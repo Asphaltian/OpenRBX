@@ -1,0 +1,34 @@
+#!/bin/sh
+
+USAGE="bootstrap [-a aclocal-cmd] [-h autoheader-cmd] [-m automake-cmd] [-c autoconf-cmd]"
+
+# Default versions of all dependency programs, override by 
+# setting arguments as described by usage above..
+ACLOCAL_CMD=aclocal-1.7
+AUTOHEAD_CMD=autoheader
+AUTOMAKE_CMD=automake-1.7
+AUTOCONF_CMD=autoconf
+
+while getopts a:h:m:c: opt
+do
+  case "$opt" in
+      a)   ACLOCAL_CMD=$OPTARG;;
+      h)   AUTOHEAD_CMD=$OPTARG;;
+      m)   AUTOMAKE_CMD=$OPTARG;;
+      c)   AUTOCONF_CMD=$OPTARG;;
+      \?)  echo $USAGE
+	   exit 1;;
+  esac
+done
+
+$ACLOCAL_CMD $ACLOCAL_FLAGS
+$AUTOHEAD_CMD
+$AUTOMAKE_CMD --foreign --add-missing --copy --include-deps
+$AUTOCONF_CMD
+
+
+#libtoolize --force --copy
+#aclocal-1.8 $ACLOCAL_FLAGS
+#autoheader
+#automake-1.8 --foreign --add-missing --copy --include-deps
+#autoconf

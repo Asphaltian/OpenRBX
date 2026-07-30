@@ -1,0 +1,2514 @@
+#!/usr/bin/env python
+# -*- python -*-
+#
+# See manual.html for documentation.  http://ice.sf.net
+#
+# Copyright 2003-2005 Morgan McGuire and Rob Hunter
+# All rights reserved.
+#
+# morgan@cs.brown.edu, rob@cs.brown.edu
+#
+# DO NOT MODIFY THIS SCRIPT.  EDIT ICE.TXT AND ~/.ICOMPILE TO CUSTOMIZE
+# YOUR PROJECT CONFIGURATION.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+version = [0, 4, 5]
+import sys, string, os, os.path, fileinput, tempfile, shutil, re
+import commands, pickle, time, ConfigParser
+from string import ljust
+
+if int(sys.version[:string.find(sys.version, '.')]) < 2:
+    print ('iCompile requires Python 2.0 or later.  You are running Python '
+           + sys.version)
+    sys.exit(-10)
+
+
+##############################################################################
+#                                 Constants                                  #
+##############################################################################
+
+DEBUG                     = 'DEBUG'
+RELEASE                   = 'RELEASE'
+EXE                       = 'EXE'
+DLL                       = 'DLL'
+LIB                       = 'LIB'
+YES                       = True
+NO                        = False
+
+BUILDDIR                  = 'build'
+DISTRIBDIR                = 'install'
+
+
+# Temp directory where scratch and .o files are stored, relative to rootDir
+tempDir                   = '.icompile-temp/'
+
+##############################################################################
+#                                  Globals                                   #
+##############################################################################
+
+# Parameters used by iCompile.  All directories must be relative to the
+# root directory to allow the source code to be moved around.
+# Directories must end in '/' and must not be '' (use './' if
+# necessary). 
+
+# Location of the project root relative to CWD.  Ends in "/".  Set by setVariables.
+rootDir                   = ''
+
+# DEBUG or RELEASE
+target                    = ''
+
+# Location to which object files are written (target-specific).
+# Set by setVariables
+objDir                    = ''
+
+# EXE, LIB, or DLL. Set by setVariables.
+binaryType                = ''
+
+# Name of the project with no extension.  Set by setVariables.
+projectName               = ''
+
+# If YES, iCompile prints diagnostic information (helpful for debugging
+# iCompile).  Set by setVariables.
+verbose                   = NO
+
+# Should debug symbols be stripped from debug build?
+stripDebugSymbols         = NO
+
+# A dictionary used to store values between invocations of iCompile
+cache                     = {}
+
+# Binary name.  Set by setVariables.
+binaryName                = ''
+
+# Location of the output binary relative to rootDir.  Set by setVariables.
+binaryDir                 = ''
+
+# Options for this target.  Set by configureCompiler
+defaultCompilerOptions    = []
+
+# Options regarding warnings. Set by configureCompiler
+compilerWarningOptions    = []
+
+# Options regarding verbose. Set by configureCompiler
+compilerVerboseOptions    = []
+
+# Set by configureCompiler.
+defaultLinkerOptions      = []
+
+# Set by configureCompiler
+defaultCompilerName       = ''
+
+# Supresses all non-error output. Set by setVariables.
+quiet                     = NO
+
+# e.g. linux-gcc4.0
+platform                  = ''
+
+defaultDynamicLibs = []
+defaultStaticLibs = []
+
+# allfiles is a list of all files on which something depends.  May be empty list.
+# 
+def printVariables(icompileargs, progargs, allfiles = []):
+    print "platform               = '" + platform + "'"
+    print "rootDir                = '" + rootDir + "'"
+    print "projectName            = '" + projectName + "'"
+    print "target                 = " + target
+    print "binaryType             = " + binaryType
+    print "verbose                =", verbose
+    print "binaryDir              = '" + binaryDir + "'"
+    print "binaryName             = '" + binaryName + "'"
+    print "objDir                 = '" + objDir + "'"
+    print "iCompile args          =", icompileargs
+    print "quiet                  =", quiet
+    print "--run args             =", progargs
+    print "compilerName           = '" + compilerName() + "'"
+    print "compilerOptions        =", getCompilerOptions(allfiles,
+                                         compilerWarningOptions +
+                                         compilerVerboseOptions)
+    print "compilerWarningOptions =", compilerWarningOptions
+    print "compilerVerboseOptions =", compilerVerboseOptions
+    print "linkerOptions          =", linkerOptions()
+    print "defaultCompilerName    = '" + defaultCompilerName + "'"
+    print "defaultCompilerOptions =", defaultCompilerOptions
+    print "defaultLinkerOptions   =", defaultLinkerOptions
+    print "includePaths           =", includePaths()
+    print "libraryPaths           =", libraryPaths()
+    print "$HOME                  =", os.environ['HOME']
+    print "cwd                    =", os.getcwd()
+    print "exclude                =", configGet(config, 'GLOBAL', 'exclude', False)
+
+
+##############################################################################
+#                              Color Printing                                #
+##############################################################################
+
+# Used by colorPrint
+ansiColor = {
+    'black'            :   "0",
+    'red'              :   "1",
+    'green'            :   "2",
+    'brown'            :   "3",
+    'blue'             :   "4",
+    'purple'           :   "5",
+    'cyan'             :   "6",
+    'white'            :   "7",
+    'defaultnounderscore' : "8",
+    'default'          :   "9",}
+
+ansiStyle = {
+    'bold'             :   "1",
+    'dim'              :   "2",  # Unsupported by most terminals
+    'italic'           :   "3",  # Unsupported by most terminals
+    'underline'        :   "4",
+    'blink'            :   "5",  # Unsupported by most terminals
+    'fastblink'        :   "6",  # Unsupported by most terminals
+    'reverse'          :   "7",
+    'hidden'           :   "8",  # Unsupported by most terminals
+    'srikethrough'     :   "9"}  # Unsupported by most terminals
+
+""" Used by colorPrint """
+useColor = 'Unknown'
+
+""" If the terminal supports color, prints in the specified color.  
+    Otherwise, prints using normal color. The color argument
+    must have the form:
+
+    [bold|underline|reverse|italic|blink|fastblink|hidden|strikethrough] [FGCOLOR] [on BGCOLOR]
+
+    COLOR = {default, black, red, green, brown, blue, purple, cyan, white}
+
+    Yellow = light brown, Pink = light red, etc.
+
+"""
+def colorPrint(text, color = 'default'):
+    global useColor
+
+    if useColor == 'Unknown':
+        # Figure out if this device supports color
+        useColor = (os.environ.has_key('TERM') and
+                    (os.environ['TERM'] == 'xterm'))
+   
+    if not useColor:
+
+        print text
+    
+    else:
+
+        # Parse the color
+
+        # First divide up into lower-case words
+        tokens = string.lower(color).split(' ')
+        if len(tokens) == 0:
+            # Give up
+            print ('Warning: illegal icompile color specified ("' +
+                   color + '")\n\n')
+            useColor = false
+            print text
+            return
+
+        styleString     = ''
+        foreColorString = ''
+        backColorString = ''        
+
+        if ansiStyle.has_key(tokens[0]):
+            styleString = tokens[0]
+            tokens = tokens[1:]
+
+        if (len(tokens) > 0) and (tokens[0] != 'on'):
+            # Foreground color
+            foreColorString = tokens[0]
+            tokens = tokens[1:]
+
+        if len(tokens) > 0:
+            # Background color, must start with 'on' keyword
+            if (tokens[0] != 'on') or (len(tokens) < 2):
+                # Give up
+                useColor = false
+                print ('Warning: illegal icompile background color' +
+                       ' specified ("' + color + '")\n\n')
+                print text
+                return
+            backColorString = tokens[1]
+
+        foreDigit = '3'
+        backDigit = '4'
+
+        style     = ''
+        foreColor = ''
+        backColor = ''
+    
+        if styleString != '':
+            style     = ansiStyle[styleString]
+
+        if (foreColorString != '') and ansiColor.has_key(foreColorString):
+            foreColor = foreDigit + ansiColor[foreColorString]
+
+        if (backColorString != '') and ansiColor.has_key(backColorString):
+            backColor = backDigit + ansiColor[backColorString]
+
+        featureString = ''
+        for s in [style, foreColor, backColor]:
+            if (s != ''):
+                if (featureString != ''):
+                    featureString = featureString + ';' + s
+                else:
+                    featureString = s
+
+        openCol = '\033['
+        closeCol = 'm'
+        stop = openCol + '0' + closeCol
+        start = openCol + featureString + closeCol
+        print start + text + stop
+
+def maybeColorPrint(text, color = 'default'):
+    if not quiet:
+        colorPrint(text, color)
+
+WARNING_COLOR = 'bold red'
+SECTION_COLOR = 'bold'
+COMMAND_COLOR = 'green'
+
+def printBar():
+    print "_______________________________________________________________________"
+    print
+
+""" Prints a line if quiet is false. """
+def maybePrintBar():
+    if not quiet:
+        printBar()
+
+def beep():
+    print '\a'
+
+##############################################################################
+#                                 getch                                      #
+##############################################################################
+
+class _Getch:
+    """Gets a single character from standard input.  Does not echo to the
+    screen."""
+    def __init__(self):
+        try:
+            self.impl = _GetchWindows()
+        except ImportError:
+            self.impl = _GetchUnix()
+            
+    def __call__(self): return self.impl()
+            
+            
+class _GetchUnix:
+    def __init__(self):
+        import tty, sys
+        
+    def __call__(self):
+        import sys, tty, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+            return ch
+            
+            
+class _GetchWindows:
+    def __init__(self):
+        import msvcrt
+        
+    def __call__(self):
+        import msvcrt
+        return msvcrt.getch()
+        
+        
+getch = _Getch()
+
+
+def maybePrint(str):
+    if not quiet:
+        print str
+
+##############################################################################
+
+def beginsWith(str1, prefix):
+    return str1[:len(prefix)] == prefix
+
+def endsWith(str1, postfix):
+    return str1[-len(postfix):] == postfix
+
+##############################################################################
+#                               Shell Helpers                                #
+##############################################################################
+
+"""Create a directory if it does not exist."""
+def mkdir(path):
+    if (path[-1] == "/"):
+        path = path[:-1]
+
+    if ((not os.path.exists(path)) and (path != "./")):
+        maybeColorPrint('mkdir ' + path, COMMAND_COLOR)
+        # TODO: set group and permissions from parent directory
+        os.makedirs(path)
+
+##############################################################################
+
+""" Turns a list of filenames into a list of at most four directories. """
+def shortlist(L):
+    num = len(L)
+    if (num > 4):
+        return L[0] + ', ' + L[1] + ', ' + L[2] + ', ' + L[3] + ', ...'
+    if (num > 3):
+        return L[0] + ', ' + L[1] + ', ' + L[2] + ', ...'
+    if (num > 2):
+        return L[0] + ', ' + L[1] + ', ...'
+    elif (num > 1):
+        return L[0] + ', ' + L[1]
+    elif (num > 0):
+        return L[0]
+    else:
+        return ''
+    
+##############################################################################
+        
+"""Recursively remove a directory tree if it exists."""
+def rmdir(path):
+    if (os.path.exists(path)):
+        maybeColorPrint('rm -rf ' + path, COMMAND_COLOR)
+        shutil.rmtree(path, 1)
+
+""" Remove a single file, if it exists. """
+def rm(file):
+    if (os.path.exists(file)):
+        maybeColorPrint('rm ' + file, COMMAND_COLOR)
+        os.remove(file)
+
+##############################################################################
+
+""" Runs a program and returns a string of its output. """
+def shell(cmd, printCmd = True):
+    if printCmd: maybeColorPrint(cmd, COMMAND_COLOR)
+    return commands.getoutput(cmd)
+
+
+##############################################################################
+#                              Locate Compiler                               #
+##############################################################################
+
+"""  Used by latestGpp"""
+def latestGppVisitor(best, dirname, files):
+    for file in files:
+        if ("g++" == file[:3]):
+            # Form of file is g++-VERSION or g++VERSION
+            try:
+                ff = dirname + "/" + file        
+                v = getVersion(ff)
+                
+                if v > best[1]:
+                    best[0] = ff
+                    best[1] = v
+
+            except ValueError:
+                pass
+
+
+"""AI for locating the users latest version of g++
+   Returns a the full path to the program, including the program name, and
+   the version as a list. """
+def latestGpp():
+    # TODO: also test the CXX and CPP variables and see if they are newer
+    
+    bin = commands.getoutput("which g++")
+    
+    # Turn binLoc into just the directory, not the path to the file g++
+    binLoc = bin[0:string.rfind(bin, "/")]
+    
+    # best will keep track of our current newest g++ found
+    best = [bin, getVersion(bin)]
+
+    # Search for all g++ binaries
+    os.path.walk(binLoc, latestGppVisitor, best)
+
+    return (best[0], best[1])
+
+    
+##############################################################################
+        
+"""Finds an executable on Windows."""
+def _findBinary(program):     
+    # Paths that may contain the program
+
+    PATH = os.getenv('PATH', '').split(';') + \
+          ['.',\
+           'C:/Program Files/Microsoft Visual Studio/Common/MSDev98/Bin',\
+           'C:/python',\
+           'C:/doxygen/bin',\
+           'C:/Program Files/PKZIP']
+
+    for path in PATH:
+        filename = path + '/' + program + '.exe'
+        if (os.path.exists(filename)):
+            return filename
+            break
+
+        filename = path + '/' + program + '.com'
+        if (os.path.exists(filename)):
+            return filename
+            break
+
+    raise 'Error', 'Cannot find "' + program + '"'
+    return program
+
+
+"""Convert path separators to local style from Unix style.
+   s is a string that contains a path name."""
+def toLocalPath(s):
+    return string.replace(s, '/', os.sep)
+
+#############################################################################
+
+"""Run a program with command line arguments.
+
+args must be a list.
+Switches the slashes from unix to dos style in program.
+Blocks until shell returns, then returns the exit code of the program.
+"""
+def run(program, args = []):
+    # Must have platform correct slashes
+    program = toLocalPath(program)
+
+    # Windows doesn't support spawnvp, so we have to locate the binary
+    if (os.name == 'nt'):
+        program = _findBinary(program)
+
+    # If the program name contains spaces, we
+    # add quotes around it.
+    if (" " in program) and not ('"' in program):
+        program = '"' + program + '"'
+
+    # spawn requires specification of argv[0]
+    args = [program] + args
+    maybeColorPrint(string.join(args), COMMAND_COLOR)
+
+    if (os.name == 'nt'):
+        # Windows doesn't support spawnvp
+        exitcode = os.spawnv(os.P_WAIT, program, args)
+    else:
+        exitcode = os.spawnvp(os.P_WAIT, program, args)
+
+    # Since we mutated the list, remove the element
+    # that was inserted.
+    args.pop(0)
+
+    return exitcode
+
+##############################################################################
+
+"""Returns 0 if the file does not exist, otherwise returns the modification
+time of the file."""
+def getTimeStamp(file):
+   try:
+       return os.path.getmtime(file)
+   except OSError:
+       return
+
+##############################################################################
+
+"""Determine if a target is out of date.
+
+Returns nonzero if file1 is newer than file2.
+Throws an error if file1 does not exist, returns
+nonzero if file2 does not exist."""
+def newer(file1, file2):
+   time1 = os.path.getmtime(file1)
+   time2 = 0
+   try:
+       time2 = os.path.getmtime(file2)
+   except OSError:
+       time2 = 0
+       
+   return time1 >= time2
+
+
+""" Removes quotation marks from the outside of a string. """
+def removeQuotes(s):
+    if (s[1] == '"'):
+        s = s[2:]
+    if (s[(len(s)-2):] == '"'):
+        s = s[:len(s)-2]
+    return s
+
+###############################################################################
+
+"""
+  verInfo: A string containing (somewhere) a version number.  Typically, the
+  output of commands.getoutput().  Returns the version as a list of version
+  numbers.
+"""
+def findVersionInString(verInfo):
+
+    # Look for a number followed by a period.
+    for i in xrange(1, len(verInfo) - 1):
+        if (verInfo[i] == '.' and 
+           (verInfo[i - 1]).isdigit() and 
+           (verInfo[i + 1]).isdigit()):
+
+            # We've found a version number.  Walk back to the
+            # beginning.
+            i -= 2
+            while (i > 0) and verInfo[i].isdigit():
+                i -= 1
+            i += 1
+
+            version = []
+            while (i < len(verInfo)) and verInfo[i].isdigit():
+                d = ''
+
+                # Now walk forward
+                while (i < len(verInfo)) and verInfo[i].isdigit():
+                    d += verInfo[i]
+                    i += 1
+
+                version.append(int(d))
+
+                # Skip the non-digit
+                i += 1
+           
+            return version     
+
+    return [0]
+
+###############################################################################
+
+""" Takes a version list and converts it to a string."""
+def versionToString(v):
+    s = ''
+    for i in v:
+        s += str(i) + '.'
+    return s[:-1]
+
+#############################################################################
+
+""" Returns the version number of a file as a list.  Note that under
+comparison, 1.10 != 1.1 and 1.01 == 1.1, which is usually what you
+want.
+"""
+def getVersion(filename):
+    cmd = filename
+
+    # We check only the beginning of a filename because it may have
+    # a version number as part of the name.
+    if beginsWith(_basename(filename), 'g++'):
+        cmd = filename + ' --version'
+    elif beginsWith(_basename(filename), 'python'):
+        cmd = filename + " -V"
+    elif beginsWith(_basename(filename), 'cl'):
+        # MSVC++ compiler
+        cmd = filename
+    elif beginsWith(_basename(filename), 'doxygen'):
+        cmd = filename + " --version"
+    elif beginsWith(_basename(filename), 'ar'):
+        cmd = filename + " --version"
+    elif beginsWith(_basename(filename), 'ld'):
+        cmd = filename + " --version"
+    else:
+        # Unsupported
+        return [0, 0, 0]
+    
+    return findVersionInString(commands.getoutput(cmd))
+
+
+_excludeDirPatterns = \
+    ['^.svn$',\
+     '^CVS$', \
+     '^Debug$', \
+     '^Release$', \
+     '^graveyard$', \
+     '^tmp$', \
+     '^temp$', \
+     '^doc-files$', \
+     '^data-files$', \
+     '^.icompile-temp$', \
+     '^' + BUILDDIR + '$']
+
+"""
+  Regular expression patterns (i.e. directory patterns) that are 
+  excluded from the search for cpp files
+"""
+_cppExcludePatterns = ['^old$'] + _excludeDirPatterns
+
+""" Regular expression patterns that will be excluded from copying by 
+    copyIfNewer.
+"""
+_excludeFromCopyingPatterns =\
+    ['\.ncb$', \
+    '\.opt$', \
+    '\.ilk$', \
+    '\.pdb$', \
+    '\.bsc$', \
+    '\.o$', \
+    '\.obj$', \
+    '\.pyc$', \
+    '\.plg$', \
+    '^#.*#$', \
+    '~$', \
+    '\.old$' \
+    '^log.txt$', \
+    '^stderr.txt$', \
+    '^stdout.txt$', \
+    '\.log$', \
+    '\^.cvsignore$'] + _excludeDirPatterns
+
+"""
+A regular expression matching files that should be excluded from copying.
+"""
+excludeFromCopying  = re.compile(string.join(_excludeFromCopyingPatterns, '|'))
+
+
+def removeTrailingSlash(s):
+    if (s[-1] == '/'):
+        s = s[:-1]
+    if (s[-1] == '\\'):
+        s = s[:-1]
+    return s
+
+
+_copyIfNewerCopiedAnything = NO
+
+"""
+Recursively copies all contents of source to dest 
+(including source itself) that are out of date.  Does 
+not copy files matching the excludeFromCopying patterns.
+"""
+def copyIfNewer(source, dest):
+    global _copyIfNewerCopiedAnything
+    _copyIfNewerCopiedAnything = NO
+    
+    if source == dest:
+        # Copying in place
+        return
+
+    dest = removeTrailingSlash(dest)
+
+    if (not os.path.exists(source)):
+        # Source does not exist
+        return
+
+    if (not os.path.isdir(source) and newer(source, dest)):
+        maybeColorPrint('cp ' + source + ' ' + dest, COMMAND_COLOR)
+        shutil.copyfile(source, dest)
+        _copyIfNewerCopiedAnything = YES
+        
+    else:
+
+        # Walk is a special iterator that visits all of the
+        # children and executes the 2nd argument on them.  
+        os.path.walk(source, _copyIfNewerVisit, [len(source), dest])
+
+    if not _copyIfNewerCopiedAnything and not quiet:
+        print dest + ' is up to date with ' + source
+    
+"""
+Strips the path from the front of a filename.
+
+os.path.basename strips one extra character from the beginning.
+This restores it.
+"""
+def _basename(filename):
+    # Find the index of the last slash
+    i = max(string.rfind(filename, '/'), string.rfind(filename, '\\'))
+
+    # Copy from there on (whole string if no slashes)
+    return filename[(i + 1):]
+
+
+""" Returns the part of a full filename after the path and before the last ext"""
+def _rawfilename(filename):
+    f = _basename(filename)
+    period = string.find(filename, '.')
+
+    if period > 0:
+        return f[0:period]
+    else:
+        return f
+    
+
+""" Returns the extensions from a full filename."""
+def _extname(filename):
+    f = _basename(filename)
+    period = string.find(filename, '.')
+
+    if period > 0:
+        return f[(period + 1):]
+    else:
+        return ''
+
+"""
+ Concatenates a file or path onto a path with a '/' if the first
+ is non-empty and lacks a '/'
+"""
+def pathConcat(a, b):
+    if ((a != '') and
+        (a[-1] != '/') and
+        (a[-1] != '\\')):
+        return a + '/' + b
+    else:
+        return a + b
+
+#########################################################################
+    
+"""Helper for copyIfNewer.
+
+args is a list of:
+[length of the source prefix in sourceDirname,
+ rootDir of the destination tree]
+"""
+def _copyIfNewerVisit(args, sourceDirname, names):
+    global _copyIfNewerCopiedAnything
+
+    prefixLen   = args[0]
+
+    # Construct the destination directory name
+    # by concatenating the root dir and source dir
+    destDirname = pathConcat(args[1], sourceDirname[prefixLen:])    
+    dirName     = _basename(destDirname)
+        
+    if (excludeFromCopying.search(dirName) != None):
+        # Don't recurse into subdirectories of excluded directories
+        del names[:]
+        return
+
+    # Create the corresponding destination dir if necessary
+    mkdir(destDirname)
+
+    # Iterate through the contents of this directory   
+    for name in names:
+        source = pathConcat(sourceDirname, name)
+
+        if ((excludeFromCopying.search(name) == None) and 
+            (not os.path.isdir(source))):
+            
+            # Copy files if newer
+            dest = pathConcat(destDirname, name)
+            if (newer(source, dest)):
+                maybeColorPrint('cp ' + source + ' ' + dest, COMMAND_COLOR)
+                _copyIfNewerCopiedAnything = YES
+                shutil.copyfile(source, dest)
+
+#########################################################################
+
+""" Returns true if this is a cpp source filename. """
+def isCFile(file):
+    return ((file[-4:] == ".cpp") or
+            (file[-2:] == ".c") or
+            (file[-2:] == ".C") or
+            (file[-4:] == ".c++") or
+            (file[-4:] == ".cxx"))
+
+#########################################################################
+
+"""
+A regular expression matching files that should be excluded from compilation
+Set by processProjectFile.
+"""
+excludeFromCompilation = None
+
+def listCFilesVisitor(result, dirname, files):
+    dir = dirname
+
+    # Strip any unnecessary "./"
+    if (dirname[:2] == "./"):
+        dir = dir[2:]
+
+    if (excludeFromCompilation.search(dir) != None):
+        # Don't recurse into subdirectories of excluded directories
+        del files[:]
+        return
+
+    # We can't modify files while iterating through it, so
+    # we must make a list of all files that are to be removed before the
+    # next iteration of the visitor.   
+    removelist = [];
+    for f in files:
+         if (excludeFromCompilation.search(f) != None):
+            if verbose: print "  Ignoring '" + f + "'"
+            removelist.append(f)
+            
+         elif isCFile(f):
+             
+            # Ensure the path ends in a slash (when needed)
+            filename = pathConcat(dir, f)
+
+            if (excludeFromCompilation.search(filename) == None):
+                result.append(filename)
+
+    # Remove any subdir in files that is itself excluded to prevent
+    # later recursion into it.
+    for f in removelist:
+        files.remove(f)
+
+
+"""Returns "ls -R *.cpp *.cxx *.c++ *.c" for the given directory.
+Filenames must be relative to the "rootDir" directory.  dir will be
+a subdirectory of rootDir."""
+def listCFiles(dir = ''):
+    if (dir == ''): dir = './'
+
+    result = []
+
+    os.path.walk(dir, listCFilesVisitor, result)
+    return result
+
+""" Non-recursiver version of listCFiles. (not actually used) """
+def flatListCFiles(dir = ''):
+    if (dir == ''): dir = './'
+
+    all = os.listdir(dir)
+    cfiles = []
+    for f in all:
+        if isCFile(f): cfiles.append(dir + f)
+
+    return cfiles
+
+
+""" List all directories in a directory """
+def listDirs(_dir = ''):
+    if (_dir == ''):
+        dir = './'
+    else:
+        dir = _dir
+
+    all = os.listdir(dir)
+    dirs = []
+    for d in all:
+        if os.path.isdir(d):
+            dirs.append(_dir + d)
+
+    return dirs
+
+
+##############################################################################
+#                            Topological Sort                                #
+##############################################################################
+
+"Return a list of all edges (v0, w) in E starting at v0. Used by topsort."
+def allEdgesFrom(v0, E):
+    resEdges = []
+    for v, w in E:
+        if v0 == v:
+            resEdges.append((v, w))
+    return resEdges
+
+
+def _topSort(v, E, visited, sorted, sortedIndices):
+    "Recursive topsort function."
+
+    # print "trying", v, visited, sorted, sortedIndices
+    visited[v] = 1
+    for v, w in allEdgesFrom(v, E):
+        # print "edge found", (v, w)
+        if not visited[w]:
+            _topSort(w, E, visited, sorted, sortedIndices)
+        else:
+            if not sorted[w]:
+                print 'Cyclic dependency in links.'
+                sys.exit(0)
+    sorted[v] = 1
+    sortedIndices.insert(0, v)
+
+"""
+
+Topsort by Nathan Wallace, Matthias Urlichs
+Hans Nowak, Snippet 302, Dinu C. Gherman
+http://www.faqts.com/knowledge_base/view.phtml/aid/4491
+"""
+def topSort(V, E):
+    "Top-level sorting function."
+
+    n = len(V)
+    visited = [0] * n   # Flags for (un-)visited elements.
+    sorted = [0] * n    # Flags for (un-)sorted elements.
+    sortedIndices = []  # The list of sorted element indices.
+
+    for v in range(n):
+        if not visited[v]:
+            _topSort(v, E, visited, sorted, sortedIndices)
+
+    # Build and return a list of elements from the sort indices.
+    sortedElements = []
+    for i in sortedIndices:
+        sortedElements.append(V[i])
+    return sortedElements
+
+
+""" For use in preparing input for topsort. """ 
+def dictionaryToPairs(dict):
+    pairs = [];
+    for k in dict:
+        for v in dict[k]:
+            pairs.append( (k, v) )
+
+    return pairs
+
+
+""" Sort predicate for static libraries. """
+def libSorter(x, y):
+ 
+    if not (libOrder.has_key(y) and libOrder.has_key(x)):
+        return 0
+    else:
+        return libOrder[x] - libOrder[y]
+
+    
+
+"""Convert an element pairs list into (verticesList, edgeIndexList)
+   for topsort.
+
+   E.g. wrap( [('a','b'), ('b','c'), ('c','a')] )
+         -> (['a','b','c'], [(0,1), (1,2), (2,0)])
+"""
+def pairsToVertexEdgeGraph(pairs):
+    e = []
+    v = []
+
+    # Make a list of unique vertices.
+    for x, y in pairs:
+        if x not in v:
+            v.append(x)
+        if y not in v:
+            v.append(y)
+
+    # Convert original element pairs into index pairs.
+    for x, y in pairs:
+        e.append((v.index(x), v.index(y)))
+
+    return v, e
+
+
+##############################################################################
+#                            Doxygen Management                              #
+##############################################################################
+
+"""
+ Called from buildDocumentation.
+"""
+def createDoxyfile():
+    # Create the template, surpressing Doxygen's usual output
+    shell("doxygen -g Doxyfile > /dev/null")
+
+    # Edit it
+    f = open("Doxyfile", "r+")
+    text = f.read()
+
+    propertyMapping = {
+    "PROJECT_NAME"            : '"' + projectName.capitalize() + '"',
+    "OUTPUT_DIRECTORY"        : '"' + BUILDDIR + '/doc"',
+    "EXTRACT_ALL"             : "YES",
+    "STRIP_FROM_PATH"         : '"' + rootDir + '"',
+    "TAB_SIZE"                : "4",
+    "HTML_OUTPUT"             : '"./"',
+    "GENERATE_LATEX"          : "NO",
+    "ALIASES"                 : ('"cite=\par Referenced Code:\\n " ' +
+                                 '"created=\par Created:\\n" ' +
+                                 '"edited=\par Last modified:\\n" ' + 
+                                 '"maintainer=\par Maintainer:\\n" ' +
+                                 '"units=\par Units:\\n"')
+    }
+
+    # Rewrite the text by replacing any of the above properties
+    newText = ""
+    for line in string.split(text,"\n"):
+        newText += (doxyLineRewriter(line, propertyMapping) + "\n")
+
+    # Write the file back out
+    f.seek(0)
+    f.write(newText)
+    f.close()
+
+#########################################################################
+
+""" Called from createDoxyfile. """
+def doxyLineRewriter(lineStr, hash):
+    line = string.strip(lineStr) # remove leading and trailing whitespace
+    if (line == ""): # it's a blank line
+        return lineStr
+    elif (line[0] == "#"): # it's a comment line
+        return lineStr
+    else : # here we know it's a property assignment
+        prop = string.strip(line[0:string.find(line, "=")])
+        if hash.has_key(prop):
+            return prop + " = " + hash[prop]
+        else:
+            return lineStr
+
+""" Expands environment variables of the form $(var) and $(shell ...)
+    in a string. Compare to os.path.expandvars, which only handles
+    $var and therefore requires a separation character after
+    variables."""
+def expandvars(str):
+    
+    while '$' in str:
+        i = str.find('$')
+        j = str.find(')', i)
+        if (i > len(str) - 3) or (str[i + 1] != '(') or (j < 0):
+            raise 'Error', 'Environment variables must have the form $(var) or $(shell cmds)'
+
+        varexpr = str[i:(j + 1)]
+
+        varname = str[(i + 2):j]
+
+        if beginsWith(varname, 'shell '):
+            # Shell command
+            cmd = varname[6:]
+            value = shell(cmd, verbose)
+            if verbose: print value
+        else:
+            # Environment variable
+            value = os.getenv(varname)
+
+        if (value == None):
+            value = ''
+        
+        str = str.replace(varexpr, value)
+
+    return str
+        
+    
+##############################################################################
+#                            Cache Management                                #
+##############################################################################
+
+""" Loads the icompile cache that preserves values between calls """
+def loadCache(filename):
+    global cache
+
+    if verbose:
+        print "Loading cache from " + filename + "\n"
+
+    if os.path.exists(filename):
+        file = open(filename, 'r')
+        try:
+            cache = pickle.load(file);
+        except:
+            # The cache was corrupted; ignore it
+            cache = {}
+            if verbose:
+                print "Internal iCompile cache at " + filename + " corrupted."
+
+        if verbose: print "cache = ", cache
+
+
+        file.close()
+    else:
+        cache = {}
+
+##############################################################################
+
+def saveCache(filename):
+    file = open(filename, 'w')
+    pickle.dump(cache, file)
+    file.close()
+    
+##############################################################################
+
+
+""" If the exact warning string passed in hasn't been printed
+in the past 72 hours, it is printed and listed in the cache under
+the "warnings" key.  Otherwise it is supressed."""
+def maybeWarn(warning):
+    MINUTE = 60
+    HOUR = MINUTE * 60
+    DAY = HOUR * 12
+    WARNING_PERIOD = 3 * DAY
+    now = time.time()
+
+    if not cache.has_key('warnings'):
+        cache['warnings'] = {}
+
+    allWarnings = cache['warnings']
+
+    if (not allWarnings.has_key(warning) or
+        ((allWarnings[warning] + WARNING_PERIOD) < time.time())):
+
+        # Either this key is not in the dictionary or
+        # the warning period has expired.  Print the warning
+        # and update the time in the cache
+        allWarnings[warning] = time.time()
+        colorPrint(warning, WARNING_COLOR)
+
+##############################################################################
+#                             Default .icompile                              #
+##############################################################################
+
+
+configHelp = """
+# If you have special needs, you can edit per-project ice.txt
+# files and your global ~/.icompile file to customize the
+# way your projects build.  However, the default values are
+# probably sufficient and you don't *have* to edit these.
+#
+# To return to default settings, just delete ice.txt and
+# ~/.icompile and iCompile will generate new ones when run.
+#
+#
+# In general you can set values without any quotes, e.g.:
+#
+#  compileoptions = -O3 -g --verbose $(CXXFLAGS) %(defaultcompileoptions)s
+#
+# Adds the '-O3' '-g' and '--verbose' options to the defaults as
+# well as the value of environment variable CXXFLAGS.
+# 
+# These files have the following sections and variables.
+# Values in ice.txt override those specified in .icompile.
+#
+# GLOBAL Section
+#  compiler           Path to compiler.
+#  include            Semi-colon or colon (on Linux) separated
+#                     include paths.
+#
+#  library            Same, for library paths.
+#
+#  defaultinclude     The initial include path.
+#
+#  defaultlibrary     The initial library path.
+#
+#  defaultcompiler    The initial compiler.
+#
+#  defaultexclude     Regular expression for directories to exclude
+#                     when searching for C++ files.  Environment
+#                     variables are NOT expanded for this expression.
+#                     e.g. exclude: <EXCLUDE>|^win32$
+# 
+#  quiet              If True, always run in --quiet mode
+#
+#  beep               If True, beep after compilation
+#
+# DEBUG and RELEASE Sections
+#  staticlibs         Semi-colon separated libraries to
+#                     link against.  iCompile will automatically
+#                     link against common libraries like
+#                     OpenGL, SDL, G3D, zlib, and jpeg as needed.  
+#                     e.g., staticlink = mylib.a; /u/uxf/lib/libpng.a
+#
+#                     You can also force linking using the '-l' linker
+#                     option, however this method is more portable.
+#
+#  dynamiclibs        Same as above but for dynamic libraries.
+#
+#  defaultcompileoptions                     
+#  compileoptions
+#  defaultlinkoptions
+#  linkoptions        Options *in addition* to the ones iCompile
+#                     generates for the compiler and linker, separated
+#                     by spaces as if they were on a command line.
+#
+#
+# The following special values are available:
+#
+#   $(envvar)        Value of shell variable named envvar.
+#                    Unset variables are the empty string.
+#   $(shell ...)     Runs the '...' and replaces the expression
+#                    as if it were the value of an envvar.
+#   %(localvar)s     Value of a variable set inside ice.txt
+#                    or .icompile (Yes, you need that 's'--
+#                    it is a Python thing.)
+#   <NEWESTGCC>      The newest version of gcc on your system.
+#   <COMPILEOPTIONS> The default compiler option.s
+#   <LINKOPTIONS>    The default linker options.
+#   <DYNAMICLIBS>    Auto-detected dynamic libraries.
+#   <STATICLIBS>     Auto-detected static libraries.
+#   <EXCLUDE>        Default directories excluded from compilation.
+#
+# The special values may differ between the RELEASE and DEBUG
+# targets.  The default .icompile sets the 'default' variables
+# and the default ice.txt sets the real ones from those, so you
+# can chain settings.
+#
+#  Colors have the form:
+#
+#    [bold|underline|reverse|italic|blink|fastblink|hidden|strikethrough]
+#    [FG] [on BG]
+#
+#  where FG and BG are each one of
+#   {default, black, red, green, brown, blue, purple, cyan, white}
+#  Many styles (e.g. blink, italic) are not supported on most terminals.
+#
+#  Examples of legal colors: "bold", "bold red", "bold red on white", "green",
+#  "bold on black"
+#
+"""
+
+defaultDotICompile = """
+# This is a configuration file for iCompile (http://ice.sf.net)
+# """ + configHelp + """
+[GLOBAL]
+defaultinclude:  $(INCLUDE)
+defaultlibrary:  $(LIBRARY);$(LD_LIBRARY_PATH);/usr/X11R6/lib
+defaultcompiler: <NEWESTGCC>
+defaultexclude:  <EXCLUDE>
+beep:            True
+quiet:           False
+
+[DEBUG]
+defaultcompileoptions: <COMPILEOPTIONS>
+defaultlinkoptions: <LINKOPTIONS>
+
+[RELEASE]
+defaultcompileoptions: <COMPILEOPTIONS>
+defaultlinkoptions: <LINKOPTIONS>
+
+"""
+
+defaultProjectFileContents = """
+# This project can be compiled by typing 'icompile'
+# at the command line. Download the iCompile Python
+# script from http://ice.sf.net
+#
+################################################################
+""" + configHelp + """
+
+################################################################
+[GLOBAL]
+
+compiler: %(defaultcompiler)s
+
+include: %(defaultinclude)s
+
+library: %(defaultlibrary)s
+
+exclude: %(defaultexclude)s
+
+################################################################
+[DEBUG]
+
+# Reserved for future use; ignored in this version of iCompile
+staticlibs: <STATICLIBS>
+
+# Reserved for future use; ignored in this version of iCompile
+dynamiclibs: <DYNAMICLIBS>
+
+compileoptions: %(defaultcompileoptions)s
+
+linkoptions: %(defaultlinkoptions)s
+
+################################################################
+[RELEASE]
+
+# Reserved for future use; ignored in this version of iCompile
+staticlibs: <STATICLIBS>
+
+# Reserved for future use; ignored in this version of iCompile
+dynamiclibs: <DYNAMICLIBS>
+
+compileoptions: %(defaultcompileoptions)s
+
+linkoptions: %(defaultlinkoptions)s
+
+"""
+
+##############################################################################
+#                                  Version                                   #
+##############################################################################
+
+def printVersion():
+    print "iCompile " + versionToString(version)
+    print "Copyright 2003-2005 Morgan McGuire and Rob Hunter"
+    print "All rights reserved"
+    print
+    print "http://ice.sf.net"
+    print
+
+##############################################################################
+#                                    Help                                    #
+##############################################################################
+
+def printHelp():
+    print ("""
+iCompile: the zero-configuration build system
+    
+icompile  [--doc] [--opt|--debug] [--verbose] [--clean] [--version]
+          [--quiet] [--help] [--run|--gdb ...]
+
+iCompile can build most C++ projects without options or manual
+configuration.  Just type 'icompile' with no arguments.
+
+Options:
+ --doc            Generate documentation before building.
+ --debug          (Default) Create a debug executable (define _DEBUG,
+                  disable optimizations).
+ --opt or -O      Generate an optimized executable.
+ --run            Run the program if compilation succeeds, passing all
+                  further arguments (...) to the program.
+ --gdb            Run the program under gdb if compilation succeeds,
+                  passing all further arguments (...) to the program.
+                  You can also just run gdb yourself after using iCompile.
+ --verbose        Print script variables and other output.
+ --quiet or -q    Only print the output of compilation steps, not other
+                  iCompile chatter.
+
+Exclusive options:
+ --help           Print this information.
+ --clean          Delete all generated files.
+ --version        Print the version number of iCompile.
+
+Special directory names:
+ """ + BUILDDIR + """           Output directory
+ data-files       Files that will be needed at runtime
+ doc-files        Files needed by your Doxygen output
+
+iCompile will not look for source files in directories matching: """ +
+           str(_excludeDirPatterns) +
+"""
+
+You may edit ice.txt if your project has unusual configuration needs.
+See manual.html or http://ice.sf.net for full information.
+""")
+    sys.exit(0)
+
+##############################################################################
+#                            Discover Platform                               #
+##############################################################################
+
+def discoverPlatform():
+    global platform
+
+    OS = ''
+    compiler = ''
+
+    # Figure out the os
+    if (os.name == 'posix'):
+        OS = 'linux'
+    else:
+        raise 'Error', 'iCompile only supports linux and os/x'
+
+    # Figure out the compiler
+    c = compilerName()
+
+    compiler = _basename(c)
+
+    if (compiler[0:3] == 'g++') or (compiler[0:3] == 'gcc'):
+        compiler = 'g++'
+
+    # Append the major and minor compiler version number to the compiler name
+    v = getVersion(c)    
+    if len(v) > 2:
+        v = v[0:2]
+    if len(v) < 2:
+        # Version number was short; add a 0 minor number
+        v = v + 0
+    compiler += string.join(map(str, v), '.')
+
+    platform = OS + '-' + compiler
+    
+##############################################################################
+#                            Build Documentation                             #
+##############################################################################
+
+def buildDocumentation():
+    maybeColorPrint('Building documentation', SECTION_COLOR)
+
+    # See if there is a Doxygen file already
+    if not os.path.exists(rootDir + "Doxyfile"):
+        print ("Your project does not have a 'Doxyfile' file, so iCompile " +
+               "will now create one for you.\n")
+        createDoxyfile()
+        print "Done creating 'Doxyfile'\n\n"
+
+    run("doxygen", ["Doxyfile"])
+
+    if (os.path.exists(rootDir + 'doc-files')):
+        copyIfNewer(rootDir + 'doc-files', rootDir + BUILDDIR + '/doc')
+
+    maybeColorPrint('Done building documentation', SECTION_COLOR)
+
+##############################################################################
+#                               Build Data Files                             #
+##############################################################################
+
+def buildDataFiles():
+    src = 'data-files'
+    dst = BUILDDIR + '/' + DISTRIBDIR
+    
+    if os.path.exists(src):
+        maybeColorPrint('Copying data files', SECTION_COLOR)
+        copyIfNewer(src, dst)
+        maybeColorPrint('Done copying data files', SECTION_COLOR)
+
+##############################################################################
+#                               Build Include                                #
+##############################################################################
+""" Copies headers to the build directory. """
+def buildInclude():
+    src = 'include'
+    dst = BUILDDIR + '/' + DISTRIBDIR + '/include'
+    
+    if os.path.exists(src):
+        maybeColorPrint('Copying public header files', SECTION_COLOR)
+        copyIfNewer(src, dst)
+        maybeColorPrint('Done copying public header files', SECTION_COLOR)
+
+##############################################################################
+#                                 Build Clean                                #
+##############################################################################
+
+def buildClean():
+    colorPrint('Deleting all generated files', SECTION_COLOR)
+    
+    rmdir(rootDir + BUILDDIR)
+    rmdir(rootDir + tempDir)
+
+    colorPrint('Done deleting generated files\n', SECTION_COLOR)
+
+
+#########################################################################
+
+"""Returns a list of *all* files on which this file depends (including
+   itself).  Returned filenames must either be fully qualified or
+   relative to the "rootDir" dir.
+
+   May modify the default compiler and linker options
+   """
+def getDependencies(file, iteration = 1):
+    # We need to use the -msse2 flad during dependency checking because of the way
+    # xmmintrin.h is set up
+    raw = shell(compilerName() + ' --depend -msse2 ' +
+                   string.join(getCompilerOptions([]), ' ') + ' ' + file,
+                verbose)
+
+    if beginsWith(raw, 'In file included from'):
+        # If there was an error, the output will have the form
+        # "In file included from _____:" and a list of files
+        
+        if iteration == 3:
+            # Give up; we can't resolve the problem
+            print raw
+            sys.exit(-1)
+        
+        if verbose:
+            print ('\nThere were some errors computing dependencies.  ' +
+                   'Attempting to recover.('), iteration,')'
+        
+        # Generate a list of files and see if they are something we
+        # know how to fix.
+        noSuchFile = []
+        for line in string.split(raw, '\n'):
+            if endsWith(line, ': No such file or directory'):
+                x = line[:-len(': No such file or directory')]
+                j = x.rfind(': ')
+                if (j >= 0): x = x[(j+2):]
+
+                # x now has the filename
+                noSuchFile.append(_basename(x))
+
+        if verbose: print 'Files not found:', noSuchFile
+        
+        # Look for files we know how to handle
+        for f in noSuchFile:
+            if f == 'wx.h':
+                if verbose: print 'wxWindows detected.'
+                defaultCompilerOptions.append(shell('wx-config --cxxflags', verbose))
+                defaultLinkerOptions.append(shell('wx-config --gl-libs --libs', verbose))
+                
+            if includeTable.has_key(f):
+                if verbose: print f,'detected.'
+                includePaths += includeTable[file]
+
+        return getDependencies(file, iteration + 1)
+    else:
+
+        # Normal case, no error
+        
+        result = []
+        for eachLine in string.split(raw, ' \\\n  '):
+            result += string.split(eachLine, ' ')
+
+        # There is always at least one file since everything depends on itself.
+        
+        # The first element of result will be "file:", so strip it
+        files = result[1:]
+        result = []
+
+        # Add the './' to raw files
+        for f in files:
+            if '/' in f:
+                result.append(f)
+            else:
+                result.append('./' + f)
+
+        return result
+
+
+#########################################################################
+
+"""Finds all of the C++/C files in rootDir and returns
+ dependency information for them as the tuple
+ [dependencies, allDependencyFiles] 
+ where dependencies[f] is the list of all files on which
+ f depends and allDependencyFiles is the list of all files
+ on which any file depends.
+
+ While getting dependencies, this may change the include/library
+ list and restart the process if it appears that some include
+ directory is missing.
+"""
+def getDependencyInformation():
+    
+    # Hash table mapping C files to the list of all files
+    # on which they depend.
+    dependencies = {}
+
+    # Hash set mapping files that are dependencies to 1.
+    # We use a dictionary to ensure that each file appears
+    # only once in the set.
+    dependencySet = {}
+
+    # Find all the c files
+    allCFiles = listCFiles(rootDir)
+
+    if verbose: print 'Source files found:', allCFiles
+
+    # Get their dependencies
+    for cfile in allCFiles:
+
+        # Get the compiler options that will be needed for them.
+        # Do not use warning or verbose options for this; they
+        # would corrupt the output.
+        dlist = getDependencies(cfile)
+
+        # Update the dependency set
+        for d in dlist: dependencySet[d] = 1
+ 
+        dependencies[cfile] = dlist
+    
+    # List of all files on which some other file depends
+    dependencyFiles = dependencySet.keys()
+
+    return (allCFiles, dependencies, dependencyFiles)
+
+#########################################################################
+
+"""Given a source file (relative to rootDir) returns an object file
+  (relative to rootDir).
+"""
+def getObjectFilename(sourceFile):
+    # strip the extension and replace it with .o
+    i = string.rfind(sourceFile, ".")
+    return objDir + sourceFile[len(rootDir):i] + ".o"
+
+#########################################################################
+
+def getOutOfDateFiles(cfiles, dependencies, files):
+    # Get modification times for all of the files
+    timeStamp = {}
+    for file in files:
+        timeStamp[file] = getTimeStamp(file)
+    
+    buildList = []
+    
+    # Need to rebuild all if this script was modified more
+    # recently than a given file.
+    icompileTime = getTimeStamp(sys.argv[0])
+
+    # Rebuild all if ice.txt or .icompile was modified
+    # more recently.
+    if os.path.exists('ice.txt'):
+        iceTime = getTimeStamp('ice.txt')
+        if iceTime > icompileTime:
+            icompileTime = iceTime
+
+    HOME = os.environ['HOME']
+    preferenceFile = pathConcat(HOME, '.icompile')
+    if os.path.exists(preferenceFile):
+        configTime = getTimeStamp(preferenceFile)
+        if configTime > icompileTime:
+            icompileTime = configTime
+
+
+    # Generate a list of all files newer than their targets
+    for cfile in cfiles:
+        ofile = getObjectFilename(cfile)
+        otime = getTimeStamp(ofile)
+        rebuild = (otime < icompileTime)
+
+        if rebuild and verbose:
+            print "iCompile is newer than " + ofile
+
+        if not rebuild:
+            # Check dependencies
+            for d in dependencies[cfile]:
+                dtime = timeStamp[d]
+                if otime < dtime:
+                    if verbose:
+                        print d + " is newer than " + ofile
+                    rebuild = 1
+                    break
+
+        if rebuild:
+            # This file needs to be rebuilt
+            buildList.append(cfile)
+
+    return buildList
+
+#########################################################################
+
+# Table mapping headers to lists of directories that should be -I when
+# that header appears.
+includeTable = {
+    'SDL.h'      : ['/usr/include/SDL']
+    }
+
+"""allFiles is a list of all files on which something
+   depends for the project.
+
+   Returns a list of strings
+
+   extraOpts are options that are needed for compilation
+   but not dependency checking:
+     compilerWarningOptions + compilerVerboseOptions
+   """
+def getCompilerOptions(allFiles, extraOpts = []):
+    opt = configCompilerOptions() + extraOpts + ['-c']
+    
+    for i in includePaths():
+        opt += ['-I' + i]
+
+    # See if the xmm intrinsics are being used
+    # This was disabled because -msse2 allows code generation,
+    # not just explicit use of intrinsics
+    #for f in allFiles:
+    #    if f[-11:] == 'xmmintrin.h':
+    #        opt += ['-msse2']
+    #        break
+        
+    return opt
+
+""" Compiles the source file. """
+def makeObjectFile(cfile, options):
+    ofile = getObjectFilename(cfile)
+   
+    # Create the directory for the ofile as needed
+    i = ofile.rfind("/")
+    if (i >= 0):
+        mkdir(ofile[:i])
+
+    args = string.split(options) + ["-o", ofile, cfile]
+    ret = run(compilerName(), args)
+
+    if ret != 0:
+        sys.exit(ret)
+    else:
+        print
+
+#########################################################################
+
+# Files can trigger additional linker options.  This is used to add
+# libraries to the link list based on what is #included.  Used by
+# getLinkerOptions.
+
+STATIC   = 1
+DYNAMIC  = 2
+
+linkTable = {
+#   Header           Link Type  Release lib    Debug lib
+    'curses.h'     : (DYNAMIC,  'curses',      'curses'),
+    'SDL.h'        : (DYNAMIC,  'SDL',         'SDL'),
+    'zlib.h'       : (DYNAMIC,  'z',           'z'),
+    'glut.h'       : (DYNAMIC,  'glut',        'glut'),
+    'glu.h'        : (DYNAMIC,  'GLU',         'GLU'),
+    'gl.h'         : (DYNAMIC,  'GL',          'GL'),
+    'jpeg.h'       : (DYNAMIC,  'jpeg',        'jpeg'),
+    'graphics3D.h' : (STATIC,   'G3D',         'G3D_debug'),
+    'GLG3D.h'      : (STATIC,   'GLG3D',       'GLG3D_debug'),
+    'pthread.h'    : (DYNAMIC,  'pthread',     'pthread'),
+    'qobject.h'    : (DYNAMIC,  'qt-mt',       'qt-mt')
+}
+
+# Static libraries may have their own dynamic dependencies.  Decoding 
+# these is pure guesswork.  This table maps symbols to the dynamic 
+# libraries that are likely to define the function you wanted.
+# Used by getAdditionalDynamicLinks
+extraLink = {
+#   Symbol                   Release Lib        Debug Lib
+    'jpeg_memory_src'     :   ('jpeg',         'jpeg'),
+    'jpeg_CreateCompress' :   ('jpeg',         'jpeg'),
+    'compress2'           :   ('z',            'z'),
+    'SDL_GetMouseState'   :   ('SDL',          'SDL'),
+    'gluBuild2DMipmaps'   :   ('GLU',          'GLU'),
+    'glBegin'             :   ('GL',           'GL'),
+    'glVertex3'           :   ('GL',           'GL'),
+    'XSync'               :   ('X11',          'X11'),
+    'XFlush'              :   ('X11',          'X11'),
+}
+
+# Static libraries can depend on each other... this specifies
+# those dependencies and the order in which they occur.
+# Recursive dependency chains are ok.
+staticLinkDependencies = {
+  # lib               depends on
+    'GLU'          : ['GL'],
+    'GLUT'         : ['GL'],
+    'G3D'          : ['z', 'jpeg'],
+    'G3D_debug'    : ['z', 'jpeg'],
+    'SDL'          : ['pthread'],
+    'GLG3D'        : ['G3D', 'SDL', 'GL'],
+    'GLG3D_debug'  : ['G3D_debug', 'SDL', 'GL']
+}
+
+""" Constructs a dictionary mapping a library name to its
+    relative dependency order in a library list. """
+def makeLibOrder():
+    pairList = dictionaryToPairs(staticLinkDependencies)
+    e, v = pairsToVertexEdgeGraph(pairList)
+    L = topSort(e, v)
+
+    order = {}
+    for i in xrange(1, len(L)):
+        order[L[i]] = i
+
+    return order
+
+libOrder = makeLibOrder()
+
+
+"""Mutates dynamicLinkFiles to contain additional libraries that are probably
+needed by the staticLinkFiles.  Called from getLinkerOptions.
+"""
+def getAdditionalDynamicLinks(dynamicLinkFiles, staticLinkFiles):
+    if verbose: print '\nBegin getAdditionalDynamicLinks'
+    
+    # Static files may have their own dependencies.  We track these down by
+    # looking at symbols defined in the library and seeing which ones map
+    # to common dynamic libraries.
+    for file in staticLinkFiles:
+        sfile = findStaticLibrary(file)
+        if os.path.exists(sfile):
+            cmd = 'nm --extern-only --demangle --undefined-only ' + sfile
+            if verbose: colorPrint(cmd, COMMAND_COLOR)
+
+            symbols = string.split(commands.getoutput(cmd))
+
+            for symbol in symbols:
+                if extraLink.has_key(symbol):
+                    (debug, release) = extraLink[symbol]
+
+                    if target == DEBUG:
+                        lfile = debug
+                    else:
+                        lfile = release
+             
+                    if verbose:
+                        print (symbol + " in " + sfile +
+                              " triggered dynamic link against " + lfile)
+
+                    if not (lfile in dynamicLinkFiles):
+                        dynamicLinkFiles.append(lfile)
+
+    if verbose: print 'End getAdditionalDynamicLinks\n'
+
+""" Given a library name (e.g. "G3D") finds the static library file and
+    returns it. """
+def findStaticLibrary(_lfile):
+    lfile = 'lib' + _lfile + '.a'
+
+    # Find the library and link against it
+    for path in libraryPaths():
+        if os.path.exists(pathConcat(path, lfile)):
+            return path + lfile
+
+    # Not found!
+    return lfile
+
+
+"""allFiles is a list of all files on which something
+   depends for the project. """
+def getLinkerOptions(allFiles):
+
+    opt = string.join(linkerOptions(), " ")
+
+    for L in libraryPaths():
+        opt += " " + "-L" + L
+
+    staticLinkFiles = []
+    dynamicLinkFiles = []
+    
+    for path in allFiles:
+        file = _basename(path)
+    
+        if linkTable.has_key(file):
+            (type, release, debug) = linkTable[file]
+
+            if target == DEBUG:
+                lfile = debug                
+            else:
+                lfile = release
+
+            if type == STATIC:
+                if not (lfile in staticLinkFiles):
+                    staticLinkFiles.append(lfile)
+            else:
+                if not (lfile in dynamicLinkFiles):
+                    dynamicLinkFiles.append(lfile)
+                
+            if verbose:
+                print '#include ' + file + ' triggered link to ' + lfile
+
+    # Seek out recursive dependencies
+    getMoreStaticLinks(staticLinkFiles)
+    getAdditionalDynamicLinks(dynamicLinkFiles, staticLinkFiles)
+    
+    if verbose:
+        print 'Static links:', staticLinkFiles
+        print 'Dynamic links:', dynamicLinkFiles
+        
+    allLinks = staticLinkFiles + dynamicLinkFiles
+
+    # Topologically sort library list so that the linker will be happy
+    if verbose: print 'Libraries before sort: ', allLinks
+    allLinks.sort(libSorter)
+
+    tmp = allLinks
+    allLinks = []
+    # Remove duplicates
+    for f in tmp:
+        if not (f in allLinks):
+            allLinks.append(f)
+
+    if verbose: print 'Libraries after sort: ', allLinks
+
+    # If SDL is already on the link list then it automatically links X11
+    # so avoid explicit link
+    if ('SDL' in allLinks) and ('X11' in allLinks):
+        allLinks.remove('X11')
+    
+    # Prepend '-l' onto every library (whether static *or* dynamic)
+    if allLinks != None:
+        allLinks = map((lambda x: '-l' + x), allLinks)
+    
+    return (opt, allLinks)
+
+
+# Adds static links from the dependency table until
+# there are no new ones to add.  The input is mutated in place.
+def getMoreStaticLinks(staticLinks):
+    added = True
+
+    # Keep looping until we can add no more
+    while added:
+        addLinks = []
+        added = False
+        for lfile in staticLinks:
+            if staticLinkDependencies.has_key(lfile):
+                for lfile2 in staticLinkDependencies[lfile]:
+                    if (not (lfile2 in addLinks) and
+                        not (lfile2 in staticLinks)):
+                        
+                        # This is a new file
+                        addLinks.append(lfile2)
+                        added = True
+                        if verbose:
+                            print lfile + ' triggered link to ' + lfile2
+                            
+        staticLinks += addLinks
+
+#########################################################################
+
+""" Makes a static library from a list of object files. """
+def makeStaticLibrary(ofiles):
+    print "Creating static library..."
+
+    ret = run("ar", ["cru", binaryDir + binaryName] + ofiles)
+    print
+    
+    if (ret == 0):
+        ret = run("ranlib", [binaryDir + binaryName])
+
+
+#########################################################################
+
+""" Makes an executable from a list of object files. """
+def makeExecutable(ofiles, options):
+    # Link
+    opt = (string.split(options) +
+           ['-o', binaryDir + binaryName] +
+            ofiles)
+
+    if not quiet: colorPrint('Linking...', SECTION_COLOR)
+    ret = run(compilerName(), opt)
+
+    if ret != 0:
+        sys.exit(ret)
+    else:
+        if (stripDebugSymbols):
+            opt = ['-g']
+            #if (verbose): opt += ["-v"]
+            opt += [binaryDir + binaryName]
+	    run('strip', opt)
+
+#########################################################################
+
+""" Creates the object files and links them """
+def buildBinary():
+    maybeColorPrint('Building ' + binaryName, SECTION_COLOR)
+
+    # Create the temp directory for object files
+    mkdir(objDir)
+
+    if verbose: colorPrint('Computing dependencies...', SECTION_COLOR)
+    (cfiles, dependencies, files) = getDependencyInformation()
+
+    if verbose:
+        print 'Header files #included:'
+        for f in files:
+            print '  ' + f
+        print
+
+    if cfiles == []:
+        print
+        print "No C++ files found."
+        sys.exit(-10)
+
+    buildList = getOutOfDateFiles(cfiles, dependencies, files)
+
+    # Definitely need to link if no executable exists
+    relink = not os.path.exists(binaryDir + binaryName)
+
+    copt = string.join(getCompilerOptions(files, compilerWarningOptions + compilerVerboseOptions), ' ')
+
+    if verbose:
+        print "\nBuilding out of date files\n"    
+
+    # Build all out of date files
+    if (buildList != []):
+        maybeColorPrint("Compiling...", SECTION_COLOR)
+    
+    for file in buildList:
+        makeObjectFile(file, copt)
+        relink = 1
+ 
+    # Generate *all* object file names (even ones that
+    # aren't rebuilt
+    ofiles = []
+    for cfile in cfiles: 
+        ofiles.append(getObjectFilename(cfile))
+
+    if not relink:
+        # See if an object file is newer than the exe
+        
+        exeTime = getTimeStamp(binaryDir + binaryName)
+        for file in ofiles:
+            if getTimeStamp(file) > exeTime:
+                if verbose:
+                    print ("Relinking because " + file + 
+                           " is newer than " + binaryDir + binaryName)
+                relink = 1
+                break
+
+    # Only link when necessary
+    if relink:
+        if not os.path.exists(binaryDir):
+            mkdir(binaryDir)
+
+        if ((binaryType == EXE) or
+            (binaryType == DLL)):
+            (lopt, libraries) = getLinkerOptions(files)
+            makeExecutable(ofiles + libraries, lopt)
+        else:
+            # Static library.  Use libtool
+            makeStaticLibrary(ofiles)
+
+        print
+
+    maybeColorPrint('Done building ' + binaryName, SECTION_COLOR)
+    
+#########################################################################
+""" Turns a string with paths separated by ; (or : on Linux) into
+    a list of paths each ending in /."""
+def makePathList(paths):
+    if (os.name == 'posix'):
+        # Allow ':' as a separator between paths
+        paths = paths.replace(':', ';')
+        
+    return cleanPathList(paths.split(';'))
+
+
+""" Ensures that every string in a list ends with a trailing slash,
+    is non-empty, and appears exactly once."""
+def cleanPathList(paths):
+    out = {}
+
+    for path in paths:
+        if path == "":
+            # do nothing
+            0
+        elif path[-1] == "/":
+            out[path] = 1
+        else:
+            out[path + "/"] = 1
+
+    return out.keys()
+
+#########################################################################
+
+""" Returns two lists; all of the arguments up to and including the first
+"--run" or "--gdb" and all arguments to the right."""
+def separateArgs(args):
+    for i in xrange(0, len(args)):
+        if (args[i] == "--run") or (args[i] == "--gdb"):
+            progArgs = args[(i + 1):]
+            args = args[:(i + 1)]
+            return (args, progArgs)
+    return (args, [])
+
+
+#########################################################################
+""" Called from runCompile to launch the program on completion.  Returns
+    the program's exit code. """
+def runCompiledProgram(progArgs):
+    printBar()
+    curDir = os.getcwd()
+    os.chdir(binaryDir)
+    cmd = './' + binaryName + ' ' + string.join(progArgs, ' ')
+    ret = os.system(cmd)
+    os.chdir(curDir)
+    return ret
+
+
+#########################################################################
+
+""" Called from runCompile to launch the program on completion.  Returns
+    the program's exit code. """
+def gdbCompiledProgram(progArgs):
+    # Write out the 'run' command to a file since gdb doesn't
+    # accept it on the command line.
+    commandFile = tempDir + 'gdb-commands.txt'
+    f = open(commandFile, 'w')
+    f.write('run ' + string.join(progArgs, ' '))
+    f.close()
+
+    # Options: -q   Don't print copyright info
+    #          -x   Run the gdb commands we wrote out to the command file
+    #          -cd  Working directory
+    #          -f   Print files and line numbers in Emacs-compatible format
+    cmd = ('gdb -x ../../' + commandFile + ' -cd ' + binaryDir +
+                ' -q -f ' + binaryName)
+    print cmd
+    printBar()
+    return os.system(cmd)
+
+#########################################################################
+
+""" Returns the exit code """
+def runCompile(args, progArgs):
+    global verbose
+    doGDB = "--gdb" in args
+    doRun = "--run" in args
+
+    if doGDB and doRun:
+        colorPrint("Cannot specify both --gdb and --run options.",
+                   WARNING_COLOR)
+        return -1
+
+    if (doGDB or doRun) and (binaryType != EXE):
+        colorPrint("Cannot specify --gdb or --run for a library.",
+                   WARNING_COLOR)
+        return -1
+
+    if verbose:
+        # Temporarily turn off verbose so that dependencies don't print spam
+        verbose = False
+        (cfiles, dependencies, files) = getDependencyInformation()
+        verbose = True
+        printVariables(args, progArgs, files)
+    
+    if ("--clean" in args):
+        buildClean()
+        # Don't allow the cache to get written
+        sys.exit(0)
+
+    if ("--doc" in args):
+        buildDocumentation()
+        maybePrintBar()
+
+    if binaryType == EXE:
+        buildDataFiles()
+        maybePrintBar()
+        
+    buildBinary()
+    maybePrintBar()
+        
+    if (binaryType == LIB) or (binaryType == DLL):
+        buildInclude()
+        maybePrintBar()
+    
+    if doGDB:
+        return gdbCompiledProgram(progArgs)
+
+    if doRun:
+        return runCompiledProgram(progArgs)
+
+    if not (doGDB or doRun) and not quiet:
+        if (binaryType == EXE):
+            print '\nExecutable written to ' + binaryDir + binaryName
+        else:
+            print '\nLibrary written to ' + binaryDir + binaryName
+                
+    return 0
+
+##########################################################################
+
+""" Checks for ice.txt and, if not found, prompts the user to create it
+    and returns if they press Y, otherwise exits."""
+def checkForProjectFile(args):
+    # Assume default project file
+    projectFile = 'ice.txt'
+    if os.path.exists(projectFile): return
+
+    # Everything below here executes only when there is no project file
+
+    if ('--clean' in args) and not os.path.exists(BUILDDIR):
+        print
+        colorPrint('Nothing to clean (you have never run iCompile in ' +
+                   os.getcwd() + ')', WARNING_COLOR)
+        print
+        # Doesn't matter, there's nothing to delete anyway, so just exit
+        sys.exit(0)
+
+    print
+    inHomeDir = (os.path.realpath(os.getenv('HOME')) == os.getcwd())
+
+    if inHomeDir:
+        colorPrint(' ******************************************************',
+                   WARNING_COLOR)
+        colorPrint(' * You are about run iCompile in your home directory! *',
+                   'bold red')
+        colorPrint(' ******************************************************',
+                   WARNING_COLOR)
+    else:        
+        colorPrint('You have never run iCompile in this directory before.',
+                   WARNING_COLOR)
+    print
+    print '  Current Directory: ' + os.getcwd()
+    
+    cfiles = flatListCFiles()
+    num = len(cfiles)
+    sl = shortlist(cfiles)
+    
+    if (num > 1):
+        print '  Contains', num, 'C++ files (' + sl + ')'
+    elif (num > 0):
+        print '  Contains 1 C++ file (' + cfiles[0] + ')'
+    else:
+        print '  Contains no C++ files'    
+
+    # Don't show .files first if we can avoid it
+    dirs = listDirs()
+    dirs.reverse()
+    num = len(dirs)
+    sl = shortlist(dirs)
+    
+    if (num > 1):
+        print '  Contains', num, 'directories (' + sl + ')'
+    elif (num > 0):
+        print '  Contains 1 directory (' + dirs[0] + ')'
+    else:
+        print '  Contains no subdirectories'
+
+    print
+    
+    dir = string.split(os.getcwd(), '/')[-1]
+    if inHomeDir:
+        prompt = ('Are you sure you want to run iCompile '+
+                  'in your home directory? (Y/N)')
+    else:
+        prompt = ("Are you sure you want to compile the '" +
+                  dir + "' project? (Y/N)")
+        
+    colorPrint(prompt, 'bold')
+    if string.lower(getch()) != 'y':
+        sys.exit(0)
+        
+    f = file(projectFile, 'wt')
+    f.write(defaultProjectFileContents)
+    f.close()
+    
+
+##########################################################################
+#                             Set Variables                              #
+##########################################################################
+"""
+ Configures the global parameters
+
+ @param args All arguments before --run
+"""
+def setVariables(args):
+    global rootDir, projectName, binaryType, verbose, target
+    global binaryName, binaryDir, objDir
+
+    # Root directory
+    rootDir                    = os.getcwd() + "/"
+
+    # Project name
+    projectName                = string.split(rootDir, ('/'))[-2]
+
+    ext = string.lower(_extname(projectName))
+    projectName = _rawfilename(projectName)
+
+    # Binary type    
+    if (ext == 'lib') or (ext == 'a'):
+        binaryType = LIB
+    elif (ext == 'dll') or (ext == 'so'):
+        binaryType = DLL
+    elif (ext == 'exe') or (ext == ''):
+        binaryType = EXE
+    else:
+        binaryType = EXE
+        maybeWarn("This project has unknown extension '" + ext +
+                  "' and will be compiled as an executable.")
+
+    # Verbose
+    verbose = '--verbose' in args
+
+    # Choose target
+    if ('--opt' in args) or ('-O' in args):
+        if ("--debug" in args):
+            colorPrint("Cannot specify '--debug' and '--opt' at " +
+                       "the same time.", WARNING_COLOR)
+            sys.exit(-1)
+
+        target                 = RELEASE
+        d                      = ''
+    else:
+        target                 = DEBUG
+        d                      = 'd'
+
+    discoverPlatform()
+    
+    # Binary name
+    if (binaryType == EXE):
+        binaryDir  = BUILDDIR + '/' + DISTRIBDIR + '/'
+        binaryName = projectName + d
+    elif (binaryType == DLL):
+        binaryDir  = BUILDDIR + '/' + DISTRIBDIR + '/' + platform + '-lib/'
+        binaryName = 'lib' + projectName + d + '.so'
+    elif (binaryType == LIB):
+        binaryDir  = BUILDDIR + '/' + DISTRIBDIR + '/' + platform + '-lib/'
+        binaryName = 'lib' + projectName + d + '.a'
+
+    stripDebugSymbols = (target == DEBUG)
+
+    # Make separate directories for object files based on
+    # debug/release
+    objDir = tempDir + platform + '/' + target + '/'
+
+
+#################################################################
+        
+""" Choose and configure the compiler for this platform and target.
+    Call after setVariables """
+def configureCompiler():
+    configureGpp()
+
+
+""" Configure g++ as our compiler of choice.
+    Called from configureCompiler."""
+def configureGpp():
+    global defaultCompilerName, defaultCompilerOptions, compilerWarningOptions
+    global compilerVerboseOptions, defaultLinkerOptions
+
+    (defaultCompilerName, compilerVersion) = latestGpp()
+
+    if (target == RELEASE):
+        defaultCompilerOptions = ['-O3',
+                                  '-D_RELEASE', 
+                                  '-funsafe-math-optimizations', 
+                                  '-fno-trapping-math',
+                                  '-s']
+        # Had to remove "-fno-math-errno" because g++ occasionally
+        # crashes with that option.
+
+        # Removed '-fno-finite-math-only' because it is not used
+        # by g++3.2
+
+        defaultLinkerOptions   = []
+    else:
+        defaultCompilerOptions = ['-D_DEBUG', '-g']
+        defaultLinkerOptions   = []
+
+    if (binaryType == DLL):
+        defaultLinkerOptions  += ['-shared']
+
+    #if verbose: compilerVerboseOptions.append('-v')
+
+    compilerWarningOptions     = ['-Wall']
+
+
+#################################################################
+#                 Configuration & Project File                  #
+#################################################################
+
+config = ConfigParser.SafeConfigParser()
+
+""" Reads [section]name from the provided configuration, replaces
+    <> and $() values with the appropriate settings.
+
+    If exp is False $() variables are *not* expanded. """
+    
+def configGet(config, section, name, exp = True):
+    val = config.get(section, name)
+
+    # Replace special values
+    if '<' in val:
+        val = val.replace('<NEWESTGCC>', defaultCompilerName)
+        val = val.replace('<COMPILEOPTIONS>',
+                          string.join(defaultCompilerOptions, ' '))
+        val = val.replace('<LINKOPTIONS>',
+                          string.join(defaultLinkerOptions, ' '))
+        val = val.replace('<DYNAMICLIBS>',
+                          string.join(defaultDynamicLibs, ';'))
+        val = val.replace('<STATICLIBS>',
+                          string.join(defaultStaticLibs, ';'))
+        val = val.replace('<EXCLUDE>',
+                          string.join(_cppExcludePatterns, '|'))
+
+    if exp:
+        val = expandvars(val)
+
+    return val
+
+""" Called from processProjectFile """ 
+def processDotICompile():
+    # Set the defaults from the default .compile
+
+    default = tempDir + 'default-.icompile'
+    if not os.path.exists(default):
+        mkdir(tempDir)
+        f = file(default, 'wt')
+        f.write(defaultDotICompile)
+        f.close()
+    config.read(default)
+
+    # Process .icompile
+    HOME = os.environ['HOME']
+    preferenceFile = pathConcat(HOME, '.icompile')
+    if os.path.exists(preferenceFile):
+        if verbose:
+            print 'Reading ' + preferenceFile
+        config.read(preferenceFile)
+    else:
+        success = False
+
+        # Try to generate a default .icompile
+        if os.path.exists(HOME):
+            f = file(preferenceFile, 'wt')
+            if f != None:
+                f.write(defaultDotICompile)
+                f.close()
+                success = True
+                maybePrint('')
+                maybeColorPrint('Created a default preference file for ' +
+                                'you in ' + preferenceFile + '\n',
+                                SECTION_COLOR)
+                
+        # We don't need to read this new .icompile because
+        # it matches the default, which we already read.
+                           
+        if not success and verbose:
+            print ('No ' + preferenceFile +
+                   ' found and cannot write to '+ HOME)
+
+
+""" Process the project file and .icompile so that we can use configGet.
+    Sets a handful of variables."""
+def processProjectFile(args):
+    global config, excludeFromCompilation, quiet
+
+    processDotICompile()
+    
+    # Process the project file
+    projectFile = 'ice.txt'
+    config.read(projectFile)
+
+    # Don't expand $ envvar in regular expressions since
+    # $ means end of pattern.
+    exclude = configGet(config, 'GLOBAL', 'exclude', False)
+    excludeFromCompilation = re.compile(exclude)
+
+    quiet = ((configGet(config, 'GLOBAL', 'quiet', True) == 'True') or
+             ('--quiet' in args) or ('-q' in args))
+
+
+def includePaths():
+    return makePathList(configGet(config, 'GLOBAL', 'include'))
+
+def libraryPaths():
+    return (makePathList(configGet(config, 'GLOBAL', 'library')) +
+            ['/usr/X11R6/lib'])
+
+def compilerName():
+    return configGet(config, 'GLOBAL', 'compiler')
+
+def configCompilerOptions():
+    return string.split(configGet(config, target, 'compileoptions'), ' ')
+
+def linkerOptions():
+    return string.split(configGet(config, target, 'linkoptions'), ' ')
+    
+#################################################################
+# Entry point
+
+if __name__ == '__main__':
+    (args, progArgs) = separateArgs(sys.argv[1:])
+    if ('--version' in args):
+        printVersion()
+        sys.exit(0)
+
+    if ('--help' in args):
+        printHelp()
+        sys.exit(0)
+
+    checkForProjectFile(args)
+    processProjectFile(args)
+
+    cacheFilename = tempDir + '.icompile-cache'
+    loadCache(cacheFilename)
+
+    setVariables(args)
+    
+    configureCompiler()
+    
+    ret = runCompile(args, progArgs)
+
+    mkdir(tempDir)
+    saveCache(cacheFilename)
+    if (not quiet) and (configGet(config, 'GLOBAL', 'beep') == 'True'):
+        beep()
+
+    sys.exit(ret)

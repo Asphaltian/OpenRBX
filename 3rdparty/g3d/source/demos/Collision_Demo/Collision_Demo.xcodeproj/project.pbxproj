@@ -1,0 +1,369 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0FCA738E06F1BBFE0006B0C9 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738506F1BBFE0006B0C9 /* main.cpp */; };
+		0FCA738F06F1BBFE0006B0C9 /* Scene.h in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738606F1BBFE0006B0C9 /* Scene.h */; };
+		0FCA739006F1BBFE0006B0C9 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738706F1BBFE0006B0C9 /* Object.cpp */; };
+		0FCA739106F1BBFE0006B0C9 /* Object.h in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738806F1BBFE0006B0C9 /* Object.h */; };
+		0FCA739206F1BBFE0006B0C9 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738906F1BBFE0006B0C9 /* Scene.cpp */; };
+		0FCA739306F1BBFE0006B0C9 /* Demo.h in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738A06F1BBFE0006B0C9 /* Demo.h */; };
+		0FCA739406F1BBFE0006B0C9 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738B06F1BBFE0006B0C9 /* Model.cpp */; };
+		0FCA739506F1BBFE0006B0C9 /* Model.h in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738C06F1BBFE0006B0C9 /* Model.h */; };
+		0FCA739606F1BBFE0006B0C9 /* buildScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA738D06F1BBFE0006B0C9 /* buildScene.cpp */; };
+		0FCA739D06F1BC9C0006B0C9 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA739B06F1BC9C0006B0C9 /* SDLMain.m */; };
+		0FCA739E06F1BC9C0006B0C9 /* SDLMain.h in Sources */ = {isa = PBXBuildFile; fileRef = 0FCA739C06F1BC9C0006B0C9 /* SDLMain.h */; };
+		0FCA73A706F1BCD70006B0C9 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCA73A606F1BCD70006B0C9 /* OpenGL.framework */; };
+		3E053D5308DE28DF005489AC /* libG3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E053D5108DE28DF005489AC /* libG3D.a */; };
+		3E053D5408DE28DF005489AC /* libGLG3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E053D5208DE28DF005489AC /* libGLG3D.a */; };
+		3EB570D7071BE66300E8B645 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EB570D6071BE66300E8B645 /* SDL.framework */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		4A9504CCFFE6A4B311CA0CBA /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = ../../../G3DOSX/build;
+				PREBINDING = YES;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		4A9504CDFFE6A4B311CA0CBA /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		0FCA738506F1BBFE0006B0C9 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		0FCA738606F1BBFE0006B0C9 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = SOURCE_ROOT; };
+		0FCA738706F1BBFE0006B0C9 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = SOURCE_ROOT; };
+		0FCA738806F1BBFE0006B0C9 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = SOURCE_ROOT; };
+		0FCA738906F1BBFE0006B0C9 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = SOURCE_ROOT; };
+		0FCA738A06F1BBFE0006B0C9 /* Demo.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Demo.h; sourceTree = SOURCE_ROOT; };
+		0FCA738B06F1BBFE0006B0C9 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = SOURCE_ROOT; };
+		0FCA738C06F1BBFE0006B0C9 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = SOURCE_ROOT; };
+		0FCA738D06F1BBFE0006B0C9 /* buildScene.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = buildScene.cpp; sourceTree = SOURCE_ROOT; };
+		0FCA739B06F1BC9C0006B0C9 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = SDLMain.m; path = ../../../G3DOSX/SDLMain.m; sourceTree = SOURCE_ROOT; };
+		0FCA739C06F1BC9C0006B0C9 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SDLMain.h; path = ../../../G3DOSX/SDLMain.h; sourceTree = SOURCE_ROOT; };
+		0FCA73A606F1BCD70006B0C9 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		3E053D5108DE28DF005489AC /* libG3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libG3D.a; path = ../../../G3DOSX/build/Development/libG3D.a; sourceTree = SOURCE_ROOT; };
+		3E053D5208DE28DF005489AC /* libGLG3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLG3D.a; path = ../../../G3DOSX/build/Development/libGLG3D.a; sourceTree = SOURCE_ROOT; };
+		3EB570D6071BE66300E8B645 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		8D1107320486CEB800E47090 /* Collision_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Collision_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E053D5408DE28DF005489AC /* libGLG3D.a in Frameworks */,
+				3E053D5308DE28DF005489AC /* libG3D.a in Frameworks */,
+				3EB570D7071BE66300E8B645 /* SDL.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0FCA73A706F1BCD70006B0C9 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Collision_Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Collision_Demo */ = {
+			isa = PBXGroup;
+			children = (
+				29B97315FDCFA39411CA2CEA /* Sources */,
+				29B97317FDCFA39411CA2CEA /* SDL Support Files */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Collision_Demo;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				0FCA738506F1BBFE0006B0C9 /* main.cpp */,
+				0FCA738606F1BBFE0006B0C9 /* Scene.h */,
+				0FCA738706F1BBFE0006B0C9 /* Object.cpp */,
+				0FCA738806F1BBFE0006B0C9 /* Object.h */,
+				0FCA738906F1BBFE0006B0C9 /* Scene.cpp */,
+				0FCA738A06F1BBFE0006B0C9 /* Demo.h */,
+				0FCA738B06F1BBFE0006B0C9 /* Model.cpp */,
+				0FCA738C06F1BBFE0006B0C9 /* Model.h */,
+				0FCA738D06F1BBFE0006B0C9 /* buildScene.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* SDL Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0FCA739B06F1BC9C0006B0C9 /* SDLMain.m */,
+				0FCA739C06F1BC9C0006B0C9 /* SDLMain.h */,
+			);
+			name = "SDL Support Files";
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E053D5108DE28DF005489AC /* libG3D.a */,
+				3E053D5208DE28DF005489AC /* libGLG3D.a */,
+				3EB570D6071BE66300E8B645 /* SDL.framework */,
+				0FCA73A606F1BCD70006B0C9 /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Collision_Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EBA4A5108DD6CF1006BB670 /* Build configuration list for PBXNativeTarget "Collision_Demo" */;
+			buildPhases = (
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Users/dbolli/Library/Frameworks,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__stdcall=",
+					"__cdecl=",
+				);
+				HEADER_SEARCH_PATHS = ../../include;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					/Users/brl/development/g3d/cpp/G3DOSX/build,
+					"/Users/dbolli/dev/Xcode src/g3d-src-6_04f/cpp/G3DOSX/build",
+				);
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = Collision_Demo;
+				WRAPPER_EXTENSION = app;
+			};
+			dependencies = (
+			);
+			name = Collision_Demo;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Collision_Demo;
+			productReference = 8D1107320486CEB800E47090 /* Collision_Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 3EBA4A5508DD6CF1006BB670 /* Build configuration list for PBXProject "Collision_Demo" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA /* Development */,
+				4A9504CDFFE6A4B311CA0CBA /* Deployment */,
+			);
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Collision_Demo */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Collision_Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0FCA738F06F1BBFE0006B0C9 /* Scene.h in Sources */,
+				0FCA739106F1BBFE0006B0C9 /* Object.h in Sources */,
+				0FCA739306F1BBFE0006B0C9 /* Demo.h in Sources */,
+				0FCA739506F1BBFE0006B0C9 /* Model.h in Sources */,
+				0FCA739E06F1BC9C0006B0C9 /* SDLMain.h in Sources */,
+				0FCA738E06F1BBFE0006B0C9 /* main.cpp in Sources */,
+				0FCA739006F1BBFE0006B0C9 /* Object.cpp in Sources */,
+				0FCA739206F1BBFE0006B0C9 /* Scene.cpp in Sources */,
+				0FCA739406F1BBFE0006B0C9 /* Model.cpp in Sources */,
+				0FCA739606F1BBFE0006B0C9 /* buildScene.cpp in Sources */,
+				0FCA739D06F1BC9C0006B0C9 /* SDLMain.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3EBA4A5208DD6CF1006BB670 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Users/dbolli/Library/Frameworks,
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__stdcall=",
+					"__cdecl=",
+				);
+				HEADER_SEARCH_PATHS = ../../include;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					../../../G3DOSX/build,
+					"$(SRCROOT)/../../../G3DOSX/build/Development",
+				);
+				OTHER_LDFLAGS = "-lz";
+				PREBINDING = YES;
+				PRODUCT_NAME = Collision_Demo;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		3EBA4A5308DD6CF1006BB670 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Users/dbolli/Library/Frameworks,
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__stdcall=",
+					"__cdecl=",
+				);
+				HEADER_SEARCH_PATHS = ../../include;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					/Users/brl/development/g3d/cpp/G3DOSX/build,
+					"/Users/dbolli/dev/Xcode src/g3d-src-6_04f/cpp/G3DOSX/build",
+					"$(SRCROOT)/../../../G3DOSX/build/Development",
+				);
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = Collision_Demo;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		3EBA4A5408DD6CF1006BB670 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(HOME)/Library/Frameworks",
+					/Users/dbolli/Library/Frameworks,
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__stdcall=",
+					"__cdecl=",
+				);
+				HEADER_SEARCH_PATHS = ../../include;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "";
+				LIBRARY_SEARCH_PATHS = (
+					/Users/brl/development/g3d/cpp/G3DOSX/build,
+					"/Users/dbolli/dev/Xcode src/g3d-src-6_04f/cpp/G3DOSX/build",
+					"$(SRCROOT)/../../../G3DOSX/build/Development",
+				);
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = Collision_Demo;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		3EBA4A5608DD6CF1006BB670 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		3EBA4A5708DD6CF1006BB670 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		3EBA4A5808DD6CF1006BB670 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3EBA4A5108DD6CF1006BB670 /* Build configuration list for PBXNativeTarget "Collision_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EBA4A5208DD6CF1006BB670 /* Development */,
+				3EBA4A5308DD6CF1006BB670 /* Deployment */,
+				3EBA4A5408DD6CF1006BB670 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		3EBA4A5508DD6CF1006BB670 /* Build configuration list for PBXProject "Collision_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EBA4A5608DD6CF1006BB670 /* Development */,
+				3EBA4A5708DD6CF1006BB670 /* Deployment */,
+				3EBA4A5808DD6CF1006BB670 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

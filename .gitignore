@@ -1,0 +1,38 @@
+reccmp-user.yml
+reccmp-build.yml
+/.vs
+/.vscode
+/.idea
+/.claude
+/.env
+/.venv
+/env/
+/venv/
+/ENV/
+/VENV/
+/env.bak/
+/venv.bak/
+/build*
+*.swp
+WEBSERVICEPROGRESS.*
+*.pyc
+
+# By convention we put the retail binaries into the project root.
+WebService.dll
+WebService.pdb
+
+# Build products
+*.obj
+*.exp
+*.ilk
+vc[0-9][0-9].pdb
+
+# Data / Ghidra project files
+/data/
+*.gpr
+*.rep/
+
+.DS_Store
+/*.log
+
+.cache/

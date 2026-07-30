@@ -1,0 +1,14 @@
+targets:
+  WEBSERVICE:
+    filename: WebService.dll
+    source-root:
+      - common
+      - WebService
+      # RakNet is recovered from the binary, not vendored, so it carries WEBSERVICE annotations.
+      - 3rdparty/RakNet30
+    hash:
+      sha256: 5e9c6b82605fc8429c5fc5f682f2d7f98b55b73d993dfba58437365754410e2f
+    data-sources:
+      - reccmp/webservice-function-size.csv
+    report:
+      icon: assets/webservice.png

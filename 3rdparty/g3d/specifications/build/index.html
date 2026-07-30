@@ -1,0 +1,246 @@
+<html>
+<head>
+<title>G3D Build Specification</title>
+</head>
+<body>
+<h1>G3D Build Specification</h1>
+
+This document describes the desired specification for the inputs,
+outputs, and properties of the build system for G3D.  It does not
+discuss particular implementations; those will be proposed in future
+documents.
+<p>
+This build system is intended to be rolled out in the G3D 7.00 release
+but may slip to a future release if it cannot be implemented in time.
+<p>
+Please discuss this document on the <a
+href="http://g3d-cpp.sourceforge.net/forums/viewforum.php?f=1">new
+forums</a>.  If Morgan accepts your proposed changes he will ask you
+to add them to this page directly.
+<p>
+
+<hr>
+<h2>Contents</h2>
+<ul>
+ <li><a href="#mandate">Mandate</a>
+ <li><a href="#sourcetree">Source Directory Tree</a>
+ <li><a href="#externaltree">External Directory Tree</a>
+ <li><a href="#buildtree">Build Directory Tree</a>
+</ul>
+
+<hr>
+<a name="mandate">
+<h2>Mandate</h2>
+
+<ol>
+ <li> Compile static libraries
+ <li> All generated files go under one subdirectory
+ <li> No project files neeed to be modified when new files are added
+ <li> Same commands used to execute the build on all platforms
+ <li> Builds from multiple compilers can sit side-by-side
+ <li> Build system requires only a single, easy-to-install tool (so that users can easily build by themselves)
+ <li> Build targets: 
+   <ol>  
+     <li> <b>debug-lib</b> - Static libraries and headers    
+     <li> <b>release-lib</b> - Static libraries and headers
+     <li> <b>lib</b> - debug-lib, release-lib
+     <li> <b>doc</b> - Documentation, data, and demos
+     <li> <b>test</b> - Automated tests; depends on lib
+     <li> <b>source</b> - zipfile of source tree without SVN directories
+     <li> <b>all</b> - lib, doc, test, source
+     <li> <b>clean</b> - Remove all generated files
+   </ol>
+</ol>
+
+<hr>
+<a name="sourcetree">
+<h2>Source Directory Tree</h2>
+
+The source tree contains code needed to compile G3D, tools, and
+documentation for all platforms.  It is a checkout of the 'g3d'
+module from subversion.
+
+<pre>
+  <img src="folder.png"> <b>g3d/</b>                                    <font color=#009000>New CVS Module</font>
+  |--<img src="folder.png"> <b>g3d.lib/</b>
+  |  |--<img src="folder.png"><b>include/</b>
+  |  |  |-- AABox.h
+  |  |  `-- ...
+  |  |
+  |  |-- AABox.cpp
+  |  `-- ...
+  |
+  |--<img src="folder.png"> <b>glg3d.lib/</b>                           <font color=#009000>Rendering + UI library</font>
+  |  |--<img src="folder.png"> <b>gl/</b>                               <font color=#009000>Customized OpenGL Headers</font>
+  |  |  `-- ...
+  |  `-- ...
+  |
+  |--<img src="folder.png"> <b>sensei/</b>                              <font color=#009000>G3D Profiler & Debugger Tool</font>
+  |  |-- main.cpp
+  |  `-- ...
+  |
+  |--<img src="folder.png"> <b>demos/</b>                               <font color=#009000>Demos</font>
+  |
+  |--<img src="folder.png"> <b>docsource/</b>                           <font color=#009000>Documentation-only headers</font>
+  |
+  |--<img src="folder.png"> <b>gfxmeter/</b>                            <font color=#009000>G3D Benchmark Tool</font>
+  |  |-- main.cpp
+  |  `-- ...
+  |
+  |--<img src="folder.png"> <b>contrib/</b>                             <font color=#009000>Unsupported code</font>
+  |
+  |--<img src="folder.png"> <b>data/</b>                                <font color=#009000>Standard data files</font>
+  |
+  |-- build
+  |-- build.bat
+  |-- .svnignore
+  |
+  :
+</pre>
+
+<hr width=50%>
+
+<ul>
+  <li> OpenGL headers are usually out of date on end-user machines.  So we include our own private GL headers under glg3d.
+  <li> 3<sup>rd</sup> party libraries are provided primarily for Win32 users who don't have these standard tools.  G3D depends on these.
+</ul>
+
+<hr>
+<a name="externaltree">
+<h2>External Directory Tree</h2>
+
+The external tree contains code needed to compile 3<sup>rd</sup> party
+libraries on which G3D (at least, for Win32) depends.  It is a checkout
+of the 'external' module from subversion.
+
+<pre>
+  <img src="folder.png"> <b>g3d-external/</b>                           <font color=#009000>New SVN Module</font>
+  |--<img src="folder.png"> <b>libpng.lib/</b>                          <font color=#009000>PNG</font>
+  |     ...
+  |
+  |--<img src="folder.png"> <b>libjpeg.lib/</b>                         <font color=#009000>JPEG</font>
+  |  `-- ...
+  |
+  |--<img src="folder.png"> <b>boost.lib/</b>                           <font color=#009000>Utility</font>
+  |  `--<img src="folder.png"> <b>include/</b>
+  |     `-- ...
+  |
+  |--<img src="folder.png"> <b>ode.dll/</b>                             <font color=#009000>Physics</font>
+  |  `--<img src="folder.png"> <b>include/</b>
+  |     `-- ...
+  |
+  |--<img src="folder.png"> <b>wx.dll/</b>                              <font color=#009000>GUI</font>
+  |  `--<img src="folder.png"> <b>include/</b>
+  |     `-- ...
+  |
+  |-- .svnignore
+  |
+  :
+</pre>
+
+<hr width=50%>
+
+<a name="buildtree">
+<h2>Build Directory Tree</h2>
+
+The build tree sits at the top level inside the CVS module.  This
+keeps all G3D files localized.  Note that the "install" subdirectory
+is what is copied elsewhere when installing the library.
+<p>
+
+<pre>  
+  <img src="folder.png"> <b>g3d/</b>                                    <font color=#009000>New CVS Module</font>
+  |
+  :
+  |
+  `--<img src="folder.png"> <b>build/</b>                               <font color=#009000>Base of the build tree</font>
+     |--<img src="folder.png"> <b>doc/</b>
+     |--<img src="folder.png"> <b>install/</b>
+     |  |--<img src="folder.png"> <b>doc/</b>
+     |  |   `-- ...
+     |  |
+     |  |--<img src="folder.png"> <b>include/</b>
+     |  |  |--<img src="folder.png"> <b>g3d/</b>
+     |  |  |  |-- AABox.h
+     |  |  |  |-- graphics3d.h
+     |  |  |  `-- ...
+     |  |  |
+     |  |  |--<img src="folder.png"> <b>glg3d/</b>
+     |  |  |  |--<img src="folder.png"> <b>gl/</b>
+     |  |  |  |   `-- ...
+     |  |  |  |
+     |  |  |  `-- ...
+     |  |  |
+     |  |  |--<img src="folder.png"> <b>boost/</b>
+     |  |  |  `--  ...
+     |  |  |
+     |  |  `--<img src="folder.png"> <b>zlib/</b>
+     |  |     `-- zlib.h
+     |  |   
+     |  |--<img src="folder.png"> <b>win32-vc6.0-lib/</b>
+     |  |  `-- ...
+     |  |
+     |  |--<img src="folder.png"> <b>win32-vc7.1-lib/</b>
+     |  |  `-- ...
+     |  |
+     |  |--<img src="folder.png"> <b>win32-vc8.0-lib/</b>
+     |  |  |-- g3d.lib
+     |  |  |-- glg3d.lib
+     |  |  |-- g3d-debug.lib
+     |  |  |-- glg3d-debug.lib
+     |  |  |-- zlib.lib
+     |  |  |-- libpng.lib
+     |  |  `-- libjpg.lib
+     |  |
+     |  |--<img src="folder.png"> <b>java/</b>
+     |  |  `-- g3d.jar
+     |  |
+     |  |--<img src="folder.png"> <b>linux-bin/</b>
+     |  |  `-- icompile
+     |  |
+     |  |--<img src="folder.png"> <b>osx-bin/</b>
+     |  |  `-- icompile
+     |  |
+     |  |--<img src="folder.png"> <b>win32-bin/</b>
+     |  |  |-- copyifnewer.exe
+     |  |  |--<img src="folder.png"> <b>gfxmeter/</b>
+     |  |  |-- gfxmeter.exe
+     |  |  `-- ...
+     |  |
+     |  |--<img src="folder.png"> <b>demos/</b>
+     |  |  |--<img src="folder.png"> <b>VARDemo/</b>
+     |  |  |   `-- main.cpp
+     |  |  |
+     |  |  `--...
+     |  |
+     |  |--<img src="folder.png"> <b>data/</b>
+     |  |  |--<img src="folder.png"> <b>fonts/</b>
+     |  |  |  `-- ...
+     |  |  |
+     |  |  `-- ...
+     |  |
+     |  `--<img src="folder.png"> <b>contrib/</b>
+     |     |--<img src="folder.png"> <b>ArticulatedModel/</b>
+     |     |  `-- ...
+     |     |
+     |     `-- ...
+     |
+     `--<img src="folder.png"> <b>temp/</b>
+        |--<img src="folder.png"> <b>g3d.lib/</b>
+        |  |--<img src="folder.png"> <b>debug/</b>
+        |  |   |-- AABox.obj
+        |  |   `-- ...
+        |  |
+        |  `--<img src="folder.png"> <b>release/</b>
+        |     `--...
+        |
+        |--<img src="folder.png"> <b>glg3d.lib/</b>
+        |  `-- ...
+        |
+        `--<img src="folder.png"> <b>zlib.lib/</b>
+           `-- ...
+
+</pre>
+
+</body>
+</html>

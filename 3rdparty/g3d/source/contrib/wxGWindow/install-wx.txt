@@ -1,0 +1,66 @@
+INTRO ----- 
+
+The installation instructions for wxWidgets are confusing. This
+diretory contains code and instructions for using G3D in the same
+application as wxWidgets 2.5.3, on Windows platforms only. These
+instructions don't cover wxWidgets/G3D interoperability on other
+platforms, although the process should be similar on those platforms.
+
+For Windows users, we have provided precompiled binaries, but you can
+also compile wxWidgets yourself. 
+
+Note: There is at least one newer development release of wxWidgets (2.5.4) 
+since version 2.5.3. These instructions have been created with 2.5.3. 
+
+
+USING PRECOMPILED BINARIES
+-------------------------
+
+To configure wxWidgets correctly for use with G3D, you can download 
+precompiled Windows binaries: 
+
+  http://prdownloads.sourceforge.net/g3d-cpp/wxWidgets-2.5.3-win32.zip?download
+
+Add the include and library directories to your build setup: in 
+C++, Tools menu -> Options -> Projects -> C++ -> Directories.
+
+
+COMPILING wxWidgets YOURSELF
+----------------------------
+
+1) Download wxWidgts 2.5.3 for windows:
+   http://prdownloads.sourceforge.net/wxwindows/wxMSW-2.5.3-setup.zip
+
+2) Run installation and put it somewhere.  I put mine at C:\libraries\wxWidgets-2.5.3
+
+3) Open C:\wxWidgets-2.5.3\build\msw\wx.dsw into MSVC6 (NOT wxWindows.dsw!)
+
+4) In solution wx, project gl, "Setup Headers" folder, edit the setup.h file. It starts out saying
+       #define wxUSE_GLCANVAS       0
+Change this to: 
+       #define wxUSE_GLCANVAS       1
+
+5) Select "Batch Build" from the Build menu.
+
+6) Check the "build" checkbox for the targets that end in only 
+" - Win32 Release" or " - Win32 Debug". That is, you DO NOT need or want to 
+build any target that is a DLL, or uses Unicode or Universal. Just the vanilla
+static libraries. 
+   
+   Press "Build".  It should take about 15 minutes to compile wxWidgets.
+
+7) Add the include path, by going to Tools menu -> Options -> Projects -> VC++ -> Directories. Select "Include files" from "Show Directories for..", then add: 
+   C:\libraries\wxWidgets-2.5.3\include    C:\libraries\wxWidgets-2.5.3\lib\vc_lib\msw
+
+8) Select "Library files", and add:
+   C:\libraries\wxWidgets-2.5.3\lib\vc_lib
+
+COMPILING THE DEMO PROJECT
+---------------------------
+
+1) Create a project and add cpp/source/contrib/wxGWindow/demo.cpp wxGWindow.cpp
+wxGWindow.h to it.
+
+2) Add resource.rc to the project.
+
+

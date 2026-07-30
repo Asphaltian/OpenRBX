@@ -1,0 +1,327 @@
+name: Build
+
+on: [push, pull_request]
+
+jobs:
+  fetch-deps:
+    name: Download original binaries
+    uses: ./.github/workflows/rbxgsbin.yml
+
+  build-current-toolchain:
+    name: Current MSVC
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v2
+
+      - name: Setup Ninja
+        uses: ./.github/actions/setup-ninja
+
+      - name: Setup vcvars
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64_x86
+
+      - name: Install LLVM
+        uses: KyleMayes/install-llvm-action@v2
+        with:
+          version: '21'
+
+      # Engine libraries only; linking would drag in G3D, which this compiler will not accept.
+      - name: Build
+        run: |
+          cmake -S . -B build -GNinja `
+            -DCMAKE_C_COMPILER=cl `
+            -DCMAKE_CXX_COMPILER=cl `
+            -DCMAKE_BUILD_TYPE=Debug `
+            -DENABLE_CLANG_TIDY=ON `
+            -Werror=dev
+          cmake --build build --target app network -- -k0
+
+  build:
+    name: 'MSVC 8.0 SP1'
+    runs-on: windows-latest
+
+    steps:
+    - name: 'Checkout OpenRBX sources'
+      uses: actions/checkout@v6
+
+    - name: 'Checkout MSVC 8.0 SP1 toolchain'
+      uses: actions/checkout@v6
+      with:
+        repository: Asphaltian/MSVC800-SP1
+        path: msvc800sp1
+
+    # The tree hash changes only when something under 3rdparty does.
+    - name: Key the vendored build
+      id: vendored
+      shell: bash
+      run: echo "tree=$(git rev-parse HEAD:3rdparty)" >>"$GITHUB_OUTPUT"
+
+    - name: Restore the vendored build
+      uses: actions/cache@v5
+      with:
+        path: build
+        key: build-msvc800sp1-${{ steps.vendored.outputs.tree }}-${{ hashFiles('CMakeLists.txt', '3rdparty/CMakeLists.txt') }}
+
+    # Restored objects must not look older than the sources or the toolchain headers they depend on.
+    - name: Backdate the inputs that never change
+      shell: pwsh
+      run: |
+        Get-ChildItem 3rdparty, msvc800sp1 -Recurse -File |
+          ForEach-Object { $_.LastWriteTime = '2000-01-01' }
+
+    - name: Build
+      shell: cmd
+      run: |
+        call .\msvc800sp1\Common7\Tools\vsvars32.bat
+        cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "NMake Makefiles"
+        cmake --build build
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: Win32
+        path: |
+          build/WebService.dll
+          build/WebService.pdb
+
+  verify:
+    name: Verify decomp
+    needs: [build, fetch-deps]
+    runs-on: windows-latest
+    # Naming any permission drops the rest to none, and checkout needs contents.
+    permissions:
+      actions: read
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/checkout@v6
+
+    - uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+
+    - uses: actions/download-artifact@v8
+      with:
+       name: Win32
+       path: build
+
+    - name: Restore cached original binaries
+      id: cache-original-binaries
+      uses: actions/cache/restore@v5
+      with:
+        enableCrossOsArchive: true
+        path: rbxgsbin
+        key: rbxgsbin
+
+    - name: Install python packages
+      shell: bash
+      run: |
+        pip install -r tools/requirements.txt
+
+    - name: Detect binaries
+      id: detection
+      run: |
+        reccmp-project detect --what original   --search-path rbxgsbin
+        reccmp-project detect --what recompiled --search-path build
+
+    - name: Summarize Accuracy
+      shell: bash
+      run: |
+        reccmp-reccmp -S WEBSERVICEPROGRESS.SVG --target WEBSERVICE --total 12619 --json WEBSERVICEPROGRESS.json --html WEBSERVICEPROGRESS.HTML
+
+    - name: Compare Accuracy With Current Master
+      shell: bash
+      env:
+        RELEASE_URL: https://github.com/Asphaltian/OpenRBX/releases/download/continuous
+      run: |
+        curl -fLSs -o progress-old.json $RELEASE_URL/WEBSERVICEPROGRESS.json || echo "" >progress-old.json
+
+        (reccmp-reccmp --target WEBSERVICE --diff progress-old.json || echo "Current master not found")>"WEBSERVICE-diff.txt"
+
+        cat WEBSERVICE-diff.txt
+
+    - name: Check Vtables
+      if: ${{ steps.detection.conclusion == 'success' && always() }}
+      shell: bash
+      run: |
+        reccmp-vtable --target WEBSERVICE
+
+    - name: Check Variables
+      if: ${{ steps.detection.conclusion == 'success' && always() }}
+      shell: bash
+      run: |
+        reccmp-datacmp --target WEBSERVICE
+
+    - name: Check Folding
+      if: ${{ steps.detection.conclusion == 'success' && always() }}
+      shell: bash
+      run: |
+        python tools/check_folded.py --target WEBSERVICE
+
+    - name: 'Create comment on PR'
+      if: ${{ github.event_name == 'pull_request' }}
+      shell: sh
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        section() {
+          echo "## $1"
+          echo '```'
+          if [ -f "$2" ]; then
+            sed -i -E 's/\x1B\[[0-9;]*[[:alpha:]]//g' "$2"
+            python -c "print(open('$2').read().strip())";
+          else
+            echo '(no diff available)';
+          fi
+          echo '```'
+        }
+
+        {
+          echo '# reccmp report'
+          section 'WEBSERVICE (WebService.dll)' WEBSERVICE-diff.txt
+        } >reccmp-pr-message.txt
+
+        echo "${{ github.event.number }}" >pr-number.txt
+
+        cat reccmp-pr-message.txt
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@main
+      with:
+        name: Accuracy Report
+        path: |
+          WEBSERVICEPROGRESS*
+
+    - name: Upload PR comment payload
+      if: ${{ github.event_name == 'pull_request' && always() }}
+      uses: actions/upload-artifact@main
+      with:
+        name: reccmp-pr-comment
+        path: |
+          reccmp-pr-message.txt
+          pr-number.txt
+
+  upload:
+    name: Upload artifacts
+    needs: [verify]
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && github.repository == 'Asphaltian/OpenRBX' }}
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        repository: probonopd/uploadtool
+
+    - uses: actions/download-artifact@v8
+      with:
+       name: Win32
+       path: build
+
+    - uses: actions/download-artifact@v8
+      with:
+        name: Accuracy Report
+
+    - name: Upload Continuous Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        ./upload.sh \
+          build/WebService.dll \
+          WEBSERVICEPROGRESS*
+
+    - name: Prepare Pages
+      run: |
+        mkdir -p progress
+        cp WEBSERVICEPROGRESS.SVG progress/
+        cp WEBSERVICEPROGRESS.HTML progress/
+
+    - uses: actions/upload-pages-artifact@v3
+      with:
+        path: progress/
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v5
+
+  decomplint:
+    name: WEBSERVICE annotations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install python libraries
+        id: install
+        run: |
+          pip install -r tools/requirements.txt
+
+      - name: Run decomplint
+        if: ${{ steps.install.conclusion == 'success' && always() }}
+        run: |
+          reccmp-decomplint WebService common --module WEBSERVICE --warnfail
+
+      - name: Check address padding
+        if: ${{ steps.install.conclusion == 'success' && always() }}
+        run: |
+          python tools/reccmp_addr_padding.py
+
+  clang-format:
+    name: c++ clang-format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run clang-format
+        run: |
+          find WebService common util tools -iname '*.h' -o -iname '*.cpp' | xargs -r \
+          pipx run "clang-format>=22,<23" \
+            --style=file \
+            -i
+          git diff --color --exit-code
+
+  naming:
+    name: Naming conventions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v2
+        with:
+          version: '21'
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install python libraries
+        run: |
+          pip install clang==21.* pyyaml
+
+      - name: Run ncc
+        run: |
+          python3 tools/ncc/ncc.py \
+            --clang-lib ${{ env.LLVM_PATH }}/lib/libclang.so \
+            --recurse \
+            --style tools/ncc/ncc.style \
+            --skip tools/ncc/skip.yml \
+            --definition PASCAL WINAPI FAR BOOL CALLBACK HWND__=HWND __int64=long \
+            --include \
+              util \
+              WebService \
+              common/app/include \
+              common/network/include \
+              common/rbxview/include \
+              common/renderlib/include \
+              common/appdraw/include \
+            --path WebService common

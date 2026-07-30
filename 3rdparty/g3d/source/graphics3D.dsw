@@ -1,0 +1,125 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "Debug"=.\Debug.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name GLG3D
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name graphics3D
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "GLG3D"=.\GLG3D.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name graphics3D
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "doc"=.\doc.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "gfxmeter"=.\gfxmeter\gfxmeter.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name GLG3D
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name graphics3D
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "graphics3D"=.\graphics3D.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name zlib
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "test"=.\test\test.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name GLG3D
+    End Project Dependency
+    Begin Project Dependency
+    Project_Dep_Name graphics3D
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "zlib"=.\zlib\zlib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+

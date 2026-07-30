@@ -1,0 +1,41 @@
+!!ARBvp1.0
+# cgc version 1.3.0001, build date Aug  4 2004 10:01:10
+# command line args: -profile arbvp1
+# source file: parallaxVP.cg
+#vendor NVIDIA Corporation
+#version 1.0.02
+#profile arbvp1
+#program main
+#semantic main.MVP
+#semantic main.osLight
+#semantic main.osEye
+#var float4x4 MVP :  : c[0], 4 : 0 : 1
+#var float4 osLight :  : c[4] : 1 : 1
+#var float3 osEye :  : c[5] : 2 : 1
+#var float4 vin.position : $vin.POSITION : POSITION : 3 : 1
+#var float2 vin.texCoord : $vin.TEXCOORD0 : TEXCOORD0 : 3 : 1
+#var float3 vin.normal : $vin.NORMAL : NORMAL : 3 : 1
+#var float3 vin.tangent : $vin.TEXCOORD1 : TEXCOORD1 : 3 : 1
+#var float3 vin.binormal : $vin.TEXCOORD2 : TEXCOORD2 : 3 : 1
+#var float4 main.position : $vout.HPOS : HPOS : -1 : 1
+#var float2 main.texCoord : $vout.TEX0 : TEX0 : -1 : 1
+#var float3 main.light : $vout.TEX1 : TEX1 : -1 : 1
+#var float3 main.eye : $vout.TEX2 : TEX2 : -1 : 1
+PARAM c[6] = { program.local[0..5] };
+TEMP R0;
+TEMP R1;
+DP4 result.position.w, vertex.position, c[3];
+DP4 result.position.z, vertex.position, c[2];
+DP4 result.position.y, vertex.position, c[1];
+DP4 result.position.x, vertex.position, c[0];
+MOV result.texcoord[0].xy, vertex.texcoord[0];
+MAD R0.xyz, -vertex.position, c[4].w, c[4];
+ADD R1.xyz, -vertex.position, c[5];
+DP3 result.texcoord[1].z, vertex.normal, R0;
+DP3 result.texcoord[1].y, -vertex.texcoord[1], R0;
+DP3 result.texcoord[1].x, -vertex.texcoord[2], R0;
+DP3 result.texcoord[2].z, vertex.normal, R1;
+DP3 result.texcoord[2].y, -vertex.texcoord[1], R1;
+DP3 result.texcoord[2].x, -vertex.texcoord[2], R1;
+END
+# 13 instructions, 2 R-regs

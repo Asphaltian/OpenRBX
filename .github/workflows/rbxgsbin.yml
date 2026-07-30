@@ -1,0 +1,53 @@
+name: Download rbxgsbin
+
+on:
+  workflow_call:
+
+env:
+  MSI_URL: https://archive.org/download/rbxgssetup/S3FileHandler_RBXGSSetup_0.3.676.0.msi
+  MSI_SHA256: 43935127301bf4189b2cec13bceef23bc32538bd4cd3fed94b14b1143a38e5e0
+  LESSMSI_VERSION: v2.12.9
+
+jobs:
+  fetch:
+    runs-on: windows-latest
+    steps:
+
+    - name: Restore cached original binaries
+      id: cache-original-binaries
+      uses: actions/cache/restore@v5
+      with:
+        enableCrossOsArchive: true
+        path: rbxgsbin
+        key: rbxgsbin
+
+    - name: Download RBXGS installer
+      if: ${{ !steps.cache-original-binaries.outputs.cache-hit }}
+      shell: pwsh
+      run: |
+        Invoke-WebRequest "$env:MSI_URL" -OutFile rbxgs.msi
+        $hash = (Get-FileHash rbxgs.msi -Algorithm SHA256).Hash
+        if ($hash -ne $env:MSI_SHA256) {
+          throw "Installer hash mismatch: got $hash, expected $env:MSI_SHA256"
+        }
+
+    - name: Extract WebService.dll
+      if: ${{ !steps.cache-original-binaries.outputs.cache-hit }}
+      shell: pwsh
+      run: |
+        Invoke-WebRequest "https://github.com/activescott/lessmsi/releases/download/$env:LESSMSI_VERSION/lessmsi-$env:LESSMSI_VERSION.zip" -OutFile lessmsi.zip
+        Expand-Archive lessmsi.zip -DestinationPath lessmsi
+        $exe = Get-ChildItem lessmsi -Recurse -Filter lessmsi.exe | Select-Object -First 1
+        if (-not $exe) { throw "lessmsi.exe not found in the release archive" }
+        & $exe.FullName x rbxgs.msi "$PWD\msi\"
+        New-Item -ItemType Directory -Force rbxgsbin | Out-Null
+        Copy-Item msi\SourceDir\WebService.dll rbxgsbin\
+        Write-Output "WebService.dll SHA256: $((Get-FileHash rbxgsbin\WebService.dll -Algorithm SHA256).Hash)"
+
+    - name: Cache original binaries
+      if: ${{ !steps.cache-original-binaries.outputs.cache-hit }}
+      uses: actions/cache/save@v5
+      with:
+        enableCrossOsArchive: true
+        path: rbxgsbin
+        key: rbxgsbin
