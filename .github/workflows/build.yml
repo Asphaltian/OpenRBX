@@ -130,7 +130,7 @@ jobs:
     - name: Summarize Accuracy
       shell: bash
       run: |
-        reccmp-reccmp -S WEBSERVICEPROGRESS.SVG --target WEBSERVICE --total 12619 --json WEBSERVICEPROGRESS.json --html WEBSERVICEPROGRESS.HTML
+        reccmp-reccmp -S WEBSERVICEPROGRESS.SVG --target WEBSERVICE --nolib --total 12619 --json WEBSERVICEPROGRESS.json --html WEBSERVICEPROGRESS.HTML
 
     - name: Compare Accuracy With Current Master
       shell: bash
@@ -139,7 +139,7 @@ jobs:
       run: |
         curl -fLSs -o progress-old.json $RELEASE_URL/WEBSERVICEPROGRESS.json || echo "" >progress-old.json
 
-        (reccmp-reccmp --target WEBSERVICE --diff progress-old.json || echo "Current master not found")>"WEBSERVICE-diff.txt"
+        (reccmp-reccmp --target WEBSERVICE --nolib --diff progress-old.json || echo "Current master not found")>"WEBSERVICE-diff.txt"
 
         cat WEBSERVICE-diff.txt
 

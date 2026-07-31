@@ -157,7 +157,7 @@ A virtual destructor with no standalone function in the PDB was inlined everywhe
 
 boost's `shared_ptr::operator<` compares ownership, not the pointer, so it loads offset 4, not 0.
 
-Calls into vendored libraries read low: reccmp cannot name the original's call targets in G3D, Boost or the CRT, so every such call counts as a difference even when the streams are identical. `LIBRARY:` is the wrong fix, since that is for code we never build and G3D is in our binary.
+Calls into vendored libraries used to read low, because reccmp only parses the recompiled PDB and had no name for the original's side. `reccmp/webservice-vendored.csv` hands it the 2,594 G3D, Boost, STL and ATL functions out of `WebService.pdb`, which reccmp then matches by mangled name; `--nolib` keeps them out of the score. Selection is by the scope a name is declared in, not the whole mangled string, or a Roblox method taking an `ATL::CStringT` counts as ATL's. Two cases are still unnamed: an address where the linker folded two vendored functions keeps one symbol in our PDB and may keep the other in theirs, and a function-local static mangles its enclosing scope's index, which the two builds number differently.
 
 ## Gotchas
 

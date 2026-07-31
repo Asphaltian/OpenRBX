@@ -10,5 +10,6 @@ targets:
       sha256: 5e9c6b82605fc8429c5fc5f682f2d7f98b55b73d993dfba58437365754410e2f
     data-sources:
       - reccmp/webservice-function-size.csv
+      - reccmp/webservice-vendored.csv
     report:
       icon: assets/webservice.png
