@@ -92,10 +92,8 @@ jobs:
     name: Verify decomp
     needs: [build, fetch-deps]
     runs-on: windows-latest
-    # Naming any permission drops the rest to none, and checkout needs contents.
     permissions:
       actions: read
-      contents: read
       issues: write
       pull-requests: write
     steps:
