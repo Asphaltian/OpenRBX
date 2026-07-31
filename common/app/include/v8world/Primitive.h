@@ -120,11 +120,11 @@ private:
 	int clumpDepth;              // 0x34
 	int traverseId;              // 0x38
 
-	SpatialNode* spatialNodes;  // 0x3c
-	Vector3int32 oldSpatialMin; // 0x40
-	Vector3int32 oldSpatialMax; // 0x4c
-	Extents fuzzyExtents;       // 0x58
-	int fuzzyExtentsStateId;    // 0x70
+	SpatialNode* spatialNodes;       // 0x3c
+	Vector3int32 oldSpatialMin;      // 0x40
+	Vector3int32 oldSpatialMax;      // 0x4c
+	mutable Extents fuzzyExtents;    // 0x58
+	mutable int fuzzyExtentsStateId; // 0x70
 
 protected:
 	Geometry* geometry;          // 0x74
@@ -172,6 +172,9 @@ public:
 
 	const CoordinateFrame& getCoordinateFrame() const;
 	void setVelocity(const Velocity& velocity);
+
+	Extents computeFuzzyExtents() const;
+	const Extents& getFastFuzzyExtents() const;
 
 	void setSurfaceData(NormalId normalId, const SurfaceData& value);
 	void setSurfaceType(NormalId normalId, SurfaceType surfaceType);

@@ -255,6 +255,29 @@ void Primitive::setSurfaceType(NormalId normalId, SurfaceType surfaceType)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x100a7e80
+Extents Primitive::computeFuzzyExtents() const
+{
+	const Matrix3& rotation = body->getCoordinateFrame().rotation;
+	const Vector3& translation = body->getCoordinateFrame().translation;
+
+	Extents extents = Extents::fromCenterCorner(translation, geometry->getCenterToCorner(rotation));
+	extents.expand(0.01f);
+
+	return extents;
+}
+
+// FUNCTION: WEBSERVICE 0x100a7f40
+const Extents& Primitive::getFastFuzzyExtents() const
+{
+	if (fuzzyExtentsStateId != body->getStateIndex()) {
+		fuzzyExtents = computeFuzzyExtents();
+		fuzzyExtentsStateId = body->getStateIndex();
+	}
+
+	return fuzzyExtents;
+}
+
 // FUNCTION: WEBSERVICE 0x100a7fb0 FOLDED
 Joint* Primitive::getFirstJoint() const
 {

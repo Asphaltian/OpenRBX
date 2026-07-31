@@ -19,6 +19,12 @@ public:
 
 	void updatePV() const;
 
+	int getStateIndex() const
+	{
+		updatePV();
+		return stateIndex;
+	}
+
 	const CoordinateFrame& getCoordinateFrame() const
 	{
 		updatePV();
@@ -28,7 +34,8 @@ public:
 	void setVelocity(const Velocity& velocity);
 
 private:
-	undefined m_unk0x00[0x88 - 0x00]; // 0x00
+	undefined m_unk0x00[0x84 - 0x00]; // 0x00
+	int stateIndex;                   // 0x84
 	PV pv;                            // 0x88
 };
 
