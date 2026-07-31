@@ -17,6 +17,7 @@
 namespace RBX {
 
 class Anchor;
+class Assembly;
 class Body;
 class Clump;
 class Contact;
@@ -157,6 +158,8 @@ public:
 	static void removeEdge(Edge* edge);
 
 	void setClump(Clump* value);
+
+	Assembly* getAssembly() const;
 
 	void setCanSleep(bool value);
 	void setCanCollide(bool value);

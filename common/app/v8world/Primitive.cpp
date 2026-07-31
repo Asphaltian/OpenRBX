@@ -2,6 +2,7 @@
 
 #include "util/Velocity.h"
 #include "v8kernel/Body.h"
+#include "v8world/Assembly2.h"
 #include "v8world/Contact.h"
 #include "v8world/Geometry.h"
 #include "v8world/Joint.h"
@@ -146,6 +147,16 @@ void Primitive::setClump(Clump* value)
 	if (value != clump) {
 		clump = value;
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a7aa0
+Assembly* Primitive::getAssembly() const
+{
+	if (clump != NULL) {
+		return clump->getRootAssembly();
+	}
+
+	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ae0
