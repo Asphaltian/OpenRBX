@@ -11,8 +11,12 @@ class Primitive;
 class World
 {
 public:
+	void onPrimitiveExtentsChanged(Primitive* primitive);
+	void onPrimitiveGeometryTypeChanged(Primitive* primitive);
 	void onPrimitiveContactParametersChanged(Primitive* primitive);
 	void onPrimitiveCanSleepChanged(Primitive* primitive);
+	void onPrimitiveAddedAnchor(Primitive* primitive);
+	void onPrimitiveRemovedAnchor(Primitive* primitive);
 	void onPrimitiveCanCollideChanged(Primitive* primitive);
 
 private:

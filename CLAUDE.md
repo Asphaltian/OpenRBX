@@ -98,10 +98,11 @@ Unlike racers, the PDB is not stripped, so real names are usually available and 
 2. Take calling conventions from the definition, not a call site. `__thiscall` means a member.
 3. A `__thiscall` on a global means that global is an instance. Declare the class with `undefined m_unk0x00[size]`.
 4. STUB every unknown callee, in ascending address order, with `STUB(0xADDRESS)` in the body so `/OPT:ICF` cannot fold them together. Empty destructors are exempt.
-5. Write clean C++, not decompiler pseudocode. No `*(int*)(this + 4)`, no gotos, no raw float bit patterns.
-6. Build, then `reccmp-reccmp --target WEBSERVICE --verbose 0xADDRESS`, and iterate to 100%.
-7. Compare the vtable address itself, not only the functions. It is what exposes a missing or misordered virtual.
-8. Re-verify functions that touch any class you changed, then run `reccmp-decomplint` and `tools/check_folded.py`.
+5. A stub is one store, and App builds `/Ob2`, so the caller inlines it and loses whatever stack the real call needed. A caller whose stub callee takes arguments cannot reach 100% until that callee is matched for real.
+6. Write clean C++, not decompiler pseudocode. No `*(int*)(this + 4)`, no gotos, no raw float bit patterns.
+7. Build, then `reccmp-reccmp --target WEBSERVICE --nolib --verbose 0xADDRESS`, and iterate to 100%.
+8. Compare the vtable address itself, not only the functions. It is what exposes a missing or misordered virtual.
+9. Re-verify functions that touch any class you changed, then run `reccmp-decomplint` and `tools/check_folded.py`.
 
 Starting a new class, match the constructor, destructor and scalar deleting destructor before any method. Those three prove size, base chain, vtable layout and member order.
 

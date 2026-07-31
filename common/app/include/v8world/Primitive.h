@@ -163,6 +163,8 @@ public:
 
 	Assembly* getAssembly() const;
 
+	void setDragging(bool value);
+	void setAnchor(bool value);
 	void setCanSleep(bool value);
 	void setCanCollide(bool value);
 	void setFriction(float value);
@@ -172,6 +174,11 @@ public:
 	void setVelocity(const Velocity& velocity);
 
 	void setSurfaceType(NormalId normalId, SurfaceType surfaceType);
+
+	void setGridSize(const Vector3& size);
+
+	void setController(Controller* value);
+	void setPrimitiveType(Geometry::GeometryType geometryType);
 
 	// FUNCTION: WEBSERVICE 0x100a8240
 	virtual float getRadius() const { return geometry->getRadius(); } // vtable+0x0c

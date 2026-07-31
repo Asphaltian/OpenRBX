@@ -45,6 +45,12 @@ public:
 	static Color3 controllerTypeToColor(ControllerType controllerType);
 };
 
+class NullController : public Controller
+{
+public:
+	static NullController* getStaticNullController();
+};
+
 } // namespace RBX
 
 #endif // V8WORLD_CONTROLLER_H

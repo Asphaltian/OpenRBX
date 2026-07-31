@@ -1,6 +1,17 @@
 #include "v8world/Controller.h"
 
+#include "decomp.h"
+
+#include <cstddef>
+
 namespace RBX {
+
+// STUB: WEBSERVICE 0x10099400
+NullController* NullController::getStaticNullController()
+{
+	STUB(0x10099400);
+	return NULL;
+}
 
 // FUNCTION: WEBSERVICE 0x101004d0
 Color3 Controller::controllerTypeToColor(ControllerType controllerType)

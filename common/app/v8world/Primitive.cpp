@@ -1,11 +1,13 @@
 #include "v8world/Primitive.h"
 
+#include "decomp.h"
 #include "util/Velocity.h"
 #include "v8kernel/Body.h"
 #include "v8world/Assembly2.h"
 #include "v8world/Ball.h"
 #include "v8world/Block.h"
 #include "v8world/Contact.h"
+#include "v8world/Controller.h"
 #include "v8world/Geometry.h"
 #include "v8world/Joint.h"
 #include "v8world/RigidJoint.h"
@@ -335,10 +337,71 @@ Primitive::~Primitive()
 	}
 }
 
+// STUB: WEBSERVICE 0x100a8320
+void Primitive::setAnchor(bool value)
+{
+	STUB(0x100a8320);
+}
+
 // FUNCTION: WEBSERVICE 0x100a8490
 const CoordinateFrame& Primitive::getCoordinateFrame() const
 {
 	return body->getCoordinateFrame();
+}
+
+// STUB: WEBSERVICE 0x100a8810
+void Primitive::setGridSize(const Vector3& size)
+{
+	STUB(0x100a8810);
+}
+
+// STUB: WEBSERVICE 0x100a88d0
+void Primitive::setDragging(bool value)
+{
+	if (value != dragging) {
+		bool wasCollideable = !dragging && canCollide;
+
+		dragging = value;
+		setAnchor(anchored);
+
+		if (world != NULL) {
+			bool isCollideable = !dragging && canCollide;
+
+			if (wasCollideable != isCollideable) {
+				world->onPrimitiveCanCollideChanged(this);
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a89f0
+void Primitive::setController(Controller* value)
+{
+	if (value == NULL) {
+		value = NullController::getStaticNullController();
+	}
+
+	if (value != controller) {
+		controller = value;
+	}
+}
+
+// STUB: WEBSERVICE 0x100a8a20
+void Primitive::setPrimitiveType(Geometry::GeometryType geometryType)
+{
+	if (geometry->getGeometryType() != geometryType) {
+		Vector3 size = geometry->getGridSize();
+
+		delete geometry;
+		geometry = newGeometry(geometryType);
+
+		if (world != NULL) {
+			world->onPrimitiveGeometryTypeChanged(this);
+		}
+
+		setGridSize(size);
+		JointK.setDirty();
+	}
 }
 
 } // namespace RBX
