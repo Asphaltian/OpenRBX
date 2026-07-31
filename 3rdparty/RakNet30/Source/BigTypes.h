@@ -941,12 +941,8 @@ namespace big
 	}
 	
 	// m = a * b (&a != &b != &m), unsigned
-	// FUNCTION: WEBSERVICE 0x101b1fe0
-	// big::umultiply<unsigned int [4],unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b2ad0
 	// big::umultiply<unsigned int [16],unsigned int [16]>
-	// FUNCTION: WEBSERVICE 0x101b37b0
-	// big::umultiply<unsigned int [8],unsigned int [8]>
 	BIGTWOTYPES void umultiply( T &a0, T &b0, Bigger &m )
 	{
 		Bigger a;
@@ -987,12 +983,8 @@ namespace big
 	}
 	
 	// a *= b (&a != &b), unsigned
-	// FUNCTION: WEBSERVICE 0x101b0fd0
-	// big::umultiply<unsigned int [4],unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b10d0
 	// big::umultiply<unsigned int [8],unsigned int [16]>
-	// FUNCTION: WEBSERVICE 0x101b28b0
-	// big::umultiply<unsigned int [8],unsigned int [8]>
 	BIGTWOTYPES void umultiply( Bigger &a0, T &b0 )
 	{
 		Bigger a;

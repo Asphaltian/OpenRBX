@@ -191,10 +191,6 @@ namespace DataStructures
 		return listArray[ position ];
 	}
 
-	// FUNCTION: WEBSERVICE 0x101b1ea0
-	// DataStructures::List<SystemAddressAndIndex>::Insert
-	// FUNCTION: WEBSERVICE 0x101bb220
-	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::Insert
 	// FUNCTION: WEBSERVICE 0x101bc710
 	// DataStructures::List<InternalPacket *>::Insert
 	template <class list_type>
@@ -238,10 +234,6 @@ namespace DataStructures
 	}
 
 
-	// FUNCTION: WEBSERVICE 0x101b1df0
-	// DataStructures::List<SystemAddressAndIndex>::Insert
-	// FUNCTION: WEBSERVICE 0x101bb180
-	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::Insert
 	// FUNCTION: WEBSERVICE 0x101bc440
 	// DataStructures::List<ReliabilityLayer::DataAndTime *>::Insert
 	template <class list_type>
