@@ -1,0 +1,26 @@
+#ifndef V8WORLD_WORLD_H
+#define V8WORLD_WORLD_H
+
+#include "decomp.h"
+
+namespace RBX {
+
+class Primitive;
+
+// SIZE 0x94
+class World
+{
+public:
+	void onPrimitiveContactParametersChanged(Primitive* primitive);
+	void onPrimitiveCanSleepChanged(Primitive* primitive);
+	void onPrimitiveCanCollideChanged(Primitive* primitive);
+
+private:
+	undefined m_unk0x00[0x94 - 0x00]; // 0x00
+};
+
+DECOMP_SIZE_ASSERT(World, 0x94)
+
+} // namespace RBX
+
+#endif // V8WORLD_WORLD_H

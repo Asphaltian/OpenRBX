@@ -123,6 +123,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/Edge.cpp
   common/app/v8world/IPipelined.cpp
   common/app/v8world/Primitive.cpp
+  common/app/v8world/World.cpp
   common/app/util/Timer.cpp
   common/app/util/Units.cpp
 )

@@ -6,6 +6,7 @@
 #include "v8world/Geometry.h"
 #include "v8world/Joint.h"
 #include "v8world/RigidJoint.h"
+#include "v8world/World.h"
 
 #include <cstddef>
 
@@ -147,6 +148,60 @@ void Primitive::setClump(Clump* value)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x100a7ae0
+void Primitive::setCanSleep(bool value)
+{
+	if (value != canSleep) {
+		canSleep = value;
+
+		if (world != NULL) {
+			world->onPrimitiveCanSleepChanged(this);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a7b10
+void Primitive::setCanCollide(bool value)
+{
+	bool wasCollideable = !dragging && canCollide;
+
+	if (value != canCollide) {
+		canCollide = value;
+
+		if (world != NULL) {
+			bool isCollideable = !dragging && canCollide;
+
+			if (wasCollideable != isCollideable) {
+				world->onPrimitiveCanCollideChanged(this);
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a7b70
+void Primitive::setFriction(float value)
+{
+	if (value != friction) {
+		friction = value;
+
+		if (world != NULL) {
+			world->onPrimitiveContactParametersChanged(this);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a7bb0
+void Primitive::setElasticity(float value)
+{
+	if (value != elasticity) {
+		elasticity = value;
+
+		if (world != NULL) {
+			world->onPrimitiveContactParametersChanged(this);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100a7cd0
 void Primitive::setVelocity(const Velocity& velocity)
 {
@@ -203,6 +258,42 @@ RigidJoint* Primitive::getFirstRigidAt(Edge* edge) const
 RigidJoint* Primitive::getFirstRigid() const
 {
 	return getFirstRigidAt(getFirstEdge());
+}
+
+// FUNCTION: WEBSERVICE 0x100a8080
+RigidJoint* Primitive::getNextRigid(RigidJoint* joint) const
+{
+	return getFirstRigidAt(getNextEdge(joint));
+}
+
+// FUNCTION: WEBSERVICE 0x100a80c0
+Joint* Primitive::getJoint(Primitive* p0, Primitive* p1)
+{
+	Primitive* shortest = p0->joints.num < p1->joints.num ? p0 : p1;
+
+	for (Joint* joint = shortest->getFirstJoint(); joint != NULL; joint = shortest->getNextJoint(joint)) {
+		if ((p0 == joint->getPrimitive(0) && p1 == joint->getPrimitive(1)) ||
+			(p0 == joint->getPrimitive(1) && p1 == joint->getPrimitive(0))) {
+			return joint;
+		}
+	}
+
+	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100a8110
+Contact* Primitive::getContact(Primitive* p0, Primitive* p1)
+{
+	Primitive* shortest = p0->contacts.num < p1->contacts.num ? p0 : p1;
+
+	for (Contact* contact = shortest->getFirstContact(); contact != NULL; contact = shortest->getNextContact(contact)) {
+		if ((p0 == contact->getPrimitive(0) && p1 == contact->getPrimitive(1)) ||
+			(p0 == contact->getPrimitive(1) && p1 == contact->getPrimitive(0))) {
+			return contact;
+		}
+	}
+
+	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a81d0

@@ -158,6 +158,11 @@ public:
 
 	void setClump(Clump* value);
 
+	void setCanSleep(bool value);
+	void setCanCollide(bool value);
+	void setFriction(float value);
+	void setElasticity(float value);
+
 	const CoordinateFrame& getCoordinateFrame() const;
 	void setVelocity(const Velocity& velocity);
 
@@ -175,6 +180,10 @@ public:
 	Contact* getFirstContact() const;
 	Contact* getNextContact(Contact* contact) const;
 	RigidJoint* getFirstRigid() const;
+	RigidJoint* getNextRigid(RigidJoint* joint) const;
+
+	static Joint* getJoint(Primitive* p0, Primitive* p1);
+	static Contact* getContact(Primitive* p0, Primitive* p1);
 
 	static Primitive* downstreamPrimitive(Joint* joint);
 };
