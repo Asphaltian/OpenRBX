@@ -252,12 +252,6 @@ void Primitive::setElasticity(float value)
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x100a7cd0
-void Primitive::setVelocity(const Velocity& velocity)
-{
-	body->setVelocity(velocity);
-}
-
 // FUNCTION: WEBSERVICE 0x100a7bf0
 CoordinateFrame Primitive::getFaceCoordInObject(NormalId normalId)
 {
@@ -270,6 +264,12 @@ Face Primitive::getFaceInObject(NormalId normalId)
 	Vector3 half = geometry->getGridSize() * 0.5f;
 
 	return Face::fromExtentsSide(Extents(-half, half), normalId);
+}
+
+// FUNCTION: WEBSERVICE 0x100a7cd0
+void Primitive::setVelocity(const Velocity& velocity)
+{
+	body->setVelocity(velocity);
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ce0
