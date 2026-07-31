@@ -143,6 +143,8 @@ protected:
 
 	ComputeProp<float, Primitive> JointK; // 0xc4
 
+	static Geometry* newGeometry(Geometry::GeometryType geometryType);
+
 public:
 	virtual ~Primitive(); // vtable+0x00
 

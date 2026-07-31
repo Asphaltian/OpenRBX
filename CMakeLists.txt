@@ -122,6 +122,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/Block.cpp
   common/app/v8world/Controller.cpp
   common/app/v8world/Edge.cpp
+  common/app/v8world/Geometry.cpp
   common/app/v8world/IPipelined.cpp
   common/app/v8world/Primitive.cpp
   common/app/v8world/World.cpp

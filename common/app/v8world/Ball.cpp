@@ -1,5 +1,6 @@
 #include "v8world/Ball.h"
 
+#include "decomp.h"
 #include "util/Math.h"
 
 namespace RBX {
@@ -26,6 +27,13 @@ float Ball::getGridVolume() const
 void Ball::onSetSize()
 {
 	realRadius = gridSize.x * 0.5f;
+}
+
+// STUB: WEBSERVICE 0x1010a7f0
+bool Ball::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
+{
+	STUB(0x1010a7f0);
+	return false;
 }
 
 } // namespace RBX

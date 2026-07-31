@@ -3,6 +3,8 @@
 #include "util/Velocity.h"
 #include "v8kernel/Body.h"
 #include "v8world/Assembly2.h"
+#include "v8world/Ball.h"
+#include "v8world/Block.h"
 #include "v8world/Contact.h"
 #include "v8world/Geometry.h"
 #include "v8world/Joint.h"
@@ -305,6 +307,19 @@ Contact* Primitive::getContact(Primitive* p0, Primitive* p1)
 	}
 
 	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100a8160
+Geometry* Primitive::newGeometry(Geometry::GeometryType geometryType)
+{
+	switch (geometryType) {
+	case Geometry::GEOMETRY_BALL:
+		return new Ball();
+	case Geometry::GEOMETRY_BLOCK:
+		return new Block();
+	default:
+		return Geometry::nullGeometry();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a81d0
