@@ -54,19 +54,52 @@ jobs:
         repository: Asphaltian/MSVC800-SP1
         path: msvc800sp1
 
-    # The tree hash changes only when something under 3rdparty does.
-    - name: Key the vendored build
+    - name: Key the vendored builds
       id: vendored
       shell: bash
-      run: echo "tree=$(git rev-parse HEAD:3rdparty)" >>"$GITHUB_OUTPUT"
+      run: |
+        {
+          echo "g3d=$(git rev-parse HEAD:3rdparty/g3d)"
+          echo "mesa=$(git rev-parse HEAD:3rdparty/mesa-6.5)"
+          echo "boost=$(git rev-parse HEAD:3rdparty/boost_1_34_1)"
+        } >>"$GITHUB_OUTPUT"
 
-    - name: Restore the vendored build
+    - name: Restore G3D
       uses: actions/cache@v5
       with:
-        path: build
-        key: build-msvc800sp1-${{ steps.vendored.outputs.tree }}-${{ hashFiles('CMakeLists.txt', '3rdparty/CMakeLists.txt') }}
+        path: |
+          build/3rdparty/CMakeFiles/graphics3d.dir
+          build/3rdparty/CMakeFiles/glg3d.dir
+          build/3rdparty/graphics3d.lib
+          build/3rdparty/glg3d.lib
+        key: g3d-${{ steps.vendored.outputs.g3d }}-${{ hashFiles('3rdparty/CMakeLists.txt') }}
 
-    # Restored objects must not look older than the sources or the toolchain headers they depend on.
+    - name: Restore Mesa
+      uses: actions/cache@v5
+      with:
+        path: |
+          build/3rdparty/CMakeFiles/mesa_core.dir
+          build/3rdparty/CMakeFiles/opengl32.dir
+          build/3rdparty/CMakeFiles/glu32.dir
+          build/3rdparty/CMakeFiles/osmesa32.dir
+          build/3rdparty/mesa_core.lib
+          build/3rdparty/opengl32.*
+          build/3rdparty/glu32.*
+          build/3rdparty/OSMESA32.*
+        key: mesa-${{ steps.vendored.outputs.mesa }}-${{ hashFiles('3rdparty/CMakeLists.txt') }}
+
+    - name: Restore Boost
+      uses: actions/cache@v5
+      with:
+        path: |
+          build/3rdparty/CMakeFiles/boost_signals.dir
+          build/3rdparty/CMakeFiles/boost_thread.dir
+          build/3rdparty/libboost_signals-vc80-mt-1_34_1.lib
+          build/3rdparty/libboost_thread-vc80-mt-1_34_1.lib
+        key: boost-${{ steps.vendored.outputs.boost }}-${{ hashFiles('3rdparty/CMakeLists.txt') }}
+
+    # Restored objects must not look older than the sources or the toolchain headers they
+    # depend on. Only the vendored objects are cached, so nothing of ours can go stale here.
     - name: Backdate the inputs that never change
       shell: pwsh
       run: |
