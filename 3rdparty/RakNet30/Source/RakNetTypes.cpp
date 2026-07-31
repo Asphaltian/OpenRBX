@@ -169,7 +169,7 @@ void SystemAddress::SetBinaryAddress(const char *str)
 		portPart[j]=0;
 	}
 
-	if (strncmp(str, "localhost", 9)==0)
+	if (_strnicmp(str, "localhost", 9)==0)
 		binaryAddress=inet_addr("127.0.0.1");
 	else if (ip[0])
 		binaryAddress=inet_addr(ip);

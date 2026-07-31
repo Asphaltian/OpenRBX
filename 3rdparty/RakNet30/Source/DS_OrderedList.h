@@ -71,7 +71,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c2070
-	// DataStructures::OrderedList<char *,StrAndBool,&StrAndBoolComp>::~OrderedList<char *,StrAndBool,&StrAndBoolComp>
+	// DataStructures::OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>::~OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>
 	// FUNCTION: WEBSERVICE 0x101bedb0
 	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::~OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
@@ -124,9 +124,9 @@ namespace DataStructures
 	// FUNCTION: WEBSERVICE 0x101b1c90
 	// DataStructures::OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>::GetIndexFromKey
 	// FUNCTION: WEBSERVICE 0x101bb0f0
-	// DataStructures::OrderedList<char *,StrAndBool,&StrAndBoolComp>::GetIndexFromKey
+	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::GetIndexFromKey
 	// FUNCTION: WEBSERVICE 0x101bc4c0
-	// DataStructures::OrderedList<unsigned int,InternalPacket *,&SplitPacketIndexComp>::GetIndexFromKey
+	// DataStructures::OrderedList<unsigned short,SplitPacketChannel *,&SplitPacketChannelComp>::GetIndexFromKey
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	unsigned OrderedList<key_type, data_type, comparison_function>::GetIndexFromKey(const key_type &key, bool *objectExists, int (*cf)(const key_type&, const data_type&)) const
 	{

@@ -351,7 +351,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bce90
-	// DataStructures::CircularLinkedList<InternalPacket *>::~CircularLinkedList<InternalPacket *>
+	// DataStructures::CircularLinkedList<HuffmanEncodingTreeNode *>::~CircularLinkedList<HuffmanEncodingTreeNode *>
 	template <class CircularLinkedListType>
 		CircularLinkedList<CircularLinkedListType>::~CircularLinkedList()
 	{
@@ -701,7 +701,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c17d0
-	// DataStructures::CircularLinkedList<InternalPacket *>::Add
+	// DataStructures::CircularLinkedList<HuffmanEncodingTreeNode *>::Add
 	template <class CircularLinkedListType>
 		CircularLinkedListType& CircularLinkedList<CircularLinkedListType>::Add ( const CircularLinkedListType& input )
 	{
@@ -962,7 +962,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc880
-	// DataStructures::CircularLinkedList<InternalPacket *>::Clear
+	// DataStructures::CircularLinkedList<HuffmanEncodingTreeNode *>::Clear
 	template <class CircularLinkedListType>
 		void CircularLinkedList<CircularLinkedListType>::Clear( void )
 	{

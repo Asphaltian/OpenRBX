@@ -58,7 +58,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bcea0
-	// DataStructures::MemoryPool<InternalPacket>::~MemoryPool<InternalPacket>
+	// DataStructures::MemoryPool<DataStructures::Page<unsigned int,InternalPacket *,32> >::~MemoryPool<DataStructures::Page<unsigned int,InternalPacket *,32> >
 	template <class MemoryBlockType>
 	MemoryPool<MemoryBlockType>::~MemoryPool()
 	{

@@ -91,7 +91,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c16f0
-	// DataStructures::Queue<InternalPacket *>::~Queue<InternalPacket *>
+	// DataStructures::Queue<HuffmanEncodingTreeNode *>::~Queue<HuffmanEncodingTreeNode *>
 	template <class queue_type>
 		Queue<queue_type>::~Queue()
 	{
@@ -117,7 +117,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc1a0
-	// DataStructures::Queue<InternalPacket *>::PushAtHead
+	// DataStructures::Queue<Packet *>::PushAtHead
 	template <class queue_type>
 		void Queue<queue_type>::PushAtHead( const queue_type& input, unsigned index )
 	{
@@ -185,7 +185,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101b08a0
-	// DataStructures::Queue<InternalPacket *>::Push
+	// DataStructures::Queue<HuffmanEncodingTreeNode *>::Push
 	// FUNCTION: WEBSERVICE 0x101bc290
 	// DataStructures::Queue<__int64>::Push
 	template <class queue_type>
