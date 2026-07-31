@@ -190,6 +190,7 @@ namespace DataStructures
 			return (SingleProducerConsumerType*)last;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101aaec0
 	template <class SingleProducerConsumerType>
 		void SingleProducerConsumer<SingleProducerConsumerType>::CancelReadLock( SingleProducerConsumerType* cancelToLocation )
 	{

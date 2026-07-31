@@ -128,6 +128,7 @@ static const int MAX_OFFLINE_DATA_LENGTH=400; // I set this because I limit ID_C
 
 //#define _TEST_AES
 
+// FUNCTION: WEBSERVICE 0x101af8d0
 Packet *AllocPacket(unsigned dataSize)
 {
 	Packet *p = (Packet *)malloc(sizeof(Packet)+dataSize);
@@ -137,6 +138,7 @@ Packet *AllocPacket(unsigned dataSize)
 	return p;
 }
 
+// FUNCTION: WEBSERVICE 0x101af900
 Packet *AllocPacket(unsigned dataSize, unsigned char *data)
 {
 	Packet *p = (Packet *)malloc(sizeof(Packet));
@@ -1795,6 +1797,7 @@ bool RakPeer::IsBanned( const char *IP )
 // Parameters:
 // target - who to ping
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101b8bf0
 void RakPeer::Ping( const SystemAddress target )
 {
 	PingInternal(target, false, UNRELIABLE);
@@ -4895,6 +4898,7 @@ bool RakPeer::RunUpdateCycle( void )
 #ifdef _WIN32
 unsigned __stdcall UpdateNetworkLoop( LPVOID arguments )
 #else
+// FUNCTION: WEBSERVICE 0x101bab00
 void* UpdateNetworkLoop( void* arguments )
 #endif
 {

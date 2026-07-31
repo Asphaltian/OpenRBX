@@ -619,6 +619,7 @@ namespace DataStructures
 		return true;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101c1700
 	template <class CircularLinkedListType>
 		void CircularLinkedList<CircularLinkedListType>::Insert( const CircularLinkedListType& input )
 	{
@@ -780,6 +781,7 @@ namespace DataStructures
 			this->position->item = input;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc820
 	template <class CircularLinkedListType>
 		void CircularLinkedList<CircularLinkedListType>::Del()
 	{

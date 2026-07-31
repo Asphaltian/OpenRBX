@@ -39,6 +39,7 @@ PacketLogger::PacketLogger()
 	prefix[0]=0;
 	suffix[0]=0;
 }
+// FUNCTION: WEBSERVICE 0x101ae580
 PacketLogger::~PacketLogger()
 {
 }

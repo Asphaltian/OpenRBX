@@ -57,6 +57,7 @@ namespace DataStructures
 	};
 
 
+	// FUNCTION: WEBSERVICE 0x101bc370
 	template <class queue_type>
 		inline unsigned int Queue<queue_type>::Size( void ) const
 	{
@@ -78,6 +79,7 @@ namespace DataStructures
 		return allocation_size;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc160
 	template <class queue_type>
 		Queue<queue_type>::Queue()
 	{
@@ -296,6 +298,7 @@ namespace DataStructures
 		tail = 0;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc390
 	template <class queue_type>
 		void Queue<queue_type>::Compress ( void )
 	{
@@ -365,6 +368,7 @@ namespace DataStructures
 			return array[ head + position ];
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b1d70
 	template <class queue_type>
 		void Queue<queue_type>::RemoveAtIndex( unsigned int position )
 	{

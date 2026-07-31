@@ -54,6 +54,7 @@ using namespace RakNet;
 #pragma warning( push )
 #endif
 
+// FUNCTION: WEBSERVICE 0x101aaad0
 BitStream::BitStream()
 {
 	numberOfBitsUsed = 0;
@@ -70,6 +71,7 @@ BitStream::BitStream()
 	copyData = true;
 }
 
+// FUNCTION: WEBSERVICE 0x101aab00
 BitStream::BitStream( int initialBytesToAllocate )
 {
 	numberOfBitsUsed = 0;
@@ -91,6 +93,7 @@ BitStream::BitStream( int initialBytesToAllocate )
 	copyData = true;
 }
 
+// FUNCTION: WEBSERVICE 0x101aab60
 BitStream::BitStream( unsigned char* _data, unsigned int lengthInBytes, bool _copyData )
 {
 	numberOfBitsUsed = lengthInBytes << 3;
@@ -132,6 +135,7 @@ void BitStream::SetNumberOfBitsAllocated( const unsigned int lengthInBits )
 	numberOfBitsAllocated = lengthInBits;
 }
 
+// FUNCTION: WEBSERVICE 0x101aabe0
 BitStream::~BitStream()
 {
 	if ( copyData && numberOfBitsAllocated > BITSTREAM_STACK_ALLOCATION_SIZE << 3)
@@ -163,6 +167,7 @@ void BitStream::Reset( void )
 }
 
 // Write an array or casted stream
+// FUNCTION: WEBSERVICE 0x101ab0e0
 void BitStream::Write( const char* input, const int numberOfBytes )
 {
 	if (numberOfBytes==0)
@@ -185,6 +190,7 @@ void BitStream::Write( BitStream *bitStream)
 {
 	Write(bitStream, bitStream->GetNumberOfBitsUsed());
 }
+// FUNCTION: WEBSERVICE 0x101aaed0
 void BitStream::Write( BitStream *bitStream, int numberOfBits )
 {
 	AddBitsAndReallocate( numberOfBits );
@@ -470,6 +476,7 @@ void BitStream::WriteCompressed( const unsigned char* input,
 // Read numberOfBitsToRead bits to the output source
 // alignBitsToRight should be set to true to convert internal bitstream data to userdata
 // It should be false if you used WriteBits with rightAlignedBits false
+// FUNCTION: WEBSERVICE 0x101aac50
 bool BitStream::ReadBits( unsigned char* output, int numberOfBitsToRead, const bool alignBitsToRight )
 {
 #ifdef _DEBUG
@@ -521,6 +528,7 @@ bool BitStream::ReadBits( unsigned char* output, int numberOfBitsToRead, const b
 }
 
 // Assume the input source points to a compressed native type. Decompress and read it
+// FUNCTION: WEBSERVICE 0x101aad00
 bool BitStream::ReadCompressed( unsigned char* output,
 	const int size, const bool unsignedData )
 {
@@ -597,6 +605,7 @@ bool BitStream::ReadCompressed( unsigned char* output,
 }
 
 // Reallocates (if necessary) in preparation of writing numberOfBitsToWrite
+// FUNCTION: WEBSERVICE 0x101aadf0
 void BitStream::AddBitsAndReallocate( const int numberOfBitsToWrite )
 {
 	if (numberOfBitsToWrite <= 0)
@@ -682,6 +691,7 @@ void BitStream::PrintBits( void ) const
 
 // Exposes the data for you to look at, like PrintBits does.
 // Data will point to the stream.  Returns the length in bits of the stream.
+// FUNCTION: WEBSERVICE 0x101aae70
 int BitStream::CopyData( unsigned char** _data ) const
 {
 #ifdef _DEBUG
@@ -694,6 +704,7 @@ int BitStream::CopyData( unsigned char** _data ) const
 }
 
 // Ignore data we don't intend to read
+// FUNCTION: WEBSERVICE 0x101aaeb0
 void BitStream::IgnoreBits( const int numberOfBits )
 {
 	readOffset += numberOfBits;

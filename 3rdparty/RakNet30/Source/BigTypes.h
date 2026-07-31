@@ -844,6 +844,7 @@ namespace big
 	}
 	
 	// --n
+	// FUNCTION: WEBSERVICE 0x101b09b0
 	BIGONETYPE void decrement( T &n )
 	{
 		for ( u32 ii = 0; ii < BIGWORDCOUNT( T ); ++ii )

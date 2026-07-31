@@ -134,6 +134,7 @@ namespace DataStructures
 		}
 		return false;
 	}
+	// FUNCTION: WEBSERVICE 0x101bc570
 	template<class KeyType, class DataType, int order>
 	void BPlusTree<KeyType, DataType, order>::DeleteFromPageAtIndex(const int index, Page<KeyType, DataType, order> *cur)
 	{
@@ -451,6 +452,7 @@ namespace DataStructures
 			return cur->size < order/2;
 		}
 	}
+	// FUNCTION: WEBSERVICE 0x101bcb50
 	template<class KeyType, class DataType, int order>
 		void BPlusTree<KeyType, DataType, order>::ShiftNodeRight(Page<KeyType, DataType, order> *cur)
 	{
@@ -470,6 +472,7 @@ namespace DataStructures
 
 		cur->size++;
 	}
+	// FUNCTION: WEBSERVICE 0x101bcad0
 	template<class KeyType, class DataType, int order>
 		void BPlusTree<KeyType, DataType, order>::ShiftNodeLeft(Page<KeyType, DataType, order> *cur)
 	{
@@ -627,12 +630,14 @@ namespace DataStructures
 		return 0;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc8d0
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::CanRotateLeft(Page<KeyType, DataType, order> *cur, int childIndex)
 	{
 		return childIndex>0 && cur->children[childIndex-1]->size<order;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc9c0
 	template<class KeyType, class DataType, int order>
 	void BPlusTree<KeyType, DataType, order>::RotateLeft(Page<KeyType, DataType, order> *cur, int childIndex, ReturnAction *returnAction)
 	{
@@ -652,12 +657,14 @@ namespace DataStructures
 		returnAction->key2=source->keys[0];
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc900
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::CanRotateRight(Page<KeyType, DataType, order> *cur, int childIndex)
 	{
 		return childIndex < cur->size && cur->children[childIndex+1]->size<order;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc930
 	template<class KeyType, class DataType, int order>
 	void BPlusTree<KeyType, DataType, order>::RotateRight(Page<KeyType, DataType, order> *cur, int childIndex, ReturnAction *returnAction)
 	{
@@ -888,6 +895,7 @@ namespace DataStructures
 	{
 		return root==0;
 	}
+	// FUNCTION: WEBSERVICE 0x101bc610
 	template<class KeyType, class DataType, int order>
 		bool BPlusTree<KeyType, DataType, order>::GetIndexOf(const KeyType key, Page<KeyType, DataType, order> *page, int *out) const
 	{

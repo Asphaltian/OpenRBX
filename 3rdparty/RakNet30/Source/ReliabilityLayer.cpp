@@ -2311,6 +2311,7 @@ void ReliabilityLayer::InsertPacketIntoResendList( InternalPacket *internalPacke
 //-------------------------------------------------------------------------------------------------------
 // If Read returns -1 and this returns true then a modified packet was detected
 //-------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101bc0b0
 bool ReliabilityLayer::IsCheater( void ) const
 {
 	return cheater;
@@ -2319,6 +2320,7 @@ bool ReliabilityLayer::IsCheater( void ) const
 //-------------------------------------------------------------------------------------------------------
 //  Were you ever unable to deliver a packet despite retries?
 //-------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101bc0c0
 bool ReliabilityLayer::IsDeadConnection( void ) const
 {
 	return deadConnection;

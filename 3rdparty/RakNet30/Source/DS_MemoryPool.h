@@ -64,6 +64,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc7b0
+	// FUNCTION: WEBSERVICE 0x101bca50
 	template <class MemoryBlockType>
 	void MemoryPool<MemoryBlockType>::InitPage(Page *page, Page *prev)
 	{
@@ -87,6 +88,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bcd10
+	// FUNCTION: WEBSERVICE 0x101bceb0
 	template <class MemoryBlockType>
 	MemoryBlockType *MemoryPool<MemoryBlockType>::Allocate(void)
 	{
@@ -152,6 +154,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bcdb0
+	// FUNCTION: WEBSERVICE 0x101bcf50
 	template <class MemoryBlockType>
 	void MemoryPool<MemoryBlockType>::Release(MemoryBlockType *m)
 	{

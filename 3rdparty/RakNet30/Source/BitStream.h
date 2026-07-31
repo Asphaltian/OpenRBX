@@ -765,6 +765,7 @@ namespace RakNet
 
 	/// Write an networkID to a bitstream
 	/// \param[in] var The value to write
+	// FUNCTION: WEBSERVICE 0x101b11c0
 	template <>
 		inline void BitStream::Write(NetworkID var)
 	{
@@ -1010,6 +1011,7 @@ namespace RakNet
 
 	/// Read a bool from a bitstream
 	/// \param[in] var The value to read
+	// FUNCTION: WEBSERVICE 0x1019bc20
 	template <>
 		inline bool BitStream::Read(bool &var)
 	{
@@ -1038,6 +1040,7 @@ namespace RakNet
 
 	/// Read an networkID from a bitstream
 	/// \param[in] var The value to read
+	// FUNCTION: WEBSERVICE 0x101b1230
 	template <>
 		inline bool BitStream::Read(NetworkID &var)
 	{

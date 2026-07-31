@@ -29,6 +29,7 @@ HuffmanEncodingTree::HuffmanEncodingTree()
 	root = 0;
 }
 
+// FUNCTION: WEBSERVICE 0x101c1b90
 HuffmanEncodingTree::~HuffmanEncodingTree()
 {
 	FreeMemory();
@@ -207,6 +208,7 @@ void HuffmanEncodingTree::EncodeArray( unsigned char *input, unsigned sizeInByte
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101c1580
 unsigned HuffmanEncodingTree::DecodeArray( RakNet::BitStream * input, unsigned sizeInBits, unsigned maxCharsToWrite, unsigned char *output )
 {
 	HuffmanEncodingTreeNode * currentNode;

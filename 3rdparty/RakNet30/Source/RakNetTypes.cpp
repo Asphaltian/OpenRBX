@@ -93,11 +93,13 @@ SocketDescriptor::SocketDescriptor(unsigned short _port, const char *_hostAddres
 // All systems must use the same value for this variable.
 bool RAK_DLL_EXPORT NetworkID::peerToPeerMode=false;
 
+// FUNCTION: WEBSERVICE 0x101ae300
 bool SystemAddress::operator==( const SystemAddress& right ) const
 {
 	return binaryAddress == right.binaryAddress && port == right.port;
 }
 
+// FUNCTION: WEBSERVICE 0x101ae330
 bool SystemAddress::operator!=( const SystemAddress& right ) const
 {
 	return binaryAddress != right.binaryAddress || port != right.port;
@@ -108,6 +110,7 @@ bool SystemAddress::operator>( const SystemAddress& right ) const
 	return ( ( binaryAddress > right.binaryAddress ) || ( ( binaryAddress == right.binaryAddress ) && ( port > right.port ) ) );
 }
 
+// FUNCTION: WEBSERVICE 0x101ae360
 bool SystemAddress::operator<( const SystemAddress& right ) const
 {
 	return ( ( binaryAddress < right.binaryAddress ) || ( ( binaryAddress == right.binaryAddress ) && ( port < right.port ) ) );
@@ -183,6 +186,7 @@ NetworkID& NetworkID::operator = ( const NetworkID& input )
 	return *this;
 }
 
+// FUNCTION: WEBSERVICE 0x101ae4f0
 bool NetworkID::operator==( const NetworkID& right ) const
 {
 	if (NetworkID::peerToPeerMode)

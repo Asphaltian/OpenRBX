@@ -30,6 +30,7 @@ namespace DataStructures
 {
 	/// The default comparison has to be first so it can be called as a default parameter.
 	/// It then is followed by MapNode, followed by NodeComparisonFunc
+	// FUNCTION: WEBSERVICE 0x101bb0d0
 	template <class key_type>
 		int defaultMapKeyComparison(const key_type &a, const key_type &b)
 	{
@@ -45,6 +46,7 @@ namespace DataStructures
 
 		struct MapNode
 		{
+			// FUNCTION: WEBSERVICE 0x100d5ad0
 			MapNode() {}
 			MapNode(key_type _key, data_type _data) : mapNodeKey(_key), mapNodeData(_data) {}
 			MapNode& operator = ( const MapNode& input ) {mapNodeKey=input.mapNodeKey; mapNodeData=input.mapNodeData; return *this;}

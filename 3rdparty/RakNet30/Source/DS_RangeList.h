@@ -18,6 +18,7 @@ namespace DataStructures
     };
 
 
+    // FUNCTION: WEBSERVICE 0x101bc550
     template <class range_type>
     int RangeNodeComp(const range_type &a, const RangeNode<range_type> &b)
     {

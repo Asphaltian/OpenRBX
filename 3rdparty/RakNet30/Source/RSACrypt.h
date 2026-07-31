@@ -1085,12 +1085,14 @@ start_squaring:
 			reset();
 		}
 
+		// FUNCTION: WEBSERVICE 0x101b4700
 		~RSACrypt()
 		{
 			reset();
 		}
 
 	public:
+		// FUNCTION: WEBSERVICE 0x101b1c00
 		void reset()
 		{
 			zero( d );
