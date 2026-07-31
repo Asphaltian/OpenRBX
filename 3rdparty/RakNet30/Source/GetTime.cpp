@@ -28,12 +28,18 @@
 #include <unistd.h>
 #endif
 
+// GLOBAL: WEBSERVICE 0x102ff45c
 static bool initialized=false;
+// GLOBAL: WEBSERVICE 0x102ff460
 static int queryCount=0;
 #ifdef _WIN32
+// GLOBAL: WEBSERVICE 0x102ff450
 static LARGE_INTEGER yo;
+// GLOBAL: WEBSERVICE 0x102ff448
 static HANDLE threadHandle;
+// GLOBAL: WEBSERVICE 0x102ff44c
 static DWORD_PTR processAffinityMask;
+// GLOBAL: WEBSERVICE 0x102ff458
 static DWORD_PTR systemAffinityMask;
 #else
 static timeval tp, initialTime;
@@ -70,8 +76,10 @@ RakNetTimeNS RakNet::GetTimeNS( void )
 	}
 
 #ifdef _WIN32
-	static RakNetTime lastTickCount = GetTickCount();
-	static RakNetTimeNS lastTimeNS = 0;
+	// GLOBAL: WEBSERVICE 0x102ff470
+	static RakNetTime lastTickCountVal = GetTickCount();
+	// GLOBAL: WEBSERVICE 0x102ff468
+	static RakNetTimeNS lastQueryVal = 0;
 
 	LARGE_INTEGER PerfVal;
 
@@ -85,22 +93,22 @@ RakNetTimeNS RakNet::GetTimeNS( void )
 	remainder=(PerfVal.QuadPart % yo.QuadPart);
 	RakNetTimeNS curTime = (RakNetTimeNS)(quotient*1000000 + (remainder*1000000 / yo.QuadPart));
 
-	if (lastTimeNS!=0)
+	if (lastQueryVal!=0)
 	{
 		RakNetTime tickCount = GetTickCount();
 
 		// If the performance counter has run ahead of the tick count by more than 100 ms,
 		// distrust it and step forward by the tick delta instead.
-		if ((__int64)(curTime - lastTimeNS)/1000 > (__int64)((tickCount - lastTickCount) + 100))
-			curTime = lastTimeNS + (RakNetTimeNS)((tickCount - lastTickCount)*1000);
+		if ((__int64)(curTime - lastQueryVal)/1000 > (__int64)((tickCount - lastTickCountVal) + 100))
+			curTime = lastQueryVal + (RakNetTimeNS)((tickCount - lastTickCountVal)*1000);
 
-		lastTickCount = tickCount;
+		lastTickCountVal = tickCount;
 
-		lastTimeNS = curTime;
+		lastQueryVal = curTime;
 		return curTime;
 	}
 
-	lastTimeNS = curTime;
+	lastQueryVal = curTime;
 	return curTime;
 
 #else
