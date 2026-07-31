@@ -28,8 +28,13 @@
 
 #define SHA1_LENGTH 20
 
+// VTABLE: WEBSERVICE 0x10251f28
+// class CSHA1
 class RAK_DLL_EXPORT CSHA1
 {
+
+	// SYNTHETIC: WEBSERVICE 0x101c3860
+	// CSHA1::`scalar deleting destructor'
 
 public:
 	// Rotate x bits to the left

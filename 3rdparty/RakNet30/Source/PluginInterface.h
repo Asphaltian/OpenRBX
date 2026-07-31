@@ -48,8 +48,13 @@ enum PluginReceiveResult
 /// \sa FullyConnectedMesh
 /// \sa PacketLogger
 /// \ingroup PLUGINS_GROUP
+// VTABLE: WEBSERVICE 0x10250fc4
+// class PluginInterface
 class RAK_DLL_EXPORT PluginInterface
 {
+
+	// SYNTHETIC: WEBSERVICE 0x101aaab0
+	// PluginInterface::`scalar deleting destructor'
 public:
 	PluginInterface();
 	virtual ~PluginInterface();

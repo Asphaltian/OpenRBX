@@ -11,5 +11,6 @@ targets:
     data-sources:
       - reccmp/webservice-function-size.csv
       - reccmp/webservice-vendored.csv
+      - reccmp/webservice-globals.csv
     report:
       icon: assets/webservice.png

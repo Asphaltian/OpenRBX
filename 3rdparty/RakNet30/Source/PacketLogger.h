@@ -29,8 +29,13 @@ class RakPeerInterface;
 /// \brief Writes incoming and outgoing messages to the screen.
 /// This will write all incoming and outgoing messages to the console window, or to a file if you override it and give it this functionality.
 /// \ingroup PACKETLOGGER_GROUP
+// VTABLE: WEBSERVICE 0x1025102c
+// class PacketLogger
 class RAK_DLL_EXPORT PacketLogger : public PluginInterface
 {
+
+	// SYNTHETIC: WEBSERVICE 0x101ae990
+	// PacketLogger::`scalar deleting destructor'
 public:
 	PacketLogger();
 	virtual ~PacketLogger();

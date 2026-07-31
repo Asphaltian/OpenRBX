@@ -162,6 +162,8 @@ Calls into vendored libraries used to read low, because reccmp only parses the r
 
 ## Gotchas
 
+`RakPeer` has no `// VTABLE:` annotation because our `RakPeerInterface` declares one virtual too many or too few: from around slot 0x5c the two vtables run one entry apart, so `RPC`, `Ping` and `GetIndexFromSystemAddress` cannot be told apart by slot order. Reconciling that virtual list is what unblocks annotating those overloads.
+
 The original link used `/OPT:ICF` and folded heavily. Many distinct source functions compiled to the same three-byte body and share one address, which is also why Ghidra's PDB source line importer throws several hundred `IllegalArgumentException` warnings when the symbols load. Those warnings are expected and harmless. Run `tools/check_folded.py` before concluding that a function at a shared address is genuinely unmatched.
 
 `tools/check_folded.py` diverges from racers there. MSVC 8 keeps a PDB symbol for every alias the linker folded away, so all the `FOLDED` annotations on one address resolve rather than just the survivor. The check asks whether they landed on a single recompiled address instead of counting how many resolved.
