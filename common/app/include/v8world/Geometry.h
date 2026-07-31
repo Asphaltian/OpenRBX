@@ -14,8 +14,9 @@ class Geometry
 public:
 	enum GeometryType
 	{
-		GEOMETRY_BALL = 0,
-		GEOMETRY_BLOCK = 1,
+		GEOMETRY_BALL = 1,
+		GEOMETRY_BLOCK = 2,
+		GEOMETRY_NONE = 3,
 	};
 
 	virtual void onSetSize() = 0;

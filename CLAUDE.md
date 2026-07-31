@@ -121,6 +121,7 @@ Each original static library gets its own OBJECT library, because each was compi
 
 - App, RbxView and AppDraw were built `/GS-`. Network and RenderLib were not. Stack cookies show up as spurious mismatches if this is wrong.
 - App is the only library with `/fp:fast`, and the only one with `/Ob2 /Oi /Oy` together.
+- App was built `/Gy`. The original folded `Primitive::getFirstJoint` onto `Joint::getJointOwner` across two objects, which only COMDATs allow.
 - RenderLib is the only one with `/Wp64`.
 - Six translation units are the only objects compiled `/GL`, so the link ran `/LTCG`. Nothing else in the binary is LTCG. Three of the six are `Client\win` sources, not RBXGS ones.
 
@@ -150,9 +151,9 @@ Building a return value through a constructor evaluates every argument before st
 
 How you spell the return path decides register assignment. `if (cond) return x; return y;` makes `x` the fall-through value; assigning to one named result and returning it keeps `y` in place.
 
-The binary does not store a vftable in the constructor of an abstract class, and ours does. Do not delete the virtuals to force the number.
+Abstract bases carry `__declspec(novtable)`. Without it the constructor stores a vftable the binary never stores, and any derived destructor gains a base vftable store plus a whole SEH frame to unwind the base through, which reads as a fifty percent diff. `Edge` and `IPipelined` both need it. Do not delete the virtuals to force the number.
 
-A virtual destructor with no standalone function in the PDB was inlined everywhere. Define it without an annotation.
+A virtual destructor with no standalone function in the PDB was inlined everywhere. Define it inline in the header, without an annotation. Out of line in the `.cpp` it cannot inline across translation units and every derived destructor calls it.
 
 boost's `shared_ptr::operator<` compares ownership, not the pointer, so it loads offset 4, not 0.
 
@@ -162,4 +163,6 @@ Calls into vendored libraries read low: reccmp cannot name the original's call t
 
 The original link used `/OPT:ICF` and folded heavily. Many distinct source functions compiled to the same three-byte body and share one address, which is also why Ghidra's PDB source line importer throws several hundred `IllegalArgumentException` warnings when the symbols load. Those warnings are expected and harmless. Run `tools/check_folded.py` before concluding that a function at a shared address is genuinely unmatched.
 
-`tools/` holds only what came from racers. Analysis scripts written along the way live in the session scratchpad.
+`tools/check_folded.py` diverges from racers there. MSVC 8 keeps a PDB symbol for every alias the linker folded away, so all the `FOLDED` annotations on one address resolve rather than just the survivor. The check asks whether they landed on a single recompiled address instead of counting how many resolved.
+
+`tools/` otherwise holds only what came from racers. Analysis scripts written along the way live in the session scratchpad.

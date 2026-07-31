@@ -1,10 +1,8 @@
 #include "v8world/IPipelined.h"
 
-namespace RBX {
+#include "v8kernel/Kernel.h"
 
-IPipelined::~IPipelined()
-{
-}
+namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1010b9b0
 IStage* IPipelined::getStage(IStage::StageType stageType)
@@ -23,10 +21,22 @@ IStage* IPipelined::getStage(IStage::StageType stageType)
 	return stage;
 }
 
+// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
+void IPipelined::putInPipeline(IStage* stage)
+{
+	currentStage = stage;
+}
+
 // FUNCTION: WEBSERVICE 0x1010b9f0
 void IPipelined::removeFromPipeline(IStage* stage)
 {
 	currentStage = 0;
+}
+
+// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
+void IPipelined::putInStage(IStage* stage)
+{
+	currentStage = stage;
 }
 
 // FUNCTION: WEBSERVICE 0x1010ba00
@@ -39,6 +49,12 @@ void IPipelined::removeFromStage(IStage* stage)
 IStage* IPipelined::getKernel()
 {
 	return getStage(IStage::KERNEL_STAGE);
+}
+
+// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
+void IPipelined::putInKernel(Kernel* kernel)
+{
+	currentStage = kernel;
 }
 
 // FUNCTION: WEBSERVICE 0x1010ba20

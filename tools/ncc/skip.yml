@@ -1,4 +1,6 @@
 floatERA: 'Real class name, from WebService.pdb'
+SPAWN_deprecated: 'SurfaceType enumerator, from WebService.pdb'
+JointK: 'Primitive member, from WebService.pdb'
 m_wLangID: 'CVersionInfo member, from WebService.pdb'
 m_wCodePage: 'CVersionInfo member, from WebService.pdb'
 m_wCharset: 'CVersionInfo member, from WebService.pdb'

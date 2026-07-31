@@ -110,16 +110,18 @@ def main():
             if fun.filename is not None
         ]
 
-        # Filter out None
-        matched_count = len([m for m in matches if m])
+        # MSVC 8 keeps a symbol for every alias the linker folded away, so each annotation
+        # resolves. What matters is that they all landed on one recomp address.
+        matched = {m for m in matches if m}
 
-        if matched_count == 0:
+        if not matched:
             failed = True
             print(f"{addr:#8x}: No match for folded annotation.")
 
-        if matched_count > 1:
+        if len(matched) > 1:
             failed = True
-            print(f"{addr:#8x}: Matched {matched_count} recomp functions.")
+            addrs = ", ".join(f"{m:#x}" for m in sorted(matched))
+            print(f"{addr:#8x}: Not folded in recomp, landed on {addrs}.")
 
     return failed
 

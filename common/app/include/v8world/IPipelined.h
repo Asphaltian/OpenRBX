@@ -1,26 +1,38 @@
 #ifndef V8WORLD_IPIPELINED_H
 #define V8WORLD_IPIPELINED_H
 
+#include "decomp.h"
 #include "v8kernel/IStage.h"
 
 namespace RBX {
 
-class IPipelined
+class Kernel;
+
+// SIZE 0x08
+class __declspec(novtable) IPipelined
 {
 public:
 	IPipelined() : currentStage(0) {}
 
-	virtual ~IPipelined();
+	virtual ~IPipelined() {} // vtable+0x00
 
-	void removeFromStage(IStage* stage);
-	void removeFromKernel();
-	void removeFromPipeline(IStage* stage);
 	IStage* getStage(IStage::StageType stageType);
+
+	void putInPipeline(IStage* stage);
+	void removeFromPipeline(IStage* stage);
+	void putInStage(IStage* stage);
+	void removeFromStage(IStage* stage);
+
 	IStage* getKernel();
+
+	virtual void putInKernel(Kernel* kernel); // vtable+0x04
+	virtual void removeFromKernel();          // vtable+0x08
 
 private:
 	IStage* currentStage; // 0x04
 };
+
+DECOMP_SIZE_ASSERT(IPipelined, 0x08)
 
 } // namespace RBX
 

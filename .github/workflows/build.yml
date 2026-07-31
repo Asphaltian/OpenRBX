@@ -313,7 +313,7 @@ jobs:
             --recurse \
             --style tools/ncc/ncc.style \
             --skip tools/ncc/skip.yml \
-            --definition PASCAL WINAPI FAR BOOL CALLBACK HWND__=HWND __int64=long \
+            --definition PASCAL WINAPI FAR BOOL CALLBACK HWND__=HWND __int64=long "__declspec(x)=" \
             --include \
               util \
               WebService \

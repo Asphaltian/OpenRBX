@@ -42,7 +42,7 @@ PacketLogger::PacketLogger()
 PacketLogger::~PacketLogger()
 {
 }
-// FUNCTION: WEBSERVICE 0x101ae590
+// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
 void PacketLogger::OnAttach(RakPeerInterface *peer)
 {
 	rakPeer=peer;

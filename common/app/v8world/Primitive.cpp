@@ -1,13 +1,20 @@
 #include "v8world/Primitive.h"
 
+#include "util/Velocity.h"
+#include "v8kernel/Body.h"
+#include "v8world/Contact.h"
 #include "v8world/Geometry.h"
+#include "v8world/Joint.h"
+#include "v8world/RigidJoint.h"
+
+#include <cstddef>
 
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100a77d0
 void Primitive::setSizeMultiplier(unsigned int multiplier)
 {
-	if (multiplier != sizeMultiplier && world == 0) {
+	if (multiplier != sizeMultiplier && world == NULL) {
 		sizeMultiplier = multiplier;
 	}
 }
@@ -18,13 +25,20 @@ const Guid& Primitive::getGuid() const
 	return guid;
 }
 
-// FUNCTION: WEBSERVICE 0x100a7820
-Primitive* Primitive::downstreamPrimitive(Edge* edge)
+// FUNCTION: WEBSERVICE 0x100a7800
+void Primitive::setGuid(const Guid& value)
 {
-	Primitive* answer = edge->getPrimitive(0);
-	Primitive* other = edge->getPrimitive(1);
+	guid.assign(value.data);
+	guidSetExternally = true;
+}
 
-	if (other != 0 && answer->clumpDepth <= other->clumpDepth) {
+// FUNCTION: WEBSERVICE 0x100a7820
+Primitive* Primitive::downstreamPrimitive(Joint* joint)
+{
+	Primitive* answer = joint->getPrimitive(0);
+	Primitive* other = joint->getPrimitive(1);
+
+	if (other != NULL && answer->clumpDepth <= other->clumpDepth) {
 		answer = other;
 	}
 
@@ -36,7 +50,7 @@ Edge* Primitive::getFirstEdge() const
 {
 	Edge* edge = joints.first;
 
-	if (edge == 0) {
+	if (edge == NULL) {
 		edge = contacts.first;
 	}
 
@@ -48,7 +62,7 @@ Edge* Primitive::getNextEdge(Edge* edge) const
 {
 	Edge* next = edge->getNext(this);
 
-	if (next != 0) {
+	if (next != NULL) {
 		return next;
 	}
 
@@ -56,7 +70,7 @@ Edge* Primitive::getNextEdge(Edge* edge) const
 		return contacts.first;
 	}
 
-	return 0;
+	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a7a90
@@ -67,10 +81,81 @@ void Primitive::setClump(Clump* value)
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x100a7fc0
-Edge* Primitive::getFirstContact() const
+// FUNCTION: WEBSERVICE 0x100a7cd0
+void Primitive::setVelocity(const Velocity& velocity)
 {
-	return contacts.first;
+	body->setVelocity(velocity);
+}
+
+// FUNCTION: WEBSERVICE 0x100a7dc0
+void Primitive::setSurfaceType(NormalId normalId, SurfaceType surfaceType)
+{
+	if (this->surfaceType[normalId] != surfaceType) {
+		this->surfaceType[normalId] = surfaceType;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a7fb0 FOLDED
+Joint* Primitive::getFirstJoint() const
+{
+	return static_cast<Joint*>(joints.first);
+}
+
+// FUNCTION: WEBSERVICE 0x100a7fc0
+Contact* Primitive::getFirstContact() const
+{
+	return static_cast<Contact*>(contacts.first);
+}
+
+// FUNCTION: WEBSERVICE 0x100a7fd0 FOLDED
+Contact* Primitive::getNextContact(Contact* contact) const
+{
+	return static_cast<Contact*>(contact->getNext(this));
+}
+
+// FUNCTION: WEBSERVICE 0x100a7fd0 FOLDED
+Joint* Primitive::getNextJoint(Joint* joint) const
+{
+	return static_cast<Joint*>(joint->getNext(this));
+}
+
+// FUNCTION: WEBSERVICE 0x100a7ff0
+RigidJoint* Primitive::getFirstRigidAt(Edge* edge) const
+{
+	while (edge != NULL) {
+		if (RigidJoint::isRigidJoint(edge)) {
+			return static_cast<RigidJoint*>(edge);
+		}
+
+		edge = getNextEdge(edge);
+	}
+
+	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100a8060
+RigidJoint* Primitive::getFirstRigid() const
+{
+	return getFirstRigidAt(getFirstEdge());
+}
+
+// FUNCTION: WEBSERVICE 0x100a81d0
+Primitive::~Primitive()
+{
+	if (geometry->getGeometryType() != Geometry::GEOMETRY_NONE) {
+		delete geometry;
+		delete body;
+	}
+
+	for (int i = 0; i < 6; i++) {
+		delete surfaceData[i];
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a8490
+const CoordinateFrame& Primitive::getCoordinateFrame() const
+{
+	return body->getCoordinateFrame();
 }
 
 } // namespace RBX

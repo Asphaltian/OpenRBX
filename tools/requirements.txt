@@ -1,1 +1,1 @@
-reccmp @ git+https://github.com/Asphaltian/reccmp@cvdump-keyerror
+reccmp @ git+https://github.com/Asphaltian/reccmp@msvc800
