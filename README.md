@@ -2,8 +2,6 @@
 
 A decompilation of Roblox as it shipped in December 2007. The aim is to rebuild the original binaries instruction for instruction, and to end up with a tree worth building on afterwards.
 
-RBXGS, the game server, comes first, because its `WebService.dll` shipped with an unstripped PDB. The client follows. Most of the work carries across either way: the engine libraries under `common/` were shared between the two, and three of the six link-time code generation objects inside `WebService.dll` came from the client tree, not the server's.
-
 Conventions and tooling follow the [LEGO Island decompilation](https://github.com/isledecomp/isle).
 
 > **Note:** The code here reproduces the original release and does not try to improve on it. 32-bit Windows only.
@@ -13,6 +11,8 @@ Conventions and tooling follow the [LEGO Island decompilation](https://github.co
 <p align="center"><a href="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.HTML"><img src="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.SVG" width="50%"></a></p>
 
 Still early. `WebService.dll` contains 12,633 functions.
+
+RBXGS, the game server, comes first, because its `WebService.dll` shipped with an unstripped PDB. The client follows. Most of the work carries across either way: the engine libraries under `common/` were shared between the two, and three of the six link-time code generation objects inside `WebService.dll` came from the client tree, not the server's.
 
 ## Building
 

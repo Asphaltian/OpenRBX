@@ -34,7 +34,11 @@ void CWebService::Something()
 }
 ```
 
-`STUB:` replaces `FUNCTION:` while a function is incomplete, and globals use `GLOBAL:`. Write addresses with all eight hex digits in lowercase, which `tools/reccmp_addr_padding.py` enforces in CI, and order functions within a translation unit by ascending address.
+`FUNCTION:` claims a 100% match, so use `STUB:` until it is one. Globals use `GLOBAL:`, vtables `VTABLE:`, compiler-generated code `SYNTHETIC:`. Write addresses with all eight hex digits in lowercase, which `tools/reccmp_addr_padding.py` enforces in CI, and order functions within a translation unit by ascending address.
+
+The colon is required on all of them except `// SIZE`. Leave it out and reccmp ignores the annotation silently, which on a `VTABLE` costs several percent on every constructor that stores the vtable.
+
+Functions the linker merged share one address and are marked `FOLDED`, as in `// FUNCTION: WEBSERVICE 0x100a77d0 FOLDED`. They are exempt from ascending order.
 
 `reccmp/webservice-function-size.csv` carries the address and size of all 12,633 functions, taken from the PDB. It is the quickest way to confirm that a function ends where you think it does.
 

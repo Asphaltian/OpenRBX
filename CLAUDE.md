@@ -36,7 +36,84 @@ The LINES range table maps an address to the file it came from. Inline and templ
 
 Jump tables settle enum values without guessing: read the byte index table and the jump table out of the image and the case-to-value mapping falls out.
 
-Prove layouts rather than assuming them. `DECOMP_SIZE_ASSERT(T, size)` fails the build on a mismatch; assert a deliberately wrong size once to confirm the assert is live.
+Prove layouts; do not assume them. `DECOMP_SIZE_ASSERT(T, size)` fails the build on a mismatch; assert a deliberately wrong size once to confirm the assert is live.
+
+## Annotations
+
+Functions in a compilation unit are ordered by ascending address.
+
+```cpp
+// FUNCTION: WEBSERVICE 0x100a77d0         complete, compared by reccmp
+// FUNCTION: WEBSERVICE 0x100a77d0 FOLDED  identical code the linker merged
+// STUB: WEBSERVICE 0x100a7800             incomplete, skipped by reccmp
+// LIBRARY: WEBSERVICE 0x10001000          CRT or third party, in library_msvc.h inside #ifdef 0
+// SYNTHETIC: WEBSERVICE 0x10007040        compiler-generated, such as scalar deleting destructors
+// GLOBAL: WEBSERVICE 0x102c7000           global variable
+// VTABLE: WEBSERVICE 0x10056440           virtual function table
+// SIZE 0xf8                               class size assertion
+```
+
+The colon is required on everything except `// SIZE`. reccmp silently ignores `// VTABLE WEBSERVICE 0x...`, and the vtable stores inside constructors then compare as `<OFFSET>` instead of the vftable symbol, costing five to ten percent.
+
+`// FUNCTION:` asserts a 100% match. Anything less is `// STUB:`.
+
+`FOLDED` marks siblings the linker merged onto one address. They share that address, are exempt from ascending order, and do not need the `STUB()` macro.
+
+## Class Pattern
+
+```cpp
+// VTABLE: WEBSERVICE 0x10056440
+// SIZE 0xf8
+class Instance : public GuidItem<Instance> {
+public:
+	virtual ~Instance();      // vtable+0x00
+	virtual void VTable0x04();
+
+private:
+	int worldIndex;                       // 0x28
+	undefined m_unk0x2c[0x40 - 0x2c];     // 0x2c
+};
+```
+
+`DECOMP_SIZE_ASSERT(Instance, 0xf8)` goes in the source. Member offset comments and `vtable+0xNN` comments are required. Size gaps use a subtraction so the length documents itself.
+
+## Types and Names
+
+`undefined`, `undefined2` and `undefined4` from `decomp.h` stand in for unproven types. Do not guess `int` or `float` until a 100% match proves it.
+
+Unlike racers, the PDB is not stripped, so real names are usually available and placeholders are the exception. Where nothing is recorded, NCC rules apply: `FUN_XXXXXXXX`, `g_unk0xXXXXXXXX`, `m_unk0xXX`, `p_unk0xXX`, `VTable0xXX`, `c_` on enum constants. Rename a placeholder only when the evidence is unambiguous; competing plausible names mean keep it, because a misleading name is worse than a neutral one.
+
+## Code Style
+
+- Bit tests read `if (flags & c_flag)`, never `!= 0`.
+- No redundant `this->`.
+- Win32 calls use the un-suffixed macro (`CreateWindowEx`, not `CreateWindowExA`), which is what the source had even though the import is the `A` symbol.
+- `NULL` for pointers, `TRUE`/`FALSE` for booleans, plain `0` only for scalars.
+- No leading `const` on return-by-value; NCC rejects it.
+- clang-format the files you touch. Reflowing does not change codegen.
+
+## Matching a Function
+
+1. Read the decompilation and check the byte budget. The gap to the next address bounds the body, so a body that cannot fit means this is a wrapper and the logic is in a callee.
+2. Take calling conventions from the definition, not a call site. `__thiscall` means a member.
+3. A `__thiscall` on a global means that global is an instance. Declare the class with `undefined m_unk0x00[size]`.
+4. STUB every unknown callee, in ascending address order, with `STUB(0xADDRESS)` in the body so `/OPT:ICF` cannot fold them together. Empty destructors are exempt.
+5. Write clean C++, not decompiler pseudocode. No `*(int*)(this + 4)`, no gotos, no raw float bit patterns.
+6. Build, then `reccmp-reccmp --target WEBSERVICE --verbose 0xADDRESS`, and iterate to 100%.
+7. Compare the vtable address itself, not only the functions. It is what exposes a missing or misordered virtual.
+8. Re-verify functions that touch any class you changed, then run `reccmp-decomplint` and `tools/check_folded.py`.
+
+Starting a new class, match the constructor, destructor and scalar deleting destructor before any method. Those three prove size, base chain, vtable layout and member order.
+
+## Decompilation Principles
+
+- A type is proven when a `// FUNCTION:` using it reaches 100%, and not before.
+- A diff means the code is wrong. Find the cause: layout, types, a missing base. Register allocation is never the explanation.
+- Claimed matches are not verified matches. Re-measure anything inherited or generated.
+- Every annotation carries a real address. No placeholders.
+- Casts plus pointer arithmetic mean the types are wrong. Find the real class.
+- One root type per header. Nest one-owner helper types inside their owner.
+- An unexplained address gap means a function sits in the wrong class, or one file mixes classes. Move whole classes; never split a class's methods across files to tidy address order.
 
 ## Build Layout
 
@@ -49,7 +126,7 @@ Each original static library gets its own OBJECT library, because each was compi
 
 Within a library, App uses subdirectories (`util`, `v8world`, `v8tree`, `v8kernel`, `v8datamodel`, `v8xml`, `gui`, `humanoid`, `reflection`, `script`, `security`, `tool`) with headers under `include/`. AppDraw, RbxView, RenderLib and the WebService project are flat, and each library's headers live under `include/<libname>/`.
 
-`util/decomp.cpp` exists so the DLL target has a source file while everything else is empty. Keep it out of the LTCG list; it is ours rather than theirs.
+`util/decomp.cpp` exists so the DLL target has a source file while everything else is empty. Keep it out of the LTCG list; it is ours, not theirs.
 
 `OPENRBX_KEEP_UNREFERENCED` links with `/OPT:NOREF` so reccmp can see functions nothing calls yet. The original used `/OPT:REF`. Turn it off once enough of the DLL is reachable.
 
@@ -77,7 +154,7 @@ The binary does not store a vftable in the constructor of an abstract class, and
 
 A virtual destructor with no standalone function in the PDB was inlined everywhere. Define it without an annotation.
 
-boost's `shared_ptr::operator<` compares ownership, not the pointer, so it loads offset 4 rather than 0.
+boost's `shared_ptr::operator<` compares ownership, not the pointer, so it loads offset 4, not 0.
 
 Calls into vendored libraries read low: reccmp cannot name the original's call targets in G3D, Boost or the CRT, so every such call counts as a difference even when the streams are identical. `LIBRARY:` is the wrong fix, since that is for code we never build and G3D is in our binary.
 
