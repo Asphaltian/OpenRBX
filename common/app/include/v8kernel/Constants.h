@@ -1,0 +1,18 @@
+#ifndef V8KERNEL_CONSTANTS_H
+#define V8KERNEL_CONSTANTS_H
+
+#include <G3D/Vector3.h>
+
+namespace RBX {
+
+using G3D::Vector3;
+
+class Constants
+{
+public:
+	static float getJointK(const Vector3& size, bool isBall);
+};
+
+} // namespace RBX
+
+#endif // V8KERNEL_CONSTANTS_H

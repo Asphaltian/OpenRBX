@@ -3,16 +3,20 @@
 #include "decomp.h"
 #include "util/Velocity.h"
 #include "v8kernel/Body.h"
+#include "v8kernel/Constants.h"
+#include "v8world/Anchor.h"
 #include "v8world/Assembly2.h"
 #include "v8world/Ball.h"
 #include "v8world/Block.h"
 #include "v8world/Contact.h"
 #include "v8world/Controller.h"
 #include "v8world/Geometry.h"
+#include "v8world/IMoving.h"
 #include "v8world/Joint.h"
 #include "v8world/RigidJoint.h"
 #include "v8world/World.h"
 
+#include <cmath>
 #include <cstddef>
 
 namespace RBX {
@@ -161,6 +165,14 @@ Assembly* Primitive::getAssembly() const
 	}
 
 	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100a7ab0
+float Primitive::computeJointK() const
+{
+	bool isBall = geometry->getGeometryType() == Geometry::GEOMETRY_BALL;
+
+	return Constants::getJointK(geometry->getGridSize(), isBall);
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ae0
@@ -384,10 +396,58 @@ Primitive::~Primitive()
 	}
 }
 
-// STUB: WEBSERVICE 0x100a8320
+// FUNCTION: WEBSERVICE 0x100a8320
 void Primitive::setAnchor(bool value)
 {
-	STUB(0x100a8320);
+	bool have = anchorObject != NULL;
+
+	anchored = value;
+
+	bool wanted = value || dragging;
+
+	if (wanted != have) {
+		if (wanted) {
+			anchorObject = new Anchor(this);
+
+			if (world != NULL) {
+				world->onPrimitiveAddedAnchor(this);
+			}
+		}
+		else {
+			delete anchorObject;
+			anchorObject = NULL;
+
+			if (world != NULL) {
+				world->onPrimitiveRemovedAnchor(this);
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a83f0
+void Primitive::setCoordinateFrame(const CoordinateFrame& value)
+{
+	if (value != body->getCoordinateFrame()) {
+		Assembly* assembly = getAssembly();
+
+		if (assembly == NULL) {
+			body->setCoordinateFrame(value);
+			myOwner->notifyMoved();
+
+			if (world != NULL) {
+				world->onPrimitiveExtentsChanged(this);
+			}
+		}
+		else if (assembly->getAssemblyPrimitive() == this) {
+			body->setCoordinateFrame(value);
+			assembly->notifyMoved();
+			world->onAssemblyExtentsChanged(assembly);
+
+			if (!anchored) {
+				world->ticklePrimitive(this, false);
+			}
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a8490
@@ -396,13 +456,50 @@ const CoordinateFrame& Primitive::getCoordinateFrame() const
 	return body->getCoordinateFrame();
 }
 
-// STUB: WEBSERVICE 0x100a8810
-void Primitive::setGridSize(const Vector3& size)
+// FUNCTION: WEBSERVICE 0x100a84b0
+CoordinateFrame Primitive::getGridCorner() const
 {
-	STUB(0x100a8810);
+	const CoordinateFrame& coord = body->getCoordinateFrame();
+
+	return CoordinateFrame(coord.rotation, coord.pointToWorldSpace(-(geometry->getGridSize() * 0.5f)));
 }
 
-// STUB: WEBSERVICE 0x100a88d0
+// STUB: WEBSERVICE 0x100a8760
+Vector3 Primitive::clipToSafeSize(const Vector3& size)
+{
+	Vector3 answer(G3D::min(512.0f, size.x), G3D::min(512.0f, size.y), G3D::min(512.0f, size.z));
+
+	if (answer.x * answer.y * answer.z > 1000000.0f) {
+		answer.y = sqrt(1000000.0f / (answer.x * answer.z));
+	}
+
+	return answer;
+}
+
+// FUNCTION: WEBSERVICE 0x100a8810
+void Primitive::setGridSize(const Vector3& size)
+{
+	Vector3 clipped = clipToSafeSize(size);
+
+	if (clipped != geometry->getGridSize()) {
+		fuzzyExtentsStateId = -2;
+		geometry->setGridSize(clipped);
+
+		float volume = geometry->getGridVolume();
+		body->setMass(volume);
+		body->setMoment(geometry->getMoment(volume));
+
+		JointK.setDirty();
+
+		if (world != NULL) {
+			world->onPrimitiveExtentsChanged(this);
+		}
+
+		JointK.setDirty();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a88d0
 void Primitive::setDragging(bool value)
 {
 	if (value != dragging) {
@@ -421,6 +518,14 @@ void Primitive::setDragging(bool value)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x100a8940
+void Primitive::setGridCorner(const CoordinateFrame& corner)
+{
+	Vector3 half = geometry->getGridSize() * 0.5f;
+
+	setCoordinateFrame(CoordinateFrame(corner.rotation, corner.pointToWorldSpace(half)));
+}
+
 // FUNCTION: WEBSERVICE 0x100a89f0
 void Primitive::setController(Controller* value)
 {
@@ -433,7 +538,7 @@ void Primitive::setController(Controller* value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a8a20
+// FUNCTION: WEBSERVICE 0x100a8a20
 void Primitive::setPrimitiveType(Geometry::GeometryType geometryType)
 {
 	if (geometry->getGeometryType() != geometryType) {

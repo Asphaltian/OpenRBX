@@ -5,6 +5,7 @@
 
 namespace RBX {
 
+class Assembly;
 class Primitive;
 
 // SIZE 0x94
@@ -18,6 +19,10 @@ public:
 	void onPrimitiveAddedAnchor(Primitive* primitive);
 	void onPrimitiveRemovedAnchor(Primitive* primitive);
 	void onPrimitiveCanCollideChanged(Primitive* primitive);
+
+	void onAssemblyExtentsChanged(Assembly* assembly);
+
+	void ticklePrimitive(Primitive* primitive, bool value);
 
 private:
 	undefined m_unk0x00[0x94 - 0x00]; // 0x00

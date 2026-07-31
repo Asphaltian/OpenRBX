@@ -6,10 +6,12 @@
 #include "util/Velocity.h"
 
 #include <G3D/CoordinateFrame.h>
+#include <G3D/Matrix3.h>
 
 namespace RBX {
 
 using G3D::CoordinateFrame;
+using G3D::Matrix3;
 
 // SIZE 0xd0
 class Body
@@ -31,7 +33,10 @@ public:
 		return pv.position;
 	}
 
+	void setCoordinateFrame(const CoordinateFrame& value);
 	void setVelocity(const Velocity& velocity);
+	void setMass(float mass);
+	void setMoment(const Matrix3& moment);
 
 private:
 	undefined m_unk0x00[0x84 - 0x00]; // 0x00

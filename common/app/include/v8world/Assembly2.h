@@ -14,6 +14,9 @@ class Assembly : public IPipelined
 {
 public:
 	Assembly* getRootAssembly();
+	Primitive* getAssemblyPrimitive();
+
+	void notifyMoved();
 
 private:
 	SleepInfo* sleepInfo;             // 0x08

@@ -16,6 +16,24 @@ void Body::setVelocity(const Velocity& velocity)
 	STUB(0x10104be0);
 }
 
+// STUB: WEBSERVICE 0x10104c60
+void Body::setMass(float mass)
+{
+	STUB(0x10104c60);
+}
+
+// STUB: WEBSERVICE 0x10104cc0
+void Body::setMoment(const Matrix3& moment)
+{
+	STUB(0x10104cc0);
+}
+
+// STUB: WEBSERVICE 0x10104ee0
+void Body::setCoordinateFrame(const CoordinateFrame& value)
+{
+	STUB(0x10104ee0);
+}
+
 // STUB: WEBSERVICE 0x101055a0
 Body::~Body()
 {

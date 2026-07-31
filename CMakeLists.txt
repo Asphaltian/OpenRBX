@@ -117,11 +117,13 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Quaternion.cpp
   common/app/util/Rect.cpp
   common/app/v8kernel/Body.cpp
+  common/app/v8kernel/Constants.cpp
   common/app/v8world/Assembly2.cpp
   common/app/v8world/Ball.cpp
   common/app/v8world/Block.cpp
   common/app/v8world/Controller.cpp
   common/app/v8world/Edge.cpp
+  common/app/v8world/IMoving.cpp
   common/app/v8world/IPipelined.cpp
   common/app/v8world/Primitive.cpp
   common/app/v8world/World.cpp

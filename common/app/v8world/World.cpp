@@ -16,10 +16,22 @@ void World::onPrimitiveExtentsChanged(Primitive* primitive)
 	STUB(0x100cf050);
 }
 
+// STUB: WEBSERVICE 0x100cf060
+void World::onAssemblyExtentsChanged(Assembly* assembly)
+{
+	STUB(0x100cf060);
+}
+
 // STUB: WEBSERVICE 0x100cf0c0
 void World::onPrimitiveGeometryTypeChanged(Primitive* primitive)
 {
 	STUB(0x100cf0c0);
+}
+
+// STUB: WEBSERVICE 0x100cf1a0
+void World::ticklePrimitive(Primitive* primitive, bool value)
+{
+	STUB(0x100cf1a0);
 }
 
 // STUB: WEBSERVICE 0x100cf1f0

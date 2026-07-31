@@ -173,12 +173,20 @@ public:
 	const CoordinateFrame& getCoordinateFrame() const;
 	void setVelocity(const Velocity& velocity);
 
+	float computeJointK() const;
+
 	Extents computeFuzzyExtents() const;
 	const Extents& getFastFuzzyExtents() const;
 
 	void setSurfaceData(NormalId normalId, const SurfaceData& value);
 	void setSurfaceType(NormalId normalId, SurfaceType surfaceType);
 
+	CoordinateFrame getGridCorner() const;
+	void setGridCorner(const CoordinateFrame& corner);
+
+	void setCoordinateFrame(const CoordinateFrame& value);
+
+	Vector3 clipToSafeSize(const Vector3& size);
 	void setGridSize(const Vector3& size);
 
 	void setController(Controller* value);
