@@ -195,6 +195,12 @@ namespace DataStructures
 
 	// FUNCTION: WEBSERVICE 0x101bc710
 	// DataStructures::List<InternalPacket *>::Insert
+	// FUNCTION: WEBSERVICE 0x101b1ea0
+	// DataStructures::List<SystemAddressAndIndex>::Insert(struct SystemAddressAndIndex, unsigned int)
+	// FUNCTION: WEBSERVICE 0x101bb220
+	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::Insert(int const &, int const &)>::MapNode>::Insert(struct DataStructures::Map<int, class HuffmanEncodingTree *, &int __cdecl DataStructures::defaultMapKeyComparison<int>(int const &, int const &)>::MapNode, unsigned int)
+	// FUNCTION: WEBSERVICE 0x101bd180
+	// DataStructures::List<DataStructures::RangeNode<unsigned int> >::Insert(struct DataStructures::RangeNode<unsigned int>, unsigned int)
 	template <class list_type>
 		void List<list_type>::Insert( const list_type input, const unsigned int position )
 	{
@@ -238,6 +244,12 @@ namespace DataStructures
 
 	// FUNCTION: WEBSERVICE 0x101bc440
 	// DataStructures::List<ReliabilityLayer::DataAndTime *>::Insert
+	// FUNCTION: WEBSERVICE 0x101b1df0
+	// DataStructures::List<SystemAddressAndIndex>::Insert(struct SystemAddressAndIndex)
+	// FUNCTION: WEBSERVICE 0x101bb180
+	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::Insert(int const &, int const &)>::MapNode>::Insert(struct DataStructures::Map<int, class HuffmanEncodingTree *, &int __cdecl DataStructures::defaultMapKeyComparison<int>(int const &, int const &)>::MapNode)
+	// FUNCTION: WEBSERVICE 0x101bd060
+	// DataStructures::List<DataStructures::RangeNode<unsigned int> >::Insert(struct DataStructures::RangeNode<unsigned int>)
 	template <class list_type>
 		void List<list_type>::Insert( const list_type input )
 	{
