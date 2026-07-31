@@ -673,6 +673,7 @@ namespace big
 	// FUNCTION: WEBSERVICE 0x101b78f0
 	// big::computeNRinverse<unsigned int [4]>
 	// FUNCTION: WEBSERVICE 0x101b7550
+	// big::computeNRinverse<unsigned int [8]>
 	BIGONETYPE void computeNRinverse( T &n0, T &np )
 	{
 		BIGDOUBLESIZE( T, r );

@@ -29,11 +29,12 @@ DataBlockEncryptor::DataBlockEncryptor()
 	keySet = false;
 }
 
-// FUNCTION: WEBSERVICE 0x1015b610
+// FUNCTION: WEBSERVICE 0x1015b610 FOLDED
 DataBlockEncryptor::~DataBlockEncryptor()
 {}
 
 // FUNCTION: WEBSERVICE 0x101c38d0
+// DataBlockEncryptor::IsKeySet
 bool DataBlockEncryptor::IsKeySet( void ) const
 {
 	return keySet;

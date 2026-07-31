@@ -73,6 +73,7 @@ namespace DataStructures
 	// FUNCTION: WEBSERVICE 0x101c2070
 	// DataStructures::OrderedList<char *,StrAndBool,&StrAndBoolComp>::~OrderedList<char *,StrAndBool,&StrAndBoolComp>
 	// FUNCTION: WEBSERVICE 0x101bedb0
+	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::~OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	OrderedList<key_type, data_type, comparison_function>::~OrderedList()
 	{

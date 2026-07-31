@@ -80,6 +80,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc160
+	// DataStructures::Queue<HuffmanEncodingTreeNode *>::Queue<HuffmanEncodingTreeNode *>
 	template <class queue_type>
 		Queue<queue_type>::Queue()
 	{
