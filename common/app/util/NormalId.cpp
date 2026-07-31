@@ -1,5 +1,7 @@
 #include "util/NormalId.h"
 
+#include "decomp.h"
+
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101039d0
@@ -54,6 +56,20 @@ NormalId Vector3ToNormalId(const Vector3& normal)
 NormalId Matrix3ToNormalId(const Matrix3& matrix)
 {
 	return Vector3ToNormalId(matrix.getColumn(2));
+}
+
+// STUB: WEBSERVICE 0x10103de0
+const Vector3& normalIdToVector3(NormalId normalId)
+{
+	STUB(0x10103de0);
+	return Vector3::zero();
+}
+
+// STUB: WEBSERVICE 0x10104070
+const Matrix3& normalIdToMatrix3(NormalId normalId)
+{
+	STUB(0x10104070);
+	return Matrix3::zero();
 }
 
 } // namespace RBX

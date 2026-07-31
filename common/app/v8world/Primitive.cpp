@@ -1,6 +1,7 @@
 #include "v8world/Primitive.h"
 
 #include "decomp.h"
+#include "util/Face.h"
 #include "util/Velocity.h"
 #include "v8kernel/Body.h"
 #include "v8kernel/Constants.h"
@@ -149,6 +150,28 @@ Edge* Primitive::getNextEdge(Edge* edge) const
 	return NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x100a7a10
+void Primitive::onNewTouch(Primitive* p0, Primitive* p1)
+{
+	Clump* clump0 = p0->clump;
+	Clump* clump1 = p1->clump;
+
+	if (p0->myOwner->reportTouches()) {
+		if (clump0->getSleepStatus() == Sim::AWAKE || clump1->getSleepStatus() == Sim::AWAKE) {
+			p0->world->onPrimitiveTouched(p0, p1);
+		}
+	}
+
+	clump0 = p1->clump;
+	clump1 = p0->clump;
+
+	if (p1->myOwner->reportTouches()) {
+		if (clump0->getSleepStatus() == Sim::AWAKE || clump1->getSleepStatus() == Sim::AWAKE) {
+			p1->world->onPrimitiveTouched(p1, p0);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100a7a90
 void Primitive::setClump(Clump* value)
 {
@@ -233,6 +256,20 @@ void Primitive::setElasticity(float value)
 void Primitive::setVelocity(const Velocity& velocity)
 {
 	body->setVelocity(velocity);
+}
+
+// FUNCTION: WEBSERVICE 0x100a7bf0
+CoordinateFrame Primitive::getFaceCoordInObject(NormalId normalId)
+{
+	return CoordinateFrame(normalIdToMatrix3(normalId), normalIdToVector3(normalId) * geometry->getGridSize());
+}
+
+// FUNCTION: WEBSERVICE 0x100a7c60
+Face Primitive::getFaceInObject(NormalId normalId)
+{
+	Vector3 half = geometry->getGridSize() * 0.5f;
+
+	return Face::fromExtentsSide(Extents(-half, half), normalId);
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ce0
@@ -396,6 +433,20 @@ Primitive::~Primitive()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x100a8250
+bool Primitive::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
+{
+	Ray objectRay = body->getCoordinateFrame().toObjectSpace(ray);
+	Vector3 objectHitPoint;
+
+	if (geometry->hitTest(objectRay, objectHitPoint, inside)) {
+		hitPoint = body->getCoordinateFrame().pointToWorldSpace(objectHitPoint);
+		return true;
+	}
+
+	return false;
+}
+
 // FUNCTION: WEBSERVICE 0x100a8320
 void Primitive::setAnchor(bool value)
 {
@@ -422,6 +473,12 @@ void Primitive::setAnchor(bool value)
 			}
 		}
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a83b0
+Face Primitive::getFaceInWorld(NormalId normalId)
+{
+	return getFaceInObject(normalId).toWorldSpace(body->getCoordinateFrame());
 }
 
 // FUNCTION: WEBSERVICE 0x100a83f0

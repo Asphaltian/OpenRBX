@@ -6,6 +6,24 @@
 
 namespace RBX {
 
+namespace Sim {
+
+enum AssemblyState
+{
+	ANCHORED = 0,
+	RECURSIVE_WAKE_PENDING = 1,
+	WAKE_PENDING = 2,
+	AWAKE = 3,
+	SLEEPING_CHECKING = 4,
+	SLEEPING_DEEPLY = 5,
+};
+
+} // namespace Sim
+
+} // namespace RBX
+
+namespace RBX {
+
 class Primitive;
 class SleepInfo;
 
@@ -17,6 +35,8 @@ public:
 	Primitive* getAssemblyPrimitive();
 
 	void notifyMoved();
+
+	Sim::AssemblyState getSleepStatus() const;
 
 private:
 	SleepInfo* sleepInfo;             // 0x08

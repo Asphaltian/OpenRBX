@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "util/ComputeProp.h"
 #include "util/Extents.h"
+#include "util/Face.h"
 #include "util/Guid.h"
 #include "util/NormalId.h"
 #include "util/Vector3int32.h"
@@ -12,6 +13,7 @@
 #include "v8world/SurfaceData.h"
 
 #include <G3D/CoordinateFrame.h>
+#include <G3D/Ray.h>
 #include <G3D/Vector3.h>
 
 namespace RBX {
@@ -31,6 +33,7 @@ class Velocity;
 class World;
 
 using G3D::CoordinateFrame;
+using G3D::Ray;
 using G3D::Vector3;
 
 namespace Sim {
@@ -172,6 +175,14 @@ public:
 
 	const CoordinateFrame& getCoordinateFrame() const;
 	void setVelocity(const Velocity& velocity);
+
+	static void onNewTouch(Primitive* p0, Primitive* p1);
+
+	bool hitTest(const Ray& ray, Vector3& hitPoint, bool& inside);
+
+	CoordinateFrame getFaceCoordInObject(NormalId normalId);
+	Face getFaceInObject(NormalId normalId);
+	Face getFaceInWorld(NormalId normalId);
 
 	float computeJointK() const;
 

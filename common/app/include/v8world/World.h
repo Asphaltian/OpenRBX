@@ -24,6 +24,8 @@ public:
 
 	void ticklePrimitive(Primitive* primitive, bool value);
 
+	void onPrimitiveTouched(Primitive* p0, Primitive* p1);
+
 private:
 	undefined m_unk0x00[0x94 - 0x00]; // 0x00
 };

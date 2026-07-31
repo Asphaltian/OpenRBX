@@ -21,6 +21,8 @@ enum NormalId
 };
 
 NormalId normalIdOpposite(NormalId normalId);
+const Vector3& normalIdToVector3(NormalId normalId);
+const Matrix3& normalIdToMatrix3(NormalId normalId);
 Vector3 normalIdToVector3Internal(NormalId normalId);
 NormalId Vector3ToNormalId(const Vector3& normal);
 NormalId Matrix3ToNormalId(const Matrix3& matrix);

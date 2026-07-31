@@ -58,4 +58,10 @@ void World::onPrimitiveCanCollideChanged(Primitive* primitive)
 	STUB(0x100cf2b0);
 }
 
+// STUB: WEBSERVICE 0x100cf510
+void World::onPrimitiveTouched(Primitive* p0, Primitive* p1)
+{
+	STUB(0x100cf510);
+}
+
 } // namespace RBX

@@ -109,6 +109,7 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Debug.cpp
   common/app/v8tree/Instance.cpp
   common/app/util/ExponentialRunningAverage.cpp
+  common/app/util/Face.cpp
   common/app/util/Guid.cpp
   common/app/util/Handle.cpp
   common/app/util/IndexBox.cpp

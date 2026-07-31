@@ -5,14 +5,22 @@
 
 namespace RBX {
 
+class IMovingManager;
+
 // SIZE 0x0c
-class IMoving
+class __declspec(novtable) IMoving
 {
+protected:
+	virtual void onCanAggregateChanged() = 0; // vtable+0x00
+
 public:
+	virtual bool reportTouches() const = 0; // vtable+0x04
+
 	void notifyMoved();
 
 private:
-	undefined m_unk0x00[0x0c - 0x00]; // 0x00
+	IMovingManager* iMovingManager; // 0x04
+	int stepsToSleep;               // 0x08
 };
 
 DECOMP_SIZE_ASSERT(IMoving, 0x0c)

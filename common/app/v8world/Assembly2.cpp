@@ -12,6 +12,13 @@ Assembly* Assembly::getRootAssembly()
 	return parent != NULL ? parent->getRootAssembly() : this;
 }
 
+// STUB: WEBSERVICE 0x10102a60
+Sim::AssemblyState Assembly::getSleepStatus() const
+{
+	STUB(0x10102a60);
+	return Sim::ANCHORED;
+}
+
 // STUB: WEBSERVICE 0x10102b60
 Primitive* Assembly::getAssemblyPrimitive()
 {
