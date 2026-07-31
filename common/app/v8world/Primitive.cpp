@@ -45,6 +45,72 @@ Primitive* Primitive::downstreamPrimitive(Joint* joint)
 	return answer;
 }
 
+void EdgeList::insertEdge(Primitive* primitive, Edge* edge, EdgeList& list)
+{
+	Edge* first = list.first;
+
+	edge->setNext(primitive, first);
+	list.first = edge;
+	list.num++;
+}
+
+// FUNCTION: WEBSERVICE 0x100a7840
+void EdgeList::removeEdge(Primitive* primitive, Edge* edge, EdgeList& list)
+{
+	Edge* previous = list.first;
+
+	if (previous == edge) {
+		list.first = edge->getNext(primitive);
+	}
+	else {
+		while (previous->getNext(primitive) != edge) {
+			previous = previous->getNext(primitive);
+		}
+
+		previous->setNext(primitive, edge->getNext(primitive));
+	}
+
+	list.num--;
+}
+
+// STUB: WEBSERVICE 0x100a78c0
+void Primitive::insertEdge(Edge* edge)
+{
+	Primitive* prim0 = edge->getPrimitive(0);
+	Primitive* prim1 = edge->getPrimitive(1);
+
+	if (edge->getEdgeType() == Edge::JOINT) {
+		EdgeList::insertEdge(prim0, edge, edge->getPrimitive(0)->joints);
+
+		if (prim1 != NULL) {
+			EdgeList::insertEdge(prim1, edge, edge->getPrimitive(1)->joints);
+		}
+	}
+	else {
+		EdgeList::insertEdge(prim0, edge, edge->getPrimitive(0)->contacts);
+		EdgeList::insertEdge(prim1, edge, edge->getPrimitive(1)->contacts);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a7960
+void Primitive::removeEdge(Edge* edge)
+{
+	Primitive* prim0 = edge->getPrimitive(0);
+	Primitive* prim1 = edge->getPrimitive(1);
+
+	if (edge->getEdgeType() == Edge::JOINT) {
+		EdgeList::removeEdge(prim0, edge, edge->getPrimitive(0)->joints);
+
+		if (prim1 != NULL) {
+			EdgeList::removeEdge(prim1, edge, edge->getPrimitive(1)->joints);
+		}
+	}
+	else {
+		EdgeList::removeEdge(prim0, edge, edge->getPrimitive(0)->contacts);
+		EdgeList::removeEdge(prim1, edge, edge->getPrimitive(1)->contacts);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100a79d0
 Edge* Primitive::getFirstEdge() const
 {

@@ -62,6 +62,16 @@ public:
 
 	Edge* getNext(const Primitive* primitive) const { return primitive == prim0 ? next0 : next1; }
 
+	void setNext(Primitive* primitive, Edge* edge)
+	{
+		if (primitive == prim0) {
+			next0 = edge;
+		}
+		else {
+			next1 = edge;
+		}
+	}
+
 	Primitive* getPrimitive(int index) const { return index == 0 ? prim0 : prim1; }
 
 private:
@@ -79,6 +89,9 @@ DECOMP_SIZE_ASSERT(Edge, 0x20)
 class EdgeList
 {
 public:
+	static void insertEdge(Primitive* primitive, Edge* edge, EdgeList& list);
+	static void removeEdge(Primitive* primitive, Edge* edge, EdgeList& list);
+
 	Edge* first; // 0x00
 	int num;     // 0x04
 };
@@ -139,6 +152,9 @@ public:
 	void setGuid(const Guid& value);
 
 	void setSizeMultiplier(unsigned int multiplier);
+
+	static void insertEdge(Edge* edge);
+	static void removeEdge(Edge* edge);
 
 	void setClump(Clump* value);
 
