@@ -40,14 +40,14 @@ NormalId Vector3ToNormalId(const Vector3& normal)
 	if (normal.z == 1.0f) {
 		return NORM_Z;
 	}
-	if (-1.0f == normal.x) {
+	if (normal.x == -1.0f) {
 		return NORM_X_NEG;
 	}
-	if (-1.0f == normal.y) {
+	if (normal.y == -1.0f) {
 		return NORM_Y_NEG;
 	}
 
-	return -1.0f == normal.z ? NORM_Z_NEG : NORM_UNDEFINED;
+	return normal.z == -1.0f ? NORM_Z_NEG : NORM_UNDEFINED;
 }
 
 // FUNCTION: WEBSERVICE 0x10103b80

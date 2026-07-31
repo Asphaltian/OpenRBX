@@ -17,6 +17,8 @@ NullController* NullController::getStaticNullController()
 Color3 Controller::controllerTypeToColor(ControllerType controllerType)
 {
 	switch (controllerType) {
+	case PLAYER_CONTROLLER:
+		return Color3::purple();
 	case PRIMARY_CONTROLLER:
 		return Color3::blue();
 	case SECONDARY_CONTROLLER:
@@ -25,8 +27,6 @@ Color3 Controller::controllerTypeToColor(ControllerType controllerType)
 		return Color3::black();
 	case AI_FLEE_CONTROLLER:
 		return Color3::yellow();
-	case PLAYER_CONTROLLER:
-		return Color3::purple();
 	default:
 		return Color3::gray();
 	}
