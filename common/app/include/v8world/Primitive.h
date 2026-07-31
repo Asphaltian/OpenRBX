@@ -15,6 +15,7 @@
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Ray.h>
 #include <G3D/Vector3.h>
+#include <cstddef>
 
 namespace RBX {
 
@@ -96,6 +97,8 @@ public:
 	static void insertEdge(Primitive* primitive, Edge* edge, EdgeList& list);
 	static void removeEdge(Primitive* primitive, Edge* edge, EdgeList& list);
 
+	EdgeList() : first(NULL), num(0) {}
+
 	Edge* first; // 0x00
 	int num;     // 0x04
 };
@@ -107,6 +110,8 @@ DECOMP_SIZE_ASSERT(EdgeList, 0x08)
 class Primitive : public IPipelined
 {
 public:
+	Primitive(Geometry::GeometryType geometryType);
+
 	static bool disableSleep;
 
 private:

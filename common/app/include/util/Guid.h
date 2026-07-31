@@ -14,6 +14,8 @@ public:
 		int index;         // 0x04
 	};
 
+	Guid();
+
 	void assign(Data data);
 
 	Data data; // 0x00

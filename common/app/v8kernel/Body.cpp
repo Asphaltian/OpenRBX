@@ -34,6 +34,12 @@ void Body::setCoordinateFrame(const CoordinateFrame& value)
 	STUB(0x10104ee0);
 }
 
+// STUB: WEBSERVICE 0x101054a0
+Body::Body()
+{
+	STUB(0x101054a0);
+}
+
 // STUB: WEBSERVICE 0x101055a0
 Body::~Body()
 {

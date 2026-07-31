@@ -6,11 +6,33 @@
 
 namespace RBX {
 
-// STUB: WEBSERVICE 0x10099400
-NullController* NullController::getStaticNullController()
+// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+Controller::ControllerType NullController::getControllerType() const
 {
-	STUB(0x10099400);
-	return NULL;
+	return NO_CONTROLLER;
+}
+
+// FUNCTION: WEBSERVICE 0x10099070 FOLDED
+float Controller::getValue(InputType inputType) const
+{
+	return 0;
+}
+
+// SYNTHETIC: WEBSERVICE 0x10099080
+// RBX::NullController::`scalar deleting destructor'
+
+// SYNTHETIC: WEBSERVICE 0x10222ff0
+// `RBX::NullController::getStaticNullController'::`2'::`dynamic atexit destructor for 'n''
+
+bool NullController::hasIntelligence() const
+{
+	return false;
+}
+
+// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
+bool NullController::isUserController() const
+{
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x101004d0

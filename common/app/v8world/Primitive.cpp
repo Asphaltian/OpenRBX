@@ -521,6 +521,21 @@ CoordinateFrame Primitive::getGridCorner() const
 	return CoordinateFrame(coord.rotation, coord.pointToWorldSpace(-(geometry->getGridSize() * 0.5f)));
 }
 
+// STUB: WEBSERVICE 0x100a8570
+Primitive::Primitive(Geometry::GeometryType geometryType)
+	: guidSetExternally(false), sizeMultiplier(1), worldIndex(-1), world(NULL), clump(NULL), clumpDepth(-1),
+	  traverseId(-1), spatialNodes(NULL), oldSpatialMin(), oldSpatialMax(),
+	  fuzzyExtents(Vector3::inf(), -Vector3::inf()), fuzzyExtentsStateId(-2), geometry(newGeometry(geometryType)),
+	  body(new Body()), myOwner(NULL), anchorObject(NULL), dragging(false), anchored(false), canCollide(true),
+	  canSleep(true), friction(0), elasticity(0.75f), controller(NullController::getStaticNullController()),
+	  JointK(this, &Primitive::computeJointK)
+{
+	for (int i = 0; i < 6; i++) {
+		surfaceType[i] = NO_SURFACE;
+		surfaceData[i] = NULL;
+	}
+}
+
 // STUB: WEBSERVICE 0x100a8760
 Vector3 Primitive::clipToSafeSize(const Vector3& size)
 {

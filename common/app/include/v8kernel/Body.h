@@ -17,6 +17,7 @@ using G3D::Matrix3;
 class Body
 {
 public:
+	Body();
 	~Body();
 
 	void updatePV() const;

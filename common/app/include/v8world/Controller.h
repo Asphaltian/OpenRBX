@@ -1,13 +1,17 @@
 #ifndef V8WORLD_CONTROLLER_H
 #define V8WORLD_CONTROLLER_H
 
+#include "decomp.h"
+
 #include <G3D/Color3.h>
+#include <G3D/ReferenceCount.h>
 
 namespace RBX {
 
 using G3D::Color3;
 
-class Controller
+// SIZE 0x0c
+class __declspec(novtable) Controller : public G3D::ReferenceCountedObject
 {
 public:
 	enum ControllerType
@@ -42,14 +46,42 @@ public:
 		NUM_INPUT_TYPES = 14,
 	};
 
+	// FUNCTION: WEBSERVICE 0x10030b80 FOLDED
+	virtual ~Controller() {} // vtable+0x00
+
+	virtual float getValue(InputType inputType) const;    // vtable+0x04
+	virtual ControllerType getControllerType() const = 0; // vtable+0x08
+	virtual bool hasIntelligence() const = 0;             // vtable+0x0c
+	virtual bool isUserController() const = 0;            // vtable+0x10
+
+	bool isNullController() const;
+
+	static bool isControllableInput(InputType inputType);
 	static Color3 controllerTypeToColor(ControllerType controllerType);
 };
 
+DECOMP_SIZE_ASSERT(Controller, 0x0c)
+
+// VTABLE: WEBSERVICE 0x10236688
+// SIZE 0x0c
 class NullController : public Controller
 {
 public:
+	virtual ControllerType getControllerType() const; // vtable+0x08
+	virtual bool hasIntelligence() const;             // vtable+0x0c
+	virtual bool isUserController() const;            // vtable+0x10
+
 	static NullController* getStaticNullController();
 };
+
+DECOMP_SIZE_ASSERT(NullController, 0x0c)
+
+// FUNCTION: WEBSERVICE 0x10099400
+inline NullController* NullController::getStaticNullController()
+{
+	static NullController n;
+	return &n;
+}
 
 } // namespace RBX
 
