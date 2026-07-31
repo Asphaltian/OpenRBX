@@ -242,6 +242,7 @@ unsigned HuffmanEncodingTree::DecodeArray( RakNet::BitStream * input, unsigned s
 }
 
 // Pass an array of encoded bytes to array and a preallocated BitStream to receive the output
+// FUNCTION: WEBSERVICE 0x101c15f0
 void HuffmanEncodingTree::DecodeArray( unsigned char *input, unsigned sizeInBits, RakNet::BitStream * output )
 {
 	HuffmanEncodingTreeNode * currentNode;

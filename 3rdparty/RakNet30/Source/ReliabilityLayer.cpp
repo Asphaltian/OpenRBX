@@ -133,6 +133,7 @@ ReliabilityLayer::ReliabilityLayer() : updateBitStream( DEFAULT_MTU_SIZE + 21 ) 
 //-------------------------------------------------------------------------------------------------------
 // Destructor
 //-------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101c1030
 ReliabilityLayer::~ReliabilityLayer()
 {
 	FreeMemory( true ); // Free all memory immediately
@@ -2080,6 +2081,7 @@ void ReliabilityLayer::SplitPacket( InternalPacket *internalPacket, int MTUSize 
 //-------------------------------------------------------------------------------------------------------
 // Insert a packet into the split packet list
 //-------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101bf4c0
 void ReliabilityLayer::InsertIntoSplitPacketList( InternalPacket * internalPacket, RakNetTimeNS time )
 {
 	bool objectExists;
@@ -2131,6 +2133,7 @@ void ReliabilityLayer::InsertIntoSplitPacketList( InternalPacket * internalPacke
 //reconstruct a packet.  If we can, allocate and return it.  Otherwise return 0
 // Optimized version
 //-------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101bf6a0
 InternalPacket * ReliabilityLayer::BuildPacketFromSplitPacketList( SplitPacketIdType splitPacketId, RakNetTimeNS time )
 {
 	unsigned i, j;
@@ -2175,6 +2178,7 @@ InternalPacket * ReliabilityLayer::BuildPacketFromSplitPacketList( SplitPacketId
 }
 
 // Delete any unreliable split packets that have long since expired
+// FUNCTION: WEBSERVICE 0x101bf870
 void ReliabilityLayer::DeleteOldUnreliableSplitPackets( RakNetTimeNS time )
 {
 	unsigned i,j;
@@ -2244,6 +2248,7 @@ DataStructures::LinkedList<InternalPacket*> *ReliabilityLayer::GetOrderingListAt
 //-------------------------------------------------------------------------------------------------------
 // Add the internal packet to the ordering list in order based on order index
 //-------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101be740
 void ReliabilityLayer::AddToOrderingList( InternalPacket * internalPacket )
 {
 #ifdef _DEBUG

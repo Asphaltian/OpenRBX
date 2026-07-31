@@ -403,6 +403,7 @@ int SocketLayer::RecvFrom( const SOCKET s, RakPeer *rakPeer, int *errorCode, uns
 #ifdef _MSC_VER
 #pragma warning( disable : 4702 ) // warning C4702: unreachable code
 #endif
+// FUNCTION: WEBSERVICE 0x101bbb50
 int SocketLayer::SendTo( SOCKET s, const char *data, int length, unsigned int binaryAddress, unsigned short port )
 {
 	if ( s == INVALID_SOCKET )
@@ -473,6 +474,7 @@ int SocketLayer::SendToTTL1( SOCKET s, const char *data, int length, char ip[ 16
 	return res;
 }
 
+// FUNCTION: WEBSERVICE 0x101bbc00
 int SocketLayer::SendTo( SOCKET s, const char *data, int length, char ip[ 16 ], unsigned short port )
 {
 	unsigned int binaryAddress;

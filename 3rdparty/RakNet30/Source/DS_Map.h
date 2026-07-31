@@ -103,6 +103,7 @@ namespace DataStructures
 		lastSearchIndexValid=false;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bb600
 	template <class key_type, class data_type, int (*key_comparison_func)(const key_type&,const key_type&)>
 	Map<key_type, data_type, key_comparison_func>::~Map()
 	{
@@ -128,6 +129,7 @@ namespace DataStructures
 		return *this;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bb2e0
 	template <class key_type, class data_type, int (*key_comparison_func)(const key_type&,const key_type&)>
 	data_type& Map<key_type, data_type, key_comparison_func>::Get(const key_type &key)
 	{
@@ -181,6 +183,7 @@ namespace DataStructures
 		return tmp;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bb680
 	template <class key_type, class data_type, int (*key_comparison_func)(const key_type&,const key_type&)>
 	void Map<key_type, data_type, key_comparison_func>::Set(const key_type &key, const data_type &data)
 	{

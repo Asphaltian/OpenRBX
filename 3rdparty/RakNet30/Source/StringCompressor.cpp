@@ -351,6 +351,7 @@ void StringCompressor::GenerateTreeFromStrings( unsigned char *input, unsigned i
 	huffmanEncodingTrees.Set(languageID, huffmanEncodingTree);
 }
 
+// FUNCTION: WEBSERVICE 0x101bb7d0
 StringCompressor::~StringCompressor()
 {
 	for (unsigned i=0; i < huffmanEncodingTrees.Size(); i++)

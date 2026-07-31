@@ -72,6 +72,7 @@ namespace DataStructures
 
 	// FUNCTION: WEBSERVICE 0x101c2070
 	// DataStructures::OrderedList<char *,StrAndBool,&StrAndBoolComp>::~OrderedList<char *,StrAndBool,&StrAndBoolComp>
+	// FUNCTION: WEBSERVICE 0x101bedb0
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	OrderedList<key_type, data_type, comparison_function>::~OrderedList()
 	{
@@ -171,6 +172,10 @@ namespace DataStructures
 		}
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bb330
+	// DataStructures::OrderedList<int,DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode,&DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::NodeComparisonFunc>::Insert
+	// FUNCTION: WEBSERVICE 0x101be020
+	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::Insert
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	unsigned OrderedList<key_type, data_type, comparison_function>::Insert(const key_type &key, const data_type &data, bool assertOnDuplicate, int (*cf)(const key_type&, const data_type&))
 	{
@@ -196,6 +201,7 @@ namespace DataStructures
 		}		
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b4710
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	unsigned OrderedList<key_type, data_type, comparison_function>::Remove(const key_type &key, int (*cf)(const key_type&, const data_type&))
 	{

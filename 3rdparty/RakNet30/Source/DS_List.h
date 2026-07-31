@@ -118,6 +118,7 @@ namespace DataStructures
 
 	// FUNCTION: WEBSERVICE 0x101b0400
 	// DataStructures::List<StrAndBool>::~List<StrAndBool>
+	// FUNCTION: WEBSERVICE 0x101bd030
 	template <class list_type>
 		List<list_type>::~List()
 	{

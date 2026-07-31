@@ -21,6 +21,7 @@
 RPCMap::RPCMap()
 {
 }
+// FUNCTION: WEBSERVICE 0x101c14e0
 RPCMap::~RPCMap()
 {
 	Clear();

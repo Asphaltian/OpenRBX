@@ -358,6 +358,7 @@ namespace DataStructures
 		this->Clear();
 	}
 
+	// FUNCTION: WEBSERVICE 0x101c1b30
 	template <class LinkedListType>
 		LinkedList<LinkedListType>::~LinkedList()
 	{

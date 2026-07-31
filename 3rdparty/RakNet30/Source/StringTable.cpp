@@ -18,6 +18,7 @@ StringTable::StringTable()
 	
 }
 
+// FUNCTION: WEBSERVICE 0x101c2100
 StringTable::~StringTable()
 {
 	unsigned i;

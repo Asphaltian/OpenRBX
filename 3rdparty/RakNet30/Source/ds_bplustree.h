@@ -113,6 +113,7 @@ namespace DataStructures
 		root=0;
 		leftmostLeaf=0;
 	}
+	// FUNCTION: WEBSERVICE 0x101bfa30
 	template<class KeyType, class DataType, int order>
 		BPlusTree<KeyType, DataType, order>::~BPlusTree ()
 	{
@@ -159,6 +160,7 @@ namespace DataStructures
 		DataType temp;
 		return Delete(key, temp);
 	}
+	// FUNCTION: WEBSERVICE 0x101bebf0
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::Delete(const KeyType key, DataType &out)
 	{
@@ -198,6 +200,7 @@ namespace DataStructures
 	
 		return true;
 	}
+	// FUNCTION: WEBSERVICE 0x101be430
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::FindDeleteRebalance(const KeyType key, Page<KeyType, DataType, order> *cur, bool *underflow, KeyType rightRootKey, ReturnAction *returnAction, DataType &out)
 	{
@@ -273,6 +276,7 @@ namespace DataStructures
 
 		return true;
 	}
+	// FUNCTION: WEBSERVICE 0x101bd700
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::FixUnderflow(int branchIndex, Page<KeyType, DataType, order> *cur, KeyType rightRootKey, ReturnAction *returnAction)
 	{
@@ -491,6 +495,7 @@ namespace DataStructures
 		}
 		cur->size--;
 	}
+	// FUNCTION: WEBSERVICE 0x101bd310
 	template<class KeyType, class DataType, int order>
 	Page<KeyType, DataType, order>* BPlusTree<KeyType, DataType, order>::InsertIntoNode(const KeyType key, const DataType &leafData, int insertionIndex, Page<KeyType, DataType, order> *nodeData, Page<KeyType, DataType, order> *cur, ReturnAction* returnAction)
 	{
@@ -699,6 +704,7 @@ namespace DataStructures
 		return cur;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101be1b0
 	template<class KeyType, class DataType, int order>
 	Page<KeyType, DataType, order>* BPlusTree<KeyType, DataType, order>::InsertBranchDown(const KeyType key, const DataType &data,Page<KeyType, DataType, order> *cur, ReturnAction *returnAction, bool *success)
 	{
@@ -807,6 +813,7 @@ namespace DataStructures
 		
 		return 0;
 	}
+	// FUNCTION: WEBSERVICE 0x101becc0
 	template<class KeyType, class DataType, int order>
 		bool BPlusTree<KeyType, DataType, order>::Insert(const KeyType key, const DataType &data)
 	{
@@ -929,6 +936,7 @@ namespace DataStructures
 			}
 		}
 	}
+	// FUNCTION: WEBSERVICE 0x101be080
 	template<class KeyType, class DataType, int order>
 		void BPlusTree<KeyType, DataType, order>::FreePages(void)
 	{

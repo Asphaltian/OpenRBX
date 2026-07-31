@@ -45,6 +45,7 @@ namespace DataStructures
 		DataStructures::OrderedList<range_type, RangeNode<range_type> , RangeNodeComp<range_type> > ranges;
 	};
 
+	// FUNCTION: WEBSERVICE 0x101bde50
 	template <class range_type>
 	unsigned RangeList<range_type>::Serialize(RakNet::BitStream *in, int maxBits, bool clearSerialized)
 	{
@@ -89,6 +90,7 @@ namespace DataStructures
 
 		return bitsWritten;
 	}
+	// FUNCTION: WEBSERVICE 0x101beaf0
 	template <class range_type>
 	bool RangeList<range_type>::Deserialize(RakNet::BitStream *out)
 	{
@@ -125,12 +127,14 @@ namespace DataStructures
 		RangeNodeComp<range_type>(0, RangeNode<range_type>());
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bf990
 	template <class range_type>
 	RangeList<range_type>::~RangeList()
 	{
 		Clear();
 	}
 
+	// FUNCTION: WEBSERVICE 0x101be990
 	template <class range_type>
 	void RangeList<range_type>::Insert(range_type index)
 	{

@@ -414,6 +414,7 @@ void BitStream::SetData( unsigned char *input )
 }
 
 // Assume the input source points to a native type, compress and write it
+// FUNCTION: WEBSERVICE 0x101ab170
 void BitStream::WriteCompressed( const unsigned char* input,
 	const int size, const bool unsignedData )
 {

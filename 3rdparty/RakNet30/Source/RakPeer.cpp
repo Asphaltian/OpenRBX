@@ -203,6 +203,7 @@ RakPeer::RakPeer() : processPacketsThreadHandle(0)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Destructor
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101b90b0
 RakPeer::~RakPeer()
 {
 //	unsigned i;
@@ -1550,6 +1551,7 @@ void RakPeer::CloseConnection( const SystemAddress target, bool sendDisconnectio
 // Returns
 // An integer from 0 to the maximum number of peers -1, or -1 if that player is not found
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101b5b60
 int RakPeer::GetIndexFromSystemAddress( const SystemAddress systemAddress )
 {
 	return GetIndexFromSystemAddress(systemAddress, false);
@@ -1815,6 +1817,7 @@ void RakPeer::Ping( const SystemAddress target )
 // onlyReplyOnAcceptingConnections: Only request a reply if the remote system has open connections
 // connectionSocketIndex Index into the array of socket descriptors passed to socketDescriptors in RakPeer::Startup() to send on.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101b1540
 void RakPeer::Ping( const char* host, unsigned short remotePort, bool onlyReplyOnAcceptingConnections, unsigned connectionSocketIndex )
 {
 	if ( host == 0 )
@@ -2657,6 +2660,7 @@ void RakPeer::RemoveFromRequestedConnectionsList( const SystemAddress systemAddr
 */
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101b3ce0
 int RakPeer::GetIndexFromSystemAddress( const SystemAddress systemAddress, bool calledFromNetworkThread )
 {
 	unsigned i;
@@ -3883,6 +3887,7 @@ void ProcessPortUnreachable( unsigned int binaryAddress, unsigned short port, Ra
 	
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// FUNCTION: WEBSERVICE 0x101b6a80
 #ifdef _WIN32
 void __stdcall ProcessNetworkPacket( const unsigned int binaryAddress, const unsigned short port, const char *data, const int length, RakPeer *rakPeer, unsigned connectionSocketIndex )
 #else

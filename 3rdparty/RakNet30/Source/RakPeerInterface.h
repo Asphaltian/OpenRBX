@@ -36,10 +36,16 @@ class NetworkIDManager;
 /// The primary interface for RakNet, RakPeer contains all major functions for the library.
 /// See the individual functions for what the class can do.
 /// \brief The main interface for network communications
+// VTABLE: WEBSERVICE 0x10251cc4
+// class RakPeerInterface
 class RAK_DLL_EXPORT RakPeerInterface
 {
 public:
+	// SYNTHETIC: WEBSERVICE 0x101af880
+	// RakPeerInterface::`scalar deleting destructor'
+
 	///Destructor
+	// FUNCTION: WEBSERVICE 0x101af870
 	virtual ~RakPeerInterface()	{}
 
 	// --------------------------------------------------------------------------------------------Major Low Level Functions - Functions needed by most users--------------------------------------------------------------------------------------------
