@@ -79,8 +79,8 @@ inline bool Geometry::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
 // FUNCTION: WEBSERVICE 0x100a7de0
 inline Geometry* Geometry::nullGeometry()
 {
-	static Geometry nullGeometry;
-	return &nullGeometry;
+	static Geometry g;
+	return &g;
 }
 
 // FUNCTION: WEBSERVICE 0x100a7e30
