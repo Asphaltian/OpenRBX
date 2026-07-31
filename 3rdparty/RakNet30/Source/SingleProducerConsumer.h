@@ -95,6 +95,12 @@ namespace DataStructures
 		unsigned readCount, writeCount;
 	};
 
+	// FUNCTION: WEBSERVICE 0x101b0410
+	// DataStructures::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>
+	// FUNCTION: WEBSERVICE 0x101b05f0
+	// DataStructures::SingleProducerConsumer<RakPeer::BufferedCommandStruct>::SingleProducerConsumer<RakPeer::BufferedCommandStruct>
+	// FUNCTION: WEBSERVICE 0x101b0770
+	// DataStructures::SingleProducerConsumer<Packet *>::SingleProducerConsumer<Packet *>
 	template <class SingleProducerConsumerType>
 		SingleProducerConsumer<SingleProducerConsumerType>::SingleProducerConsumer()
 	{
@@ -120,6 +126,12 @@ namespace DataStructures
 		readCount=writeCount=0;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b04b0
+	// DataStructures::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>::~SingleProducerConsumer<RakPeer::RequestedConnectionStruct>
+	// FUNCTION: WEBSERVICE 0x101b0670
+	// DataStructures::SingleProducerConsumer<RakPeer::BufferedCommandStruct>::~SingleProducerConsumer<RakPeer::BufferedCommandStruct>
+	// FUNCTION: WEBSERVICE 0x101b07f0
+	// DataStructures::SingleProducerConsumer<Packet *>::~SingleProducerConsumer<Packet *>
 	template <class SingleProducerConsumerType>
 		SingleProducerConsumer<SingleProducerConsumerType>::~SingleProducerConsumer()
 	{
@@ -134,6 +146,10 @@ namespace DataStructures
 		delete (char*) readPointer;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b0500
+	// DataStructures::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>::WriteLock
+	// FUNCTION: WEBSERVICE 0x101b06b0
+	// DataStructures::SingleProducerConsumer<RakPeer::BufferedCommandStruct>::WriteLock
 	template <class SingleProducerConsumerType>
 		SingleProducerConsumerType* SingleProducerConsumer<SingleProducerConsumerType>::WriteLock( void )
 	{
@@ -214,6 +230,12 @@ namespace DataStructures
 		readPointer=readPointer->next;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b0570
+	// DataStructures::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>::Clear
+	// FUNCTION: WEBSERVICE 0x101b0700
+	// DataStructures::SingleProducerConsumer<RakPeer::BufferedCommandStruct>::Clear
+	// FUNCTION: WEBSERVICE 0x101b0830
+	// DataStructures::SingleProducerConsumer<Packet *>::Clear
 	template <class SingleProducerConsumerType>
 		void SingleProducerConsumer<SingleProducerConsumerType>::Clear( void )
 	{

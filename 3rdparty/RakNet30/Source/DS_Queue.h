@@ -89,6 +89,8 @@ namespace DataStructures
 		tail = 0;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101c16f0
+	// DataStructures::Queue<InternalPacket *>::~Queue<InternalPacket *>
 	template <class queue_type>
 		Queue<queue_type>::~Queue()
 	{
@@ -113,6 +115,8 @@ namespace DataStructures
 		return ( queue_type ) array[ head -1 ];
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc1a0
+	// DataStructures::Queue<InternalPacket *>::PushAtHead
 	template <class queue_type>
 		void Queue<queue_type>::PushAtHead( const queue_type& input, unsigned index )
 	{
@@ -179,6 +183,10 @@ namespace DataStructures
 		return ( queue_type ) array[ head ];
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b08a0
+	// DataStructures::Queue<InternalPacket *>::Push
+	// FUNCTION: WEBSERVICE 0x101bc290
+	// DataStructures::Queue<__int64>::Push
 	template <class queue_type>
 		void Queue<queue_type>::Push( const queue_type& input )
 	{

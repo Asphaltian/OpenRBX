@@ -33,8 +33,8 @@
 class RAK_DLL_EXPORT CSHA1
 {
 
-	// SYNTHETIC: WEBSERVICE 0x101c3860
-	// CSHA1::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x101c3860
+// CSHA1::`scalar deleting destructor'
 
 public:
 	// Rotate x bits to the left

@@ -53,8 +53,8 @@ enum PluginReceiveResult
 class RAK_DLL_EXPORT PluginInterface
 {
 
-	// SYNTHETIC: WEBSERVICE 0x101aaab0
-	// PluginInterface::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x101aaab0
+// PluginInterface::`scalar deleting destructor'
 public:
 	PluginInterface();
 	virtual ~PluginInterface();

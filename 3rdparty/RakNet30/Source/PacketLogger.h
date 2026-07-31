@@ -34,8 +34,8 @@ class RakPeerInterface;
 class RAK_DLL_EXPORT PacketLogger : public PluginInterface
 {
 
-	// SYNTHETIC: WEBSERVICE 0x101ae990
-	// PacketLogger::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x101ae990
+// PacketLogger::`scalar deleting destructor'
 public:
 	PacketLogger();
 	virtual ~PacketLogger();

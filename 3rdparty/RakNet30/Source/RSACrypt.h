@@ -49,6 +49,10 @@ namespace big
 	using namespace cat;
 
 	// r = x^y Mod n (fast for small y)
+	// FUNCTION: WEBSERVICE 0x101b4820
+	// big::simpleModExp<unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b51c0
+	// big::simpleModExp<unsigned int [4]>
 	BIGONETYPE void simpleModExp( T &x0, T &y0, T &n0, T &r0 )
 	{
 		BIGDOUBLESIZE( T, x );
@@ -101,6 +105,10 @@ namespace big
 	}
 
 	// computes Rn = 2^k (mod n), n < 2^k
+	// FUNCTION: WEBSERVICE 0x101b4750
+	// big::rModn<unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b4e20
+	// big::rModn<unsigned int [4]>
 	BIGONETYPE void rModn( T &n, T &Rn )
 	{
 		BIGDOUBLESIZE( T, dR );
@@ -161,6 +169,10 @@ namespace big
 	}
 
 	// directly computes x = c - a * b (mod n) > 0, c < n
+	// FUNCTION: WEBSERVICE 0x101b2f50
+	// big::SubMulMod<unsigned int [4]>
+	// FUNCTION: WEBSERVICE 0x101b3670
+	// big::SubMulMod<unsigned int [8]>
 	BIGONETYPE void SubMulMod( T &a, T &b, T &c, T &n, T &x )
 	{
 		BIGDOUBLESIZE( T, da );
@@ -205,6 +217,10 @@ namespace big
 
 	Trying to keep everything positive
 	*/
+	// FUNCTION: WEBSERVICE 0x101b4ec0
+	// big::computeRinverse<unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b5600
+	// big::computeRinverse<unsigned int [4]>
 	BIGONETYPE void computeRinverse( T &n0, T &rp )
 	{
 		T x0, x1, x2, a, b, q;
@@ -528,6 +544,10 @@ namespace big
 	}
 	*/
 	// directly compute a^-1 s.t. a^-1 a (mod b) = 1, a < b, GCD(a, b)
+	// FUNCTION: WEBSERVICE 0x101b4b70
+	// big::computeModularInverse<unsigned int [4]>
+	// FUNCTION: WEBSERVICE 0x101b5370
+	// big::computeModularInverse<unsigned int [8]>
 	BIGONETYPE void computeModularInverse( T &a0, T &b0, T &ap )
 	{
 		T x0, x1, x2;
@@ -649,6 +669,8 @@ namespace big
 	}
 
 	// indirectly computes  n' s.t. 1 = r' r - n' n = GCD(r, n)
+	// FUNCTION: WEBSERVICE 0x101b78f0
+	// big::computeNRinverse<unsigned int [4]>
 	BIGONETYPE void computeNRinverse( T &n0, T &np )
 	{
 		BIGDOUBLESIZE( T, r );

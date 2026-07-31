@@ -57,6 +57,8 @@ namespace DataStructures
 		memoryPoolPageSize = 16384;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bcea0
+	// DataStructures::MemoryPool<InternalPacket>::~MemoryPool<InternalPacket>
 	template <class MemoryBlockType>
 	MemoryPool<MemoryBlockType>::~MemoryPool()
 	{

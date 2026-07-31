@@ -116,6 +116,8 @@ namespace DataStructures
 		list_size = 0;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b0400
+	// DataStructures::List<StrAndBool>::~List<StrAndBool>
 	template <class list_type>
 		List<list_type>::~List()
 	{
@@ -189,6 +191,12 @@ namespace DataStructures
 		return listArray[ position ];
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b1ea0
+	// DataStructures::List<SystemAddressAndIndex>::Insert
+	// FUNCTION: WEBSERVICE 0x101bb220
+	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::Insert
+	// FUNCTION: WEBSERVICE 0x101bc710
+	// DataStructures::List<InternalPacket *>::Insert
 	template <class list_type>
 		void List<list_type>::Insert( const list_type input, const unsigned int position )
 	{
@@ -230,6 +238,12 @@ namespace DataStructures
 	}
 
 
+	// FUNCTION: WEBSERVICE 0x101b1df0
+	// DataStructures::List<SystemAddressAndIndex>::Insert
+	// FUNCTION: WEBSERVICE 0x101bb180
+	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::Insert
+	// FUNCTION: WEBSERVICE 0x101bc440
+	// DataStructures::List<ReliabilityLayer::DataAndTime *>::Insert
 	template <class list_type>
 		void List<list_type>::Insert( const list_type input )
 	{
@@ -266,6 +280,8 @@ namespace DataStructures
 		++list_size;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101c1190
+	// DataStructures::List<DataStructures::LinkedList<InternalPacket *> *>::Replace
 	template <class list_type>
 		inline void List<list_type>::Replace( const list_type input, const list_type filler, const unsigned int position )
 	{
@@ -317,6 +333,12 @@ namespace DataStructures
 			listArray[ list_size - 1 ] = input;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101b1d30
+	// DataStructures::List<InternalPacket *>::RemoveAtIndex
+	// FUNCTION: WEBSERVICE 0x101b1f80
+	// DataStructures::List<SystemAddressAndIndex>::RemoveAtIndex
+	// FUNCTION: WEBSERVICE 0x101bd2d0
+	// DataStructures::List<DataStructures::RangeNode<unsigned int> >::RemoveAtIndex
 	template <class list_type>
 		void List<list_type>::RemoveAtIndex( const unsigned int position )
 	{

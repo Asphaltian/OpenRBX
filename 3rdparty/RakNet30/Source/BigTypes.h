@@ -349,6 +349,12 @@ namespace big
 	//////// comparison ////////
 	
 	// a > b
+	// FUNCTION: WEBSERVICE 0x101b0970
+	// big::ugreater<unsigned int [4]>
+	// FUNCTION: WEBSERVICE 0x101b0c00
+	// big::ugreater<unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b0ca0
+	// big::ugreater<unsigned int [16]>
 	BIGONETYPE bool ugreater( T &a, T &b )
 	{
 		for ( s32 ii = BIGWORDCOUNT( T ) - 1; ii >= 0; --ii )
@@ -473,6 +479,12 @@ namespace big
 	}
 	
 	// n <<= s (s <= WORDBITS)
+	// FUNCTION: WEBSERVICE 0x101b0b20
+	// big::shiftLeft<unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b0ce0
+	// big::shiftLeft<unsigned int [16]>
+	// FUNCTION: WEBSERVICE 0x101b0f30
+	// big::shiftLeft<unsigned int [4]>
 	BIGONETYPE void shiftLeft( T &n, u32 s )
 	{
 		register s32 ii;
@@ -507,6 +519,10 @@ namespace big
 	}
 	
 	// n >>= 1 (unsigned)
+	// FUNCTION: WEBSERVICE 0x101b0d70
+	// big::ushiftRight1<unsigned int [16]>
+	// FUNCTION: WEBSERVICE 0x101b0da0
+	// big::ushiftRight1<unsigned int [8]>
 	BIGONETYPE void ushiftRight1( T &n )
 	{
 		register word w_i, carry = 0;
@@ -654,6 +670,10 @@ namespace big
 #endif
 	
 	// a += b
+	// FUNCTION: WEBSERVICE 0x101b0a60
+	// big::add<unsigned int [4]>
+	// FUNCTION: WEBSERVICE 0x101b0ac0
+	// big::add<unsigned int [8]>
 	BIGONETYPE void add ( T &a, T &b )
 	{
 #if defined(NO_TEMPLATE_INLINE_ASSEMBLY) && defined(ASSEMBLY_INTEL_SYNTAX)
@@ -776,6 +796,10 @@ namespace big
 #endif
 	
 	// a -= b
+	// FUNCTION: WEBSERVICE 0x101b0a00
+	// big::subtract<unsigned int [4]>
+	// FUNCTION: WEBSERVICE 0x101b0c40
+	// big::subtract<unsigned int [8]>
 	BIGONETYPE void subtract( T &a, T &b )
 	{
 #if defined(NO_TEMPLATE_INLINE_ASSEMBLY) && defined(ASSEMBLY_INTEL_SYNTAX)
@@ -868,6 +892,10 @@ namespace big
 	//////// multiplication ////////
 	
 	// a *= a, unsigned
+	// FUNCTION: WEBSERVICE 0x101b0e20
+	// big::usquare<unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b29b0
+	// big::usquare<unsigned int [16]>
 	BIGONETYPE void usquare( T &a )
 	{
 		T a0, a1;
@@ -913,6 +941,12 @@ namespace big
 	}
 	
 	// m = a * b (&a != &b != &m), unsigned
+	// FUNCTION: WEBSERVICE 0x101b1fe0
+	// big::umultiply<unsigned int [4],unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b2ad0
+	// big::umultiply<unsigned int [16],unsigned int [16]>
+	// FUNCTION: WEBSERVICE 0x101b37b0
+	// big::umultiply<unsigned int [8],unsigned int [8]>
 	BIGTWOTYPES void umultiply( T &a0, T &b0, Bigger &m )
 	{
 		Bigger a;
@@ -953,6 +987,12 @@ namespace big
 	}
 	
 	// a *= b (&a != &b), unsigned
+	// FUNCTION: WEBSERVICE 0x101b0fd0
+	// big::umultiply<unsigned int [4],unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b10d0
+	// big::umultiply<unsigned int [8],unsigned int [16]>
+	// FUNCTION: WEBSERVICE 0x101b28b0
+	// big::umultiply<unsigned int [8],unsigned int [8]>
 	BIGTWOTYPES void umultiply( Bigger &a0, T &b0 )
 	{
 		Bigger a;
@@ -1165,6 +1205,12 @@ namespace big
 	//////// division/remainder ////////
 	
 	// {q, r} = a / b (&q != &r), unsigned
+	// FUNCTION: WEBSERVICE 0x101b2100
+	// big::udivide<unsigned int [16]>
+	// FUNCTION: WEBSERVICE 0x101b2c90
+	// big::udivide<unsigned int [4]>
+	// FUNCTION: WEBSERVICE 0x101b3070
+	// big::udivide<unsigned int [8]>
 	BIGONETYPE void udivide( T &a, T &b0, T &q, T &r )
 	{
 		T b;
@@ -1247,6 +1293,12 @@ namespace big
 	}
 	
 	// r = a Mod b, unsigned
+	// FUNCTION: WEBSERVICE 0x101b2360
+	// big::umodulo<unsigned int [16]>
+	// FUNCTION: WEBSERVICE 0x101b2580
+	// big::umodulo<unsigned int [8]>
+	// FUNCTION: WEBSERVICE 0x101b3410
+	// big::umodulo<unsigned int [4]>
 	BIGONETYPE void umodulo( T &a, T &b0, T &r )
 	{
 		T b;

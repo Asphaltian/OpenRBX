@@ -350,6 +350,8 @@ namespace DataStructures
 		this->list_size = 0;
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bce90
+	// DataStructures::CircularLinkedList<InternalPacket *>::~CircularLinkedList<InternalPacket *>
 	template <class CircularLinkedListType>
 		CircularLinkedList<CircularLinkedListType>::~CircularLinkedList()
 	{
@@ -697,6 +699,8 @@ namespace DataStructures
 			}
 	}
 
+	// FUNCTION: WEBSERVICE 0x101c17d0
+	// DataStructures::CircularLinkedList<InternalPacket *>::Add
 	template <class CircularLinkedListType>
 		CircularLinkedListType& CircularLinkedList<CircularLinkedListType>::Add ( const CircularLinkedListType& input )
 	{
@@ -956,6 +960,8 @@ namespace DataStructures
 		return this->operator--();
 	}
 
+	// FUNCTION: WEBSERVICE 0x101bc880
+	// DataStructures::CircularLinkedList<InternalPacket *>::Clear
 	template <class CircularLinkedListType>
 		void CircularLinkedList<CircularLinkedListType>::Clear( void )
 	{

@@ -70,6 +70,8 @@ namespace DataStructures
 	{
 	}
 
+	// FUNCTION: WEBSERVICE 0x101c2070
+	// DataStructures::OrderedList<char *,StrAndBool,&StrAndBoolComp>::~OrderedList<char *,StrAndBool,&StrAndBoolComp>
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	OrderedList<key_type, data_type, comparison_function>::~OrderedList()
 	{
@@ -117,6 +119,12 @@ namespace DataStructures
 			element = orderedList[index];
 		return objectExists;
 	}
+	// FUNCTION: WEBSERVICE 0x101b1c90
+	// DataStructures::OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>::GetIndexFromKey
+	// FUNCTION: WEBSERVICE 0x101bb0f0
+	// DataStructures::OrderedList<char *,StrAndBool,&StrAndBoolComp>::GetIndexFromKey
+	// FUNCTION: WEBSERVICE 0x101bc4c0
+	// DataStructures::OrderedList<unsigned int,InternalPacket *,&SplitPacketIndexComp>::GetIndexFromKey
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	unsigned OrderedList<key_type, data_type, comparison_function>::GetIndexFromKey(const key_type &key, bool *objectExists, int (*cf)(const key_type&, const data_type&)) const
 	{
