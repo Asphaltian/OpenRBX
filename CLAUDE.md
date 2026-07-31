@@ -162,6 +162,8 @@ Calls into vendored libraries used to read low, because reccmp only parses the r
 
 ## Gotchas
 
+Never sweep timestamps across the working tree. `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. That is what the CI workflow's backdate step does, which is fine on a throwaway runner and destructive in a clone.
+
 `RakPeer` has no `// VTABLE:` annotation because our `RakPeerInterface` declares one virtual too many or too few: from around slot 0x5c the two vtables run one entry apart, so `RPC`, `Ping` and `GetIndexFromSystemAddress` cannot be told apart by slot order. Reconciling that virtual list is what unblocks annotating those overloads.
 
 The original link used `/OPT:ICF` and folded heavily. Many distinct source functions compiled to the same three-byte body and share one address, which is also why Ghidra's PDB source line importer throws several hundred `IllegalArgumentException` warnings when the symbols load. Those warnings are expected and harmless. Run `tools/check_folded.py` before concluding that a function at a shared address is genuinely unmatched.
