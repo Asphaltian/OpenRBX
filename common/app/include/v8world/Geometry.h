@@ -100,6 +100,9 @@ inline void Geometry::onSetSize()
 {
 }
 
+// SYNTHETIC: WEBSERVICE 0x102235a0
+// `RBX::Geometry::nullGeometry'::`2'::`dynamic atexit destructor for 'g''
+
 } // namespace RBX
 
 #endif // V8WORLD_GEOMETRY_H

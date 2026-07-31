@@ -223,6 +223,30 @@ void Primitive::setVelocity(const Velocity& velocity)
 	body->setVelocity(velocity);
 }
 
+// FUNCTION: WEBSERVICE 0x100a7ce0
+void Primitive::setSurfaceData(NormalId normalId, const SurfaceData& value)
+{
+	if (surfaceData[normalId] == NULL && value.isEmpty()) {
+		return;
+	}
+
+	if (surfaceData[normalId] != NULL && *surfaceData[normalId] == value) {
+		return;
+	}
+
+	if (value.isEmpty()) {
+		delete surfaceData[normalId];
+		surfaceData[normalId] = NULL;
+	}
+	else {
+		if (surfaceData[normalId] == NULL) {
+			surfaceData[normalId] = new SurfaceData();
+		}
+
+		*surfaceData[normalId] = value;
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100a7dc0
 void Primitive::setSurfaceType(NormalId normalId, SurfaceType surfaceType)
 {

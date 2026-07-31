@@ -173,6 +173,7 @@ public:
 	const CoordinateFrame& getCoordinateFrame() const;
 	void setVelocity(const Velocity& velocity);
 
+	void setSurfaceData(NormalId normalId, const SurfaceData& value);
 	void setSurfaceType(NormalId normalId, SurfaceType surfaceType);
 
 	void setGridSize(const Vector3& size);
