@@ -1,11 +1,13 @@
 #ifndef V8WORLD_MOTORJOINT_H
 #define V8WORLD_MOTORJOINT_H
 
+#include "decomp.h"
 #include "v8kernel/Link.h"
 #include "v8world/Joint.h"
 
 namespace RBX {
 
+// SIZE 0x98
 class MotorJoint : public Joint
 {
 public:
@@ -18,7 +20,24 @@ public:
 	virtual JointType getJointType() const; // vtable+0x14
 
 	RevoluteLink* resetLink();
+
+	float getCurrentAngle() const { return currentAngle; }
+	float getMaxVelocity() const { return maxVelocity; }
+
+	void setCurrentAngle(float value);
+	void setMaxVelocity(float value) { maxVelocity = value; }
+
+	float getDesiredAngle() const { return desiredAngle; }
+	void setDesiredAngle(float value) { desiredAngle = value; }
+
+private:
+	RevoluteLink* link; // 0x88
+	float currentAngle; // 0x8c
+	float maxVelocity;  // 0x90
+	float desiredAngle; // 0x94
 };
+
+DECOMP_SIZE_ASSERT(MotorJoint, 0x98)
 
 } // namespace RBX
 

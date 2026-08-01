@@ -19,4 +19,10 @@ RevoluteLink* MotorJoint::resetLink()
 	return NULL;
 }
 
+// STUB: WEBSERVICE 0x10120070
+void MotorJoint::setCurrentAngle(float value)
+{
+	STUB(0x10120070);
+}
+
 } // namespace RBX

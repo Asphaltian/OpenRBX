@@ -131,10 +131,13 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/FaceInstance.cpp
   common/app/v8datamodel/Feature.cpp
   common/app/v8datamodel/ModelInstance.cpp
+  common/app/v8datamodel/JointInstance.cpp
+  common/app/v8datamodel/Message.cpp
   common/app/v8datamodel/PVInstance.cpp
   common/app/v8datamodel/PartInstance.cpp
   common/app/v8datamodel/SpawnLocation.cpp
   common/app/v8datamodel/Team.cpp
+  common/app/v8datamodel/Tool.cpp
   common/app/v8datamodel/Workspace.cpp
   common/app/v8kernel/Cofm.cpp
   common/app/v8kernel/Constants.cpp

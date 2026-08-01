@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "util/NormalId.h"
 #include "v8tree/Instance.h"
+#include "v8world/MotorJoint.h"
 
 namespace RBX {
 
@@ -46,6 +47,22 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Feature, 0x118)
+
+// SIZE 0x128
+class VelocityMotor : public Instance
+{
+public:
+	void setMaxVelocity(float value);
+	void setDesiredAngle(float value);
+	void setCurrentAngle(float value);
+
+private:
+	undefined m_unk0x0f8[0x108 - 0x0f8]; // 0x0f8
+	MotorJoint* joint;                   // 0x108
+	undefined m_unk0x10c[0x128 - 0x10c]; // 0x10c
+};
+
+DECOMP_SIZE_ASSERT(VelocityMotor, 0x128)
 
 } // namespace RBX
 
