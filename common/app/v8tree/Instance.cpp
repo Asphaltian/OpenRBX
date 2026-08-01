@@ -36,6 +36,30 @@ bool Instance::contains(const Instance* instance) const
 	return false;
 }
 
+// FUNCTION: WEBSERVICE 0x10048340
+void Instance::readProperties(const XmlElement* element, IReferenceBinder& binder)
+{
+	for (XmlElement* child = element->firstChild(); child != NULL; child = child->nextSibling()) {
+		readProperty(child, binder);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10048370
+void Instance::writeChildren(XmlElement* element)
+{
+	const std::vector<shared_ptr<Instance> >* kids = children.read();
+
+	if (kids != NULL) {
+		for (std::vector<shared_ptr<Instance> >::const_iterator it = kids->begin(); it != kids->end(); ++it) {
+			XmlElement* child = (*it)->write();
+
+			if (child != NULL) {
+				element->addChild(child);
+			}
+		}
+	}
+}
+
 // STUB: WEBSERVICE 0x10049d40
 XmlElement* Instance::write()
 {

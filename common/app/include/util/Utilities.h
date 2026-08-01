@@ -23,6 +23,9 @@ public:
 template <class T>
 class CopyOnWrite
 {
+public:
+	const T* read() const { return value.get(); }
+
 private:
 	boost::shared_ptr<T> value; // 0x00
 };

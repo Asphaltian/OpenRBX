@@ -7,14 +7,13 @@
 #include "util/Events.h"
 #include "util/Guid.h"
 #include "util/Utilities.h"
+#include "v8xml/XmlElement.h"
 
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include <string>
 #include <vector>
-
-class XmlElement;
 
 namespace RBX {
 
