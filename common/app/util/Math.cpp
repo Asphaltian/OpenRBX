@@ -126,11 +126,14 @@ float angle(const Vector3& v0, const Vector3& v1)
 	return acosf(dot);
 }
 
-// STUB: WEBSERVICE 0x100df1a0
+// FUNCTION: WEBSERVICE 0x100df1a0
 bool fuzzyEq(const Vector3& v0, const Vector3& v1, float epsilon)
 {
 	for (int i = 0; i < 3; ++i) {
-		if (v0[i] != v1[i] && fabsf(v0[i] - v1[i]) > (fabsf(v0[i]) + 1.0f) * epsilon) {
+		const float a = v0[i];
+		const float b = v1[i];
+
+		if (a != b && !(fabsf(a - b) <= (fabsf(a) + 1.0f) * epsilon)) {
 			return false;
 		}
 	}
@@ -138,12 +141,15 @@ bool fuzzyEq(const Vector3& v0, const Vector3& v1, float epsilon)
 	return true;
 }
 
-// STUB: WEBSERVICE 0x100df200
+// FUNCTION: WEBSERVICE 0x100df200
 bool fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			if (m0[i][j] != m1[i][j] && fabsf(m0[i][j] - m1[i][j]) > (fabsf(m0[i][j]) + 1.0f) * epsilon) {
+			const float a = m0[i][j];
+			const float b = m1[i][j];
+
+			if (a != b && !(fabsf(a - b) <= (fabsf(a) + 1.0f) * epsilon)) {
 				return false;
 			}
 		}

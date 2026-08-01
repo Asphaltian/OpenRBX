@@ -158,6 +158,12 @@ A virtual destructor with no standalone function in the PDB was inlined everywhe
 
 boost's `shared_ptr::operator<` compares ownership, not the pointer, so it loads offset 4, not 0.
 
+`a > b` and `!(a <= b)` are not the same float compare. The direct `>` emits the unordered-safe `test ah,5 / jp`; the negated `<=` emits `test ah,1 / je`. Both `Math::fuzzyEq` overloads hold at 95 percent until the negated form is written.
+
+`std::swap(a, b)` loads `a` into st(0) first, so the argument order is recoverable: the member the binary loads first is the one written first.
+
+A `static const float` folds to a constant and loses its magic-static guard unless the initializer calls something. The binary's guard on `Math::rotationFromByte` is what proves the step came from `G3D::pi()` rather than a literal.
+
 A `ComputeProp` member records its owner's inheritance shape. MSVC sizes the pointer-to-member by how the class inherits, so `ComputeProp<float, Primitive>` is 16 bytes and `ComputeProp<float, Assembly>` is 24: `Assembly` also derives from `boost::noncopyable`, which makes the member pointer the multiple-inheritance form. A class size that is off by the difference means a base is missing.
 
 Assigning a call's result to a local before comparing it changes the evaluation order. `f() != g()` runs `g()` first, per the right-operand rule; `x = f(); return x != g();` runs `f()` first. `Ball::hitTest` only matched with the call written inside the comparison.
