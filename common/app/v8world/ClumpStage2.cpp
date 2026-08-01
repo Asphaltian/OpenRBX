@@ -251,7 +251,7 @@ void TreeStage::process()
 	STUB(0x1011bcc0);
 }
 
-// STUB: WEBSERVICE 0x1011be80
+// FUNCTION: WEBSERVICE 0x1011be80
 void ClumpStage::process()
 {
 	getTreeStage()->process();

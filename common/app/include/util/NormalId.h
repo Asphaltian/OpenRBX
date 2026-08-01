@@ -20,10 +20,19 @@ enum NormalId
 	NORM_UNDEFINED = 6,
 };
 
+NormalId intToNormalId(int value);
 NormalId normalIdOpposite(NormalId normalId);
+
+template <int normalId>
+Vector3 uvwToObject(const Vector3& uvw);
+
+Vector3 uvwToObject(const Vector3& uvw, NormalId normalId);
+Vector3 objectToUvw(const Vector3& object, NormalId normalId);
 const Vector3& normalIdToVector3(NormalId normalId);
 const Matrix3& normalIdToMatrix3(NormalId normalId);
 Vector3 normalIdToVector3Internal(NormalId normalId);
+Matrix3 normalIdToMatrix3Internal(NormalId normalId);
+Vector3 mapToUvw_Legacy(const Vector3& uvw, NormalId normalId);
 NormalId Vector3ToNormalId(const Vector3& normal);
 NormalId Matrix3ToNormalId(const Matrix3& matrix);
 
