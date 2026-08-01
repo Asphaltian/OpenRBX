@@ -15,6 +15,8 @@ namespace RBX {
 using G3D::Vector3;
 
 class Body;
+class EdgeIterator;
+class PrimIterator;
 class Edge;
 class Joint;
 class Mechanism;
@@ -70,10 +72,23 @@ private:
 
 DECOMP_SIZE_ASSERT(SleepInfo, 0x24)
 
+// VTABLE: WEBSERVICE 0x10246c4c
 // SIZE 0x50
 class Assembly : public IPipelined, public boost::noncopyable
 {
 public:
+	Assembly(Primitive* rootPrimitive);
+	~Assembly();
+
+	// SYNTHETIC: WEBSERVICE 0x1011b5c0
+	// RBX::Assembly::`scalar deleting destructor'
+
+	PrimIterator assemblyPrimBegin();
+	PrimIterator assemblyPrimEnd();
+
+	EdgeIterator externalEdgeBegin();
+	EdgeIterator externalEdgeEnd();
+
 	Assembly* getRootAssembly();
 	Primitive* getAssemblyPrimitive();
 
@@ -100,7 +115,8 @@ public:
 	static void addGroundChild(Primitive* child);
 	Sim::AssemblyState getSleepStatus();
 	bool getAnchored();
-	bool computeCanSleep();
+	float computeMaxRadius() const;
+	bool computeCanSleep() const;
 
 	void notifyMoved();
 
@@ -123,6 +139,7 @@ private:
 
 DECOMP_SIZE_ASSERT(Assembly, 0x50)
 
+// VTABLE: WEBSERVICE 0x10247e3c
 // SIZE 0x50
 class Clump : public Assembly
 {

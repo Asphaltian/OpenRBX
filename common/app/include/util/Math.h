@@ -12,6 +12,7 @@ using G3D::Vector3;
 namespace Math {
 
 Matrix3 fromDiagonal(const Vector3& diagonal);
+Vector3 vector3Abs(const Vector3& value);
 
 } // namespace Math
 } // namespace RBX

@@ -3,6 +3,8 @@
 
 #include "decomp.h"
 
+#include <cstddef>
+
 namespace RBX {
 
 class Edge;
@@ -45,6 +47,10 @@ class EdgeIterator
 public:
 	static EdgeIterator begin(Primitive* primitive);
 
+	EdgeIterator() : primitive(NULL), edge(NULL) {}
+
+	static EdgeIterator& end();
+
 	EdgeIterator& operator++();
 
 	Edge* operator*() const { return edge; }
@@ -59,6 +65,12 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(EdgeIterator, 0x08)
+
+inline EdgeIterator& EdgeIterator::end()
+{
+	static EdgeIterator temp;
+	return temp;
+}
 
 } // namespace RBX
 

@@ -7,6 +7,7 @@
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Matrix3.h>
+#include <G3D/Vector3.h>
 
 namespace RBX {
 
@@ -14,6 +15,7 @@ class Link;
 
 using G3D::CoordinateFrame;
 using G3D::Matrix3;
+using G3D::Vector3;
 
 // SIZE 0xd0
 class Body
@@ -37,6 +39,8 @@ public:
 		updatePV();
 		return pv.position;
 	}
+
+	Vector3 getBranchCofmPos() const;
 
 	void setParent(Body* value);
 	void setMeInParent(Link* link);

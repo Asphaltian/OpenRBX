@@ -18,6 +18,8 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x1009ada0
 	static bool isRigidJoint(Edge* edge) { return isJoint(edge) && jointIsRigid(static_cast<Joint*>(edge)); }
+
+	CoordinateFrame getChildInParent(Primitive* parent, Primitive* child);
 };
 
 DECOMP_SIZE_ASSERT(RigidJoint, 0x88)

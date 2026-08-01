@@ -1,6 +1,7 @@
 #include "v8world/Assembly2.h"
 
 #include "decomp.h"
+#include "util/Math.h"
 #include "util/StlExtra.h"
 #include "v8kernel/Body.h"
 #include "v8kernel/Kernel.h"
@@ -18,6 +19,30 @@ namespace RBX {
 // FUNCTION: WEBSERVICE 0x10102990
 SleepInfo::SleepInfo() : state(Sim::WAKE_PENDING), sleepCount(0)
 {
+}
+
+// FUNCTION: WEBSERVICE 0x101029c0
+PrimIterator Assembly::assemblyPrimBegin()
+{
+	return PrimIterator(rootPrimitive, IN_ASSEMBLY);
+}
+
+// FUNCTION: WEBSERVICE 0x101029e0
+PrimIterator Assembly::assemblyPrimEnd()
+{
+	return PrimIterator(NULL, IN_ASSEMBLY);
+}
+
+// FUNCTION: WEBSERVICE 0x10102a00
+EdgeIterator Assembly::externalEdgeBegin()
+{
+	return EdgeIterator::begin(rootPrimitive);
+}
+
+// FUNCTION: WEBSERVICE 0x10102a20
+EdgeIterator Assembly::externalEdgeEnd()
+{
+	return EdgeIterator::end();
 }
 
 // FUNCTION: WEBSERVICE 0x10102a60
@@ -109,7 +134,7 @@ Mechanism* Assembly::getMechanism()
 }
 
 // FUNCTION: WEBSERVICE 0x10102bb0
-bool Assembly::computeCanSleep()
+bool Assembly::computeCanSleep() const
 {
 	for (PrimIterator it(rootPrimitive, IN_ASSEMBLY); *it != NULL; ++it) {
 		if (!(*it)->getCanSleep()) {
@@ -146,6 +171,19 @@ void Assembly::onPrimitivesChanged()
 	if (parent != NULL) {
 		parent->onPrimitivesChanged();
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x10102d70
+void Assembly::addRigidChild(Primitive* parent, RigidJoint* joint, Primitive* child)
+{
+	Clump* clump = parent->getClump();
+
+	child->setClump(clump);
+	child->setClumpDepth(parent->getClumpDepth() + 1);
+	child->getBody()->setParent(parent->getBody());
+	child->getBody()->setMeInParent(joint->getChildInParent(parent, child));
+
+	clump->onPrimitivesChanged();
 }
 
 // FUNCTION: WEBSERVICE 0x10102de0
@@ -207,10 +245,36 @@ void Assembly::stepUi(int frameCount)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10102f60
+float Assembly::computeMaxRadius() const
+{
+	float answer = 0;
+	Vector3 cofm = rootPrimitive->getBody()->getBranchCofmPos();
+
+	for (PrimIterator it(rootPrimitive, IN_ASSEMBLY); *it != NULL; ++it) {
+		Primitive* primitive = *it;
+
+		Vector3 offset = primitive->getBody()->getCoordinateFrame().translation - cofm;
+		Vector3 extent = Math::vector3Abs(offset);
+
+		answer = G3D::max(answer, (extent + primitive->getGeometry()->getGridSize() * 0.5f).magnitude());
+	}
+
+	return answer;
+}
+
 // FUNCTION: WEBSERVICE 0x10103060
 void Assembly::onPrimitiveCanSleepChanged(Primitive* primitive)
 {
 	canSleep.setDirty();
+}
+
+// FUNCTION: WEBSERVICE 0x101034e0
+Assembly::Assembly(Primitive* rootPrimitive)
+	: sleepInfo(NULL), rootPrimitive(rootPrimitive), parent(NULL), mechanism(NULL),
+	  maxRadius(this, &Assembly::computeMaxRadius), canSleep(this, &Assembly::computeCanSleep)
+{
+	rootPrimitive->setClump(static_cast<Clump*>(this));
 }
 
 // STUB: WEBSERVICE 0x10103750
@@ -218,6 +282,27 @@ void Assembly::addChild(Assembly* child)
 {
 	children.push_back(child);
 	std::sort(children.begin(), children.end(), lessAssembly);
+}
+
+// FUNCTION: WEBSERVICE 0x101037b0
+Assembly::~Assembly()
+{
+	for (PrimIterator it(rootPrimitive, IN_CLUMP); *it != NULL; ++it) {
+		Primitive* primitive = *it;
+
+		primitive->setClump(NULL);
+		primitive->setClumpDepth(-1);
+	}
+
+	if (parent != NULL) {
+		fastRemoveShort(parent->children, this);
+	}
+
+	parent = NULL;
+
+	for (unsigned int i = 0; i < children.size(); i++) {
+		children[i]->parent = NULL;
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x101038a0
