@@ -1,7 +1,11 @@
 #include "v8world/Assembly2.h"
 
 #include "decomp.h"
+#include "v8kernel/Body.h"
 #include "v8kernel/Kernel.h"
+#include "v8world/Clump2.h"
+#include "v8world/IMoving.h"
+#include "v8world/Joint.h"
 #include "v8world/Primitive.h"
 
 #include <cstddef>
@@ -24,6 +28,30 @@ Sim::AssemblyState Assembly::getSleepStatus()
 Assembly* Assembly::getRootAssembly()
 {
 	return parent != NULL ? parent->getRootAssembly() : this;
+}
+
+// FUNCTION: WEBSERVICE 0x10102ad0
+Joint* Assembly::getJointToParent(Primitive* primitive)
+{
+	Joint* joint = primitive->getFirstJoint();
+
+	while (joint != NULL) {
+		if (joint->getActive()) {
+			Primitive* other = joint->getPrimitive(0);
+
+			if (primitive == other) {
+				other = joint->getPrimitive(1);
+			}
+
+			if (other == NULL || primitive->getBody()->getParent() == other->getBody()) {
+				return joint;
+			}
+		}
+
+		joint = primitive->getNextJoint(joint);
+	}
+
+	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x10102b10
@@ -58,10 +86,33 @@ Mechanism* Assembly::getMechanism()
 	return mechanism;
 }
 
-// STUB: WEBSERVICE 0x10102bf0
+// FUNCTION: WEBSERVICE 0x10102bb0
+bool Assembly::computeCanSleep()
+{
+	for (PrimIterator it(rootPrimitive, IN_ASSEMBLY); *it != NULL; ++it) {
+		if (!(*it)->getCanSleep()) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+// FUNCTION: WEBSERVICE 0x10102bf0
 void Assembly::notifyMoved()
 {
-	STUB(0x10102bf0);
+	for (PrimIterator it(rootPrimitive, IN_ASSEMBLY); *it != NULL; ++it) {
+		(*it)->getOwner()->notifyMoved();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10102c20
+Assembly* Assembly::otherAssembly(Edge* edge)
+{
+	Assembly* assembly0 = edge->getPrimitive(0)->getAssembly();
+	Assembly* assembly1 = edge->getPrimitive(1)->getAssembly();
+
+	return assembly0 != this ? assembly0 : assembly1;
 }
 
 } // namespace RBX

@@ -34,6 +34,8 @@ public:
 
 	virtual JointType getJointType() const = 0; // vtable+0x14
 
+	bool getActive() const { return active; }
+
 private:
 	IJointOwner* jointOwner;     // 0x20
 	bool active;                 // 0x24

@@ -8,6 +8,8 @@
 
 namespace RBX {
 
+class Edge;
+class Joint;
 class Mechanism;
 class Primitive;
 
@@ -44,6 +46,10 @@ class Assembly : public IPipelined
 public:
 	Assembly* getRootAssembly();
 	Primitive* getAssemblyPrimitive();
+
+	static Joint* getJointToParent(Primitive* primitive);
+
+	Assembly* otherAssembly(Edge* edge);
 
 	Mechanism* getMechanism();
 	Sim::AssemblyState getSleepStatus();

@@ -161,6 +161,8 @@ public:
 
 	Body* getBody() const { return body; }
 	Clump* getClump() const { return clump; }
+	IMoving* getOwner() const { return myOwner; }
+	bool getCanSleep() const { return canSleep; }
 	Anchor* getAnchorObject() const { return anchorObject; }
 
 	const Guid& getGuid() const;
