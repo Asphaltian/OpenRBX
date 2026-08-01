@@ -106,6 +106,7 @@ endif()
 
 set(OPENRBX_APP_SOURCES
   common/app/security/SecurityContext.cpp
+  common/app/humanoid/Humanoid.cpp
   common/app/reflection/Signal.cpp
   common/app/util/Debug.cpp
   common/app/v8tree/Instance.cpp
@@ -122,6 +123,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8kernel/Body.cpp
   common/app/util/Debug.cpp
   common/app/v8datamodel/DebugSettings.cpp
+  common/app/v8datamodel/Feature.cpp
   common/app/v8datamodel/ModelInstance.cpp
   common/app/v8datamodel/PartInstance.cpp
   common/app/v8datamodel/Workspace.cpp
