@@ -7,6 +7,7 @@ namespace Roblox {
 
 extern const _soapmapentry ___Roblox_LuaType_entries[];
 extern const _soapmapentry ___Roblox_MessageType_entries[];
+extern const _soapmapentry ___Roblox_Status_entries[];
 extern const _soapmapentry ___Roblox_LuaValue10_entries[];
 extern const _soapmapentry ___Roblox_LuaValue9_entries[];
 extern const _soapmapentry ___Roblox_LuaValue8_entries[];
@@ -19,18 +20,26 @@ extern const _soapmapentry ___Roblox_LuaValue2_entries[];
 extern const _soapmapentry ___Roblox_LuaValue1_entries[];
 extern const _soapmapentry ___Roblox_LuaArguments_entries[];
 extern const _soapmapentry ___Roblox_ScriptExecution_entries[];
+extern const _soapmapentry ___Roblox_Strings_entries[];
 extern const _soapmapentry ___Roblox_StandardOutMessage_entries[];
 extern const _soapmapentry ___Roblox_StandardOutMessages_entries[];
+extern const _soapmapentry ___Roblox_CWebService_HelloWorld_entries[];
+extern const _soapmapentry ___Roblox_CWebService_BatchJob_atlsoapheader_entries[];
+extern const _soapmapentry ___Roblox_CWebService_GetVersion_entries[];
+extern const _soapmapentry ___Roblox_CWebService_GetStatus_entries[];
 extern const _soapmapentry ___Roblox_CWebService_Update_entries[];
-extern const _soapmapentry ___Roblox_CWebService_OpenJob_entries[];
+extern const _soapmapentry ___Roblox_CWebService_BatchJob_entries[];
 extern const _soapmapentry ___Roblox_CWebService_TouchJob_entries[];
 extern const _soapmapentry ___Roblox_CWebService_Execute_entries[];
 extern const _soapmapentry ___Roblox_CWebService_CloseJob_entries[];
 extern const _soapmapentry ___Roblox_CWebService_GetTimeout_entries[];
 extern const _soapmapentry ___Roblox_CWebService_CloseOrphanedJobs_entries[];
+extern const _soapmapentry ___Roblox_CWebService_CloseTimedoutJobs_entries[];
+extern const _soapmapentry ___Roblox_CWebService_GetAllJobs_entries[];
 extern const _soapmapentry ___Roblox_CWebService_GetStandardOutMessages_entries[];
 extern const _soapmap ___Roblox_LuaType_map;
 extern const _soapmap ___Roblox_MessageType_map;
+extern const _soapmap ___Roblox_Status_map;
 extern const _soapmap ___Roblox_LuaValue10_map;
 extern const _soapmap ___Roblox_LuaValue9_map;
 extern const _soapmap ___Roblox_LuaValue8_map;
@@ -43,6 +52,7 @@ extern const _soapmap ___Roblox_LuaValue2_map;
 extern const _soapmap ___Roblox_LuaValue1_map;
 extern const _soapmap ___Roblox_LuaArguments_map;
 extern const _soapmap ___Roblox_ScriptExecution_map;
+extern const _soapmap ___Roblox_Strings_map;
 extern const _soapmap ___Roblox_StandardOutMessage_map;
 extern const _soapmap ___Roblox_StandardOutMessages_map;
 extern const _soapmap ___Roblox_CWebService_HelloWorld_map;
@@ -78,15 +88,57 @@ extern const _soapmap ___Roblox_CWebService_GetStandardOutMessages_atlsoapheader
 
 const _soapmapentry ___Roblox_LuaType_entries[] = {
 	{0x380e5a7d, "LUA_TTABLE", L"LUA_TTABLE", 10, 5, 0x00000100, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x38e50dcc, "LUA_TSTRING", L"LUA_TSTRING", 11, 4, 0x00000100, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x2d4a7e5e, "LUA_TNUMBER", L"LUA_TNUMBER", 11, 3, 0x00000100, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x2d0a2835, "LUA_TBOOLEAN", L"LUA_TBOOLEAN", 12, 1, 0x00000100, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x51272cf8, "LUA_TNIL", L"LUA_TNIL", 8, 0, 0x00000100, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_MessageType_entries[] = {
 	{0x59a0014e, "MESSAGE_ERROR", L"MESSAGE_ERROR", 13, 3, 0x00000100, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x8395775a,
+	 "MESSAGE_WARNING",
+	 L"MESSAGE_WARNING",
+	 15,
+	 2,
+	 0x00000100,
+	 0,
+	 NULL,
+	 NULL,
+	 -1,
+	 0x00000000,
+	 NULL,
+	 NULL,
+	 0},
+	{0xbce7f070, "MESSAGE_INFO", L"MESSAGE_INFO", 12, 1, 0x00000100, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0xa52b2895, "MESSAGE_OUTPUT", L"MESSAGE_OUTPUT", 14, 0, 0x00000100, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+};
+
+const _soapmapentry ___Roblox_Status_entries[] = {
+	{0x6f40cee6, "version", L"version", 7, 0, 0x00000500, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+	{0x2967ff9e,
+	 "environmentCount",
+	 L"environmentCount",
+	 16,
+	 27,
+	 0x00000100,
+	 4,
+	 NULL,
+	 NULL,
+	 0,
+	 0x00000000,
+	 NULL,
+	 NULL,
+	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue10_entries[] = {
 	{0x0041ad82, "type", L"type", 4, -1, 0x00000100, 0, NULL, &___Roblox_LuaType_map, 0, 0x00000000, NULL, NULL, 0},
 	{0x088e571d, "value", L"value", 5, 0, 0x00000500, 4, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue9_entries[] = {
@@ -107,6 +159,7 @@ const _soapmapentry ___Roblox_LuaValue9_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue8_entries[] = {
@@ -127,6 +180,7 @@ const _soapmapentry ___Roblox_LuaValue8_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue7_entries[] = {
@@ -147,6 +201,7 @@ const _soapmapentry ___Roblox_LuaValue7_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue6_entries[] = {
@@ -167,6 +222,7 @@ const _soapmapentry ___Roblox_LuaValue6_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue5_entries[] = {
@@ -187,6 +243,7 @@ const _soapmapentry ___Roblox_LuaValue5_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue4_entries[] = {
@@ -207,6 +264,7 @@ const _soapmapentry ___Roblox_LuaValue4_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue3_entries[] = {
@@ -227,6 +285,7 @@ const _soapmapentry ___Roblox_LuaValue3_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue2_entries[] = {
@@ -247,6 +306,7 @@ const _soapmapentry ___Roblox_LuaValue2_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaValue1_entries[] = {
@@ -267,11 +327,13 @@ const _soapmapentry ___Roblox_LuaValue1_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_LuaArguments_entries[] = {
 	{0x073e5849, "count", L"count", 5, 27, 0x00040100, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 	{0x07ad6502, "items", L"items", 5, -1, 0x00000508, 4, NULL, &___Roblox_LuaValue1_map, 0, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_ScriptExecution_entries[] = {
@@ -291,12 +353,20 @@ const _soapmapentry ___Roblox_ScriptExecution_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+};
+
+const _soapmapentry ___Roblox_Strings_entries[] = {
+	{0x073e5849, "count", L"count", 5, 27, 0x00040100, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+	{0x07ad6502, "items", L"items", 5, 0, 0x00000508, 4, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_StandardOutMessage_entries[] = {
 	{0x0041ad82, "type", L"type", 4, -1, 0x00000100, 0, NULL, &___Roblox_MessageType_map, 0, 0x00000000, NULL, NULL, 0},
 	{0x0041690f, "time", L"time", 4, 26, 0x00000100, 8, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 	{0x00415985, "text", L"text", 4, 0, 0x00000500, 16, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_StandardOutMessages_entries[] = {
@@ -315,13 +385,34 @@ const _soapmapentry ___Roblox_StandardOutMessages_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+};
+
+const _soapmapentry ___Roblox_CWebService_HelloWorld_entries[] = {
+	{0xf6041a8c, "bstrOutput", L"bstrOutput", 10, 0, 0x00000406, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+};
+
+const _soapmapentry ___Roblox_CWebService_BatchJob_atlsoapheader_entries[] = {
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+};
+
+const _soapmapentry ___Roblox_CWebService_GetVersion_entries[] = {
+	{0x1150d23f, "result", L"result", 6, 0, 0x00000406, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+};
+
+const _soapmapentry ___Roblox_CWebService_GetStatus_entries[] = {
+	{0x1150d23f, "result", L"result", 6, -1, 0x00000006, 0, NULL, &___Roblox_Status_map, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_CWebService_Update_entries[] = {
 	{0x000200d3, "url", L"url", 3, 0, 0x00000401, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
-const _soapmapentry ___Roblox_CWebService_OpenJob_entries[] = {
+const _soapmapentry ___Roblox_CWebService_BatchJob_entries[] = {
 	{0x1150d23f,
 	 "result",
 	 L"result",
@@ -351,11 +442,14 @@ const _soapmapentry ___Roblox_CWebService_OpenJob_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0xde3eea67, "timeout", L"timeout", 7, 3, 0x00000001, 24, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_CWebService_TouchJob_entries[] = {
 	{0x07bcae08, "jobID", L"jobID", 5, 0, 0x00000401, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
 	{0xde3eea67, "timeout", L"timeout", 7, 3, 0x00000001, 8, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_CWebService_Execute_entries[] = {
@@ -374,18 +468,74 @@ const _soapmapentry ___Roblox_CWebService_Execute_entries[] = {
 	 NULL,
 	 0},
 	{0x07bcae08, "jobID", L"jobID", 5, 0, 0x00000401, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x13810af5,
+	 "script",
+	 L"script",
+	 6,
+	 -1,
+	 0x00000001,
+	 4,
+	 NULL,
+	 &___Roblox_ScriptExecution_map,
+	 -1,
+	 0x00000000,
+	 NULL,
+	 NULL,
+	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_CWebService_CloseJob_entries[] = {
 	{0x07bcae08, "jobID", L"jobID", 5, 0, 0x00000401, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_CWebService_GetTimeout_entries[] = {
 	{0xde3eea67, "timeout", L"timeout", 7, 3, 0x00000006, 8, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x07bcae08, "jobID", L"jobID", 5, 0, 0x00000401, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_CWebService_CloseOrphanedJobs_entries[] = {
 	{0x1150d23f, "result", L"result", 6, 27, 0x00000006, 8, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x4f26f06a,
+	 "activeJobs",
+	 L"activeJobs",
+	 10,
+	 -1,
+	 0x00000001,
+	 0,
+	 NULL,
+	 &___Roblox_Strings_map,
+	 -1,
+	 0x00000000,
+	 NULL,
+	 NULL,
+	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+};
+
+const _soapmapentry ___Roblox_CWebService_CloseTimedoutJobs_entries[] = {
+	{0x1150d23f, "result", L"result", 6, 27, 0x00000006, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
+};
+
+const _soapmapentry ___Roblox_CWebService_GetAllJobs_entries[] = {
+	{0x1150d23f,
+	 "result",
+	 L"result",
+	 6,
+	 -1,
+	 0x00000006,
+	 0,
+	 NULL,
+	 &___Roblox_Strings_map,
+	 -1,
+	 0x00000000,
+	 NULL,
+	 NULL,
+	 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmapentry ___Roblox_CWebService_GetStandardOutMessages_entries[] = {
@@ -403,6 +553,8 @@ const _soapmapentry ___Roblox_CWebService_GetStandardOutMessages_entries[] = {
 	 NULL,
 	 NULL,
 	 0},
+	{0xdfbefc8f, "maxCount", L"maxCount", 8, 27, 0x00000001, 0, NULL, NULL, -1, 0x00000000, NULL, NULL, 0},
+	{0x00000000, NULL, NULL, 0, 0, 0x00000000, 0, NULL, NULL, 0, 0x00000000, NULL, NULL, 0},
 };
 
 const _soapmap ___Roblox_LuaType_map = {
@@ -433,6 +585,24 @@ const _soapmap ___Roblox_MessageType_map = {
 	___Roblox_MessageType_entries,
 	4,
 	1,
+	-1,
+	0x00000000,
+	0x74911dc5,
+	"urn:Roblox",
+	L"urn:Roblox",
+	10
+};
+
+const _soapmap ___Roblox_Status_map = {
+	0xca067464,
+	"Status",
+	L"Status",
+	6,
+	6,
+	(SOAPMAPTYPE) 3,
+	___Roblox_Status_entries,
+	8,
+	2,
 	-1,
 	0x00000000,
 	0x74911dc5,
@@ -657,6 +827,24 @@ const _soapmap ___Roblox_ScriptExecution_map = {
 	10
 };
 
+const _soapmap ___Roblox_Strings_map = {
+	0x0c027a6a,
+	"Strings",
+	L"Strings",
+	7,
+	7,
+	(SOAPMAPTYPE) 3,
+	___Roblox_Strings_entries,
+	8,
+	2,
+	-1,
+	0x00000000,
+	0x74911dc5,
+	"urn:Roblox",
+	L"urn:Roblox",
+	10
+};
+
 const _soapmap ___Roblox_StandardOutMessage_map = {
 	0x46a169ae,
 	"StandardOutMessage",
@@ -700,7 +888,7 @@ const _soapmap ___Roblox_CWebService_HelloWorld_map = {
 	10,
 	10,
 	(SOAPMAPTYPE) 2,
-	NULL,
+	___Roblox_CWebService_HelloWorld_entries,
 	4,
 	0,
 	0,
@@ -718,7 +906,7 @@ const _soapmap ___Roblox_CWebService_HelloWorld_atlsoapheader_map = {
 	10,
 	10,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -736,7 +924,7 @@ const _soapmap ___Roblox_CWebService_GetVersion_map = {
 	10,
 	10,
 	(SOAPMAPTYPE) 2,
-	NULL,
+	___Roblox_CWebService_GetVersion_entries,
 	4,
 	0,
 	0,
@@ -754,7 +942,7 @@ const _soapmap ___Roblox_CWebService_GetVersion_atlsoapheader_map = {
 	10,
 	10,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -772,7 +960,7 @@ const _soapmap ___Roblox_CWebService_GetStatus_map = {
 	9,
 	9,
 	(SOAPMAPTYPE) 2,
-	NULL,
+	___Roblox_CWebService_GetStatus_entries,
 	8,
 	0,
 	0,
@@ -790,7 +978,7 @@ const _soapmap ___Roblox_CWebService_GetStatus_atlsoapheader_map = {
 	9,
 	9,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -826,7 +1014,7 @@ const _soapmap ___Roblox_CWebService_Update_atlsoapheader_map = {
 	6,
 	6,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -844,7 +1032,7 @@ const _soapmap ___Roblox_CWebService_OpenJob_map = {
 	7,
 	7,
 	(SOAPMAPTYPE) 2,
-	___Roblox_CWebService_OpenJob_entries,
+	___Roblox_CWebService_BatchJob_entries,
 	40,
 	3,
 	0,
@@ -862,7 +1050,7 @@ const _soapmap ___Roblox_CWebService_OpenJob_atlsoapheader_map = {
 	7,
 	7,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -898,7 +1086,7 @@ const _soapmap ___Roblox_CWebService_TouchJob_atlsoapheader_map = {
 	8,
 	8,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -934,7 +1122,7 @@ const _soapmap ___Roblox_CWebService_Execute_atlsoapheader_map = {
 	7,
 	7,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -970,7 +1158,7 @@ const _soapmap ___Roblox_CWebService_CloseJob_atlsoapheader_map = {
 	8,
 	8,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -988,7 +1176,7 @@ const _soapmap ___Roblox_CWebService_BatchJob_map = {
 	8,
 	8,
 	(SOAPMAPTYPE) 2,
-	___Roblox_CWebService_OpenJob_entries,
+	___Roblox_CWebService_BatchJob_entries,
 	40,
 	3,
 	0,
@@ -1006,7 +1194,7 @@ const _soapmap ___Roblox_CWebService_BatchJob_atlsoapheader_map = {
 	8,
 	8,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -1042,7 +1230,7 @@ const _soapmap ___Roblox_CWebService_GetTimeout_atlsoapheader_map = {
 	10,
 	10,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -1078,7 +1266,7 @@ const _soapmap ___Roblox_CWebService_CloseOrphanedJobs_atlsoapheader_map = {
 	17,
 	17,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -1096,7 +1284,7 @@ const _soapmap ___Roblox_CWebService_CloseAllJobs_map = {
 	12,
 	12,
 	(SOAPMAPTYPE) 2,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	1,
 	0,
 	-1,
@@ -1114,7 +1302,7 @@ const _soapmap ___Roblox_CWebService_CloseAllJobs_atlsoapheader_map = {
 	12,
 	12,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -1132,7 +1320,7 @@ const _soapmap ___Roblox_CWebService_CloseTimedoutJobs_map = {
 	17,
 	17,
 	(SOAPMAPTYPE) 2,
-	NULL,
+	___Roblox_CWebService_CloseTimedoutJobs_entries,
 	4,
 	0,
 	0,
@@ -1150,7 +1338,7 @@ const _soapmap ___Roblox_CWebService_CloseTimedoutJobs_atlsoapheader_map = {
 	17,
 	17,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -1168,7 +1356,7 @@ const _soapmap ___Roblox_CWebService_GetAllJobs_map = {
 	10,
 	10,
 	(SOAPMAPTYPE) 2,
-	NULL,
+	___Roblox_CWebService_GetAllJobs_entries,
 	8,
 	0,
 	0,
@@ -1186,7 +1374,7 @@ const _soapmap ___Roblox_CWebService_GetAllJobs_atlsoapheader_map = {
 	10,
 	10,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,
@@ -1222,7 +1410,7 @@ const _soapmap ___Roblox_CWebService_GetStandardOutMessages_atlsoapheader_map = 
 	22,
 	22,
 	(SOAPMAPTYPE) 5,
-	NULL,
+	___Roblox_CWebService_BatchJob_atlsoapheader_entries,
 	0,
 	0,
 	-1,

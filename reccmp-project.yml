@@ -13,5 +13,6 @@ targets:
       - reccmp/webservice-vendored.csv
       - reccmp/webservice-globals.csv
       - reccmp/webservice-statics.csv
+      - reccmp/webservice-strings.csv
     report:
       icon: assets/webservice.png
