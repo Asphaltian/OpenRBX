@@ -1,5 +1,3 @@
-# File-scope statics in the original, so reccmp can name what our code reads.
-# Generated from WebService.pdb. A name pointing at two addresses is left out.
 address,type,name
 0x10251ac0,global,PRIME_TABLE
 0x10259db0,global,SKY_BOX

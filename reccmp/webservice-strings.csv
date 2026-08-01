@@ -1,5 +1,4 @@
-# String literals in the original, typed so reccmp reads wide ones as wide.
-# Generated from WebService.pdb: ??_C@_0 is narrow, ??_C@_1 is wide.
+# ??_C@_0 is a narrow literal, ??_C@_1 a wide one.
 address,type
 0x1022cf40,string
 0x1022cfec,string

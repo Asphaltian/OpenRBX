@@ -1,5 +1,3 @@
-# Globals in the original, so reccmp can name what our code reads and writes.
-# Generated from WebService.pdb. Vtables are excluded: those want a VTABLE annotation.
 address,type,symbol
 0x10227000,global,__imp__RegOpenKeyExA@20
 0x10227004,global,__imp__CryptGetHashParam@20
@@ -2797,6 +2795,7 @@ address,type,symbol
 0x10301494,global,?_AtlModule@@3VCDllMainOverride@@A
 0x103014c0,global,?theExtension@@3VCRbxIsapiExtension@@A
 0x103017f4,global,?sync@CWebService@Roblox@@0Vmutex@boost@@A
+0x103017fc,global,?m_bInitFailed@CAtlBaseModule@ATL@@2_NA
 0x1030181c,global,??_B?1??singleton@ContentProvider@RBX@@SAAAV12@XZ@51
 0x10301820,global,sing___RBX::ContentProvider::singleton
 0x10301874,global,??_B?1??rootDescriptor@ClassDescriptor@Reflection@RBX@@SAAAV123@XZ@51

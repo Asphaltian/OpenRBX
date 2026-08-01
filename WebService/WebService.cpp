@@ -20,8 +20,10 @@ class DataModel;
 #include <map>
 #include <string>
 
-static boost::once_flag flagInitRoblox = BOOST_ONCE_INIT;
+boost::once_flag flagInitRoblox = BOOST_ONCE_INIT;
 static bool initRobloxFailed;
+
+extern "C" BOOL WINAPI TerminateExtension(DWORD flags);
 
 // STUB: WEBSERVICE 0x1000d380
 static void initRoblox()
@@ -71,8 +73,9 @@ public:
 	// FUNCTION: WEBSERVICE 0x1000dcd0
 	const _soapmap** GetHeaderMap() { return ___Roblox_CWebService_headers; }
 
+	// The header maps are all empty, so the value the parser fills in is the handler itself.
 	// FUNCTION: WEBSERVICE 0x1000dce0
-	void* GetHeaderValue() { return &errorMessage; }
+	void* GetHeaderValue() { return this; }
 
 	// FUNCTION: WEBSERVICE 0x1000dcf0
 	HRESULT CallFunction(void* pvParam, const wchar_t* wszLocalName, int cchLocalName, size_t nItem)
@@ -137,6 +140,8 @@ public:
 	const char* GetServiceName() { return "Service"; }
 
 private:
+	friend BOOL WINAPI ::TerminateExtension(DWORD flags);
+
 	static std::map<std::string, Job> jobs;
 	static boost::mutex sync;
 
@@ -225,6 +230,10 @@ extern "C" BOOL WINAPI GetExtensionVersion(HSE_VERSION_INFO* version)
 // FUNCTION: WEBSERVICE 0x1000e380
 extern "C" BOOL WINAPI TerminateExtension(DWORD flags)
 {
+	if (flags & HSE_TERM_ADVISORY_UNLOAD && Roblox::CWebService::jobs.size() > 0) {
+		return FALSE;
+	}
+
 	return theExtension.TerminateExtension(flags);
 }
 
