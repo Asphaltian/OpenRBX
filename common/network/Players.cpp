@@ -1,0 +1,20 @@
+#include "network/Players.h"
+
+#include "reflection/Property.h"
+
+namespace RBX {
+namespace Network {
+
+static Reflection::PropDescriptor<Players, int> propPlayerMaxCount;
+
+// FUNCTION: WEBSERVICE 0x101956e0
+void Players::setMaxPlayers(int value)
+{
+	if (value != maxPlayers) {
+		maxPlayers = value;
+		raisePropertyChanged(propPlayerMaxCount);
+	}
+}
+
+} // namespace Network
+} // namespace RBX
