@@ -138,7 +138,9 @@ Within a library, App uses subdirectories (`util`, `v8world`, `v8tree`, `v8kerne
 
 `WebService/WebService.def` names the eight exports the linker cannot infer. The other three the original has, `_InitializeAtlHandlers@8` and its two siblings, are `__declspec(dllexport)` inside ATL's `HANDLER_ENTRY` macro and appear on their own once a request handler is declared.
 
-Smoke test the result by loading it: the DLL has to map at 0x10000000 and resolve every export. The loader must be built 32-bit, so a 64-bit shell cannot run it.
+Smoke test the result by loading it: the DLL has to map at 0x10000000, resolve every export, and answer `GetExtensionVersion` with 6.0 and `"ROBLOX Web Service"`. That call runs ATL's whole startup, the thread pool and the DLL, file and stencil caches, so it is worth more than a load. The loader must be built 32-bit, so a 64-bit shell cannot run it.
+
+The three handler exports come from two `_HANDLER_ENTRY` records the original keeps at 0x102f4fdc and 0x102f4fec: `"Default"` for `Roblox::CWebService` and `"WSDL"` for `ATL::CSDLGenerator<Roblox::CWebService, s_szClassNameWSDL34>`, where that name is the char array `"Default"`. `DECLARE_REQUEST_HANDLER` is the macro; the generator's comma needs a typedef first or the macro takes it as a third argument. `CWebService` derives from `Roblox::IWebService` at 0 and `ATL::CSoapHandler<CWebService>` at 4, is 384 bytes, and holds `errorMessage` at 0x17c with `jobs` and `sync` static. A skeleton compiles as far as the `"Default"` entry; `CSDLGenerator` then needs the SOAP function map, so the exports wait on the `_soapmap` tables the attribute provider generated.
 
 ## Third Party
 
