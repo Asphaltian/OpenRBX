@@ -18,9 +18,8 @@ public:
 
 	void assign(Data data);
 
-	static int compare(const Guid& a, const Guid& b);
-
-	int compare(const Guid& other) const;
+	static int compare(const Guid* a, const Guid* b);
+	static int compare(const Guid* a0, const Guid* a1, const Guid* b0, const Guid* b1);
 
 	Data data; // 0x00
 };

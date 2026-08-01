@@ -68,7 +68,7 @@ bool lessAssembly(const Assembly* a, const Assembly* b)
 		return false;
 	}
 
-	return Guid::compare(a->getRootPrimitive()->getGuid(), b->getRootPrimitive()->getGuid()) == -1;
+	return Guid::compare(&a->getRootPrimitive()->getGuid(), &b->getRootPrimitive()->getGuid()) == -1;
 }
 
 // FUNCTION: WEBSERVICE 0x10102ac0 FOLDED

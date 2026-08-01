@@ -169,6 +169,7 @@ public:
 	const Guid& getGuid() const;
 	void setGuid(const Guid& value);
 
+	unsigned int getSizeMultiplier() const { return sizeMultiplier; }
 	void setSizeMultiplier(unsigned int multiplier);
 
 	static void insertEdge(Edge* edge);

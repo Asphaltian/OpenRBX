@@ -542,7 +542,7 @@ Vector3 Primitive::clipToSafeSize(const Vector3& size)
 	Vector3 answer(G3D::min(512.0f, size.x), G3D::min(512.0f, size.y), G3D::min(512.0f, size.z));
 
 	if (answer.x * answer.y * answer.z > 1000000.0f) {
-		answer.y = sqrt(1000000.0f / (answer.x * answer.z));
+		answer.y = floor(1000000.0f / (answer.x * answer.z));
 	}
 
 	return answer;

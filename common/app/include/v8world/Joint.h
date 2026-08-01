@@ -43,6 +43,7 @@ public:
 	virtual void stepUi(int frameCount);                                   // vtable+0x30
 
 	bool getActive() const { return active; }
+	void setActive(bool value) { active = value; }
 
 private:
 	IJointOwner* jointOwner;     // 0x20

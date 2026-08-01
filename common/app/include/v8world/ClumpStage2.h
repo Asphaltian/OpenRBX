@@ -12,7 +12,18 @@ namespace RBX {
 class Assembly;
 class Primitive;
 
+float getPrimitiveSize(Primitive* primitive);
+
+int biggerJointGuid(Joint* joint0, Joint* joint1);
+int biggerJointSize(Joint* joint0, Joint* joint1);
+
 Joint* getJoint(Primitive* primitive, Joint::JointType jointType);
+
+namespace JointSort {
+
+bool lighterJoint(Joint* joint0, Joint* joint1);
+
+} // namespace JointSort
 
 // SIZE 0x30
 class TreeStage : public IWorldStage
@@ -26,6 +37,10 @@ public:
 	virtual int getMetric(MetricType metricType); // vtable+0x18
 
 	void process();
+
+	void swap(Joint* remove, Joint* add, Primitive* root);
+
+	void traverse(Joint* joint, Primitive* root);
 
 	void dirtyAssemblies(Joint* joint);
 	void undirtyAssembly(Assembly* assembly);
