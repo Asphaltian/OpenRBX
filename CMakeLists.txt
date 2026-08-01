@@ -101,12 +101,6 @@ if (MSVC)
   add_compile_options(/W3)
 endif()
 
-# boost::thread throws. The decomp build sets /EHsc in CMAKE_CXX_FLAGS; the conformance build has
-# nothing of its own, and this has to precede the targets it applies to.
-if (MSVC AND NOT MSVC_FOR_DECOMP)
-  add_compile_options(/EHsc)
-endif()
-
 # --- Engine libraries ---
 # One OBJECT library per Roblox static library. Link order decides which folded copy survives.
 
@@ -250,6 +244,10 @@ function(add_engine_library NAME)
   target_include_directories(${NAME} PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS} ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
   if (MSVC_FOR_DECOMP AND ARGS_OPTIONS)
     target_compile_options(${NAME} PRIVATE ${ARGS_OPTIONS})
+  elseif (MSVC)
+    # boost::thread throws. The decomp build carries /EHsc in CMAKE_CXX_FLAGS, the conformance
+    # build has nothing of its own, and clang-tidy reads the flags off the target.
+    target_compile_options(${NAME} PRIVATE /EHsc)
   endif()
   set(OPENRBX_ENGINE_LIBRARIES ${OPENRBX_ENGINE_LIBRARIES} ${NAME} PARENT_SCOPE)
 endfunction()
