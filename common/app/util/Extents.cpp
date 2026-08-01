@@ -2,39 +2,37 @@
 
 namespace RBX {
 
-// STUB: WEBSERVICE 0x100a59a0
+// FUNCTION: WEBSERVICE 0x100a59a0
 NormalId Extents::closestFace(const Vector3& point) const
 {
-	NormalId answer = NORM_X;
-	float closest = fabsf(point.x - high.x);
+	const float xHigh = fabsf(point.x - high.x);
+	const float yHigh = fabsf(point.y - high.y);
+	const float zHigh = fabsf(point.z - high.z);
+	const float xLow = fabsf(point.x - low.x);
+	const float yLow = fabsf(point.y - low.y);
+	const float zLow = fabsf(point.z - low.z);
 
-	float distance = fabsf(point.y - high.y);
-	if (distance < closest) {
-		closest = distance;
+	NormalId answer = NORM_X;
+	float closest = xHigh;
+
+	if (yHigh < closest) {
+		closest = yHigh;
 		answer = NORM_Y;
 	}
-
-	distance = fabsf(point.z - high.z);
-	if (distance < closest) {
-		closest = distance;
+	if (zHigh < closest) {
+		closest = zHigh;
 		answer = NORM_Z;
 	}
-
-	distance = fabsf(point.x - low.x);
-	if (distance < closest) {
-		closest = distance;
+	if (xLow < closest) {
+		closest = xLow;
 		answer = NORM_X_NEG;
 	}
-
-	distance = fabsf(point.y - low.y);
-	if (distance < closest) {
-		closest = distance;
+	if (yLow < closest) {
+		closest = yLow;
 		answer = NORM_Y_NEG;
 	}
-
-	distance = fabsf(point.z - low.z);
-	if (distance < closest) {
-		closest = distance;
+	if (zLow < closest) {
+		closest = zLow;
 		answer = NORM_Z_NEG;
 	}
 
@@ -58,21 +56,21 @@ Vector3 Extents::getCorner(int index) const
 // STUB: WEBSERVICE 0x100a5d20
 bool Extents::overlapsOrTouches(const Extents& other) const
 {
-	return low.x <= other.high.x && low.y <= other.high.y && low.z <= other.high.z && other.low.x <= high.x &&
-		   other.low.y <= high.y && other.low.z <= high.z;
+	return !(low.x > other.high.x) && !(low.y > other.high.y) && !(low.z > other.high.z) && !(high.y < other.low.y) &&
+		   !(high.x < other.low.x) && !(high.z < other.low.z);
 }
 
 // STUB: WEBSERVICE 0x100a5de0
 bool Extents::contains(const Vector3& point) const
 {
-	return low.x < point.x && low.y < point.y && low.z < point.z && point.x <= high.x && point.y <= high.y &&
+	return !(point.x < low.x) && !(point.y < low.y) && !(point.z < low.z) && point.x <= high.x && point.y <= high.y &&
 		   point.z <= high.z;
 }
 
-// STUB: WEBSERVICE 0x100a5e40
+// FUNCTION: WEBSERVICE 0x100a5e40
 bool Extents::fuzzyContains(const Vector3& point, float epsilon) const
 {
-	return low.x - epsilon < point.x && low.y - epsilon < point.y && low.z - epsilon < point.z &&
+	return low.x - epsilon <= point.x && low.y - epsilon <= point.y && low.z - epsilon <= point.z &&
 		   point.x <= high.x + epsilon && point.y <= high.y + epsilon && point.z <= epsilon + high.z;
 }
 

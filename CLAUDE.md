@@ -162,6 +162,10 @@ boost's `shared_ptr::operator<` compares ownership, not the pointer, so it loads
 
 `std::swap(a, b)` loads `a` into st(0) first, so the argument order is recoverable: the member the binary loads first is the one written first.
 
+Which side of a float compare gets loaded first depends on the operator, not the operands: `<` and `<=` load the right operand into st(0), `>` and `>=` load the left. That fixes the spelling before the jump condition is even worth looking at, and it is why `Extents::contains` reads `!(point.x < low.x)` rather than any of the three equivalent ways to say it.
+
+MSVC reorders the terms of an `&&` chain of float compares. `Extents::overlapsOrTouches` tests its second triple in the order y, x, z, and the source has to be written that way to match.
+
 A `static const float` folds to a constant and loses its magic-static guard unless the initializer calls something. The binary's guard on `Math::rotationFromByte` is what proves the step came from `G3D::pi()` rather than a literal.
 
 A `ComputeProp` member records its owner's inheritance shape. MSVC sizes the pointer-to-member by how the class inherits, so `ComputeProp<float, Primitive>` is 16 bytes and `ComputeProp<float, Assembly>` is 24: `Assembly` also derives from `boost::noncopyable`, which makes the member pointer the multiple-inheritance form. A class size that is off by the difference means a base is missing.
@@ -188,7 +192,7 @@ A function-local static never matches by its mangled name. reccmp reads ours out
 
 ## Gotchas
 
-`.github/workflows/build.yml` runs seven checks and six of them are not `reccmp-reccmp`. `reccmp-decomplint` runs with `--warnfail`, so a warning fails the build: a nameref belongs in a header, never in a `.cpp`. `reccmp-vtable` compares every vtable that has a name on both sides, which is why a vendored vftable only goes into `webservice-globals.csv` one at a time, listed in `VENDORED_VTABLES` — naming them all pairs ATL and STL tables whose entries reccmp cannot resolve. `reccmp-datacmp` compares every named variable, and it matches statics by bare name, so a name has to be unique in both builds; `next` named RakNet's file-scope one and a function-local one our G3D keeps. Run all seven before committing, not just the accuracy number.
+`.github/workflows/build.yml` runs eight checks and seven of them are not `reccmp-reccmp`. `tools/ncc/ncc.py` runs on its own Linux job and needs libclang plus the `clang` python bindings to run locally; it counts its findings and still exits 0, so the count is the verdict. `reccmp-decomplint` runs with `--warnfail`, so a warning fails the build: a nameref belongs in a header, never in a `.cpp`. `reccmp-vtable` compares every vtable that has a name on both sides, which is why a vendored vftable only goes into `webservice-globals.csv` one at a time, listed in `VENDORED_VTABLES` — naming them all pairs ATL and STL tables whose entries reccmp cannot resolve. `reccmp-datacmp` compares every named variable, and it matches statics by bare name, so a name has to be unique in both builds; `next` named RakNet's file-scope one and a function-local one our G3D keeps. Run all seven before committing, not just the accuracy number.
 
 
 Never sweep timestamps across the working tree. `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. That is what the CI workflow's backdate step does, which is fine on a throwaway runner and destructive in a clone.
