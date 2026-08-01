@@ -421,6 +421,9 @@ if (MSVC_FOR_DECOMP)
   set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/incremental:no")
   set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO "/incremental:no /debug")
   set(CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL "/incremental:no")
+elseif (MSVC)
+  # boost::thread throws, and the conformance build has no /EHsc of its own.
+  add_compile_options(/EHsc)
 endif()
 
 find_program(CLANGFORMAT_BIN NAMES clang-format)

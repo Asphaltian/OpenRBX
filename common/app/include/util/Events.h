@@ -16,7 +16,23 @@ struct RaiseRange
 	unsigned int upper;   // 0x04
 	RaiseRange* previous; // 0x08
 
-	void removeIndex(unsigned int removed);
+	// STUB: WEBSERVICE 0x1000cd10
+	void removeIndex(unsigned int removed)
+	{
+		RaiseRange* range = this;
+
+		do {
+			if (range->upper > removed) {
+				range->upper--;
+			}
+
+			if (range->index >= removed) {
+				range->index--;
+			}
+
+			range = range->previous;
+		} while (range != NULL);
+	}
 };
 
 // SIZE 0x04
