@@ -15,6 +15,8 @@ public:
 		return isJoint(edge) && static_cast<Joint*>(edge)->getJointType() == MOTOR_JOINT;
 	}
 
+	virtual JointType getJointType() const; // vtable+0x14
+
 	RevoluteLink* resetLink();
 };
 

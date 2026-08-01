@@ -19,6 +19,8 @@ public:
 	static float worldDt();
 	static float kernelDt();
 
+	static float getElasticMultiplier(float elasticity);
+
 	static float getJointK(const Vector3& size, bool isBall);
 };
 

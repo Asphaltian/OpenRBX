@@ -46,6 +46,28 @@ float Constants::kernelDt()
 	return 0.00021929825f;
 }
 
+// FUNCTION: WEBSERVICE 0x1010a990
+float Constants::getElasticMultiplier(float elasticity)
+{
+	if (elasticity < 0.05f) {
+		return 0.28f;
+	}
+
+	if (elasticity < 0.26f) {
+		return 0.42f;
+	}
+
+	if (elasticity < 0.51f) {
+		return 0.57f;
+	}
+
+	if (elasticity < 0.76f) {
+		return 0.8f;
+	}
+
+	return 1.0f;
+}
+
 // STUB: WEBSERVICE 0x1010adb0
 float Constants::getJointK(const Vector3& size, bool isBall)
 {

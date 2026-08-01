@@ -4,6 +4,12 @@
 
 namespace RBX {
 
+// FUNCTION: WEBSERVICE 0x1010ae60
+Vector3& Face::operator[](int index)
+{
+	return (&c0)[index];
+}
+
 // STUB: WEBSERVICE 0x1010afb0
 Face Face::fromExtentsSide(const Extents& extents, NormalId normalId)
 {

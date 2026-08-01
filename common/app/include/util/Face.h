@@ -21,6 +21,8 @@ public:
 
 	Face toWorldSpace(const CoordinateFrame& coord) const;
 
+	Vector3& operator[](int index);
+
 private:
 	Vector3 c0; // 0x00
 	Vector3 c1; // 0x0c

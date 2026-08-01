@@ -6,6 +6,12 @@
 
 namespace RBX {
 
+// FUNCTION: WEBSERVICE 0x1010a910 FOLDED
+Joint::JointType MotorJoint::getJointType() const
+{
+	return MOTOR_JOINT;
+}
+
 // STUB: WEBSERVICE 0x1011ff70
 RevoluteLink* MotorJoint::resetLink()
 {
