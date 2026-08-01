@@ -12,6 +12,13 @@ bool PartInstance::showPartCoord;
 bool PartInstance::showUnalignedParts;
 bool PartInstance::showSpanningTree;
 
+const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_RenderImportance;
+const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Transparency;
+const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Reflectance;
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Locked;
+
+static Reflection::PropDescriptor<PartInstance, PartInstance::FormFactor> prop_formFactor;
+
 // FUNCTION: WEBSERVICE 0x1009ae40
 bool PartInstance::nonNullInWorkspace(shared_ptr<PartInstance> part)
 {
@@ -82,6 +89,60 @@ Extents PartInstance::getExtentsLocal() const
 	const Vector3 corner = primitive->getGeometry()->getGridSize() * 0.5f;
 
 	return Extents(-corner, corner);
+}
+
+// FUNCTION: WEBSERVICE 0x1009fad0
+void PartInstance::setRenderImportance(float value)
+{
+	if (value != renderImportance) {
+		renderImportance = value;
+		raisePropertyChanged(prop_RenderImportance);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fb80
+void PartInstance::setPartLocked(bool value)
+{
+	if (value != locked) {
+		locked = value;
+		raisePropertyChanged(prop_Locked);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fbb0
+void PartInstance::setTransparency(float value)
+{
+	if (value != transparency) {
+		transparency = value;
+		raisePropertyChanged(prop_Transparency);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fbe0
+void PartInstance::setAlphaModifier(float value)
+{
+	if (value != alphaModifier) {
+		alphaModifier = value;
+		raisePropertyChanged(prop_Transparency);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fc10
+void PartInstance::setReflectance(float value)
+{
+	if (value != reflectance) {
+		reflectance = value;
+		raisePropertyChanged(prop_Reflectance);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fc70
+void PartInstance::setFormFactorXml(FormFactor value)
+{
+	if (value != formFactor) {
+		formFactor = value;
+		raisePropertyChanged(prop_formFactor);
+	}
 }
 
 } // namespace RBX

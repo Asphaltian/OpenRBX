@@ -6,6 +6,8 @@
 
 namespace RBX {
 
+Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged;
+
 Instance::Instance() : parent(0), archivable(true)
 {
 }

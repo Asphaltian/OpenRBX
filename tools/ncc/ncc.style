@@ -18,4 +18,4 @@ VariableName:
         Integer: ''
         Bool: ''
         Pointer: ''
-    Pattern: '^[gmp]_unk0x[a-f0-9]{1,8}$|^[a-z][a-zA-Z0-9]*$'
+    Pattern: '^[gmp]_unk0x[a-f0-9]{1,8}$|^(prop|event)_[a-zA-Z][a-zA-Z0-9]*$|^[a-z][a-zA-Z0-9]*$'

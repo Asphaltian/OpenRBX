@@ -106,6 +106,7 @@ endif()
 
 set(OPENRBX_APP_SOURCES
   common/app/security/SecurityContext.cpp
+  common/app/reflection/Signal.cpp
   common/app/util/Debug.cpp
   common/app/v8tree/Instance.cpp
   common/app/util/ExponentialRunningAverage.cpp

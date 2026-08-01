@@ -9,6 +9,9 @@ namespace Reflection {
 // SIZE 0x10
 class MemberDescriptor
 {
+protected:
+	MemberDescriptor() {}
+
 private:
 	undefined m_unk0x00[0x10 - 0x00]; // 0x00
 };

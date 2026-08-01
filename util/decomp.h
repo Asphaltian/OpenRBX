@@ -29,6 +29,10 @@ typedef unsigned int undefined4;
 
 extern undefined4 g_foldingDummyVariable;
 
+// A stub body is one store, so /Ob2 inlines it and the caller loses the call its own match
+// depends on. Mark a stub the original did not inline, and drop this once the body is real.
+#define DECOMP_NOINLINE __declspec(noinline)
+
 // Use STUB when a function has not yet been matched and/or is WIP.
 #define STUB(val)                                                                                                      \
 	do {                                                                                                               \

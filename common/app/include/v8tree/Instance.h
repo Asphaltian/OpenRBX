@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "reflection/Property.h"
 #include "reflection/Reflection.h"
+#include "reflection/Signal.h"
 #include "util/Association.h"
 #include "util/Events.h"
 #include "util/Guid.h"
@@ -93,7 +94,21 @@ public:
 	virtual XmlElement* write();                                                // vtable+0x38
 	virtual void onChildChanged(Instance* child, const PropertyChanged& event); // vtable+0x3c
 
-	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor);
+	static Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> event_propertyChanged;
+
+	// STUB: WEBSERVICE 0x100469f0
+	DECOMP_NOINLINE void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
+	{
+		STUB(0x100469f0);
+
+		const PropertyChanged event;
+
+		if (event_propertyChanged.findSignalInstance(reinterpret_cast<const Reflection::SignalSource*>(this)) != NULL) {
+			if (parent != NULL) {
+				parent->onChildChanged(this, event);
+			}
+		}
+	}
 
 	void predelete();
 

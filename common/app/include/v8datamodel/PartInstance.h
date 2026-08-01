@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "util/Extents.h"
 #include "v8datamodel/Surfaces.h"
+#include "v8tree/Instance.h"
 #include "v8world/Primitive.h"
 
 #include <boost/scoped_ptr.hpp>
@@ -16,7 +17,7 @@ using boost::shared_ptr;
 class World;
 
 // SIZE 0x2ac
-class PartInstance
+class PartInstance : public Instance
 {
 public:
 	enum FormFactor
@@ -32,6 +33,11 @@ public:
 	static bool showPartCoord;
 	static bool showUnalignedParts;
 	static bool showSpanningTree;
+
+	static const Reflection::PropDescriptor<PartInstance, float> prop_RenderImportance;
+	static const Reflection::PropDescriptor<PartInstance, float> prop_Transparency;
+	static const Reflection::PropDescriptor<PartInstance, float> prop_Reflectance;
+	static const Reflection::PropDescriptor<PartInstance, bool> prop_Locked;
 
 	static bool nonNullInWorkspace(shared_ptr<PartInstance> part);
 
@@ -67,9 +73,15 @@ public:
 
 	Extents getExtentsLocal() const;
 
+	void setRenderImportance(float value);
+	void setPartLocked(bool value);
+	void setTransparency(float value);
+	void setAlphaModifier(float value);
+	void setReflectance(float value);
+	void setFormFactorXml(FormFactor value);
+
 private:
-	undefined m_unk0x000[0x19c - 0x000];    // 0x000
-	undefined m_unk0x19c[0x1a0 - 0x19c];    // 0x19c
+	undefined m_unk0x0f8[0x1a0 - 0x0f8];    // 0x0f8
 	FormFactor formFactor;                  // 0x1a0
 	undefined m_unk0x1a4[0x1a8 - 0x1a4];    // 0x1a4
 	float transparency;                     // 0x1a8
