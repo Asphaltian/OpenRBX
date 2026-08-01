@@ -330,11 +330,6 @@ address,type,name
 0x10301878,global,root
 0x102f5e60,global,runFunction
 0x10262440,global,s_Errors
-0x102618a0,global,s_anPrimes
-0x102618a0,global,s_anPrimes
-0x102618a0,global,s_anPrimes
-0x102618a0,global,s_anPrimes
-0x102618a0,global,s_anPrimes
 0x10262390,global,s_chBase64EncodingTable
 0x10262404,global,s_chHexChars
 0x102f6d70,global,sanitizeFunction

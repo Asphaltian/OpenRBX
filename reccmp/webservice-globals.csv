@@ -548,7 +548,6 @@ address,type,symbol
 0x1022cf20,global,__real@43340000
 0x1022cf28,global,__real@3fe0000000000000
 0x1022cf30,global,__real@42b40000
-0x1022d098,global,s_schemes___ATL::CUrl::GetSchemes
 0x1022d848,global,__real@408f400000000000
 0x1022d850,global,__real@3fb999999999999a
 0x1022dc88,global,__real@3b808081
@@ -1191,11 +1190,6 @@ address,type,symbol
 0x10262360,global,__GUID_b1f64757_6e88_4fa2_8886_7848b0d7e660
 0x10262370,global,__GUID_105a8866_4059_45fe_86ae_fa0eabbfbbb4
 0x10262380,global,__GUID_7634b28b_d819_409d_b96e_fc9f3aba329f
-0x10262390,global,s_chBase64EncodingTable___ATL::Base64Encode
-0x10262404,global,s_chHexChars___ATL::AtlHexEncode
-0x10262440,global,s_Errors___ATL::CDefaultErrorProvider::GetErrorText
-0x10262840,global,_entries___ATL::CCacheServerContext::_GetEntries
-0x1026293c,global,_entries___ATL::CTransferServerContext::_GetEntries
 0x102629d8,global,?numStrips@MegaTextureProxy@View@RBX@@2IB
 0x102638c8,global,__GUID_00000000_0000_0000_c000_000000000046
 0x102638d8,global,__GUID_00000146_0000_0000_c000_000000000046
@@ -1435,7 +1429,6 @@ address,type,symbol
 0x102f4fec,global,?__hdlrEntry_WSDL_36@@3U_HANDLER_ENTRY@ATL@@A
 0x102f5000,global,?___Roblox_CWebService_funcs@Roblox@@3PAPBU_soapmap@@A
 0x102f5040,global,?___Roblox_CWebService_headers@Roblox@@3PAPBU_soapmap@@A
-0x102f5228,global,methods___ATL::_CSDLGenerator::GetReplacementMethodMap
 0x102f5560,global,?creator@?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@0VCreator@12@B
 0x102f5564,global,?creator@?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@0VCreator@12@B
 0x102f5568,global,?creator@?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@0VCreator@12@B
@@ -2848,7 +2841,6 @@ address,type,symbol
 0x10301aac,global,?flag@?1???$declare@$1?sSoundService@Soundscape@RBX@@3PADA@Name@RBX@@SAABV12@XZ@4JA
 0x10301ab0,global,?flag@?1???$declare@$1?sSoundChannel@Soundscape@RBX@@3PADA@Name@RBX@@SAABV12@XZ@4JA
 0x10301ab4,global,?flag@?1???$getClassIndex@VScriptContext@RBX@@@ServiceProvider@RBX@@CAIXZ@4JA
-0x10301ab8,global,bDynArrWrapper___ATL::CSoapRootHandler::endElement
 0x10301abc,global,?index@?1???$doGetClassIndex@VScriptContext@RBX@@@ServiceProvider@RBX@@CAIXZ@4IA
 0x10301ac0,global,??_B?1???$doGetClassIndex@VScriptContext@RBX@@@ServiceProvider@RBX@@CAIXZ@51
 0x10301ac4,global,?n@?1???$doDeclare@$1?sSoundChannel@Soundscape@RBX@@3PADA@Name@RBX@@CAABV12@XZ@4ABV12@B

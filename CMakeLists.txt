@@ -290,6 +290,7 @@ add_engine_library(appdraw
 # --- WebService.dll target ---
 # The only objects compiled /GL, so the link ran /LTCG.
 set(OPENRBX_WEBSERVICE_SOURCES
+  WebService/WebService.cpp
   common/win/VersionInfo.cpp
 )
 
@@ -345,8 +346,7 @@ target_link_libraries(webservice PRIVATE
 )
 
 if (MSVC)
-  # Uncomment once WebService.cpp defines the entry points; until then LNK2001.
-  # target_sources(webservice PRIVATE WebService/WebService.def)
+  target_sources(webservice PRIVATE WebService/WebService.def)
   target_link_options(webservice PRIVATE "-MAP:$<TARGET_FILE_DIR:webservice>/$<TARGET_FILE_BASE_NAME:webservice>.map")
 endif()
 

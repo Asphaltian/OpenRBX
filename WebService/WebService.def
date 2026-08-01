@@ -4,12 +4,10 @@ LIBRARY "WebService"
 
 EXPORTS
 	DllCanUnloadNow		PRIVATE
+	DllMain			PRIVATE
 	DllGetClassObject	PRIVATE
 	DllRegisterServer	PRIVATE
 	DllUnregisterServer	PRIVATE
 	GetExtensionVersion	PRIVATE
 	HttpExtensionProc	PRIVATE
 	TerminateExtension	PRIVATE
-	GetAtlHandlerByName	PRIVATE
-	InitializeAtlHandlers	PRIVATE
-	UninitializeAtlHandlers	PRIVATE

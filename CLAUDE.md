@@ -132,6 +132,14 @@ Within a library, App uses subdirectories (`util`, `v8world`, `v8tree`, `v8kerne
 
 `OPENRBX_KEEP_UNREFERENCED` links with `/OPT:NOREF` so reccmp can see functions nothing calls yet. The original used `/OPT:REF`. Turn it off once enough of the DLL is reachable.
 
+## The DLL
+
+`WebService/WebService.cpp` is the ATL Server ISAPI surface: `_AtlModule` is a `CDllMainOverride`, `theExtension` a `CRbxIsapiExtension`, and both names come from the publics, not from the wizard's defaults. It needs `_WIN32_WINNT 0x0400` for `CWorkerThread::AddTimer` and `_WIN32_DCOM` for `CoInitializeEx`, or `atlisapi.h` will not compile.
+
+`WebService/WebService.def` names the eight exports the linker cannot infer. The other three the original has, `_InitializeAtlHandlers@8` and its two siblings, are `__declspec(dllexport)` inside ATL's `HANDLER_ENTRY` macro and appear on their own once a request handler is declared.
+
+Smoke test the result by loading it: the DLL has to map at 0x10000000 and resolve every export. The loader must be built 32-bit, so a 64-bit shell cannot run it.
+
 ## Third Party
 
 Everything is vendored under `3rdparty/`. RakNet is the exception that is reconstructed rather than vendored, because the 3.0 release RBXGS used was never archived; the closest archived drop still differs in nine files.
