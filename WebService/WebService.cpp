@@ -10,6 +10,8 @@ class DataModel;
 #include "WebServiceMaps.h"
 #include "decomp.h"
 
+#include <G3D/System.h>
+#include <G3D/format.h>
 #include <atlbase.h>
 #include <atlcom.h>
 #include <atlisapi.h>
@@ -18,6 +20,7 @@ class DataModel;
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/once.hpp>
 #include <map>
+#include <stdexcept>
 #include <string>
 
 boost::once_flag flagInitRoblox = BOOST_ONCE_INIT;
@@ -142,6 +145,8 @@ public:
 
 private:
 	friend BOOL WINAPI ::TerminateExtension(DWORD flags);
+
+	std::map<std::string, Job>::iterator getJob(wchar_t* jobID);
 
 	static std::map<std::string, Job> jobs;
 	static boost::mutex sync;
@@ -270,8 +275,12 @@ HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
 // STUB: WEBSERVICE 0x1000e650
 HRESULT __stdcall CWebService::TouchJob(wchar_t* jobID, double expiration)
 {
-	STUB(0x1000e650);
-	return E_NOTIMPL;
+	boost::mutex::scoped_lock lock(sync);
+
+	std::map<std::string, Job>::iterator job = getJob(jobID);
+	job->second.expiration = G3D::System::getLocalTime() + expiration;
+
+	return S_OK;
 }
 
 // STUB: WEBSERVICE 0x1000e730
@@ -312,8 +321,24 @@ HRESULT __stdcall CWebService::CloseAllJobs()
 // STUB: WEBSERVICE 0x1000f2e0
 HRESULT __stdcall CWebService::GetTimeout(wchar_t* jobID, double* timeout)
 {
-	STUB(0x1000f2e0);
-	return E_NOTIMPL;
+	boost::mutex::scoped_lock lock(sync);
+
+	std::map<std::string, Job>::iterator job = getJob(jobID);
+	*timeout = job->second.expiration - G3D::System::getLocalTime();
+
+	return S_OK;
+}
+
+// STUB: WEBSERVICE 0x1000f3c0
+std::map<std::string, CWebService::Job>::iterator CWebService::getJob(wchar_t* jobID)
+{
+	std::map<std::string, Job>::iterator job = jobs.find(std::string(ATL::CStringA(jobID)));
+
+	if (job == jobs.end()) {
+		throw std::runtime_error(G3D::format("Job %s not found", ATL::CStringA(jobID)));
+	}
+
+	return job;
 }
 
 // STUB: WEBSERVICE 0x1000f4e0
@@ -359,11 +384,10 @@ HRESULT __stdcall CWebService::GetStatus(Status* result)
 	return S_OK;
 }
 
-// STUB: WEBSERVICE 0x1000faf0
+// FUNCTION: WEBSERVICE 0x1000faf0
 HRESULT __stdcall CWebService::Update(wchar_t* url)
 {
-	STUB(0x1000faf0);
-	return E_NOTIMPL;
+	throw std::runtime_error("Update not implemented");
 }
 
 // STUB: WEBSERVICE 0x1000fb80
