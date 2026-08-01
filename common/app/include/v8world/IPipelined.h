@@ -25,6 +25,8 @@ public:
 
 	Kernel* getKernel();
 
+	bool downstreamOfStage(IStage* stage);
+
 	virtual void putInKernel(Kernel* kernel); // vtable+0x04
 	virtual void removeFromKernel();          // vtable+0x08
 

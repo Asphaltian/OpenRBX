@@ -160,6 +160,7 @@ public:
 	// RBX::Primitive::`scalar deleting destructor'
 
 	Body* getBody() const { return body; }
+	Clump* getClump() const { return clump; }
 	Anchor* getAnchorObject() const { return anchorObject; }
 
 	const Guid& getGuid() const;

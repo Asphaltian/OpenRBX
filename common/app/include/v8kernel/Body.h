@@ -22,6 +22,8 @@ public:
 
 	void updatePV() const;
 
+	Body* getParent() const { return parent; }
+
 	int getStateIndex() const
 	{
 		updatePV();
@@ -40,7 +42,9 @@ public:
 	void setMoment(const Matrix3& moment);
 
 private:
-	undefined m_unk0x00[0x84 - 0x00]; // 0x00
+	undefined m_unk0x00[0x08 - 0x00]; // 0x00
+	Body* parent;                     // 0x08
+	undefined m_unk0x0c[0x84 - 0x0c]; // 0x0c
 	int stateIndex;                   // 0x84
 	PV pv;                            // 0x88
 };
