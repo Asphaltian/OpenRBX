@@ -1,7 +1,6 @@
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include "decomp.h"
-#include "util/Log.h"
 
 #include <G3D/format.h>
 #include <cstdarg>
@@ -25,20 +24,6 @@ void StandardOut::print(MessageType type, const char* format, ...)
 	va_start(arguments, format);
 	std::string message = G3D::vformat(format, arguments);
 	va_end(arguments);
-
-	if (Log::current() != NULL) {
-		switch (type) {
-		case MESSAGE_INFO:
-			Log::current()->writeEntry(Log::Information, message.c_str());
-			break;
-		case MESSAGE_WARNING:
-			Log::current()->writeEntry(Log::Warning, message.c_str());
-			break;
-		case MESSAGE_ERROR:
-			Log::current()->writeEntry(Log::Error, message.c_str());
-			break;
-		}
-	}
 
 	if (hasListeners()) {
 		boost::mutex::scoped_lock lock(sync);

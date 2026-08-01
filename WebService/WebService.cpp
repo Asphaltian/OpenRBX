@@ -9,7 +9,7 @@ class DataModel;
 
 #include "WebServiceMaps.h"
 #include "decomp.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include <G3D/System.h>
 #include <G3D/format.h>

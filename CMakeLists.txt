@@ -116,12 +116,11 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Guid.cpp
   common/app/util/Handle.cpp
   common/app/util/IndexBox.cpp
-  common/app/util/Log.cpp
   common/app/util/Math.cpp
   common/app/util/NormalId.cpp
   common/app/util/Quaternion.cpp
   common/app/util/Rect.cpp
-  common/app/util/StandardOut.cpp
+  common/app/util/standardout.cpp
   common/app/v8kernel/Body.cpp
   common/app/util/Debug.cpp
   common/app/v8datamodel/Accoutrement.cpp
