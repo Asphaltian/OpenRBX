@@ -3,6 +3,10 @@
 
 #include "WebService.h"
 
+namespace RBX {
+class DataModel;
+}
+
 #include "WebServiceMaps.h"
 #include "decomp.h"
 
@@ -10,7 +14,11 @@
 #include <atlcom.h>
 #include <atlisapi.h>
 #include <atlsoap.h>
+#include <boost/shared_ptr.hpp>
+#include <boost/thread/mutex.hpp>
 #include <boost/thread/once.hpp>
+#include <map>
+#include <string>
 
 static boost::once_flag flagInitRoblox = BOOST_ONCE_INIT;
 static bool initRobloxFailed;
@@ -34,6 +42,13 @@ namespace Roblox {
 class CWebService : public IWebService, public ATL::CSoapHandler<CWebService>
 {
 public:
+	// SIZE 0x10
+	struct Job
+	{
+		boost::shared_ptr<RBX::DataModel> dataModel; // 0x00
+		double expiration;                           // 0x08
+	};
+
 	HRESULT __stdcall HelloWorld(wchar_t** result);
 	HRESULT __stdcall GetAllJobs(Strings* result);
 	HRESULT __stdcall TouchJob(wchar_t* jobID, double expiration);
@@ -122,6 +137,9 @@ public:
 	const char* GetServiceName() { return "Service"; }
 
 private:
+	static std::map<std::string, Job> jobs;
+	static boost::mutex sync;
+
 	undefined m_unk0x004[0x17c - 0x004]; // 0x004
 	ATL::CComBSTR errorMessage;          // 0x17c
 };
@@ -132,11 +150,16 @@ DECLARE_REQUEST_HANDLER("Default", CWebService, Roblox::CWebService)
 
 namespace Roblox {
 
-// STUB: WEBSERVICE 0x1000dfb0
+std::map<std::string, CWebService::Job> CWebService::jobs;
+boost::mutex CWebService::sync;
+
+// FUNCTION: WEBSERVICE 0x1000dfb0
 HRESULT __stdcall CWebService::HelloWorld(wchar_t** result)
 {
-	STUB(0x1000dfb0);
-	return E_NOTIMPL;
+	ATL::CComBSTR answer(L"Hello World!");
+	*result = answer.Detach();
+
+	return S_OK;
 }
 
 } // namespace Roblox
@@ -270,11 +293,16 @@ HRESULT __stdcall CWebService::Execute(wchar_t* jobID, ScriptExecution script, L
 	return E_NOTIMPL;
 }
 
-// STUB: WEBSERVICE 0x1000f990
+// FUNCTION: WEBSERVICE 0x1000f990
 HRESULT __stdcall CWebService::BatchJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result)
 {
-	STUB(0x1000f990);
-	return E_NOTIMPL;
+	HRESULT hr = OpenJob(jobID, script, expiration, result);
+
+	if (hr == S_OK) {
+		hr = CloseJob(jobID);
+	}
+
+	return hr;
 }
 
 // STUB: WEBSERVICE 0x1000f9f0
@@ -284,11 +312,18 @@ HRESULT __stdcall CWebService::GetVersion(wchar_t** result)
 	return E_NOTIMPL;
 }
 
-// STUB: WEBSERVICE 0x1000fab0
+// FUNCTION: WEBSERVICE 0x1000fab0
 HRESULT __stdcall CWebService::GetStatus(Status* result)
 {
-	STUB(0x1000fab0);
-	return E_NOTIMPL;
+	HRESULT hr = GetVersion(&result->version);
+
+	if (hr == S_OK) {
+		boost::mutex::scoped_lock lock(sync);
+		result->environmentCount = jobs.size();
+		hr = S_OK;
+	}
+
+	return hr;
 }
 
 // STUB: WEBSERVICE 0x1000faf0

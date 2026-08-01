@@ -2714,7 +2714,6 @@ address,type,symbol
 0x103013cc,global,?flagInitRoblox@@3JA
 0x10301494,global,?_AtlModule@@3VCDllMainOverride@@A
 0x103014c0,global,?theExtension@@3VCRbxIsapiExtension@@A
-0x103017e8,global,?jobs@CWebService@Roblox@@0V?$map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UJob@CWebService@Roblox@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UJob@CWebService@Roblox@@@std@@@2@@std@@A
 0x103017f4,global,?sync@CWebService@Roblox@@0Vmutex@boost@@A
 0x1030181c,global,??_B?1??singleton@ContentProvider@RBX@@SAAAV12@XZ@51
 0x10301820,global,sing___RBX::ContentProvider::singleton
