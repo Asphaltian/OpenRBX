@@ -24,7 +24,7 @@ public:
 
 	virtual ~IStage();
 	virtual StageType getStageType() const = 0;
-	virtual void stepWorld() = 0;
+	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling) = 0;
 	virtual Kernel* getKernel() = 0;
 
 	IStage* getUpstream() { return upstream; }
