@@ -42,6 +42,8 @@ public:
 	virtual bool canStepUi() const;                                        // vtable+0x2c
 	virtual void stepUi(int frameCount);                                   // vtable+0x30
 
+	void setJointOwner(IJointOwner* value);
+
 	bool getActive() const { return active; }
 	void setActive(bool value) { active = value; }
 

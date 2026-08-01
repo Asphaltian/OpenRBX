@@ -10,6 +10,7 @@
 namespace RBX {
 
 class Assembly;
+class AssemblyStage;
 class Primitive;
 
 float getPrimitiveSize(Primitive* primitive);
@@ -48,6 +49,8 @@ public:
 
 	void traverse(Joint* joint, Primitive* root);
 
+	AssemblyStage* getAssemblyStage() { return reinterpret_cast<AssemblyStage*>(getDownstream()); }
+
 	void cleanAssembly(Assembly* assembly);
 	void cleanEdge(Edge* edge);
 
@@ -74,6 +77,13 @@ public:
 	virtual void onEdgeAdded(Edge* edge);         // vtable+0x10
 	virtual void onEdgeRemoving(Edge* edge);      // vtable+0x14
 	virtual int getMetric(MetricType metricType); // vtable+0x18
+
+	void process();
+
+	void stepUi(int frameCount);
+
+private:
+	TreeStage* getTreeStage() { return reinterpret_cast<TreeStage*>(getDownstream()); }
 };
 
 DECOMP_SIZE_ASSERT(ClumpStage, 0x10)

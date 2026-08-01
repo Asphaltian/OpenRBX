@@ -1,8 +1,40 @@
 #include "v8world/World.h"
 
 #include "decomp.h"
+#include "v8kernel/Kernel.h"
+#include "v8world/JointStage.h"
 
 namespace RBX {
+
+// FUNCTION: WEBSERVICE 0x100cef80
+Kernel* World::getKernel() const
+{
+	return jointStage->getKernel();
+}
+
+// FUNCTION: WEBSERVICE 0x100cef90
+int World::getNumBodies() const
+{
+	return getKernel()->numBodies();
+}
+
+// FUNCTION: WEBSERVICE 0x100cefb0
+int World::getNumPoints() const
+{
+	return getKernel()->numPoints();
+}
+
+// FUNCTION: WEBSERVICE 0x100cefd0
+int World::getNumConstraints() const
+{
+	return getKernel()->numConnectors();
+}
+
+// FUNCTION: WEBSERVICE 0x100ceff0
+int World::getMetric(IWorldStage::MetricType metricType) const
+{
+	return jointStage->getMetric(metricType);
+}
 
 // STUB: WEBSERVICE 0x100cf020
 void World::onPrimitiveContactParametersChanged(Primitive* primitive)
@@ -26,6 +58,18 @@ void World::onAssemblyExtentsChanged(Assembly* assembly)
 void World::onPrimitiveGeometryTypeChanged(Primitive* primitive)
 {
 	STUB(0x100cf0c0);
+}
+
+// FUNCTION: WEBSERVICE 0x100cf0d0
+void World::onJointPrimitiveNulling(Joint* joint, Primitive* primitive)
+{
+	jointStage->onJointPrimitiveNulling(joint, primitive);
+}
+
+// FUNCTION: WEBSERVICE 0x100cf0e0
+void World::onJointPrimitiveSet(Joint* joint, Primitive* primitive)
+{
+	jointStage->onJointPrimitiveSet(joint, primitive);
 }
 
 // STUB: WEBSERVICE 0x100cf1a0

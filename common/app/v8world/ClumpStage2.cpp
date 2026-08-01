@@ -212,6 +212,12 @@ int TreeStage::getMetric(MetricType metricType)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1011bbb0
+void ClumpStage::stepUi(int frameCount)
+{
+	getTreeStage()->getAssemblyStage()->stepUi(frameCount);
+}
+
 // STUB: WEBSERVICE 0x1011bbc0
 void TreeStage::findHeaviestUpstream(Primitive* prim0, Primitive* prim1, Joint*& heaviest, int& heaviestIndex)
 {
@@ -237,6 +243,25 @@ void TreeStage::findHeaviestUpstream(Primitive* prim0, Primitive* prim1, Joint*&
 		prim0 = prim0 != NULL ? heavyParent(0, prim0, heaviest, heaviestIndex) : NULL;
 		prim1 = prim1 != NULL ? heavyParent(1, prim1, heaviest, heaviestIndex) : NULL;
 	}
+}
+
+// STUB: WEBSERVICE 0x1011bcc0
+void TreeStage::process()
+{
+	STUB(0x1011bcc0);
+}
+
+// STUB: WEBSERVICE 0x1011be80
+void ClumpStage::process()
+{
+	getTreeStage()->process();
+}
+
+// STUB: WEBSERVICE 0x1011bff0
+void TreeStage::stepWorld(int worldStepId, int uiStepId, bool throttling)
+{
+	process();
+	getAssemblyStage()->stepWorld(worldStepId, uiStepId, throttling);
 }
 
 // STUB: WEBSERVICE 0x1011c010

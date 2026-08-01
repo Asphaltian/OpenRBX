@@ -12,6 +12,10 @@ class Body;
 class Kernel : public IStage
 {
 public:
+	int numBodies() const;
+	int numPoints() const;
+	int numConnectors() const;
+
 	void insertBody(Body* body);
 	void removeBody(Body* body);
 
