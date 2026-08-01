@@ -10,10 +10,10 @@ DECOMP_SIZE_ASSERT(ILogProvider, 0x04)
 Log::Severity Log::aggregateWorstSeverity = Log::Information;
 ILogProvider* Log::provider;
 
-// STUB: WEBSERVICE 0x1003d880
+// FUNCTION: WEBSERVICE 0x1003d880
 void Log::setLogProvider(ILogProvider* logProvider)
 {
-	STUB(0x1003d880);
+	provider = logProvider;
 }
 
 // STUB: WEBSERVICE 0x1003d890

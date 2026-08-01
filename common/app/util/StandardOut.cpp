@@ -12,10 +12,10 @@ namespace RBX {
 DECOMP_SIZE_ASSERT(StandardOut, 0x28)
 DECOMP_SIZE_ASSERT(StandardOutMessage, 0x28)
 
-// STUB: WEBSERVICE 0x100010d0
+// FUNCTION: WEBSERVICE 0x100010d0
 void StandardOut::print(MessageType type, const std::exception& error)
 {
-	STUB(0x100010d0);
+	print(type, error.what());
 }
 
 // STUB: WEBSERVICE 0x10031e40
