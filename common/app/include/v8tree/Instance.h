@@ -14,9 +14,16 @@
 #include <string>
 #include <vector>
 
+class XmlElement;
+
 namespace RBX {
 
+using boost::shared_ptr;
+
+class IReferenceBinder;
 class Instance;
+class Name;
+class ServiceProvider;
 
 class ChildAdded
 {
@@ -61,7 +68,35 @@ class Instance : public GuidItem<Instance>,
 {
 public:
 	Instance();
-	virtual ~Instance();
+	virtual ~Instance(); // vtable+0x00
+
+	virtual void setName(const std::string& value); // vtable+0x04
+	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
+	virtual bool askAddChild(const Instance* instance) const { return false; } // vtable+0x08
+
+	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
+	virtual bool askSetParent(const Instance* instance) const { return false; } // vtable+0x0c
+	virtual void onAncestorChanged(const AncestorChanged& event);               // vtable+0x10
+	virtual void onDescendentAdded(Instance* instance);                         // vtable+0x14
+	virtual void onDescendentRemoving(const shared_ptr<Instance>& instance);    // vtable+0x18
+	virtual void onChildAdded(Instance* child) {}                               // vtable+0x1c
+
+	virtual void onChildRemoving(Instance* child) {} // vtable+0x20
+
+	virtual void onChildRemoved(Instance* child) {} // vtable+0x24
+
+	virtual void onLastChildRemoved() {}                                            // vtable+0x28
+	virtual void readProperty(const XmlElement* element, IReferenceBinder& binder); // vtable+0x2c
+	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider) {
+	} // vtable+0x30
+	virtual shared_ptr<Instance> createChild(const Name& className);            // vtable+0x34
+	virtual XmlElement* write();                                                // vtable+0x38
+	virtual void onChildChanged(Instance* child, const PropertyChanged& event); // vtable+0x3c
+
+	void predelete();
+
+	void readProperties(const XmlElement* element, IReferenceBinder& binder);
+	void writeChildren(XmlElement* element);
 
 	bool contains(const Instance* instance) const;
 
