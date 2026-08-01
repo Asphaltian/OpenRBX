@@ -1,8 +1,13 @@
 #ifndef WEBSERVICE_WEBSERVICE_H
 #define WEBSERVICE_WEBSERVICE_H
 
-#include <unknwn.h>
+// clang-format off
+// winsock2.h has to be included before anything that pulls in windows.h, so it cannot be
+// sorted with the rest.
 #include <winsock2.h>
+// clang-format on
+
+#include <unknwn.h>
 
 namespace Roblox {
 
