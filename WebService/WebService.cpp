@@ -384,7 +384,7 @@ HRESULT __stdcall CWebService::GetStatus(Status* result)
 	return S_OK;
 }
 
-// FUNCTION: WEBSERVICE 0x1000faf0
+// STUB: WEBSERVICE 0x1000faf0
 HRESULT __stdcall CWebService::Update(wchar_t* url)
 {
 	throw std::runtime_error("Update not implemented");
