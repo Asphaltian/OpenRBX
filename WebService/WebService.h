@@ -2,8 +2,7 @@
 #define WEBSERVICE_WEBSERVICE_H
 
 // clang-format off
-// winsock2.h has to be included before anything that pulls in windows.h, so it cannot be
-// sorted with the rest.
+// winsock2.h before anything that pulls in windows.h.
 #include <winsock2.h>
 // clang-format on
 
@@ -144,7 +143,6 @@ struct StandardOutMessages
 	StandardOutMessage* items; // 0x04
 };
 
-// The parameter blocks the SOAP maps describe, sized and laid out by their entry offsets.
 struct OpenJobParams
 {
 	wchar_t* jobID;         // 0x00

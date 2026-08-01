@@ -77,7 +77,6 @@ public:
 	// FUNCTION: WEBSERVICE 0x1000dcd0
 	const _soapmap** GetHeaderMap() { return ___Roblox_CWebService_headers; }
 
-	// The header maps are all empty, so the value the parser fills in is the handler itself.
 	// FUNCTION: WEBSERVICE 0x1000dce0
 	void* GetHeaderValue() { return this; }
 

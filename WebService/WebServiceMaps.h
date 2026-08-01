@@ -6,8 +6,7 @@
 #endif
 
 // clang-format off
-// winsock2.h has to be included before anything that pulls in windows.h, so it cannot be
-// sorted with the rest.
+// winsock2.h before anything that pulls in windows.h.
 #include <winsock2.h>
 // clang-format on
 
