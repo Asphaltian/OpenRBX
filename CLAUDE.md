@@ -220,6 +220,10 @@ A vendored function from a prebuilt library has no `S_GPROC32`, only a public, s
 
 A function-local static never matches by its mangled name. reccmp reads ours out of the `S_LDATA32` nested in the enclosing `S_GPROC32`, which carries only the bare name, and labels it `<variable>___<enclosing function>`. `webservice-globals.csv` hands the original the same label. The magic-static guard beside it does match by symbol, and so does the `dynamic atexit destructor` the compiler emits when the static has one, but only once a `// SYNTHETIC:` nameref claims it. Those two kinds are the exception to the rule that vendored globals stay out of the table, because a singleton like `G3D::Vector3::zero` is read straight from Roblox code and is data, which reccmp cannot match a vendored function through. A vendored vftable is the third: `G3D::ReferenceCountedObject`'s is stored by every Roblox constructor and destructor below it, and we never declare the class, so no `// VTABLE:` annotation can name it.
 
+A class whose methods are all out of line never appears in the LINES table, so the PDB records no name for its header. `RBX::Log` is the case: `app\util\log.cpp` is recorded, `log.h` is not, and `util/Log.h` is the directory's convention rather than a recovered fact. `RBX::StandardOut` is the opposite and `include\util\standardout.h` is recorded outright.
+
+`StandardOutLog` has no `// VTABLE:` annotation. Its scalar deleting destructor at 0x1000d340 needs a `// SYNTHETIC:` nameref for `reccmp-vtable` to pair slot 1, a nameref in a `.cpp` fails `reccmp-decomplint --warnfail`, and the LINES table puts the class in `webservice.cpp`, so there is no header to put it in.
+
 ## Gotchas
 
 A property descriptor is a `const` static, so it mangles with a trailing `B`. Ours ended in `A` and no setter could bind to it. `tools/ncc/ncc.style` carries a `prop_`/`event_` alternative for the same reason: those names are the original's convention, not one-offs for `skip.yml`.

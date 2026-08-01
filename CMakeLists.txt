@@ -116,6 +116,7 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Guid.cpp
   common/app/util/Handle.cpp
   common/app/util/IndexBox.cpp
+  common/app/util/Log.cpp
   common/app/util/Math.cpp
   common/app/util/NormalId.cpp
   common/app/util/Quaternion.cpp

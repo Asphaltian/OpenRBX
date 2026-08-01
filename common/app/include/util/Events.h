@@ -5,6 +5,9 @@
 
 namespace RBX {
 
+template <class Source, class Event>
+class Notifier;
+
 // SIZE 0x0c
 struct RaiseRange
 {
@@ -20,6 +23,8 @@ template <class Source, class Event>
 class __declspec(novtable) Listener
 {
 protected:
+	friend class Notifier<Source, Event>;
+
 	virtual void onEvent(const Source* source, Event event) = 0; // vtable+0x00
 	virtual ~Listener() {}                                       // vtable+0x04
 };
