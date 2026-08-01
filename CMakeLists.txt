@@ -122,13 +122,18 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Rect.cpp
   common/app/v8kernel/Body.cpp
   common/app/util/Debug.cpp
+  common/app/v8datamodel/Accoutrement.cpp
   common/app/v8datamodel/CustomMesh.cpp
+  common/app/v8datamodel/Decal.cpp
+  common/app/v8datamodel/Flag.cpp
+  common/app/v8datamodel/FlagStand.cpp
   common/app/v8datamodel/DebugSettings.cpp
   common/app/v8datamodel/FaceInstance.cpp
   common/app/v8datamodel/Feature.cpp
   common/app/v8datamodel/ModelInstance.cpp
   common/app/v8datamodel/PVInstance.cpp
   common/app/v8datamodel/PartInstance.cpp
+  common/app/v8datamodel/SpawnLocation.cpp
   common/app/v8datamodel/Team.cpp
   common/app/v8datamodel/Workspace.cpp
   common/app/v8kernel/Cofm.cpp

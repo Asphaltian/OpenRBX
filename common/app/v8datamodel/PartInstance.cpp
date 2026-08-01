@@ -17,7 +17,13 @@ const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Transpa
 const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Reflectance;
 const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Locked;
 
+const Reflection::PropDescriptor<PartInstance, G3D::Color3> PartInstance::prop_Color;
+const Reflection::PropDescriptor<PartInstance, BrickColor> PartInstance::prop_BrickColor;
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_CanCollide;
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Anchored;
+
 static Reflection::PropDescriptor<PartInstance, PartInstance::FormFactor> prop_formFactor;
+static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging;
 
 // FUNCTION: WEBSERVICE 0x1009ae40
 bool PartInstance::nonNullInWorkspace(shared_ptr<PartInstance> part)
@@ -91,12 +97,39 @@ Extents PartInstance::getExtentsLocal() const
 	return Extents(-corner, corner);
 }
 
+// FUNCTION: WEBSERVICE 0x1009faa0
+void PartInstance::setDragging(bool value)
+{
+	if (value != primitive->getDragging()) {
+		primitive->setDragging(value);
+		raisePropertyChanged(prop_Dragging);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1009fad0
 void PartInstance::setRenderImportance(float value)
 {
 	if (value != renderImportance) {
 		renderImportance = value;
 		raisePropertyChanged(prop_RenderImportance);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fb00
+void PartInstance::setCanCollide(bool value)
+{
+	if (value != getCanCollide()) {
+		primitive->setCanCollide(value);
+		raisePropertyChanged(prop_CanCollide);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fb40
+void PartInstance::setAnchored(bool value)
+{
+	if (value != getAnchored()) {
+		primitive->setAnchor(value);
+		raisePropertyChanged(prop_Anchored);
 	}
 }
 
@@ -133,6 +166,16 @@ void PartInstance::setReflectance(float value)
 	if (value != reflectance) {
 		reflectance = value;
 		raisePropertyChanged(prop_Reflectance);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fc40
+void PartInstance::setColor(BrickColor value)
+{
+	if (value.number != color.number) {
+		color = value;
+		raisePropertyChanged(prop_BrickColor);
+		raisePropertyChanged(prop_Color);
 	}
 }
 

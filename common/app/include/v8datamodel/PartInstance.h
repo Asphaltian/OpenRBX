@@ -3,10 +3,12 @@
 
 #include "decomp.h"
 #include "util/Extents.h"
+#include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Surfaces.h"
 #include "v8tree/Instance.h"
 #include "v8world/Primitive.h"
 
+#include <G3D/Color3.h>
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -38,6 +40,10 @@ public:
 	static const Reflection::PropDescriptor<PartInstance, float> prop_Transparency;
 	static const Reflection::PropDescriptor<PartInstance, float> prop_Reflectance;
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_Locked;
+	static const Reflection::PropDescriptor<PartInstance, G3D::Color3> prop_Color;
+	static const Reflection::PropDescriptor<PartInstance, BrickColor> prop_BrickColor;
+	static const Reflection::PropDescriptor<PartInstance, bool> prop_CanCollide;
+	static const Reflection::PropDescriptor<PartInstance, bool> prop_Anchored;
 
 	static bool nonNullInWorkspace(shared_ptr<PartInstance> part);
 
@@ -79,11 +85,15 @@ public:
 	void setAlphaModifier(float value);
 	void setReflectance(float value);
 	void setFormFactorXml(FormFactor value);
+	void setDragging(bool value);
+	void setCanCollide(bool value);
+	void setAnchored(bool value);
+	void setColor(BrickColor value);
 
 private:
 	undefined m_unk0x0f8[0x1a0 - 0x0f8];    // 0x0f8
 	FormFactor formFactor;                  // 0x1a0
-	undefined m_unk0x1a4[0x1a8 - 0x1a4];    // 0x1a4
+	BrickColor color;                       // 0x1a4
 	float transparency;                     // 0x1a8
 	float reflectance;                      // 0x1ac
 	bool locked;                            // 0x1b0
