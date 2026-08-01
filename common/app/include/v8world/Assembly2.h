@@ -14,10 +14,12 @@ namespace RBX {
 
 using G3D::Vector3;
 
+class Body;
 class Edge;
 class Joint;
 class Mechanism;
 class MotorJoint;
+class RigidJoint;
 class Primitive;
 
 namespace Sim {
@@ -90,6 +92,12 @@ public:
 	MotorJoint* getMotor(unsigned int index);
 
 	void stepUi(int frameCount);
+
+	void setParent(Assembly* value);
+
+	static void addRigidChild(Primitive* parent, RigidJoint* joint, Primitive* child);
+	static void addMotorChild(Primitive* parent, MotorJoint* joint, Primitive* child);
+	static void addGroundChild(Primitive* child);
 	Sim::AssemblyState getSleepStatus();
 	bool getAnchored();
 	bool computeCanSleep();
@@ -101,6 +109,8 @@ public:
 
 private:
 	MotorJoint* getMotorImp(unsigned int& index);
+
+	void addChild(Assembly* child);
 
 	SleepInfo* sleepInfo;                   // 0x08
 	Primitive* rootPrimitive;               // 0x0c

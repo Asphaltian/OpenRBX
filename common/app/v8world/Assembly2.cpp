@@ -1,6 +1,7 @@
 #include "v8world/Assembly2.h"
 
 #include "decomp.h"
+#include "util/StlExtra.h"
 #include "v8kernel/Body.h"
 #include "v8kernel/Kernel.h"
 #include "v8world/Clump2.h"
@@ -8,6 +9,7 @@
 #include "v8world/Joint.h"
 #include "v8world/MotorJoint.h"
 #include "v8world/Primitive.h"
+#include "v8world/RigidJoint.h"
 
 #include <cstddef>
 
@@ -141,9 +143,8 @@ void Assembly::onPrimitivesChanged()
 	maxRadius.setDirty();
 	canSleep.setDirty();
 
-	for (Assembly* ancestor = parent; ancestor != NULL; ancestor = ancestor->parent) {
-		ancestor->maxRadius.setDirty();
-		ancestor->canSleep.setDirty();
+	if (parent != NULL) {
+		parent->onPrimitivesChanged();
 	}
 }
 
@@ -210,6 +211,53 @@ void Assembly::stepUi(int frameCount)
 void Assembly::onPrimitiveCanSleepChanged(Primitive* primitive)
 {
 	canSleep.setDirty();
+}
+
+// STUB: WEBSERVICE 0x10103750
+void Assembly::addChild(Assembly* child)
+{
+	children.push_back(child);
+	std::sort(children.begin(), children.end(), lessAssembly);
+}
+
+// FUNCTION: WEBSERVICE 0x101038a0
+void Assembly::setParent(Assembly* value)
+{
+	if (value != parent) {
+		if (parent != NULL) {
+			fastRemoveShort(parent->children, this);
+			parent->onPrimitivesChanged();
+		}
+
+		parent = value;
+
+		if (parent != NULL) {
+			parent->addChild(this);
+		}
+
+		onPrimitivesChanged();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10103910
+void Assembly::addMotorChild(Primitive* parent, MotorJoint* joint, Primitive* child)
+{
+	Clump* clump = parent->getClump();
+
+	child->setClumpDepth(parent->getClumpDepth() + 1);
+	child->getClump()->setParent(clump);
+	child->getBody()->setParent(parent->getBody());
+	child->getBody()->setMeInParent(joint->resetLink());
+}
+
+// FUNCTION: WEBSERVICE 0x10103960
+void Assembly::addGroundChild(Primitive* child)
+{
+	Clump* clump = child->getClump();
+
+	child->setClumpDepth(1);
+	child->getBody()->setParent(NULL);
+	clump->setParent(NULL);
 }
 
 } // namespace RBX

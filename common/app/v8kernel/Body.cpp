@@ -28,10 +28,28 @@ void Body::setMoment(const Matrix3& moment)
 	STUB(0x10104cc0);
 }
 
+// STUB: WEBSERVICE 0x10104db0
+void Body::setMeInParent(const CoordinateFrame& value)
+{
+	STUB(0x10104db0);
+}
+
+// STUB: WEBSERVICE 0x10104e60
+void Body::setMeInParent(Link* link)
+{
+	STUB(0x10104e60);
+}
+
 // STUB: WEBSERVICE 0x10104ee0
 void Body::setCoordinateFrame(const CoordinateFrame& value)
 {
 	STUB(0x10104ee0);
+}
+
+// STUB: WEBSERVICE 0x10105390
+void Body::setParent(Body* value)
+{
+	STUB(0x10105390);
 }
 
 // STUB: WEBSERVICE 0x101054a0

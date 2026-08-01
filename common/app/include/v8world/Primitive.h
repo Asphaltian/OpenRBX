@@ -175,6 +175,9 @@ public:
 
 	void setClump(Clump* value);
 
+	int getClumpDepth() const { return clumpDepth; }
+	void setClumpDepth(int value) { clumpDepth = value; }
+
 	Assembly* getAssembly() const;
 
 	void setDragging(bool value);

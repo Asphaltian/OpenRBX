@@ -1,6 +1,7 @@
 #ifndef V8WORLD_MOTORJOINT_H
 #define V8WORLD_MOTORJOINT_H
 
+#include "v8kernel/Link.h"
 #include "v8world/Joint.h"
 
 namespace RBX {
@@ -13,6 +14,8 @@ public:
 	{
 		return isJoint(edge) && static_cast<Joint*>(edge)->getJointType() == MOTOR_JOINT;
 	}
+
+	RevoluteLink* resetLink();
 };
 
 } // namespace RBX

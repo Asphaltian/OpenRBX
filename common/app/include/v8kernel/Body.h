@@ -10,6 +10,8 @@
 
 namespace RBX {
 
+class Link;
+
 using G3D::CoordinateFrame;
 using G3D::Matrix3;
 
@@ -35,6 +37,10 @@ public:
 		updatePV();
 		return pv.position;
 	}
+
+	void setParent(Body* value);
+	void setMeInParent(Link* link);
+	void setMeInParent(const CoordinateFrame& value);
 
 	void setCoordinateFrame(const CoordinateFrame& value);
 	void setVelocity(const Velocity& velocity);
