@@ -169,6 +169,11 @@ public:
 	bool getCanSleep() const { return canSleep; }
 	Anchor* getAnchorObject() const { return anchorObject; }
 
+	bool getDragging() const { return dragging; }
+	bool getCanCollide() const { return canCollide; }
+	float getFriction() const { return friction; }
+	float getElasticity() const { return elasticity; }
+
 	const Guid& getGuid() const;
 	void setGuid(const Guid& value);
 

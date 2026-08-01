@@ -28,6 +28,8 @@ public:
 
 	Body* getParent() const { return parent; }
 
+	float getMass() const { return mass; }
+
 	int getStateIndex() const
 	{
 		updatePV();
@@ -58,7 +60,8 @@ public:
 private:
 	undefined m_unk0x00[0x08 - 0x00]; // 0x00
 	Body* parent;                     // 0x08
-	undefined m_unk0x0c[0x84 - 0x0c]; // 0x0c
+	undefined m_unk0x0c[0x80 - 0x0c]; // 0x0c
+	float mass;                       // 0x80
 	int stateIndex;                   // 0x84
 	PV pv;                            // 0x88
 };
