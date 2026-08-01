@@ -3,6 +3,7 @@
 #include "decomp.h"
 #include "v8kernel/Kernel.h"
 #include "v8world/JointStage.h"
+#include "v8world/SpatialHash.h"
 
 namespace RBX {
 
@@ -34,6 +35,18 @@ int World::getNumConstraints() const
 int World::getMetric(IWorldStage::MetricType metricType) const
 {
 	return jointStage->getMetric(metricType);
+}
+
+// FUNCTION: WEBSERVICE 0x100cf000
+int World::getNumHashNodes() const
+{
+	return contactManager->getSpatialHash()->getNumHashNodes();
+}
+
+// FUNCTION: WEBSERVICE 0x100cf010
+int World::getMaxBucketSize() const
+{
+	return contactManager->getSpatialHash()->getMaxBucketSize();
 }
 
 // STUB: WEBSERVICE 0x100cf020

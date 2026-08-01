@@ -10,6 +10,15 @@ using G3D::Vector3;
 class Constants
 {
 public:
+	static int kernelStepsPerWorldStep();
+	static int worldStepsPerSec();
+	static int kernelStepsPerSec();
+	static int kernelStepsPerUiStep();
+
+	static float uiDt();
+	static float worldDt();
+	static float kernelDt();
+
 	static float getJointK(const Vector3& size, bool isBall);
 };
 

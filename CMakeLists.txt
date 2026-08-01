@@ -126,6 +126,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/Block.cpp
   common/app/v8world/Clump2.cpp
   common/app/v8world/ClumpStage2.cpp
+  common/app/v8world/ContactManager.cpp
   common/app/v8world/Controller.cpp
   common/app/v8world/Edge.cpp
   common/app/v8world/IMoving.cpp
@@ -135,6 +136,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/MotorJoint.cpp
   common/app/v8world/Primitive.cpp
   common/app/v8world/RigidJoint.cpp
+  common/app/v8world/SpatialHash.cpp
   common/app/v8world/World.cpp
   common/app/util/Timer.cpp
   common/app/util/Units.cpp

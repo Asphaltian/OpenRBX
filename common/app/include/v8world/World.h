@@ -33,6 +33,9 @@ public:
 
 	Kernel* getKernel() const;
 
+	int getNumHashNodes() const;
+	int getMaxBucketSize() const;
+
 	int getNumBodies() const;
 	int getNumPoints() const;
 	int getNumConstraints() const;
