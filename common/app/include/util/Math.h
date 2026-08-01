@@ -5,6 +5,7 @@
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Matrix3.h>
+#include <G3D/Vector2.h>
 #include <G3D/Vector3.h>
 #include <limits>
 
@@ -12,6 +13,7 @@ namespace RBX {
 
 using G3D::CoordinateFrame;
 using G3D::Matrix3;
+using G3D::Vector2;
 using G3D::Vector3;
 
 unsigned char rotationToByteBase(float rotation);
@@ -28,6 +30,22 @@ public:
 	}
 
 	static bool isDenormal(float value);
+	static bool isNanInfDenorm(float value);
+	static bool isNanInfDenormVector3(const Vector3& value);
+	static Matrix3 momentToObjectSpace(const Matrix3& moment, const Matrix3& rotation);
+	static Matrix3 momentToWorldSpace(const Matrix3& moment, const Matrix3& rotation);
+	static float angleToE0(const Vector2& value);
+	static unsigned char rotationToByte(float rotation);
+	static Vector3 toGrid(const Vector3& value, float grid);
+	static bool orthonormalizeIfNecessary(Matrix3& matrix);
+	static int getOrientId(const Matrix3& matrix);
+	static const Matrix3& matrixTiltZ();
+	static const Matrix3& matrixRotateY();
+	static void getHeadingElevation(const CoordinateFrame& coordinateFrame, float& heading, float& elevation);
+	static void setHeadingElevation(CoordinateFrame& coordinateFrame, float heading, float elevation);
+	static Matrix3 snapToAxes(const Matrix3& matrix);
+	static CoordinateFrame snapToGrid(const CoordinateFrame& coordinateFrame, const Vector3& grid);
+	static CoordinateFrame snapToGrid(const CoordinateFrame& coordinateFrame, float grid);
 	static bool fixDenorm(Vector3& value);
 	static bool legalCameraCoord(const CoordinateFrame& coordinateFrame);
 	static float rotationFromByte(unsigned char byte);

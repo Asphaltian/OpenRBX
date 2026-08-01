@@ -4,6 +4,7 @@
 
 #include <G3D/g3dmath.h>
 #include <algorithm>
+#include <limits>
 
 namespace RBX {
 
@@ -18,6 +19,20 @@ bool Math::isDenormal(float value)
 {
 	const int bits = *reinterpret_cast<const int*>(&value);
 	return (bits & 0x7f800000) == 0 && (bits & 0x7fffff) != 0;
+}
+
+// STUB: WEBSERVICE 0x100de880
+bool Math::isNanInfDenorm(float value)
+{
+	return value == std::numeric_limits<float>::infinity() || -std::numeric_limits<float>::infinity() == value ||
+		   std::numeric_limits<float>::quiet_NaN() == value || std::numeric_limits<float>::signaling_NaN() == value ||
+		   isDenormal(value);
+}
+
+// FUNCTION: WEBSERVICE 0x100de8e0
+bool Math::isNanInfDenormVector3(const Vector3& value)
+{
+	return isNanInfDenorm(value.x) || isNanInfDenorm(value.y) || isNanInfDenorm(value.z);
 }
 
 // FUNCTION: WEBSERVICE 0x100de930
@@ -72,6 +87,18 @@ float Math::rotationFromByte(unsigned char byte)
 	return value * rotationStep() - 3.14159274f;
 }
 
+// FUNCTION: WEBSERVICE 0x100deb30
+Matrix3 Math::momentToObjectSpace(const Matrix3& moment, const Matrix3& rotation)
+{
+	return rotation.transpose() * moment * rotation;
+}
+
+// FUNCTION: WEBSERVICE 0x100deb70
+Matrix3 Math::momentToWorldSpace(const Matrix3& moment, const Matrix3& rotation)
+{
+	return rotation * moment * rotation.transpose();
+}
+
 // FUNCTION: WEBSERVICE 0x100debb0
 Vector3 Math::toDiagonal(const Matrix3& matrix)
 {
@@ -99,6 +126,22 @@ bool Math::isAxisAligned(const Matrix3& matrix)
 	return true;
 }
 
+// FUNCTION: WEBSERVICE 0x100dec90
+int Math::getOrientId(const Matrix3& matrix)
+{
+	const NormalId x = Vector3ToNormalId(matrix.getColumn(0));
+	const NormalId y = Vector3ToNormalId(matrix.getColumn(1));
+
+	return x * 6 + y;
+}
+
+// STUB: WEBSERVICE 0x100dee50
+DECOMP_NOINLINE Matrix3 Math::snapToAxes(const Matrix3& matrix)
+{
+	STUB(0x100dee50);
+	return matrix;
+}
+
 // FUNCTION: WEBSERVICE 0x100df0a0
 Vector3 Math::iRoundVector3(const Vector3& value)
 {
@@ -107,6 +150,21 @@ Vector3 Math::iRoundVector3(const Vector3& value)
 		static_cast<float>(G3D::iRound(value.y)),
 		static_cast<float>(G3D::iRound(value.z))
 	);
+}
+
+// FUNCTION: WEBSERVICE 0x100df100
+float Math::angleToE0(const Vector2& value)
+{
+	Vector2 unit = value;
+	unit.unitize();
+
+	const float answer = acosf(unit.x);
+
+	if (unit.y < 0.0f) {
+		return 6.28318548f - answer;
+	}
+
+	return answer;
 }
 
 // FUNCTION: WEBSERVICE 0x100df150
@@ -190,12 +248,53 @@ float Math::getHeading(const Vector3& look)
 	return atan2f(-look.x, -look.z);
 }
 
+// STUB: WEBSERVICE 0x100df630
+void Math::getHeadingElevation(const CoordinateFrame& coordinateFrame, float& heading, float& elevation)
+{
+	const Vector3 look = coordinateFrame.rotation.getColumn(2) * CoordinateFrame::zLookDirection;
+
+	heading = atan2f(-look.x, -look.z);
+	elevation = asinf(look.y);
+}
+
+// FUNCTION: WEBSERVICE 0x100df690
+void Math::setHeadingElevation(CoordinateFrame& coordinateFrame, float heading, float elevation)
+{
+	const float y = sinf(elevation);
+	const float flat = sqrtf(1.0f - y * y);
+	const Vector3 look(-sinf(heading) * flat, y, -cosf(heading) * flat);
+
+	coordinateFrame.lookAt(coordinateFrame.translation + look.direction());
+}
+
+// STUB: WEBSERVICE 0x100df7d0
+const Matrix3& Math::matrixRotateY()
+{
+	static const Matrix3 m(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f);
+
+	return m;
+}
+
+// STUB: WEBSERVICE 0x100df860
+const Matrix3& Math::matrixTiltZ()
+{
+	static const Matrix3 m(0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+
+	return m;
+}
+
 // STUB: WEBSERVICE 0x100dfaf0
 unsigned char rotationToByteBase(float rotation)
 {
 	const int index = G3D::iRound((rotation + 3.14159274f) / rotationStep());
 
 	return static_cast<unsigned char>(index < 1 ? 0 : (index > 254 ? 255 : index));
+}
+
+// FUNCTION: WEBSERVICE 0x100dfb70
+unsigned char Math::rotationToByte(float rotation)
+{
+	return rotationToByteBase(rotation);
 }
 
 // STUB: WEBSERVICE 0x100dfb90
@@ -206,6 +305,42 @@ Vector3 Math::toGrid(const Vector3& value, const Vector3& grid)
 		grid.y * G3D::iRound(value.y / grid.y),
 		grid.z * G3D::iRound(value.z / grid.z)
 	);
+}
+
+// FUNCTION: WEBSERVICE 0x100dfc10
+Vector3 Math::toGrid(const Vector3& value, float grid)
+{
+	const Vector3 steps(grid, grid, grid);
+
+	return toGrid(value, steps);
+}
+
+// STUB: WEBSERVICE 0x100dfc50
+CoordinateFrame Math::snapToGrid(const CoordinateFrame& coordinateFrame, float grid)
+{
+	const Vector3 steps(grid, grid, grid);
+	const Vector3 translation = toGrid(coordinateFrame.translation, steps);
+
+	return CoordinateFrame(snapToAxes(coordinateFrame.rotation), translation);
+}
+
+// STUB: WEBSERVICE 0x100dfcc0
+CoordinateFrame Math::snapToGrid(const CoordinateFrame& coordinateFrame, const Vector3& grid)
+{
+	const Vector3 translation = toGrid(coordinateFrame.translation, grid);
+
+	return CoordinateFrame(snapToAxes(coordinateFrame.rotation), translation);
+}
+
+// FUNCTION: WEBSERVICE 0x100dfe20
+bool Math::orthonormalizeIfNecessary(Matrix3& matrix)
+{
+	if (!matrix.isOrthonormal()) {
+		matrix.orthonormalize();
+		return true;
+	}
+
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x100dfe40
