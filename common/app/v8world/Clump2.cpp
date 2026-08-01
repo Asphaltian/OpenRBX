@@ -143,8 +143,8 @@ Primitive* PrimIterator::findNextRelative(Primitive* parent, Primitive* child, S
 // STUB: WEBSERVICE 0x10118000
 PrimIterator& PrimIterator::operator++()
 {
-	Primitive* current = primitive;
 	SearchType type = searchType;
+	Primitive* current = primitive;
 
 	Primitive* next = findFirstChild(current, type);
 
@@ -198,12 +198,6 @@ EdgeIterator EdgeIterator::begin(Primitive* primitive)
 	}
 
 	return answer;
-}
-
-// FUNCTION: WEBSERVICE 0x10118120
-bool IPipelined::downstreamOfStage(IStage* stage)
-{
-	return currentStage->getStageType() > stage->getStageType();
 }
 
 } // namespace RBX

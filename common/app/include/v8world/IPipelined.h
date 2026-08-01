@@ -16,6 +16,8 @@ public:
 
 	virtual ~IPipelined() {} // vtable+0x00
 
+	IStage* getCurrentStage() const { return currentStage; }
+
 	IStage* getStage(IStage::StageType stageType);
 
 	void putInPipeline(IStage* stage);
@@ -35,6 +37,12 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(IPipelined, 0x08)
+
+// FUNCTION: WEBSERVICE 0x10118120
+inline bool IPipelined::downstreamOfStage(IStage* stage)
+{
+	return currentStage->getStageType() > stage->getStageType();
+}
 
 } // namespace RBX
 

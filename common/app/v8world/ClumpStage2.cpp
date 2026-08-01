@@ -3,6 +3,7 @@
 #include "decomp.h"
 #include "util/Guid.h"
 #include "v8world/Assembly2.h"
+#include "v8world/AssemblyStage2.h"
 #include "v8world/Primitive.h"
 
 #include <cmath>
@@ -148,6 +149,58 @@ Primitive* TreeStage::heavyParent(int index, Primitive* primitive, Joint*& heavi
 	return NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x1011ba80
+void TreeStage::cleanAssembly(Assembly* assembly)
+{
+	if (assembly->getCurrentStage() == NULL) {
+		assembly->putInPipeline(this);
+	}
+
+	bool inKernel = assembly->downstreamOfStage(this);
+	bool wanted = !assembly->getAnchored();
+
+	if (inKernel != wanted) {
+		if (wanted) {
+			static_cast<AssemblyStage*>(getDownstream())->onAssemblyAdded(assembly);
+		}
+		else {
+			static_cast<AssemblyStage*>(getDownstream())->onAssemblyRemoving(assembly);
+		}
+	}
+	else if (inKernel) {
+		static_cast<AssemblyStage*>(getDownstream())->wakeAssembly(assembly);
+	}
+}
+
+// STUB: WEBSERVICE 0x1011bb00
+void TreeStage::cleanEdge(Edge* edge)
+{
+	Assembly* assembly0 = edge->getPrimitive(0)->getAssembly();
+	Assembly* assembly1 = edge->getPrimitive(1)->getAssembly();
+
+	bool inKernel = edge->downstreamOfStage(this);
+	bool wanted;
+
+	if (assembly0 == assembly1) {
+		wanted = false;
+	}
+	else if (assembly0->getAnchored() && assembly1->getAnchored()) {
+		wanted = false;
+	}
+	else {
+		wanted = true;
+	}
+
+	if (inKernel != wanted) {
+		if (inKernel) {
+			static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(edge);
+		}
+		else {
+			static_cast<IWorldStage*>(getDownstream())->onEdgeAdded(edge);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1011bb90
 int TreeStage::getMetric(MetricType metricType)
 {
@@ -257,7 +310,7 @@ void TreeStage::insertJoint(Joint* joint)
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x1011c7c0
+// STUB: WEBSERVICE 0x1011c7c0
 void TreeStage::onEdgeAdded(Edge* edge)
 {
 	Primitive::insertEdge(edge);

@@ -48,6 +48,9 @@ public:
 
 	void traverse(Joint* joint, Primitive* root);
 
+	void cleanAssembly(Assembly* assembly);
+	void cleanEdge(Edge* edge);
+
 	void dirtyAssemblies(Joint* joint);
 	void undirtyAssembly(Assembly* assembly);
 	void destroyAssembly(Assembly* assembly);

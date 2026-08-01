@@ -121,6 +121,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8kernel/Constants.cpp
   common/app/v8kernel/Kernel.cpp
   common/app/v8world/Assembly2.cpp
+  common/app/v8world/AssemblyStage2.cpp
   common/app/v8world/Ball.cpp
   common/app/v8world/Block.cpp
   common/app/v8world/Clump2.cpp
