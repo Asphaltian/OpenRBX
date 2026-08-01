@@ -146,9 +146,10 @@ private:
 	static std::map<std::string, Job> jobs;
 	static boost::mutex sync;
 
-	undefined m_unk0x004[0x17c - 0x004]; // 0x004
-	ATL::CComBSTR errorMessage;          // 0x17c
+	ATL::CComBSTR errorMessage; // 0x17c
 };
+
+DECOMP_SIZE_ASSERT(CWebService, 0x180)
 
 } // namespace Roblox
 
@@ -243,8 +244,27 @@ namespace Roblox {
 // STUB: WEBSERVICE 0x1000e4d0
 HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
 {
-	STUB(0x1000e4d0);
-	return E_NOTIMPL;
+	boost::mutex::scoped_lock lock(sync);
+
+	wchar_t** items = NULL;
+	result->count = jobs.size();
+
+	if (result->count != 0) {
+		size_t bytes = result->count * sizeof(wchar_t*);
+		items = (wchar_t**) GetMemMgr()->Allocate(bytes);
+		memset(items, 0, bytes);
+	}
+
+	result->items = items;
+
+	int index = 0;
+	for (std::map<std::string, Job>::const_iterator it = jobs.begin(); it != jobs.end(); ++it) {
+		ATL::CComBSTR jobID(ATL::CStringA(it->first.c_str()));
+		result->items[index] = jobID.Detach();
+		index++;
+	}
+
+	return S_OK;
 }
 
 // STUB: WEBSERVICE 0x1000e650
