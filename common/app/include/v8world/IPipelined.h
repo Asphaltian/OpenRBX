@@ -23,7 +23,7 @@ public:
 	void putInStage(IStage* stage);
 	void removeFromStage(IStage* stage);
 
-	IStage* getKernel();
+	Kernel* getKernel();
 
 	virtual void putInKernel(Kernel* kernel); // vtable+0x04
 	virtual void removeFromKernel();          // vtable+0x08

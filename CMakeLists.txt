@@ -119,6 +119,7 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Rect.cpp
   common/app/v8kernel/Body.cpp
   common/app/v8kernel/Constants.cpp
+  common/app/v8kernel/Kernel.cpp
   common/app/v8world/Assembly2.cpp
   common/app/v8world/Ball.cpp
   common/app/v8world/Block.cpp

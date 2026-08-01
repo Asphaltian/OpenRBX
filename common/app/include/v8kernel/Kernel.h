@@ -6,9 +6,15 @@
 
 namespace RBX {
 
+class Body;
+
 // SIZE 0x30
 class Kernel : public IStage
 {
+public:
+	void insertBody(Body* body);
+	void removeBody(Body* body);
+
 private:
 	undefined m_unk0x0c[0x30 - 0x0c]; // 0x0c
 };

@@ -2,6 +2,8 @@
 
 #include "decomp.h"
 
+#include <cstddef>
+
 namespace RBX {
 
 // STUB: WEBSERVICE 0x101090b0
@@ -31,10 +33,18 @@ Vector3 Block::getCenterToCorner(const Matrix3& rotation) const
 	return Vector3::zero();
 }
 
+// STUB: WEBSERVICE 0x1010a5e0
+const Vector3* BlockTemplate::getVertices(const Vector3& corner)
+{
+	STUB(0x1010a5e0);
+	return NULL;
+}
+
 // STUB: WEBSERVICE 0x1010a680
 void Block::onSetSize()
 {
-	STUB(0x1010a680);
+	vertices = BlockTemplate::getVertices(gridSize * -0.5f);
+	cornerRadius = vertices[0].magnitude();
 }
 
 } // namespace RBX

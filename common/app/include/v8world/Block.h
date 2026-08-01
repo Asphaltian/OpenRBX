@@ -1,11 +1,24 @@
 #ifndef V8WORLD_BLOCK_H
 #define V8WORLD_BLOCK_H
 
+#include "decomp.h"
 #include "v8world/Geometry.h"
 
 #include <cstddef>
 
 namespace RBX {
+
+// SIZE 0x60
+class BlockTemplate
+{
+public:
+	static const Vector3* getVertices(const Vector3& corner);
+
+private:
+	Vector3 vertices[8]; // 0x00
+};
+
+DECOMP_SIZE_ASSERT(BlockTemplate, 0x60)
 
 // VTABLE: WEBSERVICE 0x10237654
 // SIZE 0x18

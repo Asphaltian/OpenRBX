@@ -1,10 +1,24 @@
 #include "v8world/Assembly2.h"
 
 #include "decomp.h"
+#include "v8kernel/Kernel.h"
+#include "v8world/Primitive.h"
 
 #include <cstddef>
 
 namespace RBX {
+
+// FUNCTION: WEBSERVICE 0x10102a60
+Sim::AssemblyState Assembly::getSleepStatus()
+{
+	Assembly* root = this;
+
+	while (root->parent != NULL) {
+		root = root->parent;
+	}
+
+	return root->sleepInfo != NULL ? root->sleepInfo->state : Sim::ANCHORED;
+}
 
 // FUNCTION: WEBSERVICE 0x10102ac0 FOLDED
 Assembly* Assembly::getRootAssembly()
@@ -12,18 +26,36 @@ Assembly* Assembly::getRootAssembly()
 	return parent != NULL ? parent->getRootAssembly() : this;
 }
 
-// STUB: WEBSERVICE 0x10102a60
-Sim::AssemblyState Assembly::getSleepStatus() const
+// FUNCTION: WEBSERVICE 0x10102b10
+void Assembly::putInKernel(Kernel* kernel)
 {
-	STUB(0x10102a60);
-	return Sim::ANCHORED;
+	putInPipeline(kernel);
+	kernel->insertBody(rootPrimitive->getBody());
 }
 
-// STUB: WEBSERVICE 0x10102b60
+// FUNCTION: WEBSERVICE 0x10102b40
+void Assembly::removeFromKernel()
+{
+	getKernel()->removeBody(rootPrimitive->getBody());
+	IPipelined::removeFromKernel();
+}
+
+// FUNCTION: WEBSERVICE 0x10102b60
 Primitive* Assembly::getAssemblyPrimitive()
 {
-	STUB(0x10102b60);
-	return NULL;
+	return getRootAssembly()->rootPrimitive;
+}
+
+// FUNCTION: WEBSERVICE 0x10102b80
+bool Assembly::getAnchored()
+{
+	return getRootAssembly()->rootPrimitive->getAnchorObject() != NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x10102ba0
+Mechanism* Assembly::getMechanism()
+{
+	return mechanism;
 }
 
 // STUB: WEBSERVICE 0x10102bf0

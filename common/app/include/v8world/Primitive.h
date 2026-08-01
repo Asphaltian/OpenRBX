@@ -159,6 +159,9 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x100a8740
 	// RBX::Primitive::`scalar deleting destructor'
 
+	Body* getBody() const { return body; }
+	Anchor* getAnchorObject() const { return anchorObject; }
+
 	const Guid& getGuid() const;
 	void setGuid(const Guid& value);
 

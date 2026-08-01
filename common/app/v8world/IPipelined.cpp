@@ -46,9 +46,9 @@ void IPipelined::removeFromStage(IStage* stage)
 }
 
 // FUNCTION: WEBSERVICE 0x1010ba10
-IStage* IPipelined::getKernel()
+Kernel* IPipelined::getKernel()
 {
-	return getStage(IStage::KERNEL_STAGE);
+	return static_cast<Kernel*>(getStage(IStage::KERNEL_STAGE));
 }
 
 // FUNCTION: WEBSERVICE 0x101ae590 FOLDED
