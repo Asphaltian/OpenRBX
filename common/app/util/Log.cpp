@@ -23,18 +23,47 @@ void Log::setLogProvider(ILogProvider* logProvider)
 	provider = logProvider;
 }
 
-// STUB: WEBSERVICE 0x1003d890
+// FUNCTION: WEBSERVICE 0x1003d890
 std::string Log::formatMem(unsigned int bytes)
 {
-	STUB(0x1003d890);
-	return std::string();
+	char text[64];
+
+	if (bytes < 1000) {
+		sprintf(text, "%dB", bytes);
+	}
+	else if (bytes < 1000000) {
+		sprintf(text, "%dKB", bytes / 1000);
+	}
+	else if (bytes < 1000000000) {
+		sprintf(text, "%dMB", bytes / 1000000);
+	}
+	else {
+		sprintf(text, "%dGB", bytes / 1000000000);
+	}
+
+	return std::string(text);
 }
 
 // STUB: WEBSERVICE 0x1003d930
 std::string Log::formatTime(double seconds)
 {
-	STUB(0x1003d930);
-	return std::string();
+	char text[64];
+
+	if (seconds == 0.0) {
+		sprintf(text, "0s");
+	}
+
+	if (seconds < 0.0) {
+		sprintf(text, "%.3gs", seconds);
+	}
+	else if (!(seconds < 0.1)) {
+		sprintf(text, "%.3gs", seconds);
+	}
+	else {
+		sprintf(text, "%.3gms", seconds * 1000.0);
+	}
+
+	return std::string(text);
 }
 
 // STUB: WEBSERVICE 0x1003def0
@@ -52,16 +81,16 @@ Log::~Log()
 // FUNCTION: WEBSERVICE 0x1003e020
 void Log::writeEntry(Severity severity, const char* entry)
 {
-	std::ofstream* stream = currentStream();
+	std::ofstream* out = currentStream();
 
 	SYSTEMTIME now;
 	GetLocalTime(&now);
 
-	char stamp[260];
+	char stamp[256];
 	sprintf(stamp, "%02u:%02u.%03u ", now.wHour, now.wMinute, now.wMilliseconds);
 
-	*stream << stamp;
-	stream->flush();
+	*out << stamp;
+	out->flush();
 
 	switch (severity) {
 	case Error:
@@ -72,7 +101,8 @@ void Log::writeEntry(Severity severity, const char* entry)
 		*currentStream() << information;
 	}
 
-	*currentStream() << entry << '\n';
+	*currentStream() << entry;
+	stream << '\n';
 	currentStream()->flush();
 }
 
@@ -83,9 +113,7 @@ std::string Log::timeStamp()
 
 std::ofstream* Log::currentStream()
 {
-	Log* log = current();
-
-	return log != NULL ? &log->stream : NULL;
+	return &provider->provideLog()->stream;
 }
 
 } // namespace RBX
