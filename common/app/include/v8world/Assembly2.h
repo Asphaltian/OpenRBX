@@ -3,12 +3,16 @@
 
 #include "decomp.h"
 #include "util/ComputeProp.h"
+#include "util/Quaternion.h"
 #include "v8world/IPipelined.h"
 
+#include <G3D/Vector3.h>
 #include <boost/noncopyable.hpp>
 #include <vector>
 
 namespace RBX {
+
+using G3D::Vector3;
 
 class Edge;
 class Joint;
@@ -30,15 +34,36 @@ enum AssemblyState
 
 } // namespace Sim
 
+// SIZE 0x1c
+class RunningAverageState
+{
+public:
+	RunningAverageState() : position(0, 0, 0)
+	{
+		angles.x = 0;
+		angles.y = 0;
+		angles.z = 0;
+		angles.w = 1;
+	}
+
+private:
+	Vector3 position;  // 0x00
+	Quaternion angles; // 0x0c
+};
+
+DECOMP_SIZE_ASSERT(RunningAverageState, 0x1c)
+
 // SIZE 0x24
 class SleepInfo
 {
 public:
+	SleepInfo();
+
 	Sim::AssemblyState state; // 0x00
 
 private:
-	int sleepCount;                   // 0x04
-	undefined m_unk0x08[0x24 - 0x08]; // 0x08
+	int sleepCount;                          // 0x04
+	RunningAverageState runningAverageState; // 0x08
 };
 
 DECOMP_SIZE_ASSERT(SleepInfo, 0x24)

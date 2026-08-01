@@ -13,6 +13,11 @@
 
 namespace RBX {
 
+// FUNCTION: WEBSERVICE 0x10102990
+SleepInfo::SleepInfo() : state(Sim::WAKE_PENDING), sleepCount(0)
+{
+}
+
 // FUNCTION: WEBSERVICE 0x10102a60
 Sim::AssemblyState Assembly::getSleepStatus()
 {
