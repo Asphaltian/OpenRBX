@@ -42,6 +42,7 @@ public:
 	void findHeaviestUpstream(Primitive* prim0, Primitive* prim1, Joint*& heaviest, int& heaviestIndex);
 
 	void insertJoint(Joint* joint);
+	Joint* findLightestDownstream(Primitive* primitive, Primitive*& root);
 
 	void swap(Joint* remove, Joint* add, Primitive* root);
 

@@ -79,6 +79,9 @@ public:
 
 	Primitive* getPrimitive(int index) const { return index == 0 ? prim0 : prim1; }
 
+	bool getInEdgeList() const { return inEdgeList; }
+	void setInEdgeList(bool value) { inEdgeList = value; }
+
 private:
 	Sim::EdgeState edgeState; // 0x08
 	Primitive* prim0;         // 0x0c

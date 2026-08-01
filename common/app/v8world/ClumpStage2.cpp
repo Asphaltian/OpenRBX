@@ -209,6 +209,13 @@ void TreeStage::destroyAssembly(Assembly* assembly)
 	STUB(0x1011c0b0);
 }
 
+// STUB: WEBSERVICE 0x1011c440
+Joint* TreeStage::findLightestDownstream(Primitive* primitive, Primitive*& root)
+{
+	STUB(0x1011c440);
+	return NULL;
+}
+
 // STUB: WEBSERVICE 0x1011c630
 void TreeStage::traverse(Joint* joint, Primitive* root)
 {
@@ -248,6 +255,53 @@ void TreeStage::insertJoint(Joint* joint)
 		swap(heaviest, joint, joint->getPrimitive((heaviestIndex + 1) % 2));
 		dirty = true;
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x1011c7c0
+void TreeStage::onEdgeAdded(Edge* edge)
+{
+	Primitive::insertEdge(edge);
+	edge->putInPipeline(this);
+
+	if (Joint::isJoint(edge) && static_cast<Joint*>(edge)->getJointType() >= Joint::ANCHOR_JOINT) {
+		insertJoint(static_cast<Joint*>(edge));
+		return;
+	}
+
+	if (!edge->getInEdgeList()) {
+		edges.insert(edge);
+		dirty = true;
+		edge->setInEdgeList(true);
+	}
+}
+
+// STUB: WEBSERVICE 0x1011c840
+void TreeStage::onEdgeRemoving(Edge* edge)
+{
+	if (Joint::isJoint(edge) && static_cast<Joint*>(edge)->getJointType() >= Joint::ANCHOR_JOINT) {
+		Joint* joint = static_cast<Joint*>(edge);
+
+		if (joint->getActive()) {
+			Primitive* root = NULL;
+			Joint* lightest = findLightestDownstream(Primitive::downstreamPrimitive(joint), root);
+
+			swap(joint, lightest, root);
+			dirty = true;
+		}
+	}
+	else {
+		if (edge->downstreamOfStage(this)) {
+			static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(edge);
+		}
+
+		if (edge->getInEdgeList()) {
+			edges.erase(edge);
+			edge->setInEdgeList(false);
+		}
+	}
+
+	edge->removeFromStage(this);
+	Primitive::removeEdge(edge);
 }
 
 } // namespace RBX

@@ -127,18 +127,17 @@ Primitive* PrimIterator::findNextSibling(Primitive* parent, Primitive* child, Se
 // FUNCTION: WEBSERVICE 0x10117fc0
 Primitive* PrimIterator::findNextRelative(Primitive* parent, Primitive* child, SearchType searchType)
 {
-	while (parent != NULL) {
-		Primitive* sibling = findNextSibling(parent, child, searchType);
-
-		if (sibling != NULL) {
-			return sibling;
-		}
-
-		child = parent;
-		parent = findParent(parent, searchType);
+	if (parent == NULL) {
+		return NULL;
 	}
 
-	return NULL;
+	Primitive* sibling = findNextSibling(parent, child, searchType);
+
+	if (sibling != NULL) {
+		return sibling;
+	}
+
+	return findNextRelative(findParent(parent, searchType), parent, searchType);
 }
 
 // STUB: WEBSERVICE 0x10118000
@@ -164,6 +163,7 @@ void EdgeIterator::findEdgeOnNextPrimitive()
 	while (edge == NULL) {
 		PrimIterator next(primitive, IN_ASSEMBLY);
 		++next;
+
 		primitive = *next;
 
 		if (primitive == NULL) {
@@ -188,12 +188,10 @@ EdgeIterator& EdgeIterator::operator++()
 	return *this;
 }
 
-// STUB: WEBSERVICE 0x101180f0
+// FUNCTION: WEBSERVICE 0x101180f0
 EdgeIterator EdgeIterator::begin(Primitive* primitive)
 {
-	EdgeIterator answer;
-	answer.primitive = primitive;
-	answer.edge = getNextExternalUtil(primitive, primitive->getFirstEdge());
+	EdgeIterator answer(primitive, getNextExternalUtil(primitive, primitive->getFirstEdge()));
 
 	if (answer.edge == NULL) {
 		answer.findEdgeOnNextPrimitive();

@@ -49,6 +49,8 @@ public:
 
 	EdgeIterator() : primitive(NULL), edge(NULL) {}
 
+	EdgeIterator(Primitive* primitive, Edge* edge) : primitive(primitive), edge(edge) {}
+
 	static EdgeIterator& end();
 
 	EdgeIterator& operator++();
