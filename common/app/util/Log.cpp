@@ -2,6 +2,9 @@
 
 #include "decomp.h"
 
+#include <cstdio>
+#include <windows.h>
+
 namespace RBX {
 
 DECOMP_SIZE_ASSERT(Log, 0xac)
@@ -9,6 +12,10 @@ DECOMP_SIZE_ASSERT(ILogProvider, 0x04)
 
 Log::Severity Log::aggregateWorstSeverity = Log::Information;
 ILogProvider* Log::provider;
+
+static const char* information = "          ";
+static const char* warning = " Warning: ";
+static const char* error = " Error:   ";
 
 // FUNCTION: WEBSERVICE 0x1003d880
 void Log::setLogProvider(ILogProvider* logProvider)
@@ -42,10 +49,31 @@ Log::~Log()
 	STUB(0x1003dfa0);
 }
 
-// STUB: WEBSERVICE 0x1003e020
+// FUNCTION: WEBSERVICE 0x1003e020
 void Log::writeEntry(Severity severity, const char* entry)
 {
-	STUB(0x1003e020);
+	std::ofstream* stream = currentStream();
+
+	SYSTEMTIME now;
+	GetLocalTime(&now);
+
+	char stamp[260];
+	sprintf(stamp, "%02u:%02u.%03u ", now.wHour, now.wMinute, now.wMilliseconds);
+
+	*stream << stamp;
+	stream->flush();
+
+	switch (severity) {
+	case Error:
+		*currentStream() << error;
+	case Warning:
+		*currentStream() << warning;
+	case Information:
+		*currentStream() << information;
+	}
+
+	*currentStream() << entry << '\n';
+	currentStream()->flush();
 }
 
 std::string Log::timeStamp()
