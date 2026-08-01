@@ -2,6 +2,7 @@
 #define UTIL_EXTENTS_H
 
 #include "decomp.h"
+#include "util/NormalId.h"
 
 #include <G3D/Vector3.h>
 
@@ -16,9 +17,21 @@ public:
 	Extents(const Vector3& low, const Vector3& high) : low(low), high(high) {}
 
 	static Extents fromCenterCorner(const Vector3& center, const Vector3& corner);
+	static const Extents& zero();
 
 	const Vector3& min() const { return low; }
 	const Vector3& max() const { return high; }
+
+	Vector3 getCorner(int index) const;
+	Vector3 faceCenter(NormalId normalId) const;
+
+	float areaXZ() const;
+
+	NormalId closestFace(const Vector3& point) const;
+
+	bool contains(const Vector3& point) const;
+	bool fuzzyContains(const Vector3& point, float epsilon) const;
+	bool overlapsOrTouches(const Extents& other) const;
 
 	void expand(float distance);
 
