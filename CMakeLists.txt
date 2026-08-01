@@ -120,6 +120,7 @@ set(OPENRBX_APP_SOURCES
   common/app/util/NormalId.cpp
   common/app/util/Quaternion.cpp
   common/app/util/Rect.cpp
+  common/app/util/StandardOut.cpp
   common/app/v8kernel/Body.cpp
   common/app/util/Debug.cpp
   common/app/v8datamodel/Accoutrement.cpp

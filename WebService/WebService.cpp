@@ -9,6 +9,7 @@ class DataModel;
 
 #include "WebServiceMaps.h"
 #include "decomp.h"
+#include "util/StandardOut.h"
 
 #include <G3D/System.h>
 #include <G3D/format.h>
@@ -16,10 +17,12 @@ class DataModel;
 #include <atlcom.h>
 #include <atlisapi.h>
 #include <atlsoap.h>
+#include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/once.hpp>
 #include <map>
+#include <queue>
 #include <stdexcept>
 #include <string>
 
@@ -28,6 +31,53 @@ static bool initRobloxFailed;
 static std::string dotVersion;
 
 extern "C" BOOL WINAPI TerminateExtension(DWORD flags);
+
+// SIZE 0x28
+class StandardOutLog : public RBX::Listener<RBX::StandardOut, RBX::StandardOutMessage>
+{
+public:
+	StandardOutLog();
+	virtual ~StandardOutLog();
+
+	boost::mutex messagesMutex;                   // 0x0c
+	std::queue<RBX::StandardOutMessage> messages; // 0x14
+
+protected:
+	virtual void onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage event);
+
+private:
+	boost::shared_ptr<RBX::StandardOut> standardOut; // 0x04
+};
+
+DECOMP_SIZE_ASSERT(StandardOutLog, 0x28)
+
+static boost::scoped_ptr<StandardOutLog> standardOutLog;
+
+// STUB: WEBSERVICE 0x1000d010
+StandardOutLog::StandardOutLog() : standardOut(RBX::StandardOut::singleton())
+{
+	boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
+	standardOut->addListener(this);
+}
+
+// STUB: WEBSERVICE 0x1000d110
+StandardOutLog::~StandardOutLog()
+{
+	boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
+	standardOut->removeListener(this);
+}
+
+// STUB: WEBSERVICE 0x1000d230
+void StandardOutLog::onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage event)
+{
+	boost::mutex::scoped_lock lock(messagesMutex);
+
+	messages.push(event);
+
+	if (messages.size() > 1000) {
+		messages.pop();
+	}
+}
 
 // STUB: WEBSERVICE 0x1000d380
 static void initRoblox()
@@ -392,8 +442,38 @@ HRESULT __stdcall CWebService::Update(wchar_t* url)
 // STUB: WEBSERVICE 0x1000fb80
 HRESULT __stdcall CWebService::GetStandardOutMessages(int lastId, StandardOutMessages* result)
 {
-	STUB(0x1000fb80);
-	return E_NOTIMPL;
+	boost::mutex::scoped_lock lock(standardOutLog->messagesMutex);
+
+	while (lastId < (int) standardOutLog->messages.size()) {
+		standardOutLog->messages.pop();
+	}
+
+	StandardOutMessage* items = NULL;
+	result->count = standardOutLog->messages.size();
+
+	if (result->count != 0) {
+		size_t bytes = result->count * sizeof(StandardOutMessage);
+		items = (StandardOutMessage*) GetMemMgr()->Allocate(bytes);
+		memset(items, 0, bytes);
+	}
+
+	result->items = items;
+
+	int index = 0;
+	while (!standardOutLog->messages.empty()) {
+		const RBX::StandardOutMessage& message = standardOutLog->messages.front();
+
+		result->items[index].type = (MessageType) message.type;
+		result->items[index].time = message.time;
+
+		ATL::CComBSTR text(ATL::CStringA(message.message.c_str()));
+		result->items[index].text = text.Detach();
+
+		standardOutLog->messages.pop();
+		index++;
+	}
+
+	return S_OK;
 }
 
 } // namespace Roblox
