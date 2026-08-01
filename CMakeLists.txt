@@ -136,6 +136,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/JointStage.cpp
   common/app/v8world/Mechanism.cpp
   common/app/v8world/MotorJoint.cpp
+  common/app/v8world/MultiJoint.cpp
   common/app/v8world/Primitive.cpp
   common/app/v8world/RigidJoint.cpp
   common/app/v8world/SpatialHash.cpp

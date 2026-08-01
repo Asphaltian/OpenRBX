@@ -13,6 +13,7 @@ class IJointOwner;
 
 using G3D::CoordinateFrame;
 
+// VTABLE: WEBSERVICE 0x10247fb0
 // SIZE 0x88
 class Joint : public Edge
 {
@@ -31,16 +32,36 @@ public:
 		FREE_JOINT = 9,
 	};
 
+	virtual ~Joint(); // vtable+0x00
+
+	// SYNTHETIC: WEBSERVICE 0x1011ea60
+	// RBX::Joint::`scalar deleting destructor'
+
+	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	virtual EdgeType getEdgeType() const { return JOINT; } // vtable+0x0c
+
+	virtual void setPrimitive(int index, Primitive* primitive); // vtable+0x10
+
 	static bool isJoint(Edge* edge) { return edge->getEdgeType() == JOINT; }
 
-	virtual JointType getJointType() const = 0;                            // vtable+0x14
-	virtual bool isBreakable() const;                                      // vtable+0x18
-	virtual bool isBroken() const;                                         // vtable+0x1c
+	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	virtual JointType getJointType() const { return NO_JOINT; } // vtable+0x14
+	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
+	virtual bool isBreakable() const { return false; } // vtable+0x18
+
+	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
+	virtual bool isBroken() const { return false; }                        // vtable+0x1c
 	virtual bool joinsFace(Primitive* primitive, NormalId normalId) const; // vtable+0x20
-	virtual bool isAligned();                                              // vtable+0x24
-	virtual CoordinateFrame align(Primitive* prim0, Primitive* prim1);     // vtable+0x28
-	virtual bool canStepUi() const;                                        // vtable+0x2c
-	virtual void stepUi(int frameCount);                                   // vtable+0x30
+
+	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	virtual bool isAligned() { return true; } // vtable+0x24
+
+	virtual CoordinateFrame align(Primitive* prim0, Primitive* prim1); // vtable+0x28
+
+	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
+	virtual bool canStepUi() const { return false; } // vtable+0x2c
+
+	virtual void stepUi(int frameCount) {} // vtable+0x30
 
 	void setJointOwner(IJointOwner* value);
 
