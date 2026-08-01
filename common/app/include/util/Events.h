@@ -1,6 +1,7 @@
 #ifndef UTIL_EVENTS_H
 #define UTIL_EVENTS_H
 
+#include <algorithm>
 #include <vector>
 
 namespace RBX {
@@ -38,44 +39,69 @@ public:
 	void removeListener(Listener<Source, Event>* listener) const;
 
 protected:
-	virtual ~Notifier() {}                                              // vtable+0x00
-	virtual void onAddListener(Listener<Source, Event>* listener) {}    // vtable+0x04
-	virtual void onRemoveListener(Listener<Source, Event>* listener) {} // vtable+0x08
+	virtual ~Notifier() {}                                                    // vtable+0x00
+	virtual void onAddListener(Listener<Source, Event>* listener) const {}    // vtable+0x04
+	virtual void onRemoveListener(Listener<Source, Event>* listener) const {} // vtable+0x08
 
 	bool hasListeners() const { return !listeners.empty(); }
 
-	void raise(Event event) const
+	void raise(Event event, Listener<Source, Event>* listener) const
 	{
-		for (size_t index = 0; index < listeners.size(); index++) {
-			listeners[index]->onEvent(static_cast<const Source*>(this), event);
-		}
+		listener->onEvent(static_cast<const Source*>(this), event);
 	}
 
+	void raise(Event event) const;
+
 private:
-	std::vector<Listener<Source, Event>*> listeners; // 0x04
-	RaiseRange* raiseRange;                          // 0x14
+	mutable std::vector<Listener<Source, Event>*> listeners; // 0x04
+	mutable RaiseRange* raiseRange;                          // 0x14
 };
 
+// STUB: WEBSERVICE 0x1001acb0
+// RBX::Notifier<RBX::StandardOut,RBX::StandardOutMessage>::addListener
 template <class Source, class Event>
 void Notifier<Source, Event>::addListener(Listener<Source, Event>* listener) const
 {
-	const_cast<Notifier*>(this)->listeners.push_back(listener);
-	const_cast<Notifier*>(this)->onAddListener(listener);
+	if (std::find(listeners.begin(), listeners.end(), listener) == listeners.end()) {
+		listeners.push_back(listener);
+		onAddListener(listener);
+	}
 }
 
+// STUB: WEBSERVICE 0x1001ad50
+// RBX::Notifier<RBX::StandardOut,RBX::StandardOutMessage>::removeListener
 template <class Source, class Event>
 void Notifier<Source, Event>::removeListener(Listener<Source, Event>* listener) const
 {
-	std::vector<Listener<Source, Event>*>& all = const_cast<Notifier*>(this)->listeners;
+	typename std::vector<Listener<Source, Event>*>::iterator found =
+		std::find(listeners.begin(), listeners.end(), listener);
 
-	for (size_t index = 0; index < all.size(); index++) {
-		if (all[index] == listener) {
-			all.erase(all.begin() + index);
-			break;
+	if (found != listeners.end()) {
+		onRemoveListener(listener);
+
+		if (raiseRange != NULL) {
+			raiseRange->removeIndex(found - listeners.begin());
 		}
+
+		listeners.erase(found);
+	}
+}
+
+template <class Source, class Event>
+void Notifier<Source, Event>::raise(Event event) const
+{
+	RaiseRange range;
+	range.index = 0;
+	range.upper = listeners.size();
+	range.previous = raiseRange;
+	raiseRange = &range;
+
+	while (range.index < range.upper) {
+		raise(event, listeners[range.index]);
+		range.index++;
 	}
 
-	const_cast<Notifier*>(this)->onRemoveListener(listener);
+	raiseRange = range.previous;
 }
 
 } // namespace RBX
