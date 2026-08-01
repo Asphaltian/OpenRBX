@@ -38,6 +38,11 @@ public:
 
 	void process();
 
+	Primitive* heavyParent(int index, Primitive* primitive, Joint*& heaviest, int& heaviestIndex);
+	void findHeaviestUpstream(Primitive* prim0, Primitive* prim1, Joint*& heaviest, int& heaviestIndex);
+
+	void insertJoint(Joint* joint);
+
 	void swap(Joint* remove, Joint* add, Primitive* root);
 
 	void traverse(Joint* joint, Primitive* root);

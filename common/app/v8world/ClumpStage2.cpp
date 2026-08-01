@@ -121,6 +121,33 @@ bool lighterJoint(Joint* joint0, Joint* joint1)
 
 } // namespace JointSort
 
+// FUNCTION: WEBSERVICE 0x1011ba00
+Primitive* TreeStage::heavyParent(int index, Primitive* primitive, Joint*& heaviest, int& heaviestIndex)
+{
+	Joint* joint = primitive->getFirstJoint();
+
+	while (joint != NULL) {
+		if (joint->getActive()) {
+			Primitive* other = primitive == joint->getPrimitive(0) ? joint->getPrimitive(1) : joint->getPrimitive(0);
+
+			int depth = other != NULL ? other->getClumpDepth() : 0;
+
+			if (depth == primitive->getClumpDepth() - 1) {
+				if (heaviest == NULL || JointSort::lighterJoint(heaviest, joint)) {
+					heaviest = joint;
+					heaviestIndex = index;
+				}
+
+				return other;
+			}
+		}
+
+		joint = primitive->getNextJoint(joint);
+	}
+
+	return NULL;
+}
+
 // FUNCTION: WEBSERVICE 0x1011bb90
 int TreeStage::getMetric(MetricType metricType)
 {
@@ -129,6 +156,33 @@ int TreeStage::getMetric(MetricType metricType)
 		return maxTreeDepth;
 	default:
 		return static_cast<IWorldStage*>(getDownstream())->getMetric(metricType);
+	}
+}
+
+// STUB: WEBSERVICE 0x1011bbc0
+void TreeStage::findHeaviestUpstream(Primitive* prim0, Primitive* prim1, Joint*& heaviest, int& heaviestIndex)
+{
+	while (true) {
+		int depth0 = prim0 != NULL ? prim0->getClumpDepth() : 0;
+		int depth1 = prim1 != NULL ? prim1->getClumpDepth() : 0;
+
+		if (depth0 != depth1) {
+			if (depth1 < depth0) {
+				prim0 = heavyParent(0, prim0, heaviest, heaviestIndex);
+			}
+			else {
+				prim1 = heavyParent(1, prim1, heaviest, heaviestIndex);
+			}
+
+			continue;
+		}
+
+		if (prim0 == prim1) {
+			return;
+		}
+
+		prim0 = prim0 != NULL ? heavyParent(0, prim0, heaviest, heaviestIndex) : NULL;
+		prim1 = prim1 != NULL ? heavyParent(1, prim1, heaviest, heaviestIndex) : NULL;
 	}
 }
 
@@ -180,6 +234,20 @@ void TreeStage::swap(Joint* remove, Joint* add, Primitive* root)
 	dirtyAssemblies(add);
 	add->setActive(true);
 	traverse(add, root);
+}
+
+// STUB: WEBSERVICE 0x1011c740
+void TreeStage::insertJoint(Joint* joint)
+{
+	Joint* heaviest = NULL;
+	int heaviestIndex = 0;
+
+	findHeaviestUpstream(joint->getPrimitive(0), joint->getPrimitive(1), heaviest, heaviestIndex);
+
+	if (heaviest == NULL || JointSort::lighterJoint(joint, heaviest)) {
+		swap(heaviest, joint, joint->getPrimitive((heaviestIndex + 1) % 2));
+		dirty = true;
+	}
 }
 
 } // namespace RBX

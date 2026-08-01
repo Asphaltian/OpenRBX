@@ -33,7 +33,7 @@ Edge* EdgeIterator::getNextExternalUtil(Primitive* primitive, Edge* edge)
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x10117df0
+// FUNCTION: WEBSERVICE 0x10117df0
 bool PrimIterator::isParent(Primitive* parent, Primitive* child, Joint* joint, SearchType searchType)
 {
 	if (parent == NULL || child == NULL) {
@@ -66,17 +66,13 @@ bool PrimIterator::isParent(Primitive* parent, Primitive* child, Joint* joint, S
 	return sameClump || parent->getAssembly() == child->getAssembly();
 }
 
-// STUB: WEBSERVICE 0x10117ea0
+// FUNCTION: WEBSERVICE 0x10117ea0
 Primitive* PrimIterator::findParent(Primitive* primitive, SearchType searchType)
 {
 	Joint* joint = primitive->getFirstJoint();
 
 	while (joint != NULL) {
-		Primitive* other = joint->getPrimitive(0);
-
-		if (primitive == other) {
-			other = joint->getPrimitive(1);
-		}
+		Primitive* other = primitive == joint->getPrimitive(0) ? joint->getPrimitive(1) : joint->getPrimitive(0);
 
 		if (isParent(other, primitive, joint, searchType)) {
 			return other;
@@ -88,17 +84,13 @@ Primitive* PrimIterator::findParent(Primitive* primitive, SearchType searchType)
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x10117f00
+// FUNCTION: WEBSERVICE 0x10117f00
 Primitive* PrimIterator::findFirstChild(Primitive* primitive, SearchType searchType)
 {
 	Joint* joint = primitive->getFirstJoint();
 
 	while (joint != NULL) {
-		Primitive* other = joint->getPrimitive(0);
-
-		if (primitive == other) {
-			other = joint->getPrimitive(1);
-		}
+		Primitive* other = primitive == joint->getPrimitive(0) ? joint->getPrimitive(1) : joint->getPrimitive(0);
 
 		if (isParent(primitive, other, joint, searchType)) {
 			return other;
@@ -116,11 +108,7 @@ Primitive* PrimIterator::findNextSibling(Primitive* parent, Primitive* child, Se
 	bool found = false;
 
 	for (Joint* joint = parent->getFirstJoint(); joint != NULL; joint = parent->getNextJoint(joint)) {
-		Primitive* other = joint->getPrimitive(0);
-
-		if (parent == other) {
-			other = joint->getPrimitive(1);
-		}
+		Primitive* other = parent == joint->getPrimitive(0) ? joint->getPrimitive(1) : joint->getPrimitive(0);
 
 		if (isParent(parent, other, joint, searchType)) {
 			if (found) {

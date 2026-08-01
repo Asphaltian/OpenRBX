@@ -160,6 +160,12 @@ boost's `shared_ptr::operator<` compares ownership, not the pointer, so it loads
 
 A `ComputeProp` member records its owner's inheritance shape. MSVC sizes the pointer-to-member by how the class inherits, so `ComputeProp<float, Primitive>` is 16 bytes and `ComputeProp<float, Assembly>` is 24: `Assembly` also derives from `boost::noncopyable`, which makes the member pointer the multiple-inheritance form. A class size that is off by the difference means a base is missing.
 
+`x = a; if (cond) x = b;` and `x = cond ? b : a;` are not the same codegen. The if form folds into one load and a conditional reload; the ternary evaluates `a` into a scratch register first and copies it in the else branch, which is one instruction longer. Roblox wrote the ternary for the "pick the other primitive on this edge" idiom, so `heavyParent`, `findParent` and `findFirstChild` only reach 100% spelled that way.
+
+Read a CRT call's name out of the publics, never infer it from what the surrounding code looks like it should do. `_floor` at 0x101e8ac4 spent a long stretch written as `sqrt` because a size clamp reads like one, and the wrong one still matched three quarters of the body.
+
+A `__int64` multiply lowers to `_allmul`, and the conversion back to float tells you the signedness: a plain `fild` is signed, and a pair of `fild`s that splits the sign bit out and subtracts it is unsigned.
+
 A comparison puts its right operand in the register: `a == b` on integers is `mov eax, b` then `cmp [a], eax`, and on floats `fld b` then `fcomp a`. So the operand the binary loads first is the one written second, which settles whether a member `operator==` was called as `x == y` or `y == x`.
 
 Calls into vendored libraries used to read low, because reccmp only parses the recompiled PDB and had no name for the original's side. `reccmp/webservice-vendored.csv` hands it the 2,594 G3D, Boost, STL and ATL functions out of `WebService.pdb`, which reccmp then matches by mangled name; `--nolib` keeps them out of the score. Selection is by the scope a name is declared in, not the whole mangled string, or a Roblox method taking an `ATL::CStringT` counts as ATL's. Two cases are still unnamed: an address where the linker folded two vendored functions keeps one symbol in our PDB and may keep the other in theirs, and a function-local static mangles its enclosing scope's index, which the two builds number differently.
