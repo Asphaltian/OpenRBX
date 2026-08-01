@@ -35,6 +35,9 @@ template <class T>
 class TypedPropertyDescriptor : public PropertyDescriptor
 {
 protected:
+	TypedPropertyDescriptor() {}
+
+protected:
 	undefined getset[0x1c - 0x18]; // 0x18
 };
 
@@ -42,6 +45,8 @@ protected:
 template <class Class, class T>
 class PropDescriptor : public TypedPropertyDescriptor<T>
 {
+public:
+	PropDescriptor() {}
 };
 
 // SIZE 0x1c
@@ -59,6 +64,9 @@ DECOMP_SIZE_ASSERT(EnumPropertyDescriptor, 0x1c)
 template <class Class, class T>
 class EnumPropDescriptor : public EnumPropertyDescriptor
 {
+public:
+	EnumPropDescriptor() {}
+
 private:
 	undefined getset[0x20 - 0x1c]; // 0x1c
 };

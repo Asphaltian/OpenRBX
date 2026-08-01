@@ -42,6 +42,8 @@ DECOMP_SIZE_ASSERT(SignalDescriptor, 0x24)
 template <class Class, class Signature>
 class SignalDesc : public SignalDescriptor
 {
+public:
+	SignalDesc() {}
 };
 
 } // namespace Reflection
