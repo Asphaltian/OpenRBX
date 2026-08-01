@@ -2,8 +2,10 @@
 #define V8WORLD_ASSEMBLY2_H
 
 #include "decomp.h"
+#include "util/ComputeProp.h"
 #include "v8world/IPipelined.h"
 
+#include <boost/noncopyable.hpp>
 #include <vector>
 
 namespace RBX {
@@ -41,7 +43,7 @@ private:
 DECOMP_SIZE_ASSERT(SleepInfo, 0x24)
 
 // SIZE 0x50
-class Assembly : public IPipelined
+class Assembly : public IPipelined, public boost::noncopyable
 {
 public:
 	Assembly* getRootAssembly();
@@ -51,7 +53,11 @@ public:
 
 	Assembly* otherAssembly(Edge* edge);
 
+	const Primitive* getRootPrimitive() const { return rootPrimitive; }
+
 	Mechanism* getMechanism();
+
+	void onPrimitivesChanged();
 	Sim::AssemblyState getSleepStatus();
 	bool getAnchored();
 	bool computeCanSleep();
@@ -62,12 +68,13 @@ public:
 	virtual void removeFromKernel();          // vtable+0x08
 
 private:
-	SleepInfo* sleepInfo;             // 0x08
-	Primitive* rootPrimitive;         // 0x0c
-	Assembly* parent;                 // 0x10
-	std::vector<Assembly*> children;  // 0x14
-	Mechanism* mechanism;             // 0x24
-	undefined m_unk0x28[0x50 - 0x28]; // 0x28
+	SleepInfo* sleepInfo;                   // 0x08
+	Primitive* rootPrimitive;               // 0x0c
+	Assembly* parent;                       // 0x10
+	std::vector<Assembly*> children;        // 0x14
+	Mechanism* mechanism;                   // 0x24
+	ComputeProp<float, Assembly> maxRadius; // 0x28
+	ComputeProp<bool, Assembly> canSleep;   // 0x40
 };
 
 DECOMP_SIZE_ASSERT(Assembly, 0x50)
@@ -78,6 +85,8 @@ class Clump : public Assembly
 };
 
 DECOMP_SIZE_ASSERT(Clump, 0x50)
+
+bool lessAssembly(const Assembly* a, const Assembly* b);
 
 } // namespace RBX
 

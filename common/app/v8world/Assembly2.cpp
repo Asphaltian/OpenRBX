@@ -24,6 +24,20 @@ Sim::AssemblyState Assembly::getSleepStatus()
 	return root->sleepInfo != NULL ? root->sleepInfo->state : Sim::ANCHORED;
 }
 
+// FUNCTION: WEBSERVICE 0x10102a80
+bool lessAssembly(const Assembly* a, const Assembly* b)
+{
+	if (a == b) {
+		return false;
+	}
+
+	if (a->getRootPrimitive() == b->getRootPrimitive()) {
+		return false;
+	}
+
+	return Guid::compare(a->getRootPrimitive()->getGuid(), b->getRootPrimitive()->getGuid()) == -1;
+}
+
 // FUNCTION: WEBSERVICE 0x10102ac0 FOLDED
 Assembly* Assembly::getRootAssembly()
 {
@@ -113,6 +127,18 @@ Assembly* Assembly::otherAssembly(Edge* edge)
 	Assembly* assembly1 = edge->getPrimitive(1)->getAssembly();
 
 	return assembly0 != this ? assembly0 : assembly1;
+}
+
+// FUNCTION: WEBSERVICE 0x10102d50
+void Assembly::onPrimitivesChanged()
+{
+	maxRadius.setDirty();
+	canSleep.setDirty();
+
+	for (Assembly* ancestor = parent; ancestor != NULL; ancestor = ancestor->parent) {
+		ancestor->maxRadius.setDirty();
+		ancestor->canSleep.setDirty();
+	}
 }
 
 } // namespace RBX
