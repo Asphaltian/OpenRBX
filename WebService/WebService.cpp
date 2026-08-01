@@ -1,6 +1,8 @@
 #define _WIN32_WINNT 0x0400
 #define _WIN32_DCOM
 
+#include "WebService.h"
+
 #include "WebServiceMaps.h"
 #include "decomp.h"
 
@@ -29,9 +31,25 @@ CDllMainOverride _AtlModule;
 namespace Roblox {
 
 // SIZE 0x180
-class CWebService : public ATL::CSoapHandler<CWebService>
+class CWebService : public IWebService, public ATL::CSoapHandler<CWebService>
 {
 public:
+	HRESULT __stdcall HelloWorld(wchar_t** result);
+	HRESULT __stdcall GetAllJobs(Strings* result);
+	HRESULT __stdcall TouchJob(wchar_t* jobID, double expiration);
+	HRESULT __stdcall OpenJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result);
+	HRESULT __stdcall CloseJob(wchar_t* jobID);
+	HRESULT __stdcall CloseTimedoutJobs(int* result);
+	HRESULT __stdcall CloseOrphanedJobs(Strings jobs, int* result);
+	HRESULT __stdcall CloseAllJobs();
+	HRESULT __stdcall GetTimeout(wchar_t* jobID, double* timeout);
+	HRESULT __stdcall Execute(wchar_t* jobID, ScriptExecution script, LuaArguments* result);
+	HRESULT __stdcall BatchJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result);
+	HRESULT __stdcall GetVersion(wchar_t** result);
+	HRESULT __stdcall GetStatus(Status* result);
+	HRESULT __stdcall Update(wchar_t* url);
+	HRESULT __stdcall GetStandardOutMessages(int lastId, StandardOutMessages* result);
+
 	// FUNCTION: WEBSERVICE 0x1000dcc0
 	const _soapmap** GetFunctionMap() { return ___Roblox_CWebService_funcs; }
 
@@ -41,11 +59,57 @@ public:
 	// FUNCTION: WEBSERVICE 0x1000dce0
 	void* GetHeaderValue() { return &errorMessage; }
 
-	// STUB: WEBSERVICE 0x1000dcf0
+	// FUNCTION: WEBSERVICE 0x1000dcf0
 	HRESULT CallFunction(void* pvParam, const wchar_t* wszLocalName, int cchLocalName, size_t nItem)
 	{
-		STUB(0x1000dcf0);
-		return E_NOTIMPL;
+		switch (nItem) {
+		case 0:
+			return HelloWorld((wchar_t**) pvParam);
+		case 1:
+			return GetVersion((wchar_t**) pvParam);
+		case 2:
+			return GetStatus((Status*) pvParam);
+		case 3:
+			return Update(*(wchar_t**) pvParam);
+		case 4: {
+			OpenJobParams* p = (OpenJobParams*) pvParam;
+			return OpenJob(p->jobID, p->script, p->expiration, &p->result);
+		}
+		case 5: {
+			TouchJobParams* p = (TouchJobParams*) pvParam;
+			return TouchJob(p->jobID, p->expiration);
+		}
+		case 6: {
+			ExecuteParams* p = (ExecuteParams*) pvParam;
+			return Execute(p->jobID, p->script, &p->result);
+		}
+		case 7:
+			return CloseJob(*(wchar_t**) pvParam);
+		case 8: {
+			OpenJobParams* p = (OpenJobParams*) pvParam;
+			return BatchJob(p->jobID, p->script, p->expiration, &p->result);
+		}
+		case 9: {
+			GetTimeoutParams* p = (GetTimeoutParams*) pvParam;
+			return GetTimeout(p->jobID, &p->timeout);
+		}
+		case 10: {
+			CloseOrphanedJobsParams* p = (CloseOrphanedJobsParams*) pvParam;
+			return CloseOrphanedJobs(p->jobs, &p->result);
+		}
+		case 11:
+			return CloseAllJobs();
+		case 12:
+			return CloseTimedoutJobs((int*) pvParam);
+		case 13:
+			return GetAllJobs((Strings*) pvParam);
+		case 14: {
+			GetStandardOutMessagesParams* p = (GetStandardOutMessagesParams*) pvParam;
+			return GetStandardOutMessages(p->lastId, &p->result);
+		}
+		}
+
+		return E_FAIL;
 	}
 
 	// FUNCTION: WEBSERVICE 0x1000df50
@@ -65,6 +129,17 @@ private:
 } // namespace Roblox
 
 DECLARE_REQUEST_HANDLER("Default", CWebService, Roblox::CWebService)
+
+namespace Roblox {
+
+// STUB: WEBSERVICE 0x1000dfb0
+HRESULT __stdcall CWebService::HelloWorld(wchar_t** result)
+{
+	STUB(0x1000dfb0);
+	return E_NOTIMPL;
+}
+
+} // namespace Roblox
 
 // FUNCTION: WEBSERVICE 0x1000e070
 STDAPI DllGetClassObject(REFCLSID clsid, REFIID iid, LPVOID* ppv)
@@ -129,3 +204,105 @@ extern "C" BOOL WINAPI TerminateExtension(DWORD flags)
 {
 	return theExtension.TerminateExtension(flags);
 }
+
+namespace Roblox {
+
+// STUB: WEBSERVICE 0x1000e4d0
+HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
+{
+	STUB(0x1000e4d0);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000e650
+HRESULT __stdcall CWebService::TouchJob(wchar_t* jobID, double expiration)
+{
+	STUB(0x1000e650);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000e730
+HRESULT __stdcall CWebService::OpenJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result)
+{
+	STUB(0x1000e730);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000e980
+HRESULT __stdcall CWebService::CloseJob(wchar_t* jobID)
+{
+	STUB(0x1000e980);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000ebd0
+HRESULT __stdcall CWebService::CloseTimedoutJobs(int* result)
+{
+	STUB(0x1000ebd0);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000ee00
+HRESULT __stdcall CWebService::CloseOrphanedJobs(Strings jobs, int* result)
+{
+	STUB(0x1000ee00);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000f0e0
+HRESULT __stdcall CWebService::CloseAllJobs()
+{
+	STUB(0x1000f0e0);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000f2e0
+HRESULT __stdcall CWebService::GetTimeout(wchar_t* jobID, double* timeout)
+{
+	STUB(0x1000f2e0);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000f4e0
+HRESULT __stdcall CWebService::Execute(wchar_t* jobID, ScriptExecution script, LuaArguments* result)
+{
+	STUB(0x1000f4e0);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000f990
+HRESULT __stdcall CWebService::BatchJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result)
+{
+	STUB(0x1000f990);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000f9f0
+HRESULT __stdcall CWebService::GetVersion(wchar_t** result)
+{
+	STUB(0x1000f9f0);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000fab0
+HRESULT __stdcall CWebService::GetStatus(Status* result)
+{
+	STUB(0x1000fab0);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000faf0
+HRESULT __stdcall CWebService::Update(wchar_t* url)
+{
+	STUB(0x1000faf0);
+	return E_NOTIMPL;
+}
+
+// STUB: WEBSERVICE 0x1000fb80
+HRESULT __stdcall CWebService::GetStandardOutMessages(int lastId, StandardOutMessages* result)
+{
+	STUB(0x1000fb80);
+	return E_NOTIMPL;
+}
+
+} // namespace Roblox
