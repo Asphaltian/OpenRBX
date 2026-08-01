@@ -4,26 +4,37 @@
 #include "decomp.h"
 #include "util/NormalId.h"
 
+#include <G3D/CoordinateFrame.h>
+#include <G3D/GCamera.h>
+#include <G3D/Plane.h>
 #include <G3D/Vector3.h>
 
 namespace RBX {
 
+using G3D::CoordinateFrame;
+using G3D::Plane;
 using G3D::Vector3;
 
 class Extents
 {
 public:
-	Extents() {}
+	Extents() : low(Vector3::inf()), high(-Vector3::inf()) {}
 	Extents(const Vector3& low, const Vector3& high) : low(low), high(high) {}
 
 	static Extents fromCenterCorner(const Vector3& center, const Vector3& corner);
+	static Extents vv(const Vector3& v0, const Vector3& v1);
+
 	static const Extents& zero();
+	static const Extents& negativeInfiniteExtents();
 
 	const Vector3& min() const { return low; }
 	const Vector3& max() const { return high; }
 
 	Vector3 getCorner(int index) const;
 	Vector3 faceCenter(NormalId normalId) const;
+	Plane getPlane(NormalId normalId) const;
+
+	void getFaceCorners(NormalId normalId, Vector3& c0, Vector3& c1, Vector3& c2, Vector3& c3) const;
 
 	float areaXZ() const;
 
@@ -32,6 +43,11 @@ public:
 	bool contains(const Vector3& point) const;
 	bool fuzzyContains(const Vector3& point, float epsilon) const;
 	bool overlapsOrTouches(const Extents& other) const;
+	bool separatedByMoreThan(const Extents& other, float distance) const;
+	bool containedByFrustum(const G3D::GCamera::Frustum& frustum) const;
+
+	Extents toWorldSpace(const CoordinateFrame& coordinateFrame) const;
+	Extents express(const CoordinateFrame& from, const CoordinateFrame& to) const;
 
 	void expand(float distance);
 

@@ -13,17 +13,15 @@ static float rotationStep()
 	return step;
 }
 
-namespace Math {
-
 // FUNCTION: WEBSERVICE 0x100de860
-bool isDenormal(float value)
+bool Math::isDenormal(float value)
 {
 	const int bits = *reinterpret_cast<const int*>(&value);
 	return (bits & 0x7f800000) == 0 && (bits & 0x7fffff) != 0;
 }
 
 // FUNCTION: WEBSERVICE 0x100de930
-bool fixDenorm(Vector3& value)
+bool Math::fixDenorm(Vector3& value)
 {
 	bool fixed = false;
 
@@ -44,7 +42,7 @@ bool fixDenorm(Vector3& value)
 }
 
 // STUB: WEBSERVICE 0x100de9a0
-bool legalCameraCoord(const CoordinateFrame& coordinateFrame)
+bool Math::legalCameraCoord(const CoordinateFrame& coordinateFrame)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
@@ -67,7 +65,7 @@ bool legalCameraCoord(const CoordinateFrame& coordinateFrame)
 }
 
 // STUB: WEBSERVICE 0x100dea30
-float rotationFromByte(unsigned char byte)
+float Math::rotationFromByte(unsigned char byte)
 {
 	const float value = byte;
 
@@ -75,19 +73,19 @@ float rotationFromByte(unsigned char byte)
 }
 
 // FUNCTION: WEBSERVICE 0x100debb0
-Vector3 toDiagonal(const Matrix3& matrix)
+Vector3 Math::toDiagonal(const Matrix3& matrix)
 {
 	return Vector3(matrix[0][0], matrix[1][1], matrix[2][2]);
 }
 
 // FUNCTION: WEBSERVICE 0x100debd0
-Matrix3 fromDiagonal(const Vector3& diagonal)
+Matrix3 Math::fromDiagonal(const Vector3& diagonal)
 {
 	return Matrix3(diagonal.x, 0.0f, 0.0f, 0.0f, diagonal.y, 0.0f, 0.0f, 0.0f, diagonal.z);
 }
 
 // FUNCTION: WEBSERVICE 0x100dec20
-bool isAxisAligned(const Matrix3& matrix)
+bool Math::isAxisAligned(const Matrix3& matrix)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
@@ -102,7 +100,7 @@ bool isAxisAligned(const Matrix3& matrix)
 }
 
 // FUNCTION: WEBSERVICE 0x100df0a0
-Vector3 iRoundVector3(const Vector3& value)
+Vector3 Math::iRoundVector3(const Vector3& value)
 {
 	return Vector3(
 		static_cast<float>(G3D::iRound(value.x)),
@@ -112,7 +110,7 @@ Vector3 iRoundVector3(const Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100df150
-float angle(const Vector3& v0, const Vector3& v1)
+float Math::angle(const Vector3& v0, const Vector3& v1)
 {
 	const float dot = v0.dot(v1);
 
@@ -127,7 +125,7 @@ float angle(const Vector3& v0, const Vector3& v1)
 }
 
 // FUNCTION: WEBSERVICE 0x100df1a0
-bool fuzzyEq(const Vector3& v0, const Vector3& v1, float epsilon)
+bool Math::fuzzyEq(const Vector3& v0, const Vector3& v1, float epsilon)
 {
 	for (int i = 0; i < 3; ++i) {
 		const float a = v0[i];
@@ -142,7 +140,7 @@ bool fuzzyEq(const Vector3& v0, const Vector3& v1, float epsilon)
 }
 
 // FUNCTION: WEBSERVICE 0x100df200
-bool fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon)
+bool Math::fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
@@ -159,7 +157,7 @@ bool fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon)
 }
 
 // STUB: WEBSERVICE 0x100df530
-NormalId getClosestObjectNormalId(const Vector3& worldNormal, const Matrix3& objectRotation)
+NormalId Math::getClosestObjectNormalId(const Vector3& worldNormal, const Matrix3& objectRotation)
 {
 	const Vector3 objectNormal = worldNormal * objectRotation;
 
@@ -180,19 +178,17 @@ NormalId getClosestObjectNormalId(const Vector3& worldNormal, const Matrix3& obj
 }
 
 // STUB: WEBSERVICE 0x100df600
-Vector3 vector3Abs(const Vector3& value)
+Vector3 Math::vector3Abs(const Vector3& value)
 {
 	STUB(0x100df600);
 	return Vector3::zero();
 }
 
 // FUNCTION: WEBSERVICE 0x100df620
-float getHeading(const Vector3& look)
+float Math::getHeading(const Vector3& look)
 {
 	return atan2f(-look.x, -look.z);
 }
-
-} // namespace Math
 
 // STUB: WEBSERVICE 0x100dfaf0
 unsigned char rotationToByteBase(float rotation)
@@ -202,10 +198,8 @@ unsigned char rotationToByteBase(float rotation)
 	return static_cast<unsigned char>(index < 1 ? 0 : (index > 254 ? 255 : index));
 }
 
-namespace Math {
-
 // STUB: WEBSERVICE 0x100dfb90
-Vector3 toGrid(const Vector3& value, const Vector3& grid)
+Vector3 Math::toGrid(const Vector3& value, const Vector3& grid)
 {
 	return Vector3(
 		grid.x * G3D::iRound(value.x / grid.x),
@@ -215,7 +209,7 @@ Vector3 toGrid(const Vector3& value, const Vector3& grid)
 }
 
 // FUNCTION: WEBSERVICE 0x100dfe40
-Vector3 sortVector3(const Vector3& value)
+Vector3 Math::sortVector3(const Vector3& value)
 {
 	Vector3 sorted = value;
 
@@ -233,12 +227,11 @@ Vector3 sortVector3(const Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100dfea0
-float maxAxisLength(const Vector3& value)
+float Math::maxAxisLength(const Vector3& value)
 {
 	const float lengths[3] = {fabsf(value.x), fabsf(value.y), fabsf(value.z)};
 
 	return std::max(lengths[0], std::max(lengths[1], lengths[2]));
 }
 
-} // namespace Math
 } // namespace RBX

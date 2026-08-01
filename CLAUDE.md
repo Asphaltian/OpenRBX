@@ -166,6 +166,8 @@ Which side of a float compare gets loaded first depends on the operator, not the
 
 MSVC reorders the terms of an `&&` chain of float compares. `Extents::overlapsOrTouches` tests its second triple in the order y, x, z, and the source has to be written that way to match.
 
+`Math` is a class of static members, not a namespace, and the difference is visible: its magic-static guard mangles `??_B?1??inf@Math@RBX@@SAABMXZ@51` and reccmp can name it, where a namespace function's guard is `$S` and anonymous. That one symbol took `Extents::express` and `toWorldSpace` from 32 and 35 percent to 100. A guard defined in a `.cpp` stays anonymous whatever the scope, which is the ceiling on `Extents::zero` and `negativeInfiniteExtents`.
+
 A `static const float` folds to a constant and loses its magic-static guard unless the initializer calls something. The binary's guard on `Math::rotationFromByte` is what proves the step came from `G3D::pi()` rather than a literal.
 
 A `ComputeProp` member records its owner's inheritance shape. MSVC sizes the pointer-to-member by how the class inherits, so `ComputeProp<float, Primitive>` is 16 bytes and `ComputeProp<float, Assembly>` is 24: `Assembly` also derives from `boost::noncopyable`, which makes the member pointer the multiple-inheritance form. A class size that is off by the difference means a base is missing.
