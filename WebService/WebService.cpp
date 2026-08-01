@@ -22,6 +22,7 @@ class DataModel;
 
 boost::once_flag flagInitRoblox = BOOST_ONCE_INIT;
 static bool initRobloxFailed;
+static std::string dotVersion;
 
 extern "C" BOOL WINAPI TerminateExtension(DWORD flags);
 
@@ -314,11 +315,13 @@ HRESULT __stdcall CWebService::BatchJob(wchar_t* jobID, ScriptExecution script, 
 	return hr;
 }
 
-// STUB: WEBSERVICE 0x1000f9f0
+// FUNCTION: WEBSERVICE 0x1000f9f0
 HRESULT __stdcall CWebService::GetVersion(wchar_t** result)
 {
-	STUB(0x1000f9f0);
-	return E_NOTIMPL;
+	ATL::CComBSTR version(ATL::CStringA(dotVersion.c_str()));
+	*result = version.Detach();
+
+	return S_OK;
 }
 
 // FUNCTION: WEBSERVICE 0x1000fab0
@@ -326,13 +329,14 @@ HRESULT __stdcall CWebService::GetStatus(Status* result)
 {
 	HRESULT hr = GetVersion(&result->version);
 
-	if (hr == S_OK) {
-		boost::mutex::scoped_lock lock(sync);
-		result->environmentCount = jobs.size();
-		hr = S_OK;
+	if (hr != S_OK) {
+		return hr;
 	}
 
-	return hr;
+	boost::mutex::scoped_lock lock(sync);
+	result->environmentCount = jobs.size();
+
+	return S_OK;
 }
 
 // STUB: WEBSERVICE 0x1000faf0
