@@ -15,6 +15,7 @@ public:
 	virtual Log* provideLog() = 0; // vtable+0x00
 };
 
+// VTABLE: WEBSERVICE 0x1022d894
 // SIZE 0xac
 class Log
 {
@@ -38,8 +39,11 @@ public:
 
 	static void setLogProvider(ILogProvider* logProvider);
 
-	Log(const char* directory, const char* name);
+	Log(const char* logFile, const char* name);
 	virtual ~Log(); // vtable+0x00
+
+	// SYNTHETIC: WEBSERVICE 0x1003e140
+	// RBX::Log::`scalar deleting destructor'
 
 	std::string logFile; // 0x08
 

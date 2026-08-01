@@ -66,16 +66,41 @@ std::string Log::formatTime(double seconds)
 	return std::string(text);
 }
 
-// STUB: WEBSERVICE 0x1003def0
-Log::Log(const char* directory, const char* name)
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x1003de60
+static void timeStamp(std::ofstream& stream, bool withDate)
 {
-	STUB(0x1003def0);
+	SYSTEMTIME now;
+	GetLocalTime(&now);
+
+	char text[256];
+
+	if (withDate) {
+		sprintf(text, "%02u.%02u.%u ", now.wDay, now.wMonth, now.wYear);
+		stream << text;
+	}
+
+	sprintf(text, "%02u:%02u.%03u ", now.wHour, now.wMinute, now.wMilliseconds);
+	stream << text;
+	stream.flush();
 }
 
-// STUB: WEBSERVICE 0x1003dfa0
+namespace RBX {
+
+// FUNCTION: WEBSERVICE 0x1003def0
+Log::Log(const char* logFile, const char* name) : worstSeverity(Information), logFile(logFile), stream(logFile)
+{
+	::timeStamp(stream, true);
+	stream << "Log \"" << name << "\"\n";
+	stream.flush();
+}
+
+// FUNCTION: WEBSERVICE 0x1003dfa0
 Log::~Log()
 {
-	STUB(0x1003dfa0);
+	::timeStamp(stream, true);
+	stream << "End Log\n";
 }
 
 // FUNCTION: WEBSERVICE 0x1003e020
