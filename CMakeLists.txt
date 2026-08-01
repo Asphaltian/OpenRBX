@@ -118,6 +118,7 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Quaternion.cpp
   common/app/util/Rect.cpp
   common/app/v8kernel/Body.cpp
+  common/app/v8kernel/Cofm.cpp
   common/app/v8kernel/Constants.cpp
   common/app/v8kernel/Kernel.cpp
   common/app/v8world/Assembly2.cpp
@@ -133,6 +134,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/IPipelined.cpp
   common/app/v8world/Joint.cpp
   common/app/v8world/JointStage.cpp
+  common/app/v8world/Mechanism.cpp
   common/app/v8world/MotorJoint.cpp
   common/app/v8world/Primitive.cpp
   common/app/v8world/RigidJoint.cpp
