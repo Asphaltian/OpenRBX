@@ -33,7 +33,7 @@ Edge* EdgeIterator::getNextExternalUtil(Primitive* primitive, Edge* edge)
 	return NULL;
 }
 
-// FUNCTION: WEBSERVICE 0x10117df0
+// STUB: WEBSERVICE 0x10117df0
 bool PrimIterator::isParent(Primitive* parent, Primitive* child, Joint* joint, SearchType searchType)
 {
 	if (parent == NULL || child == NULL) {

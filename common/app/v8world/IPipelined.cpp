@@ -21,22 +21,10 @@ IStage* IPipelined::getStage(IStage::StageType stageType)
 	return stage;
 }
 
-// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
-void IPipelined::putInPipeline(IStage* stage)
-{
-	currentStage = stage;
-}
-
 // FUNCTION: WEBSERVICE 0x1010b9f0
 void IPipelined::removeFromPipeline(IStage* stage)
 {
 	currentStage = 0;
-}
-
-// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
-void IPipelined::putInStage(IStage* stage)
-{
-	currentStage = stage;
 }
 
 // FUNCTION: WEBSERVICE 0x1010ba00
@@ -51,16 +39,28 @@ Kernel* IPipelined::getKernel()
 	return static_cast<Kernel*>(getStage(IStage::KERNEL_STAGE));
 }
 
-// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
-void IPipelined::putInKernel(Kernel* kernel)
-{
-	currentStage = kernel;
-}
-
 // FUNCTION: WEBSERVICE 0x1010ba20
 void IPipelined::removeFromKernel()
 {
 	currentStage = currentStage->getUpstream();
+}
+
+// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
+void IPipelined::putInPipeline(IStage* stage)
+{
+	currentStage = stage;
+}
+
+// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
+void IPipelined::putInStage(IStage* stage)
+{
+	currentStage = stage;
+}
+
+// FUNCTION: WEBSERVICE 0x101ae590 FOLDED
+void IPipelined::putInKernel(Kernel* kernel)
+{
+	currentStage = kernel;
 }
 
 } // namespace RBX

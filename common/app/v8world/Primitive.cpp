@@ -190,7 +190,7 @@ Assembly* Primitive::getAssembly() const
 	return NULL;
 }
 
-// FUNCTION: WEBSERVICE 0x100a7ab0
+// STUB: WEBSERVICE 0x100a7ab0
 float Primitive::computeJointK() const
 {
 	bool isBall = geometry->getGeometryType() == Geometry::GEOMETRY_BALL;
@@ -252,7 +252,7 @@ void Primitive::setElasticity(float value)
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x100a7bf0
+// STUB: WEBSERVICE 0x100a7bf0
 CoordinateFrame Primitive::getFaceCoordInObject(NormalId normalId)
 {
 	return CoordinateFrame(normalIdToMatrix3(normalId), normalIdToVector3(normalId) * geometry->getGridSize());
@@ -513,7 +513,7 @@ const CoordinateFrame& Primitive::getCoordinateFrame() const
 	return body->getCoordinateFrame();
 }
 
-// FUNCTION: WEBSERVICE 0x100a84b0
+// STUB: WEBSERVICE 0x100a84b0
 CoordinateFrame Primitive::getGridCorner() const
 {
 	const CoordinateFrame& coord = body->getCoordinateFrame();
@@ -590,7 +590,7 @@ void Primitive::setDragging(bool value)
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x100a8940
+// STUB: WEBSERVICE 0x100a8940
 void Primitive::setGridCorner(const CoordinateFrame& corner)
 {
 	Vector3 half = geometry->getGridSize() * 0.5f;

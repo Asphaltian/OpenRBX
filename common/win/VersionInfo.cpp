@@ -26,7 +26,7 @@ CVersionInfo::~CVersionInfo()
 	m_wCharset = 1252;
 }
 
-// FUNCTION: WEBSERVICE 0x1000c8c0
+// STUB: WEBSERVICE 0x1000c8c0
 int CVersionInfo::Load(HINSTANCE hInst)
 {
 	char szFileName[500];
@@ -36,7 +36,7 @@ int CVersionInfo::Load(HINSTANCE hInst)
 	return Load(strFileName);
 }
 
-// FUNCTION: WEBSERVICE 0x1000c990
+// STUB: WEBSERVICE 0x1000c990
 int CVersionInfo::Load(const CString& strFileName)
 {
 	m_pffi = NULL;
@@ -80,7 +80,7 @@ int CVersionInfo::Load(const CString& strFileName)
 	return 0;
 }
 
-// FUNCTION: WEBSERVICE 0x1000cb20
+// STUB: WEBSERVICE 0x1000cb20
 CString CVersionInfo::GetValue(const CString& strName)
 {
 	CString strResult;
@@ -98,7 +98,7 @@ CString CVersionInfo::GetValue(const CString& strName)
 	return strResult;
 }
 
-// FUNCTION: WEBSERVICE 0x1000cc70
+// STUB: WEBSERVICE 0x1000cc70
 CString CVersionInfo::GetFileVersionAsString()
 {
 	return GetValue(CString("FileVersion"));
