@@ -291,6 +291,7 @@ add_engine_library(appdraw
 # The only objects compiled /GL, so the link ran /LTCG.
 set(OPENRBX_WEBSERVICE_SOURCES
   WebService/WebService.cpp
+  WebService/WebServiceMaps.cpp
   common/win/VersionInfo.cpp
 )
 
