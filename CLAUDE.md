@@ -144,7 +144,7 @@ Each of these cost a round trip. Keep the sources clean and leave the reasoning 
 
 A `const float` at namespace scope is emitted as a real global and referenced by name, where the binary reads an anonymous constant out of the float pool. Write the literal at each use.
 
-A dense switch lowers to descending `sub eax,N / je`. An if/else chain emits repeated `cmp` against each value. They are not interchangeable.
+A dense switch lowers to descending `sub eax,N / je`. An if/else chain emits repeated `cmp` against each value. They are not interchangeable. Ghidra prints both as `if` chains when the cases are sparse, so the bytes are the only witness: `getJointKMultiplier` has six nested dispatches and every one of them is a switch, which took it from 43 to 90 percent.
 
 Locals are pushed in declaration order, so getting that order wrong leaves an extra value on the x87 stack and shifts every later `st(n)` operand. It reads as a large diff for a one-line cause.
 

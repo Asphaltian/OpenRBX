@@ -21,6 +21,8 @@ public:
 
 	static float getElasticMultiplier(float elasticity);
 
+	static float getJointKMultiplier(const Vector3& size, bool isBall);
+
 	static float getJointK(const Vector3& size, bool isBall);
 };
 
