@@ -672,6 +672,7 @@ address,type,symbol
 0x102354f8,global,__real@7f7fffff
 0x102356c8,global,__real@461c4000
 0x10236678,global,?sPVInstance@RBX@@3QBDB
+0x102367bc,global,??_7Sphere@G3D@@6B@
 0x102367c4,global,__real@3f99999a
 0x102367c8,global,__real@3f555555
 0x1023696c,global,__real@3727c5ac
@@ -2335,6 +2336,7 @@ address,type,symbol
 0x102fe2c4,global,??_B?3??resize@?$Array@VFace@Frustum@GCamera@G3D@@@G3D@@QAEXH_N@Z@53
 0x102fe2c8,global,n___G3D::nan
 0x102fe2d0,global,??_B?1??nan@G3D@@YAABNXZ@51
+0x102fe318,global,?ignore@CollisionDetection@G3D@@0VVector3@2@A
 0x102fe354,global,??_B?3??resize@?$Array@_N@G3D@@QAEXH_N@Z@53
 0x102fe35c,global,??_B?3??resize@?$Array@E@G3D@@QAEXH_N@Z@53
 0x102fe364,global,??_B?3??resize@?$Array@G@G3D@@QAEXH_N@Z@53

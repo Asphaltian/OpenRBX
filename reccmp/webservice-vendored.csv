@@ -1358,7 +1358,7 @@ address,size,type,symbol
 0x1009a580,0x1f,library,??_ERay@G3D@@UAEPAXI@Z
 0x1009a5a0,0x32,library,??0Sphere@G3D@@QAE@ABVVector3@1@M@Z
 0x1009a5e0,0x7,library,??1Sphere@G3D@@UAE@XZ
-0x1009a5f0,0x1f,library,??_GSphere@G3D@@UAEPAXI@Z
+0x1009a5f0,0x1f,library,??_ESphere@G3D@@UAEPAXI@Z
 0x1009acb0,0x2d,library,?one@Vector3@G3D@@SAABV12@XZ
 0x1009b220,0x64,library,??$singleton@VCoordinateFrame@G3D@@@Type@Reflection@RBX@@SAABV012@XZ
 0x1009baa0,0x6c,library,??0?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@IAE@AAVClassDescriptor@12@PBD1V?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@std@@W4Functionality@PropertyDescriptor@12@@Z

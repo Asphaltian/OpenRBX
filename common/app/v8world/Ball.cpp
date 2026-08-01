@@ -3,6 +3,9 @@
 #include "decomp.h"
 #include "util/Math.h"
 
+#include <G3D/CollisionDetection.h>
+#include <G3D/Sphere.h>
+
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1010a780
@@ -29,11 +32,21 @@ void Ball::onSetSize()
 	realRadius = gridSize.x * 0.5f;
 }
 
-// STUB: WEBSERVICE 0x1010a7f0
+// FUNCTION: WEBSERVICE 0x1010a7f0
 bool Ball::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
 {
-	STUB(0x1010a7f0);
-	return false;
+	float distanceSquared = ray.origin.squaredMagnitude();
+
+	inside = distanceSquared <= realRadius * realRadius;
+
+	G3D::Sphere sphere(Vector3::zero(), realRadius);
+
+	return G3D::CollisionDetection::collisionTimeForMovingPointFixedSphere(
+			   ray.origin,
+			   ray.direction,
+			   sphere,
+			   hitPoint
+		   ) != G3D::inf();
 }
 
 } // namespace RBX
