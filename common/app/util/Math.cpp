@@ -2,6 +2,7 @@
 
 #include "decomp.h"
 
+#include <G3D/Line.h>
 #include <G3D/g3dmath.h>
 #include <algorithm>
 #include <limits>
@@ -87,6 +88,19 @@ float Math::rotationFromByte(unsigned char byte)
 	return value * rotationStep() - 3.14159274f;
 }
 
+// STUB: WEBSERVICE 0x100dea70
+Matrix3 Math::getIWorldAtPoint(const Vector3& cofm, const Vector3& point, const Matrix3& iWorld, float mass)
+{
+	const float x = point.x - cofm.x;
+	const float y = point.y - cofm.y;
+	const float z = point.z - cofm.z;
+
+	const Matrix3
+		offset(z * z + y * y, -(y * x), -(z * x), -(y * x), z * z + x * x, -(z * y), -(z * x), -(z * y), y * y + x * x);
+
+	return iWorld + mass * offset;
+}
+
 // FUNCTION: WEBSERVICE 0x100deb30
 Matrix3 Math::momentToObjectSpace(const Matrix3& moment, const Matrix3& rotation)
 {
@@ -133,6 +147,35 @@ int Math::getOrientId(const Matrix3& matrix)
 	const NormalId y = Vector3ToNormalId(matrix.getColumn(1));
 
 	return x * 6 + y;
+}
+
+// FUNCTION: WEBSERVICE 0x100dece0
+void Math::idToMatrix3(int orientId, Matrix3& matrix)
+{
+	const NormalId xId = intToNormalId(orientId / 6);
+	const NormalId yId = intToNormalId(orientId % 6);
+
+	const Vector3 x = normalIdToVector3(xId);
+	const Vector3 y = normalIdToVector3(yId);
+	const Vector3 z = x.cross(y);
+
+	matrix.setColumn(0, x);
+	matrix.setColumn(1, y);
+	matrix.setColumn(2, z);
+}
+
+// STUB: WEBSERVICE 0x100dedc0
+Matrix3 Math::rotateAboutZ(const Matrix3& matrix, float angle)
+{
+	Matrix3 rotation = Matrix3::identity();
+
+	const float s = sinf(angle);
+	const float c = cosf(angle);
+
+	rotation.setColumn(0, Vector3(c, s, 0.0f));
+	rotation.setColumn(1, Vector3(-s, c, 0.0f));
+
+	return matrix * rotation;
 }
 
 // STUB: WEBSERVICE 0x100dee50
@@ -214,6 +257,28 @@ bool Math::fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon)
 	return true;
 }
 
+// STUB: WEBSERVICE 0x100df270
+bool Math::fuzzyEq(
+	const CoordinateFrame& c0,
+	const CoordinateFrame& c1,
+	float translationEpsilon,
+	float rotationEpsilon
+)
+{
+	if (!fuzzyEq(c0.translation, c1.translation, translationEpsilon)) {
+		return false;
+	}
+
+	return fuzzyEq(c0.rotation, c1.rotation, rotationEpsilon);
+}
+
+// STUB: WEBSERVICE 0x100df2c0
+DECOMP_NOINLINE Matrix3 Math::alignAxesClosest(const Matrix3& matrix, const Matrix3& target)
+{
+	STUB(0x100df2c0);
+	return matrix;
+}
+
 // STUB: WEBSERVICE 0x100df530
 NormalId Math::getClosestObjectNormalId(const Vector3& worldNormal, const Matrix3& objectRotation)
 {
@@ -267,6 +332,16 @@ void Math::setHeadingElevation(CoordinateFrame& coordinateFrame, float heading, 
 	coordinateFrame.lookAt(coordinateFrame.translation + look.direction());
 }
 
+// STUB: WEBSERVICE 0x100df710
+void Math::rotateMatrixAboutY90(Matrix3& matrix, int count)
+{
+	static const Matrix3 y90(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f);
+
+	for (int i = 0; i < count; ++i) {
+		matrix = y90 * matrix;
+	}
+}
+
 // STUB: WEBSERVICE 0x100df7d0
 const Matrix3& Math::matrixRotateY()
 {
@@ -281,6 +356,40 @@ const Matrix3& Math::matrixTiltZ()
 	static const Matrix3 m(0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
 
 	return m;
+}
+
+// STUB: WEBSERVICE 0x100df8e0
+const Matrix3& Math::getAxisRotationMatrix(int normalId)
+{
+	static const Matrix3 y = Matrix3::fromEulerAnglesXYZ(0.0f, 0.0f, 1.57079637f);
+	static const Matrix3 z = Matrix3::fromEulerAnglesXYZ(0.0f, 1.57079637f, 0.0f);
+	static const Matrix3 y_neg = y;
+	static const Matrix3 z_neg = z;
+
+	switch (normalId) {
+	case NORM_Y:
+		return y;
+	case NORM_Z:
+		return z;
+	case NORM_Y_NEG:
+		return y_neg;
+	case NORM_Z_NEG:
+		return z_neg;
+	}
+
+	return Matrix3::identity();
+}
+
+// STUB: WEBSERVICE 0x100dfa70
+CoordinateFrame Math::getFocusSpace(const CoordinateFrame& coordinateFrame)
+{
+	const Vector3 look = coordinateFrame.rotation.getColumn(2) * CoordinateFrame::zLookDirection;
+	const float heading = atan2f(-look.x, -look.z);
+
+	CoordinateFrame answer = coordinateFrame;
+	setHeadingElevation(answer, heading, 0.0f);
+
+	return answer;
 }
 
 // STUB: WEBSERVICE 0x100dfaf0
@@ -332,6 +441,31 @@ CoordinateFrame Math::snapToGrid(const CoordinateFrame& coordinateFrame, const V
 	return CoordinateFrame(snapToAxes(coordinateFrame.rotation), translation);
 }
 
+// STUB: WEBSERVICE 0x100dfd20
+bool Math::fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float epsilon)
+{
+	Vector3 columns[3];
+
+	for (int i = 0; i < 3; ++i) {
+		columns[i] = m1.getColumn(i);
+	}
+
+	for (int i = 0; i < 3; ++i) {
+		const Vector3 column = m0.getColumn(i);
+
+		for (int j = 0; j < 3; ++j) {
+			if (columns[j].cross(column).magnitude() < epsilon) {
+				break;
+			}
+			if (j == 2) {
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
 // FUNCTION: WEBSERVICE 0x100dfe20
 bool Math::orthonormalizeIfNecessary(Matrix3& matrix)
 {
@@ -367,6 +501,21 @@ float Math::maxAxisLength(const Vector3& value)
 	const float lengths[3] = {fabsf(value.x), fabsf(value.y), fabsf(value.z)};
 
 	return std::max(lengths[0], std::max(lengths[1], lengths[2]));
+}
+
+// STUB: WEBSERVICE 0x100dfef0
+bool Math::intersectRayPlane(const Ray& ray, const Plane& plane, Vector3& hitPoint)
+{
+	const float dot = plane.normal().dot(ray.direction);
+
+	if (plane.halfSpaceContains(ray.origin) ? dot < 0.0f : dot > 0.0f) {
+		hitPoint = G3D::Line::fromPointAndDirection(ray.origin, ray.direction).intersection(plane);
+		return true;
+	}
+
+	hitPoint = Vector3::inf();
+
+	return false;
 }
 
 } // namespace RBX

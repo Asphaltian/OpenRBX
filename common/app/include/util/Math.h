@@ -5,6 +5,8 @@
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Matrix3.h>
+#include <G3D/Plane.h>
+#include <G3D/Ray.h>
 #include <G3D/Vector2.h>
 #include <G3D/Vector3.h>
 #include <limits>
@@ -13,6 +15,8 @@ namespace RBX {
 
 using G3D::CoordinateFrame;
 using G3D::Matrix3;
+using G3D::Plane;
+using G3D::Ray;
 using G3D::Vector2;
 using G3D::Vector3;
 
@@ -46,6 +50,21 @@ public:
 	static Matrix3 snapToAxes(const Matrix3& matrix);
 	static CoordinateFrame snapToGrid(const CoordinateFrame& coordinateFrame, const Vector3& grid);
 	static CoordinateFrame snapToGrid(const CoordinateFrame& coordinateFrame, float grid);
+	static bool fuzzyEq(
+		const CoordinateFrame& c0,
+		const CoordinateFrame& c1,
+		float translationEpsilon,
+		float rotationEpsilon
+	);
+	static void idToMatrix3(int orientId, Matrix3& matrix);
+	static Matrix3 rotateAboutZ(const Matrix3& matrix, float angle);
+	static void rotateMatrixAboutY90(Matrix3& matrix, int count);
+	static CoordinateFrame getFocusSpace(const CoordinateFrame& coordinateFrame);
+	static Matrix3 getIWorldAtPoint(const Vector3& cofm, const Vector3& point, const Matrix3& iWorld, float mass);
+	static bool fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float epsilon);
+	static const Matrix3& getAxisRotationMatrix(int normalId);
+	static bool intersectRayPlane(const Ray& ray, const Plane& plane, Vector3& hitPoint);
+	static Matrix3 alignAxesClosest(const Matrix3& matrix, const Matrix3& target);
 	static bool fixDenorm(Vector3& value);
 	static bool legalCameraCoord(const CoordinateFrame& coordinateFrame);
 	static float rotationFromByte(unsigned char byte);
