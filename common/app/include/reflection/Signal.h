@@ -29,6 +29,8 @@ DECOMP_SIZE_ASSERT(SignalInstance, 0x0c)
 class SignalDescriptor : public MemberDescriptor
 {
 public:
+	SignalDescriptor() {}
+
 	SignalInstance* findSignalInstance(const SignalSource* source) const;
 
 private:

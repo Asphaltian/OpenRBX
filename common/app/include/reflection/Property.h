@@ -21,6 +21,9 @@ DECOMP_SIZE_ASSERT(MemberDescriptor, 0x10)
 // SIZE 0x18
 class PropertyDescriptor : public MemberDescriptor
 {
+protected:
+	PropertyDescriptor() {}
+
 private:
 	undefined m_unk0x10[0x18 - 0x10]; // 0x10
 };
@@ -45,6 +48,8 @@ class PropDescriptor : public TypedPropertyDescriptor<T>
 class EnumPropertyDescriptor : public PropertyDescriptor
 {
 public:
+	EnumPropertyDescriptor() {}
+
 	undefined enumDescriptor[0x1c - 0x18]; // 0x18
 };
 

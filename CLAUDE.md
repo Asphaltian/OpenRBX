@@ -196,6 +196,8 @@ A function-local static never matches by its mangled name. reccmp reads ours out
 
 A property descriptor is a `const` static, so it mangles with a trailing `B`. Ours ended in `A` and no setter could bind to it. `tools/ncc/ncc.style` carries a `prop_`/`event_` alternative for the same reason: those names are the original's convention, not one-offs for `skip.yml`.
 
+`build.yml`'s "Current MSVC" job builds `app` and `network` with a modern cl plus clang-tidy, and nothing local reproduces it. It is the only check that sees C++ conformance MSVC 8 lets through: a `const` object of class type needs a user-provided default constructor on the most-derived class, not just on a base, which is why every descriptor template carries an empty one.
+
 `.github/workflows/build.yml` runs eight checks and seven of them are not `reccmp-reccmp`. `tools/ncc/ncc.py` runs on its own Linux job and needs libclang plus the `clang` python bindings to run locally; it counts its findings and still exits 0, so the count is the verdict. `reccmp-decomplint` runs with `--warnfail`, so a warning fails the build: a nameref belongs in a header, never in a `.cpp`. `reccmp-vtable` compares every vtable that has a name on both sides, which is why a vendored vftable only goes into `webservice-globals.csv` one at a time, listed in `VENDORED_VTABLES` — naming them all pairs ATL and STL tables whose entries reccmp cannot resolve. `reccmp-datacmp` compares every named variable, and it matches statics by bare name, so a name has to be unique in both builds; `next` named RakNet's file-scope one and a function-local one our G3D keeps. Run all seven before committing, not just the accuracy number.
 
 
