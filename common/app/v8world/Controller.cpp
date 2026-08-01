@@ -18,12 +18,6 @@ float Controller::getValue(InputType inputType) const
 	return 0;
 }
 
-// SYNTHETIC: WEBSERVICE 0x10099080
-// RBX::NullController::`scalar deleting destructor'
-
-// SYNTHETIC: WEBSERVICE 0x10222ff0
-// `RBX::NullController::getStaticNullController'::`2'::`dynamic atexit destructor for 'n''
-
 bool NullController::hasIntelligence() const
 {
 	return false;

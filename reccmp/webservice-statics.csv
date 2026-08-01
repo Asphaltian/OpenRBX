@@ -226,7 +226,6 @@ address,type,name
 0x102f5a34,global,nameParent
 0x102f91c8,global,namePart
 0x102f9318,global,namePosition
-0x10300244,global,next
 0x102c7580,global,none
 0x102f5ec0,global,nullName
 0x102fd13c,global,once_SafeChat_singleton

@@ -166,6 +166,9 @@ A function-local static never matches by its mangled name. reccmp reads ours out
 
 ## Gotchas
 
+`.github/workflows/build.yml` runs seven checks and six of them are not `reccmp-reccmp`. `reccmp-decomplint` runs with `--warnfail`, so a warning fails the build: a nameref belongs in a header, never in a `.cpp`. `reccmp-vtable` compares every vtable that has a name on both sides, which is why a vendored vftable only goes into `webservice-globals.csv` one at a time, listed in `VENDORED_VTABLES` — naming them all pairs ATL and STL tables whose entries reccmp cannot resolve. `reccmp-datacmp` compares every named variable, and it matches statics by bare name, so a name has to be unique in both builds; `next` named RakNet's file-scope one and a function-local one our G3D keeps. Run all seven before committing, not just the accuracy number.
+
+
 Never sweep timestamps across the working tree. `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. That is what the CI workflow's backdate step does, which is fine on a throwaway runner and destructive in a clone.
 
 `RakPeer` has no `// VTABLE:` annotation because our `RakPeerInterface` declares one virtual too many or too few: from around slot 0x5c the two vtables run one entry apart, so `RPC`, `Ping` and `GetIndexFromSystemAddress` cannot be told apart by slot order. Reconciling that virtual list is what unblocks annotating those overloads.

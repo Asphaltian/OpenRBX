@@ -67,6 +67,9 @@ DECOMP_SIZE_ASSERT(Controller, 0x0c)
 class NullController : public Controller
 {
 public:
+	// SYNTHETIC: WEBSERVICE 0x10099080
+	// RBX::NullController::`scalar deleting destructor'
+
 	virtual ControllerType getControllerType() const; // vtable+0x08
 	virtual bool hasIntelligence() const;             // vtable+0x0c
 	virtual bool isUserController() const;            // vtable+0x10
@@ -82,6 +85,9 @@ inline NullController* NullController::getStaticNullController()
 	static NullController n;
 	return &n;
 }
+
+// SYNTHETIC: WEBSERVICE 0x10222ff0
+// `RBX::NullController::getStaticNullController'::`2'::`dynamic atexit destructor for 'n''
 
 } // namespace RBX
 
