@@ -51,7 +51,7 @@ void PacketLogger::OnAttach(RakPeerInterface *peer)
 #ifdef _MSC_VER
 #pragma warning( disable : 4100 ) // warning C4100 : unreferenced formal parameter
 #endif
-// FUNCTION: WEBSERVICE 0x100d15c0
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void PacketLogger::Update(RakPeerInterface *peer)
 {
 

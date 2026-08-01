@@ -33,28 +33,28 @@ PluginInterface::~PluginInterface()
 #ifdef _MSC_VER
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
-// FUNCTION: WEBSERVICE 0x100d15c0
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void PluginInterface::OnAttach(RakPeerInterface *peer)
 {
 }
 #ifdef _MSC_VER
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
-// FUNCTION: WEBSERVICE 0x100d15c0
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void PluginInterface::OnDetach(RakPeerInterface *peer)
 {
 }
 #ifdef _MSC_VER
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
-// FUNCTION: WEBSERVICE 0x100d15c0
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void PluginInterface::OnStartup(RakPeerInterface *peer)
 {
 }
 #ifdef _MSC_VER
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
-// FUNCTION: WEBSERVICE 0x100d15c0
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void PluginInterface::Update(RakPeerInterface *peer)
 {
 }
@@ -69,7 +69,7 @@ PluginReceiveResult PluginInterface::OnReceive(RakPeerInterface *peer, Packet *p
 #ifdef _MSC_VER
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
-// FUNCTION: WEBSERVICE 0x100d15c0
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void PluginInterface::OnShutdown(RakPeerInterface *peer)
 {
 }
@@ -83,14 +83,14 @@ void PluginInterface::OnCloseConnection(RakPeerInterface *peer, SystemAddress sy
 #ifdef _MSC_VER
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
-// FUNCTION: WEBSERVICE 0x101aaa90
+// FUNCTION: WEBSERVICE 0x101aaa90 FOLDED
 void PluginInterface::OnDirectSocketSend(const char *data, const unsigned bitsUsed, SystemAddress remoteSystemAddress)
 {
 }
 #ifdef _MSC_VER
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
-// FUNCTION: WEBSERVICE 0x101aaa90
+// FUNCTION: WEBSERVICE 0x101aaa90 FOLDED
 void PluginInterface::OnDirectSocketReceive(const char *data, const unsigned bitsUsed, SystemAddress remoteSystemAddress)
 {
 }
