@@ -44,7 +44,7 @@ std::string Log::formatMem(unsigned int bytes)
 	return std::string(text);
 }
 
-// STUB: WEBSERVICE 0x1003d930
+// FUNCTION: WEBSERVICE 0x1003d930
 std::string Log::formatTime(double seconds)
 {
 	char text[64];
@@ -56,7 +56,7 @@ std::string Log::formatTime(double seconds)
 	if (seconds < 0.0) {
 		sprintf(text, "%.3gs", seconds);
 	}
-	else if (!(seconds < 0.1)) {
+	else if (seconds >= 0.1) {
 		sprintf(text, "%.3gs", seconds);
 	}
 	else {

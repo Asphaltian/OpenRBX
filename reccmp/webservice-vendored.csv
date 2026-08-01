@@ -2793,6 +2793,7 @@ address,size,type,symbol
 0x101e614c,0x5,library,??_U@YAPAXI@Z
 0x101e6176,0x5,library,??4_Init_locks@std@@QAEAAV01@ABV01@@Z
 0x101e6340,,library,?call_once@boost@@YAXP6AXXZAAJ@Z
+0x101e76e0,,library,??0mutex@boost@@QAE@XZ
 0x101e7730,,library,?do_lock@mutex@boost@@AAEXXZ
 0x101e7750,,library,?do_unlock@mutex@boost@@AAEXXZ
 0x101e80e6,0xf,library,@__security_check_cookie@4

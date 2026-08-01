@@ -27,16 +27,14 @@ void StandardOut::print(MessageType type, const char* format, ...)
 	va_end(arguments);
 
 	if (Log::current() != NULL) {
-		switch (type) {
-		case MESSAGE_INFO:
-			Log::current()->writeEntry(Log::Information, message.c_str());
-			break;
-		case MESSAGE_WARNING:
-			Log::current()->writeEntry(Log::Warning, message.c_str());
-			break;
-		case MESSAGE_ERROR:
+		if (type == MESSAGE_ERROR) {
 			Log::current()->writeEntry(Log::Error, message.c_str());
-			break;
+		}
+		else if (type == MESSAGE_WARNING) {
+			Log::current()->writeEntry(Log::Warning, message.c_str());
+		}
+		else if (type == MESSAGE_INFO) {
+			Log::current()->writeEntry(Log::Information, message.c_str());
 		}
 	}
 
@@ -44,11 +42,7 @@ void StandardOut::print(MessageType type, const char* format, ...)
 		boost::mutex::scoped_lock lock(sync);
 
 		if (hasListeners()) {
-			StandardOutMessage event;
-			event.type = type;
-			event.message = message;
-			event.time = _time64(NULL);
-			raise(event);
+			raise(StandardOutMessage(type, message.c_str()));
 		}
 	}
 }
