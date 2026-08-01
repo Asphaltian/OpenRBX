@@ -6,6 +6,7 @@
 #include "v8world/Clump2.h"
 #include "v8world/IMoving.h"
 #include "v8world/Joint.h"
+#include "v8world/MotorJoint.h"
 #include "v8world/Primitive.h"
 
 #include <cstddef>
@@ -139,6 +140,71 @@ void Assembly::onPrimitivesChanged()
 		ancestor->maxRadius.setDirty();
 		ancestor->canSleep.setDirty();
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x10102de0
+unsigned int Assembly::numMotors()
+{
+	unsigned int answer = 0;
+
+	if (MotorJoint::isMotorJoint(getJointToParent(rootPrimitive))) {
+		answer = 1;
+	}
+
+	for (unsigned int i = 0; i < children.size(); i++) {
+		answer += children[i]->numMotors();
+	}
+
+	return answer;
+}
+
+// FUNCTION: WEBSERVICE 0x10102e60
+MotorJoint* Assembly::getMotorImp(unsigned int& index)
+{
+	Joint* joint = getJointToParent(rootPrimitive);
+
+	if (MotorJoint::isMotorJoint(joint)) {
+		if (index == 0) {
+			return static_cast<MotorJoint*>(joint);
+		}
+
+		index--;
+	}
+
+	for (unsigned int i = 0; i < children.size(); i++) {
+		MotorJoint* motor = children[i]->getMotorImp(index);
+
+		if (motor != NULL) {
+			return motor;
+		}
+	}
+
+	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x10102f00
+MotorJoint* Assembly::getMotor(unsigned int index)
+{
+	unsigned int i = index;
+
+	return getMotorImp(i);
+}
+
+// FUNCTION: WEBSERVICE 0x10102f20
+void Assembly::stepUi(int frameCount)
+{
+	unsigned int count = numMotors();
+
+	for (unsigned int i = 0; i < count; i++) {
+		unsigned int index = i;
+		getMotorImp(index)->stepUi(frameCount);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10103060
+void Assembly::onPrimitiveCanSleepChanged(Primitive* primitive)
+{
+	canSleep.setDirty();
 }
 
 } // namespace RBX

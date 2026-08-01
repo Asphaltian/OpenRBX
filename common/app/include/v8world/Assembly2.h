@@ -13,6 +13,7 @@ namespace RBX {
 class Edge;
 class Joint;
 class Mechanism;
+class MotorJoint;
 class Primitive;
 
 namespace Sim {
@@ -58,6 +59,12 @@ public:
 	Mechanism* getMechanism();
 
 	void onPrimitivesChanged();
+	void onPrimitiveCanSleepChanged(Primitive* primitive);
+
+	unsigned int numMotors();
+	MotorJoint* getMotor(unsigned int index);
+
+	void stepUi(int frameCount);
 	Sim::AssemblyState getSleepStatus();
 	bool getAnchored();
 	bool computeCanSleep();
@@ -68,6 +75,8 @@ public:
 	virtual void removeFromKernel();          // vtable+0x08
 
 private:
+	MotorJoint* getMotorImp(unsigned int& index);
+
 	SleepInfo* sleepInfo;                   // 0x08
 	Primitive* rootPrimitive;               // 0x0c
 	Assembly* parent;                       // 0x10
