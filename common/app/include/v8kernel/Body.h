@@ -40,6 +40,10 @@ public:
 		return pv.position;
 	}
 
+	static int getNextStateIndex();
+
+	void advanceStateIndex();
+
 	Vector3 getBranchCofmPos() const;
 
 	void setParent(Body* value);

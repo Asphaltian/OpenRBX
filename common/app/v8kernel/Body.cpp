@@ -4,10 +4,30 @@
 
 namespace RBX {
 
+static int p = 1;
+
 // STUB: WEBSERVICE 0x1009ad20
 void Body::updatePV() const
 {
 	STUB(0x1009ad20);
+}
+
+// STUB: WEBSERVICE 0x101049f0
+int Body::getNextStateIndex()
+{
+	p = p + 1;
+
+	if (p == 0x7fffffff) {
+		p = 1;
+	}
+
+	return p;
+}
+
+// STUB: WEBSERVICE 0x10104a10
+void Body::advanceStateIndex()
+{
+	stateIndex = getNextStateIndex();
 }
 
 // STUB: WEBSERVICE 0x10104be0

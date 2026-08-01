@@ -266,7 +266,7 @@ Face Primitive::getFaceInObject(NormalId normalId)
 	return Face::fromExtentsSide(Extents(-half, half), normalId);
 }
 
-// FUNCTION: WEBSERVICE 0x100a7cd0
+// STUB: WEBSERVICE 0x100a7cd0
 void Primitive::setVelocity(const Velocity& velocity)
 {
 	body->setVelocity(velocity);
