@@ -118,6 +118,11 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Quaternion.cpp
   common/app/util/Rect.cpp
   common/app/v8kernel/Body.cpp
+  common/app/util/Debug.cpp
+  common/app/v8datamodel/DebugSettings.cpp
+  common/app/v8datamodel/ModelInstance.cpp
+  common/app/v8datamodel/PartInstance.cpp
+  common/app/v8datamodel/Workspace.cpp
   common/app/v8kernel/Cofm.cpp
   common/app/v8kernel/Constants.cpp
   common/app/v8kernel/Kernel.cpp

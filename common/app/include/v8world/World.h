@@ -17,6 +17,8 @@ class Primitive;
 class World
 {
 public:
+	static bool disableEnvironmentalThrottle;
+
 	void onPrimitiveExtentsChanged(Primitive* primitive);
 	void onPrimitiveGeometryTypeChanged(Primitive* primitive);
 	void onPrimitiveContactParametersChanged(Primitive* primitive);

@@ -7,6 +7,8 @@
 
 namespace RBX {
 
+bool World::disableEnvironmentalThrottle;
+
 // FUNCTION: WEBSERVICE 0x100cef80
 Kernel* World::getKernel() const
 {

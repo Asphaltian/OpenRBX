@@ -2,6 +2,7 @@
 #define V8TREE_INSTANCE_H
 
 #include "decomp.h"
+#include "reflection/Property.h"
 #include "reflection/Reflection.h"
 #include "util/Association.h"
 #include "util/Events.h"
@@ -91,6 +92,8 @@ public:
 	virtual shared_ptr<Instance> createChild(const Name& className);            // vtable+0x34
 	virtual XmlElement* write();                                                // vtable+0x38
 	virtual void onChildChanged(Instance* child, const PropertyChanged& event); // vtable+0x3c
+
+	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor);
 
 	void predelete();
 

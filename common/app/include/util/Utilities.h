@@ -11,12 +11,14 @@ class Debugable
 public:
 	enum AssertAction
 	{
-		ASSERT_ACTION_IGNORE = 0,
-		ASSERT_ACTION_BREAK = 1,
-		ASSERT_ACTION_CRASH = 2,
+		CrashOnAssert = 0,
+		IgnoreAssert = 1
 	};
 
-	virtual ~Debugable();
+	static AssertAction assertAction;
+	static bool validatingDebug;
+
+	virtual ~Debugable() {}
 	virtual void dump(std::ostream& stream);
 };
 
