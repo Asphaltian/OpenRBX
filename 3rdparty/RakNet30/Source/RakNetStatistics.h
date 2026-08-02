@@ -26,7 +26,7 @@
 /// \brief Network Statisics Usage 
 ///
 /// Store Statistics information related to network usage 
-struct RAK_DLL_EXPORT RakNetStatisticsStruct
+struct RAK_DLL_EXPORT RakNetStatistics
 {
 	///  Number of Messages in the send Buffer (high, medium, low priority)
 	unsigned messageSendBuffer[ NUMBER_OF_PRIORITIES ];
@@ -111,7 +111,7 @@ struct RAK_DLL_EXPORT RakNetStatisticsStruct
 	RakNetTime connectionStartTime;
 	bool isLimitedByCongestionControl;
 
-	RakNetStatisticsStruct operator +=(const RakNetStatisticsStruct& other);
+	RakNetStatistics operator +=(const RakNetStatistics& other);
 };
 
 /// Verbosity level currently supports 0 (low), 1 (medium), 2 (high)
@@ -121,6 +121,6 @@ struct RAK_DLL_EXPORT RakNetStatisticsStruct
 /// 0 low
 /// 1 medium 
 /// 2 high 
-void StatisticsToString( RakNetStatisticsStruct *s, char *buffer, int verbosityLevel );
+void StatisticsToString( RakNetStatistics *s, char *buffer, int verbosityLevel );
 
 #endif

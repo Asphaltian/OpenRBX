@@ -29,7 +29,7 @@ namespace RakNet
 }
 class PluginInterface;
 struct RPCMap;
-struct RakNetStatisticsStruct;
+struct RakNetStatistics;
 class RouterInterface;
 class NetworkIDManager;
 
@@ -463,7 +463,7 @@ public:
 	/// \param[in] systemAddress: Which connected system to get statistics for
 	/// \return 0 on can't find the specified system.  A pointer to a set of data otherwise.
 	/// \sa RakNetStatistics.h
-	virtual RakNetStatisticsStruct * const GetStatistics( const SystemAddress systemAddress )=0;
+	virtual RakNetStatistics * const GetStatistics( const SystemAddress systemAddress )=0;
 
 	// --------------------------------------------------------------------------------------------EVERYTHING AFTER THIS COMMENT IS FOR INTERNAL USE ONLY--------------------------------------------------------------------------------------------
 	/// \internal

@@ -2342,7 +2342,7 @@ void ReliabilityLayer::KillConnection( void )
 //-------------------------------------------------------------------------------------------------------
 // Statistics
 //-------------------------------------------------------------------------------------------------------
-RakNetStatisticsStruct * const ReliabilityLayer::GetStatistics( void )
+RakNetStatistics * const ReliabilityLayer::GetStatistics( void )
 {
 	unsigned i;
 

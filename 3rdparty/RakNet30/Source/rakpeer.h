@@ -447,7 +447,7 @@ public:
 	/// \param[in] systemAddress: Which connected system to get statistics for
 	/// \return 0 on can't find the specified system.  A pointer to a set of data otherwise.
 	/// \sa RakNetStatistics.h
-	RakNetStatisticsStruct * const GetStatistics( const SystemAddress systemAddress );
+	RakNetStatistics * const GetStatistics( const SystemAddress systemAddress );
 
 	// --------------------------------------------------------------------------------------------EVERYTHING AFTER THIS COMMENT IS FOR INTERNAL USE ONLY--------------------------------------------------------------------------------------------
 	/// \internal

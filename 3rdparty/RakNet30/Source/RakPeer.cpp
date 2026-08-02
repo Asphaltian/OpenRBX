@@ -953,7 +953,7 @@ bool RakPeer::Send( RakNet::BitStream * bitStream, PacketPriority priority, Pack
 // This also updates all memory blocks associated with synchronized memory and distributed objects
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101af6f0
-RakNetStatisticsStruct RakNetStatisticsStruct::operator +=(const RakNetStatisticsStruct& other)
+RakNetStatistics RakNetStatistics::operator +=(const RakNetStatistics& other)
 {
 	unsigned i;
 	for (i=0; i < NUMBER_OF_PRIORITIES; i++)
@@ -2602,13 +2602,13 @@ char *RakPeer::GetRPCString( const char *data, const unsigned int bitSize, const
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5f70
-RakNetStatisticsStruct * const RakPeer::GetStatistics( const SystemAddress systemAddress )
+RakNetStatistics * const RakPeer::GetStatistics( const SystemAddress systemAddress )
 {
 	if (systemAddress==UNASSIGNED_SYSTEM_ADDRESS)
 	{
 		bool firstWrite=false;
-		static RakNetStatisticsStruct sum;
-		RakNetStatisticsStruct *systemStats;
+		static RakNetStatistics sum;
+		RakNetStatistics *systemStats;
 		// Return a crude sum
 		for ( unsigned short i = 0; i < maximumNumberOfPeers; i++ )
 		{
@@ -2618,7 +2618,7 @@ RakNetStatisticsStruct * const RakPeer::GetStatistics( const SystemAddress syste
 				
 				if (firstWrite==false)
 				{
-					memcpy(&sum, systemStats, sizeof(RakNetStatisticsStruct));
+					memcpy(&sum, systemStats, sizeof(RakNetStatistics));
 					firstWrite=true;
 				}
 				else
@@ -4239,7 +4239,7 @@ bool RakPeer::RunUpdateCycle( void )
 	SystemAddress systemAddress;
 	BufferedCommandStruct *bcs;
 	bool callerDataAllocationUsed;
-	RakNetStatisticsStruct *rnss;
+	RakNetStatistics *rnss;
 	unsigned connectionSocketIndex;
 
 	for (connectionSocketIndex=0; connectionSocketIndex < connectionSocketsLength; connectionSocketIndex++)
@@ -4456,7 +4456,7 @@ bool RakPeer::RunUpdateCycle( void )
 
 			// Check for failure conditions
 			if ( remoteSystem->reliabilityLayer.IsDeadConnection() ||
-				((remoteSystem->connectMode==RemoteSystemStruct::DISCONNECT_ASAP || remoteSystem->connectMode==RemoteSystemStruct::DISCONNECT_ASAP_SILENTLY) && remoteSystem->reliabilityLayer.IsDataWaiting()==false) ||
+				((remoteSystem->connectMode==RemoteSystemStruct::DISCONNECT_ASAP || remoteSystem->connectMode==RemoteSystemStruct::DISCONNECT_ASAP_SILENTLY) && remoteSystem->reliabilityLayer.IsOutgoingDataWaiting()==false) ||
 				(remoteSystem->connectMode==RemoteSystemStruct::DISCONNECT_ON_NO_ACK && (remoteSystem->reliabilityLayer.AreAcksWaiting()==false || remoteSystem->reliabilityLayer.AckTimeout(timeNS)==true)) ||
 				((
 				(remoteSystem->connectMode==RemoteSystemStruct::REQUESTED_CONNECTION ||

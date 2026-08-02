@@ -67,6 +67,7 @@ address,type,symbol
 0x101bab80,synthetic,??_GRakPeer@@UAEPAXI@Z
 0x101bab80,synthetic,??_ERakPeer@@UAEPAXI@Z
 0x101bbdc0,library,?ceil@@YAOO@Z
+0x101be7e0,synthetic,?GetStatistics@ReliabilityLayer@@QAEQAURakNetStatistics@@XZ
 0x101d32e0,library,_crc32@12
 0x101d3380,library,_deflate@8
 0x101d3b50,synthetic,_deflateEnd@4

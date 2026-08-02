@@ -133,7 +133,7 @@ public:
 
 	/// Get Statistics
 	/// \return A pointer to a static struct, filled out with current statistical information.
-	RakNetStatisticsStruct * const GetStatistics( void );
+	RakNetStatistics * const GetStatistics( void );
 
 	///Are we waiting for any data to be sent out or be processed by the player?
 	bool IsDataWaiting(void);
@@ -298,7 +298,7 @@ private:
 //	int RECEIVED_PACKET_LOG_LENGTH, requestedReceivedPacketLogLength; // How big the receivedPackets array is
 //	unsigned int *receivedPackets;
 	unsigned int blockWindowIncreaseUntilTime;
-	RakNetStatisticsStruct statistics;
+	RakNetStatistics statistics;
 
 	RakNetTimeNS histogramStart;
 	unsigned histogramBitsSent;
