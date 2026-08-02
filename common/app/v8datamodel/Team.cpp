@@ -34,3 +34,8 @@ void Team::setAutoAssignable(bool value)
 }
 
 } // namespace RBX
+
+template class RBX::FactoryProduct<RBX::Team, RBX::Instance, RBX::sTeam>;
+template class RBX::Reflection::
+	Described<RBX::Team, RBX::sTeam, RBX::FactoryProduct<RBX::Team, RBX::Instance, RBX::sTeam> >;
+template class RBX::DescribedCreatable<RBX::Team, RBX::Instance, RBX::sTeam>;

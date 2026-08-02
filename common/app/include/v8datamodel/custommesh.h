@@ -9,7 +9,7 @@ namespace RBX {
 extern char sSpecialShape[];
 
 // SIZE 0x154
-class SpecialShape : public Instance
+class SpecialShape : public DescribedCreatable<SpecialShape, Instance, sSpecialShape>
 {
 public:
 	enum MeshType

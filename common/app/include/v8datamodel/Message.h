@@ -25,6 +25,13 @@ private:
 
 DECOMP_SIZE_ASSERT(Message, 0x124)
 
+// SIZE 0x124
+class Hint : public DescribedCreatable<Hint, Message, sHint>
+{
+};
+
+DECOMP_SIZE_ASSERT(Hint, 0x124)
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_MESSAGE_H

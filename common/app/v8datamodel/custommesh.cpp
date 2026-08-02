@@ -18,3 +18,10 @@ void SpecialShape::setMeshType(MeshType value)
 }
 
 } // namespace RBX
+
+template class RBX::FactoryProduct<RBX::SpecialShape, RBX::Instance, RBX::sSpecialShape>;
+template class RBX::Reflection::Described<
+	RBX::SpecialShape,
+	RBX::sSpecialShape,
+	RBX::FactoryProduct<RBX::SpecialShape, RBX::Instance, RBX::sSpecialShape> >;
+template class RBX::DescribedCreatable<RBX::SpecialShape, RBX::Instance, RBX::sSpecialShape>;

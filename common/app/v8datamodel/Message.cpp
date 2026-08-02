@@ -20,3 +20,8 @@ void Message::setText(const std::string& value)
 }
 
 } // namespace RBX
+
+template class RBX::FactoryProduct<RBX::Hint, RBX::Message, RBX::sHint>;
+template class RBX::Reflection::
+	Described<RBX::Hint, RBX::sHint, RBX::FactoryProduct<RBX::Hint, RBX::Message, RBX::sHint> >;
+template class RBX::DescribedCreatable<RBX::Hint, RBX::Message, RBX::sHint>;

@@ -2,6 +2,7 @@
 #define UTIL_NAME_H
 
 #include <boost/noncopyable.hpp>
+#include <boost/thread/once.hpp>
 #include <string>
 
 namespace RBX {
@@ -14,6 +15,16 @@ public:
 	static const Name& lookup(const char* name);
 	static const Name& lookup(const std::string& name);
 	static const Name& getNullName();
+
+	template <const char* name>
+	static const Name& declare()
+	{
+		static boost::once_flag flag = BOOST_ONCE_INIT;
+
+		boost::call_once(&callDoDeclare<name>, flag);
+
+		return doDeclare<name>();
+	}
 
 	bool empty() const;
 

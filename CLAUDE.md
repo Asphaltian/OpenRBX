@@ -87,7 +87,9 @@ The chain above every registered class is `X` to `DescribedCreatable<X, Base, sX
 
 Name the non-type parameter `sName`, not `name`. MSVC 8 rejects forwarding it into `Name::declare` with "expected compile-time constant expression" when an inherited member of the same name is visible, and `Descriptor::name` is visible through every one of these.
 
-What is left on each of those eight is two compiler statics: `flag` inside `Name::declare` and `d` inside `classDescriptor`. Both PDBs carry `?flag@?1???$declare@...` verbatim, so reccmp does pair them by symbol if `gen_globals.py` stops skipping template-scoped local statics, but that pairing costs more than it gives: datacmp drops from 682 named variables to 578 and the accuracy from 99.92 to 98.34.
+`getClassName` matches at 100% for every class wired this way, and the last thing in its way was one operand. A static local to a template instantiation reaches the original's PDB only as a mangled public, because the original inlines the template everywhere; ours keeps the enclosing `S_GPROC32`, so reccmp labels it `flag___RBX::Name::declare<&RBX::sTeam>`. Handing the mangled name over as a symbol does pair it, and costs more than it gives: the long ones collide once reccmp truncates at 255 for C4786, and the accuracy falls to 98.34. Rebuilding reccmp's own label out of the mangling is what works, and `gen_globals.py` does that for the one-argument address-of form, which is what `Name::declare` and `doDeclare` are. 210 statics reach a label that way.
+
+`classDescriptor` and both constructors are still short of 100%, each on the same kind of unnamed static: `d` inside `classDescriptor` is a template local whose argument list is nested, so the one-argument parser leaves it alone rather than guessing.
 
 `rootDescriptor` is written and unannotated: it is inline in the header and nothing calls it until `Described<T, &sName, Base>::classDescriptor` does, which is the next 98 functions and needs `DescribedBase` (12 bytes, `const ClassDescriptor& descriptor` at 8) first.
 

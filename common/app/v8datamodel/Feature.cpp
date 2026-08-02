@@ -90,3 +90,15 @@ void VelocityMotor::setCurrentAngle(float value)
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sFeature>();
 template void RBX::Name::callDoDeclare<RBX::sFeature>();
+
+template class RBX::FactoryProduct<RBX::Hole, RBX::Feature, RBX::sHole>;
+template class RBX::Reflection::
+	Described<RBX::Hole, RBX::sHole, RBX::FactoryProduct<RBX::Hole, RBX::Feature, RBX::sHole> >;
+template class RBX::DescribedCreatable<RBX::Hole, RBX::Feature, RBX::sHole>;
+
+template class RBX::FactoryProduct<RBX::MotorFeature, RBX::Feature, RBX::sMotorFeature>;
+template class RBX::Reflection::Described<
+	RBX::MotorFeature,
+	RBX::sMotorFeature,
+	RBX::FactoryProduct<RBX::MotorFeature, RBX::Feature, RBX::sMotorFeature> >;
+template class RBX::DescribedCreatable<RBX::MotorFeature, RBX::Feature, RBX::sMotorFeature>;

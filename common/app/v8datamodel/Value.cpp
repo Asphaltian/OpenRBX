@@ -40,3 +40,10 @@ template void RBX::Name::callDoDeclare<RBX::sVector3Value>();
 template void RBX::Name::callDoDeclare<RBX::sCFrameValue>();
 template void RBX::Name::callDoDeclare<RBX::sColor3Value>();
 template void RBX::Name::callDoDeclare<RBX::sBrickColorValue>();
+
+template class RBX::FactoryProduct<RBX::ObjectValue, RBX::Instance, RBX::sObjectValue>;
+template class RBX::Reflection::Described<
+	RBX::ObjectValue,
+	RBX::sObjectValue,
+	RBX::FactoryProduct<RBX::ObjectValue, RBX::Instance, RBX::sObjectValue> >;
+template class RBX::DescribedCreatable<RBX::ObjectValue, RBX::Instance, RBX::sObjectValue>;

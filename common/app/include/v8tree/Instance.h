@@ -2,13 +2,14 @@
 #define V8TREE_INSTANCE_H
 
 #include "decomp.h"
-#include "reflection/Reflection.h"
 #include "reflection/property.h"
+#include "reflection/reflection.h"
 #include "reflection/signal.h"
 #include "util/Association.h"
 #include "util/Events.h"
 #include "util/Guid.h"
 #include "util/Utilities.h"
+#include "util/object.h"
 #include "v8xml/XmlElement.h"
 
 #include <boost/enable_shared_from_this.hpp>
@@ -52,7 +53,7 @@ public:
 	virtual ~AbstractFactoryProduct() {}
 };
 
-extern const char* const sInstance;
+extern const char sInstance[];
 
 class Instance : public GuidItem<Instance>,
 				 public AbstractFactoryProduct<Instance>,
@@ -156,6 +157,15 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Instance, 0xf8)
+
+template <class T, class Base, const char* sName>
+class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >
+{
+	// TEMPLATE: WEBSERVICE 0x100be000
+	// RBX::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>::~DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>
+	// STUB: WEBSERVICE 0x100be560
+	// RBX::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>
+};
 
 } // namespace RBX
 

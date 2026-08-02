@@ -72,6 +72,20 @@ private:
 
 DECOMP_SIZE_ASSERT(VelocityMotor, 0x128)
 
+// SIZE 0x118
+class Hole : public DescribedCreatable<Hole, Feature, sHole>
+{
+};
+
+DECOMP_SIZE_ASSERT(Hole, 0x118)
+
+// SIZE 0x118
+class MotorFeature : public DescribedCreatable<MotorFeature, Feature, sMotorFeature>
+{
+};
+
+DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_FEATURE_H
