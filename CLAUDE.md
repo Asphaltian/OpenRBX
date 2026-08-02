@@ -117,6 +117,12 @@ Three spellings decided it and each is general. `getWorld` reads `currentStage` 
 
 `World::onMotorAngleChanged` folds onto `onPrimitiveCanCollideChanged` at 0x100cf2b0, and `tools/check_folded.py` requires every annotation on an address to agree, so adding the sibling means adding `FOLDED` to the one already there.
 
+## Cofm
+
+`v8kernel/Cofm.cpp` is complete, all five functions, and `updateIfDirty` matched on the first build because the line records fixed its shape before any of it was written: fourteen statements at lines 21 to 38, which is the dirty test, the mass and the running position, a four statement loop over the children, the divide, `cofmInBody`, the world moment, a second loop, `Math::momentToObjectSpace` and the flag. Count the statements first and the body follows.
+
+Everything it needs was recorded rather than guessed. `Body::getBranchMass` is `cofm != NULL ? cofm->getMass() : mass`, which is why the disassembly inlines a call to `Cofm::updateIfDirty` twice per child; `children` is `RBX::IndexArray<RBX::Body,&RBX::Body::getIndex>` at 0x10 over a `G3D::Array<Body*>`, and `include/util/indexarray.h` is in the PDB's string table even though no module's line info mentions it; `cofm` follows at 0x1c. The rest of `Body`'s layout is in the type records too: `root` at 4, `index` at 0xc, `simBody` at 0x20, `canThrottle` at 0x24, `link` at 0x28, `meInParent` at 0x2c and `moment` at 0x5c.
+
 ## Constants
 
 `v8kernel/Constants.cpp` is complete, all twelve functions. `getJointK` sorts the size, clamps it with `sorted.max(Vector3(1.0f, 1.0f, 1.0f))` and scales `getJointKMultiplier` by 960000; `getKmsMaxJointForce` rounds both stud counts with `G3D::iRound`, clamps each to at least 1, and indexes `MAX_LEGO_JOINT_FORCES_MEASURED`, seven measured forces ending 4.681, by the larger of the two.
