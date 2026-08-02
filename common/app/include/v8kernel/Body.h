@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "util/IndexArray.h"
+#include "util/Math.h"
 #include "util/PV.h"
 #include "util/Velocity.h"
 #include "v8kernel/Cofm.h"
@@ -50,8 +51,24 @@ public:
 		return pv.position.translation;
 	}
 
+	Matrix3 getIBody() const { return moment; }
+
+	Matrix3 getBranchIBody() const { return cofm != NULL ? cofm->getMoment() : moment; }
+
+	Matrix3 getIWorld() const { return Math::momentToWorldSpace(getIBody(), getPV().position.rotation); }
+
+	Matrix3 getBranchIWorld() const { return Math::momentToWorldSpace(getBranchIBody(), getPV().position.rotation); }
+
 	Matrix3 getIWorldAtPoint(const Vector3& point) const;
 	Matrix3 getBranchIWorldAtPoint(const Vector3& point) const;
+
+	const PV& getPV() const
+	{
+		updatePV();
+		return pv;
+	}
+
+	void setPv(const PV& value);
 
 	int getStateIndex() const
 	{

@@ -1,13 +1,14 @@
 #include "v8kernel/Body.h"
 
 #include "decomp.h"
+#include "util/Math.h"
 
 #include <cstddef>
 
 namespace RBX {
 
 // STUB: WEBSERVICE 0x1009ad20
-void Body::updatePV() const
+DECOMP_NOINLINE void Body::updatePV() const
 {
 	STUB(0x1009ad20);
 }
@@ -54,10 +55,23 @@ void Body::makeCofmDirty()
 	}
 }
 
-// STUB: WEBSERVICE 0x10104be0
+// STUB: WEBSERVICE 0x10104b50
+DECOMP_NOINLINE void Body::setPv(const PV& value)
+{
+	STUB(0x10104b50);
+}
+
+// FUNCTION: WEBSERVICE 0x10104be0
 void Body::setVelocity(const Velocity& velocity)
 {
-	STUB(0x10104be0);
+	if (parent == NULL) {
+		pv.velocity = velocity;
+		advanceStateIndex();
+
+		if (simBody != NULL) {
+			simBody->makeDirty();
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10104c60
@@ -95,28 +109,25 @@ void Body::setMeInParent(Link* link)
 // STUB: WEBSERVICE 0x10104ee0
 void Body::setCoordinateFrame(const CoordinateFrame& value)
 {
-	STUB(0x10104ee0);
+	setPv(PV(value, getPV().velocity));
 }
 
 // STUB: WEBSERVICE 0x10104f60
 Vector3 Body::getBranchCofmPos() const
 {
-	STUB(0x10104f60);
-	return Vector3::zero();
+	return cofm == NULL ? getPV().position.translation : getPV().position.pointToWorldSpace(cofm->getCofmInBody());
 }
 
-// STUB: WEBSERVICE 0x10105040
+// FUNCTION: WEBSERVICE 0x10105040
 Matrix3 Body::getIWorldAtPoint(const Vector3& point) const
 {
-	STUB(0x10105040);
-	return Matrix3::zero();
+	return Math::getIWorldAtPoint(getPV().position.translation, point, getIWorld(), getMass());
 }
 
-// STUB: WEBSERVICE 0x101050c0
+// FUNCTION: WEBSERVICE 0x101050c0
 Matrix3 Body::getBranchIWorldAtPoint(const Vector3& point) const
 {
-	STUB(0x101050c0);
-	return Matrix3::zero();
+	return Math::getIWorldAtPoint(getBranchCofmPos(), point, getBranchIWorld(), getBranchMass());
 }
 
 // STUB: WEBSERVICE 0x10105390

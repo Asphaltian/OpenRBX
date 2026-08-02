@@ -15,6 +15,9 @@ class PV
 public:
 	CoordinateFrame position; // 0x00
 	Velocity velocity;        // 0x30
+
+	PV() {}
+	PV(const CoordinateFrame& position, const Velocity& velocity) : position(position), velocity(velocity) {}
 };
 
 DECOMP_SIZE_ASSERT(PV, 0x48)
