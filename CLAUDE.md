@@ -77,7 +77,11 @@ The array's own translation unit comes from the contribution table, the instanti
 
 The property chain hangs off the same root: `Descriptor` (8) to `MemberDescriptor` (0x10) to `PropertyDescriptor` (0x18) to `TypedPropertyDescriptor<T>` (0x1c) to `PropDescriptor<Class, T>` (0x1c), which is 499 functions and the largest family left. `MemberDescriptor` adds `const Name& category` at 8 and `const ClassDescriptor& owner` at 0x0c; `PropertyDescriptor` adds two one-bit fields at 0x10 and `const Type& type` at 0x14, and introduces nine virtuals at vtable slots 4 through 0x20, seven of them pure. `TypedPropertyDescriptor<T>` holds `std::auto_ptr<GetSet> getset` at 0x18 and overrides all but `read`.
 
-Writing that layout is blocked on the descriptors' construction, not on the layout. Both classes hold reference members, so neither can be default constructed, and every `static PropDescriptor<Class, T> prop_Name;` in the tree today is default constructed against the placeholder. The real constructors take the owning `ClassDescriptor`, so `ClassDescriptor` and the `Described<T, &sName, Base>::classDescriptor` that supplies it have to come first.
+Writing that layout is blocked on the descriptors' construction, not on the layout. Both classes hold reference members, so neither can be default constructed, and every `static PropDescriptor<Class, T> prop_Name;` in the tree today is default constructed against the placeholder. The real constructors take the owning `ClassDescriptor`, so that has to come first.
+
+`ClassDescriptor` is 0x88 and is four bases before it is anything else: `Descriptor` at 0 and a `MemberDescriptorContainer` at 8, 44 and 80 for properties, signals and functions, each 0x24 of two vectors and a base pointer. `derivedClasses` follows at 0x74 and `base` at 0x84. It lives in `include/reflection/object.h` beside `reflection/reflection_object.cpp`, and its size assertion is what proves all four bases at once. Its destructor is compiler-generated but has a standalone body in the image, so it is declared and defined out of line rather than left implicit; inline, it folds into the scalar deleting destructor and costs that function nine percent.
+
+`rootDescriptor` is written and unannotated: it is inline in the header and nothing calls it until `Described<T, &sName, Base>::classDescriptor` does, which is the next 98 functions and needs `DescribedBase` (12 bytes, `const ClassDescriptor& descriptor` at 8) first.
 
 ## Class Pattern
 
