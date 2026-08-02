@@ -33,10 +33,26 @@ public:
 	// RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1008cc40
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100b3bc0
+	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100be220
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100c3690
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d8370
+	// RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d8410
+	// RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d84c0
+	// RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d8550
+	// RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d8610
+	// RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d86b0
+	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100de2e0
+	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100e0cd0
 	// RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100e0cf0
@@ -74,6 +90,15 @@ private:
 
 template <class T, class Base, const char* sName>
 typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, sName>::creator;
+
+template <class Base, const char* sName>
+class NonFactoryProduct : public Base
+{
+public:
+	static const Name& className() { return Name::declare<sName>(); }
+
+	virtual const Name& getClassName() const { return className(); }
+};
 
 } // namespace RBX
 

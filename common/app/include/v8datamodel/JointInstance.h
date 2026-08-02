@@ -40,6 +40,66 @@ private:
 
 DECOMP_SIZE_ASSERT(Motor, 0x11c)
 
+// SIZE 0x10c
+class JointInstance : public DescribedNonCreatable<JointInstance, Instance, sJointInstance>
+{
+private:
+	undefined m_unk0x0f8[0x10c - 0x0f8]; // 0x0f8
+};
+
+DECOMP_SIZE_ASSERT(JointInstance, 0x10c)
+
+// SIZE 0x11c
+class AutoJoint : public DescribedNonCreatable<AutoJoint, JointInstance, sAutoJoint>
+{
+private:
+	undefined m_unk0x10c[0x11c - 0x10c]; // 0x10c
+};
+
+DECOMP_SIZE_ASSERT(AutoJoint, 0x11c)
+
+// SIZE 0x11c
+class Glue : public DescribedCreatable<Glue, AutoJoint, sGlue>
+{
+};
+
+DECOMP_SIZE_ASSERT(Glue, 0x11c)
+
+// SIZE 0x11c
+class Rotate : public DescribedCreatable<Rotate, AutoJoint, sRotate>
+{
+};
+
+DECOMP_SIZE_ASSERT(Rotate, 0x11c)
+
+// SIZE 0x11c
+class RotateP : public DescribedCreatable<RotateP, AutoJoint, sRotateP>
+{
+};
+
+DECOMP_SIZE_ASSERT(RotateP, 0x11c)
+
+// SIZE 0x11c
+class RotateV : public DescribedCreatable<RotateV, AutoJoint, sRotateV>
+{
+};
+
+DECOMP_SIZE_ASSERT(RotateV, 0x11c)
+
+// SIZE 0x11c
+class Snap : public DescribedCreatable<Snap, AutoJoint, sSnap>
+{
+};
+
+DECOMP_SIZE_ASSERT(Snap, 0x11c)
+
+// SIZE 0x11c
+class Weld : public DescribedCreatable<Weld, AutoJoint, sWeld>
+{
+};
+
+DECOMP_SIZE_ASSERT(Weld, 0x11c)
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_JOINTINSTANCE_H

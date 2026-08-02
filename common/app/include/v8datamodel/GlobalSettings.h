@@ -8,8 +8,19 @@ namespace RBX {
 
 extern const char sGlobalSettings[];
 
-template <class T, const char* name>
-class GlobalSettingsItem : public Instance
+class GlobalSettings
+{
+public:
+	// SIZE 0xf8
+	class Item : public NonFactoryProduct<Instance, sGlobalSettings>
+	{
+	};
+};
+
+DECOMP_SIZE_ASSERT(GlobalSettings::Item, 0xf8)
+
+template <class T, const char* sName>
+class GlobalSettingsItem : public DescribedCreatable<T, GlobalSettings::Item, sName>
 {
 };
 

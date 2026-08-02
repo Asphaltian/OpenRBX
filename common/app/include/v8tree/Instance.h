@@ -159,6 +159,11 @@ private:
 DECOMP_SIZE_ASSERT(Instance, 0xf8)
 
 template <class T, class Base, const char* sName>
+class DescribedNonCreatable : public Reflection::Described<T, sName, NonFactoryProduct<Base, sName> >
+{
+};
+
+template <class T, class Base, const char* sName>
 class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >
 {
 	// TEMPLATE: WEBSERVICE 0x100be000
