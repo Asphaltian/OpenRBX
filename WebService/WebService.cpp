@@ -32,9 +32,13 @@ static std::string dotVersion;
 
 extern "C" BOOL WINAPI TerminateExtension(DWORD flags);
 
+// VTABLE: WEBSERVICE 0x10261998
 // SIZE 0x28
 class StandardOutLog : public RBX::Listener<RBX::StandardOut, RBX::StandardOutMessage>
 {
+private:
+	boost::shared_ptr<RBX::StandardOut> standardOut; // 0x04
+
 public:
 	StandardOutLog();
 	virtual ~StandardOutLog();
@@ -44,9 +48,6 @@ public:
 
 protected:
 	virtual void onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage event);
-
-private:
-	boost::shared_ptr<RBX::StandardOut> standardOut; // 0x04
 };
 
 DECOMP_SIZE_ASSERT(StandardOutLog, 0x28)
