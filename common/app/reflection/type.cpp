@@ -3,7 +3,7 @@
 namespace RBX {
 namespace Reflection {
 
-// STUB: WEBSERVICE 0x1003e950
+// FUNCTION: WEBSERVICE 0x1003e950
 Type::Type(const char* name, const std::type_info& type) : Descriptor(name), type(type), tag(Name::lookup(name))
 {
 }

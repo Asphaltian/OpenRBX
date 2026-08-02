@@ -9,6 +9,7 @@
 namespace RBX {
 namespace Reflection {
 
+// VTABLE: WEBSERVICE 0x1022da5c
 // SIZE 0x10
 class Type : public Descriptor
 {

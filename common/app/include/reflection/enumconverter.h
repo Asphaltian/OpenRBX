@@ -22,6 +22,7 @@ namespace Reflection {
 class EnumDescriptor : public Type
 {
 public:
+	// VTABLE: WEBSERVICE 0x1022da64
 	// SIZE 0x10
 	class Item : public Descriptor
 	{

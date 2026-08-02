@@ -73,7 +73,7 @@ The array's own translation unit comes from the contribution table, the instanti
 
 `Descriptor` (8) to `Type` (16) to `EnumDescriptor` (0x28) to `EnumDesc<T>` (0x98), each recorded in the type records. `Descriptor` holds `const Name& name` at 4 under a vfptr, and its constructor takes a `const char*` and stores `Name::declare(name, -1)`; it never reached the publics, so it is inlined everywhere and belongs in the header. `Type` adds `const std::type_info& type` and `const Name& tag`, and its two-argument form fills `tag` with `Name::lookup(name)`, not with its own name. `EnumDescriptor` passes the literal `"token"` as that tag.
 
-`Descriptor` and `Type` have byte-identical scalar deleting destructors that the original did not fold and ours does. Naming `Type`'s vftable then costs more than it gains: the store inside `Type::Type` resolves and the function reaches 100%, but `reccmp-vtable` pairs the table and fails on the slot. Listing the vftable in `webservice-globals.csv` instead of annotating it changes nothing, because reccmp-vtable picks it up either way.
+`Descriptor` and `Type` have byte-identical scalar deleting destructors that the original did not fold and ours does; the contribution table puts them in `ThumbnailGenerator.obj` and `Surfaces.obj`, one LTCG and one not. Only one of the two can hold the match, so the other's vtable slot read as missing against code that is the same. reccmp now compares the code when the slot's original function is unclaimed, which is the mirror of `FOLDED` and the general answer wherever the original kept apart what we merge.
 
 ## Class Pattern
 
