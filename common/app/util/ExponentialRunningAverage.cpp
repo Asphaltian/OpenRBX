@@ -2,6 +2,12 @@
 
 namespace RBX {
 
+// FUNCTION: WEBSERVICE 0x10122ff0
+void floatERA::reset()
+{
+	avg = 0.0f;
+}
+
 // FUNCTION: WEBSERVICE 0x10123000
 float floatERA::pushAndGetAverage(float value)
 {
@@ -13,6 +19,14 @@ float floatERA::pushAndGetAverage(float value)
 float floatERA::getAverage() const
 {
 	return avg;
+}
+
+// FUNCTION: WEBSERVICE 0x10123030
+void Vector3ERA::reset()
+{
+	z = 0.0f;
+	y = 0.0f;
+	x = 0.0f;
 }
 
 // FUNCTION: WEBSERVICE 0x10123040
