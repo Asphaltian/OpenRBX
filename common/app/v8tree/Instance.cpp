@@ -10,10 +10,6 @@ const char sInstance[] = "Instance";
 
 Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged;
 
-Instance::~Instance()
-{
-}
-
 // STUB: WEBSERVICE 0x10047af0
 void Instance::onChildChanged(Instance* child, const PropertyChanged& event)
 {
@@ -78,6 +74,11 @@ shared_ptr<Instance> Instance::createChild(const Name& className)
 {
 	STUB(0x1004cdf0);
 	return shared_ptr<Instance>();
+}
+
+// STUB: WEBSERVICE 0x1004d0b0
+Instance::~Instance()
+{
 }
 
 // STUB: WEBSERVICE 0x1004ddb0

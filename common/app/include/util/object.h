@@ -304,6 +304,9 @@ public:
 
 	virtual const Name& getClassName() const { return className(); }
 
+protected:
+	virtual ~FactoryProduct() {} // vtable+0x00
+
 private:
 	static Creator creator;
 };

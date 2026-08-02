@@ -260,6 +260,10 @@ template <class T, class Base, const char* sName>
 // clang-format on
 class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >
 {
+protected:
+	virtual ~DescribedCreatable() {} // vtable+0x00
+
+public:
 };
 
 } // namespace RBX
