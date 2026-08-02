@@ -30,7 +30,7 @@ private:
 DECOMP_SIZE_ASSERT(Decal, 0x124)
 
 // SIZE 0x12c
-class Texture : public Decal
+class Texture : public DescribedCreatable<Texture, Decal, sTexture>
 {
 public:
 	void setStudsPerTileU(float value);

@@ -52,3 +52,8 @@ void Texture::setStudsPerTileV(float value)
 }
 
 } // namespace RBX
+
+template class RBX::FactoryProduct<RBX::Texture, RBX::Decal, RBX::sTexture>;
+template class RBX::Reflection::
+	Described<RBX::Texture, RBX::sTexture, RBX::FactoryProduct<RBX::Texture, RBX::Decal, RBX::sTexture> >;
+template class RBX::DescribedCreatable<RBX::Texture, RBX::Decal, RBX::sTexture>;
