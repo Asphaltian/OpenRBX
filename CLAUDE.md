@@ -63,6 +63,14 @@ The colon is required on everything except `// SIZE`. reccmp silently ignores `/
 
 `FOLDED` marks siblings the linker merged onto one address. They share that address, are exempt from ascending order, and do not need the `STUB()` macro.
 
+## Name
+
+The interning subsystem is `util/Name.cpp`, and everything but `declare` matches. `moo2` is a magic-static `boost::mutex` called `mutex2`, `initMoo` a five-byte tail jump into it, and `boost::call_once(initMoo, flag)` guards it at the head of `declare`, `lookup` and `getNullName`. `namMap` returns a `NamMap`, which derives from `std::map<std::string, Name*>`, and `dictionary` a `std::map<int, Name*>`; their statics are named `n` and `d`. `getNullName` is `declare("", 0)` behind a magic static, and `empty` is `this == &getNullName()`.
+
+Three things gate that subsystem and each is general. Both accessors and `initMoo` need `DECOMP_NOINLINE`, or `/Ob2` inlines them and the original's out-of-line calls have nothing to bind to. `boost::mutex::do_lock` and `find` are folded in the original with other instantiations, so the vendored table names them for whichever the `min()` rule picked and our call reads as unresolved: the fix is an extra row at the same address carrying the instantiation our build emits. And the `boost::once_flag` is a file static called `flag`, which `gen_statics.py` drops for not being unique across the image, so it needs naming by hand.
+
+`declare` is written and semantically complete at 59.65%. The original keeps the mutex in `ebx` for the whole body and has eight more bytes of locals; ours leaves `ebx` free and caches `_invalid_parameter_noinfo` in it instead. Every instruction otherwise lines up.
+
 ## Class Names
 
 Every registered class carries a namespace-scope char array holding its name, and `Name::doDeclare<&sFoo>` turns it into the interned `Name`. 105 of them, each with a `callDoDeclare<&sFoo>` beside it that is a five-byte tail jump into `doDeclare`. Both templates take `const char*`: 48 arrays are `const char[]` and 46 are `char[]`, the mangling records which (`QBDB` against `PADA`), and one template accepts both through the qualification conversion.

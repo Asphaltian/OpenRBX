@@ -376,3 +376,4 @@ address,type,name
 0x102faa78,global,y90
 0x102fab14,global,y_neg
 0x102faaf0,global,z_neg
+0x102f5e90,global,flag

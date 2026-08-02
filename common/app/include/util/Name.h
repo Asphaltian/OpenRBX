@@ -3,6 +3,7 @@
 
 #include <boost/noncopyable.hpp>
 #include <boost/thread/once.hpp>
+#include <map>
 #include <string>
 
 namespace RBX {
@@ -16,6 +17,15 @@ public:
 	static const Name& lookup(const std::string& name);
 	static const Name& getNullName();
 
+private:
+	class NamMap;
+
+	static NamMap& namMap();
+	static std::map<int, Name*>& dictionary();
+
+	Name(const char* name, int dictionaryIndex);
+
+public:
 	template <const char* name>
 	static const Name& declare()
 	{
@@ -458,6 +468,15 @@ private:
 	{
 		doDeclare<name>();
 	}
+
+	// clang-format off
+	// STUB: WEBSERVICE 0x10221870
+	// `RBX::moo2'::`2'::`dynamic atexit destructor for 'mutex2''
+	// STUB: WEBSERVICE 0x10221880
+	// `RBX::Name::dictionary'::`2'::`dynamic atexit destructor for 'd''
+	// STUB: WEBSERVICE 0x102218c0
+	// `RBX::Name::namMap'::`2'::`dynamic atexit destructor for 'n''
+	// clang-format on
 
 	int dictionaryIndex; // 0x00
 	std::string name;    // 0x04
