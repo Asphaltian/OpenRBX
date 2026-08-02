@@ -21,8 +21,8 @@ public:
 		MAX_TREE_DEPTH = 3,
 	};
 
-	virtual void onEdgeAdded(Edge* edge) = 0;         // vtable+0x10
-	virtual void onEdgeRemoving(Edge* edge) = 0;      // vtable+0x14
+	virtual void onEdgeAdded(Edge* edge);             // vtable+0x10
+	virtual void onEdgeRemoving(Edge* edge);          // vtable+0x14
 	virtual int getMetric(MetricType metricType) = 0; // vtable+0x18
 
 protected:

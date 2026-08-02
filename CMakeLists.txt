@@ -164,6 +164,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/Edge.cpp
   common/app/v8world/IMoving.cpp
   common/app/v8world/IPipelined.cpp
+  common/app/v8world/IWorldStage.cpp
   common/app/v8world/Joint.cpp
   common/app/v8world/JointStage.cpp
   common/app/v8world/Mechanism.cpp
