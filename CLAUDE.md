@@ -85,6 +85,14 @@ Two of them turned on the same thing, which is general. A folded address carries
 
 `fastRemoveShort` in `util/StlExtra.h` is the one to remember for method rather than content. Sixty spellings, the original's own command line and five optimisation levels all left it near 48%, because the byte counts I was steering by came from an `/FA` listing whose relocated `call` and `mov ebp, [__imp_...]` bytes my extractor was dropping; a spelling that was already right read 42 bytes short. The line records settled it in one look: `0001:00102660-00102745` maps to lines 42, 43, 45, 54, 55, 59, 60, 62, 67 and 68 of `stlextra.h`, which is eight code-generating statements where the obvious source has seven, and lines 54 and 55 both feed `last`. It is `items.end()` and then `--last`, not `items.end() - 1`. Count the line records before sweeping spellings, and measure with reccmp on the linked image rather than by eye on a listing.
 
+## Constants
+
+`v8kernel/Constants.cpp` is complete, all twelve functions. `getJointK` sorts the size, clamps it with `sorted.max(Vector3(1.0f, 1.0f, 1.0f))` and scales `getJointKMultiplier` by 960000; `getKmsMaxJointForce` rounds both stud counts with `G3D::iRound`, clamps each to at least 1, and indexes `MAX_LEGO_JOINT_FORCES_MEASURED`, seven measured forces ending 4.681, by the larger of the two.
+
+Four things settled it and each is general. A bare `fld`/`fistp` with no control word change is round to nearest, not a cast, so it is `G3D::iRound`, which is `lrintf`. The component-wise clamp is `Vector3::max`, recognisable because it builds one `Vector3(1,1,1)` temporary and compares z, y, x in that order rather than three separate constants. `MAX_LEGO_JOINT_FORCES_MEASURED` cannot be `const`: as a constant our build folds `(1.0f / 7.0f) * table[6]` into a single pool entry where the original keeps the two multiplies apart, so the array is written without `const` and named in the statics table. And the ternaries in `getJointKMultiplier` are spelled `value < 15.0f ? a : b`, not `15.0f <= value ? b : a`; the original loads the constant into st(0) and tests `ah, 0x41`, ours loads the value and tests `ah, 1`, which is the same `<` rule that decides `Extents::contains`. Those three ternaries were the whole of the last 9.5 percent.
+
+`tools/ncc/ncc.style` gained an `^[A-Z][A-Z0-9_]*$` alternative for the same reason it carries `prop_` and `event_`: the caps spelling is the original's, recovered from its symbols rather than chosen.
+
 ## Class Names
 
 Every registered class carries a namespace-scope char array holding its name, and `Name::doDeclare<&sFoo>` turns it into the interned `Name`. 105 of them, each with a `callDoDeclare<&sFoo>` beside it that is a five-byte tail jump into `doDeclare`. Both templates take `const char*`: 48 arrays are `const char[]` and 46 are `char[]`, the mangling records which (`QBDB` against `PADA`), and one template accepts both through the qualification conversion.

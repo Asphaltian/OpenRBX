@@ -1,10 +1,15 @@
 #include "v8kernel/Constants.h"
 
 #include "decomp.h"
+#include "util/Math.h"
 
 #include <G3D/Vector3int16.h>
+#include <G3D/g3dmath.h>
+#include <algorithm>
 
 namespace RBX {
+
+static float MAX_LEGO_JOINT_FORCES_MEASURED[] = {0.0f, 1.098f, 2.134f, 2.427f, 3.191f, 4.571f, 4.681f};
 
 // FUNCTION: WEBSERVICE 0x1010a920
 int Constants::kernelStepsPerWorldStep()
@@ -70,7 +75,7 @@ float Constants::getElasticMultiplier(float elasticity)
 	return 1.0f;
 }
 
-// STUB: WEBSERVICE 0x1010aa00
+// FUNCTION: WEBSERVICE 0x1010aa00
 float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
 {
 	G3D::Vector3int16 grid(size);
@@ -120,12 +125,12 @@ float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
 				return 4.79f;
 			}
 
-			return 15.0f <= (float) z ? (float) z * 0.75f : (float) z * 0.9f;
+			return (float) z < 15.0f ? (float) z * 0.9f : (float) z * 0.75f;
 		}
 		case 3:
-			return 7.0f <= (float) grid.z ? (float) grid.z * 1.18f : (float) grid.z * 1.66f;
+			return (float) grid.z < 7.0f ? (float) grid.z * 1.66f : (float) grid.z * 1.18f;
 		case 4:
-			return 7.0f <= (float) grid.z ? (float) grid.z * 1.53f : (float) grid.z * 2.26f;
+			return (float) grid.z < 7.0f ? (float) grid.z * 2.26f : (float) grid.z * 1.53f;
 		default:
 			return ((float) grid.y * 0.3f + 0.66f) * (float) grid.z;
 		}
@@ -184,11 +189,43 @@ float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
 	return value * 1.5f;
 }
 
-// STUB: WEBSERVICE 0x1010adb0
+// FUNCTION: WEBSERVICE 0x1010acf0
+float Constants::getKmsMaxJointForce(float studsA, float studsB)
+{
+	int a = std::max(1, G3D::iRound(studsA));
+	int b = std::max(1, G3D::iRound(studsB));
+
+	int hi = std::max(a, b);
+	int lo = std::min(a, b);
+
+	float force;
+
+	if (hi < 7) {
+		force = MAX_LEGO_JOINT_FORCES_MEASURED[hi];
+	}
+	else {
+		force = hi * (1.0f / 7.0f) * MAX_LEGO_JOINT_FORCES_MEASURED[6];
+	}
+
+	force = force * 0.5f;
+
+	return force * lo * 7500.0f;
+}
+
+// FUNCTION: WEBSERVICE 0x1010adb0
 float Constants::getJointK(const Vector3& size, bool isBall)
 {
-	STUB(0x1010adb0);
-	return 0;
+	Vector3 sorted = Math::sortVector3(size);
+
+	Vector3 clamped = sorted.max(Vector3(1.0f, 1.0f, 1.0f));
+
+	float multiplier = getJointKMultiplier(clamped, isBall);
+
+	if (sorted.x < 1.0f) {
+		return sorted.x * multiplier * 960000.0f;
+	}
+
+	return multiplier * 960000.0f;
 }
 
 } // namespace RBX

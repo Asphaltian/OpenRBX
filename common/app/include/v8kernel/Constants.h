@@ -23,6 +23,8 @@ public:
 
 	static float getJointKMultiplier(const Vector3& size, bool isBall);
 
+	static float getKmsMaxJointForce(float studsA, float studsB);
+
 	static float getJointK(const Vector3& size, bool isBall);
 };
 

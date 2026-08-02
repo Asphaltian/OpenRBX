@@ -13,6 +13,7 @@ address,type,name
 0x10239860,global,flib
 0x1023a0f0,global,category_Camera
 0x1023a1cc,global,ZOOM_FACTOR
+0x10246f4c,global,MAX_LEGO_JOINT_FORCES_MEASURED
 0x10247000,global,log_2
 0x10247188,global,luaT_eventname
 0x102472c8,global,dummynode_
