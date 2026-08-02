@@ -31,7 +31,8 @@ DataBlockEncryptor::DataBlockEncryptor()
 
 // FUNCTION: WEBSERVICE 0x1015b610 FOLDED
 DataBlockEncryptor::~DataBlockEncryptor()
-{}
+{
+}
 
 // FUNCTION: WEBSERVICE 0x101c38d0
 bool DataBlockEncryptor::IsKeySet( void ) const
