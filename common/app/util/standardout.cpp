@@ -18,7 +18,7 @@ void StandardOut::print(MessageType type, const std::exception& error)
 	print(type, error.what());
 }
 
-// STUB: WEBSERVICE 0x10031e40
+// FUNCTION: WEBSERVICE 0x10031e40
 void StandardOut::print(MessageType type, const char* format, ...)
 {
 	va_list arguments;

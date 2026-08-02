@@ -104,7 +104,7 @@ void Notifier<Source, Event>::removeListener(Listener<Source, Event>* listener) 
 	}
 }
 
-// STUB: WEBSERVICE 0x10032240
+// FUNCTION: WEBSERVICE 0x10032240
 // RBX::Notifier<RBX::StandardOut,RBX::StandardOutMessage>::raise
 template <class Source, class Event>
 void Notifier<Source, Event>::raise(Event event, Listener<Source, Event>* listener) const

@@ -92,7 +92,7 @@ const Name& Name::lookup(const std::string& name)
 	boost::call_once(initMoo, flag);
 
 	boost::mutex::scoped_lock lock(moo2());
-	NamMap::iterator found = namMap().find(std::string(name));
+	NamMap::iterator found = namMap().find(name);
 
 	if (found != namMap().end()) {
 		return *found->second;
