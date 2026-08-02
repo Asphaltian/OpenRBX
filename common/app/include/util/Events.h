@@ -55,6 +55,8 @@ public:
 	void removeListener(Listener<Source, Event>* listener) const;
 
 protected:
+	Notifier() : raiseRange(NULL) {}
+
 	virtual ~Notifier() {}                                                    // vtable+0x00
 	virtual void onAddListener(Listener<Source, Event>* listener) const {}    // vtable+0x04
 	virtual void onRemoveListener(Listener<Source, Event>* listener) const {} // vtable+0x08

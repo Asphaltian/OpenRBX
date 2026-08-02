@@ -47,6 +47,11 @@ void StandardOut::print(MessageType type, const char* format, ...)
 	}
 }
 
+// STUB: WEBSERVICE 0x10032040
+StandardOut::~StandardOut()
+{
+}
+
 // STUB: WEBSERVICE 0x100320e0
 boost::shared_ptr<StandardOut> StandardOut::singleton()
 {
@@ -55,14 +60,19 @@ boost::shared_ptr<StandardOut> StandardOut::singleton()
 	return standardOut;
 }
 
-// STUB: WEBSERVICE 0x100321b0
+// FUNCTION: WEBSERVICE 0x100321b0
 void StandardOut::print_exception(const boost::function0<void>& job, MessageType type, bool rethrow)
 {
-	STUB(0x100321b0);
-}
+	try {
+		job();
+	}
+	catch (const std::exception& error) {
+		singleton()->print(type, error);
 
-StandardOut::~StandardOut()
-{
+		if (rethrow) {
+			throw;
+		}
+	}
 }
 
 } // namespace RBX
