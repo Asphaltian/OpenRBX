@@ -17,7 +17,7 @@ extern const char sMotorFeature[];
 extern const char sFeature[];
 
 // SIZE 0x118
-class Feature : public Instance
+class Feature : public DescribedNonCreatable<Feature, Instance, sFeature>
 {
 public:
 	enum TopBottom

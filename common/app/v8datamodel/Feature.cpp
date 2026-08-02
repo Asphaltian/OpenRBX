@@ -102,3 +102,8 @@ template class RBX::Reflection::Described<
 	RBX::sMotorFeature,
 	RBX::FactoryProduct<RBX::MotorFeature, RBX::Feature, RBX::sMotorFeature> >;
 template class RBX::DescribedCreatable<RBX::MotorFeature, RBX::Feature, RBX::sMotorFeature>;
+
+template class RBX::NonFactoryProduct<RBX::Instance, RBX::sFeature>;
+template class RBX::Reflection::
+	Described<RBX::Feature, RBX::sFeature, RBX::NonFactoryProduct<RBX::Instance, RBX::sFeature> >;
+template class RBX::DescribedNonCreatable<RBX::Feature, RBX::Instance, RBX::sFeature>;

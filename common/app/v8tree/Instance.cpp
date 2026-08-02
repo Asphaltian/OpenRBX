@@ -111,6 +111,12 @@ void Instance::predelete()
 	STUB(0x1004e0f0);
 }
 
+// FUNCTION: WEBSERVICE 0x1004e7b0
+void Instance::predelete(Instance* instance)
+{
+	instance->predelete();
+}
+
 // STUB: WEBSERVICE 0x1004eb10
 Instance::Instance() : parent(0), archivable(true)
 {

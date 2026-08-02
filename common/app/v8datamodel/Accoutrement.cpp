@@ -20,3 +20,15 @@ void Accoutrement::setBackendAccoutrementState(AccoutrementState value)
 }
 
 } // namespace RBX
+
+template class RBX::FactoryProduct<RBX::Accoutrement, RBX::Instance, RBX::sAccoutrement>;
+template class RBX::Reflection::Described<
+	RBX::Accoutrement,
+	RBX::sAccoutrement,
+	RBX::FactoryProduct<RBX::Accoutrement, RBX::Instance, RBX::sAccoutrement> >;
+template class RBX::DescribedCreatable<RBX::Accoutrement, RBX::Instance, RBX::sAccoutrement>;
+
+template class RBX::FactoryProduct<RBX::Hat, RBX::Accoutrement, RBX::sHat>;
+template class RBX::Reflection::
+	Described<RBX::Hat, RBX::sHat, RBX::FactoryProduct<RBX::Hat, RBX::Accoutrement, RBX::sHat> >;
+template class RBX::DescribedCreatable<RBX::Hat, RBX::Accoutrement, RBX::sHat>;

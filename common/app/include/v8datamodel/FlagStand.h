@@ -2,6 +2,7 @@
 #define V8DATAMODEL_FLAGSTAND_H
 
 #include "decomp.h"
+#include "util/Handle.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8tree/Instance.h"
 
@@ -24,6 +25,15 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(FlagStand, 0x2c4)
+
+// SIZE 0x104
+class FlagStandService : public DescribedCreatable<FlagStandService, Instance, sFlagStandService>
+{
+private:
+	undefined m_unk0x0f8[0x104 - 0x0f8]; // 0x0f8
+};
+
+DECOMP_SIZE_ASSERT(FlagStandService, 0x104)
 
 } // namespace RBX
 

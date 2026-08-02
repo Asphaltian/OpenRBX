@@ -2,6 +2,7 @@
 #define V8DATAMODEL_SPAWNLOCATION_H
 
 #include "decomp.h"
+#include "util/Handle.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8tree/Instance.h"
 
@@ -29,6 +30,15 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(SpawnLocation, 0x2cc)
+
+// SIZE 0x104
+class SpawnerService : public DescribedCreatable<SpawnerService, Instance, sSpawnerService>
+{
+private:
+	undefined m_unk0x0f8[0x104 - 0x0f8]; // 0x0f8
+};
+
+DECOMP_SIZE_ASSERT(SpawnerService, 0x104)
 
 } // namespace RBX
 

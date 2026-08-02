@@ -18,3 +18,10 @@ void SpawnLocation::setTeamColor(BrickColor value)
 }
 
 } // namespace RBX
+
+template class RBX::FactoryProduct<RBX::SpawnerService, RBX::Instance, RBX::sSpawnerService>;
+template class RBX::Reflection::Described<
+	RBX::SpawnerService,
+	RBX::sSpawnerService,
+	RBX::FactoryProduct<RBX::SpawnerService, RBX::Instance, RBX::sSpawnerService> >;
+template class RBX::DescribedCreatable<RBX::SpawnerService, RBX::Instance, RBX::sSpawnerService>;

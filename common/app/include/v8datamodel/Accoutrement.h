@@ -2,6 +2,8 @@
 #define V8DATAMODEL_ACCOUTREMENT_H
 
 #include "decomp.h"
+#include "util/Handle.h"
+#include "v8datamodel/Accoutrement.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
@@ -11,7 +13,7 @@ extern const char sHat[];
 extern const char sAccoutrement[];
 
 // SIZE 0x1a0
-class Accoutrement : public Instance
+class Accoutrement : public DescribedCreatable<Accoutrement, Instance, sAccoutrement>
 {
 public:
 	enum AccoutrementState
@@ -32,6 +34,13 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Accoutrement, 0x1a0)
+
+// SIZE 0x1a0
+class Hat : public DescribedCreatable<Hat, Accoutrement, sHat>
+{
+};
+
+DECOMP_SIZE_ASSERT(Hat, 0x1a0)
 
 } // namespace RBX
 

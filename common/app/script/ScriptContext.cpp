@@ -16,3 +16,10 @@ template const RBX::Name& RBX::Name::doDeclare<RBX::sDebugSettings>();
 template void RBX::Name::callDoDeclare<RBX::Stats::sStatsItem>();
 template void RBX::Name::callDoDeclare<RBX::Stats::sStats>();
 template void RBX::Name::callDoDeclare<RBX::sDebugSettings>();
+
+template class RBX::FactoryProduct<RBX::ScriptContext, RBX::Instance, RBX::sScriptContext>;
+template class RBX::Reflection::Described<
+	RBX::ScriptContext,
+	RBX::sScriptContext,
+	RBX::FactoryProduct<RBX::ScriptContext, RBX::Instance, RBX::sScriptContext> >;
+template class RBX::DescribedCreatable<RBX::ScriptContext, RBX::Instance, RBX::sScriptContext>;

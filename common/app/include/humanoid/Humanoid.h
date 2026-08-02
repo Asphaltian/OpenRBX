@@ -2,6 +2,7 @@
 #define HUMANOID_HUMANOID_H
 
 #include "decomp.h"
+#include "util/Handle.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
@@ -9,7 +10,7 @@ namespace RBX {
 extern char sHumanoid[];
 
 // SIZE 0x1f0
-class Humanoid : public Instance
+class Humanoid : public DescribedCreatable<Humanoid, Instance, sHumanoid>
 {
 public:
 	void setMaxHealth(float value);

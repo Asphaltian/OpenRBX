@@ -25,3 +25,8 @@ template class RBX::FactoryProduct<RBX::Hint, RBX::Message, RBX::sHint>;
 template class RBX::Reflection::
 	Described<RBX::Hint, RBX::sHint, RBX::FactoryProduct<RBX::Hint, RBX::Message, RBX::sHint> >;
 template class RBX::DescribedCreatable<RBX::Hint, RBX::Message, RBX::sHint>;
+
+template class RBX::FactoryProduct<RBX::Message, RBX::Instance, RBX::sMessage>;
+template class RBX::Reflection::
+	Described<RBX::Message, RBX::sMessage, RBX::FactoryProduct<RBX::Message, RBX::Instance, RBX::sMessage> >;
+template class RBX::DescribedCreatable<RBX::Message, RBX::Instance, RBX::sMessage>;

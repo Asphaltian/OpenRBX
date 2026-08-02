@@ -2,6 +2,7 @@
 #define V8DATAMODEL_MESSAGE_H
 
 #include "decomp.h"
+#include "util/Handle.h"
 #include "v8tree/Instance.h"
 
 #include <string>
@@ -13,7 +14,7 @@ extern char sHint[];
 extern char sMessage[];
 
 // SIZE 0x124
-class Message : public Instance
+class Message : public DescribedCreatable<Message, Instance, sMessage>
 {
 public:
 	void setText(const std::string& value);

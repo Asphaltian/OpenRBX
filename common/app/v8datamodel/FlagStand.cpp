@@ -16,3 +16,10 @@ void FlagStand::setTeamColor(BrickColor value)
 }
 
 } // namespace RBX
+
+template class RBX::FactoryProduct<RBX::FlagStandService, RBX::Instance, RBX::sFlagStandService>;
+template class RBX::Reflection::Described<
+	RBX::FlagStandService,
+	RBX::sFlagStandService,
+	RBX::FactoryProduct<RBX::FlagStandService, RBX::Instance, RBX::sFlagStandService> >;
+template class RBX::DescribedCreatable<RBX::FlagStandService, RBX::Instance, RBX::sFlagStandService>;
