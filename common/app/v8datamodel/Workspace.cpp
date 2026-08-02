@@ -2,6 +2,8 @@
 
 namespace RBX {
 
+char sWorkspace[] = "Workspace";
+
 bool Workspace::showWorldCoord;
 
 } // namespace RBX

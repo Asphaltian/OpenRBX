@@ -2,8 +2,11 @@
 #define V8DATAMODEL_WORKSPACE_H
 
 #include "decomp.h"
+#include "util/Name.h"
 
 namespace RBX {
+
+extern char sWorkspace[];
 
 // SIZE 0x394
 class Workspace

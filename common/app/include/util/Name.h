@@ -17,21 +17,23 @@ public:
 
 	bool empty() const;
 
-	template <char** name>
+private:
+	// TEMPLATE: WEBSERVICE 0x1000b530
+	// RBX::Name::doDeclare<&RBX::sWorkspace>
+	template <char* name>
 	static const Name& doDeclare()
 	{
-		static const Name& n = declare(*name, -1);
+		static const Name& n = declare(name, -1);
 
 		return n;
 	}
 
-	template <char** name>
+	template <char* name>
 	static void callDoDeclare()
 	{
 		doDeclare<name>();
 	}
 
-private:
 	int dictionaryIndex; // 0x00
 	std::string name;    // 0x04
 };

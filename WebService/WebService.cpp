@@ -10,6 +10,7 @@ class DataModel;
 #include "WebServiceMaps.h"
 #include "decomp.h"
 #include "util/standardout.h"
+#include "v8datamodel/Workspace.h"
 
 #include <G3D/System.h>
 #include <G3D/format.h>
@@ -25,6 +26,8 @@ class DataModel;
 #include <queue>
 #include <stdexcept>
 #include <string>
+
+template const RBX::Name& RBX::Name::doDeclare<RBX::sWorkspace>();
 
 boost::once_flag flagInitRoblox = BOOST_ONCE_INIT;
 static bool initRobloxFailed;
