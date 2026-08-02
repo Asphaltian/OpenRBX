@@ -26,7 +26,7 @@ void StandardOut::print(MessageType type, const char* format, ...)
 	std::string message = G3D::vformat(format, arguments);
 	va_end(arguments);
 
-	if (Log::current() != NULL) {
+	if (Log::current()) {
 		if (type == MESSAGE_ERROR) {
 			Log::current()->writeEntry(Log::Error, message.c_str());
 		}
