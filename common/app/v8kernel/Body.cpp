@@ -73,6 +73,20 @@ Vector3 Body::getBranchCofmPos() const
 	return Vector3::zero();
 }
 
+// STUB: WEBSERVICE 0x10105040
+Matrix3 Body::getIWorldAtPoint(const Vector3& point) const
+{
+	STUB(0x10105040);
+	return Matrix3::zero();
+}
+
+// STUB: WEBSERVICE 0x101050c0
+Matrix3 Body::getBranchIWorldAtPoint(const Vector3& point) const
+{
+	STUB(0x101050c0);
+	return Matrix3::zero();
+}
+
 // STUB: WEBSERVICE 0x10105390
 void Body::setParent(Body* value)
 {

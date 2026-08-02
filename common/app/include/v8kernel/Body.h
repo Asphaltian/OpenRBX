@@ -2,8 +2,10 @@
 #define V8KERNEL_BODY_H
 
 #include "decomp.h"
+#include "util/IndexArray.h"
 #include "util/PV.h"
 #include "util/Velocity.h"
+#include "v8kernel/Cofm.h"
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Matrix3.h>
@@ -29,6 +31,21 @@ public:
 	Body* getParent() const { return parent; }
 
 	float getMass() const { return mass; }
+
+	float getBranchMass() const { return cofm != NULL ? cofm->getMass() : mass; }
+
+	int numChildren() const { return children.size(); }
+
+	Body* getChild(int index) const { return children[index]; }
+
+	const Vector3& getPos() const
+	{
+		updatePV();
+		return pv.position.translation;
+	}
+
+	Matrix3 getIWorldAtPoint(const Vector3& point) const;
+	Matrix3 getBranchIWorldAtPoint(const Vector3& point) const;
 
 	int getStateIndex() const
 	{
@@ -58,12 +75,18 @@ public:
 	void setMoment(const Matrix3& moment);
 
 private:
-	undefined m_unk0x00[0x08 - 0x00]; // 0x00
-	Body* parent;                     // 0x08
-	undefined m_unk0x0c[0x80 - 0x0c]; // 0x0c
-	float mass;                       // 0x80
-	int stateIndex;                   // 0x84
-	PV pv;                            // 0x88
+	int& getIndex() const { return index; }
+
+	undefined m_unk0x00[0x04 - 0x00];           // 0x00
+	Body* root;                                 // 0x04
+	Body* parent;                               // 0x08
+	mutable int index;                          // 0x0c
+	IndexArray<Body, &Body::getIndex> children; // 0x10
+	Cofm* cofm;                                 // 0x1c
+	undefined m_unk0x20[0x80 - 0x20];           // 0x20
+	float mass;                                 // 0x80
+	int stateIndex;                             // 0x84
+	PV pv;                                      // 0x88
 };
 
 DECOMP_SIZE_ASSERT(Body, 0xd0)

@@ -1,6 +1,8 @@
 #include "v8kernel/Cofm.h"
 
 #include "decomp.h"
+#include "util/Math.h"
+#include "v8kernel/Body.h"
 
 namespace RBX {
 
@@ -17,10 +19,36 @@ float Cofm::getMass()
 	return mass;
 }
 
-// STUB: WEBSERVICE 0x10121720
+// FUNCTION: WEBSERVICE 0x10121720
 void Cofm::updateIfDirty()
 {
-	STUB(0x10121720);
+	if (dirty) {
+		mass = body->getMass();
+
+		Vector3 cofmPos = body->getPos() * body->getMass();
+
+		for (int i = 0; i < body->numChildren(); ++i) {
+			Body* child = body->getChild(i);
+
+			mass += child->getBranchMass();
+
+			cofmPos += child->getBranchCofmPos() * child->getBranchMass();
+		}
+
+		cofmPos = cofmPos / mass;
+
+		cofmInBody = body->getCoordinateFrame().pointToObjectSpace(cofmPos);
+
+		Matrix3 iWorld = body->getIWorldAtPoint(cofmPos);
+
+		for (int i = 0; i < body->numChildren(); ++i) {
+			iWorld = iWorld + body->getChild(i)->getBranchIWorldAtPoint(cofmPos);
+		}
+
+		moment = Math::momentToObjectSpace(iWorld, body->getCoordinateFrame().rotation);
+
+		dirty = false;
+	}
 }
 
 // STUB: WEBSERVICE 0x10121970
