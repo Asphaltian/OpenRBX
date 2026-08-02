@@ -113,6 +113,8 @@ public:
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::getClassName
 	// STUB: WEBSERVICE 0x100bdef0
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::~FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>
+	// STUB: WEBSERVICE 0x100bdf40
+	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>
 	// STUB: WEBSERVICE 0x100bdfa0
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100be220
