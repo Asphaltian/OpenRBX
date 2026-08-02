@@ -364,7 +364,8 @@ add_library(webservice SHARED
   ${OPENRBX_WEBSERVICE_SOURCES}
   util/decomp.cpp
 )
-target_compile_definitions(webservice PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _USRDLL _CRT_SECURE_NO_WARNINGS)
+target_compile_definitions(webservice PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _USRDLL _CRT_SECURE_NO_WARNINGS
+  _ATL_NO_COM_SUPPORT)
 reccmp_add_target(webservice ID WEBSERVICE)
 
 # ThumbnailGenerator is the only file that includes a Mesa header.

@@ -370,6 +370,18 @@ The LINES section names only the files that contributed line records, so a heade
 
 `StandardOutLog` has no `// VTABLE:` annotation. Its scalar deleting destructor at 0x1000d340 needs a `// SYNTHETIC:` nameref for `reccmp-vtable` to pair slot 1, a nameref in a `.cpp` fails `reccmp-decomplint --warnfail`, and the LINES table puts the class in `webservice.cpp`, so there is no header to put it in.
 
+## Sub-100 Functions
+
+`reccmp-reccmp --json` is how to find what is left: type 1 rows that are not stubs and whose `effective` score is below 1.0. Eleven of the nineteen the summary called incomplete carry an effective 100, which reccmp already counts as matched, so the real list was eight. Five of them fell to naming rather than to code.
+
+`_ATL_NO_COM_SUPPORT` is what both DLL registration exports were missing. ATL guards `_AtlComModule.RegisterServer` on it inside `CAtlModuleT::RegisterServer`, and the original calls neither `AtlComModuleRegisterServer` nor `AtlComModuleUnregisterServer`, going straight from the locale save to `_pPerfRegFunc`. It has to be a `target_compile_definitions` entry and never a `#define` in one source: the macro changes ATL's inline bodies, so defining it in `WebService.cpp` alone leaves the target's other translation units disagreeing and the linker keeps their copies, which cost seven of `CWebService`'s one-line inline members their matches. Two blank lines at the top of the same file cost nothing, so line shifts are not the cause. `_pPerfRegFunc`, `_pPerfUnRegFunc` and `_AtlBaseModule` then need naming in `webservice-globals.csv`, and the DLL still loads and answers `GetExtensionVersion`.
+
+A folded address needs a row per alias, on either side. Our build folds `Matrix3`'s copy constructor with its `operator=` and keys the pair on the latter, so `Geometry::getMoment`'s call read as an offset until the vendored table carried `??4Matrix3@G3D@@QAEAAV01@ABV01@@Z` at the constructor's original address.
+
+`match_variables` in the fork indexed function-local statics under their bare name, which is `match_static_variables`' job, so G3D's two `next` locals took RakNet's file-scope one and `randomMT` and `reloadMT` held at 90.91 and 98.92 percent. Skipping any recomp entity whose symbol is the `<name>___<function>` decoration fixes both and leaves `reccmp-datacmp` clean.
+
+Three are ceilings, each for a different reason. `CWebService::GetVersion` is the LTCG one: the original puts the `c_str()` pointer in `eax` and the `CStringA` in `ecx` and ours does the reverse, which whole-program codegen decides and no spelling reaches. `RakPeer::GetRPCString` differs on one operand because reccmp's scan of the original finds `"NOWN]"` inside `"[UNKNOWN]"` and our image has no entity there. `ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer` differs on two, because the original's `ceil` is an import thunk into MSVCR80 and ours is a linked function; naming the original `_ceil` resolves it as `IMPORT_THUNK`, which still does not equal a `FUNCTION`.
+
 ## Gotchas
 
 A property descriptor is a `const` static, so it mangles with a trailing `B`. Ours ended in `A` and no setter could bind to it. `tools/ncc/ncc.style` carries a `prop_`/`event_` alternative for the same reason: those names are the original's convention, not one-offs for `skip.yml`.

@@ -379,3 +379,4 @@ address,type,name
 0x10301b08,global,showedMessage
 0x10301b18,global,errorUploader
 0x10301bd8,global,registerFactoryObjects
+0x10300244,global,next
