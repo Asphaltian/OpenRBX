@@ -3,6 +3,9 @@
 
 #include "WebService.h"
 
+#include "util/Name.h"
+#include "util/Sound.h"
+
 namespace RBX {
 class DataModel;
 }
@@ -481,3 +484,8 @@ HRESULT __stdcall CWebService::GetStandardOutMessages(int lastId, StandardOutMes
 }
 
 } // namespace Roblox
+
+template void RBX::Name::callDoDeclare<RBX::Soundscape::sSoundService>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::Soundscape::sSoundService>();
+template void RBX::Name::callDoDeclare<RBX::Soundscape::sSoundChannel>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::Soundscape::sSoundChannel>();

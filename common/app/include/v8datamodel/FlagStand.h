@@ -7,6 +7,10 @@
 
 namespace RBX {
 
+extern const char sFlagStandService[];
+
+extern char sFlagStand[];
+
 // SIZE 0x2c4
 class FlagStand : public Instance
 {

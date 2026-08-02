@@ -8,6 +8,10 @@
 
 namespace RBX {
 
+extern char sHint[];
+
+extern char sMessage[];
+
 // SIZE 0x124
 class Message : public Instance
 {

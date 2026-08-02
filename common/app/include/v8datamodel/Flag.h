@@ -7,6 +7,8 @@
 
 namespace RBX {
 
+extern const char sFlag[];
+
 // SIZE 0x260
 class Flag : public Instance
 {

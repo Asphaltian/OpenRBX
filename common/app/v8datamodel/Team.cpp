@@ -4,6 +4,8 @@
 
 namespace RBX {
 
+const char sTeam[] = "Team";
+
 using namespace Reflection;
 
 static PropDescriptor<Team, int> prop_Score;

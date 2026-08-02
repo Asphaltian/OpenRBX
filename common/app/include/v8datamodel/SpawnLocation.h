@@ -7,6 +7,10 @@
 
 namespace RBX {
 
+extern const char sSpawnerService[];
+
+extern char sSpawnLocation[];
+
 // SIZE 0x2cc
 class SpawnLocation : public Instance
 {

@@ -4,6 +4,8 @@
 
 namespace RBX {
 
+const char sFlag[] = "Flag";
+
 static Reflection::PropDescriptor<Flag, BrickColor> prop_Color;
 
 // STUB: WEBSERVICE 0x100cef60

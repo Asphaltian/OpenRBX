@@ -4,7 +4,7 @@
 #include "decomp.h"
 #include "reflection/Property.h"
 #include "reflection/Reflection.h"
-#include "reflection/Signal.h"
+#include "reflection/signal.h"
 #include "util/Association.h"
 #include "util/Events.h"
 #include "util/Guid.h"

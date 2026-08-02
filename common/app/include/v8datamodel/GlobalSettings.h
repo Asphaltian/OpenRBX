@@ -6,11 +6,9 @@
 
 namespace RBX {
 
-class DebugSettings;
+extern const char sGlobalSettings[];
 
-extern DebugSettings* sDebugSettings;
-
-template <class T, T*& instance>
+template <class T, const char* name>
 class GlobalSettingsItem : public Instance
 {
 };

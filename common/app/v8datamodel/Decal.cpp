@@ -4,6 +4,10 @@
 
 namespace RBX {
 
+char sTexture[] = "Texture";
+
+char sDecal[] = "Decal";
+
 using namespace Reflection;
 
 static PropDescriptor<Decal, float> prop_Specular;

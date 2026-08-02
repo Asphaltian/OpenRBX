@@ -5,6 +5,8 @@
 
 namespace RBX {
 
+extern char sModel[];
+
 // SIZE 0x254
 class ModelInstance
 {

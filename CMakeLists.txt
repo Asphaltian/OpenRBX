@@ -111,7 +111,7 @@ endif()
 set(OPENRBX_APP_SOURCES
   common/app/security/SecurityContext.cpp
   common/app/humanoid/Humanoid.cpp
-  common/app/reflection/Signal.cpp
+  common/app/reflection/signal.cpp
   common/app/util/Debug.cpp
   common/app/v8tree/Instance.cpp
   common/app/util/ExponentialRunningAverage.cpp
@@ -130,7 +130,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8kernel/Body.cpp
   common/app/util/Debug.cpp
   common/app/v8datamodel/Accoutrement.cpp
-  common/app/v8datamodel/CustomMesh.cpp
+  common/app/v8datamodel/custommesh.cpp
   common/app/v8datamodel/Decal.cpp
   common/app/v8datamodel/Flag.cpp
   common/app/v8datamodel/FlagStand.cpp
@@ -171,10 +171,58 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/World.cpp
   common/app/util/Timer.cpp
   common/app/util/Units.cpp
+  common/app/humanoid/FallingDown.cpp
+  common/app/humanoid/Flying.cpp
+  common/app/humanoid/Freefall.cpp
+  common/app/humanoid/GettingUp.cpp
+  common/app/humanoid/Jumping.cpp
+  common/app/humanoid/Running.cpp
+  common/app/humanoid/Seated.cpp
+  common/app/script/LuaInstanceBridge.cpp
+  common/app/script/Script.cpp
+  common/app/script/ScriptContext.cpp
+  common/app/tool/GroupDragTool.cpp
+  common/app/tool/NullTool.cpp
+  common/app/tool/PartDragTool.cpp
+  common/app/tool/ToolsArrow.cpp
+  common/app/util/RunStateOwner.cpp
+  common/app/util/Sound.cpp
+  common/app/v8datamodel/Backpack.cpp
+  common/app/v8datamodel/Camera.cpp
+  common/app/v8datamodel/CharacterAppearance.cpp
+  common/app/v8datamodel/DataModel.cpp
+  common/app/v8datamodel/DebrisService.cpp
+  common/app/v8datamodel/Explosion.cpp
+  common/app/v8datamodel/ForceField.cpp
+  common/app/v8datamodel/GameSettings.cpp
+  common/app/v8datamodel/GeometryService.cpp
+  common/app/v8datamodel/GlobalSettings.cpp
+  common/app/v8datamodel/Gyro.cpp
+  common/app/v8datamodel/Hopper.cpp
+  common/app/v8datamodel/Lighting.cpp
+  common/app/v8datamodel/LocakBackpack.cpp
+  common/app/v8datamodel/Mouse.cpp
+  common/app/v8datamodel/Seat.cpp
+  common/app/v8datamodel/Selection.cpp
+  common/app/v8datamodel/Stats.cpp
+  common/app/v8datamodel/Teams.cpp
+  common/app/v8datamodel/TimerService.cpp
+  common/app/v8datamodel/ToolMouseCommand.cpp
+  common/app/v8datamodel/ToolsPart.cpp
+  common/app/v8datamodel/UserController.cpp
+  common/app/v8datamodel/Value.cpp
+  common/app/v8datamodel/Visit.cpp
+  common/app/v8datamodel/factoryregistration.cpp
+  common/app/v8tree/Service.cpp
 )
 set(OPENRBX_NETWORK_SOURCES
   common/network/Player.cpp
   common/network/Players.cpp
+  common/network/API.cpp
+  common/network/Client.cpp
+  common/network/NetworkSettings.cpp
+  common/network/Replicator.cpp
+  common/network/Server.cpp
 )
 
 # The Network project built these 21 objects into network.lib itself; only _CRT_SECURE_NO_WARNINGS differs.
@@ -301,6 +349,7 @@ add_engine_library(appdraw
 # --- WebService.dll target ---
 # The only objects compiled /GL, so the link ran /LTCG.
 set(OPENRBX_WEBSERVICE_SOURCES
+  WebService/ThumbnailGenerator.cpp
   WebService/WebService.cpp
   WebService/WebServiceMaps.cpp
   common/win/VersionInfo.cpp

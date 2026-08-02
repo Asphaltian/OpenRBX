@@ -6,6 +6,8 @@
 
 namespace RBX {
 
+extern char sSpecialShape[];
+
 // SIZE 0x154
 class SpecialShape : public Instance
 {

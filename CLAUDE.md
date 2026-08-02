@@ -34,6 +34,8 @@ Never guess a path, a name, an offset or an enum value. Each of these is recorde
 
 The LINES range table maps an address to the file it came from. Inline and template code is attributed to the header that defines it, so this is how to find a class's real header and how to tell whether a function belongs in the `.cpp` or inline in the `.h`.
 
+`reccmp-cvdump -m -seccontrib` maps any address to the object that contributed it. That is the only way to place a global whose module the symbols do not record: a namespace-scope variable reaches the PDB as an `S_PUB32` with no module, and only the contribution table says which translation unit defined it. Pair it with that module's `src =` and both the file and its casing are recovered.
+
 Jump tables settle enum values without guessing: read the byte index table and the jump table out of the image and the case-to-value mapping falls out.
 
 Prove layouts; do not assume them. `DECOMP_SIZE_ASSERT(T, size)` fails the build on a mismatch; assert a deliberately wrong size once to confirm the assert is live.
@@ -58,6 +60,14 @@ The colon is required on everything except `// SIZE`. reccmp silently ignores `/
 `// FUNCTION:` asserts a 100% match. Anything less is `// STUB:`.
 
 `FOLDED` marks siblings the linker merged onto one address. They share that address, are exempt from ascending order, and do not need the `STUB()` macro.
+
+## Class Names
+
+Every registered class carries a namespace-scope char array holding its name, and `Name::doDeclare<&sFoo>` turns it into the interned `Name`. 105 of them, each with a `callDoDeclare<&sFoo>` beside it that is a five-byte tail jump into `doDeclare`. Both templates take `const char*`: 48 arrays are `const char[]` and 46 are `char[]`, the mangling records which (`QBDB` against `PADA`), and one template accepts both through the qualification conversion.
+
+The array's own translation unit comes from the contribution table, the instantiation's from the `S_GPROC32`'s module, and the two are usually different objects: `factoryregistration.cpp` instantiates 27 whose arrays are spread over as many files. Getting that wrong shows up as a `/GS` cookie, because App is `/GS-` and the WebService project is not.
+
+`GlobalSettingsItem<T, &sName>` takes the array as its second parameter, not a pointer to the instance.
 
 ## Class Pattern
 

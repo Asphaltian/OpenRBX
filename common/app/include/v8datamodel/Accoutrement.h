@@ -6,6 +6,10 @@
 
 namespace RBX {
 
+extern const char sHat[];
+
+extern const char sAccoutrement[];
+
 // SIZE 0x1a0
 class Accoutrement : public Instance
 {

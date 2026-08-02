@@ -1,8 +1,17 @@
 #include "v8datamodel/Feature.h"
 
 #include "reflection/Property.h"
+#include "util/Name.h"
 
 namespace RBX {
+
+const char sVelocityMotor[] = "VelocityMotor";
+
+const char sHole[] = "Hole";
+
+const char sMotorFeature[] = "MotorFeature";
+
+const char sFeature[] = "Feature";
 
 using namespace Reflection;
 
@@ -78,3 +87,6 @@ void VelocityMotor::setCurrentAngle(float value)
 }
 
 } // namespace RBX
+
+template const RBX::Name& RBX::Name::doDeclare<RBX::sFeature>();
+template void RBX::Name::callDoDeclare<RBX::sFeature>();

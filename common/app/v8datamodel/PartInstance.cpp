@@ -5,6 +5,8 @@
 
 namespace RBX {
 
+char sPart[] = "Part";
+
 bool PartInstance::highlightSleepParts;
 bool PartInstance::highlightAwakeParts;
 bool PartInstance::showAnchoredParts;

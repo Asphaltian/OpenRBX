@@ -7,6 +7,8 @@
 
 namespace RBX {
 
+extern const char sTeam[];
+
 // SIZE 0x104
 class Team : public Instance
 {

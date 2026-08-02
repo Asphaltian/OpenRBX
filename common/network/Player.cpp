@@ -5,6 +5,8 @@
 namespace RBX {
 namespace Network {
 
+char sPlayer[] = "Player";
+
 static Reflection::PropDescriptor<Player, BrickColor> prop_teamColor;
 static Reflection::PropDescriptor<Player, bool> prop_neutral;
 

@@ -1,4 +1,4 @@
-#include "reflection/Signal.h"
+#include "reflection/signal.h"
 
 #include <cstddef>
 

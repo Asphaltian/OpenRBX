@@ -4,6 +4,10 @@
 
 namespace RBX {
 
+const char sSpawnerService[] = "SpawnerService";
+
+char sSpawnLocation[] = "SpawnLocation";
+
 static Reflection::PropDescriptor<SpawnLocation, BrickColor> prop_TeamColor;
 
 // FUNCTION: WEBSERVICE 0x100ff2b0

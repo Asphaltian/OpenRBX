@@ -1,8 +1,13 @@
 #include "v8datamodel/Tool.h"
 
 #include "reflection/Property.h"
+#include "util/Name.h"
+#include "v8datamodel/Mouse.h"
+#include "v8datamodel/ToolMouseCommand.h"
 
 namespace RBX {
+
+const char sTool[] = "Tool";
 
 static Reflection::PropDescriptor<Tool, Tool::ToolState> prop_BackendToolState;
 
@@ -22,3 +27,8 @@ void Tool::setBackendToolState(ToolState value)
 }
 
 } // namespace RBX
+
+template const RBX::Name& RBX::Name::doDeclare<RBX::sToolMouseCommand>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sMouse>();
+template void RBX::Name::callDoDeclare<RBX::sToolMouseCommand>();
+template void RBX::Name::callDoDeclare<RBX::sMouse>();

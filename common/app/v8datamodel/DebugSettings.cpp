@@ -8,6 +8,8 @@
 
 namespace RBX {
 
+const char sDebugSettings[] = "DebugSettings";
+
 using namespace Reflection;
 
 static PropDescriptor<DebugSettings, bool> prop_ValidatingDebug;

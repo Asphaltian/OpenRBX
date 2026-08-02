@@ -8,6 +8,8 @@
 namespace RBX {
 namespace Network {
 
+extern char sPlayer[];
+
 // SIZE 0x178
 class Player : public Instance
 {

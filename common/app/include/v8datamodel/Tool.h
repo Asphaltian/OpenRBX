@@ -6,6 +6,8 @@
 
 namespace RBX {
 
+extern const char sTool[];
+
 // SIZE 0x238
 class Tool : public Instance
 {

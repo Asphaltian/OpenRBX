@@ -1,8 +1,10 @@
-#include "v8datamodel/CustomMesh.h"
+#include "v8datamodel/custommesh.h"
 
 #include "reflection/Property.h"
 
 namespace RBX {
+
+char sSpecialShape[] = "SpecialMesh";
 
 static Reflection::PropDescriptor<SpecialShape, SpecialShape::MeshType> desc_meshType;
 

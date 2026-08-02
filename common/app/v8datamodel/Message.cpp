@@ -4,6 +4,10 @@
 
 namespace RBX {
 
+char sHint[] = "Hint";
+
+char sMessage[] = "Message";
+
 static Reflection::PropDescriptor<Message, std::string> desc_Text;
 
 // FUNCTION: WEBSERVICE 0x100eebb0

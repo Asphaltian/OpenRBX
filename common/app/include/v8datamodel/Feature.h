@@ -8,6 +8,14 @@
 
 namespace RBX {
 
+extern const char sVelocityMotor[];
+
+extern const char sHole[];
+
+extern const char sMotorFeature[];
+
+extern const char sFeature[];
+
 // SIZE 0x118
 class Feature : public Instance
 {

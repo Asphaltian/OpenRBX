@@ -14,6 +14,8 @@
 
 namespace RBX {
 
+extern char sPart[];
+
 using boost::shared_ptr;
 
 class World;

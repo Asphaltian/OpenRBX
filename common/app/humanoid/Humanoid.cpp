@@ -4,6 +4,8 @@
 
 namespace RBX {
 
+char sHumanoid[] = "Humanoid";
+
 using namespace Reflection;
 
 static PropDescriptor<Humanoid, float> propMaxHealth;

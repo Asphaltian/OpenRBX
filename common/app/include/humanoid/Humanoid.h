@@ -6,6 +6,8 @@
 
 namespace RBX {
 
+extern char sHumanoid[];
+
 // SIZE 0x1f0
 class Humanoid : public Instance
 {

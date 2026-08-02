@@ -4,6 +4,10 @@
 
 namespace RBX {
 
+const char sHat[] = "Hat";
+
+const char sAccoutrement[] = "Accoutrement";
+
 static Reflection::PropDescriptor<Accoutrement, Accoutrement::AccoutrementState> prop_BackendAccoutrementState;
 
 // FUNCTION: WEBSERVICE 0x100dcfb0

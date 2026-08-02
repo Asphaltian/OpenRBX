@@ -7,6 +7,8 @@
 
 namespace RBX {
 
+extern const char sDebugSettings[];
+
 // SIZE 0x100
 class DebugSettings : public GlobalSettingsItem<DebugSettings, sDebugSettings>
 {

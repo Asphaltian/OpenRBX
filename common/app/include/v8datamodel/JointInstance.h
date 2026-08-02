@@ -7,6 +7,24 @@
 
 namespace RBX {
 
+extern const char sAutoJoint[];
+
+extern const char sJointInstance[];
+
+extern const char sMotor[];
+
+extern const char sRotateV[];
+
+extern const char sRotateP[];
+
+extern const char sRotate[];
+
+extern const char sGlue[];
+
+extern const char sWeld[];
+
+extern const char sSnap[];
+
 // SIZE 0x11c
 class Motor : public Instance
 {

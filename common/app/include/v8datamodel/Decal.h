@@ -8,6 +8,10 @@
 
 namespace RBX {
 
+extern char sTexture[];
+
+extern char sDecal[];
+
 using G3D::Vector2;
 
 // SIZE 0x124
