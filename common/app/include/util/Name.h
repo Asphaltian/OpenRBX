@@ -479,7 +479,9 @@ private:
 	// clang-format on
 
 	int dictionaryIndex; // 0x00
-	std::string name;    // 0x04
+
+public:
+	std::string name; // 0x04
 };
 
 } // namespace RBX
