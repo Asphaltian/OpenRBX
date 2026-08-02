@@ -23,7 +23,8 @@ if (ENABLE_CLANG_TIDY)
 
   # boost 1.34's scoped_lock throws, and clang-tidy reports it as an error whatever /EHsc the
   # command line carries. The diagnostic is inside the vendored header, not our code.
-  set_source_files_properties(common/app/util/standardout.cpp PROPERTIES SKIP_LINTING ON)
+  set_source_files_properties(common/app/util/Name.cpp common/app/util/standardout.cpp
+                              PROPERTIES SKIP_LINTING ON)
 endif()
 
 math(EXPR bits "8 * ${CMAKE_SIZEOF_VOID_P}")
