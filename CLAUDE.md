@@ -306,6 +306,8 @@ Assigning a call's result to a local before comparing it changes the evaluation 
 
 Comparing two `bool`s is a byte compare. Writing one of them inline as a negation, `flag != !other`, promotes both to int and costs a `movzx`. Store the negation in its own `bool` first.
 
+Argument evaluation is right to left for operators too, so `(a * b) * c.inverse()` runs `c.inverse()` first where the original runs the left product first. Naming the left product in a local is what orders them: `RigidJoint::align` sat at 46 percent until it read `CoordinateFrame world = prim1->getCoordinateFrame() * coord1; return world * coord0.inverse();`. Naming the receiver has the same effect on scheduling, and is what took `isAligned` from 84: `Primitive* prim0 = getPrimitive(0);` ahead of the multiply hoists the member load above the argument pushes, where the inline call defers it to just before the call.
+
 A recursive helper and the loop it compiles to are not interchangeable in the source. MSVC turns tail recursion into a loop at the definition, so both spellings match there, but a caller inlines exactly one level of the recursion and none of the loop. `onPrimitivesChanged` and `findNextRelative` both had to be written recursively before `setParent` and `EdgeIterator::begin` would match.
 
 `x = a; if (cond) x = b;` and `x = cond ? b : a;` are not the same codegen. The if form folds into one load and a conditional reload; the ternary evaluates `a` into a scratch register first and copies it in the else branch, which is one instruction longer. Roblox wrote the ternary for the "pick the other primitive on this edge" idiom, so `heavyParent`, `findParent` and `findFirstChild` only reach 100% spelled that way.

@@ -69,8 +69,10 @@ public:
 	void setActive(bool value) { active = value; }
 
 private:
-	IJointOwner* jointOwner;     // 0x20
-	bool active;                 // 0x24
+	IJointOwner* jointOwner; // 0x20
+	bool active;             // 0x24
+
+protected:
 	CoordinateFrame jointCoord0; // 0x28
 	CoordinateFrame jointCoord1; // 0x58
 };
