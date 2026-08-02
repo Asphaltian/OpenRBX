@@ -132,7 +132,7 @@ bool Extents::fuzzyContains(const Vector3& point, float epsilon) const
 		   point.x <= high.x + epsilon && point.y <= high.y + epsilon && point.z <= epsilon + high.z;
 }
 
-// STUB: WEBSERVICE 0x100a5eb0
+// FUNCTION: WEBSERVICE 0x100a5eb0
 const Extents& Extents::zero()
 {
 	static const Extents e(Vector3::zero(), Vector3::zero());
@@ -140,7 +140,7 @@ const Extents& Extents::zero()
 	return e;
 }
 
-// STUB: WEBSERVICE 0x100a5f70
+// FUNCTION: WEBSERVICE 0x100a5f70
 const Extents& Extents::negativeInfiniteExtents()
 {
 	static const Extents e;

@@ -3,7 +3,7 @@
 namespace RBX {
 namespace Reflection {
 
-// STUB: WEBSERVICE 0x10094250
+// FUNCTION: WEBSERVICE 0x10094250
 std::vector<const EnumDescriptor*>& EnumDescriptor::allEnums()
 {
 	static std::vector<const EnumDescriptor*> s;

@@ -140,6 +140,7 @@ address,type,name
 0x102fd320,global,desc_textureId
 0x102f9338,global,desc_unjoin
 0x102fd394,global,desc_vertColor
+0x10301478,global,dotVersion
 0x102472c8,global,dummynode_
 0x102c8b9c,global,error
 0x10301b18,global,errorUploader

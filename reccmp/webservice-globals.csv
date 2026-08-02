@@ -1879,6 +1879,7 @@ address,type,symbol
 0x102f8e10,global,?tag_hash@@3ABVName@RBX@@B
 0x102f8e18,global,s___RBX::BrickColor::BrickMap::singleton
 0x102f8e6c,global,type___RBX::Reflection::Type::singleton<RBX::Reflection::PropertyDescriptor
+0x102f8e80,global,s___RBX::Reflection::EnumDescriptor::allEnums
 0x102f8e98,global,?foo@?1??classDescriptor@?$Described@VSky@RBX@@$1?sSky@2@3PADAV?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@34@XZ@4V534@A
 0x102f8f20,global,??_B?1??classDescriptor@?$Described@VSky@RBX@@$1?sSky@2@3PADAV?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102f8f28,global,?prop_CelestialBodiesShown@Sky@RBX@@2V?$BoundProp@_N$00@Reflection@2@A
@@ -2631,6 +2632,7 @@ address,type,symbol
 0x103013cc,global,?flagInitRoblox@@3JA
 0x10301494,global,?_AtlModule@@3VCDllMainOverride@@A
 0x103014c0,global,?theExtension@@3VCRbxIsapiExtension@@A
+0x103017e8,global,?jobs@CWebService@Roblox@@0V?$map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UJob@CWebService@Roblox@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UJob@CWebService@Roblox@@@std@@@2@@std@@A
 0x103017f4,global,?sync@CWebService@Roblox@@0Vmutex@boost@@A
 0x103017fc,global,?m_bInitFailed@CAtlBaseModule@ATL@@2_NA
 0x1030181c,global,??_B?1??singleton@ContentProvider@RBX@@SAAAV12@XZ@51

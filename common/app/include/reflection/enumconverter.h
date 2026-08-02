@@ -11,6 +11,9 @@
 namespace RBX {
 namespace Reflection {
 
+// SYNTHETIC: WEBSERVICE 0x10222ea0
+// `RBX::Reflection::EnumDescriptor::allEnums'::`2'::`dynamic atexit destructor for 's''
+
 // SYNTHETIC: WEBSERVICE 0x10094370
 // RBX::Reflection::EnumDescriptor::`scalar deleting destructor'
 

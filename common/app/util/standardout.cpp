@@ -52,7 +52,7 @@ StandardOut::~StandardOut()
 {
 }
 
-// STUB: WEBSERVICE 0x100320e0
+// FUNCTION: WEBSERVICE 0x100320e0
 boost::shared_ptr<StandardOut> StandardOut::singleton()
 {
 	static boost::shared_ptr<StandardOut> standardOut(new StandardOut());

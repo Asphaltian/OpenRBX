@@ -148,7 +148,7 @@ Vector3 objectToUvw(const Vector3& object, NormalId normalId)
 	return Vector3::unitX();
 }
 
-// STUB: WEBSERVICE 0x10103de0
+// FUNCTION: WEBSERVICE 0x10103de0
 const Vector3& normalIdToVector3(NormalId normalId)
 {
 	switch (normalId) {
@@ -191,7 +191,7 @@ Matrix3 normalIdToMatrix3Internal(NormalId normalId)
 	return Matrix3(x.x, y.x, z.x, x.y, y.y, z.y, x.z, y.z, z.z);
 }
 
-// STUB: WEBSERVICE 0x10104070
+// FUNCTION: WEBSERVICE 0x10104070
 const Matrix3& normalIdToMatrix3(NormalId normalId)
 {
 	switch (normalId) {

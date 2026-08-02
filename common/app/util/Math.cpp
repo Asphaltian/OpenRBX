@@ -332,7 +332,7 @@ void Math::setHeadingElevation(CoordinateFrame& coordinateFrame, float heading, 
 	coordinateFrame.lookAt(coordinateFrame.translation + look.direction());
 }
 
-// STUB: WEBSERVICE 0x100df710
+// FUNCTION: WEBSERVICE 0x100df710
 void Math::rotateMatrixAboutY90(Matrix3& matrix, int count)
 {
 	static const Matrix3 y90(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f);
@@ -342,7 +342,7 @@ void Math::rotateMatrixAboutY90(Matrix3& matrix, int count)
 	}
 }
 
-// STUB: WEBSERVICE 0x100df7d0
+// FUNCTION: WEBSERVICE 0x100df7d0
 const Matrix3& Math::matrixRotateY()
 {
 	static const Matrix3 m(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f);
@@ -350,7 +350,7 @@ const Matrix3& Math::matrixRotateY()
 	return m;
 }
 
-// STUB: WEBSERVICE 0x100df860
+// FUNCTION: WEBSERVICE 0x100df860
 const Matrix3& Math::matrixTiltZ()
 {
 	static const Matrix3 m(0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
