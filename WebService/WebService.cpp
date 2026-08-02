@@ -445,7 +445,7 @@ HRESULT __stdcall CWebService::GetStandardOutMessages(int lastId, StandardOutMes
 {
 	boost::mutex::scoped_lock lock(standardOutLog->messagesMutex);
 
-	while (lastId < (int) standardOutLog->messages.size()) {
+	while (standardOutLog->messages.size() > lastId) {
 		standardOutLog->messages.pop();
 	}
 
