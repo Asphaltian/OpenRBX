@@ -19,6 +19,10 @@ class Cofm
 public:
 	Cofm(Body* body);
 
+	bool getIsDirty() const { return dirty; }
+
+	void makeDirty() { dirty = true; }
+
 	const Vector3& getCofmInBody();
 	float getMass();
 	const Matrix3& getMoment();

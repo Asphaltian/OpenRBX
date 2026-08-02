@@ -7,6 +7,7 @@
 #include "util/Velocity.h"
 #include "v8kernel/Cofm.h"
 #include "v8kernel/KernelIndex.h"
+#include "v8kernel/SimBody.h"
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Matrix3.h>
@@ -68,6 +69,8 @@ public:
 
 	void advanceStateIndex();
 
+	void makeCofmDirty();
+
 	Vector3 getBranchCofmPos() const;
 
 	void setParent(Body* value);
@@ -76,8 +79,8 @@ public:
 
 	void setCoordinateFrame(const CoordinateFrame& value);
 	void setVelocity(const Velocity& velocity);
-	void setMass(float mass);
-	void setMoment(const Matrix3& moment);
+	void setMass(float value);
+	void setMoment(const Matrix3& value);
 
 private:
 	friend class Kernel;
@@ -92,7 +95,9 @@ private:
 	mutable int index;                          // 0x0c
 	IndexArray<Body, &Body::getIndex> children; // 0x10
 	Cofm* cofm;                                 // 0x1c
-	undefined m_unk0x20[0x80 - 0x20];           // 0x20
+	SimBody* simBody;                           // 0x20
+	undefined m_unk0x24[0x5c - 0x24];           // 0x24
+	Matrix3 moment;                             // 0x5c
 	float mass;                                 // 0x80
 	int stateIndex;                             // 0x84
 	PV pv;                                      // 0x88

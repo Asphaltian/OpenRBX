@@ -4853,3 +4853,4 @@ address,type,symbol
 0x10300ec4,global,?_AtlBaseModule@ATL@@3VCAtlBaseModule@1@A
 0x10301800,global,?_pPerfRegFunc@ATL@@3P6AJPAUHINSTANCE__@@@ZA
 0x10301804,global,?_pPerfUnRegFunc@ATL@@3P6AJXZA
+0x102e54c0,global,p___RBX::Body::getNextStateIndex

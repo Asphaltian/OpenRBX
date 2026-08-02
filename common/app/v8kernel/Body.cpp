@@ -2,9 +2,9 @@
 
 #include "decomp.h"
 
-namespace RBX {
+#include <cstddef>
 
-static int p = 1;
+namespace RBX {
 
 // STUB: WEBSERVICE 0x1009ad20
 void Body::updatePV() const
@@ -12,9 +12,11 @@ void Body::updatePV() const
 	STUB(0x1009ad20);
 }
 
-// STUB: WEBSERVICE 0x101049f0
+// FUNCTION: WEBSERVICE 0x101049f0
 int Body::getNextStateIndex()
 {
+	static int p = 1;
+
 	p = p + 1;
 
 	if (p == 0x7fffffff) {
@@ -24,10 +26,32 @@ int Body::getNextStateIndex()
 	return p;
 }
 
-// STUB: WEBSERVICE 0x10104a10
+// FUNCTION: WEBSERVICE 0x10104a10
 void Body::advanceStateIndex()
 {
 	stateIndex = getNextStateIndex();
+}
+
+// FUNCTION: WEBSERVICE 0x10104a40
+void Body::makeCofmDirty()
+{
+	if (cofm == NULL || !cofm->getIsDirty()) {
+
+		if (parent != NULL) {
+
+			parent->makeCofmDirty();
+		}
+		else {
+
+			if (simBody != NULL) {
+				simBody->makeDirty();
+			}
+		}
+
+		if (cofm != NULL) {
+			cofm->makeDirty();
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x10104be0
@@ -36,16 +60,24 @@ void Body::setVelocity(const Velocity& velocity)
 	STUB(0x10104be0);
 }
 
-// STUB: WEBSERVICE 0x10104c60
-void Body::setMass(float mass)
+// FUNCTION: WEBSERVICE 0x10104c60
+void Body::setMass(float value)
 {
-	STUB(0x10104c60);
+	if (mass != value) {
+		makeCofmDirty();
+
+		mass = value;
+	}
 }
 
-// STUB: WEBSERVICE 0x10104cc0
-void Body::setMoment(const Matrix3& moment)
+// FUNCTION: WEBSERVICE 0x10104cc0
+void Body::setMoment(const Matrix3& value)
 {
-	STUB(0x10104cc0);
+	if (moment != value) {
+		makeCofmDirty();
+
+		moment = value;
+	}
 }
 
 // STUB: WEBSERVICE 0x10104db0
