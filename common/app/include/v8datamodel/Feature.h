@@ -86,6 +86,11 @@ class MotorFeature : public DescribedCreatable<MotorFeature, Feature, sMotorFeat
 
 DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 
+// clang-format off
+// STUB: WEBSERVICE 0x100e4410
+// RBX::Feature::~Feature
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_FEATURE_H

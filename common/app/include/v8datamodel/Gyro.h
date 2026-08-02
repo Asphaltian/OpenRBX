@@ -80,6 +80,11 @@ private:
 
 DECOMP_SIZE_ASSERT(Rocket, 0x154)
 
+// clang-format off
+// STUB: WEBSERVICE 0x100ea340
+// RBX::BodyMover::~BodyMover
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_GYRO_H

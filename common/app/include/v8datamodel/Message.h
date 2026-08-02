@@ -32,6 +32,11 @@ class Hint : public DescribedCreatable<Hint, Message, sHint>
 
 DECOMP_SIZE_ASSERT(Hint, 0x124)
 
+// clang-format off
+// STUB: WEBSERVICE 0x1008c790
+// RBX::Message::~Message
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_MESSAGE_H

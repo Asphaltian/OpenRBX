@@ -25,6 +25,11 @@ class LocalScript : public DescribedCreatable<LocalScript, Script, sLocalScript>
 
 DECOMP_SIZE_ASSERT(LocalScript, 0x128)
 
+// clang-format off
+// STUB: WEBSERVICE 0x10068bf0
+// RBX::Script::~Script
+// clang-format on
+
 } // namespace RBX
 
 #endif // SCRIPT_SCRIPT_H

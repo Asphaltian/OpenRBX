@@ -42,6 +42,11 @@ private:
 
 DECOMP_SIZE_ASSERT(Texture, 0x12c)
 
+// clang-format off
+// STUB: WEBSERVICE 0x100ffa30
+// RBX::Decal::~Decal
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_DECAL_H

@@ -100,6 +100,13 @@ class Weld : public DescribedCreatable<Weld, AutoJoint, sWeld>
 
 DECOMP_SIZE_ASSERT(Weld, 0x11c)
 
+// clang-format off
+// STUB: WEBSERVICE 0x100d7df0
+// RBX::JointInstance::~JointInstance
+// STUB: WEBSERVICE 0x100d8110
+// RBX::AutoJoint::~AutoJoint
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_JOINTINSTANCE_H

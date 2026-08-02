@@ -56,6 +56,11 @@ private:
 
 DECOMP_SIZE_ASSERT(Shirt, 0x124)
 
+// clang-format off
+// STUB: WEBSERVICE 0x100e0930
+// RBX::ShirtGraphic::~ShirtGraphic
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_CHARACTERAPPEARANCE_H
