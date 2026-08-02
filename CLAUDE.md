@@ -55,6 +55,8 @@ Functions in a compilation unit are ordered by ascending address.
 // SIZE 0xf8                               class size assertion
 ```
 
+Namerefs obey the ascending order too, and getting it wrong is silent: Team's `0x100be5xx` markers placed above `Instance`'s own lower-addressed annotations dropped every annotation after them in that header and took forty functions with it, showing up as `raisePropertyChanged` losing its match rather than as an error.
+
 The colon is required on everything except `// SIZE`. reccmp silently ignores `// VTABLE WEBSERVICE 0x...`, and the vtable stores inside constructors then compare as `<OFFSET>` instead of the vftable symbol, costing five to ten percent.
 
 `// FUNCTION:` asserts a 100% match. Anything less is `// STUB:`.
@@ -80,6 +82,12 @@ The property chain hangs off the same root: `Descriptor` (8) to `MemberDescripto
 Writing that layout is blocked on the descriptors' construction, not on the layout. Both classes hold reference members, so neither can be default constructed, and every `static PropDescriptor<Class, T> prop_Name;` in the tree today is default constructed against the placeholder. The real constructors take the owning `ClassDescriptor`, so that has to come first.
 
 `ClassDescriptor` is 0x88 and is four bases before it is anything else: `Descriptor` at 0 and a `MemberDescriptorContainer` at 8, 44 and 80 for properties, signals and functions, each 0x24 of two vectors and a base pointer. `derivedClasses` follows at 0x74 and `base` at 0x84. It lives in `include/reflection/object.h` beside `reflection/reflection_object.cpp`, and its size assertion is what proves all four bases at once. Its destructor is compiler-generated but has a standalone body in the image, so it is declared and defined out of line rather than left implicit; inline, it folds into the scalar deleting destructor and costs that function nine percent.
+
+The chain above every registered class is `X` to `DescribedCreatable<X, Base, sX>` to `Described<X, sX, FactoryProduct<X, Base, sX>>` to `FactoryProduct<X, Base, sX>` to `Base`, and none of the three templates adds a byte. They live in `include/util/object.h`, `include/reflection/reflection.h` and `include/v8tree/instance.h`, and each class's copies are emitted from its own `.cpp`, so `Team.obj` holds all eight of Team's. Explicit instantiation of the derived class does not reach the bases; each of the three has to be named. `getClassName` is `Name::declare<sName>()`, which is `boost::call_once(&callDoDeclare<name>, flag)` followed by `doDeclare<name>()`. `classDescriptor` is a magic static `ClassDescriptor d(Base::classDescriptor(), sName)`. 36 of the 71 classes have a single base and are writable as skeletons; the other 35 carry extra or virtual bases.
+
+Name the non-type parameter `sName`, not `name`. MSVC 8 rejects forwarding it into `Name::declare` with "expected compile-time constant expression" when an inherited member of the same name is visible, and `Descriptor::name` is visible through every one of these.
+
+What is left on each of those eight is two compiler statics: `flag` inside `Name::declare` and `d` inside `classDescriptor`. Both PDBs carry `?flag@?1???$declare@...` verbatim, so reccmp does pair them by symbol if `gen_globals.py` stops skipping template-scoped local statics, but that pairing costs more than it gives: datacmp drops from 682 named variables to 578 and the accuracy from 99.92 to 98.34.
 
 `rootDescriptor` is written and unannotated: it is inline in the header and nothing calls it until `Described<T, &sName, Base>::classDescriptor` does, which is the next 98 functions and needs `DescribedBase` (12 bytes, `const ClassDescriptor& descriptor` at 8) first.
 
