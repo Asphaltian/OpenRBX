@@ -2,6 +2,7 @@
 #define V8KERNEL_POINT_H
 
 #include "decomp.h"
+#include "util/IndexArray.h"
 #include "v8kernel/KernelIndex.h"
 
 #include <G3D/Vector3.h>
@@ -9,15 +10,14 @@
 namespace RBX {
 
 class Body;
+class Kernel;
+class KernelData;
 
 using G3D::Vector3;
 
 // SIZE 0x34
 class __declspec(novtable) Point : public KernelIndex
 {
-public:
-	int& getKernelIndex() const { return kernelIndex; }
-
 protected:
 	virtual ~Point(); // vtable+0x00
 
@@ -27,6 +27,11 @@ protected:
 	Vector3 force;    // 0x28
 
 private:
+	friend class Kernel;
+	friend class KernelData;
+
+	int& getKernelIndex() const { return kernelIndex; }
+
 	int numOwners; // 0x08
 };
 

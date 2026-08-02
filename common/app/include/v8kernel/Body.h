@@ -14,6 +14,8 @@
 
 namespace RBX {
 
+class Kernel;
+class KernelData;
 class Link;
 
 using G3D::CoordinateFrame;
@@ -32,8 +34,6 @@ public:
 	Body* getParent() const { return parent; }
 
 	Body* getRoot() { return root; }
-
-	int& getKernelIndex() const { return kernelIndex; }
 
 	float getMass() const { return mass; }
 
@@ -80,7 +80,12 @@ public:
 	void setMoment(const Matrix3& moment);
 
 private:
+	friend class Kernel;
+	friend class KernelData;
+
 	int& getIndex() const { return index; }
+
+	int& getKernelIndex() const { return kernelIndex; }
 
 	Body* root;                                 // 0x04
 	Body* parent;                               // 0x08

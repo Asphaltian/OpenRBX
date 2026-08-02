@@ -133,7 +133,7 @@ Everything it needs was recorded rather than guessed. `Body::getBranchMass` is `
 
 The index those arrays keep is not the one `Body::children` uses. `RBX::KernelIndex` is a four byte base holding `kernelIndex`, which `Body` inherits at offset 0, `Point` and `Connector` at 4 under their vfptr, and each class exposes it as `getKernelIndex`, so the arrays are `IndexArray<RBX::Body,&RBX::Body::getKernelIndex>` and the two `{RBX::Point::getKernelIndex,0}` member pointer forms. `insertBody` writing to `body+0` is the giveaway. `kernelindex.h`, `kerneldata.h`, `point.h` and `connector.h` are all in the PDB's string table, so none of the four headers had to be placed by guess.
 
-The type records mark every `getKernelIndex` private, and it is public here. Private needs a friend declaration in every translation unit that names one of `KernelData`'s member types, which spreads as far as `Assembly2.cpp`, and the accessor is inline and never reaches the image, so the access changes no byte of the output.
+`realTimeConnectors` at 0x14 is a plain `G3D::Array<RBX::Connector *>`, not an `IndexArray`, and reading the type record rather than assuming is what keeps `getKernelIndex` private. Naming an `IndexArray` over a private accessor inside `Kernel` makes MSVC 8 recheck the template argument's access in every translation unit that includes `kernel.h`, which reaches `World.cpp` and `Assembly2.cpp` and cannot be answered with friend declarations. With the member typed correctly only `KernelData` and `Kernel` name those accessors, and one `friend class` each is enough.
 
 ## Constants
 

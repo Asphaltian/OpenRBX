@@ -2,9 +2,13 @@
 #define V8KERNEL_CONNECTOR_H
 
 #include "decomp.h"
+#include "util/IndexArray.h"
 #include "v8kernel/KernelIndex.h"
 
 namespace RBX {
+
+class Kernel;
+class KernelData;
 
 // SIZE 0x08
 class __declspec(novtable) Connector : public KernelIndex
@@ -15,6 +19,10 @@ public:
 	virtual bool canThrottle();                     // vtable+0x08
 	virtual bool getBroken();                       // vtable+0x0c
 	virtual float potentialEnergy();                // vtable+0x10
+
+private:
+	friend class Kernel;
+	friend class KernelData;
 
 	int& getKernelIndex() const { return kernelIndex; }
 };
