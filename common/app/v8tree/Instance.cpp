@@ -10,10 +10,6 @@ const char sInstance[] = "Instance";
 
 Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged;
 
-Instance::Instance() : parent(0), archivable(true)
-{
-}
-
 Instance::~Instance()
 {
 }
@@ -112,6 +108,11 @@ void Instance::setName(const std::string& value)
 void Instance::predelete()
 {
 	STUB(0x1004e0f0);
+}
+
+// STUB: WEBSERVICE 0x1004eb10
+Instance::Instance() : parent(0), archivable(true)
+{
 }
 
 } // namespace RBX
