@@ -2,7 +2,7 @@
 
 namespace RBX {
 
-// STUB: WEBSERVICE 0x1011ced0
+// FUNCTION: WEBSERVICE 0x1011ced0
 Rect Rect::positionChild(const Rect& child, Location xLocation, Location yLocation) const
 {
 	float x = 0.0f;
@@ -35,7 +35,7 @@ Rect Rect::positionChild(const Rect& child, Location xLocation, Location yLocati
 		break;
 	}
 
-	return Rect(x, y, x + width, y + height);
+	return fromLowSize(Vector2(x, y), Vector2(width, height));
 }
 
 } // namespace RBX

@@ -24,7 +24,10 @@ public:
 	Vector2 high; // 0x08
 
 	Rect() {}
+	Rect(const Vector2& low, const Vector2& high) : low(low), high(high) {}
 	Rect(float lowX, float lowY, float highX, float highY) : low(lowX, lowY), high(highX, highY) {}
+
+	static Rect fromLowSize(const Vector2& low, const Vector2& size) { return Rect(low, low + size); }
 
 	Rect positionChild(const Rect& child, Location xLocation, Location yLocation) const;
 };

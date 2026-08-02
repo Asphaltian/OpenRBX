@@ -123,6 +123,10 @@ Three spellings decided it and each is general. `getWorld` reads `currentStage` 
 
 Everything it needs was recorded rather than guessed. `Body::getBranchMass` is `cofm != NULL ? cofm->getMass() : mass`, which is why the disassembly inlines a call to `Cofm::updateIfDirty` twice per child; `children` is `RBX::IndexArray<RBX::Body,&RBX::Body::getIndex>` at 0x10 over a `G3D::Array<Body*>`, and `include/util/indexarray.h` is in the PDB's string table even though no module's line info mentions it; `cofm` follows at 0x1c. The rest of `Body`'s layout is in the type records too: `root` at 4, `index` at 0xc, `simBody` at 0x20, `canThrottle` at 0x24, `link` at 0x28, `meInParent` at 0x2c and `moment` at 0x5c.
 
+## Rect
+
+`Rect.obj` holds one function and `util/Rect.cpp` matches it, so the object is done. `positionChild` builds its result with `fromLowSize(Vector2(x, y), Vector2(width, height))`, which the type records carry as a static beside a `Rect(const Vector2&, const Vector2&)` constructor. The four float constructor compiles the same arithmetic in the wrong order: it stores `low` with a non-popping `fst` and adds afterwards, where the original computes both sums and then stores all four, which is the rule that building a return value through a constructor evaluates every argument before storing anything. The two switches were already right, and each is a real `switch`, lowered as descending `sub eax, N / jz` over 2, 3, 4 for the x locations and 0, 1, 4 for the y.
+
 ## Constants
 
 `v8kernel/Constants.cpp` is complete, all twelve functions. `getJointK` sorts the size, clamps it with `sorted.max(Vector3(1.0f, 1.0f, 1.0f))` and scales `getJointKMultiplier` by 960000; `getKmsMaxJointForce` rounds both stud counts with `G3D::iRound`, clamps each to at least 1, and indexes `MAX_LEGO_JOINT_FORCES_MEASURED`, seven measured forces ending 4.681, by the larger of the two.
