@@ -25,7 +25,9 @@ public:
 	virtual void onEdgeRemoving(Edge* edge);          // vtable+0x14
 	virtual int getMetric(MetricType metricType) = 0; // vtable+0x18
 
-protected:
+	World* getWorld() { return world; }
+
+private:
 	World* world; // 0x0c
 };
 

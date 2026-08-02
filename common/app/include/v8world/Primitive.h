@@ -77,7 +77,7 @@ public:
 		}
 	}
 
-	Primitive* getPrimitive(int index) const { return index == 0 ? prim0 : prim1; }
+	Primitive* getPrimitive(int index) const { return (&prim0)[index]; }
 
 	bool getInEdgeList() const { return inEdgeList; }
 	void setInEdgeList(bool value) { inEdgeList = value; }

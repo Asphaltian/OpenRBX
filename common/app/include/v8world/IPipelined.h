@@ -3,10 +3,14 @@
 
 #include "decomp.h"
 #include "v8kernel/IStage.h"
+#include "v8world/IWorldStage.h"
+
+#include <cstddef>
 
 namespace RBX {
 
 class Kernel;
+class World;
 
 // SIZE 0x08
 class __declspec(novtable) IPipelined
@@ -27,6 +31,8 @@ public:
 
 	Kernel* getKernel();
 
+	World* getWorld();
+
 	bool downstreamOfStage(IStage* stage);
 
 	virtual void putInKernel(Kernel* kernel); // vtable+0x04
@@ -37,6 +43,24 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(IPipelined, 0x08)
+
+inline World* IPipelined::getWorld()
+{
+	if (currentStage == NULL) {
+		return NULL;
+	}
+
+	IStage* stage;
+
+	if (currentStage->getStageType() == IStage::KERNEL_STAGE) {
+		stage = currentStage->getUpstream();
+	}
+	else {
+		stage = currentStage;
+	}
+
+	return static_cast<IWorldStage*>(stage)->getWorld();
+}
 
 // FUNCTION: WEBSERVICE 0x10118120
 inline bool IPipelined::downstreamOfStage(IStage* stage)

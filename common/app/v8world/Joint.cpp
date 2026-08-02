@@ -2,13 +2,14 @@
 
 #include "decomp.h"
 #include "v8world/Primitive.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
-// STUB: WEBSERVICE 0x100d7b80
+// FUNCTION: WEBSERVICE 0x100d7b80
 CoordinateFrame Joint::align(Primitive* prim0, Primitive* prim1)
 {
-	return prim1->getCoordinateFrame();
+	return CoordinateFrame();
 }
 
 // FUNCTION: WEBSERVICE 0x101019b0 FOLDED
@@ -28,10 +29,23 @@ void Joint::setJointOwner(IJointOwner* value)
 	jointOwner = value;
 }
 
-// STUB: WEBSERVICE 0x1011eac0
+// FUNCTION: WEBSERVICE 0x1011eac0
 void Joint::setPrimitive(int index, Primitive* primitive)
 {
-	STUB(0x1011eac0);
+	if (primitive != getPrimitive(index)) {
+
+		World* world = getWorld();
+
+		if (world != NULL && getPrimitive(index) != NULL) {
+			world->onJointPrimitiveNulling(this, getPrimitive(index));
+		}
+
+		Edge::setPrimitive(index, primitive);
+
+		if (world != NULL && primitive != NULL) {
+			world->onJointPrimitiveSet(this, primitive);
+		}
+	}
 }
 
 } // namespace RBX

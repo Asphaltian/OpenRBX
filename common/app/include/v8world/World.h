@@ -9,6 +9,7 @@ namespace RBX {
 class Assembly;
 class ContactManager;
 class Joint;
+class MotorJoint;
 class JointStage;
 class Kernel;
 class Primitive;
@@ -26,6 +27,8 @@ public:
 	void onPrimitiveAddedAnchor(Primitive* primitive);
 	void onPrimitiveRemovedAnchor(Primitive* primitive);
 	void onPrimitiveCanCollideChanged(Primitive* primitive);
+
+	void onMotorAngleChanged(MotorJoint* motorJoint);
 
 	void onAssemblyExtentsChanged(Assembly* assembly);
 

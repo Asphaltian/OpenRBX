@@ -111,8 +111,14 @@ void World::onPrimitiveRemovedAnchor(Primitive* primitive)
 	STUB(0x100cf270);
 }
 
-// STUB: WEBSERVICE 0x100cf2b0
+// STUB: WEBSERVICE 0x100cf2b0 FOLDED
 void World::onPrimitiveCanCollideChanged(Primitive* primitive)
+{
+	STUB(0x100cf2b0);
+}
+
+// STUB: WEBSERVICE 0x100cf2b0 FOLDED
+void World::onMotorAngleChanged(MotorJoint* motorJoint)
 {
 	STUB(0x100cf2b0);
 }

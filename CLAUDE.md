@@ -107,6 +107,16 @@ Two things that looked like the answer were not. An inlined callee also gives fo
 
 An inlined callee does produce the original's frame, its interleaved call and copy and all 19 calls, because the callee's temporaries are allocated once and every expansion shares them. Reaching it costs `__forceinline`, since MSVC will not inline nine arguments on its own, and then `#pragma inline_depth(1)`, since inlining the callee makes it inline `getCorner` too, where the original keeps it out of line; `DECOMP_NOINLINE` on `getCorner` instead costs `express`, `toWorldSpace` and `containedByFrustum` their matches, because the original does inline it into those three. Three compiler directives to reconstruct one function is not evidence, so the file carries the plain switch and the marker stays `// STUB:`.
 
+## Joints
+
+`v8world/Joint.cpp`, `MotorJoint.cpp` and `RigidJoint.cpp` are complete, and so are their headers. What unlocked the first two is `IPipelined::getWorld`, which the type records name along with `IWorldStage::getWorld` and `RevoluteLink::setJointAngle`, so none of the three had to be invented; a byte search for `call edx` followed by `cmp eax, 8` found the six sites that inline it and put it on `IPipelined` rather than `Joint`, since two of them are `BallBallContact` and `BallBlockContact::stepContact`.
+
+Three spellings decided it and each is general. `getWorld` reads `currentStage` three times rather than naming it, so the condition has to test the member and the local has to be assigned in both arms of an if/else: naming it first keeps it in a callee saved register across the virtual call where the original reloads it, which is worth 15 percent to every caller. `Edge::getPrimitive` is `(&prim0)[index]`, not `index == 0 ? prim0 : prim1`, which only shows up once a caller passes a variable index and wants `[esi+ebx*4+0xc]`. And `MotorJoint::setCurrentAngle` compares `currentAngle != value`, not the other way round: the original loads `value` into st(0) and compares against the member in memory with `fcom`, where the reversed spelling loads both and needs `fucom`.
+
+`MotorJoint::resetLink` picks its two coordinate frames with a pair of ternaries in one call, `link->reset(index == 0 ? jointCoord0 : jointCoord1, index == 1 ? jointCoord0 : jointCoord1)`. A `switch` compiles the dispatch as descending `sub eax, N / je` where the original compares against 1 and then 0, and an if/else gets the compares right but duplicates the argument pushes the original shares. Arguments evaluate right to left, so the second one carries the `== 1` test that the original performs first.
+
+`World::onMotorAngleChanged` folds onto `onPrimitiveCanCollideChanged` at 0x100cf2b0, and `tools/check_folded.py` requires every annotation on an address to agree, so adding the sibling means adding `FOLDED` to the one already there.
+
 ## Constants
 
 `v8kernel/Constants.cpp` is complete, all twelve functions. `getJointK` sorts the size, clamps it with `sorted.max(Vector3(1.0f, 1.0f, 1.0f))` and scales `getJointKMultiplier` by 960000; `getKmsMaxJointForce` rounds both stud counts with `G3D::iRound`, clamps each to at least 1, and indexes `MAX_LEGO_JOINT_FORCES_MEASURED`, seven measured forces ending 4.681, by the larger of the two.
