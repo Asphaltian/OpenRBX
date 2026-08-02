@@ -1,6 +1,6 @@
 #include "v8datamodel/DebugSettings.h"
 
-#include "reflection/Property.h"
+#include "reflection/property.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Workspace.h"

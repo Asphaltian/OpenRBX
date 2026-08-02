@@ -2,8 +2,8 @@
 #define V8TREE_INSTANCE_H
 
 #include "decomp.h"
-#include "reflection/Property.h"
 #include "reflection/Reflection.h"
+#include "reflection/property.h"
 #include "reflection/signal.h"
 #include "util/Association.h"
 #include "util/Events.h"

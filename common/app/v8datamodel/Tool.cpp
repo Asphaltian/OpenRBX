@@ -1,6 +1,6 @@
 #include "v8datamodel/Tool.h"
 
-#include "reflection/Property.h"
+#include "reflection/property.h"
 #include "util/Name.h"
 #include "v8datamodel/Mouse.h"
 #include "v8datamodel/ToolMouseCommand.h"

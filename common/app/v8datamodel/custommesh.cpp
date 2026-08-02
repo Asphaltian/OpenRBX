@@ -1,6 +1,6 @@
 #include "v8datamodel/custommesh.h"
 
-#include "reflection/Property.h"
+#include "reflection/property.h"
 
 namespace RBX {
 

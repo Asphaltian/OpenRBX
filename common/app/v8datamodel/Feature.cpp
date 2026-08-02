@@ -1,6 +1,6 @@
 #include "v8datamodel/Feature.h"
 
-#include "reflection/Property.h"
+#include "reflection/property.h"
 #include "util/Name.h"
 
 namespace RBX {

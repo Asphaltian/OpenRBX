@@ -2,7 +2,7 @@
 #define REFLECTION_SIGNAL_H
 
 #include "decomp.h"
-#include "reflection/Property.h"
+#include "reflection/property.h"
 
 namespace RBX {
 namespace Reflection {

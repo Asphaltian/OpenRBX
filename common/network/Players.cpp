@@ -1,6 +1,6 @@
 #include "network/Players.h"
 
-#include "reflection/Property.h"
+#include "reflection/property.h"
 
 namespace RBX {
 namespace Network {
