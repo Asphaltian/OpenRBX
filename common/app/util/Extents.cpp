@@ -55,47 +55,49 @@ Vector3 Extents::getCorner(int index) const
 	return Vector3(corners[index / 4].x, corners[index / 2 % 2].y, corners[index % 2].z);
 }
 
-// STUB: WEBSERVICE 0x100a5ab0
+// FUNCTION: WEBSERVICE 0x100a5ab0
 void Extents::getFaceCorners(NormalId normalId, Vector3& c0, Vector3& c1, Vector3& c2, Vector3& c3) const
 {
 	switch (normalId) {
 	case NORM_X:
-		c0 = getCorner(4);
-		c1 = getCorner(6);
-		c2 = getCorner(7);
-		c3 = getCorner(5);
-		break;
+		goto x;
 	case NORM_Y:
-		c0 = getCorner(2);
-		c1 = getCorner(3);
-		c2 = getCorner(7);
-		c3 = getCorner(6);
-		break;
+		goto y;
 	case NORM_Z:
-		c0 = getCorner(1);
-		c1 = getCorner(5);
-		c2 = getCorner(7);
-		c3 = getCorner(3);
-		break;
+		goto z;
 	case NORM_X_NEG:
-		c0 = getCorner(0);
-		c1 = getCorner(1);
-		c2 = getCorner(3);
-		c3 = getCorner(2);
-		break;
+		goto xNeg;
 	case NORM_Y_NEG:
-		c0 = getCorner(0);
-		c1 = getCorner(4);
-		c2 = getCorner(5);
-		c3 = getCorner(1);
-		break;
+		goto yNeg;
 	case NORM_Z_NEG:
-		c0 = getCorner(0);
-		c1 = getCorner(2);
-		c2 = getCorner(6);
-		c3 = getCorner(4);
-		break;
+		goto zNeg;
 	}
+
+	return;
+
+x:
+	c0 = getCorner(4), c1 = getCorner(6), c2 = getCorner(7), c3 = getCorner(5);
+	return;
+
+y:
+	c0 = getCorner(2), c1 = getCorner(3), c2 = getCorner(7), c3 = getCorner(6);
+	return;
+
+z:
+	c0 = getCorner(1), c1 = getCorner(5), c2 = getCorner(7), c3 = getCorner(3);
+	return;
+
+xNeg:
+	c0 = getCorner(0), c1 = getCorner(1), c2 = getCorner(3), c3 = getCorner(2);
+	return;
+
+yNeg:
+	c0 = getCorner(0), c1 = getCorner(4), c2 = getCorner(5), c3 = getCorner(1);
+	return;
+
+zNeg:
+	c0 = getCorner(0), c1 = getCorner(2), c2 = getCorner(6), c3 = getCorner(4);
+	return;
 }
 
 // FUNCTION: WEBSERVICE 0x100a5d20
