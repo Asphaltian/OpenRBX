@@ -33,7 +33,7 @@ public:
 	Primitive* operator*() const { return primitive; }
 
 private:
-	static bool isParent(Primitive* parent, Primitive* child, Joint* joint, SearchType searchType);
+	static bool isParent(Primitive* parentCandidate, Primitive* child, Joint* joint, SearchType searchType);
 
 	Primitive* primitive;  // 0x00
 	SearchType searchType; // 0x04

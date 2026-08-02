@@ -85,6 +85,16 @@ Two of them turned on the same thing, which is general. A folded address carries
 
 `fastRemoveShort` in `util/StlExtra.h` is the one to remember for method rather than content. Sixty spellings, the original's own command line and five optimisation levels all left it near 48%, because the byte counts I was steering by came from an `/FA` listing whose relocated `call` and `mov ebp, [__imp_...]` bytes my extractor was dropping; a spelling that was already right read 42 bytes short. The line records settled it in one look: `0001:00102660-00102745` maps to lines 42, 43, 45, 54, 55, 59, 60, 62, 67 and 68 of `stlextra.h`, which is eight code-generating statements where the obvious source has seven, and lines 54 and 55 both feed `last`. It is `items.end()` and then `--last`, not `items.end() - 1`. Count the line records before sweeping spellings, and measure with reccmp on the linked image rather than by eye on a listing.
 
+## Clump
+
+`v8world/Clump2.cpp` is complete, all ten functions: `PrimIterator`'s four search statics, its `isParent` and `operator++`, and `EdgeIterator`'s four.
+
+A ternary materialises its arms into a 32 bit register, so a `bool` function that ends `movzx eax, al` on one path and `mov eax, 1` or `xor eax, eax` on another returned a ternary; a plain `return false` writes the shorter `xor al, al`. `isParent` ends `searchType == IN_CLUMP ? sameClump : sameClump || parentCandidate->getAssembly() == child->getAssembly()`, and the three `if`s that say the same thing held it at 80 percent. Its early exits are one shared `return false` at the end, which the line records give away by sending both the joint test and the body test to the same line.
+
+Where a callee stores its result decides its caller's register allocation, and a function that already matches is still worth respelling when its caller does not. `PrimIterator::operator++` matches at 100 percent either way, but only assigning `primitive` in each branch lets `findEdgeOnNextPrimitive` share one callee saved register between the parent and the merged result; storing a local once after the merge gives that value a home from `findFirstChild`'s return, which overlaps the parent, costs a fourth callee saved register and 33 percent.
+
+An `/FA` listing's byte counts mislead, but its mnemonic stream does not. Aligning the stream against the original's disassembly scored 88.68 where reccmp scored 88.89 and 55.05 where reccmp scored 61.82, which is a compile rather than a link per spelling, and it is what made a sweep of `operator++` shapes affordable. `findEdgeOnNextPrimitive` is three statements: `Primitive* next = *++PrimIterator(primitive, IN_ASSEMBLY);`, then `if ((primitive = next) == NULL)`, then the edge. Incrementing the temporary in the same statement is what keeps the construction, the increment and the dereference on one line record.
+
 ## Constants
 
 `v8kernel/Constants.cpp` is complete, all twelve functions. `getJointK` sorts the size, clamps it with `sorted.max(Vector3(1.0f, 1.0f, 1.0f))` and scales `getJointKMultiplier` by 960000; `getKmsMaxJointForce` rounds both stud counts with `G3D::iRound`, clamps each to at least 1, and indexes `MAX_LEGO_JOINT_FORCES_MEASURED`, seven measured forces ending 4.681, by the larger of the two.

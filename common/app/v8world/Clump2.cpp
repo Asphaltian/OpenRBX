@@ -33,10 +33,10 @@ Edge* EdgeIterator::getNextExternalUtil(Primitive* primitive, Edge* edge)
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x10117df0
-bool PrimIterator::isParent(Primitive* parent, Primitive* child, Joint* joint, SearchType searchType)
+// FUNCTION: WEBSERVICE 0x10117df0
+bool PrimIterator::isParent(Primitive* parentCandidate, Primitive* child, Joint* joint, SearchType searchType)
 {
-	if (parent == NULL || child == NULL) {
+	if (parentCandidate == NULL || child == NULL) {
 		return false;
 	}
 
@@ -49,21 +49,16 @@ bool PrimIterator::isParent(Primitive* parent, Primitive* child, Joint* joint, S
 		jointed = RigidJoint::isRigidJoint(joint) || MotorJoint::isMotorJoint(joint);
 	}
 
-	if (!jointed) {
-		return false;
+	if (jointed) {
+		if (child->getBody()->getParent() == parentCandidate->getBody()) {
+			bool sameClump = parentCandidate->getClump() == child->getClump();
+
+			return searchType == IN_CLUMP ? sameClump
+										  : sameClump || parentCandidate->getAssembly() == child->getAssembly();
+		}
 	}
 
-	if (child->getBody()->getParent() != parent->getBody()) {
-		return false;
-	}
-
-	bool sameClump = parent->getClump() == child->getClump();
-
-	if (searchType == IN_CLUMP) {
-		return sameClump;
-	}
-
-	return sameClump || parent->getAssembly() == child->getAssembly();
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x10117ea0
@@ -137,10 +132,12 @@ Primitive* PrimIterator::findNextRelative(Primitive* parent, Primitive* child, S
 		return sibling;
 	}
 
-	return findNextRelative(findParent(parent, searchType), parent, searchType);
+	Primitive* grandparent = findParent(parent, searchType);
+
+	return findNextRelative(grandparent, parent, searchType);
 }
 
-// STUB: WEBSERVICE 0x10118000
+// FUNCTION: WEBSERVICE 0x10118000
 PrimIterator& PrimIterator::operator++()
 {
 	SearchType type = searchType;
@@ -149,28 +146,28 @@ PrimIterator& PrimIterator::operator++()
 	Primitive* next = findFirstChild(current, type);
 
 	if (next == NULL) {
-		next = findNextRelative(findParent(current, type), current, type);
-	}
+		Primitive* parent = findParent(current, type);
 
-	primitive = next;
+		primitive = findNextRelative(parent, current, type);
+	}
+	else {
+		primitive = next;
+	}
 
 	return *this;
 }
 
-// STUB: WEBSERVICE 0x10118040
+// FUNCTION: WEBSERVICE 0x10118040
 void EdgeIterator::findEdgeOnNextPrimitive()
 {
 	while (edge == NULL) {
-		PrimIterator next(primitive, IN_ASSEMBLY);
-		++next;
+		Primitive* next = *++PrimIterator(primitive, IN_ASSEMBLY);
 
-		primitive = *next;
-
-		if (primitive == NULL) {
+		if ((primitive = next) == NULL) {
 			return;
 		}
 
-		edge = getNextExternalUtil(primitive, primitive->getFirstEdge());
+		edge = getNextExternalUtil(next, next->getFirstEdge());
 	}
 }
 
