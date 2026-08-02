@@ -30,6 +30,8 @@ public:
 
 	Body* getParent() const { return parent; }
 
+	Body* getRoot() { return root; }
+
 	float getMass() const { return mass; }
 
 	float getBranchMass() const { return cofm != NULL ? cofm->getMass() : mass; }

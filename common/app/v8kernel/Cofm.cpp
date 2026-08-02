@@ -11,7 +11,7 @@ Cofm::Cofm(Body* body) : body(body), dirty(true), cofmInBody(0, 0, 0)
 {
 }
 
-// STUB: WEBSERVICE 0x10121710
+// FUNCTION: WEBSERVICE 0x10121710
 float Cofm::getMass()
 {
 	updateIfDirty();
@@ -51,7 +51,7 @@ void Cofm::updateIfDirty()
 	}
 }
 
-// STUB: WEBSERVICE 0x10121970
+// FUNCTION: WEBSERVICE 0x10121970
 const Vector3& Cofm::getCofmInBody()
 {
 	updateIfDirty();
@@ -59,7 +59,7 @@ const Vector3& Cofm::getCofmInBody()
 	return cofmInBody;
 }
 
-// STUB: WEBSERVICE 0x10121980
+// FUNCTION: WEBSERVICE 0x10121980
 const Matrix3& Cofm::getMoment()
 {
 	updateIfDirty();

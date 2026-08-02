@@ -1,17 +1,25 @@
 #include "v8kernel/Link.h"
 
+#include "v8kernel/Body.h"
+
+#include <cstddef>
+
 namespace RBX {
 
-// STUB: WEBSERVICE 0x101027f0
-DECOMP_NOINLINE void Link::dirty()
+// FUNCTION: WEBSERVICE 0x101027f0
+void Link::dirty()
 {
-	STUB(0x101027f0);
+	if (body != NULL) {
+		body->getRoot()->advanceStateIndex();
+	}
 }
 
-// STUB: WEBSERVICE 0x10102900
-DECOMP_NOINLINE void Link::reset(const CoordinateFrame& parentCoord, const CoordinateFrame& childCoord)
+// FUNCTION: WEBSERVICE 0x10102900
+void Link::reset(const CoordinateFrame& parentC, const CoordinateFrame& childC)
 {
-	STUB(0x10102900);
+	parentCoord = parentC;
+	childCoord = childC;
+	childCoordInverse = childC.inverse();
 }
 
 } // namespace RBX

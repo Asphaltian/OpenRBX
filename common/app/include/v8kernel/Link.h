@@ -15,7 +15,7 @@ using G3D::CoordinateFrame;
 class __declspec(novtable) Link
 {
 public:
-	void reset(const CoordinateFrame& parentCoord, const CoordinateFrame& childCoord);
+	void reset(const CoordinateFrame& parentC, const CoordinateFrame& childC);
 
 	const CoordinateFrame& getChildInParent() const { return childInParent; }
 
