@@ -10,8 +10,11 @@ namespace Reflection {
 // SIZE 0x08
 class SignalSource
 {
+public:
+	virtual ~SignalSource() {} // vtable+0x00
+
 private:
-	undefined m_unk0x00[0x08 - 0x00]; // 0x00
+	undefined m_unk0x04[0x08 - 0x04]; // 0x04
 };
 
 DECOMP_SIZE_ASSERT(SignalSource, 0x08)

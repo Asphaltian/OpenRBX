@@ -31,7 +31,8 @@ public:
 	virtual ~GuidItem() {}
 
 private:
-	Guid guid; // 0x04
+	bool registeredGuid; // 0x04
+	Guid guid;           // 0x08
 };
 
 } // namespace RBX

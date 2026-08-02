@@ -1,15 +1,19 @@
 #ifndef UTIL_ASSOCIATION_H
 #define UTIL_ASSOCIATION_H
 
-#include <string>
+#include <vector>
 
 namespace RBX {
 
 template <class T>
+// SIZE 0x10
 class Association
 {
+public:
+	class Item;
+
 private:
-	std::string key; // 0x00
+	std::vector<Item*> items; // 0x00
 };
 
 } // namespace RBX
