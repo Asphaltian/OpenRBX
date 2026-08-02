@@ -36,10 +36,10 @@ public:
 	void Clear(void);
     RPCNode *GetNodeFromIndex(RPCIndex index);
 	RPCNode *GetNodeFromFunctionName(char *uniqueIdentifier);
-	RPCIndex GetIndexFromFunctionName(char *uniqueIdentifier);
-	void AddIdentifierWithFunction(char *uniqueIdentifier, void *functionPointer, bool isPointerToMember);
-	void AddIdentifierAtIndex(char *uniqueIdentifier, RPCIndex insertionIndex);
-	void RemoveNode(char *uniqueIdentifier);
+	RPCIndex GetIndexFromFunctionName(const char *uniqueIdentifier);
+	void AddIdentifierWithFunction(const char *uniqueIdentifier, void *functionPointer, bool isPointerToMember);
+	void AddIdentifierAtIndex(const char *uniqueIdentifier, RPCIndex insertionIndex);
+	void RemoveNode(const char *uniqueIdentifier);
 protected:
 	DataStructures::List<RPCNode *> rpcSet;
 };

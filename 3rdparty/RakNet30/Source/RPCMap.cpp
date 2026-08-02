@@ -58,7 +58,7 @@ RPCNode *RPCMap::GetNodeFromFunctionName(char *uniqueIdentifier)
 	return 0;
 }
 // FUNCTION: WEBSERVICE 0x101c12d0
-RPCIndex RPCMap::GetIndexFromFunctionName(char *uniqueIdentifier)
+RPCIndex RPCMap::GetIndexFromFunctionName(const char *uniqueIdentifier)
 {
 	unsigned index;
 	for (index=0; index < rpcSet.Size(); index++)
@@ -69,7 +69,7 @@ RPCIndex RPCMap::GetIndexFromFunctionName(char *uniqueIdentifier)
 
 // Called from the user thread for the local system
 // FUNCTION: WEBSERVICE 0x101c1330
-void RPCMap::AddIdentifierWithFunction(char *uniqueIdentifier, void *functionPointer, bool isPointerToMember)
+void RPCMap::AddIdentifierWithFunction(const char *uniqueIdentifier, void *functionPointer, bool isPointerToMember)
 {
 #ifdef _DEBUG
 	assert(rpcSet.Size()+1 < MAX_RPC_MAP_SIZE); // If this hits change the typedef of RPCIndex to use an unsigned short
@@ -111,7 +111,7 @@ void RPCMap::AddIdentifierWithFunction(char *uniqueIdentifier, void *functionPoi
 
 }
 // FUNCTION: WEBSERVICE 0x101c13d0
-void RPCMap::AddIdentifierAtIndex(char *uniqueIdentifier, RPCIndex insertionIndex)
+void RPCMap::AddIdentifierAtIndex(const char *uniqueIdentifier, RPCIndex insertionIndex)
 {
 #ifdef _DEBUG
 	assert(uniqueIdentifier && uniqueIdentifier[0]);
@@ -159,7 +159,7 @@ void RPCMap::AddIdentifierAtIndex(char *uniqueIdentifier, RPCIndex insertionInde
 }
 
 // FUNCTION: WEBSERVICE 0x101c14a0
-void RPCMap::RemoveNode(char *uniqueIdentifier)
+void RPCMap::RemoveNode(const char *uniqueIdentifier)
 {
 	unsigned index;
 	index=GetIndexFromFunctionName(uniqueIdentifier);

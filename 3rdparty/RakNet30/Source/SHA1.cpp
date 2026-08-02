@@ -258,7 +258,7 @@ void CSHA1::Final()
 		Update( ( unsigned char * ) "\200", 1 );
 
 		while ( ( m_count[ 0 ] & 504 ) != 448 )
-			Update( ( unsigned char * ) "\0", 1 );
+			Update( ( unsigned char * ) "", 1 );
 
 		Update( finalcount, 8 ); // Cause a SHA1Transform()
 

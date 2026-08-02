@@ -626,7 +626,7 @@ void RakPeer::GetIncomingPassword( char* passwordData, int *passwordDataLength  
 // True on successful initiation. False on incorrect parameters, internal error, or too many existing peers
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b7ec0
-bool RakPeer::Connect( const char* host, unsigned short remotePort, char* passwordData, int passwordDataLength, unsigned connectionSocketIndex )
+bool RakPeer::Connect( const char* host, unsigned short remotePort, const char* passwordData, int passwordDataLength, unsigned connectionSocketIndex )
 {
 	// If endThreads is true here you didn't call Startup() first.
 	if ( host == 0 || endThreads || connectionSocketIndex>=connectionSocketsLength )
@@ -913,7 +913,7 @@ bool RakPeer::Send( const char *data, const int length, PacketPriority priority,
 }
 
 // FUNCTION: WEBSERVICE 0x101b39b0
-bool RakPeer::Send( RakNet::BitStream * bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast )
+bool RakPeer::Send( const RakNet::BitStream * bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast )
 {
 #ifdef _DEBUG
 	assert( bitStream->GetNumberOfBytesUsed() > 0 );
@@ -1196,7 +1196,7 @@ unsigned short RakPeer::GetMaximumNumberOfPeers( void ) const
 // UnregisterAsRemoteProcedureCall
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afbf0
-void RakPeer::RegisterAsRemoteProcedureCall( char* uniqueID, void ( *functionPointer ) ( RPCParameters *rpcParms ) )
+void RakPeer::RegisterAsRemoteProcedureCall( const char* uniqueID, void ( *functionPointer ) ( RPCParameters *rpcParms ) )
 {
 	if ( uniqueID == 0 || uniqueID[ 0 ] == 0 || functionPointer == 0 )
 		return;
@@ -1229,7 +1229,7 @@ void RakPeer::RegisterAsRemoteProcedureCall( char* uniqueID, void ( *functionPoi
 }
 
 // FUNCTION: WEBSERVICE 0x101afc20
-void RakPeer::RegisterClassMemberRPC( char* uniqueID, void *functionPointer )
+void RakPeer::RegisterClassMemberRPC( const char* uniqueID, void *functionPointer )
 {
 	if ( uniqueID == 0 || uniqueID[ 0 ] == 0 || functionPointer == 0 )
 		return;
@@ -1247,7 +1247,7 @@ void RakPeer::RegisterClassMemberRPC( char* uniqueID, void *functionPointer )
 // passed to RegisterAsRemoteProcedureCall
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afc50
-void RakPeer::UnregisterAsRemoteProcedureCall( char* uniqueID )
+void RakPeer::UnregisterAsRemoteProcedureCall( const char* uniqueID )
 {
 	if ( uniqueID == 0 || uniqueID[ 0 ] == 0 )
 		return;
@@ -1285,7 +1285,8 @@ void RakPeer::UnregisterAsRemoteProcedureCall( char* uniqueID )
 }
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-bool RakPeer::RPC( char* uniqueID, const char *data, unsigned int bitLength, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RakNetTime *includedTimestamp, NetworkID networkID, RakNet::BitStream *replyFromTarget )
+// FUNCTION: WEBSERVICE 0x101b84e0
+bool RakPeer::RPC( const char* uniqueID, const char *data, unsigned int bitLength, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RakNetTime *includedTimestamp, NetworkID networkID, RakNet::BitStream *replyFromTarget )
 {
 #ifdef _DEBUG
 	assert( uniqueID && uniqueID[ 0 ] );
@@ -1515,7 +1516,8 @@ bool RakPeer::RPC( char* uniqueID, const char *data, unsigned int bitLength, Pac
 #ifdef _MSC_VER
 #pragma warning( disable : 4701 ) // warning C4701: local variable <variable name> may be used without having been initialized
 #endif
-bool RakPeer::RPC( char* uniqueID, RakNet::BitStream *bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RakNetTime *includedTimestamp, NetworkID networkID, RakNet::BitStream *replyFromTarget )
+// FUNCTION: WEBSERVICE 0x101b1270
+bool RakPeer::RPC( const char* uniqueID, const RakNet::BitStream *bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RakNetTime *includedTimestamp, NetworkID networkID, RakNet::BitStream *replyFromTarget )
 {
 	if (bitStream)
 		return RPC(uniqueID, (const char*) bitStream->GetData(), bitStream->GetNumberOfBitsUsed(), priority, reliability, orderingChannel, systemAddress, broadcast, includedTimestamp, networkID, replyFromTarget);
@@ -2693,7 +2695,7 @@ int RakPeer::GetIndexFromSystemAddress( const SystemAddress systemAddress, bool 
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b6050
-bool RakPeer::SendConnectionRequest( const char* host, unsigned short remotePort, char* passwordData, int passwordDataLength, unsigned connectionSocketIndex )
+bool RakPeer::SendConnectionRequest( const char* host, unsigned short remotePort, const char* passwordData, int passwordDataLength, unsigned connectionSocketIndex )
 {
 	SystemAddress systemAddress;
 	systemAddress.SetBinaryAddress(host);
