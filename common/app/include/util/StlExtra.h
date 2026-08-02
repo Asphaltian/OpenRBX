@@ -13,13 +13,15 @@ template <class T>
 unsigned int fastRemoveShort(std::vector<T>& items, const T& item)
 {
 	typename std::vector<T>::iterator found = std::find(items.begin(), items.end(), item);
-	typename std::vector<T>::iterator last = items.end() - 1;
+	unsigned int index = found - items.begin();
+	typename std::vector<T>::iterator last = items.end();
+
+	--last;
 
 	if (found != last) {
 		*found = *last;
 	}
 
-	unsigned int index = found - items.begin();
 	items.resize(items.size() - 1);
 
 	return index;

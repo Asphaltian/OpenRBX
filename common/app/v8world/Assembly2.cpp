@@ -277,7 +277,7 @@ Assembly::Assembly(Primitive* rootPrimitive)
 	rootPrimitive->setClump(static_cast<Clump*>(this));
 }
 
-// STUB: WEBSERVICE 0x10103750
+// FUNCTION: WEBSERVICE 0x10103750
 void Assembly::addChild(Assembly* child)
 {
 	children.push_back(child);
