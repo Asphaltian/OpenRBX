@@ -47,7 +47,7 @@ DECOMP_NOINLINE Name::NamMap& Name::namMap()
 	return n;
 }
 
-// STUB: WEBSERVICE 0x10058840
+// FUNCTION: WEBSERVICE 0x10058840
 const Name& Name::declare(const char* name, int dictionaryIndex)
 {
 	if (name == NULL) {
@@ -69,11 +69,8 @@ const Name& Name::declare(const char* name, int dictionaryIndex)
 	}
 
 	Name* declared = new Name(name, dictionaryIndex);
-	namMap()[std::string(name)] = declared;
-
-	if (dictionaryIndex != -1) {
-		dictionary()[dictionaryIndex] = declared;
-	}
+	namMap()[name] = declared;
+	dictionary()[dictionaryIndex] = declared;
 
 	return *declared;
 }
@@ -95,7 +92,7 @@ const Name& Name::lookup(const std::string& name)
 	boost::call_once(initMoo, flag);
 
 	boost::mutex::scoped_lock lock(moo2());
-	NamMap::iterator found = namMap().find(name);
+	NamMap::iterator found = namMap().find(std::string(name));
 
 	if (found != namMap().end()) {
 		return *found->second;

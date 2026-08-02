@@ -65,11 +65,11 @@ The colon is required on everything except `// SIZE`. reccmp silently ignores `/
 
 ## Name
 
-The interning subsystem is `util/Name.cpp`, and everything but `declare` matches. `moo2` is a magic-static `boost::mutex` called `mutex2`, `initMoo` a five-byte tail jump into it, and `boost::call_once(initMoo, flag)` guards it at the head of `declare`, `lookup` and `getNullName`. `namMap` returns a `NamMap`, which derives from `std::map<std::string, Name*>`, and `dictionary` a `std::map<int, Name*>`; their statics are named `n` and `d`. `getNullName` is `declare("", 0)` behind a magic static, and `empty` is `this == &getNullName()`.
+The interning subsystem is `util/Name.cpp` and all nine functions match. `moo2` is a magic-static `boost::mutex` called `mutex2`, `initMoo` a five-byte tail jump into it, and `boost::call_once(initMoo, flag)` guards it at the head of `declare`, `lookup` and `getNullName`. `namMap` returns a `NamMap`, which derives from `std::map<std::string, Name*>`, and `dictionary` a `std::map<int, Name*>`; their statics are named `n` and `d`. `getNullName` is `declare("", 0)` behind a magic static, and `empty` is `this == &getNullName()`.
 
 Three things gate that subsystem and each is general. Both accessors and `initMoo` need `DECOMP_NOINLINE`, or `/Ob2` inlines them and the original's out-of-line calls have nothing to bind to. `boost::mutex::do_lock` and `find` are folded in the original with other instantiations, so the vendored table names them for whichever the `min()` rule picked and our call reads as unresolved: the fix is an extra row at the same address carrying the instantiation our build emits. And the `boost::once_flag` is a file static called `flag`, which `gen_statics.py` drops for not being unique across the image, so it needs naming by hand.
 
-`declare` is written and semantically complete at 59.65%. The original keeps the mutex in `ebx` for the whole body and has eight more bytes of locals; ours leaves `ebx` free and caches `_invalid_parameter_noinfo` in it instead. Every instruction otherwise lines up.
+`declare` took two things past the register allocation it looked like. Its insert path writes `dictionary()[dictionaryIndex]` unconditionally, where the found path guards on `-1`, and the extra branch was worth twenty percent. The rest was the string key: an explicit `std::string(name)` temporary pushes the constructor's own return value and an implicit conversion recomputes the address, and the two also rank the enregistration candidates differently, so the original holds the mutex in `ebx` for the whole body under one spelling and in `ebp` under the other. `find` has the explicit temporary and `operator[]` the implicit one; either alone stalls at 79 or 90 percent.
 
 ## Class Names
 
