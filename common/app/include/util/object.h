@@ -4,7 +4,11 @@
 #include "decomp.h"
 #include "util/Name.h"
 
+#include <boost/shared_ptr.hpp>
+
 namespace RBX {
+
+class Object;
 
 template <class T, class Base, const char* sName>
 class FactoryProduct : public Base
@@ -13,7 +17,7 @@ public:
 	class Creator
 	{
 	public:
-		T* create() const { return new T(); }
+		virtual boost::shared_ptr<Object> create() const { return boost::shared_ptr<Object>(); }
 	};
 
 	// clang-format off
@@ -23,7 +27,7 @@ public:
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::Creator::create
 	// STUB: WEBSERVICE 0x10064700
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::Creator::create
-	// STUB: WEBSERVICE 0x10068970
+	// TEMPLATE: WEBSERVICE 0x10068970
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::~FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>
 	// STUB: WEBSERVICE 0x10068aa0
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript><char const *>
@@ -39,7 +43,7 @@ public:
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::getClassName
 	// STUB: WEBSERVICE 0x10069270
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x10069b80
+	// STUB: WEBSERVICE 0x10069b80
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
 	// STUB: WEBSERVICE 0x1006d980
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::Creator::create
@@ -87,9 +91,9 @@ public:
 	// RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint>::~FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint>
 	// TEMPLATE: WEBSERVICE 0x1008c9c0
 	// RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint>::getClassName
-	// STUB: WEBSERVICE 0x1008c9e0
+	// TEMPLATE: WEBSERVICE 0x1008c9e0
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::~FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
-	// TEMPLATE: WEBSERVICE 0x1008ca30
+	// STUB: WEBSERVICE 0x1008ca30
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
 	// STUB: WEBSERVICE 0x1008caa0
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::`scalar deleting destructor'
@@ -111,7 +115,7 @@ public:
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>
 	// STUB: WEBSERVICE 0x100b3bc0
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::getClassName
-	// STUB: WEBSERVICE 0x100bdef0
+	// TEMPLATE: WEBSERVICE 0x100bdef0
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::~FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>
 	// STUB: WEBSERVICE 0x100bdf40
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>
@@ -119,9 +123,9 @@ public:
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100be220
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::getClassName
-	// STUB: WEBSERVICE 0x100c2710
+	// TEMPLATE: WEBSERVICE 0x100c2710
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::~FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>
-	// TEMPLATE: WEBSERVICE 0x100c2770
+	// STUB: WEBSERVICE 0x100c2770
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>
 	// TEMPLATE: WEBSERVICE 0x100c3690
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::getClassName
@@ -175,7 +179,7 @@ public:
 	// RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::`scalar deleting destructor'
 	// STUB: WEBSERVICE 0x100da260
 	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::`scalar deleting destructor'
-	// STUB: WEBSERVICE 0x100de130
+	// TEMPLATE: WEBSERVICE 0x100de130
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::~FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>
 	// STUB: WEBSERVICE 0x100de1b0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::`scalar deleting destructor'
@@ -183,11 +187,11 @@ public:
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>
 	// TEMPLATE: WEBSERVICE 0x100de2e0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::getClassName
-	// STUB: WEBSERVICE 0x100e04a0
+	// TEMPLATE: WEBSERVICE 0x100e04a0
 	// RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::~FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
-	// STUB: WEBSERVICE 0x100e0530
+	// TEMPLATE: WEBSERVICE 0x100e0530
 	// RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::~FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>
-	// STUB: WEBSERVICE 0x100e05a0
+	// TEMPLATE: WEBSERVICE 0x100e05a0
 	// RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::~FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>
 	// STUB: WEBSERVICE 0x100e0640
 	// RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
@@ -213,7 +217,7 @@ public:
 	// RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::`scalar deleting destructor'
 	// STUB: WEBSERVICE 0x100e16b0
 	// RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x100e17e0
+	// STUB: WEBSERVICE 0x100e17e0
 	// RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>
 	// STUB: WEBSERVICE 0x100e4860
 	// RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::~FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>
@@ -283,15 +287,15 @@ public:
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::~FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// TEMPLATE: WEBSERVICE 0x100ffb10
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::getClassName
-	// TEMPLATE: WEBSERVICE 0x10100110
+	// STUB: WEBSERVICE 0x10100110
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// STUB: WEBSERVICE 0x101004b0
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::`scalar deleting destructor'
 	// STUB: WEBSERVICE 0x10129f20
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::Creator::create
-	// STUB: WEBSERVICE 0x1012c970
+	// TEMPLATE: WEBSERVICE 0x1012c970
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::~FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
-	// TEMPLATE: WEBSERVICE 0x1012c9c0
+	// STUB: WEBSERVICE 0x1012c9c0
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 	// STUB: WEBSERVICE 0x1012ca90
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::`scalar deleting destructor'
