@@ -5400,6 +5400,7 @@ address,size,type,symbol
 0x101e6340,,library,?call_once@boost@@YAXP6AXXZAAJ@Z
 0x101e76e0,,library,??0mutex@boost@@QAE@XZ
 0x101e7700,,library,??1mutex@boost@@QAE@XZ
+0x101e7700,,library,??1try_mutex@boost@@QAE@XZ
 0x101e7730,,library,?do_lock@mutex@boost@@AAEXXZ
 0x101e7730,,library,?do_lock@try_mutex@boost@@AAEXXZ
 0x101e7750,,library,?do_unlock@mutex@boost@@AAEXXZ

@@ -6,6 +6,8 @@
 
 namespace RBX {
 
+class StandardOut;
+
 template <class Source, class Event>
 class Notifier;
 
@@ -63,12 +65,9 @@ protected:
 
 	bool hasListeners() const { return !listeners.empty(); }
 
-	void raise(Event event, Listener<Source, Event>* listener) const
-	{
-		listener->onEvent(static_cast<const Source*>(this), event);
-	}
+	void raise(Event event, Listener<Source, Event>* listener) const;
 
-	void raise(Event event) const;
+	void raise(Event event) const throw();
 
 private:
 	mutable std::vector<Listener<Source, Event>*> listeners; // 0x04
@@ -105,18 +104,33 @@ void Notifier<Source, Event>::removeListener(Listener<Source, Event>* listener) 
 	}
 }
 
+// STUB: WEBSERVICE 0x10032240
+// RBX::Notifier<RBX::StandardOut,RBX::StandardOutMessage>::raise
 template <class Source, class Event>
-void Notifier<Source, Event>::raise(Event event) const
+void Notifier<Source, Event>::raise(Event event, Listener<Source, Event>* listener) const
+{
+	try {
+		listener->onEvent(static_cast<const Source*>(this), event);
+	}
+	catch (std::exception& error) {
+		std::string what(error.what());
+
+		StandardOut::singleton()->print(MESSAGE_WARNING, "Exception caught in onEvent. %s", what.c_str());
+	}
+}
+
+template <class Source, class Event>
+void Notifier<Source, Event>::raise(Event event) const throw()
 {
 	RaiseRange range;
+
 	range.index = 0;
 	range.upper = listeners.size();
 	range.previous = raiseRange;
 	raiseRange = &range;
 
 	while (range.index < range.upper) {
-		raise(event, listeners[range.index]);
-		range.index++;
+		raise(event, listeners[range.index++]);
 	}
 
 	raiseRange = range.previous;

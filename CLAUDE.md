@@ -93,6 +93,20 @@ Four things settled it and each is general. A bare `fld`/`fistp` with no control
 
 `tools/ncc/ncc.style` gained an `^[A-Z][A-Z0-9_]*$` alternative for the same reason it carries `prop_` and `event_`: the caps spelling is the original's, recovered from its symbols rather than chosen.
 
+## StandardOut
+
+`util/standardout.cpp` and the `Notifier` template it instantiates are complete. Five things did it and each is general.
+
+`Notifier<Source, Event>::raise(Event, Listener*)` wraps the listener call in a `try`/`catch` that reports through StandardOut: `catch (std::exception& error)` takes `error.what()` into a `std::string` and calls `StandardOut::singleton()->print(MESSAGE_WARNING, "Exception caught in onEvent. %s", ...)`. That accounted for the frame pointer and forty of its seventy-seven instructions, and the line records placed it at events.h 187 to 197 before any of it was written.
+
+`Events.h` cannot include `standardout.h`, which includes it back, and a mid-file include breaks boost's own header ordering. A forward declaration of `class StandardOut` is enough, because MSVC only analyses a template body when it is instantiated, which happens in `standardout.cpp` where the class is complete.
+
+`raise(Event)` needs `throw()`. Without it MSVC emits an unwind funclet to destroy the by-value `Event` parameter and the whole EH frame with it, where the original has no unwind table at all; the PDB shows the two-argument overload carrying `$0` and `$2` funclet symbols and the one-argument overload carrying none. That was worth 47 percent. The last three came from writing the increment inside the subscript, `listeners[range.index++]`, which the line records give away by attributing the increment to the same line as the call.
+
+`StandardOutMessage` sets its time with `_time64(&time)` in the constructor body, not `time(_time64(NULL))` in the initialiser list; the difference is `push <address>` against `push 0` and a pair of stores. And `~StandardOut` is `(compgenx)` in the type records, so the original never declares it: declaring one adds a vftable store to the destructor that the original does not have, which is the same rule as `FactoryProduct`'s but read in the other direction.
+
+One more folded-alias row: the original's `~mutex` call target at 0x101e7700 is named `??1mutex@boost@@QAE@XZ` in the vendored table, but our build folds `~mutex` with `~try_mutex` and resolves ours as the latter, so the address needs both names.
+
 ## Class Names
 
 Every registered class carries a namespace-scope char array holding its name, and `Name::doDeclare<&sFoo>` turns it into the interned `Name`. 105 of them, each with a `callDoDeclare<&sFoo>` beside it that is a five-byte tail jump into `doDeclare`. Both templates take `const char*`: 48 arrays are `const char[]` and 46 are `char[]`, the mangling records which (`QBDB` against `PADA`), and one template accepts both through the qualification conversion.

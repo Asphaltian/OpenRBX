@@ -47,11 +47,6 @@ void StandardOut::print(MessageType type, const char* format, ...)
 	}
 }
 
-// STUB: WEBSERVICE 0x10032040
-StandardOut::~StandardOut()
-{
-}
-
 // FUNCTION: WEBSERVICE 0x100320e0
 boost::shared_ptr<StandardOut> StandardOut::singleton()
 {

@@ -24,7 +24,7 @@ enum MessageType
 // SIZE 0x28
 struct StandardOutMessage
 {
-	StandardOutMessage(MessageType type, const char* message) : type(type), message(message), time(_time64(NULL)) {}
+	StandardOutMessage(MessageType type, const char* message) : type(type), message(message) { _time64(&time); }
 
 	MessageType type;    // 0x00
 	std::string message; // 0x04
@@ -42,13 +42,14 @@ public:
 	void print(MessageType type, const std::exception& error);
 	void print(MessageType type, const char* format, ...);
 
-	virtual ~StandardOut();
-
 	// SYNTHETIC: WEBSERVICE 0x10031fe0
 	// RBX::StandardOut::StandardOut
 
 	// SYNTHETIC: WEBSERVICE 0x102213d0
 	// `RBX::StandardOut::singleton'::`2'::`dynamic atexit destructor for 'standardOut''
+
+	// SYNTHETIC: WEBSERVICE 0x10032040
+	// RBX::StandardOut::~StandardOut
 
 	// SYNTHETIC: WEBSERVICE 0x10032190
 	// RBX::StandardOut::`scalar deleting destructor'
