@@ -118,10 +118,10 @@ bool Extents::separatedByMoreThan(const Extents& other, float distance) const
 	return !expanded.overlapsOrTouches(other);
 }
 
-// STUB: WEBSERVICE 0x100a5de0
+// FUNCTION: WEBSERVICE 0x100a5de0
 bool Extents::contains(const Vector3& point) const
 {
-	return !(point.x < low.x) && !(point.y < low.y) && !(point.z < low.z) && point.x <= high.x && point.y <= high.y &&
+	return point.x >= low.x && point.y >= low.y && point.z >= low.z && point.x <= high.x && point.y <= high.y &&
 		   point.z <= high.z;
 }
 
@@ -159,12 +159,16 @@ Vector3 Extents::faceCenter(NormalId normalId) const
 	return answer;
 }
 
-// STUB: WEBSERVICE 0x100a6040
+// FUNCTION: WEBSERVICE 0x100a6040
 bool Extents::containedByFrustum(const G3D::GCamera::Frustum& frustum) const
 {
-	for (int face = 0; face < frustum.faceArray.size(); ++face) {
-		for (int corner = 0; corner < 8; ++corner) {
-			if (!frustum.faceArray[face].plane.halfSpaceContains(getCorner(corner))) {
+	for (int i = 0; i < frustum.faceArray.size(); ++i) {
+		const Plane& plane = frustum.faceArray[i].plane;
+
+		for (int j = 0; j < 8; ++j) {
+			const Vector3 corner = getCorner(j);
+
+			if (!plane.halfSpaceContains(corner)) {
 				return false;
 			}
 		}
