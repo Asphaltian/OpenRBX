@@ -1879,7 +1879,6 @@ address,type,symbol
 0x102f8e10,global,?tag_hash@@3ABVName@RBX@@B
 0x102f8e18,global,s___RBX::BrickColor::BrickMap::singleton
 0x102f8e6c,global,type___RBX::Reflection::Type::singleton<RBX::Reflection::PropertyDescriptor
-0x102f8e80,global,s___RBX::Reflection::EnumDescriptor::allEnums
 0x102f8e98,global,?foo@?1??classDescriptor@?$Described@VSky@RBX@@$1?sSky@2@3PADAV?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@34@XZ@4V534@A
 0x102f8f20,global,??_B?1??classDescriptor@?$Described@VSky@RBX@@$1?sSky@2@3PADAV?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102f8f28,global,?prop_CelestialBodiesShown@Sky@RBX@@2V?$BoundProp@_N$00@Reflection@2@A

@@ -111,7 +111,9 @@ endif()
 set(OPENRBX_APP_SOURCES
   common/app/security/SecurityContext.cpp
   common/app/humanoid/Humanoid.cpp
+  common/app/reflection/reflection_property.cpp
   common/app/reflection/signal.cpp
+  common/app/reflection/type.cpp
   common/app/util/Debug.cpp
   common/app/v8tree/Instance.cpp
   common/app/util/ExponentialRunningAverage.cpp

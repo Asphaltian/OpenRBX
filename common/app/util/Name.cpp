@@ -10,7 +10,7 @@ DECOMP_SIZE_ASSERT(Name, 0x20)
 const Name& Name::declare(const char* name, int dictionaryIndex)
 {
 	STUB(0x10058840);
-	return getNullName();
+	return *(const Name*) NULL;
 }
 
 // STUB: WEBSERVICE 0x10058a30
@@ -24,14 +24,14 @@ const Name& Name::getNullName()
 const Name& Name::lookup(const std::string& name)
 {
 	STUB(0x10058ad0);
-	return getNullName();
+	return *(const Name*) NULL;
 }
 
 // STUB: WEBSERVICE 0x10058ba0
 const Name& Name::lookup(const char* name)
 {
 	STUB(0x10058ba0);
-	return getNullName();
+	return *(const Name*) NULL;
 }
 
 // STUB: WEBSERVICE 0x10058c70
