@@ -16,6 +16,25 @@ public:
 
 	T* operator[](int index) const { return array[index]; }
 
+	void fastAppend(T* element)
+	{
+		(element->*getIndex)() = array.size();
+		array.append(element);
+	}
+
+	void fastRemove(T* element)
+	{
+		int index = (element->*getIndex)();
+		T* last = array[array.size() - 1];
+
+		array[index] = last;
+		(last->*getIndex)() = index;
+
+		array.resize(array.size() - 1, false);
+
+		(element->*getIndex)() = -1;
+	}
+
 private:
 	G3D::Array<T*> array; // 0x00
 };

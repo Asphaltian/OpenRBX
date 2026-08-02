@@ -127,6 +127,14 @@ Everything it needs was recorded rather than guessed. `Body::getBranchMass` is `
 
 `Rect.obj` holds one function and `util/Rect.cpp` matches it, so the object is done. `positionChild` builds its result with `fromLowSize(Vector2(x, y), Vector2(width, height))`, which the type records carry as a static beside a `Rect(const Vector2&, const Vector2&)` constructor. The four float constructor compiles the same arithmetic in the wrong order: it stores `low` with a non-popping `fst` and adds afterwards, where the original computes both sums and then stores all four, which is the rule that building a return value through a constructor evaluates every argument before storing anything. The two switches were already right, and each is a real `switch`, lowered as descending `sub eax, N / jz` over 2, 3, 4 for the x locations and 0, 1, 4 for the y.
 
+## Kernel
+
+`v8kernel/Kernel.cpp` is complete. All five functions reach the kernel through `KernelData* kernelData` at 0x10, and `numBodies`, `numPoints` and `numConnectors` are one `size()` each while `insertBody` and `removeBody` are `IndexArray::fastAppend` and `fastRemove`, whose swap with last and shrink is what the disassembly spells out.
+
+The index those arrays keep is not the one `Body::children` uses. `RBX::KernelIndex` is a four byte base holding `kernelIndex`, which `Body` inherits at offset 0, `Point` and `Connector` at 4 under their vfptr, and each class exposes it as `getKernelIndex`, so the arrays are `IndexArray<RBX::Body,&RBX::Body::getKernelIndex>` and the two `{RBX::Point::getKernelIndex,0}` member pointer forms. `insertBody` writing to `body+0` is the giveaway. `kernelindex.h`, `kerneldata.h`, `point.h` and `connector.h` are all in the PDB's string table, so none of the four headers had to be placed by guess.
+
+The type records mark every `getKernelIndex` private, and it is public here. Private needs a friend declaration in every translation unit that names one of `KernelData`'s member types, which spreads as far as `Assembly2.cpp`, and the accessor is inline and never reaches the image, so the access changes no byte of the output.
+
 ## Constants
 
 `v8kernel/Constants.cpp` is complete, all twelve functions. `getJointK` sorts the size, clamps it with `sorted.max(Vector3(1.0f, 1.0f, 1.0f))` and scales `getJointKMultiplier` by 960000; `getKmsMaxJointForce` rounds both stud counts with `G3D::iRound`, clamps each to at least 1, and indexes `MAX_LEGO_JOINT_FORCES_MEASURED`, seven measured forces ending 4.681, by the larger of the two.

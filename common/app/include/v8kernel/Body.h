@@ -6,6 +6,7 @@
 #include "util/PV.h"
 #include "util/Velocity.h"
 #include "v8kernel/Cofm.h"
+#include "v8kernel/KernelIndex.h"
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Matrix3.h>
@@ -20,7 +21,7 @@ using G3D::Matrix3;
 using G3D::Vector3;
 
 // SIZE 0xd0
-class Body
+class Body : public KernelIndex
 {
 public:
 	Body();
@@ -31,6 +32,8 @@ public:
 	Body* getParent() const { return parent; }
 
 	Body* getRoot() { return root; }
+
+	int& getKernelIndex() const { return kernelIndex; }
 
 	float getMass() const { return mass; }
 
@@ -79,7 +82,6 @@ public:
 private:
 	int& getIndex() const { return index; }
 
-	undefined m_unk0x00[0x04 - 0x00];           // 0x00
 	Body* root;                                 // 0x04
 	Body* parent;                               // 0x08
 	mutable int index;                          // 0x0c
