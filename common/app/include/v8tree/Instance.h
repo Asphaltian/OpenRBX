@@ -222,6 +222,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
 	// STUB: WEBSERVICE 0x100d87f0
 	// RBX::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::~DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>
+	// STUB: WEBSERVICE 0x100d8800
+	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::~DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>
 	// STUB: WEBSERVICE 0x100d9440
 	// RBX::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap><RBX::Joint *>
 	// STUB: WEBSERVICE 0x100d94e0
@@ -234,6 +236,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::DescribedCreatable<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP><RBX::Joint *>
 	// STUB: WEBSERVICE 0x100d9870
 	// RBX::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV><RBX::Joint *>
+	// STUB: WEBSERVICE 0x100d9970
+	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor><RBX::MotorJoint *>
 	// STUB: WEBSERVICE 0x100da960
 	// RBX::DescribedCreatable<RBX::Teams,RBX::Instance,&RBX::sTeams>::~DescribedCreatable<RBX::Teams,RBX::Instance,&RBX::sTeams>
 	// STUB: WEBSERVICE 0x100db0d0
@@ -252,11 +256,11 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::DescribedCreatable<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>
 	// STUB: WEBSERVICE 0x100e0920
 	// RBX::DescribedCreatable<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::~DescribedCreatable<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
-	// TEMPLATE: WEBSERVICE 0x100e0a80
+	// STUB: WEBSERVICE 0x100e0a80
 	// RBX::DescribedCreatable<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::~DescribedCreatable<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>
 	// STUB: WEBSERVICE 0x100e0b50
 	// RBX::DescribedCreatable<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::~DescribedCreatable<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>
-	// TEMPLATE: WEBSERVICE 0x100e0d50
+	// STUB: WEBSERVICE 0x100e0d50
 	// RBX::DescribedCreatable<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>::~DescribedCreatable<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>
 	// STUB: WEBSERVICE 0x100e11c0
 	// RBX::DescribedCreatable<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::DescribedCreatable<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
@@ -270,10 +274,14 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::~DescribedCreatable<RBX::Explosion,RBX::Instance,&RBX::sExplosion>
 	// STUB: WEBSERVICE 0x100e2c00
 	// RBX::DescribedCreatable<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::DescribedCreatable<RBX::Explosion,RBX::Instance,&RBX::sExplosion>
+	// STUB: WEBSERVICE 0x100e46f0
+	// RBX::DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::~DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>
 	// STUB: WEBSERVICE 0x100e4ea0
 	// RBX::DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>::~DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>
 	// STUB: WEBSERVICE 0x100e4eb0
 	// RBX::DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::~DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>
+	// STUB: WEBSERVICE 0x100e6c20
+	// RBX::DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor><RBX::MotorJoint *>
 	// STUB: WEBSERVICE 0x100e7730
 	// RBX::DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>
 	// STUB: WEBSERVICE 0x100e77d0
@@ -288,7 +296,7 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::ForceField,RBX::Instance,&RBX::sForceField>::DescribedCreatable<RBX::ForceField,RBX::Instance,&RBX::sForceField>
 	// STUB: WEBSERVICE 0x100e9d30
 	// RBX::DescribedCreatable<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>::DescribedCreatable<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService><char *>
-	// TEMPLATE: WEBSERVICE 0x100ec040
+	// STUB: WEBSERVICE 0x100ec040
 	// RBX::DescribedCreatable<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::~DescribedCreatable<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>
 	// STUB: WEBSERVICE 0x100ec050
 	// RBX::DescribedCreatable<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>::~DescribedCreatable<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>
@@ -330,7 +338,7 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>::~DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// STUB: WEBSERVICE 0x101002f0
 	// RBX::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>
-	// TEMPLATE: WEBSERVICE 0x1012cc20
+	// STUB: WEBSERVICE 0x1012cc20
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::~DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 	// STUB: WEBSERVICE 0x1012d890
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>

@@ -29,8 +29,8 @@ static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle;
 // STUB: WEBSERVICE 0x100d9020
 void Motor::setMaxVelocity(float value)
 {
-	if (value != joint->getMaxVelocity()) {
-		joint->setMaxVelocity(value);
+	if (value != static_cast<MotorJoint*>(joint)->getMaxVelocity()) {
+		static_cast<MotorJoint*>(joint)->setMaxVelocity(value);
 		raisePropertyChanged(prop_MaxVelocity);
 	}
 }
@@ -38,8 +38,8 @@ void Motor::setMaxVelocity(float value)
 // STUB: WEBSERVICE 0x100d90c0
 void Motor::setCurrentAngle(float value)
 {
-	if (value != joint->getCurrentAngle()) {
-		joint->setCurrentAngle(value);
+	if (value != static_cast<MotorJoint*>(joint)->getCurrentAngle()) {
+		static_cast<MotorJoint*>(joint)->setCurrentAngle(value);
 		raisePropertyChanged(prop_CurrentAngle);
 	}
 }

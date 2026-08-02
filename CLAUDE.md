@@ -79,6 +79,16 @@ The array's own translation unit comes from the contribution table, the instanti
 
 `GlobalSettingsItem<T, &sName>` takes the array as its second parameter, not a pointer to the instance.
 
+## Object and Creatable
+
+Below `Instance`'s registration chain sit three more classes, all in `include/util/object.h` and all 4 bytes: `RBX::Object` carries the vfptr and a public virtual destructor, `Creatable<T>` adds a nested `Deleter` and a private static `operator new` and `operator delete`, and `AbstractFactoryProduct<T>` adds `getCreators` and `create`. Since none of them adds a member, putting them under `AbstractFactoryProduct` leaves `Instance` at 0xf8.
+
+`Creatable<T>::operator delete` is `free(p)`, and that one line is what every scalar deleting destructor in the tree was missing. The original never imports the CRT's `operator delete` at all; `??3@YAXPAX@Z` appears nowhere in the image, because the class-scope one is inlined at every delete site. `operator new` is `malloc`, which is why `create` allocates with `malloc` and not `??2@YAPAXI@Z`. Both are `CA` in the mangling, private, and both have to be protected here: a virtual destructor has to reach its deallocation function and modern conformance enforces that where MSVC 8 does not. Neither reaches our own map, so the original's six-byte out-of-line copy at 0x100078f0 has nothing to annotate.
+
+`Creatable<Instance>::create<U>` is `boost::shared_ptr<U>(new U(), Deleter())` with 108 instantiations, and `FactoryProduct<T, Base, sName>::Creator::create` returns `Creatable<Instance>::create<T>()`. `Deleter::operator()` calls `Instance::predelete` and then deletes, and `predelete` has two private overloads, a member and a static taking `Instance*` that tail jumps into it. Private matters: a public static mangles `SA` where the original has `CA`. Both `predelete` and `~Instance` are inaccessible to `Deleter`, so `Instance` declares it a friend.
+
+`JointInstance` owns `Joint* joint` at 0x108, under an `IRenderable` base at 0xf8 and an empty `IJointOwner` at 0x108. `Motor` and `VelocityMotor` each held a copy of it typed `MotorJoint*`, which is what blocked rebasing them onto `AutoJoint` and `JointInstance`; the setters reach the derived type through a `static_cast`, which costs no instruction under single inheritance.
+
 ## Reflection Descriptors
 
 `Descriptor` (8) to `Type` (16) to `EnumDescriptor` (0x28) to `EnumDesc<T>` (0x98), each recorded in the type records. `Descriptor` holds `const Name& name` at 4 under a vfptr, and its constructor takes a `const char*` and stores `Name::declare(name, -1)`; it never reached the publics, so it is inlined everywhere and belongs in the header. `Type` adds `const std::type_info& type` and `const Name& tag`, and its two-argument form fills `tag` with `Name::lookup(name)`, not with its own name. `EnumDescriptor` passes the literal `"token"` as that tag.
@@ -316,6 +326,8 @@ A property descriptor is a `const` static, so it mangles with a trailing `B`. Ou
 Never sweep timestamps across the working tree. `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. That is what the CI workflow's backdate step does, which is fine on a throwaway runner and destructive in a clone.
 
 `RakPeer`'s vtable annotation needs a commented declaration under it. `class_decl_regex` takes the first identifier after `class`, so `class RAK_DLL_EXPORT RakPeer` reads as a class named `RAK_DLL_EXPORT`; the regex also accepts a `//` line, so `// class RakPeer` on the next line names it. Both vtables hold 71 slots and always did. What stopped the slots pairing was constness: the original spells `char*` as `const char*` in `Connect`, `Send`, `RegisterAsRemoteProcedureCall`, `RegisterClassMemberRPC`, `UnregisterAsRemoteProcedureCall`, `SendConnectionRequest`, both `RPC` overloads and all four `RPCMap` identifier methods, so every one of those mangled to a name our build never emitted. Compare `?Name@RakPeer@@` across both PDBs to find the rest.
+
+reccmp's summary prints one row per recompiled address, so where our link folded two functions the original kept apart, only one of the two annotations appears and the other is missing from the report rather than listed as a miss. `--verbose` on the address still resolves it. Reading absence as failure is what made 47 matching `Creator::create` instantiations look like 47 misses; probe the address before believing the summary.
 
 The original link used `/OPT:ICF` and folded heavily. Many distinct source functions compiled to the same three-byte body and share one address, which is also why Ghidra's PDB source line importer throws several hundred `IllegalArgumentException` warnings when the symbols load. Those warnings are expected and harmless. Run `tools/check_folded.py` before concluding that a function at a shared address is genuinely unmatched.
 

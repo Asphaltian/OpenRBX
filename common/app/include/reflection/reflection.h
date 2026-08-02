@@ -77,6 +77,8 @@ public:
 	// RBX::Reflection::Described<RBX::RotateP,&RBX::sRotateP,RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP> >::classDescriptor
 	// STUB: WEBSERVICE 0x1008e100
 	// RBX::Reflection::Described<RBX::RotateV,&RBX::sRotateV,RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV> >::classDescriptor
+	// STUB: WEBSERVICE 0x1008e170
+	// RBX::Reflection::Described<RBX::Motor,&RBX::sMotor,RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor> >::classDescriptor
 	// STUB: WEBSERVICE 0x1008e390
 	// RBX::Reflection::Described<RBX::Seat,&RBX::sSeat,RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat> >::classDescriptor
 	// STUB: WEBSERVICE 0x100b42f0
@@ -91,6 +93,8 @@ public:
 	// RBX::Reflection::Described<RBX::Shirt,&RBX::sShirt,RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100e0dd0
 	// RBX::Reflection::Described<RBX::Skin,&RBX::sSkin,RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin> >::classDescriptor
+	// STUB: WEBSERVICE 0x100e6160
+	// RBX::Reflection::Described<RBX::VelocityMotor,&RBX::sVelocityMotor,RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ec1a0
 	// RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ec210
@@ -149,6 +153,8 @@ public:
 	// `RBX::Reflection::Described<RBX::Hole,&RBX::sHole,RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole> >::classDescriptor'::`2'::`dynamic atexit destructor for 'd''
 	// SYNTHETIC: WEBSERVICE 0x10222640
 	// `RBX::Reflection::Described<RBX::MotorFeature,&RBX::sMotorFeature,RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature> >::classDescriptor'::`2'::`dynamic atexit destructor for 'd''
+	// SYNTHETIC: WEBSERVICE 0x10222650
+	// `RBX::Reflection::Described<RBX::Motor,&RBX::sMotor,RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor> >::classDescriptor'::`2'::`dynamic atexit destructor for 'd''
 	// SYNTHETIC: WEBSERVICE 0x10222660
 	// `RBX::Reflection::Described<RBX::RotateV,&RBX::sRotateV,RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV> >::classDescriptor'::`2'::`dynamic atexit destructor for 'd''
 	// SYNTHETIC: WEBSERVICE 0x10222670
@@ -185,6 +191,8 @@ public:
 	// `RBX::Reflection::Described<RBX::Skin,&RBX::sSkin,RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin> >::classDescriptor'::`2'::`dynamic atexit destructor for 'd''
 	// SYNTHETIC: WEBSERVICE 0x10224170
 	// `RBX::Reflection::Described<RBX::Shirt,&RBX::sShirt,RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt> >::classDescriptor'::`2'::`dynamic atexit destructor for 'd''
+	// SYNTHETIC: WEBSERVICE 0x10224300
+	// `RBX::Reflection::Described<RBX::VelocityMotor,&RBX::sVelocityMotor,RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor> >::classDescriptor'::`2'::`dynamic atexit destructor for 'd''
 	// SYNTHETIC: WEBSERVICE 0x102246a0
 	// `RBX::Reflection::Described<RBX::Rocket,&RBX::sRocket,RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket> >::classDescriptor'::`2'::`dynamic atexit destructor for 'd''
 	// SYNTHETIC: WEBSERVICE 0x102246b0

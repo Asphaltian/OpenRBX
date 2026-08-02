@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "util/NormalId.h"
+#include "v8datamodel/JointInstance.h"
 #include "v8tree/Instance.h"
 #include "v8world/MotorJoint.h"
 
@@ -57,7 +58,7 @@ private:
 DECOMP_SIZE_ASSERT(Feature, 0x118)
 
 // SIZE 0x128
-class VelocityMotor : public Instance
+class VelocityMotor : public DescribedCreatable<VelocityMotor, JointInstance, sVelocityMotor>
 {
 public:
 	void setMaxVelocity(float value);
@@ -65,8 +66,6 @@ public:
 	void setCurrentAngle(float value);
 
 private:
-	undefined m_unk0x0f8[0x108 - 0x0f8]; // 0x0f8
-	MotorJoint* joint;                   // 0x108
 	undefined m_unk0x10c[0x128 - 0x10c]; // 0x10c
 };
 

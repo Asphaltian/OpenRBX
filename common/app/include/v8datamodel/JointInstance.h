@@ -25,26 +25,12 @@ extern const char sWeld[];
 
 extern const char sSnap[];
 
-// SIZE 0x11c
-class Motor : public Instance
-{
-public:
-	void setMaxVelocity(float value);
-	void setCurrentAngle(float value);
-
-private:
-	undefined m_unk0x0f8[0x108 - 0x0f8]; // 0x0f8
-	MotorJoint* joint;                   // 0x108
-	undefined m_unk0x10c[0x11c - 0x10c]; // 0x10c
-};
-
-DECOMP_SIZE_ASSERT(Motor, 0x11c)
-
 // SIZE 0x10c
 class JointInstance : public DescribedNonCreatable<JointInstance, Instance, sJointInstance>
 {
-private:
-	undefined m_unk0x0f8[0x10c - 0x0f8]; // 0x0f8
+protected:
+	undefined m_unk0x0f8[0x108 - 0x0f8]; // 0x0f8
+	Joint* joint;                        // 0x108
 };
 
 DECOMP_SIZE_ASSERT(JointInstance, 0x10c)
@@ -57,6 +43,16 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(AutoJoint, 0x11c)
+
+// SIZE 0x11c
+class Motor : public DescribedCreatable<Motor, AutoJoint, sMotor>
+{
+public:
+	void setMaxVelocity(float value);
+	void setCurrentAngle(float value);
+};
+
+DECOMP_SIZE_ASSERT(Motor, 0x11c)
 
 // SIZE 0x11c
 class Glue : public DescribedCreatable<Glue, AutoJoint, sGlue>

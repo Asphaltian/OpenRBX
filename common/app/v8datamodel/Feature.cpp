@@ -62,8 +62,8 @@ void Feature::setInOut(InOut value)
 // STUB: WEBSERVICE 0x100e7670
 void VelocityMotor::setMaxVelocity(float value)
 {
-	if (value != joint->getMaxVelocity()) {
-		joint->setMaxVelocity(value);
+	if (value != static_cast<MotorJoint*>(joint)->getMaxVelocity()) {
+		static_cast<MotorJoint*>(joint)->setMaxVelocity(value);
 		raisePropertyChanged(prop_MaxVelocity);
 	}
 }
@@ -71,8 +71,8 @@ void VelocityMotor::setMaxVelocity(float value)
 // STUB: WEBSERVICE 0x100e76b0
 void VelocityMotor::setDesiredAngle(float value)
 {
-	if (value != joint->getDesiredAngle()) {
-		joint->setDesiredAngle(value);
+	if (value != static_cast<MotorJoint*>(joint)->getDesiredAngle()) {
+		static_cast<MotorJoint*>(joint)->setDesiredAngle(value);
 		raisePropertyChanged(prop_DesiredAngle);
 	}
 }
@@ -80,8 +80,8 @@ void VelocityMotor::setDesiredAngle(float value)
 // STUB: WEBSERVICE 0x100e76f0
 void VelocityMotor::setCurrentAngle(float value)
 {
-	if (value != joint->getCurrentAngle()) {
-		joint->setCurrentAngle(value);
+	if (value != static_cast<MotorJoint*>(joint)->getCurrentAngle()) {
+		static_cast<MotorJoint*>(joint)->setCurrentAngle(value);
 		raisePropertyChanged(prop_CurrentAngle);
 	}
 }
