@@ -17,11 +17,46 @@ using G3D::Vector3;
 class SimBody
 {
 public:
+	SimBody(Body* body);
+	~SimBody();
+
+	void accumulateForce(const Vector3& _force, const Vector3& worldPos);
+
+	void accumulateTorque(const Vector3& value)
+	{
+		updateIfDirty();
+
+		torque += value;
+	}
+
+	void step(float dt);
+
+	PV getOwnerPV() const;
+
+	const PV& getPV() const { return pv; }
+
 	void makeDirty() { dirty = true; }
 
 	bool getDirty() const { return dirty; }
 
+	void resetAccumulators();
+
 private:
+	void update();
+
+	void clearAccumulators()
+	{
+		force = Vector3(0.0f, constantForceY, 0.0f);
+		torque = Vector3(0.0f, 0.0f, 0.0f);
+	}
+
+	void updateIfDirty()
+	{
+		if (dirty) {
+			update();
+		}
+	}
+
 	Body* body;              // 0x00
 	bool dirty;              // 0x04
 	PV pv;                   // 0x08
@@ -35,6 +70,22 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(SimBody, 0x98)
+
+// FUNCTION: WEBSERVICE 0x101049a0
+inline void SimBody::resetAccumulators()
+{
+	updateIfDirty();
+	clearAccumulators();
+}
+
+// FUNCTION: WEBSERVICE 0x100e1a80
+inline void SimBody::accumulateForce(const Vector3& _force, const Vector3& worldPos)
+{
+	updateIfDirty();
+
+	force += _force;
+	torque += (worldPos - pv.position.translation).cross(_force);
+}
 
 } // namespace RBX
 

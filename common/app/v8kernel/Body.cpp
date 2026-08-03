@@ -2,15 +2,23 @@
 
 #include "decomp.h"
 #include "util/Math.h"
+#include "v8kernel/Link.h"
+#include "v8kernel/SimBody.h"
 
 #include <cstddef>
 
 namespace RBX {
 
-// STUB: WEBSERVICE 0x1009ad20
-DECOMP_NOINLINE void Body::updatePV() const
+// FUNCTION: WEBSERVICE 0x1009ad20
+void Body::updatePV() const
 {
-	STUB(0x1009ad20);
+	if (parent != NULL && stateIndex != root->getStateIndex()) {
+		const PV& parentPv = parent->getPV();
+
+		pv = parentPv.pvAtLocalCoord(link != NULL ? link->getChildInParent() : meInParent);
+
+		stateIndex = root->getStateIndex();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x101049f0
@@ -55,10 +63,34 @@ void Body::makeCofmDirty()
 	}
 }
 
-// STUB: WEBSERVICE 0x10104b50
-DECOMP_NOINLINE void Body::setPv(const PV& value)
+// FUNCTION: WEBSERVICE 0x10104a80
+void Body::step(float dt, bool throttling)
 {
-	STUB(0x10104b50);
+	if (throttling && canThrottle) {
+		simBody->resetAccumulators();
+		return;
+	}
+
+	simBody->step(dt);
+
+	pv = cofm == NULL ? simBody->getPV() : simBody->getOwnerPV();
+
+	stateIndex = getNextStateIndex();
+}
+
+// FUNCTION: WEBSERVICE 0x10104b50
+void Body::setPv(const PV& value)
+{
+	if (parent == NULL) {
+
+		pv = value;
+
+		if (simBody != NULL) {
+			simBody->makeDirty();
+		}
+
+		advanceStateIndex();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10104be0
@@ -94,28 +126,63 @@ void Body::setMoment(const Matrix3& value)
 	}
 }
 
-// STUB: WEBSERVICE 0x10104db0
+// FUNCTION: WEBSERVICE 0x10104db0
 void Body::setMeInParent(const CoordinateFrame& value)
 {
-	STUB(0x10104db0);
+	if (link != NULL) {
+
+		link->setBody(NULL);
+		link = NULL;
+	}
+
+	if (parent != NULL) {
+		meInParent = value;
+		makeCofmDirty();
+		root->advanceStateIndex();
+	}
 }
 
-// STUB: WEBSERVICE 0x10104e60
-void Body::setMeInParent(Link* link)
+// FUNCTION: WEBSERVICE 0x10104e60
+void Body::setMeInParent(Link* value)
 {
-	STUB(0x10104e60);
+	if (link != NULL && link != value) {
+		link->setBody(NULL);
+	}
+
+	if (parent != NULL) {
+		link = value;
+		value->setBody(this);
+		makeCofmDirty();
+		root->advanceStateIndex();
+	}
 }
 
-// STUB: WEBSERVICE 0x10104ee0
+// FUNCTION: WEBSERVICE 0x10104ee0
 void Body::setCoordinateFrame(const CoordinateFrame& value)
 {
 	setPv(PV(value, getPV().velocity));
 }
 
-// STUB: WEBSERVICE 0x10104f60
+// FUNCTION: WEBSERVICE 0x10104f60
 Vector3 Body::getBranchCofmPos() const
 {
-	return cofm == NULL ? getPV().position.translation : getPV().position.pointToWorldSpace(cofm->getCofmInBody());
+	return cofm != NULL ? getPV().position.pointToWorldSpace(cofm->getCofmInBody()) : getPV().position.translation;
+}
+
+// FUNCTION: WEBSERVICE 0x10104fc0
+CoordinateFrame Body::getBranchCofmCoordinateFrame() const
+{
+	return CoordinateFrame(getCoordinateFrame().rotation, getBranchCofmPos());
+}
+
+// FUNCTION: WEBSERVICE 0x10105010
+void Body::resetRoot(Body* value)
+{
+	root = value;
+
+	for (int i = 0; i < numChildren(); ++i) {
+		getChild(i)->resetRoot(value);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10105040
@@ -130,22 +197,100 @@ Matrix3 Body::getBranchIWorldAtPoint(const Vector3& point) const
 	return Math::getIWorldAtPoint(getBranchCofmPos(), point, getBranchIWorld(), getBranchMass());
 }
 
-// STUB: WEBSERVICE 0x10105390
+// FUNCTION: WEBSERVICE 0x10105150
+float Body::kineticEnergy() const
+{
+	return ((getIWorld() * pv.velocity.rotational).dot(pv.velocity.rotational) +
+			pv.velocity.linear.dot(pv.velocity.linear) * mass) *
+		   0.5f;
+}
+
+// FUNCTION: WEBSERVICE 0x10105240
+void Body::onChildRemoved(Body* child)
+{
+	children.fastRemove(child);
+
+	if (numChildren() == 0) {
+		delete cofm;
+		cofm = NULL;
+	}
+
+	makeCofmDirty();
+}
+
+// FUNCTION: WEBSERVICE 0x101052d0
+void Body::onChildAdded(Body* child)
+{
+	makeCofmDirty();
+
+	children.fastAppend(child);
+
+	if (cofm == NULL) {
+		cofm = new Cofm(this);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10105390
 void Body::setParent(Body* value)
 {
-	STUB(0x10105390);
+	if (parent != value) {
+
+		if (link != NULL) {
+			link->setBody(NULL);
+			link = NULL;
+		}
+
+		if (parent != NULL) {
+			parent->onChildRemoved(this);
+		}
+		else {
+			delete simBody;
+			simBody = NULL;
+		}
+
+		parent = value;
+
+		if (value != NULL) {
+			value->onChildAdded(this);
+		}
+		else {
+			simBody = new SimBody(this);
+		}
+
+		Body* newRoot = calcRoot();
+
+		newRoot->advanceStateIndex();
+
+		resetRoot(newRoot);
+	}
 }
 
-// STUB: WEBSERVICE 0x101054a0
+// FUNCTION: WEBSERVICE 0x101054a0
 Body::Body()
+	: root(NULL), parent(NULL), index(-1), cofm(NULL), simBody(NULL), canThrottle(true), link(NULL),
+	  moment(Matrix3::identity()), mass(0.0f), stateIndex(getNextStateIndex())
 {
-	STUB(0x101054a0);
+	root = this;
+	simBody = new SimBody(this);
 }
 
-// STUB: WEBSERVICE 0x101055a0
+// FUNCTION: WEBSERVICE 0x101055a0
 Body::~Body()
 {
-	STUB(0x101055a0);
+	if (parent != NULL) {
+		setParent(NULL);
+	}
+
+	delete simBody;
+	simBody = NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x10105620
+Body* Body::getWorldBody()
+{
+	static Body b;
+
+	return &b;
 }
 
 } // namespace RBX

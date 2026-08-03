@@ -45,6 +45,8 @@ public:
 
 	Body* getChild(int index) const { return children[index]; }
 
+	const Vector3& getCofmOffset() const { return cofm != NULL ? cofm->getCofmInBody() : Vector3::zero(); }
+
 	const Vector3& getPos() const
 	{
 		updatePV();
@@ -60,6 +62,18 @@ public:
 	Matrix3 getBranchIWorld() const { return Math::momentToWorldSpace(getBranchIBody(), getPV().position.rotation); }
 
 	Matrix3 getIWorldAtPoint(const Vector3& point) const;
+
+	float kineticEnergy() const;
+
+	void step(float dt, bool throttling);
+
+	CoordinateFrame getBranchCofmCoordinateFrame() const;
+
+	const Velocity& getVelocity() const
+	{
+		updatePV();
+		return pv.velocity;
+	}
 	Matrix3 getBranchIWorldAtPoint(const Vector3& point) const;
 
 	const PV& getPV() const
@@ -82,6 +96,8 @@ public:
 		return pv.position;
 	}
 
+	static Body* getWorldBody();
+
 	static int getNextStateIndex();
 
 	void advanceStateIndex();
@@ -90,8 +106,13 @@ public:
 
 	Vector3 getBranchCofmPos() const;
 
+	void accumulateForce(const Vector3& force, const Vector3& worldPos);
+	void accumulateTorque(const Vector3& torque);
+
+	bool getCanThrottle() const { return canThrottle; }
+
 	void setParent(Body* value);
-	void setMeInParent(Link* link);
+	void setMeInParent(Link* value);
 	void setMeInParent(const CoordinateFrame& value);
 
 	void setCoordinateFrame(const CoordinateFrame& value);
@@ -103,6 +124,15 @@ private:
 	friend class Kernel;
 	friend class KernelData;
 
+	void onChildAdded(Body* child);
+	void onChildRemoved(Body* child);
+
+	void resetRoot(Body* value);
+
+	Body* calcRoot();
+
+	SimBody* getRootSimBody() { return root->simBody; }
+
 	int& getIndex() const { return index; }
 
 	int& getKernelIndex() const { return kernelIndex; }
@@ -113,14 +143,43 @@ private:
 	IndexArray<Body, &Body::getIndex> children; // 0x10
 	Cofm* cofm;                                 // 0x1c
 	SimBody* simBody;                           // 0x20
-	undefined m_unk0x24[0x5c - 0x24];           // 0x24
+	bool canThrottle;                           // 0x24
+	Link* link;                                 // 0x28
+	CoordinateFrame meInParent;                 // 0x2c
 	Matrix3 moment;                             // 0x5c
 	float mass;                                 // 0x80
-	int stateIndex;                             // 0x84
-	PV pv;                                      // 0x88
+	mutable int stateIndex;                     // 0x84
+	mutable PV pv;                              // 0x88
 };
 
 DECOMP_SIZE_ASSERT(Body, 0xd0)
+
+inline void Body::accumulateForce(const Vector3& force, const Vector3& worldPos)
+{
+	SimBody* simBody = getRootSimBody();
+
+	if (simBody != NULL) {
+		simBody->accumulateForce(force, worldPos);
+	}
+}
+
+inline void Body::accumulateTorque(const Vector3& torque)
+{
+	SimBody* simBody = getRootSimBody();
+
+	if (simBody != NULL) {
+		simBody->accumulateTorque(torque);
+	}
+}
+
+// SYNTHETIC: WEBSERVICE 0x10225130
+// `RBX::Body::getWorldBody'::`2'::`dynamic atexit destructor for 'b''
+
+// FUNCTION: WEBSERVICE 0x101049e0
+inline Body* Body::calcRoot()
+{
+	return parent != NULL ? parent->calcRoot() : this;
+}
 
 } // namespace RBX
 

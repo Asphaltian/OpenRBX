@@ -17,6 +17,9 @@ public:
 	IndexArray<Point, &Point::getKernelIndex> points;                    // 0x0c
 	IndexArray<Connector, &Connector::getKernelIndex> connectors;        // 0x18
 	IndexArray<Connector, &Connector::getKernelIndex> connectors2ndPass; // 0x24
+
+	// FUNCTION: WEBSERVICE 0x100d5270
+	~KernelData() {}
 };
 
 DECOMP_SIZE_ASSERT(KernelData, 0x30)

@@ -129,6 +129,7 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Name.cpp
   common/app/util/NormalId.cpp
   common/app/util/Quaternion.cpp
+  common/app/util/Profiling.cpp
   common/app/util/Rect.cpp
   common/app/util/standardout.cpp
   common/app/v8kernel/Body.cpp
@@ -151,9 +152,13 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/Tool.cpp
   common/app/v8datamodel/Workspace.cpp
   common/app/v8kernel/Cofm.cpp
+  common/app/v8kernel/Connector.cpp
   common/app/v8kernel/Constants.cpp
   common/app/v8kernel/Kernel.cpp
   common/app/v8kernel/Link.cpp
+  common/app/v8kernel/Pair.cpp
+  common/app/v8kernel/Point.cpp
+  common/app/v8kernel/SimBody.cpp
   common/app/v8world/Assembly2.cpp
   common/app/v8world/AssemblyStage2.cpp
   common/app/v8world/Ball.cpp
@@ -314,7 +319,7 @@ endfunction()
 # /GS- /fp:fast and full inline expansion are unique to App among the Roblox libraries.
 add_engine_library(app
   DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE
-  OPTIONS /O2 /Ob2 /Oi /Oy /GF /Gy /GS- /fp:fast
+  OPTIONS /O2 /Ob2 /Oi /Oy /GF /GS- /fp:fast
   SOURCES ${OPENRBX_APP_SOURCES}
 )
 

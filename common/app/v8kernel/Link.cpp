@@ -1,5 +1,6 @@
 #include "v8kernel/Link.h"
 
+#include "util/Math.h"
 #include "v8kernel/Body.h"
 
 #include <cstddef>
@@ -12,6 +13,33 @@ void Link::dirty()
 	if (body != NULL) {
 		body->getRoot()->advanceStateIndex();
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x10102800
+void RevoluteLink::computeChildInParent(CoordinateFrame& answer) const
+{
+	CoordinateFrame rotatedParentCoord(Math::rotateAboutZ(parentCoord.rotation, jointAngle), parentCoord.translation);
+
+	answer = rotatedParentCoord * childCoordInverse;
+}
+
+// FUNCTION: WEBSERVICE 0x10102880
+Link::Link() : body(NULL), stateIndex(Body::getNextStateIndex())
+{
+}
+
+// FUNCTION: WEBSERVICE 0x101028c0
+const CoordinateFrame& Link::getChildInParent() const
+{
+	int index = body->getParent()->getStateIndex();
+
+	if (stateIndex != index) {
+		computeChildInParent(childInParent);
+
+		stateIndex = index;
+	}
+
+	return childInParent;
 }
 
 // FUNCTION: WEBSERVICE 0x10102900

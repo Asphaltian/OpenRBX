@@ -1,12 +1,14 @@
 #ifndef V8KERNEL_ISTAGE_H
 #define V8KERNEL_ISTAGE_H
 
+#include <cstddef>
+
 namespace RBX {
 
 class IStage;
 class Kernel;
 
-class IStage
+class __declspec(novtable) IStage
 {
 public:
 	enum StageType
@@ -22,7 +24,12 @@ public:
 		KERNEL_STAGE = 8,
 	};
 
-	virtual ~IStage();
+	IStage(IStage* upstream) : upstream(upstream), downstream(NULL) {}
+
+	// FUNCTION: WEBSERVICE 0x100ab1a0
+	// RBX::IStage::~IStage
+
+	virtual ~IStage() { delete downstream; }
 	virtual StageType getStageType() const = 0;
 	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling) = 0;
 	virtual Kernel* getKernel() = 0;

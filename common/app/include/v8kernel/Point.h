@@ -15,24 +15,49 @@ class KernelData;
 
 using G3D::Vector3;
 
+// VTABLE: WEBSERVICE 0x10247f9c
 // SIZE 0x34
-class __declspec(novtable) Point : public KernelIndex
+class Point : public KernelIndex
 {
-protected:
-	virtual ~Point(); // vtable+0x00
+private:
+	friend class Kernel;
+	friend class KernelData;
 
+	// FUNCTION: WEBSERVICE 0x100d4ec0 FOLDED
+	int& getKernelIndex() const { return kernelIndex; }
+
+	int numOwners; // 0x08
+
+protected:
 	Body* body;       // 0x0c
 	Vector3 localPos; // 0x10
 	Vector3 worldPos; // 0x1c
 	Vector3 force;    // 0x28
 
-private:
-	friend class Kernel;
-	friend class KernelData;
+	Point(Body* _body);
 
-	int& getKernelIndex() const { return kernelIndex; }
+	virtual ~Point() {} // vtable+0x00
 
-	int numOwners; // 0x08
+	// SYNTHETIC: WEBSERVICE 0x1011e6b0
+	// RBX::Point::`scalar deleting destructor'
+
+public:
+	static bool sameBodyAndOffset(const Point* p0, const Point* p1)
+	{
+		return p0->body == p1->body && p0->localPos == p1->localPos;
+	}
+
+	void step();
+	void accumulateForce(const Vector3& value) { force += value; }
+	void forceToBody();
+	void setLocalPos(const Vector3& value);
+	void setWorldPos(const Vector3& _worldPos);
+
+	void setBody(Body* body);
+
+	Body* getBody() { return body; }
+
+	const Vector3& getWorldPos() { return worldPos; }
 };
 
 DECOMP_SIZE_ASSERT(Point, 0x34)

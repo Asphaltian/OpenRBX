@@ -127,6 +127,50 @@ Everything it needs was recorded rather than guessed. `Body::getBranchMass` is `
 
 `Rect.obj` holds one function and `util/Rect.cpp` matches it, so the object is done. `positionChild` builds its result with `fromLowSize(Vector2(x, y), Vector2(width, height))`, which the type records carry as a static beside a `Rect(const Vector2&, const Vector2&)` constructor. The four float constructor compiles the same arithmetic in the wrong order: it stores `low` with a non-popping `fst` and adds afterwards, where the original computes both sums and then stores all four, which is the rule that building a return value through a constructor evaluates every argument before storing anything. The two switches were already right, and each is a real `switch`, lowered as descending `sub eax, N / jz` over 2, 3, 4 for the x locations and 0, 1, 4 for the y.
 
+## Naming Locals
+
+Where the line records show lines that generate no code, the original named something, and naming it back is worth more than any respelling. `Quaternion::operator*` spans quaternion.h 58 to 65 with code only at 63 and 64, so lines 59 to 62 are four declarations that cost nothing: two `const Vector3&` aliases for `imag()` and `other.imag()`, and two `float` copies of `w` and `other.w`. Adding the references took it from 43.90 to 68.85 and adding the scalars took it to 100. The scalars are visible in the disassembly before the source is guessed at: the original loads both `w` values at the top of the function and consumes them at the end with `fmulp` on values still in registers, where ours reloaded them from memory.
+
+A reference declaration emits nothing, so a run of no-code lines in a header is the signature of aliases. A `float` copy does emit a load, but the scheduler hoists it into the following statement's run, so it leaves no record either.
+
+A leading underscore on a parameter is the strongest tell there is, because it exists so the body can bind the unprefixed name. `mulMatrixMatrixTranspose(const Matrix3& _mat0, const Matrix3& _mat1, Matrix3& _answer)` has exactly three no-code lines between its brace at simbody.cpp 75 and the loop at 79, which are `mat0`, `mat1` and `answer` aliasing the three parameters. With those three aliases the plain flat `mat0[i][0] * mat1[j][0] + mat0[i][1] * mat1[j][1] + mat0[i][2] * mat1[j][2]` matches, where without them the same flat expression scores 66.67 and the best of sixty parenthesised and row-pointer spellings reaches only 85.71. The aliases leave no `S_BPREL32` record, so an empty local list never rules them out.
+
+An alias over a member reached through its own accessor is the same lever: `RotateConnector::computeForce` went from 91.11 to 96.09 on `KernelInput& input = getKernelInput();` and then using `input` for the latch and `input.get()`. The accessor is in the type records, which is what makes the alias a recovered fact rather than a guess. It does not generalise to any member: the identical trick on `frictionOffset` inside `ContactConnector::computeForce` costs eleven points, so alias only what the records name an accessor for.
+
+`S_FRAMEPROC`'s `inl_specified` records whether the original declared a function `inline`, which is how `mulMatrixMatrixTranspose` and `computeRotVel` are known to carry the keyword in `SimBody.cpp` even though both are emitted out of line. It changes no codegen, so it is fidelity rather than a lever.
+
+`S_BPREL32` records name every stack local and give its frame offset, which settles what the original declared without guessing: `RotateConnector::computeForce` has exactly `rotVel`, `normal`, `rotation` and `torque`, and `ContactConnector::computeForce` has `params`, `perpVel`, `force`, `kApplied` and `normalVel` with `kApplied` reusing the dead `dt` parameter slot. Declaration order cannot be read back from them, because MSVC lays locals out by size and not by declaration, and reordering to match the record order moves nothing.
+
+## Recovering Helpers
+
+Hand-inlining a helper the original called is the single most expensive mistake available, and the type records name every one of them. `RBX::Math::getWorldNormal` has two static overloads returning `Vector3`, over `(NormalId, const Matrix3&)` and `(NormalId, const CoordinateFrame&)`, and no symbol anywhere in the image because it is inline. Writing its five lines out by hand at each call site held `GeoPair::computeEdgeEdge` at 89, `computeEdgeEdgePlane` at 94, `computeBallEdge` at 96 and `NormalBreakConnector::computeForce` at 97; replacing all four with the call took every one of them to 100 in two builds. `PV::linearVelocityAtPoint` over `Velocity::linearVelocityAtOffset` is the same story and finished `computeNormalPerpVel`.
+
+A helper's temporaries are allocated once per expansion, so the expression that reads identically when written out does not schedule identically. That is why sweeping spellings of the inlined form is hopeless: `computeEdgeEdge`'s `e1` scored 89 per-component, 67 whole-vector and 65 construct-then-scale, and the helper, which is the whole-vector shape, scores 100. The score ordering of hand-written variants carries no information about which one the original had.
+
+`Math::getColumn(const Matrix3&, int)` is recorded beside it and is not what `getWorldNormal` is built from: routing the column through it drops the same four functions from 100 to between 78 and 97. Two recorded helpers that look composable need not compose.
+
+Search the type records for a plausible name before writing arithmetic out. `getWorldNormal`, `linearVelocityAtPoint`, `linearVelocityAtOffset`, `velocityAtOffset`, `getColumn`, `polarity`, `iRound` and `iFloor` were all sitting in `RBX::Math`, `RBX::PV` and `RBX::Velocity` unimplemented while five functions were stuck below 97.
+
+## SimBody
+
+`v8kernel/SimBody.cpp` is five of seven and `SimBody::step` is the one that mattered. What finished it was the recorded `Quaternion(const Vector3&, float)` constructor: `Quaternion(pv.velocity.rotational, 0.0f)` in place of naming the three components, which realigned every first-component add in the function at once. The scheduler's commute choices downstream depend on how earlier expressions were built, so a constructor overload can fix diffs in statements that never mention it. `frictionOffset += dt * perpVel` in `ContactConnector` is the same lever smaller: multiply operand order is invisible in the instruction stream but still steers later tie-breaks.
+
+`Quaternion::operator*` holds its result in a named local, which the line records prove: three records at quaternion.h 63 to 65, and the last one covers only the final store and `ret`, which is `return result;` after NRVO. The formula is the vector form, cross last, and the scalar-explicit spelling loses twenty points.
+
+`computeEdgeEdge`'s line records decode to exactly the statements the file already has, delta then dot, t0, t1, denom, the branch, then a named recip whose whole statement is the two-byte `fdivrp`. Both edges are construct-then-scale in the original, but writing `e1` whole-vector costs one 4-byte stack slot against the original's frame because ours will not reuse the dead spill slot the original shares between the e1.z spill and delta.z, and one slot shifts every spill offset in a 250-instruction function. That reads as twenty percent lost when the real difference is a temp-allocation tie. The per-component `e1` keeps the original's frame and scores 89; the shape-true spelling scores 67 with almost every instruction right but displaced.
+
+## Dot Receiver
+
+Which operand of `Vector3::dot` is the receiver decides the schedule whenever the other one is a live x87 temporary, and swapping it is worth more than any amount of respelling around it. `Body::kineticEnergy` sat at 93.55 written `w.dot(getIWorld() * w)` and reached 100 as `(getIWorld() * w).dot(w)`, because the product then stays on the stack instead of being materialised for the receiver. Where both operands are already in memory the swap is inert, which is why the same change does nothing to `GeoPair::computeNormalPerpVel` or `NormalBreakConnector`.
+
+Multiply operand order is normalised and parenthesisation is not. Sixty spellings that only commute factors move nothing; regrouping a three term sum moves several percent, in both directions. `Matrix3::operator*` is the case to remember: `t0 + (t1 + t2)` takes `computeRotVel` from 83.10 to 87.32 and drops `kineticEnergy` from 93.55 to 82.26, so one grouping cannot serve both call sites and the stock flat form is the one to keep.
+
+## Float Literals
+
+A literal that is one ULP wrong reads as a naming problem, not a value problem. `RotateConnector::computeParams` held at 99.40 on a single `fld`, because reccmp printed the original's operand as `<OFFSET5>` while resolving ours to a named float, and an unresolved operand hides a wrong value. The bytes settle it: `0x10236eec` holds `DA 0F C9 40`, so the constant is `6.283185f` (0x40C90FDA) and not `6.2831855f` (0x40C90FDB). Read the operand out of the image whenever reccmp fails to resolve one side; a constant reccmp renders on both sides is already proven equal.
+
+`RBX::Math::sign` is a static returning `float`, recorded beside `polarity`, `iRound` and `iFloor` and inlined everywhere, so it has no symbol. The original never calls `G3D::sign`, which returns double: a float `sign` loads `-1.0` as a dword where the double one loads a qword, and that one operand is what `GeoPair::computeEdgeEdgePlane` turned on.
+
 ## Kernel
 
 `v8kernel/Kernel.cpp` is complete. All five functions reach the kernel through `KernelData* kernelData` at 0x10, and `numBodies`, `numPoints` and `numConnectors` are one `size()` each while `insertBody` and `removeBody` are `IndexArray::fastAppend` and `fastRemove`, whose swap with last and shrink is what the disassembly spells out.
@@ -150,6 +194,22 @@ The index those arrays keep is not the one `Body::children` uses. `RBX::KernelIn
 Four things settled it and each is general. A bare `fld`/`fistp` with no control word change is round to nearest, not a cast, so it is `G3D::iRound`, which is `lrintf`. The component-wise clamp is `Vector3::max`, recognisable because it builds one `Vector3(1,1,1)` temporary and compares z, y, x in that order rather than three separate constants. `MAX_LEGO_JOINT_FORCES_MEASURED` cannot be `const`: as a constant our build folds `(1.0f / 7.0f) * table[6]` into a single pool entry where the original keeps the two multiplies apart, so the array is written without `const` and named in the statics table. And the ternaries in `getJointKMultiplier` are spelled `value < 15.0f ? a : b`, not `15.0f <= value ? b : a`; the original loads the constant into st(0) and tests `ah, 0x41`, ours loads the value and tests `ah, 1`, which is the same `<` rule that decides `Extents::contains`. Those three ternaries were the whole of the last 9.5 percent.
 
 `tools/ncc/ncc.style` gained an `^[A-Z][A-Z0-9_]*$` alternative for the same reason it carries `prop_` and `event_`: the caps spelling is the original's, recovered from its symbols rather than chosen.
+
+## Connector
+
+`v8kernel/Connector.cpp` is complete, all eleven functions, and `ContactConnector::computeForce` is the one that took work. It ended on three spellings that no amount of sweeping around them would substitute for, and each is a rule.
+
+Two statements on one source line are one line record, and the record lengths say when that happened. The original's records run 164 at +0x102, 165 at +0x10B, 166 at +0x126, so line 165 is 27 bytes where our four-statement form splits 21 and 6, and line 166 is the 6 byte `kFriction * forceMagLast`. Written `float frictionForce = frictionOffset.magnitude() * kApplied;` the statement is one record but the wrong code; written as two statements it is the right code and one record too many. `float magnitude = frictionOffset.magnitude(), frictionForce = magnitude * kApplied;` is both, and it is worth 1.5 percent over the single expression. Count the boundaries against the original's before deciding a local is not there: a comma declaration is invisible to a statement count taken from the source.
+
+Chained assignment is visible the same way and in the same place. The original has a record at 152 and the next at 153 covering the inlined switch, so the two `Vector3(0.0f, 0.0f, 0.0f)` stores are one statement, and the stores run `normal` then `position`, which right to left evaluation makes `params.position = params.normal = Vector3(0.0f, 0.0f, 0.0f);`. It is inert on its own and worth 0.8 percent once the rest is right.
+
+`dt * perpVel` and `perpVel * dt` compile to the same bytes and schedule differently, because G3D's free `operator*(float, const Vector3&)` is `return v * s;` and that extra inline frame changes how MSVC picks between `fxch st(2)` plus a folded `fadd [mem]` and `fld [mem]` plus `faddp`. Both forms are two instructions in the good case and three in the bad one, so this reads as a two byte function and every later line record shifted by two.
+
+None of the three moves anything alone: the accumulation and the magnitude are 98.06 and 98.45 apart, and only all three together reach 100. Sweeping one statement at a time will report every one of them as inert.
+
+`Connector::canThrottle` and `getBroken` return false, and the three bytes at 0x100eb790 are the only thing that says so. Both read as defaults a derived class overrides, both were written `return true`, and the pair then folded into their own group instead of onto `Joint::isBreakable`'s. That is what `tools/check_folded.py` is for: a wrong constant in a three byte body scores 100 against whichever alias reccmp pairs and shows up only as the fold not happening. It also failed `reccmp-vtable`, since `Connector`'s slots then pointed at a group the original does not have.
+
+The original's `S_BPREL32` list is the fingerprint that says the allocation still differs when the code is nearly right. It records `params`, `perpVel`, `force`, `kApplied` and `normalVel`, and ours had every one but `kApplied`, whose home is the dead `dt` parameter slot. It is not reachable by declaring `kApplied` earlier or `const`; it appears when the rest of the function is right. `force` has to stay declared at its use: hoisting it to the top of the block costs five percent.
 
 ## StandardOut
 
@@ -288,7 +348,7 @@ Each original static library gets its own OBJECT library, because each was compi
 
 - App, RbxView and AppDraw were built `/GS-`. Network and RenderLib were not. Stack cookies show up as spurious mismatches if this is wrong.
 - App is the only library with `/fp:fast`, and the only one with `/Ob2 /Oi /Oy` together.
-- App was built `/Gy`. The original folded `Primitive::getFirstJoint` onto `Joint::getJointOwner` across two objects, which only COMDATs allow.
+- App was not built `/Gy`. The PDB records a command block per object and `reccmp-cvdump -s` prints it, so the flag set is read rather than inferred: App's 183 objects are `-O2 -Ob2 -Oi -Oy -GF -EHs -EHc -MD -GS- -fp:fast -W3 -Zi -TP`, where G3D's and RenderLib's carry `-Gy` and App's do not. The folding it was inferred from needs no COMDAT of ours: inline and template bodies get one whatever the flag, and everything `tools/check_folded.py` asserts still folds without it. Grouping every object by its command block is also how the Lua 25 are told apart from App proper, since they are the only ones carrying `_CRT_SECURE_NO_WARNINGS`.
 - RenderLib is the only one with `/Wp64`.
 - Six translation units are the only objects compiled `/GL`, so the link ran `/LTCG`. Nothing else in the binary is LTCG. Three of the six are `Client\win` sources, not RBXGS ones.
 

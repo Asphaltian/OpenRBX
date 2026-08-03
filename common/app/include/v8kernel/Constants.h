@@ -26,6 +26,13 @@ public:
 	static float getKmsMaxJointForce(float studsA, float studsB);
 
 	static float getJointK(const Vector3& size, bool isBall);
+
+	static const Vector3& getKmsGravity()
+	{
+		static Vector3 g(0.0f, -9.81f, 0.0f);
+
+		return g;
+	}
 };
 
 } // namespace RBX

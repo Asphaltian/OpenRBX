@@ -1,3 +1,5 @@
+#include "util/Units.h"
+
 #include <G3D/Vector3.h>
 
 namespace RBX {

@@ -15,25 +15,29 @@ using G3D::CoordinateFrame;
 class __declspec(novtable) Link
 {
 public:
+	Link();
+
 	void reset(const CoordinateFrame& parentC, const CoordinateFrame& childC);
 
-	const CoordinateFrame& getChildInParent() const { return childInParent; }
+	const CoordinateFrame& getChildInParent() const;
 
 	Body* getBody() { return body; }
 
 protected:
-	virtual void computeChildInParent() const = 0; // vtable+0x00
+	friend class Body;
+
+	virtual void computeChildInParent(CoordinateFrame& answer) const = 0; // vtable+0x00
 
 	void dirty();
 
-	void setBody(Body* value);
+	void setBody(Body* value) { body = value; }
 
-	Body* body;                        // 0x04
-	CoordinateFrame parentCoord;       // 0x08
-	CoordinateFrame childCoord;        // 0x38
-	CoordinateFrame childCoordInverse; // 0x68
-	CoordinateFrame childInParent;     // 0x98
-	int stateIndex;                    // 0xc8
+	Body* body;                            // 0x04
+	CoordinateFrame parentCoord;           // 0x08
+	CoordinateFrame childCoord;            // 0x38
+	CoordinateFrame childCoordInverse;     // 0x68
+	mutable CoordinateFrame childInParent; // 0x98
+	mutable int stateIndex;                // 0xc8
 };
 
 DECOMP_SIZE_ASSERT(Link, 0xcc)
@@ -49,7 +53,7 @@ public:
 	}
 
 private:
-	virtual void computeChildInParent() const; // vtable+0x00
+	virtual void computeChildInParent(CoordinateFrame& answer) const; // vtable+0x00
 
 	float jointAngle; // 0xcc
 };

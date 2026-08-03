@@ -2,28 +2,58 @@
 #define V8KERNEL_KERNEL_H
 
 #include "decomp.h"
+#include "util/Profiling.h"
 #include "v8kernel/IStage.h"
 
 #include <G3D/Array.h>
+#include <G3D/Vector3.h>
+#include <boost/scoped_ptr.hpp>
 
 namespace RBX {
 
 class Body;
 class Connector;
 class KernelData;
+class Point;
 
+using G3D::Vector3;
+
+// VTABLE: WEBSERVICE 0x1023c81c
 // SIZE 0x30
 class Kernel : public IStage
 {
 public:
+	Kernel(IStage* upstream);
+
+	virtual ~Kernel(); // vtable+0x00
+
+	virtual StageType getStageType() const { return KERNEL_STAGE; }
+
+	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling);
+
 	int numBodies() const;
 	int numPoints() const;
 	int numConnectors() const;
+
+	float connectorSpringEnergy();
+	float bodyKineticEnergy();
+
+	void insertConnector(Connector* connector);
+	void insertConnector2ndPass(Connector* connector);
+	void removeConnector(Connector* connector);
+	void removeConnector2ndPass(Connector* connector);
+
+	Kernel* getKernel();
+
+	Point* newPoint(Body* body, const Vector3& worldPos);
+	void deletePoint(Point* point);
 
 	void insertBody(Body* body);
 	void removeBody(Body* body);
 
 private:
+	void removePoint(Point* point);
+
 	static int numKernels;
 
 	bool inStepCode;                           // 0x0c
@@ -32,7 +62,8 @@ private:
 	int maxBodies;                             // 0x20
 	int maxPoints;                             // 0x24
 	int maxConnectors;                         // 0x28
-	undefined m_unk0x2c[0x30 - 0x2c];          // 0x2c
+
+	boost::scoped_ptr<Profiling::CodeProfiler> profilingKernel; // 0x2c
 };
 
 DECOMP_SIZE_ASSERT(Kernel, 0x30)

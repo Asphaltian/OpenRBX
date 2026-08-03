@@ -9,6 +9,7 @@
 #include <G3D/Ray.h>
 #include <G3D/Vector2.h>
 #include <G3D/Vector3.h>
+#include <cmath>
 #include <limits>
 
 namespace RBX {
@@ -31,6 +32,39 @@ public:
 		static const float i = std::numeric_limits<float>::infinity();
 
 		return i;
+	}
+
+	static Vector3 getColumn(const Matrix3& matrix, int column)
+	{
+		return Vector3(matrix[0][column], matrix[1][column], matrix[2][column]);
+	}
+
+	static Vector3 getWorldNormal(NormalId normalId, const Matrix3& rotation)
+	{
+		int face = normalId / 3;
+		int axis = normalId - face * 3;
+
+		return Vector3(rotation[0][axis], rotation[1][axis], rotation[2][axis]) * (float) (1 - face * 2);
+	}
+
+	static Vector3 getWorldNormal(NormalId normalId, const CoordinateFrame& coord)
+	{
+		return getWorldNormal(normalId, coord.rotation);
+	}
+
+	static float taxiCabMagnitude(const Vector3& value) { return fabs(value.x) + fabs(value.y) + fabs(value.z); }
+
+	static float sign(float value)
+	{
+		if (value > 0.0f) {
+			return 1.0f;
+		}
+
+		if (value < 0.0f) {
+			return -1.0f;
+		}
+
+		return 0.0f;
 	}
 
 	static bool isDenormal(float value);
