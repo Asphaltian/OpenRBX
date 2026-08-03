@@ -12,8 +12,6 @@ Conventions and tooling follow the [LEGO Island decompilation](https://github.co
 
 Still early. `WebService.dll` contains 12,633 functions.
 
-RBXGS, the game server, comes first, because its `WebService.dll` shipped with an unstripped PDB. The client follows. Most of the work carries across either way: the engine libraries under `common/` were shared between the two, and three of the six link-time code generation objects inside `WebService.dll` came from the client tree, not the server's.
-
 ## Building
 
 Visual C++ 8.0 SP1 compiled the original and is the only toolchain that reproduces its output, so contributions are measured against it.

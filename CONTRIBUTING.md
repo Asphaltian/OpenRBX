@@ -21,8 +21,6 @@ Decompilation takes time to become good at. Be comfortable with C++ and x86 asse
 
 Files belong where the original kept them, and the PDB records where that was. `reccmp-cvdump -m -s -l WebService.pdb` prints a `src =` line for every module giving the original directory and filename, casing included.
 
-That settles two things people get wrong. Not everything linked into `WebService.dll` came from the RBXGS project, which is why `VersionInfo.cpp`, `LogManager.cpp` and `ErrorUploader.cpp` sit under `common/win`. And because the line records attribute inline and template code to whichever header defines it, an address landing inside a `.h` means the function belongs inline in that header. Move it to the `.cpp` and it compiles in a different context, which puts a ceiling on how well it can match.
-
 ## Annotations
 
 Decompiled functions carry a reccmp marker giving their address in the original binary:
@@ -57,7 +55,3 @@ Placeholder names follow the [LEGO Island decompilation](https://github.com/isle
 - Unknown parameters: `p_unk0xXX`
 
 They are for the cases where the original name is genuinely lost. It usually is not: the PDB was never stripped, so most of this codebase already has real names, namespaces and class hierarchies. Struct layouts and enum values are recorded too, and `reccmp-cvdump -t` prints the type records that give member offsets and enumerator values outright.
-
-## Identical COMDAT Folding
-
-The original link used `/OPT:ICF` and folded heavily. Many unrelated functions compiled down to the same short body and now share one address. When reccmp calls a function unmatched at an address other functions also claim, run `tools/check_folded.py` before concluding the code is wrong.
