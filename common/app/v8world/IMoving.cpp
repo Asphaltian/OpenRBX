@@ -32,7 +32,7 @@ void IMoving::makeMoving()
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x100d0c80
+// STUB: WEBSERVICE 0x100d0c80
 IMovingManager::~IMovingManager()
 {
 }
@@ -88,7 +88,7 @@ void IMoving::notifyMoved()
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x100d0e80
+// STUB: WEBSERVICE 0x100d0e80
 IMovingManager::IMovingManager()
 {
 	current = moving.end();

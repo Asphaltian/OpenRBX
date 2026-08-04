@@ -9,6 +9,9 @@ namespace RBX {
 // SIZE 0x34
 class Contact : public Edge
 {
+public:
+	int& steppingIndexFunc() const { return const_cast<int&>(steppingIndex); }
+
 private:
 	static bool ignoreBool;
 

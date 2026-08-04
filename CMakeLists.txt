@@ -179,6 +179,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/MotorJoint.cpp
   common/app/v8world/MultiJoint.cpp
   common/app/v8world/Primitive.cpp
+  common/app/v8world/SleepStage2.cpp
   common/app/v8world/RigidJoint.cpp
   common/app/v8world/RotateJoint.cpp
   common/app/v8world/SnapJoint.cpp

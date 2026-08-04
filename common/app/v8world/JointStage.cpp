@@ -133,7 +133,7 @@ void JointStage::onEdgeRemoving(Edge* e)
 	e->removeFromPipeline(this);
 }
 
-// FUNCTION: WEBSERVICE 0x10118700
+// STUB: WEBSERVICE 0x10118700
 JointStage::JointStage(IStage* upstream, World* world) : IWorldStage(upstream, new ClumpStage(this, world), world)
 {
 }

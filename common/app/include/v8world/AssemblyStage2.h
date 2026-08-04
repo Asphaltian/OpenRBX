@@ -10,17 +10,24 @@ namespace RBX {
 
 class Assembly;
 class Joint;
+class SleepStage;
 
+// VTABLE: WEBSERVICE 0x102485b4
 // SIZE 0x28
 class AssemblyStage : public IWorldStage
 {
 public:
-	virtual StageType getStageType() const;                                 // vtable+0x04
-	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling); // vtable+0x08
+	AssemblyStage(IStage* upstream, World* world);
 
-	virtual void onEdgeAdded(Edge* edge);         // vtable+0x10
-	virtual void onEdgeRemoving(Edge* edge);      // vtable+0x14
-	virtual int getMetric(MetricType metricType); // vtable+0x18
+	virtual ~AssemblyStage(); // vtable+0x00
+
+	// SYNTHETIC: WEBSERVICE 0x10127260
+	// RBX::AssemblyStage::`scalar deleting destructor'
+
+	virtual StageType getStageType(); // vtable+0x04
+
+	virtual void onEdgeAdded(Edge* edge);    // vtable+0x10
+	virtual void onEdgeRemoving(Edge* edge); // vtable+0x14
 
 	void onAssemblyAdded(Assembly* assembly);
 	void onAssemblyRemoving(Assembly* assembly);
@@ -30,6 +37,11 @@ public:
 	void stepUi(int frameCount);
 
 private:
+	void onJointAdded(Joint* joint);
+	void onJointRemoving(Joint* joint);
+
+	SleepStage* getSleepStage();
+
 	std::set<Assembly*> assemblies; // 0x10
 	std::set<Joint*> joints;        // 0x1c
 };
