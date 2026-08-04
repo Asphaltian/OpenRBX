@@ -2,7 +2,6 @@
 #define V8KERNEL_KERNELINPUT_H
 
 #include "decomp.h"
-#include "v8kernel/Constants.h"
 
 namespace RBX {
 
@@ -12,26 +11,8 @@ class KernelInput
 public:
 	KernelInput() : lastGoal(0.0f), currentGoal(0.0f), increment(0.0f), latchToZero(false) {}
 
-	void setGoal(float value)
-	{
-		if (value == lastGoal) {
-			currentGoal = value;
-			increment = 0.0f;
-		}
-		else {
-			lastGoal = value;
-			increment = (value - currentGoal) / steps();
-		}
-	}
-
-	void setDelta(float value)
-	{
-		increment = value / steps();
-
-		if (increment == 0.0f) {
-			latchToZero = true;
-		}
-	}
+	void setGoal(float value);
+	void setDelta(float value);
 
 	float get()
 	{
@@ -43,7 +24,7 @@ public:
 	}
 
 private:
-	int steps() { return Constants::kernelStepsPerUiStep(); }
+	int steps();
 
 	float lastGoal;    // 0x00
 	float currentGoal; // 0x04

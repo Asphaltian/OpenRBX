@@ -164,13 +164,6 @@ DECOMP_SIZE_ASSERT(Instance, 0xf8)
 template <class T, class Base, const char* sName>
 class DescribedNonCreatable : public Reflection::Described<T, sName, NonFactoryProduct<Base, sName> >
 {
-public:
-	DescribedNonCreatable() {}
-
-	template <class U>
-	DescribedNonCreatable(U* joint) : Reflection::Described<T, sName, NonFactoryProduct<Base, sName> >(joint)
-	{
-	}
 };
 
 template <class T, class Base, const char* sName>
@@ -352,13 +345,6 @@ template <class T, class Base, const char* sName>
 // clang-format on
 class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >
 {
-public:
-	DescribedCreatable() {}
-
-	template <class U>
-	DescribedCreatable(U* joint) : Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >(joint)
-	{
-	}
 };
 
 } // namespace RBX

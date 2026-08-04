@@ -32,19 +32,14 @@ public:
 		FREE_JOINT = 9,
 	};
 
-	Joint();
-	Joint(Primitive* prim0, Primitive* prim1, const CoordinateFrame& coord0, const CoordinateFrame& coord1);
-
 	virtual ~Joint(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011ea60
 	// RBX::Joint::`scalar deleting destructor'
 
-protected:
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
 	virtual EdgeType getEdgeType() const { return JOINT; } // vtable+0x0c
 
-public:
 	virtual void setPrimitive(int index, Primitive* primitive); // vtable+0x10
 
 	static bool isJoint(Edge* edge) { return edge->getEdgeType() == JOINT; }
@@ -70,30 +65,12 @@ public:
 
 	void setJointOwner(IJointOwner* value);
 
-	void setJointCoord(int index, const CoordinateFrame& value);
-
-	CoordinateFrame& getJointCoord(int index) { return index == 0 ? jointCoord0 : jointCoord1; }
-
 	bool getActive() const { return active; }
 	void setActive(bool value) { active = value; }
 
 private:
-	static bool canBuildJoint(
-		Primitive* prim0,
-		Primitive* prim1,
-		NormalId normalId0,
-		NormalId normalId1,
-		float maxUnaligned,
-		float maxOverlapOrGap
-	);
-
 	IJointOwner* jointOwner; // 0x20
-
-protected:
-	static bool canBuildJointLoose(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1);
-	static bool canBuildJointTight(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1);
-
-	bool active; // 0x24
+	bool active;             // 0x24
 
 protected:
 	CoordinateFrame jointCoord0; // 0x28

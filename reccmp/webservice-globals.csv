@@ -2732,9 +2732,7 @@ address,type,symbol
 0x10247f88,global,__real@3e45798ee2308c3a
 0x10247fa8,global,__real@3eb33333
 0x10248008,global,__real@3b23d70b
-0x10248010,global,??_7PointToPointBreakConnector@RBX@@6B@
 0x10248060,global,__real@bfb999999999999a
-0x102480fc,global,??_7NormalBreakConnector@RBX@@6B@
 0x10248168,global,__real@4028000000000000
 0x102481c0,global,__real@42200000
 0x102481e8,global,__real@3f7ff2e5

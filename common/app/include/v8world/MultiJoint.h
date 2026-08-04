@@ -8,6 +8,7 @@ namespace RBX {
 
 class Connector;
 class Point;
+class RotateConnector;
 
 // VTABLE: WEBSERVICE 0x10248074
 // SIZE 0xc0
@@ -27,25 +28,6 @@ public:
 	Point* getPoint(int index) const;
 
 protected:
-	MultiJoint(int numBreakingConnectors);
-
-	MultiJoint(
-		Primitive* prim0,
-		Primitive* prim1,
-		const CoordinateFrame& coord0,
-		const CoordinateFrame& coord1,
-		int numBreakingConnectors
-	);
-
-	void addToMultiJoint(Point* point0, Point* point1, Connector* connector);
-
-	Connector* getConnector(int index) const { return connector[index]; }
-
-	float getJointK();
-
-private:
-	void init(int numBreakingConnectors);
-
 	int numConnector;          // 0x88
 	Point* point[8];           // 0x8c
 	Connector* connector[4];   // 0xac
@@ -53,6 +35,21 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(MultiJoint, 0xc0)
+
+// VTABLE: WEBSERVICE 0x10248028
+// SIZE 0xc4
+class RotateJoint : public MultiJoint
+{
+public:
+	virtual ~RotateJoint(); // vtable+0x00
+
+	virtual void removeFromKernel(); // vtable+0x08
+
+private:
+	RotateConnector* rotateConnector; // 0xc0
+};
+
+DECOMP_SIZE_ASSERT(RotateJoint, 0xc4)
 
 } // namespace RBX
 

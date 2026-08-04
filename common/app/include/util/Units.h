@@ -7,13 +7,12 @@ namespace RBX {
 
 using G3D::Vector3;
 
-class Units
-{
-public:
-	static Vector3 kmsAccelerationToRbx(const Vector3& a);
-	static float kmsForceToRbx(float f);
-};
+namespace Units {
 
+Vector3 kmsAccelerationToRbx(const Vector3& a);
+float kmsForceToRbx(float f);
+
+} // namespace Units
 } // namespace RBX
 
 #endif // UTIL_UNITS_H

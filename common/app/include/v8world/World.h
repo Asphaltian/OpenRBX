@@ -47,9 +47,6 @@ public:
 
 	int getMetric(IWorldStage::MetricType metricType) const;
 
-	void insertJoint(Joint* joint);
-	void removeJoint(Joint* joint);
-
 	void onJointPrimitiveNulling(Joint* joint, Primitive* primitive);
 	void onJointPrimitiveSet(Joint* joint, Primitive* primitive);
 
