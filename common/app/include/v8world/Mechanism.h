@@ -47,8 +47,11 @@ public:
 
 	static Mechanism* getMechanismFromPrimitive(const Primitive* primitive);
 
-	// STUB: WEBSERVICE 0x1011ca90
+	// FUNCTION: WEBSERVICE 0x1011ca90
 	~Mechanism() {}
+
+	// SYNTHETIC: WEBSERVICE 0x1011cae0
+	// RBX::Mechanism::Mechanism
 
 	const AssemblySet& getAssemblies() const { return assemblies; }
 	AssemblySet& getAssemblies() { return assemblies; }

@@ -35,10 +35,12 @@ bool MechanismTracker::tracking()
 	return mechanism ? true : false;
 }
 
-// STUB: WEBSERVICE 0x101272b0
+// FUNCTION: WEBSERVICE 0x101272b0
 void Mechanism::notifyMovingPrimitives()
 {
-	for (AssemblySet::iterator it = assemblies.begin(); it != assemblies.end(); ++it) {
+	AssemblySet::iterator it;
+
+	for (it = assemblies.begin(); it != assemblies.end(); ++it) {
 		(*it)->notifyMoved();
 	}
 }
@@ -59,7 +61,7 @@ void Mechanism::removeAssembly(Assembly* assembly)
 	assembly->setMechanism(NULL);
 }
 
-// STUB: WEBSERVICE 0x10127370
+// FUNCTION: WEBSERVICE 0x10127370
 void Mechanism::absorb(Mechanism* other)
 {
 	while (other->assemblies.size() != 0) {

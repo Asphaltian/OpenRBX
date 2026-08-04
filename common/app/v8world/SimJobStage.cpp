@@ -42,7 +42,14 @@ void SimJobStage::destroyMechanism(Mechanism* mechanism)
 	delete mechanism;
 }
 
-// STUB: WEBSERVICE 0x1011cba0
+void SimJobStage::insertMechanism(Mechanism* mechanism)
+{
+	mechanisms.push_back(mechanism);
+
+	mechanism->myIt = --mechanisms.end();
+}
+
+// FUNCTION: WEBSERVICE 0x1011cba0
 void SimJobStage::onAssemblyAdded(Assembly* a)
 {
 	a->putInPipeline(this);
@@ -50,8 +57,7 @@ void SimJobStage::onAssemblyAdded(Assembly* a)
 	Mechanism* mechanism = new Mechanism();
 	mechanism->insertAssembly(a);
 
-	mechanisms.push_back(mechanism);
-	mechanism->myIt = --mechanisms.end();
+	insertMechanism(mechanism);
 
 	a->putInKernel(getKernel());
 }
@@ -72,7 +78,7 @@ void SimJobStage::onAssemblyRemoving(Assembly* a)
 	a->removeFromStage(this);
 }
 
-// STUB: WEBSERVICE 0x1011ccc0
+// FUNCTION: WEBSERVICE 0x1011ccc0
 void SimJobStage::combineMechanisms(Edge* edge)
 {
 	Assembly* a0 = edge->getPrimitive(0)->getAssembly();
@@ -82,17 +88,8 @@ void SimJobStage::combineMechanisms(Edge* edge)
 	Mechanism* m1 = a1->getMechanism();
 
 	if (m0 != m1) {
-		Mechanism* bigger;
-		Mechanism* smaller;
-
-		if (m0->getAssemblies().size() > m1->getAssemblies().size()) {
-			bigger = m0;
-			smaller = m1;
-		}
-		else {
-			bigger = m1;
-			smaller = m0;
-		}
+		Mechanism* bigger = m0->getAssemblies().size() > m1->getAssemblies().size() ? m0 : m1;
+		Mechanism* smaller = bigger == m0 ? m1 : m0;
 
 		bigger->absorb(smaller);
 
