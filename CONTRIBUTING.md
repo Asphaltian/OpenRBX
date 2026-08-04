@@ -13,7 +13,7 @@ Decompilation takes time to become good at. Be comfortable with C++ and x86 asse
 ## Overview
 
 * [`WebService`](/WebService): Decompilation of the RBXGS-specific translation units.
-* [`common`](/common): The engine static libraries the original link consumed, one directory per `.lib`, since each was built with its own flags. Those flags are set per target in [CMakeLists.txt](/CMakeLists.txt); one wrong flag produces mismatches that have nothing to do with the code in front of you.
+* [`common`](/common): The engine static libraries the original link consumed, one directory per `.lib`.
 * [`util`](/util): Utility headers supporting the decompilation.
 * [`3rdparty`](/3rdparty): Vendored dependencies, apart from `RakNet30`. The 3.0 release RBXGS used was never archived, so it is recovered from the binary and annotated like the rest of the decompilation.
 
@@ -54,4 +54,4 @@ Placeholder names follow the [LEGO Island decompilation](https://github.com/isle
 - Unknown member variables: `m_unk0xXX`
 - Unknown parameters: `p_unk0xXX`
 
-They are for the cases where the original name is genuinely lost. It usually is not: the PDB was never stripped, so most of this codebase already has real names, namespaces and class hierarchies. Struct layouts and enum values are recorded too, and `reccmp-cvdump -t` prints the type records that give member offsets and enumerator values outright.
+They are for the cases where the original name is genuinely lost. It usually is not since the PDB was never stripped, so most of this codebase already has real names, namespaces and class hierarchies. Struct layouts and enum values are recorded too, and `reccmp-cvdump -t` prints the type records that give member offsets and enumerator values outright.

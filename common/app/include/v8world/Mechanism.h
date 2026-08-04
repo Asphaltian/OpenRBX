@@ -4,6 +4,10 @@
 #include "decomp.h"
 
 #include <boost/noncopyable.hpp>
+#include <cstddef>
+#include <list>
+#include <set>
+#include <vector>
 
 namespace RBX {
 
@@ -15,9 +19,21 @@ class Primitive;
 class MechanismTracker
 {
 public:
-	bool tracking() const;
+	MechanismTracker() : mechanism(NULL) {}
+	~MechanismTracker() { stopTracking(); }
+
+	bool tracking();
+
+	Mechanism* getMechanism();
+	void setMechanism(Mechanism* value);
+
+	static void transferTrackers(Mechanism* from, Mechanism* to);
 
 private:
+	bool containedBy(Mechanism* value);
+
+	void stopTracking();
+
 	Mechanism* mechanism; // 0x00
 };
 
@@ -27,10 +43,31 @@ DECOMP_SIZE_ASSERT(MechanismTracker, 0x04)
 class Mechanism : public boost::noncopyable
 {
 public:
-	static Mechanism* getMechanismFromPrimitive(Primitive* primitive);
+	typedef std::set<Assembly*> AssemblySet;
+
+	static Mechanism* getMechanismFromPrimitive(const Primitive* primitive);
+
+	// STUB: WEBSERVICE 0x1011ca90
+	~Mechanism() {}
+
+	const AssemblySet& getAssemblies() const { return assemblies; }
+	AssemblySet& getAssemblies() { return assemblies; }
+
+	void insertAssembly(Assembly* assembly);
+	void removeAssembly(Assembly* assembly);
+
+	void absorb(Mechanism* other);
+
+	void notifyMovingPrimitives();
 
 private:
-	undefined m_unk0x00[0x24 - 0x00]; // 0x00
+	friend class MechanismTracker;
+
+	AssemblySet assemblies;                  // 0x00
+	std::vector<MechanismTracker*> trackers; // 0x0c
+
+public:
+	std::list<Mechanism*>::iterator myIt; // 0x1c
 };
 
 DECOMP_SIZE_ASSERT(Mechanism, 0x24)

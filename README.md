@@ -10,7 +10,7 @@ Conventions and tooling follow the [LEGO Island decompilation](https://github.co
 
 <p align="center"><a href="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.HTML"><img src="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.SVG" width="50%"></a></p>
 
-Still early. `WebService.dll` contains 12,633 functions.
+Still early. `WebService.dll` contains 12,633 functions. We are decompiling RBXGS first since the client contains no debug symbols.
 
 ## Building
 
@@ -18,7 +18,7 @@ Visual C++ 8.0 SP1 compiled the original and is the only toolchain that reproduc
 
 #### Prerequisites
 
-- Visual C++ 8.0 SP1. [MSVC800-SP1](https://github.com/Asphaltian/MSVC800-SP1) is a portable copy that requires no installation. The revision matters: the original was built with `.762`, while RTM `.42` generates different code.
+- Visual C++ 8.0 SP1. [MSVC800-SP1](https://github.com/Asphaltian/MSVC800-SP1) is a portable copy that requires no installation.
 - [CMake](https://cmake.org/), either standalone or from the "Desktop development with C++" workload of a current Visual Studio.
 
 #### Compiling
@@ -36,7 +36,7 @@ cmake --build build
 
 ### Verification
 
-To compare a build against the original, install [reccmp](https://github.com/isledecomp/reccmp):
+To compare a build against the original, install our fork of [reccmp](https://github.com/Asphaltian/reccmp/tree/msvc800):
 
 ```
 pip install -r tools/requirements.txt
@@ -83,4 +83,4 @@ Contributions are welcome. The conventions in short:
 - Take names from the PDB where it has them, and use NCC placeholders (`FUN_XXXXXXXX`, `g_unk0xXXXXXXXX`) only where it does not
 - Keep pull requests small and focused
 
-[CONTRIBUTING.md](CONTRIBUTING.md) covers each of these properly.
+You can view [CONTRIBUTING.md](CONTRIBUTING.md) for more details!

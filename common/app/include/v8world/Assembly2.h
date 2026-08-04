@@ -92,6 +92,7 @@ public:
 	const Primitive* getRootPrimitive() const { return rootPrimitive; }
 
 	Mechanism* getMechanism();
+	void setMechanism(Mechanism* value) { mechanism = value; }
 
 	void onPrimitivesChanged();
 	void onPrimitiveCanSleepChanged(Primitive* primitive);

@@ -1,10 +1,10 @@
 # OpenRBX
 
-Decompilation of Roblox as of 2007-12-20, using MSVC 8.0 SP1 (cl.exe 14.00.50727.762). Modeled after the [LEGO Racers decompilation](https://github.com/isledecomp/racers).
+Decompilation of Roblox as of 2007-12-20 using MSVC 8.0 SP1 (cl.exe 14.00.50727.762). Modeled after the [LEGO Racers decompilation](https://github.com/isledecomp/racers).
 
-The client is in scope eventually. RBXGS, the game server, comes first because its binary ships an unstripped PDB, and the engine libraries under `common/` were shared with the client anyway: three of the six LTCG objects in `WebService.dll` are `Client\win` sources.
+One target: **WEBSERVICE**, `WebService.dll`, an ATL Server ISAPI extension with 12,633 functions.
 
-One target so far: **WEBSERVICE**, `WebService.dll`, an ATL Server ISAPI extension with 12,633 functions.
+RBXGS, the game server, comes first because its binary ships an unstripped PDB, and the engine libraries under `common/` were shared with the client anyway. Three of the six LTCG objects in `WebService.dll` are `Client\win` sources. The client is in scope eventually.
 
 ## Building
 
@@ -16,49 +16,79 @@ cmake --build build
 
 Portable MSVC 8.0 SP1: https://github.com/Asphaltian/MSVC800-SP1, assembled from VS2005 Professional and KB926601. Use `vsvars32.bat`, not `VC\bin\vcvars32.bat`, which forwards to it via `%VS80COMNTOOLS%` and needs a registered installation. RTM (`.42`) will not reproduce the original codegen. `CMakeLists.txt` gates all decomp-specific flags behind `MSVC_FOR_DECOMP`, true only for cl 14.x.
 
+Delete `build/` before trusting a green result on anything that moves an include. The object file that breaks is the one that did not need recompiling.
+
+## Checks
+
+CI runs eight checks and seven of them are not `reccmp-reccmp`. Run all of them before committing, not just the accuracy number.
+
+```bash
+reccmp-reccmp   --target WEBSERVICE --nolib                       # score
+reccmp-reccmp   --target WEBSERVICE --nolib --verbose 0xADDRESS   # one function
+reccmp-reccmp   --target WEBSERVICE --nolib --json out.json       # what is left
+reccmp-decomplint WebService common --module WEBSERVICE --warnfail
+reccmp-vtable   --target WEBSERVICE
+reccmp-datacmp  --target WEBSERVICE
+python tools/check_folded.py --target WEBSERVICE
+python tools/reccmp_addr_padding.py
+```
+
+- **decomplint** runs with `--warnfail`, so a warning fails the build. It covers `WebService common` only, so nothing under `3rdparty` is linted and a bad marker there fails silently. Point it at `3rdparty/RakNet30` by hand after touching RakNet.
+- **vtable** compares every vtable that has a name on both sides. A marker asserts a layout; a data source only resolves a store. Do not add a `// VTABLE:` marker to a class whose slots cannot all be claimed yet.
+- **datacmp** matches statics by bare name, so a name has to be unique in both builds.
+- **check_folded** asks whether every annotation on a shared address landed on a single recompiled address. MSVC 8 keeps a PDB symbol for every alias the linker folded away, so all `FOLDED` annotations resolve rather than just the survivor.
+- **ncc** (`tools/ncc/ncc.py`) runs on its own Linux job and needs libclang plus the `clang` python bindings. It counts findings and still exits 0, so the count is the verdict.
+- **Current MSVC** builds `app` and `network` with a modern cl plus clang-tidy. It reproduces locally out of an `amd64_x86` vcvars shell with `cmake -GNinja -DENABLE_CLANG_TIDY=ON`. Run it whenever a class or template lands: it is the only check that sees C++ conformance MSVC 8 lets through.
+
+`reccmp-reccmp` prints one row per recompiled address. Where our link folded two functions the original kept apart, only one annotation appears and the other is absent rather than listed as a miss. Probe the address with `--verbose` before reading absence as failure.
+
 ## Ground Truth
 
-`WebService.pdb` ships alongside the binary and is not stripped. Check whether it already answers a question before working one out from the disassembly. It carries symbol names, namespaces, class hierarchies, source file paths, line numbers, per-object compiler command lines and the toolchain version.
+`WebService.pdb` ships alongside the binary and is not stripped. Check whether it answers a question before working the answer out from disassembly. It carries symbol names, namespaces, class hierarchies, source paths, line numbers, per-object compiler command lines and the toolchain version.
 
 Both files come out of the RBXGS installer on archive.org, extracted with [lessmsi](https://github.com/activescott/lessmsi) into `SourceDir/`. See the README for the URL and hashes. `.github/workflows/rbxgsbin.yml` does the same fetch for CI.
 
-Loading the PDB into Ghidra is worth doing before writing anything. Reading the decompiler's pseudocode is usually faster than inferring structure from raw bytes, and it recovers control flow that a byte diff will not show you.
+Load the PDB into Ghidra before writing anything. Reading the decompiler's pseudocode is faster than inferring structure from raw bytes and it recovers control flow a byte diff will not show.
 
-## Reading the PDB
+### Querying the PDB
 
-`scratchpad/pdb/extract.py` puts every cvdump section into one SQLite database and `q.py` queries it; `diff.py` extracts our own `build/WebService.pdb` the same way and compares the two class by class. Grepping the text answers one section at a time and silently drops the rest, and every question worth asking spans several: a function's address is in SYMBOLS, its file and line span in LINES, its owning object in SECTION CONTRIBUTIONS, that object's flags in MODULES, its parameter types in TYPES, and its constness in the `LF_MODIFIER` its `This type` points at.
+Load every cvdump section into one SQLite database and query that. Read the MSF container directly when a question needs a stream cvdump does not print. Extract our own `build/WebService.pdb` the same way and diff the two class by class for a work list of size, offset and signature mismatches.
 
-Four shapes in cvdump's output cost real data before the extractor was right, and each failed silently. The contribution table's `Imod` is hex, so reading it as decimal maps every address to the wrong object. 61,440 type records carry four-digit ids, so a `0x[0-9a-f]{8}` pattern drops a third of the type table, and ids are referenced in upper case but defined in lower. A basic-typed argument reaches an `LF_ARGLIST` as `T_INT4(0074)` rather than `0x....`, so a hex-only parser turns `getPrimitive(int)` into `getPrimitive(void)`. And an overloaded name reaches a field list as `LF_METHOD` pointing at an `LF_METHODLIST`, so a parser that only reads `LF_ONEMETHOD` loses every constructor and overload set.
+Grepping cvdump text answers one section at a time and silently drops the rest. Every question worth asking spans several: a function's address is in SYMBOLS, its file and line span in LINES, its owning object in SECTION CONTRIBUTIONS, that object's flags in MODULES, its parameter types in TYPES, and its constness in the `LF_MODIFIER` its `This type` points at.
 
-`msf.py` reads the container itself, because cvdump prints four streams and the file has 524. The superblock, the stream directory, the named stream table in stream 1, the `/names` string table, the DBI substreams with each module's own symbol stream index, and the section header stream that gives the real virtual addresses rather than the assumed 0x10001000 are all reachable that way. Stream 4 is `/LinkInfo` here, not the IPI, so a 2007 PDB carries no `LF_UDT_SRC_LINE` and a class's declaring header still has to come from the LINES attribution.
+Four shapes in cvdump's output cost real data before the extractor was right, and each failed silently:
 
-What it does carry is the attribute provider's own output. Thirteen `/src/files/*...webservice.inj` streams hold 68KB of injected source, the code `soap_handler`, `module`, `object` and `request_handler` expanded to, with `#injected_line` directives back to `WebService.h` and `WebService.cpp`. That is the generated text `WebServiceMaps.cpp` was reconstructed from `.rdata` by hand, and the reconstruction agrees with it entry for entry. `scratchpad/pdb/injected/` holds them.
+- The contribution table's `Imod` is hex. Read as decimal it maps every address to the wrong object.
+- 61,440 type records carry four-digit ids, so a `0x[0-9a-f]{8}` pattern drops a third of the type table. Ids are referenced upper case and defined lower case.
+- A basic-typed argument reaches an `LF_ARGLIST` as `T_INT4(0074)`, not `0x....`, so a hex-only parser turns `getPrimitive(int)` into `getPrimitive(void)`.
+- An overloaded name reaches a field list as `LF_METHOD` pointing at an `LF_METHODLIST`, so a parser that reads only `LF_ONEMETHOD` loses every constructor and overload set.
 
-`diff.py` found 357 of the 879 classes we and the original both declare differ in a size, a member offset, a signature or a missing method. It is the work list. It has already settled that `IPipelined::getCurrentStage` does not exist anywhere in the image: the accessor is `inPipeline()`, and `downstreamOfStage` reads the member directly. Also that `Edge::otherPrimitive` has two overloads, `(int)` and `(const Primitive*)`; that `JointStage::pairInMap` takes `(Joint*, Primitive*)` and not the reverse; that `IPipelined::getStage` and `getKernel` are const and `getStage` is private; that `IPipelined::removeFromStage` takes a `StageType`; and that `IStage` carries a `findStage` we never wrote. A nested `LF_NESTTYPE` records a class's own typedefs, which is how `JointStage::JointMap` was recovered.
+Stream 4 is `/LinkInfo` here, not the IPI, so a 2007 PDB carries no `LF_UDT_SRC_LINE` and a class's declaring header has to come from LINES attribution. What the container does carry is the attribute provider's own output: thirteen `/src/files/*...webservice.inj` streams hold 68KB of injected source, reachable through the named stream table in stream 1.
 
-## Recovering Facts
+### What Each Section Proves
 
-Never guess a path, a name, an offset or an enum value. Each of these is recorded:
+Never guess a path, a name, an offset or an enum value. Each of these is recorded.
 
-`reccmp-cvdump -m -s -l` gives modules, symbols and line info. The `src =` line in each module is the original directory and filename with its real casing, which is the layout to reproduce. Note that the LINES section lowercases every path it stores, so it cannot answer casing; only `src =` can, and only for `.cpp` files.
+- **`reccmp-cvdump -m`** gives each module's `src =` line: the original directory and filename with its real casing. This is the layout to reproduce. LINES lowercases every path it stores, so only `src =` answers casing, and only for `.cpp` files.
+- **`reccmp-cvdump -t`** writes TYPES, the authority for member names, offsets, class sizes, enum values and typedefs (`LF_NESTTYPE`). Ghidra's type browser resolves some names to the wrong namespace, so prefer the type records when they disagree.
+- **Method constness** resolves through the `This type` `LF_POINTER` to either the class or an `LF_MODIFIER const`. It costs no instruction but it is recorded, and it changes what MSVC's alias analysis may assume.
+- **LINES** maps an address to the file it came from and places a definition even when every call is inlined away. Inline and template code is attributed to the header that defines it, so this tells you whether a function belongs in the `.cpp` or in the `.h`.
+- **`reccmp-cvdump -m -seccontrib`** maps any address to the object that contributed it. It is the only way to place a namespace-scope global, which reaches the PDB as an `S_PUB32` with no module.
+- **`S_BPREL32`** names every stack local and gives its frame offset. Declaration order cannot be read back from it, because MSVC lays locals out by size.
+- **`S_FRAMEPROC`** carries `inl_specified` (whether the original wrote the `inline` keyword) and `wasinlined` (whether the callee was ever expanded anywhere). `wasinlined` answers in one query what a spelling sweep costs a build each.
+- **The raw string table** holds 2,001 Roblox source paths, readable straight out of the file. LINES names only files that contributed line records, so a header full of declarations is missing from it; the string table is the authority on whether a header exists. Every path there is lowercased.
+- **Jump tables** settle enum values: read the byte index table and the jump table out of the image and the case-to-value mapping falls out.
 
-`reccmp-cvdump -t` writes the TYPES section. It is the authority for member names, offsets, class sizes and enum values. Ghidra's type browser resolves some names to the wrong namespace, so prefer the type records when they disagree.
-
-The LINES range table maps an address to the file it came from. Inline and template code is attributed to the header that defines it, so this is how to find a class's real header and how to tell whether a function belongs in the `.cpp` or inline in the `.h`.
-
-`reccmp-cvdump -m -seccontrib` maps any address to the object that contributed it. That is the only way to place a global whose module the symbols do not record: a namespace-scope variable reaches the PDB as an `S_PUB32` with no module, and only the contribution table says which translation unit defined it. Pair it with that module's `src =` and both the file and its casing are recovered.
-
-Jump tables settle enum values without guessing: read the byte index table and the jump table out of the image and the case-to-value mapping falls out.
-
-Prove layouts; do not assume them. `DECOMP_SIZE_ASSERT(T, size)` fails the build on a mismatch; assert a deliberately wrong size once to confirm the assert is live.
+Prove layouts, do not assume them. `DECOMP_SIZE_ASSERT(T, size)` fails the build on a mismatch. Assert a deliberately wrong size once to confirm the assert is live.
 
 ## Annotations
 
-Functions in a compilation unit are ordered by ascending address.
+Functions in a compilation unit are ordered by ascending address. Namerefs obey the same order, and getting it wrong is silent: a marker placed above a lower-addressed one drops every annotation after it in that file.
 
 ```cpp
 // FUNCTION: WEBSERVICE 0x100a77d0         complete, compared by reccmp
 // FUNCTION: WEBSERVICE 0x100a77d0 FOLDED  identical code the linker merged
+// TEMPLATE: WEBSERVICE 0x10103660         template body, nameref on the next line
 // STUB: WEBSERVICE 0x100a7800             incomplete, skipped by reccmp
 // LIBRARY: WEBSERVICE 0x10001000          CRT or third party, in library_msvc.h inside #ifdef 0
 // SYNTHETIC: WEBSERVICE 0x10007040        compiler-generated, such as scalar deleting destructors
@@ -67,301 +97,12 @@ Functions in a compilation unit are ordered by ascending address.
 // SIZE 0xf8                               class size assertion
 ```
 
-Namerefs obey the ascending order too, and getting it wrong is silent: Team's `0x100be5xx` markers placed above `Instance`'s own lower-addressed annotations dropped every annotation after them in that header and took forty functions with it, showing up as `raisePropertyChanged` losing its match rather than as an error.
-
-The colon is required on everything except `// SIZE`. reccmp silently ignores `// VTABLE WEBSERVICE 0x...`, and the vtable stores inside constructors then compare as `<OFFSET>` instead of the vftable symbol, costing five to ten percent.
-
-`// FUNCTION:` asserts a 100% match. Anything less is `// STUB:`.
-
-`FOLDED` marks siblings the linker merged onto one address. They share that address, are exempt from ascending order, and do not need the `STUB()` macro.
-
-## Name
-
-The interning subsystem is `util/Name.cpp` and all nine functions match. `moo2` is a magic-static `boost::mutex` called `mutex2`, `initMoo` a five-byte tail jump into it, and `boost::call_once(initMoo, flag)` guards it at the head of `declare`, `lookup` and `getNullName`. `namMap` returns a `NamMap`, which derives from `std::map<std::string, Name*>`, and `dictionary` a `std::map<int, Name*>`; their statics are named `n` and `d`. `getNullName` is `declare("", 0)` behind a magic static, and `empty` is `this == &getNullName()`.
-
-Three things gate that subsystem and each is general. Both accessors and `initMoo` need `DECOMP_NOINLINE`, or `/Ob2` inlines them and the original's out-of-line calls have nothing to bind to. `boost::mutex::do_lock` and `find` are folded in the original with other instantiations, so the vendored table names them for whichever the `min()` rule picked and our call reads as unresolved: the fix is an extra row at the same address carrying the instantiation our build emits. And the `boost::once_flag` is a file static called `flag`, which `gen_statics.py` drops for not being unique across the image, so it needs naming by hand.
-
-`declare` took two things past the register allocation it looked like. Its insert path writes `dictionary()[dictionaryIndex]` unconditionally, where the found path guards on `-1`, and the extra branch was worth twenty percent. The rest was the string key: an explicit `std::string(name)` temporary pushes the constructor's own return value and an implicit conversion recomputes the address, and the two also rank the enregistration candidates differently, so the original holds the mutex in `ebx` for the whole body under one spelling and in `ebp` under the other. `find` has the explicit temporary and `operator[]` the implicit one; either alone stalls at 79 or 90 percent.
-
-## Guid
-
-`util/Guid.cpp` is complete, all nine functions. `Guid` is 8 bytes over a private `boost::noncopyable`, holding a `Data` of `const Name* scope` and `int index`; `Guid()` takes its scope from `getLocalScope()` and its index from `InterlockedIncrement` on a file-static `nextIndex`. `getLocalScope` holds the `boost::once_flag` as a function-local static, and the constructor reaches the same flag by inlining that call, which is why the flag's only name is the one reccmp builds for a local static. `initLocalScope` is a file static that interns `generateGUID`'s output, and `generateGUID` is `"RBX"` plus `CoCreateGuid` formatted through `StringFromGUID2`, with six `erase` calls in descending order stripping the braces and dashes.
-
-Three lessons came out of it and all three are general. MSVC lays a block out where its statement sits in the source, so a constant return written last ends up last: `operator<` and both `compare` overloads only matched once the rare `return true` and `return -1` were moved below the hot path, which needs the result tested afterwards (`int order = 0; if (...) order = ...; if (order == 0) return ...; return true;`) rather than returned early. Argument evaluation is right to left, so the pair named in the second argument is the pair that gets the callee-saved registers; assigning the first argument to a local ahead of the call is what put `a0` and `a1` in `ebx` and `edi` the way the original has them. And `std::min` returns a reference, which is visible as a `lea` of both candidates and a deref, so `windows.h`'s `min` macro has to be suppressed or the comparison compiles inline and nothing lines up; the argument order is visible too, since the two candidates land in declaration order.
-
-## Assembly
-
-`v8world/Assembly2.cpp` is complete: all 48 of its own functions match, and everything left in the object is vendored STL that `--nolib` scores out.
-
-Two of them turned on the same thing, which is general. A folded address carries one name per build, and `min()` can pick a different one on each side: the original folded three `push_back` instantiations onto 0x10127450 and the vendored table named it for `Listener`, where our build folds `Assembly*` with `EnumDescriptor const*` and picks `PAVAssembly`. The extra row has to carry the name our side picks, not the one reccmp prints in the diff. `resize` at 0x10041ee0 is the same case against the `unsigned int` instantiation.
-
-`fastRemoveShort` in `util/StlExtra.h` is the one to remember for method rather than content. Sixty spellings, the original's own command line and five optimisation levels all left it near 48%, because the byte counts I was steering by came from an `/FA` listing whose relocated `call` and `mov ebp, [__imp_...]` bytes my extractor was dropping; a spelling that was already right read 42 bytes short. The line records settled it in one look: `0001:00102660-00102745` maps to lines 42, 43, 45, 54, 55, 59, 60, 62, 67 and 68 of `stlextra.h`, which is eight code-generating statements where the obvious source has seven, and lines 54 and 55 both feed `last`. It is `items.end()` and then `--last`, not `items.end() - 1`. Count the line records before sweeping spellings, and measure with reccmp on the linked image rather than by eye on a listing.
-
-## Clump
-
-`v8world/Clump2.cpp` is complete, all ten functions: `PrimIterator`'s four search statics, its `isParent` and `operator++`, and `EdgeIterator`'s four.
-
-A ternary materialises its arms into a 32 bit register, so a `bool` function that ends `movzx eax, al` on one path and `mov eax, 1` or `xor eax, eax` on another returned a ternary; a plain `return false` writes the shorter `xor al, al`. `isParent` ends `searchType == IN_CLUMP ? sameClump : sameClump || parentCandidate->getAssembly() == child->getAssembly()`, and the three `if`s that say the same thing held it at 80 percent. Its early exits are one shared `return false` at the end, which the line records give away by sending both the joint test and the body test to the same line.
-
-Where a callee stores its result decides its caller's register allocation, and a function that already matches is still worth respelling when its caller does not. `PrimIterator::operator++` matches at 100 percent either way, but only assigning `primitive` in each branch lets `findEdgeOnNextPrimitive` share one callee saved register between the parent and the merged result; storing a local once after the merge gives that value a home from `findFirstChild`'s return, which overlaps the parent, costs a fourth callee saved register and 33 percent.
-
-An `/FA` listing's byte counts mislead, but its mnemonic stream does not. Aligning the stream against the original's disassembly scored 88.68 where reccmp scored 88.89 and 55.05 where reccmp scored 61.82, which is a compile rather than a link per spelling, and it is what made a sweep of `operator++` shapes affordable. `findEdgeOnNextPrimitive` is three statements: `Primitive* next = *++PrimIterator(primitive, IN_ASSEMBLY);`, then `if ((primitive = next) == NULL)`, then the edge. Incrementing the temporary in the same statement is what keeps the construction, the increment and the dereference on one line record.
-
-## Extents
-
-`util/Extents.cpp` is 15 of 16. `contains` is a direct `point.x >= low.x`, not the negated `!(point.x < low.x)` that reads the same: the direct form emits the unordered-safe `test ah, 0x41 / jp` where the negation emits `je`, which is the same rule as `Math::fuzzyEq`'s but on `>=`. `containedByFrustum` names two locals the loop would otherwise recompute, `const Plane& plane = frustum.faceArray[i].plane` outside the inner loop and `const Vector3 corner = getCorner(j)` inside it, and the line records place both before either was written; without them our build spends a fourth callee saved register and recomputes the plane's address eight times per face.
-
-`Extents::vv`'s line records name `include\util\extents.h` lines 61 to 66, so it belongs in the header rather than the `.cpp` it matches from today.
-
-`getFaceCorners` took a frame size to solve, and both halves of it are general. A `switch` case is not a scope MSVC 8 reuses a temporary in: the same six bodies give a 0x30 frame written at function scope and a 0x120 one written as case bodies, four `Vector3` slots against four per case, and the slot displacements are what the tail merge of the shared fourth `getCorner` call depends on. So the switch only dispatches, `case NORM_X: goto x;`, and the six bodies sit below it as labelled statements. That is the exception to no gotos in Code Style, and the frame size is the evidence for it. How many slots there are is decided by the comma operator: `c0 = getCorner(4), c1 = getCorner(6), c2 = getCorner(7), c3 = getCorner(5);` keeps four temporaries live at once where four statements reuse one, and it is what the line records already said, one record per body and one for its jump.
-
-Two things that looked like the answer were not. An inlined callee also gives four shared slots, since its temporaries are allocated once for every expansion, but it needs `__forceinline` for nine arguments and then `#pragma inline_depth(1)`, because inlining it makes MSVC inline `getCorner` too where the original keeps it out of line; `DECOMP_NOINLINE` on `getCorner` instead costs `express`, `toWorldSpace` and `containedByFrustum` their matches, since the original does inline it into those three. And the toolchain is not the difference, which the hotfixes settle: of the sixteen VS 2005 updates archived at `archive.org/download/vs80sp1-all-langs/sp1-updates`, every one that could hold a compiler postdates 2007-12-20, and KB937061 from July 2007 patches Crystal Reports. RTM 14.00.50727.42, out of `VSPROD1.iso`'s `_195` and `_196` cabs, gives the same 0x120 as SP1, as does every `/O`, `/Zi` and `/Z7` combination.
-
-An inlined callee does produce the original's frame, its interleaved call and copy and all 19 calls, because the callee's temporaries are allocated once and every expansion shares them. Reaching it costs `__forceinline`, since MSVC will not inline nine arguments on its own, and then `#pragma inline_depth(1)`, since inlining the callee makes it inline `getCorner` too, where the original keeps it out of line; `DECOMP_NOINLINE` on `getCorner` instead costs `express`, `toWorldSpace` and `containedByFrustum` their matches, because the original does inline it into those three. Three compiler directives to reconstruct one function is not evidence, so the file carries the plain switch and the marker stays `// STUB:`.
-
-## Joints
-
-`v8world/Joint.cpp`, `MotorJoint.cpp` and `RigidJoint.cpp` are complete, and so are their headers. What unlocked the first two is `IPipelined::getWorld`, which the type records name along with `IWorldStage::getWorld` and `RevoluteLink::setJointAngle`, so none of the three had to be invented; a byte search for `call edx` followed by `cmp eax, 8` found the six sites that inline it and put it on `IPipelined` rather than `Joint`, since two of them are `BallBallContact` and `BallBlockContact::stepContact`.
-
-Three spellings decided it and each is general. `getWorld` reads `currentStage` three times rather than naming it, so the condition has to test the member and the local has to be assigned in both arms of an if/else: naming it first keeps it in a callee saved register across the virtual call where the original reloads it, which is worth 15 percent to every caller. `Edge::getPrimitive` is `(&prim0)[index]`, not `index == 0 ? prim0 : prim1`, which only shows up once a caller passes a variable index and wants `[esi+ebx*4+0xc]`. And `MotorJoint::setCurrentAngle` compares `currentAngle != value`, not the other way round: the original loads `value` into st(0) and compares against the member in memory with `fcom`, where the reversed spelling loads both and needs `fucom`.
-
-`Joint::setJointCoord` writes the copy as `if (index == 0) jointCoord0 = value; else jointCoord1 = value;`, not through the `getJointCoord` ternary. The two arms tail merge, which hoists the shared `mov ecx, 9` and `mov esi, ebx` above the branch and leaves only the differing `lea`; the ternary emits the whole address selection up front and costs the function its register assignment as well, 68.52 against 100.
-
-`MotorJoint::resetLink` picks its two coordinate frames with a pair of ternaries in one call, `link->reset(index == 0 ? jointCoord0 : jointCoord1, index == 1 ? jointCoord0 : jointCoord1)`. A `switch` compiles the dispatch as descending `sub eax, N / je` where the original compares against 1 and then 0, and an if/else gets the compares right but duplicates the argument pushes the original shares. Arguments evaluate right to left, so the second one carries the `== 1` test that the original performs first.
-
-Which object emits a scalar deleting destructor decides whether it inlines the destructor or calls it, and the contribution table is what says which. The original's `RotateVJoint::`scalar deleting destructor'` at 0x100d7ba0 comes from `JointInstance.obj`, where `~RotateJoint` is only a declaration, so it calls the 11 byte out of line copy at 0x1011ee20; `RotateJoint`'s own at 0x1011f0b0 comes from `RotateJoint.obj` and inlines it. Ours emitted only the second and folded all three onto it. `DECOMP_NOINLINE` on `~RotateJoint` swaps which of the two matches and `reccmp-vtable` catches it, and moving the annotation to 0x1011f0b0 takes that check from one failing table to two. What reproduces the split is the original's own code: `RotateVJoint` has three constructors in the type records and `RotateV::RotateV()` at 0x100da280 is `DescribedCreatable<RotateV, AutoJoint, sRotateV>(new RotateVJoint())`, whose inline default constructor is what makes JointInstance.obj emit the vftable and the deleting destructor. `new` alone is not enough; the constructor has to be the inline one.
-
-That constructor needs the chain the type records already describe: `JointInstance` and `AutoJoint` each take a `Joint*`, `FactoryProduct`, `NonFactoryProduct`, `Described`, `DescribedCreatable` and `DescribedNonCreatable` each forward it through a `template <class U> X(U* joint)`, and all seven of `Motor`, `Glue`, `Rotate`, `RotateP`, `RotateV`, `Snap` and `Weld` carry a default constructor that news their joint beside a `Joint*` one. A template constructor is user-declared, so each of those templates also needs an explicit default constructor back or `Described` stops being default constructible.
-
-Adding those constructors moves which object supplies `??_GSnapJoint` and `??_GWeldJoint` too, and the alias `min()` picks at the folded address changes with it: 0x100d7a40's nameref had to move from `SnapJoint` to `WeldJoint` or it silently stops resolving and takes 0.01 percent of progress with it.
-
-`World::onMotorAngleChanged` folds onto `onPrimitiveCanCollideChanged` at 0x100cf2b0, and `tools/check_folded.py` requires every annotation on an address to agree, so adding the sibling means adding `FOLDED` to the one already there.
-
-`Joint::canBuildJoint` ends `test al, al / setne al` on a call that already returns `bool`, which is the ternary's materialisation: `return Face::overlapWithinPlanes(...) ? true : false;`. A bare `return <call>;` trusts the callee's AL and emits neither instruction.
-
-## Rotate Joints
-
-`v8world/RotateJoint.cpp` is complete, all thirteen functions, and one three byte helper decided nine of them. `Tolerance::pointsUnaligned` compares against 0x3B23D70B, one ULP above `0.0025f`, which is `0.05f * 0.05f` folded through double; it also returns 32 bit, `mov eax, 1` against `xor eax, eax`, which is a direct `return <comparison>;` rather than an if with two returns. With both fixed `RotateJoint::canBuildJoint` went from 64.71 to 99.15 percent in one build, because the helper's frame changed every caller's stack layout. Fix the callee before sweeping the caller.
-
-`canBuildJoint`'s last percent was the size comparison that picks which primitive becomes the axle. The original evaluates `prim1`'s `getGridSize().sum()` first and tests `test ah, 5 / jp`, which is `prim1 sum > prim0 sum` with `prim1` written on the left; `prim0 sum < prim1 sum` means the same thing, evaluates `prim0` first and tests `test ah, 0x41`. Which operand is written first decides which is evaluated first even where the operator is commutative in meaning.
-
-`getTorqueArmLength` names the two hole indices, `int holeIndex0 = (holeId + 1) % 3;` and its sibling, as their own statements before either `std::max`, where the axle pair stays inline in its subscript. The line records say so directly: two eleven and twenty-four byte records that only divide, ahead of the two records that load and compare.
-
-`RotateJoint::putInKernel` takes its sign from `i == 0 ? -1.0f : 1.0f`, and the second half copies `coord0.translation` into a local and names `coord0.rotation.getColumn(0)` before adding; without both the column stays a temporary addressed through a pointer and every offset in the block shifts.
-
-## Glue Joints
-
-`v8world/GlueJoint.cpp` is six of seven. `GlueJoint` is 0x120 over `MultiJoint` with `Face overlapInP0` at 0xc0 and `overlapInP1` at 0xf0, and its constructor's frame is the tell: the original allocates six `Face` slots, so each intermediate is a named local and chaining `toObjectSpace` into `projectOverlapOnMe` is one slot short and 20 percent.
-
-`Face` carries `center`, `size`, `getU`, `getV`, `snapToGrid`, `toObjectSpace`, `projectOverlapOnMe`, `cornersAligned` and `fuzzyContainsInExtrusion` in the type records, and three of them were worth finding. `center()` is `(c2 + c0) * 0.5f`, `size()` returns a `Vector2` of the two edge lengths, and writing that arithmetic out instead cost `getMaxForce` 30 percent. `Units` is a class of static members and not a namespace, the same way `Math` is, which the `SA` in `?kmsForceToRbx@Units@RBX@@SAMM@Z` records.
-
-`compatibleSurfaces` loads both surface types into locals before testing either, which is SnapJoint's shape and the last 1.6 percent of `GlueJoint::canBuildJoint`.
-
-The original folds every `Connector` subclass's scalar deleting destructor onto 0x100a0720 and ours does not, so a `// VTABLE:` marker on `PointToPointBreakConnector` or `NormalBreakConnector` asserts a slot 0 that cannot hold. The vftable still has to be named or the stores inside `putInKernel` read as `<OFFSET>`, so both go in `webservice-globals.csv` instead: a marker asserts a layout, a data source only resolves a store.
-
-`GlueJoint::putInKernel` is the one function left and it is a ceiling rather than a spelling. Its length, all thirteen line-record offsets, the `S_BPREL32` list down to `_kernel`, `nId0`, `i`, `point1`, `p0World`, `p1World` and `point0` at their frame offsets, the `S_FRAMEPROC` block and the seven contributions GlueJoint.obj makes are identical to the original's, and the second of its two `pointToWorldSpace` expansions is byte identical; only the first expansion's 22 x87 operand and term picks differ. Fifty spellings across declaration form and position, comma declarations, direct initialisation, `const`, `getPV().position`, named coordinate frames, `Face` aliases const and not, postfix increment, the connector local's type and eighteen combinations of those move it to 86.59 or 87.20 and never to the original's order. The header is not the lever either: term order and multiply operand order are normalised, every regrouping is worse locally and globally, and `v.x` style leaf accessors give 79.27. Nor is the flag set, which the PDB records per object as `-O2 -Ob2 -Oi -Oy -GF -EHs -EHc -MD -GS- -fp:fast -W3 -Zi -TP` with no `-Gy`; building the app library without `/Gy` leaves the function at 86.59 and costs `check_folded` instead.
-
-## Sleep Stage
-
-`v8world/SleepStage2.cpp` is 24 of 35. `SleepStage` is 0x90 over `IWorldStage`, its downstream is `new SimJobStage(this, world)`, and the three `boost::scoped_ptr<Profiling::CodeProfiler>` at 0x84 are constructed with `"Collision"`, `"Wake"` and `"Sleep"`. `RBX::Sim::AssemblyState` and `RBX::Sim::EdgeState` are both `LF_ENUM` records, six and five values, and `SleepInfo::sleepTolerance` and `RunningAverageState::stepsToSleep` are private statics beside them.
-
-Two predicates on `IPipelined` had to be separated. `inOrDownstreamOfStage` is `currentStage->getStageType() >= stage->getStageType()` with no null test at all, where `downstreamOfStage` is the same with `>`; the null test belongs to the caller, which is why `SleepStage::getState` is `assembly->inPipeline() && assembly->inOrDownstreamOfStage(this) ? assembly->getSleepInfo()->state : Sim::ANCHORED` and `onWakeUpRequest` spends two line records on one condition. `getState` returning `ANCHORED` is what lets MSVC jump-thread every `getState(x) == SOMETHING` test straight to the false path, which is why the expansions look like a bare null test followed by a compare.
-
-Which call sites MSVC inlines a 420 byte function into is decided by the callee's cost, and a stubbed callee is what moves it. `changeAssemblyState` is inlined by the original into `onAssemblyRemoving` and `stepAssembliesRecursiveWakePending` and called from four other places; ours inlined it everywhere, because `SimJobStage::onAssemblyAdded` is a stub here and 209 bytes there. Source order is not the lever, which a build with the definition moved below its callers settles: MSVC 8 inlines a callee defined later in the same translation unit just as readily. `DECOMP_NOINLINE` on `changeAssemblyState` is what the file carries, and it is worth six functions against the two that need the expansion; the two are `// STUB:` until SimJobStage is real.
-
-Naming a local is worth thirty points here and it cuts both ways. `computeAssemblyState` has exactly `allNeighborsSleeping` and `it` in its `S_BPREL32` list, so writing `Edge* edge = *it;` costs it 16 points; `shouldSleep` has the same loop and wants that local, and dropping it there costs 30. Read the record before deciding, and change one loop at a time.
-
-`stepAssembliesAwake` tests `if (shouldSleep(assembly))` positive first and compares `getSleepCount(assembly) > 20`, not the equivalent `>= 21`, which is visible as `cmp [edx+4], 0x14 / jle` against `cmp 0x15 / jl`. `stepAssembliesSleepingChecking` dispatches on `computeAssemblyState`'s result with a real `switch`, lowered as descending `sub eax, 3 / je` where the if/else chain emits repeated `cmp`. Both were the whole of their last 17 and 7 percent.
-
-The ten `dynamic atexit destructor` symbols for the function-local `static std::vector` accumulators are worth naming: `toWake`, `toDeep`, `toSleeping`, `toStepping`, `toTouching`, `toTouchingSleeping` and `toSleepingChecking` reach the original only through the `push` that precedes `atexit`, and a `// SYNTHETIC:` nameref per address took `stepJoints` to 100 and moved four others. `Contact::step` is the one Contact function this family needs; its `stepContact` is vtable+0x18, so `deleteAllConnectors` has to be declared at +0x14 first, and it ends `return touching;` rather than `return false;`, which reads as `mov al, bl` against `xor al, al`.
-
-`util/RunningAverage.cpp` is two of three and `Quaternion::maxComponent` is the third, inline in `quaternion.h` at lines 42 to 44. It is `std::max(std::max(fabsf(x), fabsf(y)), std::max(fabsf(z), fabsf(w)))`, and the four `fabs` temporaries land at ascending stack slots in creation order w, z, y, x, which is right to left through both arguments of both inner calls. `Quaternion::operator*(float)` is `Quaternion(value * x, ...)`, not `x * value`: with the scalar already in st(0) the first spelling emits `fld st(0) / fmul [x]` and the second `fld [x] / fmul st(1), st(0)`.
-
-## Joint Stage
-
-`v8world/JointStage.cpp` is nine of ten. The constructor is `IWorldStage(upstream, new ClumpStage(this, world), world)`, which the `push 0x10` ahead of `operator new` sizes, and `~JointStage` is empty because the set, the map and `IStage`'s `delete downstream` are all implicit.
-
-`insertToMap` carries its own null guard, `if (p != NULL) jointMap.insert(std::make_pair(p, j));`, the same shape `removeFromMap` has. `onPrimitiveRemoving` inserts under the primitive it was handed and has already dereferenced, so the test cannot be at the call site; moving it into the helper takes a statement off `onJointPrimitiveNulling`, `onJointPrimitiveSet` and `onEdgeAdded` and all three stay at 100 percent.
-
-A `for` increment is attributed to the last statement of the body, not to the `for` line. `removeFromMap` and `onPrimitiveAdded` have no record at the `_Inc` call where `onPrimitiveRemoving`, whose step is written out at the bottom of a `while`, has one at its own line, and that is what fixed all three loop forms before any of them was written.
-
-`removeFromMap`'s null guard is a `break` out of a `do { } while (0)` and nothing else reaches it. Written as `if (p != NULL) { ... }` MSVC shrink wraps per register: `push ebx` lands at its definition before the lower_bound loop while `ebp`, `esi` and `edi` sink past it, which moves two stack displacements and the pop order and holds the function at 88.11 across sixty-two spellings of the loop, the guard, the declaration, the increment and three kinds of alias. The degenerate loop makes the whole body a loop body, so the saves have to be hoisted to its preheader, and MSVC emits `push ebx`, the four loads, then `push ebp / push esi / push edi` in one group, which is the original byte for byte. Compiling the body in isolation against every guard form and reading the push offsets out of the listing is what found it; a linked sweep only reports the score and never says why the placement moved.
-
-`ClumpStage` does not override `onEdgeAdded`, `onEdgeRemoving` or `getMetric`. The type records list thirteen methods and none of the three, and the header carried them until a constructor forced the vftable out and the linker named them.
-
-A method's `This type` resolves through `LF_POINTER` to either the class or an `LF_MODIFIER const`, so the type records say which members are `const` and cvdump prints it without demangling anything. `IPipelined::downstreamOfStage`, `inPipeline`, `getStage` and `getKernel` are const where `putInPipeline` and `getWorld` are not, and `IStage::getStageType` is not const, which ours had backwards. Read the modifier before writing a signature; const-ness costs no instruction but it is recorded, and it changes what MSVC's alias analysis is allowed to assume.
-
-The line numbers say where a definition lives even when the function is inlined away. `~JointStage` and `getStageType` carry `jointstage.h` records at lines 61 and 63, so both are defined in the header, and the ninety lines between the constructor at `jointstage.cpp` line 22 and `removeFromMap` at 116 are the eleven private helpers, so those are in the `.cpp` and not in the class body.
-
-`onPrimitiveAdded` is 93.53 and the residual is one inline expansion's call order. Its length, frame, locals, line records, contributions and every other instruction match; the original evaluates `stage->getStageType()` first in the second of two `downstreamOfStage` expansions and holds `prim1->getCurrentStage()` in `edi` across that call, two bytes more than ours, where the image's other three expansions and the out-of-line copy at 0x10118120 all evaluate the receiver first and ours matches every one. Both PDBs agree on the frame, the callee saves, the debug range and all nine indirect call sites, and the first five of those sit at identical offsets before the streams diverge by two bytes. An isolated reproduction of the loop settles what it is: MSVC emits either order for the same source, and adding a second vector to the same function flips one expansion and not the other, so the choice is pressure-driven and not spelled. Writing the term out as the comparison it inlines to reproduces our order, and so does every loop form, helper structure and position, the `inline` keyword, declaration and compile order, reference aliases, and correcting the const-ness of both functions involved.
-
-## Cofm
-
-`v8kernel/Cofm.cpp` is complete, all five functions, and `updateIfDirty` matched on the first build because the line records fixed its shape before any of it was written: fourteen statements at lines 21 to 38, which is the dirty test, the mass and the running position, a four statement loop over the children, the divide, `cofmInBody`, the world moment, a second loop, `Math::momentToObjectSpace` and the flag. Count the statements first and the body follows.
-
-Everything it needs was recorded rather than guessed. `Body::getBranchMass` is `cofm != NULL ? cofm->getMass() : mass`, which is why the disassembly inlines a call to `Cofm::updateIfDirty` twice per child; `children` is `RBX::IndexArray<RBX::Body,&RBX::Body::getIndex>` at 0x10 over a `G3D::Array<Body*>`, and `include/util/indexarray.h` is in the PDB's string table even though no module's line info mentions it; `cofm` follows at 0x1c. The rest of `Body`'s layout is in the type records too: `root` at 4, `index` at 0xc, `simBody` at 0x20, `canThrottle` at 0x24, `link` at 0x28, `meInParent` at 0x2c and `moment` at 0x5c.
-
-## Rect
-
-`Rect.obj` holds one function and `util/Rect.cpp` matches it, so the object is done. `positionChild` builds its result with `fromLowSize(Vector2(x, y), Vector2(width, height))`, which the type records carry as a static beside a `Rect(const Vector2&, const Vector2&)` constructor. The four float constructor compiles the same arithmetic in the wrong order: it stores `low` with a non-popping `fst` and adds afterwards, where the original computes both sums and then stores all four, which is the rule that building a return value through a constructor evaluates every argument before storing anything. The two switches were already right, and each is a real `switch`, lowered as descending `sub eax, N / jz` over 2, 3, 4 for the x locations and 0, 1, 4 for the y.
-
-## Naming Locals
-
-Where the line records show lines that generate no code, the original named something, and naming it back is worth more than any respelling. `Quaternion::operator*` spans quaternion.h 58 to 65 with code only at 63 and 64, so lines 59 to 62 are four declarations that cost nothing: two `const Vector3&` aliases for `imag()` and `other.imag()`, and two `float` copies of `w` and `other.w`. Adding the references took it from 43.90 to 68.85 and adding the scalars took it to 100. The scalars are visible in the disassembly before the source is guessed at: the original loads both `w` values at the top of the function and consumes them at the end with `fmulp` on values still in registers, where ours reloaded them from memory.
-
-A reference declaration emits nothing, so a run of no-code lines in a header is the signature of aliases. A `float` copy does emit a load, but the scheduler hoists it into the following statement's run, so it leaves no record either.
-
-A leading underscore on a parameter is the strongest tell there is, because it exists so the body can bind the unprefixed name. `mulMatrixMatrixTranspose(const Matrix3& _mat0, const Matrix3& _mat1, Matrix3& _answer)` has exactly three no-code lines between its brace at simbody.cpp 75 and the loop at 79, which are `mat0`, `mat1` and `answer` aliasing the three parameters. With those three aliases the plain flat `mat0[i][0] * mat1[j][0] + mat0[i][1] * mat1[j][1] + mat0[i][2] * mat1[j][2]` matches, where without them the same flat expression scores 66.67 and the best of sixty parenthesised and row-pointer spellings reaches only 85.71. The aliases leave no `S_BPREL32` record, so an empty local list never rules them out.
-
-An alias over a member reached through its own accessor is the same lever: `RotateConnector::computeForce` went from 91.11 to 96.09 on `KernelInput& input = getKernelInput();` and then using `input` for the latch and `input.get()`. The accessor is in the type records, which is what makes the alias a recovered fact rather than a guess. It does not generalise to any member: the identical trick on `frictionOffset` inside `ContactConnector::computeForce` costs eleven points, so alias only what the records name an accessor for.
-
-`S_FRAMEPROC`'s `inl_specified` records whether the original declared a function `inline`, which is how `mulMatrixMatrixTranspose` and `computeRotVel` are known to carry the keyword in `SimBody.cpp` even though both are emitted out of line. It changes no codegen, so it is fidelity rather than a lever.
-
-`S_BPREL32` records name every stack local and give its frame offset, which settles what the original declared without guessing: `RotateConnector::computeForce` has exactly `rotVel`, `normal`, `rotation` and `torque`, and `ContactConnector::computeForce` has `params`, `perpVel`, `force`, `kApplied` and `normalVel` with `kApplied` reusing the dead `dt` parameter slot. Declaration order cannot be read back from them, because MSVC lays locals out by size and not by declaration, and reordering to match the record order moves nothing.
-
-## Recovering Helpers
-
-Hand-inlining a helper the original called is the single most expensive mistake available, and the type records name every one of them. `RBX::Math::getWorldNormal` has two static overloads returning `Vector3`, over `(NormalId, const Matrix3&)` and `(NormalId, const CoordinateFrame&)`, and no symbol anywhere in the image because it is inline. Writing its five lines out by hand at each call site held `GeoPair::computeEdgeEdge` at 89, `computeEdgeEdgePlane` at 94, `computeBallEdge` at 96 and `NormalBreakConnector::computeForce` at 97; replacing all four with the call took every one of them to 100 in two builds. `PV::linearVelocityAtPoint` over `Velocity::linearVelocityAtOffset` is the same story and finished `computeNormalPerpVel`.
-
-A helper's temporaries are allocated once per expansion, so the expression that reads identically when written out does not schedule identically. That is why sweeping spellings of the inlined form is hopeless: `computeEdgeEdge`'s `e1` scored 89 per-component, 67 whole-vector and 65 construct-then-scale, and the helper, which is the whole-vector shape, scores 100. The score ordering of hand-written variants carries no information about which one the original had.
-
-`Math::getColumn(const Matrix3&, int)` is recorded beside it and is not what `getWorldNormal` is built from: routing the column through it drops the same four functions from 100 to between 78 and 97. Two recorded helpers that look composable need not compose.
-
-Search the type records for a plausible name before writing arithmetic out. `getWorldNormal`, `linearVelocityAtPoint`, `linearVelocityAtOffset`, `velocityAtOffset`, `getColumn`, `polarity`, `iRound` and `iFloor` were all sitting in `RBX::Math`, `RBX::PV` and `RBX::Velocity` unimplemented while five functions were stuck below 97.
-
-## SimBody
-
-`v8kernel/SimBody.cpp` is five of seven and `SimBody::step` is the one that mattered. What finished it was the recorded `Quaternion(const Vector3&, float)` constructor: `Quaternion(pv.velocity.rotational, 0.0f)` in place of naming the three components, which realigned every first-component add in the function at once. The scheduler's commute choices downstream depend on how earlier expressions were built, so a constructor overload can fix diffs in statements that never mention it. `frictionOffset += dt * perpVel` in `ContactConnector` is the same lever smaller: multiply operand order is invisible in the instruction stream but still steers later tie-breaks.
-
-`Quaternion::operator*` holds its result in a named local, which the line records prove: three records at quaternion.h 63 to 65, and the last one covers only the final store and `ret`, which is `return result;` after NRVO. The formula is the vector form, cross last, and the scalar-explicit spelling loses twenty points.
-
-`computeEdgeEdge`'s line records decode to exactly the statements the file already has, delta then dot, t0, t1, denom, the branch, then a named recip whose whole statement is the two-byte `fdivrp`. Both edges are construct-then-scale in the original, but writing `e1` whole-vector costs one 4-byte stack slot against the original's frame because ours will not reuse the dead spill slot the original shares between the e1.z spill and delta.z, and one slot shifts every spill offset in a 250-instruction function. That reads as twenty percent lost when the real difference is a temp-allocation tie. The per-component `e1` keeps the original's frame and scores 89; the shape-true spelling scores 67 with almost every instruction right but displaced.
-
-## Dot Receiver
-
-Which operand of `Vector3::dot` is the receiver decides the schedule whenever the other one is a live x87 temporary, and swapping it is worth more than any amount of respelling around it. `Body::kineticEnergy` sat at 93.55 written `w.dot(getIWorld() * w)` and reached 100 as `(getIWorld() * w).dot(w)`, because the product then stays on the stack instead of being materialised for the receiver. Where both operands are already in memory the swap is inert, which is why the same change does nothing to `GeoPair::computeNormalPerpVel` or `NormalBreakConnector`.
-
-Multiply operand order is normalised and parenthesisation is not. Sixty spellings that only commute factors move nothing; regrouping a three term sum moves several percent, in both directions. `Matrix3::operator*` is the case to remember: `t0 + (t1 + t2)` takes `computeRotVel` from 83.10 to 87.32 and drops `kineticEnergy` from 93.55 to 82.26, so one grouping cannot serve both call sites and the stock flat form is the one to keep.
-
-## Float Literals
-
-A literal that is one ULP wrong reads as a naming problem, not a value problem. `RotateConnector::computeParams` held at 99.40 on a single `fld`, because reccmp printed the original's operand as `<OFFSET5>` while resolving ours to a named float, and an unresolved operand hides a wrong value. The bytes settle it: `0x10236eec` holds `DA 0F C9 40`, so the constant is `6.283185f` (0x40C90FDA) and not `6.2831855f` (0x40C90FDB). Read the operand out of the image whenever reccmp fails to resolve one side; a constant reccmp renders on both sides is already proven equal.
-
-`RBX::Math::sign` is a static returning `float`, recorded beside `polarity`, `iRound` and `iFloor` and inlined everywhere, so it has no symbol. The original never calls `G3D::sign`, which returns double: a float `sign` loads `-1.0` as a dword where the double one loads a qword, and that one operand is what `GeoPair::computeEdgeEdgePlane` turned on.
-
-## Kernel
-
-`v8kernel/Kernel.cpp` is complete. All five functions reach the kernel through `KernelData* kernelData` at 0x10, and `numBodies`, `numPoints` and `numConnectors` are one `size()` each while `insertBody` and `removeBody` are `IndexArray::fastAppend` and `fastRemove`, whose swap with last and shrink is what the disassembly spells out.
-
-The index those arrays keep is not the one `Body::children` uses. `RBX::KernelIndex` is a four byte base holding `kernelIndex`, which `Body` inherits at offset 0, `Point` and `Connector` at 4 under their vfptr, and each class exposes it as `getKernelIndex`, so the arrays are `IndexArray<RBX::Body,&RBX::Body::getKernelIndex>` and the two `{RBX::Point::getKernelIndex,0}` member pointer forms. `insertBody` writing to `body+0` is the giveaway. `kernelindex.h`, `kerneldata.h`, `point.h` and `connector.h` are all in the PDB's string table, so none of the four headers had to be placed by guess.
-
-`realTimeConnectors` at 0x14 is a plain `G3D::Array<RBX::Connector *>`, not an `IndexArray`, and reading the type record rather than assuming is what keeps `getKernelIndex` private. Naming an `IndexArray` over a private accessor inside `Kernel` makes MSVC 8 recheck the template argument's access in every translation unit that includes `kernel.h`, which reaches `World.cpp` and `Assembly2.cpp` and cannot be answered with friend declarations. With the member typed correctly only `KernelData` and `Kernel` name those accessors, and one `friend class` each is enough.
-
-## Body
-
-`v8kernel/Body.cpp` is eight of seventeen. Every setter that changes mass or moment inlines `makeCofmDirty`, which walks to the parent and marks the `Cofm` and the root `SimBody` dirty; its line records put the parent test positive first, `if (parent != NULL) parent->makeCofmDirty(); else if (simBody != NULL) simBody->makeDirty();`, and both `Cofm` and `SimBody` carry a public `makeDirty` so nothing needs friendship. `setMass` and `setMoment` are then three statements each, and `setMass` compares `mass != value`, the same way round as `MotorJoint::setCurrentAngle`, so the member stays in memory for `fcom`.
-
-`updatePV` is the stub every accessor goes through, so it needs `DECOMP_NOINLINE` or `/Ob2` folds its one store into each caller and the call the original makes disappears; that alone moved four functions. `getIBody` and `getBranchIBody` share a type index with `getIWorld`, so they return `Matrix3` by value, and the copy the original builds before `Math::momentToWorldSpace` is that return rather than a reference; with both changed `getIWorldAtPoint` and `getBranchIWorldAtPoint` are one expression each, `Math::getIWorldAtPoint(getPV().position.translation, point, getIWorld(), getMass())` and the branch form beside it. `PV` has a recorded `PV(const CoordinateFrame&, const Velocity&)`, which is how `setCoordinateFrame` reaches `setPv`.
-
-`SimBody` is 0x98 and `simBody` sits at `Body+0x20` with `moment` at 0x5c, both out of the type records, and `include/v8kernel/simbody.h` is in the PDB's string table.
-
-## Constants
-
-`v8kernel/Constants.cpp` is complete, all twelve functions. `getJointK` sorts the size, clamps it with `sorted.max(Vector3(1.0f, 1.0f, 1.0f))` and scales `getJointKMultiplier` by 960000; `getKmsMaxJointForce` rounds both stud counts with `G3D::iRound`, clamps each to at least 1, and indexes `MAX_LEGO_JOINT_FORCES_MEASURED`, seven measured forces ending 4.681, by the larger of the two.
-
-Four things settled it and each is general. A bare `fld`/`fistp` with no control word change is round to nearest, not a cast, so it is `G3D::iRound`, which is `lrintf`. The component-wise clamp is `Vector3::max`, recognisable because it builds one `Vector3(1,1,1)` temporary and compares z, y, x in that order rather than three separate constants. `MAX_LEGO_JOINT_FORCES_MEASURED` cannot be `const`: as a constant our build folds `(1.0f / 7.0f) * table[6]` into a single pool entry where the original keeps the two multiplies apart, so the array is written without `const` and named in the statics table. And the ternaries in `getJointKMultiplier` are spelled `value < 15.0f ? a : b`, not `15.0f <= value ? b : a`; the original loads the constant into st(0) and tests `ah, 0x41`, ours loads the value and tests `ah, 1`, which is the same `<` rule that decides `Extents::contains`. Those three ternaries were the whole of the last 9.5 percent.
-
-`tools/ncc/ncc.style` gained an `^[A-Z][A-Z0-9_]*$` alternative for the same reason it carries `prop_` and `event_`: the caps spelling is the original's, recovered from its symbols rather than chosen.
-
-## Connector
-
-`v8kernel/Connector.cpp` is complete, all eleven functions, and `ContactConnector::computeForce` is the one that took work. It ended on three spellings that no amount of sweeping around them would substitute for, and each is a rule.
-
-Two statements on one source line are one line record, and the record lengths say when that happened. The original's records run 164 at +0x102, 165 at +0x10B, 166 at +0x126, so line 165 is 27 bytes where our four-statement form splits 21 and 6, and line 166 is the 6 byte `kFriction * forceMagLast`. Written `float frictionForce = frictionOffset.magnitude() * kApplied;` the statement is one record but the wrong code; written as two statements it is the right code and one record too many. `float magnitude = frictionOffset.magnitude(), frictionForce = magnitude * kApplied;` is both, and it is worth 1.5 percent over the single expression. Count the boundaries against the original's before deciding a local is not there: a comma declaration is invisible to a statement count taken from the source.
-
-Chained assignment is visible the same way and in the same place. The original has a record at 152 and the next at 153 covering the inlined switch, so the two `Vector3(0.0f, 0.0f, 0.0f)` stores are one statement, and the stores run `normal` then `position`, which right to left evaluation makes `params.position = params.normal = Vector3(0.0f, 0.0f, 0.0f);`. It is inert on its own and worth 0.8 percent once the rest is right.
-
-`dt * perpVel` and `perpVel * dt` compile to the same bytes and schedule differently, because G3D's free `operator*(float, const Vector3&)` is `return v * s;` and that extra inline frame changes how MSVC picks between `fxch st(2)` plus a folded `fadd [mem]` and `fld [mem]` plus `faddp`. Both forms are two instructions in the good case and three in the bad one, so this reads as a two byte function and every later line record shifted by two.
-
-None of the three moves anything alone: the accumulation and the magnitude are 98.06 and 98.45 apart, and only all three together reach 100. Sweeping one statement at a time will report every one of them as inert.
-
-`Connector::canThrottle` and `getBroken` return false, and the three bytes at 0x100eb790 are the only thing that says so. Both read as defaults a derived class overrides, both were written `return true`, and the pair then folded into their own group instead of onto `Joint::isBreakable`'s. That is what `tools/check_folded.py` is for: a wrong constant in a three byte body scores 100 against whichever alias reccmp pairs and shows up only as the fold not happening. It also failed `reccmp-vtable`, since `Connector`'s slots then pointed at a group the original does not have.
-
-The original's `S_BPREL32` list is the fingerprint that says the allocation still differs when the code is nearly right. It records `params`, `perpVel`, `force`, `kApplied` and `normalVel`, and ours had every one but `kApplied`, whose home is the dead `dt` parameter slot. It is not reachable by declaring `kApplied` earlier or `const`; it appears when the rest of the function is right. `force` has to stay declared at its use: hoisting it to the top of the block costs five percent.
-
-## StandardOut
-
-`util/standardout.cpp` and the `Notifier` template it instantiates are complete. Five things did it and each is general.
-
-`Notifier<Source, Event>::raise(Event, Listener*)` wraps the listener call in a `try`/`catch` that reports through StandardOut: `catch (std::exception& error)` takes `error.what()` into a `std::string` and calls `StandardOut::singleton()->print(MESSAGE_WARNING, "Exception caught in onEvent. %s", ...)`. That accounted for the frame pointer and forty of its seventy-seven instructions, and the line records placed it at events.h 187 to 197 before any of it was written.
-
-`Events.h` cannot include `standardout.h`, which includes it back, and a mid-file include breaks boost's own header ordering. A forward declaration of `class StandardOut` is enough, because MSVC only analyses a template body when it is instantiated, which happens in `standardout.cpp` where the class is complete.
-
-`raise(Event)` needs `throw()`. Without it MSVC emits an unwind funclet to destroy the by-value `Event` parameter and the whole EH frame with it, where the original has no unwind table at all; the PDB shows the two-argument overload carrying `$0` and `$2` funclet symbols and the one-argument overload carrying none. That was worth 47 percent. The last three came from writing the increment inside the subscript, `listeners[range.index++]`, which the line records give away by attributing the increment to the same line as the call.
-
-`StandardOutMessage` sets its time with `_time64(&time)` in the constructor body, not `time(_time64(NULL))` in the initialiser list; the difference is `push <address>` against `push 0` and a pair of stores. And `~StandardOut` is `(compgenx)` in the type records, so the original never declares it: declaring one adds a vftable store to the destructor that the original does not have, which is the same rule as `FactoryProduct`'s but read in the other direction.
-
-One more folded-alias row: the original's `~mutex` call target at 0x101e7700 is named `??1mutex@boost@@QAE@XZ` in the vendored table, but our build folds `~mutex` with `~try_mutex` and resolves ours as the latter, so the address needs both names.
-
-## Class Names
-
-Every registered class carries a namespace-scope char array holding its name, and `Name::doDeclare<&sFoo>` turns it into the interned `Name`. 105 of them, each with a `callDoDeclare<&sFoo>` beside it that is a five-byte tail jump into `doDeclare`. Both templates take `const char*`: 48 arrays are `const char[]` and 46 are `char[]`, the mangling records which (`QBDB` against `PADA`), and one template accepts both through the qualification conversion.
-
-The array's own translation unit comes from the contribution table, the instantiation's from the `S_GPROC32`'s module, and the two are usually different objects: `factoryregistration.cpp` instantiates 27 whose arrays are spread over as many files. Getting that wrong shows up as a `/GS` cookie, because App is `/GS-` and the WebService project is not.
-
-`GlobalSettingsItem<T, &sName>` takes the array as its second parameter, not a pointer to the instance.
-
-## Object and Creatable
-
-Below `Instance`'s registration chain sit three more classes, all in `include/util/object.h` and all 4 bytes: `RBX::Object` carries the vfptr and a public virtual destructor, `Creatable<T>` adds a nested `Deleter` and a private static `operator new` and `operator delete`, and `AbstractFactoryProduct<T>` adds `getCreators` and `create`. Since none of them adds a member, putting them under `AbstractFactoryProduct` leaves `Instance` at 0xf8.
-
-`Creatable<T>::operator delete` is `free(p)`, and that one line is what every scalar deleting destructor in the tree was missing. The original never imports the CRT's `operator delete` at all; `??3@YAXPAX@Z` appears nowhere in the image, because the class-scope one is inlined at every delete site. `operator new` is `malloc`, which is why `create` allocates with `malloc` and not `??2@YAPAXI@Z`. Both are `CA` in the mangling, private, and both have to be protected here: a virtual destructor has to reach its deallocation function and modern conformance enforces that where MSVC 8 does not. Neither reaches our own map, so the original's six-byte out-of-line copy at 0x100078f0 has nothing to annotate.
-
-`Creatable<Instance>::create<U>` is `boost::shared_ptr<U>(new U(), Deleter())` with 108 instantiations, and `FactoryProduct<T, Base, sName>::Creator::create` returns `Creatable<Instance>::create<T>()`. `Deleter::operator()` calls `Instance::predelete` and then deletes, and `predelete` has two private overloads, a member and a static taking `Instance*` that tail jumps into it. Private matters: a public static mangles `SA` where the original has `CA`. Both `predelete` and `~Instance` are inaccessible to `Deleter`, so `Instance` declares it a friend.
-
-`JointInstance` owns `Joint* joint` at 0x108, under an `IRenderable` base at 0xf8 and an empty `IJointOwner` at 0x108. `Motor` and `VelocityMotor` each held a copy of it typed `MotorJoint*`, which is what blocked rebasing them onto `AutoJoint` and `JointInstance`; the setters reach the derived type through a `static_cast`, which costs no instruction under single inheritance.
-
-## Reflection Descriptors
-
-`Descriptor` (8) to `Type` (16) to `EnumDescriptor` (0x28) to `EnumDesc<T>` (0x98), each recorded in the type records. `Descriptor` holds `const Name& name` at 4 under a vfptr, and its constructor takes a `const char*` and stores `Name::declare(name, -1)`; it never reached the publics, so it is inlined everywhere and belongs in the header. `Type` adds `const std::type_info& type` and `const Name& tag`, and its two-argument form fills `tag` with `Name::lookup(name)`, not with its own name. `EnumDescriptor` passes the literal `"token"` as that tag.
-
-`Descriptor` and `Type` have byte-identical scalar deleting destructors that the original did not fold and ours does; the contribution table puts them in `ThumbnailGenerator.obj` and `Surfaces.obj`, one LTCG and one not. Only one of the two can hold the match, so the other's vtable slot read as missing against code that is the same. reccmp now compares the code when the slot's original function is unclaimed, which is the mirror of `FOLDED` and the general answer wherever the original kept apart what we merge.
-
-The property chain hangs off the same root: `Descriptor` (8) to `MemberDescriptor` (0x10) to `PropertyDescriptor` (0x18) to `TypedPropertyDescriptor<T>` (0x1c) to `PropDescriptor<Class, T>` (0x1c), which is 499 functions and the largest family left. `MemberDescriptor` adds `const Name& category` at 8 and `const ClassDescriptor& owner` at 0x0c; `PropertyDescriptor` adds two one-bit fields at 0x10 and `const Type& type` at 0x14, and introduces nine virtuals at vtable slots 4 through 0x20, seven of them pure. `TypedPropertyDescriptor<T>` holds `std::auto_ptr<GetSet> getset` at 0x18 and overrides all but `read`.
-
-Writing that layout is blocked on the descriptors' construction, not on the layout. Both classes hold reference members, so neither can be default constructed, and every `static PropDescriptor<Class, T> prop_Name;` in the tree today is default constructed against the placeholder. The real constructors take the owning `ClassDescriptor`, so that has to come first.
-
-`ClassDescriptor` is 0x88 and is four bases before it is anything else: `Descriptor` at 0 and a `MemberDescriptorContainer` at 8, 44 and 80 for properties, signals and functions, each 0x24 of two vectors and a base pointer. `derivedClasses` follows at 0x74 and `base` at 0x84. It lives in `include/reflection/object.h` beside `reflection/reflection_object.cpp`, and its size assertion is what proves all four bases at once. Its destructor is compiler-generated but has a standalone body in the image, so it is declared and defined out of line rather than left implicit; inline, it folds into the scalar deleting destructor and costs that function nine percent.
-
-The chain above every registered class is `X` to `DescribedCreatable<X, Base, sX>` to `Described<X, sX, FactoryProduct<X, Base, sX>>` to `FactoryProduct<X, Base, sX>` to `Base`, and none of the three templates adds a byte. They live in `include/util/object.h`, `include/reflection/reflection.h` and `include/v8tree/instance.h`, and each class's copies are emitted from its own `.cpp`, so `Team.obj` holds all eight of Team's. Explicit instantiation of the derived class does not reach the bases; each of the three has to be named. `getClassName` is `Name::declare<sName>()`, which is `boost::call_once(&callDoDeclare<name>, flag)` followed by `doDeclare<name>()`. `classDescriptor` is a magic static `ClassDescriptor d(Base::classDescriptor(), sName)`. 36 of the 71 classes have a single base and are writable as skeletons; the other 35 carry extra or virtual bases. `scratchpad/classwrite.py` wires them from the type records and the contribution table: it rebases a class the tree already declares rather than duplicating it, refuses one whose base is not declared yet, and rewrites the whole nameref block in `util/object.h` each run, so a class it skips as already wired still has to count or its nameref is dropped. One base unlocks a family at a time: `CharacterAppearance` carries four classes, `BodyMover` six, `JointInstance` and `AutoJoint` eight between them, and `GlobalSettings::Item` three. `DescribedNonCreatable<T, Base, sName>` is `Described<T, sName, NonFactoryProduct<Base, sName>>`, and `NonFactoryProduct` takes the base class rather than T; `GlobalSettingsItem<T, &sName>` is `DescribedCreatable<T, GlobalSettings::Item, sName>` with `Service` beside it. Both `NonFactoryProduct` and `FactoryProduct` declare `getClassName`, so the nameref block has to replace the first only or every annotation lands on two addresses and decomplint reports `duplicate_offset`.
-
-Everything in the chain except `getClassName` is blocked on one thing, and the constructor says what it is. `FactoryProduct`'s stores eleven vftables, at 0, 0x10, 0x14, 0x20, 0x24, 0x3c, 0x54, 0x6c, 0x84 and 0x9c, which is exactly where `Instance`'s bases sit in the type records. Ours stores at 0, 0xc, 0x10, 0x14, 0x18, so our bases are 12 bytes short of the original's: `GuidItem<Instance>` is 16 and ours is 12, `Reflection::Described<Instance, &sInstance, DescribedBase>` is 12 and ours is 4 because `DescribedBase` carries `const ClassDescriptor& descriptor` at 8 over an 8 byte base of its own. `Instance` still asserted 0xf8 because its members absorbed the difference, so every offset comment in it below `enable_shared_from_this` was 12 too low. Four records put it right: `GuidItem<Instance>` keeps `bool registeredGuid` at 4 and `guid` at 8, `DescribedBase` sits on `SignalSource` and holds `descriptor` at 8, `SignalSource` carries the vfptr itself so the base stays at offset 0, and `Association<Instance>` is a `std::vector<Item*>` at 0x10 rather than a `std::string`. A reference member would stop `Described` default constructing, so `descriptor` stays a sized placeholder with its name in a comment.
-
-That lines the constructors' eleven vftable stores up with the original's, at 0, 0x10, 0x14, 0x20, 0x24, 0x3c, 0x54, 0x6c, 0x84 and 0x9c. The original's construction vftables then have to be named, and naming them used to break `reccmp-vtable`: it compared 307 tables and 281 failed, because a table reaching the database through a data source has no `// VTABLE:` marker claiming its slots. reccmp now records which tables a marker asserts and compares only those, so `gen_globals.py` can hand over the `??_7?$FactoryProduct@`, `??_7?$DescribedCreatable@` and `??_7?$DescribedNonCreatable@` publics without it. That is the general rule: a `// VTABLE:` marker asserts a layout, a data source only resolves a store.
-
-Five of the six events a `Notifier` carries are structs, not classes. The original mangles `ChildAdded`, `ChildRemoved`, `DescendentAdded`, `DescendentRemoving` and `AncestorChanged` with `U` and only `PropertyChanged` with `V`, so every construction vftable and every `Notifier` name mentioning them missed by one character. Declaring them `struct` took `FactoryProduct`'s constructor from 62 to 94 percent, and annotating `Instance::Instance` at 0x1004eb10 finished it.
-
-A label with commas in it has to be quoted in a reccmp data source. `d___RBX::Reflection::Described<RBX::Team,&RBX::sTeam,...>` ends at the first comma otherwise, so the symbol reaching reccmp is a prefix that matches nothing, and 101 rows silently did nothing at all.
-
-`classDescriptor` hands its static to atexit, and that destructor is a real function per instantiation. cvdump truncates its name, so build it as `` `<the classDescriptor name>'::`2'::`dynamic atexit destructor for 'd'' `` and take its address from the `push` that the `call` follows. Anchor on the pair: a bare 0x68 scan lands inside another instruction and yields an address that is not a function start, which reads as 0.00% rather than as an error.
-
-`FactoryProduct` and `DescribedCreatable` both declare a protected virtual destructor, and the type records say so. Leaving it implicit costs more than the destructor: without it MSVC emits no vftable stores, every instantiation compiles to the same body, and 27 of them fold onto two addresses so 25 namerefs have nothing to bind to. The original's is ten stores and a tail jump into the base.
-
-`DescribedCreatable` must not declare one. Its destructor is five bytes in the original, a tail jump into `~FactoryProduct`, and declaring it makes MSVC re-establish all ten vftables instead. `FactoryProduct::Creator::create` is `virtual boost::shared_ptr<Object> create() const`, so a body returning `T*` mangles differently and one returning the same empty pointer for every class folds all 27 onto one address; it needs `Object`, which the tree does not have yet.
-
-`scratchpad/chainrefs.py` writes the rest of the chain's namerefs, one block per header, reading the addresses that already reach 100% so a marker is only ever written where it holds. Three things it has to get right: the scalar deleting destructor is one address shared by `FactoryProduct` and `DescribedCreatable`, so the deduplication spans the files; the block it rewrites has to include `getClassName` or that run deletes what `classwrite.py` wrote; and a nameref clang-format has already wrapped will not match the pattern that removes it, so a stale copy survives and decomplint reports `duplicate_offset`.
-
-A class whose placeholder members sit where its real base's data lives cannot just be rebased. `Motor` keeps `joint` at 0x108, which is inside `JointInstance`, and `Decal`'s padding starts at `Instance`'s size rather than `FaceInstance`'s; both need the members moved to the base that owns them first.
-
-Name the non-type parameter `sName`, not `name`. MSVC 8 rejects forwarding it into `Name::declare` with "expected compile-time constant expression" when an inherited member of the same name is visible, and `Descriptor::name` is visible through every one of these.
-
-`getClassName` matches at 100% for every class wired this way, and the last thing in its way was one operand. A static local to a template instantiation reaches the original's PDB only as a mangled public, because the original inlines the template everywhere; ours keeps the enclosing `S_GPROC32`, so reccmp labels it `flag___RBX::Name::declare<&RBX::sTeam>`. Handing the mangled name over as a symbol does pair it, and costs more than it gives: the long ones collide once reccmp truncates at 255 for C4786, and the accuracy falls to 98.34. Rebuilding reccmp's own label out of the mangling is what works, and `gen_globals.py` does that for the one-argument address-of form, which is what `Name::declare` and `doDeclare` are. 210 statics reach a label that way.
-
-`classDescriptor` holds its `ClassDescriptor` in a function-local static the original's compiler emitted no symbol for at all, so neither the publics nor the nested walk reaches it and no demangling would help. The function reaches it though: it loads the object's address into `ecx` before constructing it, so `gen_globals.py` reads that operand out of the body and pairs it with the enclosing name cvdump already prints, which names 99 of them. Ninety-five of those addresses already carry a name from the publics that does not pair, so the row has to overwrite rather than defer.
-
-clang-format reflows a `//` comment past the column limit, and a nameref is a comment. `Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<...> >::classDescriptor` is 118 characters, so it got wrapped, the name line lost its tail, and the annotation silently stopped resolving. Wrap long namerefs in `// clang-format off`.
-
-`rootDescriptor` is written and unannotated: it is inline in the header and nothing calls it until `Described<T, &sName, Base>::classDescriptor` does, which is the next 98 functions and needs `DescribedBase` (12 bytes, `const ClassDescriptor& descriptor` at 8) first.
+- **The colon is required** on everything except `// SIZE`. reccmp silently ignores `// VTABLE WEBSERVICE 0x...`, and the vtable stores inside constructors then compare as `<OFFSET>` instead of the vftable symbol, costing five to ten percent.
+- **`// FUNCTION:` asserts a 100% match.** Anything less is `// STUB:`. This applies to `// SYNTHETIC:` too: if the claim will not hold, drop the nameref rather than assert it.
+- **`FOLDED`** marks siblings the linker merged onto one address. They share that address, are exempt from ascending order, and do not need the `STUB()` macro.
+- **A nameref belongs in a header, never in a `.cpp`.** decomplint fails on it under `--warnfail`.
+- **Wrap long namerefs in `// clang-format off`.** clang-format reflows a `//` comment past the column limit, the name line loses its tail, and the annotation silently stops resolving.
+- **A body written `{}` on one line** leaves decomplint's parser inside the function. The next marker is reported `unexpected_marker` and dropped. Split the braces.
 
 ## Class Pattern
 
@@ -373,6 +114,9 @@ public:
 	virtual ~Instance();      // vtable+0x00
 	virtual void VTable0x04();
 
+	// SYNTHETIC: WEBSERVICE 0x100078f0
+	// RBX::Instance::`scalar deleting destructor'
+
 private:
 	int worldIndex;                       // 0x28
 	undefined m_unk0x2c[0x40 - 0x2c];     // 0x2c
@@ -381,11 +125,15 @@ private:
 
 `DECOMP_SIZE_ASSERT(Instance, 0xf8)` goes in the source. Member offset comments and `vtable+0xNN` comments are required. Size gaps use a subtraction so the length documents itself.
 
+Members lay out in declaration order regardless of access section, so an out-of-order member shifts every offset below it. Both `std::set` and `std::vector` carry a leading `_Myproxy` under `_SECURE_SCL`: a set is `_Myproxy, _Myhead, _Mysize` and a vector is `_Myproxy` then three pointers, which is why a vector's `_Myfirst` reads four bytes past where the type record puts the member.
+
 ## Types and Names
 
 `undefined`, `undefined2` and `undefined4` from `decomp.h` stand in for unproven types. Do not guess `int` or `float` until a 100% match proves it.
 
-Unlike racers, the PDB is not stripped, so real names are usually available and placeholders are the exception. Where nothing is recorded, NCC rules apply: `FUN_XXXXXXXX`, `g_unk0xXXXXXXXX`, `m_unk0xXX`, `p_unk0xXX`, `VTable0xXX`, `c_` on enum constants. Rename a placeholder only when the evidence is unambiguous; competing plausible names mean keep it, because a misleading name is worse than a neutral one.
+Unlike racers, the PDB is not stripped, so real names are usually available and placeholders are the exception. Where nothing is recorded, NCC rules apply: `FUN_XXXXXXXX`, `g_unk0xXXXXXXXX`, `m_unk0xXX`, `p_unk0xXX`, `VTable0xXX`, `c_` on enum constants. `tools/ncc/ncc.style` also carries `prop_`, `event_` and an all-caps alternative, because those are the original's own conventions recovered from its symbols.
+
+Rename a placeholder only when the evidence is unambiguous. Competing plausible names mean keep it, because a misleading name is worse than a neutral one.
 
 ## Code Style
 
@@ -399,36 +147,155 @@ Unlike racers, the PDB is not stripped, so real names are usually available and 
 ## Matching a Function
 
 1. Read the decompilation and check the byte budget. The gap to the next address bounds the body, so a body that cannot fit means this is a wrapper and the logic is in a callee.
-2. Take calling conventions from the definition, not a call site. `__thiscall` means a member.
-3. A `__thiscall` on a global means that global is an instance. Declare the class with `undefined m_unk0x00[size]`.
-4. STUB every unknown callee, in ascending address order, with `STUB(0xADDRESS)` in the body so `/OPT:ICF` cannot fold them together. Empty destructors are exempt.
-5. A stub is one store, and App builds `/Ob2`, so the caller inlines it and loses whatever stack the real call needed. `DECOMP_NOINLINE` on the stub keeps the call the caller's own match depends on; `Instance::raisePropertyChanged` is the one that matters, because every property setter tail-jumps to it. Drop the marker once the body is real.
-6. Write clean C++, not decompiler pseudocode. No `*(int*)(this + 4)`, no gotos, no raw float bit patterns. `Extents::getFaceCorners` is the one goto, and its frame size is why.
-7. Build, then `reccmp-reccmp --target WEBSERVICE --nolib --verbose 0xADDRESS`, and iterate to 100%.
-8. Compare the vtable address itself, not only the functions. It is what exposes a missing or misordered virtual.
-9. Re-verify functions that touch any class you changed, then run `reccmp-decomplint` and `tools/check_folded.py`.
+2. Read the line records before writing anything. Count the statements they imply, note which lines generate no code, and check `S_BPREL32` for the local set. Getting the statement count right first is worth more than any respelling afterwards.
+3. Search TYPES for a helper before writing arithmetic out. Hand-inlining a helper the original called is the single most expensive mistake available.
+4. Take calling conventions from the definition, not a call site. `__thiscall` means a member. A `__thiscall` on a global means that global is an instance.
+5. STUB every unknown callee, in ascending address order, with `STUB(0xADDRESS)` in the body so `/OPT:ICF` cannot fold them together. Empty destructors are exempt.
+6. Put `DECOMP_NOINLINE` on a stub whose call the caller's match depends on. App builds `/Ob2`, so a one-store stub inlines and the caller loses the stack the real call needed. Drop the marker once the body is real.
+7. Write clean C++, not decompiler pseudocode. No `*(int*)(this + 4)`, no gotos, no raw float bit patterns.
+8. Build, then `reccmp-reccmp --target WEBSERVICE --nolib --verbose 0xADDRESS`, and iterate to 100%.
+9. Compare the vtable address itself, not only the functions. It is what exposes a missing or misordered virtual.
+10. Re-verify every function that touches a class you changed, then run the checks above.
 
-Starting a new class, match the constructor, destructor and scalar deleting destructor before any method. Those three prove size, base chain, vtable layout and member order.
+Starting a new class, match the constructor, destructor and scalar deleting destructor before any method. Those three prove size, base chain, vtable layout and member order together.
 
 ## Decompilation Principles
 
 - A type is proven when a `// FUNCTION:` using it reaches 100%, and not before.
-- A diff means the code is wrong. Find the cause: layout, types, a missing base. Register allocation is never the explanation.
+- A diff means the code is wrong. Find the cause: layout, types, a missing base, an inlining decision. Register allocation is never the explanation.
+- Fix the callee before sweeping the caller. A three-byte helper's frame changes every caller's stack layout.
 - Claimed matches are not verified matches. Re-measure anything inherited or generated.
 - Every annotation carries a real address. No placeholders.
 - Casts plus pointer arithmetic mean the types are wrong. Find the real class.
 - One root type per header. Nest one-owner helper types inside their owner.
 - An unexplained address gap means a function sits in the wrong class, or one file mixes classes. Move whole classes; never split a class's methods across files to tidy address order.
+- Measure with reccmp on the linked image, not by eye on an `/FA` listing. A listing's byte counts mislead because relocated `call` and `mov reg, [__imp_...]` bytes read short. Its mnemonic stream is still usable for cheap sweeps, since aligning it against the original's disassembly costs a compile rather than a link.
+
+## MSVC 8.0 Codegen Patterns
+
+Each of these cost a round trip. Keep the sources clean and leave the reasoning here.
+
+### Float compares and x87
+
+- **`a > b` and `!(a <= b)` are not the same compare.** The direct `>` emits the unordered-safe `test ah,5 / jp`; the negated form emits `test ah,1 / je`.
+- **The operator decides which side loads first**, not the operands. `<` and `<=` load the right operand into st(0); `>` and `>=` load the left. Settle the spelling from this before looking at the jump condition.
+- **MSVC reorders the terms of an `&&` chain of float compares.** Write the source in the order the binary tests them.
+- **A member compared against a parameter stays in memory** when written `member != value`, giving `fcom`. The reverse spelling loads both and needs `fucom`.
+- **`std::swap(a, b)` loads `a` into st(0) first,** so argument order is recoverable from which member the binary loads first.
+- **`std::min` and `std::max` return a reference,** visible as a `lea` of both candidates and a deref. Suppress `windows.h`'s `min` macro or the comparison compiles inline and nothing lines up. The two candidates land in declaration order.
+- **Locals are pushed in declaration order.** Getting the order wrong leaves an extra value on the x87 stack and shifts every later `st(n)` operand, which reads as a large diff for a one-line cause.
+- **A literal one ULP wrong reads as a naming problem.** When reccmp fails to resolve one side's operand, read the constant out of the image; a constant it renders on both sides is already proven equal.
+- **`RBX::Math::sign` returns `float`.** `G3D::sign` returns double, which loads a qword where the float one loads a dword.
+
+### Statement shape and evaluation order
+
+- **Argument evaluation is right to left,** for operators as well as calls. The pair named in the second argument gets the callee-saved registers. Naming the left product in a local is what orders `(a * b) * c.inverse()` the way the original has it.
+- **A comparison puts its right operand in the register.** `a == b` on integers is `mov eax, b` then `cmp [a], eax`. The operand the binary loads first is the one written second.
+- **Assigning a call's result before comparing changes the order.** `f() != g()` runs `g()` first; `x = f(); return x != g();` runs `f()` first.
+- **Which operand is written first decides evaluation order even where the operator is commutative in meaning.** `prim1 sum > prim0 sum` and `prim0 sum < prim1 sum` mean the same thing and evaluate in opposite orders.
+- **Building a return value through a constructor evaluates every argument before storing anything.** Assigning members one at a time interleaves the arithmetic with the stores.
+- **Chained assignment (`a = b = c = value`)** keeps the value in a register across the stores and writes them right to left. Separate statements reload it each time.
+- **MSVC lays a block out where its statement sits in the source.** A constant return written last ends up last, so a rare `return true` has to be moved below the hot path and the result tested afterwards.
+- **How you spell the return path decides register assignment.** `if (cond) return x; return y;` makes `x` the fall-through value; assigning to one named result keeps `y` in place.
+- **`x = a; if (cond) x = b;` and `x = cond ? b : a;` are not the same codegen.** The if form folds into one load and a conditional reload; the ternary evaluates `a` into a scratch register first and copies it in the else branch, one instruction longer. An if/else assigning two variables in each arm puts the else block at the tail.
+- **A ternary materialises its arms into a 32-bit register.** A `bool` function ending `movzx eax, al` on one path and `mov eax, 1` or `xor eax, eax` on another returned a ternary; a plain `return false` writes the shorter `xor al, al`. `test al, al / setne al` on a call that already returns `bool` is the same tell.
+- **`return p ? true : false` is not `return p != NULL`.** The comparison puts its right operand in a register, so the direct form spends an extra `xor eax, eax` where the ternary compares against the immediate.
+- **Comparing two `bool`s is a byte compare.** Writing one inline as a negation promotes both to int and costs a `movzx`. Store the negation in its own `bool` first.
+- **Multiply operand order is normalised; parenthesisation is not.** Commuting factors moves nothing. Regrouping a three-term sum moves several percent, in both directions, and one grouping cannot always serve two call sites.
+- **`(&prim0)[index]` is not `index == 0 ? prim0 : prim1`.** The difference only shows once a caller passes a variable index.
+- **Two statements on one source line are one line record,** and the record lengths say when that happened. A comma declaration is invisible to a statement count taken from the source.
+
+### Naming locals
+
+Where the line records show lines that generate no code, the original named something, and naming it back is worth more than any respelling. A reference declaration emits nothing, so a run of no-code lines in a header is the signature of aliases. A `float` copy does emit a load, but the scheduler hoists it into the following statement's run, so it leaves no record either.
+
+- **A leading underscore on a parameter is the strongest tell there is,** because it exists so the body can bind the unprefixed name.
+- **Alias only what the type records name an accessor for.** An alias over a member reached through its own accessor is a real lever; the identical trick on a plain member can cost double figures.
+- **Aliases leave no `S_BPREL32` record,** so an empty local list never rules them out. The list is still authoritative for what did get a stack slot.
+- **A named local can also be wrong.** Two loops with identical shape can want opposite answers, so read the record per function and change one loop at a time.
+- **An `add reg, offset` ahead of a loop is not evidence of a source alias.** MSVC strength-reduces a member subobject used repeatedly in a loop on its own, and writing the reference can stop a trivial accessor inlining, turning the loop head into a call.
+- **Where a callee stores its result decides its caller's register allocation.** A function that already matches is still worth respelling when its caller does not.
+
+### Inlining
+
+- **`wasinlined` in `S_FRAMEPROC` answers whether the original ever expanded a callee.** Check it before assuming either way.
+- **`DECOMP_NOINLINE` is the tool when the original keeps a call out of line** and `/Ob2` inlines ours. It applies to real functions as well as stubs.
+- **Which sites MSVC inlines a large function into is cost-driven and not spelled.** Source order is not the lever: MSVC 8 inlines a callee defined later in the same translation unit just as readily. Neither is a stubbed grandchild callee. Where the original inlines at some sites and calls at others and no source change moves it, `DECOMP_NOINLINE` plus a `// STUB:` on the sites that wanted the expansion is the honest outcome.
+- **A stub that ends `return someOtherStub();` folds onto that other stub.** The callee inlines, its store overwrites the caller's, and the caller's `STUB()` constant is eliminated as dead.
+- **A virtual destructor with no standalone function in the PDB was inlined everywhere.** Define it inline in the header without an annotation. Out of line in the `.cpp` it cannot inline across translation units and every derived destructor calls it.
+- **A recursive helper and the loop it compiles to are not interchangeable.** MSVC turns tail recursion into a loop at the definition, so both spellings match there, but a caller inlines exactly one level of the recursion and none of the loop.
+- **A helper's temporaries are allocated once per expansion,** so an expression that reads identically when written out does not schedule identically. Sweeping spellings of a hand-inlined form is hopeless, and the score ordering of hand-written variants carries no information about which one the original had.
+- **Two recorded helpers that look composable need not compose.** Routing one through the other can drop four functions from 100 to the seventies.
+
+### Loops and control flow
+
+- **A dense switch lowers to descending `sub eax, N / je`.** An if/else chain emits repeated `cmp` against each value. Ghidra prints both as `if` chains when the cases are sparse, so the bytes are the only witness.
+- **A `switch` case is not a scope MSVC 8 reuses a temporary in.** Six bodies written as case bodies give four `Vector3` slots each where the same six at function scope share four. The frame size is the evidence, and dispatching with `case NORM_X: goto x;` over labelled statements below is the one sanctioned goto.
+- **The comma operator decides how many temporaries stay live.** `c0 = f(4), c1 = f(6), c2 = f(7), c3 = f(5);` keeps four alive at once where four statements reuse one.
+- **A `for` increment is attributed to the last statement of the body,** not to the `for` line. A loop with no record at its `_Inc` call has its step written out at the bottom of a `while`.
+- **A guard written as `break` out of `do { } while (0)`** makes the whole body a loop body, so MSVC hoists every callee-saved push to the loop preheader as one group instead of shrink-wrapping per register. An `if (p != NULL) { ... }` around the same body moves two stack displacements and the pop order.
+- **`std::for_each` passes its iterators through `_Unchecked`.** A raw node walk with none of the `_invalid_parameter_noinfo` checks the file's other loops carry is `for_each` plus `std::mem_fun`, not a written-out `for`.
+- **An if/else tail merge hoists the shared setup above the branch.** A ternary emits the whole address selection up front and costs the function its register assignment as well.
+- **Identical early exits are one shared return.** The line records give it away by sending both tests to the same line.
+
+### Class shape and layout
+
+- **Abstract bases carry `__declspec(novtable)`.** Without it the constructor stores a vftable the binary never stores, and any derived destructor gains a base vftable store plus a whole SEH frame, which reads as a fifty percent diff. Do not delete virtuals to force the number.
+- **A `ComputeProp` member records its owner's inheritance shape.** MSVC sizes the pointer-to-member by how the class inherits, so `ComputeProp<float, Primitive>` is 16 bytes and `ComputeProp<float, Assembly>` is 24. A class size off by that difference means a base is missing.
+- **`Math` and `Units` are classes of static members, not namespaces.** The difference is visible: a class's magic-static guard mangles a name reccmp can pair, where a namespace function's guard is `$S` and anonymous. A guard defined in a `.cpp` stays anonymous whatever the scope.
+- **A `static const float` folds to a constant and loses its magic-static guard** unless the initializer calls something. A guard in the binary proves the initializer was a call.
+- **A `const float` at namespace scope** is emitted as a real global and referenced by name, where the binary reads an anonymous constant out of the float pool. Write the literal at each use.
+- **Which object emits a scalar deleting destructor decides whether it inlines the destructor or calls it,** and the contribution table says which. Reproducing the split needs the original's own code, usually an inline constructor that forces the vftable out of a second object.
+- **boost's `shared_ptr::operator<` compares ownership, not the pointer,** so it loads offset 4.
+- **A `__int64` multiply lowers to `_allmul`,** and the conversion back to float tells you the signedness: a plain `fild` is signed; a pair that splits the sign bit out and subtracts it is unsigned.
+- **Read a CRT call's name out of the publics.** Never infer it from what the surrounding code looks like it should do.
+
+### Templates and folding
+
+- **Most of what is left in the engine is template instantiations**, not one-off functions. Count the unannotated symbols by owning template before picking work: one template written right settles every instantiation of it.
+- **A template instantiation belongs to whichever object the linker kept it from,** and that decides its flags. An instantiation kept from a `/GL` object is LTCG where ours is not, and no source spelling closes that.
+- **An explicit instantiation carries no line records,** so it takes a `// TEMPLATE:` marker with a nameref on the template body in the header.
+- **Explicit instantiation of a derived class does not reach its bases.** Name each one.
+- **A template constructor is user-declared,** so a class that has one also needs an explicit default constructor back or it stops being default constructible.
+- **Name a non-type template parameter something an inherited member does not shadow.** MSVC 8 rejects forwarding it with "expected compile-time constant expression" when a member of the same name is visible.
+- **The declaring namespace of a template member sits after its arguments in the mangling,** so splitting on the first `@@` misreads `boost::shared_ptr<RBX::Instance>::~shared_ptr` as Roblox's.
+- **A folded address only counts as vendored when every alias does.**
+- **`/OPT:ICF` folds heavily.** Many distinct source functions compiled to the same three-byte body share one address. This is also why Ghidra's PDB line importer throws several hundred `IllegalArgumentException` warnings, which are expected and harmless. Run `check_folded.py` before concluding a function at a shared address is unmatched.
+- **A wrong constant in a three-byte body scores 100** against whichever alias reccmp pairs and shows up only as the fold not happening.
+
+## reccmp Data Files
+
+reccmp parses the recompiled PDB only, so the original's side gets its names from CSVs under `reccmp/`.
+
+- **`webservice-function-size.csv`** gives the original's 12,633 function extents, so reccmp knows where each one ends without a symbol.
+- **`webservice-vendored.csv`** names the G3D, Boost, STL and ATL functions out of `WebService.pdb`; `--nolib` keeps them out of the score. Selection is by the scope a name is declared in, not the whole mangled string, or a Roblox method taking an `ATL::CStringT` counts as ATL's.
+- **`webservice-globals.csv`** names globals, function-local statics and the vendored data reccmp cannot reach otherwise. A function-local static never matches by mangled name: reccmp labels ours `<variable>___<enclosing function>` and the CSV hands the original the same label. Magic-static guards and `dynamic atexit destructor` symbols do match by symbol, the latter only once a `// SYNTHETIC:` nameref claims it.
+- **`webservice-statics.csv`** matches by bare name, so a name under three characters or one two translation units share stays out.
+- **`webservice-strings.csv`** types the original's 3,569 string literals. MSVC records the width in the mangling, `??_C@_0` narrow and `??_C@_1` wide, and without it reccmp reads all 145 wide ones as narrow.
+- **`webservice-synthetic.csv`** claims functions the source cannot annotate. A row typed `synthetic` asserts a match exactly as `// FUNCTION:` does and needs no source line. Type only the exact ones `synthetic`; the rest are `library`.
+
+Rules that bite:
+
+- **The file is order sensitive and must not be sorted whole.** Rows apply in file order and every row that overrides a folded address has to sit after the row it overrides. Those live at the end of the file.
+- **A vendored row at a folded address must carry the alias reccmp's recompiled entity actually holds,** which is not the name reccmp prints in the diff. Sweep the aliases the recompiled PDB lists at that address rather than reasoning about which one `min()` should pick.
+- **Adding an instantiation to a template already folded there shifts the pick,** so those rows have to be rechecked whenever a new family lands.
+- **A vendored function from a prebuilt library has no `S_GPROC32`,** only a public, so its row has no size. reccmp still names the call, but handing it every unsized row lets `reccmp-vtable` pair ATL and STL tables it cannot resolve. They go in one at a time, listed in `UNSIZED_KEEP`.
+- **A label with commas has to be quoted.** Otherwise the symbol reaching reccmp is a prefix that matches nothing and the row silently does nothing.
+- **A vendored vftable goes in one at a time,** listed in `VENDORED_VTABLES`, for the same reason.
+
+reccmp is `Asphaltian/reccmp@msvc800`, a fork, and `tools/requirements.txt` pins that branch.
+
+A module is not a file. Whether an original object is finished is a different question from whether one of our source files is, because a header can carry functions from several objects. Claim a file complete only by scoring every annotation that file carries.
 
 ## Build Layout
 
-Each original static library gets its own OBJECT library, because each was compiled with different flags. `CMakeLists.txt` carries the full set. The differences that bite:
+Each original static library gets its own OBJECT library, because each was compiled with different flags. The PDB records a command block per object and `reccmp-cvdump -s` prints it, so the flag set is read rather than inferred. Grouping objects by command block is also how the Lua 25 are told apart from App proper. `CMakeLists.txt` carries the full set. The differences that bite:
 
 - App, RbxView and AppDraw were built `/GS-`. Network and RenderLib were not. Stack cookies show up as spurious mismatches if this is wrong.
 - App is the only library with `/fp:fast`, and the only one with `/Ob2 /Oi /Oy` together.
-- App carries `/Gy` here and did not in the original. The PDB records a command block per object and `reccmp-cvdump -s` prints it, so the flag set is read rather than inferred: App's 183 objects are `-O2 -Ob2 -Oi -Oy -GF -EHs -EHc -MD -GS- -fp:fast -W3 -Zi -TP`, where G3D's and RenderLib's carry `-Gy` and App's do not. It has to stay on here anyway. Dropping it looks harmless at first and then fails `tools/check_folded.py` the moment another in-class inline lands: `RotatePJoint::canStepUi`, `RotateVJoint::canStepUi` and `Joint::isAligned` are all `return true` and the original folds all three onto 0x100e6150, where ours gave them three addresses. Grouping every object by its command block is also how the Lua 25 are told apart from App proper, since they are the only ones carrying `_CRT_SECURE_NO_WARNINGS`.
+- App carries `/Gy` here and did not in the original, and it has to stay on. Dropping it looks harmless and then fails `check_folded.py` the moment another in-class inline lands.
 - RenderLib is the only one with `/Wp64`.
-- Six translation units are the only objects compiled `/GL`, so the link ran `/LTCG`. Nothing else in the binary is LTCG. Three of the six are `Client\win` sources, not RBXGS ones.
+- Six translation units are the only objects compiled `/GL`, so the link ran `/LTCG`. Nothing else in the binary is LTCG. A `/GL` function's codegen depends on the whole program, and ours is missing most of the engine, so prove one against an `/FA` listing built without `/GL` rather than against the linked image.
 
 Within a library, App uses subdirectories (`util`, `v8world`, `v8tree`, `v8kernel`, `v8datamodel`, `v8xml`, `gui`, `humanoid`, `reflection`, `script`, `security`, `tool`) with headers under `include/`. AppDraw, RbxView, RenderLib and the WebService project are flat, and each library's headers live under `include/<libname>/`.
 
@@ -438,149 +305,61 @@ Within a library, App uses subdirectories (`util`, `v8world`, `v8tree`, `v8kerne
 
 ## The DLL
 
-`WebService/WebService.cpp` is the ATL Server ISAPI surface: `_AtlModule` is a `CDllMainOverride`, `theExtension` a `CRbxIsapiExtension`, and both names come from the publics, not from the wizard's defaults. It needs `_WIN32_WINNT 0x0400` for `CWorkerThread::AddTimer` and `_WIN32_DCOM` for `CoInitializeEx`, or `atlisapi.h` will not compile.
+`WebService/WebService.cpp` is the ATL Server ISAPI surface. `_AtlModule` is a `CDllMainOverride` and `theExtension` a `CRbxIsapiExtension`; both names come from the publics, not from the wizard's defaults. It needs `_WIN32_WINNT 0x0400` for `CWorkerThread::AddTimer` and `_WIN32_DCOM` for `CoInitializeEx`, or `atlisapi.h` will not compile.
 
-`WebService/WebService.def` names the eight exports the linker cannot infer. The other three the original has, `_InitializeAtlHandlers@8` and its two siblings, are `__declspec(dllexport)` inside ATL's `HANDLER_ENTRY` macro and appear on their own once a request handler is declared.
+`_ATL_NO_COM_SUPPORT` has to be a `target_compile_definitions` entry and never a `#define` in one source. The macro changes ATL's inline bodies, so defining it in one file leaves the target's other translation units disagreeing and the linker keeps their copies.
 
-Smoke test the result by loading it: the DLL has to map at 0x10000000, resolve every export, and answer `GetExtensionVersion` with 6.0 and `"ROBLOX Web Service"`. That call runs ATL's whole startup, the thread pool and the DLL, file and stencil caches, so it is worth more than a load. The loader must be built 32-bit, so a 64-bit shell cannot run it.
+`WebService/WebService.def` names the eight exports the linker cannot infer. The three handler exports come from two `_HANDLER_ENTRY` records and appear on their own once `DECLARE_REQUEST_HANDLER` registers a concrete handler.
 
-The three handler exports come from two `_HANDLER_ENTRY` records the original keeps at 0x102f4fdc and 0x102f4fec: `"Default"` for `Roblox::CWebService` and `"WSDL"` for `ATL::CSDLGenerator<Roblox::CWebService, s_szClassNameWSDL34>`, where that name is the char array `"Default"`. `DECLARE_REQUEST_HANDLER` is the macro; the generator's comma needs a typedef first or the macro takes it as a third argument. `CWebService` derives from `Roblox::IWebService` at 0 and `ATL::CSoapHandler<CWebService>` at 4, is 384 bytes, and holds `errorMessage` at 0x17c with `jobs` and `sync` static. A skeleton compiles as far as the `"Default"` entry; `CSDLGenerator` then needs the SOAP function map, so the exports wait on the `_soapmap` tables the attribute provider generated. `CWebService::GetNamespaceUri` returns `urn:Roblox` and `GetServiceName` returns `Service`, which is the `soap_handler` attribute's argument list.
+`WebService/WebService.h` is the service's own type system, all of it out of the type records. `WebService/WebServiceMaps.cpp` is the attribute provider's `_soapmap` tables written back out, generated from `.rdata` under the original's own symbol names rather than typed by hand; `reccmp-datacmp` compares all 69 against the original. `_soapmap` is fifteen dwords and `_soapmapentry` fourteen, not fifteen, and getting that stride wrong reads garbage that still looks plausible.
 
-The maps themselves are plain data in `.rdata` and can be read out instead of regenerated. `___Roblox_CWebService_funcs` at 0x102f5000 holds fifteen `_soapmap` pointers, one per SOAP method: `HelloWorld`, `GetVersion`, `GetStatus`, `Update`, `OpenJob`, `TouchJob`, `Execute`, `CloseJob`, `BatchJob`, `GetTimeout`, `CloseOrphanedJobs`, `CloseAllJobs`, `CloseTimedoutJobs`, `GetAllJobs`, `GetStandardOutMessages`. `___Roblox_CWebService_headers` at 0x102f5040 mirrors it, every entry empty but for the `errorMessage` slot `GetHeaderValue` returns. `_soapmap` is fifteen dwords and `_soapmapentry` fourteen, not fifteen; getting that stride wrong reads garbage that still looks plausible. The chained maps are what explain `LuaValue1` through `LuaValue10`: a Lua table is recursive, so the provider unrolled it ten levels deep, each level chaining to the next and bottoming out at `LuaType`.
+Attributed ATL is not available in MSVC800-SP1. `atlprov.dll` ships in `VC/bin` and loads, and the compiler's own attributes (`module`, `uuid`, `object`) work, but no provider-supplied attribute resolves: `soap_handler`, `request_handler` and OLE DB's `db_source` all fail with C2337. Registering the provider's coclasses changes nothing, so the lookup is not the ProgID. Whatever is missing belongs in the toolchain repository. Until it is found, the maps stay generated from the tables.
 
-`WebService/WebServiceMaps.cpp` is those maps written back out, generated rather than typed: the scratchpad's soapgen reads them from `.rdata` and emits the 24 entry arrays and 46 maps under the original's own symbol names. `reccmp-datacmp` then compares all 69 against the original and every field matches except the `const WCHAR*` members, which it reads as narrow on the original's side and reports as different; that is what validates the reconstruction, and it is why those symbols are the one thing `gen_globals.py` leaves out. With the maps in place `CWebService` is concrete, `DECLARE_REQUEST_HANDLER("Default", ...)` registers, and the three handler exports appear on their own.
+Smoke test the result by loading it: the DLL has to map at 0x10000000, resolve every export, and answer `GetExtensionVersion` with 6.0 and `"ROBLOX Web Service"`. That call runs ATL's whole startup, the thread pool and the DLL, file and stencil caches, so it is worth more than a load. The loader must be built 32-bit.
 
-`WebService/WebService.h` is the service's own type system, all of it out of the type records: `Status`, `Strings`, `ScriptExecution`, `StandardOutMessage`, the `LuaType` and `MessageType` enums, and the `LuaValue1` to `LuaValue10` chain that ends at ten because `LuaValue10` drops the `table` member. `IWebService` is fifteen `HRESULT __stdcall` methods at vtable slots 0x0c to 0x44; the mangled names in the publics give every signature. `CallFunction` unpacks six parameter blocks whose layouts the map entry offsets describe, and it matching at 100 percent is what proves the vtable order, the block layouts and the argument order together.
+## Reflection and Registration
 
-The provider's output is in the PDB: thirteen injected source streams hold what `soap_handler` and the other attributes expanded to, so the maps are recovered text rather than a reconstruction. See Reading the PDB. Attributed ATL is still not available in MSVC800-SP1. `atlprov.dll` ships in `VC/bin` and loads, and the compiler's own attributes (`module`, `uuid`, `object`) work, but no provider-supplied attribute resolves: `soap_handler`, `request_handler` and OLE DB's `db_source` all fail with C2337 attribute not found. Registering the provider's two coclasses under `HKCU\Software\Classes`, in both registry views, changes nothing, so the lookup is not the ProgID. Whatever is missing belongs in the toolchain repository, not here; until it is found the SOAP map has to be written by hand from the `___Roblox_*_entries` tables.
+Every registered class hangs off one chain: `X` to `DescribedCreatable<X, Base, sX>` to `Described<X, sX, FactoryProduct<X, Base, sX>>` to `FactoryProduct<X, Base, sX>` to `Base`. None of the three templates adds a byte. They live in `include/util/object.h`, `include/reflection/reflection.h` and `include/v8tree/Instance.h`, and each class's copies are emitted from its own `.cpp`.
+
+- **Wire a class from the type records and the contribution table,** rebasing one the tree already declares rather than duplicating it. A class whose base is not declared yet cannot be wired at all. One base unlocks a family at a time.
+- **The chain's namerefs live in one block per header** and a generator has to rewrite the whole block, so a class it skips still has to be counted or its nameref is dropped. Write a nameref only where the address already reaches 100%.
+- **Both `NonFactoryProduct` and `FactoryProduct` declare `getClassName`,** so the nameref block replaces the first only or every annotation lands on two addresses and decomplint reports `duplicate_offset`.
+- **A class whose placeholder members sit where its real base's data lives cannot just be rebased.** Move the members to the base that owns them first.
+- **Five of the six events a `Notifier` carries are `struct`, not `class`.** The mangling records which, and one wrong keyword misses every construction vftable and `Notifier` name that mentions them.
+- **`FactoryProduct` and `DescribedCreatable` both declare a protected virtual destructor,** which the type records state. Leaving it implicit means no vftable stores, every instantiation compiles to the same body, and they fold onto two addresses. `DescribedCreatable` must not declare one of its own: the original's is a five-byte tail jump into `~FactoryProduct`.
+- **`Creatable<T>::operator new` and `operator delete` are `malloc` and `free`,** private in the mangling and inlined at every site. The original never imports the CRT's `operator delete` at all. Both have to be protected here, because modern conformance enforces that a virtual destructor can reach its deallocation function where MSVC 8 does not.
+- **A `ClassDescriptor` static hands itself to atexit,** and that destructor is a real function per instantiation whose name cvdump truncates. Build it by hand and take its address from the `push` the `call` follows; anchor on the pair, since a bare `0x68` scan lands inside another instruction.
+- **A property descriptor is a `const` static,** so it mangles with a trailing `B`. Ours ending in `A` means no setter can bind to it.
 
 ## Third Party
 
-Everything is vendored under `3rdparty/`. RakNet is the exception that is reconstructed rather than vendored, because the 3.0 release RBXGS used was never archived; the closest archived drop still differs in nine files.
+Everything is vendored under `3rdparty/`. RakNet is the exception, reconstructed rather than vendored, because the 3.0 release RBXGS used was never archived and the closest archived drop still differs in nine files.
 
-Two dependencies are easy to miss because they were compiled into someone else's `.lib` instead of being linked. Lua 5.1.1 went into app.lib as 25 translation units, and zlib, libpng and IJG jpeg arrive inside G3D as `g3d/zlib`, `g3d/png` and `g3d/ijg`.
+Two dependencies are easy to miss because they were compiled into someone else's `.lib` instead of being linked: Lua 5.1.1 went into app.lib as 25 translation units, and zlib, libpng and IJG jpeg arrive inside G3D as `g3d/zlib`, `g3d/png` and `g3d/ijg`.
 
-## MSVC 8.0 Codegen Patterns
-
-Each of these cost a round trip. Keep the sources clean and leave the reasoning here.
-
-A stub that ends `return someOtherStub();` folds onto that other stub. The callee inlines, its store overwrites the caller's, and the caller's `STUB()` constant is eliminated as dead, leaving identical bodies. `Name::declare`, both `lookup` overloads and `getNullName` all shared one address until the three returned the null reference directly, and until they did, every call into `Name` from a matched function read as unresolved.
-
-The engine's own `Notifier` members cannot be claimed while StandardOut's are. `/OPT:ICF` folds `Notifier<Instance,ChildAdded>::addListener` and its five siblings onto one address, which is right, but it folds `Notifier<StandardOut,StandardOutMessage>::addListener` onto the same address, which the original kept separate because it comes out of the LTCG `WebService.obj`. One recompiled address carries one match, so the two sets compete and the annotation only binds to whichever alias the PDB wrote last.
-
-A `const float` at namespace scope is emitted as a real global and referenced by name, where the binary reads an anonymous constant out of the float pool. Write the literal at each use.
-
-A dense switch lowers to descending `sub eax,N / je`. An if/else chain emits repeated `cmp` against each value. They are not interchangeable. Ghidra prints both as `if` chains when the cases are sparse, so the bytes are the only witness: `getJointKMultiplier` has six nested dispatches and every one of them is a switch, which took it from 43 to 90 percent.
-
-Locals are pushed in declaration order, so getting that order wrong leaves an extra value on the x87 stack and shifts every later `st(n)` operand. It reads as a large diff for a one-line cause.
-
-Building a return value through a constructor evaluates every argument before storing anything. Assigning members one at a time interleaves the arithmetic with the stores. Chained assignment (`a = b = c = value`) keeps the value in a register across the stores and writes them right to left; separate statements reload it each time.
-
-How you spell the return path decides register assignment. `if (cond) return x; return y;` makes `x` the fall-through value; assigning to one named result and returning it keeps `y` in place.
-
-Abstract bases carry `__declspec(novtable)`. Without it the constructor stores a vftable the binary never stores, and any derived destructor gains a base vftable store plus a whole SEH frame to unwind the base through, which reads as a fifty percent diff. `Edge` and `IPipelined` both need it. Do not delete the virtuals to force the number.
-
-A virtual destructor with no standalone function in the PDB was inlined everywhere. Define it inline in the header, without an annotation. Out of line in the `.cpp` it cannot inline across translation units and every derived destructor calls it.
-
-boost's `shared_ptr::operator<` compares ownership, not the pointer, so it loads offset 4, not 0.
-
-`a > b` and `!(a <= b)` are not the same float compare. The direct `>` emits the unordered-safe `test ah,5 / jp`; the negated `<=` emits `test ah,1 / je`. Both `Math::fuzzyEq` overloads hold at 95 percent until the negated form is written.
-
-`std::swap(a, b)` loads `a` into st(0) first, so the argument order is recoverable: the member the binary loads first is the one written first.
-
-Which side of a float compare gets loaded first depends on the operator, not the operands: `<` and `<=` load the right operand into st(0), `>` and `>=` load the left. That fixes the spelling before the jump condition is even worth looking at, and it is why `Extents::contains` reads `!(point.x < low.x)` rather than any of the three equivalent ways to say it.
-
-MSVC reorders the terms of an `&&` chain of float compares. `Extents::overlapsOrTouches` tests its second triple in the order y, x, z, and the source has to be written that way to match.
-
-`Math` is a class of static members, not a namespace, and the difference is visible: its magic-static guard mangles `??_B?1??inf@Math@RBX@@SAABMXZ@51` and reccmp can name it, where a namespace function's guard is `$S` and anonymous. That one symbol took `Extents::express` and `toWorldSpace` from 32 and 35 percent to 100. A guard defined in a `.cpp` stays anonymous whatever the scope, which is the ceiling on `Extents::zero` and `negativeInfiniteExtents`.
-
-A `static const float` folds to a constant and loses its magic-static guard unless the initializer calls something. The binary's guard on `Math::rotationFromByte` is what proves the step came from `G3D::pi()` rather than a literal.
-
-A `ComputeProp` member records its owner's inheritance shape. MSVC sizes the pointer-to-member by how the class inherits, so `ComputeProp<float, Primitive>` is 16 bytes and `ComputeProp<float, Assembly>` is 24: `Assembly` also derives from `boost::noncopyable`, which makes the member pointer the multiple-inheritance form. A class size that is off by the difference means a base is missing.
-
-Assigning a call's result to a local before comparing it changes the evaluation order. `f() != g()` runs `g()` first, per the right-operand rule; `x = f(); return x != g();` runs `f()` first. `Ball::hitTest` only matched with the call written inside the comparison.
-
-Comparing two `bool`s is a byte compare. Writing one of them inline as a negation, `flag != !other`, promotes both to int and costs a `movzx`. Store the negation in its own `bool` first.
-
-Argument evaluation is right to left for operators too, so `(a * b) * c.inverse()` runs `c.inverse()` first where the original runs the left product first. Naming the left product in a local is what orders them: `RigidJoint::align` sat at 46 percent until it read `CoordinateFrame world = prim1->getCoordinateFrame() * coord1; return world * coord0.inverse();`. Naming the receiver has the same effect on scheduling, and is what took `isAligned` from 84: `Primitive* prim0 = getPrimitive(0);` ahead of the multiply hoists the member load above the argument pushes, where the inline call defers it to just before the call.
-
-A recursive helper and the loop it compiles to are not interchangeable in the source. MSVC turns tail recursion into a loop at the definition, so both spellings match there, but a caller inlines exactly one level of the recursion and none of the loop. `onPrimitivesChanged` and `findNextRelative` both had to be written recursively before `setParent` and `EdgeIterator::begin` would match.
-
-`x = a; if (cond) x = b;` and `x = cond ? b : a;` are not the same codegen. The if form folds into one load and a conditional reload; the ternary evaluates `a` into a scratch register first and copies it in the else branch, which is one instruction longer. Roblox wrote the ternary for the "pick the other primitive on this edge" idiom, so `heavyParent`, `findParent` and `findFirstChild` only reach 100% spelled that way.
-
-Read a CRT call's name out of the publics, never infer it from what the surrounding code looks like it should do. `_floor` at 0x101e8ac4 spent a long stretch written as `sqrt` because a size clamp reads like one, and the wrong one still matched three quarters of the body.
-
-A `__int64` multiply lowers to `_allmul`, and the conversion back to float tells you the signedness: a plain `fild` is signed, and a pair of `fild`s that splits the sign bit out and subtracts it is unsigned.
-
-A comparison puts its right operand in the register: `a == b` on integers is `mov eax, b` then `cmp [a], eax`, and on floats `fld b` then `fcomp a`. So the operand the binary loads first is the one written second, which settles whether a member `operator==` was called as `x == y` or `y == x`.
-
-Most of what is left in the engine is template instantiations, not one-off functions: `scratchpad/enginesurvey.py` counts 7,649 unannotated and the largest owners are `Reflection::EnumPropDescriptor` at 97, `Name::doDeclare` and `Name::callDoDeclare` at 86 each, `Creatable<Instance>::create` at 62 and `Reflection::BoundFuncDesc` at 59. Every `doDeclare` instantiation is the same body, 90 of them 0x65 bytes and 15 of them 0x74, so one template written right settles all of them. Four things have to line up: the name globals are `char sWorkspace[]` arrays, which mangle `PADA` exactly as a `char*` does, so the parameter is `template <char* name>` and the body passes `name` straight to `declare`; both templates are private, or the guard and the local static mangle `SA` where the original has `CA` and stop matching; the annotation is a `// TEMPLATE:` with a nameref on the template body in the header, since an explicit instantiation carries no line records; and the instantiation has to come from a WebService project source, because the original's copies come out of `ThumbnailGenerator.obj` and carry a `/GS` cookie that `app`'s `/GS-` does not.
-
-A template instantiation belongs to whichever object the linker kept it from, and that decides its flags. `Notifier<StandardOut,StandardOutMessage>::addListener` and `removeListener` come out of `WebService.obj` in the original, so they are LTCG where ours are not: the original keeps a frame pointer and aligns the stack, and no source spelling closes that. `raise` and all of `StandardOut` come out of `standardout.obj` and do match.
-
-The declaring namespace of a template member sits after its arguments in the mangling, so splitting on the first `@@` reads `boost::shared_ptr<RBX::Instance>::~shared_ptr` as Roblox's. Since a folded address only counts as vendored when every alias does, one misread name disqualified the whole address. Matching `@boost@@` and friends immediately before the access code fixes it and does not catch a vendored type used only as a parameter, which is always followed by another `@`. That took the vendored table from 2,915 names to 5,642.
-
-WebService.cpp is one of the six `/GL` objects, so its codegen happens at link time and depends on the whole program. Ours is missing most of the engine, so register assignment can differ from the original's on a function whose source is right. `GetVersion` is the case to remember: compile the same file with `/FA` and no `/GL` and its `CStringA` construction is the original's instruction for instruction, but through LTCG the `c_str()` pointer lands in `ecx` and the object in `eax`, the reverse of what the original does. Prove a `/GL` function against the `/FA` listing, not against the linked image.
-
-Data past the end of `.data`'s raw bytes is fine; reccmp zero fills it, which is what the loader does. What failed on `jobs` was reccmp reducing a type to scalars and leaving the bytes before the first one uncovered, so a 12 byte `std::map` produced an 8 byte format string and every unpack of it raised. An empty base class is what puts a member above offset zero. `TerminateExtension` matches once `jobs` is in the table, and `GetVersion` is left with only the LTCG register assignment.
-
-Calls into vendored libraries used to read low, because reccmp only parses the recompiled PDB and had no name for the original's side. `reccmp/webservice-vendored.csv` hands it the 2,594 G3D, Boost, STL and ATL functions out of `WebService.pdb`, which reccmp then matches by mangled name; `--nolib` keeps them out of the score. Selection is by the scope a name is declared in, not the whole mangled string, or a Roblox method taking an `ATL::CStringT` counts as ATL's. Two cases are still unnamed: an address where the linker folded two vendored functions keeps one symbol in our PDB and may keep the other in theirs, and a function-local static mangles its enclosing scope's index, which the two builds number differently.
-
-A static inside a free function reaches the PDB only as an `S_LDATA32` nested in the enclosing `S_GPROC32`; it has no entry in the publics. `gen_globals.py` walks those too, which is what took `normalIdToVector3` from 65 to 86 percent and `Extents::zero` from 80 to 96. The magic-static guard beside it is named `$S<n>`, numbered per translation unit, and the original's compiler emitted no symbol for one at all. Naming ours put a name against an unnamed original and every load of a function-local static read as a difference; reccmp now leaves `$S` unnamed so both sides fall to the same positional placeholder, which is what they are. `normalIdToVector3`, `Extents::zero`, `negativeInfiniteExtents`, `StandardOut::singleton` and three of `Math`'s matrix builders all reach 100 percent on that alone.
-
-`webservice-statics.csv` matches by bare name, so a name under three characters stays out of it. A name that two translation units both use stays out for the same reason, and that is the ceiling on `Motor` and `VelocityMotor`'s setters, which share `prop_MaxVelocity` and `prop_CurrentAngle`: identical instruction streams, 92 percent. `Decal`'s four descriptors are worse off still, carrying no symbol anywhere in the original. Body's state counter is not file-scope at all: the original's `p` is an `S_LDATA32` nested in `getNextStateIndex`, so it is a static local there and `advanceStateIndex` reaches it by inlining that function. Written that way it takes the `p___RBX::Body::getNextStateIndex` label, which is unique where a bare `p` was not, and both functions go from 62 and 66 percent to 100.
-
-`reccmp/webservice-synthetic.csv` claims functions the source cannot annotate. A CSV row typed `synthetic` asserts a match exactly as a `// FUNCTION:` annotation does, and it needs no source line, so it reaches a compiler-generated function whose class has no header to hold a nameref. `scratchpad/claimable.py` builds it: every decorated name our PDB and the original share, minus the vendored scopes and minus whatever is already annotated, was 159 functions. It writes them all, because naming a callee is what lets its callers resolve, and types only the exact ones `synthetic`; the rest are `library`, which `--nolib` keeps out of the score. Claiming all 159 as `synthetic` instead reads 728 at 100 percent but drops the accuracy to 98.85, since the 124 that are not exact then count.
-
-A vendored function from a prebuilt library has no `S_GPROC32`, only a public, so there is no size for its row. reccmp reads a blank size as unknown and still names the call, but handing it all 2,647 of them lets `reccmp-vtable` pair ATL and STL tables whose entries it cannot resolve and 54 fail. They go in one at a time, in `UNSIZED_KEEP`; `boost::call_once` is the first. Choosing which name a folded address carries is `min()`, not first seen, or `??_E` and `??_G` swap between runs and `G3D::Sphere`'s vtable stops matching.
-
-reccmp is `Asphaltian/reccmp@msvc800`, a fork, and `tools/requirements.txt` pins that branch. Two of its assumptions predate MSVC 8: `S_FRAMECOOKIE`, `S_CALLSITEINFO`, `S_EXPORT`, `S_SECTION` and `S_COFFGROUP` were unknown symbol records, and `T_BOOL08` was unverified. Both are cosmetic, since unknown records are skipped before nodes are built. The one that cost real measurement is not MSVC's: reccmp paired a PDB source path to a local file on filename alone, so G3D's `Log.cpp`, which sits outside the source roots, resolved onto `util/Log.cpp` and merged its line records in. Two function starts then fell in one annotation's line range, the annotation was dropped, and `Log::writeEntry` and `Log::formatMem` reported nothing at all.
-
-`reccmp/webservice-strings.csv` types the original's 3,569 string literals. MSVC records the width in the mangling, `??_C@_0` narrow and `??_C@_1` wide, and without it reccmp reads all 145 wide ones as narrow and every literal push diffs.
-
-A function-local static never matches by its mangled name. reccmp reads ours out of the `S_LDATA32` nested in the enclosing `S_GPROC32`, which carries only the bare name, and labels it `<variable>___<enclosing function>`. `webservice-globals.csv` hands the original the same label. The magic-static guard beside it does match by symbol, and so does the `dynamic atexit destructor` the compiler emits when the static has one, but only once a `// SYNTHETIC:` nameref claims it. Those two kinds are the exception to the rule that vendored globals stay out of the table, because a singleton like `G3D::Vector3::zero` is read straight from Roblox code and is data, which reccmp cannot match a vendored function through. A vendored vftable is the third: `G3D::ReferenceCountedObject`'s is stored by every Roblox constructor and destructor below it, and we never declare the class, so no `// VTABLE:` annotation can name it.
-
-The LINES section names only the files that contributed line records, so a header full of declarations is missing from it. The PDB's raw string table is not: it holds 2,001 Roblox source paths, and `scratchpad/pdbpaths.py` reads them straight out of the file. That is the authority on whether a header exists, and `include\util\log.h` is in it even though no module's line info mentions it. Every path there is lowercased, so it settles existence and never casing. Casing comes from `src =` alone, it covers `.cpp` files only, and Roblox's own is not uniform: `.\util\Log.cpp` sits beside `.\util\standardout.cpp` and `.\util\boost.cpp`.
-
-`StandardOutLog` has no `// VTABLE:` annotation. Its scalar deleting destructor at 0x1000d340 needs a `// SYNTHETIC:` nameref for `reccmp-vtable` to pair slot 1, a nameref in a `.cpp` fails `reccmp-decomplint --warnfail`, and the LINES table puts the class in `webservice.cpp`, so there is no header to put it in.
-
-## Sub-100 Functions
-
-`reccmp-reccmp --json` is how to find what is left: type 1 rows that are not stubs and whose `effective` score is below 1.0. Eleven of the nineteen the summary called incomplete carry an effective 100, which reccmp already counts as matched, so the real list was eight. Five of them fell to naming rather than to code.
-
-`_ATL_NO_COM_SUPPORT` is what both DLL registration exports were missing. ATL guards `_AtlComModule.RegisterServer` on it inside `CAtlModuleT::RegisterServer`, and the original calls neither `AtlComModuleRegisterServer` nor `AtlComModuleUnregisterServer`, going straight from the locale save to `_pPerfRegFunc`. It has to be a `target_compile_definitions` entry and never a `#define` in one source: the macro changes ATL's inline bodies, so defining it in `WebService.cpp` alone leaves the target's other translation units disagreeing and the linker keeps their copies, which cost seven of `CWebService`'s one-line inline members their matches. Two blank lines at the top of the same file cost nothing, so line shifts are not the cause. `_pPerfRegFunc`, `_pPerfUnRegFunc` and `_AtlBaseModule` then need naming in `webservice-globals.csv`, and the DLL still loads and answers `GetExtensionVersion`.
-
-A folded address needs a row per alias, on either side. Our build folds `Matrix3`'s copy constructor with its `operator=` and keys the pair on the latter, so `Geometry::getMoment`'s call read as an offset until the vendored table carried `??4Matrix3@G3D@@QAEAAV01@ABV01@@Z` at the constructor's original address.
-
-Two matcher bugs in the fork were behind four of them. `match_variables` indexed function-local statics under their bare name, which is `match_static_variables`' job, so G3D's two `next` locals took RakNet's file-scope one and `randomMT` and `reloadMT` held at 90.91 and 98.92 percent; skipping any recomp entity whose symbol is the `<name>___<function>` decoration fixes both and leaves `reccmp-datacmp` clean. And `create_analysis_strings` recorded the extent of a literal only when it created the entity itself, so a `webservice-strings.csv` row at the base suppressed creation without suppressing the substring: the original grew an entity for `"NOWN]"` inside `"[UNKNOWN]"` that our image, where the scan set the range, never had, and `RakPeer::GetRPCString` read one operand short.
-
-Two are ceilings and neither is a spelling. `CWebService::GetVersion` is the LTCG one: the original puts the `c_str()` pointer in `eax` and the `CStringA` in `ecx`, ours does the reverse, and whole-program codegen decides that. `ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer` differs on two instructions because math.h's `ceil(long double)` forwards to the imported `ceil`, and the out-of-line copy the original's link kept is a bare six-byte tail jump where ours materialises the argument first; casting to `double` instead is worse, because `_CRTIMP` is `dllimport` under `/MD` and the call becomes an indirect one through `__imp__ceil`. Accuracy reads 100.00 with both still in it.
+`RakPeer`'s vtable annotation needs a commented declaration under it. `class_decl_regex` takes the first identifier after `class`, so `class RAK_DLL_EXPORT RakPeer` reads as a class named `RAK_DLL_EXPORT`; a `// class RakPeer` line under the marker names it. Constness is what stops RakNet slots pairing: the original spells `char*` as `const char*` across `Connect`, `Send`, the RPC registration methods and all four `RPCMap` identifier methods. Compare `?Name@RakPeer@@` across both PDBs to find the rest.
 
 ## Gotchas
 
-A property descriptor is a `const` static, so it mangles with a trailing `B`. Ours ended in `A` and no setter could bind to it. `tools/ncc/ncc.style` carries a `prop_`/`event_` alternative for the same reason: those names are the original's convention, not one-offs for `skip.yml`.
+- **`.clang-format` sets `IncludeBlocks: Regroup`,** so it merges include blocks and sorts across them. A blank line will not hold an include in place. `WebService.h` needs `<winsock2.h>` ahead of `<unknwn.h>`, and only `// clang-format off` around it survives.
+- **`SKIP_LINTING` in `CMakeLists.txt`** is for diagnostics inside vendored headers. boost 1.34's `scoped_lock` throws and clang-tidy calls that an error whatever `/EHsc` the command line carries, so every source that includes `boost/thread/mutex.hpp` needs a line there.
+- **Never sweep timestamps across the working tree.** `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. The CI workflow's backdate step does exactly this, which is fine on a throwaway runner and destructive in a clone.
+- **Data past the end of `.data`'s raw bytes is fine;** reccmp zero fills it, as the loader does. An empty base class is what puts a member above offset zero.
 
-`build.yml`'s "Current MSVC" job builds `app` and `network` with a modern cl plus clang-tidy, and it does reproduce locally: VS 18 Community carries the same cl the runner uses, clang-tidy under `VC/Tools/Llvm/x64/bin` and ninja under `Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja`, so `cmake -GNinja -DENABLE_CLANG_TIDY=ON` out of an `amd64_x86` vcvars shell runs the whole job. Run it, because it is the only check that sees C++ conformance MSVC 8 lets through, and it fires whenever a class or template lands. A `const` object of class type needs a user-provided default constructor on the most-derived class, not just on a base, which is why every descriptor template carries an empty one; a virtual destructor has to be able to reach its deallocation function, which is why `Creatable`'s `operator delete` cannot stay private. `SKIP_LINTING` in `CMakeLists.txt` is for the other kind, a diagnostic inside a vendored header: boost 1.34's `scoped_lock` throws and clang-tidy calls that an error whatever `/EHsc` the command line carries, so every source that includes `boost/thread/mutex.hpp` needs a line there.
+## Project Structure
 
-`reccmp-decomplint` runs over `WebService common` only, so nothing under `3rdparty` is linted and a bad marker there fails silently. `DataBlockEncryptor::~DataBlockEncryptor` had its body written `{}` on one line, which leaves the parser inside the function, and the next marker was reported `unexpected_marker` and dropped: `IsKeySet` could not be matched at all and both `ReliabilityLayer` functions calling it were stuck a call short. Splitting the braces fixed all three. Point decomplint at `3rdparty/RakNet30` by hand after touching RakNet; it cannot join CI until RakNet's 56 `function_out_of_order` findings are worked through.
-
-`.github/workflows/build.yml` runs eight checks and seven of them are not `reccmp-reccmp`. `tools/ncc/ncc.py` runs on its own Linux job and needs libclang plus the `clang` python bindings to run locally; it counts its findings and still exits 0, so the count is the verdict. `reccmp-decomplint` runs with `--warnfail`, so a warning fails the build: a nameref belongs in a header, never in a `.cpp`. `reccmp-vtable` compares every vtable that has a name on both sides, which is why a vendored vftable only goes into `webservice-globals.csv` one at a time, listed in `VENDORED_VTABLES` — naming them all pairs ATL and STL tables whose entries reccmp cannot resolve. `reccmp-datacmp` compares every named variable, and it matches statics by bare name, so a name has to be unique in both builds; `next` named RakNet's file-scope one and a function-local one our G3D keeps. Run all seven before committing, not just the accuracy number.
-
-
-`.clang-format` sets `IncludeBlocks: Regroup`, so it merges include blocks and sorts across them; a blank line will not hold an include in place. `WebService.h` needs `<winsock2.h>` ahead of `<unknwn.h>`, which drags in `windows.h` and then `winsock.h`, and only `// clang-format off` around it survives. An incremental build will not catch this, because the object file that breaks is the one that did not need recompiling: delete `build/` before trusting a green result on anything that moves an include.
-
-Never sweep timestamps across the working tree. `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. That is what the CI workflow's backdate step does, which is fine on a throwaway runner and destructive in a clone.
-
-`RakPeer`'s vtable annotation needs a commented declaration under it. `class_decl_regex` takes the first identifier after `class`, so `class RAK_DLL_EXPORT RakPeer` reads as a class named `RAK_DLL_EXPORT`; the regex also accepts a `//` line, so `// class RakPeer` on the next line names it. Both vtables hold 71 slots and always did. What stopped the slots pairing was constness: the original spells `char*` as `const char*` in `Connect`, `Send`, `RegisterAsRemoteProcedureCall`, `RegisterClassMemberRPC`, `UnregisterAsRemoteProcedureCall`, `SendConnectionRequest`, both `RPC` overloads and all four `RPCMap` identifier methods, so every one of those mangled to a name our build never emitted. Compare `?Name@RakPeer@@` across both PDBs to find the rest.
-
-reccmp's summary prints one row per recompiled address, so where our link folded two functions the original kept apart, only one of the two annotations appears and the other is missing from the report rather than listed as a miss. `--verbose` on the address still resolves it. Reading absence as failure is what made 47 matching `Creator::create` instantiations look like 47 misses; probe the address before believing the summary.
-
-`reccmp/webservice-vendored.csv` is order sensitive and must not be sorted whole. reccmp applies the rows in file order and the last one at an address wins, so every row that overrides a folded address has to sit after the row it overrides; those live at the end of the file. Sorting the file by address moved `find` and `_Buynode`'s `PAVName` overrides ahead of the instantiations they exist to displace, and `Name::lookup`, `namMap` and `declare` silently fell off 100 percent while the accuracy total barely moved.
-
-A module is not a file. `modulestate.py` answers whether an original object is finished, which is a different question from whether one of our source files is: `util/Events.h` carries three functions out of the LTCG `WebService.obj` beside the ones from `standardout.obj`, and measuring by module never looked at them. Claim a file complete only against `filestate.py`, which scores every annotation the file carries.
-
-The original link used `/OPT:ICF` and folded heavily. Many distinct source functions compiled to the same three-byte body and share one address, which is also why Ghidra's PDB source line importer throws several hundred `IllegalArgumentException` warnings when the symbols load. Those warnings are expected and harmless. Run `tools/check_folded.py` before concluding that a function at a shared address is genuinely unmatched.
-
-`tools/check_folded.py` diverges from racers there. MSVC 8 keeps a PDB symbol for every alias the linker folded away, so all the `FOLDED` annotations on one address resolve rather than just the survivor. The check asks whether they landed on a single recompiled address instead of counting how many resolved.
-
-`tools/` otherwise holds only what came from racers. Analysis scripts written along the way live in the session scratchpad.
+```
+common/app/          # App static library, subdirectories by subsystem
+  include/           # Headers, mirroring the source subdirectories
+common/appdraw/      # AppDraw
+common/network/      # Network
+common/rbxview/      # RbxView
+common/renderlib/    # RenderLib
+common/win/          # VersionInfo
+WebService/          # The DLL project, plus library_msvc.h and WebServiceMaps.cpp
+util/                # decomp.h, decomp.cpp, compat.h
+3rdparty/            # Vendored dependencies, RakNet reconstructed
+reccmp/              # The six CSVs reccmp reads for the original's side
+cmake/               # reccmp CMake integration
+tools/               # check_folded.py, reccmp_addr_padding.py, ncc
+```
