@@ -24,7 +24,7 @@ public:
 protected:
 	void moved(IMoving* m) { moving.insert(m); }
 
-	void remove(IMoving* m);
+	void remove(IMoving* iMoving);
 
 private:
 	MovingSet moving;            // 0x04

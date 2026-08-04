@@ -21,6 +21,7 @@ public:
 	virtual ~IPipelined() {} // vtable+0x00
 
 	bool inPipeline() const { return currentStage != NULL; }
+	bool inStage(IStage* stage) const { return currentStage == stage; }
 
 	IStage* getStage(IStage::StageType stageType) const;
 

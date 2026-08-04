@@ -2,6 +2,7 @@
 
 #include "decomp.h"
 #include "v8world/Assembly2.h"
+#include "v8world/Contact.h"
 #include "v8world/Joint.h"
 #include "v8world/Primitive.h"
 #include "v8world/SleepStage2.h"
@@ -27,10 +28,16 @@ void AssemblyStage::wakeAssembly(Assembly* assembly)
 	getSleepStage()->onWakeUpRequest(assembly, false);
 }
 
-// STUB: WEBSERVICE 0x10126e00
-void AssemblyStage::stepUi(int frameCount)
+// FUNCTION: WEBSERVICE 0x10126e00
+void AssemblyStage::stepUi(int uiStepId)
 {
-	STUB(0x10126e00);
+	for (std::set<Assembly*>::iterator it = assemblies.begin(); it != assemblies.end(); ++it) {
+		(*it)->stepUi(uiStepId);
+	}
+
+	for (std::set<Joint*>::iterator it = joints.begin(); it != joints.end(); ++it) {
+		(*it)->stepUi(uiStepId);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10126ee0
@@ -43,13 +50,48 @@ void AssemblyStage::onAssemblyAdded(Assembly* assembly)
 	getSleepStage()->onAssemblyAdded(assembly);
 }
 
-// STUB: WEBSERVICE 0x10126f20
-void AssemblyStage::onEdgeAdded(Edge* edge)
+void AssemblyStage::onJointAdded(Joint* joint)
 {
-	STUB(0x10126f20);
+	if (joint->canStepUi()) {
+		joints.insert(joint);
+	}
 }
 
-// STUB: WEBSERVICE 0x10127000
+void AssemblyStage::onJointRemoving(Joint* joint)
+{
+	joints.erase(joint);
+
+	joint->canStepUi();
+}
+
+// FUNCTION: WEBSERVICE 0x10126f20
+void AssemblyStage::onEdgeAdded(Edge* e)
+{
+	e->putInPipeline(this);
+
+	if (e->getEdgeType() == Edge::CONTACT) {
+		Joint* joint = Primitive::getJoint(e->getPrimitive(0), e->getPrimitive(1));
+
+		if (joint != NULL && joint->downstreamOfStage(this)) {
+			return;
+		}
+
+		getDownstreamWS()->onEdgeAdded(e);
+	}
+	else {
+		Contact* contact = Primitive::getContact(e->getPrimitive(0), e->getPrimitive(1));
+
+		if (contact != NULL && contact->downstreamOfStage(this)) {
+			getDownstreamWS()->onEdgeRemoving(contact);
+		}
+
+		getDownstreamWS()->onEdgeAdded(e);
+
+		onJointAdded(static_cast<Joint*>(e));
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10127000
 AssemblyStage::~AssemblyStage()
 {
 }
@@ -64,13 +106,29 @@ void AssemblyStage::onAssemblyRemoving(Assembly* assembly)
 	assembly->removeFromStage(this);
 }
 
-// STUB: WEBSERVICE 0x101270f0
-void AssemblyStage::onEdgeRemoving(Edge* edge)
+// FUNCTION: WEBSERVICE 0x101270f0
+void AssemblyStage::onEdgeRemoving(Edge* e)
 {
-	STUB(0x101270f0);
+	if (e->downstreamOfStage(this)) {
+		getDownstreamWS()->onEdgeRemoving(e);
+	}
+
+	if (e->getEdgeType() != Edge::CONTACT) {
+		Joint* joint = static_cast<Joint*>(e);
+
+		onJointRemoving(joint);
+
+		Contact* contact = Primitive::getContact(e->getPrimitive(0), e->getPrimitive(1));
+
+		if (contact != NULL && contact->inStage(this)) {
+			getDownstreamWS()->onEdgeAdded(contact);
+		}
+	}
+
+	e->removeFromStage(this);
 }
 
-// STUB: WEBSERVICE 0x10127180
+// FUNCTION: WEBSERVICE 0x10127180
 AssemblyStage::AssemblyStage(IStage* upstream, World* world) : IWorldStage(upstream, new SleepStage(this, world), world)
 {
 }

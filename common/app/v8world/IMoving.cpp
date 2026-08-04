@@ -32,19 +32,19 @@ void IMoving::makeMoving()
 	}
 }
 
-// STUB: WEBSERVICE 0x100d0c80
+// FUNCTION: WEBSERVICE 0x100d0c80
 IMovingManager::~IMovingManager()
 {
 }
 
-// STUB: WEBSERVICE 0x100d0cc0
-void IMovingManager::remove(IMoving* m)
+// FUNCTION: WEBSERVICE 0x100d0cc0
+void IMovingManager::remove(IMoving* iMoving)
 {
-	if (current != moving.end() && *current == m) {
+	if (current != moving.end() && *current == iMoving) {
 		current = moving.erase(current);
 	}
 	else {
-		moving.erase(m);
+		moving.erase(iMoving);
 	}
 }
 
@@ -88,7 +88,7 @@ void IMoving::notifyMoved()
 	}
 }
 
-// STUB: WEBSERVICE 0x100d0e80
+// FUNCTION: WEBSERVICE 0x100d0e80
 IMovingManager::IMovingManager()
 {
 	current = moving.end();

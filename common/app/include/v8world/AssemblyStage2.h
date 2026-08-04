@@ -34,7 +34,7 @@ public:
 
 	void wakeAssembly(Assembly* assembly);
 
-	void stepUi(int frameCount);
+	void stepUi(int uiStepId);
 
 private:
 	void onJointAdded(Joint* joint);

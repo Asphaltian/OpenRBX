@@ -216,7 +216,7 @@ void Primitive::setCanCollide(bool value)
 {
 	bool wasCollideable = !dragging && canCollide;
 
-	if (value != canCollide) {
+	if (canCollide != value) {
 		canCollide = value;
 
 		if (world != NULL) {
@@ -574,7 +574,7 @@ void Primitive::setGridSize(const Vector3& size)
 // FUNCTION: WEBSERVICE 0x100a88d0
 void Primitive::setDragging(bool value)
 {
-	if (value != dragging) {
+	if (dragging != value) {
 		bool wasCollideable = !dragging && canCollide;
 
 		dragging = value;
@@ -583,7 +583,7 @@ void Primitive::setDragging(bool value)
 		if (world != NULL) {
 			bool isCollideable = !dragging && canCollide;
 
-			if (wasCollideable != isCollideable) {
+			if (isCollideable != wasCollideable) {
 				world->onPrimitiveCanCollideChanged(this);
 			}
 		}
@@ -605,7 +605,7 @@ void Primitive::setController(Controller* value)
 		value = NullController::getStaticNullController();
 	}
 
-	if (value != controller) {
+	if (controller != value) {
 		controller = value;
 	}
 }
