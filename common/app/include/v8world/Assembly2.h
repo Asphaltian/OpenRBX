@@ -137,6 +137,9 @@ DECOMP_SIZE_ASSERT(Assembly, 0x50)
 // SIZE 0x50
 class Clump : public Assembly
 {
+public:
+	// FUNCTION: WEBSERVICE 0x1011b310
+	Clump(Primitive* rootPrimitive) : Assembly(rootPrimitive) {}
 };
 
 DECOMP_SIZE_ASSERT(Clump, 0x50)

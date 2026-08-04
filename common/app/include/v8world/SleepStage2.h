@@ -36,7 +36,7 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x10119de0
 	// RBX::SleepStage::`scalar deleting destructor'
 
-	// FUNCTION: WEBSERVICE 0x1011b580
+	// FUNCTION: WEBSERVICE 0x1011b580 FOLDED
 	virtual StageType getStageType() { return SLEEP_STAGE; } // vtable+0x04
 
 	virtual void stepWorld(int worldStepId, int _uiStepId, bool _throttling); // vtable+0x0c

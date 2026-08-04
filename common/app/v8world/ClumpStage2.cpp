@@ -4,39 +4,60 @@
 #include "util/Guid.h"
 #include "v8world/Assembly2.h"
 #include "v8world/AssemblyStage2.h"
+#include "v8world/MotorJoint.h"
 #include "v8world/Primitive.h"
+#include "v8world/RigidJoint.h"
+#include "v8world/SleepStage2.h"
 
+#include <algorithm>
 #include <cmath>
 #include <cstddef>
 
 namespace RBX {
 
-// STUB: WEBSERVICE 0x1011b330
+// FUNCTION: WEBSERVICE 0x1011b330
 float getPrimitiveSize(Primitive* primitive)
 {
 	const Vector3& size = primitive->getGeometry()->getGridSize();
 
 	float area;
+	float other;
 
-	if (size.y <= size.x) {
-		area = (size.z <= size.y ? size.y : size.z) * size.x;
-	}
-	else if (size.x < size.z) {
-		area = size.z * size.y;
+	if (size.x < size.y) {
+		if (size.x < size.z) {
+			area = size.z * size.y;
+			goto haveArea;
+		}
+
+		other = size.y;
 	}
 	else {
-		area = size.y * size.x;
+		other = size.y < size.z ? size.z : size.y;
 	}
 
-	return (float) ((unsigned __int64) primitive->getSizeMultiplier() * (int) floor(area));
+	area = other * size.x;
+
+haveArea:;
+
+	float gridArea = floor(area);
+	int cells;
+
+	// clang-format off
+	__asm {
+		fld gridArea
+		fistp cells
+	}
+	// clang-format on
+
+	return (float) ((unsigned __int64) primitive->getSizeMultiplier() * cells);
 }
 
-// STUB: WEBSERVICE 0x1011b3d0
+// FUNCTION: WEBSERVICE 0x1011b3d0
 int biggerJointGuid(Joint* joint0, Joint* joint1)
 {
 	const Guid* guid0 = &joint0->getPrimitive(0)->getGuid();
-	const Guid* guid1 = joint0->getPrimitive(1) != NULL ? &joint0->getPrimitive(1)->getGuid() : NULL;
 	const Guid* other0 = &joint1->getPrimitive(0)->getGuid();
+	const Guid* guid1 = joint0->getPrimitive(1) != NULL ? &joint0->getPrimitive(1)->getGuid() : NULL;
 	const Guid* other1 = joint1->getPrimitive(1) != NULL ? &joint1->getPrimitive(1)->getGuid() : NULL;
 
 	return Guid::compare(guid0, guid1, other0, other1);
@@ -86,15 +107,18 @@ int biggerJointSize(Joint* joint0, Joint* joint1)
 
 namespace JointSort {
 
-// STUB: WEBSERVICE 0x1011b690
+// FUNCTION: WEBSERVICE 0x1011b690
 bool lighterJoint(Joint* joint0, Joint* joint1)
 {
 	if (joint0 == joint1) {
 		return false;
 	}
 
-	if (joint0->getJointType() != joint1->getJointType()) {
-		return joint0->getJointType() < joint1->getJointType();
+	Joint::JointType type0 = joint0->getJointType();
+	Joint::JointType type1 = joint1->getJointType();
+
+	if (type0 != type1) {
+		return type0 < type1;
 	}
 
 	int bigger = biggerJointSize(joint0, joint1);
@@ -122,16 +146,100 @@ bool lighterJoint(Joint* joint0, Joint* joint1)
 
 } // namespace JointSort
 
-// STUB: WEBSERVICE 0x1011b740
+// FUNCTION: WEBSERVICE 0x1011b740
 DECOMP_NOINLINE void ClumpStage::onPrimitiveAdded(Primitive* p)
 {
-	STUB(0x1011b740);
+	p->putInPipeline(this);
+	p->putInPipeline(getDownstream());
+
+	p->setClumpDepth(1);
+
+	Joint* joint;
+
+	if (p->getAnchor()) {
+		joint = new AnchorJoint(p);
+	}
+	else {
+		joint = new FreeJoint(p);
+	}
+
+	joint->putInPipeline(this);
+
+	getDownstreamWS()->onEdgeAdded(joint);
 }
 
-// STUB: WEBSERVICE 0x1011b840
+// FUNCTION: WEBSERVICE 0x1011b840
 DECOMP_NOINLINE void ClumpStage::onPrimitiveRemoving(Primitive* p)
 {
-	STUB(0x1011b840);
+	Joint* joint = p->getFirstJoint();
+
+	getDownstreamWS()->onEdgeRemoving(joint);
+
+	IStage* downstream = getDownstream();
+
+	p->setClumpDepth(-1);
+	p->removeFromStage(downstream);
+
+	joint->removeFromPipeline(this);
+	delete joint;
+
+	p->removeFromStage(this);
+}
+
+// FUNCTION: WEBSERVICE 0x1011b8a0
+void ClumpStage::onPrimitiveAddedAnchor(Primitive* p)
+{
+	Joint* freeJoint = getJoint(p, Joint::FREE_JOINT);
+
+	Joint* anchorJoint = new AnchorJoint(p);
+
+	anchorJoint->putInPipeline(this);
+
+	getDownstreamWS()->onEdgeAdded(anchorJoint);
+
+	onEdgeRemoving(freeJoint);
+}
+
+// FUNCTION: WEBSERVICE 0x1011b950
+void ClumpStage::onPrimitiveRemovedAnchor(Primitive* p)
+{
+	Joint* anchorJoint = getJoint(p, Joint::ANCHOR_JOINT);
+
+	Joint* freeJoint = new FreeJoint(p);
+
+	freeJoint->putInPipeline(this);
+
+	getDownstreamWS()->onEdgeAdded(freeJoint);
+
+	onEdgeRemoving(anchorJoint);
+}
+
+int TreeStage::getClumpDepth(Primitive* p)
+{
+	return p != NULL ? p->getClumpDepth() : 0;
+}
+
+void TreeStage::dirtyAssembly(Assembly* a)
+{
+	assemblies.insert(a);
+	dirty = true;
+}
+
+void TreeStage::insertEdge(Edge* e)
+{
+	if (!e->getInEdgeList()) {
+		edges.insert(e);
+		dirty = true;
+		e->setInEdgeList(true);
+	}
+}
+
+void TreeStage::eraseEdge(Edge* e)
+{
+	if (e->getInEdgeList()) {
+		edges.erase(e);
+		e->setInEdgeList(false);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1011ba00
@@ -184,24 +292,14 @@ void TreeStage::cleanAssembly(Assembly* assembly)
 	}
 }
 
-// STUB: WEBSERVICE 0x1011bb00
+// FUNCTION: WEBSERVICE 0x1011bb00
 void TreeStage::cleanEdge(Edge* edge)
 {
 	Assembly* assembly0 = edge->getPrimitive(0)->getAssembly();
 	Assembly* assembly1 = edge->getPrimitive(1)->getAssembly();
 
 	bool inKernel = edge->downstreamOfStage(this);
-	bool wanted;
-
-	if (assembly0 == assembly1) {
-		wanted = false;
-	}
-	else if (assembly0->getAnchored() && assembly1->getAnchored()) {
-		wanted = false;
-	}
-	else {
-		wanted = true;
-	}
+	bool wanted = assembly0 != assembly1 && !(assembly0->getAnchored() && assembly1->getAnchored());
 
 	if (inKernel != wanted) {
 		if (inKernel) {
@@ -230,37 +328,75 @@ void ClumpStage::stepUi(int frameCount)
 	getTreeStage()->getAssemblyStage()->stepUi(frameCount);
 }
 
-// STUB: WEBSERVICE 0x1011bbc0
-void TreeStage::findHeaviestUpstream(Primitive* prim0, Primitive* prim1, Joint*& heaviest, int& heaviestIndex)
+// FUNCTION: WEBSERVICE 0x1011bbc0
+void TreeStage::findHeaviestUpstream(Primitive* p0, Primitive* p1, Joint*& answer, int& heavySide)
 {
-	while (true) {
-		int depth0 = prim0 != NULL ? prim0->getClumpDepth() : 0;
-		int depth1 = prim1 != NULL ? prim1->getClumpDepth() : 0;
+	int depth0 = getClumpDepth(p0);
+	int depth1 = getClumpDepth(p1);
 
-		if (depth0 != depth1) {
-			if (depth1 < depth0) {
-				prim0 = heavyParent(0, prim0, heaviest, heaviestIndex);
-			}
-			else {
-				prim1 = heavyParent(1, prim1, heaviest, heaviestIndex);
-			}
-
-			continue;
+	if (depth0 != depth1) {
+		if (depth0 > depth1) {
+			findHeaviestUpstream(heavyParent(0, p0, answer, heavySide), p1, answer, heavySide);
+		}
+		else {
+			findHeaviestUpstream(p0, heavyParent(1, p1, answer, heavySide), answer, heavySide);
 		}
 
-		if (prim0 == prim1) {
-			return;
+		return;
+	}
+
+	if (p0 == p1) {
+		return;
+	}
+
+	Primitive* next0 = p0 != NULL ? heavyParent(0, p0, answer, heavySide) : NULL;
+	Primitive* next1 = p1 != NULL ? heavyParent(1, p1, answer, heavySide) : NULL;
+
+	findHeaviestUpstream(next0, next1, answer, heavySide);
+}
+
+// FUNCTION: WEBSERVICE 0x1011bcc0
+void TreeStage::process()
+{
+	if (dirty) {
+		std::set<Assembly*>::iterator aIt;
+
+		for (aIt = assemblies.begin(); aIt != assemblies.end(); ++aIt) {
+			cleanAssembly(*aIt);
 		}
 
-		prim0 = prim0 != NULL ? heavyParent(0, prim0, heaviest, heaviestIndex) : NULL;
-		prim1 = prim1 != NULL ? heavyParent(1, prim1, heaviest, heaviestIndex) : NULL;
+		assemblies.clear();
+
+		while (edges.size() != 0) {
+			std::set<Edge*>::iterator eIt = edges.begin();
+
+			cleanEdge(*eIt);
+
+			(*eIt)->setInEdgeList(false);
+			edges.erase(eIt);
+		}
+
+		dirty = false;
 	}
 }
 
-// STUB: WEBSERVICE 0x1011bcc0
-void TreeStage::process()
+// FUNCTION: WEBSERVICE 0x1011bde0
+void TreeStage::buildDownstreamTree(Primitive* p, std::set<Primitive*>& tree)
 {
-	STUB(0x1011bcc0);
+	Joint* j = p->getFirstJoint();
+
+	while (j != NULL) {
+		if (j->getActive() && Joint::isJoint(j) && j->getJointType() >= Joint::ANCHOR_JOINT) {
+			Primitive* other = j->otherPrimitive(p);
+
+			if (other != NULL && other->getClumpDepth() == p->getClumpDepth() + 1) {
+				tree.insert(other);
+				buildDownstreamTree(other, tree);
+			}
+		}
+
+		j = p->getNextJoint(j);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1011be80
@@ -269,34 +405,83 @@ void ClumpStage::process()
 	getTreeStage()->process();
 }
 
-// STUB: WEBSERVICE 0x1011bff0
+// FUNCTION: WEBSERVICE 0x1011be90
+void ClumpStage::onPrimitiveCanSleepChanged(Primitive* p)
+{
+	getTreeStage()->process();
+
+	Assembly* a = p->getAssembly();
+
+	bool wasCanSleep = a->getCanSleep();
+
+	a->onPrimitiveCanSleepChanged(p);
+
+	if (wasCanSleep != a->getCanSleep()) {
+		IStage* stage = this;
+
+		while (stage->getStageType() != SLEEP_STAGE) {
+			stage = stage->getDownstream();
+		}
+
+		static_cast<SleepStage*>(stage)->onWakeUpRequest(a, false);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1011bf30
+TreeStage::~TreeStage()
+{
+}
+
+// FUNCTION: WEBSERVICE 0x1011bff0
 void TreeStage::stepWorld(int worldStepId, int uiStepId, bool throttling)
 {
 	process();
-	getAssemblyStage()->stepWorld(worldStepId, uiStepId, throttling);
+
+	getDownstream()->stepWorld(worldStepId, uiStepId, throttling);
 }
 
-// STUB: WEBSERVICE 0x1011c010
-void TreeStage::dirtyAssemblies(Joint* joint)
+// FUNCTION: WEBSERVICE 0x1011c010
+void TreeStage::dirtyAssemblies(Joint* j)
 {
 	for (int i = 0; i < 2; i++) {
-		Primitive* primitive = joint->getPrimitive(i);
+		Primitive* p = j->getPrimitive(i);
 
-		if (primitive != NULL) {
-			Assembly* assembly = primitive->getAssembly();
+		if (p != NULL) {
+			Assembly* a = p->getAssembly();
 
-			if (assembly != NULL) {
-				assemblies.insert(assembly);
-				dirty = true;
+			if (a != NULL) {
+				dirtyAssembly(a);
 			}
 		}
 	}
 }
 
-// STUB: WEBSERVICE 0x1011c0b0
-void TreeStage::destroyAssembly(Assembly* assembly)
+// FUNCTION: WEBSERVICE 0x1011c060
+void TreeStage::undirtyAssembly(Assembly* a)
 {
-	STUB(0x1011c0b0);
+	assemblies.erase(a);
+
+	if (a->inPipeline()) {
+		if (a->downstreamOfStage(this)) {
+			getAssemblyStage()->onAssemblyRemoving(a);
+		}
+
+		a->removeFromPipeline(this);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1011c0b0
+void TreeStage::destroyAssembly(Assembly* a)
+{
+	undirtyAssembly(a);
+
+	delete a;
+}
+
+// FUNCTION: WEBSERVICE 0x1011c110
+TreeStage::TreeStage(IStage* upstream, World* world)
+	: IWorldStage(upstream, new AssemblyStage(this, world), world), maxTreeDepth(0), dirty(false)
+{
 }
 
 // FUNCTION: WEBSERVICE 0x10108040 FOLDED
@@ -305,61 +490,151 @@ IStage::StageType ClumpStage::getStageType()
 	return CLUMP_STAGE;
 }
 
-// STUB: WEBSERVICE 0x1011c3d0
-ClumpStage::ClumpStage(IStage* upstream, World* world) : IWorldStage(upstream, NULL, world)
+// FUNCTION: WEBSERVICE 0x1011c200
+void TreeStage::rebuildClump(Joint* joint, Primitive* parent)
 {
-	STUB(0x1011c3d0);
-}
+	maxTreeDepth = std::max(maxTreeDepth, getClumpDepth(parent) + 1);
 
-// STUB: WEBSERVICE 0x1011c440
-Joint* TreeStage::findLightestDownstream(Primitive* primitive, Primitive*& root)
-{
-	STUB(0x1011c440);
-	return NULL;
-}
+	Primitive* child = joint->otherPrimitive(parent);
 
-// STUB: WEBSERVICE 0x1011c630
-void TreeStage::traverse(Joint* joint, Primitive* root)
-{
-	STUB(0x1011c630);
-}
+	Clump* clump = child->getClump();
+	bool isRoot = clump != NULL && clump->getRootPrimitive() == child;
 
-// STUB: WEBSERVICE 0x1011c6e0
-void TreeStage::swap(Joint* remove, Joint* add, Primitive* root)
-{
-	if (remove != NULL) {
-		dirtyAssemblies(remove);
-		remove->setActive(false);
-
-		if (add == NULL) {
-			destroyAssembly(remove->getPrimitive(1)->getAssembly());
-			return;
+	if (RigidJoint::isRigidJoint(joint)) {
+		if (isRoot) {
+			destroyAssembly(clump);
 		}
-	}
-	else if (add == NULL) {
+
+		Assembly::addRigidChild(parent, static_cast<RigidJoint*>(joint), child);
 		return;
 	}
 
-	dirtyAssemblies(add);
-	add->setActive(true);
-	traverse(add, root);
-}
+	if (MotorJoint::isMotorJoint(joint)) {
+		Assembly* assembly = isRoot ? clump : new Clump(child);
 
-// STUB: WEBSERVICE 0x1011c740
-void TreeStage::insertJoint(Joint* joint)
-{
-	Joint* heaviest = NULL;
-	int heaviestIndex = 0;
+		undirtyAssembly(assembly);
 
-	findHeaviestUpstream(joint->getPrimitive(0), joint->getPrimitive(1), heaviest, heaviestIndex);
+		Assembly::addMotorChild(parent, static_cast<MotorJoint*>(joint), child);
+		return;
+	}
 
-	if (heaviest == NULL || JointSort::lighterJoint(joint, heaviest)) {
-		swap(heaviest, joint, joint->getPrimitive((heaviestIndex + 1) % 2));
+	Joint::JointType jointType = joint->getJointType();
+
+	if (jointType == Joint::FREE_JOINT || jointType == Joint::ANCHOR_JOINT) {
+		Clump* assembly = isRoot ? clump : new Clump(child);
+
+		Assembly::addGroundChild(child);
+
+		assemblies.insert(assembly);
 		dirty = true;
 	}
 }
 
-// STUB: WEBSERVICE 0x1011c7c0
+// FUNCTION: WEBSERVICE 0x1011c3d0
+ClumpStage::ClumpStage(IStage* upstream, World* world) : IWorldStage(upstream, new TreeStage(this, world), world)
+{
+}
+
+// FUNCTION: WEBSERVICE 0x1011c440
+Joint* TreeStage::findLightestDownstream(Primitive* p, Primitive*& newParent)
+{
+	std::set<Primitive*> downstreamTree;
+
+	downstreamTree.insert(p);
+
+	buildDownstreamTree(p, downstreamTree);
+
+	Joint* answer = NULL;
+
+	std::set<Primitive*>::iterator it;
+
+	for (it = downstreamTree.begin(); it != downstreamTree.end(); ++it) {
+		Primitive* p = *it;
+
+		Joint* j = p->getFirstJoint();
+
+		while (j != NULL) {
+			if (!j->getActive() && Joint::isJoint(j) && j->getJointType() >= Joint::ANCHOR_JOINT) {
+				Primitive* other = j->otherPrimitive(p);
+
+				if (other == NULL || downstreamTree.find(other) == downstreamTree.end()) {
+					if (answer == NULL || JointSort::lighterJoint(j, answer)) {
+						answer = j;
+						newParent = other;
+					}
+				}
+			}
+
+			j = p->getNextJoint(j);
+		}
+	}
+
+	return answer;
+}
+
+// FUNCTION: WEBSERVICE 0x1011c630
+void TreeStage::traverse(Joint* joint, Primitive* parent)
+{
+	rebuildClump(joint, parent);
+
+	Primitive* child = joint->otherPrimitive(parent);
+
+	Edge* e = child->getFirstEdge();
+
+	while (e != NULL) {
+		if (Joint::isJoint(e) && static_cast<Joint*>(e)->getJointType() >= Joint::ANCHOR_JOINT) {
+			if (static_cast<Joint*>(e)->getActive()) {
+				Primitive* other = e->otherPrimitive(child);
+
+				if (other != NULL && other != parent) {
+					traverse(static_cast<Joint*>(e), child);
+				}
+			}
+		}
+		else {
+			insertEdge(e);
+		}
+
+		e = child->getNextEdge(e);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1011c6e0
+void TreeStage::swap(Joint* deactivate, Joint* activate, Primitive* newParent)
+{
+	if (deactivate != NULL) {
+		dirtyAssemblies(deactivate);
+		deactivate->setActive(false);
+
+		if (activate == NULL) {
+			destroyAssembly(deactivate->getPrimitive(0)->getClump());
+			return;
+		}
+	}
+	else if (activate == NULL) {
+		return;
+	}
+
+	dirtyAssemblies(activate);
+	activate->setActive(true);
+	traverse(activate, newParent);
+}
+
+// FUNCTION: WEBSERVICE 0x1011c740
+void TreeStage::insertJoint(Joint* j)
+{
+	int heavySide = 0;
+	Joint* deActivate = NULL;
+
+	findHeaviestUpstream(j->getPrimitive(0), j->getPrimitive(1), deActivate, heavySide);
+
+	if (deActivate == NULL || JointSort::lighterJoint(j, deActivate)) {
+		swap(deActivate, j, j->getPrimitive((heavySide + 1) % 2));
+		dirty = true;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1011c7c0
 void TreeStage::onEdgeAdded(Edge* edge)
 {
 	Primitive::insertEdge(edge);
@@ -370,24 +645,22 @@ void TreeStage::onEdgeAdded(Edge* edge)
 		return;
 	}
 
-	if (!edge->getInEdgeList()) {
-		edges.insert(edge);
-		dirty = true;
-		edge->setInEdgeList(true);
-	}
+	insertEdge(edge);
 }
 
-// STUB: WEBSERVICE 0x1011c840
+// FUNCTION: WEBSERVICE 0x1011c840
 void TreeStage::onEdgeRemoving(Edge* edge)
 {
 	if (Joint::isJoint(edge) && static_cast<Joint*>(edge)->getJointType() >= Joint::ANCHOR_JOINT) {
 		Joint* joint = static_cast<Joint*>(edge);
 
 		if (joint->getActive()) {
-			Primitive* root = NULL;
-			Joint* lightest = findLightestDownstream(Primitive::downstreamPrimitive(joint), root);
+			Primitive* downstream = Primitive::downstreamPrimitive(joint);
 
-			swap(joint, lightest, root);
+			Primitive* newParent = NULL;
+			Joint* lightest = findLightestDownstream(downstream, newParent);
+
+			swap(joint, lightest, newParent);
 			dirty = true;
 		}
 	}
@@ -396,10 +669,7 @@ void TreeStage::onEdgeRemoving(Edge* edge)
 			static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(edge);
 		}
 
-		if (edge->getInEdgeList()) {
-			edges.erase(edge);
-			edge->setInEdgeList(false);
-		}
+		eraseEdge(edge);
 	}
 
 	edge->removeFromStage(this);

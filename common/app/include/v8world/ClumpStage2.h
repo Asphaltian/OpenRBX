@@ -26,11 +26,21 @@ bool lighterJoint(Joint* joint0, Joint* joint1);
 
 } // namespace JointSort
 
+// VTABLE: WEBSERVICE 0x10247edc
 // SIZE 0x30
 class TreeStage : public IWorldStage
 {
 public:
-	virtual StageType getStageType() const;                                 // vtable+0x04
+	TreeStage(IStage* upstream, World* world);
+
+	virtual ~TreeStage(); // vtable+0x00
+
+	// SYNTHETIC: WEBSERVICE 0x1011c1e0
+	// RBX::TreeStage::`scalar deleting destructor'
+
+	// FUNCTION: WEBSERVICE 0x100a7740 FOLDED
+	virtual StageType getStageType() { return TREE_STAGE; } // vtable+0x04
+
 	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling); // vtable+0x08
 
 	virtual void onEdgeAdded(Edge* edge);         // vtable+0x10
@@ -40,23 +50,32 @@ public:
 	void process();
 
 	Primitive* heavyParent(int index, Primitive* primitive, Joint*& heaviest, int& heaviestIndex);
-	void findHeaviestUpstream(Primitive* prim0, Primitive* prim1, Joint*& heaviest, int& heaviestIndex);
+	void findHeaviestUpstream(Primitive* p0, Primitive* p1, Joint*& answer, int& heavySide);
 
-	void insertJoint(Joint* joint);
-	Joint* findLightestDownstream(Primitive* primitive, Primitive*& root);
+	void insertJoint(Joint* j);
+	Joint* findLightestDownstream(Primitive* p, Primitive*& newParent);
 
-	void swap(Joint* remove, Joint* add, Primitive* root);
+	void swap(Joint* deactivate, Joint* activate, Primitive* newParent);
 
-	void traverse(Joint* joint, Primitive* root);
+	int getClumpDepth(Primitive* p);
+
+	void dirtyAssembly(Assembly* a);
+
+	void insertEdge(Edge* e);
+	void eraseEdge(Edge* e);
+
+	void buildDownstreamTree(Primitive* p, std::set<Primitive*>& tree);
+	void rebuildClump(Joint* joint, Primitive* parent);
+	void traverse(Joint* joint, Primitive* parent);
 
 	AssemblyStage* getAssemblyStage() { return reinterpret_cast<AssemblyStage*>(getDownstream()); }
 
 	void cleanAssembly(Assembly* assembly);
 	void cleanEdge(Edge* edge);
 
-	void dirtyAssemblies(Joint* joint);
-	void undirtyAssembly(Assembly* assembly);
-	void destroyAssembly(Assembly* assembly);
+	void dirtyAssemblies(Joint* j);
+	void undirtyAssembly(Assembly* a);
+	void destroyAssembly(Assembly* a);
 
 private:
 	int maxTreeDepth;               // 0x10
@@ -67,11 +86,22 @@ private:
 
 DECOMP_SIZE_ASSERT(TreeStage, 0x30)
 
+// VTABLE: WEBSERVICE 0x10247e4c
 // SIZE 0x10
 class ClumpStage : public IWorldStage
 {
 public:
 	ClumpStage(IStage* upstream, World* world);
+
+	virtual ~ClumpStage() {} // vtable+0x00
+
+	void onPrimitiveCanSleepChanged(Primitive* p);
+
+	void onPrimitiveAddedAnchor(Primitive* p);
+	void onPrimitiveRemovedAnchor(Primitive* p);
+
+	// SYNTHETIC: WEBSERVICE 0x1011b710
+	// RBX::ClumpStage::`scalar deleting destructor'
 
 	virtual StageType getStageType(); // vtable+0x04
 

@@ -177,7 +177,8 @@ public:
 	Clump* getClump() const { return clump; }
 	IMoving* getOwner() const { return myOwner; }
 	bool getCanSleep() const { return canSleep; }
-	Anchor* getAnchorObject() const { return anchorObject; }
+	Anchor* getAnchorObject() { return anchorObject; }
+	bool getAnchor() const { return anchorObject != NULL; }
 
 	bool getDragging() const { return dragging; }
 	bool getCanCollide() const { return canCollide; }
