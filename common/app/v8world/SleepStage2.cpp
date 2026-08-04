@@ -150,7 +150,7 @@ bool SleepStage::preventNeighborSleep(Assembly* assembly)
 	return false;
 }
 
-// STUB: WEBSERVICE 0x10118e70
+// FUNCTION: WEBSERVICE 0x10118e70
 Sim::AssemblyState SleepStage::computeAssemblyState(Assembly* assembly)
 {
 	if (!computeCanSleep(assembly)) {
@@ -160,9 +160,11 @@ Sim::AssemblyState SleepStage::computeAssemblyState(Assembly* assembly)
 	bool allNeighborsSleeping = true;
 
 	for (EdgeIterator it = assembly->externalEdgeBegin(); it != assembly->externalEdgeEnd(); ++it) {
-		if (edgeIsAwake(*it)) {
-			if (isAffecting(*it)) {
-				Assembly* other = assembly->otherAssembly(*it);
+		Edge* edge = *it;
+
+		if (edgeIsAwake(edge)) {
+			if (isAffecting(edge)) {
+				Assembly* other = assembly->otherAssembly(edge);
 
 				if (getState(other) == Sim::AWAKE) {
 					allNeighborsSleeping = false;
@@ -196,7 +198,7 @@ int SleepStage::getMetric(MetricType metricType)
 	}
 }
 
-// STUB: WEBSERVICE 0x10118fd0
+// FUNCTION: WEBSERVICE 0x10118fd0
 bool SleepStage::shouldSleep(Assembly* assembly)
 {
 	if (!computeCanSleep(assembly)) {
@@ -258,7 +260,7 @@ void SleepStage::changeJointState(Joint* joint, Sim::EdgeState state)
 	joint->setEdgeState(state);
 }
 
-// STUB: WEBSERVICE 0x101197c0
+// FUNCTION: WEBSERVICE 0x101197c0
 void SleepStage::changeAssemblyState(Assembly* assembly, Sim::AssemblyState state)
 {
 	Sim::AssemblyState oldState = getState(assembly);
@@ -404,7 +406,9 @@ void SleepStage::stepJoints()
 
 	toSleeping.resize(0);
 
-	for (JointSet::iterator it = steppingJoints.begin(); it != steppingJoints.end(); ++it) {
+	JointSet::iterator it;
+
+	for (it = steppingJoints.begin(); it != steppingJoints.end(); ++it) {
 		Joint* joint = *it;
 
 		Primitive* prim0 = joint->getPrimitive(0);
@@ -648,7 +652,7 @@ void SleepStage::stepContacts(ContactList& contacts)
 	changeContactState(toTouchingSleeping, Sim::TOUCHING_SLEEPING);
 }
 
-// STUB: WEBSERVICE 0x1011ab10
+// FUNCTION: WEBSERVICE 0x1011ab10
 void SleepStage::wakeAssemblyAndNeighbors(Assembly* assembly, int depth)
 {
 	Sim::AssemblyState state = getState(assembly);

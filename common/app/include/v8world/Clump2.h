@@ -57,7 +57,7 @@ public:
 
 	Edge* operator*() const { return edge; }
 
-	bool operator==(const EdgeIterator& other) const { return primitive == other.primitive && edge == other.edge; }
+	bool operator==(const EdgeIterator& other) const { return edge == other.edge && primitive == other.primitive; }
 
 	bool operator!=(const EdgeIterator& other) const { return !(*this == other); }
 

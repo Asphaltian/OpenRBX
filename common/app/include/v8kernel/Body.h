@@ -173,6 +173,7 @@ inline void Body::accumulateTorque(const Vector3& torque)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10118c80
 inline void Body::resetAccumulators()
 {
 	SimBody* simBody = getRootSimBody();
