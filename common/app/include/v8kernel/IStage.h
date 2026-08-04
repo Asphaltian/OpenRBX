@@ -37,6 +37,7 @@ public:
 		getDownstream()->stepWorld(worldStepId, uiStepId, throttling);
 	}
 
+	// FUNCTION: WEBSERVICE 0x101187f0
 	virtual Kernel* getKernel() { return getDownstream()->getKernel(); }
 
 	IStage* getUpstream() { return upstream; }

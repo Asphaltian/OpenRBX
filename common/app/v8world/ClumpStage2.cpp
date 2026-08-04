@@ -40,16 +40,8 @@ float getPrimitiveSize(Primitive* primitive)
 haveArea:;
 
 	float gridArea = floor(area);
-	int cells;
 
-	// clang-format off
-	__asm {
-		fld gridArea
-		fistp cells
-	}
-	// clang-format on
-
-	return (float) ((unsigned __int64) primitive->getSizeMultiplier() * cells);
+	return (float) (G3D::iRound(gridArea) * (unsigned __int64) primitive->getSizeMultiplier());
 }
 
 // FUNCTION: WEBSERVICE 0x1011b3d0

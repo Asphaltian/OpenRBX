@@ -42,13 +42,13 @@ int World::getMetric(IWorldStage::MetricType metricType) const
 // FUNCTION: WEBSERVICE 0x100cf000
 int World::getNumHashNodes() const
 {
-	return contactManager->getSpatialHash()->getNumHashNodes();
+	return contactManager->getSpatialHash()->getNodesOut();
 }
 
 // FUNCTION: WEBSERVICE 0x100cf010
 int World::getMaxBucketSize() const
 {
-	return contactManager->getSpatialHash()->getMaxBucketSize();
+	return contactManager->getSpatialHash()->getMaxBucket();
 }
 
 // STUB: WEBSERVICE 0x100cf020
