@@ -84,7 +84,7 @@ void EdgeList::removeEdge(Primitive* primitive, Edge* edge, EdgeList& list)
 	list.num--;
 }
 
-// STUB: WEBSERVICE 0x100a78c0
+// FUNCTION: WEBSERVICE 0x100a78c0
 void Primitive::insertEdge(Edge* edge)
 {
 	Primitive* prim0 = edge->getPrimitive(0);
@@ -250,7 +250,7 @@ void Primitive::setElasticity(float value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a7bf0
+// FUNCTION: WEBSERVICE 0x100a7bf0
 CoordinateFrame Primitive::getFaceCoordInObject(NormalId normalId)
 {
 	return CoordinateFrame(normalIdToMatrix3(normalId), normalIdToVector3(normalId) * geometry->getGridSize());
@@ -511,7 +511,7 @@ const CoordinateFrame& Primitive::getCoordinateFrame() const
 	return body->getCoordinateFrame();
 }
 
-// STUB: WEBSERVICE 0x100a84b0
+// FUNCTION: WEBSERVICE 0x100a84b0
 CoordinateFrame Primitive::getGridCorner() const
 {
 	const CoordinateFrame& coord = body->getCoordinateFrame();
@@ -519,14 +519,13 @@ CoordinateFrame Primitive::getGridCorner() const
 	return CoordinateFrame(coord.rotation, coord.pointToWorldSpace(-(geometry->getGridSize() * 0.5f)));
 }
 
-// STUB: WEBSERVICE 0x100a8570
+// FUNCTION: WEBSERVICE 0x100a8570
 Primitive::Primitive(Geometry::GeometryType geometryType)
 	: guidSetExternally(false), sizeMultiplier(1), worldIndex(-1), world(NULL), clump(NULL), clumpDepth(-1),
-	  traverseId(-1), spatialNodes(NULL), oldSpatialMin(), oldSpatialMax(),
-	  fuzzyExtents(Vector3::inf(), -Vector3::inf()), fuzzyExtentsStateId(-2), geometry(newGeometry(geometryType)),
-	  body(new Body()), myOwner(NULL), anchorObject(NULL), dragging(false), anchored(false), canCollide(true),
-	  canSleep(true), friction(0), elasticity(0.75f), controller(NullController::getStaticNullController()),
-	  JointK(this, &Primitive::computeJointK)
+	  traverseId(-1), spatialNodes(NULL), oldSpatialMin(), oldSpatialMax(), fuzzyExtents(), fuzzyExtentsStateId(-2),
+	  geometry(newGeometry(geometryType)), body(new Body()), myOwner(NULL), anchorObject(NULL), dragging(false),
+	  anchored(false), canCollide(true), canSleep(true), friction(0), elasticity(0.75f),
+	  controller(NullController::getStaticNullController()), JointK(this, &Primitive::computeJointK)
 {
 	for (int i = 0; i < 6; i++) {
 		surfaceType[i] = NO_SURFACE;
@@ -534,7 +533,7 @@ Primitive::Primitive(Geometry::GeometryType geometryType)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a8760
+// FUNCTION: WEBSERVICE 0x100a8760
 Vector3 Primitive::clipToSafeSize(const Vector3& size)
 {
 	Vector3 answer = size.min(Vector3(512.0f, 512.0f, 512.0f));
@@ -588,7 +587,7 @@ void Primitive::setDragging(bool value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a8940
+// FUNCTION: WEBSERVICE 0x100a8940
 void Primitive::setGridCorner(const CoordinateFrame& corner)
 {
 	Vector3 half = geometry->getGridSize() * 0.5f;
