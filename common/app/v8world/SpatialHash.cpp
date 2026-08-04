@@ -1,7 +1,9 @@
 #include "v8world/SpatialHash.h"
 
 #include "decomp.h"
+#include "v8world/Assembly2.h"
 #include "v8world/Primitive.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
@@ -126,7 +128,7 @@ void SpatialHash::onPrimitiveAdded(Primitive* primitive)
 }
 
 // STUB: WEBSERVICE 0x10123e20
-void SpatialHash::primitiveExtentsChanged(Primitive* primitive)
+DECOMP_NOINLINE void SpatialHash::primitiveExtentsChanged(Primitive* primitive)
 {
 	STUB(0x10123e20);
 }
@@ -148,7 +150,15 @@ void SpatialHash::onPrimitiveExtentsChanged(Primitive* primitive)
 // STUB: WEBSERVICE 0x10123ff0
 void SpatialHash::onAllPrimitivesMoved()
 {
-	STUB(0x10123ff0);
+	const World::PrimitiveArray& primitives = world->getPrimitives();
+
+	for (int i = 0; i < primitives.size(); i++) {
+		Primitive* p = primitives[i];
+
+		if (p->getAssembly()->getSleepStatus() == Sim::AWAKE) {
+			primitiveExtentsChanged(p);
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x10124100

@@ -10,7 +10,7 @@ namespace RBX {
 class Contact : public Edge
 {
 public:
-	int& steppingIndexFunc() const { return const_cast<int&>(steppingIndex); }
+	int& steppingIndexFunc() { return steppingIndex; }
 
 	bool step(int uiStepId);
 

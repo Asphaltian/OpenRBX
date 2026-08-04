@@ -8,7 +8,7 @@
 namespace RBX {
 
 // SIZE 0x0c
-template <class T, int& (T::*getIndex)() const>
+template <class T, int& (T::*getIndex)()>
 class IndexArray
 {
 public:

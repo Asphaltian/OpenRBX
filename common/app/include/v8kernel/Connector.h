@@ -33,7 +33,7 @@ private:
 	friend class Kernel;
 	friend class KernelData;
 
-	int& getKernelIndex() const { return kernelIndex; }
+	int& getKernelIndex() { return kernelIndex; }
 };
 
 DECOMP_SIZE_ASSERT(Connector, 0x08)

@@ -2,7 +2,9 @@
 #define V8WORLD_WORLD_H
 
 #include "decomp.h"
+#include "util/IndexArray.h"
 #include "v8world/IWorldStage.h"
+#include "v8world/Primitive.h"
 
 namespace RBX {
 
@@ -36,6 +38,10 @@ public:
 
 	void onPrimitiveTouched(Primitive* p0, Primitive* p1);
 
+	typedef IndexArray<Primitive, &Primitive::worldIndexFunc> PrimitiveArray;
+
+	const PrimitiveArray& getPrimitives() const { return primitives; }
+
 	Kernel* getKernel() const;
 
 	int getNumHashNodes() const;
@@ -54,10 +60,19 @@ public:
 	void onJointPrimitiveSet(Joint* joint, Primitive* primitive);
 
 private:
-	undefined m_unk0x00[0x30 - 0x00]; // 0x00
-	ContactManager* contactManager;   // 0x30
-	JointStage* jointStage;           // 0x34
-	undefined m_unk0x38[0x94 - 0x38]; // 0x38
+	undefined m_unk0x00[0x30 - 0x00];  // 0x00
+	ContactManager* contactManager;    // 0x30
+	JointStage* jointStage;            // 0x34
+	G3D::Array<Primitive*> touch;      // 0x38
+	G3D::Array<Primitive*> touchOther; // 0x44
+	bool canThrottle;                  // 0x50
+	bool inStepCode;                   // 0x51
+	bool inJointNotification;          // 0x52
+	int worldStepId;                   // 0x54
+
+	PrimitiveArray primitives; // 0x58
+
+	undefined m_unk0x64[0x94 - 0x64]; // 0x64
 };
 
 DECOMP_SIZE_ASSERT(World, 0x94)

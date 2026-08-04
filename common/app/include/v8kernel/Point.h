@@ -24,7 +24,7 @@ private:
 	friend class KernelData;
 
 	// FUNCTION: WEBSERVICE 0x100d4ec0 FOLDED
-	int& getKernelIndex() const { return kernelIndex; }
+	int& getKernelIndex() { return kernelIndex; }
 
 	int numOwners; // 0x08
 

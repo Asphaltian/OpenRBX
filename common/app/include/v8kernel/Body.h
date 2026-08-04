@@ -134,9 +134,9 @@ private:
 
 	SimBody* getRootSimBody() { return root->simBody; }
 
-	int& getIndex() const { return index; }
+	int& getIndex() { return index; }
 
-	int& getKernelIndex() const { return kernelIndex; }
+	int& getKernelIndex() { return kernelIndex; }
 
 	Body* root;                                 // 0x04
 	Body* parent;                               // 0x08

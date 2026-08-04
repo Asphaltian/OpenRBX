@@ -190,6 +190,8 @@ public:
 	const Guid& getGuid() const;
 	void setGuid(const Guid& value);
 
+	int& worldIndexFunc() { return worldIndex; }
+
 	unsigned int getSizeMultiplier() const { return sizeMultiplier; }
 	void setSizeMultiplier(unsigned int multiplier);
 
