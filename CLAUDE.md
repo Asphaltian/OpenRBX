@@ -72,10 +72,11 @@ Never guess a path, a name, an offset or an enum value. Each of these is recorde
 - **`reccmp-cvdump -m`** gives each module's `src =` line: the original directory and filename with its real casing. This is the layout to reproduce. LINES lowercases every path it stores, so only `src =` answers casing, and only for `.cpp` files.
 - **`reccmp-cvdump -t`** writes TYPES, the authority for member names, offsets, class sizes, enum values and typedefs (`LF_NESTTYPE`). Ghidra's type browser resolves some names to the wrong namespace, so prefer the type records when they disagree.
 - **Method constness** resolves through the `This type` `LF_POINTER` to either the class or an `LF_MODIFIER const`. It costs no instruction but it is recorded, and it changes what MSVC's alias analysis may assume.
-- **LINES** maps an address to the file it came from and places a definition even when every call is inlined away. Inline and template code is attributed to the header that defines it, so this tells you whether a function belongs in the `.cpp` or in the `.h`.
+- **LINES** maps an address to the file it came from and places a definition even when every call is inlined away. A header's records cover its own out-of-line copy; an inlined expansion is attributed to the **call site**, not to the callee, so a caller whose records never leave its `.cpp` still inlines header code freely. MSVC 8 has no `S_INLINESITE`, and a probe build settles this in three minutes when a helper's home is in doubt.
 - **`reccmp-cvdump -m -seccontrib`** maps any address to the object that contributed it. It is the only way to place a namespace-scope global, which reaches the PDB as an `S_PUB32` with no module.
 - **`S_BPREL32`** names every stack local and gives its frame offset. Declaration order cannot be read back from it, because MSVC lays locals out by size.
 - **`S_FRAMEPROC`** carries `inl_specified` (whether the original wrote the `inline` keyword) and `wasinlined` (whether the callee was ever expanded anywhere). `wasinlined` answers in one query what a spelling sweep costs a build each.
+- **`S_FRAMEPROC` also carries `inlasm`,** set on the 93 functions that reached inline assembly. It is the only witness that a body no spelling reproduces is expanding an `__asm` helper rather than doing something clever.
 - **The raw string table** holds 2,001 Roblox source paths, readable straight out of the file. LINES names only files that contributed line records, so a header full of declarations is missing from it; the string table is the authority on whether a header exists. Every path there is lowercased.
 - **Jump tables** settle enum values: read the byte index table and the jump table out of the image and the case-to-value mapping falls out.
 
@@ -149,7 +150,7 @@ Rename a placeholder only when the evidence is unambiguous. Competing plausible 
 1. Read the decompilation and check the byte budget. The gap to the next address bounds the body, so a body that cannot fit means this is a wrapper and the logic is in a callee.
 2. Read the line records before writing anything. Count the statements they imply, note which lines generate no code, and check `S_BPREL32` for the local set. Getting the statement count right first is worth more than any respelling afterwards.
 3. Search TYPES for a helper before writing arithmetic out. Hand-inlining a helper the original called is the single most expensive mistake available.
-4. Take calling conventions from the definition, not a call site. `__thiscall` means a member. A `__thiscall` on a global means that global is an instance.
+4. Take calling conventions from the definition, not a call site. `__thiscall` means a member. A `__thiscall` on a global means that global is an instance. A member returning with a bare `ret` is `__cdecl`, which means `static`; the type records do not spell it and the return byte does.
 5. STUB every unknown callee, in ascending address order, with `STUB(0xADDRESS)` in the body so `/OPT:ICF` cannot fold them together. Empty destructors are exempt.
 6. Put `DECOMP_NOINLINE` on a stub whose call the caller's match depends on. App builds `/Ob2`, so a one-store stub inlines and the caller loses the stack the real call needed. Drop the marker once the body is real.
 7. Write clean C++, not decompiler pseudocode. No `*(int*)(this + 4)`, no gotos, no raw float bit patterns.
@@ -186,10 +187,13 @@ Each of these cost a round trip. Keep the sources clean and leave the reasoning 
 - **Locals are pushed in declaration order.** Getting the order wrong leaves an extra value on the x87 stack and shifts every later `st(n)` operand, which reads as a large diff for a one-line cause.
 - **A literal one ULP wrong reads as a naming problem.** When reccmp fails to resolve one side's operand, read the constant out of the image; a constant it renders on both sides is already proven equal.
 - **`RBX::Math::sign` returns `float`.** `G3D::sign` returns double, which loads a qword where the float one loads a dword.
+- **Every float to int conversion goes through `G3D::iRound`,** which is `lrintf` in `g3dmath.h`, an `__inline` spelling `fld`/`fistp`. A C cast lowers to `call __ftol2_sse` and no spelling of it will ever match. The float overload loads a dword, so the argument has to reach it as a `float`: `float f = floor(x);` then `iRound(f)` gives `fstp dword`, reload, `fistp`. The `inlasm` flag names the thirteen App and RbxView functions that use it.
 
 ### Statement shape and evaluation order
 
 - **Argument evaluation is right to left,** for operators as well as calls. The pair named in the second argument gets the callee-saved registers. Naming the left product in a local is what orders `(a * b) * c.inverse()` the way the original has it.
+- **Naming each argument in a local restores left to right.** A recursive call whose arguments are computed inline evaluates them backwards, which decides which parameter lands in `esi` and flips every register below it. Two named locals in declaration order are the whole fix.
+- **A helper the caller hands a temporary sinks its parameter copy into the branch that uses it.** Where the original stores unconditionally, the caller named the value; where it stores inside the `if`, the callee holds the test. Which side owns a null check is readable from that one store.
 - **A comparison puts its right operand in the register.** `a == b` on integers is `mov eax, b` then `cmp [a], eax`. The operand the binary loads first is the one written second.
 - **Assigning a call's result before comparing changes the order.** `f() != g()` runs `g()` first; `x = f(); return x != g();` runs `f()` first.
 - **Which operand is written first decides evaluation order even where the operator is commutative in meaning.** `prim1 sum > prim0 sum` and `prim0 sum < prim1 sum` mean the same thing and evaluate in opposite orders.
@@ -340,6 +344,8 @@ Two dependencies are easy to miss because they were compiled into someone else's
 `RakPeer`'s vtable annotation needs a commented declaration under it. `class_decl_regex` takes the first identifier after `class`, so `class RAK_DLL_EXPORT RakPeer` reads as a class named `RAK_DLL_EXPORT`; a `// class RakPeer` line under the marker names it. Constness is what stops RakNet slots pairing: the original spells `char*` as `const char*` across `Connect`, `Send`, the RPC registration methods and all four `RPCMap` identifier methods. Compare `?Name@RakPeer@@` across both PDBs to find the rest.
 
 ## Gotchas
+
+- **`reccmp-reccmp --verbose` dies printing a match.** The success line carries an emoji and a cp1252 console cannot encode it, so a 100% match looks like a traceback. Export `PYTHONIOENCODING=utf-8`.
 
 - **`.clang-format` sets `IncludeBlocks: Regroup`,** so it merges include blocks and sorts across them. A blank line will not hold an include in place. `WebService.h` needs `<winsock2.h>` ahead of `<unknwn.h>`, and only `// clang-format off` around it survives.
 - **`SKIP_LINTING` in `CMakeLists.txt`** is for diagnostics inside vendored headers. boost 1.34's `scoped_lock` throws and clang-tidy calls that an error whatever `/EHsc` the command line carries, so every source that includes `boost/thread/mutex.hpp` needs a line there.
