@@ -20,8 +20,9 @@ public:
 	static Vector3int32 floor(const Vector3& value);
 
 	Vector3int32 operator+(const Vector3int32& other) const;
-	bool operator==(const Vector3int32& other) const;
-	bool operator!=(const Vector3int32& other) const;
+
+	bool operator==(const Vector3int32& other) const { return x == other.x && y == other.y && z == other.z; }
+	bool operator!=(const Vector3int32& other) const { return !(*this == other); }
 
 	Vector3 toVector3() const;
 

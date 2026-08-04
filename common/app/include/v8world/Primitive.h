@@ -123,6 +123,8 @@ public:
 	static bool disableSleep;
 
 private:
+	friend class SpatialHash;
+
 	static bool ignoreBool;
 
 	Guid guid;                   // 0x08

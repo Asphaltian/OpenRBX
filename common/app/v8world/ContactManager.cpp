@@ -13,6 +13,12 @@ void ContactManager::getPrimitivesTouchingExtents(
 	spatialHash->getPrimitivesTouchingExtents(extents, ignore, found);
 }
 
+// STUB: WEBSERVICE 0x10108140
+DECOMP_NOINLINE void ContactManager::onReleasePair(Primitive* p0, Primitive* p1)
+{
+	STUB(0x10108140);
+}
+
 // FUNCTION: WEBSERVICE 0x10108170
 void ContactManager::onPrimitiveAdded(Primitive* primitive)
 {

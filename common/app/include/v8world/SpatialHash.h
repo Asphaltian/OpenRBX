@@ -12,8 +12,21 @@ namespace RBX {
 
 class ContactManager;
 class Primitive;
-class SpatialNode;
 class World;
+
+// SIZE 0x20
+class SpatialNode
+{
+public:
+	Primitive* primitive;           // 0x00
+	SpatialNode* nextHashLink;      // 0x04
+	SpatialNode* nextPrimitiveLink; // 0x08
+	SpatialNode* prevPrimitiveLink; // 0x0c
+	int hashId;                     // 0x10
+	Vector3int32 gridId;            // 0x14
+};
+
+DECOMP_SIZE_ASSERT(SpatialNode, 0x20)
 
 // SIZE 0x24
 class SpatialHash
@@ -25,7 +38,7 @@ public:
 	void getPrimitivesTouchingExtents(const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& found);
 
 	void onPrimitiveAdded(Primitive* primitive);
-	void onPrimitiveRemoved(Primitive* primitive);
+	void onPrimitiveRemoved(Primitive* p);
 	void onPrimitiveExtentsChanged(Primitive* primitive);
 
 	void onAllPrimitivesMoved();
@@ -34,10 +47,21 @@ public:
 	int getMaxBucket() const { return maxBucket; }
 
 private:
+	static unsigned int numBits() { return 16; }
+	static unsigned int numBuckets() { return 1 << numBits(); }
+
 	static float hashGridSize() { return 8.0f; }
 	static float hashGridRecip() { return 1.0f / hashGridSize(); }
 
-	void destroyNode(SpatialNode* node);
+	static int getHash(const Vector3int32& grid);
+
+	SpatialNode* findNode(Primitive* p, const Vector3int32& grid);
+
+	void removeNodeFromPrimitive(SpatialNode* remove);
+	void removeNodeFromHash(SpatialNode* remove);
+	void returnNode(SpatialNode* node);
+	void destroyNode(SpatialNode* destroy);
+	bool shareCommonGrid(Primitive* me, Primitive* other);
 	void primitiveExtentsChanged(Primitive* primitive);
 
 	World* world;                    // 0x00
@@ -57,8 +81,10 @@ public:
 	void getPrimitivesTouchingExtents(const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& found);
 
 	void onPrimitiveAdded(Primitive* primitive);
-	void onPrimitiveRemoved(Primitive* primitive);
+	void onPrimitiveRemoved(Primitive* p);
 	void onPrimitiveExtentsChanged(Primitive* primitive);
+
+	void onReleasePair(Primitive* p0, Primitive* p1);
 
 	void stepWorld();
 

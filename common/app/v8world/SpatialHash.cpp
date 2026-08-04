@@ -1,6 +1,7 @@
 #include "v8world/SpatialHash.h"
 
 #include "decomp.h"
+#include "v8world/Primitive.h"
 
 namespace RBX {
 
@@ -21,10 +22,101 @@ Extents SpatialHash::hashGridToRealExtents(const Vector3& hashGrid)
 	);
 }
 
-// STUB: WEBSERVICE 0x10123990
-void SpatialHash::destroyNode(SpatialNode* node)
+void SpatialHash::removeNodeFromPrimitive(SpatialNode* remove)
 {
-	STUB(0x10123990);
+	SpatialNode* next = remove->nextPrimitiveLink;
+	SpatialNode* prev = remove->prevPrimitiveLink;
+
+	if (next != NULL) {
+		next->prevPrimitiveLink = prev;
+	}
+
+	if (prev != NULL) {
+		prev->nextPrimitiveLink = next;
+	}
+	else {
+		remove->primitive->spatialNodes = next;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10123840
+void SpatialHash::removeNodeFromHash(SpatialNode* remove)
+{
+	SpatialNode** link = &nodes[remove->hashId];
+
+	while (*link != remove) {
+		link = &(*link)->nextHashLink;
+	}
+	*link = remove->nextHashLink;
+}
+
+int SpatialHash::getHash(const Vector3int32& grid)
+{
+	return (grid.x * -2979 ^ grid.y * 16543 ^ grid.z * -73) & (numBuckets() - 1);
+}
+
+// FUNCTION: WEBSERVICE 0x10123890
+SpatialNode* SpatialHash::findNode(Primitive* p, const Vector3int32& grid)
+{
+	int hash = getHash(grid);
+
+	SpatialNode* node = nodes[hash];
+
+	while (node->primitive != p || node->gridId != grid) {
+		node = node->nextHashLink;
+	}
+
+	return node;
+}
+
+// FUNCTION: WEBSERVICE 0x10123910
+bool SpatialHash::shareCommonGrid(Primitive* me, Primitive* other)
+{
+	for (SpatialNode* node = me->spatialNodes; node != NULL; node = node->nextPrimitiveLink) {
+		for (SpatialNode* hashNode = nodes[node->hashId]; hashNode != NULL; hashNode = hashNode->nextHashLink) {
+			if (hashNode->primitive == other && hashNode->gridId == node->gridId) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+void SpatialHash::returnNode(SpatialNode* node)
+{
+	node->nextHashLink = extraNodes;
+	nodesOut--;
+	extraNodes = node;
+}
+
+// FUNCTION: WEBSERVICE 0x10123990
+void SpatialHash::destroyNode(SpatialNode* destroy)
+{
+	removeNodeFromPrimitive(destroy);
+
+	removeNodeFromHash(destroy);
+
+	Vector3int32 destroyGrid = destroy->gridId;
+
+	SpatialNode* node = nodes[destroy->hashId];
+
+	while (node != NULL) {
+		if (node->gridId == destroyGrid) {
+			Primitive* me = destroy->primitive;
+			Primitive* other = node->primitive;
+
+			if (Primitive::getContact(me, other) != NULL) {
+				if (!shareCommonGrid(me, other)) {
+					contactManager->onReleasePair(me, other);
+				}
+			}
+		}
+
+		node = node->nextHashLink;
+	}
+
+	returnNode(destroy);
 }
 
 // STUB: WEBSERVICE 0x10123bd0
@@ -39,10 +131,12 @@ void SpatialHash::primitiveExtentsChanged(Primitive* primitive)
 	STUB(0x10123e20);
 }
 
-// STUB: WEBSERVICE 0x10123fb0
-void SpatialHash::onPrimitiveRemoved(Primitive* primitive)
+// FUNCTION: WEBSERVICE 0x10123fb0
+void SpatialHash::onPrimitiveRemoved(Primitive* p)
 {
-	STUB(0x10123fb0);
+	while (p->spatialNodes != NULL) {
+		destroyNode(p->spatialNodes);
+	}
 }
 
 // STUB: WEBSERVICE 0x10123fe0
