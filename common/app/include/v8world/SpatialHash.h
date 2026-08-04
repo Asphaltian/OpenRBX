@@ -32,14 +32,19 @@ DECOMP_SIZE_ASSERT(SpatialNode, 0x20)
 class SpatialHash
 {
 public:
+	SpatialHash(World* world, ContactManager* contactManager);
+	~SpatialHash();
+
 	static Vector3int32 realToHashGrid(const Vector3& realPoint);
 	static Extents hashGridToRealExtents(const Vector3& hashGrid);
 
-	void getPrimitivesTouchingExtents(const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& found);
+	bool getNextGrid(Vector3int32& grid, const G3D::Ray& unitRay, float maxDistance);
 
-	void onPrimitiveAdded(Primitive* primitive);
+	void getPrimitivesTouchingExtents(const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& answer);
+
+	void onPrimitiveAdded(Primitive* p);
 	void onPrimitiveRemoved(Primitive* p);
-	void onPrimitiveExtentsChanged(Primitive* primitive);
+	void onPrimitiveExtentsChanged(Primitive* p);
 
 	void onAllPrimitivesMoved();
 
@@ -56,13 +61,20 @@ private:
 	static int getHash(const Vector3int32& grid);
 
 	SpatialNode* findNode(Primitive* p, const Vector3int32& grid);
+	SpatialNode* newNode();
+	void insertNodeToPrimitive(SpatialNode* node, Primitive* p, const Vector3int32& grid, int hash);
+	void addNode(Primitive* p, const Vector3int32& grid);
+	void getPrimitivesInGrid(const Vector3int32& grid, G3D::Array<Primitive*>& found);
 
 	void removeNodeFromPrimitive(SpatialNode* remove);
 	void removeNodeFromHash(SpatialNode* remove);
 	void returnNode(SpatialNode* node);
 	void destroyNode(SpatialNode* destroy);
 	bool shareCommonGrid(Primitive* me, Primitive* other);
-	void primitiveExtentsChanged(Primitive* primitive);
+	static void computeMinMax(const Extents& extents, Vector3int32& min, Vector3int32& max);
+
+	void changeMinMax(Primitive* p, const Extents& change, const Extents& oldBox, const Extents& newBox);
+	void primitiveExtentsChanged(Primitive* p);
 
 	World* world;                    // 0x00
 	ContactManager* contactManager;  // 0x04
@@ -82,8 +94,9 @@ public:
 
 	void onPrimitiveAdded(Primitive* primitive);
 	void onPrimitiveRemoved(Primitive* p);
-	void onPrimitiveExtentsChanged(Primitive* primitive);
+	void onPrimitiveExtentsChanged(Primitive* p);
 
+	void onNewPair(Primitive* p0, Primitive* p1);
 	void onReleasePair(Primitive* p0, Primitive* p1);
 
 	void stepWorld();

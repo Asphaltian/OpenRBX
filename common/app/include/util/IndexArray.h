@@ -12,6 +12,8 @@ template <class T, int& (T::*getIndex)()>
 class IndexArray
 {
 public:
+	const G3D::Array<T*>& getArray() const { return array; }
+
 	int size() const { return array.size(); }
 
 	T* operator[](int index) const { return array[index]; }

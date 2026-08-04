@@ -42,6 +42,8 @@ python tools/reccmp_addr_padding.py
 
 `reccmp-reccmp` prints one row per recompiled address. Where our link folded two functions the original kept apart, only one annotation appears and the other is absent rather than listed as a miss. Probe the address with `--verbose` before reading absence as failure.
 
+`--verbose` compares raw `[esp+N]` operands, so one missing local reprints the whole body as a mismatch at a constant offset. Add the frame difference back before reading a diff: `getPrimitivesTouchingExtents` looked forty percent wrong and was byte for byte right apart from a condition nothing else showed. What the shift cannot hide is a call, so read the original-only lines for callee names first; the two there named the predicate the source was missing.
+
 ## Ground Truth
 
 `WebService.pdb` ships alongside the binary and is not stripped. Check whether it answers a question before working the answer out from disassembly. It carries symbol names, namespaces, class hierarchies, source paths, line numbers, per-object compiler command lines and the toolchain version.
@@ -213,6 +215,8 @@ Each of these cost a round trip. Keep the sources clean and leave the reasoning 
 
 Where the line records show lines that generate no code, the original named something, and naming it back is worth more than any respelling. A reference declaration emits nothing, so a run of no-code lines in a header is the signature of aliases. A `float` copy does emit a load, but the scheduler hoists it into the following statement's run, so it leaves no record either.
 
+- **A pure permutation of `ebx`, `ebp`, `esi` and `edi` means a local is missing.** Where the two bodies are instruction for instruction identical and only the callee-saved assignment differs, the original named one more value; the extra name re-ranks the allocator's candidates and the whole assignment falls into place. Four of `SpatialHash.cpp`'s functions failed this way and each took exactly one name: the `Assembly*` between the accessor and the test, the `SpatialNode*` between `findNode` and `destroyNode`, the old bucket head before it is relinked. Do not read it as a preference the compiler is free to make.
+- **Naming a temporary the callee takes by const reference changes its x87 drain.** `f(AABox(lo, hi))` and `AABox box(lo, hi); f(box)` compute the same six products in the same order and then spill them with a different `fxch` schedule. A named local of a class type need not reach `S_BPREL32`, so its absence from the local list does not rule the spelling out.
 - **A leading underscore on a parameter is the strongest tell there is,** because it exists so the body can bind the unprefixed name.
 - **Alias only what the type records name an accessor for.** An alias over a member reached through its own accessor is a real lever; the identical trick on a plain member can cost double figures.
 - **Aliases leave no `S_BPREL32` record,** so an empty local list never rules them out. The list is still authoritative for what did get a stack slot.
@@ -241,6 +245,7 @@ Where the line records show lines that generate no code, the original named some
 - **`std::for_each` passes its iterators through `_Unchecked`.** A raw node walk with none of the `_invalid_parameter_noinfo` checks the file's other loops carry is `for_each` plus `std::mem_fun`, not a written-out `for`.
 - **An if/else tail merge hoists the shared setup above the branch.** A ternary emits the whole address selection up front and costs the function its register assignment as well.
 - **Identical early exits are one shared return.** The line records give it away by sending both tests to the same line.
+- **Two tests of one condition on two lines is an `if` wrapping a `while`.** A rotated loop puts the entry guard and the back-edge test on the same line; a second line holding the same test means the original wrote the redundant guard, and the back edge targets the inner test. `~SpatialHash` lost forty points to this.
 
 ### Class shape and layout
 
@@ -281,6 +286,7 @@ reccmp parses the recompiled PDB only, so the original's side gets its names fro
 Rules that bite:
 
 - **The file is order sensitive and must not be sorted whole.** Rows apply in file order and every row that overrides a folded address has to sit after the row it overrides. Those live at the end of the file.
+- **A vendored row goes stale the moment its address is annotated,** and `--nolib` then hides that function from the score however wrong it is. Selecting by mangled scope also misreads a Roblox method whose parameter types mention `std`, which is how 30 of them got in. Re-check the file against the tree's markers whenever a family lands, not only when a function reads as unresolved.
 - **A vendored row at a folded address must carry the alias reccmp's recompiled entity actually holds,** which is not the name reccmp prints in the diff. Sweep the aliases the recompiled PDB lists at that address rather than reasoning about which one `min()` should pick.
 - **Adding an instantiation to a template already folded there shifts the pick,** so those rows have to be rechecked whenever a new family lands.
 - **A vendored function from a prebuilt library has no `S_GPROC32`,** only a public, so its row has no size. reccmp still names the call, but handing it every unsized row lets `reccmp-vtable` pair ATL and STL tables it cannot resolve. They go in one at a time, listed in `UNSIZED_KEEP`.

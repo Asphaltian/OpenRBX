@@ -24,7 +24,10 @@ public:
 	bool operator==(const Vector3int32& other) const { return x == other.x && y == other.y && z == other.z; }
 	bool operator!=(const Vector3int32& other) const { return !(*this == other); }
 
-	Vector3 toVector3() const;
+	int& operator[](int index) { return (&x)[index]; }
+	const int& operator[](int index) const { return (&x)[index]; }
+
+	Vector3 toVector3() const { return Vector3((float) x, (float) y, (float) z); }
 
 	int x; // 0x00
 	int y; // 0x04

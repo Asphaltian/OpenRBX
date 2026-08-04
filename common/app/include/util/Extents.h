@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "util/NormalId.h"
+#include "util/Vector3int32.h"
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/GCamera.h>
@@ -20,6 +21,11 @@ class Extents
 public:
 	Extents() : low(Vector3::inf()), high(-Vector3::inf()) {}
 	Extents(const Vector3& low, const Vector3& high) : low(low), high(high) {}
+
+	Extents(const Vector3int32& low, const Vector3int32& high)
+		: low((float) low.x, (float) low.y, (float) low.z), high((float) high.x, (float) high.y, (float) high.z)
+	{
+	}
 
 	static Extents fromCenterCorner(const Vector3& center, const Vector3& corner);
 	static Extents vv(const Vector3& v0, const Vector3& v1);
@@ -50,6 +56,7 @@ public:
 	Extents express(const CoordinateFrame& from, const CoordinateFrame& to) const;
 
 	void expand(float distance);
+	void unionWith(const Extents& other);
 
 private:
 	static float epsilon();
@@ -63,6 +70,13 @@ DECOMP_SIZE_ASSERT(Extents, 0x18)
 inline Extents Extents::fromCenterCorner(const Vector3& center, const Vector3& corner)
 {
 	return Extents(center - corner, center + corner);
+}
+
+// STUB: WEBSERVICE 0x1005a750
+inline void Extents::unionWith(const Extents& other)
+{
+	low = Vector3(G3D::min(other.low.x, low.x), G3D::min(other.low.y, low.y), G3D::min(other.low.z, low.z));
+	high = Vector3(G3D::max(other.high.x, high.x), G3D::max(other.high.y, high.y), G3D::max(other.high.z, high.z));
 }
 
 inline void Extents::expand(float distance)

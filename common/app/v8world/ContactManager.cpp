@@ -43,4 +43,10 @@ void ContactManager::stepWorld()
 	spatialHash->onAllPrimitivesMoved();
 }
 
+// STUB: WEBSERVICE 0x10108c60
+DECOMP_NOINLINE void ContactManager::onNewPair(Primitive* p0, Primitive* p1)
+{
+	STUB(0x10108c60);
+}
+
 } // namespace RBX
