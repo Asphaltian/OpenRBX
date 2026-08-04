@@ -232,7 +232,7 @@ void SleepStage::onAssemblyAdded(Assembly* assembly)
 	wakePending.insert(assembly);
 }
 
-// STUB: WEBSERVICE 0x10119530
+// FUNCTION: WEBSERVICE 0x10119530
 SleepStage::~SleepStage()
 {
 }
@@ -330,7 +330,7 @@ void SleepStage::onEdgeAdded(Edge* edge)
 	}
 }
 
-// STUB: WEBSERVICE 0x10119ba0
+// FUNCTION: WEBSERVICE 0x10119ba0
 SleepStage::SleepStage(IStage* upstream, World* world)
 	: IWorldStage(upstream, new SimJobStage(this, world), world), externalBodyForceAdded(false), numContactsInStage(0),
 	  numContactsInKernel(0), throttling(false), uiStepId(-1),
@@ -703,7 +703,7 @@ void SleepStage::stepAssembliesRecursiveWakePending()
 	}
 }
 
-// STUB: WEBSERVICE 0x1011afa0
+// FUNCTION: WEBSERVICE 0x1011afa0
 void SleepStage::stepAssembliesWakePending()
 {
 	static std::vector<Assembly*> toWake;

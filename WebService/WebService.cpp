@@ -74,7 +74,7 @@ StandardOutLog::~StandardOutLog()
 	standardOut->removeListener(this);
 }
 
-// STUB: WEBSERVICE 0x1000d230
+// FUNCTION: WEBSERVICE 0x1000d230
 void StandardOutLog::onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage event)
 {
 	boost::mutex::scoped_lock lock(messagesMutex);

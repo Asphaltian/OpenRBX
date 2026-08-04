@@ -17,7 +17,7 @@ EnumDescriptor::~EnumDescriptor()
 	STUB(0x100942b0);
 }
 
-// STUB: WEBSERVICE 0x10094390
+// FUNCTION: WEBSERVICE 0x10094390
 EnumDescriptor::EnumDescriptor(const char* name, const std::type_info& type)
 	: Type(name, type, "token"), enumCount(0), enumCountMSB(0)
 {

@@ -164,7 +164,7 @@ void Math::idToMatrix3(int orientId, Matrix3& matrix)
 	matrix.setColumn(2, z);
 }
 
-// STUB: WEBSERVICE 0x100dedc0
+// FUNCTION: WEBSERVICE 0x100dedc0
 Matrix3 Math::rotateAboutZ(const Matrix3& matrix, float angle)
 {
 	Matrix3 rotation = Matrix3::identity();
@@ -424,7 +424,7 @@ Vector3 Math::toGrid(const Vector3& value, float grid)
 	return toGrid(value, steps);
 }
 
-// STUB: WEBSERVICE 0x100dfc50
+// FUNCTION: WEBSERVICE 0x100dfc50
 CoordinateFrame Math::snapToGrid(const CoordinateFrame& coordinateFrame, float grid)
 {
 	const Vector3 steps(grid, grid, grid);

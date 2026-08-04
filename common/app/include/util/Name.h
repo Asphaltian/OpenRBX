@@ -470,9 +470,9 @@ private:
 	}
 
 	// clang-format off
-	// STUB: WEBSERVICE 0x10221870
+	// FUNCTION: WEBSERVICE 0x10221870
 	// `RBX::moo2'::`2'::`dynamic atexit destructor for 'mutex2''
-	// STUB: WEBSERVICE 0x10221880
+	// FUNCTION: WEBSERVICE 0x10221880
 	// `RBX::Name::dictionary'::`2'::`dynamic atexit destructor for 'd''
 	// STUB: WEBSERVICE 0x102218c0
 	// `RBX::Name::namMap'::`2'::`dynamic atexit destructor for 'n''
