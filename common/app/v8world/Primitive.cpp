@@ -190,12 +190,10 @@ Assembly* Primitive::getAssembly() const
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x100a7ab0
+// FUNCTION: WEBSERVICE 0x100a7ab0
 float Primitive::computeJointK() const
 {
-	bool isBall = geometry->getGeometryType() == Geometry::GEOMETRY_BALL;
-
-	return Constants::getJointK(geometry->getGridSize(), isBall);
+	return Constants::getJointK(getGridSize(), getPrimitiveType() == Geometry::GEOMETRY_BALL);
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ae0
@@ -539,7 +537,7 @@ Primitive::Primitive(Geometry::GeometryType geometryType)
 // STUB: WEBSERVICE 0x100a8760
 Vector3 Primitive::clipToSafeSize(const Vector3& size)
 {
-	Vector3 answer(G3D::min(512.0f, size.x), G3D::min(512.0f, size.y), G3D::min(512.0f, size.z));
+	Vector3 answer = size.min(Vector3(512.0f, 512.0f, 512.0f));
 
 	if (answer.x * answer.y * answer.z > 1000000.0f) {
 		answer.y = floor(1000000.0f / (answer.x * answer.z));

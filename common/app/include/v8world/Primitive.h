@@ -165,7 +165,12 @@ public:
 	// RBX::Primitive::`scalar deleting destructor'
 
 	Body* getBody() const { return body; }
-	Geometry* getGeometry() const { return geometry; }
+	const Geometry* getGeometry() const { return geometry; }
+	Geometry* getGeometry() { return geometry; }
+
+	const Vector3& getGridSize() const { return geometry->getGridSize(); }
+	Geometry::GeometryType getPrimitiveType() const { return geometry->getGeometryType(); }
+
 	Clump* getClump() const { return clump; }
 	IMoving* getOwner() const { return myOwner; }
 	bool getCanSleep() const { return canSleep; }
