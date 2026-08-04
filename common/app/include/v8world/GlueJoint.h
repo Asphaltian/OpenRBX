@@ -26,7 +26,7 @@ private:
 
 	float getMaxForce();
 
-	virtual void putInKernel(Kernel* kernel); // vtable+0x04
+	virtual void putInKernel(Kernel* _kernel); // vtable+0x04
 
 	// FUNCTION: WEBSERVICE 0x10120280
 	virtual JointType getJointType() const { return GLUE_JOINT; } // vtable+0x14

@@ -48,9 +48,9 @@ MultiJoint::~MultiJoint()
 }
 
 // FUNCTION: WEBSERVICE 0x1011fce0
-void MultiJoint::putInKernel(Kernel* kernel)
+void MultiJoint::putInKernel(Kernel* _kernel)
 {
-	IPipelined::putInKernel(kernel);
+	IPipelined::putInKernel(_kernel);
 }
 
 // FUNCTION: WEBSERVICE 0x1011fcf0

@@ -20,6 +20,9 @@ public:
 
 	virtual ~RotateJoint(); // vtable+0x00
 
+	// SYNTHETIC: WEBSERVICE 0x1011f0b0
+	// RBX::RotateJoint::`scalar deleting destructor'
+
 	virtual void removeFromKernel(); // vtable+0x08
 
 	Primitive* getAxlePrim() const { return getPrimitive(0); }
@@ -45,7 +48,7 @@ private:
 		const CoordinateFrame& coord1
 	);
 
-	virtual void putInKernel(Kernel* kernel); // vtable+0x04
+	virtual void putInKernel(Kernel* _kernel); // vtable+0x04
 
 	// FUNCTION: WEBSERVICE 0x10108040 FOLDED
 	virtual JointType getJointType() const { return ROTATE_JOINT; } // vtable+0x14

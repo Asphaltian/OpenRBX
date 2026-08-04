@@ -88,23 +88,23 @@ GlueJoint* GlueJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, NormalId
 }
 
 // STUB: WEBSERVICE 0x10120810
-void GlueJoint::putInKernel(Kernel* kernel)
+void GlueJoint::putInKernel(Kernel* _kernel)
 {
-	MultiJoint::putInKernel(kernel);
+	MultiJoint::putInKernel(_kernel);
 
 	Body* body0 = getPrimitive(0)->getBody();
 	Body* body1 = getPrimitive(1)->getBody();
 
-	NormalId normalId = Matrix3ToNormalId(jointCoord0.rotation);
+	NormalId nId0 = Matrix3ToNormalId(jointCoord0.rotation);
 
-	for (int i = 0; i < 4; ++i) {
-		Vector3 pos0 = body0->getCoordinateFrame().pointToWorldSpace(overlapInP0[i]);
-		Vector3 pos1 = body1->getCoordinateFrame().pointToWorldSpace(overlapInP1[i]);
+	for (int i = 0; i < 4; i++) {
+		Vector3 p0World = body0->getCoordinateFrame().pointToWorldSpace(overlapInP0[i]);
+		Vector3 p1World = body1->getCoordinateFrame().pointToWorldSpace(overlapInP1[i]);
 
-		Point* point0 = getKernel()->newPoint(body0, pos0);
-		Point* point1 = getKernel()->newPoint(body1, pos1);
+		Point* point0 = getKernel()->newPoint(body0, p0World);
+		Point* point1 = getKernel()->newPoint(body1, p1World);
 
-		Connector* connector = new NormalBreakConnector(point0, point1, getJointK(), getMaxForce(), normalId);
+		Connector* connector = new NormalBreakConnector(point0, point1, getJointK(), getMaxForce(), nId0);
 
 		addToMultiJoint(point0, point1, connector);
 	}

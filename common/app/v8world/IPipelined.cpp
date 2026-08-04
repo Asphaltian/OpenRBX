@@ -10,12 +10,7 @@ IStage* IPipelined::getStage(IStage::StageType stageType) const
 	IStage* stage = currentStage;
 
 	while (stage->getStageType() != stageType) {
-		if (stageType < stage->getStageType()) {
-			stage = stage->getUpstream();
-		}
-		else {
-			stage = stage->getDownstream();
-		}
+		stage = stage->getStageType() > stageType ? stage->getUpstream() : stage->getDownstream();
 	}
 
 	return stage;

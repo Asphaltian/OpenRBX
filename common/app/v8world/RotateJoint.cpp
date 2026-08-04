@@ -270,38 +270,38 @@ float RotateJoint::getTorqueArmLength()
 }
 
 // FUNCTION: WEBSERVICE 0x1011f8c0
-void RotateJoint::putInKernel(Kernel* kernel)
+void RotateJoint::putInKernel(Kernel* _kernel)
 {
-	MultiJoint::putInKernel(kernel);
+	MultiJoint::putInKernel(_kernel);
 
-	Body* body0 = getAxlePrim()->getBody();
-	Body* body1 = getHolePrim()->getBody();
+	Body* b0 = getAxlePrim()->getBody();
+	Body* b1 = getHolePrim()->getBody();
 
-	CoordinateFrame coord0 = body0->getCoordinateFrame() * jointCoord0;
-	CoordinateFrame coord1 = body1->getCoordinateFrame() * jointCoord1;
+	CoordinateFrame cAxleWorld = b0->getCoordinateFrame() * jointCoord0;
+	CoordinateFrame cHoleWorld = b1->getCoordinateFrame() * jointCoord1;
 
-	Vector3 axis0 = coord0.rotation.getColumn(2);
-	Vector3 axis1 = coord1.rotation.getColumn(2);
+	Vector3 vAxleWorld = cAxleWorld.rotation.getColumn(2);
+	Vector3 vHoleWorld = cHoleWorld.rotation.getColumn(2);
 
 	for (int i = 0; i < 2; ++i) {
 		float offset = i == 0 ? -1.0f : 1.0f;
-		Vector3 pos0 = coord0.translation + axis0 * offset;
-		Vector3 pos1 = coord1.translation + axis1 * offset;
+		Vector3 pAxleWorld = cAxleWorld.translation + vAxleWorld * offset;
+		Vector3 pHoleWorld = cHoleWorld.translation + vHoleWorld * offset;
 
-		Point* point0 = getKernel()->newPoint(body0, pos0);
-		Point* point1 = getKernel()->newPoint(body1, pos1);
+		Point* point0 = getKernel()->newPoint(b0, pAxleWorld);
+		Point* point1 = getKernel()->newPoint(b1, pHoleWorld);
 
 		Connector* connector = new PointToPointBreakConnector(point0, point1, getJointK(), Math::inf());
 		addToMultiJoint(point0, point1, connector);
 	}
 
 	if (getJointType() == ROTATE_P_JOINT || getJointType() == ROTATE_V_JOINT) {
-		Vector3 center = coord0.translation;
-		Vector3 axis = coord0.rotation.getColumn(0);
-		Vector3 pos = center + axis * 10.0f;
+		Vector3 center0 = cAxleWorld.translation;
+		Vector3 perp = cAxleWorld.rotation.getColumn(0);
+		Vector3 marker0 = center0 + perp * 10.0f;
 
-		Point* point0 = getKernel()->newPoint(body0, pos);
-		Point* point1 = getKernel()->newPoint(body1, pos);
+		Point* point0 = getKernel()->newPoint(b0, marker0);
+		Point* point1 = getKernel()->newPoint(b1, marker0);
 
 		rotateConnector =
 			new RotateConnector(getPoint(0), getPoint(2), point0, point1, getJointK(), getTorqueArmLength());

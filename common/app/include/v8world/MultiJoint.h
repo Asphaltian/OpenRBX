@@ -19,8 +19,8 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x1011fe30
 	// RBX::MultiJoint::`scalar deleting destructor'
 
-	virtual void putInKernel(Kernel* kernel); // vtable+0x04
-	virtual void removeFromKernel();          // vtable+0x08
+	virtual void putInKernel(Kernel* _kernel); // vtable+0x04
+	virtual void removeFromKernel();           // vtable+0x08
 
 	virtual bool isBroken() const; // vtable+0x1c
 
