@@ -22,7 +22,7 @@ public:
 
 	JointStage(IStage* upstream, World* world);
 
-	// STUB: WEBSERVICE 0x10118810
+	// FUNCTION: WEBSERVICE 0x10118810
 	virtual ~JointStage() {} // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x101188d0
