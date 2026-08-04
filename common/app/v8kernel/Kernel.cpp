@@ -205,8 +205,8 @@ Kernel* Kernel::getKernel()
 
 // FUNCTION: WEBSERVICE 0x100d5ae0
 Kernel::Kernel(IStage* upstream)
-	: IStage(upstream), inStepCode(false), kernelData(new KernelData()), maxBodies(0), maxPoints(0), maxConnectors(0),
-	  profilingKernel(new Profiling::CodeProfiler("Kernel"))
+	: IStage(upstream, NULL), inStepCode(false), kernelData(new KernelData()), maxBodies(0), maxPoints(0),
+	  maxConnectors(0), profilingKernel(new Profiling::CodeProfiler("Kernel"))
 {
 	numKernels++;
 }

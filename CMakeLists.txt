@@ -169,15 +169,20 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/Controller.cpp
   common/app/v8world/Edge.cpp
   common/app/v8world/IMoving.cpp
+  common/app/v8world/GlueJoint.cpp
   common/app/v8world/IPipelined.cpp
   common/app/v8world/IWorldStage.cpp
   common/app/v8world/Joint.cpp
+  common/app/v8world/JointBuilder.cpp
   common/app/v8world/JointStage.cpp
   common/app/v8world/Mechanism.cpp
   common/app/v8world/MotorJoint.cpp
   common/app/v8world/MultiJoint.cpp
   common/app/v8world/Primitive.cpp
   common/app/v8world/RigidJoint.cpp
+  common/app/v8world/RotateJoint.cpp
+  common/app/v8world/SnapJoint.cpp
+  common/app/v8world/WeldJoint.cpp
   common/app/v8world/SpatialHash.cpp
   common/app/v8world/World.cpp
   common/app/util/Timer.cpp
@@ -319,7 +324,7 @@ endfunction()
 # /GS- /fp:fast and full inline expansion are unique to App among the Roblox libraries.
 add_engine_library(app
   DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE
-  OPTIONS /O2 /Ob2 /Oi /Oy /GF /GS- /fp:fast
+  OPTIONS /O2 /Ob2 /Oi /Oy /GF /Gy /GS- /fp:fast
   SOURCES ${OPENRBX_APP_SOURCES}
 )
 

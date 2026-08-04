@@ -20,20 +20,20 @@ public:
 
 	virtual ~IPipelined() {} // vtable+0x00
 
-	IStage* getCurrentStage() const { return currentStage; }
+	bool inPipeline() const { return currentStage != NULL; }
 
-	IStage* getStage(IStage::StageType stageType);
+	IStage* getStage(IStage::StageType stageType) const;
 
 	void putInPipeline(IStage* stage);
 	void removeFromPipeline(IStage* stage);
 	void putInStage(IStage* stage);
 	void removeFromStage(IStage* stage);
 
-	Kernel* getKernel();
+	Kernel* getKernel() const;
 
 	World* getWorld();
 
-	bool downstreamOfStage(IStage* stage);
+	bool downstreamOfStage(IStage* stage) const;
 
 	virtual void putInKernel(Kernel* kernel); // vtable+0x04
 	virtual void removeFromKernel();          // vtable+0x08
@@ -52,18 +52,18 @@ inline World* IPipelined::getWorld()
 
 	IStage* stage;
 
-	if (currentStage->getStageType() == IStage::KERNEL_STAGE) {
-		stage = currentStage->getUpstream();
+	if (currentStage->getStageType() != IStage::KERNEL_STAGE) {
+		stage = currentStage;
 	}
 	else {
-		stage = currentStage;
+		stage = currentStage->getUpstream();
 	}
 
 	return static_cast<IWorldStage*>(stage)->getWorld();
 }
 
 // FUNCTION: WEBSERVICE 0x10118120
-inline bool IPipelined::downstreamOfStage(IStage* stage)
+inline bool IPipelined::downstreamOfStage(IStage* stage) const
 {
 	return currentStage->getStageType() > stage->getStageType();
 }

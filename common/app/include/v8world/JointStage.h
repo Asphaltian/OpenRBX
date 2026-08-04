@@ -4,27 +4,63 @@
 #include "decomp.h"
 #include "v8world/IWorldStage.h"
 
+#include <map>
+#include <set>
+
 namespace RBX {
 
+class ClumpStage;
 class Joint;
 class Primitive;
 
+// VTABLE: WEBSERVICE 0x10247dcc
 // SIZE 0x28
 class JointStage : public IWorldStage
 {
 public:
-	virtual StageType getStageType() const;                                 // vtable+0x04
-	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling); // vtable+0x08
+	typedef std::multimap<Primitive*, Joint*> JointMap;
 
-	virtual void onEdgeAdded(Edge* edge);         // vtable+0x10
-	virtual void onEdgeRemoving(Edge* edge);      // vtable+0x14
-	virtual int getMetric(MetricType metricType); // vtable+0x18
+	JointStage(IStage* upstream, World* world);
 
-	void onJointPrimitiveNulling(Joint* joint, Primitive* primitive);
-	void onJointPrimitiveSet(Joint* joint, Primitive* primitive);
+	// FUNCTION: WEBSERVICE 0x10118810
+	virtual ~JointStage() {} // vtable+0x00
+
+	// SYNTHETIC: WEBSERVICE 0x101188d0
+	// RBX::JointStage::`scalar deleting destructor'
+
+	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	virtual StageType getStageType() { return JOINT_STAGE; } // vtable+0x04
+
+	virtual void onEdgeAdded(Edge* edge);    // vtable+0x10
+	virtual void onEdgeRemoving(Edge* edge); // vtable+0x14
+
+	void onPrimitiveAdded(Primitive* p);
+	void onPrimitiveRemoving(Primitive* p);
+
+	void onJointPrimitiveNulling(Joint* j, Primitive* nulling);
+	void onJointPrimitiveSet(Joint* j, Primitive* p);
 
 private:
-	undefined m_unk0x10[0x28 - 0x10]; // 0x10
+	ClumpStage* getClumpStage();
+
+	void moveEdgeToDownstream(Edge* e);
+	void removeEdgeFromDownstream(Edge* e);
+
+	void moveJointToDownstream(Joint* j);
+	void removeJointFromDownstream(Joint* j);
+
+	bool jointInList(Joint* j);
+	void removeFromList(Joint* j);
+	void insertToList(Joint* j);
+
+	bool pairInMap(Joint* j, Primitive* p);
+	void insertToMap(Joint* j, Primitive* p);
+	void removeFromMap(Joint* j, Primitive* p);
+
+	bool edgeHasPrimitivesDownstream(Edge* e);
+
+	std::set<Joint*> incompleteJoints; // 0x10
+	JointMap jointMap;                 // 0x1c
 };
 
 DECOMP_SIZE_ASSERT(JointStage, 0x28)

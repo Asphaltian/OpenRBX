@@ -16,6 +16,7 @@ class __declspec(novtable) Link
 {
 public:
 	Link();
+	~Link();
 
 	void reset(const CoordinateFrame& parentC, const CoordinateFrame& childC);
 
@@ -42,10 +43,13 @@ protected:
 
 DECOMP_SIZE_ASSERT(Link, 0xcc)
 
+// VTABLE: WEBSERVICE 0x102480b4
 // SIZE 0xd0
 class RevoluteLink : public Link
 {
 public:
+	RevoluteLink() : jointAngle(0.0f) {}
+
 	void setJointAngle(float value)
 	{
 		jointAngle = value;

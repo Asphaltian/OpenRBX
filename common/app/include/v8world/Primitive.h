@@ -79,6 +79,8 @@ public:
 
 	Primitive* getPrimitive(int index) const { return (&prim0)[index]; }
 
+	Primitive* otherPrimitive(const Primitive* primitive) const { return primitive == prim0 ? prim1 : prim0; }
+
 	bool getInEdgeList() const { return inEdgeList; }
 	void setInEdgeList(bool value) { inEdgeList = value; }
 
@@ -215,6 +217,17 @@ public:
 
 	void setSurfaceData(NormalId normalId, const SurfaceData& value);
 	void setSurfaceType(NormalId normalId, SurfaceType surfaceType);
+
+	SurfaceType getSurfaceType(NormalId normalId) const { return surfaceType[normalId]; }
+
+	float getJointK() const { return JointK; }
+
+	const SurfaceData& getSurfaceData(NormalId normalId) const
+	{
+		return surfaceData[normalId] != NULL ? *surfaceData[normalId] : SurfaceData::empty();
+	}
+
+	Controller* getController() const { return controller; }
 
 	CoordinateFrame getGridCorner() const;
 	void setGridCorner(const CoordinateFrame& corner);

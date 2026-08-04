@@ -24,15 +24,20 @@ public:
 		KERNEL_STAGE = 8,
 	};
 
-	IStage(IStage* upstream) : upstream(upstream), downstream(NULL) {}
+	IStage(IStage* upstream, IStage* downstream) : upstream(upstream), downstream(downstream) {}
 
 	// FUNCTION: WEBSERVICE 0x100ab1a0
 	// RBX::IStage::~IStage
 
 	virtual ~IStage() { delete downstream; }
-	virtual StageType getStageType() const = 0;
-	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling) = 0;
-	virtual Kernel* getKernel() = 0;
+	virtual StageType getStageType() = 0;
+
+	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling)
+	{
+		getDownstream()->stepWorld(worldStepId, uiStepId, throttling);
+	}
+
+	virtual Kernel* getKernel() { return getDownstream()->getKernel(); }
 
 	IStage* getUpstream() { return upstream; }
 	IStage* getDownstream() { return downstream; }

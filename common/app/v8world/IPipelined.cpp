@@ -5,7 +5,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1010b9b0
-IStage* IPipelined::getStage(IStage::StageType stageType)
+IStage* IPipelined::getStage(IStage::StageType stageType) const
 {
 	IStage* stage = currentStage;
 
@@ -34,7 +34,7 @@ void IPipelined::removeFromStage(IStage* stage)
 }
 
 // FUNCTION: WEBSERVICE 0x1010ba10
-Kernel* IPipelined::getKernel()
+Kernel* IPipelined::getKernel() const
 {
 	return static_cast<Kernel*>(getStage(IStage::KERNEL_STAGE));
 }

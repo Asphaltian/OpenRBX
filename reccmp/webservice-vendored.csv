@@ -5650,3 +5650,8 @@ address,size,type,symbol
 0x101e7700,,library,??1try_mutex@boost@@QAE@XZ
 0x10136310,0x16,library,??4Matrix3@G3D@@QAEAAV01@ABV01@@Z
 0x10139690,0x80,library,?unitize@Color3@G3D@@QAEMM@Z
+0x10119330,0xb9,library,?insert@?$_Tree@V?$_Tset_traits@PAVEdge@RBX@@U?$less@PAVEdge@RBX@@@std@@V?$allocator@PAVEdge@RBX@@@4@$0A@@std@@@std@@QAE?AU?$pair@Viterator@?$_Tree@V?$_Tset_traits@PAVEdge@RBX@@U?$less@PAVEdge@RBX@@@std@@V?$allocator@PAVEdge@RBX@@@4@$0A@@std@@@std@@_N@2@ABQAVEdge@RBX@@@Z
+0x101194c0,0x6a,library,?erase@?$_Tree@V?$_Tset_traits@PAVJoint@RBX@@U?$less@PAVJoint@RBX@@@std@@V?$allocator@PAVJoint@RBX@@@4@$0A@@std@@@std@@QAEIABQAVJoint@RBX@@@Z
+0x100621a0,0x3d,library,??$_Distance2@Viterator@?$_Tree@V?$_Tset_traits@PAVEdge@RBX@@U?$less@PAVEdge@RBX@@@std@@V?$allocator@PAVEdge@RBX@@@4@$0A@@std@@@std@@I@std@@YAXViterator@?$_Tree@V?$_Tset_traits@PAVEdge@RBX@@U?$less@PAVEdge@RBX@@@std@@V?$allocator@PAVEdge@RBX@@@4@$0A@@std@@@0@0AAIUbidirectional_iterator_tag@0@@Z
+0x100cfc00,0xcb,library,?erase@?$_Tree@V?$_Tset_traits@PAVEdge@RBX@@U?$less@PAVEdge@RBX@@@std@@V?$allocator@PAVEdge@RBX@@@4@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z
+0x100d0c40,0x37,library,?_Buynode@?$_Tree@V?$_Tset_traits@PAVJoint@RBX@@U?$less@PAVJoint@RBX@@@std@@V?$allocator@PAVJoint@RBX@@@4@$0A@@std@@@std@@IAEPAU_Node@?$_Tree_nod@V?$_Tset_traits@PAVJoint@RBX@@U?$less@PAVJoint@RBX@@@std@@V?$allocator@PAVJoint@RBX@@@4@$0A@@std@@@2@XZ

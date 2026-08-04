@@ -71,12 +71,18 @@ DECOMP_SIZE_ASSERT(TreeStage, 0x30)
 class ClumpStage : public IWorldStage
 {
 public:
-	virtual StageType getStageType() const;                                 // vtable+0x04
-	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling); // vtable+0x08
+	ClumpStage(IStage* upstream, World* world);
 
-	virtual void onEdgeAdded(Edge* edge);         // vtable+0x10
-	virtual void onEdgeRemoving(Edge* edge);      // vtable+0x14
-	virtual int getMetric(MetricType metricType); // vtable+0x18
+	virtual StageType getStageType(); // vtable+0x04
+
+	// FUNCTION: WEBSERVICE 0x101187e0 FOLDED
+	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling) // vtable+0x08
+	{
+		getDownstream()->stepWorld(worldStepId, uiStepId, throttling);
+	}
+
+	void onPrimitiveAdded(Primitive* p);
+	void onPrimitiveRemoving(Primitive* p);
 
 	void process();
 

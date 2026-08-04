@@ -27,7 +27,7 @@ public:
 
 	virtual ~Kernel(); // vtable+0x00
 
-	virtual StageType getStageType() const { return KERNEL_STAGE; }
+	virtual StageType getStageType() { return KERNEL_STAGE; }
 
 	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling);
 

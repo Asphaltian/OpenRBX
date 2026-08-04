@@ -21,9 +21,15 @@ public:
 		MAX_TREE_DEPTH = 3,
 	};
 
-	virtual void onEdgeAdded(Edge* edge);             // vtable+0x10
-	virtual void onEdgeRemoving(Edge* edge);          // vtable+0x14
-	virtual int getMetric(MetricType metricType) = 0; // vtable+0x18
+	IWorldStage(IStage* upstream, IStage* downstream, World* world) : IStage(upstream, downstream), world(world) {}
+
+	virtual void onEdgeAdded(Edge* edge);    // vtable+0x10
+	virtual void onEdgeRemoving(Edge* edge); // vtable+0x14
+
+	virtual int getMetric(MetricType metricType) { return getDownstreamWS()->getMetric(metricType); } // vtable+0x18
+
+	IWorldStage* getUpstreamWS() { return static_cast<IWorldStage*>(getUpstream()); }
+	IWorldStage* getDownstreamWS() { return static_cast<IWorldStage*>(getDownstream()); }
 
 	World* getWorld() { return world; }
 

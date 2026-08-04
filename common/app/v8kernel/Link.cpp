@@ -50,4 +50,8 @@ void Link::reset(const CoordinateFrame& parentC, const CoordinateFrame& childC)
 	childCoordInverse = childC.inverse();
 }
 
+Link::~Link()
+{
+}
+
 } // namespace RBX

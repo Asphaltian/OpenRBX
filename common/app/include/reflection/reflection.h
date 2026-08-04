@@ -225,6 +225,13 @@ template <class T, const char* sName, class Base>
 class Described : public Base
 {
 public:
+	Described() {}
+
+	template <class U>
+	Described(U* joint) : Base(joint)
+	{
+	}
+
 	static ClassDescriptor& classDescriptor()
 	{
 		static ClassDescriptor d(Base::classDescriptor(), sName);

@@ -122,6 +122,18 @@ bool lighterJoint(Joint* joint0, Joint* joint1)
 
 } // namespace JointSort
 
+// STUB: WEBSERVICE 0x1011b740
+DECOMP_NOINLINE void ClumpStage::onPrimitiveAdded(Primitive* p)
+{
+	STUB(0x1011b740);
+}
+
+// STUB: WEBSERVICE 0x1011b840
+DECOMP_NOINLINE void ClumpStage::onPrimitiveRemoving(Primitive* p)
+{
+	STUB(0x1011b840);
+}
+
 // FUNCTION: WEBSERVICE 0x1011ba00
 Primitive* TreeStage::heavyParent(int index, Primitive* primitive, Joint*& heaviest, int& heaviestIndex)
 {
@@ -152,7 +164,7 @@ Primitive* TreeStage::heavyParent(int index, Primitive* primitive, Joint*& heavi
 // FUNCTION: WEBSERVICE 0x1011ba80
 void TreeStage::cleanAssembly(Assembly* assembly)
 {
-	if (assembly->getCurrentStage() == NULL) {
+	if (!assembly->inPipeline()) {
 		assembly->putInPipeline(this);
 	}
 
@@ -285,6 +297,18 @@ void TreeStage::dirtyAssemblies(Joint* joint)
 void TreeStage::destroyAssembly(Assembly* assembly)
 {
 	STUB(0x1011c0b0);
+}
+
+// FUNCTION: WEBSERVICE 0x10108040 FOLDED
+IStage::StageType ClumpStage::getStageType()
+{
+	return CLUMP_STAGE;
+}
+
+// STUB: WEBSERVICE 0x1011c3d0
+ClumpStage::ClumpStage(IStage* upstream, World* world) : IWorldStage(upstream, NULL, world)
+{
+	STUB(0x1011c3d0);
 }
 
 // STUB: WEBSERVICE 0x1011c440

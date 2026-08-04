@@ -7,10 +7,15 @@
 
 namespace RBX {
 
+// VTABLE: WEBSERVICE 0x102480bc
 // SIZE 0x98
 class MotorJoint : public Joint
 {
 public:
+	MotorJoint();
+
+	virtual ~MotorJoint(); // vtable+0x00
+
 	// FUNCTION: WEBSERVICE 0x1009add0
 	static bool isMotorJoint(Edge* edge)
 	{
@@ -18,6 +23,10 @@ public:
 	}
 
 	virtual JointType getJointType() const; // vtable+0x14
+
+	virtual bool isAligned(); // vtable+0x24
+
+	virtual void stepUi(int frameCount); // vtable+0x30
 
 	RevoluteLink* resetLink();
 
