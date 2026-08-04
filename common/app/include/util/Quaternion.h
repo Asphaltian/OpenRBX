@@ -4,6 +4,8 @@
 #include <G3D/Matrix3.h>
 #include <G3D/Vector3.h>
 #include <G3D/g3dmath.h>
+#include <algorithm>
+#include <cmath>
 
 namespace RBX {
 
@@ -28,6 +30,11 @@ public:
 		return Quaternion(x + other.x, y + other.y, z + other.z, w + other.w);
 	}
 
+	Quaternion operator-(const Quaternion& other) const
+	{
+		return Quaternion(x - other.x, y - other.y, z - other.z, w - other.w);
+	}
+
 	// FUNCTION: WEBSERVICE 0x10120fb0
 	Quaternion operator*(const Quaternion& other) const
 	{
@@ -41,7 +48,7 @@ public:
 
 	const G3D::Vector3& imag() const { return *reinterpret_cast<const G3D::Vector3*>(this); }
 
-	Quaternion operator*(float value) const { return Quaternion(x * value, y * value, z * value, w * value); }
+	Quaternion operator*(float value) const { return Quaternion(value * x, value * y, value * z, value * w); }
 
 	Quaternion& operator+=(const Quaternion& other)
 	{
@@ -70,18 +77,8 @@ public:
 	// FUNCTION: WEBSERVICE 0x10121060
 	void normalize() { *this *= 1.0f / magnitude(); }
 
-	float maxComponent() const
-	{
-		float aw = G3D::abs(w);
-		float az = G3D::abs(z);
-		float ay = G3D::abs(y);
-		float ax = G3D::abs(x);
-
-		float hi = aw > az ? aw : az;
-		float lo = ay > ax ? ay : ax;
-
-		return lo < hi ? hi : lo;
-	}
+	// FUNCTION: WEBSERVICE 0x10126ba0
+	float maxComponent() const { return std::max(std::max(fabsf(x), fabsf(y)), std::max(fabsf(z), fabsf(w))); }
 };
 
 } // namespace RBX

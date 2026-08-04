@@ -34,6 +34,7 @@ public:
 	World* getWorld();
 
 	bool downstreamOfStage(IStage* stage) const;
+	bool inOrDownstreamOfStage(IStage* stage) const;
 
 	virtual void putInKernel(Kernel* kernel); // vtable+0x04
 	virtual void removeFromKernel();          // vtable+0x08
@@ -66,6 +67,11 @@ inline World* IPipelined::getWorld()
 inline bool IPipelined::downstreamOfStage(IStage* stage) const
 {
 	return currentStage->getStageType() > stage->getStageType();
+}
+
+inline bool IPipelined::inOrDownstreamOfStage(IStage* stage) const
+{
+	return currentStage->getStageType() >= stage->getStageType();
 }
 
 } // namespace RBX

@@ -84,6 +84,9 @@ public:
 	bool getInEdgeList() const { return inEdgeList; }
 	void setInEdgeList(bool value) { inEdgeList = value; }
 
+	Sim::EdgeState getEdgeState() const { return edgeState; }
+	void setEdgeState(Sim::EdgeState value) { edgeState = value; }
+
 private:
 	Sim::EdgeState edgeState; // 0x08
 	Primitive* prim0;         // 0x0c

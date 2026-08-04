@@ -77,6 +77,12 @@ Assembly* Assembly::getRootAssembly()
 	return parent != NULL ? parent->getRootAssembly() : this;
 }
 
+// FUNCTION: WEBSERVICE 0x10102ac0 FOLDED
+const Assembly* Assembly::getRootAssemblyConst() const
+{
+	return parent != NULL ? parent->getRootAssemblyConst() : this;
+}
+
 // FUNCTION: WEBSERVICE 0x10102ad0
 Joint* Assembly::getJointToParent(Primitive* primitive)
 {
@@ -115,10 +121,16 @@ void Assembly::removeFromKernel()
 	IPipelined::removeFromKernel();
 }
 
-// FUNCTION: WEBSERVICE 0x10102b60
+// FUNCTION: WEBSERVICE 0x10102b60 FOLDED
 Primitive* Assembly::getAssemblyPrimitive()
 {
 	return getRootAssembly()->rootPrimitive;
+}
+
+// FUNCTION: WEBSERVICE 0x10102b60 FOLDED
+const Primitive* Assembly::getAssemblyPrimitiveConst() const
+{
+	return getRootAssemblyConst()->rootPrimitive;
 }
 
 // FUNCTION: WEBSERVICE 0x10102b80

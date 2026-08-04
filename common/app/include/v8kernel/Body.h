@@ -108,6 +108,7 @@ public:
 
 	void accumulateForce(const Vector3& force, const Vector3& worldPos);
 	void accumulateTorque(const Vector3& torque);
+	void resetAccumulators();
 
 	bool getCanThrottle() const { return canThrottle; }
 
@@ -169,6 +170,14 @@ inline void Body::accumulateTorque(const Vector3& torque)
 
 	if (simBody != NULL) {
 		simBody->accumulateTorque(torque);
+	}
+}
+
+inline void Body::resetAccumulators()
+{
+	SimBody* simBody = getRootSimBody();
+	if (simBody != NULL) {
+		simBody->resetAccumulators();
 	}
 }
 

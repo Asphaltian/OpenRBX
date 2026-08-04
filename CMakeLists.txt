@@ -131,6 +131,7 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Quaternion.cpp
   common/app/util/Profiling.cpp
   common/app/util/Rect.cpp
+  common/app/util/RunningAverage.cpp
   common/app/util/standardout.cpp
   common/app/v8kernel/Body.cpp
   common/app/util/Debug.cpp
@@ -166,6 +167,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/Clump2.cpp
   common/app/v8world/ClumpStage2.cpp
   common/app/v8world/ContactManager.cpp
+  common/app/v8world/Contact.cpp
   common/app/v8world/Controller.cpp
   common/app/v8world/Edge.cpp
   common/app/v8world/IMoving.cpp
@@ -179,6 +181,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/MotorJoint.cpp
   common/app/v8world/MultiJoint.cpp
   common/app/v8world/Primitive.cpp
+  common/app/v8world/SimJobStage.cpp
   common/app/v8world/SleepStage2.cpp
   common/app/v8world/RigidJoint.cpp
   common/app/v8world/RotateJoint.cpp

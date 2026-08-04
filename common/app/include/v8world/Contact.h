@@ -12,6 +12,14 @@ class Contact : public Edge
 public:
 	int& steppingIndexFunc() const { return const_cast<int&>(steppingIndex); }
 
+	bool step(int uiStepId);
+
+protected:
+	virtual void deleteAllConnectors() = 0; // vtable+0x14
+	virtual bool stepContact() = 0;         // vtable+0x18
+
+public:
+
 private:
 	static bool ignoreBool;
 

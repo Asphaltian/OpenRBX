@@ -3,7 +3,7 @@
 
 #include "decomp.h"
 #include "util/ComputeProp.h"
-#include "util/Quaternion.h"
+#include "util/RunningAverage.h"
 #include "v8world/IPipelined.h"
 
 #include <G3D/Vector3.h>
@@ -38,34 +38,19 @@ enum AssemblyState
 
 } // namespace Sim
 
-// SIZE 0x1c
-class RunningAverageState
-{
-public:
-	RunningAverageState() : position(0, 0, 0)
-	{
-		angles.x = 0;
-		angles.y = 0;
-		angles.z = 0;
-		angles.w = 1;
-	}
-
-private:
-	Vector3 position;  // 0x00
-	Quaternion angles; // 0x0c
-};
-
-DECOMP_SIZE_ASSERT(RunningAverageState, 0x1c)
-
 // SIZE 0x24
 class SleepInfo
 {
 public:
 	SleepInfo();
 
-	Sim::AssemblyState state; // 0x00
-
 private:
+	friend class Assembly;
+	friend class SleepStage;
+
+	static float sleepTolerance() { return 0.02f; }
+
+	Sim::AssemblyState state;                // 0x00
 	int sleepCount;                          // 0x04
 	RunningAverageState runningAverageState; // 0x08
 };
@@ -90,7 +75,15 @@ public:
 	EdgeIterator externalEdgeEnd();
 
 	Assembly* getRootAssembly();
+	const Assembly* getRootAssemblyConst() const;
 	Primitive* getAssemblyPrimitive();
+	const Primitive* getAssemblyPrimitiveConst() const;
+
+	SleepInfo* getSleepInfo() { return sleepInfo; }
+	void setSleepInfo(SleepInfo* value) { sleepInfo = value; }
+
+	float getMaxRadius() { return maxRadius; }
+	bool getCanSleep() { return canSleep; }
 
 	static Joint* getJointToParent(Primitive* primitive);
 

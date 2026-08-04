@@ -57,6 +57,10 @@ public:
 
 	Edge* operator*() const { return edge; }
 
+	bool operator==(const EdgeIterator& other) const { return primitive == other.primitive && edge == other.edge; }
+
+	bool operator!=(const EdgeIterator& other) const { return !(*this == other); }
+
 private:
 	static Edge* getNextExternalUtil(Primitive* primitive, Edge* edge);
 

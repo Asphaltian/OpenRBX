@@ -22,6 +22,9 @@
 
 namespace RBX {
 
+// GLOBAL: WEBSERVICE 0x102f9959
+bool Primitive::disableSleep = false;
+
 // FUNCTION: WEBSERVICE 0x100a77d0
 void Primitive::setSizeMultiplier(unsigned int multiplier)
 {
