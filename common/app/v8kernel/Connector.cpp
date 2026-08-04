@@ -188,4 +188,10 @@ void ContactConnector::computeForce(const float dt, bool throttling)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1011edb0
+bool PointToPointBreakConnector::getBroken()
+{
+	return broken;
+}
+
 } // namespace RBX

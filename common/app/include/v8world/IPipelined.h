@@ -52,11 +52,11 @@ inline World* IPipelined::getWorld()
 
 	IStage* stage;
 
-	if (currentStage->getStageType() == IStage::KERNEL_STAGE) {
-		stage = currentStage->getUpstream();
+	if (currentStage->getStageType() != IStage::KERNEL_STAGE) {
+		stage = currentStage;
 	}
 	else {
-		stage = currentStage;
+		stage = currentStage->getUpstream();
 	}
 
 	return static_cast<IWorldStage*>(stage)->getWorld();

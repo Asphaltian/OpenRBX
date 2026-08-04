@@ -71,6 +71,11 @@ DECOMP_SIZE_ASSERT(RotateConnector, 0x34)
 class PointToPointBreakConnector : public Connector
 {
 public:
+	PointToPointBreakConnector(Point* point0, Point* point1, float k, float breakForce)
+		: point0(point0), point1(point1), k(k), breakForce(breakForce), broken(false)
+	{
+	}
+
 	virtual void computeForce(float dt, bool throttling); // vtable+0x04
 	virtual bool getBroken();                             // vtable+0x0c
 	virtual float potentialEnergy();                      // vtable+0x10
@@ -97,6 +102,11 @@ DECOMP_SIZE_ASSERT(PointToPointBreakConnector, 0x1c)
 class NormalBreakConnector : public PointToPointBreakConnector
 {
 public:
+	NormalBreakConnector(Point* point0, Point* point1, float k, float breakForce, NormalId normalIdBody0)
+		: PointToPointBreakConnector(point0, point1, k, breakForce), normalIdBody0(normalIdBody0)
+	{
+	}
+
 	virtual void computeForce(float dt, bool throttling); // vtable+0x04
 
 private:
@@ -105,6 +115,7 @@ private:
 
 DECOMP_SIZE_ASSERT(NormalBreakConnector, 0x20)
 
+// VTABLE: WEBSERVICE 0x1023c7f4
 // SIZE 0x50
 class ContactConnector : public Connector
 {

@@ -558,6 +558,13 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1012cef0
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::getClassName
 	// clang-format on
+	FactoryProduct() {}
+
+	template <class U>
+	FactoryProduct(U* joint) : Base(joint)
+	{
+	}
+
 	const Creator& getCreator() const { return creator; }
 
 	static const Name& className() { return Name::declare<sName>(); }
@@ -578,6 +585,13 @@ template <class Base, const char* sName>
 class NonFactoryProduct : public Base
 {
 public:
+	NonFactoryProduct() {}
+
+	template <class U>
+	NonFactoryProduct(U* joint) : Base(joint)
+	{
+	}
+
 	static const Name& className() { return Name::declare<sName>(); }
 
 	virtual const Name& getClassName() const { return className(); }

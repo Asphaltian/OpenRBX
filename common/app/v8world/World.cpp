@@ -129,4 +129,16 @@ void World::onPrimitiveTouched(Primitive* p0, Primitive* p1)
 	STUB(0x100cf510);
 }
 
+// STUB: WEBSERVICE 0x100d0020
+DECOMP_NOINLINE void World::insertJoint(Joint* joint)
+{
+	STUB(0x100d0020);
+}
+
+// STUB: WEBSERVICE 0x100d0420
+DECOMP_NOINLINE void World::removeJoint(Joint* joint)
+{
+	STUB(0x100d0420);
+}
+
 } // namespace RBX

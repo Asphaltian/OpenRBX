@@ -216,6 +216,17 @@ public:
 	void setSurfaceData(NormalId normalId, const SurfaceData& value);
 	void setSurfaceType(NormalId normalId, SurfaceType surfaceType);
 
+	SurfaceType getSurfaceType(NormalId normalId) const { return surfaceType[normalId]; }
+
+	float getJointK() const { return JointK; }
+
+	const SurfaceData& getSurfaceData(NormalId normalId) const
+	{
+		return surfaceData[normalId] != NULL ? *surfaceData[normalId] : SurfaceData::empty();
+	}
+
+	Controller* getController() const { return controller; }
+
 	CoordinateFrame getGridCorner() const;
 	void setGridCorner(const CoordinateFrame& corner);
 
