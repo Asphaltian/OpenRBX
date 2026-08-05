@@ -5345,6 +5345,7 @@ address,size,type,symbol
 0x101e60f5,0x45,library,??0CAtlComModule@ATL@@QAE@XZ
 0x101e614c,0x5,library,??_U@YAPAXI@Z
 0x101e6176,0x5,library,??4_Init_locks@std@@QAEAAV01@ABV01@@Z
+0x101e6290,,library,??0recursive_mutex@boost@@QAE@XZ
 0x101e6340,,library,?call_once@boost@@YAXP6AXXZAAJ@Z
 0x101e76e0,,library,??0mutex@boost@@QAE@XZ
 0x101e7700,,library,??1mutex@boost@@QAE@XZ

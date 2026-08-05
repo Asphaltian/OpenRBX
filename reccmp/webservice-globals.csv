@@ -3521,6 +3521,7 @@ address,type,symbol
 0x102f57d4,global,?event_LightingChanged@Lighting@RBX@@2V?$SignalDesc@VLighting@RBX@@$$A6AX_N@Z@Reflection@2@A
 0x102f59a1,global,?lockedDown@ClassDescriptor@Reflection@RBX@@2_NA
 0x102f59a4,global,s___RBX::Reflection::sync
+0x102f59b0,global,??_B?1??sync@Reflection@RBX@@YAAAVrecursive_mutex@boost@@XZ@51
 0x102f59b4,global,type___RBX::Reflection::RefType::singleton<RBX::Instance
 0x102f59c4,global,??_B?1???$singleton@PAVInstance@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102f59c8,global,?staticData@?$GuidItem@VInstance@RBX@@@RBX@@0PAUStaticData@12@A

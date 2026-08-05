@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "reflection/descriptor.h"
+#include "reflection/member.h"
 
 #include <vector>
 
@@ -12,23 +13,6 @@ namespace Reflection {
 class FunctionDescriptor;
 class PropertyDescriptor;
 class SignalDescriptor;
-
-// SIZE 0x24
-template <class T>
-class MemberDescriptorContainer
-{
-public:
-	typedef std::vector<T*> Collection;
-
-	void declare(T& descriptor);
-
-protected:
-	MemberDescriptorContainer(MemberDescriptorContainer* base) : base(base) {}
-
-	Collection descriptors;                                    // 0x00
-	std::vector<MemberDescriptorContainer*> derivedContainers; // 0x10
-	MemberDescriptorContainer* base;                           // 0x20
-};
 
 // SYNTHETIC: WEBSERVICE 0x100478a0
 // RBX::Reflection::ClassDescriptor::`scalar deleting destructor'

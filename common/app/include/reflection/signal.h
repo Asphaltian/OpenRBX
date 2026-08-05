@@ -29,7 +29,7 @@ private:
 DECOMP_SIZE_ASSERT(SignalInstance, 0x0c)
 
 // SIZE 0x24
-class SignalDescriptor : public MemberDescriptor
+class SignalDescriptor
 {
 public:
 	SignalDescriptor() {}
@@ -37,7 +37,7 @@ public:
 	SignalInstance* findSignalInstance(const SignalSource* source) const;
 
 private:
-	undefined m_unk0x10[0x24 - 0x10]; // 0x10
+	undefined m_unk0x00[0x24 - 0x00]; // 0x00
 };
 
 DECOMP_SIZE_ASSERT(SignalDescriptor, 0x24)

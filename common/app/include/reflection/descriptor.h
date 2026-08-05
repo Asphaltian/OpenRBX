@@ -5,9 +5,18 @@
 #include "util/Name.h"
 
 #include <boost/noncopyable.hpp>
+#include <boost/thread/recursive_mutex.hpp>
 
 namespace RBX {
 namespace Reflection {
+
+// FUNCTION: WEBSERVICE 0x10047470
+inline DECOMP_NOINLINE boost::recursive_mutex& sync()
+{
+	static boost::recursive_mutex s;
+
+	return s;
+}
 
 // SYNTHETIC: WEBSERVICE 0x10005990
 // RBX::Reflection::Descriptor::`scalar deleting destructor'
@@ -26,6 +35,11 @@ protected:
 };
 
 DECOMP_SIZE_ASSERT(Descriptor, 0x08)
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10221680
+// `RBX::Reflection::sync'::`2'::`dynamic atexit destructor for 's''
+// clang-format on
 
 } // namespace Reflection
 } // namespace RBX

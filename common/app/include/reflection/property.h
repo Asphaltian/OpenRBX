@@ -6,26 +6,23 @@
 namespace RBX {
 namespace Reflection {
 
-// SIZE 0x10
-class MemberDescriptor
-{
-protected:
-	MemberDescriptor() {}
-
-private:
-	undefined m_unk0x00[0x10 - 0x00]; // 0x00
-};
-
-DECOMP_SIZE_ASSERT(MemberDescriptor, 0x10)
-
 // SIZE 0x18
-class PropertyDescriptor : public MemberDescriptor
+class PropertyDescriptor
 {
+public:
+	enum Functionality
+	{
+		LEGACY = 0,
+		UI = 1,
+		STREAMING = 4,
+		STANDARD = 5,
+	};
+
 protected:
 	PropertyDescriptor() {}
 
 private:
-	undefined m_unk0x10[0x18 - 0x10]; // 0x10
+	undefined m_unk0x00[0x18 - 0x00]; // 0x00
 };
 
 DECOMP_SIZE_ASSERT(PropertyDescriptor, 0x18)
