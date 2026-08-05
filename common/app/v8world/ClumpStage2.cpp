@@ -397,10 +397,12 @@ void ClumpStage::process()
 	getTreeStage()->process();
 }
 
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void ClumpStage::onPrimitiveCanCollideChanged(Primitive* p)
 {
 }
 
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void ClumpStage::onMotorAngleChanged(MotorJoint* motorJoint)
 {
 }
