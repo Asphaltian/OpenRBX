@@ -54,6 +54,25 @@ Both files come out of the RBXGS installer on archive.org, extracted with [lessm
 
 Load the PDB into Ghidra before writing anything. Reading the decompiler's pseudocode is faster than inferring structure from raw bytes and it recovers control flow a byte diff will not show.
 
+### Feeding Ghidra Back
+
+Ghidra's PDB loader takes function names and forgets everything else, so every local in
+every function reads `local_XX` and every argument `param_N` until something puts the
+recorded names there. Push them once and the decompiler output is readable for good;
+re-deriving them from disassembly per function is the single most wasteful habit
+available. The plugin answers its MCP tool names as HTTP paths on its own port, which is
+what makes a bulk push scriptable when in-editor scripting is unavailable.
+
+MSVC records `S_BPREL32` against its own virtual frame base, and that base does not agree
+with Ghidra's entry-relative stack offsets. Do not assume the difference: vote it per
+function by counting how many recorded offsets land on slots Ghidra already has, and take
+the delta that wins. Getting this wrong renames real slots to unrelated names silently.
+
+`reccmp-ghidra-import` pushes the other direction, our matched entities into the project,
+and the CMake integration only creates its target once the project path and file name
+cache variables are set. It drives Ghidra headless, so the GUI has to release the project
+lock first.
+
 ### Querying the PDB
 
 Load every cvdump section into one SQLite database and query that. Read the MSF container directly when a question needs a stream cvdump does not print. Extract our own `build/WebService.pdb` the same way and diff the two class by class for a work list of size, offset and signature mismatches.
@@ -78,7 +97,9 @@ Never guess a path, a name, an offset or an enum value. Each of these is recorde
 - **Method constness** resolves through the `This type` `LF_POINTER` to either the class or an `LF_MODIFIER const`. It costs no instruction but it is recorded, and it changes what MSVC's alias analysis may assume.
 - **LINES** maps an address to the file it came from and places a definition even when every call is inlined away. A header's records cover its own out-of-line copy; an inlined expansion is attributed to the **call site**, not to the callee, so a caller whose records never leave its `.cpp` still inlines header code freely. MSVC 8 has no `S_INLINESITE`, and a probe build settles this in three minutes when a helper's home is in doubt.
 - **`reccmp-cvdump -m -seccontrib`** maps any address to the object that contributed it. It is the only way to place a namespace-scope global, which reaches the PDB as an `S_PUB32` with no module.
-- **`S_BPREL32`** names every stack local and gives its frame offset. Declaration order cannot be read back from it, because MSVC lays locals out by size.
+- **`S_BPREL32`** names every stack local and gives its frame offset. Declaration order cannot be read back from it, because MSVC lays locals out by size. Anchor the offsets on a local the disassembly already identifies and the rest of the frame reads straight off, which settles in one query what a spelling sweep cannot settle at all. Slots are shared between locals whose lifetimes do not overlap, so one offset carrying several names is normal and says nothing about scope.
+- **Parameter names are recoverable and positional.** The recorded entries with a positive offset, in offset order, are the argument list; a hidden sret slot carries no name and drops out of its own accord. Renaming to them is mechanical, but four things make a textual rename wrong and each fails silently: a slot MSVC shared between disjoint lifetimes carries several names and any of them is already correct; a variadic member function is `__cdecl`, so `this` arrives as a stack parameter; the recorded names are frequently a permutation of ours, so a swap applied one side at a time collapses both onto one name; and a constructor's `member(param)` initialiser, a member reached through `.` or `->`, and any spelling the body already uses must all be left alone.
+- **Where a class is declared follows from the file its in-class inline functions are attributed to.** A class cannot be declared above a type it uses, so a comparator or nested helper whose records land in the `.cpp` pins its whole dependent chain there too, however natural the header looks.
 - **`S_FRAMEPROC`** carries `inl_specified` (whether the original wrote the `inline` keyword) and `wasinlined` (whether the callee was ever expanded anywhere). `wasinlined` answers in one query what a spelling sweep costs a build each.
 - **`S_FRAMEPROC` also carries `inlasm`,** set on the 93 functions that reached inline assembly. It is the only witness that a body no spelling reproduces is expanding an `__asm` helper rather than doing something clever.
 - **The raw string table** holds 2,001 Roblox source paths, readable straight out of the file. LINES names only files that contributed line records, so a header full of declarations is missing from it; the string table is the authority on whether a header exists. Every path there is lowercased.
@@ -184,13 +205,15 @@ Each of these cost a round trip. Keep the sources clean and leave the reasoning 
 ### Float compares and x87
 
 - **`a > b` and `!(a <= b)` are not the same compare.** The direct `>` emits the unordered-safe `test ah,5 / jp`; the negated form emits `test ah,1 / je`.
-- **The operator decides which side loads first**, not the operands. `<` and `<=` load the right operand into st(0); `>` and `>=` load the left. Settle the spelling from this before looking at the jump condition.
+- **A memory-to-memory compare loads the right operand into st(0) whichever way it is spelled,** so the load says nothing about the operator and the flag test says everything: `>` emits `test ah,5 / jp`, `<` emits `test ah,0x41 / jne`. Read the operand order off the load and the direction off the test.
+- **A compare whose loaded side is also stored uses `fcom` rather than `fcomp`,** which pins that side to st(0) regardless of the operator. Where one arm of a symmetric pair of tests loads the opposite side from its sibling, that is the reason, not a different spelling.
 - **MSVC reorders the terms of an `&&` chain of float compares.** Write the source in the order the binary tests them.
 - **A member compared against a parameter stays in memory** when written `member != value`, giving `fcom`. The reverse spelling loads both and needs `fucom`.
 - **`std::swap(a, b)` loads `a` into st(0) first,** so argument order is recoverable from which member the binary loads first.
 - **`std::min` and `std::max` return a reference,** visible as a `lea` of both candidates and a deref. Suppress `windows.h`'s `min` macro or the comparison compiles inline and nothing lines up. The two candidates land in declaration order.
 - **Locals are pushed in declaration order.** Getting the order wrong leaves an extra value on the x87 stack and shifts every later `st(n)` operand, which reads as a large diff for a one-line cause.
 - **A literal one ULP wrong reads as a naming problem.** When reccmp fails to resolve one side's operand, read the constant out of the image; a constant it renders on both sides is already proven equal.
+- **`x = x * -1.0f` is not `x = -x`.** The multiply hoists the constant into an x87 register kept live across the enclosing loops and spends one `fmul st(n), st(0)` per flip; the unary negate emits `fchs`, which only reaches st(0) and so drags an `fxch` in with it. A run of sign flips at different stack depths is the multiply.
 - **`RBX::Math::sign` returns `float`.** `G3D::sign` returns double, which loads a qword where the float one loads a dword.
 - **Every float to int conversion goes through `G3D::iRound`,** which is `lrintf` in `g3dmath.h`, an `__inline` spelling `fld`/`fistp`. A C cast lowers to `call __ftol2_sse` and no spelling of it will ever match. The float overload loads a dword, so the argument has to reach it as a `float`: `float f = floor(x);` then `iRound(f)` gives `fstp dword`, reload, `fistp`. The `inlasm` flag names the thirteen App and RbxView functions that use it.
 
@@ -221,11 +244,15 @@ Where the line records show lines that generate no code, the original named some
 - **Which constant a callee-saved register holds counts that literal's uses.** Where the original keeps 0 in `ebx` and spells 1 as an immediate and ours does the reverse, an argument is wrong somewhere and the allocator is not the explanation. `World::step` sat at 65 until its two inner `Profiling::Mark` objects took the `false` the outer one does not.
 - **The frame tells a named local from a parameter copy where the store cannot.** MSVC packs a call's temporaries together and puts the register-spill slot below them, so two bodies that are instruction for instruction identical with one pair of 4-byte slots swapped differ only in whether the value reaching the callee was named. `World::destroyJoints` sat at 90.77 through eight spellings of its loop and its condition until the ignore-group test became a helper holding its own null check.
 - **A pure permutation of `ebx`, `ebp`, `esi` and `edi` means a local is missing.** Where the two bodies are instruction for instruction identical and only the callee-saved assignment differs, the original named one more value; the extra name re-ranks the allocator's candidates and the whole assignment falls into place. Four of `SpatialHash.cpp`'s functions failed this way and each took exactly one name: the `Assembly*` between the accessor and the test, the `SpatialNode*` between `findNode` and `destroyNode`, the old bucket head before it is relinked. Do not read it as a preference the compiler is free to make.
+- **A returned aggregate read through `eax` was never named.** MSVC addresses a call's hidden return slot through the pointer the callee leaves in `eax` only while the value stays a pure temporary; a named local, and a `const T&` bound to it just the same, moves every read to `esp`. So an original that reads two or three members off `[eax]` is feeding the call result straight into another inline, and a file-static helper that is expanded at every site leaves no symbol, no line records and no contribution row: its absence from the PDB is not evidence it was not written.
 - **Naming a temporary the callee takes by const reference changes its x87 drain.** `f(AABox(lo, hi))` and `AABox box(lo, hi); f(box)` compute the same six products in the same order and then spill them with a different `fxch` schedule. A named local of a class type need not reach `S_BPREL32`, so its absence from the local list does not rule the spelling out.
 - **A leading underscore on a parameter is the strongest tell there is,** because it exists so the body can bind the unprefixed name.
 - **Alias only what the type records name an accessor for.** An alias over a member reached through its own accessor is a real lever; the identical trick on a plain member can cost double figures.
 - **Aliases leave no `S_BPREL32` record,** so an empty local list never rules them out. The list is still authoritative for what did get a stack slot.
 - **A named local can also be wrong.** Two loops with identical shape can want opposite answers, so read the record per function and change one loop at a time.
+- **Declaration order between two symmetric values decides which callee-saved register each gets,** one pair per swap. Where the two bodies differ only in that a pair of registers is exchanged, swap the two declarations rather than rewriting the statement. Index one before index zero is common, because the original wrote the argument list and the compiler evaluated it right to left.
+- **Where a declaration sits decides when its value is loaded,** to the instruction. Moving one declaration between two others moves its load into that slot, so a value loaded too late in ours is a name written too late, not an allocator preference.
+- **The frame size bounds what locals can exist.** A frame with no room for the class type the obvious source would need proves the original named scalars and wrote the arithmetic out. No spelling of a call on that class type will ever match, because the vendored inline fixes an evaluation order the scalars do not have.
 - **An `add reg, offset` ahead of a loop is not evidence of a source alias.** MSVC strength-reduces a member subobject used repeatedly in a loop on its own, and writing the reference can stop a trivial accessor inlining, turning the loop head into a call.
 - **Where a callee stores its result decides its caller's register allocation.** A function that already matches is still worth respelling when its caller does not.
 
@@ -240,9 +267,13 @@ Where the line records show lines that generate no code, the original named some
 - **A stub's register footprint reaches its caller.** MSVC 8 tracks which registers a callee in the same translation unit clobbers, so a caller of a one-store stub keeps `this` in `ecx` across the call where the original spilled it to a callee-saved register. `ContactManager::onNewPair` sat at 54 until `createContact` grew the two virtual calls the original's first lines make. Give a stub the calls its real body starts with before reading the caller's frame as wrong.
 - **A stub that ends `return someOtherStub();` folds onto that other stub.** The callee inlines, its store overwrites the caller's, and the caller's `STUB()` constant is eliminated as dead.
 - **A virtual destructor with no standalone function in the PDB was inlined everywhere.** Define it inline in the header without an annotation. Out of line in the `.cpp` it cannot inline across translation units and every derived destructor calls it.
+- **A base destructor that does have a standalone function is still inline when the contribution table places it in an unrelated object.** Only a COMDAT can be kept from an object that has nothing to do with the class. Out of line in its own `.cpp`, every derived deleting destructor calls it instead of expanding it, the bodies stop being identical, and a family the original folded onto one address splits into one group per translation unit.
+- **The order of the stores inside an inlined setter is not recoverable from the emitted order.** MSVC schedules them against the surrounding register and x87 pressure, so the same source emits them differently at two call sites. Sweeping the setter's statement order is wasted; the lever is always in the caller.
 - **A recursive helper and the loop it compiles to are not interchangeable.** MSVC turns tail recursion into a loop at the definition, so both spellings match there, but a caller inlines exactly one level of the recursion and none of the loop.
 - **A helper's temporaries are allocated once per expansion,** so an expression that reads identically when written out does not schedule identically. Sweeping spellings of a hand-inlined form is hopeless, and the score ordering of hand-written variants carries no information about which one the original had.
+- **Score a vendored inline's own out-of-line copy before blaming its spelling.** An inline that is also emitted as a COMDAT can be compared directly; where that copy is byte for byte right, every residual at an expansion of it is caller context, and rewriting the vendored body will not move it. Confirm the copy exists first: the contribution table placing it in an object with nothing to do with the class is what proves the definition is in a header rather than the matching `.cpp`.
 - **Two recorded helpers that look composable need not compose.** Routing one through the other can drop four functions from 100 to the seventies.
+- **Where two spellings each fix one half of a residual and break the other, neither is the cause.** Two halves that trade off share an upstream cause, usually the x87 stack the earlier statement left behind, and sweeping the pair against each other never converges. Fix the statement that fills the stack, not the two that read it.
 
 ### Loops and control flow
 
@@ -254,6 +285,7 @@ Where the line records show lines that generate no code, the original named some
 - **`std::for_each` passes its iterators through `_Unchecked`.** A raw node walk with none of the `_invalid_parameter_noinfo` checks the file's other loops carry is `for_each` plus `std::mem_fun`, not a written-out `for`.
 - **An if/else tail merge hoists the shared setup above the branch.** A ternary emits the whole address selection up front and costs the function its register assignment as well.
 - **Identical early exits are one shared return.** The line records give it away by sending both tests to the same line.
+- **A loop MSVC fully unrolls leaves no line record on its `for` line,** so one missing line in an otherwise dense run of records is an unrolled loop, not a missing statement. Count the stores in the body to recover the trip count.
 - **Two tests of one condition on two lines is an `if` wrapping a `while`.** A rotated loop puts the entry guard and the back-edge test on the same line; a second line holding the same test means the original wrote the redundant guard, and the back edge targets the inner test. `~SpatialHash` lost forty points to this.
 
 ### Class shape and layout
@@ -264,6 +296,7 @@ Where the line records show lines that generate no code, the original named some
 - **A `static const float` folds to a constant and loses its magic-static guard** unless the initializer calls something. A guard in the binary proves the initializer was a call.
 - **A `const float` at namespace scope** is emitted as a real global and referenced by name, where the binary reads an anonymous constant out of the float pool. Write the literal at each use.
 - **Which object emits a scalar deleting destructor decides whether it inlines the destructor or calls it,** and the contribution table says which. Reproducing the split needs the original's own code, usually an inline constructor that forces the vftable out of a second object.
+- **A direct call to a method the type records mark virtual means the original qualified the call.** MSVC 8 never devirtualizes a call on `this`, so the class name is written out at the call site.
 - **boost's `shared_ptr::operator<` compares ownership, not the pointer,** so it loads offset 4.
 - **A `__int64` multiply lowers to `_allmul`,** and the conversion back to float tells you the signedness: a plain `fild` is signed; a pair that splits the sign bit out and subtracts it is unsigned.
 - **Read a CRT call's name out of the publics.** Never infer it from what the surrounding code looks like it should do.
@@ -297,7 +330,7 @@ Rules that bite:
 - **The file is order sensitive and must not be sorted whole.** Rows apply in file order and every row that overrides a folded address has to sit after the row it overrides. Those live at the end of the file.
 - **A vendored row goes stale the moment its address is annotated,** and `--nolib` then hides that function from the score however wrong it is. Selecting by mangled scope also misreads a Roblox method whose parameter types mention `std`, which is how 30 of them got in. Re-check the file against the tree's markers whenever a family lands, not only when a function reads as unresolved.
 - **A vendored row at a folded address must carry the alias reccmp's recompiled entity actually holds,** which is not the name reccmp prints in the diff. Sweep the aliases the recompiled PDB lists at that address rather than reasoning about which one `min()` should pick.
-- **Adding an instantiation to a template already folded there shifts the pick,** so those rows have to be rechecked whenever a new family lands.
+- **Adding an instantiation to a template already folded there shifts the pick,** so those rows have to be rechecked whenever a new family lands. The symptom is not a missing function but a caller stuck short of 100% whose diff prints `call <OFFSET>` on the original's side against a resolved name on ours: the row is there and carries a sibling alias our binary never emitted.
 - **A vendored function from a prebuilt library has no `S_GPROC32`,** only a public, so its row has no size. reccmp still names the call, but handing it every unsized row lets `reccmp-vtable` pair ATL and STL tables it cannot resolve. They go in one at a time, listed in `UNSIZED_KEEP`.
 - **A label with commas has to be quoted.** Otherwise the symbol reaching reccmp is a prefix that matches nothing and the row silently does nothing.
 - **A vendored vftable goes in one at a time,** listed in `VENDORED_VTABLES`, for the same reason.

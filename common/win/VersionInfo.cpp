@@ -27,12 +27,12 @@ CVersionInfo::~CVersionInfo()
 }
 
 // STUB: WEBSERVICE 0x1000c8c0
-int CVersionInfo::Load(HINSTANCE hInst)
+int CVersionInfo::Load(HINSTANCE module)
 {
-	char szFileName[500];
-	GetModuleFileName(hInst, szFileName, sizeof(szFileName));
+	char name[500];
+	GetModuleFileName(module, name, sizeof(name));
 
-	CString strFileName(szFileName);
+	CString strFileName(name);
 	return Load(strFileName);
 }
 
@@ -81,18 +81,18 @@ int CVersionInfo::Load(const CString& strFileName)
 }
 
 // STUB: WEBSERVICE 0x1000cb20
-CString CVersionInfo::GetValue(const CString& strName)
+CString CVersionInfo::GetValue(const CString& sKey)
 {
 	CString strResult;
 
-	CString strQuery;
-	strQuery.Format("\\StringFileInfo\\%04x%04x\\%s", m_wLangID, m_wCharset, strName);
+	CString sQueryValue;
+	sQueryValue.Format("\\StringFileInfo\\%04x%04x\\%s", m_wLangID, m_wCharset, sKey);
 
-	LPCTSTR pValue = NULL;
-	UINT uLen = 0;
+	LPCTSTR pVal = NULL;
+	UINT nLen = 0;
 
-	if (VerQueryValue(m_pVerData, strQuery.GetBuffer(), (LPVOID*) &pValue, &uLen)) {
-		strResult = pValue;
+	if (VerQueryValue(m_pVerData, sQueryValue.GetBuffer(), (LPVOID*) &pVal, &nLen)) {
+		strResult = pVal;
 	}
 
 	return strResult;

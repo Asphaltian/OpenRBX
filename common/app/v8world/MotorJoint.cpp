@@ -37,11 +37,11 @@ RevoluteLink* MotorJoint::resetLink()
 // FUNCTION: WEBSERVICE 0x1011ffd0
 bool MotorJoint::isAligned()
 {
-	CoordinateFrame coord0 = getPrimitive(0)->getCoordinateFrame() * jointCoord0;
-	CoordinateFrame coord1 = getPrimitive(1)->getCoordinateFrame() * jointCoord1;
+	CoordinateFrame baseWorld = getPrimitive(0)->getCoordinateFrame() * jointCoord0;
+	CoordinateFrame rotorWorld = getPrimitive(1)->getCoordinateFrame() * jointCoord1;
 
-	return Math::fuzzyEq(coord0.translation, coord1.translation, 1.0e-5f) &&
-		   Math::fuzzyEq(coord0.rotation.getColumn(2), coord1.rotation.getColumn(2), 1.0e-5f);
+	return Math::fuzzyEq(baseWorld.translation, rotorWorld.translation, 1.0e-5f) &&
+		   Math::fuzzyEq(baseWorld.rotation.getColumn(2), rotorWorld.rotation.getColumn(2), 1.0e-5f);
 }
 
 // FUNCTION: WEBSERVICE 0x10120070
@@ -66,7 +66,7 @@ MotorJoint::~MotorJoint()
 }
 
 // FUNCTION: WEBSERVICE 0x10120140
-void MotorJoint::stepUi(int frameCount)
+void MotorJoint::stepUi(int uiStepId)
 {
 	float maxStep = fabs(maxVelocity);
 

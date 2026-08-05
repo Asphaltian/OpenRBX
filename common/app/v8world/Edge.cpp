@@ -11,13 +11,13 @@ Edge::Edge(Primitive* prim0, Primitive* prim1)
 }
 
 // FUNCTION: WEBSERVICE 0x1011cfa0
-void Edge::setPrimitive(int index, Primitive* primitive)
+void Edge::setPrimitive(int i, Primitive* p)
 {
-	if (index == 0) {
-		prim0 = primitive;
+	if (i == 0) {
+		prim0 = p;
 	}
 	else {
-		prim1 = primitive;
+		prim1 = p;
 	}
 }
 

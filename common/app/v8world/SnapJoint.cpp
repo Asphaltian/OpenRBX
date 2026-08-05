@@ -17,17 +17,16 @@ bool SnapJoint::compatibleSurfaces(Primitive* prim0, Primitive* prim1, NormalId 
 }
 
 // FUNCTION: WEBSERVICE 0x10127640
-SnapJoint* SnapJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1)
+SnapJoint* SnapJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1)
 {
-	if (compatibleSurfaces(prim0, prim1, normalId0, normalId1) &&
-		canBuildJointTight(prim0, prim1, normalId0, normalId1)) {
+	if (compatibleSurfaces(p0, p1, nId0, nId1) && canBuildJointTight(p0, p1, nId0, nId1)) {
 
-		CoordinateFrame coord0;
-		CoordinateFrame coord1;
+		CoordinateFrame c0;
+		CoordinateFrame c1;
 
-		faceIdToCoords(prim0, prim1, normalId0, normalId1, coord0, coord1);
+		faceIdToCoords(p0, p1, nId0, nId1, c0, c1);
 
-		return new SnapJoint(prim0, prim1, coord0, coord1);
+		return new SnapJoint(p0, p1, c0, c1);
 	}
 
 	return NULL;

@@ -11,7 +11,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100d7b80
-CoordinateFrame Joint::align(Primitive* prim0, Primitive* prim1)
+CoordinateFrame Joint::align(Primitive* pMove, Primitive* pStay)
 {
 	return CoordinateFrame();
 }
@@ -34,51 +34,45 @@ void Joint::setJointOwner(IJointOwner* value)
 }
 
 // FUNCTION: WEBSERVICE 0x1011e890
-bool Joint::canBuildJoint(
-	Primitive* prim0,
-	Primitive* prim1,
-	NormalId normalId0,
-	NormalId normalId1,
-	float maxUnaligned,
-	float maxOverlapOrGap
-)
+bool Joint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1, float angleMax, float planarMax)
 {
-	if (!Math::fuzzyAxisAligned(
-			prim0->getCoordinateFrame().rotation,
-			prim1->getCoordinateFrame().rotation,
-			maxUnaligned
-		)) {
+	if (!Math::fuzzyAxisAligned(p0->getCoordinateFrame().rotation, p1->getCoordinateFrame().rotation, angleMax)) {
 		return false;
 	}
 
-	Face face0 = prim0->getFaceInWorld(normalId0);
-	Face face1 = prim1->getFaceInWorld(normalId1);
+	Face f0 = p0->getFaceInWorld(nId0);
+	Face f1 = p1->getFaceInWorld(nId1);
 
-	if (!Face::hasOverlap(face0, face1, 0.35f)) {
+	if (!Face::hasOverlap(f0, f1, 0.35f)) {
 		return false;
 	}
 
-	return Face::overlapWithinPlanes(face0, face1, maxOverlapOrGap) ? true : false;
+	return Face::overlapWithinPlanes(f0, f1, planarMax) ? true : false;
 }
 
 // FUNCTION: WEBSERVICE 0x1011e940
-bool Joint::canBuildJointTight(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1)
+bool Joint::canBuildJointTight(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1)
 {
-	return canBuildJoint(prim0, prim1, normalId0, normalId1, 0.01f, 0.01f);
+	return canBuildJoint(p0, p1, nId0, nId1, 0.01f, 0.01f);
 }
 
 // FUNCTION: WEBSERVICE 0x1011e970
-bool Joint::canBuildJointLoose(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1)
+bool Joint::canBuildJointLoose(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1)
 {
-	return canBuildJoint(prim0, prim1, normalId0, normalId1, 0.05f, 0.05f);
+	return canBuildJoint(p0, p1, nId0, nId1, 0.05f, 0.05f);
 }
 
 // FUNCTION: WEBSERVICE 0x1011e9a0
-Joint::Joint(Primitive* prim0, Primitive* prim1, const CoordinateFrame& coord0, const CoordinateFrame& coord1)
+Joint::Joint(
+	Primitive* prim0,
+	Primitive* prim1,
+	const CoordinateFrame& _jointCoord0,
+	const CoordinateFrame& _jointCoord1
+)
 	: Edge(prim0, prim1), jointOwner(NULL), active(false)
 {
-	jointCoord0 = Math::snapToGrid(coord0, 0.1f);
-	jointCoord1 = Math::snapToGrid(coord1, 0.1f);
+	jointCoord0 = Math::snapToGrid(_jointCoord0, 0.1f);
+	jointCoord1 = Math::snapToGrid(_jointCoord1, 0.1f);
 }
 
 // FUNCTION: WEBSERVICE 0x1011ea80
@@ -87,33 +81,33 @@ Joint::Joint() : Edge(NULL, NULL), jointOwner(NULL), active(false)
 }
 
 // FUNCTION: WEBSERVICE 0x1011eac0
-void Joint::setPrimitive(int index, Primitive* primitive)
+void Joint::setPrimitive(int i, Primitive* p)
 {
-	if (primitive != getPrimitive(index)) {
+	if (p != getPrimitive(i)) {
 
 		World* world = getWorld();
 
-		if (world != NULL && getPrimitive(index) != NULL) {
-			world->onJointPrimitiveNulling(this, getPrimitive(index));
+		if (world != NULL && getPrimitive(i) != NULL) {
+			world->onJointPrimitiveNulling(this, getPrimitive(i));
 		}
 
-		Edge::setPrimitive(index, primitive);
+		Edge::setPrimitive(i, p);
 
-		if (world != NULL && primitive != NULL) {
-			world->onJointPrimitiveSet(this, primitive);
+		if (world != NULL && p != NULL) {
+			world->onJointPrimitiveSet(this, p);
 		}
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x1011eb30
-void Joint::setJointCoord(int index, const CoordinateFrame& value)
+void Joint::setJointCoord(int i, const CoordinateFrame& c)
 {
-	if (value != getJointCoord(index)) {
-		if (index == 0) {
-			jointCoord0 = value;
+	if (c != getJointCoord(i)) {
+		if (i == 0) {
+			jointCoord0 = c;
 		}
 		else {
-			jointCoord1 = value;
+			jointCoord1 = c;
 		}
 
 		if (World* world = getWorld()) {

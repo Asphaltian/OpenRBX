@@ -20,10 +20,7 @@ public:
 	// RBX::MotorJoint::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x1009add0
-	static bool isMotorJoint(Edge* edge)
-	{
-		return isJoint(edge) && static_cast<Joint*>(edge)->getJointType() == MOTOR_JOINT;
-	}
+	static bool isMotorJoint(Edge* e) { return isJoint(e) && static_cast<Joint*>(e)->getJointType() == MOTOR_JOINT; }
 
 	virtual JointType getJointType() const; // vtable+0x14
 

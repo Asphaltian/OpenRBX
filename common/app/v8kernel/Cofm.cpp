@@ -25,27 +25,27 @@ void Cofm::updateIfDirty()
 	if (dirty) {
 		mass = body->getMass();
 
-		Vector3 cofmPos = body->getPos() * body->getMass();
+		Vector3 cofmWorld = body->getPos() * body->getMass();
 
 		for (int i = 0; i < body->numChildren(); ++i) {
 			Body* child = body->getChild(i);
 
 			mass += child->getBranchMass();
 
-			cofmPos += child->getBranchCofmPos() * child->getBranchMass();
+			cofmWorld += child->getBranchCofmPos() * child->getBranchMass();
 		}
 
-		cofmPos = cofmPos / mass;
+		cofmWorld = cofmWorld / mass;
 
-		cofmInBody = body->getCoordinateFrame().pointToObjectSpace(cofmPos);
+		cofmInBody = body->getCoordinateFrame().pointToObjectSpace(cofmWorld);
 
-		Matrix3 iWorld = body->getIWorldAtPoint(cofmPos);
+		Matrix3 iWorldSum = body->getIWorldAtPoint(cofmWorld);
 
 		for (int i = 0; i < body->numChildren(); ++i) {
-			iWorld = iWorld + body->getChild(i)->getBranchIWorldAtPoint(cofmPos);
+			iWorldSum = iWorldSum + body->getChild(i)->getBranchIWorldAtPoint(cofmWorld);
 		}
 
-		moment = Math::momentToObjectSpace(iWorld, body->getCoordinateFrame().rotation);
+		moment = Math::momentToObjectSpace(iWorldSum, body->getCoordinateFrame().rotation);
 
 		dirty = false;
 	}

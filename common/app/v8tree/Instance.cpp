@@ -11,37 +11,37 @@ const char sInstance[] = "Instance";
 Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged;
 
 // STUB: WEBSERVICE 0x10047af0
-void Instance::onChildChanged(Instance* child, const PropertyChanged& event)
+void Instance::onChildChanged(Instance* instance, const PropertyChanged& event)
 {
 	if (parent != NULL) {
-		parent->onChildChanged(child, event);
+		parent->onChildChanged(instance, event);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10047b20
-bool Instance::contains(const Instance* instance) const
+bool Instance::contains(const Instance* child) const
 {
-	while (instance != 0) {
-		if (instance == this) {
+	while (child != 0) {
+		if (child == this) {
 			return true;
 		}
 
-		instance = instance->parent;
+		child = child->parent;
 	}
 
 	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x10048340
-void Instance::readProperties(const XmlElement* element, IReferenceBinder& binder)
+void Instance::readProperties(const XmlElement* container, IReferenceBinder& binder)
 {
-	for (XmlElement* child = element->firstChild(); child != NULL; child = child->nextSibling()) {
+	for (XmlElement* child = container->firstChild(); child != NULL; child = child->nextSibling()) {
 		readProperty(child, binder);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10048370
-void Instance::writeChildren(XmlElement* element)
+void Instance::writeChildren(XmlElement* container)
 {
 	const std::vector<shared_ptr<Instance> >* kids = children.read();
 
@@ -50,7 +50,7 @@ void Instance::writeChildren(XmlElement* element)
 			XmlElement* child = (*it)->write();
 
 			if (child != NULL) {
-				element->addChild(child);
+				container->addChild(child);
 			}
 		}
 	}
@@ -64,7 +64,7 @@ XmlElement* Instance::write()
 }
 
 // STUB: WEBSERVICE 0x1004a010
-void Instance::readProperty(const XmlElement* element, IReferenceBinder& binder)
+void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
 	STUB(0x1004a010);
 }

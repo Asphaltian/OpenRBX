@@ -66,9 +66,9 @@ inline World* IPipelined::getWorld()
 }
 
 // FUNCTION: WEBSERVICE 0x10118120
-inline bool IPipelined::downstreamOfStage(IStage* stage) const
+inline bool IPipelined::downstreamOfStage(IStage* iStage) const
 {
-	return currentStage->getStageType() > stage->getStageType();
+	return currentStage->getStageType() > iStage->getStageType();
 }
 
 inline bool IPipelined::inOrDownstreamOfStage(IStage* stage) const

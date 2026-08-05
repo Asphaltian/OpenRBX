@@ -35,9 +35,9 @@ public:
 	void notifyMovingPrimitives();
 
 	// FUNCTION: WEBSERVICE 0x1011c920
-	Mechanism* nextMechanism(std::list<Mechanism*>& mechanisms, const Mechanism* mechanism)
+	Mechanism* nextMechanism(std::list<Mechanism*>& mechanisms, const Mechanism* current)
 	{
-		std::list<Mechanism*>::iterator it = mechanism->myIt;
+		std::list<Mechanism*>::iterator it = current->myIt;
 		it++;
 
 		return it == mechanisms.end() ? *mechanisms.begin() : *it;

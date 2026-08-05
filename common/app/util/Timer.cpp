@@ -5,13 +5,13 @@ namespace RBX {
 // FUNCTION: WEBSERVICE 0x10099040
 double getRealTime()
 {
-	LARGE_INTEGER counter;
+	LARGE_INTEGER count;
 	LARGE_INTEGER frequency;
 
-	QueryPerformanceCounter(&counter);
+	QueryPerformanceCounter(&count);
 	QueryPerformanceFrequency(&frequency);
 
-	return (double) counter.QuadPart / (double) frequency.QuadPart;
+	return (double) count.QuadPart / (double) frequency.QuadPart;
 }
 
 } // namespace RBX

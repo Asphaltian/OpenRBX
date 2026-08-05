@@ -37,9 +37,9 @@ public:
 DECOMP_SIZE_ASSERT(Vector3int32, 0x0c)
 
 // FUNCTION: WEBSERVICE 0x10123340
-inline Vector3int32 Vector3int32::floor(const Vector3& value)
+inline Vector3int32 Vector3int32::floor(const Vector3& v)
 {
-	return Vector3int32(G3D::iRound(floorf(value.x)), G3D::iRound(floorf(value.y)), G3D::iRound(floorf(value.z)));
+	return Vector3int32(G3D::iRound(floorf(v.x)), G3D::iRound(floorf(v.y)), G3D::iRound(floorf(v.z)));
 }
 
 } // namespace RBX

@@ -10,23 +10,23 @@ namespace RBX {
 bool RigidJoint::isAligned()
 {
 	Primitive* prim0 = getPrimitive(0);
-	CoordinateFrame coord0 = prim0->getCoordinateFrame() * jointCoord0;
+	CoordinateFrame c0World = prim0->getCoordinateFrame() * jointCoord0;
 
 	Primitive* prim1 = getPrimitive(1);
-	CoordinateFrame coord1 = prim1->getCoordinateFrame() * jointCoord1;
+	CoordinateFrame c1World = prim1->getCoordinateFrame() * jointCoord1;
 
-	return Math::fuzzyEq(coord0, coord1, 1e-5f, 1e-5f);
+	return Math::fuzzyEq(c0World, c1World, 1e-5f, 1e-5f);
 }
 
 // FUNCTION: WEBSERVICE 0x1011ec20
-CoordinateFrame RigidJoint::align(Primitive* prim0, Primitive* prim1)
+CoordinateFrame RigidJoint::align(Primitive* pMove, Primitive* pStay)
 {
-	CoordinateFrame& coord0 = prim0 == getPrimitive(0) ? jointCoord0 : jointCoord1;
-	CoordinateFrame& coord1 = prim1 == getPrimitive(0) ? jointCoord0 : jointCoord1;
+	CoordinateFrame& coord0 = pMove == getPrimitive(0) ? jointCoord0 : jointCoord1;
+	CoordinateFrame& coord1 = pStay == getPrimitive(0) ? jointCoord0 : jointCoord1;
 
-	CoordinateFrame world = prim1->getCoordinateFrame() * coord1;
+	CoordinateFrame jointWorld = pStay->getCoordinateFrame() * coord1;
 
-	return world * coord0.inverse();
+	return jointWorld * coord0.inverse();
 }
 
 // FUNCTION: WEBSERVICE 0x1011ec80
@@ -40,19 +40,19 @@ CoordinateFrame RigidJoint::getChildInParent(Primitive* parent, Primitive* child
 
 // FUNCTION: WEBSERVICE 0x1011ecd0
 void RigidJoint::faceIdToCoords(
-	Primitive* prim0,
-	Primitive* prim1,
-	NormalId normalId0,
-	NormalId normalId1,
-	CoordinateFrame& coord0,
-	CoordinateFrame& coord1
+	Primitive* p0,
+	Primitive* p1,
+	NormalId nId0,
+	NormalId nId1,
+	CoordinateFrame& c0,
+	CoordinateFrame& c1
 )
 {
-	coord0 = prim0->getFaceCoordInObject(normalId0);
+	c0 = p0->getFaceCoordInObject(nId0);
 
-	CoordinateFrame world = prim0->getCoordinateFrame() * coord0;
+	CoordinateFrame worldC = p0->getCoordinateFrame() * c0;
 
-	coord1 = prim1->getCoordinateFrame().toObjectSpace(world);
+	c1 = p1->getCoordinateFrame().toObjectSpace(worldC);
 }
 
 } // namespace RBX

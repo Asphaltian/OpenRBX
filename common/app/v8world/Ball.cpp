@@ -33,19 +33,19 @@ void Ball::onSetSize()
 }
 
 // FUNCTION: WEBSERVICE 0x1010a7f0
-bool Ball::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
+bool Ball::hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside)
 {
-	float distanceSquared = ray.origin.squaredMagnitude();
+	float distanceSquared = rayInMe.origin.squaredMagnitude();
 
 	inside = distanceSquared <= realRadius * realRadius;
 
 	G3D::Sphere sphere(Vector3::zero(), realRadius);
 
 	return G3D::CollisionDetection::collisionTimeForMovingPointFixedSphere(
-			   ray.origin,
-			   ray.direction,
+			   rayInMe.origin,
+			   rayInMe.direction,
 			   sphere,
-			   hitPoint
+			   localHitPoint
 		   ) != G3D::inf();
 }
 

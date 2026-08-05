@@ -16,41 +16,41 @@ static float rotationStep()
 }
 
 // FUNCTION: WEBSERVICE 0x100de860
-bool Math::isDenormal(float value)
+bool Math::isDenormal(float f)
 {
-	const int bits = *reinterpret_cast<const int*>(&value);
+	const int bits = *reinterpret_cast<const int*>(&f);
 	return (bits & 0x7f800000) == 0 && (bits & 0x7fffff) != 0;
 }
 
 // STUB: WEBSERVICE 0x100de880
-bool Math::isNanInfDenorm(float value)
+bool Math::isNanInfDenorm(float f)
 {
-	return value == std::numeric_limits<float>::infinity() || -std::numeric_limits<float>::infinity() == value ||
-		   std::numeric_limits<float>::quiet_NaN() == value || std::numeric_limits<float>::signaling_NaN() == value ||
-		   isDenormal(value);
+	return f == std::numeric_limits<float>::infinity() || -std::numeric_limits<float>::infinity() == f ||
+		   std::numeric_limits<float>::quiet_NaN() == f || std::numeric_limits<float>::signaling_NaN() == f ||
+		   isDenormal(f);
 }
 
 // FUNCTION: WEBSERVICE 0x100de8e0
-bool Math::isNanInfDenormVector3(const Vector3& value)
+bool Math::isNanInfDenormVector3(const Vector3& v)
 {
-	return isNanInfDenorm(value.x) || isNanInfDenorm(value.y) || isNanInfDenorm(value.z);
+	return isNanInfDenorm(v.x) || isNanInfDenorm(v.y) || isNanInfDenorm(v.z);
 }
 
 // FUNCTION: WEBSERVICE 0x100de930
-bool Math::fixDenorm(Vector3& value)
+bool Math::fixDenorm(Vector3& v)
 {
 	bool fixed = false;
 
-	if (isDenormal(value.x)) {
-		value.x = 0.0f;
+	if (isDenormal(v.x)) {
+		v.x = 0.0f;
 		fixed = true;
 	}
-	if (isDenormal(value.y)) {
-		value.y = 0.0f;
+	if (isDenormal(v.y)) {
+		v.y = 0.0f;
 		fixed = true;
 	}
-	if (isDenormal(value.z)) {
-		value.z = 0.0f;
+	if (isDenormal(v.z)) {
+		v.z = 0.0f;
 		fixed = true;
 	}
 
@@ -58,21 +58,21 @@ bool Math::fixDenorm(Vector3& value)
 }
 
 // STUB: WEBSERVICE 0x100de9a0
-bool Math::legalCameraCoord(const CoordinateFrame& coordinateFrame)
+bool Math::legalCameraCoord(const CoordinateFrame& c)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			if (coordinateFrame.rotation[i][j] <= -1.2f) {
+			if (c.rotation[i][j] <= -1.2f) {
 				return false;
 			}
-			if (coordinateFrame.rotation[i][j] >= 1.2f) {
+			if (c.rotation[i][j] >= 1.2f) {
 				return false;
 			}
 		}
-		if (coordinateFrame.translation[i] <= -1000000.0f) {
+		if (c.translation[i] <= -1000000.0f) {
 			return false;
 		}
-		if (coordinateFrame.translation[i] >= 1000000.0f) {
+		if (c.translation[i] >= 1000000.0f) {
 			return false;
 		}
 	}
@@ -81,48 +81,48 @@ bool Math::legalCameraCoord(const CoordinateFrame& coordinateFrame)
 }
 
 // STUB: WEBSERVICE 0x100dea30
-float Math::rotationFromByte(unsigned char byte)
+float Math::rotationFromByte(unsigned char byteAngle)
 {
-	const float value = byte;
+	const float value = byteAngle;
 
 	return value * rotationStep() - 3.14159274f;
 }
 
 // STUB: WEBSERVICE 0x100dea70
-Matrix3 Math::getIWorldAtPoint(const Vector3& cofm, const Vector3& point, const Matrix3& iWorld, float mass)
+Matrix3 Math::getIWorldAtPoint(const Vector3& cofmPos, const Vector3& worldPos, const Matrix3& iWorldAtCofm, float mass)
 {
-	const float x = point.x - cofm.x;
-	const float y = point.y - cofm.y;
-	const float z = point.z - cofm.z;
+	const float x = worldPos.x - cofmPos.x;
+	const float y = worldPos.y - cofmPos.y;
+	const float z = worldPos.z - cofmPos.z;
 
 	const Matrix3
 		offset(z * z + y * y, -(y * x), -(z * x), -(y * x), z * z + x * x, -(z * y), -(z * x), -(z * y), y * y + x * x);
 
-	return iWorld + mass * offset;
+	return iWorldAtCofm + mass * offset;
 }
 
 // FUNCTION: WEBSERVICE 0x100deb30
-Matrix3 Math::momentToObjectSpace(const Matrix3& moment, const Matrix3& rotation)
+Matrix3 Math::momentToObjectSpace(const Matrix3& iWorld, const Matrix3& bodyRotation)
 {
-	return rotation.transpose() * moment * rotation;
+	return bodyRotation.transpose() * iWorld * bodyRotation;
 }
 
 // FUNCTION: WEBSERVICE 0x100deb70
-Matrix3 Math::momentToWorldSpace(const Matrix3& moment, const Matrix3& rotation)
+Matrix3 Math::momentToWorldSpace(const Matrix3& iBody, const Matrix3& bodyRotation)
 {
-	return rotation * moment * rotation.transpose();
+	return bodyRotation * iBody * bodyRotation.transpose();
 }
 
 // FUNCTION: WEBSERVICE 0x100debb0
-Vector3 Math::toDiagonal(const Matrix3& matrix)
+Vector3 Math::toDiagonal(const Matrix3& m)
 {
-	return Vector3(matrix[0][0], matrix[1][1], matrix[2][2]);
+	return Vector3(m[0][0], m[1][1], m[2][2]);
 }
 
 // FUNCTION: WEBSERVICE 0x100debd0
-Matrix3 Math::fromDiagonal(const Vector3& diagonal)
+Matrix3 Math::fromDiagonal(const Vector3& v)
 {
-	return Matrix3(diagonal.x, 0.0f, 0.0f, 0.0f, diagonal.y, 0.0f, 0.0f, 0.0f, diagonal.z);
+	return Matrix3(v.x, 0.0f, 0.0f, 0.0f, v.y, 0.0f, 0.0f, 0.0f, v.z);
 }
 
 // FUNCTION: WEBSERVICE 0x100dec20
@@ -155,55 +155,55 @@ void Math::idToMatrix3(int orientId, Matrix3& matrix)
 	const NormalId xId = intToNormalId(orientId / 6);
 	const NormalId yId = intToNormalId(orientId % 6);
 
-	const Vector3 x = normalIdToVector3(xId);
-	const Vector3 y = normalIdToVector3(yId);
-	const Vector3 z = x.cross(y);
+	const Vector3 vX = normalIdToVector3(xId);
+	const Vector3 vY = normalIdToVector3(yId);
+	const Vector3 vZ = vX.cross(vY);
 
-	matrix.setColumn(0, x);
-	matrix.setColumn(1, y);
-	matrix.setColumn(2, z);
+	matrix.setColumn(0, vX);
+	matrix.setColumn(1, vY);
+	matrix.setColumn(2, vZ);
 }
 
 // FUNCTION: WEBSERVICE 0x100dedc0
 Matrix3 Math::rotateAboutZ(const Matrix3& matrix, float angle)
 {
-	Matrix3 rotation = Matrix3::identity();
+	Matrix3 rotMatrix = Matrix3::identity();
 
 	const float s = sinf(angle);
-	const float c = cosf(angle);
+	const float cosR = cosf(angle);
 
-	rotation.setColumn(0, Vector3(c, s, 0.0f));
-	rotation.setColumn(1, Vector3(-s, c, 0.0f));
+	rotMatrix.setColumn(0, Vector3(cosR, s, 0.0f));
+	rotMatrix.setColumn(1, Vector3(-s, cosR, 0.0f));
 
-	return matrix * rotation;
+	return matrix * rotMatrix;
 }
 
 // STUB: WEBSERVICE 0x100dee50
-DECOMP_NOINLINE Matrix3 Math::snapToAxes(const Matrix3& matrix)
+DECOMP_NOINLINE Matrix3 Math::snapToAxes(const Matrix3& align)
 {
 	STUB(0x100dee50);
-	return matrix;
+	return align;
 }
 
 // FUNCTION: WEBSERVICE 0x100df0a0
-Vector3 Math::iRoundVector3(const Vector3& value)
+Vector3 Math::iRoundVector3(const Vector3& point)
 {
 	return Vector3(
-		static_cast<float>(G3D::iRound(value.x)),
-		static_cast<float>(G3D::iRound(value.y)),
-		static_cast<float>(G3D::iRound(value.z))
+		static_cast<float>(G3D::iRound(point.x)),
+		static_cast<float>(G3D::iRound(point.y)),
+		static_cast<float>(G3D::iRound(point.z))
 	);
 }
 
 // FUNCTION: WEBSERVICE 0x100df100
-float Math::angleToE0(const Vector2& value)
+float Math::angleToE0(const Vector2& v)
 {
-	Vector2 unit = value;
-	unit.unitize();
+	Vector2 u = v;
+	u.unitize();
 
-	const float answer = acosf(unit.x);
+	const float answer = acosf(u.x);
 
-	if (unit.y < 0.0f) {
+	if (u.y < 0.0f) {
 		return 6.28318548f - answer;
 	}
 
@@ -258,31 +258,26 @@ bool Math::fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon)
 }
 
 // STUB: WEBSERVICE 0x100df270
-bool Math::fuzzyEq(
-	const CoordinateFrame& c0,
-	const CoordinateFrame& c1,
-	float translationEpsilon,
-	float rotationEpsilon
-)
+bool Math::fuzzyEq(const CoordinateFrame& c0, const CoordinateFrame& c1, float epsT, float epsR)
 {
-	if (!fuzzyEq(c0.translation, c1.translation, translationEpsilon)) {
+	if (!fuzzyEq(c0.translation, c1.translation, epsT)) {
 		return false;
 	}
 
-	return fuzzyEq(c0.rotation, c1.rotation, rotationEpsilon);
+	return fuzzyEq(c0.rotation, c1.rotation, epsR);
 }
 
 // STUB: WEBSERVICE 0x100df2c0
-DECOMP_NOINLINE Matrix3 Math::alignAxesClosest(const Matrix3& matrix, const Matrix3& target)
+DECOMP_NOINLINE Matrix3 Math::alignAxesClosest(const Matrix3& align, const Matrix3& target)
 {
 	STUB(0x100df2c0);
-	return matrix;
+	return align;
 }
 
 // STUB: WEBSERVICE 0x100df530
-NormalId Math::getClosestObjectNormalId(const Vector3& worldNormal, const Matrix3& objectRotation)
+NormalId Math::getClosestObjectNormalId(const Vector3& worldV, const Matrix3& objectR)
 {
-	const Vector3 objectNormal = worldNormal * objectRotation;
+	const Vector3 objectNormal = worldV * objectR;
 
 	const float x = fabsf(objectNormal.x);
 	const float y = fabsf(objectNormal.y);
@@ -301,7 +296,7 @@ NormalId Math::getClosestObjectNormalId(const Vector3& worldNormal, const Matrix
 }
 
 // STUB: WEBSERVICE 0x100df600
-Vector3 Math::vector3Abs(const Vector3& value)
+Vector3 Math::vector3Abs(const Vector3& v)
 {
 	STUB(0x100df600);
 	return Vector3::zero();
@@ -314,30 +309,30 @@ float Math::getHeading(const Vector3& look)
 }
 
 // STUB: WEBSERVICE 0x100df630
-void Math::getHeadingElevation(const CoordinateFrame& coordinateFrame, float& heading, float& elevation)
+void Math::getHeadingElevation(const CoordinateFrame& c, float& heading, float& elevation)
 {
-	const Vector3 look = coordinateFrame.rotation.getColumn(2) * CoordinateFrame::zLookDirection;
+	const Vector3 look = c.rotation.getColumn(2) * CoordinateFrame::zLookDirection;
 
 	heading = atan2f(-look.x, -look.z);
 	elevation = asinf(look.y);
 }
 
 // FUNCTION: WEBSERVICE 0x100df690
-void Math::setHeadingElevation(CoordinateFrame& coordinateFrame, float heading, float elevation)
+void Math::setHeadingElevation(CoordinateFrame& c, float heading, float elevation)
 {
 	const float y = sinf(elevation);
 	const float flat = sqrtf(1.0f - y * y);
 	const Vector3 look(-sinf(heading) * flat, y, -cosf(heading) * flat);
 
-	coordinateFrame.lookAt(coordinateFrame.translation + look.direction());
+	c.lookAt(c.translation + look.direction());
 }
 
 // FUNCTION: WEBSERVICE 0x100df710
-void Math::rotateMatrixAboutY90(Matrix3& matrix, int count)
+void Math::rotateMatrixAboutY90(Matrix3& matrix, int times)
 {
 	static const Matrix3 y90(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f);
 
-	for (int i = 0; i < count; ++i) {
+	for (int i = 0; i < times; ++i) {
 		matrix = y90 * matrix;
 	}
 }
@@ -359,14 +354,14 @@ const Matrix3& Math::matrixTiltZ()
 }
 
 // STUB: WEBSERVICE 0x100df8e0
-const Matrix3& Math::getAxisRotationMatrix(int normalId)
+const Matrix3& Math::getAxisRotationMatrix(int face)
 {
 	static const Matrix3 y = Matrix3::fromEulerAnglesXYZ(0.0f, 0.0f, 1.57079637f);
 	static const Matrix3 z = Matrix3::fromEulerAnglesXYZ(0.0f, 1.57079637f, 0.0f);
 	static const Matrix3 y_neg = y;
 	static const Matrix3 z_neg = z;
 
-	switch (normalId) {
+	switch (face) {
 	case NORM_Y:
 		return y;
 	case NORM_Z:
@@ -401,60 +396,60 @@ unsigned char rotationToByteBase(float rotation)
 }
 
 // FUNCTION: WEBSERVICE 0x100dfb70
-unsigned char Math::rotationToByte(float rotation)
+unsigned char Math::rotationToByte(float angle)
 {
-	return rotationToByteBase(rotation);
+	return rotationToByteBase(angle);
 }
 
 // STUB: WEBSERVICE 0x100dfb90
-Vector3 Math::toGrid(const Vector3& value, const Vector3& grid)
+Vector3 Math::toGrid(const Vector3& v, const Vector3& grid)
 {
 	return Vector3(
-		grid.x * G3D::iRound(value.x / grid.x),
-		grid.y * G3D::iRound(value.y / grid.y),
-		grid.z * G3D::iRound(value.z / grid.z)
+		grid.x * G3D::iRound(v.x / grid.x),
+		grid.y * G3D::iRound(v.y / grid.y),
+		grid.z * G3D::iRound(v.z / grid.z)
 	);
 }
 
 // FUNCTION: WEBSERVICE 0x100dfc10
-Vector3 Math::toGrid(const Vector3& value, float grid)
+Vector3 Math::toGrid(const Vector3& v, float grid)
 {
 	const Vector3 steps(grid, grid, grid);
 
-	return toGrid(value, steps);
+	return toGrid(v, steps);
 }
 
 // FUNCTION: WEBSERVICE 0x100dfc50
-CoordinateFrame Math::snapToGrid(const CoordinateFrame& coordinateFrame, float grid)
+CoordinateFrame Math::snapToGrid(const CoordinateFrame& snap, float grid)
 {
 	const Vector3 steps(grid, grid, grid);
-	const Vector3 translation = toGrid(coordinateFrame.translation, steps);
+	const Vector3 translation = toGrid(snap.translation, steps);
 
-	return CoordinateFrame(snapToAxes(coordinateFrame.rotation), translation);
+	return CoordinateFrame(snapToAxes(snap.rotation), translation);
 }
 
 // STUB: WEBSERVICE 0x100dfcc0
-CoordinateFrame Math::snapToGrid(const CoordinateFrame& coordinateFrame, const Vector3& grid)
+CoordinateFrame Math::snapToGrid(const CoordinateFrame& snap, const Vector3& grid)
 {
-	const Vector3 translation = toGrid(coordinateFrame.translation, grid);
+	const Vector3 translation = toGrid(snap.translation, grid);
 
-	return CoordinateFrame(snapToAxes(coordinateFrame.rotation), translation);
+	return CoordinateFrame(snapToAxes(snap.rotation), translation);
 }
 
 // STUB: WEBSERVICE 0x100dfd20
-bool Math::fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float epsilon)
+bool Math::fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float radTolerance)
 {
-	Vector3 columns[3];
+	Vector3 a1[3];
 
 	for (int i = 0; i < 3; ++i) {
-		columns[i] = m1.getColumn(i);
+		a1[i] = m1.getColumn(i);
 	}
 
 	for (int i = 0; i < 3; ++i) {
-		const Vector3 column = m0.getColumn(i);
+		const Vector3 a0 = m0.getColumn(i);
 
 		for (int j = 0; j < 3; ++j) {
-			if (columns[j].cross(column).magnitude() < epsilon) {
+			if (a1[j].cross(a0).magnitude() < radTolerance) {
 				break;
 			}
 			if (j == 2) {
@@ -467,10 +462,10 @@ bool Math::fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float epsilon)
 }
 
 // FUNCTION: WEBSERVICE 0x100dfe20
-bool Math::orthonormalizeIfNecessary(Matrix3& matrix)
+bool Math::orthonormalizeIfNecessary(Matrix3& m)
 {
-	if (!matrix.isOrthonormal()) {
-		matrix.orthonormalize();
+	if (!m.isOrthonormal()) {
+		m.orthonormalize();
 		return true;
 	}
 
@@ -478,9 +473,9 @@ bool Math::orthonormalizeIfNecessary(Matrix3& matrix)
 }
 
 // FUNCTION: WEBSERVICE 0x100dfe40
-Vector3 Math::sortVector3(const Vector3& value)
+Vector3 Math::sortVector3(const Vector3& v)
 {
-	Vector3 sorted = value;
+	Vector3 sorted = v;
 
 	if (sorted.z < sorted.y) {
 		std::swap(sorted.z, sorted.y);
@@ -496,24 +491,24 @@ Vector3 Math::sortVector3(const Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100dfea0
-float Math::maxAxisLength(const Vector3& value)
+float Math::maxAxisLength(const Vector3& v)
 {
-	const float lengths[3] = {fabsf(value.x), fabsf(value.y), fabsf(value.z)};
+	const float answer[3] = {fabsf(v.x), fabsf(v.y), fabsf(v.z)};
 
-	return std::max(lengths[0], std::max(lengths[1], lengths[2]));
+	return std::max(answer[0], std::max(answer[1], answer[2]));
 }
 
 // STUB: WEBSERVICE 0x100dfef0
-bool Math::intersectRayPlane(const Ray& ray, const Plane& plane, Vector3& hitPoint)
+bool Math::intersectRayPlane(const Ray& ray, const Plane& plane, Vector3& hit)
 {
-	const float dot = plane.normal().dot(ray.direction);
+	const float line = plane.normal().dot(ray.direction);
 
-	if (plane.halfSpaceContains(ray.origin) ? dot < 0.0f : dot > 0.0f) {
-		hitPoint = G3D::Line::fromPointAndDirection(ray.origin, ray.direction).intersection(plane);
+	if (plane.halfSpaceContains(ray.origin) ? line < 0.0f : line > 0.0f) {
+		hit = G3D::Line::fromPointAndDirection(ray.origin, ray.direction).intersection(plane);
 		return true;
 	}
 
-	hitPoint = Vector3::inf();
+	hit = Vector3::inf();
 
 	return false;
 }

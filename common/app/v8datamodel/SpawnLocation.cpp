@@ -11,9 +11,9 @@ char sSpawnLocation[] = "SpawnLocation";
 static Reflection::PropDescriptor<SpawnLocation, BrickColor> prop_TeamColor;
 
 // FUNCTION: WEBSERVICE 0x100ff2b0
-void SpawnLocation::setTeamColor(BrickColor value)
+void SpawnLocation::setTeamColor(BrickColor color)
 {
-	teamColor = value;
+	teamColor = color;
 	raisePropertyChanged(prop_TeamColor);
 }
 

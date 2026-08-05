@@ -9,7 +9,7 @@ namespace Profiling {
 DWORD Mark::markTlsIndex = 0;
 
 // STUB: WEBSERVICE 0x10084600
-void CodeProfiler::log(__int64 kernelTime, __int64 userTime, bool frameTick)
+void CodeProfiler::log(__int64 kern, __int64 user, bool frameTick)
 {
 	STUB(0x10084600);
 }

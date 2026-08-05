@@ -27,9 +27,9 @@ void Team::setTeamColor(BrickColor value)
 }
 
 // FUNCTION: WEBSERVICE 0x100be750
-void Team::setAutoAssignable(bool value)
+void Team::setAutoAssignable(bool autoAssign)
 {
-	autoAssignable = value;
+	autoAssignable = autoAssign;
 	raisePropertyChanged(prop_AutoAssignable);
 }
 

@@ -32,19 +32,19 @@ void Quaternion::toRotationMatrix(G3D::Matrix3& rot) const
 	float txz = x * tz;
 	float twxw = w * tx;
 	float twy = w * ty;
-	float twz = w * tz;
+	float wz = w * tz;
 	float tyy = y * ty;
-	float tyz = y * tz;
-	float tzz = z * tz;
+	float yz = y * tz;
+	float zz = z * tz;
 
-	rot[0][0] = 1.0f - (tzz + tyy);
-	rot[0][1] = txy - twz;
+	rot[0][0] = 1.0f - (zz + tyy);
+	rot[0][1] = txy - wz;
 	rot[0][2] = twy + txz;
-	rot[1][0] = twz + txy;
-	rot[1][1] = 1.0f - (tzz + twx);
-	rot[1][2] = tyz - twxw;
+	rot[1][0] = wz + txy;
+	rot[1][1] = 1.0f - (zz + twx);
+	rot[1][2] = yz - twxw;
 	rot[2][0] = txz - twy;
-	rot[2][1] = tyz + twxw;
+	rot[2][1] = yz + twxw;
 	rot[2][2] = 1.0f - (tyy + twx);
 }
 

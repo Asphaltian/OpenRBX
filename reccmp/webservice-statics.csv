@@ -380,3 +380,5 @@ address,type,name
 0x10301b18,global,errorUploader
 0x10301bd8,global,registerFactoryObjects
 0x10300244,global,next
+0x10246e50,global,BLOCK_FACE_TO_VERTEX
+0x10246eb0,global,BLOCK_FACE_VERTEX_TO_EDGE

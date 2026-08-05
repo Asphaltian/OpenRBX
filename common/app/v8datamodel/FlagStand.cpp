@@ -9,9 +9,9 @@ const char sFlagStandService[] = "FlagStandService";
 char sFlagStand[] = "FlagStand";
 
 // FUNCTION: WEBSERVICE 0x100e8fa0
-void FlagStand::setTeamColor(BrickColor value)
+void FlagStand::setTeamColor(BrickColor color)
 {
-	teamColor = value;
+	teamColor = color;
 	raisePropertyChanged(PartInstance::prop_Color);
 }
 

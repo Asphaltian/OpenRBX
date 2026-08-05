@@ -12,11 +12,11 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011c900
-void SimJobStage::onEdgeRemoving(Edge* edge)
+void SimJobStage::onEdgeRemoving(Edge* e)
 {
-	edge->removeFromKernel();
+	e->removeFromKernel();
 
-	edge->removeFromStage(this);
+	e->removeFromStage(this);
 }
 
 // FUNCTION: WEBSERVICE 0x1011c990
@@ -31,15 +31,15 @@ void SimJobStage::notifyMovingPrimitives()
 }
 
 // FUNCTION: WEBSERVICE 0x1011cb40
-void SimJobStage::destroyMechanism(Mechanism* mechanism)
+void SimJobStage::destroyMechanism(Mechanism* m)
 {
-	Mechanism* next = mechanisms.size() > 1 ? nextMechanism(mechanisms, mechanism) : NULL;
+	Mechanism* next = mechanisms.size() > 1 ? nextMechanism(mechanisms, m) : NULL;
 
-	MechanismTracker::transferTrackers(mechanism, next);
+	MechanismTracker::transferTrackers(m, next);
 
-	mechanisms.erase(mechanism->myIt);
+	mechanisms.erase(m->myIt);
 
-	delete mechanism;
+	delete m;
 }
 
 void SimJobStage::insertMechanism(Mechanism* mechanism)
@@ -79,10 +79,10 @@ void SimJobStage::onAssemblyRemoving(Assembly* a)
 }
 
 // FUNCTION: WEBSERVICE 0x1011ccc0
-void SimJobStage::combineMechanisms(Edge* edge)
+void SimJobStage::combineMechanisms(Edge* e)
 {
-	Assembly* a0 = edge->getPrimitive(0)->getAssembly();
-	Assembly* a1 = edge->getPrimitive(1)->getAssembly();
+	Assembly* a0 = e->getPrimitive(0)->getAssembly();
+	Assembly* a1 = e->getPrimitive(1)->getAssembly();
 
 	Mechanism* m0 = a0->getMechanism();
 	Mechanism* m1 = a1->getMechanism();
@@ -98,20 +98,20 @@ void SimJobStage::combineMechanisms(Edge* edge)
 }
 
 // FUNCTION: WEBSERVICE 0x1011cd20
-void SimJobStage::onEdgeAdded(Edge* edge)
+void SimJobStage::onEdgeAdded(Edge* e)
 {
-	edge->putInPipeline(this);
+	e->putInPipeline(this);
 
-	if (edge->getEdgeType() == Edge::JOINT) {
-		Assembly* a0 = edge->getPrimitive(0)->getAssembly();
-		Assembly* a1 = edge->getPrimitive(1)->getAssembly();
+	if (e->getEdgeType() == Edge::JOINT) {
+		Assembly* a0 = e->getPrimitive(0)->getAssembly();
+		Assembly* a1 = e->getPrimitive(1)->getAssembly();
 
 		if (a0->inOrDownstreamOfStage(this) && a1->inOrDownstreamOfStage(this)) {
-			combineMechanisms(edge);
+			combineMechanisms(e);
 		}
 	}
 
-	edge->putInKernel(getKernel());
+	e->putInKernel(getKernel());
 }
 
 } // namespace RBX

@@ -46,28 +46,28 @@ void Mechanism::notifyMovingPrimitives()
 }
 
 // FUNCTION: WEBSERVICE 0x10127320
-void Mechanism::insertAssembly(Assembly* assembly)
+void Mechanism::insertAssembly(Assembly* a)
 {
-	assemblies.insert(assembly);
+	assemblies.insert(a);
 
-	assembly->setMechanism(this);
+	a->setMechanism(this);
 }
 
 // FUNCTION: WEBSERVICE 0x10127350
-void Mechanism::removeAssembly(Assembly* assembly)
+void Mechanism::removeAssembly(Assembly* a)
 {
-	assemblies.erase(assembly);
+	assemblies.erase(a);
 
-	assembly->setMechanism(NULL);
+	a->setMechanism(NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x10127370
-void Mechanism::absorb(Mechanism* other)
+void Mechanism::absorb(Mechanism* smaller)
 {
-	while (other->assemblies.size() != 0) {
-		Assembly* assembly = *other->assemblies.begin();
+	while (smaller->assemblies.size() != 0) {
+		Assembly* assembly = *smaller->assemblies.begin();
 
-		other->removeAssembly(assembly);
+		smaller->removeAssembly(assembly);
 
 		insertAssembly(assembly);
 	}
@@ -84,14 +84,14 @@ void MechanismTracker::stopTracking()
 }
 
 // FUNCTION: WEBSERVICE 0x101274f0
-void MechanismTracker::setMechanism(Mechanism* value)
+void MechanismTracker::setMechanism(Mechanism* m)
 {
 	stopTracking();
 
-	if (value != NULL) {
-		value->trackers.push_back(this);
+	if (m != NULL) {
+		m->trackers.push_back(this);
 
-		mechanism = value;
+		mechanism = m;
 	}
 }
 

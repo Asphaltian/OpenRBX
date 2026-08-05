@@ -25,13 +25,13 @@ void Guid::generateGUID(std::string& result)
 
 	CoCreateGuid(&guid);
 
-	WCHAR wide[64] = L"";
-	char narrow[64];
+	WCHAR wszGUID[64] = L"";
+	char ansiClsid[64];
 
-	StringFromGUID2(guid, wide, 64);
-	WideCharToMultiByte(CP_ACP, 0, wide, 64, narrow, 64, NULL, NULL);
+	StringFromGUID2(guid, wszGUID, 64);
+	WideCharToMultiByte(CP_ACP, 0, wszGUID, 64, ansiClsid, 64, NULL, NULL);
 
-	result += narrow;
+	result += ansiClsid;
 
 	result.erase(0x28, 1);
 	result.erase(0x1b, 1);
@@ -135,10 +135,10 @@ int Guid::compare(const Guid* a0, const Guid* a1, const Guid* b0, const Guid* b1
 // FUNCTION: WEBSERVICE 0x1003d660
 static void initLocalScope()
 {
-	std::string scope;
+	std::string guid;
 
-	Guid::generateGUID(scope);
-	localScope = &Name::declare(scope.c_str(), -1);
+	Guid::generateGUID(guid);
+	localScope = &Name::declare(guid.c_str(), -1);
 }
 
 // FUNCTION: WEBSERVICE 0x1003d6e0
@@ -164,11 +164,11 @@ std::string Guid::Data::readableString(int scopeLength) const
 	char buffer[64];
 
 	if (scopeLength > 0) {
-		std::string name = scope->name;
+		std::string s = scope->name;
 
-		name = name.substr(std::min<size_t>(3, name.size()), std::min(scopeLength, 32));
+		s = s.substr(std::min<size_t>(3, s.size()), std::min(scopeLength, 32));
 
-		sprintf(buffer, "%s_%d", name.c_str(), index);
+		sprintf(buffer, "%s_%d", s.c_str(), index);
 	}
 	else {
 		sprintf(buffer, "%d", index);

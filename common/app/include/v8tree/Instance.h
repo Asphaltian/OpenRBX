@@ -117,12 +117,12 @@ public:
 	bool contains(const Instance* instance) const;
 
 	// FUNCTION: WEBSERVICE 0x10047cd0
-	bool isAncestorOf(const Instance* instance) const
+	bool isAncestorOf(const Instance* descendent) const
 	{
-		while (instance != 0) {
-			instance = instance->parent;
+		while (descendent != 0) {
+			descendent = descendent->parent;
 
-			if (instance == this) {
+			if (descendent == this) {
 				return true;
 			}
 		}
@@ -131,11 +131,11 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10047d90
-	bool isDescendentOf(const Instance* instance) const
+	bool isDescendentOf(const Instance* ancestor) const
 	{
 		const Instance* walk = parent;
 
-		while (instance != walk) {
+		while (ancestor != walk) {
 			if (walk == 0) {
 				return false;
 			}

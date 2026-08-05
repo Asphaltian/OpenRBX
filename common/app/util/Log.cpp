@@ -26,44 +26,44 @@ void Log::setLogProvider(ILogProvider* logProvider)
 // FUNCTION: WEBSERVICE 0x1003d890
 std::string Log::formatMem(unsigned int bytes)
 {
-	char text[64];
+	char buffer[64];
 
 	if (bytes < 1000) {
-		sprintf(text, "%dB", bytes);
+		sprintf(buffer, "%dB", bytes);
 	}
 	else if (bytes < 1000000) {
-		sprintf(text, "%dKB", bytes / 1000);
+		sprintf(buffer, "%dKB", bytes / 1000);
 	}
 	else if (bytes < 1000000000) {
-		sprintf(text, "%dMB", bytes / 1000000);
+		sprintf(buffer, "%dMB", bytes / 1000000);
 	}
 	else {
-		sprintf(text, "%dGB", bytes / 1000000000);
+		sprintf(buffer, "%dGB", bytes / 1000000000);
 	}
 
-	return std::string(text);
+	return std::string(buffer);
 }
 
 // FUNCTION: WEBSERVICE 0x1003d930
-std::string Log::formatTime(double seconds)
+std::string Log::formatTime(double time)
 {
-	char text[64];
+	char buffer[64];
 
-	if (seconds == 0.0) {
-		sprintf(text, "0s");
+	if (time == 0.0) {
+		sprintf(buffer, "0s");
 	}
 
-	if (seconds < 0.0) {
-		sprintf(text, "%.3gs", seconds);
+	if (time < 0.0) {
+		sprintf(buffer, "%.3gs", time);
 	}
-	else if (seconds >= 0.1) {
-		sprintf(text, "%.3gs", seconds);
+	else if (time >= 0.1) {
+		sprintf(buffer, "%.3gs", time);
 	}
 	else {
-		sprintf(text, "%.3gms", seconds * 1000.0);
+		sprintf(buffer, "%.3gms", time * 1000.0);
 	}
 
-	return std::string(text);
+	return std::string(buffer);
 }
 
 } // namespace RBX
@@ -71,18 +71,18 @@ std::string Log::formatTime(double seconds)
 // FUNCTION: WEBSERVICE 0x1003de60
 static void timeStamp(std::ofstream& stream, bool withDate)
 {
-	SYSTEMTIME now;
-	GetLocalTime(&now);
+	SYSTEMTIME systemTime;
+	GetLocalTime(&systemTime);
 
-	char text[256];
+	char s[256];
 
 	if (withDate) {
-		sprintf(text, "%02u.%02u.%u ", now.wDay, now.wMonth, now.wYear);
-		stream << text;
+		sprintf(s, "%02u.%02u.%u ", systemTime.wDay, systemTime.wMonth, systemTime.wYear);
+		stream << s;
 	}
 
-	sprintf(text, "%02u:%02u.%03u ", now.wHour, now.wMinute, now.wMilliseconds);
-	stream << text;
+	sprintf(s, "%02u:%02u.%03u ", systemTime.wHour, systemTime.wMinute, systemTime.wMilliseconds);
+	stream << s;
 	stream.flush();
 }
 
@@ -104,7 +104,7 @@ Log::~Log()
 }
 
 // FUNCTION: WEBSERVICE 0x1003e020
-void Log::writeEntry(Severity severity, const char* entry)
+void Log::writeEntry(Severity severity, const char* message)
 {
 	std::ofstream* out = currentStream();
 
@@ -126,7 +126,7 @@ void Log::writeEntry(Severity severity, const char* entry)
 		*currentStream() << information;
 	}
 
-	*currentStream() << entry;
+	*currentStream() << message;
 	stream << '\n';
 	currentStream()->flush();
 }

@@ -84,11 +84,11 @@ void World::onPrimitiveExtentsChanged(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x100cf060
-void World::onAssemblyExtentsChanged(Assembly* assembly)
+void World::onAssemblyExtentsChanged(Assembly* a)
 {
-	PrimIterator end = assembly->assemblyPrimEnd();
+	PrimIterator pEnd = a->assemblyPrimEnd();
 
-	for (PrimIterator it = assembly->assemblyPrimBegin(); it != end; ++it) {
+	for (PrimIterator it = a->assemblyPrimBegin(); it != pEnd; ++it) {
 		contactManager->onPrimitiveExtentsChanged(*it);
 	}
 }
@@ -100,15 +100,15 @@ void World::onPrimitiveGeometryTypeChanged(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x100cf0d0
-void World::onJointPrimitiveNulling(Joint* joint, Primitive* primitive)
+void World::onJointPrimitiveNulling(Joint* j, Primitive* p)
 {
-	jointStage->onJointPrimitiveNulling(joint, primitive);
+	jointStage->onJointPrimitiveNulling(j, p);
 }
 
 // FUNCTION: WEBSERVICE 0x100cf0e0
-void World::onJointPrimitiveSet(Joint* joint, Primitive* primitive)
+void World::onJointPrimitiveSet(Joint* j, Primitive* p)
 {
-	jointStage->onJointPrimitiveSet(joint, primitive);
+	jointStage->onJointPrimitiveSet(j, p);
 }
 
 // FUNCTION: WEBSERVICE 0x100cf0f0
@@ -149,12 +149,12 @@ const SleepStage* World::getSleepStage() const
 }
 
 // FUNCTION: WEBSERVICE 0x100cf1a0
-void World::ticklePrimitive(Primitive* p, bool value)
+void World::ticklePrimitive(Primitive* p, bool recursive)
 {
 	Assembly* assembly = p->getAssembly();
 
 	if (assembly != NULL) {
-		getSleepStage()->onWakeUpRequest(assembly, value);
+		getSleepStage()->onWakeUpRequest(assembly, recursive);
 	}
 }
 

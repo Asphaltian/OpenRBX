@@ -11,11 +11,6 @@
 
 namespace RBX {
 
-// FUNCTION: WEBSERVICE 0x100a0700
-Connector::~Connector()
-{
-}
-
 // FUNCTION: WEBSERVICE 0x100a0710 FOLDED
 float Connector::potentialEnergy()
 {

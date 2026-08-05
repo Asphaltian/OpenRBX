@@ -48,17 +48,17 @@ float Extents::areaXZ() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a5a50
-Vector3 Extents::getCorner(int index) const
+Vector3 Extents::getCorner(int i) const
 {
 	const Vector3* corners = &low;
 
-	return Vector3(corners[index / 4].x, corners[index / 2 % 2].y, corners[index % 2].z);
+	return Vector3(corners[i / 4].x, corners[i / 2 % 2].y, corners[i % 2].z);
 }
 
 // FUNCTION: WEBSERVICE 0x100a5ab0
-void Extents::getFaceCorners(NormalId normalId, Vector3& c0, Vector3& c1, Vector3& c2, Vector3& c3) const
+void Extents::getFaceCorners(NormalId faceId, Vector3& v0, Vector3& v1, Vector3& v2, Vector3& v3) const
 {
-	switch (normalId) {
+	switch (faceId) {
 	case NORM_X:
 		goto x;
 	case NORM_Y:
@@ -76,27 +76,27 @@ void Extents::getFaceCorners(NormalId normalId, Vector3& c0, Vector3& c1, Vector
 	return;
 
 x:
-	c0 = getCorner(4), c1 = getCorner(6), c2 = getCorner(7), c3 = getCorner(5);
+	v0 = getCorner(4), v1 = getCorner(6), v2 = getCorner(7), v3 = getCorner(5);
 	return;
 
 y:
-	c0 = getCorner(2), c1 = getCorner(3), c2 = getCorner(7), c3 = getCorner(6);
+	v0 = getCorner(2), v1 = getCorner(3), v2 = getCorner(7), v3 = getCorner(6);
 	return;
 
 z:
-	c0 = getCorner(1), c1 = getCorner(5), c2 = getCorner(7), c3 = getCorner(3);
+	v0 = getCorner(1), v1 = getCorner(5), v2 = getCorner(7), v3 = getCorner(3);
 	return;
 
 xNeg:
-	c0 = getCorner(0), c1 = getCorner(1), c2 = getCorner(3), c3 = getCorner(2);
+	v0 = getCorner(0), v1 = getCorner(1), v2 = getCorner(3), v3 = getCorner(2);
 	return;
 
 yNeg:
-	c0 = getCorner(0), c1 = getCorner(4), c2 = getCorner(5), c3 = getCorner(1);
+	v0 = getCorner(0), v1 = getCorner(4), v2 = getCorner(5), v3 = getCorner(1);
 	return;
 
 zNeg:
-	c0 = getCorner(0), c1 = getCorner(2), c2 = getCorner(6), c3 = getCorner(4);
+	v0 = getCorner(0), v1 = getCorner(2), v2 = getCorner(6), v3 = getCorner(4);
 	return;
 }
 
@@ -114,10 +114,10 @@ bool Extents::overlapsOrTouches(const Extents& other) const
 // FUNCTION: WEBSERVICE 0x100a5d80
 bool Extents::separatedByMoreThan(const Extents& other, float distance) const
 {
-	Extents expanded(*this);
-	expanded.expand(distance);
+	Extents thisExpanded(*this);
+	thisExpanded.expand(distance);
 
-	return !expanded.overlapsOrTouches(other);
+	return !thisExpanded.overlapsOrTouches(other);
 }
 
 // FUNCTION: WEBSERVICE 0x100a5de0
@@ -128,10 +128,10 @@ bool Extents::contains(const Vector3& point) const
 }
 
 // FUNCTION: WEBSERVICE 0x100a5e40
-bool Extents::fuzzyContains(const Vector3& point, float epsilon) const
+bool Extents::fuzzyContains(const Vector3& point, float slop) const
 {
-	return low.x - epsilon <= point.x && low.y - epsilon <= point.y && low.z - epsilon <= point.z &&
-		   point.x <= high.x + epsilon && point.y <= high.y + epsilon && point.z <= epsilon + high.z;
+	return low.x - slop <= point.x && low.y - slop <= point.y && low.z - slop <= point.z && point.x <= high.x + slop &&
+		   point.y <= high.y + slop && point.z <= slop + high.z;
 }
 
 // FUNCTION: WEBSERVICE 0x100a5eb0
@@ -151,12 +151,12 @@ const Extents& Extents::negativeInfiniteExtents()
 }
 
 // FUNCTION: WEBSERVICE 0x100a5fd0
-Vector3 Extents::faceCenter(NormalId normalId) const
+Vector3 Extents::faceCenter(NormalId faceId) const
 {
 	Vector3 answer = (high + low) * 0.5f;
 
-	const int axis = normalId % 3;
-	answer[axis] = normalId < 3 ? high[axis] : low[axis];
+	const int axis = faceId % 3;
+	answer[axis] = faceId < 3 ? high[axis] : low[axis];
 
 	return answer;
 }
@@ -190,44 +190,44 @@ Extents Extents::vv(const Vector3& v0, const Vector3& v1)
 }
 
 // FUNCTION: WEBSERVICE 0x100a61d0
-Extents Extents::express(const CoordinateFrame& from, const CoordinateFrame& to) const
+Extents Extents::express(const CoordinateFrame& myFrame, const CoordinateFrame& expressInFrame) const
 {
-	Vector3 expressedLow(Math::inf(), Math::inf(), Math::inf());
-	Vector3 expressedHigh(-Math::inf(), -Math::inf(), -Math::inf());
+	Vector3 minC(Math::inf(), Math::inf(), Math::inf());
+	Vector3 maxC(-Math::inf(), -Math::inf(), -Math::inf());
 
 	for (int i = 0; i < 8; ++i) {
-		const Vector3 corner = to.pointToObjectSpace(from.pointToWorldSpace(getCorner(i)));
+		const Vector3 inOther = expressInFrame.pointToObjectSpace(myFrame.pointToWorldSpace(getCorner(i)));
 
-		expressedLow = expressedLow.min(corner);
-		expressedHigh = expressedHigh.max(corner);
+		minC = minC.min(inOther);
+		maxC = maxC.max(inOther);
 	}
 
-	return vv(expressedLow, expressedHigh);
+	return vv(minC, maxC);
 }
 
 // FUNCTION: WEBSERVICE 0x100a6440
-Extents Extents::toWorldSpace(const CoordinateFrame& coordinateFrame) const
+Extents Extents::toWorldSpace(const CoordinateFrame& localCoord) const
 {
-	Vector3 worldLow(Math::inf(), Math::inf(), Math::inf());
-	Vector3 worldHigh(-Math::inf(), -Math::inf(), -Math::inf());
+	Vector3 minC(Math::inf(), Math::inf(), Math::inf());
+	Vector3 maxC(-Math::inf(), -Math::inf(), -Math::inf());
 
 	for (int i = 0; i < 8; ++i) {
-		const Vector3 corner = coordinateFrame.pointToWorldSpace(getCorner(i));
+		const Vector3 world = localCoord.pointToWorldSpace(getCorner(i));
 
-		worldLow = worldLow.min(corner);
-		worldHigh = worldHigh.max(corner);
+		minC = minC.min(world);
+		maxC = maxC.max(world);
 	}
 
-	return vv(worldLow, worldHigh);
+	return vv(minC, maxC);
 }
 
 // FUNCTION: WEBSERVICE 0x100a6660
 Plane Extents::getPlane(NormalId normalId) const
 {
-	const Vector3 center = faceCenter(normalId);
+	const Vector3 point = faceCenter(normalId);
 	const Vector3 normal = normalIdToVector3(normalId);
 
-	return Plane(normal, center);
+	return Plane(normal, point);
 }
 
 } // namespace RBX

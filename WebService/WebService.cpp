@@ -222,10 +222,10 @@ std::map<std::string, CWebService::Job> CWebService::jobs;
 boost::mutex CWebService::sync;
 
 // FUNCTION: WEBSERVICE 0x1000dfb0
-HRESULT __stdcall CWebService::HelloWorld(wchar_t** result)
+HRESULT __stdcall CWebService::HelloWorld(wchar_t** bstrOutput)
 {
 	ATL::CComBSTR answer(L"Hello World!");
-	*result = answer.Detach();
+	*bstrOutput = answer.Detach();
 
 	return S_OK;
 }
@@ -233,9 +233,9 @@ HRESULT __stdcall CWebService::HelloWorld(wchar_t** result)
 } // namespace Roblox
 
 // FUNCTION: WEBSERVICE 0x1000e070
-STDAPI DllGetClassObject(REFCLSID clsid, REFIID iid, LPVOID* ppv)
+STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 {
-	return _AtlModule.DllGetClassObject(clsid, iid, ppv);
+	return _AtlModule.DllGetClassObject(rclsid, riid, ppv);
 }
 
 // FUNCTION: WEBSERVICE 0x1000e090
@@ -257,9 +257,9 @@ STDAPI DllCanUnloadNow()
 }
 
 // FUNCTION: WEBSERVICE 0x1000e130
-extern "C" BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)
+extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 {
-	return _AtlModule.DllMain(reason, reserved);
+	return _AtlModule.DllMain(dwReason, lpReserved);
 }
 
 // SIZE 0x328
@@ -273,7 +273,7 @@ private:
 CRbxIsapiExtension theExtension;
 
 // FUNCTION: WEBSERVICE 0x1000e340
-extern "C" DWORD WINAPI HttpExtensionProc(EXTENSION_CONTROL_BLOCK* ecb)
+extern "C" DWORD WINAPI HttpExtensionProc(EXTENSION_CONTROL_BLOCK* lpECB)
 {
 	boost::call_once(initRoblox, flagInitRoblox);
 
@@ -281,23 +281,23 @@ extern "C" DWORD WINAPI HttpExtensionProc(EXTENSION_CONTROL_BLOCK* ecb)
 		return HSE_STATUS_ERROR;
 	}
 
-	return theExtension.HttpExtensionProc(ecb);
+	return theExtension.HttpExtensionProc(lpECB);
 }
 
 // FUNCTION: WEBSERVICE 0x1000e370
-extern "C" BOOL WINAPI GetExtensionVersion(HSE_VERSION_INFO* version)
+extern "C" BOOL WINAPI GetExtensionVersion(HSE_VERSION_INFO* pVer)
 {
-	return theExtension.GetExtensionVersion(version);
+	return theExtension.GetExtensionVersion(pVer);
 }
 
 // FUNCTION: WEBSERVICE 0x1000e380
-extern "C" BOOL WINAPI TerminateExtension(DWORD flags)
+extern "C" BOOL WINAPI TerminateExtension(DWORD dwFlags)
 {
-	if (flags & HSE_TERM_ADVISORY_UNLOAD && Roblox::CWebService::jobs.size() > 0) {
+	if (dwFlags & HSE_TERM_ADVISORY_UNLOAD && Roblox::CWebService::jobs.size() > 0) {
 		return FALSE;
 	}
 
-	return theExtension.TerminateExtension(flags);
+	return theExtension.TerminateExtension(dwFlags);
 }
 
 namespace Roblox {
@@ -329,18 +329,18 @@ HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
 }
 
 // STUB: WEBSERVICE 0x1000e650
-HRESULT __stdcall CWebService::TouchJob(wchar_t* jobID, double expiration)
+HRESULT __stdcall CWebService::TouchJob(wchar_t* jobID, double timeout)
 {
 	boost::mutex::scoped_lock lock(sync);
 
 	std::map<std::string, Job>::iterator job = getJob(jobID);
-	job->second.expiration = G3D::System::getLocalTime() + expiration;
+	job->second.expiration = G3D::System::getLocalTime() + timeout;
 
 	return S_OK;
 }
 
 // STUB: WEBSERVICE 0x1000e730
-HRESULT __stdcall CWebService::OpenJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result)
+HRESULT __stdcall CWebService::OpenJob(wchar_t* jobID, ScriptExecution script, double timeout, LuaArguments* result)
 {
 	STUB(0x1000e730);
 	return E_NOTIMPL;
@@ -361,7 +361,7 @@ HRESULT __stdcall CWebService::CloseTimedoutJobs(int* result)
 }
 
 // STUB: WEBSERVICE 0x1000ee00
-HRESULT __stdcall CWebService::CloseOrphanedJobs(Strings jobs, int* result)
+HRESULT __stdcall CWebService::CloseOrphanedJobs(Strings activeJobs, int* result)
 {
 	STUB(0x1000ee00);
 	return E_NOTIMPL;
@@ -405,9 +405,9 @@ HRESULT __stdcall CWebService::Execute(wchar_t* jobID, ScriptExecution script, L
 }
 
 // FUNCTION: WEBSERVICE 0x1000f990
-HRESULT __stdcall CWebService::BatchJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result)
+HRESULT __stdcall CWebService::BatchJob(wchar_t* jobID, ScriptExecution script, double timeout, LuaArguments* result)
 {
-	HRESULT hr = OpenJob(jobID, script, expiration, result);
+	HRESULT hr = OpenJob(jobID, script, timeout, result);
 
 	if (hr == S_OK) {
 		hr = CloseJob(jobID);
@@ -466,18 +466,18 @@ HRESULT __stdcall CWebService::GetStandardOutMessages(int lastId, StandardOutMes
 
 	result->items = items;
 
-	int index = 0;
+	int i = 0;
 	while (!standardOutLog->messages.empty()) {
 		const RBX::StandardOutMessage& message = standardOutLog->messages.front();
 
-		result->items[index].type = (MessageType) message.type;
-		result->items[index].time = message.time;
+		result->items[i].type = (MessageType) message.type;
+		result->items[i].time = message.time;
 
 		ATL::CComBSTR text(ATL::CStringA(message.message.c_str()));
-		result->items[index].text = text.Detach();
+		result->items[i].text = text.Detach();
 
 		standardOutLog->messages.pop();
-		index++;
+		i++;
 	}
 
 	return S_OK;

@@ -56,7 +56,7 @@ private:
 	static std::vector<const EnumDescriptor*>& allEnums();
 
 	// FUNCTION: WEBSERVICE 0x10081e50
-	static bool equalValue(const Item* item, int value) { return item->value == value; }
+	static bool equalValue(const Item* item, int intValue) { return item->value == intValue; }
 };
 
 DECOMP_SIZE_ASSERT(EnumDescriptor, 0x28)

@@ -23,7 +23,11 @@ using G3D::Vector3;
 class Connector : public KernelIndex
 {
 public:
-	virtual ~Connector();                                     // vtable+0x00
+	// FUNCTION: WEBSERVICE 0x100a0700
+	virtual ~Connector() // vtable+0x00
+	{
+	}
+
 	virtual void computeForce(float dt, bool throttling) = 0; // vtable+0x04
 	virtual bool canThrottle();                               // vtable+0x08
 	virtual bool getBroken();                                 // vtable+0x0c
@@ -120,7 +124,84 @@ DECOMP_SIZE_ASSERT(NormalBreakConnector, 0x20)
 class ContactConnector : public Connector
 {
 public:
-	void reset();
+	// FUNCTION: WEBSERVICE 0x100d2120
+	ContactConnector(float _k, float _kNeg, float _kFriction)
+	{
+		k = _k;
+		kNeg = _kNeg;
+		kFriction = _kFriction;
+
+		reset();
+	}
+
+	void reset()
+	{
+		frictionOffset = Vector3::zero();
+
+		firstApproach = 0;
+		threshold = 0;
+		forceMagLast = 0;
+	}
+
+	void setBallBall(Body* body0, Body* body1, float radius0, float radiusSum)
+	{
+		geoPair.setBallBall(body0, body1, radius0, radiusSum);
+	}
+
+	void setBallBlock(
+		Body* body0,
+		Body* body1,
+		float radius0,
+		const Vector3* offset1,
+		NormalId normalID1,
+		GeoPairType geoPairType
+	)
+	{
+		geoPair.setBallBlock(body0, body1, radius0, offset1, normalID1, geoPairType);
+	}
+
+	void setPointPlane(
+		Body* body0,
+		Body* body1,
+		const Vector3* offset0,
+		const Vector3* offset1,
+		int point0ID,
+		NormalId planeID
+	)
+	{
+		geoPair.setPointPlane(body0, body1, offset0, offset1, point0ID, planeID);
+	}
+
+	void setEdgeEdgePlane(
+		Body* body0,
+		Body* body1,
+		const Vector3* offset0,
+		const Vector3* offset1,
+		NormalId normalID0,
+		NormalId normalID1,
+		NormalId planeID,
+		float edgeLength0
+	)
+	{
+		geoPair.setEdgeEdgePlane(body0, body1, offset0, offset1, normalID0, normalID1, planeID, edgeLength0);
+	}
+
+	void setEdgeEdge(
+		Body* body0,
+		Body* body1,
+		const Vector3* offset0,
+		const Vector3* offset1,
+		NormalId normalID0,
+		NormalId normalID1
+	)
+	{
+		geoPair.setEdgeEdge(body0, body1, offset0, offset1, normalID0, normalID1);
+	}
+
+	bool match(Body* body0, Body* body1, GeoPairType geoPairType, int point0ID, int point1ID)
+	{
+		return geoPair.match(body0, body1, geoPairType, point0ID, point1ID);
+	}
 
 	virtual void computeForce(float dt, bool throttling); // vtable+0x04
 	virtual bool canThrottle();                           // vtable+0x08

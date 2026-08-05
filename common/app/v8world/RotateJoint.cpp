@@ -25,13 +25,8 @@ RotateJoint::RotateJoint() : MultiJoint(2), rotateConnector(NULL)
 }
 
 // FUNCTION: WEBSERVICE 0x1011ede0
-RotateJoint::RotateJoint(
-	Primitive* prim0,
-	Primitive* prim1,
-	const CoordinateFrame& coord0,
-	const CoordinateFrame& coord1
-)
-	: MultiJoint(prim0, prim1, coord0, coord1, 2), rotateConnector(NULL)
+RotateJoint::RotateJoint(Primitive* axlePrim, Primitive* holePrim, const CoordinateFrame& c0, const CoordinateFrame& c1)
+	: MultiJoint(axlePrim, holePrim, c0, c1, 2), rotateConnector(NULL)
 {
 }
 
@@ -49,14 +44,14 @@ void RotateJoint::removeFromKernel()
 }
 
 // FUNCTION: WEBSERVICE 0x1011ee40
-float RotateJoint::getChannelValue(int frameCount)
+float RotateJoint::getChannelValue(int uiStepId)
 {
 	const SurfaceData& surfaceData = getAxlePrim()->getSurfaceData(getAxleId());
 
-	float value = getAxlePrim()->getController()->getValue(surfaceData.inputType);
+	float controllerValue = getAxlePrim()->getController()->getValue(surfaceData.inputType);
 	float paramA = surfaceData.paramA;
 	float paramB = surfaceData.paramB;
-	float time = Constants::uiDt() * frameCount;
+	float time = Constants::uiDt() * uiStepId;
 
 	switch (surfaceData.inputType) {
 	case Controller::CONSTANT_INPUT:
@@ -66,27 +61,27 @@ float RotateJoint::getChannelValue(int frameCount)
 	case Controller::NO_INPUT:
 		break;
 	case Controller::LEFT_TRACK_INPUT:
-		if (value < -0.1) {
-			return fabs(paramA) * value;
+		if (controllerValue < -0.1) {
+			return fabs(paramA) * controllerValue;
 		}
-		if (0.1 < value) {
-			return fabs(paramB) * value;
+		if (0.1 < controllerValue) {
+			return fabs(paramB) * controllerValue;
 		}
 		break;
 	case Controller::RIGHT_TRACK_INPUT:
-		if (value < -0.1) {
-			return -(fabs(paramA) * value);
+		if (controllerValue < -0.1) {
+			return -(fabs(paramA) * controllerValue);
 		}
-		if (0.1 < value) {
-			return -(fabs(paramB) * value);
+		if (0.1 < controllerValue) {
+			return -(fabs(paramB) * controllerValue);
 		}
 		break;
 	default:
-		if (value < -0.1) {
-			return -(value * paramA);
+		if (controllerValue < -0.1) {
+			return -(controllerValue * paramA);
 		}
-		if (0.1 < value) {
-			return value * paramB;
+		if (0.1 < controllerValue) {
+			return controllerValue * paramB;
 		}
 		break;
 	}
@@ -96,52 +91,52 @@ float RotateJoint::getChannelValue(int frameCount)
 
 // FUNCTION: WEBSERVICE 0x1011f030
 RotatePJoint::RotatePJoint(
-	Primitive* prim0,
-	Primitive* prim1,
-	const CoordinateFrame& coord0,
-	const CoordinateFrame& coord1
+	Primitive* axlePrim,
+	Primitive* holePrim,
+	const CoordinateFrame& c0,
+	const CoordinateFrame& c1
 )
-	: RotateJoint(prim0, prim1, coord0, coord1)
+	: RotateJoint(axlePrim, holePrim, c0, c1)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1011f070
 RotateVJoint::RotateVJoint(
-	Primitive* prim0,
-	Primitive* prim1,
-	const CoordinateFrame& coord0,
-	const CoordinateFrame& coord1
+	Primitive* axlePrim,
+	Primitive* holePrim,
+	const CoordinateFrame& c0,
+	const CoordinateFrame& c1
 )
-	: RotateJoint(prim0, prim1, coord0, coord1)
+	: RotateJoint(axlePrim, holePrim, c0, c1)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1011f0e0
 RotateJoint* RotateJoint::surfaceTypeToJoint(
 	SurfaceType surfaceType,
-	Primitive* prim0,
-	Primitive* prim1,
-	const CoordinateFrame& coord0,
-	const CoordinateFrame& coord1
+	Primitive* axlePrim,
+	Primitive* holePrim,
+	const CoordinateFrame& c0,
+	const CoordinateFrame& c1
 )
 {
 	switch (surfaceType) {
 	case ROTATE:
-		return new RotateJoint(prim0, prim1, coord0, coord1);
+		return new RotateJoint(axlePrim, holePrim, c0, c1);
 	case ROTATE_P:
-		return new RotatePJoint(prim0, prim1, coord0, coord1);
+		return new RotatePJoint(axlePrim, holePrim, c0, c1);
 	case ROTATE_V:
-		return new RotateVJoint(prim0, prim1, coord0, coord1);
+		return new RotateVJoint(axlePrim, holePrim, c0, c1);
 	}
 
 	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1011f200
-RotateJoint* RotateJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1)
+RotateJoint* RotateJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, NormalId nId0, NormalId nId1)
 {
-	SurfaceType surfaceType0 = prim0->getSurfaceType(normalId0);
-	SurfaceType surfaceType1 = prim1->getSurfaceType(normalId1);
+	SurfaceType surfaceType0 = prim0->getSurfaceType(nId0);
+	SurfaceType surfaceType1 = prim1->getSurfaceType(nId1);
 
 	if (surfaceType0 < ROTATE && surfaceType1 < ROTATE) {
 		return NULL;
@@ -150,15 +145,15 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, Norm
 	const CoordinateFrame& coord0 = prim0->getCoordinateFrame();
 	const CoordinateFrame& coord1 = prim1->getCoordinateFrame();
 
-	Vector3 axis0 = Math::getWorldNormal(normalId0, coord0);
-	Vector3 axis1 = Math::getWorldNormal(normalId1, coord1);
+	Vector3 axis0 = Math::getWorldNormal(nId0, coord0);
+	Vector3 axis1 = Math::getWorldNormal(nId1, coord1);
 
 	if (0.025f < Math::angle(axis0, -axis1)) {
 		return NULL;
 	}
 
-	Face face0 = prim0->getFaceInWorld(normalId0);
-	Face face1 = prim1->getFaceInWorld(normalId1);
+	Face face0 = prim0->getFaceInWorld(nId0);
+	Face face1 = prim1->getFaceInWorld(nId1);
 
 	if (!Face::hasOverlap(face0, face1, 0.35f)) {
 		return NULL;
@@ -184,17 +179,17 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, Norm
 	if (!axle0 || (axle1 && prim1->getGeometry()->getGridSize().sum() > prim0->getGeometry()->getGridSize().sum())) {
 		surfaceType0 = surfaceType1;
 		std::swap(prim0, prim1);
-		std::swap(normalId0, normalId1);
+		std::swap(nId0, nId1);
 		std::swap(center0, center1);
 		std::swap(axis0, axis1);
 	}
 
-	CoordinateFrame jointCoord0 = prim0->getFaceCoordInObject(normalId0);
+	CoordinateFrame jointCoord0 = prim0->getFaceCoordInObject(nId0);
 
 	Vector3 worldPos0 = prim0->getCoordinateFrame().pointToWorldSpace(jointCoord0.translation);
 	Vector3 objectPos = prim1->getCoordinateFrame().pointToObjectSpace(worldPos0);
 
-	NormalId oppositeId = normalIdOpposite(normalId1);
+	NormalId oppositeId = normalIdOpposite(nId1);
 
 	CoordinateFrame jointCoord1(normalIdToMatrix3(oppositeId), Math::toGrid(objectPos, 0.1f));
 
@@ -235,9 +230,9 @@ void RotatePJoint::stepUi(int frameCount)
 }
 
 // FUNCTION: WEBSERVICE 0x1011f730
-void RotateVJoint::stepUi(int frameCount)
+void RotateVJoint::stepUi(int uiStepId)
 {
-	float value = getChannelValue(frameCount);
+	float value = getChannelValue(uiStepId);
 
 	if (rotateConnector != NULL) {
 		rotateConnector->getKernelInput().setDelta(value);
@@ -254,8 +249,8 @@ void RotateVJoint::stepUi(int frameCount)
 // FUNCTION: WEBSERVICE 0x1011f7d0
 float RotateJoint::getTorqueArmLength()
 {
-	Vector3 axleSize = getAxlePrim()->getGeometry()->getGridSize();
-	Vector3 holeSize = getHolePrim()->getGeometry()->getGridSize();
+	Vector3 ownerSize = getAxlePrim()->getGeometry()->getGridSize();
+	Vector3 otherSize = getHolePrim()->getGeometry()->getGridSize();
 
 	NormalId axleId = getAxleId();
 	NormalId holeId = getHoleId();
@@ -263,10 +258,10 @@ float RotateJoint::getTorqueArmLength()
 	int holeIndex0 = (holeId + 1) % 3;
 	int holeIndex1 = (holeId + 2) % 3;
 
-	float axleArm = std::max(axleSize[(axleId + 1) % 3], axleSize[(axleId + 2) % 3]);
-	float holeArm = std::max(holeSize[holeIndex0], holeSize[holeIndex1]);
+	float ownerMax = std::max(ownerSize[(axleId + 1) % 3], ownerSize[(axleId + 2) % 3]);
+	float otherMax = std::max(otherSize[holeIndex0], otherSize[holeIndex1]);
 
-	return std::min(axleArm, holeArm) * 0.1f;
+	return std::min(ownerMax, otherMax) * 0.1f;
 }
 
 // FUNCTION: WEBSERVICE 0x1011f8c0

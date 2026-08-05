@@ -50,7 +50,7 @@ class GeoPair
 public:
 	GeoPair();
 
-	bool match(Body* body0, Body* body1, GeoPairType geoPairType, int point0ID, int point1ID);
+	bool match(Body* _b0, Body* _b1, GeoPairType _pairType, int param0, int param1);
 
 	const Body* getBody(int index) const { return (&body0)[index]; }
 
@@ -158,6 +158,120 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(GeoPair, 0x24)
+
+// FUNCTION: WEBSERVICE 0x100d1ea0
+inline bool GeoPair::match(Body* _b0, Body* _b1, GeoPairType _pairType, int param0, int param1)
+{
+	if (_pairType == POINT_PLANE_PAIR) {
+		return _b0 == body0 && _b1 == body1 && param0 == pairData.point0ID && param1 == pairData.normalID1;
+	}
+
+	if (_pairType == EDGE_EDGE_PLANE_PAIR) {
+		return _b0 == body0 && _b1 == body1 && param0 == pairData.normalID0 && param1 == pairData.normalID1;
+	}
+
+	return (_b0 == body0 && _b1 == body1 && param0 == pairData.normalID0 && param1 == pairData.normalID1) ||
+		   (_b0 == body1 && _b1 == body0 && param0 == pairData.normalID1 && param1 == pairData.normalID0);
+}
+
+inline void GeoPair::setBallBall(Body* body0, Body* body1, float radius0, float radiusSum)
+{
+	this->body0 = body0;
+	this->body1 = body1;
+
+	pairData.radius0 = radius0;
+	pairData.radiusSum = radiusSum;
+
+	geoPairType = BALL_BALL_PAIR;
+}
+
+inline void GeoPair::setBallBlock(
+	Body* body0,
+	Body* body1,
+	float radius0,
+	const Vector3* offset1,
+	NormalId normalID1,
+	GeoPairType geoPairType
+)
+{
+	this->body0 = body0;
+	this->body1 = body1;
+
+	this->offset1 = offset1;
+
+	pairData.radius0 = radius0;
+	pairData.normalID1 = normalID1;
+
+	this->geoPairType = geoPairType;
+}
+
+inline void GeoPair::setPointPlane(
+	Body* body0,
+	Body* body1,
+	const Vector3* offset0,
+	const Vector3* offset1,
+	int point0ID,
+	NormalId planeID
+)
+{
+	this->body0 = body0;
+	this->body1 = body1;
+
+	this->offset0 = offset0;
+	this->offset1 = offset1;
+
+	pairData.point0ID = point0ID;
+	pairData.normalID1 = planeID;
+
+	geoPairType = POINT_PLANE_PAIR;
+}
+
+inline void GeoPair::setEdgeEdgePlane(
+	Body* body0,
+	Body* body1,
+	const Vector3* offset0,
+	const Vector3* offset1,
+	NormalId normalID0,
+	NormalId normalID1,
+	NormalId planeID,
+	float edgeLength0
+)
+{
+	this->body0 = body0;
+	this->body1 = body1;
+
+	this->offset0 = offset0;
+	this->offset1 = offset1;
+
+	this->edgeLength0 = edgeLength0;
+
+	pairData.normalID0 = normalID0;
+	pairData.normalID1 = normalID1;
+	pairData.planeID = planeID;
+
+	geoPairType = EDGE_EDGE_PLANE_PAIR;
+}
+
+inline void GeoPair::setEdgeEdge(
+	Body* body0,
+	Body* body1,
+	const Vector3* offset0,
+	const Vector3* offset1,
+	NormalId normalID0,
+	NormalId normalID1
+)
+{
+	this->body0 = body0;
+	this->body1 = body1;
+
+	this->offset0 = offset0;
+	this->offset1 = offset1;
+
+	pairData.normalID0 = normalID0;
+	pairData.normalID1 = normalID1;
+
+	geoPairType = EDGE_EDGE_PAIR;
+}
 
 } // namespace RBX
 

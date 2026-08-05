@@ -6,19 +6,19 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10126da0
-void IWorldStage::onEdgeAdded(Edge* edge)
+void IWorldStage::onEdgeAdded(Edge* e)
 {
-	edge->putInPipeline(this);
+	e->putInPipeline(this);
 
-	static_cast<IWorldStage*>(getDownstream())->onEdgeAdded(edge);
+	static_cast<IWorldStage*>(getDownstream())->onEdgeAdded(e);
 }
 
 // FUNCTION: WEBSERVICE 0x10126dc0
-void IWorldStage::onEdgeRemoving(Edge* edge)
+void IWorldStage::onEdgeRemoving(Edge* e)
 {
-	static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(edge);
+	static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(e);
 
-	edge->removeFromStage(this);
+	e->removeFromStage(this);
 }
 
 } // namespace RBX

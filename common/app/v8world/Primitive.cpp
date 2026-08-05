@@ -26,10 +26,10 @@ namespace RBX {
 bool Primitive::disableSleep = false;
 
 // FUNCTION: WEBSERVICE 0x100a77d0
-void Primitive::setSizeMultiplier(unsigned int multiplier)
+void Primitive::setSizeMultiplier(unsigned int value)
 {
-	if (multiplier != sizeMultiplier && world == NULL) {
-		sizeMultiplier = multiplier;
+	if (value != sizeMultiplier && world == NULL) {
+		sizeMultiplier = value;
 	}
 }
 
@@ -47,10 +47,10 @@ void Primitive::setGuid(const Guid& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7820
-Primitive* Primitive::downstreamPrimitive(Joint* joint)
+Primitive* Primitive::downstreamPrimitive(Joint* j)
 {
-	Primitive* answer = joint->getPrimitive(0);
-	Primitive* other = joint->getPrimitive(1);
+	Primitive* answer = j->getPrimitive(0);
+	Primitive* other = j->getPrimitive(1);
 
 	if (other != NULL && answer->clumpDepth <= other->clumpDepth) {
 		answer = other;
@@ -69,59 +69,59 @@ void EdgeList::insertEdge(Primitive* primitive, Edge* edge, EdgeList& list)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7840
-void EdgeList::removeEdge(Primitive* primitive, Edge* edge, EdgeList& list)
+void EdgeList::removeEdge(Primitive* p, Edge* e, EdgeList& list)
 {
 	Edge* previous = list.first;
 
-	if (previous == edge) {
-		list.first = edge->getNext(primitive);
+	if (previous == e) {
+		list.first = e->getNext(p);
 	}
 	else {
-		while (previous->getNext(primitive) != edge) {
-			previous = previous->getNext(primitive);
+		while (previous->getNext(p) != e) {
+			previous = previous->getNext(p);
 		}
 
-		previous->setNext(primitive, edge->getNext(primitive));
+		previous->setNext(p, e->getNext(p));
 	}
 
 	list.num--;
 }
 
 // FUNCTION: WEBSERVICE 0x100a78c0
-void Primitive::insertEdge(Edge* edge)
+void Primitive::insertEdge(Edge* e)
 {
-	Primitive* prim0 = edge->getPrimitive(0);
-	Primitive* prim1 = edge->getPrimitive(1);
+	Primitive* prim0 = e->getPrimitive(0);
+	Primitive* prim1 = e->getPrimitive(1);
 
-	if (edge->getEdgeType() == Edge::JOINT) {
-		EdgeList::insertEdge(prim0, edge, edge->getPrimitive(0)->joints);
+	if (e->getEdgeType() == Edge::JOINT) {
+		EdgeList::insertEdge(prim0, e, e->getPrimitive(0)->joints);
 
 		if (prim1 != NULL) {
-			EdgeList::insertEdge(prim1, edge, edge->getPrimitive(1)->joints);
+			EdgeList::insertEdge(prim1, e, e->getPrimitive(1)->joints);
 		}
 	}
 	else {
-		EdgeList::insertEdge(prim0, edge, edge->getPrimitive(0)->contacts);
-		EdgeList::insertEdge(prim1, edge, edge->getPrimitive(1)->contacts);
+		EdgeList::insertEdge(prim0, e, e->getPrimitive(0)->contacts);
+		EdgeList::insertEdge(prim1, e, e->getPrimitive(1)->contacts);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a7960
-void Primitive::removeEdge(Edge* edge)
+void Primitive::removeEdge(Edge* e)
 {
-	Primitive* prim0 = edge->getPrimitive(0);
-	Primitive* prim1 = edge->getPrimitive(1);
+	Primitive* prim0 = e->getPrimitive(0);
+	Primitive* prim1 = e->getPrimitive(1);
 
-	if (edge->getEdgeType() == Edge::JOINT) {
-		EdgeList::removeEdge(prim0, edge, edge->getPrimitive(0)->joints);
+	if (e->getEdgeType() == Edge::JOINT) {
+		EdgeList::removeEdge(prim0, e, e->getPrimitive(0)->joints);
 
 		if (prim1 != NULL) {
-			EdgeList::removeEdge(prim1, edge, edge->getPrimitive(1)->joints);
+			EdgeList::removeEdge(prim1, e, e->getPrimitive(1)->joints);
 		}
 	}
 	else {
-		EdgeList::removeEdge(prim0, edge, edge->getPrimitive(0)->contacts);
-		EdgeList::removeEdge(prim1, edge, edge->getPrimitive(1)->contacts);
+		EdgeList::removeEdge(prim0, e, e->getPrimitive(0)->contacts);
+		EdgeList::removeEdge(prim1, e, e->getPrimitive(1)->contacts);
 	}
 }
 
@@ -138,15 +138,15 @@ Edge* Primitive::getFirstEdge() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a79e0
-Edge* Primitive::getNextEdge(Edge* edge) const
+Edge* Primitive::getNextEdge(Edge* e) const
 {
-	Edge* next = edge->getNext(this);
+	Edge* next = e->getNext(this);
 
 	if (next != NULL) {
 		return next;
 	}
 
-	if (edge->getEdgeType() == Edge::JOINT) {
+	if (e->getEdgeType() == Edge::JOINT) {
 		return contacts.first;
 	}
 
@@ -176,10 +176,10 @@ void Primitive::onNewTouch(Primitive* p0, Primitive* p1)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7a90
-void Primitive::setClump(Clump* value)
+void Primitive::setClump(Clump* set)
 {
-	if (value != clump) {
-		clump = value;
+	if (set != clump) {
+		clump = set;
 	}
 }
 
@@ -200,10 +200,10 @@ float Primitive::computeJointK() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ae0
-void Primitive::setCanSleep(bool value)
+void Primitive::setCanSleep(bool _canSleep)
 {
-	if (value != canSleep) {
-		canSleep = value;
+	if (_canSleep != canSleep) {
+		canSleep = _canSleep;
 
 		if (world != NULL) {
 			world->onPrimitiveCanSleepChanged(this);
@@ -212,12 +212,12 @@ void Primitive::setCanSleep(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7b10
-void Primitive::setCanCollide(bool value)
+void Primitive::setCanCollide(bool _canCollide)
 {
 	bool wasCollideable = !dragging && canCollide;
 
-	if (canCollide != value) {
-		canCollide = value;
+	if (canCollide != _canCollide) {
+		canCollide = _canCollide;
 
 		if (world != NULL) {
 			bool isCollideable = !dragging && canCollide;
@@ -230,10 +230,10 @@ void Primitive::setCanCollide(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7b70
-void Primitive::setFriction(float value)
+void Primitive::setFriction(float _friction)
 {
-	if (value != friction) {
-		friction = value;
+	if (_friction != friction) {
+		friction = _friction;
 
 		if (world != NULL) {
 			world->onPrimitiveContactParametersChanged(this);
@@ -242,10 +242,10 @@ void Primitive::setFriction(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7bb0
-void Primitive::setElasticity(float value)
+void Primitive::setElasticity(float _elasticity)
 {
-	if (value != elasticity) {
-		elasticity = value;
+	if (_elasticity != elasticity) {
+		elasticity = _elasticity;
 
 		if (world != NULL) {
 			world->onPrimitiveContactParametersChanged(this);
@@ -254,54 +254,54 @@ void Primitive::setElasticity(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7bf0
-CoordinateFrame Primitive::getFaceCoordInObject(NormalId normalId)
+CoordinateFrame Primitive::getFaceCoordInObject(NormalId objectFace)
 {
-	return CoordinateFrame(normalIdToMatrix3(normalId), normalIdToVector3(normalId) * geometry->getGridSize());
+	return CoordinateFrame(normalIdToMatrix3(objectFace), normalIdToVector3(objectFace) * geometry->getGridSize());
 }
 
 // FUNCTION: WEBSERVICE 0x100a7c60
-Face Primitive::getFaceInObject(NormalId normalId)
+Face Primitive::getFaceInObject(NormalId objectFace)
 {
 	Vector3 half = geometry->getGridSize() * 0.5f;
 
-	return Face::fromExtentsSide(Extents(-half, half), normalId);
+	return Face::fromExtentsSide(Extents(-half, half), objectFace);
 }
 
 // FUNCTION: WEBSERVICE 0x100a7cd0
-void Primitive::setVelocity(const Velocity& velocity)
+void Primitive::setVelocity(const Velocity& vel)
 {
-	body->setVelocity(velocity);
+	body->setVelocity(vel);
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ce0
-void Primitive::setSurfaceData(NormalId normalId, const SurfaceData& value)
+void Primitive::setSurfaceData(NormalId id, const SurfaceData& newSurfaceData)
 {
-	if (surfaceData[normalId] == NULL && value.isEmpty()) {
+	if (surfaceData[id] == NULL && newSurfaceData.isEmpty()) {
 		return;
 	}
 
-	if (surfaceData[normalId] != NULL && *surfaceData[normalId] == value) {
+	if (surfaceData[id] != NULL && *surfaceData[id] == newSurfaceData) {
 		return;
 	}
 
-	if (value.isEmpty()) {
-		delete surfaceData[normalId];
-		surfaceData[normalId] = NULL;
+	if (newSurfaceData.isEmpty()) {
+		delete surfaceData[id];
+		surfaceData[id] = NULL;
 	}
 	else {
-		if (surfaceData[normalId] == NULL) {
-			surfaceData[normalId] = new SurfaceData();
+		if (surfaceData[id] == NULL) {
+			surfaceData[id] = new SurfaceData();
 		}
 
-		*surfaceData[normalId] = value;
+		*surfaceData[id] = newSurfaceData;
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a7dc0
-void Primitive::setSurfaceType(NormalId normalId, SurfaceType surfaceType)
+void Primitive::setSurfaceType(NormalId id, SurfaceType newSurfaceType)
 {
-	if (this->surfaceType[normalId] != surfaceType) {
-		this->surfaceType[normalId] = surfaceType;
+	if (this->surfaceType[id] != newSurfaceType) {
+		this->surfaceType[id] = newSurfaceType;
 	}
 }
 
@@ -341,26 +341,26 @@ Contact* Primitive::getFirstContact() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a7fd0 FOLDED
-Contact* Primitive::getNextContact(Contact* contact) const
+Contact* Primitive::getNextContact(Contact* prev) const
 {
-	return static_cast<Contact*>(contact->getNext(this));
+	return static_cast<Contact*>(prev->getNext(this));
 }
 
 // FUNCTION: WEBSERVICE 0x100a7fd0 FOLDED
-Joint* Primitive::getNextJoint(Joint* joint) const
+Joint* Primitive::getNextJoint(Joint* prev) const
 {
-	return static_cast<Joint*>(joint->getNext(this));
+	return static_cast<Joint*>(prev->getNext(this));
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ff0
-RigidJoint* Primitive::getFirstRigidAt(Edge* edge) const
+RigidJoint* Primitive::getFirstRigidAt(Edge* start) const
 {
-	while (edge != NULL) {
-		if (RigidJoint::isRigidJoint(edge)) {
-			return static_cast<RigidJoint*>(edge);
+	while (start != NULL) {
+		if (RigidJoint::isRigidJoint(start)) {
+			return static_cast<RigidJoint*>(start);
 		}
 
-		edge = getNextEdge(edge);
+		start = getNextEdge(start);
 	}
 
 	return NULL;
@@ -373,9 +373,9 @@ RigidJoint* Primitive::getFirstRigid() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a8080
-RigidJoint* Primitive::getNextRigid(RigidJoint* joint) const
+RigidJoint* Primitive::getNextRigid(RigidJoint* prev) const
 {
-	return getFirstRigidAt(getNextEdge(joint));
+	return getFirstRigidAt(getNextEdge(prev));
 }
 
 // FUNCTION: WEBSERVICE 0x100a80c0
@@ -435,13 +435,13 @@ Primitive::~Primitive()
 }
 
 // FUNCTION: WEBSERVICE 0x100a8250
-bool Primitive::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
+bool Primitive::hitTest(const Ray& worldRay, Vector3& worldHitPoint, bool& inside)
 {
-	Ray objectRay = body->getCoordinateFrame().toObjectSpace(ray);
-	Vector3 objectHitPoint;
+	Ray localRay = body->getCoordinateFrame().toObjectSpace(worldRay);
+	Vector3 localHitPoint;
 
-	if (geometry->hitTest(objectRay, objectHitPoint, inside)) {
-		hitPoint = body->getCoordinateFrame().pointToWorldSpace(objectHitPoint);
+	if (geometry->hitTest(localRay, localHitPoint, inside)) {
+		worldHitPoint = body->getCoordinateFrame().pointToWorldSpace(localHitPoint);
 		return true;
 	}
 
@@ -449,13 +449,13 @@ bool Primitive::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
 }
 
 // FUNCTION: WEBSERVICE 0x100a8320
-void Primitive::setAnchor(bool value)
+void Primitive::setAnchor(bool _anchored)
 {
 	bool have = anchorObject != NULL;
 
-	anchored = value;
+	anchored = _anchored;
 
-	bool wanted = value || dragging;
+	bool wanted = _anchored || dragging;
 
 	if (wanted != have) {
 		if (wanted) {
@@ -477,19 +477,19 @@ void Primitive::setAnchor(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a83b0
-Face Primitive::getFaceInWorld(NormalId normalId)
+Face Primitive::getFaceInWorld(NormalId objectFace)
 {
-	return getFaceInObject(normalId).toWorldSpace(body->getCoordinateFrame());
+	return getFaceInObject(objectFace).toWorldSpace(body->getCoordinateFrame());
 }
 
 // FUNCTION: WEBSERVICE 0x100a83f0
-void Primitive::setCoordinateFrame(const CoordinateFrame& value)
+void Primitive::setCoordinateFrame(const CoordinateFrame& cFrame)
 {
-	if (value != body->getCoordinateFrame()) {
+	if (cFrame != body->getCoordinateFrame()) {
 		Assembly* assembly = getAssembly();
 
 		if (assembly == NULL) {
-			body->setCoordinateFrame(value);
+			body->setCoordinateFrame(cFrame);
 			myOwner->notifyMoved();
 
 			if (world != NULL) {
@@ -497,7 +497,7 @@ void Primitive::setCoordinateFrame(const CoordinateFrame& value)
 			}
 		}
 		else if (assembly->getAssemblyPrimitive() == this) {
-			body->setCoordinateFrame(value);
+			body->setCoordinateFrame(cFrame);
 			assembly->notifyMoved();
 			world->onAssemblyExtentsChanged(assembly);
 
@@ -517,9 +517,9 @@ const CoordinateFrame& Primitive::getCoordinateFrame() const
 // FUNCTION: WEBSERVICE 0x100a84b0
 CoordinateFrame Primitive::getGridCorner() const
 {
-	const CoordinateFrame& coord = body->getCoordinateFrame();
+	const CoordinateFrame& gridCorner = body->getCoordinateFrame();
 
-	return CoordinateFrame(coord.rotation, coord.pointToWorldSpace(-(geometry->getGridSize() * 0.5f)));
+	return CoordinateFrame(gridCorner.rotation, gridCorner.pointToWorldSpace(-(geometry->getGridSize() * 0.5f)));
 }
 
 // FUNCTION: WEBSERVICE 0x100a8570
@@ -537,9 +537,9 @@ Primitive::Primitive(Geometry::GeometryType geometryType)
 }
 
 // FUNCTION: WEBSERVICE 0x100a8760
-Vector3 Primitive::clipToSafeSize(const Vector3& size)
+Vector3 Primitive::clipToSafeSize(const Vector3& newSize)
 {
-	Vector3 answer = size.min(Vector3(512.0f, 512.0f, 512.0f));
+	Vector3 answer = newSize.min(Vector3(512.0f, 512.0f, 512.0f));
 
 	if (answer.x * answer.y * answer.z > 1000000.0f) {
 		answer.y = floor(1000000.0f / (answer.x * answer.z));
@@ -549,13 +549,13 @@ Vector3 Primitive::clipToSafeSize(const Vector3& size)
 }
 
 // FUNCTION: WEBSERVICE 0x100a8810
-void Primitive::setGridSize(const Vector3& size)
+void Primitive::setGridSize(const Vector3& gridSize)
 {
-	Vector3 clipped = clipToSafeSize(size);
+	Vector3 protectedSize = clipToSafeSize(gridSize);
 
-	if (clipped != geometry->getGridSize()) {
+	if (protectedSize != geometry->getGridSize()) {
 		fuzzyExtentsStateId = -2;
-		geometry->setGridSize(clipped);
+		geometry->setGridSize(protectedSize);
 
 		float volume = geometry->getGridVolume();
 		body->setMass(volume);
@@ -572,12 +572,12 @@ void Primitive::setGridSize(const Vector3& size)
 }
 
 // FUNCTION: WEBSERVICE 0x100a88d0
-void Primitive::setDragging(bool value)
+void Primitive::setDragging(bool _dragging)
 {
-	if (dragging != value) {
+	if (dragging != _dragging) {
 		bool wasCollideable = !dragging && canCollide;
 
-		dragging = value;
+		dragging = _dragging;
 		setAnchor(anchored);
 
 		if (world != NULL) {
@@ -591,22 +591,22 @@ void Primitive::setDragging(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a8940
-void Primitive::setGridCorner(const CoordinateFrame& corner)
+void Primitive::setGridCorner(const CoordinateFrame& gridCorner)
 {
-	Vector3 half = geometry->getGridSize() * 0.5f;
+	Vector3 gridCenter = geometry->getGridSize() * 0.5f;
 
-	setCoordinateFrame(CoordinateFrame(corner.rotation, corner.pointToWorldSpace(half)));
+	setCoordinateFrame(CoordinateFrame(gridCorner.rotation, gridCorner.pointToWorldSpace(gridCenter)));
 }
 
 // FUNCTION: WEBSERVICE 0x100a89f0
-void Primitive::setController(Controller* value)
+void Primitive::setController(Controller* _controller)
 {
-	if (value == NULL) {
-		value = NullController::getStaticNullController();
+	if (_controller == NULL) {
+		_controller = NullController::getStaticNullController();
 	}
 
-	if (controller != value) {
-		controller = value;
+	if (controller != _controller) {
+		controller = _controller;
 	}
 }
 
@@ -614,7 +614,7 @@ void Primitive::setController(Controller* value)
 void Primitive::setPrimitiveType(Geometry::GeometryType geometryType)
 {
 	if (geometry->getGeometryType() != geometryType) {
-		Vector3 size = geometry->getGridSize();
+		Vector3 oldSize = geometry->getGridSize();
 
 		delete geometry;
 		geometry = newGeometry(geometryType);
@@ -623,7 +623,7 @@ void Primitive::setPrimitiveType(Geometry::GeometryType geometryType)
 			world->onPrimitiveGeometryTypeChanged(this);
 		}
 
-		setGridSize(size);
+		setGridSize(oldSize);
 		JointK.setDirty();
 	}
 }

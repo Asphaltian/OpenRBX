@@ -15,49 +15,49 @@ GeoPair::GeoPair() : body0(NULL), body1(NULL), offset0(NULL), offset1(NULL)
 }
 
 // FUNCTION: WEBSERVICE 0x1011cfe0
-void GeoPair::forceToBodies(const Vector3& force, const Vector3& position)
+void GeoPair::forceToBodies(const Vector3& _force, const Vector3& _position)
 {
-	body0->accumulateForce(-force, position);
-	body1->accumulateForce(force, position);
+	body0->accumulateForce(-_force, _position);
+	body1->accumulateForce(_force, _position);
 }
 
 // FUNCTION: WEBSERVICE 0x1011d040
-void GeoPair::computeNormalPerpVel(float& normalVel, Vector3& perpVel, const PairParams& params)
+void GeoPair::computeNormalPerpVel(float& normalVel, Vector3& perpVel, const PairParams& _params)
 {
-	Vector3 v0 = body0->getPV().linearVelocityAtPoint(params.position);
-	Vector3 v1 = body1->getPV().linearVelocityAtPoint(params.position);
+	Vector3 v0 = body0->getPV().linearVelocityAtPoint(_params.position);
+	Vector3 v1 = body1->getPV().linearVelocityAtPoint(_params.position);
 
 	Vector3 vel = v1 - v0;
 
-	normalVel = params.normal.dot(vel);
+	normalVel = _params.normal.dot(vel);
 
-	perpVel = vel - params.normal * normalVel;
+	perpVel = vel - _params.normal * normalVel;
 }
 
 // FUNCTION: WEBSERVICE 0x1011d1a0
-void GeoPair::computeBallBall(PairParams& params)
+void GeoPair::computeBallBall(PairParams& _params)
 {
 	const Vector3& pos0 = body0->getPos();
 	const Vector3& pos1 = body1->getPos();
 
-	params.normal = pos1 - pos0;
-	params.length = params.normal.unitize() - pairData.radiusSum;
-	params.position = pos0 + params.normal * pairData.radius0;
+	_params.normal = pos1 - pos0;
+	_params.length = _params.normal.unitize() - pairData.radiusSum;
+	_params.position = pos0 + _params.normal * pairData.radius0;
 }
 
 // FUNCTION: WEBSERVICE 0x1011d240
-void GeoPair::computeBallPoint(PairParams& params)
+void GeoPair::computeBallPoint(PairParams& _params)
 {
 	const Vector3& pos0 = body0->getPos();
 	const CoordinateFrame& coord1 = body1->getCoordinateFrame();
 
-	params.position = coord1.pointToWorldSpace(*offset1);
-	params.normal = params.position - pos0;
-	params.length = params.normal.unitize() - pairData.radius0;
+	_params.position = coord1.pointToWorldSpace(*offset1);
+	_params.normal = _params.position - pos0;
+	_params.length = _params.normal.unitize() - pairData.radius0;
 }
 
 // FUNCTION: WEBSERVICE 0x1011d320
-void GeoPair::computeBallEdge(PairParams& params)
+void GeoPair::computeBallEdge(PairParams& _params)
 {
 	const Vector3& pos0 = body0->getPos();
 	const CoordinateFrame& coord1 = body1->getCoordinateFrame();
@@ -68,45 +68,45 @@ void GeoPair::computeBallEdge(PairParams& params)
 
 	Vector3 delta = edgePoint - pos0;
 
-	params.normal = delta - edge * delta.dot(edge);
+	_params.normal = delta - edge * delta.dot(edge);
 
-	params.position = pos0 + params.normal;
-	params.length = params.normal.unitize() - pairData.radius0;
+	_params.position = pos0 + _params.normal;
+	_params.length = _params.normal.unitize() - pairData.radius0;
 }
 
 // FUNCTION: WEBSERVICE 0x1011d480
-void GeoPair::computeBallPlane(PairParams& params)
+void GeoPair::computeBallPlane(PairParams& _params)
 {
 	const Vector3& pos0 = body0->getPos();
 	const CoordinateFrame& coord1 = body1->getCoordinateFrame();
 	Vector3 planePoint = coord1.pointToWorldSpace(*offset1);
 
-	params.normal = -Math::getWorldNormal(pairData.normalID1, coord1);
+	_params.normal = -Math::getWorldNormal(pairData.normalID1, coord1);
 
 	Vector3 delta = planePoint - pos0;
 
-	Vector3 toPlane = params.normal * delta.dot(params.normal);
+	Vector3 toPlane = _params.normal * delta.dot(_params.normal);
 
-	params.position = pos0 + toPlane;
-	params.length = toPlane.magnitude() - pairData.radius0;
+	_params.position = pos0 + toPlane;
+	_params.length = toPlane.magnitude() - pairData.radius0;
 }
 
 // FUNCTION: WEBSERVICE 0x1011d5e0
-void GeoPair::computePointPlane(PairParams& params)
+void GeoPair::computePointPlane(PairParams& _params)
 {
-	params.position = body0->getCoordinateFrame().pointToWorldSpace(*offset0);
+	_params.position = body0->getCoordinateFrame().pointToWorldSpace(*offset0);
 
 	const CoordinateFrame& coord1 = body1->getCoordinateFrame();
 
 	Vector3 planePoint = coord1.pointToWorldSpace(*offset1);
 
-	params.normal = -Math::getWorldNormal(pairData.normalID1, coord1);
+	_params.normal = -Math::getWorldNormal(pairData.normalID1, coord1);
 
-	params.length = (planePoint - params.position).dot(params.normal);
+	_params.length = (planePoint - _params.position).dot(_params.normal);
 }
 
 // FUNCTION: WEBSERVICE 0x1011d770
-void GeoPair::computeEdgeEdgePlane(PairParams& params)
+void GeoPair::computeEdgeEdgePlane(PairParams& _params)
 {
 	const CoordinateFrame& coord0 = body0->getCoordinateFrame();
 	const CoordinateFrame& coord1 = body1->getCoordinateFrame();
@@ -122,7 +122,7 @@ void GeoPair::computeEdgeEdgePlane(PairParams& params)
 	float dot = e1.dot(e0);
 	float denom = 1.0f - dot * dot;
 
-	params.normal = -Math::getWorldNormal(pairData.planeID, coord1);
+	_params.normal = -Math::getWorldNormal(pairData.planeID, coord1);
 
 	if (denom > 1e-05) {
 		float t0 = delta.dot(e0);
@@ -134,17 +134,17 @@ void GeoPair::computeEdgeEdgePlane(PairParams& params)
 			t = 6.0f * Math::sign(t);
 		}
 
-		params.position = p0 + e0 * t;
-		params.length = (p1 - params.position).dot(params.normal);
+		_params.position = p0 + e0 * t;
+		_params.length = (p1 - _params.position).dot(_params.normal);
 	}
 	else {
-		params.position = p0;
-		params.length = 0.0f;
+		_params.position = p0;
+		_params.length = 0.0f;
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x1011daf0
-void GeoPair::computeEdgeEdge(PairParams& params)
+void GeoPair::computeEdgeEdge(PairParams& _params)
 {
 	const CoordinateFrame& coord0 = body0->getCoordinateFrame();
 	const CoordinateFrame& coord1 = body1->getCoordinateFrame();
@@ -172,14 +172,14 @@ void GeoPair::computeEdgeEdge(PairParams& params)
 		Vector3 c0 = p0 + e0 * s0;
 		Vector3 c1 = p1 + e1 * s1;
 
-		params.position = (c1 + c0) * 0.5f;
-		params.normal = c0 - c1;
-		params.length = -params.normal.unitize();
+		_params.position = (c1 + c0) * 0.5f;
+		_params.normal = c0 - c1;
+		_params.length = -_params.normal.unitize();
 	}
 	else {
-		params.position = p0;
-		params.normal = e0;
-		params.length = 0.0f;
+		_params.position = p0;
+		_params.normal = e0;
+		_params.length = 0.0f;
 	}
 }
 

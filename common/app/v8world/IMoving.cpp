@@ -64,15 +64,15 @@ void IMovingManager::onMovingHeartbeat()
 }
 
 // FUNCTION: WEBSERVICE 0x100d0de0
-void IMoving::setMovingManager(IMovingManager* value)
+void IMoving::setMovingManager(IMovingManager* _iMovingManager)
 {
 	if (iMovingManager != NULL) {
 		iMovingManager->remove(this);
 	}
 
-	iMovingManager = value;
+	iMovingManager = _iMovingManager;
 
-	if (value != NULL && stepsToSleep > 0) {
+	if (_iMovingManager != NULL && stepsToSleep > 0) {
 		onCanAggregateChanged(false);
 		makeMoving();
 	}

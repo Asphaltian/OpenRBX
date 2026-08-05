@@ -82,12 +82,12 @@ float Constants::getElasticMultiplier(float elasticity)
 }
 
 // FUNCTION: WEBSERVICE 0x1010aa00
-float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
+float Constants::getJointKMultiplier(const Vector3& clippedSortedSize, bool ball)
 {
-	G3D::Vector3int16 grid(size);
+	G3D::Vector3int16 size(clippedSortedSize);
 
-	if (isBall) {
-		switch (grid.x) {
+	if (ball) {
+		switch (size.x) {
 		case 1:
 			return 0.23f;
 		case 2:
@@ -97,17 +97,17 @@ float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
 		case 4:
 			return 11.5f;
 		default:
-			return (float) (grid.x * grid.x * grid.x) * 0.175f;
+			return (float) (size.x * size.x * size.x) * 0.175f;
 		}
 	}
 
-	int x = grid.x;
+	int x = size.x;
 
 	switch (x) {
 	case 1:
-		switch (grid.y) {
+		switch (size.y) {
 		case 1:
-			switch (grid.z) {
+			switch (size.z) {
 			case 1:
 				return 0.91f;
 			case 2:
@@ -117,10 +117,10 @@ float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
 			case 4:
 				return 2.13f;
 			default:
-				return (float) grid.z * 0.4f;
+				return (float) size.z * 0.4f;
 			}
 		case 2: {
-			int z = grid.z;
+			int z = size.z;
 
 			switch (z) {
 			case 2:
@@ -134,24 +134,24 @@ float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
 			return (float) z < 15.0f ? (float) z * 0.9f : (float) z * 0.75f;
 		}
 		case 3:
-			return (float) grid.z < 7.0f ? (float) grid.z * 1.66f : (float) grid.z * 1.18f;
+			return (float) size.z < 7.0f ? (float) size.z * 1.66f : (float) size.z * 1.18f;
 		case 4:
-			return (float) grid.z < 7.0f ? (float) grid.z * 2.26f : (float) grid.z * 1.53f;
+			return (float) size.z < 7.0f ? (float) size.z * 2.26f : (float) size.z * 1.53f;
 		default:
-			return ((float) grid.y * 0.3f + 0.66f) * (float) grid.z;
+			return ((float) size.y * 0.3f + 0.66f) * (float) size.z;
 		}
 	case 2:
 		break;
 	default:
-		return (float) (grid.z * grid.y * x) * 0.25f;
+		return (float) (size.z * size.y * x) * 0.25f;
 	}
 
-	int y = grid.y;
+	int y = size.y;
 	float value;
 
 	switch (y) {
 	case 2: {
-		int z = grid.z;
+		int z = size.z;
 
 		switch (z) {
 		case 2:
@@ -171,7 +171,7 @@ float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
 		break;
 	}
 	case 3: {
-		int z = grid.z;
+		int z = size.z;
 
 		switch (z) {
 		case 3:
@@ -189,20 +189,20 @@ float Constants::getJointKMultiplier(const Vector3& size, bool isBall)
 		break;
 	}
 	default:
-		return ((float) y * 0.66f) * grid.z;
+		return ((float) y * 0.66f) * size.z;
 	}
 
 	return value * 1.5f;
 }
 
 // FUNCTION: WEBSERVICE 0x1010acf0
-float Constants::getKmsMaxJointForce(float studsA, float studsB)
+float Constants::getKmsMaxJointForce(float grid1, float grid2)
 {
-	int a = std::max(1, G3D::iRound(studsA));
-	int b = std::max(1, G3D::iRound(studsB));
+	int grid1int = std::max(1, G3D::iRound(grid1));
+	int grid2int = std::max(1, G3D::iRound(grid2));
 
-	int hi = std::max(a, b);
-	int lo = std::min(a, b);
+	int hi = std::max(grid1int, grid2int);
+	int lo = std::min(grid1int, grid2int);
 
 	float force;
 
@@ -219,16 +219,16 @@ float Constants::getKmsMaxJointForce(float studsA, float studsB)
 }
 
 // FUNCTION: WEBSERVICE 0x1010adb0
-float Constants::getJointK(const Vector3& size, bool isBall)
+float Constants::getJointK(const Vector3& gridSize, bool ball)
 {
-	Vector3 sorted = Math::sortVector3(size);
+	Vector3 sortedSize = Math::sortVector3(gridSize);
 
-	Vector3 clamped = sorted.max(Vector3(1.0f, 1.0f, 1.0f));
+	Vector3 clippedSize = sortedSize.max(Vector3(1.0f, 1.0f, 1.0f));
 
-	float multiplier = getJointKMultiplier(clamped, isBall);
+	float multiplier = getJointKMultiplier(clippedSize, ball);
 
-	if (sorted.x < 1.0f) {
-		return sorted.x * multiplier * 960000.0f;
+	if (sortedSize.x < 1.0f) {
+		return sortedSize.x * multiplier * 960000.0f;
 	}
 
 	return multiplier * 960000.0f;

@@ -18,8 +18,8 @@ EnumDescriptor::~EnumDescriptor()
 }
 
 // FUNCTION: WEBSERVICE 0x10094390
-EnumDescriptor::EnumDescriptor(const char* name, const std::type_info& type)
-	: Type(name, type, "token"), enumCount(0), enumCountMSB(0)
+EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
+	: Type(typeName, type, "token"), enumCount(0), enumCountMSB(0)
 {
 	allEnums().push_back(this);
 }

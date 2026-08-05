@@ -32,21 +32,21 @@ void ContactManager::onReleasePair(Primitive* p0, Primitive* p1)
 }
 
 // FUNCTION: WEBSERVICE 0x10108170
-void ContactManager::onPrimitiveAdded(Primitive* primitive)
+void ContactManager::onPrimitiveAdded(Primitive* p)
 {
-	spatialHash->onPrimitiveAdded(primitive);
+	spatialHash->onPrimitiveAdded(p);
 }
 
 // FUNCTION: WEBSERVICE 0x10108180
-void ContactManager::onPrimitiveRemoved(Primitive* primitive)
+void ContactManager::onPrimitiveRemoved(Primitive* p)
 {
-	spatialHash->onPrimitiveRemoved(primitive);
+	spatialHash->onPrimitiveRemoved(p);
 }
 
 // FUNCTION: WEBSERVICE 0x10108190
-void ContactManager::onPrimitiveExtentsChanged(Primitive* primitive)
+void ContactManager::onPrimitiveExtentsChanged(Primitive* p)
 {
-	spatialHash->onPrimitiveExtentsChanged(primitive);
+	spatialHash->onPrimitiveExtentsChanged(p);
 }
 
 // FUNCTION: WEBSERVICE 0x101081a0

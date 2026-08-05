@@ -23,13 +23,13 @@ int Kernel::numConnectors() const
 // FUNCTION: WEBSERVICE 0x100d4f30
 float Kernel::connectorSpringEnergy()
 {
-	float answer = 0.0f;
+	float springPotential = 0.0f;
 
 	for (int i = 0; i < kernelData->connectors.size(); ++i) {
-		answer += kernelData->connectors[i]->potentialEnergy();
+		springPotential += kernelData->connectors[i]->potentialEnergy();
 	}
 
-	return answer;
+	return springPotential;
 }
 
 // FUNCTION: WEBSERVICE 0x100d5310
@@ -57,29 +57,29 @@ float Kernel::bodyKineticEnergy()
 }
 
 // FUNCTION: WEBSERVICE 0x100d54c0
-void Kernel::insertConnector(Connector* connector)
+void Kernel::insertConnector(Connector* c)
 {
-	kernelData->connectors.fastAppend(connector);
+	kernelData->connectors.fastAppend(c);
 }
 
 // FUNCTION: WEBSERVICE 0x100d54f0
-void Kernel::insertConnector2ndPass(Connector* connector)
+void Kernel::insertConnector2ndPass(Connector* c)
 {
-	kernelData->connectors2ndPass.fastAppend(connector);
+	kernelData->connectors2ndPass.fastAppend(c);
 }
 
 // FUNCTION: WEBSERVICE 0x100d5520
-void Kernel::removeConnector(Connector* connector)
+void Kernel::removeConnector(Connector* c)
 {
 	realTimeConnectors.resize(0, false);
 
-	kernelData->connectors.fastRemove(connector);
+	kernelData->connectors.fastRemove(c);
 }
 
 // FUNCTION: WEBSERVICE 0x100d5580
-void Kernel::removeConnector2ndPass(Connector* connector)
+void Kernel::removeConnector2ndPass(Connector* c)
 {
-	kernelData->connectors2ndPass.fastRemove(connector);
+	kernelData->connectors2ndPass.fastRemove(c);
 }
 
 // FUNCTION: WEBSERVICE 0x100d55d0
@@ -92,7 +92,7 @@ void Kernel::stepWorld(int worldStepId, int uiStepId, bool throttling)
 	Profiling::Mark mark(*profilingKernel, false);
 
 	float dt = Constants::kernelDt();
-	int steps = Constants::kernelStepsPerWorldStep();
+	int kernelSteps = Constants::kernelStepsPerWorldStep();
 
 	if (throttling) {
 		realTimeConnectors.resize(0, false);
@@ -104,7 +104,7 @@ void Kernel::stepWorld(int worldStepId, int uiStepId, bool throttling)
 		}
 	}
 
-	for (int step = 0; step < steps; ++step) {
+	for (int step = 0; step < kernelSteps; ++step) {
 		for (int i = 0; i < data->points.size(); ++i) {
 			data->points[i]->step();
 		}
@@ -137,27 +137,27 @@ void Kernel::stepWorld(int worldStepId, int uiStepId, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x100d57e0
-void Kernel::insertBody(Body* body)
+void Kernel::insertBody(Body* b)
 {
-	kernelData->bodies.fastAppend(body);
+	kernelData->bodies.fastAppend(b);
 }
 
 // FUNCTION: WEBSERVICE 0x100d5800
-void Kernel::removeBody(Body* body)
+void Kernel::removeBody(Body* b)
 {
-	kernelData->bodies.fastRemove(body);
+	kernelData->bodies.fastRemove(b);
 }
 
 // FUNCTION: WEBSERVICE 0x100d5840
-void Kernel::removePoint(Point* point)
+void Kernel::removePoint(Point* p)
 {
-	kernelData->points.fastRemove(point);
+	kernelData->points.fastRemove(p);
 }
 
 // FUNCTION: WEBSERVICE 0x100d5890
-Point* Kernel::newPoint(Body* body, const Vector3& worldPos)
+Point* Kernel::newPoint(Body* _body, const Vector3& worldPos)
 {
-	Point* point = new Point(body);
+	Point* point = new Point(_body);
 
 	point->setWorldPos(worldPos);
 
@@ -178,13 +178,13 @@ Point* Kernel::newPoint(Body* body, const Vector3& worldPos)
 }
 
 // FUNCTION: WEBSERVICE 0x100d59f0
-void Kernel::deletePoint(Point* point)
+void Kernel::deletePoint(Point* _point)
 {
-	if (point != NULL) {
+	if (_point != NULL) {
 
-		if (--point->numOwners == 0) {
-			removePoint(point);
-			delete point;
+		if (--_point->numOwners == 0) {
+			removePoint(_point);
+			delete _point;
 		}
 	}
 }

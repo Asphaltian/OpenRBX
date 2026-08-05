@@ -48,28 +48,28 @@ DECOMP_NOINLINE Name::NamMap& Name::namMap()
 }
 
 // FUNCTION: WEBSERVICE 0x10058840
-const Name& Name::declare(const char* name, int dictionaryIndex)
+const Name& Name::declare(const char* sName, int dictionaryIndex)
 {
-	if (name == NULL) {
+	if (sName == NULL) {
 		return getNullName();
 	}
 
 	boost::call_once(initMoo, flag);
 
 	boost::mutex::scoped_lock lock(moo2());
-	NamMap::iterator found = namMap().find(std::string(name));
+	NamMap::iterator iter = namMap().find(std::string(sName));
 
-	if (found != namMap().end()) {
+	if (iter != namMap().end()) {
 		if (dictionaryIndex != -1) {
-			found->second->dictionaryIndex = dictionaryIndex;
-			dictionary()[dictionaryIndex] = found->second;
+			iter->second->dictionaryIndex = dictionaryIndex;
+			dictionary()[dictionaryIndex] = iter->second;
 		}
 
-		return *found->second;
+		return *iter->second;
 	}
 
-	Name* declared = new Name(name, dictionaryIndex);
-	namMap()[name] = declared;
+	Name* declared = new Name(sName, dictionaryIndex);
+	namMap()[sName] = declared;
 	dictionary()[dictionaryIndex] = declared;
 
 	return *declared;
@@ -87,28 +87,28 @@ const Name& Name::getNullName()
 }
 
 // FUNCTION: WEBSERVICE 0x10058ad0
-const Name& Name::lookup(const std::string& name)
+const Name& Name::lookup(const std::string& sName)
 {
 	boost::call_once(initMoo, flag);
 
 	boost::mutex::scoped_lock lock(moo2());
-	NamMap::iterator found = namMap().find(name);
+	NamMap::iterator iter = namMap().find(sName);
 
-	if (found != namMap().end()) {
-		return *found->second;
+	if (iter != namMap().end()) {
+		return *iter->second;
 	}
 
 	return getNullName();
 }
 
 // FUNCTION: WEBSERVICE 0x10058ba0
-const Name& Name::lookup(const char* name)
+const Name& Name::lookup(const char* sName)
 {
-	if (name == NULL) {
+	if (sName == NULL) {
 		return getNullName();
 	}
 
-	return lookup(std::string(name));
+	return lookup(std::string(sName));
 }
 
 // FUNCTION: WEBSERVICE 0x10058c70

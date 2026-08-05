@@ -140,7 +140,7 @@ class Clump : public Assembly
 {
 public:
 	// FUNCTION: WEBSERVICE 0x1011b310
-	Clump(Primitive* rootPrimitive) : Assembly(rootPrimitive) {}
+	Clump(Primitive* root) : Assembly(root) {}
 };
 
 DECOMP_SIZE_ASSERT(Clump, 0x50)

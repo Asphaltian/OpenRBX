@@ -11,9 +11,9 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011fc10
-void MultiJoint::init(int numBreakingConnectors)
+void MultiJoint::init(int numBreaking)
 {
-	this->numBreakingConnectors = numBreakingConnectors;
+	this->numBreakingConnectors = numBreaking;
 	numConnector = 0;
 
 	for (int i = 0; i < 4; ++i) {
@@ -24,22 +24,22 @@ void MultiJoint::init(int numBreakingConnectors)
 }
 
 // FUNCTION: WEBSERVICE 0x1011fc70
-MultiJoint::MultiJoint(int numBreakingConnectors)
+MultiJoint::MultiJoint(int numBreaking)
 {
-	init(numBreakingConnectors);
+	init(numBreaking);
 }
 
 // FUNCTION: WEBSERVICE 0x1011fc90
 MultiJoint::MultiJoint(
-	Primitive* prim0,
-	Primitive* prim1,
-	const CoordinateFrame& coord0,
-	const CoordinateFrame& coord1,
-	int numBreakingConnectors
+	Primitive* p0,
+	Primitive* p1,
+	const CoordinateFrame& jointCoord0,
+	const CoordinateFrame& jointCoord1,
+	int numBreaking
 )
-	: Joint(prim0, prim1, coord0, coord1)
+	: Joint(p0, p1, jointCoord0, jointCoord1)
 {
-	init(numBreakingConnectors);
+	init(numBreaking);
 }
 
 // FUNCTION: WEBSERVICE 0x1011fcd0
@@ -54,22 +54,22 @@ void MultiJoint::putInKernel(Kernel* _kernel)
 }
 
 // FUNCTION: WEBSERVICE 0x1011fcf0
-void MultiJoint::addToMultiJoint(Point* point0, Point* point1, Connector* connector)
+void MultiJoint::addToMultiJoint(Point* point0, Point* point1, Connector* _connector)
 {
 	point[numConnector * 2] = point0;
 	point[numConnector * 2 + 1] = point1;
 
-	this->connector[numConnector] = connector;
+	this->connector[numConnector] = _connector;
 
-	getKernel()->insertConnector(connector);
+	getKernel()->insertConnector(_connector);
 
 	++numConnector;
 }
 
 // FUNCTION: WEBSERVICE 0x1011fd40
-Point* MultiJoint::getPoint(int index) const
+Point* MultiJoint::getPoint(int id) const
 {
-	return point[index];
+	return point[id];
 }
 
 // FUNCTION: WEBSERVICE 0x1011fd50

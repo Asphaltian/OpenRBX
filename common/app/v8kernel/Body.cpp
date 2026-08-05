@@ -79,11 +79,11 @@ void Body::step(float dt, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x10104b50
-void Body::setPv(const PV& value)
+void Body::setPv(const PV& _pv)
 {
 	if (parent == NULL) {
 
-		pv = value;
+		pv = _pv;
 
 		if (simBody != NULL) {
 			simBody->makeDirty();
@@ -94,10 +94,10 @@ void Body::setPv(const PV& value)
 }
 
 // FUNCTION: WEBSERVICE 0x10104be0
-void Body::setVelocity(const Velocity& velocity)
+void Body::setVelocity(const Velocity& worldVelocity)
 {
 	if (parent == NULL) {
-		pv.velocity = velocity;
+		pv.velocity = worldVelocity;
 		advanceStateIndex();
 
 		if (simBody != NULL) {
@@ -107,27 +107,27 @@ void Body::setVelocity(const Velocity& velocity)
 }
 
 // FUNCTION: WEBSERVICE 0x10104c60
-void Body::setMass(float value)
+void Body::setMass(float _mass)
 {
-	if (mass != value) {
+	if (mass != _mass) {
 		makeCofmDirty();
 
-		mass = value;
+		mass = _mass;
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10104cc0
-void Body::setMoment(const Matrix3& value)
+void Body::setMoment(const Matrix3& _momentInBody)
 {
-	if (moment != value) {
+	if (moment != _momentInBody) {
 		makeCofmDirty();
 
-		moment = value;
+		moment = _momentInBody;
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10104db0
-void Body::setMeInParent(const CoordinateFrame& value)
+void Body::setMeInParent(const CoordinateFrame& _meInParent)
 {
 	if (link != NULL) {
 
@@ -136,31 +136,31 @@ void Body::setMeInParent(const CoordinateFrame& value)
 	}
 
 	if (parent != NULL) {
-		meInParent = value;
+		meInParent = _meInParent;
 		makeCofmDirty();
 		root->advanceStateIndex();
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10104e60
-void Body::setMeInParent(Link* value)
+void Body::setMeInParent(Link* _link)
 {
-	if (link != NULL && link != value) {
+	if (link != NULL && link != _link) {
 		link->setBody(NULL);
 	}
 
 	if (parent != NULL) {
-		link = value;
-		value->setBody(this);
+		link = _link;
+		_link->setBody(this);
 		makeCofmDirty();
 		root->advanceStateIndex();
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10104ee0
-void Body::setCoordinateFrame(const CoordinateFrame& value)
+void Body::setCoordinateFrame(const CoordinateFrame& worldCoord)
 {
-	setPv(PV(value, getPV().velocity));
+	setPv(PV(worldCoord, getPV().velocity));
 }
 
 // FUNCTION: WEBSERVICE 0x10104f60
@@ -176,12 +176,12 @@ CoordinateFrame Body::getBranchCofmCoordinateFrame() const
 }
 
 // FUNCTION: WEBSERVICE 0x10105010
-void Body::resetRoot(Body* value)
+void Body::resetRoot(Body* newRoot)
 {
-	root = value;
+	root = newRoot;
 
 	for (int i = 0; i < numChildren(); ++i) {
-		getChild(i)->resetRoot(value);
+		getChild(i)->resetRoot(newRoot);
 	}
 }
 
@@ -231,9 +231,9 @@ void Body::onChildAdded(Body* child)
 }
 
 // FUNCTION: WEBSERVICE 0x10105390
-void Body::setParent(Body* value)
+void Body::setParent(Body* newParent)
 {
-	if (parent != value) {
+	if (parent != newParent) {
 
 		if (link != NULL) {
 			link->setBody(NULL);
@@ -248,10 +248,10 @@ void Body::setParent(Body* value)
 			simBody = NULL;
 		}
 
-		parent = value;
+		parent = newParent;
 
-		if (value != NULL) {
-			value->onChildAdded(this);
+		if (newParent != NULL) {
+			newParent->onChildAdded(this);
 		}
 		else {
 			simBody = new SimBody(this);

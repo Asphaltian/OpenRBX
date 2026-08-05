@@ -15,6 +15,8 @@
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Ray.h>
 #include <G3D/Vector3.h>
+#include <algorithm>
+#include <cmath>
 #include <cstddef>
 
 namespace RBX {
@@ -271,7 +273,23 @@ public:
 	static Joint* getJoint(Primitive* p0, Primitive* p1);
 	static Contact* getContact(Primitive* p0, Primitive* p1);
 
-	static bool aaBoxCollide(const Primitive& p0, const Primitive& p1);
+	// FUNCTION: WEBSERVICE 0x100d21e0
+	static bool aaBoxCollide(const Primitive& p0, const Primitive& p1)
+	{
+		Vector3 delta = p0.getCoordinateFrame().translation - p1.getCoordinateFrame().translation;
+
+		float r0 = p0.getRadius();
+		float r1 = p1.getRadius();
+
+		if (r0 + r1 < std::max(fabsf(delta.x), std::max(fabsf(delta.y), fabsf(delta.z)))) {
+			return false;
+		}
+
+		const Extents& e1 = p1.getFastFuzzyExtents();
+		const Extents& e0 = p0.getFastFuzzyExtents();
+
+		return e0.overlapsOrTouches(e1);
+	}
 
 	static Primitive* downstreamPrimitive(Joint* joint);
 };

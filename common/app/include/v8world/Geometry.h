@@ -58,9 +58,9 @@ inline float Geometry::getGridVolume() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a7660
-inline void Geometry::setGridSize(const Vector3& size)
+inline void Geometry::setGridSize(const Vector3& _gridSize)
 {
-	gridSize = size;
+	gridSize = _gridSize;
 	onSetSize();
 }
 

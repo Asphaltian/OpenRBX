@@ -107,23 +107,23 @@ Sim::EdgeState SleepStage::computeContactState(bool moving, bool wasTouching, bo
 }
 
 // FUNCTION: WEBSERVICE 0x10118cd0
-bool SleepStage::forceNeighborAwake(Assembly* assembly)
+bool SleepStage::forceNeighborAwake(Assembly* a)
 {
-	CoordinateFrame cofm = assembly->getAssemblyPrimitiveConst()->getBody()->getBranchCofmCoordinateFrame();
-	float radius = assembly->getMaxRadius();
+	CoordinateFrame cofm = a->getAssemblyPrimitiveConst()->getBody()->getBranchCofmCoordinateFrame();
+	float radius = a->getMaxRadius();
 	bool withinTolerance =
-		assembly->getSleepInfo()->runningAverageState.withinTolerance(cofm, radius, 2.0f * sleepTolerance());
+		a->getSleepInfo()->runningAverageState.withinTolerance(cofm, radius, 2.0f * sleepTolerance());
 
 	return !withinTolerance;
 }
 
 // FUNCTION: WEBSERVICE 0x10118d40
-bool SleepStage::okNeighborSleep(Assembly* assembly)
+bool SleepStage::okNeighborSleep(Assembly* a)
 {
-	CoordinateFrame cofm = assembly->getAssemblyPrimitiveConst()->getBody()->getBranchCofmCoordinateFrame();
-	float radius = assembly->getMaxRadius();
+	CoordinateFrame cofm = a->getAssemblyPrimitiveConst()->getBody()->getBranchCofmCoordinateFrame();
+	float radius = a->getMaxRadius();
 
-	return assembly->getSleepInfo()->runningAverageState.withinTolerance(cofm, radius, sleepTolerance());
+	return a->getSleepInfo()->runningAverageState.withinTolerance(cofm, radius, sleepTolerance());
 }
 
 // FUNCTION: WEBSERVICE 0x10118da0
@@ -139,10 +139,10 @@ bool SleepStage::computeShouldSleep(Assembly* assembly)
 }
 
 // FUNCTION: WEBSERVICE 0x10118e20
-bool SleepStage::preventNeighborSleep(Assembly* assembly)
+bool SleepStage::preventNeighborSleep(Assembly* a)
 {
-	if (getState(assembly) == Sim::AWAKE) {
-		if (!okNeighborSleep(assembly)) {
+	if (getState(a) == Sim::AWAKE) {
+		if (!okNeighborSleep(a)) {
 			return true;
 		}
 	}
@@ -240,24 +240,24 @@ SleepStage::~SleepStage()
 }
 
 // FUNCTION: WEBSERVICE 0x10119740
-void SleepStage::changeJointState(Joint* joint, Sim::EdgeState state)
+void SleepStage::changeJointState(Joint* j, Sim::EdgeState newState)
 {
-	bool wasStepping = joint->getEdgeState() == Sim::STEPPING, isStepping = state == Sim::STEPPING;
+	bool wasStepping = j->getEdgeState() == Sim::STEPPING, isStepping = newState == Sim::STEPPING;
 
 	if (wasStepping != isStepping) {
 		if (wasStepping) {
-			steppingJoints.erase(joint);
+			steppingJoints.erase(j);
 
-			getDownstreamWS()->onEdgeRemoving(joint);
+			getDownstreamWS()->onEdgeRemoving(j);
 		}
 		else {
-			steppingJoints.insert(joint);
+			steppingJoints.insert(j);
 
-			getDownstreamWS()->onEdgeAdded(joint);
+			getDownstreamWS()->onEdgeAdded(j);
 		}
 	}
 
-	joint->setEdgeState(state);
+	j->setEdgeState(newState);
 }
 
 void SleepStage::changeAssemblyStateInline(Assembly* assembly, Sim::AssemblyState state)
@@ -298,41 +298,41 @@ void SleepStage::changeAssemblyStateInline(Assembly* assembly, Sim::AssemblyStat
 }
 
 // FUNCTION: WEBSERVICE 0x101197c0
-void SleepStage::changeAssemblyState(Assembly* assembly, Sim::AssemblyState state)
+void SleepStage::changeAssemblyState(Assembly* a, Sim::AssemblyState newState)
 {
-	Sim::AssemblyState oldState = getState(assembly);
+	Sim::AssemblyState oldState = getState(a);
 
 	AssemblySet* oldSet = stateToSet(oldState);
-	AssemblySet* newSet = stateToSet(state);
+	AssemblySet* newSet = stateToSet(newState);
 
-	oldSet->erase(assembly);
+	oldSet->erase(a);
 
-	newSet->insert(assembly);
+	newSet->insert(a);
 
-	if ((oldState == Sim::SLEEPING_CHECKING || oldState == Sim::SLEEPING_DEEPLY) && state != Sim::SLEEPING_CHECKING &&
-		state != Sim::SLEEPING_DEEPLY) {
-		assembly->getAssemblyPrimitiveConst()->getBody()->resetAccumulators();
+	if ((oldState == Sim::SLEEPING_CHECKING || oldState == Sim::SLEEPING_DEEPLY) &&
+		newState != Sim::SLEEPING_CHECKING && newState != Sim::SLEEPING_DEEPLY) {
+		a->getAssemblyPrimitiveConst()->getBody()->resetAccumulators();
 	}
 
-	if (state == Sim::AWAKE) {
-		if (!assembly->downstreamOfStage(this)) {
-			getSimJobStage()->onAssemblyAdded(assembly);
+	if (newState == Sim::AWAKE) {
+		if (!a->downstreamOfStage(this)) {
+			getSimJobStage()->onAssemblyAdded(a);
 
 			if (!externalBodyForceAdded) {
-				const Primitive* primitive = assembly->getAssemblyPrimitiveConst();
+				const Primitive* primitive = a->getAssemblyPrimitiveConst();
 			}
 		}
 	}
-	else if (state == Sim::SLEEPING_CHECKING || state == Sim::SLEEPING_DEEPLY) {
-		assembly->getAssemblyPrimitiveConst()->getBody()->setVelocity(Velocity::zero());
+	else if (newState == Sim::SLEEPING_CHECKING || newState == Sim::SLEEPING_DEEPLY) {
+		a->getAssemblyPrimitiveConst()->getBody()->setVelocity(Velocity::zero());
 
-		if (assembly->downstreamOfStage(this)) {
-			getSimJobStage()->onAssemblyRemoving(assembly);
+		if (a->downstreamOfStage(this)) {
+			getSimJobStage()->onAssemblyRemoving(a);
 		}
 	}
 
-	resetSleepCount(assembly);
-	assembly->getSleepInfo()->state = state;
+	resetSleepCount(a);
+	a->getSleepInfo()->state = newState;
 }
 
 // STUB: WEBSERVICE 0x10119970
@@ -351,21 +351,21 @@ void SleepStage::onAssemblyRemoving(Assembly* assembly)
 }
 
 // FUNCTION: WEBSERVICE 0x10119ae0
-void SleepStage::onEdgeAdded(Edge* edge)
+void SleepStage::onEdgeAdded(Edge* e)
 {
-	Assembly* a0 = edge->getPrimitive(0)->getAssembly();
-	Assembly* a1 = edge->getPrimitive(1)->getAssembly();
+	Assembly* a0 = e->getPrimitive(0)->getAssembly();
+	Assembly* a1 = e->getPrimitive(1)->getAssembly();
 
-	edge->putInPipeline(this);
+	e->putInPipeline(this);
 
-	if (edge->getEdgeType() == Edge::CONTACT) {
-		steppingContacts.fastAppend(static_cast<Contact*>(edge));
-		edge->setEdgeState(Sim::STEPPING);
+	if (e->getEdgeType() == Edge::CONTACT) {
+		steppingContacts.fastAppend(static_cast<Contact*>(e));
+		e->setEdgeState(Sim::STEPPING);
 		numContactsInStage++;
 	}
 	else {
-		edge->setEdgeState(Sim::SLEEPING);
-		changeJointState(static_cast<Joint*>(edge), Sim::STEPPING);
+		e->setEdgeState(Sim::SLEEPING);
+		changeJointState(static_cast<Joint*>(e), Sim::STEPPING);
 	}
 }
 
@@ -379,47 +379,47 @@ SleepStage::SleepStage(IStage* upstream, World* world)
 }
 
 // FUNCTION: WEBSERVICE 0x10119e00
-void SleepStage::wakeEvent(Assembly* assembly)
+void SleepStage::wakeEvent(Assembly* a)
 {
-	Sim::AssemblyState state = getState(assembly);
+	Sim::AssemblyState state = getState(a);
 
 	if (state != Sim::ANCHORED && state != Sim::WAKE_PENDING && state != Sim::RECURSIVE_WAKE_PENDING) {
-		changeAssemblyState(assembly, Sim::WAKE_PENDING);
+		changeAssemblyState(a, Sim::WAKE_PENDING);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10119e50
-void SleepStage::recursiveWakeEvent(Assembly* assembly)
+void SleepStage::recursiveWakeEvent(Assembly* a)
 {
-	Sim::AssemblyState state = getState(assembly);
+	Sim::AssemblyState state = getState(a);
 
 	if (state != Sim::ANCHORED && state != Sim::RECURSIVE_WAKE_PENDING) {
-		changeAssemblyState(assembly, Sim::RECURSIVE_WAKE_PENDING);
+		changeAssemblyState(a, Sim::RECURSIVE_WAKE_PENDING);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10119ea0
-void SleepStage::touchEvent(Contact* contact)
+void SleepStage::touchEvent(Contact* c)
 {
 	for (int i = 0; i < 2; i++) {
-		Assembly* assembly = contact->getPrimitive(0)->getAssembly();
+		Assembly* assembly = c->getPrimitive(0)->getAssembly();
 		recursiveWakeEvent(assembly);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10119f10
-void SleepStage::changeJointState(const std::vector<Joint*>& joints, Sim::EdgeState state)
+void SleepStage::changeJointState(const std::vector<Joint*>& joints, Sim::EdgeState newState)
 {
 	for (unsigned int i = 0; i < joints.size(); i++) {
-		changeJointState(joints[i], state);
+		changeJointState(joints[i], newState);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10119f70
-void SleepStage::changeAssemblyState(const std::vector<Assembly*>& assemblies, Sim::AssemblyState state)
+void SleepStage::changeAssemblyState(const std::vector<Assembly*>& assemblies, Sim::AssemblyState newState)
 {
 	for (unsigned int i = 0; i < assemblies.size(); i++) {
-		changeAssemblyState(assemblies[i], state);
+		changeAssemblyState(assemblies[i], newState);
 	}
 }
 
@@ -446,14 +446,14 @@ void SleepStage::stepJoints()
 	JointSet::iterator it;
 
 	for (it = steppingJoints.begin(); it != steppingJoints.end(); ++it) {
-		Joint* joint = *it;
+		Joint* j = *it;
 
-		Primitive* prim0 = joint->getPrimitive(0);
-		Primitive* prim1 = joint->getPrimitive(1);
+		Primitive* prim0 = j->getPrimitive(0);
+		Primitive* prim1 = j->getPrimitive(1);
 
 		if (!throttling || !prim0->getBody()->getCanThrottle() || !prim1->getBody()->getCanThrottle()) {
 			if (!atLeastOneAssemblyMoving(prim0->getAssembly(), prim1->getAssembly())) {
-				toSleeping.push_back(joint);
+				toSleeping.push_back(j);
 			}
 		}
 	}
@@ -518,116 +518,116 @@ void SleepStage::stepAssembliesSleepingChecking()
 }
 
 // FUNCTION: WEBSERVICE 0x1011a480
-void SleepStage::wakeEvent(Edge* edge)
+void SleepStage::wakeEvent(Edge* e)
 {
 	for (int i = 0; i < 2; i++) {
-		wakeEvent(edge->getPrimitive(i)->getAssembly());
+		wakeEvent(e->getPrimitive(i)->getAssembly());
 	}
 }
 
 // STUB: WEBSERVICE 0x1011a500
-void SleepStage::changeContactState(Contact* contact, Sim::EdgeState state)
+void SleepStage::changeContactState(Contact* c, Sim::EdgeState newState)
 {
-	Sim::EdgeState oldState = contact->getEdgeState();
+	Sim::EdgeState currentState = c->getEdgeState();
 
-	bool wasStepping = oldState == Sim::STEPPING;
-	bool wasTouching = oldState == Sim::TOUCHING;
-	bool isStepping = state == Sim::STEPPING;
-	bool isTouching = state == Sim::TOUCHING;
+	bool wasStepping = currentState == Sim::STEPPING;
+	bool wasTouching = currentState == Sim::TOUCHING;
+	bool desiredInStepping = newState == Sim::STEPPING;
+	bool isTouching = newState == Sim::TOUCHING;
 
-	if (wasStepping != isStepping) {
+	if (wasStepping != desiredInStepping) {
 		if (wasStepping) {
-			steppingContacts.fastRemove(contact);
+			steppingContacts.fastRemove(c);
 		}
 	}
 
 	if (wasTouching != isTouching) {
 		if (wasTouching) {
-			touchingContacts.fastRemove(contact);
+			touchingContacts.fastRemove(c);
 		}
 	}
 
-	if (wasStepping != isStepping) {
-		if (isStepping) {
-			steppingContacts.fastAppend(contact);
+	if (wasStepping != desiredInStepping) {
+		if (desiredInStepping) {
+			steppingContacts.fastAppend(c);
 		}
 	}
 
 	if (wasTouching != isTouching) {
 		if (isTouching) {
-			touchingContacts.fastAppend(contact);
+			touchingContacts.fastAppend(c);
 		}
 	}
 
 	if (wasTouching != isTouching) {
 		if (wasTouching) {
-			getDownstreamWS()->onEdgeRemoving(contact);
+			getDownstreamWS()->onEdgeRemoving(c);
 			numContactsInKernel--;
 		}
 		else {
-			getDownstreamWS()->onEdgeAdded(contact);
+			getDownstreamWS()->onEdgeAdded(c);
 			numContactsInKernel++;
 		}
 	}
 
-	if (oldState == Sim::STEPPING && state == Sim::TOUCHING) {
-		touchEvent(contact);
+	if (currentState == Sim::STEPPING && newState == Sim::TOUCHING) {
+		touchEvent(c);
 	}
-	else if (oldState == Sim::TOUCHING && state == Sim::STEPPING) {
-		wakeEvent(contact);
+	else if (currentState == Sim::TOUCHING && newState == Sim::STEPPING) {
+		wakeEvent(c);
 	}
 
-	contact->setEdgeState(state);
+	c->setEdgeState(newState);
 }
 
 // FUNCTION: WEBSERVICE 0x1011a680
-void SleepStage::onEdgeRemoving(Edge* edge)
+void SleepStage::onEdgeRemoving(Edge* e)
 {
-	if (edge->getEdgeType() == Edge::CONTACT) {
-		if (edge->getEdgeState() == Sim::TOUCHING_SLEEPING || edge->getEdgeState() == Sim::TOUCHING) {
-			wakeEvent(edge);
+	if (e->getEdgeType() == Edge::CONTACT) {
+		if (e->getEdgeState() == Sim::TOUCHING_SLEEPING || e->getEdgeState() == Sim::TOUCHING) {
+			wakeEvent(e);
 		}
 
-		if (edge->getEdgeState() != Sim::SLEEPING) {
-			changeContactState(static_cast<Contact*>(edge), Sim::SLEEPING);
+		if (e->getEdgeState() != Sim::SLEEPING) {
+			changeContactState(static_cast<Contact*>(e), Sim::SLEEPING);
 		}
 
 		numContactsInStage--;
 	}
-	else if (edge->getEdgeState() == Sim::SLEEPING) {
-		wakeEvent(edge);
+	else if (e->getEdgeState() == Sim::SLEEPING) {
+		wakeEvent(e);
 	}
 	else {
-		changeJointState(static_cast<Joint*>(edge), Sim::SLEEPING);
+		changeJointState(static_cast<Joint*>(e), Sim::SLEEPING);
 	}
 
-	edge->setEdgeState(Sim::UNDEFINED);
-	edge->removeFromStage(this);
+	e->setEdgeState(Sim::UNDEFINED);
+	e->removeFromStage(this);
 }
 
 // FUNCTION: WEBSERVICE 0x1011a720
-void SleepStage::wakeEdge(Edge* edge)
+void SleepStage::wakeEdge(Edge* e)
 {
-	Sim::EdgeState state = edge->getEdgeState();
+	Sim::EdgeState state = e->getEdgeState();
 
-	if (edge->getEdgeType() == Edge::CONTACT) {
+	if (e->getEdgeType() == Edge::CONTACT) {
 		if (state == Sim::TOUCHING_SLEEPING) {
-			changeContactState(static_cast<Contact*>(edge), Sim::TOUCHING);
+			changeContactState(static_cast<Contact*>(e), Sim::TOUCHING);
 		}
 		else if (state == Sim::SLEEPING) {
-			changeContactState(static_cast<Contact*>(edge), Sim::STEPPING);
+			changeContactState(static_cast<Contact*>(e), Sim::STEPPING);
 		}
 	}
 	else if (state == Sim::SLEEPING) {
-		changeJointState(static_cast<Joint*>(edge), Sim::STEPPING);
+		changeJointState(static_cast<Joint*>(e), Sim::STEPPING);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x1011a780
-void SleepStage::changeContactState(const std::vector<Contact*>& contacts, Sim::EdgeState state)
+void SleepStage::changeContactState(const std::vector<Contact*>& contacts, Sim::EdgeState newState)
 {
 	for (unsigned int i = 0; i < contacts.size(); i++) {
-		changeContactState(contacts[i], state);
+		changeContactState(contacts[i], newState);
 	}
 }
 
@@ -645,38 +645,37 @@ void SleepStage::stepContacts(ContactList& contacts)
 	toTouchingSleeping.resize(0);
 
 	for (int i = 0; i < contacts.size(); i++) {
-		Contact* contact = contacts[i];
+		Contact* c = contacts[i];
 
-		Primitive* prim0 = contact->getPrimitive(0);
-		Primitive* prim1 = contact->getPrimitive(1);
+		Primitive* p0 = c->getPrimitive(0);
+		Primitive* p1 = c->getPrimitive(1);
 
-		if (!throttling || !prim0->getBody()->getCanThrottle() || !prim1->getBody()->getCanThrottle()) {
-			bool moving = atLeastOneAssemblyMoving(prim0->getAssembly(), prim1->getAssembly());
+		if (!throttling || !p0->getBody()->getCanThrottle() || !p1->getBody()->getCanThrottle()) {
+			bool moving = atLeastOneAssemblyMoving(p0->getAssembly(), p1->getAssembly());
 
-			bool touching = contact->step(uiStepId);
+			bool touching = c->step(uiStepId);
 
-			bool canCollide =
-				!prim0->getDragging() && prim0->getCanCollide() && !prim1->getDragging() && prim1->getCanCollide();
+			bool canCollide = !p0->getDragging() && p0->getCanCollide() && !p1->getDragging() && p1->getCanCollide();
 
 			Sim::EdgeState state =
-				computeContactState(moving, contact->getEdgeState() == Sim::TOUCHING, touching, canCollide);
+				computeContactState(moving, c->getEdgeState() == Sim::TOUCHING, touching, canCollide);
 
-			if (state != contact->getEdgeState()) {
+			if (state != c->getEdgeState()) {
 				switch (state) {
 				case Sim::STEPPING:
-					toStepping.push_back(contact);
+					toStepping.push_back(c);
 					break;
 
 				case Sim::SLEEPING:
-					toSleeping.push_back(contact);
+					toSleeping.push_back(c);
 					break;
 
 				case Sim::TOUCHING:
-					toTouching.push_back(contact);
+					toTouching.push_back(c);
 					break;
 
 				case Sim::TOUCHING_SLEEPING:
-					toTouchingSleeping.push_back(contact);
+					toTouchingSleeping.push_back(c);
 					break;
 				}
 			}
@@ -690,7 +689,7 @@ void SleepStage::stepContacts(ContactList& contacts)
 }
 
 // FUNCTION: WEBSERVICE 0x1011ab10
-void SleepStage::wakeAssemblyAndNeighbors(Assembly* assembly, int depth)
+void SleepStage::wakeAssemblyAndNeighbors(Assembly* assembly, int recurseDepth)
 {
 	Sim::AssemblyState state = getState(assembly);
 
@@ -708,9 +707,9 @@ void SleepStage::wakeAssemblyAndNeighbors(Assembly* assembly, int depth)
 				if (isAffecting(edge)) {
 					Assembly* other = assembly->otherAssembly(edge);
 
-					if (depth > 0) {
+					if (recurseDepth > 0) {
 						if (getState(other) != Sim::AWAKE) {
-							wakeAssemblyAndNeighbors(other, depth - 1);
+							wakeAssemblyAndNeighbors(other, recurseDepth - 1);
 						}
 					}
 					else if (getState(other) == Sim::SLEEPING_DEEPLY) {

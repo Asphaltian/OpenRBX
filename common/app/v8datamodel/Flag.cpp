@@ -9,9 +9,9 @@ const char sFlag[] = "Flag";
 static Reflection::PropDescriptor<Flag, BrickColor> prop_Color;
 
 // STUB: WEBSERVICE 0x100cef60
-void Flag::setTeamColor(BrickColor value)
+void Flag::setTeamColor(BrickColor color)
 {
-	teamColor = value;
+	teamColor = color;
 	raisePropertyChanged(prop_Color);
 }
 

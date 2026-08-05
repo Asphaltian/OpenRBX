@@ -14,7 +14,7 @@ public:
 	virtual ~RigidJoint() {} // vtable+0x00
 
 	// FUNCTION: WEBSERVICE 0x1009ada0
-	static bool isRigidJoint(Edge* edge) { return isJoint(edge) && jointIsRigid(static_cast<Joint*>(edge)); }
+	static bool isRigidJoint(Edge* e) { return isJoint(e) && jointIsRigid(static_cast<Joint*>(e)); }
 
 	// SYNTHETIC: WEBSERVICE 0x100d7a40
 	// RBX::WeldJoint::`scalar deleting destructor'

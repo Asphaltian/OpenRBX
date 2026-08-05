@@ -5,9 +5,9 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1010ae60
-Vector3& Face::operator[](int index)
+Vector3& Face::operator[](int i)
 {
-	return (&c0)[index];
+	return (&c0)[i];
 }
 
 // STUB: WEBSERVICE 0x1010ae70
@@ -31,28 +31,28 @@ DECOMP_NOINLINE bool Face::cornersAligned(const Face& f0, const Face& f1, float 
 }
 
 // STUB: WEBSERVICE 0x1010afb0
-Face Face::fromExtentsSide(const Extents& extents, NormalId normalId)
+Face Face::fromExtentsSide(const Extents& e, NormalId faceId)
 {
 	STUB(0x1010afb0);
 	return Face();
 }
 
 // STUB: WEBSERVICE 0x1010b000
-Face Face::toWorldSpace(const CoordinateFrame& coord) const
+Face Face::toWorldSpace(const CoordinateFrame& objectCoord) const
 {
 	STUB(0x1010b000);
 	return Face();
 }
 
 // STUB: WEBSERVICE 0x1010b180
-Face Face::toObjectSpace(const CoordinateFrame& coord) const
+Face Face::toObjectSpace(const CoordinateFrame& objectCoord) const
 {
 	STUB(0x1010b180);
 	return Face();
 }
 
 // STUB: WEBSERVICE 0x1010b520
-DECOMP_NOINLINE bool Face::hasOverlap(const Face& f0, const Face& f1, float tolerance)
+DECOMP_NOINLINE bool Face::hasOverlap(const Face& f0, const Face& f1, float byAtLeast)
 {
 	STUB(0x1010b520);
 	return false;

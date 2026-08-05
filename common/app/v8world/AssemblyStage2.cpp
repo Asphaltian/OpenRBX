@@ -23,9 +23,9 @@ SleepStage* AssemblyStage::getSleepStage()
 }
 
 // FUNCTION: WEBSERVICE 0x10126de0
-void AssemblyStage::wakeAssembly(Assembly* assembly)
+void AssemblyStage::wakeAssembly(Assembly* a)
 {
-	getSleepStage()->onWakeUpRequest(assembly, false);
+	getSleepStage()->onWakeUpRequest(a, false);
 }
 
 // FUNCTION: WEBSERVICE 0x10126e00

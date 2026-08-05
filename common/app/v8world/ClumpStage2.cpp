@@ -16,9 +16,9 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011b330
-float getPrimitiveSize(Primitive* primitive)
+float getPrimitiveSize(Primitive* p)
 {
-	const Vector3& size = primitive->getGeometry()->getGridSize();
+	const Vector3& size = p->getGeometry()->getGridSize();
 
 	float area;
 	float other;
@@ -41,49 +41,49 @@ haveArea:;
 
 	float gridArea = floor(area);
 
-	return (float) (G3D::iRound(gridArea) * (unsigned __int64) primitive->getSizeMultiplier());
+	return (float) (G3D::iRound(gridArea) * (unsigned __int64) p->getSizeMultiplier());
 }
 
 // FUNCTION: WEBSERVICE 0x1011b3d0
-int biggerJointGuid(Joint* joint0, Joint* joint1)
+int biggerJointGuid(Joint* j0, Joint* j1)
 {
-	const Guid* guid0 = &joint0->getPrimitive(0)->getGuid();
-	const Guid* other0 = &joint1->getPrimitive(0)->getGuid();
-	const Guid* guid1 = joint0->getPrimitive(1) != NULL ? &joint0->getPrimitive(1)->getGuid() : NULL;
-	const Guid* other1 = joint1->getPrimitive(1) != NULL ? &joint1->getPrimitive(1)->getGuid() : NULL;
+	const Guid* guid0 = &j0->getPrimitive(0)->getGuid();
+	const Guid* other0 = &j1->getPrimitive(0)->getGuid();
+	const Guid* guid1 = j0->getPrimitive(1) != NULL ? &j0->getPrimitive(1)->getGuid() : NULL;
+	const Guid* other1 = j1->getPrimitive(1) != NULL ? &j1->getPrimitive(1)->getGuid() : NULL;
 
 	return Guid::compare(guid0, guid1, other0, other1);
 }
 
 // FUNCTION: WEBSERVICE 0x1011b440
-Joint* getJoint(Primitive* primitive, Joint::JointType jointType)
+Joint* getJoint(Primitive* p, Joint::JointType jointType)
 {
-	Joint* joint = primitive->getFirstJoint();
+	Joint* joint = p->getFirstJoint();
 
 	while (joint != NULL) {
 		if (joint->getJointType() == jointType) {
 			return joint;
 		}
 
-		joint = primitive->getNextJoint(joint);
+		joint = p->getNextJoint(joint);
 	}
 
 	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1011b5e0
-int biggerJointSize(Joint* joint0, Joint* joint1)
+int biggerJointSize(Joint* j0, Joint* j1)
 {
-	float size0 = getPrimitiveSize(joint0->getPrimitive(0));
+	float size0 = getPrimitiveSize(j0->getPrimitive(0));
 
-	if (joint0->getPrimitive(1) != NULL) {
-		size0 = G3D::max(size0, getPrimitiveSize(joint0->getPrimitive(1)));
+	if (j0->getPrimitive(1) != NULL) {
+		size0 = G3D::max(size0, getPrimitiveSize(j0->getPrimitive(1)));
 	}
 
-	float size1 = getPrimitiveSize(joint1->getPrimitive(0));
+	float size1 = getPrimitiveSize(j1->getPrimitive(0));
 
-	if (joint1->getPrimitive(1) != NULL) {
-		size1 = G3D::max(size1, getPrimitiveSize(joint1->getPrimitive(1)));
+	if (j1->getPrimitive(1) != NULL) {
+		size1 = G3D::max(size1, getPrimitiveSize(j1->getPrimitive(1)));
 	}
 
 	if (size1 < size0) {
@@ -100,20 +100,20 @@ int biggerJointSize(Joint* joint0, Joint* joint1)
 namespace JointSort {
 
 // FUNCTION: WEBSERVICE 0x1011b690
-bool lighterJoint(Joint* joint0, Joint* joint1)
+bool lighterJoint(Joint* j0, Joint* j1)
 {
-	if (joint0 == joint1) {
+	if (j0 == j1) {
 		return false;
 	}
 
-	Joint::JointType type0 = joint0->getJointType();
-	Joint::JointType type1 = joint1->getJointType();
+	Joint::JointType type0 = j0->getJointType();
+	Joint::JointType type1 = j1->getJointType();
 
 	if (type0 != type1) {
 		return type0 < type1;
 	}
 
-	int bigger = biggerJointSize(joint0, joint1);
+	int bigger = biggerJointSize(j0, j1);
 
 	if (bigger == 1) {
 		return true;
@@ -123,7 +123,7 @@ bool lighterJoint(Joint* joint0, Joint* joint1)
 		return false;
 	}
 
-	bigger = biggerJointGuid(joint0, joint1);
+	bigger = biggerJointGuid(j0, j1);
 
 	if (bigger == 1) {
 		return true;
@@ -133,7 +133,7 @@ bool lighterJoint(Joint* joint0, Joint* joint1)
 		return false;
 	}
 
-	return joint0 < joint1;
+	return j0 < j1;
 }
 
 } // namespace JointSort
@@ -235,52 +235,52 @@ void TreeStage::eraseEdge(Edge* e)
 }
 
 // FUNCTION: WEBSERVICE 0x1011ba00
-Primitive* TreeStage::heavyParent(int index, Primitive* primitive, Joint*& heaviest, int& heaviestIndex)
+Primitive* TreeStage::heavyParent(int testSide, Primitive* p, Joint*& answer, int& heavySide)
 {
-	Joint* joint = primitive->getFirstJoint();
+	Joint* joint = p->getFirstJoint();
 
 	while (joint != NULL) {
 		if (joint->getActive()) {
-			Primitive* other = primitive == joint->getPrimitive(0) ? joint->getPrimitive(1) : joint->getPrimitive(0);
+			Primitive* other = p == joint->getPrimitive(0) ? joint->getPrimitive(1) : joint->getPrimitive(0);
 
 			int depth = other != NULL ? other->getClumpDepth() : 0;
 
-			if (depth == primitive->getClumpDepth() - 1) {
-				if (heaviest == NULL || JointSort::lighterJoint(heaviest, joint)) {
-					heaviest = joint;
-					heaviestIndex = index;
+			if (depth == p->getClumpDepth() - 1) {
+				if (answer == NULL || JointSort::lighterJoint(answer, joint)) {
+					answer = joint;
+					heavySide = testSide;
 				}
 
 				return other;
 			}
 		}
 
-		joint = primitive->getNextJoint(joint);
+		joint = p->getNextJoint(joint);
 	}
 
 	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1011ba80
-void TreeStage::cleanAssembly(Assembly* assembly)
+void TreeStage::cleanAssembly(Assembly* a)
 {
-	if (!assembly->inPipeline()) {
-		assembly->putInPipeline(this);
+	if (!a->inPipeline()) {
+		a->putInPipeline(this);
 	}
 
-	bool inKernel = assembly->downstreamOfStage(this);
-	bool wanted = !assembly->getAnchored();
+	bool inKernel = a->downstreamOfStage(this);
+	bool wanted = !a->getAnchored();
 
 	if (inKernel != wanted) {
 		if (wanted) {
-			static_cast<AssemblyStage*>(getDownstream())->onAssemblyAdded(assembly);
+			static_cast<AssemblyStage*>(getDownstream())->onAssemblyAdded(a);
 		}
 		else {
-			static_cast<AssemblyStage*>(getDownstream())->onAssemblyRemoving(assembly);
+			static_cast<AssemblyStage*>(getDownstream())->onAssemblyRemoving(a);
 		}
 	}
 	else if (inKernel) {
-		static_cast<AssemblyStage*>(getDownstream())->wakeAssembly(assembly);
+		static_cast<AssemblyStage*>(getDownstream())->wakeAssembly(a);
 	}
 }
 
@@ -315,9 +315,9 @@ int TreeStage::getMetric(MetricType metricType)
 }
 
 // FUNCTION: WEBSERVICE 0x1011bbb0
-void ClumpStage::stepUi(int frameCount)
+void ClumpStage::stepUi(int uiStepId)
 {
-	getTreeStage()->getAssemblyStage()->stepUi(frameCount);
+	getTreeStage()->getAssemblyStage()->stepUi(uiStepId);
 }
 
 // FUNCTION: WEBSERVICE 0x1011bbc0
@@ -635,24 +635,24 @@ void TreeStage::insertJoint(Joint* j)
 }
 
 // FUNCTION: WEBSERVICE 0x1011c7c0
-void TreeStage::onEdgeAdded(Edge* edge)
+void TreeStage::onEdgeAdded(Edge* e)
 {
-	Primitive::insertEdge(edge);
-	edge->putInPipeline(this);
+	Primitive::insertEdge(e);
+	e->putInPipeline(this);
 
-	if (Joint::isJoint(edge) && static_cast<Joint*>(edge)->getJointType() >= Joint::ANCHOR_JOINT) {
-		insertJoint(static_cast<Joint*>(edge));
+	if (Joint::isJoint(e) && static_cast<Joint*>(e)->getJointType() >= Joint::ANCHOR_JOINT) {
+		insertJoint(static_cast<Joint*>(e));
 		return;
 	}
 
-	insertEdge(edge);
+	insertEdge(e);
 }
 
 // FUNCTION: WEBSERVICE 0x1011c840
-void TreeStage::onEdgeRemoving(Edge* edge)
+void TreeStage::onEdgeRemoving(Edge* e)
 {
-	if (Joint::isJoint(edge) && static_cast<Joint*>(edge)->getJointType() >= Joint::ANCHOR_JOINT) {
-		Joint* joint = static_cast<Joint*>(edge);
+	if (Joint::isJoint(e) && static_cast<Joint*>(e)->getJointType() >= Joint::ANCHOR_JOINT) {
+		Joint* joint = static_cast<Joint*>(e);
 
 		if (joint->getActive()) {
 			Primitive* downstream = Primitive::downstreamPrimitive(joint);
@@ -665,15 +665,15 @@ void TreeStage::onEdgeRemoving(Edge* edge)
 		}
 	}
 	else {
-		if (edge->downstreamOfStage(this)) {
-			static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(edge);
+		if (e->downstreamOfStage(this)) {
+			static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(e);
 		}
 
-		eraseEdge(edge);
+		eraseEdge(e);
 	}
 
-	edge->removeFromStage(this);
-	Primitive::removeEdge(edge);
+	e->removeFromStage(this);
+	Primitive::removeEdge(e);
 }
 
 } // namespace RBX

@@ -63,17 +63,17 @@ Sim::AssemblyState Assembly::getSleepStatus()
 }
 
 // FUNCTION: WEBSERVICE 0x10102a80
-bool lessAssembly(const Assembly* a, const Assembly* b)
+bool lessAssembly(const Assembly* a0, const Assembly* a1)
 {
-	if (a == b) {
+	if (a0 == a1) {
 		return false;
 	}
 
-	if (a->getRootPrimitive() == b->getRootPrimitive()) {
+	if (a0->getRootPrimitive() == a1->getRootPrimitive()) {
 		return false;
 	}
 
-	return Guid::compare(&a->getRootPrimitive()->getGuid(), &b->getRootPrimitive()->getGuid()) == -1;
+	return Guid::compare(&a0->getRootPrimitive()->getGuid(), &a1->getRootPrimitive()->getGuid()) == -1;
 }
 
 // FUNCTION: WEBSERVICE 0x10102ac0 FOLDED
@@ -89,24 +89,24 @@ const Assembly* Assembly::getRootAssemblyConst() const
 }
 
 // FUNCTION: WEBSERVICE 0x10102ad0
-Joint* Assembly::getJointToParent(Primitive* primitive)
+Joint* Assembly::getJointToParent(Primitive* p)
 {
-	Joint* joint = primitive->getFirstJoint();
+	Joint* joint = p->getFirstJoint();
 
 	while (joint != NULL) {
 		if (joint->getActive()) {
 			Primitive* other = joint->getPrimitive(0);
 
-			if (primitive == other) {
+			if (p == other) {
 				other = joint->getPrimitive(1);
 			}
 
-			if (other == NULL || primitive->getBody()->getParent() == other->getBody()) {
+			if (other == NULL || p->getBody()->getParent() == other->getBody()) {
 				return joint;
 			}
 		}
 
-		joint = primitive->getNextJoint(joint);
+		joint = p->getNextJoint(joint);
 	}
 
 	return NULL;
@@ -191,14 +191,14 @@ void Assembly::onPrimitivesChanged()
 }
 
 // FUNCTION: WEBSERVICE 0x10102d70
-void Assembly::addRigidChild(Primitive* parent, RigidJoint* joint, Primitive* child)
+void Assembly::addRigidChild(Primitive* parent, RigidJoint* r, Primitive* child)
 {
 	Clump* clump = parent->getClump();
 
 	child->setClump(clump);
 	child->setClumpDepth(parent->getClumpDepth() + 1);
 	child->getBody()->setParent(parent->getBody());
-	child->getBody()->setMeInParent(joint->getChildInParent(parent, child));
+	child->getBody()->setMeInParent(r->getChildInParent(parent, child));
 
 	clump->onPrimitivesChanged();
 }
@@ -220,20 +220,20 @@ unsigned int Assembly::numMotors()
 }
 
 // FUNCTION: WEBSERVICE 0x10102e60
-MotorJoint* Assembly::getMotorImp(unsigned int& index)
+MotorJoint* Assembly::getMotorImp(unsigned int& motorId)
 {
 	Joint* joint = getJointToParent(rootPrimitive);
 
 	if (MotorJoint::isMotorJoint(joint)) {
-		if (index == 0) {
+		if (motorId == 0) {
 			return static_cast<MotorJoint*>(joint);
 		}
 
-		index--;
+		motorId--;
 	}
 
 	for (unsigned int i = 0; i < children.size(); i++) {
-		MotorJoint* motor = children[i]->getMotorImp(index);
+		MotorJoint* motor = children[i]->getMotorImp(motorId);
 
 		if (motor != NULL) {
 			return motor;
@@ -252,13 +252,13 @@ MotorJoint* Assembly::getMotor(unsigned int index)
 }
 
 // FUNCTION: WEBSERVICE 0x10102f20
-void Assembly::stepUi(int frameCount)
+void Assembly::stepUi(int uiStepId)
 {
 	unsigned int count = numMotors();
 
 	for (unsigned int i = 0; i < count; i++) {
 		unsigned int index = i;
-		getMotorImp(index)->stepUi(frameCount);
+		getMotorImp(index)->stepUi(uiStepId);
 	}
 }
 
@@ -266,12 +266,12 @@ void Assembly::stepUi(int frameCount)
 float Assembly::computeMaxRadius() const
 {
 	float answer = 0;
-	Vector3 cofm = rootPrimitive->getBody()->getBranchCofmPos();
+	Vector3 offsetCenter = rootPrimitive->getBody()->getBranchCofmPos();
 
 	for (PrimIterator it(rootPrimitive, IN_ASSEMBLY); *it != NULL; ++it) {
 		Primitive* primitive = *it;
 
-		Vector3 offset = primitive->getBody()->getCoordinateFrame().translation - cofm;
+		Vector3 offset = primitive->getBody()->getCoordinateFrame().translation - offsetCenter;
 		Vector3 extent = Math::vector3Abs(offset);
 
 		answer = G3D::max(answer, (extent + primitive->getGeometry()->getGridSize() * 0.5f).magnitude());
@@ -281,7 +281,7 @@ float Assembly::computeMaxRadius() const
 }
 
 // FUNCTION: WEBSERVICE 0x10103060
-void Assembly::onPrimitiveCanSleepChanged(Primitive* primitive)
+void Assembly::onPrimitiveCanSleepChanged(Primitive* p)
 {
 	canSleep.setDirty();
 }
@@ -323,15 +323,15 @@ Assembly::~Assembly()
 }
 
 // FUNCTION: WEBSERVICE 0x101038a0
-void Assembly::setParent(Assembly* value)
+void Assembly::setParent(Assembly* newParent)
 {
-	if (value != parent) {
+	if (newParent != parent) {
 		if (parent != NULL) {
 			fastRemoveShort(parent->children, this);
 			parent->onPrimitivesChanged();
 		}
 
-		parent = value;
+		parent = newParent;
 
 		if (parent != NULL) {
 			parent->addChild(this);
@@ -342,23 +342,23 @@ void Assembly::setParent(Assembly* value)
 }
 
 // FUNCTION: WEBSERVICE 0x10103910
-void Assembly::addMotorChild(Primitive* parent, MotorJoint* joint, Primitive* child)
+void Assembly::addMotorChild(Primitive* parent, MotorJoint* m, Primitive* child)
 {
 	Clump* clump = parent->getClump();
 
 	child->setClumpDepth(parent->getClumpDepth() + 1);
 	child->getClump()->setParent(clump);
 	child->getBody()->setParent(parent->getBody());
-	child->getBody()->setMeInParent(joint->resetLink());
+	child->getBody()->setMeInParent(m->resetLink());
 }
 
 // FUNCTION: WEBSERVICE 0x10103960
-void Assembly::addGroundChild(Primitive* child)
+void Assembly::addGroundChild(Primitive* p)
 {
-	Clump* clump = child->getClump();
+	Clump* clump = p->getClump();
 
-	child->setClumpDepth(1);
-	child->getBody()->setParent(NULL);
+	p->setClumpDepth(1);
+	p->getBody()->setParent(NULL);
 	clump->setParent(NULL);
 }
 

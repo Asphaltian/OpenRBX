@@ -7,15 +7,15 @@ namespace RBX {
 using G3D::Vector3;
 
 // FUNCTION: WEBSERVICE 0x10121f50
-Vector3 Units::kmsAccelerationToRbx(const Vector3& a)
+Vector3 Units::kmsAccelerationToRbx(const Vector3& kmsAccel)
 {
-	return a * 20.0f;
+	return kmsAccel * 20.0f;
 }
 
 // FUNCTION: WEBSERVICE 0x10121f80
-float Units::kmsForceToRbx(float f)
+float Units::kmsForceToRbx(float kmsForce)
 {
-	return f * 20.0f;
+	return kmsForce * 20.0f;
 }
 
 } // namespace RBX

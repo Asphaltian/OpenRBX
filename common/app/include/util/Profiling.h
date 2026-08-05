@@ -114,18 +114,18 @@ inline Mark::~Mark()
 	if (markTlsIndex != 0) {
 		TlsSetValue(markTlsIndex, enclosingSection);
 
-		FILETIME exitKernelTime;
-		FILETIME exitUserTime;
+		FILETIME endKernelTime;
+		FILETIME endUserTime;
 
-		GetThreadTimes(GetCurrentThread(), &creationTime, &exitTime, &exitKernelTime, &exitUserTime);
+		GetThreadTimes(GetCurrentThread(), &creationTime, &exitTime, &endKernelTime, &endUserTime);
 
-		__int64 kernelSpan = toInt64(exitKernelTime) - toInt64(kernelTime);
-		__int64 userSpan = toInt64(exitUserTime) - toInt64(userTime);
+		__int64 kernelSpan = toInt64(endKernelTime) - toInt64(kernelTime);
+		__int64 user = toInt64(endUserTime) - toInt64(userTime);
 
-		section->log(kernelSpan, userSpan, frameTick);
+		section->log(kernelSpan, user, frameTick);
 
 		if (enclosingSection != NULL && enclosingSection != section && enclosingSection != section->parent) {
-			enclosingSection->log(-kernelSpan, -userSpan, false);
+			enclosingSection->log(-kernelSpan, -user, false);
 		}
 	}
 }

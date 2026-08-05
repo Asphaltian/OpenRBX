@@ -2,6 +2,9 @@
 #define V8WORLD_CONTACT_H
 
 #include "decomp.h"
+#include "v8kernel/Connector.h"
+#include "v8world/Ball.h"
+#include "v8world/Block.h"
 #include "v8world/Primitive.h"
 
 #include <G3D/Vector3int16.h>
@@ -9,8 +12,8 @@
 
 namespace RBX {
 
-class Connector;
-class ContactConnector;
+using G3D::Vector3int16;
+
 class Kernel;
 
 // SIZE 0x34
@@ -28,13 +31,15 @@ public:
 	DECOMP_NOINLINE void onPrimitiveContactParametersChanged();
 
 private:
-	virtual void putInKernel(Kernel* kernel); // vtable+0x04
-	virtual void removeFromKernel();          // vtable+0x08
-	virtual EdgeType getEdgeType() const;     // vtable+0x0c
+	virtual void putInKernel(Kernel* _kernel); // vtable+0x04
+	virtual void removeFromKernel();           // vtable+0x08
+	virtual EdgeType getEdgeType() const;      // vtable+0x0c
 
 protected:
-	void createConnector();
-	void deleteConnector(Connector*& connector);
+	Body* getBody(int index) const { return getPrimitive(index)->getBody(); }
+
+	ContactConnector* createConnector();
+	void deleteConnector(ContactConnector*& c);
 
 	virtual void deleteAllConnectors() = 0; // vtable+0x14
 	virtual bool stepContact() = 0;         // vtable+0x18
@@ -47,9 +52,11 @@ private:
 
 	static bool ignoreBool;
 
+protected:
 	static int contactPairMatches;
 	static int contactPairMisses;
 
+private:
 	int lastContactStep; // 0x20
 	int steppingIndex;   // 0x24
 	float jointK;        // 0x28
@@ -64,7 +71,7 @@ DECOMP_SIZE_ASSERT(Contact, 0x34)
 class BallBallContact : public Contact
 {
 public:
-	BallBallContact(Primitive* prim0, Primitive* prim1);
+	BallBallContact(Primitive* p0, Primitive* p1);
 
 	// SYNTHETIC: WEBSERVICE 0x10108060
 	// RBX::BallBallContact::`scalar deleting destructor'
@@ -72,11 +79,13 @@ public:
 	virtual ~BallBallContact() {} // vtable+0x00
 
 private:
+	Ball* ball(int index) { return static_cast<Ball*>(getPrimitive(index)->getGeometry()); }
+
 	virtual void deleteAllConnectors();                    // vtable+0x14
 	virtual bool stepContact();                            // vtable+0x18
 	virtual bool computeIsColliding(float overlapIgnored); // vtable+0x1c
 
-	Connector* ballBallConnector; // 0x34
+	ContactConnector* ballBallConnector; // 0x34
 };
 
 DECOMP_SIZE_ASSERT(BallBallContact, 0x38)
@@ -86,7 +95,7 @@ DECOMP_SIZE_ASSERT(BallBallContact, 0x38)
 class BallBlockContact : public Contact
 {
 public:
-	BallBlockContact(Primitive* prim0, Primitive* prim1);
+	BallBlockContact(Primitive* p0, Primitive* p1);
 
 	// SYNTHETIC: WEBSERVICE 0x101080b0
 	// RBX::BallBlockContact::`scalar deleting destructor'
@@ -94,13 +103,19 @@ public:
 	virtual ~BallBlockContact() {} // vtable+0x00
 
 private:
+	Primitive* ballPrim() { return getPrimitive(0); }
+	Primitive* blockPrim() { return getPrimitive(1); }
+
+	Ball* ball() { return static_cast<Ball*>(ballPrim()->getGeometry()); }
+	Block* block() { return static_cast<Block*>(blockPrim()->getGeometry()); }
+
 	virtual void deleteAllConnectors();                    // vtable+0x14
 	virtual bool stepContact();                            // vtable+0x18
 	virtual bool computeIsColliding(float overlapIgnored); // vtable+0x1c
 
-	bool computeIsColliding(int& onBorder, G3D::Vector3int16& clip, Vector3& projectionInBlock, float overlapIgnored);
+	bool computeIsColliding(int& onBorder, Vector3int16& clip, Vector3& projectionInBlock, float overlapIgnored);
 
-	Connector* ballBlockConnector; // 0x34
+	ContactConnector* ballBlockConnector; // 0x34
 };
 
 DECOMP_SIZE_ASSERT(BallBlockContact, 0x38)
@@ -110,16 +125,28 @@ DECOMP_SIZE_ASSERT(BallBlockContact, 0x38)
 class BlockBlockContact : public Contact
 {
 public:
-	BlockBlockContact(Primitive* prim0, Primitive* prim1);
+	BlockBlockContact(Primitive* p0, Primitive* p1);
 
 	static float contactPairHitRatio();
 
 private:
+	Block* block(int index) { return static_cast<Block*>(getPrimitive(index)->getGeometry()); }
+
 	virtual void deleteAllConnectors();                    // vtable+0x14
 	virtual bool stepContact();                            // vtable+0x18
 	virtual bool computeIsColliding(float overlapIgnored); // vtable+0x1c
 
 	bool getBestPlaneEdge(bool& temp, float overlapIgnored);
+
+	ContactConnector* matchContactConnector(Body* b0, Body* b1, GeoPairType _pairType, int param0, int param1);
+	void deleteUnmatchedConnectors();
+
+	void loadGeoPairEdgeEdge(int b0, int b1, int edge0, int edge1);
+	void loadGeoPairPointPlane(int pointBody, int planeBody, int pointID, NormalId pointFaceID, NormalId planeFaceID);
+	void loadGeoPairEdgeEdgePlane(int edgeBody, int planeBody, int edge0, int edge1);
+
+	int computePlaneContact();
+	int intersectRectQuad(Vector2& planeRect, Vector2 (&otherQuad)[4]);
 
 	std::vector<ContactConnector*> connectors; // 0x34
 	std::vector<bool> matched;                 // 0x44
@@ -150,15 +177,14 @@ inline float BlockBlockContact::contactPairHitRatio()
 }
 
 // FUNCTION: WEBSERVICE 0x10107fd0
-inline BallBallContact::BallBallContact(Primitive* prim0, Primitive* prim1)
-	: Contact(prim0, prim1), ballBallConnector(NULL)
+inline BallBallContact::BallBallContact(Primitive* p0, Primitive* p1) : Contact(p0, p1), ballBallConnector(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10108000
-inline void Contact::putInKernel(Kernel* kernel)
+inline void Contact::putInKernel(Kernel* _kernel)
 {
-	IPipelined::putInKernel(kernel);
+	IPipelined::putInKernel(_kernel);
 
 	onPrimitiveContactParametersChanged();
 }
@@ -190,14 +216,13 @@ inline void BallBlockContact::deleteAllConnectors()
 }
 
 // FUNCTION: WEBSERVICE 0x10108080
-inline BallBlockContact::BallBlockContact(Primitive* prim0, Primitive* prim1)
-	: Contact(prim0, prim1), ballBlockConnector(NULL)
+inline BallBlockContact::BallBlockContact(Primitive* p0, Primitive* p1) : Contact(p0, p1), ballBlockConnector(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10108a30
-inline BlockBlockContact::BlockBlockContact(Primitive* prim0, Primitive* prim1)
-	: Contact(prim0, prim1), separatingAxisId(0), separatingBodyId(0)
+inline BlockBlockContact::BlockBlockContact(Primitive* p0, Primitive* p1)
+	: Contact(p0, p1), separatingAxisId(0), separatingBodyId(0)
 {
 	feature[0] = -1;
 	feature[1] = -1;
