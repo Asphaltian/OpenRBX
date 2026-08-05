@@ -26,6 +26,11 @@ if (ENABLE_CLANG_TIDY)
   set_source_files_properties(common/app/util/Name.cpp common/app/util/standardout.cpp
                               common/app/v8world/World.cpp
                               PROPERTIES SKIP_LINTING ON)
+
+  # Contact.cpp binds a temporary to the non-const reference getClosestEdge records, which
+  # MSVC 8 accepts as an extension. Naming the temporary is conformant and costs the caller
+  # eight points, so the original relied on the extension and the source has to as well.
+  set_source_files_properties(common/app/v8world/Contact.cpp PROPERTIES SKIP_LINTING ON)
 endif()
 
 math(EXPR bits "8 * ${CMAKE_SIZEOF_VOID_P}")

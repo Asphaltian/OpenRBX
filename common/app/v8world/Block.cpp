@@ -370,7 +370,7 @@ const Vector3* BlockTemplate::getVertices(const Vector3& corner)
 	return answer->vertices;
 }
 
-// STUB: WEBSERVICE 0x1010a680
+// FUNCTION: WEBSERVICE 0x1010a680
 void Block::onSetSize()
 {
 	vertices = BlockTemplate::getVertices(gridSize * -0.5f);
