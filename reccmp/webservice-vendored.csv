@@ -1502,7 +1502,7 @@ address,size,type,symbol
 0x10043890,0x43,library,??0named_slot_map_iterator@detail@signals@boost@@QAE@ABV0123@@Z
 0x100439d0,0x92,library,?equalValues@?$TypedPropertyDescriptor@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 0x10043a70,0x6f,library,?equalValues@?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
-0x10043b20,0x87,library,?_Buynode@?$list@UItem@SignatureDescriptor@Reflection@RBX@@V?$allocator@UItem@SignatureDescriptor@Reflection@RBX@@@std@@@std@@IAEPAU_Node@?$_List_nod@UItem@SignatureDescriptor@Reflection@RBX@@V?$allocator@UItem@SignatureDescriptor@Reflection@RBX@@@std@@@2@PAU342@0ABUItem@SignatureDescriptor@Reflection@RBX@@@Z
+0x10043b20,0x87,library,
 0x10043bb0,0x8a,library,?init_next_group@named_slot_map_iterator@detail@signals@boost@@AAEXXZ
 0x10043ca0,0x321,library,??$to_simple_string_type@D@posix_time@boost@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@Vtime_duration@01@@Z
 0x10043fd0,0x32,library,?to_simple_string@posix_time@boost@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@Vtime_duration@12@@Z

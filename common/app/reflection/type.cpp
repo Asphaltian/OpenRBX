@@ -3,14 +3,30 @@
 namespace RBX {
 namespace Reflection {
 
-// FUNCTION: WEBSERVICE 0x1003e950
-Type::Type(const char* name, const std::type_info& type) : Descriptor(name), type(type), tag(Name::lookup(name))
+// FUNCTION: WEBSERVICE 0x100711b0
+template <>
+const Type& Type::singleton<void>()
+{
+	static Type type("void", typeid(void));
+
+	return type;
+}
+
+// FUNCTION: WEBSERVICE 0x10071220
+Value::Value() : _type(&Type::singleton<void>())
 {
 }
 
-// STUB: WEBSERVICE 0x1003e9c0
-Type::Type(const char* name, const std::type_info& type, const char* tag)
-	: Descriptor(name), type(type), tag(Name::lookup(tag))
+// FUNCTION: WEBSERVICE 0x10071260
+void SignatureDescriptor::addArgument(const Name& name, const Type& type, const Value& defaultValue)
+{
+	Item i = {&name, &type, defaultValue};
+
+	arguments.push_back(i);
+}
+
+// FUNCTION: WEBSERVICE 0x10071310
+SignatureDescriptor::SignatureDescriptor() : resultType(&Type::singleton<void>())
 {
 }
 

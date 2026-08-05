@@ -3466,6 +3466,7 @@ address,type,symbol
 0x102f1be4,global,___native_vcclrit_reason
 0x102f1db0,global,?aggregationSize@AggregatingSceneManager@Render@RBX@@2IA
 0x102f226c,global,?logsEnabled@LogManager@@0_NA
+0x102f4fd0,global,??_R0X@8
 0x102f4fdb,global,firstTime___initRoblox
 0x102f4fdc,global,?__hdlrEntry_CWebService_35@@3U_HANDLER_ENTRY@ATL@@A
 0x102f4fec,global,?__hdlrEntry_WSDL_36@@3U_HANDLER_ENTRY@ATL@@A
