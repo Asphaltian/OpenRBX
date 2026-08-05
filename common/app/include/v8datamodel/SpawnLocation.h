@@ -42,6 +42,11 @@ private:
 
 DECOMP_SIZE_ASSERT(SpawnerService, 0x104)
 
+// clang-format off
+// STUB: WEBSERVICE 0x1021dc40
+// RBX::`dynamic initializer for 'prop_TeamColor''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_SPAWNLOCATION_H

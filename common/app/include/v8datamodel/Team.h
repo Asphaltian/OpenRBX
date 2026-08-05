@@ -33,6 +33,21 @@ private:
 
 DECOMP_SIZE_ASSERT(Team, 0x104)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021bd40
+// RBX::`dynamic initializer for 'prop_Score''
+// STUB: WEBSERVICE 0x1021bd80
+// RBX::`dynamic initializer for 'prop_Color''
+// STUB: WEBSERVICE 0x1021bdc0
+// RBX::`dynamic initializer for 'prop_AutoAssignable''
+// STUB: WEBSERVICE 0x10223a40
+// RBX::`dynamic atexit destructor for 'prop_AutoAssignable''
+// STUB: WEBSERVICE 0x10223a60
+// RBX::`dynamic atexit destructor for 'prop_Color''
+// STUB: WEBSERVICE 0x10223a80
+// RBX::`dynamic atexit destructor for 'prop_Score''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_TEAM_H

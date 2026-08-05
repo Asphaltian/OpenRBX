@@ -56,6 +56,25 @@ public:
 
 DECOMP_SIZE_ASSERT(DebugSettings, 0x100)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021bac0
+// `dynamic initializer for 'prop_AnchoredParts''
+// SYNTHETIC: WEBSERVICE 0x1021bb00
+// `dynamic initializer for 'prop_PartCoordinateFrames''
+// SYNTHETIC: WEBSERVICE 0x1021bb80
+// `dynamic initializer for 'prop_ModelCoordinateFrames''
+// SYNTHETIC: WEBSERVICE 0x1021bbc0
+// `dynamic initializer for 'prop_WorldCoordinateFrames''
+// SYNTHETIC: WEBSERVICE 0x1021bc00
+// `dynamic initializer for 'prop_DisableEnvironmentalThrottle''
+// SYNTHETIC: WEBSERVICE 0x1021bc40
+// `dynamic initializer for 'prop_ValidatingDebug''
+// SYNTHETIC: WEBSERVICE 0x1021bc80
+// `dynamic initializer for 'prop_assertAction''
+// SYNTHETIC: WEBSERVICE 0x1021bcc0
+// `dynamic initializer for 'prop_errorReporting''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_DEBUGSETTINGS_H

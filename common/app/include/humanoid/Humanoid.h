@@ -45,6 +45,17 @@ private:
 
 DECOMP_SIZE_ASSERT(Humanoid, 0x1f0)
 
+// clang-format off
+// STUB: WEBSERVICE 0x1021b310
+// RBX::`dynamic initializer for 'propWalkRotationalVelocity''
+// STUB: WEBSERVICE 0x1021b370
+// RBX::`dynamic initializer for 'propJump''
+// STUB: WEBSERVICE 0x1021b430
+// RBX::`dynamic initializer for 'propSit''
+// STUB: WEBSERVICE 0x1021b4f0
+// RBX::`dynamic initializer for 'propMaxHealth''
+// clang-format on
+
 } // namespace RBX
 
 #endif // HUMANOID_HUMANOID_H

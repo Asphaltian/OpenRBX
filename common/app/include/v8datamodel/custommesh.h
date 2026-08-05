@@ -35,6 +35,11 @@ private:
 
 DECOMP_SIZE_ASSERT(SpecialShape, 0x154)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021e810
+// `dynamic initializer for 'desc_meshType''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_CUSTOMMESH_H

@@ -139,6 +139,13 @@ DECOMP_SIZE_ASSERT(Weld, 0x11c)
 // RBX::AutoJoint::~AutoJoint
 // clang-format on
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021c570
+// `dynamic initializer for 'prop_MaxVelocity''
+// SYNTHETIC: WEBSERVICE 0x1021c5f0
+// `dynamic initializer for 'prop_CurrentAngle''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_JOINTINSTANCE_H

@@ -22,6 +22,11 @@ private:
 
 DECOMP_SIZE_ASSERT(FaceInstance, 0xfc)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021e780
+// `dynamic initializer for 'RBX::FaceInstance::prop_Face''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_FACEINSTANCE_H

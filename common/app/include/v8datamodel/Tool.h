@@ -38,6 +38,11 @@ private:
 
 DECOMP_SIZE_ASSERT(Tool, 0x238)
 
+// clang-format off
+// STUB: WEBSERVICE 0x1021c240
+// RBX::`dynamic initializer for 'prop_BackendToolState''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_TOOL_H

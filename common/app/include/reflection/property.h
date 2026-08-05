@@ -175,14 +175,11 @@ template <class Class, class T>
 class PropDescriptor : public TypedPropertyDescriptor<T>
 {
 public:
-	template <class GetterResult, class SetterArg>
+	template <class Getter, class Setter>
 	class GetSetImpl : public TypedPropertyDescriptor<T>::GetSet
 	{
 	public:
-		GetSetImpl(GetterResult (Class::*getter)() const, void (Class::*setter)(SetterArg))
-			: getter(getter), setter(setter)
-		{
-		}
+		GetSetImpl(Getter getter, Setter setter) : getter(getter), setter(setter) {}
 
 		virtual T getValue(const DescribedBase* instance) const
 		{
@@ -195,16 +192,16 @@ public:
 		}
 
 	private:
-		GetterResult (Class::*getter)() const; // 0x04
-		void (Class::*setter)(SetterArg);      // 0x10
+		Getter getter; // 0x04
+		Setter setter; // 0x10
 	};
 
-	template <class GetterResult, class SetterArg>
+	template <class Getter, class Setter>
 	PropDescriptor(
 		const char* name,
 		const char* category,
-		GetterResult (Class::*getter)() const,
-		void (Class::*setter)(SetterArg),
+		Getter getter,
+		Setter setter,
 		typename PropertyDescriptor::Functionality functionality = PropertyDescriptor::STANDARD
 	)
 		: TypedPropertyDescriptor<T>(
@@ -212,7 +209,7 @@ public:
 			  name,
 			  category,
 			  std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(
-				  new GetSetImpl<GetterResult, SetterArg>(getter, setter)
+				  new GetSetImpl<Getter, Setter>(getter, setter)
 			  ),
 			  functionality
 		  )
@@ -235,14 +232,11 @@ public:
 		virtual void setValue(DescribedBase* instance, const T& value) const = 0; // vtable+0x08
 	};
 
-	template <class GetterResult, class SetterArg>
+	template <class Getter, class Setter>
 	class GetSetImpl : public GetSet
 	{
 	public:
-		GetSetImpl(GetterResult (Class::*getter)() const, void (Class::*setter)(SetterArg))
-			: getter(getter), setter(setter)
-		{
-		}
+		GetSetImpl(Getter getter, Setter setter) : getter(getter), setter(setter) {}
 
 		virtual T getValue(const DescribedBase* instance) const
 		{
@@ -255,20 +249,20 @@ public:
 		}
 
 	private:
-		GetterResult (Class::*getter)() const; // 0x04
-		void (Class::*setter)(SetterArg);      // 0x10
+		Getter getter; // 0x04
+		Setter setter; // 0x10
 	};
 
-	template <class GetterResult, class SetterArg>
+	template <class Getter, class Setter>
 	EnumPropDescriptor(
 		const char* name,
 		const char* category,
-		GetterResult (Class::*getter)() const,
-		void (Class::*setter)(SetterArg),
+		Getter getter,
+		Setter setter,
 		typename PropertyDescriptor::Functionality functionality = PropertyDescriptor::STANDARD
 	)
 		: EnumPropertyDescriptor(Class::classDescriptor(), EnumDesc<T>::singleton(), name, category, functionality),
-		  getset(new GetSetImpl<GetterResult, SetterArg>(getter, setter))
+		  getset(new GetSetImpl<Getter, Setter>(getter, setter))
 	{
 	}
 

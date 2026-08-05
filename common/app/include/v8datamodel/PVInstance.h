@@ -23,6 +23,11 @@ private:
 
 DECOMP_SIZE_ASSERT(PVInstance, 0x170)
 
+// clang-format off
+// STUB: WEBSERVICE 0x1021a6f0
+// RBX::`dynamic initializer for 'prop_ControllerFlagShown''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_PVINSTANCE_H

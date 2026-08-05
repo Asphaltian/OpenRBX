@@ -25,6 +25,11 @@ private:
 
 DECOMP_SIZE_ASSERT(Flag, 0x260)
 
+// clang-format off
+// STUB: WEBSERVICE 0x1021c3e0
+// RBX::`dynamic initializer for 'prop_Color''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_FLAG_H

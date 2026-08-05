@@ -59,6 +59,17 @@ DECOMP_SIZE_ASSERT(Texture, 0x12c)
 // RBX::Decal::~Decal
 // clang-format on
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021dce0
+// `dynamic initializer for 'RBX::Decal::prop_Specular''
+// SYNTHETIC: WEBSERVICE 0x1021dd20
+// `dynamic initializer for 'RBX::Decal::prop_Shiny''
+// SYNTHETIC: WEBSERVICE 0x1021dd60
+// `dynamic initializer for 'RBX::Texture::prop_StudsPerTileU''
+// SYNTHETIC: WEBSERVICE 0x1021dda0
+// `dynamic initializer for 'RBX::Texture::prop_StudsPerTileV''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_DECAL_H
