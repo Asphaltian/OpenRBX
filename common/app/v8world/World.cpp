@@ -2,6 +2,7 @@
 
 #include "decomp.h"
 #include "util/standardout.h"
+#include "v8kernel/Constants.h"
 #include "v8kernel/Kernel.h"
 #include "v8world/Assembly2.h"
 #include "v8world/Clump2.h"
@@ -13,6 +14,11 @@
 #include "v8world/SimJobStage.h"
 #include "v8world/SleepStage2.h"
 #include "v8world/SpatialHash.h"
+
+#include <G3D/System.h>
+#include <G3D/g3dmath.h>
+#include <algorithm>
+#include <cmath>
 
 namespace RBX {
 
@@ -271,6 +277,66 @@ void World::doBreakJoints()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x100cfcd0
+float World::step(float desiredInterval)
+{
+	Profiling::Mark mark(*profilingWorldStep, true);
+
+	update();
+
+	double startTime = G3D::System::getTick();
+
+	bool throttling = false;
+
+	int steps = std::max(1, G3D::iRound((float) floor(Constants::worldStepsPerSec() * desiredInterval)));
+
+	for (int j = 0; j < steps; j++) {
+
+		int uiStepId = worldStepId / Constants::worldStepsPerUiStep();
+
+		if (worldStepId % Constants::worldStepsPerUiStep() == 0) {
+
+			Profiling::Mark mark(*profilingUiStep, false);
+
+			doBreakJoints();
+
+			touch.resize(0, false);
+			touchOther.resize(0, false);
+
+			inStepCode = true;
+
+			getClumpStage()->stepUi(uiStepId);
+
+			getSimJobStage().notifyMovingPrimitives();
+
+			inStepCode = false;
+		}
+
+		{
+			inStepCode = true;
+
+			Profiling::Mark mark(*profilingBroadphase, false);
+
+			contactManager->stepWorld();
+
+			inStepCode = false;
+		}
+
+		inStepCode = true;
+
+		jointStage->stepWorld(worldStepId, uiStepId, throttling);
+
+		inStepCode = false;
+
+		throttling = !disableEnvironmentalThrottle && canThrottle &&
+					 G3D::System::getTick() > startTime + Constants::worldDt() * (j + 1);
+
+		worldStepId++;
+	}
+
+	return Constants::worldDt() * steps;
+}
+
 // FUNCTION: WEBSERVICE 0x100d0020
 void World::insertJoint(Joint* j)
 {
@@ -354,6 +420,14 @@ void World::createJoints(Primitive* p)
 	createJoints(p, NULL);
 }
 
+// FUNCTION: WEBSERVICE 0x100d0260
+World::~World()
+{
+	delete jointStage;
+
+	delete contactManager;
+}
+
 // FUNCTION: WEBSERVICE 0x100d0420
 void World::removeJoint(Joint* j)
 {
@@ -384,6 +458,52 @@ void World::removePrimitive(Primitive* p)
 	primitives.fastRemove(p);
 
 	p->world = NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100d04f0
+World::World()
+	: contactManager(new ContactManager(this)), jointStage(new JointStage(NULL, this)), canThrottle(true),
+	  inStepCode(false), inJointNotification(false), worldStepId(0), numJoints(0), numContacts(0), numLinkCalls(0),
+	  profilingWorldStep(new Profiling::CodeProfiler("World Step")),
+	  profilingUiStep(new Profiling::CodeProfiler("UI Step")),
+	  profilingBroadphase(new Profiling::CodeProfiler("Broadphase"))
+{
+	profilingBroadphase->parent = profilingWorldStep.get();
+	profilingUiStep->parent = profilingWorldStep.get();
+
+	getSleepStage()->profilingCollision->parent = profilingWorldStep.get();
+	getSleepStage()->profilingWake->parent = profilingWorldStep.get();
+	getSleepStage()->profilingSleep->parent = profilingWorldStep.get();
+
+	getKernel()->profilingKernel->parent = profilingWorldStep.get();
+}
+
+// FUNCTION: WEBSERVICE 0x100d07f0
+void World::destroyJointsToWorld(const G3D::Array<Primitive*>& primitives)
+{
+	std::set<Primitive*> ignore;
+
+	for (int i = 0; i < primitives.size(); i++) {
+		ignore.insert(primitives[i]);
+	}
+
+	for (int i = 0; i < primitives.size(); i++) {
+		destroyJoints(primitives[i], &ignore);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100d08d0
+void World::createJointsToWorld(const G3D::Array<Primitive*>& primitives)
+{
+	std::set<Primitive*> ignore;
+
+	for (int i = 0; i < primitives.size(); i++) {
+		ignore.insert(primitives[i]);
+	}
+
+	for (int i = 0; i < primitives.size(); i++) {
+		createJoints(primitives[i], &ignore);
+	}
 }
 
 } // namespace RBX

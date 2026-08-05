@@ -41,10 +41,21 @@ struct AutoDestroy
 	Joint* joint; // 0x00
 };
 
+// clang-format off
+// VTABLE: WEBSERVICE 0x1023c550 RBX::Notifier<RBX::World, struct RBX::AutoDestroy>
+// VTABLE: WEBSERVICE 0x1023c560 RBX::Notifier<RBX::World, struct RBX::AutoJoin>
+// clang-format on
 // SIZE 0x94
 class World : public Notifier<World, AutoJoin>, public Notifier<World, AutoDestroy>
 {
 public:
+	World();
+
+	virtual ~World(); // vtable+0x00
+
+	// SYNTHETIC: WEBSERVICE 0x100d0790
+	// RBX::World::`scalar deleting destructor'
+
 	static bool disableEnvironmentalThrottle;
 
 	void onPrimitiveExtentsChanged(Primitive* p);
@@ -78,11 +89,16 @@ public:
 	SleepStage* getSleepStage();
 	const SleepStage* getSleepStage() const;
 
+	float step(float desiredInterval);
+
 	void update();
 
 	void addedBodyForce();
 
 	void joinAll();
+
+	void createJointsToWorld(const G3D::Array<Primitive*>& primitives);
+	void destroyJointsToWorld(const G3D::Array<Primitive*>& primitives);
 
 	void insertPrimitive(Primitive* p);
 	void removePrimitive(Primitive* p);

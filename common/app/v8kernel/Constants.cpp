@@ -11,6 +11,12 @@ namespace RBX {
 
 static float MAX_LEGO_JOINT_FORCES_MEASURED[] = {0.0f, 1.098f, 2.134f, 2.427f, 3.191f, 4.571f, 4.681f};
 
+// FUNCTION: WEBSERVICE 0x1010a910 FOLDED
+int Constants::worldStepsPerUiStep()
+{
+	return 8;
+}
+
 // FUNCTION: WEBSERVICE 0x1010a920
 int Constants::kernelStepsPerWorldStep()
 {

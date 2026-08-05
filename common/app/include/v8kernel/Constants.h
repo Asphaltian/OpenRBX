@@ -10,6 +10,7 @@ using G3D::Vector3;
 class Constants
 {
 public:
+	static int worldStepsPerUiStep();
 	static int kernelStepsPerWorldStep();
 	static int worldStepsPerSec();
 	static int kernelStepsPerSec();

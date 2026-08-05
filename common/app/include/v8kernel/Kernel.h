@@ -63,6 +63,7 @@ private:
 	int maxPoints;                             // 0x24
 	int maxConnectors;                         // 0x28
 
+public:
 	boost::scoped_ptr<Profiling::CodeProfiler> profilingKernel; // 0x2c
 };
 

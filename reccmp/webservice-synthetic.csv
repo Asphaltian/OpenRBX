@@ -133,6 +133,7 @@ address,type,symbol
 0x100c4370,library,??1Camera@RBX@@UAE@XZ
 0x100c4450,library,??_GCamera@RBX@@UAEPAXI@Z
 0x100c4450,library,??_ECamera@RBX@@UAEPAXI@Z
+0x100d0410,synthetic,??_EWorld@RBX@@WBI@AEPAXI@Z
 0x100e0510,library,??_E?$DescribedCreatable@VShirtGraphic@RBX@@VCharacterAppearance@2@$1?sShirtGraphic@2@3QBDB@RBX@@WBA@AEPAXI@Z
 0x100e0580,library,??_EBodyColors@RBX@@WBA@AEPAXI@Z
 0x100e0580,library,??_E?$DescribedCreatable@VBodyColors@RBX@@VCharacterAppearance@2@$1?sBodyColors@2@3QBDB@RBX@@WBA@AEPAXI@Z
