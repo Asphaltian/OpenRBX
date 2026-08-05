@@ -8,7 +8,10 @@ namespace RBX {
 
 const char sInstance[] = "Instance";
 
-Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged;
+Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged(
+	"Changed",
+	"property"
+);
 
 // STUB: WEBSERVICE 0x10047af0
 void Instance::onChildChanged(Instance* instance, const PropertyChanged& event)

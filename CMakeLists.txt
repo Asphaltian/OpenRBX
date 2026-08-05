@@ -24,6 +24,7 @@ if (ENABLE_CLANG_TIDY)
   # boost 1.34's scoped_lock throws, and clang-tidy reports it as an error whatever /EHsc the
   # command line carries. The diagnostic is inside the vendored header, not our code.
   set_source_files_properties(common/app/reflection/reflection_function.cpp
+                              common/app/reflection/signal.cpp
                               common/app/util/Name.cpp common/app/util/standardout.cpp
                               common/app/v8world/World.cpp
                               PROPERTIES SKIP_LINTING ON)

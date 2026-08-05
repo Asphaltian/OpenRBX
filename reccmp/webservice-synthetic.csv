@@ -420,3 +420,4 @@ address,type,symbol
 0x101fc1f0,library,__aullshr
 0x101fc210,library,__allshl
 0x1009a810,synthetic,??4PV@RBX@@QAEAAV01@ABV01@@Z
+0x10044680,synthetic,??1SignalDescriptor@Reflection@RBX@@UAE@XZ

@@ -361,6 +361,13 @@ public:
 	}
 };
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10218730
+// `dynamic initializer for 'RBX::Instance::event_propertyChanged''
+// SYNTHETIC: WEBSERVICE 0x102217c0
+// `dynamic atexit destructor for 'RBX::Instance::event_propertyChanged''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8TREE_INSTANCE_H

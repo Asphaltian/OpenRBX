@@ -582,6 +582,7 @@ address,type,symbol
 0x1022e158,global,__real@404e000000000000
 0x1022e280,global,?sInstance@RBX@@3QBDB
 0x1022e308,global,??_7?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@6B@
+0x1022e404,global,??_7?$SignalDesc@VInstance@RBX@@$$A6AXPBVPropertyDescriptor@Reflection@2@@Z@Reflection@RBX@@6B@
 0x1022e928,global,?sRunService@RBX@@3QBDB
 0x1022e938,global,??_7?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x1022e948,global,??_7?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
@@ -3291,6 +3292,7 @@ address,type,symbol
 0x102c8b9c,global,error___RBX::Log::writeEntry
 0x102c8f30,global,?sLighting@RBX@@3PADA
 0x102c9d6c,global,?creator@?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@RBX@@0VCreator@12@B
+0x102ca638,global,??_R0PBVPropertyDescriptor@Reflection@RBX@@@8
 0x102cbe00,global,index___RBX::ServiceProvider::newIndex
 0x102cbf00,global,?sModel@RBX@@3PADA
 0x102cc784,global,?creator@?$FactoryProduct@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@0VCreator@12@B
@@ -3985,7 +3987,8 @@ address,type,symbol
 0x102f8e0c,global,?tag_null@@3ABVName@RBX@@B
 0x102f8e10,global,?tag_hash@@3ABVName@RBX@@B
 0x102f8e18,global,s___RBX::BrickColor::BrickMap::singleton
-0x102f8e6c,global,type___RBX::Reflection::Type::singleton<RBX::Reflection::PropertyDescriptor
+0x102f8e6c,global,type___RBX::Reflection::Type::singleton<RBX::Reflection::PropertyDescriptor const *>
+0x102f8e7c,global,??_B?1???$singleton@PBVPropertyDescriptor@Reflection@RBX@@@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f8e80,global,s___RBX::Reflection::EnumDescriptor::allEnums
 0x102f8e98,global,"d___RBX::Reflection::Described<RBX::Sky,&RBX::sSky,RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky> >::classDescriptor"
 0x102f8f20,global,??_B?1??classDescriptor@?$Described@VSky@RBX@@$1?sSky@2@3PADAV?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51

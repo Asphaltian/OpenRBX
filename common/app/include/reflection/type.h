@@ -82,6 +82,8 @@ DECOMP_SIZE_ASSERT(SignatureDescriptor, 0x10)
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10221ea0
 // `RBX::Reflection::Type::singleton<void>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x10222e90
+// `RBX::Reflection::Type::singleton<RBX::Reflection::PropertyDescriptor const *>'::`2'::`dynamic atexit destructor for 'type''
 // clang-format on
 
 } // namespace Reflection

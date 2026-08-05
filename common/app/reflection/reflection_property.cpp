@@ -1,7 +1,17 @@
 #include "reflection/enumconverter.h"
+#include "reflection/property.h"
 
 namespace RBX {
 namespace Reflection {
+
+// FUNCTION: WEBSERVICE 0x10094130
+template <>
+const Type& Type::singleton<const PropertyDescriptor*>()
+{
+	static Type type("Property", typeid(const PropertyDescriptor*));
+
+	return type;
+}
 
 // FUNCTION: WEBSERVICE 0x10094250
 std::vector<const EnumDescriptor*>& EnumDescriptor::allEnums()
