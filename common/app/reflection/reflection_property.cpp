@@ -41,7 +41,7 @@ EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
 	allEnums().push_back(this);
 }
 
-// STUB: WEBSERVICE 0x10094410
+// FUNCTION: WEBSERVICE 0x10094410
 PropertyDescriptor::PropertyDescriptor(
 	ClassDescriptor& classDescriptor,
 	const Type& type,

@@ -48,6 +48,9 @@ public:
 	bool isPublic() const { return bIsPublic; }
 	bool canStreamWrite() const { return bCanStreamWrite; }
 
+	unsigned int bIsPublic : 1;       // 0x10
+	unsigned int bCanStreamWrite : 1; // 0x10
+
 	const Type& type; // 0x14
 
 protected:
@@ -66,9 +69,6 @@ private:
 		const XmlElement* element,
 		IReferenceBinder& binder
 	) const = 0; // vtable+0x20
-
-	unsigned int bIsPublic : 1;       // 0x10
-	unsigned int bCanStreamWrite : 1; // 0x10
 };
 
 DECOMP_SIZE_ASSERT(PropertyDescriptor, 0x18)

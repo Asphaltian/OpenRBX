@@ -3298,6 +3298,7 @@ address,type,symbol
 0x102c8b94,global,information___RBX::Log::writeEntry
 0x102c8b98,global,warning___RBX::Log::writeEntry
 0x102c8b9c,global,error___RBX::Log::writeEntry
+0x102c8e3c,global,??_R0?AVBrickColor@RBX@@@8
 0x102c8ea8,global,??_R0?AW4NormalId@RBX@@@8
 0x102c8f30,global,?sLighting@RBX@@3PADA
 0x102c9d6c,global,?creator@?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@RBX@@0VCreator@12@B

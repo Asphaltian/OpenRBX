@@ -186,9 +186,9 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 template <class T>
 const EnumDesc<T>& EnumDesc<T>::singleton()
 {
-	static EnumDesc<T> desc;
+	static EnumDesc<T> s;
 
-	return desc;
+	return s;
 }
 
 // clang-format off

@@ -74,11 +74,11 @@ const Type& Type::singleton<G3D::Color3>()
 	return type;
 }
 
-// STUB: WEBSERVICE 0x1003f5c0
+// FUNCTION: WEBSERVICE 0x1003f5c0
 template <>
 const Type& Type::singleton<BrickColor>()
 {
-	static Type type("int", typeid(BrickColor), "BrickColor");
+	static Type type("BrickColor", typeid(BrickColor), "int");
 
 	return type;
 }
