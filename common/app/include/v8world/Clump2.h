@@ -32,6 +32,9 @@ public:
 
 	Primitive* operator*() const { return primitive; }
 
+	bool operator==(const PrimIterator& other) const { return primitive == other.primitive; }
+	bool operator!=(const PrimIterator& other) const { return primitive != other.primitive; }
+
 private:
 	static bool isParent(Primitive* parentCandidate, Primitive* child, Joint* joint, SearchType searchType);
 

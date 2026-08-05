@@ -11,6 +11,7 @@ namespace RBX {
 
 class Assembly;
 class AssemblyStage;
+class MotorJoint;
 class Primitive;
 
 float getPrimitiveSize(Primitive* primitive);
@@ -99,6 +100,9 @@ public:
 
 	void onPrimitiveAddedAnchor(Primitive* p);
 	void onPrimitiveRemovedAnchor(Primitive* p);
+
+	void onPrimitiveCanCollideChanged(Primitive* p);
+	void onMotorAngleChanged(MotorJoint* motorJoint);
 
 	// SYNTHETIC: WEBSERVICE 0x1011b710
 	// RBX::ClumpStage::`scalar deleting destructor'

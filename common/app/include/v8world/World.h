@@ -2,41 +2,68 @@
 #define V8WORLD_WORLD_H
 
 #include "decomp.h"
+#include "util/Events.h"
 #include "util/IndexArray.h"
+#include "util/Profiling.h"
 #include "v8world/IWorldStage.h"
 #include "v8world/Primitive.h"
+
+#include <boost/scoped_ptr.hpp>
+#include <set>
 
 namespace RBX {
 
 class Assembly;
+class ClumpStage;
+class Contact;
 class ContactManager;
 class Joint;
 class MotorJoint;
 class JointStage;
 class Kernel;
 class Primitive;
+class SimJobStage;
+class SleepStage;
+
+// SIZE 0x04
+struct AutoJoin
+{
+	AutoJoin(Joint* joint) : joint(joint) {}
+
+	Joint* joint; // 0x00
+};
+
+// SIZE 0x04
+struct AutoDestroy
+{
+	AutoDestroy(Joint* joint) : joint(joint) {}
+
+	Joint* joint; // 0x00
+};
 
 // SIZE 0x94
-class World
+class World : public Notifier<World, AutoJoin>, public Notifier<World, AutoDestroy>
 {
 public:
 	static bool disableEnvironmentalThrottle;
 
-	void onPrimitiveExtentsChanged(Primitive* primitive);
-	void onPrimitiveGeometryTypeChanged(Primitive* primitive);
-	void onPrimitiveContactParametersChanged(Primitive* primitive);
-	void onPrimitiveCanSleepChanged(Primitive* primitive);
-	void onPrimitiveAddedAnchor(Primitive* primitive);
-	void onPrimitiveRemovedAnchor(Primitive* primitive);
-	void onPrimitiveCanCollideChanged(Primitive* primitive);
+	void onPrimitiveExtentsChanged(Primitive* p);
+	void onPrimitiveGeometryTypeChanged(Primitive* p);
+	void onPrimitiveContactParametersChanged(Primitive* p);
+	void onPrimitiveCanSleepChanged(Primitive* p);
+	void onPrimitiveAddedAnchor(Primitive* p);
+	void onPrimitiveRemovedAnchor(Primitive* p);
+	void onPrimitiveCanCollideChanged(Primitive* p);
 
 	void onMotorAngleChanged(MotorJoint* motorJoint);
 
 	void onAssemblyExtentsChanged(Assembly* assembly);
 
-	void ticklePrimitive(Primitive* primitive, bool value);
+	void ticklePrimitive(Primitive* p, bool value);
 
-	void onPrimitiveTouched(Primitive* p0, Primitive* p1);
+	void onPrimitiveTouched(Primitive* touchP, Primitive* touchOtherP);
+
+	void computeFallen(G3D::Array<Primitive*>& fallen) const;
 
 	typedef IndexArray<Primitive, &Primitive::worldIndexFunc> PrimitiveArray;
 
@@ -44,23 +71,61 @@ public:
 
 	Kernel* getKernel() const;
 
-	int getNumHashNodes() const;
-	int getMaxBucketSize() const;
+	ClumpStage* getClumpStage();
+
+	SimJobStage& getSimJobStage();
+
+	SleepStage* getSleepStage();
+	const SleepStage* getSleepStage() const;
+
+	void update();
+
+	void addedBodyForce();
+
+	void joinAll();
+
+	void insertPrimitive(Primitive* p);
+	void removePrimitive(Primitive* p);
+
+	void createJoints(Primitive* p);
+	void destroyJoints(Primitive* p);
 
 	int getNumBodies() const;
 	int getNumPoints() const;
 	int getNumConstraints() const;
 
+	int getNumHashNodes() const;
+	int getMaxBucketSize() const;
+
+	int getNumLinkCalls() const { return numLinkCalls; }
+
+	int getNumContacts() const { return numContacts; }
+
+	int getNumPrimitives() const { return primitives.size(); }
+
+	int getNumJoints() const { return numJoints; }
+
 	int getMetric(IWorldStage::MetricType metricType) const;
 
-	void insertJoint(Joint* joint);
-	void removeJoint(Joint* joint);
+	void insertJoint(Joint* j);
+	void removeJoint(Joint* j);
+
+	void insertContact(Contact* c);
+	void destroyContact(Contact* c);
 
 	void onJointPrimitiveNulling(Joint* joint, Primitive* primitive);
 	void onJointPrimitiveSet(Joint* joint, Primitive* primitive);
 
 private:
-	undefined m_unk0x00[0x30 - 0x00];  // 0x00
+	void createJoints(Primitive* p, std::set<Primitive*>* ignoreGroup);
+	void destroyJoints(Primitive* p, std::set<Primitive*>* ignoreGroup);
+
+	void destroyJoint(Joint* joint);
+
+	void removeFromBreakable(Joint* j);
+
+	void doBreakJoints();
+
 	ContactManager* contactManager;    // 0x30
 	JointStage* jointStage;            // 0x34
 	G3D::Array<Primitive*> touch;      // 0x38
@@ -72,7 +137,17 @@ private:
 
 	PrimitiveArray primitives; // 0x58
 
-	undefined m_unk0x64[0x94 - 0x64]; // 0x64
+	std::set<Joint*> breakableJoints; // 0x64
+
+	int numJoints;    // 0x70
+	int numContacts;  // 0x74
+	int numLinkCalls; // 0x78
+
+	G3D::Array<Primitive*> tempPrimitives; // 0x7c
+
+	boost::scoped_ptr<Profiling::CodeProfiler> profilingWorldStep;  // 0x88
+	boost::scoped_ptr<Profiling::CodeProfiler> profilingUiStep;     // 0x8c
+	boost::scoped_ptr<Profiling::CodeProfiler> profilingBroadphase; // 0x90
 };
 
 DECOMP_SIZE_ASSERT(World, 0x94)

@@ -260,6 +260,43 @@ void SleepStage::changeJointState(Joint* joint, Sim::EdgeState state)
 	joint->setEdgeState(state);
 }
 
+void SleepStage::changeAssemblyStateInline(Assembly* assembly, Sim::AssemblyState state)
+{
+	Sim::AssemblyState oldState = getState(assembly);
+
+	AssemblySet* oldSet = stateToSet(oldState);
+	AssemblySet* newSet = stateToSet(state);
+
+	oldSet->erase(assembly);
+
+	newSet->insert(assembly);
+
+	if ((oldState == Sim::SLEEPING_CHECKING || oldState == Sim::SLEEPING_DEEPLY) && state != Sim::SLEEPING_CHECKING &&
+		state != Sim::SLEEPING_DEEPLY) {
+		assembly->getAssemblyPrimitiveConst()->getBody()->resetAccumulators();
+	}
+
+	if (state == Sim::AWAKE) {
+		if (!assembly->downstreamOfStage(this)) {
+			getSimJobStage()->onAssemblyAdded(assembly);
+
+			if (!externalBodyForceAdded) {
+				const Primitive* primitive = assembly->getAssemblyPrimitiveConst();
+			}
+		}
+	}
+	else if (state == Sim::SLEEPING_CHECKING || state == Sim::SLEEPING_DEEPLY) {
+		assembly->getAssemblyPrimitiveConst()->getBody()->setVelocity(Velocity::zero());
+
+		if (assembly->downstreamOfStage(this)) {
+			getSimJobStage()->onAssemblyRemoving(assembly);
+		}
+	}
+
+	resetSleepCount(assembly);
+	assembly->getSleepInfo()->state = state;
+}
+
 // FUNCTION: WEBSERVICE 0x101197c0
 void SleepStage::changeAssemblyState(Assembly* assembly, Sim::AssemblyState state)
 {
@@ -302,7 +339,7 @@ void SleepStage::changeAssemblyState(Assembly* assembly, Sim::AssemblyState stat
 void SleepStage::onAssemblyRemoving(Assembly* assembly)
 {
 	if (getState(assembly) != Sim::SLEEPING_DEEPLY) {
-		changeAssemblyState(assembly, Sim::SLEEPING_DEEPLY);
+		changeAssemblyStateInline(assembly, Sim::SLEEPING_DEEPLY);
 	}
 
 	sleepingDeeply.erase(assembly);
@@ -700,7 +737,7 @@ void SleepStage::stepAssembliesRecursiveWakePending()
 		Assembly* assembly = toWake[i];
 
 		if (getState(assembly) != Sim::RECURSIVE_WAKE_PENDING) {
-			changeAssemblyState(assembly, Sim::RECURSIVE_WAKE_PENDING);
+			changeAssemblyStateInline(assembly, Sim::RECURSIVE_WAKE_PENDING);
 		}
 
 		wakeAssemblyAndNeighbors(assembly, 8);

@@ -43,6 +43,7 @@ class SleepInfo
 {
 public:
 	SleepInfo();
+	~SleepInfo();
 
 private:
 	friend class Assembly;

@@ -1,8 +1,17 @@
 #include "v8world/World.h"
 
 #include "decomp.h"
+#include "util/standardout.h"
 #include "v8kernel/Kernel.h"
+#include "v8world/Assembly2.h"
+#include "v8world/Clump2.h"
+#include "v8world/ClumpStage2.h"
+#include "v8world/Contact.h"
+#include "v8world/Joint.h"
+#include "v8world/JointBuilder.h"
 #include "v8world/JointStage.h"
+#include "v8world/SimJobStage.h"
+#include "v8world/SleepStage2.h"
 #include "v8world/SpatialHash.h"
 
 namespace RBX {
@@ -51,28 +60,37 @@ int World::getMaxBucketSize() const
 	return contactManager->getSpatialHash()->getMaxBucket();
 }
 
-// STUB: WEBSERVICE 0x100cf020
-void World::onPrimitiveContactParametersChanged(Primitive* primitive)
+// FUNCTION: WEBSERVICE 0x100cf020
+void World::onPrimitiveContactParametersChanged(Primitive* p)
 {
-	STUB(0x100cf020);
+	Contact* c = p->getFirstContact();
+
+	while (c != NULL) {
+		c->onPrimitiveContactParametersChanged();
+		c = p->getNextContact(c);
+	}
 }
 
-// STUB: WEBSERVICE 0x100cf050
-void World::onPrimitiveExtentsChanged(Primitive* primitive)
+// FUNCTION: WEBSERVICE 0x100cf050
+void World::onPrimitiveExtentsChanged(Primitive* p)
 {
-	STUB(0x100cf050);
+	contactManager->onPrimitiveExtentsChanged(p);
 }
 
-// STUB: WEBSERVICE 0x100cf060
+// FUNCTION: WEBSERVICE 0x100cf060
 void World::onAssemblyExtentsChanged(Assembly* assembly)
 {
-	STUB(0x100cf060);
+	PrimIterator end = assembly->assemblyPrimEnd();
+
+	for (PrimIterator it = assembly->assemblyPrimBegin(); it != end; ++it) {
+		contactManager->onPrimitiveExtentsChanged(*it);
+	}
 }
 
-// STUB: WEBSERVICE 0x100cf0c0
-void World::onPrimitiveGeometryTypeChanged(Primitive* primitive)
+// FUNCTION: WEBSERVICE 0x100cf0c0
+void World::onPrimitiveGeometryTypeChanged(Primitive* p)
 {
-	STUB(0x100cf0c0);
+	contactManager->onPrimitiveGeometryTypeChanged(p);
 }
 
 // FUNCTION: WEBSERVICE 0x100cf0d0
@@ -87,58 +105,285 @@ void World::onJointPrimitiveSet(Joint* joint, Primitive* primitive)
 	jointStage->onJointPrimitiveSet(joint, primitive);
 }
 
-// STUB: WEBSERVICE 0x100cf1a0
-void World::ticklePrimitive(Primitive* primitive, bool value)
+// FUNCTION: WEBSERVICE 0x100cf0f0
+void World::insertContact(Contact* c)
 {
-	STUB(0x100cf1a0);
+	jointStage->onEdgeAdded(c);
+	numContacts++;
 }
 
-// STUB: WEBSERVICE 0x100cf1f0
-void World::onPrimitiveCanSleepChanged(Primitive* primitive)
+// FUNCTION: WEBSERVICE 0x100cf110
+void World::destroyContact(Contact* c)
 {
-	STUB(0x100cf1f0);
+	jointStage->onEdgeRemoving(c);
+	delete c;
+	numContacts--;
 }
 
-// STUB: WEBSERVICE 0x100cf230
-void World::onPrimitiveAddedAnchor(Primitive* primitive)
+ClumpStage* World::getClumpStage()
 {
-	STUB(0x100cf230);
+	return static_cast<ClumpStage*>(jointStage->findStage(IStage::CLUMP_STAGE));
 }
 
-// STUB: WEBSERVICE 0x100cf270
-void World::onPrimitiveRemovedAnchor(Primitive* primitive)
+SleepStage* World::getSleepStage()
 {
-	STUB(0x100cf270);
+	return static_cast<SleepStage*>(jointStage->findStage(IStage::SLEEP_STAGE));
 }
 
-// STUB: WEBSERVICE 0x100cf2b0 FOLDED
-void World::onPrimitiveCanCollideChanged(Primitive* primitive)
+// FUNCTION: WEBSERVICE 0x100cf140
+SimJobStage& World::getSimJobStage()
 {
-	STUB(0x100cf2b0);
+	return *static_cast<SimJobStage*>(jointStage->findStage(IStage::SIMJOB_STAGE));
 }
 
-// STUB: WEBSERVICE 0x100cf2b0 FOLDED
+// FUNCTION: WEBSERVICE 0x100cf170
+const SleepStage* World::getSleepStage() const
+{
+	return static_cast<const SleepStage*>(jointStage->findStage(IStage::SLEEP_STAGE));
+}
+
+// FUNCTION: WEBSERVICE 0x100cf1a0
+void World::ticklePrimitive(Primitive* p, bool value)
+{
+	Assembly* assembly = p->getAssembly();
+
+	if (assembly != NULL) {
+		getSleepStage()->onWakeUpRequest(assembly, value);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100cf1f0
+void World::onPrimitiveCanSleepChanged(Primitive* p)
+{
+	getClumpStage()->onPrimitiveCanSleepChanged(p);
+}
+
+// FUNCTION: WEBSERVICE 0x100cf230
+void World::onPrimitiveAddedAnchor(Primitive* p)
+{
+	getClumpStage()->onPrimitiveAddedAnchor(p);
+}
+
+// FUNCTION: WEBSERVICE 0x100cf270
+void World::onPrimitiveRemovedAnchor(Primitive* p)
+{
+	getClumpStage()->onPrimitiveRemovedAnchor(p);
+}
+
+// FUNCTION: WEBSERVICE 0x100cf2b0 FOLDED
+void World::onPrimitiveCanCollideChanged(Primitive* p)
+{
+	getClumpStage()->onPrimitiveCanCollideChanged(p);
+}
+
+// FUNCTION: WEBSERVICE 0x100cf2b0 FOLDED
 void World::onMotorAngleChanged(MotorJoint* motorJoint)
 {
-	STUB(0x100cf2b0);
+	getClumpStage()->onMotorAngleChanged(motorJoint);
 }
 
-// STUB: WEBSERVICE 0x100cf510
-void World::onPrimitiveTouched(Primitive* p0, Primitive* p1)
+// FUNCTION: WEBSERVICE 0x100cf2f0
+void World::update()
 {
-	STUB(0x100cf510);
+	getClumpStage()->process();
 }
 
-// STUB: WEBSERVICE 0x100d0020
-DECOMP_NOINLINE void World::insertJoint(Joint* joint)
+// FUNCTION: WEBSERVICE 0x100cf320
+void World::addedBodyForce()
 {
-	STUB(0x100d0020);
+	getSleepStage()->addedBodyForce();
 }
 
-// STUB: WEBSERVICE 0x100d0420
-DECOMP_NOINLINE void World::removeJoint(Joint* joint)
+// FUNCTION: WEBSERVICE 0x100cf510
+void World::onPrimitiveTouched(Primitive* touchP, Primitive* touchOtherP)
 {
-	STUB(0x100d0420);
+	touch.append(touchP);
+	touchOther.append(touchOtherP);
+}
+
+// FUNCTION: WEBSERVICE 0x100cf540
+void World::computeFallen(G3D::Array<Primitive*>& fallen) const
+{
+	const SleepStage::AssemblySet& awake = getSleepStage()->getAwakeAssemblies();
+
+	for (SleepStage::CAssemblySetIt cIt = awake.begin(); cIt != awake.end(); cIt++) {
+
+		Assembly* assembly = *cIt;
+
+		if (assembly->getAssemblyPrimitive()->getCoordinateFrame().translation.y < -500.0f) {
+
+			PrimIterator pEnd = assembly->assemblyPrimEnd();
+
+			for (PrimIterator it = assembly->assemblyPrimBegin(); it != pEnd; ++it) {
+
+				Primitive* p = *it;
+
+				if (p->getCoordinateFrame().translation.y < -500.0f) {
+					fallen.append(p);
+				}
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100cf6b0
+void World::insertPrimitive(Primitive* p)
+{
+	primitives.fastAppend(p);
+	p->world = this;
+
+	jointStage->onPrimitiveAdded(p);
+	contactManager->onPrimitiveAdded(p);
+}
+
+static bool inIgnoreGroup(std::set<Primitive*>* ignoreGroup, Primitive* p)
+{
+	return ignoreGroup != NULL && ignoreGroup->find(p) != ignoreGroup->end();
+}
+
+inline void World::destroyJoint(Joint* joint)
+{
+	inJointNotification = true;
+	Notifier<World, AutoDestroy>::raise(AutoDestroy(joint));
+	inJointNotification = false;
+}
+
+inline void World::removeFromBreakable(Joint* j)
+{
+	if (j->isBreakable()) {
+		breakableJoints.erase(j);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100cfaf0
+void World::doBreakJoints()
+{
+	std::set<Joint*>::iterator it = breakableJoints.begin();
+
+	while (it != breakableJoints.end()) {
+
+		Joint* joint = *it;
+		++it;
+
+		if (joint->inKernel() && joint->isBroken()) {
+			destroyJoint(joint);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100d0020
+void World::insertJoint(Joint* j)
+{
+	Primitive* p0 = j->getPrimitive(0);
+	Primitive* p1 = j->getPrimitive(1);
+
+	if (p0 != NULL && p1 != NULL) {
+		Joint* existing = Primitive::getJoint(p0, p1);
+
+		if (existing != NULL) {
+			destroyJoint(existing);
+		}
+	}
+
+	jointStage->onEdgeAdded(j);
+
+	numJoints++;
+
+	if (j->isBreakable()) {
+		breakableJoints.insert(j);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100d0090
+void World::destroyJoints(Primitive* p, std::set<Primitive*>* ignoreGroup)
+{
+	Joint* j = p->getFirstJoint();
+
+	while (j != NULL) {
+		Joint* joint = j;
+		j = p->getNextJoint(j);
+
+		if (Joint::isAutoJoinJoint(joint)) {
+			Primitive* other = joint->otherPrimitive(p);
+
+			if (!inIgnoreGroup(ignoreGroup, other)) {
+				destroyJoint(joint);
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100d0140
+void World::destroyJoints(Primitive* p)
+{
+	destroyJoints(p, NULL);
+}
+
+// FUNCTION: WEBSERVICE 0x100d0150
+void World::createJoints(Primitive* p, std::set<Primitive*>* ignoreGroup)
+{
+	numLinkCalls++;
+
+	tempPrimitives.resize(0, false);
+
+	contactManager->getPrimitivesTouchingExtents(p->getFastFuzzyExtents(), p, tempPrimitives);
+
+	for (int i = 0; i < tempPrimitives.size(); i++) {
+
+		Primitive* other = tempPrimitives[i];
+
+		if (!inIgnoreGroup(ignoreGroup, other) && Primitive::getJoint(p, other) == NULL) {
+
+			Joint* joint = JointBuilder::canJoin(p, other);
+
+			if (joint != NULL) {
+
+				insertJoint(joint);
+
+				inJointNotification = true;
+				Notifier<World, AutoJoin>::raise(AutoJoin(joint));
+				inJointNotification = false;
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100d0250
+void World::createJoints(Primitive* p)
+{
+	createJoints(p, NULL);
+}
+
+// FUNCTION: WEBSERVICE 0x100d0420
+void World::removeJoint(Joint* j)
+{
+	removeFromBreakable(j);
+
+	jointStage->onEdgeRemoving(j);
+
+	numJoints--;
+}
+
+// FUNCTION: WEBSERVICE 0x100d0460
+void World::joinAll()
+{
+	for (int i = 0; i < getNumPrimitives(); i++) {
+		createJoints(primitives[i]);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100d0490
+void World::removePrimitive(Primitive* p)
+{
+	destroyJoints(p);
+
+	contactManager->onPrimitiveRemoved(p);
+
+	jointStage->onPrimitiveRemoving(p);
+
+	primitives.fastRemove(p);
+
+	p->world = NULL;
 }
 
 } // namespace RBX

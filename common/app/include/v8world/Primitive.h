@@ -124,6 +124,7 @@ public:
 
 private:
 	friend class SpatialHash;
+	friend class World;
 
 	static bool ignoreBool;
 
@@ -269,6 +270,8 @@ public:
 
 	static Joint* getJoint(Primitive* p0, Primitive* p1);
 	static Contact* getContact(Primitive* p0, Primitive* p1);
+
+	static bool aaBoxCollide(const Primitive& p0, const Primitive& p1);
 
 	static Primitive* downstreamPrimitive(Joint* joint);
 };

@@ -6,10 +6,12 @@
 #include "util/Vector3int32.h"
 
 #include <G3D/Array.h>
+#include <set>
 #include <vector>
 
 namespace RBX {
 
+class Contact;
 class ContactManager;
 class Primitive;
 class World;
@@ -90,20 +92,30 @@ DECOMP_SIZE_ASSERT(SpatialHash, 0x24)
 class ContactManager
 {
 public:
+	ContactManager(World* world);
+	~ContactManager();
+
 	void getPrimitivesTouchingExtents(const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& found);
 
 	void onPrimitiveAdded(Primitive* primitive);
 	void onPrimitiveRemoved(Primitive* p);
 	void onPrimitiveExtentsChanged(Primitive* p);
+	void onPrimitiveGeometryTypeChanged(Primitive* p);
 
 	void onNewPair(Primitive* p0, Primitive* p1);
 	void onReleasePair(Primitive* p0, Primitive* p1);
+
+	bool intersectingOthers(Primitive* check, const std::set<Primitive*>& checkSet, float overlapIgnored);
+	bool intersectingOthers(const G3D::Array<Primitive*>& check, float overlapIgnored);
+	bool intersectingOthers(Primitive* check, float overlapIgnored);
 
 	void stepWorld();
 
 	SpatialHash* getSpatialHash() const { return spatialHash; }
 
 private:
+	Contact* createContact(Primitive* p0, Primitive* p1);
+
 	SpatialHash* spatialHash; // 0x00
 	World* world;             // 0x04
 };

@@ -88,6 +88,7 @@ private:
 	void incrementSleepCount(Assembly* assembly);
 	void resetSleepCount(Assembly* assembly);
 
+	DECOMP_FORCEINLINE void changeAssemblyStateInline(Assembly* assembly, Sim::AssemblyState state);
 	DECOMP_NOINLINE void changeAssemblyState(Assembly* assembly, Sim::AssemblyState state);
 	void changeAssemblyState(const std::vector<Assembly*>& assemblies, Sim::AssemblyState state);
 	void changeContactState(Contact* contact, Sim::EdgeState state);

@@ -21,6 +21,11 @@ SleepInfo::SleepInfo() : state(Sim::WAKE_PENDING), sleepCount(0)
 {
 }
 
+// FUNCTION: WEBSERVICE 0x1015b610 FOLDED
+SleepInfo::~SleepInfo()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x101029c0
 PrimIterator Assembly::assemblyPrimBegin()
 {

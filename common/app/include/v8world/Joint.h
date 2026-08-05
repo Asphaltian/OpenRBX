@@ -49,6 +49,13 @@ public:
 
 	static bool isJoint(Edge* edge) { return edge->getEdgeType() == JOINT; }
 
+	static bool isAutoJoinJoint(Joint* joint)
+	{
+		JointType jointType = joint->getJointType();
+
+		return jointType != FREE_JOINT && jointType != ANCHOR_JOINT;
+	}
+
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
 	virtual JointType getJointType() const { return NO_JOINT; } // vtable+0x14
 	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED

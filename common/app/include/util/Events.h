@@ -104,8 +104,14 @@ void Notifier<Source, Event>::removeListener(Listener<Source, Event>* listener) 
 	}
 }
 
+// clang-format off
 // FUNCTION: WEBSERVICE 0x10032240
 // RBX::Notifier<RBX::StandardOut,RBX::StandardOutMessage>::raise
+// FUNCTION: WEBSERVICE 0x100cf390
+// RBX::Notifier<RBX::World,RBX::AutoJoin>::raise
+// FUNCTION: WEBSERVICE 0x100cf450
+// RBX::Notifier<RBX::World,RBX::AutoDestroy>::raise
+// clang-format on
 template <class Source, class Event>
 void Notifier<Source, Event>::raise(Event event, Listener<Source, Event>* listener) const
 {
@@ -119,6 +125,12 @@ void Notifier<Source, Event>::raise(Event event, Listener<Source, Event>* listen
 	}
 }
 
+// clang-format off
+// FUNCTION: WEBSERVICE 0x100cf6f0
+// RBX::Notifier<RBX::World,RBX::AutoJoin>::raise
+// FUNCTION: WEBSERVICE 0x100cf790
+// RBX::Notifier<RBX::World,RBX::AutoDestroy>::raise
+// clang-format on
 template <class Source, class Event>
 void Notifier<Source, Event>::raise(Event event) const throw()
 {

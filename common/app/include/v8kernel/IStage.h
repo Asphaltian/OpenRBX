@@ -43,6 +43,17 @@ public:
 	IStage* getUpstream() { return upstream; }
 	IStage* getDownstream() { return downstream; }
 
+	IStage* findStage(StageType stageType)
+	{
+		IStage* stage = this;
+
+		while (stage->getStageType() != stageType) {
+			stage = stage->getDownstream();
+		}
+
+		return stage;
+	}
+
 private:
 	IStage* upstream;   // 0x04
 	IStage* downstream; // 0x08

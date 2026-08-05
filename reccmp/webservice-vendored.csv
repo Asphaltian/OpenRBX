@@ -1456,7 +1456,6 @@ address,size,type,symbol
 0x10041a50,0x7d,library,?erase@?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAE?AV?$_Vector_iterator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@V32@0@Z
 0x10041ad0,0x1b5,library,?_Insert_n@?$vector@IV?$allocator@I@std@@@std@@IAEXV?$_Vector_iterator@IV?$allocator@I@std@@@2@IABI@Z
 0x10041c90,0x243,library,?_Insert_n@?$vector@VBrickColor@RBX@@V?$allocator@VBrickColor@RBX@@@std@@@std@@IAEXV?$_Vector_iterator@VBrickColor@RBX@@V?$allocator@VBrickColor@RBX@@@std@@@2@IABVBrickColor@RBX@@@Z
-0x10041ee0,0xb7,library,?resize@?$vector@IV?$allocator@I@std@@@std@@QAEXII@Z
 0x10041fa0,0x124,library,?resize@?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAEXIV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z
 0x100420d0,0x8d,library,?insert@?$vector@VBrickColor@RBX@@V?$allocator@VBrickColor@RBX@@@std@@@std@@QAE?AV?$_Vector_iterator@VBrickColor@RBX@@V?$allocator@VBrickColor@RBX@@@std@@@2@V32@ABVBrickColor@RBX@@@Z
 0x10042160,0x83,library,?push_back@?$vector@VBrickColor@RBX@@V?$allocator@VBrickColor@RBX@@@std@@@std@@QAEXABVBrickColor@RBX@@@Z
@@ -3560,13 +3559,11 @@ address,size,type,symbol
 0x10108440,0x100,library,?resize@?$Array@PAVContact@RBX@@@G3D@@QAEXH_N@Z
 0x10108540,0x68,library,?append@?$Array@PAVContact@RBX@@@G3D@@QAEXABQAVContact@RBX@@@Z
 0x101085b0,0x65,library,??4?$Array@PBVPrimitive@RBX@@@G3D@@QAEAAV01@ABV?$vector@PBVPrimitive@RBX@@V?$allocator@PBVPrimitive@RBX@@@std@@@std@@@Z
-0x10108620,0x98,library,?intersectingOthers@ContactManager@RBX@@QAE_NPAVPrimitive@2@ABV?$set@PAVPrimitive@RBX@@U?$less@PAVPrimitive@RBX@@@std@@V?$allocator@PAVPrimitive@RBX@@@4@@std@@M@Z
 0x101086c0,0x1c9,library,?getFastHit@ContactManager@RBX@@ABEPAVPrimitive@2@ABVRay@G3D@@PBV?$Array@PBVPrimitive@RBX@@@5@PBVHitTestFilter@2@AAVVector3@5@AA_N4@Z
 0x10108890,0x8b,library,?getHit@ContactManager@RBX@@QBEPAVPrimitive@2@ABVRay@G3D@@PBV?$Array@PBVPrimitive@RBX@@@5@PBVHitTestFilter@2@AAVVector3@5@AA_N@Z
 0x10108920,0x104,library,?getHitLegacy@ContactManager@RBX@@QBEPAVPrimitive@2@ABVRay@G3D@@PBV32@PBVHitTestFilter@2@AAVVector3@5@AAMABM@Z
 0x10108aa0,0x86,library,?getHit@ContactManager@RBX@@QBEPAVPrimitive@2@ABVRay@G3D@@PBV?$vector@PBVPrimitive@RBX@@V?$allocator@PBVPrimitive@RBX@@@std@@@std@@PBVHitTestFilter@2@AAVVector3@5@AA_N@Z
 0x10108dc0,0x7d,library,??$?0PBQAVPrimitive@RBX@@@?$set@PAVPrimitive@RBX@@U?$less@PAVPrimitive@RBX@@@std@@V?$allocator@PAVPrimitive@RBX@@@4@@std@@QAE@PBQAVPrimitive@RBX@@0@Z
-0x10108ea0,0xf2,library,?intersectingOthers@ContactManager@RBX@@QAE_NABV?$Array@PAVPrimitive@RBX@@@G3D@@M@Z
 0x10109200,0x88,library,?getEdgePoint@Block@RBX@@ABEPBVVector3@G3D@@ABVVector3int16@4@AAW4NormalId@2@@Z
 0x10109290,0x92,library,?getPlanePoint@Block@RBX@@ABEPBVVector3@G3D@@ABVVector3int16@4@AAW4NormalId@2@@Z
 0x10109330,0x83,library,?getBallBlockInfo@Block@RBX@@QAE?AW4GeoPairType@2@HVVector3int16@G3D@@AAPBVVector3@5@AAW4NormalId@2@@Z
@@ -5629,6 +5626,7 @@ address,size,type,symbol
 0x10119330,0xb9,library,?insert@?$_Tree@V?$_Tset_traits@PAVIMoving@RBX@@U?$less@PAVIMoving@RBX@@@std@@V?$allocator@PAVIMoving@RBX@@@4@$0A@@std@@@std@@QAE?AU?$pair@Viterator@?$_Tree@V?$_Tset_traits@PAVIMoving@RBX@@U?$less@PAVIMoving@RBX@@@std@@V?$allocator@PAVIMoving@RBX@@@4@$0A@@std@@@std@@_N@2@ABQAVIMoving@RBX@@@Z
 0x1011b510,0x6c,library,?_Inc@const_iterator@?$_Tree@V?$_Tset_traits@PAVIMoving@RBX@@U?$less@PAVIMoving@RBX@@@std@@V?$allocator@PAVIMoving@RBX@@@4@$0A@@std@@@std@@QAEXXZ
 0x10041ee0,0xb7,library,?resize@?$vector@PAVContact@RBX@@V?$allocator@PAVContact@RBX@@@std@@@std@@QAEXIPAVContact@RBX@@@Z
+0x10041ee0,0xb7,library,?resize@?$vector@IV?$allocator@I@std@@@std@@QAEXII@Z
 0x100353b0,0x9a,library,?_Incsize@?$list@PAVMechanism@RBX@@V?$allocator@PAVMechanism@RBX@@@std@@@std@@IAEXI@Z
 0x100e8060,0x33,library,?_Buynode@?$list@PAVMechanism@RBX@@V?$allocator@PAVMechanism@RBX@@@std@@@std@@IAEPAU_Node@?$_List_nod@PAVMechanism@RBX@@V?$allocator@PAVMechanism@RBX@@@std@@@2@PAU342@0ABQAVMechanism@RBX@@@Z
 0x101e7d30,0x1a,library,?_Buynode@?$list@PAVMechanism@RBX@@V?$allocator@PAVMechanism@RBX@@@std@@@std@@IAEPAU_Node@?$_List_nod@PAVMechanism@RBX@@V?$allocator@PAVMechanism@RBX@@@std@@@2@XZ

@@ -397,6 +397,14 @@ void ClumpStage::process()
 	getTreeStage()->process();
 }
 
+void ClumpStage::onPrimitiveCanCollideChanged(Primitive* p)
+{
+}
+
+void ClumpStage::onMotorAngleChanged(MotorJoint* motorJoint)
+{
+}
+
 // FUNCTION: WEBSERVICE 0x1011be90
 void ClumpStage::onPrimitiveCanSleepChanged(Primitive* p)
 {

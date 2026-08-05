@@ -22,6 +22,7 @@ public:
 
 	bool inPipeline() const { return currentStage != NULL; }
 	bool inStage(IStage* stage) const { return currentStage == stage; }
+	bool inKernel() const { return currentStage->getStageType() == IStage::KERNEL_STAGE; }
 
 	IStage* getStage(IStage::StageType stageType) const;
 
