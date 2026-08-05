@@ -22,4 +22,9 @@ bool InstanceHandle::operatorLess(const InstanceHandle& other) const
 	return target < other.target;
 }
 
+// FUNCTION: WEBSERVICE 0x10099020
+InstanceHandle::InstanceHandle(Instance* target) : target(shared_from(target))
+{
+}
+
 } // namespace RBX

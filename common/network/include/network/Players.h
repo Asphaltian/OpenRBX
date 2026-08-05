@@ -15,9 +15,13 @@ class Players : public Instance
 public:
 	void setMaxPlayers(int value);
 
+	int numPlayers() const { return players.read()->size(); }
+
 private:
-	undefined m_unk0x0f8[0x154 - 0x0f8]; // 0x0f8
-	int maxPlayers;                      // 0x154
+	undefined m_unk0x0f8[0x140 - 0x0f8];                             // 0x0f8
+	CopyOnWrite<std::vector<boost::shared_ptr<Instance> > > players; // 0x140
+	undefined m_unk0x148[0x154 - 0x148];                             // 0x148
+	int maxPlayers;                                                  // 0x154
 };
 
 DECOMP_SIZE_ASSERT(Players, 0x158)

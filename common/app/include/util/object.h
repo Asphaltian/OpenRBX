@@ -21,6 +21,16 @@ public:
 
 DECOMP_SIZE_ASSERT(Object, 0x04)
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1006c2e0
+// RBX::shared_from<RBX::Instance>
+// clang-format on
+template <class T>
+boost::shared_ptr<T> shared_from(T* r)
+{
+	return r != NULL ? boost::shared_static_cast<T>(r->shared_from_this()) : boost::shared_ptr<T>();
+}
+
 template <class T>
 class Creatable : public Object
 {

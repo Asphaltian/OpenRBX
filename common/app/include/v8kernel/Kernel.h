@@ -25,6 +25,9 @@ class Kernel : public IStage
 public:
 	Kernel(IStage* upstream);
 
+	// SYNTHETIC: WEBSERVICE 0x100d5bc0
+	// RBX::Kernel::`scalar deleting destructor'
+
 	virtual ~Kernel(); // vtable+0x00
 
 	virtual StageType getStageType() { return KERNEL_STAGE; }

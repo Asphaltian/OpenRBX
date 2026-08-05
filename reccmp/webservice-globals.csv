@@ -3375,6 +3375,7 @@ address,type,symbol
 0x102d7d58,global,?sNullTool@RBX@@3PADA
 0x102d7d64,global,?sNewNullTool@RBX@@3PADA
 0x102d7ddc,global,?sControllerService@RBX@@3PADA
+0x102db9bc,global,??_R0?AW4SoundType@RBX@@@8
 0x102dc1e8,global,?sExplosion@RBX@@3PADA
 0x102dd7bc,global,?sFlagStand@RBX@@3PADA
 0x102ddcf8,global,?sForceField@RBX@@3PADA
@@ -3407,10 +3408,14 @@ address,type,symbol
 0x102e3ba4,global,?sSpawnLocation@RBX@@3PADA
 0x102e4138,global,?sDecal@RBX@@3PADA
 0x102e4140,global,?sTexture@RBX@@3PADA
+0x102e468c,global,??_R0?AW4InputType@Controller@RBX@@@8
+0x102e4700,global,??_R0?AW4ControllerType@Controller@RBX@@@8
 0x102e54c0,global,p___RBX::Body::getNextStateIndex
+0x102e54cc,global,??_R0?AW4PartType@Part@RBX@@@8
 0x102e54f4,global,?kTurnAccelMax@Running@RBX@@0MB
 0x102e54f8,global,?maxMoveAccelerationGrid@Running@RBX@@0VVector3@G3D@@B
 0x102e56ec,global,?sToolMouseCommand@RBX@@3PADA
+0x102e5e70,global,??_R0?AW4SurfaceType@RBX@@@8
 0x102e6028,global,?sGroupDragTool@RBX@@3PADA
 0x102e60a4,global,?sPartDragTool@RBX@@3PADA
 0x102e61c4,global,?sFillTool@RBX@@3PADA

@@ -2,16 +2,17 @@
 #include "util/Utilities.h"
 
 #include <ostream>
+#include <typeinfo>
 
 namespace RBX {
 
 Debugable::AssertAction Debugable::assertAction = Debugable::IgnoreAssert;
 bool Debugable::validatingDebug;
 
-// STUB: WEBSERVICE 0x10071180
+// FUNCTION: WEBSERVICE 0x10071180
 void Debugable::dump(std::ostream& stream)
 {
-	STUB(0x10071180);
+	stream << typeid(*this).name();
 }
 
 } // namespace RBX

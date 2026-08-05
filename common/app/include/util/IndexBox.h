@@ -17,6 +17,10 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x100314f0
 	// RBX::IndexBox::`scalar deleting destructor'
 
+	void getFaceCorners(int f, Vector3& v0, Vector3& v1, Vector3& v2, Vector3& v3) const;
+
+	static const int INDEXBOX_FACE_TO_VERTEX[6][4];
+
 private:
 	Vector3 corner[8]; // 0x04
 };

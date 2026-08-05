@@ -12,7 +12,7 @@ DECOMP_SIZE_ASSERT(Name, 0x20)
 class Name::NamMap : public std::map<std::string, Name*>
 {
 public:
-	~NamMap() {}
+	~NamMap();
 };
 
 static boost::once_flag flag = BOOST_ONCE_INIT;
@@ -37,6 +37,14 @@ DECOMP_NOINLINE std::map<int, Name*>& Name::dictionary()
 	static std::map<int, Name*> d;
 
 	return d;
+}
+
+// FUNCTION: WEBSERVICE 0x100586d0
+Name::NamMap::~NamMap()
+{
+	for (iterator iter = begin(); iter != end(); ++iter) {
+		delete iter->second;
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100587b0

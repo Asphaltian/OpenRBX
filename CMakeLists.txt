@@ -144,6 +144,9 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/Accoutrement.cpp
   common/app/v8datamodel/custommesh.cpp
   common/app/v8datamodel/Decal.cpp
+  common/app/v8datamodel/Enums.cpp
+  common/app/v8datamodel/TimeState.cpp
+  common/app/v8datamodel/IEquipable.cpp
   common/app/v8datamodel/Flag.cpp
   common/app/v8datamodel/FlagStand.cpp
   common/app/v8datamodel/DebugSettings.cpp
@@ -183,6 +186,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/Joint.cpp
   common/app/v8world/JointBuilder.cpp
   common/app/v8world/JointStage.cpp
+  common/app/v8world/MacroTypes.cpp
   common/app/v8world/Mechanism.cpp
   common/app/v8world/MotorJoint.cpp
   common/app/v8world/MultiJoint.cpp
@@ -197,6 +201,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8world/World.cpp
   common/app/util/Timer.cpp
   common/app/util/Units.cpp
+  common/app/util/UserInputBase.cpp
   common/app/humanoid/FallingDown.cpp
   common/app/humanoid/Flying.cpp
   common/app/humanoid/Freefall.cpp
@@ -213,6 +218,7 @@ set(OPENRBX_APP_SOURCES
   common/app/tool/ToolsArrow.cpp
   common/app/util/RunStateOwner.cpp
   common/app/util/Sound.cpp
+  common/app/util/SoundWorld.cpp
   common/app/v8datamodel/Backpack.cpp
   common/app/v8datamodel/Camera.cpp
   common/app/v8datamodel/CharacterAppearance.cpp

@@ -14,10 +14,43 @@ Quaternion& Quaternion::operator=(const Quaternion& other)
 	return *this;
 }
 
-// STUB: WEBSERVICE 0x10129ff0
+// FUNCTION: WEBSERVICE 0x10129ff0
 Quaternion::Quaternion(const G3D::Matrix3& rot)
 {
-	STUB(0x10129ff0);
+	float trace = rot[0][0] + rot[1][1] + rot[2][2];
+
+	if (trace > 0.0f) {
+		float root = sqrtf(trace + 1.0f);
+		w = root * 0.5f;
+		root = 0.5f / root;
+		x = (rot[2][1] - rot[1][2]) * root;
+		y = (rot[0][2] - rot[2][0]) * root;
+		z = (rot[1][0] - rot[0][1]) * root;
+	}
+	else if (rot[0][0] > rot[1][1] && rot[0][0] > rot[2][2]) {
+		float root = -sqrtf(rot[0][0] + 1.0f - rot[1][1] - rot[2][2]);
+		x = root * 0.5f;
+		root = 0.5f / root;
+		y = (rot[1][0] + rot[0][1]) * root;
+		z = (rot[2][0] + rot[0][2]) * root;
+		w = (rot[2][1] - rot[1][2]) * root;
+	}
+	else if (rot[1][1] > rot[2][2]) {
+		float root = -sqrtf(rot[1][1] + 1.0f - rot[0][0] - rot[2][2]);
+		y = root * 0.5f;
+		root = 0.5f / root;
+		x = (rot[1][0] + rot[0][1]) * root;
+		z = (rot[2][1] + rot[1][2]) * root;
+		w = (rot[0][2] - rot[2][0]) * root;
+	}
+	else {
+		float root = -sqrtf(rot[2][2] + 1.0f - rot[0][0] - rot[1][1]);
+		z = root * 0.5f;
+		root = 0.5f / root;
+		x = (rot[2][0] + rot[0][2]) * root;
+		y = (rot[2][1] + rot[1][2]) * root;
+		w = (rot[1][0] - rot[0][1]) * root;
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1012a150

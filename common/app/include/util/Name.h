@@ -474,7 +474,7 @@ private:
 	// `RBX::moo2'::`2'::`dynamic atexit destructor for 'mutex2''
 	// FUNCTION: WEBSERVICE 0x10221880
 	// `RBX::Name::dictionary'::`2'::`dynamic atexit destructor for 'd''
-	// STUB: WEBSERVICE 0x102218c0
+	// FUNCTION: WEBSERVICE 0x102218c0
 	// `RBX::Name::namMap'::`2'::`dynamic atexit destructor for 'n''
 	// clang-format on
 

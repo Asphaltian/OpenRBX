@@ -26,10 +26,10 @@ template <class T>
 class CopyOnWrite
 {
 public:
-	const T* read() const { return value.get(); }
+	const T* read() const { return object.get(); }
 
 private:
-	boost::shared_ptr<T> value; // 0x00
+	boost::shared_ptr<T> object; // 0x00
 };
 
 } // namespace RBX

@@ -136,5 +136,11 @@ private:
 	static SocketLayer I;
 };
 
+// SYNTHETIC: WEBSERVICE 0x1021fc40
+// `dynamic initializer for 'SocketLayer::I''
+
+// SYNTHETIC: WEBSERVICE 0x10226320
+// `dynamic atexit destructor for 'SocketLayer::I''
+
 #endif
 

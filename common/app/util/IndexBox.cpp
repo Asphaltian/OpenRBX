@@ -2,8 +2,28 @@
 
 namespace RBX {
 
+// clang-format off
+const int IndexBox::INDEXBOX_FACE_TO_VERTEX[6][4] = {
+	{1, 0, 2, 3},
+	{0, 1, 5, 4},
+	{0, 4, 6, 2},
+	{4, 5, 7, 6},
+	{2, 6, 7, 3},
+	{1, 3, 7, 5},
+};
+// clang-format on
+
 IndexBox::~IndexBox()
 {
+}
+
+// FUNCTION: WEBSERVICE 0x1008ea60
+void IndexBox::getFaceCorners(int f, Vector3& v0, Vector3& v1, Vector3& v2, Vector3& v3) const
+{
+	v0 = corner[INDEXBOX_FACE_TO_VERTEX[f][0]];
+	v1 = corner[INDEXBOX_FACE_TO_VERTEX[f][1]];
+	v2 = corner[INDEXBOX_FACE_TO_VERTEX[f][2]];
+	v3 = corner[INDEXBOX_FACE_TO_VERTEX[f][3]];
 }
 
 // FUNCTION: WEBSERVICE 0x1008ec50

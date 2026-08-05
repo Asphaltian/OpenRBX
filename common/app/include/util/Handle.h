@@ -10,6 +10,8 @@ class Instance;
 class InstanceHandle
 {
 public:
+	InstanceHandle(Instance* target);
+
 	void linkTo(boost::shared_ptr<Instance> value);
 
 	bool empty() const;
