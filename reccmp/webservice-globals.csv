@@ -3102,8 +3102,9 @@ address,type,symbol
 0x10259a30,global,_inflate_copyright
 0x10259b60,global,_GUID_ATLVer30
 0x10259b70,global,_GUID_ATLVer70
+0x10259b80,global,??_7CAtlStringMgr@ATL@@6B@
 0x10259b98,global,_IID_ISAXContentHandler
-0x10259c08,global,__pDefaultRawDllMain
+0x10259c08,global,__pRawDllMain
 0x10259c48,global,__real@3fe6666660000000
 0x10259c50,global,__real@3fe051eb80000000
 0x10259ca8,global,__real@4040000000000000
@@ -3237,6 +3238,7 @@ address,type,symbol
 0x10262370,global,__GUID_105a8866_4059_45fe_86ae_fa0eabbfbbb4
 0x10262380,global,__GUID_7634b28b_d819_409d_b96e_fc9f3aba329f
 0x102629d8,global,?numStrips@MegaTextureProxy@View@RBX@@2IB
+0x102632cc,global,??_7CWin32Heap@ATL@@6B@
 0x102638c8,global,__GUID_00000000_0000_0000_c000_000000000046
 0x102638d8,global,__GUID_00000146_0000_0000_c000_000000000046
 0x102638e8,global,__GUID_dccfc164_2b38_11d2_b7ec_00c04f8f5d9a
@@ -4772,6 +4774,10 @@ address,type,symbol
 0x10300984,global,?glStencilOpSeparateATI@@3P6GXIIII@ZA
 0x10300998,global,??_B?3??resize@?$Array@VUniformDeclaration@VertexAndPixelShader@G3D@@@G3D@@QAEXH_N@Z@53
 0x10300ec4,global,?_AtlBaseModule@ATL@@3VCAtlBaseModule@1@A
+0x10300f00,global,?_AtlWinModule@ATL@@3VCAtlWinModule@1@A
+0x10300f2c,global,?g_strheap@ATL@@3VCWin32Heap@1@A
+0x10300f38,global,?g_strmgr@ATL@@3VCAtlStringMgr@1@A
+0x10300f54,global,?_AtlComModule@ATL@@3VCAtlComModule@1@A
 0x10300f80,global,?g_TryEnterCriticalSection@?A0x7c14e877@@3P6GHPAU_RTL_CRITICAL_SECTION@@@ZA
 0x10300f84,global,?once_init_TryEnterCriticalSection@?A0x7c14e877@@3JA
 0x10300f88,global,?tss_data_once@?A0x06c9e004@@3JA
@@ -4783,6 +4789,7 @@ address,type,symbol
 0x10300fa0,global,?threadmon_mutex@?A0x85883f4a@@3U_RTL_CRITICAL_SECTION@@A
 0x10300fb8,global,?once_init_threadmon_mutex@?A0x85883f4a@@3JA
 0x10300fbc,global,?attached_thread_count@?A0x85883f4a@@3KA
+0x10300fc0,global,__proc_attached
 0x10300fc4,global,?__type_info_root_node@@3U__type_info_node@@A
 0x10300fcc,global,__tls_index
 0x103012f4,global,__forceCRTManifest

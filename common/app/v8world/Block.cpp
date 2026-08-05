@@ -230,7 +230,7 @@ void Block::projectToFace(Vector3& ray, Vector3int16& clip, int& onBorder)
 }
 
 // FUNCTION: WEBSERVICE 0x10109590
-Vector2 Block::getProjectedVertex(const Vector3& vertex, NormalId normalID)
+Vector2 Block::getProjectedVertex(const Vector3& vertex, NormalId normalID) const
 {
 	Vector2 answer(0, 0);
 
@@ -265,7 +265,7 @@ Vector2 Block::getProjectedVertex(const Vector3& vertex, NormalId normalID)
 }
 
 // STUB: WEBSERVICE 0x10109630
-int Block::getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis)
+int Block::getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis) const
 {
 	Vector3 axisInBody = crossAxis * rotation;
 

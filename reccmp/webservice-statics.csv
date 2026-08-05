@@ -1,5 +1,6 @@
 address,type,name
 0x10043b20,library,"std::list<RBX::Reflection::SignatureDescriptor::Item,std::allocator<RBX::Reflection::SignatureDescriptor::Item> >::_Buynode"
+0x10109bc0,library,"std::_Tree<std::_Tmap_traits<G3D::Vector3,RBX::BlockTemplate *,RBX::myLess,std::allocator<std::pair<G3D::Vector3 const ,RBX::BlockTemplate *> >,0> >::_Buynode"
 0x10223020,library,RBX::`dynamic atexit destructor for 'prop_ControllerFlagShown''
 0x102230e0,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_CanCollide''
 0x10223100,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_RenderImportance''
@@ -412,6 +413,7 @@ address,type,name
 0x102ff618,global,sum
 0x102ff880,global,state
 0x10300244,global,next
+0x10300fc0,global,__proc_attached
 0x1030137c,global,toneMap
 0x10301384,global,depthBlur
 0x103013bd,global,initRobloxFailed

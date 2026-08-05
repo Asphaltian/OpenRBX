@@ -58,9 +58,9 @@ public:
 	const Vector3* getEdgePoint(const Vector3int16& clip, NormalId& normalID) const;
 	const Vector3* getPlanePoint(const Vector3int16& clip, NormalId& normalID) const;
 
-	Vector2 getProjectedVertex(const Vector3& vertex, NormalId normalID);
+	Vector2 getProjectedVertex(const Vector3& vertex, NormalId normalID) const;
 
-	int getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis);
+	int getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis) const;
 
 	const Vector3& getExtent() const { return *vertices; }
 
@@ -123,6 +123,13 @@ inline int Block::faceVertexToEdge(NormalId faceId, int vertexId)
 {
 	return BLOCK_FACE_VERTEX_TO_EDGE[faceId][vertexId];
 }
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021e3e0
+// `dynamic initializer for 'RBX::BlockTemplate::blockTemplates''
+// SYNTHETIC: WEBSERVICE 0x10225140
+// `dynamic atexit destructor for 'RBX::BlockTemplate::blockTemplates''
+// clang-format on
 
 } // namespace RBX
 
