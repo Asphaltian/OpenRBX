@@ -127,6 +127,9 @@ class BlockBlockContact : public Contact
 public:
 	BlockBlockContact(Primitive* p0, Primitive* p1);
 
+	// SYNTHETIC: WEBSERVICE 0x10108e40
+	// RBX::BlockBlockContact::`scalar deleting destructor'
+
 	static float contactPairHitRatio();
 
 private:
