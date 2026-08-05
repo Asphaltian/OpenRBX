@@ -79,7 +79,6 @@ private:
 	bool forceNeighborAwake(Assembly* assembly);
 
 	Sim::AssemblyState computeAssemblyState(Assembly* assembly);
-	Sim::EdgeState computeContactState(bool s0, bool s1, bool touching, bool stepping);
 
 	Sim::AssemblyState getState(Assembly* assembly);
 	AssemblySet* stateToSet(Sim::AssemblyState state);

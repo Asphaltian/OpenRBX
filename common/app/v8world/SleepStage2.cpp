@@ -97,15 +97,6 @@ bool SleepStage::computeCanSleep(Assembly* assembly)
 	return !Primitive::disableSleep && assembly->getCanSleep();
 }
 
-Sim::EdgeState SleepStage::computeContactState(bool moving, bool wasTouching, bool touching, bool canCollide)
-{
-	if (moving) {
-		return touching && canCollide ? Sim::TOUCHING : Sim::STEPPING;
-	}
-
-	return wasTouching && touching && canCollide ? Sim::TOUCHING_SLEEPING : Sim::SLEEPING;
-}
-
 // FUNCTION: WEBSERVICE 0x10118cd0
 bool SleepStage::forceNeighborAwake(Assembly* a)
 {
@@ -657,8 +648,17 @@ void SleepStage::stepContacts(ContactList& contacts)
 
 			bool canCollide = !p0->getDragging() && p0->getCanCollide() && !p1->getDragging() && p1->getCanCollide();
 
-			Sim::EdgeState state =
-				computeContactState(moving, c->getEdgeState() == Sim::TOUCHING, touching, canCollide);
+			Sim::EdgeState state;
+
+			if (moving) {
+				state = touching && canCollide ? Sim::TOUCHING : Sim::STEPPING;
+			}
+			else if (c->getEdgeState() == Sim::TOUCHING && touching && canCollide) {
+				state = Sim::TOUCHING_SLEEPING;
+			}
+			else {
+				state = Sim::SLEEPING;
+			}
 
 			if (state != c->getEdgeState()) {
 				switch (state) {
