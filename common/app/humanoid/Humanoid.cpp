@@ -8,10 +8,36 @@ char sHumanoid[] = "Humanoid";
 
 using namespace Reflection;
 
-static PropDescriptor<Humanoid, float> propMaxHealth;
-static PropDescriptor<Humanoid, float> propWalkRotationalVelocity;
-static PropDescriptor<Humanoid, bool> propJump;
-static PropDescriptor<Humanoid, bool> propSit;
+static PropDescriptor<Humanoid, float> propMaxHealth(
+	"MaxHealth",
+	"Game",
+	&RBX::Humanoid::getMaxHealth,
+	&RBX::Humanoid::setMaxHealth
+);
+
+static PropDescriptor<Humanoid, float> propWalkRotationalVelocity(
+	"WalkRotationalVelocity",
+	"Control",
+	&RBX::Humanoid::getWalkRotationalVelocity,
+	&RBX::Humanoid::setWalkRotationalVelocity,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, bool> propJump(
+	"Jump",
+	"Control",
+	&RBX::Humanoid::getJump,
+	&RBX::Humanoid::setJump,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, bool> propSit(
+	"Sit",
+	"Control",
+	&RBX::Humanoid::getSit,
+	&RBX::Humanoid::setSit,
+	Reflection::PropertyDescriptor::STREAMING
+);
 
 // FUNCTION: WEBSERVICE 0x100a4e80
 void Humanoid::setMaxHealth(float value)

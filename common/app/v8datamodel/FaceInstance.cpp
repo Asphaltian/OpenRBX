@@ -4,7 +4,12 @@
 
 namespace RBX {
 
-static Reflection::PropDescriptor<FaceInstance, NormalId> prop_Face;
+static Reflection::EnumPropDescriptor<FaceInstance, NormalId> prop_Face(
+	"Face",
+	"Data",
+	&RBX::FaceInstance::getFace,
+	&RBX::FaceInstance::setFace
+);
 
 // STUB: WEBSERVICE 0x10121d10
 void FaceInstance::setFace(NormalId value)

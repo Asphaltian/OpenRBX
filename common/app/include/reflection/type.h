@@ -80,6 +80,20 @@ DECOMP_SIZE_ASSERT(SignatureDescriptor::Item, 0x10)
 DECOMP_SIZE_ASSERT(SignatureDescriptor, 0x10)
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x10221470
+// `RBX::Reflection::Type::singleton<int>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x10221480
+// `RBX::Reflection::Type::singleton<bool>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x10221490
+// `RBX::Reflection::Type::singleton<float>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x102214a0
+// `RBX::Reflection::Type::singleton<double>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x102214d0
+// `RBX::Reflection::Type::singleton<G3D::Vector3>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x102214e0
+// `RBX::Reflection::Type::singleton<G3D::Color3>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x10221500
+// `RBX::Reflection::Type::singleton<RBX::BrickColor>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10221ea0
 // `RBX::Reflection::Type::singleton<void>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10222e90

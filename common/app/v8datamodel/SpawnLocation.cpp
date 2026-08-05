@@ -8,7 +8,12 @@ const char sSpawnerService[] = "SpawnerService";
 
 char sSpawnLocation[] = "SpawnLocation";
 
-static Reflection::PropDescriptor<SpawnLocation, BrickColor> prop_TeamColor;
+static Reflection::PropDescriptor<SpawnLocation, BrickColor> prop_TeamColor(
+	"TeamColor",
+	"Teams",
+	&RBX::SpawnLocation::getTeamColor,
+	&RBX::SpawnLocation::setTeamColor
+);
 
 // FUNCTION: WEBSERVICE 0x100ff2b0
 void SpawnLocation::setTeamColor(BrickColor color)

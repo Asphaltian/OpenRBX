@@ -8,10 +8,16 @@ const char sHat[] = "Hat";
 
 const char sAccoutrement[] = "Accoutrement";
 
-static Reflection::PropDescriptor<Accoutrement, Accoutrement::AccoutrementState> prop_BackendAccoutrementState;
+static Reflection::PropDescriptor<Accoutrement, int> prop_BackendAccoutrementState(
+	"BackendAccoutrementState",
+	"Appearance",
+	&RBX::Accoutrement::getBackendAccoutrementState,
+	&RBX::Accoutrement::setBackendAccoutrementState,
+	Reflection::PropertyDescriptor::STREAMING
+);
 
 // FUNCTION: WEBSERVICE 0x100dcfb0
-void Accoutrement::setBackendAccoutrementState(AccoutrementState value)
+void Accoutrement::setBackendAccoutrementState(int value)
 {
 	if (value != backendAccoutrementState) {
 		backendAccoutrementState = value;

@@ -14,7 +14,13 @@ extern char sPlayer[];
 class Player : public Instance
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100cd080
+	BrickColor getTeamColor() const { return teamColor; }
+
 	void setTeamColor(BrickColor value);
+	// FUNCTION: WEBSERVICE 0x100cd090
+	bool getNeutral() const { return neutral; }
+
 	void setNeutral(bool value);
 
 private:

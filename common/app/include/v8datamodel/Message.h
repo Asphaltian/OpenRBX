@@ -17,6 +17,9 @@ extern char sMessage[];
 class Message : public DescribedCreatable<Message, Instance, sMessage>
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100ee460
+	const std::string& getText() const { return text; }
+
 	void setText(const std::string& value);
 
 private:

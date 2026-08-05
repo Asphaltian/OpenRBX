@@ -6,7 +6,12 @@ namespace RBX {
 
 const char sFlag[] = "Flag";
 
-static Reflection::PropDescriptor<Flag, BrickColor> prop_Color;
+static Reflection::PropDescriptor<Flag, BrickColor> prop_Color(
+	"TeamColor",
+	"Data",
+	&RBX::Flag::getTeamColor,
+	&RBX::Flag::setTeamColor
+);
 
 // STUB: WEBSERVICE 0x100cef60
 void Flag::setTeamColor(BrickColor color)

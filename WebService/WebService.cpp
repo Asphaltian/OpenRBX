@@ -416,7 +416,7 @@ HRESULT __stdcall CWebService::BatchJob(wchar_t* jobID, ScriptExecution script, 
 	return hr;
 }
 
-// FUNCTION: WEBSERVICE 0x1000f9f0
+// STUB: WEBSERVICE 0x1000f9f0
 HRESULT __stdcall CWebService::GetVersion(wchar_t** result)
 {
 	ATL::CComBSTR version(ATL::CStringA(dotVersion.c_str()));

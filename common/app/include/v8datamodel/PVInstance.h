@@ -10,6 +10,9 @@ namespace RBX {
 class PVInstance : public Instance
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100990b0
+	bool getShowControllerFlag() const { return showControllerFlag; }
+
 	void setShowControllerFlag(bool value);
 
 private:

@@ -25,12 +25,15 @@ public:
 		EQUIPPED = 4
 	};
 
-	void setBackendAccoutrementState(AccoutrementState value);
+	// FUNCTION: WEBSERVICE 0x100db430
+	int getBackendAccoutrementState() const { return backendAccoutrementState; }
+
+	void setBackendAccoutrementState(int value);
 
 private:
-	undefined m_unk0x0f8[0x11c - 0x0f8];        // 0x0f8
-	AccoutrementState backendAccoutrementState; // 0x11c
-	undefined m_unk0x120[0x1a0 - 0x120];        // 0x120
+	undefined m_unk0x0f8[0x11c - 0x0f8]; // 0x0f8
+	int backendAccoutrementState;        // 0x11c
+	undefined m_unk0x120[0x1a0 - 0x120]; // 0x120
 };
 
 DECOMP_SIZE_ASSERT(Accoutrement, 0x1a0)

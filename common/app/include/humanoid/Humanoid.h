@@ -13,9 +13,21 @@ extern char sHumanoid[];
 class Humanoid : public DescribedCreatable<Humanoid, Instance, sHumanoid>
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100a0750
+	float getMaxHealth() const { return maxHealth; }
+
 	void setMaxHealth(float value);
+	// FUNCTION: WEBSERVICE 0x100a0790
+	float getWalkRotationalVelocity() const { return walkRotationalVelocity; }
+
 	void setWalkRotationalVelocity(const float& value);
+	// FUNCTION: WEBSERVICE 0x100a07b0
+	bool getJump() const { return jump; }
+
 	void setJump(bool value);
+	// FUNCTION: WEBSERVICE 0x100a07c0
+	bool getSit() const { return sit; }
+
 	void setSit(bool value);
 
 private:

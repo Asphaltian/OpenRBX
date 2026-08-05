@@ -9,16 +9,22 @@ namespace RBX {
 
 const char sTool[] = "Tool";
 
-static Reflection::PropDescriptor<Tool, Tool::ToolState> prop_BackendToolState;
+static Reflection::PropDescriptor<Tool, int> prop_BackendToolState(
+	"BackendToolState",
+	"Appearance",
+	&RBX::Tool::getBackendToolState,
+	&RBX::Tool::setBackendToolState,
+	Reflection::PropertyDescriptor::STREAMING
+);
 
 // STUB: WEBSERVICE 0x100cc300
-void Tool::setBackendToolStateNoReplicate(ToolState value)
+void Tool::setBackendToolStateNoReplicate(int value)
 {
 	STUB(0x100cc300);
 }
 
 // STUB: WEBSERVICE 0x100cc480
-void Tool::setBackendToolState(ToolState value)
+void Tool::setBackendToolState(int value)
 {
 	if (value != backendToolState) {
 		setBackendToolStateNoReplicate(value);

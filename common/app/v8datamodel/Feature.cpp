@@ -15,13 +15,103 @@ const char sFeature[] = "Feature";
 
 using namespace Reflection;
 
-static PropDescriptor<Feature, NormalId> prop_FaceId;
-static PropDescriptor<Feature, Feature::TopBottom> prop_TopBottom;
-static PropDescriptor<Feature, Feature::LeftRight> prop_LeftRight;
-static PropDescriptor<Feature, Feature::InOut> prop_InOut;
-static PropDescriptor<VelocityMotor, float> prop_MaxVelocity;
-static PropDescriptor<VelocityMotor, float> prop_DesiredAngle;
-static PropDescriptor<VelocityMotor, float> prop_CurrentAngle;
+static EnumPropDescriptor<Feature, NormalId> prop_FaceId(
+	"FaceId",
+	"Data",
+	&RBX::Feature::getFaceId,
+	&RBX::Feature::setFaceId
+);
+
+static EnumPropDescriptor<Feature, Feature::TopBottom> prop_TopBottom(
+	"TopBottom",
+	"Data",
+	&RBX::Feature::getTopBottom,
+	&RBX::Feature::setTopBottom
+);
+
+static EnumPropDescriptor<Feature, Feature::LeftRight> prop_LeftRight(
+	"LeftRight",
+	"Data",
+	&RBX::Feature::getLeftRight,
+	&RBX::Feature::setLeftRight
+);
+
+static EnumPropDescriptor<Feature, Feature::InOut> prop_InOut(
+	"InOut",
+	"Data",
+	&RBX::Feature::getInOut,
+	&RBX::Feature::setInOut
+);
+
+static PropDescriptor<VelocityMotor, float> prop_MaxVelocity(
+	"MaxVelocity",
+	"Data",
+	&RBX::VelocityMotor::getMaxVelocity,
+	&RBX::VelocityMotor::setMaxVelocity
+);
+
+static PropDescriptor<VelocityMotor, float> prop_DesiredAngle(
+	"DesiredAngle",
+	"Data",
+	&RBX::VelocityMotor::getDesiredAngle,
+	&RBX::VelocityMotor::setDesiredAngle
+);
+
+static PropDescriptor<VelocityMotor, float> prop_CurrentAngle(
+	"CurrentAngle",
+	"Data",
+	&RBX::VelocityMotor::getCurrentAngle,
+	&RBX::VelocityMotor::setCurrentAngle
+);
+
+// FUNCTION: WEBSERVICE 0x100d7d70
+float VelocityMotor::getMaxVelocity() const
+{
+	return static_cast<MotorJoint*>(joint)->getMaxVelocity();
+}
+
+// FUNCTION: WEBSERVICE 0x100d7d80
+float VelocityMotor::getDesiredAngle() const
+{
+	return static_cast<MotorJoint*>(joint)->getDesiredAngle();
+}
+
+// FUNCTION: WEBSERVICE 0x100e42d0
+float VelocityMotor::getCurrentAngle() const
+{
+	return static_cast<MotorJoint*>(joint)->getCurrentAngle();
+}
+
+namespace Reflection {
+
+// FUNCTION: WEBSERVICE 0x100e5950
+template <>
+EnumDesc<Feature::TopBottom>::EnumDesc() : EnumDescriptor("TopBottom", typeid(Feature::TopBottom))
+{
+	addPair(Feature::TOP, "Top");
+	addPair(Feature::CENTER_TB, "Center");
+	addPair(Feature::BOTTOM, "Bottom");
+}
+
+// FUNCTION: WEBSERVICE 0x100e5ad0
+template <>
+EnumDesc<Feature::LeftRight>::EnumDesc() : EnumDescriptor("LeftRight", typeid(Feature::LeftRight))
+{
+	addPair(Feature::LEFT, "Left");
+	addPair(Feature::CENTER_LR, "Center");
+	addPair(Feature::RIGHT, "Right");
+}
+
+// FUNCTION: WEBSERVICE 0x100e5c50
+template <>
+EnumDesc<Feature::InOut>::EnumDesc() : EnumDescriptor("InOut", typeid(Feature::InOut))
+{
+	addPair(Feature::EDGE, "Edge");
+	addPair(Feature::INSET, "Inset");
+	addPair(Feature::CENTER_IO, "Center");
+}
+
+} // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x100e7430
 void Feature::setFaceId(NormalId value)
@@ -85,7 +175,6 @@ void VelocityMotor::setCurrentAngle(float value)
 		raisePropertyChanged(prop_CurrentAngle);
 	}
 }
-
 } // namespace RBX
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sFeature>();

@@ -12,14 +12,61 @@ const char sDebugSettings[] = "DebugSettings";
 
 using namespace Reflection;
 
-static PropDescriptor<DebugSettings, bool> prop_ValidatingDebug;
-static EnumPropDescriptor<DebugSettings, Debugable::AssertAction> prop_assertAction;
-static EnumPropDescriptor<DebugSettings, DebugSettings::ErrorReporting> prop_errorReporting;
-static PropDescriptor<DebugSettings, bool> prop_AnchoredParts;
-static PropDescriptor<DebugSettings, bool> prop_PartCoordinateFrames;
-static PropDescriptor<DebugSettings, bool> prop_ModelCoordinateFrames;
-static PropDescriptor<DebugSettings, bool> prop_WorldCoordinateFrames;
-static PropDescriptor<DebugSettings, bool> prop_DisableEnvironmentalThrottle;
+static PropDescriptor<DebugSettings, bool> prop_ValidatingDebug(
+	"ValidatingDebug",
+	"Errors",
+	&RBX::DebugSettings::getValidatingDebug,
+	&RBX::DebugSettings::setValidatingDebug
+);
+
+static EnumPropDescriptor<DebugSettings, Debugable::AssertAction> prop_assertAction(
+	"AssertAction",
+	"Errors",
+	&RBX::DebugSettings::getAssertAction,
+	&RBX::DebugSettings::setAssertAction
+);
+
+static EnumPropDescriptor<DebugSettings, DebugSettings::ErrorReporting> prop_errorReporting(
+	"errorReporting",
+	"Errors",
+	&RBX::DebugSettings::getErrorReporting,
+	&RBX::DebugSettings::setErrorReporting
+);
+
+static PropDescriptor<DebugSettings, bool> prop_AnchoredParts(
+	"ShowAnchors",
+	"Display",
+	&RBX::DebugSettings::getShowAnchoredParts,
+	&RBX::DebugSettings::setShowAnchoredParts
+);
+
+static PropDescriptor<DebugSettings, bool> prop_PartCoordinateFrames(
+	"ShowPartCoords",
+	"Display",
+	&RBX::DebugSettings::getShowPartCoordinateFrames,
+	&RBX::DebugSettings::setShowPartCoordinateFrames
+);
+
+static PropDescriptor<DebugSettings, bool> prop_ModelCoordinateFrames(
+	"ShowModelCoords",
+	"Display",
+	&RBX::DebugSettings::getShowModelCoordinateFrames,
+	&RBX::DebugSettings::setShowModelCoordinateFrames
+);
+
+static PropDescriptor<DebugSettings, bool> prop_WorldCoordinateFrames(
+	"ShowWorldCoords",
+	"Display",
+	&RBX::DebugSettings::getShowWorldCoordinateFrames,
+	&RBX::DebugSettings::setShowWorldCoordinateFrames
+);
+
+static PropDescriptor<DebugSettings, bool> prop_DisableEnvironmentalThrottle(
+	"DisableEnvironmentalThrottle",
+	"Display",
+	&RBX::DebugSettings::getDisableEnvironmentalThrottle,
+	&RBX::DebugSettings::setDisableEnvironmentalThrottle
+);
 
 // FUNCTION: WEBSERVICE 0x100b2d30
 bool DebugSettings::getValidatingDebug() const
@@ -74,6 +121,28 @@ bool DebugSettings::getDisableEnvironmentalThrottle() const
 {
 	return World::disableEnvironmentalThrottle;
 }
+
+namespace Reflection {
+
+// FUNCTION: WEBSERVICE 0x100b3f40
+template <>
+EnumDesc<DebugSettings::ErrorReporting>::EnumDesc()
+	: EnumDescriptor("ErrorReporting", typeid(DebugSettings::ErrorReporting))
+{
+	addPair(DebugSettings::DontReport, "DontReport");
+	addPair(DebugSettings::Prompt, "Prompt");
+	addPair(DebugSettings::Report, "Report");
+}
+
+// FUNCTION: WEBSERVICE 0x100b40c0
+template <>
+EnumDesc<Debugable::AssertAction>::EnumDesc() : EnumDescriptor("AssertAction", typeid(Debugable::AssertAction))
+{
+	addPair(Debugable::CrashOnAssert, "CrashOnAssert");
+	addPair(Debugable::IgnoreAssert, "IgnoreAssert");
+}
+
+} // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x100b51f0
 void DebugSettings::setShowAnchoredParts(bool value)
@@ -155,5 +224,4 @@ void DebugSettings::setErrorReporting(ErrorReporting value)
 		raisePropertyChanged(prop_errorReporting);
 	}
 }
-
 } // namespace RBX

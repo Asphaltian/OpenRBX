@@ -13,6 +13,9 @@ extern char sPlayers[];
 class Players : public Instance
 {
 public:
+	// FUNCTION: WEBSERVICE 0x10190c40
+	int getMaxPlayers() const { return maxPlayers; }
+
 	void setMaxPlayers(int value);
 
 	int numPlayers() const { return players.read()->size(); }

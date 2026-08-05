@@ -548,6 +548,7 @@ address,type,symbol
 0x1022cf30,global,__real@42b40000
 0x1022d848,global,__real@408f400000000000
 0x1022d850,global,__real@3fb999999999999a
+0x1022dc18,global,??_7?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@6B@
 0x1022dc88,global,__real@3b808081
 0x1022dc90,global,??_7?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x1022dca0,global,??_7?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
@@ -1102,6 +1103,7 @@ address,type,symbol
 0x10236860,global,??_7?$FactoryProduct@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1023686c,global,??_7?$FactoryProduct@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x1023696c,global,__real@3727c5ac
+0x10236b20,global,??_7?$EnumDesc@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@6B@
 0x10236cf0,global,??_7?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@6BILocation@1@@
 0x10236cf8,global,??_7?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@6BIPrimaryPart@1@@
 0x10236d04,global,??_7?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@6BIControllable@1@@
@@ -1169,6 +1171,8 @@ address,type,symbol
 0x10238230,global,??_7?$FactoryProduct@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1023823c,global,??_7?$FactoryProduct@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x102382f0,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x10238340,global,??_7?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@6B@
+0x10238348,global,??_7?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@6B@
 0x102384c4,global,??_7?$DescribedCreatable@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x102384d4,global,??_7?$DescribedCreatable@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x102384e4,global,??_7?$DescribedCreatable@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
@@ -2003,6 +2007,9 @@ address,type,symbol
 0x10240c1c,global,??_7?$FactoryProduct@VHole@RBX@@VFeature@2@$1?sHole@2@3QBDB@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10240c24,global,??_7?$FactoryProduct@VHole@RBX@@VFeature@2@$1?sHole@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10240c34,global,??_7?$FactoryProduct@VHole@RBX@@VFeature@2@$1?sHole@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x10240c7c,global,??_7?$EnumDesc@W4TopBottom@Feature@RBX@@@Reflection@RBX@@6B@
+0x10240c84,global,??_7?$EnumDesc@W4LeftRight@Feature@RBX@@@Reflection@RBX@@6B@
+0x10240c8c,global,??_7?$EnumDesc@W4InOut@Feature@RBX@@@Reflection@RBX@@6B@
 0x10240de0,global,??_7?$DescribedCreatable@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@RBX@@6B@
 0x10240df8,global,??_7?$DescribedCreatable@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10240e08,global,??_7?$DescribedCreatable@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
@@ -2761,6 +2768,7 @@ address,type,symbol
 0x1024871c,global,??_7?$FactoryProduct@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10248724,global,??_7?$FactoryProduct@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10248734,global,??_7?$FactoryProduct@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x102487e0,global,??_7?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@6B@
 0x102488c4,global,??_7?$DescribedCreatable@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x102488d4,global,??_7?$DescribedCreatable@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x102488e4,global,??_7?$DescribedCreatable@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
@@ -3290,6 +3298,7 @@ address,type,symbol
 0x102c8b94,global,information___RBX::Log::writeEntry
 0x102c8b98,global,warning___RBX::Log::writeEntry
 0x102c8b9c,global,error___RBX::Log::writeEntry
+0x102c8ea8,global,??_R0?AW4NormalId@RBX@@@8
 0x102c8f30,global,?sLighting@RBX@@3PADA
 0x102c9d6c,global,?creator@?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@RBX@@0VCreator@12@B
 0x102ca638,global,??_R0PBVPropertyDescriptor@Reflection@RBX@@@8
@@ -3360,6 +3369,7 @@ address,type,symbol
 0x102d3d90,global,?sSky@RBX@@3PADA
 0x102d4560,global,?sPart@RBX@@3PADA
 0x102d4568,global,?category_Part@RBX@@3PBDB
+0x102d4ec8,global,??_R0?AW4FormFactor@PartInstance@RBX@@@8
 0x102d530c,global,?sHumanoid@RBX@@3PADA
 0x102d5d78,global,?className@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@1PBDB
 0x102d6180,global,?creator@?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@0VCreator@12@B
@@ -3369,6 +3379,8 @@ address,type,symbol
 0x102d62d0,global,?className@?$Bridge@V?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@$00@Lua@RBX@@1PBDB
 0x102d6368,global,?sStats@Stats@RBX@@3PADA
 0x102d6370,global,?sStatsItem@Stats@RBX@@3PADA
+0x102d6d28,global,??_R0?AW4ErrorReporting@DebugSettings@RBX@@@8
+0x102d6d58,global,??_R0?AW4AssertAction@Debugable@RBX@@@8
 0x102d7608,global,?sNullMouseCommand@RBX@@3PADA
 0x102d7684,global,?sArrowTool@RBX@@3PADA
 0x102d768c,global,?sBoxSelectCommand@RBX@@3PADA
@@ -3379,6 +3391,9 @@ address,type,symbol
 0x102d7ddc,global,?sControllerService@RBX@@3PADA
 0x102db9bc,global,??_R0?AW4SoundType@RBX@@@8
 0x102dc1e8,global,?sExplosion@RBX@@3PADA
+0x102dd39c,global,??_R0?AW4TopBottom@Feature@RBX@@@8
+0x102dd3c4,global,??_R0?AW4LeftRight@Feature@RBX@@@8
+0x102dd3ec,global,??_R0?AW4InOut@Feature@RBX@@@8
 0x102dd7bc,global,?sFlagStand@RBX@@3PADA
 0x102ddcf8,global,?sForceField@RBX@@3PADA
 0x102dde80,global,?sGeometryService@RBX@@3PADA
@@ -3413,6 +3428,7 @@ address,type,symbol
 0x102e468c,global,??_R0?AW4InputType@Controller@RBX@@@8
 0x102e4700,global,??_R0?AW4ControllerType@Controller@RBX@@@8
 0x102e54c0,global,p___RBX::Body::getNextStateIndex
+0x102e54c0,global,p___RBX::Body::getNextStateIndex
 0x102e54cc,global,??_R0?AW4PartType@Part@RBX@@@8
 0x102e54f4,global,?kTurnAccelMax@Running@RBX@@0MB
 0x102e54f8,global,?maxMoveAccelerationGrid@Running@RBX@@0VVector3@G3D@@B
@@ -3427,6 +3443,7 @@ address,type,symbol
 0x102e6340,global,?creator@?$FactoryProduct@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@0VCreator@12@B
 0x102e634c,global,?kTurnAccelMax@Flying@RBX@@0MB
 0x102e63b4,global,?sSpecialShape@RBX@@3PADA
+0x102e67b8,global,??_R0?AW4MeshType@SpecialShape@RBX@@@8
 0x102e74a0,global,msg___png_decompress_chunk
 0x102e79f8,global,?cache1@?$MeshFactory@VPBBMesh@View@RBX@@$03@View@RBX@@0V?$Table@VRenderSurfaceTypes@View@RBX@@V?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VPBBMesh@View@RBX@@$03@View@RBX@@@G3D@@@G3D@@A
 0x102e7a08,global,?cache1@?$MeshFactory@VSphereMesh@View@RBX@@$00@View@RBX@@0V?$Table@VRenderSurfaceTypes@View@RBX@@V?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VSphereMesh@View@RBX@@$00@View@RBX@@@G3D@@@G3D@@A
@@ -3474,6 +3491,10 @@ address,type,symbol
 0x102f4fec,global,?__hdlrEntry_WSDL_36@@3U_HANDLER_ENTRY@ATL@@A
 0x102f5000,global,?___Roblox_CWebService_funcs@Roblox@@3PAPBU_soapmap@@A
 0x102f5040,global,?___Roblox_CWebService_headers@Roblox@@3PAPBU_soapmap@@A
+0x102f5080,global,??_R0H@8
+0x102f508c,global,??_R0M@8
+0x102f5098,global,??_R0N@8
+0x102f50a4,global,??_R0_N@8
 0x102f5560,global,?creator@?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@0VCreator@12@B
 0x102f5564,global,?creator@?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@0VCreator@12@B
 0x102f5568,global,?creator@?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@0VCreator@12@B
@@ -3500,15 +3521,20 @@ address,type,symbol
 0x102f5618,global,type___RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Instance>
 0x102f562c,global,"type___RBX::Reflection::Type::singleton<boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance>"
 0x102f5640,global,type___RBX::Reflection::Type::singleton<int>
+0x102f5650,global,??_B?1???$singleton@H@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f5654,global,type___RBX::Reflection::Type::singleton<bool>
+0x102f5664,global,??_B?1???$singleton@_N@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f5668,global,type___RBX::Reflection::Type::singleton<float>
+0x102f5678,global,??_B?1???$singleton@M@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f567c,global,type___RBX::Reflection::Type::singleton<double>
+0x102f568c,global,??_B?1???$singleton@N@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f5690,global,type___RBX::Reflection::Type::singleton<RBX::ContentId>
 0x102f56a4,global,"type___RBX::Reflection::Type::singleton<std::basic_string<char,std::char_traits<char>,std::allocator<char>"
 0x102f56b8,global,type___RBX::Reflection::Type::singleton<G3D::Vector3>
 0x102f56cc,global,type___RBX::Reflection::Type::singleton<G3D::Color3>
 0x102f56e0,global,"type___RBX::Reflection::Type::singleton<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value>"
 0x102f56f4,global,type___RBX::Reflection::Type::singleton<RBX::BrickColor>
+0x102f5704,global,??_B?1???$singleton@VBrickColor@RBX@@@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f5708,global,n___RBX::Name::doDeclare<&RBX::sSky>
 0x102f570c,global,??_B?1???$doDeclare@$1?sSky@RBX@@3PADA@Name@RBX@@CAABV01@XZ@51
 0x102f5710,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::RunService>
@@ -4737,6 +4763,7 @@ address,type,symbol
 0x10300980,global,?glStencilFuncSeparateATI@@3P6GXIIHI@ZA
 0x10300984,global,?glStencilOpSeparateATI@@3P6GXIIII@ZA
 0x10300998,global,??_B?3??resize@?$Array@VUniformDeclaration@VertexAndPixelShader@G3D@@@G3D@@QAEXH_N@Z@53
+0x10300ec4,global,?_AtlBaseModule@ATL@@3VCAtlBaseModule@1@A
 0x10300f80,global,?g_TryEnterCriticalSection@?A0x7c14e877@@3P6GHPAU_RTL_CRITICAL_SECTION@@@ZA
 0x10300f84,global,?once_init_TryEnterCriticalSection@?A0x7c14e877@@3JA
 0x10300f88,global,?tss_data_once@?A0x06c9e004@@3JA
@@ -4779,6 +4806,8 @@ address,type,symbol
 0x103017e8,global,?jobs@CWebService@Roblox@@0V?$map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UJob@CWebService@Roblox@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UJob@CWebService@Roblox@@@std@@@2@@std@@A
 0x103017f4,global,?sync@CWebService@Roblox@@0Vmutex@boost@@A
 0x103017fc,global,?m_bInitFailed@CAtlBaseModule@ATL@@2_NA
+0x10301800,global,?_pPerfRegFunc@ATL@@3P6AJPAUHINSTANCE__@@@ZA
+0x10301804,global,?_pPerfUnRegFunc@ATL@@3P6AJXZA
 0x1030181c,global,??_B?1??singleton@ContentProvider@RBX@@SAAAV12@XZ@51
 0x10301820,global,sing___RBX::ContentProvider::singleton
 0x10301874,global,??_B?1??rootDescriptor@ClassDescriptor@Reflection@RBX@@SAAAV123@XZ@51
@@ -4863,7 +4892,3 @@ address,type,symbol
 0x10302001,global,__tls_end
 0x44c71023,global,"d___RBX::Reflection::Described<RBX::Tool,&RBX::sTool,RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool> >::classDescriptor"
 0x44c71025,global,"d___RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor"
-0x10300ec4,global,?_AtlBaseModule@ATL@@3VCAtlBaseModule@1@A
-0x10301800,global,?_pPerfRegFunc@ATL@@3P6AJPAUHINSTANCE__@@@ZA
-0x10301804,global,?_pPerfUnRegFunc@ATL@@3P6AJXZA
-0x102e54c0,global,p___RBX::Body::getNextStateIndex

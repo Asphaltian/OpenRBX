@@ -13,6 +13,8 @@ extern const char sFlag[];
 class Flag : public Instance
 {
 public:
+	BrickColor getTeamColor() const { return teamColor; }
+
 	void setTeamColor(BrickColor value);
 
 private:

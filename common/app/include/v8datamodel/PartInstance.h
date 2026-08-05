@@ -90,6 +90,14 @@ public:
 	void setDragging(bool value);
 	void setCanCollide(bool value);
 	void setAnchored(bool value);
+	// FUNCTION: WEBSERVICE 0x1009a7d0
+	BrickColor getColor() const { return color; }
+
+	// FUNCTION: WEBSERVICE 0x1009a7e0
+	G3D::Color3 getColor3() const { return color.color3(); }
+
+	void setColor3(G3D::Color3 value);
+
 	void setColor(BrickColor value);
 
 private:

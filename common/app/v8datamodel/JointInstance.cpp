@@ -79,8 +79,29 @@ Weld::Weld() : DescribedCreatable<Weld, AutoJoint, sWeld>(new WeldJoint())
 {
 }
 
-static Reflection::PropDescriptor<Motor, float> prop_MaxVelocity;
-static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle;
+static Reflection::PropDescriptor<Motor, float> prop_MaxVelocity(
+	"MaxVelocity",
+	"Data",
+	&RBX::Motor::getMaxVelocity,
+	&RBX::Motor::setMaxVelocity
+);
+
+static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle(
+	"CurrentAngle",
+	"Data",
+	&RBX::Motor::getCurrentAngle,
+	&RBX::Motor::setCurrentAngle
+);
+
+float Motor::getMaxVelocity() const
+{
+	return static_cast<MotorJoint*>(joint)->getMaxVelocity();
+}
+
+float Motor::getCurrentAngle() const
+{
+	return static_cast<MotorJoint*>(joint)->getCurrentAngle();
+}
 
 // STUB: WEBSERVICE 0x100d9020
 void Motor::setMaxVelocity(float value)

@@ -23,6 +23,9 @@ public:
 		BRICK_MESH = 6
 	};
 
+	// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
+	MeshType getMeshType() const { return meshType; }
+
 	void setMeshType(MeshType value);
 
 private:

@@ -10,10 +10,28 @@ char sDecal[] = "Decal";
 
 using namespace Reflection;
 
-static PropDescriptor<Decal, float> prop_Specular;
-static PropDescriptor<Decal, float> prop_Shiny;
-static PropDescriptor<Texture, float> prop_StudsPerTileU;
-static PropDescriptor<Texture, float> prop_StudsPerTileV;
+static PropDescriptor<Decal, float> prop_Specular(
+	"Specular",
+	"Appearance",
+	&RBX::Decal::getSpecular,
+	&RBX::Decal::setSpecular
+);
+
+static PropDescriptor<Decal, float> prop_Shiny("Shiny", "Appearance", &RBX::Decal::getShiny, &RBX::Decal::setShiny);
+
+static PropDescriptor<Texture, float> prop_StudsPerTileU(
+	"StudsPerTileU",
+	"Appearance",
+	&RBX::Texture::getStudsPerTileU,
+	&RBX::Texture::setStudsPerTileU
+);
+
+static PropDescriptor<Texture, float> prop_StudsPerTileV(
+	"StudsPerTileV",
+	"Appearance",
+	&RBX::Texture::getStudsPerTileV,
+	&RBX::Texture::setStudsPerTileV
+);
 
 // STUB: WEBSERVICE 0x101001f0
 void Decal::setSpecular(float value)

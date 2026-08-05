@@ -24,6 +24,7 @@ if (ENABLE_CLANG_TIDY)
   # boost 1.34's scoped_lock throws, and clang-tidy reports it as an error whatever /EHsc the
   # command line carries. The diagnostic is inside the vendored header, not our code.
   set_source_files_properties(common/app/reflection/reflection_function.cpp
+                              common/app/reflection/reflection_property.cpp
                               common/app/reflection/signal.cpp
                               common/app/util/Name.cpp common/app/util/standardout.cpp
                               common/app/v8world/World.cpp
@@ -126,6 +127,7 @@ set(OPENRBX_APP_SOURCES
   common/app/reflection/signal.cpp
   common/app/reflection/type.cpp
   common/app/util/Debug.cpp
+  common/app/v8tree/enumproperty.cpp
   common/app/v8tree/Instance.cpp
   common/app/util/ExponentialRunningAverage.cpp
   common/app/util/Extents.cpp
@@ -145,6 +147,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8kernel/Body.cpp
   common/app/util/Debug.cpp
   common/app/v8datamodel/Accoutrement.cpp
+  common/app/v8datamodel/BrickColor.cpp
   common/app/v8datamodel/custommesh.cpp
   common/app/v8datamodel/Decal.cpp
   common/app/v8datamodel/Enums.cpp

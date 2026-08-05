@@ -23,13 +23,16 @@ public:
 		ACTIVATED = 6
 	};
 
-	void setBackendToolState(ToolState value);
+	// FUNCTION: WEBSERVICE 0x100c9db0
+	int getBackendToolState() const { return backendToolState; }
+
+	void setBackendToolState(int value);
 
 private:
-	DECOMP_NOINLINE void setBackendToolStateNoReplicate(ToolState value);
+	DECOMP_NOINLINE void setBackendToolStateNoReplicate(int value);
 
 	undefined m_unk0x0f8[0x18c - 0x0f8]; // 0x0f8
-	ToolState backendToolState;          // 0x18c
+	int backendToolState;                // 0x18c
 	undefined m_unk0x190[0x238 - 0x190]; // 0x190
 };
 

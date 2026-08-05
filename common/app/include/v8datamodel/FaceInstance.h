@@ -11,6 +11,9 @@ namespace RBX {
 class FaceInstance : public Instance
 {
 public:
+	// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
+	NormalId getFace() const { return face; }
+
 	void setFace(NormalId value);
 
 private:

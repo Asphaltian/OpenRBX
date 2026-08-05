@@ -3,6 +3,8 @@
 
 #include "decomp.h"
 
+#include <G3D/Color3.h>
+
 namespace RBX {
 
 // SIZE 0x04
@@ -127,6 +129,18 @@ public:
 
 	BrickColor() : number(lego_1) {}
 	BrickColor(Number number) : number(number) {}
+
+	G3D::Color3 color3() const;
+
+	static BrickColor closest(G3D::Color3 color);
+
+	bool operator==(const BrickColor& other) const { return number == other.number; }
+
+	bool operator!=(const BrickColor& other) const { return number != other.number; }
+
+	bool operator<(const BrickColor& other) const { return number < other.number; }
+
+	bool operator>(const BrickColor& other) const { return number > other.number; }
 
 	Number number; // 0x00
 };

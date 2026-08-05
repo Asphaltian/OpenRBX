@@ -63,6 +63,9 @@ public:
 	Motor();
 	Motor(Joint* joint);
 
+	float getMaxVelocity() const;
+	float getCurrentAngle() const;
+
 	void setMaxVelocity(float value);
 	void setCurrentAngle(float value);
 };

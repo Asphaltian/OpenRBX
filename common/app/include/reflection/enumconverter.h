@@ -129,7 +129,7 @@ private:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100dfff0
-// RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::addPair
+// RBX::Reflection::EnumDesc<enum RBX::NormalId>::addPair
 // clang-format on
 template <class T>
 void EnumDesc<T>::addPair(T value, const char* name)
@@ -177,6 +177,18 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 {
 	nameToEnumLegacy[&name] = value;
 	stringToEnumLegacy[name.name] = value;
+}
+
+// clang-format off
+// STUB: WEBSERVICE 0x100e5dd0
+// RBX::Reflection::EnumDesc<enum RBX::Feature::TopBottom>::singleton
+// clang-format on
+template <class T>
+const EnumDesc<T>& EnumDesc<T>::singleton()
+{
+	static EnumDesc<T> desc;
+
+	return desc;
 }
 
 // clang-format off

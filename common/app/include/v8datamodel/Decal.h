@@ -18,7 +18,13 @@ using G3D::Vector2;
 class Decal : public Instance
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100ff500
+	float getSpecular() const { return specular; }
+
 	void setSpecular(float value);
+	// FUNCTION: WEBSERVICE 0x100ff510
+	float getShiny() const { return shiny; }
+
 	void setShiny(float value);
 
 private:
@@ -33,7 +39,13 @@ DECOMP_SIZE_ASSERT(Decal, 0x124)
 class Texture : public DescribedCreatable<Texture, Decal, sTexture>
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100ff520
+	float getStudsPerTileU() const { return studsPerTile.x; }
+
 	void setStudsPerTileU(float value);
+	// FUNCTION: WEBSERVICE 0x1007cde0
+	float getStudsPerTileV() const { return studsPerTile.y; }
+
 	void setStudsPerTileV(float value);
 
 private:

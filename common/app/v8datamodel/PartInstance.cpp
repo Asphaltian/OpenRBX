@@ -5,6 +5,9 @@
 
 namespace RBX {
 
+// GLOBAL: WEBSERVICE 0x102d4568
+const char* const category_Part = "Part";
+
 char sPart[] = "Part";
 
 bool PartInstance::highlightSleepParts;
@@ -14,18 +17,78 @@ bool PartInstance::showPartCoord;
 bool PartInstance::showUnalignedParts;
 bool PartInstance::showSpanningTree;
 
-const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_RenderImportance;
-const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Transparency;
-const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Reflectance;
-const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Locked;
+const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_RenderImportance(
+	"RenderImportance",
+	"Behavior",
+	&RBX::PartInstance::getRenderImportance,
+	&RBX::PartInstance::setRenderImportance,
+	Reflection::PropertyDescriptor::LEGACY
+);
 
-const Reflection::PropDescriptor<PartInstance, G3D::Color3> PartInstance::prop_Color;
-const Reflection::PropDescriptor<PartInstance, BrickColor> PartInstance::prop_BrickColor;
-const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_CanCollide;
-const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Anchored;
+const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Transparency(
+	"Transparency",
+	"Appearance",
+	&RBX::PartInstance::getTransparencyXml,
+	&RBX::PartInstance::setTransparency
+);
 
-static Reflection::PropDescriptor<PartInstance, PartInstance::FormFactor> prop_formFactor;
-static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging;
+const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Reflectance(
+	"Reflectance",
+	"Appearance",
+	&RBX::PartInstance::getReflectance,
+	&RBX::PartInstance::setReflectance
+);
+
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Locked(
+	"Locked",
+	"Behavior",
+	&RBX::PartInstance::getPartLocked,
+	&RBX::PartInstance::setPartLocked
+);
+
+const Reflection::PropDescriptor<PartInstance, G3D::Color3> PartInstance::prop_Color(
+	"Color",
+	"Appearance",
+	&RBX::PartInstance::getColor3,
+	&RBX::PartInstance::setColor3
+);
+
+const Reflection::PropDescriptor<PartInstance, BrickColor> PartInstance::prop_BrickColor(
+	"BrickColor",
+	"Appearance",
+	&RBX::PartInstance::getColor,
+	&RBX::PartInstance::setColor
+);
+
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_CanCollide(
+	"CanCollide",
+	"Behavior",
+	&RBX::PartInstance::getCanCollide,
+	&RBX::PartInstance::setCanCollide
+);
+
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Anchored(
+	"Anchored",
+	"Behavior",
+	&RBX::PartInstance::getAnchored,
+	&RBX::PartInstance::setAnchored
+);
+
+static Reflection::EnumPropDescriptor<PartInstance, PartInstance::FormFactor> prop_formFactor(
+	"FormFactor",
+	category_Part,
+	&RBX::PartInstance::getFormFactor,
+	&RBX::PartInstance::setFormFactorXml,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
+static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging(
+	"DraggingV1",
+	"Behavior",
+	&RBX::PartInstance::getDragging,
+	&RBX::PartInstance::setDragging,
+	Reflection::PropertyDescriptor::STREAMING
+);
 
 // FUNCTION: WEBSERVICE 0x1009ae40
 bool PartInstance::nonNullInWorkspace(shared_ptr<PartInstance> part)
@@ -98,6 +161,21 @@ Extents PartInstance::getExtentsLocal() const
 
 	return Extents(-corner, corner);
 }
+
+namespace Reflection {
+
+// FUNCTION: WEBSERVICE 0x1009daf0
+template <>
+EnumDesc<PartInstance::FormFactor>::EnumDesc() : EnumDescriptor("FormFactor", typeid(PartInstance::FormFactor))
+{
+	addPair(PartInstance::SYMETRIC, "Symmetric");
+	addPair(PartInstance::BRICK, "Brick");
+	addPair(PartInstance::PLATE, "Plate");
+
+	addLegacyName("Block", PartInstance::BRICK);
+}
+
+} // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x1009faa0
 void PartInstance::setDragging(bool value)
@@ -187,6 +265,18 @@ void PartInstance::setFormFactorXml(FormFactor value)
 	if (value != formFactor) {
 		formFactor = value;
 		raisePropertyChanged(prop_formFactor);
+	}
+}
+// STUB: WEBSERVICE 0x1009fe60
+void PartInstance::setColor3(G3D::Color3 value)
+{
+	BrickColor closest = BrickColor::closest(value);
+
+	if (closest != color) {
+		color = closest;
+
+		raisePropertyChanged(prop_Color);
+		raisePropertyChanged(prop_BrickColor);
 	}
 }
 

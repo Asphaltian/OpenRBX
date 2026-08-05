@@ -7,8 +7,19 @@ namespace Network {
 
 char sPlayer[] = "Player";
 
-static Reflection::PropDescriptor<Player, BrickColor> prop_teamColor;
-static Reflection::PropDescriptor<Player, bool> prop_neutral;
+static Reflection::PropDescriptor<Player, BrickColor> prop_teamColor(
+	"TeamColor",
+	"Team",
+	&RBX::Network::Player::getTeamColor,
+	&RBX::Network::Player::setTeamColor
+);
+
+static Reflection::PropDescriptor<Player, bool> prop_neutral(
+	"Neutral",
+	"Team",
+	&RBX::Network::Player::getNeutral,
+	&RBX::Network::Player::setNeutral
+);
 
 // FUNCTION: WEBSERVICE 0x1018f9c0
 void Player::setTeamColor(BrickColor value)

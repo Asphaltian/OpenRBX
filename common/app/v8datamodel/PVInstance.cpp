@@ -4,7 +4,12 @@
 
 namespace RBX {
 
-static Reflection::PropDescriptor<PVInstance, bool> prop_ControllerFlagShown;
+static Reflection::PropDescriptor<PVInstance, bool> prop_ControllerFlagShown(
+	"ControllerFlagShown",
+	"Appearance",
+	&RBX::PVInstance::getShowControllerFlag,
+	&RBX::PVInstance::setShowControllerFlag
+);
 
 // FUNCTION: WEBSERVICE 0x1009a4e0
 void PVInstance::setShowControllerFlag(bool _showControllerFlag)

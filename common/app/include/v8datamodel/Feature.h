@@ -42,9 +42,21 @@ public:
 		CENTER_IO = 2
 	};
 
+	// FUNCTION: WEBSERVICE 0x1019c9f0
+	NormalId getFaceId() const { return faceId; }
+
 	void setFaceId(NormalId value);
+	// FUNCTION: WEBSERVICE 0x100f9de0
+	TopBottom getTopBottom() const { return topBottom; }
+
 	void setTopBottom(TopBottom value);
+	// FUNCTION: WEBSERVICE 0x100e3c20
+	LeftRight getLeftRight() const { return leftRight; }
+
 	void setLeftRight(LeftRight value);
+	// FUNCTION: WEBSERVICE 0x100e3c30
+	InOut getInOut() const { return inOut; }
+
 	void setInOut(InOut value);
 
 private:
@@ -61,6 +73,10 @@ DECOMP_SIZE_ASSERT(Feature, 0x118)
 class VelocityMotor : public DescribedCreatable<VelocityMotor, JointInstance, sVelocityMotor>
 {
 public:
+	float getMaxVelocity() const;
+	float getDesiredAngle() const;
+	float getCurrentAngle() const;
+
 	void setMaxVelocity(float value);
 	void setDesiredAngle(float value);
 	void setCurrentAngle(float value);

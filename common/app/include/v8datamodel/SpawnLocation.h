@@ -16,6 +16,8 @@ extern char sSpawnLocation[];
 class SpawnLocation : public Instance
 {
 public:
+	BrickColor getTeamColor() const { return teamColor; }
+
 	void setTeamColor(BrickColor value);
 
 private:

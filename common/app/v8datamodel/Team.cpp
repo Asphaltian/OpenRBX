@@ -8,9 +8,21 @@ const char sTeam[] = "Team";
 
 using namespace Reflection;
 
-static PropDescriptor<Team, int> prop_Score;
-static PropDescriptor<Team, BrickColor> prop_Color;
-static PropDescriptor<Team, bool> prop_AutoAssignable;
+static PropDescriptor<Team, int> prop_Score("Score", "Data", &RBX::Team::getScore, &RBX::Team::setScore);
+
+static PropDescriptor<Team, BrickColor> prop_Color(
+	"TeamColor",
+	"Data",
+	&RBX::Team::getTeamColor,
+	&RBX::Team::setTeamColor
+);
+
+static PropDescriptor<Team, bool> prop_AutoAssignable(
+	"AutoAssignable",
+	"Data",
+	&RBX::Team::getAutoAssignable,
+	&RBX::Team::setAutoAssignable
+);
 
 // FUNCTION: WEBSERVICE 0x100be710
 void Team::setScore(int value)

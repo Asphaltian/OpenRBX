@@ -13,6 +13,12 @@ extern const char sTeam[];
 class Team : public DescribedCreatable<Team, Instance, sTeam>
 {
 public:
+	int getScore() const { return score; }
+
+	BrickColor getTeamColor() const { return color; }
+
+	bool getAutoAssignable() const { return autoAssignable; }
+
 	void setScore(int value);
 	void setTeamColor(BrickColor value);
 	void setAutoAssignable(bool value);
