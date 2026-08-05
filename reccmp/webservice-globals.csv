@@ -4119,6 +4119,7 @@ address,type,symbol
 0x102f9ef0,global,"d___RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor"
 0x102f9f78,global,??_B?1??classDescriptor@?$Described@VTeam@RBX@@$1?sTeam@2@3QBDBV?$FactoryProduct@VTeam@RBX@@VInstance@2@$1?sTeam@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102f9fb8,global,?prop_AutoColorCharacters@Team@RBX@@2V?$BoundProp@_N$00@Reflection@2@A
+0x102f9fd4,global,prop_Color
 0x102f9ff4,global,?ignoreVector3@MouseCommand@RBX@@0VVector3@G3D@@A
 0x102fa000,global,n___RBX::Name::doDeclare<&RBX::sBoxSelectCommand>
 0x102fa004,global,??_B?1???$doDeclare@$1?sBoxSelectCommand@RBX@@3PADA@Name@RBX@@CAABV01@XZ@51
@@ -4165,6 +4166,7 @@ address,type,symbol
 0x102fa634,global,isNullClassName___RBX::ServiceProvider::find<RBX::FlagStandService>
 0x102fa638,global,??_B?8???$find@VFlagStandService@RBX@@@ServiceProvider@RBX@@QBEPAVFlagStandService@1@XZ@58
 0x102fa644,global,??_B?1???$assign_to@V?$bind_t@XV?$mf0@XVFlag@RBX@@@_mfi@boost@@V?$list1@V?$value@V?$shared_ptr@VFlag@RBX@@@boost@@@_bi@boost@@@_bi@3@@_bi@boost@@@?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@XV?$mf0@XVFlag@RBX@@@_mfi@boost@@V?$list1@V?$value@V?$shared_ptr@VFlag@RBX@@@boost@@@_bi@boost@@@_bi@3@@_bi@1@@Z@51
+0x102fa64c,global,prop_Color
 0x102fa668,global,?disableEnvironmentalThrottle@World@RBX@@2_NA
 0x102fa66c,global,c___RBX::GuiItem::disabledFill
 0x102fa680,global,c___RBX::GuiItem::translucentBackdrop
@@ -4187,6 +4189,8 @@ address,type,symbol
 0x102fa750,global,n___RBX::Name::doDeclare<&RBX::sAutoJoint>
 0x102fa754,global,??_B?1???$doDeclare@$1?sAutoJoint@RBX@@3QBDB@Name@RBX@@CAABV01@XZ@51
 0x102fa758,global,flag___RBX::Name::declare<&RBX::sAutoJoint>
+0x102fa760,global,prop_CurrentAngle
+0x102fa7f4,global,prop_MaxVelocity
 0x102fa830,global,"d___RBX::Reflection::Described<RBX::Teams,&RBX::sTeams,RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams> >::classDescriptor"
 0x102fa8b8,global,??_B?1??classDescriptor@?$Described@VTeams@RBX@@$1?sTeams@2@3QBDBV?$FactoryProduct@VTeams@RBX@@VInstance@2@$1?sTeams@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102fa929,global,?writeUnlocked@Accoutrement@RBX@@2_NA
@@ -4238,6 +4242,9 @@ address,type,symbol
 0x102fb0f8,global,??_B?1??classDescriptor@?$Described@VVelocityMotor@RBX@@$1?sVelocityMotor@2@3QBDBV?$FactoryProduct@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102fb100,global,?s@?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
 0x102fb198,global,??_B?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV123@XZ@51
+0x102fb200,global,prop_MaxVelocity
+0x102fb25c,global,prop_CurrentAngle
+0x102fb278,global,prop_DesiredAngle
 0x102fb29c,global,??_B?1???$assign_to@V?$bind_t@XV?$mf1@XVFlagStand@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlagStand@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXV?$bind_t@XV?$mf1@XVFlagStand@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlagStand@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z@51
 0x102fb2e8,global,"d___RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor"
 0x102fb370,global,??_B?1??classDescriptor@?$Described@VBodyPosition@RBX@@$1?sBodyPosition@2@3PADAV?$FactoryProduct@VBodyPosition@RBX@@VBodyMover@2@$1?sBodyPosition@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51

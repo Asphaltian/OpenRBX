@@ -1,5 +1,48 @@
 address,type,name
 0x10043b20,library,"std::list<RBX::Reflection::SignatureDescriptor::Item,std::allocator<RBX::Reflection::SignatureDescriptor::Item> >::_Buynode"
+0x10223020,library,RBX::`dynamic atexit destructor for 'prop_ControllerFlagShown''
+0x102230e0,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_CanCollide''
+0x10223100,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_RenderImportance''
+0x10223160,library,RBX::`dynamic atexit destructor for 'prop_formFactor''
+0x102231e0,library,RBX::`dynamic atexit destructor for 'prop_Dragging''
+0x10223260,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_Reflectance''
+0x10223280,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_Transparency''
+0x102232a0,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_BrickColor''
+0x102232c0,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_Color''
+0x102232e0,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_Anchored''
+0x10223300,library,`dynamic atexit destructor for 'RBX::PartInstance::prop_Locked''
+0x10223400,library,RBX::`dynamic atexit destructor for 'propSit''
+0x10223420,library,RBX::`dynamic atexit destructor for 'propMaxHealth''
+0x10223480,library,RBX::`dynamic atexit destructor for 'propJump''
+0x102234a0,library,RBX::`dynamic atexit destructor for 'propWalkRotationalVelocity''
+0x102236c0,library,`dynamic atexit destructor for 'prop_ModelCoordinateFrames''
+0x102236e0,library,`dynamic atexit destructor for 'prop_WorldCoordinateFrames''
+0x10223700,library,`dynamic atexit destructor for 'prop_DisableEnvironmentalThrottle''
+0x10223720,library,`dynamic atexit destructor for 'prop_ValidatingDebug''
+0x10223800,library,`dynamic atexit destructor for 'prop_PartCoordinateFrames''
+0x10223820,library,`dynamic atexit destructor for 'prop_AnchoredParts''
+0x10223840,library,`dynamic atexit destructor for 'prop_errorReporting''
+0x10223860,library,`dynamic atexit destructor for 'prop_assertAction''
+0x10223cd0,library,RBX::`dynamic atexit destructor for 'prop_BackendToolState''
+0x10223d60,library,RBX::`dynamic atexit destructor for 'prop_Color''
+0x10223dd0,library,`dynamic atexit destructor for 'prop_CurrentAngle''
+0x10223e50,library,`dynamic atexit destructor for 'prop_MaxVelocity''
+0x10223f40,library,RBX::`dynamic atexit destructor for 'prop_BackendAccoutrementState''
+0x10224220,library,RBX::`dynamic atexit destructor for 'prop_CurrentAngle''
+0x10224240,library,RBX::`dynamic atexit destructor for 'prop_InOut''
+0x10224260,library,RBX::`dynamic atexit destructor for 'prop_LeftRight''
+0x10224280,library,RBX::`dynamic atexit destructor for 'prop_TopBottom''
+0x102242a0,library,RBX::`dynamic atexit destructor for 'prop_FaceId''
+0x102242c0,library,RBX::`dynamic atexit destructor for 'prop_DesiredAngle''
+0x102242e0,library,RBX::`dynamic atexit destructor for 'prop_MaxVelocity''
+0x10224770,library,RBX::`dynamic atexit destructor for 'desc_Text''
+0x10224ca0,library,RBX::`dynamic atexit destructor for 'prop_TeamColor''
+0x10224cd0,library,`dynamic atexit destructor for 'RBX::Texture::prop_StudsPerTileV''
+0x10224cf0,library,`dynamic atexit destructor for 'RBX::Texture::prop_StudsPerTileU''
+0x10224d10,library,`dynamic atexit destructor for 'RBX::Decal::prop_Shiny''
+0x10224d30,library,`dynamic atexit destructor for 'RBX::Decal::prop_Specular''
+0x10225590,library,`dynamic atexit destructor for 'RBX::FaceInstance::prop_Face''
+0x10225630,library,`dynamic atexit destructor for 'desc_meshType''
 0x10231ea0,global,gcTime
 0x10231ea8,global,decay
 0x10238d00,global,tab_funcs
@@ -14,6 +57,8 @@ address,type,name
 0x10239860,global,flib
 0x1023a0f0,global,category_Camera
 0x1023a1cc,global,ZOOM_FACTOR
+0x10246e50,global,BLOCK_FACE_TO_VERTEX
+0x10246eb0,global,BLOCK_FACE_VERTEX_TO_EDGE
 0x10246f4c,global,MAX_LEGO_JOINT_FORCES_MEASURED
 0x10247000,global,log_2
 0x10247188,global,luaT_eventname
@@ -366,6 +411,7 @@ address,type,name
 0x102ff518,global,uniqueIdentifier
 0x102ff618,global,sum
 0x102ff880,global,state
+0x10300244,global,next
 0x1030137c,global,toneMap
 0x10301384,global,depthBlur
 0x103013bd,global,initRobloxFailed
@@ -380,6 +426,3 @@ address,type,name
 0x10301b08,global,showedMessage
 0x10301b18,global,errorUploader
 0x10301bd8,global,registerFactoryObjects
-0x10300244,global,next
-0x10246e50,global,BLOCK_FACE_TO_VERTEX
-0x10246eb0,global,BLOCK_FACE_VERTEX_TO_EDGE
