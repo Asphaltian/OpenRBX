@@ -470,11 +470,11 @@ private:
 	}
 
 	// clang-format off
-	// FUNCTION: WEBSERVICE 0x10221870
+	// SYNTHETIC: WEBSERVICE 0x10221870
 	// `RBX::moo2'::`2'::`dynamic atexit destructor for 'mutex2''
-	// FUNCTION: WEBSERVICE 0x10221880
+	// SYNTHETIC: WEBSERVICE 0x10221880
 	// `RBX::Name::dictionary'::`2'::`dynamic atexit destructor for 'd''
-	// FUNCTION: WEBSERVICE 0x102218c0
+	// SYNTHETIC: WEBSERVICE 0x102218c0
 	// `RBX::Name::namMap'::`2'::`dynamic atexit destructor for 'n''
 	// clang-format on
 
@@ -482,6 +482,32 @@ private:
 
 public:
 	std::string name; // 0x04
+};
+
+// SIZE 0x04
+class INamed
+{
+public:
+	virtual const Name& getName() const = 0; // vtable+0x00
+};
+
+template <class Base, const char* nameValue>
+class Named : public Base
+{
+public:
+	template <class A>
+	Named(A a) : Base(a)
+	{
+	}
+
+	template <class A, class B, class C>
+	Named(A a, B b, C c) : Base(a, b, c)
+	{
+	}
+
+	static const Name& name() { return Name::declare<nameValue>(); }
+
+	virtual const Name& getName() const { return name(); }
 };
 
 } // namespace RBX

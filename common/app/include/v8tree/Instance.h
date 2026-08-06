@@ -118,7 +118,6 @@ public:
 
 	bool contains(const Instance* instance) const;
 
-	// FUNCTION: WEBSERVICE 0x10047cd0
 	bool isAncestorOf(const Instance* descendent) const
 	{
 		while (descendent != 0) {
@@ -132,7 +131,6 @@ public:
 		return false;
 	}
 
-	// FUNCTION: WEBSERVICE 0x10047d90
 	bool isDescendentOf(const Instance* ancestor) const
 	{
 		const Instance* walk = parent;
@@ -209,7 +207,7 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>
 	// STUB: WEBSERVICE 0x1008e2c0
 	// RBX::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
-	// STUB: WEBSERVICE 0x100a10f0
+	// TEMPLATE: WEBSERVICE 0x100a10f0
 	// RBX::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// STUB: WEBSERVICE 0x100a3b60
 	// RBX::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>

@@ -168,7 +168,7 @@ bool ArchiveBinder::processIDREF(
 	return true;
 }
 
-// FUNCTION: WEBSERVICE 0x10098830
+// STUB: WEBSERVICE 0x10098830
 void SerializerV2::isolateHandles(XmlElement* root)
 {
 	std::map<RBX::Instance*, RBX::InstanceHandle> isolationMap;

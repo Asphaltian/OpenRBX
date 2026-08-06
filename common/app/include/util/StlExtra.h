@@ -11,6 +11,8 @@ namespace RBX {
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100d3720
 // RBX::fastRemoveIndex<RBX::ContactConnector *>
+// STUB: WEBSERVICE 0x100d40c0
+// RBX::fastRemoveIndex<bool>
 // clang-format on
 
 template <class T>

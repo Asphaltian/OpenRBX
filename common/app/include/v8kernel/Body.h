@@ -57,6 +57,23 @@ public:
 
 	Matrix3 getBranchIBody() const { return cofm != NULL ? cofm->getMoment() : moment; }
 
+	Vector3 getIBodyV3() const { return Math::toDiagonal(getIBody()); }
+	Vector3 getBranchIBodyV3() const { return Math::toDiagonal(getBranchIBody()); }
+
+	const Vector3& getBranchForce() const
+	{
+		const SimBody* simBody = getRootSimBody();
+
+		return simBody != NULL ? simBody->getForce() : Vector3::zero();
+	}
+
+	const Vector3& getBranchTorque() const
+	{
+		const SimBody* simBody = getRootSimBody();
+
+		return simBody != NULL ? simBody->getTorque() : Vector3::zero();
+	}
+
 	Matrix3 getIWorld() const { return Math::momentToWorldSpace(getIBody(), getPV().position.rotation); }
 
 	Matrix3 getBranchIWorld() const { return Math::momentToWorldSpace(getBranchIBody(), getPV().position.rotation); }
@@ -133,6 +150,7 @@ private:
 	Body* calcRoot();
 
 	SimBody* getRootSimBody() { return root->simBody; }
+	const SimBody* getRootSimBody() const { return root->simBody; }
 
 	int& getIndex() { return index; }
 

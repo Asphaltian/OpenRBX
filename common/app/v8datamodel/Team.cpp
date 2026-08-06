@@ -31,7 +31,7 @@ void Team::setScore(int value)
 	raisePropertyChanged(prop_Score);
 }
 
-// STUB: WEBSERVICE 0x100be730
+// FUNCTION: WEBSERVICE 0x100be730
 void Team::setTeamColor(BrickColor value)
 {
 	color = value;

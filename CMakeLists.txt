@@ -159,6 +159,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/Enums.cpp
   common/app/v8datamodel/TimeState.cpp
   common/app/v8datamodel/IEquipable.cpp
+  common/app/v8datamodel/Team.cpp
   common/app/v8datamodel/Flag.cpp
   common/app/v8datamodel/FlagStand.cpp
   common/app/v8datamodel/DebugSettings.cpp
@@ -170,7 +171,6 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/PVInstance.cpp
   common/app/v8datamodel/PartInstance.cpp
   common/app/v8datamodel/SpawnLocation.cpp
-  common/app/v8datamodel/Team.cpp
   common/app/v8datamodel/Tool.cpp
   common/app/v8datamodel/Workspace.cpp
   common/app/v8kernel/Cofm.cpp
@@ -214,6 +214,7 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Timer.cpp
   common/app/util/Units.cpp
   common/app/util/UserInputBase.cpp
+  common/app/humanoid/Balancing.cpp
   common/app/humanoid/FallingDown.cpp
   common/app/humanoid/Flying.cpp
   common/app/humanoid/Freefall.cpp

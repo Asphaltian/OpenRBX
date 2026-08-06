@@ -1,0 +1,9 @@
+address,type,symbol
+0x101d3b50,library,_deflateEnd@4
+0x101d4d00,library,_inflateReset@4
+0x101d4e40,library,_inflateInit_@12
+0x101d6530,library,_inflateEnd@4
+0x101d9940,library,_uncompress@16
+0x101e5260,library,_zcalloc
+0x101e5280,library,_inflate_fast
+0x101d4d70,library,_inflateInit2_@16

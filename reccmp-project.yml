@@ -10,7 +10,18 @@ targets:
       sha256: 5e9c6b82605fc8429c5fc5f682f2d7f98b55b73d993dfba58437365754410e2f
     data-sources:
       - reccmp/webservice-function-size.csv
-      - reccmp/webservice-vendored.csv
+      - reccmp/webservice-atl.csv
+      - reccmp/webservice-boost.csv
+      - reccmp/webservice-crt.csv
+      - reccmp/webservice-g3d.csv
+      - reccmp/webservice-ijg.csv
+      - reccmp/webservice-libpng.csv
+      - reccmp/webservice-stl.csv
+      - reccmp/webservice-zlib.csv
+      # Roblox code: counted as unimplemented
+      - reccmp/webservice-symbols.csv
+      # Data, and the functions the source cannot annotate
+      - reccmp/webservice-floats.csv
       - reccmp/webservice-globals.csv
       - reccmp/webservice-statics.csv
       - reccmp/webservice-strings.csv

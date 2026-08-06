@@ -13,7 +13,7 @@ static Reflection::PropDescriptor<Flag, BrickColor> prop_Color(
 	&RBX::Flag::setTeamColor
 );
 
-// STUB: WEBSERVICE 0x100cef60
+// FUNCTION: WEBSERVICE 0x100cef60
 void Flag::setTeamColor(BrickColor color)
 {
 	teamColor = color;

@@ -61,7 +61,7 @@ protected:
 		const Type& type,
 		const char* name,
 		const char* category,
-		Functionality functionality
+		Functionality flags
 	);
 
 private:
@@ -84,8 +84,7 @@ public:
 	class __declspec(novtable) GetSet
 	{
 	public:
-		virtual ~GetSet() {} // vtable+0x00
-
+		virtual bool isReadOnly() const = 0;                                      // vtable+0x00
 		virtual T getValue(const DescribedBase* instance) const = 0;              // vtable+0x04
 		virtual void setValue(DescribedBase* instance, const T& value) const = 0; // vtable+0x08
 	};
@@ -94,7 +93,7 @@ public:
 
 	void setValue(DescribedBase* instance, const T& value) const { getset->setValue(instance, value); }
 
-	virtual bool isReadOnly() const { return false; }
+	virtual bool isReadOnly() const { return getset->isReadOnly(); }
 
 	virtual bool equalValues(const DescribedBase* a, const DescribedBase* b) const
 	{
@@ -121,9 +120,9 @@ protected:
 		const char* name,
 		const char* category,
 		std::auto_ptr<GetSet> getset,
-		Functionality functionality
+		Functionality flags
 	)
-		: PropertyDescriptor(classDescriptor, Type::singleton<T>(), name, category, functionality), getset(getset)
+		: PropertyDescriptor(classDescriptor, Type::singleton<T>(), name, category, flags), getset(getset)
 	{
 	}
 
@@ -133,9 +132,9 @@ protected:
 		const char* name,
 		const char* category,
 		std::auto_ptr<GetSet> getset,
-		Functionality functionality
+		Functionality flags
 	)
-		: PropertyDescriptor(classDescriptor, type, name, category, functionality), getset(getset)
+		: PropertyDescriptor(classDescriptor, type, name, category, flags), getset(getset)
 	{
 	}
 
@@ -181,40 +180,97 @@ public:
 	class GetSetImpl : public TypedPropertyDescriptor<T>::GetSet
 	{
 	public:
-		GetSetImpl(Getter getter, Setter setter) : getter(getter), setter(setter) {}
+		GetSetImpl(Getter get, Setter set) : get(get), set(set) {}
 
-		virtual T getValue(const DescribedBase* instance) const
-		{
-			return (static_cast<const Class*>(instance)->*getter)();
-		}
+		virtual bool isReadOnly() const { return false; }
 
-		virtual void setValue(DescribedBase* instance, const T& value) const
+		virtual T getValue(const DescribedBase* object) const { return (static_cast<const Class*>(object)->*get)(); }
+
+		virtual void setValue(DescribedBase* object, const T& value) const
 		{
-			(static_cast<Class*>(instance)->*setter)(value);
+			(static_cast<Class*>(object)->*set)(value);
 		}
 
 	private:
-		Getter getter; // 0x04
-		Setter setter; // 0x10
+		Getter get;
+		Setter set;
 	};
+
+	// clang-format off
+	// STUB: WEBSERVICE 0x100433c0
+	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// STUB: WEBSERVICE 0x10043430
+	// RBX::Reflection::TypedPropertyDescriptor<G3D::Color3>::TypedPropertyDescriptor<G3D::Color3>
+	// STUB: WEBSERVICE 0x100434e0
+	// RBX::Reflection::TypedPropertyDescriptor<float>::TypedPropertyDescriptor<float>
+	// STUB: WEBSERVICE 0x10048bd0
+	// RBX::Reflection::TypedPropertyDescriptor<bool>::TypedPropertyDescriptor<bool>
+	// STUB: WEBSERVICE 0x1007deb0
+	// RBX::Reflection::TypedPropertyDescriptor<int>::TypedPropertyDescriptor<int>
+	// STUB: WEBSERVICE 0x100996a0
+	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::getset<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>
+	// STUB: WEBSERVICE 0x1009ba30
+	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
+	// STUB: WEBSERVICE 0x1009bce0
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>
+	// STUB: WEBSERVICE 0x1009bd50
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,float>::getset<float (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(float)>
+	// STUB: WEBSERVICE 0x1009bdc0
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,bool>::getset<bool (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(bool)>
+	// STUB: WEBSERVICE 0x100a15f0
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::getset<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float const &)>
+	// STUB: WEBSERVICE 0x100a1660
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::getset<bool (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(bool)>
+	// STUB: WEBSERVICE 0x100a16d0
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::getset<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x100b36d0
+	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,bool>::getset<bool (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(bool)>
+	// TEMPLATE: WEBSERVICE 0x100be0e0
+	// RBX::Reflection::PropDescriptor<RBX::Team,int>::getset<int (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x100be140
+	// RBX::Reflection::PropDescriptor<RBX::Team,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(RBX::BrickColor)>
+	// TEMPLATE: WEBSERVICE 0x100be1a0
+	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::getset<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>
+	// TEMPLATE: WEBSERVICE 0x100ca830
+	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::getset<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x100cd6e0
+	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>
+	// TEMPLATE: WEBSERVICE 0x100d7fa0
+	// RBX::Reflection::PropDescriptor<RBX::Motor,float>::getset<float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
+	// STUB: WEBSERVICE 0x100dc050
+	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,int>::getset<int (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x100e4a40
+	// RBX::Reflection::PropDescriptor<RBX::VelocityMotor,float>::getset<float (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x100ee870
+	// RBX::Reflection::PropDescriptor<RBX::Message,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getset<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const & (__thiscall RBX::Message::*)(void)const ,void (__thiscall RBX::Message::*)(std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &)>
+	// STUB: WEBSERVICE 0x100fdac0
+	// RBX::Reflection::PropDescriptor<RBX::SpawnLocation,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::SpawnLocation::*)(void)const ,void (__thiscall RBX::SpawnLocation::*)(RBX::BrickColor)>
+	// TEMPLATE: WEBSERVICE 0x100ff7d0
+	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::getset<float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x100ff830
+	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::getset<float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x1018c700
+	// RBX::Reflection::PropDescriptor<RBX::Network::Player,bool>::getset<bool (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(bool)>
+	// TEMPLATE: WEBSERVICE 0x1018ce60
+	// RBX::Reflection::PropDescriptor<RBX::Network::Player,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(RBX::BrickColor)>
+	// TEMPLATE: WEBSERVICE 0x10191910
+	// RBX::Reflection::PropDescriptor<RBX::Network::Players,int>::getset<int (__thiscall RBX::Network::Players::*)(void)const ,void (__thiscall RBX::Network::Players::*)(int)>
+	// clang-format on
+	template <class Getter, class Setter>
+	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, Setter set)
+	{
+		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new GetSetImpl<Getter, Setter>(get, set));
+	}
 
 	template <class Getter, class Setter>
 	PropDescriptor(
 		const char* name,
 		const char* category,
-		Getter getter,
-		Setter setter,
-		typename PropertyDescriptor::Functionality functionality = PropertyDescriptor::STANDARD
+		Getter get,
+		Setter set,
+		typename PropertyDescriptor::Functionality flags = PropertyDescriptor::STANDARD
 	)
-		: TypedPropertyDescriptor<T>(
-			  Class::classDescriptor(),
-			  name,
-			  category,
-			  std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(
-				  new GetSetImpl<Getter, Setter>(getter, setter)
-			  ),
-			  functionality
-		  )
+		: TypedPropertyDescriptor<T>(Class::classDescriptor(), name, category, getset(get, set), flags)
 	{
 	}
 };

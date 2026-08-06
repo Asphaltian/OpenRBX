@@ -2,6 +2,11 @@
 #define V8DATAMODEL_TOOL_H
 
 #include "decomp.h"
+#include "util/ILocation.h"
+#include "util/IRenderable.h"
+#include "util/ISelectable3d.h"
+#include "v8datamodel/Hopper.h"
+#include "v8datamodel/IEquipable.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
@@ -9,9 +14,17 @@ namespace RBX {
 extern const char sTool[];
 
 // SIZE 0x238
-class Tool : public Instance
+class Tool : public BackpackItem,
+			 public IEquipable,
+			 public IRenderable,
+			 virtual public ILocation,
+			 virtual public ISelectable3d
 {
 public:
+	virtual ~Tool();
+
+	virtual const CoordinateFrame getLocation() const;
+
 	enum ToolState
 	{
 		NOTHING = 0,
@@ -31,9 +44,8 @@ public:
 private:
 	DECOMP_NOINLINE void setBackendToolStateNoReplicate(int value);
 
-	undefined m_unk0x0f8[0x18c - 0x0f8]; // 0x0f8
 	int backendToolState;                // 0x18c
-	undefined m_unk0x190[0x238 - 0x190]; // 0x190
+	undefined m_unk0x190[0x230 - 0x190]; // 0x190
 };
 
 DECOMP_SIZE_ASSERT(Tool, 0x238)

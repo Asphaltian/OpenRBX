@@ -42,7 +42,7 @@ DECOMP_SIZE_ASSERT(Hint, 0x124)
 // clang-format on
 
 // clang-format off
-// SYNTHETIC: WEBSERVICE 0x1021d530
+// STUB: WEBSERVICE 0x1021d530
 // RBX::`dynamic initializer for 'desc_Text''
 // clang-format on
 

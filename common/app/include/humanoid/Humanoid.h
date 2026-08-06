@@ -3,9 +3,18 @@
 
 #include "decomp.h"
 #include "util/Handle.h"
+#include "util/Name.h"
+#include "v8datamodel/PartInstance.h"
 #include "v8tree/Instance.h"
 
+#include <boost/shared_ptr.hpp>
+#include <memory>
+
 namespace RBX {
+
+class Body;
+class Controller;
+class World;
 
 extern char sHumanoid[];
 
@@ -13,6 +22,27 @@ extern char sHumanoid[];
 class Humanoid : public DescribedCreatable<Humanoid, Instance, sHumanoid>
 {
 public:
+	// SIZE 0x08
+	class __declspec(novtable) State : public INamed
+	{
+	public:
+		virtual ~State() {} // vtable+0x04
+
+		virtual void onComputeForce(const float stepDt) = 0;                   // vtable+0x08
+		virtual State* onStep(const float stepDt, Controller& controller) = 0; // vtable+0x0c
+
+		// FUNCTION: WEBSERVICE 0x100a0710 FOLDED
+		virtual float getIntendedRotationAboutYAxis() const // vtable+0x10
+		{
+			return 0;
+		}
+
+	protected:
+		State(Humanoid* humanoid) : humanoid(humanoid) {}
+
+		Humanoid* const humanoid; // 0x04
+	};
+
 	// FUNCTION: WEBSERVICE 0x100a0750
 	float getMaxHealth() const { return maxHealth; }
 
@@ -30,20 +60,40 @@ public:
 
 	void setSit(bool value);
 
+	PartInstance* getTorso() const;
+	PartInstance* getLeftLeg() const;
+	PartInstance* getRightLeg() const;
+
+	Primitive* getTorsoPrimitive() const;
+	Primitive* getLeftLegPrimitive();
+	Primitive* getRightLegPrimitive();
+
+	Body* getTorsoBody();
+	Body* getRootBody();
+
 private:
-	undefined m_unk0x0f8[0x16c - 0x0f8]; // 0x0f8
-	float health;                        // 0x16c
-	float maxHealth;                     // 0x170
-	float walkRotationalVelocity;        // 0x174
-	undefined m_unk0x178[0x1ac - 0x178]; // 0x178
-	bool jump : 1;                       // 0x1ac
-	bool imDead : 1;                     // 0x1ac
-	bool hadHeadJoint : 1;               // 0x1ac
-	bool sit : 1;                        // 0x1ac
-	undefined m_unk0x1b0[0x1f0 - 0x1b0]; // 0x1b0
+	undefined m_unk0x0f8[0x16c - 0x0f8];      // 0x0f8
+	float health;                             // 0x16c
+	float maxHealth;                          // 0x170
+	float walkRotationalVelocity;             // 0x174
+	undefined m_unk0x178[0x1ac - 0x178];      // 0x178
+	bool jump : 1;                            // 0x1ac
+	bool imDead : 1;                          // 0x1ac
+	bool hadHeadJoint : 1;                    // 0x1ac
+	bool sit : 1;                             // 0x1ac
+	boost::shared_ptr<PartInstance> head;     // 0x1b0
+	boost::shared_ptr<PartInstance> torso;    // 0x1b8
+	boost::shared_ptr<PartInstance> leftLeg;  // 0x1c0
+	boost::shared_ptr<PartInstance> rightLeg; // 0x1c8
+	boost::shared_ptr<PartInstance> rightArm; // 0x1d0
+	boost::shared_ptr<PartInstance> leftArm;  // 0x1d8
+	World* world;                             // 0x1e0
+	std::auto_ptr<State> currentState;        // 0x1e4
+	undefined m_unk0x1e8[0x1f0 - 0x1e8];      // 0x1e8
 };
 
 DECOMP_SIZE_ASSERT(Humanoid, 0x1f0)
+DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 
 // clang-format off
 // STUB: WEBSERVICE 0x1021b310

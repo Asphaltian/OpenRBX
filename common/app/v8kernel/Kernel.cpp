@@ -197,7 +197,7 @@ Kernel::~Kernel()
 	delete kernelData;
 }
 
-// FUNCTION: WEBSERVICE 0x100d5ad0
+// FUNCTION: WEBSERVICE 0x100d5ad0 FOLDED
 Kernel* Kernel::getKernel()
 {
 	return this;

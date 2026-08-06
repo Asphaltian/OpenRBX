@@ -39,12 +39,12 @@ SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char*
 	classDescriptor.MemberDescriptorContainer<SignalDescriptor>::declare(this);
 }
 
-// FUNCTION: WEBSERVICE 0x10095e80
+// STUB: WEBSERVICE 0x10095e80
 SignalSource::~SignalSource()
 {
 }
 
-// FUNCTION: WEBSERVICE 0x10095ed0
+// STUB: WEBSERVICE 0x10095ed0
 void SignalSource::disconnect_all_slots()
 {
 	delete signals.release();

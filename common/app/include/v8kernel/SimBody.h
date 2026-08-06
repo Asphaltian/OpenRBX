@@ -35,6 +35,9 @@ public:
 
 	const PV& getPV() const { return pv; }
 
+	const Vector3& getForce() const { return force; }
+	const Vector3& getTorque() const { return torque; }
+
 	void makeDirty() { dirty = true; }
 
 	bool getDirty() const { return dirty; }

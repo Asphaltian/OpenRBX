@@ -45,6 +45,100 @@ public:
 		}
 	};
 
+	// clang-format off
+	// STUB: WEBSERVICE 0x10009450
+	// RBX::Creatable<RBX::Instance>::create<RBX::Lighting>
+	// STUB: WEBSERVICE 0x100094e0
+	// RBX::Creatable<RBX::Instance>::create<RBX::RunService>
+	// STUB: WEBSERVICE 0x10009600
+	// RBX::Creatable<RBX::Instance>::create<RBX::Selection>
+	// STUB: WEBSERVICE 0x10009690
+	// RBX::Creatable<RBX::Instance>::create<RBX::ScriptContext>
+	// STUB: WEBSERVICE 0x10009720
+	// RBX::Creatable<RBX::Instance>::create<RBX::Script>
+	// STUB: WEBSERVICE 0x100097b0
+	// RBX::Creatable<RBX::Instance>::create<RBX::LocalScript>
+	// STUB: WEBSERVICE 0x1005bab0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Humanoid>
+	// TEMPLATE: WEBSERVICE 0x100691f0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Team>
+	// TEMPLATE: WEBSERVICE 0x1006bd80
+	// RBX::Creatable<RBX::Instance>::create<RBX::Camera>
+	// TEMPLATE: WEBSERVICE 0x1006be50
+	// RBX::Creatable<RBX::Instance>::create<RBX::ControllerService>
+	// TEMPLATE: WEBSERVICE 0x10076620
+	// RBX::Creatable<RBX::Instance>::create<RBX::Snap>
+	// TEMPLATE: WEBSERVICE 0x10076890
+	// RBX::Creatable<RBX::Instance>::create<RBX::Weld>
+	// TEMPLATE: WEBSERVICE 0x10076b00
+	// RBX::Creatable<RBX::Instance>::create<RBX::Glue>
+	// TEMPLATE: WEBSERVICE 0x10076d70
+	// RBX::Creatable<RBX::Instance>::create<RBX::Rotate>
+	// TEMPLATE: WEBSERVICE 0x10076fe0
+	// RBX::Creatable<RBX::Instance>::create<RBX::RotateP>
+	// TEMPLATE: WEBSERVICE 0x10077250
+	// RBX::Creatable<RBX::Instance>::create<RBX::RotateV>
+	// TEMPLATE: WEBSERVICE 0x100779a0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Teams>
+	// STUB: WEBSERVICE 0x10077c10
+	// RBX::Creatable<RBX::Instance>::create<RBX::Accoutrement>
+	// STUB: WEBSERVICE 0x10077e80
+	// RBX::Creatable<RBX::Instance>::create<RBX::Hat>
+	// TEMPLATE: WEBSERVICE 0x1007e750
+	// RBX::Creatable<RBX::Instance>::create<RBX::GameSettings>
+	// TEMPLATE: WEBSERVICE 0x10089930
+	// RBX::Creatable<RBX::Instance>::create<RBX::ShirtGraphic>
+	// TEMPLATE: WEBSERVICE 0x10089ba0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Shirt>
+	// TEMPLATE: WEBSERVICE 0x10089e10
+	// RBX::Creatable<RBX::Instance>::create<RBX::BodyColors>
+	// TEMPLATE: WEBSERVICE 0x1008a080
+	// RBX::Creatable<RBX::Instance>::create<RBX::Skin>
+	// TEMPLATE: WEBSERVICE 0x1008a2f0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Explosion>
+	// TEMPLATE: WEBSERVICE 0x1008a560
+	// RBX::Creatable<RBX::Instance>::create<RBX::MotorFeature>
+	// TEMPLATE: WEBSERVICE 0x1008a7d0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Hole>
+	// TEMPLATE: WEBSERVICE 0x1008af20
+	// RBX::Creatable<RBX::Instance>::create<RBX::FlagStandService>
+	// TEMPLATE: WEBSERVICE 0x1008b190
+	// RBX::Creatable<RBX::Instance>::create<RBX::ForceField>
+	// TEMPLATE: WEBSERVICE 0x1008b400
+	// RBX::Creatable<RBX::Instance>::create<RBX::GeometryService>
+	// TEMPLATE: WEBSERVICE 0x1008b670
+	// RBX::Creatable<RBX::Instance>::create<RBX::BodyGyro>
+	// TEMPLATE: WEBSERVICE 0x1008b8e0
+	// RBX::Creatable<RBX::Instance>::create<RBX::BodyForce>
+	// TEMPLATE: WEBSERVICE 0x1008bb50
+	// RBX::Creatable<RBX::Instance>::create<RBX::BodyThrust>
+	// TEMPLATE: WEBSERVICE 0x1008bdc0
+	// RBX::Creatable<RBX::Instance>::create<RBX::BodyPosition>
+	// TEMPLATE: WEBSERVICE 0x1008c030
+	// RBX::Creatable<RBX::Instance>::create<RBX::BodyVelocity>
+	// TEMPLATE: WEBSERVICE 0x1008c2a0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Rocket>
+	// TEMPLATE: WEBSERVICE 0x1008c510
+	// RBX::Creatable<RBX::Instance>::create<RBX::Message>
+	// TEMPLATE: WEBSERVICE 0x1008ce10
+	// RBX::Creatable<RBX::Instance>::create<RBX::Visit>
+	// TEMPLATE: WEBSERVICE 0x1008d080
+	// RBX::Creatable<RBX::Instance>::create<RBX::DebrisService>
+	// TEMPLATE: WEBSERVICE 0x1008d2f0
+	// RBX::Creatable<RBX::Instance>::create<RBX::TimerService>
+	// STUB: WEBSERVICE 0x1008d560
+	// RBX::Creatable<RBX::Instance>::create<RBX::Seat>
+	// TEMPLATE: WEBSERVICE 0x1008da40
+	// RBX::Creatable<RBX::Instance>::create<RBX::SpawnerService>
+	// TEMPLATE: WEBSERVICE 0x1008e7a0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Hint>
+	// TEMPLATE: WEBSERVICE 0x1008e820
+	// RBX::Creatable<RBX::Instance>::create<RBX::ObjectValue>
+	// TEMPLATE: WEBSERVICE 0x100ad050
+	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
+	// TEMPLATE: WEBSERVICE 0x10129ea0
+	// RBX::Creatable<RBX::Instance>::create<RBX::SpecialShape>
+	// clang-format on
 	template <class U>
 	static boost::shared_ptr<U> create()
 	{
@@ -245,7 +339,7 @@ public:
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// TEMPLATE: WEBSERVICE 0x100a0a70
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
-	// STUB: WEBSERVICE 0x100a0b40
+	// TEMPLATE: WEBSERVICE 0x100a0b40
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100a1bb0
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::getClassName
@@ -367,7 +461,7 @@ public:
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::~FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>
 	// STUB: WEBSERVICE 0x100de1b0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::`scalar deleting destructor'
-	// STUB: WEBSERVICE 0x100de1d0
+	// TEMPLATE: WEBSERVICE 0x100de1d0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>
 	// TEMPLATE: WEBSERVICE 0x100de2e0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::getClassName
@@ -377,11 +471,11 @@ public:
 	// RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::~FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>
 	// FUNCTION: WEBSERVICE 0x100e05a0
 	// RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::~FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>
-	// STUB: WEBSERVICE 0x100e0640
+	// TEMPLATE: WEBSERVICE 0x100e0640
 	// RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
-	// STUB: WEBSERVICE 0x100e06a0
+	// TEMPLATE: WEBSERVICE 0x100e06a0
 	// RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>
-	// STUB: WEBSERVICE 0x100e0700
+	// TEMPLATE: WEBSERVICE 0x100e0700
 	// RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>
 	// STUB: WEBSERVICE 0x100e0c40
 	// RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>::~FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>

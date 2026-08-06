@@ -13,6 +13,8 @@ class DescribedBase : public SignalSource
 {
 public:
 	// clang-format off
+	// STUB: WEBSERVICE 0x10008d50
+	// RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10045560
 	// RBX::Reflection::Described<RBX::Lighting,&RBX::sLighting,RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100561a0
@@ -59,29 +61,35 @@ public:
 	// RBX::Reflection::Described<RBX::SpawnerService,&RBX::sSpawnerService,RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10089630
 	// RBX::Reflection::Described<RBX::Humanoid,&RBX::sHumanoid,RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid> >::classDescriptor
+	// STUB: WEBSERVICE 0x100896a0
+	// RBX::Reflection::Described<RBX::Feature,&RBX::sFeature,RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature> >::classDescriptor
+	// STUB: WEBSERVICE 0x10089780
+	// RBX::Reflection::Described<RBX::JointInstance,&RBX::sJointInstance,RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1008cc60
 	// RBX::Reflection::Described<RBX::ObjectValue,&RBX::sObjectValue,RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008dbe0
+	// TEMPLATE: WEBSERVICE 0x1008dbe0
 	// RBX::Reflection::Described<RBX::MotorFeature,&RBX::sMotorFeature,RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008dc50
+	// TEMPLATE: WEBSERVICE 0x1008dc50
 	// RBX::Reflection::Described<RBX::Hole,&RBX::sHole,RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008ded0
+	// STUB: WEBSERVICE 0x1008dcc0
+	// RBX::Reflection::Described<RBX::AutoJoint,&RBX::sAutoJoint,RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x1008ded0
 	// RBX::Reflection::Described<RBX::Snap,&RBX::sSnap,RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008df40
+	// TEMPLATE: WEBSERVICE 0x1008df40
 	// RBX::Reflection::Described<RBX::Weld,&RBX::sWeld,RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008dfb0
+	// TEMPLATE: WEBSERVICE 0x1008dfb0
 	// RBX::Reflection::Described<RBX::Glue,&RBX::sGlue,RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008e020
+	// TEMPLATE: WEBSERVICE 0x1008e020
 	// RBX::Reflection::Described<RBX::Rotate,&RBX::sRotate,RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008e090
+	// TEMPLATE: WEBSERVICE 0x1008e090
 	// RBX::Reflection::Described<RBX::RotateP,&RBX::sRotateP,RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008e100
+	// TEMPLATE: WEBSERVICE 0x1008e100
 	// RBX::Reflection::Described<RBX::RotateV,&RBX::sRotateV,RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008e170
+	// TEMPLATE: WEBSERVICE 0x1008e170
 	// RBX::Reflection::Described<RBX::Motor,&RBX::sMotor,RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor> >::classDescriptor
 	// STUB: WEBSERVICE 0x1008e390
 	// RBX::Reflection::Described<RBX::Seat,&RBX::sSeat,RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat> >::classDescriptor
-	// STUB: WEBSERVICE 0x100b42f0
+	// TEMPLATE: WEBSERVICE 0x100b42f0
 	// RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100be240
 	// RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor
@@ -93,7 +101,7 @@ public:
 	// RBX::Reflection::Described<RBX::Shirt,&RBX::sShirt,RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100e0dd0
 	// RBX::Reflection::Described<RBX::Skin,&RBX::sSkin,RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin> >::classDescriptor
-	// STUB: WEBSERVICE 0x100e6160
+	// TEMPLATE: WEBSERVICE 0x100e6160
 	// RBX::Reflection::Described<RBX::VelocityMotor,&RBX::sVelocityMotor,RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ec1a0
 	// RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor

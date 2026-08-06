@@ -46,7 +46,7 @@ namespace DataStructures
 
 		struct MapNode
 		{
-			// FUNCTION: WEBSERVICE 0x100d5ad0
+			// FUNCTION: WEBSERVICE 0x100d5ad0 FOLDED
 			MapNode() {}
 			MapNode(key_type _key, data_type _data) : mapNodeKey(_key), mapNodeData(_data) {}
 			MapNode& operator = ( const MapNode& input ) {mapNodeKey=input.mapNodeKey; mapNodeData=input.mapNodeData; return *this;}
