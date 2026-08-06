@@ -8,7 +8,7 @@ namespace Reflection {
 FunctionDescriptor::FunctionDescriptor(ClassDescriptor& classDescriptor, const char* name, Security security)
 	: MemberDescriptor(classDescriptor, name, "Function"), security(security)
 {
-	classDescriptor.MemberDescriptorContainer<FunctionDescriptor>::declare(*this);
+	classDescriptor.MemberDescriptorContainer<FunctionDescriptor>::declare(this);
 }
 
 } // namespace Reflection

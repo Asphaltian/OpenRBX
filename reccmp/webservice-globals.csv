@@ -561,6 +561,7 @@ address,type,symbol
 0x1022dd00,global,??_7?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1022dd0c,global,??_7?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x1022ddf8,global,__real@3ef179ec9cbd821e
+0x1022de30,global,??_7SignalInstance@Reflection@RBX@@6B@
 0x1022df54,global,??_7?$DescribedCreatable@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x1022df64,global,??_7?$DescribedCreatable@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x1022df74,global,??_7?$DescribedCreatable@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
@@ -4830,7 +4831,7 @@ address,type,symbol
 0x1030181c,global,??_B?1??singleton@ContentProvider@RBX@@SAAAV12@XZ@51
 0x10301820,global,sing___RBX::ContentProvider::singleton
 0x10301874,global,??_B?1??rootDescriptor@ClassDescriptor@Reflection@RBX@@SAAAV123@XZ@51
-0x10301878,global,root___RBX::Reflection::ClassDescriptor::rootDescriptor
+0x10301878,global,?root@?1??rootDescriptor@ClassDescriptor@Reflection@RBX@@SAAAV234@XZ@4V234@A
 0x10301900,global,??_B?1??classDescriptor@?$Described@VThumbnailGenerator@@$1?sThumbnailGenerator@@3QBDBV?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x10301908,global,?foo@?1??classDescriptor@?$Described@VThumbnailGenerator@@$1?sThumbnailGenerator@@3QBDBV?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@@Reflection@RBX@@SAAAVClassDescriptor@34@XZ@4V534@A
 0x10301990,global,??_B?1??classDescriptor@?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51

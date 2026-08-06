@@ -214,9 +214,10 @@ public:
 
 	virtual ~DescribedBase() {} // vtable+0x00
 
+	const ClassDescriptor& getDescriptor() const { return *descriptor; }
+
 protected:
-	// const ClassDescriptor& descriptor
-	undefined m_unk0x08[0x0c - 0x08]; // 0x08
+	const ClassDescriptor* descriptor; // 0x08
 };
 
 DECOMP_SIZE_ASSERT(DescribedBase, 0x0c)

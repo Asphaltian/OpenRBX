@@ -6,31 +6,49 @@
 #include "reflection/property.h"
 #include "reflection/type.h"
 
+#include <boost/shared_ptr.hpp>
 #include <boost/type_traits/function_traits.hpp>
+#include <map>
+#include <memory>
 
 namespace RBX {
 namespace Reflection {
 
-// SIZE 0x08
-class SignalSource
-{
-public:
-	virtual ~SignalSource() {} // vtable+0x00
-
-private:
-	undefined m_unk0x04[0x08 - 0x04]; // 0x04
-};
-
-DECOMP_SIZE_ASSERT(SignalSource, 0x08)
+class SignalDescriptor;
+class SignalSource;
 
 // SIZE 0x0c
-class SignalInstance
+class SignalInstance : public boost::noncopyable
 {
-private:
-	undefined m_unk0x00[0x0c - 0x00]; // 0x00
+public:
+	SignalSource* getSource() const { return source; }
+
+protected:
+	virtual ~SignalInstance(); // vtable+0x00
+
+	SignalSource* source;               // 0x04
+	const SignalDescriptor& descriptor; // 0x08
 };
 
 DECOMP_SIZE_ASSERT(SignalInstance, 0x0c)
+
+// SIZE 0x08
+class __declspec(novtable) SignalSource
+{
+public:
+	typedef std::map<const SignalDescriptor*, boost::shared_ptr<SignalInstance> > SignalMap;
+
+	virtual ~SignalSource(); // vtable+0x00
+
+	void disconnect_all_slots();
+
+protected:
+	friend class SignalDescriptor;
+
+	std::auto_ptr<SignalMap> signals; // 0x04
+};
+
+DECOMP_SIZE_ASSERT(SignalSource, 0x08)
 
 // SIZE 0x24
 class __declspec(novtable) SignalDescriptor : public MemberDescriptor

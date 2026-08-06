@@ -3,16 +3,15 @@
 
 #include "decomp.h"
 #include "reflection/descriptor.h"
+#include "reflection/function.h"
 #include "reflection/member.h"
+#include "reflection/property.h"
+#include "reflection/signal.h"
 
 #include <vector>
 
 namespace RBX {
 namespace Reflection {
-
-class FunctionDescriptor;
-class PropertyDescriptor;
-class SignalDescriptor;
 
 // SYNTHETIC: WEBSERVICE 0x100478a0
 // RBX::Reflection::ClassDescriptor::`scalar deleting destructor'
@@ -36,9 +35,9 @@ public:
 
 	static ClassDescriptor& rootDescriptor()
 	{
-		static ClassDescriptor d;
+		static ClassDescriptor root;
 
-		return d;
+		return root;
 	}
 
 	static bool lockedDown;
@@ -51,6 +50,11 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(ClassDescriptor, 0x88)
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10220fa0
+// `RBX::Reflection::ClassDescriptor::rootDescriptor'::`2'::`dynamic atexit destructor for 'root''
+// clang-format on
 
 } // namespace Reflection
 } // namespace RBX

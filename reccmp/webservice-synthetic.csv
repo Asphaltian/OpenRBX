@@ -47,9 +47,6 @@ address,type,symbol
 0x10031c40,library,?raise@?$Notifier@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@IBEXUStandardOutMessage@2@@Z
 0x10032240,library,?raise@?$Notifier@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@IBEXUStandardOutMessage@2@PAV?$Listener@VStandardOut@RBX@@UStandardOutMessage@2@@2@@Z
 0x1003ea30,library,??1Type@Reflection@RBX@@UAE@XZ
-0x10047760,library,??0?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@IAE@PAV012@@Z
-0x10047760,library,??0?$MemberDescriptorContainer@VSignalDescriptor@Reflection@RBX@@@Reflection@RBX@@IAE@PAV012@@Z
-0x10047760,library,??0?$MemberDescriptorContainer@VPropertyDescriptor@Reflection@RBX@@@Reflection@RBX@@IAE@PAV012@@Z
 0x10047b10,library,??1?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@RBX@@UAE@XZ
 0x10047b10,library,??1DescribedBase@Reflection@RBX@@UAE@XZ
 0x10047dc0,library,??1?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@UAE@XZ

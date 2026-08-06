@@ -4,17 +4,107 @@
 #include "decomp.h"
 #include "reflection/descriptor.h"
 
+#include <algorithm>
 #include <vector>
 
 namespace RBX {
 namespace Reflection {
 
 class ClassDescriptor;
+class DescribedBase;
+
+// SIZE 0x24
+template <class T>
+class MemberDescriptorContainer
+{
+public:
+	typedef std::vector<T*> Collection;
+	typedef typename Collection::iterator Iterator;
+	typedef typename Collection::const_iterator ConstIterator;
+	typedef std::vector<MemberDescriptorContainer*> DerivedContainers;
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10047440
+	// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::compare
+	// clang-format on
+	static bool compare(const T* a, const T* b)
+	{
+		const Name* bn = &b->name;
+		const Name* an = &a->name;
+
+		return an != bn && an->name < bn->name;
+	}
+
+	void declare(T* descriptor);
+
+protected:
+	MemberDescriptorContainer(MemberDescriptorContainer* base);
+
+	void mergeMembers(const MemberDescriptorContainer* source);
+
+	Collection descriptors;                // 0x00
+	DerivedContainers derivedContainers;   // 0x10
+	const MemberDescriptorContainer* base; // 0x20
+};
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x100475e0
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::declare
+// clang-format on
+template <class T>
+void MemberDescriptorContainer<T>::declare(T* descriptor)
+{
+	boost::recursive_mutex::scoped_lock lock(sync());
+
+	Iterator where = std::lower_bound(descriptors.begin(), descriptors.end(), descriptor, compare);
+	if (where == descriptors.end() || *where != descriptor) {
+		descriptors.insert(where, descriptor);
+	}
+
+	for (typename DerivedContainers::iterator it = derivedContainers.begin(); it != derivedContainers.end(); ++it) {
+		(*it)->declare(descriptor);
+	}
+}
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x10047700
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::mergeMembers
+// clang-format on
+template <class T>
+void MemberDescriptorContainer<T>::mergeMembers(const MemberDescriptorContainer* source)
+{
+	for (ConstIterator it = source->descriptors.begin(); it != source->descriptors.end(); ++it) {
+		declare(*it);
+	}
+
+	if (source->base != NULL) {
+		mergeMembers(source->base);
+	}
+}
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x10047760
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>
+// clang-format on
+template <class T>
+MemberDescriptorContainer<T>::MemberDescriptorContainer(MemberDescriptorContainer* base) : base(base)
+{
+	if (base != NULL) {
+		boost::recursive_mutex::scoped_lock lock(sync());
+
+		mergeMembers(base);
+
+		base->derivedContainers.push_back(this);
+	}
+}
 
 // SIZE 0x10
 class __declspec(novtable) MemberDescriptor : public Descriptor
 {
 public:
+	bool isMemberOf(const ClassDescriptor& classDescriptor) const;
+	bool isMemberOf(const DescribedBase* instance) const;
+
 	const Name& category;         // 0x08
 	const ClassDescriptor& owner; // 0x0c
 
@@ -31,35 +121,6 @@ protected:
 };
 
 DECOMP_SIZE_ASSERT(MemberDescriptor, 0x10)
-
-// SIZE 0x24
-template <class T>
-class MemberDescriptorContainer
-{
-public:
-	typedef std::vector<T*> Collection;
-
-	void declare(T& descriptor);
-
-protected:
-	MemberDescriptorContainer(MemberDescriptorContainer* base) : base(base) {}
-
-	Collection descriptors;                                    // 0x00
-	std::vector<MemberDescriptorContainer*> derivedContainers; // 0x10
-	MemberDescriptorContainer* base;                           // 0x20
-};
-
-// clang-format off
-// STUB: WEBSERVICE 0x100475e0
-// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::declare
-// clang-format on
-template <class T>
-DECOMP_NOINLINE void MemberDescriptorContainer<T>::declare(T& descriptor)
-{
-	boost::recursive_mutex::scoped_lock lock(sync());
-
-	STUB(0x100475e0);
-}
 
 } // namespace Reflection
 } // namespace RBX

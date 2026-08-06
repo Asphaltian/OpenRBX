@@ -7,18 +7,47 @@
 namespace RBX {
 namespace Reflection {
 
-// STUB: WEBSERVICE 0x10095a50
+// FUNCTION: WEBSERVICE 0x10095790
+SignalInstance::~SignalInstance()
+{
+}
+
+// FUNCTION: WEBSERVICE 0x10095a50
 SignalInstance* SignalDescriptor::findSignalInstance(const SignalSource* source) const
 {
-	STUB(0x10095a50);
-	return NULL;
+	if (source == NULL) {
+		return NULL;
+	}
+
+	if (source->signals.get() == NULL) {
+		return NULL;
+	}
+
+	SignalSource::SignalMap::const_iterator it = source->signals->find(this);
+
+	if (it == source->signals->end()) {
+		return NULL;
+	}
+
+	return it->second.get();
 }
 
 // FUNCTION: WEBSERVICE 0x10095b90
 SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char* name)
 	: MemberDescriptor(classDescriptor, name, "Signals"), signalCreatedHook(NULL)
 {
-	classDescriptor.MemberDescriptorContainer<SignalDescriptor>::declare(*this);
+	classDescriptor.MemberDescriptorContainer<SignalDescriptor>::declare(this);
+}
+
+// FUNCTION: WEBSERVICE 0x10095e80
+SignalSource::~SignalSource()
+{
+}
+
+// FUNCTION: WEBSERVICE 0x10095ed0
+void SignalSource::disconnect_all_slots()
+{
+	delete signals.release();
 }
 
 } // namespace Reflection

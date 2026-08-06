@@ -28,10 +28,10 @@ std::vector<const EnumDescriptor*>& EnumDescriptor::allEnums()
 	return s;
 }
 
-// STUB: WEBSERVICE 0x100942b0
+// FUNCTION: WEBSERVICE 0x100942b0
 EnumDescriptor::~EnumDescriptor()
 {
-	STUB(0x100942b0);
+	allEnums().erase(std::find(allEnums().begin(), allEnums().end(), this));
 }
 
 // FUNCTION: WEBSERVICE 0x10094390
@@ -51,7 +51,7 @@ PropertyDescriptor::PropertyDescriptor(
 )
 	: MemberDescriptor(classDescriptor, name, category), type(type), bIsPublic(flags), bCanStreamWrite(flags >> 2)
 {
-	classDescriptor.MemberDescriptorContainer<PropertyDescriptor>::declare(*this);
+	classDescriptor.MemberDescriptorContainer<PropertyDescriptor>::declare(this);
 }
 
 } // namespace Reflection
