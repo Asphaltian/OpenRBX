@@ -45,6 +45,8 @@ public:
 		IReferenceBinder& binder
 	) const; // vtable+0x18
 
+	XmlElement* write(const DescribedBase* instance, bool ignoreWriteProtection) const;
+
 	bool isPublic() const { return bIsPublic; }
 	bool canStreamWrite() const { return bCanStreamWrite; }
 

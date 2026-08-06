@@ -10,12 +10,18 @@ class Instance;
 class InstanceHandle
 {
 public:
+	InstanceHandle() {}
 	InstanceHandle(Instance* target);
 
 	void linkTo(boost::shared_ptr<Instance> value);
 
 	bool empty() const;
+
+	boost::shared_ptr<Instance> getTarget() const { return target; }
+
 	bool operatorLess(const InstanceHandle& other) const;
+
+	bool operator<(const InstanceHandle& other) const { return operatorLess(other); }
 
 private:
 	boost::shared_ptr<Instance> target; // 0x00

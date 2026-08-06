@@ -1,6 +1,7 @@
 #include "reflection/enumconverter.h"
 #include "reflection/object.h"
 #include "reflection/property.h"
+#include "v8xml/XmlElement.h"
 
 namespace RBX {
 namespace Reflection {
@@ -18,6 +19,28 @@ const Type& Type::singleton<const PropertyDescriptor*>()
 	static Type type("Property", typeid(const PropertyDescriptor*));
 
 	return type;
+}
+
+// FUNCTION: WEBSERVICE 0x100941a0
+XmlElement* PropertyDescriptor::write(const DescribedBase* instance, bool ignoreWriteProtection) const
+{
+	if (!ignoreWriteProtection) {
+		if (isReadOnly()) {
+			return NULL;
+		}
+
+		if (!canStreamWrite()) {
+			return NULL;
+		}
+	}
+
+	XmlElement* element = new XmlElement(type.tag);
+
+	element->addAttribute<const RBX::Name*>(name_name, &name);
+
+	writeValue(instance, element);
+
+	return element;
 }
 
 // FUNCTION: WEBSERVICE 0x10094250

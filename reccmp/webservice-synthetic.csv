@@ -516,3 +516,7 @@ address,type,symbol
 0x10224330,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4TopBottom@Feature@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x10224340,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x102256e0,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
+0x10096090,synthetic,??1IDREFItem@MergeBinder@RBX@@QAE@XZ
+0x10097700,synthetic,??1MergeBinder@RBX@@QAE@XZ
+0x10097bc0,synthetic,??0ArchiveBinder@@QAE@XZ
+0x10098570,synthetic,??1ArchiveBinder@@QAE@XZ

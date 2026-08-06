@@ -17,6 +17,7 @@ namespace Reflection {
 // RBX::Reflection::ClassDescriptor::`scalar deleting destructor'
 
 // VTABLE: WEBSERVICE 0x1022e264
+// class ClassDescriptor
 // SIZE 0x88
 class ClassDescriptor : public Descriptor,
 						public MemberDescriptorContainer<PropertyDescriptor>,
@@ -26,7 +27,10 @@ class ClassDescriptor : public Descriptor,
 public:
 	ClassDescriptor(ClassDescriptor& base, const char* name);
 
-	virtual DECOMP_NOINLINE ~ClassDescriptor(); // vtable+0x00
+	// STUB: WEBSERVICE 0x10005bd0
+	virtual ~ClassDescriptor() // vtable+0x00
+	{
+	}
 
 	const ClassDescriptor* getBase() const { return base; }
 

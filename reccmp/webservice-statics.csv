@@ -448,3 +448,5 @@ address,type,name
 0x10301b08,global,showedMessage
 0x10301b18,global,errorUploader
 0x10301bd8,global,registerFactoryObjects
+0x102d20b0,global,_base64Chars
+0x10301878,global,root

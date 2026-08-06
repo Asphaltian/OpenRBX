@@ -114,6 +114,25 @@ void Instance::predelete()
 	STUB(0x1004e0f0);
 }
 
+// STUB: WEBSERVICE 0x1004e5e0
+DECOMP_NOINLINE void Instance::readChild(const XmlElement* element, IReferenceBinder& binder)
+{
+	STUB(0x1004e5e0);
+}
+
+// STUB: WEBSERVICE 0x1004e6e0
+void Instance::readChildren(const XmlElement* element, IReferenceBinder& binder)
+{
+	if (element != NULL) {
+		const XmlElement* item = element->findFirstChildByTag(tag_Item);
+
+		while (item != NULL) {
+			readChild(item, binder);
+			item = element->findNextChildWithSameTag(item);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1004e7b0
 void Instance::predelete(Instance* instance)
 {

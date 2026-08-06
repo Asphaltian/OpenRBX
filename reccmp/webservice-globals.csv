@@ -1006,6 +1006,7 @@ address,type,symbol
 0x1023454c,global,??_7?$DescribedCreatable@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1023455c,global,??_7?$DescribedCreatable@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x10234848,global,__real@3e7ad7f29abcaf48
+0x10234954,global,??_7XmlParser@@6B@
 0x10234cb0,global,??_7?$FactoryProduct@VMessage@RBX@@VInstance@2@$1?sMessage@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10234cc0,global,??_7?$FactoryProduct@VMessage@RBX@@VInstance@2@$1?sMessage@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x10234cd0,global,??_7?$FactoryProduct@VMessage@RBX@@VInstance@2@$1?sMessage@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
@@ -3305,6 +3306,8 @@ address,type,symbol
 0x102c8b94,global,information___RBX::Log::writeEntry
 0x102c8b98,global,warning___RBX::Log::writeEntry
 0x102c8b9c,global,error___RBX::Log::writeEntry
+0x102c8d10,global,??_R0?AVVector3@G3D@@@8
+0x102c8e20,global,??_R0?AVColor3@G3D@@@8
 0x102c8e3c,global,??_R0?AVBrickColor@RBX@@@8
 0x102c8ea8,global,??_R0?AW4NormalId@RBX@@@8
 0x102c8f30,global,?sLighting@RBX@@3PADA
@@ -3493,6 +3496,7 @@ address,type,symbol
 0x102f1be4,global,___native_vcclrit_reason
 0x102f1db0,global,?aggregationSize@AggregatingSceneManager@Render@RBX@@2IA
 0x102f226c,global,?logsEnabled@LogManager@@0_NA
+0x102f33b0,global,??_R0?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@8
 0x102f4fd0,global,??_R0X@8
 0x102f4fdb,global,firstTime___initRoblox
 0x102f4fdc,global,?__hdlrEntry_CWebService_35@@3U_HANDLER_ENTRY@ATL@@A
@@ -3537,7 +3541,7 @@ address,type,symbol
 0x102f567c,global,type___RBX::Reflection::Type::singleton<double>
 0x102f568c,global,??_B?1???$singleton@N@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f5690,global,type___RBX::Reflection::Type::singleton<RBX::ContentId>
-0x102f56a4,global,"type___RBX::Reflection::Type::singleton<std::basic_string<char,std::char_traits<char>,std::allocator<char>"
+0x102f56a4,global,"type___RBX::Reflection::Type::singleton<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >"
 0x102f56b8,global,type___RBX::Reflection::Type::singleton<G3D::Vector3>
 0x102f56cc,global,type___RBX::Reflection::Type::singleton<G3D::Color3>
 0x102f56e0,global,"type___RBX::Reflection::Type::singleton<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value>"
@@ -4831,7 +4835,6 @@ address,type,symbol
 0x1030181c,global,??_B?1??singleton@ContentProvider@RBX@@SAAAV12@XZ@51
 0x10301820,global,sing___RBX::ContentProvider::singleton
 0x10301874,global,??_B?1??rootDescriptor@ClassDescriptor@Reflection@RBX@@SAAAV123@XZ@51
-0x10301878,global,?root@?1??rootDescriptor@ClassDescriptor@Reflection@RBX@@SAAAV234@XZ@4V234@A
 0x10301900,global,??_B?1??classDescriptor@?$Described@VThumbnailGenerator@@$1?sThumbnailGenerator@@3QBDBV?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x10301908,global,?foo@?1??classDescriptor@?$Described@VThumbnailGenerator@@$1?sThumbnailGenerator@@3QBDBV?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@@Reflection@RBX@@SAAAVClassDescriptor@34@XZ@4V534@A
 0x10301990,global,??_B?1??classDescriptor@?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
@@ -4912,3 +4915,4 @@ address,type,symbol
 0x10302001,global,__tls_end
 0x44c71023,global,"d___RBX::Reflection::Described<RBX::Tool,&RBX::sTool,RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool> >::classDescriptor"
 0x44c71025,global,"d___RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor"
+0x10236354,global,??_7ArchiveBinder@@6B@

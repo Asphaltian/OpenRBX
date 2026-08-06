@@ -129,6 +129,9 @@ set(OPENRBX_APP_SOURCES
   common/app/reflection/type.cpp
   common/app/util/Debug.cpp
   common/app/v8tree/enumproperty.cpp
+  common/app/v8xml/XmlElement.cpp
+  common/app/v8xml/SerializerV2.cpp
+  common/app/v8xml/XmlSerializer.cpp
   common/app/v8tree/Instance.cpp
   common/app/util/ExponentialRunningAverage.cpp
   common/app/util/Extents.cpp
@@ -141,6 +144,8 @@ set(OPENRBX_APP_SOURCES
   common/app/util/Name.cpp
   common/app/util/NormalId.cpp
   common/app/util/Quaternion.cpp
+  common/app/util/ContentProvider.cpp
+  common/app/util/Utilities.cpp
   common/app/util/Profiling.cpp
   common/app/util/Rect.cpp
   common/app/util/RunningAverage.cpp

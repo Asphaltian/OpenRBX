@@ -6,12 +6,6 @@ namespace Reflection {
 // GLOBAL: WEBSERVICE 0x102f59a1
 bool ClassDescriptor::lockedDown;
 
-// STUB: WEBSERVICE 0x10005bd0
-ClassDescriptor::~ClassDescriptor()
-{
-	STUB(0x10005bd0);
-}
-
 // FUNCTION: WEBSERVICE 0x10047430
 bool ClassDescriptor::operator==(const ClassDescriptor& other) const
 {

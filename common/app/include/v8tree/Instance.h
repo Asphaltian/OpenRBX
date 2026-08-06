@@ -112,6 +112,8 @@ public:
 	}
 
 	void readProperties(const XmlElement* element, IReferenceBinder& binder);
+	void readChild(const XmlElement* element, IReferenceBinder& binder);
+	void readChildren(const XmlElement* element, IReferenceBinder& binder);
 	void writeChildren(XmlElement* element);
 
 	bool contains(const Instance* instance) const;

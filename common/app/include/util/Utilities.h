@@ -1,8 +1,11 @@
 #ifndef UTIL_UTILITIES_H
 #define UTIL_UTILITIES_H
 
+#include "decomp.h"
+
 #include <boost/shared_ptr.hpp>
 #include <iosfwd>
+#include <string>
 
 namespace RBX {
 
@@ -30,6 +33,14 @@ public:
 
 private:
 	boost::shared_ptr<T> object; // 0x00
+};
+
+template <class T>
+class StringConverter
+{
+public:
+	static std::string convertToString(const T& value);
+	static bool convertToValue(const std::string& text, T& value);
 };
 
 } // namespace RBX
