@@ -23,7 +23,7 @@ DECOMP_SIZE_ASSERT(Object, 0x04)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1006c2e0
-// RBX::shared_from<RBX::Instance>
+// RBX::shared_from<RBX::GuiItem>
 // clang-format on
 template <class T>
 boost::shared_ptr<T> shared_from(T* r)

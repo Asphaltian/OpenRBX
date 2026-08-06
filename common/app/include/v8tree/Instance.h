@@ -99,6 +99,11 @@ public:
 
 	Instance* getParent() const { return parent; }
 
+	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }
+
+	// FUNCTION: WEBSERVICE 0x10048320
+	unsigned int numChildren() const { return children.read() != NULL ? children.read()->size() : 0; }
+
 	// STUB: WEBSERVICE 0x100469f0
 	DECOMP_NOINLINE void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
 	{

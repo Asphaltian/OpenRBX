@@ -1,5 +1,7 @@
 #include "gui/GUI.h"
 
+#include "util/object.h"
+
 #include <G3D/g3dmath.h>
 #include <math.h>
 
@@ -98,9 +100,23 @@ void GuiItem::onDescendentRemoving(const shared_ptr<Instance>& instance)
 }
 
 // STUB: WEBSERVICE 0x100d1b80
-DECOMP_NOINLINE GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
+GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
 {
-	STUB(0x100d1b80);
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		GuiItem* item = dynamic_cast<GuiItem*>((*getChildren().read())[i].get());
+
+		if (item != NULL && item != focus.get()) {
+			GuiResponse itemResponse = item->process(event);
+
+			if (itemResponse.wasUsed()) {
+				loseFocus();
+				focus = shared_from(item);
+				focus->loseFocus();
+
+				return itemResponse;
+			}
+		}
+	}
 
 	return GuiResponse::notUsed();
 }

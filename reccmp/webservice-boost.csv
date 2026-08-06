@@ -1461,7 +1461,7 @@ address,size,type,symbol,name
 0x1006b7f0,171,library,,"boost::shared_ptr<RBX::Camera>::shared_ptr<RBX::Camera><RBX::Camera,RBX::Creatable<RBX::Instance>::Deleter>"
 0x1006b950,171,library,,"boost::shared_ptr<RBX::ControllerService>::shared_ptr<RBX::ControllerService><RBX::ControllerService,RBX::Creatable<RBX::Instance>::Deleter>"
 0x10009a30,41,library,,boost::enable_shared_from_this<RBX::Instance>::shared_from_this
-0x1005b1e0,44,library,,"boost::shared_static_cast<RBX::Instance,RBX::Instance>"
+0x1005b1e0,44,library,,"boost::shared_static_cast<RBX::GuiItem,RBX::Instance>"
 0x10076570,171,library,,"boost::shared_ptr<RBX::Snap>::shared_ptr<RBX::Snap><RBX::Snap,RBX::Creatable<RBX::Instance>::Deleter>"
 0x100767e0,171,library,,"boost::shared_ptr<RBX::Weld>::shared_ptr<RBX::Weld><RBX::Weld,RBX::Creatable<RBX::Instance>::Deleter>"
 0x10076a50,171,library,,"boost::shared_ptr<RBX::Glue>::shared_ptr<RBX::Glue><RBX::Glue,RBX::Creatable<RBX::Instance>::Deleter>"
