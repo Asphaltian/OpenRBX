@@ -2,6 +2,7 @@
 #define UTIL_RECT_H
 
 #include <G3D/Vector2.h>
+#include <G3D/Vector2int16.h>
 
 namespace RBX {
 
@@ -28,6 +29,12 @@ public:
 	Rect(float lowX, float lowY, float highX, float highY) : low(lowX, lowY), high(highX, highY) {}
 
 	static Rect fromLowSize(const Vector2& low, const Vector2& size) { return Rect(low, low + size); }
+
+	// STUB: WEBSERVICE 0x100d0f60
+	bool pointInRect(G3D::Vector2int16 point) const
+	{
+		return point.x >= low.x && point.x <= high.x && point.y >= low.y && point.y <= high.y;
+	}
 
 	Rect positionChild(const Rect& child, Location xLocation, Location yLocation) const;
 };

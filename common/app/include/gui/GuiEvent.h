@@ -2,11 +2,20 @@
 #define GUI_GUIEVENT_H
 
 #include "decomp.h"
+#include "util/UIEvent.h"
 
 namespace RBX {
 
-class GuiEvent;
 class GuiItem;
+
+// SIZE 0x18
+class GuiEvent : public UIEvent
+{
+public:
+	void* iDataState; // 0x14
+};
+
+DECOMP_SIZE_ASSERT(GuiEvent, 0x18)
 
 // SIZE 0x8
 class GuiResponse
@@ -22,6 +31,15 @@ public:
 	bool wasUsed() const { return response != NOT_USED; }
 
 	GuiItem* getTarget() const { return target; }
+
+	static GuiResponse notUsed() { return GuiResponse(NOT_USED, NULL); }
+	static GuiResponse used() { return GuiResponse(USED, NULL); }
+	static GuiResponse used(GuiItem* target) { return GuiResponse(USED, target); }
+
+private:
+	GuiResponse(ResponseType response, GuiItem* target) : response(response), target(target) {}
+
+public:
 
 private:
 	ResponseType response; // 0x00

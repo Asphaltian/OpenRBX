@@ -97,4 +97,58 @@ void GuiItem::onDescendentRemoving(const shared_ptr<Instance>& instance)
 	Instance::onDescendentRemoving(instance);
 }
 
+// STUB: WEBSERVICE 0x100d1b80
+DECOMP_NOINLINE GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
+{
+	STUB(0x100d1b80);
+
+	return GuiResponse::notUsed();
+}
+
+// STUB: WEBSERVICE 0x100d1cf0
+GuiResponse GuiItem::process(const GuiEvent& event)
+{
+	if (event.isMouseEvent() && event.eventType == UIEvent::MOUSE_IDLE) {
+		return GuiResponse::notUsed();
+	}
+
+	if (focus != NULL) {
+		if (focus->canLoseFocus()) {
+			GuiResponse nonFocus = processNonFocus(event);
+
+			if (nonFocus.wasUsed()) {
+				return nonFocus;
+			}
+		}
+
+		GuiResponse focusResponse = focus->process(event);
+
+		if (focusResponse.wasUsed()) {
+			return focusResponse;
+		}
+
+		loseFocus();
+	}
+
+	return processNonFocus(event);
+}
+
+// FUNCTION: WEBSERVICE 0x100d1de0
+GuiResponse TopMenuBar::process(const GuiEvent& event)
+{
+	if (isVisible()) {
+		GuiResponse childResponse = GuiItem::process(event);
+
+		if (childResponse.wasUsed()) {
+			return childResponse;
+		}
+
+		if (backdropColor.a > 0 && event.isMouseEvent() && getMyRect().pointInRect(event.mousePosition)) {
+			return GuiResponse::used();
+		}
+	}
+
+	return GuiResponse::notUsed();
+}
+
 } // namespace RBX
