@@ -231,8 +231,14 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Team,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100be1a0
 	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::getset<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>
+	// STUB: WEBSERVICE 0x100ca3f0
+	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::GetSetImpl<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100ca830
 	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::getset<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>
+	// STUB: WEBSERVICE 0x100cd3c0
+	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::getValue
+	// STUB: WEBSERVICE 0x100cd400
+	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100cd6e0
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100d7fa0

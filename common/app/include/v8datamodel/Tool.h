@@ -14,7 +14,7 @@ namespace RBX {
 extern const char sTool[];
 
 // SIZE 0x238
-class Tool : public BackpackItem,
+class Tool : public DescribedCreatable<Tool, BackpackItem, sTool>,
 			 public IEquipable,
 			 public IRenderable,
 			 virtual public ILocation,

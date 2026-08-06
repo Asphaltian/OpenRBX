@@ -121,6 +121,7 @@ endif()
 
 set(OPENRBX_APP_SOURCES
   common/app/security/SecurityContext.cpp
+  common/app/gui/GUI.cpp
   common/app/humanoid/Humanoid.cpp
   common/app/reflection/reflection_function.cpp
   common/app/reflection/reflection_object.cpp
@@ -307,6 +308,7 @@ set(OPENRBX_ENGINE_INCLUDE_DIRS
   "${PROJECT_SOURCE_DIR}/common/rbxview/include"
   "${PROJECT_SOURCE_DIR}/common/renderlib/include"
   "${PROJECT_SOURCE_DIR}/common/appdraw/include"
+  "${PROJECT_SOURCE_DIR}/common/rbxgraphics/include"
   "${PROJECT_SOURCE_DIR}/3rdparty/RakNet30/Source"
   "${PROJECT_SOURCE_DIR}/util"
 )

@@ -97,6 +97,8 @@ public:
 
 	static Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> event_propertyChanged;
 
+	Instance* getParent() const { return parent; }
+
 	// STUB: WEBSERVICE 0x100469f0
 	DECOMP_NOINLINE void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
 	{

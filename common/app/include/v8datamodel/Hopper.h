@@ -2,6 +2,9 @@
 #define V8DATAMODEL_HOPPER_H
 
 #include "decomp.h"
+#include "gui/GuiDraw.h"
+#include "gui/Widget.h"
+#include "util/TextureId.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
@@ -15,10 +18,14 @@ extern const char sHopperBin[];
 extern const char sBackpackItem[];
 
 // SIZE 0x168
-class BackpackItem : public Instance
+class BackpackItem : public DescribedNonCreatable<BackpackItem, Widget, sBackpackItem>
 {
+public:
+	const TextureId& getTextureId() const { return textureId; }
+
 private:
-	undefined m_unk0x0f8[0x168 - 0x0f8]; // 0x0f8
+	GuiDrawImage guiImageDraw; // 0x110
+	TextureId textureId;       // 0x148
 };
 
 DECOMP_SIZE_ASSERT(BackpackItem, 0x168)

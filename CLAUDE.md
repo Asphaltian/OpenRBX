@@ -214,6 +214,7 @@ Each of these cost a round trip. Keep the sources clean and leave the reasoning 
 - **Locals are pushed in declaration order.** Getting the order wrong leaves an extra value on the x87 stack and shifts every later `st(n)` operand, which reads as a large diff for a one-line cause.
 - **A literal one ULP wrong reads as a naming problem.** When reccmp fails to resolve one side's operand, read the constant out of the image; a constant it renders on both sides is already proven equal.
 - **`x = x * -1.0f` is not `x = -x`.** The multiply hoists the constant into an x87 register kept live across the enclosing loops and spends one `fmul st(n), st(0)` per flip; the unary negate emits `fchs`, which only reaches st(0) and so drags an `fxch` in with it. A run of sign flips at different stack depths is the multiply.
+- **A scalar on the left of a vector binds G3D's free `operator*`, not the member overload,** and the two schedule differently. `(0.01f * percent) * v` loads the scalar once and multiplies both components from it; `percent * 0.01f * v` reassociates under `/fp:fast` and folds the scalar into each product separately. `GuiRoot::toPixelSize` sat at 94 on that one difference.
 - **`RBX::Math::sign` returns `float`.** `G3D::sign` returns double, which loads a qword where the float one loads a dword.
 - **Every float to int conversion goes through `G3D::iRound`,** which is `lrintf` in `g3dmath.h`, an `__inline` spelling `fld`/`fistp`. A C cast lowers to `call __ftol2_sse` and no spelling of it will ever match. The float overload loads a dword, so the argument has to reach it as a `float`: `float f = floor(x);` then `iRound(f)` gives `fstp dword`, reload, `fistp`. The `inlasm` flag names the thirteen App and RbxView functions that use it.
 
@@ -281,6 +282,7 @@ Where the line records show lines that generate no code, the original named some
 - **A `switch` case is not a scope MSVC 8 reuses a temporary in.** Six bodies written as case bodies give four `Vector3` slots each where the same six at function scope share four. The frame size is the evidence, and dispatching with `case NORM_X: goto x;` over labelled statements below is the one sanctioned goto.
 - **The comma operator decides how many temporaries stay live.** `c0 = f(4), c1 = f(6), c2 = f(7), c3 = f(5);` keeps four alive at once where four statements reuse one.
 - **A `for` increment is attributed to the last statement of the body,** not to the `for` line. A loop with no record at its `_Inc` call has its step written out at the bottom of a `while`.
+- **Branches that leave the x87 stack at different depths cannot merge,** so MSVC clones the statement after the `if` into both arms rather than jumping to a shared tail. Two copies of one line number in the line records is that, not two statements, and a merged tail in ours means the arms are computing the same shape where the original's differ.
 - **A guard written as `break` out of `do { } while (0)`** makes the whole body a loop body, so MSVC hoists every callee-saved push to the loop preheader as one group instead of shrink-wrapping per register. An `if (p != NULL) { ... }` around the same body moves two stack displacements and the pop order.
 - **`std::for_each` passes its iterators through `_Unchecked`.** A raw node walk with none of the `_invalid_parameter_noinfo` checks the file's other loops carry is `for_each` plus `std::mem_fun`, not a written-out `for`.
 - **An if/else tail merge hoists the shared setup above the branch.** A ternary emits the whole address selection up front and costs the function its register assignment as well.
@@ -292,6 +294,7 @@ Where the line records show lines that generate no code, the original named some
 
 - **Abstract bases carry `__declspec(novtable)`.** Without it the constructor stores a vftable the binary never stores, and any derived destructor gains a base vftable store plus a whole SEH frame, which reads as a fifty percent diff. Do not delete virtuals to force the number.
 - **A `ComputeProp` member records its owner's inheritance shape.** MSVC sizes the pointer-to-member by how the class inherits, so `ComputeProp<float, Primitive>` is 16 bytes and `ComputeProp<float, Assembly>` is 24. A class size off by that difference means a base is missing.
+- **Virtual slots follow declaration order, not access order,** exactly as data members do. Declaring a public override above the protected block it belongs under moves every slot below it, which reads as one wrong `call [eax+N]` in an otherwise perfect body. The field list gives each slot's `vfptr offset`, so the order is recorded rather than inferred.
 - **A gap between a class's last member and its recorded size is a vtordisp, not padding.** MSVC inserts four bytes ahead of each virtual base whose virtuals the class overrides, when the class also has a constructor or destructor. `LF_VBCLASS` names the virtual bases and its `vbpoff` names the vbptr slot the member list leaves as a hole; an empty virtual base costs nothing, so the arithmetic only closes once the vtordisps are counted. `RBX::Tool` ends its members at 0x230 and is 0x238: one vtordisp plus a four byte `ILocation`, with `ISelectable3d` free.
 - **A derived class starts its own members at the base's non-virtual size,** below the base's `sizeof`, because the virtual bases move to the tail of the most derived object. `RBX::Flag` puts `evilClone` at 0x230 inside a `RBX::Tool` the type records call 0x238, and the two disagree by exactly the tail the vbases vacated.
 - **`Math` and `Units` are classes of static members, not namespaces.** The difference is visible: a class's magic-static guard mangles a name reccmp can pair, where a namespace function's guard is `$S` and anonymous. A guard defined in a `.cpp` stays anonymous whatever the scope.
@@ -389,6 +392,7 @@ Smoke test the result by loading it: the DLL has to map at 0x10000000, resolve e
 Every registered class hangs off one chain: `X` to `DescribedCreatable<X, Base, sX>` to `Described<X, sX, FactoryProduct<X, Base, sX>>` to `FactoryProduct<X, Base, sX>` to `Base`. None of the three templates adds a byte. They live in `include/util/object.h`, `include/reflection/reflection.h` and `include/v8tree/Instance.h`, and each class's copies are emitted from its own `.cpp`.
 
 - **Wire a class from the type records and the contribution table,** rebasing one the tree already declares rather than duplicating it. A class whose base is not declared yet cannot be wired at all. One base unlocks a family at a time.
+- **`Described<T, sName, Base>::classDescriptor` names its local static `foo`,** in all 98 instantiations. The name reaches the mangling of the static, of its guard and of its atexit destructor, so getting it wrong costs every one of those three a pairing.
 - **`TypedPropertyDescriptor<T>::GetSet` has no virtual destructor,** and its first slot is `isReadOnly`, which the descriptor forwards to. Declaring the destructor turns every `dynamic atexit destructor for 'prop_X'` into a null test, a virtual deleting call and an SEH frame where the original spends one `operator delete`.
 - **`PropDescriptor` builds its `GetSet` in a static `getset` helper,** not inline in the constructor's initializer list. Inlining it costs the constructor its whole frame and reads as a sixty point diff.
 - **The chain's namerefs live in one block per header** and a generator has to rewrite the whole block, so a class it skips still has to be counted or its nameref is dropped. Write a nameref only where the address already reaches 100%.
@@ -426,6 +430,7 @@ common/appdraw/      # AppDraw
 common/network/      # Network
 common/rbxview/      # RbxView
 common/renderlib/    # RenderLib
+common/rbxgraphics/  # Headers only; its code was compiled into AppDraw and RenderLib
 common/win/          # VersionInfo
 WebService/          # The DLL project, plus library_msvc.h and WebServiceMaps.cpp
 util/                # decomp.h, decomp.cpp, compat.h

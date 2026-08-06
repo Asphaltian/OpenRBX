@@ -11,7 +11,7 @@ namespace RBX {
 extern const char sFlag[];
 
 // SIZE 0x260
-class Flag : public Tool
+class Flag : public DescribedCreatable<Flag, Tool, sFlag>
 {
 public:
 	BrickColor getTeamColor() const { return teamColor; }
