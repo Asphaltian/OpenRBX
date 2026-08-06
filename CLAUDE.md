@@ -334,6 +334,10 @@ Rules that bite:
 - **A vendored function from a prebuilt library has no `S_GPROC32`,** only a public, so its row has no size. reccmp still names the call, but handing it every unsized row lets `reccmp-vtable` pair ATL and STL tables it cannot resolve. They go in one at a time, listed in `UNSIZED_KEEP`.
 - **A label with commas has to be quoted.** Otherwise the symbol reaching reccmp is a prefix that matches nothing and the row silently does nothing.
 - **A vendored vftable goes in one at a time,** listed in `VENDORED_VTABLES`, for the same reason.
+- **Two overloads of one template function share a 255-char prefix and pair in address order,** so a link that emits them in the opposite order crosses them: the caller's diff prints one overload's signature against the other's. Blank the symbol on the row whose pairing is wrong and give that address a bare-name row in `webservice-statics.csv`; the surviving symbol row then pairs correctly and the blanked one takes what is left.
+- **A dynamic initializer and its atexit destructor pair by name, not by symbol,** because neither reaches the PDB as a public. They take a `// SYNTHETIC:` nameref in the owning header, or `// LIBRARY:` in `library_msvc.h` for CRT, ATL and G3D, and a row in `webservice-synthetic.csv` does nothing for them.
+- **A file static an initializer stores through needs its own row before that initializer can match.** The diff prints `<OFFSET>` on the original's side against the resolved name on ours, and the name to use is the one already on the `+` line. Statics with no public go in `webservice-statics.csv` by bare name; class statics and vftables go in `webservice-globals.csv` by mangled symbol.
+- **Where our link folds two functions the original kept apart, only one of them can ever be claimed.** The recompiled entity is already paired, so the second original has no counterpart to match and is not a gap a row can close.
 
 reccmp is `Asphaltian/reccmp@msvc800`, a fork, and `tools/requirements.txt` pins that branch.
 
