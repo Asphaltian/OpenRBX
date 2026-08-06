@@ -441,6 +441,8 @@ address,type,name
 0x10301470,global,mainLogManager
 0x10301474,global,standardOutLog
 0x10301478,global,dotVersion
+0x10301494,global,_AtlModule
+0x103014c0,global,theExtension
 0x10301878,global,root
 0x10301a2c,global,creators
 0x10301ab8,global,bDynArrWrapper

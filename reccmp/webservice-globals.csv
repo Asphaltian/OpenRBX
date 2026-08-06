@@ -3231,6 +3231,10 @@ address,type,symbol
 0x10261674,global,?___Roblox_CWebService_GetStandardOutMessages_atlsoapheader_map@Roblox@@3U_soapmap@@B
 0x10261854,global,?_entries@?1??_GetEntries@?$CSoapHandler@VCWebService@Roblox@@@ATL@@SGPBU_ATL_INTMAP_ENTRY@3@XZ@4QBU43@B
 0x10261878,global,?_entries@?1??_GetEntries@?$CSDLGenerator@VCWebService@Roblox@@$1?s_szClassNameWSDL34@@3QBDB@ATL@@SGPBU_ATL_INTMAP_ENTRY@3@XZ@4QBU43@B
+0x10261b84,global,??_7CDllMainOverride@@6B@
+0x10261ba0,global,??_7CRbxIsapiExtension@@6BIServiceProvider@@@
+0x10261bdc,global,??_7CRbxIsapiExtension@@6BIIsapiExtension@ATL@@@
+0x10261c24,global,??_7CRbxIsapiExtension@@6BIRequestStats@ATL@@@
 0x10262330,global,__GUID_7424937a_e183_3486_a98f_2c3b62ad01f3
 0x10262340,global,__GUID_2b75c68d_0ddf_48d6_b58a_cc7c2387a6f2
 0x10262350,global,__GUID_6d5140c1_7436_11ce_8034_00aa006009fa
