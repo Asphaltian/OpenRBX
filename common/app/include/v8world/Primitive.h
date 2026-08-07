@@ -226,9 +226,13 @@ public:
 	Face getFaceInObject(NormalId normalId);
 	Face getFaceInWorld(NormalId normalId);
 
+protected:
 	float computeJointK() const;
 
+private:
 	Extents computeFuzzyExtents() const;
+
+public:
 	const Extents& getFastFuzzyExtents() const;
 
 	void setSurfaceData(NormalId normalId, const SurfaceData& value);
@@ -250,7 +254,10 @@ public:
 
 	void setCoordinateFrame(const CoordinateFrame& value);
 
+private:
 	Vector3 clipToSafeSize(const Vector3& size);
+
+public:
 	void setGridSize(const Vector3& size);
 
 	void setController(Controller* value);
@@ -259,8 +266,10 @@ public:
 	// FUNCTION: WEBSERVICE 0x100a8240
 	virtual float getRadius() const { return geometry->getRadius(); } // vtable+0x0c
 
+private:
 	RigidJoint* getFirstRigidAt(Edge* edge) const;
 
+public:
 	Edge* getFirstEdge() const;
 	Edge* getNextEdge(Edge* edge) const;
 	Joint* getFirstJoint() const;

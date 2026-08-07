@@ -56,6 +56,7 @@ public:
 		processIDREF(valueIDREF, propertyOwner, idref);
 	}
 
+protected:
 	// FUNCTION: WEBSERVICE 0x10097200
 	virtual bool processID(const XmlNameValuePair* valueID, Instance* source) // vtable+0x0c
 	{
