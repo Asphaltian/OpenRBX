@@ -358,9 +358,9 @@ bool XmlElement::isXsiNil() const
 {
 	const XmlAttribute* attribute = findAttribute(name_xsinil);
 
-	bool value;
+	bool isNil;
 
-	return attribute != NULL && attribute->getValue(value) && value;
+	return attribute != NULL && attribute->getValue(isNil) && isNil;
 }
 
 // STUB: WEBSERVICE 0x1008fe70

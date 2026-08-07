@@ -145,31 +145,31 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId n
 	const CoordinateFrame& coord0 = p0->getCoordinateFrame();
 	const CoordinateFrame& coord1 = p1->getCoordinateFrame();
 
-	Vector3 axis0 = Math::getWorldNormal(nId0, coord0);
-	Vector3 axis1 = Math::getWorldNormal(nId1, coord1);
+	Vector3 n0 = Math::getWorldNormal(nId0, coord0);
+	Vector3 n1 = Math::getWorldNormal(nId1, coord1);
 
-	if (0.025f < Math::angle(axis0, -axis1)) {
+	if (0.025f < Math::angle(n0, -n1)) {
 		return NULL;
 	}
 
-	Face face0 = p0->getFaceInWorld(nId0);
-	Face face1 = p1->getFaceInWorld(nId1);
+	Face f0 = p0->getFaceInWorld(nId0);
+	Face f1 = p1->getFaceInWorld(nId1);
 
-	if (!Face::hasOverlap(face0, face1, 0.35f)) {
+	if (!Face::hasOverlap(f0, f1, 0.35f)) {
 		return NULL;
 	}
 
-	if (!Face::overlapWithinPlanes(face0, face1, 0.05f)) {
+	if (!Face::overlapWithinPlanes(f0, f1, 0.05f)) {
 		return NULL;
 	}
 
-	Vector3 center0 = face0.center();
-	Vector3 center1 = face1.center();
+	Vector3 center0 = f0.center();
+	Vector3 center1 = f1.center();
 
-	bool contains0 = face1.fuzzyContainsInExtrusion(center0, 0.05f);
-	bool contains1 = face0.fuzzyContainsInExtrusion(center1, 0.05f);
+	bool touchCenter0 = f1.fuzzyContainsInExtrusion(center0, 0.05f);
+	bool contains1 = f0.fuzzyContainsInExtrusion(center1, 0.05f);
 
-	bool axle0 = surfaceType0 >= ROTATE && contains0;
+	bool axle0 = surfaceType0 >= ROTATE && touchCenter0;
 	bool axle1 = surfaceType1 >= ROTATE && contains1;
 
 	if (!axle0 && !axle1) {
@@ -181,35 +181,35 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId n
 		std::swap(p0, p1);
 		std::swap(nId0, nId1);
 		std::swap(center0, center1);
-		std::swap(axis0, axis1);
+		std::swap(n0, n1);
 	}
 
-	CoordinateFrame jointCoord0 = p0->getFaceCoordInObject(nId0);
+	CoordinateFrame axleInP0 = p0->getFaceCoordInObject(nId0);
 
-	Vector3 worldPos0 = p0->getCoordinateFrame().pointToWorldSpace(jointCoord0.translation);
-	Vector3 objectPos = p1->getCoordinateFrame().pointToObjectSpace(worldPos0);
+	Vector3 axlePtWorld = p0->getCoordinateFrame().pointToWorldSpace(axleInP0.translation);
+	Vector3 axlePtInP1 = p1->getCoordinateFrame().pointToObjectSpace(axlePtWorld);
 
 	NormalId oppositeId = normalIdOpposite(nId1);
 
-	CoordinateFrame jointCoord1(normalIdToMatrix3(oppositeId), Math::toGrid(objectPos, 0.1f));
+	CoordinateFrame holeInP1(normalIdToMatrix3(oppositeId), Math::toGrid(axlePtInP1, 0.1f));
 
-	Vector3 worldPos1 = p1->getCoordinateFrame().pointToWorldSpace(jointCoord1.translation);
+	Vector3 holePtWorld = p1->getCoordinateFrame().pointToWorldSpace(holeInP1.translation);
 
-	if (Tolerance::pointsUnaligned(worldPos0, worldPos1)) {
+	if (Tolerance::pointsUnaligned(axlePtWorld, holePtWorld)) {
 		return NULL;
 	}
 
 	for (int i = 0; i < 2; ++i) {
 		float offset = i == 0 ? 1.0f : -1.0f;
-		Vector3 p0 = worldPos0 - axis0 * offset;
-		Vector3 p1 = worldPos1 + axis1 * offset;
+		Vector3 ref0 = axlePtWorld - n0 * offset;
+		Vector3 ref1 = holePtWorld + n1 * offset;
 
-		if (Tolerance::pointsUnaligned(p0, p1)) {
+		if (Tolerance::pointsUnaligned(ref0, ref1)) {
 			return NULL;
 		}
 	}
 
-	return surfaceTypeToJoint(surfaceType0, p0, p1, jointCoord0, jointCoord1);
+	return surfaceTypeToJoint(surfaceType0, p0, p1, axleInP0, holeInP1);
 }
 
 // FUNCTION: WEBSERVICE 0x1011f690
