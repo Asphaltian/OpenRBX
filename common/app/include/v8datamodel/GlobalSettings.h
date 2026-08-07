@@ -14,7 +14,7 @@ class GlobalSettings : public DescribedNonCreatable<GlobalSettings, ServiceProvi
 {
 public:
 	// SIZE 0xf8
-	class Item : public NonFactoryProduct<Instance, 0>
+	class Item : public NonFactoryProduct<Instance, static_cast<const char*>(0)>
 	{
 	};
 };
