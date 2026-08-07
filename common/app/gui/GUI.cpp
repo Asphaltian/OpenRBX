@@ -132,7 +132,7 @@ G3D::Vector2 RelativePanel::getPosition() const
 	return canvas.positionChild(me, xLocation, yLocation).low;
 }
 
-// STUB: WEBSERVICE 0x100d14d0
+// FUNCTION: WEBSERVICE 0x100d14d0
 GuiItem::GuiItem() : guiSize(0, 0)
 {
 	setName("Unnamed GuiItem");

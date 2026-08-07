@@ -208,3 +208,13 @@ address,type,symbol
 0x100cf450,,?raise@?$Notifier@VWorld@RBX@@UAutoDestroy@2@@RBX@@IBEXUAutoDestroy@2@PAV?$Listener@VWorld@RBX@@UAutoDestroy@2@@2@@Z
 0x100cf6f0,,?raise@?$Notifier@VWorld@RBX@@UAutoJoin@2@@RBX@@IBEXUAutoJoin@2@@Z
 0x100cf790,,?raise@?$Notifier@VWorld@RBX@@UAutoDestroy@2@@RBX@@IBEXUAutoDestroy@2@@Z
+0x100c71d0,synthetic,??1GuiItem@RBX@@UAE@XZ
+0x100c78f0,stub,??_EGuiItem@RBX@@UAEPAXI@Z
+0x100c7830,stub,??_EGuiItem@RBX@@WJM@AEPAXI@Z
+0x100c78e0,stub,??_EGuiItem@RBX@@WGM@AEPAXI@Z
+0x100c8810,stub,??_EGuiItem@RBX@@WBE@AEPAXI@Z
+0x100c8820,stub,??_EGuiItem@RBX@@WCE@AEPAXI@Z
+0x100d15d0,stub,??_EGuiItem@RBX@@WFE@AEPAXI@Z
+0x100d15e0,stub,??_EGuiItem@RBX@@WDM@AEPAXI@Z
+0x100d16e0,stub,??_EGuiItem@RBX@@WBA@AEPAXI@Z
+0x100d16f0,stub,??_EGuiItem@RBX@@WIE@AEPAXI@Z

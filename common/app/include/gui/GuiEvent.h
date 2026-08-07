@@ -50,10 +50,11 @@ private:
 DECOMP_SIZE_ASSERT(GuiResponse, 0x8)
 
 // SIZE 0x4
-class __declspec(novtable) GuiTarget
+class GuiTarget
 {
 public:
-	virtual GuiResponse process(const GuiEvent& event) = 0; // vtable+0x00
+	// FUNCTION: WEBSERVICE 0x1006a090
+	virtual GuiResponse process(const GuiEvent& event) { return GuiResponse::notUsed(); } // vtable+0x00
 };
 
 DECOMP_SIZE_ASSERT(GuiTarget, 0x4)
