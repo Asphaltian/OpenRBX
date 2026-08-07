@@ -3,7 +3,9 @@
 
 #include "decomp.h"
 #include "util/Handle.h"
+#include "util/IRenderable.h"
 #include "v8datamodel/Accoutrement.h"
+#include "v8datamodel/IEquipable.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
@@ -13,7 +15,9 @@ extern const char sHat[];
 extern const char sAccoutrement[];
 
 // SIZE 0x1a0
-class Accoutrement : public DescribedCreatable<Accoutrement, Instance, sAccoutrement>
+class Accoutrement : public DescribedCreatable<Accoutrement, Instance, sAccoutrement>,
+					 public IEquipable,
+					 public IRenderable
 {
 public:
 	enum AccoutrementState
@@ -31,7 +35,7 @@ public:
 	void setBackendAccoutrementState(int value);
 
 private:
-	undefined m_unk0x0f8[0x11c - 0x0f8]; // 0x0f8
+	undefined m_unk0x118[0x11c - 0x118]; // 0x118
 	int backendAccoutrementState;        // 0x11c
 	undefined m_unk0x120[0x1a0 - 0x120]; // 0x120
 };

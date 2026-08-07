@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "util/IRenderable.h"
 #include "v8tree/Instance.h"
+#include "v8world/Edge.h"
 #include "v8world/GlueJoint.h"
 #include "v8world/MotorJoint.h"
 #include "v8world/RotateJoint.h"
@@ -31,7 +32,9 @@ extern const char sWeld[];
 extern const char sSnap[];
 
 // SIZE 0x10c
-class JointInstance : public DescribedNonCreatable<JointInstance, Instance, sJointInstance>, public IRenderable
+class JointInstance : public DescribedNonCreatable<JointInstance, Instance, sJointInstance>,
+					  public IRenderable,
+					  public IJointOwner
 {
 public:
 	JointInstance() {}

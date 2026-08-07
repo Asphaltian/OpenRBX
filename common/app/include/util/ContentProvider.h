@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "util/Name.h"
 
+#include <boost/noncopyable.hpp>
 #include <iosfwd>
 #include <memory>
 #include <string>
@@ -47,7 +48,7 @@ DECOMP_SIZE_ASSERT(ContentId, 0x20)
 bool operator<(const ContentId& a, const ContentId& b);
 
 // SIZE 0x54
-class ContentProvider
+class ContentProvider : public boost::noncopyable
 {
 public:
 	static ContentProvider& singleton();
