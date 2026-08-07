@@ -3,14 +3,95 @@
 namespace RBX {
 
 // STUB: WEBSERVICE 0x10116aa0
-DECOMP_NOINLINE GuiResponse Widget::processMouse(const GuiEvent& event)
+GuiResponse Widget::processMouse(const GuiEvent& event)
 {
-	STUB(0x10116aa0);
+	bool inRect = getMyRect().pointInRect(event.mousePosition);
+
+	switch (widgetState) {
+	case NOTHING:
+	case HOVER:
+		if (inRect) {
+			if (!isEnabled()) {
+				widgetState = NOTHING;
+
+				return GuiResponse::used();
+			}
+
+			switch (event.eventType) {
+			case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
+				widgetState = DOWN_OVER;
+				onDown(event);
+
+				return GuiResponse::used();
+
+			case UIEvent::MOUSE_MOVE:
+				widgetState = HOVER;
+
+				return GuiResponse::used();
+			}
+		}
+		else {
+			widgetState = NOTHING;
+
+			return GuiResponse::notUsed();
+		}
+		break;
+
+	case DOWN_OVER:
+		switch (event.eventType) {
+		case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
+			return GuiResponse::used();
+
+		case UIEvent::MOUSE_MOVE:
+			if (!inRect) {
+				widgetState = onDrag(event) ? NOTHING : DOWN_AWAY;
+			}
+
+			return GuiResponse::used();
+
+		case UIEvent::MOUSE_LEFT_BUTTON_UP:
+			widgetState = NOTHING;
+			onUp(event);
+
+			if (inRect) {
+				onClick(event);
+
+				return GuiResponse::finished();
+			}
+
+			return GuiResponse::notUsed();
+		}
+		break;
+
+	case DOWN_AWAY:
+		switch (event.eventType) {
+		case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
+			return GuiResponse::used();
+
+		case UIEvent::MOUSE_MOVE:
+			widgetState = inRect ? DOWN_OVER : DOWN_AWAY;
+
+			return GuiResponse::used();
+
+		case UIEvent::MOUSE_LEFT_BUTTON_UP:
+			widgetState = NOTHING;
+			onUp(event);
+
+			if (inRect) {
+				onClick(event);
+
+				return GuiResponse::used();
+			}
+
+			return GuiResponse::notUsed();
+		}
+		break;
+	}
 
 	return GuiResponse::notUsed();
 }
 
-// STUB: WEBSERVICE 0x10116cd0
+// FUNCTION: WEBSERVICE 0x10116cd0
 GuiResponse Widget::process(const GuiEvent& event)
 {
 	if (isEnabled() && event.isMouseEvent()) {

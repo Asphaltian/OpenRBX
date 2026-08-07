@@ -195,7 +195,7 @@ GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
 	return GuiResponse::notUsed();
 }
 
-// STUB: WEBSERVICE 0x100d1cf0
+// FUNCTION: WEBSERVICE 0x100d1cf0
 GuiResponse GuiItem::process(const GuiEvent& event)
 {
 	if (event.isMouseEvent() && event.eventType == UIEvent::MOUSE_IDLE) {

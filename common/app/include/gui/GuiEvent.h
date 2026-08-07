@@ -35,6 +35,7 @@ public:
 	static GuiResponse notUsed() { return GuiResponse(NOT_USED, NULL); }
 	static GuiResponse used() { return GuiResponse(USED, NULL); }
 	static GuiResponse used(GuiItem* target) { return GuiResponse(USED, target); }
+	static GuiResponse finished() { return GuiResponse(USED_AND_FINISHED, NULL); }
 
 private:
 	GuiResponse(ResponseType response, GuiItem* target) : response(response), target(target) {}
