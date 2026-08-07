@@ -2,12 +2,13 @@
 #define V8DATAMODEL_PVINSTANCE_H
 
 #include "decomp.h"
+#include "util/IControllable.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
 
 // SIZE 0x170
-class PVInstance : public Instance
+class PVInstance : public Instance, public IControllable
 {
 public:
 	// FUNCTION: WEBSERVICE 0x100990b0
@@ -15,8 +16,10 @@ public:
 
 	void setShowControllerFlag(bool value);
 
+	virtual bool isControllable() const;
+
 private:
-	undefined m_unk0x0f8[0x160 - 0x0f8]; // 0x0f8
+	undefined m_unk0x0fc[0x160 - 0x0fc]; // 0x0fc
 	bool showControllerFlag;             // 0x160
 	undefined m_unk0x161[0x170 - 0x161]; // 0x161
 };

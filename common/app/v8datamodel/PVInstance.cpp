@@ -11,6 +11,13 @@ static Reflection::PropDescriptor<PVInstance, bool> prop_ControllerFlagShown(
 	&RBX::PVInstance::setShowControllerFlag
 );
 
+// STUB: WEBSERVICE 0x1005a7f0
+bool PVInstance::isControllable() const
+{
+	STUB(0x1005a7f0);
+	return false;
+}
+
 // FUNCTION: WEBSERVICE 0x1009a4e0
 void PVInstance::setShowControllerFlag(bool _showControllerFlag)
 {
