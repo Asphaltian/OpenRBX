@@ -38,6 +38,41 @@ Rect GuiItem::getMyRect() const
 	return Rect::fromLowSize(pos, getSize());
 }
 
+// STUB: WEBSERVICE 0x100d10b0
+void GuiItem::label2d(
+	Adorn* adorn,
+	const std::string& label,
+	const G3D::Color4& fill,
+	const G3D::Color4& border,
+	Adorn::XAlign align
+) const
+{
+	if (label.size() == 0) {
+		return;
+	}
+
+	Rect myRect = getMyRect();
+
+	G3D::Vector2 size = myRect.size();
+	G3D::Vector2 pos = myRect.center();
+
+	switch (align) {
+	case Adorn::XALIGN_RIGHT:
+		pos.x = myRect.high.x - size.x * 0.1f;
+		break;
+
+	case Adorn::XALIGN_LEFT:
+		pos.x = myRect.low.x + size.x * 0.1f;
+		break;
+
+	case Adorn::XALIGN_CENTER:
+		break;
+	}
+
+	adorn
+		->drawFont2D(label, pos, getFontSize(), fill, border, align, Adorn::YALIGN_CENTER, Adorn::PROPORTIONAL_SPACING);
+}
+
 // FUNCTION: WEBSERVICE 0x100d1180
 void RelativePanel::init(const Layout& layout)
 {

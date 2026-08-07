@@ -62,6 +62,14 @@ protected:
 	void loseFocus();
 
 	Rect getMyRect() const;
+
+	void label2d(
+		Adorn* adorn,
+		const std::string& label,
+		const G3D::Color4& fill,
+		const G3D::Color4& border,
+		Adorn::XAlign align
+	) const;
 	G3D::Rect2D getMyRect2D() const;
 
 private:

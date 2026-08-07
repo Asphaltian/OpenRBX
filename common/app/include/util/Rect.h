@@ -31,6 +31,9 @@ public:
 
 	static Rect fromLowSize(const Vector2& low, const Vector2& size) { return Rect(low, low + size); }
 
+	Vector2 size() const { return high - low; }
+	Vector2 center() const { return (high + low) * 0.5f; }
+
 	// FUNCTION: WEBSERVICE 0x100d0f60
 	bool pointInRect(G3D::Vector2int16 point) const
 	{
