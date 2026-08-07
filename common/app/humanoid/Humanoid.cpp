@@ -54,10 +54,12 @@ ContactManager* Humanoid::getContactManager()
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x100a0d40
+// FUNCTION: WEBSERVICE 0x100a0d40
 void Humanoid::computeForce(float dt, bool throttling)
 {
-	STUB(0x100a0d40);
+	if (currentState.get() != NULL) {
+		currentState->onComputeForce(dt);
+	}
 }
 
 // STUB: WEBSERVICE 0x100a1100
@@ -270,7 +272,15 @@ void Humanoid::setSit(bool value)
 // STUB: WEBSERVICE 0x100a56c0
 void Humanoid::onEvent(const RunService* source, Stepped event)
 {
-	STUB(0x100a56c0);
+	State* state = currentState.get();
+
+	if (state != NULL && getParent() != NULL) {
+		State* next = state->onStep(event.step, *static_cast<PVInstance*>(getParent())->getTopPVController());
+
+		if (next != state) {
+			currentState.reset(next);
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x100a5770

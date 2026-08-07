@@ -84,6 +84,18 @@ bool PVInstance::computeIsControllable() const
 	return false;
 }
 
+// FUNCTION: WEBSERVICE 0x10099780
+Controller* PVInstance::getTopPVController() const
+{
+	Controller* controller = TopPVController.getValue().getPointer();
+
+	if (controller != NULL) {
+		return controller;
+	}
+
+	return NullController::getStaticNullController();
+}
+
 // STUB: WEBSERVICE 0x10099870
 PVInstance::~PVInstance()
 {
