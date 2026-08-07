@@ -37,7 +37,7 @@ int CVersionInfo::Load(HINSTANCE module)
 }
 
 // STUB: WEBSERVICE 0x1000c990
-int CVersionInfo::Load(const CString& strFileName)
+int CVersionInfo::Load(const CString& fileName)
 {
 	m_pffi = NULL;
 
@@ -51,7 +51,7 @@ int CVersionInfo::Load(const CString& strFileName)
 	m_pTranslations = NULL;
 	m_nTranslations = 0;
 
-	CString str(strFileName);
+	CString str(fileName);
 	DWORD dwHandle = 0;
 	DWORD dwSize = GetFileVersionInfoSize(str.GetBuffer(), &dwHandle);
 

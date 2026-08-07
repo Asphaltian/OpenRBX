@@ -11,9 +11,9 @@ bool InstanceHandle::empty() const
 }
 
 // FUNCTION: WEBSERVICE 0x10098f80
-void InstanceHandle::linkTo(boost::shared_ptr<Instance> value)
+void InstanceHandle::linkTo(boost::shared_ptr<Instance> target)
 {
-	target = value;
+	this->target = target;
 }
 
 // FUNCTION: WEBSERVICE 0x10099000

@@ -44,6 +44,15 @@ static PropDescriptor<Humanoid, bool> propSit(
 	Reflection::PropertyDescriptor::STREAMING
 );
 
+SignalDesc<Humanoid, void()> Humanoid::event_Died("Died");
+SignalDesc<Humanoid, void(float)> Humanoid::event_Running("Running", "speed");
+SignalDesc<Humanoid, void(float)> Humanoid::event_Climbing("Climbing", "speed");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_Jumping("Jumping", "active");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_FreeFalling("FreeFalling", "active");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_GettingUp("GettingUp", "active");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_FallingDown("FallingDown", "active");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_Seated("Seated", "active");
+
 // FUNCTION: WEBSERVICE 0x100a0990
 ContactManager* Humanoid::getContactManager()
 {
@@ -54,6 +63,19 @@ ContactManager* Humanoid::getContactManager()
 	}
 
 	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100a0bd0
+bool Humanoid::hasWalkToPoint(G3D::Vector3& worldPosition) const
+{
+	if (walkToPart != NULL && Workspace::findWorkspace(this) != NULL &&
+		Workspace::contextInWorkspace(walkToPart.get())) {
+		worldPosition = walkToPart->getCoordinateFrame().pointToWorldSpace(walkToPoint);
+
+		return true;
+	}
+
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x100a0d40
@@ -191,11 +213,46 @@ const CoordinateFrame Humanoid::getLocation() const
 	return getHead() != NULL ? getHead()->getCoordinateFrame() : CoordinateFrame();
 }
 
-// STUB: WEBSERVICE 0x100a2f70
-DECOMP_NOINLINE G3D::Vector3 Humanoid::getIntendedMovementVector(bool ignoreSit)
+// FUNCTION: WEBSERVICE 0x100a2f70
+G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
 {
-	STUB(0x100a2f70);
-	return G3D::Vector3::zero();
+	G3D::Vector3 result = G3D::Vector3::zero();
+
+	if (walkMode == DIRECTION_MOVE) {
+		result = walkDirection;
+	}
+	else if (walkMode == CLICK_TO_MOVE) {
+		PartInstance* torso = getTorso();
+		G3D::Vector3 worldPosition;
+
+		if (torso != NULL && hasWalkToPoint(worldPosition)) {
+			const G3D::Vector3& translation = torso->getCoordinateFrame().translation;
+
+			G3D::Vector3 delta = worldPosition - translation;
+
+			worldPosition.x = delta.x;
+			worldPosition.y = delta.y + 3.0f;
+			worldPosition.z = delta.z;
+
+			float distance = (worldPosition.z * worldPosition.z + worldPosition.x * worldPosition.x) +
+							 worldPosition.y * worldPosition.y;
+
+			worldPosition.y = 0;
+
+			if (sqrtf(distance) < 2.0f) {
+				if (setWalkMode) {
+					walkMode = DIRECTION_MOVE;
+				}
+
+				result = G3D::Vector3::zero();
+			}
+			else {
+				result = worldPosition.unit();
+			}
+		}
+	}
+
+	return result;
 }
 
 // STUB: WEBSERVICE 0x100a30d0
@@ -226,7 +283,7 @@ Humanoid::Humanoid()
 }
 
 // STUB: WEBSERVICE 0x100a4690
-DECOMP_NOINLINE void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
+void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
 {
 	STUB(0x100a4690);
 }
@@ -250,7 +307,7 @@ void Humanoid::render2d(Adorn* adorn)
 }
 
 // STUB: WEBSERVICE 0x100a4bf0
-void Humanoid::getIgnorePrims(std::vector<const Primitive*>& prims)
+void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
 {
 	STUB(0x100a4bf0);
 }
@@ -306,7 +363,7 @@ void Humanoid::onEvent(const RunService* source, Stepped event)
 }
 
 // STUB: WEBSERVICE 0x100a5770
-void Humanoid::cameraSetWalkOrientation(float angle, bool value)
+void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
 {
 	STUB(0x100a5770);
 }

@@ -31,7 +31,7 @@ public:
 	NormalId getAxleId() const { return Matrix3ToNormalId(jointCoord0.rotation); }
 	NormalId getHoleId() const { return normalIdOpposite(Matrix3ToNormalId(jointCoord1.rotation)); }
 
-	static RotateJoint* canBuildJoint(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1);
+	static RotateJoint* canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1);
 
 protected:
 	float getTorqueArmLength();
@@ -74,7 +74,7 @@ private:
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
 	virtual bool canStepUi() const { return true; } // vtable+0x2c
 
-	virtual void stepUi(int frameCount); // vtable+0x30
+	virtual void stepUi(int uiStepId); // vtable+0x30
 };
 
 DECOMP_SIZE_ASSERT(RotatePJoint, 0xc4)

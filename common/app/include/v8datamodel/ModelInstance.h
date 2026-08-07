@@ -70,7 +70,7 @@ public:
 	virtual void onExtentsChanged() const;
 
 	virtual const Primitive* getBiggestPrimitive() const;
-	virtual bool hitTest(const G3D::Ray& ray, G3D::Vector3& hitPoint);
+	virtual bool hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint);
 
 	virtual Extents getExtentsWorld() const;
 	virtual Extents getExtentsLocal() const;
@@ -83,7 +83,7 @@ public:
 	virtual PartInstance* getPrimaryPart();
 	virtual const PartInstance* getPrimaryPartConst() const;
 
-	virtual void legacyTraverseState(const CoordinateFrame& state);
+	virtual void legacyTraverseState(const CoordinateFrame& parentState);
 };
 
 DECOMP_SIZE_ASSERT(ModelInstance, 0x254)

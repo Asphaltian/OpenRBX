@@ -91,9 +91,9 @@ public:
 		float rotationEpsilon
 	);
 	static void idToMatrix3(int orientId, Matrix3& matrix);
-	static Matrix3 rotateAboutZ(const Matrix3& matrix, float angle);
+	static Matrix3 rotateAboutZ(const Matrix3& matrix, float radians);
 	static void rotateMatrixAboutY90(Matrix3& matrix, int count);
-	static CoordinateFrame getFocusSpace(const CoordinateFrame& coordinateFrame);
+	static CoordinateFrame getFocusSpace(const CoordinateFrame& focus);
 	static Matrix3 getIWorldAtPoint(const Vector3& cofm, const Vector3& point, const Matrix3& iWorld, float mass);
 	static bool fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float epsilon);
 	static const Matrix3& getAxisRotationMatrix(int normalId);

@@ -48,9 +48,9 @@ const RBX::Name& tag_mimeType = RBX::Name::declare("mimeType", 48);
 const RBX::Name& tag_xsinoNamespaceSchemaLocation = RBX::Name::declare("xsi:noNamespaceSchemaLocation", 49);
 
 // FUNCTION: WEBSERVICE 0x10084ac0
-XmlNameValuePair::XmlNameValuePair(const RBX::Name& tag, const char* value) : tag(tag), valueType(STRING)
+XmlNameValuePair::XmlNameValuePair(const RBX::Name& tag, const char* text) : tag(tag), valueType(STRING)
 {
-	stringValue = new std::string(value);
+	stringValue = new std::string(text);
 }
 
 // FUNCTION: WEBSERVICE 0x1008efe0
@@ -107,10 +107,10 @@ const XmlElement* XmlElement::findFirstChildByTag(const RBX::Name& _tag) const
 }
 
 // FUNCTION: WEBSERVICE 0x1008f080
-const XmlElement* XmlElement::findNextChildWithSameTag(const XmlElement* child) const
+const XmlElement* XmlElement::findNextChildWithSameTag(const XmlElement* node) const
 {
-	for (const XmlElement* next = child->nextSibling(); next != NULL; next = next->nextSibling()) {
-		if (&next->getTag() == &child->getTag()) {
+	for (const XmlElement* next = node->nextSibling(); next != NULL; next = next->nextSibling()) {
+		if (&next->getTag() == &node->getTag()) {
 			return next;
 		}
 	}

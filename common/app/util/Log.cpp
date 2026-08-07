@@ -18,9 +18,9 @@ static const char* warning = " Warning: ";
 static const char* error = " Error:   ";
 
 // FUNCTION: WEBSERVICE 0x1003d880
-void Log::setLogProvider(ILogProvider* logProvider)
+void Log::setLogProvider(ILogProvider* provider)
 {
-	provider = logProvider;
+	provider = provider;
 }
 
 // FUNCTION: WEBSERVICE 0x1003d890
@@ -69,14 +69,14 @@ std::string Log::formatTime(double time)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x1003de60
-static void timeStamp(std::ofstream& stream, bool withDate)
+static void timeStamp(std::ofstream& stream, bool includeDate)
 {
 	SYSTEMTIME systemTime;
 	GetLocalTime(&systemTime);
 
 	char s[256];
 
-	if (withDate) {
+	if (includeDate) {
 		sprintf(s, "%02u.%02u.%u ", systemTime.wDay, systemTime.wMonth, systemTime.wYear);
 		stream << s;
 	}

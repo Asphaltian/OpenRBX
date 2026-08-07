@@ -26,14 +26,18 @@ private:
 	G3D::Vector3 goalInFocus;  // 0x48
 
 	// STUB: WEBSERVICE 0x101074b0
-	virtual bool zoom(const float zoom, CoordinateFrame& goal, CoordinateFrame& focus) // vtable+0x10
+	virtual bool zoom(const float in, CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus) // vtable+0x10
 	{
 		STUB(0x101074b0);
 		return false;
 	}
 
 	// STUB: WEBSERVICE 0x10107860
-	virtual void stepGoalAndFocus(CoordinateFrame& goal, CoordinateFrame& focus, bool zoom) // vtable+0x14
+	virtual void stepGoalAndFocus(
+		CoordinateFrame& cameraGoal,
+		CoordinateFrame& cameraFocus,
+		bool cameraExternallyAdjusted
+	) // vtable+0x14
 	{
 		STUB(0x10107860);
 	}

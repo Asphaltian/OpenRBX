@@ -68,7 +68,7 @@ address,size,type,symbol,name
 0x1009b8b0,0x68,library,?append@?$Array@PAVPrimitive@RBX@@@G3D@@QAEXABQAVPrimitive@RBX@@@Z,
 0x1009c810,0x12b,library,?append@?$Array@V?$shared_ptr@VPartInstance@RBX@@@boost@@@G3D@@QAEXABV?$shared_ptr@VPartInstance@RBX@@@boost@@@Z,
 0x100a05b0,0x17,library,?squaredMagnitude@Vector3@G3D@@QBEMXZ,
-0x100a05d0,0x37,library,?direction@Vector3@G3D@@QBE?AV12@XZ,
+0x100a05d0,0x37,library,?unit@Vector3@G3D@@QBE?AV12@XZ,
 0x100a0610,0x5a,library,?pointToObjectSpace@CoordinateFrame@G3D@@QBE?AVVector3@2@ABV32@@Z,
 0x100a5970,0x7,library,??1Plane@G3D@@UAE@XZ,
 0x100a5980,0x1f,library,??_EPlane@G3D@@UAEPAXI@Z,

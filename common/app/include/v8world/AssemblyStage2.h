@@ -40,8 +40,6 @@ private:
 	void onJointAdded(Joint* joint);
 	void onJointRemoving(Joint* joint);
 
-	SleepStage* getSleepStage();
-
 	std::set<Assembly*> assemblies; // 0x10
 	std::set<Joint*> joints;        // 0x1c
 };

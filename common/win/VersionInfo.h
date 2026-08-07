@@ -20,7 +20,7 @@ public:
 	~CVersionInfo();
 
 	int Load(HINSTANCE hInst);
-	int Load(const CString& sFileName);
+	int Load(const CString& fileName);
 	VS_FIXEDFILEINFO* GetFixedFileInfo();
 	DWORD GetFileFlagsMask();
 	DWORD GetFileFlags();

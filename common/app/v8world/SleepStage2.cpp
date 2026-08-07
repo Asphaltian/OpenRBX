@@ -12,11 +12,6 @@
 
 namespace RBX {
 
-SimJobStage* SleepStage::getSimJobStage()
-{
-	return static_cast<SimJobStage*>(getDownstream());
-}
-
 Sim::AssemblyState SleepStage::getState(Assembly* assembly)
 {
 	return assembly->inPipeline() && assembly->inOrDownstreamOfStage(this) ? assembly->getSleepInfo()->state
@@ -118,15 +113,15 @@ bool SleepStage::okNeighborSleep(Assembly* a)
 }
 
 // FUNCTION: WEBSERVICE 0x10118da0
-bool SleepStage::computeShouldSleep(Assembly* assembly)
+bool SleepStage::computeShouldSleep(Assembly* a)
 {
-	CoordinateFrame cofm = assembly->getAssemblyPrimitiveConst()->getBody()->getBranchCofmCoordinateFrame();
-	float radius = assembly->getMaxRadius();
-	RunningAverageState& runningAverageState = assembly->getSleepInfo()->runningAverageState;
+	CoordinateFrame cofm = a->getAssemblyPrimitiveConst()->getBody()->getBranchCofmCoordinateFrame();
+	float maxRadius = a->getMaxRadius();
+	RunningAverageState& runningAverageState = a->getSleepInfo()->runningAverageState;
 
-	runningAverageState.update(cofm, radius);
+	runningAverageState.update(cofm, maxRadius);
 
-	return runningAverageState.withinTolerance(cofm, radius, sleepTolerance());
+	return runningAverageState.withinTolerance(cofm, maxRadius, sleepTolerance());
 }
 
 // FUNCTION: WEBSERVICE 0x10118e20
@@ -251,43 +246,6 @@ void SleepStage::changeJointState(Joint* j, Sim::EdgeState newState)
 	j->setEdgeState(newState);
 }
 
-void SleepStage::changeAssemblyStateInline(Assembly* assembly, Sim::AssemblyState state)
-{
-	Sim::AssemblyState oldState = getState(assembly);
-
-	AssemblySet* oldSet = stateToSet(oldState);
-	AssemblySet* newSet = stateToSet(state);
-
-	oldSet->erase(assembly);
-
-	newSet->insert(assembly);
-
-	if ((oldState == Sim::SLEEPING_CHECKING || oldState == Sim::SLEEPING_DEEPLY) && state != Sim::SLEEPING_CHECKING &&
-		state != Sim::SLEEPING_DEEPLY) {
-		assembly->getAssemblyPrimitiveConst()->getBody()->resetAccumulators();
-	}
-
-	if (state == Sim::AWAKE) {
-		if (!assembly->downstreamOfStage(this)) {
-			getSimJobStage()->onAssemblyAdded(assembly);
-
-			if (!externalBodyForceAdded) {
-				const Primitive* primitive = assembly->getAssemblyPrimitiveConst();
-			}
-		}
-	}
-	else if (state == Sim::SLEEPING_CHECKING || state == Sim::SLEEPING_DEEPLY) {
-		assembly->getAssemblyPrimitiveConst()->getBody()->setVelocity(Velocity::zero());
-
-		if (assembly->downstreamOfStage(this)) {
-			getSimJobStage()->onAssemblyRemoving(assembly);
-		}
-	}
-
-	resetSleepCount(assembly);
-	assembly->getSleepInfo()->state = state;
-}
-
 // FUNCTION: WEBSERVICE 0x101197c0
 void SleepStage::changeAssemblyState(Assembly* a, Sim::AssemblyState newState)
 {
@@ -307,7 +265,7 @@ void SleepStage::changeAssemblyState(Assembly* a, Sim::AssemblyState newState)
 
 	if (newState == Sim::AWAKE) {
 		if (!a->downstreamOfStage(this)) {
-			getSimJobStage()->onAssemblyAdded(a);
+			static_cast<SimJobStage*>(getDownstream())->onAssemblyAdded(a);
 
 			if (!externalBodyForceAdded) {
 				const Primitive* primitive = a->getAssemblyPrimitiveConst();
@@ -318,7 +276,7 @@ void SleepStage::changeAssemblyState(Assembly* a, Sim::AssemblyState newState)
 		a->getAssemblyPrimitiveConst()->getBody()->setVelocity(Velocity::zero());
 
 		if (a->downstreamOfStage(this)) {
-			getSimJobStage()->onAssemblyRemoving(a);
+			static_cast<SimJobStage*>(getDownstream())->onAssemblyRemoving(a);
 		}
 	}
 
@@ -330,7 +288,7 @@ void SleepStage::changeAssemblyState(Assembly* a, Sim::AssemblyState newState)
 void SleepStage::onAssemblyRemoving(Assembly* assembly)
 {
 	if (getState(assembly) != Sim::SLEEPING_DEEPLY) {
-		changeAssemblyStateInline(assembly, Sim::SLEEPING_DEEPLY);
+		changeAssemblyState(assembly, Sim::SLEEPING_DEEPLY);
 	}
 
 	sleepingDeeply.erase(assembly);
@@ -736,7 +694,7 @@ void SleepStage::stepAssembliesRecursiveWakePending()
 		Assembly* assembly = toWake[i];
 
 		if (getState(assembly) != Sim::RECURSIVE_WAKE_PENDING) {
-			changeAssemblyStateInline(assembly, Sim::RECURSIVE_WAKE_PENDING);
+			changeAssemblyState(assembly, Sim::RECURSIVE_WAKE_PENDING);
 		}
 
 		wakeAssemblyAndNeighbors(assembly, 8);

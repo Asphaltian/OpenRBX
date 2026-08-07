@@ -59,8 +59,6 @@ public:
 	const AssemblySet& getAwakeAssemblies() const { return awake; }
 
 private:
-	SimJobStage* getSimJobStage();
-
 	static float sleepTolerance() { return 0.02f; }
 	static int stepsToSleep() { return 6; }
 
@@ -71,7 +69,7 @@ private:
 	bool edgeIsAwake(Edge* edge);
 	bool isAffecting(Edge* edge);
 
-	bool computeShouldSleep(Assembly* assembly);
+	bool computeShouldSleep(Assembly* a);
 	bool computeCanSleep(Assembly* assembly);
 	bool shouldSleep(Assembly* assembly);
 	bool okNeighborSleep(Assembly* assembly);
@@ -87,8 +85,7 @@ private:
 	void incrementSleepCount(Assembly* assembly);
 	void resetSleepCount(Assembly* assembly);
 
-	DECOMP_FORCEINLINE void changeAssemblyStateInline(Assembly* assembly, Sim::AssemblyState state);
-	DECOMP_NOINLINE void changeAssemblyState(Assembly* assembly, Sim::AssemblyState state);
+	void changeAssemblyState(Assembly* assembly, Sim::AssemblyState state);
 	void changeAssemblyState(const std::vector<Assembly*>& assemblies, Sim::AssemblyState state);
 	void changeContactState(Contact* contact, Sim::EdgeState state);
 	void changeContactState(const std::vector<Contact*>& contacts, Sim::EdgeState state);

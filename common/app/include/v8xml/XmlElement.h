@@ -115,7 +115,7 @@ public:
 		DOUBLE = 9,
 	};
 
-	XmlNameValuePair(const RBX::Name& tag, const char* value);
+	XmlNameValuePair(const RBX::Name& tag, const char* text);
 
 	~XmlNameValuePair() { clearValue(); }
 
@@ -220,16 +220,16 @@ public:
 	XmlAttribute* findAttribute(const RBX::Name& name);
 
 	const XmlElement* findFirstChildByTag(const RBX::Name& _tag) const;
-	const XmlElement* findNextChildWithSameTag(const XmlElement* child) const;
+	const XmlElement* findNextChildWithSameTag(const XmlElement* node) const;
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10096250
 	// XmlElement::addAttribute<char const *>
 	// clang-format on
 	template <class T>
-	void addAttribute(const RBX::Name& tag, T value)
+	void addAttribute(const RBX::Name& _tag, T value)
 	{
-		addAttribute(new XmlAttribute(tag, value));
+		addAttribute(new XmlAttribute(_tag, value));
 	}
 
 protected:

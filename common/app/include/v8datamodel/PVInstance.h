@@ -69,7 +69,7 @@ protected:
 	virtual void onChildRemoving(Instance* child);
 	virtual void onDescendentAdded(Instance* instance);
 	virtual void onDescendentRemoving(const shared_ptr<Instance>& instance);
-	virtual void readProperty(const XmlElement* element, IReferenceBinder& binder);
+	virtual void readProperty(const XmlElement* propertyElement, IReferenceBinder& binder);
 
 public:
 	virtual bool isControllable() const;

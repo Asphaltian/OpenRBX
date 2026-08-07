@@ -37,7 +37,7 @@ public:
 	void writeEntry(Severity severity, const char* entry);
 	std::string timeStamp();
 
-	static void setLogProvider(ILogProvider* logProvider);
+	static void setLogProvider(ILogProvider* provider);
 
 	Log(const char* logFile, const char* name);
 	virtual ~Log(); // vtable+0x00

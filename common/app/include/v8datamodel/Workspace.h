@@ -48,8 +48,9 @@ class Workspace : public RootInstance,
 public:
 	static bool showWorldCoord;
 
-	static World* getWorldIfInWorkspace(const Instance* instance);
-	static Workspace* findWorkspace(const Instance* instance);
+	static World* getWorldIfInWorkspace(const Instance* context);
+	static Workspace* findWorkspace(const Instance* context);
+	static bool contextInWorkspace(const Instance* context);
 
 	Workspace(IDataState* dataState);
 
@@ -62,7 +63,7 @@ public:
 
 protected:
 	virtual IScriptOwner* scriptShouldRun(Script* script);
-	virtual void runScript(Script* script, ScriptContext* scriptContext);
+	virtual void runScript(Script* script, ScriptContext* context);
 	virtual void releaseScript(Script* script);
 
 	virtual void onEvent(const RunService* source, Heartbeat event);

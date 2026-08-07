@@ -35,12 +35,12 @@ public:
 	void notifyMovingPrimitives();
 
 	// FUNCTION: WEBSERVICE 0x1011c920
-	Mechanism* nextMechanism(std::list<Mechanism*>& mechanisms, const Mechanism* current)
+	Mechanism* nextMechanism(std::list<Mechanism*>& list, const Mechanism* current)
 	{
 		std::list<Mechanism*>::iterator it = current->myIt;
 		it++;
 
-		return it == mechanisms.end() ? *mechanisms.begin() : *it;
+		return it == list.end() ? *list.begin() : *it;
 	}
 
 private:

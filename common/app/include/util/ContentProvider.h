@@ -53,7 +53,7 @@ class ContentProvider : public boost::noncopyable
 public:
 	static ContentProvider& singleton();
 
-	std::auto_ptr<std::istream> getContent(ContentId contentId);
+	std::auto_ptr<std::istream> getContent(ContentId ticket);
 
 private:
 	undefined m_unk0x00[0x54]; // 0x00

@@ -33,7 +33,7 @@ GuiItem* GuiItem::getGuiParent()
 }
 
 // FUNCTION: WEBSERVICE 0x100d1040 FOLDED
-DECOMP_NOINLINE const GuiItem* GuiItem::getGuiParent() const
+const GuiItem* GuiItem::getGuiParent() const
 {
 	return dynamic_cast<const GuiItem*>(getParent());
 }

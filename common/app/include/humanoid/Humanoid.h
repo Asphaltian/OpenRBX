@@ -33,33 +33,6 @@ class Humanoid : public DescribedCreatable<Humanoid, Instance, sHumanoid>,
 {
 
 public:
-	Humanoid();
-	virtual ~Humanoid();
-
-	virtual void computeForce(float dt, bool throttling);
-	virtual bool isControllable() const;
-	virtual const CoordinateFrame getLocation() const;
-
-	virtual bool shouldRender2d() const;
-	virtual bool shouldRender3dAdorn() const;
-	void renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera);
-
-	virtual void render2d(Adorn* adorn);
-	virtual void render3dAdorn(Adorn* adorn);
-
-	virtual ContactManager* getContactManager();
-	virtual void getIgnorePrims(std::vector<const Primitive*>& prims);
-	virtual void tellCameraNear(float distance);
-	G3D::Vector3 getIntendedMovementVector(bool ignoreSit);
-	virtual G3D::Vector3 getIntendedMovementVector();
-
-	G3D::Vector3 updateWalkDirection();
-	virtual float getIntendedRotationAboutYAxis();
-	virtual void cameraSetWalkOrientation(float angle, bool value);
-
-	virtual void onEvent(const RunService* source, Stepped event);
-
-public:
 	enum WalkMode
 	{
 		HAS_PART = 0,
@@ -89,22 +62,51 @@ public:
 		Humanoid* const humanoid; // 0x04
 	};
 
+	static Reflection::SignalDesc<Humanoid, void()> event_Died;
+	static Reflection::SignalDesc<Humanoid, void(float)> event_Running;
+	static Reflection::SignalDesc<Humanoid, void(float)> event_Climbing;
+	static Reflection::SignalDesc<Humanoid, void(bool)> event_Jumping;
+	static Reflection::SignalDesc<Humanoid, void(bool)> event_FreeFalling;
+	static Reflection::SignalDesc<Humanoid, void(bool)> event_GettingUp;
+	static Reflection::SignalDesc<Humanoid, void(bool)> event_FallingDown;
+	static Reflection::SignalDesc<Humanoid, void(bool)> event_Seated;
+
+	virtual ~Humanoid();
+
+	Body* getTorsoBody();
+	Body* getRootBody();
+
+	float getHealth() const { return health; }
+
+	void setMaxHealth(float value);
 	// FUNCTION: WEBSERVICE 0x100a0750
 	float getMaxHealth() const { return maxHealth; }
 
-	void setMaxHealth(float value);
+	G3D::Vector3 getWalkDirection() const { return walkDirection; }
+
+	void setWalkRotationalVelocity(const float& value);
 	// FUNCTION: WEBSERVICE 0x100a0790
 	float getWalkRotationalVelocity() const { return walkRotationalVelocity; }
 
-	void setWalkRotationalVelocity(const float& value);
+	const G3D::Vector3& getWalkToPoint() const { return walkToPoint; }
+
+	PartInstance* getWalkToPart() const { return walkToPart.get(); }
+
+	void setJump(bool value);
 	// FUNCTION: WEBSERVICE 0x100a07b0
 	bool getJump() const { return jump; }
 
-	void setJump(bool value);
+	void setSit(bool value);
 	// FUNCTION: WEBSERVICE 0x100a07c0
 	bool getSit() const { return sit; }
 
-	void setSit(bool value);
+	const G3D::Vector3& getTargetPoint() const { return targetPoint; }
+
+	G3D::Vector3 updateWalkDirection();
+
+	Primitive* getTorsoPrimitive() const;
+	Primitive* getLeftLegPrimitive();
+	Primitive* getRightLegPrimitive();
 
 	PartInstance* getHead() const;
 	PartInstance* getTorso() const;
@@ -113,12 +115,31 @@ public:
 	PartInstance* getLeftArm() const;
 	PartInstance* getRightArm() const;
 
-	Primitive* getTorsoPrimitive() const;
-	Primitive* getLeftLegPrimitive();
-	Primitive* getRightLegPrimitive();
+private:
+	bool hasWalkToPoint(G3D::Vector3& worldPosition) const;
 
-	Body* getTorsoBody();
-	Body* getRootBody();
+	virtual bool shouldRender2d() const;
+	virtual bool shouldRender3dAdorn() const;
+	virtual void render2d(Adorn* adorn);
+	virtual void render3dAdorn(Adorn* adorn);
+	void renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera);
+	virtual bool isControllable() const;
+	virtual void onEvent(const RunService* source, Stepped event);
+	virtual void computeForce(float dt, bool throttling);
+	virtual const CoordinateFrame getLocation() const;
+	virtual ContactManager* getContactManager();
+	virtual void tellCameraNear(float distance);
+	virtual float getIntendedRotationAboutYAxis();
+	virtual void cameraSetWalkOrientation(float rad, bool noAdjust);
+
+public:
+	virtual void getIgnorePrims(std::vector<const Primitive*>& ignore);
+
+	Humanoid();
+
+private:
+	G3D::Vector3 getIntendedMovementVector(bool setWalkMode);
+	virtual G3D::Vector3 getIntendedMovementVector();
 
 private:
 	float health;                                     // 0x16c
@@ -156,6 +177,38 @@ DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 // RBX::`dynamic initializer for 'propSit''
 // STUB: WEBSERVICE 0x1021b4f0
 // RBX::`dynamic initializer for 'propMaxHealth''
+// SYNTHETIC: WEBSERVICE 0x1021b5e0
+// `dynamic initializer for 'RBX::Humanoid::event_Died''
+// SYNTHETIC: WEBSERVICE 0x1021b610
+// `dynamic initializer for 'RBX::Humanoid::event_Running''
+// SYNTHETIC: WEBSERVICE 0x1021b630
+// `dynamic initializer for 'RBX::Humanoid::event_Climbing''
+// SYNTHETIC: WEBSERVICE 0x1021b650
+// `dynamic initializer for 'RBX::Humanoid::event_Jumping''
+// SYNTHETIC: WEBSERVICE 0x1021b670
+// `dynamic initializer for 'RBX::Humanoid::event_FreeFalling''
+// SYNTHETIC: WEBSERVICE 0x1021b690
+// `dynamic initializer for 'RBX::Humanoid::event_GettingUp''
+// SYNTHETIC: WEBSERVICE 0x1021b6b0
+// `dynamic initializer for 'RBX::Humanoid::event_FallingDown''
+// SYNTHETIC: WEBSERVICE 0x1021b6d0
+// `dynamic initializer for 'RBX::Humanoid::event_Seated''
+// SYNTHETIC: WEBSERVICE 0x10223500
+// `dynamic atexit destructor for 'RBX::Humanoid::event_Climbing''
+// SYNTHETIC: WEBSERVICE 0x10223510
+// `dynamic atexit destructor for 'RBX::Humanoid::event_FreeFalling''
+// SYNTHETIC: WEBSERVICE 0x10223520
+// `dynamic atexit destructor for 'RBX::Humanoid::event_GettingUp''
+// SYNTHETIC: WEBSERVICE 0x10223530
+// `dynamic atexit destructor for 'RBX::Humanoid::event_FallingDown''
+// SYNTHETIC: WEBSERVICE 0x10223540
+// `dynamic atexit destructor for 'RBX::Humanoid::event_Seated''
+// SYNTHETIC: WEBSERVICE 0x10223560
+// `dynamic atexit destructor for 'RBX::Humanoid::event_Running''
+// SYNTHETIC: WEBSERVICE 0x10223570
+// `dynamic atexit destructor for 'RBX::Humanoid::event_Jumping''
+// SYNTHETIC: WEBSERVICE 0x10223590
+// `dynamic atexit destructor for 'RBX::Humanoid::event_Died''
 // clang-format on
 
 } // namespace RBX

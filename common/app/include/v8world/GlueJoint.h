@@ -14,7 +14,7 @@ class GlueJoint : public MultiJoint
 {
 public:
 	GlueJoint();
-	GlueJoint(Primitive* prim0, Primitive* prim1, const CoordinateFrame& coord0, const CoordinateFrame& coord1);
+	GlueJoint(Primitive* p0, Primitive* p1, const CoordinateFrame& jointCoord0, const CoordinateFrame& jointCoord1);
 
 	// SYNTHETIC: WEBSERVICE 0x10120320
 	// RBX::GlueJoint::`scalar deleting destructor'

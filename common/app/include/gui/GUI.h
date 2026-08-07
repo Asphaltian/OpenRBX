@@ -58,7 +58,7 @@ public:
 	void setGuiSize(const G3D::Vector2& value) { guiSize = value; }
 	const G3D::Vector2& getGuiSize() const { return guiSize; }
 
-	DECOMP_NOINLINE const GuiItem* getGuiParent() const;
+	const GuiItem* getGuiParent() const;
 	GuiItem* getGuiParent();
 
 	const GuiItem* getGuiItem(int index) const;

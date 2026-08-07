@@ -11,7 +11,7 @@ namespace RBX {
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x10047470
-inline DECOMP_NOINLINE boost::recursive_mutex& sync()
+inline boost::recursive_mutex& sync()
 {
 	static boost::recursive_mutex s;
 

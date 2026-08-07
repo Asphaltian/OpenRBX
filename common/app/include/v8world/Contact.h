@@ -28,7 +28,7 @@ public:
 
 	bool computeIsAdjacent(float spaceAllowed);
 
-	DECOMP_NOINLINE void onPrimitiveContactParametersChanged();
+	void onPrimitiveContactParametersChanged();
 
 private:
 	virtual void putInKernel(Kernel* _kernel); // vtable+0x04

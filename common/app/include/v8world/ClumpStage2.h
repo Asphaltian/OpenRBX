@@ -31,9 +31,31 @@ bool lighterJoint(Joint* joint0, Joint* joint1);
 // SIZE 0x30
 class TreeStage : public IWorldStage
 {
-public:
-	TreeStage(IStage* upstream, World* world);
+private:
+	void insertEdge(Edge* e);
+	void insertJoint(Joint* j);
 
+	void swap(Joint* deactivate, Joint* activate, Primitive* newParent);
+	void findHeaviestUpstream(Primitive* p0, Primitive* p1, Joint*& answer, int& heavySide);
+	Primitive* heavyParent(int index, Primitive* primitive, Joint*& heaviest, int& heaviestIndex);
+
+	void buildDownstreamTree(Primitive* p, std::set<Primitive*>& tree);
+	Joint* findLightestDownstream(Primitive* p, Primitive*& newParent);
+
+	void traverse(Joint* joint, Primitive* parent);
+	void rebuildClump(Joint* joint, Primitive* parent);
+
+	int getClumpDepth(Primitive* p);
+
+	void cleanEdge(Edge* e);
+
+	void dirtyAssemblies(Joint* j);
+	void destroyAssembly(Assembly* a);
+	void dirtyAssembly(Assembly* a);
+	void undirtyAssembly(Assembly* a);
+	void cleanAssembly(Assembly* assembly);
+
+public:
 	virtual ~TreeStage(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011c1e0
@@ -42,41 +64,19 @@ public:
 	// FUNCTION: WEBSERVICE 0x100a7740 FOLDED
 	virtual StageType getStageType() { return TREE_STAGE; } // vtable+0x04
 
-	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling); // vtable+0x08
-
 	virtual void onEdgeAdded(Edge* edge);         // vtable+0x10
 	virtual void onEdgeRemoving(Edge* edge);      // vtable+0x14
 	virtual int getMetric(MetricType metricType); // vtable+0x18
 
+	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling); // vtable+0x08
+
 	void process();
 
-	Primitive* heavyParent(int index, Primitive* primitive, Joint*& heaviest, int& heaviestIndex);
-	void findHeaviestUpstream(Primitive* p0, Primitive* p1, Joint*& answer, int& heavySide);
-
-	void insertJoint(Joint* j);
-	Joint* findLightestDownstream(Primitive* p, Primitive*& newParent);
-
-	void swap(Joint* deactivate, Joint* activate, Primitive* newParent);
-
-	int getClumpDepth(Primitive* p);
-
-	void dirtyAssembly(Assembly* a);
-
-	void insertEdge(Edge* e);
+private:
 	void eraseEdge(Edge* e);
 
-	void buildDownstreamTree(Primitive* p, std::set<Primitive*>& tree);
-	void rebuildClump(Joint* joint, Primitive* parent);
-	void traverse(Joint* joint, Primitive* parent);
-
-	AssemblyStage* getAssemblyStage() { return reinterpret_cast<AssemblyStage*>(getDownstream()); }
-
-	void cleanAssembly(Assembly* assembly);
-	void cleanEdge(Edge* edge);
-
-	void dirtyAssemblies(Joint* j);
-	void undirtyAssembly(Assembly* a);
-	void destroyAssembly(Assembly* a);
+public:
+	TreeStage(IStage* upstream, World* world);
 
 private:
 	int maxTreeDepth;               // 0x10
@@ -123,7 +123,6 @@ public:
 	void stepUi(int frameCount);
 
 private:
-	TreeStage* getTreeStage() { return reinterpret_cast<TreeStage*>(getDownstream()); }
 };
 
 DECOMP_SIZE_ASSERT(ClumpStage, 0x10)

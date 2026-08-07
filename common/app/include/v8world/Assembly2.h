@@ -63,7 +63,7 @@ DECOMP_SIZE_ASSERT(SleepInfo, 0x24)
 class Assembly : public IPipelined, public boost::noncopyable
 {
 public:
-	Assembly(Primitive* rootPrimitive);
+	Assembly(Primitive* root);
 	~Assembly();
 
 	// SYNTHETIC: WEBSERVICE 0x1011b5c0

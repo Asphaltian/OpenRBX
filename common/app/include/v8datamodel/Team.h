@@ -19,8 +19,8 @@ public:
 
 	bool getAutoAssignable() const { return autoAssignable; }
 
-	void setScore(int value);
-	void setTeamColor(BrickColor value);
+	void setScore(int score);
+	void setTeamColor(BrickColor color);
 	void setAutoAssignable(bool value);
 
 private:

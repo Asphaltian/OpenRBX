@@ -28,21 +28,26 @@ float GlueJoint::getMaxForce()
 }
 
 // FUNCTION: WEBSERVICE 0x10120340
-GlueJoint::GlueJoint(Primitive* p0, Primitive* p1, const CoordinateFrame& coord0, const CoordinateFrame& coord1)
-	: MultiJoint(p0, p1, coord0, coord1, 4)
+GlueJoint::GlueJoint(
+	Primitive* p0,
+	Primitive* p1,
+	const CoordinateFrame& jointCoord0,
+	const CoordinateFrame& jointCoord1
+)
+	: MultiJoint(p0, p1, jointCoord0, jointCoord1, 4)
 {
-	Face face0inP0 = p0->getFaceInObject(Matrix3ToNormalId(jointCoord0.rotation));
-	Face face1inP1 = p1->getFaceInObject(normalIdOpposite(Matrix3ToNormalId(jointCoord1.rotation)));
+	Face face0inP0 = p0->getFaceInObject(Matrix3ToNormalId(this->jointCoord0.rotation));
+	Face face1inP1 = p1->getFaceInObject(normalIdOpposite(Matrix3ToNormalId(this->jointCoord1.rotation)));
 
-	Face face0inJoint0 = face0inP0.toObjectSpace(coord0);
-	Face face1inJoint1 = face1inP1.toObjectSpace(coord1);
+	Face face0inJoint0 = face0inP0.toObjectSpace(jointCoord0);
+	Face face1inJoint1 = face1inP1.toObjectSpace(jointCoord1);
 
 	Face overlapInJoint0 = face0inJoint0.projectOverlapOnMe(face1inJoint1);
 
 	overlapInJoint0.snapToGrid(0.1f);
 
-	overlapInP0 = overlapInJoint0.toWorldSpace(coord0);
-	overlapInP1 = overlapInJoint0.toWorldSpace(coord1);
+	overlapInP0 = overlapInJoint0.toWorldSpace(jointCoord0);
+	overlapInP1 = overlapInJoint0.toWorldSpace(jointCoord1);
 }
 
 bool GlueJoint::compatibleSurfaces(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1)

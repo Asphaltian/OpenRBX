@@ -23,13 +23,13 @@ HitTestFilter::Result Balancing::filterResult(const Primitive* testMe) const
 }
 
 // STUB: WEBSERVICE 0x10122140
-void Balancing::onComputeForce(const float stepDt)
+void Balancing::onComputeForce(const float dt)
 {
 	STUB(0x10122140);
 }
 
 // STUB: WEBSERVICE 0x10122520
-DECOMP_NOINLINE PartInstance* Balancing::findFloor(bool hadFloor)
+PartInstance* Balancing::findFloor(bool existingFloor)
 {
 	STUB(0x10122520);
 	return NULL;
@@ -53,7 +53,7 @@ Humanoid::State* Balancing::onStep(const float stepDt, Controller& controller)
 	return NULL;
 }
 
-DECOMP_NOINLINE G3D::Vector3 Balancing::getYAxis() const
+G3D::Vector3 Balancing::getYAxis() const
 {
 	return G3D::Vector3(0, 0, 0);
 }

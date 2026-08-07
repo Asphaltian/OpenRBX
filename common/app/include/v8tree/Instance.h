@@ -83,6 +83,8 @@ public:
 	virtual ~Instance(); // vtable+0x00
 
 	virtual void setName(const std::string& value); // vtable+0x04
+
+protected:
 	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
 	virtual bool askAddChild(const Instance* instance) const { return false; } // vtable+0x08
 
@@ -97,19 +99,27 @@ public:
 
 	virtual void onChildRemoved(Instance* child) {} // vtable+0x24
 
-	virtual void onLastChildRemoved() {}                                            // vtable+0x28
+private:
+	virtual void onLastChildRemoved() {} // vtable+0x28
+
+protected:
 	virtual void readProperty(const XmlElement* element, IReferenceBinder& binder); // vtable+0x2c
+
+public:
 	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider) {
 	} // vtable+0x30
-	virtual shared_ptr<Instance> createChild(const Name& className);            // vtable+0x34
-	virtual XmlElement* write();                                                // vtable+0x38
+	virtual shared_ptr<Instance> createChild(const Name& className); // vtable+0x34
+	virtual XmlElement* write();                                     // vtable+0x38
+
+protected:
 	virtual void onChildChanged(Instance* child, const PropertyChanged& event); // vtable+0x3c
 
+public:
 	static Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> event_propertyChanged;
 
 	Instance* getParent() const { return parent; }
 
-	Instance* findFirstChildByName(const std::string& name) const;
+	Instance* findFirstChildByName(const std::string& findName) const;
 
 	template <class T>
 	T* findFirstChildOfType() const;
@@ -122,7 +132,7 @@ public:
 	unsigned int numChildren() const { return children.read() != NULL ? children.read()->size() : 0; }
 
 	// STUB: WEBSERVICE 0x100469f0
-	DECOMP_NOINLINE void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
+	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
 	{
 		STUB(0x100469f0);
 
@@ -136,7 +146,7 @@ public:
 	}
 
 	void readProperties(const XmlElement* element, IReferenceBinder& binder);
-	void readChild(const XmlElement* element, IReferenceBinder& binder);
+	void readChild(const XmlElement* childElement, IReferenceBinder& binder);
 	void readChildren(const XmlElement* element, IReferenceBinder& binder);
 	void writeChildren(XmlElement* element);
 

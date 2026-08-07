@@ -25,16 +25,16 @@ static PropDescriptor<Team, bool> prop_AutoAssignable(
 );
 
 // FUNCTION: WEBSERVICE 0x100be710
-void Team::setScore(int value)
+void Team::setScore(int score)
 {
-	score = value;
+	this->score = score;
 	raisePropertyChanged(prop_Score);
 }
 
 // FUNCTION: WEBSERVICE 0x100be730
-void Team::setTeamColor(BrickColor value)
+void Team::setTeamColor(BrickColor color)
 {
-	color = value;
+	this->color = color;
 	raisePropertyChanged(prop_Color);
 }
 

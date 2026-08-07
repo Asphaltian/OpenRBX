@@ -40,7 +40,7 @@ void TextXmlWriter::writeCloseTag(const XmlElement* element, int depth)
 }
 
 // FUNCTION: WEBSERVICE 0x10085870
-DECOMP_NOINLINE void TextXmlWriter::serialize(const XmlElement* xmlNode, int depth)
+void TextXmlWriter::serialize(const XmlElement* xmlNode, int depth)
 {
 	if (xmlNode != NULL) {
 		serializeNode(xmlNode, depth);
@@ -101,9 +101,9 @@ void TextXmlWriter::encodedWrite(std::ostream& stream, const char* text)
 }
 
 // FUNCTION: WEBSERVICE 0x10086590
-void TextXmlWriter::serialize(const XmlElement* element)
+void TextXmlWriter::serialize(const XmlElement* xmlNode)
 {
-	serialize(element, 0);
+	serialize(xmlNode, 0);
 }
 
 // FUNCTION: WEBSERVICE 0x10086af0

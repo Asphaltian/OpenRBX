@@ -48,7 +48,7 @@ public:
 
 protected:
 	EnumDescriptor(const char* name, const std::type_info& type);
-	virtual DECOMP_NOINLINE ~EnumDescriptor(); // vtable+0x00
+	virtual ~EnumDescriptor(); // vtable+0x00
 
 	std::vector<const Item*> allItems; // 0x10
 	unsigned int enumCount;            // 0x20

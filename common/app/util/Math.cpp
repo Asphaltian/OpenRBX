@@ -165,21 +165,21 @@ void Math::idToMatrix3(int orientId, Matrix3& matrix)
 }
 
 // FUNCTION: WEBSERVICE 0x100dedc0
-Matrix3 Math::rotateAboutZ(const Matrix3& matrix, float angle)
+Matrix3 Math::rotateAboutZ(const Matrix3& matrix, float radians)
 {
 	Matrix3 rotMatrix = Matrix3::identity();
 
-	const float s = sinf(angle);
-	const float cosR = cosf(angle);
+	const float sinR = sinf(radians);
+	const float cosR = cosf(radians);
 
-	rotMatrix.setColumn(0, Vector3(cosR, s, 0.0f));
-	rotMatrix.setColumn(1, Vector3(-s, cosR, 0.0f));
+	rotMatrix.setColumn(0, Vector3(cosR, sinR, 0.0f));
+	rotMatrix.setColumn(1, Vector3(-sinR, cosR, 0.0f));
 
 	return matrix * rotMatrix;
 }
 
 // STUB: WEBSERVICE 0x100dee50
-DECOMP_NOINLINE Matrix3 Math::snapToAxes(const Matrix3& align)
+Matrix3 Math::snapToAxes(const Matrix3& align)
 {
 	STUB(0x100dee50);
 	return align;
@@ -268,7 +268,7 @@ bool Math::fuzzyEq(const CoordinateFrame& c0, const CoordinateFrame& c1, float e
 }
 
 // STUB: WEBSERVICE 0x100df2c0
-DECOMP_NOINLINE Matrix3 Math::alignAxesClosest(const Matrix3& align, const Matrix3& target)
+Matrix3 Math::alignAxesClosest(const Matrix3& align, const Matrix3& target)
 {
 	STUB(0x100df2c0);
 	return align;
@@ -376,12 +376,12 @@ const Matrix3& Math::getAxisRotationMatrix(int face)
 }
 
 // STUB: WEBSERVICE 0x100dfa70
-CoordinateFrame Math::getFocusSpace(const CoordinateFrame& coordinateFrame)
+CoordinateFrame Math::getFocusSpace(const CoordinateFrame& focus)
 {
-	const Vector3 look = coordinateFrame.rotation.getColumn(2) * CoordinateFrame::zLookDirection;
+	const Vector3 look = focus.rotation.getColumn(2) * CoordinateFrame::zLookDirection;
 	const float heading = atan2f(-look.x, -look.z);
 
-	CoordinateFrame answer = coordinateFrame;
+	CoordinateFrame answer = focus;
 	setHeadingElevation(answer, heading, 0.0f);
 
 	return answer;

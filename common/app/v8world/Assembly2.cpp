@@ -287,11 +287,11 @@ void Assembly::onPrimitiveCanSleepChanged(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x101034e0
-Assembly::Assembly(Primitive* rootPrimitive)
-	: sleepInfo(NULL), rootPrimitive(rootPrimitive), parent(NULL), mechanism(NULL),
-	  maxRadius(this, &Assembly::computeMaxRadius), canSleep(this, &Assembly::computeCanSleep)
+Assembly::Assembly(Primitive* root)
+	: sleepInfo(NULL), rootPrimitive(root), parent(NULL), mechanism(NULL), maxRadius(this, &Assembly::computeMaxRadius),
+	  canSleep(this, &Assembly::computeCanSleep)
 {
-	rootPrimitive->setClump(static_cast<Clump*>(this));
+	root->setClump(static_cast<Clump*>(this));
 }
 
 // FUNCTION: WEBSERVICE 0x10103750

@@ -16,7 +16,7 @@ class PartInstance;
 class Balancing : public Humanoid::State, public HitTestFilter
 {
 private:
-	PartInstance* findFloor(bool hadFloor);
+	PartInstance* findFloor(bool existingFloor);
 	PartInstance* tryFloor(const G3D::Ray& ray, float distance);
 	void balance(const float stepDt, const G3D::Vector3& yAxis);
 
@@ -28,7 +28,7 @@ protected:
 	static const float fallCutoff();
 	static const float maxClimbDistance();
 
-	virtual void onComputeForce(const float stepDt);                   // vtable+0x08
+	virtual void onComputeForce(const float dt);                       // vtable+0x08
 	virtual State* onStep(const float stepDt, Controller& controller); // vtable+0x0c
 	virtual Result filterResult(const Primitive* testMe) const;        // HitTestFilter vtable+0x00
 

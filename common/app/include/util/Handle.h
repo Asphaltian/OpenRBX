@@ -13,7 +13,7 @@ public:
 	InstanceHandle() {}
 	InstanceHandle(Instance* target);
 
-	void linkTo(boost::shared_ptr<Instance> value);
+	void linkTo(boost::shared_ptr<Instance> target);
 
 	bool empty() const;
 

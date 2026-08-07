@@ -133,17 +133,17 @@ RotateJoint* RotateJoint::surfaceTypeToJoint(
 }
 
 // FUNCTION: WEBSERVICE 0x1011f200
-RotateJoint* RotateJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, NormalId nId0, NormalId nId1)
+RotateJoint* RotateJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1)
 {
-	SurfaceType surfaceType0 = prim0->getSurfaceType(nId0);
-	SurfaceType surfaceType1 = prim1->getSurfaceType(nId1);
+	SurfaceType surfaceType0 = p0->getSurfaceType(nId0);
+	SurfaceType surfaceType1 = p1->getSurfaceType(nId1);
 
 	if (surfaceType0 < ROTATE && surfaceType1 < ROTATE) {
 		return NULL;
 	}
 
-	const CoordinateFrame& coord0 = prim0->getCoordinateFrame();
-	const CoordinateFrame& coord1 = prim1->getCoordinateFrame();
+	const CoordinateFrame& coord0 = p0->getCoordinateFrame();
+	const CoordinateFrame& coord1 = p1->getCoordinateFrame();
 
 	Vector3 axis0 = Math::getWorldNormal(nId0, coord0);
 	Vector3 axis1 = Math::getWorldNormal(nId1, coord1);
@@ -152,8 +152,8 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, Norm
 		return NULL;
 	}
 
-	Face face0 = prim0->getFaceInWorld(nId0);
-	Face face1 = prim1->getFaceInWorld(nId1);
+	Face face0 = p0->getFaceInWorld(nId0);
+	Face face1 = p1->getFaceInWorld(nId1);
 
 	if (!Face::hasOverlap(face0, face1, 0.35f)) {
 		return NULL;
@@ -176,24 +176,24 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, Norm
 		return NULL;
 	}
 
-	if (!axle0 || (axle1 && prim1->getGeometry()->getGridSize().sum() > prim0->getGeometry()->getGridSize().sum())) {
+	if (!axle0 || (axle1 && p1->getGeometry()->getGridSize().sum() > p0->getGeometry()->getGridSize().sum())) {
 		surfaceType0 = surfaceType1;
-		std::swap(prim0, prim1);
+		std::swap(p0, p1);
 		std::swap(nId0, nId1);
 		std::swap(center0, center1);
 		std::swap(axis0, axis1);
 	}
 
-	CoordinateFrame jointCoord0 = prim0->getFaceCoordInObject(nId0);
+	CoordinateFrame jointCoord0 = p0->getFaceCoordInObject(nId0);
 
-	Vector3 worldPos0 = prim0->getCoordinateFrame().pointToWorldSpace(jointCoord0.translation);
-	Vector3 objectPos = prim1->getCoordinateFrame().pointToObjectSpace(worldPos0);
+	Vector3 worldPos0 = p0->getCoordinateFrame().pointToWorldSpace(jointCoord0.translation);
+	Vector3 objectPos = p1->getCoordinateFrame().pointToObjectSpace(worldPos0);
 
 	NormalId oppositeId = normalIdOpposite(nId1);
 
 	CoordinateFrame jointCoord1(normalIdToMatrix3(oppositeId), Math::toGrid(objectPos, 0.1f));
 
-	Vector3 worldPos1 = prim1->getCoordinateFrame().pointToWorldSpace(jointCoord1.translation);
+	Vector3 worldPos1 = p1->getCoordinateFrame().pointToWorldSpace(jointCoord1.translation);
 
 	if (Tolerance::pointsUnaligned(worldPos0, worldPos1)) {
 		return NULL;
@@ -209,13 +209,13 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* prim0, Primitive* prim1, Norm
 		}
 	}
 
-	return surfaceTypeToJoint(surfaceType0, prim0, prim1, jointCoord0, jointCoord1);
+	return surfaceTypeToJoint(surfaceType0, p0, p1, jointCoord0, jointCoord1);
 }
 
 // FUNCTION: WEBSERVICE 0x1011f690
-void RotatePJoint::stepUi(int frameCount)
+void RotatePJoint::stepUi(int uiStepId)
 {
-	float value = getChannelValue(frameCount);
+	float value = getChannelValue(uiStepId);
 
 	if (rotateConnector != NULL) {
 		rotateConnector->getKernelInput().setGoal(value);

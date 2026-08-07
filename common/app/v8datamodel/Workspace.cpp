@@ -36,7 +36,7 @@ Camera* Workspace::getCamera() const
 }
 
 // STUB: WEBSERVICE 0x1006ccb0
-void Workspace::runScript(Script* script, ScriptContext* scriptContext)
+void Workspace::runScript(Script* script, ScriptContext* context)
 {
 	STUB(0x1006ccb0);
 }
@@ -67,17 +67,24 @@ void Workspace::releaseScript(Script* script)
 }
 
 // STUB: WEBSERVICE 0x1006ebc0
-Workspace* Workspace::findWorkspace(const Instance* instance)
+Workspace* Workspace::findWorkspace(const Instance* context)
 {
 	STUB(0x1006ebc0);
 	return NULL;
 }
 
 // STUB: WEBSERVICE 0x1006ec00
-World* Workspace::getWorldIfInWorkspace(const Instance* instance)
+World* Workspace::getWorldIfInWorkspace(const Instance* context)
 {
 	STUB(0x1006ec00);
 	return NULL;
+}
+
+// STUB: WEBSERVICE 0x1006ec40
+bool Workspace::contextInWorkspace(const Instance* context)
+{
+	STUB(0x1006ec40);
+	return false;
 }
 
 // STUB: WEBSERVICE 0x1006ec80

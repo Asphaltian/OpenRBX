@@ -42,7 +42,7 @@ public:
 	void setBackendToolState(int value);
 
 private:
-	DECOMP_NOINLINE void setBackendToolStateNoReplicate(int value);
+	void setBackendToolStateNoReplicate(int value);
 
 	int backendToolState;                // 0x18c
 	undefined m_unk0x190[0x230 - 0x190]; // 0x190

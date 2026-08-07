@@ -16,7 +16,7 @@ std::string StringConverter<bool>::convertToString(const bool& value)
 
 // STUB: WEBSERVICE 0x10090060
 template <>
-DECOMP_NOINLINE bool StringConverter<bool>::convertToValue(const std::string& text, bool& value)
+bool StringConverter<bool>::convertToValue(const std::string& text, bool& value)
 {
 	STUB(0x10090060);
 	return false;
@@ -88,7 +88,7 @@ std::string StringConverter<float>::convertToString(const float& value)
 
 // STUB: WEBSERVICE 0x10090670
 template <>
-DECOMP_NOINLINE bool StringConverter<int>::convertToValue(const std::string& text, int& value)
+bool StringConverter<int>::convertToValue(const std::string& text, int& value)
 {
 	STUB(0x10090670);
 	return false;
@@ -96,7 +96,7 @@ DECOMP_NOINLINE bool StringConverter<int>::convertToValue(const std::string& tex
 
 // STUB: WEBSERVICE 0x100906e0
 template <>
-DECOMP_NOINLINE bool StringConverter<unsigned int>::convertToValue(const std::string& text, unsigned int& value)
+bool StringConverter<unsigned int>::convertToValue(const std::string& text, unsigned int& value)
 {
 	STUB(0x100906e0);
 	return false;
@@ -104,7 +104,7 @@ DECOMP_NOINLINE bool StringConverter<unsigned int>::convertToValue(const std::st
 
 // STUB: WEBSERVICE 0x10090750
 template <>
-DECOMP_NOINLINE bool StringConverter<double>::convertToValue(const std::string& text, double& value)
+bool StringConverter<double>::convertToValue(const std::string& text, double& value)
 {
 	STUB(0x10090750);
 	return false;
@@ -112,7 +112,7 @@ DECOMP_NOINLINE bool StringConverter<double>::convertToValue(const std::string& 
 
 // STUB: WEBSERVICE 0x10090860
 template <>
-DECOMP_NOINLINE bool StringConverter<float>::convertToValue(const std::string& text, float& value)
+bool StringConverter<float>::convertToValue(const std::string& text, float& value)
 {
 	STUB(0x10090860);
 	return false;

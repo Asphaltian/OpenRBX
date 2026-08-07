@@ -17,15 +17,10 @@ IStage::StageType AssemblyStage::getStageType()
 	return ASSEMBLY_STAGE;
 }
 
-SleepStage* AssemblyStage::getSleepStage()
-{
-	return static_cast<SleepStage*>(getDownstream());
-}
-
 // FUNCTION: WEBSERVICE 0x10126de0
 void AssemblyStage::wakeAssembly(Assembly* a)
 {
-	getSleepStage()->onWakeUpRequest(a, false);
+	static_cast<SleepStage*>(getDownstream())->onWakeUpRequest(a, false);
 }
 
 // FUNCTION: WEBSERVICE 0x10126e00
@@ -47,7 +42,7 @@ void AssemblyStage::onAssemblyAdded(Assembly* assembly)
 
 	assemblies.insert(assembly);
 
-	getSleepStage()->onAssemblyAdded(assembly);
+	static_cast<SleepStage*>(getDownstream())->onAssemblyAdded(assembly);
 }
 
 void AssemblyStage::onJointAdded(Joint* joint)
@@ -99,7 +94,7 @@ AssemblyStage::~AssemblyStage()
 // FUNCTION: WEBSERVICE 0x101270c0
 void AssemblyStage::onAssemblyRemoving(Assembly* assembly)
 {
-	getSleepStage()->onAssemblyRemoving(assembly);
+	static_cast<SleepStage*>(getDownstream())->onAssemblyRemoving(assembly);
 
 	assemblies.erase(assembly);
 

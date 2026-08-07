@@ -16,22 +16,22 @@ namespace RBX {
 // clang-format on
 
 template <class T>
-DECOMP_NOINLINE void fastRemoveIndex(std::vector<T>& newSize, unsigned int index)
+void fastRemoveIndex(std::vector<T>& vec, unsigned int index)
 {
-	unsigned int size = newSize.size();
+	unsigned int size = vec.size();
 
 	if (index < size - 1) {
-		newSize[index] = *(newSize.end() - 1);
+		vec[index] = *(vec.end() - 1);
 	}
 
-	newSize.resize(size - 1);
+	vec.resize(size - 1);
 }
 
 // TEMPLATE: WEBSERVICE 0x10103660
 // RBX::fastRemoveShort<RBX::Assembly *>
 
 template <class T>
-DECOMP_NOINLINE unsigned int fastRemoveShort(std::vector<T>& vec, const T& item)
+unsigned int fastRemoveShort(std::vector<T>& vec, const T& item)
 {
 	typename std::vector<T>::iterator found = std::find(vec.begin(), vec.end(), item);
 	unsigned int lastOne = found - vec.begin();

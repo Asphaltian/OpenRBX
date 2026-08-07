@@ -54,7 +54,7 @@ class GuiTarget
 {
 public:
 	// FUNCTION: WEBSERVICE 0x1006a090
-	virtual GuiResponse process(const GuiEvent& event) { return GuiResponse::notUsed(); } // vtable+0x00
+	virtual GuiResponse process(const GuiEvent& guiEvent) { return GuiResponse::notUsed(); } // vtable+0x00
 };
 
 DECOMP_SIZE_ASSERT(GuiTarget, 0x4)

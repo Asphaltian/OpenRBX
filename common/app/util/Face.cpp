@@ -11,20 +11,20 @@ Vector3& Face::operator[](int i)
 }
 
 // STUB: WEBSERVICE 0x1010ae70
-DECOMP_NOINLINE void Face::snapToGrid(float grid)
+void Face::snapToGrid(float grid)
 {
 	STUB(0x1010ae70);
 }
 
 // STUB: WEBSERVICE 0x1010aec0
-DECOMP_NOINLINE bool Face::fuzzyContainsInExtrusion(const Vector3& point, float tolerance) const
+bool Face::fuzzyContainsInExtrusion(const Vector3& point, float tolerance) const
 {
 	STUB(0x1010aec0);
 	return false;
 }
 
 // STUB: WEBSERVICE 0x1010af40
-DECOMP_NOINLINE bool Face::cornersAligned(const Face& f0, const Face& f1, float tolerance)
+bool Face::cornersAligned(const Face& f0, const Face& f1, float tolerance)
 {
 	STUB(0x1010af40);
 	return false;
@@ -52,7 +52,7 @@ Face Face::toObjectSpace(const CoordinateFrame& objectCoord) const
 }
 
 // STUB: WEBSERVICE 0x1010b520
-DECOMP_NOINLINE bool Face::hasOverlap(const Face& f0, const Face& f1, float byAtLeast)
+bool Face::hasOverlap(const Face& f0, const Face& f1, float byAtLeast)
 {
 	STUB(0x1010b520);
 	return false;
@@ -66,7 +66,7 @@ Face Face::projectOverlapOnMe(const Face& other) const
 }
 
 // STUB: WEBSERVICE 0x1010b890
-DECOMP_NOINLINE bool Face::overlapWithinPlanes(const Face& f0, const Face& f1, float tolerance)
+bool Face::overlapWithinPlanes(const Face& f0, const Face& f1, float tolerance)
 {
 	STUB(0x1010b890);
 	return false;

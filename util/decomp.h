@@ -29,16 +29,6 @@ typedef unsigned int undefined4;
 
 extern undefined4 g_foldingDummyVariable;
 
-// A stub body is one store, so /Ob2 inlines it and the caller loses the call its own match
-// depends on. Mark a stub the original did not inline, and drop this once the body is real.
-#define DECOMP_NOINLINE __declspec(noinline)
-
-// MSVC 8 decides inlining per call site, so a callee the original expanded at some sites and
-// called at others cannot be spelled with one attribute. Give the body a second
-// DECOMP_FORCEINLINE copy for the sites that want the expansion and leave the recorded function
-// DECOMP_NOINLINE. A thin wrapper does not work: the expansion keeps the wrapper's parameter copy.
-#define DECOMP_FORCEINLINE __forceinline
-
 // Use STUB when a function has not yet been matched and/or is WIP.
 #define STUB(val)                                                                                                      \
 	do {                                                                                                               \

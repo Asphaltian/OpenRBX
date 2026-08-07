@@ -97,6 +97,10 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004c110
 	// RBX::Reflection::SignalDesc<RBX::Instance,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::SignalDesc<RBX::Instance,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>
+	// TEMPLATE: WEBSERVICE 0x100a3c20
+	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(float)>::SignalDesc<RBX::Humanoid,void __cdecl(float)>
+	// TEMPLATE: WEBSERVICE 0x100a3cf0
+	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(bool)>::SignalDesc<RBX::Humanoid,void __cdecl(bool)>
 	// clang-format on
 	SignalDesc(const char* name, const char* arg1name)
 		: SignalDescImpl<boost::function_traits<Signature>::arity, Signature>(Class::classDescriptor(), name)

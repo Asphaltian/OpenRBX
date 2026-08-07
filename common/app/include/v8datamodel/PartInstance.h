@@ -58,7 +58,7 @@ public:
 
 private:
 	G3D::Vector3 xmlToUiSize(const G3D::Vector3& size) const;
-	G3D::Vector3 uiToXmlSize(const G3D::Vector3& size) const;
+	G3D::Vector3 uiToXmlSize(const G3D::Vector3& uiSize) const;
 
 	Part::PartType partType;                           // 0x19c
 	FormFactor formFactor;                             // 0x1a0
@@ -143,7 +143,7 @@ public:
 
 	void setColor(BrickColor value);
 
-	virtual void onCanAggregateChanged(bool value);
+	virtual void onCanAggregateChanged(bool canAggregate);
 	virtual bool reportTouches() const;
 
 	virtual void onAncestorChanged(const AncestorChanged& event);
@@ -165,11 +165,11 @@ public:
 	virtual PartInstance* getPrimaryPart();
 	virtual const PartInstance* getPrimaryPartConst() const;
 
-	virtual void legacyTraverseState(const CoordinateFrame& state);
+	virtual void legacyTraverseState(const CoordinateFrame& parentState);
 	virtual void onParentControllerChanged();
 
 	virtual const Primitive* getBiggestPrimitive() const;
-	virtual bool hitTest(const G3D::Ray& ray, G3D::Vector3& hitPoint);
+	virtual bool hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint);
 
 	virtual Extents getExtentsWorld() const;
 	virtual Extents getExtentsLocal() const;

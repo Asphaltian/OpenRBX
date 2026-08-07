@@ -139,7 +139,7 @@ bool lighterJoint(Joint* j0, Joint* j1)
 } // namespace JointSort
 
 // FUNCTION: WEBSERVICE 0x1011b740
-DECOMP_NOINLINE void ClumpStage::onPrimitiveAdded(Primitive* p)
+void ClumpStage::onPrimitiveAdded(Primitive* p)
 {
 	p->putInPipeline(this);
 	p->putInPipeline(getDownstream());
@@ -161,7 +161,7 @@ DECOMP_NOINLINE void ClumpStage::onPrimitiveAdded(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x1011b840
-DECOMP_NOINLINE void ClumpStage::onPrimitiveRemoving(Primitive* p)
+void ClumpStage::onPrimitiveRemoving(Primitive* p)
 {
 	Joint* joint = p->getFirstJoint();
 
@@ -285,20 +285,20 @@ void TreeStage::cleanAssembly(Assembly* a)
 }
 
 // FUNCTION: WEBSERVICE 0x1011bb00
-void TreeStage::cleanEdge(Edge* edge)
+void TreeStage::cleanEdge(Edge* e)
 {
-	Assembly* assembly0 = edge->getPrimitive(0)->getAssembly();
-	Assembly* assembly1 = edge->getPrimitive(1)->getAssembly();
+	Assembly* assembly0 = e->getPrimitive(0)->getAssembly();
+	Assembly* a1 = e->getPrimitive(1)->getAssembly();
 
-	bool inKernel = edge->downstreamOfStage(this);
-	bool wanted = assembly0 != assembly1 && !(assembly0->getAnchored() && assembly1->getAnchored());
+	bool inKernel = e->downstreamOfStage(this);
+	bool wanted = assembly0 != a1 && !(assembly0->getAnchored() && a1->getAnchored());
 
 	if (inKernel != wanted) {
 		if (inKernel) {
-			static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(edge);
+			static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(e);
 		}
 		else {
-			static_cast<IWorldStage*>(getDownstream())->onEdgeAdded(edge);
+			static_cast<IWorldStage*>(getDownstream())->onEdgeAdded(e);
 		}
 	}
 }
@@ -317,7 +317,7 @@ int TreeStage::getMetric(MetricType metricType)
 // FUNCTION: WEBSERVICE 0x1011bbb0
 void ClumpStage::stepUi(int uiStepId)
 {
-	getTreeStage()->getAssemblyStage()->stepUi(uiStepId);
+	static_cast<AssemblyStage*>(static_cast<TreeStage*>(getDownstream())->getDownstream())->stepUi(uiStepId);
 }
 
 // FUNCTION: WEBSERVICE 0x1011bbc0
@@ -394,7 +394,7 @@ void TreeStage::buildDownstreamTree(Primitive* p, std::set<Primitive*>& tree)
 // FUNCTION: WEBSERVICE 0x1011be80
 void ClumpStage::process()
 {
-	getTreeStage()->process();
+	static_cast<TreeStage*>(getDownstream())->process();
 }
 
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
@@ -410,7 +410,7 @@ void ClumpStage::onMotorAngleChanged(MotorJoint* motorJoint)
 // FUNCTION: WEBSERVICE 0x1011be90
 void ClumpStage::onPrimitiveCanSleepChanged(Primitive* p)
 {
-	getTreeStage()->process();
+	static_cast<TreeStage*>(getDownstream())->process();
 
 	Assembly* a = p->getAssembly();
 
@@ -465,7 +465,7 @@ void TreeStage::undirtyAssembly(Assembly* a)
 
 	if (a->inPipeline()) {
 		if (a->downstreamOfStage(this)) {
-			getAssemblyStage()->onAssemblyRemoving(a);
+			static_cast<AssemblyStage*>(getDownstream())->onAssemblyRemoving(a);
 		}
 
 		a->removeFromPipeline(this);

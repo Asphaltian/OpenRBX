@@ -54,7 +54,7 @@ class TextXmlWriter : public XmlWriter
 public:
 	TextXmlWriter(std::ostream& stream) : XmlWriter(stream) {}
 
-	virtual void serialize(const XmlElement* element); // vtable+0x00
+	virtual void serialize(const XmlElement* xmlNode); // vtable+0x00
 
 	static void encodedWrite(std::ostream& stream, const std::string& text) { encodedWrite(stream, text.c_str()); }
 
@@ -64,7 +64,7 @@ protected:
 	void writeOpenTag(const XmlElement* element, int depth, const XmlAttribute* extraAttribute);
 	void writeCloseTag(const XmlElement* element, int depth);
 
-	DECOMP_NOINLINE void serialize(const XmlElement* xmlNode, int depth);
+	void serialize(const XmlElement* xmlNode, int depth);
 
 	virtual void serializeNode(const XmlElement* xmlNode, int depth); // vtable+0x04
 };

@@ -104,7 +104,7 @@ void PartInstance::onChildAdded(Instance* child)
 }
 
 // STUB: WEBSERVICE 0x1009ae00
-void PartInstance::setName(const std::string& name)
+void PartInstance::setName(const std::string& value)
 {
 	STUB(0x1009ae00);
 }
@@ -123,7 +123,7 @@ bool PartInstance::computeSurfacesNeedAdorn() const
 }
 
 // STUB: WEBSERVICE 0x1009af50
-void PartInstance::legacyTraverseState(const CoordinateFrame& state)
+void PartInstance::legacyTraverseState(const CoordinateFrame& parentState)
 {
 	STUB(0x1009af50);
 }
@@ -209,10 +209,10 @@ Extents PartInstance::getExtentsLocal() const
 }
 
 // STUB: WEBSERVICE 0x1009b610
-Vector3 PartInstance::uiToXmlSize(const Vector3& size) const
+Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 {
 	STUB(0x1009b610);
-	return size;
+	return uiSize;
 }
 
 // STUB: WEBSERVICE 0x1009b6e0
@@ -255,14 +255,14 @@ void PartInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 }
 
 // STUB: WEBSERVICE 0x1009c0f0
-bool PartInstance::hitTest(const G3D::Ray& ray, G3D::Vector3& hitPoint)
+bool PartInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint)
 {
 	STUB(0x1009c0f0);
 	return false;
 }
 
 // STUB: WEBSERVICE 0x1009cc10
-void PartInstance::onCanAggregateChanged(bool value)
+void PartInstance::onCanAggregateChanged(bool canAggregate)
 {
 	STUB(0x1009cc10);
 }

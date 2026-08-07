@@ -41,9 +41,9 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10097030
-	virtual void announceID(const XmlNameValuePair* valueID, Instance* instance) // vtable+0x00
+	virtual void announceID(const XmlNameValuePair* valueID, Instance* target) // vtable+0x00
 	{
-		processID(valueID, instance);
+		processID(valueID, target);
 	}
 
 	// FUNCTION: WEBSERVICE 0x10097040

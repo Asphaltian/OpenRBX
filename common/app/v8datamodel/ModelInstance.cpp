@@ -83,13 +83,13 @@ Extents ModelInstance::getExtentsLocal() const
 }
 
 // STUB: WEBSERVICE 0x1005ac90
-void ModelInstance::legacyTraverseState(const CoordinateFrame& state)
+void ModelInstance::legacyTraverseState(const CoordinateFrame& parentState)
 {
 	STUB(0x1005ac90);
 }
 
 // STUB: WEBSERVICE 0x1005ad40
-bool ModelInstance::hitTest(const G3D::Ray& ray, G3D::Vector3& hitPoint)
+bool ModelInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint)
 {
 	STUB(0x1005ad40);
 	return false;

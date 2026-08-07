@@ -11,7 +11,7 @@ using G3D::Vector3;
 class IndexBox
 {
 public:
-	IndexBox(const Vector3& max, const Vector3& min);
+	IndexBox(const Vector3& min, const Vector3& max);
 	virtual ~IndexBox(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x100314f0

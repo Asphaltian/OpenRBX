@@ -31,7 +31,7 @@ bool PVInstance::isControllable() const
 }
 
 // STUB: WEBSERVICE 0x10099100
-void PVInstance::readProperty(const XmlElement* element, IReferenceBinder& binder)
+void PVInstance::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
 	STUB(0x10099100);
 }

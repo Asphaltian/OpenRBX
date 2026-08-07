@@ -60,7 +60,7 @@ void Instance::writeChildren(XmlElement* container)
 }
 
 // STUB: WEBSERVICE 0x100483f0
-Instance* Instance::findFirstChildByName(const std::string& name) const
+Instance* Instance::findFirstChildByName(const std::string& findName) const
 {
 	STUB(0x100483f0);
 	return NULL;
@@ -122,7 +122,7 @@ void Instance::predelete()
 }
 
 // STUB: WEBSERVICE 0x1004e5e0
-DECOMP_NOINLINE void Instance::readChild(const XmlElement* element, IReferenceBinder& binder)
+void Instance::readChild(const XmlElement* childElement, IReferenceBinder& binder)
 {
 	STUB(0x1004e5e0);
 }

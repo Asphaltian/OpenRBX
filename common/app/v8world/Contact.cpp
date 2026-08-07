@@ -319,7 +319,7 @@ bool BlockBlockContact::getBestPlaneEdge(bool& planeContact, float overlapIgnore
 }
 
 // FUNCTION: WEBSERVICE 0x100d2da0
-DECOMP_NOINLINE void Contact::onPrimitiveContactParametersChanged()
+void Contact::onPrimitiveContactParametersChanged()
 {
 	Primitive* prim0 = getPrimitive(0);
 	Primitive* prim1 = getPrimitive(1);

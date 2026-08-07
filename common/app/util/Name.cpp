@@ -18,7 +18,7 @@ public:
 static boost::once_flag flag = BOOST_ONCE_INIT;
 
 // FUNCTION: WEBSERVICE 0x10057ed0
-DECOMP_NOINLINE boost::mutex& moo2()
+boost::mutex& moo2()
 {
 	static boost::mutex mutex2;
 
@@ -26,13 +26,13 @@ DECOMP_NOINLINE boost::mutex& moo2()
 }
 
 // FUNCTION: WEBSERVICE 0x10057f30
-DECOMP_NOINLINE void initMoo()
+void initMoo()
 {
 	moo2();
 }
 
 // FUNCTION: WEBSERVICE 0x10058640
-DECOMP_NOINLINE std::map<int, Name*>& Name::dictionary()
+std::map<int, Name*>& Name::dictionary()
 {
 	static std::map<int, Name*> d;
 
@@ -48,7 +48,7 @@ Name::NamMap::~NamMap()
 }
 
 // FUNCTION: WEBSERVICE 0x100587b0
-DECOMP_NOINLINE Name::NamMap& Name::namMap()
+Name::NamMap& Name::namMap()
 {
 	static NamMap n;
 
