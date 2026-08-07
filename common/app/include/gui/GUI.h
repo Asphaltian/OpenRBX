@@ -70,7 +70,13 @@ protected:
 		const G3D::Color4& border,
 		Adorn::XAlign align
 	) const;
-	G3D::Rect2D getMyRect2D() const;
+	// STUB: WEBSERVICE 0x100d1460
+	G3D::Rect2D getMyRect2D() const
+	{
+		Rect rect = getMyRect();
+
+		return G3D::Rect2D::xyxy(rect.low, rect.high);
+	}
 
 private:
 	GuiResponse processNonFocus(const GuiEvent& event);

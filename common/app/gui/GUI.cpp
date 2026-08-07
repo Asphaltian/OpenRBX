@@ -61,11 +61,11 @@ void GuiItem::label2d(
 		pos.x = myRect.high.x - size.x * 0.1f;
 		break;
 
-	case Adorn::XALIGN_LEFT:
-		pos.x = myRect.low.x + size.x * 0.1f;
+	case Adorn::XALIGN_CENTER:
 		break;
 
-	case Adorn::XALIGN_CENTER:
+	default:
+		pos.x = myRect.low.x + size.x * 0.1f;
 		break;
 	}
 
@@ -185,6 +185,27 @@ G3D::Vector2 TopMenuBar::getChildPosition(const GuiItem* child) const
 	}
 
 	return position;
+}
+
+// FUNCTION: WEBSERVICE 0x100d19f0
+void TopMenuBar::render2d(Adorn* adorn)
+{
+	if (!isVisible()) {
+		return;
+	}
+
+	if (backdropColor != G3D::Color4::clear()) {
+		adorn->rect2d(getMyRect2D(), backdropColor);
+	}
+
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		Instance* instance = (*getChildren().read())[i].get();
+		GuiItem* item = dynamic_cast<GuiItem*>(instance);
+
+		if (item != NULL) {
+			item->render2d(adorn);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100d1ae0
