@@ -20,7 +20,7 @@ static const char* error = " Error:   ";
 // FUNCTION: WEBSERVICE 0x1003d880
 void Log::setLogProvider(ILogProvider* provider)
 {
-	provider = provider;
+	Log::provider = provider;
 }
 
 // FUNCTION: WEBSERVICE 0x1003d890
