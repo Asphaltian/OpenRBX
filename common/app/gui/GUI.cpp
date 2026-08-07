@@ -10,11 +10,6 @@ namespace RBX {
 
 G3D::Vector2 GuiRoot::canvasSize;
 
-// STUB: WEBSERVICE 0x100c71d0
-GuiItem::~GuiItem()
-{
-}
-
 // FUNCTION: WEBSERVICE 0x100d0fc0
 const G3D::Color4& GuiItem::disabledFill()
 {
@@ -135,6 +130,18 @@ G3D::Vector2 RelativePanel::getPosition() const
 	canvas = canvas.inset(offset);
 
 	return canvas.positionChild(me, xLocation, yLocation).low;
+}
+
+// STUB: WEBSERVICE 0x100d14d0
+GuiItem::GuiItem() : guiSize(0, 0)
+{
+	setName("Unnamed GuiItem");
+}
+
+// FUNCTION: WEBSERVICE 0x100d15f0
+GuiRoot::GuiRoot()
+{
+	setName("GuiRoot");
 }
 
 // FUNCTION: WEBSERVICE 0x100d1700

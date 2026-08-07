@@ -22,7 +22,7 @@ namespace RBX {
 class GuiItem : public Instance, public GuiTarget
 {
 public:
-	virtual ~GuiItem();
+	GuiItem();
 
 	// FUNCTION: WEBSERVICE 0x100c7460
 	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const GuiItem*>(instance) != NULL; }
@@ -107,6 +107,8 @@ DECOMP_SIZE_ASSERT(GuiItem, 0x10c)
 class GuiRoot : public GuiItem
 {
 public:
+	GuiRoot();
+
 	static void setCanvasSize(const G3D::Vector2& value) { canvasSize = value; }
 	static G3D::Vector2 getCanvasSize() { return canvasSize; }
 	static G3D::Vector2 toPixelSize(const G3D::Vector2& size);
@@ -115,7 +117,8 @@ public:
 	virtual void render2d(Adorn* adorn);
 
 private:
-	virtual G3D::Vector2 getSize() const;
+	// FUNCTION: WEBSERVICE 0x100d16c0
+	virtual G3D::Vector2 getSize() const { return canvasSize; }
 
 	static G3D::Vector2 canvasSize;
 	static G3D::Matrix4 oldProjectionMatrix;
