@@ -14,7 +14,7 @@ class GlobalSettings : public DescribedNonCreatable<GlobalSettings, ServiceProvi
 {
 public:
 	// SIZE 0xf8
-	class Item : public NonFactoryProduct<Instance, sGlobalSettings>
+	class Item : public NonFactoryProduct<Instance, 0>
 	{
 	};
 };
@@ -23,7 +23,7 @@ DECOMP_SIZE_ASSERT(GlobalSettings, 0x15c)
 DECOMP_SIZE_ASSERT(GlobalSettings::Item, 0xf8)
 
 template <class T, const char* sName>
-class GlobalSettingsItem : public DescribedCreatable<T, GlobalSettings::Item, sName>
+class GlobalSettingsItem : public DescribedCreatable<T, GlobalSettings::Item, sName>, public Service
 {
 };
 
