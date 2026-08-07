@@ -144,4 +144,10 @@ Instance::Instance() : parent(0), archivable(true)
 {
 }
 
+// STUB: WEBSERVICE 0x1004ec70
+Instance::Instance(const char* name) : name(name), parent(0), archivable(true)
+{
+	STUB(0x1004ec70);
+}
+
 } // namespace RBX

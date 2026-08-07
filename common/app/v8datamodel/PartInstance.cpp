@@ -90,10 +90,49 @@ static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging(
 	Reflection::PropertyDescriptor::STREAMING
 );
 
+// STUB: WEBSERVICE 0x10059c10
+bool PartInstance::askSetParent(const Instance* instance) const
+{
+	STUB(0x10059c10);
+	return false;
+}
+
+// STUB: WEBSERVICE 0x1009a8d0
+void PartInstance::onChildAdded(Instance* child)
+{
+	STUB(0x1009a8d0);
+}
+
+// STUB: WEBSERVICE 0x1009ae00
+void PartInstance::setName(const std::string& name)
+{
+	STUB(0x1009ae00);
+}
+
 // FUNCTION: WEBSERVICE 0x1009ae40
 bool PartInstance::nonNullInWorkspace(shared_ptr<PartInstance> part)
 {
 	return part.get() != NULL && part->myWorld != NULL;
+}
+
+// STUB: WEBSERVICE 0x1009aef0
+bool PartInstance::computeSurfacesNeedAdorn() const
+{
+	STUB(0x1009aef0);
+	return false;
+}
+
+// STUB: WEBSERVICE 0x1009af50
+void PartInstance::legacyTraverseState(const CoordinateFrame& state)
+{
+	STUB(0x1009af50);
+}
+
+// STUB: WEBSERVICE 0x1009af90
+bool PartInstance::isControllable() const
+{
+	STUB(0x1009af90);
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x1009b080
@@ -154,12 +193,123 @@ float PartInstance::getElasticity() const
 	return primitive->getElasticity();
 }
 
+// STUB: WEBSERVICE 0x1009b1b0
+Extents PartInstance::getExtentsWorld() const
+{
+	STUB(0x1009b1b0);
+	return Extents();
+}
+
 // FUNCTION: WEBSERVICE 0x1009b1d0
 Extents PartInstance::getExtentsLocal() const
 {
 	const Vector3 corner = primitive->getGeometry()->getGridSize() * 0.5f;
 
 	return Extents(-corner, corner);
+}
+
+// STUB: WEBSERVICE 0x1009b610
+Vector3 PartInstance::uiToXmlSize(const Vector3& size) const
+{
+	STUB(0x1009b610);
+	return size;
+}
+
+// STUB: WEBSERVICE 0x1009b6e0
+Part PartInstance::computePersistentPart() const
+{
+	STUB(0x1009b6e0);
+	return Part();
+}
+
+// STUB: WEBSERVICE 0x1009b780
+bool PartInstance::shouldRender3dAdorn() const
+{
+	STUB(0x1009b780);
+	return false;
+}
+
+// STUB: WEBSERVICE 0x1009bf50
+bool PartInstance::reportTouches() const
+{
+	STUB(0x1009bf50);
+	return false;
+}
+
+// STUB: WEBSERVICE 0x1009bff0
+void PartInstance::onAncestorChanged(const AncestorChanged& event)
+{
+	STUB(0x1009bff0);
+}
+
+// STUB: WEBSERVICE 0x1009c090
+void PartInstance::onParentControllerChanged()
+{
+	STUB(0x1009c090);
+}
+
+// STUB: WEBSERVICE 0x1009c0c0
+void PartInstance::render3dSelect(Adorn* adorn, SelectState selectState)
+{
+	STUB(0x1009c0c0);
+}
+
+// STUB: WEBSERVICE 0x1009c0f0
+bool PartInstance::hitTest(const G3D::Ray& ray, G3D::Vector3& hitPoint)
+{
+	STUB(0x1009c0f0);
+	return false;
+}
+
+// STUB: WEBSERVICE 0x1009cc10
+void PartInstance::onCanAggregateChanged(bool value)
+{
+	STUB(0x1009cc10);
+}
+
+// STUB: WEBSERVICE 0x1009cc30
+void PartInstance::safeMove()
+{
+	STUB(0x1009cc30);
+}
+
+// STUB: WEBSERVICE 0x1009d150
+PartInstance::~PartInstance()
+{
+	STUB(0x1009d150);
+}
+
+// STUB: WEBSERVICE 0x1009d2e0
+PartInstance* PartInstance::getPrimaryPart()
+{
+	STUB(0x1009d2e0);
+	return NULL;
+}
+
+const PartInstance* PartInstance::getPrimaryPartConst() const
+{
+	STUB(0x1009d2e1);
+	return NULL;
+}
+
+// STUB: WEBSERVICE 0x1009d3b0
+const Primitive* PartInstance::getBiggestPrimitive() const
+{
+	STUB(0x1009d3b0);
+	return primitive.get();
+}
+
+// STUB: WEBSERVICE 0x1009d3c0
+const CoordinateFrame PartInstance::getLocation() const
+{
+	STUB(0x1009d3c0);
+	return CoordinateFrame();
+}
+
+// STUB: WEBSERVICE 0x1009d7d0
+void PartInstance::getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives)
+{
+	STUB(0x1009d7d0);
 }
 
 namespace Reflection {
@@ -176,6 +326,14 @@ EnumDesc<PartInstance::FormFactor>::EnumDesc() : EnumDescriptor("FormFactor", ty
 }
 
 } // namespace Reflection
+
+// STUB: WEBSERVICE 0x1009f220
+PartInstance::PartInstance()
+	: PVInstance(sPart), PersistentPart(this, &PartInstance::computePersistentPart),
+	  SurfacesNeedAdorn(this, &PartInstance::computeSurfacesNeedAdorn)
+{
+	STUB(0x1009f220);
+}
 
 // FUNCTION: WEBSERVICE 0x1009faa0
 void PartInstance::setDragging(bool value)
@@ -278,6 +436,18 @@ void PartInstance::setColor3(G3D::Color3 value)
 		raisePropertyChanged(prop_Color);
 		raisePropertyChanged(prop_BrickColor);
 	}
+}
+
+// STUB: WEBSERVICE 0x1009fec0
+void PartInstance::onCameraNear(float distance)
+{
+	STUB(0x1009fec0);
+}
+
+// STUB: WEBSERVICE 0x1009ff60
+void PartInstance::render3dAdorn(Adorn* adorn)
+{
+	STUB(0x1009ff60);
 }
 
 } // namespace RBX

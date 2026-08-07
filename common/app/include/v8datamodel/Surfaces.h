@@ -2,14 +2,22 @@
 #define V8DATAMODEL_SURFACES_H
 
 #include "decomp.h"
+#include "v8datamodel/Surface.h"
+
+#include <boost/noncopyable.hpp>
 
 namespace RBX {
 
 // SIZE 0x30
-class Surfaces
+class Surfaces : public boost::noncopyable
 {
 private:
-	undefined m_unk0x00[0x30 - 0x00]; // 0x00
+	Surface Top;    // 0x00
+	Surface Bottom; // 0x08
+	Surface Left;   // 0x10
+	Surface Right;  // 0x18
+	Surface Front;  // 0x20
+	Surface Back;   // 0x28
 };
 
 DECOMP_SIZE_ASSERT(Surfaces, 0x30)

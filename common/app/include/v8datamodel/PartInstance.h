@@ -1,11 +1,18 @@
 #ifndef V8DATAMODEL_PARTINSTANCE_H
 #define V8DATAMODEL_PARTINSTANCE_H
 
+#include "appdraw/Part.h"
 #include "decomp.h"
+#include "util/ComputeProp.h"
 #include "util/Extents.h"
+#include "util/ICameraSubject.h"
+#include "util/IRenderable.h"
+#include "util/ISelectable3d.h"
 #include "v8datamodel/BrickColor.h"
+#include "v8datamodel/IPrimaryPart.h"
+#include "v8datamodel/PVInstance.h"
 #include "v8datamodel/Surfaces.h"
-#include "v8tree/Instance.h"
+#include "v8world/IMoving.h"
 #include "v8world/Primitive.h"
 
 #include <G3D/Color3.h>
@@ -21,9 +28,22 @@ using boost::shared_ptr;
 class World;
 
 // SIZE 0x2ac
-class PartInstance : public Instance
+class PartInstance : public PVInstance,
+					 public Notifier<PartInstance, CanAggregateChanged>,
+					 public IMoving,
+					 public IRenderable,
+					 public virtual IPrimaryPart,
+					 public virtual ICameraSubject,
+					 public virtual ISelectable3d
 {
 public:
+	static bool highlightSleepParts;
+	static bool highlightAwakeParts;
+	static bool showAnchoredParts;
+	static bool showPartCoord;
+	static bool showUnalignedParts;
+	static bool showSpanningTree;
+
 	enum FormFactor
 	{
 		SYMETRIC = 0,
@@ -31,12 +51,36 @@ public:
 		PLATE = 2
 	};
 
-	static bool highlightSleepParts;
-	static bool highlightAwakeParts;
-	static bool showAnchoredParts;
-	static bool showPartCoord;
-	static bool showUnalignedParts;
-	static bool showSpanningTree;
+	static float plateHeight();
+	static float brickHeight();
+	static float cameraTransparentDistance();
+	static float cameraTranslucentDistance();
+
+private:
+	G3D::Vector3 xmlToUiSize(const G3D::Vector3& size) const;
+	G3D::Vector3 uiToXmlSize(const G3D::Vector3& size) const;
+
+	Part::PartType partType;                           // 0x19c
+	FormFactor formFactor;                             // 0x1a0
+	BrickColor color;                                  // 0x1a4
+	float transparency;                                // 0x1a8
+	float reflectance;                                 // 0x1ac
+	bool locked;                                       // 0x1b0
+	Surfaces surfaces;                                 // 0x1b4
+	float renderImportance;                            // 0x1e4
+	boost::scoped_ptr<Primitive> primitive;            // 0x1e8
+	World* myWorld;                                    // 0x1ec
+	float alphaModifier;                               // 0x1f0
+	ComputeProp<Part, PartInstance> PersistentPart;    // 0x1f8
+	ComputeProp<bool, PartInstance> SurfacesNeedAdorn; // 0x278
+
+	Part computePersistentPart() const;
+	bool computeSurfacesNeedAdorn() const;
+	void safeMove();
+
+public:
+	PartInstance();
+	virtual ~PartInstance();
 
 	static const Reflection::PropDescriptor<PartInstance, float> prop_RenderImportance;
 	static const Reflection::PropDescriptor<PartInstance, float> prop_Transparency;
@@ -46,6 +90,9 @@ public:
 	static const Reflection::PropDescriptor<PartInstance, BrickColor> prop_BrickColor;
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_CanCollide;
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_Anchored;
+
+	const Primitive* getPrimitive() const { return primitive.get(); }
+	Primitive* getPrimitive() { return primitive.get(); }
 
 	static bool nonNullInWorkspace(shared_ptr<PartInstance> part);
 
@@ -60,8 +107,6 @@ public:
 	bool getPartLocked() const { return locked; }
 
 	Surfaces& getSurfaces() { return surfaces; }
-
-	Primitive* getBiggestPrimitive() const { return primitive.get(); }
 
 	bool getIsTransparent() const { return 1.0f - (1.0f - transparency) * alphaModifier > 0.1f; }
 
@@ -78,8 +123,6 @@ public:
 
 	float getFriction() const;
 	float getElasticity() const;
-
-	Extents getExtentsLocal() const;
 
 	void setRenderImportance(float value);
 	void setPartLocked(bool value);
@@ -100,20 +143,36 @@ public:
 
 	void setColor(BrickColor value);
 
-private:
-	undefined m_unk0x0f8[0x1a0 - 0x0f8];    // 0x0f8
-	FormFactor formFactor;                  // 0x1a0
-	BrickColor color;                       // 0x1a4
-	float transparency;                     // 0x1a8
-	float reflectance;                      // 0x1ac
-	bool locked;                            // 0x1b0
-	undefined m_unk0x1b1[0x1b4 - 0x1b1];    // 0x1b1
-	Surfaces surfaces;                      // 0x1b4
-	float renderImportance;                 // 0x1e4
-	boost::scoped_ptr<Primitive> primitive; // 0x1e8
-	World* myWorld;                         // 0x1ec
-	float alphaModifier;                    // 0x1f0
-	undefined m_unk0x1f4[0x2ac - 0x1f4];    // 0x1f4
+	virtual void onCanAggregateChanged(bool value);
+	virtual bool reportTouches() const;
+
+	virtual void onAncestorChanged(const AncestorChanged& event);
+	virtual bool askSetParent(const Instance* instance) const;
+	virtual void onChildAdded(Instance* child);
+	virtual void setName(const std::string& value);
+
+	virtual const CoordinateFrame getLocation() const;
+
+	virtual void onCameraNear(float distance);
+	virtual void getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives);
+
+	virtual bool shouldRender3dAdorn() const;
+	virtual void render3dAdorn(Adorn* adorn);
+	virtual void render3dSelect(Adorn* adorn, SelectState selectState);
+
+	virtual bool isControllable() const;
+
+	virtual PartInstance* getPrimaryPart();
+	virtual const PartInstance* getPrimaryPartConst() const;
+
+	virtual void legacyTraverseState(const CoordinateFrame& state);
+	virtual void onParentControllerChanged();
+
+	virtual const Primitive* getBiggestPrimitive() const;
+	virtual bool hitTest(const G3D::Ray& ray, G3D::Vector3& hitPoint);
+
+	virtual Extents getExtentsWorld() const;
+	virtual Extents getExtentsLocal() const;
 };
 
 DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)

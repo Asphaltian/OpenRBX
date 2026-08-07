@@ -66,7 +66,7 @@ Primitive* Humanoid::getTorsoPrimitive() const
 {
 	PartInstance* part = getTorso();
 
-	return part != NULL ? part->getBiggestPrimitive() : NULL;
+	return part != NULL ? part->getPrimitive() : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a26c0
@@ -74,7 +74,7 @@ Primitive* Humanoid::getLeftLegPrimitive()
 {
 	PartInstance* part = getLeftLeg();
 
-	return part != NULL ? part->getBiggestPrimitive() : NULL;
+	return part != NULL ? part->getPrimitive() : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a26e0
@@ -82,7 +82,7 @@ Primitive* Humanoid::getRightLegPrimitive()
 {
 	PartInstance* part = getRightLeg();
 
-	return part != NULL ? part->getBiggestPrimitive() : NULL;
+	return part != NULL ? part->getPrimitive() : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a2700
@@ -90,7 +90,7 @@ Body* Humanoid::getTorsoBody()
 {
 	PartInstance* part = getTorso();
 
-	return part != NULL ? part->getBiggestPrimitive()->getBody() : NULL;
+	return part != NULL ? part->getPrimitive()->getBody() : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a2720

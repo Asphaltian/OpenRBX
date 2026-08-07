@@ -70,6 +70,7 @@ class Instance : public GuidItem<Instance>,
 {
 public:
 	Instance();
+	Instance(const char* name);
 	virtual ~Instance(); // vtable+0x00
 
 	virtual void setName(const std::string& value); // vtable+0x04

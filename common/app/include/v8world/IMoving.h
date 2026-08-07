@@ -35,6 +35,16 @@ private:
 
 DECOMP_SIZE_ASSERT(IMovingManager, 0x18)
 
+// SIZE 0x1
+struct CanAggregateChanged
+{
+	const bool canClump; // 0x00
+
+	CanAggregateChanged(bool canClump) : canClump(canClump) {}
+};
+
+DECOMP_SIZE_ASSERT(CanAggregateChanged, 0x1)
+
 // SIZE 0x0c
 class __declspec(novtable) IMoving
 {
