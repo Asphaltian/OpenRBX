@@ -11,20 +11,20 @@ namespace RBX {
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100d3720
 // RBX::fastRemoveIndex<RBX::ContactConnector *>
-// STUB: WEBSERVICE 0x100d40c0
+// TEMPLATE: WEBSERVICE 0x100d40c0
 // RBX::fastRemoveIndex<bool>
 // clang-format on
 
 template <class T>
 void fastRemoveIndex(std::vector<T>& vec, unsigned int index)
 {
-	unsigned int size = vec.size();
+	unsigned int newSize = vec.size() - 1;
 
-	if (index < size - 1) {
-		vec[index] = *(vec.end() - 1);
+	if (index < newSize) {
+		vec[index] = vec.back();
 	}
 
-	vec.resize(size - 1);
+	vec.resize(newSize);
 }
 
 // TEMPLATE: WEBSERVICE 0x10103660

@@ -313,6 +313,7 @@ Where the line records show lines that generate no code, the original named some
 
 - **Most of what is left in the engine is template instantiations**, not one-off functions. Count the unannotated symbols by owning template before picking work: one template written right settles every instantiation of it.
 - **A template instantiation belongs to whichever object the linker kept it from,** and that decides its flags. An instantiation kept from a `/GL` object is LTCG where ours is not, and no source spelling closes that.
+- **The instantiation set names the spelling.** `std::vector<bool>::back` is emitted out of line where `vector<T*>::back` inlines to nothing, so a helper whose module shows one and not the other called `back()` rather than `*(end() - 1)`. `fastRemoveIndex<bool>` went from 46.51 to 100 on that plus the recorded `newSize`, which its pointer sibling records and it does not.
 - **An explicit instantiation carries no line records,** so it takes a `// TEMPLATE:` marker with a nameref on the template body in the header.
 - **Explicit instantiation of a derived class does not reach its bases.** Name each one.
 - **A template constructor is user-declared,** so a class that has one also needs an explicit default constructor back or it stops being default constructible.

@@ -205,15 +205,15 @@ bool BlockBlockContact::getBestPlaneEdge(bool& planeContact, float overlapIgnore
 
 	bool checkLastFeature = (lastFeature[0] >= 0 && lastFeature[0] < 6) || (lastFeature[1] >= 0 && lastFeature[1] < 6);
 
-	for (int baseId = separatingBodyId; baseId < separatingBodyId + 2; baseId++) {
+	for (int i = separatingBodyId; i < separatingBodyId + 2; i++) {
 
-		int i0 = baseId % 2;
-		int i1 = (baseId + 1) % 2;
+		int baseId = i % 2;
+		int i1 = (i + 1) % 2;
 
-		const CoordinateFrame& cBase = getBody(i0)->getCoordinateFrame();
+		const CoordinateFrame& cBase = getBody(baseId)->getCoordinateFrame();
 		const CoordinateFrame& cTest = getBody(i1)->getCoordinateFrame();
 
-		const Vector3& eBase = block(i0)->getExtent();
+		const Vector3& eBase = block(baseId)->getExtent();
 		const Vector3& eTest = block(i1)->getExtent();
 
 		Vector3 pTestInBase = cBase.pointToObjectSpace(cTest.translation);
@@ -228,14 +228,14 @@ bool BlockBlockContact::getBestPlaneEdge(bool& planeContact, float overlapIgnore
 						   fabsf(eBaseInTest.z * eTest.z) + eBase[j] - fabsf(pTestInBase[j]);
 
 			if (!(length > overlapIgnored)) {
-				separatingBodyId = i0;
+				separatingBodyId = baseId;
 				separatingAxisId = j;
 
 				return false;
 			}
 
 			if (checkLastFeature) {
-				if (lastFeature[i0] % 3 == j) {
+				if (lastFeature[baseId] % 3 == j) {
 					lastPlaneLength = length;
 				}
 			}
@@ -243,10 +243,10 @@ bool BlockBlockContact::getBestPlaneEdge(bool& planeContact, float overlapIgnore
 			if (length < bestPlaneLength) {
 				bestPlaneLength = length;
 
-				feature[i0] = pTestInBase[j] > 0 ? j : j + 3;
+				feature[baseId] = pTestInBase[j] > 0 ? j : j + 3;
 				feature[i1] = -1;
 
-				separatingBodyId = i0;
+				separatingBodyId = baseId;
 				separatingAxisId = j;
 
 				planeContact = true;
