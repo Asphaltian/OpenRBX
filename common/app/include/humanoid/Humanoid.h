@@ -108,6 +108,8 @@ public:
 	PartInstance* getTorso() const;
 	PartInstance* getLeftLeg() const;
 	PartInstance* getRightLeg() const;
+	PartInstance* getLeftArm() const;
+	PartInstance* getRightArm() const;
 
 	Primitive* getTorsoPrimitive() const;
 	Primitive* getLeftLegPrimitive();
@@ -134,8 +136,8 @@ private:
 	mutable boost::shared_ptr<PartInstance> torso;    // 0x1b8
 	mutable boost::shared_ptr<PartInstance> leftLeg;  // 0x1c0
 	mutable boost::shared_ptr<PartInstance> rightLeg; // 0x1c8
-	boost::shared_ptr<PartInstance> rightArm;         // 0x1d0
-	boost::shared_ptr<PartInstance> leftArm;          // 0x1d8
+	mutable boost::shared_ptr<PartInstance> rightArm; // 0x1d0
+	mutable boost::shared_ptr<PartInstance> leftArm;  // 0x1d8
 	World* world;                                     // 0x1e0
 	std::auto_ptr<State> currentState;                // 0x1e4
 };

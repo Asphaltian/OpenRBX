@@ -121,6 +121,26 @@ PartInstance* Humanoid::getRightLeg() const
 	return rightLeg.get();
 }
 
+// FUNCTION: WEBSERVICE 0x100a2410
+PartInstance* Humanoid::getLeftArm() const
+{
+	if (leftArm == NULL && getParent() != NULL) {
+		leftArm = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Left Arm"));
+	}
+
+	return leftArm.get();
+}
+
+// FUNCTION: WEBSERVICE 0x100a2510
+PartInstance* Humanoid::getRightArm() const
+{
+	if (rightArm == NULL && getParent() != NULL) {
+		rightArm = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Right Arm"));
+	}
+
+	return rightArm.get();
+}
+
 // FUNCTION: WEBSERVICE 0x100a26a0
 Primitive* Humanoid::getTorsoPrimitive() const
 {
