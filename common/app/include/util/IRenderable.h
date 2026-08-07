@@ -2,10 +2,12 @@
 #define UTIL_IRENDERABLE_H
 
 #include "decomp.h"
+#include "util/IndexArray.h"
 
 namespace RBX {
 
 class Adorn;
+class IRenderableBucket;
 
 enum SelectState
 {
@@ -25,13 +27,42 @@ public:
 	virtual void render3dAdorn(Adorn* adorn) {}                           // vtable+0x0c
 	virtual void render3dSelect(Adorn* adorn, SelectState selectState) {} // vtable+0x10
 
+	void shouldRenderSetDirty();
+
 private:
-	undefined4 index2d; // 0x04
-	undefined4 index3d; // 0x08
-	undefined4 bucket;  // 0x0c
+	int index2d; // 0x04
+	int index3d; // 0x08
+
+	int& indexFunc2d() { return index2d; }
+	int& indexFunc3d() { return index3d; }
+
+	IRenderableBucket* bucket; // 0x0c
+
+	friend class IRenderableBucket;
 };
 
 DECOMP_SIZE_ASSERT(IRenderable, 0x10)
+
+// SIZE 0x18
+class IRenderableBucket
+{
+private:
+	IndexArray<IRenderable, &IRenderable::indexFunc2d> renderable2ds; // 0x00
+	IndexArray<IRenderable, &IRenderable::indexFunc3d> renderable3ds; // 0x0c
+
+protected:
+	void onAdded(IRenderable* renderable);
+	void onRemoving(IRenderable* renderable);
+	void recomputeShouldRender(IRenderable* renderable);
+
+public:
+	~IRenderableBucket();
+
+	void render2dItems(Adorn* adorn);
+	void render3dAdornItems(Adorn* adorn);
+};
+
+DECOMP_SIZE_ASSERT(IRenderableBucket, 0x18)
 
 } // namespace RBX
 
