@@ -9,6 +9,8 @@
 namespace RBX {
 
 G3D::Vector2 GuiRoot::canvasSize;
+G3D::Matrix4 GuiRoot::oldProjectionMatrix;
+G3D::CoordinateFrame GuiRoot::oldCameraWorld;
 
 // FUNCTION: WEBSERVICE 0x100d0fc0
 const G3D::Color4& GuiItem::disabledFill()

@@ -167,6 +167,15 @@ protected:
 
 DECOMP_SIZE_ASSERT(RelativePanel, 0x130)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021c440
+// `dynamic initializer for 'RBX::GuiRoot::oldProjectionMatrix''
+// SYNTHETIC: WEBSERVICE 0x1021c450
+// `dynamic initializer for 'RBX::GuiRoot::oldCameraWorld''
+// SYNTHETIC: WEBSERVICE 0x10223d80
+// `dynamic atexit destructor for 'RBX::GuiRoot::oldCameraWorld''
+// clang-format on
+
 } // namespace RBX
 
 #endif // GUI_GUI_H
