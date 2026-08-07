@@ -27,6 +27,8 @@ public:
 	virtual void render3dAdorn(Adorn* adorn) {}                           // vtable+0x0c
 	virtual void render3dSelect(Adorn* adorn, SelectState selectState) {} // vtable+0x10
 
+	~IRenderable();
+
 	void shouldRenderSetDirty();
 
 private:

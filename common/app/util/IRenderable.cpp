@@ -2,6 +2,10 @@
 
 namespace RBX {
 
+IRenderable::~IRenderable()
+{
+}
+
 // STUB: WEBSERVICE 0x100a66c0
 IRenderableBucket::~IRenderableBucket()
 {

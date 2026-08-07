@@ -63,7 +63,6 @@ void Humanoid::computeForce(float dt, bool throttling)
 // STUB: WEBSERVICE 0x100a1100
 Humanoid::~Humanoid()
 {
-	STUB(0x100a1100);
 }
 
 // FUNCTION: WEBSERVICE 0x100a1480
