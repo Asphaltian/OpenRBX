@@ -66,6 +66,13 @@ void Workspace::releaseScript(Script* script)
 	STUB(0x1006d440);
 }
 
+// STUB: WEBSERVICE 0x1006ec00
+World* Workspace::getWorldIfInWorkspace(const Instance* instance)
+{
+	STUB(0x1006ec00);
+	return NULL;
+}
+
 // STUB: WEBSERVICE 0x1006ec80
 void Workspace::onEvent(const RunService* source, Heartbeat event)
 {

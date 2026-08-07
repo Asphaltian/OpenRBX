@@ -48,7 +48,10 @@ public:
 	virtual ContactManager* getContactManager();
 	virtual void getIgnorePrims(std::vector<const Primitive*>& prims);
 	virtual void tellCameraNear(float distance);
+	G3D::Vector3 getIntendedMovementVector(bool ignoreSit);
 	virtual G3D::Vector3 getIntendedMovementVector();
+
+	G3D::Vector3 updateWalkDirection();
 	virtual float getIntendedRotationAboutYAxis();
 	virtual void cameraSetWalkOrientation(float angle, bool value);
 

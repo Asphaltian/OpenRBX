@@ -1,7 +1,9 @@
 #include "humanoid/Humanoid.h"
 
 #include "reflection/property.h"
+#include "v8datamodel/Workspace.h"
 #include "v8kernel/Body.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
@@ -40,10 +42,15 @@ static PropDescriptor<Humanoid, bool> propSit(
 	Reflection::PropertyDescriptor::STREAMING
 );
 
-// STUB: WEBSERVICE 0x100a0990
+// FUNCTION: WEBSERVICE 0x100a0990
 ContactManager* Humanoid::getContactManager()
 {
-	STUB(0x100a0990);
+	World* world = Workspace::getWorldIfInWorkspace(this);
+
+	if (world != NULL) {
+		return world->getContactManager();
+	}
+
 	return NULL;
 }
 
@@ -59,10 +66,13 @@ Humanoid::~Humanoid()
 	STUB(0x100a1100);
 }
 
-// STUB: WEBSERVICE 0x100a1480
+// FUNCTION: WEBSERVICE 0x100a1480
 float Humanoid::getIntendedRotationAboutYAxis()
 {
-	STUB(0x100a1480);
+	if (currentState.get() != NULL) {
+		return currentState->getIntendedRotationAboutYAxis();
+	}
+
 	return 0;
 }
 
@@ -140,10 +150,23 @@ const CoordinateFrame Humanoid::getLocation() const
 	return CoordinateFrame();
 }
 
+// STUB: WEBSERVICE 0x100a2f70
+DECOMP_NOINLINE G3D::Vector3 Humanoid::getIntendedMovementVector(bool ignoreSit)
+{
+	STUB(0x100a2f70);
+	return G3D::Vector3::zero();
+}
+
 // STUB: WEBSERVICE 0x100a30d0
 G3D::Vector3 Humanoid::getIntendedMovementVector()
 {
-	STUB(0x100a30d0);
+	return getIntendedMovementVector(false);
+}
+
+// STUB: WEBSERVICE 0x100a30f0
+G3D::Vector3 Humanoid::updateWalkDirection()
+{
+	STUB(0x100a30f0);
 	return G3D::Vector3::zero();
 }
 

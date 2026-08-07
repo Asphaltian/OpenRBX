@@ -15,6 +15,7 @@
 namespace RBX {
 
 class IDataState;
+class World;
 
 extern char sWorkspace[];
 
@@ -46,6 +47,8 @@ class Workspace : public RootInstance,
 {
 public:
 	static bool showWorldCoord;
+
+	static World* getWorldIfInWorkspace(const Instance* instance);
 
 	Workspace(IDataState* dataState);
 

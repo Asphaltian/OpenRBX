@@ -49,6 +49,8 @@ struct AutoDestroy
 class World : public Notifier<World, AutoJoin>, public Notifier<World, AutoDestroy>
 {
 public:
+	ContactManager* getContactManager() { return contactManager; }
+
 	World();
 
 	virtual ~World(); // vtable+0x00
