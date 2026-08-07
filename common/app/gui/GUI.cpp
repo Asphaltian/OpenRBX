@@ -126,6 +126,21 @@ G3D::Vector2 RelativePanel::getPosition() const
 	return canvas.positionChild(me, xLocation, yLocation).low;
 }
 
+// FUNCTION: WEBSERVICE 0x100d1700
+void GuiRoot::render2d(Adorn* adorn)
+{
+	setCanvasSize(G3D::Vector2(G3D::Vector2int16(adorn->getWidth(), adorn->getHeight())));
+
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		Instance* instance = (*getChildren().read())[i].get();
+		GuiItem* item = dynamic_cast<GuiItem*>(instance);
+
+		if (item != NULL) {
+			item->render2d(adorn);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100d17c0
 G3D::Vector2 TopMenuBar::getSize() const
 {

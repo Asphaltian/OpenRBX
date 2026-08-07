@@ -71,12 +71,7 @@ protected:
 		Adorn::XAlign align
 	) const;
 	// STUB: WEBSERVICE 0x100d1460
-	G3D::Rect2D getMyRect2D() const
-	{
-		Rect rect = getMyRect();
-
-		return G3D::Rect2D::xyxy(rect.low, rect.high);
-	}
+	G3D::Rect2D getMyRect2D() const { return getMyRect().toRect2D(); }
 
 private:
 	GuiResponse processNonFocus(const GuiEvent& event);
@@ -94,7 +89,7 @@ DECOMP_SIZE_ASSERT(GuiItem, 0x10c)
 class GuiRoot : public GuiItem
 {
 public:
-	static void setCanvasSize(const G3D::Vector2& value);
+	static void setCanvasSize(const G3D::Vector2& value) { canvasSize = value; }
 	static G3D::Vector2 getCanvasSize() { return canvasSize; }
 	static G3D::Vector2 toPixelSize(const G3D::Vector2& size);
 	static int normalizedFontSize(int size);

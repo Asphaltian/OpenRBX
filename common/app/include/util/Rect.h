@@ -1,6 +1,7 @@
 #ifndef UTIL_RECT_H
 #define UTIL_RECT_H
 
+#include <G3D/Rect2D.h>
 #include <G3D/Vector2.h>
 #include <G3D/Vector2int16.h>
 
@@ -30,6 +31,8 @@ public:
 	Rect(float lowX, float lowY, float highX, float highY) : low(lowX, lowY), high(highX, highY) {}
 
 	static Rect fromLowSize(const Vector2& low, const Vector2& size) { return Rect(low, low + size); }
+
+	G3D::Rect2D toRect2D() const { return G3D::Rect2D::xyxy(low, high); }
 
 	Vector2 size() const { return high - low; }
 	Vector2 center() const { return (high + low) * 0.5f; }
