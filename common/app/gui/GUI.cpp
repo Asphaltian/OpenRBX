@@ -80,6 +80,17 @@ int GuiRoot::normalizedFontSize(int fontSize)
 	return G3D::iRound(floorf(fontSize * toPixelSize(percentSize).x * 0.001f));
 }
 
+// FUNCTION: WEBSERVICE 0x100d1360
+G3D::Vector2 RelativePanel::getPosition() const
+{
+	Rect canvas(G3D::Vector2::zero(), GuiRoot::getCanvasSize());
+	Rect me(G3D::Vector2::zero(), getSize());
+
+	canvas = canvas.inset(offset);
+
+	return canvas.positionChild(me, xLocation, yLocation).low;
+}
+
 // FUNCTION: WEBSERVICE 0x100d17c0
 G3D::Vector2 TopMenuBar::getSize() const
 {

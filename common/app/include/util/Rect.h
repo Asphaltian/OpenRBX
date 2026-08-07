@@ -26,6 +26,7 @@ public:
 
 	Rect() {}
 	Rect(const Vector2& low, const Vector2& high) : low(low), high(high) {}
+	Rect(const Vector2& size) : low(Vector2::zero()), high(size) {}
 	Rect(float lowX, float lowY, float highX, float highY) : low(lowX, lowY), high(highX, highY) {}
 
 	static Rect fromLowSize(const Vector2& low, const Vector2& size) { return Rect(low, low + size); }
@@ -37,6 +38,11 @@ public:
 		int x = point.x;
 
 		return x >= low.x && x <= high.x && y >= low.y && y <= high.y;
+	}
+
+	Rect inset(const G3D::Vector2int16& amount) const
+	{
+		return Rect(low.x + amount.x, low.y + amount.y, high.x - amount.x, high.y - amount.y);
 	}
 
 	Rect positionChild(const Rect& child, Location xLocation, Location yLocation) const;

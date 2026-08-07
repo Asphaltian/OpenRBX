@@ -122,6 +122,7 @@ endif()
 set(OPENRBX_APP_SOURCES
   common/app/security/SecurityContext.cpp
   common/app/gui/GUI.cpp
+  common/app/gui/Widget.cpp
   common/app/humanoid/Humanoid.cpp
   common/app/reflection/reflection_function.cpp
   common/app/reflection/reflection_object.cpp

@@ -82,7 +82,7 @@ class GuiRoot : public GuiItem
 {
 public:
 	static void setCanvasSize(const G3D::Vector2& value);
-	static const G3D::Vector2& getCanvasSize();
+	static G3D::Vector2 getCanvasSize() { return canvasSize; }
 	static G3D::Vector2 toPixelSize(const G3D::Vector2& size);
 	static int normalizedFontSize(int size);
 

@@ -23,7 +23,14 @@ protected:
 	virtual void onLoseFocus();
 	virtual void render2d(Adorn* adorn);
 
-	virtual void onClick(); // vtable+0x64
+	virtual void onClick(const GuiEvent& event); // vtable+0x64
+	virtual bool onDrag(const GuiEvent& event);  // vtable+0x68
+	virtual void onDown(const UIEvent& event);   // vtable+0x6c
+	virtual void onUp(const UIEvent& event);     // vtable+0x70
+	virtual G3D::Color4 getFontColor();          // vtable+0x74
+	virtual bool isEnabled();                    // vtable+0x78
+
+	virtual int getFontSize() const;
 
 	WidgetState widgetState; // 0x10c
 
