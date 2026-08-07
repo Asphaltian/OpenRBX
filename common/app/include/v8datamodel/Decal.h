@@ -2,6 +2,7 @@
 #define V8DATAMODEL_DECAL_H
 
 #include "decomp.h"
+#include "reflection/property.h"
 #include "v8datamodel/FaceInstance.h"
 #include "v8tree/Instance.h"
 
@@ -19,6 +20,9 @@ using G3D::Vector2;
 class Decal : public FaceInstance
 {
 public:
+	static const Reflection::PropDescriptor<Decal, float> prop_Specular;
+	static const Reflection::PropDescriptor<Decal, float> prop_Shiny;
+
 	// FUNCTION: WEBSERVICE 0x100ff500
 	float getSpecular() const { return specular; }
 
@@ -40,6 +44,9 @@ DECOMP_SIZE_ASSERT(Decal, 0x124)
 class Texture : public DescribedCreatable<Texture, Decal, sTexture>
 {
 public:
+	static const Reflection::PropDescriptor<Texture, float> prop_StudsPerTileU;
+	static const Reflection::PropDescriptor<Texture, float> prop_StudsPerTileV;
+
 	// FUNCTION: WEBSERVICE 0x100ff520
 	float getStudsPerTileU() const { return studsPerTile.x; }
 

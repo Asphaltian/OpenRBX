@@ -10,23 +10,23 @@ char sDecal[] = "Decal";
 
 using namespace Reflection;
 
-static PropDescriptor<Decal, float> prop_Specular(
+const PropDescriptor<Decal, float> Decal::prop_Specular(
 	"Specular",
 	"Appearance",
 	&RBX::Decal::getSpecular,
 	&RBX::Decal::setSpecular
 );
 
-static PropDescriptor<Decal, float> prop_Shiny("Shiny", "Appearance", &RBX::Decal::getShiny, &RBX::Decal::setShiny);
+const PropDescriptor<Decal, float> Decal::prop_Shiny("Shiny", "Appearance", &RBX::Decal::getShiny, &RBX::Decal::setShiny);
 
-static PropDescriptor<Texture, float> prop_StudsPerTileU(
+const PropDescriptor<Texture, float> Texture::prop_StudsPerTileU(
 	"StudsPerTileU",
 	"Appearance",
 	&RBX::Texture::getStudsPerTileU,
 	&RBX::Texture::setStudsPerTileU
 );
 
-static PropDescriptor<Texture, float> prop_StudsPerTileV(
+const PropDescriptor<Texture, float> Texture::prop_StudsPerTileV(
 	"StudsPerTileV",
 	"Appearance",
 	&RBX::Texture::getStudsPerTileV,
