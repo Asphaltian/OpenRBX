@@ -39,6 +39,8 @@ private:
 	}
 
 public:
+	ICharacterSubject();
+
 	virtual ContactManager* getContactManager() = 0;                    // vtable+0x18
 	virtual void getIgnorePrims(std::vector<const Primitive*>& prims);  // vtable+0x1c
 	virtual void tellCameraNear(float distance);                        // vtable+0x20

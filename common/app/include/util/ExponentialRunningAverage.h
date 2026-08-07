@@ -10,6 +10,8 @@ using G3D::Vector3;
 class floatERA
 {
 public:
+	floatERA(float weight) : weight(weight) { reset(); }
+
 	void reset();
 	float pushAndGetAverage(float value);
 	float getAverage() const;
@@ -22,6 +24,8 @@ private:
 class Vector3ERA
 {
 public:
+	Vector3ERA(float weight) : weight(weight) { reset(); }
+
 	void reset();
 	Vector3 pushAndGetAverage(Vector3 value);
 	Vector3 getAverage() const;

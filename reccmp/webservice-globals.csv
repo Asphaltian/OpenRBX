@@ -693,6 +693,7 @@ address,type,symbol
 0x1022ee04,global,??_7?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1022ee0c,global,??_7?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1022ee1c,global,??_7?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1022ee84,global,??_8PVInstance@RBX@@7B@
 0x1022ee94,global,??_7?$GetSetImpl@P8ModelInstance@RBX@@BEABVCoordinateFrame@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VModelInstance@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@6B@
 0x1022eea4,global,??_7?$GetSetImpl@P8ModelInstance@RBX@@BEPAVPartInstance@2@XZP812@AEXPAV32@@Z@?$PropDescriptor@VModelInstance@RBX@@PAVPartInstance@2@@Reflection@RBX@@6B@
 0x1022eeb4,global,??_7ModelInstance@RBX@@6BICameraSubject@1@@
@@ -1409,6 +1410,7 @@ address,type,symbol
 0x10237498,global,??_7?$SignalDesc@VHumanoid@RBX@@$$A6AX_N@Z@Reflection@RBX@@6B@
 0x102374a8,global,??_7?$BoundFuncDesc@VHumanoid@RBX@@$$A6AXM@Z$00@Reflection@RBX@@6B@
 0x102374b4,global,??_7?$BoundFuncDesc@VHumanoid@RBX@@$$A6AXVVector3@G3D@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z$01@Reflection@RBX@@6B@
+0x102374c8,global,??_8Humanoid@RBX@@7B@
 0x1023762c,global,??_7Geometry@RBX@@6B@
 0x10237654,global,??_7Block@RBX@@6B@
 0x1023767c,global,??_7Ball@RBX@@6B@
@@ -2738,6 +2740,13 @@ address,type,symbol
 0x10241768,global,??_7?$DescribedCreatable@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10241770,global,??_7?$DescribedCreatable@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1024177c,global,??_7?$DescribedCreatable@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x102417e4,global,??_8ModelInstance@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8?$FactoryProduct@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8RootInstance@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8?$DescribedCreatable@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8PartInstance@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8Workspace@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8Seat@RBX@@7BICameraSubject@1@@
 0x102417f0,global,??_7?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10241800,global,??_7?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x10241810,global,??_7?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
@@ -3620,6 +3629,7 @@ address,type,symbol
 0x10246d10,global,?sRunning@RBX@@3QBDB
 0x10246d1c,global,??_7State@Humanoid@RBX@@6B@
 0x10246d50,global,??_7Running@RBX@@6B@
+0x10246d90,global,??_8ICharacterSubject@RBX@@7B@
 0x10246da8,global,?sFallingDown@RBX@@3QBDB
 0x10246db8,global,??_7FallingDown@RBX@@6B@
 0x10246ddc,global,??_7BallBallContact@RBX@@6B@
@@ -5393,6 +5403,8 @@ address,type,symbol
 0x102fe2c4,global,??_B?3??resize@?$Array@VFace@Frustum@GCamera@G3D@@@G3D@@QAEXH_N@Z@53
 0x102fe2c8,global,n___G3D::nan
 0x102fe2d0,global,??_B?1??nan@G3D@@YAABNXZ@51
+0x102fe2e0,global,?ZERO@Vector3@G3D@@2V12@B
+0x102fe2ec,global,?ZERO3@Vector3@G3D@@2V12@B
 0x102fe314,global,?ignoreBool@CollisionDetection@G3D@@0_NA
 0x102fe318,global,?ignore@CollisionDetection@G3D@@0VVector3@2@A
 0x102fe354,global,??_B?3??resize@?$Array@_N@G3D@@QAEXH_N@Z@53

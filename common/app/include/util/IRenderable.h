@@ -16,7 +16,7 @@ enum SelectState
 };
 
 // SIZE 0x10
-class IRenderable
+class __declspec(novtable) IRenderable
 {
 protected:
 	virtual bool shouldRender2d() const { return false; }      // vtable+0x00
@@ -26,6 +26,8 @@ public:
 	virtual void render2d(Adorn* adorn) {}                                // vtable+0x08
 	virtual void render3dAdorn(Adorn* adorn) {}                           // vtable+0x0c
 	virtual void render3dSelect(Adorn* adorn, SelectState selectState) {} // vtable+0x10
+
+	IRenderable() : index2d(-1), index3d(-1), bucket(NULL) {}
 
 	~IRenderable();
 

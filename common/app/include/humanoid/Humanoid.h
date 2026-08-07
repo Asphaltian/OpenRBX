@@ -122,7 +122,7 @@ private:
 	float health;                                     // 0x16c
 	float maxHealth;                                  // 0x170
 	float walkRotationalVelocity;                     // 0x174
-	float walkTimer;                                  // 0x178
+	int walkTimer;                                    // 0x178
 	WalkMode walkMode;                                // 0x17c
 	shared_ptr<PartInstance> walkToPart;              // 0x180
 	G3D::Vector3 walkToPoint;                         // 0x188

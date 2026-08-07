@@ -62,7 +62,7 @@ void Humanoid::computeForce(float dt, bool throttling)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a1100
+// FUNCTION: WEBSERVICE 0x100a1100
 Humanoid::~Humanoid()
 {
 }
@@ -215,10 +215,12 @@ void Humanoid::tellCameraNear(float distance)
 	STUB(0x100a31b0);
 }
 
-// STUB: WEBSERVICE 0x100a4290
+// FUNCTION: WEBSERVICE 0x100a4290
 Humanoid::Humanoid()
+	: health(100), maxHealth(100), walkRotationalVelocity(0), walkTimer(0), walkMode(DIRECTION_MOVE), jump(false),
+	  imDead(false), hadHeadJoint(false), sit(false), world(NULL)
 {
-	STUB(0x100a4290);
+	setName("Humanoid");
 }
 
 // STUB: WEBSERVICE 0x100a4960
