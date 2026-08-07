@@ -18,4 +18,4 @@ VariableName:
         Integer: ''
         Bool: ''
         Pointer: ''
-    Pattern: '^[gmp]_unk0x[a-f0-9]{1,8}$|^(prop|event|desc)_[a-zA-Z][a-zA-Z0-9]*$|^(tag|name|value)_[a-zA-Z][a-zA-Z0-9]*(_[a-zA-Z][a-zA-Z0-9]*)?$|^(forward|backward|left|right)_(arrow|asdw)$|^_type$|^_base64Chars$|^line_octets$|^category_[A-Z][a-zA-Z0-9]*$|^___Roblox_[A-Za-z0-9_]+$|^[A-Z][A-Z0-9_]*$|^[a-z][a-zA-Z0-9]*$'
+    Pattern: '^[gmp]_unk0x[a-f0-9]{1,8}$|^(prop|event|desc)_[a-zA-Z][a-zA-Z0-9]*$|^(tag|name|value)_[a-zA-Z][a-zA-Z0-9]*(_[a-zA-Z][a-zA-Z0-9]*)?$|^(forward|backward|left|right)_(arrow|asdw)$|^_type$|^_base64Chars$|^line_octets$|^category_[A-Z][a-zA-Z0-9]*$|^___Roblox_[A-Za-z0-9_]+$|^(IsControllable|IsTopFlag|TopPVController)$|^[A-Z][A-Z0-9_]*$|^[a-z][a-zA-Z0-9]*$'
