@@ -6,6 +6,7 @@
 #include "reflection/property.h"
 #include "reflection/type.h"
 
+#include <boost/any.hpp>
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/signal.hpp>
@@ -13,6 +14,7 @@
 #include <functional>
 #include <map>
 #include <memory>
+#include <vector>
 
 namespace RBX {
 namespace Reflection {
@@ -54,6 +56,17 @@ protected:
 };
 
 DECOMP_SIZE_ASSERT(SignalSource, 0x08)
+
+// SIZE 0x04
+class __declspec(novtable) GenericSlotWrapper
+{
+public:
+	virtual ~GenericSlotWrapper() {} // vtable+0x00
+
+	virtual void execute(const std::vector<boost::any>& arguments) = 0; // vtable+0x04
+};
+
+DECOMP_SIZE_ASSERT(GenericSlotWrapper, 0x04)
 
 // SIZE 0x24
 class __declspec(novtable) SignalDescriptor : public MemberDescriptor
