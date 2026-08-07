@@ -25,6 +25,11 @@ private:
 
 DECOMP_SIZE_ASSERT(FaceInstance, 0xfc)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10225590
+// `dynamic atexit destructor for 'RBX::FaceInstance::prop_Face''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_FACEINSTANCE_H

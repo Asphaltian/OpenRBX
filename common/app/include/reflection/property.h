@@ -290,10 +290,8 @@ public:
 	class __declspec(novtable) GetSet
 	{
 	public:
-		virtual ~GetSet() {} // vtable+0x00
-
-		virtual T getValue(const DescribedBase* instance) const = 0;              // vtable+0x04
-		virtual void setValue(DescribedBase* instance, const T& value) const = 0; // vtable+0x08
+		virtual T getValue(const DescribedBase* instance) const = 0;              // vtable+0x00
+		virtual void setValue(DescribedBase* instance, const T& value) const = 0; // vtable+0x04
 	};
 
 	template <class Getter, class Setter>
