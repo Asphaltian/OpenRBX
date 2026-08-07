@@ -66,6 +66,13 @@ void Workspace::releaseScript(Script* script)
 	STUB(0x1006d440);
 }
 
+// STUB: WEBSERVICE 0x1006ebc0
+Workspace* Workspace::findWorkspace(const Instance* instance)
+{
+	STUB(0x1006ebc0);
+	return NULL;
+}
+
 // STUB: WEBSERVICE 0x1006ec00
 World* Workspace::getWorldIfInWorkspace(const Instance* instance)
 {

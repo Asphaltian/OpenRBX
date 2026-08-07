@@ -111,6 +111,9 @@ public:
 
 	Instance* findFirstChildByName(const std::string& name) const;
 
+	template <class T>
+	T* findFirstChildOfType() const;
+
 	const std::string& getName() const { return name; }
 
 	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }
@@ -388,6 +391,29 @@ public:
 // SYNTHETIC: WEBSERVICE 0x102217c0
 // `dynamic atexit destructor for 'RBX::Instance::event_propertyChanged''
 // clang-format on
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1005aff0
+// RBX::Instance::findFirstChildOfType<RBX::Humanoid>
+// clang-format on
+template <class T>
+T* Instance::findFirstChildOfType() const
+{
+	if (getChildren().read() != NULL) {
+		std::vector<shared_ptr<Instance> >::const_iterator end = getChildren().read()->end();
+
+		for (std::vector<shared_ptr<Instance> >::const_iterator iter = getChildren().read()->begin(); iter != end;
+			 ++iter) {
+			T* child = dynamic_cast<T*>(iter->get());
+
+			if (child != NULL) {
+				return child;
+			}
+		}
+	}
+
+	return NULL;
+}
 
 } // namespace RBX
 

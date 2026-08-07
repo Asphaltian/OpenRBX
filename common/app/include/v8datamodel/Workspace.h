@@ -49,6 +49,7 @@ public:
 	static bool showWorldCoord;
 
 	static World* getWorldIfInWorkspace(const Instance* instance);
+	static Workspace* findWorkspace(const Instance* instance);
 
 	Workspace(IDataState* dataState);
 

@@ -11,6 +11,9 @@
 #include <boost/shared_ptr.hpp>
 
 namespace RBX {
+
+class ModelInstance;
+
 namespace Network {
 
 extern char sPlayers[];
@@ -39,6 +42,8 @@ public:
 	void setMaxPlayers(int value);
 
 	int numPlayers() const { return players.read()->size(); }
+
+	static RBX::ModelInstance* findLocalCharacter(const Instance* context);
 
 private:
 	virtual void onEvent(const Player* source, CharacterAdded event);

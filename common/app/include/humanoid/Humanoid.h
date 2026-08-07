@@ -42,6 +42,8 @@ public:
 
 	virtual bool shouldRender2d() const;
 	virtual bool shouldRender3dAdorn() const;
+	void renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera);
+
 	virtual void render2d(Adorn* adorn);
 	virtual void render3dAdorn(Adorn* adorn);
 

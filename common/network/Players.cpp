@@ -1,6 +1,7 @@
 #include "network/Players.h"
 
 #include "reflection/property.h"
+#include "v8datamodel/ModelInstance.h"
 
 namespace RBX {
 namespace Network {
@@ -18,6 +19,13 @@ static Reflection::PropDescriptor<Players, int> propPlayerMaxCount(
 void Players::onEvent(const Player* source, CharacterAdded event)
 {
 	STUB(0x101913e0);
+}
+
+// STUB: WEBSERVICE 0x101935c0
+RBX::ModelInstance* Players::findLocalCharacter(const Instance* context)
+{
+	STUB(0x101935c0);
+	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x101956e0

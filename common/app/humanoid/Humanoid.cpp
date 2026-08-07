@@ -1,6 +1,8 @@
 #include "humanoid/Humanoid.h"
 
+#include "network/Players.h"
 #include "reflection/property.h"
+#include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Body.h"
 #include "v8world/World.h"
@@ -223,10 +225,28 @@ Humanoid::Humanoid()
 	setName("Humanoid");
 }
 
-// STUB: WEBSERVICE 0x100a4960
+// STUB: WEBSERVICE 0x100a4690
+DECOMP_NOINLINE void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
+{
+	STUB(0x100a4690);
+}
+
+// FUNCTION: WEBSERVICE 0x100a4960
 void Humanoid::render2d(Adorn* adorn)
 {
-	STUB(0x100a4960);
+	Humanoid* self = this;
+	ModelInstance* character = Network::Players::findLocalCharacter(self);
+	Humanoid* localHumanoid = character != NULL ? character->findFirstChildOfType<Humanoid>() : NULL;
+
+	if (this == localHumanoid) {
+		return;
+	}
+
+	Workspace* workspace = Workspace::findWorkspace(self);
+
+	if (workspace != NULL) {
+		renderMultiplayer(adorn, workspace->getGCamera());
+	}
 }
 
 // STUB: WEBSERVICE 0x100a4bf0
