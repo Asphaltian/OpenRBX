@@ -59,6 +59,13 @@ void Instance::writeChildren(XmlElement* container)
 	}
 }
 
+// STUB: WEBSERVICE 0x100483f0
+Instance* Instance::findFirstChildByName(const std::string& name) const
+{
+	STUB(0x100483f0);
+	return NULL;
+}
+
 // STUB: WEBSERVICE 0x10049d40
 XmlElement* Instance::write()
 {

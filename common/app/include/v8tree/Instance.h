@@ -109,6 +109,8 @@ public:
 
 	Instance* getParent() const { return parent; }
 
+	Instance* findFirstChildByName(const std::string& name) const;
+
 	const std::string& getName() const { return name; }
 
 	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }

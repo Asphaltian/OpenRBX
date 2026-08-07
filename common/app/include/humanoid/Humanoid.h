@@ -104,6 +104,7 @@ public:
 
 	void setSit(bool value);
 
+	PartInstance* getHead() const;
 	PartInstance* getTorso() const;
 	PartInstance* getLeftLeg() const;
 	PartInstance* getRightLeg() const;
@@ -116,27 +117,27 @@ public:
 	Body* getRootBody();
 
 private:
-	float health;                             // 0x16c
-	float maxHealth;                          // 0x170
-	float walkRotationalVelocity;             // 0x174
-	float walkTimer;                          // 0x178
-	WalkMode walkMode;                        // 0x17c
-	shared_ptr<PartInstance> walkToPart;      // 0x180
-	G3D::Vector3 walkToPoint;                 // 0x188
-	G3D::Vector3 walkDirection;               // 0x194
-	G3D::Vector3 targetPoint;                 // 0x1a0
-	bool jump : 1;                            // 0x1ac
-	bool imDead : 1;                          // 0x1ac
-	bool hadHeadJoint : 1;                    // 0x1ac
-	bool sit : 1;                             // 0x1ac
-	boost::shared_ptr<PartInstance> head;     // 0x1b0
-	boost::shared_ptr<PartInstance> torso;    // 0x1b8
-	boost::shared_ptr<PartInstance> leftLeg;  // 0x1c0
-	boost::shared_ptr<PartInstance> rightLeg; // 0x1c8
-	boost::shared_ptr<PartInstance> rightArm; // 0x1d0
-	boost::shared_ptr<PartInstance> leftArm;  // 0x1d8
-	World* world;                             // 0x1e0
-	std::auto_ptr<State> currentState;        // 0x1e4
+	float health;                                     // 0x16c
+	float maxHealth;                                  // 0x170
+	float walkRotationalVelocity;                     // 0x174
+	float walkTimer;                                  // 0x178
+	WalkMode walkMode;                                // 0x17c
+	shared_ptr<PartInstance> walkToPart;              // 0x180
+	G3D::Vector3 walkToPoint;                         // 0x188
+	G3D::Vector3 walkDirection;                       // 0x194
+	G3D::Vector3 targetPoint;                         // 0x1a0
+	bool jump : 1;                                    // 0x1ac
+	bool imDead : 1;                                  // 0x1ac
+	bool hadHeadJoint : 1;                            // 0x1ac
+	bool sit : 1;                                     // 0x1ac
+	mutable boost::shared_ptr<PartInstance> head;     // 0x1b0
+	mutable boost::shared_ptr<PartInstance> torso;    // 0x1b8
+	mutable boost::shared_ptr<PartInstance> leftLeg;  // 0x1c0
+	mutable boost::shared_ptr<PartInstance> rightLeg; // 0x1c8
+	boost::shared_ptr<PartInstance> rightArm;         // 0x1d0
+	boost::shared_ptr<PartInstance> leftArm;          // 0x1d8
+	World* world;                                     // 0x1e0
+	std::auto_ptr<State> currentState;                // 0x1e4
 };
 
 DECOMP_SIZE_ASSERT(Humanoid, 0x1f0)

@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "util/Name.h"
 
+#include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
 #include <stdlib.h>
 
@@ -29,6 +30,12 @@ template <class T>
 boost::shared_ptr<T> shared_from(T* r)
 {
 	return r != NULL ? boost::shared_static_cast<T>(r->shared_from_this()) : boost::shared_ptr<T>();
+}
+
+template <class T, class Base>
+boost::shared_ptr<T> shared_from_dynamic_cast(boost::enable_shared_from_this<Base>* r)
+{
+	return r != NULL ? boost::shared_dynamic_cast<T>(r->shared_from_this()) : boost::shared_ptr<T>();
 }
 
 template <class T>

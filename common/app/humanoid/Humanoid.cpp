@@ -81,25 +81,44 @@ void Humanoid::render3dAdorn(Adorn* adorn)
 	STUB(0x100a1b00);
 }
 
-// STUB: WEBSERVICE 0x100a2110
-DECOMP_NOINLINE PartInstance* Humanoid::getTorso() const
+// FUNCTION: WEBSERVICE 0x100a2010
+PartInstance* Humanoid::getHead() const
 {
-	STUB(0x100a2110);
-	return NULL;
+	if (head == NULL && getParent() != NULL) {
+		head = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Head"));
+	}
+
+	return head.get();
 }
 
-// STUB: WEBSERVICE 0x100a2210
-DECOMP_NOINLINE PartInstance* Humanoid::getLeftLeg() const
+// FUNCTION: WEBSERVICE 0x100a2110
+PartInstance* Humanoid::getTorso() const
 {
-	STUB(0x100a2210);
-	return NULL;
+	if (torso == NULL && getParent() != NULL) {
+		torso = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Torso"));
+	}
+
+	return torso.get();
 }
 
-// STUB: WEBSERVICE 0x100a2310
-DECOMP_NOINLINE PartInstance* Humanoid::getRightLeg() const
+// FUNCTION: WEBSERVICE 0x100a2210
+PartInstance* Humanoid::getLeftLeg() const
 {
-	STUB(0x100a2310);
-	return NULL;
+	if (leftLeg == NULL && getParent() != NULL) {
+		leftLeg = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Left Leg"));
+	}
+
+	return leftLeg.get();
+}
+
+// FUNCTION: WEBSERVICE 0x100a2310
+PartInstance* Humanoid::getRightLeg() const
+{
+	if (rightLeg == NULL && getParent() != NULL) {
+		rightLeg = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Right Leg"));
+	}
+
+	return rightLeg.get();
 }
 
 // FUNCTION: WEBSERVICE 0x100a26a0
@@ -142,11 +161,10 @@ Body* Humanoid::getRootBody()
 	return body != NULL ? body->getRoot() : NULL;
 }
 
-// STUB: WEBSERVICE 0x100a27c0
+// FUNCTION: WEBSERVICE 0x100a27c0
 const CoordinateFrame Humanoid::getLocation() const
 {
-	STUB(0x100a27c0);
-	return CoordinateFrame();
+	return getHead() != NULL ? getHead()->getCoordinateFrame() : CoordinateFrame();
 }
 
 // STUB: WEBSERVICE 0x100a2f70
