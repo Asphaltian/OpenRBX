@@ -3,12 +3,14 @@
 
 #include "decomp.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 namespace RBX {
 
 extern const char sGlobalSettings[];
 
-class GlobalSettings
+// SIZE 0x15c
+class GlobalSettings : public DescribedNonCreatable<GlobalSettings, ServiceProvider, sGlobalSettings>
 {
 public:
 	// SIZE 0xf8
@@ -17,6 +19,7 @@ public:
 	};
 };
 
+DECOMP_SIZE_ASSERT(GlobalSettings, 0x15c)
 DECOMP_SIZE_ASSERT(GlobalSettings::Item, 0xf8)
 
 template <class T, const char* sName>
