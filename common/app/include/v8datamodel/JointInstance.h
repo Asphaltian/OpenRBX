@@ -2,6 +2,7 @@
 #define V8DATAMODEL_JOINTINSTANCE_H
 
 #include "decomp.h"
+#include "util/IRenderable.h"
 #include "v8tree/Instance.h"
 #include "v8world/GlueJoint.h"
 #include "v8world/MotorJoint.h"
@@ -30,15 +31,14 @@ extern const char sWeld[];
 extern const char sSnap[];
 
 // SIZE 0x10c
-class JointInstance : public DescribedNonCreatable<JointInstance, Instance, sJointInstance>
+class JointInstance : public DescribedNonCreatable<JointInstance, Instance, sJointInstance>, public IRenderable
 {
 public:
 	JointInstance() {}
 	JointInstance(Joint* joint) : joint(joint) {}
 
 protected:
-	undefined m_unk0x0f8[0x108 - 0x0f8]; // 0x0f8
-	Joint* joint;                        // 0x108
+	Joint* joint; // 0x108
 };
 
 DECOMP_SIZE_ASSERT(JointInstance, 0x10c)
