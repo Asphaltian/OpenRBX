@@ -48,25 +48,27 @@ class Workspace : public RootInstance,
 public:
 	static bool showWorldCoord;
 
-	static World* getWorldIfInWorkspace(const Instance* context);
 	static Workspace* findWorkspace(const Instance* context);
+	static World* getWorldIfInWorkspace(const Instance* context);
 	static bool contextInWorkspace(const Instance* context);
 
-	Workspace(IDataState* dataState);
-
-	virtual ~Workspace();
-
-	virtual Camera* getCamera() const;              // ICameraOwner vtable+0x04
-	virtual const G3D::GCamera& getGCamera() const; // ICameraOwner vtable+0x08
-	virtual void cameraMoved();                     // ICameraOwner vtable+0x0c
-	virtual Extents computeCameraOwnerExtents();    // ICameraOwner vtable+0x10
-
-protected:
+private:
 	virtual IScriptOwner* scriptShouldRun(Script* script);
 	virtual void runScript(Script* script, ScriptContext* context);
 	virtual void releaseScript(Script* script);
 
+	virtual Extents computeCameraOwnerExtents(); // ICameraOwner vtable+0x10
+	virtual void cameraMoved();                  // ICameraOwner vtable+0x0c
+
 	virtual void onEvent(const RunService* source, Heartbeat event);
+
+public:
+	virtual ~Workspace();
+
+	virtual const G3D::GCamera& getGCamera() const; // ICameraOwner vtable+0x08
+	virtual Camera* getCamera() const;              // ICameraOwner vtable+0x04
+
+	Workspace(IDataState* dataState);
 
 private:
 	undefined m_unk0x310[0x374 - 0x310]; // 0x310

@@ -201,21 +201,21 @@ float Constants::getKmsMaxJointForce(float grid1, float grid2)
 	int grid1int = std::max(1, G3D::iRound(grid1));
 	int grid2int = std::max(1, G3D::iRound(grid2));
 
-	int hi = std::max(grid1int, grid2int);
-	int lo = std::min(grid1int, grid2int);
+	int width = std::max(grid1int, grid2int);
+	int overlap = std::min(grid1int, grid2int);
 
 	float force;
 
-	if (hi < 7) {
-		force = MAX_LEGO_JOINT_FORCES_MEASURED[hi];
+	if (width < 7) {
+		force = MAX_LEGO_JOINT_FORCES_MEASURED[width];
 	}
 	else {
-		force = hi * (1.0f / 7.0f) * MAX_LEGO_JOINT_FORCES_MEASURED[6];
+		force = width * (1.0f / 7.0f) * MAX_LEGO_JOINT_FORCES_MEASURED[6];
 	}
 
 	force = force * 0.5f;
 
-	return force * lo * 7500.0f;
+	return force * overlap * 7500.0f;
 }
 
 // FUNCTION: WEBSERVICE 0x1010adb0

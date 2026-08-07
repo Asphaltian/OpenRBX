@@ -62,6 +62,12 @@ DECOMP_SIZE_ASSERT(SleepInfo, 0x24)
 // SIZE 0x50
 class Assembly : public IPipelined, public boost::noncopyable
 {
+private:
+	float computeMaxRadius() const;
+	bool computeCanSleep() const;
+	void onPrimitivesChanged();
+	static Joint* getJointToParent(Primitive* primitive);
+
 public:
 	Assembly(Primitive* root);
 	~Assembly();
@@ -86,8 +92,6 @@ public:
 	float getMaxRadius() { return maxRadius; }
 	bool getCanSleep() { return canSleep; }
 
-	static Joint* getJointToParent(Primitive* primitive);
-
 	Assembly* otherAssembly(Edge* edge);
 
 	const Primitive* getRootPrimitive() const { return rootPrimitive; }
@@ -95,7 +99,6 @@ public:
 	Mechanism* getMechanism();
 	void setMechanism(Mechanism* value) { mechanism = value; }
 
-	void onPrimitivesChanged();
 	void onPrimitiveCanSleepChanged(Primitive* primitive);
 
 	unsigned int numMotors();
@@ -110,8 +113,6 @@ public:
 	static void addGroundChild(Primitive* child);
 	Sim::AssemblyState getSleepStatus();
 	bool getAnchored();
-	float computeMaxRadius() const;
-	bool computeCanSleep() const;
 
 	void notifyMoved();
 

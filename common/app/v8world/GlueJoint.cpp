@@ -63,28 +63,28 @@ GlueJoint* GlueJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0,
 {
 	if (compatibleSurfaces(p0, p1, nId0, nId1) && canBuildJointLoose(p0, p1, nId0, nId1)) {
 
-		Face face0 = p0->getFaceInWorld(nId0);
-		Face face1 = p1->getFaceInWorld(nId1);
+		Face f0 = p0->getFaceInWorld(nId0);
+		Face f1 = p1->getFaceInWorld(nId1);
 
-		Face overlap0 = face0.projectOverlapOnMe(face1);
-		Face overlap1 = face1.projectOverlapOnMe(face0);
+		Face overlapOn0 = f0.projectOverlapOnMe(f1);
+		Face overlapOn1 = f1.projectOverlapOnMe(f0);
 
-		Face objectOverlap0 = overlap0.toObjectSpace(p0->getCoordinateFrame());
-		Face objectOverlap1 = overlap1.toObjectSpace(p1->getCoordinateFrame());
+		Face offsetInP0 = overlapOn0.toObjectSpace(p0->getCoordinateFrame());
+		Face offsetInP1 = overlapOn1.toObjectSpace(p1->getCoordinateFrame());
 
-		objectOverlap0.snapToGrid(0.1f);
-		objectOverlap1.snapToGrid(0.1f);
+		offsetInP0.snapToGrid(0.1f);
+		offsetInP1.snapToGrid(0.1f);
 
-		Face worldOverlap0 = objectOverlap0.toWorldSpace(p0->getCoordinateFrame());
-		Face worldOverlap1 = objectOverlap1.toWorldSpace(p1->getCoordinateFrame());
+		Face offset0World = offsetInP0.toWorldSpace(p0->getCoordinateFrame());
+		Face offset1World = offsetInP1.toWorldSpace(p1->getCoordinateFrame());
 
-		if (Face::cornersAligned(worldOverlap0, worldOverlap1, 0.05f)) {
-			CoordinateFrame coord0 = p0->getFaceCoordInObject(nId0);
-			CoordinateFrame world = p0->getCoordinateFrame() * coord0;
-			CoordinateFrame object = p1->getCoordinateFrame().toObjectSpace(world);
-			CoordinateFrame coord1 = Math::snapToGrid(object, 0.1f);
+		if (Face::cornersAligned(offset0World, offset1World, 0.05f)) {
+			CoordinateFrame jointCoord0 = p0->getFaceCoordInObject(nId0);
+			CoordinateFrame jointCoord0InWorld = p0->getCoordinateFrame() * jointCoord0;
+			CoordinateFrame jc0InP1 = p1->getCoordinateFrame().toObjectSpace(jointCoord0InWorld);
+			CoordinateFrame jointCoord1 = Math::snapToGrid(jc0InP1, 0.1f);
 
-			return new GlueJoint(p0, p1, coord0, coord1);
+			return new GlueJoint(p0, p1, jointCoord0, jointCoord1);
 		}
 	}
 
