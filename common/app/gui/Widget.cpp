@@ -110,10 +110,28 @@ Widget::Widget() : widgetState(NOTHING)
 	setGuiSize(G3D::Vector2(100, 24));
 }
 
-// STUB: WEBSERVICE 0x10116dd0
+// FUNCTION: WEBSERVICE 0x10116dd0
 void Widget::render2d(Adorn* adorn)
 {
-	STUB(0x10116dd0);
+	if (!isVisible()) {
+		return;
+	}
+
+	if (widgetState == HOVER || widgetState == DOWN_AWAY) {
+		adorn->rect2d(getMyRect2D(), G3D::Color4(G3D::Color3::gray(), 1));
+	}
+
+	else if (widgetState == DOWN_OVER) {
+		adorn->rect2d(getMyRect2D(), G3D::Color4(G3D::Color3::yellow(), 1));
+	}
+
+	label2d(
+		adorn,
+		getTitle(),
+		isEnabled() ? getFontColor() : disabledFill(),
+		G3D::Color4(0.5f, 0.5f, 0.5f, 0.25f),
+		Adorn::XALIGN_LEFT
+	);
 }
 
 } // namespace RBX
