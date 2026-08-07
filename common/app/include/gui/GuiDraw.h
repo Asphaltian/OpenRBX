@@ -2,6 +2,7 @@
 #define GUI_GUIDRAW_H
 
 #include "decomp.h"
+#include "rbxgraphics/Adorn.h"
 #include "rbxgraphics/TextureProxyBase.h"
 #include "util/TextureId.h"
 
@@ -9,8 +10,6 @@
 #include <G3D/Vector2.h>
 
 namespace RBX {
-
-class Adorn;
 
 // SIZE 0x38
 class GuiDrawImage

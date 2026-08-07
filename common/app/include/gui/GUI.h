@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "gui/GuiEvent.h"
 #include "gui/Layout.h"
+#include "rbxgraphics/Adorn.h"
 #include "util/Rect.h"
 #include "v8tree/Instance.h"
 
@@ -15,8 +16,6 @@
 #include <G3D/Vector2int16.h>
 
 namespace RBX {
-
-class Adorn;
 
 // SIZE 0x10c
 class __declspec(novtable) GuiItem : public Instance, public GuiTarget

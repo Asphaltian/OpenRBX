@@ -2,7 +2,7 @@
 
 namespace RBX {
 
-// STUB: WEBSERVICE 0x10116aa0
+// FUNCTION: WEBSERVICE 0x10116aa0
 GuiResponse Widget::processMouse(const GuiEvent& event)
 {
 	bool inRect = getMyRect().pointInRect(event.mousePosition);
@@ -21,14 +21,17 @@ GuiResponse Widget::processMouse(const GuiEvent& event)
 			case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
 				widgetState = DOWN_OVER;
 				onDown(event);
-
-				return GuiResponse::used();
+				break;
 
 			case UIEvent::MOUSE_MOVE:
 				widgetState = HOVER;
+				break;
 
-				return GuiResponse::used();
+			default:
+				return GuiResponse::notUsed();
 			}
+
+			return GuiResponse::used();
 		}
 		else {
 			widgetState = NOTHING;
