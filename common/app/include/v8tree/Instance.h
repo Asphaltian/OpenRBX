@@ -138,10 +138,12 @@ public:
 
 		const PropertyChanged event;
 
-		if (event_propertyChanged.findSignalInstance(reinterpret_cast<const Reflection::SignalSource*>(this)) != NULL) {
-			if (parent != NULL) {
-				parent->onChildChanged(this, event);
-			}
+		if (!event_propertyChanged.empty(this)) {
+			event_propertyChanged.fire(this, &descriptor);
+		}
+
+		if (parent != NULL) {
+			parent->onChildChanged(this, event);
 		}
 	}
 

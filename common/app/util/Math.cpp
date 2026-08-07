@@ -178,11 +178,81 @@ Matrix3 Math::rotateAboutZ(const Matrix3& matrix, float radians)
 	return matrix * rotMatrix;
 }
 
-// STUB: WEBSERVICE 0x100dee50
+// FUNCTION: WEBSERVICE 0x100dee50
 Matrix3 Math::snapToAxes(const Matrix3& align)
 {
-	STUB(0x100dee50);
-	return align;
+	float dots[3][3];
+
+	float tBest = 0.0f;
+	int aBest = -1;
+	int best = -1;
+
+	for (int a = 0; a < 3; ++a) {
+		Vector3 aAxis = align.getColumn(a);
+
+		for (int i = 0; i < 3; ++i) {
+			float t = Matrix3::identity().getColumn(i).dot(aAxis);
+
+			dots[a][i] = t;
+
+			if (fabs(t) > fabs(tBest)) {
+				best = i;
+				tBest = t;
+				aBest = a;
+			}
+		}
+	}
+
+	Vector3 bestV = Matrix3::identity().getColumn(best);
+
+	if (tBest < 0.0f) {
+		bestV.x = bestV.x * -1.0f;
+		bestV.y = bestV.y * -1.0f;
+		bestV.z = bestV.z * -1.0f;
+	}
+
+	float tSecond = 0.0f;
+	int aSecond = -1;
+	int second = -1;
+
+	for (int a = 0; a < 3; ++a) {
+		if (a != aBest) {
+			for (int i = 0; i < 3; ++i) {
+				if (i != best && fabs(dots[a][i]) > fabs(tSecond)) {
+					tSecond = dots[a][i];
+					second = i;
+					aSecond = a;
+				}
+			}
+		}
+	}
+
+	Vector3 secondV = Matrix3::identity().getColumn(second);
+
+	if (tSecond < 0.0f) {
+		secondV.x = secondV.x * -1.0f;
+		secondV.y = secondV.y * -1.0f;
+		secondV.z = secondV.z * -1.0f;
+	}
+
+	int aThird = (3 - aSecond) - aBest;
+	int third = (3 - second) - best;
+
+	Vector3 thirdV = Matrix3::identity().getColumn(third);
+
+	if (dots[aThird][third] < 0.0f) {
+		thirdV.x = thirdV.x * -1.0f;
+		thirdV.y = thirdV.y * -1.0f;
+		thirdV.z = thirdV.z * -1.0f;
+	}
+
+	Matrix3 answer;
+
+	answer.setColumn(aBest, bestV);
+	answer.setColumn(aSecond, secondV);
+	answer.setColumn(aThird, thirdV);
+
+	return answer;
 }
 
 // FUNCTION: WEBSERVICE 0x100df0a0
