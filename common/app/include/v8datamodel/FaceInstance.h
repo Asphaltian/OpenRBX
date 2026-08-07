@@ -2,6 +2,7 @@
 #define V8DATAMODEL_FACEINSTANCE_H
 
 #include "decomp.h"
+#include "reflection/property.h"
 #include "util/NormalId.h"
 #include "v8tree/Instance.h"
 
@@ -11,6 +12,8 @@ namespace RBX {
 class FaceInstance : public Instance
 {
 public:
+	static const Reflection::EnumPropDescriptor<FaceInstance, NormalId> prop_Face;
+
 	// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
 	NormalId getFace() const { return face; }
 
@@ -21,11 +24,6 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(FaceInstance, 0xfc)
-
-// clang-format off
-// SYNTHETIC: WEBSERVICE 0x1021e780
-// `dynamic initializer for 'RBX::FaceInstance::prop_Face''
-// clang-format on
 
 } // namespace RBX
 

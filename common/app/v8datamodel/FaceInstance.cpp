@@ -4,7 +4,7 @@
 
 namespace RBX {
 
-static Reflection::EnumPropDescriptor<FaceInstance, NormalId> prop_Face(
+const Reflection::EnumPropDescriptor<FaceInstance, NormalId> FaceInstance::prop_Face(
 	"Face",
 	"Data",
 	&RBX::FaceInstance::getFace,
