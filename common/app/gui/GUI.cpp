@@ -103,7 +103,8 @@ void GuiItem::onDescendentRemoving(const shared_ptr<Instance>& instance)
 GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
 {
 	for (unsigned int i = 0; i < numChildren(); ++i) {
-		GuiItem* item = dynamic_cast<GuiItem*>((*getChildren().read())[i].get());
+		Instance* child = (*getChildren().read())[i].get();
+		GuiItem* item = dynamic_cast<GuiItem*>(child);
 
 		if (item != NULL && item != focus.get()) {
 			GuiResponse itemResponse = item->process(event);
