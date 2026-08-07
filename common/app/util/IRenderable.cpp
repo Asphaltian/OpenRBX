@@ -6,10 +6,9 @@ IRenderable::~IRenderable()
 {
 }
 
-// STUB: WEBSERVICE 0x100a66c0
+// FUNCTION: WEBSERVICE 0x100a66c0
 IRenderableBucket::~IRenderableBucket()
 {
-	STUB(0x100a66c0);
 }
 
 } // namespace RBX
