@@ -24,8 +24,10 @@ public:
 	bool inStage(IStage* stage) const { return currentStage == stage; }
 	bool inKernel() const { return currentStage->getStageType() == IStage::KERNEL_STAGE; }
 
+private:
 	IStage* getStage(IStage::StageType stageType) const;
 
+public:
 	void putInPipeline(IStage* stage);
 	void removeFromPipeline(IStage* stage);
 	void putInStage(IStage* stage);

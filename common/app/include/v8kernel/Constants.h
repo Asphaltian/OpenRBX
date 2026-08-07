@@ -22,8 +22,10 @@ public:
 
 	static float getElasticMultiplier(float elasticity);
 
+private:
 	static float getJointKMultiplier(const Vector3& size, bool isBall);
 
+public:
 	static float getKmsMaxJointForce(float studsA, float studsB);
 
 	static float getJointK(const Vector3& size, bool isBall);

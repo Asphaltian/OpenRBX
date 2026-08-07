@@ -23,8 +23,10 @@ class Tool : public DescribedCreatable<Tool, BackpackItem, sTool>,
 public:
 	virtual ~Tool();
 
+private:
 	virtual const CoordinateFrame getLocation() const;
 
+public:
 	enum ToolState
 	{
 		NOTHING = 0,

@@ -23,8 +23,10 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x1011f0b0
 	// RBX::RotateJoint::`scalar deleting destructor'
 
+private:
 	virtual void removeFromKernel(); // vtable+0x08
 
+public:
 	Primitive* getAxlePrim() const { return getPrimitive(0); }
 	Primitive* getHolePrim() const { return getPrimitive(1); }
 

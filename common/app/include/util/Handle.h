@@ -19,8 +19,10 @@ public:
 
 	boost::shared_ptr<Instance> getTarget() const { return target; }
 
+protected:
 	bool operatorLess(const InstanceHandle& other) const;
 
+public:
 	bool operator<(const InstanceHandle& other) const { return operatorLess(other); }
 
 private:

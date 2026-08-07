@@ -83,7 +83,10 @@ public:
 	virtual PartInstance* getPrimaryPart();
 	virtual const PartInstance* getPrimaryPartConst() const;
 
+protected:
 	virtual void legacyTraverseState(const CoordinateFrame& parentState);
+
+public:
 };
 
 DECOMP_SIZE_ASSERT(ModelInstance, 0x254)

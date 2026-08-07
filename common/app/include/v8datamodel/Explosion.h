@@ -15,7 +15,7 @@ class Explosion : public DescribedCreatable<Explosion, Instance, sExplosion>,
 				  public Listener<RunService, Stepped>,
 				  public IRenderable
 {
-protected:
+private:
 	virtual void onEvent(const RunService* source, Stepped event);
 
 private:

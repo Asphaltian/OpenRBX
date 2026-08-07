@@ -31,8 +31,10 @@ public:
 	Body();
 	~Body();
 
+private:
 	void updatePV() const;
 
+public:
 	Body* getParent() const { return parent; }
 
 	Body* getRoot() { return root; }

@@ -129,6 +129,7 @@ Functions in a compilation unit are ordered by ascending address. Namerefs obey 
 - **`FOLDED`** marks siblings the linker merged onto one address. They share that address, are exempt from ascending order, and do not need the `STUB()` macro.
 - **A class with two bases needs the base-qualified vtable marker,** `// VTABLE: WEBSERVICE 0xADDR Base`, and the base has to be spelled the way the recompiled PDB does: `RBX::Notifier<RBX::World, struct RBX::AutoDestroy>`, with the space and the keyword. The second base's adjustor thunk carries no source line, so it goes in `webservice-synthetic.csv` or `reccmp-vtable` fails on slot zero.
 - **A nameref belongs in a header, never in a `.cpp`.** decomplint fails on it under `--warnfail`.
+- **An access label between a marker and its function unresolves the annotation.** reccmp pairs a header annotation with the declaration that follows it, so moving a method into its recorded access section by writing `private:` under the marker silently drops that function and takes others in the file with it: one label in `GUI.h` cost ten matches. Put the label above the marker.
 - **Wrap long namerefs in `// clang-format off`.** clang-format reflows a `//` comment past the column limit, the name line loses its tail, and the annotation silently stops resolving.
 - **A body written `{}` on one line** leaves decomplint's parser inside the function. The next marker is reported `unexpected_marker` and dropped. Split the braces.
 

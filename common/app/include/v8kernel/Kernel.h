@@ -54,9 +54,10 @@ public:
 	void insertBody(Body* body);
 	void removeBody(Body* body);
 
-private:
+public:
 	void removePoint(Point* point);
 
+private:
 	static int numKernels;
 
 	bool inStepCode;                           // 0x0c

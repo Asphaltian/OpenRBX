@@ -24,8 +24,11 @@ class GuiItem : public Instance, public GuiTarget
 public:
 	GuiItem();
 
+private:
 	// FUNCTION: WEBSERVICE 0x100c7460
 	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const GuiItem*>(instance) != NULL; }
+
+public:
 
 protected:
 	virtual void onLoseFocus() {}                 // vtable+0x40

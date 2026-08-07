@@ -66,8 +66,11 @@ private:
 	SpatialNode* newNode();
 	void insertNodeToPrimitive(SpatialNode* node, Primitive* p, const Vector3int32& grid, int hash);
 	void addNode(Primitive* p, const Vector3int32& grid);
+
+public:
 	void getPrimitivesInGrid(const Vector3int32& grid, G3D::Array<Primitive*>& found);
 
+private:
 	void removeNodeFromPrimitive(SpatialNode* remove);
 	void removeNodeFromHash(SpatialNode* remove);
 	void returnNode(SpatialNode* node);
