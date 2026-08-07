@@ -8,6 +8,18 @@ namespace RBX {
 
 char sScriptContext[] = "ScriptContext";
 
+// STUB: WEBSERVICE 0x1005eb60
+void ScriptContext::onEvent(const RunService* source, RunTransition event)
+{
+	STUB(0x1005eb60);
+}
+
+// STUB: WEBSERVICE 0x10068880
+void ScriptContext::onEvent(const RunService* source, Heartbeat event)
+{
+	STUB(0x10068880);
+}
+
 } // namespace RBX
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::Stats::sStatsItem>();

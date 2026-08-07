@@ -2,6 +2,7 @@
 #define V8DATAMODEL_FEATURE_H
 
 #include "decomp.h"
+#include "util/IRenderable.h"
 #include "util/NormalId.h"
 #include "v8datamodel/JointInstance.h"
 #include "v8tree/Instance.h"
@@ -18,7 +19,7 @@ extern const char sMotorFeature[];
 extern const char sFeature[];
 
 // SIZE 0x118
-class Feature : public DescribedNonCreatable<Feature, Instance, sFeature>
+class Feature : public DescribedNonCreatable<Feature, Instance, sFeature>, public IRenderable
 {
 public:
 	enum TopBottom
@@ -60,11 +61,10 @@ public:
 	void setInOut(InOut value);
 
 private:
-	undefined m_unk0x0f8[0x108 - 0x0f8]; // 0x0f8
-	NormalId faceId;                     // 0x108
-	TopBottom topBottom;                 // 0x10c
-	LeftRight leftRight;                 // 0x110
-	InOut inOut;                         // 0x114
+	NormalId faceId;     // 0x108
+	TopBottom topBottom; // 0x10c
+	LeftRight leftRight; // 0x110
+	InOut inOut;         // 0x114
 };
 
 DECOMP_SIZE_ASSERT(Feature, 0x118)

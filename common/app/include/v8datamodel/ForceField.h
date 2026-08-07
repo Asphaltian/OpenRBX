@@ -3,16 +3,17 @@
 
 #include "decomp.h"
 #include "util/Handle.h"
+#include "util/IRenderable.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
 
 extern char sForceField[];
 // SIZE 0x10c
-class ForceField : public DescribedCreatable<ForceField, Instance, sForceField>
+class ForceField : public DescribedCreatable<ForceField, Instance, sForceField>, public IRenderable
 {
 private:
-	undefined m_unk0x0f8[0x10c - 0x0f8]; // 0x0f8
+	undefined m_unk0x108[0x10c - 0x108]; // 0x108
 };
 
 DECOMP_SIZE_ASSERT(ForceField, 0x10c)

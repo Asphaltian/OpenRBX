@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "util/Handle.h"
+#include "util/IRenderable.h"
 #include "v8tree/Instance.h"
 
 #include <string>
@@ -14,7 +15,7 @@ extern char sHint[];
 extern char sMessage[];
 
 // SIZE 0x124
-class Message : public DescribedCreatable<Message, Instance, sMessage>
+class Message : public DescribedCreatable<Message, Instance, sMessage>, public IRenderable
 {
 public:
 	// FUNCTION: WEBSERVICE 0x100ee460
@@ -23,8 +24,7 @@ public:
 	void setText(const std::string& value);
 
 private:
-	undefined m_unk0x0f8[0x108 - 0x0f8]; // 0x0f8
-	std::string text;                    // 0x108
+	std::string text; // 0x108
 };
 
 DECOMP_SIZE_ASSERT(Message, 0x124)
