@@ -4,12 +4,13 @@
 #include "decomp.h"
 
 #include <G3D/Array.h>
+#include <boost/noncopyable.hpp>
 
 namespace RBX {
 
 // SIZE 0x0c
 template <class T, int& (T::*getIndex)()>
-class IndexArray
+class IndexArray : public boost::noncopyable
 {
 public:
 	const G3D::Array<T*>& getArray() const { return array; }

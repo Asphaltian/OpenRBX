@@ -12,7 +12,7 @@ namespace RBX {
 namespace Profiling {
 
 // SIZE 0x20
-class Bucket
+struct Bucket
 {
 public:
 	Bucket() : sampleTimeSpan(0.0), kernTimeSpan(0), userTimeSpan(0), frames(0) {}

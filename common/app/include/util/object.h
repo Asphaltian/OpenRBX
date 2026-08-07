@@ -160,11 +160,20 @@ protected:
 	static void operator delete(void* p) { free(p); }
 };
 
+// SIZE 0x4
+class __declspec(novtable) ICreator
+{
+public:
+	virtual boost::shared_ptr<Object> create() const = 0; // vtable+0x00
+};
+
+DECOMP_SIZE_ASSERT(ICreator, 0x4)
+
 template <class T, class Base, const char* sName>
 class FactoryProduct : public Base
 {
 public:
-	class Creator
+	class Creator : public ICreator
 	{
 	public:
 		virtual boost::shared_ptr<Object> create() const { return Creatable<Instance>::create<T>(); }

@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "util/Handle.h"
 #include "v8datamodel/BrickColor.h"
+#include "v8datamodel/PartInstance.h"
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
 
@@ -14,15 +15,14 @@ extern const char sFlagStandService[];
 extern char sFlagStand[];
 
 // SIZE 0x2c4
-class FlagStand : public Instance
+class FlagStand : public PartInstance
 {
 public:
 	void setTeamColor(BrickColor value);
 
 private:
-	undefined m_unk0x0f8[0x2a4 - 0x0f8]; // 0x0f8
+	undefined m_unk0x290[0x2a4 - 0x290]; // 0x290
 	BrickColor teamColor;                // 0x2a4
-	undefined m_unk0x2a8[0x2c4 - 0x2a8]; // 0x2a8
 };
 
 DECOMP_SIZE_ASSERT(FlagStand, 0x2c4)

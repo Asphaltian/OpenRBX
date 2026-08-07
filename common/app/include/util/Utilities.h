@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 
+#include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include <iosfwd>
 #include <string>
@@ -21,12 +22,15 @@ public:
 	static AssertAction assertAction;
 	static bool validatingDebug;
 
-	virtual ~Debugable() {}
-	virtual void dump(std::ostream& stream);
+	static void forceBadTypeId();
+	static void doCrash();
+
+	static void dump(void* object, std::ostream& stream);
+	virtual void dump(std::ostream& stream); // vtable+0x00
 };
 
 template <class T>
-class CopyOnWrite
+class CopyOnWrite : public boost::noncopyable
 {
 public:
 	const T* read() const { return object.get(); }

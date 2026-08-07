@@ -2,6 +2,7 @@
 #define V8DATAMODEL_DECAL_H
 
 #include "decomp.h"
+#include "v8datamodel/FaceInstance.h"
 #include "v8tree/Instance.h"
 
 #include <G3D/Vector2.h>
@@ -15,7 +16,7 @@ extern char sDecal[];
 using G3D::Vector2;
 
 // SIZE 0x124
-class Decal : public Instance
+class Decal : public FaceInstance
 {
 public:
 	// FUNCTION: WEBSERVICE 0x100ff500
@@ -28,7 +29,7 @@ public:
 	void setShiny(float value);
 
 private:
-	undefined m_unk0x0f8[0x11c - 0x0f8]; // 0x0f8
+	undefined m_unk0x0fc[0x11c - 0x0fc]; // 0x0fc
 	float specular;                      // 0x11c
 	float shiny;                         // 0x120
 };
