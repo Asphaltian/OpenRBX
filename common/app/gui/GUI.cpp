@@ -3,6 +3,7 @@
 #include "util/object.h"
 
 #include <G3D/g3dmath.h>
+#include <algorithm>
 #include <math.h>
 
 namespace RBX {
@@ -77,6 +78,67 @@ int GuiRoot::normalizedFontSize(int fontSize)
 	static G3D::Vector2 percentSize(100.0f, 75.0f);
 
 	return G3D::iRound(floorf(fontSize * toPixelSize(percentSize).x * 0.001f));
+}
+
+// FUNCTION: WEBSERVICE 0x100d17c0
+G3D::Vector2 TopMenuBar::getSize() const
+{
+	G3D::Vector2 size(0, 0);
+
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		Instance* child = (*getChildren().read())[i].get();
+		GuiItem* item = dynamic_cast<GuiItem*>(child);
+
+		if (item != NULL) {
+			G3D::Vector2 childSize = item->getSize();
+
+			switch (layoutStyle) {
+			case Layout::HORIZONTAL:
+				size.x += childSize.x;
+				size.y = std::max(size.y, childSize.y);
+				break;
+			case Layout::VERTICAL:
+				size.x = std::max(size.x, childSize.x);
+				size.y += childSize.y;
+				break;
+			}
+		}
+	}
+
+	return size;
+}
+
+// FUNCTION: WEBSERVICE 0x100d18d0
+G3D::Vector2 TopMenuBar::getChildPosition(const GuiItem* child) const
+{
+	G3D::Vector2 position = getPosition();
+	G3D::Vector2 mySize = getSize();
+
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		Instance* instance = (*getChildren().read())[i].get();
+		GuiItem* item = dynamic_cast<GuiItem*>(instance);
+
+		if (item != NULL) {
+			G3D::Vector2 myChildSize = item->getSize();
+
+			if (item == child) {
+				int other = (layoutStyle + 1) % 2;
+
+				position[other] += (mySize[other] - myChildSize[other]) * 0.5f;
+
+				return position;
+			}
+
+			switch (layoutStyle) {
+			case Layout::HORIZONTAL:
+			case Layout::VERTICAL:
+				position[layoutStyle] += item->getSize()[layoutStyle];
+				break;
+			}
+		}
+	}
+
+	return position;
 }
 
 // FUNCTION: WEBSERVICE 0x100d1ae0
