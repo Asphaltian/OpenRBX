@@ -9,14 +9,19 @@ namespace RBX {
 // SIZE 0x14
 class Ball : public Geometry
 {
-public:
-	Ball() : realRadius(0) {}
+private:
+	Matrix3 getMomentSolid(float mass) const;
 
+	virtual void onSetSize();
+
+public:
 	// SYNTHETIC: WEBSERVICE 0x100a76b0 FOLDED
 	// RBX::Ball::`scalar deleting destructor'
 
-	virtual void onSetSize();
 	virtual bool hitTest(const Ray& ray, Vector3& hitPoint, bool& inside);
+
+	// FUNCTION: WEBSERVICE 0x10108040 FOLDED
+	virtual GeometryType getGeometryType() const { return GEOMETRY_BALL; }
 
 	// FUNCTION: WEBSERVICE 0x100a7780
 	virtual float getRadius() const { return realRadius; }
@@ -30,12 +35,9 @@ public:
 	// FUNCTION: WEBSERVICE 0x100a77b0
 	virtual Matrix3 getMoment(float mass) const { return getMomentSolid(mass); }
 
-	// FUNCTION: WEBSERVICE 0x10108040 FOLDED
-	virtual GeometryType getGeometryType() const { return GEOMETRY_BALL; }
-
 	virtual float getGridVolume() const;
 
-	Matrix3 getMomentSolid(float mass) const;
+	Ball() : realRadius(0) {}
 
 private:
 	float realRadius; // 0x10

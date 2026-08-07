@@ -20,24 +20,25 @@ enum SearchType
 // SIZE 0x08
 class PrimIterator
 {
-public:
-	PrimIterator(Primitive* primitive, SearchType searchType) : primitive(primitive), searchType(searchType) {}
-
-	static Primitive* findParent(Primitive* primitive, SearchType searchType);
+private:
+	static bool isParent(Primitive* parentCandidate, Primitive* child, Joint* joint, SearchType searchType);
 	static Primitive* findFirstChild(Primitive* primitive, SearchType searchType);
 	static Primitive* findNextSibling(Primitive* parent, Primitive* child, SearchType searchType);
 	static Primitive* findNextRelative(Primitive* parent, Primitive* child, SearchType searchType);
 
-	PrimIterator& operator++();
+public:
+	PrimIterator(Primitive* primitive, SearchType searchType) : primitive(primitive), searchType(searchType) {}
 
 	Primitive* operator*() const { return primitive; }
 
 	bool operator==(const PrimIterator& other) const { return primitive == other.primitive; }
 	bool operator!=(const PrimIterator& other) const { return primitive != other.primitive; }
 
-private:
-	static bool isParent(Primitive* parentCandidate, Primitive* child, Joint* joint, SearchType searchType);
+	PrimIterator& operator++();
 
+	static Primitive* findParent(Primitive* primitive, SearchType searchType);
+
+private:
 	Primitive* primitive;  // 0x00
 	SearchType searchType; // 0x04
 };

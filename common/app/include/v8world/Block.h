@@ -17,39 +17,7 @@ using G3D::Vector3int16;
 // SIZE 0x18
 class Block : public Geometry
 {
-public:
-	Block() : vertices(NULL), cornerRadius(0) {}
-
-	// SYNTHETIC: WEBSERVICE 0x100a76b0 FOLDED
-	// RBX::Block::`scalar deleting destructor'
-
-	virtual void onSetSize();
-	// FUNCTION: WEBSERVICE 0x100a7740 FOLDED
-	virtual GeometryType getGeometryType() const { return GEOMETRY_BLOCK; }
-
-	// FUNCTION: WEBSERVICE 0x100a7750
-	virtual float getRadius() const { return cornerRadius; }
-
-	virtual bool hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside);
-
-	// FUNCTION: WEBSERVICE 0x100a7760
-	virtual Matrix3 getMoment(float mass) const { return getMomentHollow(mass); }
-
-	virtual Vector3 getCenterToCorner(const Matrix3& rotation) const;
-	virtual float getGridVolume() const;
-
-	Matrix3 getMomentHollow(float mass) const;
-
-	const Vector3* getFaceVertex(NormalId faceId, int vertexId) const;
-	const Vector3* getEdgeVertex(int edgeId) const;
-	NormalId getEdgeNormal(int edgeId);
-	int faceVertexToEdge(NormalId faceId, int vertexId);
-
-	GeoPairType getBallInsideInfo(const Vector3& ray, const Vector3*& offset, NormalId& normalID);
-	GeoPairType getBallBlockInfo(int onBorder, Vector3int16 clip, const Vector3*& offset, NormalId& normalID);
-
-	void projectToFace(Vector3& ray, Vector3int16& clip, int& onBorder);
-
+private:
 	const Vector3* getCornerPoint(const Vector3int16& clip) const
 	{
 		return &vertices[((clip.x <= 0) * 2 + (clip.y <= 0)) * 2 + (clip.z <= 0)];
@@ -58,11 +26,48 @@ public:
 	const Vector3* getEdgePoint(const Vector3int16& clip, NormalId& normalID) const;
 	const Vector3* getPlanePoint(const Vector3int16& clip, NormalId& normalID) const;
 
-	Vector2 getProjectedVertex(const Vector3& vertex, NormalId normalID) const;
+	Matrix3 getMomentHollow(float mass) const;
+
+	virtual void onSetSize();
+
+public:
+	// SYNTHETIC: WEBSERVICE 0x100a76b0 FOLDED
+	// RBX::Block::`scalar deleting destructor'
+
+	virtual bool hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside);
+
+	// FUNCTION: WEBSERVICE 0x100a7740 FOLDED
+	virtual GeometryType getGeometryType() const { return GEOMETRY_BLOCK; }
+
+	// FUNCTION: WEBSERVICE 0x100a7750
+	virtual float getRadius() const { return cornerRadius; }
+
+	virtual Vector3 getCenterToCorner(const Matrix3& rotation) const;
+
+	// FUNCTION: WEBSERVICE 0x100a7760
+	virtual Matrix3 getMoment(float mass) const { return getMomentHollow(mass); }
+
+	virtual float getGridVolume() const;
+
+	void projectToFace(Vector3& ray, Vector3int16& clip, int& onBorder);
+
+	GeoPairType getBallInsideInfo(const Vector3& ray, const Vector3*& offset, NormalId& normalID);
+	GeoPairType getBallBlockInfo(int onBorder, Vector3int16 clip, const Vector3*& offset, NormalId& normalID);
+
+	const Vector3& getExtent() const { return *vertices; }
+
+	const Vector3* getFaceVertex(NormalId faceId, int vertexId) const;
 
 	int getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis) const;
 
-	const Vector3& getExtent() const { return *vertices; }
+	int faceVertexToEdge(NormalId faceId, int vertexId);
+
+	const Vector3* getEdgeVertex(int edgeId) const;
+	NormalId getEdgeNormal(int edgeId);
+
+	Vector2 getProjectedVertex(const Vector3& vertex, NormalId normalID) const;
+
+	Block() : vertices(NULL), cornerRadius(0) {}
 
 private:
 	const Vector3* vertices; // 0x10

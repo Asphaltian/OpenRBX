@@ -13,20 +13,28 @@ class Point;
 // SIZE 0xc0
 class MultiJoint : public Joint
 {
-public:
-	virtual ~MultiJoint(); // vtable+0x00
+private:
+	void init(int numBreakingConnectors);
 
-	// SYNTHETIC: WEBSERVICE 0x1011fe30
-	// RBX::MultiJoint::`scalar deleting destructor'
-
+protected:
 	virtual void putInKernel(Kernel* _kernel); // vtable+0x04
 	virtual void removeFromKernel();           // vtable+0x08
 
 	virtual bool isBroken() const; // vtable+0x1c
 
+	void addToMultiJoint(Point* point0, Point* point1, Connector* connector);
+
 	Point* getPoint(int index) const;
 
-protected:
+	Connector* getConnector(int index) const { return connector[index]; }
+
+	float getJointK();
+
+	virtual ~MultiJoint(); // vtable+0x00
+
+	// SYNTHETIC: WEBSERVICE 0x1011fe30
+	// RBX::MultiJoint::`scalar deleting destructor'
+
 	MultiJoint(int numBreakingConnectors);
 
 	MultiJoint(
@@ -37,15 +45,7 @@ protected:
 		int numBreakingConnectors
 	);
 
-	void addToMultiJoint(Point* point0, Point* point1, Connector* connector);
-
-	Connector* getConnector(int index) const { return connector[index]; }
-
-	float getJointK();
-
 private:
-	void init(int numBreakingConnectors);
-
 	int numConnector;          // 0x88
 	Point* point[8];           // 0x8c
 	Connector* connector[4];   // 0xac
