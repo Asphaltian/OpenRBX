@@ -4,6 +4,12 @@ namespace RBX {
 
 const char sSelection[] = "Selection";
 
+// STUB: WEBSERVICE 0x1005e870
+void Selection::onEvent(const Instance* source, AncestorChanged event)
+{
+	STUB(0x1005e870);
+}
+
 } // namespace RBX
 
 template class RBX::FactoryProduct<RBX::Selection, RBX::Instance, RBX::sSelection>;

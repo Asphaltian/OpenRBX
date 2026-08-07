@@ -39,8 +39,17 @@ struct DescendentAdded
 struct DescendentRemoving
 {
 };
+// SIZE 0xc
 struct AncestorChanged
 {
+	Instance* const child;     // 0x00
+	Instance* const oldParent; // 0x04
+	Instance* const newParent; // 0x08
+
+	AncestorChanged(Instance* child, Instance* oldParent, Instance* newParent)
+		: child(child), oldParent(oldParent), newParent(newParent)
+	{
+	}
 };
 class PropertyChanged
 {
