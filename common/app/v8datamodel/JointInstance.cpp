@@ -103,7 +103,7 @@ float Motor::getCurrentAngle() const
 	return static_cast<MotorJoint*>(joint)->getCurrentAngle();
 }
 
-// STUB: WEBSERVICE 0x100d9020
+// FUNCTION: WEBSERVICE 0x100d9020
 void Motor::setMaxVelocity(float value)
 {
 	if (value != static_cast<MotorJoint*>(joint)->getMaxVelocity()) {
@@ -112,7 +112,7 @@ void Motor::setMaxVelocity(float value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100d90c0
+// FUNCTION: WEBSERVICE 0x100d90c0
 void Motor::setCurrentAngle(float value)
 {
 	if (value != static_cast<MotorJoint*>(joint)->getCurrentAngle()) {

@@ -5756,8 +5756,6 @@ address,type,symbol
 0x102fa750,global,n___RBX::Name::doDeclare<&RBX::sAutoJoint>
 0x102fa754,global,??_B?1???$doDeclare@$1?sAutoJoint@RBX@@3QBDB@Name@RBX@@CAABV01@XZ@51
 0x102fa758,global,flag___RBX::Name::declare<&RBX::sAutoJoint>
-0x102fa760,global,prop_CurrentAngle
-0x102fa7f4,global,prop_MaxVelocity
 0x102fa830,global,"foo___RBX::Reflection::Described<RBX::Teams,&RBX::sTeams,RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams> >::classDescriptor"
 0x102fa8b8,global,??_B?1??classDescriptor@?$Described@VTeams@RBX@@$1?sTeams@2@3QBDBV?$FactoryProduct@VTeams@RBX@@VInstance@2@$1?sTeams@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102fa929,global,?writeUnlocked@Accoutrement@RBX@@2_NA

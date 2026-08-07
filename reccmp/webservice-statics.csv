@@ -235,9 +235,11 @@ address,type,name
 0x102fa5c8,global,event_Activated
 0x102fa64c,global,prop_Color
 0x102fa694,global,percentSize
+0x102fa760,global,prop_CurrentAngle
 0x102fa77c,global,prop_Part1
 0x102fa79c,global,prop_Part0
 0x102fa7bc,global,prop_C0
+0x102fa7f4,global,prop_MaxVelocity
 0x102fa810,global,prop_C1
 0x102fa8c8,global,teams_rebalanceTeamsFunction
 0x102fa8f8,global,func_teams
@@ -247,6 +249,7 @@ address,type,name
 0x102fa980,global,prop_AttachmentRight
 0x102fa99c,global,prop_AttachmentPoint
 0x102fa9b8,global,prop_AttachmentForward
+0x102faa70,global,step
 0x102faa78,global,y90
 0x102faaf0,global,z_neg
 0x102fab14,global,y_neg
