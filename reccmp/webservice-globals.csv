@@ -5055,7 +5055,6 @@ address,type,symbol
 0x102f4e88,global,??_R0?AV?$Listener@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@@8
 0x102f4ed0,global,??_R0?AVStandardOutLog@@@8
 0x102f4fd0,global,??_R0X@8
-0x102f4fdb,global,firstTime___initRoblox
 0x102f4fdc,global,?__hdlrEntry_CWebService_35@@3U_HANDLER_ENTRY@ATL@@A
 0x102f4fec,global,?__hdlrEntry_WSDL_36@@3U_HANDLER_ENTRY@ATL@@A
 0x102f5000,global,?___Roblox_CWebService_funcs@Roblox@@3PAPBU_soapmap@@A
@@ -5143,7 +5142,6 @@ address,type,symbol
 0x102f5d98,global,??_B?1???$assign_to@VGenericSlotAdapter@?$SignalDescImpl@$01$$A6AXMM@Z@Reflection@RBX@@@?$function2@XMMV?$allocator@X@std@@@boost@@AAEXVGenericSlotAdapter@?$SignalDescImpl@$01$$A6AXMM@Z@Reflection@RBX@@@Z@51
 0x102f5da4,global,??_B?1???$assign_to@VGenericSlotAdapter@?$SignalDescImpl@$00$$A6AXM@Z@Reflection@RBX@@@?$function1@XMV?$allocator@X@std@@@boost@@AAEXVGenericSlotAdapter@?$SignalDescImpl@$00$$A6AXM@Z@Reflection@RBX@@@Z@51
 0x102f5e38,global,?event_Stepped@RunService@RBX@@2V?$SignalDesc@VRunService@RBX@@$$A6AXMM@Z@Reflection@2@A
-0x102f5e94,global,mutex2___moo2
 0x102f5ea0,global,d___RBX::Name::dictionary
 0x102f5eb0,global,n___RBX::Name::namMap
 0x102f5ec0,global,nullName___RBX::Name::getNullName
@@ -6447,7 +6445,6 @@ address,type,symbol
 0x10301b08,global,showedMessage___RobloxCrashReporter::ProcessException
 0x10301b10,global,??_B?1???$assign_to@P6AXPAVThreadLogManager@@@Z@?$function1@XPAVThreadLogManager@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXP6AXPAVThreadLogManager@@@Z@Z@51
 0x10301b14,global,value___log_detail::init
-0x10301b18,global,errorUploader___initRoblox
 0x10301b34,global,?shared@?6??0OSContext@@CAPAUosmesa_context@@_N@Z@4V1@A
 0x10301b68,global,?shared@?4??0OSContext@@CAPAUosmesa_context@@_N@Z@4V1@A
 0x10301b9c,global,??_B?4??shared@OSContext@@CAPAUosmesa_context@@_N@Z@54
@@ -6460,7 +6457,6 @@ address,type,symbol
 0x10301bcc,global,??_B?1???$assign_to@V?$bind_t@W4work_result@worker_thread@RBX@@P6A?AW4123@V?$shared_ptr@Udata@ErrorUploader@@@boost@@@ZV?$list1@V?$value@V?$shared_ptr@Udata@ErrorUploader@@@boost@@@_bi@boost@@@_bi@5@@_bi@boost@@@?$function0@W4work_result@worker_thread@RBX@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@W4work_result@worker_thread@RBX@@P6A?AW4123@V?$shared_ptr@Udata@ErrorUploader@@@boost@@@ZV?$list1@V?$value@V?$shared_ptr@Udata@ErrorUploader@@@boost@@@_bi@boost@@@_bi@5@@_bi@1@@Z@51
 0x10301bd0,global,isNullClassName___RBX::ServiceProvider::find<RBX::Lighting>
 0x10301bd4,global,??_B?8???$find@VLighting@RBX@@@ServiceProvider@RBX@@QBEPAVLighting@1@XZ@58
-0x10301bd8,global,registerFactoryObjects___initRoblox
 0x10301be4,global,___sse2_available
 0x10301be8,global,__adjust_fdiv
 0x10301bec,global,___native_startup_state

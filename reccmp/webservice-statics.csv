@@ -83,6 +83,7 @@ address,type,name
 0x102ece9c,global,UNASSIGNED_NETWORK_ID
 0x102f0420,global,shifts
 0x102f4fdb,global,firstTime
+0x102f4fdb,global,firstTime___initRoblox
 0x102f5228,global,methods
 0x102f5594,global,standardOut
 0x102f55e0,global,skipTrustCheck
@@ -115,6 +116,7 @@ address,type,name
 0x102f5e08,global,pauseFunction
 0x102f5e60,global,runFunction
 0x102f5e90,global,flag
+0x102f5e94,global,mutex2
 0x102f5e94,global,mutex2
 0x102f5ec0,global,nullName
 0x102f5fd8,global,model_moveFunctionOld
@@ -410,4 +412,6 @@ address,type,name
 0x10301ab8,global,bDynArrWrapper
 0x10301b08,global,showedMessage
 0x10301b18,global,errorUploader
+0x10301b18,global,errorUploader___initRoblox
 0x10301bd8,global,registerFactoryObjects
+0x10301bd8,global,registerFactoryObjects___initRoblox
