@@ -5719,3 +5719,15 @@ address,type,symbol
 0x102489f8,global,??_7SpecialShape@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10248a00,global,??_7SpecialShape@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10248a0c,global,??_7SpecialShape@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x10247a6c,global,??_7Widget@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10247a7c,global,??_7Widget@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x10247a8c,global,??_7Widget@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x10247a9c,global,??_7Widget@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x10247aac,global,??_7Widget@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x10247abc,global,??_7Widget@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x10247acc,global,??_7Widget@RBX@@6BDebugable@1@@
+0x10247ad4,global,??_7Widget@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x10247adc,global,??_7Widget@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x10247aec,global,??_7Widget@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x102619f4,global,??_7CWebService@Roblox@@6BCSoapRootHandler@ATL@@@
+0x10261a6c,global,??_7CWebService@Roblox@@6B?$IRequestHandlerImpl@VCWebService@Roblox@@@ATL@@@

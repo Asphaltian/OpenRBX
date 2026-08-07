@@ -104,4 +104,16 @@ GuiResponse Widget::process(const GuiEvent& event)
 	return GuiResponse::notUsed();
 }
 
+// FUNCTION: WEBSERVICE 0x10116d40
+Widget::Widget() : widgetState(NOTHING)
+{
+	setGuiSize(G3D::Vector2(100, 24));
+}
+
+// STUB: WEBSERVICE 0x10116dd0
+void Widget::render2d(Adorn* adorn)
+{
+	STUB(0x10116dd0);
+}
+
 } // namespace RBX

@@ -4,10 +4,13 @@
 #include "decomp.h"
 #include "gui/GUI.h"
 
+#include <G3D/Color3.h>
+#include <G3D/Color4.h>
+
 namespace RBX {
 
 // SIZE 0x110
-class __declspec(novtable) Widget : public GuiItem
+class Widget : public GuiItem
 {
 public:
 	enum WidgetState
@@ -18,19 +21,33 @@ public:
 		DOWN_AWAY = 3
 	};
 
+public:
+	Widget();
+
 protected:
 	virtual GuiResponse process(const GuiEvent& event);
-	virtual void onLoseFocus();
+
+	// FUNCTION: WEBSERVICE 0x100c74d0
+	virtual void onLoseFocus() { widgetState = NOTHING; }
+
 	virtual void render2d(Adorn* adorn);
 
-	virtual void onClick(const GuiEvent& event); // vtable+0x64
-	virtual bool onDrag(const GuiEvent& event);  // vtable+0x68
-	virtual void onDown(const UIEvent& event);   // vtable+0x6c
-	virtual void onUp(const UIEvent& event);     // vtable+0x70
-	virtual G3D::Color4 getFontColor();          // vtable+0x74
-	virtual bool isEnabled();                    // vtable+0x78
+	virtual void onClick(const GuiEvent& event) {} // vtable+0x64
 
-	virtual int getFontSize() const;
+	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
+	virtual bool onDrag(const GuiEvent& event) { return false; } // vtable+0x68
+
+	virtual void onDown(const UIEvent& event) {} // vtable+0x6c
+	virtual void onUp(const UIEvent& event) {}   // vtable+0x70
+
+	// FUNCTION: WEBSERVICE 0x100c7500
+	virtual G3D::Color4 getFontColor() { return G3D::Color4(G3D::Color3::white(), 1); } // vtable+0x74
+
+	// FUNCTION: WEBSERVICE 0x100c7530
+	virtual bool isEnabled() { return isVisible(); } // vtable+0x78
+
+	// FUNCTION: WEBSERVICE 0x100c74f0
+	virtual int getFontSize() const { return 12; }
 
 	WidgetState widgetState; // 0x10c
 
