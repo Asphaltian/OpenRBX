@@ -99,6 +99,8 @@ public:
 
 	Instance* getParent() const { return parent; }
 
+	const std::string& getName() const { return name; }
+
 	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }
 
 	// FUNCTION: WEBSERVICE 0x10048320

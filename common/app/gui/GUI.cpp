@@ -10,6 +10,11 @@ namespace RBX {
 
 G3D::Vector2 GuiRoot::canvasSize;
 
+// STUB: WEBSERVICE 0x100c71d0
+GuiItem::~GuiItem()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x100d0fc0
 const G3D::Color4& GuiItem::disabledFill()
 {
@@ -24,10 +29,16 @@ const G3D::Color4& GuiItem::translucentBackdrop()
 	return c;
 }
 
-// FUNCTION: WEBSERVICE 0x100d1040
+// FUNCTION: WEBSERVICE 0x100d1040 FOLDED
 GuiItem* GuiItem::getGuiParent()
 {
 	return dynamic_cast<GuiItem*>(getParent());
+}
+
+// FUNCTION: WEBSERVICE 0x100d1040 FOLDED
+DECOMP_NOINLINE const GuiItem* GuiItem::getGuiParent() const
+{
+	return dynamic_cast<const GuiItem*>(getParent());
 }
 
 // FUNCTION: WEBSERVICE 0x100d1060

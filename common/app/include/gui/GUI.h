@@ -5,6 +5,7 @@
 #include "gui/GuiEvent.h"
 #include "gui/Layout.h"
 #include "rbxgraphics/Adorn.h"
+#include "util/Name.h"
 #include "util/Rect.h"
 #include "v8tree/Instance.h"
 
@@ -18,20 +19,37 @@
 namespace RBX {
 
 // SIZE 0x10c
-class __declspec(novtable) GuiItem : public Instance, public GuiTarget
+class GuiItem : public Instance, public GuiTarget
 {
+public:
+	virtual ~GuiItem();
+
+	// FUNCTION: WEBSERVICE 0x100c7460
+	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const GuiItem*>(instance) != NULL; }
+
 protected:
-	virtual void onLoseFocus();                                        // vtable+0x40
-	virtual bool canLoseFocus();                                       // vtable+0x44
-	virtual G3D::Vector2 getPosition() const;                          // vtable+0x48
-	virtual G3D::Vector2 getChildPosition(const GuiItem* child) const; // vtable+0x4c
-	virtual int getFontSize() const;                                   // vtable+0x50
-	virtual bool isVisible() const;                                    // vtable+0x54
-	virtual std::string getTitle();                                    // vtable+0x58
+	virtual void onLoseFocus() {}                 // vtable+0x40
+	virtual bool canLoseFocus() { return false; } // vtable+0x44
+
+	// FUNCTION: WEBSERVICE 0x100c7490
+	virtual G3D::Vector2 getPosition() const { return getGuiParent()->getChildPosition(this); } // vtable+0x48
+
+	// FUNCTION: WEBSERVICE 0x100c74b0
+	virtual G3D::Vector2 getChildPosition(const GuiItem* child) const { return G3D::Vector2::zero(); } // vtable+0x4c
+
+	// FUNCTION: WEBSERVICE 0x100c72b0
+	virtual int getFontSize() const { return 14; } // vtable+0x50
+
+	virtual bool isVisible() const { return true; } // vtable+0x54
+
+	// FUNCTION: WEBSERVICE 0x100c72c0
+	virtual std::string getTitle() { return getName(); } // vtable+0x58
 
 public:
-	virtual G3D::Vector2 getSize() const; // vtable+0x5c
-	virtual void render2d(Adorn* adorn);  // vtable+0x60
+	// FUNCTION: WEBSERVICE 0x100c75b0
+	virtual G3D::Vector2 getSize() const { return guiSize; } // vtable+0x5c
+
+	virtual void render2d(Adorn* adorn) {} // vtable+0x60
 
 	virtual GuiResponse process(const GuiEvent& event);
 
@@ -40,7 +58,7 @@ public:
 	void setGuiSize(const G3D::Vector2& value) { guiSize = value; }
 	const G3D::Vector2& getGuiSize() const { return guiSize; }
 
-	const GuiItem* getGuiParent() const;
+	DECOMP_NOINLINE const GuiItem* getGuiParent() const;
 	GuiItem* getGuiParent();
 
 	const GuiItem* getGuiItem(int index) const;
