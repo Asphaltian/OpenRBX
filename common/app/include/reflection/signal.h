@@ -6,8 +6,11 @@
 #include "reflection/property.h"
 #include "reflection/type.h"
 
+#include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/signal.hpp>
 #include <boost/type_traits/function_traits.hpp>
+#include <functional>
 #include <map>
 #include <memory>
 
@@ -24,6 +27,8 @@ public:
 	SignalSource* getSource() const { return source; }
 
 protected:
+	SignalInstance(SignalSource* source, const SignalDescriptor& descriptor) : source(source), descriptor(descriptor) {}
+
 	virtual ~SignalInstance(); // vtable+0x00
 
 	SignalSource* source;               // 0x04
@@ -70,9 +75,23 @@ DECOMP_SIZE_ASSERT(SignalDescriptor, 0x24)
 template <class Signature>
 class __declspec(novtable) TSignalDesc : public SignalDescriptor
 {
+public:
+	// SIZE 0x28
+	class TSignalInstance
+		: public SignalInstance,
+		  public boost::signal<Signature, boost::last_value<void>, int, std::less<int>, boost::function<Signature> >
+	{
+	public:
+		TSignalInstance(SignalSource* source, const SignalDescriptor& descriptor) : SignalInstance(source, descriptor)
+		{
+		}
+	};
+
 protected:
 	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}
 };
+
+DECOMP_SIZE_ASSERT(TSignalDesc<void(bool)>::TSignalInstance, 0x28)
 
 // SIZE 0x24
 template <int arity, class Signature>
