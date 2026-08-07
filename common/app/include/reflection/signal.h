@@ -100,7 +100,19 @@ public:
 		}
 	};
 
+	bool empty(const SignalSource* source) const
+	{
+		const TSignalInstance* instance = findSig(source);
+
+		return instance == NULL || instance->empty();
+	}
+
 protected:
+	TSignalInstance* findSig(const SignalSource* source) const
+	{
+		return static_cast<TSignalInstance*>(findSignalInstance(source));
+	}
+
 	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}
 };
 
@@ -110,6 +122,26 @@ DECOMP_SIZE_ASSERT(TSignalDesc<void(bool)>::TSignalInstance, 0x28)
 template <int arity, class Signature>
 class __declspec(novtable) SignalDescImpl : public TSignalDesc<Signature>
 {
+protected:
+	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
+	{
+	}
+};
+
+// SIZE 0x24
+template <class Signature>
+class __declspec(novtable) SignalDescImpl<1, Signature> : public TSignalDesc<Signature>
+{
+public:
+	void fire(SignalSource* source, typename boost::function_traits<Signature>::arg1_type arg1)
+	{
+		typename TSignalDesc<Signature>::TSignalInstance* instance = this->findSig(source);
+
+		if (instance != NULL) {
+			(*instance)(arg1);
+		}
+	}
+
 protected:
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
 	{
