@@ -4,12 +4,13 @@
 #include "decomp.h"
 #include "util/Handle.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 namespace RBX {
 
 extern char sGeometryService[];
 // SIZE 0xfc
-class GeometryService : public DescribedCreatable<GeometryService, Instance, sGeometryService>
+class GeometryService : public DescribedCreatable<GeometryService, Instance, sGeometryService>, public Service
 {
 private:
 	undefined m_unk0x0f8[0xfc - 0x0f8]; // 0x0f8

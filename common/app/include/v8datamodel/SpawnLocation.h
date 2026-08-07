@@ -5,6 +5,7 @@
 #include "util/Handle.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 namespace RBX {
 
@@ -34,7 +35,7 @@ private:
 DECOMP_SIZE_ASSERT(SpawnLocation, 0x2cc)
 
 // SIZE 0x104
-class SpawnerService : public DescribedCreatable<SpawnerService, Instance, sSpawnerService>
+class SpawnerService : public DescribedCreatable<SpawnerService, Instance, sSpawnerService>, public Service
 {
 private:
 	undefined m_unk0x0f8[0x104 - 0x0f8]; // 0x0f8

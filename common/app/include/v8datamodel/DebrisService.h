@@ -4,12 +4,13 @@
 #include "decomp.h"
 #include "util/Handle.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 namespace RBX {
 
 extern char sDebrisService[];
 // SIZE 0x114
-class DebrisService : public DescribedCreatable<DebrisService, Instance, sDebrisService>
+class DebrisService : public DescribedCreatable<DebrisService, Instance, sDebrisService>, public Service
 {
 private:
 	undefined m_unk0x0f8[0x114 - 0x0f8]; // 0x0f8

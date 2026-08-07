@@ -4,12 +4,13 @@
 #include "decomp.h"
 #include "util/Handle.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 namespace RBX {
 
 extern char sLighting[];
 // SIZE 0x230
-class Lighting : public DescribedCreatable<Lighting, Instance, sLighting>
+class Lighting : public DescribedCreatable<Lighting, Instance, sLighting>, public Service
 {
 private:
 	undefined m_unk0x0f8[0x230 - 0x0f8]; // 0x0f8

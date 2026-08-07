@@ -4,12 +4,13 @@
 #include "decomp.h"
 #include "util/Handle.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 namespace RBX {
 
 extern char sControllerService[];
 // SIZE 0x10c
-class ControllerService : public DescribedCreatable<ControllerService, Instance, sControllerService>
+class ControllerService : public DescribedCreatable<ControllerService, Instance, sControllerService>, public Service
 {
 private:
 	undefined m_unk0x0f8[0x10c - 0x0f8]; // 0x0f8

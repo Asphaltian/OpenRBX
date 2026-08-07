@@ -4,12 +4,13 @@
 #include "decomp.h"
 #include "util/Handle.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 namespace RBX {
 
 extern const char sTeams[];
 // SIZE 0x100
-class Teams : public DescribedCreatable<Teams, Instance, sTeams>
+class Teams : public DescribedCreatable<Teams, Instance, sTeams>, public Service
 {
 private:
 	undefined m_unk0x0f8[0x100 - 0x0f8]; // 0x0f8
