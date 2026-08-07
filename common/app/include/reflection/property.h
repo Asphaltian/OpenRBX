@@ -362,6 +362,30 @@ private:
 	std::auto_ptr<GetSet> getset; // 0x1c
 };
 
+// SIZE 0x08
+class ConstProperty
+{
+public:
+	ConstProperty(const ConstProperty& other);
+	ConstProperty(const PropertyDescriptor* descriptor, const DescribedBase* instance);
+
+protected:
+	const PropertyDescriptor* descriptor; // 0x00
+	const DescribedBase* instance;        // 0x04
+};
+
+DECOMP_SIZE_ASSERT(ConstProperty, 0x08)
+
+// SIZE 0x08
+class Property : public ConstProperty
+{
+public:
+	Property(const Property& other);
+	Property(const PropertyDescriptor* descriptor, DescribedBase* instance);
+};
+
+DECOMP_SIZE_ASSERT(Property, 0x08)
+
 } // namespace Reflection
 } // namespace RBX
 
