@@ -259,8 +259,11 @@ address,type,name
 0x102fb1a0,global,prop_LeftRight
 0x102fb1c0,global,prop_TopBottom
 0x102fb1e0,global,prop_Hole
+0x102fb200,global,prop_MaxVelocity
 0x102fb21c,global,prop_InOut
 0x102fb23c,global,prop_FaceId
+0x102fb25c,global,prop_CurrentAngle
+0x102fb278,global,prop_DesiredAngle
 0x102fb2a4,global,event_FlagCaptured
 0x102fb2c8,global,prop_Color
 0x102fba64,global,desc_Text

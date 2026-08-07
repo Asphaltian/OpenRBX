@@ -5805,9 +5805,6 @@ address,type,symbol
 0x102fb0f8,global,??_B?1??classDescriptor@?$Described@VVelocityMotor@RBX@@$1?sVelocityMotor@2@3QBDBV?$FactoryProduct@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102fb100,global,?s@?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
 0x102fb198,global,??_B?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV123@XZ@51
-0x102fb200,global,prop_MaxVelocity
-0x102fb25c,global,prop_CurrentAngle
-0x102fb278,global,prop_DesiredAngle
 0x102fb29c,global,??_B?1???$assign_to@V?$bind_t@XV?$mf1@XVFlagStand@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlagStand@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXV?$bind_t@XV?$mf1@XVFlagStand@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlagStand@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z@51
 0x102fb2e8,global,"foo___RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor"
 0x102fb370,global,??_B?1??classDescriptor@?$Described@VBodyPosition@RBX@@$1?sBodyPosition@2@3PADAV?$FactoryProduct@VBodyPosition@RBX@@VBodyMover@2@$1?sBodyPosition@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
