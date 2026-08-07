@@ -25,6 +25,19 @@ class LocalScript : public DescribedCreatable<LocalScript, Script, sLocalScript>
 
 DECOMP_SIZE_ASSERT(LocalScript, 0x128)
 
+class ScriptContext;
+
+// SIZE 0x4
+class __declspec(novtable) IScriptOwner
+{
+protected:
+	virtual IScriptOwner* scriptShouldRun(Script* script) = 0;            // vtable+0x00
+	virtual void runScript(Script* script, ScriptContext* scriptContext); // vtable+0x04
+	virtual void releaseScript(Script* script);                           // vtable+0x08
+};
+
+DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
+
 // clang-format off
 // STUB: WEBSERVICE 0x10068bf0
 // RBX::Script::~Script

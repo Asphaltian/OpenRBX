@@ -14,6 +14,70 @@ char sWorkspace[] = "Workspace";
 
 bool Workspace::showWorldCoord;
 
+// STUB: WEBSERVICE 0x1006a0f0
+const G3D::GCamera& Workspace::getGCamera() const
+{
+	STUB(0x1006a0f0);
+	return *static_cast<const G3D::GCamera*>(NULL);
+}
+
+// STUB: WEBSERVICE 0x1006a960
+IScriptOwner* Workspace::scriptShouldRun(Script* script)
+{
+	STUB(0x1006a960);
+	return NULL;
+}
+
+// STUB: WEBSERVICE 0x1006bfd0
+Camera* Workspace::getCamera() const
+{
+	STUB(0x1006bfd0);
+	return NULL;
+}
+
+// STUB: WEBSERVICE 0x1006ccb0
+void Workspace::runScript(Script* script, ScriptContext* scriptContext)
+{
+	STUB(0x1006ccb0);
+}
+
+// STUB: WEBSERVICE 0x1006cd70
+Workspace::~Workspace()
+{
+	STUB(0x1006cd70);
+}
+
+// STUB: WEBSERVICE 0x1006d0d0
+Extents Workspace::computeCameraOwnerExtents()
+{
+	STUB(0x1006d0d0);
+	return Extents();
+}
+
+// STUB: WEBSERVICE 0x1006d230
+void Workspace::cameraMoved()
+{
+	STUB(0x1006d230);
+}
+
+// STUB: WEBSERVICE 0x1006d440
+void Workspace::releaseScript(Script* script)
+{
+	STUB(0x1006d440);
+}
+
+// STUB: WEBSERVICE 0x1006ec80
+void Workspace::onEvent(const RunService* source, Heartbeat event)
+{
+	STUB(0x1006ec80);
+}
+
+// STUB: WEBSERVICE 0x100703e0
+Workspace::Workspace(IDataState* dataState) : VerbContainer(NULL)
+{
+	STUB(0x100703e0);
+}
+
 } // namespace RBX
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sControllerService>();

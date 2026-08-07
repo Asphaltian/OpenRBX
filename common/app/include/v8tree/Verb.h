@@ -22,6 +22,8 @@ private:
 	void removeVerb(Verb* verb);
 
 public:
+	VerbContainer(VerbContainer* parent);
+
 	virtual ~VerbContainer(); // vtable+0x00
 
 	Verb* getVerb(const Name& name);

@@ -2,20 +2,69 @@
 #define V8DATAMODEL_WORKSPACE_H
 
 #include "decomp.h"
+#include "gui/GuiEvent.h"
+#include "script/Script.h"
+#include "util/IRenderable.h"
 #include "util/Name.h"
+#include "util/RunStateOwner.h"
+#include "v8datamodel/RootInstance.h"
+#include "v8tree/Service.h"
+#include "v8tree/Verb.h"
+#include "v8world/IMoving.h"
 
 namespace RBX {
 
+class IDataState;
+
 extern char sWorkspace[];
 
+// SIZE 0x1
+class DrawChanged
+{
+};
+
+DECOMP_SIZE_ASSERT(DrawChanged, 0x1)
+
+// SIZE 0x1
+class ToolChanged
+{
+};
+
+DECOMP_SIZE_ASSERT(ToolChanged, 0x1)
+
 // SIZE 0x394
-class Workspace
+class Workspace : public RootInstance,
+				  public GuiTarget,
+				  public VerbContainer,
+				  public IMovingManager,
+				  public IScriptOwner,
+				  public Notifier<Workspace, DrawChanged>,
+				  public Notifier<Workspace, ToolChanged>,
+				  public Listener<RunService, Heartbeat>,
+				  public Service,
+				  public IRenderableBucket
 {
 public:
 	static bool showWorldCoord;
 
+	Workspace(IDataState* dataState);
+
+	virtual ~Workspace();
+
+	virtual Camera* getCamera() const;              // ICameraOwner vtable+0x04
+	virtual const G3D::GCamera& getGCamera() const; // ICameraOwner vtable+0x08
+	virtual void cameraMoved();                     // ICameraOwner vtable+0x0c
+	virtual Extents computeCameraOwnerExtents();    // ICameraOwner vtable+0x10
+
+protected:
+	virtual IScriptOwner* scriptShouldRun(Script* script);
+	virtual void runScript(Script* script, ScriptContext* scriptContext);
+	virtual void releaseScript(Script* script);
+
+	virtual void onEvent(const RunService* source, Heartbeat event);
+
 private:
-	undefined m_unk0x000[0x394 - 0x000]; // 0x000
+	undefined m_unk0x310[0x374 - 0x310]; // 0x310
 };
 
 DECOMP_SIZE_ASSERT(Workspace, 0x394)

@@ -134,7 +134,9 @@ set(OPENRBX_APP_SOURCES
   common/app/v8xml/XmlElement.cpp
   common/app/v8xml/SerializerV2.cpp
   common/app/v8xml/XmlSerializer.cpp
+  common/app/util/IRenderable.cpp
   common/app/v8tree/Instance.cpp
+  common/app/v8tree/Verb.cpp
   common/app/util/ExponentialRunningAverage.cpp
   common/app/util/Extents.cpp
   common/app/util/Face.cpp
