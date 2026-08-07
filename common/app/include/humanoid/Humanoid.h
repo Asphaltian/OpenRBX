@@ -3,8 +3,13 @@
 
 #include "decomp.h"
 #include "util/Handle.h"
+#include "util/IControllable.h"
+#include "util/IRenderable.h"
 #include "util/Name.h"
+#include "util/RunStateOwner.h"
+#include "v8datamodel/ICharacterSubject.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8kernel/Connector.h"
 #include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>
@@ -19,8 +24,36 @@ class World;
 extern char sHumanoid[];
 
 // SIZE 0x1f0
-class Humanoid : public DescribedCreatable<Humanoid, Instance, sHumanoid>
+class Humanoid : public DescribedCreatable<Humanoid, Instance, sHumanoid>,
+				 public Connector,
+				 public IControllable,
+				 public IRenderable,
+				 public ICharacterSubject,
+				 public Listener<RunService, Stepped>
 {
+
+public:
+	Humanoid();
+	virtual ~Humanoid();
+
+	virtual void computeForce(float dt, bool throttling);
+	virtual bool isControllable() const;
+	virtual const CoordinateFrame getLocation() const;
+
+	virtual bool shouldRender2d() const;
+	virtual bool shouldRender3dAdorn() const;
+	virtual void render2d(Adorn* adorn);
+	virtual void render3dAdorn(Adorn* adorn);
+
+	virtual ContactManager* getContactManager();
+	virtual void getIgnorePrims(std::vector<const Primitive*>& prims);
+	virtual void tellCameraNear(float distance);
+	virtual G3D::Vector3 getIntendedMovementVector();
+	virtual float getIntendedRotationAboutYAxis();
+	virtual void cameraSetWalkOrientation(float angle, bool value);
+
+	virtual void onEvent(const RunService* source, Stepped event);
+
 public:
 	// SIZE 0x08
 	class __declspec(novtable) State : public INamed
@@ -72,7 +105,6 @@ public:
 	Body* getRootBody();
 
 private:
-	undefined m_unk0x0f8[0x16c - 0x0f8];      // 0x0f8
 	float health;                             // 0x16c
 	float maxHealth;                          // 0x170
 	float walkRotationalVelocity;             // 0x174
@@ -89,7 +121,6 @@ private:
 	boost::shared_ptr<PartInstance> leftArm;  // 0x1d8
 	World* world;                             // 0x1e0
 	std::auto_ptr<State> currentState;        // 0x1e4
-	undefined m_unk0x1e8[0x1f0 - 0x1e8];      // 0x1e8
 };
 
 DECOMP_SIZE_ASSERT(Humanoid, 0x1f0)
