@@ -58,6 +58,14 @@ public:
 	virtual void onEvent(const RunService* source, Stepped event);
 
 public:
+	enum WalkMode
+	{
+		HAS_PART = 0,
+		HAS_POINT = 1,
+		CLICK_TO_MOVE = 2,
+		DIRECTION_MOVE = 3
+	};
+
 	// SIZE 0x08
 	class __declspec(novtable) State : public INamed
 	{
@@ -111,7 +119,12 @@ private:
 	float health;                             // 0x16c
 	float maxHealth;                          // 0x170
 	float walkRotationalVelocity;             // 0x174
-	undefined m_unk0x178[0x1ac - 0x178];      // 0x178
+	float walkTimer;                          // 0x178
+	WalkMode walkMode;                        // 0x17c
+	shared_ptr<PartInstance> walkToPart;      // 0x180
+	G3D::Vector3 walkToPoint;                 // 0x188
+	G3D::Vector3 walkDirection;               // 0x194
+	G3D::Vector3 targetPoint;                 // 0x1a0
 	bool jump : 1;                            // 0x1ac
 	bool imDead : 1;                          // 0x1ac
 	bool hadHeadJoint : 1;                    // 0x1ac
