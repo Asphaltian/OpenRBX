@@ -31,7 +31,7 @@ private:
 		return jointType == WELD_JOINT || jointType == SNAP_JOINT;
 	}
 
-protected:
+public:
 	RigidJoint() {}
 
 	RigidJoint(Primitive* prim0, Primitive* prim1, const CoordinateFrame& coord0, const CoordinateFrame& coord1)

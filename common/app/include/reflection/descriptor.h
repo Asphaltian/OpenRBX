@@ -30,7 +30,6 @@ public:
 
 	const Name& name; // 0x04
 
-protected:
 	Descriptor(const char* name) : name(Name::declare(name, -1)) {}
 };
 
