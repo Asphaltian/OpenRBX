@@ -168,6 +168,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/FaceInstance.cpp
   common/app/v8datamodel/Feature.cpp
   common/app/v8datamodel/ModelInstance.cpp
+  common/app/v8datamodel/RootInstance.cpp
   common/app/v8datamodel/JointInstance.cpp
   common/app/v8datamodel/Message.cpp
   common/app/v8datamodel/PVInstance.cpp

@@ -79,6 +79,30 @@ public:
 
 DECOMP_SIZE_ASSERT(NullController, 0x0c)
 
+// SIZE 0x8
+class ControllerTypeArray
+{
+private:
+	bool values[Controller::NUM_CONTROLLER_TYPES]; // 0x00
+
+public:
+	ControllerTypeArray() { clear(); }
+
+	void clear()
+	{
+		for (int i = 0; i < Controller::NUM_CONTROLLER_TYPES; ++i) {
+			values[i] = false;
+		}
+	}
+
+	void setController(Controller::ControllerType controllerType, bool value);
+	bool hasController(Controller::ControllerType controllerType) const;
+
+	ControllerTypeArray& operator|=(const ControllerTypeArray& other);
+};
+
+DECOMP_SIZE_ASSERT(ControllerTypeArray, 0x8)
+
 // FUNCTION: WEBSERVICE 0x10099400
 inline NullController* NullController::getStaticNullController()
 {
