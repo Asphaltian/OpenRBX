@@ -269,10 +269,14 @@ void PartInstance::onAncestorChanged(const AncestorChanged& event)
 	STUB(0x1009bff0);
 }
 
-// STUB: WEBSERVICE 0x1009c090
+// FUNCTION: WEBSERVICE 0x1009c090
 void PartInstance::onParentControllerChanged()
 {
-	STUB(0x1009c090);
+	PVInstance::onParentControllerChanged();
+
+	PersistentPart.setDirty();
+
+	primitive->setController(getTopPVController());
 }
 
 // STUB: WEBSERVICE 0x1009c0c0
