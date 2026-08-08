@@ -1,69 +1,158 @@
+#define NOMINMAX
+
 #include "util/Profiling.h"
 
 #include "decomp.h"
 
+#include <G3D/System.h>
+#include <algorithm>
+
 namespace RBX {
 namespace Profiling {
 
-// GLOBAL: WEBSERVICE 0x102fcf6c
+// GLOBAL: WEBSERVICE 0x102f7474
 DWORD Mark::markTlsIndex = 0;
 
-// STUB: WEBSERVICE 0x10084600
+// FUNCTION: WEBSERVICE 0x100844e0
+void init(bool enabled)
+{
+	if (enabled) {
+		Mark::markTlsIndex = TlsAlloc();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10084500
+void ThreadProfiler::sample(void* thread)
+{
+	double now = G3D::System::getTick();
+
+	if (now >= lastSampleTime + bucketTimeSpan) {
+		__int64 creationTime;
+		__int64 exitTime;
+		__int64 kernelTime;
+		__int64 userTime;
+
+		if (GetThreadTimes(
+				thread,
+				(FILETIME*) &creationTime,
+				(FILETIME*) &exitTime,
+				(FILETIME*) &kernelTime,
+				(FILETIME*) &userTime
+			)) {
+			__int64 kern = kernelTime;
+			__int64 user = userTime;
+
+			if (initialized) {
+				buckets[currentBucket].sampleTimeSpan = now - lastSampleTime;
+				buckets[currentBucket].kernTimeSpan += kern;
+				buckets[currentBucket].userTimeSpan += user;
+
+				currentBucket = (currentBucket + 1) % bucketCount;
+			}
+			else {
+				initialized = true;
+			}
+
+			lastSampleTime = now;
+
+			buckets[currentBucket].kernTimeSpan = -kern;
+			buckets[currentBucket].userTimeSpan = -user;
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10084600
 void CodeProfiler::log(__int64 kern, __int64 user, bool frameTick)
 {
-	STUB(0x10084600);
+	double now = G3D::System::getTick();
+
+	if (now >= lastSampleTime + bucketTimeSpan) {
+		buckets[currentBucket].sampleTimeSpan = now - lastSampleTime;
+
+		currentBucket = (currentBucket + 1) % bucketCount;
+
+		buckets[currentBucket].frames = frameTick ? 1 : 0;
+		buckets[currentBucket].kernTimeSpan = kern;
+		buckets[currentBucket].userTimeSpan = user;
+
+		lastSampleTime = now;
+	}
+	else {
+		if (frameTick) {
+			buckets[currentBucket].frames++;
+		}
+
+		buckets[currentBucket].kernTimeSpan += kern;
+		buckets[currentBucket].userTimeSpan += user;
+	}
 }
 
-// STUB: WEBSERVICE 0x100846d0
+// FUNCTION: WEBSERVICE 0x100846d0
 double Bucket::getActualFPS() const
 {
-	STUB(0x100846d0);
+	if (sampleTimeSpan > 0.0) {
+		return frames / sampleTimeSpan;
+	}
 
 	return 0.0;
 }
 
-// STUB: WEBSERVICE 0x100846f0
+// FUNCTION: WEBSERVICE 0x100846f0
 double Bucket::getFrameTime() const
 {
-	STUB(0x100846f0);
-
-	return 0.0;
+	return getTotalTime() / frames;
 }
 
-// STUB: WEBSERVICE 0x10084720
+// FUNCTION: WEBSERVICE 0x10084720
 double Bucket::getTotalTime() const
 {
-	STUB(0x10084720);
-
-	return 0.0;
+	return (kernTimeSpan + userTimeSpan) * 1e-7;
 }
 
-// STUB: WEBSERVICE 0x10084750
-Profiler::Profiler(const char* name) : bucketTimeSpan(0.0), name(name)
+// FUNCTION: WEBSERVICE 0x10084750
+Profiler::Profiler(const char* name)
+	: bucketTimeSpan(1.0), currentBucket(0), lastSampleTime(G3D::System::getTick()), name(name)
 {
-	STUB(0x10084750);
 }
 
-// STUB: WEBSERVICE 0x100847b0
-CodeProfiler::CodeProfiler(const char* name) : Profiler(name)
+// FUNCTION: WEBSERVICE 0x100847b0
+CodeProfiler::CodeProfiler(const char* name) : Profiler(name), parent(NULL)
 {
-	STUB(0x100847b0);
 }
 
-// STUB: WEBSERVICE 0x100847f0
+// FUNCTION: WEBSERVICE 0x100847d0
+ThreadProfiler::ThreadProfiler(const char* name) : Profiler(name), initialized(false)
+{
+}
+
+// FUNCTION: WEBSERVICE 0x100847f0
 Bucket Profiler::getData(double seconds) const
 {
-	STUB(0x100847f0);
+	Bucket result;
 
-	return Bucket();
+	if (Mark::markTlsIndex != 0) {
+		double span = seconds - (G3D::System::getTick() - lastSampleTime);
+
+		unsigned int index = currentBucket + bucketCount - 1;
+
+		unsigned int count = std::min((unsigned int) (span / bucketTimeSpan), bucketCount - 2);
+
+		for (unsigned int i = 0; i < count; i++) {
+			if (result.sampleTimeSpan >= span) {
+				break;
+			}
+
+			result += buckets[(index - i) % bucketCount];
+		}
+	}
+
+	return result;
 }
 
-// STUB: WEBSERVICE 0x10084a20
+// FUNCTION: WEBSERVICE 0x10084a20
 double Bucket::getNominalFPS() const
 {
-	STUB(0x10084a20);
-
-	return 0.0;
+	return frames / getTotalTime();
 }
 
 } // namespace Profiling
