@@ -58,11 +58,10 @@ void ModelInstance::updatePrimaryPart(PartInstance* part) const
 	STUB(0x1005a1f0);
 }
 
-// STUB: WEBSERVICE 0x1005a350
+// FUNCTION: WEBSERVICE 0x1005a350
 Extents ModelInstance::computeWorldGridExtents() const
 {
-	STUB(0x1005a350);
-	return Extents();
+	return LocalGridExtents.getValue().express(getLocation(), CoordinateFrame());
 }
 
 // STUB: WEBSERVICE 0x1005a3b0
