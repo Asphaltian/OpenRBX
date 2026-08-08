@@ -34,7 +34,7 @@ class ToolChanged
 DECOMP_SIZE_ASSERT(ToolChanged, 0x1)
 
 // SIZE 0x394
-class Workspace : public RootInstance,
+class Workspace : public DescribedNonCreatable<Workspace, RootInstance, sWorkspace>,
 				  public GuiTarget,
 				  public VerbContainer,
 				  public IMovingManager,

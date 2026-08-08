@@ -68,22 +68,31 @@ void Workspace::releaseScript(Script* script)
 // STUB: WEBSERVICE 0x1006ebc0
 Workspace* Workspace::findWorkspace(const Instance* context)
 {
-	STUB(0x1006ebc0);
-	return NULL;
+	return ServiceProvider::find<Workspace>(const_cast<Instance*>(context));
 }
 
 // STUB: WEBSERVICE 0x1006ec00
 World* Workspace::getWorldIfInWorkspace(const Instance* context)
 {
-	STUB(0x1006ec00);
+	Workspace* workspace = ServiceProvider::find<Workspace>(const_cast<Instance*>(context));
+
+	if (workspace != NULL && (context == workspace || context->isDescendentOf(workspace))) {
+		return workspace->world.get();
+	}
+
 	return NULL;
 }
 
 // STUB: WEBSERVICE 0x1006ec40
 bool Workspace::contextInWorkspace(const Instance* context)
 {
-	STUB(0x1006ec40);
-	return false;
+	Workspace* workspace = ServiceProvider::find<Workspace>(const_cast<Instance*>(context));
+
+	if (workspace != NULL && context != workspace && !context->isDescendentOf(workspace)) {
+		workspace = NULL;
+	}
+
+	return workspace != NULL;
 }
 
 // STUB: WEBSERVICE 0x1006ec80

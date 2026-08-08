@@ -24,9 +24,12 @@ class __declspec(novtable) RootInstance : public ModelInstance, public ICameraOw
 private:
 	ComputeProp<ControllerTypeArray, RootInstance> ControllersUsed; // 0x250
 	G3D::Vector3 insertPoint;                                       // 0x270
-	G3D::Rect2D viewPort;                                           // 0x27c
-	std::auto_ptr<World> world;                                     // 0x28c
 
+protected:
+	G3D::Rect2D viewPort;       // 0x27c
+	std::auto_ptr<World> world; // 0x28c
+
+private:
 	ControllerTypeArray computeControllersUsed() const;
 	G3D::Vector3 computeIdeInsertPoint() const;
 
