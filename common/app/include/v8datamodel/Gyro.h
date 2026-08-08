@@ -11,6 +11,7 @@
 
 namespace RBX {
 
+class Body;
 class World;
 class PartInstance;
 
@@ -63,6 +64,9 @@ public:
 	virtual void computeForce(float dt, bool throttling);
 
 private:
+	void computeOrientation(Body* body);
+	void computeBalance(Body* body);
+
 	float kP;                    // 0x10c
 	float kD;                    // 0x110
 	G3D::Vector3 maxTorque;      // 0x114

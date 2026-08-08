@@ -28,6 +28,18 @@ void BodyMover::onEvent(const RunService* source, Stepped event)
 	}
 }
 
+// STUB: WEBSERVICE 0x100ea7c0
+void BodyGyro::computeOrientation(Body* body)
+{
+	STUB(0x100ea7c0);
+}
+
+// STUB: WEBSERVICE 0x100eaaf0
+void BodyGyro::computeBalance(Body* body)
+{
+	STUB(0x100eaaf0);
+}
+
 // STUB: WEBSERVICE 0x100eaf60
 void BodyPosition::computeForce(float dt, bool throttling)
 {
@@ -84,7 +96,10 @@ void Rocket::computeForce(float dt, bool throttling)
 // STUB: WEBSERVICE 0x100ebfb0
 void BodyGyro::computeForce(float dt, bool throttling)
 {
-	STUB(0x100ebfb0);
+	Body* body = part->getPrimitive()->getBody();
+
+	computeBalance(body);
+	computeOrientation(body);
 }
 
 // FUNCTION: WEBSERVICE 0x100ed7b0
