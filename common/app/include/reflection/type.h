@@ -88,6 +88,8 @@ DECOMP_SIZE_ASSERT(SignatureDescriptor, 0x10)
 // `RBX::Reflection::Type::singleton<float>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x102214a0
 // `RBX::Reflection::Type::singleton<double>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x102214b0
+// `RBX::Reflection::Type::singleton<RBX::ContentId>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x102214c0
 // `RBX::Reflection::Type::singleton<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x102214d0

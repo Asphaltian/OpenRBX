@@ -213,6 +213,8 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<int>::TypedPropertyDescriptor<int>
 	// STUB: WEBSERVICE 0x100996a0
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::getset<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>
+	// STUB: WEBSERVICE 0x10094c50
+	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::TypedPropertyDescriptor<RBX::TextureId>
 	// STUB: WEBSERVICE 0x1009ba30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
 	// STUB: WEBSERVICE 0x1009bce0
@@ -259,6 +261,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::getset<float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ff830
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::getset<float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x100ffc90
+	// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::PropDescriptor<RBX::Decal,RBX::TextureId><RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>
 	// TEMPLATE: WEBSERVICE 0x1018c700
 	// RBX::Reflection::PropDescriptor<RBX::Network::Player,bool>::getset<bool (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(bool)>
 	// TEMPLATE: WEBSERVICE 0x1018ce60

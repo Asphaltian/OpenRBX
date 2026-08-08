@@ -1,5 +1,6 @@
 #include "reflection/enumconverter.h"
 #include "reflection/property.h"
+#include "util/ContentProvider.h"
 #include "util/NormalId.h"
 #include "v8datamodel/BrickColor.h"
 
@@ -43,6 +44,15 @@ template <>
 const Type& Type::singleton<double>()
 {
 	static Type type("double", typeid(double));
+
+	return type;
+}
+
+// FUNCTION: WEBSERVICE 0x1003f270
+template <>
+const Type& Type::singleton<ContentId>()
+{
+	static Type type("Content", typeid(ContentId));
 
 	return type;
 }

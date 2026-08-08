@@ -405,7 +405,7 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>::~DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// TEMPLATE: WEBSERVICE 0x100ffe70
 	// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
-	// STUB: WEBSERVICE 0x101002f0
+	// TEMPLATE: WEBSERVICE 0x101002f0
 	// RBX::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// STUB: WEBSERVICE 0x1012cc20
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::~DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>

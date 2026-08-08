@@ -46,6 +46,8 @@ private:
 DECOMP_SIZE_ASSERT(ContentId, 0x20)
 
 bool operator<(const ContentId& a, const ContentId& b);
+bool operator!=(const ContentId& a, const ContentId& b);
+bool operator==(const ContentId& a, const ContentId& b);
 
 // SIZE 0x54
 class ContentProvider : public boost::noncopyable

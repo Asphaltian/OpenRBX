@@ -2,6 +2,7 @@
 #define UTIL_TEXTUREID_H
 
 #include "decomp.h"
+#include "reflection/type.h"
 #include "util/ContentProvider.h"
 
 namespace RBX {
@@ -16,6 +17,13 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(TextureId, 0x20)
+
+namespace Reflection {
+
+template <>
+const Type& Type::singleton<TextureId>();
+
+} // namespace Reflection
 
 } // namespace RBX
 

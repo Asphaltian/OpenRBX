@@ -372,7 +372,6 @@ address,size,symbol,name
 0x10094000,0x41,?name@BrickColor@RBX@@QBEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
 0x10094050,0x5e,?color4@BrickColor@RBX@@QBE?AVColor4@G3D@@XZ,
 0x10094700,0x54c,?getG3DSky@Sky@RBX@@SA?AV?$ReferenceCountedPointer@VSky@G3D@@@G3D@@PAV12@@Z,
-0x10094c50,0x6c,??0?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@IAE@AAVClassDescriptor@12@PBD1V?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@@std@@W4Functionality@PropertyDescriptor@12@@Z,
 0x10095c50,0x1f3,?getSignalInstance@SignalDescriptor@Reflection@RBX@@QBE?AV?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@AAVSignalSource@23@@Z,
 0x10095e50,0x21,?getSignalInstance@Signal@Reflection@RBX@@QBE?AV?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@XZ,
 0x10098620,0x20d,?loadInstances@SerializerV2@@QAEXPAVXmlElement@@AAV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@Z,

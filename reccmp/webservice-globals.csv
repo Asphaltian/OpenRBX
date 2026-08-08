@@ -6494,3 +6494,4 @@ address,type,symbol
 0x1023ae3c,global,??_7Hopper@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1023ae44,global,??_7Hopper@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1023ae54,global,??_7Hopper@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x102f50b0,global,??_R0?AVContentId@RBX@@@8
