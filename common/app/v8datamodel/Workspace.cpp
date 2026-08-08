@@ -2,6 +2,7 @@
 
 #include "tool/ToolsArrow.h"
 #include "util/Name.h"
+#include "util/standardout.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Flag.h"
 #include "v8datamodel/Hopper.h"
@@ -57,7 +58,7 @@ Extents Workspace::computeCameraOwnerExtents()
 // STUB: WEBSERVICE 0x1006d230
 void Workspace::cameraMoved()
 {
-	STUB(0x1006d230);
+	Notifier<Workspace, DrawChanged>::raise(DrawChanged());
 }
 
 // STUB: WEBSERVICE 0x1006d440
