@@ -87,15 +87,13 @@ ModelInstance::~ModelInstance()
 // STUB: WEBSERVICE 0x1005ab00
 Extents ModelInstance::getExtentsWorld() const
 {
-	STUB(0x1005ab00);
-	return Extents();
+	return WorldGridExtents.getValue();
 }
 
 // STUB: WEBSERVICE 0x1005ab50
 Extents ModelInstance::getExtentsLocal() const
 {
-	STUB(0x1005ab50);
-	return Extents();
+	return LocalGridExtents.getValue();
 }
 
 // STUB: WEBSERVICE 0x1005abb0
