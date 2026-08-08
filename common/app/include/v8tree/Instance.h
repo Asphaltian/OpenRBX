@@ -150,6 +150,9 @@ public:
 	// FUNCTION: WEBSERVICE 0x10048320
 	unsigned int numChildren() const { return children.read() != NULL ? children.read()->size() : 0; }
 
+	const Instance* getChild(unsigned int index) const { return (*children.read())[index].get(); }
+	Instance* getChild(unsigned int index) { return (*children.read())[index].get(); }
+
 	// STUB: WEBSERVICE 0x100469f0
 	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
 	{

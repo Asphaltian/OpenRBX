@@ -85,9 +85,35 @@ Extents ModelInstance::getExtentsLocal() const
 // STUB: WEBSERVICE 0x1005abb0
 PartInstance* ModelInstance::getPrimaryPartInternal() const
 {
-	STUB(0x1005abb0);
+	if (primaryPart != NULL) {
+		return primaryPart;
+	}
 
-	return NULL;
+	float bestArea = -1.0f;
+	PartInstance* best = NULL;
+
+	for (unsigned int i = 0; i < numChildren(); i++) {
+		const PVInstance* pv = dynamic_cast<const PVInstance*>(getChild(i));
+
+		if (pv != NULL) {
+			const Primitive* primitive = pv->getBiggestPrimitive();
+
+			if (primitive != NULL) {
+				PartInstance* part = PartInstance::fromPrimitive(const_cast<Primitive*>(primitive));
+
+				float area = part->getExtentsWorld().areaXZ();
+
+				if (area > bestArea) {
+					bestArea = area;
+					best = part;
+				}
+			}
+		}
+	}
+
+	updatePrimaryPart(best);
+
+	return best;
 }
 
 // STUB: WEBSERVICE 0x1005ac90
