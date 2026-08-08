@@ -95,7 +95,7 @@ public:
 		}
 	}
 
-	void setController(Controller::ControllerType controllerType, bool value);
+	void setController(Controller::ControllerType controllerType, bool value) { values[controllerType] = value; }
 	bool hasController(Controller::ControllerType controllerType) const;
 
 	ControllerTypeArray& operator|=(const ControllerTypeArray& other);

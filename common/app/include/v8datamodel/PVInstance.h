@@ -53,7 +53,8 @@ protected:
 public:
 	virtual ~PVInstance();
 
-	Controller::ControllerType getControllerType() const;
+	// FUNCTION: WEBSERVICE 0x100990a0
+	Controller::ControllerType getControllerType() const { return controllerType; }
 	void setControllerType(Controller::ControllerType _control);
 
 	// FUNCTION: WEBSERVICE 0x100990b0

@@ -45,12 +45,6 @@ bool PVInstance::isTopLevelPVInstance() const
 	return dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent();
 }
 
-// FUNCTION: WEBSERVICE 0x100990a0
-Controller::ControllerType PVInstance::getControllerType() const
-{
-	return controllerType;
-}
-
 // FUNCTION: WEBSERVICE 0x10099100
 void PVInstance::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {

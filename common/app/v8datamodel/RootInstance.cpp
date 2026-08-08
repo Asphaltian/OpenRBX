@@ -9,11 +9,20 @@ G3D::Vector3 RootInstance::computeIdeInsertPoint() const
 	return G3D::Vector3::zero();
 }
 
-// STUB: WEBSERVICE 0x100c1020
+// FUNCTION: WEBSERVICE 0x100c1020
 ControllerTypeArray RootInstance::computeControllersUsed() const
 {
-	STUB(0x100c1020);
-	return ControllerTypeArray();
+	ControllerTypeArray result;
+
+	for (unsigned int i = 0; i < numChildren(); i++) {
+		const PVInstance* pv = dynamic_cast<const PVInstance*>(getChild(i));
+
+		if (pv != NULL && pv->isControllable()) {
+			result.setController(pv->getControllerType(), true);
+		}
+	}
+
+	return result;
 }
 
 // STUB: WEBSERVICE 0x100c1250
