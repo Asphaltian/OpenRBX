@@ -64,24 +64,6 @@ ContactManager::~ContactManager()
 	delete spatialHash;
 }
 
-// FUNCTION: WEBSERVICE 0x10108620
-bool ContactManager::intersectingOthers(Primitive* check, const std::set<Primitive*>& checkSet, float overlapIgnored)
-{
-	Contact* c = check->getFirstContact();
-
-	while (c != NULL) {
-		Primitive* other = c->otherPrimitive(check);
-
-		if (checkSet.find(other) == checkSet.end() && c->computeIsColliding(overlapIgnored)) {
-			return true;
-		}
-
-		c = check->getNextContact(c);
-	}
-
-	return false;
-}
-
 // FUNCTION: WEBSERVICE 0x101081d0
 Primitive* ContactManager::getSlowHit(
 	const G3D::Array<Primitive*>& primitives,
@@ -164,6 +146,24 @@ Primitive* ContactManager::getSlowHit(
 	}
 
 	return answer;
+}
+
+// FUNCTION: WEBSERVICE 0x10108620
+bool ContactManager::intersectingOthers(Primitive* check, const std::set<Primitive*>& checkSet, float overlapIgnored)
+{
+	Contact* c = check->getFirstContact();
+
+	while (c != NULL) {
+		Primitive* other = c->otherPrimitive(check);
+
+		if (checkSet.find(other) == checkSet.end() && c->computeIsColliding(overlapIgnored)) {
+			return true;
+		}
+
+		c = check->getNextContact(c);
+	}
+
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x101086c0
