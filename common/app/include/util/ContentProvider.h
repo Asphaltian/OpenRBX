@@ -19,13 +19,7 @@ public:
 
 	ContentId(const std::string& id) : id(id), mimeTypePtr(&Name::getNullName()) {}
 
-	ContentId& operator=(const ContentId& other)
-	{
-		id = other.id;
-		mimeTypePtr = other.mimeTypePtr;
-
-		return *this;
-	}
+	static ContentId fromAssets(const std::string& id);
 
 	const Name& mimeType() const { return *mimeTypePtr; }
 

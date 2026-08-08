@@ -6495,3 +6495,13 @@ address,type,symbol
 0x1023ae44,global,??_7Hopper@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1023ae54,global,??_7Hopper@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x102f50b0,global,??_R0?AVContentId@RBX@@@8
+0x10236174,global,??_7Sky@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10236184,global,??_7Sky@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x10236194,global,??_7Sky@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x102361a4,global,??_7Sky@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x102361b4,global,??_7Sky@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x102361c4,global,??_7Sky@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x102361d4,global,??_7Sky@RBX@@6BDebugable@1@@
+0x102361dc,global,??_7Sky@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x102361e4,global,??_7Sky@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x102361f4,global,??_7Sky@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@

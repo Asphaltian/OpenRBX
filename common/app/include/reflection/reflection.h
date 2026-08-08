@@ -99,6 +99,8 @@ public:
 	// RBX::Reflection::Described<RBX::Flag,&RBX::sFlag,RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag> >::classDescriptor
 	// STUB: WEBSERVICE 0x1008e390
 	// RBX::Reflection::Described<RBX::Seat,&RBX::sSeat,RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x10094d80
+	// RBX::Reflection::Described<RBX::Sky,&RBX::sSky,RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100b42f0
 	// RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100be240
@@ -205,6 +207,8 @@ public:
 	// `RBX::Reflection::Described<RBX::PartInstance,&RBX::sPart,RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10222790
 	// `RBX::Reflection::Described<RBX::ObjectValue,&RBX::sObjectValue,RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10222fe0
+	// `RBX::Reflection::Described<RBX::Sky,&RBX::sSky,RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10223960
 	// `RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10223aa0

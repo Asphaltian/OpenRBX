@@ -351,12 +351,18 @@ public:
 	// RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1008e950
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100945c0
+	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::~FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x100a09b0
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
+	// TEMPLATE: WEBSERVICE 0x10094610
+	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x100a0a70
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// STUB: WEBSERVICE 0x100a0b40
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x10094d60
+	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100a1bb0
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100ad0d0

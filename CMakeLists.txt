@@ -31,6 +31,10 @@ if (ENABLE_CLANG_TIDY)
                               common/app/v8world/World.cpp
                               PROPERTIES SKIP_LINTING ON)
 
+  # G3D's BinaryInput.h and BinaryOutput.h throw from a header, which clang-tidy reports as an
+  # error whatever /EHsc the command line carries. GLG3D/Sky.h pulls both in.
+  set_source_files_properties(common/app/v8datamodel/Sky.cpp PROPERTIES SKIP_LINTING ON)
+
   # Contact.cpp binds a temporary to the non-const reference getClosestEdge records, which
   # MSVC 8 accepts as an extension. Naming the temporary is conformant and costs the caller
   # eight points, so the original relied on the extension and the source has to as well.
@@ -256,6 +260,7 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/Seat.cpp
   common/app/v8datamodel/Selection.cpp
   common/app/v8datamodel/Stats.cpp
+  common/app/v8datamodel/Sky.cpp
   common/app/v8datamodel/Teams.cpp
   common/app/v8datamodel/TimerService.cpp
   common/app/v8datamodel/ToolMouseCommand.cpp

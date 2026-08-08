@@ -280,8 +280,12 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>
 	// STUB: WEBSERVICE 0x1008e2c0
 	// RBX::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
+	// TEMPLATE: WEBSERVICE 0x100946f0
+	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::~DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x100a10f0
 	// RBX::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
+	// TEMPLATE: WEBSERVICE 0x10095060
+	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// STUB: WEBSERVICE 0x100a3b60
 	// RBX::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// STUB: WEBSERVICE 0x100b3b30

@@ -146,6 +146,7 @@ private:
 		STUB(0x10094420);
 	}
 
+protected:
 	std::auto_ptr<GetSet> getset; // 0x18
 };
 
@@ -211,6 +212,12 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<bool>::TypedPropertyDescriptor<bool>
 	// STUB: WEBSERVICE 0x1007deb0
 	// RBX::Reflection::TypedPropertyDescriptor<int>::TypedPropertyDescriptor<int>
+	// TEMPLATE: WEBSERVICE 0x10094df0
+	// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundProp<RBX::TextureId,1><RBX::Sky>
+	// TEMPLATE: WEBSERVICE 0x10094ec0
+	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::Sky>
+	// TEMPLATE: WEBSERVICE 0x10094f90
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Sky>
 	// STUB: WEBSERVICE 0x100996a0
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::getset<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>
 	// STUB: WEBSERVICE 0x10094c50
@@ -300,6 +307,65 @@ public:
 	)
 		: TypedPropertyDescriptor<T>(Class::classDescriptor(), name, category, getset(get, set), flags)
 	{
+	}
+};
+
+// SIZE 0x1c
+template <class T, int bound>
+class BoundProp : public TypedPropertyDescriptor<T>
+{
+public:
+	// SIZE 0x18
+	template <class Class>
+	class BoundPropGetSet : public TypedPropertyDescriptor<T>::GetSet
+	{
+	public:
+		BoundPropGetSet(BoundProp<T, bound>* desc, T Class::* member, void (Class::*changed)())
+			: desc(desc), member(member), changed(changed)
+		{
+		}
+
+		virtual bool isReadOnly() const { return false; }
+
+		virtual T getValue(const DescribedBase* instance) const { return static_cast<const Class*>(instance)->*member; }
+
+		virtual void setValue(DescribedBase* instance, const T& value) const
+		{
+			Class* object = static_cast<Class*>(instance);
+
+			if (object->*member != value) {
+				object->*member = value;
+
+				if (changed != NULL) {
+					(object->*changed)();
+				}
+
+				object->raisePropertyChanged(*desc);
+			}
+		}
+
+	private:
+		BoundProp<T, bound>* desc; // 0x04
+		T Class::* member;         // 0x08
+		void (Class::*changed)();  // 0x10
+	};
+
+	template <class Class>
+	BoundProp(
+		const char* name,
+		const char* category,
+		T Class::* member,
+		typename PropertyDescriptor::Functionality flags = PropertyDescriptor::STANDARD
+	)
+		: TypedPropertyDescriptor<T>(
+			  Class::classDescriptor(),
+			  name,
+			  category,
+			  std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(),
+			  flags
+		  )
+	{
+		this->getset.reset(new BoundPropGetSet<Class>(this, member, NULL));
 	}
 };
 

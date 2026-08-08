@@ -62,6 +62,8 @@ private:
 	// RBX::Name::doDeclare<&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1001ca10
 	// RBX::Name::doDeclare<&RBX::Soundscape::sSoundChannel>
+	// TEMPLATE: WEBSERVICE 0x100428c0
+	// RBX::Name::doDeclare<&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x10059e20
 	// RBX::Name::doDeclare<&RBX::sPart>
 	// TEMPLATE: WEBSERVICE 0x10059e90
@@ -278,6 +280,8 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1001ca00
 	// RBX::Name::callDoDeclare<&RBX::Soundscape::sSoundChannel>
+	// TEMPLATE: WEBSERVICE 0x10042df0
+	// RBX::Name::callDoDeclare<&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x1005a690
 	// RBX::Name::callDoDeclare<&RBX::sPart>
 	// TEMPLATE: WEBSERVICE 0x1005a6a0

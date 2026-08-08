@@ -14,6 +14,10 @@ public:
 	TextureId() {}
 
 	TextureId(const std::string& id) : ContentId(id) {}
+
+	TextureId(const char* id) : ContentId(id) {}
+
+	TextureId(const ContentId& id) : ContentId(id) {}
 };
 
 DECOMP_SIZE_ASSERT(TextureId, 0x20)

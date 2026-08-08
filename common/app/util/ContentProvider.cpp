@@ -49,6 +49,13 @@ bool operator==(const ContentId& a, const ContentId& b)
 	return a.toString() == b.toString();
 }
 
+// STUB: WEBSERVICE 0x1004f340
+ContentId ContentId::fromAssets(const std::string& id)
+{
+	STUB(0x1004f340);
+	return ContentId();
+}
+
 // STUB: WEBSERVICE 0x100535f0
 std::auto_ptr<std::istream> ContentProvider::getContent(ContentId ticket)
 {
