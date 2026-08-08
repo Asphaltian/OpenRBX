@@ -276,6 +276,7 @@ set(OPENRBX_NETWORK_SOURCES
   common/network/Players.cpp
   common/network/API.cpp
   common/network/Client.cpp
+  common/network/CrashReporter.cpp
   common/network/NetworkSettings.cpp
   common/network/Replicator.cpp
   common/network/Server.cpp
