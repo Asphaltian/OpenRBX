@@ -181,30 +181,30 @@ public:
 DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 
 // clang-format off
-// STUB: WEBSERVICE 0x1009c730
+// FUNCTION: WEBSERVICE 0x1009c730
 // RBX::Notifier<RBX::PartInstance,RBX::CanAggregateChanged>::raise(struct RBX::CanAggregateChanged)
 // clang-format on
 
 // clang-format off
 // STUB: WEBSERVICE 0x1021ab10
 // `dynamic initializer for 'RBX::PartInstance::prop_Color''
-// STUB: WEBSERVICE 0x1021ab70
+// FUNCTION: WEBSERVICE 0x1021ab70
 // `dynamic initializer for 'RBX::PartInstance::prop_BrickColor''
-// STUB: WEBSERVICE 0x1021abd0
+// FUNCTION: WEBSERVICE 0x1021abd0
 // `dynamic initializer for 'RBX::PartInstance::prop_Transparency''
-// STUB: WEBSERVICE 0x1021ac30
+// FUNCTION: WEBSERVICE 0x1021ac30
 // `dynamic initializer for 'RBX::PartInstance::prop_Reflectance''
-// STUB: WEBSERVICE 0x1021ac90
+// FUNCTION: WEBSERVICE 0x1021ac90
 // `dynamic initializer for 'RBX::PartInstance::prop_Locked''
-// STUB: WEBSERVICE 0x1021acf0
+// FUNCTION: WEBSERVICE 0x1021acf0
 // `dynamic initializer for 'RBX::PartInstance::prop_Anchored''
-// STUB: WEBSERVICE 0x1021ad50
+// FUNCTION: WEBSERVICE 0x1021ad50
 // `dynamic initializer for 'RBX::PartInstance::prop_CanCollide''
-// STUB: WEBSERVICE 0x1021adb0
+// FUNCTION: WEBSERVICE 0x1021adb0
 // `dynamic initializer for 'RBX::PartInstance::prop_RenderImportance''
 // STUB: WEBSERVICE 0x1021af30
 // RBX::`dynamic initializer for 'prop_formFactor''
-// STUB: WEBSERVICE 0x1021b070
+// FUNCTION: WEBSERVICE 0x1021b070
 // RBX::`dynamic initializer for 'prop_Dragging''
 // SYNTHETIC: WEBSERVICE 0x102230e0
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_CanCollide''

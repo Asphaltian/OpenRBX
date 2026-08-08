@@ -37,12 +37,12 @@ class Hint : public DescribedCreatable<Hint, Message, sHint>
 DECOMP_SIZE_ASSERT(Hint, 0x124)
 
 // clang-format off
-// STUB: WEBSERVICE 0x1008c790
+// FUNCTION: WEBSERVICE 0x1008c790
 // RBX::Message::~Message
 // clang-format on
 
 // clang-format off
-// STUB: WEBSERVICE 0x1021d530
+// FUNCTION: WEBSERVICE 0x1021d530
 // RBX::`dynamic initializer for 'desc_Text''
 // SYNTHETIC: WEBSERVICE 0x10224770
 // RBX::`dynamic atexit destructor for 'desc_Text''

@@ -38,7 +38,7 @@ DECOMP_SIZE_ASSERT(SpecialShape, 0x154)
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021e810
 // RBX::`dynamic initializer for 'desc_meshType''
-// STUB: WEBSERVICE 0x10225630
+// FUNCTION: WEBSERVICE 0x10225630
 // RBX::`dynamic atexit destructor for 'desc_meshType''
 // clang-format on
 

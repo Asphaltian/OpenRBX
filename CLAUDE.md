@@ -132,6 +132,7 @@ Functions in a compilation unit are ordered by ascending address. Namerefs obey 
 - **An access label between a marker and its function unresolves the annotation.** reccmp pairs a header annotation with the declaration that follows it, so moving a method into its recorded access section by writing `private:` under the marker silently drops that function and takes others in the file with it: one label in `GUI.h` cost ten matches. Put the label above the marker.
 - **Wrap long namerefs in `// clang-format off`.** clang-format reflows a `//` comment past the column limit, the name line loses its tail, and the annotation silently stops resolving.
 - **A body written `{}` on one line** leaves decomplint's parser inside the function. The next marker is reported `unexpected_marker` and dropped. Split the braces.
+- **A `// STUB:` is a claim in the other direction,** and it goes stale as its callees land. Twenty-nine v8datamodel bodies were already byte-exact behind one, which drops them from the denominator and reads as work outstanding. Flipping every `STUB` in a directory to `FUNCTION`, scoring once and reverting whatever misses costs one build and finds them all.
 
 ## Class Pattern
 
@@ -240,6 +241,7 @@ Each of these cost a round trip. Keep the sources clean and leave the reasoning 
 - **Multiply operand order is normalised; parenthesisation is not.** Commuting factors moves nothing. Regrouping a three-term sum moves several percent, in both directions, and one grouping cannot always serve two call sites.
 - **`(&prim0)[index]` is not `index == 0 ? prim0 : prim1`.** The difference only shows once a caller passes a variable index.
 - **Two statements on one source line are one line record,** and the record lengths say when that happened. A comma declaration is invisible to a statement count taken from the source.
+- **An implicit conversion and an explicit functional cast are not the same codegen.** `f(x)` through a converting constructor builds the temporary in the argument slot: `push ecx` reserves it and the store goes through a materialised `mov eax, esp`. `f(T(x))` builds a temporary and copies it, spending a whole-dword `mov eax, [esp+N]` and `push eax` even where `T` is one byte with a `const` member. `PartInstance::onCanAggregateChanged` sat at 63.64 on that difference alone.
 
 ### Naming locals
 
@@ -319,6 +321,7 @@ Where the line records show lines that generate no code, the original named some
 - **A template constructor is user-declared,** so a class that has one also needs an explicit default constructor back or it stops being default constructible.
 - **Name a non-type template parameter something an inherited member does not shadow.** MSVC 8 rejects forwarding it with "expected compile-time constant expression" when a member of the same name is visible.
 - **The declaring namespace of a template member sits after its arguments in the mangling,** so splitting on the first `@@` misreads `boost::shared_ptr<RBX::Instance>::~shared_ptr` as Roblox's.
+- **A nameref cannot always live on the template body.** `Notifier`'s two `raise` overloads interleave in address order across their instantiations, so no arrangement of two blocks in `Events.h` keeps one ascending sequence. The instantiation's nameref goes in the header of the class that owns the instantiating object instead, wherever ordering does hold.
 - **A folded address only belongs in a library file when every alias does.**
 - **`/OPT:ICF` folds heavily.** Many distinct source functions compiled to the same three-byte body share one address. This is also why Ghidra's PDB line importer throws several hundred `IllegalArgumentException` warnings, which are expected and harmless. Run `check_folded.py` before concluding a function at a shared address is unmatched.
 - **A wrong constant in a three-byte body scores 100** against whichever alias reccmp pairs and shows up only as the fold not happening.

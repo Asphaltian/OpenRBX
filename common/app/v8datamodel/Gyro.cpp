@@ -108,7 +108,7 @@ bool BodyVelocity::preventBodySleep()
 	return velocity != G3D::Vector3::zero();
 }
 
-// FUNCTION: WEBSERVICE 0x100ed840
+// STUB: WEBSERVICE 0x100ed840
 BodyForce::BodyForce() : force(G3D::Vector3::unitY())
 {
 }

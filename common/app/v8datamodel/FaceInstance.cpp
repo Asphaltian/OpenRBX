@@ -18,7 +18,7 @@ const Reflection::EnumPropDescriptor<FaceInstance, NormalId> FaceInstance::prop_
 	&RBX::FaceInstance::setFace
 );
 
-// STUB: WEBSERVICE 0x10121d10
+// FUNCTION: WEBSERVICE 0x10121d10
 void FaceInstance::setFace(NormalId value)
 {
 	if (face != value) {

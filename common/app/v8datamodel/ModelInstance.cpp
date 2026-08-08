@@ -135,7 +135,7 @@ void ModelInstance::legacyTraverseState(const CoordinateFrame& parentState)
 	STUB(0x1005ac90);
 }
 
-// STUB: WEBSERVICE 0x1005ad40
+// FUNCTION: WEBSERVICE 0x1005ad40
 bool ModelInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint)
 {
 	for (unsigned int i = 0; i < numChildren(); i++) {
@@ -179,7 +179,7 @@ void ModelInstance::onCameraNear(float distance)
 	}
 }
 
-// STUB: WEBSERVICE 0x1005b220
+// FUNCTION: WEBSERVICE 0x1005b220
 PartInstance* ModelInstance::getPrimaryPart()
 {
 	return getPrimaryPartInternal();

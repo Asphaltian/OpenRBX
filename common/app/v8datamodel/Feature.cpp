@@ -149,7 +149,7 @@ void Feature::setInOut(InOut value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100e7670
+// FUNCTION: WEBSERVICE 0x100e7670
 void VelocityMotor::setMaxVelocity(float value)
 {
 	if (value != static_cast<MotorJoint*>(joint)->getMaxVelocity()) {
@@ -158,7 +158,7 @@ void VelocityMotor::setMaxVelocity(float value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100e76b0
+// FUNCTION: WEBSERVICE 0x100e76b0
 void VelocityMotor::setDesiredAngle(float value)
 {
 	if (value != static_cast<MotorJoint*>(joint)->getDesiredAngle()) {
@@ -167,7 +167,7 @@ void VelocityMotor::setDesiredAngle(float value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100e76f0
+// FUNCTION: WEBSERVICE 0x100e76f0
 void VelocityMotor::setCurrentAngle(float value)
 {
 	if (value != static_cast<MotorJoint*>(joint)->getCurrentAngle()) {

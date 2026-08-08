@@ -74,7 +74,7 @@ private:
 DECOMP_SIZE_ASSERT(Texture, 0x12c)
 
 // clang-format off
-// STUB: WEBSERVICE 0x100ffa30
+// FUNCTION: WEBSERVICE 0x100ffa30
 // RBX::Decal::~Decal
 // clang-format on
 

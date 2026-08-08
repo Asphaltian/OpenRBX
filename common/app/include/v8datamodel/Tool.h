@@ -53,7 +53,7 @@ private:
 DECOMP_SIZE_ASSERT(Tool, 0x238)
 
 // clang-format off
-// STUB: WEBSERVICE 0x1021c240
+// FUNCTION: WEBSERVICE 0x1021c240
 // RBX::`dynamic initializer for 'prop_BackendToolState''
 // SYNTHETIC: WEBSERVICE 0x10223cd0
 // RBX::`dynamic atexit destructor for 'prop_BackendToolState''

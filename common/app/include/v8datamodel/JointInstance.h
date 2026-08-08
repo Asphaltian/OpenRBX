@@ -136,16 +136,16 @@ public:
 DECOMP_SIZE_ASSERT(Weld, 0x11c)
 
 // clang-format off
-// STUB: WEBSERVICE 0x100d7df0
+// FUNCTION: WEBSERVICE 0x100d7df0
 // RBX::JointInstance::~JointInstance
 // STUB: WEBSERVICE 0x100d8110
 // RBX::AutoJoint::~AutoJoint
 // clang-format on
 
 // clang-format off
-// STUB: WEBSERVICE 0x1021c570
+// FUNCTION: WEBSERVICE 0x1021c570
 // `dynamic initializer for 'prop_MaxVelocity''
-// STUB: WEBSERVICE 0x1021c5f0
+// FUNCTION: WEBSERVICE 0x1021c5f0
 // `dynamic initializer for 'prop_CurrentAngle''
 // SYNTHETIC: WEBSERVICE 0x10223dd0
 // `dynamic atexit destructor for 'prop_CurrentAngle''

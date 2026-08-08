@@ -107,19 +107,19 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // clang-format on
 
 // clang-format off
-// STUB: WEBSERVICE 0x1021cce0
+// FUNCTION: WEBSERVICE 0x1021cce0
 // RBX::`dynamic initializer for 'prop_MaxVelocity''
-// STUB: WEBSERVICE 0x1021cd20
+// FUNCTION: WEBSERVICE 0x1021cd20
 // RBX::`dynamic initializer for 'prop_DesiredAngle''
-// STUB: WEBSERVICE 0x1021cd60
+// FUNCTION: WEBSERVICE 0x1021cd60
 // RBX::`dynamic initializer for 'prop_CurrentAngle''
-// STUB: WEBSERVICE 0x1021cda0
+// FUNCTION: WEBSERVICE 0x1021cda0
 // RBX::`dynamic initializer for 'prop_FaceId''
-// STUB: WEBSERVICE 0x1021cde0
+// FUNCTION: WEBSERVICE 0x1021cde0
 // RBX::`dynamic initializer for 'prop_TopBottom''
-// STUB: WEBSERVICE 0x1021ce20
+// FUNCTION: WEBSERVICE 0x1021ce20
 // RBX::`dynamic initializer for 'prop_LeftRight''
-// STUB: WEBSERVICE 0x1021ce60
+// FUNCTION: WEBSERVICE 0x1021ce60
 // RBX::`dynamic initializer for 'prop_InOut''
 // SYNTHETIC: WEBSERVICE 0x10224220
 // RBX::`dynamic atexit destructor for 'prop_CurrentAngle''
