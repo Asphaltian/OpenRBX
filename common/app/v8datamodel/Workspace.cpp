@@ -15,11 +15,10 @@ char sWorkspace[] = "Workspace";
 
 bool Workspace::showWorldCoord;
 
-// STUB: WEBSERVICE 0x1006a0f0
+// FUNCTION: WEBSERVICE 0x1006a0f0
 const G3D::GCamera& Workspace::getGCamera() const
 {
-	STUB(0x1006a0f0);
-	return *static_cast<const G3D::GCamera*>(NULL);
+	return getCamera()->getGCamera();
 }
 
 // STUB: WEBSERVICE 0x1006a960
