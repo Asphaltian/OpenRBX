@@ -29,6 +29,9 @@ extern char sBodyGyro[];
 class BodyMover : public Instance, public Connector, public Listener<RunService, Stepped>
 {
 protected:
+	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	virtual bool preventBodySleep() { return true; } // vtable+0x40
+
 	virtual void onEvent(const RunService* source, Stepped event);
 
 	World* world;       // 0x104
@@ -42,6 +45,8 @@ class BodyForce : public DescribedCreatable<BodyForce, BodyMover, sBodyForce>
 {
 public:
 	BodyForce();
+
+	virtual bool preventBodySleep();
 
 	virtual void computeForce(float dt, bool throttling);
 
@@ -86,6 +91,8 @@ DECOMP_SIZE_ASSERT(BodyPosition, 0x138)
 class BodyThrust : public DescribedCreatable<BodyThrust, BodyMover, sBodyThrust>
 {
 public:
+	virtual bool preventBodySleep();
+
 	virtual void computeForce(float dt, bool throttling);
 
 private:
@@ -99,6 +106,8 @@ DECOMP_SIZE_ASSERT(BodyThrust, 0x124)
 class BodyVelocity : public DescribedCreatable<BodyVelocity, BodyMover, sBodyVelocity>
 {
 public:
+	virtual bool preventBodySleep();
+
 	virtual void computeForce(float dt, bool throttling);
 
 private:

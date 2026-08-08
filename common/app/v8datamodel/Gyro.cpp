@@ -4,6 +4,7 @@
 #include "v8kernel/Body.h"
 #include "v8kernel/SimBody.h"
 #include "v8world/Primitive.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
@@ -19,10 +20,12 @@ char sBodyForce[] = "BodyForce";
 
 char sBodyGyro[] = "BodyGyro";
 
-// STUB: WEBSERVICE 0x100ea3b0
+// FUNCTION: WEBSERVICE 0x100ea3b0
 void BodyMover::onEvent(const RunService* source, Stepped event)
 {
-	STUB(0x100ea3b0);
+	if (preventBodySleep()) {
+		world->ticklePrimitive(part->getPrimitive(), true);
+	}
 }
 
 // STUB: WEBSERVICE 0x100eaf60
@@ -66,9 +69,27 @@ void BodyGyro::computeForce(float dt, bool throttling)
 	STUB(0x100ebfb0);
 }
 
+// FUNCTION: WEBSERVICE 0x100ed7b0
+bool BodyVelocity::preventBodySleep()
+{
+	return velocity != G3D::Vector3::zero();
+}
+
 // FUNCTION: WEBSERVICE 0x100ed840
 BodyForce::BodyForce() : force(G3D::Vector3::unitY())
 {
+}
+
+// FUNCTION: WEBSERVICE 0x100ed950 FOLDED
+bool BodyForce::preventBodySleep()
+{
+	return force != G3D::Vector3::zero();
+}
+
+// FUNCTION: WEBSERVICE 0x100ed950 FOLDED
+bool BodyThrust::preventBodySleep()
+{
+	return force != G3D::Vector3::zero();
 }
 
 } // namespace RBX
