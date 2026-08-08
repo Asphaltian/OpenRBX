@@ -91,7 +91,7 @@ protected:
 		const G3D::Color4& border,
 		Adorn::XAlign align
 	) const;
-	// STUB: WEBSERVICE 0x100d1460
+	// FUNCTION: WEBSERVICE 0x100d1460
 	G3D::Rect2D getMyRect2D() const { return getMyRect().toRect2D(); }
 
 private:

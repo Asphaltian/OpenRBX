@@ -43,7 +43,7 @@ Rect GuiItem::getMyRect() const
 {
 	Vector2 pos = getPosition();
 
-	return Rect::fromLowSize(pos, getSize());
+	return Rect(pos, pos + getSize());
 }
 
 // STUB: WEBSERVICE 0x100d10b0
