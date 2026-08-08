@@ -181,6 +181,11 @@ public:
 DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 
 // clang-format off
+// STUB: WEBSERVICE 0x1009c730
+// RBX::Notifier<RBX::PartInstance,RBX::CanAggregateChanged>::raise(struct RBX::CanAggregateChanged)
+// clang-format on
+
+// clang-format off
 // STUB: WEBSERVICE 0x1021ab10
 // `dynamic initializer for 'RBX::PartInstance::prop_Color''
 // STUB: WEBSERVICE 0x1021ab70

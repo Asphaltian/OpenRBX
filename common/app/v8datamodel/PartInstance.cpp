@@ -1,5 +1,6 @@
 #include "v8datamodel/PartInstance.h"
 
+#include "util/standardout.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8kernel/Body.h"
 #include "v8world/Geometry.h"
@@ -319,10 +320,12 @@ bool PartInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1009cc10
+// FUNCTION: WEBSERVICE 0x1009cc10
 void PartInstance::onCanAggregateChanged(bool canAggregate)
 {
-	STUB(0x1009cc10);
+	Notifier<PartInstance, CanAggregateChanged>::raise(canAggregate);
+
+	shouldRenderSetDirty();
 }
 
 // STUB: WEBSERVICE 0x1009cc30

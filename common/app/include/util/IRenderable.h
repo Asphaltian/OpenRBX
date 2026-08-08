@@ -64,6 +64,8 @@ public:
 
 	void render2dItems(Adorn* adorn);
 	void render3dAdornItems(Adorn* adorn);
+
+	friend class IRenderable;
 };
 
 DECOMP_SIZE_ASSERT(IRenderableBucket, 0x18)
