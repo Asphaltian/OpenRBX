@@ -184,7 +184,11 @@ public:
 
 		virtual bool isReadOnly() const { return false; }
 
-		virtual T getValue(const DescribedBase* object) const { return (static_cast<const Class*>(object)->*get)(); }
+		virtual T getValue(const DescribedBase* object) const
+		{
+			const Class* instance = static_cast<const Class*>(object);
+			return (instance->*get)();
+		}
 
 		virtual void setValue(DescribedBase* object, const T& value) const
 		{

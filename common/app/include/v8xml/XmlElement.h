@@ -174,17 +174,17 @@ protected:
 	const RBX::Name& tag;        // 0x00
 	mutable ValueType valueType; // 0x04
 
-	mutable union // 0x08
+	union // 0x08
 	{
-		std::string* stringValue;
-		RBX::ContentId* contentIdValue;
-		bool boolValue;
-		int intValue;
-		unsigned int uintValue;
-		float floatValue;
-		double doubleValue;
-		const RBX::Name* nameValue;
-		RBX::InstanceHandle* handleValue;
+		mutable std::string* stringValue;
+		mutable RBX::ContentId* contentIdValue;
+		mutable bool boolValue;
+		mutable int intValue;
+		mutable unsigned int uintValue;
+		mutable float floatValue;
+		mutable double doubleValue;
+		mutable const RBX::Name* nameValue;
+		mutable RBX::InstanceHandle* handleValue;
 	};
 };
 
