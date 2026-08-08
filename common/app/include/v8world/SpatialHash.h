@@ -6,6 +6,7 @@
 #include "util/Vector3int32.h"
 
 #include <G3D/Array.h>
+#include <G3D/Ray.h>
 #include <set>
 #include <vector>
 
@@ -13,6 +14,7 @@ namespace RBX {
 
 class Contact;
 class ContactManager;
+class HitTestFilter;
 class Primitive;
 class World;
 
@@ -114,10 +116,57 @@ public:
 
 	void stepWorld();
 
+	Primitive* getHit(
+		const G3D::Ray& ray,
+		const G3D::Array<const Primitive*>* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		bool& hitSurface
+	) const;
+
+	Primitive* getHit(
+		const G3D::Ray& ray,
+		const std::vector<const Primitive*>* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		bool& hitSurface
+	) const;
+
+	Primitive* getHitLegacy(
+		const G3D::Ray& ray,
+		const Primitive* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		float& distance,
+		const float& maxDistance
+	) const;
+
 	SpatialHash* getSpatialHash() { return spatialHash; }
 
 private:
 	Contact* createContact(Primitive* p0, Primitive* p1);
+
+	Primitive* getSlowHit(
+		const G3D::Array<Primitive*>& primitives,
+		const G3D::Ray& unitRay,
+		const G3D::Array<const Primitive*>* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		float maxDistance,
+		bool& hitSurface,
+		bool& blocked
+	) const;
+
+	Primitive* getFastHit(
+		const G3D::Ray& ray,
+		const G3D::Array<const Primitive*>* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		bool& hitSurface,
+		bool& blocked
+	) const;
+
+	static bool ignoreBool;
 
 	SpatialHash* spatialHash; // 0x00
 	World* world;             // 0x04
