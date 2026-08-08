@@ -104,10 +104,6 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // clang-format off
 // STUB: WEBSERVICE 0x100e4410
 // RBX::Feature::~Feature
-// STUB: WEBSERVICE 0x10223dd0
-// RBX::`dynamic atexit destructor for 'prop_CurrentAngle''
-// STUB: WEBSERVICE 0x10223e50
-// RBX::`dynamic atexit destructor for 'prop_MaxVelocity''
 // clang-format on
 
 // clang-format off
@@ -125,6 +121,20 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // RBX::`dynamic initializer for 'prop_LeftRight''
 // STUB: WEBSERVICE 0x1021ce60
 // RBX::`dynamic initializer for 'prop_InOut''
+// SYNTHETIC: WEBSERVICE 0x10224220
+// RBX::`dynamic atexit destructor for 'prop_CurrentAngle''
+// SYNTHETIC: WEBSERVICE 0x10224240
+// RBX::`dynamic atexit destructor for 'prop_InOut''
+// SYNTHETIC: WEBSERVICE 0x10224260
+// RBX::`dynamic atexit destructor for 'prop_LeftRight''
+// SYNTHETIC: WEBSERVICE 0x10224280
+// RBX::`dynamic atexit destructor for 'prop_TopBottom''
+// SYNTHETIC: WEBSERVICE 0x102242a0
+// RBX::`dynamic atexit destructor for 'prop_FaceId''
+// SYNTHETIC: WEBSERVICE 0x102242c0
+// RBX::`dynamic atexit destructor for 'prop_DesiredAngle''
+// SYNTHETIC: WEBSERVICE 0x102242e0
+// RBX::`dynamic atexit destructor for 'prop_MaxVelocity''
 // clang-format on
 
 } // namespace RBX

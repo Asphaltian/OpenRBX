@@ -114,6 +114,8 @@ DECOMP_SIZE_ASSERT(PVInstance, 0x170)
 // clang-format off
 // STUB: WEBSERVICE 0x1021a6f0
 // RBX::`dynamic initializer for 'prop_ControllerFlagShown''
+// SYNTHETIC: WEBSERVICE 0x10223020
+// RBX::`dynamic atexit destructor for 'prop_ControllerFlagShown''
 // clang-format on
 
 } // namespace RBX

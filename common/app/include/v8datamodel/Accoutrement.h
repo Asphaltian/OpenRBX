@@ -52,6 +52,8 @@ DECOMP_SIZE_ASSERT(Hat, 0x1a0)
 // clang-format off
 // STUB: WEBSERVICE 0x1021c870
 // RBX::`dynamic initializer for 'prop_BackendAccoutrementState''
+// SYNTHETIC: WEBSERVICE 0x10223f40
+// RBX::`dynamic atexit destructor for 'prop_BackendAccoutrementState''
 // clang-format on
 
 } // namespace RBX

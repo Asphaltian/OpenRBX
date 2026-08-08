@@ -44,6 +44,8 @@ DECOMP_SIZE_ASSERT(Hint, 0x124)
 // clang-format off
 // STUB: WEBSERVICE 0x1021d530
 // RBX::`dynamic initializer for 'desc_Text''
+// SYNTHETIC: WEBSERVICE 0x10224770
+// RBX::`dynamic atexit destructor for 'desc_Text''
 // clang-format on
 
 } // namespace RBX

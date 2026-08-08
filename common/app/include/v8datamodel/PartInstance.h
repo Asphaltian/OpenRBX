@@ -198,6 +198,26 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // RBX::`dynamic initializer for 'prop_formFactor''
 // STUB: WEBSERVICE 0x1021b070
 // RBX::`dynamic initializer for 'prop_Dragging''
+// SYNTHETIC: WEBSERVICE 0x102230e0
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_CanCollide''
+// SYNTHETIC: WEBSERVICE 0x10223100
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_RenderImportance''
+// SYNTHETIC: WEBSERVICE 0x10223160
+// RBX::`dynamic atexit destructor for 'prop_formFactor''
+// SYNTHETIC: WEBSERVICE 0x102231e0
+// RBX::`dynamic atexit destructor for 'prop_Dragging''
+// SYNTHETIC: WEBSERVICE 0x10223260
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_Reflectance''
+// SYNTHETIC: WEBSERVICE 0x10223280
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_Transparency''
+// SYNTHETIC: WEBSERVICE 0x102232a0
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_BrickColor''
+// SYNTHETIC: WEBSERVICE 0x102232c0
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_Color''
+// SYNTHETIC: WEBSERVICE 0x102232e0
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_Anchored''
+// SYNTHETIC: WEBSERVICE 0x10223300
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_Locked''
 // clang-format on
 
 } // namespace RBX

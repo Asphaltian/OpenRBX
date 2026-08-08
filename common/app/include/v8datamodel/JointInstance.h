@@ -147,6 +147,10 @@ DECOMP_SIZE_ASSERT(Weld, 0x11c)
 // `dynamic initializer for 'prop_MaxVelocity''
 // STUB: WEBSERVICE 0x1021c5f0
 // `dynamic initializer for 'prop_CurrentAngle''
+// SYNTHETIC: WEBSERVICE 0x10223dd0
+// `dynamic atexit destructor for 'prop_CurrentAngle''
+// SYNTHETIC: WEBSERVICE 0x10223e50
+// `dynamic atexit destructor for 'prop_MaxVelocity''
 // clang-format on
 
 } // namespace RBX
