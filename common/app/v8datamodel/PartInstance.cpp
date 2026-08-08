@@ -355,11 +355,10 @@ const Primitive* PartInstance::getBiggestPrimitive() const
 	return primitive.get();
 }
 
-// STUB: WEBSERVICE 0x1009d3c0
+// FUNCTION: WEBSERVICE 0x1009d3c0
 const CoordinateFrame PartInstance::getLocation() const
 {
-	STUB(0x1009d3c0);
-	return CoordinateFrame();
+	return primitive->getCoordinateFrame();
 }
 
 // STUB: WEBSERVICE 0x1009d7d0
