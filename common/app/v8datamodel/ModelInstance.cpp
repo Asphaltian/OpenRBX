@@ -23,16 +23,25 @@ float ModelInstance::computeFlagHeight() const
 	return 0;
 }
 
-// STUB: WEBSERVICE 0x1005a1a0
+// FUNCTION: WEBSERVICE 0x1005a1a0
 void ModelInstance::onExtentsChanged() const
 {
-	STUB(0x1005a1a0);
+	LocalGridExtents.setDirty();
+	WorldGridExtents.setDirty();
+	FlagHeight.setDirty();
+
+	PVInstance::onExtentsChanged();
 }
 
-// STUB: WEBSERVICE 0x1005a1c0
+// FUNCTION: WEBSERVICE 0x1005a1c0
 const Primitive* ModelInstance::getBiggestPrimitive() const
 {
-	STUB(0x1005a1c0);
+	const PartInstance* part = getPrimaryPartConst();
+
+	if (part != NULL) {
+		return part->getPrimitive();
+	}
+
 	return NULL;
 }
 
