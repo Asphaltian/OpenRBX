@@ -4,6 +4,13 @@
 
 namespace RBX {
 
+const char sFaceInstance[] = "FaceInstance";
+
+// FUNCTION: WEBSERVICE 0x101219f0
+FaceInstance::FaceInstance() : face(NORM_Z_NEG)
+{
+}
+
 const Reflection::EnumPropDescriptor<FaceInstance, NormalId> FaceInstance::prop_Face(
 	"Face",
 	"Data",

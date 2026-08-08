@@ -38,6 +38,12 @@ const PropDescriptor<Texture, float> Texture::prop_StudsPerTileV(
 	&RBX::Texture::setStudsPerTileV
 );
 
+// FUNCTION: WEBSERVICE 0x100fff70
+Decal::Decal() : specular(0.0f), shiny(20.0f)
+{
+	setName("Decal");
+}
+
 // STUB: WEBSERVICE 0x101001f0
 void Decal::setSpecular(float value)
 {

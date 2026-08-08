@@ -661,6 +661,8 @@ public:
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::`scalar deleting destructor'
 	// STUB: WEBSERVICE 0x100ffaa0
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::~FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>
+	// TEMPLATE: WEBSERVICE 0x100ff600
+	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// TEMPLATE: WEBSERVICE 0x100ffb10
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::getClassName
 	// FUNCTION: WEBSERVICE 0x10100110

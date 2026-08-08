@@ -125,6 +125,10 @@ public:
 	// RBX::Reflection::Described<RBX::BodyThrust,&RBX::sBodyThrust,RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ec710
 	// RBX::Reflection::Described<RBX::Rocket,&RBX::sRocket,RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100ffb40
+	// RBX::Reflection::Described<RBX::FaceInstance,&RBX::sFaceInstance,RBX::Instance>::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100ffbb0
+	// RBX::Reflection::Described<RBX::Decal,&RBX::sDecal,RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal> >::classDescriptor
 	// STUB: WEBSERVICE 0x100ffc20
 	// RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1012d2d0
@@ -229,6 +233,10 @@ public:
 	// `RBX::Reflection::Described<RBX::BodyGyro,&RBX::sBodyGyro,RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10224d70
 	// `RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10224d80
+	// `RBX::Reflection::Described<RBX::Decal,&RBX::sDecal,RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10224d90
+	// `RBX::Reflection::Described<RBX::FaceInstance,&RBX::sFaceInstance,RBX::Instance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x102256d0
 	// `RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// clang-format on
@@ -245,7 +253,7 @@ protected:
 DECOMP_SIZE_ASSERT(DescribedBase, 0x0c)
 
 template <class T, const char* sName, class Base>
-class Described : public Base
+class __declspec(novtable) Described : public Base
 {
 public:
 	Described() { this->descriptor = &classDescriptor(); }

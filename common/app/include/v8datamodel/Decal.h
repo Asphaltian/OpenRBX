@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "reflection/property.h"
+#include "util/TextureId.h"
 #include "v8datamodel/FaceInstance.h"
 #include "v8tree/Instance.h"
 
@@ -17,9 +18,11 @@ extern char sDecal[];
 using G3D::Vector2;
 
 // SIZE 0x124
-class Decal : public FaceInstance
+class Decal : public DescribedCreatable<Decal, FaceInstance, sDecal>
 {
 public:
+	Decal();
+
 	static const Reflection::PropDescriptor<Decal, float> prop_Specular;
 	static const Reflection::PropDescriptor<Decal, float> prop_Shiny;
 
@@ -33,9 +36,9 @@ public:
 	void setShiny(float value);
 
 private:
-	undefined m_unk0x0fc[0x11c - 0x0fc]; // 0x0fc
-	float specular;                      // 0x11c
-	float shiny;                         // 0x120
+	TextureId texture; // 0x0fc
+	float specular;    // 0x11c
+	float shiny;       // 0x120
 };
 
 DECOMP_SIZE_ASSERT(Decal, 0x124)

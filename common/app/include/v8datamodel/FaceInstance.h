@@ -8,10 +8,14 @@
 
 namespace RBX {
 
+extern const char sFaceInstance[];
+
 // SIZE 0xfc
-class FaceInstance : public Instance
+class FaceInstance : public Reflection::Described<FaceInstance, sFaceInstance, Instance>
 {
 public:
+	FaceInstance();
+
 	static const Reflection::EnumPropDescriptor<FaceInstance, NormalId> prop_Face;
 
 	// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
