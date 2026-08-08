@@ -37,8 +37,8 @@ namespace DataStructures
 		~RangeList();
 		void Insert(range_type index);
 		void Clear(void);
-		unsigned Size(void);
-		unsigned RangeSum(void);
+		unsigned Size(void) const;
+		unsigned RangeSum(void) const;
 		unsigned Serialize(RakNet::BitStream *in, int maxBits, bool clearSerialized);
 		bool Deserialize(RakNet::BitStream *out);
 
@@ -204,13 +204,13 @@ namespace DataStructures
 	}
 
 	template <class range_type>
-	unsigned RangeList<range_type>::Size(void)
+	unsigned RangeList<range_type>::Size(void) const
 	{
 		return ranges.Size();
 	}
 
 	template <class range_type>
-	unsigned RangeList<range_type>::RangeSum(void)
+	unsigned RangeList<range_type>::RangeSum(void) const
 	{
 		unsigned sum=0,i;
 		for (i=0; i < ranges.Size(); i++)

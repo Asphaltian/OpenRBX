@@ -24,6 +24,7 @@ private:
 	static std::map<int, Name*>& dictionary();
 
 	Name(const char* name, int dictionaryIndex);
+	Name& operator=(const Name& other);
 
 public:
 	template <const char* name>

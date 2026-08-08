@@ -56,4 +56,10 @@ std::auto_ptr<std::istream> ContentProvider::getContent(ContentId ticket)
 	return std::auto_ptr<std::istream>();
 }
 
+// STUB: WEBSERVICE 0x10053800
+ContentProvider::~ContentProvider()
+{
+	STUB(0x10053800);
+}
+
 } // namespace RBX

@@ -27,17 +27,30 @@ class Instance;
 class Name;
 class ServiceProvider;
 
+// SIZE 0x8
 struct ChildAdded
 {
+	const boost::shared_ptr<Instance> child; // 0x00
 };
+
+// SIZE 0x8
 struct ChildRemoved
 {
+	const boost::shared_ptr<Instance> child; // 0x00
 };
+
+// SIZE 0x10
 struct DescendentAdded
 {
+	const boost::shared_ptr<Instance> instance; // 0x00
+	const boost::shared_ptr<Instance> parent;   // 0x08
 };
+
+// SIZE 0x10
 struct DescendentRemoving
 {
+	const boost::shared_ptr<Instance> instance; // 0x00
+	const boost::shared_ptr<Instance> parent;   // 0x08
 };
 // SIZE 0xc
 struct AncestorChanged

@@ -58,6 +58,8 @@ public:
 	std::auto_ptr<std::istream> getContent(ContentId ticket);
 
 private:
+	~ContentProvider();
+
 	undefined m_unk0x00[0x54]; // 0x00
 };
 

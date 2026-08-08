@@ -100,7 +100,7 @@ public:
 		}
 	};
 
-	bool empty(const SignalSource* source) const
+	bool empty(const SignalSource* source)
 	{
 		const TSignalInstance* instance = findSig(source);
 
