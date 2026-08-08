@@ -580,7 +580,7 @@ void SleepStage::changeContactState(const std::vector<Contact*>& contacts, Sim::
 	}
 }
 
-// STUB: WEBSERVICE 0x1011a7e0
+// FUNCTION: WEBSERVICE 0x1011a7e0
 void SleepStage::stepContacts(ContactList& contacts)
 {
 	static std::vector<Contact*> toSleeping;
@@ -606,34 +606,37 @@ void SleepStage::stepContacts(ContactList& contacts)
 
 			bool canCollide = !p0->getDragging() && p0->getCanCollide() && !p1->getDragging() && p1->getCanCollide();
 
+			Sim::EdgeState edgeState = c->getEdgeState();
+			bool wasTouching = edgeState == Sim::TOUCHING;
+
 			Sim::EdgeState state;
 
 			if (moving) {
 				state = touching && canCollide ? Sim::TOUCHING : Sim::STEPPING;
 			}
-			else if (c->getEdgeState() == Sim::TOUCHING && touching && canCollide) {
+			else if (wasTouching && touching && canCollide) {
 				state = Sim::TOUCHING_SLEEPING;
 			}
 			else {
 				state = Sim::SLEEPING;
 			}
 
-			if (state != c->getEdgeState()) {
+			if (state != edgeState) {
 				switch (state) {
-				case Sim::STEPPING:
-					toStepping.push_back(c);
-					break;
-
 				case Sim::SLEEPING:
 					toSleeping.push_back(c);
 					break;
 
-				case Sim::TOUCHING:
-					toTouching.push_back(c);
-					break;
-
 				case Sim::TOUCHING_SLEEPING:
 					toTouchingSleeping.push_back(c);
+					break;
+
+				case Sim::STEPPING:
+					toStepping.push_back(c);
+					break;
+
+				case Sim::TOUCHING:
+					toTouching.push_back(c);
 					break;
 				}
 			}
