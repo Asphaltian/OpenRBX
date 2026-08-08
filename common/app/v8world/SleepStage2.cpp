@@ -70,6 +70,19 @@ bool SleepStage::canThrottle(Assembly* assembly)
 	return assembly->getAssemblyPrimitiveConst()->getBody()->getCanThrottle();
 }
 
+Sim::EdgeState SleepStage::computeContactState(bool moving, bool touching, bool canCollide, bool wasTouching)
+{
+	if (moving) {
+		return touching && canCollide ? Sim::TOUCHING : Sim::STEPPING;
+	}
+
+	if (wasTouching && touching && canCollide) {
+		return Sim::TOUCHING_SLEEPING;
+	}
+
+	return Sim::SLEEPING;
+}
+
 bool SleepStage::isAffecting(Edge* edge)
 {
 	Sim::EdgeState state = edge->getEdgeState();
@@ -596,8 +609,8 @@ void SleepStage::stepContacts(ContactList& contacts)
 	for (int i = 0; i < contacts.size(); i++) {
 		Contact* c = contacts[i];
 
-		Primitive* p1 = c->getPrimitive(1);
 		Primitive* p0 = c->getPrimitive(0);
+		Primitive* p1 = c->getPrimitive(1);
 
 		if (!throttling || !p0->getBody()->getCanThrottle() || !p1->getBody()->getCanThrottle()) {
 			bool moving = atLeastOneAssemblyMoving(p0->getAssembly(), p1->getAssembly());
@@ -606,20 +619,11 @@ void SleepStage::stepContacts(ContactList& contacts)
 
 			bool canCollide = !p0->getDragging() && p0->getCanCollide() && !p1->getDragging() && p1->getCanCollide();
 
-			Sim::EdgeState edgeState = c->getEdgeState();
-			bool wasTouching = edgeState == Sim::TOUCHING;
+			// clang-format off
+			Sim::EdgeState edgeState = c->getEdgeState(); bool wasTouching = edgeState == Sim::TOUCHING;
+			// clang-format on
 
-			Sim::EdgeState state;
-
-			if (moving) {
-				state = touching && canCollide ? Sim::TOUCHING : Sim::STEPPING;
-			}
-			else if (wasTouching && touching && canCollide) {
-				state = Sim::TOUCHING_SLEEPING;
-			}
-			else {
-				state = Sim::SLEEPING;
-			}
+			Sim::EdgeState state = computeContactState(moving, touching, canCollide, wasTouching);
 
 			if (state != edgeState) {
 				switch (state) {

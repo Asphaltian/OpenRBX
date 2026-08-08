@@ -70,6 +70,8 @@ public:
 	static bool isDenormal(float value);
 	static bool isNanInfDenorm(float value);
 	static bool isNanInfDenormVector3(const Vector3& value);
+	static Vector3 vectorToObjectSpace(const Vector3& vector, const Matrix3& rotation) { return vector * rotation; }
+
 	static Matrix3 momentToObjectSpace(const Matrix3& moment, const Matrix3& rotation);
 	static Matrix3 momentToWorldSpace(const Matrix3& moment, const Matrix3& rotation);
 	static float angleToE0(const Vector2& value);

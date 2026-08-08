@@ -96,6 +96,9 @@ private:
 	void wakeAssemblyAndNeighbors(Assembly* assembly);
 	void wakeAssemblyAndNeighbors(Assembly* assembly, int depth);
 	void wakeEdge(Edge* edge);
+
+	Sim::EdgeState computeContactState(bool moving, bool touching, bool canCollide, bool wasTouching);
+
 	void wakeEvent(Assembly* assembly);
 	void wakeEvent(Edge* edge);
 	void recursiveWakeEvent(Assembly* assembly);

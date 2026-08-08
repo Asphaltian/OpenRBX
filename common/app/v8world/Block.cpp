@@ -71,9 +71,7 @@ BlockTemplate::BlockTemplates BlockTemplate::blockTemplates;
 // STUB: WEBSERVICE 0x101090b0
 Matrix3 Block::getMomentHollow(float mass) const
 {
-	float x = gridSize.x;
-	float y = gridSize.y;
-	float z = gridSize.z;
+	float x = gridSize.x, y = gridSize.y, z = gridSize.z;
 
 	float area = 2.0f * ((y + x) * z + y * x);
 
