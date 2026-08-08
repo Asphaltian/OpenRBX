@@ -47,11 +47,10 @@ Workspace::~Workspace()
 	STUB(0x1006cd70);
 }
 
-// STUB: WEBSERVICE 0x1006d0d0
+// FUNCTION: WEBSERVICE 0x1006d0d0
 Extents Workspace::computeCameraOwnerExtents()
 {
-	STUB(0x1006d0d0);
-	return Extents();
+	return getExtentsWorld();
 }
 
 // STUB: WEBSERVICE 0x1006d230

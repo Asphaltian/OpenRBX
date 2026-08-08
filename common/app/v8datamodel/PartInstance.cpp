@@ -1,5 +1,6 @@
 #include "v8datamodel/PartInstance.h"
 
+#include "v8datamodel/ModelInstance.h"
 #include "v8kernel/Body.h"
 #include "v8world/Geometry.h"
 
@@ -90,11 +91,10 @@ static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging(
 	Reflection::PropertyDescriptor::STREAMING
 );
 
-// STUB: WEBSERVICE 0x10059c10
+// FUNCTION: WEBSERVICE 0x10059c10
 bool PartInstance::askSetParent(const Instance* instance) const
 {
-	STUB(0x10059c10);
-	return false;
+	return dynamic_cast<const ModelInstance*>(instance) != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1009a8d0
