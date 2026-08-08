@@ -8,17 +8,17 @@
 // SIZE 0x7cc
 struct CrashReportControls
 {
-	int actionToTake;              // 0x000
-	char appName[128];             // 0x004
-	char appVersion[128];          // 0x084
-	char pathToMinidump[260];      // 0x104
-	char SMTPServer[128];          // 0x208
-	char SMTPAccountName[64];      // 0x288
-	char emailSender[64];          // 0x2c8
-	char emailSubjectPrefix[128];  // 0x308
-	char emailBody[1024];          // 0x388
-	char emailRecipient[64];       // 0x788
-	int minidumpType;              // 0x7c8
+	int actionToTake;             // 0x000
+	char appName[128];            // 0x004
+	char appVersion[128];         // 0x084
+	char pathToMinidump[260];     // 0x104
+	char SMTPServer[128];         // 0x208
+	char SMTPAccountName[64];     // 0x288
+	char emailSender[64];         // 0x2c8
+	char emailSubjectPrefix[128]; // 0x308
+	char emailBody[1024];         // 0x388
+	char emailRecipient[64];      // 0x788
+	int minidumpType;             // 0x7c8
 };
 
 DECOMP_SIZE_ASSERT(CrashReportControls, 0x7cc)

@@ -42,7 +42,7 @@ static void PreventSetUnhandledExceptionFilter()
 	}
 
 	unsigned char jump[5];
-	DWORD written;
+	SIZE_T written;
 
 	jump[0] = 0xe9;
 	*reinterpret_cast<DWORD*>(jump + 1) =
