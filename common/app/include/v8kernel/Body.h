@@ -125,6 +125,7 @@ public:
 
 	Vector3 getBranchCofmPos() const;
 
+	void accumulateForceAtBranchCofm(const Vector3& force);
 	void accumulateForce(const Vector3& force, const Vector3& worldPos);
 	void accumulateTorque(const Vector3& torque);
 	void resetAccumulators();
@@ -174,6 +175,16 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Body, 0xd0)
+
+// FUNCTION: WEBSERVICE 0x100ea020
+inline void Body::accumulateForceAtBranchCofm(const Vector3& force)
+{
+	SimBody* simBody = getRootSimBody();
+
+	if (simBody != NULL) {
+		simBody->accumulateForceCofm(force);
+	}
+}
 
 inline void Body::accumulateForce(const Vector3& force, const Vector3& worldPos)
 {

@@ -1,5 +1,10 @@
 #include "v8datamodel/Gyro.h"
 
+#include "v8datamodel/PartInstance.h"
+#include "v8kernel/Body.h"
+#include "v8kernel/SimBody.h"
+#include "v8world/Primitive.h"
+
 namespace RBX {
 
 char sRocket[] = "RocketPropulsion";
@@ -32,10 +37,10 @@ void BodyVelocity::computeForce(float dt, bool throttling)
 	STUB(0x100eb0c0);
 }
 
-// STUB: WEBSERVICE 0x100eb1e0
+// FUNCTION: WEBSERVICE 0x100eb1e0
 void BodyForce::computeForce(float dt, bool throttling)
 {
-	STUB(0x100eb1e0);
+	part->getPrimitive()->getBody()->getRoot()->accumulateForceAtBranchCofm(force);
 }
 
 // STUB: WEBSERVICE 0x100eb240
@@ -54,6 +59,11 @@ void Rocket::computeForce(float dt, bool throttling)
 void BodyGyro::computeForce(float dt, bool throttling)
 {
 	STUB(0x100ebfb0);
+}
+
+// FUNCTION: WEBSERVICE 0x100ed840
+BodyForce::BodyForce() : force(G3D::Vector3::unitY())
+{
 }
 
 } // namespace RBX

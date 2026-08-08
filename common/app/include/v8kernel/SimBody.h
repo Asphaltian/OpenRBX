@@ -20,6 +20,13 @@ public:
 	SimBody(Body* body);
 	~SimBody();
 
+	void accumulateForceCofm(const Vector3& value)
+	{
+		updateIfDirty();
+
+		force += value;
+	}
+
 	void accumulateForce(const Vector3& _force, const Vector3& worldPos);
 
 	void accumulateTorque(const Vector3& value)

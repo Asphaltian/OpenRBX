@@ -6,7 +6,13 @@
 #include "v8kernel/Connector.h"
 #include "v8tree/Instance.h"
 
+#include <G3D/CoordinateFrame.h>
+#include <G3D/Vector3.h>
+
 namespace RBX {
+
+class World;
+class PartInstance;
 
 extern char sRocket[];
 
@@ -25,8 +31,8 @@ class BodyMover : public Instance, public Connector, public Listener<RunService,
 protected:
 	virtual void onEvent(const RunService* source, Stepped event);
 
-private:
-	undefined m_unk0x104[0x10c - 0x104]; // 0x104
+	World* world;       // 0x104
+	PartInstance* part; // 0x108
 };
 
 DECOMP_SIZE_ASSERT(BodyMover, 0x10c)
@@ -35,10 +41,12 @@ DECOMP_SIZE_ASSERT(BodyMover, 0x10c)
 class BodyForce : public DescribedCreatable<BodyForce, BodyMover, sBodyForce>
 {
 public:
+	BodyForce();
+
 	virtual void computeForce(float dt, bool throttling);
 
 private:
-	undefined m_unk0x10c[0x118 - 0x10c]; // 0x10c
+	G3D::Vector3 force; // 0x10c
 };
 
 DECOMP_SIZE_ASSERT(BodyForce, 0x118)
@@ -50,7 +58,10 @@ public:
 	virtual void computeForce(float dt, bool throttling);
 
 private:
-	undefined m_unk0x10c[0x150 - 0x10c]; // 0x10c
+	float kP;                    // 0x10c
+	float kD;                    // 0x110
+	G3D::Vector3 maxTorque;      // 0x114
+	G3D::CoordinateFrame cframe; // 0x120
 };
 
 DECOMP_SIZE_ASSERT(BodyGyro, 0x150)
@@ -62,7 +73,11 @@ public:
 	virtual void computeForce(float dt, bool throttling);
 
 private:
-	undefined m_unk0x10c[0x138 - 0x10c]; // 0x10c
+	float kP;               // 0x10c
+	float kD;               // 0x110
+	G3D::Vector3 maxForce;  // 0x114
+	G3D::Vector3 position;  // 0x120
+	G3D::Vector3 lastForce; // 0x12c
 };
 
 DECOMP_SIZE_ASSERT(BodyPosition, 0x138)
@@ -74,7 +89,8 @@ public:
 	virtual void computeForce(float dt, bool throttling);
 
 private:
-	undefined m_unk0x10c[0x124 - 0x10c]; // 0x10c
+	G3D::Vector3 force;    // 0x10c
+	G3D::Vector3 location; // 0x118
 };
 
 DECOMP_SIZE_ASSERT(BodyThrust, 0x124)
@@ -86,7 +102,10 @@ public:
 	virtual void computeForce(float dt, bool throttling);
 
 private:
-	undefined m_unk0x10c[0x134 - 0x10c]; // 0x10c
+	float kP;               // 0x10c
+	G3D::Vector3 maxForce;  // 0x110
+	G3D::Vector3 velocity;  // 0x11c
+	G3D::Vector3 lastForce; // 0x128
 };
 
 DECOMP_SIZE_ASSERT(BodyVelocity, 0x134)
@@ -98,7 +117,19 @@ public:
 	virtual void computeForce(float dt, bool throttling);
 
 private:
-	undefined m_unk0x10c[0x154 - 0x10c]; // 0x10c
+	bool active;                            // 0x10c
+	boost::shared_ptr<PartInstance> target; // 0x110
+	G3D::Vector3 targetOffset;              // 0x118
+	float targetRadius;                     // 0x124
+	bool firedEvent;                        // 0x128
+	float maxThrust;                        // 0x12c
+	float kThrustP;                         // 0x130
+	float kThrustD;                         // 0x134
+	float maxSpeed;                         // 0x138
+	float kTurnP;                           // 0x13c
+	float kTurnD;                           // 0x140
+	G3D::Vector3 maxTorque;                 // 0x144
+	float cartoonFactor;                    // 0x150
 };
 
 DECOMP_SIZE_ASSERT(Rocket, 0x154)
