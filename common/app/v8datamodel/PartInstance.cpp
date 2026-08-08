@@ -97,10 +97,10 @@ bool PartInstance::askSetParent(const Instance* instance) const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1009a8d0
+// FUNCTION: WEBSERVICE 0x1009a8d0
 void PartInstance::onChildAdded(Instance* child)
 {
-	STUB(0x1009a8d0);
+	PVInstance::onChildAdded(child);
 }
 
 // STUB: WEBSERVICE 0x1009ae00
@@ -279,11 +279,10 @@ PartInstance::~PartInstance()
 	STUB(0x1009d150);
 }
 
-// STUB: WEBSERVICE 0x1009d2e0
+// FUNCTION: WEBSERVICE 0x1009d2e0
 PartInstance* PartInstance::getPrimaryPart()
 {
-	STUB(0x1009d2e0);
-	return NULL;
+	return this;
 }
 
 const PartInstance* PartInstance::getPrimaryPartConst() const
@@ -292,10 +291,9 @@ const PartInstance* PartInstance::getPrimaryPartConst() const
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x1009d3b0
+// FUNCTION: WEBSERVICE 0x1009d3b0
 const Primitive* PartInstance::getBiggestPrimitive() const
 {
-	STUB(0x1009d3b0);
 	return primitive.get();
 }
 

@@ -82,6 +82,14 @@ Extents ModelInstance::getExtentsLocal() const
 	return Extents();
 }
 
+// STUB: WEBSERVICE 0x1005abb0
+PartInstance* ModelInstance::getPrimaryPartInternal() const
+{
+	STUB(0x1005abb0);
+
+	return NULL;
+}
+
 // STUB: WEBSERVICE 0x1005ac90
 void ModelInstance::legacyTraverseState(const CoordinateFrame& parentState)
 {
@@ -117,8 +125,7 @@ void ModelInstance::onCameraNear(float distance)
 // STUB: WEBSERVICE 0x1005b220
 PartInstance* ModelInstance::getPrimaryPart()
 {
-	STUB(0x1005b220);
-	return NULL;
+	return getPrimaryPartInternal();
 }
 
 const PartInstance* ModelInstance::getPrimaryPartConst() const
