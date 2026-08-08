@@ -15,7 +15,7 @@ extern const char sSpawnerService[];
 extern char sSpawnLocation[];
 
 // SIZE 0x2cc
-class SpawnLocation : public PartInstance
+class SpawnLocation : public DescribedCreatable<SpawnLocation, PartInstance, sSpawnLocation>
 {
 public:
 	BrickColor getTeamColor() const { return teamColor; }

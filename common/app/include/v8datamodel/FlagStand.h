@@ -15,7 +15,7 @@ extern const char sFlagStandService[];
 extern char sFlagStand[];
 
 // SIZE 0x2c4
-class FlagStand : public PartInstance
+class FlagStand : public DescribedCreatable<FlagStand, PartInstance, sFlagStand>
 {
 public:
 	void setTeamColor(BrickColor value);
