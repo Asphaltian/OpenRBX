@@ -34,7 +34,7 @@ private:
 	PartInstance* primaryPart;                            // 0x1a8
 	boost::shared_ptr<PartInstance> candidatePrimaryPart; // 0x1ac
 
-	void updatePrimaryPart();
+	void updatePrimaryPart(PartInstance* part) const;
 
 	ComputeProp<float, ModelInstance> FlagHeight;         // 0x1b8
 	ComputeProp<Extents, ModelInstance> LocalGridExtents; // 0x1d8
@@ -43,7 +43,7 @@ private:
 	float computeFlagHeight() const;
 	Extents computeLocalGridExtents() const;
 	Extents computeWorldGridExtents() const;
-	void dirtyAll();
+	void dirtyAll() const;
 
 	virtual bool shouldRender3dAdorn() const;
 	virtual void render3dAdorn(Adorn* adorn);
@@ -61,7 +61,7 @@ public:
 	ModelInstance();
 	virtual ~ModelInstance();
 
-	PartInstance* getPrimaryPartInternal();
+	PartInstance* getPrimaryPartInternal() const;
 	void setPrimaryPart(PartInstance* value);
 
 	const CoordinateFrame& getModelInPrimary() const;

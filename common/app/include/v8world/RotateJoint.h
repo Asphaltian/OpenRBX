@@ -27,11 +27,11 @@ private:
 	virtual void removeFromKernel(); // vtable+0x08
 
 public:
-	Primitive* getAxlePrim() const { return getPrimitive(0); }
-	Primitive* getHolePrim() const { return getPrimitive(1); }
+	Primitive* getAxlePrim() { return getPrimitive(0); }
+	Primitive* getHolePrim() { return getPrimitive(1); }
 
-	NormalId getAxleId() const { return Matrix3ToNormalId(jointCoord0.rotation); }
-	NormalId getHoleId() const { return normalIdOpposite(Matrix3ToNormalId(jointCoord1.rotation)); }
+	NormalId getAxleId() { return Matrix3ToNormalId(jointCoord0.rotation); }
+	NormalId getHoleId() { return normalIdOpposite(Matrix3ToNormalId(jointCoord1.rotation)); }
 
 	static RotateJoint* canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1);
 

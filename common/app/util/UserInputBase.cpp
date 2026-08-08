@@ -3,7 +3,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100d0ec0
-void UserInputBase::getNavKeys(NavKeys& navKeys)
+void UserInputBase::getNavKeys(NavKeys& navKeys) const
 {
 	navKeys.forward_arrow = keyDown(SDLK_UP);
 	navKeys.backward_arrow = keyDown(SDLK_DOWN);

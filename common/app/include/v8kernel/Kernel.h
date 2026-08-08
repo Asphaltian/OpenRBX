@@ -38,8 +38,8 @@ public:
 	int numPoints() const;
 	int numConnectors() const;
 
-	float connectorSpringEnergy();
-	float bodyKineticEnergy();
+	float connectorSpringEnergy() const;
+	float bodyKineticEnergy() const;
 
 	void insertConnector(Connector* connector);
 	void insertConnector2ndPass(Connector* connector);

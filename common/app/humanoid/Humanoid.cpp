@@ -1,10 +1,14 @@
 #include "humanoid/Humanoid.h"
 
 #include "network/Players.h"
+#include "rbxgraphics/Adorn.h"
 #include "reflection/property.h"
+#include "util/Color.h"
 #include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/Teams.h"
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Body.h"
+#include "v8tree/Service.h"
 #include "v8world/World.h"
 
 namespace RBX {
@@ -285,7 +289,55 @@ Humanoid::Humanoid()
 // STUB: WEBSERVICE 0x100a4690
 void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
 {
-	STUB(0x100a4690);
+	if (getHead() != NULL) {
+		const CoordinateFrame& headCoord = head->getCoordinateFrame();
+
+		Vector3 headPosition(headCoord.translation.x, headCoord.translation.y + 1.5f, headCoord.translation.z);
+
+		Vector3 projected = camera.project(headPosition, adorn->getViewport());
+
+		float distance = (camera.getCoordinateFrame().translation - headPosition).magnitude();
+
+		if (distance < 100.0f) {
+			int fontSize = 8;
+
+			if (20.0f <= distance) {
+				if (distance < 50.0f) {
+					fontSize = 10;
+				}
+			}
+			else {
+				fontSize = 12;
+			}
+
+			Teams* teams = ServiceProvider::find<Teams>(this);
+
+			G3D::Color3 nameColor = teams == NULL ? G3D::Color3::white() : teams->getTeamColorForHumanoid(this);
+
+			adorn->drawFont2D(
+				getName(),
+				projected.xy(),
+				fontSize,
+				G3D::Color4(nameColor, 1.0f),
+				G3D::Color4(G3D::Color3::black(), 1.0f),
+				Adorn::XALIGN_CENTER,
+				Adorn::YALIGN_CENTER,
+				Adorn::PROPORTIONAL_SPACING
+			);
+
+			float width = (float) (fontSize * 4);
+
+			headPosition.x -= 0.5f * width;
+
+			Vector2 barLow(headPosition.x, headPosition.y);
+			Vector2 barHigh(headPosition.x + width, headPosition.y + (float) (fontSize / 2));
+
+			Vector2 healthHigh(headPosition.x + (health / maxHealth) * width, headPosition.y);
+
+			adorn->rect2d(G3D::Rect2D::xyxy(barLow, healthHigh), G3D::Color4(Color::lightGreen(), 1.0f));
+			adorn->rect2d(G3D::Rect2D::xyxy(healthHigh, barHigh), G3D::Color4(G3D::Color3::red(), 1.0f));
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a4960

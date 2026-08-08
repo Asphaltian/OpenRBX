@@ -15,7 +15,7 @@ public:
 
 	~Anchor() {}
 
-	Primitive* getPrimitive() const { return primitive; }
+	Primitive* getPrimitive() { return primitive; }
 
 private:
 	Primitive* primitive; // 0x00

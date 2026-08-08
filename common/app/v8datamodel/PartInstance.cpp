@@ -142,7 +142,7 @@ const CoordinateFrame& PartInstance::getCoordinateFrame() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b0b0
-float PartInstance::getMass() const
+float PartInstance::getMass()
 {
 	return primitive->getBody()->getMass();
 }
@@ -426,7 +426,7 @@ void PartInstance::setFormFactorXml(FormFactor value)
 	}
 }
 // STUB: WEBSERVICE 0x1009fe60
-void PartInstance::setColor3(G3D::Color3 value)
+void PartInstance::setColor3(const G3D::Color3& value)
 {
 	BrickColor closest = BrickColor::closest(value);
 

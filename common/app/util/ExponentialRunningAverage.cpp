@@ -16,7 +16,7 @@ float floatERA::pushAndGetAverage(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x10123020
-float floatERA::getAverage() const
+float floatERA::getAverage()
 {
 	return avg;
 }
@@ -40,7 +40,7 @@ Vector3 Vector3ERA::pushAndGetAverage(Vector3 value)
 }
 
 // FUNCTION: WEBSERVICE 0x10123080
-Vector3 Vector3ERA::getAverage() const
+Vector3 Vector3ERA::getAverage()
 {
 	return Vector3(x, y, z);
 }

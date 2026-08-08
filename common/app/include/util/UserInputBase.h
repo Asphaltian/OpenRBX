@@ -33,11 +33,11 @@ public:
 	virtual void setWrapMode(WrapMode wrapMode) = 0;                   // vtable+0x08
 	virtual WrapMode getWrapMode() = 0;                                // vtable+0x0c
 	virtual void centerCursor() = 0;                                   // vtable+0x10
-	virtual bool keyDown(SDLKey key) = 0;                              // vtable+0x14
+	virtual bool keyDown(SDLKey key) const = 0;                        // vtable+0x14
 	virtual void setKeyState(SDLKey key, bool down) = 0;               // vtable+0x18
 	virtual void setCursorId(Adorn* adorn, const TextureId& cursorId); // vtable+0x1c
 
-	void getNavKeys(NavKeys& navKeys);
+	void getNavKeys(NavKeys& navKeys) const;
 
 private:
 	undefined m_unk0x04[0x28 - 0x04]; // 0x04

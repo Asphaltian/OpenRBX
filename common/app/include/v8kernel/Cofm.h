@@ -23,18 +23,18 @@ public:
 
 	void makeDirty() { dirty = true; }
 
-	const Vector3& getCofmInBody();
-	float getMass();
-	const Matrix3& getMoment();
+	const Vector3& getCofmInBody() const;
+	const float getMass() const;
+	const Matrix3& getMoment() const;
 
 private:
-	void updateIfDirty();
+	void updateIfDirty() const;
 
-	Body* body;         // 0x00
-	bool dirty;         // 0x04
-	Vector3 cofmInBody; // 0x08
-	float mass;         // 0x14
-	Matrix3 moment;     // 0x18
+	Body* body;                 // 0x00
+	mutable bool dirty;         // 0x04
+	mutable Vector3 cofmInBody; // 0x08
+	mutable float mass;         // 0x14
+	mutable Matrix3 moment;     // 0x18
 };
 
 DECOMP_SIZE_ASSERT(Cofm, 0x3c)

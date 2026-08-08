@@ -39,6 +39,7 @@ public:
 	{
 	}
 
+protected:
 	static void faceIdToCoords(
 		Primitive* prim0,
 		Primitive* prim1,

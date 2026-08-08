@@ -121,6 +121,7 @@ endif()
 
 set(OPENRBX_APP_SOURCES
   common/app/security/SecurityContext.cpp
+  common/app/v8datamodel/Hopper.cpp
   common/app/gui/GUI.cpp
   common/app/gui/Widget.cpp
   common/app/humanoid/Humanoid.cpp
@@ -249,7 +250,6 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/GeometryService.cpp
   common/app/v8datamodel/GlobalSettings.cpp
   common/app/v8datamodel/Gyro.cpp
-  common/app/v8datamodel/Hopper.cpp
   common/app/v8datamodel/Lighting.cpp
   common/app/v8datamodel/LocakBackpack.cpp
   common/app/v8datamodel/Mouse.cpp

@@ -37,7 +37,7 @@ const Primitive* ModelInstance::getBiggestPrimitive() const
 }
 
 // STUB: WEBSERVICE 0x1005a1f0
-void ModelInstance::updatePrimaryPart()
+void ModelInstance::updatePrimaryPart(PartInstance* part) const
 {
 	STUB(0x1005a1f0);
 }

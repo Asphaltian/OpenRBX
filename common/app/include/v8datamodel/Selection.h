@@ -37,6 +37,8 @@ class Selection : public DescribedCreatable<Selection, Instance, sSelection>,
 				  public Service
 {
 public:
+	void removeFromSelection(const Instance* instance);
+
 	virtual void onEvent(const Instance* source, AncestorChanged event);
 
 private:

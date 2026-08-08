@@ -67,7 +67,7 @@ void MultiJoint::addToMultiJoint(Point* point0, Point* point1, Connector* _conne
 }
 
 // FUNCTION: WEBSERVICE 0x1011fd40
-Point* MultiJoint::getPoint(int id) const
+Point* MultiJoint::getPoint(int id)
 {
 	return point[id];
 }

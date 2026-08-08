@@ -5,7 +5,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100a59a0
-NormalId Extents::closestFace(const Vector3& point) const
+NormalId Extents::closestFace(const Vector3& point)
 {
 	const float xHigh = fabsf(point.x - high.x);
 	const float yHigh = fabsf(point.y - high.y);
@@ -190,7 +190,7 @@ Extents Extents::vv(const Vector3& v0, const Vector3& v1)
 }
 
 // FUNCTION: WEBSERVICE 0x100a61d0
-Extents Extents::express(const CoordinateFrame& myFrame, const CoordinateFrame& expressInFrame) const
+Extents Extents::express(const CoordinateFrame& myFrame, const CoordinateFrame& expressInFrame)
 {
 	Vector3 minC(Math::inf(), Math::inf(), Math::inf());
 	Vector3 maxC(-Math::inf(), -Math::inf(), -Math::inf());
@@ -206,7 +206,7 @@ Extents Extents::express(const CoordinateFrame& myFrame, const CoordinateFrame& 
 }
 
 // FUNCTION: WEBSERVICE 0x100a6440
-Extents Extents::toWorldSpace(const CoordinateFrame& localCoord) const
+Extents Extents::toWorldSpace(const CoordinateFrame& localCoord)
 {
 	Vector3 minC(Math::inf(), Math::inf(), Math::inf());
 	Vector3 maxC(-Math::inf(), -Math::inf(), -Math::inf());

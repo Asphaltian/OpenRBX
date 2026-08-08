@@ -66,6 +66,34 @@ private:
 public:
 	static ServiceProvider* findServiceProvider(Instance* instance);
 
+	template <class T>
+	T* find()
+	{
+		return dynamic_cast<T*>(findServiceByClassName(T::className()));
+	}
+
+	template <class T>
+	static T* find(Instance* context)
+	{
+		ServiceProvider* provider;
+
+		while (true) {
+			if (context == NULL) {
+				return NULL;
+			}
+
+			provider = dynamic_cast<ServiceProvider*>(context);
+
+			if (provider != NULL) {
+				break;
+			}
+
+			context = context->getParent();
+		}
+
+		return provider->find<T>();
+	}
+
 protected:
 	virtual bool askAddChild(const Instance* instance) const;
 	virtual void onChildAdded(Instance* child);
@@ -76,7 +104,7 @@ protected:
 	void clearServices();
 
 private:
-	Instance* findServiceByClassName(const Name& className);
+	Instance* findServiceByClassName(const Name& className) const;
 	Instance* findServiceByClassNameString(const std::string& className);
 };
 

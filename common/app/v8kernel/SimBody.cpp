@@ -62,7 +62,7 @@ SimBody::SimBody(Body* body)
 }
 
 // FUNCTION: WEBSERVICE 0x10121190
-PV SimBody::getOwnerPV() const
+PV SimBody::getOwnerPV()
 {
 	Vector3 cofmInBody = body->getCofmOffset();
 

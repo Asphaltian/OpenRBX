@@ -596,8 +596,8 @@ void SleepStage::stepContacts(ContactList& contacts)
 	for (int i = 0; i < contacts.size(); i++) {
 		Contact* c = contacts[i];
 
-		Primitive* p0 = c->getPrimitive(0);
 		Primitive* p1 = c->getPrimitive(1);
+		Primitive* p0 = c->getPrimitive(0);
 
 		if (!throttling || !p0->getBody()->getCanThrottle() || !p1->getBody()->getCanThrottle()) {
 			bool moving = atLeastOneAssemblyMoving(p0->getAssembly(), p1->getAssembly());

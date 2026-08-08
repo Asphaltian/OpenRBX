@@ -96,7 +96,7 @@ public:
 	static CoordinateFrame getFocusSpace(const CoordinateFrame& focus);
 	static Matrix3 getIWorldAtPoint(const Vector3& cofm, const Vector3& point, const Matrix3& iWorld, float mass);
 	static bool fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float epsilon);
-	static const Matrix3& getAxisRotationMatrix(int normalId);
+	static const Matrix3& getAxisRotationMatrix(int face);
 	static bool intersectRayPlane(const Ray& ray, const Plane& plane, Vector3& hitPoint);
 	static Matrix3 alignAxesClosest(const Matrix3& matrix, const Matrix3& target);
 	static bool fixDenorm(Vector3& value);

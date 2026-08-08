@@ -14,8 +14,8 @@ using G3D::Vector3;
 class Velocity
 {
 public:
-	Vector3 linear;     // 0x00
-	Vector3 rotational; // 0x0c
+	mutable Vector3 linear;     // 0x00
+	mutable Vector3 rotational; // 0x0c
 
 	// FUNCTION: WEBSERVICE 0x10104d20
 	Velocity() : linear(Vector3::zero()), rotational(Vector3::zero()) {}
@@ -28,7 +28,7 @@ public:
 		return Velocity(linearVelocityAtOffset(offset), rotational);
 	}
 
-	void rotateBy(const Matrix3& rotation)
+	void rotateBy(const Matrix3& rotation) const
 	{
 		linear = rotation * linear;
 		rotational = rotation * rotational;

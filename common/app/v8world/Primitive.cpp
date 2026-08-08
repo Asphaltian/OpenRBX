@@ -335,13 +335,13 @@ Joint* Primitive::getFirstJoint() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a7fc0
-Contact* Primitive::getFirstContact() const
+Contact* Primitive::getFirstContact()
 {
 	return static_cast<Contact*>(contacts.first);
 }
 
 // FUNCTION: WEBSERVICE 0x100a7fd0 FOLDED
-Contact* Primitive::getNextContact(Contact* prev) const
+Contact* Primitive::getNextContact(Contact* prev)
 {
 	return static_cast<Contact*>(prev->getNext(this));
 }
@@ -353,7 +353,7 @@ Joint* Primitive::getNextJoint(Joint* prev) const
 }
 
 // FUNCTION: WEBSERVICE 0x100a7ff0
-RigidJoint* Primitive::getFirstRigidAt(Edge* start) const
+RigidJoint* Primitive::getFirstRigidAt(Edge* start)
 {
 	while (start != NULL) {
 		if (RigidJoint::isRigidJoint(start)) {
@@ -367,13 +367,13 @@ RigidJoint* Primitive::getFirstRigidAt(Edge* start) const
 }
 
 // FUNCTION: WEBSERVICE 0x100a8060
-RigidJoint* Primitive::getFirstRigid() const
+RigidJoint* Primitive::getFirstRigid()
 {
 	return getFirstRigidAt(getFirstEdge());
 }
 
 // FUNCTION: WEBSERVICE 0x100a8080
-RigidJoint* Primitive::getNextRigid(RigidJoint* prev) const
+RigidJoint* Primitive::getNextRigid(RigidJoint* prev)
 {
 	return getFirstRigidAt(getNextEdge(prev));
 }

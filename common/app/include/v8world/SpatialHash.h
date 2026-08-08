@@ -114,7 +114,7 @@ public:
 
 	void stepWorld();
 
-	SpatialHash* getSpatialHash() const { return spatialHash; }
+	SpatialHash* getSpatialHash() { return spatialHash; }
 
 private:
 	Contact* createContact(Primitive* p0, Primitive* p1);

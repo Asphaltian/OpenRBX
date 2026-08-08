@@ -58,14 +58,14 @@ public:
 
 	const Vector3* getFaceVertex(NormalId faceId, int vertexId) const;
 
-	int getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis) const;
+	int getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis);
 
 	int faceVertexToEdge(NormalId faceId, int vertexId);
 
 	const Vector3* getEdgeVertex(int edgeId) const;
 	NormalId getEdgeNormal(int edgeId);
 
-	Vector2 getProjectedVertex(const Vector3& vertex, NormalId normalID) const;
+	Vector2 getProjectedVertex(const Vector3& vertex, NormalId normalID);
 
 	Block() : vertices(NULL), cornerRadius(0) {}
 

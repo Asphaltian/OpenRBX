@@ -6,12 +6,19 @@
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
 
+#include <G3D/Color3.h>
+
 namespace RBX {
+
+class Humanoid;
 
 extern const char sTeams[];
 // SIZE 0x100
 class Teams : public DescribedCreatable<Teams, Instance, sTeams>, public Service
 {
+public:
+	G3D::Color3 getTeamColorForHumanoid(Humanoid* humanoid);
+
 private:
 	undefined m_unk0x0f8[0x100 - 0x0f8]; // 0x0f8
 };

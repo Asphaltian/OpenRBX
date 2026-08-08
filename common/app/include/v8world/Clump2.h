@@ -11,23 +11,33 @@ class Edge;
 class Joint;
 class Primitive;
 
-enum SearchType
-{
-	IN_CLUMP = 0,
-	IN_ASSEMBLY = 1,
-};
-
 // SIZE 0x08
 class PrimIterator
 {
+public:
+	enum SearchType
+	{
+		IN_CLUMP = 0,
+		IN_ASSEMBLY = 1,
+	};
+
 private:
+	Primitive* primitive;  // 0x00
+	SearchType searchType; // 0x04
+
 	static bool isParent(Primitive* parentCandidate, Primitive* child, Joint* joint, SearchType searchType);
 	static Primitive* findFirstChild(Primitive* primitive, SearchType searchType);
 	static Primitive* findNextSibling(Primitive* parent, Primitive* child, SearchType searchType);
 	static Primitive* findNextRelative(Primitive* parent, Primitive* child, SearchType searchType);
 
-public:
 	PrimIterator(Primitive* primitive, SearchType searchType) : primitive(primitive), searchType(searchType) {}
+
+public:
+	static PrimIterator begin(Primitive* primitive, SearchType searchType)
+	{
+		return PrimIterator(primitive, searchType);
+	}
+	static PrimIterator end(SearchType searchType) { return PrimIterator(NULL, searchType); }
 
 	Primitive* operator*() const { return primitive; }
 
@@ -37,10 +47,6 @@ public:
 	PrimIterator& operator++();
 
 	static Primitive* findParent(Primitive* primitive, SearchType searchType);
-
-private:
-	Primitive* primitive;  // 0x00
-	SearchType searchType; // 0x04
 };
 
 DECOMP_SIZE_ASSERT(PrimIterator, 0x08)

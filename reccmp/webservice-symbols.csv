@@ -1234,19 +1234,8 @@ address,size,symbol,name
 0x1012db90,,??_GSpecialShape@RBX@@UAEPAXI@Z,
 0x1012db90,,??_ESpecialShape@RBX@@UAEPAXI@Z,
 0x101e8dcc,,?terminate@@YAXXZ,
-0x102236c0,,,`dynamic atexit destructor for 'prop_ModelCoordinateFrames''
-0x102236e0,,,`dynamic atexit destructor for 'prop_WorldCoordinateFrames''
-0x10223700,,,`dynamic atexit destructor for 'prop_DisableEnvironmentalThrottle''
-0x10223720,,,`dynamic atexit destructor for 'prop_ValidatingDebug''
-0x10223800,,,`dynamic atexit destructor for 'prop_PartCoordinateFrames''
-0x10223820,,,`dynamic atexit destructor for 'prop_AnchoredParts''
-0x10223840,,,`dynamic atexit destructor for 'prop_errorReporting''
-0x10223860,,,`dynamic atexit destructor for 'prop_assertAction''
-0x10223dd0,,,`dynamic atexit destructor for 'prop_CurrentAngle''
-0x10223e50,,,`dynamic atexit destructor for 'prop_MaxVelocity''
 0x10224cd0,,,`dynamic atexit destructor for 'RBX::Texture::prop_StudsPerTileV''
 0x10224cf0,,,`dynamic atexit destructor for 'RBX::Texture::prop_StudsPerTileU''
 0x10224d10,,,`dynamic atexit destructor for 'RBX::Decal::prop_Shiny''
 0x10224d30,,,`dynamic atexit destructor for 'RBX::Decal::prop_Specular''
 0x10225590,,,`dynamic atexit destructor for 'RBX::FaceInstance::prop_Face''
-0x10225630,,,`dynamic atexit destructor for 'desc_meshType''

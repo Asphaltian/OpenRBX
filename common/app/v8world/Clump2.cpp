@@ -161,7 +161,7 @@ PrimIterator& PrimIterator::operator++()
 void EdgeIterator::findEdgeOnNextPrimitive()
 {
 	while (edge == NULL) {
-		Primitive* next = *++PrimIterator(primitive, IN_ASSEMBLY);
+		Primitive* next = *++PrimIterator::begin(primitive, PrimIterator::IN_ASSEMBLY);
 
 		if ((primitive = next) == NULL) {
 			return;

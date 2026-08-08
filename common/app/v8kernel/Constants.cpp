@@ -12,55 +12,55 @@ namespace RBX {
 static float MAX_LEGO_JOINT_FORCES_MEASURED[] = {0.0f, 1.098f, 2.134f, 2.427f, 3.191f, 4.571f, 4.681f};
 
 // FUNCTION: WEBSERVICE 0x1010a910 FOLDED
-int Constants::worldStepsPerUiStep()
+const int Constants::worldStepsPerUiStep()
 {
 	return 8;
 }
 
 // FUNCTION: WEBSERVICE 0x1010a920
-int Constants::kernelStepsPerWorldStep()
+const int Constants::kernelStepsPerWorldStep()
 {
 	return 19;
 }
 
 // FUNCTION: WEBSERVICE 0x1010a930
-int Constants::worldStepsPerSec()
+const int Constants::worldStepsPerSec()
 {
 	return 240;
 }
 
 // FUNCTION: WEBSERVICE 0x1010a940
-int Constants::kernelStepsPerSec()
+const int Constants::kernelStepsPerSec()
 {
 	return 4560;
 }
 
 // FUNCTION: WEBSERVICE 0x1010a950
-int Constants::kernelStepsPerUiStep()
+const int Constants::kernelStepsPerUiStep()
 {
 	return 152;
 }
 
 // FUNCTION: WEBSERVICE 0x1010a960
-float Constants::uiDt()
+const float Constants::uiDt()
 {
 	return 0.033333335f;
 }
 
 // FUNCTION: WEBSERVICE 0x1010a970
-float Constants::worldDt()
+const float Constants::worldDt()
 {
 	return 0.004166667f;
 }
 
 // FUNCTION: WEBSERVICE 0x1010a980
-float Constants::kernelDt()
+const float Constants::kernelDt()
 {
 	return 0.00021929825f;
 }
 
 // FUNCTION: WEBSERVICE 0x1010a990
-float Constants::getElasticMultiplier(float elasticity)
+const float Constants::getElasticMultiplier(float elasticity)
 {
 	if (elasticity < 0.05f) {
 		return 0.28f;
@@ -82,7 +82,7 @@ float Constants::getElasticMultiplier(float elasticity)
 }
 
 // FUNCTION: WEBSERVICE 0x1010aa00
-float Constants::getJointKMultiplier(const Vector3& clippedSortedSize, bool ball)
+const float Constants::getJointKMultiplier(const Vector3& clippedSortedSize, bool ball)
 {
 	G3D::Vector3int16 size(clippedSortedSize);
 
@@ -196,7 +196,7 @@ float Constants::getJointKMultiplier(const Vector3& clippedSortedSize, bool ball
 }
 
 // FUNCTION: WEBSERVICE 0x1010acf0
-float Constants::getKmsMaxJointForce(float grid1, float grid2)
+const float Constants::getKmsMaxJointForce(float grid1, float grid2)
 {
 	int grid1int = std::max(1, G3D::iRound(grid1));
 	int grid2int = std::max(1, G3D::iRound(grid2));
@@ -219,7 +219,7 @@ float Constants::getKmsMaxJointForce(float grid1, float grid2)
 }
 
 // FUNCTION: WEBSERVICE 0x1010adb0
-float Constants::getJointK(const Vector3& gridSize, bool ball)
+const float Constants::getJointK(const Vector3& gridSize, bool ball)
 {
 	Vector3 sortedSize = Math::sortVector3(gridSize);
 

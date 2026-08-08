@@ -14,18 +14,18 @@ class AssemblyStage;
 class MotorJoint;
 class Primitive;
 
-float getPrimitiveSize(Primitive* primitive);
+float getPrimitiveSize(const Primitive* primitive);
 
-int biggerJointGuid(Joint* joint0, Joint* joint1);
-int biggerJointSize(Joint* joint0, Joint* joint1);
+int biggerJointGuid(const Joint* joint0, const Joint* joint1);
+int biggerJointSize(const Joint* joint0, const Joint* joint1);
 
 Joint* getJoint(Primitive* primitive, Joint::JointType jointType);
 
-namespace JointSort {
-
-bool lighterJoint(Joint* joint0, Joint* joint1);
-
-} // namespace JointSort
+class JointSort
+{
+public:
+	static bool lighterJoint(const Joint* joint0, const Joint* joint1);
+};
 
 // VTABLE: WEBSERVICE 0x10247edc
 // SIZE 0x30

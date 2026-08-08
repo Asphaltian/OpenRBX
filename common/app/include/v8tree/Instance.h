@@ -79,9 +79,13 @@ class Instance : public GuidItem<Instance>,
 {
 public:
 	Instance();
+
+protected:
 	Instance(const char* name);
+
 	virtual ~Instance(); // vtable+0x00
 
+public:
 	virtual void setName(const std::string& value); // vtable+0x04
 
 protected:
@@ -119,6 +123,8 @@ public:
 
 	Instance* getParent() const { return parent; }
 
+	Instance* getRootAncestor() { return parent != NULL ? parent->getRootAncestor() : this; }
+
 	Instance* findFirstChildByName(const std::string& findName) const;
 
 	template <class T>
@@ -153,6 +159,24 @@ public:
 	void writeChildren(XmlElement* element);
 
 	bool contains(const Instance* instance) const;
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10059dc0
+	// RBX::Instance::getTypedRoot<RBX::PVInstance>
+	// clang-format on
+	template <class T>
+	const T* getTypedRoot() const
+	{
+		const Instance* root = this;
+		const T* typedParent = dynamic_cast<const T*>(parent);
+
+		while (typedParent != NULL) {
+			root = typedParent;
+			typedParent = dynamic_cast<const T*>(typedParent->parent);
+		}
+
+		return static_cast<const T*>(root);
+	}
 
 	bool isAncestorOf(const Instance* descendent) const
 	{
@@ -227,7 +251,7 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::~DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
 	// STUB: WEBSERVICE 0x10065660
 	// RBX::DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
-	// TEMPLATE: WEBSERVICE 0x10068be0
+	// STUB: WEBSERVICE 0x10068be0
 	// RBX::DescribedCreatable<RBX::Script,RBX::Instance,&RBX::sScript>::~DescribedCreatable<RBX::Script,RBX::Instance,&RBX::sScript>
 	// STUB: WEBSERVICE 0x10068ff0
 	// RBX::DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::~DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
@@ -388,7 +412,7 @@ template <class T, class Base, const char* sName>
 // clang-format on
 class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >
 {
-public:
+protected:
 	DescribedCreatable() {}
 
 	template <class U>

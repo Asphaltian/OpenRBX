@@ -32,9 +32,11 @@ public:
 		FREE_JOINT = 9,
 	};
 
+protected:
 	Joint();
 	Joint(Primitive* prim0, Primitive* prim1, const CoordinateFrame& coord0, const CoordinateFrame& coord1);
 
+public:
 	virtual ~Joint(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011ea60
@@ -79,7 +81,7 @@ public:
 
 	void setJointCoord(int index, const CoordinateFrame& value);
 
-	CoordinateFrame& getJointCoord(int index) { return index == 0 ? jointCoord0 : jointCoord1; }
+	const CoordinateFrame& getJointCoord(int index) const { return index == 0 ? jointCoord0 : jointCoord1; }
 
 	bool getActive() const { return active; }
 	void setActive(bool value) { active = value; }

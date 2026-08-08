@@ -31,7 +31,7 @@ public:
 
 	void step(float dt);
 
-	PV getOwnerPV() const;
+	PV getOwnerPV();
 
 	const PV& getPV() const { return pv; }
 

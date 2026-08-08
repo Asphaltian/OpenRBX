@@ -31,7 +31,7 @@ public:
 	static int compare(const Guid* a, const Guid* b);
 	static int compare(const Guid* a0, const Guid* a1, const Guid* b0, const Guid* b1);
 
-	static const Name* getLocalScope();
+	static const Name& getLocalScope();
 	static void generateGUID(std::string& result);
 
 	Data data; // 0x00

@@ -240,11 +240,12 @@ template <class T, const char* sName, class Base>
 class Described : public Base
 {
 public:
-	Described() {}
+	Described() { this->descriptor = &classDescriptor(); }
 
 	template <class U>
 	Described(U* joint) : Base(joint)
 	{
+		this->descriptor = &classDescriptor();
 	}
 
 	static ClassDescriptor& classDescriptor()

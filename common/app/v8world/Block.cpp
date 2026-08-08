@@ -75,18 +75,18 @@ Matrix3 Block::getMomentHollow(float mass) const
 	float y = gridSize.y;
 	float z = gridSize.z;
 
-	float area = 2.0f * ((x + y) * z + x * y);
+	float area = 2.0f * ((y + x) * z + y * x);
 
 	Vector3 I(
 		mass / (2 * area) *
-			(z * z * y * x + y * y * y * z / 3 + z * z * z * x / 3 + z * y * y * x + y * y * y * x / 3 +
+			(z * z * y * x + z * y * y * y / 3 + z * z * z * x / 3 + z * y * y * x + y * y * y * x / 3 +
 			 z * z * z * y / 3),
 		mass / (2 * area) *
-			(z * z * x * y + x * x * x * z / 3 + z * z * z * y / 3 + z * x * x * y + x * x * x * y / 3 +
-			 z * z * z * x / 3),
+			(x * x * x * y / 3 + z * z * x * z / 3 + x * x * z * y + z * z * x * y + x * x * x * z / 3 +
+			 z * z * z * y / 3),
 		mass / (2 * area) *
-			(x * x * y * z + y * y * y * x / 3 + x * x * x * z / 3 + x * y * y * z + y * y * y * z / 3 +
-			 x * x * x * y / 3)
+			(y * y * y * z / 3 + y * x * x * z + y * x * x * x / 3 + y * y * z * x + x * x * x * z / 3 +
+			 y * y * y * x / 3)
 	);
 
 	return Math::fromDiagonal(I);
@@ -230,7 +230,7 @@ void Block::projectToFace(Vector3& ray, Vector3int16& clip, int& onBorder)
 }
 
 // FUNCTION: WEBSERVICE 0x10109590
-Vector2 Block::getProjectedVertex(const Vector3& vertex, NormalId normalID) const
+Vector2 Block::getProjectedVertex(const Vector3& vertex, NormalId normalID)
 {
 	Vector2 answer(0, 0);
 
@@ -265,7 +265,7 @@ Vector2 Block::getProjectedVertex(const Vector3& vertex, NormalId normalID) cons
 }
 
 // STUB: WEBSERVICE 0x10109630
-int Block::getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis) const
+int Block::getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis)
 {
 	Vector3 axisInBody = crossAxis * rotation;
 

@@ -18,7 +18,7 @@ float Connector::potentialEnergy()
 }
 
 // FUNCTION: WEBSERVICE 0x100eb790 FOLDED
-bool Connector::canThrottle()
+bool Connector::canThrottle() const
 {
 	return false;
 }
@@ -47,7 +47,7 @@ float PointToPointBreakConnector::potentialEnergy()
 }
 
 // FUNCTION: WEBSERVICE 0x1011dee0
-bool ContactConnector::canThrottle()
+bool ContactConnector::canThrottle() const
 {
 	return geoPair.getBody(0)->getCanThrottle() && geoPair.getBody(1)->getCanThrottle();
 }

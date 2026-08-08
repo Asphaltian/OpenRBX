@@ -112,7 +112,7 @@ public:
 
 	const CoordinateFrame& getCoordinateFrame() const;
 
-	float getMass() const;
+	float getMass();
 
 	const Vector3& getPartSizeXml() const;
 	Vector3 getPartSizeUi() const;
@@ -139,7 +139,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x1009a7e0
 	G3D::Color3 getColor3() const { return color.color3(); }
 
-	void setColor3(G3D::Color3 value);
+	void setColor3(const G3D::Color3& value);
 
 	void setColor(BrickColor value);
 

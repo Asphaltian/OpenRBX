@@ -22,8 +22,10 @@ class Adorn;
 class Primitive;
 class XmlState;
 
+extern const char sPVInstance[];
+
 // SIZE 0x170
-class __declspec(novtable) PVInstance : public Instance,
+class __declspec(novtable) PVInstance : public Reflection::Described<PVInstance, sPVInstance, Instance>,
 										public IControllable,
 										public virtual IPrimaryPart,
 										public virtual ILocation
@@ -52,7 +54,7 @@ public:
 	virtual ~PVInstance();
 
 	Controller::ControllerType getControllerType() const;
-	void setControllerType(Controller::ControllerType value);
+	void setControllerType(Controller::ControllerType _control);
 
 	// FUNCTION: WEBSERVICE 0x100990b0
 	bool getShowControllerFlag() const { return showControllerFlag; }

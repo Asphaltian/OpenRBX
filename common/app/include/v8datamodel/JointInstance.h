@@ -143,9 +143,9 @@ DECOMP_SIZE_ASSERT(Weld, 0x11c)
 // clang-format on
 
 // clang-format off
-// SYNTHETIC: WEBSERVICE 0x1021c570
+// STUB: WEBSERVICE 0x1021c570
 // `dynamic initializer for 'prop_MaxVelocity''
-// SYNTHETIC: WEBSERVICE 0x1021c5f0
+// STUB: WEBSERVICE 0x1021c5f0
 // `dynamic initializer for 'prop_CurrentAngle''
 // clang-format on
 

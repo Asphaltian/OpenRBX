@@ -104,6 +104,10 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // clang-format off
 // STUB: WEBSERVICE 0x100e4410
 // RBX::Feature::~Feature
+// STUB: WEBSERVICE 0x10223dd0
+// RBX::`dynamic atexit destructor for 'prop_CurrentAngle''
+// STUB: WEBSERVICE 0x10223e50
+// RBX::`dynamic atexit destructor for 'prop_MaxVelocity''
 // clang-format on
 
 // clang-format off

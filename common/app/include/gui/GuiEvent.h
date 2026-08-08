@@ -28,9 +28,9 @@ public:
 		USED_AND_FINISHED = 2
 	};
 
-	bool wasUsed() const { return response != NOT_USED; }
+	bool wasUsed() { return response != NOT_USED; }
 
-	GuiItem* getTarget() const { return target; }
+	GuiItem* getTarget() { return target; }
 
 	static GuiResponse notUsed() { return GuiResponse(NOT_USED, NULL); }
 	static GuiResponse used() { return GuiResponse(USED, NULL); }

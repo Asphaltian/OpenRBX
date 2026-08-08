@@ -10,25 +10,25 @@ using G3D::Vector3;
 class Constants
 {
 public:
-	static int worldStepsPerUiStep();
-	static int kernelStepsPerWorldStep();
-	static int worldStepsPerSec();
-	static int kernelStepsPerSec();
-	static int kernelStepsPerUiStep();
+	static const int worldStepsPerUiStep();
+	static const int kernelStepsPerWorldStep();
+	static const int worldStepsPerSec();
+	static const int kernelStepsPerSec();
+	static const int kernelStepsPerUiStep();
 
-	static float uiDt();
-	static float worldDt();
-	static float kernelDt();
+	static const float uiDt();
+	static const float worldDt();
+	static const float kernelDt();
 
-	static float getElasticMultiplier(float elasticity);
+	static const float getElasticMultiplier(float elasticity);
 
 private:
-	static float getJointKMultiplier(const Vector3& size, bool isBall);
+	static const float getJointKMultiplier(const Vector3& size, bool isBall);
 
 public:
-	static float getKmsMaxJointForce(float studsA, float studsB);
+	static const float getKmsMaxJointForce(float studsA, float studsB);
 
-	static float getJointK(const Vector3& size, bool isBall);
+	static const float getJointK(const Vector3& size, bool isBall);
 
 	static const Vector3& getKmsGravity()
 	{

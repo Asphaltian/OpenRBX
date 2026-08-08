@@ -22,9 +22,13 @@ public:
 	Sibling() : next(NULL) {}
 
 	T* nextSibling() const { return next; }
-	void setNextSibling(T* value) { next = value; }
 
 private:
+	template <class U>
+	friend class Parent;
+
+	void setNextSibling(T* value) { next = value; }
+
 	T* next; // 0x00
 };
 
@@ -135,8 +139,10 @@ public:
 
 	bool isValueEqual(const RBX::Name* value) const;
 
-	void clearValue();
+private:
+	void clearValue() const;
 
+public:
 	std::string toString(XmlWriter* writer) const;
 
 	void replaceHandles(const std::map<RBX::Instance*, RBX::InstanceHandle>& handleMap);
@@ -165,10 +171,10 @@ protected:
 		intValue = value;
 	}
 
-	const RBX::Name& tag; // 0x00
-	ValueType valueType;  // 0x04
+	const RBX::Name& tag;        // 0x00
+	mutable ValueType valueType; // 0x04
 
-	union // 0x08
+	mutable union // 0x08
 	{
 		std::string* stringValue;
 		RBX::ContentId* contentIdValue;

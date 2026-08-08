@@ -58,21 +58,37 @@ DECOMP_SIZE_ASSERT(DebugSettings, 0x100)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021bac0
-// `dynamic initializer for 'prop_AnchoredParts''
+// RBX::`dynamic initializer for 'prop_AnchoredParts''
 // SYNTHETIC: WEBSERVICE 0x1021bb00
-// `dynamic initializer for 'prop_PartCoordinateFrames''
+// RBX::`dynamic initializer for 'prop_PartCoordinateFrames''
 // SYNTHETIC: WEBSERVICE 0x1021bb80
-// `dynamic initializer for 'prop_ModelCoordinateFrames''
+// RBX::`dynamic initializer for 'prop_ModelCoordinateFrames''
 // SYNTHETIC: WEBSERVICE 0x1021bbc0
-// `dynamic initializer for 'prop_WorldCoordinateFrames''
+// RBX::`dynamic initializer for 'prop_WorldCoordinateFrames''
 // SYNTHETIC: WEBSERVICE 0x1021bc00
-// `dynamic initializer for 'prop_DisableEnvironmentalThrottle''
+// RBX::`dynamic initializer for 'prop_DisableEnvironmentalThrottle''
 // SYNTHETIC: WEBSERVICE 0x1021bc40
-// `dynamic initializer for 'prop_ValidatingDebug''
+// RBX::`dynamic initializer for 'prop_ValidatingDebug''
 // SYNTHETIC: WEBSERVICE 0x1021bc80
-// `dynamic initializer for 'prop_assertAction''
+// RBX::`dynamic initializer for 'prop_assertAction''
 // SYNTHETIC: WEBSERVICE 0x1021bcc0
-// `dynamic initializer for 'prop_errorReporting''
+// RBX::`dynamic initializer for 'prop_errorReporting''
+// SYNTHETIC: WEBSERVICE 0x102236c0
+// RBX::`dynamic atexit destructor for 'prop_ModelCoordinateFrames''
+// SYNTHETIC: WEBSERVICE 0x102236e0
+// RBX::`dynamic atexit destructor for 'prop_WorldCoordinateFrames''
+// SYNTHETIC: WEBSERVICE 0x10223700
+// RBX::`dynamic atexit destructor for 'prop_DisableEnvironmentalThrottle''
+// SYNTHETIC: WEBSERVICE 0x10223720
+// RBX::`dynamic atexit destructor for 'prop_ValidatingDebug''
+// SYNTHETIC: WEBSERVICE 0x10223800
+// RBX::`dynamic atexit destructor for 'prop_PartCoordinateFrames''
+// SYNTHETIC: WEBSERVICE 0x10223820
+// RBX::`dynamic atexit destructor for 'prop_AnchoredParts''
+// SYNTHETIC: WEBSERVICE 0x10223840
+// RBX::`dynamic atexit destructor for 'prop_errorReporting''
+// SYNTHETIC: WEBSERVICE 0x10223860
+// RBX::`dynamic atexit destructor for 'prop_assertAction''
 // clang-format on
 
 } // namespace RBX

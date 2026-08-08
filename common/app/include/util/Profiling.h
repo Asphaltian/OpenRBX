@@ -17,10 +17,10 @@ struct Bucket
 public:
 	Bucket() : sampleTimeSpan(0.0), kernTimeSpan(0), userTimeSpan(0), frames(0) {}
 
-	float getActualFPS();
-	float getNominalFPS();
-	float getFrameTime();
-	float getTotalTime();
+	double getActualFPS() const;
+	double getNominalFPS() const;
+	double getFrameTime() const;
+	double getTotalTime() const;
 
 	Bucket& operator+=(const Bucket& other);
 
@@ -38,7 +38,7 @@ class Profiler : public boost::noncopyable
 public:
 	Profiler(const char* name);
 
-	void getData(Bucket& answer, double seconds);
+	Bucket getData(double seconds) const;
 
 protected:
 	static const unsigned int bucketCount;

@@ -44,7 +44,7 @@ public:
 
 	float areaXZ() const;
 
-	NormalId closestFace(const Vector3& point) const;
+	NormalId closestFace(const Vector3& point);
 
 	bool contains(const Vector3& point) const;
 	bool fuzzyContains(const Vector3& point, float epsilon) const;
@@ -52,8 +52,8 @@ public:
 	bool separatedByMoreThan(const Extents& other, float distance) const;
 	bool containedByFrustum(const G3D::GCamera::Frustum& frustum) const;
 
-	Extents toWorldSpace(const CoordinateFrame& coordinateFrame) const;
-	Extents express(const CoordinateFrame& from, const CoordinateFrame& to) const;
+	Extents toWorldSpace(const CoordinateFrame& coordinateFrame);
+	Extents express(const CoordinateFrame& from, const CoordinateFrame& to);
 
 	void expand(float distance);
 	void unionWith(const Extents& other);

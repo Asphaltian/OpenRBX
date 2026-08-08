@@ -75,11 +75,11 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x1011b5c0
 	// RBX::Assembly::`scalar deleting destructor'
 
-	PrimIterator assemblyPrimBegin();
-	PrimIterator assemblyPrimEnd();
+	PrimIterator assemblyPrimBegin() const;
+	PrimIterator assemblyPrimEnd() const;
 
-	EdgeIterator externalEdgeBegin();
-	EdgeIterator externalEdgeEnd();
+	EdgeIterator externalEdgeBegin() const;
+	EdgeIterator externalEdgeEnd() const;
 
 	Assembly* getRootAssembly();
 	const Assembly* getRootAssemblyConst() const;
@@ -92,7 +92,7 @@ public:
 	float getMaxRadius() { return maxRadius; }
 	bool getCanSleep() { return canSleep; }
 
-	Assembly* otherAssembly(Edge* edge);
+	Assembly* otherAssembly(Edge* edge) const;
 
 	const Primitive* getRootPrimitive() const { return rootPrimitive; }
 
@@ -101,7 +101,7 @@ public:
 
 	void onPrimitiveCanSleepChanged(Primitive* primitive);
 
-	unsigned int numMotors();
+	unsigned int numMotors() const;
 	MotorJoint* getMotor(unsigned int index);
 
 	void stepUi(int frameCount);
@@ -111,8 +111,8 @@ public:
 	static void addRigidChild(Primitive* parent, RigidJoint* joint, Primitive* child);
 	static void addMotorChild(Primitive* parent, MotorJoint* joint, Primitive* child);
 	static void addGroundChild(Primitive* child);
-	Sim::AssemblyState getSleepStatus();
-	bool getAnchored();
+	Sim::AssemblyState getSleepStatus() const;
+	bool getAnchored() const;
 
 	void notifyMoved();
 
@@ -120,7 +120,7 @@ public:
 	virtual void removeFromKernel();          // vtable+0x08
 
 private:
-	MotorJoint* getMotorImp(unsigned int& index);
+	const MotorJoint* getMotorImp(unsigned int& index) const;
 
 	void addChild(Assembly* child);
 

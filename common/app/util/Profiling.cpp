@@ -15,27 +15,27 @@ void CodeProfiler::log(__int64 kern, __int64 user, bool frameTick)
 }
 
 // STUB: WEBSERVICE 0x100846d0
-float Bucket::getActualFPS()
+double Bucket::getActualFPS() const
 {
 	STUB(0x100846d0);
 
-	return 0.0f;
+	return 0.0;
 }
 
 // STUB: WEBSERVICE 0x100846f0
-float Bucket::getFrameTime()
+double Bucket::getFrameTime() const
 {
 	STUB(0x100846f0);
 
-	return 0.0f;
+	return 0.0;
 }
 
 // STUB: WEBSERVICE 0x10084720
-float Bucket::getTotalTime()
+double Bucket::getTotalTime() const
 {
 	STUB(0x10084720);
 
-	return 0.0f;
+	return 0.0;
 }
 
 // STUB: WEBSERVICE 0x10084750
@@ -51,17 +51,19 @@ CodeProfiler::CodeProfiler(const char* name) : Profiler(name)
 }
 
 // STUB: WEBSERVICE 0x100847f0
-void Profiler::getData(Bucket& answer, double seconds)
+Bucket Profiler::getData(double seconds) const
 {
 	STUB(0x100847f0);
+
+	return Bucket();
 }
 
 // STUB: WEBSERVICE 0x10084a20
-float Bucket::getNominalFPS()
+double Bucket::getNominalFPS() const
 {
 	STUB(0x10084a20);
 
-	return 0.0f;
+	return 0.0;
 }
 
 } // namespace Profiling

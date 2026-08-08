@@ -143,7 +143,7 @@ XmlAttribute* XmlElement::findAttribute(const RBX::Name& name)
 }
 
 // FUNCTION: WEBSERVICE 0x1008f100
-void XmlNameValuePair::clearValue()
+void XmlNameValuePair::clearValue() const
 {
 	switch (valueType) {
 	case STRING:

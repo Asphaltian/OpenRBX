@@ -21,7 +21,7 @@ int Kernel::numConnectors() const
 }
 
 // FUNCTION: WEBSERVICE 0x100d4f30
-float Kernel::connectorSpringEnergy()
+float Kernel::connectorSpringEnergy() const
 {
 	float springPotential = 0.0f;
 
@@ -45,7 +45,7 @@ int Kernel::numPoints() const
 }
 
 // FUNCTION: WEBSERVICE 0x100d5330
-float Kernel::bodyKineticEnergy()
+float Kernel::bodyKineticEnergy() const
 {
 	float answer = 0.0f;
 

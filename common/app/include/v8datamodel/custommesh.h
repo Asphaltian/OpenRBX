@@ -24,7 +24,7 @@ public:
 	};
 
 	// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
-	MeshType getMeshType() const { return meshType; }
+	const MeshType getMeshType() const { return meshType; }
 
 	void setMeshType(MeshType value);
 
@@ -37,7 +37,9 @@ DECOMP_SIZE_ASSERT(SpecialShape, 0x154)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021e810
-// `dynamic initializer for 'desc_meshType''
+// RBX::`dynamic initializer for 'desc_meshType''
+// STUB: WEBSERVICE 0x10225630
+// RBX::`dynamic atexit destructor for 'desc_meshType''
 // clang-format on
 
 } // namespace RBX

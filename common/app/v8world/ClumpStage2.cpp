@@ -16,7 +16,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011b330
-float getPrimitiveSize(Primitive* p)
+float getPrimitiveSize(const Primitive* p)
 {
 	const Vector3& size = p->getGeometry()->getGridSize();
 
@@ -45,7 +45,7 @@ haveArea:;
 }
 
 // FUNCTION: WEBSERVICE 0x1011b3d0
-int biggerJointGuid(Joint* j0, Joint* j1)
+int biggerJointGuid(const Joint* j0, const Joint* j1)
 {
 	const Guid* guid0 = &j0->getPrimitive(0)->getGuid();
 	const Guid* other0 = &j1->getPrimitive(0)->getGuid();
@@ -72,7 +72,7 @@ Joint* getJoint(Primitive* p, Joint::JointType jointType)
 }
 
 // FUNCTION: WEBSERVICE 0x1011b5e0
-int biggerJointSize(Joint* j0, Joint* j1)
+int biggerJointSize(const Joint* j0, const Joint* j1)
 {
 	float size0 = getPrimitiveSize(j0->getPrimitive(0));
 
@@ -97,10 +97,8 @@ int biggerJointSize(Joint* j0, Joint* j1)
 	return 0;
 }
 
-namespace JointSort {
-
 // FUNCTION: WEBSERVICE 0x1011b690
-bool lighterJoint(Joint* j0, Joint* j1)
+bool JointSort::lighterJoint(const Joint* j0, const Joint* j1)
 {
 	if (j0 == j1) {
 		return false;
@@ -135,8 +133,6 @@ bool lighterJoint(Joint* j0, Joint* j1)
 
 	return j0 < j1;
 }
-
-} // namespace JointSort
 
 // FUNCTION: WEBSERVICE 0x1011b740
 void ClumpStage::onPrimitiveAdded(Primitive* p)

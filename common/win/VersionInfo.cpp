@@ -51,20 +51,20 @@ int CVersionInfo::Load(const CString& fileName)
 	m_pTranslations = NULL;
 	m_nTranslations = 0;
 
-	CString str(fileName);
+	CString sFileName(fileName);
 	DWORD dwHandle = 0;
-	DWORD dwSize = GetFileVersionInfoSize(str.GetBuffer(), &dwHandle);
+	DWORD dwSize = GetFileVersionInfoSize(sFileName.GetBuffer(), &dwHandle);
 
 	if (dwSize) {
 		m_pVerData = new BYTE[dwSize];
 
-		if (GetFileVersionInfo(str.GetBuffer(), dwHandle, dwSize, m_pVerData)) {
-			UINT uLen = 0;
+		if (GetFileVersionInfo(sFileName.GetBuffer(), dwHandle, dwSize, m_pVerData)) {
+			UINT nLen = 0;
 
-			if (VerQueryValue(m_pVerData, "\\", (LPVOID*) &m_pffi, &uLen)) {
-				if (VerQueryValue(m_pVerData, "\\VarFileInfo\\Translation", (LPVOID*) &m_pTranslations, &uLen) &&
-					uLen > 3) {
-					m_nTranslations = uLen / 4;
+			if (VerQueryValue(m_pVerData, "\\", (LPVOID*) &m_pffi, &nLen)) {
+				if (VerQueryValue(m_pVerData, "\\VarFileInfo\\Translation", (LPVOID*) &m_pTranslations, &nLen) &&
+					nLen > 3) {
+					m_nTranslations = nLen / 4;
 					m_wLangID = m_pTranslations[0].m_wLangID;
 					m_wCharset = m_pTranslations[0].m_wCodePage;
 				}

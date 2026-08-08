@@ -25,8 +25,11 @@ public:
 		GEOMETRY_NONE = 3,
 	};
 
+protected:
 	virtual void onSetSize(); // vtable+0x00
-	virtual ~Geometry() {}    // vtable+0x04
+
+public:
+	virtual ~Geometry() {} // vtable+0x04
 
 	static Geometry* nullGeometry();
 

@@ -1,6 +1,7 @@
 #include "v8datamodel/PVInstance.h"
 
 #include "reflection/property.h"
+#include "v8xml/XmlElement.h"
 
 namespace RBX {
 
@@ -9,6 +10,15 @@ static Reflection::PropDescriptor<PVInstance, bool> prop_ControllerFlagShown(
 	"Appearance",
 	&RBX::PVInstance::getShowControllerFlag,
 	&RBX::PVInstance::setShowControllerFlag
+);
+
+const char sPVInstance[] = "PVInstance";
+
+const Reflection::EnumPropDescriptor<PVInstance, Controller::ControllerType> PVInstance::prop_ControllerType(
+	"Controller",
+	"Behavior",
+	&RBX::PVInstance::getControllerType,
+	&RBX::PVInstance::setControllerType
 );
 
 unsigned int PVInstance::topHashCode() const
@@ -23,23 +33,59 @@ unsigned int PVInstance::childHashCode() const
 	return 0;
 }
 
-// STUB: WEBSERVICE 0x1005a7f0
+// FUNCTION: WEBSERVICE 0x1005a7f0
 bool PVInstance::isControllable() const
 {
-	STUB(0x1005a7f0);
-	return false;
+	return IsControllable;
 }
 
-// STUB: WEBSERVICE 0x10099100
+// FUNCTION: WEBSERVICE 0x1005a830
+bool PVInstance::isTopLevelPVInstance() const
+{
+	return dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent();
+}
+
+// FUNCTION: WEBSERVICE 0x100990a0
+Controller::ControllerType PVInstance::getControllerType() const
+{
+	return controllerType;
+}
+
+// FUNCTION: WEBSERVICE 0x10099100
 void PVInstance::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
-	STUB(0x10099100);
+	if (propertyElement->getTag().name.compare("Feature") == 0) {
+		const RBX::Name* name = NULL;
+
+		const XmlAttribute* attribute = propertyElement->findAttribute(name_name);
+
+		if (attribute != NULL) {
+			attribute->getValue(name);
+		}
+
+		if (name->name.compare("Part") == 0) {
+			readProperties(propertyElement, binder);
+			return;
+		}
+
+		if (name->name.compare("Item") == 0) {
+			readProperties(propertyElement, binder);
+			return;
+		}
+	}
+
+	Instance::readProperty(propertyElement, binder);
 }
 
-// STUB: WEBSERVICE 0x100991c0
-void PVInstance::onChildAdded(Instance* child)
+// FUNCTION: WEBSERVICE 0x100991c0
+void PVInstance::onChildAdded(Instance* instance)
 {
-	STUB(0x100991c0);
+	PVInstance* pvInstance = dynamic_cast<PVInstance*>(instance);
+
+	if (pvInstance != NULL) {
+		pvInstance->onChildControllerChanged();
+		pvInstance->onParentControllerChanged();
+	}
 }
 
 void PVInstance::onChildRemoving(Instance* child)
@@ -47,40 +93,79 @@ void PVInstance::onChildRemoving(Instance* child)
 	STUB(0x100991c1);
 }
 
-// STUB: WEBSERVICE 0x100992c0
+// FUNCTION: WEBSERVICE 0x100992c0
 void PVInstance::onChildControllerChanged()
 {
-	STUB(0x100992c0);
+	TopPVController.setDirty();
+	IsControllable.setDirty();
+	IsTopFlag.setDirty();
+
+	PVInstance* pvInstance = dynamic_cast<PVInstance*>(getParent());
+
+	if (pvInstance != NULL) {
+		pvInstance->onChildControllerChanged();
+	}
 }
 
-// STUB: WEBSERVICE 0x10099300
+// FUNCTION: WEBSERVICE 0x10099300
 void PVInstance::onDescendentAdded(Instance* instance)
 {
-	STUB(0x10099300);
+	Instance::onDescendentAdded(instance);
+
+	TopPVController.setDirty();
+	IsControllable.setDirty();
+	IsTopFlag.setDirty();
 }
 
-// STUB: WEBSERVICE 0x10099330
+// FUNCTION: WEBSERVICE 0x10099330
 void PVInstance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 {
-	STUB(0x10099330);
+	TopPVController.setDirty();
+	IsControllable.setDirty();
+	IsTopFlag.setDirty();
+
+	Instance::onDescendentRemoving(instance);
 }
 
-// STUB: WEBSERVICE 0x10099350
+// FUNCTION: WEBSERVICE 0x10099350
 void PVInstance::onExtentsChanged() const
 {
-	STUB(0x10099350);
+	const PVInstance* pvInstance = dynamic_cast<const PVInstance*>(getParent());
+
+	if (pvInstance != NULL) {
+		pvInstance->onExtentsChanged();
+	}
 }
 
-// STUB: WEBSERVICE 0x10099450
+// FUNCTION: WEBSERVICE 0x10099450
 void PVInstance::onParentControllerChanged()
 {
-	STUB(0x10099450);
+	TopPVController.setDirty();
+	IsControllable.setDirty();
+	IsTopFlag.setDirty();
+
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		Instance* child = (*getChildren().read())[i].get();
+		PVInstance* pvInstance = dynamic_cast<PVInstance*>(child);
+
+		if (pvInstance != NULL) {
+			pvInstance->onParentControllerChanged();
+		}
+	}
 }
 
-// STUB: WEBSERVICE 0x100994d0
+// FUNCTION: WEBSERVICE 0x100994d0
 bool PVInstance::computeIsControllable() const
 {
-	STUB(0x100994d0);
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		Instance* child = (*getChildren().read())[i].get();
+		IControllable* controllable = dynamic_cast<IControllable*>(child);
+
+		if (controllable != NULL && controllable->isControllable()) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -96,16 +181,24 @@ Controller* PVInstance::getTopPVController() const
 	return NullController::getStaticNullController();
 }
 
-// STUB: WEBSERVICE 0x10099870
+// FUNCTION: WEBSERVICE 0x10099870
 PVInstance::~PVInstance()
 {
-	STUB(0x10099870);
 }
 
-// STUB: WEBSERVICE 0x10099910
+// FUNCTION: WEBSERVICE 0x10099910
 bool PVInstance::computeIsTopFlag() const
 {
-	STUB(0x10099910);
+	if (IsControllable && controllerType != Controller::NO_CONTROLLER) {
+		if (isTopLevelPVInstance()) {
+			return true;
+		}
+
+		const PVInstance* parentPV = static_cast<const PVInstance*>(getParent());
+
+		return parentPV->getTopPVController()->getControllerType() == Controller::NO_CONTROLLER;
+	}
+
 	return false;
 }
 
@@ -118,10 +211,24 @@ G3D::ReferenceCountedPointer<Controller> PVInstance::computeTopPVController() co
 
 // STUB: WEBSERVICE 0x1009a3b0
 PVInstance::PVInstance(const char* name)
-	: Instance(name), IsControllable(this, &PVInstance::computeIsControllable),
-	  IsTopFlag(this, &PVInstance::computeIsTopFlag), TopPVController(this, &PVInstance::computeTopPVController),
-	  controllerType(Controller::NO_CONTROLLER), showControllerFlag(true)
+	: Reflection::Described<PVInstance, sPVInstance, Instance>(name),
+	  IsControllable(this, &PVInstance::computeIsControllable), IsTopFlag(this, &PVInstance::computeIsTopFlag),
+	  TopPVController(this, &PVInstance::computeTopPVController), controllerType(Controller::NO_CONTROLLER),
+	  showControllerFlag(true)
 {
+}
+
+// FUNCTION: WEBSERVICE 0x1009a4a0
+void PVInstance::setControllerType(Controller::ControllerType _control)
+{
+	if (controllerType != _control) {
+		controllerType = _control;
+
+		onChildControllerChanged();
+		onParentControllerChanged();
+
+		raisePropertyChanged(prop_ControllerType);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1009a4e0

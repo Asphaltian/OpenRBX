@@ -134,10 +134,14 @@ DECOMP_SIZE_ASSERT(GuiRoot, 0x10c)
 class TopMenuBar : public GuiItem
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100c7690
+	TopMenuBar() { init(); }
+
 	virtual GuiResponse process(const GuiEvent& event);
 	virtual void render2d(Adorn* adorn);
 	virtual G3D::Vector2 getSize() const;
-	virtual bool isVisible() const;
+	// FUNCTION: WEBSERVICE 0x100c72f0
+	virtual bool isVisible() const { return visible; }
 
 	void setVisible(bool value) { visible = value; }
 
@@ -158,6 +162,22 @@ DECOMP_SIZE_ASSERT(TopMenuBar, 0x124)
 class RelativePanel : public TopMenuBar
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100c7740
+	RelativePanel()
+	{
+		offset.x = 0;
+		offset.y = 0;
+
+		Layout layout;
+		layout.xLocation = Rect::LEFT;
+		layout.yLocation = Rect::TOP;
+		layout.offset.x = 0;
+		layout.offset.y = 0;
+		layout.layoutStyle = Layout::HORIZONTAL;
+		layout.backdropColor = G3D::Color4::clear();
+		init(layout);
+	}
+
 	virtual G3D::Vector2 getPosition() const;
 
 protected:

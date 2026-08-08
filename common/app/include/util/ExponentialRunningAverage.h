@@ -14,7 +14,7 @@ public:
 
 	void reset();
 	float pushAndGetAverage(float value);
-	float getAverage() const;
+	float getAverage();
 
 private:
 	float weight; // 0x00
@@ -28,7 +28,7 @@ public:
 
 	void reset();
 	Vector3 pushAndGetAverage(Vector3 value);
-	Vector3 getAverage() const;
+	Vector3 getAverage();
 
 private:
 	float weight; // 0x00

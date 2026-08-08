@@ -22,7 +22,7 @@ public:
 
 	const CoordinateFrame& getChildInParent() const;
 
-	Body* getBody() { return body; }
+	Body* getBody() const { return body; }
 
 protected:
 	friend class Body;

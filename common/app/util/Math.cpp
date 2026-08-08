@@ -11,7 +11,7 @@ namespace RBX {
 
 static float rotationStep()
 {
-	static const float step = static_cast<float>(2.0 * G3D::pi() / 256.0);
+	static const float step = static_cast<float>(G3D::twoPi() / 256.0);
 	return step;
 }
 
@@ -22,11 +22,11 @@ bool Math::isDenormal(float f)
 	return (bits & 0x7f800000) == 0 && (bits & 0x7fffff) != 0;
 }
 
-// STUB: WEBSERVICE 0x100de880
+// FUNCTION: WEBSERVICE 0x100de880
 bool Math::isNanInfDenorm(float f)
 {
-	return f == std::numeric_limits<float>::infinity() || -std::numeric_limits<float>::infinity() == f ||
-		   std::numeric_limits<float>::quiet_NaN() == f || std::numeric_limits<float>::signaling_NaN() == f ||
+	return f == std::numeric_limits<float>::infinity() || f == -std::numeric_limits<float>::infinity() ||
+		   f == std::numeric_limits<float>::quiet_NaN() || f == std::numeric_limits<float>::signaling_NaN() ||
 		   isDenormal(f);
 }
 
@@ -62,17 +62,22 @@ bool Math::legalCameraCoord(const CoordinateFrame& c)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			if (c.rotation[i][j] <= -1.2f) {
+			const float value = c.rotation[i][j];
+
+			if (value <= -1.2f) {
 				return false;
 			}
-			if (c.rotation[i][j] >= 1.2f) {
+			if (value >= 1.2f) {
 				return false;
 			}
 		}
-		if (c.translation[i] <= -1000000.0f) {
+
+		const float value = c.translation[i];
+
+		if (value <= -1000000.0f) {
 			return false;
 		}
-		if (c.translation[i] >= 1000000.0f) {
+		if (value >= 1000000.0f) {
 			return false;
 		}
 	}
@@ -80,7 +85,7 @@ bool Math::legalCameraCoord(const CoordinateFrame& c)
 	return true;
 }
 
-// STUB: WEBSERVICE 0x100dea30
+// FUNCTION: WEBSERVICE 0x100dea30
 float Math::rotationFromByte(unsigned char byteAngle)
 {
 	const float value = byteAngle;
@@ -95,10 +100,17 @@ Matrix3 Math::getIWorldAtPoint(const Vector3& cofmPos, const Vector3& worldPos, 
 	const float y = worldPos.y - cofmPos.y;
 	const float z = worldPos.z - cofmPos.z;
 
-	const Matrix3
-		offset(z * z + y * y, -(y * x), -(z * x), -(y * x), z * z + x * x, -(z * y), -(z * x), -(z * y), y * y + x * x);
-
-	return iWorldAtCofm + mass * offset;
+	return iWorldAtCofm + mass * Matrix3(
+									 z * z + y * y,
+									 -(y * x),
+									 -(z * x),
+									 -(y * x),
+									 z * z + x * x,
+									 -(z * y),
+									 -(z * x),
+									 -(z * y),
+									 y * y + x * x
+								 );
 }
 
 // FUNCTION: WEBSERVICE 0x100deb30
@@ -327,24 +339,78 @@ bool Math::fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon)
 	return true;
 }
 
-// STUB: WEBSERVICE 0x100df270
+// FUNCTION: WEBSERVICE 0x100df270
 bool Math::fuzzyEq(const CoordinateFrame& c0, const CoordinateFrame& c1, float epsT, float epsR)
 {
 	if (!fuzzyEq(c0.translation, c1.translation, epsT)) {
 		return false;
 	}
 
-	return fuzzyEq(c0.rotation, c1.rotation, epsR);
+	return fuzzyEq(c0.rotation, c1.rotation, epsR) ? true : false;
 }
 
 // STUB: WEBSERVICE 0x100df2c0
 Matrix3 Math::alignAxesClosest(const Matrix3& align, const Matrix3& target)
 {
-	STUB(0x100df2c0);
-	return align;
+	float dots[3][3];
+
+	float tBest = 0.0f;
+	int aBest = -1;
+	int best = -1;
+
+	for (int a = 0; a < 3; ++a) {
+		Vector3 aAxis = align.getColumn(a);
+
+		for (int i = 0; i < 3; ++i) {
+			Vector3 tAxis = target.getColumn(i);
+
+			float t = tAxis.dot(aAxis);
+
+			dots[a][i] = t;
+
+			if (fabs(t) > fabs(tBest)) {
+				best = i;
+				aBest = a;
+				tBest = t;
+			}
+		}
+	}
+
+	Vector3 bestV = align.getColumn(aBest) * Math::sign(tBest);
+
+	float tSecond = 0.0f;
+	int aSecond = -1;
+	int second = -1;
+
+	for (int a = 0; a < 3; ++a) {
+		if (a != aBest) {
+			for (int i = 0; i < 3; ++i) {
+				if (i != best && fabs(dots[a][i]) > fabs(tSecond)) {
+					tSecond = dots[a][i];
+					second = i;
+					aSecond = a;
+				}
+			}
+		}
+	}
+
+	Vector3 secondV = align.getColumn(aSecond) * Math::sign(tSecond);
+
+	int aThird = (3 - aSecond) - aBest;
+	int third = (3 - second) - best;
+
+	Vector3 thirdV = align.getColumn(aThird) * Math::sign(dots[aThird][third]);
+
+	Matrix3 answer;
+
+	answer.setColumn(best, bestV);
+	answer.setColumn(second, secondV);
+	answer.setColumn(third, thirdV);
+
+	return answer;
 }
 
-// STUB: WEBSERVICE 0x100df530
+// FUNCTION: WEBSERVICE 0x100df530
 NormalId Math::getClosestObjectNormalId(const Vector3& worldV, const Matrix3& objectR)
 {
 	const Vector3 objectNormal = worldV * objectR;
@@ -357,19 +423,21 @@ NormalId Math::getClosestObjectNormalId(const Vector3& worldV, const Matrix3& ob
 		if (x > z) {
 			return objectNormal.x > 0.0f ? NORM_X : NORM_X_NEG;
 		}
+
+		return objectNormal.z > 0.0f ? NORM_Z : NORM_Z_NEG;
 	}
-	else if (y > z) {
+
+	if (y > z) {
 		return objectNormal.y > 0.0f ? NORM_Y : NORM_Y_NEG;
 	}
 
 	return objectNormal.z > 0.0f ? NORM_Z : NORM_Z_NEG;
 }
 
-// STUB: WEBSERVICE 0x100df600
+// FUNCTION: WEBSERVICE 0x100df600
 Vector3 Math::vector3Abs(const Vector3& v)
 {
-	STUB(0x100df600);
-	return Vector3::zero();
+	return Vector3(fabsf(v.x), fabsf(v.y), fabsf(v.z));
 }
 
 // FUNCTION: WEBSERVICE 0x100df620
@@ -432,6 +500,9 @@ const Matrix3& Math::getAxisRotationMatrix(int face)
 	static const Matrix3 z_neg = z;
 
 	switch (face) {
+	case NORM_X:
+	case NORM_X_NEG:
+		break;
 	case NORM_Y:
 		return y;
 	case NORM_Z:
@@ -457,12 +528,15 @@ CoordinateFrame Math::getFocusSpace(const CoordinateFrame& focus)
 	return answer;
 }
 
-// STUB: WEBSERVICE 0x100dfaf0
-unsigned char rotationToByteBase(float rotation)
+// FUNCTION: WEBSERVICE 0x100dfaf0
+unsigned char rotationToByteBase(float angle)
 {
-	const int index = G3D::iRound((rotation + 3.14159274f) / rotationStep());
+	const float fAngle = (angle + 3.14159274f) / rotationStep();
+	int iAngle = G3D::iRound(fAngle);
 
-	return static_cast<unsigned char>(index < 1 ? 0 : (index > 254 ? 255 : index));
+	iAngle = std::max(0, iAngle);
+
+	return static_cast<unsigned char>(std::min(255, iAngle));
 }
 
 // FUNCTION: WEBSERVICE 0x100dfb70
@@ -471,14 +545,12 @@ unsigned char Math::rotationToByte(float angle)
 	return rotationToByteBase(angle);
 }
 
-// STUB: WEBSERVICE 0x100dfb90
+// FUNCTION: WEBSERVICE 0x100dfb90
 Vector3 Math::toGrid(const Vector3& v, const Vector3& grid)
 {
-	return Vector3(
-		grid.x * G3D::iRound(v.x / grid.x),
-		grid.y * G3D::iRound(v.y / grid.y),
-		grid.z * G3D::iRound(v.z / grid.z)
-	);
+	const Vector3 units = v / grid;
+
+	return grid * iRoundVector3(units);
 }
 
 // FUNCTION: WEBSERVICE 0x100dfc10
@@ -498,12 +570,10 @@ CoordinateFrame Math::snapToGrid(const CoordinateFrame& snap, float grid)
 	return CoordinateFrame(snapToAxes(snap.rotation), translation);
 }
 
-// STUB: WEBSERVICE 0x100dfcc0
+// FUNCTION: WEBSERVICE 0x100dfcc0
 CoordinateFrame Math::snapToGrid(const CoordinateFrame& snap, const Vector3& grid)
 {
-	const Vector3 translation = toGrid(snap.translation, grid);
-
-	return CoordinateFrame(snapToAxes(snap.rotation), translation);
+	return CoordinateFrame(snapToAxes(snap.rotation), toGrid(snap.translation, grid));
 }
 
 // STUB: WEBSERVICE 0x100dfd20
@@ -518,13 +588,16 @@ bool Math::fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float radToler
 	for (int i = 0; i < 3; ++i) {
 		const Vector3 a0 = m0.getColumn(i);
 
-		for (int j = 0; j < 3; ++j) {
-			if (a1[j].cross(a0).magnitude() < radTolerance) {
+		int j;
+
+		for (j = 0; j < 3; ++j) {
+			if (a0.cross(a1[j]).magnitude() < radTolerance) {
 				break;
 			}
-			if (j == 2) {
-				return false;
-			}
+		}
+
+		if (j == 3) {
+			return false;
 		}
 	}
 
@@ -568,13 +641,16 @@ float Math::maxAxisLength(const Vector3& v)
 	return std::max(answer[0], std::max(answer[1], answer[2]));
 }
 
-// STUB: WEBSERVICE 0x100dfef0
+// FUNCTION: WEBSERVICE 0x100dfef0
 bool Math::intersectRayPlane(const Ray& ray, const Plane& plane, Vector3& hit)
 {
-	const float line = plane.normal().dot(ray.direction);
+	const float dotProd = ray.direction.dot(plane.normal());
 
-	if (plane.halfSpaceContains(ray.origin) ? line < 0.0f : line > 0.0f) {
-		hit = G3D::Line::fromPointAndDirection(ray.origin, ray.direction).intersection(plane);
+	if (plane.halfSpaceContains(ray.origin) ? dotProd < 0.0f : dotProd > 0.0f) {
+		const G3D::Line line = G3D::Line::fromPointAndDirection(ray.origin, ray.direction);
+
+		hit = line.intersection(plane);
+
 		return true;
 	}
 

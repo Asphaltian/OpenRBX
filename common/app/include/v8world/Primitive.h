@@ -247,7 +247,7 @@ public:
 		return surfaceData[normalId] != NULL ? *surfaceData[normalId] : SurfaceData::empty();
 	}
 
-	Controller* getController() const { return controller; }
+	Controller* getController() { return controller; }
 
 	CoordinateFrame getGridCorner() const;
 	void setGridCorner(const CoordinateFrame& corner);
@@ -267,17 +267,17 @@ public:
 	virtual float getRadius() const { return geometry->getRadius(); } // vtable+0x0c
 
 private:
-	RigidJoint* getFirstRigidAt(Edge* edge) const;
+	RigidJoint* getFirstRigidAt(Edge* edge);
 
 public:
 	Edge* getFirstEdge() const;
 	Edge* getNextEdge(Edge* edge) const;
 	Joint* getFirstJoint() const;
 	Joint* getNextJoint(Joint* joint) const;
-	Contact* getFirstContact() const;
-	Contact* getNextContact(Contact* contact) const;
-	RigidJoint* getFirstRigid() const;
-	RigidJoint* getNextRigid(RigidJoint* joint) const;
+	Contact* getFirstContact();
+	Contact* getNextContact(Contact* contact);
+	RigidJoint* getFirstRigid();
+	RigidJoint* getNextRigid(RigidJoint* joint);
 
 	static Joint* getJoint(Primitive* p0, Primitive* p1);
 	static Contact* getContact(Primitive* p0, Primitive* p1);

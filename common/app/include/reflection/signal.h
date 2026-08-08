@@ -26,12 +26,12 @@ class SignalSource;
 class SignalInstance : public boost::noncopyable
 {
 public:
-	SignalSource* getSource() const { return source; }
+	SignalSource* getSource() { return source; }
+
+	virtual ~SignalInstance(); // vtable+0x00
 
 protected:
 	SignalInstance(SignalSource* source, const SignalDescriptor& descriptor) : source(source), descriptor(descriptor) {}
-
-	virtual ~SignalInstance(); // vtable+0x00
 
 	SignalSource* source;               // 0x04
 	const SignalDescriptor& descriptor; // 0x08
@@ -72,11 +72,11 @@ DECOMP_SIZE_ASSERT(GenericSlotWrapper, 0x04)
 class __declspec(novtable) SignalDescriptor : public MemberDescriptor
 {
 public:
-	SignalInstance* findSignalInstance(const SignalSource* source) const;
-
 	void (*signalCreatedHook)(SignalSource*); // 0x10
 
 protected:
+	SignalInstance* findSignalInstance(const SignalSource* source) const;
+
 	SignalDescriptor(ClassDescriptor& classDescriptor, const char* name);
 
 	SignatureDescriptor signature; // 0x14

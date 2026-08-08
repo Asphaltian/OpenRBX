@@ -24,9 +24,9 @@ protected:
 
 	void addToMultiJoint(Point* point0, Point* point1, Connector* connector);
 
-	Point* getPoint(int index) const;
+	Point* getPoint(int index);
 
-	Connector* getConnector(int index) const { return connector[index]; }
+	Connector* getConnector(int index) { return connector[index]; }
 
 	float getJointK();
 

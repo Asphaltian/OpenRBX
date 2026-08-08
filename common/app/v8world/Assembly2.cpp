@@ -27,33 +27,33 @@ SleepInfo::~SleepInfo()
 }
 
 // FUNCTION: WEBSERVICE 0x101029c0
-PrimIterator Assembly::assemblyPrimBegin()
+PrimIterator Assembly::assemblyPrimBegin() const
 {
-	return PrimIterator(rootPrimitive, IN_ASSEMBLY);
+	return PrimIterator::begin(rootPrimitive, PrimIterator::IN_ASSEMBLY);
 }
 
 // FUNCTION: WEBSERVICE 0x101029e0
-PrimIterator Assembly::assemblyPrimEnd()
+PrimIterator Assembly::assemblyPrimEnd() const
 {
-	return PrimIterator(NULL, IN_ASSEMBLY);
+	return PrimIterator::end(PrimIterator::IN_ASSEMBLY);
 }
 
 // FUNCTION: WEBSERVICE 0x10102a00
-EdgeIterator Assembly::externalEdgeBegin()
+EdgeIterator Assembly::externalEdgeBegin() const
 {
 	return EdgeIterator::begin(rootPrimitive);
 }
 
 // FUNCTION: WEBSERVICE 0x10102a20
-EdgeIterator Assembly::externalEdgeEnd()
+EdgeIterator Assembly::externalEdgeEnd() const
 {
 	return EdgeIterator::end();
 }
 
 // FUNCTION: WEBSERVICE 0x10102a60
-Sim::AssemblyState Assembly::getSleepStatus()
+Sim::AssemblyState Assembly::getSleepStatus() const
 {
-	Assembly* root = this;
+	const Assembly* root = this;
 
 	while (root->parent != NULL) {
 		root = root->parent;
@@ -139,9 +139,9 @@ const Primitive* Assembly::getAssemblyPrimitiveConst() const
 }
 
 // FUNCTION: WEBSERVICE 0x10102b80
-bool Assembly::getAnchored()
+bool Assembly::getAnchored() const
 {
-	return getRootAssembly()->rootPrimitive->getAnchorObject() != NULL;
+	return getRootAssemblyConst()->rootPrimitive->getAnchorObject() != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x10102ba0
@@ -153,7 +153,7 @@ Mechanism* Assembly::getMechanism()
 // FUNCTION: WEBSERVICE 0x10102bb0
 bool Assembly::computeCanSleep() const
 {
-	for (PrimIterator it(rootPrimitive, IN_ASSEMBLY); *it != NULL; ++it) {
+	for (PrimIterator it = PrimIterator::begin(rootPrimitive, PrimIterator::IN_ASSEMBLY); *it != NULL; ++it) {
 		if (!(*it)->getCanSleep()) {
 			return false;
 		}
@@ -165,13 +165,13 @@ bool Assembly::computeCanSleep() const
 // FUNCTION: WEBSERVICE 0x10102bf0
 void Assembly::notifyMoved()
 {
-	for (PrimIterator it(rootPrimitive, IN_ASSEMBLY); *it != NULL; ++it) {
+	for (PrimIterator it = PrimIterator::begin(rootPrimitive, PrimIterator::IN_ASSEMBLY); *it != NULL; ++it) {
 		(*it)->getOwner()->notifyMoved();
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x10102c20
-Assembly* Assembly::otherAssembly(Edge* edge)
+Assembly* Assembly::otherAssembly(Edge* edge) const
 {
 	Assembly* assembly0 = edge->getPrimitive(0)->getAssembly();
 	Assembly* assembly1 = edge->getPrimitive(1)->getAssembly();
@@ -204,7 +204,7 @@ void Assembly::addRigidChild(Primitive* parent, RigidJoint* r, Primitive* child)
 }
 
 // FUNCTION: WEBSERVICE 0x10102de0
-unsigned int Assembly::numMotors()
+unsigned int Assembly::numMotors() const
 {
 	unsigned int answer = 0;
 
@@ -220,7 +220,7 @@ unsigned int Assembly::numMotors()
 }
 
 // FUNCTION: WEBSERVICE 0x10102e60
-MotorJoint* Assembly::getMotorImp(unsigned int& motorId)
+const MotorJoint* Assembly::getMotorImp(unsigned int& motorId) const
 {
 	Joint* joint = getJointToParent(rootPrimitive);
 
@@ -233,7 +233,7 @@ MotorJoint* Assembly::getMotorImp(unsigned int& motorId)
 	}
 
 	for (unsigned int i = 0; i < children.size(); i++) {
-		MotorJoint* motor = children[i]->getMotorImp(motorId);
+		const MotorJoint* motor = children[i]->getMotorImp(motorId);
 
 		if (motor != NULL) {
 			return motor;
@@ -248,7 +248,7 @@ MotorJoint* Assembly::getMotor(unsigned int index)
 {
 	unsigned int i = index;
 
-	return getMotorImp(i);
+	return const_cast<MotorJoint*>(getMotorImp(i));
 }
 
 // FUNCTION: WEBSERVICE 0x10102f20
@@ -258,7 +258,7 @@ void Assembly::stepUi(int uiStepId)
 
 	for (unsigned int i = 0; i < count; i++) {
 		unsigned int index = i;
-		getMotorImp(index)->stepUi(uiStepId);
+		const_cast<MotorJoint*>(getMotorImp(index))->stepUi(uiStepId);
 	}
 }
 
@@ -268,7 +268,7 @@ float Assembly::computeMaxRadius() const
 	float answer = 0;
 	Vector3 offsetCenter = rootPrimitive->getBody()->getBranchCofmPos();
 
-	for (PrimIterator it(rootPrimitive, IN_ASSEMBLY); *it != NULL; ++it) {
+	for (PrimIterator it = PrimIterator::begin(rootPrimitive, PrimIterator::IN_ASSEMBLY); *it != NULL; ++it) {
 		Primitive* primitive = *it;
 
 		Vector3 offset = primitive->getBody()->getCoordinateFrame().translation - offsetCenter;
@@ -304,7 +304,7 @@ void Assembly::addChild(Assembly* child)
 // FUNCTION: WEBSERVICE 0x101037b0
 Assembly::~Assembly()
 {
-	for (PrimIterator it(rootPrimitive, IN_CLUMP); *it != NULL; ++it) {
+	for (PrimIterator it = PrimIterator::begin(rootPrimitive, PrimIterator::IN_CLUMP); *it != NULL; ++it) {
 		Primitive* primitive = *it;
 
 		primitive->setClump(NULL);

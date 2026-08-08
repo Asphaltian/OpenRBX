@@ -29,7 +29,7 @@ public:
 	}
 
 	virtual void computeForce(float dt, bool throttling) = 0; // vtable+0x04
-	virtual bool canThrottle();                               // vtable+0x08
+	virtual bool canThrottle() const;                         // vtable+0x08
 	virtual bool getBroken();                                 // vtable+0x0c
 	virtual float potentialEnergy();                          // vtable+0x10
 
@@ -53,7 +53,7 @@ public:
 
 	virtual void computeForce(float dt, bool throttling); // vtable+0x04
 
-	// SYNTHETIC: WEBSERVICE 0x100a0720
+	// STUB: WEBSERVICE 0x100a0720
 	// RBX::RotateConnector::`scalar deleting destructor'
 
 private:
@@ -204,7 +204,7 @@ public:
 	}
 
 	virtual void computeForce(float dt, bool throttling); // vtable+0x04
-	virtual bool canThrottle();                           // vtable+0x08
+	virtual bool canThrottle() const;                     // vtable+0x08
 
 protected:
 	GeoPair geoPair;        // 0x08

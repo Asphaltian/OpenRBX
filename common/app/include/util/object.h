@@ -45,7 +45,7 @@ public:
 	class Deleter
 	{
 	public:
-		void operator()(T* instance) const
+		void operator()(T* instance)
 		{
 			T::predelete(instance);
 			delete instance;
@@ -239,11 +239,11 @@ public:
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::~FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>
 	// STUB: WEBSERVICE 0x10068aa0
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript><char const *>
-	// TEMPLATE: WEBSERVICE 0x10068b10
+	// STUB: WEBSERVICE 0x10068b10
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::`scalar deleting destructor'
 	// STUB: WEBSERVICE 0x10068e10
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::~FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
-	// TEMPLATE: WEBSERVICE 0x10068e80
+	// STUB: WEBSERVICE 0x10068e80
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10069070
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::getClassName
@@ -355,7 +355,7 @@ public:
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// TEMPLATE: WEBSERVICE 0x100a0a70
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
-	// TEMPLATE: WEBSERVICE 0x100a0b40
+	// STUB: WEBSERVICE 0x100a0b40
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100a1bb0
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::getClassName
@@ -456,7 +456,7 @@ public:
 	// STUB: WEBSERVICE 0x100da8e0
 	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100dabc0
-	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::getClassName
+	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::className
 	// FUNCTION: WEBSERVICE 0x100db590
 	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::~FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>
 	// FUNCTION: WEBSERVICE 0x100db5e0
@@ -678,13 +678,6 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1012cef0
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::getClassName
 	// clang-format on
-	FactoryProduct() {}
-
-	template <class U>
-	FactoryProduct(U* joint) : Base(joint)
-	{
-	}
-
 	const Creator& getCreator() const { return creator; }
 
 	static const Name& className() { return Name::declare<sName>(); }
@@ -692,6 +685,13 @@ public:
 	virtual const Name& getClassName() const { return className(); }
 
 protected:
+	FactoryProduct() {}
+
+	template <class U>
+	FactoryProduct(U* joint) : Base(joint)
+	{
+	}
+
 	virtual ~FactoryProduct() {} // vtable+0x00
 
 private:

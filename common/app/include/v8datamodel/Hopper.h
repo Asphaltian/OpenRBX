@@ -30,6 +30,21 @@ private:
 
 DECOMP_SIZE_ASSERT(BackpackItem, 0x168)
 
+extern const char sHopper[];
+
+// SIZE 0x130
+class Hopper : public RelativePanel
+{
+public:
+	Hopper();
+
+protected:
+	virtual bool askAddChild(const Instance* instance) const;
+	virtual bool askSetParent(const Instance* instance) const;
+};
+
+DECOMP_SIZE_ASSERT(Hopper, 0x130)
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_HOPPER_H

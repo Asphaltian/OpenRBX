@@ -54,7 +54,7 @@ public:
 	virtual bool hasIntelligence() const = 0;             // vtable+0x0c
 	virtual bool isUserController() const = 0;            // vtable+0x10
 
-	bool isNullController() const;
+	bool isNullController();
 
 	static bool isControllableInput(InputType inputType);
 	static Color3 controllerTypeToColor(ControllerType controllerType);

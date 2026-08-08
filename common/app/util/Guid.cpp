@@ -142,19 +142,19 @@ static void initLocalScope()
 }
 
 // FUNCTION: WEBSERVICE 0x1003d6e0
-const Name* Guid::getLocalScope()
+const Name& Guid::getLocalScope()
 {
 	static boost::once_flag flag = BOOST_ONCE_INIT;
 
 	boost::call_once(initLocalScope, flag);
 
-	return localScope;
+	return *localScope;
 }
 
 // FUNCTION: WEBSERVICE 0x1003d700
 Guid::Guid()
 {
-	data.scope = getLocalScope();
+	data.scope = &getLocalScope();
 	data.index = InterlockedIncrement(&nextIndex);
 }
 
