@@ -249,11 +249,11 @@ Part PartInstance::computePersistentPart() const
 	return Part();
 }
 
-// STUB: WEBSERVICE 0x1009b780
+// FUNCTION: WEBSERVICE 0x1009b780
 bool PartInstance::shouldRender3dAdorn() const
 {
-	STUB(0x1009b780);
-	return false;
+	return partType == Part::CYLINDER_PART || SurfacesNeedAdorn || highlightSleepParts || highlightAwakeParts ||
+		   showPartCoord || showAnchoredParts || showUnalignedParts || showSpanningTree;
 }
 
 // STUB: WEBSERVICE 0x1009bf50
