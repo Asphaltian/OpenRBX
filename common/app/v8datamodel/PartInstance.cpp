@@ -361,10 +361,10 @@ const CoordinateFrame PartInstance::getLocation() const
 	return primitive->getCoordinateFrame();
 }
 
-// STUB: WEBSERVICE 0x1009d7d0
+// FUNCTION: WEBSERVICE 0x1009d7d0
 void PartInstance::getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives)
 {
-	STUB(0x1009d7d0);
+	primitives.push_back(getPrimitive());
 }
 
 namespace Reflection {
