@@ -16,11 +16,18 @@ bool ModelInstance::askSetParent(const Instance* instance) const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x10059c40
+// FUNCTION: WEBSERVICE 0x10059c40
 float ModelInstance::computeFlagHeight() const
 {
-	STUB(0x10059c40);
-	return 0;
+	float height = 6.0f;
+
+	if (primaryPart != NULL) {
+		float partTop = primaryPart->getExtentsWorld().max().y;
+
+		height = getExtentsWorld().max().y - partTop + 6.0f;
+	}
+
+	return height;
 }
 
 // FUNCTION: WEBSERVICE 0x1005a1a0
