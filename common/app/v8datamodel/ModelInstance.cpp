@@ -141,7 +141,12 @@ bool ModelInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoin
 // STUB: WEBSERVICE 0x1005add0
 bool ModelInstance::shouldRender3dAdorn() const
 {
-	STUB(0x1005add0);
+	const PVInstance* pv = dynamic_cast<const PVInstance*>(getParent());
+
+	if (pv == NULL || getTypedRoot<PVInstance>() == getParent()) {
+		return showModelCoord;
+	}
+
 	return false;
 }
 
