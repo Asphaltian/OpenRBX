@@ -17,7 +17,12 @@ const PropDescriptor<Decal, float> Decal::prop_Specular(
 	&RBX::Decal::setSpecular
 );
 
-const PropDescriptor<Decal, float> Decal::prop_Shiny("Shiny", "Appearance", &RBX::Decal::getShiny, &RBX::Decal::setShiny);
+const PropDescriptor<Decal, float> Decal::prop_Shiny(
+	"Shiny",
+	"Appearance",
+	&RBX::Decal::getShiny,
+	&RBX::Decal::setShiny
+);
 
 const PropDescriptor<Texture, float> Texture::prop_StudsPerTileU(
 	"StudsPerTileU",
