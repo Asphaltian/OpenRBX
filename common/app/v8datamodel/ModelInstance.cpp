@@ -141,7 +141,14 @@ void ModelInstance::legacyTraverseState(const CoordinateFrame& parentState)
 // STUB: WEBSERVICE 0x1005ad40
 bool ModelInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint)
 {
-	STUB(0x1005ad40);
+	for (unsigned int i = 0; i < numChildren(); i++) {
+		PVInstance* pv = dynamic_cast<PVInstance*>(getChild(i));
+
+		if (pv != NULL && pv->hitTest(worldRay, worldHitPoint)) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -163,10 +170,16 @@ void ModelInstance::render3dAdorn(Adorn* adorn)
 	STUB(0x1005ae20);
 }
 
-// STUB: WEBSERVICE 0x1005ae80
+// FUNCTION: WEBSERVICE 0x1005ae80
 void ModelInstance::onCameraNear(float distance)
 {
-	STUB(0x1005ae80);
+	for (unsigned int i = 0; i < numChildren(); i++) {
+		ICameraSubject* subject = dynamic_cast<ICameraSubject*>(getChild(i));
+
+		if (subject != NULL) {
+			subject->onCameraNear(distance);
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x1005b220
