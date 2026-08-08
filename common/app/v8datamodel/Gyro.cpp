@@ -43,10 +43,15 @@ void BodyForce::computeForce(float dt, bool throttling)
 	part->getPrimitive()->getBody()->getRoot()->accumulateForceAtBranchCofm(force);
 }
 
-// STUB: WEBSERVICE 0x100eb240
+// FUNCTION: WEBSERVICE 0x100eb240
 void BodyThrust::computeForce(float dt, bool throttling)
 {
-	STUB(0x100eb240);
+	Body* body = part->getPrimitive()->getBody();
+
+	Vector3 worldForce = body->getPV().position.vectorToWorldSpace(force);
+	Vector3 worldPos = body->getPV().position.pointToWorldSpace(location);
+
+	body->accumulateForce(worldForce, worldPos);
 }
 
 // STUB: WEBSERVICE 0x100ebb10
