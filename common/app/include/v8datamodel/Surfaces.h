@@ -2,6 +2,7 @@
 #define V8DATAMODEL_SURFACES_H
 
 #include "decomp.h"
+#include "util/NormalId.h"
 #include "v8datamodel/Surface.h"
 
 #include <boost/noncopyable.hpp>
@@ -18,6 +19,9 @@ private:
 	Surface Right;  // 0x18
 	Surface Front;  // 0x20
 	Surface Back;   // 0x28
+
+public:
+	const Surface& operator[](NormalId normalId) const;
 };
 
 DECOMP_SIZE_ASSERT(Surfaces, 0x30)

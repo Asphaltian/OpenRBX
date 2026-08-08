@@ -261,6 +261,8 @@ set(OPENRBX_APP_SOURCES
   common/app/v8datamodel/Seat.cpp
   common/app/v8datamodel/Selection.cpp
   common/app/v8datamodel/Stats.cpp
+  common/app/v8datamodel/Surface.cpp
+  common/app/v8datamodel/Surfaces.cpp
   common/app/v8datamodel/Sky.cpp
   common/app/v8datamodel/Teams.cpp
   common/app/v8datamodel/TimerService.cpp

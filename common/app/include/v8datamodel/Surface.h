@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "util/NormalId.h"
+#include "v8world/SurfaceData.h"
 
 namespace RBX {
 
@@ -14,6 +15,9 @@ class Surface
 private:
 	PartInstance* partInstance; // 0x00
 	NormalId surfId;            // 0x04
+
+public:
+	SurfaceType getSurfaceType() const;
 };
 
 DECOMP_SIZE_ASSERT(Surface, 0x8)

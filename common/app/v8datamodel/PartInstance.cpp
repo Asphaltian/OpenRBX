@@ -143,10 +143,18 @@ const PartInstance* PartInstance::fromPrimitiveConst(const Primitive* primitive)
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x1009aef0
+// FUNCTION: WEBSERVICE 0x1009aef0
 bool PartInstance::computeSurfacesNeedAdorn() const
 {
-	STUB(0x1009aef0);
+	for (int i = 0; i < 6; i++) {
+		const Surface& surface = surfaces[(NormalId) i];
+
+		if (surface.getSurfaceType() == ROTATE || surface.getSurfaceType() == ROTATE_P ||
+			surface.getSurfaceType() == ROTATE_V) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
