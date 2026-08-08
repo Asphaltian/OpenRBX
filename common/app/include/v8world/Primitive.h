@@ -173,6 +173,14 @@ public:
 	// RBX::Primitive::`scalar deleting destructor'
 
 	Body* getBody() const { return body; }
+	// FUNCTION: WEBSERVICE 0x1009a860
+	Extents getExtentsWorld() const
+	{
+		const Vector3 corner = geometry->getGridSize() * 0.5f;
+
+		return Extents(-corner, corner).toWorldSpace(getCoordinateFrame());
+	}
+
 	const Geometry* getGeometry() const { return geometry; }
 	Geometry* getGeometry() { return geometry; }
 

@@ -193,11 +193,10 @@ float PartInstance::getElasticity() const
 	return primitive->getElasticity();
 }
 
-// STUB: WEBSERVICE 0x1009b1b0
+// FUNCTION: WEBSERVICE 0x1009b1b0
 Extents PartInstance::getExtentsWorld() const
 {
-	STUB(0x1009b1b0);
-	return Extents();
+	return primitive->getExtentsWorld();
 }
 
 // FUNCTION: WEBSERVICE 0x1009b1d0
