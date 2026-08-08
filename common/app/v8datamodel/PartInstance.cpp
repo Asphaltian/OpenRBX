@@ -164,10 +164,18 @@ void PartInstance::legacyTraverseState(const CoordinateFrame& parentState)
 	STUB(0x1009af50);
 }
 
-// STUB: WEBSERVICE 0x1009af90
+// FUNCTION: WEBSERVICE 0x1009af90
 bool PartInstance::isControllable() const
 {
-	STUB(0x1009af90);
+	for (int i = 0; i < 6; i++) {
+		const Surface& surface = surfaces[(NormalId) i];
+
+		if ((surface.getSurfaceType() == ROTATE_P || surface.getSurfaceType() == ROTATE_V) &&
+			surface.isControllable()) {
+			return true;
+		}
+	}
+
 	return false;
 }
 

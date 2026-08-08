@@ -18,6 +18,8 @@ private:
 
 public:
 	SurfaceType getSurfaceType() const;
+	Controller::InputType getInput() const;
+	bool isControllable() const;
 };
 
 DECOMP_SIZE_ASSERT(Surface, 0x8)
