@@ -168,6 +168,9 @@ public:
 	virtual void legacyTraverseState(const CoordinateFrame& parentState);
 	virtual void onParentControllerChanged();
 
+	static PartInstance* fromPrimitive(Primitive* primitive);
+	static const PartInstance* fromPrimitiveConst(const Primitive* primitive);
+
 	virtual const Primitive* getBiggestPrimitive() const;
 	virtual bool hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint);
 

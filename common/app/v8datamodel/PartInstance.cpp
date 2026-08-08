@@ -115,6 +115,34 @@ bool PartInstance::nonNullInWorkspace(shared_ptr<PartInstance> part)
 	return part.get() != NULL && part->myWorld != NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x1009ae90 FOLDED
+PartInstance* PartInstance::fromPrimitive(Primitive* primitive)
+{
+	if (primitive != NULL) {
+		IMoving* owner = primitive->getOwner();
+
+		if (owner != NULL) {
+			return static_cast<PartInstance*>(owner);
+		}
+	}
+
+	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x1009ae90 FOLDED
+const PartInstance* PartInstance::fromPrimitiveConst(const Primitive* primitive)
+{
+	if (primitive != NULL) {
+		IMoving* owner = primitive->getOwner();
+
+		if (owner != NULL) {
+			return static_cast<const PartInstance*>(owner);
+		}
+	}
+
+	return NULL;
+}
+
 // STUB: WEBSERVICE 0x1009aef0
 bool PartInstance::computeSurfacesNeedAdorn() const
 {
