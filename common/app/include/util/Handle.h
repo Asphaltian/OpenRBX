@@ -17,6 +17,7 @@ public:
 
 	bool empty() const;
 
+	// FUNCTION: WEBSERVICE 0x100484b0 FOLDED
 	boost::shared_ptr<Instance> getTarget() const { return target; }
 
 protected:

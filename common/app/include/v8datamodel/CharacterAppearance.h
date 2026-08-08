@@ -14,7 +14,7 @@ extern const char sShirt[];
 
 extern const char sShirtGraphic[];
 // SIZE 0xf8
-class CharacterAppearance : public Instance
+class __declspec(novtable) CharacterAppearance : public Instance
 {
 };
 

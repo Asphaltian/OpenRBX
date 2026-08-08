@@ -28,7 +28,7 @@ using boost::shared_ptr;
 class World;
 
 // SIZE 0x2ac
-class PartInstance : public PVInstance,
+class PartInstance : public DescribedCreatable<PartInstance, PVInstance, sPart>,
 					 public Notifier<PartInstance, CanAggregateChanged>,
 					 public IMoving,
 					 public IRenderable,
