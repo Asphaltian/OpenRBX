@@ -31,13 +31,31 @@ void BodyMover::onEvent(const RunService* source, Stepped event)
 // STUB: WEBSERVICE 0x100eaf60
 void BodyPosition::computeForce(float dt, bool throttling)
 {
-	STUB(0x100eaf60);
+	Body* body = part->getPrimitive()->getBody();
+
+	Vector3 positionForce = (position - body->getPV().position.translation) * kP;
+
+	Vector3 goalForce = positionForce + body->getPV().velocity.linear * -kD;
+
+	lastForce = goalForce * body->getRoot()->getBranchMass();
+
+	lastForce = lastForce.clamp(-maxForce, maxForce);
+
+	body->getRoot()->accumulateForceAtBranchCofm(lastForce);
 }
 
-// STUB: WEBSERVICE 0x100eb0c0
+// FUNCTION: WEBSERVICE 0x100eb0c0
 void BodyVelocity::computeForce(float dt, bool throttling)
 {
-	STUB(0x100eb0c0);
+	Body* body = part->getPrimitive()->getBody();
+
+	Vector3 goalForce = (velocity - body->getPV().velocity.linear) * kP;
+
+	lastForce = goalForce * body->getRoot()->getBranchMass();
+
+	lastForce = lastForce.clamp(-maxForce, maxForce);
+
+	body->getRoot()->accumulateForceAtBranchCofm(lastForce);
 }
 
 // FUNCTION: WEBSERVICE 0x100eb1e0
