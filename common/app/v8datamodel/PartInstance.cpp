@@ -238,8 +238,19 @@ Extents PartInstance::getExtentsLocal() const
 // STUB: WEBSERVICE 0x1009b610
 Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 {
-	STUB(0x1009b610);
-	return uiSize;
+	Vector3 size =
+		Math::iRoundVector3(Vector3(std::max(1.0f, uiSize.x), std::max(1.0f, uiSize.y), std::max(1.0f, uiSize.z)));
+
+	switch (formFactor) {
+	case BRICK:
+		size.y *= 1.2f;
+		break;
+	case PLATE:
+		size.y *= 0.4f;
+		break;
+	}
+
+	return size;
 }
 
 // STUB: WEBSERVICE 0x1009b6e0
