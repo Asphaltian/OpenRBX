@@ -2,9 +2,15 @@
 #define SCRIPT_SCRIPT_H
 
 #include "decomp.h"
+#include "util/ContentProvider.h"
 #include "v8tree/Instance.h"
 
+#include <boost/shared_ptr.hpp>
+#include <string>
+
 namespace RBX {
+
+class IScriptOwner;
 
 extern char sScript[];
 
@@ -12,8 +18,18 @@ extern char sLocalScript[];
 // SIZE 0x128
 class Script : public DescribedCreatable<Script, Instance, sScript>
 {
+public:
+	// FUNCTION: WEBSERVICE 0x10068960
+	const ContentId& getScriptId() const { return scriptId; }
+
+	// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
+	const std::string* getEmbeddedCode() const { return embeddedSource.get(); }
+
 private:
-	undefined m_unk0x0f8[0x128 - 0x0f8]; // 0x0f8
+	boost::shared_ptr<std::string> embeddedSource; // 0x0f8
+	ContentId scriptId;                            // 0x100
+	bool disabled;                                 // 0x120
+	IScriptOwner* owner;                           // 0x124
 };
 
 DECOMP_SIZE_ASSERT(Script, 0x128)
