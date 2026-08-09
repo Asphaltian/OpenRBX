@@ -739,5 +739,21 @@ template bool Bridge<G3D::CoordinateFrame, 1>::getValue<G3D::CoordinateFrame>(
 
 template void Bridge<G3D::Color3, 1>::on_newindex(G3D::Color3& value, const char* name, lua_State* L);
 
+template int Bridge<G3D::CoordinateFrame, 1>::on_gc(lua_State* L);
+
+template int Bridge<G3D::Vector3, 1>::on_gc(lua_State* L);
+
+template int Bridge<G3D::Color3, 1>::on_gc(lua_State* L);
+
+template int Bridge<RBX::BrickColor, 1>::on_gc(lua_State* L);
+
+template int Bridge<G3D::CoordinateFrame, 1>::on_index(lua_State* L);
+
+template int Bridge<G3D::Vector3, 1>::on_index(lua_State* L);
+
+template int Bridge<G3D::Color3, 1>::on_index(lua_State* L);
+
+template int Bridge<RBX::BrickColor, 1>::on_index(lua_State* L);
+
 } // namespace Lua
 } // namespace RBX

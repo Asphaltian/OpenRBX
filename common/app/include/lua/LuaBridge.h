@@ -125,6 +125,18 @@ void Bridge<T, Tag>::on_newindex(T& value, const char* name, lua_State* L)
 	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
 }
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1005fd30
+// ?on_gc@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x1005fe50
+// ?on_gc@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x1005ff60
+// ?on_gc@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x100600f0
+// ?on_gc@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x10060200
+// ?on_gc@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// clang-format on
 template <class T, int Tag>
 int Bridge<T, Tag>::on_gc(lua_State* L)
 {
@@ -157,8 +169,16 @@ int Bridge<T, Tag>::on_newindex(lua_State* L)
 }
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x1005fda0
+// ?on_index@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x1005fec0
+// ?on_index@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x1005ffe0
 // ?on_index@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x10060160
+// ?on_index@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x10060270
+// ?on_index@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x10060390
 // ?on_index@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHPAUlua_State@@@Z
 // clang-format on
