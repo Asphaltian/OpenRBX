@@ -62,6 +62,8 @@ private:
 // SIZE 0x1
 class CoordinateFrameBridge : public Bridge<G3D::CoordinateFrame, 1>
 {
+	friend class Bridge<G3D::CoordinateFrame, 1>;
+
 public:
 	static void registerClassLibrary(lua_State* L);
 

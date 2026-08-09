@@ -335,12 +335,17 @@ int Bridge<RBX::BrickColor, 1>::on_index(const RBX::BrickColor& value, const cha
 template <>
 const char* Bridge<RBX::BrickColor, 1>::className = "BrickColor";
 
-// STUB: WEBSERVICE 0x100ae950
+// FUNCTION: WEBSERVICE 0x100ae950
 int CoordinateFrameBridge::newCoordinateFrame(lua_State* L)
 {
 	G3D::CoordinateFrame result;
 
-	switch (lua_gettop(L)) {
+	int count = lua_gettop(L);
+
+	switch (count) {
+	case 0:
+		break;
+
 	case 1:
 		result.translation = Vector3Bridge::getObject(L, 1);
 		break;
@@ -356,29 +361,45 @@ int CoordinateFrameBridge::newCoordinateFrame(lua_State* L)
 		}
 		break;
 
-	case 7:
+	case 7: {
 		for (int i = 0; i < 3; i++) {
 			result.translation[i] = lua_tofloat(L, i + 1);
 		}
 
-		result.rotation =
-			G3D::Matrix3(G3D::Quat(lua_tofloat(L, 4), lua_tofloat(L, 5), lua_tofloat(L, 6), lua_tofloat(L, 7)));
+		G3D::Quat quaternion;
+
+		quaternion.x = lua_tofloat(L, 4);
+		quaternion.y = lua_tofloat(L, 5);
+		quaternion.z = lua_tofloat(L, 6);
+		quaternion.w = lua_tofloat(L, 7);
+
+		G3D::Matrix3 rotation(quaternion);
+
+		result.rotation = rotation;
 		break;
+	}
 
 	case 12: {
 		for (int i = 0; i < 3; i++) {
 			result.translation[i] = lua_tofloat(L, i + 1);
 		}
 
+		int index = 4;
+
 		float* element = result.rotation[0];
 
-		for (int index = 4; index < 13; index += 3) {
+		while (index < 13) {
 			for (int c = 0; c < 3; c++) {
 				*element++ = lua_tofloat(L, c + index);
 			}
+
+			index += 3;
 		}
 		break;
 	}
+
+	default:
+		throw std::runtime_error(G3D::format("Invalid number of arguments: %d", count));
 	}
 
 	pushNewObject(L, result);
@@ -605,6 +626,92 @@ int CoordinateFrameBridge::fromAxisAngle(lua_State* L)
 
 template <>
 const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
+
+// FUNCTION: WEBSERVICE 0x100af750
+template <>
+int Bridge<G3D::CoordinateFrame, 1>::on_index(const G3D::CoordinateFrame& value, const char* name, lua_State* L)
+{
+	if (strcmp(name, "p") == 0) {
+		Vector3Bridge::pushVector3(L, value.translation);
+		return 1;
+	}
+
+	if (strcmp(name, "lookVector") == 0) {
+		Vector3Bridge::pushVector3(L, value.getLookVector());
+		return 1;
+	}
+
+	if (strcmp(name, "inverse") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_inverse, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "toWorldSpace") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_toWorldSpace, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "toObjectSpace") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_toObjectSpace, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "pointToWorldSpace") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_pointToWorldSpace, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "pointToObjectSpace") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_pointToObjectSpace, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "vectorToWorldSpace") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_vectorToWorldSpace, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "vectorToObjectSpace") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_vectorToObjectSpace, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "toEulerAnglesXYZ") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_toEulerAnglesXYZ, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "components") == 0) {
+		lua_pushvalue(L, -1);
+		lua_pushcclosure(L, CoordinateFrameBridge::on_components, 1);
+		return 1;
+	}
+
+	if (strcmp(name, "x") == 0) {
+		lua_pushnumber(L, value.translation.x);
+		return 1;
+	}
+
+	if (strcmp(name, "y") == 0) {
+		lua_pushnumber(L, value.translation.y);
+		return 1;
+	}
+
+	if (strcmp(name, "z") == 0) {
+		lua_pushnumber(L, value.translation.z);
+		return 1;
+	}
+
+	throw std::runtime_error(G3D::format("%s is not a valid member", name));
+}
 
 // FUNCTION: WEBSERVICE 0x100afaf0
 int CoordinateFrameBridge::on_mul(lua_State* L)
