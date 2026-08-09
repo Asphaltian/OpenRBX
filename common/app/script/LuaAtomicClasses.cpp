@@ -181,11 +181,15 @@ int Vector3Bridge::newVector3(lua_State* L)
 	return 1;
 }
 
-// STUB: WEBSERVICE 0x100ae160
+// FUNCTION: WEBSERVICE 0x100ae160
 static int lerp(lua_State* L)
 {
-	STUB(0x100ae160);
-	return 0;
+	const G3D::Vector3& value = Vector3Bridge::getObject(L, 1);
+	const G3D::Vector3& other = Vector3Bridge::getObject(L, 2);
+	float alpha = lua_tofloat(L, 3);
+
+	Vector3Bridge::pushNewObject(L, value.lerp(other, alpha));
+	return 1;
 }
 
 // FUNCTION: WEBSERVICE 0x100ae210
@@ -233,6 +237,13 @@ template bool Bridge<G3D::Vector3, 1>::getValue<G3D::Vector3>(lua_State* L, unsi
 template G3D::Vector3* Bridge<G3D::Vector3, 1>::pushNewObject<G3D::Vector3>(lua_State* L, G3D::Vector3 value);
 
 template G3D::Color3* Bridge<G3D::Color3, 1>::pushNewObject<G3D::Color3>(lua_State* L, G3D::Color3 value);
+
+// FUNCTION: WEBSERVICE 0x100ae740
+int BrickColorBridge::randomBrickColor(lua_State* L)
+{
+	pushNewObject(L, RBX::BrickColor::random());
+	return 1;
+}
 
 // FUNCTION: WEBSERVICE 0x100ae790
 template <>

@@ -137,6 +137,8 @@ public:
 
 	static BrickColor closest(G3D::Color3 color);
 
+	static BrickColor random();
+
 	bool operator==(const BrickColor& other) const { return number == other.number; }
 
 	bool operator!=(const BrickColor& other) const { return number != other.number; }

@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "lua/LuaBridge.h"
+#include "v8datamodel/BrickColor.h"
 
 #include <G3D/Color3.h>
 #include <G3D/Vector3.h>
@@ -40,6 +41,19 @@ private:
 	static int on_mul(lua_State* L);
 	static int on_div(lua_State* L);
 	static int on_unm(lua_State* L);
+
+	static const luaL_Reg classLibrary[];
+};
+
+// SIZE 0x1
+class BrickColorBridge : public Bridge<RBX::BrickColor, 1>
+{
+public:
+	static void registerClassLibrary(lua_State* L);
+
+private:
+	static int newBrickColor(lua_State* L);
+	static int randomBrickColor(lua_State* L);
 
 	static const luaL_Reg classLibrary[];
 };

@@ -2,6 +2,13 @@
 
 namespace RBX {
 
+// STUB: WEBSERVICE 0x10093df0
+BrickColor BrickColor::random()
+{
+	STUB(0x10093df0);
+	return BrickColor();
+}
+
 // STUB: WEBSERVICE 0x10094000
 const std::string& BrickColor::name() const
 {
