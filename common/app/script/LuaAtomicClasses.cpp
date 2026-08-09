@@ -2,6 +2,7 @@
 #include "lua/lua.h"
 
 #include <G3D/Color3.h>
+#include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
 #include <G3D/g3dmath.h>
 #include <float.h>
@@ -69,6 +70,17 @@ template <>
 const char* Bridge<G3D::Vector3, 1>::className = "Vector3";
 
 template bool Bridge<G3D::Vector3, 1>::getValue<G3D::Vector3>(lua_State* L, unsigned int index, G3D::Vector3& value);
+
+template G3D::Vector3* Bridge<G3D::Vector3, 1>::pushNewObject<G3D::Vector3>(lua_State* L, G3D::Vector3 value);
+
+template <>
+const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
+
+template bool Bridge<G3D::CoordinateFrame, 1>::getValue<G3D::CoordinateFrame>(
+	lua_State* L,
+	unsigned int index,
+	G3D::CoordinateFrame& value
+);
 
 template void Bridge<G3D::Color3, 1>::on_newindex(G3D::Color3& value, const char* name, lua_State* L);
 

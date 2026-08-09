@@ -4,6 +4,7 @@
 #include <G3D/format.h>
 #include <lauxlib.h>
 #include <lua.h>
+#include <new>
 #include <stdexcept>
 
 struct lua_State;
@@ -17,6 +18,9 @@ class Bridge
 {
 public:
 	static T& pushNewObject(lua_State* L);
+
+	template <class U>
+	static U* pushNewObject(lua_State* L, U value);
 
 	static T& getObject(lua_State* L, unsigned int index)
 	{
@@ -42,6 +46,22 @@ protected:
 
 	static const char* className;
 };
+
+// TEMPLATE: WEBSERVICE 0x1005f1b0
+// ??$pushNewObject@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SAPAVVector3@G3D@@PAUlua_State@@V23@@Z
+template <class T, int Tag>
+template <class U>
+U* Bridge<T, Tag>::pushNewObject(lua_State* L, U value)
+{
+	U* object = static_cast<U*>(lua_newuserdata(L, sizeof(U)));
+
+	new (object) U(value);
+
+	lua_getfield(L, LUA_REGISTRYINDEX, className);
+	lua_setmetatable(L, -2);
+
+	return object;
+}
 
 // TEMPLATE: WEBSERVICE 0x100adbf0
 // ??$getValue@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KA_NPAUlua_State@@IAAVVector3@G3D@@@Z

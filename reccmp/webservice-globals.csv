@@ -4575,6 +4575,7 @@ address,type,symbol
 0x102d6184,global,?creator@?$FactoryProduct@VTexture@RBX@@VDecal@2@$1?sTexture@2@3PADA@RBX@@0VCreator@12@B
 0x102d6190,global,?className@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@1PBDB
 0x102d6194,global,?className@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@1PBDB
+0x102d6198,global,?className@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@1PBDB
 0x102d61a0,global,?className@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@1PBDB
 0x102d62d0,global,?className@?$Bridge@V?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@$00@Lua@RBX@@1PBDB
 0x102d6368,global,?sStats@Stats@RBX@@3PADA
