@@ -15,8 +15,20 @@ void ScriptContext::onEvent(const RunService* source, RunTransition event)
 	STUB(0x1005eb60);
 }
 
+// FUNCTION: WEBSERVICE 0x1005f880
+void Lua::CoordinateFrameBridge::pushCoordinateFrame(lua_State* L, G3D::CoordinateFrame value)
+{
+	pushNewObject(L, value);
+}
+
 // FUNCTION: WEBSERVICE 0x1005f8c0
 void Lua::Vector3Bridge::pushVector3(lua_State* L, G3D::Vector3 value)
+{
+	pushNewObject(L, value);
+}
+
+// FUNCTION: WEBSERVICE 0x1005f910
+void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 value)
 {
 	pushNewObject(L, value);
 }
