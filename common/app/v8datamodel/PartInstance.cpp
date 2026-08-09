@@ -166,10 +166,12 @@ bool PartInstance::computeSurfacesNeedAdorn() const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1009af50
+// FUNCTION: WEBSERVICE 0x1009af50
 void PartInstance::legacyTraverseState(const CoordinateFrame& parentState)
 {
-	STUB(0x1009af50);
+	CoordinateFrame gridCorner = parentState * *legacyOffset;
+
+	primitive->setGridCorner(gridCorner);
 }
 
 // FUNCTION: WEBSERVICE 0x1009af90

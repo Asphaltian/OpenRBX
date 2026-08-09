@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "util/TextureId.h"
+#include "v8datamodel/BrickColor.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
@@ -43,7 +44,7 @@ DECOMP_SIZE_ASSERT(ShirtGraphic, 0x118)
 class Skin : public DescribedCreatable<Skin, CharacterAppearance, sSkin>
 {
 private:
-	undefined m_unk0x0f8[0xfc - 0x0f8]; // 0x0f8
+	BrickColor skinColor; // 0x0f8
 };
 
 DECOMP_SIZE_ASSERT(Skin, 0xfc)
