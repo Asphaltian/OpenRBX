@@ -30,8 +30,8 @@ public:
 	static bool showModelCoord;
 
 private:
-	CoordinateFrame modelInPrimary;                       // 0x178
-	PartInstance* primaryPart;                            // 0x1a8
+	mutable CoordinateFrame modelInPrimary;               // 0x178
+	mutable PartInstance* primaryPart;                    // 0x1a8
 	boost::shared_ptr<PartInstance> candidatePrimaryPart; // 0x1ac
 
 	void updatePrimaryPart(PartInstance* part) const;

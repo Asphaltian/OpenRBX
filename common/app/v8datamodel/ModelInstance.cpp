@@ -55,7 +55,21 @@ const Primitive* ModelInstance::getBiggestPrimitive() const
 // STUB: WEBSERVICE 0x1005a1f0
 void ModelInstance::updatePrimaryPart(PartInstance* part) const
 {
-	STUB(0x1005a1f0);
+	if (primaryPart == part) {
+		return;
+	}
+
+	if (part != NULL && primaryPart != NULL) {
+		Matrix3 rotation = getLocation().rotation;
+
+		modelInPrimary =
+			CoordinateFrame(primaryPart->getCoordinateFrame().rotation.transpose() * rotation, Vector3::zero());
+	}
+	else {
+		modelInPrimary = CoordinateFrame();
+	}
+
+	primaryPart = part;
 }
 
 // FUNCTION: WEBSERVICE 0x1005a350
@@ -95,7 +109,7 @@ Extents ModelInstance::getExtentsLocal() const
 	return LocalGridExtents.getValue();
 }
 
-// STUB: WEBSERVICE 0x1005abb0
+// FUNCTION: WEBSERVICE 0x1005abb0
 PartInstance* ModelInstance::getPrimaryPartInternal() const
 {
 	if (primaryPart != NULL) {
