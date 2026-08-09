@@ -1,15 +1,19 @@
 #include "script/LuaSignalBridge.h"
 
+#include "reflection/property.h"
 #include "reflection/signal.h"
 #include "script/Script.h"
 #include "script/ScriptContext.h"
 #include "script/ThreadRef.h"
+#include "v8tree/Instance.h"
 
 #include <G3D/format.h>
 #include <boost/any.hpp>
 #include <lua.h>
 #include <stdexcept>
 #include <string.h>
+#include <string>
+#include <typeinfo>
 #include <vector>
 
 // SIZE 0x28
@@ -103,9 +107,65 @@ int Bridge<boost::signals::connection, 1>::on_index(
 } // namespace Lua
 } // namespace RBX
 
+// STUB: WEBSERVICE 0x100b0440
+static unsigned int pushArgs(lua_State* L, const std::vector<boost::any>& arguments)
+{
+	for (std::vector<boost::any>::const_iterator iter = arguments.begin(), end = arguments.end(); iter != end; ++iter) {
+		const std::type_info& type = iter->type();
+
+		if (type == typeid(std::string)) {
+			lua_pushstring(L, boost::any_cast<std::string>(*iter).c_str());
+		}
+		else if (type == typeid(int)) {
+			lua_pushinteger(L, boost::any_cast<int>(*iter));
+		}
+		else if (type == typeid(unsigned int)) {
+			lua_pushinteger(L, boost::any_cast<unsigned int>(*iter));
+		}
+		else if (type == typeid(float)) {
+			lua_pushnumber(L, boost::any_cast<float>(*iter));
+		}
+		else if (type == typeid(double)) {
+			lua_pushnumber(L, boost::any_cast<double>(*iter));
+		}
+		else if (type == typeid(bool)) {
+			lua_pushboolean(L, boost::any_cast<bool>(*iter));
+		}
+		else if (type == typeid(boost::shared_ptr<RBX::Instance>)) {
+			RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(
+				L,
+				boost::any_cast<boost::shared_ptr<RBX::Instance> >(*iter)
+			);
+		}
+		else if (type == typeid(const RBX::Reflection::PropertyDescriptor*)) {
+			lua_pushstring(L, boost::any_cast<const RBX::Reflection::PropertyDescriptor*>(*iter)->name.name.c_str());
+		}
+		else if (type == typeid(const char*)) {
+			lua_pushstring(L, boost::any_cast<const char*>(*iter));
+		}
+		else {
+			type.name();
+
+			lua_pushnil(L);
+		}
+	}
+
+	return arguments.size();
+}
+
 void WaitScriptSlot::operator()(const std::vector<boost::any>& arguments)
 {
 	cnction->disconnect();
+
+	lua_State* thread = waitThread.thread();
+
+	if (thread != NULL) {
+		int top = lua_gettop(thread);
+
+		RBX::ScriptContext::getContext(thread).resume(thread, pushArgs(thread, arguments));
+
+		lua_settop(thread, top);
+	}
 }
 
 // STUB: WEBSERVICE 0x100b0920

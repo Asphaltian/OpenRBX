@@ -2,6 +2,7 @@
 #define LUA_LUABRIDGE_H
 
 #include <G3D/format.h>
+#include <boost/shared_ptr.hpp>
 #include <lauxlib.h>
 #include <lua.h>
 #include <new>
@@ -65,6 +66,8 @@ T& Bridge<T, Tag>::pushNewObject(lua_State* L)
 // ??$pushNewObject@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SAPAVVector3@G3D@@PAUlua_State@@V23@@Z
 // TEMPLATE: WEBSERVICE 0x1005f250
 // ??$pushNewObject@VBrickColor@RBX@@@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@SAPAVBrickColor@2@PAUlua_State@@V32@@Z
+// TEMPLATE: WEBSERVICE 0x10060550
+// ??$pushNewObject@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@SAPAV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@V34@@Z
 // TEMPLATE: WEBSERVICE 0x100afbe0
 // ??$pushNewObject@Vconnection@signals@boost@@@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@SAPAVconnection@signals@boost@@PAUlua_State@@V345@@Z
 // clang-format on
@@ -115,6 +118,57 @@ template <class T, int Tag>
 void Bridge<T, Tag>::on_newindex(T& value, const char* name, lua_State* L)
 {
 	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
+}
+
+// SIZE 0x1
+template <class T>
+class SharedPtrBridge : protected Bridge<boost::shared_ptr<T>, 0>
+{
+public:
+	static void registerClass(lua_State* L);
+	static void registerClassLibrary(lua_State* L);
+
+	static void push(lua_State* L, boost::shared_ptr<T> instance);
+
+	static boost::shared_ptr<T> getPtr(lua_State* L, unsigned int index);
+
+	template <class U>
+	static bool getPtr(lua_State* L, unsigned int index, U& value);
+};
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x100612f0
+// ?push@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SAXPAUlua_State@@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Z
+// TEMPLATE: WEBSERVICE 0x10061640
+// ?push@?$SharedPtrBridge@VSignalInstance@Reflection@RBX@@@Lua@RBX@@SAXPAUlua_State@@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@@Z
+// clang-format on
+template <class T>
+void SharedPtrBridge<T>::push(lua_State* L, boost::shared_ptr<T> instance)
+{
+	if (instance.get() == NULL) {
+		lua_pushnil(L);
+	}
+	else {
+		lua_gettop(L);
+
+		lua_pushlightuserdata(L, (void*) push);
+		lua_rawget(L, LUA_REGISTRYINDEX);
+
+		lua_pushlightuserdata(L, instance.get());
+		lua_rawget(L, -2);
+
+		if (lua_type(L, -1) == LUA_TNIL) {
+			lua_settop(L, -2);
+
+			SharedPtrBridge<T>::pushNewObject(L, instance);
+
+			lua_pushlightuserdata(L, instance.get());
+			lua_pushvalue(L, -2);
+			lua_rawset(L, -4);
+		}
+
+		lua_remove(L, -2);
+	}
 }
 
 } // namespace Lua

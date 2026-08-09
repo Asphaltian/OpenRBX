@@ -4277,6 +4277,7 @@ address,type,symbol
 0x102c8b9c,global,error___RBX::Log::writeEntry
 0x102c8ba8,global,??_R0?AVType@Reflection@RBX@@@8
 0x102c8bcc,global,??_R0?AVItem@EnumDescriptor@Reflection@RBX@@@8
+0x102c8cdc,global,??_R0?AV?$shared_ptr@VInstance@RBX@@@boost@@@8
 0x102c8d10,global,??_R0?AVVector3@G3D@@@8
 0x102c8e20,global,??_R0?AVColor3@G3D@@@8
 0x102c8e3c,global,??_R0?AVBrickColor@RBX@@@8
@@ -4518,6 +4519,7 @@ address,type,symbol
 0x102d3d58,global,?creator@?$FactoryProduct@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@0VCreator@12@B
 0x102d3d5c,global,?creator@?$FactoryProduct@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@0VCreator@12@B
 0x102d3d60,global,?creator@?$FactoryProduct@VSpawnerService@RBX@@VInstance@2@$1?sSpawnerService@2@3QBDB@RBX@@0VCreator@12@B
+0x102d3d74,global,??_R0I@8
 0x102d3d90,global,?sSky@RBX@@3PADA
 0x102d413c,global,??_R0?AVMergeBinder@RBX@@@8
 0x102d415c,global,??_R0?AVIReferenceBinder@RBX@@@8
@@ -4579,6 +4581,7 @@ address,type,symbol
 0x102d6198,global,?className@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@1PBDB
 0x102d61a0,global,?className@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@1PBDB
 0x102d61a4,global,?className@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@1PBDB
+0x102d6270,global,??_R0PBD@8
 0x102d62d0,global,?className@?$Bridge@V?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@$00@Lua@RBX@@1PBDB
 0x102d6368,global,?sStats@Stats@RBX@@3PADA
 0x102d6370,global,?sStatsItem@Stats@RBX@@3PADA

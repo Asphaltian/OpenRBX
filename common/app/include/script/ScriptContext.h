@@ -19,7 +19,16 @@ class ScriptContext : public DescribedCreatable<ScriptContext, Instance, sScript
 					  public Service
 {
 public:
+	enum Result
+	{
+		Success,
+		Yield,
+		Error
+	};
+
 	static ScriptContext& getContext(lua_State* L);
+
+	Result resume(lua_State* L, int nargs);
 
 protected:
 	virtual void onEvent(const RunService* source, RunTransition event);

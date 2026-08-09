@@ -92,6 +92,10 @@ private:
 	Slot slot; // 0x04
 };
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x100b0be0
+// RBX::Reflection::TGenericSlotWrapper<WaitScriptSlot>::execute
+// clang-format on
 template <class Slot>
 void TGenericSlotWrapper<Slot>::execute(const std::vector<boost::any>& arguments)
 {
