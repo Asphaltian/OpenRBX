@@ -29,6 +29,9 @@ class SignalInstance : public boost::noncopyable
 public:
 	SignalSource* getSource() { return source; }
 
+	template <class Slot>
+	boost::signals::connection connectGeneric(Slot slot, boost::signals::connect_position position);
+
 	virtual ~SignalInstance(); // vtable+0x00
 
 protected:
@@ -128,7 +131,15 @@ public:
 	void (*signalCreatedHook)(SignalSource*); // 0x10
 
 protected:
+	friend class SignalInstance;
+
 	SignalInstance* findSignalInstance(const SignalSource* source) const;
+
+	virtual boost::signals::connection connectGeneric(
+		SignalInstance* instance,
+		GenericSlotWrapper* wrapper,
+		boost::signals::connect_position position
+	) const = 0; // vtable+0x04
 
 	SignalDescriptor(ClassDescriptor& classDescriptor, const char* name);
 
@@ -136,6 +147,18 @@ protected:
 };
 
 DECOMP_SIZE_ASSERT(SignalDescriptor, 0x24)
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x100b0e00
+// RBX::Reflection::SignalInstance::connectGeneric<WaitScriptSlot>
+// TEMPLATE: WEBSERVICE 0x100b1020
+// RBX::Reflection::SignalInstance::connectGeneric<FunctionScriptSlot>
+// clang-format on
+template <class Slot>
+boost::signals::connection SignalInstance::connectGeneric(Slot slot, boost::signals::connect_position position)
+{
+	return descriptor.connectGeneric(this, GenericSlotWrapper::create(slot), position);
+}
 
 // SIZE 0x24
 template <class Signature>
@@ -176,6 +199,34 @@ template <int arity, class Signature>
 class __declspec(novtable) SignalDescImpl : public TSignalDesc<Signature>
 {
 protected:
+	class GenericSlotAdapter
+	{
+	public:
+		GenericSlotAdapter(GenericSlotWrapper* wrapper) : wrapper(wrapper) {}
+
+		void operator()() const
+		{
+			std::vector<boost::any> arguments;
+
+			wrapper->execute(arguments);
+		}
+
+	private:
+		boost::shared_ptr<GenericSlotWrapper> wrapper; // 0x00
+	};
+
+	virtual boost::signals::connection connectGeneric(
+		SignalInstance* instance,
+		GenericSlotWrapper* wrapper,
+		boost::signals::connect_position position
+	) const // vtable+0x04
+	{
+		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(instance)->connect(
+			GenericSlotAdapter(wrapper),
+			position
+		);
+	}
+
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
 	{
 	}
@@ -196,6 +247,94 @@ public:
 	}
 
 protected:
+	class GenericSlotAdapter
+	{
+	public:
+		GenericSlotAdapter(GenericSlotWrapper* wrapper) : wrapper(wrapper) {}
+
+		void operator()(typename boost::function_traits<Signature>::arg1_type arg1) const
+		{
+			std::vector<boost::any> arguments(1);
+
+			arguments[0] = arg1;
+
+			wrapper->execute(arguments);
+		}
+
+	private:
+		boost::shared_ptr<GenericSlotWrapper> wrapper; // 0x00
+	};
+
+	virtual boost::signals::connection connectGeneric(
+		SignalInstance* instance,
+		GenericSlotWrapper* wrapper,
+		boost::signals::connect_position position
+	) const // vtable+0x04
+	{
+		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(instance)->connect(
+			GenericSlotAdapter(wrapper),
+			position
+		);
+	}
+
+	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
+	{
+	}
+};
+
+// SIZE 0x24
+template <class Signature>
+class __declspec(novtable) SignalDescImpl<2, Signature> : public TSignalDesc<Signature>
+{
+public:
+	void fire(
+		SignalSource* source,
+		typename boost::function_traits<Signature>::arg1_type arg1,
+		typename boost::function_traits<Signature>::arg2_type arg2
+	)
+	{
+		typename TSignalDesc<Signature>::TSignalInstance* instance = this->findSig(source);
+
+		if (instance != NULL) {
+			(*instance)(arg1, arg2);
+		}
+	}
+
+protected:
+	class GenericSlotAdapter
+	{
+	public:
+		GenericSlotAdapter(GenericSlotWrapper* wrapper) : wrapper(wrapper) {}
+
+		void operator()(
+			typename boost::function_traits<Signature>::arg1_type arg1,
+			typename boost::function_traits<Signature>::arg2_type arg2
+		) const
+		{
+			std::vector<boost::any> arguments(2);
+
+			arguments[0] = arg1;
+			arguments[1] = arg2;
+
+			wrapper->execute(arguments);
+		}
+
+	private:
+		boost::shared_ptr<GenericSlotWrapper> wrapper; // 0x00
+	};
+
+	virtual boost::signals::connection connectGeneric(
+		SignalInstance* instance,
+		GenericSlotWrapper* wrapper,
+		boost::signals::connect_position position
+	) const // vtable+0x04
+	{
+		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(instance)->connect(
+			GenericSlotAdapter(wrapper),
+			position
+		);
+	}
+
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
 	{
 	}
