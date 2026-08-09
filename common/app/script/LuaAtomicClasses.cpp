@@ -7,7 +7,9 @@
 
 #include <G3D/Color3.h>
 #include <G3D/CoordinateFrame.h>
+#include <G3D/Quat.h>
 #include <G3D/Vector3.h>
+#include <G3D/Vector4.h>
 #include <G3D/g3dmath.h>
 #include <algorithm>
 #include <float.h>
@@ -333,6 +335,56 @@ int Bridge<RBX::BrickColor, 1>::on_index(const RBX::BrickColor& value, const cha
 template <>
 const char* Bridge<RBX::BrickColor, 1>::className = "BrickColor";
 
+// STUB: WEBSERVICE 0x100ae950
+int CoordinateFrameBridge::newCoordinateFrame(lua_State* L)
+{
+	G3D::CoordinateFrame result;
+
+	switch (lua_gettop(L)) {
+	case 1:
+		result.translation = Vector3Bridge::getObject(L, 1);
+		break;
+
+	case 2:
+		result.translation = Vector3Bridge::getObject(L, 1);
+		result.lookAt(Vector3Bridge::getObject(L, 2));
+		break;
+
+	case 3:
+		for (int i = 0; i < 3; i++) {
+			result.translation[i] = lua_tofloat(L, i + 1);
+		}
+		break;
+
+	case 7:
+		for (int i = 0; i < 3; i++) {
+			result.translation[i] = lua_tofloat(L, i + 1);
+		}
+
+		result.rotation =
+			G3D::Matrix3(G3D::Quat(lua_tofloat(L, 4), lua_tofloat(L, 5), lua_tofloat(L, 6), lua_tofloat(L, 7)));
+		break;
+
+	case 12: {
+		for (int i = 0; i < 3; i++) {
+			result.translation[i] = lua_tofloat(L, i + 1);
+		}
+
+		float* element = result.rotation[0];
+
+		for (int index = 4; index < 13; index += 3) {
+			for (int c = 0; c < 3; c++) {
+				*element++ = lua_tofloat(L, c + index);
+			}
+		}
+		break;
+	}
+	}
+
+	pushNewObject(L, result);
+	return 1;
+}
+
 // FUNCTION: WEBSERVICE 0x100aebc0
 int CoordinateFrameBridge::on_add(lua_State* L)
 {
@@ -553,6 +605,24 @@ int CoordinateFrameBridge::fromAxisAngle(lua_State* L)
 
 template <>
 const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
+
+// FUNCTION: WEBSERVICE 0x100afaf0
+int CoordinateFrameBridge::on_mul(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	G3D::CoordinateFrame other;
+
+	if (getValue(L, 2, other)) {
+		G3D::CoordinateFrame result = value * other;
+
+		pushNewObject(L, result);
+		return 1;
+	}
+
+	Vector3Bridge::pushVector3(L, value.toWorldSpace(G3D::Vector4(Vector3Bridge::getObject(L, 2), 1.0f)).xyz());
+	return 1;
+}
 
 template bool Bridge<G3D::CoordinateFrame, 1>::getValue<G3D::CoordinateFrame>(
 	lua_State* L,
