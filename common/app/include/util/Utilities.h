@@ -35,6 +35,18 @@ class CopyOnWrite : public boost::noncopyable
 public:
 	const T* read() const { return object.get(); }
 
+	boost::shared_ptr<T>& write()
+	{
+		if (object.get() == NULL) {
+			object.reset(new T());
+		}
+		else if (!object.unique()) {
+			object.reset(new T(*object));
+		}
+
+		return object;
+	}
+
 private:
 	boost::shared_ptr<T> object; // 0x00
 };
