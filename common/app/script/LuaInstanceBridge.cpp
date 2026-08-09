@@ -2,6 +2,8 @@
 #include "reflection/object.h"
 #include "reflection/property.h"
 #include "util/Name.h"
+#include "util/Sound.h"
+#include "util/TextureId.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Decal.h"
 
@@ -58,3 +60,7 @@ template void RBX::Reflection::Property::setValue<G3D::Vector3>(const G3D::Vecto
 template void RBX::Reflection::Property::setValue<G3D::CoordinateFrame>(const G3D::CoordinateFrame& value);
 template void RBX::Reflection::Property::setValue<G3D::Color3>(const G3D::Color3& value);
 template void RBX::Reflection::Property::setValue<RBX::BrickColor>(const RBX::BrickColor& value);
+
+template void RBX::Reflection::Property::setValue<RBX::TextureId>(const RBX::TextureId& value);
+
+template void RBX::Reflection::Property::setValue<RBX::Soundscape::SoundId>(const RBX::Soundscape::SoundId& value);
