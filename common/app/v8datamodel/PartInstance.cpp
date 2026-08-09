@@ -104,10 +104,17 @@ void PartInstance::onChildAdded(Instance* child)
 	PVInstance::onChildAdded(child);
 }
 
-// STUB: WEBSERVICE 0x1009ae00
+// FUNCTION: WEBSERVICE 0x1009ae00
 void PartInstance::setName(const std::string& value)
 {
-	STUB(0x1009ae00);
+	Instance::setName(value);
+
+	if (value == "Torso") {
+		getPrimitive()->setSizeMultiplier(5);
+	}
+	else {
+		getPrimitive()->setSizeMultiplier(1);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1009ae40
