@@ -241,6 +241,7 @@ Each of these cost a round trip. Keep the sources clean and leave the reasoning 
 - **Multiply operand order is normalised; parenthesisation is not.** Commuting factors moves nothing. Regrouping a three-term sum moves several percent, in both directions, and one grouping cannot always serve two call sites.
 - **`(&prim0)[index]` is not `index == 0 ? prim0 : prim1`.** The difference only shows once a caller passes a variable index.
 - **Two statements on one source line are one line record,** and the record lengths say when that happened. A comma declaration is invisible to a statement count taken from the source.
+- **Naming a call's argument decides when the object expression is loaded.** `p->f(a * b)` lets MSVC hoist the load of `p` above the arithmetic; naming the argument first moves it below, where the original has it. `PartInstance::legacyTraverseState` sat at 51.61 until its `CoordinateFrame` was named, and spelling the member as an accessor call moved nothing.
 - **An implicit conversion and an explicit functional cast are not the same codegen.** `f(x)` through a converting constructor builds the temporary in the argument slot: `push ecx` reserves it and the store goes through a materialised `mov eax, esp`. `f(T(x))` builds a temporary and copies it, spending a whole-dword `mov eax, [esp+N]` and `push eax` even where `T` is one byte with a `const` member. `PartInstance::onCanAggregateChanged` sat at 63.64 on that difference alone.
 
 ### Naming locals

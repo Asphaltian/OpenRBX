@@ -4,10 +4,12 @@
 #include "decomp.h"
 #include "util/Events.h"
 #include "util/Handle.h"
+#include "util/Utilities.h"
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
 
 #include <boost/shared_ptr.hpp>
+#include <vector>
 
 namespace RBX {
 
@@ -29,6 +31,8 @@ private:
 
 DECOMP_SIZE_ASSERT(SelectionChanged, 0x10)
 
+class ISelectionBase;
+
 extern const char sSelection[];
 // SIZE 0x12c
 class Selection : public DescribedCreatable<Selection, Instance, sSelection>,
@@ -42,7 +46,8 @@ public:
 	virtual void onEvent(const Instance* source, AncestorChanged event);
 
 private:
-	undefined m_unk0x114[0x12c - 0x114]; // 0x114
+	CopyOnWrite<std::vector<boost::shared_ptr<Instance> > > selection; // 0x114
+	std::vector<ISelectionBase*> filteredSelections;                   // 0x11c
 };
 
 DECOMP_SIZE_ASSERT(Selection, 0x12c)
