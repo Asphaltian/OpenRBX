@@ -1,6 +1,7 @@
 #include "script/Script.h"
 
 #include "network/Player.h"
+#include "util/ContentProvider.h"
 #include "util/Name.h"
 #include "v8datamodel/Team.h"
 
@@ -9,6 +10,16 @@ namespace RBX {
 char sScript[] = "Script";
 
 char sLocalScript[] = "LocalScript";
+
+// FUNCTION: WEBSERVICE 0x10068d50
+boost::shared_ptr<const std::string> Script::requestCode()
+{
+	if (scriptId.isNull()) {
+		return embeddedSource;
+	}
+
+	return ContentProvider::singleton().requestContentString(scriptId);
+}
 
 } // namespace RBX
 

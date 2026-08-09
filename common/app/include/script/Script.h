@@ -22,6 +22,8 @@ public:
 	// FUNCTION: WEBSERVICE 0x10068960
 	const ContentId& getScriptId() const { return scriptId; }
 
+	boost::shared_ptr<const std::string> requestCode();
+
 	// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
 	const std::string* getEmbeddedCode() const { return embeddedSource.get(); }
 

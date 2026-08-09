@@ -3,6 +3,7 @@
 #include "decomp.h"
 
 #include <istream>
+#include <string>
 
 namespace RBX {
 
@@ -67,6 +68,14 @@ std::auto_ptr<std::istream> ContentProvider::getContent(ContentId ticket)
 ContentProvider::~ContentProvider()
 {
 	STUB(0x10053800);
+}
+
+// STUB: WEBSERVICE 0x10053a80
+boost::shared_ptr<const std::string> ContentProvider::requestContentString(ContentId id)
+{
+	STUB(0x10053a80);
+
+	return boost::shared_ptr<const std::string>();
 }
 
 } // namespace RBX

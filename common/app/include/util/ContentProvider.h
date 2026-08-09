@@ -5,6 +5,7 @@
 #include "util/Name.h"
 
 #include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
 #include <iosfwd>
 #include <memory>
 #include <string>
@@ -50,6 +51,8 @@ public:
 	static ContentProvider& singleton();
 
 	std::auto_ptr<std::istream> getContent(ContentId ticket);
+
+	boost::shared_ptr<const std::string> requestContentString(ContentId id);
 
 private:
 	~ContentProvider();
