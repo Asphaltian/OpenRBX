@@ -1,5 +1,6 @@
 #include "script/ScriptContext.h"
 
+#include "script/LuaAtomicClasses.h"
 #include "util/Name.h"
 #include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/Stats.h"
@@ -12,6 +13,12 @@ char sScriptContext[] = "ScriptContext";
 void ScriptContext::onEvent(const RunService* source, RunTransition event)
 {
 	STUB(0x1005eb60);
+}
+
+// FUNCTION: WEBSERVICE 0x1005f8c0
+void Lua::Vector3Bridge::pushVector3(lua_State* L, G3D::Vector3 value)
+{
+	pushNewObject(L, value);
 }
 
 // STUB: WEBSERVICE 0x10068880
