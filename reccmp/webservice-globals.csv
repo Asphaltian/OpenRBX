@@ -4573,6 +4573,7 @@ address,type,symbol
 0x102d6118,global,??_R0?AV?$sp_counted_impl_pd@PAVTexture@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
 0x102d6180,global,?creator@?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@0VCreator@12@B
 0x102d6184,global,?creator@?$FactoryProduct@VTexture@RBX@@VDecal@2@$1?sTexture@2@3PADA@RBX@@0VCreator@12@B
+0x102d618c,global,?className@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@1PBDB
 0x102d6190,global,?className@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@1PBDB
 0x102d6194,global,?className@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@1PBDB
 0x102d6198,global,?className@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@1PBDB

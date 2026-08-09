@@ -1,3 +1,4 @@
+#include "decomp.h"
 #include "lua/LuaBridge.h"
 #include "lua/lua.h"
 
@@ -66,12 +67,58 @@ int Bridge<G3D::Color3, 1>::on_index(const G3D::Color3& value, const char* name,
 	throw std::runtime_error(G3D::format("%s is not a valid member", name));
 }
 
+// STUB: WEBSERVICE 0x100ae160
+static int lerp(lua_State* L)
+{
+	STUB(0x100ae160);
+	return 0;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae210
+template <>
+int Bridge<G3D::Vector3, 1>::on_index(const G3D::Vector3& value, const char* name, lua_State* L)
+{
+	if (strcmp(name, "x") == 0) {
+		lua_pushnumber(L, value.x);
+		return 1;
+	}
+
+	if (strcmp(name, "y") == 0) {
+		lua_pushnumber(L, value.y);
+		return 1;
+	}
+
+	if (strcmp(name, "z") == 0) {
+		lua_pushnumber(L, value.z);
+		return 1;
+	}
+
+	if (strcmp(name, "unit") == 0) {
+		pushNewObject(L, value.unit());
+		return 1;
+	}
+
+	if (strcmp(name, "magnitude") == 0) {
+		lua_pushnumber(L, value.magnitude());
+		return 1;
+	}
+
+	if (strcmp(name, "lerp") == 0) {
+		lua_pushcclosure(L, lerp, 0);
+		return 1;
+	}
+
+	throw std::runtime_error(G3D::format("%s is not a valid member", name));
+}
+
 template <>
 const char* Bridge<G3D::Vector3, 1>::className = "Vector3";
 
 template bool Bridge<G3D::Vector3, 1>::getValue<G3D::Vector3>(lua_State* L, unsigned int index, G3D::Vector3& value);
 
 template G3D::Vector3* Bridge<G3D::Vector3, 1>::pushNewObject<G3D::Vector3>(lua_State* L, G3D::Vector3 value);
+
+template G3D::Color3* Bridge<G3D::Color3, 1>::pushNewObject<G3D::Color3>(lua_State* L, G3D::Color3 value);
 
 template <>
 const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
