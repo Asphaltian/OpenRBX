@@ -55,6 +55,8 @@ protected:
 	virtual void removeRef(); // vtable+0x00
 
 private:
+	friend class Node;
+
 	void addRef();
 	void addToNode();
 	void removeFromNode();

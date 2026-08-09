@@ -105,6 +105,55 @@ void ThreadRef::reset()
 	removeRef();
 }
 
+// FUNCTION: WEBSERVICE 0x100b18b0
+ThreadRef& ThreadRef::operator=(const ThreadRef& other)
+{
+	if (L != other.L) {
+		boost::mutex::scoped_lock lock(*sync);
+
+		removeRef();
+
+		L = other.L;
+
+		addRef();
+	}
+
+	if (node != other.node) {
+		boost::mutex::scoped_lock lock(*sync);
+
+		removeFromNode();
+
+		node = other.node;
+
+		addToNode();
+	}
+
+	return *this;
+}
+
+// FUNCTION: WEBSERVICE 0x100b19c0
+void ThreadRef::Node::eraseAllRefs()
+{
+	boost::mutex::scoped_lock lock(*sync);
+
+	ThreadRef* ref = first;
+
+	while (ref != NULL) {
+		ref->removeRef();
+		ref->node = NULL;
+
+		ref = ref->next;
+	}
+
+	first = NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100b1a40
+ThreadRef::Node::~Node()
+{
+	eraseAllRefs();
+}
+
 // FUNCTION: WEBSERVICE 0x100b1ac0
 ThreadRef::~ThreadRef()
 {
