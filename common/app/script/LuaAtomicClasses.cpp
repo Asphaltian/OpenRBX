@@ -87,6 +87,29 @@ int Vector3Bridge::on_sub(lua_State* L)
 	return 1;
 }
 
+// FUNCTION: WEBSERVICE 0x100ade50
+int Vector3Bridge::on_mul(lua_State* L)
+{
+	G3D::Vector3 vector;
+
+	if (getValue(L, 1, vector)) {
+		G3D::Vector3 other;
+
+		if (getValue(L, 2, other)) {
+			pushVector3(L, vector * other);
+			return 1;
+		}
+
+		pushVector3(L, vector * lua_tofloat(L, 2));
+		return 1;
+	}
+
+	vector = getObject(L, 2);
+
+	pushVector3(L, vector * lua_tofloat(L, 1));
+	return 1;
+}
+
 // FUNCTION: WEBSERVICE 0x100ae030
 int Vector3Bridge::on_unm(lua_State* L)
 {
