@@ -4344,6 +4344,7 @@ address,type,symbol
 0x102cc950,global,??_R0?AV?$Listener@VInstance@RBX@@UAncestorChanged@2@@RBX@@@8
 0x102ccb7c,global,?sScriptContext@RBX@@3PADA
 0x102ccb90,global,??_R0?AV?$FactoryProduct@VScriptContext@RBX@@VInstance@2@$1?sScriptContext@2@3PADA@RBX@@@8
+0x102ccc7c,global,??_R0?AVFunctionRef@Lua@RBX@@@8
 0x102cd410,global,??_R0PAX@8
 0x102cd850,global,??_R0?AV?$DescribedCreatable@VScriptContext@RBX@@VInstance@2@$1?sScriptContext@2@3PADA@RBX@@@8
 0x102cd8b8,global,??_R0?AV?$Described@VScriptContext@RBX@@$1?sScriptContext@2@3PADAV?$FactoryProduct@VScriptContext@RBX@@VInstance@2@$1?sScriptContext@2@3PADA@2@@Reflection@RBX@@@8

@@ -1,6 +1,7 @@
 #include "script/ThreadRef.h"
 
 #include "lua/LuaBridge.h"
+#include "reflection/type.h"
 
 #include <lauxlib.h>
 #include <lua.h>
@@ -102,6 +103,23 @@ boost::shared_ptr<ThreadRef::Node> ThreadRef::Node::get(lua_State* L)
 
 	return node;
 }
+
+} // namespace Lua
+
+namespace Reflection {
+
+// FUNCTION: WEBSERVICE 0x100b14b0
+template <>
+const Type& Type::singleton<Lua::FunctionRef>()
+{
+	static Type type("Function", typeid(Lua::FunctionRef));
+
+	return type;
+}
+
+} // namespace Reflection
+
+namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x100b15f0
 ThreadRef::ThreadRef(lua_State* L) : sync(syncSingleton), node(NULL), previous(NULL), next(NULL), L(L), threadId(0)
