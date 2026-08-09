@@ -8,6 +8,7 @@
 
 #include <memory>
 #include <string>
+#include <typeinfo>
 
 class XmlElement;
 
@@ -455,6 +456,24 @@ public:
 	ConstProperty(const ConstProperty& other);
 	ConstProperty(const PropertyDescriptor* descriptor, const DescribedBase* instance);
 
+	template <class T>
+	T getValue() const
+	{
+		const TypedPropertyDescriptor<T>* typed = dynamic_cast<const TypedPropertyDescriptor<T>*>(descriptor);
+
+		if (typed == NULL) {
+#if defined(_MSC_VER) && _MSC_VER <= 1400
+			throw std::bad_cast("bad cast");
+#else
+			throw std::bad_cast();
+#endif
+		}
+
+		return typed->getValue(instance);
+	}
+
+	std::string getStringValue() const { return descriptor->getStringValue(instance); }
+
 protected:
 	const PropertyDescriptor* descriptor; // 0x00
 	const DescribedBase* instance;        // 0x04
@@ -468,6 +487,22 @@ class Property : public ConstProperty
 public:
 	Property(const Property& other);
 	Property(const PropertyDescriptor* descriptor, DescribedBase* instance);
+
+	template <class T>
+	void setValue(const T& value) const
+	{
+		const TypedPropertyDescriptor<T>* typed = dynamic_cast<const TypedPropertyDescriptor<T>*>(descriptor);
+
+		if (typed == NULL) {
+#if defined(_MSC_VER) && _MSC_VER <= 1400
+			throw std::bad_cast("bad cast");
+#else
+			throw std::bad_cast();
+#endif
+		}
+
+		typed->setValue(const_cast<DescribedBase*>(instance), value);
+	}
 };
 
 DECOMP_SIZE_ASSERT(Property, 0x08)

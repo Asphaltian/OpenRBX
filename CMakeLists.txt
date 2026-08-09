@@ -39,6 +39,7 @@ if (ENABLE_CLANG_TIDY)
   # LuaBridge.h throws, which clang-tidy reports as an error whatever /EHsc the command line carries.
   set_source_files_properties(common/app/script/LuaAtomicClasses.cpp PROPERTIES SKIP_LINTING ON)
   set_source_files_properties(common/app/script/LuaSignalBridge.cpp PROPERTIES SKIP_LINTING ON)
+  set_source_files_properties(common/app/script/LuaInstanceBridge.cpp PROPERTIES SKIP_LINTING ON)
 
   # G3D's BinaryInput.h and BinaryOutput.h throw from a header, which clang-tidy reports as an
   # error whatever /EHsc the command line carries. GLG3D/Sky.h pulls both in.

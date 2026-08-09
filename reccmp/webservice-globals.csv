@@ -4236,6 +4236,7 @@ address,type,symbol
 0x1029dba8,global,___rtc_taa
 0x1029dbac,global,___rtc_tzz
 0x102bc0d8,global,__TI2?AVruntime_error@std@@
+0x102bc14c,global,__TI2?AVbad_cast@std@@
 0x102c0b00,global,___pobjMapEntryFirst
 0x102c0b04,global,___pobjMapEntryLast
 0x102c0b08,global,___phdlrA
@@ -4329,6 +4330,7 @@ address,type,symbol
 0x102cc370,global,??_R0?AVIRenderable@RBX@@@8
 0x102cc390,global,??_R0?AVISelectable3d@RBX@@@8
 0x102cc3b0,global,??_R0?AVHumanoid@RBX@@@8
+0x102cc3d0,global,??_R0?AV?$TypedPropertyDescriptor@VCoordinateFrame@G3D@@@Reflection@RBX@@@8
 0x102cc420,global,??_R0?AVPartInstance@RBX@@@8
 0x102cc510,global,??_R0?AVCreator@?$FactoryProduct@VHumanoid@RBX@@VInstance@2@$1?sHumanoid@2@3PADA@RBX@@@8
 0x102cc570,global,??_R0?AV?$sp_counted_impl_pd@PAVHumanoid@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
@@ -4538,6 +4540,7 @@ address,type,symbol
 0x102d4a00,global,??_R0?AV?$GetSetImpl@P8PartInstance@RBX@@BEMXZP812@AEXM@Z@?$PropDescriptor@VPartInstance@RBX@@M@Reflection@RBX@@@8
 0x102d4a78,global,??_R0?AV?$GetSetImpl@P8PartInstance@RBX@@BE_NXZP812@AEX_N@Z@?$PropDescriptor@VPartInstance@RBX@@_N@Reflection@RBX@@@8
 0x102d4c88,global,??_R0?AV?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@RBX@@@8
+0x102d4cd8,global,??_R0?AV?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@8
 0x102d4e18,global,??_R0?AV?$Notifier@VPartInstance@RBX@@UCanAggregateChanged@2@@RBX@@@8
 0x102d4e60,global,??_R0?AVIMoving@RBX@@@8
 0x102d4e80,global,??_R0?AV?$EnumDesc@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@@8
@@ -4571,6 +4574,7 @@ address,type,symbol
 0x102d5cf8,global,??_R0?AVPrimitive@RBX@@@8
 0x102d5d14,global,??_R0?AVIPipelined@RBX@@@8
 0x102d5d78,global,?className@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@1PBDB
+0x102d5d7c,global,??_R0?AV?$TypedPropertyDescriptor@N@Reflection@RBX@@@8
 0x102d60c0,global,??_R0?AVCreator@?$FactoryProduct@VTexture@RBX@@VDecal@2@$1?sTexture@2@3PADA@RBX@@@8
 0x102d6118,global,??_R0?AV?$sp_counted_impl_pd@PAVTexture@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
 0x102d6180,global,?creator@?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@0VCreator@12@B
