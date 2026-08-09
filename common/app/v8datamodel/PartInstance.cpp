@@ -541,7 +541,17 @@ void PartInstance::setColor3(const G3D::Color3& value)
 // STUB: WEBSERVICE 0x1009fec0
 void PartInstance::onCameraNear(float distance)
 {
-	STUB(0x1009fec0);
+	if (distance > 3.0f) {
+		if (distance > 6.0f) {
+			setAlphaModifier(1.0f);
+		}
+		else {
+			setAlphaModifier(0.5f);
+		}
+	}
+	else {
+		setAlphaModifier(0.0f);
+	}
 }
 
 // STUB: WEBSERVICE 0x1009ff60
