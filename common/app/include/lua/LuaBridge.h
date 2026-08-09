@@ -2,6 +2,7 @@
 #define LUA_LUABRIDGE_H
 
 #include <G3D/format.h>
+#include <lua.h>
 #include <stdexcept>
 
 struct lua_State;
@@ -15,6 +16,10 @@ class Bridge
 {
 public:
 	static T& pushNewObject(lua_State* L);
+
+	template <class U>
+	static bool getValue(lua_State* L, unsigned int index, U& value);
+
 	static void registerClass(lua_State* L);
 
 protected:
@@ -31,6 +36,33 @@ protected:
 
 	static const char* className;
 };
+
+// TEMPLATE: WEBSERVICE 0x100adbf0
+// ??$getValue@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KA_NPAUlua_State@@IAAVVector3@G3D@@@Z
+template <class T, int Tag>
+template <class U>
+bool Bridge<T, Tag>::getValue(lua_State* L, unsigned int index, U& value)
+{
+	const void* userdata = lua_touserdata(L, index);
+
+	if (userdata != NULL) {
+		if (lua_getmetatable(L, index)) {
+			lua_getfield(L, LUA_REGISTRYINDEX, className);
+
+			if (lua_rawequal(L, -1, -2)) {
+				lua_settop(L, -3);
+
+				value = *static_cast<const U*>(userdata);
+				return true;
+			}
+		}
+		else {
+			lua_settop(L, -2);
+		}
+	}
+
+	return false;
+}
 
 // TEMPLATE: WEBSERVICE 0x100adb90
 // ?on_newindex@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAXAAVColor3@G3D@@PBDPAUlua_State@@@Z

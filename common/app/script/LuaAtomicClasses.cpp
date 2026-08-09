@@ -2,6 +2,7 @@
 #include "lua/lua.h"
 
 #include <G3D/Color3.h>
+#include <G3D/Vector3.h>
 #include <G3D/g3dmath.h>
 #include <float.h>
 #include <limits>
@@ -39,6 +40,9 @@ float lua_tofloat(lua_State* L, int index)
 	return static_cast<float>(value);
 }
 
+template <>
+const char* Bridge<G3D::Color3, 1>::className = "Color3";
+
 // FUNCTION: WEBSERVICE 0x100adac0
 template <>
 int Bridge<G3D::Color3, 1>::on_index(const G3D::Color3& value, const char* name, lua_State* L)
@@ -60,6 +64,11 @@ int Bridge<G3D::Color3, 1>::on_index(const G3D::Color3& value, const char* name,
 
 	throw std::runtime_error(G3D::format("%s is not a valid member", name));
 }
+
+template <>
+const char* Bridge<G3D::Vector3, 1>::className = "Vector3";
+
+template bool Bridge<G3D::Vector3, 1>::getValue<G3D::Vector3>(lua_State* L, unsigned int index, G3D::Vector3& value);
 
 template void Bridge<G3D::Color3, 1>::on_newindex(G3D::Color3& value, const char* name, lua_State* L);
 
