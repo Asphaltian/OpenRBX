@@ -368,6 +368,109 @@ int CoordinateFrameBridge::on_inverse(lua_State* L)
 	return 1;
 }
 
+// FUNCTION: WEBSERVICE 0x100aed30
+int CoordinateFrameBridge::on_toWorldSpace(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	int count = lua_gettop(L) - 1;
+
+	if (count == 0) {
+		G3D::CoordinateFrame result = value;
+
+		pushNewObject(L, result);
+		return 1;
+	}
+
+	for (int i = 0; i < count; i++) {
+		G3D::CoordinateFrame result = value * getObject(L, i + 2);
+
+		pushNewObject(L, result);
+	}
+
+	return count;
+}
+
+// FUNCTION: WEBSERVICE 0x100aee30
+int CoordinateFrameBridge::on_toObjectSpace(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	int count = lua_gettop(L) - 1;
+
+	if (count == 0) {
+		G3D::CoordinateFrame result = value.inverse();
+
+		pushNewObject(L, result);
+		return 1;
+	}
+
+	for (int i = 0; i < count; i++) {
+		G3D::CoordinateFrame result = value.toObjectSpace(getObject(L, i + 2));
+
+		pushNewObject(L, result);
+	}
+
+	return count;
+}
+
+// FUNCTION: WEBSERVICE 0x100aef20
+int CoordinateFrameBridge::on_pointToWorldSpace(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	int count = lua_gettop(L) - 1;
+
+	if (count == 0) {
+		Vector3Bridge::pushVector3(L, value.pointToWorldSpace(G3D::Vector3::zero()));
+		return 1;
+	}
+
+	for (int i = 0; i < count; i++) {
+		Vector3Bridge::pushNewObject(L, value.pointToWorldSpace(Vector3Bridge::getObject(L, i + 2)));
+	}
+
+	return count;
+}
+
+// FUNCTION: WEBSERVICE 0x100af060
+int CoordinateFrameBridge::on_pointToObjectSpace(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	int count = lua_gettop(L) - 1;
+
+	if (count == 0) {
+		Vector3Bridge::pushVector3(L, value.pointToObjectSpace(G3D::Vector3::zero()));
+		return 1;
+	}
+
+	for (int i = 0; i < count; i++) {
+		Vector3Bridge::pushNewObject(L, value.pointToObjectSpace(Vector3Bridge::getObject(L, i + 2)));
+	}
+
+	return count;
+}
+
+// STUB: WEBSERVICE 0x100af1a0
+int CoordinateFrameBridge::on_vectorToWorldSpace(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	int count = lua_gettop(L) - 1;
+
+	if (count == 0) {
+		Vector3Bridge::pushVector3(L, value.vectorToWorldSpace(G3D::Vector3::zero()));
+		return 1;
+	}
+
+	for (int i = 0; i < count; i++) {
+		Vector3Bridge::pushNewObject(L, value.vectorToWorldSpace(Vector3Bridge::getObject(L, i + 2)));
+	}
+
+	return count;
+}
+
 // FUNCTION: WEBSERVICE 0x100af3d0
 int CoordinateFrameBridge::on_toEulerAnglesXYZ(lua_State* L)
 {
@@ -393,6 +496,25 @@ template bool Bridge<G3D::CoordinateFrame, 1>::getValue<G3D::CoordinateFrame>(
 	unsigned int index,
 	G3D::CoordinateFrame& value
 );
+
+// FUNCTION: WEBSERVICE 0x100af440
+int CoordinateFrameBridge::on_vectorToObjectSpace(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	int count = lua_gettop(L) - 1;
+
+	if (count == 0) {
+		Vector3Bridge::pushVector3(L, value.vectorToObjectSpace(G3D::Vector3::zero()));
+		return 1;
+	}
+
+	for (int i = 0; i < count; i++) {
+		Vector3Bridge::pushNewObject(L, value.vectorToObjectSpace(Vector3Bridge::getObject(L, i + 2)));
+	}
+
+	return count;
+}
 
 template void Bridge<G3D::Color3, 1>::on_newindex(G3D::Color3& value, const char* name, lua_State* L);
 
