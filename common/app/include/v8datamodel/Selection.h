@@ -31,7 +31,14 @@ private:
 
 DECOMP_SIZE_ASSERT(SelectionChanged, 0x10)
 
-class ISelectionBase;
+// SIZE 0x4
+class __declspec(novtable) ISelectionBase
+{
+public:
+	virtual void VTable0x00(const SelectionChanged& event) = 0; // vtable+0x00
+};
+
+DECOMP_SIZE_ASSERT(ISelectionBase, 0x4)
 
 extern const char sSelection[];
 // SIZE 0x12c
@@ -41,6 +48,8 @@ class Selection : public DescribedCreatable<Selection, Instance, sSelection>,
 				  public Service
 {
 public:
+	void raiseRemoved(boost::shared_ptr<Instance> item);
+
 	void removeFromSelection(const Instance* instance);
 
 	virtual void onEvent(const Instance* source, AncestorChanged event);
@@ -51,6 +60,17 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Selection, 0x12c)
+
+// clang-format off
+// FUNCTION: WEBSERVICE 0x10047e10
+// RBX::SelectionChanged::~SelectionChanged
+// FUNCTION: WEBSERVICE 0x1005cf20
+// RBX::SelectionChanged::SelectionChanged
+// STUB: WEBSERVICE 0x1005d160
+// RBX::Notifier<RBX::Selection,RBX::SelectionChanged>::raise
+// FUNCTION: WEBSERVICE 0x100ddf60
+// RBX::Notifier<RBX::Instance,RBX::AncestorChanged>::removeListener
+// clang-format on
 
 } // namespace RBX
 

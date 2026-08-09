@@ -9,6 +9,19 @@ namespace RBX {
 
 const char sSelection[] = "Selection";
 
+// STUB: WEBSERVICE 0x1005d440
+void Selection::raiseRemoved(boost::shared_ptr<Instance> item)
+{
+	SelectionChanged event(boost::shared_ptr<Instance>(), item);
+
+	for (std::vector<ISelectionBase*>::iterator iter = filteredSelections.begin(); iter != filteredSelections.end();
+		 ++iter) {
+		(*iter)->VTable0x00(event);
+	}
+
+	Notifier<Selection, SelectionChanged>::raise(event);
+}
+
 // STUB: WEBSERVICE 0x1005e1f0
 void Selection::removeFromSelection(const Instance* instance)
 {
@@ -24,7 +37,7 @@ void Selection::removeFromSelection(const Instance* instance)
 
 		instance->Notifier<Instance, AncestorChanged>::removeListener(this);
 
-		Notifier<Selection, SelectionChanged>::raise(SelectionChanged(boost::shared_ptr<Instance>(), removedItem));
+		raiseRemoved(removedItem);
 	}
 }
 
