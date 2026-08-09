@@ -238,6 +238,7 @@ set(OPENRBX_APP_SOURCES
   common/app/humanoid/Seated.cpp
   common/app/script/LuaInstanceBridge.cpp
   common/app/script/Script.cpp
+  common/app/script/ThreadRef.cpp
   common/app/script/ScriptContext.cpp
   common/app/tool/GroupDragTool.cpp
   common/app/tool/NullTool.cpp
@@ -333,6 +334,7 @@ set(OPENRBX_ENGINE_INCLUDE_DIRS
 set(OPENRBX_3RDPARTY_INCLUDE_DIRS
   "${OPENRBX_BOOST_INCLUDE_DIR}"
   "${OPENRBX_G3D_INCLUDE_DIR}"
+  "${OPENRBX_LUA_INCLUDE_DIR}"
   ${OPENRBX_G3D_EXTRA_INCLUDE_DIRS}
   "${OPENRBX_SDL_INCLUDE_DIR}"
 )
@@ -367,6 +369,42 @@ function(add_engine_library NAME)
   endif()
   set(OPENRBX_ENGINE_LIBRARIES ${OPENRBX_ENGINE_LIBRARIES} ${NAME} PARENT_SCOPE)
 endfunction()
+
+# Lua 5.1.1 went into app.lib as 25 translation units. The recorded command block carries -TP,
+# so the original compiled these .c files as C++ and their symbols are C++ mangled.
+set(OPENRBX_LUA_SOURCES
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lapi.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lauxlib.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lbaselib.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lcode.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ldebug.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ldo.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ldump.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lfunc.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lgc.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/liolib.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/llex.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lmathlib.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lmem.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lobject.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lopcodes.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lparser.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lstate.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lstring.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lstrlib.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ltable.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ltablib.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ltm.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lundump.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lvm.c"
+  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lzio.c"
+)
+
+add_engine_library(lua
+  DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE
+  OPTIONS /O2 /Ob2 /Oi /Oy /GF /GS- /fp:fast /TP
+  SOURCES ${OPENRBX_LUA_SOURCES}
+)
 
 # /GS- /fp:fast and full inline expansion are unique to App among the Roblox libraries.
 add_engine_library(app

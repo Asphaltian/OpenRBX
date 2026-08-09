@@ -331,7 +331,7 @@ Where the line records show lines that generate no code, the original named some
 
 reccmp parses the recompiled PDB only, so the original's side gets its names from CSVs under `reccmp/`.
 
-One file per library, named after the library, the way racers splits `directshow` from `dxguid`. Every file carries a `#` comment header saying what it holds; reccmp skips `#` and `//` lines and ignores any column it does not know, which is what `x-text` in the strings file is for.
+One file per library, named after the library, the way racers splits `directshow` from `dxguid`. No comments: the files carry rows only. reccmp ignores any column it does not know, which is what `x-text` in the strings file is for.
 
 - **`webservice-function-size.csv`** gives the original's 12,633 function extents, so reccmp knows where each one ends without a symbol. Every other file edits this baseline.
 - **`webservice-atl.csv`, `-boost.csv`, `-crt.csv`, `-g3d.csv`, `-ijg.csv`, `-libpng.csv`, `-stl.csv`, `-zlib.csv`** are the third-party code, typed `library` so `--nolib` drops them. IJG, libpng and zlib ship inside G3D and are still their own files, because a row is only reviewable next to the library it came from.

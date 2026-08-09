@@ -1,16 +1,9 @@
 address,type,name
 0x10231ea0,global,gcTime
 0x10231ea8,global,decay
-0x10238d00,global,tab_funcs
-0x10238e80,global,mathlib
-0x10239030,global,strlib
-0x102393c0,global,base_funcs
-0x10239488,global,co_funcs
 0x102395c0,global,optsnum
 0x102395e4,global,opts
 0x102397f8,global,fnames
-0x10239800,global,iolib
-0x10239860,global,flib
 0x1023a0f0,global,category_Camera
 0x1023a1cc,global,ZOOM_FACTOR
 0x10246e50,global,BLOCK_FACE_TO_VERTEX

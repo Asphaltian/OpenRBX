@@ -16,6 +16,7 @@ targets:
       - reccmp/webservice-g3d.csv
       - reccmp/webservice-ijg.csv
       - reccmp/webservice-libpng.csv
+      - reccmp/webservice-lua.csv
       - reccmp/webservice-stl.csv
       - reccmp/webservice-zlib.csv
       # Roblox code: counted as unimplemented
