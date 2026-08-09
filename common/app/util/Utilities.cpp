@@ -2,6 +2,7 @@
 
 #include "decomp.h"
 
+#include <G3D/Vector3.h>
 #include <cstdio>
 #include <limits>
 
@@ -116,6 +117,20 @@ bool StringConverter<float>::convertToValue(const std::string& text, float& valu
 {
 	STUB(0x10090860);
 	return false;
+}
+
+// FUNCTION: WEBSERVICE 0x10090970
+template <>
+std::string StringConverter<G3D::Vector3>::convertToString(const G3D::Vector3& value)
+{
+	std::string result = StringConverter<float>::convertToString(value.x);
+
+	result += ", ";
+	result += StringConverter<float>::convertToString(value.y);
+	result += ", ";
+	result += StringConverter<float>::convertToString(value.z);
+
+	return result;
 }
 
 } // namespace RBX

@@ -763,5 +763,9 @@ template int Bridge<G3D::Color3, 1>::on_eq(lua_State* L);
 
 template int Bridge<RBX::BrickColor, 1>::on_eq(lua_State* L);
 
+template int Bridge<G3D::Vector3, 1>::on_tostring(const G3D::Vector3& value, lua_State* L);
+
+template int Bridge<G3D::Vector3, 1>::on_tostring(lua_State* L);
+
 } // namespace Lua
 } // namespace RBX

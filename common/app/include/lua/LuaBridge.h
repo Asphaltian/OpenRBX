@@ -1,6 +1,8 @@
 #ifndef LUA_LUABRIDGE_H
 #define LUA_LUABRIDGE_H
 
+#include "util/Utilities.h"
+
 #include <G3D/format.h>
 #include <boost/shared_ptr.hpp>
 #include <lauxlib.h>
@@ -145,6 +147,24 @@ int Bridge<T, Tag>::on_gc(lua_State* L)
 	return 0;
 }
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1005edb0
+// ?on_tostring@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHABVVector3@G3D@@PAUlua_State@@@Z
+// clang-format on
+template <class T, int Tag>
+int Bridge<T, Tag>::on_tostring(const T& value, lua_State* L)
+{
+	std::string text = StringConverter<T>::convertToString(value);
+
+	lua_pushstring(L, text.c_str());
+
+	return 1;
+}
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1005fe70
+// ?on_tostring@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// clang-format on
 template <class T, int Tag>
 int Bridge<T, Tag>::on_tostring(lua_State* L)
 {
