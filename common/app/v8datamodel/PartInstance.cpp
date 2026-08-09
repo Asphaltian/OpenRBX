@@ -302,6 +302,16 @@ bool PartInstance::reportTouches() const
 	return false;
 }
 
+// FUNCTION: WEBSERVICE 0x1009bfa0
+const Part& PartInstance::getPart()
+{
+	Part& part = PersistentPart.getValueRef();
+
+	part.coordinateFrame = getPrimitive()->getCoordinateFrame();
+
+	return part;
+}
+
 // FUNCTION: WEBSERVICE 0x1009bff0
 void PartInstance::onAncestorChanged(const AncestorChanged& event)
 {

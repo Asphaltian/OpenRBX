@@ -14,6 +14,8 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10059d30
 	// RBX::ComputeProp<RBX::Extents,RBX::ModelInstance>::getValue
+	// STUB: WEBSERVICE 0x1009b290
+	// RBX::ComputeProp<RBX::Part,RBX::PartInstance>::getValue
 	// clang-format on
 	T getValue() const
 	{

@@ -75,6 +75,8 @@ private:
 	ComputeProp<bool, PartInstance> SurfacesNeedAdorn; // 0x278
 
 	Part computePersistentPart() const;
+
+	const Part& getPart();
 	bool computeSurfacesNeedAdorn() const;
 	void safeMove();
 
