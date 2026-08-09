@@ -41,6 +41,7 @@ protected:
 	static void on_newindex(T& value, const char* name, lua_State* L);
 
 	static int on_tostring(lua_State* L);
+	static int on_tostring(const T& value, lua_State* L);
 
 	static int on_gc(lua_State* L);
 	static int on_eq(lua_State* L);
@@ -122,6 +123,51 @@ template <class T, int Tag>
 void Bridge<T, Tag>::on_newindex(T& value, const char* name, lua_State* L)
 {
 	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
+}
+
+template <class T, int Tag>
+int Bridge<T, Tag>::on_gc(lua_State* L)
+{
+	getObject(L, 1).~T();
+
+	return 0;
+}
+
+template <class T, int Tag>
+int Bridge<T, Tag>::on_tostring(lua_State* L)
+{
+	return on_tostring(getObject(L, 1), L);
+}
+
+// clang-format off
+// STUB: WEBSERVICE 0x1005ffb0
+// ?on_newindex@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// STUB: WEBSERVICE 0x10060360
+// ?on_newindex@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHPAUlua_State@@@Z
+// clang-format on
+template <class T, int Tag>
+int Bridge<T, Tag>::on_newindex(lua_State* L)
+{
+	const char* name = luaL_checkstring(L, 2);
+	T& value = getObject(L, 1);
+
+	on_newindex(value, name, L);
+
+	return 0;
+}
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1005ffe0
+// ?on_index@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x10060390
+// ?on_index@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHPAUlua_State@@@Z
+// clang-format on
+template <class T, int Tag>
+int Bridge<T, Tag>::on_index(lua_State* L)
+{
+	const char* name = luaL_checkstring(L, 2);
+
+	return on_index(getObject(L, 1), name, L);
 }
 
 // SIZE 0x1

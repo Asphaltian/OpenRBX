@@ -320,6 +320,14 @@ int Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_index(
 } // namespace Lua
 } // namespace RBX
 
+template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_newindex(lua_State* L);
+
+template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_index(lua_State* L);
+
+template int RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_newindex(lua_State* L);
+
+template int RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_index(lua_State* L);
+
 template RBX::Reflection::GenericSlotWrapper* RBX::Reflection::GenericSlotWrapper::create<WaitScriptSlot>(
 	WaitScriptSlot slot
 );
