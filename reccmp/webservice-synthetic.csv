@@ -90,6 +90,12 @@ address,type,symbol
 0x100a38f0,stub,??$?0P8Humanoid@RBX@@BE_NXZP801@AEX_N@Z@?$PropDescriptor@VHumanoid@RBX@@_N@Reflection@RBX@@QAE@PBD0P8Humanoid@2@BE_NXZP832@AEX_N@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100a39b0,stub,??$?0P8Humanoid@RBX@@BEMXZP801@AEXM@Z@?$PropDescriptor@VHumanoid@RBX@@M@Reflection@RBX@@QAE@PBD0P8Humanoid@2@BEMXZP832@AEXM@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100a4290,stub,??0Humanoid@RBX@@QAE@XZ
+0x100afd20,synthetic,??1FunctionScriptSlot@@QAE@XZ
+0x100afdb0,synthetic,??1WaitScriptSlot@@QAE@XZ
+0x100afe70,synthetic,??0WaitScriptSlot@@QAE@ABV0@@Z
+0x100b03e0,synthetic,??_G?$TGenericSlotWrapper@VWaitScriptSlot@@@Reflection@RBX@@UAEPAXI@Z
+0x100b0770,synthetic,??0FunctionScriptSlot@@QAE@ABV0@@Z
+0x100b08c0,synthetic,??_G?$TGenericSlotWrapper@VFunctionScriptSlot@@@Reflection@RBX@@UAEPAXI@Z
 0x100b3640,stub,??0Item@GlobalSettings@RBX@@QAE@XZ
 0x100b3be0,synthetic,??1?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@EAE@XZ
 0x100b3d90,synthetic,??1?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@EAE@XZ

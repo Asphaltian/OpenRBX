@@ -7,6 +7,10 @@
 namespace RBX {
 namespace Reflection {
 
+GenericSlotWrapper::~GenericSlotWrapper()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x10095790
 SignalInstance::~SignalInstance()
 {

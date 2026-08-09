@@ -7,6 +7,8 @@
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
 
+struct lua_State;
+
 namespace RBX {
 
 extern char sScriptContext[];
@@ -16,6 +18,9 @@ class ScriptContext : public DescribedCreatable<ScriptContext, Instance, sScript
 					  public Listener<RunService, Heartbeat>,
 					  public Service
 {
+public:
+	static ScriptContext& getContext(lua_State* L);
+
 protected:
 	virtual void onEvent(const RunService* source, RunTransition event);
 	virtual void onEvent(const RunService* source, Heartbeat event);

@@ -36,7 +36,8 @@ public:
 		const boost::shared_ptr<boost::mutex> sync; // 0x04
 	};
 
-	ThreadRef();
+	ThreadRef() : sync(syncSingleton), node(NULL), previous(NULL), next(NULL), L(NULL), threadId(0) {}
+
 	ThreadRef(const ThreadRef& other);
 	ThreadRef(lua_State* L);
 

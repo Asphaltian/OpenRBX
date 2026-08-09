@@ -9,6 +9,19 @@ namespace RBX {
 
 char sScriptContext[] = "ScriptContext";
 
+// FUNCTION: WEBSERVICE 0x1005eb00
+ScriptContext& ScriptContext::getContext(lua_State* L)
+{
+	lua_pushlightuserdata(L, (void*) 0x43);
+	lua_gettable(L, LUA_GLOBALSINDEX);
+
+	ScriptContext* context = static_cast<ScriptContext*>(lua_touserdata(L, -1));
+
+	lua_settop(L, -2);
+
+	return *context;
+}
+
 // STUB: WEBSERVICE 0x1005eb60
 void ScriptContext::onEvent(const RunService* source, RunTransition event)
 {

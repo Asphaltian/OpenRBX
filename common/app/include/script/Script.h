@@ -6,6 +6,7 @@
 #include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>
+#include <boost/signals/connection.hpp>
 #include <string>
 
 namespace RBX {
@@ -19,6 +20,16 @@ extern char sLocalScript[];
 class Script : public DescribedCreatable<Script, Instance, sScript>
 {
 public:
+	// SIZE 0x8
+	class Slot
+	{
+	public:
+		boost::shared_ptr<boost::signals::connection> cnction; // 0x00
+
+	protected:
+		Slot() : cnction(new boost::signals::connection()) {}
+	};
+
 	// FUNCTION: WEBSERVICE 0x10068960
 	const ContentId& getScriptId() const { return scriptId; }
 

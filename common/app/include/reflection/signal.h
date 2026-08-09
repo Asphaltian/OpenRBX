@@ -5,6 +5,7 @@
 #include "reflection/member.h"
 #include "reflection/property.h"
 #include "reflection/type.h"
+#include "util/standardout.h"
 
 #include <boost/any.hpp>
 #include <boost/function.hpp>
@@ -61,12 +62,58 @@ DECOMP_SIZE_ASSERT(SignalSource, 0x08)
 class __declspec(novtable) GenericSlotWrapper
 {
 public:
-	virtual ~GenericSlotWrapper() {} // vtable+0x00
+	virtual ~GenericSlotWrapper(); // vtable+0x00
 
 	virtual void execute(const std::vector<boost::any>& arguments) = 0; // vtable+0x04
+
+	template <class Slot>
+	static GenericSlotWrapper* create(Slot slot);
 };
 
 DECOMP_SIZE_ASSERT(GenericSlotWrapper, 0x04)
+
+template <class Slot>
+class TGenericSlotWrapper : public GenericSlotWrapper
+{
+	friend class GenericSlotWrapper;
+
+public:
+	virtual void execute(const std::vector<boost::any>& arguments); // vtable+0x04
+
+private:
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100b0060
+	// RBX::Reflection::TGenericSlotWrapper<WaitScriptSlot>::TGenericSlotWrapper<WaitScriptSlot>
+	// TEMPLATE: WEBSERVICE 0x100b0870
+	// RBX::Reflection::TGenericSlotWrapper<FunctionScriptSlot>::TGenericSlotWrapper<FunctionScriptSlot>
+	// clang-format on
+	TGenericSlotWrapper(const Slot& slot) : slot(slot) {}
+
+	Slot slot; // 0x04
+};
+
+template <class Slot>
+void TGenericSlotWrapper<Slot>::execute(const std::vector<boost::any>& arguments)
+{
+	try {
+		slot(arguments);
+	}
+	catch (const std::exception& error) {
+		StandardOut::singleton()->print(MESSAGE_ERROR, "Exception caught in TGenericSlotWrapper. %s", error.what());
+	}
+}
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x100b0800
+// RBX::Reflection::GenericSlotWrapper::create<WaitScriptSlot>
+// TEMPLATE: WEBSERVICE 0x100b0e90
+// RBX::Reflection::GenericSlotWrapper::create<FunctionScriptSlot>
+// clang-format on
+template <class Slot>
+GenericSlotWrapper* GenericSlotWrapper::create(Slot slot)
+{
+	return new TGenericSlotWrapper<Slot>(slot);
+}
 
 // SIZE 0x24
 class __declspec(novtable) SignalDescriptor : public MemberDescriptor
