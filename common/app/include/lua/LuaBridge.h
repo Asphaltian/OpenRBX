@@ -65,6 +65,8 @@ T& Bridge<T, Tag>::pushNewObject(lua_State* L)
 // ??$pushNewObject@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SAPAVVector3@G3D@@PAUlua_State@@V23@@Z
 // TEMPLATE: WEBSERVICE 0x1005f250
 // ??$pushNewObject@VBrickColor@RBX@@@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@SAPAVBrickColor@2@PAUlua_State@@V32@@Z
+// TEMPLATE: WEBSERVICE 0x100afbe0
+// ??$pushNewObject@Vconnection@signals@boost@@@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@SAPAVconnection@signals@boost@@PAUlua_State@@V345@@Z
 // clang-format on
 template <class T, int Tag>
 template <class U>

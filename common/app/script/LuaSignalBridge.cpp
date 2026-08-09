@@ -11,6 +11,29 @@ namespace Lua {
 template <>
 const char* Bridge<boost::signals::connection, 1>::className = "RBXScriptConnection";
 
+template <>
+const char* Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::className = "RBXScriptSignal";
+
+template boost::signals::connection* Bridge<boost::signals::connection, 1>::pushNewObject<boost::signals::connection>(
+	lua_State* L,
+	boost::signals::connection value
+);
+
+// FUNCTION: WEBSERVICE 0x100afc80
+template <>
+void Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_newindex(
+	boost::shared_ptr<RBX::Reflection::SignalInstance>& value,
+	const char* name,
+	lua_State* L
+)
+{
+	if (value.get() == NULL) {
+		throw std::runtime_error(G3D::format("The %s event has been deleted", name));
+	}
+
+	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
+}
+
 // FUNCTION: WEBSERVICE 0x100afe30
 int SignalConnectionBridge::disconnect(lua_State* L)
 {
