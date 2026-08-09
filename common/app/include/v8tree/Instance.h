@@ -259,6 +259,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>::~DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>
 	// FUNCTION: WEBSERVICE 0x100563e0
 	// RBX::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>
+	// FUNCTION: WEBSERVICE 0x1005cde0
+	// RBX::Instance::getRootAncestor
 	// FUNCTION: WEBSERVICE 0x1005d000
 	// RBX::DescribedCreatable<RBX::Selection,RBX::Instance,&RBX::sSelection>::~DescribedCreatable<RBX::Selection,RBX::Instance,&RBX::sSelection>
 	// FUNCTION: WEBSERVICE 0x1005e3f0

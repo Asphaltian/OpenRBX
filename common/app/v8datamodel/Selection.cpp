@@ -1,5 +1,10 @@
 #include "v8datamodel/Selection.h"
 
+#include "util/object.h"
+#include "util/standardout.h"
+
+#include <algorithm>
+
 namespace RBX {
 
 const char sSelection[] = "Selection";
@@ -7,10 +12,23 @@ const char sSelection[] = "Selection";
 // STUB: WEBSERVICE 0x1005e1f0
 void Selection::removeFromSelection(const Instance* instance)
 {
-	STUB(0x1005e1f0);
+	boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > > items = selection.write();
+
+	std::vector<boost::shared_ptr<Instance> >::iterator iter =
+		std::find(items->begin(), items->end(), shared_from(instance));
+
+	if (iter != items->end()) {
+		boost::shared_ptr<Instance> removedItem = *iter;
+
+		items->erase(iter);
+
+		instance->Notifier<Instance, AncestorChanged>::removeListener(this);
+
+		Notifier<Selection, SelectionChanged>::raise(SelectionChanged(boost::shared_ptr<Instance>(), removedItem));
+	}
 }
 
-// STUB: WEBSERVICE 0x1005e870
+// FUNCTION: WEBSERVICE 0x1005e870
 void Selection::onEvent(const Instance* source, AncestorChanged event)
 {
 	const Instance* sourceRoot = source->getParent() != NULL ? source->getParent()->getRootAncestor() : source;

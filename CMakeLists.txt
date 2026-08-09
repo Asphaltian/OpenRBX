@@ -29,6 +29,7 @@ if (ENABLE_CLANG_TIDY)
                               common/app/reflection/signal.cpp
                               common/app/util/Name.cpp common/app/util/standardout.cpp
                               common/app/v8datamodel/PartInstance.cpp
+                              common/app/v8datamodel/Selection.cpp
                               common/app/v8datamodel/Workspace.cpp
                               common/app/v8world/World.cpp
                               PROPERTIES SKIP_LINTING ON)

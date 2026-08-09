@@ -18,7 +18,7 @@ struct RaiseRange
 	unsigned int upper;   // 0x04
 	RaiseRange* previous; // 0x08
 
-	// STUB: WEBSERVICE 0x1000cd10
+	// FUNCTION: WEBSERVICE 0x1000cd10
 	void removeIndex(unsigned int index)
 	{
 		RaiseRange* range = this;
@@ -85,7 +85,7 @@ void Notifier<Source, Event>::addListener(Listener<Source, Event>* listener) con
 	}
 }
 
-// STUB: WEBSERVICE 0x1001ad50
+// FUNCTION: WEBSERVICE 0x1001ad50
 // RBX::Notifier<RBX::StandardOut,RBX::StandardOutMessage>::removeListener
 template <class Source, class Event>
 void Notifier<Source, Event>::removeListener(Listener<Source, Event>* listener) const
