@@ -1,5 +1,7 @@
 #include "script/ThreadRef.h"
 
+#include "lua/LuaBridge.h"
+
 #include <lauxlib.h>
 #include <lua.h>
 
@@ -7,6 +9,9 @@ namespace RBX {
 namespace Lua {
 
 boost::shared_ptr<boost::mutex> ThreadRef::syncSingleton;
+
+template <>
+const char* Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::className = "shared_ptr<ThreadRef::Node>";
 
 void ThreadRef::addRef()
 {
@@ -85,6 +90,31 @@ void FunctionRef::removeRef()
 	ThreadRef::removeRef();
 }
 
+// FUNCTION: WEBSERVICE 0x100b1440
+boost::shared_ptr<ThreadRef::Node> ThreadRef::Node::get(lua_State* L)
+{
+	lua_pushlightuserdata(L, (void*) 0x4e);
+	lua_gettable(L, LUA_GLOBALSINDEX);
+
+	boost::shared_ptr<Node>& node = Bridge<boost::shared_ptr<Node>, 1>::getObject(L, lua_gettop(L));
+
+	lua_settop(L, -2);
+
+	return node;
+}
+
+// FUNCTION: WEBSERVICE 0x100b15f0
+ThreadRef::ThreadRef(lua_State* L) : sync(syncSingleton), node(NULL), previous(NULL), next(NULL), L(L), threadId(0)
+{
+	boost::mutex::scoped_lock lock(*sync);
+
+	node = Node::get(L).get();
+
+	addToNode();
+
+	addRef();
+}
+
 // FUNCTION: WEBSERVICE 0x100b1720
 ThreadRef::ThreadRef(const ThreadRef& other) : sync(syncSingleton), node(other.node), L(other.L)
 {
@@ -160,6 +190,14 @@ ThreadRef::~ThreadRef()
 	reset();
 }
 
+// FUNCTION: WEBSERVICE 0x100b1b40
+FunctionRef::FunctionRef(lua_State* L, int index) : ThreadRef(L)
+{
+	lua_pushvalue(L, index);
+
+	functionId = luaL_ref(L, LUA_REGISTRYINDEX);
+}
+
 // FUNCTION: WEBSERVICE 0x100b1bb0
 FunctionRef::~FunctionRef()
 {
@@ -179,6 +217,12 @@ FunctionRef::FunctionRef(const FunctionRef& other) : ThreadRef(other)
 
 		functionId = luaL_ref(thread(), LUA_REGISTRYINDEX);
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x100b1cd0
+FunctionRef lua_tofunction(lua_State* L, int index)
+{
+	return FunctionRef(L, index);
 }
 
 } // namespace Lua

@@ -2,6 +2,7 @@
 #define LUA_LUABRIDGE_H
 
 #include <G3D/format.h>
+#include <lauxlib.h>
 #include <lua.h>
 #include <stdexcept>
 
@@ -16,6 +17,11 @@ class Bridge
 {
 public:
 	static T& pushNewObject(lua_State* L);
+
+	static T& getObject(lua_State* L, unsigned int index)
+	{
+		return *static_cast<T*>(luaL_checkudata(L, index, className));
+	}
 
 	template <class U>
 	static bool getValue(lua_State* L, unsigned int index, U& value);
