@@ -1,3 +1,5 @@
+#include "lua/LuaBridge.h"
+#include "reflection/object.h"
 #include "reflection/property.h"
 #include "util/Name.h"
 #include "v8datamodel/BrickColor.h"
@@ -24,6 +26,16 @@ void newweaktable(lua_State* L, const char* mode)
 
 } // namespace Lua
 } // namespace RBX
+
+template bool RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::DescribedBase>, 0>::getValue<
+	boost::shared_ptr<RBX::Reflection::DescribedBase> >(
+	lua_State* L,
+	unsigned int index,
+	boost::shared_ptr<RBX::Reflection::DescribedBase>& value
+);
+
+template boost::shared_ptr<RBX::Reflection::DescribedBase> RBX::Lua::SharedPtrBridge<
+	RBX::Reflection::DescribedBase>::getPtr(lua_State* L, unsigned int index);
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sDecal>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sTexture>();

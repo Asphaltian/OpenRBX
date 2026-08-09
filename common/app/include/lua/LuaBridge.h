@@ -85,8 +85,12 @@ U* Bridge<T, Tag>::pushNewObject(lua_State* L, U value)
 	return object;
 }
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x100ab220
+// ??$getValue@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@SA_NPAUlua_State@@IAAV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Z
 // TEMPLATE: WEBSERVICE 0x100adbf0
 // ??$getValue@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KA_NPAUlua_State@@IAAVVector3@G3D@@@Z
+// clang-format on
 template <class T, int Tag>
 template <class U>
 bool Bridge<T, Tag>::getValue(lua_State* L, unsigned int index, U& value)
@@ -169,6 +173,20 @@ void SharedPtrBridge<T>::push(lua_State* L, boost::shared_ptr<T> instance)
 
 		lua_remove(L, -2);
 	}
+}
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x100ab1b0
+// ?getPtr@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA?AV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@I@Z
+// clang-format on
+template <class T>
+boost::shared_ptr<T> SharedPtrBridge<T>::getPtr(lua_State* L, unsigned int index)
+{
+	if (lua_type(L, index) == LUA_TNIL) {
+		return boost::shared_ptr<T>();
+	}
+
+	return getObject(L, index);
 }
 
 } // namespace Lua
