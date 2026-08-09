@@ -196,7 +196,17 @@ const PartInstance* ModelInstance::getPrimaryPartConst() const
 // STUB: WEBSERVICE 0x1005b230
 void ModelInstance::onDescendentAdded(Instance* instance)
 {
-	STUB(0x1005b230);
+	PVInstance::onDescendentAdded(instance);
+
+	LocalGridExtents.setDirty();
+	WorldGridExtents.setDirty();
+	FlagHeight.setDirty();
+
+	if (instance == candidatePrimaryPart.get()) {
+		candidatePrimaryPart.reset();
+	}
+
+	shouldRenderSetDirty();
 }
 
 // STUB: WEBSERVICE 0x1005b2c0
