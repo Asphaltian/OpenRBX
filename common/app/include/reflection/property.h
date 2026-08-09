@@ -218,23 +218,23 @@ public:
 	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::Sky>
 	// TEMPLATE: WEBSERVICE 0x10094f90
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Sky>
-	// STUB: WEBSERVICE 0x100996a0
+	// FUNCTION: WEBSERVICE 0x100996a0
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::getset<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>
 	// STUB: WEBSERVICE 0x10094c50
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::TypedPropertyDescriptor<RBX::TextureId>
 	// STUB: WEBSERVICE 0x1009ba30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
-	// STUB: WEBSERVICE 0x1009bce0
+	// FUNCTION: WEBSERVICE 0x1009bce0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>
-	// STUB: WEBSERVICE 0x1009bd50
+	// FUNCTION: WEBSERVICE 0x1009bd50
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,float>::getset<float (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(float)>
-	// STUB: WEBSERVICE 0x1009bdc0
+	// FUNCTION: WEBSERVICE 0x1009bdc0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,bool>::getset<bool (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(bool)>
-	// STUB: WEBSERVICE 0x100a15f0
+	// FUNCTION: WEBSERVICE 0x100a15f0
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::getset<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float const &)>
-	// STUB: WEBSERVICE 0x100a1660
+	// FUNCTION: WEBSERVICE 0x100a1660
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::getset<bool (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(bool)>
-	// STUB: WEBSERVICE 0x100a16d0
+	// FUNCTION: WEBSERVICE 0x100a16d0
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::getset<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100b36d0
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,bool>::getset<bool (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(bool)>
@@ -244,11 +244,11 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Team,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100be1a0
 	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::getset<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>
-	// STUB: WEBSERVICE 0x100ca3f0
+	// FUNCTION: WEBSERVICE 0x100ca3f0
 	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::GetSetImpl<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100ca830
 	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::getset<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>
-	// STUB: WEBSERVICE 0x100cd3c0
+	// FUNCTION: WEBSERVICE 0x100cd3c0
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::getValue
 	// STUB: WEBSERVICE 0x100cd400
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::setValue
@@ -262,7 +262,7 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::VelocityMotor,float>::getset<float (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ee870
 	// RBX::Reflection::PropDescriptor<RBX::Message,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getset<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const & (__thiscall RBX::Message::*)(void)const ,void (__thiscall RBX::Message::*)(std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &)>
-	// STUB: WEBSERVICE 0x100fdac0
+	// FUNCTION: WEBSERVICE 0x100fdac0
 	// RBX::Reflection::PropDescriptor<RBX::SpawnLocation,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::SpawnLocation::*)(void)const ,void (__thiscall RBX::SpawnLocation::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100ff7d0
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::getset<float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
@@ -292,7 +292,7 @@ public:
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting><enum RBX::DebugSettings::ErrorReporting (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::DebugSettings::ErrorReporting)>
 	// TEMPLATE: WEBSERVICE 0x100b4610
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,bool>::PropDescriptor<RBX::DebugSettings,bool><bool (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(bool)>
-	// STUB: WEBSERVICE 0x100ffd30
+	// FUNCTION: WEBSERVICE 0x100ffd30
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::PropDescriptor<RBX::Decal,float><float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ffdd0
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::PropDescriptor<RBX::Texture,float><float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>

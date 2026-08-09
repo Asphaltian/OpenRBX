@@ -53,7 +53,7 @@ public:
 
 	virtual void computeForce(float dt, bool throttling); // vtable+0x04
 
-	// STUB: WEBSERVICE 0x100a0720
+	// FUNCTION: WEBSERVICE 0x100a0720
 	// RBX::RotateConnector::`scalar deleting destructor'
 
 private:

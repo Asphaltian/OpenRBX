@@ -30,7 +30,7 @@ bool ContentId::isHttp() const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1004f310
+// FUNCTION: WEBSERVICE 0x1004f310
 bool operator<(const ContentId& a, const ContentId& b)
 {
 	STUB(0x1004f310);

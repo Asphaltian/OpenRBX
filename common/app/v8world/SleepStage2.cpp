@@ -340,7 +340,7 @@ SleepStage::SleepStage(IStage* upstream, World* world)
 {
 }
 
-// FUNCTION: WEBSERVICE 0x10119e00
+// STUB: WEBSERVICE 0x10119e00
 void SleepStage::wakeEvent(Assembly* a)
 {
 	Sim::AssemblyState state = getState(a);
@@ -350,7 +350,7 @@ void SleepStage::wakeEvent(Assembly* a)
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x10119e50
+// STUB: WEBSERVICE 0x10119e50
 void SleepStage::recursiveWakeEvent(Assembly* a)
 {
 	Sim::AssemblyState state = getState(a);
@@ -360,7 +360,7 @@ void SleepStage::recursiveWakeEvent(Assembly* a)
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x10119ea0
+// STUB: WEBSERVICE 0x10119ea0
 void SleepStage::touchEvent(Contact* c)
 {
 	for (int i = 0; i < 2; i++) {
@@ -479,7 +479,7 @@ void SleepStage::stepAssembliesSleepingChecking()
 	changeAssemblyState(toDeep, Sim::SLEEPING_DEEPLY);
 }
 
-// FUNCTION: WEBSERVICE 0x1011a480
+// STUB: WEBSERVICE 0x1011a480
 void SleepStage::wakeEvent(Edge* e)
 {
 	for (int i = 0; i < 2; i++) {
@@ -653,7 +653,7 @@ void SleepStage::stepContacts(ContactList& contacts)
 	changeContactState(toTouchingSleeping, Sim::TOUCHING_SLEEPING);
 }
 
-// FUNCTION: WEBSERVICE 0x1011ab10
+// STUB: WEBSERVICE 0x1011ab10
 void SleepStage::wakeAssemblyAndNeighbors(Assembly* assembly, int recurseDepth)
 {
 	Sim::AssemblyState state = getState(assembly);

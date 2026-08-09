@@ -259,7 +259,7 @@ G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
 	return result;
 }
 
-// STUB: WEBSERVICE 0x100a30d0
+// FUNCTION: WEBSERVICE 0x100a30d0
 G3D::Vector3 Humanoid::getIntendedMovementVector()
 {
 	return getIntendedMovementVector(false);

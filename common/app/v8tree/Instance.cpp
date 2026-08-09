@@ -140,7 +140,7 @@ void Instance::readChildren(const XmlElement* element, IReferenceBinder& binder)
 	}
 }
 
-// STUB: WEBSERVICE 0x1004e7b0
+// FUNCTION: WEBSERVICE 0x1004e7b0
 void Instance::predelete(Instance* instance)
 {
 	instance->predelete();

@@ -251,37 +251,37 @@ public:
 
 template <class T, class Base, const char* sName>
 // clang-format off
-	// STUB: WEBSERVICE 0x10043190
+	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
-	// STUB: WEBSERVICE 0x100459e0
+	// FUNCTION: WEBSERVICE 0x100459e0
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
-	// STUB: WEBSERVICE 0x100543a0
+	// FUNCTION: WEBSERVICE 0x100543a0
 	// RBX::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>::~DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>
-	// STUB: WEBSERVICE 0x100563e0
+	// FUNCTION: WEBSERVICE 0x100563e0
 	// RBX::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>
-	// STUB: WEBSERVICE 0x1005d000
+	// FUNCTION: WEBSERVICE 0x1005d000
 	// RBX::DescribedCreatable<RBX::Selection,RBX::Instance,&RBX::sSelection>::~DescribedCreatable<RBX::Selection,RBX::Instance,&RBX::sSelection>
-	// STUB: WEBSERVICE 0x1005e3f0
+	// FUNCTION: WEBSERVICE 0x1005e3f0
 	// RBX::DescribedCreatable<RBX::Selection,RBX::Instance,&RBX::sSelection>::DescribedCreatable<RBX::Selection,RBX::Instance,&RBX::sSelection>
-	// STUB: WEBSERVICE 0x10061210
+	// FUNCTION: WEBSERVICE 0x10061210
 	// RBX::DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::~DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
-	// STUB: WEBSERVICE 0x10065660
+	// FUNCTION: WEBSERVICE 0x10065660
 	// RBX::DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
-	// STUB: WEBSERVICE 0x10068be0
+	// FUNCTION: WEBSERVICE 0x10068be0
 	// RBX::DescribedCreatable<RBX::Script,RBX::Instance,&RBX::sScript>::~DescribedCreatable<RBX::Script,RBX::Instance,&RBX::sScript>
-	// STUB: WEBSERVICE 0x10068ff0
+	// FUNCTION: WEBSERVICE 0x10068ff0
 	// RBX::DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::~DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
-	// STUB: WEBSERVICE 0x10069880
+	// FUNCTION: WEBSERVICE 0x10069880
 	// RBX::DescribedCreatable<RBX::Script,RBX::Instance,&RBX::sScript>::DescribedCreatable<RBX::Script,RBX::Instance,&RBX::sScript><char const *>
-	// STUB: WEBSERVICE 0x10069be0
+	// FUNCTION: WEBSERVICE 0x10069be0
 	// RBX::DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
 	// TEMPLATE: WEBSERVICE 0x1008c6f0
 	// RBX::DescribedCreatable<RBX::Message,RBX::Instance,&RBX::sMessage>::~DescribedCreatable<RBX::Message,RBX::Instance,&RBX::sMessage>
-	// STUB: WEBSERVICE 0x1008cb80
+	// FUNCTION: WEBSERVICE 0x1008cb80
 	// RBX::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::~DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
-	// STUB: WEBSERVICE 0x1008de10
+	// FUNCTION: WEBSERVICE 0x1008de10
 	// RBX::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>
-	// STUB: WEBSERVICE 0x1008e2c0
+	// FUNCTION: WEBSERVICE 0x1008e2c0
 	// RBX::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
 	// TEMPLATE: WEBSERVICE 0x100946f0
 	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::~DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
@@ -289,147 +289,147 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// TEMPLATE: WEBSERVICE 0x10095060
 	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
-	// STUB: WEBSERVICE 0x100a3b60
+	// FUNCTION: WEBSERVICE 0x100a3b60
 	// RBX::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
-	// STUB: WEBSERVICE 0x100b3b30
+	// FUNCTION: WEBSERVICE 0x100b3b30
 	// RBX::DescribedCreatable<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::~DescribedCreatable<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>
-	// STUB: WEBSERVICE 0x100b4f20
+	// FUNCTION: WEBSERVICE 0x100b4f20
 	// RBX::DescribedCreatable<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::DescribedCreatable<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>
-	// STUB: WEBSERVICE 0x100be000
+	// FUNCTION: WEBSERVICE 0x100be000
 	// RBX::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>::~DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>
-	// STUB: WEBSERVICE 0x100be560
+	// FUNCTION: WEBSERVICE 0x100be560
 	// RBX::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>
-	// STUB: WEBSERVICE 0x100c2ee0
+	// FUNCTION: WEBSERVICE 0x100c2ee0
 	// RBX::DescribedCreatable<RBX::Camera,RBX::Instance,&RBX::sCamera>::~DescribedCreatable<RBX::Camera,RBX::Instance,&RBX::sCamera>
-	// STUB: WEBSERVICE 0x100c4030
+	// FUNCTION: WEBSERVICE 0x100c4030
 	// RBX::DescribedCreatable<RBX::Camera,RBX::Instance,&RBX::sCamera>::DescribedCreatable<RBX::Camera,RBX::Instance,&RBX::sCamera>
-	// STUB: WEBSERVICE 0x100c5b70
+	// FUNCTION: WEBSERVICE 0x100c5b70
 	// RBX::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::~DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
-	// STUB: WEBSERVICE 0x100c6a90
+	// FUNCTION: WEBSERVICE 0x100c6a90
 	// RBX::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
-	// STUB: WEBSERVICE 0x100d87f0
+	// FUNCTION: WEBSERVICE 0x100d87f0
 	// RBX::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::~DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>
-	// STUB: WEBSERVICE 0x100d8800
+	// FUNCTION: WEBSERVICE 0x100d8800
 	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::~DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>
-	// STUB: WEBSERVICE 0x100d9440
+	// FUNCTION: WEBSERVICE 0x100d9440
 	// RBX::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap><RBX::Joint *>
-	// STUB: WEBSERVICE 0x100d94e0
+	// FUNCTION: WEBSERVICE 0x100d94e0
 	// RBX::DescribedCreatable<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::DescribedCreatable<RBX::Weld,RBX::AutoJoint,&RBX::sWeld><RBX::Joint *>
-	// STUB: WEBSERVICE 0x100d95c0
+	// FUNCTION: WEBSERVICE 0x100d95c0
 	// RBX::DescribedCreatable<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::DescribedCreatable<RBX::Glue,RBX::AutoJoint,&RBX::sGlue><RBX::GlueJoint *>
-	// STUB: WEBSERVICE 0x100d96d0
+	// FUNCTION: WEBSERVICE 0x100d96d0
 	// RBX::DescribedCreatable<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::DescribedCreatable<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate><RBX::Joint *>
-	// STUB: WEBSERVICE 0x100d9790
+	// FUNCTION: WEBSERVICE 0x100d9790
 	// RBX::DescribedCreatable<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::DescribedCreatable<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP><RBX::Joint *>
-	// STUB: WEBSERVICE 0x100d9870
+	// FUNCTION: WEBSERVICE 0x100d9870
 	// RBX::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV><RBX::Joint *>
-	// STUB: WEBSERVICE 0x100d9970
+	// FUNCTION: WEBSERVICE 0x100d9970
 	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor><RBX::MotorJoint *>
-	// STUB: WEBSERVICE 0x100da960
+	// FUNCTION: WEBSERVICE 0x100da960
 	// RBX::DescribedCreatable<RBX::Teams,RBX::Instance,&RBX::sTeams>::~DescribedCreatable<RBX::Teams,RBX::Instance,&RBX::sTeams>
-	// STUB: WEBSERVICE 0x100db0d0
+	// FUNCTION: WEBSERVICE 0x100db0d0
 	// RBX::DescribedCreatable<RBX::Teams,RBX::Instance,&RBX::sTeams>::DescribedCreatable<RBX::Teams,RBX::Instance,&RBX::sTeams>
-	// STUB: WEBSERVICE 0x100db930
+	// FUNCTION: WEBSERVICE 0x100db930
 	// RBX::DescribedCreatable<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::~DescribedCreatable<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>
-	// STUB: WEBSERVICE 0x100dc280
+	// FUNCTION: WEBSERVICE 0x100dc280
 	// RBX::DescribedCreatable<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::~DescribedCreatable<RBX::Hat,RBX::Accoutrement,&RBX::sHat>
-	// STUB: WEBSERVICE 0x100dcc10
+	// FUNCTION: WEBSERVICE 0x100dcc10
 	// RBX::DescribedCreatable<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::DescribedCreatable<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>
 	// STUB: WEBSERVICE 0x100dd680
 	// RBX::DescribedCreatable<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::DescribedCreatable<RBX::Hat,RBX::Accoutrement,&RBX::sHat>
-	// STUB: WEBSERVICE 0x100de230
+	// FUNCTION: WEBSERVICE 0x100de230
 	// RBX::DescribedCreatable<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::~DescribedCreatable<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>
-	// STUB: WEBSERVICE 0x100de4c0
+	// FUNCTION: WEBSERVICE 0x100de4c0
 	// RBX::DescribedCreatable<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::DescribedCreatable<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>
-	// STUB: WEBSERVICE 0x100e0920
+	// FUNCTION: WEBSERVICE 0x100e0920
 	// RBX::DescribedCreatable<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::~DescribedCreatable<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
-	// STUB: WEBSERVICE 0x100e0a80
+	// FUNCTION: WEBSERVICE 0x100e0a80
 	// RBX::DescribedCreatable<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::~DescribedCreatable<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>
-	// STUB: WEBSERVICE 0x100e0b50
+	// FUNCTION: WEBSERVICE 0x100e0b50
 	// RBX::DescribedCreatable<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::~DescribedCreatable<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>
-	// STUB: WEBSERVICE 0x100e0d50
+	// FUNCTION: WEBSERVICE 0x100e0d50
 	// RBX::DescribedCreatable<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>::~DescribedCreatable<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>
-	// STUB: WEBSERVICE 0x100e11c0
+	// FUNCTION: WEBSERVICE 0x100e11c0
 	// RBX::DescribedCreatable<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::DescribedCreatable<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
-	// STUB: WEBSERVICE 0x100e12b0
+	// FUNCTION: WEBSERVICE 0x100e12b0
 	// RBX::DescribedCreatable<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::DescribedCreatable<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>
-	// STUB: WEBSERVICE 0x100e13a0
+	// FUNCTION: WEBSERVICE 0x100e13a0
 	// RBX::DescribedCreatable<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::DescribedCreatable<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>
-	// STUB: WEBSERVICE 0x100e1840
+	// FUNCTION: WEBSERVICE 0x100e1840
 	// RBX::DescribedCreatable<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>::DescribedCreatable<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>
-	// STUB: WEBSERVICE 0x100e2100
+	// FUNCTION: WEBSERVICE 0x100e2100
 	// RBX::DescribedCreatable<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::~DescribedCreatable<RBX::Explosion,RBX::Instance,&RBX::sExplosion>
-	// STUB: WEBSERVICE 0x100e2c00
+	// FUNCTION: WEBSERVICE 0x100e2c00
 	// RBX::DescribedCreatable<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::DescribedCreatable<RBX::Explosion,RBX::Instance,&RBX::sExplosion>
-	// STUB: WEBSERVICE 0x100e46f0
+	// FUNCTION: WEBSERVICE 0x100e46f0
 	// RBX::DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::~DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>
-	// STUB: WEBSERVICE 0x100e4ea0
+	// FUNCTION: WEBSERVICE 0x100e4ea0
 	// RBX::DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>::~DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>
-	// STUB: WEBSERVICE 0x100e4eb0
+	// FUNCTION: WEBSERVICE 0x100e4eb0
 	// RBX::DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::~DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>
-	// STUB: WEBSERVICE 0x100e6c20
+	// FUNCTION: WEBSERVICE 0x100e6c20
 	// RBX::DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor><RBX::MotorJoint *>
-	// STUB: WEBSERVICE 0x100e7730
+	// FUNCTION: WEBSERVICE 0x100e7730
 	// RBX::DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>
-	// STUB: WEBSERVICE 0x100e77d0
+	// FUNCTION: WEBSERVICE 0x100e77d0
 	// RBX::DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>::DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>
-	// STUB: WEBSERVICE 0x100e8050
+	// FUNCTION: WEBSERVICE 0x100e8050
 	// RBX::DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::~DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
-	// STUB: WEBSERVICE 0x100e89f0
+	// FUNCTION: WEBSERVICE 0x100e89f0
 	// RBX::DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
-	// STUB: WEBSERVICE 0x100e9460
+	// FUNCTION: WEBSERVICE 0x100e9460
 	// RBX::DescribedCreatable<RBX::ForceField,RBX::Instance,&RBX::sForceField>::~DescribedCreatable<RBX::ForceField,RBX::Instance,&RBX::sForceField>
-	// STUB: WEBSERVICE 0x100e96e0
+	// FUNCTION: WEBSERVICE 0x100e96e0
 	// RBX::DescribedCreatable<RBX::ForceField,RBX::Instance,&RBX::sForceField>::DescribedCreatable<RBX::ForceField,RBX::Instance,&RBX::sForceField>
-	// STUB: WEBSERVICE 0x100e9d30
+	// FUNCTION: WEBSERVICE 0x100e9d30
 	// RBX::DescribedCreatable<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>::DescribedCreatable<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService><char *>
-	// STUB: WEBSERVICE 0x100ec040
+	// FUNCTION: WEBSERVICE 0x100ec040
 	// RBX::DescribedCreatable<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::~DescribedCreatable<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>
-	// STUB: WEBSERVICE 0x100ec050
+	// FUNCTION: WEBSERVICE 0x100ec050
 	// RBX::DescribedCreatable<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>::~DescribedCreatable<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>
-	// STUB: WEBSERVICE 0x100ece60
+	// FUNCTION: WEBSERVICE 0x100ece60
 	// RBX::DescribedCreatable<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>::DescribedCreatable<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro><char *>
-	// STUB: WEBSERVICE 0x100ecf60
+	// FUNCTION: WEBSERVICE 0x100ecf60
 	// RBX::DescribedCreatable<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition>::DescribedCreatable<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition><char *>
-	// STUB: WEBSERVICE 0x100ed010
+	// FUNCTION: WEBSERVICE 0x100ed010
 	// RBX::DescribedCreatable<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>::DescribedCreatable<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity><char *>
-	// STUB: WEBSERVICE 0x100ed1b0
+	// FUNCTION: WEBSERVICE 0x100ed1b0
 	// RBX::DescribedCreatable<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce>::DescribedCreatable<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce><char *>
-	// STUB: WEBSERVICE 0x100ed380
+	// FUNCTION: WEBSERVICE 0x100ed380
 	// RBX::DescribedCreatable<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust>::DescribedCreatable<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust><char *>
-	// STUB: WEBSERVICE 0x100eddb0
+	// FUNCTION: WEBSERVICE 0x100eddb0
 	// RBX::DescribedCreatable<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::DescribedCreatable<RBX::Rocket,RBX::BodyMover,&RBX::sRocket><char *>
-	// STUB: WEBSERVICE 0x100ee970
+	// FUNCTION: WEBSERVICE 0x100ee970
 	// RBX::DescribedCreatable<RBX::Message,RBX::Instance,&RBX::sMessage>::DescribedCreatable<RBX::Message,RBX::Instance,&RBX::sMessage><char const *>
-	// STUB: WEBSERVICE 0x100f8d50
+	// FUNCTION: WEBSERVICE 0x100f8d50
 	// RBX::DescribedCreatable<RBX::Visit,RBX::Instance,&RBX::sVisit>::~DescribedCreatable<RBX::Visit,RBX::Instance,&RBX::sVisit>
-	// STUB: WEBSERVICE 0x100f94e0
+	// FUNCTION: WEBSERVICE 0x100f94e0
 	// RBX::DescribedCreatable<RBX::Visit,RBX::Instance,&RBX::sVisit>::DescribedCreatable<RBX::Visit,RBX::Instance,&RBX::sVisit>
-	// STUB: WEBSERVICE 0x100fa020
+	// FUNCTION: WEBSERVICE 0x100fa020
 	// RBX::DescribedCreatable<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService>::~DescribedCreatable<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService>
-	// STUB: WEBSERVICE 0x100fac30
+	// FUNCTION: WEBSERVICE 0x100fac30
 	// RBX::DescribedCreatable<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService>::DescribedCreatable<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService><char *>
-	// STUB: WEBSERVICE 0x100fb690
+	// FUNCTION: WEBSERVICE 0x100fb690
 	// RBX::DescribedCreatable<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::~DescribedCreatable<RBX::TimerService,RBX::Instance,&RBX::sTimerService>
-	// STUB: WEBSERVICE 0x100fbc60
+	// FUNCTION: WEBSERVICE 0x100fbc60
 	// RBX::DescribedCreatable<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::DescribedCreatable<RBX::TimerService,RBX::Instance,&RBX::sTimerService>
-	// STUB: WEBSERVICE 0x100fc3f0
+	// FUNCTION: WEBSERVICE 0x100fc3f0
 	// RBX::DescribedCreatable<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::~DescribedCreatable<RBX::Seat,RBX::PartInstance,&RBX::sSeat>
 	// STUB: WEBSERVICE 0x100fcfd0
 	// RBX::DescribedCreatable<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::DescribedCreatable<RBX::Seat,RBX::PartInstance,&RBX::sSeat>
-	// STUB: WEBSERVICE 0x100fda80
+	// FUNCTION: WEBSERVICE 0x100fda80
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::~DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
-	// STUB: WEBSERVICE 0x100feae0
+	// FUNCTION: WEBSERVICE 0x100feae0
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
-	// STUB: WEBSERVICE 0x100ffb30
+	// FUNCTION: WEBSERVICE 0x100ffb30
 	// RBX::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>::~DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// TEMPLATE: WEBSERVICE 0x100ffe70
 	// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// TEMPLATE: WEBSERVICE 0x101002f0
 	// RBX::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>
-	// STUB: WEBSERVICE 0x1012cc20
+	// FUNCTION: WEBSERVICE 0x1012cc20
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::~DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
-	// STUB: WEBSERVICE 0x1012d890
+	// FUNCTION: WEBSERVICE 0x1012d890
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 // clang-format on
 class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >

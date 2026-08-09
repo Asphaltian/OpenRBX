@@ -97,7 +97,7 @@ public:
 	// RBX::Reflection::Described<RBX::Motor,&RBX::sMotor,RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor> >::classDescriptor
 	// STUB: WEBSERVICE 0x1008e1e0
 	// RBX::Reflection::Described<RBX::Flag,&RBX::sFlag,RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag> >::classDescriptor
-	// STUB: WEBSERVICE 0x1008e390
+	// FUNCTION: WEBSERVICE 0x1008e390
 	// RBX::Reflection::Described<RBX::Seat,&RBX::sSeat,RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10094d80
 	// RBX::Reflection::Described<RBX::Sky,&RBX::sSky,RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky> >::classDescriptor
@@ -131,7 +131,7 @@ public:
 	// RBX::Reflection::Described<RBX::FaceInstance,&RBX::sFaceInstance,RBX::Instance>::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ffbb0
 	// RBX::Reflection::Described<RBX::Decal,&RBX::sDecal,RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal> >::classDescriptor
-	// STUB: WEBSERVICE 0x100ffc20
+	// FUNCTION: WEBSERVICE 0x100ffc20
 	// RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1012d2d0
 	// RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor
