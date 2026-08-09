@@ -36,7 +36,7 @@ public:
 
 	ThreadRef();
 	ThreadRef(const ThreadRef& other);
-	ThreadRef(lua_State* L, int index);
+	ThreadRef(lua_State* L);
 
 	~ThreadRef();
 
@@ -49,10 +49,7 @@ public:
 
 	bool empty() const;
 
-	lua_State* thread() const
-	{
-		return L;
-	}
+	lua_State* thread() const { return L; }
 
 protected:
 	virtual void removeRef(); // vtable+0x00
@@ -81,6 +78,7 @@ class FunctionRef : public ThreadRef
 {
 public:
 	FunctionRef();
+	FunctionRef(const FunctionRef& other);
 	FunctionRef(lua_State* L, int index);
 
 	~FunctionRef();

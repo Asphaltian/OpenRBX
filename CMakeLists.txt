@@ -27,6 +27,7 @@ if (ENABLE_CLANG_TIDY)
                               common/app/reflection/reflection_object.cpp
                               common/app/reflection/reflection_property.cpp
                               common/app/reflection/signal.cpp
+                              common/app/script/ThreadRef.cpp
                               common/app/util/Name.cpp common/app/util/standardout.cpp
                               common/app/v8datamodel/PartInstance.cpp
                               common/app/v8datamodel/Selection.cpp
