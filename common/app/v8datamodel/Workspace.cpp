@@ -21,6 +21,20 @@ const G3D::GCamera& Workspace::getGCamera() const
 	return getCamera()->getGCamera();
 }
 
+// FUNCTION: WEBSERVICE 0x1006a7c0
+Workspace* Workspace::getMyWorkspaceFast(const Instance* context)
+{
+	const Instance* workspace = context->getParent();
+	const Instance* dataModel = workspace->getParent();
+
+	while (dataModel->getParent() != NULL) {
+		workspace = dataModel;
+		dataModel = dataModel->getParent();
+	}
+
+	return (Workspace*) workspace;
+}
+
 // STUB: WEBSERVICE 0x1006a960
 IScriptOwner* Workspace::scriptShouldRun(Script* script)
 {

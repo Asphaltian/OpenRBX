@@ -2,8 +2,10 @@
 
 #include "util/standardout.h"
 #include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/Workspace.h"
 #include "v8kernel/Body.h"
 #include "v8world/Geometry.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
@@ -300,10 +302,30 @@ bool PartInstance::reportTouches() const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1009bff0
+// FUNCTION: WEBSERVICE 0x1009bff0
 void PartInstance::onAncestorChanged(const AncestorChanged& event)
 {
-	STUB(0x1009bff0);
+	Instance::onAncestorChanged(event);
+
+	World* world = Workspace::getWorldIfInWorkspace(this);
+
+	if (world != myWorld) {
+		if (myWorld != NULL) {
+			setMovingManager(NULL);
+
+			myWorld->removePrimitive(getPrimitive());
+		}
+
+		myWorld = world;
+
+		if (world != NULL) {
+			world->insertPrimitive(getPrimitive());
+
+			setMovingManager(Workspace::getMyWorkspaceFast(this));
+
+			getPrimitive()->setController(getTopPVController());
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1009c090

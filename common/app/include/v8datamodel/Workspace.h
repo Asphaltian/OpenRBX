@@ -50,6 +50,7 @@ public:
 
 	static Workspace* findWorkspace(const Instance* context);
 	static World* getWorldIfInWorkspace(const Instance* context);
+	static Workspace* getMyWorkspaceFast(const Instance* context);
 	static bool contextInWorkspace(const Instance* context);
 
 private:
