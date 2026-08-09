@@ -1,3 +1,5 @@
+#include "script/LuaAtomicClasses.h"
+
 #include "decomp.h"
 #include "lua/LuaBridge.h"
 #include "lua/lua.h"
@@ -66,6 +68,30 @@ int Bridge<G3D::Color3, 1>::on_index(const G3D::Color3& value, const char* name,
 	}
 
 	throw std::runtime_error(G3D::format("%s is not a valid member", name));
+}
+
+// FUNCTION: WEBSERVICE 0x100add30
+int Vector3Bridge::on_add(lua_State* L)
+{
+	pushNewObject(L, getObject(L, 2) + getObject(L, 1));
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100addc0
+int Vector3Bridge::on_sub(lua_State* L)
+{
+	const G3D::Vector3& left = getObject(L, 1);
+	const G3D::Vector3& right = getObject(L, 2);
+
+	pushNewObject(L, left - right);
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae030
+int Vector3Bridge::on_unm(lua_State* L)
+{
+	pushNewObject(L, -getObject(L, 1));
+	return 1;
 }
 
 // STUB: WEBSERVICE 0x100ae160
