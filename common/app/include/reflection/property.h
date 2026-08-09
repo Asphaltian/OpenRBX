@@ -484,6 +484,8 @@ public:
 		return typed->getValue(instance);
 	}
 
+	const DescribedBase* getInstance() const { return instance; }
+
 	std::string getStringValue() const { return descriptor->getStringValue(instance); }
 
 protected:
@@ -499,6 +501,8 @@ class Property : public ConstProperty
 public:
 	Property(const Property& other);
 	Property(const PropertyDescriptor* descriptor, DescribedBase* instance);
+
+	DescribedBase* getInstance() const { return const_cast<DescribedBase*>(instance); }
 
 	// clang-format off
 	// STUB: WEBSERVICE 0x100ab3a0
@@ -529,7 +533,7 @@ public:
 #endif
 		}
 
-		typed->setValue(const_cast<DescribedBase*>(instance), value);
+		typed->setValue(getInstance(), value);
 	}
 };
 

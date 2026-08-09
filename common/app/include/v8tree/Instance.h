@@ -176,6 +176,17 @@ public:
 
 	bool contains(const Instance* instance) const;
 
+	bool canAddChild(const Instance* child) const
+	{
+		if (child->contains(this) || child->parent == this) {
+			return false;
+		}
+
+		return askAddChild(child) || child->askSetParent(this);
+	}
+
+	bool canSetParent(const Instance* parent) const { return parent == NULL || parent->canAddChild(this); }
+
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10059dc0
 	// RBX::Instance::getTypedRoot<RBX::PVInstance>

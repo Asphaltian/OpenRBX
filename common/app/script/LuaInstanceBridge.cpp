@@ -6,6 +6,24 @@
 #include <G3D/Color3.h>
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
+#include <lua.h>
+
+namespace RBX {
+namespace Lua {
+
+// FUNCTION: WEBSERVICE 0x100aaf70
+void newweaktable(lua_State* L, const char* mode)
+{
+	lua_newtable(L);
+	lua_pushvalue(L, -1);
+	lua_setmetatable(L, -2);
+	lua_pushliteral(L, "__mode");
+	lua_pushstring(L, mode);
+	lua_settable(L, -3);
+}
+
+} // namespace Lua
+} // namespace RBX
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sDecal>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sTexture>();
