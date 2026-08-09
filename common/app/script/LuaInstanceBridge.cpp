@@ -1,6 +1,8 @@
 #include "script/LuaInstanceBridge.h"
+#include "script/ThreadRef.h"
 
 #include "lua/LuaBridge.h"
+#include "lua/lua.h"
 #include "reflection/object.h"
 #include "reflection/property.h"
 #include "util/Name.h"
@@ -56,6 +58,96 @@ boost::shared_ptr<Instance> ObjectBridge::getInstance(lua_State* L, unsigned int
 	}
 
 	return shared_from(instance);
+}
+
+static void assignLuaValue(Reflection::Property p, lua_State* L, int index)
+{
+	const Reflection::PropertyDescriptor& descriptor = p.getDescriptor();
+
+	if (&descriptor.type == &Reflection::Type::singleton<int>()) {
+		p.setValue<int>(lua_tointeger(L, index));
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<bool>()) {
+		p.setValue<bool>(lua_toboolean(L, index) != 0);
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<float>()) {
+		p.setValue<float>(lua_tofloat(L, index));
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<std::string>()) {
+		p.setValue<std::string>(lua_tostring(L, index));
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<FunctionRef>()) {
+		p.setValue<FunctionRef>(FunctionRef(L, index));
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<boost::shared_ptr<Instance> >()) {
+		p.setValue<boost::shared_ptr<Instance> >(ObjectBridge::getInstance(L, index));
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<boost::shared_ptr<Reflection::DescribedBase> >()) {
+		p.setValue<boost::shared_ptr<Reflection::DescribedBase> >(
+			SharedPtrBridge<Reflection::DescribedBase>::getPtr(L, index)
+		);
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<G3D::Vector3>()) {
+		p.setValue<G3D::Vector3>(Bridge<G3D::Vector3, 1>::getObject(L, index));
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<G3D::CoordinateFrame>()) {
+		p.setValue<G3D::CoordinateFrame>(Bridge<G3D::CoordinateFrame, 1>::getObject(L, index));
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<G3D::Color3>()) {
+		p.setValue<G3D::Color3>(Bridge<G3D::Color3, 1>::getObject(L, index));
+		return;
+	}
+
+	if (&descriptor.type == &Reflection::Type::singleton<BrickColor>()) {
+		p.setValue<BrickColor>(Bridge<BrickColor, 1>::getObject(L, index));
+		return;
+	}
+
+	if (dynamic_cast<const Reflection::TypedPropertyDescriptor<Soundscape::SoundId>*>(&descriptor) != NULL) {
+		p.setValue<Soundscape::SoundId>(Soundscape::SoundId(ContentId(lua_tostring(L, index))));
+		return;
+	}
+
+	if (dynamic_cast<const Reflection::TypedPropertyDescriptor<TextureId>*>(&descriptor) != NULL) {
+		p.setValue<TextureId>(TextureId(ContentId(lua_tostring(L, index))));
+		return;
+	}
+
+	if (dynamic_cast<const Reflection::EnumPropertyDescriptor*>(&descriptor) != NULL) {
+		p.setValue<int>(lua_tointeger(L, index));
+		return;
+	}
+
+	if (dynamic_cast<const Reflection::RefPropertyDescriptor*>(&descriptor) != NULL) {
+		p.setValue<boost::shared_ptr<Instance> >(ObjectBridge::getInstance(L, index));
+		return;
+	}
+
+	throw std::runtime_error(
+		G3D::format(
+			"Unable to set property %s, type %s",
+			descriptor.name.name.c_str(),
+			descriptor.type.name.name.c_str()
+		)
+	);
 }
 
 } // namespace Lua

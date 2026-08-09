@@ -173,6 +173,24 @@ protected:
 
 DECOMP_SIZE_ASSERT(EnumPropertyDescriptor, 0x1c)
 
+// SIZE 0x18
+class __declspec(novtable) RefPropertyDescriptor : public PropertyDescriptor
+{
+protected:
+	RefPropertyDescriptor(
+		ClassDescriptor& classDescriptor,
+		const Type& type,
+		const char* name,
+		const char* category,
+		Functionality functionality
+	)
+		: PropertyDescriptor(classDescriptor, type, name, category, functionality)
+	{
+	}
+};
+
+DECOMP_SIZE_ASSERT(RefPropertyDescriptor, 0x18)
+
 // SIZE 0x1c
 template <class Class, class T>
 class PropDescriptor : public TypedPropertyDescriptor<T>
@@ -485,6 +503,8 @@ public:
 	}
 
 	const DescribedBase* getInstance() const { return instance; }
+
+	const PropertyDescriptor& getDescriptor() const { return *descriptor; }
 
 	std::string getStringValue() const { return descriptor->getStringValue(instance); }
 
