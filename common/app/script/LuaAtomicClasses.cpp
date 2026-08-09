@@ -471,6 +471,24 @@ int CoordinateFrameBridge::on_vectorToWorldSpace(lua_State* L)
 	return count;
 }
 
+// FUNCTION: WEBSERVICE 0x100af340
+int CoordinateFrameBridge::on_components(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	lua_pushnumber(L, value.translation.x);
+	lua_pushnumber(L, value.translation.y);
+	lua_pushnumber(L, value.translation.z);
+
+	for (int r = 0; r < 3; r++) {
+		for (int c = 0; c < 3; c++) {
+			lua_pushnumber(L, value.rotation[r][c]);
+		}
+	}
+
+	return 12;
+}
+
 // FUNCTION: WEBSERVICE 0x100af3d0
 int CoordinateFrameBridge::on_toEulerAnglesXYZ(lua_State* L)
 {
@@ -487,15 +505,6 @@ int CoordinateFrameBridge::on_toEulerAnglesXYZ(lua_State* L)
 	lua_pushnumber(L, z);
 	return 3;
 }
-
-template <>
-const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
-
-template bool Bridge<G3D::CoordinateFrame, 1>::getValue<G3D::CoordinateFrame>(
-	lua_State* L,
-	unsigned int index,
-	G3D::CoordinateFrame& value
-);
 
 // FUNCTION: WEBSERVICE 0x100af440
 int CoordinateFrameBridge::on_vectorToObjectSpace(lua_State* L)
@@ -515,6 +524,41 @@ int CoordinateFrameBridge::on_vectorToObjectSpace(lua_State* L)
 
 	return count;
 }
+
+// FUNCTION: WEBSERVICE 0x100af610
+int CoordinateFrameBridge::fromEulerAnglesXYZ(lua_State* L)
+{
+	G3D::CoordinateFrame result;
+
+	result.rotation =
+		G3D::Matrix3::fromEulerAnglesXYZ(luaL_checknumber(L, 1), luaL_checknumber(L, 2), luaL_checknumber(L, 3));
+
+	pushNewObject(L, result);
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100af6b0
+int CoordinateFrameBridge::fromAxisAngle(lua_State* L)
+{
+	G3D::CoordinateFrame result;
+
+	const G3D::Vector3& axis = Vector3Bridge::getObject(L, 1);
+	float angle = luaL_checknumber(L, 2);
+
+	result.rotation = G3D::Matrix3::fromAxisAngle(axis, angle);
+
+	pushNewObject(L, result);
+	return 1;
+}
+
+template <>
+const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
+
+template bool Bridge<G3D::CoordinateFrame, 1>::getValue<G3D::CoordinateFrame>(
+	lua_State* L,
+	unsigned int index,
+	G3D::CoordinateFrame& value
+);
 
 template void Bridge<G3D::Color3, 1>::on_newindex(G3D::Color3& value, const char* name, lua_State* L);
 
