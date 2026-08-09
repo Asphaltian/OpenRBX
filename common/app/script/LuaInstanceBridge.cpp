@@ -1,16 +1,22 @@
+#include "script/LuaInstanceBridge.h"
+
 #include "lua/LuaBridge.h"
 #include "reflection/object.h"
 #include "reflection/property.h"
 #include "util/Name.h"
 #include "util/Sound.h"
 #include "util/TextureId.h"
+#include "util/object.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Decal.h"
+#include "v8tree/Instance.h"
 
 #include <G3D/Color3.h>
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
+#include <G3D/format.h>
 #include <lua.h>
+#include <stdexcept>
 
 namespace RBX {
 namespace Lua {
@@ -24,6 +30,32 @@ void newweaktable(lua_State* L, const char* mode)
 	lua_pushliteral(L, "__mode");
 	lua_pushstring(L, mode);
 	lua_settable(L, -3);
+}
+
+// STUB: WEBSERVICE 0x100ac300
+boost::shared_ptr<Instance> ObjectBridge::getInstance(lua_State* L, unsigned int index)
+{
+	boost::shared_ptr<Reflection::DescribedBase> object = SharedPtrBridge<Reflection::DescribedBase>::getPtr(L, index);
+
+	Instance* instance;
+
+	if (object.get() != NULL) {
+		instance = dynamic_cast<Instance*>(object.get());
+
+		if (instance == NULL) {
+			throw std::runtime_error(
+				G3D::format(
+					"Object %s is not an Instance",
+					Reflection::ClassDescriptor::rootDescriptor().name.name.c_str()
+				)
+			);
+		}
+	}
+	else {
+		instance = NULL;
+	}
+
+	return shared_from(instance);
 }
 
 } // namespace Lua
