@@ -333,6 +333,58 @@ int Bridge<RBX::BrickColor, 1>::on_index(const RBX::BrickColor& value, const cha
 template <>
 const char* Bridge<RBX::BrickColor, 1>::className = "BrickColor";
 
+// FUNCTION: WEBSERVICE 0x100aebc0
+int CoordinateFrameBridge::on_add(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+	const G3D::Vector3& other = Vector3Bridge::getObject(L, 2);
+
+	G3D::CoordinateFrame result = value + other;
+
+	pushNewObject(L, result);
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100aec40
+int CoordinateFrameBridge::on_sub(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+	const G3D::Vector3& other = Vector3Bridge::getObject(L, 2);
+
+	G3D::CoordinateFrame result = value - other;
+
+	pushNewObject(L, result);
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100aecc0
+int CoordinateFrameBridge::on_inverse(lua_State* L)
+{
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	G3D::CoordinateFrame result = value.inverse();
+
+	pushNewObject(L, result);
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100af3d0
+int CoordinateFrameBridge::on_toEulerAnglesXYZ(lua_State* L)
+{
+	float x;
+	float y;
+	float z;
+
+	const G3D::CoordinateFrame& value = getObject(L, 1);
+
+	value.rotation.toEulerAnglesXYZ(x, y, z);
+
+	lua_pushnumber(L, x);
+	lua_pushnumber(L, y);
+	lua_pushnumber(L, z);
+	return 3;
+}
+
 template <>
 const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
 
