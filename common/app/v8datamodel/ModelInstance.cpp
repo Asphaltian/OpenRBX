@@ -143,10 +143,22 @@ PartInstance* ModelInstance::getPrimaryPartInternal() const
 	return best;
 }
 
-// STUB: WEBSERVICE 0x1005ac90
+// FUNCTION: WEBSERVICE 0x1005ac90
 void ModelInstance::legacyTraverseState(const CoordinateFrame& parentState)
 {
-	STUB(0x1005ac90);
+	int count = numChildren();
+
+	if (count > 0) {
+		CoordinateFrame state = parentState * *legacyOffset;
+
+		for (int i = 0; i < count; i++) {
+			PVInstance* pv = dynamic_cast<PVInstance*>(getChild(i));
+
+			if (pv != NULL) {
+				pv->legacyTraverseState(state);
+			}
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1005ad40
