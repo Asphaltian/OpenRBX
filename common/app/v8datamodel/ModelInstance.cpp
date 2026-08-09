@@ -219,7 +219,7 @@ const PartInstance* ModelInstance::getPrimaryPartConst() const
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x1005b230
+// FUNCTION: WEBSERVICE 0x1005b230
 void ModelInstance::onDescendentAdded(Instance* instance)
 {
 	PVInstance::onDescendentAdded(instance);
@@ -230,15 +230,31 @@ void ModelInstance::onDescendentAdded(Instance* instance)
 
 	if (instance == candidatePrimaryPart.get()) {
 		candidatePrimaryPart.reset();
+
+		updatePrimaryPart(static_cast<PartInstance*>(instance));
 	}
 
 	shouldRenderSetDirty();
 }
 
-// STUB: WEBSERVICE 0x1005b2c0
+// FUNCTION: WEBSERVICE 0x1005b2c0
 void ModelInstance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 {
-	STUB(0x1005b2c0);
+	if (primaryPart == instance.get()) {
+		primaryPart = NULL;
+	}
+
+	if (candidatePrimaryPart.get() == instance.get()) {
+		candidatePrimaryPart.reset();
+	}
+
+	LocalGridExtents.setDirty();
+	WorldGridExtents.setDirty();
+	FlagHeight.setDirty();
+
+	shouldRenderSetDirty();
+
+	PVInstance::onDescendentRemoving(instance);
 }
 
 // STUB: WEBSERVICE 0x1005b440
