@@ -2,11 +2,31 @@
 
 namespace RBX {
 
+// STUB: WEBSERVICE 0x10093d40
+BrickColor BrickColor::parse(const char* name)
+{
+	STUB(0x10093d40);
+	return BrickColor();
+}
+
 // STUB: WEBSERVICE 0x10093df0
 BrickColor BrickColor::random()
 {
 	STUB(0x10093df0);
 	return BrickColor();
+}
+
+// STUB: WEBSERVICE 0x10093e50
+BrickColor BrickColor::closest(G3D::Color4 color)
+{
+	STUB(0x10093e50);
+	return BrickColor();
+}
+
+// STUB: WEBSERVICE 0x10093f70
+BrickColor::BrickColor(int number)
+{
+	STUB(0x10093f70);
 }
 
 // STUB: WEBSERVICE 0x10094000

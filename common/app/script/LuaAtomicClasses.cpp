@@ -238,6 +238,44 @@ template G3D::Vector3* Bridge<G3D::Vector3, 1>::pushNewObject<G3D::Vector3>(lua_
 
 template G3D::Color3* Bridge<G3D::Color3, 1>::pushNewObject<G3D::Color3>(lua_State* L, G3D::Color3 value);
 
+template RBX::BrickColor* Bridge<RBX::BrickColor, 1>::pushNewObject<RBX::BrickColor>(
+	lua_State* L,
+	RBX::BrickColor value
+);
+
+// FUNCTION: WEBSERVICE 0x100ae580
+int BrickColorBridge::newBrickColor(lua_State* L)
+{
+	int count = std::min(4, lua_gettop(L));
+
+	if (count == 0) {
+		pushNewObject(L, RBX::BrickColor(RBX::BrickColor::lego_194));
+	}
+	else if (count == 1) {
+		if (lua_isnumber(L, 1)) {
+			pushNewObject(L, RBX::BrickColor(lua_tointeger(L, 1)));
+			return count;
+		}
+
+		if (lua_isstring(L, 1)) {
+			pushNewObject(L, RBX::BrickColor::parse(lua_tolstring(L, 1, 0)));
+			return 1;
+		}
+
+		pushNewObject(L, RBX::BrickColor::closest(Color3Bridge::getObject(L, 1)));
+		return 1;
+	}
+
+	float color[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+
+	for (int i = 0; i < count; i++) {
+		color[i] = lua_tofloat(L, i + 1);
+	}
+
+	pushNewObject(L, RBX::BrickColor::closest(G3D::Color4(color[0], color[1], color[2], color[3])));
+	return 1;
+}
+
 // FUNCTION: WEBSERVICE 0x100ae740
 int BrickColorBridge::randomBrickColor(lua_State* L)
 {

@@ -47,8 +47,12 @@ protected:
 	static const char* className;
 };
 
+// clang-format off
 // TEMPLATE: WEBSERVICE 0x1005f1b0
 // ??$pushNewObject@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SAPAVVector3@G3D@@PAUlua_State@@V23@@Z
+// TEMPLATE: WEBSERVICE 0x1005f250
+// ??$pushNewObject@VBrickColor@RBX@@@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@SAPAVBrickColor@2@PAUlua_State@@V32@@Z
+// clang-format on
 template <class T, int Tag>
 template <class U>
 U* Bridge<T, Tag>::pushNewObject(lua_State* L, U value)

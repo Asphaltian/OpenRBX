@@ -4,6 +4,9 @@
 #include "decomp.h"
 
 #include <G3D/Color3.h>
+#include <G3D/Color3uint8.h>
+#include <G3D/Color4.h>
+#include <G3D/Color4uint8.h>
 #include <string>
 
 namespace RBX {
@@ -128,16 +131,22 @@ public:
 		lego_268 = 268
 	};
 
+	BrickColor(int number);
 	BrickColor() : number(lego_1) {}
 	BrickColor(Number number) : number(number) {}
 
-	const std::string& name() const;
+	static BrickColor closest(G3D::Color4 color);
+	static BrickColor closest(G3D::Color3 color);
+	static BrickColor closest(G3D::Color4uint8 color);
+	static BrickColor closest(G3D::Color3uint8 color);
+
+	static BrickColor parse(const char* name);
+
+	static BrickColor random();
 
 	G3D::Color3 color3() const;
 
-	static BrickColor closest(G3D::Color3 color);
-
-	static BrickColor random();
+	const std::string& name() const;
 
 	bool operator==(const BrickColor& other) const { return number == other.number; }
 
