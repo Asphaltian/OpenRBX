@@ -411,7 +411,7 @@ set(OPENRBX_LUA_SOURCES
 
 add_engine_library(lua
   DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE
-  OPTIONS /O2 /Ob2 /Oi /Oy /GF /GS- /fp:fast /TP
+  OPTIONS /O2 /Ob2 /Oi /Oy /GF /GS- /fp:fast /TP /EHsc
   SOURCES ${OPENRBX_LUA_SOURCES}
 )
 

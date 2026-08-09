@@ -256,7 +256,7 @@ WaitScriptSlot::WaitScriptSlot(lua_State* L) : waitThread(L)
 namespace RBX {
 namespace Lua {
 
-// STUB: WEBSERVICE 0x100b0f00
+// FUNCTION: WEBSERVICE 0x100b0f00
 int SignalBridge::wait(lua_State* L)
 {
 	{
@@ -265,6 +265,8 @@ int SignalBridge::wait(lua_State* L)
 		WaitScriptSlot slot(L);
 
 		*slot.cnction = si->connectGeneric(slot, boost::signals::at_front);
+
+		RobloxExtraSpace::get(L)->yieldCaptured = true;
 	}
 
 	return lua_yield(L, 0);

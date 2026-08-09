@@ -711,7 +711,47 @@ union luai_Cast { double l_d; long l_l; };
 ** CHANGE (define) this if you really need that. This value must be
 ** a multiple of the maximum alignment required for your machine.
 */
-#define LUAI_EXTRASPACE		12
+#include <boost/shared_ptr.hpp>
+#include <new>
+
+struct lua_State;
+
+class RobloxExtraSpace
+{
+private:
+	boost::shared_ptr<int> threadCount;
+
+	RobloxExtraSpace(RobloxExtraSpace* parent);
+
+	~RobloxExtraSpace() { --*threadCount; }
+
+public:
+	bool yieldCaptured;
+
+	unsigned int getThreadCount() const { return *threadCount; }
+
+	static RobloxExtraSpace* get(lua_State* L)
+	{
+		return L != NULL ? reinterpret_cast<RobloxExtraSpace*>((char*) L - sizeof(RobloxExtraSpace)) : NULL;
+	}
+
+	static void construct(lua_State* L, RobloxExtraSpace* parent) { new (get(L)) RobloxExtraSpace(parent); }
+
+	static void destroy(lua_State* L) { get(L)->~RobloxExtraSpace(); }
+};
+
+inline RobloxExtraSpace::RobloxExtraSpace(RobloxExtraSpace* parent) : yieldCaptured(false)
+{
+	if (parent != NULL) {
+		threadCount = parent->threadCount;
+		++*threadCount;
+	}
+	else {
+		threadCount.reset(new int(1));
+	}
+}
+
+#define LUAI_EXTRASPACE		sizeof(RobloxExtraSpace)
 
 
 /*
@@ -719,10 +759,10 @@ union luai_Cast { double l_d; long l_l; };
 ** CHANGE them if you defined LUAI_EXTRASPACE and need to do something
 ** extra when a thread is created/deleted/resumed/yielded.
 */
-#define luai_userstateopen(L)		((void)L)
+#define luai_userstateopen(L)		RobloxExtraSpace::construct(L, NULL)
 #define luai_userstateclose(L)		((void)L)
-#define luai_userstatethread(L,L1)	((void)L)
-#define luai_userstatefree(L)		((void)L)
+#define luai_userstatethread(L,L1)	RobloxExtraSpace::construct(L1, RobloxExtraSpace::get(L))
+#define luai_userstatefree(L)		RobloxExtraSpace::destroy(L)
 #define luai_userstateresume(L,n)	((void)L)
 #define luai_userstateyield(L,n)	((void)L)
 
