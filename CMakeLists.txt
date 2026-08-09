@@ -27,6 +27,7 @@ if (ENABLE_CLANG_TIDY)
                               common/app/reflection/reflection_object.cpp
                               common/app/reflection/reflection_property.cpp
                               common/app/reflection/signal.cpp
+                              common/app/script/ScriptEvent.cpp
                               common/app/script/ThreadRef.cpp
                               common/app/util/Name.cpp common/app/util/standardout.cpp
                               common/app/v8datamodel/PartInstance.cpp
@@ -239,6 +240,7 @@ set(OPENRBX_APP_SOURCES
   common/app/humanoid/Seated.cpp
   common/app/script/LuaInstanceBridge.cpp
   common/app/script/Script.cpp
+  common/app/script/ScriptEvent.cpp
   common/app/script/ThreadRef.cpp
   common/app/script/ScriptContext.cpp
   common/app/tool/GroupDragTool.cpp
