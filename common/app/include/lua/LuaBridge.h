@@ -1,0 +1,46 @@
+#ifndef LUA_LUABRIDGE_H
+#define LUA_LUABRIDGE_H
+
+#include <G3D/format.h>
+#include <stdexcept>
+
+struct lua_State;
+
+namespace RBX {
+namespace Lua {
+
+// SIZE 0x1
+template <class T, int Tag>
+class Bridge
+{
+public:
+	static T& pushNewObject(lua_State* L);
+	static void registerClass(lua_State* L);
+
+protected:
+	static int on_index(lua_State* L);
+	static int on_index(const T& value, const char* name, lua_State* L);
+
+	static int on_newindex(lua_State* L);
+	static void on_newindex(T& value, const char* name, lua_State* L);
+
+	static int on_tostring(lua_State* L);
+
+	static int on_gc(lua_State* L);
+	static int on_eq(lua_State* L);
+
+	static const char* className;
+};
+
+// TEMPLATE: WEBSERVICE 0x100adb90
+// ?on_newindex@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAXAAVColor3@G3D@@PBDPAUlua_State@@@Z
+template <class T, int Tag>
+void Bridge<T, Tag>::on_newindex(T& value, const char* name, lua_State* L)
+{
+	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
+}
+
+} // namespace Lua
+} // namespace RBX
+
+#endif // LUA_LUABRIDGE_H

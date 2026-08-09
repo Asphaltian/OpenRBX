@@ -1,5 +1,5 @@
 ClassName: '^[A-Z][a-zA-Z0-9]*$'
-CppMethod: '^operator|^FUN_[a-f0-9]{8}$|^print_exception$|^disconnect_all_slots$|^c_str$|^[a-zA-Z][a-zA-Z0-9]*$'
+CppMethod: '^operator|^on_[a-z][a-zA-Z0-9]*$|^FUN_[a-f0-9]{8}$|^print_exception$|^disconnect_all_slots$|^c_str$|^[a-zA-Z][a-zA-Z0-9]*$'
 EnumName: '^\(unnamed|^[A-Z][a-zA-Z0-9]*$'
 EnumConstantName: '^lego_[0-9]+$|^[A-Z][A-Z0-9_]*$|^[A-Z][a-zA-Z0-9]*$'
 FunctionName: '^operator|^FUN_[a-f0-9]{8}$|^lua_(pushfunction|tofunction)$|^[a-zA-Z][a-zA-Z0-9]*$'

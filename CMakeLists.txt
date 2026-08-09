@@ -36,6 +36,9 @@ if (ENABLE_CLANG_TIDY)
                               common/app/v8world/World.cpp
                               PROPERTIES SKIP_LINTING ON)
 
+  # LuaBridge.h throws, which clang-tidy reports as an error whatever /EHsc the command line carries.
+  set_source_files_properties(common/app/script/LuaAtomicClasses.cpp PROPERTIES SKIP_LINTING ON)
+
   # G3D's BinaryInput.h and BinaryOutput.h throw from a header, which clang-tidy reports as an
   # error whatever /EHsc the command line carries. GLG3D/Sky.h pulls both in.
   set_source_files_properties(common/app/v8datamodel/Sky.cpp PROPERTIES SKIP_LINTING ON)
@@ -238,6 +241,7 @@ set(OPENRBX_APP_SOURCES
   common/app/humanoid/Jumping.cpp
   common/app/humanoid/Running.cpp
   common/app/humanoid/Seated.cpp
+  common/app/script/LuaAtomicClasses.cpp
   common/app/script/LuaInstanceBridge.cpp
   common/app/script/Script.cpp
   common/app/script/ScriptEvent.cpp
