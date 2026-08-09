@@ -9,6 +9,7 @@
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
 #include <G3D/g3dmath.h>
+#include <algorithm>
 #include <float.h>
 #include <limits>
 #include <lua.h>
@@ -70,6 +71,25 @@ int Bridge<G3D::Color3, 1>::on_index(const G3D::Color3& value, const char* name,
 	throw std::runtime_error(G3D::format("%s is not a valid member", name));
 }
 
+// FUNCTION: WEBSERVICE 0x100adc80
+int Color3Bridge::newColor3(lua_State* L)
+{
+	float color[3];
+
+	int count = std::min(3, lua_gettop(L));
+
+	for (int i = 0; i < count; i++) {
+		color[i] = lua_tofloat(L, i + 1);
+	}
+
+	for (int i = count; i < 3; i++) {
+		color[i] = 0.0f;
+	}
+
+	pushNewObject(L, G3D::Color3(color[0], color[1], color[2]));
+	return 1;
+}
+
 // FUNCTION: WEBSERVICE 0x100add30
 int Vector3Bridge::on_add(lua_State* L)
 {
@@ -110,10 +130,54 @@ int Vector3Bridge::on_mul(lua_State* L)
 	return 1;
 }
 
+// FUNCTION: WEBSERVICE 0x100adf30
+int Vector3Bridge::on_div(lua_State* L)
+{
+	G3D::Vector3 vector;
+
+	if (getValue(L, 1, vector)) {
+		G3D::Vector3 other;
+
+		if (getValue(L, 2, other)) {
+			pushVector3(L, vector / other);
+			return 1;
+		}
+
+		pushVector3(L, vector / lua_tofloat(L, 2));
+		return 1;
+	}
+
+	vector = getObject(L, 2);
+
+	float scalar = lua_tofloat(L, 1);
+
+	pushVector3(L, G3D::Vector3(scalar, scalar, scalar) / vector);
+	return 1;
+}
+
 // FUNCTION: WEBSERVICE 0x100ae030
 int Vector3Bridge::on_unm(lua_State* L)
 {
 	pushNewObject(L, -getObject(L, 1));
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae0b0
+int Vector3Bridge::newVector3(lua_State* L)
+{
+	float vector[3];
+
+	int count = std::min(3, lua_gettop(L));
+
+	for (int i = 0; i < count; i++) {
+		vector[i] = lua_tofloat(L, i + 1);
+	}
+
+	for (int i = count; i < 3; i++) {
+		vector[i] = 0.0f;
+	}
+
+	pushNewObject(L, G3D::Vector3(vector[0], vector[1], vector[2]));
 	return 1;
 }
 
