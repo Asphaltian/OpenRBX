@@ -3,6 +3,7 @@
 #include "util/ContentProvider.h"
 #include "util/NormalId.h"
 #include "v8datamodel/BrickColor.h"
+#include "v8tree/Instance.h"
 
 #include <G3D/Color3.h>
 #include <G3D/Vector3.h>
@@ -11,6 +12,33 @@
 
 namespace RBX {
 namespace Reflection {
+
+// FUNCTION: WEBSERVICE 0x1003ef60
+template <>
+const Type& Type::singleton<boost::shared_ptr<DescribedBase> >()
+{
+	static Type type("Object", typeid(boost::shared_ptr<DescribedBase>));
+
+	return type;
+}
+
+// FUNCTION: WEBSERVICE 0x1003efd0
+template <>
+const Type& Type::singleton<boost::shared_ptr<Instance> >()
+{
+	static Type type("Instance", typeid(boost::shared_ptr<Instance>));
+
+	return type;
+}
+
+// FUNCTION: WEBSERVICE 0x1003f040
+template <>
+const Type& Type::singleton<boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > >()
+{
+	static Type type("Objects", typeid(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >));
+
+	return type;
+}
 
 // FUNCTION: WEBSERVICE 0x1003f0b0
 template <>
@@ -80,6 +108,15 @@ template <>
 const Type& Type::singleton<G3D::Color3>()
 {
 	static Type type("Color3", typeid(G3D::Color3));
+
+	return type;
+}
+
+// FUNCTION: WEBSERVICE 0x1003f430
+template <>
+const Type& Type::singleton<std::vector<Value> >()
+{
+	static Type type("Table", typeid(std::vector<Value>));
 
 	return type;
 }

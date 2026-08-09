@@ -4278,6 +4278,8 @@ address,type,symbol
 0x102c8b9c,global,error___RBX::Log::writeEntry
 0x102c8ba8,global,??_R0?AVType@Reflection@RBX@@@8
 0x102c8bcc,global,??_R0?AVItem@EnumDescriptor@Reflection@RBX@@@8
+0x102c8c00,global,??_R0?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@8
+0x102c8c98,global,??_R0?AV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@8
 0x102c8cdc,global,??_R0?AV?$shared_ptr@VInstance@RBX@@@boost@@@8
 0x102c8d10,global,??_R0?AVVector3@G3D@@@8
 0x102c8e20,global,??_R0?AVColor3@G3D@@@8
@@ -5119,6 +5121,7 @@ address,type,symbol
 0x102f5098,global,??_R0N@8
 0x102f50a4,global,??_R0_N@8
 0x102f50b0,global,??_R0?AVContentId@RBX@@@8
+0x102f50d0,global,??_R0?AV?$vector@VValue@Reflection@RBX@@V?$allocator@VValue@Reflection@RBX@@@std@@@std@@@8
 0x102f5560,global,?creator@?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@0VCreator@12@B
 0x102f5564,global,?creator@?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@0VCreator@12@B
 0x102f5568,global,?creator@?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@0VCreator@12@B
@@ -5141,9 +5144,9 @@ address,type,symbol
 0x102f55f8,global,flag___RBX::Guid::getLocalScope
 0x102f55fc,global,?provider@Log@RBX@@0PAVILogProvider@2@A
 0x102f5600,global,?aggregateWorstSeverity@Log@RBX@@2W4Severity@12@A
-0x102f5604,global,type___RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Reflection::DescribedBase>
-0x102f5618,global,type___RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Instance>
-0x102f562c,global,"type___RBX::Reflection::Type::singleton<boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance>"
+0x102f5604,global,type___RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Reflection::DescribedBase> >
+0x102f5618,global,type___RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Instance> >
+0x102f562c,global,"type___RBX::Reflection::Type::singleton<boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > >"
 0x102f5640,global,type___RBX::Reflection::Type::singleton<int>
 0x102f5650,global,??_B?1???$singleton@H@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f5654,global,type___RBX::Reflection::Type::singleton<bool>
@@ -5156,7 +5159,7 @@ address,type,symbol
 0x102f56a4,global,"type___RBX::Reflection::Type::singleton<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >"
 0x102f56b8,global,type___RBX::Reflection::Type::singleton<G3D::Vector3>
 0x102f56cc,global,type___RBX::Reflection::Type::singleton<G3D::Color3>
-0x102f56e0,global,"type___RBX::Reflection::Type::singleton<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value>"
+0x102f56e0,global,"type___RBX::Reflection::Type::singleton<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value> > >"
 0x102f56f4,global,type___RBX::Reflection::Type::singleton<RBX::BrickColor>
 0x102f5704,global,??_B?1???$singleton@VBrickColor@RBX@@@Type@Reflection@RBX@@SAABV012@XZ@51
 0x102f5708,global,n___RBX::Name::doDeclare<&RBX::sSky>
