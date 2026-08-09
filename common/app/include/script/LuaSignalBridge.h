@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "lua/LuaBridge.h"
+#include "reflection/signal.h"
 
 #include <boost/signals/connection.hpp>
 
@@ -16,6 +17,14 @@ class SignalConnectionBridge : public Bridge<boost::signals::connection, 1>
 
 private:
 	static int disconnect(lua_State* L);
+};
+
+// SIZE 0x1
+class SignalBridge : public Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>
+{
+public:
+	static int connect(lua_State* L);
+	static int wait(lua_State* L);
 };
 
 } // namespace Lua
