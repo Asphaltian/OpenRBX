@@ -259,15 +259,29 @@ namespace Lua {
 // STUB: WEBSERVICE 0x100b0f00
 int SignalBridge::wait(lua_State* L)
 {
-	STUB(0x100b0f00);
-	return 0;
+	{
+		boost::shared_ptr<RBX::Reflection::SignalInstance> si = getObject(L, 1);
+
+		WaitScriptSlot slot(L);
+
+		*slot.cnction = si->connectGeneric(slot, boost::signals::at_front);
+	}
+
+	return lua_yield(L, 0);
 }
 
-// STUB: WEBSERVICE 0x100b10b0
+// FUNCTION: WEBSERVICE 0x100b10b0
 int SignalBridge::connect(lua_State* L)
 {
-	STUB(0x100b10b0);
-	return 0;
+	boost::shared_ptr<RBX::Reflection::SignalInstance> si = getObject(L, 1);
+
+	FunctionScriptSlot slot(L, 2);
+
+	*slot.cnction = si->connectGeneric(slot, boost::signals::at_front);
+
+	SignalConnectionBridge::pushNewObject(L, *slot.cnction);
+
+	return 1;
 }
 
 // FUNCTION: WEBSERVICE 0x100b11f0
