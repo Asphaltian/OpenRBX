@@ -456,6 +456,18 @@ public:
 	ConstProperty(const ConstProperty& other);
 	ConstProperty(const PropertyDescriptor* descriptor, const DescribedBase* instance);
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100ab2e0
+	// RBX::Reflection::ConstProperty::getValue<bool>
+	// TEMPLATE: WEBSERVICE 0x100ab340
+	// RBX::Reflection::ConstProperty::getValue<float>
+	// TEMPLATE: WEBSERVICE 0x100ab610
+	// RBX::Reflection::ConstProperty::getValue<int>
+	// TEMPLATE: WEBSERVICE 0x100ab670
+	// RBX::Reflection::ConstProperty::getValue<double>
+	// TEMPLATE: WEBSERVICE 0x100ab8d0
+	// RBX::Reflection::ConstProperty::getValue<RBX::BrickColor>
+	// clang-format on
 	template <class T>
 	T getValue() const
 	{
@@ -488,8 +500,24 @@ public:
 	Property(const Property& other);
 	Property(const PropertyDescriptor* descriptor, DescribedBase* instance);
 
+	// clang-format off
+	// STUB: WEBSERVICE 0x100ab3a0
+	// RBX::Reflection::Property::setValue<bool>
+	// STUB: WEBSERVICE 0x100ab400
+	// RBX::Reflection::Property::setValue<float>
+	// STUB: WEBSERVICE 0x100aba10
+	// RBX::Reflection::Property::setValue<int>
+	// STUB: WEBSERVICE 0x100abb90
+	// RBX::Reflection::Property::setValue<G3D::Vector3>
+	// STUB: WEBSERVICE 0x100abbf0
+	// RBX::Reflection::Property::setValue<G3D::CoordinateFrame>
+	// STUB: WEBSERVICE 0x100abc50
+	// RBX::Reflection::Property::setValue<G3D::Color3>
+	// STUB: WEBSERVICE 0x100abcb0
+	// RBX::Reflection::Property::setValue<RBX::BrickColor>
+	// clang-format on
 	template <class T>
-	void setValue(const T& value) const
+	void setValue(const T& value)
 	{
 		const TypedPropertyDescriptor<T>* typed = dynamic_cast<const TypedPropertyDescriptor<T>*>(descriptor);
 

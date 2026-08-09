@@ -21,10 +21,10 @@ template G3D::CoordinateFrame RBX::Reflection::ConstProperty::getValue<G3D::Coor
 template G3D::Color3 RBX::Reflection::ConstProperty::getValue<G3D::Color3>() const;
 template RBX::BrickColor RBX::Reflection::ConstProperty::getValue<RBX::BrickColor>() const;
 
-template void RBX::Reflection::Property::setValue<bool>(const bool& value) const;
-template void RBX::Reflection::Property::setValue<float>(const float& value) const;
-template void RBX::Reflection::Property::setValue<int>(const int& value) const;
-template void RBX::Reflection::Property::setValue<G3D::Vector3>(const G3D::Vector3& value) const;
-template void RBX::Reflection::Property::setValue<G3D::CoordinateFrame>(const G3D::CoordinateFrame& value) const;
-template void RBX::Reflection::Property::setValue<G3D::Color3>(const G3D::Color3& value) const;
-template void RBX::Reflection::Property::setValue<RBX::BrickColor>(const RBX::BrickColor& value) const;
+template void RBX::Reflection::Property::setValue<bool>(const bool& value);
+template void RBX::Reflection::Property::setValue<float>(const float& value);
+template void RBX::Reflection::Property::setValue<int>(const int& value);
+template void RBX::Reflection::Property::setValue<G3D::Vector3>(const G3D::Vector3& value);
+template void RBX::Reflection::Property::setValue<G3D::CoordinateFrame>(const G3D::CoordinateFrame& value);
+template void RBX::Reflection::Property::setValue<G3D::Color3>(const G3D::Color3& value);
+template void RBX::Reflection::Property::setValue<RBX::BrickColor>(const RBX::BrickColor& value);
