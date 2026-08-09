@@ -225,5 +225,19 @@ FunctionRef lua_tofunction(lua_State* L, int index)
 	return FunctionRef(L, index);
 }
 
+// STUB: WEBSERVICE 0x100b1db0
+boost::shared_ptr<ThreadRef::Node> ThreadRef::Node::create(lua_State* L)
+{
+	lua_pushlightuserdata(L, (void*) 0x4e);
+
+	boost::shared_ptr<Node>& node = Bridge<boost::shared_ptr<Node>, 1>::pushNewObject(L);
+
+	lua_settable(L, LUA_GLOBALSINDEX);
+
+	node = boost::shared_ptr<Node>(new Node());
+
+	return node;
+}
+
 } // namespace Lua
 } // namespace RBX

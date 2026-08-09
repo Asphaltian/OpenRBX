@@ -1500,3 +1500,4 @@ address,size,type,symbol,name
 0x10129df0,171,library,,"boost::shared_ptr<RBX::SpecialShape>::shared_ptr<RBX::SpecialShape><RBX::SpecialShape,RBX::Creatable<RBX::Instance>::Deleter>"
 0x101e7700,,library,,boost::mutex::~mutex
 0x101e7730,,library,,boost::mutex::do_lock
+0x101ea450,,library,?disconnect@connection@signals@boost@@QBEXXZ,

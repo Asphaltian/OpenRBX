@@ -30,6 +30,8 @@ public:
 	private:
 		friend class ThreadRef;
 
+		Node() : first(NULL), sync(syncSingleton) {}
+
 		ThreadRef* first;                           // 0x00
 		const boost::shared_ptr<boost::mutex> sync; // 0x04
 	};

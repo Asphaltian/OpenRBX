@@ -47,6 +47,19 @@ protected:
 	static const char* className;
 };
 
+template <class T, int Tag>
+T& Bridge<T, Tag>::pushNewObject(lua_State* L)
+{
+	T* object = static_cast<T*>(lua_newuserdata(L, sizeof(T)));
+
+	new (object) T();
+
+	lua_getfield(L, LUA_REGISTRYINDEX, className);
+	lua_setmetatable(L, -2);
+
+	return *object;
+}
+
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1005f1b0
 // ??$pushNewObject@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SAPAVVector3@G3D@@PAUlua_State@@V23@@Z
