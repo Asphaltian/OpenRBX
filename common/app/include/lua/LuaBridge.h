@@ -169,6 +169,26 @@ int Bridge<T, Tag>::on_newindex(lua_State* L)
 }
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x1005fdd0
+// ?on_eq@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x1005fef0
+// ?on_eq@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// STUB: WEBSERVICE 0x10060010
+// ?on_eq@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x10060190
+// ?on_eq@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// TEMPLATE: WEBSERVICE 0x100602a0
+// ?on_eq@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
+// clang-format on
+template <class T, int Tag>
+int Bridge<T, Tag>::on_eq(lua_State* L)
+{
+	lua_pushboolean(L, getObject(L, 1) == getObject(L, 2));
+
+	return 1;
+}
+
+// clang-format off
 // TEMPLATE: WEBSERVICE 0x1005fda0
 // ?on_index@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x1005fec0

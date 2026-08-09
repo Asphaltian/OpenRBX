@@ -322,6 +322,8 @@ int Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_index(
 
 template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_gc(lua_State* L);
 
+template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_eq(lua_State* L);
+
 template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_newindex(lua_State* L);
 
 template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_index(lua_State* L);
