@@ -1,6 +1,7 @@
 #include "decomp.h"
 #include "lua/LuaBridge.h"
 #include "lua/lua.h"
+#include "v8datamodel/BrickColor.h"
 
 #include <G3D/Color3.h>
 #include <G3D/CoordinateFrame.h>
@@ -119,6 +120,56 @@ template bool Bridge<G3D::Vector3, 1>::getValue<G3D::Vector3>(lua_State* L, unsi
 template G3D::Vector3* Bridge<G3D::Vector3, 1>::pushNewObject<G3D::Vector3>(lua_State* L, G3D::Vector3 value);
 
 template G3D::Color3* Bridge<G3D::Color3, 1>::pushNewObject<G3D::Color3>(lua_State* L, G3D::Color3 value);
+
+// FUNCTION: WEBSERVICE 0x100ae790
+template <>
+int Bridge<RBX::BrickColor, 1>::on_index(const RBX::BrickColor& value, const char* name, lua_State* L)
+{
+	if (strcmp(name, "number") == 0) {
+		lua_pushinteger(L, value.number);
+		return 1;
+	}
+
+	if (strcmp(name, "Number") == 0) {
+		lua_pushinteger(L, value.number);
+		return 1;
+	}
+
+	if (strcmp(name, "Color") == 0) {
+		Bridge<G3D::Color3, 1>::pushNewObject(L, value.color3());
+		return 1;
+	}
+
+	if (strcmp(name, "r") == 0) {
+		lua_pushnumber(L, value.color3().r);
+		return 1;
+	}
+
+	if (strcmp(name, "g") == 0) {
+		lua_pushnumber(L, value.color3().g);
+		return 1;
+	}
+
+	if (strcmp(name, "b") == 0) {
+		lua_pushnumber(L, value.color3().b);
+		return 1;
+	}
+
+	if (strcmp(name, "name") == 0) {
+		lua_pushstring(L, value.name().c_str());
+		return 1;
+	}
+
+	if (strcmp(name, "Name") == 0) {
+		lua_pushstring(L, value.name().c_str());
+		return 1;
+	}
+
+	throw std::runtime_error(G3D::format("%s is not a valid member", name));
+}
+
+template <>
+const char* Bridge<RBX::BrickColor, 1>::className = "BrickColor";
 
 template <>
 const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";

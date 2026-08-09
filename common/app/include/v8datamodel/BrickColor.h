@@ -4,6 +4,7 @@
 #include "decomp.h"
 
 #include <G3D/Color3.h>
+#include <string>
 
 namespace RBX {
 
@@ -129,6 +130,8 @@ public:
 
 	BrickColor() : number(lego_1) {}
 	BrickColor(Number number) : number(number) {}
+
+	const std::string& name() const;
 
 	G3D::Color3 color3() const;
 
