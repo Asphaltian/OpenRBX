@@ -164,7 +164,9 @@ bool ModelInstance::shouldRender3dAdorn() const
 // STUB: WEBSERVICE 0x1005ae20
 void ModelInstance::render3dAdorn(Adorn* adorn)
 {
-	STUB(0x1005ae20);
+	if (ModelInstance::shouldRender3dAdorn()) {
+		renderCoordinateFrame(adorn);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1005ae80

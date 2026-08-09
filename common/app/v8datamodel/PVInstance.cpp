@@ -1,5 +1,6 @@
 #include "v8datamodel/PVInstance.h"
 
+#include "rbxgraphics/Adorn.h"
 #include "reflection/property.h"
 #include "v8xml/XmlElement.h"
 
@@ -85,6 +86,19 @@ void PVInstance::onChildAdded(Instance* instance)
 void PVInstance::onChildRemoving(Instance* child)
 {
 	STUB(0x100991c1);
+}
+
+// FUNCTION: WEBSERVICE 0x10099200
+void PVInstance::renderCoordinateFrame(Adorn* adorn)
+{
+	adorn->setObjectToWorldMatrix(getLocation());
+
+	adorn->axes(
+		G3D::Color4(G3D::Color3::red(), 1.0f),
+		G3D::Color4(G3D::Color3::green(), 1.0f),
+		G3D::Color4(G3D::Color3::blue(), 1.0f),
+		10.0f
+	);
 }
 
 // FUNCTION: WEBSERVICE 0x100992c0
