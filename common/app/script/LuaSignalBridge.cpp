@@ -5,6 +5,8 @@
 #include "script/Script.h"
 #include "script/ScriptContext.h"
 #include "script/ThreadRef.h"
+#include "util/scopedassign.h"
+#include "util/standardout.h"
 #include "v8tree/Instance.h"
 
 #include <G3D/format.h>
@@ -168,10 +170,76 @@ void WaitScriptSlot::operator()(const std::vector<boost::any>& arguments)
 	}
 }
 
-// STUB: WEBSERVICE 0x100b0920
+// FUNCTION: WEBSERVICE 0x100b0920
 void FunctionScriptSlot::operator()(const std::vector<boost::any>& arguments)
 {
-	STUB(0x100b0920);
+	bool reentrant = executionDepth > 0;
+	RBX::ScopedAssign<int> assign(executionDepth, executionDepth + 1);
+
+	if (executionDepth > 6) {
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, "maximum event re-entrancy depth exceeded");
+		return;
+	}
+
+	lua_State* thread = function.thread();
+
+	if (thread == NULL) {
+		cnction->disconnect();
+		return;
+	}
+
+	lua_State* slotThread = reentrant ? NULL : cachedSlotThread.thread();
+	bool createdThread;
+
+	if (slotThread != NULL) {
+		createdThread = false;
+	}
+	else {
+		slotThread = lua_newthread(thread);
+
+		if (slotThread == NULL) {
+			throw std::runtime_error("lua_newthread failed");
+		}
+
+		createdThread = true;
+	}
+
+	RBX::Lua::lua_pushfunction(thread, function);
+
+	lua_xmove(thread, slotThread, 1);
+
+	RBX::ScriptContext::Result result = context.resume(slotThread, pushArgs(slotThread, arguments));
+
+	switch (result) {
+	case RBX::ScriptContext::Yield:
+		if (!reentrant) {
+			cachedSlotThread.reset();
+		}
+
+		break;
+
+	case RBX::ScriptContext::Error:
+		if (!reentrant) {
+			cachedSlotThread.reset();
+		}
+
+		cnction->disconnect();
+		break;
+	}
+
+	if (function.thread() == NULL) {
+		cnction->disconnect();
+	}
+
+	if (createdThread) {
+		if (!reentrant && result == RBX::ScriptContext::Success && function.thread() != NULL) {
+			cachedSlotThread = RBX::Lua::ThreadRef(slotThread);
+		}
+
+		lua_settop(thread, -2);
+	}
+
+	lua_settop(slotThread, 0);
 }
 
 // STUB: WEBSERVICE 0x100b0cb0

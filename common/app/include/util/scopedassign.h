@@ -1,0 +1,24 @@
+#ifndef UTIL_SCOPEDASSIGN_H
+#define UTIL_SCOPEDASSIGN_H
+
+#include "decomp.h"
+
+namespace RBX {
+
+// SIZE 0x8
+template <class T>
+class ScopedAssign
+{
+public:
+	ScopedAssign(T& value, const T& newValue) : value(&value), oldValue(value) { value = newValue; }
+
+	~ScopedAssign() { *value = oldValue; }
+
+private:
+	T* value;   // 0x00
+	T oldValue; // 0x04
+};
+
+} // namespace RBX
+
+#endif // UTIL_SCOPEDASSIGN_H
