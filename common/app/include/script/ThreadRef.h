@@ -11,6 +11,7 @@ struct lua_State;
 namespace RBX {
 namespace Lua {
 
+// VTABLE: WEBSERVICE 0x1022f964
 // SIZE 0x20
 class ThreadRef
 {
@@ -20,14 +21,15 @@ public:
 	{
 	public:
 		static boost::shared_ptr<Node> create(lua_State* L);
-
-		ThreadRef* get(lua_State* L);
+		static boost::shared_ptr<Node> get(lua_State* L);
 
 		void eraseAllRefs();
 
 		~Node();
 
 	private:
+		friend class ThreadRef;
+
 		ThreadRef* first;                           // 0x00
 		const boost::shared_ptr<boost::mutex> sync; // 0x04
 	};
@@ -47,7 +49,10 @@ public:
 
 	bool empty() const;
 
-	lua_State* thread() const;
+	lua_State* thread() const
+	{
+		return L;
+	}
 
 protected:
 	virtual void removeRef(); // vtable+0x00
@@ -70,6 +75,7 @@ private:
 DECOMP_SIZE_ASSERT(ThreadRef, 0x20)
 DECOMP_SIZE_ASSERT(ThreadRef::Node, 0xc)
 
+// VTABLE: WEBSERVICE 0x10237ddc
 // SIZE 0x24
 class FunctionRef : public ThreadRef
 {
