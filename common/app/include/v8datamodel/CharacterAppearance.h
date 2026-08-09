@@ -2,6 +2,7 @@
 #define V8DATAMODEL_CHARACTERAPPEARANCE_H
 
 #include "decomp.h"
+#include "util/TextureId.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
@@ -33,7 +34,7 @@ DECOMP_SIZE_ASSERT(BodyColors, 0x110)
 class ShirtGraphic : public DescribedCreatable<ShirtGraphic, CharacterAppearance, sShirtGraphic>
 {
 private:
-	undefined m_unk0x0f8[0x118 - 0x0f8]; // 0x0f8
+	TextureId graphic; // 0x0f8
 };
 
 DECOMP_SIZE_ASSERT(ShirtGraphic, 0x118)
@@ -57,7 +58,7 @@ private:
 DECOMP_SIZE_ASSERT(Shirt, 0x124)
 
 // clang-format off
-// STUB: WEBSERVICE 0x100e0930
+// FUNCTION: WEBSERVICE 0x100e0930
 // RBX::ShirtGraphic::~ShirtGraphic
 // clang-format on
 
