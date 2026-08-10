@@ -43,11 +43,11 @@ public:
 
 	boost::shared_ptr<T>& write()
 	{
-		if (object.get() == NULL) {
-			object.reset(new T());
+		if (!object) {
+			object = boost::shared_ptr<T>(new T());
 		}
-		else if (!object.unique()) {
-			object.reset(new T(*object));
+		else if (object.use_count() > 1) {
+			object = boost::shared_ptr<T>(new T(*object));
 		}
 
 		return object;
