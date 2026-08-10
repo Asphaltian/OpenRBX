@@ -2,6 +2,7 @@
 
 #include "reflection/property.h"
 #include "util/Name.h"
+#include "v8datamodel/PartInstance.h"
 
 namespace RBX {
 
@@ -101,6 +102,32 @@ float Motor::getMaxVelocity() const
 float Motor::getCurrentAngle() const
 {
 	return static_cast<MotorJoint*>(joint)->getCurrentAngle();
+}
+
+// FUNCTION: WEBSERVICE 0x100d7df0
+JointInstance::~JointInstance()
+{
+	joint->setJointOwner(NULL);
+	delete joint;
+	joint = NULL;
+}
+
+// STUB: WEBSERVICE 0x100d8030
+void AutoJoint::setPart(int index, PartInstance* value)
+{
+	if (part[index].get() == value) {
+		return;
+	}
+
+	part[index] = shared_from(value);
+	joint->setPrimitive(index, value ? value->getPrimitive() : NULL);
+}
+
+// STUB: WEBSERVICE 0x100d8110
+AutoJoint::~AutoJoint()
+{
+	setPart(0, NULL);
+	setPart(1, NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x100d9020

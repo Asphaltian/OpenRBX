@@ -13,6 +13,8 @@
 
 namespace RBX {
 
+class PartInstance;
+
 extern const char sAutoJoint[];
 
 extern const char sJointInstance[];
@@ -40,6 +42,8 @@ public:
 	JointInstance() {}
 	JointInstance(Joint* joint) : joint(joint) {}
 
+	virtual ~JointInstance();
+
 protected:
 	Joint* joint; // 0x108
 };
@@ -53,8 +57,12 @@ public:
 	AutoJoint() {}
 	AutoJoint(Joint* joint) : DescribedNonCreatable<AutoJoint, JointInstance, sAutoJoint>(joint) {}
 
+	virtual ~AutoJoint();
+
 private:
-	undefined m_unk0x10c[0x11c - 0x10c]; // 0x10c
+	void setPart(int index, PartInstance* value);
+
+	boost::shared_ptr<PartInstance> part[2]; // 0x10c
 };
 
 DECOMP_SIZE_ASSERT(AutoJoint, 0x11c)
@@ -134,13 +142,6 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(Weld, 0x11c)
-
-// clang-format off
-// FUNCTION: WEBSERVICE 0x100d7df0
-// RBX::JointInstance::~JointInstance
-// STUB: WEBSERVICE 0x100d8110
-// RBX::AutoJoint::~AutoJoint
-// clang-format on
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x1021c570
