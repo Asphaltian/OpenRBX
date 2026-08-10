@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "util/Events.h"
+#include "util/object.h"
 #include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>
@@ -32,7 +33,7 @@ struct ServiceAdded
 {
 	const boost::shared_ptr<Instance> service; // 0x00
 
-	ServiceAdded(boost::shared_ptr<Instance> service) : service(service) {}
+	ServiceAdded(Instance* service) : service(shared_from(service)) {}
 
 private:
 	ServiceAdded& operator=(const ServiceAdded& other);
@@ -45,7 +46,7 @@ struct ServiceRemoving
 {
 	const boost::shared_ptr<Instance> service; // 0x00
 
-	ServiceRemoving(boost::shared_ptr<Instance> service) : service(service) {}
+	ServiceRemoving(Instance* service) : service(shared_from(service)) {}
 
 private:
 	ServiceRemoving& operator=(const ServiceRemoving& other);
@@ -53,6 +54,24 @@ private:
 
 DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 
+// clang-format off
+// FUNCTION: WEBSERVICE 0x10058da0
+// RBX::Notifier<RBX::ServiceProvider,RBX::ServiceAdded>::raise
+// FUNCTION: WEBSERVICE 0x10058ec0
+// RBX::Notifier<RBX::ServiceProvider,RBX::ServiceRemoving>::raise
+// FUNCTION: WEBSERVICE 0x10058fe0
+// RBX::Notifier<RBX::ServiceProvider,RBX::ServiceAdded>::raise
+// FUNCTION: WEBSERVICE 0x100590c0
+// RBX::Notifier<RBX::ServiceProvider,RBX::ServiceRemoving>::raise
+// FUNCTION: WEBSERVICE 0x10071ad0
+// RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>
+// FUNCTION: WEBSERVICE 0x10079520
+// RBX::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>
+// FUNCTION: WEBSERVICE 0x1007aa60
+// RBX::ServiceProvider::ServiceProvider
+// SYNTHETIC: WEBSERVICE 0x102218d0
+// `RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// clang-format on
 // SIZE 0x15c
 class ServiceProvider : public DescribedNonCreatable<ServiceProvider, Instance, sServiceProvider>,
 						public Notifier<ServiceProvider, Closing>,
@@ -96,8 +115,8 @@ public:
 
 protected:
 	virtual bool askAddChild(const Instance* instance) const;
-	virtual void onChildAdded(Instance* child);
-	virtual void onChildRemoving(Instance* child);
+	virtual void onChildAdded(Instance* instance);
+	virtual void onChildRemoving(Instance* instance);
 	virtual void onDescendentAdded(Instance* instance);
 	virtual void onDescendentRemoving(const shared_ptr<Instance>& instance);
 

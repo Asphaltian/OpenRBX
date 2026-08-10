@@ -26,26 +26,27 @@ Instance* ServiceProvider::findServiceByClassName(const Name& className) const
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x10059320
-void ServiceProvider::onChildRemoving(Instance* child)
+// FUNCTION: WEBSERVICE 0x10059320
+void ServiceProvider::onChildRemoving(Instance* instance)
 {
-	const Name* className = &child->getClassName();
-	std::map<const Name*, boost::shared_ptr<Instance> >::iterator iter = serviceMap.find(className);
+	std::map<const Name*, boost::shared_ptr<Instance> >::iterator iter = serviceMap.find(&instance->getClassName());
 
 	if (iter != serviceMap.end()) {
-		Notifier<ServiceProvider, ServiceRemoving>::raise(ServiceRemoving(shared_from(child)));
+		Notifier<ServiceProvider, ServiceRemoving>::raise(instance);
 	}
 }
 
-// STUB: WEBSERVICE 0x10059550
-void ServiceProvider::onChildAdded(Instance* child)
+// FUNCTION: WEBSERVICE 0x10059550
+void ServiceProvider::onChildAdded(Instance* instance)
 {
-	if (dynamic_cast<Service*>(child) != NULL) {
-		if (&child->getClassName() != &Name::getNullName()) {
-			serviceMap[&child->getClassName()] = shared_from(child);
+	if (dynamic_cast<Service*>(instance) != NULL) {
+		const Name& nullName = Name::getNullName();
+
+		if (&instance->getClassName() != &nullName) {
+			serviceMap[&instance->getClassName()] = shared_from(instance);
 		}
 
-		Notifier<ServiceProvider, ServiceAdded>::raise(ServiceAdded(shared_from(child)));
+		Notifier<ServiceProvider, ServiceAdded>::raise(instance);
 	}
 }
 

@@ -143,6 +143,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hint>
 	// TEMPLATE: WEBSERVICE 0x1008e820
 	// RBX::Creatable<RBX::Instance>::create<RBX::ObjectValue>
+	// TEMPLATE: WEBSERVICE 0x100b7470
+	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
 	// TEMPLATE: WEBSERVICE 0x100ad050
 	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
 	// TEMPLATE: WEBSERVICE 0x10129ea0

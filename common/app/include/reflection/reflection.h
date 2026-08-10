@@ -19,6 +19,8 @@ public:
 	// RBX::Reflection::Described<RBX::Lighting,&RBX::sLighting,RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100561a0
 	// RBX::Reflection::Described<RBX::RunService,&RBX::sRunService,RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100596e0
+	// RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1005bbe0
 	// RBX::Reflection::Described<RBX::PVInstance,&RBX::sPVInstance,RBX::Instance>::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1005d7f0
@@ -73,6 +75,8 @@ public:
 	// RBX::Reflection::Described<RBX::JointInstance,&RBX::sJointInstance,RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1008cc60
 	// RBX::Reflection::Described<RBX::ObjectValue,&RBX::sObjectValue,RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x1008db70
+	// RBX::Reflection::Described<RBX::GlobalSettings,&RBX::sGlobalSettings,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1008dbe0
 	// RBX::Reflection::Described<RBX::MotorFeature,&RBX::sMotorFeature,RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1008dc50

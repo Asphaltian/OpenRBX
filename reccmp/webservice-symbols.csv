@@ -508,7 +508,6 @@ address,size,symbol,name
 0x100b4a80,0x45,?setStringValue@?$EnumPropDescriptor@VDebugSettings@RBX@@W4AssertAction@Debugable@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x100b4d10,0x3a,?getStringValue@?$EnumPropDescriptor@VDebugSettings@RBX@@W4ErrorReporting@12@@Reflection@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@23@@Z,
 0x100b4d50,0x45,?setStringValue@?$EnumPropDescriptor@VDebugSettings@RBX@@W4ErrorReporting@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
-0x100b7470,0x78,??$create@VGlobalSettings@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VGlobalSettings@RBX@@@boost@@XZ,
 0x100b74f0,0xb7,?singleton@GlobalSettings@RBX@@SA?AV?$shared_ptr@VGlobalSettings@RBX@@@boost@@XZ,
 0x100be8c0,0x4e,?getSearchRay@MouseCommand@RBX@@SA?AVRay@G3D@@ABV34@@Z,
 0x100be910,0xad,?getMousePart@MouseCommand@RBX@@SAPAVPartInstance@2@ABVRay@G3D@@ABVContactManager@2@ABV?$vector@PBVPrimitive@RBX@@V?$allocator@PBVPrimitive@RBX@@@std@@@std@@PBVHitTestFilter@2@AAVVector3@5@M@Z,
