@@ -243,7 +243,7 @@ public:
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript><char const *>
 	// FUNCTION: WEBSERVICE 0x10068b10
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::`scalar deleting destructor'
-	// STUB: WEBSERVICE 0x10068e10
+	// FUNCTION: WEBSERVICE 0x10068e10
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::~FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
 	// FUNCTION: WEBSERVICE 0x10068e80
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::`scalar deleting destructor'
