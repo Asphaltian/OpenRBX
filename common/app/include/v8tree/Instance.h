@@ -453,7 +453,7 @@ protected:
 	DescribedCreatable() {}
 
 	template <class U>
-	DescribedCreatable(U* joint) : Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >(joint)
+	DescribedCreatable(U joint) : Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >(joint)
 	{
 	}
 };

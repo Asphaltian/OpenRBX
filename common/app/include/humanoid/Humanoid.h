@@ -169,13 +169,13 @@ DECOMP_SIZE_ASSERT(Humanoid, 0x1f0)
 DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 
 // clang-format off
-// STUB: WEBSERVICE 0x1021b310
+// SYNTHETIC: WEBSERVICE 0x1021b310
 // RBX::`dynamic initializer for 'propWalkRotationalVelocity''
-// STUB: WEBSERVICE 0x1021b370
+// SYNTHETIC: WEBSERVICE 0x1021b370
 // RBX::`dynamic initializer for 'propJump''
-// STUB: WEBSERVICE 0x1021b430
+// SYNTHETIC: WEBSERVICE 0x1021b430
 // RBX::`dynamic initializer for 'propSit''
-// STUB: WEBSERVICE 0x1021b4f0
+// SYNTHETIC: WEBSERVICE 0x1021b4f0
 // RBX::`dynamic initializer for 'propMaxHealth''
 // SYNTHETIC: WEBSERVICE 0x1021b5e0
 // `dynamic initializer for 'RBX::Humanoid::event_Died''
@@ -193,6 +193,14 @@ DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 // `dynamic initializer for 'RBX::Humanoid::event_FallingDown''
 // SYNTHETIC: WEBSERVICE 0x1021b6d0
 // `dynamic initializer for 'RBX::Humanoid::event_Seated''
+// SYNTHETIC: WEBSERVICE 0x10223400
+// RBX::`dynamic atexit destructor for 'propSit''
+// SYNTHETIC: WEBSERVICE 0x10223420
+// RBX::`dynamic atexit destructor for 'propMaxHealth''
+// SYNTHETIC: WEBSERVICE 0x10223480
+// RBX::`dynamic atexit destructor for 'propJump''
+// SYNTHETIC: WEBSERVICE 0x102234a0
+// RBX::`dynamic atexit destructor for 'propWalkRotationalVelocity''
 // SYNTHETIC: WEBSERVICE 0x10223500
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Climbing''
 // SYNTHETIC: WEBSERVICE 0x10223510
