@@ -1,9 +1,13 @@
 #include "util/Sound.h"
 
 #include "util/Name.h"
+#include "util/StandardOut.h"
 #include "v8datamodel/GameSettings.h"
 
+#include <G3D/format.h>
 #include <fmod.hpp>
+#include <fmod_errors.h>
+#include <stdexcept>
 
 char sStockSound[] = "StockSound";
 
@@ -67,6 +71,22 @@ Sound::Sound(FMOD::System* system, SoundId id, bool is3D)
 	: fmod_sound(NULL), system(system), refCount(0), id(id), is3D(is3D)
 {
 }
+
+} // namespace Soundscape
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x1007d490
+void checkResult(FMOD_RESULT result)
+{
+	if (result != FMOD_OK) {
+		std::string message = G3D::format("FMOD %d: %s", result, FMOD_ErrorString(result));
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_WARNING, message.c_str());
+		throw std::runtime_error(message);
+	}
+}
+
+namespace RBX {
+namespace Soundscape {
 
 // STUB: WEBSERVICE 0x10080830
 void SoundChannel::onEvent(const RunService* source, Heartbeat event)

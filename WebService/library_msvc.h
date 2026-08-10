@@ -1,6 +1,8 @@
 #ifdef 0
 
 // clang-format off
+// LIBRARY: WEBSERVICE 0x1007c9e0
+// FMOD_ErrorString
 // LIBRARY: WEBSERVICE 0x1012e300
 // G3D::_internal::postToClipboard
 // LIBRARY: WEBSERVICE 0x1012e380
