@@ -21,35 +21,6 @@ if (ENABLE_CLANG_TIDY)
   set(CMAKE_C_CLANG_TIDY "${CLANG_TIDY_BIN}")
   set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_BIN}" "--extra-arg=/EHsc")
 
-  # boost 1.34's scoped_lock throws, and clang-tidy reports it as an error whatever /EHsc the
-  # command line carries. The diagnostic is inside the vendored header, not our code.
-  set_source_files_properties(common/app/reflection/reflection_function.cpp
-                              common/app/reflection/reflection_object.cpp
-                              common/app/reflection/reflection_property.cpp
-                              common/app/reflection/signal.cpp
-                              common/app/script/ScriptEvent.cpp
-                              common/app/script/ThreadRef.cpp
-                              common/app/util/Name.cpp common/app/util/standardout.cpp
-                              common/app/v8datamodel/GlobalSettings.cpp
-                              common/app/v8datamodel/PartInstance.cpp
-                              common/app/v8datamodel/Selection.cpp
-                              common/app/v8datamodel/Workspace.cpp
-                              common/app/v8world/World.cpp
-                              PROPERTIES SKIP_LINTING ON)
-
-  # LuaBridge.h throws, which clang-tidy reports as an error whatever /EHsc the command line carries.
-  set_source_files_properties(common/app/v8tree/Service.cpp PROPERTIES SKIP_LINTING ON)
-  set_source_files_properties(common/app/script/LuaAtomicClasses.cpp PROPERTIES SKIP_LINTING ON)
-  set_source_files_properties(common/app/script/LuaSignalBridge.cpp PROPERTIES SKIP_LINTING ON)
-  set_source_files_properties(common/app/script/LuaInstanceBridge.cpp PROPERTIES SKIP_LINTING ON)
-
-  # checkResult throws, which clang-tidy reports as an error whatever /EHsc the command line carries.
-  set_source_files_properties(common/app/util/Sound.cpp PROPERTIES SKIP_LINTING ON)
-
-  # G3D's BinaryInput.h and BinaryOutput.h throw from a header, which clang-tidy reports as an
-  # error whatever /EHsc the command line carries. GLG3D/Sky.h pulls both in.
-  set_source_files_properties(common/app/v8datamodel/Sky.cpp PROPERTIES SKIP_LINTING ON)
-
   # Contact.cpp binds a temporary to the non-const reference getClosestEdge records, which
   # MSVC 8 accepts as an extension. Naming the temporary is conformant and costs the caller
   # eight points, so the original relied on the extension and the source has to as well.
