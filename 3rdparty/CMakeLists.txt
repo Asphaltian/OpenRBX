@@ -340,26 +340,28 @@ set(OPENRBX_MESA_COMPILE_OPTIONS "/GF" "/Gy")
 
 # The static core the three DLLs share. Each DLL exists for its import library.
 add_library(mesa_core STATIC ${OPENRBX_MESA_CORE_SOURCES})
+set_target_properties(mesa_core PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded")
 target_include_directories(mesa_core PRIVATE
   "${MESA}/include" "${MESA}/src/mesa" "${MESA}/src/mesa/glapi" "${MESA}/src/mesa/main"
   "${MESA}/src/mesa/shader" "${MESA}/src/mesa/shader/slang" "${MESA}/src/mesa/shader/grammar"
 )
-target_compile_definitions(mesa_core PRIVATE NDEBUG WIN32 _LIB _DLL BUILD_GL32 MESA_MINWARN)
+target_compile_definitions(mesa_core PRIVATE NDEBUG WIN32 _MBCS _LIB _DLL BUILD_GL32 MESA_MINWARN)
 target_compile_options(mesa_core PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
 
 # The installer ships OPENGL32.DLL, GLU32.DLL and OSMESA32.DLL, and each vcproj names its
 # OutputFile that way. The case reaches the import table of every dependent, WebService.dll
 # included, so it is part of the comparison rather than a cosmetic detail.
 add_library(opengl32 SHARED ${OPENRBX_MESA_GDI_SOURCES})
-set_target_properties(opengl32 PROPERTIES OUTPUT_NAME "OPENGL32" SUFFIX ".DLL")
+set_target_properties(opengl32 PROPERTIES OUTPUT_NAME "OPENGL32" SUFFIX ".DLL"
+  MSVC_RUNTIME_LIBRARY "MultiThreaded")
 target_include_directories(opengl32 PRIVATE
   "${MESA}/windows/VC7/main" "${MESA}/include" "${MESA}/src/mesa" "${MESA}/src/mesa/main"
   "${MESA}/src/mesa/glapi" "${MESA}/src/mesa/swrast" "${MESA}/src/mesa/shader"
 )
 target_compile_definitions(opengl32 PRIVATE
-  NDEBUG WIN32 _WINDOWS _USRDLL GDI_EXPORTS _DLL BUILD_GL32 MESA_MINWARN)
+  NDEBUG WIN32 _WINDOWS _MBCS _USRDLL GDI_EXPORTS _DLL BUILD_GL32 MESA_MINWARN)
 target_compile_options(opengl32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
-target_link_libraries(opengl32 PRIVATE mesa_core winmm kernel32 user32 gdi32 advapi32)
+target_link_libraries(opengl32 PRIVATE mesa_core winmm msvcrt kernel32 user32 gdi32 advapi32)
 target_link_options(opengl32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/mesa/drivers/windows/gdi/mesa.def")
 
@@ -375,26 +377,32 @@ target_include_directories(osmesa32 PRIVATE
   "${MESA}/src/mesa/swrast" "${MESA}/src/mesa/shader"
 )
 target_compile_definitions(osmesa32 PRIVATE
-  WIN32 NDEBUG _WINDOWS _USRDLL OSMESA_EXPORTS)
+  WIN32 NDEBUG _WINDOWS _MBCS _USRDLL OSMESA_EXPORTS)
 target_compile_options(osmesa32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
 target_link_libraries(osmesa32 PRIVATE opengl32 winmm msvcrt kernel32 user32 gdi32 advapi32)
 target_link_options(osmesa32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/mesa/drivers/osmesa/osmesa.def")
 
 add_library(glu32 SHARED ${OPENRBX_MESA_GLU_SOURCES})
-set_target_properties(glu32 PROPERTIES OUTPUT_NAME "GLU32" SUFFIX ".DLL")
+set_target_properties(glu32 PROPERTIES OUTPUT_NAME "GLU32" SUFFIX ".DLL"
+  MSVC_RUNTIME_LIBRARY "MultiThreaded")
 target_include_directories(glu32 PRIVATE
   "${MESA}/include" "${MESA}/src/glu/sgi/include" "${MESA}/src/glu/sgi/libnurbs/interface"
   "${MESA}/src/glu/sgi/libnurbs/internals" "${MESA}/src/glu/sgi/libnurbs/nurbtess"
 )
 target_compile_definitions(glu32 PRIVATE
-  WIN32 NDEBUG _WINDOWS _USRDLL GLU_EXPORTS BUILD_GL32 LIBRARYBUILD)
-target_compile_options(glu32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS}
-  # glu is the only C++ target here and its vcproj omits ExceptionHandling, which VC7 defaults
-  # off where CMake passes /EHsc. RuntimeTypeInfo is omitted too and stays on regardless: /GR-
-  # takes .data to 0x550 where the original is 0x6d8, four bytes under the /GR build.
-  "/EHs-c-")
-target_link_libraries(glu32 PRIVATE opengl32 winmm kernel32 user32 gdi32 advapi32)
+  WIN32 NDEBUG _WINDOWS _MBCS _USRDLL GLU_EXPORTS BUILD_GL32)
+target_compile_options(glu32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
+
+# GLU is two compiles, not one. glu.dsp builds the libtess and libutil C files /GX /O2 with
+# NDEBUG, while windows/VC6/mesa/glu/compileRelease.txt builds the libnurbs C++ half /GX- /O2
+# /TP with LIBRARYBUILD and no NDEBUG. Only the NURBS half turns exceptions off; RTTI stays on
+# either way, since /GR- takes .data to 0x550 where the original is 0x6d8.
+set(OPENRBX_MESA_GLU_NURBS_SOURCES ${OPENRBX_MESA_GLU_SOURCES})
+list(FILTER OPENRBX_MESA_GLU_NURBS_SOURCES INCLUDE REGEX "[.]cc$")
+set_source_files_properties(${OPENRBX_MESA_GLU_NURBS_SOURCES} DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  PROPERTIES COMPILE_OPTIONS "/EHs-c-" COMPILE_DEFINITIONS "LIBRARYBUILD")
+target_link_libraries(glu32 PRIVATE opengl32 winmm msvcrt kernel32 user32 gdi32 advapi32)
 target_link_options(glu32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/glu/sgi/glu.def")
 
