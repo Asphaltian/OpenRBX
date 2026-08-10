@@ -65,6 +65,8 @@ class SoundChannel : public DescribedCreatable<SoundChannel, Instance, sSoundCha
 public:
 	SoundChannel();
 
+	virtual ~SoundChannel();
+
 	bool isPaused() const;
 
 	bool isPlaying() const;

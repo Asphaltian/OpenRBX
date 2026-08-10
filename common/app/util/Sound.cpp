@@ -88,6 +88,11 @@ void checkResult(FMOD_RESULT result)
 namespace RBX {
 namespace Soundscape {
 
+// FUNCTION: WEBSERVICE 0x1007db00
+SoundChannel::~SoundChannel()
+{
+}
+
 // STUB: WEBSERVICE 0x10080830
 void SoundChannel::onEvent(const RunService* source, Heartbeat event)
 {
