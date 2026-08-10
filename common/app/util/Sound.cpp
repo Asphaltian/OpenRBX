@@ -18,6 +18,14 @@ void SoundChannel::onEvent(const RunService* source, Heartbeat event)
 	STUB(0x10080830);
 }
 
+// FUNCTION: WEBSERVICE 0x10082d90
+SoundChannel::SoundChannel()
+	: sound(), fmod_channel(NULL), volume(0.5f), playOnRemove(false), is3D(0), looped(0), soundDisabled(0),
+	  playCount(-1), part(NULL)
+{
+	setName("Sound");
+}
+
 } // namespace Soundscape
 } // namespace RBX
 

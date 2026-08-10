@@ -39,6 +39,9 @@ class Sound;
 class SoundChannel : public DescribedCreatable<SoundChannel, Instance, sSoundChannel>,
 					 public Listener<RunService, Heartbeat>
 {
+public:
+	SoundChannel();
+
 protected:
 	virtual void onEvent(const RunService* source, Heartbeat event); // vtable+0x00
 

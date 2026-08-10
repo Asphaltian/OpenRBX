@@ -1090,6 +1090,16 @@ address,type,symbol
 0x10233a48,global,??_7?$GetSetImpl@P8SoundChannel@Soundscape@RBX@@BE?AVSoundId@23@XZP8123@AEXV423@@Z@?$PropDescriptor@VSoundChannel@Soundscape@RBX@@VSoundId@23@@Reflection@RBX@@6B@
 0x10233a58,global,??_7?$GetSetImpl@P8SoundChannel@Soundscape@RBX@@BEHXZP8123@AEXH@Z@?$PropDescriptor@VSoundChannel@Soundscape@RBX@@H@Reflection@RBX@@6B@
 0x10233a68,global,??_7SoundChannel@Soundscape@RBX@@6B@
+0x10233a74,global,??_7SoundChannel@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
+0x10233a84,global,??_7SoundChannel@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
+0x10233a94,global,??_7SoundChannel@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@2@@
+0x10233aa4,global,??_7SoundChannel@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
+0x10233ab4,global,??_7SoundChannel@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@2@@
+0x10233ac4,global,??_7SoundChannel@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@2@@
+0x10233ad4,global,??_7SoundChannel@Soundscape@RBX@@6BDebugable@2@@
+0x10233adc,global,??_7SoundChannel@Soundscape@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
+0x10233ae4,global,??_7SoundChannel@Soundscape@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
+0x10233af4,global,??_7SoundChannel@Soundscape@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@
 0x10233b38,global,??_7?$FactoryProduct@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@6B@
 0x10233b44,global,??_7?$FactoryProduct@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10233b54,global,??_7?$FactoryProduct@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
