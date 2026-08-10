@@ -405,31 +405,31 @@ public:
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100c5e20
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::getClassName
-	// STUB: WEBSERVICE 0x100d8300
+	// FUNCTION: WEBSERVICE 0x100d8300
 	// RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::~FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>
 	// TEMPLATE: WEBSERVICE 0x100d8370
 	// RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::getClassName
-	// STUB: WEBSERVICE 0x100d8390
+	// FUNCTION: WEBSERVICE 0x100d8390
 	// RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::~FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>
 	// TEMPLATE: WEBSERVICE 0x100d8410
 	// RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::getClassName
-	// STUB: WEBSERVICE 0x100d8430
+	// FUNCTION: WEBSERVICE 0x100d8430
 	// RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::~FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>
 	// TEMPLATE: WEBSERVICE 0x100d84c0
 	// RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::getClassName
-	// STUB: WEBSERVICE 0x100d84e0
+	// FUNCTION: WEBSERVICE 0x100d84e0
 	// RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::~FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>
 	// TEMPLATE: WEBSERVICE 0x100d8550
 	// RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::getClassName
-	// STUB: WEBSERVICE 0x100d8570
+	// FUNCTION: WEBSERVICE 0x100d8570
 	// RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::~FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>
 	// TEMPLATE: WEBSERVICE 0x100d8610
 	// RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::getClassName
-	// STUB: WEBSERVICE 0x100d8630
+	// FUNCTION: WEBSERVICE 0x100d8630
 	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::~FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>
 	// TEMPLATE: WEBSERVICE 0x100d86b0
 	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::getClassName
-	// STUB: WEBSERVICE 0x100d86d0
+	// FUNCTION: WEBSERVICE 0x100d86d0
 	// RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::~FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>
 	// FUNCTION: WEBSERVICE 0x100d8750
 	// RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::getClassName
@@ -581,17 +581,17 @@ public:
 	// RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100e9b70
 	// RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>::getClassName
-	// STUB: WEBSERVICE 0x100eb370
+	// FUNCTION: WEBSERVICE 0x100eb370
 	// RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>::~FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>
-	// STUB: WEBSERVICE 0x100eb400
+	// FUNCTION: WEBSERVICE 0x100eb400
 	// RBX::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce>::~FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce>
-	// STUB: WEBSERVICE 0x100eb470
+	// FUNCTION: WEBSERVICE 0x100eb470
 	// RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust>::~FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust>
-	// STUB: WEBSERVICE 0x100eb520
+	// FUNCTION: WEBSERVICE 0x100eb520
 	// RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition>::~FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition>
-	// STUB: WEBSERVICE 0x100eb5d0
+	// FUNCTION: WEBSERVICE 0x100eb5d0
 	// RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>::~FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>
-	// STUB: WEBSERVICE 0x100eb670
+	// FUNCTION: WEBSERVICE 0x100eb670
 	// RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::~FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>
 	// FUNCTION: WEBSERVICE 0x100eb730
 	// RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>::`scalar deleting destructor'
