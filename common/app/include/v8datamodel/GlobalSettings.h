@@ -13,6 +13,12 @@ namespace RBX {
 extern const char sGlobalSettings[];
 
 // clang-format off
+// FUNCTION: WEBSERVICE 0x10071970
+// RBX::NonFactoryProduct<RBX::Instance,0>::NonFactoryProduct<RBX::Instance,0>
+// FUNCTION: WEBSERVICE 0x100b3640
+// RBX::GlobalSettings::Item::Item
+// FUNCTION: WEBSERVICE 0x100b36a0
+// RBX::GlobalSettings::Item::askAddChild
 // FUNCTION: WEBSERVICE 0x100b7150
 // RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings>::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings>
 // FUNCTION: WEBSERVICE 0x100b72c0
@@ -35,6 +41,8 @@ public:
 	// SIZE 0xf8
 	class Item : public NonFactoryProduct<Instance, static_cast<const char*>(0)>
 	{
+	protected:
+		virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const Item*>(instance) != NULL; }
 	};
 };
 

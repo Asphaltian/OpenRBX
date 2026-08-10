@@ -50,6 +50,13 @@ void ServiceProvider::onChildAdded(Instance* instance)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10059660
+void ServiceProvider::clearServices()
+{
+	serviceArray.clear();
+	serviceMap.clear();
+}
+
 // FUNCTION: WEBSERVICE 0x1007ab90
 bool ServiceProvider::askAddChild(const Instance* instance) const
 {
