@@ -329,6 +329,15 @@ set(OPENRBX_MESA_GLU_SOURCES
   "${MESA}/src/glu/sgi/libutil/registry.c"
 )
 
+# RelWithDebInfo links incrementally, which keeps .idata a section of its own. The three
+# originals carry no .idata, so the Release configs linked without it.
+set(OPENRBX_MESA_LINK_OPTIONS "/INCREMENTAL:NO")
+
+# StringPooling and EnableFunctionLevelLinking off every Mesa vcproj. RelWithDebInfo already
+# carries the /O2 /Ob1 that InlineFunctionExpansion="1" asks for, but neither of these, and
+# without /Gy the linker has no COMDATs to fold.
+set(OPENRBX_MESA_COMPILE_OPTIONS "/GF" "/Gy")
+
 # The static core the three DLLs share. Each DLL exists for its import library.
 add_library(mesa_core STATIC ${OPENRBX_MESA_CORE_SOURCES})
 target_include_directories(mesa_core PRIVATE
@@ -336,39 +345,58 @@ target_include_directories(mesa_core PRIVATE
   "${MESA}/src/mesa/shader" "${MESA}/src/mesa/shader/slang" "${MESA}/src/mesa/shader/grammar"
 )
 target_compile_definitions(mesa_core PRIVATE NDEBUG WIN32 _LIB _DLL BUILD_GL32 MESA_MINWARN)
+target_compile_options(mesa_core PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
 
+# The installer ships OPENGL32.DLL, GLU32.DLL and OSMESA32.DLL, and each vcproj names its
+# OutputFile that way. The case reaches the import table of every dependent, WebService.dll
+# included, so it is part of the comparison rather than a cosmetic detail.
 add_library(opengl32 SHARED ${OPENRBX_MESA_GDI_SOURCES})
+set_target_properties(opengl32 PROPERTIES OUTPUT_NAME "OPENGL32" SUFFIX ".DLL")
 target_include_directories(opengl32 PRIVATE
   "${MESA}/windows/VC7/main" "${MESA}/include" "${MESA}/src/mesa" "${MESA}/src/mesa/main"
   "${MESA}/src/mesa/glapi" "${MESA}/src/mesa/swrast" "${MESA}/src/mesa/shader"
 )
 target_compile_definitions(opengl32 PRIVATE
   NDEBUG WIN32 _WINDOWS _USRDLL GDI_EXPORTS _DLL BUILD_GL32 MESA_MINWARN)
-target_link_libraries(opengl32 PRIVATE mesa_core kernel32 user32 gdi32 advapi32)
-target_link_options(opengl32 PRIVATE
+target_compile_options(opengl32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
+target_link_libraries(opengl32 PRIVATE mesa_core winmm kernel32 user32 gdi32 advapi32)
+target_link_options(opengl32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/mesa/drivers/windows/gdi/mesa.def")
 
-# osmesa's project omits BUILD_GL32, leaving GLAPI dllimport and osmesa.c rejected with C2491.
+# osmesa's project defines neither BUILD_GL32 nor _DLL, so GLAPI is plain extern and every GL
+# entry point resolves out of OPENGL32.DLL instead of being compiled in again. That is what
+# keeps the original at 31,232 bytes with nine exports. RuntimeLibrary=0 is what leaves _DLL
+# undefined; the explicit msvcrt.lib then still binds the CRT to MSVCR80.dll.
 add_library(osmesa32 SHARED ${OPENRBX_MESA_OSMESA_SOURCES})
-set_target_properties(osmesa32 PROPERTIES OUTPUT_NAME "OSMESA32")
+set_target_properties(osmesa32 PROPERTIES OUTPUT_NAME "OSMESA32" SUFFIX ".DLL"
+  MSVC_RUNTIME_LIBRARY "MultiThreaded")
 target_include_directories(osmesa32 PRIVATE
   "${MESA}/include" "${MESA}/src/mesa" "${MESA}/src/mesa/main" "${MESA}/src/mesa/glapi"
   "${MESA}/src/mesa/swrast" "${MESA}/src/mesa/shader"
 )
 target_compile_definitions(osmesa32 PRIVATE
-  WIN32 NDEBUG _WINDOWS _USRDLL OSMESA_EXPORTS BUILD_GL32)
-target_link_libraries(osmesa32 PRIVATE mesa_core opengl32 kernel32 user32 gdi32 advapi32)
-target_link_options(osmesa32 PRIVATE "/DEF:${MESA}/src/mesa/drivers/osmesa/osmesa.def")
+  WIN32 NDEBUG _WINDOWS _USRDLL OSMESA_EXPORTS)
+target_compile_options(osmesa32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
+target_link_libraries(osmesa32 PRIVATE opengl32 winmm msvcrt kernel32 user32 gdi32 advapi32)
+target_link_options(osmesa32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
+  "/DEF:${MESA}/src/mesa/drivers/osmesa/osmesa.def")
 
 add_library(glu32 SHARED ${OPENRBX_MESA_GLU_SOURCES})
+set_target_properties(glu32 PROPERTIES OUTPUT_NAME "GLU32" SUFFIX ".DLL")
 target_include_directories(glu32 PRIVATE
   "${MESA}/include" "${MESA}/src/glu/sgi/include" "${MESA}/src/glu/sgi/libnurbs/interface"
   "${MESA}/src/glu/sgi/libnurbs/internals" "${MESA}/src/glu/sgi/libnurbs/nurbtess"
 )
 target_compile_definitions(glu32 PRIVATE
   WIN32 NDEBUG _WINDOWS _USRDLL GLU_EXPORTS BUILD_GL32 LIBRARYBUILD)
-target_link_libraries(glu32 PRIVATE opengl32 kernel32 user32 gdi32 advapi32)
-target_link_options(glu32 PRIVATE "/DEF:${MESA}/src/glu/sgi/glu.def")
+target_compile_options(glu32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS}
+  # glu is the only C++ target here and its vcproj omits ExceptionHandling, which VC7 defaults
+  # off where CMake passes /EHsc. RuntimeTypeInfo is omitted too and stays on regardless: /GR-
+  # takes .data to 0x550 where the original is 0x6d8, four bytes under the /GR build.
+  "/EHs-c-")
+target_link_libraries(glu32 PRIVATE opengl32 winmm kernel32 user32 gdi32 advapi32)
+target_link_options(glu32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
+  "/DEF:${MESA}/src/glu/sgi/glu.def")
 
 # None of it is ours.
 foreach(name graphics3d glg3d boost_signals boost_thread mesa_core opengl32 osmesa32 glu32)
