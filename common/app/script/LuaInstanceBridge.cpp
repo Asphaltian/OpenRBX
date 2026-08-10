@@ -1,10 +1,10 @@
 #include "script/LuaInstanceBridge.h"
-#include "script/ThreadRef.h"
 
 #include "lua/LuaBridge.h"
 #include "lua/lua.h"
 #include "reflection/object.h"
 #include "reflection/property.h"
+#include "script/ThreadRef.h"
 #include "util/Name.h"
 #include "util/Sound.h"
 #include "util/TextureId.h"
