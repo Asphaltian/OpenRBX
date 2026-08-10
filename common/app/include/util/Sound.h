@@ -13,6 +13,7 @@
 extern char sStockSound[];
 
 namespace FMOD {
+class Channel;
 class Sound;
 class System;
 } // namespace FMOD
@@ -64,6 +65,10 @@ class SoundChannel : public DescribedCreatable<SoundChannel, Instance, sSoundCha
 public:
 	SoundChannel();
 
+	bool isPaused() const;
+
+	bool isPlaying() const;
+
 	SoundId getSoundId() const;
 
 	bool getLooped() const;
@@ -75,7 +80,7 @@ protected:
 
 private:
 	boost::shared_ptr<Sound> sound; // 0xfc
-	undefined4 fmod_channel;        // 0x104
+	FMOD::Channel* fmod_channel;    // 0x104
 	SoundId soundId;                // 0x108
 	float volume;                   // 0x128
 	bool playOnRemove;              // 0x12c

@@ -3,6 +3,8 @@
 #include "util/Name.h"
 #include "v8datamodel/GameSettings.h"
 
+#include <fmod.hpp>
+
 char sStockSound[] = "StockSound";
 
 namespace RBX {
@@ -16,6 +18,36 @@ char sSoundChannel[] = "Sound";
 int SoundChannel::getPlayCount() const
 {
 	return playCount;
+}
+
+// FUNCTION: WEBSERVICE 0x1007cd50
+bool SoundChannel::isPaused() const
+{
+	if (fmod_channel == NULL) {
+		return true;
+	}
+
+	bool paused;
+	if (fmod_channel->getPaused(&paused) == FMOD_ERR_INVALID_HANDLE) {
+		return true;
+	}
+
+	return paused;
+}
+
+// FUNCTION: WEBSERVICE 0x1007cd80
+bool SoundChannel::isPlaying() const
+{
+	if (fmod_channel == NULL) {
+		return false;
+	}
+
+	bool playing;
+	if (fmod_channel->isPlaying(&playing) == FMOD_ERR_INVALID_HANDLE) {
+		return false;
+	}
+
+	return playing;
 }
 
 // FUNCTION: WEBSERVICE 0x1007cdb0
