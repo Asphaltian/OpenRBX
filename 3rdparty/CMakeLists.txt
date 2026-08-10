@@ -402,7 +402,10 @@ set(OPENRBX_MESA_GLU_NURBS_SOURCES ${OPENRBX_MESA_GLU_SOURCES})
 list(FILTER OPENRBX_MESA_GLU_NURBS_SOURCES INCLUDE REGEX "[.]cc$")
 set_source_files_properties(${OPENRBX_MESA_GLU_NURBS_SOURCES} DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
   PROPERTIES COMPILE_OPTIONS "/EHs-c-" COMPILE_DEFINITIONS "LIBRARYBUILD")
-target_link_libraries(glu32 PRIVATE opengl32 winmm msvcrt kernel32 user32 gdi32 advapi32)
+# glu.vcproj lists msvcrt.lib winmm.lib ... opengl32.lib as AdditionalDependencies, which the
+# linker sees before the default libraries kernel32 and friends. That ordering is what the
+# original GLU32.DLL's import directory records: MSVCR80, OPENGL32, KERNEL32.
+target_link_libraries(glu32 PRIVATE msvcrt winmm opengl32 kernel32 user32 gdi32 advapi32)
 target_link_options(glu32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/glu/sgi/glu.def")
 
