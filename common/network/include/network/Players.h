@@ -41,7 +41,7 @@ public:
 
 	void setMaxPlayers(int value);
 
-	int numPlayers() const { return players.read()->size(); }
+	int numPlayers() const { return players->size(); }
 
 	static RBX::ModelInstance* findLocalCharacter(const Instance* context);
 

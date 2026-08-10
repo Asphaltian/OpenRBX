@@ -153,7 +153,7 @@ void PVInstance::onParentControllerChanged()
 	IsTopFlag.setDirty();
 
 	for (unsigned int i = 0; i < numChildren(); ++i) {
-		Instance* child = (*getChildren().read())[i].get();
+		Instance* child = (*getChildren())[i].get();
 		PVInstance* pvInstance = dynamic_cast<PVInstance*>(child);
 
 		if (pvInstance != NULL) {
@@ -166,7 +166,7 @@ void PVInstance::onParentControllerChanged()
 bool PVInstance::computeIsControllable() const
 {
 	for (unsigned int i = 0; i < numChildren(); ++i) {
-		Instance* child = (*getChildren().read())[i].get();
+		Instance* child = (*getChildren())[i].get();
 		IControllable* controllable = dynamic_cast<IControllable*>(child);
 
 		if (controllable != NULL && controllable->isControllable()) {

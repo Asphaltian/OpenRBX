@@ -165,10 +165,10 @@ public:
 	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }
 
 	// FUNCTION: WEBSERVICE 0x10048320
-	unsigned int numChildren() const { return children.read() != NULL ? children.read()->size() : 0; }
+	unsigned int numChildren() const { return children ? children->size() : 0; }
 
-	const Instance* getChild(unsigned int index) const { return (*children.read())[index].get(); }
-	Instance* getChild(unsigned int index) { return (*children.read())[index].get(); }
+	const Instance* getChild(unsigned int index) const { return (*children)[index].get(); }
+	Instance* getChild(unsigned int index) { return (*children)[index].get(); }
 
 	// FUNCTION: WEBSERVICE 0x100469f0
 	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
@@ -225,17 +225,20 @@ public:
 		return static_cast<const T*>(root);
 	}
 
+	// FUNCTION: WEBSERVICE 0x10047cd0
 	bool isAncestorOf(const Instance* descendent) const
 	{
-		while (descendent != 0) {
-			descendent = descendent->parent;
-
-			if (descendent == this) {
-				return true;
-			}
+		if (descendent == NULL) {
+			return false;
 		}
 
-		return false;
+		descendent = descendent->parent;
+
+		if (descendent == this) {
+			return true;
+		}
+
+		return isAncestorOf(descendent);
 	}
 
 	bool isDescendentOf(const Instance* ancestor) const
@@ -258,6 +261,13 @@ private:
 
 	void predelete();
 	static void predelete(Instance* instance);
+
+	static void signalDescendentAdded(Instance* instance, Instance* beginParent, Instance* oldParent);
+	static void signalDescendentRemoving(
+		const shared_ptr<Instance>& instance,
+		Instance* beginParent,
+		Instance* newParent
+	);
 
 	Association<Instance> assoc;                                      // 0xbc
 	Instance* parent;                                                 // 0xcc
@@ -498,11 +508,10 @@ protected:
 template <class T>
 T* Instance::findFirstChildOfType() const
 {
-	if (getChildren().read() != NULL) {
-		std::vector<shared_ptr<Instance> >::const_iterator end = getChildren().read()->end();
+	if (getChildren()) {
+		std::vector<shared_ptr<Instance> >::const_iterator end = getChildren()->end();
 
-		for (std::vector<shared_ptr<Instance> >::const_iterator iter = getChildren().read()->begin(); iter != end;
-			 ++iter) {
+		for (std::vector<shared_ptr<Instance> >::const_iterator iter = getChildren()->begin(); iter != end; ++iter) {
 			T* child = dynamic_cast<T*>(iter->get());
 
 			if (child != NULL) {

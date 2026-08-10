@@ -152,7 +152,7 @@ void GuiRoot::render2d(Adorn* adorn)
 	setCanvasSize(G3D::Vector2(G3D::Vector2int16(adorn->getWidth(), adorn->getHeight())));
 
 	for (unsigned int i = 0; i < numChildren(); ++i) {
-		Instance* instance = (*getChildren().read())[i].get();
+		Instance* instance = (*getChildren())[i].get();
 		GuiItem* item = dynamic_cast<GuiItem*>(instance);
 
 		if (item != NULL) {
@@ -167,7 +167,7 @@ G3D::Vector2 TopMenuBar::getSize() const
 	G3D::Vector2 size(0, 0);
 
 	for (unsigned int i = 0; i < numChildren(); ++i) {
-		Instance* child = (*getChildren().read())[i].get();
+		Instance* child = (*getChildren())[i].get();
 		GuiItem* item = dynamic_cast<GuiItem*>(child);
 
 		if (item != NULL) {
@@ -196,7 +196,7 @@ G3D::Vector2 TopMenuBar::getChildPosition(const GuiItem* child) const
 	G3D::Vector2 mySize = getSize();
 
 	for (unsigned int i = 0; i < numChildren(); ++i) {
-		Instance* instance = (*getChildren().read())[i].get();
+		Instance* instance = (*getChildren())[i].get();
 		GuiItem* item = dynamic_cast<GuiItem*>(instance);
 
 		if (item != NULL) {
@@ -234,7 +234,7 @@ void TopMenuBar::render2d(Adorn* adorn)
 	}
 
 	for (unsigned int i = 0; i < numChildren(); ++i) {
-		Instance* instance = (*getChildren().read())[i].get();
+		Instance* instance = (*getChildren())[i].get();
 		GuiItem* item = dynamic_cast<GuiItem*>(instance);
 
 		if (item != NULL) {
@@ -267,7 +267,7 @@ void GuiItem::onDescendentRemoving(const shared_ptr<Instance>& instance)
 GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
 {
 	for (unsigned int i = 0; i < numChildren(); ++i) {
-		Instance* child = (*getChildren().read())[i].get();
+		Instance* child = (*getChildren())[i].get();
 		GuiItem* item = dynamic_cast<GuiItem*>(child);
 
 		if (item != NULL && item != focus.get()) {

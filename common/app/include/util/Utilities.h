@@ -33,7 +33,13 @@ template <class T>
 class CopyOnWrite : public boost::noncopyable
 {
 public:
-	const T* read() const { return object.get(); }
+	operator typename boost::shared_ptr<T>::unspecified_bool_type() const { return object; }
+
+	const T& operator*() const { return *object; }
+
+	const T* operator->() const { return object.get(); }
+
+	boost::shared_ptr<const T> read() const { return object; }
 
 	boost::shared_ptr<T>& write()
 	{
@@ -46,6 +52,8 @@ public:
 
 		return object;
 	}
+
+	void reset() { object.reset(); }
 
 private:
 	boost::shared_ptr<T> object; // 0x00
