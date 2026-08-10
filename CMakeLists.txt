@@ -37,6 +37,7 @@ if (ENABLE_CLANG_TIDY)
                               PROPERTIES SKIP_LINTING ON)
 
   # LuaBridge.h throws, which clang-tidy reports as an error whatever /EHsc the command line carries.
+  set_source_files_properties(common/app/v8tree/Service.cpp PROPERTIES SKIP_LINTING ON)
   set_source_files_properties(common/app/script/LuaAtomicClasses.cpp PROPERTIES SKIP_LINTING ON)
   set_source_files_properties(common/app/script/LuaSignalBridge.cpp PROPERTIES SKIP_LINTING ON)
   set_source_files_properties(common/app/script/LuaInstanceBridge.cpp PROPERTIES SKIP_LINTING ON)

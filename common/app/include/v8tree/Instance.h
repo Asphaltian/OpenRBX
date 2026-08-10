@@ -73,6 +73,8 @@ class AbstractFactoryProduct : public Creatable<T>
 {
 public:
 	virtual ~AbstractFactoryProduct() {}
+
+	virtual const Name& getClassName() const = 0; // vtable+0x04
 };
 
 extern const char sInstance[];
