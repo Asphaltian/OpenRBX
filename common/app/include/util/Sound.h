@@ -7,9 +7,15 @@
 #include "util/RunStateOwner.h"
 #include "v8tree/Instance.h"
 
+#include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 
 extern char sStockSound[];
+
+namespace FMOD {
+class Sound;
+class System;
+} // namespace FMOD
 
 namespace RBX {
 namespace Soundscape {
@@ -33,7 +39,23 @@ public:
 
 DECOMP_SIZE_ASSERT(SoundId, 0x20)
 
-class Sound;
+// SIZE 0x30
+class Sound : public boost::noncopyable
+{
+public:
+	Sound(FMOD::System* system, SoundId id, bool is3D);
+
+private:
+	FMOD::Sound* fmod_sound; // 0x00
+	FMOD::System* system;    // 0x04
+
+public:
+	int refCount;     // 0x08
+	const SoundId id; // 0x0c
+	const bool is3D;  // 0x2c
+};
+
+DECOMP_SIZE_ASSERT(Sound, 0x30)
 
 // SIZE 0x138
 class SoundChannel : public DescribedCreatable<SoundChannel, Instance, sSoundChannel>,
@@ -41,6 +63,10 @@ class SoundChannel : public DescribedCreatable<SoundChannel, Instance, sSoundCha
 {
 public:
 	SoundChannel();
+
+	bool getLooped() const;
+
+	int getPlayCount() const;
 
 protected:
 	virtual void onEvent(const RunService* source, Heartbeat event); // vtable+0x00

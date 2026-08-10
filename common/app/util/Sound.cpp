@@ -12,6 +12,24 @@ char sSoundService[] = "SoundService";
 
 char sSoundChannel[] = "Sound";
 
+// FUNCTION: WEBSERVICE 0x1007c9b0
+int SoundChannel::getPlayCount() const
+{
+	return playCount;
+}
+
+// FUNCTION: WEBSERVICE 0x1007cdf0
+bool SoundChannel::getLooped() const
+{
+	return looped;
+}
+
+// FUNCTION: WEBSERVICE 0x1007d420
+Sound::Sound(FMOD::System* system, SoundId id, bool is3D)
+	: fmod_sound(NULL), system(system), refCount(0), id(id), is3D(is3D)
+{
+}
+
 // STUB: WEBSERVICE 0x10080830
 void SoundChannel::onEvent(const RunService* source, Heartbeat event)
 {
