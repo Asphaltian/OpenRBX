@@ -1504,3 +1504,5 @@ address,size,type,symbol,name
 0x101ea450,,library,?disconnect@connection@signals@boost@@QBEXXZ,
 0x101ea560,,library,??1connection@signals@boost@@QAE@XZ,
 0x101ea5f0,,library,??4connection@signals@boost@@QAEAAV012@ABV012@@Z,
+0x101e9710,,library,?empty@signal_base_impl@detail@signals@boost@@QBE_NXZ,
+0x100f5b20,291,library,,"boost::signal1<void,RBX::Reflection::PropertyDescriptor const *,boost::last_value<void>,int,std::less<int>,boost::function<void __cdecl(RBX::Reflection::PropertyDescriptor const *),std::allocator<void> > >::operator()"
