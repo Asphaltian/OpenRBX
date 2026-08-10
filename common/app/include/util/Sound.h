@@ -64,6 +64,8 @@ class SoundChannel : public DescribedCreatable<SoundChannel, Instance, sSoundCha
 public:
 	SoundChannel();
 
+	SoundId getSoundId() const;
+
 	bool getLooped() const;
 
 	int getPlayCount() const;

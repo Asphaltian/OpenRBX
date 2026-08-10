@@ -18,6 +18,12 @@ int SoundChannel::getPlayCount() const
 	return playCount;
 }
 
+// FUNCTION: WEBSERVICE 0x1007cdb0
+SoundId SoundChannel::getSoundId() const
+{
+	return soundId;
+}
+
 // FUNCTION: WEBSERVICE 0x1007cdf0
 bool SoundChannel::getLooped() const
 {
