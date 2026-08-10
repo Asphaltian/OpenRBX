@@ -20,6 +20,11 @@ char sBodyForce[] = "BodyForce";
 
 char sBodyGyro[] = "BodyGyro";
 
+// FUNCTION: WEBSERVICE 0x100ea340
+BodyMover::~BodyMover()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x100ea3b0
 void BodyMover::onEvent(const RunService* source, Stepped event)
 {

@@ -93,6 +93,12 @@ SoundChannel::~SoundChannel()
 {
 }
 
+// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+bool SoundChannel::askSetParent(const Instance* parent) const
+{
+	return true;
+}
+
 // STUB: WEBSERVICE 0x10080830
 void SoundChannel::onEvent(const RunService* source, Heartbeat event)
 {

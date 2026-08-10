@@ -78,6 +78,8 @@ public:
 	int getPlayCount() const;
 
 protected:
+	virtual bool askSetParent(const Instance* parent) const;
+
 	virtual void onEvent(const RunService* source, Heartbeat event); // vtable+0x00
 
 private:

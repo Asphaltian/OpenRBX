@@ -29,6 +29,9 @@ extern char sBodyGyro[];
 // SIZE 0x10c
 class BodyMover : public Instance, public Connector, public Listener<RunService, Stepped>
 {
+public:
+	virtual ~BodyMover();
+
 protected:
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
 	virtual bool preventBodySleep() { return true; } // vtable+0x40
@@ -146,11 +149,6 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Rocket, 0x154)
-
-// clang-format off
-// STUB: WEBSERVICE 0x100ea340
-// RBX::BodyMover::~BodyMover
-// clang-format on
 
 } // namespace RBX
 
