@@ -83,7 +83,7 @@ DECOMP_SIZE_ASSERT(PropertyDescriptor, 0x18)
 
 // SIZE 0x1c
 template <class T>
-class __declspec(novtable) TypedPropertyDescriptor : public PropertyDescriptor
+class TypedPropertyDescriptor : public PropertyDescriptor
 {
 public:
 	// SIZE 0x04
@@ -226,15 +226,15 @@ public:
 	};
 
 	// clang-format off
-	// STUB: WEBSERVICE 0x100433c0
+	// FUNCTION: WEBSERVICE 0x100433c0
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
-	// STUB: WEBSERVICE 0x10043430
+	// FUNCTION: WEBSERVICE 0x10043430
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Color3>::TypedPropertyDescriptor<G3D::Color3>
-	// STUB: WEBSERVICE 0x100434e0
+	// FUNCTION: WEBSERVICE 0x100434e0
 	// RBX::Reflection::TypedPropertyDescriptor<float>::TypedPropertyDescriptor<float>
-	// STUB: WEBSERVICE 0x10048bd0
+	// FUNCTION: WEBSERVICE 0x10048bd0
 	// RBX::Reflection::TypedPropertyDescriptor<bool>::TypedPropertyDescriptor<bool>
-	// STUB: WEBSERVICE 0x1007deb0
+	// FUNCTION: WEBSERVICE 0x1007deb0
 	// RBX::Reflection::TypedPropertyDescriptor<int>::TypedPropertyDescriptor<int>
 	// TEMPLATE: WEBSERVICE 0x10094df0
 	// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundProp<RBX::TextureId,1><RBX::Sky>
@@ -246,7 +246,7 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::getset<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>
 	// STUB: WEBSERVICE 0x10094c50
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::TypedPropertyDescriptor<RBX::TextureId>
-	// STUB: WEBSERVICE 0x1009ba30
+	// FUNCTION: WEBSERVICE 0x1009ba30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
 	// FUNCTION: WEBSERVICE 0x1009bce0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>
