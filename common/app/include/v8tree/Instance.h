@@ -64,9 +64,25 @@ struct AncestorChanged
 	{
 	}
 };
+// SIZE 0x8
 class PropertyChanged
 {
+public:
+	PropertyChanged(const PropertyChanged& other) : property(other.property) {}
+
+	const Reflection::Property& getProperty() const { return property; }
+
+	const Reflection::PropertyDescriptor& getDescriptor() const { return property.getDescriptor(); }
+
+private:
+	friend class Instance;
+
+	PropertyChanged(const Reflection::Property& property) : property(property) {}
+
+	Reflection::Property property; // 0x00
 };
+
+DECOMP_SIZE_ASSERT(PropertyChanged, 0x8)
 
 template <class T>
 class AbstractFactoryProduct : public Creatable<T>
@@ -107,7 +123,6 @@ protected:
 	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
 	virtual bool askAddChild(const Instance* instance) const { return false; } // vtable+0x08
 
-	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return false; } // vtable+0x0c
 	virtual void onAncestorChanged(const AncestorChanged& event);               // vtable+0x10
 	virtual void onDescendentAdded(Instance* instance);                         // vtable+0x14
@@ -155,16 +170,19 @@ public:
 	const Instance* getChild(unsigned int index) const { return (*children.read())[index].get(); }
 	Instance* getChild(unsigned int index) { return (*children.read())[index].get(); }
 
-	// STUB: WEBSERVICE 0x100469f0
+	// FUNCTION: WEBSERVICE 0x100469f0
 	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
 	{
-		STUB(0x100469f0);
+		Reflection::Property property(&descriptor, this);
+		PropertyChanged event(property);
 
-		const PropertyChanged event;
+		Notifier<Instance, PropertyChanged>::raise(property);
 
 		if (!event_propertyChanged.empty(this)) {
 			event_propertyChanged.fire(this, &descriptor);
 		}
+
+		Instance* parent = this->parent;
 
 		if (parent != NULL) {
 			parent->onChildChanged(this, event);
@@ -266,6 +284,12 @@ template <class T, class Base, const char* sName>
 // clang-format off
 	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
+	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
+	// RBX::Instance::askSetParent
+	// FUNCTION: WEBSERVICE 0x10043270
+	// RBX::Notifier<RBX::Instance,RBX::PropertyChanged>::raise
+	// FUNCTION: WEBSERVICE 0x10043920
+	// RBX::Notifier<RBX::Instance,RBX::PropertyChanged>::raise
 	// FUNCTION: WEBSERVICE 0x100459e0
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
 	// FUNCTION: WEBSERVICE 0x100543a0

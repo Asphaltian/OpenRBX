@@ -19,7 +19,7 @@ option(ENABLE_CLANG_TIDY "Enable clang-tidy")
 if (ENABLE_CLANG_TIDY)
   find_program(CLANG_TIDY_BIN NAMES "clang-tidy")
   set(CMAKE_C_CLANG_TIDY "${CLANG_TIDY_BIN}")
-  set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_BIN}")
+  set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_BIN}" "--extra-arg=/EHsc")
 
   # boost 1.34's scoped_lock throws, and clang-tidy reports it as an error whatever /EHsc the
   # command line carries. The diagnostic is inside the vendored header, not our code.

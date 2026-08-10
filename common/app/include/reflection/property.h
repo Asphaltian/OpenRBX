@@ -476,8 +476,11 @@ private:
 class ConstProperty
 {
 public:
-	ConstProperty(const ConstProperty& other);
-	ConstProperty(const PropertyDescriptor* descriptor, const DescribedBase* instance);
+	ConstProperty(const ConstProperty& other) : descriptor(other.descriptor), instance(other.instance) {}
+	ConstProperty(const PropertyDescriptor* descriptor, const DescribedBase* instance)
+		: descriptor(descriptor), instance(instance)
+	{
+	}
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100ab2e0
@@ -524,8 +527,9 @@ DECOMP_SIZE_ASSERT(ConstProperty, 0x08)
 class Property : public ConstProperty
 {
 public:
-	Property(const Property& other);
-	Property(const PropertyDescriptor* descriptor, DescribedBase* instance);
+	Property(const Property& other) : ConstProperty(other) {}
+
+	Property(const PropertyDescriptor* descriptor, DescribedBase* instance) : ConstProperty(descriptor, instance) {}
 
 	DescribedBase* getInstance() const { return const_cast<DescribedBase*>(instance); }
 
