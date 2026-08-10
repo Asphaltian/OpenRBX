@@ -8,10 +8,22 @@ namespace RBX {
 
 const char sInstance[] = "Instance";
 
+Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_childAdded("ChildAdded", "child");
+
+Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_childRemoved("ChildRemoved", "child");
+
 Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged(
 	"Changed",
 	"property"
 );
+
+ChildAdded::ChildAdded(Instance* child) : child(shared_from(child))
+{
+}
+
+ChildRemoved::ChildRemoved(Instance* child) : child(shared_from(child))
+{
+}
 
 // STUB: WEBSERVICE 0x10047af0
 void Instance::onChildChanged(Instance* instance, const PropertyChanged& event)

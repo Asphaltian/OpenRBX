@@ -31,12 +31,22 @@ class ServiceProvider;
 struct ChildAdded
 {
 	const boost::shared_ptr<Instance> child; // 0x00
+
+	ChildAdded(Instance* child);
+
+private:
+	ChildAdded& operator=(const ChildAdded& other);
 };
 
 // SIZE 0x8
 struct ChildRemoved
 {
 	const boost::shared_ptr<Instance> child; // 0x00
+
+	ChildRemoved(Instance* child);
+
+private:
+	ChildRemoved& operator=(const ChildRemoved& other);
 };
 
 // SIZE 0x10
@@ -149,6 +159,8 @@ protected:
 	virtual void onChildChanged(Instance* child, const PropertyChanged& event); // vtable+0x3c
 
 public:
+	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_childAdded;
+	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_childRemoved;
 	static Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> event_propertyChanged;
 
 	Instance* getParent() const { return parent; }
@@ -302,6 +314,8 @@ template <class T, class Base, const char* sName>
 	// RBX::Notifier<RBX::Instance,RBX::PropertyChanged>::raise
 	// FUNCTION: WEBSERVICE 0x100459e0
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
+	// FUNCTION: WEBSERVICE 0x1004c040
+	// RBX::Reflection::SignalDesc<RBX::Instance,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::Instance,void __cdecl(boost::shared_ptr<RBX::Instance>)>
 	// FUNCTION: WEBSERVICE 0x100543a0
 	// RBX::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>::~DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>
 	// FUNCTION: WEBSERVICE 0x100563e0
@@ -495,10 +509,18 @@ protected:
 };
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x10218690
+// `dynamic initializer for 'RBX::Instance::event_childAdded''
+// SYNTHETIC: WEBSERVICE 0x102186b0
+// `dynamic initializer for 'RBX::Instance::event_childRemoved''
 // SYNTHETIC: WEBSERVICE 0x10218730
 // `dynamic initializer for 'RBX::Instance::event_propertyChanged''
 // SYNTHETIC: WEBSERVICE 0x102217c0
 // `dynamic atexit destructor for 'RBX::Instance::event_propertyChanged''
+// SYNTHETIC: WEBSERVICE 0x10221780
+// `dynamic atexit destructor for 'RBX::Instance::event_childRemoved''
+// SYNTHETIC: WEBSERVICE 0x102217e0
+// `dynamic atexit destructor for 'RBX::Instance::event_childAdded''
 // clang-format on
 
 // clang-format off
