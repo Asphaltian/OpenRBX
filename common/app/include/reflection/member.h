@@ -19,8 +19,41 @@ class MemberDescriptorContainer
 {
 public:
 	typedef std::vector<T*> Collection;
-	typedef typename Collection::iterator Iterator;
-	typedef typename Collection::const_iterator ConstIterator;
+
+	// SIZE 0x10
+	class Iterator : public std::iterator<
+						 std::forward_iterator_tag,
+						 typename T::MemberType,
+						 void,
+						 typename T::MemberType,
+						 typename T::MemberType&>
+	{
+	public:
+		Iterator(DescribedBase* instance, typename Collection::const_iterator iter) : instance(instance), iter(iter) {}
+
+		typename T::MemberType operator*() const { return typename T::MemberType(*iter, instance); }
+
+		bool operator==(const Iterator& other) const { return iter == other.iter; }
+
+		bool operator!=(const Iterator& other) const { return iter != other.iter; }
+
+		Iterator& operator++()
+		{
+			++iter;
+			return *this;
+		}
+
+		Iterator operator++(int)
+		{
+			Iterator result = *this;
+			++iter;
+			return result;
+		}
+
+	private:
+		DescribedBase* instance;                  // 0x04
+		typename Collection::const_iterator iter; // 0x08
+	};
 	typedef std::vector<MemberDescriptorContainer*> DerivedContainers;
 
 	// clang-format off
@@ -56,7 +89,7 @@ void MemberDescriptorContainer<T>::declare(T* descriptor)
 {
 	boost::recursive_mutex::scoped_lock lock(sync());
 
-	Iterator where = std::lower_bound(descriptors.begin(), descriptors.end(), descriptor, compare);
+	typename Collection::iterator where = std::lower_bound(descriptors.begin(), descriptors.end(), descriptor, compare);
 	if (where == descriptors.end() || *where != descriptor) {
 		descriptors.insert(where, descriptor);
 	}
@@ -73,7 +106,7 @@ void MemberDescriptorContainer<T>::declare(T* descriptor)
 template <class T>
 void MemberDescriptorContainer<T>::mergeMembers(const MemberDescriptorContainer* source)
 {
-	for (ConstIterator it = source->descriptors.begin(); it != source->descriptors.end(); ++it) {
+	for (typename Collection::const_iterator it = source->descriptors.begin(); it != source->descriptors.end(); ++it) {
 		declare(*it);
 	}
 

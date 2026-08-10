@@ -20,7 +20,9 @@ extern const char* const category_Part;
 
 namespace Reflection {
 
+class ConstProperty;
 class DescribedBase;
+class Property;
 class EnumDescriptor;
 
 // SIZE 0x18
@@ -34,6 +36,9 @@ public:
 		STREAMING = 4,
 		STANDARD = 5,
 	};
+
+	typedef ConstProperty ConstMemberType;
+	typedef Property MemberType;
 
 	virtual bool isReadOnly() const = 0;                                                      // vtable+0x04
 	virtual bool equalValues(const DescribedBase* a, const DescribedBase* b) const = 0;       // vtable+0x08
