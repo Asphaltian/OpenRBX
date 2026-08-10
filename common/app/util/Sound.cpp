@@ -12,6 +12,12 @@ char sSoundService[] = "SoundService";
 
 char sSoundChannel[] = "Sound";
 
+// STUB: WEBSERVICE 0x10080830
+void SoundChannel::onEvent(const RunService* source, Heartbeat event)
+{
+	STUB(0x10080830);
+}
+
 } // namespace Soundscape
 } // namespace RBX
 
