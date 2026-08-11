@@ -425,7 +425,6 @@ Two dependencies are easy to miss because they were compiled into someone else's
 - **`reccmp-reccmp --verbose` dies printing a match.** The success line carries an emoji and a cp1252 console cannot encode it, so a 100% match looks like a traceback. Export `PYTHONIOENCODING=utf-8`.
 
 - **`.clang-format` sets `IncludeBlocks: Regroup`,** so it merges include blocks and sorts across them. A blank line will not hold an include in place. `WebService.h` needs `<winsock2.h>` ahead of `<unknwn.h>`, and only `// clang-format off` around it survives.
-- **`SKIP_LINTING` in `CMakeLists.txt`** is for diagnostics inside vendored headers. boost 1.34's `scoped_lock` throws and clang-tidy calls that an error whatever `/EHsc` the command line carries, so every source that includes `boost/thread/mutex.hpp` needs a line there.
 - **Never sweep timestamps across the working tree.** `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. The CI workflow's backdate step does exactly this, which is fine on a throwaway runner and destructive in a clone.
 - **Data past the end of `.data`'s raw bytes is fine;** reccmp zero fills it, as the loader does. An empty base class is what puts a member above offset zero.
 

@@ -369,6 +369,26 @@ public:
 
 		this->signature.arguments.push_back(arg1);
 	}
+
+	SignalDesc(const char* name, const char* arg1name, const char* arg2name)
+		: SignalDescImpl<boost::function_traits<Signature>::arity, Signature>(Class::classDescriptor(), name)
+	{
+		SignatureDescriptor::Item arg1 = {
+			&Name::declare(arg1name, -1),
+			&Type::singleton<typename boost::function_traits<Signature>::arg1_type>(),
+			Value()
+		};
+
+		this->signature.arguments.push_back(arg1);
+
+		SignatureDescriptor::Item arg2 = {
+			&Name::declare(arg2name, -1),
+			&Type::singleton<typename boost::function_traits<Signature>::arg2_type>(),
+			Value()
+		};
+
+		this->signature.arguments.push_back(arg2);
+	}
 };
 
 } // namespace Reflection

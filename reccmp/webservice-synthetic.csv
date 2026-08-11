@@ -50,7 +50,6 @@ address,type,symbol
 0x100495b0,synthetic,?equalValues@?$TypedPropertyDescriptor@_N@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 0x1004a1e0,stub,??1?$Association@VInstance@RBX@@@RBX@@QAE@XZ
 0x10055720,synthetic,??_ERunService@RBX@@UAEPAXI@Z
-0x10056950,stub,??0RunService@RBX@@QAE@XZ
 0x1005d7b0,synthetic,??_GSelection@RBX@@UAEPAXI@Z
 0x1005e720,stub,??0Selection@RBX@@QAE@XZ
 0x10066200,stub,??0ScriptContext@RBX@@QAE@XZ

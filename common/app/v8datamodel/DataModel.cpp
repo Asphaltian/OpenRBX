@@ -13,6 +13,26 @@ namespace RBX {
 
 const char sDataModel[] = "DataModel";
 
+// STUB: WEBSERVICE 0x1000cd40
+DataModel::Lock::Lock(boost::shared_ptr<const DataModel> dataModel)
+{
+	STUB(0x1000cd40);
+}
+
+// STUB: WEBSERVICE 0x10072640
+float DataModel::step(float distributedGameTime)
+{
+	STUB(0x10072640);
+
+	return 0.0f;
+}
+
+// STUB: WEBSERVICE 0x100743f0
+DataModel::Lock::~Lock()
+{
+	STUB(0x100743f0);
+}
+
 } // namespace RBX
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sServiceProvider>();

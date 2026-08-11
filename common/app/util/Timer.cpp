@@ -1,3 +1,5 @@
+#include "util/Timer.h"
+
 #include <windows.h>
 
 namespace RBX {
