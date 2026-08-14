@@ -6253,6 +6253,13 @@ address,type,symbol
 0x1030030c,global,??_B?3??resize@?$Array@PBX@G3D@@QAEXH_N@Z@53
 0x10300314,global,??_B?3??resize@?$Array@V?$Array@PBX@G3D@@@G3D@@QAEXH_N@Z@53
 0x103005b4,global,??_B?3??resize@?$Array@V?$ReferenceCountedPointer@VVARArea@G3D@@@G3D@@@G3D@@QAEXH_N@Z@53
+0x103005bc,global,?AUTO@TextureFormat@G3D@@2PBV12@B
+0x1030062c,global,?RGBA8@TextureFormat@G3D@@2PBV12@B
+0x10300634,global,?RGB8@TextureFormat@G3D@@2PBV12@B
+0x10300670,global,?_supports_GL_ARB_shader_objects@GLCaps@G3D@@0_NA
+0x10300671,global,?_supports_GL_ARB_shading_language_100@GLCaps@G3D@@0_NA
+0x10300672,global,?_supports_GL_ARB_fragment_shader@GLCaps@G3D@@0_NA
+0x10300673,global,?_supports_GL_ARB_vertex_shader@GLCaps@G3D@@0_NA
 0x10300734,global,?glMultiTexCoord1fARB@@3P6GXIM@ZA
 0x10300738,global,?glMultiTexCoord1dARB@@3P6GXIN@ZA
 0x1030073c,global,?glMultiTexCoord2fARB@@3P6GXIMM@ZA
@@ -6433,7 +6440,7 @@ address,type,symbol
 0x10301324,global,??_B?3??resize@?$Array@V?$ReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@@G3D@@QAEXH_N@Z@53
 0x10301328,global,shadowVertex___RBX::Render::RenderScene::markStencilShadows
 0x10301338,global,?identity@AggregateChunk@Render@RBX@@2VCoordinateFrame@G3D@@B
-0x10301368,global,?minSize@?3??resize@?$Array@VLevel@Material@Render@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x10301368,global,minSize___G3D::Array<RBX::Render::Material::Level>::resize
 0x1030136c,global,??_B?3??resize@?$Array@VLevel@Material@Render@RBX@@@G3D@@QAEXH_N@Z@53
 0x10301370,global,?chunkCount@RenderStats@@2HA
 0x10301374,global,?aggregatedChunkCount@RenderStats@@2HA

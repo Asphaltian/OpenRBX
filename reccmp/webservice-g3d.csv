@@ -468,7 +468,7 @@ address,size,type,symbol,name
 0x101674a0,0x132,library,?append@?$Array@V?$ReferenceCountedPointer@VLevel@Mesh@Render@RBX@@@G3D@@@G3D@@QAEXABV?$ReferenceCountedPointer@VLevel@Mesh@Render@RBX@@@2@@Z,
 0x10167c40,0x123,library,?realloc@?$Array@VVertex@MeshAlg@G3D@@@G3D@@AAEXH@Z,
 0x10168820,0x1ac,library,?resize@?$Array@VVertex@MeshAlg@G3D@@@G3D@@QAEXH_N@Z,
-0x10168fe0,0x17,library,??4?$ReferenceCountedPointer@VMaterial@Render@RBX@@@G3D@@QAEABV01@ABV01@@Z,
+0x10168fe0,0x17,library,??4?$ReferenceCountedPointer@VTexture@G3D@@@G3D@@QAEABV01@ABV01@@Z,
 0x10169000,0x46,library,?fromGImage@Texture@G3D@@SA?AV?$ReferenceCountedPointer@VTexture@G3D@@@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVGImage@2@PBVTextureFormat@2@W4Dimension@12@ABVSettings@12@@Z,
 0x1016a280,0x7,library,??1_WeakPtr@G3D@@UAE@XZ,
 0x1016a290,0x1f,library,??_E_WeakPtr@G3D@@UAEPAXI@Z,
