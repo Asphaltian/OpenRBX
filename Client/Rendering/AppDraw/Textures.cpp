@@ -13,7 +13,8 @@ G3D::ReferenceCountedPointer<TextureProxyBase> Textures::getTextureProxy(Adorn* 
 		std::string fileName = ContentProvider::singleton().getFile(id);
 
 		return adorn->createTextureProxy(fileName);
-	} catch (...) {
+	}
+	catch (...) {
 		return NULL;
 	}
 }
