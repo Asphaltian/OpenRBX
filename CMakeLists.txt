@@ -308,6 +308,7 @@ set(OPENRBX_RENDERLIB_SOURCES
   Client/Rendering/RenderLib/Material.cpp
   Client/Rendering/RenderLib/Mesh.cpp
   Client/Rendering/RenderLib/Profiler.cpp
+  Client/Rendering/RenderLib/RenderScene.cpp
   Client/Rendering/RenderLib/RenderStats.cpp
   Client/Rendering/RenderLib/RenderSurface.cpp
   Client/Rendering/RenderLib/TextureProxy.cpp
