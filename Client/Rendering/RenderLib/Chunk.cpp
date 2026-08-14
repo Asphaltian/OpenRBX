@@ -68,7 +68,8 @@ void AggregateChunk::renderShadows(
 			shadowIndexArray.resize(0, true);
 		}
 
-		G3D::VARAreaRef area = G3D::VARArea::create(shadowVertex.size() * sizeof(G3D::Vector3));
+		G3D::VARAreaRef area =
+			G3D::VARArea::create(shadowVertex.size() * sizeof(G3D::Vector3), G3D::VARArea::WRITE_EVERY_FEW_FRAMES);
 		shadowVAR = G3D::VAR(shadowVertex, area);
 	}
 
