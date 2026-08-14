@@ -57,7 +57,7 @@ reccmp-reccmp --target WEBSERVICE -S WEBSERVICEPROGRESS.SVG
 ## Project Structure
 
 - `WebService/` - The RBXGS-specific translation units
-- `common/` - Engine static libraries, one directory per `.lib` the original link consumed
+- `Client/` - Engine static libraries, laid out as the PDB's command blocks record them
 - `3rdparty/` - Vendored dependencies
 - `util/` - Headers supporting the decompilation itself
 - `cmake/` - CMake modules

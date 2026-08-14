@@ -4,7 +4,7 @@ Decompilation of Roblox as of 2007-12-20 using MSVC 8.0 SP1 (cl.exe 14.00.50727.
 
 One target: **WEBSERVICE**, `WebService.dll`, an ATL Server ISAPI extension with 12,633 functions.
 
-RBXGS, the game server, comes first because its binary ships an unstripped PDB, and the engine libraries under `common/` were shared with the client anyway. Three of the six LTCG objects in `WebService.dll` are `Client\win` sources. The client is in scope eventually.
+RBXGS, the game server, comes first because its binary ships an unstripped PDB, and the engine libraries under `Client/` were shared with the client anyway. Three of the six LTCG objects in `WebService.dll` are `Client\win` sources. The client is in scope eventually.
 
 ## Building
 
@@ -26,14 +26,14 @@ CI runs eight checks and seven of them are not `reccmp-reccmp`. Run all of them 
 reccmp-reccmp   --target WEBSERVICE --nolib                       # score
 reccmp-reccmp   --target WEBSERVICE --nolib --verbose 0xADDRESS   # one function
 reccmp-reccmp   --target WEBSERVICE --nolib --json out.json       # what is left
-reccmp-decomplint WebService common --module WEBSERVICE --warnfail
+reccmp-decomplint WebService Client --module WEBSERVICE --warnfail
 reccmp-vtable   --target WEBSERVICE
 reccmp-datacmp  --target WEBSERVICE
 python tools/check_folded.py --target WEBSERVICE
 python tools/reccmp_addr_padding.py
 ```
 
-- **decomplint** runs with `--warnfail`, so a warning fails the build. It covers `WebService common` only, so nothing under `3rdparty` is linted and a bad marker there fails silently. Point it at `3rdparty/RakNet30` by hand after touching RakNet.
+- **decomplint** runs with `--warnfail`, so a warning fails the build. It covers `WebService Client` only, so nothing under `3rdparty` is linted and a bad marker there fails silently. Point it at `3rdparty/RakNet30` by hand after touching RakNet.
 - **vtable** compares every vtable that has a name on both sides. A marker asserts a layout; a data source only resolves a store. Do not add a `// VTABLE:` marker to a class whose slots cannot all be claimed yet.
 - **datacmp** matches statics by bare name, so a name has to be unique in both builds.
 - **check_folded** asks whether every annotation on a shared address landed on a single recompiled address. MSVC 8 keeps a PDB symbol for every alias the linker folded away, so all `FOLDED` annotations resolve rather than just the survivor.
@@ -430,19 +430,27 @@ Two dependencies are easy to miss because they were compiled into someone else's
 
 ## Project Structure
 
+The tree reproduces the original's own directory names, taken from each library's
+`-Fo` and `-I` arguments in the PDB command blocks. LINES lowercases every path it
+stores, so it settles structure but never casing.
+
 ```
-common/app/          # App static library, subdirectories by subsystem
-  include/           # Headers, mirroring the source subdirectories
-common/appdraw/      # AppDraw
-common/network/      # Network
-common/rbxview/      # RbxView
-common/renderlib/    # RenderLib
-common/rbxgraphics/  # Headers only; its code was compiled into AppDraw and RenderLib
-common/win/          # VersionInfo
-WebService/          # The DLL project, plus library_msvc.h and WebServiceMaps.cpp
-util/                # decomp.h, decomp.cpp, compat.h
-3rdparty/            # Vendored dependencies, RakNet reconstructed
-reccmp/              # The six CSVs reccmp reads for the original's side
-cmake/               # reccmp CMake integration
-tools/               # check_folded.py, reccmp_addr_padding.py, ncc
+Client/App/                  # app.lib, subdirectories by subsystem
+  include/                   # Headers, mirroring the source subdirectories
+Client/Network/              # network.lib
+Client/RbxView/              # rbxview.lib
+Client/RbxGraphics/          # Headers only; its code was compiled into AppDraw and RenderLib
+Client/Rendering/AppDraw/    # appdraw.lib
+Client/Rendering/RenderLib/  # renderlib.lib
+Client/win/                  # VersionInfo, compiled into the WebService project
+WebService/                  # The DLL project, plus library_msvc.h and WebServiceMaps.cpp
+util/                        # decomp.h, decomp.cpp, compat.h
+3rdparty/                    # Vendored dependencies, RakNet reconstructed
+reccmp/                      # The six CSVs reccmp reads for the original's side
+cmake/                       # reccmp CMake integration
+tools/                       # check_folded.py, reccmp_addr_padding.py, ncc
 ```
+
+The original also had `Client/RbxViewBase/`, `Client/Rendering/RenderLibNew/` and
+`Client/Rendering/OgreSDK/` on the include path. Nothing in `WebService.dll` comes
+from them, so they have no directory here yet.

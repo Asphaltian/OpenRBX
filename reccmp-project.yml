@@ -2,7 +2,7 @@ targets:
   WEBSERVICE:
     filename: WebService.dll
     source-root:
-      - common
+      - Client
       - WebService
       # RakNet is recovered from the binary, not vendored, so it carries WEBSERVICE annotations.
       - 3rdparty/RakNet30
