@@ -1,5 +1,8 @@
 #include "Clusterer.h"
 
+#include <algorithm>
+#include <cstdlib>
+
 namespace RBX {
 namespace Render {
 
@@ -61,15 +64,58 @@ unsigned int Clusterer::moveSample(Sample* sample, Cluster* cluster)
 // STUB: WEBSERVICE 0x101fa380
 unsigned int Clusterer::moveSamples()
 {
-	STUB(0x101fa380);
-	return 0;
+	unsigned int moveCount = 0;
+
+	for (Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
+		it->visitIndex = 0;
+	}
+
+	for (Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
+		while (it->visitIndex < it->samples.size()) {
+			Sample* sample = it->samples[it->visitIndex];
+			Cluster* bestCluster = findClosestCluster(sample);
+
+			if (bestCluster == &(*it)) {
+				it->visitIndex++;
+			}
+			else {
+				it->samples[it->visitIndex] = it->samples.back();
+				it->samples.pop_back();
+				moveCount += moveSample(sample, bestCluster);
+			}
+		}
+	}
+
+	return moveCount;
 }
 
 // STUB: WEBSERVICE 0x101fa520
 Clusterer::Clusters* Clusterer::go(unsigned int maxSteps)
 {
-	STUB(0x101fa520);
-	return NULL;
+	if (clusterCount < 2) {
+		return &clusters;
+	}
+
+	Clusters::iterator end = clusters.end();
+
+	for (Clusters::iterator it = clusters.begin(); it != end; ++it) {
+		if (it->samples.size() != 0) {
+			it->centroid = it->samples[rand() % it->samples.size()]->cframe().translation;
+		}
+	}
+
+	unsigned int threshold = std::max(sampleSize / 20, 1u);
+	unsigned int step = 1;
+
+	while (moveSamples() > threshold && step != maxSteps) {
+		for (Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
+			it->computeCentroid();
+		}
+
+		step++;
+	}
+
+	return &clusters;
 }
 
 // FUNCTION: WEBSERVICE 0x101fa8a0
