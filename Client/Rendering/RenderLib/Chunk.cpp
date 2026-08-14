@@ -1,5 +1,9 @@
 #include "renderlib/Chunk.h"
 
+#include "renderlib/RenderStats.h"
+
+#include <G3D/g3dmath.h>
+
 namespace RBX {
 namespace Render {
 
@@ -8,6 +12,18 @@ const float Chunk::TEXTURE_OFFSET = -0.1f;
 
 bool AggregateChunk::randomColors;
 const G3D::CoordinateFrame AggregateChunk::identity;
+
+// FUNCTION: WEBSERVICE 0x1016f140
+Chunk::Chunk(float polygonOffset) : polygonOffset(polygonOffset), radius(G3D::inf())
+{
+	RenderStats::chunkCount++;
+}
+
+// STUB: WEBSERVICE 0x1016f1a0
+Chunk::~Chunk()
+{
+	RenderStats::chunkCount--;
+}
 
 // FUNCTION: WEBSERVICE 0x101f96a0
 void AggregateChunk::makeMesh()
@@ -26,16 +42,29 @@ void AggregateChunk::renderShadows(
 	STUB(0x101f9740);
 }
 
-// STUB: WEBSERVICE 0x101f9ad0
-AggregateChunk::AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk)
+// FUNCTION: WEBSERVICE 0x101f9ad0
+AggregateChunk::AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& firstChunk)
+	: Chunk(firstChunk->polygonOffset), _castsShadows(firstChunk->castsShadows()), _cullable(firstChunk->cullable())
 {
-	STUB(0x101f9ad0);
+	if (!randomColors) {
+		material = firstChunk->getMaterial();
+	}
+
+	RenderStats::aggregateChunkCount++;
+	RenderStats::chunkCount--;
+
+	if (randomColors) {
+		material = new Material();
+		material->appendLevel(NULL, (G3D::Color3::white() + G3D::Color3::wheelRandom()) / 2.0f, 0, 50, 0, 0);
+	}
 }
 
-// STUB: WEBSERVICE 0x101f9d70
+// FUNCTION: WEBSERVICE 0x101f9d70
 AggregateChunk::~AggregateChunk()
 {
-	STUB(0x101f9d70);
+	RenderStats::chunkCount++;
+	RenderStats::aggregateChunkCount--;
+	RenderStats::aggregatedChunkCount -= components.size();
 }
 
 } // namespace Render

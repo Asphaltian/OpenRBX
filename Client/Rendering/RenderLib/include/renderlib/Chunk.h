@@ -19,7 +19,7 @@ namespace Render {
 class AggregateChunk;
 
 // SIZE 0x1c
-class Chunk : public G3D::ReferenceCountedObject
+class __declspec(novtable) Chunk : public G3D::ReferenceCountedObject
 {
 public:
 	static const float DECAL_OFFSET;
@@ -28,9 +28,9 @@ public:
 	float polygonOffset; // 0x0c
 	float radius;        // 0x10
 
-	Chunk() {}
+	Chunk(float polygonOffset);
 
-	virtual ~Chunk() {}
+	virtual ~Chunk();
 
 	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
 	virtual bool cachesShadows() const { return false; }
@@ -55,6 +55,7 @@ public:
 
 DECOMP_SIZE_ASSERT(Chunk, 0x1c)
 
+// VTABLE: WEBSERVICE 0x1025a1a4
 // SIZE 0xf0
 class AggregateChunk : public Chunk
 {
@@ -102,7 +103,7 @@ public:
 
 	Components components; // 0xe0
 
-	AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+	AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& firstChunk);
 	virtual ~AggregateChunk();
 
 	void makeMesh();
