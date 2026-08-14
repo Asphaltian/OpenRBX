@@ -66,6 +66,11 @@ public:
 		bool caps
 	) const;
 
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x102257c0
+	// `RBX::Render::Mesh::computeDirectionalShadowVolume'::`2'::`dynamic atexit destructor for 'backface''
+	// clang-format on
+
 	static G3D::ReferenceCountedPointer<Mesh> aggregate(
 		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
 		G3D::CoordinateFrame& outCFrame,
