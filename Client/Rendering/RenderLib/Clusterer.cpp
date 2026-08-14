@@ -6,8 +6,21 @@ namespace Render {
 // STUB: WEBSERVICE 0x101f9fa0
 Clusterer::Cluster* Clusterer::findClosestCluster(Sample* sample)
 {
-	STUB(0x101f9fa0);
-	return NULL;
+	Cluster* bestCluster = NULL;
+	float bestDistance = G3D::inf();
+
+	Clusters::iterator end = clusters.end();
+
+	for (Clusters::iterator it = clusters.begin(); it != end; ++it) {
+		float distance = it->getDistanceFromCentroid(sample);
+
+		if (distance < bestDistance) {
+			bestDistance = distance;
+			bestCluster = &(*it);
+		}
+	}
+
+	return bestCluster;
 }
 
 // STUB: WEBSERVICE 0x101fa0c0
@@ -15,7 +28,9 @@ void Clusterer::Cluster::computeCentroid()
 {
 	G3D::Vector3 c(0, 0, 0);
 
-	for (Samples::iterator it = samples.begin(); it != samples.end(); ++it) {
+	Samples::iterator end = samples.end();
+
+	for (Samples::iterator it = samples.begin(); it != end; ++it) {
 		c += (*it)->cframe().translation;
 	}
 
@@ -25,8 +40,22 @@ void Clusterer::Cluster::computeCentroid()
 // STUB: WEBSERVICE 0x101fa2c0
 unsigned int Clusterer::moveSample(Sample* sample, Cluster* cluster)
 {
-	STUB(0x101fa2c0);
-	return 0;
+	while (cluster->visitIndex != cluster->samples.size()) {
+		Sample* visited = cluster->samples[cluster->visitIndex];
+		Cluster* bestCluster = findClosestCluster(visited);
+
+		if (bestCluster != cluster) {
+			cluster->samples[cluster->visitIndex] = sample;
+			return moveSample(visited, bestCluster) + 1;
+		}
+
+		cluster->visitIndex++;
+	}
+
+	cluster->samples.push_back(sample);
+	cluster->visitIndex++;
+
+	return 1;
 }
 
 // STUB: WEBSERVICE 0x101fa380

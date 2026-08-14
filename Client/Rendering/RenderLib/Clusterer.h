@@ -26,7 +26,8 @@ public:
 		unsigned int visitIndex; // 0x1c
 
 		void computeCentroid();
-		float getDistanceFromCentroid(Sample* sample);
+
+		float getDistanceFromCentroid(Sample* sample) { return (sample->cframe().translation - centroid).length(); }
 	};
 
 	typedef std::vector<Cluster> Clusters;
