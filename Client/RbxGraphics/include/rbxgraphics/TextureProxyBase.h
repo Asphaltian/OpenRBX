@@ -10,14 +10,18 @@
 namespace RBX {
 
 // SIZE 0x28
-class __declspec(novtable) TextureProxyBase : public G3D::ReferenceCountedObject
+class TextureProxyBase : public G3D::ReferenceCountedObject
 {
 public:
-	virtual ~TextureProxyBase();
-
-	virtual G3D::Vector2 getSize() const = 0; // vtable+0x04
-
 	std::string filename; // 0x0c
+
+	// FUNCTION: WEBSERVICE 0x10030b90
+	TextureProxyBase() {}
+
+	// FUNCTION: WEBSERVICE 0x10030be0
+	virtual ~TextureProxyBase() {}
+
+	virtual G3D::Vector2 getSize() = 0; // vtable+0x04
 };
 
 DECOMP_SIZE_ASSERT(TextureProxyBase, 0x28)

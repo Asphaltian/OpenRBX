@@ -301,8 +301,14 @@ set(OPENRBX_RAKNET_SOURCES
 set(OPENRBX_RBXVIEW_SOURCES
 )
 set(OPENRBX_RENDERLIB_SOURCES
+  Client/Rendering/RenderLib/Material.cpp
+  Client/Rendering/RenderLib/Profiler.cpp
+  Client/Rendering/RenderLib/RenderStats.cpp
+  Client/Rendering/RenderLib/TextureProxy.cpp
 )
 set(OPENRBX_APPDRAW_SOURCES
+  Client/Rendering/AppDraw/AdornG3D.cpp
+  Client/Rendering/AppDraw/Draw.cpp
   Client/Rendering/AppDraw/DrawAdorn.cpp
   Client/Rendering/AppDraw/DrawPrimitives.cpp
   Client/Rendering/AppDraw/Fonts.cpp
@@ -426,16 +432,16 @@ add_engine_library(rbxview
   SOURCES ${OPENRBX_RBXVIEW_SOURCES}
 )
 
-# RenderLib is the only library built with /Wp64.
-add_engine_library(renderlib
-  OPTIONS /O2 /Wp64
-  SOURCES ${OPENRBX_RENDERLIB_SOURCES}
-)
-
 add_engine_library(appdraw
   DEFINITIONS _RELEASE
   OPTIONS /O2 /GS-
   SOURCES ${OPENRBX_APPDRAW_SOURCES}
+)
+
+# RenderLib is the only library built with /Wp64.
+add_engine_library(renderlib
+  OPTIONS /O2 /Wp64
+  SOURCES ${OPENRBX_RENDERLIB_SOURCES}
 )
 
 # --- WebService.dll target ---

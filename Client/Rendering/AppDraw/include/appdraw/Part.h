@@ -2,6 +2,8 @@
 #define APPDRAW_PART_H
 
 #include "decomp.h"
+#include "util/SurfaceType.h"
+#include "util/Vector6.h"
 
 #include <G3D/Color4.h>
 #include <G3D/CoordinateFrame.h>
@@ -23,7 +25,7 @@ public:
 	PartType type;                        // 0x00
 	G3D::Vector3 gridSize;                // 0x04
 	G3D::Color4 color;                    // 0x10
-	undefined m_unk0x20[0x38 - 0x20];     // 0x20
+	Vector6<SurfaceType> surfaceType;     // 0x20
 	G3D::CoordinateFrame coordinateFrame; // 0x38
 };
 

@@ -29,6 +29,7 @@ public:
 	Rect(const Vector2& low, const Vector2& high) : low(low), high(high) {}
 	Rect(const Vector2& size) : low(Vector2::zero()), high(size) {}
 	Rect(float lowX, float lowY, float highX, float highY) : low(lowX, lowY), high(highX, highY) {}
+	Rect(G3D::Rect2D rect) : low(rect.x0y0()), high(rect.x1y1()) {}
 
 	static Rect fromLowSize(const Vector2& low, const Vector2& size) { return Rect(low, low + size); }
 
