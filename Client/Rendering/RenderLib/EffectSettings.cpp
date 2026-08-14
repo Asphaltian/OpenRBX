@@ -39,9 +39,12 @@ G3D::ReferenceCountedPointer<G3D::Lighting> EffectSettings::update(
 	G3D::LightingParameters& outSkyParameters
 )
 {
-	int numShadowLights = G3D::min(desiredLighting->shadowedLightArray.size(), 8);
+	int numShadowLights =
+		desiredLighting->shadowedLightArray.size() >= 8 ? 8 : desiredLighting->shadowedLightArray.size();
+	int maxLights = G3D::glGetInteger(GL_MAX_LIGHTS) - 3;
 	int numNonShadowLights =
-		G3D::max(G3D::min(desiredLighting->lightArray.size(), G3D::glGetInteger(GL_MAX_LIGHTS) - 3), 0);
+		desiredLighting->lightArray.size() >= maxLights ? maxLights : desiredLighting->lightArray.size();
+	numNonShadowLights = numNonShadowLights > 0 ? numNonShadowLights : 0;
 
 	_groundLOD = 1.0f;
 	_LODShift = 0.0f;
