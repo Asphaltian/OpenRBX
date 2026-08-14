@@ -19,12 +19,7 @@ class Draw
 
 	static void frameBox(const Part& part, Adorn* adorn, const G3D::Color4& selectColor);
 
-	static void constraint(
-		const Part& part,
-		Adorn* adorn,
-		int face,
-		const G3D::Color3& controllerColor
-	);
+	static void constraint(const Part& part, Adorn* adorn, int face, const G3D::Color3& controllerColor);
 
 public:
 	static const G3D::Color3& selectColor();

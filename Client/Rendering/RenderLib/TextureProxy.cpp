@@ -21,7 +21,8 @@ void TextureProxy::shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& li
 			float shade = (light - 128.0) / 128.0;
 			float a = std::min(shade, 1.0f);
 			color = (1.0 - a) * color + 255.0 * a;
-		} else if (light < 126) {
+		}
+		else if (light < 126) {
 			float a = light / 128.0;
 			a = 0.5 + a * 0.5;
 			color = color * a;
@@ -58,7 +59,11 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 			char encodedFileName[1024];
 
 			sprintf(
-				encodedFileName, "%g%g%g%s", shadeColor.r, shadeColor.g, shadeColor.b,
+				encodedFileName,
+				"%g%g%g%s",
+				shadeColor.r,
+				shadeColor.g,
+				shadeColor.b,
 				shadeTexture->filename.c_str()
 			);
 
@@ -89,36 +94,43 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 
 				texture = G3D::Texture::fromGImage(
 					G3D::format(
-						"Generated bump texture, color = (%3.1f, %3.1f, %3.1f)", shadeColor.r,
-						shadeColor.g, shadeColor.b
+						"Generated bump texture, color = (%3.1f, %3.1f, %3.1f)",
+						shadeColor.r,
+						shadeColor.g,
+						shadeColor.b
 					),
-					bumpImage, G3D::TextureFormat::RGB8
+					bumpImage,
+					G3D::TextureFormat::RGB8
 				);
 
 				textureManager->cacheTexture(texture, encodedFileName);
 			}
-		} else if (root.isNull()) {
+		}
+		else if (root.isNull()) {
 			try {
 				if (filename == "") {
 					texture = G3D::Texture::createEmpty(8, 8);
-				} else {
+				}
+				else {
 					texture = textureManager->loadTexture(
-						filename, G3D::TextureFormat::AUTO,
+						filename,
+						G3D::TextureFormat::AUTO,
 						tiled ? G3D::Texture::TILE : G3D::Texture::TRANSPARENT_BORDER
 					);
 				}
-			} catch (std::exception& e) {
-				StandardOut::singleton()->print(
-					MESSAGE_ERROR, "Failed to load texture '%s', %s", filename.c_str(), e.what()
-				);
-				texture = NULL;
-			} catch (...) {
-				StandardOut::singleton()->print(
-					MESSAGE_ERROR, "Failed to load texture '%s', unknown exception", filename.c_str()
-				);
+			}
+			catch (std::exception& e) {
+				StandardOut::singleton()
+					->print(MESSAGE_ERROR, "Failed to load texture '%s', %s", filename.c_str(), e.what());
 				texture = NULL;
 			}
-		} else {
+			catch (...) {
+				StandardOut::singleton()
+					->print(MESSAGE_ERROR, "Failed to load texture '%s', unknown exception", filename.c_str());
+				texture = NULL;
+			}
+		}
+		else {
 			G3D::TextureRef t = root->resolve(rd);
 
 			if (!t.isNull() && !t->opaque()) {
@@ -147,9 +159,10 @@ G3D::Vector2 TextureProxy::getSize()
 	G3D::Vector2 size;
 
 	if (!t.isNull()) {
-		size.x = (float)t->texelWidth();
-		size.y = (float)t->texelHeight();
-	} else {
+		size.x = (float) t->texelWidth();
+		size.y = (float) t->texelHeight();
+	}
+	else {
 		size.y = 0;
 		size.x = 0;
 	}

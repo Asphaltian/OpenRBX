@@ -33,10 +33,7 @@ protected:
 	G3D::Color3 shadeColor;                             // 0x40
 
 	// FUNCTION: WEBSERVICE 0x10169050
-	TextureProxy(TextureProxyRef root) : loaded(false), textureManager(NULL), root(root)
-	{
-		filename = "";
-	}
+	TextureProxy(TextureProxyRef root) : loaded(false), textureManager(NULL), root(root) { filename = ""; }
 
 public:
 	// FUNCTION: WEBSERVICE 0x10030fd0
@@ -50,7 +47,7 @@ public:
 
 	TextureProxyRef alphaOnlyVersion();
 
-	virtual G3D::ReferenceCountedPointer<G3D::Texture> getIfResolved() const;                    // vtable+0x08
+	virtual G3D::ReferenceCountedPointer<G3D::Texture> getIfResolved() const;          // vtable+0x08
 	virtual G3D::ReferenceCountedPointer<G3D::Texture> resolve(G3D::RenderDevice* rd); // vtable+0x0c
 
 	static void shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& lighting);
