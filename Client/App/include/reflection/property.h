@@ -81,6 +81,13 @@ private:
 
 DECOMP_SIZE_ASSERT(PropertyDescriptor, 0x18)
 
+inline std::string PropertyDescriptor::getStringValue(const DescribedBase* instance) const
+{
+	hasStringValue();
+
+	return "";
+}
+
 // SIZE 0x1c
 template <class T>
 class TypedPropertyDescriptor : public PropertyDescriptor
@@ -181,6 +188,10 @@ DECOMP_SIZE_ASSERT(EnumPropertyDescriptor, 0x1c)
 // SIZE 0x18
 class __declspec(novtable) RefPropertyDescriptor : public PropertyDescriptor
 {
+public:
+	virtual DescribedBase* getRefValue(const DescribedBase* instance) const = 0;       // vtable+0x24
+	virtual void setRefValue(DescribedBase* instance, DescribedBase* value) const = 0; // vtable+0x28
+
 protected:
 	RefPropertyDescriptor(
 		ClassDescriptor& classDescriptor,
@@ -191,6 +202,20 @@ protected:
 	)
 		: PropertyDescriptor(classDescriptor, type, name, category, functionality)
 	{
+	}
+
+	virtual bool hasStringValue() const { return false; }
+
+	virtual std::string getStringValue(const DescribedBase* instance) const
+	{
+		return PropertyDescriptor::getStringValue(instance);
+	}
+
+	virtual bool setStringValue(DescribedBase* instance, const std::string& value) const
+	{
+		hasStringValue();
+
+		return false;
 	}
 };
 

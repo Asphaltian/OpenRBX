@@ -2,6 +2,7 @@
 #define V8XML_XMLELEMENT_H
 
 #include "decomp.h"
+#include "util/Handle.h"
 
 #include <cstddef>
 #include <map>
@@ -138,6 +139,14 @@ public:
 	bool getValue(RBX::InstanceHandle& value) const;
 
 	bool isValueEqual(const RBX::Name* value) const;
+
+	void setValue(RBX::InstanceHandle value)
+	{
+		clearValue();
+
+		handleValue = new RBX::InstanceHandle(value);
+		valueType = HANDLE;
+	}
 
 private:
 	void clearValue() const;

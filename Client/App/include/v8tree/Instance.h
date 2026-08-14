@@ -163,7 +163,11 @@ public:
 	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_childRemoved;
 	static Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> event_propertyChanged;
 
+	static const Reflection::RefPropDescriptor<Instance, Instance> propParent;
+
 	Instance* getParent() const { return parent; }
+
+	void setParent(Instance* newParent);
 
 	Instance* getRootAncestor() { return parent != NULL ? parent->getRootAncestor() : this; }
 

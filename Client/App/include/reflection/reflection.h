@@ -3,7 +3,14 @@
 
 #include "decomp.h"
 #include "reflection/object.h"
+#include "reflection/property.h"
 #include "reflection/signal.h"
+#include "util/Handle.h"
+#include "v8xml/Serializer.h"
+#include "v8xml/XmlElement.h"
+
+#include <boost/cast.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace RBX {
 namespace Reflection {
@@ -296,6 +303,65 @@ public:
 
 		return foo;
 	}
+};
+
+// SIZE 0x20
+template <class Class, class T>
+class RefPropDescriptor : public RefPropertyDescriptor, public IIDREF
+{
+public:
+	template <class Getter, class Setter>
+	RefPropDescriptor(
+		const char* name,
+		const char* category,
+		Getter get,
+		Setter set,
+		typename PropertyDescriptor::Functionality functionality = PropertyDescriptor::STANDARD
+	)
+		: RefPropertyDescriptor(Class::classDescriptor(), RefType::singleton<T*>(), name, category, functionality),
+		  getset(PropDescriptor<Class, T*>::getset(get, set))
+	{
+	}
+
+	virtual bool isReadOnly() const { return getset->isReadOnly(); }
+
+	T* getValue(const DescribedBase* instance) const { return getset->getValue(instance); }
+
+	void setValue(DescribedBase* instance, T* value) const { getset->setValue(instance, value); }
+
+	virtual bool equalValues(const DescribedBase* a, const DescribedBase* b) const
+	{
+		return getValue(a) == getValue(b);
+	}
+
+	virtual DescribedBase* getRefValue(const DescribedBase* instance) const { return getValue(instance); }
+
+	virtual void setRefValue(DescribedBase* instance, DescribedBase* value) const
+	{
+		T* t = value != NULL ? boost::polymorphic_cast<T*>(value) : NULL;
+
+		setValue(instance, t);
+	}
+
+	virtual void readValue(DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder) const
+	{
+		binder.announceIDREF(element, instance, this);
+	}
+
+	virtual void writeValue(const DescribedBase* instance, XmlElement* element) const
+	{
+		element->setValue(getValue(instance));
+	}
+
+	virtual void assignIDREF(DescribedBase* propertyOwner, const InstanceHandle& handle) const
+	{
+		boost::shared_ptr<Instance> t = handle.getTarget();
+
+		setValue(propertyOwner, static_cast<T*>(t.get()));
+	}
+
+private:
+	std::auto_ptr<typename TypedPropertyDescriptor<T*>::GetSet> getset; // 0x1c
 };
 
 } // namespace Reflection

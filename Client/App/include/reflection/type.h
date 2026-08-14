@@ -38,6 +38,27 @@ protected:
 
 DECOMP_SIZE_ASSERT(Type, 0x10)
 
+// SIZE 0x10
+class RefType : public Type
+{
+public:
+	template <class T>
+	static const Type& singleton();
+
+private:
+	RefType(const char* name, const std::type_info& type) : Type(name, type, "Ref") {}
+};
+
+DECOMP_SIZE_ASSERT(RefType, 0x10)
+
+template <class T>
+const Type& RefType::singleton()
+{
+	static RefType type("Object", typeid(RefType));
+
+	return type;
+}
+
 // SIZE 0x08
 class Value
 {
