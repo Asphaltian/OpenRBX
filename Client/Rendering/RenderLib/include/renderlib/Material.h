@@ -57,7 +57,14 @@ public:
 		}
 
 		void setBaseTexture(TextureProxyRef baseTexture);
-		G3D::TextureRef matte(G3D::RenderDevice* renderDevice) const;
+		G3D::TextureRef matte(G3D::RenderDevice* renderDevice) const
+		{
+			if (mMatte.isNull()) {
+				return NULL;
+			}
+
+			return mMatte->resolve(renderDevice);
+		}
 
 		const G3D::Color3& color() const { return mColor; }
 
