@@ -1,4 +1,4 @@
-#include "ToneMap.h"
+#include "GLG3D/ToneMap.h"
 #include <GLG3D/Draw.h>
 #include <G3D/Rect2D.h>
 

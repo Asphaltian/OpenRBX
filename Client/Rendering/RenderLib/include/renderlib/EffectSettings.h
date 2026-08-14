@@ -6,10 +6,7 @@
 
 #include <G3D/ReferenceCount.h>
 #include <GLG3D/LightingParameters.h>
-
-namespace G3D {
-class ToneMap;
-}
+#include <GLG3D/ToneMap.h>
 
 namespace RBX {
 namespace Render {
@@ -45,6 +42,8 @@ public:
 	);
 
 	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x102264c0
+	// `RBX::Render::EffectSettings::getToneMap'::`2'::`dynamic atexit destructor for 'toneMap''
 	// SYNTHETIC: WEBSERVICE 0x102264e0
 	// `RBX::Render::EffectSettings::getDepthBlur'::`2'::`dynamic atexit destructor for 'depthBlur''
 	// clang-format on
