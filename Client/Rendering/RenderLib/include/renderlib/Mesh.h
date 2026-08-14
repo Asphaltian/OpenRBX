@@ -58,6 +58,14 @@ protected:
 	ShadowSurface shadowSurface; // 0x18
 
 public:
+	void computeDirectionalShadowVolume(
+		const G3D::CoordinateFrame& cframe,
+		const G3D::Vector3& worldLight,
+		G3D::Array<unsigned int>& indexArray,
+		G3D::Array<G3D::Vector3>& vertexArray,
+		bool caps
+	) const;
+
 	static G3D::ReferenceCountedPointer<Mesh> aggregate(
 		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
 		G3D::CoordinateFrame& outCFrame,

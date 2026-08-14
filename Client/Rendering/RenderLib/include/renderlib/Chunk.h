@@ -36,12 +36,7 @@ public:
 	virtual bool cachesShadows() const { return false; }
 
 	// FUNCTION: WEBSERVICE 0x101aaa90 FOLDED
-	virtual void renderShadows(
-		G3D::RenderDevice* renderDevice,
-		const G3D::GLight& light,
-		bool shadowsEnabled,
-		float shadowAlpha
-	)
+	virtual void renderShadows(G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance)
 	{
 	}
 	virtual bool castsShadows() const = 0;
@@ -92,12 +87,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x101f9d40
 	virtual G3D::ReferenceCountedPointer<Mesh> getMesh() { return mesh; }
 
-	virtual void renderShadows(
-		G3D::RenderDevice* renderDevice,
-		const G3D::GLight& light,
-		bool shadowsEnabled,
-		float shadowAlpha
-	);
+	virtual void renderShadows(G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance);
 
 	typedef std::vector<G3D::ReferenceCountedPointer<Chunk> > Components;
 

@@ -33,13 +33,57 @@ void AggregateChunk::makeMesh()
 
 // STUB: WEBSERVICE 0x101f9740
 void AggregateChunk::renderShadows(
-	G3D::RenderDevice* renderDevice,
+	G3D::RenderDevice* rd,
 	const G3D::GLight& light,
-	bool shadowsEnabled,
-	float shadowAlpha
+	bool caps,
+	float shadowVertexDistance
 )
 {
-	STUB(0x101f9740);
+	if (light != shadowSource) {
+		shadowSource = light;
+		shadowIndexArray.resize(0, true);
+		shadowIndexArray16.resize(0, true);
+
+		if (material->veryTransparent()) {
+			return;
+		}
+
+		static G3D::Array<G3D::Vector3> shadowVertex;
+		shadowVertex.resize(0, true);
+
+		shadowVertex.append(-light.position.xyz().unit() * shadowVertexDistance);
+
+		G3D::Vector3 worldLight = light.position.xyz().unit();
+
+		mesh->computeDirectionalShadowVolume(cframe(), worldLight, shadowIndexArray, shadowVertex, caps);
+
+		if (shadowVertex.size() < 65536) {
+			int numIndices = shadowIndexArray.size();
+			shadowIndexArray16.resize(numIndices, true);
+
+			for (int i = 0; i < numIndices; i++) {
+				shadowIndexArray16[i] = (unsigned short) shadowIndexArray[i];
+			}
+
+			shadowIndexArray.resize(0, true);
+		}
+
+		G3D::VARAreaRef area = G3D::VARArea::create(shadowVertex.size() * sizeof(G3D::Vector3));
+		shadowVAR = G3D::VAR(shadowVertex, area);
+	}
+
+	if (shadowIndexArray.size() > 0) {
+		rd->beginIndexedPrimitives();
+		rd->setVertexArray(shadowVAR);
+		rd->sendIndices(G3D::RenderDevice::TRIANGLES, shadowIndexArray);
+		rd->endIndexedPrimitives();
+	}
+	else if (shadowIndexArray16.size() > 0) {
+		rd->beginIndexedPrimitives();
+		rd->setVertexArray(shadowVAR);
+		rd->sendIndices(G3D::RenderDevice::TRIANGLES, shadowIndexArray16);
+		rd->endIndexedPrimitives();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x101f9ad0
