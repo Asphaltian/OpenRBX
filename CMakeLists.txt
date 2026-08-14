@@ -304,6 +304,7 @@ set(OPENRBX_RENDERLIB_SOURCES
   Client/Rendering/RenderLib/Chunk.cpp
   Client/Rendering/RenderLib/Clusterer.cpp
   Client/Rendering/RenderLib/DepthBlur.cpp
+  Client/Rendering/RenderLib/EffectSettings.cpp
   Client/Rendering/RenderLib/Material.cpp
   Client/Rendering/RenderLib/Mesh.cpp
   Client/Rendering/RenderLib/Profiler.cpp

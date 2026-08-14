@@ -219,6 +219,7 @@ address,type,symbol
 0x101f6670,synthetic,??0Level@Material@Render@RBX@@QAE@ABV0123@@Z
 0x101f6710,synthetic,??4Level@Material@Render@RBX@@QAEAAV0123@ABV0123@@Z
 0x101f6ea0,synthetic,??_GMaterial@Render@RBX@@UAEPAXI@Z
+0x101f7ac0,synthetic,??1DepthBlur@Render@RBX@@QAE@XZ
 0x10223320,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x10223970,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x10223980,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
