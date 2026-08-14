@@ -303,6 +303,10 @@ set(OPENRBX_RBXVIEW_SOURCES
 set(OPENRBX_RENDERLIB_SOURCES
 )
 set(OPENRBX_APPDRAW_SOURCES
+  Client/Rendering/AppDraw/DrawAdorn.cpp
+  Client/Rendering/AppDraw/Fonts.cpp
+  Client/Rendering/AppDraw/HitTest.cpp
+  Client/Rendering/AppDraw/Textures.cpp
 )
 
 set(OPENRBX_ENGINE_INCLUDE_DIRS
@@ -497,6 +501,9 @@ target_link_libraries(webservice PRIVATE
 if (MSVC)
   target_sources(webservice PRIVATE WebService/WebService.def)
   target_link_options(webservice PRIVATE "-MAP:$<TARGET_FILE_DIR:webservice>/$<TARGET_FILE_BASE_NAME:webservice>.map")
+  foreach(lib zlib.lib G3D.lib G3D-debug.lib GLG3D.lib GLG3D-debug.lib sdl.lib sdlmain.lib glut32.lib)
+    target_link_options(webservice PRIVATE "/NODEFAULTLIB:${lib}")
+  endforeach()
 endif()
 
 set_property(TARGET webservice PROPERTY OUTPUT_NAME "WebService")

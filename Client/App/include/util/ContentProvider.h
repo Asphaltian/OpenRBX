@@ -50,6 +50,10 @@ class ContentProvider : public boost::noncopyable
 public:
 	static ContentProvider& singleton();
 
+	std::string getFile(ContentId id);
+
+	std::string getAssetFile(const std::string& id);
+
 	std::auto_ptr<std::istream> getContent(ContentId ticket);
 
 	boost::shared_ptr<const std::string> requestContentString(ContentId id);

@@ -57,6 +57,13 @@ ContentId ContentId::fromAssets(const std::string& id)
 	return ContentId();
 }
 
+// STUB: WEBSERVICE 0x10053500
+std::string ContentProvider::getFile(ContentId id)
+{
+	STUB(0x10053500);
+	return std::string();
+}
+
 // STUB: WEBSERVICE 0x100535f0
 std::auto_ptr<std::istream> ContentProvider::getContent(ContentId ticket)
 {
@@ -68,6 +75,13 @@ std::auto_ptr<std::istream> ContentProvider::getContent(ContentId ticket)
 ContentProvider::~ContentProvider()
 {
 	STUB(0x10053800);
+}
+
+// STUB: WEBSERVICE 0x10053900
+std::string ContentProvider::getAssetFile(const std::string& id)
+{
+	STUB(0x10053900);
+	return std::string();
 }
 
 // STUB: WEBSERVICE 0x10053a80
