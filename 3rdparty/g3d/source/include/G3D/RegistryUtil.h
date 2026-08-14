@@ -47,7 +47,7 @@ public:
     static bool keyExists(const std::string& key);
 
     /** returns false if the key could not be read for any reason. */
-    static bool readInt32(const std::string& key, int32& valueData);
+    static bool read32bitNumber(const std::string& key, int32& valueData);
 
     /** 
       Reads an arbitrary amount of data from a binary registry key.

@@ -57,7 +57,7 @@ bool RegistryUtil::keyExists(const std::string& key) {
     }
 }
 
-bool RegistryUtil::readInt32(const std::string& key, int32& valueData) {
+bool RegistryUtil::read32bitNumber(const std::string& key, int32& valueData) {
 
     size_t pos = key.find('\\', 0);
     if ( pos == std::string::npos ) {

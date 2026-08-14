@@ -409,7 +409,7 @@ void System::init() {
     }
 
     #ifdef G3D_WIN32
-        bool success = RegistryUtil::readInt32("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0\\~MHz", _CPUSpeed);
+        bool success = RegistryUtil::read32bitNumber("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0\\~MHz", _CPUSpeed);
 
         SYSTEM_INFO systemInfo;
         GetSystemInfo(&systemInfo);
