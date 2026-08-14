@@ -12,14 +12,23 @@ class IndexBox
 {
 public:
 	IndexBox(const Vector3& min, const Vector3& max);
-	virtual ~IndexBox(); // vtable+0x00
+
+	virtual ~IndexBox() // vtable+0x00
+	{
+	}
 
 	// SYNTHETIC: WEBSERVICE 0x100314f0
 	// RBX::IndexBox::`scalar deleting destructor'
 
+	Vector3 getFaceNormal(int f) const
+	{
+		return Vector3(INDEXBOX_FACE_TO_NORMAL[f][0], INDEXBOX_FACE_TO_NORMAL[f][1], INDEXBOX_FACE_TO_NORMAL[f][2]);
+	}
+
 	void getFaceCorners(int f, Vector3& v0, Vector3& v1, Vector3& v2, Vector3& v3) const;
 
 	static const int INDEXBOX_FACE_TO_VERTEX[6][4];
+	static const float INDEXBOX_FACE_TO_NORMAL[6][3];
 
 private:
 	Vector3 corner[8]; // 0x04

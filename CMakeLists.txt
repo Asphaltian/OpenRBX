@@ -304,6 +304,7 @@ set(OPENRBX_RENDERLIB_SOURCES
 )
 set(OPENRBX_APPDRAW_SOURCES
   Client/Rendering/AppDraw/DrawAdorn.cpp
+  Client/Rendering/AppDraw/DrawPrimitives.cpp
   Client/Rendering/AppDraw/Fonts.cpp
   Client/Rendering/AppDraw/HitTest.cpp
   Client/Rendering/AppDraw/Textures.cpp
