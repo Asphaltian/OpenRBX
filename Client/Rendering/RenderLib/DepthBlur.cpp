@@ -6,10 +6,10 @@
 namespace RBX {
 namespace Render {
 
-// STUB: WEBSERVICE 0x101f8fe0
+// FUNCTION: WEBSERVICE 0x101f8fe0
 void DepthBlur::allocateTextures(const G3D::Rect2D& screenRect)
 {
-	if (!depth.isNull() && screenRect.width() == depth->texelWidth() && screenRect.height() == depth->texelHeight()) {
+	if (!depth.isNull() && depth->vector2Bounds() == screenRect.wh()) {
 		return;
 	}
 
