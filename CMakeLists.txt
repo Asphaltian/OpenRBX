@@ -301,7 +301,9 @@ set(OPENRBX_RAKNET_SOURCES
 set(OPENRBX_RBXVIEW_SOURCES
 )
 set(OPENRBX_RENDERLIB_SOURCES
+  Client/Rendering/RenderLib/Chunk.cpp
   Client/Rendering/RenderLib/Material.cpp
+  Client/Rendering/RenderLib/Mesh.cpp
   Client/Rendering/RenderLib/Profiler.cpp
   Client/Rendering/RenderLib/RenderStats.cpp
   Client/Rendering/RenderLib/TextureProxy.cpp
