@@ -6257,6 +6257,7 @@ address,type,symbol
 0x103005bc,global,?AUTO@TextureFormat@G3D@@2PBV12@B
 0x1030062c,global,?RGBA8@TextureFormat@G3D@@2PBV12@B
 0x10300634,global,?RGB8@TextureFormat@G3D@@2PBV12@B
+0x10300661,global,?_supports_GL_EXT_texture_rectangle@GLCaps@G3D@@0_NA
 0x10300670,global,?_supports_GL_ARB_shader_objects@GLCaps@G3D@@0_NA
 0x10300671,global,?_supports_GL_ARB_shading_language_100@GLCaps@G3D@@0_NA
 0x10300672,global,?_supports_GL_ARB_fragment_shader@GLCaps@G3D@@0_NA
