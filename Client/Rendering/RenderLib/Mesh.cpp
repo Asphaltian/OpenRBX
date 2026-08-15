@@ -8,11 +8,14 @@ namespace Render {
 G3D::MeshAlg::Geometry Mesh::visibleGeometry;
 G3D::Array<G3D::Vector2> Mesh::texCoordArray;
 G3D::Array<G3D::Vector3> Mesh::tangentArray;
+Mesh::VertexList Mesh::vertexRefCounts;
 G3D::VAR Mesh::vertexVAR;
 G3D::VAR Mesh::normalVAR;
 G3D::VAR Mesh::texCoordVAR;
 G3D::VAR Mesh::tangentVAR;
 bool Mesh::varDirty;
+
+static int vertexRefCount;
 
 // FUNCTION: WEBSERVICE 0x101655f0
 void Mesh::endRender(G3D::RenderDevice* rd)
@@ -20,10 +23,19 @@ void Mesh::endRender(G3D::RenderDevice* rd)
 	rd->endIndexedPrimitives();
 }
 
-// STUB: WEBSERVICE 0x10165fc0
-const Mesh::LevelRef Mesh::detailLevel(float detail) const
+// FUNCTION: WEBSERVICE 0x10165830
+unsigned int Mesh::allocVertex(unsigned int i, unsigned int count)
 {
-	return levels[detailIndex(levels.size() * detail)];
+	vertexRefCounts[i] += count;
+	vertexRefCount += count;
+
+	return i;
+}
+
+// STUB: WEBSERVICE 0x10165fc0
+const Mesh::LevelRef Mesh::detailLevel(float meshLOD) const
+{
+	return levels[detailIndex(levels.size() * meshLOD)];
 }
 
 // FUNCTION: WEBSERVICE 0x10166020

@@ -85,6 +85,8 @@ public:
 
 	float debugBoundingRadius; // 0x4c
 
+	static unsigned int allocVertex(unsigned int i, unsigned int count);
+
 	static void beginRender(G3D::RenderDevice* rd, bool usetexCoords, bool useTangent);
 
 	static void sendGeometry(const Level* lvl, G3D::RenderDevice* rd);
