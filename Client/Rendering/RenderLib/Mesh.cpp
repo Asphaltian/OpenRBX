@@ -5,6 +5,14 @@
 namespace RBX {
 namespace Render {
 
+// FUNCTION: WEBSERVICE 0x10166020
+void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
+{
+	if (lvl != NULL && lvl->indexArray.size() > 0) {
+		rd->sendIndices(lvl->primitive, lvl->indexArray);
+	}
+}
+
 // STUB: WEBSERVICE 0x101676c0
 void Mesh::computeDirectionalShadowVolume(
 	const G3D::CoordinateFrame& cframe,

@@ -9,6 +9,7 @@
 #include <G3D/ReferenceCount.h>
 #include <G3D/Vector2.h>
 #include <G3D/Vector3.h>
+#include <GLG3D/RenderDevice.h>
 #include <GLG3D/VAR.h>
 #include <vector>
 
@@ -24,7 +25,18 @@ public:
 	typedef unsigned int IndexType;
 	typedef G3D::Array<int> VertexList;
 
-	class Level;
+	// SIZE 0x1c
+	class Level : public G3D::ReferenceCountedObject
+	{
+	public:
+		G3D::Array<IndexType> indexArray;       // 0x0c
+		G3D::RenderDevice::Primitive primitive; // 0x18
+
+		Level();
+		Level(G3D::RenderDevice::Primitive primitive);
+
+		virtual ~Level() {}
+	};
 
 	typedef G3D::ReferenceCountedPointer<Level> LevelRef;
 
@@ -58,6 +70,18 @@ protected:
 	ShadowSurface shadowSurface; // 0x18
 
 public:
+	static G3D::ReferenceCountedPointer<Mesh> aggregate(
+		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
+		G3D::CoordinateFrame& outCFrame,
+		float& outBoundingRadius
+	);
+
+	virtual ~Mesh();
+
+	float debugBoundingRadius; // 0x4c
+
+	static void sendGeometry(const Level* lvl, G3D::RenderDevice* rd);
+
 	void computeDirectionalShadowVolume(
 		const G3D::CoordinateFrame& cframe,
 		const G3D::Vector3& worldLight,
@@ -70,19 +94,10 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x102257c0
 	// `RBX::Render::Mesh::computeDirectionalShadowVolume'::`2'::`dynamic atexit destructor for 'backface''
 	// clang-format on
-
-	static G3D::ReferenceCountedPointer<Mesh> aggregate(
-		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
-		G3D::CoordinateFrame& outCFrame,
-		float& outBoundingRadius
-	);
-
-	float debugBoundingRadius; // 0x4c
-
-	virtual ~Mesh();
 };
 
 DECOMP_SIZE_ASSERT(Mesh, 0x50)
+DECOMP_SIZE_ASSERT(Mesh::Level, 0x1c)
 DECOMP_SIZE_ASSERT(Mesh::ShadowSurface, 0x34)
 
 } // namespace Render
