@@ -88,6 +88,29 @@ void RenderScene::reflectionPass(G3D::RenderDevice* rd)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101f01b0
+void RenderScene::setThrottle(float t, float m, bool s, float c)
+{
+	t = G3D::clamp(t, 0.0f, 100.0f);
+
+	if (t != shadingQuality || m != meshDetail || s != shadows || c != cameraDistance) {
+		shadingQuality = t;
+		meshDetail = m;
+		cameraDistance = c;
+		shadows = s;
+
+		lighting = effectSettings.update(
+			shadingQuality,
+			meshDetail,
+			shadows,
+			cameraDistance,
+			desiredLighting,
+			desiredSkyParameters,
+			skyParameters
+		);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x101f0320
 void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>& L)
 {
@@ -101,6 +124,21 @@ void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>&
 		desiredSkyParameters,
 		skyParameters
 	);
+}
+
+// FUNCTION: WEBSERVICE 0x101f07a0
+void RenderScene::updateShadowVAR(const G3D::Array<G3D::Vector3>& shadowVertex)
+{
+	size_t size = shadowVertex.size() * sizeof(G3D::Vector3) + 16;
+
+	if (shadowVARArea.isNull() || shadowVARArea->totalSize() < size) {
+		shadowVARArea = G3D::VARArea::create(size);
+	}
+	else {
+		shadowVARArea->reset();
+	}
+
+	shadowVAR = G3D::VAR(shadowVertex, shadowVARArea);
 }
 
 // FUNCTION: WEBSERVICE 0x101f0900
