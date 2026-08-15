@@ -91,9 +91,13 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId decalFace)
 }
 
 // STUB: WEBSERVICE 0x1017db60
-PBBMesh::PBBMesh(const G3D::Vector3&, NormalId, const G3D::Vector2&)
+PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId, const G3D::Vector2&)
 {
-	STUB(0x1017db60);
+	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);
+
+	levels.append(level);
+
+	PBBBuilder builder(level, size, RenderSurfaceTypes());
 }
 
 template PBBMesh* MeshFactory<PBBMesh, 4>::createDecal(const G3D::Vector3&, NormalId);

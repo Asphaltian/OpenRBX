@@ -45,7 +45,7 @@ private:
 		NormalId face;     // 0x0c
 
 	public:
-		DecalKey(const G3D::Vector3& size, NormalId face) : size(size), face(face) {}
+		DecalKey(NormalId face, const G3D::Vector3& size) : size(size), face(face) {}
 
 		bool operator<(const DecalKey& other) const
 		{
@@ -76,8 +76,8 @@ private:
 		G3D::Vector2 studsPerTile; // 0x10
 
 	public:
-		TextureKey(const G3D::Vector3& size, NormalId face, const G3D::Vector2& studsPerTile)
-			: DecalKey(size, face), studsPerTile(studsPerTile)
+		TextureKey(NormalId face, const G3D::Vector3& size, const G3D::Vector2& studsPerTile)
+			: DecalKey(face, size), studsPerTile(studsPerTile)
 		{
 		}
 
@@ -112,7 +112,7 @@ public:
 template <class T, int N>
 T* MeshFactory<T, N>::createDecal(const G3D::Vector3& size, NormalId face)
 {
-	DecalKey key(size, face);
+	DecalKey key(face, size);
 
 	typename DecalCache::iterator iter = decalCache.find(key);
 
@@ -128,7 +128,7 @@ T* MeshFactory<T, N>::createDecal(const G3D::Vector3& size, NormalId face)
 template <class T, int N>
 T* MeshFactory<T, N>::createTexture(const G3D::Vector3& size, NormalId face, const G3D::Vector2& studsPerTile)
 {
-	TextureKey key(size, face, studsPerTile);
+	TextureKey key(face, size, studsPerTile);
 
 	typename TextureCache::iterator iter = textureCache.find(key);
 
