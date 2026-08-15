@@ -9,6 +9,43 @@ static float detailLevel(float x, float lo, float hi)
 	return G3D::clamp(1.0f - (x - lo) / (hi - lo), 0.0f, 1.0f);
 }
 
+// FUNCTION: WEBSERVICE 0x101ef6c0
+void RenderScene::turnOnLights(G3D::RenderDevice* rd, bool allLights) const
+{
+	rd->enableLighting();
+
+	for (int i = 0; i < lighting->lightArray.size(); i++) {
+		rd->setLight(i, lighting->lightArray[i]);
+	}
+
+	if (allLights) {
+		for (int i = 0; i < lighting->shadowedLightArray.size(); i++) {
+			rd->setLight(lighting->lightArray.size() + i, lighting->shadowedLightArray[i]);
+		}
+	}
+
+	G3D::Color3 average = (lighting->ambientTop + lighting->ambientBottom) / 2.0f;
+	rd->setAmbientLightColor(average);
+
+	int i = lighting->shadowedLightArray.size() * 2;
+	G3D::Vector3 direction(-0.4f, -1.0f, 0.1f);
+
+	if (lighting->shadowedLightArray.size() > 0) {
+		direction = -lighting->shadowedLightArray[0].position.xyz();
+	}
+
+	if (effectSettings.hemisphereLighting()) {
+		if (lighting->ambientBottom != average) {
+			rd->setLight(i, G3D::GLight::directional(direction, lighting->ambientBottom - average, false));
+			i++;
+		}
+
+		if (lighting->ambientTop != average) {
+			rd->setLight(i + 1, G3D::GLight::directional(G3D::Vector3::unitY(), lighting->ambientTop - average, false));
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x101ef990
 void RenderScene::sendDiffuseProxyMeshGeometry(G3D::RenderDevice* rd) const
 {
