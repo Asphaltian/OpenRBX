@@ -67,6 +67,9 @@ private:
 
 protected:
 	G3D::Array<LevelRef> levels; // 0x0c
+
+	int detailIndex(double detail) const { return G3D::iClamp((int) detail, 0, levels.size() - 1); }
+
 	ShadowSurface shadowSurface; // 0x18
 
 public:
@@ -82,7 +85,10 @@ public:
 
 	static void sendGeometry(const Level* lvl, G3D::RenderDevice* rd);
 
+	// FUNCTION: WEBSERVICE 0x101eff00
 	LevelRef dropShadowMesh() { return shadowSurface.dropShadowGeometry; }
+
+	const LevelRef detailLevel(float detail) const;
 
 	void computeDirectionalShadowVolume(
 		const G3D::CoordinateFrame& cframe,

@@ -40,7 +40,7 @@ public:
 			float transparent
 		);
 
-		bool isEmptyLevel() const;
+		bool isEmptyLevel() const { return emptyLevel; }
 
 	public:
 		Level();
@@ -107,17 +107,7 @@ public:
 			return NULL;
 		}
 
-		int maxIndex = levels.size() - 1;
-		int index = (int) detail;
-
-		if (index <= 0) {
-			index = 0;
-		}
-		else if (maxIndex <= index) {
-			index = maxIndex;
-		}
-
-		const Level* level = &levels[index];
+		const Level* level = &levels[G3D::iClamp((int) detail, 0, levels.size() - 1)];
 
 		return level->isEmptyLevel() ? NULL : level;
 	}

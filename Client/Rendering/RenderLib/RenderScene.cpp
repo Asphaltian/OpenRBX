@@ -3,6 +3,12 @@
 namespace RBX {
 namespace Render {
 
+// FUNCTION: WEBSERVICE 0x101ef3f0
+static float detailLevel(float x, float lo, float hi)
+{
+	return G3D::clamp(1.0f - (x - lo) / (hi - lo), 0.0f, 1.0f);
+}
+
 // FUNCTION: WEBSERVICE 0x101ef990
 void RenderScene::sendDiffuseProxyMeshGeometry(G3D::RenderDevice* rd) const
 {
@@ -73,10 +79,68 @@ void RenderScene::classifyProxies()
 // STUB: WEBSERVICE 0x101f1960
 void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 {
-	STUB(0x101f1960);
+	G3D::CoordinateFrame cameraCFrame;
+	camera.getCoordinateFrame(cameraCFrame);
+
+	float farZ = G3D::max(camera.getFarPlaneZ(), effectSettings.farCullZ());
+	float nearZ = camera.getNearPlaneZ();
+
+	for (int i = 0; i < chunkArray.size(); i++) {
+		Chunk* chunk = chunkArray[i].getPointer();
+
+		if (chunk == NULL) {
+			continue;
+		}
+
+		if (chunk->getMesh().isNull() || chunk->getMaterial().isNull()) {
+			continue;
+		}
+
+		const G3D::CoordinateFrame& cframe = chunk->cframe();
+		G3D::Vector3 p = cameraCFrame.pointToObjectSpace(cframe.translation);
+
+		bool farCulled = p.z + chunk->radius < farZ && chunk->cullable();
+		bool nearCulled = p.z - chunk->radius > nearZ;
+		bool shadowCulled = p.z + chunk->radius < farZ * 1.2f && chunk->cullable();
+		bool castsShadow = chunk->castsShadows() && !shadowCulled && !chunk->getMaterial()->veryTransparent();
+
+		if (castsShadow) {
+			if (chunk->cachesShadows()) {
+				shadowCachingChunkArray.append(chunkArray[i]);
+			}
+			else {
+				shadowProxyArray.resize(shadowProxyArray.size() + 1, false);
+
+				RenderSurface& shadowProxy = shadowProxyArray.last();
+				shadowProxy.material = NULL;
+				shadowProxy.cframe = cframe;
+				shadowProxy.mesh = chunk->getMesh()->dropShadowMesh().getPointer();
+				shadowProxy.fullMesh = chunk->getMesh();
+			}
+		}
+
+		if (!farCulled && !nearCulled) {
+			RenderSurface proxy;
+			proxy.cframe = cframe;
+			proxy.polygonOffset = chunk->polygonOffset;
+			proxy.z = p.z - chunk->polygonOffset;
+			proxy.fullMesh = chunk->getMesh();
+
+			float detail = detailLevel(fabs(proxy.z), -nearZ, -farZ) + effectSettings.LODShift();
+			float lod = G3D::clamp(detail, 0.0f, 1.0f);
+
+			proxy.material = chunk->getMaterial()->detailLevel(detail);
+
+			if (proxy.material != NULL) {
+				proxy.material->baseTexture(rd);
+				proxy.mesh = chunk->getMesh()->detailLevel(lod).getPointer();
+				proxyArray.append(proxy);
+			}
+		}
+	}
 }
 
-// STUB: WEBSERVICE 0x101f1fd0
+// FUNCTION: WEBSERVICE 0x101f1fd0
 void RenderScene::computeProxyArrays(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 {
 	renderStats.computeProxyArrays.tick();

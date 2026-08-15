@@ -5,6 +5,12 @@
 namespace RBX {
 namespace Render {
 
+// STUB: WEBSERVICE 0x10165fc0
+const Mesh::LevelRef Mesh::detailLevel(float detail) const
+{
+	return levels[detailIndex(levels.size() * detail)];
+}
+
 // FUNCTION: WEBSERVICE 0x10166020
 void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 {
