@@ -3862,6 +3862,7 @@ address,type,symbol
 0x1024df64,global,??_7Level@Mesh@Render@RBX@@6B@
 0x1024df6c,global,??_7Mesh@Render@RBX@@6B@
 0x1024e17c,global,??_7ViewBase@RBX@@6B@
+0x1024e1b8,global,??_7_WeakPtr@G3D@@6B@
 0x1024e2c4,global,??_7?$WeakReferenceCountedPointer@VAggregateChunk@Render@RBX@@@G3D@@6B@
 0x1024e2d0,global,??_7Decal@View@RBX@@6B@
 0x1024e2fc,global,??_7Texture@View@RBX@@6B@

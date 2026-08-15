@@ -31,7 +31,7 @@ public:
 
 	Chunk(float polygonOffset);
 
-	// STUB: WEBSERVICE 0x1016f1a0
+	// FUNCTION: WEBSERVICE 0x1016f1a0
 	virtual ~Chunk() { RenderStats::chunkCount--; }
 
 	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
