@@ -28,16 +28,16 @@ int AdornG3D::getHeight() const
 	return renderDevice->getHeight();
 }
 
-// STUB: WEBSERVICE 0x10030cd0
+// FUNCTION: WEBSERVICE 0x10030cd0
 void AdornG3D::rect2d(const G3D::Rect2D& rect, const G3D::Color4& color) const
 {
-	DrawPrimitives::rect2d(rect, renderDevice, color);
+	DrawPrimitives::rect2d(Rect(rect), renderDevice, color);
 }
 
-// STUB: WEBSERVICE 0x10030d30
+// FUNCTION: WEBSERVICE 0x10030d30
 void AdornG3D::outlineRect2d(const G3D::Rect2D& rect, float thick, const G3D::Color4& color) const
 {
-	DrawPrimitives::outlineRect2d(rect, thick, renderDevice, color);
+	DrawPrimitives::outlineRect2d(Rect(rect), thick, renderDevice, color);
 }
 
 // FUNCTION: WEBSERVICE 0x10030da0
