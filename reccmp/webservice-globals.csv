@@ -3873,6 +3873,7 @@ address,type,symbol
 0x1024e3e4,global,?normalPerturbation@BrickMesh@View@RBX@@2MB
 0x1024e3e8,global,?bevel@BrickMesh@View@RBX@@2MB
 0x1024e40c,global,??_7BrickMesh@View@RBX@@6B@
+0x1024e41c,global,??_7PBBBuilder@@6B@
 0x1024e444,global,??_7PBBMesh@View@RBX@@6B@
 0x1024e458,global,??_7Builder@BevelMesh@View@RBX@@6B@
 0x1024e498,global,??_7WedgeMesh@View@RBX@@6B@

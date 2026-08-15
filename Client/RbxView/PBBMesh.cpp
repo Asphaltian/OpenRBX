@@ -34,9 +34,15 @@ PBBBuilder::PBBBuilder(
 	G3D::Vector3 size,
 	RBX::View::RenderSurfaceTypes surfaceTypes
 )
-	: RBX::View::LevelBuilder(level, size, surfaceTypes)
+	: RBX::View::LevelBuilder(level, size, surfaceTypes), strips(0, 0, 0)
 {
-	STUB(0x1017abc0);
+	strips.x = G3D::max(1, (int) (size.x / 6.0));
+	strips.y = G3D::max(1, (int) (size.y / 6.0));
+	strips.z = G3D::max(1, (int) (size.z / 6.0));
+
+	strips.x = G3D::min(4, (int) strips.x);
+	strips.y = G3D::min(4, (int) strips.y);
+	strips.z = G3D::min(4, (int) strips.z);
 }
 
 // STUB: WEBSERVICE 0x1017d7c0

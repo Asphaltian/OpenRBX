@@ -7,13 +7,14 @@
 #include "util/NormalId.h"
 
 #include <G3D/ReferenceCount.h>
+#include <G3D/Vector2.h>
 #include <G3D/Vector3.h>
 
 namespace RBX {
 namespace View {
 
 // SIZE 0x20
-class LevelBuilder
+class __declspec(novtable) LevelBuilder
 {
 protected:
 	const G3D::Vector3 halfSize;                             // 0x04
@@ -21,9 +22,7 @@ protected:
 	G3D::ReferenceCountedPointer<Render::Mesh::Level> level; // 0x14
 
 public:
-	float textureScale; // 0x18
-
-	undefined m_unk0x1c[0x20 - 0x1c]; // 0x1c
+	G3D::Vector2 textureScale; // 0x18
 
 	enum Purpose
 	{

@@ -8,7 +8,7 @@ LevelBuilder::LevelBuilder(
 	G3D::Vector3 size,
 	RenderSurfaceTypes surfaceTypes
 )
-	: halfSize(size * 0.5f), surfaceTypes(surfaceTypes), level(level), textureScale(1.0f)
+	: halfSize(size * 0.5f), surfaceTypes(surfaceTypes), level(level), textureScale(2.0f, 2.0f)
 {
 }
 
