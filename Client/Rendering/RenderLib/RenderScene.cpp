@@ -412,5 +412,13 @@ void RenderScene::computeProxyArrays(G3D::RenderDevice* rd, const G3D::GCamera& 
 	renderStats.diffuseProxyCount = diffuseProxyArray.size();
 }
 
+// FUNCTION: WEBSERVICE 0x101f2450
+RenderScene::RenderScene()
+	: shadingQuality(-1.0f), meshDetail(-1.0f), shadows(false), cameraDistance((float) G3D::inf()),
+	  debugShadowVolumes(false), colorClearValue(0.5f, 0.5f, 1.0f, 1.0f)
+{
+	desiredLighting = lighting = G3D::Lighting::create();
+}
+
 } // namespace Render
 } // namespace RBX
