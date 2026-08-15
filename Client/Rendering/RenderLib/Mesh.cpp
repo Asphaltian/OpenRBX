@@ -175,13 +175,13 @@ void Mesh::initStatics()
 // STUB: WEBSERVICE 0x101676c0
 void Mesh::computeDirectionalShadowVolume(
 	const G3D::CoordinateFrame& cframe,
-	const G3D::Vector3& worldLight,
+	const G3D::Vector3& wsLightVector,
 	G3D::Array<unsigned int>& indexArray,
-	G3D::Array<G3D::Vector3>& vertexArray,
-	bool caps
+	G3D::Array<G3D::Vector3>& shadowVertex,
+	bool generateLightCap
 ) const
 {
-	G3D::Vector3 objectLight = cframe.rotation.transpose() * worldLight;
+	G3D::Vector3 objectLight = cframe.rotation.transpose() * wsLightVector;
 	const G3D::Array<G3D::Vector3>& geometry = shadowSurface.geometry;
 
 	static G3D::Array<bool> backface;
@@ -191,10 +191,10 @@ void Mesh::computeDirectionalShadowVolume(
 		backface[f] = shadowSurface.faceNormalArray[f].dot(objectLight) < 0;
 	}
 
-	if (caps) {
+	if (generateLightCap) {
 		for (int f = 0; f < backface.size(); f++) {
 			if (!backface[f]) {
-				int n = vertexArray.size();
+				int n = shadowVertex.size();
 				indexArray.append(n, n + 1, n + 2);
 
 				const G3D::MeshAlg::Face& face = shadowSurface.faceArray[f];
@@ -202,7 +202,7 @@ void Mesh::computeDirectionalShadowVolume(
 				const G3D::Vector3& v1 = geometry[face.vertexIndex[1]];
 				const G3D::Vector3& v2 = geometry[face.vertexIndex[2]];
 
-				vertexArray
+				shadowVertex
 					.append(cframe.pointToWorldSpace(v0), cframe.pointToWorldSpace(v1), cframe.pointToWorldSpace(v2));
 			}
 		}
@@ -210,19 +210,19 @@ void Mesh::computeDirectionalShadowVolume(
 
 	for (int e = 0; e < shadowSurface.edgeArray.size(); e++) {
 		const G3D::MeshAlg::Edge& edge = shadowSurface.edgeArray[e];
-		bool backface0 = backface[edge.faceIndex[0]];
+		bool b0 = backface[edge.faceIndex[0]];
 
-		if (backface0 != backface[edge.faceIndex[1]]) {
-			int n = vertexArray.size();
+		if (b0 != backface[edge.faceIndex[1]]) {
+			int n = shadowVertex.size();
 			const G3D::Vector3& v0 = geometry[edge.vertexIndex[0]];
 			const G3D::Vector3& v1 = geometry[edge.vertexIndex[1]];
 
 			G3D::Vector3 p0 = cframe.pointToWorldSpace(v0);
 			G3D::Vector3 p1 = cframe.pointToWorldSpace(v1);
 
-			vertexArray.append(p0, p1);
+			shadowVertex.append(p0, p1);
 
-			if (backface0) {
+			if (b0) {
 				indexArray.append(n, n + 1, 0);
 			}
 			else {

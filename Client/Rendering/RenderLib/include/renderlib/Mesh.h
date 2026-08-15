@@ -116,10 +116,10 @@ public:
 
 	void computeDirectionalShadowVolume(
 		const G3D::CoordinateFrame& cframe,
-		const G3D::Vector3& worldLight,
+		const G3D::Vector3& wsLightVector,
 		G3D::Array<unsigned int>& indexArray,
-		G3D::Array<G3D::Vector3>& vertexArray,
-		bool caps
+		G3D::Array<G3D::Vector3>& shadowVertex,
+		bool generateLightCap
 	) const;
 
 	// clang-format off
