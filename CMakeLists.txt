@@ -299,6 +299,7 @@ set(OPENRBX_RAKNET_SOURCES
   3rdparty/RakNet30/Source/rijndael.cpp
 )
 set(OPENRBX_RBXVIEW_SOURCES
+  Client/RbxView/Part.cpp
 )
 set(OPENRBX_RENDERLIB_SOURCES
   Client/Rendering/RenderLib/Chunk.cpp
