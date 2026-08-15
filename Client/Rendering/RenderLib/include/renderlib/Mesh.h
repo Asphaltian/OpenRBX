@@ -35,7 +35,7 @@ public:
 		Level();
 		Level(G3D::RenderDevice::Primitive primitive);
 
-		virtual ~Level() {}
+		virtual ~Level();
 	};
 
 	typedef G3D::ReferenceCountedPointer<Level> LevelRef;
@@ -85,6 +85,8 @@ public:
 	virtual ~Mesh();
 
 	float debugBoundingRadius; // 0x4c
+
+	static void freeVertex(unsigned int i);
 
 	static unsigned int allocVertex(unsigned int i, unsigned int count);
 

@@ -85,6 +85,32 @@ unsigned int Mesh::allocVertex(
 	return index;
 }
 
+// STUB: WEBSERVICE 0x10166e40
+void Mesh::freeVertex(unsigned int i)
+{
+	int* refCounts = vertexRefCounts.getCArray();
+
+	if (refCounts != NULL) {
+		vertexRefCount--;
+
+		if (refCounts[i] == 1) {
+			refCounts[i] = 0;
+			freeList.append(i);
+			return;
+		}
+
+		refCounts[i]--;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10166e80
+Mesh::Level::~Level()
+{
+	for (int i = 0; i < indexArray.size(); i++) {
+		freeVertex(indexArray[i]);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10166fc0
 void Mesh::makeVAR()
 {
@@ -186,6 +212,11 @@ void Mesh::computeDirectionalShadowVolume(
 			}
 		}
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x10167b50
+Mesh::Level::Level(G3D::RenderDevice::Primitive primitive) : primitive(primitive)
+{
 }
 
 // STUB: WEBSERVICE 0x10167d70
