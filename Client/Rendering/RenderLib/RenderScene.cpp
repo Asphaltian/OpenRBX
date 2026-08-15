@@ -82,7 +82,7 @@ void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& cam
 	G3D::CoordinateFrame cameraCFrame;
 	camera.getCoordinateFrame(cameraCFrame);
 
-	float farZ = G3D::max(camera.getFarPlaneZ(), effectSettings.farCullZ());
+	float farZ = G3D::max(effectSettings.farCullZ(), camera.getFarPlaneZ());
 	float nearZ = camera.getNearPlaneZ();
 
 	for (int i = 0; i < chunkArray.size(); i++) {
