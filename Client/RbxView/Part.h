@@ -65,8 +65,8 @@ protected:
 
 private:
 	void onAncestorChanged(boost::shared_ptr<Instance> ancestor);
-	void onChildAdded(boost::shared_ptr<Instance>);
-	void onChildRemoved(boost::shared_ptr<Instance>);
+	void onChildAdded(boost::shared_ptr<Instance> child);
+	void onChildRemoved(boost::shared_ptr<Instance> child);
 	void onSpecialShapeChanged();
 };
 

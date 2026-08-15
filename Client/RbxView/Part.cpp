@@ -1,6 +1,7 @@
 #include "Part.h"
 
 #include "v8datamodel/PartInstance.h"
+#include "v8datamodel/custommesh.h"
 
 namespace RBX {
 namespace View {
@@ -66,10 +67,14 @@ G3D::ReferenceCountedPointer<Render::Mesh> PartChunk::getMesh()
 	return mesh;
 }
 
-// STUB: WEBSERVICE 0x1016e0e0
-void PartChunk::onChildRemoved(boost::shared_ptr<Instance>)
+// FUNCTION: WEBSERVICE 0x1016e0e0
+void PartChunk::onChildRemoved(boost::shared_ptr<Instance> child)
 {
-	STUB(0x1016e0e0);
+	if (child.get() == specialShape) {
+		shapePropertyChangedConnection.disconnect();
+		specialShape = NULL;
+		invalidateMesh();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1016f210
@@ -78,7 +83,7 @@ PartChunk::~PartChunk()
 }
 
 // STUB: WEBSERVICE 0x10173c90
-void PartChunk::onChildAdded(boost::shared_ptr<Instance>)
+void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 {
 	STUB(0x10173c90);
 }
