@@ -34,10 +34,10 @@ unsigned int Mesh::allocVertex(unsigned int i, unsigned int count)
 	return i;
 }
 
-// STUB: WEBSERVICE 0x10165fc0
+// FUNCTION: WEBSERVICE 0x10165fc0
 const Mesh::LevelRef Mesh::detailLevel(float meshLOD) const
 {
-	return levels[detailIndex(levels.size() * meshLOD)];
+	return levels[detailIndex(levels.size() * meshLOD)].getPointer();
 }
 
 // FUNCTION: WEBSERVICE 0x10166020
