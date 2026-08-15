@@ -38,6 +38,8 @@ public:
 	// RBX::Reflection::Described<RBX::Script,&RBX::sScript,RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10069810
 	// RBX::Reflection::Described<RBX::LocalScript,&RBX::sLocalScript,RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript> >::classDescriptor
+	// STUB: WEBSERVICE 0x1006f520
+	// RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10081b90
 	// RBX::Reflection::Described<RBX::Soundscape::SoundChannel,&RBX::Soundscape::sSoundChannel,RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10088d00
@@ -140,6 +142,8 @@ public:
 	// RBX::Reflection::Described<RBX::BodyThrust,&RBX::sBodyThrust,RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ec710
 	// RBX::Reflection::Described<RBX::Rocket,&RBX::sRocket,RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket> >::classDescriptor
+	// STUB: WEBSERVICE 0x100fe360
+	// RBX::Reflection::Described<RBX::SpawnLocation,&RBX::sSpawnLocation,RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ffb40
 	// RBX::Reflection::Described<RBX::FaceInstance,&RBX::sFaceInstance,RBX::Instance>::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ffbb0
