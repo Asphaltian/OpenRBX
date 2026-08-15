@@ -34,19 +34,20 @@ void PartChunk::onAncestorChanged(boost::shared_ptr<Instance>)
 // STUB: WEBSERVICE 0x1016d320
 void PartChunk::invalidateMesh()
 {
-	STUB(0x1016d320);
+	mesh = NULL;
 }
 
 // STUB: WEBSERVICE 0x1016d410
 void PartChunk::invalidateMaterial()
 {
-	STUB(0x1016d410);
+	material = NULL;
 }
 
 // STUB: WEBSERVICE 0x1016d500
 void PartChunk::onSpecialShapeChanged()
 {
-	STUB(0x1016d500);
+	invalidateMesh();
+	invalidateMaterial();
 }
 
 // STUB: WEBSERVICE 0x1016d510
@@ -71,7 +72,7 @@ void PartChunk::onChildRemoved(boost::shared_ptr<Instance>)
 	STUB(0x1016e0e0);
 }
 
-// STUB: WEBSERVICE 0x1016f210
+// FUNCTION: WEBSERVICE 0x1016f210
 PartChunk::~PartChunk()
 {
 }
