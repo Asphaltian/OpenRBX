@@ -121,6 +121,11 @@ public:
 
 DECOMP_SIZE_ASSERT(RenderScene, 0x4f0)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10226490
+// `RBX::Render::RenderScene::markStencilShadows'::`2'::`dynamic atexit destructor for 'shadowVertex''
+// clang-format on
+
 } // namespace Render
 } // namespace RBX
 

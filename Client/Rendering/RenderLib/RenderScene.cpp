@@ -260,6 +260,79 @@ void RenderScene::presetLighting(
 	setLighting(lighting);
 }
 
+// FUNCTION: WEBSERVICE 0x101f1680
+void RenderScene::markStencilShadows(G3D::RenderDevice* rd, const G3D::GCamera& camera, const G3D::GLight& light)
+{
+	static G3D::Array<G3D::Vector3> shadowVertex;
+
+	float shadowVertexDistance = G3D::min(10000.0f, -camera.getFarPlaneZ() * 0.2f);
+
+	shadowIndexArray.resize(0, false);
+	computeShadowVolumeGeometry(shadowIndexArray, shadowVertex, light, true, shadowVertexDistance);
+	updateShadowVAR(shadowVertex);
+
+	rd->pushState();
+	rd->setDepthTest(G3D::RenderDevice::DEPTH_LEQUAL);
+
+	if (debugShadowVolumes) {
+		rd->setColor(G3D::Color3::white() * 0.25f);
+		rd->setCullFace(G3D::RenderDevice::CULL_NONE);
+		rd->setBlendFunc(G3D::RenderDevice::BLEND_ONE, G3D::RenderDevice::BLEND_ONE);
+		rd->setDepthWrite(false);
+	}
+	else {
+
+		rd->setDepthWrite(false);
+		rd->setColorWrite(false);
+		rd->setDepthTest(G3D::RenderDevice::DEPTH_LESS);
+		rd->setPolygonOffset(0.2);
+
+		if (G3D::GLCaps::supports_two_sided_stencil()) {
+			rd->setCullFace(G3D::RenderDevice::CULL_NONE);
+			rd->setStencilOp(
+				G3D::RenderDevice::STENCIL_KEEP,
+				G3D::RenderDevice::STENCIL_DECR_WRAP,
+				G3D::RenderDevice::STENCIL_KEEP,
+				G3D::RenderDevice::STENCIL_KEEP,
+				G3D::RenderDevice::STENCIL_INCR_WRAP,
+				G3D::RenderDevice::STENCIL_KEEP
+			);
+		}
+		else {
+			rd->setCullFace(G3D::RenderDevice::CULL_BACK);
+			rd->setStencilOp(
+				G3D::RenderDevice::STENCIL_KEEP,
+				G3D::RenderDevice::STENCIL_DECR_WRAP,
+				G3D::RenderDevice::STENCIL_KEEP
+			);
+		}
+
+		rd->disableLighting();
+	}
+
+	rd->setShadeMode(G3D::RenderDevice::SHADE_FLAT);
+	rd->setObjectToWorldMatrix(G3D::CoordinateFrame());
+	renderShadowVolumeGeometry(rd, light, true, shadowVertexDistance);
+
+	if (!G3D::GLCaps::supports_two_sided_stencil() && !debugShadowVolumes) {
+		rd->setCullFace(G3D::RenderDevice::CULL_FRONT);
+		rd->setStencilOp(
+			G3D::RenderDevice::STENCIL_KEEP,
+			G3D::RenderDevice::STENCIL_INCR_WRAP,
+			G3D::RenderDevice::STENCIL_KEEP
+		);
+		renderShadowVolumeGeometry(rd, light, true, shadowVertexDistance);
+		rd->setCullFace(G3D::RenderDevice::CULL_BACK);
+		rd->setStencilOp(
+			G3D::RenderDevice::STENCIL_KEEP,
+			G3D::RenderDevice::STENCIL_DECR_WRAP,
+			G3D::RenderDevice::STENCIL_KEEP
+		);
+	}
+
+	rd->popState();
+}
+
 // STUB: WEBSERVICE 0x101f1960
 void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 {
