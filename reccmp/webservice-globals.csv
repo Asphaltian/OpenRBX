@@ -693,7 +693,7 @@ address,type,symbol
 0x1022ee04,global,??_7?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1022ee0c,global,??_7?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1022ee1c,global,??_7?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
-0x1022ee84,global,??_8PVInstance@RBX@@7B@
+0x1022ee84,global,??_8?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@7B@
 0x1022ee94,global,??_7?$GetSetImpl@P8ModelInstance@RBX@@BEABVCoordinateFrame@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VModelInstance@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@6B@
 0x1022eea4,global,??_7?$GetSetImpl@P8ModelInstance@RBX@@BEPAVPartInstance@2@XZP812@AEXPAV32@@Z@?$PropDescriptor@VModelInstance@RBX@@PAVPartInstance@2@@Reflection@RBX@@6B@
 0x1022eeb4,global,??_7ModelInstance@RBX@@6BICameraSubject@1@@

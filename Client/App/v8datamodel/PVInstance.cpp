@@ -217,7 +217,7 @@ G3D::ReferenceCountedPointer<Controller> PVInstance::computeTopPVController() co
 	return G3D::ReferenceCountedPointer<Controller>();
 }
 
-// STUB: WEBSERVICE 0x1009a3b0
+// FUNCTION: WEBSERVICE 0x1009a3b0
 PVInstance::PVInstance(const char* name)
 	: Reflection::Described<PVInstance, sPVInstance, Instance>(name),
 	  IsControllable(this, &PVInstance::computeIsControllable), IsTopFlag(this, &PVInstance::computeIsTopFlag),
