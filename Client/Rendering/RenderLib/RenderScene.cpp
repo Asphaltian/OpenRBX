@@ -22,6 +22,25 @@ void RenderScene::sendDiffuseProxyMeshGeometry(G3D::RenderDevice* rd) const
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101efa00
+void RenderScene::transparentPass(G3D::RenderDevice* rd)
+{
+	rd->setDepthTest(G3D::RenderDevice::DEPTH_LEQUAL);
+	rd->setBlendFunc(G3D::RenderDevice::BLEND_SRC_ALPHA, G3D::RenderDevice::BLEND_ONE_MINUS_SRC_ALPHA);
+	rd->setDepthWrite(false);
+
+	for (int i = 0; i < transparentProxyArray.size(); i++) {
+		RenderSurface* p = transparentProxyArray[i];
+		const Material::Level* material = p->material;
+
+		rd->setObjectToWorldMatrix(p->cframe);
+		rd->setPolygonOffset(p->polygonOffset);
+		p->material->configureRenderDevice(rd);
+		rd->setColor(G3D::Color4(material->color(), 1.0f - material->transparent()));
+		Mesh::sendGeometry(p->mesh, rd);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x101eff30
 void RenderScene::renderShadowVolumeGeometry(
 	G3D::RenderDevice* rd,
@@ -37,6 +56,35 @@ void RenderScene::renderShadowVolumeGeometry(
 
 	for (int i = 0; i < shadowCachingChunkArray.size(); i++) {
 		shadowCachingChunkArray[i]->renderShadows(rd, light, caps, shadowVertexDistance);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101effc0
+void RenderScene::reflectionPass(G3D::RenderDevice* rd)
+{
+	if (G3D::GLCaps::supports_GL_EXT_texture_cube_map() && !lighting->environmentMap.isNull() &&
+		(lighting->environmentMap->getDimension() == G3D::Texture::DIM_CUBE_MAP ||
+		 lighting->environmentMap->getDimension() == G3D::Texture::DIM_CUBE_MAP_NPOT)) {
+		rd->pushState();
+		rd->setDepthTest(G3D::RenderDevice::DEPTH_LEQUAL);
+		rd->setPolygonOffset(-0.2);
+		rd->setBlendFunc(G3D::RenderDevice::BLEND_ONE, G3D::RenderDevice::BLEND_ONE);
+		rd->disableLighting();
+		rd->configureReflectionMap(1, lighting->environmentMap);
+		rd->setDepthWrite(false);
+
+		for (int i = 0; i < reflectProxyArray.size(); i++) {
+			RenderSurface* p = reflectProxyArray[i];
+			const Material::Level* material = p->material;
+
+			rd->setPolygonOffset(p->polygonOffset);
+			rd->setObjectToWorldMatrix(p->cframe);
+			rd->setTexture(0, material->matte(rd));
+			rd->setColor(material->reflect() * G3D::Color3::white());
+			Mesh::sendGeometry(p->mesh, rd);
+		}
+
+		rd->popState();
 	}
 }
 
