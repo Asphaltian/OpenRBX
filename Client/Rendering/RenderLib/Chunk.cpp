@@ -94,7 +94,7 @@ AggregateChunk::AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& firstC
 
 	if (randomColors) {
 		material = new Material();
-		material->appendLevel(NULL, (G3D::Color3::white() + G3D::Color3::wheelRandom()) / 2.0f, 0, 50, 0, 0);
+		material->appendLevel(NULL, (G3D::Color3::wheelRandom() + G3D::Color3::white()) / 2.0f, 0, 50, 0, 0);
 	}
 }
 
