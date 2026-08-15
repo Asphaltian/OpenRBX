@@ -53,6 +53,13 @@ public:
 	static void shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& lighting);
 
 	virtual G3D::Vector2 getSize(); // vtable+0x04
+
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x102258f0
+	// `RBX::Render::TextureProxy::resolve'::`11'::`dynamic atexit destructor for 'cachedBumpImage''
+	// SYNTHETIC: WEBSERVICE 0x10225900
+	// `RBX::Render::TextureProxy::resolve'::`11'::`dynamic atexit destructor for 'lastFilename''
+	// clang-format on
 };
 
 DECOMP_SIZE_ASSERT(TextureProxy, 0x4c)
