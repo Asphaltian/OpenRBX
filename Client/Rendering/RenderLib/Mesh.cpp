@@ -5,6 +5,21 @@
 namespace RBX {
 namespace Render {
 
+G3D::MeshAlg::Geometry Mesh::visibleGeometry;
+G3D::Array<G3D::Vector2> Mesh::texCoordArray;
+G3D::Array<G3D::Vector3> Mesh::tangentArray;
+G3D::VAR Mesh::vertexVAR;
+G3D::VAR Mesh::normalVAR;
+G3D::VAR Mesh::texCoordVAR;
+G3D::VAR Mesh::tangentVAR;
+bool Mesh::varDirty;
+
+// FUNCTION: WEBSERVICE 0x101655f0
+void Mesh::endRender(G3D::RenderDevice* rd)
+{
+	rd->endIndexedPrimitives();
+}
+
 // STUB: WEBSERVICE 0x10165fc0
 const Mesh::LevelRef Mesh::detailLevel(float detail) const
 {
@@ -16,6 +31,49 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 {
 	if (lvl != NULL && lvl->indexArray.size() > 0) {
 		rd->sendIndices(lvl->primitive, lvl->indexArray);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10166fc0
+void Mesh::makeVAR()
+{
+	if (varDirty) {
+		G3D::VARAreaRef area =
+			G3D::VARArea::create(visibleGeometry.vertexArray.size() * 44 + 1024, G3D::VARArea::WRITE_ONCE);
+
+		vertexVAR = G3D::VAR(visibleGeometry.vertexArray, area);
+		normalVAR = G3D::VAR(visibleGeometry.normalArray, area);
+		texCoordVAR = G3D::VAR(texCoordArray, area);
+		tangentVAR = G3D::VAR(tangentArray, area);
+
+		varDirty = false;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10167400
+void Mesh::beginRender(G3D::RenderDevice* rd, bool usetexCoords, bool useTangent)
+{
+	makeVAR();
+	rd->beginIndexedPrimitives();
+
+	if (vertexVAR.valid()) {
+		rd->setVertexArray(vertexVAR);
+	}
+
+	if (normalVAR.valid()) {
+		rd->setNormalArray(normalVAR);
+	}
+
+	if (usetexCoords) {
+		if (texCoordVAR.valid()) {
+			rd->setTexCoordArray(0, texCoordVAR);
+		}
+	}
+
+	if (useTangent) {
+		if (tangentVAR.valid()) {
+			rd->setTexCoordArray(2, tangentVAR);
+		}
 	}
 }
 

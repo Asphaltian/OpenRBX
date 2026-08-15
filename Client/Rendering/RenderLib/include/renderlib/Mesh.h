@@ -62,6 +62,8 @@ private:
 	static G3D::VAR texCoordVAR;
 	static G3D::VAR tangentVAR;
 	static bool varDirty;
+
+	static void makeVAR();
 	static G3D::Vector3 findScale;
 	static VertexList findGrid[32][32][32];
 
@@ -83,10 +85,14 @@ public:
 
 	float debugBoundingRadius; // 0x4c
 
+	static void beginRender(G3D::RenderDevice* rd, bool usetexCoords, bool useTangent);
+
 	static void sendGeometry(const Level* lvl, G3D::RenderDevice* rd);
 
 	// FUNCTION: WEBSERVICE 0x101eff00
 	LevelRef dropShadowMesh() { return shadowSurface.dropShadowGeometry; }
+
+	static void endRender(G3D::RenderDevice* rd);
 
 	const LevelRef detailLevel(float detail) const;
 
