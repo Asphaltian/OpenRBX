@@ -17,6 +17,9 @@ class __declspec(novtable) SceneManager
 public:
 	virtual void invalidateModel(const G3D::ReferenceCountedPointer<Chunk>&, bool) = 0; // vtable+0x00
 	virtual void addModel(const G3D::ReferenceCountedPointer<Chunk>&) = 0;              // vtable+0x04
+	virtual void removeModel(const G3D::ReferenceCountedPointer<Chunk>&) = 0;           // vtable+0x08
+	virtual void clear() = 0;                                                           // vtable+0x0c
+	virtual void setSleeping(const G3D::ReferenceCountedPointer<Chunk>&, bool) = 0;     // vtable+0x10
 
 protected:
 	RenderScene* renderScene; // 0x04

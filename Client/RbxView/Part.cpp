@@ -20,10 +20,13 @@ bool PartChunk::cullable() const
 }
 
 // STUB: WEBSERVICE 0x1016c240
-float primaryComponent(const G3D::Vector3& size)
+float primaryComponent(const G3D::Vector3& v)
 {
-	STUB(0x1016c240);
-	return 0.0f;
+	float nx = G3D::abs(v.x);
+	float ny = G3D::abs(v.y);
+	float nz = G3D::abs(v.z);
+
+	return G3D::max(G3D::max(nx, ny), nz);
 }
 
 // STUB: WEBSERVICE 0x1016c6d0
@@ -48,10 +51,10 @@ G3D::ReferenceCountedPointer<Render::Material> Part::getMaterial()
 	return material;
 }
 
-// STUB: WEBSERVICE 0x1016d060
-void Part::onEvent(const PartInstance*, CanAggregateChanged)
+// FUNCTION: WEBSERVICE 0x1016d060
+void Part::onEvent(const PartInstance* source, CanAggregateChanged event)
 {
-	STUB(0x1016d060);
+	view->sceneManager->setSleeping(this, event.canClump);
 }
 
 // STUB: WEBSERVICE 0x1016d100

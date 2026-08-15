@@ -28,7 +28,7 @@ namespace View {
 
 class View;
 
-float primaryComponent(const G3D::Vector3& size);
+float primaryComponent(const G3D::Vector3& v);
 
 // SIZE 0xcc
 class __declspec(novtable) PartChunk : public Render::Chunk
@@ -89,7 +89,7 @@ public:
 
 protected:
 	virtual void onPropertyChanged(const Reflection::PropertyDescriptor* descriptor);
-	virtual void onEvent(const PartInstance*, CanAggregateChanged);
+	virtual void onEvent(const PartInstance* source, CanAggregateChanged event);
 
 private:
 	bool usesMegaTexture() const;
