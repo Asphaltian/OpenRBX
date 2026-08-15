@@ -102,14 +102,14 @@ public:
 
 	unsigned int levelCount() const;
 	Level& getLevel(int index);
-	// STUB: WEBSERVICE 0x101ef660
+	// FUNCTION: WEBSERVICE 0x101ef660
 	const Level* detailLevel(float detail) const
 	{
 		if (levels.size() == 0) {
 			return NULL;
 		}
 
-		const Level* level = &levels[G3D::iClamp((int) detail, 0, levels.size() - 1)];
+		const Level* level = &levels[G3D::iClamp((int) (levels.size() * detail), 0, levels.size() - 1)];
 
 		return level->isEmptyLevel() ? NULL : level;
 	}
