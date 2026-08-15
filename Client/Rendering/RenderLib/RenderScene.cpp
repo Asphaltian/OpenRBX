@@ -163,7 +163,7 @@ void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>&
 	);
 }
 
-// STUB: WEBSERVICE 0x101f06a0
+// FUNCTION: WEBSERVICE 0x101f06a0
 void RenderScene::computeShadowVolumeGeometry(
 	G3D::Array<unsigned int>& indexArray,
 	G3D::Array<G3D::Vector3>& shadowVertex,
@@ -177,18 +177,15 @@ void RenderScene::computeShadowVolumeGeometry(
 	shadowVertex.resize(0, false);
 	indexArray.resize(0, false);
 
-	shadowVertex.append(-light.position.xyz().unit() * shadowVertexDistance);
+	shadowVertex.append(-light.position.xyz().direction() * shadowVertexDistance);
 
-	G3D::Vector3 worldLight = light.position.xyz().unit();
+	G3D::Vector3 worldLight = light.position.xyz().direction();
 
 	for (int i = 0; i < shadowProxyArray.size(); i++) {
-		shadowProxyArray[i].fullMesh->computeDirectionalShadowVolume(
-			shadowProxyArray[i].cframe,
-			worldLight,
-			indexArray,
-			shadowVertex,
-			generateLightCap
-		);
+		const RenderSurface& proxy = shadowProxyArray[i];
+
+		proxy.fullMesh
+			->computeDirectionalShadowVolume(proxy.cframe, worldLight, indexArray, shadowVertex, generateLightCap);
 	}
 
 	renderStats.cpuShadow.tock();
@@ -341,29 +338,30 @@ void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& cam
 
 	float farZ = G3D::max(effectSettings.farCullZ(), camera.getFarPlaneZ());
 	float nearZ = camera.getNearPlaneZ();
-
-	for (int i = 0; i < chunkArray.size(); i++) {
-		Chunk* chunk = chunkArray[i].getPointer();
+	for (int p = 0; p < chunkArray.size(); p++) {
+		Chunk* chunk = chunkArray[p].getPointer();
 
 		if (chunk == NULL) {
 			continue;
 		}
 
-		if (chunk->getMesh().isNull() || chunk->getMaterial().isNull()) {
+		bool hasMesh = chunk->getMesh().notNull();
+		bool hasMaterial = chunk->getMaterial().notNull();
+
+		if (!hasMesh || !hasMaterial) {
 			continue;
 		}
 
 		const G3D::CoordinateFrame& cframe = chunk->cframe();
-		G3D::Vector3 p = cameraCFrame.pointToObjectSpace(cframe.translation);
+		G3D::Vector3 cspace = cameraCFrame.pointToObjectSpace(cframe.translation);
 
-		bool farCulled = p.z + chunk->radius < farZ && chunk->cullable();
-		bool nearCulled = p.z - chunk->radius > nearZ;
-		bool shadowCulled = p.z + chunk->radius < farZ * 1.2f && chunk->cullable();
-		bool castsShadow = chunk->castsShadows() && !shadowCulled && !chunk->getMaterial()->veryTransparent();
+		bool farCulled = cspace.z + chunk->radius < farZ && chunk->cullable();
+		bool nearCulled = cspace.z - chunk->radius > nearZ;
+		bool shadowFarCulled = cspace.z + chunk->radius < farZ * 1.2f && chunk->cullable();
 
-		if (castsShadow) {
+		if (chunk->castsShadows() && !shadowFarCulled && !chunk->getMaterial()->veryTransparent()) {
 			if (chunk->cachesShadows()) {
-				shadowCachingChunkArray.append(chunkArray[i]);
+				shadowCachingChunkArray.append(chunkArray[p]);
 			}
 			else {
 				shadowProxyArray.resize(shadowProxyArray.size() + 1, false);
@@ -380,17 +378,17 @@ void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& cam
 			RenderSurface proxy;
 			proxy.cframe = cframe;
 			proxy.polygonOffset = chunk->polygonOffset;
-			proxy.z = p.z - chunk->polygonOffset;
+			proxy.z = cspace.z - chunk->polygonOffset;
 			proxy.fullMesh = chunk->getMesh();
 
-			float detail = detailLevel(fabs(proxy.z), -nearZ, -farZ) + effectSettings.LODShift();
-			float lod = G3D::clamp(detail, 0.0f, 1.0f);
+			float rawLvl = detailLevel(fabs(proxy.z), -nearZ, -farZ) + effectSettings.LODShift();
+			float lvl = G3D::clamp(rawLvl, 0.0f, 1.0f);
 
-			proxy.material = chunk->getMaterial()->detailLevel(detail);
+			proxy.material = chunk->getMaterial()->detailLevel(rawLvl);
 
 			if (proxy.material != NULL) {
 				proxy.material->baseTexture(rd);
-				proxy.mesh = chunk->getMesh()->detailLevel(lod).getPointer();
+				proxy.mesh = chunk->getMesh()->detailLevel(lvl).getPointer();
 				proxyArray.append(proxy);
 			}
 		}

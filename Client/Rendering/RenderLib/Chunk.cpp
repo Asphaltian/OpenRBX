@@ -19,19 +19,13 @@ Chunk::Chunk(float polygonOffset) : polygonOffset(polygonOffset), radius(G3D::in
 	RenderStats::chunkCount++;
 }
 
-// STUB: WEBSERVICE 0x1016f1a0
-Chunk::~Chunk()
-{
-	RenderStats::chunkCount--;
-}
-
 // FUNCTION: WEBSERVICE 0x101f96a0
 void AggregateChunk::makeMesh()
 {
 	mesh = Mesh::aggregate(components, _cframe, radius);
 }
 
-// STUB: WEBSERVICE 0x101f9740
+// FUNCTION: WEBSERVICE 0x101f9740
 void AggregateChunk::renderShadows(
 	G3D::RenderDevice* rd,
 	const G3D::GLight& light,
@@ -51,9 +45,9 @@ void AggregateChunk::renderShadows(
 		static G3D::Array<G3D::Vector3> shadowVertex;
 		shadowVertex.resize(0, true);
 
-		shadowVertex.append(-light.position.xyz().unit() * shadowVertexDistance);
+		shadowVertex.append(-light.position.xyz().direction() * shadowVertexDistance);
 
-		G3D::Vector3 worldLight = light.position.xyz().unit();
+		G3D::Vector3 worldLight = light.position.xyz().direction();
 
 		mesh->computeDirectionalShadowVolume(cframe(), worldLight, shadowIndexArray, shadowVertex, caps);
 

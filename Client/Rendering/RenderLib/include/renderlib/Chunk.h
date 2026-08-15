@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "renderlib/Material.h"
 #include "renderlib/Mesh.h"
+#include "renderlib/RenderStats.h"
 
 #include <G3D/Array.h>
 #include <G3D/CoordinateFrame.h>
@@ -30,7 +31,8 @@ public:
 
 	Chunk(float polygonOffset);
 
-	virtual ~Chunk();
+	// STUB: WEBSERVICE 0x1016f1a0
+	virtual ~Chunk() { RenderStats::chunkCount--; }
 
 	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
 	virtual bool cachesShadows() const { return false; }
