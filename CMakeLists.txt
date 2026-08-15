@@ -328,6 +328,7 @@ set(OPENRBX_ENGINE_INCLUDE_DIRS
   "${PROJECT_SOURCE_DIR}/Client/App/include"
   "${PROJECT_SOURCE_DIR}/Client/Network/include"
   "${PROJECT_SOURCE_DIR}/Client/RbxView/include"
+  "${PROJECT_SOURCE_DIR}/Client/RbxViewBase"
   "${PROJECT_SOURCE_DIR}/Client/Rendering/RenderLib/include"
   "${PROJECT_SOURCE_DIR}/Client/Rendering/AppDraw/include"
   "${PROJECT_SOURCE_DIR}/Client/RbxGraphics/include"

@@ -1,5 +1,6 @@
 #include "Part.h"
 
+#include "View.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/custommesh.h"
 
@@ -18,12 +19,39 @@ bool PartChunk::cullable() const
 	return true;
 }
 
+// STUB: WEBSERVICE 0x1016c240
+float primaryComponent(const G3D::Vector3& size)
+{
+	STUB(0x1016c240);
+	return 0.0f;
+}
+
+// STUB: WEBSERVICE 0x1016c6d0
+bool Part::usesMegaTexture() const
+{
+	STUB(0x1016c6d0);
+	return false;
+}
+
 // FUNCTION: WEBSERVICE 0x1016c740
 const G3D::CoordinateFrame& PartChunk::cframe()
 {
 	coordinateFrame = partInstance->getCoordinateFrame();
 
 	return coordinateFrame;
+}
+
+// STUB: WEBSERVICE 0x1016cd00
+G3D::ReferenceCountedPointer<Render::Material> Part::getMaterial()
+{
+	STUB(0x1016cd00);
+	return material;
+}
+
+// STUB: WEBSERVICE 0x1016d060
+void Part::onEvent(const PartInstance*, CanAggregateChanged)
+{
+	STUB(0x1016d060);
 }
 
 // STUB: WEBSERVICE 0x1016d100
@@ -57,6 +85,12 @@ void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor*)
 	STUB(0x1016d510);
 }
 
+// STUB: WEBSERVICE 0x1016d550
+void Part::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
+{
+	STUB(0x1016d550);
+}
+
 // FUNCTION: WEBSERVICE 0x1016d5d0
 G3D::ReferenceCountedPointer<Render::Mesh> PartChunk::getMesh()
 {
@@ -82,6 +116,20 @@ PartChunk::~PartChunk()
 {
 }
 
+// FUNCTION: WEBSERVICE 0x101703a0
+Part::~Part()
+{
+	if (partInstance) {
+		partInstance->Notifier<PartInstance, CanAggregateChanged>::removeListener(this);
+	}
+}
+
+// STUB: WEBSERVICE 0x101722a0
+void Part::updateMesh()
+{
+	STUB(0x101722a0);
+}
+
 // STUB: WEBSERVICE 0x10173c90
 void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 {
@@ -92,7 +140,13 @@ void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>& partInstance, View* view)
 	: Render::Chunk(polygonOffset), partInstance(partInstance), materialInvalid(true), view(view), specialShape(NULL)
 {
-	STUB(0x10174160);
+	view->sceneManager->addModel(this);
+}
+
+// STUB: WEBSERVICE 0x10174800
+Part::Part(const boost::shared_ptr<PartInstance>& partInstance, View* view) : PartChunk(0.0f, partInstance, view)
+{
+	STUB(0x10174800);
 }
 
 } // namespace View

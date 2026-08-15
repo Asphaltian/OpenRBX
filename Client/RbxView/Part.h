@@ -5,9 +5,12 @@
 #include "renderlib/Chunk.h"
 #include "renderlib/Material.h"
 #include "renderlib/Mesh.h"
+#include "util/Events.h"
+#include "v8world/IMoving.h"
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/ReferenceCount.h>
+#include <G3D/Vector3.h>
 #include <boost/shared_ptr.hpp>
 #include <boost/signals/connection.hpp>
 
@@ -24,6 +27,8 @@ class PropertyDescriptor;
 namespace View {
 
 class View;
+
+float primaryComponent(const G3D::Vector3& size);
 
 // SIZE 0xcc
 class __declspec(novtable) PartChunk : public Render::Chunk
@@ -71,6 +76,28 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(PartChunk, 0xcc)
+
+// SIZE 0xd0
+class Part : public PartChunk, public Listener<PartInstance, CanAggregateChanged>
+{
+public:
+	Part(const boost::shared_ptr<PartInstance>& partInstance, View* view);
+
+	virtual ~Part();
+
+	virtual G3D::ReferenceCountedPointer<Render::Material> getMaterial();
+
+protected:
+	virtual void onPropertyChanged(const Reflection::PropertyDescriptor* descriptor);
+	virtual void onEvent(const PartInstance*, CanAggregateChanged);
+
+private:
+	bool usesMegaTexture() const;
+
+	virtual void updateMesh();
+};
+
+DECOMP_SIZE_ASSERT(Part, 0xd0)
 
 } // namespace View
 } // namespace RBX

@@ -3866,6 +3866,8 @@ address,type,symbol
 0x1024e2c4,global,??_7?$WeakReferenceCountedPointer@VAggregateChunk@Render@RBX@@@G3D@@6B@
 0x1024e2d0,global,??_7Decal@View@RBX@@6B@
 0x1024e2fc,global,??_7Texture@View@RBX@@6B@
+0x1024e328,global,??_7Part@View@RBX@@6B?$Listener@VPartInstance@RBX@@UCanAggregateChanged@2@@2@@
+0x1024e334,global,??_7Part@View@RBX@@6BPartChunk@12@@
 0x1024e36c,global,??_7MegaTextureProxy@View@RBX@@6B@
 0x1024e3e0,global,?widthInset@BrickMesh@View@RBX@@2MB
 0x1024e3e4,global,?normalPerturbation@BrickMesh@View@RBX@@2MB
