@@ -44,29 +44,46 @@ private:
 	void updateShadowVAR(const G3D::Array<G3D::Vector3>& shadowVertex);
 
 	void computeShadowVolumeGeometry(
-		G3D::Array<unsigned int>& shadowIndexArray,
+		G3D::Array<unsigned int>& indexArray,
 		G3D::Array<G3D::Vector3>& shadowVertex,
 		const G3D::GLight& light,
-		bool caps,
+		bool generateLightCap,
 		float shadowVertexDistance
 	) const;
 
-	void clearProxyArrays();
-	void allocateProxies(G3D::RenderDevice* renderDevice, const G3D::GCamera& camera);
+	void clearProxyArrays()
+	{
+		diffuseProxyArray.resize(0, false);
+		shadowProxyArray.resize(0, false);
+		reflectProxyArray.resize(0, false);
+		transparentProxyArray.resize(0, false);
+		proxyArray.resize(0, false);
+		shadowCachingChunkArray.resize(0, false);
+	}
+
+	void allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& camera);
 	void classifyProxies();
-	void sortProxies();
-	void computeProxyArrays(G3D::RenderDevice* renderDevice, const G3D::GCamera& camera);
-	void sendDiffuseProxyMeshGeometry(G3D::RenderDevice* renderDevice) const;
-	void markStencilShadows(G3D::RenderDevice* renderDevice, const G3D::GCamera& camera, const G3D::GLight& light);
-	void sendShadowProxyMeshGeometry(G3D::RenderDevice* renderDevice, const G3D::GLight& light) const;
-	void turnOnLights(G3D::RenderDevice* renderDevice, bool shadowPass) const;
-	void diffusePass(G3D::RenderDevice* renderDevice);
-	void reflectionPass(G3D::RenderDevice* renderDevice);
-	void transparentPass(G3D::RenderDevice* renderDevice);
-	void debugShowTextures(G3D::RenderDevice* renderDevice, const G3D::GCamera& camera);
+
+	void sortProxies()
+	{
+		renderStats.sort.tick();
+		sortByMaterialAndDepth(diffuseProxyArray);
+		sortByMaterial(reflectProxyArray);
+		sortByDepth(transparentProxyArray);
+		renderStats.sort.tock();
+	}
+	void computeProxyArrays(G3D::RenderDevice* rd, const G3D::GCamera& camera);
+	void sendDiffuseProxyMeshGeometry(G3D::RenderDevice* rd) const;
+	void markStencilShadows(G3D::RenderDevice* rd, const G3D::GCamera& camera, const G3D::GLight& light);
+	void sendShadowProxyMeshGeometry(G3D::RenderDevice* rd, const G3D::GLight& light) const;
+	void turnOnLights(G3D::RenderDevice* rd, bool allLights) const;
+	void diffusePass(G3D::RenderDevice* rd);
+	void reflectionPass(G3D::RenderDevice* rd);
+	void transparentPass(G3D::RenderDevice* rd);
+	void debugShowTextures(G3D::RenderDevice* rd, const G3D::GCamera& camera);
 
 	void renderShadowVolumeGeometry(
-		G3D::RenderDevice* renderDevice,
+		G3D::RenderDevice* rd,
 		const G3D::GLight& light,
 		bool caps,
 		float shadowVertexDistance
@@ -89,17 +106,17 @@ public:
 	void presetLighting(
 		G3D::ReferenceCountedPointer<G3D::Sky> sky,
 		G3D::LightingParameters skyParameters,
-		G3D::Color3 ambient,
-		G3D::Color3 diffuse
+		G3D::Color3 ambientTop,
+		G3D::Color3 ambientBottom
 	);
 
-	void setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>& lighting);
-	void setThrottle(float shadingQuality, float meshDetail, bool shadows, float cameraDistance);
+	void setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>& L);
+	void setThrottle(float t, float m, bool s, float c);
 
 	float getShadingQuality() const;
 	float getMeshDetail() const;
 
-	void render(G3D::RenderDevice* renderDevice, const G3D::GCamera& camera);
+	void render(G3D::RenderDevice* rd, const G3D::GCamera& camera);
 };
 
 DECOMP_SIZE_ASSERT(RenderScene, 0x4f0)

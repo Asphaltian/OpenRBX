@@ -23,7 +23,7 @@ public:
 	const Mesh::Level* mesh;                     // 0x3c
 	G3D::ReferenceCountedPointer<Mesh> fullMesh; // 0x40
 
-	RenderSurface();
+	RenderSurface() {}
 };
 
 DECOMP_SIZE_ASSERT(RenderSurface, 0x44)
