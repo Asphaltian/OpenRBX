@@ -101,7 +101,26 @@ public:
 
 	unsigned int levelCount() const;
 	Level& getLevel(int index);
-	const Level* detailLevel(float detail) const;
+	const Level* detailLevel(float detail) const
+	{
+		if (levels.size() == 0) {
+			return NULL;
+		}
+
+		int maxIndex = levels.size() - 1;
+		int index = (int) detail;
+
+		if (index <= 0) {
+			index = 0;
+		}
+		else if (maxIndex <= index) {
+			index = maxIndex;
+		}
+
+		const Level* level = &levels[index];
+
+		return level->isEmptyLevel() ? NULL : level;
+	}
 	bool veryTransparent() const;
 };
 

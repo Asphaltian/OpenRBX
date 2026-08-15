@@ -82,6 +82,8 @@ public:
 
 	static void sendGeometry(const Level* lvl, G3D::RenderDevice* rd);
 
+	LevelRef dropShadowMesh() { return shadowSurface.dropShadowGeometry; }
+
 	void computeDirectionalShadowVolume(
 		const G3D::CoordinateFrame& cframe,
 		const G3D::Vector3& worldLight,
