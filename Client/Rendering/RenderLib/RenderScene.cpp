@@ -126,6 +126,37 @@ void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>&
 	);
 }
 
+// STUB: WEBSERVICE 0x101f06a0
+void RenderScene::computeShadowVolumeGeometry(
+	G3D::Array<unsigned int>& indexArray,
+	G3D::Array<G3D::Vector3>& shadowVertex,
+	const G3D::GLight& light,
+	bool generateLightCap,
+	float shadowVertexDistance
+) const
+{
+	renderStats.cpuShadow.tick();
+
+	shadowVertex.resize(0, false);
+	indexArray.resize(0, false);
+
+	shadowVertex.append(-light.position.xyz().unit() * shadowVertexDistance);
+
+	G3D::Vector3 worldLight = light.position.xyz().unit();
+
+	for (int i = 0; i < shadowProxyArray.size(); i++) {
+		shadowProxyArray[i].fullMesh->computeDirectionalShadowVolume(
+			shadowProxyArray[i].cframe,
+			worldLight,
+			indexArray,
+			shadowVertex,
+			generateLightCap
+		);
+	}
+
+	renderStats.cpuShadow.tock();
+}
+
 // FUNCTION: WEBSERVICE 0x101f07a0
 void RenderScene::updateShadowVAR(const G3D::Array<G3D::Vector3>& shadowVertex)
 {

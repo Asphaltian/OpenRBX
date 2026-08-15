@@ -93,7 +93,7 @@ private:
 	G3D::Array<unsigned int> shadowIndexArray;                   // 0x0a4
 
 public:
-	RenderStats renderStats;                      // 0x0b0
+	mutable RenderStats renderStats;              // 0x0b0
 	bool debugShadowVolumes;                      // 0x2e8
 	G3D::ReferenceCountedPointer<G3D::Sky> sky;   // 0x2ec
 	G3D::Color4 colorClearValue;                  // 0x2f0
