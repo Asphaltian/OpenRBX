@@ -1,5 +1,8 @@
 #include "Part.h"
 
+#include "MaterialFactory.h"
+#include "MeshFactory.h"
+#include "PBBMesh.h"
 #include "View.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/custommesh.h"
