@@ -73,6 +73,8 @@ protected:
 
 	Mesh();
 
+	void computeShadowSurface(const LevelRef& level);
+
 	G3D::Array<LevelRef> levels; // 0x0c
 
 	int detailIndex(double detail) const { return G3D::iClamp((int) detail, 0, levels.size() - 1); }
