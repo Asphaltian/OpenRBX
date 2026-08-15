@@ -193,6 +193,11 @@ void RenderScene::classifyProxies()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101f0ff0
+RenderScene::~RenderScene()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x101f1200
 void RenderScene::presetLighting(
 	G3D::ReferenceCountedPointer<G3D::Sky> sky,

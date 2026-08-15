@@ -773,7 +773,7 @@ address,size,type,symbol,name
 0x101da0e0,0x164,library,??1VARArea@G3D@@UAE@XZ,
 0x101da250,0x44,library,?finish@VARArea@G3D@@QAEXXZ,
 0x101da2a0,0x19,library,?reset@VARArea@G3D@@QAEXXZ,
-0x101da2c0,0x8d,library,??1?$Array@V?$ReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@@G3D@@QAE@XZ,
+0x101da2c0,0x8d,library,??1?$Array@V?$ReferenceCountedPointer@VVARArea@G3D@@@G3D@@@G3D@@QAE@XZ,
 0x101da350,0x18f,library,?resize@?$Array@V?$ReferenceCountedPointer@VVARArea@G3D@@@G3D@@@G3D@@QAEXH_N@Z,
 0x101da4e0,0x1e,library,??_EVARArea@G3D@@UAEPAXI@Z,
 0x101da500,0x132,library,?append@?$Array@V?$ReferenceCountedPointer@VVARArea@G3D@@@G3D@@@G3D@@QAEXABV?$ReferenceCountedPointer@VVARArea@G3D@@@2@@Z,
