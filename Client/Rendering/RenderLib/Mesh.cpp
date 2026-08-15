@@ -9,6 +9,7 @@ G3D::MeshAlg::Geometry Mesh::visibleGeometry;
 G3D::Array<G3D::Vector2> Mesh::texCoordArray;
 G3D::Array<G3D::Vector3> Mesh::tangentArray;
 Mesh::VertexList Mesh::vertexRefCounts;
+Mesh::VertexList Mesh::freeList;
 G3D::VAR Mesh::vertexVAR;
 G3D::VAR Mesh::normalVAR;
 G3D::VAR Mesh::texCoordVAR;
@@ -44,6 +45,44 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 	if (lvl != NULL && lvl->indexArray.size() > 0) {
 		rd->sendIndices(lvl->primitive, lvl->indexArray);
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x10166cc0
+unsigned int Mesh::allocVertex(
+	const G3D::Vector3& vertex,
+	const G3D::Vector3& normal,
+	const G3D::Vector2& tex,
+	bool share
+)
+{
+	if (!varDirty) {
+		varDirty = true;
+	}
+
+	if (freeList.size() == 0) {
+		int index = visibleGeometry.vertexArray.size();
+
+		visibleGeometry.vertexArray.append(vertex);
+		visibleGeometry.normalArray.append(normal);
+		texCoordArray.append(tex);
+		tangentArray.append(G3D::Vector3::zero());
+		vertexRefCounts.append(1);
+		vertexRefCount++;
+
+		return index;
+	}
+
+	unsigned int index = freeList.last();
+	freeList.resize(freeList.size() - 1, false);
+
+	visibleGeometry.vertexArray[index] = vertex;
+	visibleGeometry.normalArray[index] = normal;
+	texCoordArray[index] = tex;
+	tangentArray[index] = G3D::Vector3::zero();
+	vertexRefCounts[index] = 1;
+	vertexRefCount++;
+
+	return index;
 }
 
 // FUNCTION: WEBSERVICE 0x10166fc0

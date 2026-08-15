@@ -64,6 +64,7 @@ private:
 	static bool varDirty;
 
 	static void makeVAR();
+
 	static G3D::Vector3 findScale;
 	static VertexList findGrid[32][32][32];
 
@@ -86,6 +87,13 @@ public:
 	float debugBoundingRadius; // 0x4c
 
 	static unsigned int allocVertex(unsigned int i, unsigned int count);
+
+	static unsigned int allocVertex(
+		const G3D::Vector3& vertex,
+		const G3D::Vector3& normal,
+		const G3D::Vector2& tex,
+		bool share
+	);
 
 	static void beginRender(G3D::RenderDevice* rd, bool usetexCoords, bool useTangent);
 
