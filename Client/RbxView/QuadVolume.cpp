@@ -12,10 +12,29 @@ LevelBuilder::LevelBuilder(
 {
 }
 
-// STUB: WEBSERVICE 0x1018ae60
-void LevelBuilder::buildFace(NormalId, Purpose)
+// FUNCTION: WEBSERVICE 0x1018ae60
+void LevelBuilder::buildFace(NormalId normalId, Purpose purpose)
 {
-	STUB(0x1018ae60);
+	switch (normalId) {
+	case NORM_X:
+		buildRight(purpose);
+		break;
+	case NORM_Y:
+		buildTop(purpose);
+		break;
+	case NORM_Z:
+		buildBack(purpose);
+		break;
+	case NORM_X_NEG:
+		buildLeft(purpose);
+		break;
+	case NORM_Y_NEG:
+		buildBottom(purpose);
+		break;
+	case NORM_Z_NEG:
+		buildFront(purpose);
+		break;
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1018aef0
