@@ -117,6 +117,8 @@ public:
 	) const;
 
 	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10165ee0
+	// RBX::Render::Mesh::ShadowSurface::~ShadowSurface
 	// SYNTHETIC: WEBSERVICE 0x102257c0
 	// `RBX::Render::Mesh::computeDirectionalShadowVolume'::`2'::`dynamic atexit destructor for 'backface''
 	// clang-format on

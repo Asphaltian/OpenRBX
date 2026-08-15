@@ -111,6 +111,11 @@ Mesh::Level::~Level()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10166f50
+Mesh::~Mesh()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x10166fc0
 void Mesh::makeVAR()
 {
