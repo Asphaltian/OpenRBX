@@ -6,7 +6,7 @@
 namespace RBX {
 namespace Render {
 
-// STUB: WEBSERVICE 0x101f9fa0
+// FUNCTION: WEBSERVICE 0x101f9fa0
 Clusterer::Cluster* Clusterer::findClosestCluster(Sample* sample)
 {
 	Cluster* bestCluster = NULL;
@@ -18,22 +18,23 @@ Clusterer::Cluster* Clusterer::findClosestCluster(Sample* sample)
 		float distance = it->getDistanceFromCentroid(sample);
 
 		if (distance < bestDistance) {
-			bestDistance = distance;
 			bestCluster = &(*it);
+			bestDistance = distance;
 		}
 	}
 
 	return bestCluster;
 }
 
-// STUB: WEBSERVICE 0x101fa0c0
+// FUNCTION: WEBSERVICE 0x101fa0c0
 void Clusterer::Cluster::computeCentroid()
 {
 	G3D::Vector3 c(0, 0, 0);
 
+	Samples::iterator it = samples.begin();
 	Samples::iterator end = samples.end();
 
-	for (Samples::iterator it = samples.begin(); it != end; ++it) {
+	for (; it != end; ++it) {
 		c += (*it)->cframe().translation;
 	}
 
