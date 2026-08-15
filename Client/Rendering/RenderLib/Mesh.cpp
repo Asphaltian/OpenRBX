@@ -17,6 +17,7 @@ G3D::VAR Mesh::tangentVAR;
 bool Mesh::varDirty;
 
 static int vertexRefCount;
+static bool init;
 
 // FUNCTION: WEBSERVICE 0x101655f0
 void Mesh::endRender(G3D::RenderDevice* rd)
@@ -159,6 +160,18 @@ void Mesh::beginRender(G3D::RenderDevice* rd, bool usetexCoords, bool useTangent
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10167600
+void Mesh::initStatics()
+{
+	visibleGeometry.vertexArray.resize(1);
+	visibleGeometry.normalArray.resize(1);
+	texCoordArray.resize(1);
+	tangentArray.resize(1);
+	vertexRefCounts.resize(1);
+	vertexRefCounts[0] = 1;
+	freeList.resize(0);
+}
+
 // STUB: WEBSERVICE 0x101676c0
 void Mesh::computeDirectionalShadowVolume(
 	const G3D::CoordinateFrame& cframe,
@@ -222,6 +235,17 @@ void Mesh::computeDirectionalShadowVolume(
 // FUNCTION: WEBSERVICE 0x10167b50
 Mesh::Level::Level(G3D::RenderDevice::Primitive primitive) : primitive(primitive)
 {
+}
+
+// FUNCTION: WEBSERVICE 0x10167bb0
+Mesh::Mesh()
+{
+	if (!init) {
+		initStatics();
+		init = true;
+	}
+
+	debugBoundingRadius = 0.0f;
 }
 
 // STUB: WEBSERVICE 0x10167d70

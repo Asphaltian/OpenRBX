@@ -69,6 +69,10 @@ private:
 	static VertexList findGrid[32][32][32];
 
 protected:
+	static void initStatics();
+
+	Mesh();
+
 	G3D::Array<LevelRef> levels; // 0x0c
 
 	int detailIndex(double detail) const { return G3D::iClamp((int) detail, 0, levels.size() - 1); }
@@ -119,6 +123,8 @@ public:
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x10165ee0
 	// RBX::Render::Mesh::ShadowSurface::~ShadowSurface
+	// SYNTHETIC: WEBSERVICE 0x10167660
+	// RBX::Render::Mesh::ShadowSurface::ShadowSurface
 	// SYNTHETIC: WEBSERVICE 0x102257c0
 	// `RBX::Render::Mesh::computeDirectionalShadowVolume'::`2'::`dynamic atexit destructor for 'backface''
 	// clang-format on

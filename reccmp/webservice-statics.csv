@@ -352,6 +352,7 @@ address,type,name
 0x102fe388,global,G3D::_internal::currentFilesUsed
 0x102fe3a4,global,vertexRefCount
 0x102fe490,global,backface
+0x102fe4a0,global,init
 0x102fe4ac,global,cachedBumpImage
 0x102fe4c0,global,lastFilename
 0x102fe5e4,global,cache
