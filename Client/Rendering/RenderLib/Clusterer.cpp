@@ -62,7 +62,7 @@ unsigned int Clusterer::moveSample(Sample* sample, Cluster* cluster)
 	return 1;
 }
 
-// STUB: WEBSERVICE 0x101fa380
+// FUNCTION: WEBSERVICE 0x101fa380
 unsigned int Clusterer::moveSamples()
 {
 	unsigned int moveCount = 0;
@@ -72,17 +72,19 @@ unsigned int Clusterer::moveSamples()
 	}
 
 	for (Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
-		while (it->visitIndex < it->samples.size()) {
-			Sample* sample = it->samples[it->visitIndex];
+		Cluster& cluster = *it;
+
+		while (cluster.visitIndex < cluster.samples.size()) {
+			Sample* sample = cluster.samples[cluster.visitIndex];
 			Cluster* bestCluster = findClosestCluster(sample);
 
-			if (bestCluster == &(*it)) {
-				it->visitIndex++;
+			if (bestCluster != &cluster) {
+				cluster.samples[cluster.visitIndex] = cluster.samples.back();
+				cluster.samples.pop_back();
+				moveCount += moveSample(sample, bestCluster);
 			}
 			else {
-				it->samples[it->visitIndex] = it->samples.back();
-				it->samples.pop_back();
-				moveCount += moveSample(sample, bestCluster);
+				cluster.visitIndex++;
 			}
 		}
 	}
@@ -93,7 +95,7 @@ unsigned int Clusterer::moveSamples()
 // STUB: WEBSERVICE 0x101fa520
 Clusterer::Clusters* Clusterer::go(unsigned int maxSteps)
 {
-	if (clusterCount < 2) {
+	if (clusterCount <= 1) {
 		return &clusters;
 	}
 
