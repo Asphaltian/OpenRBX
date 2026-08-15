@@ -102,6 +102,7 @@ public:
 
 	unsigned int levelCount() const;
 	Level& getLevel(int index);
+	// STUB: WEBSERVICE 0x101ef660
 	const Level* detailLevel(float detail) const
 	{
 		if (levels.size() == 0) {

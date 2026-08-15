@@ -97,6 +97,11 @@ public:
 	virtual ~AggregateChunk();
 
 	void makeMesh();
+
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10226500
+	// `RBX::Render::AggregateChunk::renderShadows'::`8'::`dynamic atexit destructor for 'shadowVertex''
+	// clang-format on
 };
 
 DECOMP_SIZE_ASSERT(AggregateChunk, 0xf0)
