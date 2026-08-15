@@ -193,6 +193,31 @@ void RenderScene::classifyProxies()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101f1200
+void RenderScene::presetLighting(
+	G3D::ReferenceCountedPointer<G3D::Sky> sky,
+	G3D::LightingParameters skyParameters,
+	G3D::Color3 ambientTop,
+	G3D::Color3 ambientBottom
+)
+{
+	this->sky = sky;
+	desiredSkyParameters = skyParameters;
+
+	G3D::LightingRef lighting = G3D::Lighting::create();
+	lighting->ambientTop = ambientTop;
+	lighting->ambientBottom = ambientBottom;
+
+	G3D::GLight light = G3D::GLight::directional(skyParameters.lightDirection, skyParameters.lightColor * 0.9);
+	lighting->shadowedLightArray.append(light);
+
+	if (!sky.isNull()) {
+		lighting->environmentMap = sky->getEnvironmentMap();
+	}
+
+	setLighting(lighting);
+}
+
 // STUB: WEBSERVICE 0x101f1960
 void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 {
