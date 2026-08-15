@@ -9,7 +9,7 @@ namespace RBX {
 
 const char sSelection[] = "Selection";
 
-// STUB: WEBSERVICE 0x1005d440
+// FUNCTION: WEBSERVICE 0x1005d440
 void Selection::raiseRemoved(boost::shared_ptr<Instance> item)
 {
 	SelectionChanged event(boost::shared_ptr<Instance>(), item);
