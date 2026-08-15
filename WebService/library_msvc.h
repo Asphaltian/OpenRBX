@@ -29,6 +29,8 @@
 // G3D::readUInt32
 // LIBRARY: WEBSERVICE 0x1014aeb0
 // G3D::tokenTypeToString
+// LIBRARY: WEBSERVICE 0x101e821c
+// __ArrayUnwind
 // LIBRARY: WEBSERVICE 0x101e82fc
 // pre_c_init
 // LIBRARY: WEBSERVICE 0x101e850c
