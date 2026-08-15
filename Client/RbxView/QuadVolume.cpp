@@ -18,8 +18,15 @@ void LevelBuilder::buildFace(NormalId, Purpose)
 	STUB(0x1018ae60);
 }
 
-void LevelBuilder::build(Purpose)
+// FUNCTION: WEBSERVICE 0x1018aef0
+void LevelBuilder::build(Purpose purpose)
 {
+	buildTop(purpose);
+	buildBottom(purpose);
+	buildLeft(purpose);
+	buildRight(purpose);
+	buildFront(purpose);
+	buildBack(purpose);
 }
 
 } // namespace View
