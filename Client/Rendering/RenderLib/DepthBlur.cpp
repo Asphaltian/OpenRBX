@@ -56,7 +56,7 @@ void DepthBlur::apply(G3D::RenderDevice* rd)
 	}
 }
 
-// STUB: WEBSERVICE 0x101f9590
+// FUNCTION: WEBSERVICE 0x101f9590
 DepthBlur::DepthBlur()
 {
 	if (G3D::GLCaps::supports_GL_ARB_shader_objects() && G3D::GLCaps::supports_GL_ARB_shading_language_100() &&
