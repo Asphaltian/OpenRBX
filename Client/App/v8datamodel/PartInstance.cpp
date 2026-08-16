@@ -1,5 +1,6 @@
 #include "v8datamodel/PartInstance.h"
 
+#include "tool/Dragger.h"
 #include "util/standardout.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Workspace.h"
@@ -422,10 +423,16 @@ void PartInstance::onCanAggregateChanged(bool canAggregate)
 	shouldRenderSetDirty();
 }
 
-// STUB: WEBSERVICE 0x1009cc30
+// FUNCTION: WEBSERVICE 0x1009cc30
 void PartInstance::safeMove()
 {
-	STUB(0x1009cc30);
+	if (World* world = Workspace::getWorldIfInWorkspace(this)) {
+		G3D::Array<Primitive*> temp;
+
+		temp.append(primitive.get());
+
+		Dragger::safeMoveNoDrop(temp, Vector3::zero(), *world->getContactManager());
+	}
 }
 
 // STUB: WEBSERVICE 0x1009d150

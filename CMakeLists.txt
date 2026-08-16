@@ -226,6 +226,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/script/ScriptEvent.cpp
   Client/App/script/ThreadRef.cpp
   Client/App/script/ScriptContext.cpp
+  Client/App/tool/Dragger.cpp
   Client/App/tool/GroupDragTool.cpp
   Client/App/tool/NullTool.cpp
   Client/App/tool/PartDragTool.cpp
