@@ -22,6 +22,11 @@ void Selection::raiseRemoved(boost::shared_ptr<Instance> item)
 	Notifier<Selection, SelectionChanged>::raise(event);
 }
 
+// FUNCTION: WEBSERVICE 0x1005d5e0
+Selection::~Selection()
+{
+}
+
 // STUB: WEBSERVICE 0x1005e1f0
 void Selection::removeFromSelection(const Instance* instance)
 {
