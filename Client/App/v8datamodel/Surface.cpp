@@ -22,6 +22,18 @@ Controller::InputType Surface::getInput() const
 	return partInstance->getPrimitive()->getSurfaceData(surfId).inputType;
 }
 
+// FUNCTION: WEBSERVICE 0x10104300
+float Surface::getParamA() const
+{
+	return partInstance->getPrimitive()->getSurfaceData(surfId).paramA;
+}
+
+// FUNCTION: WEBSERVICE 0x10104360
+float Surface::getParamB() const
+{
+	return partInstance->getPrimitive()->getSurfaceData(surfId).paramB;
+}
+
 // FUNCTION: WEBSERVICE 0x101043c0
 bool Surface::isControllable() const
 {
@@ -40,10 +52,43 @@ void Surface::setSurfaceType(SurfaceType type)
 	}
 }
 
-// STUB: WEBSERVICE 0x10104430
+// FUNCTION: WEBSERVICE 0x10104430
 void Surface::setSurfaceInput(Controller::InputType value)
 {
-	STUB(0x10104430);
+	SurfaceData current = partInstance->getPrimitive()->getSurfaceData(surfId);
+
+	if (value != current.inputType) {
+		current.inputType = value;
+		partInstance->getPrimitive()->setSurfaceData(surfId, current);
+		partInstance->onSurfaceChanged(surfId);
+		partInstance->raisePropertyChanged(partInstance->getSurfaces().getSurfaceInput(surfId));
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101044f0
+void Surface::setParamA(float value)
+{
+	SurfaceData current = partInstance->getPrimitive()->getSurfaceData(surfId);
+
+	if (current.paramA != value) {
+		current.paramA = value;
+		partInstance->getPrimitive()->setSurfaceData(surfId, current);
+		partInstance->onSurfaceChanged(surfId);
+		partInstance->raisePropertyChanged(partInstance->getSurfaces().getParamA(surfId));
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101045c0
+void Surface::setParamB(float value)
+{
+	SurfaceData current = partInstance->getPrimitive()->getSurfaceData(surfId);
+
+	if (current.paramB != value) {
+		current.paramB = value;
+		partInstance->getPrimitive()->setSurfaceData(surfId, current);
+		partInstance->onSurfaceChanged(surfId);
+		partInstance->raisePropertyChanged(partInstance->getSurfaces().getParamB(surfId));
+	}
 }
 
 } // namespace RBX

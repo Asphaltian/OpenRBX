@@ -219,10 +219,13 @@ bool PartInstance::isControllable() const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1009aff0
+// FUNCTION: WEBSERVICE 0x1009aff0
 void PartInstance::onSurfaceChanged(NormalId normalId)
 {
-	STUB(0x1009aff0);
+	PersistentPart.setDirty();
+	IsControllable.setDirty();
+	SurfacesNeedAdorn.setDirty();
+	shouldRenderSetDirty();
 }
 
 // FUNCTION: WEBSERVICE 0x1009b080

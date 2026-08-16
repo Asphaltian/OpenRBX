@@ -25,6 +25,12 @@ public:
 	Controller::InputType getInput() const;
 	void setSurfaceInput(Controller::InputType value);
 
+	float getParamA() const;
+	void setParamA(float value);
+
+	float getParamB() const;
+	void setParamB(float value);
+
 	bool isControllable() const;
 };
 

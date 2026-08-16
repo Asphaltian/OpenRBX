@@ -34,6 +34,8 @@ public:
 
 	const Reflection::PropertyDescriptor& getSurfaceType(NormalId normalId) const;
 	const Reflection::PropertyDescriptor& getSurfaceInput(NormalId normalId) const;
+	const Reflection::PropertyDescriptor& getParamA(NormalId normalId) const;
+	const Reflection::PropertyDescriptor& getParamB(NormalId normalId) const;
 
 	const bool isStandardPart() const;
 };
