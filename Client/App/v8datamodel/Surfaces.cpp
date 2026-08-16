@@ -431,7 +431,7 @@ Surfaces::Surfaces(PartInstance* partInstance)
 {
 }
 
-// STUB: WEBSERVICE 0x10100de0
+// FUNCTION: WEBSERVICE 0x10100de0
 const Surface& Surfaces::operator[](NormalId normalId) const
 {
 	switch (normalId) {

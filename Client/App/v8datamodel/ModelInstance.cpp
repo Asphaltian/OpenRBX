@@ -94,7 +94,6 @@ void ModelInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 // STUB: WEBSERVICE 0x1005a890
 ModelInstance::~ModelInstance()
 {
-	STUB(0x1005a890);
 }
 
 // STUB: WEBSERVICE 0x1005ab00

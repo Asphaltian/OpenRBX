@@ -67,7 +67,7 @@ Extents Workspace::computeCameraOwnerExtents()
 	return getExtentsWorld();
 }
 
-// STUB: WEBSERVICE 0x1006d230
+// FUNCTION: WEBSERVICE 0x1006d230
 void Workspace::cameraMoved()
 {
 	Notifier<Workspace, DrawChanged>::raise(DrawChanged());
