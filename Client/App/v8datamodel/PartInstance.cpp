@@ -94,6 +94,14 @@ static Reflection::EnumPropDescriptor<PartInstance, Part::PartType> prop_shapeUi
 	Reflection::PropertyDescriptor::UI
 );
 
+static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_SizeUi(
+	"Size",
+	category_Part,
+	&RBX::PartInstance::getPartSizeUi,
+	&RBX::PartInstance::setPartSizeUi,
+	Reflection::PropertyDescriptor::UI
+);
+
 const Reflection::PropDescriptor<PartInstance, G3D::Vector3> PartInstance::prop_Size(
 	"size",
 	category_Part,
@@ -480,10 +488,35 @@ PartInstance::PartInstance()
 	STUB(0x1009f220);
 }
 
-// STUB: WEBSERVICE 0x1009f910
-void PartInstance::setPartSizeXml(const Vector3& value)
+// FUNCTION: WEBSERVICE 0x1009f910
+void PartInstance::setPartSizeXml(const Vector3& rbxSize)
 {
-	STUB(0x1009f910);
+	if (rbxSize != getPartSizeXml()) {
+		Vector3 newRbxSize = partType == Part::BLOCK_PART ? rbxSize : rbxSize.xxx();
+
+		if (legacyOffset) {
+			CoordinateFrame oldCorner = primitive->getGridCorner();
+
+			primitive->setGridSize(newRbxSize);
+			primitive->setGridCorner(oldCorner);
+		}
+		else {
+			primitive->setGridSize(newRbxSize);
+		}
+
+		raisePropertyChanged(prop_Size);
+		raisePropertyChanged(prop_SizeUi);
+
+		PersistentPart.setDirty();
+
+		onExtentsChanged();
+	}
+}
+
+// STUB: WEBSERVICE 0x1009f9f0
+void PartInstance::setPartSizeUi(const Vector3& uiSize)
+{
+	STUB(0x1009f9f0);
 }
 
 // FUNCTION: WEBSERVICE 0x1009faa0
@@ -639,7 +672,27 @@ void PartInstance::setPartTypeXml(Part::PartType _type)
 // STUB: WEBSERVICE 0x100a04e0
 void PartInstance::setPartTypeUi(Part::PartType _type)
 {
-	STUB(0x100a04e0);
+	if (partType != _type) {
+		World* world = Workspace::getWorldIfInWorkspace(this);
+
+		if (world != NULL) {
+			world->destroyJoints(primitive.get());
+		}
+
+		setPartTypeXml(_type);
+
+		if (_type != Part::BLOCK_PART) {
+			setPartSizeXml(uiToXmlSize(getPartSizeXml()));
+		}
+
+		safeMove();
+
+		world = Workspace::getWorldIfInWorkspace(this);
+
+		if (world != NULL) {
+			world->createJoints(primitive.get());
+		}
+	}
 }
 
 } // namespace RBX

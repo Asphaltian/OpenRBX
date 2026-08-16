@@ -134,7 +134,8 @@ public:
 
 	void setPartTypeXml(Part::PartType _type);
 	void setPartTypeUi(Part::PartType _type);
-	void setPartSizeXml(const Vector3& value);
+	void setPartSizeXml(const Vector3& rbxSize);
+	void setPartSizeUi(const Vector3& uiSize);
 	void setRenderImportance(float value);
 	void setPartLocked(bool value);
 	void setTransparency(float value);
