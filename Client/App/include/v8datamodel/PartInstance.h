@@ -98,6 +98,9 @@ public:
 
 	static bool nonNullInWorkspace(shared_ptr<PartInstance> part);
 
+	// FUNCTION: WEBSERVICE 0x100a07e0
+	Part::PartType getPartType() const { return partType; }
+
 	FormFactor getFormFactor() const { return formFactor; }
 
 	float getRenderImportance() const { return renderImportance; }

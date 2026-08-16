@@ -58,6 +58,8 @@ public:
 
 	void notifyMoved();
 
+	bool getCanAggregate() const { return stepsToSleep == 0; }
+
 protected:
 	bool checkSleep();
 

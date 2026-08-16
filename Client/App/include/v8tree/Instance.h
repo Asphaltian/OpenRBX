@@ -257,6 +257,7 @@ public:
 		return isAncestorOf(descendent);
 	}
 
+	// FUNCTION: WEBSERVICE 0x10047d90
 	bool isDescendentOf(const Instance* ancestor) const
 	{
 		const Instance* walk = parent;

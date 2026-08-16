@@ -5,6 +5,7 @@
 #include "PBBMesh.h"
 #include "View.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Workspace.h"
 #include "v8datamodel/custommesh.h"
 
 namespace RBX {
@@ -32,10 +33,15 @@ float primaryComponent(const G3D::Vector3& v)
 	return G3D::max(G3D::max(nx, ny), nz);
 }
 
-// STUB: WEBSERVICE 0x1016c6d0
+// FUNCTION: WEBSERVICE 0x1016c6d0
 bool Part::usesMegaTexture() const
 {
-	STUB(0x1016c6d0);
+	if (specialShape == NULL && partInstance->getPartType() == RBX::Part::BLOCK_PART) {
+		G3D::Vector3 size = partInstance->getPartSizeXml();
+
+		return primaryComponent(size) < 30.0;
+	}
+
 	return false;
 }
 
@@ -60,25 +66,36 @@ void Part::onEvent(const PartInstance* source, CanAggregateChanged event)
 	view->sceneManager->setSleeping(this, event.canClump);
 }
 
-// STUB: WEBSERVICE 0x1016d100
+// FUNCTION: WEBSERVICE 0x1016d100
 void PartChunk::onAncestorChanged(boost::shared_ptr<Instance>)
 {
-	STUB(0x1016d100);
+	Workspace* workspace = Workspace::findWorkspace(partInstance.get());
+	Instance* parent;
+
+	if (workspace == NULL ||
+		(workspace != (parent = partInstance->getParent()) && (parent == NULL || !parent->isDescendentOf(workspace)))) {
+		view->sceneManager->removeModel(this);
+	}
 }
 
-// STUB: WEBSERVICE 0x1016d320
+// FUNCTION: WEBSERVICE 0x1016d320
 void PartChunk::invalidateMesh()
 {
 	mesh = NULL;
+
+	view->sceneManager->invalidateModel(this, partInstance->getCanAggregate());
 }
 
-// STUB: WEBSERVICE 0x1016d410
+// FUNCTION: WEBSERVICE 0x1016d410
 void PartChunk::invalidateMaterial()
 {
 	material = NULL;
+	materialInvalid = true;
+
+	view->sceneManager->invalidateModel(this, partInstance->getCanAggregate());
 }
 
-// STUB: WEBSERVICE 0x1016d500
+// FUNCTION: WEBSERVICE 0x1016d500
 void PartChunk::onSpecialShapeChanged()
 {
 	invalidateMesh();
