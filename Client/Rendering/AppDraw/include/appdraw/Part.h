@@ -42,6 +42,8 @@ public:
 
 	// SYNTHETIC: WEBSERVICE 0x1009aa30
 	// RBX::Part::Part
+	// FUNCTION: WEBSERVICE 0x1009a9a0
+	// RBX::Part::operator=
 
 	Part() {}
 

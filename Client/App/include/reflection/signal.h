@@ -159,6 +159,8 @@ DECOMP_SIZE_ASSERT(SignalDescriptor, 0x24)
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100b0e00
 // RBX::Reflection::SignalInstance::connectGeneric<WaitScriptSlot>
+// FUNCTION: WEBSERVICE 0x100447e0
+// RBX::Reflection::SignalInstance::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x100b1020
 // RBX::Reflection::SignalInstance::connectGeneric<FunctionScriptSlot>
 // clang-format on

@@ -44,6 +44,8 @@ DECOMP_SIZE_ASSERT(Sky, 0x1c0)
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x100956c0
 // RBX::Sky::~Sky
+// FUNCTION: WEBSERVICE 0x10095770
+// RBX::Sky::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x1021a530
 // `dynamic initializer for 'RBX::Sky::prop_SkyUp''
 // SYNTHETIC: WEBSERVICE 0x1021a560

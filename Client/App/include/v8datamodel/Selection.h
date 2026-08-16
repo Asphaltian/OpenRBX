@@ -68,6 +68,8 @@ DECOMP_SIZE_ASSERT(Selection, 0x12c)
 // RBX::SelectionChanged::SelectionChanged
 // STUB: WEBSERVICE 0x1005d160
 // RBX::Notifier<RBX::Selection,RBX::SelectionChanged>::raise(class RBX::SelectionChanged)
+// TEMPLATE: WEBSERVICE 0x1005d010
+// RBX::Notifier<RBX::Selection,RBX::SelectionChanged>::raise
 // FUNCTION: WEBSERVICE 0x100ddf60
 // RBX::Notifier<RBX::Instance,RBX::AncestorChanged>::removeListener
 // clang-format on

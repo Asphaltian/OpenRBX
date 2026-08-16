@@ -39,6 +39,8 @@ DECOMP_SIZE_ASSERT(Hint, 0x124)
 // clang-format off
 // FUNCTION: WEBSERVICE 0x1008c790
 // RBX::Message::~Message
+// FUNCTION: WEBSERVICE 0x100eeb90
+// RBX::Message::`scalar deleting destructor'
 // clang-format on
 
 // clang-format off

@@ -42,6 +42,8 @@ public:
 private:
 	// TEMPLATE: WEBSERVICE 0x1000b0b0
 	// RBX::Name::doDeclare<&sThumbnailGenerator>
+	// FUNCTION: WEBSERVICE 0x10071c60
+	// RBX::Name::doDeclare<0>
 	// TEMPLATE: WEBSERVICE 0x1000b140
 	// RBX::Name::doDeclare<&RBX::sLighting>
 	// TEMPLATE: WEBSERVICE 0x1000b1d0

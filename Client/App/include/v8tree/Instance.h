@@ -233,6 +233,8 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10059dc0
 	// RBX::Instance::getTypedRoot<RBX::PVInstance>
+	// FUNCTION: WEBSERVICE 0x10005d00
+	// RBX::Instance::getParent
 	// clang-format on
 	template <class T>
 	const T* getTypedRoot() const
