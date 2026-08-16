@@ -457,10 +457,9 @@ void PartInstance::safeMove()
 	}
 }
 
-// STUB: WEBSERVICE 0x1009d150
+// FUNCTION: WEBSERVICE 0x1009d150
 PartInstance::~PartInstance()
 {
-	STUB(0x1009d150);
 }
 
 // FUNCTION: WEBSERVICE 0x1009d2e0
@@ -510,7 +509,7 @@ EnumDesc<PartInstance::FormFactor>::EnumDesc() : EnumDescriptor("FormFactor", ty
 
 // STUB: WEBSERVICE 0x1009f220
 PartInstance::PartInstance()
-	: DescribedCreatable<PartInstance, PVInstance, sPart>(sPart), surfaces(this),
+	: DescribedCreatable<PartInstance, PVInstance, sPart>("Part"), surfaces(this),
 	  PersistentPart(this, &PartInstance::computePersistentPart),
 	  SurfacesNeedAdorn(this, &PartInstance::computeSurfacesNeedAdorn)
 {

@@ -354,6 +354,10 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>
 	// FUNCTION: WEBSERVICE 0x1008e2c0
 	// RBX::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
+	// TEMPLATE: WEBSERVICE 0x1009b4b0
+	// RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::~DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>
+	// TEMPLATE: WEBSERVICE 0x1009ee20
+	// RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart><char const *>
 	// TEMPLATE: WEBSERVICE 0x100946f0
 	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::~DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x100a10f0
@@ -509,7 +513,7 @@ protected:
 	DescribedCreatable() {}
 
 	template <class U>
-	DescribedCreatable(U joint) : Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >(joint)
+	DescribedCreatable(U arg0) : Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >(arg0)
 	{
 	}
 };

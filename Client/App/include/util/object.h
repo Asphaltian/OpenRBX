@@ -361,6 +361,12 @@ public:
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100945c0
 	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::~FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
+	// TEMPLATE: WEBSERVICE 0x1009a8f0
+	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::~FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>
+	// TEMPLATE: WEBSERVICE 0x1009ab10
+	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart><char const *>
+	// TEMPLATE: WEBSERVICE 0x1009ccf0
+	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100a09b0
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// TEMPLATE: WEBSERVICE 0x10094610
@@ -706,7 +712,7 @@ protected:
 	FactoryProduct() {}
 
 	template <class U>
-	FactoryProduct(U* joint) : Base(joint)
+	FactoryProduct(U arg0) : Base(arg0)
 	{
 	}
 
@@ -726,7 +732,7 @@ public:
 	NonFactoryProduct() {}
 
 	template <class U>
-	NonFactoryProduct(U* joint) : Base(joint)
+	NonFactoryProduct(U arg0) : Base(arg0)
 	{
 	}
 
