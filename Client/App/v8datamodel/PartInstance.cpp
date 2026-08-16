@@ -317,6 +317,22 @@ Extents PartInstance::getExtentsLocal() const
 	return Extents(-corner, corner);
 }
 
+Vector3 PartInstance::xmlToUiSize(const Vector3& size) const
+{
+	Vector3 uiSize = size;
+
+	switch (formFactor) {
+	case BRICK:
+		uiSize.y = size.y / 1.2f;
+		break;
+	case PLATE:
+		uiSize.y = size.y / 0.4f;
+		break;
+	}
+
+	return uiSize;
+}
+
 // FUNCTION: WEBSERVICE 0x1009b610
 Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 {
@@ -521,10 +537,24 @@ void PartInstance::setPartSizeXml(const Vector3& rbxSize)
 	}
 }
 
-// STUB: WEBSERVICE 0x1009f9f0
+// FUNCTION: WEBSERVICE 0x1009f9f0
 void PartInstance::setPartSizeUi(const Vector3& uiSize)
 {
-	STUB(0x1009f9f0);
+	World* world = Workspace::getWorldIfInWorkspace(this);
+
+	if (world != NULL) {
+		world->destroyJoints(primitive.get());
+	}
+
+	setPartSizeXml(uiToXmlSize(xmlToUiSize(uiSize)));
+
+	safeMove();
+
+	world = Workspace::getWorldIfInWorkspace(this);
+
+	if (world != NULL) {
+		world->createJoints(primitive.get());
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1009faa0
