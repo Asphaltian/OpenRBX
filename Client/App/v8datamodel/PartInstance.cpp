@@ -86,6 +86,14 @@ const Reflection::EnumPropDescriptor<PartInstance, Part::PartType> PartInstance:
 	Reflection::PropertyDescriptor::STREAMING
 );
 
+static Reflection::EnumPropDescriptor<PartInstance, Part::PartType> prop_shapeUi(
+	"Shape",
+	category_Part,
+	&RBX::PartInstance::getPartType,
+	&RBX::PartInstance::setPartTypeUi,
+	Reflection::PropertyDescriptor::UI
+);
+
 const Reflection::PropDescriptor<PartInstance, G3D::Vector3> PartInstance::prop_Size(
 	"size",
 	category_Part,
@@ -603,10 +611,35 @@ void PartInstance::render3dAdorn(Adorn* adorn)
 	STUB(0x1009ff60);
 }
 
-// STUB: WEBSERVICE 0x100a0450
-void PartInstance::setPartTypeXml(Part::PartType value)
+// FUNCTION: WEBSERVICE 0x100a0450
+void PartInstance::setPartTypeXml(Part::PartType _type)
 {
-	STUB(0x100a0450);
+	if (partType != _type) {
+		partType = _type;
+		primitive->setPrimitiveType(partType == Part::BLOCK_PART ? Geometry::GEOMETRY_BLOCK : Geometry::GEOMETRY_BALL);
+
+		if (partType != Part::BLOCK_PART) {
+			if (formFactor != SYMETRIC) {
+				formFactor = SYMETRIC;
+
+				raisePropertyChanged(prop_formFactor);
+			}
+		}
+
+		raisePropertyChanged(prop_shapeXml);
+		raisePropertyChanged(prop_shapeUi);
+
+		PersistentPart.setDirty();
+		shouldRenderSetDirty();
+
+		onExtentsChanged();
+	}
+}
+
+// STUB: WEBSERVICE 0x100a04e0
+void PartInstance::setPartTypeUi(Part::PartType _type)
+{
+	STUB(0x100a04e0);
 }
 
 } // namespace RBX

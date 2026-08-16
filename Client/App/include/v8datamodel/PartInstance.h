@@ -132,7 +132,8 @@ public:
 	float getFriction() const;
 	float getElasticity() const;
 
-	void setPartTypeXml(Part::PartType value);
+	void setPartTypeXml(Part::PartType _type);
+	void setPartTypeUi(Part::PartType _type);
 	void setPartSizeXml(const Vector3& value);
 	void setRenderImportance(float value);
 	void setPartLocked(bool value);
