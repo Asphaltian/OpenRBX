@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "util/NormalId.h"
+#include "util/Vector6.h"
 #include "v8datamodel/Surface.h"
 
 #include <boost/noncopyable.hpp>
@@ -31,6 +32,18 @@ public:
 
 	Surface& operator[](NormalId normalId);
 	const Surface& operator[](NormalId normalId) const;
+
+	// FUNCTION: WEBSERVICE 0x1009ace0
+	Vector6<SurfaceType> surf6() const
+	{
+		Vector6<SurfaceType> answer;
+
+		for (int i = 0; i < 6; i++) {
+			answer[i] = (*this)[static_cast<NormalId>(i)].getSurfaceType();
+		}
+
+		return answer;
+	}
 
 	const Reflection::PropertyDescriptor& getSurfaceType(NormalId normalId) const;
 	const Reflection::PropertyDescriptor& getSurfaceInput(NormalId normalId) const;

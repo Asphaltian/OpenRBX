@@ -22,6 +22,20 @@ public:
 		CYLINDER_PART = 2,
 	};
 
+	Part() {}
+
+	// FUNCTION: WEBSERVICE 0x1009a700
+	Part(
+		PartType type,
+		const G3D::Vector3& gridSize,
+		G3D::Color4 color,
+		const Vector6<SurfaceType>& surfaceType,
+		const G3D::CoordinateFrame& coordinateFrame
+	)
+		: type(type), gridSize(gridSize), color(color), surfaceType(surfaceType), coordinateFrame(coordinateFrame)
+	{
+	}
+
 	PartType type;                        // 0x00
 	G3D::Vector3 gridSize;                // 0x04
 	G3D::Color4 color;                    // 0x10

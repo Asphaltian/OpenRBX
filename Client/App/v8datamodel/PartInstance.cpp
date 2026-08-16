@@ -355,8 +355,13 @@ Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 // STUB: WEBSERVICE 0x1009b6e0
 Part PartInstance::computePersistentPart() const
 {
-	STUB(0x1009b6e0);
-	return Part();
+	return Part(
+		partType,
+		getPartSizeXml(),
+		G3D::Color4(getColor3(), 1.0f - (1.0f - transparency) * alphaModifier),
+		surfaces.surf6(),
+		primitive->getCoordinateFrame()
+	);
 }
 
 // FUNCTION: WEBSERVICE 0x1009b780
