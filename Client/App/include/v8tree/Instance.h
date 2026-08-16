@@ -94,6 +94,12 @@ private:
 
 DECOMP_SIZE_ASSERT(PropertyChanged, 0x8)
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x10047dc0
+// RBX::AbstractFactoryProduct<RBX::Instance>::~AbstractFactoryProduct<RBX::Instance>
+// FUNCTION: WEBSERVICE 0x10048490
+// RBX::AbstractFactoryProduct<RBX::Instance>::`scalar deleting destructor'
+// clang-format on
 template <class T>
 class AbstractFactoryProduct : public Creatable<T>
 {
@@ -506,6 +512,18 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::~DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 	// FUNCTION: WEBSERVICE 0x1012d890
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
+// FUNCTION: WEBSERVICE 0x1007d2e0
+// RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::`scalar deleting destructor'
+// TEMPLATE: WEBSERVICE 0x1007daf0
+// RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::~DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
+// FUNCTION: WEBSERVICE 0x10094680
+// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::`scalar deleting destructor'
+// FUNCTION: WEBSERVICE 0x1009ac30
+// RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::`scalar deleting destructor'
+// TEMPLATE: WEBSERVICE 0x100ffa20
+// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::~DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
+// FUNCTION: WEBSERVICE 0x100fff50
+// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::`scalar deleting destructor'
 // clang-format on
 class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >
 {

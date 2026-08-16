@@ -276,6 +276,10 @@ public:
 	// `RBX::Reflection::Described<RBX::FaceInstance,&RBX::sFaceInstance,RBX::Instance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x102256d0
 	// `RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10221c70
+	// `RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10224cc0
+	// `RBX::Reflection::Described<RBX::SpawnLocation,&RBX::sSpawnLocation,RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// clang-format on
 	static ClassDescriptor& classDescriptor() { return ClassDescriptor::rootDescriptor(); }
 

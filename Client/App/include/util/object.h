@@ -701,6 +701,26 @@ public:
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1012cef0
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::getClassName
+	// TEMPLATE: WEBSERVICE 0x1006c0d0
+	// RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>::getClassName
+	// TEMPLATE: WEBSERVICE 0x10074490
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::getClassName
+	// TEMPLATE: WEBSERVICE 0x1007e870
+	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100b7280
+	// RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d7ab0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>
+	// TEMPLATE: WEBSERVICE 0x100d8010
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d82e0
+	// RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100e3ca0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::NonFactoryProduct<RBX::Instance,&RBX::sFeature>
+	// TEMPLATE: WEBSERVICE 0x100e4ec0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100ffa80
+	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::getClassName
 	// clang-format on
 	const Creator& getCreator() const { return creator; }
 
