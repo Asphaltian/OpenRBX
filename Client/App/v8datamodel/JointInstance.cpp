@@ -96,8 +96,10 @@ Snap::Snap(Joint* joint) : DescribedCreatable<Snap, AutoJoint, sSnap>(joint)
 {
 }
 
+// STUB: WEBSERVICE 0x100d9b20
 Snap::Snap() : DescribedCreatable<Snap, AutoJoint, sSnap>(new SnapJoint())
 {
+	setName("Snap");
 }
 
 // STUB: WEBSERVICE 0x100d9c20
@@ -105,6 +107,7 @@ Weld::Weld(Joint* joint) : DescribedCreatable<Weld, AutoJoint, sWeld>(joint)
 {
 }
 
+// STUB: WEBSERVICE 0x100d9cb0
 Weld::Weld() : DescribedCreatable<Weld, AutoJoint, sWeld>(new WeldJoint())
 {
 }
@@ -114,6 +117,7 @@ Glue::Glue(Joint* joint) : DescribedCreatable<Glue, AutoJoint, sGlue>(joint)
 {
 }
 
+// FUNCTION: WEBSERVICE 0x100d9e00
 Glue::Glue() : DescribedCreatable<Glue, AutoJoint, sGlue>(new GlueJoint())
 {
 }
@@ -123,6 +127,7 @@ Rotate::Rotate(Joint* joint) : DescribedCreatable<Rotate, AutoJoint, sRotate>(jo
 {
 }
 
+// STUB: WEBSERVICE 0x100d9f90
 Rotate::Rotate() : DescribedCreatable<Rotate, AutoJoint, sRotate>(new RotateJoint())
 {
 }
@@ -132,6 +137,7 @@ RotateP::RotateP(Joint* joint) : DescribedCreatable<RotateP, AutoJoint, sRotateP
 {
 }
 
+// STUB: WEBSERVICE 0x100da100
 RotateP::RotateP() : DescribedCreatable<RotateP, AutoJoint, sRotateP>(new RotatePJoint())
 {
 }
@@ -141,6 +147,7 @@ RotateV::RotateV(Joint* joint) : DescribedCreatable<RotateV, AutoJoint, sRotateV
 {
 }
 
+// STUB: WEBSERVICE 0x100da280
 RotateV::RotateV() : DescribedCreatable<RotateV, AutoJoint, sRotateV>(new RotateVJoint())
 {
 }
@@ -149,8 +156,10 @@ Motor::Motor(Joint* joint) : DescribedCreatable<Motor, AutoJoint, sMotor>(joint)
 {
 }
 
+// FUNCTION: WEBSERVICE 0x100da370
 Motor::Motor() : DescribedCreatable<Motor, AutoJoint, sMotor>(new MotorJoint())
 {
+	setName("Motor");
 }
 
 } // namespace RBX
