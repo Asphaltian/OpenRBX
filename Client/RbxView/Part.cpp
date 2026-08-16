@@ -8,6 +8,8 @@
 #include "v8datamodel/Workspace.h"
 #include "v8datamodel/custommesh.h"
 
+#include <boost/bind.hpp>
+
 namespace RBX {
 namespace View {
 
@@ -102,16 +104,36 @@ void PartChunk::onSpecialShapeChanged()
 	invalidateMaterial();
 }
 
-// STUB: WEBSERVICE 0x1016d510
-void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor*)
+// FUNCTION: WEBSERVICE 0x1016d510
+void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
-	STUB(0x1016d510);
+	if (descriptor == &PartInstance::prop_Size) {
+		invalidateMesh();
+		invalidateMaterial();
+	}
+	else if (descriptor == &PartInstance::prop_shapeXml) {
+		invalidateMesh();
+	}
+	else if (Surfaces::isSurfaceDescriptor(*descriptor)) {
+		invalidateMesh();
+	}
 }
 
-// STUB: WEBSERVICE 0x1016d550
+// FUNCTION: WEBSERVICE 0x1016d550
 void Part::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
-	STUB(0x1016d550);
+	PartChunk::onPropertyChanged(descriptor);
+
+	if (descriptor == &PartInstance::prop_Color) {
+		if (usesMegaTexture()) {
+			invalidateMesh();
+		}
+
+		invalidateMaterial();
+	}
+	else if (descriptor == &PartInstance::prop_Transparency || descriptor == &PartInstance::prop_Reflectance) {
+		invalidateMaterial();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1016d5d0
@@ -156,7 +178,19 @@ void Part::updateMesh()
 // STUB: WEBSERVICE 0x10173c90
 void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 {
-	STUB(0x10173c90);
+	SpecialShape* specialShape = dynamic_cast<SpecialShape*>(child.get());
+
+	if (specialShape != NULL) {
+		this->specialShape = specialShape;
+
+		shapePropertyChangedConnection = Instance::event_propertyChanged.connect(
+			specialShape,
+			boost::bind(&PartChunk::onSpecialShapeChanged, this),
+			10
+		);
+
+		invalidateMesh();
+	}
 }
 
 // STUB: WEBSERVICE 0x10174160

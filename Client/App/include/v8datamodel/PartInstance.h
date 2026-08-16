@@ -85,6 +85,7 @@ public:
 	virtual ~PartInstance();
 
 	static const Reflection::PropDescriptor<PartInstance, float> prop_RenderImportance;
+	static const Reflection::EnumPropDescriptor<PartInstance, Part::PartType> prop_shapeXml;
 	static const Reflection::PropDescriptor<PartInstance, float> prop_Transparency;
 	static const Reflection::PropDescriptor<PartInstance, float> prop_Reflectance;
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_Locked;
@@ -92,6 +93,7 @@ public:
 	static const Reflection::PropDescriptor<PartInstance, BrickColor> prop_BrickColor;
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_CanCollide;
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_Anchored;
+	static const Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_Size;
 
 	const Primitive* getPrimitive() const { return primitive.get(); }
 	Primitive* getPrimitive() { return primitive.get(); }
@@ -113,6 +115,8 @@ public:
 
 	Surfaces& getSurfaces() { return surfaces; }
 
+	const Surfaces& getSurfaces() const { return surfaces; }
+
 	bool getIsTransparent() const { return 1.0f - (1.0f - transparency) * alphaModifier > 0.1f; }
 
 	const CoordinateFrame& getCoordinateFrame() const;
@@ -129,6 +133,8 @@ public:
 	float getFriction() const;
 	float getElasticity() const;
 
+	void setPartTypeXml(Part::PartType value);
+	void setPartSizeXml(const Vector3& value);
 	void setRenderImportance(float value);
 	void setPartLocked(bool value);
 	void setTransparency(float value);

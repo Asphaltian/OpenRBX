@@ -161,6 +161,7 @@ protected:
 public:
 	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_childAdded;
 	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_childRemoved;
+	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_ancestryChanged;
 	static Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> event_propertyChanged;
 
 	static const Reflection::RefPropDescriptor<Instance, Instance> propParent;

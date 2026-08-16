@@ -78,6 +78,22 @@ const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Anchored
 	&RBX::PartInstance::setAnchored
 );
 
+const Reflection::EnumPropDescriptor<PartInstance, Part::PartType> PartInstance::prop_shapeXml(
+	"shape",
+	category_Part,
+	&RBX::PartInstance::getPartType,
+	&RBX::PartInstance::setPartTypeXml,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
+const Reflection::PropDescriptor<PartInstance, G3D::Vector3> PartInstance::prop_Size(
+	"size",
+	category_Part,
+	&RBX::PartInstance::getPartSizeXml,
+	&RBX::PartInstance::setPartSizeXml,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
 static Reflection::EnumPropDescriptor<PartInstance, PartInstance::FormFactor> prop_formFactor(
 	"FormFactor",
 	category_Part,
@@ -435,6 +451,12 @@ PartInstance::PartInstance()
 	STUB(0x1009f220);
 }
 
+// STUB: WEBSERVICE 0x1009f910
+void PartInstance::setPartSizeXml(const Vector3& value)
+{
+	STUB(0x1009f910);
+}
+
 // FUNCTION: WEBSERVICE 0x1009faa0
 void PartInstance::setDragging(bool value)
 {
@@ -558,6 +580,12 @@ void PartInstance::onCameraNear(float distance)
 void PartInstance::render3dAdorn(Adorn* adorn)
 {
 	STUB(0x1009ff60);
+}
+
+// STUB: WEBSERVICE 0x100a0450
+void PartInstance::setPartTypeXml(Part::PartType value)
+{
+	STUB(0x100a0450);
 }
 
 } // namespace RBX

@@ -43,6 +43,30 @@ SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char*
 	classDescriptor.MemberDescriptorContainer<SignalDescriptor>::declare(this);
 }
 
+// STUB: WEBSERVICE 0x10095c50
+boost::shared_ptr<SignalInstance> SignalDescriptor::getSignalInstance(SignalSource& source) const
+{
+	if (source.signals.get() == NULL) {
+		source.signals.reset(new SignalSource::SignalMap());
+	}
+
+	SignalSource::SignalMap::iterator iter = source.signals->find(this);
+
+	if (iter != source.signals->end()) {
+		return iter->second;
+	}
+
+	boost::shared_ptr<SignalInstance> si(newSignalInstance(source));
+
+	(*source.signals)[this] = si;
+
+	if (signalCreatedHook != NULL) {
+		signalCreatedHook(&source);
+	}
+
+	return si;
+}
+
 // STUB: WEBSERVICE 0x10095e80
 SignalSource::~SignalSource()
 {
@@ -51,7 +75,7 @@ SignalSource::~SignalSource()
 // STUB: WEBSERVICE 0x10095ed0
 void SignalSource::disconnect_all_slots()
 {
-	delete signals.release();
+	signals.reset();
 }
 
 } // namespace Reflection

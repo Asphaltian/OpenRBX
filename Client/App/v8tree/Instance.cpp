@@ -21,6 +21,11 @@ Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_chi
 
 Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_childRemoved("ChildRemoved", "child");
 
+Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_ancestryChanged(
+	"AncestryChanged",
+	"child"
+);
+
 Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged(
 	"Changed",
 	"property"

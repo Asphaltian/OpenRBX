@@ -9,6 +9,7 @@
 
 #include <boost/any.hpp>
 #include <boost/function.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/signal.hpp>
 #include <boost/type_traits/function_traits.hpp>
@@ -53,10 +54,10 @@ public:
 
 	void disconnect_all_slots();
 
-protected:
+private:
 	friend class SignalDescriptor;
 
-	std::auto_ptr<SignalMap> signals; // 0x04
+	boost::scoped_ptr<SignalMap> signals; // 0x04
 };
 
 DECOMP_SIZE_ASSERT(SignalSource, 0x08)
@@ -135,12 +136,19 @@ protected:
 
 	SignalInstance* findSignalInstance(const SignalSource* source) const;
 
+private:
 	virtual boost::signals::connection connectGeneric(
 		SignalInstance* instance,
 		GenericSlotWrapper* wrapper,
 		boost::signals::connect_position position
 	) const = 0; // vtable+0x04
 
+	virtual SignalInstance* newSignalInstance(SignalSource& source) const = 0; // vtable+0x08
+
+public:
+	boost::shared_ptr<SignalInstance> getSignalInstance(SignalSource& source) const;
+
+protected:
 	SignalDescriptor(ClassDescriptor& classDescriptor, const char* name);
 
 	SignatureDescriptor signature; // 0x14
@@ -183,10 +191,24 @@ public:
 		return instance == NULL || instance->empty();
 	}
 
+	boost::signals::connection connect(SignalSource* source, const typename TSignalInstance::slot_type& slot, int group)
+	{
+		if (source == NULL) {
+			return boost::signals::connection();
+		}
+
+		return sig(*source).connect(group, slot, boost::signals::at_back);
+	}
+
 protected:
 	TSignalInstance* findSig(const SignalSource* source) const
 	{
 		return static_cast<TSignalInstance*>(findSignalInstance(source));
+	}
+
+	TSignalInstance& sig(SignalSource& source) const
+	{
+		return *static_cast<TSignalInstance*>(getSignalInstance(source).get());
 	}
 
 	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}
@@ -225,6 +247,11 @@ protected:
 			GenericSlotAdapter(wrapper),
 			position
 		);
+	}
+
+	virtual SignalInstance* newSignalInstance(SignalSource& source) const // vtable+0x08
+	{
+		return new typename TSignalDesc<Signature>::TSignalInstance(&source, *this);
 	}
 
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
@@ -275,6 +302,11 @@ protected:
 			GenericSlotAdapter(wrapper),
 			position
 		);
+	}
+
+	virtual SignalInstance* newSignalInstance(SignalSource& source) const // vtable+0x08
+	{
+		return new typename TSignalDesc<Signature>::TSignalInstance(&source, *this);
 	}
 
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
@@ -333,6 +365,11 @@ protected:
 			GenericSlotAdapter(wrapper),
 			position
 		);
+	}
+
+	virtual SignalInstance* newSignalInstance(SignalSource& source) const // vtable+0x08
+	{
+		return new typename TSignalDesc<Signature>::TSignalInstance(&source, *this);
 	}
 
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)

@@ -18,7 +18,11 @@ private:
 
 public:
 	SurfaceType getSurfaceType() const;
+	void setSurfaceType(SurfaceType value);
+
 	Controller::InputType getInput() const;
+	void setSurfaceInput(Controller::InputType value);
+
 	bool isControllable() const;
 };
 

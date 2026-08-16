@@ -25,4 +25,16 @@ bool Surface::isControllable() const
 	return input != Controller::NO_INPUT && input != Controller::CONSTANT_INPUT && input != Controller::SIN_INPUT;
 }
 
+// STUB: WEBSERVICE 0x101043e0
+void Surface::setSurfaceType(SurfaceType value)
+{
+	STUB(0x101043e0);
+}
+
+// STUB: WEBSERVICE 0x10104430
+void Surface::setSurfaceInput(Controller::InputType value)
+{
+	STUB(0x10104430);
+}
+
 } // namespace RBX

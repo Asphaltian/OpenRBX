@@ -9,6 +9,10 @@
 
 namespace RBX {
 
+namespace Reflection {
+class PropertyDescriptor;
+}
+
 // SIZE 0x30
 class Surfaces : public boost::noncopyable
 {
@@ -21,6 +25,9 @@ private:
 	Surface Back;   // 0x28
 
 public:
+	static bool isSurfaceDescriptor(const Reflection::PropertyDescriptor& desc);
+
+	Surface& operator[](NormalId normalId);
 	const Surface& operator[](NormalId normalId) const;
 };
 
