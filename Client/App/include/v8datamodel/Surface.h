@@ -17,6 +17,8 @@ private:
 	NormalId surfId;            // 0x04
 
 public:
+	Surface(PartInstance* partInstance, NormalId surfId);
+
 	SurfaceType getSurfaceType() const;
 	void setSurfaceType(SurfaceType value);
 

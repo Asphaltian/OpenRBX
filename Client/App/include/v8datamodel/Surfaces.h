@@ -25,10 +25,17 @@ private:
 	Surface Back;   // 0x28
 
 public:
-	static bool isSurfaceDescriptor(const Reflection::PropertyDescriptor& desc);
+	static const bool isSurfaceDescriptor(const Reflection::PropertyDescriptor& desc);
+
+	Surfaces(PartInstance* partInstance);
 
 	Surface& operator[](NormalId normalId);
 	const Surface& operator[](NormalId normalId) const;
+
+	const Reflection::PropertyDescriptor& getSurfaceType(NormalId normalId) const;
+	const Reflection::PropertyDescriptor& getSurfaceInput(NormalId normalId) const;
+
+	const bool isStandardPart() const;
 };
 
 DECOMP_SIZE_ASSERT(Surfaces, 0x30)

@@ -184,8 +184,8 @@ static SurfaceEnumPropDescriptor<NORM_Z, Controller::InputType> desc_BackSurface
 	&Surface::setSurfaceInput
 );
 
-// STUB: WEBSERVICE 0x10100bd0
-bool Surfaces::isSurfaceDescriptor(const Reflection::PropertyDescriptor& desc)
+// FUNCTION: WEBSERVICE 0x10100bd0
+const bool Surfaces::isSurfaceDescriptor(const Reflection::PropertyDescriptor& desc)
 {
 	if (&desc == &desc_TopType) {
 		return true;
@@ -210,20 +210,65 @@ bool Surfaces::isSurfaceDescriptor(const Reflection::PropertyDescriptor& desc)
 	return &desc == &desc_BackType;
 }
 
+// FUNCTION: WEBSERVICE 0x10100c10
+const Reflection::PropertyDescriptor& Surfaces::getSurfaceType(NormalId normalId) const
+{
+	switch (normalId) {
+	default:
+		return desc_TopType;
+	case NORM_Y_NEG:
+		return desc_BottomType;
+	case NORM_Z:
+		return desc_BackType;
+	case NORM_Z_NEG:
+		return desc_FrontType;
+	case NORM_X:
+		return desc_RightType;
+	case NORM_X_NEG:
+		return desc_LeftType;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10100c70
+const Reflection::PropertyDescriptor& Surfaces::getSurfaceInput(NormalId normalId) const
+{
+	switch (normalId) {
+	default:
+		return desc_TopSurfaceInput;
+	case NORM_Y_NEG:
+		return desc_BottomSurfaceInput;
+	case NORM_Z:
+		return desc_BackSurfaceInput;
+	case NORM_Z_NEG:
+		return desc_FrontSurfaceInput;
+	case NORM_X:
+		return desc_RightSurfaceInput;
+	case NORM_X_NEG:
+		return desc_LeftSurfaceInput;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10100d90
+Surfaces::Surfaces(PartInstance* partInstance)
+	: Top(partInstance, NORM_Y), Bottom(partInstance, NORM_Y_NEG), Left(partInstance, NORM_X_NEG),
+	  Right(partInstance, NORM_X), Front(partInstance, NORM_Z_NEG), Back(partInstance, NORM_Z)
+{
+}
+
 // STUB: WEBSERVICE 0x10100de0
 const Surface& Surfaces::operator[](NormalId normalId) const
 {
 	switch (normalId) {
-	case NORM_X:
-		return Right;
-	case NORM_Z:
-		return Back;
-	case NORM_X_NEG:
-		return Left;
 	case NORM_Y_NEG:
 		return Bottom;
+	case NORM_Z:
+		return Back;
 	case NORM_Z_NEG:
 		return Front;
+	case NORM_X:
+		return Right;
+	case NORM_X_NEG:
+		return Left;
 	default:
 		return Top;
 	}
@@ -232,19 +277,27 @@ const Surface& Surfaces::operator[](NormalId normalId) const
 Surface& Surfaces::operator[](NormalId normalId)
 {
 	switch (normalId) {
-	case NORM_X:
-		return Right;
-	case NORM_Z:
-		return Back;
-	case NORM_X_NEG:
-		return Left;
 	case NORM_Y_NEG:
 		return Bottom;
+	case NORM_Z:
+		return Back;
 	case NORM_Z_NEG:
 		return Front;
+	case NORM_X:
+		return Right;
+	case NORM_X_NEG:
+		return Left;
 	default:
 		return Top;
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x10100e30
+const bool Surfaces::isStandardPart() const
+{
+	return Bottom.getSurfaceType() == INLET && Front.getSurfaceType() == NO_SURFACE &&
+		   Back.getSurfaceType() == NO_SURFACE && Left.getSurfaceType() == NO_SURFACE &&
+		   Right.getSurfaceType() == NO_SURFACE;
 }
 
 } // namespace RBX

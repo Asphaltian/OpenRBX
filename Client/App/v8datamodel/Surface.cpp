@@ -5,6 +5,11 @@
 
 namespace RBX {
 
+// FUNCTION: WEBSERVICE 0x10104260
+Surface::Surface(PartInstance* partInstance, NormalId surfId) : partInstance(partInstance), surfId(surfId)
+{
+}
+
 // FUNCTION: WEBSERVICE 0x10104280
 SurfaceType Surface::getSurfaceType() const
 {

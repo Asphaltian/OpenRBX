@@ -444,7 +444,7 @@ EnumDesc<PartInstance::FormFactor>::EnumDesc() : EnumDescriptor("FormFactor", ty
 
 // STUB: WEBSERVICE 0x1009f220
 PartInstance::PartInstance()
-	: DescribedCreatable<PartInstance, PVInstance, sPart>(sPart),
+	: DescribedCreatable<PartInstance, PVInstance, sPart>(sPart), surfaces(this),
 	  PersistentPart(this, &PartInstance::computePersistentPart),
 	  SurfacesNeedAdorn(this, &PartInstance::computeSurfacesNeedAdorn)
 {
