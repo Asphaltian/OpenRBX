@@ -317,22 +317,23 @@ Extents PartInstance::getExtentsLocal() const
 	return Extents(-corner, corner);
 }
 
-// STUB: WEBSERVICE 0x1009b610
+// FUNCTION: WEBSERVICE 0x1009b610
 Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 {
-	Vector3 size =
-		Math::iRoundVector3(Vector3(std::max(1.0f, uiSize.x), std::max(1.0f, uiSize.y), std::max(1.0f, uiSize.z)));
+	Vector3 gridUiSize = Math::iRoundVector3(uiSize.max(Vector3(1, 1, 1)));
+
+	Vector3 xmlSize = gridUiSize;
 
 	switch (formFactor) {
 	case BRICK:
-		size.y *= 1.2f;
+		xmlSize.y *= 1.2f;
 		break;
 	case PLATE:
-		size.y *= 0.4f;
+		xmlSize.y *= 0.4f;
 		break;
 	}
 
-	return size;
+	return xmlSize;
 }
 
 // STUB: WEBSERVICE 0x1009b6e0
@@ -676,7 +677,7 @@ void PartInstance::setPartTypeXml(Part::PartType _type)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a04e0
+// FUNCTION: WEBSERVICE 0x100a04e0
 void PartInstance::setPartTypeUi(Part::PartType _type)
 {
 	if (partType != _type) {
@@ -689,7 +690,10 @@ void PartInstance::setPartTypeUi(Part::PartType _type)
 		setPartTypeXml(_type);
 
 		if (_type != Part::BLOCK_PART) {
-			setPartSizeXml(uiToXmlSize(getPartSizeXml()));
+			Vector3 xmlSize = uiToXmlSize(getPartSizeUi());
+
+			setPartSizeXml(xmlSize);
+			safeMove();
 		}
 
 		safeMove();
