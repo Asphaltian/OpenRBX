@@ -113,9 +113,8 @@ public:
 
 	bool getPartLocked() const { return locked; }
 
-	Surfaces& getSurfaces() { return surfaces; }
-
-	const Surfaces& getSurfaces() const { return surfaces; }
+	Surfaces& getSurfaces();
+	const Surfaces& getSurfaces() const;
 
 	bool getIsTransparent() const { return 1.0f - (1.0f - transparency) * alphaModifier > 0.1f; }
 
@@ -153,6 +152,8 @@ public:
 	void setColor3(const G3D::Color3& value);
 
 	void setColor(BrickColor value);
+
+	void onSurfaceChanged(NormalId normalId);
 
 	virtual void onCanAggregateChanged(bool canAggregate);
 	virtual bool reportTouches() const;

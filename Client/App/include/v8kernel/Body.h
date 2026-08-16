@@ -130,7 +130,7 @@ public:
 	void accumulateTorque(const Vector3& torque);
 	void resetAccumulators();
 
-	bool getCanThrottle() const { return canThrottle; }
+	const bool getCanThrottle() const { return canThrottle; }
 
 	void setParent(Body* value);
 	void setMeInParent(Link* value);

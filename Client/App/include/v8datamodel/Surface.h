@@ -20,7 +20,7 @@ public:
 	Surface(PartInstance* partInstance, NormalId surfId);
 
 	SurfaceType getSurfaceType() const;
-	void setSurfaceType(SurfaceType value);
+	void setSurfaceType(SurfaceType type);
 
 	Controller::InputType getInput() const;
 	void setSurfaceInput(Controller::InputType value);

@@ -30,10 +30,14 @@ bool Surface::isControllable() const
 	return input != Controller::NO_INPUT && input != Controller::CONSTANT_INPUT && input != Controller::SIN_INPUT;
 }
 
-// STUB: WEBSERVICE 0x101043e0
-void Surface::setSurfaceType(SurfaceType value)
+// FUNCTION: WEBSERVICE 0x101043e0
+void Surface::setSurfaceType(SurfaceType type)
 {
-	STUB(0x101043e0);
+	if (type != getSurfaceType()) {
+		partInstance->getPrimitive()->setSurfaceType(surfId, type);
+		partInstance->onSurfaceChanged(surfId);
+		partInstance->raisePropertyChanged(partInstance->getSurfaces().getSurfaceType(surfId));
+	}
 }
 
 // STUB: WEBSERVICE 0x10104430

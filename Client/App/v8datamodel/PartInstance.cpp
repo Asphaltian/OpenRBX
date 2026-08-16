@@ -122,6 +122,18 @@ void PartInstance::onChildAdded(Instance* child)
 	PVInstance::onChildAdded(child);
 }
 
+// FUNCTION: WEBSERVICE 0x1009a8e0 FOLDED
+Surfaces& PartInstance::getSurfaces()
+{
+	return surfaces;
+}
+
+// FUNCTION: WEBSERVICE 0x1009a8e0 FOLDED
+const Surfaces& PartInstance::getSurfaces() const
+{
+	return surfaces;
+}
+
 // FUNCTION: WEBSERVICE 0x1009ae00
 void PartInstance::setName(const std::string& value)
 {
@@ -205,6 +217,12 @@ bool PartInstance::isControllable() const
 	}
 
 	return false;
+}
+
+// STUB: WEBSERVICE 0x1009aff0
+void PartInstance::onSurfaceChanged(NormalId normalId)
+{
+	STUB(0x1009aff0);
 }
 
 // FUNCTION: WEBSERVICE 0x1009b080
