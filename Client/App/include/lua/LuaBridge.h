@@ -284,6 +284,8 @@ void SharedPtrBridge<T>::push(lua_State* L, boost::shared_ptr<T> instance)
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100ab1b0
 // ?getPtr@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA?AV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@I@Z
+// TEMPLATE: WEBSERVICE 0x1005f010
+// RBX::Lua::Bridge<RBX::BrickColor,1>::getObject
 // clang-format on
 template <class T>
 boost::shared_ptr<T> SharedPtrBridge<T>::getPtr(lua_State* L, unsigned int index)

@@ -222,6 +222,13 @@ inline Body* Body::calcRoot()
 	return parent != NULL ? parent->calcRoot() : this;
 }
 
+// clang-format off
+// FUNCTION: WEBSERVICE 0x100e9fe0
+// RBX::Body::getBranchIBodyV3
+// FUNCTION: WEBSERVICE 0x100ea1c0
+// RBX::Body::getBranchTorque
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8KERNEL_BODY_H

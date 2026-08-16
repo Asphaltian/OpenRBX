@@ -130,6 +130,18 @@ void Notifier<Source, Event>::raise(Event event, Listener<Source, Event>* listen
 // RBX::Notifier<RBX::World,RBX::AutoJoin>::raise
 // FUNCTION: WEBSERVICE 0x100cf790
 // RBX::Notifier<RBX::World,RBX::AutoDestroy>::raise
+// TEMPLATE: WEBSERVICE 0x100485a0
+// RBX::Notifier<RBX::Instance,RBX::ChildAdded>::raise
+// TEMPLATE: WEBSERVICE 0x100486c0
+// RBX::Notifier<RBX::Instance,RBX::ChildRemoved>::raise
+// TEMPLATE: WEBSERVICE 0x10049220
+// RBX::Notifier<RBX::Instance,RBX::ChildAdded>::raise
+// TEMPLATE: WEBSERVICE 0x10049300
+// RBX::Notifier<RBX::Instance,RBX::ChildRemoved>::raise
+// TEMPLATE: WEBSERVICE 0x1006b500
+// RBX::Notifier<RBX::Workspace,RBX::DrawChanged>::raise
+// TEMPLATE: WEBSERVICE 0x1006bc40
+// RBX::Notifier<RBX::Workspace,RBX::DrawChanged>::raise
 // clang-format on
 template <class Source, class Event>
 void Notifier<Source, Event>::raise(Event event) const throw()

@@ -36,6 +36,11 @@ public:
 
 DECOMP_SIZE_ASSERT(ICameraSubject, 0x0c)
 
+// clang-format off
+// FUNCTION: WEBSERVICE 0x1005aa00
+// RBX::ICameraSubject::getLerp
+// clang-format on
+
 } // namespace RBX
 
 #endif // UTIL_ICAMERASUBJECT_H

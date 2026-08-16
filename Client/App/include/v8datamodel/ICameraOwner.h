@@ -37,6 +37,11 @@ public:
 
 DECOMP_SIZE_ASSERT(ICameraOwner, 0x14)
 
+// clang-format off
+// FUNCTION: WEBSERVICE 0x100c1210
+// RBX::ICameraOwner::~ICameraOwner
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_ICAMERAOWNER_H

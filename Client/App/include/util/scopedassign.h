@@ -19,6 +19,11 @@ private:
 	T oldValue; // 0x04
 };
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1019bf50
+// RBX::ScopedAssign<int>::~ScopedAssign<int>
+// clang-format on
+
 } // namespace RBX
 
 #endif // UTIL_SCOPEDASSIGN_H
