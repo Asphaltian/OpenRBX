@@ -358,9 +358,9 @@ Part PartInstance::computePersistentPart() const
 	return Part(
 		partType,
 		getPartSizeXml(),
-		G3D::Color4(getColor3(), 1.0f - (1.0f - transparency) * alphaModifier),
+		G3D::Color4(getColor3(), 1.0f - (1.0f - (1.0f - transparency) * alphaModifier)),
 		surfaces.surf6(),
-		primitive->getCoordinateFrame()
+		getCoordinateFrame()
 	);
 }
 
