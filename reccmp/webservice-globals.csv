@@ -4673,6 +4673,7 @@ address,type,symbol
 0x102d97e8,global,??_R0?AVContactConnector@RBX@@@8
 0x102d9810,global,??_R0?AVKernel@RBX@@@8
 0x102d982c,global,??_R0?AVIStage@RBX@@@8
+0x102d991c,global,??_R0?AVPlayer@Network@RBX@@@8
 0x102d9d54,global,??_R0?AVLineSegment@G3D@@@8
 0x102d9d74,global,??_R0?AVRigidJoint@RBX@@@8
 0x102d9d94,global,??_R0?AVJoint@RBX@@@8
@@ -5419,6 +5420,7 @@ address,type,symbol
 0x102f6be8,global,flag___RBX::Name::declare<&RBX::sAccoutrement>
 0x102f6bec,global,flag___RBX::Name::declare<&RBX::sHat>
 0x102f6bf0,global,flag___RBX::Name::declare<&RBX::Network::sPlayers>
+0x102f6c00,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Network::Players>
 0x102f6c04,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Teams>
 0x102f6c08,global,isNullClassName___RBX::ServiceProvider::find<RBX::LocalBackpack>
 0x102f6c0c,global,??_B?8???$find@VLocalBackpack@RBX@@@ServiceProvider@RBX@@QBEPAVLocalBackpack@1@XZ@58

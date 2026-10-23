@@ -9,6 +9,9 @@
 #include <boost/shared_ptr.hpp>
 
 namespace RBX {
+
+class ModelInstance;
+
 namespace Network {
 
 extern char sPlayer[];
@@ -37,6 +40,9 @@ DECOMP_SIZE_ASSERT(CharacterRemoving, 0x8)
 class Player : public Instance, public Notifier<Player, CharacterAdded>, public Notifier<Player, CharacterRemoving>
 {
 public:
+	// FUNCTION: WEBSERVICE 0x100ca220
+	ModelInstance* getCharacter() const { return character.get(); }
+
 	// FUNCTION: WEBSERVICE 0x100cd080
 	BrickColor getTeamColor() const { return teamColor; }
 
@@ -47,10 +53,10 @@ public:
 	void setNeutral(bool value);
 
 private:
-	undefined m_unk0x128[0x130 - 0x128]; // 0x128
-	BrickColor teamColor;                // 0x130
-	bool neutral;                        // 0x134
-	undefined m_unk0x135[0x178 - 0x135]; // 0x135
+	boost::shared_ptr<ModelInstance> character; // 0x128
+	BrickColor teamColor;                       // 0x130
+	bool neutral;                               // 0x134
+	undefined m_unk0x135[0x178 - 0x135];        // 0x135
 };
 
 DECOMP_SIZE_ASSERT(Player, 0x178)

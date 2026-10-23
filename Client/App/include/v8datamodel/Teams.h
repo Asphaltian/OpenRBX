@@ -17,7 +17,7 @@ extern const char sTeams[];
 class Teams : public DescribedCreatable<Teams, Instance, sTeams>, public Service
 {
 public:
-	G3D::Color3 getTeamColorForHumanoid(Humanoid* humanoid);
+	G3D::Color3 getTeamColorForHumanoid(Humanoid* h);
 
 private:
 	undefined m_unk0x0f8[0x100 - 0x0f8]; // 0x0f8

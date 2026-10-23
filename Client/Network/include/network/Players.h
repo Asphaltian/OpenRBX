@@ -29,11 +29,11 @@ struct ChatMessage
 DECOMP_SIZE_ASSERT(ChatMessage, 0x2c)
 
 // SIZE 0x158
-class Players : public Instance,
+class Players : public DescribedNonCreatable<Players, Instance, sPlayers>,
+				public Service,
 				public Notifier<Players, ChatMessage>,
 				public Notifier<Players, SuperSafeChanged>,
-				public Listener<Player, CharacterAdded>,
-				public Service
+				public Listener<Player, CharacterAdded>
 {
 public:
 	// FUNCTION: WEBSERVICE 0x10190c40

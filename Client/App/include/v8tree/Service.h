@@ -65,18 +65,26 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::Notifier<RBX::ServiceProvider,RBX::ServiceRemoving>::raise
 // FUNCTION: WEBSERVICE 0x10071ad0
 // RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>
+// TEMPLATE: WEBSERVICE 0x10072450
+// RBX::ServiceProvider::doGetClassIndex<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x100724b0
 // RBX::ServiceProvider::doGetClassIndex<RBX::Teams>
+// TEMPLATE: WEBSERVICE 0x100733a0
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x100733b0
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Teams>
 // STUB: WEBSERVICE 0x100784c0
 // RBX::ServiceProvider::find<RBX::Teams>
+// STUB: WEBSERVICE 0x10078670
+// RBX::ServiceProvider::find<RBX::Network::Players>
 // FUNCTION: WEBSERVICE 0x10079520
 // RBX::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>
 // FUNCTION: WEBSERVICE 0x1007aa60
 // RBX::ServiceProvider::ServiceProvider
 // TEMPLATE: WEBSERVICE 0x100a41f0
 // RBX::ServiceProvider::find<RBX::Teams>
+// TEMPLATE: WEBSERVICE 0x100dac50
+// RBX::ServiceProvider::find<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x10106140
 // RBX::ServiceProvider::doGetClassIndex<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106670
