@@ -256,17 +256,15 @@ public:
 	// FUNCTION: WEBSERVICE 0x10047d90
 	bool isDescendentOf(const Instance* ancestor) const
 	{
-		const Instance* walk = parent;
-
-		while (ancestor != walk) {
-			if (walk == 0) {
-				return false;
-			}
-
-			walk = walk->parent;
+		if (ancestor == parent) {
+			return true;
 		}
 
-		return true;
+		if (parent != NULL) {
+			return parent->isDescendentOf(ancestor);
+		}
+
+		return false;
 	}
 
 private:

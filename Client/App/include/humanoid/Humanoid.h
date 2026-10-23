@@ -17,6 +17,7 @@
 
 namespace RBX {
 
+class ModelInstance;
 class Body;
 class Controller;
 class World;
@@ -72,6 +73,8 @@ public:
 	static Reflection::SignalDesc<Humanoid, void(bool)> event_Seated;
 
 	virtual ~Humanoid();
+
+	static PartInstance* getHeadFromCharacter(const ModelInstance* character);
 
 	Body* getTorsoBody();
 	Body* getRootBody();

@@ -57,6 +57,13 @@ SignalDesc<Humanoid, void(bool)> Humanoid::event_GettingUp("GettingUp", "active"
 SignalDesc<Humanoid, void(bool)> Humanoid::event_FallingDown("FallingDown", "active");
 SignalDesc<Humanoid, void(bool)> Humanoid::event_Seated("Seated", "active");
 
+// STUB: WEBSERVICE 0x100a0830
+PartInstance* Humanoid::getHeadFromCharacter(const ModelInstance* character)
+{
+	STUB(0x100a0830);
+	return NULL;
+}
+
 // FUNCTION: WEBSERVICE 0x100a0990
 ContactManager* Humanoid::getContactManager()
 {

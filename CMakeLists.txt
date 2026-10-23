@@ -228,6 +228,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/v8datamodel/DataModel.cpp
   Client/App/v8datamodel/DebrisService.cpp
   Client/App/v8datamodel/Explosion.cpp
+  Client/App/v8datamodel/Filters.cpp
   Client/App/v8datamodel/ForceField.cpp
   Client/App/v8datamodel/GameSettings.cpp
   Client/App/v8datamodel/GeometryService.cpp

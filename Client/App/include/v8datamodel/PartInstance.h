@@ -116,6 +116,7 @@ public:
 	Surfaces& getSurfaces();
 	const Surfaces& getSurfaces() const;
 
+	// FUNCTION: WEBSERVICE 0x10115a90
 	bool getIsTransparent() const { return 1.0f - (1.0f - transparency) * alphaModifier > 0.1f; }
 
 	const CoordinateFrame& getCoordinateFrame() const;
