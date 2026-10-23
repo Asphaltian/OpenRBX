@@ -294,4 +294,9 @@ Instance::Instance(const char* name) : name(name), parent(0), archivable(true)
 	STUB(0x1004ec70);
 }
 
+// FUNCTION: WEBSERVICE 0x101019f0 FOLDED
+void Instance::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+}
+
 } // namespace RBX

@@ -139,7 +139,7 @@ public:
 	}
 
 	template <class T>
-	T* create()
+	T* create() const
 	{
 		T* t = find<T>();
 		if (t == NULL) {
@@ -149,7 +149,7 @@ public:
 
 			unsigned int index = getClassIndex<T>();
 			serviceArray[index] = s;
-			t->setParent(this);
+			t->setParent(const_cast<ServiceProvider*>(this));
 		}
 
 		return t;
@@ -196,7 +196,7 @@ public:
 			context = context->getParent();
 		}
 
-		return const_cast<ServiceProvider*>(provider)->create<T>();
+		return provider->create<T>();
 	}
 
 protected:

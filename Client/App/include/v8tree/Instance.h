@@ -141,8 +141,10 @@ protected:
 	virtual void readProperty(const XmlElement* element, IReferenceBinder& binder); // vtable+0x2c
 
 public:
-	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider) {
-	} // vtable+0x30
+	virtual void onServiceProvider(
+		const ServiceProvider* oldProvider,
+		const ServiceProvider* newProvider
+	);                                                               // vtable+0x30
 	virtual shared_ptr<Instance> createChild(const Name& className); // vtable+0x34
 	virtual XmlElement* write();                                     // vtable+0x38
 
