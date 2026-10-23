@@ -1,5 +1,3 @@
-; WebService.def : Declares the module parameters for WebService.dll.
-
 LIBRARY "WebService"
 
 EXPORTS

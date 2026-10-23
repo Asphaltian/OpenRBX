@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.25...4.2 FATAL_ERROR)
 
-# MSVC runtime library flags are selected by an abstraction
 cmake_policy(SET CMP0091 NEW)
 
 project(openrbx C CXX)
@@ -21,9 +20,6 @@ if (ENABLE_CLANG_TIDY)
   set(CMAKE_C_CLANG_TIDY "${CLANG_TIDY_BIN}")
   set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_BIN}" "--extra-arg=/EHsc")
 
-  # Contact.cpp binds a temporary to the non-const reference getClosestEdge records, which
-  # MSVC 8 accepts as an extension. Naming the temporary is conformant and costs the caller
-  # eight points, so the original relied on the extension and the source has to as well.
   set_source_files_properties(Client/App/v8world/Contact.cpp PROPERTIES SKIP_LINTING ON)
 endif()
 
@@ -33,7 +29,6 @@ if (NOT bits EQUAL 32)
   message(WARNING "Only 32-bit binaries are supported")
 endif()
 
-# Only cl 14.00.50727.762 (VC8 SP1) reproduces the original codegen.
 set(MSVC_FOR_DECOMP FALSE)
 if (MSVC)
   if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "14.0" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS "15.0")
@@ -75,8 +70,6 @@ if(IWYU_BIN)
   set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "${IWYU_BIN}" -target i686-pc-windows-msvc "-Xiwyu" "--mapping_file=${PROJECT_SOURCE_DIR}/tools/iwyu.imp")
 endif()
 
-# --- Third party dependencies ---
-# Lua went into app.lib and SDL is headers only, so neither has a library here.
 set(OPENRBX_3RDPARTY "${PROJECT_SOURCE_DIR}/3rdparty")
 
 set(OPENRBX_BOOST_INCLUDE_DIR "${OPENRBX_3RDPARTY}/boost_1_34_1")
@@ -89,25 +82,19 @@ set(OPENRBX_G3D_EXTRA_INCLUDE_DIRS
   "${OPENRBX_3RDPARTY}/g3d/source/zlib"
 )
 
-# FMOD ships fmodex_vc.lib prebuilt, so it is always on disk.
 add_library(fmodex IMPORTED UNKNOWN)
 set_property(TARGET fmodex PROPERTY IMPORTED_LOCATION "${OPENRBX_3RDPARTY}/fmod/api/lib/fmodex_vc.lib")
 set_property(TARGET fmodex PROPERTY INTERFACE_INCLUDE_DIRECTORIES "${OPENRBX_3RDPARTY}/fmod/api/inc")
 
-# Built from source next door, under the names the original linked.
 add_subdirectory(3rdparty)
 
 set(OPENRBX_BOOST_LIBS boost_signals boost_thread)
 set(OPENRBX_G3D_LIBS   graphics3d glg3d)
 set(OPENRBX_MESA_LIBS  opengl32 glu32 osmesa32)
 
-# Below here is ours. The vendored targets already exist, so their /W0 never meets this.
 if (MSVC)
   add_compile_options(/W3)
 endif()
-
-# --- Engine libraries ---
-# One OBJECT library per Roblox static library. Link order decides which folded copy survives.
 
 set(OPENRBX_APP_SOURCES
   Client/App/security/SecurityContext.cpp
@@ -275,7 +262,6 @@ set(OPENRBX_NETWORK_SOURCES
   Client/Network/Server.cpp
 )
 
-# The Network project built these 21 objects into network.lib itself; only _CRT_SECURE_NO_WARNINGS differs.
 set(OPENRBX_RAKNET_SOURCES
   3rdparty/RakNet30/Source/BitStream.cpp
   3rdparty/RakNet30/Source/CheckSum.cpp
@@ -339,7 +325,6 @@ set(OPENRBX_ENGINE_INCLUDE_DIRS
   "${PROJECT_SOURCE_DIR}/util"
 )
 
-# On the command line of every Roblox library.
 set(OPENRBX_3RDPARTY_INCLUDE_DIRS
   "${OPENRBX_BOOST_INCLUDE_DIR}"
   "${OPENRBX_G3D_INCLUDE_DIR}"
@@ -348,7 +333,6 @@ set(OPENRBX_3RDPARTY_INCLUDE_DIRS
   "${OPENRBX_SDL_INCLUDE_DIR}"
 )
 
-# Verbatim from the command lines in WebService.pdb. _VC80_UPGRADE marks a VS2003 conversion.
 set(OPENRBX_COMMON_DEFINITIONS
   WIN32
   NDEBUG
@@ -359,7 +343,6 @@ set(OPENRBX_COMMON_DEFINITIONS
 
 set(OPENRBX_ENGINE_LIBRARIES)
 
-# Creates an OBJECT library only when it has sources, so the tree configures while empty.
 function(add_engine_library NAME)
   cmake_parse_arguments(ARGS "" "" "DEFINITIONS;OPTIONS;SOURCES" ${ARGN})
   if (NOT ARGS_SOURCES)
@@ -372,15 +355,11 @@ function(add_engine_library NAME)
   if (MSVC_FOR_DECOMP AND ARGS_OPTIONS)
     target_compile_options(${NAME} PRIVATE ${ARGS_OPTIONS})
   elseif (MSVC)
-    # boost::thread throws. The decomp build carries /EHsc in CMAKE_CXX_FLAGS, the conformance
-    # build has nothing of its own, and clang-tidy reads the flags off the target.
     target_compile_options(${NAME} PRIVATE /EHsc)
   endif()
   set(OPENRBX_ENGINE_LIBRARIES ${OPENRBX_ENGINE_LIBRARIES} ${NAME} PARENT_SCOPE)
 endfunction()
 
-# Lua 5.1.1 went into app.lib as 25 translation units. The recorded command block carries -TP,
-# so the original compiled these .c files as C++ and their symbols are C++ mangled.
 set(OPENRBX_LUA_SOURCES
   "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lapi.c"
   "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lauxlib.c"
@@ -415,19 +394,16 @@ add_engine_library(lua
   SOURCES ${OPENRBX_LUA_SOURCES}
 )
 
-# /GS- /fp:fast and full inline expansion are unique to App among the Roblox libraries.
 add_engine_library(app
   DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE
   OPTIONS /O2 /Ob2 /Oi /Oy /GF /Gy /GS- /fp:fast
   SOURCES ${OPENRBX_APP_SOURCES}
 )
 
-# App is the only library that touches FMOD, from Sound.cpp.
 if (TARGET app)
   target_link_libraries(app PRIVATE fmodex)
 endif()
 
-# Network does not define _CRT_SECURE_NO_WARNINGS; only the RakNet files inside it do.
 add_engine_library(network
   OPTIONS /O2
   SOURCES ${OPENRBX_NETWORK_SOURCES} ${OPENRBX_RAKNET_SOURCES}
@@ -450,14 +426,11 @@ add_engine_library(appdraw
   SOURCES ${OPENRBX_APPDRAW_SOURCES}
 )
 
-# RenderLib is the only library built with /Wp64.
 add_engine_library(renderlib
   OPTIONS /O2 /Wp64
   SOURCES ${OPENRBX_RENDERLIB_SOURCES}
 )
 
-# --- WebService.dll target ---
-# The only objects compiled /GL, so the link ran /LTCG.
 set(OPENRBX_WEBSERVICE_SOURCES
   WebService/ThumbnailGenerator.cpp
   WebService/WebService.cpp
@@ -473,7 +446,6 @@ target_compile_definitions(webservice PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _USR
   _ATL_NO_COM_SUPPORT)
 reccmp_add_target(webservice ID WEBSERVICE)
 
-# ThumbnailGenerator is the only file that includes a Mesa header.
 target_include_directories(webservice PRIVATE
   "${PROJECT_SOURCE_DIR}/WebService"
   ${OPENRBX_ENGINE_INCLUDE_DIRS}
@@ -481,18 +453,17 @@ target_include_directories(webservice PRIVATE
   "${OPENRBX_MESA_INCLUDE_DIR}"
 )
 
+
 if (OPENRBX_ENGINE_LIBRARIES)
   target_link_libraries(webservice PRIVATE ${OPENRBX_ENGINE_LIBRARIES})
 endif()
 
-# opengl32 and glu32 here are Mesa's, not the system libraries.
 target_link_libraries(webservice PRIVATE
   ${OPENRBX_G3D_LIBS}
   ${OPENRBX_BOOST_LIBS}
   ${OPENRBX_MESA_LIBS}
 )
 
-# fmodex_vc.lib was pulled in at the final link of WebService.dll, not into app.lib.
 target_link_libraries(webservice PRIVATE fmodex)
 add_custom_command(TARGET webservice POST_BUILD
   COMMAND "${CMAKE_COMMAND}" -E copy_if_different
@@ -500,7 +471,6 @@ add_custom_command(TARGET webservice POST_BUILD
   COMMENT "Copying fmodex.dll next to WebService.dll"
 )
 
-# From the import table of the original binary.
 target_link_libraries(webservice PRIVATE
   advapi32
   dbghelp
@@ -531,12 +501,10 @@ set_property(TARGET webservice PROPERTY SUFFIX ".dll")
 
 add_custom_target(rbxgs DEPENDS webservice)
 
-# --- Modern compiler compatibility ---
 if (MSVC)
   if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "15")
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
   endif()
-  # Visual Studio 2017 version 15.7 needs "/Zc:__cplusplus" for __cplusplus
   if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "19.14.26428")
     add_compile_options(-Zc:__cplusplus)
   endif()
@@ -544,13 +512,11 @@ endif()
 
 if (OPENRBX_DECOMP_ASSERT)
   message(STATUS "Decomp asserts enabled")
-  # The size assertions live in the engine headers, so every target needs this, not just the DLL.
   set_property(TARGET webservice ${OPENRBX_ENGINE_LIBRARIES}
     APPEND PROPERTY COMPILE_DEFINITIONS "ENABLE_DECOMP_ASSERTS")
 endif()
 
 if (MSVC_FOR_DECOMP)
-  # util/decomp.cpp is ours, not theirs, so it stays out of the LTCG list.
   if (OPENRBX_WEBSERVICE_SOURCES)
     set_source_files_properties(
       ${OPENRBX_WEBSERVICE_SOURCES}
@@ -559,7 +525,6 @@ if (MSVC_FOR_DECOMP)
     target_link_options(webservice PRIVATE "/LTCG")
   endif()
 
-  # The original linked /OPT:REF. Keeping the COMDATs costs no accuracy; turn off once reachable.
   option(OPENRBX_KEEP_UNREFERENCED "Keep unreferenced functions so reccmp can compare them" ON)
   if (OPENRBX_KEEP_UNREFERENCED)
     target_link_options(webservice PRIVATE "/OPT:NOREF,ICF")
@@ -567,20 +532,16 @@ if (MSVC_FOR_DECOMP)
     target_link_options(webservice PRIVATE "/OPT:REF,ICF")
   endif()
 
-  # Every Roblox object used the shared CRT (/MD) and depends on Microsoft.VC80.CRT 8.0.50727.762.
   set_property(TARGET webservice PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
-  # The original shipped a separate PDB (/Zi), not embedded debug info.
   set_property(TARGET webservice PROPERTY MSVC_DEBUG_INFORMATION_FORMAT "$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>")
 
-  # The original also passed /X with every system include listed. Not reproduced, no codegen effect.
   set(CMAKE_CXX_FLAGS "/EHsc /TP /GR /nologo")
   set(CMAKE_CXX_FLAGS_DEBUG "/Od /D_DEBUG")
   set(CMAKE_CXX_FLAGS_RELEASE "/O2 /DNDEBUG")
   set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/O2 /Zi /DNDEBUG")
   set(CMAKE_CXX_FLAGS_MINSIZEREL "/O1 /DNDEBUG")
 
-  # As above without /TP, which would compile G3D's vendored C as C++.
   set(CMAKE_C_FLAGS "/nologo")
   set(CMAKE_C_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
   set(CMAKE_C_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
@@ -671,4 +632,3 @@ foreach(target ${RECCMP_TARGETS})
   )
   add_dependencies(show-progress show-progress-${reccmp_id})
 endforeach()
-

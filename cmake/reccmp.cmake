@@ -1,10 +1,8 @@
-# Find reccmp-ghidra-import for adding reccmp-import-ghidra-<ID> build targets
 find_program(RECCMP_GHIDRA_IMPORT_BIN
     NAMES reccmp-ghidra-import
     DOC "Path of reccmp-ghidra-import"
 )
 if(EXISTS "${RECCMP_GHIDRA_IMPORT_BIN}")
-    # Avoid running multiple reccmp-ghidra-import in parallel
     set_property(GLOBAL APPEND PROPERTY JOB_POOLS "reccmp_import_ghidra_job_pool=1")
     add_custom_target(reccmp-import-ghidra)
 endif()

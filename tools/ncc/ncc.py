@@ -1,27 +1,5 @@
 #!/usr/bin/env python
 
-# MIT License
-#
-# Copyright (c) 2018 Nithin Nellikunnu (nithin.nn@gmail.com)
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 import logging
 import argparse
 import yaml
@@ -36,13 +14,10 @@ from clang.cindex import StorageClass
 from clang.cindex import TypeKind
 from clang.cindex import Config
 
-
-# Clang cursor kind to ncc Defined cursor map
 default_rules_db = {}
 clang_to_user_map = {}
 special_kind = {CursorKind.STRUCT_DECL: 1, CursorKind.CLASS_DECL: 1}
 file_extensions = [".c", ".cpp", ".h", ".hpp"]
-
 
 class Rule(object):
     def __init__(self, name, clang_kind, parent_kind=None, pattern_str='^.*$'):
@@ -62,7 +37,6 @@ class Rule(object):
             sys.stderr.write(msg)
             return False
         return True
-
 
 class ScopePrefixRule(object):
     def __init__(self, pattern_obj):
@@ -92,7 +66,6 @@ class ScopePrefixRule(object):
                 sys.stderr.write('Did you mean rule name: {} ?\n'.format(fixit[0]))
             sys.exit(1)
 
-
 class DataTypePrefixRule(object):
     def __init__(self, pattern_obj):
         self.name = "DataTypePrefix"
@@ -117,7 +90,6 @@ class DataTypePrefixRule(object):
             if fixit:
                 sys.stderr.write('Did you mean rule name: {} ?\n'.format(fixit[0]))
             sys.exit(1)
-
 
 class VariableNameRule(object):
     def __init__(self, pattern_obj=None):
@@ -192,8 +164,6 @@ class VariableNameRule(object):
 
         return True
 
-
-# All supported rules
 default_rules_db["StructName"] = Rule("StructName", CursorKind.STRUCT_DECL)
 default_rules_db["UnionName"] = Rule("UnionName", CursorKind.UNION_DECL)
 default_rules_db["ClassName"] = Rule("ClassName", CursorKind.CLASS_DECL)
@@ -337,14 +307,11 @@ default_rules_db["InclusionDirective"] = Rule("InclusionDirective", CursorKind.I
 default_rules_db["TypeAliasTeplateDeclaration"] = Rule(
     "TypeAliasTeplateDeclaration", CursorKind.TYPE_ALIAS_TEMPLATE_DECL)
 
-# Reverse lookup map. The parse identifies Clang cursor kinds, which must be mapped
-# to user defined types
 for key, value in default_rules_db.items():
     clang_to_user_map[value.clang_kind] = key
 default_rules_db["VariableName"] = Rule("VariableName", CursorKind.VAR_DECL)
 clang_to_user_map[CursorKind.FIELD_DECL] = "VariableName"
 clang_to_user_map[CursorKind.VAR_DECL] = "VariableName"
-
 
 class AstNodeStack(object):
     def __init__(self):
@@ -360,7 +327,6 @@ class AstNodeStack(object):
         if len(self.stack) > 0:
             return self.stack[-1]
         return None
-
 
 class Options:
     def __init__(self):
@@ -412,9 +378,6 @@ class Options:
                                  help="Read list of items to ignore during the check. "
                                  "User can use the skip file to specify character sequences that should "
                                  "be ignored by ncc")
-
-        # self.parser.add_argument('--exclude-dir', dest='exclude_dir', help="Skip the directories"
-        #                          "matching the pattern specified")
 
         self.parser.add_argument('--path', dest='path', nargs="+",
                                  help="Path of file or directory")
@@ -509,15 +472,10 @@ class RulesDb(object):
         return False
 
     def get_rule_names(self, kind):
-        """
-        Multiple user defined rules can be configured against one type of ClangKind
-        For e.g. ClassMemberVariable, StructMemberVariable are types of FIELD_DECL
-        """
         return self.__clang_db.get(kind)
 
     def get_rule(self, rule_name):
         return self.__rule_db.get(rule_name)
-
 
 class Validator(object):
     def __init__(self, rule_db, filename, options, skip_db=None):
@@ -546,16 +504,10 @@ class Validator(object):
         return self.check(self.cursor)
 
     def check(self, node):
-        """
-        Recursively visit all nodes of the AST and match against the patter provided by
-        the user. Return the total number of errors caught in the file
-        """
         errors = 0
         for child in node.get_children():
             if self.is_local(child, self.filename):
 
-                # This is the case when typedef of struct is causing double reporting of error
-                # TODO: Find a better way to handle it
                 parent = self.node_stack.peek()
                 if (parent and parent == CursorKind.TYPEDEF_DECL and
                         child.kind == CursorKind.STRUCT_DECL):
@@ -563,9 +515,6 @@ class Validator(object):
 
                 errors += self.evaluate(child)
 
-                # Members struct, class, and unions must be treated differently.
-                # So parent ast node information is pushed in to the stack.
-                # Once all its children are validated pop it out of the stack
                 self.node_stack.push(child.kind)
                 errors += self.check(child)
                 self.node_stack.pop()
@@ -573,14 +522,9 @@ class Validator(object):
         return errors
 
     def evaluate(self, node):
-        """
-        get the node's rule and match the pattern. Report and error if pattern
-        matching fails
-        """
         if not self.rule_db.is_rule_enabled(node.kind):
             return 0
 
-        # If the pattern is in the skip list, ignore it
         if self.skip_db.check_skip_db(node.displayname):
             return 0
 
@@ -591,18 +535,11 @@ class Validator(object):
         return 0
 
     def is_local(self, node, filename):
-        """ Returns True is node belongs to the file being validated and not an include file """
         if node.location.file and node.location.file.name in filename:
             return True
         return False
 
-
 def do_validate(options, filename):
-    """
-    Returns true if the file should be validated
-    - Check if its a c/c++ file
-    - Check if the file is not excluded
-    """
     path, extension = os.path.splitext(filename)
     if extension not in file_extensions:
         return False
@@ -613,7 +550,6 @@ def do_validate(options, filename):
                 return False
 
     return True
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s',

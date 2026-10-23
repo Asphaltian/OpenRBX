@@ -12,19 +12,14 @@ from reccmp.project.detect import (
     RecCmpProject,
 )
 
-
 logger = logging.getLogger()
 
-# The summary line ends in an emoji. A Windows console defaults to cp1252 and raises
-# UnicodeEncodeError on it, which matters here because this is a Windows-only project.
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-
 
 class AddrProblem(NamedTuple):
     line_number: int
     line: str
-
 
 def display_errors(alerts: Iterable[AddrProblem], filename: PurePath):
     sorted_alerts = sorted(alerts, key=lambda a: a.line_number)
@@ -44,7 +39,6 @@ def display_errors(alerts: Iterable[AddrProblem], filename: PurePath):
 
     print()
 
-
 def problem_markers(text: str) -> Iterator[AddrProblem]:
     for i, line in enumerate(text.splitlines(), start=1):
         match = markerRegex.match(line)
@@ -52,9 +46,8 @@ def problem_markers(text: str) -> Iterator[AddrProblem]:
             continue
 
         addr_text = match.group("offset")
-        if len(addr_text) != 10:  # 0x12345678
+        if len(addr_text) != 10:
             yield AddrProblem(i, line)
-
 
 def main():
     project = RecCmpProject.from_directory(directory=Path.cwd())
@@ -81,7 +74,6 @@ def main():
 
     print(f"Problems: {count} {'❌' if count > 0 else '✅'}")
     return count > 0
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

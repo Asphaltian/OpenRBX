@@ -29,7 +29,6 @@ jobs:
         with:
           version: '21'
 
-      # Engine libraries only; linking would drag in G3D, which this compiler will not accept.
       - name: Build
         run: |
           cmake -S . -B build -GNinja `
@@ -98,8 +97,6 @@ jobs:
           build/3rdparty/libboost_thread-vc80-mt-1_34_1.lib
         key: boost-${{ steps.vendored.outputs.boost }}-${{ hashFiles('3rdparty/CMakeLists.txt') }}
 
-    # Restored objects must not look older than the sources or the toolchain headers they
-    # depend on. Only the vendored objects are cached, so nothing of ours can go stale here.
     - name: Backdate the inputs that never change
       shell: pwsh
       run: |

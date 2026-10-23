@@ -1,8 +1,5 @@
 name: Post reccmp output as PR comment
 
-# Runs after the Build workflow finishes. Triggered via workflow_run so it
-# executes in the base-repo context with a writable token, which lets it comment
-# on pull requests opened from forks (those builds only get a read-only token).
 on:
   workflow_run:
     workflows: [Build]

@@ -14,11 +14,9 @@ from reccmp.project.detect import (
     argparse_parse_project_target,
 )
 
-# Ignore all compare-db messages.
 logging.getLogger("reccmp.compare").addHandler(logging.NullHandler())
 
 logger = logging.getLogger()
-
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="folded")
@@ -26,9 +24,7 @@ def parse_args() -> argparse.Namespace:
     argparse_add_project_target_args(parser)
     return parser.parse_args()
 
-
 def get_folded_functions(compare: Compare) -> dict[int, list[SymbolsEntry]]:
-    # mypy: Required for get_abs_addr
     assert isinstance(compare.recomp_bin, PEImage)
     lookup: dict[int, list[SymbolsEntry]] = {}
 
@@ -38,11 +34,9 @@ def get_folded_functions(compare: Compare) -> dict[int, list[SymbolsEntry]]:
 
     return {key: value for key, value in lookup.items() if len(value) > 1}
 
-
 def display_folded_functions(compare: Compare):
     folded = get_folded_functions(compare)
     for addr, syms in folded.items():
-        # pylint: disable=protected-access
         ent = compare._db.get(ImageId.RECOMP, addr)
         orig_addr = ent.orig_addr if ent is not None else None
 
@@ -52,9 +46,7 @@ def display_folded_functions(compare: Compare):
 
         print()
 
-
 def main():
-    # pylint: disable=too-many-locals
     args = parse_args()
     try:
         target = argparse_parse_project_target(args=args)
@@ -66,7 +58,6 @@ def main():
 
     compare = Compare.from_target(target)
 
-    # Show the (user) functions that have been folded in recomp.
     if args.list:
         display_folded_functions(compare)
 
@@ -74,7 +65,6 @@ def main():
     codebase.prune_invalid_addrs(compare.orig_bin.is_valid_vaddr)
     codebase.prune_reused_addrs()
 
-    # Combine annotations for folded functions on the same address.
     functions: dict[int, list[ParserFunction]] = {}
     for fun in codebase.iter_line_functions():
         functions.setdefault(fun.offset, []).append(fun)
@@ -91,7 +81,6 @@ def main():
             failed = True
             print(f"{addr:#8x}: Some annotations are folded, some not.")
 
-    # Ignore nameref annotations (e.g. scalar dtors) for this check.
     folds = {
         key: [f for f in value if not f.is_nameref() and f.is_folded]
         for key, value in functions.items()
@@ -101,7 +90,6 @@ def main():
         if not folded:
             continue
 
-        # pylint: disable=protected-access
         matches = [
             compare._lines_db.find_function(
                 fun.filename, fun.line_number, fun.end_line, folded=True
@@ -110,8 +98,6 @@ def main():
             if fun.filename is not None
         ]
 
-        # MSVC 8 keeps a symbol for every alias the linker folded away, so each annotation
-        # resolves. What matters is that they all landed on one recomp address.
         matched = {m for m in matches if m}
 
         if not matched:
@@ -124,7 +110,6 @@ def main():
             print(f"{addr:#8x}: Not folded in recomp, landed on {addrs}.")
 
     return failed
-
 
 if __name__ == "__main__":
     raise SystemExit(main())
