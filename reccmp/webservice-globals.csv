@@ -3689,6 +3689,8 @@ address,type,symbol
 0x10246d10,global,?sRunning@RBX@@3QBDB
 0x10246d1c,global,??_7State@Humanoid@RBX@@6B@
 0x10246d50,global,??_7Running@RBX@@6B@
+0x10246d68,global,??_7Running@RBX@@6BHitTestFilter@1@@
+0x10246d70,global,??_7Running@RBX@@6BState@Humanoid@1@@
 0x10246d90,global,??_8ICharacterSubject@RBX@@7B@
 0x10246da8,global,?sFallingDown@RBX@@3QBDB
 0x10246db8,global,??_7FallingDown@RBX@@6B@
@@ -5048,6 +5050,7 @@ address,type,symbol
 0x102f3248,global,??_R0?AVICreator@RBX@@@8
 0x102f3268,global,??_R0?AVCreator@?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@@8
 0x102f32e0,global,??_R0?AVInstance@RBX@@@8
+0x102f32fc,global,??_R0?AVServiceProvider@RBX@@@8
 0x102f3320,global,??_R0?AVService@RBX@@@8
 0x102f333c,global,??_R0?AVbad_weak_ptr@boost@@@8
 0x102f3360,global,??_R0?AVDescribedBase@Reflection@RBX@@@8
@@ -5412,6 +5415,7 @@ address,type,symbol
 0x102f6be8,global,flag___RBX::Name::declare<&RBX::sAccoutrement>
 0x102f6bec,global,flag___RBX::Name::declare<&RBX::sHat>
 0x102f6bf0,global,flag___RBX::Name::declare<&RBX::Network::sPlayers>
+0x102f6c04,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Teams>
 0x102f6c08,global,isNullClassName___RBX::ServiceProvider::find<RBX::LocalBackpack>
 0x102f6c0c,global,??_B?8???$find@VLocalBackpack@RBX@@@ServiceProvider@RBX@@QBEPAVLocalBackpack@1@XZ@58
 0x102f6c10,global,isNullClassName___RBX::ServiceProvider::find<RBX::Soundscape::SoundService>
@@ -6055,6 +6059,7 @@ address,type,symbol
 0x102fce18,global,n___RBX::Name::doDeclare<&RBX::sRunning>
 0x102fce1c,global,??_B?1???$doDeclare@$1?sRunning@RBX@@3QBDB@Name@RBX@@CAABV01@XZ@51
 0x102fce20,global,flag___RBX::Name::declare<&RBX::sRunning>
+0x102fce24,global,flag___RBX::ServiceProvider::getClassIndex<RBX::GeometryService>
 0x102fce28,global,isNullClassName___RBX::ServiceProvider::find<RBX::GeometryService>
 0x102fce2c,global,??_B?8???$find@VGeometryService@RBX@@@ServiceProvider@RBX@@QBEPAVGeometryService@1@XZ@58
 0x102fce30,global,n___RBX::Name::doDeclare<&RBX::sFallingDown>

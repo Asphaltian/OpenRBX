@@ -211,6 +211,18 @@ Body* Humanoid::getRootBody()
 	return body != NULL ? body->getRoot() : NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x100a2750
+float Humanoid::getTorsoHeading() const
+{
+	Primitive* torso = getTorsoPrimitive();
+
+	if (torso != NULL) {
+		return Math::getHeading(torso->getCoordinateFrame().lookVector());
+	}
+
+	return 0.0f;
+}
+
 // FUNCTION: WEBSERVICE 0x100a27c0
 const CoordinateFrame Humanoid::getLocation() const
 {

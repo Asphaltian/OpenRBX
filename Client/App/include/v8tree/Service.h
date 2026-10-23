@@ -65,10 +65,28 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::Notifier<RBX::ServiceProvider,RBX::ServiceRemoving>::raise
 // FUNCTION: WEBSERVICE 0x10071ad0
 // RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>
+// TEMPLATE: WEBSERVICE 0x100724b0
+// RBX::ServiceProvider::doGetClassIndex<RBX::Teams>
+// TEMPLATE: WEBSERVICE 0x100733b0
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::Teams>
+// STUB: WEBSERVICE 0x100784c0
+// RBX::ServiceProvider::find<RBX::Teams>
 // FUNCTION: WEBSERVICE 0x10079520
 // RBX::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>
 // FUNCTION: WEBSERVICE 0x1007aa60
 // RBX::ServiceProvider::ServiceProvider
+// TEMPLATE: WEBSERVICE 0x100a41f0
+// RBX::ServiceProvider::find<RBX::Teams>
+// TEMPLATE: WEBSERVICE 0x10106140
+// RBX::ServiceProvider::doGetClassIndex<RBX::GeometryService>
+// TEMPLATE: WEBSERVICE 0x10106670
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::GeometryService>
+// STUB: WEBSERVICE 0x10106790
+// RBX::ServiceProvider::find<RBX::GeometryService>
+// TEMPLATE: WEBSERVICE 0x10106940
+// RBX::ServiceProvider::create<RBX::GeometryService>
+// TEMPLATE: WEBSERVICE 0x10106a30
+// RBX::ServiceProvider::create<RBX::GeometryService>
 // SYNTHETIC: WEBSERVICE 0x102218d0
 // `RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on
@@ -79,29 +97,67 @@ class ServiceProvider : public DescribedNonCreatable<ServiceProvider, Instance, 
 						public Notifier<ServiceProvider, ServiceRemoving>
 {
 private:
-	std::vector<boost::shared_ptr<Instance> > serviceArray;         // 0x140
+	mutable std::vector<boost::shared_ptr<Instance> > serviceArray; // 0x140
 	std::map<const Name*, boost::shared_ptr<Instance> > serviceMap; // 0x150
 
 public:
 	static ServiceProvider* findServiceProvider(Instance* instance);
 
 	template <class T>
-	T* find()
+	T* find() const
 	{
-		return dynamic_cast<T*>(findServiceByClassName(T::className()));
+		unsigned int index = getClassIndex<T>();
+
+		if (index + 1 > serviceArray.size()) {
+			serviceArray.resize(index + 1);
+		}
+		else if (Instance* service = serviceArray[index].get()) {
+			return static_cast<T*>(service);
+		}
+
+		static const bool isNullClassName = &T::className() == &Name::getNullName();
+		if (isNullClassName) {
+			return NULL;
+		}
+
+		boost::shared_ptr<Instance> i = findServiceByClassName(T::className());
+		if (!i) {
+			return NULL;
+		}
+
+		T* service = static_cast<T*>(i.get());
+		serviceArray[index] = i;
+		return service;
 	}
 
 	template <class T>
-	static T* find(Instance* context)
+	T* create()
 	{
-		ServiceProvider* provider;
+		T* t = find<T>();
+		if (t == NULL) {
+			boost::shared_ptr<T> s = Creatable<Instance>::create<T>();
+
+			t = s.get();
+
+			unsigned int index = getClassIndex<T>();
+			serviceArray[index] = s;
+			t->setParent(this);
+		}
+
+		return t;
+	}
+
+	template <class T>
+	static T* find(const Instance* context)
+	{
+		const ServiceProvider* provider;
 
 		while (true) {
 			if (context == NULL) {
 				return NULL;
 			}
 
-			provider = dynamic_cast<ServiceProvider*>(context);
+			provider = dynamic_cast<const ServiceProvider*>(context);
 
 			if (provider != NULL) {
 				break;
@@ -111,6 +167,28 @@ public:
 		}
 
 		return provider->find<T>();
+	}
+
+	template <class T>
+	static T* create(const Instance* context)
+	{
+		const ServiceProvider* provider;
+
+		while (true) {
+			if (context == NULL) {
+				return NULL;
+			}
+
+			provider = dynamic_cast<const ServiceProvider*>(context);
+
+			if (provider != NULL) {
+				break;
+			}
+
+			context = context->getParent();
+		}
+
+		return const_cast<ServiceProvider*>(provider)->create<T>();
 	}
 
 protected:
@@ -123,7 +201,33 @@ protected:
 	void clearServices();
 
 private:
-	Instance* findServiceByClassName(const Name& className) const;
+	static unsigned int newIndex();
+
+	template <class T>
+	static unsigned int doGetClassIndex()
+	{
+		static unsigned int index = newIndex();
+
+		return index;
+	}
+
+	template <class T>
+	static void callDoGetClassIndex()
+	{
+		doGetClassIndex<T>();
+	}
+
+	template <class T>
+	static unsigned int getClassIndex()
+	{
+		static boost::once_flag flag = BOOST_ONCE_INIT;
+
+		boost::call_once(&callDoGetClassIndex<T>, flag);
+
+		return doGetClassIndex<T>();
+	}
+
+	boost::shared_ptr<Instance> findServiceByClassName(const Name& className) const;
 	Instance* findServiceByClassNameString(const std::string& className);
 };
 

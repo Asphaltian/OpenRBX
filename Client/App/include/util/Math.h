@@ -114,6 +114,16 @@ public:
 	static NormalId getClosestObjectNormalId(const Vector3& worldNormal, const Matrix3& objectRotation);
 	static Vector3 vector3Abs(const Vector3& value);
 	static float getHeading(const Vector3& look);
+
+	// FUNCTION: WEBSERVICE 0x100a06a0
+	static float radWrap(float rad)
+	{
+		if (rad >= -3.1415927f && rad < 3.1415927f) {
+			return rad;
+		}
+		return rad - G3D::iRound(floor((rad + 3.1415927f) / 6.283185f)) * 6.283185f;
+	}
+
 	static Vector3 toGrid(const Vector3& value, const Vector3& grid);
 	static Vector3 sortVector3(const Vector3& value);
 	static float maxAxisLength(const Vector3& value);

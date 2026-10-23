@@ -42,7 +42,7 @@ public:
 	};
 
 	// SIZE 0x08
-	class __declspec(novtable) State : public INamed
+	class State : public INamed
 	{
 	public:
 		virtual ~State() {} // vtable+0x04
@@ -103,6 +103,7 @@ public:
 	const G3D::Vector3& getTargetPoint() const { return targetPoint; }
 
 	G3D::Vector3 updateWalkDirection();
+	float getTorsoHeading() const;
 
 	Primitive* getTorsoPrimitive() const;
 	Primitive* getLeftLegPrimitive();

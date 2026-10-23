@@ -39,6 +39,9 @@ protected:
 
 public:
 	Balancing(Humanoid* humanoid, const float kP, const float kD);
+
+	// SYNTHETIC: WEBSERVICE 0x10106680
+	// RBX::Balancing::~Balancing
 };
 
 DECOMP_SIZE_ASSERT(Balancing, 0x28)

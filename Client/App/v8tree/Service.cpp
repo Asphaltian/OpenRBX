@@ -1,8 +1,18 @@
 #include "v8tree/Service.h"
 
+#include <windows.h>
+
 namespace RBX {
 
 const char sServiceProvider[] = "ServiceProvider";
+
+// FUNCTION: WEBSERVICE 0x10058c20
+unsigned int ServiceProvider::newIndex()
+{
+	static long index = -1;
+
+	return InterlockedIncrement(&index);
+}
 
 // FUNCTION: WEBSERVICE 0x10058c30
 void ServiceProvider::onDescendentAdded(Instance* instance)
@@ -18,12 +28,16 @@ void ServiceProvider::onDescendentRemoving(const shared_ptr<Instance>& instance)
 	Instance::onDescendentRemoving(instance);
 }
 
-// STUB: WEBSERVICE 0x10059270
-Instance* ServiceProvider::findServiceByClassName(const Name& className) const
+// FUNCTION: WEBSERVICE 0x10059270
+boost::shared_ptr<Instance> ServiceProvider::findServiceByClassName(const Name& className) const
 {
-	STUB(0x10059270);
+	std::map<const Name*, boost::shared_ptr<Instance> >::const_iterator iter = serviceMap.find(&className);
 
-	return NULL;
+	if (iter != serviceMap.end()) {
+		return iter->second;
+	}
+
+	return boost::shared_ptr<Instance>();
 }
 
 // FUNCTION: WEBSERVICE 0x10059320
