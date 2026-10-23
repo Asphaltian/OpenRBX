@@ -536,6 +536,12 @@ PartInstance::PartInstance()
 	STUB(0x1009f220);
 }
 
+// STUB: WEBSERVICE 0x1009f610
+void PartInstance::setCoordinateFrame(const CoordinateFrame& value)
+{
+	STUB(0x1009f610);
+}
+
 // FUNCTION: WEBSERVICE 0x1009f910
 void PartInstance::setPartSizeXml(const Vector3& rbxSize)
 {

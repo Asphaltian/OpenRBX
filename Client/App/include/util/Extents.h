@@ -36,6 +36,8 @@ public:
 	const Vector3& min() const { return low; }
 	const Vector3& max() const { return high; }
 
+	Vector3 center() const { return (high + low) * 0.5f; }
+
 	Vector3 getCorner(int index) const;
 	Vector3 faceCenter(NormalId normalId) const;
 	Plane getPlane(NormalId normalId) const;

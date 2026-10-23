@@ -188,6 +188,7 @@ public:
 	static const PartInstance* fromPrimitiveConst(const Primitive* primitive);
 
 	void destroyJoints();
+	void setCoordinateFrame(const CoordinateFrame& value);
 
 	virtual const Primitive* getBiggestPrimitive() const;
 	virtual bool hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint);
