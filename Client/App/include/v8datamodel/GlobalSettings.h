@@ -33,6 +33,10 @@ extern const char sGlobalSettings[];
 // RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::~GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>
 // TEMPLATE: WEBSERVICE 0x100de5a0
 // RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>
+// TEMPLATE: WEBSERVICE 0x1019b4b0
+// RBX::GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>::~GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>
+// TEMPLATE: WEBSERVICE 0x1019b960
+// RBX::GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>::GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>
 // SYNTHETIC: WEBSERVICE 0x102226f0
 // `RBX::Reflection::Described<RBX::GlobalSettings,&RBX::sGlobalSettings,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102239a0

@@ -331,6 +331,12 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Network::Player,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x10191910
 	// RBX::Reflection::PropDescriptor<RBX::Network::Players,int>::getset<int (__thiscall RBX::Network::Players::*)(void)const ,void (__thiscall RBX::Network::Players::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x1019b5c0
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::NetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1019b6a0
+	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::NetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1019b780
+	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::NetworkSettings>
 	// clang-format on
 	template <class Getter, class Setter>
 	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, Setter set)

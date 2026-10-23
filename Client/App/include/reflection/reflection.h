@@ -156,6 +156,8 @@ public:
 	// RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1012d2d0
 	// RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x1018c2f0
+	// RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor
 	// SYNTHETIC: WEBSERVICE 0x10221010
 	// `RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x102215d0
@@ -292,6 +294,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::GetSetImpl<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100d8960
 	// RBX::Reflection::PropDescriptor<RBX::Motor,float>::PropDescriptor<RBX::Motor,float><float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
+	// SYNTHETIC: WEBSERVICE 0x10225d20
+	// `RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// clang-format on
 	static ClassDescriptor& classDescriptor() { return ClassDescriptor::rootDescriptor(); }
 
@@ -309,6 +313,10 @@ template <class T, const char* sName, class Base>
 class __declspec(novtable) Described : public Base
 {
 public:
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1019b860
+	// RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >
+	// clang-format on
 	Described() { this->descriptor = &classDescriptor(); }
 
 	template <class U>

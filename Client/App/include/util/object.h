@@ -752,6 +752,14 @@ public:
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100ffa80
 	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::getClassName
+	// TEMPLATE: WEBSERVICE 0x1019b3a0
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1019b420
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x1019b440
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1019b580
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::getClassName
 	// clang-format on
 	const Creator& getCreator() const { return creator; }
 
