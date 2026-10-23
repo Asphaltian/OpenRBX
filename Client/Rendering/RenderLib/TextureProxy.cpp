@@ -14,21 +14,20 @@ namespace Render {
 void TextureProxy::shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& lighting)
 {
 	for (int i = 0; i < 3; i++) {
-		int light = lighting[i];
+		const int shade = lighting[i];
 		float color = base[i];
 
-		if (light > 130) {
-			float shade = (light - 128.0) / 128.0;
-			float a = std::min(shade, 1.0f);
+		if (shade > 130) {
+			float a = std::min(float((shade - 128.0) / 128.0), 1.0f);
 			color = (1.0 - a) * color + 255.0 * a;
 		}
-		else if (light < 126) {
-			float a = light / 128.0;
+		else if (shade < 126) {
+			float a = shade / 128.0;
 			a = 0.5 + a * 0.5;
 			color = color * a;
 		}
 
-		lighting[i] = std::min(std::max(0, G3D::iRound(255.0 * pow(color / 255.0, 1.0))), 255);
+		lighting[i] = std::min(255, std::max(0, G3D::iRound(255.0 * pow(color / 255.0, 1.0))));
 	}
 }
 

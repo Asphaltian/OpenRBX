@@ -1477,7 +1477,16 @@ address,type,symbol
 0x10238228,global,??_7?$FactoryProduct@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10238230,global,??_7?$FactoryProduct@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1023823c,global,??_7?$FactoryProduct@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x10238280,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10238290,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x102382a0,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x102382b0,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x102382c0,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x102382d0,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x102382e0,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6BDebugable@1@@
+0x102382e8,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x102382f0,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x102382fc,global,??_7?$GlobalSettingsItem@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x10238340,global,??_7?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@6B@
 0x10238348,global,??_7?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@6B@
 0x102383ac,global,??_7?$PropDescriptor@VDebugSettings@RBX@@M@Reflection@RBX@@6B@
@@ -3813,6 +3822,7 @@ address,type,symbol
 0x102489f8,global,??_7SpecialShape@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10248a00,global,??_7SpecialShape@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10248a0c,global,??_7SpecialShape@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x10249590,global,?zLookDirection@CoordinateFrame@G3D@@2MB
 0x1024a040,global,_png_libpng_ver
 0x1024a054,global,_png_sig
 0x1024a05c,global,_png_IHDR
@@ -4216,7 +4226,7 @@ address,type,symbol
 0x10261590,global,?___Roblox_CWebService_GetStandardOutMessages_entries@Roblox@@3QBU_soapmapentry@@B
 0x10261638,global,?___Roblox_CWebService_GetStandardOutMessages_map@Roblox@@3U_soapmap@@B
 0x10261674,global,?___Roblox_CWebService_GetStandardOutMessages_atlsoapheader_map@Roblox@@3U_soapmap@@B
-0x10261854,global,?_entries@?1??_GetEntries@?$CSoapHandler@VCWebService@Roblox@@@ATL@@SGPBU_ATL_INTMAP_ENTRY@3@XZ@4QBU43@B
+0x10261854,global,_entries___ATL::CSoapHandler<Roblox::CWebService>::_GetEntries
 0x10261878,global,?_entries@?1??_GetEntries@?$CSDLGenerator@VCWebService@Roblox@@$1?s_szClassNameWSDL34@@3QBDB@ATL@@SGPBU_ATL_INTMAP_ENTRY@3@XZ@4QBU43@B
 0x102619a4,global,??_7CWebService@Roblox@@6B@
 0x102619f4,global,??_7CWebService@Roblox@@6BCSoapRootHandler@ATL@@@
@@ -5314,9 +5324,9 @@ address,type,symbol
 0x102f6934,global,??_B?1???$doGetClassIndex@VStarterPackService@RBX@@@ServiceProvider@RBX@@CAIXZ@51
 0x102f6938,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::Selection>
 0x102f693c,global,??_B?1???$doGetClassIndex@VSelection@RBX@@@ServiceProvider@RBX@@CAIXZ@51
-0x102f6940,global,?minSize@?3??resize@?$Array@PAVIRenderable@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x102f6940,global,minSize___G3D::Array<RBX::IRenderable *>::resize
 0x102f6944,global,??_B?3??resize@?$Array@PAVIRenderable@RBX@@@G3D@@QAEXH_N@Z@53
-0x102f6948,global,?minSize@?3??resize@?$Array@PAVPrimitive@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x102f6948,global,minSize___G3D::Array<RBX::Primitive *>::resize
 0x102f694c,global,??_B?3??resize@?$Array@PAVPrimitive@RBX@@@G3D@@QAEXH_N@Z@53
 0x102f6950,global,type___RBX::Reflection::RefType::singleton<RBX::Camera
 0x102f6960,global,??_B?1???$singleton@PAVCamera@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
@@ -5587,7 +5597,7 @@ address,type,symbol
 0x102f8608,global,??_B?1??classDescriptor@?$Described@VHole@RBX@@$1?sHole@2@3QBDBV?$FactoryProduct@VHole@RBX@@VFeature@2@$1?sHole@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102f8610,global,"foo___RBX::Reflection::Described<RBX::AutoJoint,&RBX::sAutoJoint,RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint> >::classDescriptor"
 0x102f8698,global,??_B?1??classDescriptor@?$Described@VAutoJoint@RBX@@$1?sAutoJoint@2@3QBDBV?$NonFactoryProduct@VJointInstance@RBX@@$1?sAutoJoint@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
-0x102f86a0,global,?foo@?1??classDescriptor@?$Described@VTool@RBX@@$1?sTool@2@3QBDBV?$FactoryProduct@VTool@RBX@@VBackpackItem@2@$1?sTool@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@34@XZ@4V534@A
+0x102f86a0,global,"foo___RBX::Reflection::Described<RBX::Tool,&RBX::sTool,RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool> >::classDescriptor"
 0x102f86a0,global,"foo___RBX::Reflection::Described<RBX::Tool,&RBX::sTool,RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool> >::classDescriptor"
 0x102f8728,global,??_B?1??classDescriptor@?$Described@VTool@RBX@@$1?sTool@2@3QBDBV?$FactoryProduct@VTool@RBX@@VBackpackItem@2@$1?sTool@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102f8730,global,"foo___RBX::Reflection::Described<RBX::PartInstance,&RBX::sPart,RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart> >::classDescriptor"
@@ -5697,7 +5707,7 @@ address,type,symbol
 0x102f9464,global,v___G3D::Vector3::one
 0x102f9470,global,??_B?1??one@Vector3@G3D@@SAABV12@XZ@51
 0x102f9474,global,type___RBX::Reflection::Type::singleton<G3D::CoordinateFrame>
-0x102f9488,global,?s@?1??singleton@?$EnumDesc@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102f9488,global,s___RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton
 0x102f9520,global,??_B?1??singleton@?$EnumDesc@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102f9528,global,?s@?1??singleton@?$EnumDesc@W4PartType@Part@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
 0x102f95c0,global,??_B?1??singleton@?$EnumDesc@W4PartType@Part@RBX@@@Reflection@RBX@@SAABV123@XZ@51
@@ -5770,7 +5780,7 @@ address,type,symbol
 0x102fa01c,global,??_B?8???$find@V?$FilteredSelection@VInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VInstance@RBX@@@1@XZ@58
 0x102fa020,global,v___G3D::Vector3::unitZ
 0x102fa02c,global,??_B?1??unitZ@Vector3@G3D@@SAABV12@XZ@51
-0x102fa030,global,?minSize@?3??resize@?$Array@PBVPrimitive@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x102fa030,global,minSize___G3D::Array<RBX::Primitive const *>::resize
 0x102fa034,global,??_B?3??resize@?$Array@PBVPrimitive@RBX@@@G3D@@QAEXH_N@Z@53
 0x102fa038,global,?s@?1??singleton@?$EnumDesc@W4CameraType@Camera@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
 0x102fa0d0,global,??_B?1??singleton@?$EnumDesc@W4CameraType@Camera@RBX@@@Reflection@RBX@@SAABV123@XZ@51
@@ -5816,11 +5826,11 @@ address,type,symbol
 0x102fa720,global,?contactPairMatches@Contact@RBX@@1HA
 0x102fa724,global,?contactPairMisses@Contact@RBX@@1HA
 0x102fa728,global,?numKernels@Kernel@RBX@@0HA
-0x102fa72c,global,?minSize@?3??resize@?$Array@PAVConnector@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x102fa72c,global,minSize___G3D::Array<RBX::Connector *>::resize
 0x102fa730,global,??_B?3??resize@?$Array@PAVConnector@RBX@@@G3D@@QAEXH_N@Z@53
-0x102fa734,global,?minSize@?3??resize@?$Array@PAVBody@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x102fa734,global,minSize___G3D::Array<RBX::Body *>::resize
 0x102fa738,global,??_B?3??resize@?$Array@PAVBody@RBX@@@G3D@@QAEXH_N@Z@53
-0x102fa73c,global,?minSize@?3??resize@?$Array@PAVPoint@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x102fa73c,global,minSize___G3D::Array<RBX::Point *>::resize
 0x102fa740,global,??_B?3??resize@?$Array@PAVPoint@RBX@@@G3D@@QAEXH_N@Z@53
 0x102fa744,global,n___RBX::Name::doDeclare<&RBX::sJointInstance>
 0x102fa748,global,??_B?1???$doDeclare@$1?sJointInstance@RBX@@3QBDB@Name@RBX@@CAABV01@XZ@51
@@ -6052,7 +6062,7 @@ address,type,symbol
 0x102fce38,global,flag___RBX::Name::declare<&RBX::sFallingDown>
 0x102fce3c,global,?ignoreBool@ContactManager@RBX@@0_NA
 0x102fce3c,global,?ignoreBool@ContactManager@RBX@@0_NA
-0x102fce40,global,?minSize@?3??resize@?$Array@PAVContact@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x102fce40,global,minSize___G3D::Array<RBX::Contact *>::resize
 0x102fce44,global,??_B?3??resize@?$Array@PAVContact@RBX@@@G3D@@QAEXH_N@Z@53
 0x102fce48,global,?blockTemplates@BlockTemplate@RBX@@0VBlockTemplates@12@A
 0x102fd080,global,toSleeping___RBX::SleepStage::stepJoints
@@ -6131,7 +6141,7 @@ address,type,symbol
 0x102fe474,global,??_B?3??resize@?$Array@VVector2@G3D@@@G3D@@QAEXH_N@Z@53
 0x102fe47c,global,??_B?3??resize@?$Array@VEdge@MeshAlg@G3D@@@G3D@@QAEXH_N@Z@53
 0x102fe484,global,??_B?3??resize@?$Array@VFace@MeshAlg@G3D@@@G3D@@QAEXH_N@Z@53
-0x102fe488,global,?minSize@?3??resize@?$Array@V?$ReferenceCountedPointer@VLevel@Mesh@Render@RBX@@@G3D@@@G3D@@QAEXH_N@Z@4HB
+0x102fe488,global,minSize___G3D::Array<G3D::ReferenceCountedPointer<RBX::Render::Mesh::Level> >::resize
 0x102fe48c,global,??_B?3??resize@?$Array@V?$ReferenceCountedPointer@VLevel@Mesh@Render@RBX@@@G3D@@@G3D@@QAEXH_N@Z@53
 0x102fe490,global,backface___RBX::Render::Mesh::computeDirectionalShadowVolume
 0x102fe4a0,global,init___RBX::Render::Mesh::Mesh
@@ -6439,11 +6449,11 @@ address,type,symbol
 0x103012f4,global,__forceCRTManifest
 0x103012f8,global,c___RBX::Draw::selectColor
 0x1030130c,global,??_B?3??resize@?$Array@VGLight@G3D@@@G3D@@QAEXH_N@Z@53
-0x10301310,global,?minSize@?3??resize@?$Array@PAVRenderSurface@Render@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x10301310,global,minSize___G3D::Array<RBX::Render::RenderSurface *>::resize
 0x10301314,global,??_B?3??resize@?$Array@PAVRenderSurface@Render@RBX@@@G3D@@QAEXH_N@Z@53
-0x10301318,global,?minSize@?3??resize@?$Array@VRenderSurface@Render@RBX@@@G3D@@QAEXH_N@Z@4HB
+0x10301318,global,minSize___G3D::Array<RBX::Render::RenderSurface>::resize
 0x1030131c,global,??_B?3??resize@?$Array@VRenderSurface@Render@RBX@@@G3D@@QAEXH_N@Z@53
-0x10301320,global,?minSize@?3??resize@?$Array@V?$ReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@@G3D@@QAEXH_N@Z@4HB
+0x10301320,global,minSize___G3D::Array<G3D::ReferenceCountedPointer<RBX::Render::Chunk> >::resize
 0x10301324,global,??_B?3??resize@?$Array@V?$ReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@@G3D@@QAEXH_N@Z@53
 0x10301328,global,shadowVertex___RBX::Render::RenderScene::markStencilShadows
 0x10301338,global,?identity@AggregateChunk@Render@RBX@@2VCoordinateFrame@G3D@@B
@@ -6477,7 +6487,7 @@ address,type,symbol
 0x10301998,global,"foo___RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor"
 0x10301a20,global,??_B?3??resize@?$Array@VLoopBody@GWindow@G3D@@@G3D@@QAEXH_N@Z@53
 0x10301a28,global,??_B?1??getCreators@?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@KAAAV?$map@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@@std@@XZ@51
-0x10301a2c,global,?creators@?1??getCreators@?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@KAAAV?$map@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@@std@@XZ@4V45@A
+0x10301a2c,global,creators___RBX::AbstractFactoryProduct<RBX::Instance>::getCreators
 0x10301a38,global,??_B?1???$doDeclare@$1?sModel@RBX@@3PADA@Name@RBX@@CAABV01@XZ@51
 0x10301a3c,global,n___RBX::Name::doDeclare<&RBX::sModel>
 0x10301a40,global,??_B?1???$doDeclare@$1?sSelection@RBX@@3QBDB@Name@RBX@@CAABV01@XZ@51

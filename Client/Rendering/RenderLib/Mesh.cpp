@@ -48,6 +48,42 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10166980
+void Mesh::computeAABounds(
+	const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
+	G3D::Vector3& lo,
+	G3D::Vector3& hi
+)
+{
+	lo = G3D::Vector3::inf();
+	hi = -G3D::Vector3::inf();
+
+	std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator end = chunkArray.end();
+
+	for (std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator iter = chunkArray.begin(); iter != end;
+		 ++iter) {
+		const G3D::ReferenceCountedPointer<Chunk>& chunk = *iter;
+		const G3D::ReferenceCountedPointer<Mesh>& srcMesh = chunk->getMesh();
+
+		if (srcMesh.isNull()) {
+			continue;
+		}
+
+		const G3D::CoordinateFrame& cframe = chunk->cframe();
+		LevelRef srcLevel = srcMesh->detailLevel(0.0f);
+		const G3D::Array<IndexType>& indexArray = srcLevel->indexArray;
+
+		for (int i = 0; i < indexArray.size(); i++) {
+			IndexType index = indexArray[i];
+
+			G3D::Vector3 v = cframe.pointToWorldSpace(visibleGeometry.vertexArray[index]);
+
+			hi = hi.max(v);
+			lo = lo.min(v);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10166cc0
 unsigned int Mesh::allocVertex(
 	const G3D::Vector3& vertex,
@@ -86,21 +122,20 @@ unsigned int Mesh::allocVertex(
 	return index;
 }
 
-// STUB: WEBSERVICE 0x10166e40
-void Mesh::freeVertex(unsigned int i)
+// FUNCTION: WEBSERVICE 0x10166e40
+void Mesh::freeVertex(unsigned int index)
 {
-	int* refCounts = vertexRefCounts.getCArray();
-
-	if (refCounts != NULL) {
+	if (vertexRefCounts.getCArray() != NULL) {
+		int refCount = vertexRefCounts[index];
 		vertexRefCount--;
 
-		if (refCounts[i] == 1) {
-			refCounts[i] = 0;
-			freeList.append(i);
-			return;
+		if (refCount == 1) {
+			vertexRefCounts[index] = 0;
+			freeList.append(index);
 		}
-
-		refCounts[i]--;
+		else {
+			vertexRefCounts[index] = refCount - 1;
+		}
 	}
 }
 
@@ -213,21 +248,27 @@ void Mesh::computeDirectionalShadowVolume(
 		bool b0 = backface[edge.faceIndex[0]];
 
 		if (b0 != backface[edge.faceIndex[1]]) {
-			int n = shadowVertex.size();
 			const G3D::Vector3& v0 = geometry[edge.vertexIndex[0]];
 			const G3D::Vector3& v1 = geometry[edge.vertexIndex[1]];
 
-			G3D::Vector3 p0 = cframe.pointToWorldSpace(v0);
-			G3D::Vector3 p1 = cframe.pointToWorldSpace(v1);
+			G3D::Vector3 wvertex0 = cframe.pointToWorldSpace(v0), wvertex1 = cframe.pointToWorldSpace(v1);
 
-			shadowVertex.append(p0, p1);
+			int n = shadowVertex.size();
+			shadowVertex.append(wvertex0, wvertex1);
+
+			unsigned int A;
+			unsigned int B;
 
 			if (b0) {
-				indexArray.append(n, n + 1, 0);
+				A = n;
+				B = n + 1;
 			}
 			else {
-				indexArray.append(n + 1, n, 0);
+				A = n + 1;
+				B = n;
 			}
+
+			indexArray.append(A, B, 0);
 		}
 	}
 }
@@ -255,8 +296,112 @@ G3D::ReferenceCountedPointer<Mesh> Mesh::aggregate(
 	float& outBoundingRadius
 )
 {
-	STUB(0x10167d70);
-	return NULL;
+	G3D::ReferenceCountedPointer<Mesh> mesh = new Mesh();
+
+	std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator end = chunkArray.end();
+
+	{
+		G3D::Vector3 lo, hi;
+		computeAABounds(chunkArray, lo, hi);
+
+		outCFrame.translation = (hi + lo) / 2.0f;
+		outCFrame.rotation = G3D::Matrix3::identity();
+		outBoundingRadius = (hi - lo).magnitude() * 0.5;
+	}
+
+	mesh->levels.append(new Level(G3D::RenderDevice::QUADS));
+
+	{
+		LevelRef dstLevel = mesh->levels.last();
+
+		for (std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator iter = chunkArray.begin(); iter != end;
+			 ++iter) {
+			const G3D::ReferenceCountedPointer<Chunk>& chunk = *iter;
+			const G3D::ReferenceCountedPointer<Mesh>& srcMesh = chunk->getMesh();
+
+			if (srcMesh.isNull()) {
+				continue;
+			}
+
+			const G3D::CoordinateFrame& cframe = chunk->cframe();
+			LevelRef srcLevel = srcMesh->detailLevel(0.3f);
+			const G3D::Array<IndexType>& indexArray = srcLevel->indexArray;
+
+			G3D::CoordinateFrame netTransform = outCFrame.inverse() * cframe;
+
+			for (int i = 0; i < indexArray.size(); i++) {
+				IndexType index = indexArray[i];
+				G3D::Vector3 v = netTransform.pointToWorldSpace(visibleGeometry.vertexArray[index]);
+				G3D::Vector3 n = netTransform.vectorToWorldSpace(visibleGeometry.normalArray[index]);
+				G3D::Vector2 t = texCoordArray[index];
+
+				dstLevel->indexArray.append(allocVertex(v, n, t, false));
+			}
+		}
+	}
+
+	ShadowSurface& shadow = mesh->shadowSurface;
+	shadow.dropShadowGeometry = mesh->levels[0];
+
+	int faceOffset = 0;
+	int edgeOffset = 0;
+	int vertexOffset = 0;
+
+	for (std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator iter = chunkArray.begin(); iter != end;
+		 ++iter) {
+		const G3D::ReferenceCountedPointer<Chunk>& chunk = *iter;
+		const G3D::ReferenceCountedPointer<Mesh>& srcMesh = chunk->getMesh();
+
+		if (srcMesh.isNull()) {
+			continue;
+		}
+
+		const ShadowSurface& src = srcMesh->shadowSurface;
+		const G3D::CoordinateFrame& cframe = chunk->cframe();
+
+		G3D::CoordinateFrame netTransform = outCFrame.inverse() * cframe;
+
+		for (int i = 0; i < src.faceNormalArray.size(); i++) {
+			shadow.faceNormalArray.append(netTransform.vectorToWorldSpace(src.faceNormalArray[i]));
+		}
+
+		for (int i = 0; i < src.geometry.size(); i++) {
+			shadow.geometry.append(netTransform.pointToWorldSpace(src.geometry[i]));
+		}
+
+		for (int i = 0; i < src.edgeArray.size(); i++) {
+			const G3D::MeshAlg::Edge& srcEdge = src.edgeArray[i];
+			shadow.edgeArray.resize(shadow.edgeArray.size() + 1, false);
+			G3D::MeshAlg::Edge& e = shadow.edgeArray.last();
+
+			for (int j = 0; j < 2; j++) {
+				e.vertexIndex[j] = srcEdge.vertexIndex[j] + vertexOffset;
+				e.faceIndex[j] = srcEdge.faceIndex[j] + faceOffset;
+			}
+		}
+
+		for (int i = 0; i < src.faceArray.size(); i++) {
+			const G3D::MeshAlg::Face& srcFace = src.faceArray[i];
+			shadow.faceArray.resize(shadow.faceArray.size() + 1, false);
+			G3D::MeshAlg::Face& f = shadow.faceArray.last();
+
+			for (int j = 0; j < 2; j++) {
+				f.edgeIndex[j] = srcFace.edgeIndex[j] + edgeOffset;
+			}
+
+			for (int j = 0; j < 3; j++) {
+				f.vertexIndex[j] = srcFace.vertexIndex[j] + vertexOffset;
+			}
+		}
+
+		faceOffset += src.faceArray.size();
+		edgeOffset += src.edgeArray.size();
+		vertexOffset += src.geometry.size();
+	}
+
+	mesh->debugBoundingRadius = outBoundingRadius;
+
+	return mesh;
 }
 
 // FUNCTION: WEBSERVICE 0x101689d0

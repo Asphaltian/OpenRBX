@@ -39,11 +39,10 @@ G3D::ReferenceCountedPointer<G3D::Lighting> EffectSettings::update(
 	G3D::LightingParameters& outSkyParameters
 )
 {
-	int numShadowLights =
-		desiredLighting->shadowedLightArray.size() >= 8 ? 8 : desiredLighting->shadowedLightArray.size();
+	int numLights = desiredLighting->lightArray.size();
+	int numShadowLights = G3D::iMin(desiredLighting->shadowedLightArray.size(), 8);
 	int maxLights = G3D::glGetInteger(GL_MAX_LIGHTS) - 3;
-	int numNonShadowLights =
-		desiredLighting->lightArray.size() >= maxLights ? maxLights : desiredLighting->lightArray.size();
+	int numNonShadowLights = numLights >= maxLights ? maxLights : numLights;
 	numNonShadowLights = numNonShadowLights > 0 ? numNonShadowLights : 0;
 
 	_groundLOD = 1.0f;
@@ -106,6 +105,12 @@ G3D::ReferenceCountedPointer<G3D::Lighting> EffectSettings::update(
 	}
 
 	_useAllLightsInUnshadowedPass = _stencilShadows == false;
+
+	for (int i = 0; i < lighting->lightArray.size(); i++) {
+	}
+
+	for (int i = 0; i < lighting->shadowedLightArray.size(); i++) {
+	}
 
 	if (_toneMap) {
 		getToneMap()->setEnabled(true);

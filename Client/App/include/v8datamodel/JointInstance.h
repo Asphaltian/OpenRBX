@@ -40,7 +40,7 @@ class JointInstance : public DescribedNonCreatable<JointInstance, Instance, sJoi
 {
 public:
 	JointInstance() {}
-	JointInstance(Joint* joint) : joint(joint) {}
+	JointInstance(Joint* joint);
 
 	virtual ~JointInstance();
 
@@ -55,7 +55,7 @@ class AutoJoint : public DescribedNonCreatable<AutoJoint, JointInstance, sAutoJo
 {
 public:
 	AutoJoint() {}
-	AutoJoint(Joint* joint) : DescribedNonCreatable<AutoJoint, JointInstance, sAutoJoint>(joint) {}
+	AutoJoint(Joint* _joint);
 
 	virtual ~AutoJoint();
 
@@ -144,6 +144,12 @@ public:
 DECOMP_SIZE_ASSERT(Weld, 0x11c)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x100d8a40
+// RBX::DescribedNonCreatable<RBX::JointInstance,RBX::Instance,&RBX::sJointInstance>::DescribedNonCreatable<RBX::JointInstance,RBX::Instance,&RBX::sJointInstance>
+// TEMPLATE: WEBSERVICE 0x100d8c40
+// RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint>::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint><RBX::Joint *>
+// TEMPLATE: WEBSERVICE 0x100d8cf0
+// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint><RBX::Joint *>
 // FUNCTION: WEBSERVICE 0x1021c570
 // `dynamic initializer for 'prop_MaxVelocity''
 // FUNCTION: WEBSERVICE 0x1021c5f0

@@ -1,8 +1,12 @@
 #include "util/Sound.h"
 
+#include "util/Math.h"
 #include "util/Name.h"
 #include "util/StandardOut.h"
+#include "util/Velocity.h"
+#include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/GameSettings.h"
+#include "v8datamodel/PartInstance.h"
 
 #include <G3D/format.h>
 #include <fmod.hpp>
@@ -85,6 +89,33 @@ void checkResult(FMOD_RESULT result)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1007d570
+bool convert(const G3D::Vector3& src, FMOD_VECTOR& dst)
+{
+	G3D::Vector3 filter = src;
+
+	if (RBX::Math::isDenormal(filter.x)) {
+		filter.x = 0.0f;
+	}
+	if (RBX::Math::isDenormal(filter.y)) {
+		filter.y = 0.0f;
+	}
+	if (RBX::Math::isDenormal(filter.z)) {
+		filter.z = 0.0f;
+	}
+
+	if (RBX::Math::isNanInfDenormVector3(filter)) {
+		return false;
+	}
+
+	filter = filter.clamp(-5000.0f, 5000.0f);
+	dst.x = filter.x;
+	dst.y = filter.y;
+	dst.z = filter.z;
+
+	return true;
+}
+
 namespace RBX {
 namespace Soundscape {
 
@@ -93,16 +124,50 @@ SoundChannel::~SoundChannel()
 {
 }
 
+} // namespace Soundscape
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x1007ebe0
+void checkResultNoThrow(FMOD_RESULT result)
+{
+	if (result != FMOD_OK) {
+		if (RBX::DebugSettings::singleton().soundWarnings) {
+			char err[512];
+			strncpy(err, FMOD_ErrorString(result), 512);
+			RBX::StandardOut::singleton()->print(RBX::MESSAGE_WARNING, "FMOD %d: %s", result, err);
+		}
+	}
+}
+
+namespace RBX {
+namespace Soundscape {
+
+// FUNCTION: WEBSERVICE 0x1007fd70
+void SoundChannel::update3D(FMOD::Channel* channel)
+{
+	if (is3D && part) {
+		FMOD_VECTOR pos;
+		if (convert(part->getCoordinateFrame().translation, pos)) {
+			FMOD_VECTOR vel;
+			if (convert(part->getLinearVelocity(), vel)) {
+				checkResultNoThrow(channel->set3DAttributes(&pos, &vel));
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10080830
+void SoundChannel::onEvent(const RunService* source, Heartbeat event)
+{
+	if (!isPaused()) {
+		update3D(fmod_channel);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
 bool SoundChannel::askSetParent(const Instance* parent) const
 {
 	return true;
-}
-
-// STUB: WEBSERVICE 0x10080830
-void SoundChannel::onEvent(const RunService* source, Heartbeat event)
-{
-	STUB(0x10080830);
 }
 
 // FUNCTION: WEBSERVICE 0x10082d90

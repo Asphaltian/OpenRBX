@@ -2,6 +2,8 @@
 
 namespace RBX {
 
+char sRootInstance[] = "RootInstance";
+
 // STUB: WEBSERVICE 0x100c0eb0
 G3D::Vector3 RootInstance::computeIdeInsertPoint() const
 {

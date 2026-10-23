@@ -91,7 +91,7 @@ void ModelInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 	STUB(0x1005a460);
 }
 
-// STUB: WEBSERVICE 0x1005a890
+// FUNCTION: WEBSERVICE 0x1005a890
 ModelInstance::~ModelInstance()
 {
 }
@@ -271,11 +271,18 @@ Extents ModelInstance::computeLocalGridExtents() const
 
 // STUB: WEBSERVICE 0x1005c000
 ModelInstance::ModelInstance()
-	: PVInstance(sModel), primaryPart(NULL), FlagHeight(this, &ModelInstance::computeFlagHeight),
+	: DescribedCreatable<ModelInstance, PVInstance, sModel>("Model"), primaryPart(NULL),
+	  FlagHeight(this, &ModelInstance::computeFlagHeight),
 	  LocalGridExtents(this, &ModelInstance::computeLocalGridExtents),
 	  WorldGridExtents(this, &ModelInstance::computeWorldGridExtents)
 {
-	STUB(0x1005c000);
+	static bool physicalCharacterHacked = false;
+
+	if (!physicalCharacterHacked) {
+		const Name& name = Name::declare("PhysicalCharacter", -1);
+		getCreators()[&name] = &getCreator();
+		physicalCharacterHacked = true;
+	}
 }
 
 void ModelInstance::onLastChildRemoved()

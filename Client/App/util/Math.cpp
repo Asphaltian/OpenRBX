@@ -516,7 +516,7 @@ const Matrix3& Math::getAxisRotationMatrix(int face)
 	return Matrix3::identity();
 }
 
-// STUB: WEBSERVICE 0x100dfa70
+// FUNCTION: WEBSERVICE 0x100dfa70
 CoordinateFrame Math::getFocusSpace(const CoordinateFrame& focus)
 {
 	const Vector3 look = focus.rotation.getColumn(2) * CoordinateFrame::zLookDirection;

@@ -121,6 +121,8 @@ public:
 	const CoordinateFrame& getCoordinateFrame() const;
 
 	float getMass();
+	const Velocity& getVelocity() const;
+	const Vector3& getLinearVelocity() const;
 
 	const Vector3& getPartSizeXml() const;
 	Vector3 getPartSizeUi() const;

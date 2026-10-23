@@ -19,6 +19,9 @@ class System;
 } // namespace FMOD
 
 namespace RBX {
+
+class PartInstance;
+
 namespace Soundscape {
 
 extern char sSoundService[];
@@ -83,6 +86,8 @@ protected:
 	virtual void onEvent(const RunService* source, Heartbeat event); // vtable+0x00
 
 private:
+	void update3D(FMOD::Channel* channel);
+
 	boost::shared_ptr<Sound> sound; // 0xfc
 	FMOD::Channel* fmod_channel;    // 0x104
 	SoundId soundId;                // 0x108
@@ -92,7 +97,7 @@ private:
 	bool looped : 1;                // 0x12d
 	bool soundDisabled : 1;         // 0x12d
 	int playCount;                  // 0x130
-	undefined4 part;                // 0x134
+	PartInstance* part;             // 0x134
 };
 
 DECOMP_SIZE_ASSERT(SoundChannel, 0x138)

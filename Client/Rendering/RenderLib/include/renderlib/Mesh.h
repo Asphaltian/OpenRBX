@@ -65,6 +65,12 @@ private:
 
 	static void makeVAR();
 
+	static void computeAABounds(
+		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
+		G3D::Vector3& lo,
+		G3D::Vector3& hi
+	);
+
 	static G3D::Vector3 findScale;
 	static VertexList findGrid[32][32][32];
 
@@ -92,7 +98,7 @@ public:
 
 	float debugBoundingRadius; // 0x4c
 
-	static void freeVertex(unsigned int i);
+	static void freeVertex(unsigned int index);
 
 	static unsigned int allocVertex(unsigned int i, unsigned int count);
 

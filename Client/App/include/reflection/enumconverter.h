@@ -179,8 +179,12 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 }
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x1009dde0
+// RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton
 // STUB: WEBSERVICE 0x100e5dd0
 // RBX::Reflection::EnumDesc<enum RBX::Feature::TopBottom>::singleton
+// SYNTHETIC: WEBSERVICE 0x10223320
+// `RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton'::`2'::`dynamic atexit destructor for 's''
 // clang-format on
 template <class T>
 const EnumDesc<T>& EnumDesc<T>::singleton()

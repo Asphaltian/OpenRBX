@@ -13,6 +13,9 @@ extern const char sDebugSettings[];
 class DebugSettings : public GlobalSettingsItem<DebugSettings, sDebugSettings>
 {
 public:
+	// SYNTHETIC: WEBSERVICE 0x100b51d0
+	// RBX::DebugSettings::`scalar deleting destructor'
+
 	enum ErrorReporting
 	{
 		DontReport = 0,

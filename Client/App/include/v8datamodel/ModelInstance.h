@@ -20,7 +20,7 @@ class PartInstance;
 extern char sModel[];
 
 // SIZE 0x254
-class ModelInstance : public PVInstance,
+class ModelInstance : public DescribedCreatable<ModelInstance, PVInstance, sModel>,
 					  public IRenderable,
 					  public virtual IPrimaryPart,
 					  public virtual ICameraSubject,

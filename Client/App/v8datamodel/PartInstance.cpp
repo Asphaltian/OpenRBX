@@ -257,6 +257,18 @@ float PartInstance::getMass()
 	return primitive->getBody()->getMass();
 }
 
+// FUNCTION: WEBSERVICE 0x1009b0c0 FOLDED
+const Velocity& PartInstance::getVelocity() const
+{
+	return primitive->getBody()->getVelocity();
+}
+
+// FUNCTION: WEBSERVICE 0x1009b0c0 FOLDED
+const Vector3& PartInstance::getLinearVelocity() const
+{
+	return primitive->getBody()->getVelocity().linear;
+}
+
 // FUNCTION: WEBSERVICE 0x1009b100
 const Vector3& PartInstance::getPartSizeXml() const
 {

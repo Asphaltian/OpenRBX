@@ -95,27 +95,25 @@ unsigned int Clusterer::moveSamples()
 // STUB: WEBSERVICE 0x101fa520
 Clusterer::Clusters* Clusterer::go(unsigned int maxSteps)
 {
-	if (clusterCount <= 1) {
-		return &clusters;
-	}
+	if (clusterCount > 1) {
+		Clusters::iterator end = clusters.end();
 
-	Clusters::iterator end = clusters.end();
-
-	for (Clusters::iterator it = clusters.begin(); it != end; ++it) {
-		if (it->samples.size() != 0) {
-			it->centroid = it->samples[rand() % it->samples.size()]->cframe().translation;
-		}
-	}
-
-	unsigned int threshold = std::max(sampleSize / 20, 1u);
-	unsigned int step = 1;
-
-	while (moveSamples() > threshold && step != maxSteps) {
-		for (Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
-			it->computeCentroid();
+		for (Clusters::iterator it = clusters.begin(); it != end; ++it) {
+			if (it->samples.size() != 0) {
+				it->centroid = it->samples[rand() % it->samples.size()]->cframe().translation;
+			}
 		}
 
-		step++;
+		unsigned int threshold = std::max(sampleSize / 20, 1u);
+		unsigned int step = 1;
+
+		while (moveSamples() > threshold && step != maxSteps) {
+			for (Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
+				it->computeCentroid();
+			}
+
+			step++;
+		}
 	}
 
 	return &clusters;

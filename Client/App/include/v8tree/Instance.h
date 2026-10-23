@@ -94,21 +94,6 @@ private:
 
 DECOMP_SIZE_ASSERT(PropertyChanged, 0x8)
 
-// clang-format off
-// TEMPLATE: WEBSERVICE 0x10047dc0
-// RBX::AbstractFactoryProduct<RBX::Instance>::~AbstractFactoryProduct<RBX::Instance>
-// FUNCTION: WEBSERVICE 0x10048490
-// RBX::AbstractFactoryProduct<RBX::Instance>::`scalar deleting destructor'
-// clang-format on
-template <class T>
-class AbstractFactoryProduct : public Creatable<T>
-{
-public:
-	virtual ~AbstractFactoryProduct() {}
-
-	virtual const Name& getClassName() const = 0; // vtable+0x04
-};
-
 extern const char sInstance[];
 
 class Instance : public GuidItem<Instance>,
@@ -311,7 +296,7 @@ public:
 	DescribedNonCreatable() {}
 
 	template <class U>
-	DescribedNonCreatable(U* joint) : Reflection::Described<T, sName, NonFactoryProduct<Base, sName> >(joint)
+	DescribedNonCreatable(U arg0) : Reflection::Described<T, sName, NonFactoryProduct<Base, sName> >(arg0)
 	{
 	}
 };
@@ -320,6 +305,10 @@ template <class T, class Base, const char* sName>
 // clang-format off
 	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
+	// TEMPLATE: WEBSERVICE 0x1005a880
+	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::~DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>
+	// TEMPLATE: WEBSERVICE 0x1005bed0
+	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel><char const *>
 	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
 	// RBX::Instance::askSetParent
 	// FUNCTION: WEBSERVICE 0x10043270
@@ -395,17 +384,17 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: WEBSERVICE 0x100d8800
 	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::~DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>
 	// FUNCTION: WEBSERVICE 0x100d9440
-	// RBX::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap><RBX::Joint *>
+	// RBX::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap><RBX::SnapJoint *>
 	// FUNCTION: WEBSERVICE 0x100d94e0
-	// RBX::DescribedCreatable<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::DescribedCreatable<RBX::Weld,RBX::AutoJoint,&RBX::sWeld><RBX::Joint *>
+	// RBX::DescribedCreatable<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::DescribedCreatable<RBX::Weld,RBX::AutoJoint,&RBX::sWeld><RBX::WeldJoint *>
 	// FUNCTION: WEBSERVICE 0x100d95c0
 	// RBX::DescribedCreatable<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::DescribedCreatable<RBX::Glue,RBX::AutoJoint,&RBX::sGlue><RBX::GlueJoint *>
 	// FUNCTION: WEBSERVICE 0x100d96d0
-	// RBX::DescribedCreatable<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::DescribedCreatable<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate><RBX::Joint *>
+	// RBX::DescribedCreatable<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::DescribedCreatable<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate><RBX::RotateJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9790
-	// RBX::DescribedCreatable<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::DescribedCreatable<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP><RBX::Joint *>
+	// RBX::DescribedCreatable<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::DescribedCreatable<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP><RBX::RotatePJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9870
-	// RBX::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV><RBX::Joint *>
+	// RBX::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV><RBX::RotateVJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9970
 	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor><RBX::MotorJoint *>
 	// FUNCTION: WEBSERVICE 0x100da960

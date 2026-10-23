@@ -11,6 +11,10 @@ extern const char sGameSettings[];
 // SIZE 0x104
 class GameSettings : public GlobalSettingsItem<GameSettings, sGameSettings>
 {
+public:
+	// SYNTHETIC: WEBSERVICE 0x100de300
+	// RBX::GameSettings::`scalar deleting destructor'
+
 private:
 	undefined m_unk0x0f8[0x104 - 0x0f8]; // 0x0f8
 };

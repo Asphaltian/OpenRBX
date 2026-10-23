@@ -16,10 +16,11 @@ namespace RBX {
 
 class World;
 
-extern const char sRootInstance[];
+extern char sRootInstance[];
 
 // SIZE 0x2ac
-class __declspec(novtable) RootInstance : public ModelInstance, public ICameraOwner
+class __declspec(novtable) RootInstance : public Reflection::Described<RootInstance, sRootInstance, ModelInstance>,
+										  public ICameraOwner
 {
 private:
 	ComputeProp<ControllerTypeArray, RootInstance> ControllersUsed; // 0x250

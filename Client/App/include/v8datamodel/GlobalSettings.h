@@ -13,16 +13,26 @@ namespace RBX {
 extern const char sGlobalSettings[];
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x10062fb0
+// RBX::GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>::singleton
 // FUNCTION: WEBSERVICE 0x10071970
 // RBX::NonFactoryProduct<RBX::Instance,0>::NonFactoryProduct<RBX::Instance,0>
 // FUNCTION: WEBSERVICE 0x100b3640
 // RBX::GlobalSettings::Item::Item
 // FUNCTION: WEBSERVICE 0x100b36a0
 // RBX::GlobalSettings::Item::askAddChild
+// TEMPLATE: WEBSERVICE 0x100b3b40
+// RBX::GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>::~GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>
+// TEMPLATE: WEBSERVICE 0x100b4fd0
+// RBX::GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>::GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>
 // FUNCTION: WEBSERVICE 0x100b7150
 // RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings>::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings>
 // FUNCTION: WEBSERVICE 0x100b72c0
 // RBX::DescribedNonCreatable<RBX::GlobalSettings,RBX::ServiceProvider,&RBX::sGlobalSettings>::DescribedNonCreatable<RBX::GlobalSettings,RBX::ServiceProvider,&RBX::sGlobalSettings>
+// TEMPLATE: WEBSERVICE 0x100de240
+// RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::~GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>
+// TEMPLATE: WEBSERVICE 0x100de5a0
+// RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>
 // SYNTHETIC: WEBSERVICE 0x102226f0
 // `RBX::Reflection::Described<RBX::GlobalSettings,&RBX::sGlobalSettings,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102239a0
@@ -52,7 +62,32 @@ DECOMP_SIZE_ASSERT(GlobalSettings::Item, 0xf8)
 template <class T, const char* sName>
 class GlobalSettingsItem : public DescribedCreatable<T, GlobalSettings::Item, sName>, public Service
 {
+private:
+	static GlobalSettingsItem* sing;
+
+protected:
+	GlobalSettingsItem()
+	{
+		setName(sName);
+		sing = this;
+	}
+
+	virtual ~GlobalSettingsItem() { sing = NULL; }
+
+public:
+	static T& singleton()
+	{
+		boost::recursive_mutex::scoped_lock lock(GlobalSettings::mutex);
+		if (sing == NULL) {
+			boost::shared_ptr<T> s = Creatable<Instance>::create<T>();
+			s->setParent(GlobalSettings::singleton().get());
+		}
+		return static_cast<T&>(*sing);
+	}
 };
+
+template <class T, const char* sName>
+GlobalSettingsItem<T, sName>* GlobalSettingsItem<T, sName>::sing = NULL;
 
 } // namespace RBX
 

@@ -74,6 +74,21 @@ AutoJoint::~AutoJoint()
 	setPart(1, NULL);
 }
 
+// FUNCTION: WEBSERVICE 0x100d8ad0
+JointInstance::JointInstance(Joint* joint) : joint(joint)
+{
+	joint->setJointOwner(this);
+}
+
+// STUB: WEBSERVICE 0x100d8de0
+AutoJoint::AutoJoint(Joint* _joint) : DescribedNonCreatable<AutoJoint, JointInstance, sAutoJoint>(_joint)
+{
+	PartInstance* p0 = const_cast<PartInstance*>(PartInstance::fromPrimitiveConst(joint->getPrimitive(0)));
+	PartInstance* p1 = const_cast<PartInstance*>(PartInstance::fromPrimitiveConst(joint->getPrimitive(1)));
+	part[0] = shared_from(p0);
+	part[1] = shared_from(p1);
+}
+
 // FUNCTION: WEBSERVICE 0x100d9020
 void Motor::setMaxVelocity(float value)
 {
@@ -96,18 +111,18 @@ Snap::Snap(Joint* joint) : DescribedCreatable<Snap, AutoJoint, sSnap>(joint)
 {
 }
 
-// STUB: WEBSERVICE 0x100d9b20
+// FUNCTION: WEBSERVICE 0x100d9b20
 Snap::Snap() : DescribedCreatable<Snap, AutoJoint, sSnap>(new SnapJoint())
 {
 	setName("Snap");
 }
 
-// STUB: WEBSERVICE 0x100d9c20
+// FUNCTION: WEBSERVICE 0x100d9c20
 Weld::Weld(Joint* joint) : DescribedCreatable<Weld, AutoJoint, sWeld>(joint)
 {
 }
 
-// STUB: WEBSERVICE 0x100d9cb0
+// FUNCTION: WEBSERVICE 0x100d9cb0
 Weld::Weld() : DescribedCreatable<Weld, AutoJoint, sWeld>(new WeldJoint())
 {
 }
@@ -122,32 +137,32 @@ Glue::Glue() : DescribedCreatable<Glue, AutoJoint, sGlue>(new GlueJoint())
 {
 }
 
-// STUB: WEBSERVICE 0x100d9ec0
+// FUNCTION: WEBSERVICE 0x100d9ec0
 Rotate::Rotate(Joint* joint) : DescribedCreatable<Rotate, AutoJoint, sRotate>(joint)
 {
 }
 
-// STUB: WEBSERVICE 0x100d9f90
+// FUNCTION: WEBSERVICE 0x100d9f90
 Rotate::Rotate() : DescribedCreatable<Rotate, AutoJoint, sRotate>(new RotateJoint())
 {
 }
 
-// STUB: WEBSERVICE 0x100da050
+// FUNCTION: WEBSERVICE 0x100da050
 RotateP::RotateP(Joint* joint) : DescribedCreatable<RotateP, AutoJoint, sRotateP>(joint)
 {
 }
 
-// STUB: WEBSERVICE 0x100da100
+// FUNCTION: WEBSERVICE 0x100da100
 RotateP::RotateP() : DescribedCreatable<RotateP, AutoJoint, sRotateP>(new RotatePJoint())
 {
 }
 
-// STUB: WEBSERVICE 0x100da1d0
+// FUNCTION: WEBSERVICE 0x100da1d0
 RotateV::RotateV(Joint* joint) : DescribedCreatable<RotateV, AutoJoint, sRotateV>(joint)
 {
 }
 
-// STUB: WEBSERVICE 0x100da280
+// FUNCTION: WEBSERVICE 0x100da280
 RotateV::RotateV() : DescribedCreatable<RotateV, AutoJoint, sRotateV>(new RotateVJoint())
 {
 }

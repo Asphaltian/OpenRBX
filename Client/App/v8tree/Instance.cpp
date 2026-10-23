@@ -169,7 +169,7 @@ Instance::~Instance()
 {
 }
 
-// STUB: WEBSERVICE 0x1004da80
+// FUNCTION: WEBSERVICE 0x1004da80
 void Instance::setParent(Instance* newParent)
 {
 	if (newParent == parent) {

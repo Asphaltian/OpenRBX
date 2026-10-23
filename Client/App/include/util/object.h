@@ -6,6 +6,7 @@
 
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
+#include <map>
 #include <stdlib.h>
 
 namespace RBX {
@@ -180,6 +181,28 @@ public:
 
 DECOMP_SIZE_ASSERT(ICreator, 0x4)
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x10047dc0
+// RBX::AbstractFactoryProduct<RBX::Instance>::~AbstractFactoryProduct<RBX::Instance>
+// FUNCTION: WEBSERVICE 0x10048490
+// RBX::AbstractFactoryProduct<RBX::Instance>::`scalar deleting destructor'
+// clang-format on
+template <class T>
+class AbstractFactoryProduct : public Creatable<T>
+{
+protected:
+	static std::map<const Name*, const ICreator*>& getCreators()
+	{
+		static std::map<const Name*, const ICreator*> creators;
+		return creators;
+	}
+
+public:
+	virtual const Name& getClassName() const = 0; // vtable+0x04
+
+	virtual ~AbstractFactoryProduct() {}
+};
+
 template <class T, class Base, const char* sName>
 class FactoryProduct : public Base
 {
@@ -219,8 +242,16 @@ public:
 	// RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::getClassName
 	// FUNCTION: WEBSERVICE 0x100564d0
 	// RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x10059c90
+	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::~FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>
+	// TEMPLATE: WEBSERVICE 0x10059f00
+	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel><char const *>
+	// TEMPLATE: WEBSERVICE 0x1005b540
+	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1005bb30
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1005bfe0
+	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1005ce00
 	// RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>::~FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>
 	// TEMPLATE: WEBSERVICE 0x1005ce50
@@ -448,17 +479,17 @@ public:
 	// FUNCTION: WEBSERVICE 0x100d87b0
 	// RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100d9100
-	// RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap><RBX::Joint *>
+	// RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap><RBX::SnapJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9170
-	// RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld><RBX::Joint *>
+	// RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld><RBX::WeldJoint *>
 	// FUNCTION: WEBSERVICE 0x100d91e0
 	// RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue><RBX::GlueJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9250
-	// RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate><RBX::Joint *>
+	// RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate><RBX::RotateJoint *>
 	// FUNCTION: WEBSERVICE 0x100d92c0
-	// RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP><RBX::Joint *>
+	// RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP><RBX::RotatePJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9330
-	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV><RBX::Joint *>
+	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV><RBX::RotateVJoint *>
 	// FUNCTION: WEBSERVICE 0x100d93a0
 	// RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor><RBX::MotorJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9950
