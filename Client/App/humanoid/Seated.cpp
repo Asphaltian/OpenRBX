@@ -1,10 +1,34 @@
 #include "humanoid/Seated.h"
 
+#include "humanoid/Jumping.h"
 #include "util/Name.h"
 
 namespace RBX {
 
 const char sSeated[] = "Seated";
+
+// FUNCTION: WEBSERVICE 0x101229b0
+Humanoid::State* Seated::onStep(const float stepDt, Controller& controller)
+{
+	if (humanoid->getJump()) {
+		humanoid->setJump(false);
+		return new Jumping(humanoid);
+	}
+
+	return this;
+}
+
+// FUNCTION: WEBSERVICE 0x10122ae0
+Seated::Seated(Humanoid* humanoid) : Named<Humanoid::State, sSeated>(humanoid)
+{
+	Humanoid::event_Seated.fire(humanoid, true);
+}
+
+// FUNCTION: WEBSERVICE 0x10122b50
+Seated::~Seated()
+{
+	Humanoid::event_Seated.fire(humanoid, false);
+}
 
 } // namespace RBX
 

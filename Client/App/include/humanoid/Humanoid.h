@@ -99,6 +99,7 @@ public:
 	void setSit(bool value);
 	// FUNCTION: WEBSERVICE 0x100a07c0
 	bool getSit() const { return sit; }
+	World* getWorld() const { return world; }
 
 	const G3D::Vector3& getTargetPoint() const { return targetPoint; }
 

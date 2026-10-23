@@ -2,6 +2,7 @@
 
 #include "util/object.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8kernel/Body.h"
 #include "v8world/Primitive.h"
 
 namespace RBX {
@@ -20,6 +21,19 @@ HitTestFilter::Result Balancing::filterResult(const Primitive* testMe) const
 	// clang-format on
 
 	return result;
+}
+
+// FUNCTION: WEBSERVICE 0x10122030
+G3D::Vector3 Balancing::getYAxis() const
+{
+	Body* body = humanoid->getTorsoBody();
+
+	if (body != NULL) {
+		G3D::Vector3 yAxis = body->getPV().position.vectorToObjectSpace(G3D::Vector3::unitY());
+		return yAxis;
+	}
+
+	return G3D::Vector3::unitY();
 }
 
 // STUB: WEBSERVICE 0x10122140
@@ -51,11 +65,6 @@ Humanoid::State* Balancing::onStep(const float stepDt, Controller& controller)
 	}
 
 	return NULL;
-}
-
-G3D::Vector3 Balancing::getYAxis() const
-{
-	return G3D::Vector3(0, 0, 0);
 }
 
 } // namespace RBX

@@ -3772,7 +3772,11 @@ address,type,symbol
 0x102483e0,global,?kJumpP@Jumping@RBX@@0MB
 0x102483e4,global,?jumpVelocityGrid@Jumping@RBX@@0MB
 0x102483e8,global,?sJumping@RBX@@3QBDB
+0x102483f4,global,??_7Jumping@RBX@@6BHitTestFilter@1@@
+0x102483fc,global,??_7Jumping@RBX@@6BState@Humanoid@1@@
 0x10248420,global,?sGettingUp@RBX@@3QBDB
+0x1024843c,global,??_7GettingUp@RBX@@6BHitTestFilter@1@@
+0x10248444,global,??_7GettingUp@RBX@@6BState@Humanoid@1@@
 0x102485b4,global,??_7AssemblyStage@RBX@@6B@
 0x102485fc,global,??_7FillToolColor@RBX@@6B@
 0x1024860c,global,??_7Creator@?$FactoryProduct@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@6B@

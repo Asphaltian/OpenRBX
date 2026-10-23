@@ -1,10 +1,15 @@
 #include "humanoid/Running.h"
 
+#include "humanoid/FallingDown.h"
+#include "humanoid/Jumping.h"
+#include "humanoid/Seated.h"
 #include "util/Math.h"
 #include "util/Name.h"
 #include "v8datamodel/GeometryService.h"
 #include "v8kernel/Body.h"
+#include "v8world/Geometry.h"
 #include "v8world/Primitive.h"
+#include "v8world/World.h"
 
 #include <G3D/System.h>
 
@@ -152,11 +157,57 @@ void Running::updateGoals(Controller& controller)
 	intendedYRotation = desiredYRotationalVelocity;
 }
 
-// STUB: WEBSERVICE 0x10107110
+// FUNCTION: WEBSERVICE 0x10107110
 Humanoid::State* Running::onStep(const float stepDt, Controller& controller)
 {
-	STUB(0x10107110);
-	return NULL;
+	State* answer = Balancing::onStep(stepDt, controller);
+	if (answer != this) {
+		return answer;
+	}
+
+	G3D::Vector3 yAxis = getYAxis();
+	if (yAxis.y < fallCutoff()) {
+		return new FallingDown(humanoid, 3.0f);
+	}
+
+	if (jumpWarmup >= 0.0f && humanoid->getJump()) {
+		humanoid->setJump(false);
+		return new Jumping(humanoid);
+	}
+
+	humanoid->setJump(false);
+
+	if (humanoid->getSit()) {
+		humanoid->setSit(false);
+		return new Seated(humanoid);
+	}
+
+	if (floorPart) {
+		humanoid->getWorld()->ticklePrimitive(floorPart->getPrimitive(), false);
+	}
+
+	desiredAltitude = floorTouchInWorld.y;
+
+	if (humanoid->getTorsoPrimitive()) {
+		desiredAltitude += humanoid->getTorsoPrimitive()->getGeometry()->getGridSize().y * 0.5f;
+	}
+
+	if (humanoid->getLeftLegPrimitive()) {
+		desiredAltitude += humanoid->getLeftLegPrimitive()->getGeometry()->getGridSize().y;
+	}
+	else if (humanoid->getRightLegPrimitive()) {
+		desiredAltitude += humanoid->getRightLegPrimitive()->getGeometry()->getGridSize().y;
+	}
+
+	const Velocity& floorVel = !floorPart
+								   ? Velocity::zero()
+								   : floorPart->getPrimitive()->getBody()->getPV().velocityAtPoint(floorTouchInWorld);
+	floorVelocity = floorVel.linear;
+	floorRotationalVelocity = floorVel.rotational.y;
+
+	updateGoals(controller);
+
+	return this;
 }
 
 } // namespace RBX

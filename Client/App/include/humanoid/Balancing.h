@@ -25,7 +25,7 @@ private:
 
 protected:
 	static const float maxTorqueComponent();
-	static const float fallCutoff();
+	static const float fallCutoff() { return 0.85f; }
 	static const float maxClimbDistance();
 
 	virtual void onComputeForce(const float dt);                       // vtable+0x08
