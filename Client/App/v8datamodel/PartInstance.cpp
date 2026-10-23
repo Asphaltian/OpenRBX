@@ -415,18 +415,29 @@ const Type& Type::singleton<CoordinateFrame>()
 
 } // namespace Reflection
 
-// STUB: WEBSERVICE 0x1009b4c0
+// FUNCTION: WEBSERVICE 0x1009b4c0
 CoordinateFrame PartInstance::worldSnapLocation() const
 {
-	STUB(0x1009b4c0);
-	return CoordinateFrame();
+	Vector3 halfSize = primitive->getGeometry()->getGridSize() * 0.5f;
+
+	Vector3 snapInPart;
+	snapInPart.y = -halfSize.y;
+	snapInPart.x = halfSize.x - G3D::iRound(floor(halfSize.x));
+	snapInPart.z = halfSize.z - G3D::iRound(floor(halfSize.z));
+
+	CoordinateFrame localSnapLocation(snapInPart);
+
+	return primitive->getCoordinateFrame() * localSnapLocation;
 }
 
-// STUB: WEBSERVICE 0x1009b5a0
+// FUNCTION: WEBSERVICE 0x1009b5a0
 bool PartInstance::aligned() const
 {
-	STUB(0x1009b5a0);
-	return false;
+	CoordinateFrame myCoord = worldSnapLocation();
+
+	CoordinateFrame myCoordSnapped = Math::snapToGrid(myCoord, Dragger::dragSnap());
+
+	return Math::fuzzyEq(myCoord, myCoordSnapped, 0.00001f, 0.00001f);
 }
 
 // FUNCTION: WEBSERVICE 0x1009b610
