@@ -259,6 +259,7 @@ set(OPENRBX_NETWORK_SOURCES
   Client/Network/Players.cpp
   Client/Network/API.cpp
   Client/Network/Client.cpp
+  Client/Network/ClientPhysics.cpp
   Client/Network/CrashReporter.cpp
   Client/Network/NetworkSettings.cpp
   Client/Network/Replicator.cpp

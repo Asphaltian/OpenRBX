@@ -33,6 +33,8 @@ extern const char sGlobalSettings[];
 // RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::~GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>
 // TEMPLATE: WEBSERVICE 0x100de5a0
 // RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>
+// TEMPLATE: WEBSERVICE 0x1018b970
+// RBX::GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>::singleton
 // TEMPLATE: WEBSERVICE 0x1019b4b0
 // RBX::GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>::~GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>
 // TEMPLATE: WEBSERVICE 0x1019b960
