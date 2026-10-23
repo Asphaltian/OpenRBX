@@ -192,7 +192,12 @@ public:
 	static const PartInstance* fromPrimitiveConst(const Primitive* primitive);
 
 	void destroyJoints();
+	void join();
 	void setCoordinateFrame(const CoordinateFrame& value);
+	void setLinearVelocity(const Vector3& set);
+	void setRotationalVelocity(const Vector3& set);
+
+	static void findParts(Instance* instance, std::vector<boost::weak_ptr<PartInstance> >& parts);
 
 	virtual const Primitive* getBiggestPrimitive() const;
 	virtual bool hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint);

@@ -13,6 +13,7 @@
 namespace RBX {
 
 class ContactManager;
+class Instance;
 class PartInstance;
 class Primitive;
 class PVInstance;
@@ -21,8 +22,12 @@ class World;
 class DragUtilities
 {
 public:
+	static void unJoinFromOutsiders(const std::vector<boost::weak_ptr<PartInstance> >& parts);
+	static void joinToOutsiders(const std::vector<boost::weak_ptr<PartInstance> >& parts);
+	static void join(const std::vector<boost::weak_ptr<PartInstance> >& parts);
 	static void unJoinAndSetDragging(const std::vector<boost::weak_ptr<PartInstance> >& parts);
 	static void joinAndStopDragging(const std::vector<boost::weak_ptr<PartInstance> >& parts);
+	static void clean(PartInstance* part);
 	static void clean(const std::vector<boost::weak_ptr<PartInstance> >& parts);
 	static void move(
 		const std::vector<boost::weak_ptr<PartInstance> >& parts,
@@ -32,6 +37,10 @@ public:
 	static void moveAndClean(PartInstance* part, const G3D::Vector3& delta);
 	static void pvsToParts(
 		const std::vector<PVInstance*>& pvInstances,
+		std::vector<boost::weak_ptr<PartInstance> >& parts
+	);
+	static void instancesToParts(
+		const std::vector<Instance*>& instances,
 		std::vector<boost::weak_ptr<PartInstance> >& parts
 	);
 	static World* partsToPrimitives(
@@ -46,6 +55,7 @@ public:
 		G3D::Vector3& hitPoint
 	);
 	static bool anyPartAlive(const std::vector<boost::weak_ptr<PartInstance> >& parts);
+	static void getPrimitivesConst(const Instance* instance, std::vector<const Primitive*>& primitives);
 };
 
 } // namespace RBX

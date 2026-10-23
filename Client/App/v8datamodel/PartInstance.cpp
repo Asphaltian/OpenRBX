@@ -206,6 +206,12 @@ void PartInstance::destroyJoints()
 	}
 }
 
+// STUB: WEBSERVICE 0x1009aed0
+void PartInstance::join()
+{
+	STUB(0x1009aed0);
+}
+
 // FUNCTION: WEBSERVICE 0x1009aef0
 bool PartInstance::computeSurfacesNeedAdorn() const
 {
@@ -541,6 +547,12 @@ EnumDesc<PartInstance::FormFactor>::EnumDesc() : EnumDescriptor("FormFactor", ty
 
 } // namespace Reflection
 
+// STUB: WEBSERVICE 0x1009dca0
+void PartInstance::findParts(Instance* instance, std::vector<boost::weak_ptr<PartInstance> >& parts)
+{
+	STUB(0x1009dca0);
+}
+
 // STUB: WEBSERVICE 0x1009f220
 PartInstance::PartInstance()
 	: DescribedCreatable<PartInstance, PVInstance, sPart>("Part"), surfaces(this),
@@ -554,6 +566,18 @@ PartInstance::PartInstance()
 void PartInstance::setCoordinateFrame(const CoordinateFrame& value)
 {
 	STUB(0x1009f610);
+}
+
+// STUB: WEBSERVICE 0x1009f790
+void PartInstance::setLinearVelocity(const Vector3& set)
+{
+	STUB(0x1009f790);
+}
+
+// STUB: WEBSERVICE 0x1009f850
+void PartInstance::setRotationalVelocity(const Vector3& set)
+{
+	STUB(0x1009f850);
 }
 
 // FUNCTION: WEBSERVICE 0x1009f910

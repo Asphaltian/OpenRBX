@@ -1,22 +1,47 @@
 #include "tool/DragUtilities.h"
 
 #include "decomp.h"
+#include "tool/Dragger.h"
+#include "util/Math.h"
+#include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Workspace.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
-// STUB: WEBSERVICE 0x100a6970
+// FUNCTION: WEBSERVICE 0x100a6970
 void DragUtilities::moveAndClean(PartInstance* part, const G3D::Vector3& delta)
 {
-	STUB(0x100a6970);
+	G3D::CoordinateFrame coord = part->getCoordinateFrame();
+	coord.translation += delta;
+
+	if (part->aligned()) {
+		coord = Math::snapToGrid(coord, 0.1f);
+	}
+
+	part->setCoordinateFrame(coord);
 }
 
-// STUB: WEBSERVICE 0x100a6b10
+// FUNCTION: WEBSERVICE 0x100a6b10 FOLDED
 void DragUtilities::pvsToParts(
 	const std::vector<PVInstance*>& pvInstances,
 	std::vector<boost::weak_ptr<PartInstance> >& parts
 )
 {
-	STUB(0x100a6b10);
+	for (unsigned int i = 0; i < pvInstances.size(); i++) {
+		PartInstance::findParts(pvInstances[i], parts);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a6b10 FOLDED
+void DragUtilities::instancesToParts(
+	const std::vector<Instance*>& instances,
+	std::vector<boost::weak_ptr<PartInstance> >& parts
+)
+{
+	for (unsigned int i = 0; i < instances.size(); i++) {
+		PartInstance::findParts(instances[i], parts);
+	}
 }
 
 // STUB: WEBSERVICE 0x100a6b70
@@ -31,56 +56,169 @@ bool DragUtilities::hitObjectOrPlane(
 	return false;
 }
 
-// STUB: WEBSERVICE 0x100a6cd0
+// FUNCTION: WEBSERVICE 0x100a6cd0
 bool DragUtilities::anyPartAlive(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
-	STUB(0x100a6cd0);
+	for (unsigned int i = 0; i < parts.size(); i++) {
+		if (PartInstance::nonNullInWorkspace(parts[i].lock())) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
-// STUB: WEBSERVICE 0x100a6d50
+// FUNCTION: WEBSERVICE 0x100a6d50
 World* DragUtilities::partsToPrimitives(
 	const std::vector<boost::weak_ptr<PartInstance> >& parts,
 	G3D::Array<Primitive*>& primitives
 )
 {
-	STUB(0x100a6d50);
-	return NULL;
+	World* answer = NULL;
+
+	for (unsigned int i = 0; i < parts.size(); i++) {
+		boost::shared_ptr<PartInstance> part = parts[i].lock();
+
+		if (PartInstance::nonNullInWorkspace(part)) {
+			primitives.append(part->getPrimitive());
+
+			if (answer == NULL) {
+				answer = Workspace::getMyWorldFast(part.get());
+			}
+		}
+	}
+
+	return answer;
 }
 
-// STUB: WEBSERVICE 0x100a7070
+// FUNCTION: WEBSERVICE 0x100a6e90
+void DragUtilities::unJoinFromOutsiders(const std::vector<boost::weak_ptr<PartInstance> >& parts)
+{
+	G3D::Array<Primitive*> primitives;
+	World* world = partsToPrimitives(parts, primitives);
+
+	if (world) {
+		world->destroyJointsToWorld(primitives);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a6f00
+void DragUtilities::joinToOutsiders(const std::vector<boost::weak_ptr<PartInstance> >& parts)
+{
+	G3D::Array<Primitive*> primitives;
+	World* world = partsToPrimitives(parts, primitives);
+
+	if (world) {
+		world->createJointsToWorld(primitives);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a6f70
+void DragUtilities::join(const std::vector<boost::weak_ptr<PartInstance> >& parts)
+{
+	for (unsigned int i = 0; i < parts.size(); i++) {
+		boost::shared_ptr<PartInstance> part = parts[i].lock();
+
+		if (PartInstance::nonNullInWorkspace(part)) {
+			part->join();
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a7070
 void DragUtilities::unJoinAndSetDragging(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
-	STUB(0x100a7070);
+	unJoinFromOutsiders(parts);
+
+	for (unsigned int i = 0; i < parts.size(); i++) {
+		boost::shared_ptr<PartInstance> part = parts[i].lock();
+
+		if (PartInstance::nonNullInWorkspace(part)) {
+			part->setDragging(true);
+		}
+	}
 }
 
-// STUB: WEBSERVICE 0x100a7180
+// FUNCTION: WEBSERVICE 0x100a7180
 void DragUtilities::joinAndStopDragging(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
-	STUB(0x100a7180);
+	joinToOutsiders(parts);
+
+	for (unsigned int i = 0; i < parts.size(); i++) {
+		boost::shared_ptr<PartInstance> part = parts[i].lock();
+
+		if (PartInstance::nonNullInWorkspace(part)) {
+			part->setDragging(false);
+
+			if (parts.size() == 1) {
+				part->setLinearVelocity(G3D::Vector3::zero());
+				part->setRotationalVelocity(G3D::Vector3::zero());
+			}
+		}
+	}
 }
 
-// STUB: WEBSERVICE 0x100a7300
+void DragUtilities::clean(PartInstance* part)
+{
+	if (part->aligned()) {
+		const G3D::CoordinateFrame& coord = part->getCoordinateFrame();
+		G3D::CoordinateFrame snapped = Math::snapToGrid(coord, 0.1f);
+
+		if (snapped != coord) {
+			part->setCoordinateFrame(snapped);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a7300
 void DragUtilities::clean(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
-	STUB(0x100a7300);
+	for (unsigned int i = 0; i < parts.size(); i++) {
+		boost::shared_ptr<PartInstance> part = parts[i].lock();
+
+		if (part) {
+			clean(part.get());
+		}
+	}
 }
 
-// STUB: WEBSERVICE 0x100a7440
+// FUNCTION: WEBSERVICE 0x100a7440
 void DragUtilities::move(
 	const std::vector<boost::weak_ptr<PartInstance> >& parts,
-	G3D::CoordinateFrame start,
-	G3D::CoordinateFrame end
+	G3D::CoordinateFrame from,
+	G3D::CoordinateFrame to
 )
 {
-	STUB(0x100a7440);
+	for (unsigned int i = 0; i < parts.size(); i++) {
+		boost::shared_ptr<PartInstance> part = parts[i].lock();
+
+		if (part) {
+			G3D::CoordinateFrame meInFrom = from.toObjectSpace(part->getCoordinateFrame());
+			Math::orthonormalizeIfNecessary(meInFrom.rotation);
+			part->setCoordinateFrame(to * meInFrom);
+		}
+	}
 }
 
-// STUB: WEBSERVICE 0x100a7550
+// FUNCTION: WEBSERVICE 0x100a7550
 Extents DragUtilities::computeExtents(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
-	STUB(0x100a7550);
-	return Extents();
+	G3D::Array<Primitive*> primitives;
+	partsToPrimitives(parts, primitives);
+
+	return Dragger::computeExtents(primitives);
+}
+
+// FUNCTION: WEBSERVICE 0x100a75c0
+void DragUtilities::getPrimitivesConst(const Instance* instance, std::vector<const Primitive*>& primitives)
+{
+	if (const PartInstance* part = dynamic_cast<const PartInstance*>(instance)) {
+		primitives.push_back(part->getPrimitive());
+	}
+
+	for (unsigned int i = 0; i < instance->numChildren(); i++) {
+		getPrimitivesConst(instance->getChild(i), primitives);
+	}
 }
 
 } // namespace RBX
