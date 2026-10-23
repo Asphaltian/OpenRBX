@@ -22,6 +22,35 @@ bool PartInstance::showPartCoord;
 bool PartInstance::showUnalignedParts;
 bool PartInstance::showSpanningTree;
 
+const Reflection::PropDescriptor<PartInstance, CoordinateFrame> PartInstance::prop_CFrame(
+	"CFrame",
+	"Data",
+	&RBX::PartInstance::getCoordinateFrame,
+	&RBX::PartInstance::setCoordinateFrame
+);
+
+static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_PositionUi(
+	"Position",
+	"Data",
+	&RBX::PartInstance::getTranslationUi,
+	&RBX::PartInstance::setTranslationUi,
+	Reflection::PropertyDescriptor::UI
+);
+
+static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_Velocity(
+	"Velocity",
+	"Data",
+	&RBX::PartInstance::getLinearVelocity,
+	&RBX::PartInstance::setLinearVelocity
+);
+
+static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_RotVelocity(
+	"RotVelocity",
+	"Data",
+	&RBX::PartInstance::getRotationalVelocity,
+	&RBX::PartInstance::setRotationalVelocity
+);
+
 const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_RenderImportance(
 	"RenderImportance",
 	"Behavior",
@@ -206,10 +235,12 @@ void PartInstance::destroyJoints()
 	}
 }
 
-// STUB: WEBSERVICE 0x1009aed0
+// FUNCTION: WEBSERVICE 0x1009aed0
 void PartInstance::join()
 {
-	STUB(0x1009aed0);
+	if (World* world = Workspace::getWorldIfInWorkspace(this)) {
+		world->createJoints(getPrimitive());
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1009aef0
@@ -265,6 +296,12 @@ const CoordinateFrame& PartInstance::getCoordinateFrame() const
 	return primitive->getCoordinateFrame();
 }
 
+// FUNCTION: WEBSERVICE 0x1009b090
+const Vector3& PartInstance::getTranslationUi() const
+{
+	return primitive->getBody()->getCoordinateFrame().translation;
+}
+
 // FUNCTION: WEBSERVICE 0x1009b0b0
 float PartInstance::getMass()
 {
@@ -281,6 +318,12 @@ const Velocity& PartInstance::getVelocity() const
 const Vector3& PartInstance::getLinearVelocity() const
 {
 	return primitive->getBody()->getVelocity().linear;
+}
+
+// FUNCTION: WEBSERVICE 0x1009b0e0
+const Vector3& PartInstance::getRotationalVelocity() const
+{
+	return primitive->getBody()->getVelocity().rotational;
 }
 
 // FUNCTION: WEBSERVICE 0x1009b100
@@ -358,6 +401,19 @@ Vector3 PartInstance::xmlToUiSize(const Vector3& size) const
 
 	return uiSize;
 }
+
+namespace Reflection {
+
+// FUNCTION: WEBSERVICE 0x1009b220
+template <>
+const Type& Type::singleton<CoordinateFrame>()
+{
+	static Type type("CoordinateFrame", typeid(CoordinateFrame));
+
+	return type;
+}
+
+} // namespace Reflection
 
 // STUB: WEBSERVICE 0x1009b4c0
 CoordinateFrame PartInstance::worldSnapLocation() const
@@ -562,22 +618,60 @@ PartInstance::PartInstance()
 	STUB(0x1009f220);
 }
 
-// STUB: WEBSERVICE 0x1009f610
+// FUNCTION: WEBSERVICE 0x1009f610
 void PartInstance::setCoordinateFrame(const CoordinateFrame& value)
 {
-	STUB(0x1009f610);
+	if (value != primitive->getCoordinateFrame()) {
+		CoordinateFrame orthoValue = value;
+		Math::orthonormalizeIfNecessary(orthoValue.rotation);
+
+		if (orthoValue != primitive->getCoordinateFrame()) {
+			primitive->setCoordinateFrame(orthoValue);
+			PersistentPart.setDirty();
+			onExtentsChanged();
+		}
+
+		raisePropertyChanged(prop_CFrame);
+		raisePropertyChanged(prop_PositionUi);
+	}
 }
 
-// STUB: WEBSERVICE 0x1009f790
+// FUNCTION: WEBSERVICE 0x1009f6c0
+void PartInstance::setTranslationUi(const Vector3& set)
+{
+	CoordinateFrame current = getCoordinateFrame();
+
+	if (current.translation != set) {
+		current.translation = set;
+		destroyJoints();
+		setCoordinateFrame(current);
+		safeMove();
+		join();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009f790
 void PartInstance::setLinearVelocity(const Vector3& set)
 {
-	STUB(0x1009f790);
+	Velocity vel = getVelocity();
+
+	if (vel.linear != set) {
+		vel.linear = set;
+		primitive->getBody()->setVelocity(vel);
+		raisePropertyChanged(prop_Velocity);
+	}
 }
 
-// STUB: WEBSERVICE 0x1009f850
+// FUNCTION: WEBSERVICE 0x1009f850
 void PartInstance::setRotationalVelocity(const Vector3& set)
 {
-	STUB(0x1009f850);
+	Velocity vel = getVelocity();
+
+	if (vel.rotational != set) {
+		vel.rotational = set;
+		primitive->getBody()->setVelocity(vel);
+		raisePropertyChanged(prop_RotVelocity);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1009f910

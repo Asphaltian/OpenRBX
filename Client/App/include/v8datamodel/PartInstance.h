@@ -94,6 +94,7 @@ public:
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_CanCollide;
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_Anchored;
 	static const Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_Size;
+	static const Reflection::PropDescriptor<PartInstance, CoordinateFrame> prop_CFrame;
 
 	const Primitive* getPrimitive() const { return primitive.get(); }
 	Primitive* getPrimitive() { return primitive.get(); }
@@ -127,6 +128,9 @@ public:
 	float getMass();
 	const Velocity& getVelocity() const;
 	const Vector3& getLinearVelocity() const;
+	const Vector3& getRotationalVelocity() const;
+	const Vector3& getTranslationUi() const;
+	void setTranslationUi(const Vector3& set);
 
 	const Vector3& getPartSizeXml() const;
 	Vector3 getPartSizeUi() const;
@@ -214,6 +218,14 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // clang-format on
 
 // clang-format off
+// FUNCTION: WEBSERVICE 0x1021a810
+// `dynamic initializer for 'RBX::PartInstance::prop_CFrame''
+// FUNCTION: WEBSERVICE 0x1021a870
+// RBX::`dynamic initializer for 'prop_PositionUi''
+// FUNCTION: WEBSERVICE 0x1021a8d0
+// RBX::`dynamic initializer for 'prop_Velocity''
+// FUNCTION: WEBSERVICE 0x1021a930
+// RBX::`dynamic initializer for 'prop_RotVelocity''
 // STUB: WEBSERVICE 0x1021ab10
 // `dynamic initializer for 'RBX::PartInstance::prop_Color''
 // FUNCTION: WEBSERVICE 0x1021ab70
@@ -234,6 +246,8 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // RBX::`dynamic initializer for 'prop_formFactor''
 // FUNCTION: WEBSERVICE 0x1021b070
 // RBX::`dynamic initializer for 'prop_Dragging''
+// SYNTHETIC: WEBSERVICE 0x10223080
+// RBX::`dynamic atexit destructor for 'prop_RotVelocity''
 // SYNTHETIC: WEBSERVICE 0x102230e0
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_CanCollide''
 // SYNTHETIC: WEBSERVICE 0x10223100
@@ -242,6 +256,12 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // RBX::`dynamic atexit destructor for 'prop_formFactor''
 // SYNTHETIC: WEBSERVICE 0x102231e0
 // RBX::`dynamic atexit destructor for 'prop_Dragging''
+// SYNTHETIC: WEBSERVICE 0x10223200
+// RBX::`dynamic atexit destructor for 'prop_Velocity''
+// SYNTHETIC: WEBSERVICE 0x10223220
+// RBX::`dynamic atexit destructor for 'prop_PositionUi''
+// SYNTHETIC: WEBSERVICE 0x10223240
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_CFrame''
 // SYNTHETIC: WEBSERVICE 0x10223260
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_Reflectance''
 // SYNTHETIC: WEBSERVICE 0x10223280

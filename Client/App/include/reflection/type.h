@@ -131,6 +131,8 @@ DECOMP_SIZE_ASSERT(SignatureDescriptor, 0x10)
 // `RBX::Reflection::Type::singleton<void>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10222e90
 // `RBX::Reflection::Type::singleton<RBX::Reflection::PropertyDescriptor const *>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x10223070
+// `RBX::Reflection::Type::singleton<G3D::CoordinateFrame>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10223630
 // `RBX::Reflection::Type::singleton<RBX::Lua::FunctionRef>'::`2'::`dynamic atexit destructor for 'type''
 // clang-format on

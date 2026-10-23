@@ -273,6 +273,8 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::TypedPropertyDescriptor<RBX::TextureId>
 	// FUNCTION: WEBSERVICE 0x1009ba30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
+	// TEMPLATE: WEBSERVICE 0x1009bb20
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>
 	// FUNCTION: WEBSERVICE 0x1009bce0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>
 	// FUNCTION: WEBSERVICE 0x1009bd50
@@ -345,6 +347,8 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1009e0b0
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame><G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100e2920
 	// RBX::Reflection::PropDescriptor<RBX::Explosion,float>::PropDescriptor<RBX::Explosion,float><float (__thiscall RBX::Explosion::*)(void)const ,void (__thiscall RBX::Explosion::*)(float)>
 	// STUB: WEBSERVICE 0x1012d340
