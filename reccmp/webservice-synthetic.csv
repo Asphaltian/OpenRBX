@@ -149,7 +149,6 @@ address,type,symbol
 0x100e16d0,stub,??0BodyColors@RBX@@QAE@XZ
 0x100e1990,stub,??0Shirt@RBX@@QAE@XZ
 0x100e1b30,synthetic,?accumulateTorque@Body@RBX@@QAEXABVVector3@G3D@@@Z
-0x100e2ea0,stub,??0Explosion@RBX@@QAE@XZ
 0x100e3100,synthetic,??_GExplosion@RBX@@UAEPAXI@Z
 0x100e3ca0,synthetic,??0?$NonFactoryProduct@VInstance@RBX@@$1?sFeature@2@3QBDB@RBX@@QAE@XZ
 0x100e4ec0,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sFeature@2@3QBDB@RBX@@UBEABVName@2@XZ

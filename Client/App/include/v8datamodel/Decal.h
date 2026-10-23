@@ -32,7 +32,7 @@ public:
 
 	void setTexture(TextureId value);
 
-	// FUNCTION: WEBSERVICE 0x100ff500
+	// FUNCTION: WEBSERVICE 0x100ff500 FOLDED
 	float getSpecular() const { return specular; }
 
 	void setSpecular(float value);

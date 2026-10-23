@@ -409,6 +409,10 @@ public:
 		this->signature.arguments.push_back(arg1);
 	}
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100e2d00
+	// RBX::Reflection::SignalDesc<RBX::Explosion,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::SignalDesc<RBX::Explosion,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>
+	// clang-format on
 	SignalDesc(const char* name, const char* arg1name, const char* arg2name)
 		: SignalDescImpl<boost::function_traits<Signature>::arity, Signature>(Class::classDescriptor(), name)
 	{

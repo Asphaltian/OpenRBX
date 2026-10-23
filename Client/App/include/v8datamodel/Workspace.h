@@ -51,6 +51,7 @@ public:
 	static Workspace* findWorkspace(const Instance* context);
 	static World* getWorldIfInWorkspace(const Instance* context);
 	static Workspace* getMyWorkspaceFast(const Instance* context);
+	static World* getMyWorldFast(const Instance* context);
 	static bool contextInWorkspace(const Instance* context);
 
 private:
@@ -70,6 +71,8 @@ public:
 	virtual Camera* getCamera() const;              // ICameraOwner vtable+0x04
 
 	Workspace(IDataState* dataState);
+
+	World* getWorld() const { return world.get(); }
 
 private:
 	undefined m_unk0x310[0x374 - 0x310]; // 0x310

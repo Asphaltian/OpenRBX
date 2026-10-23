@@ -35,6 +35,12 @@ Workspace* Workspace::getMyWorkspaceFast(const Instance* context)
 	return (Workspace*) workspace;
 }
 
+// FUNCTION: WEBSERVICE 0x1006a7f0
+World* Workspace::getMyWorldFast(const Instance* context)
+{
+	return getMyWorkspaceFast(context)->getWorld();
+}
+
 // STUB: WEBSERVICE 0x1006a960
 IScriptOwner* Workspace::scriptShouldRun(Script* script)
 {

@@ -161,7 +161,7 @@ Members lay out in declaration order regardless of access section, so an out-of-
 
 `undefined`, `undefined2` and `undefined4` from `decomp.h` stand in for unproven types. Do not guess `int` or `float` until a 100% match proves it.
 
-Unlike racers, the PDB is not stripped, so real names are usually available and placeholders are the exception. Where nothing is recorded, NCC rules apply: `FUN_XXXXXXXX`, `g_unk0xXXXXXXXX`, `m_unk0xXX`, `p_unk0xXX`, `VTable0xXX`, `c_` on enum constants. `tools/ncc/ncc.style` also carries `prop_`, `event_` and an all-caps alternative, because those are the original's own conventions recovered from its symbols.
+Unlike racers, the PDB is not stripped, so real names are usually available and placeholders are the exception. Where nothing is recorded, NCC rules apply: `FUN_XXXXXXXX`, `g_unk0xXXXXXXXX`, `m_unk0xXX`, `p_unk0xXX`, `VTable0xXX`, `c_` on enum constants. `tools/ncc/ncc.style` also carries `prop_`, `event_`, `signal_` and an all-caps alternative, because those are the original's own conventions recovered from its symbols.
 
 Rename a placeholder only when the evidence is unambiguous. Competing plausible names mean keep it, because a misleading name is worse than a neutral one.
 
@@ -242,6 +242,7 @@ Each of these cost a round trip. Keep the sources clean and leave the reasoning 
 - **Multiply operand order is normalised; parenthesisation is not.** Commuting factors moves nothing. Regrouping a three-term sum moves several percent, in both directions, and one grouping cannot always serve two call sites.
 - **`(&prim0)[index]` is not `index == 0 ? prim0 : prim1`.** The difference only shows once a caller passes a variable index.
 - **Two statements on one source line are one line record,** and the record lengths say when that happened. A comma declaration is invisible to a statement count taken from the source.
+- **A base conversion evaluated ahead of the null test that guards its use is a helper's argument.** `Explosion::onServiceProvider` and `Humanoid::onServiceProvider` compute `this ? this + 0xf8 : NULL` before testing the provider, and each block is one line record, so the original passed the `Listener*` and the provider to an inline that does the `find` and the `removeListener`. Written out with the conversion inside the `if`, the same body sits at 33, and through a two-argument template it is instruction for instruction right. The PDB records no name or header for that helper, so both stay STUB.
 - **Naming a call's argument decides when the object expression is loaded.** `p->f(a * b)` lets MSVC hoist the load of `p` above the arithmetic; naming the argument first moves it below, where the original has it. `PartInstance::legacyTraverseState` sat at 51.61 until its `CoordinateFrame` was named, and spelling the member as an accessor call moved nothing.
 - **An implicit conversion and an explicit functional cast are not the same codegen.** `f(x)` through a converting constructor builds the temporary in the argument slot: `push ecx` reserves it and the store goes through a materialised `mov eax, esp`. `f(T(x))` builds a temporary and copies it, spending a whole-dword `mov eax, [esp+N]` and `push eax` even where `T` is one byte with a `const` member. `PartInstance::onCanAggregateChanged` sat at 63.64 on that difference alone.
 

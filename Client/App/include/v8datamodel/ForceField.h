@@ -10,8 +10,13 @@ namespace RBX {
 
 extern char sForceField[];
 // SIZE 0x10c
+class PartInstance;
+
 class ForceField : public DescribedCreatable<ForceField, Instance, sForceField>, public IRenderable
 {
+public:
+	static bool partInForceField(PartInstance* part);
+
 private:
 	undefined m_unk0x108[0x10c - 0x108]; // 0x108
 };

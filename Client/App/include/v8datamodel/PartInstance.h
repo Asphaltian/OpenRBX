@@ -187,6 +187,8 @@ public:
 	static PartInstance* fromPrimitive(Primitive* primitive);
 	static const PartInstance* fromPrimitiveConst(const Primitive* primitive);
 
+	void destroyJoints();
+
 	virtual const Primitive* getBiggestPrimitive() const;
 	virtual bool hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint);
 

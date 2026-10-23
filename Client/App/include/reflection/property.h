@@ -307,6 +307,12 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Motor,float>::getset<float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
 	// STUB: WEBSERVICE 0x100dc050
 	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,int>::getset<int (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x100e2110
+	// RBX::Reflection::PropDescriptor<RBX::Explosion,float>::getset<float (__thiscall RBX::Explosion::*)(void)const ,void (__thiscall RBX::Explosion::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x100e29c0
+	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::Explosion>
+	// TEMPLATE: WEBSERVICE 0x100e2a90
+	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::Explosion>
 	// TEMPLATE: WEBSERVICE 0x100e4a40
 	// RBX::Reflection::PropDescriptor<RBX::VelocityMotor,float>::getset<float (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ee870
@@ -333,6 +339,8 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100e2920
+	// RBX::Reflection::PropDescriptor<RBX::Explosion,float>::PropDescriptor<RBX::Explosion,float><float (__thiscall RBX::Explosion::*)(void)const ,void (__thiscall RBX::Explosion::*)(float)>
 	// STUB: WEBSERVICE 0x1012d340
 	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType><enum RBX::SpecialShape::MeshType const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(enum RBX::SpecialShape::MeshType)>
 	// STUB: WEBSERVICE 0x100b46b0

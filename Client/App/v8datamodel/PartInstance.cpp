@@ -198,6 +198,14 @@ const PartInstance* PartInstance::fromPrimitiveConst(const Primitive* primitive)
 	return NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x1009aeb0
+void PartInstance::destroyJoints()
+{
+	if (World* world = Workspace::getWorldIfInWorkspace(this)) {
+		world->destroyJoints(getPrimitive());
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1009aef0
 bool PartInstance::computeSurfacesNeedAdorn() const
 {
