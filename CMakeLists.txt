@@ -216,6 +216,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/tool/DragUtilities.cpp
   Client/App/tool/Dragger.cpp
   Client/App/tool/GroupDragTool.cpp
+  Client/App/tool/MegaDragger.cpp
   Client/App/tool/NullTool.cpp
   Client/App/tool/PartDragTool.cpp
   Client/App/tool/ToolsArrow.cpp

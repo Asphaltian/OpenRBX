@@ -38,6 +38,14 @@ public:
 
 	Vector3 center() const { return (high + low) * 0.5f; }
 
+	Vector3 topCenter() const
+	{
+		Vector3 answer = center();
+		answer.y = high.y;
+
+		return answer;
+	}
+
 	Vector3 getCorner(int index) const;
 	Vector3 faceCenter(NormalId normalId) const;
 	Plane getPlane(NormalId normalId) const;

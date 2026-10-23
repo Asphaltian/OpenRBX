@@ -353,6 +353,20 @@ Vector3 PartInstance::xmlToUiSize(const Vector3& size) const
 	return uiSize;
 }
 
+// STUB: WEBSERVICE 0x1009b4c0
+CoordinateFrame PartInstance::worldSnapLocation() const
+{
+	STUB(0x1009b4c0);
+	return CoordinateFrame();
+}
+
+// STUB: WEBSERVICE 0x1009b5a0
+bool PartInstance::aligned() const
+{
+	STUB(0x1009b5a0);
+	return false;
+}
+
 // FUNCTION: WEBSERVICE 0x1009b610
 Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 {

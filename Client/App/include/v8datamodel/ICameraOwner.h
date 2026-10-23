@@ -33,7 +33,7 @@ public:
 
 	void setCameraIgnoreParts(PartInstance* _set);
 	void setCameraIgnoreParts(const std::vector<PartInstance*>& _set);
-	void clearCameraIgnoreParts();
+	void clearCameraIgnoreParts() { cameraIgnoreParts.clear(); }
 	void getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives);
 };
 

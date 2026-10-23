@@ -100,6 +100,9 @@ public:
 
 	static bool nonNullInWorkspace(shared_ptr<PartInstance> part);
 
+	CoordinateFrame worldSnapLocation() const;
+	bool aligned() const;
+
 	// FUNCTION: WEBSERVICE 0x100a07e0
 	Part::PartType getPartType() const { return partType; }
 

@@ -41,6 +41,8 @@ protected:
 	virtual ~RootInstance();
 
 public:
+	World* getWorld() { return world.get(); }
+	void setInsertPoint(const G3D::Vector3& point);
 	void moveToPoint(PVInstance* pv, G3D::Vector3 point);
 };
 
