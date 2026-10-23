@@ -2,6 +2,8 @@
 
 #include "rbxgraphics/Adorn.h"
 #include "reflection/property.h"
+#include "v8datamodel/UserController.h"
+#include "v8datamodel/Workspace.h"
 #include "v8xml/XmlElement.h"
 
 namespace RBX {
@@ -44,6 +46,14 @@ bool PVInstance::isControllable() const
 bool PVInstance::isTopLevelPVInstance() const
 {
 	return dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent();
+}
+
+// FUNCTION: WEBSERVICE 0x100990c0
+void PVInstance::moveToPoint(G3D::Vector3 point)
+{
+	if (Workspace* workspace = Workspace::findWorkspace(this)) {
+		workspace->moveToPoint(this, point);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10099100
@@ -189,6 +199,18 @@ Controller* PVInstance::getTopPVController() const
 	return NullController::getStaticNullController();
 }
 
+// FUNCTION: WEBSERVICE 0x100997e0
+void PVInstance::clearLegacyOffset()
+{
+	legacyOffset.reset();
+
+	for (unsigned int i = 0; i < numChildren(); i++) {
+		if (PVInstance* pv = dynamic_cast<PVInstance*>(getChild(i))) {
+			pv->clearLegacyOffset();
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10099870
 PVInstance::~PVInstance()
 {
@@ -210,11 +232,31 @@ bool PVInstance::computeIsTopFlag() const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x10099ea0
+// FUNCTION: WEBSERVICE 0x100999a0
+void PVInstance::setPVGridOffsetLegacy(const CoordinateFrame& _offset)
+{
+	if (!legacyOffset) {
+		legacyOffset.reset(new CoordinateFrame());
+		*legacyOffset = _offset;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10099ea0
 G3D::ReferenceCountedPointer<Controller> PVInstance::computeTopPVController() const
 {
-	STUB(0x10099ea0);
-	return G3D::ReferenceCountedPointer<Controller>();
+	if (!isTopLevelPVInstance()) {
+		G3D::ReferenceCountedPointer<Controller> parentController =
+			static_cast<const PVInstance*>(getParent())->TopPVController;
+
+		if (parentController.notNull() && parentController->getControllerType() != Controller::NO_CONTROLLER) {
+			if (!parentController->isUserController()) {
+				return parentController.getPointer();
+			}
+		}
+	}
+
+	ControllerService* service = ServiceProvider::create<ControllerService>(this);
+	return service ? service->getController(getControllerType(), this) : G3D::ReferenceCountedPointer<Controller>();
 }
 
 // FUNCTION: WEBSERVICE 0x1009a3b0

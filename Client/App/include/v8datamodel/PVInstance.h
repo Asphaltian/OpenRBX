@@ -103,7 +103,7 @@ public:
 
 	bool isTopLevelPVInstance() const;
 
-	void setPVGridOffsetLegacy(const CoordinateFrame& value);
+	void setPVGridOffsetLegacy(const CoordinateFrame& _offset);
 	CoordinateFrame* getLegacyOffset();
 	void clearLegacyOffset();
 

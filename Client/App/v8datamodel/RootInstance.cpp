@@ -33,6 +33,12 @@ RootInstance::~RootInstance()
 	STUB(0x100c1250);
 }
 
+// STUB: WEBSERVICE 0x100c1640
+void RootInstance::moveToPoint(PVInstance* pv, G3D::Vector3 point)
+{
+	STUB(0x100c1640);
+}
+
 // STUB: WEBSERVICE 0x100c22b0
 RootInstance::RootInstance() : ControllersUsed(this, &RootInstance::computeControllersUsed)
 {

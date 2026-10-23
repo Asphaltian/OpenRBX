@@ -14,6 +14,7 @@
 
 namespace RBX {
 
+class PVInstance;
 class World;
 
 extern char sRootInstance[];
@@ -38,6 +39,9 @@ protected:
 	RootInstance();
 
 	virtual ~RootInstance();
+
+public:
+	void moveToPoint(PVInstance* pv, G3D::Vector3 point);
 };
 
 DECOMP_SIZE_ASSERT(RootInstance, 0x2ac)

@@ -5349,6 +5349,7 @@ address,type,symbol
 0x102f6980,global,flag___RBX::Name::declare<&RBX::sTool>
 0x102f6984,global,flag___RBX::Name::declare<&RBX::sFlag>
 0x102f6988,global,flag___RBX::Name::declare<&RBX::sArrowTool>
+0x102f698c,global,flag___RBX::ServiceProvider::getClassIndex<RBX::ControllerService>
 0x102f69a0,global,??_B?1???$assign_to@V?$bind_t@NP6ANPAVCodeProfiler@Profiling@RBX@@@ZV?$list1@V?$value@PAVCodeProfiler@Profiling@RBX@@@_bi@boost@@@_bi@boost@@@_bi@boost@@@?$function0@NV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@NP6ANPAVCodeProfiler@Profiling@RBX@@@ZV?$list1@V?$value@PAVCodeProfiler@Profiling@RBX@@@_bi@boost@@@_bi@boost@@@_bi@1@@Z@51
 0x102f69a4,global,isNullClassName___RBX::ServiceProvider::find<RBX::StarterPackService>
 0x102f69a8,global,??_B?8???$find@VStarterPackService@RBX@@@ServiceProvider@RBX@@QBEPAVStarterPackService@1@XZ@58
