@@ -7,11 +7,13 @@
 #include "util/Name.h"
 #include "v8datamodel/GeometryService.h"
 #include "v8kernel/Body.h"
+#include "v8kernel/SimBody.h"
 #include "v8world/Geometry.h"
 #include "v8world/Primitive.h"
 #include "v8world/World.h"
 
 #include <G3D/System.h>
+#include <algorithm>
 
 namespace RBX {
 
@@ -20,14 +22,96 @@ const char sRunning[] = "Running";
 const float Running::manualTurnSpeed = 4.0f;
 const float Running::autoTurnSpeed = 8.0f;
 const float Running::kTurnP = 7500.0f;
+const float Running::kTurnAccelMax = 160000.0f;
 const float Running::kMoveP = 1250.0f;
 const float Running::kAltitudeP = 10000.0f;
 const float Running::kAltitudeD = 1250.0f;
+const G3D::Vector3 Running::maxMoveAccelerationGrid(1000.0f, 10000.0f, 200.0f);
 
 // STUB: WEBSERVICE 0x10106260
 void Running::onComputeForce(const float dt)
 {
-	STUB(0x10106260);
+	Balancing::onComputeForce(dt);
+
+	if (jumpWarmup < 0.0f) {
+		jumpWarmup += dt;
+	}
+
+	Body* torso = humanoid->getTorsoBody();
+	if (!torso) {
+		return;
+	}
+
+	Body* root = humanoid->getRootBody();
+	if (!root) {
+		return;
+	}
+
+	const Velocity& velocity = root->getVelocity();
+
+	float walkRotationalVelocity = humanoid->getWalkRotationalVelocity();
+	float desiredTorqueY =
+		root->getBranchIBodyV3().y *
+		(walkRotationalVelocity * 4.0f + desiredYRotationalVelocity + floorRotationalVelocity - velocity.rotational.y) *
+		kTurnP;
+	desiredTorqueY -= root->getBranchTorque().y;
+	float maxTorqueY = root->getBranchIBodyV3().y * kTurnAccelMax;
+	desiredTorqueY = G3D::clamp(desiredTorqueY, -maxTorqueY, maxTorqueY);
+
+	root->accumulateTorque(G3D::Vector3(0.0f, desiredTorqueY, 0.0f));
+
+	Primitive* floorPrim = floorPart ? floorPart->getPrimitive() : NULL;
+
+	float mass = !floorPrim ? root->getBranchMass()
+							: std::min(root->getBranchMass(), floorPrim->getBody()->getRoot()->getBranchMass());
+
+	if (floorPrim && desiredAltitude != 0.0f) {
+		float yAccelDesired = (desiredAltitude - torso->getPV().position.translation.y) * kAltitudeP -
+							  root->getVelocity().linear.y * kAltitudeD;
+
+		if (yAccelDesired > 0.0f) {
+			float currentAccel = root->getBranchForce().y / root->getBranchMass();
+
+			if (yAccelDesired > currentAccel) {
+				const float deltaForce = std::min(yAccelDesired - currentAccel, maxMoveAccelerationGrid.y) * mass;
+				root->accumulateForceAtBranchCofm(G3D::Vector3(0.0f, deltaForce, 0.0f));
+				floorPrim->getBody()->accumulateForce(G3D::Vector3(0.0f, -deltaForce, 0.0f), floorTouchInWorld);
+			}
+		}
+	}
+
+	float desiredVelocityInWorldX = desiredVelocity.x + floorVelocity.x;
+	float desiredVelocityInWorldZ = desiredVelocity.z + floorVelocity.z;
+
+	const Velocity& currentVelocity = root->getBranchVelocity();
+
+	G3D::Vector3 currentAccel = root->getBranchForce() / root->getBranchMass();
+
+	float accelX = (desiredVelocityInWorldX - currentVelocity.linear.x) * kAltitudeD;
+	float accelY =
+		desiredVelocity.y > 0.0f ? (desiredVelocity.y - currentVelocity.linear.y) * kAltitudeD : currentAccel.y;
+	float accelZ = (desiredVelocityInWorldZ - currentVelocity.linear.z) * kAltitudeD;
+
+	G3D::Vector3 deltaAccel =
+		(G3D::Vector3(accelX, accelY, accelZ) - currentAccel)
+			.clamp(G3D::Vector3(-maxMoveAccelerationGrid.x, 0.0f, -maxMoveAccelerationGrid.z), maxMoveAccelerationGrid);
+
+	G3D::Vector3 deltaForce = deltaAccel * mass;
+
+	if (floorPrim) {
+		float friction = floorPrim->getFriction();
+		if (friction < 0.3f) {
+			float frictionSquared = friction * friction;
+			deltaForce.x *= frictionSquared;
+			deltaForce.z *= frictionSquared;
+		}
+	}
+
+	root->accumulateForceAtBranchCofm(deltaForce);
+
+	if (floorPrim) {
+		floorPrim->getBody()->accumulateForce(-deltaForce, floorTouchInWorld);
+	}
 }
 
 // STUB: WEBSERVICE 0x10106a80

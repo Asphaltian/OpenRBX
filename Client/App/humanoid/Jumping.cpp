@@ -2,7 +2,13 @@
 
 #include "humanoid/Freefall.h"
 #include "util/Name.h"
+#include "v8datamodel/PartInstance.h"
+#include "v8kernel/Body.h"
+#include "v8kernel/SimBody.h"
+#include "v8world/Primitive.h"
 #include "v8world/World.h"
+
+#include <algorithm>
 
 namespace RBX {
 
@@ -31,10 +37,39 @@ Humanoid::State* Jumping::onStep(const float stepDt, Controller& controller)
 	return new Freefall(humanoid);
 }
 
-// STUB: WEBSERVICE 0x10122cd0
+// FUNCTION: WEBSERVICE 0x10122cd0
 void Jumping::onComputeForce(const float dt)
 {
-	STUB(0x10122cd0);
+	Flying::onComputeForce(dt);
+
+	timeout -= dt;
+
+	if (done) {
+		return;
+	}
+
+	Body* root = humanoid->getRootBody();
+
+	float yAccelDesired = root ? (jumpVelocityGrid - root->getVelocity().linear.y) * kJumpP : 0.0f;
+
+	if (yAccelDesired <= 0.0f) {
+		done = true;
+		return;
+	}
+
+	if (floorPart) {
+		Body* floorRoot = floorPart->getPrimitive()->getBody()->getRoot();
+
+		float newForceY = std::min(root->getBranchMass(), floorRoot->getBranchMass()) * yAccelDesired;
+		const float& branchForceY = root->getBranchForce().y;
+
+		if (newForceY > branchForceY) {
+			float diff = newForceY - branchForceY;
+
+			root->accumulateForceAtBranchCofm(G3D::Vector3(0.0f, diff, 0.0f));
+			floorRoot->accumulateForce(G3D::Vector3(0.0f, -diff, 0.0f), floorTouchInWorld);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10122ec0

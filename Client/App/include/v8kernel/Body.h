@@ -76,6 +76,13 @@ public:
 		return simBody != NULL ? simBody->getTorque() : Vector3::zero();
 	}
 
+	const Velocity& getBranchVelocity() const
+	{
+		const SimBody* simBody = getRootSimBody();
+
+		return simBody != NULL ? simBody->getPV().velocity : Velocity::zero();
+	}
+
 	Matrix3 getIWorld() const { return Math::momentToWorldSpace(getIBody(), getPV().position.rotation); }
 
 	Matrix3 getBranchIWorld() const { return Math::momentToWorldSpace(getBranchIBody(), getPV().position.rotation); }
