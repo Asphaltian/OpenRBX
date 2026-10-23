@@ -31,6 +31,12 @@ bool ContentId::isHttp() const
 	return false;
 }
 
+// FUNCTION: WEBSERVICE 0x1004f2e0
+std::string ContentProvider::assetFolder() const
+{
+	return assetFolderPath;
+}
+
 // FUNCTION: WEBSERVICE 0x1004f310
 bool operator<(const ContentId& a, const ContentId& b)
 {

@@ -67,7 +67,7 @@ SkyRef Sky::fromFile(
 SkyRef Sky::fromFile(
     RenderDevice*                       rd,
     const std::string&                  directory,
-    const std::string                   _filename[6],
+    const std::string*                  _filename,
     bool                                _drawCelestialBodies,
     double                              quality,
     int                                 scaleDownFactor) {
@@ -420,6 +420,18 @@ void Sky::renderBox(RenderDevice* renderDevice) const {
     }
     renderDevice->popState();
 
+}
+
+
+void Sky::setNumStars(int numStars) {
+    if (numStars != star.size()) {
+        star.resize(numStars);
+        starIntensity.resize(star.size());
+        for (int i = star.size() - 1; i >= 0; --i) {
+            star[i] = Vector4(Vector3::random(), 0);
+            starIntensity[i] = square(uniformRandom()) + .3f;
+        }
+    }
 }
 
 

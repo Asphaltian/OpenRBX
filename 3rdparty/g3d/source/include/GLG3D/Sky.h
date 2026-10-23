@@ -135,10 +135,12 @@ public:
     static SkyRef fromFile(
         class RenderDevice*                     renderDevice,
         const std::string&                      directory,
-        const std::string                       filename[6],
+        const std::string*                      filename,
         bool                                    drawCelestialBodies = true,
         double                                  quality = 1.0,
         int                                     scaleDownFactor = 1);
+
+    void setNumStars(int numStars);
 
     /** @deprecated Converted to Sky::fromFile */
     static SkyRef G3D_DEPRECATED create(

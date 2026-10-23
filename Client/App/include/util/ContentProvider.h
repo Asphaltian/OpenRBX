@@ -58,10 +58,14 @@ public:
 
 	boost::shared_ptr<const std::string> requestContentString(ContentId id);
 
+	std::string assetFolder() const;
+
 private:
 	~ContentProvider();
 
-	undefined m_unk0x00[0x54]; // 0x00
+	undefined m_unk0x00[0x34];        // 0x00
+	std::string assetFolderPath;      // 0x34
+	undefined m_unk0x50[0x54 - 0x50]; // 0x50
 };
 
 DECOMP_SIZE_ASSERT(ContentProvider, 0x54)

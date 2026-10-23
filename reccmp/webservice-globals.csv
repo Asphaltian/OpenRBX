@@ -1263,6 +1263,7 @@ address,type,symbol
 0x102353d0,global,?INDEXBOX_EDGE_TO_VERTEX_AND_NORMALS@IndexBox@RBX@@2QAY03$$CBHA
 0x10235490,global,?INDEXBOX_FACE_EDGE_TO_NORMAL@IndexBox@RBX@@2QAY03$$CBHA
 0x10235de0,global,??_7EnumDescriptor@Reflection@RBX@@6B@
+0x10235df4,global,??_7GImage@G3D@@6B@
 0x10235e7c,global,??_7?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10235e8c,global,??_7?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x10235e9c,global,??_7?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
