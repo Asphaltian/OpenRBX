@@ -12,14 +12,10 @@ Decompilation takes time to become good at. Be comfortable with C++ and x86 asse
 
 ## Overview
 
-* [`WebService`](/WebService): Decompilation of the RBXGS-specific translation units.
-* [`Client`](/Client): The engine static libraries the original link consumed, laid out under the directory names its own build recorded.
-* [`util`](/util): Utility headers supporting the decompilation.
-* [`3rdparty`](/3rdparty): Vendored dependencies, apart from `RakNet30`. The 3.0 release RBXGS used was never archived, so it is recovered from the binary and annotated like the rest of the decompilation.
-
-## File Layout
-
-Files belong where the original kept them, and the PDB records where that was. `reccmp-cvdump -m -s -l WebService.pdb` prints a `src =` line for every module giving the original directory and filename, casing included.
+* [`WebService`](/WebService): Decompilation of the RBXGS-specific translation units
+* [`Client`](/Client): The engine static libraries the original link consumed, laid out under the directory names its own build recorded
+* [`util`](/util): Utility headers supporting the decompilation
+* [`3rdparty`](/3rdparty): Vendored dependencies
 
 ## Annotations
 

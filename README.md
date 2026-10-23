@@ -56,10 +56,10 @@ reccmp-reccmp --target WEBSERVICE -S WEBSERVICEPROGRESS.SVG
 
 ## Project Structure
 
-- `WebService/` - The RBXGS-specific translation units
-- `Client/` - Engine static libraries, laid out as the PDB's command blocks record them
+- `WebService/` - RBXGS-specific translation units
+- `Client/` - Engine static libraries
 - `3rdparty/` - Vendored dependencies
-- `util/` - Headers supporting the decompilation itself
+- `util/` - Headers supporting the decompilation
 - `cmake/` - CMake modules
 - `tools/` - Python tooling and its requirements
 - `reccmp/` - Data sources for reccmp
