@@ -74,11 +74,11 @@ inline Extents Extents::fromCenterCorner(const Vector3& center, const Vector3& c
 	return Extents(center - corner, center + corner);
 }
 
-// STUB: WEBSERVICE 0x1005a750
+// FUNCTION: WEBSERVICE 0x1005a750
 inline void Extents::unionWith(const Extents& other)
 {
-	low = Vector3(G3D::min(other.low.x, low.x), G3D::min(other.low.y, low.y), G3D::min(other.low.z, low.z));
-	high = Vector3(G3D::max(other.high.x, high.x), G3D::max(other.high.y, high.y), G3D::max(other.high.z, high.z));
+	low = low.min(other.low);
+	high = high.max(other.high);
 }
 
 inline void Extents::expand(float distance)
