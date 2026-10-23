@@ -233,6 +233,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/v8datamodel/GeometryService.cpp
   Client/App/v8datamodel/GlobalSettings.cpp
   Client/App/v8datamodel/Gyro.cpp
+  Client/App/v8datamodel/ICameraOwner.cpp
   Client/App/v8datamodel/Lighting.cpp
   Client/App/v8datamodel/LocakBackpack.cpp
   Client/App/v8datamodel/Mouse.cpp

@@ -31,6 +31,8 @@ public:
 	virtual void cameraMoved() = 0;                     // vtable+0x0c
 	virtual Extents computeCameraOwnerExtents() = 0;    // vtable+0x10
 
+	void setCameraIgnoreParts(PartInstance* _set);
+	void setCameraIgnoreParts(const std::vector<PartInstance*>& _set);
 	void clearCameraIgnoreParts();
 	void getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives);
 };
