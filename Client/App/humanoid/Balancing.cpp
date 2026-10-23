@@ -3,7 +3,10 @@
 #include "util/object.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8kernel/Body.h"
+#include "v8world/Geometry.h"
 #include "v8world/Primitive.h"
+#include "v8world/SpatialHash.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
@@ -21,6 +24,17 @@ HitTestFilter::Result Balancing::filterResult(const Primitive* testMe) const
 	// clang-format on
 
 	return result;
+}
+
+// FUNCTION: WEBSERVICE 0x10121fe0
+PartInstance* Balancing::tryFloor(const G3D::Ray& ray, float maxDistance)
+{
+	float distance;
+	Primitive* hit = humanoid->getWorld()
+						 ->getContactManager()
+						 ->getHitLegacy(ray, NULL, this, floorTouchInWorld, distance, maxDistance);
+
+	return hit ? PartInstance::fromPrimitive(hit) : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x10122030
@@ -45,7 +59,42 @@ void Balancing::onComputeForce(const float dt)
 // STUB: WEBSERVICE 0x10122520
 PartInstance* Balancing::findFloor(bool existingFloor)
 {
-	STUB(0x10122520);
+	if (humanoid->getTorsoBody()) {
+		const CoordinateFrame& torsoCoord = humanoid->getTorsoPrimitive()->getCoordinateFrame();
+		G3D::Vector3 halfSize = humanoid->getTorsoPrimitive()->getGridSize() * 0.5f;
+
+		float maxDistance = 1.0f;
+		const float hysteresis = existingFloor ? 1.5f : 1.1f;
+
+		if (humanoid->getLeftLegPrimitive()) {
+			maxDistance = humanoid->getLeftLegPrimitive()->getGridSize().y * hysteresis + 1.0f;
+		}
+		else if (humanoid->getRightLegPrimitive()) {
+			maxDistance = humanoid->getRightLegPrimitive()->getGridSize().y * hysteresis + 1.0f;
+		}
+
+		G3D::Vector3 offset(0.0f, -halfSize.y, 0.0f);
+		G3D::Vector3 pointOnTorso = torsoCoord.pointToWorldSpace(offset);
+		G3D::Ray tryRay = G3D::Ray::fromOriginAndDirection(pointOnTorso, -G3D::Vector3::unitY());
+
+		if (PartInstance* floor = tryFloor(tryRay, maxDistance)) {
+			return floor;
+		}
+
+		for (int x = -1; x < 2; x += 2) {
+			for (int z = -1; z < 2; z += 2) {
+				offset.x = x * halfSize.x;
+				offset.z = z * halfSize.z;
+				pointOnTorso = torsoCoord.pointToWorldSpace(offset);
+				tryRay = G3D::Ray::fromOriginAndDirection(pointOnTorso, -G3D::Vector3::unitY());
+
+				if (PartInstance* floor = tryFloor(tryRay, maxDistance)) {
+					return floor;
+				}
+			}
+		}
+	}
+
 	return NULL;
 }
 

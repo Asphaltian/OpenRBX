@@ -17,7 +17,7 @@ class Balancing : public Humanoid::State, public HitTestFilter
 {
 private:
 	PartInstance* findFloor(bool existingFloor);
-	PartInstance* tryFloor(const G3D::Ray& ray, float distance);
+	PartInstance* tryFloor(const G3D::Ray& ray, float maxDistance);
 	void balance(const float stepDt, const G3D::Vector3& yAxis);
 
 	const float kP; // 0x0c
