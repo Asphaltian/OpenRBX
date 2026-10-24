@@ -419,8 +419,15 @@ public:
 	template <class Class>
 	class BoundPropGetSet : public TypedPropertyDescriptor<T>::GetSet
 	{
+		BoundProp<T, bound>* desc; // 0x04
+		T Class::* member;         // 0x08
+
+		typedef void (Class::*ChangedMember)(const PropertyDescriptor&);
+
+		ChangedMember changed; // 0x10
+
 	public:
-		BoundPropGetSet(BoundProp<T, bound>* desc, T Class::* member, void (Class::*changed)())
+		BoundPropGetSet(BoundProp<T, bound>* desc, T Class::* member, ChangedMember changed)
 			: desc(desc), member(member), changed(changed)
 		{
 		}
@@ -440,27 +447,34 @@ public:
 		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::getValue
 		// TEMPLATE: WEBSERVICE 0x100eb7c0
 		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::getValue
+		// TEMPLATE: WEBSERVICE 0x100b53a0
+		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::Sky>::setValue
+		// TEMPLATE: WEBSERVICE 0x100e1920
+		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::Sky>::setValue
+		// TEMPLATE: WEBSERVICE 0x100ee410
+		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::setValue
+		// TEMPLATE: WEBSERVICE 0x100f7560
+		// RBX::Reflection::BoundProp<int,1>::BoundPropGetSet<RBX::Sky>::setValue
+		// TEMPLATE: WEBSERVICE 0x100f76e0
+		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::setValue
+		// TEMPLATE: WEBSERVICE 0x1019bb70
+		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::NetworkSettings>::setValue
 		// clang-format on
 
-		virtual void setValue(DescribedBase* instance, const T& value) const
+		virtual void setValue(DescribedBase* object, const T& value) const
 		{
-			Class* object = static_cast<Class*>(instance);
+			Class* instance = static_cast<Class*>(object);
 
-			if (object->*member != value) {
-				object->*member = value;
+			if (instance->*member != value) {
+				instance->*member = value;
 
 				if (changed != NULL) {
-					(object->*changed)();
+					(instance->*changed)(*desc);
 				}
 
-				object->raisePropertyChanged(*desc);
+				instance->raisePropertyChanged(*desc);
 			}
 		}
-
-	private:
-		BoundProp<T, bound>* desc; // 0x04
-		T Class::* member;         // 0x08
-		void (Class::*changed)();  // 0x10
 	};
 
 	template <class Class>
