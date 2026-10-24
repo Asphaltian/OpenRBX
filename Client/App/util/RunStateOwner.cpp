@@ -13,7 +13,7 @@ const char sRunService[] = "RunService";
 
 Reflection::SignalDesc<RunService, void(float, float)> RunService::event_Stepped("Stepped", "time", "step");
 
-static Reflection::SignalDesc<RunService, void(float)> event_Heartbeat("Heartbeat", "step");
+static Reflection::SignalDesc<RunService, void(float)> event_Heartbeat("Heartbeat", "interval");
 
 // FUNCTION: WEBSERVICE 0x10054320
 void RunService::endRunThread(bool join)

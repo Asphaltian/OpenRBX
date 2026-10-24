@@ -172,6 +172,8 @@ private:
 DECOMP_SIZE_ASSERT(RunService, 0x1c0)
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x102187c0
+// RBX::`dynamic initializer for 'event_Heartbeat''
 // SYNTHETIC: WEBSERVICE 0x10221850
 // RBX::`dynamic atexit destructor for 'event_Heartbeat''
 // clang-format on
