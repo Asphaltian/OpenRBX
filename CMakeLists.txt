@@ -115,6 +115,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/util/IRenderable.cpp
   Client/App/v8tree/Instance.cpp
   Client/App/v8tree/Verb.cpp
+  Client/App/util/boost.cpp
   Client/App/util/ExponentialRunningAverage.cpp
   Client/App/util/Extents.cpp
   Client/App/util/Face.cpp

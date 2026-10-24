@@ -79,6 +79,7 @@ address,type,name
 0x102f4fdb,global,firstTime___initRoblox
 0x102f5228,global,methods
 0x102f5594,global,standardOut
+0x102f55a0,global,foo
 0x102f55e0,global,skipTrustCheck
 0x102f55e8,global,trustCheckMutex
 0x102f55f0,global,localScope

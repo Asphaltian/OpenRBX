@@ -546,6 +546,7 @@ address,type,symbol
 0x1022cef4,global,??_7TextureProxyBase@RBX@@6B@
 0x1022cf00,global,??_7TextureProxy@Render@RBX@@6B@
 0x1022cf1c,global,??_7IndexBox@RBX@@6B@
+0x1022cf88,global,??_7runtime_error@std@@6B@
 0x1022cfe0,global,??_7StandardOut@RBX@@6B@
 0x1022d894,global,??_7Log@RBX@@6B@
 0x1022da44,global,??_7Descriptor@Reflection@RBX@@6B@
