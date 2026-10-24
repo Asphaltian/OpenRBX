@@ -49,11 +49,12 @@ boost::shared_ptr<SignalInstance> SignalDescriptor::getSignalInstance(SignalSour
 	if (source.signals.get() == NULL) {
 		source.signals.reset(new SignalSource::SignalMap());
 	}
+	else {
+		SignalSource::SignalMap::iterator iter = source.signals->find(this);
 
-	SignalSource::SignalMap::iterator iter = source.signals->find(this);
-
-	if (iter != source.signals->end()) {
-		return iter->second;
+		if (iter != source.signals->end()) {
+			return iter->second;
+		}
 	}
 
 	boost::shared_ptr<SignalInstance> si(newSignalInstance(source));
@@ -67,12 +68,12 @@ boost::shared_ptr<SignalInstance> SignalDescriptor::getSignalInstance(SignalSour
 	return si;
 }
 
-// STUB: WEBSERVICE 0x10095e80
+// FUNCTION: WEBSERVICE 0x10095e80
 SignalSource::~SignalSource()
 {
 }
 
-// STUB: WEBSERVICE 0x10095ed0
+// FUNCTION: WEBSERVICE 0x10095ed0
 void SignalSource::disconnect_all_slots()
 {
 	signals.reset();

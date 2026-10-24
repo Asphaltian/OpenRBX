@@ -13,6 +13,7 @@ class IndexBox
 public:
 	IndexBox(const Vector3& min, const Vector3& max);
 
+	// FUNCTION: WEBSERVICE 0x100314e0
 	virtual ~IndexBox() // vtable+0x00
 	{
 	}
