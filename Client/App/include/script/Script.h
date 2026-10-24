@@ -86,6 +86,8 @@ DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10068fd0
 // RBX::Script::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x10069e60
+// RBX::LocalScript::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x10218cb0
 // `dynamic initializer for 'helloWorld''
 // SYNTHETIC: WEBSERVICE 0x10221b00

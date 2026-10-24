@@ -10,6 +10,8 @@
 
 namespace RBX {
 
+class ICameraSubject;
+
 extern char sCamera[];
 // SIZE 0x1b0
 class Camera : public DescribedCreatable<Camera, Instance, sCamera>
@@ -42,6 +44,11 @@ public:
 	void zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType zoomType);
 	void zoomExtents(const G3D::Rect2D& viewPort);
 	void lookAt(const G3D::Vector3& point);
+
+	ICameraSubject* getCameraSubject() const;
+	void setCameraSubject(Instance* value);
+
+	CameraType getCameraType() const { return cameraType; }
 
 	// FUNCTION: WEBSERVICE 0x100c4370
 	virtual ~Camera() {}

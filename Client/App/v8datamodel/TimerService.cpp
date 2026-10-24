@@ -51,7 +51,7 @@ TimerService::TimerService()
 {
 }
 
-// STUB: WEBSERVICE 0x100fbf40
+// FUNCTION: WEBSERVICE 0x100fbf40
 void TimerService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(runService, this);

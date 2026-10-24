@@ -4,6 +4,7 @@
 #include "rbxgraphics/Adorn.h"
 #include "reflection/property.h"
 #include "util/Color.h"
+#include "v8datamodel/Camera.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/Workspace.h"
@@ -110,6 +111,18 @@ float Humanoid::getIntendedRotationAboutYAxis()
 	}
 
 	return 0;
+}
+
+// FUNCTION: WEBSERVICE 0x100a1840
+Humanoid* Humanoid::modelIsCharacter(const Instance* instance)
+{
+	return instance ? instance->findFirstChildOfType<Humanoid>() : NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100a19e0
+Humanoid* Humanoid::getLocalHumanoidFromContext(const Instance* context)
+{
+	return modelIsCharacter(Network::Players::findLocalCharacter(context));
 }
 
 // STUB: WEBSERVICE 0x100a1b00
@@ -303,6 +316,55 @@ Humanoid::Humanoid()
 	  imDead(false), hadHeadJoint(false), sit(false), world(NULL)
 {
 	setName("Humanoid");
+}
+
+// FUNCTION: WEBSERVICE 0x100a44c0
+void Humanoid::onLocalHumanoidEnteringWorkspace()
+{
+	Workspace* workspace = ServiceProvider::find<Workspace>(this);
+
+	if (workspace) {
+		if (this == getLocalHumanoidFromContext(this)) {
+			if (workspace->getCamera()->getCameraType() == Camera::CUSTOM_CAMERA) {
+				if (workspace->getCamera()->getCameraSubject() != this) {
+					workspace->getCamera()->setCameraSubject(this);
+				}
+			}
+
+			if (getHead()) {
+				getHead()->setRenderImportance(1.0f);
+			}
+			if (getLeftLeg()) {
+				getLeftLeg()->setRenderImportance(1.0f);
+			}
+			if (getRightLeg()) {
+				getRightLeg()->setRenderImportance(1.0f);
+			}
+			if (getLeftArm()) {
+				getLeftArm()->setRenderImportance(1.0f);
+			}
+			if (getRightArm()) {
+				getRightArm()->setRenderImportance(1.0f);
+			}
+			if (getTorso()) {
+				getTorso()->setRenderImportance(1.0f);
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a4610
+void Humanoid::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	stopListening(oldProvider ? oldProvider->create<RunService>() : NULL, this);
+
+	Instance::onServiceProvider(oldProvider, newProvider);
+
+	startListening(newProvider ? newProvider->create<RunService>() : NULL, this);
+
+	if (newProvider && !oldProvider) {
+		onLocalHumanoidEnteringWorkspace();
+	}
 }
 
 // STUB: WEBSERVICE 0x100a4690

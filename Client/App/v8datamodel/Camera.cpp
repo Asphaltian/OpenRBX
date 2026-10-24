@@ -1,5 +1,7 @@
 #include "v8datamodel/Camera.h"
 
+#include "util/ICameraSubject.h"
+
 namespace RBX {
 
 char sCamera[] = "Camera";
@@ -9,6 +11,18 @@ void Camera::lookAt(const G3D::Vector3& point)
 {
 	cameraFocus.translation = point;
 	cameraGoal.lookAt(point);
+}
+
+// FUNCTION: WEBSERVICE 0x100c29f0
+ICameraSubject* Camera::getCameraSubject() const
+{
+	return cameraSubject ? dynamic_cast<ICameraSubject*>(cameraSubject.get()) : NULL;
+}
+
+// STUB: WEBSERVICE 0x100c44b0
+void Camera::setCameraSubject(Instance* value)
+{
+	STUB(0x100c44b0);
 }
 
 // STUB: WEBSERVICE 0x100c4770

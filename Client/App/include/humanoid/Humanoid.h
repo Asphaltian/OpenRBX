@@ -80,6 +80,8 @@ public:
 
 	virtual ~Humanoid();
 
+	static Humanoid* modelIsCharacter(const Instance* instance);
+	static Humanoid* getLocalHumanoidFromContext(const Instance* context);
 	static PartInstance* getHeadFromCharacter(const ModelInstance* character);
 
 	Body* getTorsoBody();
@@ -137,7 +139,9 @@ private:
 	virtual void render3dAdorn(Adorn* adorn);
 	void renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera);
 	virtual bool isControllable() const;
+	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
 	virtual void onEvent(const RunService* source, Stepped event);
+	void onLocalHumanoidEnteringWorkspace();
 	virtual void computeForce(float dt, bool throttling);
 	virtual const CoordinateFrame getLocation() const;
 	virtual ContactManager* getContactManager();

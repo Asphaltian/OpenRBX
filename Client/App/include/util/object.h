@@ -62,6 +62,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Lighting>
 	// FUNCTION: WEBSERVICE 0x100094e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::RunService>
+	// TEMPLATE: WEBSERVICE 0x10009570
+	// RBX::Creatable<RBX::Instance>::create<RBX::ModelInstance>
 	// FUNCTION: WEBSERVICE 0x10009600
 	// RBX::Creatable<RBX::Instance>::create<RBX::Selection>
 	// FUNCTION: WEBSERVICE 0x10009690
@@ -239,6 +241,8 @@ template <class T>
 class AbstractFactoryProduct : public Creatable<T>
 {
 protected:
+	// TEMPLATE: WEBSERVICE 0x10009a60
+	// RBX::AbstractFactoryProduct<RBX::Instance>::getCreators
 	static std::map<const Name*, const ICreator*>& getCreators()
 	{
 		static std::map<const Name*, const ICreator*> creators;
@@ -272,6 +276,8 @@ public:
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007be0
 	// RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x10007ca0
+	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007d60
 	// RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007e20
@@ -758,6 +764,8 @@ public:
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 	// FUNCTION: WEBSERVICE 0x1012ca90
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x1006a9d0
+	// RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>
 	// TEMPLATE: WEBSERVICE 0x10074490
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1007e870

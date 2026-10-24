@@ -57,6 +57,8 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10042970
 // RBX::ServiceProvider::doGetClassIndex<RBX::RunService>
+// TEMPLATE: WEBSERVICE 0x10045820
+// RBX::ServiceProvider::find<RBX::RunService>
 // FUNCTION: WEBSERVICE 0x10058da0
 // RBX::Notifier<RBX::ServiceProvider,RBX::ServiceAdded>::raise
 // FUNCTION: WEBSERVICE 0x10058ec0
@@ -65,6 +67,8 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::Notifier<RBX::ServiceProvider,RBX::ServiceAdded>::raise
 // FUNCTION: WEBSERVICE 0x100590c0
 // RBX::Notifier<RBX::ServiceProvider,RBX::ServiceRemoving>::raise
+// TEMPLATE: WEBSERVICE 0x10064d40
+// RBX::ServiceProvider::create<RBX::RunService>
 // TEMPLATE: WEBSERVICE 0x1006a590
 // RBX::ServiceProvider::doGetClassIndex<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006a5f0

@@ -38,6 +38,9 @@ public:
 
 DECOMP_SIZE_ASSERT(Lighting, 0x230)
 
+// SYNTHETIC: WEBSERVICE 0x100463f0
+// RBX::Lighting::~Lighting
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_LIGHTING_H

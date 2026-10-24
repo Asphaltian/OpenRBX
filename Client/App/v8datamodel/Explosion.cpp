@@ -84,7 +84,7 @@ Explosion::Explosion() : age(0.0f), blastRadius(4.0f), blastPressure(500000.0f)
 	setName("Explosion");
 }
 
-// STUB: WEBSERVICE 0x100e3120
+// FUNCTION: WEBSERVICE 0x100e3120
 void Explosion::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);
