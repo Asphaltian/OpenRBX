@@ -27,6 +27,9 @@ private:
 	undefined m_unk0x21c[0x230 - 0x21c]; // 0x21c
 
 public:
+	Lighting();
+	virtual ~Lighting();
+
 	void replaceSky(Sky* sky);
 };
 

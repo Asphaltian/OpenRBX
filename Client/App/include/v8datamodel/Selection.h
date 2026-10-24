@@ -48,6 +48,7 @@ class Selection : public DescribedCreatable<Selection, Instance, sSelection>,
 				  public Service
 {
 public:
+	Selection();
 	virtual ~Selection();
 
 	void raiseRemoved(boost::shared_ptr<Instance> item);

@@ -16,6 +16,18 @@ void Lighting::replaceSky(Sky* sky)
 	sky->setParent(this);
 }
 
+// STUB: WEBSERVICE 0x10046190
+Lighting::Lighting()
+{
+	STUB(0x10046190);
+}
+
+// STUB: WEBSERVICE 0x100463f0
+Lighting::~Lighting()
+{
+	STUB(0x100463f0);
+}
+
 } // namespace RBX
 
 template class RBX::FactoryProduct<RBX::Lighting, RBX::Instance, RBX::sLighting>;

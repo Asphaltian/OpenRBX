@@ -46,6 +46,12 @@ void Selection::removeFromSelection(const Instance* instance)
 	}
 }
 
+// STUB: WEBSERVICE 0x1005e720
+Selection::Selection()
+{
+	STUB(0x1005e720);
+}
+
 // FUNCTION: WEBSERVICE 0x1005e870
 void Selection::onEvent(const Instance* source, AncestorChanged event)
 {

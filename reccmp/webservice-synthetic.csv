@@ -70,6 +70,7 @@ address,type,symbol
 0x10062f50,synthetic,?getClassName@?$FactoryProduct@VScriptContext@RBX@@VInstance@2@$1?sScriptContext@2@3PADA@RBX@@UBEABVName@2@XZ
 0x10066200,stub,??0ScriptContext@RBX@@QAE@XZ
 0x10066970,synthetic,??_GScriptContext@RBX@@UAEPAXI@Z
+0x10068b10,synthetic,??_G?$FactoryProduct@VScript@RBX@@VInstance@2@$1?sScript@2@3PADA@RBX@@MAEPAXI@Z
 0x10069070,synthetic,?getClassName@?$FactoryProduct@VScript@RBX@@VInstance@2@$1?sScript@2@3PADA@RBX@@UBEABVName@2@XZ
 0x10069090,synthetic,?getClassName@?$FactoryProduct@VLocalScript@RBX@@VScript@2@$1?sLocalScript@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100699a0,stub,??0Script@RBX@@QAE@XZ

@@ -19,6 +19,9 @@ class ScriptContext : public DescribedCreatable<ScriptContext, Instance, sScript
 					  public Service
 {
 public:
+	ScriptContext();
+	virtual ~ScriptContext();
+
 	enum Result
 	{
 		Success,

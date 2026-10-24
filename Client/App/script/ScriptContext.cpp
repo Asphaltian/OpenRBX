@@ -56,6 +56,18 @@ void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 value)
 	pushNewObject(L, value);
 }
 
+// STUB: WEBSERVICE 0x10066200
+ScriptContext::ScriptContext()
+{
+	STUB(0x10066200);
+}
+
+// STUB: WEBSERVICE 0x10066460
+ScriptContext::~ScriptContext()
+{
+	STUB(0x10066460);
+}
+
 // FUNCTION: WEBSERVICE 0x10066de0
 int ScriptContext::trustedThread(lua_State* thread)
 {

@@ -29,3 +29,18 @@ template void RBX::Name::callDoDeclare<RBX::sLocalScript>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sLocalScript>();
 template void RBX::Name::callDoDeclare<RBX::sWorkspace>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sWorkspace>();
+
+template const RBX::FactoryProduct<RBX::Lighting, RBX::Instance, RBX::sLighting>::Creator
+	RBX::FactoryProduct<RBX::Lighting, RBX::Instance, RBX::sLighting>::creator;
+template const RBX::FactoryProduct<RBX::RunService, RBX::Instance, RBX::sRunService>::Creator
+	RBX::FactoryProduct<RBX::RunService, RBX::Instance, RBX::sRunService>::creator;
+template const RBX::FactoryProduct<RBX::ModelInstance, RBX::PVInstance, RBX::sModel>::Creator
+	RBX::FactoryProduct<RBX::ModelInstance, RBX::PVInstance, RBX::sModel>::creator;
+template const RBX::FactoryProduct<RBX::Selection, RBX::Instance, RBX::sSelection>::Creator
+	RBX::FactoryProduct<RBX::Selection, RBX::Instance, RBX::sSelection>::creator;
+template const RBX::FactoryProduct<RBX::ScriptContext, RBX::Instance, RBX::sScriptContext>::Creator
+	RBX::FactoryProduct<RBX::ScriptContext, RBX::Instance, RBX::sScriptContext>::creator;
+template const RBX::FactoryProduct<RBX::Script, RBX::Instance, RBX::sScript>::Creator
+	RBX::FactoryProduct<RBX::Script, RBX::Instance, RBX::sScript>::creator;
+template const RBX::FactoryProduct<RBX::LocalScript, RBX::Script, RBX::sLocalScript>::Creator
+	RBX::FactoryProduct<RBX::LocalScript, RBX::Script, RBX::sLocalScript>::creator;

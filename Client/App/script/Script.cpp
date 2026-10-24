@@ -11,6 +11,12 @@ char sScript[] = "Script";
 
 char sLocalScript[] = "LocalScript";
 
+// STUB: WEBSERVICE 0x10068bf0
+Script::~Script()
+{
+	STUB(0x10068bf0);
+}
+
 // FUNCTION: WEBSERVICE 0x10068d50
 boost::shared_ptr<const std::string> Script::requestCode()
 {
@@ -19,6 +25,24 @@ boost::shared_ptr<const std::string> Script::requestCode()
 	}
 
 	return ContentProvider::singleton().requestContentString(scriptId);
+}
+
+// STUB: WEBSERVICE 0x100699a0
+Script::Script()
+{
+	STUB(0x100699a0);
+}
+
+// STUB: WEBSERVICE 0x10069cd0
+LocalScript::LocalScript()
+{
+	STUB(0x10069cd0);
+}
+
+// STUB: WEBSERVICE 0x10069e10
+LocalScript::~LocalScript()
+{
+	STUB(0x10069e10);
 }
 
 } // namespace RBX

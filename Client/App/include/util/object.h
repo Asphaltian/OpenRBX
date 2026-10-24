@@ -318,8 +318,6 @@ public:
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::~FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>
 	// FUNCTION: WEBSERVICE 0x10068aa0
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript><char const *>
-	// FUNCTION: WEBSERVICE 0x10068b10
-	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x10068e10
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::~FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
 	// FUNCTION: WEBSERVICE 0x10068e80
@@ -817,6 +815,124 @@ template <class T, class Base, const char* sName>
 const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, sName>::creator;
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x10217e20
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::creator''
+// SYNTHETIC: WEBSERVICE 0x10217e60
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10217ea0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::creator''
+// SYNTHETIC: WEBSERVICE 0x10217ee0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>::creator''
+// SYNTHETIC: WEBSERVICE 0x10217f20
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::creator''
+// SYNTHETIC: WEBSERVICE 0x10217f60
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::creator''
+// SYNTHETIC: WEBSERVICE 0x10217fa0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218af0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218cc0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218d00
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218ee0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218f20
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218fa0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219380
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::creator''
+// SYNTHETIC: WEBSERVICE 0x102193c0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219400
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219440
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219480
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::creator''
+// SYNTHETIC: WEBSERVICE 0x102194c0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219540
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219580
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::creator''
+// SYNTHETIC: WEBSERVICE 0x102195c0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219600
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219930
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::creator''
+// SYNTHETIC: WEBSERVICE 0x102199b0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::creator''
+// SYNTHETIC: WEBSERVICE 0x102199f0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219a30
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219a70
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219ab0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219af0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219b30
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219bf0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219c30
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219c70
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219cb0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219cf0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219d30
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219d70
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219db0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219df0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219e30
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219e70
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219eb0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219ef0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219f30
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219f70
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219fb0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021a030
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021b730
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021d8a0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021d8e0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021d920
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021d960
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>,RBX::Instance,&RBX::sStringValue>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021d9a0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021d9e0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021da20
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021da60
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021e7d0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021f1e0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221020
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221060
@@ -837,6 +953,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221c00
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::creator''
+// SYNTHETIC: WEBSERVICE 0x10221d60
+// `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221de0
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221e20

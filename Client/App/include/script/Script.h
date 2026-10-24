@@ -20,6 +20,9 @@ extern char sLocalScript[];
 class Script : public DescribedCreatable<Script, Instance, sScript>
 {
 public:
+	Script();
+	virtual ~Script();
+
 	// SIZE 0x8
 	class Slot
 	{
@@ -50,6 +53,9 @@ DECOMP_SIZE_ASSERT(Script, 0x128)
 // SIZE 0x128
 class LocalScript : public DescribedCreatable<LocalScript, Script, sLocalScript>
 {
+public:
+	LocalScript();
+	virtual ~LocalScript();
 };
 
 DECOMP_SIZE_ASSERT(LocalScript, 0x128)
@@ -76,8 +82,6 @@ protected:
 DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
 
 // clang-format off
-// STUB: WEBSERVICE 0x10068bf0
-// RBX::Script::~Script
 // SYNTHETIC: WEBSERVICE 0x10068fd0
 // RBX::Script::`scalar deleting destructor'
 // clang-format on
