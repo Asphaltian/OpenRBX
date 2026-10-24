@@ -2,6 +2,7 @@
 
 #include "decomp.h"
 
+#include <G3D/Color3.h>
 #include <G3D/Vector3.h>
 #include <cstdio>
 #include <limits>
@@ -159,6 +160,64 @@ bool StringConverter<G3D::Vector3>::convertToValue(const std::string& text, G3D:
 	}
 
 	value.z = (float) atof(text.substr(start, text.size() - start).c_str());
+
+	return true;
+}
+
+// FUNCTION: WEBSERVICE 0x10090c50
+template <>
+std::string StringConverter<G3D::Color3>::convertToString(const G3D::Color3& value)
+{
+	char szText[64];
+	_snprintf(szText, 64, "%g, %g, %g", value.r, value.g, value.b);
+	return szText;
+}
+
+// FUNCTION: WEBSERVICE 0x10090cb0
+template <>
+bool StringConverter<G3D::Color3>::convertToValue(const std::string& text, G3D::Color3& value)
+{
+	if (text.c_str()[0] == '#') {
+		if (text.size() != 7) {
+			return false;
+		}
+
+		value.r = strtol(text.substr(1, 2).c_str(), NULL, 16) / 255.0f;
+		value.g = strtol(text.substr(3, 2).c_str(), NULL, 16) / 255.0f;
+		value.b = strtol(text.substr(5, 2).c_str(), NULL, 16) / 255.0f;
+	}
+	else if (text.substr(0, 2) == "0x") {
+		if (text.size() != 8) {
+			return false;
+		}
+
+		value.r = strtol(text.substr(2, 2).c_str(), NULL, 16) / 255.0f;
+		value.g = strtol(text.substr(4, 2).c_str(), NULL, 16) / 255.0f;
+		value.b = strtol(text.substr(6, 2).c_str(), NULL, 16) / 255.0f;
+	}
+	else {
+		int r = text.find_first_of(",;");
+		if (r < 0) {
+			return false;
+		}
+
+		value.r = (float) atof(text.substr(0, r).c_str());
+
+		int start = r + 1;
+		int g = text.find_first_of(",;", start);
+		if (g < start) {
+			return false;
+		}
+
+		value.g = (float) atof(text.substr(start, g - start).c_str());
+
+		start = g + 1;
+		if ((int) text.size() < start) {
+			return false;
+		}
+
+		value.b = (float) atof(text.substr(start, text.size() - start).c_str());
+	}
 
 	return true;
 }

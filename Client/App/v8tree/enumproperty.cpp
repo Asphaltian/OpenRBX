@@ -399,6 +399,85 @@ void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* inst
 	z->setValue(v.z);
 }
 
+// FUNCTION: WEBSERVICE 0x10041430
+template <>
+std::string TypedPropertyDescriptor<G3D::Color3>::getStringValue(const DescribedBase* instance) const
+{
+	return StringConverter<G3D::Color3>::convertToString(getValue(instance));
+}
+
+// FUNCTION: WEBSERVICE 0x10041470
+template <>
+bool TypedPropertyDescriptor<G3D::Color3>::setStringValue(DescribedBase* instance, const std::string& text) const
+{
+	G3D::Color3 value;
+	if (StringConverter<G3D::Color3>::convertToValue(text, value)) {
+		setValue(instance, value);
+		return true;
+	}
+
+	return false;
+}
+
+// FUNCTION: WEBSERVICE 0x100414c0
+template <>
+void TypedPropertyDescriptor<G3D::Color3>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const
+{
+	if (!element->isXsiNil()) {
+		unsigned int argb;
+		if (element->getValue(argb)) {
+			G3D::Color3 v(G3D::Color3uint8::fromARGB(argb));
+			setValue(instance, v);
+		}
+		else {
+			const XmlElement* r = element->findFirstChildByTag(tag_R);
+			const XmlElement* g = element->findFirstChildByTag(tag_G);
+			const XmlElement* b = element->findFirstChildByTag(tag_B);
+
+			G3D::Color3 v;
+			r->getValue(v.r);
+			g->getValue(v.g);
+			b->getValue(v.b);
+			setValue(instance, v);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100415b0
+template <>
+void TypedPropertyDescriptor<G3D::Color3>::writeValue(const DescribedBase* instance, XmlElement* element) const
+{
+	G3D::Color3uint8 v(getValue(instance));
+	element->setValue(v.asUInt32());
+}
+
+// FUNCTION: WEBSERVICE 0x10041620
+template <>
+void TypedPropertyDescriptor<BrickColor>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const
+{
+	if (!element->isXsiNil()) {
+		int value;
+		if (element->getValue(value)) {
+			setValue(instance, BrickColor(value));
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10041670
+template <>
+void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instance, XmlElement* element) const
+{
+	element->setValue(getValue(instance).asInt());
+}
+
 // FUNCTION: WEBSERVICE 0x100421f0
 template <>
 EnumDesc<NormalId>::EnumDesc() : EnumDescriptor("NormalId", typeid(NormalId))

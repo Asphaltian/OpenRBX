@@ -150,6 +150,8 @@ public:
 
 	const std::string& name() const;
 
+	int asInt() const { return number; }
+
 	bool operator==(const BrickColor& other) const { return number == other.number; }
 
 	bool operator!=(const BrickColor& other) const { return number != other.number; }

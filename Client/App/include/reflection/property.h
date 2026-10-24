@@ -5,6 +5,7 @@
 #include "reflection/enumconverter.h"
 #include "reflection/member.h"
 #include "reflection/type.h"
+#include "v8datamodel/BrickColor.h"
 
 #include <G3D/Vector3.h>
 #include <memory>
@@ -261,6 +262,28 @@ void TypedPropertyDescriptor<G3D::Vector3>::readValue(
 ) const;
 template <>
 void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+std::string TypedPropertyDescriptor<G3D::Color3>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<G3D::Color3>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<G3D::Color3>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<G3D::Color3>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+void TypedPropertyDescriptor<BrickColor>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 // SIZE 0x1c
 class __declspec(novtable) EnumPropertyDescriptor : public PropertyDescriptor
