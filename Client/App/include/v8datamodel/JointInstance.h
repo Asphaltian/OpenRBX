@@ -46,6 +46,9 @@ public:
 
 protected:
 	Joint* joint; // 0x108
+
+	virtual bool shouldRender3dAdorn() const;
+	virtual void render3dAdorn(Adorn* adorn);
 };
 
 DECOMP_SIZE_ASSERT(JointInstance, 0x10c)

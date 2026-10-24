@@ -1,5 +1,6 @@
 #include "v8datamodel/JointInstance.h"
 
+#include "rbxgraphics/Adorn.h"
 #include "reflection/property.h"
 #include "util/Math.h"
 #include "util/Name.h"
@@ -72,6 +73,12 @@ static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle(
 	&RBX::Motor::setCurrentAngle
 );
 
+// FUNCTION: WEBSERVICE 0x100d7a80
+bool JointInstance::shouldRender3dAdorn() const
+{
+	return PartInstance::showSpanningTree;
+}
+
 // FUNCTION: WEBSERVICE 0x100d7a90
 const CoordinateFrame& AutoJoint::getC0() const
 {
@@ -82,6 +89,24 @@ const CoordinateFrame& AutoJoint::getC0() const
 const CoordinateFrame& AutoJoint::getC1() const
 {
 	return joint->getJointCoord(1);
+}
+
+// FUNCTION: WEBSERVICE 0x100d7bc0
+void JointInstance::render3dAdorn(Adorn* adorn)
+{
+	if (Joint::isAssemblyJoint(joint)) {
+		Primitive* p0 = joint->getPrimitive(0);
+		Primitive* p1 = joint->getPrimitive(1);
+
+		Vector3 pt0 = p0 ? p0->getCoordinateFrame().translation : Vector3::zero();
+		Vector3 pt1 = p1 ? p1->getCoordinateFrame().translation : Vector3::zero();
+
+		Color3 color = joint->getActive() ? Color3::green() : Color3::red();
+
+		adorn->setObjectToWorldMatrix(CoordinateFrame());
+
+		adorn->lineSegment(G3D::LineSegment::fromTwoPoints(pt0, pt1), color, 20.0f);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100d7d70 FOLDED

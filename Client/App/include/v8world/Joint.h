@@ -51,6 +51,11 @@ public:
 
 	static bool isJoint(Edge* edge) { return edge->getEdgeType() == JOINT; }
 
+	static bool isAssemblyJoint(Edge* edge)
+	{
+		return isJoint(edge) && static_cast<Joint*>(edge)->getJointType() >= ANCHOR_JOINT;
+	}
+
 	static bool isAutoJoinJoint(Joint* joint)
 	{
 		JointType jointType = joint->getJointType();
