@@ -3,6 +3,7 @@
 
 #include "appdraw/Part.h"
 #include "decomp.h"
+#include "reflection/signal.h"
 #include "util/ComputeProp.h"
 #include "util/Extents.h"
 #include "util/ICameraSubject.h"
@@ -95,6 +96,7 @@ public:
 	static const Reflection::PropDescriptor<PartInstance, bool> prop_Anchored;
 	static const Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_Size;
 	static const Reflection::PropDescriptor<PartInstance, CoordinateFrame> prop_CFrame;
+	static Reflection::SignalDesc<PartInstance, void(shared_ptr<Instance>)> event_Touched;
 
 	const Primitive* getPrimitive() const { return primitive.get(); }
 	Primitive* getPrimitive() { return primitive.get(); }
@@ -201,6 +203,15 @@ public:
 	static bool getLocked(Instance* instance);
 
 	void setPhysics(const CoordinateFrame& cf, const Velocity& vel);
+	void setFormFactorUi(FormFactor value);
+	void onTouchThisStep(shared_ptr<PartInstance> other);
+
+	void setPartSizeUnjoined(const Vector3& uiSize)
+	{
+		Vector3 xmlSize = uiToXmlSize(uiSize);
+		setPartSizeXml(xmlSize);
+		safeMove();
+	}
 	void setFriction(float friction);
 	void setElasticity(float elasticity);
 
@@ -257,6 +268,8 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // RBX::`dynamic initializer for 'prop_Elasticity''
 // STUB: WEBSERVICE 0x1021aff0
 // RBX::`dynamic initializer for 'prop_Friction''
+// FUNCTION: WEBSERVICE 0x1021b050
+// `dynamic initializer for 'RBX::PartInstance::event_Touched''
 // FUNCTION: WEBSERVICE 0x1021b070
 // RBX::`dynamic initializer for 'prop_Dragging''
 // SYNTHETIC: WEBSERVICE 0x10223080
@@ -291,6 +304,8 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_Anchored''
 // SYNTHETIC: WEBSERVICE 0x10223300
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_Locked''
+// SYNTHETIC: WEBSERVICE 0x10223360
+// `dynamic atexit destructor for 'RBX::PartInstance::event_Touched''
 // clang-format on
 
 } // namespace RBX

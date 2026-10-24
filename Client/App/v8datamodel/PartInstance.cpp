@@ -162,6 +162,8 @@ static Reflection::PropDescriptor<PartInstance, float> prop_Friction(
 	&RBX::PartInstance::setFriction
 );
 
+Reflection::SignalDesc<PartInstance, void(shared_ptr<Instance>)> PartInstance::event_Touched("Touched", "part");
+
 static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging(
 	"DraggingV1",
 	"Behavior",
@@ -682,6 +684,12 @@ PartInstance::PartInstance()
 	STUB(0x1009f220);
 }
 
+// FUNCTION: WEBSERVICE 0x1009f560
+void PartInstance::onTouchThisStep(shared_ptr<PartInstance> other)
+{
+	event_Touched.fire(this, other);
+}
+
 // FUNCTION: WEBSERVICE 0x1009f610
 void PartInstance::setCoordinateFrame(const CoordinateFrame& value)
 {
@@ -871,6 +879,26 @@ void PartInstance::setFormFactorXml(FormFactor value)
 	if (value != formFactor) {
 		formFactor = value;
 		raisePropertyChanged(prop_formFactor);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fca0
+void PartInstance::setFormFactorUi(FormFactor value)
+{
+	if (partType != Part::BLOCK_PART) {
+		value = SYMETRIC;
+	}
+
+	if (value != formFactor) {
+		destroyJoints();
+		setFormFactorXml(value);
+
+		Vector3 uiSize = getPartSizeUi();
+
+		uiSize.y = std::max(1.0f, (float) G3D::iRound(uiSize.y));
+
+		setPartSizeUnjoined(uiSize);
+		join();
 	}
 }
 

@@ -392,6 +392,8 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004c110
 	// RBX::Reflection::SignalDesc<RBX::Instance,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::SignalDesc<RBX::Instance,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>
+	// TEMPLATE: WEBSERVICE 0x1009e9f0
+	// RBX::Reflection::SignalDesc<RBX::PartInstance,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::PartInstance,void __cdecl(boost::shared_ptr<RBX::Instance>)>
 	// TEMPLATE: WEBSERVICE 0x100a3c20
 	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(float)>::SignalDesc<RBX::Humanoid,void __cdecl(float)>
 	// TEMPLATE: WEBSERVICE 0x100a3cf0
