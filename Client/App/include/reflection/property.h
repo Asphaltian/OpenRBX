@@ -409,6 +409,26 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// FUNCTION: WEBSERVICE 0x10043430
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Color3>::TypedPropertyDescriptor<G3D::Color3>
+	// TEMPLATE: WEBSERVICE 0x100ef0c0
+	// RBX::Reflection::TypedPropertyDescriptor<double>::TypedPropertyDescriptor<double>
+	// TEMPLATE: WEBSERVICE 0x100ef130
+	// RBX::Reflection::PropDescriptor<RBX::ObjectValue,RBX::Instance *>::getset<RBX::Instance * (__thiscall RBX::ObjectValue::*)(void)const ,void (__thiscall RBX::ObjectValue::*)(RBX::Instance *)>
+	// TEMPLATE: WEBSERVICE 0x100ef330
+	// RBX::Reflection::TypedPropertyDescriptor<double>::equalValues
+	// TEMPLATE: WEBSERVICE 0x100f3270
+	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::Value<int,&RBX::sIntValue> >
+	// TEMPLATE: WEBSERVICE 0x100f3350
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Value<bool,&RBX::sBoolValue> >
+	// TEMPLATE: WEBSERVICE 0x100f3430
+	// RBX::Reflection::BoundProp<double,1>::BoundProp<double,1><RBX::Value<double,&RBX::sDoubleValue> >
+	// TEMPLATE: WEBSERVICE 0x100f35f0
+	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::Value<G3D::Vector3,&RBX::sVector3Value> >
+	// TEMPLATE: WEBSERVICE 0x100f36d0
+	// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundProp<G3D::CoordinateFrame,1><RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue> >
+	// TEMPLATE: WEBSERVICE 0x100f37b0
+	// RBX::Reflection::BoundProp<G3D::Color3,1>::BoundProp<G3D::Color3,1><RBX::Value<G3D::Color3,&RBX::sColor3Value> >
+	// TEMPLATE: WEBSERVICE 0x100f3890
+	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >
 	// TEMPLATE: WEBSERVICE 0x1012cc30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::MeshId>::TypedPropertyDescriptor<RBX::MeshId>
 	// TEMPLATE: WEBSERVICE 0x1005b070
@@ -670,6 +690,20 @@ public:
 		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::Sky>::setValue
 		// TEMPLATE: WEBSERVICE 0x100ee410
 		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::setValue
+		// TEMPLATE: WEBSERVICE 0x100eef70
+		// RBX::Reflection::BoundProp<double,1>::BoundPropGetSet<RBX::Value<double,&RBX::sDoubleValue> >::getValue
+		// TEMPLATE: WEBSERVICE 0x100eef90
+		// RBX::Reflection::BoundProp<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,1>::BoundPropGetSet<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue> >::getValue
+		// TEMPLATE: WEBSERVICE 0x100eefd0
+		// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundPropGetSet<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue> >::getValue
+		// TEMPLATE: WEBSERVICE 0x100ef010
+		// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundPropGetSet<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >::getValue
+		// TEMPLATE: WEBSERVICE 0x100f75b0
+		// RBX::Reflection::BoundProp<double,1>::BoundPropGetSet<RBX::Value<double,&RBX::sDoubleValue> >::setValue
+		// TEMPLATE: WEBSERVICE 0x100f7600
+		// RBX::Reflection::BoundProp<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,1>::BoundPropGetSet<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue> >::setValue
+		// TEMPLATE: WEBSERVICE 0x100f7660
+		// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundPropGetSet<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue> >::setValue
 		// TEMPLATE: WEBSERVICE 0x100f76e0
 		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::setValue
 		// TEMPLATE: WEBSERVICE 0x1019bb70
@@ -708,6 +742,25 @@ public:
 		  )
 	{
 		this->getset.reset(new BoundPropGetSet<Class>(this, member, NULL));
+	}
+
+	template <class Class>
+	BoundProp(
+		const char* name,
+		const char* category,
+		T Class::* member,
+		void (Class::*changed)(const PropertyDescriptor&),
+		typename PropertyDescriptor::Functionality flags = PropertyDescriptor::STANDARD
+	)
+		: TypedPropertyDescriptor<T>(
+			  Class::classDescriptor(),
+			  name,
+			  category,
+			  std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(),
+			  flags
+		  )
+	{
+		this->getset.reset(new BoundPropGetSet<Class>(this, member, changed));
 	}
 };
 

@@ -198,10 +198,24 @@ public:
 		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100789a0
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x100f2ef0
+		// RBX::Reflection::TSignalDesc<void __cdecl(int)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x100f2f60
+		// RBX::Reflection::TSignalDesc<void __cdecl(double)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x100f2fd0
+		// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x100f3040
+		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Vector3)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x100f30b0
+		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::CoordinateFrame)>::TSignalInstance::TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3120
 		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::~TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3170
 		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::`scalar deleting destructor'
+		// TEMPLATE: WEBSERVICE 0x100f3190
+		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Color3)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x100f3200
+		// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::TSignalInstance::TSignalInstance
 		// clang-format on
 	};
 
@@ -278,6 +292,20 @@ protected:
 		// RBX::Reflection::SignalDescImpl<0,void __cdecl(void)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100e2710
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100f1d60
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(int)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100f1e50
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(double)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100f1f40
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100f2040
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Vector3)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100f2140
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::CoordinateFrame)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100f2230
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Color3)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100f2330
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::BrickColor)>::GenericSlotAdapter::operator()
 		// clang-format on
 	};
 
@@ -446,6 +474,22 @@ public:
 	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(float)>::SignalDesc<RBX::Humanoid,void __cdecl(float)>
 	// TEMPLATE: WEBSERVICE 0x100a3cf0
 	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(bool)>::SignalDesc<RBX::Humanoid,void __cdecl(bool)>
+	// TEMPLATE: WEBSERVICE 0x100f2420
+	// RBX::Reflection::SignalDesc<RBX::ObjectValue,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::ObjectValue,void __cdecl(boost::shared_ptr<RBX::Instance>)>
+	// TEMPLATE: WEBSERVICE 0x100f2560
+	// RBX::Reflection::SignalDesc<RBX::Value<int,&RBX::sIntValue>,void __cdecl(int)>::SignalDesc<RBX::Value<int,&RBX::sIntValue>,void __cdecl(int)>
+	// TEMPLATE: WEBSERVICE 0x100f26a0
+	// RBX::Reflection::SignalDesc<RBX::Value<bool,&RBX::sBoolValue>,void __cdecl(bool)>::SignalDesc<RBX::Value<bool,&RBX::sBoolValue>,void __cdecl(bool)>
+	// TEMPLATE: WEBSERVICE 0x100f27e0
+	// RBX::Reflection::SignalDesc<RBX::Value<double,&RBX::sDoubleValue>,void __cdecl(double)>::SignalDesc<RBX::Value<double,&RBX::sDoubleValue>,void __cdecl(double)>
+	// TEMPLATE: WEBSERVICE 0x100f2a60
+	// RBX::Reflection::SignalDesc<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,void __cdecl(G3D::Vector3)>::SignalDesc<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,void __cdecl(G3D::Vector3)>
+	// TEMPLATE: WEBSERVICE 0x100f2ba0
+	// RBX::Reflection::SignalDesc<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,void __cdecl(G3D::CoordinateFrame)>::SignalDesc<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,void __cdecl(G3D::CoordinateFrame)>
+	// TEMPLATE: WEBSERVICE 0x100f2ce0
+	// RBX::Reflection::SignalDesc<RBX::Value<G3D::Color3,&RBX::sColor3Value>,void __cdecl(G3D::Color3)>::SignalDesc<RBX::Value<G3D::Color3,&RBX::sColor3Value>,void __cdecl(G3D::Color3)>
+	// TEMPLATE: WEBSERVICE 0x100f2e20
+	// RBX::Reflection::SignalDesc<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,void __cdecl(RBX::BrickColor)>::SignalDesc<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,void __cdecl(RBX::BrickColor)>
 	// clang-format on
 	SignalDesc(const char* name, const char* arg1name)
 		: SignalDescImpl<boost::function_traits<Signature>::arity, Signature>(Class::classDescriptor(), name)

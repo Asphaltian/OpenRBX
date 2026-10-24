@@ -151,6 +151,20 @@ public:
 	// RBX::Reflection::Described<RBX::BodyThrust,&RBX::sBodyThrust,RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ec710
 	// RBX::Reflection::Described<RBX::Rocket,&RBX::sRocket,RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100f24f0
+	// RBX::Reflection::Described<RBX::Value<int,&RBX::sIntValue>,&RBX::sIntValue,RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100f2630
+	// RBX::Reflection::Described<RBX::Value<bool,&RBX::sBoolValue>,&RBX::sBoolValue,RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100f2770
+	// RBX::Reflection::Described<RBX::Value<double,&RBX::sDoubleValue>,&RBX::sDoubleValue,RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100f29f0
+	// RBX::Reflection::Described<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,&RBX::sVector3Value,RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100f2b30
+	// RBX::Reflection::Described<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,&RBX::sCFrameValue,RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100f2c70
+	// RBX::Reflection::Described<RBX::Value<G3D::Color3,&RBX::sColor3Value>,&RBX::sColor3Value,RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x100f2db0
+	// RBX::Reflection::Described<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,&RBX::sBrickColorValue,RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue> >::classDescriptor
 	// FUNCTION: WEBSERVICE 0x100fe360
 	// RBX::Reflection::Described<RBX::SpawnLocation,&RBX::sSpawnLocation,RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100ffb40
@@ -670,6 +684,8 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::getRefValue
 	// TEMPLATE: WEBSERVICE 0x100ec850
 	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::setRefValue
+	// TEMPLATE: WEBSERVICE 0x100f3970
+	// RBX::Reflection::RefPropDescriptor<RBX::ObjectValue,RBX::Instance>::RefPropDescriptor<RBX::ObjectValue,RBX::Instance><RBX::Instance * (__thiscall RBX::ObjectValue::*)(void)const ,void (__thiscall RBX::ObjectValue::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x10102200
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::isReadOnly
 	// clang-format on
