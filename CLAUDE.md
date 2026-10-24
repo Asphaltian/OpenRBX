@@ -132,6 +132,8 @@ Functions in a compilation unit are ordered by ascending address. Namerefs obey 
 - **An access label between a marker and its function unresolves the annotation.** reccmp pairs a header annotation with the declaration that follows it, so moving a method into its recorded access section by writing `private:` under the marker silently drops that function and takes others in the file with it: one label in `GUI.h` cost ten matches. Put the label above the marker.
 - **Wrap long namerefs in `// clang-format off`.** clang-format reflows a `//` comment past the column limit, the name line loses its tail, and the annotation silently stops resolving.
 - **A body written `{}` on one line** leaves decomplint's parser inside the function. The next marker is reported `unexpected_marker` and dropped. Split the braces.
+- **A nameref cannot carry a parameter list.** It resolves by bare name, so on an overload set it lands on whichever overload reccmp indexes first: `EnumDesc<T>::convertToValue` claimed the `unsigned int` overload at 17.7. Pair the intended overload with a `synthetic` row on its mangled symbol instead.
+- **A nameref on a folded address must use the alias reccmp's recompiled entity holds, and that alias must be one of the original's.** Any other alias in the group silently resolves to nothing, and the held alias shifts whenever a new instantiation joins the fold.
 - **A `// STUB:` is a claim in the other direction,** and it goes stale as its callees land. Twenty-nine v8datamodel bodies were already byte-exact behind one, which drops them from the denominator and reads as work outstanding. Flipping every `STUB` in a directory to `FUNCTION`, scoring once and reverting whatever misses costs one build and finds them all.
 
 ## Class Pattern
