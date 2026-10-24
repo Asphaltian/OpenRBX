@@ -3,9 +3,12 @@
 
 #include "decomp.h"
 #include "reflection/descriptor.h"
+#include "util/Utilities.h"
 
+#include <G3D/format.h>
 #include <boost/any.hpp>
 #include <list>
+#include <stdexcept>
 #include <typeinfo>
 
 namespace RBX {
@@ -81,14 +84,72 @@ public:
 	// clang-format on
 
 	bool isVoid() const;
-	const Type& type() const;
+	const Type& type() const { return *_type; }
+
+	template <class T>
+	bool isType() const
+	{
+		return typeid(T) == type().type;
+	}
+
+	template <class T>
+	T& convert();
 
 private:
+	template <class T>
+	T& genericConvert();
+
 	const Type* _type; // 0x00
 	boost::any value;  // 0x04
 };
 
 DECOMP_SIZE_ASSERT(Value, 0x08)
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1003fa40
+// RBX::Reflection::Value::genericConvert<int>
+// TEMPLATE: WEBSERVICE 0x1003fc30
+// RBX::Reflection::Value::genericConvert<bool>
+// TEMPLATE: WEBSERVICE 0x1003fd90
+// RBX::Reflection::Value::genericConvert<float>
+// TEMPLATE: WEBSERVICE 0x1003fef0
+// RBX::Reflection::Value::genericConvert<double>
+// clang-format on
+template <class T>
+T& Value::genericConvert()
+{
+	if (T* t = boost::any_cast<T>(&value)) {
+		return *t;
+	}
+
+	if (isType<std::string>()) {
+		T v;
+		if (StringConverter<T>::convertToValue(*boost::any_cast<std::string>(&value), v)) {
+			value = v;
+			_type = &Type::singleton<T>();
+			return *boost::any_cast<T>(&value);
+		}
+	}
+
+	throw std::runtime_error(
+		G3D::format("Unable to cast %s to %s", _type->tag.c_str(), Type::singleton<T>().tag.c_str())
+	);
+}
+
+template <class T>
+T& Value::convert()
+{
+	return genericConvert<T>();
+}
+
+template <>
+int& Value::convert<int>();
+template <>
+bool& Value::convert<bool>();
+template <>
+float& Value::convert<float>();
+template <>
+double& Value::convert<double>();
 
 // SIZE 0x10
 class SignatureDescriptor

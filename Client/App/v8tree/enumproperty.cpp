@@ -9,6 +9,7 @@
 
 #include <G3D/Color3.h>
 #include <G3D/Vector3.h>
+#include <G3D/g3dmath.h>
 #include <string>
 #include <vector>
 
@@ -397,6 +398,94 @@ void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* inst
 	x->setValue(v.x);
 	y->setValue(v.y);
 	z->setValue(v.z);
+}
+
+// FUNCTION: WEBSERVICE 0x10040bb0
+template <>
+int& Value::convert<int>()
+{
+	if (isType<float>()) {
+		value = G3D::iRound(boost::any_cast<float>(value));
+		_type = &Type::singleton<int>();
+	}
+
+	if (isType<double>()) {
+		value = G3D::iRound(boost::any_cast<double>(value));
+		_type = &Type::singleton<int>();
+	}
+
+	if (isType<bool>()) {
+		value = boost::any_cast<bool>(value) ? 1 : 0;
+		_type = &Type::singleton<int>();
+	}
+
+	return genericConvert<int>();
+}
+
+// FUNCTION: WEBSERVICE 0x10040ce0
+template <>
+bool& Value::convert<bool>()
+{
+	if (isType<int>()) {
+		value = boost::any_cast<int>(value) != 0;
+		_type = &Type::singleton<bool>();
+	}
+
+	if (isType<float>()) {
+		value = boost::any_cast<float>(value) != 0.0f;
+		_type = &Type::singleton<bool>();
+	}
+
+	if (isType<double>()) {
+		value = boost::any_cast<double>(value) != 0.0;
+		_type = &Type::singleton<bool>();
+	}
+
+	return genericConvert<bool>();
+}
+
+// FUNCTION: WEBSERVICE 0x10040e10
+template <>
+float& Value::convert<float>()
+{
+	if (isType<int>()) {
+		value = (float) boost::any_cast<int>(value);
+		_type = &Type::singleton<float>();
+	}
+
+	if (isType<double>()) {
+		value = (float) boost::any_cast<double>(value);
+		_type = &Type::singleton<float>();
+	}
+
+	if (isType<bool>()) {
+		value = (float) (boost::any_cast<bool>(value) ? 1 : 0);
+		_type = &Type::singleton<float>();
+	}
+
+	return genericConvert<float>();
+}
+
+// FUNCTION: WEBSERVICE 0x10040f40
+template <>
+double& Value::convert<double>()
+{
+	if (isType<int>()) {
+		value = (double) boost::any_cast<int>(value);
+		_type = &Type::singleton<double>();
+	}
+
+	if (isType<bool>()) {
+		value = (double) (boost::any_cast<bool>(value) ? 1 : 0);
+		_type = &Type::singleton<double>();
+	}
+
+	if (isType<float>()) {
+		value = (double) boost::any_cast<float>(value);
+		_type = &Type::singleton<double>();
+	}
+
+	return genericConvert<double>();
 }
 
 // FUNCTION: WEBSERVICE 0x10041430

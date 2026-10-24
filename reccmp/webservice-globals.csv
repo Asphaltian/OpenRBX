@@ -553,6 +553,7 @@ address,type,symbol
 0x1022da64,global,??_7Item@EnumDescriptor@Reflection@RBX@@6B@
 0x1022da78,global,??_7?$holder@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@any@boost@@6B@
 0x1022da88,global,??_7?$holder@M@any@boost@@6B@
+0x1022da98,global,??_7?$holder@H@any@boost@@6B@
 0x1022daa8,global,??_7?$holder@N@any@boost@@6B@
 0x1022dab8,global,??_7?$holder@_N@any@boost@@6B@
 0x1022db80,global,??_7?$holder@V?$shared_ptr@VInstance@RBX@@@boost@@@any@boost@@6B@

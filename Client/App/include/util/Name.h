@@ -39,6 +39,10 @@ public:
 
 	bool empty() const;
 
+	const std::string& toString() const { return name; }
+
+	const char* c_str() const { return name.c_str(); }
+
 private:
 	// TEMPLATE: WEBSERVICE 0x1000b0b0
 	// RBX::Name::doDeclare<&sThumbnailGenerator>
