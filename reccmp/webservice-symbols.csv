@@ -461,7 +461,6 @@ address,size,symbol,name
 0x100b1370,0x51,?on_index@?$Bridge@V?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@$00@Lua@RBX@@KAHABV?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@PBDPAUlua_State@@@Z,
 0x100b1440,0x65,?get@Node@ThreadRef@Lua@RBX@@SA?AV?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@PAUlua_State@@@Z,
 0x100b1db0,0x152,?create@Node@ThreadRef@Lua@RBX@@SA?AV?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@PAUlua_State@@@Z,
-0x100b1f30,0x2d,?getStringValue2@Item@Stats@RBX@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
 0x100b23b0,0x6c,??0?$BoundFuncDesc@VItem@Stats@RBX@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ$0A@@Reflection@RBX@@QAE@P8Item@Stats@2@AE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZPBDW4Security@FunctionDescriptor@12@@Z,
 0x100b2420,0x8a,??$call@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$BoundFuncDesc@VItem@Stats@RBX@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ$0A@@Reflection@RBX@@ABEXPAVItem@Stats@2@AAVValue@12@@Z,
 0x100b24b0,0x5a,?execute@?$BoundFuncDesc@VItem@Stats@RBX@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ$0A@@Reflection@RBX@@UBEXPAVDescribedBase@23@AAVArguments@FunctionDescriptor@23@@Z,

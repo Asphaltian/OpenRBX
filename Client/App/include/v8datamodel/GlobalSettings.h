@@ -15,6 +15,8 @@ extern const char sGlobalSettings[];
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10062fb0
 // RBX::GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>::singleton
+// TEMPLATE: WEBSERVICE 0x10065760
+// RBX::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>
 // FUNCTION: WEBSERVICE 0x10071970
 // RBX::NonFactoryProduct<RBX::Instance,0>::NonFactoryProduct<RBX::Instance,0>
 // FUNCTION: WEBSERVICE 0x100b3640

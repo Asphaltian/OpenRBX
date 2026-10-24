@@ -748,8 +748,12 @@ public:
 	// RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100e3ca0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::NonFactoryProduct<RBX::Instance,&RBX::sFeature>
+	// TEMPLATE: WEBSERVICE 0x1005f0b0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>
 	// TEMPLATE: WEBSERVICE 0x100e4ec0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::getClassName
+	// TEMPLATE: WEBSERVICE 0x10062f70
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100ffa80
 	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1019b3a0
