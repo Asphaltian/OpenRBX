@@ -35,6 +35,9 @@ protected:
 	virtual void onEvent(const RunService* source, Heartbeat event);
 
 private:
+	static int trustedThread(lua_State* thread);
+	static int loadfile(lua_State* L);
+
 	undefined m_unk0x100[0x168 - 0x100]; // 0x100
 };
 

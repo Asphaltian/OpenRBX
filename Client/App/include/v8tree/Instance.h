@@ -525,8 +525,12 @@ template <class T, class Base, const char* sName>
 // RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x1019b4a0
 // RBX::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1018c900
+	// RBX::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::~DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
 // TEMPLATE: WEBSERVICE 0x1019b8b0
 // RBX::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1018edc0
+	// RBX::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
 // clang-format on
 class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >
 {

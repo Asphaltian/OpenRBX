@@ -6628,3 +6628,16 @@ address,type,symbol
 0x10231a84,global,??_7ServiceProvider@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10231a8c,global,??_7ServiceProvider@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10231a9c,global,??_7ServiceProvider@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+
+0x1024eab0,global,??_7Player@Network@RBX@@6B?$Notifier@VPlayer@Network@RBX@@UCharacterRemoving@23@@2@@
+0x1024eac0,global,??_7Player@Network@RBX@@6B?$Notifier@VPlayer@Network@RBX@@UCharacterAdded@23@@2@@
+0x1024ead0,global,??_7Player@Network@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
+0x1024eae0,global,??_7Player@Network@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
+0x1024eaf0,global,??_7Player@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@2@@
+0x1024eb00,global,??_7Player@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
+0x1024eb10,global,??_7Player@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@2@@
+0x1024eb20,global,??_7Player@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@2@@
+0x1024eb30,global,??_7Player@Network@RBX@@6BDebugable@2@@
+0x1024eb38,global,??_7Player@Network@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
+0x1024eb40,global,??_7Player@Network@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
+0x1024eb4c,global,??_7Player@Network@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@

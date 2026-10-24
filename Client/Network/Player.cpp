@@ -1,6 +1,7 @@
 #include "network/Player.h"
 
 #include "reflection/property.h"
+#include "security/SecurityContext.h"
 
 namespace RBX {
 namespace Network {
@@ -21,6 +22,12 @@ static Reflection::PropDescriptor<Player, bool> prop_neutral(
 	&RBX::Network::Player::setNeutral
 );
 
+// STUB: WEBSERVICE 0x1018f870
+void Player::setCharacter(ModelInstance* value)
+{
+	STUB(0x1018f870);
+}
+
 // FUNCTION: WEBSERVICE 0x1018f9c0
 void Player::setTeamColor(BrickColor value)
 {
@@ -39,5 +46,37 @@ void Player::setNeutral(bool value)
 	}
 }
 
+// STUB: WEBSERVICE 0x1018fb20
+void Player::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	STUB(0x1018fb20);
+}
+
+// STUB: WEBSERVICE 0x1018fce0
+Player::~Player()
+{
+	setCharacter(NULL);
+}
+
+// FUNCTION: WEBSERVICE 0x1018fef0
+void Player::setName(const std::string& name)
+{
+	Security::Context::current().requirePermission(Security::Administrator, "set a Player's name");
+	Instance::setName(name);
+}
+
+// FUNCTION: WEBSERVICE 0x1018ffd0
+Player::Player() : neutral(true), under13(false), superSafeChat(false), userId(0), lastActivityTime(0.0)
+{
+	Security::Context::current().requirePermission(Security::Administrator, "create a Player");
+	setName(sPlayer);
+}
+
 } // namespace Network
 } // namespace RBX
+
+template class RBX::Reflection::Described<
+	RBX::Network::Player,
+	RBX::Network::sPlayer,
+	RBX::FactoryProduct<RBX::Network::Player, RBX::Instance, RBX::Network::sPlayer> >;
+template class RBX::DescribedCreatable<RBX::Network::Player, RBX::Instance, RBX::Network::sPlayer>;

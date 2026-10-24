@@ -20,6 +20,9 @@ public:
 
 	ContentId(const std::string& id) : id(id), mimeTypePtr(&Name::getNullName()) {}
 
+	// FUNCTION: WEBSERVICE 0x1004f100
+	ContentId(const char* id) : id(id), mimeTypePtr(&Name::getNullName()) {}
+
 	static ContentId fromAssets(const std::string& id);
 
 	const Name& mimeType() const { return *mimeTypePtr; }

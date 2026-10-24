@@ -754,12 +754,20 @@ public:
 	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1019b3a0
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1018c410
+	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::~FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
 	// TEMPLATE: WEBSERVICE 0x1019b420
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::`scalar deleting destructor'
+	// SYNTHETIC: WEBSERVICE 0x1018c4d0
+	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1019b440
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1018c460
+	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
 	// TEMPLATE: WEBSERVICE 0x1019b580
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::getClassName
+	// TEMPLATE: WEBSERVICE 0x1018d230
+	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::getClassName
 	// clang-format on
 	const Creator& getCreator() const { return creator; }
 

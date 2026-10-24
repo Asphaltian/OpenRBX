@@ -26,3 +26,5 @@ targets:
       - reccmp/webservice-synthetic.csv
     report:
       icon: assets/webservice.png
+      ignore-variables:
+        - _tls_used

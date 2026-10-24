@@ -28,6 +28,9 @@ template const RBX::Name& RBX::Name::doDeclare<RBX::Network::sPlayer>();
 template void RBX::Name::callDoDeclare<RBX::sTeam>();
 template void RBX::Name::callDoDeclare<RBX::Network::sPlayer>();
 
+template RBX::FactoryProduct<RBX::Network::Player, RBX::Instance, RBX::Network::sPlayer>::Creator
+	RBX::FactoryProduct<RBX::Network::Player, RBX::Instance, RBX::Network::sPlayer>::creator;
+
 template class RBX::FactoryProduct<RBX::Script, RBX::Instance, RBX::sScript>;
 template class RBX::Reflection::
 	Described<RBX::Script, RBX::sScript, RBX::FactoryProduct<RBX::Script, RBX::Instance, RBX::sScript> >;

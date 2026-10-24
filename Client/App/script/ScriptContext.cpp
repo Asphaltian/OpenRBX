@@ -2,6 +2,8 @@
 
 #include "reflection/signal.h"
 #include "script/LuaAtomicClasses.h"
+#include "security/SecurityContext.h"
+#include "util/ContentProvider.h"
 #include "util/Name.h"
 #include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/Stats.h"
@@ -52,6 +54,38 @@ void Lua::Vector3Bridge::pushVector3(lua_State* L, G3D::Vector3 value)
 void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 value)
 {
 	pushNewObject(L, value);
+}
+
+// FUNCTION: WEBSERVICE 0x10066de0
+int ScriptContext::trustedThread(lua_State* thread)
+{
+	bool trusted = Security::Context::current().hasPermission(Security::Administrator);
+	lua_pushboolean(thread, trusted ? 1 : 0);
+
+	return 1;
+}
+
+static int loadAux(lua_State* L, int status)
+{
+	if (status == 0) {
+		return 1;
+	}
+	else {
+		lua_pushnil(L);
+		lua_insert(L, -2);
+		return 2;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10066e10
+int ScriptContext::loadfile(lua_State* L)
+{
+	Security::Context::current().requirePermission(Security::Administrator, "loadfile");
+
+	ContentId contentId(lua_tostring(L, -1));
+	std::string file = ContentProvider::singleton().getFile(contentId);
+
+	return loadAux(L, luaL_loadfile(L, file.c_str()));
 }
 
 // STUB: WEBSERVICE 0x100673d0
