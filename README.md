@@ -2,7 +2,7 @@
 
 A decompilation of Roblox as it shipped in December 2007. The aim is to rebuild the original binaries instruction for instruction, and to end up with a tree worth building on afterwards.
 
-Conventions and tooling follow the [LEGO Island decompilation](https://github.com/isledecomp/isle).
+Conventions and tooling follow the [LEGO Racers decompilation](https://github.com/isledecomp/racers).
 
 > **Note:** The code here reproduces the original release and does not try to improve on it. 32-bit Windows only.
 
