@@ -8,55 +8,81 @@
 
 namespace RBX {
 
+// SIZE 0x0c
+template <int normalId, class T, class Getter, class Setter>
+class SurfaceGetSet : public Reflection::TypedPropertyDescriptor<T>::GetSet
+{
+public:
+	SurfaceGetSet(Getter get, Setter set) : get(get), set(set) {}
+
+	virtual bool isReadOnly() const { return false; }
+
+	virtual T getValue(const Reflection::DescribedBase* instance) const
+	{
+		const Surfaces& surfaces = static_cast<const PartInstance*>(instance)->getSurfaces();
+
+		return (surfaces[static_cast<NormalId>(normalId)].*get)();
+	}
+
+	virtual void setValue(Reflection::DescribedBase* instance, const T& value) const
+	{
+		Surfaces& surfaces = static_cast<PartInstance*>(instance)->getSurfaces();
+
+		(surfaces[static_cast<NormalId>(normalId)].*set)(value);
+	}
+
+private:
+	Getter get; // 0x04
+	Setter set; // 0x08
+};
+
+// SIZE 0x1c
+template <int normalId, class T>
+class SurfacePropDescriptor : public Reflection::TypedPropertyDescriptor<T>
+{
+public:
+	template <class Getter, class Setter>
+	SurfacePropDescriptor(
+		const char* name,
+		const char* category,
+		Getter get,
+		Setter set,
+		Reflection::PropertyDescriptor::Functionality flags = Reflection::PropertyDescriptor::STANDARD
+	)
+		: Reflection::TypedPropertyDescriptor<T>(
+			  PartInstance::classDescriptor(),
+			  name,
+			  category,
+			  std::auto_ptr<typename Reflection::TypedPropertyDescriptor<T>::GetSet>(
+				  new SurfaceGetSet<normalId, T, Getter, Setter>(get, set)
+			  ),
+			  flags
+		  )
+	{
+	}
+};
+
 // SIZE 0x20
 template <int normalId, class T>
 class SurfaceEnumPropDescriptor : public Reflection::EnumPropertyDescriptor
 {
 public:
-	// SIZE 0x0c
-	template <class Getter, class Setter>
-	class GetSetImpl : public Reflection::TypedPropertyDescriptor<T>::GetSet
-	{
-	public:
-		GetSetImpl(Getter getter, Setter setter) : getter(getter), setter(setter) {}
-
-		virtual bool isReadOnly() const { return false; }
-
-		virtual T getValue(const Reflection::DescribedBase* instance) const
-		{
-			const Surfaces& surfaces = static_cast<const PartInstance*>(instance)->getSurfaces();
-
-			return (surfaces[static_cast<NormalId>(normalId)].*getter)();
-		}
-
-		virtual void setValue(Reflection::DescribedBase* instance, const T& value) const
-		{
-			Surfaces& surfaces = static_cast<PartInstance*>(instance)->getSurfaces();
-
-			(surfaces[static_cast<NormalId>(normalId)].*setter)(value);
-		}
-
-	private:
-		Getter getter; // 0x04
-		Setter setter; // 0x08
-	};
-
 	template <class Getter, class Setter>
 	SurfaceEnumPropDescriptor(
 		const char* name,
 		const char* category,
-		Getter getter,
-		Setter setter,
-		Reflection::PropertyDescriptor::Functionality functionality = Reflection::PropertyDescriptor::STANDARD
+		Getter get,
+		Setter set,
+		Reflection::PropertyDescriptor::Functionality flags = Reflection::PropertyDescriptor::STANDARD
 	)
 		: Reflection::EnumPropertyDescriptor(
 			  PartInstance::classDescriptor(),
 			  Reflection::EnumDesc<T>::singleton(),
 			  name,
 			  category,
-			  functionality
+			  flags
 		  ),
-		  getset(new GetSetImpl<Getter, Setter>(getter, setter))
+		  getset(new SurfaceGetSet<normalId, T, Getter, Setter>(get, set))
 	{
 	}
 
@@ -98,60 +124,6 @@ public:
 
 private:
 	std::auto_ptr<typename Reflection::TypedPropertyDescriptor<T>::GetSet> getset; // 0x1c
-};
-
-// SIZE 0x1c
-template <int normalId, class T>
-class SurfacePropDescriptor : public Reflection::TypedPropertyDescriptor<T>
-{
-public:
-	// SIZE 0x0c
-	template <class Getter, class Setter>
-	class GetSetImpl : public Reflection::TypedPropertyDescriptor<T>::GetSet
-	{
-	public:
-		GetSetImpl(Getter getter, Setter setter) : getter(getter), setter(setter) {}
-
-		virtual bool isReadOnly() const { return false; }
-
-		virtual T getValue(const Reflection::DescribedBase* instance) const
-		{
-			const Surfaces& surfaces = static_cast<const PartInstance*>(instance)->getSurfaces();
-
-			return (surfaces[static_cast<NormalId>(normalId)].*getter)();
-		}
-
-		virtual void setValue(Reflection::DescribedBase* instance, const T& value) const
-		{
-			Surfaces& surfaces = static_cast<PartInstance*>(instance)->getSurfaces();
-
-			(surfaces[static_cast<NormalId>(normalId)].*setter)(value);
-		}
-
-	private:
-		Getter getter; // 0x04
-		Setter setter; // 0x08
-	};
-
-	template <class Getter, class Setter>
-	SurfacePropDescriptor(
-		const char* name,
-		const char* category,
-		Getter getter,
-		Setter setter,
-		Reflection::PropertyDescriptor::Functionality functionality = Reflection::PropertyDescriptor::STANDARD
-	)
-		: Reflection::TypedPropertyDescriptor<T>(
-			  PartInstance::classDescriptor(),
-			  name,
-			  category,
-			  std::auto_ptr<typename Reflection::TypedPropertyDescriptor<T>::GetSet>(
-				  new GetSetImpl<Getter, Setter>(getter, setter)
-			  ),
-			  functionality
-		  )
-	{
-	}
 };
 
 static SurfaceEnumPropDescriptor<NORM_Y, SurfaceType> desc_TopType(

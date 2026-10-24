@@ -56,6 +56,120 @@ public:
 DECOMP_SIZE_ASSERT(Surfaces, 0x30)
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021dfc0
+// RBX::`dynamic initializer for 'desc_TopParamA''
+// SYNTHETIC: WEBSERVICE 0x1021dff0
+// RBX::`dynamic initializer for 'desc_TopParamB''
+// SYNTHETIC: WEBSERVICE 0x1021e080
+// RBX::`dynamic initializer for 'desc_BottomParamA''
+// SYNTHETIC: WEBSERVICE 0x1021e0b0
+// RBX::`dynamic initializer for 'desc_BottomParamB''
+// SYNTHETIC: WEBSERVICE 0x1021e140
+// RBX::`dynamic initializer for 'desc_LeftParamA''
+// SYNTHETIC: WEBSERVICE 0x1021e170
+// RBX::`dynamic initializer for 'desc_LeftParamB''
+// SYNTHETIC: WEBSERVICE 0x1021e200
+// RBX::`dynamic initializer for 'desc_RightParamA''
+// SYNTHETIC: WEBSERVICE 0x1021e230
+// RBX::`dynamic initializer for 'desc_RightParamB''
+// SYNTHETIC: WEBSERVICE 0x1021e2c0
+// RBX::`dynamic initializer for 'desc_FrontParamA''
+// SYNTHETIC: WEBSERVICE 0x1021e2f0
+// RBX::`dynamic initializer for 'desc_FrontParamB''
+// SYNTHETIC: WEBSERVICE 0x1021e380
+// RBX::`dynamic initializer for 'desc_BackParamA''
+// SYNTHETIC: WEBSERVICE 0x1021e3b0
+// RBX::`dynamic initializer for 'desc_BackParamB''
+// SYNTHETIC: WEBSERVICE 0x1021df60
+// RBX::`dynamic initializer for 'desc_TopType''
+// SYNTHETIC: WEBSERVICE 0x1021df90
+// RBX::`dynamic initializer for 'desc_TopSurfaceInput''
+// SYNTHETIC: WEBSERVICE 0x1021e020
+// RBX::`dynamic initializer for 'desc_BottomType''
+// SYNTHETIC: WEBSERVICE 0x1021e050
+// RBX::`dynamic initializer for 'desc_BottomSurfaceInput''
+// SYNTHETIC: WEBSERVICE 0x1021e0e0
+// RBX::`dynamic initializer for 'desc_LeftType''
+// SYNTHETIC: WEBSERVICE 0x1021e110
+// RBX::`dynamic initializer for 'desc_LeftSurfaceInput''
+// SYNTHETIC: WEBSERVICE 0x1021e1a0
+// RBX::`dynamic initializer for 'desc_RightType''
+// SYNTHETIC: WEBSERVICE 0x1021e1d0
+// RBX::`dynamic initializer for 'desc_RightSurfaceInput''
+// SYNTHETIC: WEBSERVICE 0x1021e260
+// RBX::`dynamic initializer for 'desc_FrontType''
+// SYNTHETIC: WEBSERVICE 0x1021e290
+// RBX::`dynamic initializer for 'desc_FrontSurfaceInput''
+// SYNTHETIC: WEBSERVICE 0x1021e320
+// RBX::`dynamic initializer for 'desc_BackType''
+// SYNTHETIC: WEBSERVICE 0x1021e350
+// RBX::`dynamic initializer for 'desc_BackSurfaceInput''
+// clang-format on
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x10100f10
+// RBX::SurfaceGetSet<1,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
+// TEMPLATE: WEBSERVICE 0x10100f40
+// RBX::SurfaceGetSet<1,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
+// TEMPLATE: WEBSERVICE 0x10100f70
+// RBX::SurfaceGetSet<1,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
+// TEMPLATE: WEBSERVICE 0x10100fa0
+// RBX::SurfaceGetSet<4,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
+// TEMPLATE: WEBSERVICE 0x10100fd0
+// RBX::SurfaceGetSet<4,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
+// TEMPLATE: WEBSERVICE 0x10101010
+// RBX::SurfaceGetSet<4,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
+// TEMPLATE: WEBSERVICE 0x10101040
+// RBX::SurfaceGetSet<3,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
+// TEMPLATE: WEBSERVICE 0x10101070
+// RBX::SurfaceGetSet<3,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
+// TEMPLATE: WEBSERVICE 0x101010b0
+// RBX::SurfaceGetSet<3,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
+// TEMPLATE: WEBSERVICE 0x101010e0
+// RBX::SurfaceGetSet<0,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
+// TEMPLATE: WEBSERVICE 0x10101110
+// RBX::SurfaceGetSet<0,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
+// TEMPLATE: WEBSERVICE 0x10101150
+// RBX::SurfaceGetSet<0,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
+// TEMPLATE: WEBSERVICE 0x10101180
+// RBX::SurfaceGetSet<5,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
+// TEMPLATE: WEBSERVICE 0x101011b0
+// RBX::SurfaceGetSet<5,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
+// TEMPLATE: WEBSERVICE 0x101011f0
+// RBX::SurfaceGetSet<5,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
+// TEMPLATE: WEBSERVICE 0x10101220
+// RBX::SurfaceGetSet<2,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
+// TEMPLATE: WEBSERVICE 0x10101250
+// RBX::SurfaceGetSet<2,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
+// TEMPLATE: WEBSERVICE 0x10101280
+// RBX::SurfaceGetSet<2,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
+// TEMPLATE: WEBSERVICE 0x10101490
+// RBX::SurfacePropDescriptor<1,float>::SurfacePropDescriptor<1,float><float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>
+// TEMPLATE: WEBSERVICE 0x10101540
+// RBX::SurfacePropDescriptor<4,float>::SurfacePropDescriptor<4,float><float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>
+// TEMPLATE: WEBSERVICE 0x101015f0
+// RBX::SurfacePropDescriptor<3,float>::SurfacePropDescriptor<3,float><float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>
+// TEMPLATE: WEBSERVICE 0x101016a0
+// RBX::SurfacePropDescriptor<0,float>::SurfacePropDescriptor<0,float><float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>
+// TEMPLATE: WEBSERVICE 0x10101750
+// RBX::SurfacePropDescriptor<5,float>::SurfacePropDescriptor<5,float><float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>
+// TEMPLATE: WEBSERVICE 0x10101800
+// RBX::SurfacePropDescriptor<2,float>::SurfacePropDescriptor<2,float><float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>
+// TEMPLATE: WEBSERVICE 0x10101af0
+// RBX::SurfaceEnumPropDescriptor<1,enum RBX::SurfaceType>::SurfaceEnumPropDescriptor<1,enum RBX::SurfaceType><enum RBX::SurfaceType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::SurfaceType)>
+// TEMPLATE: WEBSERVICE 0x10101c30
+// RBX::SurfaceEnumPropDescriptor<4,enum RBX::SurfaceType>::SurfaceEnumPropDescriptor<4,enum RBX::SurfaceType><enum RBX::SurfaceType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::SurfaceType)>
+// TEMPLATE: WEBSERVICE 0x10101d70
+// RBX::SurfaceEnumPropDescriptor<3,enum RBX::SurfaceType>::SurfaceEnumPropDescriptor<3,enum RBX::SurfaceType><enum RBX::SurfaceType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::SurfaceType)>
+// TEMPLATE: WEBSERVICE 0x10101eb0
+// RBX::SurfaceEnumPropDescriptor<0,enum RBX::SurfaceType>::SurfaceEnumPropDescriptor<0,enum RBX::SurfaceType><enum RBX::SurfaceType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::SurfaceType)>
+// TEMPLATE: WEBSERVICE 0x10101ff0
+// RBX::SurfaceEnumPropDescriptor<5,enum RBX::SurfaceType>::SurfaceEnumPropDescriptor<5,enum RBX::SurfaceType><enum RBX::SurfaceType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::SurfaceType)>
+// TEMPLATE: WEBSERVICE 0x10102160
+// RBX::SurfaceEnumPropDescriptor<2,enum RBX::SurfaceType>::SurfaceEnumPropDescriptor<2,enum RBX::SurfaceType><enum RBX::SurfaceType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::SurfaceType)>
+// clang-format on
+
+// clang-format off
 // SYNTHETIC: WEBSERVICE 0x10224e10
 // RBX::`dynamic atexit destructor for 'desc_TopSurfaceInput''
 // SYNTHETIC: WEBSERVICE 0x10224e30

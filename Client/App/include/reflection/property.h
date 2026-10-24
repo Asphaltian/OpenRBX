@@ -275,6 +275,10 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
 	// TEMPLATE: WEBSERVICE 0x10043a70
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>::equalValues
+	// TEMPLATE: WEBSERVICE 0x10094cc0
+	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::equalValues
+	// TEMPLATE: WEBSERVICE 0x100439d0
+	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::equalValues
 	// SYNTHETIC: WEBSERVICE 0x1004b730
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1007dcd0

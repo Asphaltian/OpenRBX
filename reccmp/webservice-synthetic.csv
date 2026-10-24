@@ -195,6 +195,12 @@ address,type,symbol
 0x100febd0,stub,??0SpawnerService@RBX@@QAE@XZ
 0x100fff70,synthetic,??0Decal@RBX@@QAE@XZ
 0x101003c0,synthetic,??0Texture@RBX@@QAE@XZ
+0x10101b90,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$00W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
+0x10101cd0,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$03W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
+0x10101e10,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$02W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
+0x10101f50,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$0A@W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
+0x10102090,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$04W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
+0x10102210,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$01W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
 0x10106230,synthetic,?zero@Velocity@RBX@@SAABV12@XZ
 0x101194c0,stub,?erase@?$_Tree@V?$_Tset_traits@PAVIMoving@RBX@@U?$less@PAVIMoving@RBX@@@std@@V?$allocator@PAVIMoving@RBX@@@4@$0A@@std@@@std@@QAEIABQAVIMoving@RBX@@@Z
 0x10122140,stub,?onComputeForce@Balancing@RBX@@MAEXM@Z

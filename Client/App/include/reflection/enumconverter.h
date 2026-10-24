@@ -183,8 +183,16 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton
 // STUB: WEBSERVICE 0x100e5dd0
 // RBX::Reflection::EnumDesc<enum RBX::Feature::TopBottom>::singleton
+// TEMPLATE: WEBSERVICE 0x10101a30
+// RBX::Reflection::EnumDesc<enum RBX::SurfaceType>::singleton
+// TEMPLATE: WEBSERVICE 0x10101a90
+// RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::singleton
 // SYNTHETIC: WEBSERVICE 0x10223320
 // `RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10225110
+// `RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10225120
+// `RBX::Reflection::EnumDesc<enum RBX::SurfaceType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // clang-format on
 template <class T>
 const EnumDesc<T>& EnumDesc<T>::singleton()

@@ -103,6 +103,8 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::doGetClassIndex<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106670
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::GeometryService>
+// TEMPLATE: WEBSERVICE 0x10043180
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::RunService>
 // STUB: WEBSERVICE 0x10106790
 // RBX::ServiceProvider::find<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106940

@@ -200,6 +200,8 @@ public:
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3120
 		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::~TSignalInstance
+		// SYNTHETIC: WEBSERVICE 0x100f3170
+		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::`scalar deleting destructor'
 		// clang-format on
 	};
 

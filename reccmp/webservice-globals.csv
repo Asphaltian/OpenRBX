@@ -6054,9 +6054,9 @@ address,type,symbol
 0x102fc6d4,global,?prop_StudsPerTileV@Texture@RBX@@2V?$PropDescriptor@VTexture@RBX@@M@Reflection@2@B
 0x102fc6f0,global,?prop_StudsPerTileU@Texture@RBX@@2V?$PropDescriptor@VTexture@RBX@@M@Reflection@2@B
 0x102fc70c,global,type___RBX::Reflection::Type::singleton<RBX::Surface>
-0x102fc720,global,?s@?1??singleton@?$EnumDesc@W4SurfaceType@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102fc720,global,s___RBX::Reflection::EnumDesc<enum RBX::SurfaceType>::singleton
 0x102fc7b8,global,??_B?1??singleton@?$EnumDesc@W4SurfaceType@RBX@@@Reflection@RBX@@SAABV123@XZ@51
-0x102fc7c0,global,?s@?1??singleton@?$EnumDesc@W4InputType@Controller@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102fc7c0,global,s___RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::singleton
 0x102fc858,global,??_B?1??singleton@?$EnumDesc@W4InputType@Controller@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102fcbc0,global,temp___RBX::EdgeIterator::end
 0x102fcbc8,global,??_B?1??end@EdgeIterator@RBX@@SAAAV12@XZ@51

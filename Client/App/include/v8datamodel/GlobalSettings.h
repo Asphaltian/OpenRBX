@@ -67,6 +67,11 @@ public:
 DECOMP_SIZE_ASSERT(GlobalSettings, 0x15c)
 DECOMP_SIZE_ASSERT(GlobalSettings::Item, 0xf8)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x100b72a0
+// RBX::GlobalSettings::`scalar deleting destructor'
+// clang-format on
+
 template <class T, const char* sName>
 class GlobalSettingsItem : public DescribedCreatable<T, GlobalSettings::Item, sName>, public Service
 {
