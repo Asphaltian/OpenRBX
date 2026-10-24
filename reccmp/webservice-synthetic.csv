@@ -99,6 +99,7 @@ address,type,symbol
 0x100b03e0,synthetic,??_G?$TGenericSlotWrapper@VWaitScriptSlot@@@Reflection@RBX@@UAEPAXI@Z
 0x100b0770,synthetic,??0FunctionScriptSlot@@QAE@ABV0@@Z
 0x100b08c0,synthetic,??_G?$TGenericSlotWrapper@VFunctionScriptSlot@@@Reflection@RBX@@UAEPAXI@Z
+0x100b27f0,synthetic,??_GProfilingItem@@UAEPAXI@Z
 0x100b3640,stub,??0Item@GlobalSettings@RBX@@QAE@XZ
 0x100b3be0,synthetic,??1?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@EAE@XZ
 0x100b3d90,synthetic,??1?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@EAE@XZ

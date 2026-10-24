@@ -458,7 +458,6 @@ address,size,symbol,name
 0x100b1370,0x51,?on_index@?$Bridge@V?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@$00@Lua@RBX@@KAHABV?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@PBDPAUlua_State@@@Z,
 0x100b1440,0x65,?get@Node@ThreadRef@Lua@RBX@@SA?AV?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@PAUlua_State@@@Z,
 0x100b1db0,0x152,?create@Node@ThreadRef@Lua@RBX@@SA?AV?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@PAUlua_State@@@Z,
-0x100b2890,0x7d,??$create@VProfilingItem@@PBVProfiler@Profiling@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VProfilingItem@@@boost@@PBVProfiler@Profiling@1@@Z,
 0x100b2e90,0x6b,?osVer@DebugSettings@RBX@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
 0x100b2f40,0x7e,?glVendor@DebugSettings@RBX@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
 0x100b2fc0,0x40a,?gfxcard@DebugSettings@RBX@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,

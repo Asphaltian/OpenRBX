@@ -152,6 +152,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100b2810
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item>
+	// TEMPLATE: WEBSERVICE 0x100b2890
+	// RBX::Creatable<RBX::Instance>::create<ProfilingItem,RBX::Profiling::Profiler const *>
 	// TEMPLATE: WEBSERVICE 0x100b2ba0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedMemItem,unsigned int const *>
 	// TEMPLATE: WEBSERVICE 0x10129ea0

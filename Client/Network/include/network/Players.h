@@ -45,6 +45,7 @@ public:
 
 	int numPlayers() const { return players->size(); }
 
+	// FUNCTION: WEBSERVICE 0x10072560
 	Player* getLocalPlayer() const { return localPlayer.get(); }
 
 	static bool frontendProcessing(const Instance* context, bool testInDatamodel);

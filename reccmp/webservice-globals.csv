@@ -1482,6 +1482,16 @@ address,type,symbol
 0x10237ddc,global,??_7FunctionRef@Lua@RBX@@6B@
 0x10237e14,global,??_7?$BoundFuncDesc@VItem@Stats@RBX@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ$0A@@Reflection@RBX@@6B@
 0x10237e20,global,??_7?$BoundFuncDesc@VItem@Stats@RBX@@$$A6ANXZ$0A@@Reflection@RBX@@6B@
+0x10237e2c,global,??_7ProfilingItem@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@@
+0x10237e3c,global,??_7ProfilingItem@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@@
+0x10237e4c,global,??_7ProfilingItem@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@@
+0x10237e5c,global,??_7ProfilingItem@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@@
+0x10237e6c,global,??_7ProfilingItem@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@RBX@@@
+0x10237e7c,global,??_7ProfilingItem@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@RBX@@@
+0x10237e8c,global,??_7ProfilingItem@@6BDebugable@RBX@@@
+0x10237e94,global,??_7ProfilingItem@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@RBX@@@
+0x10237e9c,global,??_7ProfilingItem@@6B?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@@
+0x10237eac,global,??_7ProfilingItem@@6B?$GuidItem@VInstance@RBX@@@RBX@@@
 0x10237f24,global,??_7TypedMemItem@Stats@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
 0x10237f34,global,??_7TypedMemItem@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
 0x10237f44,global,??_7TypedMemItem@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@2@@

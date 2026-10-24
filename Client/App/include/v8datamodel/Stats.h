@@ -79,9 +79,6 @@ protected:
 
 	// SYNTHETIC: WEBSERVICE 0x100610e0
 	// RBX::Stats::Item::~Item
-
-	// SYNTHETIC: WEBSERVICE 0x100b27f0
-	// RBX::Stats::Item::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(Item, 0x120)
