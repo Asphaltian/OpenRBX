@@ -48,20 +48,16 @@ ClientPhysics::ClientPhysics(PartInstance* part) : part(part)
 {
 }
 
-// STUB: WEBSERVICE 0x101af320
+// FUNCTION: WEBSERVICE 0x101af320
 ClientPhysics::~ClientPhysics()
 {
-	if (boost::shared_ptr<RunService> rs = runService.lock()) {
-		rs->Notifier<RunService, Heartbeat>::removeListener(this);
-	}
+	stopListening(runService.lock(), this);
 }
 
-// STUB: WEBSERVICE 0x101af3f0
+// FUNCTION: WEBSERVICE 0x101af3f0
 void ClientPhysics::sleep()
 {
-	if (boost::shared_ptr<RunService> rs = runService.lock()) {
-		rs->Notifier<RunService, Heartbeat>::removeListener(this);
-	}
+	stopListening(runService.lock(), this);
 
 	runService.reset();
 	lastPos = part->getCoordinateFrame();
@@ -75,7 +71,7 @@ void ClientPhysics::onEvent(const RunService* source, Heartbeat event)
 	}
 }
 
-// STUB: WEBSERVICE 0x101af540
+// FUNCTION: WEBSERVICE 0x101af540
 void ClientPhysics::update(const boost::shared_ptr<RunService>& runService)
 {
 	lastUpdateTime = G3D::System::getLocalTime();
@@ -89,15 +85,11 @@ void ClientPhysics::update(const boost::shared_ptr<RunService>& runService)
 		lastPos = cf;
 
 		if (this->runService.lock() != runService) {
-			if (boost::shared_ptr<RunService> rs = this->runService.lock()) {
-				rs->Notifier<RunService, Heartbeat>::removeListener(this);
-			}
+			stopListening(this->runService.lock(), this);
 
 			this->runService = runService;
 
-			if (boost::shared_ptr<RunService> rs = this->runService.lock()) {
-				rs->Notifier<RunService, Heartbeat>::addListener(this);
-			}
+			startListening(this->runService.lock(), this);
 		}
 	}
 }

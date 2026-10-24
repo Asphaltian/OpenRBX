@@ -1024,7 +1024,7 @@ address,size,type,symbol,name
 0x100bf310,0x84,library,??$?0PAV?$FilteredSelection@VInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@shared_count@detail@boost@@QAE@PAV?$FilteredSelection@VInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@4@@Z,
 0x100bf4a0,0xab,library,??$?0V?$FilteredSelection@VInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@V?$FilteredSelection@VInstance@RBX@@@RBX@@@boost@@QAE@PAV?$FilteredSelection@VInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,
 0x100c5460,0x1b,library,??1?$enable_shared_from_this@VInstance@RBX@@@boost@@IAE@XZ,
-0x100c5a50,0x43,library,??$?4$$CBVPVInstance@RBX@@@?$weak_ptr@$$CBVPVInstance@RBX@@@boost@@QAEAAV01@ABV?$shared_ptr@$$CBVPVInstance@RBX@@@1@@Z,
+0x100c5a50,0x43,library,??$?4VRunService@RBX@@@?$weak_ptr@VRunService@RBX@@@boost@@QAEAAV01@ABV?$shared_ptr@VRunService@RBX@@@1@@Z,
 0x100c5b80,0xa0,library,?lock@?$weak_ptr@VPartInstance@RBX@@@boost@@QBE?AV?$shared_ptr@VPartInstance@RBX@@@2@XZ,
 0x100ca190,0x5a,library,?manager@?$functor_manager@V?$bind_t@XV?$mf1@XVTool@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVTool@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@V?$allocator@X@std@@@function@detail@boost@@CAXABTfunction_buffer@234@AAT5234@W4functor_manager_operation_type@234@U?$bool_@$00@mpl@4@@Z,
 0x100ca430,0x84,library,??$?0PAVMouse@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@shared_count@detail@boost@@QAE@PAVMouse@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@4@@Z,
