@@ -730,6 +730,12 @@ public:
 	// RBX::Reflection::ConstProperty::getValue<int>
 	// TEMPLATE: WEBSERVICE 0x100ab670
 	// RBX::Reflection::ConstProperty::getValue<double>
+	// TEMPLATE: WEBSERVICE 0x100ab7b0
+	// RBX::Reflection::ConstProperty::getValue<G3D::Vector3>
+	// TEMPLATE: WEBSERVICE 0x100ab810
+	// RBX::Reflection::ConstProperty::getValue<G3D::CoordinateFrame>
+	// TEMPLATE: WEBSERVICE 0x100ab870
+	// RBX::Reflection::ConstProperty::getValue<G3D::Color3>
 	// TEMPLATE: WEBSERVICE 0x100ab8d0
 	// RBX::Reflection::ConstProperty::getValue<RBX::BrickColor>
 	// clang-format on

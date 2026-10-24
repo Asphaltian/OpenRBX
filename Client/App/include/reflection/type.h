@@ -113,6 +113,15 @@ public:
 		return typeid(T) == type().type;
 	}
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1001c410
+	// RBX::Reflection::Value::isType<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: WEBSERVICE 0x1003f630
+	// RBX::Reflection::Value::isType<G3D::Vector3>
+	// TEMPLATE: WEBSERVICE 0x1003f650
+	// RBX::Reflection::Value::isType<boost::shared_ptr<RBX::Reflection::DescribedBase> >
+	// clang-format on
+
 	template <class T>
 	T& convert();
 

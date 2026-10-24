@@ -743,6 +743,8 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100db1f0
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x100db2c0
+	// RBX::Reflection::BoundFuncDesc<RBX::Teams,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100f9750
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100f97c0

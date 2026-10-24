@@ -239,6 +239,8 @@ protected:
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::TSignalInstance::TSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100fca60
 	// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::connect
+	// TEMPLATE: WEBSERVICE 0x10170460
+	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::connect
 	// clang-format on
 
 	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}
