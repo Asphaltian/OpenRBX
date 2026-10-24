@@ -18,36 +18,51 @@ using G3D::Vector3;
 // SIZE 0x30
 class Face
 {
+private:
+	Vector3 c0; // 0x00
+	Vector3 c1; // 0x0c
+	Vector3 c2; // 0x18
+	Vector3 c3; // 0x24
+
 public:
-	static Face fromExtentsSide(const Extents& extents, NormalId normalId);
+	Face() {}
+	Face(const Vector3& c0, const Vector3& c1, const Vector3& c2, const Vector3& c3) : c0(c0), c1(c1), c2(c2), c3(c3) {}
+
+private:
+	// STUB: WEBSERVICE 0x1010b320
+	Vector3 getAxis(int i) const { return i == 0 ? (c1 - c0).direction() : (c3 - c0).direction(); }
+
+	void minMax(const Vector3& point, const Vector3& normal, float& min, float& max) const;
+
+public:
+	Face operator*(const Vector3& scale) const;
+	Face operator*(float scale) const;
+
+	static Face fromExtentsSide(const Extents& e, NormalId faceId);
+
+	void snapToGrid(float grid);
+
+	const Vector3& operator[](int i) const { return (&c0)[i]; }
+	Vector3& operator[](int i);
 
 	Vector3 getU() const { return c1 - c0; }
 	Vector3 getV() const { return c3 - c0; }
+	Vector3 getNormal() const;
 
 	Vector2 size() const { return Vector2((c1 - c0).magnitude(), (c3 - c0).magnitude()); }
 
 	Vector3 center() const { return (c2 + c0) * 0.5f; }
 
-	void snapToGrid(float grid);
-
-	Face toWorldSpace(const CoordinateFrame& coord) const;
-	Face toObjectSpace(const CoordinateFrame& coord) const;
+	Face toWorldSpace(const CoordinateFrame& objectCoord) const;
+	Face toObjectSpace(const CoordinateFrame& objectCoord) const;
 
 	Face projectOverlapOnMe(const Face& other) const;
 
 	bool fuzzyContainsInExtrusion(const Vector3& point, float tolerance) const;
 
 	static bool cornersAligned(const Face& f0, const Face& f1, float tolerance);
-	static bool hasOverlap(const Face& f0, const Face& f1, float tolerance);
+	static bool hasOverlap(const Face& f0, const Face& f1, float byAtLeast);
 	static bool overlapWithinPlanes(const Face& f0, const Face& f1, float tolerance);
-
-	Vector3& operator[](int index);
-
-private:
-	Vector3 c0; // 0x00
-	Vector3 c1; // 0x0c
-	Vector3 c2; // 0x18
-	Vector3 c3; // 0x24
 };
 
 DECOMP_SIZE_ASSERT(Face, 0x30)
