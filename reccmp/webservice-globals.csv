@@ -5713,7 +5713,7 @@ address,type,symbol
 0x102f9008,global,tag_xmlnsxmime___SerializerV2::newRootElement
 0x102f9010,global,n___RBX::NullController::getStaticNullController
 0x102f901c,global,??_B?1??getStaticNullController@NullController@RBX@@SAPAV12@XZ@51
-0x102f9020,global,?s@?1??singleton@?$EnumDesc@W4ControllerType@Controller@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102f9020,global,s___RBX::Reflection::EnumDesc<enum RBX::Controller::ControllerType>::singleton
 0x102f90b8,global,??_B?1??singleton@?$EnumDesc@W4ControllerType@Controller@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102f90c0,global,?prop_ControllerType@PVInstance@RBX@@2V?$EnumPropDescriptor@VPVInstance@RBX@@W4ControllerType@Controller@2@@Reflection@2@B
 0x102f9119,global,?highlightSleepParts@PartInstance@RBX@@2_NA
@@ -5741,7 +5741,7 @@ address,type,symbol
 0x102f9474,global,type___RBX::Reflection::Type::singleton<G3D::CoordinateFrame>
 0x102f9488,global,s___RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton
 0x102f9520,global,??_B?1??singleton@?$EnumDesc@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@SAABV123@XZ@51
-0x102f9528,global,?s@?1??singleton@?$EnumDesc@W4PartType@Part@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102f9528,global,s___RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::singleton
 0x102f95c0,global,??_B?1??singleton@?$EnumDesc@W4PartType@Part@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102f95c4,global,i___RBX::Math::inf
 0x102f95c8,global,??_B?1??inf@Math@RBX@@SAABMXZ@51
@@ -5779,9 +5779,9 @@ address,type,symbol
 0x102f9994,global,flag___RBX::Name::declare<&RBX::sTexture>
 0x102f9998,global,type___RBX::Reflection::Type::singleton<RBX::Lua::FunctionRef>
 0x102f99b0,global,?syncSingleton@ThreadRef@Lua@RBX@@0V?$shared_ptr@Vmutex@boost@@@boost@@A
-0x102f9a20,global,?s@?1??singleton@?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102f9a20,global,s___RBX::Reflection::EnumDesc<enum RBX::DebugSettings::ErrorReporting>::singleton
 0x102f9ab8,global,??_B?1??singleton@?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@SAABV123@XZ@51
-0x102f9ac0,global,?s@?1??singleton@?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102f9ac0,global,s___RBX::Reflection::EnumDesc<enum RBX::Debugable::AssertAction>::singleton
 0x102f9b58,global,??_B?1??singleton@?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102f9b60,global,"foo___RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor"
 0x102f9be8,global,??_B?1??classDescriptor@?$Described@VDebugSettings@RBX@@$1?sDebugSettings@2@3QBDBV?$FactoryProduct@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
@@ -5911,15 +5911,15 @@ address,type,symbol
 0x102fae7c,global,??_B?1???$singleton@PAVHole@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102fae80,global,flag___RBX::Name::declare<&RBX::sFeature>
 0x102fae8c,global,??_B?1???$assign_to@V?$bind_t@XV?$mf0@XVVelocityMotor@RBX@@@_mfi@boost@@V?$list1@V?$value@PAVVelocityMotor@RBX@@@_bi@boost@@@_bi@3@@_bi@boost@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXV?$bind_t@XV?$mf0@XVVelocityMotor@RBX@@@_mfi@boost@@V?$list1@V?$value@PAVVelocityMotor@RBX@@@_bi@boost@@@_bi@3@@_bi@1@@Z@51
-0x102fae90,global,?s@?1??singleton@?$EnumDesc@W4TopBottom@Feature@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102fae90,global,s___RBX::Reflection::EnumDesc<enum RBX::Feature::TopBottom>::singleton
 0x102faf28,global,??_B?1??singleton@?$EnumDesc@W4TopBottom@Feature@RBX@@@Reflection@RBX@@SAABV123@XZ@51
-0x102faf30,global,?s@?1??singleton@?$EnumDesc@W4LeftRight@Feature@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102faf30,global,s___RBX::Reflection::EnumDesc<enum RBX::Feature::LeftRight>::singleton
 0x102fafc8,global,??_B?1??singleton@?$EnumDesc@W4LeftRight@Feature@RBX@@@Reflection@RBX@@SAABV123@XZ@51
-0x102fafd0,global,?s@?1??singleton@?$EnumDesc@W4InOut@Feature@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102fafd0,global,s___RBX::Reflection::EnumDesc<enum RBX::Feature::InOut>::singleton
 0x102fb068,global,??_B?1??singleton@?$EnumDesc@W4InOut@Feature@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102fb070,global,"foo___RBX::Reflection::Described<RBX::VelocityMotor,&RBX::sVelocityMotor,RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor> >::classDescriptor"
 0x102fb0f8,global,??_B?1??classDescriptor@?$Described@VVelocityMotor@RBX@@$1?sVelocityMotor@2@3QBDBV?$FactoryProduct@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
-0x102fb100,global,?s@?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102fb100,global,s___RBX::Reflection::EnumDesc<enum RBX::NormalId>::singleton
 0x102fb198,global,??_B?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102fb29c,global,??_B?1???$assign_to@V?$bind_t@XV?$mf1@XVFlagStand@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlagStand@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXV?$bind_t@XV?$mf1@XVFlagStand@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlagStand@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z@51
 0x102fb2e8,global,"foo___RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor"
@@ -6137,7 +6137,7 @@ address,type,symbol
 0x102fd1e4,global,flag___RBX::Name::declare<&RBX::sFreefall>
 0x102fd1e8,global,?minSize@?3??resize@?$Array@W4NormalId@RBX@@@G3D@@QAEXH_N@Z@4HB
 0x102fd1ec,global,??_B?3??resize@?$Array@W4NormalId@RBX@@@G3D@@QAEXH_N@Z@53
-0x102fd1f0,global,?s@?1??singleton@?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102fd1f0,global,s___RBX::Reflection::EnumDesc<enum RBX::SpecialShape::MeshType>::singleton
 0x102fd288,global,??_B?1??singleton@?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102fd290,global,"foo___RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor"
 0x102fd318,global,??_B?1??classDescriptor@?$Described@VSpecialShape@RBX@@$1?sSpecialShape@2@3PADAV?$FactoryProduct@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51

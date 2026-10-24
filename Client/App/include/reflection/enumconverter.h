@@ -179,20 +179,54 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 }
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x10099d80
+// RBX::Reflection::EnumDesc<enum RBX::Controller::ControllerType>::singleton
 // TEMPLATE: WEBSERVICE 0x1009dde0
 // RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton
-// STUB: WEBSERVICE 0x100e5dd0
+// TEMPLATE: WEBSERVICE 0x1009ed00
+// RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::singleton
+// TEMPLATE: WEBSERVICE 0x100b4230
+// RBX::Reflection::EnumDesc<enum RBX::DebugSettings::ErrorReporting>::singleton
+// TEMPLATE: WEBSERVICE 0x100b4290
+// RBX::Reflection::EnumDesc<enum RBX::Debugable::AssertAction>::singleton
+// TEMPLATE: WEBSERVICE 0x100e5dd0
 // RBX::Reflection::EnumDesc<enum RBX::Feature::TopBottom>::singleton
+// TEMPLATE: WEBSERVICE 0x100e5e30
+// RBX::Reflection::EnumDesc<enum RBX::Feature::LeftRight>::singleton
+// TEMPLATE: WEBSERVICE 0x100e5e90
+// RBX::Reflection::EnumDesc<enum RBX::Feature::InOut>::singleton
+// TEMPLATE: WEBSERVICE 0x100e6f90
+// RBX::Reflection::EnumDesc<enum RBX::NormalId>::singleton
 // TEMPLATE: WEBSERVICE 0x10101a30
 // RBX::Reflection::EnumDesc<enum RBX::SurfaceType>::singleton
 // TEMPLATE: WEBSERVICE 0x10101a90
 // RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::singleton
+// TEMPLATE: WEBSERVICE 0x1012d270
+// RBX::Reflection::EnumDesc<enum RBX::SpecialShape::MeshType>::singleton
+// SYNTHETIC: WEBSERVICE 0x10223060
+// `RBX::Reflection::EnumDesc<enum RBX::Controller::ControllerType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10223320
 // `RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10223370
+// `RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10223970
+// `RBX::Reflection::EnumDesc<enum RBX::Debugable::AssertAction>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10223980
+// `RBX::Reflection::EnumDesc<enum RBX::DebugSettings::ErrorReporting>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10224310
+// `RBX::Reflection::EnumDesc<enum RBX::Feature::InOut>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10224320
+// `RBX::Reflection::EnumDesc<enum RBX::Feature::LeftRight>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10224330
+// `RBX::Reflection::EnumDesc<enum RBX::Feature::TopBottom>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10224340
+// `RBX::Reflection::EnumDesc<enum RBX::NormalId>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10225110
 // `RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10225120
 // `RBX::Reflection::EnumDesc<enum RBX::SurfaceType>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x102256e0
+// `RBX::Reflection::EnumDesc<enum RBX::SpecialShape::MeshType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // clang-format on
 template <class T>
 const EnumDesc<T>& EnumDesc<T>::singleton()
