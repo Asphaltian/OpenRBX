@@ -160,6 +160,22 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x100a1d00
 	// RBX::shared_from_dynamic_cast<RBX::PartInstance,RBX::Instance>
+	// TEMPLATE: WEBSERVICE 0x100f5c50
+	// RBX::Creatable<RBX::Instance>::create<RBX::Value<int,&RBX::sIntValue> >
+	// TEMPLATE: WEBSERVICE 0x100f5cd0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Value<bool,&RBX::sBoolValue> >
+	// TEMPLATE: WEBSERVICE 0x100f5d50
+	// RBX::Creatable<RBX::Instance>::create<RBX::Value<double,&RBX::sDoubleValue> >
+	// TEMPLATE: WEBSERVICE 0x100f5dd0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue> >
+	// TEMPLATE: WEBSERVICE 0x100f5e50
+	// RBX::Creatable<RBX::Instance>::create<RBX::Value<G3D::Vector3,&RBX::sVector3Value> >
+	// TEMPLATE: WEBSERVICE 0x100f5ed0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue> >
+	// TEMPLATE: WEBSERVICE 0x100f5f50
+	// RBX::Creatable<RBX::Instance>::create<RBX::Value<G3D::Color3,&RBX::sColor3Value> >
+	// TEMPLATE: WEBSERVICE 0x100f5fd0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >
 	// TEMPLATE: WEBSERVICE 0x1018b8e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::NetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x10129ea0
@@ -446,6 +462,50 @@ public:
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100694e0
 	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f0a90
+	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::~FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
+	// TEMPLATE: WEBSERVICE 0x100f0ae0
+	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
+	// TEMPLATE: WEBSERVICE 0x100f0d00
+	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::~FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
+	// TEMPLATE: WEBSERVICE 0x100f0d50
+	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
+	// TEMPLATE: WEBSERVICE 0x100f0f50
+	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::~FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
+	// TEMPLATE: WEBSERVICE 0x100f0fa0
+	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
+	// TEMPLATE: WEBSERVICE 0x100f1400
+	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::~FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
+	// TEMPLATE: WEBSERVICE 0x100f1450
+	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
+	// TEMPLATE: WEBSERVICE 0x100f1670
+	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::~FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
+	// TEMPLATE: WEBSERVICE 0x100f16c0
+	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
+	// TEMPLATE: WEBSERVICE 0x100f18c0
+	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::~FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
+	// TEMPLATE: WEBSERVICE 0x100f1910
+	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
+	// TEMPLATE: WEBSERVICE 0x100f1b10
+	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::~FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
+	// TEMPLATE: WEBSERVICE 0x100f1b60
+	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
+	// TEMPLATE: WEBSERVICE 0x100f6520
+	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f65d0
+	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f6680
+	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f6730
+	// RBX::FactoryProduct<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>,RBX::Instance,&RBX::sStringValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f67e0
+	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f6890
+	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f6940
+	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f69f0
+	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1018c030
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100da470

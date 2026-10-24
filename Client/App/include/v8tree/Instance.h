@@ -501,6 +501,20 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::DescribedCreatable<RBX::Rocket,RBX::BodyMover,&RBX::sRocket><char *>
 	// FUNCTION: WEBSERVICE 0x100ee970
 	// RBX::DescribedCreatable<RBX::Message,RBX::Instance,&RBX::sMessage>::DescribedCreatable<RBX::Message,RBX::Instance,&RBX::sMessage><char const *>
+	// TEMPLATE: WEBSERVICE 0x100f3ea0
+	// RBX::DescribedCreatable<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::DescribedCreatable<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
+	// TEMPLATE: WEBSERVICE 0x100f3f50
+	// RBX::DescribedCreatable<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::DescribedCreatable<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
+	// TEMPLATE: WEBSERVICE 0x100f4010
+	// RBX::DescribedCreatable<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::DescribedCreatable<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
+	// TEMPLATE: WEBSERVICE 0x100f41f0
+	// RBX::DescribedCreatable<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::DescribedCreatable<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
+	// TEMPLATE: WEBSERVICE 0x100f4290
+	// RBX::DescribedCreatable<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::DescribedCreatable<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
+	// TEMPLATE: WEBSERVICE 0x100f4330
+	// RBX::DescribedCreatable<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::DescribedCreatable<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
+	// TEMPLATE: WEBSERVICE 0x100f4410
+	// RBX::DescribedCreatable<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::DescribedCreatable<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
 	// FUNCTION: WEBSERVICE 0x100f8d50
 	// RBX::DescribedCreatable<RBX::Visit,RBX::Instance,&RBX::sVisit>::~DescribedCreatable<RBX::Visit,RBX::Instance,&RBX::sVisit>
 	// FUNCTION: WEBSERVICE 0x100f94e0

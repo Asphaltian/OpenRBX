@@ -190,6 +190,65 @@ template void RBX::Name::callDoDeclare<RBX::sCFrameValue>();
 template void RBX::Name::callDoDeclare<RBX::sColor3Value>();
 template void RBX::Name::callDoDeclare<RBX::sBrickColorValue>();
 
+template class RBX::FactoryProduct<RBX::Value<int, RBX::sIntValue>, RBX::Instance, RBX::sIntValue>;
+template class RBX::Reflection::Described<
+	RBX::Value<int, RBX::sIntValue>,
+	RBX::sIntValue,
+	RBX::FactoryProduct<RBX::Value<int, RBX::sIntValue>, RBX::Instance, RBX::sIntValue> >;
+template class RBX::DescribedCreatable<RBX::Value<int, RBX::sIntValue>, RBX::Instance, RBX::sIntValue>;
+
+template class RBX::FactoryProduct<RBX::Value<bool, RBX::sBoolValue>, RBX::Instance, RBX::sBoolValue>;
+template class RBX::Reflection::Described<
+	RBX::Value<bool, RBX::sBoolValue>,
+	RBX::sBoolValue,
+	RBX::FactoryProduct<RBX::Value<bool, RBX::sBoolValue>, RBX::Instance, RBX::sBoolValue> >;
+template class RBX::DescribedCreatable<RBX::Value<bool, RBX::sBoolValue>, RBX::Instance, RBX::sBoolValue>;
+
+template class RBX::FactoryProduct<RBX::Value<double, RBX::sDoubleValue>, RBX::Instance, RBX::sDoubleValue>;
+template class RBX::Reflection::Described<
+	RBX::Value<double, RBX::sDoubleValue>,
+	RBX::sDoubleValue,
+	RBX::FactoryProduct<RBX::Value<double, RBX::sDoubleValue>, RBX::Instance, RBX::sDoubleValue> >;
+template class RBX::DescribedCreatable<RBX::Value<double, RBX::sDoubleValue>, RBX::Instance, RBX::sDoubleValue>;
+
+template class RBX::FactoryProduct<RBX::Value<std::string, RBX::sStringValue>, RBX::Instance, RBX::sStringValue>;
+template class RBX::Reflection::Described<
+	RBX::Value<std::string, RBX::sStringValue>,
+	RBX::sStringValue,
+	RBX::FactoryProduct<RBX::Value<std::string, RBX::sStringValue>, RBX::Instance, RBX::sStringValue> >;
+template class RBX::DescribedCreatable<RBX::Value<std::string, RBX::sStringValue>, RBX::Instance, RBX::sStringValue>;
+
+template class RBX::FactoryProduct<RBX::Value<G3D::Vector3, RBX::sVector3Value>, RBX::Instance, RBX::sVector3Value>;
+template class RBX::Reflection::Described<
+	RBX::Value<G3D::Vector3, RBX::sVector3Value>,
+	RBX::sVector3Value,
+	RBX::FactoryProduct<RBX::Value<G3D::Vector3, RBX::sVector3Value>, RBX::Instance, RBX::sVector3Value> >;
+template class RBX::DescribedCreatable<RBX::Value<G3D::Vector3, RBX::sVector3Value>, RBX::Instance, RBX::sVector3Value>;
+
+template class RBX::
+	FactoryProduct<RBX::Value<G3D::CoordinateFrame, RBX::sCFrameValue>, RBX::Instance, RBX::sCFrameValue>;
+template class RBX::Reflection::Described<
+	RBX::Value<G3D::CoordinateFrame, RBX::sCFrameValue>,
+	RBX::sCFrameValue,
+	RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame, RBX::sCFrameValue>, RBX::Instance, RBX::sCFrameValue> >;
+template class RBX::
+	DescribedCreatable<RBX::Value<G3D::CoordinateFrame, RBX::sCFrameValue>, RBX::Instance, RBX::sCFrameValue>;
+
+template class RBX::FactoryProduct<RBX::Value<G3D::Color3, RBX::sColor3Value>, RBX::Instance, RBX::sColor3Value>;
+template class RBX::Reflection::Described<
+	RBX::Value<G3D::Color3, RBX::sColor3Value>,
+	RBX::sColor3Value,
+	RBX::FactoryProduct<RBX::Value<G3D::Color3, RBX::sColor3Value>, RBX::Instance, RBX::sColor3Value> >;
+template class RBX::DescribedCreatable<RBX::Value<G3D::Color3, RBX::sColor3Value>, RBX::Instance, RBX::sColor3Value>;
+
+template class RBX::
+	FactoryProduct<RBX::Value<RBX::BrickColor, RBX::sBrickColorValue>, RBX::Instance, RBX::sBrickColorValue>;
+template class RBX::Reflection::Described<
+	RBX::Value<RBX::BrickColor, RBX::sBrickColorValue>,
+	RBX::sBrickColorValue,
+	RBX::FactoryProduct<RBX::Value<RBX::BrickColor, RBX::sBrickColorValue>, RBX::Instance, RBX::sBrickColorValue> >;
+template class RBX::
+	DescribedCreatable<RBX::Value<RBX::BrickColor, RBX::sBrickColorValue>, RBX::Instance, RBX::sBrickColorValue>;
 template class RBX::FactoryProduct<RBX::ObjectValue, RBX::Instance, RBX::sObjectValue>;
 template class RBX::Reflection::Described<
 	RBX::ObjectValue,

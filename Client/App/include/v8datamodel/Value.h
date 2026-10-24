@@ -55,6 +55,26 @@ private:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1008e6a0
 	// RBX::ObjectValue::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100f44d0
+	// RBX::Value<int,&RBX::sIntValue>::Value<int,&RBX::sIntValue>
+	// TEMPLATE: WEBSERVICE 0x100f45f0
+	// RBX::Value<bool,&RBX::sBoolValue>::Value<bool,&RBX::sBoolValue>
+	// TEMPLATE: WEBSERVICE 0x100f46f0
+	// RBX::Value<double,&RBX::sDoubleValue>::Value<double,&RBX::sDoubleValue>
+	// TEMPLATE: WEBSERVICE 0x100f47c0
+	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>
+	// TEMPLATE: WEBSERVICE 0x100f4910
+	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::~Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>
+	// TEMPLATE: WEBSERVICE 0x100f4960
+	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100f4980
+	// RBX::Value<G3D::Vector3,&RBX::sVector3Value>::Value<G3D::Vector3,&RBX::sVector3Value>
+	// TEMPLATE: WEBSERVICE 0x100f4aa0
+	// RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>
+	// TEMPLATE: WEBSERVICE 0x100f4bf0
+	// RBX::Value<G3D::Color3,&RBX::sColor3Value>::Value<G3D::Color3,&RBX::sColor3Value>
+	// TEMPLATE: WEBSERVICE 0x100f4cf0
+	// RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>::Value<RBX::BrickColor,&RBX::sBrickColorValue>
 	// TEMPLATE: WEBSERVICE 0x100f72a0
 	// RBX::Value<int,&RBX::sIntValue>::onValueChanged
 	// TEMPLATE: WEBSERVICE 0x100f72e0

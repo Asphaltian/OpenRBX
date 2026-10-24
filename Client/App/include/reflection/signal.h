@@ -175,6 +175,8 @@ template <class Signature>
 class __declspec(novtable) TSignalDesc : public SignalDescriptor
 {
 public:
+	typedef boost::function_traits<Signature> traits;
+
 	// SIZE 0x28
 	class TSignalInstance
 		: public SignalInstance,
@@ -219,21 +221,45 @@ public:
 		// clang-format on
 	};
 
-	bool empty(const SignalSource* source)
-	{
-		const TSignalInstance* instance = findSig(source);
+protected:
+	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}
 
-		return instance == NULL || instance->empty();
+private:
+	virtual SignalInstance* newSignalInstance(SignalSource& source) const // vtable+0x08
+	{
+		return new TSignalInstance(&source, *this);
 	}
 
-	boost::signals::connection connect(SignalSource* source, const typename TSignalInstance::slot_type& slot, int group)
-	{
-		if (source != NULL) {
-			return sig(*source).connect(group, slot, boost::signals::at_back);
-		}
-
-		return boost::signals::connection();
-	}
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10045b70
+	// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x1004cfd0
+	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x1004d040
+	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x10056620
+	// RBX::Reflection::TSignalDesc<void __cdecl(float,float)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x10056760
+	// RBX::Reflection::TSignalDesc<void __cdecl(float)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x10079440
+	// RBX::Reflection::TSignalDesc<void __cdecl(void)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100e2e30
+	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100f3b90
+	// RBX::Reflection::TSignalDesc<void __cdecl(int)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100f3c00
+	// RBX::Reflection::TSignalDesc<void __cdecl(double)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100f3c70
+	// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100f3ce0
+	// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Vector3)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100f3d50
+	// RBX::Reflection::TSignalDesc<void __cdecl(G3D::CoordinateFrame)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100f3dc0
+	// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Color3)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100f3e30
+	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::newSignalInstance
+	// clang-format on
 
 protected:
 	TSignalInstance* findSig(const SignalSource* source) const
@@ -246,6 +272,23 @@ protected:
 		return *static_cast<TSignalInstance*>(getSignalInstance(source).get());
 	}
 
+public:
+	boost::signals::connection connect(SignalSource* source, const typename TSignalInstance::slot_type& slot, int group)
+	{
+		if (source != NULL) {
+			return sig(*source).connect(group, slot, boost::signals::at_back);
+		}
+
+		return boost::signals::connection();
+	}
+
+	bool empty(const SignalSource* source)
+	{
+		const TSignalInstance* instance = findSig(source);
+
+		return instance == NULL || instance->empty();
+	}
+
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100caf70
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::connect
@@ -256,8 +299,6 @@ protected:
 	// TEMPLATE: WEBSERVICE 0x10170460
 	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::connect
 	// clang-format on
-
-	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}
 };
 
 DECOMP_SIZE_ASSERT(TSignalDesc<void(bool)>::TSignalInstance, 0x28)
@@ -321,11 +362,6 @@ protected:
 		);
 	}
 
-	virtual SignalInstance* newSignalInstance(SignalSource& source) const // vtable+0x08
-	{
-		return new typename TSignalDesc<Signature>::TSignalInstance(&source, *this);
-	}
-
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
 	{
 	}
@@ -374,11 +410,6 @@ protected:
 			GenericSlotAdapter(wrapper),
 			position
 		);
-	}
-
-	virtual SignalInstance* newSignalInstance(SignalSource& source) const // vtable+0x08
-	{
-		return new typename TSignalDesc<Signature>::TSignalInstance(&source, *this);
 	}
 
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
@@ -437,11 +468,6 @@ protected:
 			GenericSlotAdapter(wrapper),
 			position
 		);
-	}
-
-	virtual SignalInstance* newSignalInstance(SignalSource& source) const // vtable+0x08
-	{
-		return new typename TSignalDesc<Signature>::TSignalInstance(&source, *this);
 	}
 
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
