@@ -555,7 +555,6 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(message)s',
                         filemode='w')
 
-    """ Parse all command line arguments and validate """
     op = Options()
     op.parse_cmd_line()
 
@@ -565,13 +564,10 @@ if __name__ == "__main__":
     if op.args.clang_lib:
         Config.set_library_file(op.args.clang_lib)
 
-    """ Creating the rules database """
     rules_db = RulesDb(op._style_file)
 
-    """ Creating the skip database """
     skip_db = SkipDb(op._skip_file)
 
-    """ Check the source code against the configured rules """
     errors = 0
     for path in op.args.path:
         if os.path.isfile(path):

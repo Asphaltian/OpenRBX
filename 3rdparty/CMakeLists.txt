@@ -1,11 +1,7 @@
-# Vendored dependencies, built from source. Added before the parent turns /W3 on.
-
 if (MSVC)
   add_compile_options(/W0)
 endif()
 
-# --- G3D 6.09 ---
-# WebService.pdb puts the IJG jpeg and libpng objects in graphics3d and the zlib objects in glg3d.
 set(G3D "${CMAKE_CURRENT_SOURCE_DIR}/g3d/source")
 
 file(GLOB OPENRBX_GRAPHICS3D_SOURCES "${G3D}/G3Dcpp/*.cpp" "${G3D}/IJG/*.c" "${G3D}/png/*.c")
@@ -15,7 +11,6 @@ add_library(graphics3d STATIC ${OPENRBX_GRAPHICS3D_SOURCES})
 add_library(glg3d STATIC ${OPENRBX_GLG3D_SOURCES})
 
 foreach(name graphics3d glg3d)
-  # GWindow.h includes <SDL_events.h> under G3D_WIN32, hence SDL on the include path.
   target_include_directories(${name} PRIVATE
     "${G3D}/include" "${G3D}/png" "${G3D}/zlib" "${G3D}/IJG"
     "${CMAKE_CURRENT_SOURCE_DIR}/SDL-1.2.6/include"
@@ -23,8 +18,6 @@ foreach(name graphics3d glg3d)
   target_compile_definitions(${name} PRIVATE WIN32 _LIB _MBCS _CRT_SECURE_NO_WARNINGS)
 endforeach()
 
-# --- Boost 1.34.1 ---
-# Sources and BOOST_THREAD_BUILD_LIB from libs/thread/build/Jamfile.v2.
 set(BOOST "${CMAKE_CURRENT_SOURCE_DIR}/boost_1_34_1")
 
 add_library(boost_signals STATIC
@@ -51,7 +44,6 @@ add_library(boost_thread STATIC
 )
 target_compile_definitions(boost_thread PRIVATE BOOST_THREAD_BUILD_LIB=1)
 
-# Sources and requirements from libs/date_time/build/Jamfile.v2.
 add_library(boost_date_time STATIC
   "${BOOST}/libs/date_time/src/gregorian/greg_month.cpp"
   "${BOOST}/libs/date_time/src/gregorian/greg_weekday.cpp"
@@ -59,7 +51,6 @@ add_library(boost_date_time STATIC
 )
 target_compile_definitions(boost_date_time PRIVATE DATE_TIME_INLINE BOOST_DATE_TIME_STATIC_LINK)
 
-# auto_link.hpp asks the linker for exactly these names.
 set_target_properties(boost_signals PROPERTIES OUTPUT_NAME "libboost_signals-vc80-mt-1_34_1")
 set_target_properties(boost_thread  PROPERTIES OUTPUT_NAME "libboost_thread-vc80-mt-1_34_1")
 set_target_properties(boost_date_time PROPERTIES OUTPUT_NAME "libboost_date_time-vc80-mt-1_34_1")
@@ -68,8 +59,6 @@ foreach(name boost_signals boost_thread boost_date_time)
   target_include_directories(${name} PRIVATE "${BOOST}")
 endforeach()
 
-# --- Mesa 6.5 ---
-# The Release configuration of Mesa's own VC7 projects, exclusions included.
 set(MESA "${CMAKE_CURRENT_SOURCE_DIR}/mesa-6.5")
 
 set(OPENRBX_MESA_CORE_SOURCES
@@ -338,16 +327,10 @@ set(OPENRBX_MESA_GLU_SOURCES
   "${MESA}/src/glu/sgi/libutil/registry.c"
 )
 
-# RelWithDebInfo links incrementally, which keeps .idata a section of its own. The three
-# originals carry no .idata, so the Release configs linked without it.
 set(OPENRBX_MESA_LINK_OPTIONS "/INCREMENTAL:NO")
 
-# StringPooling and EnableFunctionLevelLinking off every Mesa vcproj. RelWithDebInfo already
-# carries the /O2 /Ob1 that InlineFunctionExpansion="1" asks for, but neither of these, and
-# without /Gy the linker has no COMDATs to fold.
 set(OPENRBX_MESA_COMPILE_OPTIONS "/GF" "/Gy")
 
-# The static core the three DLLs share. Each DLL exists for its import library.
 add_library(mesa_core STATIC ${OPENRBX_MESA_CORE_SOURCES})
 set_target_properties(mesa_core PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded")
 target_include_directories(mesa_core PRIVATE
@@ -357,9 +340,6 @@ target_include_directories(mesa_core PRIVATE
 target_compile_definitions(mesa_core PRIVATE NDEBUG WIN32 _MBCS _LIB _DLL BUILD_GL32 MESA_MINWARN)
 target_compile_options(mesa_core PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
 
-# The installer ships OPENGL32.DLL, GLU32.DLL and OSMESA32.DLL, and each vcproj names its
-# OutputFile that way. The case reaches the import table of every dependent, WebService.dll
-# included, so it is part of the comparison rather than a cosmetic detail.
 add_library(opengl32 SHARED ${OPENRBX_MESA_GDI_SOURCES})
 set_target_properties(opengl32 PROPERTIES OUTPUT_NAME "OPENGL32" SUFFIX ".DLL"
   MSVC_RUNTIME_LIBRARY "MultiThreaded")
@@ -374,10 +354,6 @@ target_link_libraries(opengl32 PRIVATE mesa_core winmm msvcrt kernel32 user32 gd
 target_link_options(opengl32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/mesa/drivers/windows/gdi/mesa.def")
 
-# osmesa's project defines neither BUILD_GL32 nor _DLL, so GLAPI is plain extern and every GL
-# entry point resolves out of OPENGL32.DLL instead of being compiled in again. That is what
-# keeps the original at 31,232 bytes with nine exports. RuntimeLibrary=0 is what leaves _DLL
-# undefined; the explicit msvcrt.lib then still binds the CRT to MSVCR80.dll.
 add_library(osmesa32 SHARED ${OPENRBX_MESA_OSMESA_SOURCES})
 set_target_properties(osmesa32 PROPERTIES OUTPUT_NAME "OSMESA32" SUFFIX ".DLL"
   MSVC_RUNTIME_LIBRARY "MultiThreaded")
@@ -403,22 +379,14 @@ target_compile_definitions(glu32 PRIVATE
   WIN32 NDEBUG _WINDOWS _MBCS _USRDLL GLU_EXPORTS BUILD_GL32)
 target_compile_options(glu32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
 
-# GLU is two compiles, not one. glu.dsp builds the libtess and libutil C files /GX /O2 with
-# NDEBUG, while windows/VC6/mesa/glu/compileRelease.txt builds the libnurbs C++ half /GX- /O2
-# /TP with LIBRARYBUILD and no NDEBUG. Only the NURBS half turns exceptions off; RTTI stays on
-# either way, since /GR- takes .data to 0x550 where the original is 0x6d8.
 set(OPENRBX_MESA_GLU_NURBS_SOURCES ${OPENRBX_MESA_GLU_SOURCES})
 list(FILTER OPENRBX_MESA_GLU_NURBS_SOURCES INCLUDE REGEX "[.]cc$")
 set_source_files_properties(${OPENRBX_MESA_GLU_NURBS_SOURCES} DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
   PROPERTIES COMPILE_OPTIONS "/EHs-c-" COMPILE_DEFINITIONS "LIBRARYBUILD")
-# glu.vcproj lists msvcrt.lib winmm.lib ... opengl32.lib as AdditionalDependencies, which the
-# linker sees before the default libraries kernel32 and friends. That ordering is what the
-# original GLU32.DLL's import directory records: MSVCR80, OPENGL32, KERNEL32.
 target_link_libraries(glu32 PRIVATE msvcrt winmm opengl32 kernel32 user32 gdi32 advapi32)
 target_link_options(glu32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/glu/sgi/glu.def")
 
-# None of it is ours.
 foreach(name graphics3d glg3d boost_signals boost_thread mesa_core opengl32 osmesa32 glu32)
   set_target_properties(${name} PROPERTIES
     C_CLANG_TIDY "" CXX_CLANG_TIDY "" CXX_INCLUDE_WHAT_YOU_USE "")
