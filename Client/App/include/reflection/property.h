@@ -409,6 +409,10 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// FUNCTION: WEBSERVICE 0x10043430
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Color3>::TypedPropertyDescriptor<G3D::Color3>
+	// TEMPLATE: WEBSERVICE 0x10068f70
+	// RBX::Reflection::PropDescriptor<RBX::Script,RBX::ContentId>::getset<RBX::ContentId const & (__thiscall RBX::Script::*)(void)const ,void (__thiscall RBX::Script::*)(RBX::ContentId const &)>
+	// TEMPLATE: WEBSERVICE 0x10069740
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Script>
 	// TEMPLATE: WEBSERVICE 0x100ef0c0
 	// RBX::Reflection::TypedPropertyDescriptor<double>::TypedPropertyDescriptor<double>
 	// TEMPLATE: WEBSERVICE 0x100ef130

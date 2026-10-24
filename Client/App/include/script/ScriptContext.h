@@ -48,6 +48,9 @@ public:
 
 	Result resume(lua_State* L, int nargs);
 
+	void addScript(Script* script);
+	void removeScript(Script* script);
+
 protected:
 	virtual void onEvent(const RunService* source, RunTransition event);
 	virtual void onEvent(const RunService* source, Heartbeat event);
@@ -55,6 +58,12 @@ protected:
 private:
 	static int trustedThread(lua_State* thread);
 	static int loadfile(lua_State* L);
+
+	void onChangedScriptEnabled(const Reflection::PropertyDescriptor&);
+
+	void disassociateState(Script* script);
+	void startScript(boost::shared_ptr<Script> script);
+	void startPendingScripts();
 
 	lua_State* globalState;                                 // 0x100
 	Lua::ThreadRef commandLineSandbox;                      // 0x104

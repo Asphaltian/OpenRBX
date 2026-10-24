@@ -159,6 +159,9 @@ public:
 
 	static const Reflection::RefPropDescriptor<Instance, Instance> propParent;
 
+	const Association<Instance>& association() const { return assoc; }
+	Association<Instance>& association() { return assoc; }
+
 	Instance* getParent() const { return parent; }
 
 	void setParent(Instance* newParent);

@@ -1,20 +1,39 @@
 #include "script/Script.h"
 
 #include "network/Player.h"
+#include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
 #include "util/Name.h"
 #include "v8datamodel/Team.h"
 
 #include <boost/thread/once.hpp>
 
-static boost::shared_ptr<const std::string> helloWorld;
-static boost::once_flag flagInitScriptCpp = BOOST_ONCE_INIT;
-
 namespace RBX {
 
 char sScript[] = "Script";
 
 char sLocalScript[] = "LocalScript";
+
+const Reflection::PropDescriptor<Script, std::string> Script::prop_EmbeddedSourceCode(
+	"Source",
+	"Data",
+	&RBX::Script::getEmbeddedCode,
+	&RBX::Script::setEmbeddedCode
+);
+const Reflection::PropDescriptor<Script, ContentId> Script::prop_SourceCodeId(
+	"LinkedSource",
+	"Data",
+	&RBX::Script::getScriptId,
+	&RBX::Script::setScriptId
+);
+Reflection::BoundProp<bool, 1> Script::prop_Disabled("Disabled", "Behavior", &RBX::Script::disabled);
+
+} // namespace RBX
+
+static boost::shared_ptr<const std::string> helloWorld;
+static boost::once_flag flagInitScriptCpp = BOOST_ONCE_INIT;
+
+namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10068bf0
 Script::~Script()
@@ -49,10 +68,71 @@ Script::Script() : DescribedCreatable<Script, Instance, sScript>("Script"), disa
 	embeddedSource = helloWorld;
 }
 
+// FUNCTION: WEBSERVICE 0x10069aa0
+void Script::onAncestorChanged(const AncestorChanged& event)
+{
+	Instance::onAncestorChanged(event);
+
+	IScriptOwner* newOwner = NULL;
+
+	for (Instance* i = getParent(); i != NULL; i = i->getParent()) {
+		IScriptOwner* scriptOwner = dynamic_cast<IScriptOwner*>(i);
+
+		if (scriptOwner && (newOwner = scriptOwner->scriptShouldRun(this)) != NULL) {
+			break;
+		}
+	}
+
+	if (newOwner != owner) {
+		if (owner) {
+			owner->releaseScript(this);
+		}
+
+		owner = newOwner;
+
+		if (ScriptContext* scriptContext = ServiceProvider::find<ScriptContext>(this)) {
+			scriptContext->removeScript(this);
+
+			if (owner) {
+				owner->runScript(this, scriptContext);
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10069b40
+void Script::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	if (ScriptContext* scriptContext = oldProvider ? oldProvider->find<ScriptContext>() : NULL) {
+		scriptContext->removeScript(this);
+	}
+
+	Instance::onServiceProvider(oldProvider, newProvider);
+}
+
 // FUNCTION: WEBSERVICE 0x10069cd0
 LocalScript::LocalScript()
 {
 	setName("LocalScript");
+}
+
+// FUNCTION: WEBSERVICE 0x10069e80
+void Script::setEmbeddedCode(const std::string& value)
+{
+	if (*embeddedSource != value) {
+		embeddedSource.reset(new std::string(value));
+		raisePropertyChanged(prop_EmbeddedSourceCode);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10069f10
+void Script::setScriptId(const ContentId& value)
+{
+	if (scriptId != value) {
+		scriptId = value;
+		requestCode();
+		raisePropertyChanged(prop_SourceCodeId);
+	}
 }
 
 } // namespace RBX

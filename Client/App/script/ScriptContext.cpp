@@ -3,6 +3,7 @@
 #include "reflection/signal.h"
 #include "script/LuaAtomicClasses.h"
 #include "script/LuaMemory.h"
+#include "script/Script.h"
 #include "script/ScriptEvent.h"
 #include "security/SecurityContext.h"
 #include "util/ContentProvider.h"
@@ -10,6 +11,8 @@
 #include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/Stats.h"
 
+#include <algorithm>
+#include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 
 namespace RBX {
@@ -58,6 +61,29 @@ void Lua::Vector3Bridge::pushVector3(lua_State* L, G3D::Vector3 value)
 void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 value)
 {
 	pushNewObject(L, value);
+}
+
+// FUNCTION: WEBSERVICE 0x100644e0
+void ScriptContext::disassociateState(Script* script)
+{
+	if (script->association().contains<boost::shared_ptr<Lua::ThreadRef::Node> >()) {
+		script->association().get<boost::shared_ptr<Lua::ThreadRef::Node> >()->eraseAllRefs();
+		script->association().remove<boost::shared_ptr<Lua::ThreadRef::Node> >();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10064510
+void ScriptContext::removeScript(Script* script)
+{
+	if (scripts.erase(script)) {
+		disassociateState(script);
+
+		std::vector<boost::shared_ptr<Script> >::iterator iter =
+			std::find(pendingScripts.begin(), pendingScripts.end(), shared_from(script));
+		if (iter != pendingScripts.end()) {
+			pendingScripts.erase(iter);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10066200
@@ -109,6 +135,41 @@ ScriptContext::Result ScriptContext::resume(lua_State* L, int nargs)
 {
 	STUB(0x100673d0);
 	return Success;
+}
+
+// STUB: WEBSERVICE 0x10067e00
+void ScriptContext::startScript(boost::shared_ptr<Script> script)
+{
+	STUB(0x10067e00);
+}
+
+// FUNCTION: WEBSERVICE 0x10068640
+void ScriptContext::startPendingScripts()
+{
+	if (!scriptsDisabled) {
+		std::vector<boost::shared_ptr<Script> > copy(pendingScripts);
+		pendingScripts.clear();
+
+		std::for_each(copy.begin(), copy.end(), boost::bind(&ScriptContext::startScript, this, _1));
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10068760
+void ScriptContext::onChangedScriptEnabled(const Reflection::PropertyDescriptor&)
+{
+	if (scriptsDisabled) {
+		startPendingScripts();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10068780
+void ScriptContext::addScript(Script* script)
+{
+	if (scripts.insert(script).second == true) {
+		if (!script->isDisabled()) {
+			startScript(shared_from(script));
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x10068880

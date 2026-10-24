@@ -2,6 +2,7 @@
 #define SCRIPT_SCRIPT_H
 
 #include "decomp.h"
+#include "reflection/property.h"
 #include "util/ContentProvider.h"
 #include "v8tree/Instance.h"
 
@@ -37,9 +38,22 @@ public:
 	const ContentId& getScriptId() const { return scriptId; }
 
 	boost::shared_ptr<const std::string> requestCode();
+	void setEmbeddedCode(const std::string& value);
 
 	// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
-	const std::string* getEmbeddedCode() const { return embeddedSource.get(); }
+	const std::string& getEmbeddedCode() const { return *embeddedSource; }
+
+	void setScriptId(const ContentId& value);
+
+	bool isDisabled() const { return disabled; }
+
+	static const Reflection::PropDescriptor<Script, std::string> prop_EmbeddedSourceCode;
+	static const Reflection::PropDescriptor<Script, ContentId> prop_SourceCodeId;
+	static Reflection::BoundProp<bool, 1> prop_Disabled;
+
+protected:
+	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
+	virtual void onAncestorChanged(const AncestorChanged& event);
 
 private:
 	boost::shared_ptr<const std::string> embeddedSource; // 0x0f8
@@ -67,6 +81,8 @@ class ScriptContext;
 // SIZE 0x4
 class __declspec(novtable) IScriptOwner
 {
+	friend class Script;
+
 protected:
 	virtual IScriptOwner* scriptShouldRun(Script* script) = 0; // vtable+0x00
 
@@ -88,10 +104,22 @@ DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
 // RBX::Script::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x10069e60
 // RBX::LocalScript::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x10218c00
+// `dynamic initializer for 'RBX::Script::prop_EmbeddedSourceCode''
+// SYNTHETIC: WEBSERVICE 0x10218c40
+// `dynamic initializer for 'RBX::Script::prop_SourceCodeId''
+// SYNTHETIC: WEBSERVICE 0x10218c80
+// `dynamic initializer for 'RBX::Script::prop_Disabled''
 // SYNTHETIC: WEBSERVICE 0x10218cb0
 // `dynamic initializer for 'helloWorld''
 // SYNTHETIC: WEBSERVICE 0x10221b00
 // `dynamic atexit destructor for 'helloWorld''
+// SYNTHETIC: WEBSERVICE 0x10221b40
+// `dynamic atexit destructor for 'RBX::Script::prop_Disabled''
+// SYNTHETIC: WEBSERVICE 0x10221b60
+// `dynamic atexit destructor for 'RBX::Script::prop_SourceCodeId''
+// SYNTHETIC: WEBSERVICE 0x10221b80
+// `dynamic atexit destructor for 'RBX::Script::prop_EmbeddedSourceCode''
 // clang-format on
 
 } // namespace RBX

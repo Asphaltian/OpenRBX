@@ -5577,9 +5577,10 @@ address,type,symbol
 0x102f63b0,global,??_B?1???$doDeclare@$1?sStats@Stats@RBX@@3PADA@Name@RBX@@CAABV01@XZ@51
 0x102f63b4,global,n___RBX::Name::doDeclare<&RBX::sDebugSettings>
 0x102f63b8,global,??_B?1???$doDeclare@$1?sDebugSettings@RBX@@3QBDB@Name@RBX@@CAABV01@XZ@51
-0x102f63bc,global,?c@?1??count@?$Association@VInstance@RBX@@@RBX@@CAAAIXZ@4IA
+0x102f63bc,global,c___RBX::Association<RBX::Instance>::count
 0x102f63c0,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::Stats::StatsService>
 0x102f63c4,global,??_B?1???$doGetClassIndex@VStatsService@Stats@RBX@@@ServiceProvider@RBX@@CAIXZ@51
+0x102f63c8,global,"i___RBX::Association<RBX::Instance>::index<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >"
 0x102f63cc,global,??_B?1???$index@V?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@@?$Association@VInstance@RBX@@@RBX@@ABEIXZ@51
 0x102f63d0,global,flag___RBX::Name::declare<&RBX::Stats::sStatsItem>
 0x102f63d4,global,flag___RBX::Name::declare<&RBX::Stats::sStats>
