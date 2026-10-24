@@ -286,6 +286,20 @@ void SharedPtrBridge<T>::push(lua_State* L, boost::shared_ptr<T> instance)
 // ?getPtr@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA?AV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@I@Z
 // TEMPLATE: WEBSERVICE 0x1005f010
 // RBX::Lua::Bridge<RBX::BrickColor,1>::getObject
+// TEMPLATE: WEBSERVICE 0x1005ecf0
+// RBX::Lua::Bridge<G3D::CoordinateFrame,1>::getObject
+// TEMPLATE: WEBSERVICE 0x1005ed90
+// RBX::Lua::Bridge<G3D::Vector3,1>::getObject
+// TEMPLATE: WEBSERVICE 0x1005ef70
+// RBX::Lua::Bridge<G3D::Color3,1>::getObject
+// TEMPLATE: WEBSERVICE 0x1005f110
+// RBX::Lua::Bridge<G3D::CoordinateFrame,1>::pushNewObject<G3D::CoordinateFrame>
+// TEMPLATE: WEBSERVICE 0x1005f200
+// RBX::Lua::Bridge<G3D::Color3,1>::pushNewObject<G3D::Color3>
+// TEMPLATE: WEBSERVICE 0x10060610
+// RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>,0>::pushNewObject<boost::shared_ptr<RBX::Reflection::SignalInstance> >
+// TEMPLATE: WEBSERVICE 0x100afa60
+// RBX::Lua::Bridge<G3D::CoordinateFrame,1>::getValue<G3D::CoordinateFrame>
 // clang-format on
 template <class T>
 boost::shared_ptr<T> SharedPtrBridge<T>::getPtr(lua_State* L, unsigned int index)

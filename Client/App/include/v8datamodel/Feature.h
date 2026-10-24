@@ -135,6 +135,8 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // RBX::`dynamic atexit destructor for 'prop_DesiredAngle''
 // SYNTHETIC: WEBSERVICE 0x102242e0
 // RBX::`dynamic atexit destructor for 'prop_MaxVelocity''
+// SYNTHETIC: WEBSERVICE 0x100e4c60
+// RBX::Feature::`scalar deleting destructor'
 // clang-format on
 
 } // namespace RBX

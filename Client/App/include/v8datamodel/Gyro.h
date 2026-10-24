@@ -150,6 +150,13 @@ private:
 
 DECOMP_SIZE_ASSERT(Rocket, 0x154)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x100ee090
+// RBX::Rocket::~Rocket
+// SYNTHETIC: WEBSERVICE 0x100ee110
+// RBX::Rocket::`scalar deleting destructor'
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_GYRO_H

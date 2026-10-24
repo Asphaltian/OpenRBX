@@ -156,6 +156,12 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<ProfilingItem,RBX::Profiling::Profiler const *>
 	// TEMPLATE: WEBSERVICE 0x100b2ba0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedMemItem,unsigned int const *>
+	// TEMPLATE: WEBSERVICE 0x10069460
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Player>
+	// TEMPLATE: WEBSERVICE 0x100a1d00
+	// RBX::shared_from_dynamic_cast<RBX::PartInstance,RBX::Instance>
+	// TEMPLATE: WEBSERVICE 0x1018b8e0
+	// RBX::Creatable<RBX::Instance>::create<RBX::NetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x10129ea0
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpecialShape>
 	// clang-format on
@@ -438,6 +444,10 @@ public:
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100be220
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100694e0
+	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1018c030
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100da470
 	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
 	// TEMPLATE: WEBSERVICE 0x100da500

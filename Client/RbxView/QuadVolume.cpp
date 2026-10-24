@@ -3,15 +3,6 @@
 namespace RBX {
 namespace View {
 
-LevelBuilder::LevelBuilder(
-	G3D::ReferenceCountedPointer<Render::Mesh::Level>& level,
-	G3D::Vector3 size,
-	RenderSurfaceTypes surfaceTypes
-)
-	: halfSize(size * 0.5f), surfaceTypes(surfaceTypes), level(level), textureScale(2.0f, 2.0f)
-{
-}
-
 // FUNCTION: WEBSERVICE 0x1018ae60
 void LevelBuilder::buildFace(NormalId normalId, Purpose purpose)
 {
@@ -46,6 +37,16 @@ void LevelBuilder::build(Purpose purpose)
 	buildRight(purpose);
 	buildFront(purpose);
 	buildBack(purpose);
+}
+
+// FUNCTION: WEBSERVICE 0x1018af40
+LevelBuilder::LevelBuilder(
+	G3D::ReferenceCountedPointer<Render::Mesh::Level>& level,
+	G3D::Vector3 size,
+	RenderSurfaceTypes surfaceTypes
+)
+	: halfSize(size * 0.5f), surfaceTypes(surfaceTypes), level(level), textureScale(2.0f, 2.0f)
+{
 }
 
 } // namespace View

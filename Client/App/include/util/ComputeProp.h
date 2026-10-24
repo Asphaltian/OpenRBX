@@ -19,6 +19,8 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10059d30
 	// RBX::ComputeProp<RBX::Extents,RBX::ModelInstance>::getValue
+	// TEMPLATE: WEBSERVICE 0x10099560
+	// RBX::ComputeProp<G3D::ReferenceCountedPointer<RBX::Controller>,RBX::PVInstance>::getValue
 	// FUNCTION: WEBSERVICE 0x1009b290
 	// RBX::ComputeProp<RBX::Part,RBX::PartInstance>::getValue
 	// clang-format on

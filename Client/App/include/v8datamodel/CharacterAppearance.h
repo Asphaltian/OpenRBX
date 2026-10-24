@@ -61,6 +61,8 @@ DECOMP_SIZE_ASSERT(Shirt, 0x124)
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100e0930
 // RBX::ShirtGraphic::~ShirtGraphic
+// SYNTHETIC: WEBSERVICE 0x100e15a0
+// RBX::ShirtGraphic::`scalar deleting destructor'
 // clang-format on
 
 } // namespace RBX

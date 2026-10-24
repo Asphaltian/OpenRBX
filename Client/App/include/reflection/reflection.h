@@ -533,6 +533,22 @@ public:
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009e820
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setStringValue
+	// TEMPLATE: WEBSERVICE 0x1009a1a0
+	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x1009e7e0
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x1009f010
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x100b4a40
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x100b4d10
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x100e6560
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x100e6830
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x1012d680
+	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x1009e8c0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::readValue
 	// TEMPLATE: WEBSERVICE 0x1009efb0

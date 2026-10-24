@@ -99,6 +99,8 @@ DECOMP_SIZE_ASSERT(Texture, 0x12c)
 // `dynamic atexit destructor for 'RBX::Decal::prop_Specular''
 // SYNTHETIC: WEBSERVICE 0x10224d50
 // `dynamic atexit destructor for 'RBX::Decal::prop_Texture''
+// SYNTHETIC: WEBSERVICE 0x101000f0
+// RBX::Decal::`scalar deleting destructor'
 // clang-format on
 
 } // namespace RBX

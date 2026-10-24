@@ -78,6 +78,8 @@ DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
 // clang-format off
 // STUB: WEBSERVICE 0x10068bf0
 // RBX::Script::~Script
+// SYNTHETIC: WEBSERVICE 0x10068fd0
+// RBX::Script::`scalar deleting destructor'
 // clang-format on
 
 } // namespace RBX

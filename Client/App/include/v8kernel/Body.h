@@ -62,6 +62,7 @@ public:
 	Vector3 getIBodyV3() const { return Math::toDiagonal(getIBody()); }
 	Vector3 getBranchIBodyV3() const { return Math::toDiagonal(getBranchIBody()); }
 
+	// FUNCTION: WEBSERVICE 0x100ea180
 	const Vector3& getBranchForce() const
 	{
 		const SimBody* simBody = getRootSimBody();

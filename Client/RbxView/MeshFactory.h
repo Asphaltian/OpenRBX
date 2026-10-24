@@ -107,6 +107,13 @@ public:
 	static T* createTexture(const G3D::Vector3& size, NormalId face, const G3D::Vector2& studsPerTile);
 
 	static void flushCache();
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x101727e0
+	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::createDecal
+	// TEMPLATE: WEBSERVICE 0x101728f0
+	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::createTexture
+	// clang-format on
 };
 
 template <class T, int N>

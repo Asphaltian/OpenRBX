@@ -170,6 +170,7 @@ public:
 	template <class T>
 	T* findFirstChildOfType() const;
 
+	// FUNCTION: WEBSERVICE 0x10047ae0
 	const std::string& getName() const { return name; }
 
 	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }

@@ -235,6 +235,8 @@ protected:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100fc400
 	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::sig
+	// TEMPLATE: WEBSERVICE 0x100e28b0
+	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::TSignalInstance::TSignalInstance
 	// clang-format on
 
 	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}

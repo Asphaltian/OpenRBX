@@ -81,6 +81,7 @@ private:
 
 DECOMP_SIZE_ASSERT(PropertyDescriptor, 0x18)
 
+// FUNCTION: WEBSERVICE 0x1003ea40
 inline std::string PropertyDescriptor::getStringValue(const DescribedBase* instance) const
 {
 	hasStringValue();
@@ -260,6 +261,12 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// FUNCTION: WEBSERVICE 0x10043430
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Color3>::TypedPropertyDescriptor<G3D::Color3>
+	// TEMPLATE: WEBSERVICE 0x1005b070
+	// RBX::Reflection::TypedPropertyDescriptor<G3D::CoordinateFrame>::TypedPropertyDescriptor<G3D::CoordinateFrame>
+	// TEMPLATE: WEBSERVICE 0x1005b480
+	// RBX::Reflection::TypedPropertyDescriptor<G3D::CoordinateFrame>::equalValues
+	// TEMPLATE: WEBSERVICE 0x1009baa0
+	// RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>::TypedPropertyDescriptor<G3D::Vector3>
 	// FUNCTION: WEBSERVICE 0x100434e0
 	// RBX::Reflection::TypedPropertyDescriptor<float>::TypedPropertyDescriptor<float>
 	// FUNCTION: WEBSERVICE 0x10048bd0
@@ -398,6 +405,42 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::PropDescriptor<RBX::Decal,float><float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ffdd0
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::PropDescriptor<RBX::Texture,float><float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x10048cf0
+	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::getset<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>
+	// TEMPLATE: WEBSERVICE 0x10099710
+	// RBX::Reflection::PropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::getset<enum RBX::Controller::ControllerType (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(enum RBX::Controller::ControllerType)>
+	// TEMPLATE: WEBSERVICE 0x1009b340
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::GetSetImpl<G3D::Vector3 const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>::getValue
+	// TEMPLATE: WEBSERVICE 0x1009bb90
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::getset<G3D::Vector3 const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x1009bc00
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::getset<enum RBX::Part::PartType (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(enum RBX::Part::PartType)>
+	// TEMPLATE: WEBSERVICE 0x1009bc70
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Color3>::getset<G3D::Color3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Color3 const &)>
+	// TEMPLATE: WEBSERVICE 0x1009be30
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::getset<G3D::Vector3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x1009bea0
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::getset<enum RBX::PartInstance::FormFactor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(enum RBX::PartInstance::FormFactor)>
+	// TEMPLATE: WEBSERVICE 0x1009e170
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::PropDescriptor<RBX::PartInstance,G3D::Vector3><G3D::Vector3 const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x1009e230
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Color3>::PropDescriptor<RBX::PartInstance,G3D::Color3><G3D::Color3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Color3 const &)>
+	// TEMPLATE: WEBSERVICE 0x1009e530
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::PropDescriptor<RBX::PartInstance,G3D::Vector3><G3D::Vector3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x100b3a70
+	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::getset<enum RBX::Debugable::AssertAction (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::Debugable::AssertAction)>
+	// TEMPLATE: WEBSERVICE 0x100e4aa0
+	// RBX::Reflection::PropDescriptor<RBX::Feature,enum RBX::NormalId>::getset<enum RBX::NormalId (__thiscall RBX::Feature::*)(void)const ,void (__thiscall RBX::Feature::*)(enum RBX::NormalId)>
+	// TEMPLATE: WEBSERVICE 0x100e4b00
+	// RBX::Reflection::PropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::getset<enum RBX::Feature::TopBottom (__thiscall RBX::Feature::*)(void)const ,void (__thiscall RBX::Feature::*)(enum RBX::Feature::TopBottom)>
+	// TEMPLATE: WEBSERVICE 0x100e4b60
+	// RBX::Reflection::PropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::getset<enum RBX::Feature::LeftRight (__thiscall RBX::Feature::*)(void)const ,void (__thiscall RBX::Feature::*)(enum RBX::Feature::LeftRight)>
+	// TEMPLATE: WEBSERVICE 0x100e4bc0
+	// RBX::Reflection::PropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::getset<enum RBX::Feature::InOut (__thiscall RBX::Feature::*)(void)const ,void (__thiscall RBX::Feature::*)(enum RBX::Feature::InOut)>
+	// TEMPLATE: WEBSERVICE 0x100ff770
+	// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::getset<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>
+	// TEMPLATE: WEBSERVICE 0x1012cca0
+	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::getset<enum RBX::SpecialShape::MeshType const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(enum RBX::SpecialShape::MeshType)>
 	// clang-format on
 	template <class Getter, class Setter>
 	PropDescriptor(
