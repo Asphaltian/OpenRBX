@@ -175,7 +175,7 @@ void Part::updateMesh()
 	STUB(0x101722a0);
 }
 
-// STUB: WEBSERVICE 0x10173c90
+// FUNCTION: WEBSERVICE 0x10173c90
 void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 {
 	SpecialShape* specialShape = dynamic_cast<SpecialShape*>(child.get());

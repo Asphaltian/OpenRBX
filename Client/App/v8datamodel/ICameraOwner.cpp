@@ -16,7 +16,7 @@ void ICameraOwner::getCameraIgnorePrimitives(std::vector<const Primitive*>& prim
 	}
 }
 
-// STUB: WEBSERVICE 0x10115f20
+// FUNCTION: WEBSERVICE 0x10115f20
 void ICameraOwner::setCameraIgnoreParts(const std::vector<PartInstance*>& _set)
 {
 	cameraIgnoreParts.clear();

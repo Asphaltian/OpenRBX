@@ -73,7 +73,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006b180
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::StarterPackService>
-// STUB: WEBSERVICE 0x1006e4c0
+// FUNCTION: WEBSERVICE 0x1006e4c0
 // RBX::ServiceProvider::find<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006e760
 // RBX::ServiceProvider::create<RBX::ControllerService>
@@ -91,9 +91,9 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x100733b0
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Teams>
-// STUB: WEBSERVICE 0x100784c0
+// FUNCTION: WEBSERVICE 0x100784c0
 // RBX::ServiceProvider::find<RBX::Teams>
-// STUB: WEBSERVICE 0x10078670
+// FUNCTION: WEBSERVICE 0x10078670
 // RBX::ServiceProvider::find<RBX::Network::Players>
 // FUNCTION: WEBSERVICE 0x10079520
 // RBX::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>
@@ -105,7 +105,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::doGetClassIndex<RBX::TimerService>
 // TEMPLATE: WEBSERVICE 0x100cd440
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::TimerService>
-// STUB: WEBSERVICE 0x100cdf90
+// FUNCTION: WEBSERVICE 0x100cdf90
 // RBX::ServiceProvider::find<RBX::TimerService>
 // TEMPLATE: WEBSERVICE 0x100ce4f0
 // RBX::ServiceProvider::create<RBX::TimerService>
@@ -117,7 +117,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10043180
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::RunService>
-// STUB: WEBSERVICE 0x10106790
+// FUNCTION: WEBSERVICE 0x10106790
 // RBX::ServiceProvider::find<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106940
 // RBX::ServiceProvider::create<RBX::GeometryService>

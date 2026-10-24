@@ -41,7 +41,7 @@ HitTestFilter::Result IgnoreDescendantsOf::filterResult(const Primitive* testMe)
 	return INCLUDE_PRIM;
 }
 
-// STUB: WEBSERVICE 0x10115b80
+// FUNCTION: WEBSERVICE 0x10115b80
 PartByLocalCharacter::PartByLocalCharacter(Instance* root)
 {
 	character = shared_from(Network::Players::findLocalCharacter(root));

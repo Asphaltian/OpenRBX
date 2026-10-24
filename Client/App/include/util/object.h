@@ -58,17 +58,17 @@ public:
 	};
 
 	// clang-format off
-	// STUB: WEBSERVICE 0x10009450
+	// FUNCTION: WEBSERVICE 0x10009450
 	// RBX::Creatable<RBX::Instance>::create<RBX::Lighting>
-	// STUB: WEBSERVICE 0x100094e0
+	// FUNCTION: WEBSERVICE 0x100094e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::RunService>
-	// STUB: WEBSERVICE 0x10009600
+	// FUNCTION: WEBSERVICE 0x10009600
 	// RBX::Creatable<RBX::Instance>::create<RBX::Selection>
-	// STUB: WEBSERVICE 0x10009690
+	// FUNCTION: WEBSERVICE 0x10009690
 	// RBX::Creatable<RBX::Instance>::create<RBX::ScriptContext>
-	// STUB: WEBSERVICE 0x10009720
+	// FUNCTION: WEBSERVICE 0x10009720
 	// RBX::Creatable<RBX::Instance>::create<RBX::Script>
-	// STUB: WEBSERVICE 0x100097b0
+	// FUNCTION: WEBSERVICE 0x100097b0
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalScript>
 	// FUNCTION: WEBSERVICE 0x1005bab0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Humanoid>
@@ -268,17 +268,17 @@ public:
 	};
 
 	// clang-format off
-	// STUB: WEBSERVICE 0x10007b20
+	// FUNCTION: WEBSERVICE 0x10007b20
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::Creator::create
-	// STUB: WEBSERVICE 0x10007be0
+	// FUNCTION: WEBSERVICE 0x10007be0
 	// RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::Creator::create
-	// STUB: WEBSERVICE 0x10007d60
+	// FUNCTION: WEBSERVICE 0x10007d60
 	// RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>::Creator::create
-	// STUB: WEBSERVICE 0x10007e20
+	// FUNCTION: WEBSERVICE 0x10007e20
 	// RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::Creator::create
-	// STUB: WEBSERVICE 0x10007ee0
+	// FUNCTION: WEBSERVICE 0x10007ee0
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::Creator::create
-	// STUB: WEBSERVICE 0x10007fa0
+	// FUNCTION: WEBSERVICE 0x10007fa0
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10042700
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>
@@ -732,7 +732,7 @@ public:
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::~FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>
 	// FUNCTION: WEBSERVICE 0x100fc2a0
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::`scalar deleting destructor'
-	// STUB: WEBSERVICE 0x100fc2c0
+	// FUNCTION: WEBSERVICE 0x100fc2c0
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>
 	// FUNCTION: WEBSERVICE 0x100fd610
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::~FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>

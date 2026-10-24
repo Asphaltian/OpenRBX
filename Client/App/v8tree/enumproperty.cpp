@@ -676,7 +676,7 @@ std::string TypedPropertyDescriptor<ContentId>::getStringValue(const DescribedBa
 	return StringConverter<ContentId>::convertToString(getValue(instance));
 }
 
-// STUB: WEBSERVICE 0x10041850
+// FUNCTION: WEBSERVICE 0x10041850
 template <>
 boost::shared_ptr<Instance>& Value::convert<boost::shared_ptr<Instance> >()
 {

@@ -129,7 +129,7 @@ JointInstance::~JointInstance()
 	joint = NULL;
 }
 
-// STUB: WEBSERVICE 0x100d8030
+// FUNCTION: WEBSERVICE 0x100d8030
 void AutoJoint::setPart(int i, PartInstance* value)
 {
 	if (part[i].get() == value) {
@@ -189,7 +189,7 @@ void AutoJoint::onAncestorChanged(const AncestorChanged& event)
 	}
 }
 
-// STUB: WEBSERVICE 0x100d8de0
+// FUNCTION: WEBSERVICE 0x100d8de0
 AutoJoint::AutoJoint(Joint* _joint) : DescribedNonCreatable<AutoJoint, JointInstance, sAutoJoint>(_joint)
 {
 	PartInstance* p0 = const_cast<PartInstance*>(PartInstance::fromPrimitiveConst(joint->getPrimitive(0)));

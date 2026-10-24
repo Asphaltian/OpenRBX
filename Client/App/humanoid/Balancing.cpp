@@ -104,7 +104,7 @@ Balancing::Balancing(Humanoid* humanoid, const float kP, const float kD)
 {
 }
 
-// STUB: WEBSERVICE 0x101228d0
+// FUNCTION: WEBSERVICE 0x101228d0
 Humanoid::State* Balancing::onStep(const float stepDt, Controller& controller)
 {
 	if (humanoid->getTorsoBody() != NULL) {

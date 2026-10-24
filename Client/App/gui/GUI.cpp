@@ -263,7 +263,7 @@ void GuiItem::onDescendentRemoving(const shared_ptr<Instance>& instance)
 	Instance::onDescendentRemoving(instance);
 }
 
-// STUB: WEBSERVICE 0x100d1b80
+// FUNCTION: WEBSERVICE 0x100d1b80
 GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
 {
 	for (unsigned int i = 0; i < numChildren(); ++i) {

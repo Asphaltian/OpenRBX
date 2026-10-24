@@ -85,7 +85,7 @@ void MegaDragger::safeRotate(const G3D::Matrix3& rotMatrix)
 	Dragger::safeRotate(primitives, rotMatrix, *contactManager);
 }
 
-// STUB: WEBSERVICE 0x10116790
+// FUNCTION: WEBSERVICE 0x10116790
 MegaDragger::MegaDragger(
 	PartInstance* mousePartPtr,
 	const std::vector<PVInstance*>& pvInstances,
@@ -97,7 +97,7 @@ MegaDragger::MegaDragger(
 	DragUtilities::pvsToParts(pvInstances, dragParts);
 }
 
-// STUB: WEBSERVICE 0x10116870
+// FUNCTION: WEBSERVICE 0x10116870
 MegaDragger::MegaDragger(
 	PartInstance* mousePartPtr,
 	const std::vector<boost::weak_ptr<PartInstance> >& partArray,

@@ -121,7 +121,7 @@ bool ArchiveBinder::resolveRefs()
 	return MergeBinder::resolveRefs() && resolvedCount == idrefBindings.size();
 }
 
-// STUB: WEBSERVICE 0x10097740
+// FUNCTION: WEBSERVICE 0x10097740
 static void buildIsolationMap(XmlElement* element, std::map<RBX::Instance*, RBX::InstanceHandle>& isolationMap)
 {
 	const XmlAttribute* referent = element->findAttribute(name_referent);
