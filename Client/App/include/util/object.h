@@ -718,8 +718,6 @@ public:
 	// RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>
 	// FUNCTION: WEBSERVICE 0x100fb630
 	// RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x100fb880
-	// RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::getClassName
 	// FUNCTION: WEBSERVICE 0x100fc040
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::~FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>
 	// FUNCTION: WEBSERVICE 0x100fc2a0

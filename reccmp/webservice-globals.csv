@@ -5910,6 +5910,7 @@ address,type,symbol
 0x102fa60c,global,??_B?1???$doGetClassIndex@VTimerService@RBX@@@ServiceProvider@RBX@@CAIXZ@51
 0x102fa610,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::FlagStandService>
 0x102fa614,global,??_B?1???$doGetClassIndex@VFlagStandService@RBX@@@ServiceProvider@RBX@@CAIXZ@51
+0x102fa618,global,flag___RBX::ServiceProvider::getClassIndex<RBX::TimerService>
 0x102fa628,global,??_B?1???$assign_to@V?$bind_t@XV?$mf1@XVFlag@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlag@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXV?$bind_t@XV?$mf1@XVFlag@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlag@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z@51
 0x102fa62c,global,isNullClassName___RBX::ServiceProvider::find<RBX::TimerService>
 0x102fa630,global,??_B?8???$find@VTimerService@RBX@@@ServiceProvider@RBX@@QBEPAVTimerService@1@XZ@58

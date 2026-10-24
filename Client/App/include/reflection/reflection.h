@@ -742,6 +742,73 @@ public:
 	// clang-format on
 };
 
+// SIZE 0x40
+template <class Class, class Signature>
+class BoundFuncDesc<Class, Signature, 2> : public FuncDesc<Class>
+{
+public:
+	typedef typename boost::function_traits<Signature>::result_type result_type;
+	typedef typename boost::function_traits<Signature>::arg1_type Arg1;
+	typedef typename boost::function_traits<Signature>::arg2_type Arg2;
+	typedef result_type (Class::*Function)(Arg1, Arg2);
+
+private:
+	Function function; // 0x28
+	Value default1;    // 0x30
+	Value default2;    // 0x38
+
+	void declareSignature(const char* arg1Name, const char* arg2Name)
+	{
+		this->signature.resultType = &Type::singleton<result_type>();
+		this->signature.addArgument(Name::declare(arg1Name, -1), Type::singleton<Arg1>(), default1);
+		this->signature.addArgument(Name::declare(arg2Name, -1), Type::singleton<Arg2>(), default2);
+	}
+
+	template <class R>
+	void call(Class* o, Value& arg1, Value& arg2, Value& returnValue) const
+	{
+		returnValue = (o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>());
+	}
+
+	template <>
+	void call<void>(Class* o, Value& arg1, Value& arg2, Value& returnValue) const
+	{
+		(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>());
+	}
+
+public:
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		const char* arg2Name,
+		Arg2 default2,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function), default2(default2)
+	{
+		declareSignature(arg1Name, arg2Name);
+	}
+
+	virtual void execute(DescribedBase* instance, typename FunctionDescriptor::Arguments& arguments) const
+	{
+		Value arg1(default1);
+		arguments.get(1, arg1);
+		Value arg2(default2);
+		arguments.get(2, arg2);
+		call<result_type>(boost::polymorphic_cast<Class*>(instance), arg1, arg2, arguments.returnValue);
+	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100f9e40
+	// RBX::Reflection::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>::declareSignature
+	// TEMPLATE: WEBSERVICE 0x100fafb0
+	// RBX::Reflection::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>
+	// TEMPLATE: WEBSERVICE 0x100fb070
+	// RBX::Reflection::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>::execute
+	// clang-format on
+};
+
 } // namespace Reflection
 } // namespace RBX
 

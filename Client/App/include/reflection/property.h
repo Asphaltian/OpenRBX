@@ -551,6 +551,10 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::PropDescriptor<RBX::Decal,float><float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ffdd0
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::PropDescriptor<RBX::Texture,float><float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x100fa0d0
+	// RBX::Reflection::PropDescriptor<RBX::DebrisService,int>::getset<int (__thiscall RBX::DebrisService::*)(void)const ,void (__thiscall RBX::DebrisService::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x100faae0
+	// RBX::Reflection::PropDescriptor<RBX::DebrisService,int>::PropDescriptor<RBX::DebrisService,int><int (__thiscall RBX::DebrisService::*)(void)const ,void (__thiscall RBX::DebrisService::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x1012cb10
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::GetSetImpl<G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x1012cd00

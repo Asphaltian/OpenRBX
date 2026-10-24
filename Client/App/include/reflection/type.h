@@ -78,6 +78,11 @@ public:
 	Value();
 
 	template <class T>
+	Value(const T& value) : _type(&Type::singleton<T>()), value(value)
+	{
+	}
+
+	template <class T>
 	Value& operator=(const T& rhs)
 	{
 		_type = &Type::singleton<T>();

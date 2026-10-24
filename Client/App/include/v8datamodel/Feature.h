@@ -47,7 +47,7 @@ public:
 	NormalId getFaceId() const { return faceId; }
 
 	void setFaceId(NormalId value);
-	// FUNCTION: WEBSERVICE 0x100f9de0
+	// FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
 	TopBottom getTopBottom() const { return topBottom; }
 
 	void setTopBottom(TopBottom value);

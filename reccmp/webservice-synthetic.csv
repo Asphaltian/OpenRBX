@@ -63,6 +63,8 @@ address,type,symbol
 0x100699a0,stub,??0Script@RBX@@QAE@XZ
 0x10069cd0,stub,??0LocalScript@RBX@@QAE@XZ
 0x1006a7b0,synthetic,?getNumPrimitives@World@RBX@@QBEHXZ
+0x100788b0,stub,??1?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAE@XZ
+0x1007a4b0,synthetic,??_G?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAEPAXI@Z
 0x1007e620,synthetic,?equalValues@?$TypedPropertyDescriptor@H@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 0x1008e400,synthetic,??0Hint@RBX@@QAE@XZ
 0x1008e4b0,synthetic,??_GHint@RBX@@UAEPAXI@Z
@@ -213,6 +215,7 @@ address,type,symbol
 0x100f9a70,stub,??0Visit@RBX@@QAE@XZ
 0x100fae30,stub,??0DebrisService@RBX@@QAE@XZ
 0x100faf90,synthetic,??_GDebrisService@RBX@@UAEPAXI@Z
+0x100fb880,synthetic,?getClassName@?$FactoryProduct@VTimerService@RBX@@VInstance@2@$1?sTimerService@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100fbd30,stub,??0TimerService@RBX@@QAE@XZ
 0x100fbf20,synthetic,??_ETimerService@RBX@@UAEPAXI@Z
 0x100fd180,stub,??0Seat@RBX@@QAE@XZ
