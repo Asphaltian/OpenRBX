@@ -1494,6 +1494,7 @@ address,size,type,symbol,name
 0x101e6590,,library,?cleanup@tss@detail@boost@@QAEXPAX@Z,
 0x101e6dd0,,library,?get@tss@detail@boost@@QBEPAXXZ,
 0x101e7100,,library,?set@tss@detail@boost@@QAEXPAX@Z,
+0x101e73e0,,library,?sleep@thread@boost@@SAXABUxtime@2@@Z,
 0x101e7630,,library,??0thread@boost@@QAE@ABV?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@1@@Z,
 0x101e76e0,,library,??0mutex@boost@@QAE@XZ,
 0x101e7700,,library,??1mutex@boost@@QAE@XZ,

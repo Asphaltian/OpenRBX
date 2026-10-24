@@ -121,6 +121,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/util/Face.cpp
   Client/App/util/Guid.cpp
   Client/App/util/Handle.cpp
+  Client/App/util/Http.cpp
   Client/App/util/IndexBox.cpp
   Client/App/util/Log.cpp
   Client/App/util/Math.cpp

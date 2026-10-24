@@ -739,10 +739,83 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100db1f0
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x100f9750
+	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x100f97c0
+	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::execute
 	// clang-format on
 };
 
 // SIZE 0x40
+template <class Class, class Signature>
+class BoundFuncDesc<Class, Signature, 1> : public FuncDesc<Class>
+{
+public:
+	typedef typename boost::function_traits<Signature>::result_type result_type;
+	typedef typename boost::function_traits<Signature>::arg1_type Arg1;
+	typedef result_type (Class::*Function)(Arg1);
+
+private:
+	Function function; // 0x28
+	Value default1;    // 0x30
+
+	void declareSignature(const char* arg1Name)
+	{
+		this->signature.resultType = &Type::singleton<result_type>();
+		this->signature.addArgument(Name::declare(arg1Name, -1), Type::singleton<Arg1>(), default1);
+	}
+
+	template <class R>
+	void call(Class* o, Value& arg1, Value& returnValue) const
+	{
+		returnValue = (o->*function)(arg1.convert<Arg1>());
+	}
+
+	template <>
+	void call<void>(Class* o, Value& arg1, Value& returnValue) const
+	{
+		(o->*function)(arg1.convert<Arg1>());
+	}
+
+public:
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function)
+	{
+		declareSignature(arg1Name);
+	}
+
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		Arg1 default1,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function), default1(default1)
+	{
+		declareSignature(arg1Name);
+	}
+
+	virtual void execute(DescribedBase* instance, typename FunctionDescriptor::Arguments& arguments) const
+	{
+		Value arg1(default1);
+		arguments.get(1, arg1);
+		call<result_type>(boost::polymorphic_cast<Class*>(instance), arg1, arguments.returnValue);
+	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100f95d0
+	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>
+	// TEMPLATE: WEBSERVICE 0x100f9670
+	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::execute
+	// clang-format on
+};
+
 template <class Class, class Signature>
 class BoundFuncDesc<Class, Signature, 2> : public FuncDesc<Class>
 {
@@ -782,10 +855,36 @@ public:
 		const char* name,
 		const char* arg1Name,
 		const char* arg2Name,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function)
+	{
+		declareSignature(arg1Name, arg2Name);
+	}
+
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		const char* arg2Name,
 		Arg2 default2,
 		typename FunctionDescriptor::Security security
 	)
 		: FuncDesc<Class>(name, security), function(function), default2(default2)
+	{
+		declareSignature(arg1Name, arg2Name);
+	}
+
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		Arg1 default1,
+		const char* arg2Name,
+		Arg2 default2,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function), default1(default1), default2(default2)
 	{
 		declareSignature(arg1Name, arg2Name);
 	}
@@ -800,6 +899,12 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100f8be0
+	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>::declareSignature
+	// TEMPLATE: WEBSERVICE 0x100f9820
+	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>
+	// TEMPLATE: WEBSERVICE 0x100f98b0
+	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>::execute
 	// TEMPLATE: WEBSERVICE 0x100f9e40
 	// RBX::Reflection::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x100fafb0
