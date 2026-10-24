@@ -49,10 +49,14 @@ public:
 
 	Result resume(lua_State* L, int nargs);
 
+	unsigned int getThreadCount() const;
+
+	void closeState();
 	void addScript(Script* script);
 	void removeScript(Script* script);
 
 protected:
+	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
 	virtual void onEvent(const RunService* source, RunTransition event);
 	virtual void onEvent(const RunService* source, Heartbeat event);
 

@@ -8,6 +8,7 @@
 #include "security/SecurityContext.h"
 #include "util/ContentProvider.h"
 #include "util/Name.h"
+#include "util/StandardOut.h"
 #include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/Stats.h"
 
@@ -15,6 +16,8 @@
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include <lualib.h>
+
+static int contextCount;
 
 namespace RBX {
 
@@ -64,6 +67,12 @@ void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 value)
 	pushNewObject(L, value);
 }
 
+// FUNCTION: WEBSERVICE 0x1005f9a0
+unsigned int ScriptContext::getThreadCount() const
+{
+	return globalState ? RobloxExtraSpace::get(globalState)->getThreadCount() : 0;
+}
+
 // FUNCTION: WEBSERVICE 0x100644e0
 void ScriptContext::disassociateState(Script* script)
 {
@@ -85,6 +94,53 @@ void ScriptContext::removeScript(Script* script)
 			pendingScripts.erase(iter);
 		}
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x10065f80
+void ScriptContext::closeState()
+{
+	if (!globalState) {
+		return;
+	}
+
+	commandLineSandbox.reset();
+
+	try {
+		Lua::ThreadRef::Node::get(globalState)->eraseAllRefs();
+
+		std::set<Script*> copy(scripts);
+		std::for_each(copy.begin(), copy.end(), boost::bind(&ScriptContext::disassociateState, this, _1));
+
+		yieldEvent.reset();
+	}
+	catch (std::exception& e) {
+		StandardOut::singleton()->print(MESSAGE_ERROR, "Exception thrown while cleaning up Lua: %s", e.what());
+	}
+
+	lua_close(globalState);
+	contextCount--;
+
+	{
+		unsigned int heapSize;
+		unsigned int heapCount;
+		unsigned int maxHeapSize;
+		unsigned int maxHeapCount;
+		allocator->getHeapStats(heapSize, heapCount, maxHeapSize, maxHeapCount);
+		StandardOut::singleton()->print(
+			MESSAGE_INFO,
+			"Script Heap Stats: Max Size = %d bytes, Max Count = %d blocks",
+			maxHeapSize,
+			maxHeapCount
+		);
+		allocator->clearHeapMax();
+
+		if (contextCount == 0 && (heapSize > 0 || heapCount > 0)) {
+			StandardOut::singleton()
+				->print(MESSAGE_ERROR, "Script memory leaks: %d bytes, %d blocks", heapSize, heapCount);
+		}
+	}
+
+	globalState = NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x10066200
@@ -152,6 +208,37 @@ int ScriptContext::stats(lua_State* L)
 	);
 
 	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x10067140
+void ScriptContext::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	stopListening<RunService, RunTransition>(runService, this);
+	stopListening<RunService, Heartbeat>(runService, this);
+
+	if (oldProvider && !newProvider) {
+		closeState();
+	}
+
+	if (statsItem) {
+		statsItem->setParent(NULL);
+		statsItem.reset();
+	}
+
+	Instance::onServiceProvider(oldProvider, newProvider);
+
+	Stats::StatsService* stats = newProvider ? newProvider->create<Stats::StatsService>() : NULL;
+	if (stats) {
+		statsItem = Creatable<Instance>::create<Stats::Item>("Lua");
+		statsItem->setParent(stats);
+		statsItem->createBoundChildItem("disabled", scriptsDisabled);
+		statsItem->createChildItem<int>("threads", boost::bind(&ScriptContext::getThreadCount, this));
+	}
+
+	runService = shared_from(newProvider ? newProvider->create<RunService>() : NULL);
+
+	startListening<RunService, RunTransition>(runService, this);
+	startListening<RunService, Heartbeat>(runService, this);
 }
 
 // STUB: WEBSERVICE 0x100673d0

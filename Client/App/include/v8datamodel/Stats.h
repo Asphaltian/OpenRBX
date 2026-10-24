@@ -33,6 +33,7 @@ protected:
 public:
 	// FUNCTION: WEBSERVICE 0x10065a50
 	Item() : val(0) {}
+	// FUNCTION: WEBSERVICE 0x10065510
 	Item(const char* name) : DescribedNonCreatable<Item, Instance, sStatsItem>(name), val(0) {}
 
 	const std::string& getStringValue()
@@ -71,7 +72,15 @@ public:
 	void formatPercent(double value);
 
 	Item* createChildItem(const char* name);
+
+	template <class T>
+	Item* createChildItem(const char* name, boost::function0<T> func);
+
 	Item* createBoundChildItem(const Profiling::Profiler& p);
+
+	template <class T>
+	Item* createBoundChildItem(const char* name, const T& v);
+
 	Item* createBoundMemChildItem(const char* name, const unsigned int& v);
 
 protected:
@@ -103,13 +112,22 @@ protected:
 	const boost::function0<T> func; // 0x120
 
 public:
+	TypedStatsItem(boost::function0<T> func) : func(func) {}
 	TypedStatsItem(const T* value) : func(boost::bind(&deref, value)) {}
 
 	virtual void update() { formatValue(func()); }
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10065c90
+	// RBX::Stats::TypedStatsItem<bool>::TypedStatsItem<bool>
+	// TEMPLATE: WEBSERVICE 0x10065da0
+	// RBX::Stats::TypedStatsItem<bool>::update
+	// TEMPLATE: WEBSERVICE 0x10065dd0
+	// RBX::Stats::TypedStatsItem<int>::TypedStatsItem<int>
+	// TEMPLATE: WEBSERVICE 0x10065ec0
+	// RBX::Stats::TypedStatsItem<int>::update
 	// TEMPLATE: WEBSERVICE 0x10065ef0
-	// RBX::Stats::TypedStatsItem<unsigned int>::~TypedStatsItem<unsigned int>
+	// RBX::Stats::TypedStatsItem<int>::~TypedStatsItem<int>
 	// TEMPLATE: WEBSERVICE 0x10082f50
 	// RBX::Stats::TypedStatsItem<unsigned int>::TypedStatsItem<unsigned int>
 	// clang-format on
@@ -126,7 +144,7 @@ public:
 	virtual void update() { formatMem(func()); }
 
 	// SYNTHETIC: WEBSERVICE 0x10065f60
-	// RBX::Stats::TypedMemItem::`scalar deleting destructor'
+	// RBX::Stats::TypedStatsItem<int>::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(TypedMemItem, 0x140)
@@ -150,6 +168,28 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(StatsService, 0xf8)
+
+// TEMPLATE: WEBSERVICE 0x10066b10
+// RBX::Stats::Item::createChildItem<int>
+template <class T>
+Item* Item::createChildItem(const char* name, boost::function0<T> func)
+{
+	boost::shared_ptr<Item> item = Creatable<Instance>::create<TypedStatsItem<T> >(func);
+	item->setName(name);
+	item->setParent(this);
+	return item.get();
+}
+
+// TEMPLATE: WEBSERVICE 0x10066a00
+// RBX::Stats::Item::createBoundChildItem<bool>
+template <class T>
+Item* Item::createBoundChildItem(const char* name, const T& v)
+{
+	boost::shared_ptr<Item> item = Creatable<Instance>::create<TypedStatsItem<T> >(&v);
+	item->setName(name);
+	item->setParent(this);
+	return item.get();
+}
 
 // SYNTHETIC: WEBSERVICE 0x1021b7f0
 // RBX::Stats::`dynamic initializer for 'func_values''

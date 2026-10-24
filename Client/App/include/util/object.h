@@ -76,8 +76,14 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Humanoid>
 	// TEMPLATE: WEBSERVICE 0x10062870
 	// RBX::Creatable<RBX::Instance>::create<RBX::DebugSettings>
+	// TEMPLATE: WEBSERVICE 0x100657f0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item,char const *>
 	// TEMPLATE: WEBSERVICE 0x100659d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::StatsService>
+	// TEMPLATE: WEBSERVICE 0x100666f0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<bool>,bool const *>
+	// TEMPLATE: WEBSERVICE 0x10066770
+	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<int>,boost::function0<int,std::allocator<boost::function_base> > >
 	// TEMPLATE: WEBSERVICE 0x100691f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Team>
 	// TEMPLATE: WEBSERVICE 0x1006bd80
@@ -784,6 +790,8 @@ public:
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::NonFactoryProduct<RBX::Instance,&RBX::sFeature>
 	// TEMPLATE: WEBSERVICE 0x1005f0b0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>
+	// TEMPLATE: WEBSERVICE 0x1005f450
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem><char const *>
 	// TEMPLATE: WEBSERVICE 0x1005f4b0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats><char const *>
 	// TEMPLATE: WEBSERVICE 0x100e4ec0

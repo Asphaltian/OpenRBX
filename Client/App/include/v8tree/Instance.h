@@ -360,6 +360,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Selection,RBX::Instance,&RBX::sSelection>::DescribedCreatable<RBX::Selection,RBX::Instance,&RBX::sSelection>
 	// FUNCTION: WEBSERVICE 0x10061210
 	// RBX::DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::~DescribedCreatable<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
+	// TEMPLATE: WEBSERVICE 0x10065320
+	// RBX::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem><char const *>
 	// TEMPLATE: WEBSERVICE 0x100653c0
 	// RBX::DescribedNonCreatable<RBX::Stats::StatsService,RBX::Instance,&RBX::Stats::sStats>::DescribedNonCreatable<RBX::Stats::StatsService,RBX::Instance,&RBX::Stats::sStats><char const *>
 	// FUNCTION: WEBSERVICE 0x10065660

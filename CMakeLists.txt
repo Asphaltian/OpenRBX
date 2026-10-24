@@ -212,6 +212,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/script/LuaAtomicClasses.cpp
   Client/App/script/LuaSignalBridge.cpp
   Client/App/script/LuaInstanceBridge.cpp
+  Client/App/script/LuaMemory.cpp
   Client/App/script/Script.cpp
   Client/App/script/ScriptEvent.cpp
   Client/App/script/ThreadRef.cpp
