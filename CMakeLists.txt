@@ -123,6 +123,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/util/IndexBox.cpp
   Client/App/util/Log.cpp
   Client/App/util/Math.cpp
+  Client/App/util/MeshId.cpp
   Client/App/util/Name.cpp
   Client/App/util/NormalId.cpp
   Client/App/util/Quaternion.cpp

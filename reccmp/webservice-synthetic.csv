@@ -68,6 +68,7 @@ address,type,symbol
 0x1008e4d0,stub,??0ObjectValue@RBX@@QAE@XZ
 0x1008eba0,stub,?halfSpaceContains@Plane@G3D@@QBE_NVVector3@2@@Z
 0x10093e50,stub,?closest@BrickColor@RBX@@SA?AV12@VColor4@G3D@@@Z
+0x10094cc0,synthetic,?equalValues@?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 0x10096090,synthetic,??1IDREFItem@MergeBinder@RBX@@QAE@XZ
 0x10096330,stub,??$_Copy_opt@PAUIDREFItem@MergeBinder@RBX@@PAU123@Uforward_iterator_tag@std@@@std@@YAPAUIDREFItem@MergeBinder@RBX@@PAU123@00Uforward_iterator_tag@0@U_Nonscalar_ptr_iterator_tag@0@U_Range_checked_iterator_tag@0@@Z
 0x10097700,synthetic,??1MergeBinder@RBX@@QAE@XZ
@@ -218,6 +219,7 @@ address,type,symbol
 0x100fde70,synthetic,??_ESpawnerService@RBX@@UAEPAXI@Z
 0x100fe590,stub,??$?0P8SpawnLocation@RBX@@BE?AVBrickColor@1@XZP801@AEXV21@@Z@?$PropDescriptor@VSpawnLocation@RBX@@VBrickColor@2@@Reflection@RBX@@QAE@PBD0P8SpawnLocation@2@BE?AVBrickColor@2@XZP832@AEXV42@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100febd0,stub,??0SpawnerService@RBX@@QAE@XZ
+0x100ff690,synthetic,?getValue@?$GetSetImpl@P8SpecialShape@RBX@@BE?BVTextureId@2@XZP812@AEXABV32@@Z@?$PropDescriptor@VSpecialShape@RBX@@VTextureId@2@@Reflection@RBX@@UBE?AVTextureId@4@PBVDescribedBase@34@@Z
 0x100fff70,synthetic,??0Decal@RBX@@QAE@XZ
 0x101003c0,synthetic,??0Texture@RBX@@QAE@XZ
 0x10101b90,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$00W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z

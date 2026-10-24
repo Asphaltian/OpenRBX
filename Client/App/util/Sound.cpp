@@ -58,7 +58,7 @@ bool SoundChannel::isPlaying() const
 	return playing;
 }
 
-// FUNCTION: WEBSERVICE 0x1007cdb0
+// FUNCTION: WEBSERVICE 0x1007cdb0 FOLDED
 SoundId SoundChannel::getSoundId() const
 {
 	return soundId;

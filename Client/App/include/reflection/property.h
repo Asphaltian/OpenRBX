@@ -409,6 +409,8 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// FUNCTION: WEBSERVICE 0x10043430
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Color3>::TypedPropertyDescriptor<G3D::Color3>
+	// TEMPLATE: WEBSERVICE 0x1012cc30
+	// RBX::Reflection::TypedPropertyDescriptor<RBX::MeshId>::TypedPropertyDescriptor<RBX::MeshId>
 	// TEMPLATE: WEBSERVICE 0x1005b070
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::CoordinateFrame>::TypedPropertyDescriptor<G3D::CoordinateFrame>
 	// TEMPLATE: WEBSERVICE 0x1005b480
@@ -435,8 +437,6 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
 	// TEMPLATE: WEBSERVICE 0x10043a70
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>::equalValues
-	// TEMPLATE: WEBSERVICE 0x10094cc0
-	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::equalValues
 	// TEMPLATE: WEBSERVICE 0x100439d0
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::equalValues
 	// SYNTHETIC: WEBSERVICE 0x1004b730
@@ -475,8 +475,6 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::getValue
 	// TEMPLATE: WEBSERVICE 0x1018c890
 	// RBX::Reflection::PropDescriptor<RBX::Team,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(RBX::BrickColor)>::getValue
-	// TEMPLATE: WEBSERVICE 0x100ff690
-	// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::GetSetImpl<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100fda10
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100b37a0
@@ -553,6 +551,20 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::PropDescriptor<RBX::Decal,float><float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ffdd0
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::PropDescriptor<RBX::Texture,float><float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x1012cb10
+	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::GetSetImpl<G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>::getValue
+	// TEMPLATE: WEBSERVICE 0x1012cd00
+	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::getset<G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x1012cd60
+	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::MeshId>::getset<RBX::MeshId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::MeshId const &)>
+	// TEMPLATE: WEBSERVICE 0x1012cdc0
+	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::TextureId>::getset<RBX::TextureId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::TextureId const &)>
+	// TEMPLATE: WEBSERVICE 0x1012d3e0
+	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::PropDescriptor<RBX::SpecialShape,G3D::Vector3><G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x1012d480
+	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::MeshId>::PropDescriptor<RBX::SpecialShape,RBX::MeshId><RBX::MeshId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::MeshId const &)>
+	// TEMPLATE: WEBSERVICE 0x1012d520
+	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::TextureId>::PropDescriptor<RBX::SpecialShape,RBX::TextureId><RBX::TextureId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x10048cf0
 	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::getset<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x10099710

@@ -116,6 +116,8 @@ public:
 
 	float getTransparencyXml() const { return transparency; }
 
+	float getTransparencyUi() const { return 1.0f - (1.0f - transparency) * alphaModifier; }
+
 	float getReflectance() const { return reflectance; }
 
 	bool getPartLocked() const { return locked; }
