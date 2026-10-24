@@ -596,7 +596,6 @@ address,size,symbol,name
 0x100ddbc0,0x7d,??$create@VRotate@RBX@@PAVJoint@2@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VRotate@RBX@@@boost@@PAVJoint@1@@Z,
 0x100ddc40,0x7d,??$create@VRotateP@RBX@@PAVJoint@2@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VRotateP@RBX@@@boost@@PAVJoint@1@@Z,
 0x100ddcc0,0x7d,??$create@VRotateV@RBX@@PAVJoint@2@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VRotateV@RBX@@@boost@@PAVJoint@1@@Z,
-0x100e2710,0x19c,??RGenericSlotAdapter@?$SignalDescImpl@$01$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@M@Z@Reflection@RBX@@QAEXV?$shared_ptr@VInstance@RBX@@@boost@@M@Z,
 0x100e28b0,0x65,??0TSignalInstance@?$TSignalDesc@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@M@Z@Reflection@RBX@@QAE@PAVSignalSource@23@ABVSignalDescriptor@23@@Z,
 0x100e2e30,0x66,?newSignalInstance@?$TSignalDesc@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@M@Z@Reflection@RBX@@EBEPAVSignalInstance@23@AAVSignalSource@23@@Z,
 0x100e3b40,0xdb,?connectGeneric@?$SignalDescImpl@$01$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@M@Z@Reflection@RBX@@MBE?AVconnection@signals@boost@@PAVSignalInstance@23@PAVGenericSlotWrapper@23@W4connect_position@56@@Z,

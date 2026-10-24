@@ -252,15 +252,27 @@ protected:
 	public:
 		GenericSlotAdapter(GenericSlotWrapper* wrapper) : wrapper(wrapper) {}
 
-		void operator()() const
-		{
-			std::vector<boost::any> arguments;
-
-			wrapper->execute(arguments);
-		}
+		void operator()() const { wrapper->execute(std::vector<boost::any>()); }
 
 	private:
 		boost::shared_ptr<GenericSlotWrapper> wrapper; // 0x00
+
+		// clang-format off
+		// TEMPLATE: WEBSERVICE 0x10045470
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(bool)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x1004bce0
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x1004be30
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x10055f60
+		// RBX::Reflection::SignalDescImpl<2,void __cdecl(float,float)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100560b0
+		// RBX::Reflection::SignalDescImpl<1,void __cdecl(float)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x10076130
+		// RBX::Reflection::SignalDescImpl<0,void __cdecl(void)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x100e2710
+		// RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::GenericSlotAdapter::operator()
+		// clang-format on
 	};
 
 	virtual boost::signals::connection connectGeneric(

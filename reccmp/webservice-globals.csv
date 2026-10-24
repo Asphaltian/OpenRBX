@@ -551,6 +551,9 @@ address,type,symbol
 0x1022da44,global,??_7Descriptor@Reflection@RBX@@6B@
 0x1022da5c,global,??_7Type@Reflection@RBX@@6B@
 0x1022da64,global,??_7Item@EnumDescriptor@Reflection@RBX@@6B@
+0x1022da88,global,??_7?$holder@M@any@boost@@6B@
+0x1022dab8,global,??_7?$holder@_N@any@boost@@6B@
+0x1022db80,global,??_7?$holder@V?$shared_ptr@VInstance@RBX@@@boost@@@any@boost@@6B@
 0x1022dc18,global,??_7?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@6B@
 0x1022dc90,global,??_7?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x1022dca0,global,??_7?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
@@ -569,6 +572,8 @@ address,type,symbol
 0x1022dda8,global,??_7?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@6B@
 0x1022ddd0,global,??_7?$TypedPropertyDescriptor@M@Reflection@RBX@@6B@
 0x1022de30,global,??_7SignalInstance@Reflection@RBX@@6B@
+0x1022de60,global,??_7?$holder@U?$last_value@X@boost@@@any@boost@@6B@
+0x1022de70,global,??_7?$holder@V?$function@$$A6AX_N@ZV?$allocator@X@std@@@boost@@@any@boost@@6B@
 0x1022de80,global,??_7Creator@?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@6B@
 0x1022de9c,global,??_7Creator@?$FactoryProduct@VSky@RBX@@VInstance@2@$1?sSky@2@3PADA@RBX@@6B@
 0x1022deb8,global,??_7Creator@?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@6B@
@@ -611,6 +616,9 @@ address,type,symbol
 0x1022e2f8,global,??_7?$GetSetImpl@P8Instance@RBX@@BEPAV12@XZP812@AEXPAV12@@Z@?$PropDescriptor@VInstance@RBX@@PAV12@@Reflection@RBX@@6B@
 0x1022e308,global,??_7?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@6B@
 0x1022e314,global,??_7?$TypedPropertyDescriptor@_N@Reflection@RBX@@6B@
+0x1022e33c,global,??_7?$holder@V?$function@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@ZV?$allocator@X@std@@@boost@@@any@boost@@6B@
+0x1022e34c,global,??_7?$holder@PBVPropertyDescriptor@Reflection@RBX@@@any@boost@@6B@
+0x1022e35c,global,??_7?$holder@V?$function@$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@ZV?$allocator@X@std@@@boost@@@any@boost@@6B@
 0x1022e36c,global,??_7?$BoundProp@_N$00@Reflection@RBX@@6B@
 0x1022e394,global,??_7?$PropDescriptor@VInstance@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@6B@
 0x1022e3f4,global,??_7?$SignalDesc@VInstance@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@6B@
@@ -658,6 +666,8 @@ address,type,symbol
 0x1022eaac,global,??_7RunService@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1022eab4,global,??_7RunService@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1022eac4,global,??_7RunService@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1022eb08,global,??_7?$holder@V?$function@$$A6AXMM@ZV?$allocator@X@std@@@boost@@@any@boost@@6B@
+0x1022eb18,global,??_7?$holder@V?$function@$$A6AXM@ZV?$allocator@X@std@@@boost@@@any@boost@@6B@
 0x1022eb28,global,??_7Creator@?$FactoryProduct@VScriptContext@RBX@@VInstance@2@$1?sScriptContext@2@3PADA@RBX@@6B@
 0x1022eb44,global,??_7Creator@?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B@
 0x1022eb60,global,??_7Creator@?$FactoryProduct@VSelection@RBX@@VInstance@2@$1?sSelection@2@3QBDB@RBX@@6B@
@@ -1002,6 +1012,7 @@ address,type,symbol
 0x10231388,global,??_7?$NonFactoryProduct@VInstance@RBX@@$1?sServiceProvider@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10231394,global,??_7?$NonFactoryProduct@VInstance@RBX@@$1?sServiceProvider@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x10231718,global,??_7?$StateStack@VXmlState@RBX@@@RBX@@6B@
+0x10231720,global,??_7?$holder@V?$function@$$A6AXXZV?$allocator@X@std@@@boost@@@any@boost@@6B@
 0x10231730,global,??_7Creator@?$FactoryProduct@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@6B@
 0x1023174c,global,??_7Creator@?$FactoryProduct@VLocalBackpack@RBX@@VRelativePanel@2@$1?sLocalBackpack@2@3QBDB@RBX@@6B@
 0x10231754,global,??_7Creator@?$FactoryProduct@VSnap@RBX@@VAutoJoint@2@$1?sSnap@2@3QBDB@RBX@@6B@
@@ -2580,6 +2591,7 @@ address,type,symbol
 0x10240440,global,??_7?$GetSetImpl@P8Explosion@RBX@@BEMXZP812@AEXM@Z@?$PropDescriptor@VExplosion@RBX@@M@Reflection@RBX@@6B@
 0x10240454,global,??_7?$BoundPropGetSet@VExplosion@RBX@@@?$BoundProp@M$00@Reflection@RBX@@6B@
 0x10240464,global,??_7?$BoundPropGetSet@VExplosion@RBX@@@?$BoundProp@VVector3@G3D@@$00@Reflection@RBX@@6B@
+0x10240474,global,??_7?$holder@V?$function@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@M@ZV?$allocator@X@std@@@boost@@@any@boost@@6B@
 0x10240484,global,??_7TSignalInstance@?$TSignalDesc@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@M@Z@Reflection@RBX@@6B@
 0x1024048c,global,??_7?$PropDescriptor@VExplosion@RBX@@M@Reflection@RBX@@6B@
 0x102404b4,global,??_7?$BoundProp@VVector3@G3D@@$00@Reflection@RBX@@6B@
