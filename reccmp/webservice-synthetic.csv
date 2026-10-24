@@ -50,6 +50,7 @@ address,type,symbol
 0x10046190,stub,??0Lighting@RBX@@QAE@XZ
 0x10046470,synthetic,??_GLighting@RBX@@UAEPAXI@Z
 0x10047a70,synthetic,??_EObject@RBX@@UAEPAXI@Z
+0x100480e0,synthetic,?getValue@?$GetSetImpl@P8Message@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP812@AEXABV34@@Z@?$PropDescriptor@VMessage@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@34@@Z
 0x100495b0,synthetic,?equalValues@?$TypedPropertyDescriptor@_N@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 0x1004a1e0,stub,??1?$Association@VInstance@RBX@@@RBX@@QAE@XZ
 0x10055720,synthetic,??_ERunService@RBX@@UAEPAXI@Z
@@ -62,6 +63,7 @@ address,type,symbol
 0x1006a7b0,synthetic,?getNumPrimitives@World@RBX@@QBEHXZ
 0x1007e620,synthetic,?equalValues@?$TypedPropertyDescriptor@H@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 0x1008e400,synthetic,??0Hint@RBX@@QAE@XZ
+0x1008e4b0,synthetic,??_GHint@RBX@@UAEPAXI@Z
 0x1008e4d0,stub,??0ObjectValue@RBX@@QAE@XZ
 0x1008eba0,stub,?halfSpaceContains@Plane@G3D@@QBE_NVVector3@2@@Z
 0x10093e50,stub,?closest@BrickColor@RBX@@SA?AV12@VColor4@G3D@@@Z
@@ -129,6 +131,7 @@ address,type,symbol
 0x100c78f0,stub,??_EGuiItem@RBX@@UAEPAXI@Z
 0x100c8810,stub,??_EGuiItem@RBX@@WBE@AEPAXI@Z
 0x100c8820,stub,??_EGuiItem@RBX@@WCE@AEPAXI@Z
+0x100c9de0,synthetic,??1?$DescribedNonCreatable@VItem@Stats@RBX@@VInstance@3@$1?sStatsItem@23@3PADA@RBX@@UAE@XZ
 0x100cb580,synthetic,??$?0P8Tool@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VTool@RBX@@H@Reflection@RBX@@QAE@PBD0P8Tool@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100cd0a0,synthetic,?getTeamColor@Flag@RBX@@QBE?AVBrickColor@2@XZ
 0x100ce6d0,synthetic,??$?0P8Flag@RBX@@BE?AVBrickColor@1@XZP801@AEXV21@@Z@?$PropDescriptor@VFlag@RBX@@VBrickColor@2@@Reflection@RBX@@QAE@PBD0P8Flag@2@BE?AVBrickColor@2@XZP832@AEXV42@@ZW4Functionality@PropertyDescriptor@12@@Z
@@ -233,6 +236,7 @@ address,type,symbol
 0x10121b90,synthetic,?setStringValue@?$EnumPropDescriptor@VFaceInstance@RBX@@W4NormalId@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 0x10122140,stub,?onComputeForce@Balancing@RBX@@MAEXM@Z
 0x101228d0,stub,?onStep@Balancing@RBX@@MAEPAVState@Humanoid@2@MAAVController@2@@Z
+0x1012cbe0,synthetic,?setValue@?$GetSetImpl@P8Message@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP812@AEXABV34@@Z@?$PropDescriptor@VMessage@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 0x1012cf10,synthetic,??1?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@EAE@XZ
 0x1012d250,synthetic,??_E?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@EAEPAXI@Z
 0x1012d6c0,synthetic,?setStringValue@?$EnumPropDescriptor@VSpecialShape@RBX@@W4MeshType@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
