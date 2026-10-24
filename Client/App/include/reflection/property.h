@@ -431,7 +431,7 @@ public:
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Sky>
 	// FUNCTION: WEBSERVICE 0x100996a0
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::getset<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>
-	// STUB: WEBSERVICE 0x10094c50
+	// FUNCTION: WEBSERVICE 0x10094c50
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::TypedPropertyDescriptor<RBX::TextureId>
 	// FUNCTION: WEBSERVICE 0x1009ba30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>

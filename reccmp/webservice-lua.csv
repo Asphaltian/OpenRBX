@@ -240,7 +240,6 @@ address,type,name
 0x10125b50,library,luaK_infix
 0x10125bc0,library,luaK_posfix
 0x10125e00,library,luaK_patchlist
-0x10196b30,library,boost::shared_ptr<int>::~shared_ptr<int>
 0x101ea310,library,boost::detail::sp_counted_impl_p<int>::get_deleter
 0x10238d00,library,tab_funcs
 0x10238e80,library,mathlib

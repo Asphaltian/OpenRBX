@@ -85,13 +85,13 @@ void Workspace::releaseScript(Script* script)
 	STUB(0x1006d440);
 }
 
-// STUB: WEBSERVICE 0x1006ebc0
+// FUNCTION: WEBSERVICE 0x1006ebc0
 Workspace* Workspace::findWorkspace(const Instance* context)
 {
 	return ServiceProvider::find<Workspace>(context);
 }
 
-// STUB: WEBSERVICE 0x1006ec00
+// FUNCTION: WEBSERVICE 0x1006ec00
 World* Workspace::getWorldIfInWorkspace(const Instance* context)
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(context);

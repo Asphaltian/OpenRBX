@@ -67,7 +67,7 @@ void AutoJoint::setPart(int index, PartInstance* value)
 	joint->setPrimitive(index, value ? value->getPrimitive() : NULL);
 }
 
-// STUB: WEBSERVICE 0x100d8110
+// FUNCTION: WEBSERVICE 0x100d8110
 AutoJoint::~AutoJoint()
 {
 	setPart(0, NULL);
