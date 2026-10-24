@@ -371,5 +371,6 @@ address,type,symbol
 0x10224340,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x102256e0,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x10068ba0,synthetic,?getValue@?$GetSetImpl@P8Script@RBX@@BEABVContentId@2@XZP812@AEXABV32@@Z@?$PropDescriptor@VScript@RBX@@VContentId@2@@Reflection@RBX@@UBE?AVContentId@4@PBVDescribedBase@34@@Z
+0x10062f90,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sStats@Stats@2@3PADA@RBX@@UBEABVName@2@XZ
 0x10068ea0,synthetic,??0?$TypedPropertyDescriptor@VContentId@RBX@@@Reflection@RBX@@IAE@AAVClassDescriptor@12@PBD1V?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VContentId@RBX@@@Reflection@RBX@@@std@@W4Functionality@PropertyDescriptor@12@@Z
 0x100696a0,synthetic,??$?0P8Script@RBX@@BEABVContentId@1@XZP801@AEXABV21@@Z@?$PropDescriptor@VScript@RBX@@VContentId@2@@Reflection@RBX@@QAE@PBD0P8Script@2@BEABVContentId@2@XZP832@AEXABV42@@ZW4Functionality@PropertyDescriptor@12@@Z

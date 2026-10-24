@@ -187,7 +187,6 @@ address,size,symbol,name
 0x100632c0,0x133,??$pushTable@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@LuaArguments@Lua@RBX@@SAHV?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@0QAUlua_State@@@Z,
 0x10064440,0x9c,?on_tostring@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHABV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@@Z,
 0x100657f0,0x7d,??$create@VItem@Stats@RBX@@PBD@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VItem@Stats@RBX@@@boost@@PBD@Z,
-0x100659d0,0x78,??$create@VStatsService@Stats@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VStatsService@Stats@RBX@@@boost@@XZ,
 0x100666f0,0x7d,??$create@V?$TypedStatsItem@_N@Stats@RBX@@PB_N@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@V?$TypedStatsItem@_N@Stats@RBX@@@boost@@PB_N@Z,
 0x10066770,0xd7,??$create@V?$TypedStatsItem@H@Stats@RBX@@V?$function0@HV?$allocator@Vfunction_base@boost@@@std@@@boost@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@V?$TypedStatsItem@H@Stats@RBX@@@boost@@V?$function0@HV?$allocator@Vfunction_base@boost@@@std@@@3@@Z,
 0x10067cb0,0x146,?resume@ScriptContext@RBX@@QAEXPAUlua_State@@V?$function1@IPAUlua_State@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@V?$function2@XPAUlua_State@@IV?$allocator@Vfunction_base@boost@@@std@@@5@@Z,

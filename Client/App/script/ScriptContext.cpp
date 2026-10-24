@@ -14,6 +14,7 @@
 #include <algorithm>
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <lualib.h>
 
 namespace RBX {
 
@@ -98,6 +99,16 @@ ScriptContext::~ScriptContext()
 {
 }
 
+// FUNCTION: WEBSERVICE 0x10066ce0
+int ScriptContext::settings(lua_State* thread)
+{
+	Security::Context::current().requirePermission(Security::Administrator, NULL);
+
+	Lua::SharedPtrBridge<Reflection::DescribedBase>::push(thread, GlobalSettings::singleton());
+
+	return 1;
+}
+
 // FUNCTION: WEBSERVICE 0x10066de0
 int ScriptContext::trustedThread(lua_State* thread)
 {
@@ -130,11 +141,42 @@ int ScriptContext::loadfile(lua_State* L)
 	return loadAux(L, luaL_loadfile(L, file.c_str()));
 }
 
+// FUNCTION: WEBSERVICE 0x10066f20
+int ScriptContext::stats(lua_State* L)
+{
+	Security::Context::current().requirePermission(Security::Administrator, "Stats");
+
+	Lua::SharedPtrBridge<Reflection::DescribedBase>::push(
+		L,
+		shared_from(ServiceProvider::create<Stats::StatsService>(&getContext(L)))
+	);
+
+	return 1;
+}
+
 // STUB: WEBSERVICE 0x100673d0
 ScriptContext::Result ScriptContext::resume(lua_State* L, int nargs)
 {
 	STUB(0x100673d0);
 	return Success;
+}
+
+// FUNCTION: WEBSERVICE 0x10067c20
+void ScriptContext::setThreadIdentity(lua_State* thread, Security::Identities identity)
+{
+	lua_pushlightuserdata(thread, (void*) 0x54);
+	lua_pushinteger(thread, identity);
+	lua_settable(thread, LUA_GLOBALSINDEX);
+
+	if (DebugSettings::singleton().getioEnabled()) {
+		lua_pushcfunction(thread, luaopen_io);
+		lua_pushstring(thread, "io");
+		lua_call(thread, 1, 0);
+	}
+
+	lua_pushstring(thread, "settings");
+	lua_pushcfunction(thread, settings);
+	lua_settable(thread, LUA_GLOBALSINDEX);
 }
 
 // STUB: WEBSERVICE 0x10067e00

@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
@@ -74,7 +75,7 @@ public:
 	Item* createBoundMemChildItem(const char* name, const unsigned int& v);
 
 protected:
-	// FUNCTION: WEBSERVICE 0x100655c0
+	// FUNCTION: WEBSERVICE 0x100655c0 FOLDED
 	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const Item*>(instance) != NULL; }
 
 	// SYNTHETIC: WEBSERVICE 0x100610e0
@@ -129,6 +130,26 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(TypedMemItem, 0x140)
+
+// SIZE 0xf8
+class StatsService : public DescribedNonCreatable<StatsService, Instance, sStats>, public Service
+{
+public:
+	// FUNCTION: WEBSERVICE 0x10065600
+	StatsService() : DescribedNonCreatable<StatsService, Instance, sStats>("Stats") {}
+
+protected:
+	// FUNCTION: WEBSERVICE 0x100655c0 FOLDED
+	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const Item*>(instance) != NULL; }
+
+	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	virtual XmlElement* write() { return NULL; }
+
+public:
+	virtual ~StatsService() {}
+};
+
+DECOMP_SIZE_ASSERT(StatsService, 0xf8)
 
 // SYNTHETIC: WEBSERVICE 0x1021b7f0
 // RBX::Stats::`dynamic initializer for 'func_values''

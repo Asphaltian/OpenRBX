@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "script/ThreadRef.h"
+#include "security/SecurityContext.h"
 #include "util/Handle.h"
 #include "util/RunStateOwner.h"
 #include "v8datamodel/Stats.h"
@@ -56,8 +57,12 @@ protected:
 	virtual void onEvent(const RunService* source, Heartbeat event);
 
 private:
+	static void setThreadIdentity(lua_State* thread, Security::Identities identity);
+
 	static int trustedThread(lua_State* thread);
 	static int loadfile(lua_State* L);
+	static int settings(lua_State* thread);
+	static int stats(lua_State* L);
 
 	void onChangedScriptEnabled(const Reflection::PropertyDescriptor&);
 

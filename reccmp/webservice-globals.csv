@@ -839,6 +839,16 @@ address,type,symbol
 0x1022fb70,global,??_7?$DescribedNonCreatable@VStatsService@Stats@RBX@@VInstance@3@$1?sStats@23@3PADA@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1022fb78,global,??_7?$DescribedNonCreatable@VStatsService@Stats@RBX@@VInstance@3@$1?sStats@23@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1022fb84,global,??_7?$DescribedNonCreatable@VStatsService@Stats@RBX@@VInstance@3@$1?sStats@23@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1022fc8c,global,??_7StatsService@Stats@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
+0x1022fc9c,global,??_7StatsService@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
+0x1022fcac,global,??_7StatsService@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@2@@
+0x1022fcbc,global,??_7StatsService@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
+0x1022fccc,global,??_7StatsService@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@2@@
+0x1022fcdc,global,??_7StatsService@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@2@@
+0x1022fcec,global,??_7StatsService@Stats@RBX@@6BDebugable@2@@
+0x1022fcf4,global,??_7StatsService@Stats@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
+0x1022fcfc,global,??_7StatsService@Stats@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
+0x1022fd0c,global,??_7StatsService@Stats@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@
 0x1022fbc8,global,??_7Item@Stats@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
 0x1022fbd8,global,??_7Item@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
 0x1022fbe8,global,??_7Item@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@2@@
@@ -5582,6 +5592,7 @@ address,type,symbol
 0x102f63c4,global,??_B?1???$doGetClassIndex@VStatsService@Stats@RBX@@@ServiceProvider@RBX@@CAIXZ@51
 0x102f63c8,global,"i___RBX::Association<RBX::Instance>::index<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >"
 0x102f63cc,global,??_B?1???$index@V?$shared_ptr@VNode@ThreadRef@Lua@RBX@@@boost@@@?$Association@VInstance@RBX@@@RBX@@ABEIXZ@51
+0x102f63dc,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Stats::StatsService>
 0x102f63d0,global,flag___RBX::Name::declare<&RBX::Stats::sStatsItem>
 0x102f63d4,global,flag___RBX::Name::declare<&RBX::Stats::sStats>
 0x102f63d8,global,flag___RBX::Name::declare<&RBX::sDebugSettings>

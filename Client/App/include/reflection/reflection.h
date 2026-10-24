@@ -35,6 +35,8 @@ public:
 	// RBX::Reflection::Described<RBX::ModelInstance,&RBX::sModel,RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1005d7f0
 	// RBX::Reflection::Described<RBX::Selection,&RBX::sSelection,RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x10064820
+	// RBX::Reflection::Described<RBX::Stats::StatsService,&RBX::Stats::sStats,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10064b80
 	// RBX::Reflection::Described<RBX::ScriptContext,&RBX::sScriptContext,RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10064bf0
@@ -199,6 +201,8 @@ public:
 	// `RBX::Reflection::Described<RBX::Stats::Item,&RBX::Stats::sStatsItem,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10221aa0
 	// `RBX::Reflection::Described<RBX::ScriptContext,&RBX::sScriptContext,RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10221ab0
+	// `RBX::Reflection::Described<RBX::Stats::StatsService,&RBX::Stats::sStats,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10221ba0
 	// `RBX::Reflection::Described<RBX::LocalScript,&RBX::sLocalScript,RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10221bb0
