@@ -323,8 +323,6 @@ template <class T, class Base, const char* sName>
 // clang-format off
 	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
-	// SYNTHETIC: WEBSERVICE 0x100c19f0
-	// RBX::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>::`scalar deleting destructor'
 	// SYNTHETIC: WEBSERVICE 0x100ca200
 	// RBX::Instance::`scalar deleting destructor'
 	// SYNTHETIC: WEBSERVICE 0x100d8000
@@ -593,8 +591,12 @@ protected:
 // clang-format on
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x10043340
+// RBX::Instance::findFirstChildOfType<RBX::Sky>
 // TEMPLATE: WEBSERVICE 0x1005aff0
 // RBX::Instance::findFirstChildOfType<RBX::Humanoid>
+// TEMPLATE: WEBSERVICE 0x1018cbc0
+// RBX::Instance::findFirstChildOfType<RBX::Backpack>
 // clang-format on
 template <class T>
 T* Instance::findFirstChildOfType() const

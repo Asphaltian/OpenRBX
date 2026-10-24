@@ -147,6 +147,9 @@ address,type,symbol
 0x100be350,synthetic,??$?0P8Team@RBX@@BE?AVBrickColor@1@XZP801@AEXV21@@Z@?$PropDescriptor@VTeam@RBX@@VBrickColor@2@@Reflection@RBX@@QAE@PBD0P8Team@2@BE?AVBrickColor@2@XZP832@AEXV42@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100be3f0,synthetic,??$?0P8Team@RBX@@BE_NXZP801@AEX_N@Z@?$PropDescriptor@VTeam@RBX@@_N@Reflection@RBX@@QAE@PBD0P8Team@2@BE_NXZP832@AEX_N@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100be630,stub,??0Team@RBX@@QAE@XZ
+0x100c19f0,synthetic,??_GRootInstance@RBX@@MAEPAXI@Z
+0x100c1a10,synthetic,??$create@VTeams@RBX@@@ServiceProvider@RBX@@QBEPAVTeams@1@XZ
+0x100c1b00,synthetic,??$create@VTeams@RBX@@@ServiceProvider@RBX@@SAPAVTeams@1@PBVInstance@1@@Z
 0x100c3690,synthetic,?getClassName@?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100c4120,stub,??0Camera@RBX@@QAE@XZ
 0x100c6be0,stub,??0ControllerService@RBX@@QAE@XZ

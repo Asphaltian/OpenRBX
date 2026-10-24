@@ -36,7 +36,17 @@ public:
 	const Vector3& min() const { return low; }
 	const Vector3& max() const { return high; }
 
+	Vector3 size() const { return high - low; }
+
 	Vector3 center() const { return (high + low) * 0.5f; }
+
+	Vector3 bottomCenter() const
+	{
+		Vector3 answer = center();
+		answer.y = low.y;
+
+		return answer;
+	}
 
 	Vector3 topCenter() const
 	{
@@ -49,6 +59,8 @@ public:
 	Vector3 getCorner(int index) const;
 	Vector3 faceCenter(NormalId normalId) const;
 	Plane getPlane(NormalId normalId) const;
+
+	Vector3 clip(const Vector3& point) const { return point.clamp(low, high); }
 
 	void getFaceCorners(NormalId normalId, Vector3& c0, Vector3& c1, Vector3& c2, Vector3& c3) const;
 

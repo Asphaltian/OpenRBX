@@ -1005,6 +1005,7 @@ address,type,symbol
 0x10230ed8,global,??_7?$DescribedNonCreatable@VWorkspace@RBX@@VRootInstance@2@$1?sWorkspace@2@3PADA@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10230ee0,global,??_7?$DescribedNonCreatable@VWorkspace@RBX@@VRootInstance@2@$1?sWorkspace@2@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10230eec,global,??_7?$DescribedNonCreatable@VWorkspace@RBX@@VRootInstance@2@$1?sWorkspace@2@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x10230f54,global,??_8RootInstance@RBX@@7B?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@1@@
 0x10230f6c,global,??_7?$BoundFuncDesc@VWorkspace@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@VContentId@2@@Z$00@Reflection@RBX@@6B@
 0x10230f78,global,??_7?$BoundFuncDesc@VWorkspace@RBX@@$$A6AXV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@Z$00@Reflection@RBX@@6B@
 0x10230f84,global,??_7?$BoundFuncDesc@VWorkspace@RBX@@$$A6AX_N@Z$00@Reflection@RBX@@6B@
@@ -1650,6 +1651,22 @@ address,type,symbol
 0x10239d58,global,??_7Unlocked@RBX@@6B@
 0x10239df4,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B@
 0x10239e6c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x10239f2c,global,??_7RootInstance@RBX@@6BICameraSubject@1@@
+0x10239f48,global,??_7RootInstance@RBX@@6BILocation@1@@
+0x10239f50,global,??_7RootInstance@RBX@@6BIPrimaryPart@1@@
+0x10239f5c,global,??_7RootInstance@RBX@@6BICameraOwner@1@@
+0x10239f74,global,??_7RootInstance@RBX@@6B?$Described@VRootInstance@RBX@@$1?sRootInstance@2@3PADAVModelInstance@2@@Reflection@1@@
+0x10239f8c,global,??_7RootInstance@RBX@@6BIControllable@1@@
+0x10239f98,global,??_7RootInstance@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10239fa8,global,??_7RootInstance@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x10239fb8,global,??_7RootInstance@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x10239fc8,global,??_7RootInstance@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x10239fd8,global,??_7RootInstance@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x10239fe8,global,??_7RootInstance@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x10239ff8,global,??_7RootInstance@RBX@@6BDebugable@1@@
+0x1023a000,global,??_7RootInstance@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x1023a008,global,??_7RootInstance@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x1023a014,global,??_7RootInstance@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x1023a10c,global,??_7?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x1023a11c,global,??_7?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x1023a12c,global,??_7?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
@@ -4508,6 +4525,7 @@ address,type,symbol
 0x102c8ec4,global,??_R0?AV?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@@8
 0x102c8f00,global,??_R0?AVEnumDescriptor@Reflection@RBX@@@8
 0x102c8f30,global,?sLighting@RBX@@3PADA
+0x102c8f64,global,??_R0?AVSky@RBX@@@8
 0x102c8f80,global,??_R0?AV?$FactoryProduct@VLighting@RBX@@VInstance@2@$1?sLighting@2@3PADA@RBX@@@8
 0x102c9068,global,??_R0?AVGetSet@?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@8
 0x102c91a8,global,??_R0?AVGetSet@?$TypedPropertyDescriptor@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@@8
@@ -4598,6 +4616,7 @@ address,type,symbol
 0x102ce2f8,global,??_R0?AV?$sp_counted_impl_pd@PAVCamera@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
 0x102ce3d8,global,??_R0?AV?$sp_counted_impl_pd@PAVControllerService@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
 0x102ce788,global,??_R0?AVRootInstance@RBX@@@8
+0x102ce7a8,global,??_R0?AV?$Described@VRootInstance@RBX@@$1?sRootInstance@2@3PADAVModelInstance@2@@Reflection@RBX@@@8
 0x102ce810,global,??_R0?AVICameraOwner@RBX@@@8
 0x102ce830,global,??_R0?AVHopperBin@RBX@@@8
 0x102ce948,global,??_R0?AVWorkspace@RBX@@@8
@@ -4852,6 +4871,7 @@ address,type,symbol
 0x102d7f50,global,??_R0?AV?$DescribedCreatable@VControllerService@RBX@@VInstance@2@$1?sControllerService@2@3PADA@RBX@@@8
 0x102d7fc0,global,??_R0?AV?$Described@VControllerService@RBX@@$1?sControllerService@2@3PADAV?$FactoryProduct@VControllerService@RBX@@VInstance@2@$1?sControllerService@2@3PADA@2@@Reflection@RBX@@@8
 0x102d80c0,global,??_R0?AVControllerService@RBX@@@8
+0x102d80e8,global,??_R0?AVBackpack@RBX@@@8
 0x102d8104,global,??_R0?AVBackpackItem@RBX@@@8
 0x102d81ec,global,??_R0?AVGuiItem@RBX@@@8
 0x102d82bc,global,??_R0?AVWidget@RBX@@@8

@@ -11,6 +11,8 @@
 
 namespace RBX {
 
+class Sky;
+
 extern char sLighting[];
 // SIZE 0x230
 class Lighting : public DescribedCreatable<Lighting, Instance, sLighting>, public Service
@@ -23,6 +25,9 @@ private:
 	undefined m_unk0x209[0x20c - 0x209]; // 0x209
 	G3D::Color4 clearColor;              // 0x20c
 	undefined m_unk0x21c[0x230 - 0x21c]; // 0x21c
+
+public:
+	void replaceSky(Sky* sky);
 };
 
 DECOMP_SIZE_ASSERT(Lighting, 0x230)

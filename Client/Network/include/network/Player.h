@@ -12,6 +12,7 @@
 
 namespace RBX {
 
+class Backpack;
 class ModelInstance;
 
 namespace Network {
@@ -81,6 +82,8 @@ public:
 	bool getNeutral() const { return neutral; }
 
 	void setNeutral(bool value);
+
+	Backpack* getPlayerBackpack() const;
 };
 
 DECOMP_SIZE_ASSERT(Player, 0x178)

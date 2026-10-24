@@ -18,13 +18,15 @@ extern char sSpawnLocation[];
 class SpawnLocation : public DescribedCreatable<SpawnLocation, PartInstance, sSpawnLocation>
 {
 public:
-	BrickColor getTeamColor() const { return teamColor; }
+	BrickColor getTeamColor() const;
 
 	void setTeamColor(BrickColor value);
 
 private:
 	BrickColor teamColor;                // 0x290
 	undefined m_unk0x294[0x2a8 - 0x294]; // 0x294
+
+public:
 	bool neutral;                        // 0x2a8
 	bool allowTeamChangeOnTouch;         // 0x2a9
 	undefined m_unk0x2aa[0x2ac - 0x2aa]; // 0x2aa

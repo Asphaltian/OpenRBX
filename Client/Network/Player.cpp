@@ -2,6 +2,7 @@
 
 #include "reflection/property.h"
 #include "security/SecurityContext.h"
+#include "v8datamodel/Backpack.h"
 
 namespace RBX {
 namespace Network {
@@ -21,6 +22,12 @@ static Reflection::PropDescriptor<Player, bool> prop_neutral(
 	&RBX::Network::Player::getNeutral,
 	&RBX::Network::Player::setNeutral
 );
+
+// FUNCTION: WEBSERVICE 0x1018cfb0
+Backpack* Player::getPlayerBackpack() const
+{
+	return findFirstChildOfType<Backpack>();
+}
 
 // STUB: WEBSERVICE 0x1018f870
 void Player::setCharacter(ModelInstance* value)

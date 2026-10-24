@@ -2,9 +2,11 @@
 #define V8DATAMODEL_CAMERA_H
 
 #include "decomp.h"
+#include "util/Extents.h"
 #include "v8tree/Instance.h"
 
 #include <G3D/GCamera.h>
+#include <G3D/Rect2D.h>
 
 namespace RBX {
 
@@ -29,6 +31,17 @@ public:
 		CUSTOM_CAMERA = 5,
 		NUM_CAMERA_TYPE = 6
 	};
+
+	enum ZoomType
+	{
+		ZOOM_IN_OR_OUT = 0,
+		ZOOM_OUT_ONLY = 1,
+		ZOOM_CHAR_PART_DRAG = 2
+	};
+
+	void zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType zoomType);
+	void zoomExtents(const G3D::Rect2D& viewPort);
+	void lookAt(const G3D::Vector3& point);
 
 	// FUNCTION: WEBSERVICE 0x100c4370
 	virtual ~Camera() {}

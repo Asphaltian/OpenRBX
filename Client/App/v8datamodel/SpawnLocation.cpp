@@ -15,6 +15,12 @@ static Reflection::PropDescriptor<SpawnLocation, BrickColor> prop_TeamColor(
 	&RBX::SpawnLocation::setTeamColor
 );
 
+// FUNCTION: WEBSERVICE 0x100fd500
+BrickColor SpawnLocation::getTeamColor() const
+{
+	return teamColor;
+}
+
 // FUNCTION: WEBSERVICE 0x100ff2b0
 void SpawnLocation::setTeamColor(BrickColor color)
 {
