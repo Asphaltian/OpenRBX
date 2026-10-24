@@ -941,19 +941,17 @@ void PartInstance::setColor3(const G3D::Color3& value)
 	setColor(BrickColor::closest(value));
 }
 
-// STUB: WEBSERVICE 0x1009fec0
+// FUNCTION: WEBSERVICE 0x1009fec0
 void PartInstance::onCameraNear(float distance)
 {
-	if (distance > 3.0f) {
-		if (distance > 6.0f) {
-			setAlphaModifier(1.0f);
-		}
-		else {
-			setAlphaModifier(0.5f);
-		}
+	if (distance < 3.0f) {
+		setAlphaModifier(0.0f);
+	}
+	else if (distance < 6.0f) {
+		setAlphaModifier(0.5f);
 	}
 	else {
-		setAlphaModifier(0.0f);
+		setAlphaModifier(1.0f);
 	}
 }
 
