@@ -87,19 +87,11 @@ Explosion::Explosion() : age(0.0f), blastRadius(4.0f), blastPressure(500000.0f)
 // STUB: WEBSERVICE 0x100e3120
 void Explosion::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
-	if (oldProvider) {
-		if (RunService* runService = oldProvider->find<RunService>()) {
-			runService->Notifier<RunService, Stepped>::removeListener(this);
-		}
-	}
+	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);
 
 	DescribedCreatable<Explosion, Instance, sExplosion>::onServiceProvider(oldProvider, newProvider);
 
-	if (newProvider) {
-		if (RunService* runService = newProvider->find<RunService>()) {
-			runService->Notifier<RunService, Stepped>::addListener(this);
-		}
-	}
+	startListening(newProvider ? newProvider->find<RunService>() : NULL, this);
 }
 
 // FUNCTION: WEBSERVICE 0x100e3700

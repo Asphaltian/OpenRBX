@@ -70,6 +70,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalScript>
 	// FUNCTION: WEBSERVICE 0x1005bab0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Humanoid>
+	// TEMPLATE: WEBSERVICE 0x10062870
+	// RBX::Creatable<RBX::Instance>::create<RBX::DebugSettings>
 	// TEMPLATE: WEBSERVICE 0x100691f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Team>
 	// TEMPLATE: WEBSERVICE 0x1006bd80
@@ -160,6 +162,18 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x100a1d00
 	// RBX::shared_from_dynamic_cast<RBX::PartInstance,RBX::Instance>
+	// TEMPLATE: WEBSERVICE 0x100dda40
+	// RBX::Creatable<RBX::Instance>::create<RBX::Snap,RBX::Joint *>
+	// TEMPLATE: WEBSERVICE 0x100ddac0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Weld,RBX::Joint *>
+	// TEMPLATE: WEBSERVICE 0x100ddb40
+	// RBX::Creatable<RBX::Instance>::create<RBX::Glue,RBX::Joint *>
+	// TEMPLATE: WEBSERVICE 0x100ddbc0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Rotate,RBX::Joint *>
+	// TEMPLATE: WEBSERVICE 0x100ddc40
+	// RBX::Creatable<RBX::Instance>::create<RBX::RotateP,RBX::Joint *>
+	// TEMPLATE: WEBSERVICE 0x100ddcc0
+	// RBX::Creatable<RBX::Instance>::create<RBX::RotateV,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100f5c50
 	// RBX::Creatable<RBX::Instance>::create<RBX::Value<int,&RBX::sIntValue> >
 	// TEMPLATE: WEBSERVICE 0x100f5cd0

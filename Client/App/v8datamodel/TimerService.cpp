@@ -54,17 +54,13 @@ TimerService::TimerService()
 // STUB: WEBSERVICE 0x100fbf40
 void TimerService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
-	if (runService) {
-		runService->Notifier<RunService, Heartbeat>::removeListener(this);
-	}
+	stopListening(runService, this);
 
 	DescribedCreatable<TimerService, Instance, sTimerService>::onServiceProvider(oldProvider, newProvider);
 
 	runService = shared_from(newProvider ? newProvider->create<RunService>() : NULL);
 
-	if (runService) {
-		runService->Notifier<RunService, Heartbeat>::addListener(this);
-	}
+	startListening(runService, this);
 }
 
 } // namespace RBX

@@ -33,6 +33,12 @@ void Joint::setJointOwner(IJointOwner* value)
 	jointOwner = value;
 }
 
+// FUNCTION: WEBSERVICE 0x100a7fb0 FOLDED
+IJointOwner* Joint::getJointOwner() const
+{
+	return jointOwner;
+}
+
 // FUNCTION: WEBSERVICE 0x1011e890
 bool Joint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1, float angleMax, float planarMax)
 {

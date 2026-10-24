@@ -83,6 +83,7 @@ public:
 	virtual void stepUi(int frameCount) {} // vtable+0x30
 
 	void setJointOwner(IJointOwner* value);
+	IJointOwner* getJointOwner() const;
 
 	void setJointCoord(int index, const CoordinateFrame& value);
 

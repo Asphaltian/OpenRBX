@@ -104,6 +104,22 @@ void Notifier<Source, Event>::removeListener(Listener<Source, Event>* listener) 
 	}
 }
 
+template <class Source, class Event, class SourcePtr>
+void startListening(const SourcePtr& source, Listener<Source, Event>* listener)
+{
+	if (source) {
+		source->Notifier<Source, Event>::addListener(listener);
+	}
+}
+
+template <class Source, class Event, class SourcePtr>
+void stopListening(const SourcePtr& source, Listener<Source, Event>* listener)
+{
+	if (source) {
+		source->Notifier<Source, Event>::removeListener(listener);
+	}
+}
+
 // clang-format off
 // FUNCTION: WEBSERVICE 0x10032240
 // RBX::Notifier<RBX::StandardOut,RBX::StandardOutMessage>::raise
