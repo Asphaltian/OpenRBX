@@ -413,6 +413,26 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Script,RBX::ContentId>::getset<RBX::ContentId const & (__thiscall RBX::Script::*)(void)const ,void (__thiscall RBX::Script::*)(RBX::ContentId const &)>
 	// TEMPLATE: WEBSERVICE 0x10069740
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Script>
+	// TEMPLATE: WEBSERVICE 0x100ebfe0
+	// RBX::Reflection::PropDescriptor<RBX::Rocket,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Rocket::*)(void)const ,void (__thiscall RBX::Rocket::*)(RBX::PartInstance *)>
+	// TEMPLATE: WEBSERVICE 0x100ec280
+	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::BodyPosition>
+	// TEMPLATE: WEBSERVICE 0x100ec350
+	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::BodyPosition>
+	// TEMPLATE: WEBSERVICE 0x100ec420
+	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::BodyVelocity>
+	// TEMPLATE: WEBSERVICE 0x100ec4f0
+	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::BodyVelocity>
+	// TEMPLATE: WEBSERVICE 0x100ecbf0
+	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::BodyGyro>
+	// TEMPLATE: WEBSERVICE 0x100eccc0
+	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::BodyGyro>
+	// TEMPLATE: WEBSERVICE 0x100ecd90
+	// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundProp<G3D::CoordinateFrame,1><RBX::BodyGyro>
+	// TEMPLATE: WEBSERVICE 0x100ed0e0
+	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::BodyForce>
+	// TEMPLATE: WEBSERVICE 0x100ed2b0
+	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::BodyThrust>
 	// TEMPLATE: WEBSERVICE 0x100ef0c0
 	// RBX::Reflection::TypedPropertyDescriptor<double>::TypedPropertyDescriptor<double>
 	// TEMPLATE: WEBSERVICE 0x100ef130
@@ -699,7 +719,7 @@ public:
 		// TEMPLATE: WEBSERVICE 0x100eef90
 		// RBX::Reflection::BoundProp<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,1>::BoundPropGetSet<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue> >::getValue
 		// TEMPLATE: WEBSERVICE 0x100eefd0
-		// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundPropGetSet<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue> >::getValue
+		// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundPropGetSet<RBX::BodyGyro>::getValue
 		// TEMPLATE: WEBSERVICE 0x100ef010
 		// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundPropGetSet<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >::getValue
 		// TEMPLATE: WEBSERVICE 0x100f75b0
@@ -707,7 +727,7 @@ public:
 		// TEMPLATE: WEBSERVICE 0x100f7600
 		// RBX::Reflection::BoundProp<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,1>::BoundPropGetSet<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue> >::setValue
 		// TEMPLATE: WEBSERVICE 0x100f7660
-		// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundPropGetSet<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue> >::setValue
+		// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundPropGetSet<RBX::BodyGyro>::setValue
 		// TEMPLATE: WEBSERVICE 0x100f76e0
 		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::setValue
 		// TEMPLATE: WEBSERVICE 0x1019bb70

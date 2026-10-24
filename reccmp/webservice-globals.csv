@@ -3397,6 +3397,8 @@ address,type,symbol
 0x10243e84,global,??_7?$BoundProp@VColor3@G3D@@$00@Reflection@RBX@@6B@
 0x10243eac,global,??_7?$RefPropDescriptor@VObjectValue@RBX@@VInstance@2@@Reflection@RBX@@6BIIDREF@2@@
 0x10243eb4,global,??_7?$RefPropDescriptor@VObjectValue@RBX@@VInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
+0x102426a4,global,??_7?$RefPropDescriptor@VRocket@RBX@@VPartInstance@2@@Reflection@RBX@@6BIIDREF@2@@
+0x102426ac,global,??_7?$RefPropDescriptor@VRocket@RBX@@VPartInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x10243ee4,global,??_7?$DescribedCreatable@V?$Value@H$1?sIntValue@RBX@@3PADA@RBX@@VInstance@2@$1?sIntValue@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10243ef4,global,??_7?$DescribedCreatable@V?$Value@H$1?sIntValue@RBX@@3PADA@RBX@@VInstance@2@$1?sIntValue@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x10243f04,global,??_7?$DescribedCreatable@V?$Value@H$1?sIntValue@RBX@@3PADA@RBX@@VInstance@2@$1?sIntValue@2@3PADA@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@

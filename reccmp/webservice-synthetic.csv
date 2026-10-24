@@ -68,13 +68,17 @@ address,type,symbol
 0x1005d7b0,synthetic,??_GSelection@RBX@@UAEPAXI@Z
 0x1005e720,stub,??0Selection@RBX@@QAE@XZ
 0x10062f50,synthetic,?getClassName@?$FactoryProduct@VScriptContext@RBX@@VInstance@2@$1?sScriptContext@2@3PADA@RBX@@UBEABVName@2@XZ
+0x10062f90,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sStats@Stats@2@3PADA@RBX@@UBEABVName@2@XZ
 0x10066200,stub,??0ScriptContext@RBX@@QAE@XZ
 0x10066970,synthetic,??_GScriptContext@RBX@@UAEPAXI@Z
 0x10068b10,synthetic,??_G?$FactoryProduct@VScript@RBX@@VInstance@2@$1?sScript@2@3PADA@RBX@@MAEPAXI@Z
+0x10068ba0,synthetic,?getValue@?$GetSetImpl@P8Script@RBX@@BEABVContentId@2@XZP812@AEXABV32@@Z@?$PropDescriptor@VScript@RBX@@VContentId@2@@Reflection@RBX@@UBE?AVContentId@4@PBVDescribedBase@34@@Z
+0x10068ea0,synthetic,??0?$TypedPropertyDescriptor@VContentId@RBX@@@Reflection@RBX@@IAE@AAVClassDescriptor@12@PBD1V?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VContentId@RBX@@@Reflection@RBX@@@std@@W4Functionality@PropertyDescriptor@12@@Z
 0x10068f10,synthetic,??$getset@P8Script@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP812@AEXABV34@@Z@?$PropDescriptor@VScript@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@@std@@P8Script@2@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@4@XZP852@AEXABV64@@Z@Z
 0x10069070,synthetic,?getClassName@?$FactoryProduct@VScript@RBX@@VInstance@2@$1?sScript@2@3PADA@RBX@@UBEABVName@2@XZ
 0x10069090,synthetic,?getClassName@?$FactoryProduct@VLocalScript@RBX@@VScript@2@$1?sLocalScript@2@3PADA@RBX@@UBEABVName@2@XZ
 0x10069600,synthetic,??$?0P8Script@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP801@AEXABV23@@Z@?$PropDescriptor@VScript@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@QAE@PBD0P8Script@2@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP832@AEXABV45@@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100696a0,synthetic,??$?0P8Script@RBX@@BEABVContentId@1@XZP801@AEXABV21@@Z@?$PropDescriptor@VScript@RBX@@VContentId@2@@Reflection@RBX@@QAE@PBD0P8Script@2@BEABVContentId@2@XZP832@AEXABV42@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x10069950,synthetic,??$find@VScriptContext@RBX@@@ServiceProvider@RBX@@SAPAVScriptContext@1@PBVInstance@1@@Z
 0x100699a0,stub,??0Script@RBX@@QAE@XZ
 0x10069cd0,stub,??0LocalScript@RBX@@QAE@XZ
@@ -161,6 +165,7 @@ address,type,symbol
 0x100c1b00,synthetic,??$create@VTeams@RBX@@@ServiceProvider@RBX@@SAPAVTeams@1@PBVInstance@1@@Z
 0x100c3690,synthetic,?getClassName@?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100c4120,stub,??0Camera@RBX@@QAE@XZ
+0x100c64c0,synthetic,??$create@VRunService@RBX@@@ServiceProvider@RBX@@SAPAVRunService@1@PBVInstance@1@@Z
 0x100c6be0,stub,??0ControllerService@RBX@@QAE@XZ
 0x100c6ee0,synthetic,??_EControllerService@RBX@@UAEPAXI@Z
 0x100c71d0,synthetic,??1GuiItem@RBX@@UAE@XZ
@@ -268,6 +273,11 @@ address,type,symbol
 0x100ec0c0,synthetic,?getClassName@?$FactoryProduct@VBodyPosition@RBX@@VBodyMover@2@$1?sBodyPosition@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100ec0e0,synthetic,?getClassName@?$FactoryProduct@VBodyVelocity@RBX@@VBodyMover@2@$1?sBodyVelocity@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100ec100,synthetic,?getClassName@?$FactoryProduct@VRocket@RBX@@VBodyMover@2@$1?sRocket@2@3PADA@RBX@@UBEABVName@2@XZ
+0x100ec780,synthetic,??$?0P8Rocket@RBX@@BEPAVPartInstance@1@XZP801@AEXPAV21@@Z@?$RefPropDescriptor@VRocket@RBX@@VPartInstance@2@@Reflection@RBX@@QAE@PBD0P8Rocket@2@BEPAVPartInstance@2@XZP832@AEXPAV42@@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100ec890,synthetic,??$?0VRocket@RBX@@@?$BoundProp@VVector3@G3D@@$00@Reflection@RBX@@QAE@PBD0PQRocket@2@VVector3@G3D@@P832@AEXABVPropertyDescriptor@12@@ZW4Functionality@612@@Z
+0x100ec970,synthetic,??$?0VRocket@RBX@@@?$BoundProp@M$00@Reflection@RBX@@QAE@PBD0PQRocket@2@MP832@AEXABVPropertyDescriptor@12@@ZW4Functionality@412@@Z
+0x100eca50,synthetic,??$?0VRocket@RBX@@@?$BoundProp@M$00@Reflection@RBX@@QAE@PBD0PQRocket@2@MW4Functionality@PropertyDescriptor@12@@Z
+0x100ecb20,synthetic,??$?0VRocket@RBX@@@?$BoundProp@VVector3@G3D@@$00@Reflection@RBX@@QAE@PBD0PQRocket@2@VVector3@G3D@@W4Functionality@PropertyDescriptor@12@@Z
 0x100ed460,stub,??0BodyGyro@RBX@@QAE@XZ
 0x100ed570,stub,??0BodyPosition@RBX@@QAE@XZ
 0x100ed6a0,stub,??0BodyVelocity@RBX@@QAE@XZ
@@ -370,7 +380,3 @@ address,type,symbol
 0x10224330,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4TopBottom@Feature@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x10224340,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x102256e0,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
-0x10068ba0,synthetic,?getValue@?$GetSetImpl@P8Script@RBX@@BEABVContentId@2@XZP812@AEXABV32@@Z@?$PropDescriptor@VScript@RBX@@VContentId@2@@Reflection@RBX@@UBE?AVContentId@4@PBVDescribedBase@34@@Z
-0x10062f90,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sStats@Stats@2@3PADA@RBX@@UBEABVName@2@XZ
-0x10068ea0,synthetic,??0?$TypedPropertyDescriptor@VContentId@RBX@@@Reflection@RBX@@IAE@AAVClassDescriptor@12@PBD1V?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VContentId@RBX@@@Reflection@RBX@@@std@@W4Functionality@PropertyDescriptor@12@@Z
-0x100696a0,synthetic,??$?0P8Script@RBX@@BEABVContentId@1@XZP801@AEXABV21@@Z@?$PropDescriptor@VScript@RBX@@VContentId@2@@Reflection@RBX@@QAE@PBD0P8Script@2@BEABVContentId@2@XZP832@AEXABV42@@ZW4Functionality@PropertyDescriptor@12@@Z

@@ -17,6 +17,12 @@ static Reflection::PropDescriptor<Players, int> propPlayerMaxCount(
 	&RBX::Network::Players::setMaxPlayers
 );
 
+// FUNCTION: WEBSERVICE 0x10190c50
+bool Players::clientIsPresent(const Instance* context, bool testInDatamodel)
+{
+	return Client::clientIsPresent(context, testInDatamodel);
+}
+
 // FUNCTION: WEBSERVICE 0x10190c60
 bool Players::frontendProcessing(const Instance* context, bool testInDatamodel)
 {

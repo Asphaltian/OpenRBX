@@ -773,6 +773,18 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100db2c0
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x100edb20
+	// RBX::Reflection::BoundFuncDesc<RBX::Rocket,void __cdecl(void),0>::BoundFuncDesc<RBX::Rocket,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x100edb90
+	// RBX::Reflection::BoundFuncDesc<RBX::Rocket,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x100edbf0
+	// RBX::Reflection::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x100edc60
+	// RBX::Reflection::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x100edcd0
+	// RBX::Reflection::BoundFuncDesc<RBX::BodyVelocity,G3D::Vector3 __cdecl(void),0>::BoundFuncDesc<RBX::BodyVelocity,G3D::Vector3 __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x100edd40
+	// RBX::Reflection::BoundFuncDesc<RBX::BodyVelocity,G3D::Vector3 __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100f9750
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100f97c0
