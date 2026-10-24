@@ -11,7 +11,13 @@
 #include <stdexcept>
 #include <typeinfo>
 
+namespace G3D {
+class Vector3;
+}
+
 namespace RBX {
+
+class ContentId;
 namespace Reflection {
 
 // VTABLE: WEBSERVICE 0x1022da5c
@@ -114,6 +120,10 @@ DECOMP_SIZE_ASSERT(Value, 0x08)
 // RBX::Reflection::Value::genericConvert<float>
 // TEMPLATE: WEBSERVICE 0x1003fef0
 // RBX::Reflection::Value::genericConvert<double>
+// TEMPLATE: WEBSERVICE 0x10040010
+// RBX::Reflection::Value::genericConvert<G3D::Vector3>
+// TEMPLATE: WEBSERVICE 0x10040160
+// RBX::Reflection::Value::genericConvert<RBX::ContentId>
 // clang-format on
 template <class T>
 T& Value::genericConvert()
@@ -150,6 +160,12 @@ template <>
 float& Value::convert<float>();
 template <>
 double& Value::convert<double>();
+template <>
+G3D::Vector3& Value::convert<G3D::Vector3>();
+template <>
+ContentId& Value::convert<ContentId>();
+template <>
+std::string& Value::convert<std::string>();
 
 // SIZE 0x10
 class SignatureDescriptor

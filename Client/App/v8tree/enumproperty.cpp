@@ -488,6 +488,61 @@ double& Value::convert<double>()
 	return genericConvert<double>();
 }
 
+// FUNCTION: WEBSERVICE 0x10041070
+template <>
+G3D::Vector3& Value::convert<G3D::Vector3>()
+{
+	return genericConvert<G3D::Vector3>();
+}
+
+// FUNCTION: WEBSERVICE 0x10041080
+template <>
+ContentId& Value::convert<ContentId>()
+{
+	if (isType<std::string>()) {
+		value = ContentId(boost::any_cast<std::string>(value));
+		_type = &Type::singleton<ContentId>();
+	}
+
+	return genericConvert<ContentId>();
+}
+
+// FUNCTION: WEBSERVICE 0x10041140
+template <>
+std::string& Value::convert<std::string>()
+{
+	if (isType<bool>()) {
+		value = StringConverter<bool>::convertToString(boost::any_cast<bool>(value));
+		_type = &Type::singleton<bool>();
+	}
+
+	if (isType<int>()) {
+		value = StringConverter<int>::convertToString(boost::any_cast<int>(value));
+		_type = &Type::singleton<int>();
+	}
+
+	if (isType<float>()) {
+		value = StringConverter<float>::convertToString(boost::any_cast<float>(value));
+		_type = &Type::singleton<float>();
+	}
+
+	if (isType<double>()) {
+		value = StringConverter<double>::convertToString(boost::any_cast<double>(value));
+		_type = &Type::singleton<double>();
+	}
+
+	if (isType<G3D::Vector3>()) {
+		value = StringConverter<G3D::Vector3>::convertToString(boost::any_cast<G3D::Vector3>(value));
+		_type = &Type::singleton<G3D::Vector3>();
+	}
+
+	if (std::string* s = boost::any_cast<std::string>(&value)) {
+		return *s;
+	}
+
+	throw std::runtime_error("Unable to cast value to std::string");
+}
+
 // FUNCTION: WEBSERVICE 0x10041430
 template <>
 std::string TypedPropertyDescriptor<G3D::Color3>::getStringValue(const DescribedBase* instance) const

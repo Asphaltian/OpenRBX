@@ -5,6 +5,7 @@ address,type,symbol
 0x10005570,stub,??0runtime_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z
 0x100059b0,synthetic,??1Descriptor@Reflection@RBX@@UAE@XZ
 0x100059c0,stub,??0ContentId@RBX@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x10005a20,stub,??0ContentId@RBX@@QAE@XZ
 0x10005b60,stub,?rootDescriptor@ClassDescriptor@Reflection@RBX@@SAAAV123@XZ
 0x10005cc0,synthetic,??1?$MemberDescriptorContainer@VPropertyDescriptor@Reflection@RBX@@@Reflection@RBX@@QAE@XZ
 0x10005cc0,synthetic,??1?$MemberDescriptorContainer@VSignalDescriptor@Reflection@RBX@@@Reflection@RBX@@QAE@XZ
