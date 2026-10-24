@@ -156,6 +156,8 @@ public:
 	// RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1012d2d0
 	// RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x1018c270
+	// RBX::Reflection::Described<RBX::Network::Players,&RBX::Network::sPlayers,RBX::NonFactoryProduct<RBX::Instance,&RBX::Network::sPlayers> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x1018c2f0
 	// RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor
 	// SYNTHETIC: WEBSERVICE 0x10221010
@@ -296,6 +298,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Motor,float>::PropDescriptor<RBX::Motor,float><float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
 	// SYNTHETIC: WEBSERVICE 0x10225d20
 	// `RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10225d30
+	// `RBX::Reflection::Described<RBX::Network::Players,&RBX::Network::sPlayers,RBX::NonFactoryProduct<RBX::Instance,&RBX::Network::sPlayers> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// clang-format on
 	static ClassDescriptor& classDescriptor() { return ClassDescriptor::rootDescriptor(); }
 
@@ -629,6 +633,8 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100ec830
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::getRefValue
+	// TEMPLATE: WEBSERVICE 0x100a3680
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::writeValue
 	// TEMPLATE: WEBSERVICE 0x100b4750
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::equalValues
 	// TEMPLATE: WEBSERVICE 0x10102200

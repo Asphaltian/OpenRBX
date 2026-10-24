@@ -360,6 +360,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::getset<float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ffc90
 	// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::PropDescriptor<RBX::Decal,RBX::TextureId><RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>
+	// TEMPLATE: WEBSERVICE 0x10193310
+	// RBX::Reflection::PropDescriptor<RBX::Network::Players,int>::PropDescriptor<RBX::Network::Players,int><int (__thiscall RBX::Network::Players::*)(void)const ,void (__thiscall RBX::Network::Players::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x1018c700
 	// RBX::Reflection::PropDescriptor<RBX::Network::Player,bool>::getset<bool (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(bool)>
 	// TEMPLATE: WEBSERVICE 0x1018ce60

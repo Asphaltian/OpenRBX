@@ -2,6 +2,7 @@
 #define V8XML_XMLELEMENT_H
 
 #include "decomp.h"
+#include "util/ContentProvider.h"
 #include "util/Handle.h"
 
 #include <cstddef>
@@ -10,7 +11,6 @@
 
 namespace RBX {
 
-class ContentId;
 class Instance;
 class InstanceHandle;
 class Name;
@@ -142,11 +142,28 @@ public:
 
 	bool isValueEqual(const RBX::Name* value) const;
 
-	void setValue(RBX::InstanceHandle value)
+	void setValue(std::string value)
 	{
 		clearValue();
 
-		handleValue = new RBX::InstanceHandle(value);
+		stringValue = new std::string(value);
+		valueType = STRING;
+	}
+
+	void setValue(RBX::ContentId contentId)
+	{
+		clearValue();
+
+		contentIdValue = new RBX::ContentId(contentId);
+		valueType = CONTENTID;
+	}
+
+	// FUNCTION: WEBSERVICE 0x1004b9a0
+	void setValue(RBX::InstanceHandle handle)
+	{
+		clearValue();
+
+		handleValue = new RBX::InstanceHandle(handle);
 		valueType = HANDLE;
 	}
 
