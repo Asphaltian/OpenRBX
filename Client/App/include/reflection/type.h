@@ -7,9 +7,11 @@
 
 #include <G3D/format.h>
 #include <boost/any.hpp>
+#include <boost/shared_ptr.hpp>
 #include <list>
 #include <stdexcept>
 #include <typeinfo>
+#include <vector>
 
 namespace G3D {
 class Vector3;
@@ -18,6 +20,7 @@ class Vector3;
 namespace RBX {
 
 class ContentId;
+class Instance;
 namespace Reflection {
 
 // VTABLE: WEBSERVICE 0x1022da5c
@@ -166,6 +169,13 @@ template <>
 ContentId& Value::convert<ContentId>();
 template <>
 std::string& Value::convert<std::string>();
+template <>
+boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >& Value::convert<
+	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > >();
+template <>
+std::vector<Value>& Value::convert<std::vector<Value> >();
+template <>
+boost::shared_ptr<Instance>& Value::convert<boost::shared_ptr<Instance> >();
 
 // SIZE 0x10
 class SignatureDescriptor

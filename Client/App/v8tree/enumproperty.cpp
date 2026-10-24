@@ -124,6 +124,30 @@ const Type& Type::singleton<std::vector<Value> >()
 	return type;
 }
 
+// FUNCTION: WEBSERVICE 0x1003f4a0
+template <>
+boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >& Value::convert<
+	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > >()
+{
+	if (boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >* objects =
+			boost::any_cast<boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > >(&value)) {
+		return *objects;
+	}
+
+	throw std::runtime_error("Unable to cast value to Objects");
+}
+
+// FUNCTION: WEBSERVICE 0x1003f530
+template <>
+std::vector<Value>& Value::convert<std::vector<Value> >()
+{
+	if (std::vector<Value>* values = boost::any_cast<std::vector<Value> >(&value)) {
+		return *values;
+	}
+
+	throw std::runtime_error("Unable to cast value to ValueCollection");
+}
+
 // FUNCTION: WEBSERVICE 0x1003f5c0
 template <>
 const Type& Type::singleton<BrickColor>()
@@ -650,6 +674,39 @@ template <>
 std::string TypedPropertyDescriptor<ContentId>::getStringValue(const DescribedBase* instance) const
 {
 	return StringConverter<ContentId>::convertToString(getValue(instance));
+}
+
+// STUB: WEBSERVICE 0x10041850
+template <>
+boost::shared_ptr<Instance>& Value::convert<boost::shared_ptr<Instance> >()
+{
+	if (isType<void>()) {
+		value = boost::shared_ptr<Instance>();
+		_type = &Type::singleton<boost::shared_ptr<Instance> >();
+	}
+
+	if (isType<boost::shared_ptr<DescribedBase> >()) {
+		boost::shared_ptr<DescribedBase>* described = boost::any_cast<boost::shared_ptr<DescribedBase> >(&value);
+		if (described) {
+			Instance* instance = dynamic_cast<Instance*>(described->get());
+			if (instance == NULL) {
+				throw std::runtime_error("Unable to cast value to Object");
+			}
+
+			value = shared_from(instance);
+		}
+		else {
+			value = boost::shared_ptr<Instance>();
+		}
+
+		_type = &Type::singleton<boost::shared_ptr<Instance> >();
+	}
+
+	if (boost::shared_ptr<Instance>* instance = boost::any_cast<boost::shared_ptr<Instance> >(&value)) {
+		return *instance;
+	}
+
+	throw std::runtime_error("Unable to cast value to Object");
 }
 
 // FUNCTION: WEBSERVICE 0x100421f0
