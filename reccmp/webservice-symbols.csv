@@ -317,8 +317,6 @@ address,size,symbol,name
 0x1008d7d0,0x7a,??$create@VSpawnLocation@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VSpawnLocation@RBX@@@boost@@XZ,
 0x1008d850,0xaf,?create@Creator@?$FactoryProduct@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ,
 0x10090970,0xd1,?convertToString@?$StringConverter@VVector3@G3D@@@RBX@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVVector3@G3D@@@Z,
-0x10090a50,0xbe,?convertToString@?$StringConverter@VCoordinateFrame@G3D@@@RBX@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVCoordinateFrame@G3D@@@Z,
-0x10090c20,0x25,?convertToString@?$StringConverter@VBrickColor@RBX@@@RBX@@SA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVBrickColor@2@@Z,
 0x100923f0,0x149,?insert@BrickMap@BrickColor@RBX@@AAEXW4Number@23@EEEV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x10093d10,0x9,?colorPalette@BrickColor@RBX@@SAABV?$vector@VBrickColor@RBX@@V?$allocator@VBrickColor@RBX@@@std@@@std@@XZ,
 0x10094000,0x41,?name@BrickColor@RBX@@QBEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,

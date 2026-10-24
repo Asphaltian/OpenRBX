@@ -2,8 +2,10 @@
 
 #include "decomp.h"
 #include "util/ContentProvider.h"
+#include "v8datamodel/BrickColor.h"
 
 #include <G3D/Color3.h>
+#include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
 #include <cstdio>
 #include <limits>
@@ -136,6 +138,22 @@ std::string StringConverter<G3D::Vector3>::convertToString(const G3D::Vector3& v
 	return result;
 }
 
+// FUNCTION: WEBSERVICE 0x10090a50
+template <>
+std::string StringConverter<G3D::CoordinateFrame>::convertToString(const G3D::CoordinateFrame& value)
+{
+	std::string result = StringConverter<G3D::Vector3>::convertToString(value.translation);
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			result += ", ";
+			result += StringConverter<float>::convertToString(value.rotation[i][j]);
+		}
+	}
+
+	return result;
+}
+
 // FUNCTION: WEBSERVICE 0x10090b10
 template <>
 bool StringConverter<G3D::Vector3>::convertToValue(const std::string& text, G3D::Vector3& value)
@@ -163,6 +181,13 @@ bool StringConverter<G3D::Vector3>::convertToValue(const std::string& text, G3D:
 	value.z = (float) atof(text.substr(start, text.size() - start).c_str());
 
 	return true;
+}
+
+// FUNCTION: WEBSERVICE 0x10090c20
+template <>
+std::string StringConverter<BrickColor>::convertToString(const BrickColor& value)
+{
+	return value.name();
 }
 
 // FUNCTION: WEBSERVICE 0x10090c50
