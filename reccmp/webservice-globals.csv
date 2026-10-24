@@ -1562,6 +1562,16 @@ address,type,symbol
 0x1023852c,global,??_7?$DescribedCreatable@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10238534,global,??_7?$DescribedCreatable@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10238544,global,??_7?$DescribedCreatable@VDebugSettings@RBX@@VItem@GlobalSettings@2@$1?sDebugSettings@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x10238588,global,??_7DebugSettings@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10238598,global,??_7DebugSettings@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x102385a8,global,??_7DebugSettings@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x102385b8,global,??_7DebugSettings@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x102385c8,global,??_7DebugSettings@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x102385d8,global,??_7DebugSettings@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x102385e8,global,??_7DebugSettings@RBX@@6BDebugable@1@@
+0x102385f0,global,??_7DebugSettings@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x102385f8,global,??_7DebugSettings@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x10238604,global,??_7DebugSettings@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x102388a0,global,?sGlobalSettings@RBX@@3QBDB
 0x102388c8,global,??_7?$NonFactoryProduct@VServiceProvider@RBX@@$1?sGlobalSettings@2@3QBDB@RBX@@6B?$Notifier@VServiceProvider@RBX@@UServiceRemoving@2@@1@@
 0x102388d8,global,??_7?$NonFactoryProduct@VServiceProvider@RBX@@$1?sGlobalSettings@2@3QBDB@RBX@@6B?$Notifier@VServiceProvider@RBX@@UServiceAdded@2@@1@@

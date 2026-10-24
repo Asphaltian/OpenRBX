@@ -144,6 +144,13 @@ EnumDesc<Debugable::AssertAction>::EnumDesc() : EnumDescriptor("AssertAction", t
 
 } // namespace Reflection
 
+// FUNCTION: WEBSERVICE 0x100b5090
+DebugSettings::DebugSettings()
+	: stackTracingEnabled(true), ioEnabled(false), soundWarnings(false), errorReporting(Prompt)
+{
+	setName("Diagnostics");
+}
+
 // FUNCTION: WEBSERVICE 0x100b51f0
 void DebugSettings::setShowAnchoredParts(bool value)
 {
