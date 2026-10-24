@@ -51,11 +51,20 @@ add_library(boost_thread STATIC
 )
 target_compile_definitions(boost_thread PRIVATE BOOST_THREAD_BUILD_LIB=1)
 
+# Sources and requirements from libs/date_time/build/Jamfile.v2.
+add_library(boost_date_time STATIC
+  "${BOOST}/libs/date_time/src/gregorian/greg_month.cpp"
+  "${BOOST}/libs/date_time/src/gregorian/greg_weekday.cpp"
+  "${BOOST}/libs/date_time/src/gregorian/date_generators.cpp"
+)
+target_compile_definitions(boost_date_time PRIVATE DATE_TIME_INLINE BOOST_DATE_TIME_STATIC_LINK)
+
 # auto_link.hpp asks the linker for exactly these names.
 set_target_properties(boost_signals PROPERTIES OUTPUT_NAME "libboost_signals-vc80-mt-1_34_1")
 set_target_properties(boost_thread  PROPERTIES OUTPUT_NAME "libboost_thread-vc80-mt-1_34_1")
+set_target_properties(boost_date_time PROPERTIES OUTPUT_NAME "libboost_date_time-vc80-mt-1_34_1")
 
-foreach(name boost_signals boost_thread)
+foreach(name boost_signals boost_thread boost_date_time)
   target_include_directories(${name} PRIVATE "${BOOST}")
 endforeach()
 

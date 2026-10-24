@@ -44,3 +44,18 @@ template const RBX::FactoryProduct<RBX::Script, RBX::Instance, RBX::sScript>::Cr
 	RBX::FactoryProduct<RBX::Script, RBX::Instance, RBX::sScript>::creator;
 template const RBX::FactoryProduct<RBX::LocalScript, RBX::Script, RBX::sLocalScript>::Creator
 	RBX::FactoryProduct<RBX::LocalScript, RBX::Script, RBX::sLocalScript>::creator;
+
+typedef std::vector<boost::shared_ptr<RBX::Instance> > InstanceVector;
+template InstanceVector::size_type InstanceVector::size() const;
+template InstanceVector::iterator InstanceVector::begin();
+template InstanceVector::iterator InstanceVector::end();
+template InstanceVector::iterator InstanceVector::erase(InstanceVector::iterator);
+template void InstanceVector::resize(InstanceVector::size_type);
+
+template boost::shared_ptr<RBX::Instance>::~shared_ptr();
+template boost::shared_ptr<RBX::ModelInstance>::~shared_ptr();
+template boost::shared_ptr<RBX::Selection>::~shared_ptr();
+template boost::shared_ptr<RBX::RunService>::~shared_ptr();
+template boost::shared_ptr<RBX::Script>::~shared_ptr();
+template boost::shared_ptr<RBX::ScriptContext>::~shared_ptr();
+template boost::shared_ptr<RBX::Lighting>::~shared_ptr();

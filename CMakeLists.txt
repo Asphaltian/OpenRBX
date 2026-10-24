@@ -88,7 +88,7 @@ set_property(TARGET fmodex PROPERTY INTERFACE_INCLUDE_DIRECTORIES "${OPENRBX_3RD
 
 add_subdirectory(3rdparty)
 
-set(OPENRBX_BOOST_LIBS boost_signals boost_thread)
+set(OPENRBX_BOOST_LIBS boost_signals boost_thread boost_date_time)
 set(OPENRBX_G3D_LIBS   graphics3d glg3d)
 set(OPENRBX_MESA_LIBS  opengl32 glu32 osmesa32)
 

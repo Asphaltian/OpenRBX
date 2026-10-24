@@ -2,14 +2,29 @@
 #define SCRIPT_SCRIPTCONTEXT_H
 
 #include "decomp.h"
+#include "script/ThreadRef.h"
 #include "util/Handle.h"
 #include "util/RunStateOwner.h"
+#include "v8datamodel/Stats.h"
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
 
+#include <boost/date_time/posix_time/ptime.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <boost/shared_ptr.hpp>
+#include <set>
+#include <vector>
+
+class LuaAllocator;
 struct lua_State;
 
 namespace RBX {
+
+class Script;
+
+namespace Lua {
+class YieldingThreads;
+}
 
 extern char sScriptContext[];
 // SIZE 0x168
@@ -41,7 +56,18 @@ private:
 	static int trustedThread(lua_State* thread);
 	static int loadfile(lua_State* L);
 
-	undefined m_unk0x100[0x168 - 0x100]; // 0x100
+	lua_State* globalState;                                 // 0x100
+	Lua::ThreadRef commandLineSandbox;                      // 0x104
+	std::set<Script*> scripts;                              // 0x124
+	boost::posix_time::ptime nextPendingScripts;            // 0x130
+	std::vector<boost::shared_ptr<Script> > pendingScripts; // 0x138
+	boost::shared_ptr<RunService> runService;               // 0x148
+	boost::scoped_ptr<Lua::YieldingThreads> yieldEvent;     // 0x150
+	bool scriptsDisabled;                                   // 0x154
+	boost::shared_ptr<Stats::Item> statsItem;               // 0x158
+
+public:
+	boost::scoped_ptr<LuaAllocator> allocator; // 0x160
 };
 
 DECOMP_SIZE_ASSERT(ScriptContext, 0x168)

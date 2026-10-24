@@ -46,10 +46,10 @@ void Selection::removeFromSelection(const Instance* instance)
 	}
 }
 
-// STUB: WEBSERVICE 0x1005e720
-Selection::Selection()
+// FUNCTION: WEBSERVICE 0x1005e720
+Selection::Selection() : selection(std::vector<boost::shared_ptr<Instance> >())
 {
-	STUB(0x1005e720);
+	setName("Selection");
 }
 
 // FUNCTION: WEBSERVICE 0x1005e870

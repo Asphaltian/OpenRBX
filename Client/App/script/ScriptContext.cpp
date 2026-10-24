@@ -2,11 +2,15 @@
 
 #include "reflection/signal.h"
 #include "script/LuaAtomicClasses.h"
+#include "script/LuaMemory.h"
+#include "script/ScriptEvent.h"
 #include "security/SecurityContext.h"
 #include "util/ContentProvider.h"
 #include "util/Name.h"
 #include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/Stats.h"
+
+#include <boost/date_time/posix_time/posix_time_types.hpp>
 
 namespace RBX {
 
@@ -56,16 +60,16 @@ void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 value)
 	pushNewObject(L, value);
 }
 
-// STUB: WEBSERVICE 0x10066200
+// FUNCTION: WEBSERVICE 0x10066200
 ScriptContext::ScriptContext()
+	: globalState(NULL), nextPendingScripts(boost::posix_time::second_clock::local_time()), scriptsDisabled(false)
 {
-	STUB(0x10066200);
+	setName("Script Context");
 }
 
-// STUB: WEBSERVICE 0x10066460
+// FUNCTION: WEBSERVICE 0x10066460
 ScriptContext::~ScriptContext()
 {
-	STUB(0x10066460);
 }
 
 // FUNCTION: WEBSERVICE 0x10066de0

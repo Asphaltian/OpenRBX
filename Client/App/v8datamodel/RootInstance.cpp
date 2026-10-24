@@ -121,7 +121,7 @@ ControllerTypeArray RootInstance::computeControllersUsed() const
 	return result;
 }
 
-// STUB: WEBSERVICE 0x100c1110
+// FUNCTION: WEBSERVICE 0x100c1110
 void RootInstance::insertRaw(
 	const std::vector<boost::shared_ptr<Instance> >& instances,
 	Instance* requestedParent,

@@ -5,16 +5,20 @@
 #include "util/Name.h"
 #include "v8datamodel/Team.h"
 
+#include <boost/thread/once.hpp>
+
+static boost::shared_ptr<const std::string> helloWorld;
+static boost::once_flag flagInitScriptCpp = BOOST_ONCE_INIT;
+
 namespace RBX {
 
 char sScript[] = "Script";
 
 char sLocalScript[] = "LocalScript";
 
-// STUB: WEBSERVICE 0x10068bf0
+// FUNCTION: WEBSERVICE 0x10068bf0
 Script::~Script()
 {
-	STUB(0x10068bf0);
 }
 
 // FUNCTION: WEBSERVICE 0x10068d50
@@ -27,22 +31,28 @@ boost::shared_ptr<const std::string> Script::requestCode()
 	return ContentProvider::singleton().requestContentString(scriptId);
 }
 
-// STUB: WEBSERVICE 0x100699a0
-Script::Script()
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x10069000
+static void initScriptCpp()
 {
-	STUB(0x100699a0);
+	helloWorld.reset(new std::string("print(\"Hello world!\")\r\n"));
 }
 
-// STUB: WEBSERVICE 0x10069cd0
+namespace RBX {
+
+// FUNCTION: WEBSERVICE 0x100699a0
+Script::Script() : DescribedCreatable<Script, Instance, sScript>("Script"), disabled(false), owner(NULL)
+{
+	boost::call_once(initScriptCpp, flagInitScriptCpp);
+
+	embeddedSource = helloWorld;
+}
+
+// FUNCTION: WEBSERVICE 0x10069cd0
 LocalScript::LocalScript()
 {
-	STUB(0x10069cd0);
-}
-
-// STUB: WEBSERVICE 0x10069e10
-LocalScript::~LocalScript()
-{
-	STUB(0x10069e10);
+	setName("LocalScript");
 }
 
 } // namespace RBX

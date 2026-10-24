@@ -42,10 +42,10 @@ public:
 	const std::string* getEmbeddedCode() const { return embeddedSource.get(); }
 
 private:
-	boost::shared_ptr<std::string> embeddedSource; // 0x0f8
-	ContentId scriptId;                            // 0x100
-	bool disabled;                                 // 0x120
-	IScriptOwner* owner;                           // 0x124
+	boost::shared_ptr<const std::string> embeddedSource; // 0x0f8
+	ContentId scriptId;                                  // 0x100
+	bool disabled;                                       // 0x120
+	IScriptOwner* owner;                                 // 0x124
 };
 
 DECOMP_SIZE_ASSERT(Script, 0x128)
@@ -55,7 +55,9 @@ class LocalScript : public DescribedCreatable<LocalScript, Script, sLocalScript>
 {
 public:
 	LocalScript();
-	virtual ~LocalScript();
+
+	// FUNCTION: WEBSERVICE 0x10069e10
+	virtual ~LocalScript() {}
 };
 
 DECOMP_SIZE_ASSERT(LocalScript, 0x128)
@@ -84,6 +86,10 @@ DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10068fd0
 // RBX::Script::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x10218cb0
+// `dynamic initializer for 'helloWorld''
+// SYNTHETIC: WEBSERVICE 0x10221b00
+// `dynamic atexit destructor for 'helloWorld''
 // clang-format on
 
 } // namespace RBX

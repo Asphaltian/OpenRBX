@@ -8,6 +8,9 @@
 
 #include <G3D/Color3.h>
 #include <G3D/Color4.h>
+#include <GLG3D/LightingParameters.h>
+#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace RBX {
 
@@ -18,19 +21,19 @@ extern char sLighting[];
 class Lighting : public DescribedCreatable<Lighting, Instance, sLighting>, public Service
 {
 private:
-	undefined m_unk0x0f8[0x1f0 - 0x0f8]; // 0x0f8
-	G3D::Color3 ambientTop;              // 0x1f0
-	G3D::Color3 ambientBottom;           // 0x1fc
-	bool hasSky;                         // 0x208
-	undefined m_unk0x209[0x20c - 0x209]; // 0x209
-	G3D::Color4 clearColor;              // 0x20c
-	undefined m_unk0x21c[0x230 - 0x21c]; // 0x21c
+	G3D::LightingParameters skyParameters;      // 0x0f8
+	G3D::Color3 ambientTop;                     // 0x1f0
+	G3D::Color3 ambientBottom;                  // 0x1fc
+	bool hasSky;                                // 0x208
+	G3D::Color4 clearColor;                     // 0x20c
+	boost::posix_time::time_duration timeOfDay; // 0x220
 
 public:
 	Lighting();
-	virtual ~Lighting();
 
 	void replaceSky(Sky* sky);
+
+	boost::shared_ptr<Sky> sky; // 0x228
 };
 
 DECOMP_SIZE_ASSERT(Lighting, 0x230)
