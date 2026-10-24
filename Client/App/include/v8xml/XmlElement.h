@@ -183,6 +183,38 @@ public:
 		valueType = INT;
 	}
 
+	void setValue(unsigned int value)
+	{
+		clearValue();
+
+		uintValue = value;
+		valueType = UINT;
+	}
+
+	void setValue(bool value)
+	{
+		clearValue();
+
+		boolValue = value;
+		valueType = BOOL;
+	}
+
+	void setValue(float value)
+	{
+		clearValue();
+
+		floatValue = value;
+		valueType = FLOAT;
+	}
+
+	void setValue(double value)
+	{
+		clearValue();
+
+		doubleValue = value;
+		valueType = DOUBLE;
+	}
+
 private:
 	void clearValue() const;
 
@@ -253,6 +285,20 @@ public:
 
 	const XmlElement* findFirstChildByTag(const RBX::Name& _tag) const;
 	const XmlElement* findNextChildWithSameTag(const XmlElement* node) const;
+
+	XmlElement* addChild(XmlElement* child)
+	{
+		RBX::Parent<XmlElement>::addChild(child);
+		return child;
+	}
+
+	// FUNCTION: WEBSERVICE 0x1003f890
+	XmlElement* addChild(const RBX::Name& tag)
+	{
+		XmlElement* child = new XmlElement(tag);
+		addChild(child);
+		return child;
+	}
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10096250

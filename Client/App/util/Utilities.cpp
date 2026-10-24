@@ -5,6 +5,7 @@
 #include <G3D/Vector3.h>
 #include <cstdio>
 #include <limits>
+#include <stdlib.h>
 
 namespace RBX {
 
@@ -131,6 +132,35 @@ std::string StringConverter<G3D::Vector3>::convertToString(const G3D::Vector3& v
 	result += StringConverter<float>::convertToString(value.z);
 
 	return result;
+}
+
+// FUNCTION: WEBSERVICE 0x10090b10
+template <>
+bool StringConverter<G3D::Vector3>::convertToValue(const std::string& text, G3D::Vector3& value)
+{
+	int x = text.find_first_of(",;");
+	if (x < 0) {
+		return false;
+	}
+
+	value.x = (float) atof(text.substr(0, x).c_str());
+
+	int start = x + 1;
+	int y = text.find_first_of(",;", start);
+	if (y < start) {
+		return false;
+	}
+
+	value.y = (float) atof(text.substr(start, y - start).c_str());
+
+	start = y + 1;
+	if ((int) text.size() < start) {
+		return false;
+	}
+
+	value.z = (float) atof(text.substr(start, text.size() - start).c_str());
+
+	return true;
 }
 
 } // namespace RBX

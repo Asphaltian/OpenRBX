@@ -6,6 +6,7 @@
 #include "reflection/member.h"
 #include "reflection/type.h"
 
+#include <G3D/Vector3.h>
 #include <memory>
 #include <string>
 #include <typeinfo>
@@ -116,17 +117,9 @@ public:
 
 	virtual bool hasStringValue() const { return false; }
 
-	virtual std::string getStringValue(const DescribedBase* instance) const
-	{
-		STUB(0x10094120);
-		return std::string();
-	}
+	virtual std::string getStringValue(const DescribedBase* instance) const;
 
-	virtual bool setStringValue(DescribedBase* instance, const std::string& value) const
-	{
-		STUB(0x100941a0);
-		return false;
-	}
+	virtual bool setStringValue(DescribedBase* instance, const std::string& value) const;
 
 protected:
 	TypedPropertyDescriptor(
@@ -153,16 +146,121 @@ protected:
 	}
 
 private:
-	virtual void writeValue(const DescribedBase* instance, XmlElement* element) const { STUB(0x10094410); }
+	virtual void writeValue(const DescribedBase* instance, XmlElement* element) const;
 
-	virtual void readValue(DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder) const
-	{
-		STUB(0x10094420);
-	}
+	virtual void readValue(DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder) const;
 
 protected:
 	std::auto_ptr<GetSet> getset; // 0x18
 };
+
+template <class T>
+std::string TypedPropertyDescriptor<T>::getStringValue(const DescribedBase* instance) const
+{
+	STUB(0x10094120);
+	return std::string();
+}
+
+template <class T>
+bool TypedPropertyDescriptor<T>::setStringValue(DescribedBase* instance, const std::string& value) const
+{
+	STUB(0x100941a0);
+	return false;
+}
+
+template <class T>
+void TypedPropertyDescriptor<T>::writeValue(const DescribedBase* instance, XmlElement* element) const
+{
+	STUB(0x10094410);
+}
+
+template <class T>
+void TypedPropertyDescriptor<T>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const
+{
+	STUB(0x10094420);
+}
+
+template <>
+std::string TypedPropertyDescriptor<std::string>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<std::string>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<std::string>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<std::string>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+std::string TypedPropertyDescriptor<bool>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<bool>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<bool>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<bool>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+std::string TypedPropertyDescriptor<float>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<float>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<float>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<float>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+std::string TypedPropertyDescriptor<double>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<double>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<double>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<double>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+std::string TypedPropertyDescriptor<int>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<int>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<int>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<int>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+std::string TypedPropertyDescriptor<G3D::Vector3>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<G3D::Vector3>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<G3D::Vector3>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 // SIZE 0x1c
 class __declspec(novtable) EnumPropertyDescriptor : public PropertyDescriptor
@@ -294,7 +392,7 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x1004b730
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1007dcd0
-	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::getValue
+	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getValue
 	// TEMPLATE: WEBSERVICE 0x1009bb10
 	// RBX::Reflection::TypedPropertyDescriptor<bool>::isReadOnly
 	// TEMPLATE: WEBSERVICE 0x1009bb20
