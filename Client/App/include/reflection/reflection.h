@@ -650,6 +650,8 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1004b8a0
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::RefPropDescriptor<RBX::Instance,RBX::Instance><RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x1004ba50
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x1004ba90

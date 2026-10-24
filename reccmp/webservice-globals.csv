@@ -625,6 +625,8 @@ address,type,symbol
 0x1022e35c,global,??_7?$holder@V?$function@$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@ZV?$allocator@X@std@@@boost@@@any@boost@@6B@
 0x1022e36c,global,??_7?$BoundProp@_N$00@Reflection@RBX@@6B@
 0x1022e394,global,??_7?$PropDescriptor@VInstance@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@6B@
+0x1022e3bc,global,??_7?$RefPropDescriptor@VInstance@RBX@@V12@@Reflection@RBX@@6BIIDREF@2@@
+0x1022e3c4,global,??_7?$RefPropDescriptor@VInstance@RBX@@V12@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x1022e3f4,global,??_7?$SignalDesc@VInstance@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@6B@
 0x1022e404,global,??_7?$SignalDesc@VInstance@RBX@@$$A6AXPBVPropertyDescriptor@Reflection@2@@Z@Reflection@RBX@@6B@
 0x1022e414,global,??_7?$BoundFuncDesc@VInstance@RBX@@$$A6A?AV?$shared_ptr@VInstance@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z$01@Reflection@RBX@@6B@
