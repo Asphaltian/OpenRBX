@@ -83,6 +83,7 @@ address,type,symbol
 0x100993c0,synthetic,?getValue@?$GetSetImpl@P8PartInstance@RBX@@BE?AW4PartType@Part@2@XZP812@AEXW4342@@Z@?$PropDescriptor@VPartInstance@RBX@@W4PartType@Part@2@@Reflection@RBX@@UBE?AW4PartType@Part@4@PBVDescribedBase@34@@Z
 0x10099cc0,synthetic,??$?0P8PVInstance@RBX@@BE_NXZP801@AEX_N@Z@?$PropDescriptor@VPVInstance@RBX@@_N@Reflection@RBX@@QAE@PBD0P8PVInstance@2@BE_NXZP832@AEX_N@ZW4Functionality@PropertyDescriptor@12@@Z
 0x1009a1e0,synthetic,?setStringValue@?$EnumPropDescriptor@VPVInstance@RBX@@W4ControllerType@Controller@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x1009a230,synthetic,?setStringValue@?$EnumPropDescriptor@VPVInstance@RBX@@W4ControllerType@Controller@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x1009a790,synthetic,?getFormFactor@PartInstance@RBX@@QBE?AW4FormFactor@12@XZ
 0x1009a7a0,synthetic,?getRenderImportance@PartInstance@RBX@@QBEMXZ
 0x1009a7b0,synthetic,?getTransparencyXml@PartInstance@RBX@@QBEMXZ
@@ -99,8 +100,11 @@ address,type,symbol
 0x1009e470,synthetic,??$?0P8PartInstance@RBX@@BE_NXZP801@AEX_N@Z@?$PropDescriptor@VPartInstance@RBX@@_N@Reflection@RBX@@QAE@PBD0P8PartInstance@2@BE_NXZP832@AEX_N@ZW4Functionality@PropertyDescriptor@12@@Z
 0x1009e5f0,stub,??$?0P8PartInstance@RBX@@BE?AW4FormFactor@01@XZP801@AEXW4201@@Z@?$EnumPropDescriptor@VPartInstance@RBX@@W4FormFactor@12@@Reflection@RBX@@QAE@PBD0P8PartInstance@2@BE?AW4FormFactor@32@XZP832@AEXW4432@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x1009e6b0,synthetic,?convertToString@?$EnumDesc@W4SurfaceType@RBX@@@Reflection@RBX@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABW4SurfaceType@3@@Z
+0x1009e820,synthetic,?setStringValue@?$EnumPropDescriptor@VPartInstance@RBX@@W4FormFactor@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x1009e870,synthetic,?setStringValue@?$EnumPropDescriptor@VPartInstance@RBX@@W4FormFactor@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x1009ed60,synthetic,??$?0P8PartInstance@RBX@@BE?AW4PartType@Part@1@XZP801@AEXW4231@@Z@?$EnumPropDescriptor@VPartInstance@RBX@@W4PartType@Part@2@@Reflection@RBX@@QAE@PBD0P8PartInstance@2@BE?AW4PartType@Part@2@XZP832@AEXW4452@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x1009f050,synthetic,?setStringValue@?$EnumPropDescriptor@VPartInstance@RBX@@W4PartType@Part@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x1009f0a0,synthetic,?setStringValue@?$EnumPropDescriptor@VPartInstance@RBX@@W4PartType@Part@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x1009f220,stub,??0PartInstance@RBX@@QAE@XZ
 0x100a0f00,stub,?setValue@?$GetSetImpl@P8Humanoid@RBX@@BE_NXZP812@AEX_N@Z@?$PropDescriptor@VHumanoid@RBX@@_N@Reflection@RBX@@UBEXPAVDescribedBase@34@AB_N@Z
 0x100a1820,synthetic,??_GHumanoid@RBX@@UAEPAXI@Z
@@ -123,7 +127,9 @@ address,type,symbol
 0x100b4210,synthetic,??_E?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@EAEPAXI@Z
 0x100b4800,synthetic,?convertToValue@?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@QBE_NABVName@3@AAW4MeshType@SpecialShape@3@@Z
 0x100b4a80,synthetic,?setStringValue@?$EnumPropDescriptor@VDebugSettings@RBX@@W4AssertAction@Debugable@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x100b4ad0,synthetic,?setStringValue@?$EnumPropDescriptor@VDebugSettings@RBX@@W4AssertAction@Debugable@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x100b4d50,synthetic,?setStringValue@?$EnumPropDescriptor@VDebugSettings@RBX@@W4ErrorReporting@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x100b4da0,synthetic,?setStringValue@?$EnumPropDescriptor@VDebugSettings@RBX@@W4ErrorReporting@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x100bded0,synthetic,?getTeamColor@Team@RBX@@QBE?AVBrickColor@2@XZ
 0x100bdee0,synthetic,?getAutoAssignable@Team@RBX@@QBE_NXZ
 0x100be2b0,synthetic,??$?0P8Team@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VTeam@RBX@@H@Reflection@RBX@@QAE@PBD0P8Team@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
@@ -191,8 +197,11 @@ address,type,symbol
 0x100e6010,stub,??$?0P8Feature@RBX@@BE?AW4LeftRight@01@XZP801@AEXW4201@@Z@?$EnumPropDescriptor@VFeature@RBX@@W4LeftRight@12@@Reflection@RBX@@QAE@PBD0P8Feature@2@BE?AW4LeftRight@32@XZP832@AEXW4432@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100e60b0,stub,??$?0P8Feature@RBX@@BE?AW4InOut@01@XZP801@AEXW4201@@Z@?$EnumPropDescriptor@VFeature@RBX@@W4InOut@12@@Reflection@RBX@@QAE@PBD0P8Feature@2@BE?AW4InOut@32@XZP832@AEXW4432@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100e62d0,synthetic,?setStringValue@?$EnumPropDescriptor@VFeature@RBX@@W4TopBottom@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x100e6320,synthetic,?setStringValue@?$EnumPropDescriptor@VFeature@RBX@@W4TopBottom@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x100e65a0,synthetic,?setStringValue@?$EnumPropDescriptor@VFeature@RBX@@W4LeftRight@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x100e65f0,synthetic,?setStringValue@?$EnumPropDescriptor@VFeature@RBX@@W4LeftRight@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x100e6870,synthetic,?setStringValue@?$EnumPropDescriptor@VFeature@RBX@@W4InOut@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x100e68c0,synthetic,?setStringValue@?$EnumPropDescriptor@VFeature@RBX@@W4InOut@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x100e6b80,synthetic,??$?0P8VelocityMotor@RBX@@BEMXZP801@AEXM@Z@?$PropDescriptor@VVelocityMotor@RBX@@M@Reflection@RBX@@QAE@PBD0P8VelocityMotor@2@BEMXZP832@AEXM@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100e6ff0,stub,??$?0P8Feature@RBX@@BE?AW4NormalId@1@XZP801@AEXW421@@Z@?$EnumPropDescriptor@VFeature@RBX@@W4NormalId@2@@Reflection@RBX@@QAE@PBD0P8Feature@2@BE?AW4NormalId@2@XZP832@AEXW442@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100e7090,synthetic,?convertToValue@?$EnumDesc@W4ControllerType@Controller@RBX@@@Reflection@RBX@@QBE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAW4ControllerType@Controller@3@@Z
@@ -240,10 +249,12 @@ address,type,symbol
 0x10101f50,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$0A@W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
 0x10102090,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$04W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
 0x10102210,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$01W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
+0x10102400,synthetic,?setStringValue@?$SurfaceEnumPropDescriptor@$0A@W4InputType@Controller@RBX@@@RBX@@UBE_NPAVDescribedBase@Reflection@2@ABVName@2@@Z
 0x10102460,synthetic,?getStringValue@?$SurfaceEnumPropDescriptor@$0A@W4SurfaceType@RBX@@@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@Reflection@2@@Z
 0x101024c0,synthetic,?getStringValue@?$SurfaceEnumPropDescriptor@$03W4InputType@Controller@RBX@@@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@Reflection@2@@Z
 0x10102610,synthetic,?setStringValue@?$SurfaceEnumPropDescriptor@$0A@W4SurfaceType@RBX@@@RBX@@UBE_NPAVDescribedBase@Reflection@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 0x10102650,synthetic,?setStringValue@?$SurfaceEnumPropDescriptor@$0A@W4InputType@Controller@RBX@@@RBX@@UBE_NPAVDescribedBase@Reflection@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x10102700,synthetic,?setStringValue@?$SurfaceEnumPropDescriptor@$00W4SurfaceType@RBX@@@RBX@@UBE_NPAVDescribedBase@Reflection@2@ABVName@2@@Z
 0x10106230,synthetic,?zero@Velocity@RBX@@SAABV12@XZ
 0x101194c0,stub,?erase@?$_Tree@V?$_Tset_traits@PAVIMoving@RBX@@U?$less@PAVIMoving@RBX@@@std@@V?$allocator@PAVIMoving@RBX@@@4@$0A@@std@@@std@@QAEIABQAVIMoving@RBX@@@Z
 0x10121990,synthetic,??$getset@P8FaceInstance@RBX@@BE?AW4NormalId@2@XZP812@AEXW432@@Z@?$PropDescriptor@VFaceInstance@RBX@@W4NormalId@2@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@W4NormalId@RBX@@@Reflection@RBX@@@std@@P8FaceInstance@2@BE?AW4NormalId@2@XZP852@AEXW462@@Z@Z
@@ -255,6 +266,7 @@ address,type,symbol
 0x1012cf10,synthetic,??1?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@EAE@XZ
 0x1012d250,synthetic,??_E?$EnumDesc@W4MeshType@SpecialShape@RBX@@@Reflection@RBX@@EAEPAXI@Z
 0x1012d6c0,synthetic,?setStringValue@?$EnumPropDescriptor@VSpecialShape@RBX@@W4MeshType@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x1012d710,synthetic,?setStringValue@?$EnumPropDescriptor@VSpecialShape@RBX@@W4MeshType@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x1012d970,stub,??0SpecialShape@RBX@@QAE@XZ
 0x10134a30,stub,?getTick@System@G3D@@SANXZ
 0x10136380,stub,?getColumn@Matrix3@G3D@@QBE?AVVector3@2@H@Z

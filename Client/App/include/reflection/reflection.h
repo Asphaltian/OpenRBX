@@ -531,8 +531,6 @@ public:
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::readValue
 	// TEMPLATE: WEBSERVICE 0x1009e780
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setIndexValue
-	// TEMPLATE: WEBSERVICE 0x1009e820
-	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setStringValue
 	// TEMPLATE: WEBSERVICE 0x1009a1a0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x1009e7e0
