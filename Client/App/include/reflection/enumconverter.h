@@ -5,6 +5,7 @@
 #include "reflection/type.h"
 
 #include <algorithm>
+#include <boost/bind.hpp>
 #include <boost/checked_delete.hpp>
 #include <map>
 #include <string>
@@ -44,7 +45,11 @@ public:
 	std::vector<const Item*>::const_iterator begin() const { return allItems.begin(); }
 	std::vector<const Item*>::const_iterator end() const { return allItems.end(); }
 
-	bool isValue(int value) const;
+	// FUNCTION: WEBSERVICE 0x10081ec0
+	bool isValue(int intValue) const
+	{
+		return std::find_if(allItems.begin(), allItems.end(), boost::bind(&equalValue, _1, intValue)) != allItems.end();
+	}
 
 protected:
 	EnumDescriptor(const char* name, const std::type_info& type);
@@ -80,8 +85,21 @@ class EnumDesc : public EnumDescriptor
 public:
 	static const EnumDesc<T>& singleton();
 
-	const Name& convertToName(T value) const;
-	const std::string& convertToString(T value) const;
+	const Name& convertToName(const T& value) const;
+	std::string convertToString(const T& value) const;
+
+	bool convertToValue(unsigned int index, T& value) const
+	{
+		if (index < enumCount) {
+			value = indexToEnum[index];
+			return true;
+		}
+
+		return false;
+	}
+
+	bool convertToValue(const std::string& text, T& value) const;
+	bool convertToValue(const Name& name, T& value) const;
 	unsigned int convertToIndex(T value) const;
 
 private:
@@ -183,6 +201,10 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // RBX::Reflection::EnumDesc<enum RBX::Controller::ControllerType>::singleton
 // TEMPLATE: WEBSERVICE 0x1009dde0
 // RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton
+// TEMPLATE: WEBSERVICE 0x10081e50
+// RBX::Reflection::EnumDescriptor::equalValue
+// TEMPLATE: WEBSERVICE 0x100e5f90
+// RBX::Reflection::EnumDesc<enum RBX::SpecialShape::MeshType>::convertToIndex
 // TEMPLATE: WEBSERVICE 0x1009ed00
 // RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::singleton
 // TEMPLATE: WEBSERVICE 0x100b4230
@@ -234,6 +256,70 @@ const EnumDesc<T>& EnumDesc<T>::singleton()
 	static EnumDesc<T> s;
 
 	return s;
+}
+
+template <class T>
+std::string EnumDesc<T>::convertToString(const T& value) const
+{
+	if (value < 0) {
+		return "";
+	}
+
+	if (static_cast<unsigned int>(value) >= enumToString.size()) {
+		return "";
+	}
+
+	return enumToString[value];
+}
+
+template <class T>
+bool EnumDesc<T>::convertToValue(const Name& name, T& value) const
+{
+	typename std::map<const Name*, T>::const_iterator iter = nameToEnum.find(&name);
+
+	if (iter != nameToEnum.end()) {
+		value = iter->second;
+		return true;
+	}
+
+	iter = nameToEnumLegacy.find(&name);
+
+	if (iter != nameToEnumLegacy.end()) {
+		value = iter->second;
+		return true;
+	}
+
+	return false;
+}
+
+template <class T>
+bool EnumDesc<T>::convertToValue(const std::string& text, T& value) const
+{
+	typename std::map<std::string, T>::const_iterator iter = stringToEnum.find(text);
+
+	if (iter != stringToEnum.end()) {
+		value = iter->second;
+		return true;
+	}
+
+	iter = stringToEnumLegacy.find(text);
+
+	if (iter != stringToEnumLegacy.end()) {
+		value = iter->second;
+		return true;
+	}
+
+	return false;
+}
+
+template <class T>
+unsigned int EnumDesc<T>::convertToIndex(T value) const
+{
+	if (static_cast<unsigned int>(value) < enumToIndex.size()) {
+		return enumToIndex[value];
+	}
+
+	return -1;
 }
 
 // clang-format off

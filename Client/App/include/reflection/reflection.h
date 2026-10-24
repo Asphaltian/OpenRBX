@@ -335,6 +335,191 @@ public:
 
 // SIZE 0x20
 template <class Class, class T>
+class EnumPropDescriptor : public EnumPropertyDescriptor
+{
+	std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset; // 0x1c
+
+public:
+	template <class GetFunc, class SetFunc>
+	EnumPropDescriptor(
+		const char* name,
+		const char* category,
+		GetFunc get,
+		SetFunc set,
+		typename PropertyDescriptor::Functionality flags = PropertyDescriptor::STANDARD
+	)
+		: EnumPropertyDescriptor(Class::classDescriptor(), EnumDesc<T>::singleton(), name, category, flags),
+		  getset(PropDescriptor<Class, T>::getset(get, set))
+	{
+	}
+
+	virtual bool isReadOnly() const { return getset->isReadOnly(); }
+
+	T getValue(const DescribedBase* instance) const { return getset->getValue(instance); }
+
+	void setValue(DescribedBase* instance, T value) const { getset->setValue(instance, value); }
+
+	virtual bool equalValues(const DescribedBase* a, const DescribedBase* b) const
+	{
+		return getValue(a) == getValue(b);
+	}
+
+	virtual int getEnumValue(const DescribedBase* instance) const { return getValue(instance); }
+
+	virtual bool setEnumValue(DescribedBase* instance, int intValue) const
+	{
+		if (EnumDesc<T>::singleton().isValue(intValue)) {
+			setValue(instance, static_cast<T>(intValue));
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	virtual unsigned int getIndexValue(const DescribedBase* instance) const
+	{
+		return EnumDesc<T>::singleton().convertToIndex(getValue(instance));
+	}
+
+	virtual bool setIndexValue(DescribedBase* instance, unsigned int index) const
+	{
+		T value;
+
+		if (EnumDesc<T>::singleton().convertToValue(index, value)) {
+			setValue(instance, value);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	virtual bool hasStringValue() const { return true; }
+
+	virtual std::string getStringValue(const DescribedBase* instance) const
+	{
+		return EnumDesc<T>::singleton().convertToString(getValue(instance));
+	}
+
+	virtual bool setStringValue(DescribedBase* instance, const std::string& text) const
+	{
+		T value;
+
+		if (EnumDesc<T>::singleton().convertToValue(text, value)) {
+			setValue(instance, value);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	virtual bool setStringValue(DescribedBase* instance, const Name& name) const // vtable+0x34
+	{
+		T value;
+
+		if (EnumDesc<T>::singleton().convertToValue(name, value)) {
+			setValue(instance, value);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	virtual void readValue(DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder) const
+	{
+		if (!element->isXsiNil()) {
+			if (element->isValueType<std::string>()) {
+				std::string sValue;
+
+				if (element->getValue(sValue)) {
+					T e;
+
+					if (EnumDesc<T>::singleton().convertToValue(sValue, e)) {
+						setValue(instance, e);
+						return;
+					}
+					else if (sValue.size() == 0) {
+						if (setIndexValue(instance, 0)) {
+							return;
+						}
+					}
+				}
+			}
+
+			int value;
+
+			if (element->getValue(value)) {
+				setValue(instance, static_cast<T>(value));
+			}
+		}
+	}
+
+	virtual void writeValue(const DescribedBase* instance, XmlElement* element) const
+	{
+		element->setValue(static_cast<int>(getValue(instance)));
+	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1009a140
+	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x1009a280
+	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::readValue
+	// TEMPLATE: WEBSERVICE 0x1009e780
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x1009e820
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setStringValue
+	// TEMPLATE: WEBSERVICE 0x1009e8c0
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::readValue
+	// TEMPLATE: WEBSERVICE 0x1009efb0
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x1009f0f0
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::readValue
+	// TEMPLATE: WEBSERVICE 0x100b46b0
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction><enum RBX::Debugable::AssertAction (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::Debugable::AssertAction)>
+	// TEMPLATE: WEBSERVICE 0x100b48e0
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting><enum RBX::DebugSettings::ErrorReporting (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::DebugSettings::ErrorReporting)>
+	// TEMPLATE: WEBSERVICE 0x100b49e0
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x100b4b20
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::readValue
+	// TEMPLATE: WEBSERVICE 0x100b4cb0
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x100b4df0
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::readValue
+	// TEMPLATE: WEBSERVICE 0x100e6230
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x100e6290
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x100e6370
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::readValue
+	// TEMPLATE: WEBSERVICE 0x100e6500
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x100e6640
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::readValue
+	// TEMPLATE: WEBSERVICE 0x100e67d0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x100e6910
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::readValue
+	// TEMPLATE: WEBSERVICE 0x10102130
+	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::writeValue
+	// TEMPLATE: WEBSERVICE 0x10121b30
+	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x10121be0
+	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::readValue
+	// TEMPLATE: WEBSERVICE 0x1012d340
+	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType><enum RBX::SpecialShape::MeshType const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(enum RBX::SpecialShape::MeshType)>
+	// TEMPLATE: WEBSERVICE 0x1012d620
+	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x1012d760
+	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::readValue
+	// clang-format on
+};
+
+// SIZE 0x20
+template <class Class, class T>
 class RefPropDescriptor : public RefPropertyDescriptor, public IIDREF
 {
 public:
@@ -399,6 +584,10 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100ec830
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::getRefValue
+	// TEMPLATE: WEBSERVICE 0x100b4750
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::equalValues
+	// TEMPLATE: WEBSERVICE 0x10102200
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::isReadOnly
 	// clang-format on
 
 private:

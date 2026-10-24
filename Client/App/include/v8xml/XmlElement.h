@@ -120,6 +120,8 @@ public:
 		DOUBLE = 9,
 	};
 
+	XmlNameValuePair(const RBX::Name& tag, const RBX::Name* value) : tag(tag), valueType(NAME), nameValue(value) {}
+	XmlNameValuePair(const RBX::Name& tag, const int value) : tag(tag), valueType(INT), intValue(value) {}
 	XmlNameValuePair(const RBX::Name& tag, const char* text);
 
 	~XmlNameValuePair() { clearValue(); }
@@ -148,6 +150,22 @@ public:
 		valueType = HANDLE;
 	}
 
+	void setValue(const RBX::Name* value)
+	{
+		clearValue();
+
+		nameValue = value;
+		valueType = NAME;
+	}
+
+	void setValue(int value)
+	{
+		clearValue();
+
+		intValue = value;
+		valueType = INT;
+	}
+
 private:
 	void clearValue() const;
 
@@ -159,26 +177,8 @@ public:
 	template <class T>
 	bool isValueType() const;
 
-	template <class T>
-	XmlNameValuePair(const RBX::Name& tag, T value) : tag(tag)
-	{
-		setValue(value);
-	}
-
 protected:
 	XmlNameValuePair(const RBX::Name& tag) : tag(tag), valueType(NONE) {}
-
-	void setValue(const RBX::Name* value)
-	{
-		valueType = NAME;
-		nameValue = value;
-	}
-
-	void setValue(int value)
-	{
-		valueType = INT;
-		intValue = value;
-	}
 
 	const RBX::Name& tag;        // 0x00
 	mutable ValueType valueType; // 0x04

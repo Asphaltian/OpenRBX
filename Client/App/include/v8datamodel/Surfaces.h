@@ -56,6 +56,17 @@ public:
 DECOMP_SIZE_ASSERT(Surfaces, 0x30)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x101022f0
+// RBX::SurfaceEnumPropDescriptor<2,enum RBX::SurfaceType>::readValue
+// TEMPLATE: WEBSERVICE 0x10102500
+// RBX::SurfaceEnumPropDescriptor<2,enum RBX::Controller::InputType>::readValue
+// TEMPLATE: WEBSERVICE 0x10102690
+// RBX::SurfaceEnumPropDescriptor<2,enum RBX::SurfaceType>::setIndexValue
+// TEMPLATE: WEBSERVICE 0x10102780
+// RBX::SurfaceEnumPropDescriptor<2,enum RBX::Controller::InputType>::setIndexValue
+// clang-format on
+
+// clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021dfc0
 // RBX::`dynamic initializer for 'desc_TopParamA''
 // SYNTHETIC: WEBSERVICE 0x1021dff0

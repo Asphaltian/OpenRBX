@@ -66,6 +66,8 @@ public:
 template <int normalId, class T>
 class SurfaceEnumPropDescriptor : public Reflection::EnumPropertyDescriptor
 {
+	std::auto_ptr<typename Reflection::TypedPropertyDescriptor<T>::GetSet> getset; // 0x1c
+
 public:
 	template <class Getter, class Setter>
 	SurfaceEnumPropDescriptor(
@@ -97,18 +99,68 @@ public:
 		return getValue(a) == getValue(b);
 	}
 
+	virtual int getEnumValue(const Reflection::DescribedBase* instance) const { return getValue(instance); }
+
+	virtual bool setEnumValue(Reflection::DescribedBase* instance, int intValue) const
+	{
+		if (Reflection::EnumDesc<T>::singleton().isValue(intValue)) {
+			setValue(instance, static_cast<T>(intValue));
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	virtual unsigned int getIndexValue(const Reflection::DescribedBase* instance) const
+	{
+		return Reflection::EnumDesc<T>::singleton().convertToIndex(getValue(instance));
+	}
+
+	virtual bool setIndexValue(Reflection::DescribedBase* instance, unsigned int index) const
+	{
+		T value;
+
+		if (Reflection::EnumDesc<T>::singleton().convertToValue(index, value)) {
+			setValue(instance, value);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	virtual bool hasStringValue() const { return true; }
 
 	virtual std::string getStringValue(const Reflection::DescribedBase* instance) const
 	{
-		STUB(0x10102460);
-		return std::string();
+		return Reflection::EnumDesc<T>::singleton().convertToString(getValue(instance));
 	}
 
-	virtual bool setStringValue(Reflection::DescribedBase* instance, const std::string& value) const
+	virtual bool setStringValue(Reflection::DescribedBase* instance, const std::string& text) const
 	{
-		STUB(0x10102610);
-		return false;
+		T value;
+
+		if (Reflection::EnumDesc<T>::singleton().convertToValue(text, value)) {
+			setValue(instance, value);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	virtual bool setStringValue(Reflection::DescribedBase* instance, const Name& name) const // vtable+0x34
+	{
+		T value;
+
+		if (Reflection::EnumDesc<T>::singleton().convertToValue(name, value)) {
+			setValue(instance, value);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	virtual void readValue(
@@ -117,13 +169,32 @@ public:
 		IReferenceBinder& binder
 	) const
 	{
-		STUB(0x101022f0);
+		if (!element->isXsiNil()) {
+			if (element->isValueType<std::string>()) {
+				std::string sValue;
+
+				if (element->getValue(sValue)) {
+					T e;
+
+					if (Reflection::EnumDesc<T>::singleton().convertToValue(sValue, e)) {
+						setValue(instance, e);
+						return;
+					}
+				}
+			}
+
+			int value;
+
+			if (element->getValue(value)) {
+				setValue(instance, static_cast<T>(value));
+			}
+		}
 	}
 
-	virtual void writeValue(const Reflection::DescribedBase* instance, XmlElement* element) const { STUB(0x10102130); }
-
-private:
-	std::auto_ptr<typename Reflection::TypedPropertyDescriptor<T>::GetSet> getset; // 0x1c
+	virtual void writeValue(const Reflection::DescribedBase* instance, XmlElement* element) const
+	{
+		element->setValue(static_cast<int>(getValue(instance)));
+	}
 };
 
 static SurfaceEnumPropDescriptor<NORM_Y, SurfaceType> desc_TopType(

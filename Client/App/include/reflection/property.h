@@ -169,6 +169,11 @@ class __declspec(novtable) EnumPropertyDescriptor : public PropertyDescriptor
 public:
 	const EnumDescriptor& enumDescriptor; // 0x18
 
+	virtual unsigned int getIndexValue(const DescribedBase* instance) const = 0;       // vtable+0x24
+	virtual bool setIndexValue(DescribedBase* instance, unsigned int index) const = 0; // vtable+0x28
+	virtual int getEnumValue(const DescribedBase* instance) const = 0;                 // vtable+0x2c
+	virtual bool setEnumValue(DescribedBase* instance, int intValue) const = 0;        // vtable+0x30
+
 protected:
 	EnumPropertyDescriptor(
 		ClassDescriptor& classDescriptor,
@@ -321,8 +326,6 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100b37a0
 	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::GetSetImpl<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>::getValue
-	// TEMPLATE: WEBSERVICE 0x100993c0
-	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::GetSetImpl<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>::getValue
 	// TEMPLATE: WEBSERVICE 0x1005a6b0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>::getValue
 	// STUB: WEBSERVICE 0x100cd400
@@ -381,12 +384,6 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame><G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100e2920
 	// RBX::Reflection::PropDescriptor<RBX::Explosion,float>::PropDescriptor<RBX::Explosion,float><float (__thiscall RBX::Explosion::*)(void)const ,void (__thiscall RBX::Explosion::*)(float)>
-	// STUB: WEBSERVICE 0x1012d340
-	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType><enum RBX::SpecialShape::MeshType const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(enum RBX::SpecialShape::MeshType)>
-	// STUB: WEBSERVICE 0x100b46b0
-	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction><enum RBX::Debugable::AssertAction (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::Debugable::AssertAction)>
-	// STUB: WEBSERVICE 0x100b48e0
-	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting><enum RBX::DebugSettings::ErrorReporting (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::DebugSettings::ErrorReporting)>
 	// TEMPLATE: WEBSERVICE 0x100b4610
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,bool>::PropDescriptor<RBX::DebugSettings,bool><bool (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(bool)>
 	// FUNCTION: WEBSERVICE 0x100ffd30
@@ -477,85 +474,6 @@ public:
 	{
 		this->getset.reset(new BoundPropGetSet<Class>(this, member, NULL));
 	}
-};
-
-// SIZE 0x20
-template <class Class, class T>
-class EnumPropDescriptor : public EnumPropertyDescriptor
-{
-public:
-	// SIZE 0x04
-	class __declspec(novtable) GetSet
-	{
-	public:
-		virtual T getValue(const DescribedBase* instance) const = 0;              // vtable+0x00
-		virtual void setValue(DescribedBase* instance, const T& value) const = 0; // vtable+0x04
-	};
-
-	template <class Getter, class Setter>
-	class GetSetImpl : public GetSet
-	{
-	public:
-		GetSetImpl(Getter getter, Setter setter) : getter(getter), setter(setter) {}
-
-		virtual T getValue(const DescribedBase* instance) const
-		{
-			return (static_cast<const Class*>(instance)->*getter)();
-		}
-
-		virtual void setValue(DescribedBase* instance, const T& value) const
-		{
-			(static_cast<Class*>(instance)->*setter)(value);
-		}
-
-	private:
-		Getter getter; // 0x04
-		Setter setter; // 0x10
-	};
-
-	template <class Getter, class Setter>
-	EnumPropDescriptor(
-		const char* name,
-		const char* category,
-		Getter getter,
-		Setter setter,
-		typename PropertyDescriptor::Functionality functionality = PropertyDescriptor::STANDARD
-	)
-		: EnumPropertyDescriptor(Class::classDescriptor(), EnumDesc<T>::singleton(), name, category, functionality),
-		  getset(new GetSetImpl<Getter, Setter>(getter, setter))
-	{
-	}
-
-	virtual bool isReadOnly() const { return false; }
-
-	virtual bool equalValues(const DescribedBase* a, const DescribedBase* b) const
-	{
-		return getset->getValue(a) == getset->getValue(b);
-	}
-
-	virtual bool hasStringValue() const { return true; }
-
-	virtual std::string getStringValue(const DescribedBase* instance) const
-	{
-		STUB(0x10094440);
-		return std::string();
-	}
-
-	virtual bool setStringValue(DescribedBase* instance, const std::string& value) const
-	{
-		STUB(0x10094450);
-		return false;
-	}
-
-private:
-	virtual void writeValue(const DescribedBase* instance, XmlElement* element) const { STUB(0x10094460); }
-
-	virtual void readValue(DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder) const
-	{
-		STUB(0x10094470);
-	}
-
-	std::auto_ptr<GetSet> getset; // 0x1c
 };
 
 // SIZE 0x08
