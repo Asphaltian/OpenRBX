@@ -148,6 +148,10 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
 	// TEMPLATE: WEBSERVICE 0x100ad050
 	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
+	// TEMPLATE: WEBSERVICE 0x100b2810
+	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item>
+	// TEMPLATE: WEBSERVICE 0x100b2ba0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedMemItem,unsigned int const *>
 	// TEMPLATE: WEBSERVICE 0x10129ea0
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpecialShape>
 	// clang-format on

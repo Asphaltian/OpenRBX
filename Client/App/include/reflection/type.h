@@ -65,6 +65,21 @@ class Value
 public:
 	Value();
 
+	template <class T>
+	Value& operator=(const T& rhs)
+	{
+		_type = &Type::singleton<T>();
+		value = rhs;
+		return *this;
+	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1000b060
+	// RBX::Reflection::Value::operator=<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: WEBSERVICE 0x10045eb0
+	// RBX::Reflection::Value::operator=<double>
+	// clang-format on
+
 	bool isVoid() const;
 	const Type& type() const;
 

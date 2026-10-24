@@ -11,6 +11,7 @@
 
 #include <boost/cast.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/type_traits/function_traits.hpp>
 
 namespace RBX {
 namespace Reflection {
@@ -651,6 +652,70 @@ public:
 
 private:
 	std::auto_ptr<typename TypedPropertyDescriptor<T*>::GetSet> getset; // 0x1c
+};
+
+// SIZE 0x24
+template <class Class>
+class FuncDesc : public FunctionDescriptor
+{
+protected:
+	FuncDesc(const char* name, Security security) : FunctionDescriptor(Class::classDescriptor(), name, security) {}
+};
+
+template <class Class, class Signature, int arity>
+class BoundFuncDesc;
+
+// SIZE 0x30
+template <class Class, class Signature>
+class BoundFuncDesc<Class, Signature, 0> : public FuncDesc<Class>
+{
+public:
+	typedef typename boost::function_traits<Signature>::result_type result_type;
+	typedef result_type (Class::*Function)();
+
+private:
+	Function function; // 0x28
+
+	template <class R>
+	void call(Class* o, Value& returnValue) const
+	{
+		returnValue = (o->*function)();
+	}
+
+	template <>
+	void call<void>(Class* o, Value& returnValue) const
+	{
+		(o->*function)();
+	}
+
+	void declareSignature() { this->signature.resultType = &Type::singleton<result_type>(); }
+
+public:
+	BoundFuncDesc(Function function, const char* name, typename FunctionDescriptor::Security security)
+		: FuncDesc<Class>(name, security), function(function)
+	{
+		declareSignature();
+	}
+
+	virtual void execute(DescribedBase* instance, typename FunctionDescriptor::Arguments& arguments) const
+	{
+		call<result_type>(boost::polymorphic_cast<Class*>(instance), arguments.returnValue);
+	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10045f00
+	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::call<double>
+	// TEMPLATE: WEBSERVICE 0x100b23b0
+	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x100b2420
+	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::call<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: WEBSERVICE 0x100b24b0
+	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x100b2510
+	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x100b2580
+	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::execute
+	// clang-format on
 };
 
 } // namespace Reflection

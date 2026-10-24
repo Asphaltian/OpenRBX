@@ -30,7 +30,7 @@ public:
 		Value returnValue; // 0x04
 	};
 
-	virtual void execute(DescribedBase*, const Arguments&) const = 0; // vtable+0x04
+	virtual void execute(DescribedBase* instance, Arguments& arguments) const = 0; // vtable+0x04
 
 	const SignatureDescriptor& getSignature() const;
 

@@ -133,6 +133,11 @@ public:
 
 DECOMP_SIZE_ASSERT(TypedMemItem, 0x140)
 
+// SYNTHETIC: WEBSERVICE 0x1021b7f0
+// RBX::Stats::`dynamic initializer for 'func_values''
+// SYNTHETIC: WEBSERVICE 0x1021b820
+// RBX::Stats::`dynamic initializer for 'func_value''
+
 } // namespace Stats
 } // namespace RBX
 
