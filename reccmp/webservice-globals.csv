@@ -5109,6 +5109,10 @@ address,type,symbol
 0x102e2f9c,global,?creator@?$FactoryProduct@V?$Value@H$1?sIntValue@RBX@@3PADA@RBX@@VInstance@2@$1?sIntValue@2@3PADA@RBX@@0VCreator@12@B
 0x102e2fa0,global,?creator@?$FactoryProduct@V?$Value@_N$1?sBoolValue@RBX@@3PADA@RBX@@VInstance@2@$1?sBoolValue@2@3PADA@RBX@@0VCreator@12@B
 0x102e2fa4,global,?creator@?$FactoryProduct@V?$Value@N$1?sDoubleValue@RBX@@3PADA@RBX@@VInstance@2@$1?sDoubleValue@2@3PADA@RBX@@0VCreator@12@B
+0x102e2fa8,global,?creator@?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@0VCreator@12@B
+0x102e2fac,global,?creator@?$FactoryProduct@V?$Value@VVector3@G3D@@$1?sVector3Value@RBX@@3PADA@RBX@@VInstance@2@$1?sVector3Value@2@3PADA@RBX@@0VCreator@12@B
+0x102e2fb0,global,?creator@?$FactoryProduct@V?$Value@VCoordinateFrame@G3D@@$1?sCFrameValue@RBX@@3PADA@RBX@@VInstance@2@$1?sCFrameValue@2@3PADA@RBX@@0VCreator@12@B
+0x102e2fb4,global,?creator@?$FactoryProduct@V?$Value@VColor3@G3D@@$1?sColor3Value@RBX@@3PADA@RBX@@VInstance@2@$1?sColor3Value@2@3PADA@RBX@@0VCreator@12@B
 0x102e2fb8,global,?creator@?$FactoryProduct@V?$Value@VBrickColor@RBX@@$1?sBrickColorValue@2@3PADA@RBX@@VInstance@2@$1?sBrickColorValue@2@3PADA@RBX@@0VCreator@12@B
 0x102e2fc0,global,?sVisit@RBX@@3PADA
 0x102e2fc8,global,??_R0?AV?$FactoryProduct@VVisit@RBX@@VInstance@2@$1?sVisit@2@3PADA@RBX@@@8
