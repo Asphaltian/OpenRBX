@@ -493,6 +493,10 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100d7fa0
 	// RBX::Reflection::PropDescriptor<RBX::Motor,float>::getset<float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x100de320
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::GameSettings>
+	// TEMPLATE: WEBSERVICE 0x100de3f0
+	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::GameSettings>
 	// STUB: WEBSERVICE 0x100dc050
 	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,int>::getset<int (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x100e2110
@@ -654,8 +658,6 @@ public:
 		// clang-format off
 		// TEMPLATE: WEBSERVICE 0x100de0f0
 		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::Sky>::getValue
-		// TEMPLATE: WEBSERVICE 0x100de110
-		// RBX::Reflection::BoundProp<int,1>::BoundPropGetSet<RBX::Sky>::getValue
 		// TEMPLATE: WEBSERVICE 0x100e0760
 		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::Sky>::getValue
 		// TEMPLATE: WEBSERVICE 0x100eb7a0
@@ -668,8 +670,6 @@ public:
 		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::Sky>::setValue
 		// TEMPLATE: WEBSERVICE 0x100ee410
 		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::setValue
-		// TEMPLATE: WEBSERVICE 0x100f7560
-		// RBX::Reflection::BoundProp<int,1>::BoundPropGetSet<RBX::Sky>::setValue
 		// TEMPLATE: WEBSERVICE 0x100f76e0
 		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::setValue
 		// TEMPLATE: WEBSERVICE 0x1019bb70

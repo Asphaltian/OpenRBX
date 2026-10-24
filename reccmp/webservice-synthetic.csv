@@ -171,6 +171,7 @@ address,type,symbol
 0x100dc680,stub,??$?0P8Accoutrement@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VAccoutrement@RBX@@H@Reflection@RBX@@QAE@PBD0P8Accoutrement@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100dcd00,stub,??0Accoutrement@RBX@@QAE@XZ
 0x100dd7e0,stub,??0Hat@RBX@@QAE@XZ
+0x100de110,synthetic,?getValue@?$BoundPropGetSet@VSky@RBX@@@?$BoundProp@H$00@Reflection@RBX@@UBEHPBVDescribedBase@34@@Z
 0x100de660,stub,??0GameSettings@RBX@@QAE@XZ
 0x100e1440,stub,??0ShirtGraphic@RBX@@QAE@XZ
 0x100e15c0,stub,??0Skin@RBX@@QAE@XZ
@@ -215,6 +216,7 @@ address,type,symbol
 0x100eded0,stub,??0Rocket@RBX@@QAE@XZ
 0x100ee8d0,synthetic,??$?0P8Message@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP801@AEXABV23@@Z@?$PropDescriptor@VMessage@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@QAE@PBD0P8Message@2@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP832@AEXABV45@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100eea50,stub,??0Message@RBX@@QAE@XZ
+0x100f7560,synthetic,?setValue@?$BoundPropGetSet@VSky@RBX@@@?$BoundProp@H$00@Reflection@RBX@@UBEXPAVDescribedBase@34@ABH@Z
 0x100f9060,synthetic,??_GVisit@RBX@@UAEPAXI@Z
 0x100f9a70,stub,??0Visit@RBX@@QAE@XZ
 0x100fae30,stub,??0DebrisService@RBX@@QAE@XZ
