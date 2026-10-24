@@ -463,6 +463,51 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1009a0e0
+	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x1009a120
+	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x1009e720
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x1009e760
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x1009ef50
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x1009ef90
+	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x100b4980
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x100b49c0
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x100b4c50
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x100b4c90
+	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x100e61d0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x100e6210
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x100e64a0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x100e64e0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x100e6770
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x100e67b0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x100e7260
+	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x100e72a0
+	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x1012d5c0
+	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x1012d600
+	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::getIndexValue
+	// clang-format on
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10099de0
+	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType><enum RBX::Controller::ControllerType (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(enum RBX::Controller::ControllerType)>
 	// TEMPLATE: WEBSERVICE 0x1009a140
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009a280
