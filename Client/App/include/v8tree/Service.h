@@ -67,8 +67,12 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::Notifier<RBX::ServiceProvider,RBX::ServiceRemoving>::raise
 // TEMPLATE: WEBSERVICE 0x1006a590
 // RBX::ServiceProvider::doGetClassIndex<RBX::ControllerService>
+// TEMPLATE: WEBSERVICE 0x1006a5f0
+// RBX::ServiceProvider::doGetClassIndex<RBX::StarterPackService>
 // TEMPLATE: WEBSERVICE 0x1006b170
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::ControllerService>
+// TEMPLATE: WEBSERVICE 0x1006b180
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::StarterPackService>
 // STUB: WEBSERVICE 0x1006e4c0
 // RBX::ServiceProvider::find<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006e760

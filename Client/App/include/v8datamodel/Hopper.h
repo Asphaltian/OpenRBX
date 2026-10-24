@@ -6,6 +6,7 @@
 #include "gui/Widget.h"
 #include "util/TextureId.h"
 #include "v8tree/Instance.h"
+#include "v8tree/Service.h"
 
 namespace RBX {
 
@@ -71,6 +72,17 @@ protected:
 };
 
 DECOMP_SIZE_ASSERT(Hopper, 0x130)
+
+// SIZE 0x130
+class StarterPackService : public DescribedCreatable<StarterPackService, Hopper, sStarterPackService>, public Service
+{
+public:
+	StarterPackService();
+
+	virtual void render2d(Adorn* adorn);
+};
+
+DECOMP_SIZE_ASSERT(StarterPackService, 0x130)
 
 } // namespace RBX
 

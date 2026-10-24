@@ -323,6 +323,8 @@ template <class T, class Base, const char* sName>
 // clang-format off
 	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
+	// TEMPLATE: WEBSERVICE 0x100c90f0
+	// RBX::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
 	// SYNTHETIC: WEBSERVICE 0x100ca200
 	// RBX::Instance::`scalar deleting destructor'
 	// SYNTHETIC: WEBSERVICE 0x100d8000

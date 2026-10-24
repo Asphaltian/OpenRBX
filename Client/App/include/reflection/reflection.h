@@ -53,6 +53,8 @@ public:
 	// RBX::Reflection::Described<RBX::Accoutrement,&RBX::sAccoutrement,RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10088d70
 	// RBX::Reflection::Described<RBX::Hat,&RBX::sHat,RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x10088de0
+	// RBX::Reflection::Described<RBX::StarterPackService,&RBX::sStarterPackService,RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10088f30
 	// RBX::Reflection::Described<RBX::ShirtGraphic,&RBX::sShirtGraphic,RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x10088fa0
@@ -257,6 +259,8 @@ public:
 	// `RBX::Reflection::Described<RBX::BodyColors,&RBX::sBodyColors,RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x102226e0
 	// `RBX::Reflection::Described<RBX::ShirtGraphic,&RBX::sShirtGraphic,RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10222720
+	// `RBX::Reflection::Described<RBX::StarterPackService,&RBX::sStarterPackService,RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10222730
 	// `RBX::Reflection::Described<RBX::Hat,&RBX::sHat,RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10222740

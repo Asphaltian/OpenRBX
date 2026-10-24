@@ -1,5 +1,7 @@
 #include "v8datamodel/RootInstance.h"
 
+#define NOMINMAX
+
 #include "network/Player.h"
 #include "network/Players.h"
 #include "tool/DragUtilities.h"
@@ -13,11 +15,13 @@
 #include "v8datamodel/SpawnLocation.h"
 #include "v8datamodel/Team.h"
 #include "v8datamodel/Teams.h"
+#include "v8datamodel/Tool.h"
 #include "v8world/World.h"
 
 #include <G3D/GCamera.h>
 #include <algorithm>
 #include <boost/bind.hpp>
+#include <windows.h>
 
 namespace RBX {
 
@@ -232,26 +236,55 @@ void RootInstance::insertCharacterView(
 	moveToCharacterInsertPoint(partArray);
 }
 
-// STUB: WEBSERVICE 0x100c1b50
+// FUNCTION: WEBSERVICE 0x100c1b50
 void RootInstance::insertIdeView(
 	const std::vector<boost::shared_ptr<Instance> >& instances,
 	std::vector<boost::weak_ptr<PartInstance> >& partArray,
 	PromptMode promptMode
 )
 {
-	STUB(0x100c1b50);
+	if (instances.size() == 1) {
+		Instance* instance = instances[0].get();
+
+		if (dynamic_cast<HopperBin*>(instance)) {
+			instance->setParent(ServiceProvider::create<StarterPackService>(this));
+			return;
+		}
+
+		if (dynamic_cast<Tool*>(instance) && promptMode == ALLOW_PROMPTS) {
+			if (MessageBox(
+					NULL,
+					"Put this tool into the starter pack (otherwise drop into the 3d view)?",
+					"Inserting Tool",
+					MB_YESNO
+				) == IDYES) {
+				instance->setParent(ServiceProvider::create<StarterPackService>(this));
+				return;
+			}
+		}
+	}
+
+	insertRaw(instances, this, partArray);
+
+	if (!partArray.empty()) {
+		moveToIdeInsertPoint(partArray);
+
+		Extents extents = DragUtilities::computeExtents(partArray);
+
+		getCamera()->lookAt(extents.center());
+	}
 }
 
-// STUB: WEBSERVICE 0x100c1c90
+// FUNCTION: WEBSERVICE 0x100c1c90
 void RootInstance::insert3dView(const std::vector<boost::shared_ptr<Instance> >& instances, PromptMode promptMode)
 {
 	std::vector<boost::weak_ptr<PartInstance> > partArray;
 
-	if (!Network::Players::findLocalCharacter(this)) {
-		insertIdeView(instances, partArray, promptMode);
+	if (Network::Players::findLocalCharacter(this)) {
+		insertCharacterView(instances, partArray);
 	}
 	else {
-		insertCharacterView(instances, partArray);
+		insertIdeView(instances, partArray, promptMode);
 	}
 
 	if (!partArray.empty()) {

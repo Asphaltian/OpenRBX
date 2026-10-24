@@ -78,6 +78,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Camera>
 	// TEMPLATE: WEBSERVICE 0x1006be50
 	// RBX::Creatable<RBX::Instance>::create<RBX::ControllerService>
+	// TEMPLATE: WEBSERVICE 0x1006bed0
+	// RBX::Creatable<RBX::Instance>::create<RBX::StarterPackService>
 	// TEMPLATE: WEBSERVICE 0x10076620
 	// RBX::Creatable<RBX::Instance>::create<RBX::Snap>
 	// TEMPLATE: WEBSERVICE 0x10076890
@@ -324,6 +326,8 @@ public:
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10069270
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1006dca0
+	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100777b0
 	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10069b80
@@ -460,6 +464,10 @@ public:
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100694e0
 	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100c7250
+	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::~FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
+	// TEMPLATE: WEBSERVICE 0x100c7910
+	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
 	// TEMPLATE: WEBSERVICE 0x100f0a90
 	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::~FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
 	// TEMPLATE: WEBSERVICE 0x100f0ae0

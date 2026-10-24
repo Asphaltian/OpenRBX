@@ -72,6 +72,7 @@ address,type,symbol
 0x10069cd0,stub,??0LocalScript@RBX@@QAE@XZ
 0x1006a7b0,synthetic,?getNumPrimitives@World@RBX@@QBEHXZ
 0x1006c0d0,synthetic,?getClassName@?$NonFactoryProduct@VRootInstance@RBX@@$1?sWorkspace@2@3PADA@RBX@@UBEABVName@2@XZ
+0x1006ead0,synthetic,??$create@VStarterPackService@RBX@@@ServiceProvider@RBX@@SAPAVStarterPackService@1@PBVInstance@1@@Z
 0x100788b0,stub,??1?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAE@XZ
 0x1007a4b0,synthetic,??_G?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAEPAXI@Z
 0x1007e620,synthetic,?equalValues@?$TypedPropertyDescriptor@H@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
@@ -158,8 +159,10 @@ address,type,symbol
 0x100c7830,stub,??_EGuiItem@RBX@@WJM@AEPAXI@Z
 0x100c78e0,stub,??_EGuiItem@RBX@@WGM@AEPAXI@Z
 0x100c78f0,stub,??_EGuiItem@RBX@@UAEPAXI@Z
+0x100c7b80,synthetic,??1?$DescribedCreatable@VStarterPackService@RBX@@VHopper@2@$1?sStarterPackService@2@3QBDB@RBX@@UAE@XZ
 0x100c8810,stub,??_EGuiItem@RBX@@WBE@AEPAXI@Z
 0x100c8820,stub,??_EGuiItem@RBX@@WCE@AEPAXI@Z
+0x100c9600,synthetic,??_G?$FactoryProduct@VStarterPackService@RBX@@VHopper@2@$1?sStarterPackService@2@3QBDB@RBX@@MAEPAXI@Z
 0x100c9de0,synthetic,??1?$DescribedNonCreatable@VItem@Stats@RBX@@VInstance@3@$1?sStatsItem@23@3PADA@RBX@@UAE@XZ
 0x100cb580,synthetic,??$?0P8Tool@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VTool@RBX@@H@Reflection@RBX@@QAE@PBD0P8Tool@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100cd0a0,synthetic,?getTeamColor@Flag@RBX@@QBE?AVBrickColor@2@XZ
