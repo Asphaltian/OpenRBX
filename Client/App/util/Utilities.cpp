@@ -1,6 +1,7 @@
 #include "util/Utilities.h"
 
 #include "decomp.h"
+#include "util/ContentProvider.h"
 
 #include <G3D/Color3.h>
 #include <G3D/Vector3.h>
@@ -219,6 +220,21 @@ bool StringConverter<G3D::Color3>::convertToValue(const std::string& text, G3D::
 		value.b = (float) atof(text.substr(start, text.size() - start).c_str());
 	}
 
+	return true;
+}
+
+// FUNCTION: WEBSERVICE 0x100ff530 FOLDED
+template <>
+std::string StringConverter<ContentId>::convertToString(const ContentId& value)
+{
+	return value.toString();
+}
+
+// FUNCTION: WEBSERVICE 0x100ff580 FOLDED
+template <>
+bool StringConverter<ContentId>::convertToValue(const std::string& text, ContentId& value)
+{
+	value = ContentId(text);
 	return true;
 }
 

@@ -142,6 +142,7 @@ public:
 
 	bool isValueEqual(const RBX::Name* value) const;
 
+	// FUNCTION: WEBSERVICE 0x1003e8b0
 	void setValue(std::string value)
 	{
 		clearValue();
@@ -150,6 +151,7 @@ public:
 		valueType = STRING;
 	}
 
+	// FUNCTION: WEBSERVICE 0x1003eed0
 	void setValue(RBX::ContentId contentId)
 	{
 		clearValue();

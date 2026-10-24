@@ -5,6 +5,7 @@
 #include "reflection/enumconverter.h"
 #include "reflection/member.h"
 #include "reflection/type.h"
+#include "util/TextureId.h"
 #include "v8datamodel/BrickColor.h"
 
 #include <G3D/Vector3.h>
@@ -285,6 +286,32 @@ void TypedPropertyDescriptor<BrickColor>::readValue(
 template <>
 void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
+template <>
+std::string TypedPropertyDescriptor<ContentId>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<ContentId>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<ContentId>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<ContentId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+std::string TypedPropertyDescriptor<TextureId>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<TextureId>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<TextureId>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<TextureId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
 // SIZE 0x1c
 class __declspec(novtable) EnumPropertyDescriptor : public PropertyDescriptor
 {
@@ -415,7 +442,7 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x1004b730
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1007dcd0
-	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getValue
+	// RBX::Reflection::TypedPropertyDescriptor<RBX::ContentId>::getValue
 	// TEMPLATE: WEBSERVICE 0x1009bb10
 	// RBX::Reflection::TypedPropertyDescriptor<bool>::isReadOnly
 	// TEMPLATE: WEBSERVICE 0x1009bb20

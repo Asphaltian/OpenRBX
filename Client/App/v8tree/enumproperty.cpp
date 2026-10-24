@@ -478,6 +478,36 @@ void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instan
 	element->setValue(getValue(instance).asInt());
 }
 
+// FUNCTION: WEBSERVICE 0x100416b0
+template <>
+void TypedPropertyDescriptor<ContentId>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const
+{
+	if (!element->isXsiNil()) {
+		ContentId value;
+		if (element->getValue(value)) {
+			setValue(instance, value);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10041750 FOLDED
+template <>
+void TypedPropertyDescriptor<ContentId>::writeValue(const DescribedBase* instance, XmlElement* element) const
+{
+	element->setValue(ContentId(getValue(instance)));
+}
+
+// FUNCTION: WEBSERVICE 0x100417d0 FOLDED
+template <>
+std::string TypedPropertyDescriptor<ContentId>::getStringValue(const DescribedBase* instance) const
+{
+	return StringConverter<ContentId>::convertToString(getValue(instance));
+}
+
 // FUNCTION: WEBSERVICE 0x100421f0
 template <>
 EnumDesc<NormalId>::EnumDesc() : EnumDescriptor("NormalId", typeid(NormalId))
@@ -488,6 +518,19 @@ EnumDesc<NormalId>::EnumDesc() : EnumDescriptor("NormalId", typeid(NormalId))
 	addPair(NORM_Z_NEG, "Front");
 	addPair(NORM_X, "Right");
 	addPair(NORM_X_NEG, "Left");
+}
+
+// FUNCTION: WEBSERVICE 0x100ff960 FOLDED
+template <>
+bool TypedPropertyDescriptor<ContentId>::setStringValue(DescribedBase* instance, const std::string& text) const
+{
+	ContentId value;
+	if (StringConverter<ContentId>::convertToValue(text, value)) {
+		setValue(instance, value);
+		return true;
+	}
+
+	return false;
 }
 
 } // namespace Reflection

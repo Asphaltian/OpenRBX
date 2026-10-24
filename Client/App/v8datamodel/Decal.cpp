@@ -1,6 +1,8 @@
 #include "v8datamodel/Decal.h"
 
 #include "reflection/property.h"
+#include "util/Utilities.h"
+#include "v8xml/XmlElement.h"
 
 namespace RBX {
 
@@ -44,6 +46,70 @@ const PropDescriptor<Texture, float> Texture::prop_StudsPerTileV(
 	&RBX::Texture::getStudsPerTileV,
 	&RBX::Texture::setStudsPerTileV
 );
+
+// FUNCTION: WEBSERVICE 0x100ff530 FOLDED
+template <>
+std::string StringConverter<TextureId>::convertToString(const TextureId& value)
+{
+	return value.toString();
+}
+
+// FUNCTION: WEBSERVICE 0x100ff580 FOLDED
+template <>
+bool StringConverter<TextureId>::convertToValue(const std::string& text, TextureId& value)
+{
+	value = TextureId(text);
+	return true;
+}
+
+// FUNCTION: WEBSERVICE 0x10041750 FOLDED
+template <>
+void Reflection::TypedPropertyDescriptor<TextureId>::writeValue(
+	const DescribedBase* instance,
+	XmlElement* element
+) const
+{
+	element->setValue(getValue(instance));
+}
+
+// FUNCTION: WEBSERVICE 0x100417d0 FOLDED
+template <>
+std::string Reflection::TypedPropertyDescriptor<TextureId>::getStringValue(const DescribedBase* instance) const
+{
+	return StringConverter<TextureId>::convertToString(getValue(instance));
+}
+
+// FUNCTION: WEBSERVICE 0x100ff890
+template <>
+void Reflection::TypedPropertyDescriptor<TextureId>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const
+{
+	if (!element->isXsiNil()) {
+		ContentId value;
+		if (element->getValue(value)) {
+			setValue(instance, TextureId(value));
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100ff960 FOLDED
+template <>
+bool Reflection::TypedPropertyDescriptor<TextureId>::setStringValue(
+	DescribedBase* instance,
+	const std::string& text
+) const
+{
+	TextureId value;
+	if (StringConverter<TextureId>::convertToValue(text, value)) {
+		setValue(instance, value);
+		return true;
+	}
+
+	return false;
+}
 
 // FUNCTION: WEBSERVICE 0x100fff70
 Decal::Decal() : specular(0.0f), shiny(20.0f)
