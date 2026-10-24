@@ -26,11 +26,11 @@ public:
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
 	virtual bool askAddChild(const Instance* instance) const { return true; }
 
-	int getScore() const { return score; }
+	int getScore() const;
 
-	BrickColor getTeamColor() const { return color; }
+	BrickColor getTeamColor() const;
 
-	bool getAutoAssignable() const { return autoAssignable; }
+	bool getAutoAssignable() const;
 
 	void setScore(int score);
 	void setTeamColor(BrickColor color);

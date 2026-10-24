@@ -3,11 +3,71 @@
 #include "humanoid/Humanoid.h"
 #include "network/Player.h"
 #include "network/Players.h"
+#include "reflection/reflection.h"
 #include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/Team.h"
+
+#include <algorithm>
 
 namespace RBX {
 
 const char sTeams[] = "Teams";
+
+static Reflection::BoundFuncDesc<Teams, void(), 0> teams_rebalanceTeamsFunction(
+	&RBX::Teams::rebalanceTeams,
+	"RebalanceTeams",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<Teams, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(), 0>
+	func_teams(&RBX::Teams::getTeams, "GetTeams", Reflection::FunctionDescriptor::AnyCaller);
+
+// FUNCTION: WEBSERVICE 0x100da970
+Teams::~Teams()
+{
+}
+
+// FUNCTION: WEBSERVICE 0x100daac0
+Team* Teams::getTeamFromTeamColor(BrickColor c)
+{
+	for (unsigned int i = 0; i < numChildren(); i++) {
+		if (Team* team = dynamic_cast<Team*>(getChild(i))) {
+			if (team->getTeamColor() == c) {
+				return team;
+			}
+		}
+	}
+
+	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100dab50
+boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Teams::getTeams()
+{
+	return teams.read();
+}
+
+// FUNCTION: WEBSERVICE 0x100daba0
+bool Teams::teamExists(BrickColor color)
+{
+	return getTeamFromTeamColor(color) != NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100daca0
+int Teams::getNumPlayersInTeam(BrickColor color)
+{
+	int count = 0;
+	Network::Players* players = ServiceProvider::find<Network::Players>(this);
+
+	for (unsigned int i = 0; i < players->numChildren(); i++) {
+		if (Network::Player* player = dynamic_cast<Network::Player*>(players->getChild(i))) {
+			if (!player->getNeutral() && player->getTeamColor() == color) {
+				count++;
+			}
+		}
+	}
+
+	return count;
+}
 
 // FUNCTION: WEBSERVICE 0x100dad30
 G3D::Color3 Teams::getTeamColorForHumanoid(Humanoid* h)
@@ -27,6 +87,61 @@ G3D::Color3 Teams::getTeamColorForHumanoid(Humanoid* h)
 	}
 
 	return G3D::Color3::white();
+}
+
+// FUNCTION: WEBSERVICE 0x100dae00
+void Teams::assignNewPlayerToTeam(Network::Player* p)
+{
+	BrickColor best = BrickColor(BrickColor::lego_28);
+	int best_count = 10000;
+	bool found = false;
+
+	for (unsigned int i = 0; i < numChildren(); i++) {
+		if (Team* team = dynamic_cast<Team*>(getChild(i))) {
+			if (team->getAutoAssignable() == true) {
+				int count = getNumPlayersInTeam(team->getTeamColor());
+				if (count < best_count) {
+					best = team->getTeamColor();
+					best_count = count;
+					found = true;
+				}
+			}
+		}
+	}
+
+	if (found) {
+		p->setTeamColor(best);
+		p->setNeutral(false);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100daf00
+void Teams::onChildAdded(Instance* child)
+{
+	if (dynamic_cast<Team*>(child)) {
+		boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > >& t = teams.write();
+		t->push_back(shared_from(child));
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100dafc0
+void Teams::onChildRemoving(Instance* child)
+{
+	if (dynamic_cast<Team*>(child)) {
+		boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > >& t = teams.write();
+		t->erase(std::find(t->begin(), t->end(), shared_from(child)));
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100db320
+Teams::Teams() : teams(std::vector<boost::shared_ptr<Instance> >())
+{
+	setName(sTeams);
+}
+
+// FUNCTION: WEBSERVICE 0x1015b610 FOLDED
+void Teams::rebalanceTeams()
+{
 }
 
 } // namespace RBX

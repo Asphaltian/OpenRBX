@@ -33,6 +33,10 @@ template <class T>
 class CopyOnWrite : public boost::noncopyable
 {
 public:
+	CopyOnWrite() {}
+
+	CopyOnWrite(const T& value) : object(new T(value)) {}
+
 	operator typename boost::shared_ptr<T>::unspecified_bool_type() const { return object; }
 
 	const T& operator*() const { return *object; }

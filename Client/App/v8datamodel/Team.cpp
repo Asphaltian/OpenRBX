@@ -30,6 +30,24 @@ Reflection::BoundProp<bool, 1> Team::prop_AutoColorCharacters(
 	&RBX::Team::autoColorCharacters
 );
 
+// FUNCTION: WEBSERVICE 0x10068b70 FOLDED
+int Team::getScore() const
+{
+	return score;
+}
+
+// FUNCTION: WEBSERVICE 0x100bded0
+BrickColor Team::getTeamColor() const
+{
+	return color;
+}
+
+// FUNCTION: WEBSERVICE 0x100bdee0
+bool Team::getAutoAssignable() const
+{
+	return autoAssignable;
+}
+
 // FUNCTION: WEBSERVICE 0x100be010
 Team::~Team()
 {

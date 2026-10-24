@@ -735,6 +735,10 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100b2580
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x100db180
+	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x100db1f0
+	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::execute
 	// clang-format on
 };
 
