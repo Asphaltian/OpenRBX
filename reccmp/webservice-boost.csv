@@ -605,7 +605,7 @@ address,size,type,symbol,name
 0x100558f0,0x6,library,?type@?$holder@V?$function@$$A6AXMM@ZV?$allocator@X@std@@@boost@@@any@boost@@UBEABVtype_info@@XZ,
 0x10055900,0x60,library,?clone@?$holder@V?$function@$$A6AXMM@ZV?$allocator@X@std@@@boost@@@any@boost@@UBEPAVplaceholder@23@XZ,
 0x10055960,0x88,library,?manager@?$functor_manager@VGenericSlotAdapter@?$SignalDescImpl@$01$$A6AXMM@Z@Reflection@RBX@@V?$allocator@X@std@@@function@detail@boost@@CAXABTfunction_buffer@234@AAT5234@W4functor_manager_operation_type@234@U?$bool_@$00@mpl@4@@Z,
-0x100559f0,0x8e,library,??1?$slot@V?$function@$$A6AXH@ZV?$allocator@X@std@@@boost@@@boost@@QAE@XZ,
+0x100559f0,0x8e,library,??1?$slot@V?$function@$$A6AX_N@ZV?$allocator@X@std@@@boost@@@boost@@QAE@XZ,
 0x10055a80,0x59,library,??$?0V?$function@$$A6AXMM@ZV?$allocator@X@std@@@boost@@@any@boost@@QAE@ABV?$function@$$A6AXMM@ZV?$allocator@X@std@@@1@@Z,
 0x10055ae0,0x113,library,?connect@?$signal2@XMMU?$last_value@X@boost@@HU?$less@H@std@@V?$function@$$A6AXMM@ZV?$allocator@X@std@@@2@@boost@@QAE?AVconnection@signals@2@ABV?$slot@V?$function@$$A6AXMM@ZV?$allocator@X@std@@@boost@@@2@W4connect_position@42@@Z,
 0x10055c00,0x32,library,?manage@?$functor_manager@VGenericSlotAdapter@?$SignalDescImpl@$01$$A6AXMM@Z@Reflection@RBX@@V?$allocator@X@std@@@function@detail@boost@@SAXABTfunction_buffer@234@AAT5234@W4functor_manager_operation_type@234@@Z,
@@ -1524,3 +1524,4 @@ address,size,type,symbol,name
 0x101e9710,,library,?empty@signal_base_impl@detail@signals@boost@@QBE_NXZ,
 0x100f5b20,291,library,,"boost::signal1<void,RBX::Reflection::PropertyDescriptor const *,boost::last_value<void>,int,std::less<int>,boost::function<void __cdecl(RBX::Reflection::PropertyDescriptor const *),std::allocator<void> > >::operator()"
 0x101ea6a0,,library,??1scoped_connection@signals@boost@@QAE@XZ,
+0x101ea740,,library,??4scoped_connection@signals@boost@@QAEAAV012@ABVconnection@12@@Z,

@@ -108,6 +108,8 @@ public:
 	void setSit(bool value);
 	// FUNCTION: WEBSERVICE 0x100a07c0
 	bool getSit() const { return sit; }
+	// FUNCTION: WEBSERVICE 0x100fc260
+	bool canSit() const { return !sit && currentState->getName() == "Running"; }
 	World* getWorld() const { return world; }
 
 	const G3D::Vector3& getTargetPoint() const { return targetPoint; }

@@ -3570,6 +3570,7 @@ address,type,symbol
 0x102456b0,global,??_7Seat@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x102456b8,global,??_7Seat@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x102456c4,global,??_7Seat@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1024572c,global,??_8Seat@RBX@@7B?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@1@@
 0x10245748,global,?sSpawnerService@RBX@@3QBDB
 0x1024575c,global,??_7?$FactoryProduct@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@6BICameraSubject@1@@
 0x10245778,global,??_7?$FactoryProduct@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@6BILocation@1@@

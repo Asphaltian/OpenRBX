@@ -91,6 +91,18 @@ Workspace* Workspace::findWorkspace(const Instance* context)
 	return ServiceProvider::find<Workspace>(context);
 }
 
+// FUNCTION: WEBSERVICE 0x1006ebd0
+Workspace* Workspace::getWorkspaceIfInWorkspace(const Instance* context)
+{
+	Workspace* workspace = ServiceProvider::find<Workspace>(context);
+
+	if (workspace != NULL && (context == workspace || context->isDescendentOf(workspace))) {
+		return workspace;
+	}
+
+	return NULL;
+}
+
 // FUNCTION: WEBSERVICE 0x1006ec00
 World* Workspace::getWorldIfInWorkspace(const Instance* context)
 {

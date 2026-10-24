@@ -214,11 +214,11 @@ public:
 
 	boost::signals::connection connect(SignalSource* source, const typename TSignalInstance::slot_type& slot, int group)
 	{
-		if (source == NULL) {
-			return boost::signals::connection();
+		if (source != NULL) {
+			return sig(*source).connect(group, slot, boost::signals::at_back);
 		}
 
-		return sig(*source).connect(group, slot, boost::signals::at_back);
+		return boost::signals::connection();
 	}
 
 protected:
@@ -233,10 +233,12 @@ protected:
 	}
 
 	// clang-format off
-	// TEMPLATE: WEBSERVICE 0x100fc400
-	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::sig
+	// TEMPLATE: WEBSERVICE 0x100caf70
+	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::connect
 	// TEMPLATE: WEBSERVICE 0x100e28b0
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::TSignalInstance::TSignalInstance
+	// TEMPLATE: WEBSERVICE 0x100fca60
+	// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::connect
 	// clang-format on
 
 	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}

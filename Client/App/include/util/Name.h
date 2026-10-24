@@ -43,6 +43,17 @@ public:
 
 	const char* c_str() const { return name.c_str(); }
 
+	bool operator<(const Name& other) const;
+	bool operator>(const Name& other) const;
+
+	bool operator==(const Name& other) const;
+	bool operator==(const std::string& other) const;
+	bool operator==(const char* other) const { return name.compare(other) == 0; }
+
+	bool operator!=(const Name& other) const;
+	bool operator!=(const std::string& other) const;
+	bool operator!=(const char* other) const { return name.compare(other) != 0; }
+
 private:
 	// TEMPLATE: WEBSERVICE 0x1000b0b0
 	// RBX::Name::doDeclare<&sThumbnailGenerator>

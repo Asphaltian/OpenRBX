@@ -222,6 +222,7 @@ address,type,symbol
 0x100fb880,synthetic,?getClassName@?$FactoryProduct@VTimerService@RBX@@VInstance@2@$1?sTimerService@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100fbd30,stub,??0TimerService@RBX@@QAE@XZ
 0x100fbf20,synthetic,??_ETimerService@RBX@@UAEPAXI@Z
+0x100fc400,synthetic,?sig@?$TSignalDesc@$$A6AX_N@Z@Reflection@RBX@@IBEAAVTSignalInstance@123@AAVSignalSource@23@@Z
 0x100fd180,stub,??0Seat@RBX@@QAE@XZ
 0x100fd4d0,synthetic,??_ESeat@RBX@@UAEPAXI@Z
 0x100fd500,synthetic,?getTeamColor@SpawnLocation@RBX@@QBE?AVBrickColor@2@XZ

@@ -49,10 +49,11 @@ public:
 	static bool showWorldCoord;
 
 	static Workspace* findWorkspace(const Instance* context);
-	static World* getWorldIfInWorkspace(const Instance* context);
 	static Workspace* getMyWorkspaceFast(const Instance* context);
-	static World* getMyWorldFast(const Instance* context);
+	static World* getWorldIfInWorkspace(const Instance* context);
+	static Workspace* getWorkspaceIfInWorkspace(const Instance* context);
 	static bool contextInWorkspace(const Instance* context);
+	static World* getMyWorldFast(const Instance* context);
 
 private:
 	virtual IScriptOwner* scriptShouldRun(Script* script);
