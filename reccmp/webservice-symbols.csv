@@ -549,7 +549,6 @@ address,size,symbol,name
 0x100e3e30,0x274,?computeLocalCoordinateFrame@Feature@RBX@@QBE?AVCoordinateFrame@G3D@@XZ,
 0x100e49e0,0x5b,??$getset@P8VelocityMotor@RBX@@BEPAVHole@2@XZP812@AEXPAV32@@Z@?$PropDescriptor@VVelocityMotor@RBX@@PAVHole@2@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@PAVHole@RBX@@@Reflection@RBX@@@std@@P8VelocityMotor@2@BEPAVHole@2@XZP852@AEXPAV62@@Z@Z,
 0x100e8120,0x69,??$getset@P8FlagStand@RBX@@BE?AVBrickColor@2@XZP812@AEXV32@@Z@?$PropDescriptor@VFlagStand@RBX@@VBrickColor@2@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@RBX@@@std@@P8FlagStand@2@BE?AVBrickColor@2@XZP852@AEXV62@@Z@Z,
-0x100e9b90,0x16e,?getHitLocationFilterDescendants@GeometryService@RBX@@QAE?AVVector3@G3D@@PAVInstance@2@VRay@4@@Z,
 0x100e9f50,0x21,?getLastForce@BodyPosition@RBX@@QAE?AVVector3@G3D@@XZ,
 0x100e9f80,0x21,?getLastForce@BodyVelocity@RBX@@QAE?AVVector3@G3D@@XZ,
 0x100ea3e0,0x3e0,?turn@Rocket@RBX@@AAE?AVVector3@G3D@@PAVBody@2@ABV34@@Z,

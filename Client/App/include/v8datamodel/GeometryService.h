@@ -12,14 +12,22 @@
 namespace RBX {
 
 extern char sGeometryService[];
+
+class Workspace;
+
 // SIZE 0xfc
 class GeometryService : public DescribedCreatable<GeometryService, Instance, sGeometryService>, public Service
 {
+private:
+	Workspace* workspace; // 0xf8
+
 public:
+	GeometryService();
+
 	G3D::Vector3 getHitLocationFilterDescendants(Instance* ancestor, G3D::Ray ray);
 
-private:
-	undefined m_unk0x0f8[0xfc - 0x0f8]; // 0x0f8
+protected:
+	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
 };
 
 DECOMP_SIZE_ASSERT(GeometryService, 0xfc)

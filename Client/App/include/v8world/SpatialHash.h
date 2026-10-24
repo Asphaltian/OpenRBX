@@ -129,7 +129,7 @@ public:
 		const std::vector<const Primitive*>* ignore,
 		const HitTestFilter* filter,
 		Vector3& hitPoint,
-		bool& hitSurface
+		bool& hitSurface = ignoreBool
 	) const;
 
 	Primitive* getHitLegacy(
