@@ -531,9 +531,9 @@ bool PartInstance::reportTouches() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009bfa0
-const Part& PartInstance::getPart()
+const Part& PartInstance::getPart() const
 {
-	Part& part = PersistentPart.getValueRef();
+	Part& part = const_cast<Part&>(PersistentPart.getValueRef());
 
 	part.coordinateFrame = getPrimitive()->getCoordinateFrame();
 

@@ -77,11 +77,12 @@ private:
 
 	Part computePersistentPart() const;
 
-	const Part& getPart();
 	bool computeSurfacesNeedAdorn() const;
 	void safeMove();
 
 public:
+	const Part& getPart() const;
+
 	PartInstance();
 	virtual ~PartInstance();
 

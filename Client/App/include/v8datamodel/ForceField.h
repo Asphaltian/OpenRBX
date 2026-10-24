@@ -2,23 +2,38 @@
 #define V8DATAMODEL_FORCEFIELD_H
 
 #include "decomp.h"
-#include "util/Handle.h"
 #include "util/IRenderable.h"
 #include "v8tree/Instance.h"
 
 namespace RBX {
 
 extern char sForceField[];
-// SIZE 0x10c
+
 class PartInstance;
 
+// SIZE 0x10c
 class ForceField : public DescribedCreatable<ForceField, Instance, sForceField>, public IRenderable
 {
-public:
-	static bool partInForceField(PartInstance* part);
-
 private:
-	undefined m_unk0x108[0x10c - 0x108]; // 0x108
+	int cycle; // 0x108
+
+	virtual bool askSetParent(const Instance* instance) const;
+
+	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	virtual bool shouldRender3dAdorn() const { return true; }
+
+	virtual void render3dAdorn(Adorn* adorn);
+
+public:
+	ForceField();
+
+	// FUNCTION: WEBSERVICE 0x100e9950
+	virtual ~ForceField() {}
+
+	// SYNTHETIC: WEBSERVICE 0x100e99f0
+	// RBX::ForceField::`scalar deleting destructor'
+
+	static bool partInForceField(PartInstance* part);
 };
 
 DECOMP_SIZE_ASSERT(ForceField, 0x10c)

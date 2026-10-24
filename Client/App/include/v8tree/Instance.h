@@ -175,6 +175,23 @@ public:
 
 	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100e9570
+	// RBX::Instance::visitDescendents<boost::_bi::bind_t<void,void (__cdecl*)(boost::shared_ptr<RBX::Instance>,RBX::Adorn *,int),boost::_bi::list3<boost::arg<1>,boost::_bi::value<RBX::Adorn *>,boost::_bi::value<int> > > >
+	// clang-format on
+	template <class Func>
+	void visitDescendents(Func func) const
+	{
+		if (children) {
+			boost::shared_ptr<const std::vector<shared_ptr<Instance> > > c = children.read();
+			std::vector<shared_ptr<Instance> >::const_iterator end = c->end();
+			for (std::vector<shared_ptr<Instance> >::const_iterator iter = c->begin(); iter != end; ++iter) {
+				func(*iter);
+				(*iter)->visitDescendents(func);
+			}
+		}
+	}
+
 	// FUNCTION: WEBSERVICE 0x10048320
 	unsigned int numChildren() const { return children ? children->size() : 0; }
 

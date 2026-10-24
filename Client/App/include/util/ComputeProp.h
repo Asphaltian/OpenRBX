@@ -36,13 +36,13 @@ public:
 
 	operator T() const { return getValue(); }
 
-	T* getValuePointer() const
+	const T* getValuePointer() const
 	{
 		getValue();
 		return &val;
 	}
 
-	T& getValueRef() const
+	const T& getValueRef() const
 	{
 		getValue();
 		return val;
