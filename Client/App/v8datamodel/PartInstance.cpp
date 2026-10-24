@@ -148,6 +148,20 @@ static Reflection::EnumPropDescriptor<PartInstance, PartInstance::FormFactor> pr
 	Reflection::PropertyDescriptor::STREAMING
 );
 
+static Reflection::PropDescriptor<PartInstance, float> prop_Elasticity(
+	"Elasticity",
+	category_Part,
+	&RBX::PartInstance::getElasticity,
+	&RBX::PartInstance::setElasticity
+);
+
+static Reflection::PropDescriptor<PartInstance, float> prop_Friction(
+	"Friction",
+	category_Part,
+	&RBX::PartInstance::getFriction,
+	&RBX::PartInstance::setFriction
+);
+
 static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging(
 	"DraggingV1",
 	"Behavior",
@@ -288,6 +302,18 @@ void PartInstance::onSurfaceChanged(NormalId normalId)
 	IsControllable.setDirty();
 	SurfacesNeedAdorn.setDirty();
 	shouldRenderSetDirty();
+}
+
+// FUNCTION: WEBSERVICE 0x1009b020
+void PartInstance::setPhysics(const CoordinateFrame& cf, const Velocity& vel)
+{
+	primitive->getBody()->setVelocity(vel);
+
+	if (cf != primitive->getCoordinateFrame()) {
+		primitive->setCoordinateFrame(cf);
+		PersistentPart.setDirty();
+		onExtentsChanged();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1009b080
@@ -478,6 +504,22 @@ bool PartInstance::shouldRender3dAdorn() const
 		   showPartCoord || showAnchoredParts || showUnalignedParts || showSpanningTree;
 }
 
+// FUNCTION: WEBSERVICE 0x1009b820
+bool PartInstance::getLocked(Instance* instance)
+{
+	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
+		return part->getPartLocked();
+	}
+
+	for (unsigned int i = 0; i < instance->numChildren(); i++) {
+		if (getLocked(instance->getChild(i))) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 // STUB: WEBSERVICE 0x1009bf50
 bool PartInstance::reportTouches() const
 {
@@ -561,6 +603,17 @@ void PartInstance::safeMove()
 		temp.append(primitive.get());
 
 		Dragger::safeMoveNoDrop(temp, Vector3::zero(), *world->getContactManager());
+	}
+}
+
+// STUB: WEBSERVICE 0x1009ce00
+void PartInstance::primitivesToParts(
+	const G3D::Array<Primitive*>& primitives,
+	G3D::Array<shared_ptr<PartInstance> >& parts
+)
+{
+	for (int i = 0; i < primitives.size(); i++) {
+		parts.append(shared_from(fromPrimitive(primitives[i])));
 	}
 }
 
@@ -820,6 +873,29 @@ void PartInstance::setFormFactorXml(FormFactor value)
 		raisePropertyChanged(prop_formFactor);
 	}
 }
+
+// FUNCTION: WEBSERVICE 0x1009fda0
+void PartInstance::setFriction(float friction)
+{
+	friction = G3D::clamp(friction, 0.0f, 2.0f);
+
+	if (friction != primitive->getFriction()) {
+		primitive->setFriction(friction);
+		raisePropertyChanged(prop_Friction);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1009fe00
+void PartInstance::setElasticity(float elasticity)
+{
+	elasticity = G3D::clamp(elasticity, 0.0f, 1.0f);
+
+	if (elasticity != primitive->getElasticity()) {
+		primitive->setElasticity(elasticity);
+		raisePropertyChanged(prop_Elasticity);
+	}
+}
+
 // STUB: WEBSERVICE 0x1009fe60
 void PartInstance::setColor3(const G3D::Color3& value)
 {

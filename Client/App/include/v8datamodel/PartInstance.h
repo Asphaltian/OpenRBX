@@ -194,6 +194,15 @@ public:
 
 	static PartInstance* fromPrimitive(Primitive* primitive);
 	static const PartInstance* fromPrimitiveConst(const Primitive* primitive);
+	static void primitivesToParts(
+		const G3D::Array<Primitive*>& primitives,
+		G3D::Array<shared_ptr<PartInstance> >& parts
+	);
+	static bool getLocked(Instance* instance);
+
+	void setPhysics(const CoordinateFrame& cf, const Velocity& vel);
+	void setFriction(float friction);
+	void setElasticity(float elasticity);
 
 	void destroyJoints();
 	void join();
@@ -244,6 +253,10 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // `dynamic initializer for 'RBX::PartInstance::prop_RenderImportance''
 // STUB: WEBSERVICE 0x1021af30
 // RBX::`dynamic initializer for 'prop_formFactor''
+// STUB: WEBSERVICE 0x1021af90
+// RBX::`dynamic initializer for 'prop_Elasticity''
+// STUB: WEBSERVICE 0x1021aff0
+// RBX::`dynamic initializer for 'prop_Friction''
 // FUNCTION: WEBSERVICE 0x1021b070
 // RBX::`dynamic initializer for 'prop_Dragging''
 // SYNTHETIC: WEBSERVICE 0x10223080
@@ -254,6 +267,10 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_RenderImportance''
 // SYNTHETIC: WEBSERVICE 0x10223160
 // RBX::`dynamic atexit destructor for 'prop_formFactor''
+// SYNTHETIC: WEBSERVICE 0x102231a0
+// RBX::`dynamic atexit destructor for 'prop_Elasticity''
+// SYNTHETIC: WEBSERVICE 0x102231c0
+// RBX::`dynamic atexit destructor for 'prop_Friction''
 // SYNTHETIC: WEBSERVICE 0x102231e0
 // RBX::`dynamic atexit destructor for 'prop_Dragging''
 // SYNTHETIC: WEBSERVICE 0x10223200
