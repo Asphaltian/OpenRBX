@@ -126,6 +126,7 @@ public:
 		Notifier<RunService, RunTransition>::raise(RunTransition(oldState, state));
 	}
 
+	// STUB: WEBSERVICE 0x100550f0
 	void run()
 	{
 		if (!runDisabled && (isEditState() || isPauseState())) {
@@ -133,6 +134,7 @@ public:
 		}
 	}
 
+	// STUB: WEBSERVICE 0x10055140
 	void pause()
 	{
 		if (isRunState()) {
@@ -140,6 +142,7 @@ public:
 		}
 	}
 
+	// STUB: WEBSERVICE 0x10055180
 	void reset() { setRunState(RS_NORMAL); }
 
 	void endRunThread(bool join);
@@ -187,6 +190,19 @@ DECOMP_SIZE_ASSERT(RunService, 0x1c0)
 // RBX::Notifier<RBX::RunService,RBX::Heartbeat>::raise
 // FUNCTION: WEBSERVICE 0x10054930
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::raise
+// clang-format on
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10218790
+// `dynamic initializer for 'RBX::RunService::event_Stepped''
+// SYNTHETIC: WEBSERVICE 0x102187e0
+// RBX::`dynamic initializer for 'runFunction''
+// SYNTHETIC: WEBSERVICE 0x10218810
+// RBX::`dynamic initializer for 'pauseFunction''
+// SYNTHETIC: WEBSERVICE 0x10218840
+// RBX::`dynamic initializer for 'resetFunction''
+// SYNTHETIC: WEBSERVICE 0x10221860
+// `dynamic atexit destructor for 'RBX::RunService::event_Stepped''
 // clang-format on
 
 } // namespace RBX

@@ -15,6 +15,22 @@ Reflection::SignalDesc<RunService, void(float, float)> RunService::event_Stepped
 
 static Reflection::SignalDesc<RunService, void(float)> event_Heartbeat("Heartbeat", "interval");
 
+static Reflection::BoundFuncDesc<RunService, void(), 0> runFunction(
+	&RunService::run,
+	"Run",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<RunService, void(), 0> pauseFunction(
+	&RunService::pause,
+	"Pause",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<RunService, void(), 0> resetFunction(
+	&RunService::reset,
+	"Reset",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
 // FUNCTION: WEBSERVICE 0x10054320
 void RunService::endRunThread(bool join)
 {

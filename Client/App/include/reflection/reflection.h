@@ -749,6 +749,10 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10045f00
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::call<double>
+	// TEMPLATE: WEBSERVICE 0x100567d0
+	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x10056840
+	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100b23b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100b2420

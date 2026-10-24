@@ -58,6 +58,10 @@ address,type,symbol
 0x1004b570,stub,??1?$BoundFuncDesc@VVisit@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$00@Reflection@RBX@@UAE@XZ
 0x1004c860,synthetic,??$call@V?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@?$BoundFuncDesc@VTeams@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZ$0A@@Reflection@RBX@@ABEXPAVTeams@2@AAVValue@12@@Z
 0x1004cba0,synthetic,??_G?$BoundFuncDesc@VVisit@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$00@Reflection@RBX@@UAEPAXI@Z
+0x10054570,synthetic,?raise@?$Notifier@VRunService@RBX@@VRunTransition@2@@RBX@@IBEXVRunTransition@2@PAV?$Listener@VRunService@RBX@@VRunTransition@2@@2@@Z
+0x10054630,synthetic,?raise@?$Notifier@VRunService@RBX@@W4RunState@2@@RBX@@IBEXW4RunState@2@PAV?$Listener@VRunService@RBX@@W4RunState@2@@2@@Z
+0x100549d0,synthetic,?raise@?$Notifier@VRunService@RBX@@VRunTransition@2@@RBX@@IBEXVRunTransition@2@@Z
+0x10054a70,synthetic,?raise@?$Notifier@VRunService@RBX@@W4RunState@2@@RBX@@IBEXW4RunState@2@@Z
 0x100550d0,synthetic,?getClassName@?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x10055720,synthetic,??_ERunService@RBX@@UAEPAXI@Z
 0x1005d5c0,synthetic,?getClassName@?$FactoryProduct@VSelection@RBX@@VInstance@2@$1?sSelection@2@3QBDB@RBX@@UBEABVName@2@XZ
