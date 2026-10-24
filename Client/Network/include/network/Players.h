@@ -43,6 +43,9 @@ public:
 
 	int numPlayers() const { return players->size(); }
 
+	static bool frontendProcessing(const Instance* context, bool testInDatamodel);
+	static bool backendProcessing(const Instance* context, bool testInDatamodel);
+
 	static RBX::ModelInstance* findLocalCharacter(const Instance* context);
 
 private:

@@ -1,5 +1,7 @@
 #include "network/Players.h"
 
+#include "network/Client.h"
+#include "network/Server.h"
 #include "reflection/property.h"
 #include "v8datamodel/ModelInstance.h"
 
@@ -14,6 +16,22 @@ static Reflection::PropDescriptor<Players, int> propPlayerMaxCount(
 	&RBX::Network::Players::getMaxPlayers,
 	&RBX::Network::Players::setMaxPlayers
 );
+
+// FUNCTION: WEBSERVICE 0x10190c60
+bool Players::frontendProcessing(const Instance* context, bool testInDatamodel)
+{
+	const ServiceProvider* serviceProvider = ServiceProvider::findServiceProvider(context);
+
+	return serviceProvider != NULL && !Server::serverIsPresent(context, testInDatamodel);
+}
+
+// FUNCTION: WEBSERVICE 0x10190c90
+bool Players::backendProcessing(const Instance* context, bool testInDatamodel)
+{
+	const ServiceProvider* serviceProvider = ServiceProvider::findServiceProvider(context);
+
+	return serviceProvider != NULL && !Client::clientIsPresent(context, testInDatamodel);
+}
 
 // STUB: WEBSERVICE 0x101913e0
 void Players::onEvent(const Player* source, CharacterAdded event)

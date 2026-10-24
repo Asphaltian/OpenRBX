@@ -24,6 +24,11 @@ static PropDescriptor<Team, bool> prop_AutoAssignable(
 	&RBX::Team::setAutoAssignable
 );
 
+// FUNCTION: WEBSERVICE 0x100be010
+Team::~Team()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x100be710
 void Team::setScore(int score)
 {

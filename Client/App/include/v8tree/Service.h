@@ -127,7 +127,21 @@ private:
 	std::map<const Name*, boost::shared_ptr<Instance> > serviceMap; // 0x150
 
 public:
-	static ServiceProvider* findServiceProvider(Instance* instance);
+	// FUNCTION: WEBSERVICE 0x1007c960
+	static const ServiceProvider* findServiceProvider(const Instance* context)
+	{
+		while (context != NULL) {
+			const ServiceProvider* serviceProvider = dynamic_cast<const ServiceProvider*>(context);
+
+			if (serviceProvider != NULL) {
+				return serviceProvider;
+			}
+
+			context = context->getParent();
+		}
+
+		return NULL;
+	}
 
 	template <class T>
 	T* find() const

@@ -13,6 +13,11 @@ extern const char sTeam[];
 class Team : public DescribedCreatable<Team, Instance, sTeam>
 {
 public:
+	virtual ~Team();
+
+	// SYNTHETIC: WEBSERVICE 0x100be200
+	// RBX::Team::`scalar deleting destructor'
+
 	int getScore() const { return score; }
 
 	BrickColor getTeamColor() const { return color; }

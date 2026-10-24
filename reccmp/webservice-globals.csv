@@ -6641,3 +6641,4 @@ address,type,symbol
 0x1024eb38,global,??_7Player@Network@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
 0x1024eb40,global,??_7Player@Network@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
 0x1024eb4c,global,??_7Player@Network@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@
+0x102f571c,global,flag___RBX::ServiceProvider::getClassIndex<RBX::RunService>
