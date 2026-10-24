@@ -21,6 +21,11 @@ public:
 	// FUNCTION: WEBSERVICE 0x10030be0
 	virtual ~TextureProxyBase() {}
 
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10030c30
+	// RBX::TextureProxyBase::`scalar deleting destructor'
+	// clang-format on
+
 	virtual G3D::Vector2 getSize() = 0; // vtable+0x04
 };
 

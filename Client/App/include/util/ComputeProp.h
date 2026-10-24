@@ -12,6 +12,11 @@ public:
 	ComputeProp(Class* object, GetFunc getFunc) : dirty(true), object(object), getFunc(getFunc) {}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1005a5b0
+	// RBX::ComputeProp<RBX::Extents,RBX::ModelInstance>::ComputeProp<RBX::Extents,RBX::ModelInstance>
+	// clang-format on
+
+	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10059d30
 	// RBX::ComputeProp<RBX::Extents,RBX::ModelInstance>::getValue
 	// FUNCTION: WEBSERVICE 0x1009b290

@@ -305,6 +305,14 @@ template <class T, class Base, const char* sName>
 // clang-format off
 	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
+	// SYNTHETIC: WEBSERVICE 0x100c19f0
+	// RBX::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>::`scalar deleting destructor'
+	// SYNTHETIC: WEBSERVICE 0x100ca200
+	// RBX::Instance::`scalar deleting destructor'
+	// SYNTHETIC: WEBSERVICE 0x100d8000
+	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::~DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>
+	// SYNTHETIC: WEBSERVICE 0x100d8dc0
+	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1005a880
 	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::~DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>
 	// TEMPLATE: WEBSERVICE 0x1005bed0

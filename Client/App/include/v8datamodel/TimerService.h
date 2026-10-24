@@ -28,6 +28,11 @@ private:
 	public:
 		double time;                 // 0x00
 		boost::function0<void> func; // 0x08
+
+		// clang-format off
+		// SYNTHETIC: WEBSERVICE 0x100fb7e0
+		// RBX::TimerService::Item::~Item
+		// clang-format on
 	};
 
 	std::list<Item> items; // 0x104

@@ -23,6 +23,11 @@ private:
 	PBBMesh(const G3D::Vector3& size, NormalId decalFace);
 
 	PBBMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes);
+
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x1018a8d0
+	// RBX::View::PBBMesh::`scalar deleting destructor'
+	// clang-format on
 };
 
 DECOMP_SIZE_ASSERT(PBBMesh, 0x50)

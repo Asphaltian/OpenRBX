@@ -184,6 +184,23 @@ public:
 		TSignalInstance(SignalSource* source, const SignalDescriptor& descriptor) : SignalInstance(source, descriptor)
 		{
 		}
+
+		// clang-format off
+		// TEMPLATE: WEBSERVICE 0x100455d0
+		// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x1004cc60
+		// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x1004ccd0
+		// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x10056210
+		// RBX::Reflection::TSignalDesc<void __cdecl(float,float)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x10056280
+		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x100789a0
+		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::TSignalInstance
+		// SYNTHETIC: WEBSERVICE 0x100f3120
+		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::~TSignalInstance
+		// clang-format on
 	};
 
 	bool empty(const SignalSource* source)
@@ -212,6 +229,11 @@ protected:
 	{
 		return *static_cast<TSignalInstance*>(getSignalInstance(source).get());
 	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100fc400
+	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::sig
+	// clang-format on
 
 	TSignalDesc(ClassDescriptor& classDescriptor, const char* name) : SignalDescriptor(classDescriptor, name) {}
 };
@@ -392,6 +414,12 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004c110
 	// RBX::Reflection::SignalDesc<RBX::Instance,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::SignalDesc<RBX::Instance,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>
+	// TEMPLATE: WEBSERVICE 0x100564f0
+	// RBX::Reflection::SignalDesc<RBX::RunService,void __cdecl(float,float)>::SignalDesc<RBX::RunService,void __cdecl(float,float)>
+	// TEMPLATE: WEBSERVICE 0x10056690
+	// RBX::Reflection::SignalDesc<RBX::RunService,void __cdecl(float)>::SignalDesc<RBX::RunService,void __cdecl(float)>
+	// SYNTHETIC: WEBSERVICE 0x100c9390
+	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(void)>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1009e9f0
 	// RBX::Reflection::SignalDesc<RBX::PartInstance,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::PartInstance,void __cdecl(boost::shared_ptr<RBX::Instance>)>
 	// TEMPLATE: WEBSERVICE 0x100a3c20

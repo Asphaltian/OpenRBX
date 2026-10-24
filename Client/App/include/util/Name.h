@@ -316,6 +316,8 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sArrowTool>
 	// TEMPLATE: WEBSERVICE 0x10072f00
 	// RBX::Name::callDoDeclare<&RBX::sServiceProvider>
+	// TEMPLATE: WEBSERVICE 0x10072f10
+	// RBX::Name::callDoDeclare<0>
 	// TEMPLATE: WEBSERVICE 0x10072f20
 	// RBX::Name::callDoDeclare<&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x10072f30
@@ -515,6 +517,23 @@ public:
 	static const Name& name() { return Name::declare<nameValue>(); }
 
 	virtual const Name& getName() const { return name(); }
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10106770
+	// RBX::Named<RBX::Balancing,&RBX::sRunning>::getName
+	// TEMPLATE: WEBSERVICE 0x10107ea0
+	// RBX::Named<RBX::Humanoid::State,&RBX::sFallingDown>::getName
+	// TEMPLATE: WEBSERVICE 0x10122ac0
+	// RBX::Named<RBX::Humanoid::State,&RBX::sSeated>::getName
+	// TEMPLATE: WEBSERVICE 0x10122ea0
+	// RBX::Named<RBX::Flying,&RBX::sJumping>::getName
+	// TEMPLATE: WEBSERVICE 0x101231e0
+	// RBX::Named<RBX::Balancing,&RBX::sGettingUp>::getName
+	// TEMPLATE: WEBSERVICE 0x1012a510
+	// RBX::Named<RBX::Balancing,&RBX::sFlying>::getName
+	// TEMPLATE: WEBSERVICE 0x1012a650
+	// RBX::Named<RBX::Flying,&RBX::sFreefall>::getName
+	// clang-format on
 };
 
 } // namespace RBX

@@ -274,6 +274,10 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // RBX::`dynamic initializer for 'prop_Dragging''
 // SYNTHETIC: WEBSERVICE 0x10223080
 // RBX::`dynamic atexit destructor for 'prop_RotVelocity''
+// SYNTHETIC: WEBSERVICE 0x102230a0
+// RBX::`dynamic atexit destructor for 'prop_shapeUi''
+// SYNTHETIC: WEBSERVICE 0x10223140
+// RBX::`dynamic atexit destructor for 'prop_SizeUi''
 // SYNTHETIC: WEBSERVICE 0x102230e0
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_CanCollide''
 // SYNTHETIC: WEBSERVICE 0x10223100

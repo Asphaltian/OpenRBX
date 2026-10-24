@@ -85,6 +85,11 @@ public:
 
 	virtual ~Part();
 
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10171280
+	// RBX::View::Part::`scalar deleting destructor'
+	// clang-format on
+
 	virtual G3D::ReferenceCountedPointer<Render::Material> getMaterial();
 
 protected:

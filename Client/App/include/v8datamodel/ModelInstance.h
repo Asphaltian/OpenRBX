@@ -61,6 +61,11 @@ public:
 	ModelInstance();
 	virtual ~ModelInstance();
 
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x1005b520
+	// RBX::ModelInstance::`scalar deleting destructor'
+	// clang-format on
+
 	PartInstance* getPrimaryPartInternal() const;
 	void setPrimaryPart(PartInstance* value);
 

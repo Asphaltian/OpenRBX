@@ -55,6 +55,11 @@ public:
 	virtual G3D::Vector2 getSize(); // vtable+0x04
 
 	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10031040
+	// RBX::Render::TextureProxy::~TextureProxy
+	// SYNTHETIC: WEBSERVICE 0x10174e60
+	// RBX::Render::TextureProxy::`scalar deleting destructor'
+
 	// SYNTHETIC: WEBSERVICE 0x102258f0
 	// `RBX::Render::TextureProxy::resolve'::`11'::`dynamic atexit destructor for 'cachedBumpImage''
 	// SYNTHETIC: WEBSERVICE 0x10225900

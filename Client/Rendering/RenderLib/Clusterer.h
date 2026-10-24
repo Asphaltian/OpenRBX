@@ -25,6 +25,11 @@ public:
 		Samples samples;         // 0x0c
 		unsigned int visitIndex; // 0x1c
 
+		// clang-format off
+		// SYNTHETIC: WEBSERVICE 0x101f33c0
+		// RBX::Render::Clusterer::Cluster::~Cluster
+		// clang-format on
+
 		void computeCentroid();
 
 		float getDistanceFromCentroid(Sample* sample) { return (sample->cframe().translation - centroid).length(); }

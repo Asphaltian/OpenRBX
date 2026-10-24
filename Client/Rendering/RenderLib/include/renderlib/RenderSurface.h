@@ -23,6 +23,11 @@ public:
 	const Mesh::Level* mesh;                     // 0x3c
 	G3D::ReferenceCountedPointer<Mesh> fullMesh; // 0x40
 
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x101efb70
+	// RBX::Render::RenderSurface::operator=
+	// clang-format on
+
 	RenderSurface() {}
 };
 

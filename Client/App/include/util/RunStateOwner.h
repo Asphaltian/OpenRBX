@@ -172,6 +172,11 @@ private:
 DECOMP_SIZE_ASSERT(RunService, 0x1c0)
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x10221850
+// RBX::`dynamic atexit destructor for 'event_Heartbeat''
+// clang-format on
+
+// clang-format off
 // FUNCTION: WEBSERVICE 0x100543f0
 // RBX::Notifier<RBX::RunService,RBX::Heartbeat>::raise
 // FUNCTION: WEBSERVICE 0x100544b0

@@ -36,6 +36,11 @@ public:
 		Level(G3D::RenderDevice::Primitive primitive);
 
 		virtual ~Level();
+
+		// clang-format off
+		// SYNTHETIC: WEBSERVICE 0x101675e0
+		// RBX::Render::Mesh::Level::`scalar deleting destructor'
+		// clang-format on
 	};
 
 	typedef G3D::ReferenceCountedPointer<Level> LevelRef;

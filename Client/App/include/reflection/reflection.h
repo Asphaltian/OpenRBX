@@ -388,6 +388,19 @@ public:
 		setValue(propertyOwner, static_cast<T*>(t.get()));
 	}
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1004ba50
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::setRefValue
+	// TEMPLATE: WEBSERVICE 0x1004ba90
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::assignIDREF
+	// TEMPLATE: WEBSERVICE 0x1005be40
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::readValue
+	// SYNTHETIC: WEBSERVICE 0x100e5fe0
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100ec830
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::getRefValue
+	// clang-format on
+
 private:
 	std::auto_ptr<typename TypedPropertyDescriptor<T*>::GetSet> getset; // 0x1c
 };

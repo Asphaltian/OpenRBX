@@ -42,6 +42,8 @@ public:
 
 	// SYNTHETIC: WEBSERVICE 0x10106680
 	// RBX::Balancing::~Balancing
+	// SYNTHETIC: WEBSERVICE 0x101228b0
+	// RBX::Balancing::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(Balancing, 0x28)

@@ -26,6 +26,9 @@ public:
 		const IIDREF* idref;                      // 0x00
 		Reflection::DescribedBase* propertyOwner; // 0x04
 		InstanceHandle value;                     // 0x08
+
+		// SYNTHETIC: WEBSERVICE 0x10096090
+		// RBX::MergeBinder::IDREFItem::~IDREFItem
 	};
 
 	// STUB: WEBSERVICE 0x10096f20
@@ -72,6 +75,9 @@ protected:
 
 		return false;
 	}
+
+	// SYNTHETIC: WEBSERVICE 0x10097700
+	// RBX::MergeBinder::~MergeBinder
 
 	// FUNCTION: WEBSERVICE 0x100979e0
 	virtual bool processIDREF(

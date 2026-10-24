@@ -57,6 +57,12 @@ public:
 			return 0;
 		}
 
+		// FUNCTION: WEBSERVICE 0x10106110
+		// RBX::Humanoid::State::~State
+
+		// SYNTHETIC: WEBSERVICE 0x10106120
+		// RBX::Humanoid::State::`scalar deleting destructor'
+
 	protected:
 		State(Humanoid* humanoid) : humanoid(humanoid) {}
 

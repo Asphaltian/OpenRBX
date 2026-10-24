@@ -70,6 +70,11 @@ public:
 
 	virtual ~SoundChannel();
 
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x1007e580
+	// RBX::Soundscape::SoundChannel::`scalar deleting destructor'
+	// clang-format on
+
 	bool isPaused() const;
 
 	bool isPlaying() const;

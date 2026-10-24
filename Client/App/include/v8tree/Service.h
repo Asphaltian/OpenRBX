@@ -55,6 +55,8 @@ private:
 DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x10042970
+// RBX::ServiceProvider::doGetClassIndex<RBX::RunService>
 // FUNCTION: WEBSERVICE 0x10058da0
 // RBX::Notifier<RBX::ServiceProvider,RBX::ServiceAdded>::raise
 // FUNCTION: WEBSERVICE 0x10058ec0
@@ -107,6 +109,8 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::create<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106a30
 // RBX::ServiceProvider::create<RBX::GeometryService>
+// SYNTHETIC: WEBSERVICE 0x10079940
+// RBX::ServiceProvider::~ServiceProvider
 // SYNTHETIC: WEBSERVICE 0x102218d0
 // `RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on

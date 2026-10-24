@@ -98,6 +98,11 @@ public:
 	AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& firstChunk);
 	virtual ~AggregateChunk();
 
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x101f9f20
+	// RBX::Render::AggregateChunk::`scalar deleting destructor'
+	// clang-format on
+
 	void makeMesh();
 
 	// clang-format off

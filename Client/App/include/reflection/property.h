@@ -273,6 +273,14 @@ public:
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::TypedPropertyDescriptor<RBX::TextureId>
 	// FUNCTION: WEBSERVICE 0x1009ba30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
+	// TEMPLATE: WEBSERVICE 0x10043a70
+	// RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>::equalValues
+	// SYNTHETIC: WEBSERVICE 0x1004b730
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x1007dcd0
+	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::getValue
+	// TEMPLATE: WEBSERVICE 0x1009bb10
+	// RBX::Reflection::TypedPropertyDescriptor<bool>::isReadOnly
 	// TEMPLATE: WEBSERVICE 0x1009bb20
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>
 	// FUNCTION: WEBSERVICE 0x1009bce0
@@ -301,8 +309,26 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::getset<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>
 	// FUNCTION: WEBSERVICE 0x100cd3c0
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::getValue
+	// TEMPLATE: WEBSERVICE 0x1018c890
+	// RBX::Reflection::PropDescriptor<RBX::Team,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(RBX::BrickColor)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100ff690
+	// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::GetSetImpl<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100fda10
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100b37a0
+	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::GetSetImpl<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100993c0
+	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::GetSetImpl<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>::getValue
+	// TEMPLATE: WEBSERVICE 0x1005a6b0
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>::getValue
 	// STUB: WEBSERVICE 0x100cd400
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::setValue
+	// TEMPLATE: WEBSERVICE 0x1018c8c0
+	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::GetSetImpl<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>::setValue
+	// TEMPLATE: WEBSERVICE 0x100e20d0
+	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::GetSetImpl<float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>::setValue
+	// TEMPLATE: WEBSERVICE 0x100b37d0
+	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::GetSetImpl<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100cd6e0
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100d7fa0
@@ -395,6 +421,19 @@ public:
 		virtual bool isReadOnly() const { return false; }
 
 		virtual T getValue(const DescribedBase* instance) const { return static_cast<const Class*>(instance)->*member; }
+
+		// clang-format off
+		// TEMPLATE: WEBSERVICE 0x100de0f0
+		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::Sky>::getValue
+		// TEMPLATE: WEBSERVICE 0x100de110
+		// RBX::Reflection::BoundProp<int,1>::BoundPropGetSet<RBX::Sky>::getValue
+		// TEMPLATE: WEBSERVICE 0x100e0760
+		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::Sky>::getValue
+		// TEMPLATE: WEBSERVICE 0x100eb7a0
+		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::getValue
+		// TEMPLATE: WEBSERVICE 0x100eb7c0
+		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::getValue
+		// clang-format on
 
 		virtual void setValue(DescribedBase* instance, const T& value) const
 		{

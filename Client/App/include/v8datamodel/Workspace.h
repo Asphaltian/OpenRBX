@@ -67,6 +67,11 @@ private:
 public:
 	virtual ~Workspace();
 
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x1006d4d0
+	// RBX::Workspace::`scalar deleting destructor'
+	// clang-format on
+
 	virtual const G3D::GCamera& getGCamera() const; // ICameraOwner vtable+0x08
 	virtual Camera* getCamera() const;              // ICameraOwner vtable+0x04
 
