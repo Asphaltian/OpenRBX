@@ -71,6 +71,13 @@ const Type& RefType::singleton()
 	return type;
 }
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1005a610
+// RBX::Reflection::RefType::singleton<RBX::PartInstance *>
+// SYNTHETIC: WEBSERVICE 0x10221900
+// `RBX::Reflection::RefType::singleton<RBX::PartInstance *>'::`2'::`dynamic atexit destructor for 'type''
+// clang-format on
+
 // SIZE 0x08
 class Value
 {

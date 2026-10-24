@@ -756,8 +756,6 @@ public:
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1012cef0
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::getClassName
-	// TEMPLATE: WEBSERVICE 0x1006c0d0
-	// RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>::getClassName
 	// TEMPLATE: WEBSERVICE 0x10074490
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1007e870

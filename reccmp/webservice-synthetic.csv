@@ -65,6 +65,7 @@ address,type,symbol
 0x100699a0,stub,??0Script@RBX@@QAE@XZ
 0x10069cd0,stub,??0LocalScript@RBX@@QAE@XZ
 0x1006a7b0,synthetic,?getNumPrimitives@World@RBX@@QBEHXZ
+0x1006c0d0,synthetic,?getClassName@?$NonFactoryProduct@VRootInstance@RBX@@$1?sWorkspace@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100788b0,stub,??1?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAE@XZ
 0x1007a4b0,synthetic,??_G?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAEPAXI@Z
 0x1007e620,synthetic,?equalValues@?$TypedPropertyDescriptor@H@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
@@ -155,6 +156,7 @@ address,type,symbol
 0x100d8010,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sJointInstance@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100d82e0,synthetic,?getClassName@?$NonFactoryProduct@VJointInstance@RBX@@$1?sAutoJoint@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100d87d0,synthetic,??_EAutoJoint@RBX@@UAEPAXI@Z
+0x100d88c0,synthetic,??$?0P8AutoJoint@RBX@@BEABVCoordinateFrame@G3D@@XZP801@AEXABV23@@Z@?$PropDescriptor@VAutoJoint@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@QAE@PBD0P8AutoJoint@2@BEABVCoordinateFrame@G3D@@XZP832@AEXABV45@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100d9b20,stub,??0Snap@RBX@@QAE@XZ
 0x100d9cb0,stub,??0Weld@RBX@@QAE@XZ
 0x100d9e00,stub,??0Glue@RBX@@QAE@XZ

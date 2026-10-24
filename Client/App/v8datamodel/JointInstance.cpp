@@ -1,8 +1,11 @@
 #include "v8datamodel/JointInstance.h"
 
 #include "reflection/property.h"
+#include "util/Math.h"
 #include "util/Name.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Workspace.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
@@ -24,13 +27,44 @@ const char sWeld[] = "Weld";
 
 const char sSnap[] = "Snap";
 
+static Reflection::RefPropDescriptor<AutoJoint, PartInstance> prop_Part0(
+	"Part0",
+	"Data",
+	&RBX::AutoJoint::getPart0,
+	&RBX::AutoJoint::setPart0
+);
+static Reflection::RefPropDescriptor<AutoJoint, PartInstance> prop_Part1(
+	"Part1",
+	"Data",
+	&RBX::AutoJoint::getPart1,
+	&RBX::AutoJoint::setPart1
+);
+
+static Reflection::PropDescriptor<AutoJoint, CoordinateFrame> prop_C1(
+	"C1",
+	"Data",
+	&RBX::AutoJoint::getC1,
+	&RBX::AutoJoint::setC1
+);
+static Reflection::PropDescriptor<AutoJoint, CoordinateFrame> prop_C0(
+	"C0",
+	"Data",
+	&RBX::AutoJoint::getC0,
+	&RBX::AutoJoint::setC0
+);
+
 static Reflection::PropDescriptor<Motor, float> prop_MaxVelocity(
 	"MaxVelocity",
 	"Data",
 	&RBX::Motor::getMaxVelocity,
 	&RBX::Motor::setMaxVelocity
 );
-
+static Reflection::PropDescriptor<Motor, float> prop_DesiredAngle(
+	"DesiredAngle",
+	"Data",
+	&RBX::Motor::getDesiredAngle,
+	&RBX::Motor::setDesiredAngle
+);
 static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle(
 	"CurrentAngle",
 	"Data",
@@ -38,14 +72,28 @@ static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle(
 	&RBX::Motor::setCurrentAngle
 );
 
-float Motor::getMaxVelocity() const
+// FUNCTION: WEBSERVICE 0x100d7a90
+const CoordinateFrame& AutoJoint::getC0() const
 {
-	return static_cast<MotorJoint*>(joint)->getMaxVelocity();
+	return joint->getJointCoord(0);
 }
 
-float Motor::getCurrentAngle() const
+// FUNCTION: WEBSERVICE 0x100d7aa0
+const CoordinateFrame& AutoJoint::getC1() const
 {
-	return static_cast<MotorJoint*>(joint)->getCurrentAngle();
+	return joint->getJointCoord(1);
+}
+
+// FUNCTION: WEBSERVICE 0x100d7d70 FOLDED
+float Motor::getMaxVelocity() const
+{
+	return getMotorJoint()->getMaxVelocity();
+}
+
+// FUNCTION: WEBSERVICE 0x100d7d80 FOLDED
+float Motor::getDesiredAngle() const
+{
+	return getMotorJoint()->getDesiredAngle();
 }
 
 // FUNCTION: WEBSERVICE 0x100d7df0
@@ -57,14 +105,14 @@ JointInstance::~JointInstance()
 }
 
 // STUB: WEBSERVICE 0x100d8030
-void AutoJoint::setPart(int index, PartInstance* value)
+void AutoJoint::setPart(int i, PartInstance* value)
 {
-	if (part[index].get() == value) {
+	if (part[i].get() == value) {
 		return;
 	}
 
-	part[index] = shared_from(value);
-	joint->setPrimitive(index, value ? value->getPrimitive() : NULL);
+	part[i] = shared_from(value);
+	joint->setPrimitive(i, value ? value->getPrimitive() : NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x100d8110
@@ -74,10 +122,46 @@ AutoJoint::~AutoJoint()
 	setPart(1, NULL);
 }
 
+// FUNCTION: WEBSERVICE 0x100d8a00
+bool AutoJoint::askSetParent(const Instance* instance) const
+{
+	return instance->getDescriptor() == Instance::classDescriptor() ||
+		   instance->getDescriptor() == PartInstance::classDescriptor();
+}
+
 // FUNCTION: WEBSERVICE 0x100d8ad0
 JointInstance::JointInstance(Joint* joint) : joint(joint)
 {
 	joint->setJointOwner(this);
+}
+
+World* AutoJoint::computeWorld()
+{
+	if (getParent() != NULL && getParent()->getDescriptor() == Instance::classDescriptor()) {
+		Workspace* workspace = ServiceProvider::find<Workspace>(this);
+		return workspace ? workspace->getWorld() : NULL;
+	}
+
+	return Workspace::getWorldIfInWorkspace(this);
+}
+
+// FUNCTION: WEBSERVICE 0x100d8b90
+void AutoJoint::onAncestorChanged(const AncestorChanged& event)
+{
+	Instance::onAncestorChanged(event);
+
+	World* oldWorld = joint->getWorld();
+	World* newWorld = computeWorld();
+
+	if (oldWorld != newWorld) {
+		if (oldWorld) {
+			oldWorld->removeJoint(joint);
+		}
+
+		if (newWorld) {
+			newWorld->insertJoint(joint);
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x100d8de0
@@ -89,26 +173,65 @@ AutoJoint::AutoJoint(Joint* _joint) : DescribedNonCreatable<AutoJoint, JointInst
 	part[1] = shared_from(p1);
 }
 
+// FUNCTION: WEBSERVICE 0x100d8f80
+void AutoJoint::setPart0(PartInstance* value)
+{
+	setPart(0, value);
+	raisePropertyChanged(prop_Part0);
+}
+
+// FUNCTION: WEBSERVICE 0x100d8fa0
+void AutoJoint::setPart1(PartInstance* value)
+{
+	setPart(1, value);
+	raisePropertyChanged(prop_Part1);
+}
+
+// FUNCTION: WEBSERVICE 0x100d8fc0
+void AutoJoint::setC0(const CoordinateFrame& value)
+{
+	joint->setJointCoord(0, value);
+	raisePropertyChanged(prop_C0);
+}
+
+// FUNCTION: WEBSERVICE 0x100d8ff0
+void AutoJoint::setC1(const CoordinateFrame& value)
+{
+	joint->setJointCoord(1, value);
+	raisePropertyChanged(prop_C1);
+}
+
 // FUNCTION: WEBSERVICE 0x100d9020
 void Motor::setMaxVelocity(float value)
 {
-	if (value != static_cast<MotorJoint*>(joint)->getMaxVelocity()) {
-		static_cast<MotorJoint*>(joint)->setMaxVelocity(value);
+	if (value != getMotorJoint()->getMaxVelocity()) {
+		getMotorJoint()->setMaxVelocity(value);
 		raisePropertyChanged(prop_MaxVelocity);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100d9060
+void Motor::setDesiredAngle(float value)
+{
+	if (!Math::fuzzyEq(value, getMotorJoint()->getDesiredAngle(), 0.034906585f)) {
+		getMotorJoint()->setDesiredAngle(value);
+		raisePropertyChanged(prop_DesiredAngle);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x100d90c0
 void Motor::setCurrentAngle(float value)
 {
-	if (value != static_cast<MotorJoint*>(joint)->getCurrentAngle()) {
-		static_cast<MotorJoint*>(joint)->setCurrentAngle(value);
+	if (value != getMotorJoint()->getCurrentAngle()) {
+		getMotorJoint()->setCurrentAngle(value);
 		raisePropertyChanged(prop_CurrentAngle);
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x100d9a10
 Snap::Snap(Joint* joint) : DescribedCreatable<Snap, AutoJoint, sSnap>(joint)
 {
+	setName("Snap");
 }
 
 // FUNCTION: WEBSERVICE 0x100d9b20
@@ -175,6 +298,24 @@ Motor::Motor(Joint* joint) : DescribedCreatable<Motor, AutoJoint, sMotor>(joint)
 Motor::Motor() : DescribedCreatable<Motor, AutoJoint, sMotor>(new MotorJoint())
 {
 	setName("Motor");
+}
+
+// FUNCTION: WEBSERVICE 0x100e3c30 FOLDED
+PartInstance* AutoJoint::getPart1() const
+{
+	return part[1].get();
+}
+
+// FUNCTION: WEBSERVICE 0x100e42d0 FOLDED
+float Motor::getCurrentAngle() const
+{
+	return getMotorJoint()->getCurrentAngle();
+}
+
+// FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
+PartInstance* AutoJoint::getPart0() const
+{
+	return part[0].get();
 }
 
 } // namespace RBX

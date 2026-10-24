@@ -64,19 +64,19 @@ static PropDescriptor<VelocityMotor, float> prop_CurrentAngle(
 	&RBX::VelocityMotor::setCurrentAngle
 );
 
-// FUNCTION: WEBSERVICE 0x100d7d70
+// FUNCTION: WEBSERVICE 0x100d7d70 FOLDED
 float VelocityMotor::getMaxVelocity() const
 {
 	return static_cast<MotorJoint*>(joint)->getMaxVelocity();
 }
 
-// FUNCTION: WEBSERVICE 0x100d7d80
+// FUNCTION: WEBSERVICE 0x100d7d80 FOLDED
 float VelocityMotor::getDesiredAngle() const
 {
 	return static_cast<MotorJoint*>(joint)->getDesiredAngle();
 }
 
-// FUNCTION: WEBSERVICE 0x100e42d0
+// FUNCTION: WEBSERVICE 0x100e42d0 FOLDED
 float VelocityMotor::getCurrentAngle() const
 {
 	return static_cast<MotorJoint*>(joint)->getCurrentAngle();

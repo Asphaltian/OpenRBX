@@ -658,14 +658,18 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::assignIDREF
 	// TEMPLATE: WEBSERVICE 0x1005be40
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::readValue
-	// SYNTHETIC: WEBSERVICE 0x100e5fe0
-	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x100ec830
-	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::getRefValue
 	// TEMPLATE: WEBSERVICE 0x100a3680
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::writeValue
 	// TEMPLATE: WEBSERVICE 0x100b4750
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::equalValues
+	// TEMPLATE: WEBSERVICE 0x100d8810
+	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(RBX::PartInstance *)>
+	// SYNTHETIC: WEBSERVICE 0x100e5fe0
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100ec830
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::getRefValue
+	// TEMPLATE: WEBSERVICE 0x100ec850
+	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x10102200
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::isReadOnly
 	// clang-format on

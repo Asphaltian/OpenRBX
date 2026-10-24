@@ -55,7 +55,7 @@ public:
 	LeftRight getLeftRight() const { return leftRight; }
 
 	void setLeftRight(LeftRight value);
-	// FUNCTION: WEBSERVICE 0x100e3c30
+	// FUNCTION: WEBSERVICE 0x100e3c30 FOLDED
 	InOut getInOut() const { return inOut; }
 
 	void setInOut(InOut value);

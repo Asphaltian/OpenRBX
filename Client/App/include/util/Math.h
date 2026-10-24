@@ -111,6 +111,10 @@ public:
 	static float angle(const Vector3& v0, const Vector3& v1);
 	static bool fuzzyEq(const Vector3& v0, const Vector3& v1, float epsilon);
 	static bool fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon);
+	static bool fuzzyEq(float f0, float f1, float epsilon)
+	{
+		return f0 == f1 || fabsf(f0 - f1) <= (fabsf(f0) + 1.0f) * epsilon;
+	}
 	static NormalId getClosestObjectNormalId(const Vector3& worldNormal, const Matrix3& objectRotation);
 	static Vector3 vector3Abs(const Vector3& value);
 	static float getHeading(const Vector3& look);

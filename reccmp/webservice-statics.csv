@@ -235,6 +235,7 @@ address,type,name
 0x102fa77c,global,prop_Part1
 0x102fa79c,global,prop_Part0
 0x102fa7bc,global,prop_C0
+0x102fa7d8,global,prop_DesiredAngle
 0x102fa7f4,global,prop_MaxVelocity
 0x102fa810,global,prop_C1
 0x102fa8c8,global,teams_rebalanceTeamsFunction

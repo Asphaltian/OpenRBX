@@ -2125,6 +2125,8 @@ address,type,symbol
 0x1023d838,global,??_7?$FactoryProduct@VMotor@RBX@@VAutoJoint@2@$1?sMotor@2@3QBDB@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1023d840,global,??_7?$FactoryProduct@VMotor@RBX@@VAutoJoint@2@$1?sMotor@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1023d84c,global,??_7?$FactoryProduct@VMotor@RBX@@VAutoJoint@2@$1?sMotor@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1023d890,global,??_7?$RefPropDescriptor@VAutoJoint@RBX@@VPartInstance@2@@Reflection@RBX@@6BIIDREF@2@@
+0x1023d898,global,??_7?$RefPropDescriptor@VAutoJoint@RBX@@VPartInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x1023d8c8,global,??_7?$PropDescriptor@VAutoJoint@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@6B@
 0x1023d8f0,global,??_7?$PropDescriptor@VMotor@RBX@@M@Reflection@RBX@@6B@
 0x1023d918,global,??_7?$DescribedNonCreatable@VJointInstance@RBX@@VInstance@2@$1?sJointInstance@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
@@ -4424,6 +4426,7 @@ address,type,symbol
 0x102c9da8,global,??_R0?AV?$MemberDescriptorContainer@VPropertyDescriptor@Reflection@RBX@@@Reflection@RBX@@@8
 0x102c9e08,global,??_R0?AV?$MemberDescriptorContainer@VSignalDescriptor@Reflection@RBX@@@Reflection@RBX@@@8
 0x102c9e68,global,??_R0?AV?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@@8
+0x102c9ecc,global,??_R0?AVRefType@Reflection@RBX@@@8
 0x102c9ff0,global,??_R0?AVGetSet@?$TypedPropertyDescriptor@_N@Reflection@RBX@@@8
 0x102ca2d8,global,??_R0?AV?$TypedPropertyDescriptor@_N@Reflection@RBX@@@8
 0x102ca530,global,??_R0?AV?$SignalDescImpl@$00$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@Z@Reflection@RBX@@@8
@@ -5300,7 +5303,7 @@ address,type,symbol
 0x102f59a1,global,?lockedDown@ClassDescriptor@Reflection@RBX@@2_NA
 0x102f59a4,global,s___RBX::Reflection::sync
 0x102f59b0,global,??_B?1??sync@Reflection@RBX@@YAAAVrecursive_mutex@boost@@XZ@51
-0x102f59b4,global,type___RBX::Reflection::RefType::singleton<RBX::Instance
+0x102f59b4,global,type___RBX::Reflection::RefType::singleton<RBX::Instance *>
 0x102f59c4,global,??_B?1???$singleton@PAVInstance@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102f59c8,global,?staticData@?$GuidItem@VInstance@RBX@@@RBX@@0PAUStaticData@12@A
 0x102f59cc,global,?flag@?1??getStaticData@?$GuidItem@VInstance@RBX@@@RBX@@CAAAUStaticData@23@XZ@4JA
@@ -5342,7 +5345,7 @@ address,type,symbol
 0x102f6130,global,??_B?1??zero@Vector3@G3D@@SAABV12@XZ@51
 0x102f6134,global,v___G3D::Vector3::inf
 0x102f6140,global,??_B?1??inf@Vector3@G3D@@SAABV12@XZ@51
-0x102f6144,global,type___RBX::Reflection::RefType::singleton<RBX::PartInstance
+0x102f6144,global,type___RBX::Reflection::RefType::singleton<RBX::PartInstance *>
 0x102f6154,global,??_B?1???$singleton@PAVPartInstance@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102f6158,global,flag___RBX::Name::declare<&RBX::sPart>
 0x102f615c,global,flag___RBX::Name::declare<&RBX::sHumanoid>
@@ -5426,7 +5429,7 @@ address,type,symbol
 0x102f6944,global,??_B?3??resize@?$Array@PAVIRenderable@RBX@@@G3D@@QAEXH_N@Z@53
 0x102f6948,global,minSize___G3D::Array<RBX::Primitive *>::resize
 0x102f694c,global,??_B?3??resize@?$Array@PAVPrimitive@RBX@@@G3D@@QAEXH_N@Z@53
-0x102f6950,global,type___RBX::Reflection::RefType::singleton<RBX::Camera
+0x102f6950,global,type___RBX::Reflection::RefType::singleton<RBX::Camera *>
 0x102f6960,global,??_B?1???$singleton@PAVCamera@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102f6964,global,?minSize@?3??resize@?$Array@V?$shared_ptr@VPartInstance@RBX@@@boost@@@G3D@@QAEXH_N@Z@4HB
 0x102f6968,global,??_B?3??resize@?$Array@V?$shared_ptr@VPartInstance@RBX@@@boost@@@G3D@@QAEXH_N@Z@53
@@ -5816,11 +5819,11 @@ address,type,symbol
 0x102f95c8,global,??_B?1??inf@Math@RBX@@SAABMXZ@51
 0x102f95cc,global,c___RBX::Color::lightGreen
 0x102f95d8,global,??_B?1??lightGreen@Color@RBX@@SAABVColor3@G3D@@XZ@51
-0x102f95dc,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::PartInstance>
+0x102f95dc,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::PartInstance> >
 0x102f95e0,global,??_B?1???$doGetClassIndex@V?$FilteredSelection@VPartInstance@RBX@@@RBX@@@ServiceProvider@RBX@@CAIXZ@51
 0x102f95e4,global,v___G3D::Vector3::unitX
 0x102f95f0,global,??_B?1??unitX@Vector3@G3D@@SAABV12@XZ@51
-0x102f95f8,global,isNullClassName___RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::PartInstance>
+0x102f95f8,global,isNullClassName___RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::PartInstance> >
 0x102f95fc,global,??_B?8???$find@V?$FilteredSelection@VPartInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VPartInstance@RBX@@@1@XZ@58
 0x102f967c,global,?event_FallingDown@Humanoid@RBX@@2V?$SignalDesc@VHumanoid@RBX@@$$A6AX_N@Z@Reflection@2@A
 0x102f96c0,global,?event_Died@Humanoid@RBX@@2V?$SignalDesc@VHumanoid@RBX@@$$A6AXXZ@Reflection@2@A
@@ -5874,10 +5877,10 @@ address,type,symbol
 0x102f9ff4,global,?ignoreVector3@MouseCommand@RBX@@0VVector3@G3D@@A
 0x102fa000,global,n___RBX::Name::doDeclare<&RBX::sBoxSelectCommand>
 0x102fa004,global,??_B?1???$doDeclare@$1?sBoxSelectCommand@RBX@@3PADA@Name@RBX@@CAABV01@XZ@51
-0x102fa008,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::Instance>
+0x102fa008,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::Instance> >
 0x102fa00c,global,??_B?1???$doGetClassIndex@V?$FilteredSelection@VInstance@RBX@@@RBX@@@ServiceProvider@RBX@@CAIXZ@51
 0x102fa010,global,flag___RBX::Name::declare<&RBX::sBoxSelectCommand>
-0x102fa018,global,isNullClassName___RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::Instance>
+0x102fa018,global,isNullClassName___RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::Instance> >
 0x102fa01c,global,??_B?8???$find@V?$FilteredSelection@VInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VInstance@RBX@@@1@XZ@58
 0x102fa020,global,v___G3D::Vector3::unitZ
 0x102fa02c,global,??_B?1??unitZ@Vector3@G3D@@SAABV12@XZ@51
@@ -5977,7 +5980,7 @@ address,type,symbol
 0x102fae40,global,?signal_Hit@RBX@@3V?$SignalDesc@VExplosion@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@M@Z@Reflection@1@A
 0x102fae64,global,n___RBX::Name::doDeclare<&RBX::sFeature>
 0x102fae68,global,??_B?1???$doDeclare@$1?sFeature@RBX@@3QBDB@Name@RBX@@CAABV01@XZ@51
-0x102fae6c,global,type___RBX::Reflection::RefType::singleton<RBX::Hole
+0x102fae6c,global,type___RBX::Reflection::RefType::singleton<RBX::Hole *>
 0x102fae7c,global,??_B?1???$singleton@PAVHole@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102fae80,global,flag___RBX::Name::declare<&RBX::sFeature>
 0x102fae8c,global,??_B?1???$assign_to@V?$bind_t@XV?$mf0@XVVelocityMotor@RBX@@@_mfi@boost@@V?$list1@V?$value@PAVVelocityMotor@RBX@@@_bi@boost@@@_bi@3@@_bi@boost@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXV?$bind_t@XV?$mf0@XVVelocityMotor@RBX@@@_mfi@boost@@V?$list1@V?$value@PAVVelocityMotor@RBX@@@_bi@boost@@@_bi@3@@_bi@1@@Z@51
@@ -6297,7 +6300,7 @@ address,type,symbol
 0x102fe8f0,global,"foo___RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor"
 0x102fe978,global,??_B?1??classDescriptor@?$Described@VNetworkSettings@RBX@@$1?sNetworkSettings@2@3QBDBV?$FactoryProduct@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102fe980,global,?version@API@Network@RBX@@2V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@A
-0x102fe99c,global,type___RBX::Reflection::RefType::singleton<RBX::ModelInstance
+0x102fe99c,global,type___RBX::Reflection::RefType::singleton<RBX::ModelInstance *>
 0x102fe9ac,global,??_B?1???$singleton@PAVModelInstance@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102fe9b8,global,??_B?1???$assign_to@V?$bind_t@XV?$mf0@XVPlayer@Network@RBX@@@_mfi@boost@@V?$list1@V?$value@V?$shared_ptr@VPlayer@Network@RBX@@@boost@@@_bi@boost@@@_bi@3@@_bi@boost@@@?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@XV?$mf0@XVPlayer@Network@RBX@@@_mfi@boost@@V?$list1@V?$value@V?$shared_ptr@VPlayer@Network@RBX@@@boost@@@_bi@boost@@@_bi@3@@_bi@1@@Z@51
 0x102fe9c4,global,??_B?1???$assign_to@VGenericSlotAdapter@?$SignalDescImpl@$01$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@@?$function2@XV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@2@@boost@@AAEXVGenericSlotAdapter@?$SignalDescImpl@$01$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@@Z@51
@@ -6305,7 +6308,7 @@ address,type,symbol
 0x102fea50,global,?prop_SuperSafeChat@Player@Network@RBX@@2V?$BoundProp@_N$00@Reflection@3@A
 0x102fea6c,global,?prop_userId@Player@Network@RBX@@2V?$BoundProp@H$00@Reflection@3@A
 0x102feb98,global,?prop_Under13@Player@Network@RBX@@2V?$BoundProp@_N$00@Reflection@3@A
-0x102febb4,global,type___RBX::Reflection::RefType::singleton<RBX::Network::Player
+0x102febb4,global,type___RBX::Reflection::RefType::singleton<RBX::Network::Player *>
 0x102febc4,global,??_B?1???$singleton@PAVPlayer@Network@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102febd0,global,??_B?1???$assign_to@V?$bind_t@W4work_result@worker_thread@RBX@@P6A?AW4123@V?$shared_ptr@Udata@AbuseReporter@Network@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZV?$list2@V?$value@V?$shared_ptr@Udata@AbuseReporter@Network@RBX@@@boost@@@_bi@boost@@V?$value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@@_bi@5@@_bi@boost@@@?$function0@W4work_result@worker_thread@RBX@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@W4work_result@worker_thread@RBX@@P6A?AW4123@V?$shared_ptr@Udata@AbuseReporter@Network@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZV?$list2@V?$value@V?$shared_ptr@Udata@AbuseReporter@Network@RBX@@@boost@@@_bi@boost@@V?$value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@@_bi@5@@_bi@1@@Z@51
 0x102fec98,global,?propLocalPlayer@Players@Network@RBX@@2V?$RefPropDescriptor@VPlayers@Network@RBX@@VPlayer@23@@Reflection@3@A

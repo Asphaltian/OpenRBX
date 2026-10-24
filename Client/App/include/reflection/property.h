@@ -551,6 +551,12 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::PropDescriptor<RBX::Decal,float><float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ffdd0
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::PropDescriptor<RBX::Texture,float><float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x100d7da0
+	// RBX::Reflection::PropDescriptor<RBX::AutoJoint,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(G3D::CoordinateFrame const &)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100d7ee0
+	// RBX::Reflection::PropDescriptor<RBX::AutoJoint,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(RBX::PartInstance *)>
+	// TEMPLATE: WEBSERVICE 0x100d7f40
+	// RBX::Reflection::PropDescriptor<RBX::AutoJoint,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100fa0d0
 	// RBX::Reflection::PropDescriptor<RBX::DebrisService,int>::getset<int (__thiscall RBX::DebrisService::*)(void)const ,void (__thiscall RBX::DebrisService::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x100faae0

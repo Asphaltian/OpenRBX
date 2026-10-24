@@ -53,16 +53,33 @@ DECOMP_SIZE_ASSERT(JointInstance, 0x10c)
 // SIZE 0x11c
 class AutoJoint : public DescribedNonCreatable<AutoJoint, JointInstance, sAutoJoint>
 {
+private:
+	boost::shared_ptr<PartInstance> part[2]; // 0x10c
+
+	void setPart(int i, PartInstance* value);
+	void setPartNull(int i);
+	void setPrimitiveFromPart(int i);
+
+	virtual bool askSetParent(const Instance* instance) const;
+	virtual void onAncestorChanged(const AncestorChanged& event);
+
+	World* computeWorld();
+
 public:
 	AutoJoint() {}
 	AutoJoint(Joint* _joint);
 
 	virtual ~AutoJoint();
 
-private:
-	void setPart(int index, PartInstance* value);
+	PartInstance* getPart0() const;
+	PartInstance* getPart1() const;
+	void setPart0(PartInstance* value);
+	void setPart1(PartInstance* value);
 
-	boost::shared_ptr<PartInstance> part[2]; // 0x10c
+	const CoordinateFrame& getC0() const;
+	const CoordinateFrame& getC1() const;
+	void setC0(const CoordinateFrame& value);
+	void setC1(const CoordinateFrame& value);
 };
 
 DECOMP_SIZE_ASSERT(AutoJoint, 0x11c)
@@ -70,14 +87,19 @@ DECOMP_SIZE_ASSERT(AutoJoint, 0x11c)
 // SIZE 0x11c
 class Motor : public DescribedCreatable<Motor, AutoJoint, sMotor>
 {
+private:
+	MotorJoint* getMotorJoint() { return static_cast<MotorJoint*>(joint); }
+	const MotorJoint* getMotorJoint() const { return static_cast<const MotorJoint*>(joint); }
+
 public:
 	Motor();
 	Motor(Joint* joint);
 
 	float getMaxVelocity() const;
-	float getCurrentAngle() const;
-
 	void setMaxVelocity(float value);
+	float getDesiredAngle() const;
+	void setDesiredAngle(float value);
+	float getCurrentAngle() const;
 	void setCurrentAngle(float value);
 };
 
@@ -150,14 +172,22 @@ DECOMP_SIZE_ASSERT(Weld, 0x11c)
 // RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint>::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint><RBX::Joint *>
 // TEMPLATE: WEBSERVICE 0x100d8cf0
 // RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint><RBX::Joint *>
-// FUNCTION: WEBSERVICE 0x1021c570
-// `dynamic initializer for 'prop_MaxVelocity''
-// FUNCTION: WEBSERVICE 0x1021c5f0
-// `dynamic initializer for 'prop_CurrentAngle''
-// SYNTHETIC: WEBSERVICE 0x10223dd0
-// `dynamic atexit destructor for 'prop_CurrentAngle''
-// SYNTHETIC: WEBSERVICE 0x10223e50
-// `dynamic atexit destructor for 'prop_MaxVelocity''
+// FUNCTION: WEBSERVICE 0x1021c470
+// RBX::`dynamic initializer for 'prop_Part0''
+// FUNCTION: WEBSERVICE 0x1021c4b0
+// RBX::`dynamic initializer for 'prop_Part1''
+// FUNCTION: WEBSERVICE 0x1021c4f0
+// RBX::`dynamic initializer for 'prop_C1''
+// FUNCTION: WEBSERVICE 0x1021c530
+// RBX::`dynamic initializer for 'prop_C0''
+// SYNTHETIC: WEBSERVICE 0x10223d90
+// RBX::`dynamic atexit destructor for 'prop_Part1''
+// SYNTHETIC: WEBSERVICE 0x10223db0
+// RBX::`dynamic atexit destructor for 'prop_Part0''
+// SYNTHETIC: WEBSERVICE 0x10223df0
+// RBX::`dynamic atexit destructor for 'prop_C0''
+// SYNTHETIC: WEBSERVICE 0x10223e10
+// RBX::`dynamic atexit destructor for 'prop_C1''
 // clang-format on
 
 } // namespace RBX
