@@ -13,7 +13,9 @@ address,type,symbol
 0x10006330,synthetic,??1Value@Reflection@RBX@@QAE@XZ
 0x100063b0,synthetic,??1SignatureDescriptor@Reflection@RBX@@QAE@XZ
 0x100078f0,synthetic,??3?$Creatable@VInstance@RBX@@@RBX@@CAXPAX@Z
+0x100091f0,synthetic,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@SAPAVWorkspace@1@PBVInstance@1@@Z
 0x10009a20,synthetic,??1Item@SignatureDescriptor@Reflection@RBX@@QAE@XZ
+0x1000a8b0,stub,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@QBEPAVWorkspace@1@XZ
 0x1000d340,stub,??_GStandardOutLog@@UAEPAXI@Z
 0x1000db70,synthetic,_GetAtlHandlerByName@12
 0x1000dc00,synthetic,_InitializeAtlHandlers@8
@@ -140,6 +142,7 @@ address,type,symbol
 0x100d9f90,stub,??0Rotate@RBX@@QAE@XZ
 0x100da100,stub,??0RotateP@RBX@@QAE@XZ
 0x100da280,stub,??0RotateV@RBX@@QAE@XZ
+0x100da560,synthetic,??1?$DescribedCreatable@VBackpack@RBX@@VHopper@2@$1?sBackpack@2@3QBDB@RBX@@UAE@XZ
 0x100dab80,synthetic,??_ETeams@RBX@@UAEPAXI@Z
 0x100db320,stub,??0Teams@RBX@@QAE@XZ
 0x100dc260,synthetic,??_GAccoutrement@RBX@@UAEPAXI@Z

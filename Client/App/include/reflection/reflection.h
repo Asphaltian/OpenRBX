@@ -127,6 +127,8 @@ public:
 	// RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100be240
 	// RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor
+	// TEMPLATE: WEBSERVICE 0x10088ec0
+	// RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100c3a60
 	// RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor
 	// TEMPLATE: WEBSERVICE 0x100dabe0
@@ -265,6 +267,8 @@ public:
 	// `RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10223aa0
 	// `RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+	// SYNTHETIC: WEBSERVICE 0x10222700
+	// `RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10223b30
 	// `RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 	// SYNTHETIC: WEBSERVICE 0x10223e70

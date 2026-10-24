@@ -10,6 +10,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+class RakPeerInterface;
+
 namespace RBX {
 
 class ModelInstance;
@@ -43,10 +45,13 @@ public:
 
 	int numPlayers() const { return players->size(); }
 
+	Player* getLocalPlayer() const { return localPlayer.get(); }
+
 	static bool frontendProcessing(const Instance* context, bool testInDatamodel);
 	static bool backendProcessing(const Instance* context, bool testInDatamodel);
 
 	static RBX::ModelInstance* findLocalCharacter(const Instance* context);
+	static Player* findLocalPlayer(const Instance* context);
 
 private:
 	virtual void onEvent(const Player* source, CharacterAdded event);
@@ -56,7 +61,8 @@ public:
 private:
 	undefined m_unk0x12c[0x140 - 0x12c];                             // 0x12c
 	CopyOnWrite<std::vector<boost::shared_ptr<Instance> > > players; // 0x140
-	undefined m_unk0x148[0x154 - 0x148];                             // 0x148
+	boost::shared_ptr<Player> localPlayer;                           // 0x148
+	RakPeerInterface* peer;                                          // 0x150
 	int maxPlayers;                                                  // 0x154
 };
 

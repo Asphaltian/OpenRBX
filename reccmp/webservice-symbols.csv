@@ -292,8 +292,6 @@ address,size,symbol,name
 0x10076380,0xaf,?create@Creator@?$FactoryProduct@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ,
 0x10076430,0xaf,?create@Creator@?$FactoryProduct@VLocalBackpack@RBX@@VRelativePanel@2@$1?sLocalBackpack@2@3QBDB@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ,
 0x100774c0,0x78,??$create@VMotor@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VMotor@RBX@@@boost@@XZ,
-0x10077730,0x78,??$create@VBackpack@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VBackpack@RBX@@@boost@@XZ,
-0x100777b0,0xaf,?create@Creator@?$FactoryProduct@VBackpack@RBX@@VHopper@2@$1?sBackpack@2@3QBDB@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ,
 0x100788b0,0x67,??1?$BoundFuncDesc@VDataModel@RBX@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V34@_N@Z$01@Reflection@RBX@@UAE@XZ,
 0x10078920,0x7b,??1?$BoundFuncDesc@VDataModel@RBX@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V34@0_N@Z$02@Reflection@RBX@@UAE@XZ,
 0x10079bf0,0x1f4,?get@DataModel@RBX@@QAE?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@VContentId@2@@Z,

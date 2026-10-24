@@ -132,7 +132,7 @@ public:
 	};
 
 	BrickColor(int number);
-	BrickColor() : number(lego_1) {}
+	BrickColor() : number(lego_194) {}
 	BrickColor(Number number) : number(number) {}
 
 	static BrickColor closest(G3D::Color4 color);
@@ -143,6 +143,8 @@ public:
 	static BrickColor parse(const char* name);
 
 	static BrickColor random();
+
+	static BrickColor legoWhite() { return BrickColor(lego_1); }
 
 	G3D::Color3 color3() const;
 

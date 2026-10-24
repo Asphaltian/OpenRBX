@@ -30,6 +30,33 @@ private:
 
 DECOMP_SIZE_ASSERT(BackpackItem, 0x168)
 
+// SIZE 0x170
+class HopperBin : public DescribedCreatable<HopperBin, BackpackItem, sHopperBin>
+{
+public:
+	enum BinType
+	{
+		SCRIPT_BIN = 0,
+		GAME_TOOL = 1,
+		GRAB_TOOL = 2,
+		CLONE_TOOL = 3,
+		HAMMER_TOOL = 4,
+		SLINGSHOT_TOOL = 5,
+		ROCKET_TOOL = 6,
+		LASER_TOOL = 7,
+	};
+
+	virtual ~HopperBin();
+
+	BinType getBinType() const { return binType; }
+
+private:
+	BinType binType; // 0x168
+	bool active;     // 0x16c
+};
+
+DECOMP_SIZE_ASSERT(HopperBin, 0x170)
+
 extern const char sHopper[];
 
 // SIZE 0x130

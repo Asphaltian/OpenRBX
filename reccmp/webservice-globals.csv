@@ -2324,6 +2324,18 @@ address,type,symbol
 0x1023e924,global,??_7?$DescribedCreatable@VBackpack@RBX@@VHopper@2@$1?sBackpack@2@3QBDB@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1023e92c,global,??_7?$DescribedCreatable@VBackpack@RBX@@VHopper@2@$1?sBackpack@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1023e93c,global,??_7?$DescribedCreatable@VBackpack@RBX@@VHopper@2@$1?sBackpack@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1023e9a4,global,??_7Backpack@RBX@@6BIScriptOwner@1@@
+0x1023e9b4,global,??_7Backpack@RBX@@6B?$DescribedCreatable@VBackpack@RBX@@VHopper@2@$1?sBackpack@2@3QBDB@1@@
+0x1023e9bc,global,??_7Backpack@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x1023e9cc,global,??_7Backpack@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x1023e9dc,global,??_7Backpack@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x1023e9ec,global,??_7Backpack@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x1023e9fc,global,??_7Backpack@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x1023ea0c,global,??_7Backpack@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x1023ea1c,global,??_7Backpack@RBX@@6BDebugable@1@@
+0x1023ea24,global,??_7Backpack@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x1023ea2c,global,??_7Backpack@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x1023ea3c,global,??_7Backpack@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x1023eab8,global,?sTeams@RBX@@3QBDB
 0x1023eac4,global,??_7?$FactoryProduct@VTeams@RBX@@VInstance@2@$1?sTeams@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x1023ead4,global,??_7?$FactoryProduct@VTeams@RBX@@VInstance@2@$1?sTeams@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
@@ -4472,6 +4484,7 @@ address,type,symbol
 0x102ce3d8,global,??_R0?AV?$sp_counted_impl_pd@PAVControllerService@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
 0x102ce788,global,??_R0?AVRootInstance@RBX@@@8
 0x102ce810,global,??_R0?AVICameraOwner@RBX@@@8
+0x102ce830,global,??_R0?AVHopperBin@RBX@@@8
 0x102ce948,global,??_R0?AVWorkspace@RBX@@@8
 0x102cea58,global,??_R0?AVVerbContainer@RBX@@@8
 0x102cea78,global,??_R0?AVIRenderableBucket@RBX@@@8

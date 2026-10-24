@@ -379,6 +379,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>::~DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>
 	// FUNCTION: WEBSERVICE 0x100be560
 	// RBX::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>
+	// FUNCTION: WEBSERVICE 0x100da640
+	// RBX::DescribedCreatable<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::DescribedCreatable<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
 	// FUNCTION: WEBSERVICE 0x100c2ee0
 	// RBX::DescribedCreatable<RBX::Camera,RBX::Instance,&RBX::sCamera>::~DescribedCreatable<RBX::Camera,RBX::Instance,&RBX::sCamera>
 	// FUNCTION: WEBSERVICE 0x100c4030

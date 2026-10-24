@@ -39,10 +39,21 @@ void Players::onEvent(const Player* source, CharacterAdded event)
 	STUB(0x101913e0);
 }
 
-// STUB: WEBSERVICE 0x101935c0
+// FUNCTION: WEBSERVICE 0x101935a0
+Player* Players::findLocalPlayer(const Instance* context)
+{
+	const Players* players = ServiceProvider::find<Players>(context);
+
+	return players ? players->getLocalPlayer() : NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x101935c0
 RBX::ModelInstance* Players::findLocalCharacter(const Instance* context)
 {
-	STUB(0x101935c0);
+	if (Player* player = findLocalPlayer(context)) {
+		return player->getCharacter();
+	}
+
 	return NULL;
 }
 

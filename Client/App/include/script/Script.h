@@ -60,9 +60,17 @@ class ScriptContext;
 class __declspec(novtable) IScriptOwner
 {
 protected:
-	virtual IScriptOwner* scriptShouldRun(Script* script) = 0;            // vtable+0x00
-	virtual void runScript(Script* script, ScriptContext* scriptContext); // vtable+0x04
-	virtual void releaseScript(Script* script);                           // vtable+0x08
+	virtual IScriptOwner* scriptShouldRun(Script* script) = 0; // vtable+0x00
+
+	// FUNCTION: WEBSERVICE 0x101019f0 FOLDED
+	virtual void runScript(Script* script, ScriptContext* scriptContext) // vtable+0x04
+	{
+	}
+
+	// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+	virtual void releaseScript(Script* script) // vtable+0x08
+	{
+	}
 };
 
 DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)

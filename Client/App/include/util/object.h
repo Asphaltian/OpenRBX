@@ -148,6 +148,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
 	// TEMPLATE: WEBSERVICE 0x100ad050
 	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
+	// TEMPLATE: WEBSERVICE 0x10077730
+	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100b2810
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item>
 	// TEMPLATE: WEBSERVICE 0x100b2ba0
@@ -290,6 +292,8 @@ public:
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::getClassName
 	// TEMPLATE: WEBSERVICE 0x10069270
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100777b0
+	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10069b80
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
 	// TEMPLATE: WEBSERVICE 0x1006d8d0
@@ -432,6 +436,12 @@ public:
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100be220
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100da470
+	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
+	// TEMPLATE: WEBSERVICE 0x100da500
+	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::~FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
+	// TEMPLATE: WEBSERVICE 0x100da570
+	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100c2710
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::~FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>
 	// TEMPLATE: WEBSERVICE 0x100c2770

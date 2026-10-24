@@ -2,6 +2,7 @@
 #define V8DATAMODEL_TEAM_H
 
 #include "decomp.h"
+#include "reflection/property.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8tree/Instance.h"
 
@@ -13,10 +14,17 @@ extern const char sTeam[];
 class Team : public DescribedCreatable<Team, Instance, sTeam>
 {
 public:
+	Team();
 	virtual ~Team();
 
 	// SYNTHETIC: WEBSERVICE 0x100be200
 	// RBX::Team::`scalar deleting destructor'
+
+	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	virtual bool askSetParent(const Instance* instance) const { return true; }
+
+	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	virtual bool askAddChild(const Instance* instance) const { return true; }
 
 	int getScore() const { return score; }
 
@@ -28,12 +36,13 @@ public:
 	void setTeamColor(BrickColor color);
 	void setAutoAssignable(bool value);
 
-private:
-	int score;                           // 0x0f8
-	BrickColor color;                    // 0x0fc
-	bool autoAssignable;                 // 0x100
-	bool autoColorCharacters;            // 0x101
-	undefined m_unk0x102[0x104 - 0x102]; // 0x102
+	static Reflection::BoundProp<bool, 1> prop_AutoColorCharacters;
+
+protected:
+	int score;                // 0x0f8
+	BrickColor color;         // 0x0fc
+	bool autoAssignable;      // 0x100
+	bool autoColorCharacters; // 0x101
 };
 
 DECOMP_SIZE_ASSERT(Team, 0x104)
@@ -45,6 +54,10 @@ DECOMP_SIZE_ASSERT(Team, 0x104)
 // RBX::`dynamic initializer for 'prop_Color''
 // SYNTHETIC: WEBSERVICE 0x1021bdc0
 // RBX::`dynamic initializer for 'prop_AutoAssignable''
+// SYNTHETIC: WEBSERVICE 0x1021be00
+// `dynamic initializer for 'RBX::Team::prop_AutoColorCharacters''
+// SYNTHETIC: WEBSERVICE 0x10223a20
+// `dynamic atexit destructor for 'RBX::Team::prop_AutoColorCharacters''
 // SYNTHETIC: WEBSERVICE 0x10223a40
 // RBX::`dynamic atexit destructor for 'prop_AutoAssignable''
 // SYNTHETIC: WEBSERVICE 0x10223a60

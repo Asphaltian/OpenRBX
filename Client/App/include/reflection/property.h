@@ -378,6 +378,8 @@ public:
 	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::NetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1019b780
 	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::NetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x100be490
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Team>
 	// clang-format on
 	template <class Getter, class Setter>
 	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, Setter set)

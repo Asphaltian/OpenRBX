@@ -24,9 +24,22 @@ static PropDescriptor<Team, bool> prop_AutoAssignable(
 	&RBX::Team::setAutoAssignable
 );
 
+Reflection::BoundProp<bool, 1> Team::prop_AutoColorCharacters(
+	"AutoColorCharacters",
+	"Data",
+	&RBX::Team::autoColorCharacters
+);
+
 // FUNCTION: WEBSERVICE 0x100be010
 Team::~Team()
 {
+}
+
+// FUNCTION: WEBSERVICE 0x100be630
+Team::Team() : score(0), autoAssignable(true), autoColorCharacters(true)
+{
+	setName(sTeam);
+	color = BrickColor::legoWhite();
 }
 
 // FUNCTION: WEBSERVICE 0x100be710
