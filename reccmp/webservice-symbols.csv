@@ -393,7 +393,6 @@ address,size,symbol,name
 0x1009bc70,0x69,??$getset@P8PartInstance@RBX@@BE?AVColor3@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VPartInstance@RBX@@VColor3@G3D@@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@std@@P8PartInstance@2@BE?AVColor3@G3D@@XZP852@AEXABV67@@Z@Z,
 0x1009be30,0x69,??$getset@P8PartInstance@RBX@@BE?AVVector3@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VPartInstance@RBX@@VVector3@G3D@@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@std@@P8PartInstance@2@BE?AVVector3@G3D@@XZP852@AEXABV67@@Z@Z,
 0x1009bea0,0x69,??$getset@P8PartInstance@RBX@@BE?AW4FormFactor@12@XZP812@AEXW4312@@Z@?$PropDescriptor@VPartInstance@RBX@@W4FormFactor@12@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@@std@@P8PartInstance@2@BE?AW4FormFactor@52@XZP852@AEXW4652@@Z@Z,
-0x1009c0f0,0xc9,?hitTest@PartInstance@RBX@@UAE_NABVRay@G3D@@AAVVector3@4@@Z,
 0x1009c1c0,0x1f7,?readValue@?$TypedPropertyDescriptor@VCoordinateFrame@G3D@@@Reflection@RBX@@EBEXPAVDescribedBase@23@PBVXmlElement@@AAVIReferenceBinder@3@@Z,
 0x1009c3c0,0x363,?writeValue@?$TypedPropertyDescriptor@VCoordinateFrame@G3D@@@Reflection@RBX@@EBEXPBVDescribedBase@23@PAVXmlElement@@@Z,
 0x1009d3c0,0x34,?getLocation@PartInstance@RBX@@UBE?BVCoordinateFrame@G3D@@XZ,

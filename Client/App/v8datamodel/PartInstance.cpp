@@ -1,5 +1,7 @@
 #include "v8datamodel/PartInstance.h"
 
+#include "appdraw/Draw.h"
+#include "appdraw/HitTest.h"
 #include "tool/Dragger.h"
 #include "util/standardout.h"
 #include "v8datamodel/ModelInstance.h"
@@ -522,11 +524,10 @@ bool PartInstance::getLocked(Instance* instance)
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1009bf50
+// FUNCTION: WEBSERVICE 0x1009bf50
 bool PartInstance::reportTouches() const
 {
-	STUB(0x1009bf50);
-	return false;
+	return !event_Touched.empty(this);
 }
 
 // FUNCTION: WEBSERVICE 0x1009bfa0
@@ -575,16 +576,26 @@ void PartInstance::onParentControllerChanged()
 	primitive->setController(getTopPVController());
 }
 
-// STUB: WEBSERVICE 0x1009c0c0
+// FUNCTION: WEBSERVICE 0x1009c0c0
 void PartInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 {
-	STUB(0x1009c0c0);
+	Draw::selectionBox(getPart(), adorn, selectState);
 }
 
-// STUB: WEBSERVICE 0x1009c0f0
+// FUNCTION: WEBSERVICE 0x1009c0f0
 bool PartInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint)
 {
-	STUB(0x1009c0f0);
+	G3D::Ray rayInPartCoords = getCoordinateFrame().toObjectSpace(worldRay);
+
+	Vector3 hitPointInPartCoords;
+
+	bool hit = HitTest::hitTest(getPart(), rayInPartCoords, hitPointInPartCoords, 1.0f);
+
+	if (hit) {
+		worldHitPoint = getCoordinateFrame().pointToWorldSpace(hitPointInPartCoords);
+		return true;
+	}
+
 	return false;
 }
 
@@ -924,17 +935,10 @@ void PartInstance::setElasticity(float elasticity)
 	}
 }
 
-// STUB: WEBSERVICE 0x1009fe60
+// FUNCTION: WEBSERVICE 0x1009fe60
 void PartInstance::setColor3(const G3D::Color3& value)
 {
-	BrickColor closest = BrickColor::closest(value);
-
-	if (closest != color) {
-		color = closest;
-
-		raisePropertyChanged(prop_Color);
-		raisePropertyChanged(prop_BrickColor);
-	}
+	setColor(BrickColor::closest(value));
 }
 
 // STUB: WEBSERVICE 0x1009fec0
