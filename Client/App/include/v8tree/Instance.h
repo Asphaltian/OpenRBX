@@ -766,6 +766,12 @@ protected:
 // RBX::Instance::findFirstChildOfType<RBX::Sky>
 // TEMPLATE: WEBSERVICE 0x1005aff0
 // RBX::Instance::findFirstChildOfType<RBX::Humanoid>
+// TEMPLATE: WEBSERVICE 0x100e07a0
+// RBX::Instance::findFirstChildOfType<RBX::Decal>
+// TEMPLATE: WEBSERVICE 0x100e0820
+// RBX::Instance::findFirstChildOfType<RBX::Shirt>
+// TEMPLATE: WEBSERVICE 0x100e08a0
+// RBX::Instance::findFirstChildOfType<RBX::Skin>
 // TEMPLATE: WEBSERVICE 0x1018cbc0
 // RBX::Instance::findFirstChildOfType<RBX::Backpack>
 // clang-format on

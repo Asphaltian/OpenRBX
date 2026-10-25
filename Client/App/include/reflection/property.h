@@ -496,6 +496,14 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Script,RBX::ContentId>::getset<RBX::ContentId const & (__thiscall RBX::Script::*)(void)const ,void (__thiscall RBX::Script::*)(RBX::ContentId const &)>
 	// TEMPLATE: WEBSERVICE 0x10069740
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Script>
+	// TEMPLATE: WEBSERVICE 0x100e0e40
+	// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundProp<RBX::TextureId,1><RBX::ShirtGraphic>
+	// TEMPLATE: WEBSERVICE 0x100e0f20
+	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::Shirt>
+	// TEMPLATE: WEBSERVICE 0x100e1000
+	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::Skin>
+	// TEMPLATE: WEBSERVICE 0x100e10e0
+	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::BodyColors>
 	// TEMPLATE: WEBSERVICE 0x100ebfe0
 	// RBX::Reflection::PropDescriptor<RBX::Rocket,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Rocket::*)(void)const ,void (__thiscall RBX::Rocket::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100ec280
@@ -834,7 +842,7 @@ public:
 		// TEMPLATE: WEBSERVICE 0x100de0f0
 		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::Sky>::getValue
 		// TEMPLATE: WEBSERVICE 0x100e0760
-		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::Sky>::getValue
+		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::ShirtGraphic>::getValue
 		// TEMPLATE: WEBSERVICE 0x100eb7a0
 		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::getValue
 		// TEMPLATE: WEBSERVICE 0x100eb7c0
@@ -842,7 +850,7 @@ public:
 		// TEMPLATE: WEBSERVICE 0x100b53a0
 		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::Sky>::setValue
 		// TEMPLATE: WEBSERVICE 0x100e1920
-		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::Sky>::setValue
+		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::ShirtGraphic>::setValue
 		// TEMPLATE: WEBSERVICE 0x100ee410
 		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::setValue
 		// TEMPLATE: WEBSERVICE 0x100eef70

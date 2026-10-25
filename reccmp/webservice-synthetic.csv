@@ -245,10 +245,6 @@ address,type,symbol
 0x100e0cf0,synthetic,?getClassName@?$FactoryProduct@VShirt@RBX@@VShirtGraphic@2@$1?sShirt@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100e0d10,synthetic,?getClassName@?$FactoryProduct@VBodyColors@RBX@@VCharacterAppearance@2@$1?sBodyColors@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100e0d30,synthetic,?getClassName@?$FactoryProduct@VSkin@RBX@@VCharacterAppearance@2@$1?sSkin@2@3QBDB@RBX@@UBEABVName@2@XZ
-0x100e1440,stub,??0ShirtGraphic@RBX@@QAE@XZ
-0x100e15c0,stub,??0Skin@RBX@@QAE@XZ
-0x100e16d0,stub,??0BodyColors@RBX@@QAE@XZ
-0x100e1990,stub,??0Shirt@RBX@@QAE@XZ
 0x100e1b30,synthetic,?accumulateTorque@Body@RBX@@QAEXABVVector3@G3D@@@Z
 0x100e2280,synthetic,?getClassName@?$FactoryProduct@VExplosion@RBX@@VInstance@2@$1?sExplosion@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100e3100,synthetic,??_GExplosion@RBX@@UAEPAXI@Z
