@@ -12,6 +12,7 @@
 namespace RBX {
 
 class PVInstance;
+class UserInputBase;
 
 extern char sControllerService[];
 // SIZE 0x10c
@@ -23,8 +24,12 @@ public:
 		const PVInstance* pvInstance
 	);
 
+	const UserInputBase* getHardwareDevice() const { return hardwareDevice; }
+	UserInputBase* getHardwareDevice() { return hardwareDevice; }
+
 private:
-	undefined m_unk0x0f8[0x10c - 0x0f8]; // 0x0f8
+	UserInputBase* hardwareDevice;       // 0x0f8
+	undefined m_unk0x0fc[0x10c - 0x0fc]; // 0x0fc
 };
 
 DECOMP_SIZE_ASSERT(ControllerService, 0x10c)

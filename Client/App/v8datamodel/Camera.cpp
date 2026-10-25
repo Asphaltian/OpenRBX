@@ -13,6 +13,26 @@ void Camera::lookAt(const G3D::Vector3& point)
 	cameraGoal.lookAt(point);
 }
 
+// FUNCTION: WEBSERVICE 0x100c2810
+float Camera::getNewZoomDistance(float currentDistance, float in)
+{
+	static const float ZOOM_FACTOR = 0.25f;
+
+	float newDistance;
+
+	if (in > 0.0f) {
+		newDistance = std::max(currentDistance / (1.0f + in * ZOOM_FACTOR), distanceMin());
+	}
+	else if (in < 0.0f) {
+		newDistance = std::min(currentDistance * (1.0f - in * ZOOM_FACTOR), distanceMax());
+	}
+	else {
+		newDistance = currentDistance;
+	}
+
+	return newDistance;
+}
+
 // FUNCTION: WEBSERVICE 0x100c29f0
 ICameraSubject* Camera::getCameraSubject() const
 {

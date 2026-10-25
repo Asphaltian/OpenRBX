@@ -25,22 +25,20 @@ private:
 	bool hasGoalInFocus;       // 0x44
 	G3D::Vector3 goalInFocus;  // 0x48
 
-	// STUB: WEBSERVICE 0x101074b0
-	virtual bool zoom(const float in, CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus) // vtable+0x10
-	{
-		STUB(0x101074b0);
-		return false;
-	}
+	CoordinateFrame getFocusLookingAtGoal(const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal);
+	bool testOcclusion(const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal, float& distance);
+	CoordinateFrame goalFromDistance(
+		const CoordinateFrame& cameraFocus,
+		const CoordinateFrame& cameraGoal,
+		const float distance
+	);
 
-	// STUB: WEBSERVICE 0x10107860
+	virtual bool zoom(const float in, CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus); // vtable+0x10
 	virtual void stepGoalAndFocus(
 		CoordinateFrame& cameraGoal,
 		CoordinateFrame& cameraFocus,
 		bool cameraExternallyAdjusted
-	) // vtable+0x14
-	{
-		STUB(0x10107860);
-	}
+	); // vtable+0x14
 
 public:
 	ICharacterSubject();
@@ -51,6 +49,9 @@ public:
 	virtual G3D::Vector3 getIntendedMovementVector() = 0;               // vtable+0x24
 	virtual float getIntendedRotationAboutYAxis() = 0;                  // vtable+0x28
 	virtual void cameraSetWalkOrientation(float angle, bool value) = 0; // vtable+0x2c
+
+	void onHeartBeat(CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus);
+	void setCursorCenterLocked(bool value);
 };
 
 DECOMP_SIZE_ASSERT(ICharacterSubject, 0x58)

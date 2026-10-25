@@ -7,6 +7,7 @@
 
 #include <G3D/GCamera.h>
 #include <G3D/Rect2D.h>
+#include <algorithm>
 
 namespace RBX {
 
@@ -41,6 +42,10 @@ public:
 		ZOOM_CHAR_PART_DRAG = 2
 	};
 
+	static float distanceMin() { return 0.5f; }
+	static float distanceMax() { return 1000.0f; }
+	static float distanceMaxCharacter() { return 400.0f; }
+
 	void zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType zoomType);
 	void zoomExtents(const G3D::Rect2D& viewPort);
 	void lookAt(const G3D::Vector3& point);
@@ -57,6 +62,8 @@ public:
 	// RBX::Camera::`scalar deleting destructor'
 
 	const G3D::GCamera& getGCamera() const { return gCamera; }
+
+	static float getNewZoomDistance(float currentDistance, float in);
 
 private:
 	G3D::GCamera gCamera;                      // 0x0f8

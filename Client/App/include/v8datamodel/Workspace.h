@@ -80,8 +80,12 @@ public:
 
 	World* getWorld() const { return world.get(); }
 
+	bool getInMouselookMode() { return inMouselookMode; }
+
 private:
-	undefined m_unk0x310[0x374 - 0x310]; // 0x310
+	undefined m_unk0x310[0x35c - 0x310]; // 0x310
+	bool inMouselookMode;                // 0x35c
+	undefined m_unk0x35d[0x374 - 0x35d]; // 0x35d
 };
 
 DECOMP_SIZE_ASSERT(Workspace, 0x394)
