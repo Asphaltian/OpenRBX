@@ -91,4 +91,64 @@ void Surface::setParamB(float value)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10104690
+void Surface::readValue(const XmlElement* element, IReferenceBinder& binder)
+{
+	static const Name& desc_LegacyType = Name::declare("Type", -1);
+	static const Name& desc_LegacySurfaceInput = Name::declare("SurfaceInput", -1);
+	static const Name& desc_LegacyParamA = Name::declare("ParamA", -1);
+	static const Name& desc_LegacyParamB = Name::declare("ParamB", -1);
+	static const Name& desc_LegacyConstraint = Name::declare("Constraint", -1);
+
+	const XmlElement* child = element->firstChild();
+	while (child) {
+		const Name* name = NULL;
+		if (!child->isXsiNil() && child->findAttributeValue(name_name, name)) {
+			if (name == &desc_LegacyType) {
+				std::string sValue;
+				if (child->getValue(sValue)) {
+					SurfaceType e;
+					if (Reflection::EnumDesc<SurfaceType>::singleton().convertToValue(sValue, e)) {
+						setSurfaceType(e);
+					}
+					else {
+						setSurfaceType(NO_SURFACE);
+					}
+				}
+			}
+			else if (name == &desc_LegacySurfaceInput) {
+				std::string sValue;
+				if (child->getValue(sValue)) {
+					Controller::InputType e;
+					if (Reflection::EnumDesc<Controller::InputType>::singleton().convertToValue(sValue, e)) {
+						setSurfaceInput(e);
+					}
+				}
+			}
+			else if (name == &desc_LegacyParamA) {
+				float value;
+				if (child->getValue(value)) {
+					setParamA(value);
+				}
+			}
+			else if (name == &desc_LegacyParamB) {
+				float value;
+				if (child->getValue(value)) {
+					setParamB(value);
+				}
+			}
+			else if (name == &desc_LegacyConstraint) {
+				std::string sValue;
+				if (child->getValue(sValue)) {
+					SurfaceType e;
+					if (Reflection::EnumDesc<SurfaceType>::singleton().convertToValue(sValue, e) && e != NO_SURFACE) {
+						setSurfaceType(e);
+					}
+				}
+			}
+		}
+		child = child->nextSibling();
+	}
+}
+
 } // namespace RBX

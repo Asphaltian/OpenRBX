@@ -130,6 +130,7 @@ public:
 	XmlNameValuePair(const RBX::Name& tag, const int value) : tag(tag), valueType(INT), intValue(value) {}
 	XmlNameValuePair(const RBX::Name& tag, const char* text);
 
+	// FUNCTION: WEBSERVICE 0x1003e8a0
 	~XmlNameValuePair() { clearValue(); }
 
 	const RBX::Name& getTag() const { return tag; }

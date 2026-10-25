@@ -104,6 +104,13 @@ public:
 template <class T, const char* sName>
 GlobalSettingsItem<T, sName>* GlobalSettingsItem<T, sName>::sing = NULL;
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021bd00
+// `dynamic initializer for 'RBX::GlobalSettings::mutex''
+// SYNTHETIC: WEBSERVICE 0x10223990
+// `dynamic atexit destructor for 'RBX::GlobalSettings::mutex''
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_GLOBALSETTINGS_H

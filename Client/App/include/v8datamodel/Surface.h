@@ -5,8 +5,11 @@
 #include "util/NormalId.h"
 #include "v8world/SurfaceData.h"
 
+class XmlElement;
+
 namespace RBX {
 
+class IReferenceBinder;
 class PartInstance;
 
 // SIZE 0x8
@@ -32,6 +35,8 @@ public:
 	void setParamB(float value);
 
 	bool isControllable() const;
+
+	void readValue(const XmlElement* element, IReferenceBinder& binder);
 };
 
 DECOMP_SIZE_ASSERT(Surface, 0x8)
