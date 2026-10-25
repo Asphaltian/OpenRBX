@@ -1,72 +1,112 @@
 #include "v8datamodel/DebugSettings.h"
 
 #include "reflection/property.h"
+#include "renderlib/Profiler.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Workspace.h"
 #include "v8world/World.h"
 
+#include <G3D/format.h>
+#include <windows.h>
+
 namespace RBX {
 
 const char sDebugSettings[] = "DebugSettings";
 
-using namespace Reflection;
+} // namespace RBX
 
-static PropDescriptor<DebugSettings, bool> prop_ValidatingDebug(
-	"ValidatingDebug",
-	"Errors",
-	&RBX::DebugSettings::getValidatingDebug,
-	&RBX::DebugSettings::setValidatingDebug
+using namespace RBX;
+using namespace RBX::Reflection;
+
+static PropDescriptor<DebugSettings, float> prop_shaderModel("ShaderModel", "Profile", &DebugSettings::shaderModel, 0);
+static PropDescriptor<DebugSettings, int> prop_videoMemory("VideoMemory", "Profile", &DebugSettings::videoMemory, 0);
+static PropDescriptor<DebugSettings, int> prop_cpuSpeed("CpuSpeed", "Profile", &DebugSettings::cpuSpeed, 0);
+static PropDescriptor<DebugSettings, int> prop_osPlatformId("OsPlatformId", "Profile", &DebugSettings::osPlatformId, 0);
+static PropDescriptor<DebugSettings, std::string> prop_osVer("OsVer", "Profile", &DebugSettings::osVer, 0);
+static PropDescriptor<DebugSettings, std::string> prop_glVendor("GlVendor", "Profile", &DebugSettings::glVendor, 0);
+static PropDescriptor<DebugSettings, std::string> prop_gfxcard("GfxCard", "Profile", &DebugSettings::gfxcard, 0);
+static PropDescriptor<DebugSettings, std::string> prop_cpu("CPU", "Profile", &DebugSettings::cpu, 0);
+static PropDescriptor<DebugSettings, int> prop_ram("RAM", "Profile", &DebugSettings::ram, 0);
+static PropDescriptor<DebugSettings, std::string> prop_resolution(
+	"Resolution",
+	"Profile",
+	&DebugSettings::resolution,
+	0
 );
 
-static EnumPropDescriptor<DebugSettings, Debugable::AssertAction> prop_assertAction(
-	"AssertAction",
-	"Errors",
-	&RBX::DebugSettings::getAssertAction,
-	&RBX::DebugSettings::setAssertAction
+BoundProp<bool, 1> prop_SoundWarnings("SoundWarnings", "Errors", &DebugSettings::soundWarnings);
+
+BoundProp<bool, 1> DebugSettings::prop_stackTracingEnabled(
+	"stackTracingEnabled",
+	"Scripts",
+	&DebugSettings::stackTracingEnabled
 );
 
-static EnumPropDescriptor<DebugSettings, DebugSettings::ErrorReporting> prop_errorReporting(
-	"errorReporting",
-	"Errors",
-	&RBX::DebugSettings::getErrorReporting,
-	&RBX::DebugSettings::setErrorReporting
+BoundProp<bool, 1> DebugSettings::prop_ioEnabled(
+	"ioEnabled",
+	"Scripts",
+	&DebugSettings::ioEnabled,
+	PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<DebugSettings, bool> prop_AnchoredParts(
 	"ShowAnchors",
 	"Display",
-	&RBX::DebugSettings::getShowAnchoredParts,
-	&RBX::DebugSettings::setShowAnchoredParts
+	&DebugSettings::getShowAnchoredParts,
+	&DebugSettings::setShowAnchoredParts
 );
-
 static PropDescriptor<DebugSettings, bool> prop_PartCoordinateFrames(
 	"ShowPartCoords",
 	"Display",
-	&RBX::DebugSettings::getShowPartCoordinateFrames,
-	&RBX::DebugSettings::setShowPartCoordinateFrames
+	&DebugSettings::getShowPartCoordinateFrames,
+	&DebugSettings::setShowPartCoordinateFrames
 );
-
+static PropDescriptor<DebugSettings, bool> prop_UnalignedParts(
+	"ShowUnalignedParts",
+	"Display",
+	&DebugSettings::getShowUnalignedParts,
+	&DebugSettings::setShowUnalignedParts
+);
 static PropDescriptor<DebugSettings, bool> prop_ModelCoordinateFrames(
 	"ShowModelCoords",
 	"Display",
-	&RBX::DebugSettings::getShowModelCoordinateFrames,
-	&RBX::DebugSettings::setShowModelCoordinateFrames
+	&DebugSettings::getShowModelCoordinateFrames,
+	&DebugSettings::setShowModelCoordinateFrames
 );
-
 static PropDescriptor<DebugSettings, bool> prop_WorldCoordinateFrames(
 	"ShowWorldCoords",
 	"Display",
-	&RBX::DebugSettings::getShowWorldCoordinateFrames,
-	&RBX::DebugSettings::setShowWorldCoordinateFrames
+	&DebugSettings::getShowWorldCoordinateFrames,
+	&DebugSettings::setShowWorldCoordinateFrames
 );
-
 static PropDescriptor<DebugSettings, bool> prop_DisableEnvironmentalThrottle(
 	"DisableEnvironmentalThrottle",
 	"Display",
-	&RBX::DebugSettings::getDisableEnvironmentalThrottle,
-	&RBX::DebugSettings::setDisableEnvironmentalThrottle
+	&DebugSettings::getDisableEnvironmentalThrottle,
+	&DebugSettings::setDisableEnvironmentalThrottle
 );
+
+static PropDescriptor<DebugSettings, bool> prop_ValidatingDebug(
+	"ValidatingDebug",
+	"Errors",
+	&DebugSettings::getValidatingDebug,
+	&DebugSettings::setValidatingDebug
+);
+static EnumPropDescriptor<DebugSettings, Debugable::AssertAction> prop_assertAction(
+	"AssertAction",
+	"Errors",
+	&DebugSettings::getAssertAction,
+	&DebugSettings::setAssertAction
+);
+static EnumPropDescriptor<DebugSettings, DebugSettings::ErrorReporting> prop_errorReporting(
+	"errorReporting",
+	"Errors",
+	&DebugSettings::getErrorReporting,
+	&DebugSettings::setErrorReporting
+);
+
+namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100b2d30
 bool DebugSettings::getValidatingDebug() const
@@ -120,6 +160,81 @@ bool DebugSettings::getShowWorldCoordinateFrames() const
 bool DebugSettings::getDisableEnvironmentalThrottle() const
 {
 	return World::disableEnvironmentalThrottle;
+}
+
+// FUNCTION: WEBSERVICE 0x100b2e30
+int DebugSettings::videoMemory() const
+{
+	return Render::SpecData().videoMemory;
+}
+
+// FUNCTION: WEBSERVICE 0x100b2e60
+int DebugSettings::cpuSpeed() const
+{
+	return Render::SpecData().CPUSpeed;
+}
+
+// FUNCTION: WEBSERVICE 0x100b2e90
+std::string DebugSettings::osVer() const
+{
+	OSVERSIONINFO osvi = {0};
+
+	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+	GetVersionEx(&osvi);
+	return G3D::format(
+		"%d.%d.%d.%d",
+		osvi.dwOSVersionInfoSize,
+		osvi.dwMajorVersion,
+		osvi.dwMinorVersion,
+		osvi.dwBuildNumber
+	);
+}
+
+// FUNCTION: WEBSERVICE 0x100b2f00
+int DebugSettings::osPlatformId() const
+{
+	OSVERSIONINFO osvi = {0};
+
+	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+	GetVersionEx(&osvi);
+	return osvi.dwPlatformId;
+}
+
+// FUNCTION: WEBSERVICE 0x100b2f40
+std::string DebugSettings::glVendor() const
+{
+	return Render::SpecData().glVendor;
+}
+
+// STUB: WEBSERVICE 0x100b2fc0
+std::string DebugSettings::gfxcard() const
+{
+	STUB(0x100b2fc0);
+	return std::string();
+}
+
+// FUNCTION: WEBSERVICE 0x100b33d0
+std::string DebugSettings::cpu() const
+{
+	return Render::SpecData().cpu;
+}
+
+// FUNCTION: WEBSERVICE 0x100b3450
+int DebugSettings::ram() const
+{
+	return Render::SpecData().ram;
+}
+
+// FUNCTION: WEBSERVICE 0x100b3480
+std::string DebugSettings::resolution() const
+{
+	return Render::SpecData().resolution;
+}
+
+// FUNCTION: WEBSERVICE 0x100b3610
+float DebugSettings::shaderModel() const
+{
+	return Render::SpecData().shaderModel;
 }
 
 namespace Reflection {

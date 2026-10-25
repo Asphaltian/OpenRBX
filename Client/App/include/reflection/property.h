@@ -674,6 +674,8 @@ public:
 	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::NetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x100be490
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Team>
+	// TEMPLATE: WEBSERVICE 0x100b4540
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::DebugSettings>
 	// clang-format on
 	template <class Getter, class Setter>
 	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, Setter set)
@@ -684,6 +686,12 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10048c40
 	// RBX::Reflection::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getset<std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::Instance::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x100b3980
+	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,float>::getset<float (__thiscall RBX::DebugSettings::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x100b39d0
+	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,int>::getset<int (__thiscall RBX::DebugSettings::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x100b3a20
+	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getset<std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// clang-format on
 	template <class Getter, class Setter>
 	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, int)
@@ -712,6 +720,12 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Explosion,float>::PropDescriptor<RBX::Explosion,float><float (__thiscall RBX::Explosion::*)(void)const ,void (__thiscall RBX::Explosion::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100b4610
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,bool>::PropDescriptor<RBX::DebugSettings,bool><bool (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(bool)>
+	// TEMPLATE: WEBSERVICE 0x100b4360
+	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,float>::PropDescriptor<RBX::DebugSettings,float><float (__thiscall RBX::DebugSettings::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x100b4400
+	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,int>::PropDescriptor<RBX::DebugSettings,int><int (__thiscall RBX::DebugSettings::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x100b44a0
+	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > ><std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// FUNCTION: WEBSERVICE 0x100ffd30
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::PropDescriptor<RBX::Decal,float><float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ffdd0

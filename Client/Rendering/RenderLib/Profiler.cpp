@@ -1,3 +1,5 @@
+#include "renderlib/Profiler.h"
+
 #include "decomp.h"
 
 #include <G3D/RegistryUtil.h>
@@ -17,25 +19,6 @@ static int getCPUSpeed();
 static std::string getCPUMake();
 static std::string getMaxRes();
 static int getRam();
-
-// SIZE 0x80
-struct SpecData
-{
-	static bool glLoaded;
-
-	float shaderModel;      // 0x00
-	int videoMemory;        // 0x04
-	int CPUSpeed;           // 0x08
-	std::string glVendor;   // 0x0c
-	std::string gfxcard;    // 0x28
-	std::string cpu;        // 0x44
-	int ram;                // 0x60
-	std::string resolution; // 0x64
-
-	SpecData();
-};
-
-DECOMP_SIZE_ASSERT(SpecData, 0x80)
 
 bool SpecData::glLoaded;
 
