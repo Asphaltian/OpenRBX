@@ -25,12 +25,12 @@ void TimerService::delay(boost::function0<void> func, double seconds)
 	items.push_back(item);
 }
 
-// STUB: WEBSERVICE 0x100fbb60
+// FUNCTION: WEBSERVICE 0x100fbb60
 void TimerService::onEvent(const RunService* source, Heartbeat event)
 {
 	double time = G3D::System::getLocalTime();
 
-	if (items.size() > 0) {
+	while (items.size() > 0) {
 		Item& item = items.front();
 
 		if (time >= item.time) {
@@ -42,6 +42,9 @@ void TimerService::onEvent(const RunService* source, Heartbeat event)
 			}
 
 			items.pop_front();
+		}
+		else {
+			break;
 		}
 	}
 }
