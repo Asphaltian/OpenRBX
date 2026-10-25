@@ -2,8 +2,10 @@
 
 #include "decomp.h"
 #include "util/Name.h"
+#include "util/standardout.h"
 #include "v8xml/XmlElement.h"
 
+#include <G3D/Log.h>
 #include <algorithm>
 #include <functional>
 #include <list>
@@ -168,10 +170,40 @@ bool ArchiveBinder::processIDREF(
 	return true;
 }
 
-// STUB: WEBSERVICE 0x10098620
+// FUNCTION: WEBSERVICE 0x10098620
 void SerializerV2::loadInstances(XmlElement* root, std::vector<boost::shared_ptr<RBX::Instance> >& instances)
 {
-	STUB(0x10098620);
+	if (root->getTag() == tag_roblox) {
+		const XmlAttribute* version = root->findAttribute(tag_version);
+		if (version && version->getValue(schemaVersionLoading) && schemaVersionLoading >= 4) {
+			ArchiveBinder binder;
+			const XmlElement* itemElement = root->findFirstChildByTag(tag_Item);
+			while (itemElement) {
+				const RBX::Name* className = NULL;
+				if (itemElement->findAttributeValue(tag_class, className)) {
+					boost::shared_ptr<RBX::Instance> instance =
+						RBX::AbstractFactoryProduct<RBX::Instance>::create(*className);
+					if (instance) {
+						instance->read(itemElement, binder);
+						instances.push_back(instance);
+					}
+					else {
+						RBX::StandardOut::singleton()->print(
+							RBX::MESSAGE_WARNING,
+							"Unknown object class \"%s\" while reading XML",
+							className ? className->c_str() : ""
+						);
+					}
+				}
+				itemElement = root->findNextChildWithSameTag(itemElement);
+			}
+
+			binder.resolveRefs();
+			return;
+		}
+	}
+
+	G3D::Log::common()->println("Version 1.0 - 3.0 model files not supported - all future version will be supported");
 }
 
 // FUNCTION: WEBSERVICE 0x10098830

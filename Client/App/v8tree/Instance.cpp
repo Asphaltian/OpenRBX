@@ -493,10 +493,33 @@ void Instance::removeAllChildren()
 	}
 }
 
-// STUB: WEBSERVICE 0x1004e0f0
+// FUNCTION: WEBSERVICE 0x1004e0f0
 void Instance::predelete()
 {
-	STUB(0x1004e0f0);
+	while (children) {
+		shared_ptr<Instance> child;
+
+		{
+			shared_ptr<std::vector<shared_ptr<Instance> > > c = children.write();
+			child = c->back();
+
+			signalDescendentRemoving(child, this, NULL);
+			onChildRemoving(child.get());
+			child->parent = NULL;
+
+			c->pop_back();
+
+			if (c->size() == 0) {
+				children.reset();
+			}
+		}
+
+		event_childRemoved.fire(this, child);
+		Notifier<Instance, ChildRemoved>::raise(child.get());
+
+		child->onAncestorChanged(AncestorChanged(child.get(), this, NULL));
+		child->raisePropertyChanged(propParent);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1004e4f0

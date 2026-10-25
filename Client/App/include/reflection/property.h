@@ -622,7 +622,11 @@ public:
 		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new GetSetImpl<Getter, Setter>(get, set));
 	}
 
-	template <class Getter>
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10048c40
+	// RBX::Reflection::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getset<std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::Instance::*)(void)const ,int>
+	// clang-format on
+	template <class Getter, class Setter>
 	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, int)
 	{
 		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new GetImpl<Getter>(get));
@@ -708,7 +712,7 @@ public:
 		Setter set,
 		typename PropertyDescriptor::Functionality flags = PropertyDescriptor::STANDARD
 	)
-		: TypedPropertyDescriptor<T>(Class::classDescriptor(), name, category, getset(get, set), flags)
+		: TypedPropertyDescriptor<T>(Class::classDescriptor(), name, category, getset<Getter, Setter>(get, set), flags)
 	{
 	}
 };

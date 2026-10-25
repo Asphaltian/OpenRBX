@@ -321,13 +321,13 @@ public:
 	bool findAttributeValue(const RBX::Name& name, std::string& value) const
 	{
 		const XmlAttribute* attribute = findAttribute(name);
-		return attribute != NULL && attribute->getValue(value);
+		return attribute ? attribute->getValue(value) : false;
 	}
 
 	bool findAttributeValue(const RBX::Name& name, const RBX::Name*& value) const
 	{
 		const XmlAttribute* attribute = findAttribute(name);
-		return attribute != NULL && attribute->getValue(value);
+		return attribute ? attribute->getValue(value) : false;
 	}
 
 	const XmlElement* findFirstChildByTag(const RBX::Name& _tag) const;
