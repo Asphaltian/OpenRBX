@@ -28,6 +28,10 @@ const char sWeld[] = "Weld";
 
 const char sSnap[] = "Snap";
 
+} // namespace RBX
+
+using namespace RBX;
+
 static Reflection::RefPropDescriptor<AutoJoint, PartInstance> prop_Part0(
 	"Part0",
 	"Data",
@@ -72,6 +76,8 @@ static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle(
 	&RBX::Motor::getCurrentAngle,
 	&RBX::Motor::setCurrentAngle
 );
+
+namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100d7a80
 bool JointInstance::shouldRender3dAdorn() const

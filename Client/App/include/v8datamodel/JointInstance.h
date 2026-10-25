@@ -176,21 +176,33 @@ DECOMP_SIZE_ASSERT(Weld, 0x11c)
 // TEMPLATE: WEBSERVICE 0x100d8cf0
 // RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint><RBX::Joint *>
 // FUNCTION: WEBSERVICE 0x1021c470
-// RBX::`dynamic initializer for 'prop_Part0''
+// `dynamic initializer for 'prop_Part0''
 // FUNCTION: WEBSERVICE 0x1021c4b0
-// RBX::`dynamic initializer for 'prop_Part1''
+// `dynamic initializer for 'prop_Part1''
 // FUNCTION: WEBSERVICE 0x1021c4f0
-// RBX::`dynamic initializer for 'prop_C1''
+// `dynamic initializer for 'prop_C1''
 // FUNCTION: WEBSERVICE 0x1021c530
-// RBX::`dynamic initializer for 'prop_C0''
+// `dynamic initializer for 'prop_C0''
+// FUNCTION: WEBSERVICE 0x1021c570
+// `dynamic initializer for 'prop_MaxVelocity''
+// FUNCTION: WEBSERVICE 0x1021c5b0
+// `dynamic initializer for 'prop_DesiredAngle''
+// FUNCTION: WEBSERVICE 0x1021c5f0
+// `dynamic initializer for 'prop_CurrentAngle''
 // SYNTHETIC: WEBSERVICE 0x10223d90
-// RBX::`dynamic atexit destructor for 'prop_Part1''
+// `dynamic atexit destructor for 'prop_Part1''
 // SYNTHETIC: WEBSERVICE 0x10223db0
-// RBX::`dynamic atexit destructor for 'prop_Part0''
+// `dynamic atexit destructor for 'prop_Part0''
+// SYNTHETIC: WEBSERVICE 0x10223dd0
+// `dynamic atexit destructor for 'prop_CurrentAngle''
 // SYNTHETIC: WEBSERVICE 0x10223df0
-// RBX::`dynamic atexit destructor for 'prop_C0''
+// `dynamic atexit destructor for 'prop_C0''
 // SYNTHETIC: WEBSERVICE 0x10223e10
-// RBX::`dynamic atexit destructor for 'prop_C1''
+// `dynamic atexit destructor for 'prop_C1''
+// SYNTHETIC: WEBSERVICE 0x10223e30
+// `dynamic atexit destructor for 'prop_DesiredAngle''
+// SYNTHETIC: WEBSERVICE 0x10223e50
+// `dynamic atexit destructor for 'prop_MaxVelocity''
 // clang-format on
 
 } // namespace RBX
