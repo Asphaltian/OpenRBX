@@ -241,6 +241,12 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // clang-format on
 
 // clang-format off
+// FUNCTION: WEBSERVICE 0x1021a7b0
+// RBX::`dynamic initializer for 'namePart''
+// FUNCTION: WEBSERVICE 0x1021a7d0
+// RBX::`dynamic initializer for 'nameCFrame''
+// FUNCTION: WEBSERVICE 0x1021a7f0
+// RBX::`dynamic initializer for 'namePosition''
 // FUNCTION: WEBSERVICE 0x1021a810
 // `dynamic initializer for 'RBX::PartInstance::prop_CFrame''
 // FUNCTION: WEBSERVICE 0x1021a870
@@ -249,7 +255,17 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // RBX::`dynamic initializer for 'prop_Velocity''
 // FUNCTION: WEBSERVICE 0x1021a930
 // RBX::`dynamic initializer for 'prop_RotVelocity''
-// STUB: WEBSERVICE 0x1021ab10
+// FUNCTION: WEBSERVICE 0x1021a990
+// RBX::`dynamic initializer for 'desc_unjoin''
+// FUNCTION: WEBSERVICE 0x1021a9d0
+// RBX::`dynamic initializer for 'desc_join''
+// FUNCTION: WEBSERVICE 0x1021aa10
+// RBX::`dynamic initializer for 'desc_getMass''
+// STUB: WEBSERVICE 0x1021aa50
+// `dynamic initializer for 'RBX::PartInstance::prop_shapeXml''
+// STUB: WEBSERVICE 0x1021aab0
+// RBX::`dynamic initializer for 'prop_shapeUi''
+// FUNCTION: WEBSERVICE 0x1021ab10
 // `dynamic initializer for 'RBX::PartInstance::prop_Color''
 // FUNCTION: WEBSERVICE 0x1021ab70
 // `dynamic initializer for 'RBX::PartInstance::prop_BrickColor''
@@ -265,6 +281,12 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // `dynamic initializer for 'RBX::PartInstance::prop_CanCollide''
 // FUNCTION: WEBSERVICE 0x1021adb0
 // `dynamic initializer for 'RBX::PartInstance::prop_RenderImportance''
+// STUB: WEBSERVICE 0x1021ae10
+// RBX::`dynamic initializer for 'prop_SizeUi''
+// STUB: WEBSERVICE 0x1021ae70
+// `dynamic initializer for 'RBX::PartInstance::prop_Size''
+// STUB: WEBSERVICE 0x1021aed0
+// RBX::`dynamic initializer for 'prop_FormFactorUi''
 // STUB: WEBSERVICE 0x1021af30
 // RBX::`dynamic initializer for 'prop_formFactor''
 // STUB: WEBSERVICE 0x1021af90
@@ -279,14 +301,20 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // RBX::`dynamic atexit destructor for 'prop_RotVelocity''
 // SYNTHETIC: WEBSERVICE 0x102230a0
 // RBX::`dynamic atexit destructor for 'prop_shapeUi''
-// SYNTHETIC: WEBSERVICE 0x10223140
-// RBX::`dynamic atexit destructor for 'prop_SizeUi''
+// SYNTHETIC: WEBSERVICE 0x102230c0
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_shapeXml''
 // SYNTHETIC: WEBSERVICE 0x102230e0
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_CanCollide''
 // SYNTHETIC: WEBSERVICE 0x10223100
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_RenderImportance''
+// SYNTHETIC: WEBSERVICE 0x10223120
+// `dynamic atexit destructor for 'RBX::PartInstance::prop_Size''
+// SYNTHETIC: WEBSERVICE 0x10223140
+// RBX::`dynamic atexit destructor for 'prop_SizeUi''
 // SYNTHETIC: WEBSERVICE 0x10223160
 // RBX::`dynamic atexit destructor for 'prop_formFactor''
+// SYNTHETIC: WEBSERVICE 0x10223180
+// RBX::`dynamic atexit destructor for 'prop_FormFactorUi''
 // SYNTHETIC: WEBSERVICE 0x102231a0
 // RBX::`dynamic atexit destructor for 'prop_Elasticity''
 // SYNTHETIC: WEBSERVICE 0x102231c0
@@ -311,6 +339,12 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_Anchored''
 // SYNTHETIC: WEBSERVICE 0x10223300
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_Locked''
+// STUB: WEBSERVICE 0x10223330
+// RBX::`dynamic atexit destructor for 'desc_join''
+// STUB: WEBSERVICE 0x10223340
+// RBX::`dynamic atexit destructor for 'desc_getMass''
+// STUB: WEBSERVICE 0x10223350
+// RBX::`dynamic atexit destructor for 'desc_unjoin''
 // SYNTHETIC: WEBSERVICE 0x10223360
 // `dynamic atexit destructor for 'RBX::PartInstance::event_Touched''
 // clang-format on

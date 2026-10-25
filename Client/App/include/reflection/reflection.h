@@ -758,6 +758,16 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10056840
 	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x1009eac0
+	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x1009eb40
+	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x1009ebb0
+	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x1009ec30
+	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::call<float>
+	// TEMPLATE: WEBSERVICE 0x1009eca0
+	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100b23b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100b2420

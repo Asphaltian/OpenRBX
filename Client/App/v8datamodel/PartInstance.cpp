@@ -12,10 +12,10 @@
 
 namespace RBX {
 
+char sPart[] = "Part";
+
 // GLOBAL: WEBSERVICE 0x102d4568
 const char* const category_Part = "Part";
-
-char sPart[] = "Part";
 
 bool PartInstance::highlightSleepParts;
 bool PartInstance::highlightAwakeParts;
@@ -24,13 +24,16 @@ bool PartInstance::showPartCoord;
 bool PartInstance::showUnalignedParts;
 bool PartInstance::showSpanningTree;
 
+static const Name& namePart = Name::declare(sPart, 1000);
+static const Name& nameCFrame = Name::declare("CFrame", 1001);
+static const Name& namePosition = Name::declare("Position", 1002);
+
 const Reflection::PropDescriptor<PartInstance, CoordinateFrame> PartInstance::prop_CFrame(
 	"CFrame",
 	"Data",
 	&RBX::PartInstance::getCoordinateFrame,
 	&RBX::PartInstance::setCoordinateFrame
 );
-
 static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_PositionUi(
 	"Position",
 	"Data",
@@ -38,19 +41,92 @@ static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_PositionUi(
 	&RBX::PartInstance::setTranslationUi,
 	Reflection::PropertyDescriptor::UI
 );
-
 static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_Velocity(
 	"Velocity",
 	"Data",
 	&RBX::PartInstance::getLinearVelocity,
 	&RBX::PartInstance::setLinearVelocity
 );
-
 static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_RotVelocity(
 	"RotVelocity",
 	"Data",
 	&RBX::PartInstance::getRotationalVelocity,
 	&RBX::PartInstance::setRotationalVelocity
+);
+
+static Reflection::BoundFuncDesc<PartInstance, void(), 0> desc_unjoin(
+	&PartInstance::destroyJoints,
+	"BreakJoints",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<PartInstance, void(), 0> desc_join(
+	&PartInstance::join,
+	"MakeJoints",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<PartInstance, float(), 0> desc_getMass(
+	&PartInstance::getMass,
+	"GetMass",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+
+const Reflection::EnumPropDescriptor<PartInstance, Part::PartType> PartInstance::prop_shapeXml(
+	"shape",
+	category_Part,
+	&RBX::PartInstance::getPartType,
+	&RBX::PartInstance::setPartTypeXml,
+	Reflection::PropertyDescriptor::STREAMING
+);
+static Reflection::EnumPropDescriptor<PartInstance, Part::PartType> prop_shapeUi(
+	"Shape",
+	category_Part,
+	&RBX::PartInstance::getPartType,
+	&RBX::PartInstance::setPartTypeUi,
+	Reflection::PropertyDescriptor::UI
+);
+
+const Reflection::PropDescriptor<PartInstance, G3D::Color3> PartInstance::prop_Color(
+	"Color",
+	"Appearance",
+	&RBX::PartInstance::getColor3,
+	&RBX::PartInstance::setColor3,
+	Reflection::PropertyDescriptor::LEGACY
+);
+const Reflection::PropDescriptor<PartInstance, BrickColor> PartInstance::prop_BrickColor(
+	"BrickColor",
+	"Appearance",
+	&RBX::PartInstance::getColor,
+	&RBX::PartInstance::setColor
+);
+const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Transparency(
+	"Transparency",
+	"Appearance",
+	&RBX::PartInstance::getTransparencyXml,
+	&RBX::PartInstance::setTransparency
+);
+const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Reflectance(
+	"Reflectance",
+	"Appearance",
+	&RBX::PartInstance::getReflectance,
+	&RBX::PartInstance::setReflectance
+);
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Locked(
+	"Locked",
+	"Behavior",
+	&RBX::PartInstance::getPartLocked,
+	&RBX::PartInstance::setPartLocked
+);
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Anchored(
+	"Anchored",
+	"Behavior",
+	&RBX::PartInstance::getAnchored,
+	&RBX::PartInstance::setAnchored
+);
+const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_CanCollide(
+	"CanCollide",
+	"Behavior",
+	&RBX::PartInstance::getCanCollide,
+	&RBX::PartInstance::setCanCollide
 );
 
 const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_RenderImportance(
@@ -61,71 +137,6 @@ const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_RenderI
 	Reflection::PropertyDescriptor::LEGACY
 );
 
-const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Transparency(
-	"Transparency",
-	"Appearance",
-	&RBX::PartInstance::getTransparencyXml,
-	&RBX::PartInstance::setTransparency
-);
-
-const Reflection::PropDescriptor<PartInstance, float> PartInstance::prop_Reflectance(
-	"Reflectance",
-	"Appearance",
-	&RBX::PartInstance::getReflectance,
-	&RBX::PartInstance::setReflectance
-);
-
-const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Locked(
-	"Locked",
-	"Behavior",
-	&RBX::PartInstance::getPartLocked,
-	&RBX::PartInstance::setPartLocked
-);
-
-const Reflection::PropDescriptor<PartInstance, G3D::Color3> PartInstance::prop_Color(
-	"Color",
-	"Appearance",
-	&RBX::PartInstance::getColor3,
-	&RBX::PartInstance::setColor3
-);
-
-const Reflection::PropDescriptor<PartInstance, BrickColor> PartInstance::prop_BrickColor(
-	"BrickColor",
-	"Appearance",
-	&RBX::PartInstance::getColor,
-	&RBX::PartInstance::setColor
-);
-
-const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_CanCollide(
-	"CanCollide",
-	"Behavior",
-	&RBX::PartInstance::getCanCollide,
-	&RBX::PartInstance::setCanCollide
-);
-
-const Reflection::PropDescriptor<PartInstance, bool> PartInstance::prop_Anchored(
-	"Anchored",
-	"Behavior",
-	&RBX::PartInstance::getAnchored,
-	&RBX::PartInstance::setAnchored
-);
-
-const Reflection::EnumPropDescriptor<PartInstance, Part::PartType> PartInstance::prop_shapeXml(
-	"shape",
-	category_Part,
-	&RBX::PartInstance::getPartType,
-	&RBX::PartInstance::setPartTypeXml,
-	Reflection::PropertyDescriptor::STREAMING
-);
-
-static Reflection::EnumPropDescriptor<PartInstance, Part::PartType> prop_shapeUi(
-	"Shape",
-	category_Part,
-	&RBX::PartInstance::getPartType,
-	&RBX::PartInstance::setPartTypeUi,
-	Reflection::PropertyDescriptor::UI
-);
-
 static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_SizeUi(
 	"Size",
 	category_Part,
@@ -133,7 +144,6 @@ static Reflection::PropDescriptor<PartInstance, G3D::Vector3> prop_SizeUi(
 	&RBX::PartInstance::setPartSizeUi,
 	Reflection::PropertyDescriptor::UI
 );
-
 const Reflection::PropDescriptor<PartInstance, G3D::Vector3> PartInstance::prop_Size(
 	"size",
 	category_Part,
@@ -141,7 +151,13 @@ const Reflection::PropDescriptor<PartInstance, G3D::Vector3> PartInstance::prop_
 	&RBX::PartInstance::setPartSizeXml,
 	Reflection::PropertyDescriptor::STREAMING
 );
-
+static Reflection::EnumPropDescriptor<PartInstance, PartInstance::FormFactor> prop_FormFactorUi(
+	"formFactor",
+	category_Part,
+	&RBX::PartInstance::getFormFactor,
+	&RBX::PartInstance::setFormFactorUi,
+	Reflection::PropertyDescriptor::UI
+);
 static Reflection::EnumPropDescriptor<PartInstance, PartInstance::FormFactor> prop_formFactor(
 	"FormFactor",
 	category_Part,
@@ -156,7 +172,6 @@ static Reflection::PropDescriptor<PartInstance, float> prop_Elasticity(
 	&RBX::PartInstance::getElasticity,
 	&RBX::PartInstance::setElasticity
 );
-
 static Reflection::PropDescriptor<PartInstance, float> prop_Friction(
 	"Friction",
 	category_Part,
