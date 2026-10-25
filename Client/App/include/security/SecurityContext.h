@@ -81,6 +81,11 @@ private:
 
 DECOMP_SIZE_ASSERT(Context, 0x4)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10221a60
+// `RBX::Security::Context::ptr'::`2'::`dynamic atexit destructor for 'value''
+// clang-format on
+
 // SIZE 0x4
 class Impersonator
 {

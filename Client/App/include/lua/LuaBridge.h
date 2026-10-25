@@ -239,7 +239,7 @@ int Bridge<T, Tag>::on_newindex(lua_State* L)
 // ?on_eq@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x1005fef0
 // ?on_eq@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
-// STUB: WEBSERVICE 0x10060010
+// TEMPLATE: WEBSERVICE 0x10060010
 // ?on_eq@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x10060190
 // ?on_eq@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z

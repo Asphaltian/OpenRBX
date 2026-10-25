@@ -1518,6 +1518,7 @@ address,size,type,symbol,name
 0x101e73c0,,library,?join@thread@boost@@QAEXXZ,
 0x101ea310,0x5,library,?get_deleter@?$sp_counted_impl_p@VStandardOut@RBX@@@detail@boost@@UAEPAXABVtype_info@@@Z,
 0x101ea320,,library,??0connection@signals@boost@@QAE@ABV012@@Z,
+0x101ea350,,library,??8connection@signals@boost@@QBE_NABV012@@Z,
 0x101ea450,,library,?disconnect@connection@signals@boost@@QBEXXZ,
 0x101ea560,,library,??1connection@signals@boost@@QAE@XZ,
 0x101ea5f0,,library,??4connection@signals@boost@@QAEAAV012@ABV012@@Z,

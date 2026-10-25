@@ -869,6 +869,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::creator''
 // SYNTHETIC: WEBSERVICE 0x10218af0
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218bc0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::creator''
 // SYNTHETIC: WEBSERVICE 0x10218cc0
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::creator''
 // SYNTHETIC: WEBSERVICE 0x10218d00
@@ -989,6 +991,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221980
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::creator''
+// SYNTHETIC: WEBSERVICE 0x10221ac0
+// `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221bc0
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221c00

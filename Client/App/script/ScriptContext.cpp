@@ -853,6 +853,9 @@ template void RBX::Lua::SharedPtrBridge<RBX::Reflection::SignalInstance>::push(
 	boost::shared_ptr<RBX::Reflection::SignalInstance> instance
 );
 
+template const RBX::FactoryProduct<RBX::DebugSettings, RBX::GlobalSettings::Item, RBX::sDebugSettings>::Creator
+	RBX::FactoryProduct<RBX::DebugSettings, RBX::GlobalSettings::Item, RBX::sDebugSettings>::creator;
+
 template const RBX::Name& RBX::Name::doDeclare<RBX::Stats::sStatsItem>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::Stats::sStats>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sDebugSettings>();
