@@ -296,7 +296,7 @@ bool XmlNameValuePair::getValue(float& value) const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1008f4a0
+// FUNCTION: WEBSERVICE 0x1008f4a0
 bool XmlNameValuePair::getValue(double& value) const
 {
 	if (valueType == DOUBLE) {
@@ -304,21 +304,26 @@ bool XmlNameValuePair::getValue(double& value) const
 		return true;
 	}
 
-	if (valueType == FLOAT) {
-		value = floatValue;
-	}
-	else if (valueType != STRING || !RBX::StringConverter<double>::convertToValue(*stringValue, value)) {
-		return false;
-	}
-
 	XmlNameValuePair* self = const_cast<XmlNameValuePair*>(this);
 
-	self->clearValue();
+	if (valueType == FLOAT) {
+		value = floatValue;
+		self->clearValue();
+		self->doubleValue = value;
+		self->valueType = DOUBLE;
+		return true;
+	}
 
-	self->doubleValue = value;
-	self->valueType = DOUBLE;
+	if (valueType == STRING) {
+		if (RBX::StringConverter<double>::convertToValue(*stringValue, value)) {
+			self->clearValue();
+			self->doubleValue = value;
+			self->valueType = DOUBLE;
+			return true;
+		}
+	}
 
-	return true;
+	return false;
 }
 
 // STUB: WEBSERVICE 0x1008f510
@@ -363,7 +368,7 @@ bool XmlElement::isXsiNil() const
 	return attribute != NULL && attribute->getValue(isNil) && isNil;
 }
 
-// STUB: WEBSERVICE 0x1008fe70
+// FUNCTION: WEBSERVICE 0x1008fe70
 std::string XmlNameValuePair::toString(XmlWriter* writer) const
 {
 	switch (valueType) {
