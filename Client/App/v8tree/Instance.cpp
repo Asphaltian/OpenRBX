@@ -257,6 +257,15 @@ XmlElement* Instance::write()
 	return NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x10049e80
+int Instance::findChildIndex(const Instance* instance) const
+{
+	const std::vector<shared_ptr<Instance> >& c = *children;
+	std::vector<shared_ptr<Instance> >::const_iterator iter =
+		std::find(c.begin(), c.end(), instance->shared_from_this());
+	return iter - c.begin();
+}
+
 // STUB: WEBSERVICE 0x1004a010
 void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
@@ -354,10 +363,13 @@ void Instance::onAncestorChanged(const AncestorChanged& event)
 	STUB(0x1004ddb0);
 }
 
-// STUB: WEBSERVICE 0x1004dee0
+// FUNCTION: WEBSERVICE 0x1004dee0
 void Instance::onDescendentAdded(Instance* instance)
 {
-	STUB(0x1004dee0);
+	if (Notifier<Instance, DescendentAdded>::hasListeners()) {
+		Notifier<Instance, DescendentAdded>::raise(DescendentAdded(instance, instance->getParent()));
+	}
+	event_descendentAdded.fire(this, shared_from(instance));
 }
 
 // STUB: WEBSERVICE 0x1004df50
@@ -372,6 +384,14 @@ void Instance::setName(const std::string& value)
 	if (name != value) {
 		name = value;
 		raisePropertyChanged(desc_Name);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1004e080
+void Instance::removeAllChildren()
+{
+	while (children) {
+		children->back()->setParent(NULL);
 	}
 }
 

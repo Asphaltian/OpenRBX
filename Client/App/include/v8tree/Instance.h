@@ -54,6 +54,13 @@ struct DescendentAdded
 {
 	const boost::shared_ptr<Instance> instance; // 0x00
 	const boost::shared_ptr<Instance> parent;   // 0x08
+
+	// FUNCTION: WEBSERVICE 0x10049ad0
+	// RBX::DescendentAdded::DescendentAdded
+
+	DescendentAdded(Instance* instance, Instance* parent) : instance(shared_from(instance)), parent(shared_from(parent))
+	{
+	}
 };
 
 // SIZE 0x10
@@ -162,6 +169,10 @@ public:
 	static Reflection::BoundProp<bool, 1> propArchivable;
 	static const Reflection::PropDescriptor<Instance, std::string> desc_Name;
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10047f40
+	// ?raise@?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@IBEXUDescendentAdded@2@PAV?$Listener@VInstance@RBX@@UDescendentAdded@2@@2@@Z
+	// TEMPLATE: WEBSERVICE 0x10048af0
+	// ?raise@?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@IBEXUDescendentAdded@2@@Z
 	// SYNTHETIC: WEBSERVICE 0x10218450
 	// `dynamic initializer for 'RBX::Instance::propArchivable''
 	// SYNTHETIC: WEBSERVICE 0x10218480
@@ -182,10 +193,14 @@ public:
 	// RBX::`dynamic initializer for 'prop_className''
 	// SYNTHETIC: WEBSERVICE 0x10218610
 	// `dynamic initializer for 'RBX::Instance::desc_Name''
+	// SYNTHETIC: WEBSERVICE 0x10218650
+	// `dynamic initializer for 'RBX::Instance::propParent''
 	// SYNTHETIC: WEBSERVICE 0x10218750
 	// RBX::`dynamic initializer for 'nameName''
 	// SYNTHETIC: WEBSERVICE 0x10218770
 	// RBX::`dynamic initializer for 'nameParent''
+	// SYNTHETIC: WEBSERVICE 0x102216a0
+	// `dynamic atexit destructor for 'RBX::Instance::propParent''
 	// SYNTHETIC: WEBSERVICE 0x102216c0
 	// `dynamic atexit destructor for 'RBX::Instance::propArchivable''
 	// SYNTHETIC: WEBSERVICE 0x102216e0
@@ -220,6 +235,9 @@ public:
 	void setParent2(boost::shared_ptr<Instance> instance) { setParent(instance.get()); }
 
 	Instance* getRootAncestor() { return parent != NULL ? parent->getRootAncestor() : this; }
+
+	int findChildIndex(const Instance* instance) const;
+	void removeAllChildren();
 
 	Instance* findFirstChildByName(const std::string& findName) const;
 	Instance* findFirstChildByNameRecursive(const std::string& findName) const;
@@ -687,12 +705,16 @@ protected:
 // `dynamic initializer for 'RBX::Instance::event_descendentAdded''
 // SYNTHETIC: WEBSERVICE 0x102186f0
 // `dynamic initializer for 'RBX::Instance::event_descendentRemoving''
+// SYNTHETIC: WEBSERVICE 0x10218710
+// `dynamic initializer for 'RBX::Instance::event_ancestryChanged''
 // SYNTHETIC: WEBSERVICE 0x10218730
 // `dynamic initializer for 'RBX::Instance::event_propertyChanged''
 // SYNTHETIC: WEBSERVICE 0x10221790
 // `dynamic atexit destructor for 'RBX::Instance::event_descendentAdded''
 // SYNTHETIC: WEBSERVICE 0x102217a0
 // `dynamic atexit destructor for 'RBX::Instance::event_descendentRemoving''
+// SYNTHETIC: WEBSERVICE 0x102217b0
+// `dynamic atexit destructor for 'RBX::Instance::event_ancestryChanged''
 // SYNTHETIC: WEBSERVICE 0x102217c0
 // `dynamic atexit destructor for 'RBX::Instance::event_propertyChanged''
 // SYNTHETIC: WEBSERVICE 0x10221780

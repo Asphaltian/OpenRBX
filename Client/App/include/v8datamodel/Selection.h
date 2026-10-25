@@ -66,7 +66,7 @@ DECOMP_SIZE_ASSERT(Selection, 0x12c)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x10047e10
-// RBX::SelectionChanged::~SelectionChanged
+// RBX::DescendentAdded::~DescendentAdded
 // FUNCTION: WEBSERVICE 0x1005cf20
 // RBX::SelectionChanged::SelectionChanged
 // STUB: WEBSERVICE 0x1005d160
