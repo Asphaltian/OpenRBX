@@ -157,6 +157,13 @@ public:
 	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_ancestryChanged;
 	static Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> event_propertyChanged;
 
+	static const Reflection::PropDescriptor<Instance, std::string> desc_Name;
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10218610
+	// `dynamic initializer for 'RBX::Instance::desc_Name''
+	// SYNTHETIC: WEBSERVICE 0x102216e0
+	// `dynamic atexit destructor for 'RBX::Instance::desc_Name''
+	// clang-format on
 	static const Reflection::RefPropDescriptor<Instance, Instance> propParent;
 
 	const Association<Instance>& association() const { return assoc; }
@@ -176,10 +183,18 @@ public:
 	template <class T>
 	T* findFirstChildOfType() const;
 
+	// FUNCTION: WEBSERVICE 0x10047ab0
+	std::string getClassNameStr() const { return getClassName().name; }
+
 	// FUNCTION: WEBSERVICE 0x10047ae0
+	// RBX::Instance::getName
+
 	const std::string& getName() const { return name; }
 
 	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }
+
+	// FUNCTION: WEBSERVICE 0x10048f00
+	boost::shared_ptr<const std::vector<shared_ptr<Instance> > > getChildren2() { return children.read(); }
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100e9570
@@ -288,6 +303,12 @@ public:
 
 		return isAncestorOf(descendent);
 	}
+
+	// FUNCTION: WEBSERVICE 0x10047d00
+	bool isAncestorOf2(boost::shared_ptr<Instance> descendent) { return isAncestorOf(descendent.get()); }
+
+	// FUNCTION: WEBSERVICE 0x10048290
+	bool isDescendentOf2(boost::shared_ptr<Instance> ancestor) { return isDescendentOf(ancestor.get()); }
 
 	// FUNCTION: WEBSERVICE 0x10047d90
 	bool isDescendentOf(const Instance* ancestor) const

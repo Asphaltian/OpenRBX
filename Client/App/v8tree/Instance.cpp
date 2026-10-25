@@ -9,6 +9,14 @@ namespace RBX {
 
 const char sInstance[] = "Instance";
 
+const Reflection::PropDescriptor<Instance, std::string> Instance::desc_Name(
+	"Name",
+	"Data",
+	&Instance::getName,
+	&Instance::setName,
+	Reflection::PropertyDescriptor::STANDARD
+);
+
 const Reflection::RefPropDescriptor<Instance, Instance> Instance::propParent(
 	"Parent",
 	"Data",
@@ -39,11 +47,11 @@ ChildRemoved::ChildRemoved(Instance* child) : child(shared_from(child))
 {
 }
 
-// STUB: WEBSERVICE 0x10047af0
+// FUNCTION: WEBSERVICE 0x10047af0
 void Instance::onChildChanged(Instance* instance, const PropertyChanged& event)
 {
-	if (parent != NULL) {
-		parent->onChildChanged(instance, event);
+	if (getParent() != NULL) {
+		getParent()->onChildChanged(instance, event);
 	}
 }
 
@@ -88,7 +96,16 @@ void Instance::writeChildren(XmlElement* container)
 // STUB: WEBSERVICE 0x100483f0
 Instance* Instance::findFirstChildByName(const std::string& findName) const
 {
-	STUB(0x100483f0);
+	if (!children) {
+		return NULL;
+	}
+
+	for (unsigned int i = 0; i < children->size(); ++i) {
+		if ((*children)[i]->getName() == findName) {
+			return (*children)[i].get();
+		}
+	}
+
 	return NULL;
 }
 
@@ -157,11 +174,10 @@ void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder&
 	STUB(0x1004a010);
 }
 
-// STUB: WEBSERVICE 0x1004cdf0
+// FUNCTION: WEBSERVICE 0x1004cdf0
 shared_ptr<Instance> Instance::createChild(const Name& className)
 {
-	STUB(0x1004cdf0);
-	return shared_ptr<Instance>();
+	return Instance::create(className);
 }
 
 // STUB: WEBSERVICE 0x1004d0b0
@@ -246,10 +262,13 @@ void Instance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 	STUB(0x1004df50);
 }
 
-// STUB: WEBSERVICE 0x1004e040
+// FUNCTION: WEBSERVICE 0x1004e040
 void Instance::setName(const std::string& value)
 {
-	STUB(0x1004e040);
+	if (name != value) {
+		name = value;
+		raisePropertyChanged(desc_Name);
+	}
 }
 
 // STUB: WEBSERVICE 0x1004e0f0
