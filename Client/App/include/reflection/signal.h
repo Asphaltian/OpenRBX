@@ -163,6 +163,26 @@ protected:
 
 DECOMP_SIZE_ASSERT(SignalDescriptor, 0x24)
 
+// SIZE 0x08
+class Signal
+{
+public:
+	Signal(const Signal& other) : descriptor(other.descriptor), instance(other.instance) {}
+	Signal(const SignalDescriptor& descriptor, DescribedBase* instance) : descriptor(&descriptor), instance(instance) {}
+
+	const Name& getName() const { return descriptor->name; }
+
+	const SignalDescriptor* getDescriptor() const { return descriptor; }
+
+	boost::shared_ptr<SignalInstance> getSignalInstance() const;
+
+protected:
+	const SignalDescriptor* descriptor; // 0x00
+	DescribedBase* instance;            // 0x04
+};
+
+DECOMP_SIZE_ASSERT(Signal, 0x08)
+
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100b0e00
 // RBX::Reflection::SignalInstance::connectGeneric<WaitScriptSlot>

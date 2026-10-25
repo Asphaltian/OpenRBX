@@ -260,6 +260,20 @@ protected:
 public:
 	virtual const Name& getClassName() const = 0; // vtable+0x04
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1004bf20
+	// RBX::AbstractFactoryProduct<RBX::Instance>::create
+	// clang-format on
+	static boost::shared_ptr<T> create(const Name& name)
+	{
+		std::map<const Name*, const ICreator*>::iterator iter = getCreators().find(&name);
+		if (iter == getCreators().end()) {
+			return boost::shared_ptr<T>();
+		}
+
+		return boost::shared_dynamic_cast<T>(iter->second->create());
+	}
+
 	virtual ~AbstractFactoryProduct() {}
 };
 

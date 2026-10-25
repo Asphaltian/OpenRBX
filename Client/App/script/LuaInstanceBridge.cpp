@@ -42,6 +42,137 @@ void newweaktable(lua_State* L, const char* mode)
 	lua_settable(L, -3);
 }
 
+} // namespace Lua
+} // namespace RBX
+
+// STUB: WEBSERVICE 0x100abd50
+static void pushLuaValue(RBX::Reflection::ConstProperty p, lua_State* L)
+{
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<int>()) {
+		lua_pushinteger(L, p.getValue<int>());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<bool>()) {
+		lua_pushboolean(L, p.getValue<bool>());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<float>()) {
+		lua_pushnumber(L, p.getValue<float>());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<double>()) {
+		lua_pushnumber(L, p.getValue<double>());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<std::string>()) {
+		lua_pushstring(L, p.getStringValue().c_str());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Instance> >()) {
+		RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(
+			L,
+			p.getValue<boost::shared_ptr<RBX::Instance> >()
+		);
+		return;
+	}
+
+	if (p.getDescriptor().type ==
+		RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Reflection::DescribedBase> >()) {
+		RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(
+			L,
+			p.getValue<boost::shared_ptr<RBX::Reflection::DescribedBase> >()
+		);
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<G3D::Vector3>()) {
+		RBX::Lua::Vector3Bridge::pushVector3(L, p.getValue<G3D::Vector3>());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<G3D::CoordinateFrame>()) {
+		RBX::Lua::CoordinateFrameBridge::pushCoordinateFrame(L, p.getValue<G3D::CoordinateFrame>());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<G3D::Color3>()) {
+		RBX::Lua::Color3Bridge::pushColor3(L, p.getValue<G3D::Color3>());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<RBX::BrickColor>()) {
+		RBX::Lua::Bridge<RBX::BrickColor, 1>::pushNewObject(L, p.getValue<RBX::BrickColor>());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<RBX::ContentId>()) {
+		lua_pushstring(L, p.getStringValue().c_str());
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<RBX::Lua::FunctionRef>()) {
+		RBX::Lua::lua_pushfunction(L, p.getValue<RBX::Lua::FunctionRef>());
+		return;
+	}
+
+	if (p.getDescriptor().type ==
+		RBX::Reflection::Type::singleton<boost::shared_ptr<const std::vector<boost::shared_ptr<RBX::Instance> > > >()) {
+		boost::shared_ptr<const std::vector<boost::shared_ptr<RBX::Instance> > > objects =
+			p.getValue<boost::shared_ptr<const std::vector<boost::shared_ptr<RBX::Instance> > > >();
+		if (objects) {
+			std::vector<boost::shared_ptr<RBX::Instance> >::const_iterator iter = objects->begin();
+			std::vector<boost::shared_ptr<RBX::Instance> >::const_iterator end = objects->end();
+			lua_createtable(L, end - iter, 0);
+			int index = 1;
+			while (iter != end) {
+				RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(L, *iter);
+				lua_rawseti(L, -2, index);
+				++iter;
+				++index;
+			}
+		}
+		else {
+			lua_newtable(L);
+		}
+		return;
+	}
+
+	const RBX::Reflection::EnumPropertyDescriptor* enumDescriptor =
+		dynamic_cast<const RBX::Reflection::EnumPropertyDescriptor*>(&p.getDescriptor());
+	if (enumDescriptor) {
+		lua_pushinteger(L, enumDescriptor->getEnumValue(p.getInstance()));
+		return;
+	}
+
+	const RBX::Reflection::RefPropertyDescriptor* refDescriptor =
+		dynamic_cast<const RBX::Reflection::RefPropertyDescriptor*>(&p.getDescriptor());
+	if (refDescriptor) {
+		RBX::Reflection::DescribedBase* value = refDescriptor->getRefValue(p.getInstance());
+		if (value) {
+			RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(
+				L,
+				static_cast<RBX::Instance*>(value)->shared_from_this()
+			);
+		}
+		else {
+			RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(L, boost::shared_ptr<RBX::Instance>());
+		}
+		return;
+	}
+
+	throw std::runtime_error(
+		G3D::format("Unable to get property %s, type %s", p.getName().c_str(), p.getDescriptor().type.name.name.c_str())
+	);
+}
+
+namespace RBX {
+namespace Lua {
+
 // FUNCTION: WEBSERVICE 0x100ac300
 boost::shared_ptr<Instance> ObjectBridge::getInstance(lua_State* L, unsigned int index)
 {
@@ -212,11 +343,21 @@ void Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_newindex(
 	}
 }
 
-// STUB: WEBSERVICE 0x100ad180
-int ObjectBridge::newInstance(lua_State* L)
+// FUNCTION: WEBSERVICE 0x100ad180
+int ObjectBridge::newInstance(lua_State* thread)
 {
-	STUB(0x100ad180);
-	return 0;
+	const Name& className = Name::lookup(lua_tostring(thread, 1));
+
+	boost::shared_ptr<Instance> instance = Instance::create(className);
+	if (lua_gettop(thread) >= 2) {
+		boost::shared_ptr<Instance> parent = getInstance(thread, 2);
+		if (parent) {
+			instance->setParent(parent.get());
+		}
+	}
+
+	push(thread, instance);
+	return 1;
 }
 
 // FUNCTION: WEBSERVICE 0x100ad2e0
@@ -255,16 +396,80 @@ int ObjectBridge::callMemberFunction(lua_State* L)
 	return args.pushReturnValue();
 }
 
-// STUB: WEBSERVICE 0x100ad4b0
+// FUNCTION: WEBSERVICE 0x100ad4b0
 template <>
 int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_index(
-	const boost::shared_ptr<Reflection::DescribedBase>& value,
+	const boost::shared_ptr<Reflection::DescribedBase>& object,
 	const char* name,
 	lua_State* L
 )
 {
-	STUB(0x100ad4b0);
-	return 0;
+	if (!object) {
+		throw std::runtime_error("The object has been deleted");
+	}
+
+	const Name& memberName = Name::lookup(name);
+
+	{
+		Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator iter =
+			object->findProperty(memberName);
+		if (iter != object->properties_end()) {
+			pushLuaValue(*iter, L);
+			return 1;
+		}
+	}
+
+	{
+		Reflection::MemberDescriptorContainer<Reflection::FunctionDescriptor>::ConstIterator iter =
+			object->findFunction(memberName);
+		if (iter != object->functions_end()) {
+			const Reflection::FunctionDescriptor* descriptor = (*iter).getDescriptor();
+
+			lua_pushlightuserdata(L, (void*) descriptor);
+			lua_rawget(L, LUA_ENVIRONINDEX);
+			if (lua_isnil(L, -1)) {
+				lua_pop(L, 1);
+
+				lua_pushlightuserdata(L, (void*) descriptor);
+				lua_pushcclosure(L, ObjectBridge::callMemberFunction, 1);
+
+				lua_pushlightuserdata(L, (void*) descriptor);
+				lua_pushvalue(L, -2);
+				lua_settable(L, LUA_ENVIRONINDEX);
+			}
+
+			return 1;
+		}
+	}
+
+	{
+		Reflection::MemberDescriptorContainer<Reflection::SignalDescriptor>::Iterator iter =
+			object->findSignal(memberName);
+		if (iter != object->signals_end()) {
+			Reflection::Signal s = *iter;
+			SharedPtrBridge<Reflection::SignalInstance>::push(L, s.getSignalInstance());
+			return 1;
+		}
+	}
+
+	Instance* instance = dynamic_cast<Instance*>(object.get());
+	if (instance) {
+		Instance* child = instance->findFirstChildByName(name);
+		if (child) {
+			SharedPtrBridge<Reflection::DescribedBase>::push(L, shared_from(child));
+			return 1;
+		}
+	}
+
+	if (&Name::getNullName() == &memberName) {
+		std::string name2 = name;
+		name2[0] = toupper(name[0]);
+		if (name2[0] != name[0] && !Name::lookup(name2).empty()) {
+			return on_index(object, name2.c_str(), L);
+		}
+	}
+
+	throw std::runtime_error(G3D::format("%s is not a valid member of %s", name, instance->getClassName().c_str()));
 }
 
 } // namespace Lua

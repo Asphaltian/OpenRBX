@@ -44,7 +44,7 @@ public:
 		{
 		}
 
-		ConstMemberType operator*() const { return ConstMemberType(*iter, instance); }
+		ConstMemberType operator*() const { return ConstMemberType(**iter, instance); }
 
 		bool operator==(const ConstIterator& other) const { return iter == other.iter; }
 
@@ -81,9 +81,9 @@ public:
 
 		// clang-format off
 		// TEMPLATE: WEBSERVICE 0x10047dd0
-		// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::Iterator::operator*
+		// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::Iterator::operator*
 		// clang-format on
-		MemberType operator*() const { return MemberType(*iter, instance); }
+		MemberType operator*() const { return MemberType(**iter, instance); }
 
 		bool operator==(const Iterator& other) const { return iter == other.iter; }
 
@@ -148,7 +148,7 @@ protected:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100495f0
-// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::findDescriptor
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::findDescriptor
 // clang-format on
 template <class T>
 typename MemberDescriptorContainer<T>::Collection::const_iterator MemberDescriptorContainer<T>::findDescriptor(

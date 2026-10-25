@@ -796,8 +796,8 @@ class ConstProperty
 {
 public:
 	ConstProperty(const ConstProperty& other) : descriptor(other.descriptor), instance(other.instance) {}
-	ConstProperty(const PropertyDescriptor* descriptor, const DescribedBase* instance)
-		: descriptor(descriptor), instance(instance)
+	ConstProperty(const PropertyDescriptor& descriptor, const DescribedBase* instance)
+		: descriptor(&descriptor), instance(instance)
 	{
 	}
 
@@ -810,6 +810,10 @@ public:
 	// RBX::Reflection::ConstProperty::getValue<int>
 	// TEMPLATE: WEBSERVICE 0x100ab670
 	// RBX::Reflection::ConstProperty::getValue<double>
+	// TEMPLATE: WEBSERVICE 0x100ab6d0
+	// RBX::Reflection::ConstProperty::getValue<boost::shared_ptr<RBX::Instance> >
+	// TEMPLATE: WEBSERVICE 0x100ab740
+	// RBX::Reflection::ConstProperty::getValue<boost::shared_ptr<RBX::Reflection::DescribedBase> >
 	// TEMPLATE: WEBSERVICE 0x100ab7b0
 	// RBX::Reflection::ConstProperty::getValue<G3D::Vector3>
 	// TEMPLATE: WEBSERVICE 0x100ab810
@@ -818,6 +822,10 @@ public:
 	// RBX::Reflection::ConstProperty::getValue<G3D::Color3>
 	// TEMPLATE: WEBSERVICE 0x100ab8d0
 	// RBX::Reflection::ConstProperty::getValue<RBX::BrickColor>
+	// TEMPLATE: WEBSERVICE 0x100ab930
+	// RBX::Reflection::ConstProperty::getValue<RBX::Lua::FunctionRef>
+	// TEMPLATE: WEBSERVICE 0x100ab9a0
+	// RBX::Reflection::ConstProperty::getValue<boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > >
 	// clang-format on
 	template <class T>
 	T getValue() const
@@ -831,6 +839,7 @@ public:
 
 	const Name& getName() const { return descriptor->name; }
 
+	// FUNCTION: WEBSERVICE 0x100aaf40
 	std::string getStringValue() const { return descriptor->getStringValue(instance); }
 
 protected:
@@ -846,7 +855,7 @@ class Property : public ConstProperty
 public:
 	Property(const Property& other) : ConstProperty(other) {}
 
-	Property(const PropertyDescriptor* descriptor, DescribedBase* instance) : ConstProperty(descriptor, instance) {}
+	Property(const PropertyDescriptor& descriptor, DescribedBase* instance) : ConstProperty(descriptor, instance) {}
 
 	DescribedBase* getInstance() const { return const_cast<DescribedBase*>(instance); }
 

@@ -49,6 +49,29 @@ protected:
 DECOMP_SIZE_ASSERT(FunctionDescriptor::Arguments, 0x0c)
 DECOMP_SIZE_ASSERT(FunctionDescriptor, 0x24)
 
+// SIZE 0x08
+class Function
+{
+public:
+	Function(const Function& other) : descriptor(other.descriptor), instance(other.instance) {}
+	Function(const FunctionDescriptor& descriptor, const DescribedBase* instance)
+		: descriptor(&descriptor), instance(instance)
+	{
+	}
+
+	const Name& getName() const { return descriptor->name; }
+
+	const FunctionDescriptor* getDescriptor() const { return descriptor; }
+
+	void execute(FunctionDescriptor::Arguments& arguments) const;
+
+protected:
+	const FunctionDescriptor* descriptor; // 0x00
+	const DescribedBase* instance;        // 0x04
+};
+
+DECOMP_SIZE_ASSERT(Function, 0x08)
+
 } // namespace Reflection
 } // namespace RBX
 

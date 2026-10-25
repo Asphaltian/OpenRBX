@@ -68,6 +68,12 @@ boost::shared_ptr<SignalInstance> SignalDescriptor::getSignalInstance(SignalSour
 	return si;
 }
 
+// FUNCTION: WEBSERVICE 0x10095e50
+boost::shared_ptr<SignalInstance> Signal::getSignalInstance() const
+{
+	return descriptor->getSignalInstance(*instance);
+}
+
 // FUNCTION: WEBSERVICE 0x10095e80
 SignalSource::~SignalSource()
 {

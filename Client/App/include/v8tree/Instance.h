@@ -207,7 +207,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100469f0
 	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
 	{
-		Reflection::Property property(&descriptor, this);
+		Reflection::Property property(descriptor, this);
 		PropertyChanged event(property);
 
 		Notifier<Instance, PropertyChanged>::raise(property);

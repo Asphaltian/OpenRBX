@@ -4873,6 +4873,7 @@ address,type,symbol
 0x102d5db8,global,??_R0?AV?$TypedPropertyDescriptor@V?$shared_ptr@VInstance@RBX@@@boost@@@Reflection@RBX@@@8
 0x102d5e18,global,??_R0?AV?$TypedPropertyDescriptor@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Reflection@RBX@@@8
 0x102d5e88,global,??_R0?AV?$TypedPropertyDescriptor@VFunctionRef@Lua@RBX@@@Reflection@RBX@@@8
+0x102d5ed8,global,??_R0?AV?$TypedPropertyDescriptor@V?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@Reflection@RBX@@@8
 0x102d60c0,global,??_R0?AVCreator@?$FactoryProduct@VTexture@RBX@@VDecal@2@$1?sTexture@2@3PADA@RBX@@@8
 0x102d6118,global,??_R0?AV?$sp_counted_impl_pd@PAVTexture@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
 0x102d6180,global,?creator@?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@0VCreator@12@B
