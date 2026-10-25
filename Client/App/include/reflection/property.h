@@ -608,6 +608,14 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::getset<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>
 	// FUNCTION: WEBSERVICE 0x100ca3f0
 	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::GetSetImpl<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100a0f40
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::GetSetImpl<bool (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(bool)>::getValue
+	// TEMPLATE: WEBSERVICE 0x1009b390
+	// RBX::Reflection::PropDescriptor<RBX::ModelInstance,RBX::PartInstance *>::GetSetImpl<RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>::setValue
+	// TEMPLATE: WEBSERVICE 0x100a0f80
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::GetSetImpl<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float)>::setValue
+	// TEMPLATE: WEBSERVICE 0x100db7a0
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::GetSetImpl<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float const &)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100ca830
 	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::getset<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>
 	// FUNCTION: WEBSERVICE 0x100cd3c0

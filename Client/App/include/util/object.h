@@ -50,6 +50,8 @@ public:
 	class Deleter
 	{
 	public:
+		// TEMPLATE: WEBSERVICE 0x1000c260
+		// RBX::Creatable<RBX::Instance>::Deleter::operator()
 		void operator()(T* instance)
 		{
 			T::predelete(instance);
