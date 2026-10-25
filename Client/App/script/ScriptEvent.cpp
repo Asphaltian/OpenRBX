@@ -18,7 +18,7 @@ YieldingThreads::YieldingThreads(ScriptContext* context) : context(context)
 {
 }
 
-// STUB: WEBSERVICE 0x100b5f80
+// FUNCTION: WEBSERVICE 0x100b5f80
 void YieldingThreads::queueWaiter(lua_State* L, double requestedDelay)
 {
 	RobloxExtraSpace::get(L)->yieldCaptured = true;

@@ -218,9 +218,9 @@ int Bridge<T, Tag>::on_tostring(lua_State* L)
 }
 
 // clang-format off
-// STUB: WEBSERVICE 0x1005ffb0
+// FUNCTION: WEBSERVICE 0x1005ffb0
 // ?on_newindex@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
-// STUB: WEBSERVICE 0x10060360
+// FUNCTION: WEBSERVICE 0x10060360
 // ?on_newindex@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHPAUlua_State@@@Z
 // clang-format on
 template <class T, int Tag>
