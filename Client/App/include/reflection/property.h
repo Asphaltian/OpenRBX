@@ -408,10 +408,41 @@ public:
 	};
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10042e80
+	// RBX::Reflection::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::GetImpl<std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::Instance::*)(void)const >::getValue
+	// TEMPLATE: WEBSERVICE 0x100b3730
+	// RBX::Reflection::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::GetImpl<std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::Instance::*)(void)const >::setValue
+	// clang-format on
+	template <class Getter>
+	class GetImpl : public TypedPropertyDescriptor<T>::GetSet
+	{
+	public:
+		GetImpl(Getter get) : get(get) {}
+
+		virtual bool isReadOnly() const { return true; }
+
+		virtual T getValue(const DescribedBase* object) const
+		{
+			const Class* instance = static_cast<const Class*>(object);
+			return (instance->*get)();
+		}
+
+		virtual void setValue(DescribedBase* object, const T& value) const
+		{
+			throw std::runtime_error("can't set value");
+		}
+
+	private:
+		Getter get;
+	};
+
+	// clang-format off
 	// FUNCTION: WEBSERVICE 0x100433c0
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// FUNCTION: WEBSERVICE 0x10043430
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Color3>::TypedPropertyDescriptor<G3D::Color3>
+	// TEMPLATE: WEBSERVICE 0x1004b660
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Instance>
 	// TEMPLATE: WEBSERVICE 0x10068f70
 	// RBX::Reflection::PropDescriptor<RBX::Script,RBX::ContentId>::getset<RBX::ContentId const & (__thiscall RBX::Script::*)(void)const ,void (__thiscall RBX::Script::*)(RBX::ContentId const &)>
 	// TEMPLATE: WEBSERVICE 0x10069740
@@ -589,6 +620,12 @@ public:
 	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, Setter set)
 	{
 		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new GetSetImpl<Getter, Setter>(get, set));
+	}
+
+	template <class Getter>
+	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, int)
+	{
+		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new GetImpl<Getter>(get));
 	}
 
 	// clang-format off

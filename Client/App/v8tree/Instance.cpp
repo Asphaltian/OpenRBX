@@ -1,13 +1,60 @@
 #include "v8tree/Instance.h"
 
 #include "decomp.h"
+#include "v8xml/SerializerV2.h"
 
 #include <algorithm>
+#include <boost/bind.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <cstddef>
 
 namespace RBX {
 
 const char sInstance[] = "Instance";
+
+Reflection::BoundProp<bool, 1> Instance::propArchivable("archivable", "Behavior", &Instance::archivable);
+
+static Reflection::BoundFuncDesc<Instance, boost::shared_ptr<Instance>(std::string, bool), 2> findFirstChild(
+	&Instance::findFirstChildByName2,
+	"FindFirstChild",
+	"name",
+	"recursive",
+	false,
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<Instance, boost::shared_ptr<Instance>(), 0> func_clone(
+	&Instance::clone,
+	"Clone",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<Instance, void(), 0> func_Remove(
+	&Instance::remove,
+	"Remove",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<Instance, boost::shared_ptr<const std::vector<shared_ptr<Instance> > >(), 0>
+	func_childrenOld(&Instance::getChildren2, "children", Reflection::FunctionDescriptor::AnyCaller);
+static Reflection::BoundFuncDesc<Instance, boost::shared_ptr<const std::vector<shared_ptr<Instance> > >(), 0>
+	func_children(&Instance::getChildren2, "GetChildren", Reflection::FunctionDescriptor::AnyCaller);
+static Reflection::BoundFuncDesc<Instance, bool(shared_ptr<Instance>), 1> func_isDescendentOf(
+	&Instance::isDescendentOf2,
+	"IsDescendentOf",
+	"ancestor",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<Instance, bool(shared_ptr<Instance>), 1> func_isAncestorOf(
+	&Instance::isAncestorOf2,
+	"IsAncestorOf",
+	"descendent",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static const Reflection::PropDescriptor<Instance, std::string> prop_className(
+	"className",
+	"Data",
+	&Instance::getClassNameStr,
+	NULL,
+	Reflection::PropertyDescriptor::UI
+);
 
 const Reflection::PropDescriptor<Instance, std::string> Instance::desc_Name(
 	"Name",
@@ -29,6 +76,16 @@ Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_chi
 
 Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_childRemoved("ChildRemoved", "child");
 
+Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_descendentAdded(
+	"DescendentAdded",
+	"descendent"
+);
+
+Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_descendentRemoving(
+	"DescendentRemoving",
+	"descendent"
+);
+
 Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_ancestryChanged(
 	"AncestryChanged",
 	"child"
@@ -38,6 +95,9 @@ Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> In
 	"Changed",
 	"property"
 );
+
+static const Name& nameName = Name::declare("Name", 3000);
+static const Name& nameParent = Name::declare("Parent", 3001);
 
 ChildAdded::ChildAdded(Instance* child) : child(shared_from(child))
 {
@@ -109,6 +169,28 @@ Instance* Instance::findFirstChildByName(const std::string& findName) const
 	return NULL;
 }
 
+// STUB: WEBSERVICE 0x10048f30
+Instance* Instance::findFirstChildByNameRecursive(const std::string& findName) const
+{
+	Instance* result = findFirstChildByName(findName);
+	if (result) {
+		return result;
+	}
+
+	if (!children) {
+		return NULL;
+	}
+
+	for (unsigned int i = 0; i < children->size(); ++i) {
+		result = (*children)[i]->findFirstChildByNameRecursive(findName);
+		if (result) {
+			return result;
+		}
+	}
+
+	return NULL;
+}
+
 // FUNCTION: WEBSERVICE 0x10048fb0
 void Instance::signalDescendentAdded(Instance* instance, Instance* beginParent, Instance* oldParent)
 {
@@ -161,6 +243,13 @@ void Instance::signalDescendentRemoving(
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10049b30
+boost::shared_ptr<Instance> Instance::findFirstChildByName2(std::string findName, bool recursive)
+{
+	return recursive ? shared_from(findFirstChildByNameRecursive(findName))
+					 : shared_from(findFirstChildByName(findName));
+}
+
 // STUB: WEBSERVICE 0x10049d40
 XmlElement* Instance::write()
 {
@@ -172,6 +261,21 @@ XmlElement* Instance::write()
 void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
 	STUB(0x1004a010);
+}
+
+// STUB: WEBSERVICE 0x1004a9c0
+boost::shared_ptr<Instance> Instance::fromXmlRoot(XmlElement* root)
+{
+	STUB(0x1004a9c0);
+	return boost::shared_ptr<Instance>();
+}
+
+// STUB: WEBSERVICE 0x1004ab00
+boost::shared_ptr<Instance> Instance::clone()
+{
+	boost::scoped_ptr<XmlElement> root(SerializerV2::newRootElement());
+	root->addChild(write());
+	return fromXmlRoot(root.get());
 }
 
 // FUNCTION: WEBSERVICE 0x1004cdf0
@@ -275,6 +379,16 @@ void Instance::setName(const std::string& value)
 void Instance::predelete()
 {
 	STUB(0x1004e0f0);
+}
+
+// FUNCTION: WEBSERVICE 0x1004e4f0
+void Instance::remove()
+{
+	boost::shared_ptr<const std::vector<shared_ptr<Instance> > > c = children.read();
+	setParent(NULL);
+	if (c) {
+		std::for_each(c->begin(), c->end(), boost::bind(&Instance::remove, _1));
+	}
 }
 
 // STUB: WEBSERVICE 0x1004e5e0

@@ -268,6 +268,24 @@ class XmlElement : public RBX::Sibling<XmlElement>, public RBX::Parent<XmlElemen
 public:
 	XmlElement(const RBX::Name& tag) : XmlNameValuePair(tag) {}
 
+	// FUNCTION: WEBSERVICE 0x10048200
+	~XmlElement()
+	{
+		XmlAttribute* attribute = attributes.firstChild();
+		while (attribute) {
+			XmlAttribute* old = attribute;
+			attribute = attribute->nextSibling();
+			delete old;
+		}
+
+		XmlElement* child = firstChild();
+		while (child) {
+			XmlElement* old = child;
+			child = child->nextSibling();
+			delete old;
+		}
+	}
+
 	template <class T>
 	XmlElement(const RBX::Name& tag, T value) : XmlNameValuePair(tag, value)
 	{

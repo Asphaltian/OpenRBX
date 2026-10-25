@@ -154,15 +154,58 @@ protected:
 public:
 	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_childAdded;
 	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_childRemoved;
+	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_descendentAdded;
+	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_descendentRemoving;
 	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_ancestryChanged;
 	static Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> event_propertyChanged;
 
+	static Reflection::BoundProp<bool, 1> propArchivable;
 	static const Reflection::PropDescriptor<Instance, std::string> desc_Name;
 	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10218450
+	// `dynamic initializer for 'RBX::Instance::propArchivable''
+	// SYNTHETIC: WEBSERVICE 0x10218480
+	// RBX::`dynamic initializer for 'findFirstChild''
+	// SYNTHETIC: WEBSERVICE 0x102184c0
+	// RBX::`dynamic initializer for 'func_clone''
+	// SYNTHETIC: WEBSERVICE 0x102184f0
+	// RBX::`dynamic initializer for 'func_Remove''
+	// SYNTHETIC: WEBSERVICE 0x10218520
+	// RBX::`dynamic initializer for 'func_childrenOld''
+	// SYNTHETIC: WEBSERVICE 0x10218550
+	// RBX::`dynamic initializer for 'func_children''
+	// SYNTHETIC: WEBSERVICE 0x10218580
+	// RBX::`dynamic initializer for 'func_isDescendentOf''
+	// SYNTHETIC: WEBSERVICE 0x102185b0
+	// RBX::`dynamic initializer for 'func_isAncestorOf''
+	// SYNTHETIC: WEBSERVICE 0x102185e0
+	// RBX::`dynamic initializer for 'prop_className''
 	// SYNTHETIC: WEBSERVICE 0x10218610
 	// `dynamic initializer for 'RBX::Instance::desc_Name''
+	// SYNTHETIC: WEBSERVICE 0x10218750
+	// RBX::`dynamic initializer for 'nameName''
+	// SYNTHETIC: WEBSERVICE 0x10218770
+	// RBX::`dynamic initializer for 'nameParent''
+	// SYNTHETIC: WEBSERVICE 0x102216c0
+	// `dynamic atexit destructor for 'RBX::Instance::propArchivable''
 	// SYNTHETIC: WEBSERVICE 0x102216e0
 	// `dynamic atexit destructor for 'RBX::Instance::desc_Name''
+	// SYNTHETIC: WEBSERVICE 0x10221700
+	// RBX::`dynamic atexit destructor for 'prop_className''
+	// STUB: WEBSERVICE 0x10221720
+	// RBX::`dynamic atexit destructor for 'func_children''
+	// SYNTHETIC: WEBSERVICE 0x10221730
+	// RBX::`dynamic atexit destructor for 'func_isAncestorOf''
+	// STUB: WEBSERVICE 0x10221740
+	// RBX::`dynamic atexit destructor for 'func_clone''
+	// STUB: WEBSERVICE 0x10221750
+	// RBX::`dynamic atexit destructor for 'func_Remove''
+	// STUB: WEBSERVICE 0x10221760
+	// RBX::`dynamic atexit destructor for 'func_childrenOld''
+	// SYNTHETIC: WEBSERVICE 0x10221770
+	// RBX::`dynamic atexit destructor for 'func_isDescendentOf''
+	// SYNTHETIC: WEBSERVICE 0x102217d0
+	// RBX::`dynamic atexit destructor for 'findFirstChild''
 	// clang-format on
 	static const Reflection::RefPropDescriptor<Instance, Instance> propParent;
 
@@ -179,11 +222,20 @@ public:
 	Instance* getRootAncestor() { return parent != NULL ? parent->getRootAncestor() : this; }
 
 	Instance* findFirstChildByName(const std::string& findName) const;
+	Instance* findFirstChildByNameRecursive(const std::string& findName) const;
+	boost::shared_ptr<Instance> findFirstChildByName2(std::string findName, bool recursive);
+
+	static boost::shared_ptr<Instance> fromXmlRoot(XmlElement* root);
+
+	boost::shared_ptr<Instance> clone();
+	void remove();
 
 	template <class T>
 	T* findFirstChildOfType() const;
 
 	// FUNCTION: WEBSERVICE 0x10047ab0
+	// RBX::Instance::getClassNameStr
+
 	std::string getClassNameStr() const { return getClassName().name; }
 
 	// FUNCTION: WEBSERVICE 0x10047ae0
@@ -194,6 +246,8 @@ public:
 	const CopyOnWrite<std::vector<shared_ptr<Instance> > >& getChildren() const { return children; }
 
 	// FUNCTION: WEBSERVICE 0x10048f00
+	// RBX::Instance::getChildren2
+
 	boost::shared_ptr<const std::vector<shared_ptr<Instance> > > getChildren2() { return children.read(); }
 
 	// clang-format off
@@ -305,9 +359,13 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10047d00
+	// RBX::Instance::isAncestorOf2
+
 	bool isAncestorOf2(boost::shared_ptr<Instance> descendent) { return isAncestorOf(descendent.get()); }
 
 	// FUNCTION: WEBSERVICE 0x10048290
+	// RBX::Instance::isDescendentOf2
+
 	bool isDescendentOf2(boost::shared_ptr<Instance> ancestor) { return isDescendentOf(ancestor.get()); }
 
 	// FUNCTION: WEBSERVICE 0x10047d90
@@ -625,8 +683,16 @@ protected:
 // `dynamic initializer for 'RBX::Instance::event_childAdded''
 // SYNTHETIC: WEBSERVICE 0x102186b0
 // `dynamic initializer for 'RBX::Instance::event_childRemoved''
+// SYNTHETIC: WEBSERVICE 0x102186d0
+// `dynamic initializer for 'RBX::Instance::event_descendentAdded''
+// SYNTHETIC: WEBSERVICE 0x102186f0
+// `dynamic initializer for 'RBX::Instance::event_descendentRemoving''
 // SYNTHETIC: WEBSERVICE 0x10218730
 // `dynamic initializer for 'RBX::Instance::event_propertyChanged''
+// SYNTHETIC: WEBSERVICE 0x10221790
+// `dynamic atexit destructor for 'RBX::Instance::event_descendentAdded''
+// SYNTHETIC: WEBSERVICE 0x102217a0
+// `dynamic atexit destructor for 'RBX::Instance::event_descendentRemoving''
 // SYNTHETIC: WEBSERVICE 0x102217c0
 // `dynamic atexit destructor for 'RBX::Instance::event_propertyChanged''
 // SYNTHETIC: WEBSERVICE 0x10221780

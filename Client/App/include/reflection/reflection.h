@@ -738,6 +738,18 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10045f00
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::call<double>
+	// TEMPLATE: WEBSERVICE 0x1004c510
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x1004c580
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::call<boost::shared_ptr<RBX::Instance> >
+	// TEMPLATE: WEBSERVICE 0x1004c620
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x1004c680
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,void __cdecl(void),0>::BoundFuncDesc<RBX::Instance,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x1004c6f0
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x1004c900
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100567d0
 	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10056840
@@ -840,6 +852,10 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1004ca50
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::call<bool>
+	// TEMPLATE: WEBSERVICE 0x1004cad0
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::execute
 	// TEMPLATE: WEBSERVICE 0x100598b0
 	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x10059970
@@ -934,6 +950,12 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10047b70
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::declareSignature
+	// TEMPLATE: WEBSERVICE 0x1004c330
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::call<boost::shared_ptr<RBX::Instance> >
+	// TEMPLATE: WEBSERVICE 0x1004c3f0
+	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::execute
 	// TEMPLATE: WEBSERVICE 0x100f8be0
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x100f9820
