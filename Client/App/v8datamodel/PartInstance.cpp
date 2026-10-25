@@ -504,16 +504,10 @@ Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 	return xmlSize;
 }
 
-// STUB: WEBSERVICE 0x1009b6e0
+// FUNCTION: WEBSERVICE 0x1009b6e0
 Part PartInstance::computePersistentPart() const
 {
-	return Part(
-		partType,
-		getPartSizeXml(),
-		G3D::Color4(getColor3(), 1.0f - (1.0f - (1.0f - transparency) * alphaModifier)),
-		surfaces.surf6(),
-		getCoordinateFrame()
-	);
+	return Part(partType, getPartSizeXml(), G3D::Color4(getColor3(), alpha()), surfaces.surf6(), getCoordinateFrame());
 }
 
 // FUNCTION: WEBSERVICE 0x1009b780
@@ -656,14 +650,15 @@ void PartInstance::safeMove()
 	}
 }
 
-// STUB: WEBSERVICE 0x1009ce00
+// FUNCTION: WEBSERVICE 0x1009ce00
 void PartInstance::primitivesToParts(
 	const G3D::Array<Primitive*>& primitives,
 	G3D::Array<shared_ptr<PartInstance> >& parts
 )
 {
 	for (int i = 0; i < primitives.size(); i++) {
-		parts.append(shared_from(fromPrimitive(primitives[i])));
+		PartInstance* part = fromPrimitive(primitives[i]);
+		parts.append(shared_from(part));
 	}
 }
 
@@ -717,10 +712,16 @@ EnumDesc<PartInstance::FormFactor>::EnumDesc() : EnumDescriptor("FormFactor", ty
 
 } // namespace Reflection
 
-// STUB: WEBSERVICE 0x1009dca0
+// FUNCTION: WEBSERVICE 0x1009dca0
 void PartInstance::findParts(Instance* instance, std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
-	STUB(0x1009dca0);
+	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
+		parts.push_back(shared_from(part));
+	}
+
+	for (unsigned int i = 0; i < instance->numChildren(); i++) {
+		findParts(instance->getChild(i), parts);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1009ef30

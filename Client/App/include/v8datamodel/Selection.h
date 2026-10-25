@@ -69,10 +69,10 @@ DECOMP_SIZE_ASSERT(Selection, 0x12c)
 // RBX::DescendentRemoving::~DescendentRemoving
 // FUNCTION: WEBSERVICE 0x1005cf20
 // RBX::SelectionChanged::SelectionChanged
-// STUB: WEBSERVICE 0x1005d160
-// RBX::Notifier<RBX::Selection,RBX::SelectionChanged>::raise(class RBX::SelectionChanged)
 // TEMPLATE: WEBSERVICE 0x1005d010
-// RBX::Notifier<RBX::Selection,RBX::SelectionChanged>::raise
+// ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@PAV?$Listener@VSelection@RBX@@VSelectionChanged@2@@2@@Z
+// TEMPLATE: WEBSERVICE 0x1005d160
+// ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@@Z
 // FUNCTION: WEBSERVICE 0x100d6c30
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::addListener
 // FUNCTION: WEBSERVICE 0x100ddf60

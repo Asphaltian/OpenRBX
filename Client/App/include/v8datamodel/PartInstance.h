@@ -168,6 +168,8 @@ public:
 
 	void setColor3(const G3D::Color3& value);
 
+	float alpha() const { return 1.0f - getTransparencyUi(); }
+
 	void setColor(BrickColor value);
 
 	void onSurfaceChanged(NormalId normalId);
@@ -237,8 +239,10 @@ public:
 DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 
 // clang-format off
-// FUNCTION: WEBSERVICE 0x1009c730
-// RBX::Notifier<RBX::PartInstance,RBX::CanAggregateChanged>::raise(struct RBX::CanAggregateChanged)
+// TEMPLATE: WEBSERVICE 0x1009b970
+// ?raise@?$Notifier@VPartInstance@RBX@@UCanAggregateChanged@2@@RBX@@IBEXUCanAggregateChanged@2@PAV?$Listener@VPartInstance@RBX@@UCanAggregateChanged@2@@2@@Z
+// TEMPLATE: WEBSERVICE 0x1009c730
+// ?raise@?$Notifier@VPartInstance@RBX@@UCanAggregateChanged@2@@RBX@@IBEXUCanAggregateChanged@2@@Z
 // clang-format on
 
 // clang-format off

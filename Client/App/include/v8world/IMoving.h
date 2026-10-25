@@ -40,6 +40,7 @@ struct CanAggregateChanged
 {
 	const bool canClump; // 0x00
 
+	CanAggregateChanged(const CanAggregateChanged& other) : canClump(other.canClump) {}
 	CanAggregateChanged(bool canClump) : canClump(canClump) {}
 };
 
