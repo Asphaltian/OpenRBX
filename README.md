@@ -1,29 +1,25 @@
 # OpenRBX
 
-A decompilation of Roblox as it shipped in December 2007. The aim is to rebuild the original binaries instruction for instruction, and to end up with a tree worth building on afterwards.
+This is a decompilation of Roblox as it was released in December 2007. We're writing the source back until Visual C++ compiles it into the same binaries, instruction for instruction, and the end goal is a codebase you can actually build on.
 
-Conventions and tooling follow the [LEGO Racers decompilation](https://github.com/isledecomp/racers).
+We follow the conventions and tooling of the [LEGO Racers decompilation](https://github.com/isledecomp/racers).
 
-> **Note:** The code here reproduces the original release and does not try to improve on it. 32-bit Windows only.
+Keep in mind that this code reproduces the original release as it was, bugs included. It only builds for 32-bit Windows.
 
-## Status
+## Progress
 
 <p align="center"><a href="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.HTML"><img src="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.SVG" width="50%"></a></p>
 
-Still early. `WebService.dll` contains 12,633 functions. We are decompiling RBXGS first since the client contains no debug symbols.
+It's still early. Right now we're working on `WebService.dll` from RBXGS, the game server, which has 12,633 functions. We started there because it ships with its debug symbols and the client doesn't.
 
 ## Building
 
-Visual C++ 8.0 SP1 compiled the original and is the only toolchain that reproduces its output, so contributions are measured against it.
+You will need:
 
-#### Prerequisites
+* Visual C++ 8.0 SP1. [MSVC800-SP1](https://github.com/Asphaltian/MSVC800-SP1) is a portable copy that doesn't need installing. This is the compiler the original was built with, and no other version produces the same code.
+* [CMake](https://cmake.org/), either standalone or the one that comes with the "Desktop development with C++" workload in a recent Visual Studio.
 
-- Visual C++ 8.0 SP1. [MSVC800-SP1](https://github.com/Asphaltian/MSVC800-SP1) is a portable copy that requires no installation.
-- [CMake](https://cmake.org/), either standalone or from the "Desktop development with C++" workload of a current Visual Studio.
-
-#### Compiling
-
-Open a command prompt and run `Common7\Tools\vsvars32.bat` from the toolchain to set the environment. `VC\bin\vcvars32.bat` will not do, as it defers to `%VS80COMNTOOLS%` and expects a registered installation.
+Open a command prompt and run `Common7\Tools\vsvars32.bat` from the toolchain folder. Don't use `VC\bin\vcvars32.bat`, it looks for a registered Visual Studio 2005 install and won't work with the portable copy.
 
 Then configure and build:
 
@@ -32,55 +28,53 @@ cmake -B build -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo
 cmake --build build
 ```
 
-`RelWithDebInfo` keeps the debug symbols that further decompilation work depends on, and NMake Makefiles is the generator that copes with a toolchain of this age. The result is `build\WebService.dll`.
+This gives you `build\WebService.dll`. Stick with `RelWithDebInfo`, comparing your build against the original needs the debug symbols it produces.
 
-### Verification
+## Comparing With the Original
 
-To compare a build against the original, install our fork of [reccmp](https://github.com/Asphaltian/reccmp/tree/msvc800):
+You'll need the original `WebService.dll`. It comes from the RBXGS 0.3.676.0 installer on [archive.org](https://archive.org/download/rbxgssetup/S3FileHandler_RBXGSSetup_0.3.676.0.msi), and you can pull it out of the `.msi` with [lessmsi](https://github.com/activescott/lessmsi):
+
+```
+lessmsi x S3FileHandler_RBXGSSetup_0.3.676.0.msi
+```
+
+The DLL ends up in `SourceDir`. Make sure its SHA256 matches before you use it:
+
+```
+5e9c6b82605fc8429c5fc5f682f2d7f98b55b73d993dfba58437365754410e2f
+```
+
+Install our fork of [reccmp](https://github.com/Asphaltian/reccmp/tree/msvc800):
 
 ```
 pip install -r tools/requirements.txt
 ```
 
-Point it at your copy of the original through `reccmp-user.yml` in the project root:
+Create `reccmp-user.yml` in the project root and point it at your copy:
+
 ```yaml
 targets:
   WEBSERVICE:
     path: path/to/WebService.dll
 ```
 
-Then:
+Now you can compare:
+
 ```
 reccmp-reccmp --target WEBSERVICE -S WEBSERVICEPROGRESS.SVG
 ```
 
 ## Project Structure
 
-- `WebService/` - RBXGS-specific translation units
-- `Client/` - Engine static libraries
-- `3rdparty/` - Vendored dependencies
-- `util/` - Headers supporting the decompilation
-- `cmake/` - CMake modules
-- `tools/` - Python tooling and its requirements
-- `reccmp/` - Data sources for reccmp
-- `assets/` - Icons for the progress report
-
-## Target Binary
-
-| Binary | Size | SHA256 |
-|--------|------|--------|
-| WebService.dll | 3,461,120 bytes | `5e9c6b82605fc8429c5fc5f682f2d7f98b55b73d993dfba58437365754410e2f` |
-
-Version 0.3.676.0, dated December 20, 2007.
+* `WebService/` - the translation units specific to RBXGS
+* `Client/` - the engine's static libraries
+* `3rdparty/` - vendored dependencies
+* `util/` - headers the decompilation needs
+* `cmake/` - CMake modules
+* `tools/` - Python tooling and its requirements
+* `reccmp/` - data files for reccmp
+* `assets/` - icons for the progress report
 
 ## Contributing
 
-Contributions are welcome. The conventions in short:
-- Annotate decompiled code with reccmp markers (`FUNCTION:`, `STUB:`, `GLOBAL:`)
-- Order functions within a translation unit by ascending address
-- Place each file at the path `WebService.pdb` records for it
-- Follow the clang-format configuration
-- Take names from the PDB where it has them, and use NCC placeholders (`FUN_XXXXXXXX`, `g_unk0xXXXXXXXX`) only where it does not
-- Keep pull requests small and focused
-
-You can view [CONTRIBUTING.md](CONTRIBUTING.md) for more details!
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before you open a pull request.

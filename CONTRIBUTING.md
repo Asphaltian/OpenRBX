@@ -1,25 +1,23 @@
 # Contributing
 
-## General Guidelines
+Pull requests are welcome!
 
-Pull requests are welcome.
+Please keep them small. Reviewing decompiled code means reading the original assembly side by side with it, and that gets painful fast as the diff grows. One class per pull request is a good rule. Some classes are too tangled up with each other for that to work, but once you're past ten files or so it's too big to review properly.
 
-Keep them small. Reviewing decompiled code means reading the original assembly next to it, and that does not scale with the size of the diff. One class per pull request is the working rule. Some classes are entangled enough that this cannot hold, but past roughly ten files a submission is too large to review properly.
+Right now the only goal is accuracy to the original binary. A change is good if Visual C++ 8.0 SP1 compiles it into exactly what `WebService.dll` already contains, so please hold off on modernizing code or fixing bugs for now.
 
-Accuracy to the original binary is the only current goal. The work is instruction matching, so the only question about a change is whether Visual C++ 8.0 SP1 emits what `WebService.dll` already contains. Modernisations and bug fixes are out of scope until that changes.
-
-Decompilation takes time to become good at. Be comfortable with C++ and x86 assembly before starting.
+Decompiling takes a while to get good at. You should be comfortable with C++ and x86 assembly before you start.
 
 ## Overview
 
-* [`WebService`](/WebService): Decompilation of the RBXGS-specific translation units
-* [`Client`](/Client): The engine's static libraries
-* [`util`](/util): Utility headers supporting the decompilation
-* [`3rdparty`](/3rdparty): Vendored dependencies
+* [`WebService`](/WebService) - the translation units specific to RBXGS
+* [`Client`](/Client) - the engine's static libraries
+* [`util`](/util) - headers the decompilation needs
+* [`3rdparty`](/3rdparty) - vendored dependencies
 
 ## Annotations
 
-Decompiled functions carry a reccmp marker giving their address in the original binary:
+Every decompiled function gets a reccmp marker with its address in the original binary:
 
 ```cpp
 // FUNCTION: WEBSERVICE 0x10001040
@@ -28,26 +26,35 @@ void CWebService::Something()
 }
 ```
 
-`FUNCTION:` claims a 100% match, so use `STUB:` until it is one. Globals use `GLOBAL:`, vtables `VTABLE:`, compiler-generated code `SYNTHETIC:`. Write addresses with all eight hex digits in lowercase, which `tools/reccmp_addr_padding.py` enforces in CI, and order functions within a translation unit by ascending address.
+`FUNCTION:` means the function is a 100% match, so use `STUB:` until it is one. Globals use `GLOBAL:`, vtables use `VTABLE:` and compiler-generated code uses `SYNTHETIC:`.
 
-The colon is required on all of them except `// SIZE`. Leave it out and reccmp ignores the annotation silently, which on a `VTABLE` costs several percent on every constructor that stores the vtable.
+* Write addresses with all eight hex digits in lowercase. CI checks this with `tools/reccmp_addr_padding.py`.
+* Order the functions in a translation unit by ascending address.
+* Don't forget the colon! Every marker needs one except `// SIZE`, and reccmp silently skips a marker without it.
 
-Functions the linker merged share one address and are marked `FOLDED`, as in `// FUNCTION: WEBSERVICE 0x100a77d0 FOLDED`. They are exempt from ascending order.
+Functions the linker merged into one share an address. Mark them `FOLDED`, they don't have to follow the address order:
 
-`reccmp/webservice-function-size.csv` carries the address and size of all 12,633 functions, taken from the PDB. It is the quickest way to confirm that a function ends where you think it does.
+```cpp
+// FUNCTION: WEBSERVICE 0x100a77d0 FOLDED
+```
+
+`reccmp/webservice-function-size.csv` lists the address and size of all 12,633 functions. Check it if you want to know where a function ends.
 
 ## Code Style
 
 ### Formatting
 
-[clang-format](https://clang.llvm.org/docs/ClangFormat.html) and [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) run from the configuration files in the repository root, whose settings were measured against Roblox's own sources. Most editors have [integrations](https://clang.llvm.org/docs/ClangFormat.html#vim-integration). CI runs clang-format 22.
+Run [clang-format](https://clang.llvm.org/docs/ClangFormat.html) and [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) with the configuration files in the repository root. Most editors can [do this for you](https://clang.llvm.org/docs/ClangFormat.html#vim-integration). CI uses clang-format 22.
 
-### Naming conventions
+### Naming
 
-Placeholder names follow the [LEGO Island decompilation](https://github.com/isledecomp/isle):
-- Unknown functions: `FUN_XXXXXXXX` (8 hex digits, lowercase)
-- Unknown global variables: `g_unk0xXXXXXXXX`
-- Unknown member variables: `m_unk0xXX`
-- Unknown parameters: `p_unk0xXX`
+`WebService.pdb` was never stripped, so most names are already known. Take class names, member names, namespaces, struct layouts and enum values from it. `reccmp-cvdump -t` prints the type records with member offsets and enum values.
 
-They are for the cases where the original name is genuinely lost. It usually is not since the PDB was never stripped, so most of this codebase already has real names, namespaces and class hierarchies. Struct layouts and enum values are recorded too, and `reccmp-cvdump -t` prints the type records that give member offsets and enumerator values outright.
+Only when the PDB really doesn't have a name, use the placeholders from the [LEGO Island decompilation](https://github.com/isledecomp/isle):
+
+* Unknown functions: `FUN_XXXXXXXX` (eight hex digits, lowercase)
+* Unknown global variables: `g_unk0xXXXXXXXX`
+* Unknown member variables: `m_unk0xXX`
+* Unknown parameters: `p_unk0xXX`
+
+Please put each file at the path the PDB records for it, too.
