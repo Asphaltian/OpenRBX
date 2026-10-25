@@ -188,6 +188,7 @@ public:
 	Geometry::GeometryType getPrimitiveType() const { return geometry->getGeometryType(); }
 
 	Clump* getClump() const { return clump; }
+	void setOwner(IMoving* value) { myOwner = value; }
 	IMoving* getOwner() const { return myOwner; }
 	const bool getCanSleep() const { return canSleep; }
 	Anchor* getAnchorObject() { return anchorObject; }

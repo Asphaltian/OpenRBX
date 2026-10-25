@@ -730,13 +730,24 @@ void PartInstance::onGuidChanged()
 	getPrimitive()->setGuid(getGuid());
 }
 
-// STUB: WEBSERVICE 0x1009f220
+// FUNCTION: WEBSERVICE 0x1009f220
 PartInstance::PartInstance()
-	: DescribedCreatable<PartInstance, PVInstance, sPart>("Part"), surfaces(this),
+	: DescribedCreatable<PartInstance, PVInstance, sPart>("Part"), partType(Part::BLOCK_PART), formFactor(BRICK),
+	  transparency(0.0f), reflectance(0.0f), locked(false), surfaces(this), renderImportance(0.0f),
+	  primitive(new Primitive(Geometry::GEOMETRY_BLOCK)), myWorld(NULL), alphaModifier(1.0f),
 	  PersistentPart(this, &PartInstance::computePersistentPart),
 	  SurfacesNeedAdorn(this, &PartInstance::computeSurfacesNeedAdorn)
 {
-	STUB(0x1009f220);
+	primitive->setSurfaceType(NORM_Y, STUDS);
+	primitive->setSurfaceType(NORM_Y_NEG, INLET);
+	primitive->setGridSize(Vector3(4.0f, 1.2f, 2.0f));
+	primitive->setFriction(0.3f);
+	primitive->setElasticity(0.5f);
+	primitive->setAnchor(false);
+	primitive->setCanCollide(true);
+	primitive->setOwner(this);
+
+	primitive->setGuid(getGuid());
 }
 
 // FUNCTION: WEBSERVICE 0x1009f560
