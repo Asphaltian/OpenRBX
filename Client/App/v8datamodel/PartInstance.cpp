@@ -1,14 +1,21 @@
 #include "v8datamodel/PartInstance.h"
 
 #include "appdraw/Draw.h"
+#include "appdraw/DrawAdorn.h"
 #include "appdraw/HitTest.h"
+#include "rbxgraphics/Adorn.h"
 #include "tool/Dragger.h"
+#include "util/Math.h"
 #include "util/standardout.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Body.h"
+#include "v8world/Assembly2.h"
 #include "v8world/Geometry.h"
 #include "v8world/World.h"
+
+#include <G3D/AABox.h>
+#include <G3D/Sphere.h>
 
 namespace RBX {
 
@@ -1013,7 +1020,91 @@ void PartInstance::onCameraNear(float distance)
 // STUB: WEBSERVICE 0x1009ff60
 void PartInstance::render3dAdorn(Adorn* adorn)
 {
-	STUB(0x1009ff60);
+	if (partType == Part::CYLINDER_PART || SurfacesNeedAdorn) {
+		Draw::partAdorn(getPart(), adorn, Controller::controllerTypeToColor(getTopPVController()->getControllerType()));
+	}
+
+	if (highlightSleepParts && primitive->getAssembly()) {
+		Sim::AssemblyState status = primitive->getAssembly()->getRootAssemblyConst()->getSleepStatus();
+
+		if (status != Sim::ANCHORED && status != Sim::AWAKE) {
+			Color3 sleepColor;
+
+			switch (status) {
+			case Sim::RECURSIVE_WAKE_PENDING:
+			case Sim::WAKE_PENDING:
+				sleepColor = Color3::purple();
+				break;
+			case Sim::SLEEPING_CHECKING:
+				sleepColor = Color3::orange();
+				break;
+			case Sim::SLEEPING_DEEPLY:
+				sleepColor = Color3::yellow();
+				break;
+			}
+
+			Draw::selectionBox(getPart(), adorn, sleepColor);
+		}
+	}
+
+	if (highlightAwakeParts && primitive->getAssembly()) {
+		Sim::AssemblyState status = primitive->getAssembly()->getRootAssemblyConst()->getSleepStatus();
+
+		if (status != Sim::ANCHORED && status != Sim::SLEEPING_DEEPLY) {
+			Color3 wakeColor;
+
+			switch (status) {
+			case Sim::AWAKE:
+				wakeColor = Color3::red();
+				break;
+			case Sim::SLEEPING_CHECKING:
+				wakeColor = Color3::orange();
+				break;
+			case Sim::RECURSIVE_WAKE_PENDING:
+			case Sim::WAKE_PENDING:
+				wakeColor = Color3::purple();
+				break;
+			}
+
+			Draw::selectionBox(getPart(), adorn, wakeColor);
+		}
+	}
+
+	if (showPartCoord) {
+		renderCoordinateFrame(adorn);
+	}
+
+	if (showAnchoredParts && primitive->getAnchorObject()) {
+		DrawAdorn::partSurface(
+			getPart(),
+			Math::getClosestObjectNormalId(Vector3(0.0f, -1.0f, 0.0f), primitive->getCoordinateFrame().rotation),
+			adorn,
+			G3D::Color4(Color3::gray(), alpha())
+		);
+	}
+
+	if (showUnalignedParts && !aligned()) {
+		Draw::selectionBox(getPart(), adorn, Color3::yellow());
+	}
+
+	if (showSpanningTree) {
+		setAlphaModifier(0.3f);
+
+		if (Assembly* assembly = primitive->getAssembly()) {
+			if (primitive.get() == assembly->getAssemblyPrimitiveConst()) {
+				adorn->setObjectToWorldMatrix(
+					CoordinateFrame(Matrix3::identity(), primitive->getCoordinateFrame().translation)
+				);
+				if (primitive->getAnchorObject()) {
+					adorn->sphere(G3D::Sphere(Vector3::zero(), 0.5f), Color3::green(), G3D::Color4::clear());
+				}
+				else {
+					Vector3 boxSize = Vector3::one() * 0.25f;
+					adorn->box(G3D::AABox(-boxSize, boxSize), Color3::green(), G3D::Color4::clear());
+				}
+			}
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a0450
