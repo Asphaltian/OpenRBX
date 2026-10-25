@@ -2,6 +2,7 @@
 
 #include "lua/lua.hpp"
 #include "reflection/signal.h"
+#include "script/LuaArguments.h"
 #include "script/LuaAtomicClasses.h"
 #include "script/LuaInstanceBridge.h"
 #include "script/LuaMemory.h"
@@ -214,6 +215,21 @@ static int panic(lua_State* L)
 	return 0;
 }
 
+// FUNCTION: WEBSERVICE 0x10062ef0
+static unsigned int pushArguments(const std::vector<RBX::Reflection::Value>& arguments, lua_State* thread)
+{
+	unsigned int count = 0;
+
+	std::vector<RBX::Reflection::Value>::const_iterator iter = arguments.begin();
+	std::vector<RBX::Reflection::Value>::const_iterator end = arguments.end();
+	while (iter != end) {
+		count += RBX::Lua::LuaArguments::push(*iter, thread);
+		++iter;
+	}
+
+	return count;
+}
+
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100636b0
@@ -271,6 +287,25 @@ void ScriptContext::removeScript(Script* script)
 		}
 	}
 }
+
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x10065240
+static void readResults(
+	std::auto_ptr<std::vector<RBX::Reflection::Value> >& result,
+	lua_State* thread,
+	unsigned int returnCount
+)
+{
+	result.reset(new std::vector<RBX::Reflection::Value>(returnCount));
+
+	for (unsigned int i = 0; i < returnCount; i++) {
+		RBX::Reflection::Value& value = result->at(i);
+		RBX::Lua::LuaArguments::get(thread, i + 1, value);
+	}
+}
+
+namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10065f80
 void ScriptContext::closeState()
@@ -592,6 +627,37 @@ void ScriptContext::setThreadIdentity(lua_State* thread, Security::Identities id
 	lua_settable(thread, LUA_GLOBALSINDEX);
 }
 
+// FUNCTION: WEBSERVICE 0x10067cb0
+void ScriptContext::resume(
+	lua_State* thread,
+	boost::function1<unsigned int, lua_State*> pushArguments,
+	boost::function2<void, lua_State*, unsigned int> readResults
+)
+{
+	int top = lua_gettop(thread);
+
+	int narg = pushArguments(thread);
+
+	if (resume(thread, narg) != Error) {
+		const int returnCount = lua_gettop(thread) - top + 1;
+
+		try {
+			readResults(thread, returnCount);
+		}
+		catch (...) {
+			lua_pop(thread, returnCount);
+			throw;
+		}
+
+		lua_pop(thread, returnCount);
+	}
+	else {
+		std::string err = lua_tostring(thread, -1);
+		lua_settop(thread, 0);
+		throw std::runtime_error(err);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10067e00
 void ScriptContext::startScript(boost::shared_ptr<Script> script)
 {
@@ -647,6 +713,67 @@ void ScriptContext::startScript(boost::shared_ptr<Script> script)
 	lua_settop(thread, 0);
 }
 
+// FUNCTION: WEBSERVICE 0x10068220
+void ScriptContext::executeInNewThread(
+	Security::Identities identity,
+	const char* script,
+	const char* name,
+	boost::function1<unsigned int, lua_State*> pushArguments,
+	boost::function2<void, lua_State*, unsigned int> readResults
+)
+{
+	openState();
+
+	lua_State* parent;
+	lua_State* thread;
+
+	if (identity == Security::CmdLine) {
+		if (!commandLineSandbox.thread()) {
+			commandLineSandbox = lua_newthread(globalState);
+			if (!commandLineSandbox.thread()) {
+				throw std::runtime_error("Unable to create trusted sandbox thread");
+			}
+			sandboxThread(commandLineSandbox.thread());
+			setThreadIdentity(commandLineSandbox.thread(), Security::CmdLine);
+			lua_pop(globalState, 1);
+		}
+
+		parent = commandLineSandbox.thread();
+		thread = lua_newthread(parent);
+	}
+	else {
+		parent = globalState;
+		thread = lua_newthread(parent);
+		sandboxThread(thread);
+		setThreadIdentity(thread, identity);
+	}
+
+	if (!thread) {
+		StandardOut::singleton()->print(MESSAGE_ERROR, "ScriptContext::execute: Unable to create a new thread");
+		throw std::runtime_error("Unable to create a new thread");
+	}
+
+	Lua::ScopedPopper popper(parent, 1);
+
+	std::string sName = "=";
+	if (name) {
+		sName += name;
+	}
+	else {
+		sName += "Script";
+	}
+
+	if (luaL_loadbuffer(thread, script, strlen(script), sName.c_str())) {
+		std::string err = lua_tostring(thread, -1);
+		lua_pop(thread, 1);
+
+		StandardOut::singleton()->print(MESSAGE_ERROR, err.c_str());
+		throw std::runtime_error(err);
+	}
+
+	resume(thread, pushArguments, readResults);
+}
+
 // FUNCTION: WEBSERVICE 0x10068640
 void ScriptContext::startPendingScripts()
 {
@@ -674,6 +801,27 @@ void ScriptContext::addScript(Script* script)
 			startScript(shared_from(script));
 		}
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x100687d0
+std::auto_ptr<std::vector<Reflection::Value> > ScriptContext::executeInNewThread(
+	Security::Identities identity,
+	const char* script,
+	const char* name,
+	const std::vector<Reflection::Value>& arguments
+)
+{
+	std::auto_ptr<std::vector<Reflection::Value> > result;
+
+	executeInNewThread(
+		identity,
+		script,
+		name,
+		boost::bind(&pushArguments, boost::cref(arguments), _1),
+		boost::bind(&readResults, boost::ref(result), _1, _2)
+	);
+
+	return result;
 }
 
 // FUNCTION: WEBSERVICE 0x10068880

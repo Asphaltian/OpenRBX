@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "reflection/property.h"
+#include "reflection/type.h"
 #include "script/ThreadRef.h"
 #include "security/SecurityContext.h"
 #include "util/Handle.h"
@@ -12,9 +13,11 @@
 #include "v8tree/Service.h"
 
 #include <boost/date_time/posix_time/ptime.hpp>
+#include <boost/function.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <lua.h>
+#include <memory>
 #include <set>
 #include <vector>
 
@@ -47,11 +50,39 @@ public:
 		Error
 	};
 
+	std::auto_ptr<std::vector<Reflection::Value> > call(const Lua::FunctionRef&, const std::vector<Reflection::Value>&);
+	void call(const Lua::FunctionRef&);
+	void call(
+		const Lua::FunctionRef&,
+		boost::function1<unsigned int, lua_State*>,
+		boost::function2<void, lua_State*, unsigned int>
+	);
+
+	std::auto_ptr<std::vector<Reflection::Value> > executeInNewThread(
+		Security::Identities identity,
+		const char* script,
+		const char* name,
+		const std::vector<Reflection::Value>& arguments
+	);
+	void executeInNewThread(Security::Identities, const char*, const char*);
+	void executeInNewThread(
+		Security::Identities identity,
+		const char* script,
+		const char* name,
+		boost::function1<unsigned int, lua_State*> pushArguments,
+		boost::function2<void, lua_State*, unsigned int> readResults
+	);
+
+	Result resume(lua_State* thread, int narg);
+	void resume(
+		lua_State* thread,
+		boost::function1<unsigned int, lua_State*> pushArguments,
+		boost::function2<void, lua_State*, unsigned int> readResults
+	);
+
 	static Reflection::BoundProp<bool, 1> propScriptsDisabled;
 
 	static ScriptContext& getContext(lua_State* L);
-
-	Result resume(lua_State* thread, int narg);
 
 	unsigned int getThreadCount() const;
 

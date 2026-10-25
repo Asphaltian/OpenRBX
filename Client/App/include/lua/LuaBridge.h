@@ -133,6 +133,16 @@ U* Bridge<T, Tag>::pushNewObject(lua_State* L, U value)
 }
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x100630c0
+// ??$getValue@VValue@Reflection@RBX@@@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
+// TEMPLATE: WEBSERVICE 0x10063140
+// ??$getValue@VValue@Reflection@RBX@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
+// TEMPLATE: WEBSERVICE 0x100631c0
+// ??$getValue@VValue@Reflection@RBX@@@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
+// TEMPLATE: WEBSERVICE 0x10063240
+// ??$getValue@VValue@Reflection@RBX@@@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
+// TEMPLATE: WEBSERVICE 0x10063550
+// ??$getValue@VValue@Reflection@RBX@@@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
 // TEMPLATE: WEBSERVICE 0x100ab220
 // ??$getValue@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@SA_NPAUlua_State@@IAAV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Z
 // TEMPLATE: WEBSERVICE 0x100adbf0
@@ -151,7 +161,7 @@ bool Bridge<T, Tag>::getValue(lua_State* L, unsigned int index, U& value)
 			if (lua_rawequal(L, -1, -2)) {
 				lua_settop(L, -3);
 
-				value = *static_cast<const U*>(userdata);
+				value = *static_cast<const T*>(userdata);
 				return true;
 			}
 		}
@@ -281,6 +291,22 @@ public:
 	template <class U>
 	static bool getPtr(lua_State* L, unsigned int index, U& value);
 };
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x10063970
+// ??$getPtr@VValue@Reflection@RBX@@@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
+// clang-format on
+template <class T>
+template <class U>
+bool SharedPtrBridge<T>::getPtr(lua_State* L, unsigned int index, U& value)
+{
+	if (lua_type(L, index) == LUA_TNIL) {
+		value = boost::shared_ptr<T>();
+		return true;
+	}
+
+	return Bridge<boost::shared_ptr<T>, 0>::getValue(L, index, value);
+}
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100612f0

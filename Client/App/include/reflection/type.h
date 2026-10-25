@@ -104,8 +104,20 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1000b060
 	// RBX::Reflection::Value::operator=<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: WEBSERVICE 0x10045d80
+	// RBX::Reflection::Value::operator=<G3D::Vector3>
 	// TEMPLATE: WEBSERVICE 0x10045eb0
 	// RBX::Reflection::Value::operator=<double>
+	// TEMPLATE: WEBSERVICE 0x1004ca00
+	// RBX::Reflection::Value::operator=<bool>
+	// TEMPLATE: WEBSERVICE 0x10062800
+	// RBX::Reflection::Value::operator=<RBX::Lua::FunctionRef>
+	// TEMPLATE: WEBSERVICE 0x100628f0
+	// RBX::Reflection::Value::operator=<G3D::CoordinateFrame>
+	// TEMPLATE: WEBSERVICE 0x10062930
+	// RBX::Reflection::Value::operator=<G3D::Color3>
+	// TEMPLATE: WEBSERVICE 0x10062980
+	// RBX::Reflection::Value::operator=<RBX::BrickColor>
 	// clang-format on
 
 	bool isVoid() const;
@@ -120,11 +132,44 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1001c410
 	// RBX::Reflection::Value::isType<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: WEBSERVICE 0x1001c430
+	// RBX::Reflection::Value::isType<RBX::ContentId>
+	// TEMPLATE: WEBSERVICE 0x1001c450
+	// RBX::Reflection::Value::isType<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value> > >
 	// TEMPLATE: WEBSERVICE 0x1003f630
 	// RBX::Reflection::Value::isType<G3D::Vector3>
 	// TEMPLATE: WEBSERVICE 0x1003f650
 	// RBX::Reflection::Value::isType<boost::shared_ptr<RBX::Reflection::DescribedBase> >
+	// TEMPLATE: WEBSERVICE 0x100603c0
+	// RBX::Reflection::Value::isType<RBX::Lua::FunctionRef>
+	// TEMPLATE: WEBSERVICE 0x100603e0
+	// RBX::Reflection::Value::isType<G3D::CoordinateFrame>
+	// TEMPLATE: WEBSERVICE 0x10060400
+	// RBX::Reflection::Value::isType<G3D::Color3>
+	// TEMPLATE: WEBSERVICE 0x10060420
+	// RBX::Reflection::Value::isType<RBX::BrickColor>
+	// TEMPLATE: WEBSERVICE 0x10060440
+	// RBX::Reflection::Value::isType<boost::shared_ptr<RBX::Instance> >
+	// TEMPLATE: WEBSERVICE 0x10060530
+	// RBX::Reflection::Value::isType<boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > >
 	// clang-format on
+
+	template <class T>
+	T cast() const
+	{
+		return boost::any_cast<T>(value);
+	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10062840
+	// ??$cast@V?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@Value@Reflection@RBX@@QBE?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZ
+	// clang-format on
+
+	template <class T>
+	T cast()
+	{
+		return boost::any_cast<T>(value);
+	}
 
 	template <class T>
 	T& convert();
@@ -138,6 +183,9 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Value, 0x08)
+
+// SYNTHETIC: WEBSERVICE 0x1005f960
+// RBX::Reflection::Value::operator=
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1003fa40
