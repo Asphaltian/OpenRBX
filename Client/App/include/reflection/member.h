@@ -81,7 +81,7 @@ public:
 
 		// clang-format off
 		// TEMPLATE: WEBSERVICE 0x10047dd0
-		// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::Iterator::operator*
+		// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::Iterator::operator*
 		// clang-format on
 		MemberType operator*() const { return MemberType(**iter, instance); }
 
@@ -148,7 +148,7 @@ protected:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100495f0
-// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::findDescriptor
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::findDescriptor
 // clang-format on
 template <class T>
 typename MemberDescriptorContainer<T>::Collection::const_iterator MemberDescriptorContainer<T>::findDescriptor(

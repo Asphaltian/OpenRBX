@@ -896,6 +896,8 @@ public:
 
 	DescribedBase* getInstance() const { return const_cast<DescribedBase*>(instance); }
 
+	void read(const XmlElement* element, IReferenceBinder& binder) { descriptor->read(getInstance(), element, binder); }
+
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100ab3a0
 	// RBX::Reflection::Property::setValue<bool>

@@ -338,6 +338,8 @@ class __declspec(novtable) Described : public Base
 {
 public:
 	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10047b10
+	// RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::~Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>
 	// TEMPLATE: WEBSERVICE 0x1004e950
 	// RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>
 	// TEMPLATE: WEBSERVICE 0x1019b860

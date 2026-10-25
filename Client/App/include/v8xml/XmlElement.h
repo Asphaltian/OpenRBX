@@ -120,6 +120,12 @@ public:
 		DOUBLE = 9,
 	};
 
+	// FUNCTION: WEBSERVICE 0x10048150
+	XmlNameValuePair(const RBX::Name& tag, RBX::InstanceHandle value)
+		: tag(tag), valueType(HANDLE), handleValue(new RBX::InstanceHandle(value))
+	{
+	}
+
 	XmlNameValuePair(const RBX::Name& tag, const RBX::Name* value) : tag(tag), valueType(NAME), nameValue(value) {}
 	XmlNameValuePair(const RBX::Name& tag, const int value) : tag(tag), valueType(INT), intValue(value) {}
 	XmlNameValuePair(const RBX::Name& tag, const char* text);
@@ -254,6 +260,12 @@ DECOMP_SIZE_ASSERT(XmlNameValuePair, 0x10)
 class XmlAttribute : public RBX::Sibling<XmlAttribute>, public XmlNameValuePair
 {
 public:
+	// SYNTHETIC: WEBSERVICE 0x10047a90
+	// XmlAttribute::~XmlAttribute
+
+	// TEMPLATE: WEBSERVICE 0x10048d50
+	// XmlAttribute::XmlAttribute<RBX::InstanceHandle>
+
 	template <class T>
 	XmlAttribute(const RBX::Name& tag, T value) : XmlNameValuePair(tag, value)
 	{
@@ -285,6 +297,9 @@ public:
 			delete old;
 		}
 	}
+
+	// TEMPLATE: WEBSERVICE 0x100489c0
+	// XmlElement::XmlElement<RBX::InstanceHandle>
 
 	template <class T>
 	XmlElement(const RBX::Name& tag, T value) : XmlNameValuePair(tag, value)
@@ -333,6 +348,10 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10048a70
+	// XmlElement::addAttribute<RBX::Name const *>
+	// TEMPLATE: WEBSERVICE 0x10049980
+	// XmlElement::addAttribute<RBX::InstanceHandle>
 	// TEMPLATE: WEBSERVICE 0x10096250
 	// XmlElement::addAttribute<char const *>
 	// clang-format on

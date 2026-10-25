@@ -260,9 +260,9 @@ public:
 	Instance* findFirstChildByNameRecursive(const std::string& findName) const;
 	boost::shared_ptr<Instance> findFirstChildByName2(std::string findName, bool recursive);
 
-	static boost::shared_ptr<Instance> fromXmlRoot(XmlElement* root);
-
 	boost::shared_ptr<Instance> clone();
+	static XmlElement* toNewXmlRoot(Instance* instance);
+	static boost::shared_ptr<Instance> fromXmlRoot(XmlElement* root);
 	void remove();
 
 	template <class T>
@@ -447,6 +447,7 @@ private:
 		Instance* beginParent,
 		Instance* newParent
 	);
+	void writeProperties(XmlElement* container) const;
 
 	Association<Instance> assoc;                                      // 0xbc
 	Instance* parent;                                                 // 0xcc

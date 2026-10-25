@@ -168,6 +168,12 @@ bool ArchiveBinder::processIDREF(
 	return true;
 }
 
+// STUB: WEBSERVICE 0x10098620
+void SerializerV2::loadInstances(XmlElement* root, std::vector<boost::shared_ptr<RBX::Instance> >& instances)
+{
+	STUB(0x10098620);
+}
+
 // FUNCTION: WEBSERVICE 0x10098830
 void SerializerV2::isolateHandles(XmlElement* root)
 {

@@ -250,11 +250,40 @@ boost::shared_ptr<Instance> Instance::findFirstChildByName2(std::string findName
 					 : shared_from(findFirstChildByName(findName));
 }
 
-// STUB: WEBSERVICE 0x10049d40
+// FUNCTION: WEBSERVICE 0x10049c80
+void Instance::writeProperties(XmlElement* container) const
+{
+	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::ConstIterator iter = properties_begin();
+	while (iter != properties_end()) {
+		const Reflection::PropertyDescriptor& descriptor = iter.getDescriptor();
+
+		XmlElement* child = descriptor.write(this, false);
+		if (child) {
+			container->addChild(child);
+		}
+
+		++iter;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10049d40
 XmlElement* Instance::write()
 {
-	STUB(0x10049d40);
-	return NULL;
+	if (!archivable || getClassName() == Name::getNullName()) {
+		return new XmlElement(tag_External, InstanceHandle(this));
+	}
+
+	XmlElement* element = new XmlElement(tag_Item);
+
+	element->addAttribute(tag_class, &getClassName());
+
+	element->addAttribute(name_referent, InstanceHandle(this));
+
+	writeProperties(element->addChild(tag_Properties));
+
+	writeChildren(element);
+
+	return element;
 }
 
 // FUNCTION: WEBSERVICE 0x10049e80
@@ -266,10 +295,16 @@ int Instance::findChildIndex(const Instance* instance) const
 	return iter - c.begin();
 }
 
-// STUB: WEBSERVICE 0x1004a010
+// FUNCTION: WEBSERVICE 0x1004a010
 void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
-	STUB(0x1004a010);
+	const Name* name = NULL;
+	if (propertyElement->findAttributeValue(name_name, name)) {
+		Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator iter = findProperty(*name);
+		if (iter != properties_end()) {
+			(*iter).read(propertyElement, binder);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1004a0e0
@@ -309,18 +344,32 @@ void Instance::onAddListener(Listener<Instance, DescendentAdded>* listener) cons
 	for_eachChild(RaiseDescendentAdded2(this, listener));
 }
 
-// STUB: WEBSERVICE 0x1004a9c0
-boost::shared_ptr<Instance> Instance::fromXmlRoot(XmlElement* root)
+// FUNCTION: WEBSERVICE 0x1004a9c0
+boost::shared_ptr<Instance> Instance::fromXmlRoot(XmlElement* xmlRoot)
 {
-	STUB(0x1004a9c0);
-	return boost::shared_ptr<Instance>();
+	Serializer serializer;
+
+	SerializerV2::isolateHandles(xmlRoot);
+	std::vector<shared_ptr<Instance> > newInstances;
+	serializer.loadInstances(xmlRoot, newInstances);
+	if (newInstances.size() == 0) {
+		return shared_ptr<Instance>();
+	}
+
+	return newInstances.front();
 }
 
-// STUB: WEBSERVICE 0x1004ab00
+inline XmlElement* Instance::toNewXmlRoot(Instance* instance)
+{
+	XmlElement* root = SerializerV2::newRootElement();
+	root->addChild(instance->write());
+	return root;
+}
+
+// FUNCTION: WEBSERVICE 0x1004ab00
 boost::shared_ptr<Instance> Instance::clone()
 {
-	boost::scoped_ptr<XmlElement> root(SerializerV2::newRootElement());
-	root->addChild(write());
+	boost::scoped_ptr<XmlElement> root(toNewXmlRoot(this));
 	return fromXmlRoot(root.get());
 }
 

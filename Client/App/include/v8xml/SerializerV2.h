@@ -120,17 +120,26 @@ DECOMP_SIZE_ASSERT(MergeBinder::IDREFItem, 0x10)
 // SIZE 0x04
 class SerializerV2
 {
+protected:
+	int schemaVersionLoading; // 0x00
+
 public:
 	static XmlElement* newRootElement();
 
-	static void load(XmlElement* root, RBX::DataModel* dataModel);
-
 	static void isolateHandles(XmlElement* root);
 
-private:
-	int schemaVersionLoading; // 0x00
+	void loadInstances(XmlElement* root, std::vector<boost::shared_ptr<RBX::Instance> >& instances);
+
+	static void load(XmlElement* root, RBX::DataModel* dataModel);
 };
 
 DECOMP_SIZE_ASSERT(SerializerV2, 0x04)
+
+// SIZE 0x04
+class Serializer : public SerializerV2
+{
+};
+
+DECOMP_SIZE_ASSERT(Serializer, 0x04)
 
 #endif // V8XML_SERIALIZERV2_H
