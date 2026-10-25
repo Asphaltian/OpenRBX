@@ -153,6 +153,8 @@ private:
 	std::map<const Name*, boost::shared_ptr<Instance> > serviceMap; // 0x150
 
 public:
+	static Instance* create(Instance* context, const Name& name);
+
 	// FUNCTION: WEBSERVICE 0x1007c960
 	static const ServiceProvider* findServiceProvider(const Instance* context)
 	{
@@ -258,6 +260,8 @@ public:
 	}
 
 protected:
+	virtual shared_ptr<Instance> createChild(const Name& className);
+	virtual void onAddListener(Listener<ServiceProvider, ServiceAdded>* listener) const;
 	virtual bool askAddChild(const Instance* instance) const;
 	virtual void onChildAdded(Instance* instance);
 	virtual void onChildRemoving(Instance* instance);
@@ -294,10 +298,24 @@ private:
 	}
 
 	boost::shared_ptr<Instance> findServiceByClassName(const Name& className) const;
-	Instance* findServiceByClassNameString(const std::string& className);
+	boost::shared_ptr<Instance> findServiceByClassNameString(std::string sName);
+
+	static Reflection::BoundFuncDesc<ServiceProvider, boost::shared_ptr<Instance>(std::string), 1> func_service;
+	static Reflection::BoundFuncDesc<ServiceProvider, boost::shared_ptr<Instance>(std::string), 1> func_GetService;
 };
 
 DECOMP_SIZE_ASSERT(ServiceProvider, 0x15c)
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10218870
+// `dynamic initializer for 'RBX::ServiceProvider::func_service''
+// SYNTHETIC: WEBSERVICE 0x102188a0
+// `dynamic initializer for 'RBX::ServiceProvider::func_GetService''
+// SYNTHETIC: WEBSERVICE 0x102218e0
+// `dynamic atexit destructor for 'RBX::ServiceProvider::func_GetService''
+// SYNTHETIC: WEBSERVICE 0x102218f0
+// `dynamic atexit destructor for 'RBX::ServiceProvider::func_service''
+// clang-format on
 
 } // namespace RBX
 

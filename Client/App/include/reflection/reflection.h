@@ -797,13 +797,13 @@ private:
 	}
 
 	template <class R>
-	void call(Class* o, Value& arg1, Value& returnValue) const
+	void call(Class* o, Value& returnValue, Value& arg1) const
 	{
 		returnValue = (o->*function)(arg1.convert<Arg1>());
 	}
 
 	template <>
-	void call<void>(Class* o, Value& arg1, Value& returnValue) const
+	void call<void>(Class* o, Value& returnValue, Value& arg1) const
 	{
 		(o->*function)(arg1.convert<Arg1>());
 	}
@@ -836,10 +836,14 @@ public:
 	{
 		Value arg1(default1);
 		arguments.get(1, arg1);
-		call<result_type>(boost::polymorphic_cast<Class*>(instance), arg1, arguments.returnValue);
+		call<result_type>(boost::polymorphic_cast<Class*>(instance), arguments.returnValue, arg1);
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100598b0
+	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::call<boost::shared_ptr<RBX::Instance> >
+	// TEMPLATE: WEBSERVICE 0x10059970
+	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::execute
 	// TEMPLATE: WEBSERVICE 0x100f95d0
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>
 	// TEMPLATE: WEBSERVICE 0x100f9670
@@ -869,13 +873,13 @@ private:
 	}
 
 	template <class R>
-	void call(Class* o, Value& arg1, Value& arg2, Value& returnValue) const
+	void call(Class* o, Value& returnValue, Value& arg1, Value& arg2) const
 	{
 		returnValue = (o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>());
 	}
 
 	template <>
-	void call<void>(Class* o, Value& arg1, Value& arg2, Value& returnValue) const
+	void call<void>(Class* o, Value& returnValue, Value& arg1, Value& arg2) const
 	{
 		(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>());
 	}
@@ -926,7 +930,7 @@ public:
 		arguments.get(1, arg1);
 		Value arg2(default2);
 		arguments.get(2, arg2);
-		call<result_type>(boost::polymorphic_cast<Class*>(instance), arg1, arg2, arguments.returnValue);
+		call<result_type>(boost::polymorphic_cast<Class*>(instance), arguments.returnValue, arg1, arg2);
 	}
 
 	// clang-format off
