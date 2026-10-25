@@ -38,6 +38,7 @@ public:
 
 	SoundId(const char* id) : ContentId(id) {}
 
+	// FUNCTION: WEBSERVICE 0x1003e930 FOLDED
 	SoundId(const ContentId& id) : ContentId(id) {}
 };
 

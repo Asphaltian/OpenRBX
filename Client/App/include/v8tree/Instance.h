@@ -166,6 +166,9 @@ public:
 
 	void setParent(Instance* newParent);
 
+	// FUNCTION: WEBSERVICE 0x100ab0a0
+	void setParent2(boost::shared_ptr<Instance> instance) { setParent(instance.get()); }
+
 	Instance* getRootAncestor() { return parent != NULL ? parent->getRootAncestor() : this; }
 
 	Instance* findFirstChildByName(const std::string& findName) const;
@@ -227,16 +230,28 @@ public:
 
 	bool contains(const Instance* instance) const;
 
-	bool canAddChild(const Instance* child) const
+	bool canAddChild(const boost::shared_ptr<Instance>& instance) const;
+
+	// FUNCTION: WEBSERVICE 0x100ab120
+	bool canAddChild(const Instance* instance) const
 	{
-		if (child->contains(this) || child->parent == this) {
+		if (instance->contains(this)) {
 			return false;
 		}
-
-		return askAddChild(child) || child->askSetParent(this);
+		if (instance->parent == this) {
+			return false;
+		}
+		if (askAddChild(instance)) {
+			return true;
+		}
+		if (instance->askSetParent(this)) {
+			return true;
+		}
+		return false;
 	}
 
-	bool canSetParent(const Instance* parent) const { return parent == NULL || parent->canAddChild(this); }
+	// FUNCTION: WEBSERVICE 0x100ab170
+	bool canSetParent(const Instance* instance) const { return instance == NULL || instance->canAddChild(this); }
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10059dc0

@@ -43,6 +43,16 @@ public:
 
 	const char* c_str() const { return name.c_str(); }
 
+	int compare(const Name& other) const
+	{
+		if (this == &other) {
+			return 0;
+		}
+		return name.compare(other.name);
+	}
+
+	static int compare(const Name* a, const Name* b);
+
 	bool operator<(const Name& other) const;
 	bool operator>(const Name& other) const;
 

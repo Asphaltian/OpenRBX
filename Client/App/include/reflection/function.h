@@ -9,17 +9,12 @@ namespace RBX {
 namespace Reflection {
 
 class DescribedBase;
+class Function;
 
 // SIZE 0x24
 class __declspec(novtable) FunctionDescriptor : public MemberDescriptor
 {
 public:
-	enum Security
-	{
-		NeedTrustedCaller = 0,
-		AnyCaller = 1,
-	};
-
 	// SIZE 0x0c
 	class __declspec(novtable) Arguments
 	{
@@ -28,6 +23,15 @@ public:
 		virtual void get(int, Value&) const = 0; // vtable+0x04
 
 		Value returnValue; // 0x04
+	};
+
+	typedef Function ConstMember;
+	typedef Function Member;
+
+	enum Security
+	{
+		NeedTrustedCaller = 0,
+		AnyCaller = 1,
 	};
 
 	virtual void execute(DescribedBase* instance, Arguments& arguments) const = 0; // vtable+0x04

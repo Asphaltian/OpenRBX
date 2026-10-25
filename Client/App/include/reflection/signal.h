@@ -21,6 +21,7 @@
 namespace RBX {
 namespace Reflection {
 
+class Signal;
 class SignalDescriptor;
 class SignalSource;
 
@@ -132,6 +133,9 @@ GenericSlotWrapper* GenericSlotWrapper::create(Slot slot)
 class __declspec(novtable) SignalDescriptor : public MemberDescriptor
 {
 public:
+	typedef Signal ConstMember;
+	typedef Signal Member;
+
 	void (*signalCreatedHook)(SignalSource*); // 0x10
 
 protected:

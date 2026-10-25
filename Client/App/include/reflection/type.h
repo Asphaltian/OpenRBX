@@ -31,8 +31,8 @@ public:
 	template <class T>
 	static const Type& singleton();
 
-	bool operator==(const Type& other) const;
-	bool operator!=(const Type& other) const;
+	bool operator==(const Type& other) const { return this == &other; }
+	bool operator!=(const Type& other) const { return this != &other; }
 
 	const std::type_info& type; // 0x08
 	const Name& tag;            // 0x0c

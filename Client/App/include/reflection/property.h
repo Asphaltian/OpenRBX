@@ -9,6 +9,7 @@
 #include "v8datamodel/BrickColor.h"
 
 #include <G3D/Vector3.h>
+#include <boost/cast.hpp>
 #include <memory>
 #include <string>
 #include <typeinfo>
@@ -40,8 +41,8 @@ public:
 		STANDARD = 5,
 	};
 
-	typedef ConstProperty ConstMemberType;
-	typedef Property MemberType;
+	typedef ConstProperty ConstMember;
+	typedef Property Member;
 
 	virtual bool isReadOnly() const = 0;                                                      // vtable+0x04
 	virtual bool equalValues(const DescribedBase* a, const DescribedBase* b) const = 0;       // vtable+0x08
@@ -58,6 +59,8 @@ public:
 
 	bool isPublic() const { return bIsPublic; }
 	bool canStreamWrite() const { return bCanStreamWrite; }
+
+	bool operator==(const PropertyDescriptor& other) const { return this == &other; }
 
 	unsigned int bIsPublic : 1;       // 0x10
 	unsigned int bCanStreamWrite : 1; // 0x10
@@ -819,22 +822,14 @@ public:
 	template <class T>
 	T getValue() const
 	{
-		const TypedPropertyDescriptor<T>* typed = dynamic_cast<const TypedPropertyDescriptor<T>*>(descriptor);
-
-		if (typed == NULL) {
-#if defined(_MSC_VER) && _MSC_VER <= 1400
-			throw std::bad_cast("bad cast");
-#else
-			throw std::bad_cast();
-#endif
-		}
-
-		return typed->getValue(instance);
+		return boost::polymorphic_cast<const TypedPropertyDescriptor<T>*>(descriptor)->getValue(instance);
 	}
 
 	const DescribedBase* getInstance() const { return instance; }
 
 	const PropertyDescriptor& getDescriptor() const { return *descriptor; }
+
+	const Name& getName() const { return descriptor->name; }
 
 	std::string getStringValue() const { return descriptor->getStringValue(instance); }
 
@@ -856,35 +851,38 @@ public:
 	DescribedBase* getInstance() const { return const_cast<DescribedBase*>(instance); }
 
 	// clang-format off
-	// STUB: WEBSERVICE 0x100ab3a0
+	// TEMPLATE: WEBSERVICE 0x100ab3a0
 	// RBX::Reflection::Property::setValue<bool>
-	// STUB: WEBSERVICE 0x100ab400
+	// TEMPLATE: WEBSERVICE 0x100ab400
 	// RBX::Reflection::Property::setValue<float>
-	// STUB: WEBSERVICE 0x100aba10
+	// TEMPLATE: WEBSERVICE 0x100ab460
+	// RBX::Reflection::Property::setValue<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: WEBSERVICE 0x100ab4c0
+	// RBX::Reflection::Property::setValue<RBX::Soundscape::SoundId>
+	// TEMPLATE: WEBSERVICE 0x100ab520
+	// RBX::Reflection::Property::setValue<RBX::TextureId>
+	// TEMPLATE: WEBSERVICE 0x100aba10
 	// RBX::Reflection::Property::setValue<int>
-	// STUB: WEBSERVICE 0x100abb90
+	// TEMPLATE: WEBSERVICE 0x100aba70
+	// RBX::Reflection::Property::setValue<RBX::Lua::FunctionRef>
+	// TEMPLATE: WEBSERVICE 0x100abad0
+	// RBX::Reflection::Property::setValue<boost::shared_ptr<RBX::Instance> >
+	// TEMPLATE: WEBSERVICE 0x100abb30
+	// RBX::Reflection::Property::setValue<boost::shared_ptr<RBX::Reflection::DescribedBase> >
+	// TEMPLATE: WEBSERVICE 0x100abb90
 	// RBX::Reflection::Property::setValue<G3D::Vector3>
-	// STUB: WEBSERVICE 0x100abbf0
+	// TEMPLATE: WEBSERVICE 0x100abbf0
 	// RBX::Reflection::Property::setValue<G3D::CoordinateFrame>
-	// STUB: WEBSERVICE 0x100abc50
+	// TEMPLATE: WEBSERVICE 0x100abc50
 	// RBX::Reflection::Property::setValue<G3D::Color3>
-	// STUB: WEBSERVICE 0x100abcb0
+	// TEMPLATE: WEBSERVICE 0x100abcb0
 	// RBX::Reflection::Property::setValue<RBX::BrickColor>
 	// clang-format on
 	template <class T>
 	void setValue(const T& value)
 	{
-		const TypedPropertyDescriptor<T>* typed = dynamic_cast<const TypedPropertyDescriptor<T>*>(descriptor);
-
-		if (typed == NULL) {
-#if defined(_MSC_VER) && _MSC_VER <= 1400
-			throw std::bad_cast("bad cast");
-#else
-			throw std::bad_cast();
-#endif
-		}
-
-		typed->setValue(getInstance(), value);
+		boost::polymorphic_cast<const TypedPropertyDescriptor<T>*>(descriptor)
+			->setValue(const_cast<DescribedBase*>(instance), value);
 	}
 };
 

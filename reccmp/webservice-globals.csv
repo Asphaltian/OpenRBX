@@ -4592,6 +4592,7 @@ address,type,symbol
 0x102ca530,global,??_R0?AV?$SignalDescImpl@$00$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@Z@Reflection@RBX@@@8
 0x102ca590,global,??_R0?AV?$TSignalDesc@$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@Z@Reflection@RBX@@@8
 0x102ca638,global,??_R0PBVPropertyDescriptor@Reflection@RBX@@@8
+0x102ca8f0,global,??_R0?AVRefPropertyDescriptor@Reflection@RBX@@@8
 0x102ca9a8,global,??_R0?AV?$SignalDesc@VInstance@RBX@@$$A6AXPBVPropertyDescriptor@Reflection@2@@Z@Reflection@RBX@@@8
 0x102cb404,global,??_R0?AVXmlParser@@@8
 0x102cb420,global,??_R0?AV?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@@8
@@ -4719,6 +4720,7 @@ address,type,symbol
 0x102d1228,global,??_R0?AV?$sp_counted_impl_pd@PAVGameSettings@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
 0x102d1318,global,??_R0?AV?$bind_t@ABIP6AABIPBI@ZV?$list1@V?$value@PBI@_bi@boost@@@_bi@boost@@@_bi@boost@@@8
 0x102d16e0,global,??_R0?AVGetSet@?$TypedPropertyDescriptor@H@Reflection@RBX@@@8
+0x102d18e8,global,??_R0?AV?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@RBX@@@8
 0x102d193c,global,??_R0?AV?$TypedPropertyDescriptor@H@Reflection@RBX@@@8
 0x102d1b20,global,??_R0?AVCreator@?$FactoryProduct@VGameSettings@RBX@@VItem@GlobalSettings@2@$1?sGameSettings@2@3QBDB@RBX@@@8
 0x102d1d04,global,??_R0?AVEnumPropertyDescriptor@Reflection@RBX@@@8
@@ -4814,6 +4816,7 @@ address,type,symbol
 0x102d3d60,global,?creator@?$FactoryProduct@VSpawnerService@RBX@@VInstance@2@$1?sSpawnerService@2@3QBDB@RBX@@0VCreator@12@B
 0x102d3d74,global,??_R0I@8
 0x102d3d90,global,?sSky@RBX@@3PADA
+0x102d3f58,global,??_R0?AV?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@@8
 0x102d413c,global,??_R0?AVMergeBinder@RBX@@@8
 0x102d415c,global,??_R0?AVIReferenceBinder@RBX@@@8
 0x102d4180,global,??_R0?AVArchiveBinder@@@8
@@ -4867,6 +4870,9 @@ address,type,symbol
 0x102d5d14,global,??_R0?AVIPipelined@RBX@@@8
 0x102d5d78,global,?className@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@1PBDB
 0x102d5d7c,global,??_R0?AV?$TypedPropertyDescriptor@N@Reflection@RBX@@@8
+0x102d5db8,global,??_R0?AV?$TypedPropertyDescriptor@V?$shared_ptr@VInstance@RBX@@@boost@@@Reflection@RBX@@@8
+0x102d5e18,global,??_R0?AV?$TypedPropertyDescriptor@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Reflection@RBX@@@8
+0x102d5e88,global,??_R0?AV?$TypedPropertyDescriptor@VFunctionRef@Lua@RBX@@@Reflection@RBX@@@8
 0x102d60c0,global,??_R0?AVCreator@?$FactoryProduct@VTexture@RBX@@VDecal@2@$1?sTexture@2@3PADA@RBX@@@8
 0x102d6118,global,??_R0?AV?$sp_counted_impl_pd@PAVTexture@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@@8
 0x102d6180,global,?creator@?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@0VCreator@12@B

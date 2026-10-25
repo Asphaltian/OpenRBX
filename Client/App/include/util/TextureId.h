@@ -17,6 +17,7 @@ public:
 
 	TextureId(const char* id) : ContentId(id) {}
 
+	// FUNCTION: WEBSERVICE 0x1003e930 FOLDED
 	TextureId(const ContentId& id) : ContentId(id) {}
 };
 

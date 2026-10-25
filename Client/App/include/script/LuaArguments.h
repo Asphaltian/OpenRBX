@@ -19,12 +19,13 @@ namespace Lua {
 // SIZE 0x14
 class LuaArguments : public Reflection::FunctionDescriptor::Arguments
 {
-	const int offset; // 0x0c
-	lua_State* L;     // 0x10
+	const int offset;   // 0x0c
+	lua_State* const L; // 0x10
 
 public:
 	LuaArguments(lua_State* L, int offset) : offset(offset), L(L) {}
 
+	// FUNCTION: WEBSERVICE 0x100ab2d0
 	virtual unsigned int size() const { return lua_gettop(L) - 1; }
 
 	// STUB: WEBSERVICE 0x10064ef0
@@ -99,6 +100,7 @@ public:
 		return true;
 	}
 
+	// FUNCTION: WEBSERVICE 0x100ad2c0
 	virtual void get(int index, Reflection::Value& value) const { get(L, offset + index, value); }
 
 	template <class Iterator>
@@ -219,8 +221,6 @@ public:
 	// clang-format on
 
 	int pushReturnValue() const { return push(returnValue); }
-
-	~LuaArguments() {}
 };
 
 DECOMP_SIZE_ASSERT(LuaArguments, 0x14)

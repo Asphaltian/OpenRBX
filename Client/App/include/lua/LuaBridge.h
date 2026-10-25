@@ -295,6 +295,8 @@ public:
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10063970
 // ??$getPtr@VValue@Reflection@RBX@@@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
+// TEMPLATE: WEBSERVICE 0x100ab580
+// ??$getPtr@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA_NPAUlua_State@@IAAV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Z
 // clang-format on
 template <class T>
 template <class U>

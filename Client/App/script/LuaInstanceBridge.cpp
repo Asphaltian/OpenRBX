@@ -2,9 +2,12 @@
 
 #include "lua/LuaBridge.h"
 #include "lua/lua.hpp"
+#include "reflection/function.h"
 #include "reflection/object.h"
 #include "reflection/property.h"
+#include "script/LuaArguments.h"
 #include "script/ThreadRef.h"
+#include "security/SecurityContext.h"
 #include "util/Name.h"
 #include "util/Sound.h"
 #include "util/TextureId.h"
@@ -39,41 +42,174 @@ void newweaktable(lua_State* L, const char* mode)
 	lua_settable(L, -3);
 }
 
-// STUB: WEBSERVICE 0x100ac300
+// FUNCTION: WEBSERVICE 0x100ac300
 boost::shared_ptr<Instance> ObjectBridge::getInstance(lua_State* L, unsigned int index)
 {
 	boost::shared_ptr<Reflection::DescribedBase> object = SharedPtrBridge<Reflection::DescribedBase>::getPtr(L, index);
-
-	Instance* instance;
-
-	if (object.get() != NULL) {
-		instance = dynamic_cast<Instance*>(object.get());
-
-		if (instance == NULL) {
-			throw std::runtime_error(
-				G3D::format(
-					"Object %s is not an Instance",
-					Reflection::ClassDescriptor::rootDescriptor().name.name.c_str()
-				)
-			);
-		}
+	if (object && !dynamic_cast<Instance*>(object.get())) {
+		throw std::runtime_error(
+			G3D::format("Object %s is not an Instance", Reflection::ClassDescriptor::rootDescriptor().name.name.c_str())
+		);
 	}
-	else {
-		instance = NULL;
-	}
-
-	return shared_from(instance);
+	return shared_from(static_cast<Instance*>(object.get()));
 }
 
-// STUB: WEBSERVICE 0x100ac9b0
+} // namespace Lua
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x100ac420
+static void assignLuaValue(RBX::Reflection::Property p, lua_State* L, int index)
+{
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<int>()) {
+		p.setValue<int>(lua_tointeger(L, index));
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<bool>()) {
+		p.setValue<bool>(lua_toboolean(L, index) != 0);
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<float>()) {
+		p.setValue<float>(RBX::Lua::lua_tofloat(L, index));
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<std::string>()) {
+		p.setValue<std::string>(lua_tostring(L, index));
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<RBX::Lua::FunctionRef>()) {
+		p.setValue<RBX::Lua::FunctionRef>(RBX::Lua::FunctionRef(L, index));
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Instance> >()) {
+		p.setValue<boost::shared_ptr<RBX::Instance> >(RBX::Lua::ObjectBridge::getInstance(L, index));
+		return;
+	}
+
+	if (p.getDescriptor().type ==
+		RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Reflection::DescribedBase> >()) {
+		p.setValue<boost::shared_ptr<RBX::Reflection::DescribedBase> >(
+			RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::getPtr(L, index)
+		);
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<G3D::Vector3>()) {
+		p.setValue<G3D::Vector3>(RBX::Lua::Bridge<G3D::Vector3, 1>::getObject(L, index));
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<G3D::CoordinateFrame>()) {
+		p.setValue<G3D::CoordinateFrame>(RBX::Lua::Bridge<G3D::CoordinateFrame, 1>::getObject(L, index));
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<G3D::Color3>()) {
+		p.setValue<G3D::Color3>(RBX::Lua::Bridge<G3D::Color3, 1>::getObject(L, index));
+		return;
+	}
+
+	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<RBX::BrickColor>()) {
+		p.setValue<RBX::BrickColor>(RBX::Lua::Bridge<RBX::BrickColor, 1>::getObject(L, index));
+		return;
+	}
+
+	const RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId>* soundDescriptor =
+		dynamic_cast<const RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId>*>(&p.getDescriptor());
+	if (soundDescriptor) {
+		p.setValue<RBX::Soundscape::SoundId>(RBX::ContentId(lua_tostring(L, index)));
+		return;
+	}
+
+	const RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>* textureDescriptor =
+		dynamic_cast<const RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>*>(&p.getDescriptor());
+	if (textureDescriptor) {
+		p.setValue<RBX::TextureId>(RBX::ContentId(lua_tostring(L, index)));
+		return;
+	}
+
+	const RBX::Reflection::EnumPropertyDescriptor* enumDescriptor =
+		dynamic_cast<const RBX::Reflection::EnumPropertyDescriptor*>(&p.getDescriptor());
+	if (enumDescriptor) {
+		enumDescriptor->setEnumValue(p.getInstance(), lua_tointeger(L, index));
+		return;
+	}
+
+	const RBX::Reflection::RefPropertyDescriptor* refDescriptor =
+		dynamic_cast<const RBX::Reflection::RefPropertyDescriptor*>(&p.getDescriptor());
+	if (refDescriptor) {
+		boost::shared_ptr<RBX::Instance> value = RBX::Lua::ObjectBridge::getInstance(L, index);
+		refDescriptor->setRefValue(p.getInstance(), value.get());
+		return;
+	}
+
+	throw std::runtime_error(
+		G3D::format("Unable to set property %s, type %s", p.getName().c_str(), p.getDescriptor().type.name.name.c_str())
+	);
+}
+
+namespace RBX {
+namespace Lua {
+
+// FUNCTION: WEBSERVICE 0x100ac9b0
 template <>
 void Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_newindex(
-	boost::shared_ptr<Reflection::DescribedBase>& value,
+	boost::shared_ptr<Reflection::DescribedBase>& object,
 	const char* name,
 	lua_State* L
 )
 {
-	STUB(0x100ac9b0);
+	if (!object) {
+		throw std::runtime_error("The object has been deleted");
+	}
+
+	const Name& propName = Name::lookup(name);
+
+	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator iter =
+		object->findProperty(propName);
+	if (iter != object->properties_end()) {
+		if ((*iter).getDescriptor() == Instance::propParent) {
+			Instance* instance = dynamic_cast<Instance*>(object.get());
+			if (!instance) {
+				throw std::runtime_error(
+					G3D::format(
+						"%s is not a valid member of %s",
+						name,
+						Reflection::ClassDescriptor::rootDescriptor().name.name.c_str()
+					)
+				);
+			}
+
+			boost::shared_ptr<Instance> parent = ObjectBridge::getInstance(L, 3);
+			if (instance->getParent() != parent.get()) {
+				if (!instance->canSetParent(parent.get())) {
+					StandardOut::singleton()->print(
+						MESSAGE_WARNING,
+						"%s should not be a child of %s",
+						instance->getName().c_str(),
+						parent->getName().c_str()
+					);
+				}
+				instance->setParent2(parent);
+			}
+		}
+		else {
+			assignLuaValue(*iter, L, 3);
+		}
+	}
+	else {
+		throw std::runtime_error(
+			G3D::format(
+				"%s is not a valid member of %s",
+				name,
+				Reflection::ClassDescriptor::rootDescriptor().name.name.c_str()
+			)
+		);
+	}
 }
 
 // STUB: WEBSERVICE 0x100ad180
@@ -81,6 +217,42 @@ int ObjectBridge::newInstance(lua_State* L)
 {
 	STUB(0x100ad180);
 	return 0;
+}
+
+// FUNCTION: WEBSERVICE 0x100ad2e0
+int ObjectBridge::callMemberFunction(lua_State* L)
+{
+	const Reflection::FunctionDescriptor* desc =
+		static_cast<const Reflection::FunctionDescriptor*>(lua_touserdata(L, lua_upvalueindex(1)));
+
+	if (desc->security == Reflection::FunctionDescriptor::NeedTrustedCaller) {
+		Security::Context::current().requirePermission(Security::Administrator, desc->name.name.c_str());
+	}
+
+	boost::shared_ptr<Reflection::DescribedBase> instance;
+
+	if (!getPtr(L, 1, instance) || !instance) {
+		throw std::runtime_error(
+			G3D::format(
+				"Did you forget a semicolon?  The first argument of member function %s must be an Object",
+				desc->name.name.c_str()
+			)
+		);
+	}
+
+	if (!desc->isMemberOf(instance.get())) {
+		throw std::runtime_error(
+			G3D::format(
+				"The function %s is not a member of \"%s\"",
+				desc->name.name.c_str(),
+				Reflection::ClassDescriptor::rootDescriptor().name.name.c_str()
+			)
+		);
+	}
+
+	LuaArguments args(L, 1);
+	desc->execute(instance.get(), args);
+	return args.pushReturnValue();
 }
 
 // STUB: WEBSERVICE 0x100ad4b0
@@ -93,96 +265,6 @@ int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_index(
 {
 	STUB(0x100ad4b0);
 	return 0;
-}
-
-static void assignLuaValue(Reflection::Property p, lua_State* L, int index)
-{
-	const Reflection::PropertyDescriptor& descriptor = p.getDescriptor();
-
-	if (&descriptor.type == &Reflection::Type::singleton<int>()) {
-		p.setValue<int>(lua_tointeger(L, index));
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<bool>()) {
-		p.setValue<bool>(lua_toboolean(L, index) != 0);
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<float>()) {
-		p.setValue<float>(lua_tofloat(L, index));
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<std::string>()) {
-		p.setValue<std::string>(lua_tostring(L, index));
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<FunctionRef>()) {
-		p.setValue<FunctionRef>(FunctionRef(L, index));
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<boost::shared_ptr<Instance> >()) {
-		p.setValue<boost::shared_ptr<Instance> >(ObjectBridge::getInstance(L, index));
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<boost::shared_ptr<Reflection::DescribedBase> >()) {
-		p.setValue<boost::shared_ptr<Reflection::DescribedBase> >(
-			SharedPtrBridge<Reflection::DescribedBase>::getPtr(L, index)
-		);
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<G3D::Vector3>()) {
-		p.setValue<G3D::Vector3>(Bridge<G3D::Vector3, 1>::getObject(L, index));
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<G3D::CoordinateFrame>()) {
-		p.setValue<G3D::CoordinateFrame>(Bridge<G3D::CoordinateFrame, 1>::getObject(L, index));
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<G3D::Color3>()) {
-		p.setValue<G3D::Color3>(Bridge<G3D::Color3, 1>::getObject(L, index));
-		return;
-	}
-
-	if (&descriptor.type == &Reflection::Type::singleton<BrickColor>()) {
-		p.setValue<BrickColor>(Bridge<BrickColor, 1>::getObject(L, index));
-		return;
-	}
-
-	if (dynamic_cast<const Reflection::TypedPropertyDescriptor<Soundscape::SoundId>*>(&descriptor) != NULL) {
-		p.setValue<Soundscape::SoundId>(Soundscape::SoundId(ContentId(lua_tostring(L, index))));
-		return;
-	}
-
-	if (dynamic_cast<const Reflection::TypedPropertyDescriptor<TextureId>*>(&descriptor) != NULL) {
-		p.setValue<TextureId>(TextureId(ContentId(lua_tostring(L, index))));
-		return;
-	}
-
-	if (dynamic_cast<const Reflection::EnumPropertyDescriptor*>(&descriptor) != NULL) {
-		p.setValue<int>(lua_tointeger(L, index));
-		return;
-	}
-
-	if (dynamic_cast<const Reflection::RefPropertyDescriptor*>(&descriptor) != NULL) {
-		p.setValue<boost::shared_ptr<Instance> >(ObjectBridge::getInstance(L, index));
-		return;
-	}
-
-	throw std::runtime_error(
-		G3D::format(
-			"Unable to set property %s, type %s",
-			descriptor.name.name.c_str(),
-			descriptor.type.name.name.c_str()
-		)
-	);
 }
 
 } // namespace Lua
