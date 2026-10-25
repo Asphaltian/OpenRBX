@@ -10,10 +10,10 @@ char sModel[] = "Model";
 
 bool ModelInstance::showModelCoord;
 
+// FUNCTION: WEBSERVICE 0x10059c10 FOLDED
 bool ModelInstance::askSetParent(const Instance* instance) const
 {
-	STUB(0x10059c10);
-	return false;
+	return dynamic_cast<const ModelInstance*>(instance) != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x10059c40
@@ -206,16 +206,16 @@ void ModelInstance::onCameraNear(float distance)
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x1005b220
+// FUNCTION: WEBSERVICE 0x1005b220 FOLDED
 PartInstance* ModelInstance::getPrimaryPart()
 {
 	return getPrimaryPartInternal();
 }
 
+// FUNCTION: WEBSERVICE 0x1005b220 FOLDED
 const PartInstance* ModelInstance::getPrimaryPartConst() const
 {
-	STUB(0x1005b221);
-	return NULL;
+	return getPrimaryPartInternal();
 }
 
 // FUNCTION: WEBSERVICE 0x1005b230
@@ -285,9 +285,9 @@ ModelInstance::ModelInstance()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1015b610 FOLDED
 void ModelInstance::onLastChildRemoved()
 {
-	STUB(0x1015b611);
 }
 
 } // namespace RBX

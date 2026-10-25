@@ -28,6 +28,7 @@ public:
 		return false;
 	}
 
+	// STUB: WEBSERVICE 0x1005aa10
 	virtual void stepGoalAndFocus(CoordinateFrame& goal, CoordinateFrame& focus, bool zoom) // vtable+0x14
 	{
 		STUB(0x1005aa10);

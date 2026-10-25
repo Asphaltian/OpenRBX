@@ -8,6 +8,14 @@
 
 namespace RBX {
 
+static const Reflection::PropDescriptor<PVInstance, CoordinateFrame> desc_CoordFrame(
+	"CoordinateFrame",
+	"Data",
+	NULL,
+	&PVInstance::setPVGridOffsetLegacy,
+	Reflection::PropertyDescriptor::LEGACY
+);
+
 static Reflection::PropDescriptor<PVInstance, bool> prop_ControllerFlagShown(
 	"ControllerFlagShown",
 	"Appearance",
@@ -24,15 +32,15 @@ const Reflection::EnumPropDescriptor<PVInstance, Controller::ControllerType> PVI
 	&RBX::PVInstance::setControllerType
 );
 
+// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
 unsigned int PVInstance::topHashCode() const
 {
-	STUB(0x10059d20);
 	return 0;
 }
 
+// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
 unsigned int PVInstance::childHashCode() const
 {
-	STUB(0x10059d21);
 	return 0;
 }
 
@@ -82,7 +90,7 @@ void PVInstance::readProperty(const XmlElement* propertyElement, IReferenceBinde
 	Instance::readProperty(propertyElement, binder);
 }
 
-// FUNCTION: WEBSERVICE 0x100991c0
+// FUNCTION: WEBSERVICE 0x100991c0 FOLDED
 void PVInstance::onChildAdded(Instance* instance)
 {
 	PVInstance* pvInstance = dynamic_cast<PVInstance*>(instance);
@@ -93,9 +101,15 @@ void PVInstance::onChildAdded(Instance* instance)
 	}
 }
 
-void PVInstance::onChildRemoving(Instance* child)
+// FUNCTION: WEBSERVICE 0x100991c0 FOLDED
+void PVInstance::onChildRemoving(Instance* instance)
 {
-	STUB(0x100991c1);
+	PVInstance* pvInstance = dynamic_cast<PVInstance*>(instance);
+
+	if (pvInstance != NULL) {
+		pvInstance->onChildControllerChanged();
+		pvInstance->onParentControllerChanged();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10099200

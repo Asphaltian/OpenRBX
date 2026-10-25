@@ -5,9 +5,11 @@
 #include "reflection/enumconverter.h"
 #include "reflection/member.h"
 #include "reflection/type.h"
+#include "util/MeshId.h"
 #include "util/TextureId.h"
 #include "v8datamodel/BrickColor.h"
 
+#include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
 #include <boost/cast.hpp>
 #include <memory>
@@ -95,6 +97,13 @@ inline std::string PropertyDescriptor::getStringValue(const DescribedBase* insta
 	return "";
 }
 
+inline bool PropertyDescriptor::setStringValue(DescribedBase* instance, const std::string& value) const
+{
+	hasStringValue();
+
+	return false;
+}
+
 // SIZE 0x1c
 template <class T>
 class TypedPropertyDescriptor : public PropertyDescriptor
@@ -162,31 +171,13 @@ protected:
 template <class T>
 std::string TypedPropertyDescriptor<T>::getStringValue(const DescribedBase* instance) const
 {
-	STUB(0x10094120);
-	return std::string();
+	return PropertyDescriptor::getStringValue(instance);
 }
 
 template <class T>
 bool TypedPropertyDescriptor<T>::setStringValue(DescribedBase* instance, const std::string& value) const
 {
-	STUB(0x100941a0);
-	return false;
-}
-
-template <class T>
-void TypedPropertyDescriptor<T>::writeValue(const DescribedBase* instance, XmlElement* element) const
-{
-	STUB(0x10094410);
-}
-
-template <class T>
-void TypedPropertyDescriptor<T>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
-) const
-{
-	STUB(0x10094420);
+	return PropertyDescriptor::setStringValue(instance, value);
 }
 
 template <>
@@ -315,6 +306,31 @@ void TypedPropertyDescriptor<TextureId>::readValue(
 template <>
 void TypedPropertyDescriptor<TextureId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
+template <>
+std::string TypedPropertyDescriptor<MeshId>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<MeshId>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<MeshId>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<MeshId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+void TypedPropertyDescriptor<G3D::CoordinateFrame>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<G3D::CoordinateFrame>::writeValue(
+	const DescribedBase* instance,
+	XmlElement* element
+) const;
+
 // SIZE 0x1c
 class __declspec(novtable) EnumPropertyDescriptor : public PropertyDescriptor
 {
@@ -363,10 +379,16 @@ protected:
 
 	virtual bool hasStringValue() const { return false; }
 
+	// FUNCTION: WEBSERVICE 0x10101910 FOLDED
+	// RBX::Reflection::RefPropertyDescriptor::getStringValue
+
 	virtual std::string getStringValue(const DescribedBase* instance) const
 	{
 		return PropertyDescriptor::getStringValue(instance);
 	}
+
+	// FUNCTION: WEBSERVICE 0x1003ea80 FOLDED
+	// RBX::Reflection::RefPropertyDescriptor::setStringValue
 
 	virtual bool setStringValue(DescribedBase* instance, const std::string& value) const
 	{
@@ -434,6 +456,32 @@ public:
 
 	private:
 		Getter get;
+	};
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10099380
+	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::SetImpl<void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>::setValue
+	// TEMPLATE: WEBSERVICE 0x100c75e0
+	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::SetImpl<void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>::getValue
+	// clang-format on
+	template <class Setter>
+	class SetImpl : public TypedPropertyDescriptor<T>::GetSet
+	{
+	public:
+		SetImpl(Setter set) : set(set) {}
+
+		virtual bool isReadOnly() const { return false; }
+
+		virtual T getValue(const DescribedBase* object) const { throw std::runtime_error("can't get value"); }
+
+		virtual void setValue(DescribedBase* object, const T& value) const
+		{
+			Class* instance = static_cast<Class*>(object);
+			(instance->*set)(value);
+		}
+
+	private:
+		Setter set;
 	};
 
 	// clang-format off
@@ -633,6 +681,18 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10099640
+	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::getset<int,void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>
+	// clang-format on
+	template <class Getter, class Setter>
+	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(int, Setter set)
+	{
+		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new SetImpl<Setter>(set));
+	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10099c10
+	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame><int,void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x1009e0b0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame><G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100e2920

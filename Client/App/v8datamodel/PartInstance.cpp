@@ -174,7 +174,7 @@ static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging(
 	Reflection::PropertyDescriptor::STREAMING
 );
 
-// FUNCTION: WEBSERVICE 0x10059c10
+// FUNCTION: WEBSERVICE 0x10059c10 FOLDED
 bool PartInstance::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const ModelInstance*>(instance) != NULL;
@@ -599,6 +599,28 @@ bool PartInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint
 	return false;
 }
 
+namespace Reflection {
+
+// STUB: WEBSERVICE 0x1009c1c0
+template <>
+void TypedPropertyDescriptor<CoordinateFrame>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const
+{
+	STUB(0x1009c1c0);
+}
+
+// STUB: WEBSERVICE 0x1009c3c0
+template <>
+void TypedPropertyDescriptor<CoordinateFrame>::writeValue(const DescribedBase* instance, XmlElement* element) const
+{
+	STUB(0x1009c3c0);
+}
+
+} // namespace Reflection
+
 // FUNCTION: WEBSERVICE 0x1009cc10
 void PartInstance::onCanAggregateChanged(bool canAggregate)
 {
@@ -635,16 +657,16 @@ PartInstance::~PartInstance()
 {
 }
 
-// FUNCTION: WEBSERVICE 0x1009d2e0
+// FUNCTION: WEBSERVICE 0x1009d2e0 FOLDED
 PartInstance* PartInstance::getPrimaryPart()
 {
 	return this;
 }
 
+// FUNCTION: WEBSERVICE 0x1009d2e0 FOLDED
 const PartInstance* PartInstance::getPrimaryPartConst() const
 {
-	STUB(0x1009d2e1);
-	return NULL;
+	return this;
 }
 
 // FUNCTION: WEBSERVICE 0x1009d3b0

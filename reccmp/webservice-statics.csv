@@ -154,6 +154,7 @@ address,type,name
 0x102f70d8,global,sound_pauseFunction
 0x102f7144,global,sound_desc_Volume
 0x102f9008,global,tag_xmlnsxmime
+0x102f90e0,global,desc_CoordFrame
 0x102f90fc,global,prop_ControllerFlagShown
 0x102f9120,global,prop_Elasticity
 0x102f913c,global,prop_PositionUi

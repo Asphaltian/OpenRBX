@@ -501,22 +501,22 @@ void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
 	STUB(0x100a5770);
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
 bool Humanoid::isControllable() const
 {
-	STUB(0x100e6150);
-	return false;
+	return true;
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
 bool Humanoid::shouldRender2d() const
 {
-	STUB(0x100e6151);
-	return false;
+	return true;
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
 bool Humanoid::shouldRender3dAdorn() const
 {
-	STUB(0x100e6152);
-	return false;
+	return true;
 }
 
 } // namespace RBX
