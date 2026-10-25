@@ -145,6 +145,13 @@ public:
 	static BrickColor random();
 
 	static BrickColor legoWhite() { return BrickColor(lego_1); }
+	static BrickColor legoGray() { return BrickColor(lego_194); }
+	static BrickColor legoDarkGray() { return BrickColor(lego_199); }
+	static BrickColor legoBlack() { return BrickColor(lego_26); }
+	static BrickColor legoRed() { return BrickColor(lego_21); }
+	static BrickColor legoYellow() { return BrickColor(lego_24); }
+	static BrickColor legoGreen() { return BrickColor(lego_28); }
+	static BrickColor legoBlue() { return BrickColor(lego_23); }
 
 	G3D::Color3 color3() const;
 

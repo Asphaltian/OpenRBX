@@ -23,6 +23,11 @@
 namespace RBX {
 namespace Lua {
 
+const luaL_Reg ObjectBridge::classLibrary[] = {
+	{"new", newInstance},
+	{NULL, NULL},
+};
+
 // FUNCTION: WEBSERVICE 0x100aaf70
 void newweaktable(lua_State* L, const char* mode)
 {
@@ -58,6 +63,36 @@ boost::shared_ptr<Instance> ObjectBridge::getInstance(lua_State* L, unsigned int
 	}
 
 	return shared_from(instance);
+}
+
+// STUB: WEBSERVICE 0x100ac9b0
+template <>
+void Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_newindex(
+	boost::shared_ptr<Reflection::DescribedBase>& value,
+	const char* name,
+	lua_State* L
+)
+{
+	STUB(0x100ac9b0);
+}
+
+// STUB: WEBSERVICE 0x100ad180
+int ObjectBridge::newInstance(lua_State* L)
+{
+	STUB(0x100ad180);
+	return 0;
+}
+
+// STUB: WEBSERVICE 0x100ad4b0
+template <>
+int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_index(
+	const boost::shared_ptr<Reflection::DescribedBase>& value,
+	const char* name,
+	lua_State* L
+)
+{
+	STUB(0x100ad4b0);
+	return 0;
 }
 
 static void assignLuaValue(Reflection::Property p, lua_State* L, int index)

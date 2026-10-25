@@ -2,7 +2,9 @@
 
 #include "reflection/signal.h"
 #include "script/LuaAtomicClasses.h"
+#include "script/LuaInstanceBridge.h"
 #include "script/LuaMemory.h"
+#include "script/LuaSignalBridge.h"
 #include "script/Script.h"
 #include "script/ScriptEvent.h"
 #include "security/SecurityContext.h"
@@ -11,13 +13,26 @@
 #include "util/StandardOut.h"
 #include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/Stats.h"
+#include "v8datamodel/Workspace.h"
 
+#include <G3D/System.h>
 #include <algorithm>
 #include <boost/bind.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/signals/connection.hpp>
 #include <lualib.h>
+#include <stdio.h>
 
 static int contextCount;
+
+bool vvvvv;
+
+static void openLibrary(lua_State* L, lua_CFunction function, const char* name)
+{
+	lua_pushcfunction(L, function);
+	lua_pushstring(L, name);
+	lua_call(L, 1, 0);
+}
 
 namespace RBX {
 
@@ -41,6 +56,13 @@ ScriptContext& ScriptContext::getContext(lua_State* L)
 	lua_settop(L, -2);
 
 	return *context;
+}
+
+// FUNCTION: WEBSERVICE 0x1005eb40
+int ScriptContext::tick(lua_State* L)
+{
+	lua_pushnumber(L, G3D::System::getTick());
+	return 1;
 }
 
 // STUB: WEBSERVICE 0x1005eb60
@@ -72,6 +94,86 @@ unsigned int ScriptContext::getThreadCount() const
 {
 	return globalState ? RobloxExtraSpace::get(globalState)->getThreadCount() : 0;
 }
+
+// FUNCTION: WEBSERVICE 0x1005f9c0
+int ScriptContext::delay(lua_State* thread)
+{
+	if (lua_gettop(thread) != 2) {
+		throw new std::runtime_error("delay function requires 2 arguments");
+	}
+
+	double timout = lua_tonumber(thread, 1);
+
+	Lua::ThreadRef functor(lua_newthread(thread));
+
+	lua_pushvalue(thread, 2);
+
+	lua_xmove(thread, functor.thread(), 1);
+
+	getContext(thread).yieldEvent->queueWaiter(functor.thread(), timout);
+
+	lua_pop(thread, 1);
+
+	return 0;
+}
+
+// FUNCTION: WEBSERVICE 0x1005fb00
+int ScriptContext::wait(lua_State* thread)
+{
+	double timout = lua_tonumber(thread, 1);
+
+	getContext(thread).yieldEvent->queueWaiter(thread, timout);
+
+	return lua_yield(thread, 0);
+}
+
+// FUNCTION: WEBSERVICE 0x1005fb70
+int ScriptContext::print(lua_State* L)
+{
+	std::string message;
+
+	int n = lua_gettop(L);
+	int i;
+	lua_getglobal(L, "tostring");
+	for (i = 1; i <= n; i++) {
+		if (i > 1) {
+			message += ' ';
+		}
+		lua_pushvalue(L, -1);
+		lua_pushvalue(L, i);
+		lua_call(L, 1, 1);
+		const char* s = lua_tostring(L, -1);
+		if (s == NULL) {
+			throw std::runtime_error("'tostring' must return a string to 'print'");
+		}
+		message += s;
+		if (i > 1) {
+			fputs("\t", stdout);
+		}
+		lua_pop(L, 1);
+	}
+
+	StandardOut::singleton()->print(MESSAGE_OUTPUT, message.c_str());
+
+	return 0;
+}
+
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x10061130
+static int panic(lua_State* L)
+{
+	std::string error = lua_tostring(L, -1);
+	RBX::StandardOut::singleton()
+		->print(RBX::MESSAGE_ERROR, "Unprotected error in call to Lua API (%s)\n", error.c_str());
+
+	int* crash = NULL;
+	*crash = crash[1];
+
+	return 0;
+}
+
+namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100636b0
 void ScriptContext::reportError(lua_State* thread)
@@ -322,6 +424,112 @@ ScriptContext::Result ScriptContext::resume(lua_State* thread, int narg)
 	default:
 		reportError(thread);
 		return Error;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100674d0
+void ScriptContext::openState()
+{
+	if (!globalState) {
+		if (vvvvv) {
+			lua_getstack(NULL, 0, NULL);
+			lua_getinfo(NULL, NULL, NULL);
+			lua_getlocal(NULL, NULL, 0);
+			lua_setlocal(NULL, NULL, 0);
+			lua_getupvalue(NULL, 0, 0);
+			lua_setupvalue(NULL, 0, 0);
+			lua_sethook(NULL, NULL, 0, 0);
+			lua_gethook(NULL);
+			lua_gethookmask(NULL);
+			lua_gethookcount(NULL);
+		}
+
+		allocator.reset(new LuaAllocator());
+		globalState = lua_newstate(LuaAllocator::alloc, allocator.get());
+		if (!globalState) {
+			throw std::runtime_error("Failed to create Lua state");
+		}
+
+		contextCount++;
+
+		lua_atpanic(globalState, panic);
+
+		lua_pushlightuserdata(globalState, (void*) 0x43);
+		lua_pushlightuserdata(globalState, this);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pop(globalState, luaopen_base(globalState));
+		openLibrary(globalState, luaopen_string, "string");
+		openLibrary(globalState, luaopen_math, "math");
+		openLibrary(globalState, luaopen_table, "table");
+
+		Lua::SharedPtrBridge<Reflection::DescribedBase>::registerClass(globalState);
+		Lua::SharedPtrBridge<Reflection::SignalInstance>::registerClass(globalState);
+		Lua::Bridge<boost::signals::connection, 1>::registerClass(globalState);
+		Lua::Bridge<G3D::CoordinateFrame, 1>::registerClass(globalState);
+		Lua::Bridge<G3D::Vector3, 1>::registerClass(globalState);
+		Lua::Bridge<G3D::Color3, 1>::registerClass(globalState);
+		Lua::Bridge<BrickColor, 1>::registerClass(globalState);
+		Lua::Bridge<boost::shared_ptr<Lua::ThreadRef::Node>, 1>::registerClass(globalState);
+
+		Lua::CoordinateFrameBridge::registerClassLibrary(globalState);
+		Lua::Vector3Bridge::registerClassLibrary(globalState);
+		Lua::Color3Bridge::registerClassLibrary(globalState);
+		Lua::BrickColorBridge::registerClassLibrary(globalState);
+		Lua::SharedPtrBridge<Reflection::DescribedBase>::registerClassLibrary(globalState);
+		Lua::ObjectBridge::registerInstanceClassLibrary(globalState);
+		Lua::SharedPtrBridge<Reflection::SignalInstance>::registerClassLibrary(globalState);
+
+		Lua::ThreadRef::Node::create(globalState);
+
+		lua_pushstring(globalState, "game");
+		Lua::SharedPtrBridge<Reflection::DescribedBase>::push(globalState, getRootAncestor()->shared_from_this());
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "workspace");
+		Lua::SharedPtrBridge<Reflection::DescribedBase>::push(
+			globalState,
+			ServiceProvider::find<Workspace>(this)->shared_from_this()
+		);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "shared");
+		lua_newtable(globalState);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "print");
+		lua_pushcfunction(globalState, print);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "tick");
+		lua_pushcfunction(globalState, tick);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "wait");
+		lua_pushcfunction(globalState, wait);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "delay");
+		lua_pushcfunction(globalState, delay);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "trustedThread");
+		lua_pushcfunction(globalState, trustedThread);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "dofile");
+		lua_pushcfunction(globalState, dofile);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "loadfile");
+		lua_pushcfunction(globalState, loadfile);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		lua_pushstring(globalState, "stats");
+		lua_pushcfunction(globalState, stats);
+		lua_settable(globalState, LUA_GLOBALSINDEX);
+
+		yieldEvent.reset(new Lua::YieldingThreads(this));
 	}
 }
 

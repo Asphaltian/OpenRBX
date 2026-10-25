@@ -106,7 +106,7 @@ void* bucketRealloc(void* ptr, size_t osize, size_t nsize)
 }
 
 // FUNCTION: WEBSERVICE 0x100b8970
-void* LuaAllocator::alloc(void* ptr, unsigned int osize, unsigned int nsize)
+void* LuaAllocator::alloc(void* ptr, size_t osize, size_t nsize)
 {
 	void* result = bucketRealloc<16, 32>(ptr, osize, nsize);
 
@@ -127,7 +127,7 @@ void* LuaAllocator::alloc(void* ptr, unsigned int osize, unsigned int nsize)
 }
 
 // FUNCTION: WEBSERVICE 0x100b89d0
-void* LuaAllocator::alloc(void* ud, void* ptr, unsigned int osize, unsigned int nsize)
+void* LuaAllocator::alloc(void* ud, void* ptr, size_t osize, size_t nsize)
 {
 	return static_cast<LuaAllocator*>(ud)->alloc(ptr, osize, nsize);
 }

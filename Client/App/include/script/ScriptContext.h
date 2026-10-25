@@ -79,6 +79,10 @@ private:
 		return identity;
 	}
 
+	static int print(lua_State* L);
+	static int tick(lua_State* L);
+	static int wait(lua_State* thread);
+	static int delay(lua_State* thread);
 	static int trustedThread(lua_State* thread);
 	static int loadfile(lua_State* L);
 	static int settings(lua_State* thread);
@@ -90,6 +94,7 @@ private:
 	void onChangedScriptEnabled(const Reflection::PropertyDescriptor&);
 
 	void disassociateState(Script* script);
+	void openState();
 	void startScript(boost::shared_ptr<Script> script);
 	void startPendingScripts();
 

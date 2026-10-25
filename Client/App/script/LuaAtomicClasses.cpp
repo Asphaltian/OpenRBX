@@ -73,6 +73,13 @@ int Bridge<G3D::Color3, 1>::on_index(const G3D::Color3& value, const char* name,
 	throw std::runtime_error(G3D::format("%s is not a valid member", name));
 }
 
+// FUNCTION: WEBSERVICE 0x100adb90 FOLDED
+template <class T, int Tag>
+void Bridge<T, Tag>::on_newindex(T& value, const char* name, lua_State* L)
+{
+	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
+}
+
 // FUNCTION: WEBSERVICE 0x100adc80
 int Color3Bridge::newColor3(lua_State* L)
 {
@@ -244,6 +251,68 @@ template RBX::BrickColor* Bridge<RBX::BrickColor, 1>::pushNewObject<RBX::BrickCo
 	lua_State* L,
 	RBX::BrickColor value
 );
+
+} // namespace Lua
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x100ae380
+static int pushRed(lua_State* L)
+{
+	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoRed());
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae3c0
+static int pushWhite(lua_State* L)
+{
+	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoWhite());
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae400
+static int pushGray(lua_State* L)
+{
+	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoGray());
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae440
+static int pushDarkGray(lua_State* L)
+{
+	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoDarkGray());
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae480
+static int pushBlack(lua_State* L)
+{
+	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoBlack());
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae4c0
+static int pushYellow(lua_State* L)
+{
+	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoYellow());
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae500
+static int pushGreen(lua_State* L)
+{
+	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoGreen());
+	return 1;
+}
+
+// FUNCTION: WEBSERVICE 0x100ae540
+static int pushBlue(lua_State* L)
+{
+	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoBlue());
+	return 1;
+}
+
+namespace RBX {
+namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x100ae580
 int BrickColorBridge::newBrickColor(lua_State* L)
@@ -739,6 +808,12 @@ template bool Bridge<G3D::CoordinateFrame, 1>::getValue<G3D::CoordinateFrame>(
 
 template void Bridge<G3D::Color3, 1>::on_newindex(G3D::Color3& value, const char* name, lua_State* L);
 
+template void Bridge<G3D::Vector3, 1>::on_newindex(G3D::Vector3& value, const char* name, lua_State* L);
+
+template void Bridge<RBX::BrickColor, 1>::on_newindex(RBX::BrickColor& value, const char* name, lua_State* L);
+
+template void Bridge<G3D::CoordinateFrame, 1>::on_newindex(G3D::CoordinateFrame& value, const char* name, lua_State* L);
+
 template int Bridge<G3D::CoordinateFrame, 1>::on_gc(lua_State* L);
 
 template int Bridge<G3D::Vector3, 1>::on_gc(lua_State* L);
@@ -766,6 +841,39 @@ template int Bridge<RBX::BrickColor, 1>::on_eq(lua_State* L);
 template int Bridge<G3D::Vector3, 1>::on_tostring(const G3D::Vector3& value, lua_State* L);
 
 template int Bridge<G3D::Vector3, 1>::on_tostring(lua_State* L);
+
+const luaL_Reg Color3Bridge::classLibrary[] = {
+	{"new", newColor3},
+	{NULL, NULL},
+};
+
+const luaL_Reg Vector3Bridge::classLibrary[] = {
+	{"new", newVector3},
+	{NULL, NULL},
+};
+
+const luaL_Reg BrickColorBridge::classLibrary[] = {
+	{"new", newBrickColor},
+	{"random", randomBrickColor},
+	{"New", newBrickColor},
+	{"Random", randomBrickColor},
+	{"White", pushWhite},
+	{"Gray", pushGray},
+	{"DarkGray", pushDarkGray},
+	{"Black", pushBlack},
+	{"Red", pushRed},
+	{"Yellow", pushYellow},
+	{"Green", pushGreen},
+	{"Blue", pushBlue},
+	{NULL, NULL},
+};
+
+const luaL_Reg CoordinateFrameBridge::classLibrary[] = {
+	{"new", newCoordinateFrame},
+	{"fromEulerAnglesXYZ", fromEulerAnglesXYZ},
+	{"fromAxisAngle", fromAxisAngle},
+	{NULL, NULL},
+};
 
 } // namespace Lua
 } // namespace RBX

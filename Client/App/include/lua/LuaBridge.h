@@ -65,6 +65,50 @@ T& Bridge<T, Tag>::pushNewObject(lua_State* L)
 }
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x10061220
+// RBX::Lua::Bridge<boost::signals::connection,1>::registerClass
+// TEMPLATE: WEBSERVICE 0x10061410
+// RBX::Lua::Bridge<G3D::Color3,1>::registerClass
+// TEMPLATE: WEBSERVICE 0x100614e0
+// RBX::Lua::Bridge<RBX::BrickColor,1>::registerClass
+// TEMPLATE: WEBSERVICE 0x10062680
+// RBX::Lua::Bridge<boost::shared_ptr<RBX::Lua::ThreadRef::Node>,1>::registerClass
+// TEMPLATE: WEBSERVICE 0x10062750
+// RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>,0>::registerClass
+// TEMPLATE: WEBSERVICE 0x10064ad0
+// RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::DescribedBase>,0>::registerClass
+// clang-format on
+template <class T, int Tag>
+void Bridge<T, Tag>::registerClass(lua_State* L)
+{
+	luaL_newmetatable(L, className);
+
+	lua_pushstring(L, "__index");
+	lua_pushcfunction(L, on_index);
+	lua_settable(L, -3);
+
+	lua_pushstring(L, "__newindex");
+	lua_pushcfunction(L, on_newindex);
+	lua_settable(L, -3);
+
+	lua_pushstring(L, "__gc");
+	lua_pushcfunction(L, on_gc);
+	lua_settable(L, -3);
+
+	if (Tag == 1) {
+		lua_pushstring(L, "__eq");
+		lua_pushcfunction(L, on_eq);
+		lua_settable(L, -3);
+	}
+
+	lua_pushstring(L, "__tostring");
+	lua_pushcfunction(L, on_tostring);
+	lua_settable(L, -3);
+
+	lua_pop(L, 1);
+}
+
+// clang-format off
 // TEMPLATE: WEBSERVICE 0x1005f1b0
 // ??$pushNewObject@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SAPAVVector3@G3D@@PAUlua_State@@V23@@Z
 // TEMPLATE: WEBSERVICE 0x1005f250
@@ -117,14 +161,6 @@ bool Bridge<T, Tag>::getValue(lua_State* L, unsigned int index, U& value)
 	}
 
 	return false;
-}
-
-// TEMPLATE: WEBSERVICE 0x100adb90
-// ?on_newindex@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAXAAVColor3@G3D@@PBDPAUlua_State@@@Z
-template <class T, int Tag>
-void Bridge<T, Tag>::on_newindex(T& value, const char* name, lua_State* L)
-{
-	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
 }
 
 // clang-format off
@@ -235,7 +271,7 @@ template <class T>
 class SharedPtrBridge : protected Bridge<boost::shared_ptr<T>, 0>
 {
 public:
-	static void registerClass(lua_State* L);
+	static void registerClass(lua_State* L) { Bridge<boost::shared_ptr<T>, 0>::registerClass(L); }
 	static void registerClassLibrary(lua_State* L);
 
 	static void push(lua_State* L, boost::shared_ptr<T> instance);

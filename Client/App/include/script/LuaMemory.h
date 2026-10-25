@@ -3,6 +3,8 @@
 
 #include "decomp.h"
 
+#include <stddef.h>
+
 // SIZE 0x10
 class LuaAllocator
 {
@@ -18,8 +20,8 @@ public:
 		unsigned int& maxHeapCount
 	) const;
 
-	static void* alloc(void* ud, void* ptr, unsigned int osize, unsigned int nsize);
-	void* alloc(void* ptr, unsigned int osize, unsigned int nsize);
+	static void* alloc(void* ud, void* ptr, size_t osize, size_t nsize);
+	void* alloc(void* ptr, size_t osize, size_t nsize);
 
 private:
 	unsigned int heapSize;     // 0x00

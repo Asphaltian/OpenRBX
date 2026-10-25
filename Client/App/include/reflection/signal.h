@@ -38,7 +38,10 @@ public:
 protected:
 	SignalInstance(SignalSource* source, const SignalDescriptor& descriptor) : source(source), descriptor(descriptor) {}
 
-	SignalSource* source;               // 0x04
+private:
+	SignalSource* source; // 0x04
+
+public:
 	const SignalDescriptor& descriptor; // 0x08
 };
 

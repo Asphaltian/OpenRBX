@@ -63,6 +63,17 @@ template boost::signals::connection* Bridge<boost::signals::connection, 1>::push
 	boost::signals::connection value
 );
 
+// FUNCTION: WEBSERVICE 0x100adb90 FOLDED
+template <>
+void Bridge<boost::signals::connection, 1>::on_newindex(
+	boost::signals::connection& value,
+	const char* name,
+	lua_State* L
+)
+{
+	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
+}
+
 // FUNCTION: WEBSERVICE 0x100afc80
 template <>
 void Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_newindex(
@@ -319,23 +330,3 @@ int Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_index(
 
 } // namespace Lua
 } // namespace RBX
-
-template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_gc(lua_State* L);
-
-template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_eq(lua_State* L);
-
-template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_newindex(lua_State* L);
-
-template int RBX::Lua::Bridge<boost::signals::connection, 1>::on_index(lua_State* L);
-
-template int RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_newindex(lua_State* L);
-
-template int RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_index(lua_State* L);
-
-template RBX::Reflection::GenericSlotWrapper* RBX::Reflection::GenericSlotWrapper::create<WaitScriptSlot>(
-	WaitScriptSlot slot
-);
-
-template RBX::Reflection::GenericSlotWrapper* RBX::Reflection::GenericSlotWrapper::create<FunctionScriptSlot>(
-	FunctionScriptSlot slot
-);

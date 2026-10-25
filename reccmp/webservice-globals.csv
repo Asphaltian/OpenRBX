@@ -4511,6 +4511,7 @@ address,type,symbol
 0x1029dba4,global,___rtc_izz
 0x1029dba8,global,___rtc_taa
 0x1029dbac,global,___rtc_tzz
+0x102a3094,global,__TI3PAVruntime_error@std@@
 0x102bc0d8,global,__TI2?AVruntime_error@std@@
 0x102bc14c,global,__TI2?AVbad_cast@std@@
 0x102c0b00,global,___pobjMapEntryFirst
