@@ -9,7 +9,7 @@
 namespace RBX {
 namespace Lua {
 
-boost::shared_ptr<boost::mutex> ThreadRef::syncSingleton;
+boost::shared_ptr<boost::mutex> ThreadRef::syncSingleton(new boost::mutex());
 
 template <>
 const char* Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::className = "shared_ptr<ThreadRef::Node>";
@@ -84,7 +84,7 @@ void Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::on_newindex(
 	throw std::runtime_error(G3D::format("%s cannot be assigned to", name));
 }
 
-// STUB: WEBSERVICE 0x100b1370
+// FUNCTION: WEBSERVICE 0x100b1370
 template <>
 int Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::on_index(
 	const boost::shared_ptr<ThreadRef::Node>& value,
@@ -92,8 +92,7 @@ int Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::on_index(
 	lua_State* L
 )
 {
-	STUB(0x100b1370);
-	return 0;
+	throw std::runtime_error(G3D::format("%s is not a valid member", name));
 }
 
 // FUNCTION: WEBSERVICE 0x100b13d0
