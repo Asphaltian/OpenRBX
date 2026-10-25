@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "script/ThreadRef.h"
+#include "util/RunStateOwner.h"
 
 #include <boost/shared_ptr.hpp>
 #include <vector>
@@ -36,7 +37,7 @@ public:
 	void queueWaiter(lua_State* L, double requestedDelay);
 	void queueWaiter(lua_State* L);
 
-	void resume(double elapsedTime);
+	void resume(Heartbeat event);
 
 private:
 	void clearAllSinks();

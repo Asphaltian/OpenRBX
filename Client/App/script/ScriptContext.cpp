@@ -73,6 +73,39 @@ unsigned int ScriptContext::getThreadCount() const
 	return globalState ? RobloxExtraSpace::get(globalState)->getThreadCount() : 0;
 }
 
+// FUNCTION: WEBSERVICE 0x100636b0
+void ScriptContext::reportError(lua_State* thread)
+{
+	lua_Debug ar;
+	int level = 0;
+
+	if (lua_getstack(thread, level++, &ar)) {
+		StandardOut::singleton()->print(MESSAGE_ERROR, lua_tostring(thread, -1));
+
+		if (DebugSettings::singleton().getStackTracingEnabled()) {
+			if (lua_getstack(thread, level, &ar)) {
+				do {
+					level++;
+					lua_getinfo(thread, "nSlu", &ar);
+					StandardOut::singleton()->print(
+						MESSAGE_INFO,
+						"   stack %s, line %d: %s %s",
+						ar.source,
+						ar.currentline,
+						ar.namewhat,
+						ar.name
+					);
+				} while (lua_getstack(thread, level, &ar));
+
+				StandardOut::singleton()->print(MESSAGE_INFO, "   stack end");
+			}
+		}
+	}
+	else {
+		StandardOut::singleton()->print(MESSAGE_ERROR, lua_tostring(thread, -1));
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100644e0
 void ScriptContext::disassociateState(Script* script)
 {
@@ -155,6 +188,11 @@ ScriptContext::~ScriptContext()
 {
 }
 
+// FUNCTION: WEBSERVICE 0x10066990
+ScriptContext::ScriptImpersonator::ScriptImpersonator(lua_State* thread) : Impersonator(getThreadIdentity(thread))
+{
+}
+
 // FUNCTION: WEBSERVICE 0x10066ce0
 int ScriptContext::settings(lua_State* thread)
 {
@@ -210,6 +248,26 @@ int ScriptContext::stats(lua_State* L)
 	return 1;
 }
 
+// FUNCTION: WEBSERVICE 0x10067020
+int ScriptContext::dofile(lua_State* L)
+{
+	Security::Context::current().requirePermission(Security::Administrator, "dofile");
+
+	const char* fname = luaL_optstring(L, 1, NULL);
+	int n = lua_gettop(L);
+
+	ContentId contentId(fname);
+	std::string file = ContentProvider::singleton().getFile(contentId);
+
+	if (luaL_loadfile(L, file.c_str()) != 0) {
+		lua_error(L);
+	}
+
+	lua_call(L, 0, LUA_MULTRET);
+
+	return lua_gettop(L) - n;
+}
+
 // FUNCTION: WEBSERVICE 0x10067140
 void ScriptContext::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
@@ -241,11 +299,30 @@ void ScriptContext::onServiceProvider(const ServiceProvider* oldProvider, const 
 	startListening<RunService, Heartbeat>(runService, this);
 }
 
-// STUB: WEBSERVICE 0x100673d0
-ScriptContext::Result ScriptContext::resume(lua_State* L, int nargs)
+// FUNCTION: WEBSERVICE 0x100673d0
+ScriptContext::Result ScriptContext::resume(lua_State* thread, int narg)
 {
-	STUB(0x100673d0);
-	return Success;
+	int result;
+
+	{
+		ScriptImpersonator impersonate(thread);
+		result = lua_resume(thread, narg);
+	}
+
+	switch (result) {
+	case 0:
+		return Success;
+
+	case LUA_YIELD:
+		if (!RobloxExtraSpace::get(thread)->yieldCaptured) {
+			yieldEvent->queueWaiter(thread);
+		}
+		return Yield;
+
+	default:
+		reportError(thread);
+		return Error;
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10067c20
@@ -301,10 +378,21 @@ void ScriptContext::addScript(Script* script)
 	}
 }
 
-// STUB: WEBSERVICE 0x10068880
+// FUNCTION: WEBSERVICE 0x10068880
 void ScriptContext::onEvent(const RunService* source, Heartbeat event)
 {
-	STUB(0x10068880);
+	if (boost::posix_time::second_clock::local_time() >= nextPendingScripts) {
+		startPendingScripts();
+		nextPendingScripts = boost::posix_time::second_clock::local_time() + boost::posix_time::seconds(1);
+	}
+
+	if (yieldEvent) {
+		yieldEvent->resume(event);
+	}
+
+	if (globalState) {
+		lua_gc(globalState, LUA_GCSTEP, 1);
+	}
 }
 
 } // namespace RBX

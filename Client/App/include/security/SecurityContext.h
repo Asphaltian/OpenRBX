@@ -66,6 +66,8 @@ public:
 	static bool isInRole(Identities identity, Permissions permission);
 
 private:
+	friend class Impersonator;
+
 	Context(Identities identity) : identity(identity) {}
 
 	// FUNCTION: WEBSERVICE 0x10066850
@@ -78,6 +80,26 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Context, 0x4)
+
+// SIZE 0x4
+class Impersonator
+{
+	Context* previous; // 0x00
+
+public:
+	// FUNCTION: WEBSERVICE 0x100668b0
+	Impersonator(Identities identity)
+	{
+		Context* context = new Context(identity);
+		previous = Context::ptr().release();
+		Context::ptr().reset(context);
+	}
+
+	// FUNCTION: WEBSERVICE 0x10066930
+	~Impersonator() { Context::ptr().reset(previous); }
+};
+
+DECOMP_SIZE_ASSERT(Impersonator, 0x4)
 
 } // namespace Security
 } // namespace RBX

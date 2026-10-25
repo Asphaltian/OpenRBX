@@ -22,6 +22,12 @@ void YieldingThreads::queueWaiter(lua_State* L, double requestedDelay)
 	waitingThreads.push_back(WaitingThread(L, requestedDelay));
 }
 
+// STUB: WEBSERVICE 0x100b6030
+void YieldingThreads::resume(Heartbeat event)
+{
+	STUB(0x100b6030);
+}
+
 // FUNCTION: WEBSERVICE 0x100b61d0
 void YieldingThreads::queueWaiter(lua_State* L)
 {

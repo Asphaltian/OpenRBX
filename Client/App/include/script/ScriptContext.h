@@ -13,6 +13,7 @@
 #include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
+#include <lua.h>
 #include <set>
 #include <vector>
 
@@ -47,7 +48,7 @@ public:
 
 	static ScriptContext& getContext(lua_State* L);
 
-	Result resume(lua_State* L, int nargs);
+	Result resume(lua_State* thread, int narg);
 
 	unsigned int getThreadCount() const;
 
@@ -63,10 +64,28 @@ protected:
 private:
 	static void setThreadIdentity(lua_State* thread, Security::Identities identity);
 
+	static Security::Identities getThreadIdentity(lua_State* thread)
+	{
+		lua_pushlightuserdata(thread, (void*) 0x54);
+		lua_gettable(thread, LUA_GLOBALSINDEX);
+
+		if (!lua_isnumber(thread, -1)) {
+			return Security::Anonymous;
+		}
+
+		Security::Identities identity = static_cast<Security::Identities>(lua_tointeger(thread, -1));
+		lua_settop(thread, -2);
+
+		return identity;
+	}
+
 	static int trustedThread(lua_State* thread);
 	static int loadfile(lua_State* L);
 	static int settings(lua_State* thread);
 	static int stats(lua_State* L);
+	static int dofile(lua_State* L);
+
+	static void reportError(lua_State* thread);
 
 	void onChangedScriptEnabled(const Reflection::PropertyDescriptor&);
 
@@ -83,6 +102,14 @@ private:
 	boost::scoped_ptr<Lua::YieldingThreads> yieldEvent;     // 0x150
 	bool scriptsDisabled;                                   // 0x154
 	boost::shared_ptr<Stats::Item> statsItem;               // 0x158
+
+	// SIZE 0x4
+	class ScriptImpersonator : public Security::Impersonator
+	{
+	public:
+		ScriptImpersonator(lua_State* thread);
+		~ScriptImpersonator() {}
+	};
 
 public:
 	boost::scoped_ptr<LuaAllocator> allocator; // 0x160
