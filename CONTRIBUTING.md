@@ -13,7 +13,7 @@ Decompilation takes time to become good at. Be comfortable with C++ and x86 asse
 ## Overview
 
 * [`WebService`](/WebService): Decompilation of the RBXGS-specific translation units
-* [`Client`](/Client): The engine static libraries the original link consumed, laid out under the directory names its own build recorded
+* [`Client`](/Client): The engine's static libraries
 * [`util`](/util): Utility headers supporting the decompilation
 * [`3rdparty`](/3rdparty): Vendored dependencies
 
