@@ -19,6 +19,7 @@ address,type,symbol
 0x1000a8b0,stub,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@QBEPAVWorkspace@1@XZ
 0x1000cfd0,synthetic,??1Job@CWebService@Roblox@@QAE@XZ
 0x1000d340,stub,??_GStandardOutLog@@UAEPAXI@Z
+0x1000d370,synthetic,??1StandardOutMessage@RBX@@QAE@XZ
 0x1000db70,synthetic,_GetAtlHandlerByName@12
 0x1000dc00,synthetic,_InitializeAtlHandlers@8
 0x1000dc80,synthetic,_UninitializeAtlHandlers@0
@@ -54,6 +55,7 @@ address,type,symbol
 0x10046470,synthetic,??_GLighting@RBX@@UAEPAXI@Z
 0x10047a70,synthetic,??_EObject@RBX@@UAEPAXI@Z
 0x100480e0,synthetic,?getValue@?$GetSetImpl@P8Message@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP812@AEXABV34@@Z@?$PropDescriptor@VMessage@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@34@@Z
+0x10049560,synthetic,?reset@?$CopyOnWrite@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@RBX@@QAEXXZ
 0x100495b0,synthetic,?equalValues@?$TypedPropertyDescriptor@_N@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 0x1004b570,stub,??1?$BoundFuncDesc@VVisit@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$00@Reflection@RBX@@UAE@XZ
 0x1004c860,synthetic,??$call@V?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@?$BoundFuncDesc@VTeams@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZ$0A@@Reflection@RBX@@ABEXPAVTeams@2@AAVValue@12@@Z
@@ -64,6 +66,7 @@ address,type,symbol
 0x10054a70,synthetic,?raise@?$Notifier@VRunService@RBX@@W4RunState@2@@RBX@@IBEXW4RunState@2@@Z
 0x100550d0,synthetic,?getClassName@?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x10055720,synthetic,??_ERunService@RBX@@UAEPAXI@Z
+0x1005b0e0,synthetic,?getValue@?$TypedPropertyDescriptor@VCoordinateFrame@G3D@@@Reflection@RBX@@QBE?AVCoordinateFrame@G3D@@PBVDescribedBase@23@@Z
 0x1005d5c0,synthetic,?getClassName@?$FactoryProduct@VSelection@RBX@@VInstance@2@$1?sSelection@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x1005d7b0,synthetic,??_GSelection@RBX@@UAEPAXI@Z
 0x1005e720,stub,??0Selection@RBX@@QAE@XZ
@@ -109,6 +112,7 @@ address,type,symbol
 0x10069cd0,stub,??0LocalScript@RBX@@QAE@XZ
 0x1006a7b0,synthetic,?getNumPrimitives@World@RBX@@QBEHXZ
 0x1006c0d0,synthetic,?getClassName@?$NonFactoryProduct@VRootInstance@RBX@@$1?sWorkspace@2@3PADA@RBX@@UBEABVName@2@XZ
+0x1006cd10,synthetic,??1?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@MAE@XZ
 0x1006ead0,synthetic,??$create@VStarterPackService@RBX@@@ServiceProvider@RBX@@SAPAVStarterPackService@1@PBVInstance@1@@Z
 0x100788b0,stub,??1?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAE@XZ
 0x1007a4b0,synthetic,??_G?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAEPAXI@Z
@@ -313,9 +317,16 @@ address,type,symbol
 0x100eea50,stub,??0Message@RBX@@QAE@XZ
 0x100f1190,synthetic,??1?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@MAE@XZ
 0x100f11e0,synthetic,??0?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@IAE@XZ
+0x100f1240,synthetic,??_E?$DescribedCreatable@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@UAEPAXI@Z
+0x100f1290,synthetic,??1?$DescribedCreatable@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@UAE@XZ
+0x100f13e0,synthetic,?getClassName@?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100f14c0,synthetic,??_E?$Value@VVector3@G3D@@$1?sVector3Value@RBX@@3PADA@RBX@@UAEPAXI@Z
 0x100f1500,synthetic,??1?$DescribedCreatable@V?$Value@VVector3@G3D@@$1?sVector3Value@RBX@@3PADA@RBX@@VInstance@2@$1?sVector3Value@2@3PADA@RBX@@UAE@XZ
+0x100f1650,synthetic,?getClassName@?$FactoryProduct@V?$Value@VVector3@G3D@@$1?sVector3Value@RBX@@3PADA@RBX@@VInstance@2@$1?sVector3Value@2@3PADA@RBX@@UBEABVName@2@XZ
+0x100f1750,synthetic,??1?$DescribedCreatable@V?$Value@VCoordinateFrame@G3D@@$1?sCFrameValue@RBX@@3PADA@RBX@@VInstance@2@$1?sCFrameValue@2@3PADA@RBX@@UAE@XZ
+0x100f18a0,synthetic,?getClassName@?$FactoryProduct@V?$Value@VCoordinateFrame@G3D@@$1?sCFrameValue@RBX@@3PADA@RBX@@VInstance@2@$1?sCFrameValue@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100f19a0,synthetic,??1?$DescribedCreatable@V?$Value@VColor3@G3D@@$1?sColor3Value@RBX@@3PADA@RBX@@VInstance@2@$1?sColor3Value@2@3PADA@RBX@@UAE@XZ
+0x100f1af0,synthetic,?getClassName@?$FactoryProduct@V?$Value@VColor3@G3D@@$1?sColor3Value@RBX@@3PADA@RBX@@VInstance@2@$1?sColor3Value@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100f28b0,synthetic,?classDescriptor@?$Described@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@$1?sStringValue@2@3PADAV?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
 0x100f2920,synthetic,??0?$SignalDesc@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@Reflection@RBX@@QAE@PBD0@Z
 0x100f3510,synthetic,??$?0V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@@?$BoundProp@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$00@Reflection@RBX@@QAE@PBD0PQ?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@2@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P832@AEXABVPropertyDescriptor@12@@ZW4Functionality@612@@Z

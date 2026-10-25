@@ -24,6 +24,7 @@ address,size,type,symbol,name
 0x101e8a5e,0x65,library,??_L@YGXPAXIHP6EX0@Z1@Z,
 0x101e8ad0,0x5,library,??_U@YAPAXIABUnothrow_t@std@@@Z,
 0x101e8b2a,0x23,library,__except_handler4,
+0x101e8b4d,0x69,library,??__C@YGXPAX0IHP6EX00@ZP6EX0@Z@Z,
 0x101e8bb8,0x45,library,__SEH_prolog4,
 0x101e8bfd,0x14,library,__SEH_epilog4,
 0x101e8c20,0x95,library,__aulldvrm,

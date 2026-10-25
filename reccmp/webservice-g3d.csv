@@ -874,6 +874,7 @@ address,size,type,symbol,name
 0x101ed320,0x125,library,?directionOrZero@Vector3@G3D@@QBE?AV12@XZ,
 0x101ed450,0x69,library,?createIndexArray@MeshAlg@G3D@@SAXHAAV?$Array@H@2@HHH@Z,
 0x101ed4c0,0x39,library,??4?$Array@H@G3D@@QAEAAV01@ABV01@@Z,
+0x101ed500,0xd,library,?hashCode@@YAIABVMeshDirectedEdgeKey@G3D@@@Z,
 0x101ed540,0x59,library,?containsKey@?$Table@VMeshDirectedEdgeKey@G3D@@V?$Array@H@2@@G3D@@QBE_NABVMeshDirectedEdgeKey@2@@Z,
 0x101ed5a0,0x5b,library,?get@?$Table@VMeshDirectedEdgeKey@G3D@@V?$Array@H@2@@G3D@@QBEAAV?$Array@H@2@ABVMeshDirectedEdgeKey@2@@Z,
 0x101ed600,0x1c,library,??1Entry@?$Table@VMeshDirectedEdgeKey@G3D@@V?$Array@H@2@@G3D@@QAE@XZ,
