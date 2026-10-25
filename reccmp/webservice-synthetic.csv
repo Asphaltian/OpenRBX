@@ -159,7 +159,7 @@ address,type,symbol
 0x1009f050,synthetic,?setStringValue@?$EnumPropDescriptor@VPartInstance@RBX@@W4PartType@Part@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 0x1009f0a0,synthetic,?setStringValue@?$EnumPropDescriptor@VPartInstance@RBX@@W4PartType@Part@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x1009f220,stub,??0PartInstance@RBX@@QAE@XZ
-0x100a0f00,stub,?setValue@?$GetSetImpl@P8Humanoid@RBX@@BE_NXZP812@AEX_N@Z@?$PropDescriptor@VHumanoid@RBX@@_N@Reflection@RBX@@UBEXPAVDescribedBase@34@AB_N@Z
+0x100a0f00,synthetic,?setValue@?$GetSetImpl@P8Humanoid@RBX@@BE_NXZP812@AEX_N@Z@?$PropDescriptor@VHumanoid@RBX@@_N@Reflection@RBX@@UBEXPAVDescribedBase@34@AB_N@Z
 0x100a1820,synthetic,??_GHumanoid@RBX@@UAEPAXI@Z
 0x100a1bb0,synthetic,?getClassName@?$FactoryProduct@VHumanoid@RBX@@VInstance@2@$1?sHumanoid@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100a3830,synthetic,??$?0P8Humanoid@RBX@@BEMXZP801@AEXABM@Z@?$PropDescriptor@VHumanoid@RBX@@M@Reflection@RBX@@QAE@PBD0P8Humanoid@2@BEMXZP832@AEXABM@ZW4Functionality@PropertyDescriptor@12@@Z

@@ -83,7 +83,11 @@ public:
 	// clang-format on
 	~GuidItem() { unregisterGuid(); }
 	void assignGuid(const Guid::Data& guidData);
-	const Guid& getGuid() const { return guid; }
+	const Guid& getGuid() const
+	{
+		registerGuid();
+		return guid;
+	}
 
 	static bool lookupByGuid(const Guid::Data& data, T*& result);
 	static T* getByGuid(const Guid::Data& data);
@@ -109,6 +113,10 @@ private:
 		registeredGuid = false;
 	}
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1009de40
+	// RBX::GuidItem<RBX::Instance>::registerGuid
+	// clang-format on
 	void registerGuid() const
 	{
 		if (!registeredGuid) {

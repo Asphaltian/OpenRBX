@@ -421,7 +421,8 @@ public:
 
 		virtual void setValue(DescribedBase* object, const T& value) const
 		{
-			(static_cast<Class*>(object)->*set)(value);
+			Class* instance = static_cast<Class*>(object);
+			(instance->*set)(value);
 		}
 
 	private:
@@ -607,7 +608,7 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::GetSetImpl<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>::getValue
 	// TEMPLATE: WEBSERVICE 0x1005a6b0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>::getValue
-	// STUB: WEBSERVICE 0x100cd400
+	// TEMPLATE: WEBSERVICE 0x100cd400
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::setValue
 	// TEMPLATE: WEBSERVICE 0x1018c8c0
 	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::GetSetImpl<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>::setValue
@@ -615,6 +616,10 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::GetSetImpl<float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100b37d0
 	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::GetSetImpl<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>::setValue
+	// TEMPLATE: WEBSERVICE 0x1009b3d0
+	// RBX::Reflection::PropDescriptor<RBX::PartInstance,float>::GetSetImpl<float (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(float)>::setValue
+	// TEMPLATE: WEBSERVICE 0x1009b410
+	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::GetSetImpl<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100cd6e0
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100d7fa0

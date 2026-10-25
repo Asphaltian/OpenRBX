@@ -723,6 +723,12 @@ void PartInstance::findParts(Instance* instance, std::vector<boost::weak_ptr<Par
 	STUB(0x1009dca0);
 }
 
+// FUNCTION: WEBSERVICE 0x1009ef30
+void PartInstance::onGuidChanged()
+{
+	getPrimitive()->setGuid(getGuid());
+}
+
 // STUB: WEBSERVICE 0x1009f220
 PartInstance::PartInstance()
 	: DescribedCreatable<PartInstance, PVInstance, sPart>("Part"), surfaces(this),

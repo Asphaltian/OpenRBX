@@ -178,6 +178,7 @@ public:
 	virtual void onAncestorChanged(const AncestorChanged& event);
 	virtual bool askSetParent(const Instance* instance) const;
 	virtual void onChildAdded(Instance* child);
+	virtual void onGuidChanged();
 	virtual void setName(const std::string& value);
 
 	virtual const CoordinateFrame getLocation() const;
