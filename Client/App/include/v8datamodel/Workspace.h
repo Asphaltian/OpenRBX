@@ -86,6 +86,11 @@ private:
 
 DECOMP_SIZE_ASSERT(Workspace, 0x394)
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1006fab0
+// RBX::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>
+// clang-format on
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_WORKSPACE_H
