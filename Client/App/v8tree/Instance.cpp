@@ -357,10 +357,19 @@ void Instance::setParent(Instance* newParent)
 	raisePropertyChanged(propParent);
 }
 
-// STUB: WEBSERVICE 0x1004ddb0
+// FUNCTION: WEBSERVICE 0x1004ddb0
 void Instance::onAncestorChanged(const AncestorChanged& event)
 {
-	STUB(0x1004ddb0);
+	if (children) {
+		boost::shared_ptr<const std::vector<shared_ptr<Instance> > > c = children.read();
+		for (std::vector<shared_ptr<Instance> >::const_iterator it = c->begin(); it != c->end(); ++it) {
+			(*it)->onAncestorChanged(event);
+		}
+	}
+
+	event_ancestryChanged.fire(this, shared_from(event.child));
+
+	Notifier<Instance, AncestorChanged>::raise(event);
 }
 
 // FUNCTION: WEBSERVICE 0x1004dee0
@@ -372,10 +381,13 @@ void Instance::onDescendentAdded(Instance* instance)
 	event_descendentAdded.fire(this, shared_from(instance));
 }
 
-// STUB: WEBSERVICE 0x1004df50
+// FUNCTION: WEBSERVICE 0x1004df50
 void Instance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 {
-	STUB(0x1004df50);
+	event_descendentRemoving.fire(this, instance);
+	if (Notifier<Instance, DescendentRemoving>::hasListeners()) {
+		Notifier<Instance, DescendentRemoving>::raise(DescendentRemoving(instance, shared_from(instance->getParent())));
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1004e040
@@ -411,13 +423,29 @@ void Instance::remove()
 	}
 }
 
-// STUB: WEBSERVICE 0x1004e5e0
+// FUNCTION: WEBSERVICE 0x1004e5e0
 void Instance::readChild(const XmlElement* childElement, IReferenceBinder& binder)
 {
-	STUB(0x1004e5e0);
+	const Name* className = NULL;
+	if (childElement->findAttributeValue(tag_class, className)) {
+		shared_ptr<Instance> childInstance = createChild(*className);
+
+		if (childInstance) {
+			childInstance->read(childElement, binder);
+			if (childInstance) {
+				childInstance->setParent(this);
+			}
+		}
+		else {
+			const XmlAttribute* referent = childElement->findAttribute(name_referent);
+			if (referent) {
+				binder.announceID(referent, NULL);
+			}
+		}
+	}
 }
 
-// STUB: WEBSERVICE 0x1004e6e0
+// FUNCTION: WEBSERVICE 0x1004e6e0
 void Instance::readChildren(const XmlElement* element, IReferenceBinder& binder)
 {
 	if (element != NULL) {
@@ -427,6 +455,27 @@ void Instance::readChildren(const XmlElement* element, IReferenceBinder& binder)
 			readChild(item, binder);
 			item = element->findNextChildWithSameTag(item);
 		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1004e730
+void Instance::read(const XmlElement* element, IReferenceBinder& binder)
+{
+	const XmlAttribute* referent = element->findAttribute(name_referent);
+	if (referent) {
+		binder.announceID(referent, this);
+	}
+
+	if (&element->getTag() == &tag_Item) {
+		const XmlElement* properties = element->findFirstChildByTag(tag_Properties);
+		if (properties) {
+			readProperties(properties, binder);
+		}
+
+		readChildren(element, binder);
+	}
+	else {
+		readProperty(element, binder);
 	}
 }
 

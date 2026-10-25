@@ -303,6 +303,18 @@ public:
 	const XmlAttribute* findAttribute(const RBX::Name& name) const;
 	XmlAttribute* findAttribute(const RBX::Name& name);
 
+	bool findAttributeValue(const RBX::Name& name, std::string& value) const
+	{
+		const XmlAttribute* attribute = findAttribute(name);
+		return attribute != NULL && attribute->getValue(value);
+	}
+
+	bool findAttributeValue(const RBX::Name& name, const RBX::Name*& value) const
+	{
+		const XmlAttribute* attribute = findAttribute(name);
+		return attribute != NULL && attribute->getValue(value);
+	}
+
 	const XmlElement* findFirstChildByTag(const RBX::Name& _tag) const;
 	const XmlElement* findNextChildWithSameTag(const XmlElement* node) const;
 

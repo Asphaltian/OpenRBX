@@ -68,6 +68,11 @@ struct DescendentRemoving
 {
 	const boost::shared_ptr<Instance> instance; // 0x00
 	const boost::shared_ptr<Instance> parent;   // 0x08
+
+	DescendentRemoving(const boost::shared_ptr<Instance>& instance, const boost::shared_ptr<Instance>& parent)
+		: instance(instance), parent(parent)
+	{
+	}
 };
 // SIZE 0xc
 struct AncestorChanged
@@ -171,8 +176,16 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10047f40
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@IBEXUDescendentAdded@2@PAV?$Listener@VInstance@RBX@@UDescendentAdded@2@@2@@Z
+	// TEMPLATE: WEBSERVICE 0x100487e0
+	// ?raise@?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@IBEXUDescendentRemoving@2@PAV?$Listener@VInstance@RBX@@UDescendentRemoving@2@@2@@Z
+	// TEMPLATE: WEBSERVICE 0x100488f0
+	// ?raise@?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@IBEXUAncestorChanged@2@PAV?$Listener@VInstance@RBX@@UAncestorChanged@2@@2@@Z
 	// TEMPLATE: WEBSERVICE 0x10048af0
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@IBEXUDescendentAdded@2@@Z
+	// TEMPLATE: WEBSERVICE 0x100493e0
+	// ?raise@?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@IBEXUDescendentRemoving@2@@Z
+	// TEMPLATE: WEBSERVICE 0x100494c0
+	// ?raise@?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@IBEXUAncestorChanged@2@@Z
 	// SYNTHETIC: WEBSERVICE 0x10218450
 	// `dynamic initializer for 'RBX::Instance::propArchivable''
 	// SYNTHETIC: WEBSERVICE 0x10218480
@@ -311,8 +324,9 @@ public:
 	}
 
 	void readProperties(const XmlElement* element, IReferenceBinder& binder);
-	void readChild(const XmlElement* childElement, IReferenceBinder& binder);
+	void read(const XmlElement* element, IReferenceBinder& binder);
 	void readChildren(const XmlElement* element, IReferenceBinder& binder);
+	void readChild(const XmlElement* childElement, IReferenceBinder& binder);
 	void writeChildren(XmlElement* element);
 
 	bool contains(const Instance* instance) const;
