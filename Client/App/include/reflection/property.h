@@ -620,6 +620,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::GetSetImpl<float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100b37d0
 	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::GetSetImpl<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>::setValue
+	// TEMPLATE: WEBSERVICE 0x1005a710
+	// RBX::Reflection::PropDescriptor<RBX::ModelInstance,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(G3D::CoordinateFrame const &)>::setValue
 	// TEMPLATE: WEBSERVICE 0x1009b3d0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,float>::GetSetImpl<float (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(float)>::setValue
 	// TEMPLATE: WEBSERVICE 0x1009b410

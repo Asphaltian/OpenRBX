@@ -1,5 +1,6 @@
 #include "v8datamodel/ModelInstance.h"
 
+#include "appdraw/Draw.h"
 #include "humanoid/Humanoid.h"
 #include "tool/DragUtilities.h"
 #include "util/Name.h"
@@ -92,24 +93,28 @@ const Primitive* ModelInstance::getBiggestPrimitive() const
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x1005a1f0
+// FUNCTION: WEBSERVICE 0x1005a1f0
 void ModelInstance::updatePrimaryPart(PartInstance* part) const
 {
-	if (primaryPart == part) {
-		return;
-	}
+	if (primaryPart != part) {
+		if (part != NULL) {
+			if (primaryPart != NULL) {
+				Matrix3 rotation = getLocation().rotation;
 
-	if (part != NULL && primaryPart != NULL) {
-		Matrix3 rotation = getLocation().rotation;
+				modelInPrimary =
+					CoordinateFrame(primaryPart->getCoordinateFrame().rotation.transpose() * rotation, Vector3::zero());
+			}
+			else {
+				modelInPrimary = CoordinateFrame();
+			}
 
-		modelInPrimary =
-			CoordinateFrame(primaryPart->getCoordinateFrame().rotation.transpose() * rotation, Vector3::zero());
+			primaryPart = part;
+		}
+		else {
+			modelInPrimary = CoordinateFrame();
+			primaryPart = NULL;
+		}
 	}
-	else {
-		modelInPrimary = CoordinateFrame();
-	}
-
-	primaryPart = part;
 }
 
 // FUNCTION: WEBSERVICE 0x1005a350
@@ -118,17 +123,28 @@ Extents ModelInstance::computeWorldGridExtents() const
 	return LocalGridExtents.getValue().express(getLocation(), CoordinateFrame());
 }
 
-// STUB: WEBSERVICE 0x1005a3b0
+// FUNCTION: WEBSERVICE 0x1005a3b0
 const CoordinateFrame ModelInstance::getLocation() const
 {
-	STUB(0x1005a3b0);
+	if (getPrimaryPartConst()) {
+		CoordinateFrame c = primaryPart->getCoordinateFrame();
+		return CoordinateFrame(c.rotation * modelInPrimary.rotation, c.translation);
+	}
+
 	return CoordinateFrame();
 }
 
-// STUB: WEBSERVICE 0x1005a460
+// FUNCTION: WEBSERVICE 0x1005a460
 void ModelInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 {
-	STUB(0x1005a460);
+	Extents localExtents = getExtentsLocal();
+	CoordinateFrame location = getLocation();
+
+	location.translation = location.pointToWorldSpace(localExtents.center());
+
+	Part part(Part::BLOCK_PART, localExtents.size(), G3D::Color4(Color3::white()), location);
+
+	Draw::selectionBox(part, adorn, selectState);
 }
 
 // FUNCTION: WEBSERVICE 0x1005a890
@@ -337,11 +353,24 @@ void ModelInstance::getCameraIgnorePrimitives(std::vector<const Primitive*>& pri
 	}
 }
 
-// STUB: WEBSERVICE 0x1005b560
+// FUNCTION: WEBSERVICE 0x1005b560
 Extents ModelInstance::computeLocalGridExtents() const
 {
-	STUB(0x1005b560);
-	return Extents();
+	std::vector<const Primitive*> primitives;
+
+	DragUtilities::getPrimitivesConst(this, primitives);
+
+	Extents answer = Extents::negativeInfiniteExtents();
+
+	for (unsigned int i = 0; i < primitives.size(); i++) {
+		const Primitive* primitive = primitives[i];
+
+		Vector3 halfSize = primitive->getGridSize() * 0.5f;
+		Extents childExtentsInMe = Extents(-halfSize, halfSize).express(primitive->getCoordinateFrame(), getLocation());
+		answer.unionWith(childExtentsInMe);
+	}
+
+	return primitives.size() > 0 ? answer : Extents::zero();
 }
 
 // FUNCTION: WEBSERVICE 0x1005c000
