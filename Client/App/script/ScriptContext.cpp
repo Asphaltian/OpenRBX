@@ -39,12 +39,32 @@ namespace RBX {
 
 char sScriptContext[] = "ScriptContext";
 
+Reflection::BoundProp<bool, 1> ScriptContext::propScriptsDisabled(
+	"ScriptsDisabled",
+	"State",
+	&RBX::ScriptContext::scriptsDisabled,
+	&RBX::ScriptContext::onChangedScriptEnabled,
+	Reflection::PropertyDescriptor::UI
+);
+
 namespace Lua {
 
 template <>
 const char* Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::className = "Object";
 
 } // namespace Lua
+
+// FUNCTION: WEBSERVICE 0x1005eaa0
+void ScriptContext::sandboxThread(lua_State* thread)
+{
+	lua_newtable(thread);
+	lua_newtable(thread);
+	lua_pushliteral(thread, "__index");
+	lua_pushvalue(thread, LUA_GLOBALSINDEX);
+	lua_settable(thread, -3);
+	lua_setmetatable(thread, -2);
+	lua_replace(thread, LUA_GLOBALSINDEX);
+}
 
 // FUNCTION: WEBSERVICE 0x1005eb00
 ScriptContext& ScriptContext::getContext(lua_State* L)
@@ -66,10 +86,12 @@ int ScriptContext::tick(lua_State* L)
 	return 1;
 }
 
-// STUB: WEBSERVICE 0x1005eb60
+// FUNCTION: WEBSERVICE 0x1005eb60
 void ScriptContext::onEvent(const RunService* source, RunTransition event)
 {
-	STUB(0x1005eb60);
+	if (globalState) {
+		lua_gc(globalState, LUA_GCCOLLECT, 0);
+	}
 }
 
 } // namespace RBX

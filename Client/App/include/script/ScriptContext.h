@@ -2,6 +2,7 @@
 #define SCRIPT_SCRIPTCONTEXT_H
 
 #include "decomp.h"
+#include "reflection/property.h"
 #include "script/ThreadRef.h"
 #include "security/SecurityContext.h"
 #include "util/Handle.h"
@@ -46,6 +47,8 @@ public:
 		Error
 	};
 
+	static Reflection::BoundProp<bool, 1> propScriptsDisabled;
+
 	static ScriptContext& getContext(lua_State* L);
 
 	Result resume(lua_State* thread, int narg);
@@ -62,6 +65,7 @@ protected:
 	virtual void onEvent(const RunService* source, Heartbeat event);
 
 private:
+	static void sandboxThread(lua_State* thread);
 	static void setThreadIdentity(lua_State* thread, Security::Identities identity);
 
 	static Security::Identities getThreadIdentity(lua_State* thread)
@@ -121,6 +125,13 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(ScriptContext, 0x168)
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10218b90
+// `dynamic initializer for 'RBX::ScriptContext::propScriptsDisabled''
+// SYNTHETIC: WEBSERVICE 0x10221a70
+// `dynamic atexit destructor for 'RBX::ScriptContext::propScriptsDisabled''
+// clang-format on
 
 } // namespace RBX
 
