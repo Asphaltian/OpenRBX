@@ -1,6 +1,7 @@
 #include "v8datamodel/ModelInstance.h"
 
 #include "humanoid/Humanoid.h"
+#include "tool/DragUtilities.h"
 #include "util/Name.h"
 #include "v8datamodel/PartInstance.h"
 
@@ -9,6 +10,45 @@ namespace RBX {
 char sModel[] = "Model";
 
 bool ModelInstance::showModelCoord;
+
+static const Name& partName = Name::declare(sModel, 2000);
+
+static const Reflection::PropDescriptor<ModelInstance, CoordinateFrame> desc_ModelInPrimary(
+	"ModelInPrimary",
+	"Data",
+	&ModelInstance::getModelInPrimary,
+	&ModelInstance::setModelInPrimary,
+	Reflection::PropertyDescriptor::STREAMING
+);
+static const Reflection::RefPropDescriptor<ModelInstance, PartInstance> primaryPartProp(
+	"PrimaryPart",
+	"Data",
+	&ModelInstance::getPrimaryPartInternal,
+	&ModelInstance::setPrimaryPart
+);
+static Reflection::BoundFuncDesc<ModelInstance, void(), 0> desc_breakJoints(
+	&ModelInstance::breakJoints,
+	"BreakJoints",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<ModelInstance, void(), 0> desc_makeJoints(
+	&ModelInstance::makeJoints,
+	"MakeJoints",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+
+static Reflection::BoundFuncDesc<ModelInstance, void(G3D::Vector3), 1> model_moveFunctionOld(
+	&ModelInstance::moveToPoint,
+	"move",
+	"location",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+static Reflection::BoundFuncDesc<ModelInstance, void(G3D::Vector3), 1> model_moveFunction(
+	&ModelInstance::moveToPoint,
+	"MoveTo",
+	"location",
+	Reflection::FunctionDescriptor::AnyCaller
+);
 
 // FUNCTION: WEBSERVICE 0x10059c10 FOLDED
 bool ModelInstance::askSetParent(const Instance* instance) const
@@ -96,16 +136,16 @@ ModelInstance::~ModelInstance()
 {
 }
 
-// STUB: WEBSERVICE 0x1005ab00
+// FUNCTION: WEBSERVICE 0x1005ab00
 Extents ModelInstance::getExtentsWorld() const
 {
-	return WorldGridExtents.getValue();
+	return WorldGridExtents;
 }
 
-// STUB: WEBSERVICE 0x1005ab50
+// FUNCTION: WEBSERVICE 0x1005ab50
 Extents ModelInstance::getExtentsLocal() const
 {
-	return LocalGridExtents.getValue();
+	return LocalGridExtents;
 }
 
 // FUNCTION: WEBSERVICE 0x1005abb0
@@ -177,20 +217,17 @@ bool ModelInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoin
 // STUB: WEBSERVICE 0x1005add0
 bool ModelInstance::shouldRender3dAdorn() const
 {
-	const PVInstance* pv = dynamic_cast<const PVInstance*>(getParent());
-
-	if (pv == NULL || getTypedRoot<PVInstance>() == getParent()) {
-		return showModelCoord;
-	}
-
-	return false;
+	return (dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent()) &&
+		   showModelCoord;
 }
 
 // STUB: WEBSERVICE 0x1005ae20
 void ModelInstance::render3dAdorn(Adorn* adorn)
 {
-	if (ModelInstance::shouldRender3dAdorn()) {
-		renderCoordinateFrame(adorn);
+	if (dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent()) {
+		if (showModelCoord) {
+			renderCoordinateFrame(adorn);
+		}
 	}
 }
 
@@ -256,10 +293,48 @@ void ModelInstance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 	PVInstance::onDescendentRemoving(instance);
 }
 
-// STUB: WEBSERVICE 0x1005b440
+// FUNCTION: WEBSERVICE 0x1005b360
+static void makeJ(Instance* instance)
+{
+	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
+		part->join();
+	}
+	else if (ModelInstance* model = dynamic_cast<ModelInstance*>(instance)) {
+		model->for_eachChild(makeJ);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1005b3c0
+void ModelInstance::makeJoints()
+{
+	for_eachChild(makeJ);
+}
+
+// FUNCTION: WEBSERVICE 0x1005b3d0
+static void breakJ(Instance* instance)
+{
+	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
+		part->destroyJoints();
+	}
+	else if (ModelInstance* model = dynamic_cast<ModelInstance*>(instance)) {
+		model->for_eachChild(breakJ);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1005b430
+void ModelInstance::breakJoints()
+{
+	for_eachChild(breakJ);
+}
+
+// FUNCTION: WEBSERVICE 0x1005b440
 void ModelInstance::getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives)
 {
-	STUB(0x1005b440);
+	DragUtilities::getPrimitivesConst(this, primitives);
+
+	if (Humanoid* humanoid = findFirstChildOfType<Humanoid>()) {
+		humanoid->getIgnorePrims(primitives);
+	}
 }
 
 // STUB: WEBSERVICE 0x1005b560
@@ -269,7 +344,7 @@ Extents ModelInstance::computeLocalGridExtents() const
 	return Extents();
 }
 
-// STUB: WEBSERVICE 0x1005c000
+// FUNCTION: WEBSERVICE 0x1005c000
 ModelInstance::ModelInstance()
 	: DescribedCreatable<ModelInstance, PVInstance, sModel>("Model"), primaryPart(NULL),
 	  FlagHeight(this, &ModelInstance::computeFlagHeight),
@@ -285,6 +360,21 @@ ModelInstance::ModelInstance()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1005c520
+void ModelInstance::setPrimaryPart(PartInstance* set)
+{
+	if (set == NULL || set->isDescendentOf(this)) {
+		candidatePrimaryPart.reset();
+		updatePrimaryPart(set);
+	}
+	else {
+		candidatePrimaryPart = shared_from(set);
+		updatePrimaryPart(NULL);
+	}
+
+	raisePropertyChanged(primaryPartProp);
+}
+
 // FUNCTION: WEBSERVICE 0x1015b610 FOLDED
 void ModelInstance::onLastChildRemoved()
 {
@@ -296,3 +386,6 @@ template const RBX::Name& RBX::Name::doDeclare<RBX::sPart>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sHumanoid>();
 template void RBX::Name::callDoDeclare<RBX::sPart>();
 template void RBX::Name::callDoDeclare<RBX::sHumanoid>();
+
+template const RBX::FactoryProduct<RBX::PartInstance, RBX::PVInstance, RBX::sPart>::Creator
+	RBX::FactoryProduct<RBX::PartInstance, RBX::PVInstance, RBX::sPart>::creator;

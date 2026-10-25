@@ -69,8 +69,10 @@ public:
 	PartInstance* getPrimaryPartInternal() const;
 	void setPrimaryPart(PartInstance* value);
 
-	const CoordinateFrame& getModelInPrimary() const;
-	void setModelInPrimary(const CoordinateFrame& value);
+	// FUNCTION: WEBSERVICE 0x10059bd0
+	const CoordinateFrame& getModelInPrimary() const { return modelInPrimary; }
+	// FUNCTION: WEBSERVICE 0x10059be0
+	void setModelInPrimary(const CoordinateFrame& value) { modelInPrimary = value; }
 
 	virtual void onExtentsChanged() const;
 
@@ -88,6 +90,9 @@ public:
 	virtual PartInstance* getPrimaryPart();
 	virtual const PartInstance* getPrimaryPartConst() const;
 
+	void makeJoints();
+	void breakJoints();
+
 protected:
 	virtual void legacyTraverseState(const CoordinateFrame& parentState);
 
@@ -95,6 +100,35 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(ModelInstance, 0x254)
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x102188d0
+// RBX::`dynamic initializer for 'partName''
+// SYNTHETIC: WEBSERVICE 0x102188f0
+// RBX::`dynamic initializer for 'desc_ModelInPrimary''
+// SYNTHETIC: WEBSERVICE 0x10218950
+// RBX::`dynamic initializer for 'primaryPartProp''
+// SYNTHETIC: WEBSERVICE 0x102189b0
+// RBX::`dynamic initializer for 'desc_breakJoints''
+// SYNTHETIC: WEBSERVICE 0x102189f0
+// RBX::`dynamic initializer for 'desc_makeJoints''
+// SYNTHETIC: WEBSERVICE 0x10218a30
+// RBX::`dynamic initializer for 'model_moveFunctionOld''
+// SYNTHETIC: WEBSERVICE 0x10218a70
+// RBX::`dynamic initializer for 'model_moveFunction''
+// SYNTHETIC: WEBSERVICE 0x10221910
+// RBX::`dynamic atexit destructor for 'primaryPartProp''
+// SYNTHETIC: WEBSERVICE 0x10221930
+// RBX::`dynamic atexit destructor for 'desc_ModelInPrimary''
+// SYNTHETIC: WEBSERVICE 0x10221970
+// RBX::`dynamic atexit destructor for 'model_moveFunction''
+// STUB: WEBSERVICE 0x10221a00
+// RBX::`dynamic atexit destructor for 'desc_makeJoints''
+// SYNTHETIC: WEBSERVICE 0x10221a10
+// RBX::`dynamic atexit destructor for 'model_moveFunctionOld''
+// STUB: WEBSERVICE 0x10221a20
+// RBX::`dynamic atexit destructor for 'desc_breakJoints''
+// clang-format on
 
 } // namespace RBX
 

@@ -732,6 +732,8 @@ address,type,symbol
 0x1022f01c,global,??_7Creator@?$FactoryProduct@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@6B@
 0x1022f038,global,??_7Creator@?$FactoryProduct@VHumanoid@RBX@@VInstance@2@$1?sHumanoid@2@3PADA@RBX@@6B@
 0x1022f054,global,??_7?$PropDescriptor@VModelInstance@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@6B@
+0x1022f07c,global,??_7?$RefPropDescriptor@VModelInstance@RBX@@VPartInstance@2@@Reflection@RBX@@6BIIDREF@2@@
+0x1022f084,global,??_7?$RefPropDescriptor@VModelInstance@RBX@@VPartInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x1022f0b4,global,??_7?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6BILocation@1@@
 0x1022f0bc,global,??_7?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6BIPrimaryPart@1@@
 0x1022f0c8,global,??_7?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6BIControllable@1@@
@@ -745,6 +747,7 @@ address,type,symbol
 0x1022f13c,global,??_7?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1022f144,global,??_7?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1022f154,global,??_7?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1022f1d8,global,??_8ModelInstance@RBX@@7B?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@1@@
 0x1022f1f0,global,??_7?$BoundFuncDesc@VModelInstance@RBX@@$$A6AXXZ$0A@@Reflection@RBX@@6B@
 0x1022f1fc,global,??_7?$BoundFuncDesc@VModelInstance@RBX@@$$A6AXVVector3@G3D@@@Z$00@Reflection@RBX@@6B@
 0x1022f298,global,?sSelection@RBX@@3QBDB

@@ -680,9 +680,11 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100ec830
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::getRefValue
 	// TEMPLATE: WEBSERVICE 0x100ec850
-	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::setRefValue
+	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100f3970
 	// RBX::Reflection::RefPropDescriptor<RBX::ObjectValue,RBX::Instance>::RefPropDescriptor<RBX::ObjectValue,RBX::Instance><RBX::Instance * (__thiscall RBX::ObjectValue::*)(void)const ,void (__thiscall RBX::ObjectValue::*)(RBX::Instance *)>
+	// TEMPLATE: WEBSERVICE 0x1005bd80
+	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x10102200
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::isReadOnly
 	// clang-format on
@@ -758,6 +760,10 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10056840
 	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x1005c230
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x1005c300
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1009eac0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1009eb40
@@ -870,6 +876,14 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::call<bool>
 	// TEMPLATE: WEBSERVICE 0x1004cad0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::execute
+	// TEMPLATE: WEBSERVICE 0x1005c370
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
+	// TEMPLATE: WEBSERVICE 0x1005c420
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::execute
+	// STUB: WEBSERVICE 0x1006ea20
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::~BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
+	// SYNTHETIC: WEBSERVICE 0x10070050
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100598b0
 	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x10059970

@@ -288,6 +288,8 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004a340
 	// ??$for_eachChild@VRaiseDescendentAdded2@RBX@@@Instance@RBX@@QBEXVRaiseDescendentAdded2@1@@Z
+	// TEMPLATE: WEBSERVICE 0x1005af10
+	// ??$for_eachChild@P6AXPAVInstance@RBX@@@Z@Instance@RBX@@QBEXP6AXPAV01@@Z@Z
 	// clang-format on
 	template <class Func>
 	void for_eachChild(Func func) const

@@ -72,6 +72,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Script>
 	// FUNCTION: WEBSERVICE 0x100097b0
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalScript>
+	// TEMPLATE: WEBSERVICE 0x1005b840
+	// RBX::Creatable<RBX::Instance>::create<RBX::PartInstance>
 	// FUNCTION: WEBSERVICE 0x1005bab0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Humanoid>
 	// TEMPLATE: WEBSERVICE 0x10062870
@@ -328,6 +330,8 @@ public:
 	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel><char const *>
 	// TEMPLATE: WEBSERVICE 0x1005b540
 	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::getClassName
+	// TEMPLATE: WEBSERVICE 0x1005b8c0
+	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1005bb30
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1005bfe0
@@ -464,8 +468,6 @@ public:
 	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::~FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>
 	// TEMPLATE: WEBSERVICE 0x1009ab10
 	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart><char const *>
-	// TEMPLATE: WEBSERVICE 0x1009ccf0
-	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100a09b0
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// TEMPLATE: WEBSERVICE 0x10094610
@@ -867,6 +869,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::creator''
 // SYNTHETIC: WEBSERVICE 0x10217fa0
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218ab0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::creator''
 // SYNTHETIC: WEBSERVICE 0x10218af0
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::creator''
 // SYNTHETIC: WEBSERVICE 0x10218bc0
@@ -991,6 +995,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221980
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::creator''
+// SYNTHETIC: WEBSERVICE 0x102219c0
+// `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221ac0
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221bc0
