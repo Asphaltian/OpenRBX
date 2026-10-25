@@ -330,7 +330,7 @@ shared_ptr<Instance> Instance::createChild(const Name& className)
 	return Instance::create(className);
 }
 
-// STUB: WEBSERVICE 0x1004d0b0
+// FUNCTION: WEBSERVICE 0x1004d0b0
 Instance::~Instance()
 {
 }
