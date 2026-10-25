@@ -305,8 +305,6 @@ address,size,symbol,name
 0x100a5310,0xec,?moveTo@Humanoid@RBX@@QAEXABVVector3@G3D@@PAVPartInstance@2@@Z,
 0x100a58a0,0xcc,?moveTo2@Humanoid@RBX@@QAEXVVector3@G3D@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z,
 0x100ab1b0,0x6a,?getPtr@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA?AV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@I@Z,
-0x100acde0,0x78,??$create@VDecal@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VDecal@RBX@@@boost@@XZ,
-0x100ace60,0xaf,?create@Creator@?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ,
 0x100adac0,0xca,?on_index@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHABVColor3@G3D@@PBDPAUlua_State@@@Z,
 0x100adbf0,0x81,??$getValue@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVVector3@G3D@@@Z,
 0x100ae210,0x165,?on_index@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHABVVector3@G3D@@PBDPAUlua_State@@@Z,

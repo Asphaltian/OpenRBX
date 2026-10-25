@@ -160,6 +160,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hint>
 	// TEMPLATE: WEBSERVICE 0x1008e820
 	// RBX::Creatable<RBX::Instance>::create<RBX::ObjectValue>
+	// TEMPLATE: WEBSERVICE 0x100acde0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Decal>
 	// TEMPLATE: WEBSERVICE 0x100b7470
 	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
 	// TEMPLATE: WEBSERVICE 0x100ad050
@@ -474,6 +476,8 @@ public:
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10094d60
 	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100ace60
+	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100ad0d0
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::Creator::create
 	// FUNCTION: WEBSERVICE 0x100b3810
@@ -812,8 +816,6 @@ public:
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::getClassName
 	// TEMPLATE: WEBSERVICE 0x10062f70
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::getClassName
-	// TEMPLATE: WEBSERVICE 0x100ffa80
-	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1019b3a0
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1018c410
@@ -947,6 +949,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::creator''
 // SYNTHETIC: WEBSERVICE 0x1021a030
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021b6f0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::creator''
 // SYNTHETIC: WEBSERVICE 0x1021b730
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::creator''
 // SYNTHETIC: WEBSERVICE 0x1021d8a0
@@ -1067,6 +1071,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::creator''
 // SYNTHETIC: WEBSERVICE 0x102235b0
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::creator''
+// SYNTHETIC: WEBSERVICE 0x102235f0
+// `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::creator''
 // SYNTHETIC: WEBSERVICE 0x10224950
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::creator''
 // SYNTHETIC: WEBSERVICE 0x10224990
