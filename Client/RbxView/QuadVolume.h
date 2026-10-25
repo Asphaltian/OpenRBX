@@ -18,7 +18,7 @@ class __declspec(novtable) LevelBuilder
 {
 protected:
 	const G3D::Vector3 halfSize;                             // 0x04
-	RenderSurfaceTypes surfaceTypes;                         // 0x10
+	const RenderSurfaceTypes surfaceTypes;                   // 0x10
 	G3D::ReferenceCountedPointer<Render::Mesh::Level> level; // 0x14
 
 public:
@@ -49,6 +49,12 @@ public:
 	virtual void buildRight(Purpose purpose) = 0;  // vtable+0x10
 	virtual void buildFront(Purpose purpose) = 0;  // vtable+0x14
 	virtual void buildBack(Purpose purpose) = 0;   // vtable+0x18
+
+protected:
+	void appendQuadFromIndexArray(int a, int b, int c, int d);
+	void appendQuadFromIndexArray(int a, int b, int c);
+	void appendQuadFromVertexIndices(unsigned int a, unsigned int b, unsigned int c, unsigned int d);
+	void appendQuadFromVertexIndices(unsigned int a, unsigned int b, unsigned int c);
 };
 
 DECOMP_SIZE_ASSERT(LevelBuilder, 0x20)

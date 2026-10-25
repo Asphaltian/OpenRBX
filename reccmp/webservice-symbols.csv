@@ -101,7 +101,6 @@ address,size,symbol,name
 0x10057d90,0xdb,?connectGeneric@?$SignalDescImpl@$00$$A6AXM@Z@Reflection@RBX@@MBE?AVconnection@signals@boost@@PAVSignalInstance@23@PAVGenericSlotWrapper@23@W4connect_position@56@@Z,
 0x10059270,0xa1,?findServiceByClassName@ServiceProvider@RBX@@ABE?AV?$shared_ptr@VInstance@RBX@@@boost@@ABVName@2@@Z,
 0x1005ad40,0x88,?hitTest@ModelInstance@RBX@@UAE_NABVRay@G3D@@AAVVector3@4@@Z,
-0x1005cb60,0x141,?draw@GuiDrawImage@RBX@@AAEXPAVAdorn@2@V?$ReferenceCountedPointer@VTextureProxyBase@RBX@@@G3D@@ABVRect@2@ABVColor4@5@3@Z,
 0x1005d130,0x21,?getSelection2@Selection@RBX@@QAE?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZ,
 0x1005d860,0x77,??0?$CopyOnWrite@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@RBX@@QAE@ABV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@Z,
 0x1005e4b0,0x6c,??0?$BoundFuncDesc@VSelection@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZ$0A@@Reflection@RBX@@QAE@P8Selection@2@AE?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZPBDW4Security@FunctionDescriptor@12@@Z,

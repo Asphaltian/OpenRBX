@@ -90,6 +90,13 @@ std::string ContentProvider::getAssetFile(const std::string& id)
 	return std::string();
 }
 
+// STUB: WEBSERVICE 0x10053940
+bool ContentProvider::hasContent(ContentId id)
+{
+	STUB(0x10053940);
+	return false;
+}
+
 // STUB: WEBSERVICE 0x10053a80
 boost::shared_ptr<const std::string> ContentProvider::requestContentString(ContentId id)
 {

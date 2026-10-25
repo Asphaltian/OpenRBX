@@ -59,6 +59,8 @@ public:
 
 	std::auto_ptr<std::istream> getContent(ContentId ticket);
 
+	bool hasContent(ContentId id);
+
 	boost::shared_ptr<const std::string> requestContentString(ContentId id);
 
 	std::string assetFolder() const;

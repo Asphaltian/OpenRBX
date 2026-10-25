@@ -49,5 +49,57 @@ LevelBuilder::LevelBuilder(
 {
 }
 
+// FUNCTION: WEBSERVICE 0x1018afa0
+void LevelBuilder::appendQuadFromVertexIndices(unsigned int a, unsigned int b, unsigned int c)
+{
+	switch (level->primitive) {
+	case G3D::RenderDevice::QUADS:
+		level->indexArray.append(
+			Render::Mesh::allocVertex(a, 1),
+			Render::Mesh::allocVertex(a, 1),
+			Render::Mesh::allocVertex(b, 1),
+			Render::Mesh::allocVertex(c, 1)
+		);
+		break;
+	case G3D::RenderDevice::TRIANGLES:
+		level->indexArray
+			.append(Render::Mesh::allocVertex(a, 1), Render::Mesh::allocVertex(b, 1), Render::Mesh::allocVertex(c, 1));
+		break;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018b070
+void LevelBuilder::appendQuadFromVertexIndices(unsigned int a, unsigned int b, unsigned int c, unsigned int d)
+{
+	switch (level->primitive) {
+	case G3D::RenderDevice::QUADS:
+		level->indexArray.append(
+			Render::Mesh::allocVertex(a, 1),
+			Render::Mesh::allocVertex(b, 1),
+			Render::Mesh::allocVertex(c, 1),
+			Render::Mesh::allocVertex(d, 1)
+		);
+		break;
+	case G3D::RenderDevice::TRIANGLES:
+		level->indexArray
+			.append(Render::Mesh::allocVertex(a, 1), Render::Mesh::allocVertex(b, 1), Render::Mesh::allocVertex(c, 1));
+		level->indexArray
+			.append(Render::Mesh::allocVertex(c, 1), Render::Mesh::allocVertex(d, 1), Render::Mesh::allocVertex(a, 1));
+		break;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018b190
+void LevelBuilder::appendQuadFromIndexArray(int a, int b, int c)
+{
+	appendQuadFromVertexIndices(level->indexArray[a], level->indexArray[b], level->indexArray[c]);
+}
+
+// FUNCTION: WEBSERVICE 0x1018b1c0
+void LevelBuilder::appendQuadFromIndexArray(int a, int b, int c, int d)
+{
+	appendQuadFromVertexIndices(level->indexArray[a], level->indexArray[b], level->indexArray[c], level->indexArray[d]);
+}
+
 } // namespace View
 } // namespace RBX
