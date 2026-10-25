@@ -56,10 +56,18 @@ private:
 DECOMP_SIZE_ASSERT(ClassDescriptor, 0x88)
 
 // SIZE 0x0c
-class DescribedBase : public SignalSource
+class __declspec(novtable) DescribedBase : public SignalSource
 {
 public:
 	static ClassDescriptor& classDescriptor() { return ClassDescriptor::rootDescriptor(); }
+
+	// FUNCTION: WEBSERVICE 0x1004e900
+	DescribedBase()
+	{
+		ClassDescriptor::lockedDown = true;
+
+		descriptor = &classDescriptor();
+	}
 
 	const ClassDescriptor& getDescriptor() const { return *descriptor; }
 
@@ -137,8 +145,6 @@ public:
 	{
 		return getDescriptor().MemberDescriptorContainer<SignalDescriptor>::members_end(this);
 	}
-
-	virtual ~DescribedBase() {} // vtable+0x00
 
 protected:
 	const ClassDescriptor* descriptor; // 0x08

@@ -5557,7 +5557,7 @@ address,type,symbol
 0x102f59b4,global,type___RBX::Reflection::RefType::singleton<RBX::Instance *>
 0x102f59c4,global,??_B?1???$singleton@PAVInstance@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102f59c8,global,?staticData@?$GuidItem@VInstance@RBX@@@RBX@@0PAUStaticData@12@A
-0x102f59cc,global,?flag@?1??getStaticData@?$GuidItem@VInstance@RBX@@@RBX@@CAAAUStaticData@23@XZ@4JA
+0x102f59cc,global,flag___RBX::GuidItem<RBX::Instance>::getStaticData
 0x102f59d8,global,??_B?1???$assign_to@VGenericSlotAdapter@?$SignalDescImpl@$00$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXVGenericSlotAdapter@?$SignalDescImpl@$00$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@@Z@51
 0x102f59e4,global,??_B?1???$assign_to@VGenericSlotAdapter@?$SignalDescImpl@$00$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@Z@Reflection@RBX@@@?$function1@XPBVPropertyDescriptor@Reflection@RBX@@V?$allocator@X@std@@@boost@@AAEXVGenericSlotAdapter@?$SignalDescImpl@$00$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@Z@Reflection@RBX@@@Z@51
 0x102f59ec,global,?event_ancestryChanged@Instance@RBX@@2V?$SignalDesc@VInstance@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@2@A

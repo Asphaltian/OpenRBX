@@ -55,6 +55,10 @@ struct DescendentAdded
 	const boost::shared_ptr<Instance> instance; // 0x00
 	const boost::shared_ptr<Instance> parent;   // 0x08
 
+private:
+	friend class Instance;
+	friend class RaiseDescendentAdded2;
+
 	// FUNCTION: WEBSERVICE 0x10049ad0
 	// RBX::DescendentAdded::DescendentAdded
 
@@ -108,7 +112,8 @@ DECOMP_SIZE_ASSERT(PropertyChanged, 0x8)
 
 extern const char sInstance[];
 
-class Instance : public GuidItem<Instance>,
+class Instance : public boost::enable_shared_from_this<Instance>,
+				 public GuidItem<Instance>,
 				 public AbstractFactoryProduct<Instance>,
 				 public Reflection::Described<Instance, sInstance, Reflection::DescribedBase>,
 				 public Debugable,
@@ -118,13 +123,10 @@ class Instance : public GuidItem<Instance>,
 				 public Notifier<Instance, DescendentRemoving>,
 				 public Notifier<Instance, AncestorChanged>,
 				 public Notifier<Instance, PropertyChanged>,
-				 public boost::enable_shared_from_this<Instance>,
 				 public boost::noncopyable
 {
-public:
-	Instance();
-
 protected:
+	Instance();
 	Instance(const char* name);
 
 	virtual ~Instance(); // vtable+0x00
@@ -137,10 +139,12 @@ protected:
 	virtual bool askAddChild(const Instance* instance) const { return false; } // vtable+0x08
 
 	virtual bool askSetParent(const Instance* instance) const { return false; } // vtable+0x0c
-	virtual void onAncestorChanged(const AncestorChanged& event);               // vtable+0x10
-	virtual void onDescendentAdded(Instance* instance);                         // vtable+0x14
-	virtual void onDescendentRemoving(const shared_ptr<Instance>& instance);    // vtable+0x18
-	virtual void onChildAdded(Instance* child) {}                               // vtable+0x1c
+	virtual void onAddListener(Listener<Instance, DescendentAdded>* listener) const;
+	virtual void onAddListener(Listener<Instance, ChildAdded>* listener) const;
+	virtual void onAncestorChanged(const AncestorChanged& event);            // vtable+0x10
+	virtual void onDescendentAdded(Instance* instance);                      // vtable+0x14
+	virtual void onDescendentRemoving(const shared_ptr<Instance>& instance); // vtable+0x18
+	virtual void onChildAdded(Instance* child) {}                            // vtable+0x1c
 
 	virtual void onChildRemoving(Instance* child) {} // vtable+0x20
 
@@ -282,6 +286,22 @@ public:
 	boost::shared_ptr<const std::vector<shared_ptr<Instance> > > getChildren2() { return children.read(); }
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1004a340
+	// ??$for_eachChild@VRaiseDescendentAdded2@RBX@@@Instance@RBX@@QBEXVRaiseDescendentAdded2@1@@Z
+	// clang-format on
+	template <class Func>
+	void for_eachChild(Func func) const
+	{
+		if (children) {
+			boost::shared_ptr<const std::vector<shared_ptr<Instance> > > c = children.read();
+			std::vector<shared_ptr<Instance> >::const_iterator end = c->end();
+			for (std::vector<shared_ptr<Instance> >::const_iterator iter = c->begin(); iter != end; ++iter) {
+				func(iter->get());
+			}
+		}
+	}
+
+	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100e9570
 	// RBX::Instance::visitDescendents<boost::_bi::bind_t<void,void (__cdecl*)(boost::shared_ptr<RBX::Instance>,RBX::Adorn *,int),boost::_bi::list3<boost::arg<1>,boost::_bi::value<RBX::Adorn *>,boost::_bi::value<int> > > >
 	// clang-format on
@@ -416,6 +436,7 @@ public:
 
 private:
 	friend class Creatable<Instance>::Deleter;
+	friend class RaiseDescendentAdded2;
 
 	void predelete();
 	static void predelete(Instance* instance);

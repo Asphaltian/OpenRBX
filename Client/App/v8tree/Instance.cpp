@@ -272,6 +272,43 @@ void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder&
 	STUB(0x1004a010);
 }
 
+// FUNCTION: WEBSERVICE 0x1004a0e0
+void Instance::onAddListener(Listener<Instance, ChildAdded>* listener) const
+{
+	if (children) {
+		boost::shared_ptr<const std::vector<shared_ptr<Instance> > > c = children.read();
+		std::vector<shared_ptr<Instance> >::const_iterator end = c->end();
+		for (std::vector<shared_ptr<Instance> >::const_iterator iter = c->begin(); iter != end; ++iter) {
+			Notifier<Instance, ChildAdded>::raise(ChildAdded(iter->get()), listener);
+		}
+	}
+}
+
+// SIZE 0x8
+class RaiseDescendentAdded2
+{
+	const Instance* const notifier;                      // 0x00
+	Listener<Instance, DescendentAdded>* const listener; // 0x04
+
+public:
+	RaiseDescendentAdded2(const Instance* notifier, Listener<Instance, DescendentAdded>* listener)
+		: notifier(notifier), listener(listener)
+	{
+	}
+
+	void operator()(Instance* child)
+	{
+		notifier->Notifier<Instance, DescendentAdded>::raise(DescendentAdded(child, child->getParent()), listener);
+		child->for_eachChild(*this);
+	}
+};
+
+// FUNCTION: WEBSERVICE 0x1004a470
+void Instance::onAddListener(Listener<Instance, DescendentAdded>* listener) const
+{
+	for_eachChild(RaiseDescendentAdded2(this, listener));
+}
+
 // STUB: WEBSERVICE 0x1004a9c0
 boost::shared_ptr<Instance> Instance::fromXmlRoot(XmlElement* root)
 {
@@ -485,15 +522,14 @@ void Instance::predelete(Instance* instance)
 	instance->predelete();
 }
 
-// STUB: WEBSERVICE 0x1004eb10
-Instance::Instance() : parent(0), archivable(true)
+// FUNCTION: WEBSERVICE 0x1004eb10
+Instance::Instance() : parent(NULL), name("Instance"), archivable(true)
 {
 }
 
-// STUB: WEBSERVICE 0x1004ec70
-Instance::Instance(const char* name) : name(name), parent(0), archivable(true)
+// FUNCTION: WEBSERVICE 0x1004ec70
+Instance::Instance(const char* name) : parent(NULL), name(name), archivable(true)
 {
-	STUB(0x1004ec70);
 }
 
 // FUNCTION: WEBSERVICE 0x101019f0 FOLDED
