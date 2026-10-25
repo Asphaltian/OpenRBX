@@ -97,6 +97,13 @@ bool ContentProvider::hasContent(ContentId id)
 	return false;
 }
 
+// STUB: WEBSERVICE 0x100539c0
+bool ContentProvider::requestContentFile(ContentId id, std::string& filename)
+{
+	STUB(0x100539c0);
+	return false;
+}
+
 // STUB: WEBSERVICE 0x10053a80
 boost::shared_ptr<const std::string> ContentProvider::requestContentString(ContentId id)
 {

@@ -10,12 +10,7 @@ namespace RBX {
 // SIZE 0x8
 class VistaAPIs
 {
-	typedef HRESULT(STDAPICALLTYPE* GetKnownFolderPathPtr)(
-		const GUID& rfid,
-		DWORD dwFlags,
-		HANDLE hToken,
-		PWSTR* ppszPath
-	);
+	typedef HRESULT(WINAPI* GetKnownFolderPathPtr)(const GUID& rfid, DWORD dwFlags, HANDLE hToken, PWSTR* ppszPath);
 
 	GetKnownFolderPathPtr getKnownFolderPath; // 0x00
 	HINSTANCE gShell32DLLInst;                // 0x04

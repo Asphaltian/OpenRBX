@@ -61,6 +61,8 @@ public:
 
 	bool hasContent(ContentId id);
 
+	bool requestContentFile(ContentId id, std::string& filename);
+
 	boost::shared_ptr<const std::string> requestContentString(ContentId id);
 
 	std::string assetFolder() const;

@@ -298,6 +298,8 @@ set(OPENRBX_RAKNET_SOURCES
   3rdparty/RakNet30/Source/rijndael.cpp
 )
 set(OPENRBX_RBXVIEW_SOURCES
+  Client/RbxView/BevelMesh.cpp
+  Client/RbxView/FileMesh.cpp
   Client/RbxView/PBBMesh.cpp
   Client/RbxView/QuadVolume.cpp
   Client/RbxView/Part.cpp
