@@ -27,7 +27,7 @@ Selection::~Selection()
 {
 }
 
-// STUB: WEBSERVICE 0x1005e1f0
+// FUNCTION: WEBSERVICE 0x1005e1f0
 void Selection::removeFromSelection(const Instance* instance)
 {
 	boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > > items = selection.write();

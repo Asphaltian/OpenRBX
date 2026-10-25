@@ -27,7 +27,7 @@ DECOMP_SIZE_ASSERT(Object, 0x04)
 // TEMPLATE: WEBSERVICE 0x1006c2e0
 // RBX::shared_from<RBX::Instance>
 // TEMPLATE: WEBSERVICE 0x100c5e40
-// RBX::shared_from<RBX::Instance const>
+// RBX::shared_from<RBX::Instance const >
 // TEMPLATE: WEBSERVICE 0x1016ef10
 // RBX::shared_from<RBX::GuiItem>
 // clang-format on
