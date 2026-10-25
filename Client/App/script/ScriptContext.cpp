@@ -1,5 +1,6 @@
 #include "script/ScriptContext.h"
 
+#include "lua/lua.hpp"
 #include "reflection/signal.h"
 #include "script/LuaAtomicClasses.h"
 #include "script/LuaInstanceBridge.h"
@@ -70,6 +71,24 @@ void ScriptContext::onEvent(const RunService* source, RunTransition event)
 {
 	STUB(0x1005eb60);
 }
+
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x1005eb80
+static std::string getFullName(RBX::Instance* instance)
+{
+	if (instance->getParent() != NULL) {
+		if (instance->getParent()->getParent() != NULL) {
+			return getFullName(instance->getParent()) + "." + instance->getName();
+		}
+
+		return instance->getName();
+	}
+
+	return "";
+}
+
+namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1005f880
 void Lua::CoordinateFrameBridge::pushCoordinateFrame(lua_State* L, G3D::CoordinateFrame value)
@@ -551,10 +570,59 @@ void ScriptContext::setThreadIdentity(lua_State* thread, Security::Identities id
 	lua_settable(thread, LUA_GLOBALSINDEX);
 }
 
-// STUB: WEBSERVICE 0x10067e00
+// FUNCTION: WEBSERVICE 0x10067e00
 void ScriptContext::startScript(boost::shared_ptr<Script> script)
 {
-	STUB(0x10067e00);
+	if (scriptsDisabled) {
+		pendingScripts.push_back(script);
+		return;
+	}
+
+	boost::shared_ptr<const std::string> code = script->requestCode();
+	if (!code) {
+		pendingScripts.push_back(script);
+		return;
+	}
+
+	openState();
+
+	lua_State* thread = lua_newthread(globalState);
+	if (!thread) {
+		StandardOut::singleton()->print(
+			MESSAGE_ERROR,
+			"Unable to create a new thread for %s. It did not execute",
+			script->getName().c_str()
+		);
+		return;
+	}
+
+	Lua::ScopedPopper popper(globalState, 1);
+
+	lua_newtable(thread);
+	lua_newtable(thread);
+	lua_pushliteral(thread, "__index");
+	lua_pushvalue(thread, LUA_GLOBALSINDEX);
+	lua_settable(thread, -3);
+	lua_setmetatable(thread, -2);
+	lua_replace(thread, LUA_GLOBALSINDEX);
+
+	setThreadIdentity(thread, Security::GameScript);
+
+	script->association().get<boost::shared_ptr<Lua::ThreadRef::Node> >() = Lua::ThreadRef::Node::create(thread);
+
+	Lua::SharedPtrBridge<Reflection::DescribedBase>::push(thread, script);
+	lua_setfield(thread, LUA_GLOBALSINDEX, "script");
+
+	std::string name = std::string("=") + getFullName(script.get());
+	if (luaL_loadbuffer(thread, code->c_str(), code->size(), name.c_str())) {
+		StandardOut::singleton()->print(MESSAGE_ERROR, lua_tostring(thread, -1));
+		lua_pop(thread, 1);
+	}
+	else {
+		resume(thread, 0);
+	}
+
+	lua_settop(thread, 0);
 }
 
 // FUNCTION: WEBSERVICE 0x10068640
