@@ -120,6 +120,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/util/ExponentialRunningAverage.cpp
   Client/App/util/Extents.cpp
   Client/App/util/Face.cpp
+  Client/App/util/FileSystem.cpp
   Client/App/util/Guid.cpp
   Client/App/util/Handle.cpp
   Client/App/util/Http.cpp
