@@ -7,6 +7,7 @@
 #include <G3D/Color3.h>
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
+#include <boost/lexical_cast.hpp>
 #include <cstdio>
 #include <limits>
 #include <stdlib.h>
@@ -20,12 +21,21 @@ std::string StringConverter<bool>::convertToString(const bool& value)
 	return value ? "true" : "false";
 }
 
-// STUB: WEBSERVICE 0x10090060
+// FUNCTION: WEBSERVICE 0x10090060
 template <>
 bool StringConverter<bool>::convertToValue(const std::string& text, bool& value)
 {
-	STUB(0x10090060);
-	return false;
+	if (text == "true" || text == "True" || text == "TRUE") {
+		value = true;
+	}
+	else if (text == "false" || text == "False" || text == "FALSE") {
+		value = false;
+	}
+	else {
+		return false;
+	}
+
+	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x100900f0
@@ -92,36 +102,98 @@ std::string StringConverter<float>::convertToString(const float& value)
 	return szText;
 }
 
-// STUB: WEBSERVICE 0x10090670
+// FUNCTION: WEBSERVICE 0x10090670
 template <>
 bool StringConverter<int>::convertToValue(const std::string& text, int& value)
 {
-	STUB(0x10090670);
-	return false;
+	if (text.size() == 0) {
+		return false;
+	}
+
+	try {
+		value = boost::lexical_cast<int>(text);
+	}
+	catch (boost::bad_lexical_cast&) {
+		return false;
+	}
+
+	return true;
 }
 
-// STUB: WEBSERVICE 0x100906e0
+// FUNCTION: WEBSERVICE 0x100906e0
 template <>
 bool StringConverter<unsigned int>::convertToValue(const std::string& text, unsigned int& value)
 {
-	STUB(0x100906e0);
-	return false;
+	if (text.size() == 0) {
+		return false;
+	}
+
+	try {
+		value = boost::lexical_cast<unsigned int>(text);
+	}
+	catch (boost::bad_lexical_cast&) {
+		return false;
+	}
+
+	return true;
 }
 
-// STUB: WEBSERVICE 0x10090750
+// FUNCTION: WEBSERVICE 0x10090750
 template <>
 bool StringConverter<double>::convertToValue(const std::string& text, double& value)
 {
-	STUB(0x10090750);
-	return false;
+	if (text.size() == 0) {
+		return false;
+	}
+
+	if (text == "INF") {
+		value = std::numeric_limits<double>::infinity();
+	}
+	else if (text == "-INF") {
+		value = -std::numeric_limits<double>::infinity();
+	}
+	else if (text == "NAN") {
+		value = std::numeric_limits<double>::quiet_NaN();
+	}
+	else {
+		try {
+			value = boost::lexical_cast<double>(text);
+		}
+		catch (boost::bad_lexical_cast&) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
-// STUB: WEBSERVICE 0x10090860
+// FUNCTION: WEBSERVICE 0x10090860
 template <>
 bool StringConverter<float>::convertToValue(const std::string& text, float& value)
 {
-	STUB(0x10090860);
-	return false;
+	if (text.size() == 0) {
+		return false;
+	}
+
+	if (text == "INF") {
+		value = std::numeric_limits<float>::infinity();
+	}
+	else if (text == "-INF") {
+		value = -std::numeric_limits<float>::infinity();
+	}
+	else if (text == "NAN") {
+		value = std::numeric_limits<float>::quiet_NaN();
+	}
+	else {
+		try {
+			value = boost::lexical_cast<float>(text);
+		}
+		catch (boost::bad_lexical_cast&) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x10090970

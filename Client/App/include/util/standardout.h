@@ -42,6 +42,11 @@ public:
 	void print(MessageType type, const std::exception& error);
 	void print(MessageType type, const char* format, ...);
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10031c40
+	// ?raise@?$Notifier@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@IBEXUStandardOutMessage@2@@Z
+	// clang-format on
+
 	// SYNTHETIC: WEBSERVICE 0x10031fe0
 	// RBX::StandardOut::StandardOut
 
