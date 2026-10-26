@@ -229,5 +229,9 @@ HeadMesh::HeadMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Ve
 	builder.buildFace(textureFace, LevelBuilder::Decal);
 }
 
+template HeadMesh* MeshFactory<HeadMesh, 1>::createDecal(const G3D::Vector3&, NormalId);
+
+template HeadMesh* MeshFactory<HeadMesh, 1>::createTexture(const G3D::Vector3&, NormalId, const G3D::Vector2&);
+
 } // namespace View
 } // namespace RBX

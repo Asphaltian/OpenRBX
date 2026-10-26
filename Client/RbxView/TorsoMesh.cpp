@@ -226,6 +226,10 @@ TorsoMesh::TorsoMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::
 	builder.buildFace(textureFace, LevelBuilder::Decal);
 }
 
+template TorsoMesh* MeshFactory<TorsoMesh, 1>::createDecal(const G3D::Vector3&, NormalId);
+
+template TorsoMesh* MeshFactory<TorsoMesh, 1>::createTexture(const G3D::Vector3&, NormalId, const G3D::Vector2&);
+
 } // namespace View
 } // namespace RBX
 

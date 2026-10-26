@@ -171,5 +171,13 @@ CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId textur
 	builder.buildFace(textureFace, LevelBuilder::Decal);
 }
 
+template CylinderAlongXMesh* MeshFactory<CylinderAlongXMesh, 1>::createDecal(const G3D::Vector3&, NormalId);
+
+template CylinderAlongXMesh* MeshFactory<CylinderAlongXMesh, 1>::createTexture(
+	const G3D::Vector3&,
+	NormalId,
+	const G3D::Vector2&
+);
+
 } // namespace View
 } // namespace RBX

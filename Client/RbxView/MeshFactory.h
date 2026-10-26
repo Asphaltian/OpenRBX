@@ -126,6 +126,26 @@ public:
 	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::createDecal
 	// TEMPLATE: WEBSERVICE 0x101728f0
 	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::createTexture
+	// TEMPLATE: WEBSERVICE 0x10172a10
+	// RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::createDecal
+	// TEMPLATE: WEBSERVICE 0x10172b20
+	// RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::createTexture
+	// TEMPLATE: WEBSERVICE 0x10172c40
+	// RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::createDecal
+	// TEMPLATE: WEBSERVICE 0x10172d50
+	// RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::createTexture
+	// TEMPLATE: WEBSERVICE 0x10172e70
+	// RBX::View::MeshFactory<RBX::View::SphereMesh,1>::createDecal
+	// TEMPLATE: WEBSERVICE 0x10172f80
+	// RBX::View::MeshFactory<RBX::View::SphereMesh,1>::createTexture
+	// TEMPLATE: WEBSERVICE 0x101730a0
+	// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::createDecal
+	// TEMPLATE: WEBSERVICE 0x101731b0
+	// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::createTexture
+	// TEMPLATE: WEBSERVICE 0x101732d0
+	// RBX::View::MeshFactory<RBX::View::HeadMesh,1>::createDecal
+	// TEMPLATE: WEBSERVICE 0x101733e0
+	// RBX::View::MeshFactory<RBX::View::HeadMesh,1>::createTexture
 	// clang-format on
 };
 
@@ -173,10 +193,50 @@ typename MeshFactory<T, N>::TextureCache MeshFactory<T, N>::textureCache;
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021ecc0
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x1021ed40
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x1021edc0
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::decalCache''
 // SYNTHETIC: WEBSERVICE 0x1021ee00
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x1021ee80
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x1021eec0
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x1021ef40
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x1021ef80
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x1021efc0
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x1021f000
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x1021f080
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x1021f0c0
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x10225910
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x10225970
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::decalCache''
 // SYNTHETIC: WEBSERVICE 0x102259d0
 // `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x10225a90
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x10225ad0
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x10225b10
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x10225b50
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x10225b90
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x10225bd0
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x10225c10
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x10225c50
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::decalCache''
 // SYNTHETIC: WEBSERVICE 0x10225c90
 // `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::textureCache''
 // clang-format on
