@@ -135,10 +135,8 @@ public:
 	virtual void setName(const std::string& value); // vtable+0x04
 
 protected:
-	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
-	virtual bool askAddChild(const Instance* instance) const { return false; } // vtable+0x08
-
-	virtual bool askSetParent(const Instance* instance) const { return false; } // vtable+0x0c
+	virtual bool askAddChild(const Instance* instance) const;  // vtable+0x08
+	virtual bool askSetParent(const Instance* instance) const; // vtable+0x0c
 	virtual void onAddListener(Listener<Instance, DescendentAdded>* listener) const;
 	virtual void onAddListener(Listener<Instance, ChildAdded>* listener) const;
 	virtual void onAncestorChanged(const AncestorChanged& event);            // vtable+0x10
@@ -224,15 +222,15 @@ public:
 	// `dynamic atexit destructor for 'RBX::Instance::desc_Name''
 	// SYNTHETIC: WEBSERVICE 0x10221700
 	// RBX::`dynamic atexit destructor for 'prop_className''
-	// STUB: WEBSERVICE 0x10221720
+	// SYNTHETIC: WEBSERVICE 0x10221720
 	// RBX::`dynamic atexit destructor for 'func_children''
 	// SYNTHETIC: WEBSERVICE 0x10221730
 	// RBX::`dynamic atexit destructor for 'func_isAncestorOf''
-	// STUB: WEBSERVICE 0x10221740
+	// SYNTHETIC: WEBSERVICE 0x10221740
 	// RBX::`dynamic atexit destructor for 'func_clone''
-	// STUB: WEBSERVICE 0x10221750
+	// SYNTHETIC: WEBSERVICE 0x10221750
 	// RBX::`dynamic atexit destructor for 'func_Remove''
-	// STUB: WEBSERVICE 0x10221760
+	// SYNTHETIC: WEBSERVICE 0x10221760
 	// RBX::`dynamic atexit destructor for 'func_childrenOld''
 	// SYNTHETIC: WEBSERVICE 0x10221770
 	// RBX::`dynamic atexit destructor for 'func_isDescendentOf''
@@ -504,8 +502,6 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::~DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>
 	// TEMPLATE: WEBSERVICE 0x1005bed0
 	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel><char const *>
-	// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
-	// RBX::Instance::askSetParent
 	// FUNCTION: WEBSERVICE 0x10043270
 	// RBX::Notifier<RBX::Instance,RBX::PropertyChanged>::raise
 	// FUNCTION: WEBSERVICE 0x10043920

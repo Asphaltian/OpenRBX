@@ -122,11 +122,11 @@ DECOMP_SIZE_ASSERT(ModelInstance, 0x254)
 // RBX::`dynamic atexit destructor for 'desc_ModelInPrimary''
 // SYNTHETIC: WEBSERVICE 0x10221970
 // RBX::`dynamic atexit destructor for 'model_moveFunction''
-// STUB: WEBSERVICE 0x10221a00
+// SYNTHETIC: WEBSERVICE 0x10221a00
 // RBX::`dynamic atexit destructor for 'desc_makeJoints''
 // SYNTHETIC: WEBSERVICE 0x10221a10
 // RBX::`dynamic atexit destructor for 'model_moveFunctionOld''
-// STUB: WEBSERVICE 0x10221a20
+// SYNTHETIC: WEBSERVICE 0x10221a20
 // RBX::`dynamic atexit destructor for 'desc_breakJoints''
 // clang-format on
 

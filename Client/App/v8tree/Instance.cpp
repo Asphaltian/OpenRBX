@@ -611,4 +611,16 @@ void Instance::onServiceProvider(const ServiceProvider* oldProvider, const Servi
 {
 }
 
+// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
+bool Instance::askSetParent(const Instance* instance) const
+{
+	return false;
+}
+
+// FUNCTION: WEBSERVICE 0x100c74e0 FOLDED
+bool Instance::askAddChild(const Instance* instance) const
+{
+	return false;
+}
+
 } // namespace RBX

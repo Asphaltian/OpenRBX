@@ -58,9 +58,9 @@ DECOMP_SIZE_ASSERT(Teams, 0x100)
 // RBX::`dynamic initializer for 'teams_rebalanceTeamsFunction''
 // SYNTHETIC: WEBSERVICE 0x1021c660
 // RBX::`dynamic initializer for 'func_teams''
-// STUB: WEBSERVICE 0x10223e80
+// SYNTHETIC: WEBSERVICE 0x10223e80
 // RBX::`dynamic atexit destructor for 'func_teams''
-// STUB: WEBSERVICE 0x10223e90
+// SYNTHETIC: WEBSERVICE 0x10223e90
 // RBX::`dynamic atexit destructor for 'teams_rebalanceTeamsFunction''
 // clang-format on
 

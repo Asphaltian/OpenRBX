@@ -37,6 +37,7 @@ public:
 	bool operator==(const ClassDescriptor& other) const;
 	bool operator!=(const ClassDescriptor& other) const;
 
+	// FUNCTION: WEBSERVICE 0x10005b60
 	static ClassDescriptor& rootDescriptor()
 	{
 		static ClassDescriptor root;

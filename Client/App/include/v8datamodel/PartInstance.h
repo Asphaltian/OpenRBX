@@ -344,11 +344,11 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_Anchored''
 // SYNTHETIC: WEBSERVICE 0x10223300
 // `dynamic atexit destructor for 'RBX::PartInstance::prop_Locked''
-// STUB: WEBSERVICE 0x10223330
+// SYNTHETIC: WEBSERVICE 0x10223330
 // RBX::`dynamic atexit destructor for 'desc_join''
-// STUB: WEBSERVICE 0x10223340
+// SYNTHETIC: WEBSERVICE 0x10223340
 // RBX::`dynamic atexit destructor for 'desc_getMass''
-// STUB: WEBSERVICE 0x10223350
+// SYNTHETIC: WEBSERVICE 0x10223350
 // RBX::`dynamic atexit destructor for 'desc_unjoin''
 // SYNTHETIC: WEBSERVICE 0x10223360
 // `dynamic atexit destructor for 'RBX::PartInstance::event_Touched''

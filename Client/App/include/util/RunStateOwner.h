@@ -201,11 +201,11 @@ DECOMP_SIZE_ASSERT(RunService, 0x1c0)
 // RBX::`dynamic initializer for 'pauseFunction''
 // SYNTHETIC: WEBSERVICE 0x10218840
 // RBX::`dynamic initializer for 'resetFunction''
-// STUB: WEBSERVICE 0x10221820
+// SYNTHETIC: WEBSERVICE 0x10221820
 // RBX::`dynamic atexit destructor for 'pauseFunction''
-// STUB: WEBSERVICE 0x10221830
+// SYNTHETIC: WEBSERVICE 0x10221830
 // RBX::`dynamic atexit destructor for 'resetFunction''
-// STUB: WEBSERVICE 0x10221840
+// SYNTHETIC: WEBSERVICE 0x10221840
 // RBX::`dynamic atexit destructor for 'runFunction''
 // SYNTHETIC: WEBSERVICE 0x10221860
 // `dynamic atexit destructor for 'RBX::RunService::event_Stepped''

@@ -17,7 +17,7 @@ namespace RBX {
 namespace Reflection {
 
 // clang-format off
-// STUB: WEBSERVICE 0x10008d50
+// TEMPLATE: WEBSERVICE 0x10008d50
 // RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10045560
 // RBX::Reflection::Described<RBX::Lighting,&RBX::sLighting,RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting> >::classDescriptor
@@ -886,7 +886,7 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
 	// TEMPLATE: WEBSERVICE 0x1005c420
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::execute
-	// STUB: WEBSERVICE 0x1006ea20
+	// SYNTHETIC: WEBSERVICE 0x1006ea20
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::~BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
 	// SYNTHETIC: WEBSERVICE 0x10070050
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::`scalar deleting destructor'
@@ -1003,6 +1003,75 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100fb070
 	// RBX::Reflection::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>::execute
 	// clang-format on
+};
+
+template <class Class, class Signature>
+class BoundFuncDesc<Class, Signature, 4> : public FuncDesc<Class>
+{
+public:
+	typedef typename boost::function_traits<Signature>::result_type result_type;
+	typedef typename boost::function_traits<Signature>::arg1_type Arg1;
+	typedef typename boost::function_traits<Signature>::arg2_type Arg2;
+	typedef typename boost::function_traits<Signature>::arg3_type Arg3;
+	typedef typename boost::function_traits<Signature>::arg4_type Arg4;
+	typedef result_type (Class::*Function)(Arg1, Arg2, Arg3, Arg4);
+
+private:
+	Function function; // 0x28
+	Value default1;    // 0x30
+	Value default2;    // 0x38
+	Value default3;    // 0x40
+	Value default4;    // 0x48
+
+	void declareSignature(const char* arg1Name, const char* arg2Name, const char* arg3Name, const char* arg4Name)
+	{
+		this->signature.resultType = &Type::singleton<result_type>();
+		this->signature.addArgument(Name::declare(arg1Name, -1), Type::singleton<Arg1>(), default1);
+		this->signature.addArgument(Name::declare(arg2Name, -1), Type::singleton<Arg2>(), default2);
+		this->signature.addArgument(Name::declare(arg3Name, -1), Type::singleton<Arg3>(), default3);
+		this->signature.addArgument(Name::declare(arg4Name, -1), Type::singleton<Arg4>(), default4);
+	}
+
+	template <class R>
+	void call(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3, Value& arg4) const
+	{
+		returnValue =
+			(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>(), arg3.convert<Arg3>(), arg4.convert<Arg4>());
+	}
+
+	template <>
+	void call<void>(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3, Value& arg4) const
+	{
+		(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>(), arg3.convert<Arg3>(), arg4.convert<Arg4>());
+	}
+
+public:
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		const char* arg2Name,
+		const char* arg3Name,
+		const char* arg4Name,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function)
+	{
+		declareSignature(arg1Name, arg2Name, arg3Name, arg4Name);
+	}
+
+	virtual void execute(DescribedBase* instance, typename FunctionDescriptor::Arguments& arguments) const
+	{
+		Value arg1(default1);
+		arguments.get(1, arg1);
+		Value arg2(default2);
+		arguments.get(2, arg2);
+		Value arg3(default3);
+		arguments.get(3, arg3);
+		Value arg4(default4);
+		arguments.get(4, arg4);
+		call<result_type>(boost::polymorphic_cast<Class*>(instance), arguments.returnValue, arg1, arg2, arg3, arg4);
+	}
 };
 
 } // namespace Reflection

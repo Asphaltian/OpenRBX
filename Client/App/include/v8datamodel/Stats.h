@@ -195,9 +195,9 @@ Item* Item::createBoundChildItem(const char* name, const T& v)
 // RBX::Stats::`dynamic initializer for 'func_values''
 // SYNTHETIC: WEBSERVICE 0x1021b820
 // RBX::Stats::`dynamic initializer for 'func_value''
-// STUB: WEBSERVICE 0x10223680
+// SYNTHETIC: WEBSERVICE 0x10223680
 // RBX::Stats::`dynamic atexit destructor for 'func_value''
-// STUB: WEBSERVICE 0x10223690
+// SYNTHETIC: WEBSERVICE 0x10223690
 // RBX::Stats::`dynamic atexit destructor for 'func_values''
 
 } // namespace Stats

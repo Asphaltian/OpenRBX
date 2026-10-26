@@ -12,6 +12,51 @@
 
 const char sThumbnailGenerator[] = "ThumbnailGenerator";
 
+static RBX::Reflection::BoundFuncDesc<ThumbnailGenerator, std::string(std::string, int, int, bool), 4> clickFunction(
+	&ThumbnailGenerator::click,
+	"Click",
+	"fileType",
+	"width",
+	"height",
+	"hideSky",
+	RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static RBX::Reflection::BoundFuncDesc<ThumbnailGenerator, std::string(std::string, std::string, int, int), 4>
+	clickTextureFunction(
+		&ThumbnailGenerator::clickTexture,
+		"ClickTexture",
+		"textureId",
+		"fileType",
+		"width",
+		"height",
+		RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+	);
+
+// STUB: WEBSERVICE 0x10006470
+ThumbnailGenerator::ThumbnailGenerator()
+{
+}
+
+// STUB: WEBSERVICE 0x10006af0
+std::string ThumbnailGenerator::clickTexture(std::string textureId, std::string fileType, int cx, int cy)
+{
+	STUB(0x10006af0);
+	return std::string();
+}
+
+// STUB: WEBSERVICE 0x10007170
+std::string ThumbnailGenerator::click(std::string fileType, int cx, int cy, bool hideSky)
+{
+	STUB(0x10007170);
+	return std::string();
+}
+
+// STUB: WEBSERVICE 0x10007470
+void ThumbnailGenerator::doClick(std::string fileType, int cx, int cy, bool hideSky, G3D::BinaryOutput* binaryOutput)
+{
+	STUB(0x10007470);
+}
+
 template void RBX::Name::callDoDeclare<sThumbnailGenerator>();
 template const RBX::Name& RBX::Name::doDeclare<sThumbnailGenerator>();
 template void RBX::Name::callDoDeclare<RBX::sLighting>();
