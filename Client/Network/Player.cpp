@@ -73,7 +73,9 @@ void Player::setName(const std::string& name)
 }
 
 // FUNCTION: WEBSERVICE 0x1018ffd0
-Player::Player() : neutral(true), under13(false), superSafeChat(false), userId(0), lastActivityTime(0.0)
+Player::Player()
+	: teamColor(BrickColor::legoWhite()), neutral(true), under13(false), superSafeChat(false), userId(0),
+	  lastActivityTime(0.0)
 {
 	Security::Context::current().requirePermission(Security::Administrator, "create a Player");
 	setName(sPlayer);

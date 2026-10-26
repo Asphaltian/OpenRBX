@@ -119,7 +119,7 @@ public:
 
 	int push(const Reflection::Value& value) const { return push(value, L); }
 
-	// STUB: WEBSERVICE 0x10062a40
+	// FUNCTION: WEBSERVICE 0x10062a40
 	static int push(const Reflection::Value& value, lua_State* const L)
 	{
 		if (value.isType<void>()) {

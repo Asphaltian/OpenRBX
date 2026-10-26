@@ -13,6 +13,7 @@ class DataModel;
 #include "ErrorUploader.h"
 #include "WebServiceMaps.h"
 #include "decomp.h"
+#include "reflection/type.h"
 #include "util/standardout.h"
 #include "v8datamodel/Workspace.h"
 
@@ -491,3 +492,7 @@ template void RBX::Name::callDoDeclare<RBX::Soundscape::sSoundService>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::Soundscape::sSoundService>();
 template void RBX::Name::callDoDeclare<RBX::Soundscape::sSoundChannel>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::Soundscape::sSoundChannel>();
+
+typedef std::vector<RBX::Reflection::Value> ValueVector;
+template ValueVector::const_iterator ValueVector::begin() const;
+template ValueVector::const_iterator ValueVector::end() const;
