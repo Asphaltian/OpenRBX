@@ -5,6 +5,8 @@
 #include "v8tree/Instance.h"
 
 #include <StringCompressor.h>
+#include <algorithm>
+#include <boost/bind.hpp>
 #include <cmath>
 
 namespace RBX {
@@ -382,6 +384,12 @@ void deserialize<ContentId>(Reflection::Property& property, RakNet::BitStream& b
 	property.setStringValue(value);
 }
 
+// FUNCTION: WEBSERVICE 0x101abeb0
+void IdSerializer::setRefValue(WaitItem& wi, Instance* instance)
+{
+	wi.desc->setRefValue(wi.instance.get(), instance);
+}
+
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, BrickColor value)
 {
 	unsigned int i = value.getClosestPaletteIndex();
@@ -450,6 +458,20 @@ void StringReceiver::receive(RakNet::BitStream& stream, std::string& value)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101acf50
+void IdSerializer::deserializeId(RakNet::BitStream& stream, Guid::Data& id)
+{
+	scopeNames.receive(stream, id.scope);
+
+	if (id.scope != &Name::getNullName()) {
+		id.index = 0;
+		stream.ReadBits(reinterpret_cast<unsigned char*>(&id.index), 24);
+	}
+	else {
+		id.index = 0;
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x101acfa0
 void StringSender::send(RakNet::BitStream& stream, const std::string& value)
 {
@@ -493,6 +515,84 @@ void StringSender::serializeString(const Reflection::ConstProperty& property, Ra
 
 	std::string value = property.getDescriptor().getStringValue(instance);
 	send(bitStream, value);
+}
+
+// FUNCTION: WEBSERVICE 0x101adac0
+void IdSerializer::serializeId(RakNet::BitStream& stream, const Instance* instance)
+{
+	if (instance) {
+		Guid::Data id = instance->getGuid().data;
+		scopeNames.send(stream, id.scope->toString());
+
+		stream.WriteBits(reinterpret_cast<unsigned char*>(&id.index), 24);
+	}
+	else {
+		scopeNames.send(stream, Name::getNullName().toString());
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101adb40
+bool IdSerializer::deserializeInstanceRef(RakNet::BitStream& stream, Instance*& instance, Guid::Data& id)
+{
+	deserializeId(stream, id);
+	return Instance::lookupByGuid(id, instance);
+}
+
+// FUNCTION: WEBSERVICE 0x101adbb0
+void IdSerializer::serializeRef(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
+{
+	const Reflection::RefPropertyDescriptor& desc =
+		static_cast<const Reflection::RefPropertyDescriptor&>(property.getDescriptor());
+
+	serializeId(bitStream, static_cast<const Instance*>(desc.getRefValue(property.getInstance())));
+}
+
+// FUNCTION: WEBSERVICE 0x101adce0
+bool IdSerializer::trySerializeId(RakNet::BitStream& stream, const Instance* instance)
+{
+	if (instance) {
+		Guid::Data id = instance->getGuid().data;
+		if (!scopeNames.trySend(stream, id.scope->toString())) {
+			return false;
+		}
+
+		stream.WriteBits(reinterpret_cast<unsigned char*>(&id.index), 24);
+	}
+	else {
+		scopeNames.send(stream, Name::getNullName().toString());
+	}
+
+	return true;
+}
+
+// FUNCTION: WEBSERVICE 0x101adf70
+void IdSerializer::resolvePendingReferences(Instance* instance, Guid::Data id)
+{
+	WaitItemMap::iterator iter = waitItems.find(id);
+	if (iter != waitItems.end()) {
+		std::for_each(iter->second.begin(), iter->second.end(), boost::bind(&IdSerializer::setRefValue, _1, instance));
+		waitItems.erase(iter);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101ae170
+void IdSerializer::deserializeRef(Reflection::Property& property, RakNet::BitStream& bitStream)
+{
+	Instance* owner = static_cast<Instance*>(property.getInstance());
+	const Reflection::RefPropertyDescriptor& desc =
+		static_cast<const Reflection::RefPropertyDescriptor&>(property.getDescriptor());
+
+	Guid::Data id;
+	deserializeId(bitStream, id);
+
+	Instance* instance;
+	if (Instance::lookupByGuid(id, instance)) {
+		desc.setRefValue(owner, instance);
+	}
+	else {
+		WaitItem item = {&desc, shared_from(owner)};
+		waitItems[id].push_back(item);
+	}
 }
 
 } // namespace Network

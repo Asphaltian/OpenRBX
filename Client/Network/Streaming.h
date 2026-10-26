@@ -4,15 +4,19 @@
 #include "decomp.h"
 #include "reflection/property.h"
 #include "util/ContentProvider.h"
+#include "util/Guid.h"
 #include "v8datamodel/BrickColor.h"
+#include "v8tree/Instance.h"
 
 #include <BitStream.h>
 #include <G3D/Color3.h>
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
 #include <boost/noncopyable.hpp>
+#include <boost/shared_ptr.hpp>
 #include <map>
 #include <string>
+#include <vector>
 
 namespace RBX {
 namespace Network {
@@ -138,6 +142,38 @@ class SharedStringDictionary : public StringSender, public StringReceiver, priva
 };
 
 DECOMP_SIZE_ASSERT(SharedStringDictionary, 0xe20)
+
+// SIZE 0xf24
+class IdSerializer : public Instance
+{
+	SharedStringDictionary scopeNames; // 0x0f8
+
+protected:
+	// SIZE 0x0c
+	struct WaitItem
+	{
+		const Reflection::RefPropertyDescriptor* desc; // 0x00
+		boost::shared_ptr<Instance> instance;          // 0x04
+	};
+
+	typedef std::map<Guid::Data, std::vector<WaitItem> > WaitItemMap;
+
+	WaitItemMap waitItems; // 0xf18
+
+	static void setRefValue(WaitItem& wi, Instance* instance);
+
+public:
+	void serializeId(RakNet::BitStream& stream, const Instance* instance);
+	bool trySerializeId(RakNet::BitStream& stream, const Instance* instance);
+	void deserializeId(RakNet::BitStream& stream, Guid::Data& id);
+	void resolvePendingReferences(Instance* instance, Guid::Data id);
+	bool deserializeInstanceRef(RakNet::BitStream& stream, Instance*& instance, Guid::Data& id);
+	unsigned int numWaitingRefs() const { return waitItems.size(); }
+	void serializeRef(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream);
+	void deserializeRef(Reflection::Property& property, RakNet::BitStream& bitStream);
+
+	virtual ~IdSerializer() {}
+};
 
 } // namespace Network
 } // namespace RBX
