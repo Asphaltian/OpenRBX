@@ -9,6 +9,7 @@
 #include <G3D/Table.h>
 #include <G3D/Vector2.h>
 #include <G3D/Vector3.h>
+#include <G3D/g3dmath.h>
 #include <map>
 
 namespace RBX {
@@ -31,7 +32,18 @@ public:
 
 	RenderSurfaceTypes() : data(0) {}
 
+	void setSurfaceType(NormalId face, RenderSurfaceType surfaceType)
+	{
+		data = (data & ~(7 << (face * 3))) | (surfaceType << (face * 3));
+	}
+
 	RenderSurfaceType getSurfaceType(NormalId face) const { return (RenderSurfaceType) ((data >> (face * 3)) & 7); }
+
+	unsigned int hashCode() const { return data; }
+
+	bool operator==(const RenderSurfaceTypes& other) const { return data == other.data; }
+	bool operator<(const RenderSurfaceTypes& other) const { return data < other.data; }
+	bool operator>(const RenderSurfaceTypes& other) const { return data > other.data; }
 };
 
 DECOMP_SIZE_ASSERT(RenderSurfaceTypes, 0x4)
@@ -122,6 +134,24 @@ public:
 	static void flushCache();
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1016b4b0
+	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::flushCache
+	// TEMPLATE: WEBSERVICE 0x1016b530
+	// RBX::View::MeshFactory<RBX::View::SphereMesh,1>::flushCache
+	// TEMPLATE: WEBSERVICE 0x1016b5b0
+	// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::flushCache
+	// TEMPLATE: WEBSERVICE 0x101712a0
+	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::create
+	// TEMPLATE: WEBSERVICE 0x10171440
+	// RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::create
+	// TEMPLATE: WEBSERVICE 0x101715d0
+	// RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::create
+	// TEMPLATE: WEBSERVICE 0x10171760
+	// RBX::View::MeshFactory<RBX::View::SphereMesh,1>::create
+	// TEMPLATE: WEBSERVICE 0x101718f0
+	// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::create
+	// TEMPLATE: WEBSERVICE 0x10171a80
+	// RBX::View::MeshFactory<RBX::View::HeadMesh,1>::create
 	// TEMPLATE: WEBSERVICE 0x101727e0
 	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::createDecal
 	// TEMPLATE: WEBSERVICE 0x101728f0
@@ -148,6 +178,31 @@ public:
 	// RBX::View::MeshFactory<RBX::View::HeadMesh,1>::createTexture
 	// clang-format on
 };
+
+template <class T, int N>
+T* MeshFactory<T, N>::create(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
+{
+	if (!cache1.containsKey(surfaceTypes)) {
+		cache1.set(surfaceTypes, Cache2());
+	}
+
+	Cache2& cache2 = cache1[surfaceTypes];
+	if (!cache2.containsKey(size)) {
+		cache2.set(size, Variations());
+	}
+
+	Variations& variations = cache2.get(size);
+	int index = N > 1 ? G3D::iRandom(0, N - 1) : 0;
+
+	G3D::ReferenceCountedPointer<Render::Mesh>& mesh = variations.meshes[index];
+	if (mesh.isNull()) {
+		T* result = new T(size, surfaceTypes);
+		mesh = result;
+		return result;
+	}
+
+	return static_cast<T*>(mesh.pointer());
+}
 
 template <class T, int N>
 T* MeshFactory<T, N>::createDecal(const G3D::Vector3& size, NormalId face)
@@ -182,6 +237,13 @@ T* MeshFactory<T, N>::createTexture(const G3D::Vector3& size, NormalId face, con
 }
 
 template <class T, int N>
+void MeshFactory<T, N>::flushCache()
+{
+	cache1.clear();
+	decalCache.clear();
+}
+
+template <class T, int N>
 typename MeshFactory<T, N>::Cache1 MeshFactory<T, N>::cache1;
 
 template <class T, int N>
@@ -191,18 +253,28 @@ template <class T, int N>
 typename MeshFactory<T, N>::TextureCache MeshFactory<T, N>::textureCache;
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021ec80
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::cache1''
 // SYNTHETIC: WEBSERVICE 0x1021ecc0
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x1021ed00
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::cache1''
 // SYNTHETIC: WEBSERVICE 0x1021ed40
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x1021ed80
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::cache1''
 // SYNTHETIC: WEBSERVICE 0x1021edc0
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::decalCache''
 // SYNTHETIC: WEBSERVICE 0x1021ee00
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x1021ee40
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::cache1''
 // SYNTHETIC: WEBSERVICE 0x1021ee80
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::decalCache''
 // SYNTHETIC: WEBSERVICE 0x1021eec0
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x1021ef00
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::cache1''
 // SYNTHETIC: WEBSERVICE 0x1021ef40
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::decalCache''
 // SYNTHETIC: WEBSERVICE 0x1021ef80
@@ -211,16 +283,30 @@ typename MeshFactory<T, N>::TextureCache MeshFactory<T, N>::textureCache;
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::textureCache''
 // SYNTHETIC: WEBSERVICE 0x1021f000
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x1021f040
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::cache1''
 // SYNTHETIC: WEBSERVICE 0x1021f080
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::decalCache''
 // SYNTHETIC: WEBSERVICE 0x1021f0c0
 // `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::textureCache''
 // SYNTHETIC: WEBSERVICE 0x10225910
 // `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x10225950
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::cache1''
 // SYNTHETIC: WEBSERVICE 0x10225970
 // `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x102259b0
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::SphereMesh,1>::cache1''
 // SYNTHETIC: WEBSERVICE 0x102259d0
 // `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x10225a10
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::cache1''
+// SYNTHETIC: WEBSERVICE 0x10225a30
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::cache1''
+// SYNTHETIC: WEBSERVICE 0x10225a50
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::cache1''
+// SYNTHETIC: WEBSERVICE 0x10225a70
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::cache1''
 // SYNTHETIC: WEBSERVICE 0x10225a90
 // `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::HeadMesh,1>::textureCache''
 // SYNTHETIC: WEBSERVICE 0x10225ad0
@@ -243,5 +329,10 @@ typename MeshFactory<T, N>::TextureCache MeshFactory<T, N>::textureCache;
 
 } // namespace View
 } // namespace RBX
+
+inline unsigned int hashCode(const RBX::View::RenderSurfaceTypes& surfaceTypes)
+{
+	return surfaceTypes.hashCode();
+}
 
 #endif // RBXVIEW_MESHFACTORY_H

@@ -196,6 +196,8 @@ WedgeMesh::WedgeMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::
 	builder.buildFace(textureFace, LevelBuilder::Decal);
 }
 
+template WedgeMesh* MeshFactory<WedgeMesh, 1>::create(const G3D::Vector3&, RenderSurfaceTypes);
+
 template WedgeMesh* MeshFactory<WedgeMesh, 1>::createDecal(const G3D::Vector3&, NormalId);
 
 template WedgeMesh* MeshFactory<WedgeMesh, 1>::createTexture(const G3D::Vector3&, NormalId, const G3D::Vector2&);

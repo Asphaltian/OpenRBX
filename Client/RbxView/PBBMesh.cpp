@@ -224,6 +224,10 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 	}
 }
 
+template void MeshFactory<PBBMesh, 4>::flushCache();
+
+template PBBMesh* MeshFactory<PBBMesh, 4>::create(const G3D::Vector3&, RenderSurfaceTypes);
+
 template PBBMesh* MeshFactory<PBBMesh, 4>::createDecal(const G3D::Vector3&, NormalId);
 
 template PBBMesh* MeshFactory<PBBMesh, 4>::createTexture(const G3D::Vector3&, NormalId, const G3D::Vector2&);

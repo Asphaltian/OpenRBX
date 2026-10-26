@@ -131,6 +131,10 @@ SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId textureFace, const G3D
 	builder.buildFace(textureFace, LevelBuilder::Decal);
 }
 
+template void MeshFactory<SphereMesh, 1>::flushCache();
+
+template SphereMesh* MeshFactory<SphereMesh, 1>::create(const G3D::Vector3&, RenderSurfaceTypes);
+
 template SphereMesh* MeshFactory<SphereMesh, 1>::createDecal(const G3D::Vector3&, NormalId);
 
 template SphereMesh* MeshFactory<SphereMesh, 1>::createTexture(const G3D::Vector3&, NormalId, const G3D::Vector2&);
