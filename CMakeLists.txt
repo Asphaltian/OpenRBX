@@ -303,6 +303,7 @@ set(OPENRBX_RBXVIEW_SOURCES
   Client/RbxView/CylinderMesh.cpp
   Client/RbxView/FileMesh.cpp
   Client/RbxView/HeadMesh.cpp
+  Client/RbxView/MaterialFactory.cpp
   Client/RbxView/PBBMesh.cpp
   Client/RbxView/QuadVolume.cpp
   Client/RbxView/SphereMesh.cpp

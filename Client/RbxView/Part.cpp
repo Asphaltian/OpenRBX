@@ -1,6 +1,8 @@
 #include "Part.h"
 
+#include "BrickMesh.h"
 #include "CylinderMesh.h"
+#include "FileMesh.h"
 #include "HeadMesh.h"
 #include "MaterialFactory.h"
 #include "MeshFactory.h"
@@ -75,10 +77,48 @@ const G3D::CoordinateFrame& PartChunk::cframe()
 	return coordinateFrame;
 }
 
-// STUB: WEBSERVICE 0x1016cd00
+// FUNCTION: WEBSERVICE 0x1016cd00
 G3D::ReferenceCountedPointer<Render::Material> Part::getMaterial()
 {
-	STUB(0x1016cd00);
+	try {
+		if (materialInvalid) {
+			MaterialFactory::Attributes attr =
+				{partInstance->getColor(), partInstance->getTransparencyUi(), partInstance->getReflectance()};
+
+			if (usesMegaTexture()) {
+				material = view->materialFactory->getMegaMaterial(attr);
+				materialInvalid = false;
+			}
+			else if (specialShape && specialShape->getMeshType() == SpecialShape::FILE_MESH) {
+				std::string textureFile;
+				if (!ContentProvider::singleton().requestContentFile(specialShape->getTextureId(), textureFile)) {
+					material = view->materialFactory->getMaterial(attr);
+					return material;
+				}
+
+				G3D::Vector3 color = specialShape->getVertColor();
+				float trans = specialShape->getAlpha();
+
+				material = new Render::Material();
+				material->appendLevel(
+					new Render::TextureProxy(*view->textureManager, textureFile, false),
+					G3D::Color3(color),
+					0.0f,
+					0.1f,
+					0.0f,
+					trans
+				);
+				materialInvalid = false;
+			}
+			else {
+				material = view->materialFactory->getMaterial(attr);
+				materialInvalid = false;
+			}
+		}
+	}
+	catch (...) {
+	}
+
 	return material;
 }
 
@@ -315,10 +355,89 @@ Part::~Part()
 	}
 }
 
-// STUB: WEBSERVICE 0x101722a0
+static RenderSurfaceType renderSurfaceType(SurfaceType surfaceType)
+{
+	switch (surfaceType) {
+	case RBX::STUDS:
+		return STUDS;
+	case RBX::INLET:
+		return INLET;
+	case RBX::WELD:
+		return WELD;
+	case RBX::GLUE:
+		return GLUE;
+	default:
+		return FLAT;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101722a0
 void Part::updateMesh()
 {
-	STUB(0x101722a0);
+	RenderSurfaceTypes surfaceTypes;
+	surfaceTypes.setSurfaceType(NORM_X, renderSurfaceType(partInstance->getSurfaces()[NORM_X].getSurfaceType()));
+	surfaceTypes.setSurfaceType(NORM_Y, renderSurfaceType(partInstance->getSurfaces()[NORM_Y].getSurfaceType()));
+	surfaceTypes.setSurfaceType(NORM_Z, renderSurfaceType(partInstance->getSurfaces()[NORM_Z].getSurfaceType()));
+	surfaceTypes.setSurfaceType(
+		NORM_X_NEG,
+		renderSurfaceType(partInstance->getSurfaces()[NORM_X_NEG].getSurfaceType())
+	);
+	surfaceTypes.setSurfaceType(
+		NORM_Y_NEG,
+		renderSurfaceType(partInstance->getSurfaces()[NORM_Y_NEG].getSurfaceType())
+	);
+	surfaceTypes.setSurfaceType(
+		NORM_Z_NEG,
+		renderSurfaceType(partInstance->getSurfaces()[NORM_Z_NEG].getSurfaceType())
+	);
+
+	G3D::Vector3 size = partInstance->getPartSizeXml();
+
+	if (usesMegaTexture()) {
+		mesh = BrickMesh::create(size, surfaceTypes, partInstance->getColor());
+	}
+	else if (!specialShape) {
+		switch (partInstance->getPartType()) {
+		case RBX::Part::BALL_PART:
+			mesh = MeshFactory<SphereMesh, 1>::create(size, surfaceTypes);
+			break;
+		case RBX::Part::BLOCK_PART:
+			mesh = MeshFactory<PBBMesh, 4>::create(size, surfaceTypes);
+			break;
+		case RBX::Part::CYLINDER_PART:
+			mesh = MeshFactory<CylinderAlongXMesh, 1>::create(size, surfaceTypes);
+			break;
+		}
+	}
+	else {
+		size *= specialShape->getScale();
+
+		switch (specialShape->getMeshType()) {
+		case SpecialShape::WEDGE_MESH:
+			mesh = MeshFactory<WedgeMesh, 1>::create(size, surfaceTypes);
+			break;
+		case SpecialShape::HEAD_MESH:
+			mesh = MeshFactory<HeadMesh, 1>::create(size, surfaceTypes);
+			break;
+		case SpecialShape::TORSO_MESH:
+			mesh = MeshFactory<TorsoMesh, 1>::create(size, surfaceTypes);
+			break;
+		case SpecialShape::SPHERE_MESH:
+			mesh = MeshFactory<SphereMesh, 1>::create(size, surfaceTypes);
+			break;
+		case SpecialShape::CYLINDER_MESH:
+			mesh = MeshFactory<CylinderAlongXMesh, 1>::create(size, surfaceTypes);
+			break;
+		case SpecialShape::BRICK_MESH:
+			mesh = MeshFactory<PBBMesh, 4>::create(size, surfaceTypes);
+			break;
+		case SpecialShape::FILE_MESH:
+			mesh = FileMesh::create(specialShape->getScale(), specialShape->getMeshId());
+			break;
+		}
+	}
+
+	radius = sqrt(2.0f) * 0.5 * primaryComponent(size);
 }
 
 // FUNCTION: WEBSERVICE 0x10173790

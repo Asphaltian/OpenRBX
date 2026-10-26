@@ -34,7 +34,7 @@ public:
 
 	void setSurfaceType(NormalId face, RenderSurfaceType surfaceType)
 	{
-		data = (data & ~(7 << (face * 3))) | (surfaceType << (face * 3));
+		data = (data & (unsigned short) ~(7 << (face * 3))) | (surfaceType << (face * 3));
 	}
 
 	RenderSurfaceType getSurfaceType(NormalId face) const { return (RenderSurfaceType) ((data >> (face * 3)) & 7); }
