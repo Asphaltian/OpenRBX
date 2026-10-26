@@ -101,7 +101,11 @@ public:
 	const PVInstance* getTopLevelPVParent() const;
 	PVInstance* getTopLevelPVParent();
 
-	bool isTopLevelPVInstance() const;
+	// FUNCTION: WEBSERVICE 0x1005a830
+	bool isTopLevelPVInstance() const
+	{
+		return dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent();
+	}
 
 	void setPVGridOffsetLegacy(const CoordinateFrame& _offset);
 	CoordinateFrame* getLegacyOffset();

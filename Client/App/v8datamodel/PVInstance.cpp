@@ -50,12 +50,6 @@ bool PVInstance::isControllable() const
 	return IsControllable;
 }
 
-// FUNCTION: WEBSERVICE 0x1005a830
-bool PVInstance::isTopLevelPVInstance() const
-{
-	return dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent();
-}
-
 // FUNCTION: WEBSERVICE 0x100990c0
 void PVInstance::moveToPoint(G3D::Vector3 point)
 {

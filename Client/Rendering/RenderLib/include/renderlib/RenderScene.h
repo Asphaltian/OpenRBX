@@ -113,8 +113,8 @@ public:
 	void setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>& L);
 	void setThrottle(float t, float m, bool s, float c);
 
-	float getShadingQuality() const;
-	float getMeshDetail() const;
+	float getShadingQuality() const { return shadingQuality; }
+	float getMeshDetail() const { return meshDetail; }
 
 	void render(G3D::RenderDevice* rd, const G3D::GCamera& camera);
 };

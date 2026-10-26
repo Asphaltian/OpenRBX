@@ -230,20 +230,21 @@ bool ModelInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoin
 	return false;
 }
 
-// STUB: WEBSERVICE 0x1005add0
+// FUNCTION: WEBSERVICE 0x1005add0
 bool ModelInstance::shouldRender3dAdorn() const
 {
-	return (dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent()) &&
-		   showModelCoord;
+	return isTopLevelPVInstance() && showModelCoord;
 }
 
-// STUB: WEBSERVICE 0x1005ae20
+// FUNCTION: WEBSERVICE 0x1005ae20
 void ModelInstance::render3dAdorn(Adorn* adorn)
 {
-	if (dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent()) {
-		if (showModelCoord) {
-			renderCoordinateFrame(adorn);
-		}
+	if (!isTopLevelPVInstance()) {
+		return;
+	}
+
+	if (showModelCoord) {
+		renderCoordinateFrame(adorn);
 	}
 }
 

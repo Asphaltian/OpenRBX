@@ -55,6 +55,17 @@ private:
 	struct Variations
 	{
 		G3D::ReferenceCountedPointer<Render::Mesh> meshes[N]; // 0x00
+
+		// clang-format off
+		// SYNTHETIC: WEBSERVICE 0x1016a4e0
+		// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::Variations::~Variations
+		// SYNTHETIC: WEBSERVICE 0x1016c7a0
+		// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::Variations::~Variations
+		// SYNTHETIC: WEBSERVICE 0x1016c7f0
+		// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::Variations::operator=
+		// SYNTHETIC: WEBSERVICE 0x1016c890
+		// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::Variations::operator=
+		// clang-format on
 	};
 
 	typedef G3D::Table<G3D::Vector3, Variations> Cache2;

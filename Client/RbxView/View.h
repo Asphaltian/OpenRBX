@@ -22,6 +22,7 @@ class DataModel;
 class Instance;
 
 namespace Render {
+class Material;
 class Model;
 class RenderScene;
 } // namespace Render
@@ -46,6 +47,30 @@ public:
 	std::auto_ptr<Render::RenderScene> renderLibScene; // 0x4c
 	std::auto_ptr<G3D::TextureManager> textureManager; // 0x50
 	std::auto_ptr<MaterialFactory> materialFactory;    // 0x54
+
+	View(boost::shared_ptr<DataModel> dataModel);
+	virtual ~View(); // vtable+0x00
+
+	virtual void render(void* rd); // vtable+0x04
+
+	G3D::ReferenceCountedPointer<Render::Material> getMaterial(G3D::ReferenceCountedPointer<Render::Material>);
+
+	virtual float getShadingQuality() const; // vtable+0x08
+	virtual float getMeshDetail() const;     // vtable+0x0c
+	virtual void updateSettings(
+		float shadingQuality,
+		float meshDetail,
+		bool shadows,
+		float cameraDistance
+	);                                     // vtable+0x10
+	virtual void suppressSkybox();         // vtable+0x14
+	virtual Instance* getWorkspace();      // vtable+0x18
+	virtual RenderStats& getRenderStats(); // vtable+0x1c
+
+private:
+	virtual void onWorkspaceDescendentAdded(boost::shared_ptr<Instance> descendent); // vtable+0x20
+	virtual void updateLighting();                                                   // vtable+0x24
+	virtual void invalidateLighting(bool updateSkybox);                              // vtable+0x28
 };
 
 DECOMP_SIZE_ASSERT(View, 0x58)
