@@ -1,0 +1,175 @@
+#include "CylinderMesh.h"
+
+#include "QuadVolume.h"
+
+#include <G3D/Vector2int16.h>
+#include <G3D/vectorMath.h>
+#include <algorithm>
+#include <math.h>
+
+static void EndcapTransform(
+	G3D::Vector3& vertex,
+	G3D::Vector3& normal,
+	G3D::Vector2& tex,
+	const G3D::Vector3& radius,
+	const G3D::Vector2int16& ivertex
+);
+static void CylinderTransform(
+	G3D::Vector3& vertex,
+	G3D::Vector3& normal,
+	G3D::Vector2& tex,
+	const G3D::Vector3& radius,
+	const G3D::Vector2int16& ivertex
+);
+
+// SIZE 0x24
+class CylinderBuilder : public RBX::View::LevelBuilder
+{
+public:
+	const unsigned int elements; // 0x20
+
+	// FUNCTION: WEBSERVICE 0x10187030
+	CylinderBuilder(
+		G3D::ReferenceCountedPointer<RBX::Render::Mesh::Level>& level,
+		G3D::Vector3 size,
+		RBX::View::RenderSurfaceTypes surfaceTypes,
+		unsigned int slices
+	)
+		: RBX::View::LevelBuilder(level, size, surfaceTypes), elements(std::max(slices / 4, 1u))
+	{
+	}
+
+protected:
+	virtual void buildRight(Purpose purpose);  // vtable+0x10
+	virtual void buildTop(Purpose purpose);    // vtable+0x04
+	virtual void buildBack(Purpose purpose);   // vtable+0x18
+	virtual void buildLeft(Purpose purpose);   // vtable+0x0c
+	virtual void buildBottom(Purpose purpose); // vtable+0x08
+	virtual void buildFront(Purpose purpose);  // vtable+0x14
+};
+
+DECOMP_SIZE_ASSERT(CylinderBuilder, 0x24)
+
+// FUNCTION: WEBSERVICE 0x101870a0
+static void EndcapTransform(
+	G3D::Vector3& vertex,
+	G3D::Vector3& normal,
+	G3D::Vector2& tex,
+	const G3D::Vector3& radius,
+	const G3D::Vector2int16& ivertex
+)
+{
+	float ratio;
+	if (fabs(vertex.y) >= fabs(vertex.x)) {
+		if (vertex.y == 0) {
+			ratio = 0;
+		}
+		else {
+			ratio = fabs(vertex.y) / vertex.xy().length();
+		}
+	}
+	else {
+		if (vertex.x == 0) {
+			ratio = 0;
+		}
+		else {
+			ratio = fabs(vertex.x) / vertex.xy().length();
+		}
+	}
+	vertex.x *= ratio;
+	vertex.y *= ratio;
+}
+
+// STUB: WEBSERVICE 0x10187190
+static void CylinderTransform(
+	G3D::Vector3& vertex,
+	G3D::Vector3& normal,
+	G3D::Vector2& tex,
+	const G3D::Vector3& radius,
+	const G3D::Vector2int16& ivertex
+)
+{
+	G3D::Vector2 v = G3D::normalize(vertex.yz());
+	vertex.y = v.x * radius.x;
+	vertex.z = v.y * radius.y;
+	normal = G3D::Vector3(0, v.x, v.y);
+}
+
+// FUNCTION: WEBSERVICE 0x10187230
+inline void CylinderBuilder::buildRight(Purpose purpose)
+{
+	buildFace<RBX::NORM_X>(EndcapTransform, elements, elements, purpose);
+}
+
+// FUNCTION: WEBSERVICE 0x10187260
+inline void CylinderBuilder::buildTop(Purpose purpose)
+{
+	buildFace<RBX::NORM_Y>(CylinderTransform, elements, 1, purpose);
+}
+
+// FUNCTION: WEBSERVICE 0x10187290
+inline void CylinderBuilder::buildBack(Purpose purpose)
+{
+	buildFace<RBX::NORM_Z>(CylinderTransform, elements, 1, purpose);
+}
+
+// FUNCTION: WEBSERVICE 0x101872c0
+inline void CylinderBuilder::buildLeft(Purpose purpose)
+{
+	buildFace<RBX::NORM_X_NEG>(EndcapTransform, elements, elements, purpose);
+}
+
+// FUNCTION: WEBSERVICE 0x101872f0
+inline void CylinderBuilder::buildBottom(Purpose purpose)
+{
+	buildFace<RBX::NORM_Y_NEG>(CylinderTransform, elements, 1, purpose);
+}
+
+// FUNCTION: WEBSERVICE 0x10187320
+inline void CylinderBuilder::buildFront(Purpose purpose)
+{
+	buildFace<RBX::NORM_Z_NEG>(CylinderTransform, elements, 1, purpose);
+}
+
+namespace RBX {
+namespace View {
+
+// FUNCTION: WEBSERVICE 0x10187350
+CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
+{
+	levels.append(new Render::Mesh::Level(G3D::RenderDevice::QUADS));
+	{
+		Render::Mesh::LevelRef& level = levels.last();
+		CylinderBuilder builder(level, size, surfaceTypes, 12);
+		builder.build(LevelBuilder::Surface);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101874a0
+CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId decalFace)
+{
+	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);
+
+	levels.append(level);
+
+	CylinderBuilder builder(level, size, RenderSurfaceTypes(), 12);
+
+	builder.buildFace(decalFace, LevelBuilder::Decal);
+}
+
+// FUNCTION: WEBSERVICE 0x10187600
+CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
+{
+	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);
+
+	levels.append(level);
+
+	CylinderBuilder builder(level, size, RenderSurfaceTypes(), 12);
+
+	builder.textureScale = mapToUvw_Legacy(size, textureFace).xy() * 2.0 / studsPerTile;
+
+	builder.buildFace(textureFace, LevelBuilder::Decal);
+}
+
+} // namespace View
+} // namespace RBX

@@ -18,11 +18,6 @@ public:
 	bool loadFromMeshFile(const G3D::Vector3& scale, const MeshId meshFile);
 
 	static G3D::ReferenceCountedPointer<Render::Mesh> create(const G3D::Vector3& scale, const MeshId meshFile);
-
-	// clang-format off
-	// SYNTHETIC: WEBSERVICE 0x1018a8d0
-	// RBX::View::FileMesh::`scalar deleting destructor'
-	// clang-format on
 };
 
 DECOMP_SIZE_ASSERT(FileMesh, 0x50)

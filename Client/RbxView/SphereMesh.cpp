@@ -1,6 +1,7 @@
 #include "SphereMesh.h"
 
 #include "QuadVolume.h"
+#include "ViewBase.h"
 
 #include <G3D/Vector2int16.h>
 
@@ -77,9 +78,36 @@ DECOMP_SIZE_ASSERT(SphereBuilder, 0x24)
 namespace RBX {
 namespace View {
 
-// STUB: WEBSERVICE 0x10186c90
+// FUNCTION: WEBSERVICE 0x10186970
+SphereMesh::SphereMesh(const G3D::Vector3& diameter, RenderSurfaceTypes surfaceTypes)
+{
+	levels.append(new Render::Mesh::Level(G3D::RenderDevice::QUADS));
+	{
+		Render::Mesh::LevelRef& level = levels.last();
+		SphereBuilder builder(level, diameter, surfaceTypes, 6);
+		builder.build(LevelBuilder::Surface);
+	}
+
+	if (ViewBase::getShadowsEnabled()) {
+		int elements = (diameter.x < 40.0f && diameter.y < 40.0f && diameter.z < 40.0f) ? 3 : 4;
+
+		Render::Mesh::LevelRef tempShadowLevel = new Render::Mesh::Level(G3D::RenderDevice::TRIANGLES);
+		SphereBuilder builder(tempShadowLevel, diameter, surfaceTypes, elements);
+		builder.build(LevelBuilder::Shadow);
+		computeShadowSurface(tempShadowLevel);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10186c90
 SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId decalFace)
 {
+	if (false) {
+		Render::Mesh::LevelRef tempShadowLevel = new Render::Mesh::Level(G3D::RenderDevice::TRIANGLES);
+		SphereBuilder builder(tempShadowLevel, size, RenderSurfaceTypes(), 3);
+		builder.build(LevelBuilder::Shadow);
+		computeShadowSurface(tempShadowLevel);
+	}
+
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);
 
 	levels.append(level);
@@ -89,7 +117,7 @@ SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId decalFace)
 	builder.buildFace(decalFace, LevelBuilder::Decal);
 }
 
-// STUB: WEBSERVICE 0x10186e10
+// FUNCTION: WEBSERVICE 0x10186e10
 SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);

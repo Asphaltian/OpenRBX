@@ -29,6 +29,8 @@ class RenderSurfaceTypes
 public:
 	unsigned int data; // 0x00
 
+	RenderSurfaceTypes() : data(0) {}
+
 	RenderSurfaceType getSurfaceType(NormalId face) const { return (RenderSurfaceType) ((data >> (face * 3)) & 7); }
 };
 
