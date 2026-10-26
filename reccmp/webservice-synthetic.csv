@@ -263,6 +263,7 @@ address,type,symbol
 0x100d87f0,synthetic,??1?$DescribedCreatable@VSnap@RBX@@VAutoJoint@2@$1?sSnap@2@3QBDB@RBX@@UAE@XZ
 0x100d8800,synthetic,??1?$DescribedCreatable@VMotor@RBX@@VAutoJoint@2@$1?sMotor@2@3QBDB@RBX@@UAE@XZ
 0x100d88c0,synthetic,??$?0P8AutoJoint@RBX@@BEABVCoordinateFrame@G3D@@XZP801@AEXABV23@@Z@?$PropDescriptor@VAutoJoint@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@QAE@PBD0P8AutoJoint@2@BEABVCoordinateFrame@G3D@@XZP832@AEXABV45@@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100d8dc0,synthetic,??_G?$NonFactoryProduct@VJointInstance@RBX@@$1?sAutoJoint@2@3QBDB@RBX@@UAEPAXI@Z
 0x100d9950,synthetic,??_E?$DescribedCreatable@VMotor@RBX@@VAutoJoint@2@$1?sMotor@2@3QBDB@RBX@@UAEPAXI@Z
 0x100d9f70,synthetic,??_GRotate@RBX@@UAEPAXI@Z
 0x100da0e0,synthetic,??_GRotateP@RBX@@UAEPAXI@Z
@@ -305,6 +306,7 @@ address,type,symbol
 0x100e4ec0,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sFeature@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100e4ee0,synthetic,?getClassName@?$FactoryProduct@VMotorFeature@RBX@@VFeature@2@$1?sMotorFeature@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100e4f00,synthetic,?getClassName@?$FactoryProduct@VHole@RBX@@VFeature@2@$1?sHole@2@3QBDB@RBX@@UBEABVName@2@XZ
+0x100e4f20,synthetic,?getClassName@?$FactoryProduct@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100e5440,synthetic,??1?$EnumDesc@W4TopBottom@Feature@RBX@@@Reflection@RBX@@EAE@XZ
 0x100e55f0,synthetic,??1?$EnumDesc@W4LeftRight@Feature@RBX@@@Reflection@RBX@@EAE@XZ
 0x100e57a0,synthetic,??1?$EnumDesc@W4InOut@Feature@RBX@@@Reflection@RBX@@EAE@XZ
@@ -321,6 +323,7 @@ address,type,symbol
 0x100e6870,synthetic,?setStringValue@?$EnumPropDescriptor@VFeature@RBX@@W4InOut@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 0x100e68c0,synthetic,?setStringValue@?$EnumPropDescriptor@VFeature@RBX@@W4InOut@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x100e6b80,synthetic,??$?0P8VelocityMotor@RBX@@BEMXZP801@AEXM@Z@?$PropDescriptor@VVelocityMotor@RBX@@M@Reflection@RBX@@QAE@PBD0P8VelocityMotor@2@BEMXZP832@AEXM@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100e6d00,synthetic,??_E?$DescribedCreatable@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@RBX@@UAEPAXI@Z
 0x100e6ff0,synthetic,??$?0P8Feature@RBX@@BE?AW4NormalId@1@XZP801@AEXW421@@Z@?$EnumPropDescriptor@VFeature@RBX@@W4NormalId@2@@Reflection@RBX@@QAE@PBD0P8Feature@2@BE?AW4NormalId@2@XZP832@AEXW442@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100e7090,synthetic,?convertToValue@?$EnumDesc@W4ControllerType@Controller@RBX@@@Reflection@RBX@@QBE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAW4ControllerType@Controller@3@@Z
 0x100e7160,stub,??0Feature@RBX@@QAE@XZ

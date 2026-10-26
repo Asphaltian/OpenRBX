@@ -675,6 +675,8 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::equalValues
 	// TEMPLATE: WEBSERVICE 0x100d8810
 	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(RBX::PartInstance *)>
+	// TEMPLATE: WEBSERVICE 0x100e6a40
+	// RBX::Reflection::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole>::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole><RBX::Hole * (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(RBX::Hole *)>
 	// SYNTHETIC: WEBSERVICE 0x100e5fe0
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100ec830

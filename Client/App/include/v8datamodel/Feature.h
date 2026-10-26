@@ -8,6 +8,9 @@
 #include "v8tree/Instance.h"
 #include "v8world/MotorJoint.h"
 
+#include <boost/shared_ptr.hpp>
+#include <boost/signals/connection.hpp>
+
 namespace RBX {
 
 extern const char sVelocityMotor[];
@@ -17,6 +20,8 @@ extern const char sHole[];
 extern const char sMotorFeature[];
 
 extern const char sFeature[];
+
+class Hole;
 
 // SIZE 0x118
 class Feature : public DescribedNonCreatable<Feature, Instance, sFeature>, public IRenderable
@@ -43,6 +48,17 @@ public:
 		CENTER_IO = 2
 	};
 
+protected:
+	enum InOutZ
+	{
+		Z_IN = 0,
+		Z_OUT = 1
+	};
+
+	// FUNCTION: WEBSERVICE 0x10108040 FOLDED
+	virtual InOutZ getCoordOrientation() const { return Z_OUT; } // vtable+0x40
+
+public:
 	// FUNCTION: WEBSERVICE 0x1019c9f0
 	NormalId getFaceId() const { return faceId; }
 
@@ -60,6 +76,8 @@ public:
 
 	void setInOut(InOut value);
 
+	CoordinateFrame computeLocalCoordinateFrame() const;
+
 private:
 	NormalId faceId;     // 0x108
 	TopBottom topBottom; // 0x10c
@@ -72,7 +90,28 @@ DECOMP_SIZE_ASSERT(Feature, 0x118)
 // SIZE 0x128
 class VelocityMotor : public DescribedCreatable<VelocityMotor, JointInstance, sVelocityMotor>
 {
+private:
+	MotorJoint* motorJoint() { return static_cast<MotorJoint*>(joint); }
+	const MotorJoint* motorJoint() const { return static_cast<const MotorJoint*>(joint); }
+
+	boost::shared_ptr<Hole> hole;                          // 0x10c
+	boost::signals::scoped_connection holeAncestorChanged; // 0x114
+
+	void onEvent_HoleAncestorChanged();
+	void setPart(int i, Feature* feature);
+
+	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	virtual bool askSetParent(const Instance* instance) const { return true; }
+
+	virtual void onAncestorChanged(const AncestorChanged& event);
+
 public:
+	VelocityMotor();
+	virtual ~VelocityMotor();
+
+	Hole* getHole() const;
+	void setHole(Hole* value);
+
 	float getMaxVelocity() const;
 	float getDesiredAngle() const;
 	float getCurrentAngle() const;
@@ -80,9 +119,6 @@ public:
 	void setMaxVelocity(float value);
 	void setDesiredAngle(float value);
 	void setCurrentAngle(float value);
-
-private:
-	undefined m_unk0x10c[0x128 - 0x10c]; // 0x10c
 };
 
 DECOMP_SIZE_ASSERT(VelocityMotor, 0x128)
@@ -90,6 +126,9 @@ DECOMP_SIZE_ASSERT(VelocityMotor, 0x128)
 // SIZE 0x118
 class Hole : public DescribedCreatable<Hole, Feature, sHole>
 {
+protected:
+	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	virtual InOutZ getCoordOrientation() const { return Z_IN; }
 };
 
 DECOMP_SIZE_ASSERT(Hole, 0x118)
@@ -107,6 +146,8 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // clang-format on
 
 // clang-format off
+// FUNCTION: WEBSERVICE 0x1021cca0
+// RBX::`dynamic initializer for 'prop_Hole''
 // FUNCTION: WEBSERVICE 0x1021cce0
 // RBX::`dynamic initializer for 'prop_MaxVelocity''
 // FUNCTION: WEBSERVICE 0x1021cd20
@@ -121,6 +162,8 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // RBX::`dynamic initializer for 'prop_LeftRight''
 // FUNCTION: WEBSERVICE 0x1021ce60
 // RBX::`dynamic initializer for 'prop_InOut''
+// SYNTHETIC: WEBSERVICE 0x10224200
+// RBX::`dynamic atexit destructor for 'prop_Hole''
 // SYNTHETIC: WEBSERVICE 0x10224220
 // RBX::`dynamic atexit destructor for 'prop_CurrentAngle''
 // SYNTHETIC: WEBSERVICE 0x10224240

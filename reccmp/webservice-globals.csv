@@ -2201,6 +2201,8 @@ address,type,symbol
 0x1023d84c,global,??_7?$FactoryProduct@VMotor@RBX@@VAutoJoint@2@$1?sMotor@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x1023d890,global,??_7?$RefPropDescriptor@VAutoJoint@RBX@@VPartInstance@2@@Reflection@RBX@@6BIIDREF@2@@
 0x1023d898,global,??_7?$RefPropDescriptor@VAutoJoint@RBX@@VPartInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
+0x10240d80,global,??_7?$RefPropDescriptor@VVelocityMotor@RBX@@VHole@2@@Reflection@RBX@@6BIIDREF@2@@
+0x10240d88,global,??_7?$RefPropDescriptor@VVelocityMotor@RBX@@VHole@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x1023d8c8,global,??_7?$PropDescriptor@VAutoJoint@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@6B@
 0x1023d8f0,global,??_7?$PropDescriptor@VMotor@RBX@@M@Reflection@RBX@@6B@
 0x1023d918,global,??_7?$DescribedNonCreatable@VJointInstance@RBX@@VInstance@2@$1?sJointInstance@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
@@ -2792,6 +2794,16 @@ address,type,symbol
 0x10240990,global,??_7Feature@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1024099c,global,??_7Feature@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x102409e4,global,??_7VelocityMotor@RBX@@6B@
+0x102409fc,global,??_7VelocityMotor@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10240a0c,global,??_7VelocityMotor@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x10240a1c,global,??_7VelocityMotor@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x10240a2c,global,??_7VelocityMotor@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x10240a3c,global,??_7VelocityMotor@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x10240a4c,global,??_7VelocityMotor@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x10240a5c,global,??_7VelocityMotor@RBX@@6BDebugable@1@@
+0x10240a64,global,??_7VelocityMotor@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x10240a6c,global,??_7VelocityMotor@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x10240a7c,global,??_7VelocityMotor@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x10240ac0,global,??_7?$FactoryProduct@VMotorFeature@RBX@@VFeature@2@$1?sMotorFeature@2@3QBDB@RBX@@6B@
 0x10240ad8,global,??_7?$FactoryProduct@VMotorFeature@RBX@@VFeature@2@$1?sMotorFeature@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10240ae8,global,??_7?$FactoryProduct@VMotorFeature@RBX@@VFeature@2@$1?sMotorFeature@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
@@ -5601,6 +5613,7 @@ address,type,symbol
 0x102f6140,global,??_B?1??inf@Vector3@G3D@@SAABV12@XZ@51
 0x102f6144,global,type___RBX::Reflection::RefType::singleton<RBX::PartInstance *>
 0x102f6154,global,??_B?1???$singleton@PAVPartInstance@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
+0x102fae7c,global,??_B?1???$singleton@PAVHole@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102f6158,global,flag___RBX::Name::declare<&RBX::sPart>
 0x102f615c,global,flag___RBX::Name::declare<&RBX::sHumanoid>
 0x102f6160,global,"foo___RBX::Reflection::Described<RBX::PVInstance,&RBX::sPVInstance,RBX::Instance>::classDescriptor"

@@ -1,7 +1,16 @@
 #include "v8datamodel/Feature.h"
 
 #include "reflection/property.h"
+#include "util/Extents.h"
+#include "util/Math.h"
 #include "util/Name.h"
+#include "util/NormalId.h"
+#include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Workspace.h"
+#include "v8world/Primitive.h"
+#include "v8world/World.h"
+
+#include <boost/bind.hpp>
 
 namespace RBX {
 
@@ -14,6 +23,34 @@ const char sMotorFeature[] = "MotorFeature";
 const char sFeature[] = "Feature";
 
 using namespace Reflection;
+
+static RefPropDescriptor<VelocityMotor, Hole> prop_Hole(
+	"Hole",
+	"Data",
+	&RBX::VelocityMotor::getHole,
+	&RBX::VelocityMotor::setHole
+);
+
+static PropDescriptor<VelocityMotor, float> prop_MaxVelocity(
+	"MaxVelocity",
+	"Data",
+	&RBX::VelocityMotor::getMaxVelocity,
+	&RBX::VelocityMotor::setMaxVelocity
+);
+
+static PropDescriptor<VelocityMotor, float> prop_DesiredAngle(
+	"DesiredAngle",
+	"Data",
+	&RBX::VelocityMotor::getDesiredAngle,
+	&RBX::VelocityMotor::setDesiredAngle
+);
+
+static PropDescriptor<VelocityMotor, float> prop_CurrentAngle(
+	"CurrentAngle",
+	"Data",
+	&RBX::VelocityMotor::getCurrentAngle,
+	&RBX::VelocityMotor::setCurrentAngle
+);
 
 static EnumPropDescriptor<Feature, NormalId> prop_FaceId(
 	"FaceId",
@@ -43,27 +80,6 @@ static EnumPropDescriptor<Feature, Feature::InOut> prop_InOut(
 	&RBX::Feature::setInOut
 );
 
-static PropDescriptor<VelocityMotor, float> prop_MaxVelocity(
-	"MaxVelocity",
-	"Data",
-	&RBX::VelocityMotor::getMaxVelocity,
-	&RBX::VelocityMotor::setMaxVelocity
-);
-
-static PropDescriptor<VelocityMotor, float> prop_DesiredAngle(
-	"DesiredAngle",
-	"Data",
-	&RBX::VelocityMotor::getDesiredAngle,
-	&RBX::VelocityMotor::setDesiredAngle
-);
-
-static PropDescriptor<VelocityMotor, float> prop_CurrentAngle(
-	"CurrentAngle",
-	"Data",
-	&RBX::VelocityMotor::getCurrentAngle,
-	&RBX::VelocityMotor::setCurrentAngle
-);
-
 // FUNCTION: WEBSERVICE 0x100d7d70 FOLDED
 float VelocityMotor::getMaxVelocity() const
 {
@@ -80,6 +96,107 @@ float VelocityMotor::getDesiredAngle() const
 float VelocityMotor::getCurrentAngle() const
 {
 	return static_cast<MotorJoint*>(joint)->getCurrentAngle();
+}
+
+// STUB: WEBSERVICE 0x100e3e30
+CoordinateFrame Feature::computeLocalCoordinateFrame() const
+{
+	PartInstance* part = dynamic_cast<PartInstance*>(getParent());
+
+	if (!part) {
+		return CoordinateFrame();
+	}
+
+	Extents extents = part->getPrimitive()->getExtentsLocal();
+	Vector3 halfSize = extents.max();
+
+	Vector3 uvw = Math::vector3Abs(objectToUvw(halfSize, faceId));
+	uvw.z = 0.0f;
+
+	switch (leftRight) {
+	case LEFT:
+		uvw.x = -uvw.x;
+		break;
+	case CENTER_LR:
+		uvw.x = 0.0f;
+		break;
+	}
+
+	switch (topBottom) {
+	case CENTER_TB:
+		uvw.y = 0.0f;
+		break;
+	case BOTTOM:
+		uvw.y = -uvw.y;
+		break;
+	}
+
+	switch (inOut) {
+	case INSET:
+		uvw.x = Math::sign(uvw.x) * std::max(fabs(uvw.x) - 1.0f, 0.0f);
+		uvw.y = Math::sign(uvw.y) * std::max(fabs(uvw.y) - 1.0f, 0.0f);
+		break;
+	case CENTER_IO:
+		uvw.x = 0.0f;
+		uvw.y = 0.0f;
+		break;
+	}
+
+	Vector3 offset = uvwToObject(uvw, faceId);
+	Vector3 position = extents.faceCenter(faceId) + offset;
+
+	NormalId normalId = getCoordOrientation() == Z_OUT ? faceId : intToNormalId((faceId + 3) % 6);
+
+	return CoordinateFrame(normalIdToMatrix3(normalId), position);
+}
+
+// FUNCTION: WEBSERVICE 0x100e40b0
+void VelocityMotor::setPart(int i, Feature* feature)
+{
+	PartInstance* part = feature ? dynamic_cast<PartInstance*>(feature->getParent()) : NULL;
+	Primitive* primitive = part ? part->getPrimitive() : NULL;
+	CoordinateFrame c = feature ? feature->computeLocalCoordinateFrame() : CoordinateFrame();
+
+	if (motorJoint()->getPrimitive(i) != primitive) {
+		motorJoint()->setPrimitive(i, primitive);
+		if (primitive) {
+			motorJoint()->setJointCoord(i, c);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100e4180
+void VelocityMotor::onAncestorChanged(const AncestorChanged& event)
+{
+	Instance::onAncestorChanged(event);
+
+	setPart(0, dynamic_cast<Feature*>(getParent()));
+
+	World* oldWorld = joint->getWorld();
+	World* newWorld = Workspace::getWorldIfInWorkspace(this);
+
+	if (oldWorld != newWorld) {
+		if (oldWorld) {
+			oldWorld->removeJoint(joint);
+			setPart(0, NULL);
+			setPart(1, NULL);
+		}
+
+		if (newWorld) {
+			newWorld->insertJoint(joint);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100e42c0
+void VelocityMotor::onEvent_HoleAncestorChanged()
+{
+	setPart(1, hole.get());
+}
+
+// FUNCTION: WEBSERVICE 0x100e4700
+VelocityMotor::~VelocityMotor()
+{
 }
 
 namespace Reflection {
@@ -112,6 +229,12 @@ EnumDesc<Feature::InOut>::EnumDesc() : EnumDescriptor("InOut", typeid(Feature::I
 }
 
 } // namespace Reflection
+
+// FUNCTION: WEBSERVICE 0x100e6dd0
+VelocityMotor::VelocityMotor() : DescribedCreatable<VelocityMotor, JointInstance, sVelocityMotor>(new MotorJoint())
+{
+	setName("VelocityMotor");
+}
 
 // FUNCTION: WEBSERVICE 0x100e7430
 void Feature::setFaceId(NormalId value)
@@ -149,6 +272,26 @@ void Feature::setInOut(InOut value)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x100e74f0
+void VelocityMotor::setHole(Hole* value)
+{
+	if (value != hole.get()) {
+		hole = shared_from(value);
+		raisePropertyChanged(prop_Hole);
+		setPart(1, hole.get());
+		if (hole) {
+			holeAncestorChanged = Instance::event_ancestryChanged.connect(
+				hole.get(),
+				boost::bind(&VelocityMotor::onEvent_HoleAncestorChanged, this),
+				10
+			);
+		}
+		else {
+			holeAncestorChanged.disconnect();
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100e7670
 void VelocityMotor::setMaxVelocity(float value)
 {
@@ -175,6 +318,12 @@ void VelocityMotor::setCurrentAngle(float value)
 		raisePropertyChanged(prop_CurrentAngle);
 	}
 }
+// FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
+Hole* VelocityMotor::getHole() const
+{
+	return hole.get();
+}
+
 } // namespace RBX
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sFeature>();
@@ -196,3 +345,10 @@ template class RBX::NonFactoryProduct<RBX::Instance, RBX::sFeature>;
 template class RBX::Reflection::
 	Described<RBX::Feature, RBX::sFeature, RBX::NonFactoryProduct<RBX::Instance, RBX::sFeature> >;
 template class RBX::DescribedNonCreatable<RBX::Feature, RBX::Instance, RBX::sFeature>;
+
+template class RBX::FactoryProduct<RBX::VelocityMotor, RBX::JointInstance, RBX::sVelocityMotor>;
+template class RBX::Reflection::Described<
+	RBX::VelocityMotor,
+	RBX::sVelocityMotor,
+	RBX::FactoryProduct<RBX::VelocityMotor, RBX::JointInstance, RBX::sVelocityMotor> >;
+template class RBX::DescribedCreatable<RBX::VelocityMotor, RBX::JointInstance, RBX::sVelocityMotor>;
