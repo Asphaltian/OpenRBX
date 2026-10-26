@@ -48,7 +48,25 @@ public:
 		CENTER_IO = 2
 	};
 
+	typedef NormalId FaceId;
+
+	NormalId faceId;     // 0x108
+	TopBottom topBottom; // 0x10c
+	LeftRight leftRight; // 0x110
+	InOut inOut;         // 0x114
+
+private:
+	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	virtual bool askSetParent(const Instance* instance) const { return true; }
+
+	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	virtual bool shouldRender3dAdorn() const { return true; }
+
+	virtual void render3dSelect(Adorn* adorn, SelectState selectState);
+
 protected:
+	bool getRenderCoord(CoordinateFrame& c) const;
+
 	enum InOutZ
 	{
 		Z_IN = 0,
@@ -59,6 +77,9 @@ protected:
 	virtual InOutZ getCoordOrientation() const { return Z_OUT; } // vtable+0x40
 
 public:
+	Feature();
+	virtual ~Feature();
+
 	// FUNCTION: WEBSERVICE 0x1019c9f0
 	NormalId getFaceId() const { return faceId; }
 
@@ -77,12 +98,6 @@ public:
 	void setInOut(InOut value);
 
 	CoordinateFrame computeLocalCoordinateFrame() const;
-
-private:
-	NormalId faceId;     // 0x108
-	TopBottom topBottom; // 0x10c
-	LeftRight leftRight; // 0x110
-	InOut inOut;         // 0x114
 };
 
 DECOMP_SIZE_ASSERT(Feature, 0x118)
@@ -126,9 +141,14 @@ DECOMP_SIZE_ASSERT(VelocityMotor, 0x128)
 // SIZE 0x118
 class Hole : public DescribedCreatable<Hole, Feature, sHole>
 {
-protected:
+private:
+	virtual void render3dAdorn(Adorn* adorn);
+
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
 	virtual InOutZ getCoordOrientation() const { return Z_IN; }
+
+public:
+	Hole();
 };
 
 DECOMP_SIZE_ASSERT(Hole, 0x118)
@@ -136,14 +156,14 @@ DECOMP_SIZE_ASSERT(Hole, 0x118)
 // SIZE 0x118
 class MotorFeature : public DescribedCreatable<MotorFeature, Feature, sMotorFeature>
 {
+private:
+	virtual void render3dAdorn(Adorn* adorn);
+
+public:
+	MotorFeature();
 };
 
 DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
-
-// clang-format off
-// STUB: WEBSERVICE 0x100e4410
-// RBX::Feature::~Feature
-// clang-format on
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x1021cca0
@@ -180,6 +200,8 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // RBX::`dynamic atexit destructor for 'prop_MaxVelocity''
 // SYNTHETIC: WEBSERVICE 0x100e4c60
 // RBX::Feature::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x100e4c80
+// RBX::VelocityMotor::`scalar deleting destructor'
 // clang-format on
 
 } // namespace RBX

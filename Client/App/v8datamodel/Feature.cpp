@@ -1,5 +1,7 @@
 #include "v8datamodel/Feature.h"
 
+#include "appdraw/Draw.h"
+#include "appdraw/DrawAdorn.h"
 #include "reflection/property.h"
 #include "util/Extents.h"
 #include "util/Math.h"
@@ -194,6 +196,51 @@ void VelocityMotor::onEvent_HoleAncestorChanged()
 	setPart(1, hole.get());
 }
 
+// FUNCTION: WEBSERVICE 0x100e4410
+Feature::~Feature()
+{
+}
+
+// FUNCTION: WEBSERVICE 0x100e4540
+bool Feature::getRenderCoord(CoordinateFrame& c) const
+{
+	if (PartInstance* part = dynamic_cast<PartInstance*>(getParent())) {
+		CoordinateFrame local = computeLocalCoordinateFrame();
+		c = part->getCoordinateFrame() * local;
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100e45d0
+void Feature::render3dSelect(Adorn* adorn, SelectState selectState)
+{
+	CoordinateFrame c;
+	if (getRenderCoord(c)) {
+		DrawAdorn::cylinder(adorn, c, 2, 0.3f, 0.6f, Draw::selectColor());
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100e4630
+void Hole::render3dAdorn(Adorn* adorn)
+{
+	CoordinateFrame c;
+	if (getRenderCoord(c)) {
+		DrawAdorn::cylinder(adorn, c, 2, 0.2f, 0.3f, G3D::Color3::black());
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100e4690
+void MotorFeature::render3dAdorn(Adorn* adorn)
+{
+	CoordinateFrame c;
+	if (getRenderCoord(c)) {
+		DrawAdorn::cylinder(adorn, c, 2, 1.0f, 0.3f, G3D::Color3::yellow());
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100e4700
 VelocityMotor::~VelocityMotor()
 {
@@ -234,6 +281,12 @@ EnumDesc<Feature::InOut>::EnumDesc() : EnumDescriptor("InOut", typeid(Feature::I
 VelocityMotor::VelocityMotor() : DescribedCreatable<VelocityMotor, JointInstance, sVelocityMotor>(new MotorJoint())
 {
 	setName("VelocityMotor");
+}
+
+// FUNCTION: WEBSERVICE 0x100e7160
+Feature::Feature() : faceId(NORM_X), topBottom(CENTER_TB), leftRight(CENTER_LR), inOut(CENTER_IO)
+{
+	setName("Feature");
 }
 
 // FUNCTION: WEBSERVICE 0x100e7430
@@ -318,6 +371,18 @@ void VelocityMotor::setCurrentAngle(float value)
 		raisePropertyChanged(prop_CurrentAngle);
 	}
 }
+// FUNCTION: WEBSERVICE 0x100e78b0
+Hole::Hole()
+{
+	setName("Hole");
+}
+
+// FUNCTION: WEBSERVICE 0x100e79a0
+MotorFeature::MotorFeature()
+{
+	setName("MotorFeature");
+}
+
 // FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
 Hole* VelocityMotor::getHole() const
 {

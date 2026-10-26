@@ -504,6 +504,8 @@ public:
 	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::Skin>
 	// TEMPLATE: WEBSERVICE 0x100e10e0
 	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::BodyColors>
+	// TEMPLATE: WEBSERVICE 0x100e49e0
+	// RBX::Reflection::PropDescriptor<RBX::VelocityMotor,RBX::Hole *>::getset<RBX::Hole * (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(RBX::Hole *)>
 	// TEMPLATE: WEBSERVICE 0x100ebfe0
 	// RBX::Reflection::PropDescriptor<RBX::Rocket,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Rocket::*)(void)const ,void (__thiscall RBX::Rocket::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100ec280
