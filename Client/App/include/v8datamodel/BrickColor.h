@@ -143,6 +143,8 @@ public:
 	BrickColor() : number(lego_194) {}
 	BrickColor(Number number) : number(number) {}
 
+	unsigned int getClosestPaletteIndex() const;
+
 	static BrickColor closest(G3D::Color4 color);
 	static BrickColor closest(G3D::Color3 color);
 	static BrickColor closest(G3D::Color4uint8 color);

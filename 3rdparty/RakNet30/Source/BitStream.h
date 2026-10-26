@@ -1231,6 +1231,8 @@ namespace RakNet
 		}
 	}
 
+	// TEMPLATE: WEBSERVICE 0x1019c1d0
+	// RakNet::BitStream::WriteNormQuat<float>
 	template <class templateType> // templateType for this function must be a float or double
 		void BitStream::WriteNormQuat( templateType w, templateType x, templateType y, templateType z)
 	{
@@ -1365,6 +1367,8 @@ namespace RakNet
 		return true;
 	}
 
+	// TEMPLATE: WEBSERVICE 0x1019c330
+	// RakNet::BitStream::ReadNormQuat<float>
 	template <class templateType> // templateType for this function must be a float or double
 		bool BitStream::ReadNormQuat( templateType &w, templateType &x, templateType &y, templateType &z)
 	{
@@ -1380,18 +1384,14 @@ namespace RakNet
 			return false;
 
 		// Calculate w from x,y,z
-		x=(templateType)(cx/65535.0);
-		y=(templateType)(cy/65535.0);
-		z=(templateType)(cz/65535.0);
-		if (cxNeg) x=-x;
-		if (cyNeg) y=-y;
-		if (czNeg) z=-z;
+		x = cxNeg ? -(templateType)(cx/65535.0) : (templateType)(cx/65535.0);
+		y = cyNeg ? -(templateType)(cy/65535.0) : (templateType)(cy/65535.0);
+		z = czNeg ? -(templateType)(cz/65535.0) : (templateType)(cz/65535.0);
 		float difference = 1.0 - x*x - y*y - z*z;
-		if (difference < 0.0f)
-			difference=0.0f;
-		w = (templateType)(sqrt(difference));
-		if (cwNeg)
-			w=-w;
+		if (difference <= 0.0f)
+			w = 0.0f;
+		else
+			w = cwNeg ? -(templateType)(sqrt(difference)) : (templateType)(sqrt(difference));
 		return true;
 	}
 

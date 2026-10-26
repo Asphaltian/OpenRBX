@@ -47,6 +47,13 @@ const BrickColor::Colors& BrickColor::colorPalette()
 	return BrickMap::singleton().colorPalette;
 }
 
+// STUB: WEBSERVICE 0x10093d20
+unsigned int BrickColor::getClosestPaletteIndex() const
+{
+	STUB(0x10093d20);
+	return 0;
+}
+
 // STUB: WEBSERVICE 0x10093d40
 BrickColor BrickColor::parse(const char* name)
 {

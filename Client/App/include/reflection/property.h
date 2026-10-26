@@ -1013,6 +1013,11 @@ public:
 
 	DescribedBase* getInstance() const { return const_cast<DescribedBase*>(instance); }
 
+	bool setStringValue(const std::string& value)
+	{
+		return descriptor->setStringValue(const_cast<DescribedBase*>(instance), value);
+	}
+
 	void read(const XmlElement* element, IReferenceBinder& binder) { descriptor->read(getInstance(), element, binder); }
 
 	// clang-format off

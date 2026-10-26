@@ -1,9 +1,36 @@
 #include "Streaming.h"
 
+#include "util/Math.h"
+#include "util/Quaternion.h"
+
 #include <StringCompressor.h>
+#include <cmath>
 
 namespace RBX {
 namespace Network {
+
+const float brickEpsilon = 0.0005f;
+
+// FUNCTION: WEBSERVICE 0x101ab330
+void serializeEnum(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
+{
+	const Reflection::EnumPropertyDescriptor& descriptor =
+		static_cast<const Reflection::EnumPropertyDescriptor&>(property.getDescriptor());
+	unsigned int value = descriptor.getIndexValue(property.getInstance());
+
+	bitStream.WriteBits(reinterpret_cast<unsigned char*>(&value), descriptor.enumDescriptor.getEnumCountMSB() + 1);
+}
+
+// FUNCTION: WEBSERVICE 0x101ab370
+void deserializeEnum(Reflection::Property& property, RakNet::BitStream& bitStream)
+{
+	const Reflection::EnumPropertyDescriptor& descriptor =
+		static_cast<const Reflection::EnumPropertyDescriptor&>(property.getDescriptor());
+	unsigned int value = 0;
+	bitStream.ReadBits(reinterpret_cast<unsigned char*>(&value), descriptor.enumDescriptor.getEnumCountMSB() + 1);
+
+	descriptor.setIndexValue(property.getInstance(), value);
+}
 
 // FUNCTION: WEBSERVICE 0x101ab3b0
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, bool value)
@@ -18,6 +45,51 @@ RakNet::BitStream& operator>> <bool>(RakNet::BitStream& stream, bool& value)
 {
 	stream.Read(value);
 	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101ab410
+bool brickEq(float a, float b)
+{
+	return a == b || fabsf(a - b) <= brickEpsilon;
+}
+
+// FUNCTION: WEBSERVICE 0x101ab460
+static bool isBrickLocation(const G3D::Vector3& v, short& x, unsigned short& y, short& z)
+{
+	if (v.x >= 512.0f) {
+		return false;
+	}
+	if (v.x <= -512.0f) {
+		return false;
+	}
+	if (v.z >= 512.0f) {
+		return false;
+	}
+	if (v.z <= -512.0f) {
+		return false;
+	}
+	if (v.y >= 204.8f) {
+		return false;
+	}
+	if (v.y < 0.0f) {
+		return false;
+	}
+
+	float dx = v.x * 2.0;
+	x = (short) dx;
+	if (x != dx) {
+		return false;
+	}
+
+	float dz = v.z * 2.0;
+	z = (short) dz;
+	if (z != dz) {
+		return false;
+	}
+
+	float dy = v.y * 10.0;
+	y = (unsigned short) dy;
+	return brickEq(y, dy) ? true : false;
 }
 
 // FUNCTION: WEBSERVICE 0x101ab600 FOLDED
@@ -125,6 +197,221 @@ RakNet::BitStream& operator>> <std::string>(RakNet::BitStream& stream, std::stri
 	value = buffer;
 	delete[] buffer;
 	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101ab7d0
+template <>
+RakNet::BitStream& operator>> <ContentId>(RakNet::BitStream& stream, ContentId& value)
+{
+	std::string text;
+	stream >> text;
+	value = ContentId(text);
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101ab890 FOLDED
+RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::Color3& value)
+{
+	stream << value.r;
+	stream << value.g;
+	stream << value.b;
+
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101ab890 FOLDED
+RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::Vector3& value)
+{
+	stream << value.x;
+	stream << value.y;
+	stream << value.z;
+
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101ab8f0
+void writeBrickVector(RakNet::BitStream& stream, const G3D::Vector3& value)
+{
+	short x;
+	unsigned short y;
+	short z;
+
+	if (isBrickLocation(value, x, y, z)) {
+		stream.Write1();
+		stream.WriteBits(reinterpret_cast<unsigned char*>(&x), 11);
+		stream.WriteBits(reinterpret_cast<unsigned char*>(&y), 11);
+		stream.WriteBits(reinterpret_cast<unsigned char*>(&z), 11);
+	}
+	else {
+		stream.Write0();
+		stream << value.x;
+		stream << value.y;
+		stream << value.z;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101ab9b0
+void readBrickVector(RakNet::BitStream& stream, G3D::Vector3& value)
+{
+	bool isBrickLocation;
+	stream >> isBrickLocation;
+
+	if (isBrickLocation) {
+		int x = 0;
+		int y = 0;
+		int z = 0;
+
+		stream.ReadBits(reinterpret_cast<unsigned char*>(&x), 11);
+		stream.ReadBits(reinterpret_cast<unsigned char*>(&y), 11);
+		stream.ReadBits(reinterpret_cast<unsigned char*>(&z), 11);
+
+		if (x & 0x400) {
+			x |= 0xfffffc00;
+		}
+		if (z & 0x400) {
+			z |= 0xfffffc00;
+		}
+
+		value.x = (short) x * 0.5;
+		value.y = (unsigned short) y / 10.0;
+		value.z = (short) z * 0.5;
+	}
+	else {
+		stream >> value.x;
+		stream >> value.y;
+		stream >> value.z;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101abad0 FOLDED
+template <>
+RakNet::BitStream& operator>> <G3D::Color3>(RakNet::BitStream& stream, G3D::Color3& value)
+{
+	stream >> value.r;
+	stream >> value.g;
+	stream >> value.b;
+
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101abb10
+void rationalize(G3D::CoordinateFrame& value)
+{
+	if (!value.translation.isFinite()) {
+		value.translation = G3D::Vector3(0.0f, -1e6f, 0.0f);
+	}
+	else {
+		G3D::Vector3 translation =
+			G3D::Vector3(-1e6f, -1e6f, -1e6f).clamp(value.translation, G3D::Vector3(1e6f, 1e6f, 1e6f));
+		value.translation = translation;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101abbc0
+RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::CoordinateFrame& cf)
+{
+	G3D::CoordinateFrame value = cf;
+	rationalize(value);
+
+	writeBrickVector(stream, value.translation);
+
+	bool isAxisAligned = Math::isAxisAligned(value.rotation);
+	stream << isAxisAligned;
+
+	if (isAxisAligned) {
+		int orientId = Math::getOrientId(value.rotation);
+		stream.WriteBits(reinterpret_cast<unsigned char*>(&orientId), 6);
+	}
+	else {
+		Quaternion q(value.rotation);
+		stream.WriteNormQuat(q.w, q.x, q.y, q.z);
+	}
+
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101abc90
+template <>
+RakNet::BitStream& operator>> <G3D::CoordinateFrame>(RakNet::BitStream& stream, G3D::CoordinateFrame& value)
+{
+	readBrickVector(stream, value.translation);
+
+	bool isAxisAligned;
+	stream >> isAxisAligned;
+
+	if (isAxisAligned) {
+		int orientId = 0;
+		stream.ReadBits(reinterpret_cast<unsigned char*>(&orientId), 6);
+		Math::idToMatrix3(orientId, value.rotation);
+	}
+	else {
+		Quaternion q(0.0f, 0.0f, 0.0f, 1.0f);
+		stream.ReadNormQuat(q.w, q.x, q.y, q.z);
+		q.toRotationMatrix(value.rotation);
+		Math::orthonormalizeIfNecessary(value.rotation);
+	}
+
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101abad0 FOLDED
+template <>
+RakNet::BitStream& operator>> <G3D::Vector3>(RakNet::BitStream& stream, G3D::Vector3& value)
+{
+	stream >> value.x;
+	stream >> value.y;
+	stream >> value.z;
+
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101abd60
+template <>
+void serialize<ContentId>(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
+{
+	bitStream << property.getStringValue();
+}
+
+// FUNCTION: WEBSERVICE 0x101abe10
+template <>
+void deserialize<ContentId>(Reflection::Property& property, RakNet::BitStream& bitStream)
+{
+	std::string value;
+	bitStream >> value;
+	property.setStringValue(value);
+}
+
+RakNet::BitStream& operator<<(RakNet::BitStream& stream, BrickColor value)
+{
+	unsigned int i = value.getClosestPaletteIndex();
+	stream.WriteBits(reinterpret_cast<unsigned char*>(&i), 5);
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101ac010
+template <>
+RakNet::BitStream& operator>> <BrickColor>(RakNet::BitStream& stream, BrickColor& value)
+{
+	unsigned int i = 0;
+	stream.ReadBits(reinterpret_cast<unsigned char*>(&i), 5);
+	value = BrickColor::colorPalette()[i];
+	return stream;
+}
+
+// FUNCTION: WEBSERVICE 0x101ac720
+template <>
+void serialize<BrickColor>(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
+{
+	bitStream << property.getValue<BrickColor>();
+}
+
+// FUNCTION: WEBSERVICE 0x101ac760
+template <>
+void deserialize<BrickColor>(Reflection::Property& property, RakNet::BitStream& bitStream)
+{
+	BrickColor c;
+	bitStream >> c;
+	property.setValue(c);
 }
 
 } // namespace Network
