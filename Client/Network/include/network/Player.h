@@ -103,6 +103,7 @@ public:
 
 	int getUserID() const { return userId; }
 
+	void rebuildBackpack();
 	Backpack* getPlayerBackpack() const;
 
 	void loadCharacter();

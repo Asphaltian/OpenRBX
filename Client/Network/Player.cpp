@@ -9,6 +9,7 @@
 #include "v8datamodel/Backpack.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/CharacterAppearance.h"
+#include "v8datamodel/Hopper.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/TimerService.h"
 #include "v8datamodel/Workspace.h"
@@ -173,6 +174,29 @@ void Player::onCharacterChangedFrontend()
 			workspace->getCamera()->setDistanceFromTarget(13.0f);
 			workspace->getCamera()->zoom(-1.0f);
 			workspace->setDefaultMouseCommand();
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018ebc0
+void Player::rebuildBackpack()
+{
+	if (!Players::backendProcessing(this, true)) {
+		throw std::runtime_error("rebuildBackpack can only be called by the backend server");
+	}
+
+	while (Backpack* oldBackpack = findFirstChildOfType<Backpack>()) {
+		oldBackpack->setParent(NULL);
+	}
+
+	boost::shared_ptr<Instance> backpack = Creatable<Instance>::create<Backpack>();
+	backpack->setParent(this);
+
+	if (StarterPackService* starterPack = ServiceProvider::find<StarterPackService>(this)) {
+		for (unsigned int i = 0; i < starterPack->numChildren(); ++i) {
+			Instance* child = starterPack->getChild(i);
+			boost::shared_ptr<Instance> copy = child->clone();
+			copy->setParent(backpack.get());
 		}
 	}
 }
