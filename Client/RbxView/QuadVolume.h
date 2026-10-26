@@ -19,6 +19,11 @@
 namespace RBX {
 namespace View {
 
+inline G3D::Vector3 absolute(G3D::Vector3 v)
+{
+	return G3D::abs(v);
+}
+
 // SIZE 0x20
 class __declspec(novtable) LevelBuilder
 {
@@ -85,12 +90,13 @@ protected:
 	{
 		RenderSurfaceType surfaceType = surfaceTypes.getSurfaceType((NormalId) face);
 
-		G3D::Vector3 localRadius = G3D::abs(uvwToObject<face>(halfSize));
+		G3D::Vector3 localRadius = absolute(uvwToObject<face>(halfSize));
 
 		bool vertical = purpose == Surface && localRadius.y > localRadius.x;
 		int stripIndex = vertical ? 0 : 1;
 
-		int strips = (purpose == Surface && surfaceType != FLAT) ? G3D::iRound(ceil(localRadius[stripIndex] * 0.5)) : 1;
+		int strips =
+			(purpose == Surface && surfaceType != FLAT) ? G3D::iRound(ceil(localRadius[stripIndex] * 0.5f)) : 1;
 
 		G3D::Vector2int16 stripElements;
 		stripElements[stripIndex] = std::max<G3D::int16>(1, elements[1 - stripIndex] / strips);
@@ -127,7 +133,8 @@ protected:
 			texDelta.y = 0.0f;
 			break;
 		case Decal:
-			texCoord = G3D::Vector2(0.0f, textureScale.y);
+			texCoord.x = 0.0f;
+			texCoord.y = textureScale.y;
 			texDelta.x = textureScale.x;
 			texDelta.y = -textureScale.y;
 			break;
