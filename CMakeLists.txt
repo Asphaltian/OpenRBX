@@ -272,6 +272,7 @@ set(OPENRBX_NETWORK_SOURCES
   Client/Network/NetworkSettings.cpp
   Client/Network/Replicator.cpp
   Client/Network/Server.cpp
+  Client/Network/Streaming.cpp
 )
 
 set(OPENRBX_RAKNET_SOURCES

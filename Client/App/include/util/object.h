@@ -43,6 +43,16 @@ boost::shared_ptr<T> shared_from_dynamic_cast(boost::enable_shared_from_this<Bas
 	return r != NULL ? boost::shared_dynamic_cast<T>(r->shared_from_this()) : boost::shared_ptr<T>();
 }
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1019f4b0
+// RBX::shared_from_polymorphic_downcast<RBX::Network::Player,RBX::Instance>
+// clang-format on
+template <class T, class Base>
+boost::shared_ptr<T> shared_from_polymorphic_downcast(boost::enable_shared_from_this<Base>* r)
+{
+	return r != NULL ? boost::shared_polymorphic_downcast<T>(r->shared_from_this()) : boost::shared_ptr<T>();
+}
+
 template <class T>
 class Creatable : public Object
 {

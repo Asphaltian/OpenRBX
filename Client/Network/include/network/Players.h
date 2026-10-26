@@ -56,6 +56,13 @@ struct AbuseReport
 	void addMessage(const ChatMessage& cm);
 };
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x101929c0
+// RBX::Network::AbuseReport::AbuseReport
+// SYNTHETIC: WEBSERVICE 0x10192a30
+// RBX::Network::AbuseReport::~AbuseReport
+// clang-format on
+
 DECOMP_SIZE_ASSERT(AbuseReport::Message, 0x20)
 DECOMP_SIZE_ASSERT(AbuseReport, 0x30)
 

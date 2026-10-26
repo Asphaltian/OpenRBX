@@ -1,14 +1,17 @@
 #include "network/Players.h"
 
+#include "Streaming.h"
 #include "network/Client.h"
 #include "network/Server.h"
 #include "reflection/property.h"
+#include "util/StandardOut.h"
 #include "v8datamodel/GameSettings.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Teams.h"
 
 #include <PluginInterface.h>
 #include <RakPeerInterface.h>
+#include <algorithm>
 #include <boost/bind.hpp>
 #include <stdexcept>
 
@@ -150,6 +153,14 @@ void Players::onChildChanged(Instance* instance, const PropertyChanged& event)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10192860
+void AbuseReport::addMessage(const ChatMessage& cm)
+{
+	int userID = cm.source ? Player::prop_userId.getValue(cm.source.get()) : 0;
+	Message message = {userID, cm.message};
+	messages.push_back(message);
+}
+
 // FUNCTION: WEBSERVICE 0x10192bb0
 Players::~Players()
 {
@@ -192,10 +203,17 @@ Players::Players() : players(std::vector<boost::shared_ptr<Instance> >()), peer(
 	plugin.reset(new Plugin(this));
 }
 
-// STUB: WEBSERVICE 0x101945e0
+// FUNCTION: WEBSERVICE 0x101945e0
 void AbuseReporter::add(AbuseReport& r, const std::list<ChatMessage>& chatHistory)
 {
-	STUB(0x101945e0);
+	std::for_each(chatHistory.begin(), chatHistory.end(), boost::bind(&AbuseReport::addMessage, boost::ref(r), _1));
+
+	{
+		boost::mutex::scoped_lock lock(_data->requestSync);
+		_data->queue.push(r);
+	}
+
+	requestProcessor->wake();
 }
 
 // STUB: WEBSERVICE 0x10194680
@@ -244,11 +262,83 @@ void Players::addChatMessage(const ChatMessage& message)
 	Player::event_Chatted.fire(message.source.get(), message.message, message.destination);
 }
 
-// STUB: WEBSERVICE 0x10195a30
+// FUNCTION: WEBSERVICE 0x10195a30
 bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
-	STUB(0x10195a30);
-	return false;
+	switch (packet->data[0]) {
+	case 'P':
+		try {
+			RakNet::BitStream inBitstream(packet->data, packet->length, false);
+			inBitstream.IgnoreBits(8);
+
+			std::string foo;
+			inBitstream >> foo;
+
+			Guid::Data id;
+			id.scope = &Name::lookup(foo);
+			inBitstream >> id.index;
+
+			Instance* player = NULL;
+			Instance::lookupByGuid(id, player);
+
+			std::string message;
+			inBitstream >> message;
+
+			if (!player) {
+				StandardOut::singleton()->print(
+					MESSAGE_WARNING,
+					"Chat message from unknown Player %s %s",
+					packet->systemAddress.ToString(true),
+					message.c_str()
+				);
+			}
+			else if (player->getParent() == this) {
+				ChatMessage event = {message, shared_from_polymorphic_downcast<Player>(player)};
+				addChatMessage(event);
+
+				peer->Send(
+					reinterpret_cast<const char*>(packet->data),
+					packet->length,
+					MEDIUM_PRIORITY,
+					RELIABLE_ORDERED,
+					2,
+					packet->systemAddress,
+					true
+				);
+			}
+		}
+		catch (std::exception& e) {
+			StandardOut::singleton()
+				->print(MESSAGE_ERROR, "Players::OnReceive packet %d: %s", packet->data[0], e.what());
+		}
+
+		return false;
+
+	case 'Q':
+		try {
+			if (abuseReporter) {
+				RakNet::BitStream inBitstream(packet->data, packet->length, false);
+				inBitstream.IgnoreBits(8);
+
+				AbuseReport r;
+
+				inBitstream >> r.submitterID;
+				inBitstream >> r.allegedAbuserID;
+				inBitstream >> r.comment;
+
+				abuseReporter->add(r, chatHistory);
+			}
+		}
+		catch (std::exception& e) {
+			StandardOut::singleton()
+				->print(MESSAGE_ERROR, "Players::OnReceive packet %d: %s", packet->data[0], e.what());
+		}
+
+		return false;
+
+	default:
+		return true;
+	}
 }
 
 // STUB: WEBSERVICE 0x10195db0
@@ -297,7 +387,7 @@ void Players::onChildAdded(Instance* child)
 } // namespace Network
 } // namespace RBX
 
-// STUB: WEBSERVICE 0x101961a0
+// FUNCTION: WEBSERVICE 0x101961a0
 template <class T>
 PluginReceiveResult PluginInterfaceAdapter<T>::OnReceive(RakPeerInterface* peer, Packet* packet)
 {

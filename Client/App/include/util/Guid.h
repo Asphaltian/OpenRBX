@@ -2,6 +2,7 @@
 #define UTIL_GUID_H
 
 #include "decomp.h"
+#include "util/Name.h"
 
 #include <boost/noncopyable.hpp>
 #include <boost/thread/once.hpp>
@@ -10,8 +11,6 @@
 #include <string>
 
 namespace RBX {
-
-class Name;
 
 // SIZE 0x08
 class Guid : private boost::noncopyable
@@ -89,7 +88,30 @@ public:
 		return guid;
 	}
 
-	static bool lookupByGuid(const Guid::Data& data, T*& result);
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10194230
+	// RBX::GuidItem<RBX::Instance>::lookupByGuid
+	// clang-format on
+	static bool lookupByGuid(const Guid::Data& data, T*& result)
+	{
+		if (&Name::getNullName() == data.scope) {
+			result = NULL;
+			return true;
+		}
+
+		StaticData& s = getStaticData();
+		boost::recursive_mutex::scoped_lock lock(s.mutex);
+		typename StaticData::Map::iterator iter = s.map.find(data);
+
+		if (iter == s.map.end()) {
+			result = NULL;
+			return false;
+		}
+
+		result = iter->second;
+		return true;
+	}
+
 	static T* getByGuid(const Guid::Data& data);
 
 protected:
