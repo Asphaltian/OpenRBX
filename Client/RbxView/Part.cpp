@@ -1,9 +1,16 @@
 #include "Part.h"
 
+#include "CylinderMesh.h"
+#include "HeadMesh.h"
 #include "MaterialFactory.h"
 #include "MeshFactory.h"
 #include "PBBMesh.h"
+#include "SphereMesh.h"
+#include "TorsoMesh.h"
 #include "View.h"
+#include "WedgeMesh.h"
+#include "renderlib/TextureProxy.h"
+#include "util/ContentProvider.h"
 #include "v8datamodel/Decal.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Workspace.h"
@@ -26,14 +33,26 @@ bool PartChunk::cullable() const
 	return true;
 }
 
-// STUB: WEBSERVICE 0x1016c240
+// FUNCTION: WEBSERVICE 0x1016c240
 float primaryComponent(const G3D::Vector3& v)
 {
-	float nx = G3D::abs(v.x);
-	float ny = G3D::abs(v.y);
-	float nz = G3D::abs(v.z);
+	float nx = fabs(v.x);
+	float ny = fabs(v.y);
+	float nz = fabs(v.z);
 
-	return G3D::max(G3D::max(nx, ny), nz);
+	if (nx > ny) {
+		if (nx > nz) {
+			return nx;
+		}
+
+		return nz;
+	}
+
+	if (ny > nz) {
+		return ny;
+	}
+
+	return nz;
 }
 
 // FUNCTION: WEBSERVICE 0x1016c6d0
@@ -188,10 +207,29 @@ void Decal::onDecalPropertyChanged(const Reflection::PropertyDescriptor* descrip
 	}
 }
 
-// STUB: WEBSERVICE 0x1016d640
+// FUNCTION: WEBSERVICE 0x1016d640
 G3D::ReferenceCountedPointer<Render::Material> Decal::getMaterial()
 {
-	STUB(0x1016d640);
+	try {
+		if (materialInvalid) {
+			std::string textureFile;
+			if (ContentProvider::singleton().requestContentFile(decal->getTexture(), textureFile)) {
+				material = new Render::Material();
+				material->appendLevel(
+					new Render::TextureProxy(*view->textureManager, textureFile, false),
+					G3D::Color3::WHITE,
+					decal->getSpecular(),
+					decal->getShiny(),
+					0.0f,
+					0.0f
+				);
+				materialInvalid = false;
+			}
+		}
+	}
+	catch (...) {
+	}
+
 	return material;
 }
 
@@ -218,10 +256,29 @@ void Texture::onTexturePropertyChanged(const Reflection::PropertyDescriptor* des
 	}
 }
 
-// STUB: WEBSERVICE 0x1016d850
+// FUNCTION: WEBSERVICE 0x1016d850
 G3D::ReferenceCountedPointer<Render::Material> Texture::getMaterial()
 {
-	STUB(0x1016d850);
+	try {
+		if (materialInvalid) {
+			std::string textureFile;
+			if (ContentProvider::singleton().requestContentFile(texture->getTexture(), textureFile)) {
+				material = new Render::Material();
+				material->appendLevel(
+					new Render::TextureProxy(*view->textureManager, textureFile, true),
+					G3D::Color3::WHITE,
+					texture->getSpecular(),
+					texture->getShiny(),
+					0.0f,
+					0.0f
+				);
+				materialInvalid = false;
+			}
+		}
+	}
+	catch (...) {
+	}
+
 	return material;
 }
 
@@ -264,16 +321,112 @@ void Part::updateMesh()
 	STUB(0x101722a0);
 }
 
-// STUB: WEBSERVICE 0x10173790
+// FUNCTION: WEBSERVICE 0x10173790
 void Decal::updateMesh()
 {
-	STUB(0x10173790);
+	if (partInstance) {
+		G3D::Vector3 size = partInstance->getPartSizeXml();
+
+		if (specialShape) {
+			size *= specialShape->getScale();
+		}
+
+		if (!specialShape) {
+			switch (partInstance->getPartType()) {
+			case RBX::Part::BALL_PART:
+				mesh = MeshFactory<SphereMesh, 1>::createDecal(size, decal->getFace());
+				break;
+			case RBX::Part::BLOCK_PART:
+				mesh = MeshFactory<PBBMesh, 4>::createDecal(size, decal->getFace());
+				break;
+			case RBX::Part::CYLINDER_PART:
+				mesh = MeshFactory<CylinderAlongXMesh, 1>::createDecal(size, decal->getFace());
+				break;
+			}
+		}
+		else {
+			switch (specialShape->getMeshType()) {
+			case SpecialShape::WEDGE_MESH:
+				mesh = MeshFactory<WedgeMesh, 1>::createDecal(size, decal->getFace());
+				break;
+			case SpecialShape::HEAD_MESH:
+				mesh = MeshFactory<HeadMesh, 1>::createDecal(size, decal->getFace());
+				break;
+			case SpecialShape::TORSO_MESH:
+				mesh = MeshFactory<TorsoMesh, 1>::createDecal(size, decal->getFace());
+				break;
+			case SpecialShape::SPHERE_MESH:
+				mesh = MeshFactory<SphereMesh, 1>::createDecal(size, decal->getFace());
+				break;
+			case SpecialShape::CYLINDER_MESH:
+				mesh = MeshFactory<CylinderAlongXMesh, 1>::createDecal(size, decal->getFace());
+				break;
+			case SpecialShape::BRICK_MESH:
+				mesh = MeshFactory<PBBMesh, 4>::createDecal(size, decal->getFace());
+				break;
+			}
+		}
+
+		radius = sqrt(2.0f) * 0.5 * primaryComponent(size);
+	}
 }
 
-// STUB: WEBSERVICE 0x101739a0
+// FUNCTION: WEBSERVICE 0x101739a0
 void Texture::updateMesh()
 {
-	STUB(0x101739a0);
+	if (partInstance) {
+		G3D::Vector3 size = partInstance->getPartSizeXml();
+
+		if (specialShape) {
+			size *= specialShape->getScale();
+		}
+
+		if (!specialShape) {
+			switch (partInstance->getPartType()) {
+			case RBX::Part::BALL_PART:
+				mesh = MeshFactory<SphereMesh, 1>::createTexture(size, texture->getFace(), texture->getStudsPerTile());
+				break;
+			case RBX::Part::BLOCK_PART:
+				mesh = MeshFactory<PBBMesh, 4>::createTexture(size, texture->getFace(), texture->getStudsPerTile());
+				break;
+			case RBX::Part::CYLINDER_PART:
+				mesh = MeshFactory<CylinderAlongXMesh, 1>::createTexture(
+					size,
+					texture->getFace(),
+					texture->getStudsPerTile()
+				);
+				break;
+			}
+		}
+		else {
+			switch (specialShape->getMeshType()) {
+			case SpecialShape::WEDGE_MESH:
+				mesh = MeshFactory<WedgeMesh, 1>::createTexture(size, texture->getFace(), texture->getStudsPerTile());
+				break;
+			case SpecialShape::HEAD_MESH:
+				mesh = MeshFactory<HeadMesh, 1>::createTexture(size, texture->getFace(), texture->getStudsPerTile());
+				break;
+			case SpecialShape::TORSO_MESH:
+				mesh = MeshFactory<TorsoMesh, 1>::createTexture(size, texture->getFace(), texture->getStudsPerTile());
+				break;
+			case SpecialShape::SPHERE_MESH:
+				mesh = MeshFactory<SphereMesh, 1>::createTexture(size, texture->getFace(), texture->getStudsPerTile());
+				break;
+			case SpecialShape::CYLINDER_MESH:
+				mesh = MeshFactory<CylinderAlongXMesh, 1>::createTexture(
+					size,
+					texture->getFace(),
+					texture->getStudsPerTile()
+				);
+				break;
+			case SpecialShape::BRICK_MESH:
+				mesh = MeshFactory<PBBMesh, 4>::createTexture(size, texture->getFace(), texture->getStudsPerTile());
+				break;
+			}
+		}
+
+		radius = sqrt(2.0f) * 0.5 * primaryComponent(size);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10173c90

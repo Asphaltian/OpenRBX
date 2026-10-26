@@ -409,8 +409,6 @@ address,size,symbol,name
 0x1016c740,0x34,?cframe@PartChunk@View@RBX@@MAEABVCoordinateFrame@G3D@@XZ,
 0x1016cd00,0x35b,?getMaterial@Part@View@RBX@@UAE?AV?$ReferenceCountedPointer@VMaterial@Render@RBX@@@G3D@@XZ,
 0x1016d5d0,0x3d,?getMesh@PartChunk@View@RBX@@MAE?AV?$ReferenceCountedPointer@VMesh@Render@RBX@@@G3D@@XZ,
-0x1016d640,0x1ce,?getMaterial@Decal@View@RBX@@UAE?AV?$ReferenceCountedPointer@VMaterial@Render@RBX@@@G3D@@XZ,
-0x1016d850,0x1ce,?getMaterial@Texture@View@RBX@@UAE?AV?$ReferenceCountedPointer@VMaterial@Render@RBX@@@G3D@@XZ,
 0x1016ee10,0xfc,??$visitChildren@V?$bind_t@XV?$mf1@XVPartChunk@View@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVPartChunk@View@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@Instance@RBX@@QBEXV?$bind_t@XV?$mf1@XVPartChunk@View@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVPartChunk@View@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@Z,
 0x10174160,0x313,??0PartChunk@View@RBX@@IAE@MABV?$shared_ptr@VPartInstance@RBX@@@boost@@PAV112@@Z,
 0x10174800,0xeb,??0Part@View@RBX@@QAE@ABV?$shared_ptr@VPartInstance@RBX@@@boost@@PAV112@@Z,

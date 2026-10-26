@@ -5324,6 +5324,7 @@ address,type,symbol
 0x102e6a34,global,??_R0?AVSpecialShape@RBX@@@8
 0x102e6a5c,global,??_R0?AVLog@G3D@@@8
 0x102e6a98,global,??_R0PAD@8
+0x102e6f2c,global,?WHITE@Color3@G3D@@2V12@B
 0x102e6fd0,global,??_R0?AVDialogTemplate@_internal@G3D@@@8
 0x102e7000,global,??_R0?AVBinaryInput@G3D@@@8
 0x102e7020,global,??_R0?AV?$_String_val@DV?$allocator@D@std@@@std@@@8

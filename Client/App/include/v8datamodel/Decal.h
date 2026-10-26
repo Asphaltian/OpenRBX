@@ -55,13 +55,17 @@ class Texture : public DescribedCreatable<Texture, Decal, sTexture>
 public:
 	Texture();
 
+	const Vector2& getStudsPerTile() { return studsPerTile; }
+
 	static const Reflection::PropDescriptor<Texture, float> prop_StudsPerTileU;
-	static const Reflection::PropDescriptor<Texture, float> prop_StudsPerTileV;
 
 	// FUNCTION: WEBSERVICE 0x100ff520
 	float getStudsPerTileU() const { return studsPerTile.x; }
 
 	void setStudsPerTileU(float value);
+
+	static const Reflection::PropDescriptor<Texture, float> prop_StudsPerTileV;
+
 	// FUNCTION: WEBSERVICE 0x1007cde0
 	float getStudsPerTileV() const { return studsPerTile.y; }
 
