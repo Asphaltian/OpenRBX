@@ -445,6 +445,7 @@ address,type,symbol
 0x10102700,synthetic,?setStringValue@?$SurfaceEnumPropDescriptor@$00W4SurfaceType@RBX@@@RBX@@UBE_NPAVDescribedBase@Reflection@2@ABVName@2@@Z
 0x10106230,synthetic,?zero@Velocity@RBX@@SAABV12@XZ
 0x101194c0,stub,?erase@?$_Tree@V?$_Tset_traits@PAVIMoving@RBX@@U?$less@PAVIMoving@RBX@@@std@@V?$allocator@PAVIMoving@RBX@@@4@$0A@@std@@@std@@QAEIABQAVIMoving@RBX@@@Z
+0x10120a60,stub,??1ChatMessage@Network@RBX@@QAE@XZ
 0x10121990,synthetic,??$getset@P8FaceInstance@RBX@@BE?AW4NormalId@2@XZP812@AEXW432@@Z@?$PropDescriptor@VFaceInstance@RBX@@W4NormalId@2@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@W4NormalId@RBX@@@Reflection@RBX@@@std@@P8FaceInstance@2@BE?AW4NormalId@2@XZP852@AEXW462@@Z@Z
 0x10121a90,synthetic,??$?0P8FaceInstance@RBX@@BE?AW4NormalId@1@XZP801@AEXW421@@Z@?$EnumPropDescriptor@VFaceInstance@RBX@@W4NormalId@2@@Reflection@RBX@@QAE@PBD0P8FaceInstance@2@BE?AW4NormalId@2@XZP832@AEXW442@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x10121b90,synthetic,?setStringValue@?$EnumPropDescriptor@VFaceInstance@RBX@@W4NormalId@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
@@ -542,7 +543,9 @@ address,type,symbol
 0x1018efa0,synthetic,?newSignalInstance@?$TSignalDesc@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@EBEPAVSignalInstance@23@AAVSignalSource@23@@Z
 0x10190250,synthetic,?connectGeneric@?$SignalDescImpl@$01$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@MBE?AVconnection@signals@boost@@PAVSignalInstance@23@PAVGenericSlotWrapper@23@W4connect_position@56@@Z
 0x10190d50,synthetic,??0?$NonFactoryProduct@VInstance@RBX@@$1?sPlayers@Network@2@3PADA@RBX@@QAE@XZ
+0x10191970,synthetic,??$getset@P8Players@Network@RBX@@BEPAVPlayer@23@XZH@?$PropDescriptor@VPlayers@Network@RBX@@PAVPlayer@23@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@PAVPlayer@Network@RBX@@@Reflection@RBX@@@std@@P8Players@Network@2@BEPAVPlayer@62@XZH@Z
 0x10193210,synthetic,??0?$Described@VPlayers@Network@RBX@@$1?sPlayers@23@3PADAV?$NonFactoryProduct@VInstance@RBX@@$1?sPlayers@Network@2@3PADA@3@@Reflection@RBX@@QAE@XZ
+0x10195520,synthetic,?fire@?$SignalDescImpl@$01$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@QAEXPAVSignalSource@23@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z
 0x10196b30,synthetic,??1?$shared_ptr@VPartInstance@RBX@@@boost@@QAE@XZ
 0x1019b420,synthetic,??_E?$DescribedCreatable@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UAEPAXI@Z
 0x1019b580,synthetic,?getClassName@?$FactoryProduct@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UBEABVName@2@XZ

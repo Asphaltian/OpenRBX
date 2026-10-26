@@ -185,3 +185,4 @@ template const RBX::Name& RBX::Name::doDeclare<RBX::sGameSettings>();
 template const RBX::Name& RBX::Name::doDeclare<sStockSound>();
 template void RBX::Name::callDoDeclare<RBX::sGameSettings>();
 template void RBX::Name::callDoDeclare<sStockSound>();
+template RBX::GameSettings& RBX::GlobalSettingsItem<RBX::GameSettings, RBX::sGameSettings>::singleton();

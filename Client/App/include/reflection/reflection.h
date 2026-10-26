@@ -627,7 +627,7 @@ public:
 		typename PropertyDescriptor::Functionality functionality = PropertyDescriptor::STANDARD
 	)
 		: RefPropertyDescriptor(Class::classDescriptor(), RefType::singleton<T*>(), name, category, functionality),
-		  getset(PropDescriptor<Class, T*>::getset(get, set))
+		  getset(PropDescriptor<Class, T*>::template getset<Getter, Setter>(get, set))
 	{
 	}
 
@@ -703,6 +703,10 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance>::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance><RBX::ModelInstance * (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(RBX::ModelInstance *)>
 	// TEMPLATE: WEBSERVICE 0x1018e490
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance>::setRefValue
+	// TEMPLATE: WEBSERVICE 0x101933c0
+	// RBX::Reflection::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player>::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player><RBX::Network::Player * (__thiscall RBX::Network::Players::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x10193470
+	// RBX::Reflection::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player>::setRefValue
 	// clang-format on
 
 private:

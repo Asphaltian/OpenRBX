@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "network/Player.h"
 #include "network/SuperSafeChanged.h"
+#include "reflection/reflection.h"
 #include "util/Events.h"
 #include "util/boost.hpp"
 #include "v8tree/Instance.h"
@@ -113,6 +114,8 @@ class Players : public DescribedNonCreatable<Players, Instance, sPlayers>,
 	virtual void onChildChanged(Instance* instance, const PropertyChanged& event);
 
 public:
+	static Reflection::RefPropDescriptor<Players, Player> propLocalPlayer;
+
 	Players();
 	virtual ~Players();
 
@@ -120,10 +123,12 @@ public:
 	// RBX::Network::Players::`scalar deleting destructor'
 
 	bool superSafeOn() const { return localPlayer ? Player::prop_SuperSafeChat.getValue(localPlayer.get()) : false; }
+	boost::shared_ptr<Instance> createLocalPlayer(int userId);
 
 	// FUNCTION: WEBSERVICE 0x10072560
 	Player* getLocalPlayer() const { return localPlayer.get(); }
 
+	// FUNCTION: WEBSERVICE 0x10120bc0
 	int numPlayers() const { return players->size(); }
 
 	// FUNCTION: WEBSERVICE 0x10190c40
@@ -154,6 +159,9 @@ protected:
 	virtual bool askAddChild(const Instance* instance) const;
 	virtual void onChildAdded(Instance* child);
 	virtual void onChildRemoving(Instance* child);
+
+private:
+	void addChatMessage(const ChatMessage& message);
 };
 
 DECOMP_SIZE_ASSERT(Players, 0x158)
@@ -161,14 +169,22 @@ DECOMP_SIZE_ASSERT(Players, 0x158)
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10190e60
 // RBX::Network::Players::Plugin::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x1021f4c0
+// RBX::Network::`dynamic initializer for 'propPlayerCount''
 // SYNTHETIC: WEBSERVICE 0x1021f4f0
 // RBX::Network::`dynamic initializer for 'propPlayerMaxCount''
+// SYNTHETIC: WEBSERVICE 0x1021f530
+// `dynamic initializer for 'RBX::Network::Players::propLocalPlayer''
 // SYNTHETIC: WEBSERVICE 0x1021f710
 // RBX::Network::`dynamic initializer for 'event_PlayerAdded''
 // SYNTHETIC: WEBSERVICE 0x1021f730
 // RBX::Network::`dynamic initializer for 'event_PlayerRemoving''
+// SYNTHETIC: WEBSERVICE 0x10225fa0
+// `dynamic atexit destructor for 'RBX::Network::Players::propLocalPlayer''
 // SYNTHETIC: WEBSERVICE 0x10225fc0
 // RBX::Network::`dynamic atexit destructor for 'propPlayerMaxCount''
+// SYNTHETIC: WEBSERVICE 0x10225fe0
+// RBX::Network::`dynamic atexit destructor for 'propPlayerCount''
 // SYNTHETIC: WEBSERVICE 0x10226080
 // RBX::Network::`dynamic atexit destructor for 'event_PlayerRemoving''
 // SYNTHETIC: WEBSERVICE 0x102260a0

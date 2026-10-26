@@ -19,6 +19,8 @@ extern const char sGlobalSettings[];
 // RBX::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>
 // FUNCTION: WEBSERVICE 0x10071970
 // RBX::NonFactoryProduct<RBX::Instance,0>::NonFactoryProduct<RBX::Instance,0>
+// TEMPLATE: WEBSERVICE 0x1007e890
+// RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::singleton
 // FUNCTION: WEBSERVICE 0x100b3640
 // RBX::GlobalSettings::Item::Item
 // FUNCTION: WEBSERVICE 0x100b36a0

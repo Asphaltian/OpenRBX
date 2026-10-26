@@ -3,12 +3,14 @@
 #include "network/Client.h"
 #include "network/Server.h"
 #include "reflection/property.h"
+#include "v8datamodel/GameSettings.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Teams.h"
 
 #include <PluginInterface.h>
 #include <RakPeerInterface.h>
 #include <boost/bind.hpp>
+#include <stdexcept>
 
 template <class T>
 class PluginInterfaceAdapter : public PluginInterface
@@ -26,6 +28,13 @@ namespace Network {
 
 char sPlayers[] = "Players";
 
+static Reflection::PropDescriptor<Players, int> propPlayerCount(
+	"NumPlayers",
+	"Data",
+	&RBX::Network::Players::numPlayers,
+	0,
+	Reflection::PropertyDescriptor::UI
+);
 static Reflection::PropDescriptor<Players, int> propPlayerMaxCount(
 	"MaxPlayers",
 	"Data",
@@ -39,6 +48,13 @@ class Players::Plugin : public PluginInterfaceAdapter<Players>
 public:
 	Plugin(Players* players) : PluginInterfaceAdapter<Players>(players) {}
 };
+
+Reflection::RefPropDescriptor<Players, Player> Players::propLocalPlayer(
+	"LocalPlayer",
+	"Data",
+	&RBX::Network::Players::getLocalPlayer,
+	0
+);
 
 static Reflection::SignalDesc<Players, void(boost::shared_ptr<Instance>)> event_PlayerAdded("PlayerAdded", "player");
 static Reflection::SignalDesc<Players, void(boost::shared_ptr<Instance>)> event_PlayerRemoving(
@@ -196,6 +212,36 @@ void Players::setMaxPlayers(int value)
 		maxPlayers = value;
 		raisePropertyChanged(propPlayerMaxCount);
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x10195710
+boost::shared_ptr<Instance> Players::createLocalPlayer(int userId)
+{
+	if (localPlayer) {
+		throw std::runtime_error("Local player already exists");
+	}
+
+	localPlayer = Creatable<Instance>::create<Player>();
+	Player::prop_userId.setValue(localPlayer.get(), userId);
+	localPlayer->setParent(this);
+	raisePropertyChanged(propLocalPlayer);
+
+	Notifier<Players, SuperSafeChanged>::raise(SuperSafeChanged(superSafeOn()));
+
+	return localPlayer;
+}
+
+// FUNCTION: WEBSERVICE 0x10195890
+void Players::addChatMessage(const ChatMessage& message)
+{
+	chatHistory.push_front(message);
+
+	while (chatHistory.size() > GameSettings::singleton().chatHistory) {
+		chatHistory.pop_back();
+	}
+
+	Notifier<Players, ChatMessage>::raise(message);
+	Player::event_Chatted.fire(message.source.get(), message.message, message.destination);
 }
 
 // STUB: WEBSERVICE 0x10195a30

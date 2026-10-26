@@ -7027,4 +7027,6 @@ address,type,symbol
 0x1024efb0,global,??_7Players@Network@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
 0x1024efb8,global,??_7Players@Network@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
 0x1024efc4,global,??_7Players@Network@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@
+0x1024f030,global,??_7?$RefPropDescriptor@VPlayers@Network@RBX@@VPlayer@23@@Reflection@RBX@@6BIIDREF@2@@
+0x1024f038,global,??_7?$RefPropDescriptor@VPlayers@Network@RBX@@VPlayer@23@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x102f571c,global,flag___RBX::ServiceProvider::getClassIndex<RBX::RunService>
