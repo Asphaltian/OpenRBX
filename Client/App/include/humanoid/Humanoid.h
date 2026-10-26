@@ -82,6 +82,7 @@ public:
 
 	static Humanoid* modelIsCharacter(const Instance* instance);
 	static Humanoid* getLocalHumanoidFromContext(const Instance* context);
+	static PartInstance* getLocalHeadFromContext(const Instance* context);
 	static PartInstance* getHeadFromCharacter(const ModelInstance* character);
 
 	Body* getTorsoBody();

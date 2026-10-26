@@ -29,7 +29,7 @@ class XmlState;
 class MouseCommand : public INamed, public IRenderable
 {
 private:
-	static float maxSearch();
+	static float maxSearch() { return 2048.0f; }
 	static G3D::Vector3 ignoreVector3;
 
 	bool capturedMouse; // 0x14
@@ -101,7 +101,7 @@ public:
 	);
 
 private:
-	virtual const std::string getCursorName() const; // vtable+0x3c
+	virtual const std::string getCursorName() const { return "ArrowCursor"; } // vtable+0x3c
 };
 
 DECOMP_SIZE_ASSERT(MouseCommand, 0x20)

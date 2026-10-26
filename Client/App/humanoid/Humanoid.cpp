@@ -58,11 +58,10 @@ SignalDesc<Humanoid, void(bool)> Humanoid::event_GettingUp("GettingUp", "active"
 SignalDesc<Humanoid, void(bool)> Humanoid::event_FallingDown("FallingDown", "active");
 SignalDesc<Humanoid, void(bool)> Humanoid::event_Seated("Seated", "active");
 
-// STUB: WEBSERVICE 0x100a0830
+// FUNCTION: WEBSERVICE 0x100a0830
 PartInstance* Humanoid::getHeadFromCharacter(const ModelInstance* character)
 {
-	STUB(0x100a0830);
-	return NULL;
+	return character ? dynamic_cast<PartInstance*>(character->findFirstChildByName("Head")) : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a0990
@@ -75,6 +74,14 @@ ContactManager* Humanoid::getContactManager()
 	}
 
 	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100a0bb0
+PartInstance* Humanoid::getLocalHeadFromContext(const Instance* context)
+{
+	ModelInstance* character = Network::Players::findLocalCharacter(context);
+
+	return getHeadFromCharacter(character);
 }
 
 // FUNCTION: WEBSERVICE 0x100a0bd0

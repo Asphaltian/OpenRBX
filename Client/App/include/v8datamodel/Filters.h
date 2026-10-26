@@ -12,13 +12,18 @@ class Instance;
 class ModelInstance;
 class PartInstance;
 
+// VTABLE: WEBSERVICE 0x10239d58
 // SIZE 0x04
 class Unlocked : public HitTestFilter
 {
 public:
 	static bool unlocked(const Primitive* testMe);
 
-	virtual Result filterResult(const Primitive* testMe) const; // vtable+0x00
+	// FUNCTION: WEBSERVICE 0x100bead0
+	virtual Result filterResult(const Primitive* testMe) const // vtable+0x00
+	{
+		return unlocked(testMe) ? INCLUDE_PRIM : STOP_TEST;
+	}
 };
 
 DECOMP_SIZE_ASSERT(Unlocked, 0x04)
@@ -35,6 +40,9 @@ public:
 	PartByLocalCharacter(Instance* root);
 
 	virtual Result filterResult(const Primitive* testMe) const; // vtable+0x00
+
+	// SYNTHETIC: WEBSERVICE 0x100beb70
+	// RBX::PartByLocalCharacter::~PartByLocalCharacter
 };
 
 DECOMP_SIZE_ASSERT(PartByLocalCharacter, 0x14)
