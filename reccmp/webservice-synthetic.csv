@@ -326,12 +326,9 @@ address,type,symbol
 0x100e6d00,synthetic,??_E?$DescribedCreatable@VVelocityMotor@RBX@@VJointInstance@2@$1?sVelocityMotor@2@3QBDB@RBX@@UAEPAXI@Z
 0x100e6ff0,synthetic,??$?0P8Feature@RBX@@BE?AW4NormalId@1@XZP801@AEXW421@@Z@?$EnumPropDescriptor@VFeature@RBX@@W4NormalId@2@@Reflection@RBX@@QAE@PBD0P8Feature@2@BE?AW4NormalId@2@XZP832@AEXW442@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100e7090,synthetic,?convertToValue@?$EnumDesc@W4ControllerType@Controller@RBX@@@Reflection@RBX@@QBE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAW4ControllerType@Controller@3@@Z
-0x100e7160,stub,??0Feature@RBX@@QAE@XZ
 0x100e72c0,synthetic,?getStringValue@?$EnumPropDescriptor@VFaceInstance@RBX@@W4NormalId@2@@Reflection@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@23@@Z
 0x100e7300,synthetic,?setStringValue@?$EnumPropDescriptor@VFaceInstance@RBX@@W4NormalId@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABVName@3@@Z
 0x100e7890,synthetic,??_E?$FactoryProduct@VHole@RBX@@VFeature@2@$1?sHole@2@3QBDB@RBX@@MAEPAXI@Z
-0x100e78b0,stub,??0Hole@RBX@@QAE@XZ
-0x100e79a0,stub,??0MotorFeature@RBX@@QAE@XZ
 0x100e7ab0,synthetic,??_GMotorFeature@RBX@@UAEPAXI@Z
 0x100e7d00,synthetic,??_G?$FactoryProduct@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@MAEPAXI@Z
 0x100e8050,synthetic,??1?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@UAE@XZ

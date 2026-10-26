@@ -45,7 +45,7 @@ void newweaktable(lua_State* L, const char* mode)
 } // namespace Lua
 } // namespace RBX
 
-// STUB: WEBSERVICE 0x100abd50
+// FUNCTION: WEBSERVICE 0x100abd50
 static void pushLuaValue(RBX::Reflection::ConstProperty p, lua_State* L)
 {
 	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<int>()) {

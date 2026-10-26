@@ -170,6 +170,17 @@ typename MeshFactory<T, N>::DecalCache MeshFactory<T, N>::decalCache;
 template <class T, int N>
 typename MeshFactory<T, N>::TextureCache MeshFactory<T, N>::textureCache;
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021ecc0
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x1021ee00
+// `dynamic initializer for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::textureCache''
+// SYNTHETIC: WEBSERVICE 0x102259d0
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::decalCache''
+// SYNTHETIC: WEBSERVICE 0x10225c90
+// `dynamic atexit destructor for 'RBX::View::MeshFactory<RBX::View::PBBMesh,4>::textureCache''
+// clang-format on
+
 } // namespace View
 } // namespace RBX
 

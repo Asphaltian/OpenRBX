@@ -923,6 +923,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::creator''
 // SYNTHETIC: WEBSERVICE 0x10219b30
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole>::creator''
+// SYNTHETIC: WEBSERVICE 0x10219b70
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::creator''
 // SYNTHETIC: WEBSERVICE 0x10219bf0
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::creator''
 // SYNTHETIC: WEBSERVICE 0x10219c30
@@ -1067,6 +1069,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>::creator''
 // SYNTHETIC: WEBSERVICE 0x10222c00
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10222c80
+// `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::creator''
 // SYNTHETIC: WEBSERVICE 0x10222cc0
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole>::creator''
 // SYNTHETIC: WEBSERVICE 0x10222d00

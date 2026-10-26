@@ -140,8 +140,44 @@ public:
 	// RBX::Render::Mesh::ShadowSurface::~ShadowSurface
 	// SYNTHETIC: WEBSERVICE 0x10167660
 	// RBX::Render::Mesh::ShadowSurface::ShadowSurface
+	// SYNTHETIC: WEBSERVICE 0x1021eb80
+	// `dynamic initializer for 'RBX::Render::Mesh::visibleGeometry''
+	// SYNTHETIC: WEBSERVICE 0x1021ebc0
+	// `dynamic initializer for 'RBX::Render::Mesh::texCoordArray''
+	// SYNTHETIC: WEBSERVICE 0x1021ebd0
+	// `dynamic initializer for 'RBX::Render::Mesh::tangentArray''
+	// SYNTHETIC: WEBSERVICE 0x1021ebe0
+	// `dynamic initializer for 'RBX::Render::Mesh::vertexVAR''
+	// SYNTHETIC: WEBSERVICE 0x1021ec00
+	// `dynamic initializer for 'RBX::Render::Mesh::normalVAR''
+	// SYNTHETIC: WEBSERVICE 0x1021ec20
+	// `dynamic initializer for 'RBX::Render::Mesh::texCoordVAR''
+	// SYNTHETIC: WEBSERVICE 0x1021ec40
+	// `dynamic initializer for 'RBX::Render::Mesh::tangentVAR''
+	// SYNTHETIC: WEBSERVICE 0x1021ec60
+	// `dynamic initializer for 'RBX::Render::Mesh::vertexRefCounts''
+	// SYNTHETIC: WEBSERVICE 0x1021ec70
+	// `dynamic initializer for 'RBX::Render::Mesh::freeList''
+	// SYNTHETIC: WEBSERVICE 0x10225740
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::texCoordArray''
+	// SYNTHETIC: WEBSERVICE 0x10225760
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::tangentArray''
+	// SYNTHETIC: WEBSERVICE 0x10225780
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::vertexRefCounts''
+	// SYNTHETIC: WEBSERVICE 0x102257a0
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::freeList''
 	// SYNTHETIC: WEBSERVICE 0x102257c0
 	// `RBX::Render::Mesh::computeDirectionalShadowVolume'::`2'::`dynamic atexit destructor for 'backface''
+	// SYNTHETIC: WEBSERVICE 0x102257e0
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::visibleGeometry''
+	// SYNTHETIC: WEBSERVICE 0x102257f0
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::normalVAR''
+	// SYNTHETIC: WEBSERVICE 0x10225830
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::texCoordVAR''
+	// SYNTHETIC: WEBSERVICE 0x10225870
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::tangentVAR''
+	// SYNTHETIC: WEBSERVICE 0x102258b0
+	// `dynamic atexit destructor for 'RBX::Render::Mesh::vertexVAR''
 	// clang-format on
 };
 

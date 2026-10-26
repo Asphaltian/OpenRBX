@@ -8,12 +8,12 @@ namespace Render {
 G3D::MeshAlg::Geometry Mesh::visibleGeometry;
 G3D::Array<G3D::Vector2> Mesh::texCoordArray;
 G3D::Array<G3D::Vector3> Mesh::tangentArray;
-Mesh::VertexList Mesh::vertexRefCounts;
-Mesh::VertexList Mesh::freeList;
 G3D::VAR Mesh::vertexVAR;
 G3D::VAR Mesh::normalVAR;
 G3D::VAR Mesh::texCoordVAR;
 G3D::VAR Mesh::tangentVAR;
+Mesh::VertexList Mesh::vertexRefCounts;
+Mesh::VertexList Mesh::freeList;
 bool Mesh::varDirty;
 
 static int vertexRefCount;
