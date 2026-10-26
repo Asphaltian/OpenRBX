@@ -546,6 +546,10 @@ public:
 	// RBX::Reflection::BoundProp<G3D::Color3,1>::BoundProp<G3D::Color3,1><RBX::Value<G3D::Color3,&RBX::sColor3Value> >
 	// TEMPLATE: WEBSERVICE 0x100f3890
 	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >
+	// TEMPLATE: WEBSERVICE 0x1018e580
+	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::Network::Player>
+	// TEMPLATE: WEBSERVICE 0x1018e660
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x1012cc30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::MeshId>::TypedPropertyDescriptor<RBX::MeshId>
 	// TEMPLATE: WEBSERVICE 0x1005b070

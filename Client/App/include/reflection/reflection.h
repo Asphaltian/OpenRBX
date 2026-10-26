@@ -822,6 +822,10 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100f97c0
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x1018f020
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(void),0>::BoundFuncDesc<RBX::Network::Player,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x1018f0f0
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(void),0>::execute
 	// clang-format on
 };
 
@@ -908,6 +912,14 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>
 	// TEMPLATE: WEBSERVICE 0x100f9670
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::execute
+	// TEMPLATE: WEBSERVICE 0x1018f150
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
+	// TEMPLATE: WEBSERVICE 0x1018f200
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::execute
+	// SYNTHETIC: WEBSERVICE 0x101975b0
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::~BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
+	// SYNTHETIC: WEBSERVICE 0x10198560
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::`scalar deleting destructor'
 	// clang-format on
 };
 

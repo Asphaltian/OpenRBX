@@ -25,6 +25,29 @@ namespace Network {
 
 char sPlayer[] = "Player";
 
+static Reflection::BoundFuncDesc<Player, void(), 0> loadCharacterFunction(
+	&RBX::Network::Player::loadCharacter,
+	"LoadCharacter",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<Player, void(), 0> removeCharacterFunction(
+	&RBX::Network::Player::removeCharacter,
+	"RemoveCharacter",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<Player, void(bool), 1> func_SetUnder13(
+	&RBX::Network::Player::setUnder13,
+	"SetUnder13",
+	"value",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<Player, void(bool), 1> func_SetSuperSafeChat(
+	&RBX::Network::Player::setSuperSafeChat,
+	"SetSuperSafeChat",
+	"value",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
 static Reflection::RefPropDescriptor<Player, ModelInstance> prop_Character(
 	"Character",
 	"Data",
@@ -37,6 +60,26 @@ static Reflection::PropDescriptor<Player, std::string> prop_characterAppearance(
 	"Data",
 	&RBX::Network::Player::getCharacterAppearance,
 	&RBX::Network::Player::setCharacterAppearance
+);
+
+Reflection::BoundProp<int, 1> Player::prop_userId("userId", "Data", &RBX::Network::Player::userId);
+Reflection::BoundProp<bool, 1> Player::prop_Under13(
+	"Under13",
+	"Data",
+	&RBX::Network::Player::under13,
+	Reflection::PropertyDescriptor::STREAMING
+);
+Reflection::BoundProp<bool, 1> Player::prop_SuperSafeChat(
+	"SuperSafeChat",
+	"Data",
+	&RBX::Network::Player::superSafeChat,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
+Reflection::SignalDesc<Player, void(std::string, boost::shared_ptr<Instance>)> Player::event_Chatted(
+	"Chatted",
+	"message",
+	"recipient"
 );
 
 static Reflection::PropDescriptor<Player, BrickColor> prop_teamColor(
@@ -81,6 +124,18 @@ static void setAppearanceParent(boost::shared_ptr<Instance> parent, boost::share
 	else {
 		throw std::runtime_error("Attempt to add a non-CharacterAppearance/Accoutrement object to a character");
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018cec0
+void Player::setUnder13(bool value)
+{
+	prop_Under13.setValue(this, value);
+}
+
+// FUNCTION: WEBSERVICE 0x1018cef0
+void Player::setSuperSafeChat(bool value)
+{
+	prop_SuperSafeChat.setValue(this, value);
 }
 
 // FUNCTION: WEBSERVICE 0x1018cf20
