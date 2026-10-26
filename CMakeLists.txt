@@ -304,6 +304,7 @@ set(OPENRBX_RBXVIEW_SOURCES
   Client/RbxView/PBBMesh.cpp
   Client/RbxView/QuadVolume.cpp
   Client/RbxView/SphereMesh.cpp
+  Client/RbxView/WedgeMesh.cpp
   Client/RbxView/Part.cpp
 )
 set(OPENRBX_RENDERLIB_SOURCES

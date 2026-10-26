@@ -207,11 +207,12 @@ protected:
 
 		for (int i = 0; i < elements.x; ++i) {
 			for (int j = 0; j < elements.y; ++j) {
+				int v = i * (elements.y + 1) + j;
 				appendQuadFromVertexIndices(
-					vertexIndices[i * (elements.y + 1) + j + 1],
-					vertexIndices[i * (elements.y + 1) + j],
-					vertexIndices[(i + 1) * (elements.y + 1) + j],
-					vertexIndices[(i + 1) * (elements.y + 1) + j + 1]
+					vertexIndices[v + 1],
+					vertexIndices[v],
+					vertexIndices[v + elements.y + 1],
+					vertexIndices[v + elements.y + 2]
 				);
 			}
 		}

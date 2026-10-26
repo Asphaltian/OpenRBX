@@ -13,6 +13,7 @@ address,type,name
 0x10247188,global,luaT_eventname
 0x102472c8,global,dummynode_
 0x10247360,global,priority
+0x1024e450,global,bevel
 0x10250318,global,positionBits
 0x10250324,global,positionMin
 0x10250330,global,positionMax

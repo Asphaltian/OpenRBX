@@ -23,10 +23,35 @@ public:
 			G3D::Vector3 size,
 			RenderSurfaceTypes surfaceTypes,
 			float bevel
-		);
+		)
+			: LevelBuilder(level, size, surfaceTypes), bevel(bevel)
+		{
+		}
 
 	public:
 		virtual void build(Purpose purpose); // vtable+0x00
+
+		void operator()(
+			G3D::Vector3& vertex,
+			G3D::Vector3& normal,
+			G3D::Vector2& tex,
+			const G3D::Vector3& radius,
+			const G3D::Vector2int16& ivertex
+		)
+		{
+			if (vertex.x > 0) {
+				vertex.x -= bevel;
+			}
+			else {
+				vertex.x += bevel;
+			}
+			if (vertex.y > 0) {
+				vertex.y -= bevel;
+			}
+			else {
+				vertex.y += bevel;
+			}
+		}
 	};
 };
 
