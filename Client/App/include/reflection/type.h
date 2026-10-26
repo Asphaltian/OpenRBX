@@ -78,12 +78,16 @@ const Type& RefType::singleton()
 // RBX::Reflection::RefType::singleton<RBX::PartInstance *>
 // TEMPLATE: WEBSERVICE 0x100e4330
 // RBX::Reflection::RefType::singleton<RBX::Hole *>
+// TEMPLATE: WEBSERVICE 0x1018c680
+// RBX::Reflection::RefType::singleton<RBX::ModelInstance *>
 // SYNTHETIC: WEBSERVICE 0x10221690
 // `RBX::Reflection::RefType::singleton<RBX::Instance *>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10221900
 // `RBX::Reflection::RefType::singleton<RBX::PartInstance *>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x102241f0
 // `RBX::Reflection::RefType::singleton<RBX::Hole *>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x10225e40
+// `RBX::Reflection::RefType::singleton<RBX::ModelInstance *>'::`2'::`dynamic atexit destructor for 'type''
 // clang-format on
 
 // SIZE 0x08

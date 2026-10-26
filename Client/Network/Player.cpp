@@ -1,13 +1,25 @@
 #include "network/Player.h"
 
+#include "humanoid/Humanoid.h"
+#include "network/Players.h"
 #include "reflection/property.h"
 #include "security/SecurityContext.h"
 #include "v8datamodel/Backpack.h"
+#include "v8datamodel/Camera.h"
+#include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/Workspace.h"
 
 namespace RBX {
 namespace Network {
 
 char sPlayer[] = "Player";
+
+static Reflection::RefPropDescriptor<Player, ModelInstance> prop_Character(
+	"Character",
+	"Data",
+	&RBX::Network::Player::getCharacter,
+	&RBX::Network::Player::setCharacter
+);
 
 static Reflection::PropDescriptor<Player, BrickColor> prop_teamColor(
 	"TeamColor",
@@ -29,10 +41,50 @@ Backpack* Player::getPlayerBackpack() const
 	return findFirstChildOfType<Backpack>();
 }
 
-// STUB: WEBSERVICE 0x1018f870
+// FUNCTION: WEBSERVICE 0x1018eae0
+void Player::onCharacterChangedFrontend()
+{
+	if (this == Players::findLocalPlayer(this)) {
+		Workspace* workspace = ServiceProvider::find<Workspace>(this);
+
+		if (!character) {
+			workspace->getCamera()->setCameraType(Camera::FIXED_CAMERA);
+			workspace->getCamera()->setDistanceFromTarget(0.0f);
+			workspace->getCamera()->zoom(-1.0f);
+		}
+		else {
+			workspace->getCamera()->setCameraSubject(Humanoid::modelIsCharacter(character.get()));
+			workspace->getCamera()->setCameraType(Camera::CUSTOM_CAMERA);
+			workspace->getCamera()->setDistanceFromTarget(13.0f);
+			workspace->getCamera()->zoom(-1.0f);
+			workspace->setDefaultMouseCommand();
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018f870
 void Player::setCharacter(ModelInstance* value)
 {
-	STUB(0x1018f870);
+	if (value != character.get()) {
+		if (character) {
+			characterDiedConnection.disconnect();
+			Notifier<Player, CharacterRemoving>::raise(CharacterRemoving(character.get()));
+			if (Players::backendProcessing(this, false)) {
+				character->setParent(NULL);
+			}
+			character.reset();
+		}
+
+		if (value) {
+			character = shared_from(value);
+			Notifier<Player, CharacterAdded>::raise(CharacterAdded(character.get()));
+			if (Players::frontendProcessing(this, false)) {
+				onCharacterChangedFrontend();
+			}
+		}
+
+		raisePropertyChanged(prop_Character);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1018f9c0
@@ -59,7 +111,7 @@ void Player::onServiceProvider(const ServiceProvider* oldProvider, const Service
 	STUB(0x1018fb20);
 }
 
-// STUB: WEBSERVICE 0x1018fce0
+// FUNCTION: WEBSERVICE 0x1018fce0
 Player::~Player()
 {
 	setCharacter(NULL);

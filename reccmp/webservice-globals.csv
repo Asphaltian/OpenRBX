@@ -6999,6 +6999,8 @@ address,type,symbol
 0x10231a84,global,??_7ServiceProvider@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10231a8c,global,??_7ServiceProvider@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10231a9c,global,??_7ServiceProvider@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1024e880,global,??_7?$RefPropDescriptor@VPlayer@Network@RBX@@VModelInstance@3@@Reflection@RBX@@6BIIDREF@2@@
+0x1024e888,global,??_7?$RefPropDescriptor@VPlayer@Network@RBX@@VModelInstance@3@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 
 0x1024eab0,global,??_7Player@Network@RBX@@6B?$Notifier@VPlayer@Network@RBX@@UCharacterRemoving@23@@2@@
 0x1024eac0,global,??_7Player@Network@RBX@@6B?$Notifier@VPlayer@Network@RBX@@UCharacterAdded@23@@2@@

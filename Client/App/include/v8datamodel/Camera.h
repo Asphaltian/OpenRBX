@@ -47,13 +47,17 @@ public:
 	static float distanceMaxCharacter() { return 400.0f; }
 
 	void zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType zoomType);
-	void zoomExtents(const G3D::Rect2D& viewPort);
+	bool zoomExtents(const G3D::Rect2D& viewPort);
 	void lookAt(const G3D::Vector3& point);
 
 	ICameraSubject* getCameraSubject() const;
 	void setCameraSubject(Instance* value);
 
 	CameraType getCameraType() const { return cameraType; }
+	void setCameraType(CameraType value);
+
+	bool setDistanceFromTarget(float newDistance);
+	bool zoom(float in);
 
 	// FUNCTION: WEBSERVICE 0x100c4370
 	virtual ~Camera() {}

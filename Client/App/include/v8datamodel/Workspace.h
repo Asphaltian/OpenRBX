@@ -82,6 +82,8 @@ public:
 
 	bool getInMouselookMode() { return inMouselookMode; }
 
+	void setDefaultMouseCommand();
+
 private:
 	undefined m_unk0x310[0x35c - 0x310]; // 0x310
 	bool inMouselookMode;                // 0x35c

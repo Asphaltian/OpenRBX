@@ -79,6 +79,12 @@ void Workspace::cameraMoved()
 	Notifier<Workspace, DrawChanged>::raise(DrawChanged());
 }
 
+// STUB: WEBSERVICE 0x1006d410
+void Workspace::setDefaultMouseCommand()
+{
+	STUB(0x1006d410);
+}
+
 // STUB: WEBSERVICE 0x1006d440
 void Workspace::releaseScript(Script* script)
 {

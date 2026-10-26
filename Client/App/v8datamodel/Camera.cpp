@@ -33,10 +33,30 @@ float Camera::getNewZoomDistance(float currentDistance, float in)
 	return newDistance;
 }
 
+// STUB: WEBSERVICE 0x100c28a0
+bool Camera::setDistanceFromTarget(float newDistance)
+{
+	STUB(0x100c28a0);
+	return false;
+}
+
 // FUNCTION: WEBSERVICE 0x100c29f0
 ICameraSubject* Camera::getCameraSubject() const
 {
 	return cameraSubject ? dynamic_cast<ICameraSubject*>(cameraSubject.get()) : NULL;
+}
+
+// STUB: WEBSERVICE 0x100c31e0
+bool Camera::zoom(float in)
+{
+	STUB(0x100c31e0);
+	return false;
+}
+
+// STUB: WEBSERVICE 0x100c4470
+void Camera::setCameraType(CameraType value)
+{
+	STUB(0x100c4470);
 }
 
 // STUB: WEBSERVICE 0x100c44b0
@@ -52,9 +72,10 @@ void Camera::zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType 
 }
 
 // STUB: WEBSERVICE 0x100c4aa0
-void Camera::zoomExtents(const G3D::Rect2D& viewPort)
+bool Camera::zoomExtents(const G3D::Rect2D& viewPort)
 {
 	STUB(0x100c4aa0);
+	return false;
 }
 
 } // namespace RBX

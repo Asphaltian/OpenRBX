@@ -24,7 +24,7 @@ struct CharacterAdded
 {
 	const boost::shared_ptr<Instance> character; // 0x00
 
-	CharacterAdded(boost::shared_ptr<Instance> character) : character(character) {}
+	CharacterAdded(Instance* character) : character(shared_from(character)) {}
 };
 
 DECOMP_SIZE_ASSERT(CharacterAdded, 0x8)
@@ -34,7 +34,7 @@ struct CharacterRemoving
 {
 	const boost::shared_ptr<Instance> character; // 0x00
 
-	CharacterRemoving(boost::shared_ptr<Instance> character) : character(character) {}
+	CharacterRemoving(Instance* character) : character(shared_from(character)) {}
 };
 
 DECOMP_SIZE_ASSERT(CharacterRemoving, 0x8)
@@ -57,6 +57,9 @@ class Player : public DescribedCreatable<Player, Instance, sPlayer>,
 	virtual bool askAddChild(const Instance* instance) const { return true; }
 
 	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
+
+	void onCharacterChangedFrontend();
+	void registerLocalPlayerNotIdle();
 
 public:
 	Player();
@@ -87,6 +90,13 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(Player, 0x178)
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021f2e0
+// RBX::Network::`dynamic initializer for 'prop_Character''
+// SYNTHETIC: WEBSERVICE 0x10225e50
+// RBX::Network::`dynamic atexit destructor for 'prop_Character''
+// clang-format on
 
 } // namespace Network
 } // namespace RBX
