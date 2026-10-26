@@ -1,4 +1,5 @@
 address,type,symbol
+0x10001070,stub,??0Http@RBX@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 0x10004ec0,stub,??0?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QAE@PBD@Z
 0x100052c0,stub,??0?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QAE@PB_W@Z
 0x100054a0,stub,?Format@?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QAAXPBDZZ
@@ -285,7 +286,7 @@ address,type,symbol
 0x100da8e0,synthetic,??_G?$FactoryProduct@VTeams@RBX@@VInstance@2@$1?sTeams@2@3QBDB@RBX@@MAEPAXI@Z
 0x100dab80,synthetic,??_ETeams@RBX@@UAEPAXI@Z
 0x100db250,synthetic,??0?$BoundFuncDesc@VTeams@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZ$0A@@Reflection@RBX@@QAE@P8Teams@2@AE?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZPBDW4Security@FunctionDescriptor@12@@Z
-0x100dc260,synthetic,??_GAccoutrement@RBX@@UAEPAXI@Z
+0x100dc260,stub,??_GAccoutrement@RBX@@UAEPAXI@Z
 0x100dc280,synthetic,??1?$DescribedCreatable@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@UAE@XZ
 0x100dc290,synthetic,?getClassName@?$FactoryProduct@VAccoutrement@RBX@@VInstance@2@$1?sAccoutrement@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100dc2b0,synthetic,?getClassName@?$FactoryProduct@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@UBEABVName@2@XZ
@@ -589,6 +590,7 @@ address,type,symbol
 0x101f6710,synthetic,??4Level@Material@Render@RBX@@QAEAAV0123@ABV0123@@Z
 0x101f6ea0,synthetic,??_GMaterial@Render@RBX@@UAEPAXI@Z
 0x101f7ac0,synthetic,??1DepthBlur@Render@RBX@@QAE@XZ
+0x10221220,stub,??__Fcreators@?1??getCreators@?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@KAAAV?$map@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@@std@@XZ@YAXXZ
 0x10223320,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x10223970,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 0x10223980,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ

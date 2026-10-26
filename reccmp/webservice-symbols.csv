@@ -1,5 +1,4 @@
 address,size,symbol,name
-0x10001070,0x59,??0Http@RBX@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x10001100,0x250,?Upload@ErrorUploader@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z,
 0x10001df0,0xa1,?GetLogPath@LogManager@@QBE?AV?$CPathT@V?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@@ATL@@XZ,
 0x10001ea0,0x12b,?getLogFileName@MainLogManager@@UAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
@@ -484,7 +483,6 @@ address,size,symbol,name
 0x101f9d10,0x26,?getMaterial@AggregateChunk@Render@RBX@@UAE?AV?$ReferenceCountedPointer@VMaterial@Render@RBX@@@G3D@@XZ,
 0x101f9d40,0x26,?getMesh@AggregateChunk@Render@RBX@@UAE?AV?$ReferenceCountedPointer@VMesh@Render@RBX@@@G3D@@XZ,
 0x101fa520,0x1ab,?go@Clusterer@Render@RBX@@QAEAAV?$vector@VCluster@Clusterer@Render@RBX@@V?$allocator@VCluster@Clusterer@Render@RBX@@@std@@@std@@I@Z,
-0x10221220,0x46,??__Fcreators@?1??getCreators@?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@KAAAV?$map@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@@std@@XZ@YAXXZ,
 0x100068f0,,?onAddListener@?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@MBEXPAV?$Listener@VInstance@RBX@@VPropertyChanged@2@@2@@Z,
 0x100068f0,,?onRemoveListener@?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@MBEXPAV?$Listener@VInstance@RBX@@VPropertyChanged@2@@2@@Z,
 0x1003ea30,,??1Type@Reflection@RBX@@UAE@XZ,

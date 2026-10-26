@@ -658,7 +658,7 @@ public:
 
 	virtual void writeValue(const DescribedBase* instance, XmlElement* element) const
 	{
-		element->setValue(getValue(instance));
+		element->setValue(InstanceHandle(getValue(instance)));
 	}
 
 	virtual void assignIDREF(DescribedBase* propertyOwner, const InstanceHandle& handle) const
