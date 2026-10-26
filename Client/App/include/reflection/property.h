@@ -546,6 +546,14 @@ public:
 	// RBX::Reflection::BoundProp<G3D::Color3,1>::BoundProp<G3D::Color3,1><RBX::Value<G3D::Color3,&RBX::sColor3Value> >
 	// TEMPLATE: WEBSERVICE 0x100f3890
 	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >
+	// TEMPLATE: WEBSERVICE 0x10117580
+	// RBX::Reflection::PropDescriptor<RBX::Mouse,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame (__thiscall RBX::Mouse::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x101175d0
+	// RBX::Reflection::PropDescriptor<RBX::Mouse,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Mouse::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x10117620
+	// RBX::Reflection::PropDescriptor<RBX::Mouse,int>::getset<int (__thiscall RBX::Mouse::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x10117670
+	// RBX::Reflection::PropDescriptor<RBX::Mouse,RBX::TextureId>::getset<RBX::TextureId (__thiscall RBX::Mouse::*)(void)const ,void (__thiscall RBX::Mouse::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x1018e580
 	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x1018e660
@@ -766,6 +774,12 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::DebrisService,int>::getset<int (__thiscall RBX::DebrisService::*)(void)const ,void (__thiscall RBX::DebrisService::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x100faae0
 	// RBX::Reflection::PropDescriptor<RBX::DebrisService,int>::PropDescriptor<RBX::DebrisService,int><int (__thiscall RBX::DebrisService::*)(void)const ,void (__thiscall RBX::DebrisService::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x101176d0
+	// RBX::Reflection::PropDescriptor<RBX::Mouse,G3D::CoordinateFrame>::PropDescriptor<RBX::Mouse,G3D::CoordinateFrame><G3D::CoordinateFrame (__thiscall RBX::Mouse::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x10117810
+	// RBX::Reflection::PropDescriptor<RBX::Mouse,int>::PropDescriptor<RBX::Mouse,int><int (__thiscall RBX::Mouse::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x101178b0
+	// RBX::Reflection::PropDescriptor<RBX::Mouse,RBX::TextureId>::PropDescriptor<RBX::Mouse,RBX::TextureId><RBX::TextureId (__thiscall RBX::Mouse::*)(void)const ,void (__thiscall RBX::Mouse::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x1012cb10
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::GetSetImpl<G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x1012cd00

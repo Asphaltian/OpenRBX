@@ -392,6 +392,18 @@ protected:
 	SignalDescImpl(ClassDescriptor& classDescriptor, const char* name) : TSignalDesc<Signature>(classDescriptor, name)
 	{
 	}
+
+public:
+	// TEMPLATE: WEBSERVICE 0x1007b390
+	// RBX::Reflection::SignalDescImpl<0,void __cdecl(void)>::fire
+	void fire(SignalSource* source)
+	{
+		typename TSignalDesc<Signature>::TSignalInstance* instance = this->findSig(source);
+
+		if (instance != NULL) {
+			(*instance)();
+		}
+	}
 };
 
 // SIZE 0x24
@@ -543,6 +555,8 @@ public:
 	// RBX::Reflection::SignalDesc<RBX::Value<G3D::Color3,&RBX::sColor3Value>,void __cdecl(G3D::Color3)>::SignalDesc<RBX::Value<G3D::Color3,&RBX::sColor3Value>,void __cdecl(G3D::Color3)>
 	// TEMPLATE: WEBSERVICE 0x100f2e20
 	// RBX::Reflection::SignalDesc<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,void __cdecl(RBX::BrickColor)>::SignalDesc<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,void __cdecl(RBX::BrickColor)>
+	// TEMPLATE: WEBSERVICE 0x10117950
+	// RBX::Reflection::SignalDesc<RBX::Mouse,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::SignalDesc<RBX::Mouse,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>
 	// TEMPLATE: WEBSERVICE 0x1018f2e0
 	// RBX::Reflection::SignalDesc<RBX::Network::Player,void __cdecl(float)>::SignalDesc<RBX::Network::Player,void __cdecl(float)>
 	// TEMPLATE: WEBSERVICE 0x10194160

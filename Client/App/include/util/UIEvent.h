@@ -4,6 +4,7 @@
 #include "decomp.h"
 
 #include <G3D/Vector2int16.h>
+#include <SDL_keysym.h>
 
 namespace RBX {
 
@@ -29,6 +30,26 @@ public:
 		KEY_UP = 11
 	};
 
+	EventType eventType;      // 0x00
+	UserInputBase* userInput; // 0x04
+	union {
+		struct
+		{
+			G3D::Vector2int16 mousePosition; // 0x08
+			G3D::Vector2int16 mouseDelta;    // 0x0c
+			G3D::Vector2int16 windowSize;    // 0x10
+		};
+		struct
+		{
+			SDLKey key; // 0x08
+			SDLMod mod; // 0x0c
+		};
+	};
+
+	UIEvent(UserInputBase* userInput, EventType eventType, SDLKey key, SDLMod mod);
+	UIEvent(UserInputBase* userInput, EventType eventType, G3D::Vector2int16, G3D::Vector2int16);
+	UIEvent();
+
 	// FUNCTION: WEBSERVICE 0x10069fa0
 	bool isMouseEvent() const
 	{
@@ -37,11 +58,10 @@ public:
 			   eventType == MOUSE_DELTA || eventType == MOUSE_IDLE;
 	}
 
-	EventType eventType;             // 0x00
-	UserInputBase* userInput;        // 0x04
-	G3D::Vector2int16 mousePosition; // 0x08
-	G3D::Vector2int16 mouseDelta;    // 0x0c
-	G3D::Vector2int16 windowSize;    // 0x10
+	bool isKeyPressedEvent(SDLKey key) const;
+	bool isKeyUpEvent(SDLKey key) const;
+	bool isKeyPressedWithShiftEvent(SDLKey key) const;
+	bool isKeyPressedWithShiftEvent() const;
 };
 
 DECOMP_SIZE_ASSERT(UIEvent, 0x14)

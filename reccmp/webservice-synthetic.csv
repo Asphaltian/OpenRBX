@@ -228,6 +228,7 @@ address,type,symbol
 0x100c19f0,synthetic,??_GRootInstance@RBX@@MAEPAXI@Z
 0x100c1a10,synthetic,??$create@VTeams@RBX@@@ServiceProvider@RBX@@QBEPAVTeams@1@XZ
 0x100c1b00,synthetic,??$create@VTeams@RBX@@@ServiceProvider@RBX@@SAPAVTeams@1@PBVInstance@1@@Z
+0x100c2e90,synthetic,?getValue@?$GetImpl@P8Mouse@RBX@@BE?AVCoordinateFrame@G3D@@XZ@?$PropDescriptor@VMouse@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@UBE?AVCoordinateFrame@G3D@@PBVDescribedBase@34@@Z
 0x100c3690,synthetic,?getClassName@?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100c4100,synthetic,??_G?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@MAEPAXI@Z
 0x100c4120,stub,??0Camera@RBX@@QAE@XZ
@@ -406,6 +407,7 @@ address,type,symbol
 0x100f4bd0,synthetic,??_E?$DescribedCreatable@V?$Value@VCoordinateFrame@G3D@@$1?sCFrameValue@RBX@@3PADA@RBX@@VInstance@2@$1?sCFrameValue@2@3PADA@RBX@@UAEPAXI@Z
 0x100f4de0,synthetic,??_G?$FactoryProduct@V?$Value@VBrickColor@RBX@@$1?sBrickColorValue@2@3PADA@RBX@@VInstance@2@$1?sBrickColorValue@2@3PADA@RBX@@MAEPAXI@Z
 0x100f7560,synthetic,?setValue@?$BoundPropGetSet@VSky@RBX@@@?$BoundProp@H$00@Reflection@RBX@@UBEXPAVDescribedBase@34@ABH@Z
+0x100f86b0,synthetic,?connectGeneric@?$SignalDescImpl@$00$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@Reflection@RBX@@MBE?AVconnection@signals@boost@@PAVSignalInstance@23@PAVGenericSlotWrapper@23@W4connect_position@56@@Z
 0x100f9060,synthetic,??_GVisit@RBX@@UAEPAXI@Z
 0x100f9080,synthetic,?getClassName@?$FactoryProduct@VVisit@RBX@@VInstance@2@$1?sVisit@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100f95b0,synthetic,??_G?$DescribedCreatable@VVisit@RBX@@VInstance@2@$1?sVisit@2@3PADA@RBX@@UAEPAXI@Z

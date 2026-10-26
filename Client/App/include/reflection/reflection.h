@@ -139,6 +139,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100c3a60
 // RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x100cb390
+// RBX::Reflection::Described<RBX::Mouse,&RBX::sMouse,RBX::NonFactoryProduct<RBX::Instance,&RBX::sMouse> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100d8960
 // RBX::Reflection::PropDescriptor<RBX::Motor,float>::PropDescriptor<RBX::Motor,float><float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
 // TEMPLATE: WEBSERVICE 0x100dabe0
@@ -303,6 +305,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223b30
 // `RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10223d10
+// `RBX::Reflection::Described<RBX::Mouse,&RBX::sMouse,RBX::NonFactoryProduct<RBX::Instance,&RBX::sMouse> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223e70
 // `RBX::Reflection::Described<RBX::Teams,&RBX::sTeams,RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224160
@@ -699,6 +703,8 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x10102200
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::isReadOnly
+	// TEMPLATE: WEBSERVICE 0x10117770
+	// RBX::Reflection::RefPropDescriptor<RBX::Mouse,RBX::PartInstance>::RefPropDescriptor<RBX::Mouse,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::Mouse::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x1018e3e0
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance>::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance><RBX::ModelInstance * (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(RBX::ModelInstance *)>
 	// TEMPLATE: WEBSERVICE 0x1018e490

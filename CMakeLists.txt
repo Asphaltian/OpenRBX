@@ -246,6 +246,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/v8datamodel/Lighting.cpp
   Client/App/v8datamodel/LocakBackpack.cpp
   Client/App/v8datamodel/Mouse.cpp
+  Client/App/v8datamodel/MouseCommand.cpp
   Client/App/v8datamodel/Seat.cpp
   Client/App/v8datamodel/Selection.cpp
   Client/App/v8datamodel/Stats.cpp
