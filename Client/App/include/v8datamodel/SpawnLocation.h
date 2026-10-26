@@ -8,7 +8,16 @@
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
 
+#include <boost/shared_ptr.hpp>
+#include <list>
+
 namespace RBX {
+
+class ModelInstance;
+
+namespace Network {
+class Player;
+}
 
 extern const char sSpawnerService[];
 
@@ -38,8 +47,16 @@ DECOMP_SIZE_ASSERT(SpawnLocation, 0x2cc)
 // SIZE 0x104
 class SpawnerService : public DescribedCreatable<SpawnerService, Instance, sSpawnerService>, public Service
 {
+public:
+	SpawnerService();
+	virtual ~SpawnerService();
+
+	void RegisterSpawner(SpawnLocation* spawner);
+	void UnregisterSpawner(SpawnLocation* spawner);
+	void SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network::Player* p);
+
 private:
-	undefined m_unk0x0f8[0x104 - 0x0f8]; // 0x0f8
+	std::list<SpawnLocation*> spawners; // 0x0f8
 };
 
 DECOMP_SIZE_ASSERT(SpawnerService, 0x104)

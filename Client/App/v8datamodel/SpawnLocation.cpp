@@ -21,6 +21,18 @@ BrickColor SpawnLocation::getTeamColor() const
 	return teamColor;
 }
 
+// FUNCTION: WEBSERVICE 0x100fdd80
+SpawnerService::~SpawnerService()
+{
+}
+
+// FUNCTION: WEBSERVICE 0x100febd0
+SpawnerService::SpawnerService()
+{
+	setName(sSpawnerService);
+	propArchivable.setValue(this, false);
+}
+
 // FUNCTION: WEBSERVICE 0x100ff2b0
 void SpawnLocation::setTeamColor(BrickColor color)
 {

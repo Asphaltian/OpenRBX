@@ -335,6 +335,18 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // `dynamic atexit destructor for 'RBX::Rocket::prop_targetOffset''
 // SYNTHETIC: WEBSERVICE 0x10224680
 // `dynamic atexit destructor for 'RBX::BodyGyro::prop_cframe''
+// STUB: WEBSERVICE 0x10224700
+// `dynamic atexit destructor for 'func_getLastForce''
+// STUB: WEBSERVICE 0x10224710
+// `dynamic atexit destructor for 'func_getLastForceV''
+// STUB: WEBSERVICE 0x10224720
+// `dynamic atexit destructor for 'RBX::Rocket::func_Abort''
+// STUB: WEBSERVICE 0x10224730
+// `dynamic atexit destructor for 'func_getLastForceOld''
+// STUB: WEBSERVICE 0x10224740
+// `dynamic atexit destructor for 'func_getLastForceVOld''
+// STUB: WEBSERVICE 0x10224750
+// `dynamic atexit destructor for 'RBX::Rocket::func_Fire''
 // SYNTHETIC: WEBSERVICE 0x10224760
 // `dynamic atexit destructor for 'RBX::Rocket::event_ReachedTarget''
 // clang-format on

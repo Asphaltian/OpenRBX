@@ -49,6 +49,8 @@ DECOMP_SIZE_ASSERT(Visit, 0x118)
 // `dynamic initializer for 'getUploadUrl''
 // SYNTHETIC: WEBSERVICE 0x1021db00
 // `dynamic initializer for 'desc_setPing''
+// STUB: WEBSERVICE 0x10224be0
+// `dynamic atexit destructor for 'getUploadUrl''
 // SYNTHETIC: WEBSERVICE 0x10224bf0
 // `dynamic atexit destructor for 'desc_setPing''
 // SYNTHETIC: WEBSERVICE 0x10224c00
