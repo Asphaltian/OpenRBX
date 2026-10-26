@@ -2,6 +2,7 @@
 
 #include "util/Math.h"
 #include "util/Quaternion.h"
+#include "v8tree/Instance.h"
 
 #include <StringCompressor.h>
 #include <cmath>
@@ -412,6 +413,86 @@ void deserialize<BrickColor>(Reflection::Property& property, RakNet::BitStream& 
 	BrickColor c;
 	bitStream >> c;
 	property.setValue(c);
+}
+
+// FUNCTION: WEBSERVICE 0x101aca80
+bool StringSender::trySend(RakNet::BitStream& stream, const std::string& value)
+{
+	if (value == "") {
+		stream << (unsigned char) 0;
+		return true;
+	}
+
+	Dictionary::const_iterator iter = dictionary.find(value);
+	if (iter == dictionary.end()) {
+		return false;
+	}
+
+	stream << iter->second;
+	return true;
+}
+
+// FUNCTION: WEBSERVICE 0x101ace20
+void StringReceiver::receive(RakNet::BitStream& stream, std::string& value)
+{
+	unsigned char id;
+	stream >> id;
+
+	if (id == 0) {
+		value.clear();
+	}
+	else if (id & 0x80) {
+		stream >> value;
+		dictionary[id & 0x7f] = value;
+	}
+	else {
+		value = dictionary[id];
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101acfa0
+void StringSender::send(RakNet::BitStream& stream, const std::string& value)
+{
+	if (value == "") {
+		stream << (unsigned char) 0;
+		return;
+	}
+
+	std::pair<Dictionary::iterator, bool> pair = dictionary.insert(Dictionary::value_type(value, nextIndex));
+	if (!pair.second) {
+		stream << pair.first->second;
+		return;
+	}
+
+	dictionary.erase(strings[nextIndex]);
+	strings[nextIndex] = value;
+
+	unsigned char id = nextIndex;
+	stream << (unsigned char) (id | 0x80);
+	stream << value;
+
+	nextIndex = nextIndex % 127;
+	nextIndex++;
+}
+
+// STUB: WEBSERVICE 0x101ad130
+void StringReceiver::deserializeString(Reflection::Property& property, RakNet::BitStream& bitStream)
+{
+	std::string value;
+	receive(bitStream, value);
+
+	Instance* instance = static_cast<Instance*>(property.getInstance());
+
+	property.getDescriptor().setStringValue(instance, value);
+}
+
+// STUB: WEBSERVICE 0x101ad620
+void StringSender::serializeString(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
+{
+	const Instance* instance = static_cast<const Instance*>(property.getInstance());
+
+	std::string value = property.getDescriptor().getStringValue(instance);
+	send(bitStream, value);
 }
 
 } // namespace Network

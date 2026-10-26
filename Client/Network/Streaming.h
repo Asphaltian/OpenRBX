@@ -10,6 +10,8 @@
 #include <G3D/Color3.h>
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Vector3.h>
+#include <boost/noncopyable.hpp>
+#include <map>
 #include <string>
 
 namespace RBX {
@@ -88,6 +90,54 @@ template <>
 void deserialize<BrickColor>(Reflection::Property& property, RakNet::BitStream& bitStream);
 template <>
 void deserialize<ContentId>(Reflection::Property& property, RakNet::BitStream& bitStream);
+
+// SIZE 0xe10
+class StringSender
+{
+	typedef std::map<std::string, unsigned char> Dictionary;
+
+	Dictionary dictionary;    // 0x000
+	std::string strings[128]; // 0x00c
+	int nextIndex;            // 0xe0c
+
+public:
+	StringSender() : nextIndex(1) {}
+
+	void serializeString(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream);
+	void send(RakNet::BitStream& stream, const std::string& value);
+	bool trySend(RakNet::BitStream& stream, const std::string& value);
+};
+
+DECOMP_SIZE_ASSERT(StringSender, 0xe10)
+
+// SIZE 0x0c
+class StringReceiver
+{
+	typedef std::map<unsigned char, std::string> Dictionary;
+
+	Dictionary dictionary; // 0x00
+
+public:
+	void deserializeString(Reflection::Property& property, RakNet::BitStream& bitStream);
+	void receive(RakNet::BitStream& stream, std::string& value);
+
+	// FUNCTION: WEBSERVICE 0x1019bc60
+	void receive(RakNet::BitStream& stream, const Name*& value)
+	{
+		std::string s;
+		receive(stream, s);
+		value = &Name::declare(s.c_str(), -1);
+	}
+};
+
+DECOMP_SIZE_ASSERT(StringReceiver, 0x0c)
+
+// SIZE 0xe20
+class SharedStringDictionary : public StringSender, public StringReceiver, private boost::noncopyable
+{
+};
+
+DECOMP_SIZE_ASSERT(SharedStringDictionary, 0xe20)
 
 } // namespace Network
 } // namespace RBX
