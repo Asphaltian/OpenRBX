@@ -66,7 +66,7 @@ public:
 
 	static const Reflection::PropDescriptor<Texture, float> prop_StudsPerTileV;
 
-	// FUNCTION: WEBSERVICE 0x1007cde0
+	// FUNCTION: WEBSERVICE 0x1007cde0 FOLDED
 	float getStudsPerTileV() const { return studsPerTile.y; }
 
 	void setStudsPerTileV(float value);

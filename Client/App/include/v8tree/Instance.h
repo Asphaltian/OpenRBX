@@ -534,6 +534,8 @@ template <class T, class Base, const char* sName>
 // RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x1007daf0
 // RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::~DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
+	// TEMPLATE: WEBSERVICE 0x10082340
+	// RBX::DescribedCreatable<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::DescribedCreatable<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>
 	// FUNCTION: WEBSERVICE 0x100826c0
 	// RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
 	// TEMPLATE: WEBSERVICE 0x1008c6f0

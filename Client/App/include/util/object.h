@@ -428,8 +428,12 @@ public:
 	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10077f00
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1007ce00
+	// RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::~FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1007ce50
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::~FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
+	// TEMPLATE: WEBSERVICE 0x1007cfe0
+	// RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1007d040
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
 	// TEMPLATE: WEBSERVICE 0x1007e870

@@ -121,6 +121,8 @@ private:
 };
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x10081410
+// RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::~EnumDesc<enum RBX::Soundscape::ReverbType>
 // TEMPLATE: WEBSERVICE 0x10082790
 // RBX::Reflection::EnumDesc<enum RBX::SoundType>::~EnumDesc<enum RBX::SoundType>
 // clang-format on
@@ -197,6 +199,8 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 }
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x10081c70
+// RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::singleton
 // TEMPLATE: WEBSERVICE 0x10099d80
 // RBX::Reflection::EnumDesc<enum RBX::Controller::ControllerType>::singleton
 // TEMPLATE: WEBSERVICE 0x1009dde0
@@ -225,6 +229,8 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::singleton
 // TEMPLATE: WEBSERVICE 0x1012d270
 // RBX::Reflection::EnumDesc<enum RBX::SpecialShape::MeshType>::singleton
+// SYNTHETIC: WEBSERVICE 0x10222450
+// `RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10223060
 // `RBX::Reflection::EnumDesc<enum RBX::Controller::ControllerType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10223320

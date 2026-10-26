@@ -5854,7 +5854,7 @@ address,type,symbol
 0x102f72a0,global,??_B?1??classDescriptor@?$Described@VSoundChannel@Soundscape@RBX@@$1?sSoundChannel@23@3PADAV?$FactoryProduct@VSoundChannel@Soundscape@RBX@@VInstance@3@$1?sSoundChannel@23@3PADA@3@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x102f72a8,global,"foo___RBX::Reflection::Described<StockSound,&sStockSound,RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound> >::classDescriptor"
 0x102f7330,global,??_B?1??classDescriptor@?$Described@VStockSound@@$1?sStockSound@@3PADAV?$FactoryProduct@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
-0x102f7338,global,?s@?1??singleton@?$EnumDesc@W4ReverbType@Soundscape@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
+0x102f7338,global,s___RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::singleton
 0x102f73d0,global,??_B?1??singleton@?$EnumDesc@W4ReverbType@Soundscape@RBX@@@Reflection@RBX@@SAABV123@XZ@51
 0x102f73d8,global,?s@?1??singleton@?$EnumDesc@W4SoundType@RBX@@@Reflection@RBX@@SAABV234@XZ@4V234@A
 0x102f7470,global,??_B?1??singleton@?$EnumDesc@W4SoundType@RBX@@@Reflection@RBX@@SAABV123@XZ@51
@@ -7032,3 +7032,16 @@ address,type,symbol
 0x102f571c,global,flag___RBX::ServiceProvider::getClassIndex<RBX::RunService>
 0x10247c74,global,??_7?$RefPropDescriptor@VMouse@RBX@@VPartInstance@2@@Reflection@RBX@@6BIIDREF@2@@
 0x10247c7c,global,??_7?$RefPropDescriptor@VMouse@RBX@@VPartInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
+0x102d1bfc,global,??_R0?AW4ReverbType@Soundscape@RBX@@@8
+0x102f6bf8,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Soundscape::SoundService>
+0x10233eb8,global,??_7SoundService@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@2@@
+0x10233e78,global,??_7SoundService@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
+0x10233ec8,global,??_7SoundService@Soundscape@RBX@@6BDebugable@2@@
+0x10233e68,global,??_7SoundService@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
+0x10233e98,global,??_7SoundService@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
+0x10233e88,global,??_7SoundService@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@2@@
+0x10233ee4,global,??_7SoundService@Soundscape@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@
+0x10233ed0,global,??_7SoundService@Soundscape@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
+0x10233e5c,global,??_7SoundService@Soundscape@RBX@@6B@
+0x10233ea8,global,??_7SoundService@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@2@@
+0x10233ed8,global,??_7SoundService@Soundscape@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@

@@ -508,6 +508,20 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Script,RBX::ContentId>::getset<RBX::ContentId const & (__thiscall RBX::Script::*)(void)const ,void (__thiscall RBX::Script::*)(RBX::ContentId const &)>
 	// TEMPLATE: WEBSERVICE 0x10069740
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Script>
+	// TEMPLATE: WEBSERVICE 0x1007d700
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,float>::getset<float (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x1007d760
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,bool>::getset<bool (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x1007de40
+	// RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId>::TypedPropertyDescriptor<RBX::Soundscape::SoundId>
+	// TEMPLATE: WEBSERVICE 0x1007e140
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,int>::getset<int (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x1007e1a0
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,bool>::getset<bool (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(bool)>
+	// TEMPLATE: WEBSERVICE 0x10081cd0
+	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::Soundscape::SoundService>
+	// TEMPLATE: WEBSERVICE 0x10082260
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Soundscape::SoundChannel>
 	// TEMPLATE: WEBSERVICE 0x100e0e40
 	// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundProp<RBX::TextureId,1><RBX::ShirtGraphic>
 	// TEMPLATE: WEBSERVICE 0x100e0f20
@@ -760,6 +774,14 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Lighting,G3D::Color3>::PropDescriptor<RBX::Lighting,G3D::Color3><G3D::Color3 (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(G3D::Color3)>
 	// TEMPLATE: WEBSERVICE 0x10045780
 	// RBX::Reflection::PropDescriptor<RBX::Lighting,float>::PropDescriptor<RBX::Lighting,float><float (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x10081fe0
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,float>::PropDescriptor<RBX::Soundscape::SoundChannel,float><float (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(float)>
+	// TEMPLATE: WEBSERVICE 0x10082080
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,int>::PropDescriptor<RBX::Soundscape::SoundChannel,int><int (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(int)>
+	// TEMPLATE: WEBSERVICE 0x10082120
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,bool>::PropDescriptor<RBX::Soundscape::SoundChannel,bool><bool (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(bool)>
+	// TEMPLATE: WEBSERVICE 0x100821c0
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,bool>::PropDescriptor<RBX::Soundscape::SoundChannel,bool><bool (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x10099c10
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame><int,void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x1009e0b0

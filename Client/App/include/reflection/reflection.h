@@ -53,6 +53,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1007d7d0
 // RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::GetSetImpl<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>::setValue
+// TEMPLATE: WEBSERVICE 0x10081b20
+// RBX::Reflection::Described<RBX::Soundscape::SoundService,&RBX::Soundscape::sSoundService,RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10081b90
 // RBX::Reflection::Described<RBX::Soundscape::SoundChannel,&RBX::Soundscape::sSoundChannel,RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088d00
@@ -223,6 +225,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::RootInstance,&RBX::sRootInstance,RBX::ModelInstance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222430
 // `RBX::Reflection::Described<RBX::Soundscape::SoundChannel,&RBX::Soundscape::sSoundChannel,RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10222440
+// `RBX::Reflection::Described<RBX::Soundscape::SoundService,&RBX::Soundscape::sSoundService,RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222520
 // `RBX::Reflection::Described<RBX::Humanoid,&RBX::sHumanoid,RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222530
@@ -503,6 +507,10 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100823f0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x10082430
+	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009a0e0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x1009a120
@@ -546,6 +554,12 @@ public:
 	// clang-format on
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10081db0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType><enum RBX::Soundscape::ReverbType (__thiscall RBX::Soundscape::SoundService::*)(void)const ,void (__thiscall RBX::Soundscape::SoundService::*)(enum RBX::Soundscape::ReverbType const &)>
+	// TEMPLATE: WEBSERVICE 0x10082450
+	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x10082590
+	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::readValue
 	// TEMPLATE: WEBSERVICE 0x10099de0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType><enum RBX::Controller::ControllerType (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(enum RBX::Controller::ControllerType)>
 	// TEMPLATE: WEBSERVICE 0x1009a140
@@ -806,6 +820,8 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1005c300
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x10082940
+	// RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1009eac0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1009eb40
