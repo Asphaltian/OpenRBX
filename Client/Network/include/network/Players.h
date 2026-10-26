@@ -119,6 +119,8 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x10193090
 	// RBX::Network::Players::`scalar deleting destructor'
 
+	bool superSafeOn() const { return localPlayer ? Player::prop_SuperSafeChat.getValue(localPlayer.get()) : false; }
+
 	// FUNCTION: WEBSERVICE 0x10072560
 	Player* getLocalPlayer() const { return localPlayer.get(); }
 
@@ -129,8 +131,17 @@ public:
 
 	void setMaxPlayers(int value);
 
+	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > getPlayers() { return players.read(); }
+
+	void setAbuseReportUrl(std::string value);
+
 	bool OnReceive(RakPeerInterface* peer, Packet* packet);
 	void setConnection(RakPeerInterface* peer);
+
+	boost::shared_ptr<Instance> playerFromCharacter(boost::shared_ptr<Instance> character);
+	boost::shared_ptr<Instance> getPlayerByID(int userID);
+
+	static Player* getPlayerFromCharacter(Instance* character);
 
 	static RBX::ModelInstance* findLocalCharacter(const Instance* context);
 	static Player* findLocalPlayer(const Instance* context);
@@ -141,6 +152,8 @@ public:
 
 protected:
 	virtual bool askAddChild(const Instance* instance) const;
+	virtual void onChildAdded(Instance* child);
+	virtual void onChildRemoving(Instance* child);
 };
 
 DECOMP_SIZE_ASSERT(Players, 0x158)
@@ -148,6 +161,18 @@ DECOMP_SIZE_ASSERT(Players, 0x158)
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10190e60
 // RBX::Network::Players::Plugin::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x1021f4f0
+// RBX::Network::`dynamic initializer for 'propPlayerMaxCount''
+// SYNTHETIC: WEBSERVICE 0x1021f710
+// RBX::Network::`dynamic initializer for 'event_PlayerAdded''
+// SYNTHETIC: WEBSERVICE 0x1021f730
+// RBX::Network::`dynamic initializer for 'event_PlayerRemoving''
+// SYNTHETIC: WEBSERVICE 0x10225fc0
+// RBX::Network::`dynamic atexit destructor for 'propPlayerMaxCount''
+// SYNTHETIC: WEBSERVICE 0x10226080
+// RBX::Network::`dynamic atexit destructor for 'event_PlayerRemoving''
+// SYNTHETIC: WEBSERVICE 0x102260a0
+// RBX::Network::`dynamic atexit destructor for 'event_PlayerAdded''
 // TEMPLATE: WEBSERVICE 0x10193670
 // RBX::DescribedNonCreatable<RBX::Network::Players,RBX::Instance,&RBX::Network::sPlayers>::DescribedNonCreatable<RBX::Network::Players,RBX::Instance,&RBX::Network::sPlayers>
 // clang-format on

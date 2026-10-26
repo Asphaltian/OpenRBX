@@ -166,6 +166,14 @@ void Notifier<Source, Event>::raise(Event event, Listener<Source, Event>* listen
 // RBX::Notifier<RBX::Network::Player,RBX::Network::CharacterAdded>::raise
 // TEMPLATE: WEBSERVICE 0x1018d0a0
 // RBX::Notifier<RBX::Network::Player,RBX::Network::CharacterRemoving>::raise
+// TEMPLATE: WEBSERVICE 0x10190ee0
+// RBX::Notifier<RBX::Network::Players,RBX::Network::ChatMessage>::raise
+// TEMPLATE: WEBSERVICE 0x10191020
+// RBX::Notifier<RBX::Network::Players,RBX::SuperSafeChanged>::raise
+// TEMPLATE: WEBSERVICE 0x10191460
+// RBX::Notifier<RBX::Network::Players,RBX::Network::ChatMessage>::raise
+// TEMPLATE: WEBSERVICE 0x10191550
+// RBX::Notifier<RBX::Network::Players,RBX::SuperSafeChanged>::raise
 // clang-format on
 template <class Source, class Event>
 void Notifier<Source, Event>::raise(Event event) const throw()
