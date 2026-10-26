@@ -299,6 +299,7 @@ set(OPENRBX_RAKNET_SOURCES
 )
 set(OPENRBX_RBXVIEW_SOURCES
   Client/RbxView/BevelMesh.cpp
+  Client/RbxView/BrickMesh.cpp
   Client/RbxView/CylinderMesh.cpp
   Client/RbxView/FileMesh.cpp
   Client/RbxView/HeadMesh.cpp
