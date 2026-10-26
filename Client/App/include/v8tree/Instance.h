@@ -488,20 +488,10 @@ protected:
 
 template <class T, class Base, const char* sName>
 // clang-format off
+	// TEMPLATE: WEBSERVICE 0x10007950
+	// RBX::DescribedCreatable<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::DescribedCreatable<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>
 	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
-	// TEMPLATE: WEBSERVICE 0x100c90f0
-	// RBX::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
-	// SYNTHETIC: WEBSERVICE 0x100ca200
-	// RBX::Instance::`scalar deleting destructor'
-	// SYNTHETIC: WEBSERVICE 0x100d8000
-	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::~DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>
-	// SYNTHETIC: WEBSERVICE 0x100d8dc0
-	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x1005a880
-	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::~DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>
-	// TEMPLATE: WEBSERVICE 0x1005bed0
-	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel><char const *>
 	// FUNCTION: WEBSERVICE 0x10043270
 	// RBX::Notifier<RBX::Instance,RBX::PropertyChanged>::raise
 	// FUNCTION: WEBSERVICE 0x10043920
@@ -514,6 +504,10 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>::~DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>
 	// FUNCTION: WEBSERVICE 0x100563e0
 	// RBX::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>::DescribedCreatable<RBX::RunService,RBX::Instance,&RBX::sRunService>
+	// TEMPLATE: WEBSERVICE 0x1005a880
+	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::~DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>
+	// TEMPLATE: WEBSERVICE 0x1005bed0
+	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel><char const *>
 	// FUNCTION: WEBSERVICE 0x1005cde0
 	// RBX::Instance::getRootAncestor
 	// FUNCTION: WEBSERVICE 0x1005d000
@@ -536,6 +530,10 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Script,RBX::Instance,&RBX::sScript>::DescribedCreatable<RBX::Script,RBX::Instance,&RBX::sScript><char const *>
 	// FUNCTION: WEBSERVICE 0x10069be0
 	// RBX::DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
+// FUNCTION: WEBSERVICE 0x1007d2e0
+// RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::`scalar deleting destructor'
+// TEMPLATE: WEBSERVICE 0x1007daf0
+// RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::~DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
 	// FUNCTION: WEBSERVICE 0x100826c0
 	// RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
 	// TEMPLATE: WEBSERVICE 0x1008c6f0
@@ -546,16 +544,20 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>
 	// FUNCTION: WEBSERVICE 0x1008e2c0
 	// RBX::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
+// FUNCTION: WEBSERVICE 0x10094680
+// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100946f0
+	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::~DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
+	// TEMPLATE: WEBSERVICE 0x10095060
+	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
+// FUNCTION: WEBSERVICE 0x1009ac30
+// RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1009b4b0
 	// RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::~DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>
 	// TEMPLATE: WEBSERVICE 0x1009ee20
 	// RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart><char const *>
-	// TEMPLATE: WEBSERVICE 0x100946f0
-	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::~DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x100a10f0
 	// RBX::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
-	// TEMPLATE: WEBSERVICE 0x10095060
-	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// FUNCTION: WEBSERVICE 0x100a3b60
 	// RBX::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::DescribedCreatable<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// FUNCTION: WEBSERVICE 0x100b3b30
@@ -566,8 +568,6 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>::~DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>
 	// FUNCTION: WEBSERVICE 0x100be560
 	// RBX::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>::DescribedCreatable<RBX::Team,RBX::Instance,&RBX::sTeam>
-	// FUNCTION: WEBSERVICE 0x100da640
-	// RBX::DescribedCreatable<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::DescribedCreatable<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
 	// FUNCTION: WEBSERVICE 0x100c2ee0
 	// RBX::DescribedCreatable<RBX::Camera,RBX::Instance,&RBX::sCamera>::~DescribedCreatable<RBX::Camera,RBX::Instance,&RBX::sCamera>
 	// FUNCTION: WEBSERVICE 0x100c4030
@@ -576,10 +576,18 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::~DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
 	// FUNCTION: WEBSERVICE 0x100c6a90
 	// RBX::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
+	// TEMPLATE: WEBSERVICE 0x100c90f0
+	// RBX::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
+	// SYNTHETIC: WEBSERVICE 0x100ca200
+	// RBX::Instance::`scalar deleting destructor'
+	// SYNTHETIC: WEBSERVICE 0x100d8000
+	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::~DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>
 	// FUNCTION: WEBSERVICE 0x100d87f0
 	// RBX::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::~DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>
 	// FUNCTION: WEBSERVICE 0x100d8800
 	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::~DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>
+	// SYNTHETIC: WEBSERVICE 0x100d8dc0
+	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100d9440
 	// RBX::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::DescribedCreatable<RBX::Snap,RBX::AutoJoint,&RBX::sSnap><RBX::SnapJoint *>
 	// FUNCTION: WEBSERVICE 0x100d94e0
@@ -594,6 +602,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::DescribedCreatable<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV><RBX::RotateVJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9970
 	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor><RBX::MotorJoint *>
+	// FUNCTION: WEBSERVICE 0x100da640
+	// RBX::DescribedCreatable<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::DescribedCreatable<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
 	// FUNCTION: WEBSERVICE 0x100da960
 	// RBX::DescribedCreatable<RBX::Teams,RBX::Instance,&RBX::sTeams>::~DescribedCreatable<RBX::Teams,RBX::Instance,&RBX::sTeams>
 	// FUNCTION: WEBSERVICE 0x100db0d0
@@ -704,36 +714,28 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::~DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// FUNCTION: WEBSERVICE 0x100feae0
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
+// TEMPLATE: WEBSERVICE 0x100ffa20
+// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::~DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// FUNCTION: WEBSERVICE 0x100ffb30
 	// RBX::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>::~DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// TEMPLATE: WEBSERVICE 0x100ffe70
 	// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
+// FUNCTION: WEBSERVICE 0x100fff50
+// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x101002f0
 	// RBX::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>::DescribedCreatable<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// FUNCTION: WEBSERVICE 0x1012cc20
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::~DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 	// FUNCTION: WEBSERVICE 0x1012d890
 	// RBX::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::DescribedCreatable<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
-// FUNCTION: WEBSERVICE 0x1007d2e0
-// RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::`scalar deleting destructor'
-// TEMPLATE: WEBSERVICE 0x1007daf0
-// RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::~DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
-// FUNCTION: WEBSERVICE 0x10094680
-// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::`scalar deleting destructor'
-// FUNCTION: WEBSERVICE 0x1009ac30
-// RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::`scalar deleting destructor'
-// TEMPLATE: WEBSERVICE 0x100ffa20
-// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::~DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
-// FUNCTION: WEBSERVICE 0x100fff50
-// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::`scalar deleting destructor'
-// TEMPLATE: WEBSERVICE 0x1019b4a0
-// RBX::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1018c900
 	// RBX::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::~DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
-// TEMPLATE: WEBSERVICE 0x1019b8b0
-// RBX::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1018edc0
 	// RBX::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
+// TEMPLATE: WEBSERVICE 0x1019b4a0
+// RBX::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+// TEMPLATE: WEBSERVICE 0x1019b8b0
+// RBX::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 // clang-format on
 class DescribedCreatable : public Reflection::Described<T, sName, FactoryProduct<T, Base, sName> >
 {

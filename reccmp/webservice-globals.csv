@@ -4399,6 +4399,16 @@ address,type,symbol
 0x1025bb44,global,??_7AdornG3D@RBX@@6B@
 0x1025bba8,global,??_7?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@HH_N@Z$03@Reflection@RBX@@6B@
 0x1025bbb4,global,??_7?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@0HH@Z$03@Reflection@RBX@@6B@
+0x1025bc7c,global,??_7ThumbnailGenerator@@6B?$GuidItem@VInstance@RBX@@@RBX@@@
+0x1025bcc0,global,??_7ThumbnailGenerator@@6B?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@@
+0x1025bccc,global,??_7ThumbnailGenerator@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@RBX@@@
+0x1025bcd4,global,??_7ThumbnailGenerator@@6BDebugable@RBX@@@
+0x1025bcdc,global,??_7ThumbnailGenerator@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@RBX@@@
+0x1025bcec,global,??_7ThumbnailGenerator@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@RBX@@@
+0x1025bcfc,global,??_7ThumbnailGenerator@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@@
+0x1025bd0c,global,??_7ThumbnailGenerator@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@@
+0x1025bd1c,global,??_7ThumbnailGenerator@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@@
+0x1025bd2c,global,??_7ThumbnailGenerator@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@@
 0x1025bd3c,global,??_7?$DescribedCreatable@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x1025bd80,global,??_7?$DescribedCreatable@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1025bd8c,global,??_7?$DescribedCreatable@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
@@ -5436,6 +5446,7 @@ address,type,symbol
 0x102f3320,global,??_R0?AVService@RBX@@@8
 0x102f333c,global,??_R0?AVbad_weak_ptr@boost@@@8
 0x102f3360,global,??_R0?AVDescribedBase@Reflection@RBX@@@8
+0x102f338c,global,??_R0?AVThumbnailGenerator@@@8
 0x102f33b0,global,??_R0?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@8
 0x102f33fc,global,??_R0?AVDeleter@?$Creatable@VInstance@RBX@@@RBX@@@8
 0x102f3434,global,??_R0?AVout_of_range@std@@@8

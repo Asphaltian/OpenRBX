@@ -60,6 +60,8 @@ public:
 	};
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100093c0
+	// RBX::Creatable<RBX::Instance>::create<ThumbnailGenerator>
 	// FUNCTION: WEBSERVICE 0x10009450
 	// RBX::Creatable<RBX::Instance>::create<RBX::Lighting>
 	// FUNCTION: WEBSERVICE 0x100094e0
@@ -90,6 +92,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<int>,boost::function0<int,std::allocator<boost::function_base> > >
 	// TEMPLATE: WEBSERVICE 0x100691f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Team>
+	// TEMPLATE: WEBSERVICE 0x10069460
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x1006bd80
 	// RBX::Creatable<RBX::Instance>::create<RBX::Camera>
 	// TEMPLATE: WEBSERVICE 0x1006be50
@@ -108,6 +112,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateP>
 	// TEMPLATE: WEBSERVICE 0x10077250
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateV>
+	// TEMPLATE: WEBSERVICE 0x10077730
+	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100779a0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Teams>
 	// STUB: WEBSERVICE 0x10077c10
@@ -166,24 +172,20 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hint>
 	// TEMPLATE: WEBSERVICE 0x1008e820
 	// RBX::Creatable<RBX::Instance>::create<RBX::ObjectValue>
+	// TEMPLATE: WEBSERVICE 0x100a1d00
+	// RBX::shared_from_dynamic_cast<RBX::PartInstance,RBX::Instance>
 	// TEMPLATE: WEBSERVICE 0x100acde0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Decal>
-	// TEMPLATE: WEBSERVICE 0x100b7470
-	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
 	// TEMPLATE: WEBSERVICE 0x100ad050
 	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
-	// TEMPLATE: WEBSERVICE 0x10077730
-	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100b2810
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item>
 	// TEMPLATE: WEBSERVICE 0x100b2890
 	// RBX::Creatable<RBX::Instance>::create<ProfilingItem,RBX::Profiling::Profiler const *>
 	// TEMPLATE: WEBSERVICE 0x100b2ba0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedMemItem,unsigned int const *>
-	// TEMPLATE: WEBSERVICE 0x10069460
-	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Player>
-	// TEMPLATE: WEBSERVICE 0x100a1d00
-	// RBX::shared_from_dynamic_cast<RBX::PartInstance,RBX::Instance>
+	// TEMPLATE: WEBSERVICE 0x100b7470
+	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
 	// TEMPLATE: WEBSERVICE 0x100dda40
 	// RBX::Creatable<RBX::Instance>::create<RBX::Snap,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100ddac0
@@ -212,10 +214,10 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Value<G3D::Color3,&RBX::sColor3Value> >
 	// TEMPLATE: WEBSERVICE 0x100f5fd0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >
-	// TEMPLATE: WEBSERVICE 0x1018b8e0
-	// RBX::Creatable<RBX::Instance>::create<RBX::NetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x10129ea0
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpecialShape>
+	// TEMPLATE: WEBSERVICE 0x1018b8e0
+	// RBX::Creatable<RBX::Instance>::create<RBX::NetworkSettings>
 	// clang-format on
 	template <class U>
 	static boost::shared_ptr<U> create()
@@ -302,6 +304,12 @@ public:
 	};
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100079f0
+	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::~FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>
+	// TEMPLATE: WEBSERVICE 0x10007a40
+	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::getClassName
+	// TEMPLATE: WEBSERVICE 0x10007a60
+	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007b20
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007be0
@@ -316,6 +324,8 @@ public:
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007fa0
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x10008b90
+	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>
 	// TEMPLATE: WEBSERVICE 0x10042700
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>
 	// TEMPLATE: WEBSERVICE 0x10042760
@@ -350,6 +360,14 @@ public:
 	// RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::~FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
 	// TEMPLATE: WEBSERVICE 0x1005eeb0
 	// RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
+	// TEMPLATE: WEBSERVICE 0x1005f0b0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>
+	// TEMPLATE: WEBSERVICE 0x1005f450
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem><char const *>
+	// TEMPLATE: WEBSERVICE 0x1005f4b0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats><char const *>
+	// TEMPLATE: WEBSERVICE 0x10062f70
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::getClassName
 	// FUNCTION: WEBSERVICE 0x10064700
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10065740
@@ -364,16 +382,20 @@ public:
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10069270
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x1006dca0
-	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100777b0
-	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100694e0
+	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10069b80
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
+	// TEMPLATE: WEBSERVICE 0x1006a9d0
+	// RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>
 	// TEMPLATE: WEBSERVICE 0x1006d8d0
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1006d980
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1006dca0
+	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x10074490
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100766a0
 	// RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10076910
@@ -388,6 +410,8 @@ public:
 	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10077540
 	// RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100777b0
+	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10077a20
 	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10077c90
@@ -398,6 +422,8 @@ public:
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::~FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
 	// TEMPLATE: WEBSERVICE 0x1007d040
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
+	// TEMPLATE: WEBSERVICE 0x1007e870
+	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100815c0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100899b0
@@ -468,20 +494,20 @@ public:
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100945c0
 	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::~FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
+	// TEMPLATE: WEBSERVICE 0x10094610
+	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
+	// TEMPLATE: WEBSERVICE 0x10094d60
+	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1009a8f0
 	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::~FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>
 	// TEMPLATE: WEBSERVICE 0x1009ab10
 	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart><char const *>
 	// TEMPLATE: WEBSERVICE 0x100a09b0
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
-	// TEMPLATE: WEBSERVICE 0x10094610
-	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x100a0a70
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// FUNCTION: WEBSERVICE 0x100a0b40
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x10094d60
-	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100ace60
 	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100ad0d0
@@ -494,68 +520,14 @@ public:
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>
 	// FUNCTION: WEBSERVICE 0x100b3bc0
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100b7280
+	// RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100bdef0
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::~FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>
 	// TEMPLATE: WEBSERVICE 0x100bdf40
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>
 	// FUNCTION: WEBSERVICE 0x100bdfa0
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x100694e0
-	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100c7250
-	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::~FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
-	// TEMPLATE: WEBSERVICE 0x100c7910
-	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
-	// TEMPLATE: WEBSERVICE 0x100f0a90
-	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::~FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
-	// TEMPLATE: WEBSERVICE 0x100f0ae0
-	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
-	// TEMPLATE: WEBSERVICE 0x100f0d00
-	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::~FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
-	// TEMPLATE: WEBSERVICE 0x100f0d50
-	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
-	// TEMPLATE: WEBSERVICE 0x100f0f50
-	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::~FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
-	// TEMPLATE: WEBSERVICE 0x100f0fa0
-	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
-	// TEMPLATE: WEBSERVICE 0x100f1400
-	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::~FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
-	// TEMPLATE: WEBSERVICE 0x100f1450
-	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
-	// TEMPLATE: WEBSERVICE 0x100f1670
-	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::~FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
-	// TEMPLATE: WEBSERVICE 0x100f16c0
-	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
-	// TEMPLATE: WEBSERVICE 0x100f18c0
-	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::~FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
-	// TEMPLATE: WEBSERVICE 0x100f1910
-	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
-	// TEMPLATE: WEBSERVICE 0x100f1b10
-	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::~FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
-	// TEMPLATE: WEBSERVICE 0x100f1b60
-	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
-	// TEMPLATE: WEBSERVICE 0x100f6520
-	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100f65d0
-	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100f6680
-	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100f6730
-	// RBX::FactoryProduct<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>,RBX::Instance,&RBX::sStringValue>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100f67e0
-	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100f6890
-	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100f6940
-	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100f69f0
-	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x1018c030
-	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::Creator::create
-	// TEMPLATE: WEBSERVICE 0x100da470
-	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
-	// TEMPLATE: WEBSERVICE 0x100da500
-	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::~FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
 	// TEMPLATE: WEBSERVICE 0x100c2710
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::~FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>
 	// TEMPLATE: WEBSERVICE 0x100c2770
@@ -570,6 +542,16 @@ public:
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100c5e20
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100c7250
+	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::~FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
+	// TEMPLATE: WEBSERVICE 0x100c7910
+	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
+	// TEMPLATE: WEBSERVICE 0x100d7ab0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>
+	// TEMPLATE: WEBSERVICE 0x100d8010
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::getClassName
+	// TEMPLATE: WEBSERVICE 0x100d82e0
+	// RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint>::getClassName
 	// FUNCTION: WEBSERVICE 0x100d8300
 	// RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::~FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>
 	// FUNCTION: WEBSERVICE 0x100d8390
@@ -614,6 +596,10 @@ public:
 	// RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100da260
 	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100da470
+	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
+	// TEMPLATE: WEBSERVICE 0x100da500
+	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::~FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
 	// FUNCTION: WEBSERVICE 0x100da830
 	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::~FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>
 	// FUNCTION: WEBSERVICE 0x100da880
@@ -672,12 +658,16 @@ public:
 	// RBX::FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100e3c40
 	// RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::~FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>
+	// TEMPLATE: WEBSERVICE 0x100e3ca0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::NonFactoryProduct<RBX::Instance,&RBX::sFeature>
 	// FUNCTION: WEBSERVICE 0x100e3d70
 	// RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor><RBX::MotorJoint *>
 	// FUNCTION: WEBSERVICE 0x100e4860
 	// RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::~FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>
 	// FUNCTION: WEBSERVICE 0x100e4900
 	// RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole>::~FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole>
+	// TEMPLATE: WEBSERVICE 0x100e4ec0
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::getClassName
 	// FUNCTION: WEBSERVICE 0x100e4f20
 	// RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::getClassName
 	// FUNCTION: WEBSERVICE 0x100e6d00
@@ -748,6 +738,50 @@ public:
 	// RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100ee470
 	// RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage>::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage><char const *>
+	// TEMPLATE: WEBSERVICE 0x100f0a90
+	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::~FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
+	// TEMPLATE: WEBSERVICE 0x100f0ae0
+	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
+	// TEMPLATE: WEBSERVICE 0x100f0d00
+	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::~FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
+	// TEMPLATE: WEBSERVICE 0x100f0d50
+	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
+	// TEMPLATE: WEBSERVICE 0x100f0f50
+	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::~FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
+	// TEMPLATE: WEBSERVICE 0x100f0fa0
+	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
+	// TEMPLATE: WEBSERVICE 0x100f1400
+	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::~FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
+	// TEMPLATE: WEBSERVICE 0x100f1450
+	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
+	// TEMPLATE: WEBSERVICE 0x100f1670
+	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::~FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
+	// TEMPLATE: WEBSERVICE 0x100f16c0
+	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
+	// TEMPLATE: WEBSERVICE 0x100f18c0
+	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::~FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
+	// TEMPLATE: WEBSERVICE 0x100f1910
+	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
+	// TEMPLATE: WEBSERVICE 0x100f1b10
+	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::~FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
+	// TEMPLATE: WEBSERVICE 0x100f1b60
+	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
+	// TEMPLATE: WEBSERVICE 0x100f6520
+	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f65d0
+	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f6680
+	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f6730
+	// RBX::FactoryProduct<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>,RBX::Instance,&RBX::sStringValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f67e0
+	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f6890
+	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f6940
+	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x100f69f0
+	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::Creator::create
 	// FUNCTION: WEBSERVICE 0x100f8b90
 	// RBX::FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit>::~FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit>
 	// FUNCTION: WEBSERVICE 0x100f8c40
@@ -778,12 +812,12 @@ public:
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// FUNCTION: WEBSERVICE 0x100febb0
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100ff600
+	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// TEMPLATE: WEBSERVICE 0x100ff720
 	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::~FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// FUNCTION: WEBSERVICE 0x100ffaa0
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::~FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>
-	// TEMPLATE: WEBSERVICE 0x100ff600
-	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// FUNCTION: WEBSERVICE 0x10100110
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// FUNCTION: WEBSERVICE 0x101004b0
@@ -796,44 +830,20 @@ public:
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 	// FUNCTION: WEBSERVICE 0x1012ca90
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x1006a9d0
-	// RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>
-	// TEMPLATE: WEBSERVICE 0x10074490
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::getClassName
-	// TEMPLATE: WEBSERVICE 0x1007e870
-	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::getClassName
-	// TEMPLATE: WEBSERVICE 0x100b7280
-	// RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings>::getClassName
-	// TEMPLATE: WEBSERVICE 0x100d7ab0
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>
-	// TEMPLATE: WEBSERVICE 0x100d8010
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::getClassName
-	// TEMPLATE: WEBSERVICE 0x100d82e0
-	// RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint>::getClassName
-	// TEMPLATE: WEBSERVICE 0x100e3ca0
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::NonFactoryProduct<RBX::Instance,&RBX::sFeature>
-	// TEMPLATE: WEBSERVICE 0x1005f0b0
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>
-	// TEMPLATE: WEBSERVICE 0x1005f450
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem><char const *>
-	// TEMPLATE: WEBSERVICE 0x1005f4b0
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats><char const *>
-	// TEMPLATE: WEBSERVICE 0x100e4ec0
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::getClassName
-	// TEMPLATE: WEBSERVICE 0x10062f70
-	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::getClassName
-	// TEMPLATE: WEBSERVICE 0x1019b3a0
-	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1018c030
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1018c410
 	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::~FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
-	// TEMPLATE: WEBSERVICE 0x1019b420
-	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::`scalar deleting destructor'
-	// SYNTHETIC: WEBSERVICE 0x1018c4d0
-	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x1019b440
-	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1018c460
 	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
+	// SYNTHETIC: WEBSERVICE 0x1018c4d0
+	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x1019b3a0
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1019b420
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x1019b440
+	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 	// clang-format on
 	const Creator& getCreator() const { return creator; }
 
@@ -859,6 +869,8 @@ template <class T, class Base, const char* sName>
 const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, sName>::creator;
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x10217de0
+// `dynamic initializer for 'RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::creator''
 // SYNTHETIC: WEBSERVICE 0x10217e20
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::creator''
 // SYNTHETIC: WEBSERVICE 0x10217e60
@@ -999,6 +1011,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::creator''
 // SYNTHETIC: WEBSERVICE 0x102211a0
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::creator''
+// SYNTHETIC: WEBSERVICE 0x102211e0
+// `dynamic atexit destructor for 'RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221980
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::creator''
 // SYNTHETIC: WEBSERVICE 0x102219c0

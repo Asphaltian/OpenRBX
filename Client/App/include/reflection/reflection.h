@@ -17,10 +17,16 @@ namespace RBX {
 namespace Reflection {
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x10006320
+// RBX::Reflection::FuncDesc<ThumbnailGenerator>::~FuncDesc<ThumbnailGenerator>
+// TEMPLATE: WEBSERVICE 0x10008b10
+// RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10008d50
 // RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10045560
 // RBX::Reflection::Described<RBX::Lighting,&RBX::sLighting,RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x1004b760
+// RBX::Reflection::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > ><std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::Instance::*)(void)const ,int>
 // TEMPLATE: WEBSERVICE 0x100561a0
 // RBX::Reflection::Described<RBX::RunService,&RBX::sRunService,RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100596e0
@@ -45,6 +51,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::RootInstance,&RBX::sRootInstance,RBX::ModelInstance>::classDescriptor
 // FUNCTION: WEBSERVICE 0x1006f520
 // RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x1007d7d0
+// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::GetSetImpl<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>::setValue
 // TEMPLATE: WEBSERVICE 0x10081b90
 // RBX::Reflection::Described<RBX::Soundscape::SoundChannel,&RBX::Soundscape::sSoundChannel,RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088d00
@@ -53,6 +61,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Hat,&RBX::sHat,RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088de0
 // RBX::Reflection::Described<RBX::StarterPackService,&RBX::sStarterPackService,RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x10088ec0
+// RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088f30
 // RBX::Reflection::Described<RBX::ShirtGraphic,&RBX::sShirtGraphic,RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088fa0
@@ -127,10 +137,10 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100be240
 // RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor
-// TEMPLATE: WEBSERVICE 0x10088ec0
-// RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100c3a60
 // RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x100d8960
+// RBX::Reflection::PropDescriptor<RBX::Motor,float>::PropDescriptor<RBX::Motor,float><float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
 // TEMPLATE: WEBSERVICE 0x100dabe0
 // RBX::Reflection::Described<RBX::Teams,&RBX::sTeams,RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100e0d60
@@ -181,6 +191,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Network::Players,&RBX::Network::sPlayers,RBX::NonFactoryProduct<RBX::Instance,&RBX::Network::sPlayers> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c2f0
 // RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor
+// SYNTHETIC: WEBSERVICE 0x10221000
+// `RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221010
 // `RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102215d0
@@ -203,6 +215,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::LocalScript,&RBX::sLocalScript,RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221bb0
 // `RBX::Reflection::Described<RBX::Script,&RBX::sScript,RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10221c70
+// `RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221c80
 // `RBX::Reflection::Described<RBX::RootInstance,&RBX::sRootInstance,RBX::ModelInstance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222430
@@ -259,6 +273,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::BodyColors,&RBX::sBodyColors,RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102226e0
 // `RBX::Reflection::Described<RBX::ShirtGraphic,&RBX::sShirtGraphic,RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10222700
+// `RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222720
 // `RBX::Reflection::Described<RBX::StarterPackService,&RBX::sStarterPackService,RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222730
@@ -267,26 +283,24 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::Accoutrement,&RBX::sAccoutrement,RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222750
 // `RBX::Reflection::Described<RBX::PartInstance,&RBX::sPart,RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
-// SYNTHETIC: WEBSERVICE 0x10222780
-// `RBX::Reflection::Described<RBX::AutoJoint,&RBX::sAutoJoint,RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
-// SYNTHETIC: WEBSERVICE 0x10222770
-// `RBX::Reflection::Described<RBX::Feature,&RBX::sFeature,RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222760
 // `RBX::Reflection::Described<RBX::Tool,&RBX::sTool,RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10222770
+// `RBX::Reflection::Described<RBX::Feature,&RBX::sFeature,RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10222780
+// `RBX::Reflection::Described<RBX::AutoJoint,&RBX::sAutoJoint,RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222790
 // `RBX::Reflection::Described<RBX::ObjectValue,&RBX::sObjectValue,RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
-// SYNTHETIC: WEBSERVICE 0x102227b0
-// `RBX::Reflection::Described<RBX::BackpackItem,&RBX::sBackpackItem,RBX::NonFactoryProduct<RBX::Widget,&RBX::sBackpackItem> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102227a0
 // `RBX::Reflection::Described<RBX::JointInstance,&RBX::sJointInstance,RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x102227b0
+// `RBX::Reflection::Described<RBX::BackpackItem,&RBX::sBackpackItem,RBX::NonFactoryProduct<RBX::Widget,&RBX::sBackpackItem> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222fe0
 // `RBX::Reflection::Described<RBX::Sky,&RBX::sSky,RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223960
 // `RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223aa0
 // `RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
-// SYNTHETIC: WEBSERVICE 0x10222700
-// `RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223b30
 // `RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223e70
@@ -309,6 +323,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::BodyForce,&RBX::sBodyForce,RBX::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246f0
 // `RBX::Reflection::Described<RBX::BodyGyro,&RBX::sBodyGyro,RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10224cc0
+// `RBX::Reflection::Described<RBX::SpawnLocation,&RBX::sSpawnLocation,RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224d70
 // `RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224d80
@@ -317,16 +333,6 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::FaceInstance,&RBX::sFaceInstance,RBX::Instance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102256d0
 // `RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
-// SYNTHETIC: WEBSERVICE 0x10221c70
-// `RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
-// SYNTHETIC: WEBSERVICE 0x10224cc0
-// `RBX::Reflection::Described<RBX::SpawnLocation,&RBX::sSpawnLocation,RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
-// TEMPLATE: WEBSERVICE 0x1004b760
-// RBX::Reflection::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > ><std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::Instance::*)(void)const ,int>
-// TEMPLATE: WEBSERVICE 0x1007d7d0
-// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::GetSetImpl<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>::setValue
-// TEMPLATE: WEBSERVICE 0x100d8960
-// RBX::Reflection::PropDescriptor<RBX::Motor,float>::PropDescriptor<RBX::Motor,float><float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
 // SYNTHETIC: WEBSERVICE 0x10225d20
 // `RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10225d30

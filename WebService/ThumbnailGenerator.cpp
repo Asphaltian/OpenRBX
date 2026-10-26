@@ -32,7 +32,7 @@ static RBX::Reflection::BoundFuncDesc<ThumbnailGenerator, std::string(std::strin
 		RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
 	);
 
-// STUB: WEBSERVICE 0x10006470
+// FUNCTION: WEBSERVICE 0x10006470
 ThumbnailGenerator::ThumbnailGenerator()
 {
 }
@@ -76,6 +76,8 @@ template const RBX::Name& RBX::Name::doDeclare<RBX::sLocalScript>();
 template void RBX::Name::callDoDeclare<RBX::sWorkspace>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sWorkspace>();
 
+template const RBX::FactoryProduct<ThumbnailGenerator, RBX::Instance, sThumbnailGenerator>::Creator
+	RBX::FactoryProduct<ThumbnailGenerator, RBX::Instance, sThumbnailGenerator>::creator;
 template const RBX::FactoryProduct<RBX::Lighting, RBX::Instance, RBX::sLighting>::Creator
 	RBX::FactoryProduct<RBX::Lighting, RBX::Instance, RBX::sLighting>::creator;
 template const RBX::FactoryProduct<RBX::RunService, RBX::Instance, RBX::sRunService>::Creator
