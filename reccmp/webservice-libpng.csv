@@ -96,6 +96,8 @@ address,size,type,symbol
 0x1014d8f0,0x2e,library,_png_write_chunk_data
 0x1014d920,0x28,library,_png_write_chunk_end
 0x1014d950,0x78,library,_png_write_sig
+0x1014d9d0,0x2a4,library,
+0x1014dc80,0xa0,library,
 0x1014dd20,0xb3,library,_png_write_PLTE
 0x1014dde0,0x79,library,_png_write_hIST
 0x1014de60,0x20b,library,_png_check_keyword
@@ -123,6 +125,9 @@ address,size,type,symbol
 0x1014fa40,0x1cd,library,_png_write_finish_row
 0x1014fc10,0xd1,library,_png_write_filtered_row
 0x1014fcf0,0xbbe,library,_png_write_find_filter
+0x101508b0,0x9a,library,
+0x10150950,0x12e,library,
+0x10150a80,0x151,library,
 0x10150be0,0x1a,library,_png_set_error_fn
 0x10150c00,0xa7,library,_png_error
 0x10150cb0,0x54,library,_png_warning

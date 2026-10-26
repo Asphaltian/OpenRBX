@@ -1,5 +1,6 @@
 address,size,type,symbol,name
 0x10003590,0x7f,library,?FormatV@?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QAEXPBDPAD@Z,
+0x10003610,0xd8,library,??HATL@@YA?AV?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@0@ABV10@PBD@Z,
 0x100036f0,0x69,library,?AddBackslash@?$CPathT@V?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@@ATL@@QAEXXZ,
 0x10003760,0x5f,library,?StripPath@?$CPathT@V?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@@ATL@@QAEXXZ,
 0x100039c0,0x80,library,?Concatenate@?$CSimpleStringT@D$0A@@ATL@@KAXAAV12@PBDH1H@Z,
@@ -707,6 +708,7 @@ address,size,type,symbol,name
 0x10035000,0x18,library,??1CRegKey@ATL@@QAE@XZ,
 0x10035020,0xd7,library,?SetSchemeName@CUrl@ATL@@QAEHPBD@Z,
 0x100351e0,0x43,library,??0CUrl@ATL@@QAE@XZ,
+0x10035230,0x2b,library,??8ATL@@YA_NABV?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@0@PBD@Z,
 0x10035be0,0x80,library,?Right@?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QBE?AV12@H@Z,
 0x10036890,0x3d2,library,?Parse@CUrl@ATL@@AAEHPBD@Z,
 0x10036d00,0x5c,library,?MakeLower@?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QAEAAV12@XZ,

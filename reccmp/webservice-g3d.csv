@@ -144,10 +144,19 @@ address,size,type,symbol,name
 0x1012ee30,0x26,library,?reserveBytes@BinaryOutput@G3D@@AAEXH@Z,
 0x1012ee60,0x1e,library,?getFilename@BinaryOutput@G3D@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
 0x1012ee80,0x4d,library,?setLength@BinaryOutput@G3D@@QAEXH@Z,
+0x1012eed0,0x1a,library,,init_destination
+0x1012eef0,0x15,library,,empty_output_buffer
+0x1012ef10,0x11,library,,term_destination
+0x1012ef30,0x3f,library,,jpeg_memory_dest
+0x1012ef70,0xc,library,,init_source
+0x1012ef80,0x41,library,,fill_input_buffer
+0x1012efd0,0x31,library,,skip_input_data
+0x1012f010,0x70,library,,jpeg_memory_src
 0x1012f080,0x15f,library,?flipRGBVertical@GImage@G3D@@SAXPBEPAEHH@Z,
 0x1012f1e0,0x167,library,?flipRGBAVertical@GImage@G3D@@SAXPBEPAEHH@Z,
 0x1012f350,0x2ab,library,?encodeBMP@GImage@G3D@@ABEXAAVBinaryOutput@2@@Z,
 0x1012f600,0x394,library,?encodeTGA@GImage@G3D@@ABEXAAVBinaryOutput@2@@Z,
+0x1012f9a0,0x95,library,,G3D::error_exception
 0x1012fa40,0x47,library,?png_write_data@G3D@@YAXPAUpng_struct_def@@PAEI@Z,
 0x1012fa90,0x7a,library,?png_error@G3D@@YAXPAUpng_struct_def@@PBD@Z,
 0x1012fb10,0x5a,library,??1Error@GImage@G3D@@QAE@XZ,
@@ -160,6 +169,7 @@ address,size,type,symbol,name
 0x10131130,0x2a2,library,?decodeJPEG@GImage@G3D@@AAEXAAVBinaryInput@2@@Z,
 0x101313e0,0x17,library,?png_read_data@G3D@@YAXPAUpng_struct_def@@PAEI@Z,
 0x10131400,0x425,library,?decodePNG@GImage@G3D@@AAEXAAVBinaryInput@2@@Z,
+0x10131830,0x1ca,library,,G3D::scanUInt
 0x10131a00,0x26,library,?clear@GImage@G3D@@QAEXXZ,
 0x10131a30,0x1c0,library,?stringToFormat@GImage@G3D@@SA?AW4Format@12@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x10131bf0,0x78,library,??1TextOutput@G3D@@QAE@XZ,
@@ -548,6 +558,10 @@ address,size,type,symbol,name
 0x101c4f40,0x45,library,?executeLoopBody@GWindow@G3D@@IAEXXZ,
 0x101c4f90,0x36,library,?pushLoopBody@GWindow@G3D@@UAEXPAVGApplet@2@@Z,
 0x101c4fd0,0x3e,library,?popLoopBody@GWindow@G3D@@UAEXXZ,
+0x101c5010,0x50,library,,G3D::toGLBlendFunc
+0x101c5060,0x79,library,,G3D::_glViewport
+0x101c50e0,0x5c,library,,G3D::primitiveToGLenum
+0x101c5140,0x12,library,,G3D::isOk
 0x101c5160,0x9,library,?setCaption@RenderDevice@G3D@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x101c5170,0x19,library,?project@RenderDevice@G3D@@QBE?AVVector4@2@ABV32@@Z,
 0x101c5190,0x93,library,??4Matrices@RenderState@RenderDevice@G3D@@QAEAAV0123@ABV0123@@Z,
@@ -566,6 +580,7 @@ address,size,type,symbol,name
 0x101c56a0,0x2b,library,?disableClip2D@RenderDevice@G3D@@QAEXXZ,
 0x101c56d0,0x2a,library,?getViewport@RenderDevice@G3D@@QBE?AVRect2D@2@XZ,
 0x101c5700,0x128,library,?setDepthTest@RenderDevice@G3D@@QAEXW4DepthTest@12@@Z,
+0x101c5830,0x64,library,,G3D::toGLEnum
 0x101c58a0,0x8c,library,?_setStencilTest@RenderDevice@G3D@@AAEXW4StencilTest@12@H@Z,
 0x101c5930,0x2e,library,?setStencilConstant@RenderDevice@G3D@@QAEXH@Z,
 0x101c5960,0x9f,library,?setStencilTest@RenderDevice@G3D@@QAEXW4StencilTest@12@@Z,
@@ -573,6 +588,7 @@ address,size,type,symbol,name
 0x101c5b60,0x80,library,?toGLStencilOp@RenderDevice@G3D@@ABEHW4StencilOp@12@@Z,
 0x101c5be0,0x250,library,?setStencilOp@RenderDevice@G3D@@QAEXW4StencilOp@12@00000@Z,
 0x101c5e30,0x1c,library,?setStencilOp@RenderDevice@G3D@@QAEXW4StencilOp@12@00@Z,
+0x101c5e50,0x44,library,,G3D::toGLBlendEq
 0x101c5ea0,0x15a,library,?setBlendFunc@RenderDevice@G3D@@QAEXW4BlendFunc@12@0W4BlendEq@12@@Z,
 0x101c6000,0x45,library,?setLineWidth@RenderDevice@G3D@@QAEXN@Z,
 0x101c6050,0x45,library,?setPointSize@RenderDevice@G3D@@QAEXN@Z,
@@ -711,11 +727,21 @@ address,size,type,symbol,name
 0x101cdb50,0x6d,library,?arrow@Draw@G3D@@SAXABVVector3@2@0PAVRenderDevice@2@ABVColor4@2@M@Z,
 0x101cdbc0,0x99d,library,?axes@Draw@G3D@@SAXABVCoordinateFrame@2@PAVRenderDevice@2@ABVColor4@2@22M@Z,
 0x101ce560,0x32,library,?axes@Draw@G3D@@SAXPAVRenderDevice@2@ABVColor4@2@11M@Z,
+0x101ce5a0,0xcb,library,,G3D::hasAutoMipMap
 0x101ce670,0x32,library,??0Settings@Texture@G3D@@QAE@XZ,
 0x101ce6b0,0x23,library,?defaults@Settings@Texture@G3D@@SAABV123@XZ,
 0x101ce6e0,0x54,library,?video@Settings@Texture@G3D@@SAABV123@XZ,
+0x101ce740,0x28,library,,G3D::glStatePush
+0x101ce770,0xc,library,,G3D::glStatePop
+0x101ce780,0x3c,library,,G3D::dimensionToTarget
+0x101ce7c0,0x1ec,library,,G3D::createTexture
+0x101ce9b0,0x16b,library,,G3D::createMipMapTexture
+0x101ceb20,0x2a4,library,,G3D::setTexParameters
+0x101cedd0,0xa6,library,,G3D::brightenImage
+0x101cee80,0x10c,library,,G3D::isMipMapformat
 0x101cef90,0x193,library,?splitFilenameAtWildCard@Texture@G3D@@SAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAV34@1@Z,
 0x101cf130,0xf3,library,?newGLTextureID@Texture@G3D@@SAIXZ,
+0x101cf230,0x6c,library,,G3D::getCurrentBuffer
 0x101cf2a0,0x82,library,?sizeInMemory@Texture@G3D@@QBEIXZ,
 0x101cf330,0x40,library,?getOpenGLTextureTarget@Texture@G3D@@QBEIXZ,
 0x101cf370,0x155,library,??0Texture@G3D@@AAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@IW4Dimension@01@PBVTextureFormat@1@W4InterpolateMode@01@W4WrapMode@01@_NW4DepthReadMode@01@M@Z,
@@ -750,6 +776,8 @@ address,size,type,symbol,name
 0x101d2340,0xc69,library,?setTime@LightingParameters@G3D@@QAEXN@Z,
 0x101d2fb0,0x82,library,??0LightingParameters@G3D@@QAE@XZ,
 0x101d6580,0x45,library,?setColor@RenderDevice@G3D@@QAEXABVColor3@2@@Z,
+0x101d65d0,0x352,library,,G3D::drawCelestialSphere
+0x101d6930,0x35,library,,G3D::hackProjectionMatrix
 0x101d6970,0x13b,library,?vertex@Sky@G3D@@ABEXPAVRenderDevice@2@MMMMM@Z,
 0x101d6ab0,0x18b,library,??1Sky@G3D@@UAE@XZ,
 0x101d6c40,0x691,library,?renderBox@Sky@G3D@@ABEXPAVRenderDevice@2@@Z,
@@ -809,6 +837,7 @@ address,size,type,symbol,name
 0x101dd660,0x14,library,??1?$Set@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@G3D@@UAE@XZ,
 0x101dd680,0x2d,library,??_E?$Set@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@G3D@@UAEPAXI@Z,
 0x101dd6b0,0xb0,library,?videoMemorySize@DXCaps@G3D@@SA_KXZ,
+0x101dd760,0x5a,library,,G3D::_getGLMatrix
 0x101dd7c0,0x25,library,?glLoadMatrix@G3D@@YAXABVCoordinateFrame@1@@Z,
 0x101dd7f0,0x45,library,?glLoadMatrix@G3D@@YAXABVMatrix4@1@@Z,
 0x101dd840,0x47,library,?glDisableAllTextures@G3D@@YAXXZ,
@@ -828,6 +857,7 @@ address,size,type,symbol,name
 0x101ddf60,0x8b,library,??1GPUShader@VertexAndPixelShader@G3D@@QAE@XZ,
 0x101ddff0,0x6e,library,??0GPUShader@VertexAndPixelShader@G3D@@QAE@XZ,
 0x101de060,0x45,library,?isSamplerType@VertexAndPixelShader@G3D@@KA_NI@Z,
+0x101de0b0,0x167,library,,G3D::toGLType
 0x101de220,0x89,library,?canonicalType@VertexAndPixelShader@G3D@@KAII@Z,
 0x101de2b0,0x63,library,?get@?$Table@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VArg@ArgList@VertexAndPixelShader@G3D@@@G3D@@QBEAAVArg@ArgList@VertexAndPixelShader@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x101de320,0x72,library,?containsKey@?$Table@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VArg@ArgList@VertexAndPixelShader@G3D@@@G3D@@QBE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
@@ -875,6 +905,7 @@ address,size,type,symbol,name
 0x101ed450,0x69,library,?createIndexArray@MeshAlg@G3D@@SAXHAAV?$Array@H@2@HHH@Z,
 0x101ed4c0,0x39,library,??4?$Array@H@G3D@@QAEAAV01@ABV01@@Z,
 0x101ed500,0xd,library,?hashCode@@YAIABVMeshDirectedEdgeKey@G3D@@@Z,
+0x101ed510,0x29,library,,G3D::assignEdgeIndex
 0x101ed540,0x59,library,?containsKey@?$Table@VMeshDirectedEdgeKey@G3D@@V?$Array@H@2@@G3D@@QBE_NABVMeshDirectedEdgeKey@2@@Z,
 0x101ed5a0,0x5b,library,?get@?$Table@VMeshDirectedEdgeKey@G3D@@V?$Array@H@2@@G3D@@QBEAAV?$Array@H@2@ABVMeshDirectedEdgeKey@2@@Z,
 0x101ed600,0x1c,library,??1Entry@?$Table@VMeshDirectedEdgeKey@G3D@@V?$Array@H@2@@G3D@@QAE@XZ,
@@ -952,3 +983,48 @@ address,size,type,symbol,name
 0x101fbf30,0x2b7,library,??0ToneMap@G3D@@QAE@XZ,
 0x101ef5a0,0x50,library,?setPointer@?$ReferenceCountedPointer@VVertexAndPixelShader@G3D@@@G3D@@AAEXPAVVertexAndPixelShader@2@@Z,
 0x10030fb0,0x19,library,??0?$ReferenceCountedPointer@VVertexAndPixelShader@G3D@@@G3D@@QAE@PAVVertexAndPixelShader@1@@Z,
+0x1021fc70,0x17,library,,`dynamic initializer for 'G3D::RenderDevice::dummyString''
+0x1021fc90,0xc,library,,`dynamic initializer for 'G3D::VARArea::allVARAreas''
+0x1021fca0,0x6f,library,,`dynamic initializer for 'G3D::TextureFormat::L8''
+0x1021fd10,0x73,library,,`dynamic initializer for 'G3D::TextureFormat::L16''
+0x1021fd90,0x73,library,,`dynamic initializer for 'G3D::TextureFormat::L16F''
+0x1021fe10,0x73,library,,`dynamic initializer for 'G3D::TextureFormat::L32F''
+0x1021fe90,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::A8''
+0x1021ff10,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::A16''
+0x1021ff90,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::A16F''
+0x10220010,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::A32F''
+0x10220090,0x7a,library,,`dynamic initializer for 'G3D::TextureFormat::LA4''
+0x10220110,0x7b,library,,`dynamic initializer for 'G3D::TextureFormat::LA8''
+0x10220190,0x7b,library,,`dynamic initializer for 'G3D::TextureFormat::LA16''
+0x10220210,0x7b,library,,`dynamic initializer for 'G3D::TextureFormat::LA16F''
+0x10220290,0x7b,library,,`dynamic initializer for 'G3D::TextureFormat::LA32F''
+0x10220310,0x7c,library,,`dynamic initializer for 'G3D::TextureFormat::RGB5''
+0x10220390,0x7d,library,,`dynamic initializer for 'G3D::TextureFormat::RGB5A1''
+0x10220410,0x7f,library,,`dynamic initializer for 'G3D::TextureFormat::RGB8''
+0x10220490,0x78,library,,`dynamic initializer for 'G3D::TextureFormat::RGB16''
+0x10220510,0x7c,library,,`dynamic initializer for 'G3D::TextureFormat::RGB16F''
+0x10220590,0x7c,library,,`dynamic initializer for 'G3D::TextureFormat::RGB32F''
+0x10220610,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::RGBA8''
+0x10220690,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::RGBA16''
+0x10220710,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::RGBA16F''
+0x10220790,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::RGBA32F''
+0x10220810,0x78,library,,`dynamic initializer for 'G3D::TextureFormat::RGB_DXT1''
+0x10220890,0x7b,library,,`dynamic initializer for 'G3D::TextureFormat::RGBA_DXT1''
+0x10220910,0x7b,library,,`dynamic initializer for 'G3D::TextureFormat::RGBA_DXT3''
+0x10220990,0x7b,library,,`dynamic initializer for 'G3D::TextureFormat::RGBA_DXT5''
+0x10220a10,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::DEPTH16''
+0x10220a90,0x7a,library,,`dynamic initializer for 'G3D::TextureFormat::DEPTH24''
+0x10220b10,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::DEPTH32''
+0x10220b90,0x72,library,,`dynamic initializer for 'G3D::TextureFormat::STENCIL1''
+0x10220c10,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::STENCIL4''
+0x10220c90,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::STENCIL8''
+0x10220d10,0x76,library,,`dynamic initializer for 'G3D::TextureFormat::STENCIL16''
+0x10220d90,0xc,library,,G3D::`dynamic initializer for '_textureFormatCleanup''
+0x10220da0,0x32,library,,G3D::`dynamic initializer for '_supportedTextureFormat''
+0x10220de0,0x32,library,,`dynamic initializer for 'G3D::GLCaps::extensionSet''
+0x10220e20,0xc,library,,`dynamic initializer for 'G3D::Milestone::factory''
+0x10220e30,0xc,library,,`dynamic initializer for 'G3D::Win32Window::_shareWindow''
+0x10220ed0,0x32,library,,G3D::`dynamic initializer for 'edgeTable''
+0x10220f30,0x24,library,,`dynamic initializer for 'G3D::ToneMap::bloomShader''
+0x10220f60,0xc,library,,`dynamic initializer for 'G3D::ToneMap::RG''
+0x10220f70,0xc,library,,`dynamic initializer for 'G3D::ToneMap::B''
