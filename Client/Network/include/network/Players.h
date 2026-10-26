@@ -5,12 +5,19 @@
 #include "network/Player.h"
 #include "network/SuperSafeChanged.h"
 #include "util/Events.h"
+#include "util/boost.hpp"
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
 
+#include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/thread/mutex.hpp>
+#include <list>
+#include <queue>
+#include <string>
 
 class RakPeerInterface;
+struct Packet;
 
 namespace RBX {
 
@@ -30,6 +37,60 @@ struct ChatMessage
 
 DECOMP_SIZE_ASSERT(ChatMessage, 0x2c)
 
+// SIZE 0x30
+struct AbuseReport
+{
+	// SIZE 0x20
+	struct Message
+	{
+		int userID;       // 0x00
+		std::string text; // 0x04
+	};
+
+	int submitterID;             // 0x00
+	int allegedAbuserID;         // 0x04
+	std::string comment;         // 0x08
+	std::list<Message> messages; // 0x24
+
+	void addMessage(const ChatMessage& cm);
+};
+
+DECOMP_SIZE_ASSERT(AbuseReport::Message, 0x20)
+DECOMP_SIZE_ASSERT(AbuseReport, 0x30)
+
+// SIZE 0x0c
+class AbuseReporter
+{
+	// SIZE 0x1c
+	struct data
+	{
+		std::queue<AbuseReport> queue; // 0x00
+		boost::mutex requestSync;      // 0x14
+	};
+
+	boost::shared_ptr<data> _data;                     // 0x00
+	boost::scoped_ptr<worker_thread> requestProcessor; // 0x08
+
+public:
+	AbuseReporter(std::string abuseUrl);
+
+	void add(AbuseReport& r, const std::list<ChatMessage>& chatHistory);
+
+private:
+	static worker_thread::work_result processRequests(boost::shared_ptr<data> _data, std::string abuseUrl);
+};
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10191750
+// RBX::Network::AbuseReporter::~AbuseReporter
+// SYNTHETIC: WEBSERVICE 0x10195460
+// RBX::Network::AbuseReporter::data::~data
+// SYNTHETIC: WEBSERVICE 0x101954c0
+// RBX::Network::AbuseReporter::data::data
+// clang-format on
+
+DECOMP_SIZE_ASSERT(AbuseReporter, 0x0c)
+
 // SIZE 0x158
 class Players : public DescribedNonCreatable<Players, Instance, sPlayers>,
 				public Service,
@@ -37,39 +98,59 @@ class Players : public DescribedNonCreatable<Players, Instance, sPlayers>,
 				public Notifier<Players, SuperSafeChanged>,
 				public Listener<Player, CharacterAdded>
 {
+	boost::scoped_ptr<AbuseReporter> abuseReporter; // 0x12c
+	std::list<ChatMessage> chatHistory;             // 0x130
+
+	class Plugin;
+
+	boost::scoped_ptr<Plugin> plugin;                                // 0x13c
+	CopyOnWrite<std::vector<boost::shared_ptr<Instance> > > players; // 0x140
+	boost::shared_ptr<Player> localPlayer;                           // 0x148
+	RakPeerInterface* peer;                                          // 0x150
+	int maxPlayers;                                                  // 0x154
+
+	virtual void onEvent(const Player* source, CharacterAdded event);
+	virtual void onChildChanged(Instance* instance, const PropertyChanged& event);
+
 public:
+	Players();
+	virtual ~Players();
+
+	// SYNTHETIC: WEBSERVICE 0x10193090
+	// RBX::Network::Players::`scalar deleting destructor'
+
+	// FUNCTION: WEBSERVICE 0x10072560
+	Player* getLocalPlayer() const { return localPlayer.get(); }
+
+	int numPlayers() const { return players->size(); }
+
 	// FUNCTION: WEBSERVICE 0x10190c40
 	int getMaxPlayers() const { return maxPlayers; }
 
 	void setMaxPlayers(int value);
 
-	int numPlayers() const { return players->size(); }
-
-	// FUNCTION: WEBSERVICE 0x10072560
-	Player* getLocalPlayer() const { return localPlayer.get(); }
-
-	static bool frontendProcessing(const Instance* context, bool testInDatamodel);
-	static bool backendProcessing(const Instance* context, bool testInDatamodel);
-
-	static bool clientIsPresent(const Instance* context, bool testInDatamodel);
+	bool OnReceive(RakPeerInterface* peer, Packet* packet);
+	void setConnection(RakPeerInterface* peer);
 
 	static RBX::ModelInstance* findLocalCharacter(const Instance* context);
 	static Player* findLocalPlayer(const Instance* context);
 
-private:
-	virtual void onEvent(const Player* source, CharacterAdded event);
+	static bool clientIsPresent(const Instance* context, bool testInDatamodel);
+	static bool frontendProcessing(const Instance* context, bool testInDatamodel);
+	static bool backendProcessing(const Instance* context, bool testInDatamodel);
 
-public:
-
-private:
-	undefined m_unk0x12c[0x140 - 0x12c];                             // 0x12c
-	CopyOnWrite<std::vector<boost::shared_ptr<Instance> > > players; // 0x140
-	boost::shared_ptr<Player> localPlayer;                           // 0x148
-	RakPeerInterface* peer;                                          // 0x150
-	int maxPlayers;                                                  // 0x154
+protected:
+	virtual bool askAddChild(const Instance* instance) const;
 };
 
 DECOMP_SIZE_ASSERT(Players, 0x158)
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10190e60
+// RBX::Network::Players::Plugin::`scalar deleting destructor'
+// TEMPLATE: WEBSERVICE 0x10193670
+// RBX::DescribedNonCreatable<RBX::Network::Players,RBX::Instance,&RBX::Network::sPlayers>::DescribedNonCreatable<RBX::Network::Players,RBX::Instance,&RBX::Network::sPlayers>
+// clang-format on
 
 } // namespace Network
 } // namespace RBX

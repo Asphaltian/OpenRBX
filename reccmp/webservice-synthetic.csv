@@ -541,6 +541,8 @@ address,type,symbol
 0x1018ee60,synthetic,??0?$SignalDesc@VPlayer@Network@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@QAE@PBD00@Z
 0x1018efa0,synthetic,?newSignalInstance@?$TSignalDesc@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@EBEPAVSignalInstance@23@AAVSignalSource@23@@Z
 0x10190250,synthetic,?connectGeneric@?$SignalDescImpl@$01$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@MBE?AVconnection@signals@boost@@PAVSignalInstance@23@PAVGenericSlotWrapper@23@W4connect_position@56@@Z
+0x10190d50,synthetic,??0?$NonFactoryProduct@VInstance@RBX@@$1?sPlayers@Network@2@3PADA@RBX@@QAE@XZ
+0x10193210,synthetic,??0?$Described@VPlayers@Network@RBX@@$1?sPlayers@23@3PADAV?$NonFactoryProduct@VInstance@RBX@@$1?sPlayers@Network@2@3PADA@3@@Reflection@RBX@@QAE@XZ
 0x10196b30,synthetic,??1?$shared_ptr@VPartInstance@RBX@@@boost@@QAE@XZ
 0x1019b420,synthetic,??_E?$DescribedCreatable@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UAEPAXI@Z
 0x1019b580,synthetic,?getClassName@?$FactoryProduct@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UBEABVName@2@XZ

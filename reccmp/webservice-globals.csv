@@ -7014,4 +7014,17 @@ address,type,symbol
 0x1024eb38,global,??_7Player@Network@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
 0x1024eb40,global,??_7Player@Network@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
 0x1024eb4c,global,??_7Player@Network@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@
+0x1024ef1c,global,??_7Players@Network@RBX@@6B?$Listener@VPlayer@Network@RBX@@UCharacterAdded@23@@2@@
+0x1024ef28,global,??_7Players@Network@RBX@@6B?$Notifier@VPlayers@Network@RBX@@VSuperSafeChanged@3@@2@@
+0x1024ef38,global,??_7Players@Network@RBX@@6B?$Notifier@VPlayers@Network@RBX@@UChatMessage@23@@2@@
+0x1024ef48,global,??_7Players@Network@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
+0x1024ef58,global,??_7Players@Network@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
+0x1024ef68,global,??_7Players@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@2@@
+0x1024ef78,global,??_7Players@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
+0x1024ef88,global,??_7Players@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@2@@
+0x1024ef98,global,??_7Players@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@2@@
+0x1024efa8,global,??_7Players@Network@RBX@@6BDebugable@2@@
+0x1024efb0,global,??_7Players@Network@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
+0x1024efb8,global,??_7Players@Network@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
+0x1024efc4,global,??_7Players@Network@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@
 0x102f571c,global,flag___RBX::ServiceProvider::getClassIndex<RBX::RunService>
