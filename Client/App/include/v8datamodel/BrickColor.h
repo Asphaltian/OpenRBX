@@ -163,6 +163,7 @@ public:
 	static BrickColor legoGreen() { return BrickColor(lego_28); }
 	static BrickColor legoBlue() { return BrickColor(lego_23); }
 
+	G3D::Color4 color4() const;
 	G3D::Color3 color3() const;
 
 	const std::string& name() const;
