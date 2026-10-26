@@ -9,8 +9,11 @@
 #include <iosfwd>
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace RBX {
+
+class Instance;
 
 // SIZE 0x20
 class ContentId
@@ -64,6 +67,8 @@ public:
 	bool requestContentFile(ContentId id, std::string& filename);
 
 	boost::shared_ptr<const std::string> requestContentString(ContentId id);
+
+	void load(ContentId id, std::vector<boost::shared_ptr<Instance> >& instances);
 
 	std::string assetFolder() const;
 

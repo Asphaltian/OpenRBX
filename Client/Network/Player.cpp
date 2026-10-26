@@ -4,10 +4,21 @@
 #include "network/Players.h"
 #include "reflection/property.h"
 #include "security/SecurityContext.h"
+#include "util/ContentProvider.h"
+#include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/Backpack.h"
 #include "v8datamodel/Camera.h"
+#include "v8datamodel/CharacterAppearance.h"
 #include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/TimerService.h"
 #include "v8datamodel/Workspace.h"
+#include "v8world/World.h"
+
+#include <G3D/System.h>
+#include <algorithm>
+#include <boost/algorithm/string.hpp>
+#include <boost/bind.hpp>
+#include <stdexcept>
 
 namespace RBX {
 namespace Network {
@@ -19,6 +30,13 @@ static Reflection::RefPropDescriptor<Player, ModelInstance> prop_Character(
 	"Data",
 	&RBX::Network::Player::getCharacter,
 	&RBX::Network::Player::setCharacter
+);
+
+static Reflection::PropDescriptor<Player, std::string> prop_characterAppearance(
+	"CharacterAppearance",
+	"Data",
+	&RBX::Network::Player::getCharacterAppearance,
+	&RBX::Network::Player::setCharacterAppearance
 );
 
 static Reflection::PropDescriptor<Player, BrickColor> prop_teamColor(
@@ -34,6 +52,48 @@ static Reflection::PropDescriptor<Player, bool> prop_neutral(
 	&RBX::Network::Player::getNeutral,
 	&RBX::Network::Player::setNeutral
 );
+
+static Reflection::SignalDesc<Player, void(float)> event_Idled("Idled", "time");
+
+// FUNCTION: WEBSERVICE 0x1018c3b0
+std::string Player::getCharacterAppearance() const
+{
+	return characterAppearance;
+}
+
+// FUNCTION: WEBSERVICE 0x1018c3e0
+static void setAppearanceParentNull(Instance* instance)
+{
+	if (dynamic_cast<CharacterAppearance*>(instance)) {
+		instance->setParent(NULL);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018c540
+static void setAppearanceParent(boost::shared_ptr<Instance> parent, boost::shared_ptr<Instance> instance)
+{
+	if (dynamic_cast<CharacterAppearance*>(instance.get())) {
+		instance->setParent(parent.get());
+	}
+	else if (dynamic_cast<Accoutrement*>(instance.get())) {
+		instance->setParent(parent.get());
+	}
+	else {
+		throw std::runtime_error("Attempt to add a non-CharacterAppearance/Accoutrement object to a character");
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018cf20
+void Player::removeCharacterAppearance()
+{
+	if (!Players::backendProcessing(this, true)) {
+		throw std::runtime_error("RemoveCharacterAppearance can only be called by the backend server");
+	}
+
+	if (character) {
+		character->for_eachChild(setAppearanceParentNull);
+	}
+}
 
 // FUNCTION: WEBSERVICE 0x1018cfb0
 Backpack* Player::getPlayerBackpack() const
@@ -105,10 +165,59 @@ void Player::setNeutral(bool value)
 	}
 }
 
-// STUB: WEBSERVICE 0x1018fb20
+// FUNCTION: WEBSERVICE 0x1018fa20
+void Player::doPeriodicIdleCheck()
+{
+	if (!ServiceProvider::findServiceProvider(this)) {
+		return;
+	}
+
+	if (lastActivityTime != 0.0) {
+		double idleTime = G3D::System::getLocalTime() - lastActivityTime;
+
+		if (idleTime > 120.0) {
+			Players* players = ServiceProvider::find<Players>(this);
+
+			if (players && players->getLocalPlayer() && Players::clientIsPresent(this, true)) {
+				event_Idled.fire(this, idleTime);
+			}
+		}
+	}
+
+	TimerService* timer = ServiceProvider::create<TimerService>(this);
+
+	if (timer) {
+		timer->delay(boost::bind(&Player::doPeriodicIdleCheck, shared_from(this)), 30.0);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018fb20
 void Player::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
-	STUB(0x1018fb20);
+	if (oldProvider && Players::backendProcessing(oldProvider, true)) {
+		setCharacter(NULL);
+	}
+
+	Instance::onServiceProvider(oldProvider, newProvider);
+
+	if (newProvider && Players::frontendProcessing(newProvider, true)) {
+		onCharacterChangedFrontend();
+	}
+
+	if (!oldProvider && Players::frontendProcessing(newProvider, true)) {
+		lastActivityTime = G3D::System::getLocalTime();
+		doPeriodicIdleCheck();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1018fba0
+void Player::removeCharacter()
+{
+	if (!Players::backendProcessing(this, true)) {
+		throw std::runtime_error("RemoveCharacter can only be called by the backend server");
+	}
+
+	setCharacter(NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x1018fce0
@@ -131,6 +240,61 @@ Player::Player()
 {
 	Security::Context::current().requirePermission(Security::Administrator, "create a Player");
 	setName(sPlayer);
+}
+
+// STUB: WEBSERVICE 0x10190340
+void Player::loadCharacterAppearance()
+{
+	if (!Players::backendProcessing(this, true)) {
+		throw std::runtime_error("LoadCharacterAppearance can only be called by the backend server");
+	}
+
+	removeCharacterAppearance();
+
+	if (character && !characterAppearance.empty()) {
+		std::vector<boost::shared_ptr<Instance> > characterApperance;
+
+		{
+			std::vector<std::string> strings;
+			boost::algorithm::split(strings, characterAppearance, boost::algorithm::is_any_of(";"));
+
+			for (unsigned int i = 0; i < strings.size(); ++i) {
+				ContentProvider::singleton().load(ContentId(strings[i]), characterApperance);
+			}
+		}
+
+		std::for_each(
+			characterApperance.begin(),
+			characterApperance.end(),
+			boost::bind(&setAppearanceParent, character, _1)
+		);
+
+		Workspace* workspace = ServiceProvider::find<Workspace>(this);
+
+		if (workspace) {
+			workspace->getWorld()->update();
+		}
+	}
+}
+
+// STUB: WEBSERVICE 0x101905d0
+void Player::loadCharacter()
+{
+	STUB(0x101905d0);
+}
+
+// FUNCTION: WEBSERVICE 0x10190bf0
+void Player::setCharacterAppearance(const std::string& value)
+{
+	if (value != characterAppearance) {
+		characterAppearance = value;
+
+		if (Players::backendProcessing(this, false)) {
+			loadCharacterAppearance();
+		}
+
+		raisePropertyChanged(prop_characterAppearance);
+	}
 }
 
 } // namespace Network

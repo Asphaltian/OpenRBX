@@ -543,6 +543,8 @@ public:
 	// RBX::Reflection::SignalDesc<RBX::Value<G3D::Color3,&RBX::sColor3Value>,void __cdecl(G3D::Color3)>::SignalDesc<RBX::Value<G3D::Color3,&RBX::sColor3Value>,void __cdecl(G3D::Color3)>
 	// TEMPLATE: WEBSERVICE 0x100f2e20
 	// RBX::Reflection::SignalDesc<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,void __cdecl(RBX::BrickColor)>::SignalDesc<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,void __cdecl(RBX::BrickColor)>
+	// TEMPLATE: WEBSERVICE 0x1018f2e0
+	// RBX::Reflection::SignalDesc<RBX::Network::Player,void __cdecl(float)>::SignalDesc<RBX::Network::Player,void __cdecl(float)>
 	// clang-format on
 	SignalDesc(const char* name, const char* arg1name)
 		: SignalDescImpl<boost::function_traits<Signature>::arity, Signature>(Class::classDescriptor(), name)

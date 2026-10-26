@@ -52,7 +52,6 @@ class Player : public DescribedCreatable<Player, Instance, sPlayer>,
 	bool under13;                                              // 0x168
 	bool superSafeChat;                                        // 0x169
 	int userId;                                                // 0x16c
-	double lastActivityTime;                                   // 0x170
 
 	virtual bool askAddChild(const Instance* instance) const { return true; }
 
@@ -86,7 +85,20 @@ public:
 
 	void setNeutral(bool value);
 
+	std::string getCharacterAppearance() const;
+	void setCharacterAppearance(const std::string& value);
+
 	Backpack* getPlayerBackpack() const;
+
+	void loadCharacter();
+	void removeCharacter();
+	void removeCharacterAppearance();
+	void loadCharacterAppearance();
+
+private:
+	void doPeriodicIdleCheck();
+
+	double lastActivityTime; // 0x170
 };
 
 DECOMP_SIZE_ASSERT(Player, 0x178)
@@ -94,8 +106,16 @@ DECOMP_SIZE_ASSERT(Player, 0x178)
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021f2e0
 // RBX::Network::`dynamic initializer for 'prop_Character''
+// SYNTHETIC: WEBSERVICE 0x1021f320
+// RBX::Network::`dynamic initializer for 'prop_characterAppearance''
+// SYNTHETIC: WEBSERVICE 0x1021f4a0
+// RBX::Network::`dynamic initializer for 'event_Idled''
 // SYNTHETIC: WEBSERVICE 0x10225e50
 // RBX::Network::`dynamic atexit destructor for 'prop_Character''
+// SYNTHETIC: WEBSERVICE 0x10225ef0
+// RBX::Network::`dynamic atexit destructor for 'prop_characterAppearance''
+// SYNTHETIC: WEBSERVICE 0x10225f60
+// RBX::Network::`dynamic atexit destructor for 'event_Idled''
 // clang-format on
 
 } // namespace Network

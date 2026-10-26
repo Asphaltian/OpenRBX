@@ -145,6 +145,8 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::create<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106a30
 // RBX::ServiceProvider::create<RBX::GeometryService>
+// TEMPLATE: WEBSERVICE 0x1018f3b0
+// RBX::ServiceProvider::create<RBX::TimerService>
 // SYNTHETIC: WEBSERVICE 0x10079940
 // RBX::ServiceProvider::~ServiceProvider
 // SYNTHETIC: WEBSERVICE 0x102218d0

@@ -112,4 +112,10 @@ boost::shared_ptr<const std::string> ContentProvider::requestContentString(Conte
 	return boost::shared_ptr<const std::string>();
 }
 
+// STUB: WEBSERVICE 0x10053f00
+void ContentProvider::load(ContentId id, std::vector<boost::shared_ptr<Instance> >& instances)
+{
+	STUB(0x10053f00);
+}
+
 } // namespace RBX
