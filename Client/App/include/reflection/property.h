@@ -1,3 +1,11 @@
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x10043670
+// RBX::Reflection::PropDescriptor<RBX::Lighting,G3D::Color3>::getset<G3D::Color3 (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(G3D::Color3)>
+// clang-format on
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x10043730
+// RBX::Reflection::PropDescriptor<RBX::Lighting,float>::getset<float (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(float)>
+// clang-format on
 #ifndef REFLECTION_PROPERTY_H
 #define REFLECTION_PROPERTY_H
 
@@ -486,6 +494,10 @@ public:
 	};
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10042e00
+	// RBX::Reflection::PropDescriptor<RBX::Lighting,G3D::Color3>::GetSetImpl<G3D::Color3 (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(G3D::Color3)>::getValue
+	// TEMPLATE: WEBSERVICE 0x10042e40
+	// RBX::Reflection::PropDescriptor<RBX::Lighting,G3D::Color3>::GetSetImpl<G3D::Color3 (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(G3D::Color3)>::setValue
 	// FUNCTION: WEBSERVICE 0x100433c0
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// FUNCTION: WEBSERVICE 0x10043430
@@ -744,6 +756,10 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10045640
+	// RBX::Reflection::PropDescriptor<RBX::Lighting,G3D::Color3>::PropDescriptor<RBX::Lighting,G3D::Color3><G3D::Color3 (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(G3D::Color3)>
+	// TEMPLATE: WEBSERVICE 0x10045780
+	// RBX::Reflection::PropDescriptor<RBX::Lighting,float>::PropDescriptor<RBX::Lighting,float><float (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x10099c10
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame><int,void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x1009e0b0

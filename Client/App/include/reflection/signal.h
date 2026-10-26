@@ -525,6 +525,8 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10045aa0
+	// RBX::Reflection::SignalDesc<RBX::Lighting,void __cdecl(bool)>::SignalDesc<RBX::Lighting,void __cdecl(bool)>
 	// TEMPLATE: WEBSERVICE 0x1004c110
 	// RBX::Reflection::SignalDesc<RBX::Instance,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::SignalDesc<RBX::Instance,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>
 	// TEMPLATE: WEBSERVICE 0x100564f0

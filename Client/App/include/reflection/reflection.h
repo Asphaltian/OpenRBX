@@ -768,8 +768,24 @@ public:
 	}
 
 	// clang-format off
-	// TEMPLATE: WEBSERVICE 0x10045f00
+	// TEMPLATE: WEBSERVICE 0x10045be0
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x10045c50
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>::call<float>
+	// TEMPLATE: WEBSERVICE 0x10045cb0
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x10045d10
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,G3D::Vector3 __cdecl(void),0>::BoundFuncDesc<RBX::Lighting,G3D::Vector3 __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x10045dd0
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,G3D::Vector3 __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x10045e40
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x10045f00 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::call<double>
+	// TEMPLATE: WEBSERVICE 0x10045f00 FOLDED
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>::call<double>
+	// TEMPLATE: WEBSERVICE 0x10045f60
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1004c510
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1004c580
@@ -902,6 +918,10 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10045fc0
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,void __cdecl(double),1>::BoundFuncDesc<RBX::Lighting,void __cdecl(double),1>
+	// TEMPLATE: WEBSERVICE 0x10046060
+	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,void __cdecl(double),1>::execute
 	// TEMPLATE: WEBSERVICE 0x1004ca50
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::call<bool>
 	// TEMPLATE: WEBSERVICE 0x1004cad0

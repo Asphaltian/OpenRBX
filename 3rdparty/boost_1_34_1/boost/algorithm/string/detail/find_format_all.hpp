@@ -212,8 +212,8 @@ namespace boost {
                     BOOST_STRING_TYPENAME range_value<InputT>::type> Storage;
 
                 // Initialize replacement iterators
-                input_iterator_type InsertIt=begin(Input);
-                input_iterator_type SearchIt=begin(Input);
+                input_iterator_type InsertIt=boost::begin(Input);
+                input_iterator_type SearchIt=boost::begin(Input);
                 
                 while( M )
                 {
@@ -232,7 +232,7 @@ namespace boost {
                     copy_to_storage( Storage, M.format_result() );
 
                     // Find range for a next match
-                    M=Finder( SearchIt, end(Input) );
+                    M=Finder( SearchIt, boost::end(Input) );
                 }
 
                 // process the last segment
@@ -241,17 +241,17 @@ namespace boost {
                     Input,
                     InsertIt,
                     SearchIt,
-                    end(Input) );
+                    boost::end(Input) );
                 
                 if ( Storage.empty() )
                 {
                     // Truncate input
-                    erase( Input, InsertIt, end(Input) );
+                    erase( Input, InsertIt, boost::end(Input) );
                 }
                 else
                 {
                     // Copy remaining data to the end of input
-                    insert( Input, end(Input), Storage.begin(), Storage.end() );
+                    insert( Input, boost::end(Input), Storage.begin(), Storage.end() );
                 }
             }
 

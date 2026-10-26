@@ -38,7 +38,7 @@ namespace boost {
             public:
                 // Construction
                 const_formatF(const RangeT& Format) :
-                    m_Format(begin(Format), end(Format)) {}
+                    m_Format(boost::begin(Format), boost::end(Format)) {}
 
                 // Operation
 #if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))

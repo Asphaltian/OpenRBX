@@ -245,7 +245,7 @@ namespace boost {
                 Input,
                 Finder,
                 Formatter,
-                Finder(begin(Input), end(Input)));
+                Finder(boost::begin(Input), boost::end(Input)));
 
         }
 

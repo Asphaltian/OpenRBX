@@ -1,12 +1,111 @@
 #include "v8datamodel/Lighting.h"
 
+#include "util/RunStateOwner.h"
 #include "v8datamodel/Sky.h"
 
+#include <boost/date_time/posix_time/time_formatters.hpp>
+#include <boost/date_time/posix_time/time_parsers.hpp>
 #include <boost/date_time/time_parsing.hpp>
 
 namespace RBX {
 
 char sLighting[] = "Lighting";
+
+Reflection::SignalDesc<Lighting, void(bool)> Lighting::event_LightingChanged("LightingChanged", "skyboxChanged");
+
+} // namespace RBX
+
+static RBX::Reflection::PropDescriptor<RBX::Lighting, G3D::Color3> desc_AmbientTop(
+	"TopAmbientV9",
+	"Appearance",
+	&RBX::Lighting::getAmbientTop,
+	&RBX::Lighting::setAmbientTop
+);
+static RBX::Reflection::PropDescriptor<RBX::Lighting, G3D::Color3> desc_AmbientBottom(
+	"BottomAmbientV9",
+	"Appearance",
+	&RBX::Lighting::getAmbientBottom,
+	&RBX::Lighting::setAmbientBottom
+);
+static RBX::Reflection::PropDescriptor<RBX::Lighting, G3D::Color3> desc_LightColor(
+	"SpotLightV9",
+	"Appearance",
+	&RBX::Lighting::getLightColor,
+	&RBX::Lighting::setLightColor
+);
+static RBX::Reflection::PropDescriptor<RBX::Lighting, G3D::Color3> desc_ClearColor(
+	"ClearColor",
+	"Appearance",
+	&RBX::Lighting::getClearColor3,
+	&RBX::Lighting::setClearColor3
+);
+static RBX::Reflection::PropDescriptor<RBX::Lighting, std::string> prop_Time(
+	"TimeOfDay",
+	"Data",
+	&RBX::Lighting::getTimeStr,
+	&RBX::Lighting::setTimeStr
+);
+static RBX::Reflection::PropDescriptor<RBX::Lighting, float> prop_GeographicLatitude(
+	"GeographicLatitude",
+	"Data",
+	&RBX::Lighting::getGeographicLatitude,
+	&RBX::Lighting::setGeographicLatitude
+);
+static RBX::Reflection::BoundFuncDesc<RBX::Lighting, float(), 0> prop_GetMoonPhase(
+	&RBX::Lighting::getMoonPhase,
+	"GetMoonPhase",
+	RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+static RBX::Reflection::BoundFuncDesc<RBX::Lighting, G3D::Vector3(), 0> prop_GetMoonPosition(
+	&RBX::Lighting::getMoonPosition,
+	"GetMoonDirection",
+	RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+static RBX::Reflection::BoundFuncDesc<RBX::Lighting, G3D::Vector3(), 0> prop_GetSunPosition(
+	&RBX::Lighting::getSunPosition,
+	"GetSunDirection",
+	RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+static RBX::Reflection::BoundFuncDesc<RBX::Lighting, double(), 0> func_GetMinutesAfterMidnight(
+	&RBX::Lighting::getMinutesAfterMidnight,
+	"GetMinutesAfterMidnight",
+	RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+static RBX::Reflection::BoundFuncDesc<RBX::Lighting, void(double), 1> func_SetMinutesAfterMidnight(
+	&RBX::Lighting::setMinutesAfterMidnight,
+	"SetMinutesAfterMidnight",
+	"minutes",
+	RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+
+namespace RBX {
+
+void Lighting::fireLightingChanged(bool skyChanged)
+{
+	event_LightingChanged.fire(this, skyChanged);
+
+	if (RunService* runService = ServiceProvider::find<RunService>(this)) {
+		runService->invalidateRunViews();
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10042670
+G3D::Vector3 Lighting::getMoonPosition()
+{
+	return skyParameters.physicallyCorrect ? skyParameters.trueMoonPosition : skyParameters.moonPosition;
+}
+
+// FUNCTION: WEBSERVICE 0x100426a0
+G3D::Vector3 Lighting::getSunPosition()
+{
+	return skyParameters.physicallyCorrect ? skyParameters.trueSunPosition : skyParameters.sunPosition;
+}
+
+// FUNCTION: WEBSERVICE 0x100426d0
+bool Lighting::askAddChild(const Instance* instance) const
+{
+	return dynamic_cast<const Sky*>(instance) != NULL;
+}
 
 // FUNCTION: WEBSERVICE 0x100438e0
 void Lighting::replaceSky(Sky* sky)
@@ -18,6 +117,18 @@ void Lighting::replaceSky(Sky* sky)
 	sky->setParent(this);
 }
 
+// FUNCTION: WEBSERVICE 0x10043c40
+double Lighting::getMinutesAfterMidnight()
+{
+	return timeOfDay.total_milliseconds() / 60000.0;
+}
+
+// FUNCTION: WEBSERVICE 0x10044080
+std::string Lighting::getTimeStr() const
+{
+	return boost::posix_time::to_simple_string(timeOfDay);
+}
+
 // FUNCTION: WEBSERVICE 0x10046190
 Lighting::Lighting()
 	: ambientTop(209 / 255.0f, 208 / 255.0f, 217 / 255.0f), ambientBottom(122 / 255.0f, 134 / 255.0f, 120 / 255.0f),
@@ -27,6 +138,110 @@ Lighting::Lighting()
 	skyParameters.lightColor = G3D::Color3(152 / 255.0f, 137 / 255.0f, 102 / 255.0f);
 	skyParameters.setTime(timeOfDay.total_seconds());
 	setName("Lighting");
+}
+
+// FUNCTION: WEBSERVICE 0x10046a90
+void Lighting::setClearColor(G3D::Color4 value)
+{
+	if (value != clearColor) {
+		clearColor = value;
+		raisePropertyChanged(desc_ClearColor);
+		fireLightingChanged(false);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10046b60
+void Lighting::setLightColor(G3D::Color3 value)
+{
+	if (value != skyParameters.lightColor) {
+		skyParameters.lightColor = value;
+		raisePropertyChanged(desc_LightColor);
+		fireLightingChanged(false);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10046c10
+void Lighting::setAmbientBottom(G3D::Color3 value)
+{
+	if (value != ambientBottom) {
+		ambientBottom = value;
+		raisePropertyChanged(desc_AmbientBottom);
+		fireLightingChanged(false);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10046cc0
+void Lighting::onChildRemoving(Instance* child)
+{
+	if (sky.get() == child) {
+		sky.reset();
+		fireLightingChanged(true);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10046d60
+void Lighting::onChildAdded(Instance* child)
+{
+	if (Sky* s = dynamic_cast<Sky*>(child)) {
+		sky = shared_from(s);
+		fireLightingChanged(true);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10046e60
+void Lighting::onChildChanged(Instance* instance, const PropertyChanged& event)
+{
+	Instance::onChildChanged(instance, event);
+	if (sky.get() == instance) {
+		fireLightingChanged(true);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10046f60
+void Lighting::setTime(const boost::posix_time::time_duration& value)
+{
+	int seconds = value.total_seconds();
+	seconds = seconds % 86400;
+
+	if (timeOfDay.total_seconds() != seconds) {
+		timeOfDay = boost::posix_time::seconds(seconds);
+
+		skyParameters.setTime(timeOfDay.total_seconds());
+		raisePropertyChanged(prop_Time);
+		fireLightingChanged(false);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10047060
+void Lighting::setAmbientTop(G3D::Color3 value)
+{
+	if (value != ambientTop) {
+		ambientTop = value;
+		raisePropertyChanged(desc_AmbientTop);
+		fireLightingChanged(false);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10047110
+void Lighting::setGeographicLatitude(float value)
+{
+	if (value != skyParameters.geoLatitude) {
+		skyParameters.geoLatitude = value;
+		raisePropertyChanged(prop_GeographicLatitude);
+		fireLightingChanged(false);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10047220
+void Lighting::setMinutesAfterMidnight(double value)
+{
+	setTime(boost::posix_time::seconds(static_cast<long>(value * 60.0)));
+}
+
+// FUNCTION: WEBSERVICE 0x10047270
+void Lighting::setTimeStr(const std::string& value)
+{
+	setTime(boost::posix_time::duration_from_string(value));
 }
 
 } // namespace RBX
