@@ -8,6 +8,7 @@
 #include <G3D/Color4.h>
 #include <G3D/Color4uint8.h>
 #include <string>
+#include <vector>
 
 namespace RBX {
 
@@ -15,6 +16,8 @@ namespace RBX {
 class BrickColor
 {
 public:
+	class BrickMap;
+
 	enum Number
 	{
 		lego_1 = 1,
@@ -131,6 +134,11 @@ public:
 		lego_268 = 268
 	};
 
+	typedef std::vector<BrickColor> Colors;
+
+	static const Colors& colorPalette();
+	static const Colors& allColors();
+
 	BrickColor(int number);
 	BrickColor() : number(lego_194) {}
 	BrickColor(Number number) : number(number) {}
@@ -171,6 +179,13 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(BrickColor, 0x04)
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10092580
+// RBX::BrickColor::BrickMap::~BrickMap
+// SYNTHETIC: WEBSERVICE 0x10222e80
+// `RBX::BrickColor::BrickMap::singleton'::`2'::`dynamic atexit destructor for 's''
+// clang-format on
 
 } // namespace RBX
 

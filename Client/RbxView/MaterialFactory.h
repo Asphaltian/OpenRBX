@@ -23,18 +23,40 @@ public:
 		float transparency;     // 0x04
 		float reflectance;      // 0x08
 
-		bool operator<(const Attributes& other) const;
+		// FUNCTION: WEBSERVICE 0x101748f0
+		bool operator<(const Attributes& other) const
+		{
+			if (color < other.color) {
+				return true;
+			}
+			if (color > other.color) {
+				return false;
+			}
+			if (transparency < other.transparency) {
+				return true;
+			}
+			if (transparency > other.transparency) {
+				return false;
+			}
+			return reflectance < other.reflectance;
+		}
 	};
 
 	G3D::ReferenceCountedPointer<Render::Material> getMegaMaterial(Attributes attributes);
 
+	G3D::ReferenceCountedPointer<Render::Material> getFileMeshMaterial() { return fileMeshMaterial; }
+
 	G3D::ReferenceCountedPointer<Render::Material> getMaterial(Attributes attributes);
+
+	MaterialFactory(G3D::TextureManager* textureManager);
 
 private:
 	G3D::ReferenceCountedPointer<Render::TextureProxy> megaTexture;     // 0x00
 	G3D::ReferenceCountedPointer<Render::TextureProxy> surfacesTexture; // 0x04
 	G3D::ReferenceCountedPointer<Render::TextureProxy> fileMeshTexture; // 0x08
 	G3D::ReferenceCountedPointer<Render::Material> fileMeshMaterial;    // 0x0c
+
+	G3D::ReferenceCountedPointer<Render::TextureProxy> getSurfacesTexture(G3D::Color3 tint);
 
 	typedef std::map<Attributes, G3D::WeakReferenceCountedPointer<Render::Material> > Database;
 
