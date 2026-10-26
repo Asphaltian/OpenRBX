@@ -4141,6 +4141,7 @@ address,type,symbol
 0x1024e504,global,??_7SphereMesh@View@RBX@@6B@
 0x1024e514,global,??_7CylinderBuilder@@6B@
 0x1024e534,global,??_7CylinderAlongXMesh@View@RBX@@6B@
+0x1024e544,global,??_7HeadBuilder@@6B@
 0x1024e574,global,??_7HeadMesh@View@RBX@@6B@
 0x1024e584,global,??_7FileMesh@View@RBX@@6B@
 0x1024e660,global,??_7Creator@?$FactoryProduct@VClient@Network@RBX@@VPeer@23@$1?sClient@23@3PADA@RBX@@6B@
