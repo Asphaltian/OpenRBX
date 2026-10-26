@@ -16,9 +16,11 @@
 
 namespace RBX {
 
+class Decal;
 class Instance;
 class PartInstance;
 class SpecialShape;
+class Texture;
 
 namespace Reflection {
 class PropertyDescriptor;
@@ -103,6 +105,66 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Part, 0xd0)
+
+// SIZE 0xfc
+class Decal : public PartChunk
+{
+private:
+	boost::shared_ptr<RBX::Decal> decal;                              // 0xcc
+	boost::signals::scoped_connection decalAncestorChangedConnection; // 0xd4
+	boost::signals::scoped_connection decalPropertyChangedConnection; // 0xe8
+
+public:
+	Decal(RBX::Decal& decal, PartInstance& parentPart, View* view);
+
+	virtual ~Decal();
+
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10170420
+	// RBX::View::Decal::`scalar deleting destructor'
+	// clang-format on
+
+	virtual G3D::ReferenceCountedPointer<Render::Material> getMaterial();
+
+protected:
+	void onDecalPropertyChanged(const Reflection::PropertyDescriptor* descriptor);
+	void onDecalAncestorChanged(boost::shared_ptr<Instance> ancestor);
+
+private:
+	virtual void updateMesh();
+};
+
+DECOMP_SIZE_ASSERT(Decal, 0xfc)
+
+// SIZE 0xfc
+class Texture : public PartChunk
+{
+private:
+	boost::shared_ptr<RBX::Texture> texture;                            // 0xcc
+	boost::signals::scoped_connection textureAncestorChangedConnection; // 0xd4
+	boost::signals::scoped_connection texturePropertyChangedConnection; // 0xe8
+
+public:
+	Texture(RBX::Texture& texture, PartInstance& parentPart, View* view);
+
+	virtual ~Texture();
+
+	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10170440
+	// RBX::View::Texture::`scalar deleting destructor'
+	// clang-format on
+
+	virtual G3D::ReferenceCountedPointer<Render::Material> getMaterial();
+
+protected:
+	void onTexturePropertyChanged(const Reflection::PropertyDescriptor* descriptor);
+	void onTextureAncestorChanged(boost::shared_ptr<Instance> ancestor);
+
+private:
+	virtual void updateMesh();
+};
+
+DECOMP_SIZE_ASSERT(Texture, 0xfc)
 
 } // namespace View
 } // namespace RBX

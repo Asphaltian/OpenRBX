@@ -4,6 +4,7 @@
 #include "MeshFactory.h"
 #include "PBBMesh.h"
 #include "View.h"
+#include "v8datamodel/Decal.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Workspace.h"
 #include "v8datamodel/custommesh.h"
@@ -69,13 +70,37 @@ void Part::onEvent(const PartInstance* source, CanAggregateChanged event)
 }
 
 // FUNCTION: WEBSERVICE 0x1016d100
-void PartChunk::onAncestorChanged(boost::shared_ptr<Instance>)
+void PartChunk::onAncestorChanged(boost::shared_ptr<Instance> ancestor)
 {
 	Workspace* workspace = Workspace::findWorkspace(partInstance.get());
 	Instance* parent;
 
 	if (workspace == NULL ||
 		(workspace != (parent = partInstance->getParent()) && (parent == NULL || !parent->isDescendentOf(workspace)))) {
+		view->sceneManager->removeModel(this);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1016d210 FOLDED
+void Decal::onDecalAncestorChanged(boost::shared_ptr<Instance> ancestor)
+{
+	Workspace* workspace = Workspace::findWorkspace(decal.get());
+	Instance* parent;
+
+	if (workspace == NULL ||
+		(workspace != (parent = decal->getParent()) && (parent == NULL || !parent->isDescendentOf(workspace)))) {
+		view->sceneManager->removeModel(this);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1016d210 FOLDED
+void Texture::onTextureAncestorChanged(boost::shared_ptr<Instance> ancestor)
+{
+	Workspace* workspace = Workspace::findWorkspace(texture.get());
+	Instance* parent;
+
+	if (workspace == NULL ||
+		(workspace != (parent = texture->getParent()) && (parent == NULL || !parent->isDescendentOf(workspace)))) {
 		view->sceneManager->removeModel(this);
 	}
 }
@@ -146,6 +171,60 @@ G3D::ReferenceCountedPointer<Render::Mesh> PartChunk::getMesh()
 	return mesh;
 }
 
+// FUNCTION: WEBSERVICE 0x1016d610
+void Decal::onDecalPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
+{
+	if (descriptor == &FaceInstance::prop_Face) {
+		invalidateMesh();
+	}
+	else if (descriptor == &RBX::Decal::prop_Texture) {
+		invalidateMaterial();
+	}
+	else if (descriptor == &RBX::Decal::prop_Specular) {
+		invalidateMaterial();
+	}
+	else if (descriptor == &RBX::Decal::prop_Shiny) {
+		invalidateMaterial();
+	}
+}
+
+// STUB: WEBSERVICE 0x1016d640
+G3D::ReferenceCountedPointer<Render::Material> Decal::getMaterial()
+{
+	STUB(0x1016d640);
+	return material;
+}
+
+// FUNCTION: WEBSERVICE 0x1016d810
+void Texture::onTexturePropertyChanged(const Reflection::PropertyDescriptor* descriptor)
+{
+	if (descriptor == &FaceInstance::prop_Face) {
+		invalidateMesh();
+	}
+	else if (descriptor == &RBX::Decal::prop_Texture) {
+		invalidateMaterial();
+	}
+	else if (descriptor == &RBX::Decal::prop_Specular) {
+		invalidateMaterial();
+	}
+	else if (descriptor == &RBX::Decal::prop_Shiny) {
+		invalidateMaterial();
+	}
+	else if (descriptor == &RBX::Texture::prop_StudsPerTileU) {
+		invalidateMesh();
+	}
+	else if (descriptor == &RBX::Texture::prop_StudsPerTileV) {
+		invalidateMesh();
+	}
+}
+
+// STUB: WEBSERVICE 0x1016d850
+G3D::ReferenceCountedPointer<Render::Material> Texture::getMaterial()
+{
+	STUB(0x1016d850);
+	return material;
+}
+
 // FUNCTION: WEBSERVICE 0x1016e0e0
 void PartChunk::onChildRemoved(boost::shared_ptr<Instance> child)
 {
@@ -161,6 +240,16 @@ PartChunk::~PartChunk()
 {
 }
 
+// FUNCTION: WEBSERVICE 0x1016f360
+Decal::~Decal()
+{
+}
+
+// FUNCTION: WEBSERVICE 0x1016f400
+Texture::~Texture()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x101703a0
 Part::~Part()
 {
@@ -173,6 +262,18 @@ Part::~Part()
 void Part::updateMesh()
 {
 	STUB(0x101722a0);
+}
+
+// STUB: WEBSERVICE 0x10173790
+void Decal::updateMesh()
+{
+	STUB(0x10173790);
+}
+
+// STUB: WEBSERVICE 0x101739a0
+void Texture::updateMesh()
+{
+	STUB(0x101739a0);
 }
 
 // FUNCTION: WEBSERVICE 0x10173c90
@@ -198,6 +299,32 @@ PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>&
 	: Render::Chunk(polygonOffset), partInstance(partInstance), materialInvalid(true), view(view), specialShape(NULL)
 {
 	view->sceneManager->addModel(this);
+}
+
+// FUNCTION: WEBSERVICE 0x10174480
+Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
+	: PartChunk(Render::Chunk::DECAL_OFFSET, shared_from(&parentPart), view), decal(shared_from(&decal))
+{
+	decalAncestorChangedConnection =
+		Instance::event_ancestryChanged.connect(&decal, boost::bind(&Decal::onDecalAncestorChanged, this, _1), 10);
+	decalPropertyChangedConnection =
+		Instance::event_propertyChanged.connect(&decal, boost::bind(&Decal::onDecalPropertyChanged, this, _1), 10);
+}
+
+// FUNCTION: WEBSERVICE 0x10174640
+Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
+	: PartChunk(Render::Chunk::TEXTURE_OFFSET, shared_from(&parentPart), view), texture(shared_from(&texture))
+{
+	textureAncestorChangedConnection = Instance::event_ancestryChanged.connect(
+		&texture,
+		boost::bind(&Texture::onTextureAncestorChanged, this, _1),
+		10
+	);
+	texturePropertyChangedConnection = Instance::event_propertyChanged.connect(
+		&texture,
+		boost::bind(&Texture::onTexturePropertyChanged, this, _1),
+		10
+	);
 }
 
 // STUB: WEBSERVICE 0x10174800
