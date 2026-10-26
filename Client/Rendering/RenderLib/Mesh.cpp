@@ -273,11 +273,6 @@ void Mesh::computeDirectionalShadowVolume(
 	}
 }
 
-// FUNCTION: WEBSERVICE 0x10167b50
-Mesh::Level::Level(G3D::RenderDevice::Primitive primitive) : primitive(primitive)
-{
-}
-
 // FUNCTION: WEBSERVICE 0x10167bb0
 Mesh::Mesh()
 {

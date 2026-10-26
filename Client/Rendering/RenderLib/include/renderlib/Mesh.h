@@ -33,7 +33,9 @@ public:
 		G3D::RenderDevice::Primitive primitive; // 0x18
 
 		Level();
-		Level(G3D::RenderDevice::Primitive primitive);
+
+		// STUB: WEBSERVICE 0x10167b50
+		Level(G3D::RenderDevice::Primitive primitive) : primitive(primitive) {}
 
 		virtual ~Level();
 

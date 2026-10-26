@@ -84,7 +84,7 @@ void PBBBuilder::buildBack(Purpose)
 namespace RBX {
 namespace View {
 
-// STUB: WEBSERVICE 0x1017da00
+// FUNCTION: WEBSERVICE 0x1017da00
 PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);

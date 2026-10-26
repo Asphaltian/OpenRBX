@@ -4135,6 +4135,7 @@ address,type,symbol
 0x1024e458,global,??_7Builder@BevelMesh@View@RBX@@6B@
 0x1024e498,global,??_7WedgeMesh@View@RBX@@6B@
 0x1024e4d0,global,??_7TorsoMesh@View@RBX@@6B@
+0x1024e4e4,global,??_7SphereBuilder@@6B@
 0x1024e504,global,??_7SphereMesh@View@RBX@@6B@
 0x1024e534,global,??_7CylinderAlongXMesh@View@RBX@@6B@
 0x1024e574,global,??_7HeadMesh@View@RBX@@6B@

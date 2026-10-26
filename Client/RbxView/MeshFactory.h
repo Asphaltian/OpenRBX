@@ -14,11 +14,22 @@
 namespace RBX {
 namespace View {
 
+enum RenderSurfaceType
+{
+	FLAT = 0,
+	STUDS = 1,
+	INLET = 2,
+	WELD = 3,
+	GLUE = 4
+};
+
 // SIZE 0x4
 class RenderSurfaceTypes
 {
 public:
 	unsigned int data; // 0x00
+
+	RenderSurfaceType getSurfaceType(NormalId face) const { return (RenderSurfaceType) ((data >> (face * 3)) & 7); }
 };
 
 DECOMP_SIZE_ASSERT(RenderSurfaceTypes, 0x4)
