@@ -398,7 +398,6 @@ address,size,symbol,name
 0x10168ea0,0x13e,?shadePixel@TextureProxy@Render@RBX@@SAXABVColor3uint8@G3D@@AAV45@@Z,
 0x10169100,0xd0,?shade@TextureProxy@Render@RBX@@QAE?AV?$ReferenceCountedPointer@VTextureProxy@Render@RBX@@@G3D@@ABVColor3@5@ABV45@@Z,
 0x101691d0,0x26,?getIfResolved@TextureProxy@Render@RBX@@UBE?AV?$ReferenceCountedPointer@VTexture@G3D@@@G3D@@XZ,
-0x10169200,0x714,?resolve@TextureProxy@Render@RBX@@UAE?AV?$ReferenceCountedPointer@VTexture@G3D@@@G3D@@PAVRenderDevice@5@@Z,
 0x10169920,0x99,?alphaOnlyVersion@TextureProxy@Render@RBX@@QAE?AV?$ReferenceCountedPointer@VTextureProxy@Render@RBX@@@G3D@@XZ,
 0x101699c0,0x68,?getSize@TextureProxy@Render@RBX@@UAE?AVVector2@G3D@@XZ,
 0x1016a8f0,0x121,??$visitDescendents@V?$bind_t@XV?$mf1@XVView@1RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVView@1RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@Instance@RBX@@QBEXV?$bind_t@XV?$mf1@XVView@1RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVView@1RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@Z,

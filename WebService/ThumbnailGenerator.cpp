@@ -1,5 +1,6 @@
 #include "ThumbnailGenerator.h"
 
+#include "rbxgraphics/TextureProxyBase.h"
 #include "script/Script.h"
 #include "script/ScriptContext.h"
 #include "util/Name.h"
@@ -59,3 +60,6 @@ template boost::shared_ptr<RBX::RunService>::~shared_ptr();
 template boost::shared_ptr<RBX::Script>::~shared_ptr();
 template boost::shared_ptr<RBX::ScriptContext>::~shared_ptr();
 template boost::shared_ptr<RBX::Lighting>::~shared_ptr();
+
+template G3D::ReferenceCountedPointer<G3D::Texture>::~ReferenceCountedPointer();
+template G3D::ReferenceCountedPointer<RBX::TextureProxyBase>::~ReferenceCountedPointer();

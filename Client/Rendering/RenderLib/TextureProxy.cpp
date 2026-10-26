@@ -50,7 +50,7 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::getIfResolved() const
 	return texture;
 }
 
-// STUB: WEBSERVICE 0x10169200
+// FUNCTION: WEBSERVICE 0x10169200
 G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevice* rd)
 {
 	if (!loaded) {
