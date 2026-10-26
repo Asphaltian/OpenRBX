@@ -91,8 +91,12 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Workspace>
 // TEMPLATE: WEBSERVICE 0x1001e340
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::ScriptContext>
+// TEMPLATE: WEBSERVICE 0x1006d570
+// RBX::ServiceProvider::find<RBX::StarterPackService>
 // FUNCTION: WEBSERVICE 0x1006e4c0
 // RBX::ServiceProvider::find<RBX::ControllerService>
+// TEMPLATE: WEBSERVICE 0x1006e670
+// RBX::ServiceProvider::create<RBX::StarterPackService>
 // TEMPLATE: WEBSERVICE 0x1006e760
 // RBX::ServiceProvider::create<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006ea80

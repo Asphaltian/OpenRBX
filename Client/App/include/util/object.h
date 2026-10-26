@@ -130,6 +130,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::MotorFeature>
 	// TEMPLATE: WEBSERVICE 0x1008a7d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hole>
+	// TEMPLATE: WEBSERVICE 0x1008aa40
+	// RBX::Creatable<RBX::Instance>::create<RBX::VelocityMotor>
 	// TEMPLATE: WEBSERVICE 0x1008af20
 	// RBX::Creatable<RBX::Instance>::create<RBX::FlagStandService>
 	// TEMPLATE: WEBSERVICE 0x1008b190

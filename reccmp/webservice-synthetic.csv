@@ -13,6 +13,7 @@ address,type,symbol
 0x100061a0,synthetic,??_H@YGXPAXIHP6EPAX0@Z@Z
 0x10006330,synthetic,??1Value@Reflection@RBX@@QAE@XZ
 0x100063b0,synthetic,??1SignatureDescriptor@Reflection@RBX@@QAE@XZ
+0x100078c0,synthetic,??1?$vector@PAV?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@V?$allocator@PAV?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@@std@@@std@@QAE@XZ
 0x100078f0,synthetic,??3?$Creatable@VInstance@RBX@@@RBX@@CAXPAX@Z
 0x100091f0,synthetic,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@SAPAVWorkspace@1@PBVInstance@1@@Z
 0x10009a20,synthetic,??1Item@SignatureDescriptor@Reflection@RBX@@QAE@XZ
