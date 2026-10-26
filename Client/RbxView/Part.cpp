@@ -566,11 +566,28 @@ void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 	}
 }
 
-// STUB: WEBSERVICE 0x10174160
+// FUNCTION: WEBSERVICE 0x10174160
 PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>& partInstance, View* view)
 	: Render::Chunk(polygonOffset), partInstance(partInstance), materialInvalid(true), view(view), specialShape(NULL)
 {
 	view->sceneManager->addModel(this);
+
+	childAddedConnection =
+		Instance::event_childAdded.connect(partInstance.get(), boost::bind(&PartChunk::onChildAdded, this, _1), 10);
+	childRemovedConnection =
+		Instance::event_childRemoved.connect(partInstance.get(), boost::bind(&PartChunk::onChildRemoved, this, _1), 10);
+	ancestorChangedConnection = Instance::event_ancestryChanged.connect(
+		partInstance.get(),
+		boost::bind(&PartChunk::onAncestorChanged, this, _1),
+		10
+	);
+	propertyChangedConnection = Instance::event_propertyChanged.connect(
+		partInstance.get(),
+		boost::bind(&PartChunk::onPropertyChanged, this, _1),
+		10
+	);
+
+	partInstance->visitChildren(boost::bind(&PartChunk::onChildAdded, this, _1));
 }
 
 // FUNCTION: WEBSERVICE 0x10174480
@@ -599,10 +616,15 @@ Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 	);
 }
 
-// STUB: WEBSERVICE 0x10174800
+// FUNCTION: WEBSERVICE 0x10174800
 Part::Part(const boost::shared_ptr<PartInstance>& partInstance, View* view) : PartChunk(0.0f, partInstance, view)
 {
-	STUB(0x10174800);
+	if (partInstance->getCanAggregate()) {
+		view->sceneManager->setSleeping(this, true);
+	}
+	startListening(partInstance, this);
+	invalidateMesh();
+	invalidateMaterial();
 }
 
 } // namespace View

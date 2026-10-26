@@ -453,6 +453,7 @@ address,type,symbol
 0x10136e40,stub,?fromEulerAnglesXYZ@Matrix3@G3D@@SA?AV12@MMM@Z
 0x10137500,synthetic,??__G@YGXPAX0IHP6EPAX00@Z@Z
 0x1013ab30,stub,??0Plane@G3D@@QAE@ABVVector3@1@00@Z
+0x1016c6c0,synthetic,??_9PartChunk@View@RBX@@$BCE@AE
 0x1017ae60,stub,??$buildFace@$00VTopBottom@@@LevelBuilder@View@RBX@@IAEXVTopBottom@@VRect2D@G3D@@MVVector2@5@2HVVector2int16@5@@Z
 0x1017b220,stub,??$buildFace@$03VTopBottom@@@LevelBuilder@View@RBX@@IAEXVTopBottom@@VRect2D@G3D@@MVVector2@5@2HVVector2int16@5@@Z
 0x1017b5e0,stub,??$buildFace@$02VSide@@@LevelBuilder@View@RBX@@IAEXVSide@@VRect2D@G3D@@MVVector2@5@2HVVector2int16@5@@Z

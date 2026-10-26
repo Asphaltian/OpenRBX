@@ -320,6 +320,22 @@ public:
 		}
 	}
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1016ee10
+	// RBX::Instance::visitChildren<boost::_bi::bind_t<void,boost::_mfi::mf1<void,RBX::View::PartChunk,boost::shared_ptr<RBX::Instance> >,boost::_bi::list2<boost::_bi::value<RBX::View::PartChunk *>,boost::arg<1> > > >
+	// clang-format on
+	template <class Func>
+	void visitChildren(Func func) const
+	{
+		if (children) {
+			boost::shared_ptr<const std::vector<shared_ptr<Instance> > > c = children.read();
+			std::vector<shared_ptr<Instance> >::const_iterator end = c->end();
+			for (std::vector<shared_ptr<Instance> >::const_iterator iter = c->begin(); iter != end; ++iter) {
+				func(*iter);
+			}
+		}
+	}
+
 	// FUNCTION: WEBSERVICE 0x10048320
 	unsigned int numChildren() const { return children ? children->size() : 0; }
 
