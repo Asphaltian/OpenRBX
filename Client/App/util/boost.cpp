@@ -162,7 +162,7 @@ boost::function0<void> background_function(const boost::function0<void>& threadf
 	return boost::bind(&run_in_background, threadfunc, std::string(name));
 }
 
-// STUB: WEBSERVICE 0x10034500
+// FUNCTION: WEBSERVICE 0x10034500
 worker_thread::worker_thread(const boost::function0<work_result>& work_function, const char* name)
 	: _data(new data()), thread(background_function(boost::bind(&threadProc, _data, work_function), name))
 {

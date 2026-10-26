@@ -10,6 +10,7 @@ namespace RBX {
 class DataModel;
 }
 
+#include "ErrorUploader.h"
 #include "WebServiceMaps.h"
 #include "decomp.h"
 #include "util/standardout.h"
@@ -90,6 +91,7 @@ void StandardOutLog::onEvent(const RBX::StandardOut* source, RBX::StandardOutMes
 static void initRoblox()
 {
 	STUB(0x1000d380);
+	static ErrorUploader errorUploader;
 }
 
 // SIZE 0x2c

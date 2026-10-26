@@ -43,7 +43,7 @@ SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char*
 	classDescriptor.MemberDescriptorContainer<SignalDescriptor>::declare(this);
 }
 
-// STUB: WEBSERVICE 0x10095c50
+// FUNCTION: WEBSERVICE 0x10095c50
 boost::shared_ptr<SignalInstance> SignalDescriptor::getSignalInstance(SignalSource& source) const
 {
 	if (source.signals.get() == NULL) {

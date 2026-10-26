@@ -457,6 +457,7 @@ set(OPENRBX_WEBSERVICE_SOURCES
   WebService/ThumbnailGenerator.cpp
   WebService/WebService.cpp
   WebService/WebServiceMaps.cpp
+  Client/win/ErrorUploader.cpp
   Client/win/VersionInfo.cpp
 )
 
@@ -470,6 +471,7 @@ reccmp_add_target(webservice ID WEBSERVICE)
 
 target_include_directories(webservice PRIVATE
   "${PROJECT_SOURCE_DIR}/WebService"
+  "${PROJECT_SOURCE_DIR}/Client/win"
   ${OPENRBX_ENGINE_INCLUDE_DIRS}
   ${OPENRBX_3RDPARTY_INCLUDE_DIRS}
   "${OPENRBX_MESA_INCLUDE_DIR}"

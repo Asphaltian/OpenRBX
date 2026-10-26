@@ -153,23 +153,24 @@ void Instance::writeChildren(XmlElement* container)
 	}
 }
 
-// STUB: WEBSERVICE 0x100483f0
+// FUNCTION: WEBSERVICE 0x100483f0
 Instance* Instance::findFirstChildByName(const std::string& findName) const
 {
-	if (!children) {
+	const std::vector<shared_ptr<Instance> >* c = children.operator->();
+	if (!c) {
 		return NULL;
 	}
 
-	for (unsigned int i = 0; i < children->size(); ++i) {
-		if ((*children)[i]->getName() == findName) {
-			return (*children)[i].get();
+	for (unsigned int i = 0; i < c->size(); ++i) {
+		if ((*c)[i]->getName() == findName) {
+			return (*c)[i].get();
 		}
 	}
 
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x10048f30
+// FUNCTION: WEBSERVICE 0x10048f30
 Instance* Instance::findFirstChildByNameRecursive(const std::string& findName) const
 {
 	Instance* result = findFirstChildByName(findName);
@@ -177,12 +178,13 @@ Instance* Instance::findFirstChildByNameRecursive(const std::string& findName) c
 		return result;
 	}
 
-	if (!children) {
+	const std::vector<shared_ptr<Instance> >* c = children.operator->();
+	if (!c) {
 		return NULL;
 	}
 
-	for (unsigned int i = 0; i < children->size(); ++i) {
-		result = (*children)[i]->findFirstChildByNameRecursive(findName);
+	for (unsigned int i = 0; i < c->size(); ++i) {
+		result = (*c)[i]->findFirstChildByNameRecursive(findName);
 		if (result) {
 			return result;
 		}

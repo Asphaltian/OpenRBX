@@ -253,13 +253,13 @@ void FunctionScriptSlot::operator()(const std::vector<boost::any>& arguments)
 	lua_settop(slotThread, 0);
 }
 
-// STUB: WEBSERVICE 0x100b0cb0
+// FUNCTION: WEBSERVICE 0x100b0cb0
 FunctionScriptSlot::FunctionScriptSlot(lua_State* L, int index)
 	: context(RBX::ScriptContext::getContext(L)), function(L, index), executionDepth(0)
 {
 }
 
-// STUB: WEBSERVICE 0x100b0d80
+// FUNCTION: WEBSERVICE 0x100b0d80
 WaitScriptSlot::WaitScriptSlot(lua_State* L) : waitThread(L)
 {
 }

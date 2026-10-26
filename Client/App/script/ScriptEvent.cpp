@@ -7,7 +7,7 @@
 namespace RBX {
 namespace Lua {
 
-// STUB: WEBSERVICE 0x100b5790
+// FUNCTION: WEBSERVICE 0x100b5790
 YieldingThreads::WaitingThread::WaitingThread(lua_State* L, double requestedDelay)
 	: thread(new ThreadRef(L)), requestedDelay(requestedDelay), elapsedTime(0.0)
 {
