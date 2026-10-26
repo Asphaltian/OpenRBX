@@ -145,6 +145,10 @@ public:
 
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > getPlayers() { return players.read(); }
 
+	void chat(std::string message);
+	void reportAbuse(Player* player, std::string comment);
+	void reportAbuse(boost::shared_ptr<Instance> player, std::string comment);
+
 	void setAbuseReportUrl(std::string value);
 
 	bool OnReceive(RakPeerInterface* peer, Packet* packet);
@@ -182,6 +186,24 @@ DECOMP_SIZE_ASSERT(Players, 0x158)
 // RBX::Network::`dynamic initializer for 'propPlayerMaxCount''
 // SYNTHETIC: WEBSERVICE 0x1021f530
 // `dynamic initializer for 'RBX::Network::Players::propLocalPlayer''
+// SYNTHETIC: WEBSERVICE 0x1021f560
+// RBX::Network::`dynamic initializer for 'func_GetPlayerByID''
+// SYNTHETIC: WEBSERVICE 0x1021f590
+// RBX::Network::`dynamic initializer for 'funcChat''
+// SYNTHETIC: WEBSERVICE 0x1021f5c0
+// RBX::Network::`dynamic initializer for 'funcReportAbuse''
+// SYNTHETIC: WEBSERVICE 0x1021f5f0
+// RBX::Network::`dynamic initializer for 'func_players''
+// SYNTHETIC: WEBSERVICE 0x1021f620
+// RBX::Network::`dynamic initializer for 'func_GetPlayers''
+// SYNTHETIC: WEBSERVICE 0x1021f650
+// RBX::Network::`dynamic initializer for 'func_createLocalPlayer''
+// SYNTHETIC: WEBSERVICE 0x1021f680
+// RBX::Network::`dynamic initializer for 'func_setAbuseReportUrl''
+// SYNTHETIC: WEBSERVICE 0x1021f6b0
+// RBX::Network::`dynamic initializer for 'func_playerFromCharacterOld''
+// SYNTHETIC: WEBSERVICE 0x1021f6e0
+// RBX::Network::`dynamic initializer for 'func_playerFromCharacter''
 // SYNTHETIC: WEBSERVICE 0x1021f710
 // RBX::Network::`dynamic initializer for 'event_PlayerAdded''
 // SYNTHETIC: WEBSERVICE 0x1021f730
@@ -192,8 +214,26 @@ DECOMP_SIZE_ASSERT(Players, 0x158)
 // RBX::Network::`dynamic atexit destructor for 'propPlayerMaxCount''
 // SYNTHETIC: WEBSERVICE 0x10225fe0
 // RBX::Network::`dynamic atexit destructor for 'propPlayerCount''
+// SYNTHETIC: WEBSERVICE 0x10226000
+// RBX::Network::`dynamic atexit destructor for 'func_GetPlayers''
+// SYNTHETIC: WEBSERVICE 0x10226010
+// RBX::Network::`dynamic atexit destructor for 'func_setAbuseReportUrl''
+// SYNTHETIC: WEBSERVICE 0x10226020
+// RBX::Network::`dynamic atexit destructor for 'func_playerFromCharacter''
+// SYNTHETIC: WEBSERVICE 0x10226030
+// RBX::Network::`dynamic atexit destructor for 'funcChat''
+// SYNTHETIC: WEBSERVICE 0x10226040
+// RBX::Network::`dynamic atexit destructor for 'funcReportAbuse''
+// SYNTHETIC: WEBSERVICE 0x10226050
+// RBX::Network::`dynamic atexit destructor for 'func_players''
+// SYNTHETIC: WEBSERVICE 0x10226060
+// RBX::Network::`dynamic atexit destructor for 'func_createLocalPlayer''
+// SYNTHETIC: WEBSERVICE 0x10226070
+// RBX::Network::`dynamic atexit destructor for 'func_playerFromCharacterOld''
 // SYNTHETIC: WEBSERVICE 0x10226080
 // RBX::Network::`dynamic atexit destructor for 'event_PlayerRemoving''
+// SYNTHETIC: WEBSERVICE 0x10226090
+// RBX::Network::`dynamic atexit destructor for 'func_GetPlayerByID''
 // SYNTHETIC: WEBSERVICE 0x102260a0
 // RBX::Network::`dynamic atexit destructor for 'event_PlayerAdded''
 // TEMPLATE: WEBSERVICE 0x10193670

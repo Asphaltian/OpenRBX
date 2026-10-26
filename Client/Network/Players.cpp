@@ -59,6 +59,55 @@ Reflection::RefPropDescriptor<Players, Player> Players::propLocalPlayer(
 	0
 );
 
+static Reflection::BoundFuncDesc<Players, boost::shared_ptr<Instance>(int), 1> func_GetPlayerByID(
+	&RBX::Network::Players::getPlayerByID,
+	"GetPlayerByID",
+	"userID",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<Players, void(std::string), 1> funcChat(
+	&RBX::Network::Players::chat,
+	"Chat",
+	"message",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<Players, void(boost::shared_ptr<Instance>, std::string), 2> funcReportAbuse(
+	&RBX::Network::Players::reportAbuse,
+	"ReportAbuse",
+	"player",
+	"message",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<Players, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(), 0>
+	func_players(&RBX::Network::Players::getPlayers, "players", Reflection::FunctionDescriptor::AnyCaller);
+static Reflection::BoundFuncDesc<Players, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(), 0>
+	func_GetPlayers(&RBX::Network::Players::getPlayers, "GetPlayers", Reflection::FunctionDescriptor::AnyCaller);
+static Reflection::BoundFuncDesc<Players, boost::shared_ptr<Instance>(int), 1> func_createLocalPlayer(
+	&RBX::Network::Players::createLocalPlayer,
+	"CreateLocalPlayer",
+	"userId",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<Players, void(std::string), 1> func_setAbuseReportUrl(
+	&RBX::Network::Players::setAbuseReportUrl,
+	"SetAbuseReportUrl",
+	"url",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static Reflection::BoundFuncDesc<Players, boost::shared_ptr<Instance>(boost::shared_ptr<Instance>), 1>
+	func_playerFromCharacterOld(
+		&RBX::Network::Players::playerFromCharacter,
+		"playerFromCharacter",
+		"character",
+		Reflection::FunctionDescriptor::AnyCaller
+	);
+static Reflection::BoundFuncDesc<Players, boost::shared_ptr<Instance>(boost::shared_ptr<Instance>), 1>
+	func_playerFromCharacter(
+		&RBX::Network::Players::playerFromCharacter,
+		"GetPlayerFromCharacter",
+		"character",
+		Reflection::FunctionDescriptor::AnyCaller
+	);
 static Reflection::SignalDesc<Players, void(boost::shared_ptr<Instance>)> event_PlayerAdded("PlayerAdded", "player");
 static Reflection::SignalDesc<Players, void(boost::shared_ptr<Instance>)> event_PlayerRemoving(
 	"PlayerRemoving",
@@ -221,6 +270,67 @@ worker_thread::work_result AbuseReporter::processRequests(boost::shared_ptr<data
 {
 	STUB(0x10194680);
 	return worker_thread::done;
+}
+
+// FUNCTION: WEBSERVICE 0x10194b30
+void Players::reportAbuse(Player* player, std::string comment)
+{
+	if (abuseReporter) {
+		StandardOut::singleton()->print(
+			MESSAGE_INFO,
+			"Submitting abuse report from %s",
+			player ? player->getName().c_str() : "[[[anonymous]]]"
+		);
+
+		AbuseReport r;
+		r.submitterID = localPlayer ? localPlayer->getUserID() : 0;
+		r.allegedAbuserID = player ? player->getUserID() : 0;
+		r.comment = comment;
+		abuseReporter->add(r, chatHistory);
+	}
+	else {
+		StandardOut::singleton()->print(MESSAGE_INFO, "Sending abuse report to game server via Raknet");
+
+		if (!peer) {
+			throw std::runtime_error("Can't report abuse: Not in a networked game");
+		}
+
+		RakNet::BitStream bitStream;
+		bitStream << (unsigned char) 'Q';
+		bitStream << (localPlayer ? localPlayer->getUserID() : 0);
+		bitStream << (player ? player->getUserID() : 0);
+		bitStream << comment;
+
+		peer->Send(&bitStream, HIGH_PRIORITY, RELIABLE, 2, UNASSIGNED_SYSTEM_ADDRESS, true);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10194e10
+void Players::reportAbuse(boost::shared_ptr<Instance> player, std::string comment)
+{
+	reportAbuse(dynamic_cast<Player*>(player.get()), comment);
+}
+
+// FUNCTION: WEBSERVICE 0x10194ff0
+void Players::chat(std::string message)
+{
+	if (!localPlayer) {
+		throw std::runtime_error("No local Player to chat from");
+	}
+
+	RakNet::BitStream bitStream;
+	bitStream << (unsigned char) 'P';
+
+	Guid::Data id = localPlayer->getGuid().data;
+
+	bitStream << id.scope->toString();
+	bitStream << id.index;
+	bitStream << message;
+
+	peer->Send(&bitStream, MEDIUM_PRIORITY, RELIABLE, 2, UNASSIGNED_SYSTEM_ADDRESS, true);
+
+	ChatMessage event = {message, localPlayer};
+	Notifier<Players, ChatMessage>::raise(event);
 }
 
 // FUNCTION: WEBSERVICE 0x101956e0

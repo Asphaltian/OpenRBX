@@ -94,22 +94,22 @@ public:
 	// clang-format on
 	static bool lookupByGuid(const Guid::Data& data, T*& result)
 	{
-		if (&Name::getNullName() == data.scope) {
+		if (Name::getNullName() == *data.scope) {
 			result = NULL;
 			return true;
 		}
 
 		StaticData& s = getStaticData();
 		boost::recursive_mutex::scoped_lock lock(s.mutex);
-		typename StaticData::Map::iterator iter = s.map.find(data);
+		typename StaticData::Map::const_iterator iter = s.map.find(data);
 
-		if (iter == s.map.end()) {
-			result = NULL;
-			return false;
+		if (iter != s.map.end()) {
+			result = iter->second;
+			return true;
 		}
 
-		result = iter->second;
-		return true;
+		result = NULL;
+		return false;
 	}
 
 	static T* getByGuid(const Guid::Data& data);
