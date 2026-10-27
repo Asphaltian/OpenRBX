@@ -47,10 +47,12 @@ public:
 		return x >= low.x && x <= high.x && y >= low.y && y <= high.y;
 	}
 
-	Rect inset(const G3D::Vector2int16& amount) const
+	Rect inset(const G3D::Vector2int16& amount)
 	{
 		return Rect(low.x + amount.x, low.y + amount.y, high.x - amount.x, high.y - amount.y);
 	}
+
+	Rect inset(int amount) { return Rect(low.x + amount, low.y + amount, high.x - amount, high.y - amount); }
 
 	Rect positionChild(const Rect& child, Location xLocation, Location yLocation) const;
 };

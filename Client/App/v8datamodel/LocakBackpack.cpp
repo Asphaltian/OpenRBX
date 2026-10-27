@@ -1,3 +1,4 @@
+#include "compat.h"
 #include "network/Player.h"
 #include "network/Players.h"
 #include "util/Events.h"
@@ -19,10 +20,52 @@ G3D::Vector2 LocalBackpackItem::getSize() const
 	return G3D::Vector2(size, size);
 }
 
-// STUB: WEBSERVICE 0x100d5d80
+// FUNCTION: WEBSERVICE 0x100d5d80
 void LocalBackpackItem::render2d(Adorn* adorn)
 {
-	STUB(0x100d5d80);
+	int fontSize = GuiRoot::normalizedFontSize(12);
+
+	Rect draw = getMyRect();
+	float numberSize = draw.size().x * 0.2f;
+	Rect numberRect = Rect::fromLowSize(
+		G3D::Vector2(draw.low.x + 2, draw.high.y - 2 - numberSize),
+		G3D::Vector2(numberSize, numberSize)
+	);
+
+	adorn->rect2d(draw.toRect2D(), GuiItem::translucentBackdrop());
+
+	adorn->rect2d(numberRect.toRect2D(), G3D::Color4(G3D::Color3::gray(), 1));
+
+	adorn->drawFont2D(
+		StringConverter<int>::convertToString(getBinId()),
+		numberRect.center(),
+		fontSize,
+		G3D::Color3::white(),
+		G3D::Color4::clear(),
+		Adorn::XALIGN_CENTER,
+		Adorn::YALIGN_CENTER,
+		Adorn::PROPORTIONAL_SPACING
+	);
+
+	if (myItem) {
+		if (myItem->drawSelected()) {
+			adorn->outlineRect2d(draw.toRect2D(), 3.0f, G3D::Color4(G3D::Color3::green(), 1));
+		}
+
+		if (guiImageDraw.setImage(adorn, myItem->getTextureId())) {
+#ifdef COMPAT_MODE
+			Rect imageRect = draw.inset(fontSize);
+			guiImageDraw.render2d(adorn, myItem->drawEnabled(), imageRect, widgetState);
+#else
+			guiImageDraw.render2d(adorn, myItem->drawEnabled(), draw.inset(fontSize), widgetState);
+#endif
+			return;
+		}
+
+		setName(myItem->getName());
+	}
+
+	Widget::render2d(adorn);
 }
 
 // STUB: WEBSERVICE 0x100d6100

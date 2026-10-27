@@ -22,7 +22,7 @@ extern const char sBackpackItem[];
 class BackpackItem : public DescribedNonCreatable<BackpackItem, Widget, sBackpackItem>
 {
 public:
-	const TextureId& getTextureId() const { return textureId; }
+	const TextureId getTextureId() const;
 
 	virtual bool drawEnabled() const { return true; }   // vtable+0x7c
 	virtual bool drawSelected() const { return false; } // vtable+0x80

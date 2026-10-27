@@ -4,6 +4,12 @@
 
 namespace RBX {
 
+// FUNCTION: WEBSERVICE 0x100c70f0
+const TextureId BackpackItem::getTextureId() const
+{
+	return textureId;
+}
+
 // FUNCTION: WEBSERVICE 0x100c7120
 bool Hopper::askAddChild(const Instance* instance) const
 {

@@ -36,7 +36,7 @@ private:
 	virtual G3D::Vector2 getSize() const;
 	virtual void render2d(Adorn* adorn);
 	virtual void onClick(const GuiEvent& event);
-	int getBinId() const;
+	int getBinId() const { return getParent()->findChildIndex(this) + 1; }
 
 public:
 	LocalBackpackItem();
