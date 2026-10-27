@@ -14,9 +14,7 @@
 #include <atlpath.h>
 #include <atlstr.h>
 #include <boost/bind.hpp>
-#ifndef COMPAT_MODE
 #include <boost/iostreams/copy.hpp>
-#endif
 #include <fstream>
 #include <istream>
 #include <shlobj.h>
@@ -544,11 +542,7 @@ boost::shared_ptr<const std::string> ContentProvider::requestContentString(Conte
 		std::ifstream stream(content->filename->c_str(), std::ios_base::in | std::ios_base::binary);
 
 		std::ostringstream data;
-#ifdef COMPAT_MODE
-		data << stream.rdbuf();
-#else
 		boost::iostreams::copy(stream, data);
-#endif
 		content->data.reset(new std::string(data.str()));
 	}
 	return content->data;

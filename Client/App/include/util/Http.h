@@ -34,6 +34,15 @@ public:
 
 DECOMP_SIZE_ASSERT(Http, 0x38)
 
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10218160
+// RBX::`dynamic initializer for 'trustCheckMutex''
+// SYNTHETIC: WEBSERVICE 0x10221420
+// RBX::`dynamic atexit destructor for 'trustCheckMutex''
+// SYNTHETIC: WEBSERVICE 0x10221430
+// `RBX::Http::trustCheck'::`3'::`dynamic atexit destructor for 'skipTrustCheck''
+// clang-format on
+
 } // namespace RBX
 
 #endif // UTIL_HTTP_H

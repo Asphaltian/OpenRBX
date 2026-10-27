@@ -421,8 +421,12 @@ add_engine_library(lua
   SOURCES ${OPENRBX_LUA_SOURCES}
 )
 
+if (MSVC_FOR_DECOMP)
+  list(APPEND OPENRBX_APP_SOURCES 3rdparty/boost_1_34_1/libs/iostreams/src/zlib.cpp)
+endif()
+
 add_engine_library(app
-  DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE
+  DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE BOOST_IOSTREAMS_NO_LIB
   OPTIONS /O2 /Ob2 /Oi /Oy /GF /Gy /GS- /fp:fast
   SOURCES ${OPENRBX_APP_SOURCES}
 )

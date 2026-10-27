@@ -27,6 +27,33 @@ struct _Outit
 	typedef void reference;
 };
 } // namespace std
+
+#include <boost/cstdint.hpp>
+#include <ios>
+
+#define BOOST_IOSTREAMS_POSITIONING_HPP_INCLUDED
+
+namespace boost {
+namespace iostreams {
+typedef boost::intmax_t stream_offset;
+
+inline std::streamoff stream_offset_to_streamoff(stream_offset off)
+{
+	return static_cast<std::streamoff>(off);
+}
+
+inline std::streampos offset_to_position(stream_offset off)
+{
+	return std::streampos(static_cast<std::streamoff>(off));
+}
+
+template <typename PosType>
+inline stream_offset position_to_offset(PosType pos)
+{
+	return std::streamoff(pos);
+}
+} // namespace iostreams
+} // namespace boost
 #endif
 
 #endif // COMPAT_H
