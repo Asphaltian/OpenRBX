@@ -648,6 +648,8 @@ address,type,symbol
 0x1022e4e0,global,??_7Instance@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x1022e4ec,global,??_7Instance@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x1022e7a8,global,??_7MD5HasherImpl@RBX@@6B@
+0x1022e8e0,global,??_S?$basic_ifstream@DU?$char_traits@D@std@@@std@@6B@
+0x1022e8e8,global,??_S?$basic_istringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@6B@
 0x1022e928,global,?sRunService@RBX@@3QBDB
 0x1022e938,global,??_7?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x1022e948,global,??_7?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@

@@ -97,6 +97,10 @@ protected:
 
 	std::streambuf* buffer;                                     // 0x04
 	std::stack<XmlElement*, std::deque<XmlElement*> > elements; // 0x08
+
+public:
+	// SYNTHETIC: WEBSERVICE 0x100519d0
+	// XmlParser::~XmlParser
 };
 
 DECOMP_SIZE_ASSERT(XmlParser, 0x1c)
