@@ -180,6 +180,7 @@ private:
 	virtual ContactManager* getContactManager();
 	virtual void tellCameraNear(float distance);
 	virtual float getIntendedRotationAboutYAxis();
+	virtual void getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives);
 	virtual void cameraSetWalkOrientation(float rad, bool noAdjust);
 
 public:

@@ -10,6 +10,7 @@
 #include "v8datamodel/JointInstance.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Teams.h"
+#include "v8datamodel/Tool.h"
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Body.h"
 #include "v8tree/Service.h"
@@ -17,7 +18,11 @@
 #include "v8world/Primitive.h"
 #include "v8world/World.h"
 
+#include <algorithm>
+#include <boost/bind.hpp>
+#include <boost/ref.hpp>
 #include <stdexcept>
+#include <vector>
 
 namespace RBX {
 
@@ -239,6 +244,12 @@ Humanoid::~Humanoid()
 {
 }
 
+// FUNCTION: WEBSERVICE 0x100a13b0
+void Humanoid::getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives)
+{
+	getIgnorePrims(primitives);
+}
+
 // FUNCTION: WEBSERVICE 0x100a1480
 float Humanoid::getIntendedRotationAboutYAxis()
 {
@@ -440,17 +451,46 @@ G3D::Vector3 Humanoid::getIntendedMovementVector()
 	return getIntendedMovementVector(false);
 }
 
-// STUB: WEBSERVICE 0x100a30f0
+// FUNCTION: WEBSERVICE 0x100a30f0
 G3D::Vector3 Humanoid::updateWalkDirection()
 {
-	STUB(0x100a30f0);
-	return G3D::Vector3::zero();
+	return getIntendedMovementVector(true);
 }
 
-// STUB: WEBSERVICE 0x100a31b0
+// FUNCTION: WEBSERVICE 0x100a3110
+static void collectAllDescendantCharacterPrims(
+	boost::shared_ptr<Instance> descendant,
+	std::vector<Primitive*>& primitives
+)
+{
+	PartInstance* part = dynamic_cast<PartInstance*>(descendant.get());
+	if (part) {
+		primitives.push_back(part->getPrimitive());
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a31b0
 void Humanoid::tellCameraNear(float distance)
 {
-	STUB(0x100a31b0);
+	std::vector<Primitive*> primitives;
+	if (ModelInstance* character = getCharacterFromHumanoid(this)) {
+		character->visitDescendents(boost::bind(&collectAllDescendantCharacterPrims, _1, boost::ref(primitives)));
+	}
+
+	float alphaModifier = 1.0f;
+	if (distance < 3.0f) {
+		alphaModifier = 0.0f;
+	}
+	else if (distance < 6.0f) {
+		alphaModifier = 0.5f;
+	}
+
+	for (size_t i = 0; i < primitives.size(); ++i) {
+		PartInstance* part = PartInstance::fromPrimitive(primitives[i]);
+		if (!dynamic_cast<Tool*>(part->getParent())) {
+			part->setAlphaModifier(alphaModifier);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a4290
@@ -694,10 +734,19 @@ void Humanoid::setSit(bool value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a5230
+// FUNCTION: WEBSERVICE 0x100a5230
 void Humanoid::setTargetPoint(const G3D::Vector3& value)
 {
-	STUB(0x100a5230);
+	float tolerance = 1.0f;
+	if (getTorso()) {
+		float torsoToTarget = Math::taxiCabMagnitude(getTorso()->getCoordinateFrame().translation - value);
+		tolerance = std::max(2.0f, torsoToTarget) * 0.01f;
+	}
+
+	if (Math::taxiCabMagnitude(value - targetPoint) > tolerance) {
+		targetPoint = value;
+		raisePropertyChanged(propTargetPoint);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a5310
@@ -776,10 +825,25 @@ void Humanoid::onEvent(const RunService* source, Stepped event)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a5770
+// FUNCTION: WEBSERVICE 0x100a5770
 void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
 {
-	STUB(0x100a5770);
+	if (noAdjust) {
+		setWalkRotationalVelocity(0.0f);
+	}
+	else if (Body* torsoBody = getTorsoBody()) {
+		if (Body* root = torsoBody->getRoot()) {
+			G3D::Vector3 look = root->getPV().position.lookVector();
+			look.y = 0.0f;
+			look.unitize();
+			float lookAng = Math::radWrap(Math::angleToE0(G3D::Vector2(look.z, look.x)));
+			float delta = Math::radWrap(Math::radWrap(rad) - lookAng);
+			if (fabs(delta) < 0.1f) {
+				delta = 0.0f;
+			}
+			setWalkRotationalVelocity(delta);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a58a0
