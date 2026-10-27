@@ -14,4 +14,19 @@
 #define static_assert(expr, msg)
 #endif
 
+#ifdef COMPAT_MODE
+#include <iterator>
+
+namespace std {
+struct _Outit
+{
+	typedef output_iterator_tag iterator_category;
+	typedef void value_type;
+	typedef void difference_type;
+	typedef void pointer;
+	typedef void reference;
+};
+} // namespace std
+#endif
+
 #endif // COMPAT_H

@@ -1,6 +1,7 @@
 #ifndef V8DATAMODEL_SELECTION_H
 #define V8DATAMODEL_SELECTION_H
 
+#include "compat.h"
 #include "decomp.h"
 #include "util/Events.h"
 #include "util/Handle.h"
@@ -82,6 +83,74 @@ public:
 	void toggleSelection(Instance* instance);
 	void removeFromSelection(const Instance* instance);
 
+	bool isSelected(const Instance* instance) const
+	{
+		return std::find(selection->begin(), selection->end(), shared_from(instance)) != selection->end();
+	}
+
+	// SIZE 0x8
+	class AddIterator : public std::_Outit
+	{
+	private:
+		Selection* selection; // 0x4
+
+	public:
+		AddIterator(Selection* selection) : selection(selection) {}
+
+		AddIterator& operator*() { return *this; }
+		AddIterator& operator++() { return *this; }
+		AddIterator operator++(int) { return *this; }
+
+		template <class T>
+		AddIterator& operator=(T* instance)
+		{
+			selection->addToSelection(instance);
+			return *this;
+		}
+	};
+
+	// SIZE 0x8
+	class RemoveIterator : public std::_Outit
+	{
+	private:
+		Selection* selection; // 0x4
+
+	public:
+		RemoveIterator(Selection* selection) : selection(selection) {}
+
+		RemoveIterator& operator*() { return *this; }
+		RemoveIterator& operator++() { return *this; }
+		RemoveIterator operator++(int) { return *this; }
+
+		template <class T>
+		RemoveIterator& operator=(T* instance)
+		{
+			selection->removeFromSelection(instance);
+			return *this;
+		}
+	};
+
+	// SIZE 0x8
+	class ToggleIterator : public std::_Outit
+	{
+	private:
+		Selection* selection; // 0x4
+
+	public:
+		ToggleIterator(Selection* selection) : selection(selection) {}
+
+		ToggleIterator& operator*() { return *this; }
+		ToggleIterator& operator++() { return *this; }
+		ToggleIterator operator++(int) { return *this; }
+
+		template <class T>
+		ToggleIterator& operator=(T* instance)
+		{
+			selection->toggleSelection(instance);
+			return *this;
+		}
+	};
+
 	virtual void onEvent(const Instance* source, AncestorChanged event);
 
 	void addFilteredSelection(ISelectionBase* fs);
@@ -96,6 +165,9 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Selection, 0x12c)
+DECOMP_SIZE_ASSERT(Selection::AddIterator, 0x8)
+DECOMP_SIZE_ASSERT(Selection::RemoveIterator, 0x8)
+DECOMP_SIZE_ASSERT(Selection::ToggleIterator, 0x8)
 
 // SIZE 0x114
 template <class T>

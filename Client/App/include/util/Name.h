@@ -546,6 +546,8 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1006c110
 	// RBX::Named<RBX::ArrowToolBase,&RBX::sArrowTool>::getName
+	// TEMPLATE: WEBSERVICE 0x100bfa10
+	// RBX::Named<RBX::MouseCommand,&RBX::sBoxSelectCommand>::getName
 	// TEMPLATE: WEBSERVICE 0x100c5340
 	// RBX::Named<RBX::MouseCommand,&RBX::sNewNullTool>::getName
 	// TEMPLATE: WEBSERVICE 0x100cabf0
@@ -560,6 +562,8 @@ public:
 	// RBX::Named<RBX::Flying,&RBX::sJumping>::getName
 	// TEMPLATE: WEBSERVICE 0x101231e0
 	// RBX::Named<RBX::Balancing,&RBX::sGettingUp>::getName
+	// TEMPLATE: WEBSERVICE 0x10126330
+	// RBX::Named<RBX::MouseCommand,&RBX::sGroupDragTool>::getName
 	// TEMPLATE: WEBSERVICE 0x1012a510
 	// RBX::Named<RBX::Balancing,&RBX::sFlying>::getName
 	// TEMPLATE: WEBSERVICE 0x1012a650

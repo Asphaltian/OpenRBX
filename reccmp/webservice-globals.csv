@@ -7306,3 +7306,7 @@ address,type,symbol
 0x1023a794,global,??_7AIChaseController@RBX@@6BController@1@@
 0x1023a7b0,global,??_7AIFleeController@RBX@@6B?$Listener@VRunService@RBX@@VHeartbeat@2@@1@@
 0x1023a7bc,global,??_7AIFleeController@RBX@@6BController@1@@
+0x10239ec0,global,??_7BoxSelectCommand@RBX@@6BIRenderable@1@@
+0x10239edc,global,??_7BoxSelectCommand@RBX@@6BINamed@1@@
+0x102484c4,global,??_7GroupDragTool@RBX@@6BIRenderable@1@@
+0x102484dc,global,??_7GroupDragTool@RBX@@6BINamed@1@@

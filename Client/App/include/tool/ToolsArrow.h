@@ -4,7 +4,12 @@
 #include "decomp.h"
 #include "util/Name.h"
 #include "v8datamodel/MouseCommand.h"
+#include "v8datamodel/Selection.h"
+#include "v8tree/Service.h"
 
+#include <G3D/Rect2D.h>
+#include <G3D/Vector2int16.h>
+#include <set>
 #include <string>
 
 namespace RBX {
@@ -12,6 +17,35 @@ namespace RBX {
 class Workspace;
 
 extern char sBoxSelectCommand[];
+// SIZE 0x44
+class BoxSelectCommand : public Named<MouseCommand, sBoxSelectCommand>
+{
+private:
+	ServiceClient<Selection> selection;     // 0x20
+	bool reverseSelecting;                  // 0x2c
+	G3D::Vector2int16 mouseDownView;        // 0x2e
+	G3D::Vector2int16 mouseCurrentView;     // 0x32
+	std::set<Instance*> previousItemsInBox; // 0x38
+
+	void getMouseInstances(std::set<Instance*>& instances, const UIEvent& uiEvent, G3D::Rect2D& selectBox);
+	void selectAnd(const std::set<Instance*>& newItemsInBox);
+	void selectReverse(const std::set<Instance*>& newItemsInBox);
+
+public:
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+	virtual void onMouseMove(const UIEvent& uiEvent);
+	virtual void render2d(Adorn* adorn);
+
+	BoxSelectCommand(Workspace* workspace);
+};
+
+DECOMP_SIZE_ASSERT(BoxSelectCommand, 0x44)
+
+// SYNTHETIC: WEBSERVICE 0x100c0110
+// RBX::BoxSelectCommand::~BoxSelectCommand
+
+// SYNTHETIC: WEBSERVICE 0x100c01c0
+// RBX::BoxSelectCommand::`scalar deleting destructor'
 
 extern char sArrowTool[];
 
