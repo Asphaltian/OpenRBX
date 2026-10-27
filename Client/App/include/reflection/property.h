@@ -524,6 +524,16 @@ public:
 	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::Soundscape::SoundService>
 	// TEMPLATE: WEBSERVICE 0x10082260
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Soundscape::SoundChannel>
+	// TEMPLATE: WEBSERVICE 0x100db740
+	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::CoordinateFrame const &)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100db7e0
+	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::Vector3>::GetSetImpl<G3D::Vector3 const (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::Vector3 const &)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100db840
+	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,int>::GetSetImpl<int (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(int)>::setValue
+	// TEMPLATE: WEBSERVICE 0x100dbf70
+	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::CoordinateFrame const &)>
+	// TEMPLATE: WEBSERVICE 0x100dbfe0
+	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::Vector3>::getset<G3D::Vector3 const (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x100e0e40
 	// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundProp<RBX::TextureId,1><RBX::ShirtGraphic>
 	// TEMPLATE: WEBSERVICE 0x100e0f20
@@ -802,6 +812,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::ModelInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::ModelInstance,G3D::CoordinateFrame><G3D::CoordinateFrame const & (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100c8660
 	// RBX::Reflection::PropDescriptor<RBX::BackpackItem,RBX::TextureId>::PropDescriptor<RBX::BackpackItem,RBX::TextureId><RBX::TextureId const (__thiscall RBX::BackpackItem::*)(void)const ,void (__thiscall RBX::BackpackItem::*)(RBX::TextureId const &)>
+	// TEMPLATE: WEBSERVICE 0x100dc5c0
+	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::Vector3>::PropDescriptor<RBX::Accoutrement,G3D::Vector3><G3D::Vector3 const (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x100e2920
 	// RBX::Reflection::PropDescriptor<RBX::Explosion,float>::PropDescriptor<RBX::Explosion,float><float (__thiscall RBX::Explosion::*)(void)const ,void (__thiscall RBX::Explosion::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100b4610

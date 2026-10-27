@@ -126,6 +126,7 @@ public:
 
 	PartInstance* getHead() const;
 	PartInstance* getTorso() const;
+	G3D::CoordinateFrame getTopOfHead() const;
 	PartInstance* getLeftLeg() const;
 	PartInstance* getRightLeg() const;
 	PartInstance* getLeftArm() const;

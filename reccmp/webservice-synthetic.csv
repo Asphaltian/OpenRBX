@@ -324,6 +324,7 @@ address,type,symbol
 0x100dc280,synthetic,??1?$DescribedCreatable@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@UAE@XZ
 0x100dc290,synthetic,?getClassName@?$FactoryProduct@VAccoutrement@RBX@@VInstance@2@$1?sAccoutrement@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100dc2b0,synthetic,?getClassName@?$FactoryProduct@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@UBEABVName@2@XZ
+0x100dc500,synthetic,??$?0P8Accoutrement@RBX@@BEABVCoordinateFrame@G3D@@XZP801@AEXABV23@@Z@?$PropDescriptor@VAccoutrement@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@QAE@PBD0P8Accoutrement@2@BEABVCoordinateFrame@G3D@@XZP832@AEXABV45@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100dc680,stub,??$?0P8Accoutrement@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VAccoutrement@RBX@@H@Reflection@RBX@@QAE@PBD0P8Accoutrement@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100dcd00,stub,??0Accoutrement@RBX@@QAE@XZ
 0x100dd7e0,stub,??0Hat@RBX@@QAE@XZ

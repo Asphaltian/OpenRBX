@@ -64,6 +64,12 @@ PartInstance* Humanoid::getHeadFromCharacter(const ModelInstance* character)
 	return character ? dynamic_cast<PartInstance*>(character->findFirstChildByName("Head")) : NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x100a0900
+G3D::CoordinateFrame Humanoid::getTopOfHead() const
+{
+	return G3D::CoordinateFrame(G3D::Matrix3::identity(), G3D::Vector3(0, 0.5f, 0));
+}
+
 // FUNCTION: WEBSERVICE 0x100a0990
 ContactManager* Humanoid::getContactManager()
 {

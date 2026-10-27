@@ -7165,3 +7165,15 @@ address,type,symbol
 0x102fc3ac,global,flag___RBX::ServiceProvider::getClassIndex<RBX::SpawnerService>
 0x10245e24,global,??_8SpawnLocation@RBX@@7B?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@1@@
 0x102fc39c,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::SpawnerService>
+0x1023ee84,global,??_7Accoutrement@RBX@@6BILocation@1@@
+0x1023ee68,global,??_7Accoutrement@RBX@@6BICameraSubject@1@@
+0x1023f2d8,global,??_7Hat@RBX@@6BICameraSubject@1@@
+0x1023f2f4,global,??_7Hat@RBX@@6BILocation@1@@
+0x102417e4,global,??_8Accoutrement@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8?$FactoryProduct@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@7BICameraSubject@1@@
+0x1023f1bc,global,??_8Accoutrement@RBX@@7B01@@
+0x1023f1bc,global,??_8?$DescribedCreatable@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@7BAccoutrement@1@@
+0x1023f1bc,global,??_8Hat@RBX@@7BAccoutrement@1@@
+0x1023f1bc,global,??_8?$FactoryProduct@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@7BAccoutrement@1@@
+0x102417e4,global,??_8Hat@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8?$DescribedCreatable@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@7BICameraSubject@1@@

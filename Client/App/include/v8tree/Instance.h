@@ -798,6 +798,8 @@ protected:
 // RBX::Instance::findFirstChildOfType<RBX::Humanoid>
 // TEMPLATE: WEBSERVICE 0x100c79f0
 // RBX::Instance::findFirstChildOfType<RBX::BackpackItem>
+// TEMPLATE: WEBSERVICE 0x100dbef0
+// RBX::Instance::findFirstChildOfType<RBX::Accoutrement>
 // TEMPLATE: WEBSERVICE 0x100e07a0
 // RBX::Instance::findFirstChildOfType<RBX::Decal>
 // TEMPLATE: WEBSERVICE 0x100e0820
