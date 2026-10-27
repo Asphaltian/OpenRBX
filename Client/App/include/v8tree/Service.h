@@ -55,8 +55,14 @@ private:
 DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x1000c360
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::Workspace>
+// TEMPLATE: WEBSERVICE 0x1001e340
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::ScriptContext>
 // TEMPLATE: WEBSERVICE 0x10042970
 // RBX::ServiceProvider::doGetClassIndex<RBX::RunService>
+// TEMPLATE: WEBSERVICE 0x10043180
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::RunService>
 // TEMPLATE: WEBSERVICE 0x10045820
 // RBX::ServiceProvider::find<RBX::RunService>
 // FUNCTION: WEBSERVICE 0x10058da0
@@ -83,14 +89,14 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::doGetClassIndex<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006a5f0
 // RBX::ServiceProvider::doGetClassIndex<RBX::StarterPackService>
+// TEMPLATE: WEBSERVICE 0x1006a650
+// RBX::ServiceProvider::doGetClassIndex<RBX::Selection>
 // TEMPLATE: WEBSERVICE 0x1006b170
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006b180
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::StarterPackService>
-// TEMPLATE: WEBSERVICE 0x1000c360
-// RBX::ServiceProvider::callDoGetClassIndex<RBX::Workspace>
-// TEMPLATE: WEBSERVICE 0x1001e340
-// RBX::ServiceProvider::callDoGetClassIndex<RBX::ScriptContext>
+// TEMPLATE: WEBSERVICE 0x1006b220
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::Selection>
 // TEMPLATE: WEBSERVICE 0x1006d570
 // RBX::ServiceProvider::find<RBX::StarterPackService>
 // FUNCTION: WEBSERVICE 0x1006e4c0
@@ -125,8 +131,16 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::find<RBX::Network::Players>
 // FUNCTION: WEBSERVICE 0x10079520
 // RBX::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>
+// SYNTHETIC: WEBSERVICE 0x10079940
+// RBX::ServiceProvider::~ServiceProvider
 // FUNCTION: WEBSERVICE 0x1007aa60
 // RBX::ServiceProvider::ServiceProvider
+// TEMPLATE: WEBSERVICE 0x100a0ad0
+// RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::PartInstance> >
+// TEMPLATE: WEBSERVICE 0x100a1050
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::FilteredSelection<RBX::PartInstance> >
+// TEMPLATE: WEBSERVICE 0x100a3410
+// RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::PartInstance> >
 // TEMPLATE: WEBSERVICE 0x100a41f0
 // RBX::ServiceProvider::find<RBX::Teams>
 // TEMPLATE: WEBSERVICE 0x100cd240
@@ -155,8 +169,6 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::doGetClassIndex<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106670
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::GeometryService>
-// TEMPLATE: WEBSERVICE 0x10043180
-// RBX::ServiceProvider::callDoGetClassIndex<RBX::RunService>
 // FUNCTION: WEBSERVICE 0x10106790
 // RBX::ServiceProvider::find<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106940
@@ -167,8 +179,6 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::find<RBX::StarterPackService>
 // TEMPLATE: WEBSERVICE 0x1018f3b0
 // RBX::ServiceProvider::create<RBX::TimerService>
-// SYNTHETIC: WEBSERVICE 0x10079940
-// RBX::ServiceProvider::~ServiceProvider
 // SYNTHETIC: WEBSERVICE 0x102218d0
 // `RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on
@@ -335,6 +345,35 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(ServiceProvider, 0x15c)
+
+// SIZE 0x0c
+template <class T>
+class ServiceClient
+{
+private:
+	Instance* context;                    // 0x00
+	mutable boost::shared_ptr<T> service; // 0x04
+
+public:
+	ServiceClient(Instance* context) : context(context) {}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100a49c0
+	// RBX::ServiceClient<RBX::FilteredSelection<RBX::PartInstance> >::createService
+	// clang-format on
+	operator T*() { return createService(true); }
+	T* operator->() { return createService(true); }
+
+private:
+	T* createService(bool createIfNotFound) const
+	{
+		if (!service) {
+			service = shared_from(ServiceProvider::create<T>(context));
+		}
+
+		return service.get();
+	}
+};
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10218870

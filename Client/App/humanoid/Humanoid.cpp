@@ -9,6 +9,7 @@
 #include "v8datamodel/ForceField.h"
 #include "v8datamodel/JointInstance.h"
 #include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/Selection.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/Tool.h"
 #include "v8datamodel/Workspace.h"
@@ -622,10 +623,26 @@ void Humanoid::render2d(Adorn* adorn)
 	}
 }
 
-// STUB: WEBSERVICE 0x100a4bf0
+// FUNCTION: WEBSERVICE 0x100a4bf0
 void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
 {
-	STUB(0x100a4bf0);
+	if (ModelInstance* character = getCharacterFromHumanoid(this)) {
+		character->visitDescendents(
+			boost::bind(
+				&collectAllDescendantCharacterPrims,
+				_1,
+				boost::ref(reinterpret_cast<std::vector<Primitive*>&>(ignore))
+			)
+		);
+	}
+
+	ServiceClient<FilteredSelection<PartInstance> > pvSelection(this);
+	if (pvSelection) {
+		for (std::vector<PartInstance*>::const_iterator iter = pvSelection->begin(); iter != pvSelection->end();
+			 ++iter) {
+			ignore.push_back((*iter)->getPrimitive());
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a4d50

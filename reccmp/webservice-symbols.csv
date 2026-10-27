@@ -157,7 +157,6 @@ address,size,symbol,name
 0x1009ae00,0x3f,?setName@PartInstance@RBX@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x1009b610,0xc1,?uiToXmlSize@PartInstance@RBX@@ABE?AVVector3@G3D@@ABV34@@Z,
 0x1009d3c0,0x34,?getLocation@PartInstance@RBX@@UBE?BVCoordinateFrame@G3D@@XZ,
-0x100a1f90,0x78,??$create@V?$FilteredSelection@VPartInstance@RBX@@@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@V?$FilteredSelection@VPartInstance@RBX@@@RBX@@@boost@@XZ,
 0x100ab1b0,0x6a,?getPtr@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA?AV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@I@Z,
 0x100adac0,0xca,?on_index@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHABVColor3@G3D@@PBDPAUlua_State@@@Z,
 0x100adbf0,0x81,??$getValue@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVVector3@G3D@@@Z,

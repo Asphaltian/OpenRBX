@@ -155,7 +155,10 @@ address,type,symbol
 0x1006a7b0,synthetic,?getNumPrimitives@World@RBX@@QBEHXZ
 0x1006c0d0,synthetic,?getClassName@?$NonFactoryProduct@VRootInstance@RBX@@$1?sWorkspace@2@3PADA@RBX@@UBEABVName@2@XZ
 0x1006cd10,synthetic,??1?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@MAE@XZ
+0x1006d720,synthetic,??$find@VSelection@RBX@@@ServiceProvider@RBX@@QBEPAVSelection@1@XZ
+0x1006e930,synthetic,??$create@VSelection@RBX@@@ServiceProvider@RBX@@QBEPAVSelection@1@XZ
 0x1006ead0,synthetic,??$create@VStarterPackService@RBX@@@ServiceProvider@RBX@@SAPAVStarterPackService@1@PBVInstance@1@@Z
+0x1006eb70,synthetic,??$create@VSelection@RBX@@@ServiceProvider@RBX@@SAPAVSelection@1@PBVInstance@1@@Z
 0x100788b0,synthetic,??1?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAE@XZ
 0x10078c00,synthetic,??$create@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@QBEPAVSoundService@Soundscape@1@XZ
 0x1007a4b0,synthetic,??_G?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAEPAXI@Z
@@ -227,6 +230,8 @@ address,type,symbol
 0x100a3830,synthetic,??$?0P8Humanoid@RBX@@BEMXZP801@AEXABM@Z@?$PropDescriptor@VHumanoid@RBX@@M@Reflection@RBX@@QAE@PBD0P8Humanoid@2@BEMXZP832@AEXABM@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100a38f0,synthetic,??$?0P8Humanoid@RBX@@BE_NXZP801@AEX_N@Z@?$PropDescriptor@VHumanoid@RBX@@_N@Reflection@RBX@@QAE@PBD0P8Humanoid@2@BE_NXZP832@AEX_N@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100a39b0,synthetic,??$?0P8Humanoid@RBX@@BEMXZP801@AEXM@Z@?$PropDescriptor@VHumanoid@RBX@@M@Reflection@RBX@@QAE@PBD0P8Humanoid@2@BEMXZP832@AEXM@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100a3a70,synthetic,??$create@V?$FilteredSelection@VPartInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VPartInstance@RBX@@@1@XZ
+0x100a4240,synthetic,??$create@V?$FilteredSelection@VPartInstance@RBX@@@RBX@@@ServiceProvider@RBX@@SAPAV?$FilteredSelection@VPartInstance@RBX@@@1@PBVInstance@1@@Z
 0x100a4290,synthetic,??0Humanoid@RBX@@QAE@XZ
 0x100afd20,synthetic,??1FunctionScriptSlot@@QAE@XZ
 0x100afdb0,synthetic,??1WaitScriptSlot@@QAE@XZ

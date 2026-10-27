@@ -7252,3 +7252,15 @@ address,type,symbol
 0x10230f54,global,??_8?$FactoryProduct@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@7B?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@1@@
 0x1023730c,global,??_7?$RefPropDescriptor@VHumanoid@RBX@@VPartInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x10237304,global,??_7?$RefPropDescriptor@VHumanoid@RBX@@VPartInstance@2@@Reflection@RBX@@6BIIDREF@2@@
+0x1023721c,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x102371dc,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x1023722c,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6BDebugable@1@@
+0x102371fc,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x102371cc,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x102371ec,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x10237234,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x1023724c,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1023720c,global,??_7?$FilteredSelection@VPartInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x102f95f4,global,flag___RBX::ServiceProvider::getClassIndex<RBX::FilteredSelection<RBX::PartInstance> >
+0x102f6bb8,global,flag___RBX::Name::declare<0>
+0x102f6994,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Selection>

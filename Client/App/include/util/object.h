@@ -25,7 +25,7 @@ DECOMP_SIZE_ASSERT(Object, 0x04)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1006c2e0
-// RBX::shared_from<RBX::Instance>
+// RBX::shared_from<RBX::Selection>
 // TEMPLATE: WEBSERVICE 0x100c5e40
 // RBX::shared_from<RBX::Instance const >
 // TEMPLATE: WEBSERVICE 0x1016ef10
@@ -98,8 +98,6 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::StatsService>
 	// TEMPLATE: WEBSERVICE 0x100666f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<bool>,bool const *>
-	// TEMPLATE: WEBSERVICE 0x10074260
-	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Players>
 	// TEMPLATE: WEBSERVICE 0x10066770
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<int>,boost::function0<int,std::allocator<boost::function_base> > >
 	// TEMPLATE: WEBSERVICE 0x100691f0
@@ -120,6 +118,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Tool>
 	// TEMPLATE: WEBSERVICE 0x1006e390
 	// RBX::Creatable<RBX::Instance>::create<RBX::Flag>
+	// TEMPLATE: WEBSERVICE 0x10074260
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Players>
 	// TEMPLATE: WEBSERVICE 0x10076300
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x10076620
@@ -204,6 +204,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::ObjectValue>
 	// TEMPLATE: WEBSERVICE 0x100a1d00
 	// RBX::shared_from_dynamic_cast<RBX::PartInstance,RBX::Instance>
+	// TEMPLATE: WEBSERVICE 0x100a1f90
+	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::PartInstance> >
 	// TEMPLATE: WEBSERVICE 0x100acde0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Decal>
 	// TEMPLATE: WEBSERVICE 0x100ad050
