@@ -168,7 +168,6 @@ address,size,symbol,name
 0x100c25f0,0x7,?getCameraFocus@Camera@RBX@@QBEABVCoordinateFrame@G3D@@XZ,
 0x100c3e20,0x3a,?getStringValue@?$EnumPropDescriptor@VCamera@RBX@@W4CameraType@12@@Reflection@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@23@@Z,
 0x100c3e60,0x45,?setStringValue@?$EnumPropDescriptor@VCamera@RBX@@W4CameraType@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
-0x100c5ca0,0x17e,?getLocalTargetPosition@AIController@RBX@@IBE?AVVector3@G3D@@XZ,
 0x100c8990,0x3a,?getStringValue@?$EnumPropDescriptor@VHopperBin@RBX@@W4BinType@12@@Reflection@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@23@@Z,
 0x100c89d0,0x45,?setStringValue@?$EnumPropDescriptor@VHopperBin@RBX@@W4BinType@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x100c8ba0,0x99,??$?0HP8HopperBin@RBX@@AEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@?$PropDescriptor@VHopperBin@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@QAE@PBD0HP8HopperBin@2@AEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZW4Functionality@PropertyDescriptor@12@@Z,

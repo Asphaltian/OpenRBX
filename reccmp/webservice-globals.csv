@@ -7296,3 +7296,13 @@ address,type,symbol
 0x1022e8f0,global,??_7TextXmlParser@@6B@
 0x1023a2c0,global,??_7?$RefPropDescriptor@VCamera@RBX@@VInstance@2@@Reflection@RBX@@6BIIDREF@2@@
 0x1023a2c8,global,??_7?$RefPropDescriptor@VCamera@RBX@@VInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
+0x1023a658,global,??_7SteppingController@RBX@@6B?$Listener@VRunService@RBX@@VHeartbeat@2@@1@@
+0x1023a664,global,??_7SteppingController@RBX@@6BController@1@@
+0x1023a67c,global,??_7AIController@RBX@@6B?$Listener@VRunService@RBX@@VHeartbeat@2@@1@@
+0x1023a688,global,??_7AIController@RBX@@6BController@1@@
+0x1023a6a4,global,??_7PlayerController@RBX@@6B?$Listener@VRunService@RBX@@VHeartbeat@2@@1@@
+0x1023a6b0,global,??_7PlayerController@RBX@@6BController@1@@
+0x1023a788,global,??_7AIChaseController@RBX@@6B?$Listener@VRunService@RBX@@VHeartbeat@2@@1@@
+0x1023a794,global,??_7AIChaseController@RBX@@6BController@1@@
+0x1023a7b0,global,??_7AIFleeController@RBX@@6B?$Listener@VRunService@RBX@@VHeartbeat@2@@1@@
+0x1023a7bc,global,??_7AIFleeController@RBX@@6BController@1@@

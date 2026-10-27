@@ -278,8 +278,6 @@ address,type,symbol
 0x100c5b70,synthetic,??1?$DescribedCreatable@VControllerService@RBX@@VInstance@2@$1?sControllerService@2@3PADA@RBX@@UAE@XZ
 0x100c5e20,synthetic,?getClassName@?$FactoryProduct@VControllerService@RBX@@VInstance@2@$1?sControllerService@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100c64c0,synthetic,??$create@VRunService@RBX@@@ServiceProvider@RBX@@SAPAVRunService@1@PBVInstance@1@@Z
-0x100c6be0,stub,??0ControllerService@RBX@@QAE@XZ
-0x100c6ee0,synthetic,??_EControllerService@RBX@@UAEPAXI@Z
 0x100c71d0,synthetic,??1GuiItem@RBX@@UAE@XZ
 0x100c73e0,synthetic,??1TopMenuBar@RBX@@UAE@XZ
 0x100c7830,synthetic,??_EGuiItem@RBX@@WJM@AEPAXI@Z

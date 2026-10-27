@@ -21,6 +21,17 @@ public:
 	// FUNCTION: WEBSERVICE 0x1006a050
 	bool navKeyDown() const { return arrowKeyDown() || asdwKeyDown() || space; }
 
+	// FUNCTION: WEBSERVICE 0x100c5400
+	float leftRightASDW() const { return left_asdw ? 1.0f : (right_asdw ? -1.0f : 0.0f); }
+
+	// FUNCTION: WEBSERVICE 0x100c5420
+	float leftRightArrow() const { return left_arrow ? 1.0f : (right_arrow ? -1.0f : 0.0f); }
+
+	float forwardBackwardArrow() const { return forward_arrow ? 1.0f : (backward_arrow ? -1.0f : 0.0f); }
+
+	// FUNCTION: WEBSERVICE 0x100c5440
+	float forwardBackwardASDW() const { return forward_asdw ? 1.0f : (backward_asdw ? -1.0f : 0.0f); }
+
 	bool forward_arrow;  // 0x00
 	bool backward_arrow; // 0x01
 	bool left_arrow;     // 0x02

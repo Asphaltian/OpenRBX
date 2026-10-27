@@ -88,7 +88,9 @@ protected:
 public:
 	void moveToPoint(G3D::Vector3 point);
 	Controller* getTopPVController() const;
-	bool isChaseable() const;
+
+	// FUNCTION: WEBSERVICE 0x100c5b00
+	bool isChaseable() const { return getTopPVController()->hasIntelligence() && IsControllable.getValue(); }
 
 	virtual Extents getExtentsWorld() const = 0;                           // vtable+0x54
 	virtual Extents getExtentsLocal() const = 0;                           // vtable+0x58

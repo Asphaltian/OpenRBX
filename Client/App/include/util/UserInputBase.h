@@ -40,6 +40,8 @@ public:
 	void getNavKeys(NavKeys& navKeys) const;
 	bool altKeyDown() const { return keyDown(SDLK_RALT) || keyDown(SDLK_LALT); }
 	bool shiftKeyDown() const { return keyDown(SDLK_RSHIFT) || keyDown(SDLK_LSHIFT); }
+
+	// FUNCTION: WEBSERVICE 0x100bf0b0
 	bool ctrlKeyDown() const { return keyDown(SDLK_RCTRL) || keyDown(SDLK_LCTRL); }
 
 private:
