@@ -45,6 +45,10 @@ public:
 
 	boost::shared_ptr<const T> read() const { return object; }
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1004ce30
+	// RBX::CopyOnWrite<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > >::write
+	// clang-format on
 	boost::shared_ptr<T>& write()
 	{
 		if (!object) {

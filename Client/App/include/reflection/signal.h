@@ -439,6 +439,27 @@ protected:
 		boost::shared_ptr<GenericSlotWrapper> wrapper; // 0x00
 	};
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1004edd0
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x1004eeb0
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x10057d90
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(float)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x100f84f0
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(int)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x100f85d0
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(double)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x100f8790
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Vector3)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x100f8870
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::CoordinateFrame)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x100f8950
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Color3)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x100f8a30
+	// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::BrickColor)>::connectGeneric
+	// clang-format on
+
 	virtual boost::signals::connection connectGeneric(
 		SignalInstance* instance,
 		GenericSlotWrapper* wrapper,
@@ -496,6 +517,13 @@ protected:
 	private:
 		boost::shared_ptr<GenericSlotWrapper> wrapper; // 0x00
 	};
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10057cb0
+	// RBX::Reflection::SignalDescImpl<2,void __cdecl(float,float)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x100e3b40
+	// RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::connectGeneric
+	// clang-format on
 
 	virtual boost::signals::connection connectGeneric(
 		SignalInstance* instance,

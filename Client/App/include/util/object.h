@@ -98,6 +98,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::StatsService>
 	// TEMPLATE: WEBSERVICE 0x100666f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<bool>,bool const *>
+	// TEMPLATE: WEBSERVICE 0x10074260
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Players>
 	// TEMPLATE: WEBSERVICE 0x10066770
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<int>,boost::function0<int,std::allocator<boost::function_base> > >
 	// TEMPLATE: WEBSERVICE 0x100691f0

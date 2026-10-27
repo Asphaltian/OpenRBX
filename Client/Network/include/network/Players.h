@@ -143,6 +143,7 @@ public:
 
 	void setMaxPlayers(int value);
 
+	// FUNCTION: WEBSERVICE 0x10120d00
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > getPlayers() { return players.read(); }
 
 	void chat(std::string message);
