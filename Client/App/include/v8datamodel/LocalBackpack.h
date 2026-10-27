@@ -104,6 +104,9 @@ public:
 
 DECOMP_SIZE_ASSERT(LocalBackpack, 0x174)
 
+// SYNTHETIC: WEBSERVICE 0x100d7410
+// RBX::LocalBackpackItem::~LocalBackpackItem
+
 } // namespace RBX
 
 #endif // V8DATAMODEL_LOCALBACKPACK_H

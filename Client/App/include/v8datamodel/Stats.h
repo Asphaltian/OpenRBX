@@ -134,6 +134,8 @@ public:
 	// RBX::Stats::TypedStatsItem<double>::update
 	// TEMPLATE: WEBSERVICE 0x10082f50
 	// RBX::Stats::TypedStatsItem<unsigned int>::TypedStatsItem<unsigned int>
+	// TEMPLATE: WEBSERVICE 0x10082fe0
+	// RBX::Stats::TypedStatsItem<unsigned int>::update
 	// clang-format on
 };
 

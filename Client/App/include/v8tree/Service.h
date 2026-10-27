@@ -55,6 +55,8 @@ private:
 DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x1000c2f0
+// RBX::ServiceProvider::doGetClassIndex<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000c360
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Workspace>
 // TEMPLATE: WEBSERVICE 0x1001e340

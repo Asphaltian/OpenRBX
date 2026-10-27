@@ -73,6 +73,9 @@ public:
 	std::list<Mechanism*>::iterator myIt; // 0x1c
 };
 
+// FUNCTION: WEBSERVICE 0x1019bbf0
+// RBX::MechanismTracker::~MechanismTracker
+
 DECOMP_SIZE_ASSERT(Mechanism, 0x24)
 
 } // namespace RBX

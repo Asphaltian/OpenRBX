@@ -323,6 +323,10 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1016ee10
 	// RBX::Instance::visitChildren<boost::_bi::bind_t<void,boost::_mfi::mf1<void,RBX::View::PartChunk,boost::shared_ptr<RBX::Instance> >,boost::_bi::list2<boost::_bi::value<RBX::View::PartChunk *>,boost::arg<1> > > >
+	// TEMPLATE: WEBSERVICE 0x1019f290
+	// RBX::Instance::visitChildren<boost::_bi::bind_t<void,boost::_mfi::mf1<void,RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> >,boost::_bi::list2<boost::_bi::value<RBX::Network::Replicator *>,boost::arg<1> > > >
+	// TEMPLATE: WEBSERVICE 0x1019f3a0
+	// RBX::Instance::visitChildren<boost::_bi::bind_t<bool,boost::_mfi::mf1<bool,RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> >,boost::_bi::list2<boost::_bi::value<RBX::Network::Replicator *>,boost::arg<1> > > >
 	// clang-format on
 	template <class Func>
 	void visitChildren(Func func) const

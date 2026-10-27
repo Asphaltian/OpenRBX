@@ -129,6 +129,7 @@ public:
 	);
 
 private:
+	// FUNCTION: WEBSERVICE 0x100beda0
 	virtual const std::string getCursorName() const { return "ArrowCursor"; } // vtable+0x3c
 };
 

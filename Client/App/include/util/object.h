@@ -30,6 +30,8 @@ DECOMP_SIZE_ASSERT(Object, 0x04)
 // RBX::shared_from<RBX::Instance const >
 // TEMPLATE: WEBSERVICE 0x1016ef10
 // RBX::shared_from<RBX::GuiItem>
+// TEMPLATE: WEBSERVICE 0x1019f630
+// RBX::shared_from<RBX::Network::Replicator>
 // clang-format on
 template <class T>
 boost::shared_ptr<T> shared_from(T* r)
@@ -226,6 +228,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
 	// TEMPLATE: WEBSERVICE 0x100bfd10
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::Instance> >
+	// TEMPLATE: WEBSERVICE 0x100cc1b0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Mouse>
 	// TEMPLATE: WEBSERVICE 0x100dda40
 	// RBX::Creatable<RBX::Instance>::create<RBX::Snap,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100ddac0
@@ -258,6 +262,18 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpecialShape>
 	// TEMPLATE: WEBSERVICE 0x1018b8e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::NetworkSettings>
+	// TEMPLATE: WEBSERVICE 0x1018bc50
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Client>
+	// TEMPLATE: WEBSERVICE 0x1018bee0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Server>
+	// TEMPLATE: WEBSERVICE 0x10197080
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Replicator,SystemAddress,RakPeer *>
+	// TEMPLATE: WEBSERVICE 0x1019a030
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Server::ClientProxy,SystemAddress,RBX::Network::Server *>
+	// TEMPLATE: WEBSERVICE 0x1019a1b0
+	// RBX::shared_from_dynamic_cast<RBX::Network::Player,RBX::Instance>
+	// TEMPLATE: WEBSERVICE 0x101a6bc0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Replicator::ReplicatorStatsItem,boost::shared_ptr<RBX::Network::Replicator>,RakNetStatistics *>
 	// clang-format on
 	template <class U>
 	static boost::shared_ptr<U> create()

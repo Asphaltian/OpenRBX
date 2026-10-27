@@ -131,8 +131,12 @@ private:
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::~EnumDesc<enum RBX::HopperBin::BinType>
 // clang-format on
 
+// SYNTHETIC: WEBSERVICE 0x100818f0
+// RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x10082a10
 // RBX::Reflection::EnumDesc<enum RBX::SoundType>::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x100c85e0
+// RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::`scalar deleting destructor'
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10099a40

@@ -23,6 +23,7 @@ class JointsService : public NonFactoryProduct<Instance, static_cast<const char*
 private:
 	virtual void onDescendentAdded(Instance* instance);
 	virtual void onDescendentRemoving(const boost::shared_ptr<Instance>& instance);
+	// FUNCTION: WEBSERVICE 0x10074fc0
 	virtual bool askAddChild(const Instance* instance) const
 	{
 		return dynamic_cast<const JointInstance*>(instance) != NULL;

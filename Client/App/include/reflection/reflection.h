@@ -575,6 +575,10 @@ public:
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100c8830
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType><enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>
+	// TEMPLATE: WEBSERVICE 0x100c88d0
+	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x100c8910
+	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100e61d0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100e6210
@@ -622,6 +626,18 @@ public:
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100b4d10
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x100c3dc0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x100c3e20
+	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x100c3f00
+	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::readValue
+	// TEMPLATE: WEBSERVICE 0x100c8930
+	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::setIndexValue
+	// TEMPLATE: WEBSERVICE 0x100c8990
+	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::getStringValue
+	// TEMPLATE: WEBSERVICE 0x100c8a70
+	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::readValue
 	// TEMPLATE: WEBSERVICE 0x100e6560
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100e6830
@@ -1174,6 +1190,12 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::~BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>
 	// TEMPLATE: WEBSERVICE 0x10193d30
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x10196790
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::declareSignature
+	// TEMPLATE: WEBSERVICE 0x101981a0
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::execute
+	// SYNTHETIC: WEBSERVICE 0x10198390
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10199300
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x1019abb0

@@ -3,6 +3,7 @@
 #include "network/Client.h"
 #include "network/NetworkSettings.h"
 #include "network/Player.h"
+#include "network/Players.h"
 #include "network/Server.h"
 #include "util/Name.h"
 
@@ -10,6 +11,21 @@ namespace RBX {
 namespace Network {
 
 std::string API::version;
+
+// FUNCTION: WEBSERVICE 0x1018c370
+void API::init(const char* version)
+{
+	API::version = version;
+
+	Client::classDescriptor();
+	Server::classDescriptor();
+	Player::classDescriptor();
+	Players::classDescriptor();
+	GlobalSettings::classDescriptor();
+	NetworkSettings::classDescriptor();
+
+	NetworkSettings::singleton();
+}
 
 } // namespace Network
 } // namespace RBX

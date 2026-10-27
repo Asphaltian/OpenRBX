@@ -245,6 +245,8 @@ public:
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Color3)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f3200
 		// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x10197810
+		// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::TSignalInstance::TSignalInstance
 		// clang-format on
 	};
 
@@ -286,6 +288,8 @@ private:
 	// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Color3)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3e30
 	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x10197ac0
+	// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::newSignalInstance
 	// clang-format on
 
 protected:
@@ -374,6 +378,10 @@ protected:
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Color3)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2330
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::BrickColor)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x1018e0e0
+		// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,boost::shared_ptr<RBX::Instance>)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x10197610
+		// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::GenericSlotAdapter::operator()
 		// clang-format on
 	};
 
@@ -523,6 +531,8 @@ protected:
 	// RBX::Reflection::SignalDescImpl<2,void __cdecl(float,float)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100e3b40
 	// RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x10199190
+	// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::connectGeneric
 	// clang-format on
 
 	virtual boost::signals::connection connectGeneric(

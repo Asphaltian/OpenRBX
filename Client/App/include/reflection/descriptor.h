@@ -29,6 +29,8 @@ inline boost::recursive_mutex& sync()
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100f6aa0
 // RBX::Reflection::SignalDescImpl<1,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::fire
+// FUNCTION: WEBSERVICE 0x10198a10
+// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::fire
 // clang-format on
 
 // VTABLE: WEBSERVICE 0x1022da44
