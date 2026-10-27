@@ -28,6 +28,8 @@ class XmlState;
 // SIZE 0x20
 class MouseCommand : public INamed, public IRenderable
 {
+	friend class Workspace;
+
 private:
 	static float maxSearch() { return 2048.0f; }
 	static G3D::Vector3 ignoreVector3;

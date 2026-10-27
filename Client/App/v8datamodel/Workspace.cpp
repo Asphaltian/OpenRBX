@@ -4,6 +4,8 @@
 #include "tool/NullTool.h"
 #include "tool/ToolsArrow.h"
 #include "util/Name.h"
+#include "util/NavKeys.h"
+#include "util/UserInputBase.h"
 #include "util/standardout.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Flag.h"
@@ -114,8 +116,13 @@ void Workspace::reset()
 // STUB: WEBSERVICE 0x1006bfd0
 Camera* Workspace::getCamera() const
 {
-	STUB(0x1006bfd0);
-	return NULL;
+	if (!currentCamera || !currentCamera->isDescendentOf(this)) {
+		boost::shared_ptr<Camera> camera = Creatable<Instance>::create<Camera>();
+		camera->setParent(const_cast<Workspace*>(this));
+		const_cast<Workspace*>(this)->currentCamera = camera;
+	}
+
+	return currentCamera.get();
 }
 
 // FUNCTION: WEBSERVICE 0x1006c460
@@ -252,22 +259,34 @@ World* Workspace::getWorldIfInWorkspace(const Instance* context)
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x1006ec40
+// FUNCTION: WEBSERVICE 0x1006ec40
 bool Workspace::contextInWorkspace(const Instance* context)
 {
-	Workspace* workspace = ServiceProvider::find<Workspace>(context);
-
-	if (workspace != NULL && context != workspace && !context->isDescendentOf(workspace)) {
-		workspace = NULL;
-	}
-
-	return workspace != NULL;
+	return getWorkspaceIfInWorkspace(context) != NULL;
 }
 
-// STUB: WEBSERVICE 0x1006ec80
+// FUNCTION: WEBSERVICE 0x1006ec80
 void Workspace::onEvent(const RunService* source, Heartbeat event)
 {
-	STUB(0x1006ec80);
+	onMovingHeartbeat();
+
+	if (idleMouseEvent.eventType == UIEvent::MOUSE_IDLE) {
+		currentCommand->onMouseIdle(idleMouseEvent);
+	}
+
+	if (!Network::Players::findLocalCharacter(this)) {
+		ControllerService* controllerService = ServiceProvider::find<ControllerService>(this);
+		if (controllerService && controllerService->getHardwareDevice()) {
+			NavKeys navKeys;
+			controllerService->getHardwareDevice()->getNavKeys(navKeys);
+			if (navKeys.navKeyDown()) {
+				getCamera()->doFly(navKeys, flySteps++);
+				return;
+			}
+
+			flySteps = 0;
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100703e0

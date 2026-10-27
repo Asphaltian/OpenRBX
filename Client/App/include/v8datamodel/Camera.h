@@ -12,6 +12,7 @@
 namespace RBX {
 
 class ICameraOwner;
+class NavKeys;
 class ICameraSubject;
 
 extern char sCamera[];
@@ -50,6 +51,7 @@ public:
 	void zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType zoomType);
 	bool zoomExtents(const G3D::Rect2D& viewPort);
 	void autoMode();
+	void doFly(const NavKeys& navKeys, int steps);
 	void lookAt(const G3D::Vector3& point);
 
 	ICameraSubject* getCameraSubject() const;

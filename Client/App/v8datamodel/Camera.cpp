@@ -112,6 +112,12 @@ bool Camera::zoomExtents(const G3D::Rect2D& viewPort)
 	return false;
 }
 
+// STUB: WEBSERVICE 0x100c4d80
+void Camera::doFly(const NavKeys& navKeys, int steps)
+{
+	STUB(0x100c4d80);
+}
+
 } // namespace RBX
 
 template class RBX::FactoryProduct<RBX::Camera, RBX::Instance, RBX::sCamera>;
