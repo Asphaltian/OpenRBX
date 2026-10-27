@@ -1,6 +1,8 @@
 #include "v8datamodel/Workspace.h"
 
+#include "humanoid/Humanoid.h"
 #include "network/Players.h"
+#include "script/ScriptContext.h"
 #include "tool/NullTool.h"
 #include "tool/ToolsArrow.h"
 #include "util/Name.h"
@@ -10,7 +12,9 @@
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Flag.h"
 #include "v8datamodel/Hopper.h"
+#include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/MouseCommand.h"
+#include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Tool.h"
 #include "v8datamodel/UserController.h"
 #include "v8world/World.h"
@@ -86,11 +90,19 @@ void Workspace::render2d(Adorn* adorn)
 	render2dItems(adorn);
 }
 
-// STUB: WEBSERVICE 0x1006a960
+// FUNCTION: WEBSERVICE 0x1006a960
 IScriptOwner* Workspace::scriptShouldRun(Script* script)
 {
-	STUB(0x1006a960);
-	return NULL;
+	bool shouldRun;
+	if (!dynamic_cast<LocalScript*>(script)) {
+		shouldRun = Network::Players::backendProcessing(this, true);
+	}
+	else {
+		ModelInstance* character = Network::Players::findLocalCharacter(this);
+		shouldRun = character && script->isDescendentOf(character);
+	}
+
+	return shouldRun ? this : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1006b2d0
@@ -164,6 +176,41 @@ void Workspace::onDescendentAdded(Instance* instance)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1006c6f0
+void clearEmptiedModels(boost::shared_ptr<Instance> test, Instance* workspace)
+{
+	if (test.get() != workspace) {
+		if (ModelInstance* model = dynamic_cast<ModelInstance*>(test.get())) {
+			if (!Humanoid::modelIsCharacter(model)) {
+				if (!model->findFirstChildOfType<PartInstance>() && !model->findFirstChildOfType<ModelInstance>()) {
+					boost::shared_ptr<Instance> oldParent = shared_from(model->getParent());
+					model->setParent(NULL);
+					clearEmptiedModels(oldParent, workspace);
+				}
+			}
+		}
+
+		if (Flag* flag = dynamic_cast<Flag*>(test.get())) {
+			if (!flag->findFirstChildOfType<PartInstance>()) {
+				boost::shared_ptr<Instance> oldParent = shared_from(flag->getParent());
+				flag->setParent(NULL);
+				clearEmptiedModels(oldParent, workspace);
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1006c890
+void Workspace::handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstance> >& fallenParts)
+{
+	for (int i = 0; i < fallenParts.size(); ++i) {
+		boost::shared_ptr<PartInstance> part = fallenParts[i];
+		boost::shared_ptr<Instance> oldParent = shared_from(part->getParent());
+		part->setParent(NULL);
+		clearEmptiedModels(oldParent, this);
+	}
+}
+
 // STUB: WEBSERVICE 0x1006c9e0
 void Workspace::setMouseCommand(MouseCommand* command)
 {
@@ -193,10 +240,15 @@ void Workspace::setMouseCommand(MouseCommand* command)
 	}
 }
 
-// STUB: WEBSERVICE 0x1006ccb0
+// FUNCTION: WEBSERVICE 0x1006ccb0
 void Workspace::runScript(Script* script, ScriptContext* context)
 {
-	STUB(0x1006ccb0);
+	if (Network::Players::backendProcessing(this, true) && !isSimulating) {
+		pendingScripts.insert(script);
+	}
+	else {
+		context->addScript(script);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1006cd70
@@ -214,6 +266,32 @@ Extents Workspace::computeCameraOwnerExtents()
 void Workspace::cameraMoved()
 {
 	Notifier<Workspace, DrawChanged>::raise(DrawChanged());
+}
+
+// FUNCTION: WEBSERVICE 0x1006d280
+float Workspace::step(float timeInterval)
+{
+	timeInterval = world->step(timeInterval);
+
+	G3D::Array<boost::shared_ptr<PartInstance> > touchParts;
+	G3D::Array<boost::shared_ptr<PartInstance> > touchOtherParts;
+	G3D::Array<Primitive*> fallen;
+	G3D::Array<boost::shared_ptr<PartInstance> > fallenParts;
+
+	PartInstance::primitivesToParts(world->getTouch(), touchParts);
+	PartInstance::primitivesToParts(world->getTouchOther(), touchOtherParts);
+
+	world->computeFallen(fallen);
+	PartInstance::primitivesToParts(fallen, fallenParts);
+	handleFallenParts(fallenParts);
+
+	for (int i = 0; i < touchParts.size(); ++i) {
+		touchParts[i]->onTouchThisStep(touchOtherParts[i]);
+	}
+
+	raiseDrawChanged();
+
+	return timeInterval;
 }
 
 // FUNCTION: WEBSERVICE 0x1006d410

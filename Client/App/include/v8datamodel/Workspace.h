@@ -81,6 +81,13 @@ private:
 	virtual Extents computeCameraOwnerExtents(); // ICameraOwner vtable+0x10
 	virtual void cameraMoved();                  // ICameraOwner vtable+0x0c
 
+	// FUNCTION: WEBSERVICE 0x1006d250
+	virtual void onExtentsChanged() const
+	{
+		ModelInstance::onExtentsChanged();
+		raiseDrawChanged();
+	}
+
 	virtual void onEvent(const RunService* source, Heartbeat event);
 
 public:
@@ -111,6 +118,12 @@ public:
 	void setThrottleEnabled(bool value);
 	void joinAllHack();
 
+	float step(float timeInterval);
+
+private:
+	void handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstance> >& fallenParts);
+
+public:
 	void raiseDrawChanged() const { Notifier<Workspace, DrawChanged>::raise(DrawChanged()); }
 
 private:

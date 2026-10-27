@@ -806,6 +806,10 @@ protected:
 // RBX::Instance::findFirstChildOfType<RBX::Sky>
 // TEMPLATE: WEBSERVICE 0x1005aff0
 // RBX::Instance::findFirstChildOfType<RBX::Humanoid>
+// TEMPLATE: WEBSERVICE 0x1006b680
+// RBX::Instance::findFirstChildOfType<RBX::PartInstance>
+// TEMPLATE: WEBSERVICE 0x1006b700
+// RBX::Instance::findFirstChildOfType<RBX::ModelInstance>
 // TEMPLATE: WEBSERVICE 0x100c79f0
 // RBX::Instance::findFirstChildOfType<RBX::BackpackItem>
 // TEMPLATE: WEBSERVICE 0x100ca6d0

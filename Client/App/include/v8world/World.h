@@ -131,6 +131,9 @@ public:
 	void insertContact(Contact* c);
 	void destroyContact(Contact* c);
 
+	const G3D::Array<Primitive*>& getTouch() const { return touch; }
+	const G3D::Array<Primitive*>& getTouchOther() const { return touchOther; }
+
 	void setCanThrottle(bool value) { canThrottle = value; }
 	void reset() { worldStepId = 0; }
 

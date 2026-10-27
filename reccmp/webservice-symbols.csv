@@ -77,7 +77,6 @@ address,size,symbol,name
 0x1006be00,0x50,??$for_each@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@P6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@std@@YAP6AXV?$shared_ptr@VInstance@RBX@@@boost@@@ZV?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@0@1P6AX0@Z@Z,
 0x1006c5b0,0x9f,?makeJoints@Workspace@RBX@@QAEXV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@Z,
 0x1006c650,0x9f,?breakJoints@Workspace@RBX@@QAEXV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@Z,
-0x1006c6f0,0x196,?clearEmptiedModels@RBX@@YAXV?$shared_ptr@VInstance@RBX@@@boost@@PAVInstance@1@@Z,
 0x1006db70,0x78,??$create@VHopperBin@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VHopperBin@RBX@@@boost@@XZ,
 0x1006dbf0,0xaf,?create@Creator@?$FactoryProduct@VHopperBin@RBX@@VBackpackItem@2@$1?sHopperBin@2@3QBDB@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ,
 0x1006de90,0x78,??$create@VLegacyHopperService@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VLegacyHopperService@RBX@@@boost@@XZ,
