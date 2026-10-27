@@ -574,6 +574,10 @@ public:
 	// RBX::Reflection::BoundProp<G3D::Color3,1>::BoundProp<G3D::Color3,1><RBX::Value<G3D::Color3,&RBX::sColor3Value> >
 	// TEMPLATE: WEBSERVICE 0x100f3890
 	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >
+	// TEMPLATE: WEBSERVICE 0x100fe3d0
+	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::SpawnLocation>
+	// TEMPLATE: WEBSERVICE 0x100fe4b0
+	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::SpawnLocation>
 	// TEMPLATE: WEBSERVICE 0x10117580
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame (__thiscall RBX::Mouse::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x101175d0
@@ -949,6 +953,10 @@ public:
 		// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundPropGetSet<RBX::BodyGyro>::setValue
 		// TEMPLATE: WEBSERVICE 0x100f76e0
 		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::setValue
+		// TEMPLATE: WEBSERVICE 0x100ff420
+		// RBX::Reflection::BoundProp<int,1>::BoundPropGetSet<RBX::SpawnLocation>::setValue
+		// TEMPLATE: WEBSERVICE 0x100ff490
+		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::SpawnLocation>::setValue
 		// TEMPLATE: WEBSERVICE 0x1019bb70
 		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::NetworkSettings>::setValue
 		// clang-format on

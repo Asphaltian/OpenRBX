@@ -728,6 +728,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::~DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// FUNCTION: WEBSERVICE 0x100feae0
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
+// TEMPLATE: WEBSERVICE 0x100fecd0
+// RBX::DescribedCreatable<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>::DescribedCreatable<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>
 // TEMPLATE: WEBSERVICE 0x100ffa20
 // RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::~DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// FUNCTION: WEBSERVICE 0x100ffb30

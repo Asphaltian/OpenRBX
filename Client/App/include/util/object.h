@@ -186,6 +186,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::TimerService>
 	// FUNCTION: WEBSERVICE 0x1008d560
 	// RBX::Creatable<RBX::Instance>::create<RBX::Seat>
+	// TEMPLATE: WEBSERVICE 0x1008d7d0
+	// RBX::Creatable<RBX::Instance>::create<RBX::SpawnLocation>
 	// TEMPLATE: WEBSERVICE 0x1008da40
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpawnerService>
 	// TEMPLATE: WEBSERVICE 0x1008e7a0
@@ -516,6 +518,8 @@ public:
 	// RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1008d5e0
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1008d850
+	// RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1008dac0
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::Creator::create
 	// FUNCTION: WEBSERVICE 0x1008e4b0
@@ -854,10 +858,14 @@ public:
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100fc2c0
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>
+	// TEMPLATE: WEBSERVICE 0x100fd510
+	// RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>::~FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>
 	// FUNCTION: WEBSERVICE 0x100fd610
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::~FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// FUNCTION: WEBSERVICE 0x100fd660
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
+	// TEMPLATE: WEBSERVICE 0x100fd880
+	// RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>
 	// FUNCTION: WEBSERVICE 0x100febb0
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100ff600

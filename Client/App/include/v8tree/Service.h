@@ -139,6 +139,14 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::create<RBX::TimerService>
 // TEMPLATE: WEBSERVICE 0x100dac50
 // RBX::ServiceProvider::find<RBX::Network::Players>
+// TEMPLATE: WEBSERVICE 0x100fd6c0
+// RBX::ServiceProvider::doGetClassIndex<RBX::SpawnerService>
+// TEMPLATE: WEBSERVICE 0x100fda50
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::SpawnerService>
+// TEMPLATE: WEBSERVICE 0x100fe0c0
+// RBX::ServiceProvider::find<RBX::SpawnerService>
+// TEMPLATE: WEBSERVICE 0x100feea0
+// RBX::ServiceProvider::create<RBX::SpawnerService>
 // TEMPLATE: WEBSERVICE 0x10106140
 // RBX::ServiceProvider::doGetClassIndex<RBX::GeometryService>
 // TEMPLATE: WEBSERVICE 0x10106670

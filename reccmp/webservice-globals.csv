@@ -2963,6 +2963,7 @@ address,type,symbol
 0x102417e4,global,??_8PartInstance@RBX@@7BICameraSubject@1@@
 0x102417e4,global,??_8Workspace@RBX@@7BICameraSubject@1@@
 0x102417e4,global,??_8Seat@RBX@@7BICameraSubject@1@@
+0x102417e4,global,??_8SpawnLocation@RBX@@7BICameraSubject@1@@
 0x102417f0,global,??_7?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10241800,global,??_7?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 0x10241810,global,??_7?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
@@ -7144,3 +7145,23 @@ address,type,symbol
 0x1023b4cc,global,??_7?$SignalDesc@VHopperBin@RBX@@$$A6AXXZ@Reflection@RBX@@6B@
 0x102d882c,global,??_R0?AW4BinType@HopperBin@RBX@@@8
 0x102fa1f8,global,s___RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton
+0x10245cec,global,??_7SpawnLocation@RBX@@6BILocation@1@@
+0x10245d40,global,??_7SpawnLocation@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10245db0,global,??_7SpawnLocation@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x10245d70,global,??_7SpawnLocation@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x10245cf4,global,??_7SpawnLocation@RBX@@6BIPrimaryPart@1@@
+0x10245da8,global,??_7SpawnLocation@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x10245d50,global,??_7SpawnLocation@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x10245d00,global,??_7SpawnLocation@RBX@@6BIRenderable@1@@
+0x10245d60,global,??_7SpawnLocation@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x10245da0,global,??_7SpawnLocation@RBX@@6BDebugable@1@@
+0x10245d80,global,??_7SpawnLocation@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x10245cd0,global,??_7SpawnLocation@RBX@@6BICameraSubject@1@@
+0x10245d18,global,??_7SpawnLocation@RBX@@6BIMoving@1@@
+0x10245d24,global,??_7SpawnLocation@RBX@@6B?$Notifier@VPartInstance@RBX@@UCanAggregateChanged@2@@1@@
+0x10245d90,global,??_7SpawnLocation@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x10245dbc,global,??_7SpawnLocation@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x10245d34,global,??_7SpawnLocation@RBX@@6BIControllable@1@@
+0x102fc3ac,global,flag___RBX::ServiceProvider::getClassIndex<RBX::SpawnerService>
+0x10245e24,global,??_8SpawnLocation@RBX@@7B?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@1@@
+0x102fc39c,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::SpawnerService>
