@@ -568,6 +568,14 @@ public:
 	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::~FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
 	// TEMPLATE: WEBSERVICE 0x100c7910
 	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
+	// TEMPLATE: WEBSERVICE 0x100d5c10
+	// RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::~FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
+	// TEMPLATE: WEBSERVICE 0x100d5c90
+	// RBX::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>::~FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>
+	// TEMPLATE: WEBSERVICE 0x100d5d10
+	// RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
+	// TEMPLATE: WEBSERVICE 0x100d6070
+	// RBX::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>
 	// TEMPLATE: WEBSERVICE 0x100d7ab0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>
 	// TEMPLATE: WEBSERVICE 0x100d8010

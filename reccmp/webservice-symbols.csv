@@ -267,7 +267,6 @@ address,size,symbol,name
 0x100d16c0,0x18,?getSize@GuiRoot@RBX@@EBE?AVVector2@G3D@@XZ,
 0x100d17c0,0x103,?getSize@TopMenuBar@RBX@@UBE?AVVector2@G3D@@XZ,
 0x100d18d0,0x11b,?getChildPosition@TopMenuBar@RBX@@MBE?AVVector2@G3D@@PBVGuiItem@2@@Z,
-0x100d5be0,0x30,?getSize@BackpackItem@RBX@@MBE?AVVector2@G3D@@XZ,
 0x100db440,0x7,?getAttachmentPoint@Accoutrement@RBX@@QBEABVCoordinateFrame@G3D@@XZ,
 0x100db4d0,0x21,?getAttachmentPos@Accoutrement@RBX@@QBE?BVVector3@G3D@@XZ,
 0x100db500,0x44,?getAttachmentForward@Accoutrement@RBX@@QBE?BVVector3@G3D@@XZ,

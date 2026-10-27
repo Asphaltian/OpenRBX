@@ -11,6 +11,7 @@ address,type,symbol
 0x10005cc0,synthetic,??1?$MemberDescriptorContainer@VSignalDescriptor@Reflection@RBX@@@Reflection@RBX@@QAE@XZ
 0x10005cc0,synthetic,??1?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@QAE@XZ
 0x100061a0,synthetic,??_H@YGXPAXIHP6EPAX0@Z@Z
+0x10006260,stub,??0GuiDrawImage@RBX@@QAE@XZ
 0x10006330,synthetic,??1Value@Reflection@RBX@@QAE@XZ
 0x10006340,stub,??1FunctionDescriptor@Reflection@RBX@@UAE@XZ
 0x100063b0,synthetic,??1SignatureDescriptor@Reflection@RBX@@QAE@XZ
@@ -286,6 +287,8 @@ address,type,symbol
 0x100d15e0,synthetic,??_EGuiItem@RBX@@WDM@AEPAXI@Z
 0x100d16e0,synthetic,??_EGuiItem@RBX@@WBA@AEPAXI@Z
 0x100d16f0,synthetic,??_EGuiItem@RBX@@WIE@AEPAXI@Z
+0x100d6370,synthetic,?getClassName@?$FactoryProduct@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@UBEABVName@2@XZ
+0x100d7290,stub,??$create@VPlayers@Network@RBX@@@ServiceProvider@RBX@@SAPAVPlayers@Network@1@PBVInstance@1@@Z
 0x100d7ab0,synthetic,??0?$NonFactoryProduct@VInstance@RBX@@$1?sJointInstance@2@3QBDB@RBX@@QAE@XZ
 0x100d8010,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sJointInstance@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100d82e0,synthetic,?getClassName@?$NonFactoryProduct@VJointInstance@RBX@@$1?sAutoJoint@2@3QBDB@RBX@@UBEABVName@2@XZ

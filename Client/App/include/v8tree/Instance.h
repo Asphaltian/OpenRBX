@@ -584,6 +584,10 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
 	// SYNTHETIC: WEBSERVICE 0x100ca200
 	// RBX::Instance::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100d7050
+	// RBX::DescribedCreatable<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::DescribedCreatable<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
+	// TEMPLATE: WEBSERVICE 0x100d7170
+	// RBX::DescribedCreatable<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>::DescribedCreatable<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>
 	// SYNTHETIC: WEBSERVICE 0x100d8000
 	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::~DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>
 	// FUNCTION: WEBSERVICE 0x100d87f0

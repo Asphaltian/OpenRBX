@@ -81,6 +81,10 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::GameSettings,&RBX::sGameSettings,RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100891d0
 // RBX::Reflection::Described<RBX::GeometryService,&RBX::sGeometryService,RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x10089240
+// RBX::Reflection::Described<RBX::LocalBackpackItem,&RBX::sLocalBackpackItem,RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x100892b0
+// RBX::Reflection::Described<RBX::LocalBackpack,&RBX::sLocalBackpack,RBX::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089320
 // RBX::Reflection::Described<RBX::Message,&RBX::sMessage,RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089390
@@ -249,6 +253,10 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::Hint,&RBX::sHint,RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225a0
 // `RBX::Reflection::Described<RBX::Message,&RBX::sMessage,RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x102225b0
+// `RBX::Reflection::Described<RBX::LocalBackpack,&RBX::sLocalBackpack,RBX::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x102225c0
+// `RBX::Reflection::Described<RBX::LocalBackpackItem,&RBX::sLocalBackpackItem,RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225d0
 // `RBX::Reflection::Described<RBX::GeometryService,&RBX::sGeometryService,RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225e0

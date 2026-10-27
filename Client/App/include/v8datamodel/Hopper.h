@@ -24,6 +24,11 @@ class BackpackItem : public DescribedNonCreatable<BackpackItem, Widget, sBackpac
 public:
 	const TextureId& getTextureId() const { return textureId; }
 
+	virtual bool drawEnabled() const { return true; }   // vtable+0x7c
+	virtual bool drawSelected() const { return false; } // vtable+0x80
+	virtual void onLocalClicked() {}                    // vtable+0x84
+	virtual void onLocalOtherClicked() {}               // vtable+0x88
+
 private:
 	GuiDrawImage guiImageDraw; // 0x110
 	TextureId textureId;       // 0x148
