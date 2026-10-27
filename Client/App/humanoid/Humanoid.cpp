@@ -842,16 +842,25 @@ void Humanoid::checkForJointDeath()
 	}
 }
 
-// STUB: WEBSERVICE 0x100a56c0
+// FUNCTION: WEBSERVICE 0x100a56c0
 void Humanoid::onEvent(const RunService* source, Stepped event)
 {
-	State* state = currentState.get();
+	if (State* state = currentState.get()) {
+		if (getParent()) {
+			setState(state->onStep(event.step, *static_cast<PVInstance*>(getParent())->getTopPVController()));
+		}
+	}
 
-	if (state != NULL && getParent() != NULL) {
-		State* next = state->onStep(event.step, *static_cast<PVInstance*>(getParent())->getTopPVController());
+	if (getTorsoPrimitive()) {
+		getTorsoPrimitive()->setCanSleep(false);
+	}
 
-		if (next != state) {
-			currentState.reset(next);
+	checkForJointDeath();
+
+	if (walkTimer > 0) {
+		walkTimer--;
+		if (walkTimer == 0) {
+			walkMode = DIRECTION_MOVE;
 		}
 	}
 }
