@@ -131,6 +131,11 @@ public:
 	void insertContact(Contact* c);
 	void destroyContact(Contact* c);
 
+	const Profiling::CodeProfiler& getProfileWorldStep() const { return *profilingWorldStep; }
+	Profiling::CodeProfiler& getProfileWorldStep() { return *profilingWorldStep; }
+	const Profiling::CodeProfiler& getProfileBroadphase() const { return *profilingBroadphase; }
+	const Profiling::CodeProfiler& getProfileUiStep() const { return *profilingUiStep; }
+
 	void onJointPrimitiveNulling(Joint* joint, Primitive* primitive);
 	void onJointPrimitiveSet(Joint* joint, Primitive* primitive);
 

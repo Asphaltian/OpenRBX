@@ -6,14 +6,22 @@
 #include "script/Script.h"
 #include "util/IRenderable.h"
 #include "util/Name.h"
+#include "util/Profiling.h"
 #include "util/RunStateOwner.h"
+#include "util/UIEvent.h"
 #include "v8datamodel/RootInstance.h"
 #include "v8tree/Service.h"
 #include "v8tree/Verb.h"
 #include "v8world/IMoving.h"
 
+#include <boost/scoped_ptr.hpp>
+#include <boost/shared_ptr.hpp>
+#include <memory>
+#include <set>
+
 namespace RBX {
 
+class Camera;
 class IDataState;
 class MouseCommand;
 class World;
@@ -36,15 +44,15 @@ DECOMP_SIZE_ASSERT(ToolChanged, 0x1)
 
 // SIZE 0x394
 class Workspace : public DescribedNonCreatable<Workspace, RootInstance, sWorkspace>,
+				  public Service,
 				  public GuiTarget,
 				  public VerbContainer,
+				  public IRenderableBucket,
 				  public IMovingManager,
 				  public IScriptOwner,
 				  public Notifier<Workspace, DrawChanged>,
 				  public Notifier<Workspace, ToolChanged>,
-				  public Listener<RunService, Heartbeat>,
-				  public Service,
-				  public IRenderableBucket
+				  public Listener<RunService, Heartbeat>
 {
 public:
 	static bool showWorldCoord;
@@ -89,12 +97,25 @@ public:
 	void raiseDrawChanged() const { Notifier<Workspace, DrawChanged>::raise(DrawChanged()); }
 
 private:
-	undefined m_unk0x310[0x35c - 0x310]; // 0x310
-	bool inMouselookMode;                // 0x35c
-	undefined m_unk0x35d[0x370 - 0x35d]; // 0x35d
+	boost::shared_ptr<Instance> statsItem;      // 0x310
+	IDataState* dataState;                      // 0x318
+	bool arrowCameraControls;                   // 0x31c
+	std::auto_ptr<MouseCommand> currentCommand; // 0x320
+	std::auto_ptr<MouseCommand> stickyCommand;  // 0x324
+	UIEvent idleMouseEvent;                     // 0x328
+	boost::shared_ptr<Camera> currentCamera;    // 0x33c
+	int flySteps;                               // 0x344
+	bool isSimulating;                          // 0x348
+	std::set<Script*> pendingScripts;           // 0x34c
+	ScriptContext* scriptContext;               // 0x358
+	bool inMouselookMode;                       // 0x35c
 
 public:
-	int imageServerViewHack; // 0x370
+	boost::scoped_ptr<Profiling::CodeProfiler> profileWorkspaceStep;       // 0x360
+	boost::scoped_ptr<Profiling::CodeProfiler> profileRunServiceStepped;   // 0x364
+	boost::scoped_ptr<Profiling::CodeProfiler> profileRunServiceHeartbeat; // 0x368
+	boost::scoped_ptr<Profiling::ThreadProfiler> profileRun;               // 0x36c
+	int imageServerViewHack;                                               // 0x370
 };
 
 DECOMP_SIZE_ASSERT(Workspace, 0x394)

@@ -6,8 +6,10 @@
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Flag.h"
 #include "v8datamodel/Hopper.h"
+#include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/Tool.h"
 #include "v8datamodel/UserController.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
@@ -67,10 +69,9 @@ void Workspace::runScript(Script* script, ScriptContext* context)
 	STUB(0x1006ccb0);
 }
 
-// STUB: WEBSERVICE 0x1006cd70
+// FUNCTION: WEBSERVICE 0x1006cd70
 Workspace::~Workspace()
 {
-	STUB(0x1006cd70);
 }
 
 // FUNCTION: WEBSERVICE 0x1006d0d0
@@ -145,10 +146,18 @@ void Workspace::onEvent(const RunService* source, Heartbeat event)
 	STUB(0x1006ec80);
 }
 
-// STUB: WEBSERVICE 0x100703e0
-Workspace::Workspace(IDataState* dataState) : VerbContainer(NULL)
+// FUNCTION: WEBSERVICE 0x100703e0
+Workspace::Workspace(IDataState* dataState)
+	: VerbContainer(NULL), dataState(dataState), arrowCameraControls(false), flySteps(0), isSimulating(false),
+	  scriptContext(NULL), inMouselookMode(false), profileWorkspaceStep(new Profiling::CodeProfiler("DataModel Step")),
+	  profileRunServiceStepped(new Profiling::CodeProfiler("RunService Stepped")),
+	  profileRunServiceHeartbeat(new Profiling::CodeProfiler("RunService Heartbeat")),
+	  profileRun(new Profiling::ThreadProfiler("Run Thread")), imageServerViewHack(0)
 {
-	STUB(0x100703e0);
+	setName("Workspace");
+	world->getProfileWorldStep().parent = profileWorkspaceStep.get();
+	profileRunServiceStepped->parent = profileWorkspaceStep.get();
+	profileRunServiceHeartbeat->parent = profileWorkspaceStep.get();
 }
 
 } // namespace RBX

@@ -7264,3 +7264,5 @@ address,type,symbol
 0x102f95f4,global,flag___RBX::ServiceProvider::getClassIndex<RBX::FilteredSelection<RBX::PartInstance> >
 0x102f6bb8,global,flag___RBX::Name::declare<0>
 0x102f6994,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Selection>
+0x10230b54,global,??_7Workspace@RBX@@6B?$Described@VRootInstance@RBX@@$1?sRootInstance@2@3PADAVModelInstance@2@@Reflection@1@@
+0x10230fec,global,??_8Workspace@RBX@@7B?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@1@@
