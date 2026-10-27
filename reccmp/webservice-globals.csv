@@ -7289,3 +7289,5 @@ address,type,symbol
 0x10230d40,global,??_7?$TypedStatsItem@N@Stats@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
 0x10230d70,global,??_7?$TypedStatsItem@N@Stats@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
 0x10230da8,global,??_7?$TypedStatsItem@N@Stats@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
+0x10230ce8,global,??_7?$RefPropDescriptor@VWorkspace@RBX@@VCamera@2@@Reflection@RBX@@6BIIDREF@2@@
+0x10230cf0,global,??_7?$RefPropDescriptor@VWorkspace@RBX@@VCamera@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@

@@ -510,6 +510,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Script,RBX::ContentId>::getset<RBX::ContentId const & (__thiscall RBX::Script::*)(void)const ,void (__thiscall RBX::Script::*)(RBX::ContentId const &)>
 	// TEMPLATE: WEBSERVICE 0x10069740
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Script>
+	// TEMPLATE: WEBSERVICE 0x1006b780
+	// RBX::Reflection::PropDescriptor<RBX::Workspace,RBX::Camera *>::getset<RBX::Camera * (__thiscall RBX::Workspace::*)(void)const ,void (__thiscall RBX::Workspace::*)(RBX::Camera *)>
 	// TEMPLATE: WEBSERVICE 0x1007d700
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,float>::getset<float (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x1007d760

@@ -719,30 +719,34 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x1004ba90
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::assignIDREF
+	// TEMPLATE: WEBSERVICE 0x1005bd80
+	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x1005be40
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::readValue
+	// TEMPLATE: WEBSERVICE 0x1006f590
+	// RBX::Reflection::RefPropDescriptor<RBX::Workspace,RBX::Camera>::RefPropDescriptor<RBX::Workspace,RBX::Camera><RBX::Camera * (__thiscall RBX::Workspace::*)(void)const ,void (__thiscall RBX::Workspace::*)(RBX::Camera *)>
+	// TEMPLATE: WEBSERVICE 0x1006f6a0
+	// RBX::Reflection::RefPropDescriptor<RBX::Workspace,RBX::Camera>::setRefValue
+	// TEMPLATE: WEBSERVICE 0x100a35c0
+	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100a3680
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::writeValue
 	// TEMPLATE: WEBSERVICE 0x100b4750
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::equalValues
-	// TEMPLATE: WEBSERVICE 0x100a35c0
-	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100d8810
 	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(RBX::PartInstance *)>
+	// SYNTHETIC: WEBSERVICE 0x100e5fe0
+	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100e6a40
 	// RBX::Reflection::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole>::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole><RBX::Hole * (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(RBX::Hole *)>
 	// TEMPLATE: WEBSERVICE 0x100e6b40
 	// RBX::Reflection::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole>::setRefValue
-	// SYNTHETIC: WEBSERVICE 0x100e5fe0
-	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100ec830
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::getRefValue
 	// TEMPLATE: WEBSERVICE 0x100ec850
 	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100f3970
 	// RBX::Reflection::RefPropDescriptor<RBX::ObjectValue,RBX::Instance>::RefPropDescriptor<RBX::ObjectValue,RBX::Instance><RBX::Instance * (__thiscall RBX::ObjectValue::*)(void)const ,void (__thiscall RBX::ObjectValue::*)(RBX::Instance *)>
-	// TEMPLATE: WEBSERVICE 0x1005bd80
-	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x10102200
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::isReadOnly
 	// TEMPLATE: WEBSERVICE 0x10117770
@@ -850,6 +854,10 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1005e520
 	// RBX::Reflection::BoundFuncDesc<RBX::Selection,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x10070210
+	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x10070290
+	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10082940
 	// RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1009eac0
@@ -972,20 +980,34 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::call<bool>
 	// TEMPLATE: WEBSERVICE 0x1004cad0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::execute
-	// TEMPLATE: WEBSERVICE 0x1005c370
-	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
-	// TEMPLATE: WEBSERVICE 0x1005c420
-	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::execute
-	// SYNTHETIC: WEBSERVICE 0x1006ea20 FOLDED
-	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::~BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
-	// SYNTHETIC: WEBSERVICE 0x1006ea20 FOLDED
-	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::~BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>
-	// SYNTHETIC: WEBSERVICE 0x10070050
-	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100598b0
 	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x10059970
 	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::execute
+	// TEMPLATE: WEBSERVICE 0x1005c370
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
+	// TEMPLATE: WEBSERVICE 0x1005c420
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::execute
+	// TEMPLATE: WEBSERVICE 0x1005e620
+	// RBX::Reflection::BoundFuncDesc<RBX::Selection,void __cdecl(boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const >),1>::execute
+	// SYNTHETIC: WEBSERVICE 0x1006ea20 FOLDED
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::~BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
+	// SYNTHETIC: WEBSERVICE 0x1006ea20 FOLDED
+	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::~BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>
+	// TEMPLATE: WEBSERVICE 0x1006fdc0
+	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(RBX::ContentId),1>::execute
+	// TEMPLATE: WEBSERVICE 0x1006ff40
+	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const >),1>::execute
+	// SYNTHETIC: WEBSERVICE 0x10070050
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x10070070
+	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>
+	// TEMPLATE: WEBSERVICE 0x10070120
+	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>::execute
+	// TEMPLATE: WEBSERVICE 0x100a3dc0
+	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>
+	// TEMPLATE: WEBSERVICE 0x100a3e70
+	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::execute
 	// TEMPLATE: WEBSERVICE 0x100f95d0
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>
 	// TEMPLATE: WEBSERVICE 0x100f9670
@@ -998,12 +1020,6 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::~BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
 	// SYNTHETIC: WEBSERVICE 0x10198560
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::`scalar deleting destructor'
-	// TEMPLATE: WEBSERVICE 0x1005e620
-	// RBX::Reflection::BoundFuncDesc<RBX::Selection,void __cdecl(boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const >),1>::execute
-	// TEMPLATE: WEBSERVICE 0x100a3dc0
-	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>
-	// TEMPLATE: WEBSERVICE 0x100a3e70
-	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::execute
 	// clang-format on
 };
 

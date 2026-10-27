@@ -4,7 +4,9 @@
 #include "decomp.h"
 #include "gui/GuiEvent.h"
 #include "script/Script.h"
+#include "util/ContentProvider.h"
 #include "util/IRenderable.h"
+#include "util/InsertMode.h"
 #include "util/Name.h"
 #include "util/Profiling.h"
 #include "util/RunStateOwner.h"
@@ -101,6 +103,7 @@ public:
 
 	virtual const G3D::GCamera& getGCamera() const; // ICameraOwner vtable+0x08
 	virtual Camera* getCamera() const;              // ICameraOwner vtable+0x04
+	void setCamera(Camera* value);
 
 	Workspace(IDataState* dataState);
 
@@ -120,6 +123,14 @@ public:
 	void joinAllHack();
 
 	float step(float timeInterval);
+
+	void insertContent(
+		ContentId contentId,
+		std::vector<boost::shared_ptr<Instance> >& items,
+		InsertMode insertMode,
+		PromptMode promptMode
+	);
+	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > insertContent(ContentId contentId);
 
 	void makeJoints(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > instances);
 	void breakJoints(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > instances);
@@ -165,6 +176,33 @@ DECOMP_SIZE_ASSERT(Workspace, 0x394)
 // RBX::wrapper2<0>
 // TEMPLATE: WEBSERVICE 0x1006fab0
 // RBX::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>
+// clang-format on
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x10218d40
+// RBX::`dynamic initializer for 'workspace_insertContent''
+// SYNTHETIC: WEBSERVICE 0x10218d80
+// RBX::`dynamic initializer for 'workspace_makeJoints''
+// SYNTHETIC: WEBSERVICE 0x10218dc0
+// RBX::`dynamic initializer for 'workspace_breakJoints''
+// SYNTHETIC: WEBSERVICE 0x10218e00
+// RBX::`dynamic initializer for 'workspace_SetThrottleEnabled''
+// SYNTHETIC: WEBSERVICE 0x10218e40
+// RBX::`dynamic initializer for 'workspace_zoomToExtents''
+// SYNTHETIC: WEBSERVICE 0x10218e80
+// RBX::`dynamic initializer for 'currentCameraProxyProp''
+// SYNTHETIC: WEBSERVICE 0x10221c50
+// RBX::`dynamic atexit destructor for 'currentCameraProxyProp''
+// SYNTHETIC: WEBSERVICE 0x10221c90
+// RBX::`dynamic atexit destructor for 'workspace_breakJoints''
+// SYNTHETIC: WEBSERVICE 0x10221e60
+// RBX::`dynamic atexit destructor for 'workspace_makeJoints''
+// SYNTHETIC: WEBSERVICE 0x10221e70
+// RBX::`dynamic atexit destructor for 'workspace_SetThrottleEnabled''
+// SYNTHETIC: WEBSERVICE 0x10221e80
+// RBX::`dynamic atexit destructor for 'workspace_zoomToExtents''
+// SYNTHETIC: WEBSERVICE 0x10221e90
+// RBX::`dynamic atexit destructor for 'workspace_insertContent''
 // clang-format on
 
 } // namespace RBX

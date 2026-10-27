@@ -118,6 +118,10 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Tool>
 	// TEMPLATE: WEBSERVICE 0x1006e390
 	// RBX::Creatable<RBX::Instance>::create<RBX::Flag>
+	// TEMPLATE: WEBSERVICE 0x10070300
+	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<double>,boost::function0<double,std::allocator<boost::function_base> > >
+	// TEMPLATE: WEBSERVICE 0x10070f60
+	// RBX::Creatable<RBX::Instance>::create<RBX::WorkspaceStatsItem,RBX::Workspace *,RBX::World *>
 	// TEMPLATE: WEBSERVICE 0x10074260
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Players>
 	// TEMPLATE: WEBSERVICE 0x10076300

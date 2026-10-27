@@ -2,6 +2,7 @@
 
 #include "humanoid/Humanoid.h"
 #include "network/Players.h"
+#include "reflection/reflection.h"
 #include "script/ScriptContext.h"
 #include "tool/NullTool.h"
 #include "tool/ToolsArrow.h"
@@ -30,6 +31,50 @@ namespace RBX {
 char sWorkspace[] = "Workspace";
 
 bool Workspace::showWorldCoord;
+
+static Reflection::
+	BoundFuncDesc<Workspace, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(ContentId), 1>
+		workspace_insertContent(
+			&Workspace::insertContent,
+			"InsertContent",
+			"url",
+			Reflection::FunctionDescriptor::NeedTrustedCaller
+		);
+static Reflection::
+	BoundFuncDesc<Workspace, void(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >), 1>
+		workspace_makeJoints(
+			&Workspace::makeJoints,
+			"MakeJoints",
+			"objects",
+			Reflection::FunctionDescriptor::NeedTrustedCaller
+		);
+static Reflection::
+	BoundFuncDesc<Workspace, void(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >), 1>
+		workspace_breakJoints(
+			&Workspace::breakJoints,
+			"BreakJoints",
+			"objects",
+			Reflection::FunctionDescriptor::NeedTrustedCaller
+		);
+static Reflection::BoundFuncDesc<Workspace, void(bool), 1> workspace_SetThrottleEnabled(
+	&Workspace::setThrottleEnabled,
+	"SetPhysicsThrottleEnabled",
+	"value",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::BoundFuncDesc<Workspace, void(), 0> workspace_zoomToExtents(
+	&Workspace::zoomToExtents,
+	"ZoomToExtents",
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::RefPropDescriptor<Workspace, Camera> currentCameraProxyProp(
+	"CurrentCamera",
+	"Data",
+	&Workspace::getCamera,
+	&Workspace::setCamera
+);
 
 // FUNCTION: WEBSERVICE 0x1006a0c0
 bool Workspace::askAddChild(const Instance* instance) const
@@ -414,6 +459,24 @@ void Workspace::onEvent(const RunService* source, Heartbeat event)
 	}
 }
 
+// STUB: WEBSERVICE 0x1006eeb0
+void Workspace::insertContent(
+	ContentId contentId,
+	std::vector<boost::shared_ptr<Instance> >& items,
+	InsertMode insertMode,
+	PromptMode promptMode
+)
+{
+	STUB(0x1006eeb0);
+}
+
+// STUB: WEBSERVICE 0x1006f380
+boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Workspace::insertContent(ContentId contentId)
+{
+	STUB(0x1006f380);
+	return boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >();
+}
+
 // FUNCTION: WEBSERVICE 0x100703e0
 Workspace::Workspace(IDataState* dataState)
 	: VerbContainer(NULL), dataState(dataState), arrowCameraControls(false), flySteps(0), isSimulating(false),
@@ -436,6 +499,19 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(WorkspaceStatsItem, 0x120)
+
+// FUNCTION: WEBSERVICE 0x100707e0
+void Workspace::setCamera(Camera* value)
+{
+	if (value != currentCamera.get()) {
+		if (currentCamera) {
+			currentCamera->setParent(NULL);
+		}
+
+		currentCamera = shared_from(value);
+		raisePropertyChanged(currentCameraProxyProp);
+	}
+}
 
 // FUNCTION: WEBSERVICE 0x10070a20
 WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* world)
