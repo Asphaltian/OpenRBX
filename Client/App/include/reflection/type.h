@@ -120,6 +120,8 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1000b060
 	// RBX::Reflection::Value::operator=<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// STUB: WEBSERVICE 0x1001bf90
+	// RBX::Reflection::Value::operator=<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value> > >
 	// TEMPLATE: WEBSERVICE 0x10045d80
 	// RBX::Reflection::Value::operator=<G3D::Vector3>
 	// TEMPLATE: WEBSERVICE 0x10045eb0

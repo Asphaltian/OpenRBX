@@ -321,7 +321,7 @@ Player::Player()
 	setName(sPlayer);
 }
 
-// STUB: WEBSERVICE 0x10190340
+// FUNCTION: WEBSERVICE 0x10190340
 void Player::loadCharacterAppearance()
 {
 	if (!Players::backendProcessing(this, true)) {

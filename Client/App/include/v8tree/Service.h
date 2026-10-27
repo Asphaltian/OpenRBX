@@ -55,6 +55,8 @@ private:
 DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 
 // clang-format off
+// STUB: WEBSERVICE 0x1000a7b0
+// RBX::ServiceProvider::create<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000c2f0
 // RBX::ServiceProvider::doGetClassIndex<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000c360
@@ -115,6 +117,8 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>
 // TEMPLATE: WEBSERVICE 0x10072350
 // RBX::ServiceProvider::doGetClassIndex<RBX::Soundscape::SoundService>
+// STUB: WEBSERVICE 0x100723b0
+// RBX::ServiceProvider::doGetClassIndex<RBX::JointsService>
 // TEMPLATE: WEBSERVICE 0x10072450
 // RBX::ServiceProvider::doGetClassIndex<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x100724b0
@@ -127,6 +131,8 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Teams>
 // TEMPLATE: WEBSERVICE 0x10078160
 // RBX::ServiceProvider::find<RBX::Soundscape::SoundService>
+// STUB: WEBSERVICE 0x10078310
+// RBX::ServiceProvider::find<RBX::JointsService>
 // FUNCTION: WEBSERVICE 0x100784c0
 // RBX::ServiceProvider::find<RBX::Teams>
 // FUNCTION: WEBSERVICE 0x10078670

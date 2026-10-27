@@ -1159,7 +1159,7 @@ void Replicator::addTopReplicationContainer(Instance* instance, bool replicatePr
 	}
 }
 
-// STUB: WEBSERVICE 0x101a8eb0
+// FUNCTION: WEBSERVICE 0x101a8eb0
 void Replicator::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	std::for_each(replicationContainers.begin(), replicationContainers.end(), boost::bind(&closeReplicationItem, _1));

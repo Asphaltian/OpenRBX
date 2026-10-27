@@ -23,6 +23,9 @@ class JointsService : public NonFactoryProduct<Instance, static_cast<const char*
 private:
 	virtual void onDescendentAdded(Instance* instance);
 	virtual void onDescendentRemoving(const boost::shared_ptr<Instance>& instance);
+	// STUB: WEBSERVICE 0x10074ec0
+	// RBX::JointsService::JointsService
+
 	// FUNCTION: WEBSERVICE 0x10074fc0
 	virtual bool askAddChild(const Instance* instance) const
 	{
