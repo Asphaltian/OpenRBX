@@ -6,6 +6,7 @@
 #include "reflection/signal.h"
 #include "util/Name.h"
 #include "v8datamodel/Backpack.h"
+#include "v8datamodel/ScriptMouseCommand.h"
 #include "v8datamodel/Workspace.h"
 
 namespace RBX {
@@ -218,10 +219,14 @@ void BackpackItem::setTextureId(const TextureId& value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100c9850
+// FUNCTION: WEBSERVICE 0x100c9850
 void HopperBin::onSelectScript()
 {
-	STUB(0x100c9850);
+	if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
+		ScriptMouseCommand* command = new ScriptMouseCommand(workspace);
+		workspace->setMouseCommand(command);
+		desc_Selected.fire(this, command->getMouse());
+	}
 }
 
 // STUB: WEBSERVICE 0x100c9950

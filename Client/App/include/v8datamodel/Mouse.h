@@ -40,13 +40,20 @@ private:
 	}
 
 public:
+	// FUNCTION: WEBSERVICE 0x100cbf60
 	Mouse() : command(NULL) {}
+
+	// SYNTHETIC: WEBSERVICE 0x100cc0d0
+	// RBX::Mouse::~Mouse
+
+	// SYNTHETIC: WEBSERVICE 0x100cc120
+	// RBX::Mouse::`scalar deleting destructor'
 
 	void update(const UIEvent& uiEvent);
 	G3D::CoordinateFrame getHit() const;
 	G3D::CoordinateFrame getOrigin() const;
 	PartInstance* getTarget() const;
-	void setCommand(MouseCommand* command);
+	void setCommand(MouseCommand* value) { command = value; }
 
 	// FUNCTION: WEBSERVICE 0x10116fb0
 	TextureId getIcon() const
@@ -85,8 +92,6 @@ public:
 		checkActive();
 		return lastEvent.windowSize.y;
 	}
-
-	virtual ~Mouse() {}
 };
 
 DECOMP_SIZE_ASSERT(Mouse, 0x130)

@@ -590,6 +590,8 @@ public:
 	// RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::~FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
 	// TEMPLATE: WEBSERVICE 0x100c96f0
 	// RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
+	// TEMPLATE: WEBSERVICE 0x100ca050
+	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sMouse>::NonFactoryProduct<RBX::Instance,&RBX::sMouse>
 	// TEMPLATE: WEBSERVICE 0x100d5c10
 	// RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::~FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100d5c90

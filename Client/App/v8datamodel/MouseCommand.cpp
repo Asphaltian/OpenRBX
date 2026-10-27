@@ -111,6 +111,16 @@ G3D::Ray MouseCommand::getSearchRay(const UIEvent& uiEvent) const
 	return getSearchRay(uiEvent, workspace);
 }
 
+// FUNCTION: WEBSERVICE 0x100bed70
+MouseCommand::MouseCommand(Workspace* workspace) : capturedMouse(false), workspace(workspace)
+{
+}
+
+// STUB: WEBSERVICE 0x100bedd0
+MouseCommand::~MouseCommand()
+{
+}
+
 // FUNCTION: WEBSERVICE 0x100bee40
 PartInstance* MouseCommand::getPart(const UIEvent& uiEvent, const HitTestFilter* filter, G3D::Vector3& hitWorld)
 {

@@ -590,6 +590,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::DescribedCreatable<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
 	// SYNTHETIC: WEBSERVICE 0x100ca200
 	// RBX::Instance::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100cbe00
+	// RBX::DescribedNonCreatable<RBX::Mouse,RBX::Instance,&RBX::sMouse>::DescribedNonCreatable<RBX::Mouse,RBX::Instance,&RBX::sMouse>
 	// TEMPLATE: WEBSERVICE 0x100d7050
 	// RBX::DescribedCreatable<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::DescribedCreatable<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100d7170

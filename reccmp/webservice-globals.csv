@@ -7177,3 +7177,17 @@ address,type,symbol
 0x1023f1bc,global,??_8?$FactoryProduct@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@7BAccoutrement@1@@
 0x102417e4,global,??_8Hat@RBX@@7BICameraSubject@1@@
 0x102417e4,global,??_8?$DescribedCreatable@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@7BICameraSubject@1@@
+0x10239d60,global,??_7MouseCommand@RBX@@6BIRenderable@1@@
+0x10239d7c,global,??_7MouseCommand@RBX@@6BINamed@1@@
+0x10247bac,global,??_7ScriptMouseCommand@RBX@@6BINamed@1@@
+0x10247b94,global,??_7ScriptMouseCommand@RBX@@6BIRenderable@1@@
+0x1023bf18,global,??_7Mouse@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x1023bf44,global,??_7Mouse@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1023bf08,global,??_7Mouse@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x1023bf28,global,??_7Mouse@RBX@@6BDebugable@1@@
+0x1023bee8,global,??_7Mouse@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x1023bf30,global,??_7Mouse@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x1023bed8,global,??_7Mouse@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x1023bf38,global,??_7Mouse@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x1023bec8,global,??_7Mouse@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x1023bef8,global,??_7Mouse@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@

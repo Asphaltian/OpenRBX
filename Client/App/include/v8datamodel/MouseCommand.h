@@ -56,19 +56,45 @@ public:
 	Surface* getSurface(const UIEvent& uiEvent, PartInstance*&, int&);
 	Surface* getSurface(const UIEvent& uiEvent);
 
-	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent); // vtable+0x04
+	// FUNCTION: WEBSERVICE 0x10069fd0 FOLDED
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent) // vtable+0x04
+	{
+		return this;
+	}
 
 protected:
-	virtual void onMouseIdle(const UIEvent& uiEvent);            // vtable+0x08
-	virtual void onMouseHover(const UIEvent& uiEvent);           // vtable+0x0c
-	virtual MouseCommand* onKeyDown(const UIEvent& uiEvent);     // vtable+0x10
-	virtual MouseCommand* onPeekKeyDown(const UIEvent& uiEvent); // vtable+0x14
-	virtual void onMouseMove(const UIEvent& uiEvent);            // vtable+0x18
-	virtual void onMouseDelta(const UIEvent& uiEvent);           // vtable+0x1c
-	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent);     // vtable+0x20
-	virtual void capture();                                      // vtable+0x24
-	virtual void releaseCapture();                               // vtable+0x28
-	virtual void cancel();                                       // vtable+0x2c
+	virtual void onMouseIdle(const UIEvent& uiEvent) {}  // vtable+0x08
+	virtual void onMouseHover(const UIEvent& uiEvent) {} // vtable+0x0c
+
+	// FUNCTION: WEBSERVICE 0x10069fd0 FOLDED
+	virtual MouseCommand* onKeyDown(const UIEvent& uiEvent) // vtable+0x10
+	{
+		return this;
+	}
+
+	virtual MouseCommand* onPeekKeyDown(const UIEvent& uiEvent) { return NULL; } // vtable+0x14
+	virtual void onMouseMove(const UIEvent& uiEvent) {}                          // vtable+0x18
+	virtual void onMouseDelta(const UIEvent& uiEvent) {}                         // vtable+0x1c
+
+	// FUNCTION: WEBSERVICE 0x10069fe0
+	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent) // vtable+0x20
+	{
+		releaseCapture();
+		return NULL;
+	}
+
+	virtual void capture(); // vtable+0x24
+
+	// FUNCTION: WEBSERVICE 0x10069ff0
+	virtual void releaseCapture() { capturedMouse = false; } // vtable+0x28
+
+	// FUNCTION: WEBSERVICE 0x1006a700
+	virtual void cancel() // vtable+0x2c
+	{
+		if (capturedMouse) {
+			releaseCapture();
+		}
+	}
 
 	void snapshotSelectionPositions(XmlState*);
 	bool characterCanReach(const G3D::Vector3& hitPoint) const;
@@ -80,8 +106,8 @@ public:
 
 	bool captured() const;
 
-	virtual MouseCommand* isSticky() const; // vtable+0x34
-	virtual TextureId getCursorId() const;  // vtable+0x38
+	virtual MouseCommand* isSticky() const { return NULL; } // vtable+0x34
+	virtual TextureId getCursorId() const;                  // vtable+0x38
 
 	static PartInstance* getMousePart(
 		const G3D::Ray& unitRay,

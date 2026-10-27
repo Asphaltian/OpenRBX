@@ -48,7 +48,7 @@ public:
 
 	UIEvent(UserInputBase* userInput, EventType eventType, SDLKey key, SDLMod mod);
 	UIEvent(UserInputBase* userInput, EventType eventType, G3D::Vector2int16, G3D::Vector2int16);
-	UIEvent();
+	UIEvent() : eventType(NO_EVENT), userInput(NULL) {}
 
 	// FUNCTION: WEBSERVICE 0x10069fa0
 	bool isMouseEvent() const
