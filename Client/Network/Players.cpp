@@ -1,5 +1,6 @@
 #include "network/Players.h"
 
+#include "PacketIds.h"
 #include "Streaming.h"
 #include "network/Client.h"
 #include "network/Server.h"
@@ -354,7 +355,7 @@ void Players::reportAbuse(Player* player, std::string comment)
 		}
 
 		RakNet::BitStream bitStream;
-		bitStream << (unsigned char) 'Q';
+		bitStream << (unsigned char) ID_REPORT_ABUSE;
 		bitStream << (localPlayer ? localPlayer->getUserID() : 0);
 		bitStream << (player ? player->getUserID() : 0);
 		bitStream << comment;
@@ -377,7 +378,7 @@ void Players::chat(std::string message)
 	}
 
 	RakNet::BitStream bitStream;
-	bitStream << (unsigned char) 'P';
+	bitStream << (unsigned char) ID_CHAT_ALL;
 
 	Guid::Data id = localPlayer->getGuid().data;
 
@@ -434,7 +435,7 @@ void Players::addChatMessage(const ChatMessage& message)
 bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
 	switch (packet->data[0]) {
-	case 'P':
+	case ID_CHAT_ALL:
 		try {
 			RakNet::BitStream inBitstream(packet->data, packet->length, false);
 			inBitstream.IgnoreBits(8);
@@ -482,7 +483,7 @@ bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 
 		return false;
 
-	case 'Q':
+	case ID_REPORT_ABUSE:
 		try {
 			if (abuseReporter) {
 				RakNet::BitStream inBitstream(packet->data, packet->length, false);

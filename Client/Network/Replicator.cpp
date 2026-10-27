@@ -1,5 +1,6 @@
 #include "network/Replicator.h"
 
+#include "PacketIds.h"
 #include "network/NetworkSettings.h"
 #include "network/Player.h"
 #include "network/Players.h"
@@ -149,6 +150,46 @@ public:
 		const Reflection::PropertyDescriptor& desc
 	);
 	virtual void write(RakNet::BitStream& bitStream);
+};
+
+// SIZE 0x124
+class Replicator::ItemSender : boost::noncopyable
+{
+	Replicator& replicator;      // 0x00
+	RakPeerInterface* peer;      // 0x04
+	RakNet::BitStream bitStream; // 0x08
+
+	void openPacket() { bitStream << (unsigned char) ID_DATA; }
+
+	void closePacket()
+	{
+		Item::writeItemType(bitStream, Item::ItemTypeEnd);
+		peer->Send(&bitStream, MEDIUM_PRIORITY, RELIABLE_ORDERED, 0, replicator.remotePlayerId, false);
+		bitStream.Reset();
+	}
+
+	const int maxStreamSize; // 0x11c
+
+public:
+	bool sentItems; // 0x120
+
+	ItemSender(Replicator& replicator, RakPeerInterface* peer);
+	~ItemSender();
+
+	bool send(Item& item)
+	{
+		if (bitStream.GetNumberOfBytesUsed() >= maxStreamSize) {
+			return false;
+		}
+
+		if (bitStream.GetNumberOfBitsUsed() == 0) {
+			openPacket();
+		}
+
+		item.write(bitStream);
+		sentItems = true;
+		return true;
+	}
 };
 
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
@@ -319,6 +360,14 @@ Mechanism* Replicator::findTargetPlayerCharacterMechanism()
 	return NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x1019cdf0
+inline Replicator::ItemSender::~ItemSender()
+{
+	if (bitStream.GetNumberOfBitsUsed() > 0) {
+		closePacket();
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1019dfe0
 void Peer::onEvent(const RunService* source, Heartbeat event)
 {
@@ -399,6 +448,16 @@ inline void Replicator::MarkerItem::write(RakNet::BitStream& bitStream)
 	}
 
 	replicator.onSentMarker(id);
+}
+
+// FUNCTION: WEBSERVICE 0x1019ff90
+inline Replicator::ItemSender::ItemSender(Replicator& replicator, RakPeerInterface* peer)
+	: replicator(replicator), peer(peer),
+	  maxStreamSize(
+		  G3D::iRound(NetworkSettings::singleton().dataPacketSize * (peer->GetMTUSize(replicator.remotePlayerId) - 128))
+	  ),
+	  sentItems(false)
+{
 }
 
 // FUNCTION: WEBSERVICE 0x101a1410
@@ -495,6 +554,29 @@ void Replicator::onPropertyChanged(
 	else {
 		pendingItems.push_back(boost::shared_ptr<Item>(new ChangePropertyItem(*this, instance, *descriptor)));
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x101a24c0
+bool Replicator::sendItems()
+{
+	if (!canSendItems()) {
+		return false;
+	}
+
+	Profiling::Mark mark(*profileDataOut, false);
+	ItemSender sender(*this, peer);
+
+	while (pendingItems.size() > 0) {
+		boost::shared_ptr<Item> item = pendingItems.front();
+		if (item) {
+			if (!sender.send(*item)) {
+				break;
+			}
+		}
+		pendingItems.pop_front();
+	}
+
+	return sender.sentItems;
 }
 
 // FUNCTION: WEBSERVICE 0x101a3b60
