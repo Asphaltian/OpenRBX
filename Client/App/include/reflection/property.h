@@ -1176,6 +1176,8 @@ public:
 	// RBX::Reflection::Property::setValue<G3D::Color3>
 	// TEMPLATE: WEBSERVICE 0x100abcb0
 	// RBX::Reflection::Property::setValue<RBX::BrickColor>
+	// TEMPLATE: WEBSERVICE 0x1019e880
+	// RBX::Reflection::Property::setValue<double>
 	// clang-format on
 	template <class T>
 	void setValue(const T& value)

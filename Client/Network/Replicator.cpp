@@ -9,6 +9,7 @@
 #include "util/Name.h"
 #include "util/Profiling.h"
 #include "util/StandardOut.h"
+#include "util/scopedassign.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Hopper.h"
 #include "v8datamodel/JointsService.h"
@@ -28,6 +29,7 @@
 #include <algorithm>
 #include <boost/bind.hpp>
 #include <boost/noncopyable.hpp>
+#include <stdexcept>
 #include <stdio.h>
 
 // SIZE 0x210
@@ -616,6 +618,61 @@ inline void Replicator::DeleteInstanceItem::write(RakNet::BitStream& bitStream)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101a3da0
+void Replicator::requestCharacter()
+{
+	RakNet::BitStream bitStream;
+	bitStream << (unsigned char) ID_REQUEST_CHARACTER;
+
+	Player* player = findTargetPlayer();
+
+	if (!player) {
+		throw std::runtime_error("Attempting to send a Character request without a local Player");
+	}
+
+	serializeId(bitStream, player);
+
+	if (NetworkSettings::singleton().printInstances) {
+		Guid::Data id = player->getGuid().data;
+		StandardOut::singleton()
+			->print(MESSAGE_INFO, "Replicator: Requesting character for %s", id.readableString(4).c_str());
+	}
+
+	peer->Send(&bitStream, MEDIUM_PRIORITY, RELIABLE_ORDERED, 0, remotePlayerId, false);
+}
+
+// FUNCTION: WEBSERVICE 0x101a3f80
+void Replicator::readInstanceDelete(RakNet::BitStream& inBitstream)
+{
+	Instance* instance;
+	Guid::Data id;
+	if (deserializeInstanceRef(inBitstream, instance, id)) {
+		boost::shared_ptr<Instance> hold = shared_from(instance);
+
+		if (NetworkSettings::singleton().printInstances) {
+			StandardOut::singleton()->print(
+				MESSAGE_INFO,
+				"Replication: ~%s:%d << %s",
+				instance->getClassName().c_str(),
+				instance->getGuid().readableString(4).c_str(),
+				remotePlayerId.ToString()
+			);
+		}
+
+		if (disconnectReplicationData(hold)) {
+			removeFromPendingNewInstances(instance);
+
+			ScopedAssign<Instance*> assign(removingInstance, instance);
+			instance->setParent(NULL);
+		}
+	}
+	else if (NetworkSettings::singleton().printInstances) {
+		StandardOut::singleton()->print(MESSAGE_INFO, "Replication ~??? << %s", remotePlayerId.ToString());
+	}
+
+	resolvePendingReferences(NULL, id);
+}
+
 // FUNCTION: WEBSERVICE 0x101a4ad0
 Peer::Peer() : profilePacketsThread(new Profiling::ThreadProfiler("Packets Thread")), rakPeer(new RakPeer())
 {
@@ -824,6 +881,56 @@ inline bool Replicator::isReplicationContainer(const Instance* instance) const
 	return replicationContainers.find(instance) != replicationContainers.end();
 }
 
+// FUNCTION: WEBSERVICE 0x101a7480
+void Replicator::deserializeValue(RakNet::BitStream& inBitStream, Reflection::Property& property)
+{
+	ScopedAssign<const Reflection::Property*> assign(deserializingProperty, &property);
+
+	if (property.getDescriptor().type == Reflection::Type::singleton<std::string>()) {
+		getSharedDictionary(property.getDescriptor()).deserializeString(property, inBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<bool>()) {
+		deserialize<bool>(property, inBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<int>()) {
+		deserialize<int>(property, inBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<float>()) {
+		deserialize<float>(property, inBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<double>()) {
+		deserialize<double>(property, inBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<BrickColor>()) {
+		deserialize<BrickColor>(property, inBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<G3D::Color3>()) {
+		deserialize<G3D::Color3>(property, inBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<G3D::Vector3>()) {
+		if (property.getDescriptor() == PartInstance::prop_Size) {
+			G3D::Vector3 value;
+			readBrickVector(inBitStream, value);
+			property.setValue(value);
+		}
+		else {
+			deserialize<G3D::Vector3>(property, inBitStream);
+		}
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<G3D::CoordinateFrame>()) {
+		deserialize<G3D::CoordinateFrame>(property, inBitStream);
+	}
+	else if (dynamic_cast<const Reflection::EnumPropertyDescriptor*>(&property.getDescriptor())) {
+		deserializeEnum(property, inBitStream);
+	}
+	else if (dynamic_cast<const Reflection::RefPropertyDescriptor*>(&property.getDescriptor())) {
+		deserializeRef(property, inBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<ContentId>()) {
+		deserialize<ContentId>(property, inBitStream);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x101a76d0
 inline void Replicator::ChangePropertyItem::write(RakNet::BitStream& bitStream)
 {
@@ -885,6 +992,31 @@ Replicator::ReplicationData& Replicator::addReplicationData(boost::shared_ptr<In
 			);
 		}
 		return oldData;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101a7cf0
+void Replicator::readProperties(RakNet::BitStream& inBitstream, Instance* instance)
+{
+	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator iter = instance->properties_begin();
+	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator end = instance->properties_end();
+	while (iter != end) {
+		Reflection::Property property = *iter;
+
+		if (property.getDescriptor().canStreamWrite()) {
+			if (typeid(bool) == property.getDescriptor().type.type) {
+				deserializeValue(inBitstream, property);
+			}
+			else {
+				bool equalValues;
+				inBitstream >> equalValues;
+				if (!equalValues) {
+					deserializeValue(inBitstream, property);
+				}
+			}
+		}
+
+		++iter;
 	}
 }
 

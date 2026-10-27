@@ -86,6 +86,18 @@ void serialize(const Reflection::ConstProperty& property, RakNet::BitStream& bit
 	bitStream << property.getValue<T>();
 }
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1019dcf0
+// RBX::Network::deserialize<G3D::Vector3>
+// TEMPLATE: WEBSERVICE 0x1019e710
+// RBX::Network::deserialize<float>
+// TEMPLATE: WEBSERVICE 0x1019e740
+// RBX::Network::deserialize<G3D::Color3>
+// TEMPLATE: WEBSERVICE 0x1019e770
+// RBX::Network::deserialize<G3D::CoordinateFrame>
+// TEMPLATE: WEBSERVICE 0x1019f7d0
+// RBX::Network::deserialize<double>
+// clang-format on
 template <class T>
 void deserialize(Reflection::Property& property, RakNet::BitStream& bitStream)
 {

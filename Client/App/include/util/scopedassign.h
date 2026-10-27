@@ -10,7 +10,7 @@ template <class T>
 class ScopedAssign
 {
 public:
-	ScopedAssign(T& value, const T& newValue) : value(&value), oldValue(value) { value = newValue; }
+	ScopedAssign(T& value, const T& newValue) : value(&value), oldValue(value) { *this->value = newValue; }
 
 	~ScopedAssign() { *value = oldValue; }
 
