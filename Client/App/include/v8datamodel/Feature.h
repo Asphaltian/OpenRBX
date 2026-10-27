@@ -80,7 +80,7 @@ public:
 	Feature();
 	virtual ~Feature();
 
-	// FUNCTION: WEBSERVICE 0x1019c9f0
+	// FUNCTION: WEBSERVICE 0x1019c9f0 FOLDED
 	NormalId getFaceId() const { return faceId; }
 
 	void setFaceId(NormalId value);

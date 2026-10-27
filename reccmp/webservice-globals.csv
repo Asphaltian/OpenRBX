@@ -7344,3 +7344,16 @@ address,type,symbol
 0x10239dfc,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10239e2c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
 0x102318b4,global,??_7TextXmlWriter@@6B@
+0x102505ac,global,??_7Peer@Network@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
+0x10250574,global,??_7Peer@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
+0x10250544,global,??_7Peer@Network@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
+0x10250554,global,??_7Peer@Network@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
+0x10250584,global,??_7Peer@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@2@@
+0x102505a4,global,??_7Peer@Network@RBX@@6BDebugable@2@@
+0x10250508,global,??_7Peer@Network@RBX@@6B?$Listener@VRunService@RBX@@VHeartbeat@2@@2@@
+0x10250514,global,??_7Peer@Network@RBX@@6BPluginInterface@@@
+0x10250594,global,??_7Peer@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@2@@
+0x10250564,global,??_7Peer@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@2@@
+0x102505c4,global,??_7Peer@Network@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@
+0x102505b4,global,??_7Peer@Network@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
+0x10250354,global,??_7FilePacketLogger@@6B@
