@@ -2,9 +2,6 @@
 #define DECOMP_H
 
 #ifndef NDEBUG
-// Disable size assertions for debug builds because the sizes differ between debug and release
-// builds. The release WebService.dll is what we ultimately want to decompile, so that is what
-// we assert against.
 #undef ENABLE_DECOMP_ASSERTS
 #endif
 
@@ -29,13 +26,11 @@ typedef unsigned int undefined4;
 
 extern undefined4 g_foldingDummyVariable;
 
-// Use STUB when a function has not yet been matched and/or is WIP.
 #define STUB(val)                                                                                                      \
 	do {                                                                                                               \
 		g_foldingDummyVariable = val;                                                                                  \
 	} while (0)
 
-// Use MATCHING when a function is matched, but function folding inhibits success.
 #define MATCHING(val)                                                                                                  \
 	do {                                                                                                               \
 		g_foldingDummyVariable = val;                                                                                  \

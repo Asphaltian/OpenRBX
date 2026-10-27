@@ -116,6 +116,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::LegacyHopperService>
 	// TEMPLATE: WEBSERVICE 0x1006e120
 	// RBX::Creatable<RBX::Instance>::create<RBX::Tool>
+	// TEMPLATE: WEBSERVICE 0x1006e390
+	// RBX::Creatable<RBX::Instance>::create<RBX::Flag>
 	// TEMPLATE: WEBSERVICE 0x10076300
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x10076620
@@ -424,6 +426,8 @@ public:
 	// RBX::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1006e1a0
 	// RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1006e410
+	// RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10074490
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100766a0
@@ -600,6 +604,10 @@ public:
 	// RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>::~FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>
 	// TEMPLATE: WEBSERVICE 0x100cc140
 	// RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>
+	// TEMPLATE: WEBSERVICE 0x100cd0e0
+	// RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>::~FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>
+	// TEMPLATE: WEBSERVICE 0x100cd180
+	// RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>
 	// TEMPLATE: WEBSERVICE 0x100d5c10
 	// RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::~FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100d5c90

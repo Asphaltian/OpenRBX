@@ -8,7 +8,11 @@
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
 
+#include <list>
+
 namespace RBX {
+
+class Flag;
 
 extern const char sFlagStandService[];
 
@@ -19,6 +23,7 @@ class FlagStand : public DescribedCreatable<FlagStand, PartInstance, sFlagStand>
 {
 public:
 	void setTeamColor(BrickColor value);
+	void AffixFlag(Flag* flag);
 
 private:
 	undefined m_unk0x290[0x2a4 - 0x290]; // 0x290
@@ -31,7 +36,13 @@ DECOMP_SIZE_ASSERT(FlagStand, 0x2c4)
 class FlagStandService : public DescribedCreatable<FlagStandService, Instance, sFlagStandService>, public Service
 {
 private:
-	undefined m_unk0x0f8[0x104 - 0x0f8]; // 0x0f8
+	std::list<FlagStand*> flagStands; // 0xf8
+
+public:
+	virtual ~FlagStandService();
+
+	FlagStand* FindClosestEmptyStandForFlag(Flag* flag);
+	FlagStand* FindStandWithFlag(Flag* flag);
 };
 
 DECOMP_SIZE_ASSERT(FlagStandService, 0x104)

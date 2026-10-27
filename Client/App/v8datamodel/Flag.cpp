@@ -1,6 +1,15 @@
 #include "v8datamodel/Flag.h"
 
+#include "humanoid/Humanoid.h"
+#include "network/Player.h"
+#include "network/Players.h"
 #include "reflection/property.h"
+#include "util/RunStateOwner.h"
+#include "v8datamodel/FlagStand.h"
+#include "v8datamodel/PartInstance.h"
+#include "v8datamodel/TimerService.h"
+
+#include <boost/bind.hpp>
 
 namespace RBX {
 
@@ -13,6 +22,96 @@ static Reflection::PropDescriptor<Flag, BrickColor> prop_Color(
 	&RBX::Flag::setTeamColor
 );
 
+// STUB: WEBSERVICE 0x100cd0b0
+bool Flag::canBePickedUpByPlayer(Network::Player* player)
+{
+	if (player->getNeutral()) {
+		return false;
+	}
+
+	return player->getTeamColor() != teamColor;
+}
+
+// FUNCTION: WEBSERVICE 0x100cd520
+Flag::~Flag()
+{
+}
+
+// FUNCTION: WEBSERVICE 0x100ce8a0
+void Flag::doUglyPeriodicCloneHack()
+{
+	evilClone = clone();
+
+	if (timer && numChildren() == 0) {
+		timer->delay(boost::bind(&Flag::doUglyPeriodicCloneHack, shared_from(this)), 2.0);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100ce9c0
+void Flag::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	Instance::onServiceProvider(oldProvider, newProvider);
+
+	if (oldProvider == NULL) {
+		timer = newProvider ? newProvider->create<TimerService>() : NULL;
+		timer->delay(boost::bind(&Flag::doUglyPeriodicCloneHack, shared_from(this)), 2.0);
+	}
+
+	if (newProvider == NULL) {
+		flagTouched.disconnect();
+
+		RunService* runService = oldProvider ? oldProvider->create<RunService>() : NULL;
+		if (runService->getRunState() == RS_RUNNING && evilClone) {
+			Flag* flag = dynamic_cast<Flag*>(evilClone.get());
+			flag->getHandle();
+
+			FlagStandService* flagStandService = ServiceProvider::create<FlagStandService>(this);
+			if (!flagStandService->FindStandWithFlag(flag)) {
+				if (FlagStand* stand = flagStandService->FindClosestEmptyStandForFlag(flag)) {
+					stand->AffixFlag(flag);
+				}
+			}
+		}
+	}
+}
+
+// STUB: WEBSERVICE 0x100ceae0
+void Flag::onEvent_flagTouched(boost::shared_ptr<Instance> other)
+{
+	Instance* character = other->getParent();
+
+	Network::Player* player;
+	if (!Humanoid::modelIsCharacter(character) || !(player = Network::Players::getPlayerFromCharacter(character))) {
+		return;
+	}
+
+	if (!player->getNeutral() && teamColor == player->getTeamColor()) {
+		FlagStandService* flagStandService = ServiceProvider::create<FlagStandService>(this);
+		if (!flagStandService->FindStandWithFlag(this)) {
+			if (FlagStand* stand = flagStandService->FindClosestEmptyStandForFlag(this)) {
+				stand->AffixFlag(this);
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100cebe0
+void Flag::onChildAdded(Instance* child)
+{
+	if (dynamic_cast<PartInstance*>(child)) {
+		if (PartInstance* handle = getHandle()) {
+			flagTouched =
+				PartInstance::event_Touched.connect(handle, boost::bind(&Flag::onEvent_flagTouched, this, _1), 10);
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100cee10
+Flag::Flag() : timer(NULL)
+{
+	setName(sFlag);
+}
+
 // FUNCTION: WEBSERVICE 0x100cef60
 void Flag::setTeamColor(BrickColor color)
 {
@@ -21,3 +120,8 @@ void Flag::setTeamColor(BrickColor color)
 }
 
 } // namespace RBX
+
+template class RBX::FactoryProduct<RBX::Flag, RBX::Tool, RBX::sFlag>;
+template class RBX::Reflection::
+	Described<RBX::Flag, RBX::sFlag, RBX::FactoryProduct<RBX::Flag, RBX::Tool, RBX::sFlag> >;
+template class RBX::DescribedCreatable<RBX::Flag, RBX::Tool, RBX::sFlag>;

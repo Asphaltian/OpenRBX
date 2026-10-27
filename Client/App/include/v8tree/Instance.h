@@ -594,6 +594,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedNonCreatable<RBX::Mouse,RBX::Instance,&RBX::sMouse>::DescribedNonCreatable<RBX::Mouse,RBX::Instance,&RBX::sMouse>
 	// TEMPLATE: WEBSERVICE 0x100ccc60
 	// RBX::DescribedCreatable<RBX::Tool,RBX::BackpackItem,&RBX::sTool>::DescribedCreatable<RBX::Tool,RBX::BackpackItem,&RBX::sTool>
+	// TEMPLATE: WEBSERVICE 0x100cecd0
+	// RBX::DescribedCreatable<RBX::Flag,RBX::Tool,&RBX::sFlag>::DescribedCreatable<RBX::Flag,RBX::Tool,&RBX::sFlag>
 	// TEMPLATE: WEBSERVICE 0x100d7050
 	// RBX::DescribedCreatable<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::DescribedCreatable<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100d7170

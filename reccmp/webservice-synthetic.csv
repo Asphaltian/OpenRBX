@@ -282,7 +282,11 @@ address,type,symbol
 0x100cae00,synthetic,?getClassName@?$FactoryProduct@VTool@RBX@@VBackpackItem@2@$1?sTool@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100cb580,synthetic,??$?0P8Tool@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VTool@RBX@@H@Reflection@RBX@@QAE@PBD0P8Tool@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100cd0a0,synthetic,?getTeamColor@Flag@RBX@@QBE?AVBrickColor@2@XZ
+0x100cd7f0,synthetic,?getClassName@?$FactoryProduct@VFlag@RBX@@VTool@2@$1?sFlag@2@3QBDB@RBX@@UBEABVName@2@XZ
+0x100ce140,synthetic,??$find@VFlagStandService@RBX@@@ServiceProvider@RBX@@QBEPAVFlagStandService@1@XZ
+0x100ce5e0,synthetic,??$create@VFlagStandService@RBX@@@ServiceProvider@RBX@@QBEPAVFlagStandService@1@XZ
 0x100ce6d0,synthetic,??$?0P8Flag@RBX@@BE?AVBrickColor@1@XZP801@AEXV21@@Z@?$PropDescriptor@VFlag@RBX@@VBrickColor@2@@Reflection@RBX@@QAE@PBD0P8Flag@2@BE?AVBrickColor@2@XZP832@AEXV42@@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100ce850,synthetic,??$create@VFlagStandService@RBX@@@ServiceProvider@RBX@@SAPAVFlagStandService@1@PBVInstance@1@@Z
 0x100cf390,,?raise@?$Notifier@VWorld@RBX@@UAutoJoin@2@@RBX@@IBEXUAutoJoin@2@PAV?$Listener@VWorld@RBX@@UAutoJoin@2@@2@@Z
 0x100cf450,,?raise@?$Notifier@VWorld@RBX@@UAutoDestroy@2@@RBX@@IBEXUAutoDestroy@2@PAV?$Listener@VWorld@RBX@@UAutoDestroy@2@@2@@Z
 0x100cf6f0,,?raise@?$Notifier@VWorld@RBX@@UAutoJoin@2@@RBX@@IBEXUAutoJoin@2@@Z
