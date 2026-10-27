@@ -3,6 +3,7 @@
 #include "network/NetworkSettings.h"
 #include "network/Player.h"
 #include "network/Players.h"
+#include "security/SecurityContext.h"
 #include "util/Log.h"
 #include "util/Name.h"
 #include "util/Profiling.h"
@@ -496,10 +497,41 @@ void Replicator::onPropertyChanged(
 	}
 }
 
-// STUB: WEBSERVICE 0x101a3b60
+// FUNCTION: WEBSERVICE 0x101a3b60
 inline void Replicator::DeleteInstanceItem::write(RakNet::BitStream& bitStream)
 {
-	STUB(0x101a3b60);
+	if (replicator.pendingDeleteInstances.erase(instance.get())) {
+		if (!instance) {
+			StandardOut::singleton()
+				->print(MESSAGE_ERROR, "Replication: ~NULL >> %s", replicator.remotePlayerId.ToString());
+		}
+		else {
+			try {
+				writeItemType(bitStream, ItemTypeDelete);
+
+				replicator.serializeId(bitStream, instance.get());
+
+				if (NetworkSettings::singleton().printInstances) {
+					StandardOut::singleton()->print(
+						MESSAGE_INFO,
+						"Replication: ~%s:%s >> %s",
+						instance->getClassName().c_str(),
+						instance->getGuid().readableString(4).c_str(),
+						replicator.remotePlayerId.ToString()
+					);
+				}
+			}
+			catch (std::exception& e) {
+				StandardOut::singleton()->print(
+					MESSAGE_ERROR,
+					"Replication: ~%s >> %s, %s",
+					instance->getClassName().c_str(),
+					replicator.remotePlayerId.ToString(),
+					e.what()
+				);
+			}
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x101a4ad0
@@ -586,6 +618,25 @@ void Replicator::ReplicatorStatsItem::update()
 
 		instanceSize->formatMem(instanceCount ? instanceBits / (8 * instanceCount) : 0);
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x101a6690
+const Instance* Replicator::getDefault(const Name& className)
+{
+	Security::Impersonator impersonate(Security::Replicator);
+
+	DefaultObjects::iterator iter = defaultObjects.find(&className);
+	if (iter == defaultObjects.end()) {
+		boost::shared_ptr<Instance> instance = Instance::create(className);
+		if (!instance) {
+			StandardOut::singleton()
+				->print(MESSAGE_ERROR, "Replication: Can't create default object of type %s", className.c_str());
+		}
+		defaultObjects[&className] = instance;
+		return instance.get();
+	}
+
+	return iter->second.get();
 }
 
 // FUNCTION: WEBSERVICE 0x101a6e20
@@ -755,6 +806,61 @@ Replicator::ReplicationData& Replicator::addReplicationData(boost::shared_ptr<In
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101a8aa0
+void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitStream)
+{
+	const Instance* defaultInstance = getDefault(instance->getClassName());
+
+	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator iter = instance->properties_begin();
+	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator end = instance->properties_end();
+	while (iter != end) {
+		Reflection::ConstProperty property = *iter;
+		const Reflection::PropertyDescriptor& descriptor = property.getDescriptor();
+
+		if (descriptor.canStreamWrite()) {
+			if (typeid(bool) == descriptor.type.type) {
+				serializeValue(property, false, outBitStream);
+				if (NetworkSettings::singleton().printInstances && NetworkSettings::singleton().printProperties) {
+					StandardOut::singleton()->print(
+						MESSAGE_INFO,
+						"   %s %s, %d bit",
+						descriptor.type.name.c_str(),
+						descriptor.name.c_str(),
+						1
+					);
+				}
+			}
+			else if (defaultInstance && descriptor.equalValues(instance, defaultInstance)) {
+				outBitStream << true;
+				if (NetworkSettings::singleton().printInstances && NetworkSettings::singleton().printProperties) {
+					StandardOut::singleton()->print(
+						MESSAGE_INFO,
+						"   %s %s, 1 bit (default)",
+						descriptor.type.name.c_str(),
+						descriptor.name.c_str()
+					);
+				}
+			}
+			else {
+				int start = outBitStream.GetNumberOfBitsUsed();
+				outBitStream << false;
+				serializeValue(property, false, outBitStream);
+				if (NetworkSettings::singleton().printInstances && NetworkSettings::singleton().printProperties) {
+					StandardOut::singleton()->print(
+						MESSAGE_INFO,
+						"   %s %s, %d bits",
+						descriptor.type.name.c_str(),
+						descriptor.name.c_str(),
+						outBitStream.GetNumberOfBitsUsed() - start
+					);
+				}
+			}
+		}
+
+		++iter;
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x101a8e40
 void Replicator::addTopReplicationContainer(Instance* instance, bool replicateProperties)
 {
@@ -806,10 +912,36 @@ PluginReceiveResult Replicator::OnReceive(RakPeerInterface* peer, Packet* packet
 	return RR_CONTINUE_PROCESSING;
 }
 
-// STUB: WEBSERVICE 0x101a9890
+// FUNCTION: WEBSERVICE 0x101a9890
 inline void Replicator::NewInstanceItem::write(RakNet::BitStream& bitStream)
 {
-	STUB(0x101a9890);
+	if (replicator.pendingNewInstances.erase(instance.get())) {
+		writeItemType(bitStream, ItemTypeNew);
+
+		replicator.serializeId(bitStream, instance.get());
+
+		if (NetworkSettings::singleton().printInstances) {
+			StandardOut::singleton()->print(
+				MESSAGE_INFO,
+				"Replication: %s:%s >> %s",
+				instance->getClassName().c_str(),
+				instance->getGuid().readableString(4).c_str(),
+				replicator.remotePlayerId.ToString()
+			);
+		}
+
+		replicator.classNames.send(bitStream, instance->getClassName().toString());
+
+		bool deleteOnDisconnect = replicator.remoteDeleteOnDisconnect(instance.get());
+
+		bitStream << deleteOnDisconnect;
+
+		replicator.writeProperties(instance.get(), bitStream);
+
+		Reflection::ConstProperty property(Instance::propParent, instance.get());
+
+		replicator.serializeValue(property, false, bitStream);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x101aa110
