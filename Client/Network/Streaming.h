@@ -70,6 +70,16 @@ bool brickEq(float a, float b);
 void writeBrickVector(RakNet::BitStream& stream, const G3D::Vector3& value);
 void readBrickVector(RakNet::BitStream& stream, G3D::Vector3& value);
 
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1019dcd0
+// RBX::Network::serialize<G3D::Vector3>
+// TEMPLATE: WEBSERVICE 0x1019e6d0
+// RBX::Network::serialize<G3D::Color3>
+// TEMPLATE: WEBSERVICE 0x1019e6f0
+// RBX::Network::serialize<G3D::CoordinateFrame>
+// TEMPLATE: WEBSERVICE 0x1019f7b0
+// RBX::Network::serialize<double>
+// clang-format on
 template <class T>
 void serialize(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
 {

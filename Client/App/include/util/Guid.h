@@ -30,6 +30,9 @@ public:
 
 	void assign(Data data);
 
+	// FUNCTION: WEBSERVICE 0x1019bbd0
+	std::string readableString(int scopeLength) const { return data.readableString(4); }
+
 	static int compare(const Guid* a, const Guid* b);
 	static int compare(const Guid* a0, const Guid* a1, const Guid* b0, const Guid* b1);
 

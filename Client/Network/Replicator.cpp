@@ -111,6 +111,45 @@ public:
 	virtual void write(RakNet::BitStream& bitStream);
 };
 
+// VTABLE: WEBSERVICE 0x10250608
+// SIZE 0x10
+class Replicator::DeleteInstanceItem : public Item
+{
+	boost::shared_ptr<const Instance> instance; // 0x08
+
+public:
+	DeleteInstanceItem(Replicator& replicator, const boost::shared_ptr<const Instance>& instance);
+	virtual void write(RakNet::BitStream& bitStream);
+};
+
+// VTABLE: WEBSERVICE 0x102503a4
+// SIZE 0xc
+class Replicator::MarkerItem : public Item
+{
+	long id; // 0x08
+
+public:
+	MarkerItem(Replicator& replicator, long id) : Item(replicator), id(id) {}
+
+	virtual void write(RakNet::BitStream& bitStream);
+};
+
+// VTABLE: WEBSERVICE 0x10250498
+// SIZE 0x14
+class Replicator::ChangePropertyItem : public Item
+{
+	const Reflection::PropertyDescriptor& desc;       // 0x08
+	const boost::shared_ptr<const Instance> instance; // 0x0c
+
+public:
+	ChangePropertyItem(
+		Replicator& replicator,
+		const boost::shared_ptr<const Instance>& instance,
+		const Reflection::PropertyDescriptor& desc
+	);
+	virtual void write(RakNet::BitStream& bitStream);
+};
+
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void Replicator::onSentMarker(long id)
 {
@@ -231,6 +270,16 @@ void Replicator::closeReplicationItem(const std::pair<const Instance* const, Rep
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1019cc30
+inline Replicator::ChangePropertyItem::ChangePropertyItem(
+	Replicator& replicator,
+	const boost::shared_ptr<const Instance>& instance,
+	const Reflection::PropertyDescriptor& desc
+)
+	: Item(replicator), desc(desc), instance(instance)
+{
+}
+
 // FUNCTION: WEBSERVICE 0x1019cd10
 bool Replicator::remoteDeleteOnDisconnect(const Instance* instance) const
 {
@@ -327,6 +376,30 @@ void Peer::updateNetworkSimulator()
 	);
 }
 
+// FUNCTION: WEBSERVICE 0x1019fd80
+inline Replicator::DeleteInstanceItem::DeleteInstanceItem(
+	Replicator& replicator,
+	const boost::shared_ptr<const Instance>& instance
+)
+	: Item(replicator), instance(instance)
+{
+	replicator.pendingDeleteInstances.insert(instance.get());
+}
+
+// STUB: WEBSERVICE 0x1019fe60
+inline void Replicator::MarkerItem::write(RakNet::BitStream& bitStream)
+{
+	writeItemType(bitStream, ItemTypeMarker);
+	bitStream << (int) id;
+
+	if (NetworkSettings::singleton().printInstances) {
+		StandardOut::singleton()
+			->print(MESSAGE_INFO, "Replication: Sending marker %d to %s", id, replicator.remotePlayerId.ToString());
+	}
+
+	replicator.onSentMarker(id);
+}
+
 // FUNCTION: WEBSERVICE 0x101a1410
 bool Replicator::disconnectReplicationData(boost::shared_ptr<Instance> instance)
 {
@@ -362,13 +435,71 @@ void Replicator::onChildAdded(boost::shared_ptr<Instance> child)
 	}
 }
 
-// STUB: WEBSERVICE 0x101a1c20
+inline bool Replicator::removeFromPendingNewInstances(const Instance* instance)
+{
+	bool removed = pendingNewInstances.erase(instance) != 0;
+	return removed;
+}
+
+// FUNCTION: WEBSERVICE 0x101a18d0
+void Replicator::onParentChanged(boost::shared_ptr<Instance> instance)
+{
+	if (replicationContainers.find(instance->getParent()) != replicationContainers.end()) {
+		pendingItems.push_back(boost::shared_ptr<Item>(new ChangePropertyItem(*this, instance, Instance::propParent)));
+	}
+	else {
+		disconnectReplicationData(instance);
+
+		if (!removeFromPendingNewInstances(instance.get())) {
+			pendingItems.push_back(boost::shared_ptr<Item>(new DeleteInstanceItem(*this, instance)));
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101a1c20
 void Replicator::onPropertyChanged(
 	boost::shared_ptr<Instance> instance,
 	const Reflection::PropertyDescriptor* descriptor
 )
 {
-	STUB(0x101a1c20);
+	Profiling::Mark mark(*profileReplication, false);
+	Profiling::Mark mark2(*profileDataListening, false);
+
+	if (instance.get() == removingInstance) {
+		return;
+	}
+
+	if (deserializingProperty && Reflection::Property(*descriptor, instance.get()) == *deserializingProperty) {
+		return;
+	}
+
+	if (isSerializePending(instance.get())) {
+		return;
+	}
+
+	if (descriptor == &Instance::propParent) {
+		onParentChanged(instance);
+		return;
+	}
+
+	if (!descriptor->canStreamWrite()) {
+		return;
+	}
+
+	Player* player = findTargetPlayer();
+	ModelInstance* character = player ? player->getCharacter() : NULL;
+	if (character && instance->isDescendentOf(character)) {
+		pendingItems.push_front(boost::shared_ptr<Item>(new ChangePropertyItem(*this, instance, *descriptor)));
+	}
+	else {
+		pendingItems.push_back(boost::shared_ptr<Item>(new ChangePropertyItem(*this, instance, *descriptor)));
+	}
+}
+
+// STUB: WEBSERVICE 0x101a3b60
+inline void Replicator::DeleteInstanceItem::write(RakNet::BitStream& bitStream)
+{
+	STUB(0x101a3b60);
 }
 
 // FUNCTION: WEBSERVICE 0x101a4ad0
@@ -476,6 +607,114 @@ void Replicator::createStatsItems(Stats::StatsService* stats)
 			statsItem->setName(getName());
 			statsItem->setParent2(network);
 		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101a7030
+SharedStringDictionary& Replicator::getSharedDictionary(const Reflection::PropertyDescriptor& descriptor)
+{
+	Strings::iterator iter = strings.find(&descriptor);
+	if (iter == strings.end()) {
+		boost::shared_ptr<SharedStringDictionary> result(new SharedStringDictionary());
+		strings[&descriptor] = result;
+		return *result;
+	}
+
+	return *iter->second;
+}
+
+// FUNCTION: WEBSERVICE 0x101a7180
+void Replicator::serializeValue(
+	const Reflection::ConstProperty& property,
+	bool includeLength,
+	RakNet::BitStream& outBitStream
+)
+{
+	if (property.getDescriptor().type == Reflection::Type::singleton<std::string>()) {
+		writeValueType(includeLength, ValueType_string, outBitStream);
+		getSharedDictionary(property.getDescriptor()).serializeString(property, outBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<bool>()) {
+		writeValueType(includeLength, ValueType_bool, outBitStream);
+		outBitStream << property.getValue<bool>();
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<int>()) {
+		writeValueType(includeLength, ValueType_int, outBitStream);
+		outBitStream << property.getValue<int>();
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<float>()) {
+		writeValueType(includeLength, ValueType_float, outBitStream);
+		outBitStream << property.getValue<float>();
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<double>()) {
+		writeValueType(includeLength, ValueType_double, outBitStream);
+		serialize<double>(property, outBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<BrickColor>()) {
+		writeValueType(includeLength, ValueType_BrickColor, outBitStream);
+		serialize<BrickColor>(property, outBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<G3D::Color3>()) {
+		writeValueType(includeLength, ValueType_Color3, outBitStream);
+		serialize<G3D::Color3>(property, outBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<G3D::Vector3>()) {
+		if (property.getDescriptor() == PartInstance::prop_Size) {
+			writeValueType(includeLength, ValueType_BrickVector, outBitStream);
+			writeBrickVector(outBitStream, property.getValue<G3D::Vector3>());
+		}
+		else {
+			writeValueType(includeLength, ValueType_Vector3, outBitStream);
+			serialize<G3D::Vector3>(property, outBitStream);
+		}
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<G3D::CoordinateFrame>()) {
+		writeValueType(includeLength, ValueType_CoordinateFrame, outBitStream);
+		serialize<G3D::CoordinateFrame>(property, outBitStream);
+	}
+	else if (dynamic_cast<const Reflection::EnumPropertyDescriptor*>(&property.getDescriptor())) {
+		writeValueType(includeLength, ValueType_Enum, outBitStream);
+		serializeEnum(property, outBitStream);
+	}
+	else if (dynamic_cast<const Reflection::RefPropertyDescriptor*>(&property.getDescriptor())) {
+		writeValueType(includeLength, ValueType_Ref, outBitStream);
+		serializeRef(property, outBitStream);
+	}
+	else if (property.getDescriptor().type == Reflection::Type::singleton<ContentId>()) {
+		writeValueType(includeLength, ValueType_ContentId, outBitStream);
+		serialize<ContentId>(property, outBitStream);
+	}
+}
+
+inline bool Replicator::isReplicationContainer(const Instance* instance) const
+{
+	return replicationContainers.find(instance) != replicationContainers.end();
+}
+
+// FUNCTION: WEBSERVICE 0x101a76d0
+inline void Replicator::ChangePropertyItem::write(RakNet::BitStream& bitStream)
+{
+	if (replicator.isReplicationContainer(instance.get())) {
+		writeItemType(bitStream, ItemTypeChangeProperty);
+
+		const Name& name = desc.name;
+
+		replicator.serializeId(bitStream, instance.get());
+
+		replicator.propNames.send(bitStream, name.toString());
+
+		if (NetworkSettings::singleton().printProperties) {
+			StandardOut::singleton()->print(
+				MESSAGE_INFO,
+				"Replication: %s:%s.%s >> %s",
+				instance->getClassName().c_str(),
+				instance->getGuid().readableString(4).c_str(),
+				name.c_str(),
+				replicator.remotePlayerId.ToString()
+			);
+		}
+
+		replicator.serializeValue(Reflection::ConstProperty(desc, instance.get()), true, bitStream);
 	}
 }
 

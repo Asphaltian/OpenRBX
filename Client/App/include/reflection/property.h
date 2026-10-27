@@ -1135,6 +1135,11 @@ public:
 
 	Property(const PropertyDescriptor& descriptor, DescribedBase* instance) : ConstProperty(descriptor, instance) {}
 
+	bool operator==(const Property& other) const
+	{
+		return descriptor == other.descriptor && instance == other.instance;
+	}
+
 	DescribedBase* getInstance() const { return const_cast<DescribedBase*>(instance); }
 
 	bool setStringValue(const std::string& value)
