@@ -314,6 +314,78 @@ void Replicator::closeReplicationItem(const std::pair<const Instance* const, Rep
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1019ca30
+void Replicator::skipValue(RakNet::BitStream& inBitStream, ValueType type)
+{
+	switch (type) {
+	case ValueType_string: {
+		std::string value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_bool: {
+		bool value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_int: {
+		int value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_float: {
+		float value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_double: {
+		double value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_BrickColor: {
+		BrickColor value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_Color3: {
+		G3D::Color3 value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_Vector3: {
+		G3D::Vector3 value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_BrickVector: {
+		G3D::Vector3 value;
+		readBrickVector(inBitStream, value);
+		break;
+	}
+	case ValueType_CoordinateFrame: {
+		G3D::CoordinateFrame value;
+		inBitStream >> value;
+		break;
+	}
+	case ValueType_Enum: {
+		int value;
+		inBitStream.ReadCompressed(value);
+		break;
+	}
+	case ValueType_Ref: {
+		int id;
+		inBitStream >> id;
+		break;
+	}
+	case ValueType_ContentId: {
+		ContentId value;
+		inBitStream >> value;
+		break;
+	}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1019cc30
 inline Replicator::ChangePropertyItem::ChangePropertyItem(
 	Replicator& replicator,

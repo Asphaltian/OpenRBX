@@ -626,7 +626,7 @@ address,type,symbol
 0x10196b30,synthetic,??1?$shared_ptr@VPartInstance@RBX@@@boost@@QAE@XZ
 0x1019b420,synthetic,??_E?$DescribedCreatable@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UAEPAXI@Z
 0x1019b580,synthetic,?getClassName@?$FactoryProduct@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UBEABVName@2@XZ
-0x1019bc00,stub,??$Write@_N@BitStream@RakNet@@QAEX_N@Z
+0x1019bc00,synthetic,??$Write@_N@BitStream@RakNet@@QAEX_N@Z
 0x1019c9b0,synthetic,??_GFilePacketLogger@@UAEPAXI@Z
 0x1019cc10,synthetic,??_GMarkerItem@Replicator@Network@RBX@@UAEPAXI@Z
 0x1019d870,synthetic,??_GChangePropertyItem@Replicator@Network@RBX@@UAEPAXI@Z

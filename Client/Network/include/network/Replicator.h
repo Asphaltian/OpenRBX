@@ -208,7 +208,7 @@ private:
 	void createStatsItems(Stats::StatsService* stats);
 	void serializeValue(const Reflection::ConstProperty& property, bool includeLength, RakNet::BitStream& outBitStream);
 	void deserializeValue(RakNet::BitStream& inBitstream, Reflection::Property& property);
-	void skipValue(RakNet::BitStream& inBitstream, ValueType valueType);
+	void skipValue(RakNet::BitStream& inBitStream, ValueType type);
 	void receiveData(Packet* packet);
 	void readInstanceNew(RakNet::BitStream& inBitstream);
 	void readInstanceDelete(RakNet::BitStream& inBitstream);
