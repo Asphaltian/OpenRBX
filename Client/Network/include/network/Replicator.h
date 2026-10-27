@@ -109,6 +109,12 @@ protected:
 		boost::signals::connection childAdded; // 0x08
 		boost::signals::connection changed;    // 0x18
 		bool deleteOnDisconnect;               // 0x28
+
+		// SYNTHETIC: WEBSERVICE 0x1019cc70
+		// RBX::Network::Replicator::ReplicationData::~ReplicationData
+
+		// SYNTHETIC: WEBSERVICE 0x1019ce80
+		// RBX::Network::Replicator::ReplicationData::ReplicationData
 	};
 
 	typedef std::map<const Instance*, ReplicationData> RepConts;
@@ -188,7 +194,7 @@ protected:
 private:
 	virtual bool remoteDeleteOnDisconnect(const Instance* instance) const; // vtable+0x4c
 
-	ReplicationData& addReplicationData(boost::shared_ptr<Instance> instance, bool deleteOnDisconnect);
+	ReplicationData& addReplicationData(boost::shared_ptr<Instance> instance, bool listenToChanges);
 	void addTopReplicationContainer(Instance* instance, bool deleteOnDisconnect);
 	void connectToReplicationContainers();
 	void removeFromPendingProperties(const Instance* instance);

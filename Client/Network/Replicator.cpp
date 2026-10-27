@@ -25,6 +25,7 @@
 #include <RakPeer.h>
 #include <algorithm>
 #include <boost/bind.hpp>
+#include <boost/noncopyable.hpp>
 #include <stdio.h>
 
 // SIZE 0x210
@@ -72,6 +73,42 @@ public:
 	ReplicatorStatsItem(const boost::shared_ptr<Replicator>& replicator, const RakNetStatistics* statistics);
 
 	virtual void update();
+};
+
+// SIZE 0x8
+class __declspec(novtable) Replicator::Item : boost::noncopyable
+{
+protected:
+	Replicator& replicator; // 0x04
+
+	Item(Replicator& replicator) : replicator(replicator) {}
+
+public:
+	enum ItemType
+	{
+		ItemTypeEnd = 0,
+		ItemTypeDelete = 1,
+		ItemTypeNew = 2,
+		ItemTypeChangeProperty = 3,
+		ItemTypeMarker = 4
+	};
+
+	virtual ~Item() {}
+
+	virtual void write(RakNet::BitStream& bitStream) = 0;
+	static void writeItemType(RakNet::BitStream& stream, ItemType value);
+	static void readItemType(RakNet::BitStream& stream, ItemType& value);
+};
+
+// VTABLE: WEBSERVICE 0x102504fc
+// SIZE 0x10
+class Replicator::NewInstanceItem : public Item
+{
+	const boost::shared_ptr<Instance> instance; // 0x08
+
+public:
+	NewInstanceItem(Replicator& replicator, const boost::shared_ptr<Instance>& instance);
+	virtual void write(RakNet::BitStream& bitStream);
 };
 
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
@@ -137,6 +174,19 @@ void Replicator::closeConnection()
 	peer->CloseConnection(remotePlayerId, true);
 
 	setParent(NULL);
+}
+
+// FUNCTION: WEBSERVICE 0x1019c760
+void Replicator::Item::writeItemType(RakNet::BitStream& stream, ItemType value)
+{
+	if (value >= ItemTypeDelete && value <= ItemTypeChangeProperty) {
+		stream.WriteBits((const unsigned char*) &value, 2);
+	}
+	else {
+		unsigned char zero = 0;
+		stream.WriteBits(&zero, 2);
+		stream.Write(value);
+	}
 }
 
 } // namespace Network
@@ -242,6 +292,13 @@ bool Replicator::isSerializePending(const Instance* instance) const
 	return pendingNewInstances.find(instance) != pendingNewInstances.end();
 }
 
+// FUNCTION: WEBSERVICE 0x1019f9f0
+inline Replicator::NewInstanceItem::NewInstanceItem(Replicator& replicator, const boost::shared_ptr<Instance>& instance)
+	: Item(replicator), instance(instance)
+{
+	replicator.pendingNewInstances.insert(instance.get());
+}
+
 // FUNCTION: WEBSERVICE 0x1019fa80
 Peer::~Peer()
 {
@@ -286,10 +343,32 @@ bool Replicator::disconnectReplicationData(boost::shared_ptr<Instance> instance)
 	return true;
 }
 
-// STUB: WEBSERVICE 0x101a1580
+// FUNCTION: WEBSERVICE 0x101a1580
 void Replicator::onChildAdded(boost::shared_ptr<Instance> child)
 {
-	STUB(0x101a1580);
+	Profiling::Mark mark(*profileReplication, false);
+	Profiling::Mark mark2(*profileDataListening, false);
+
+	if (!wantReplicate(child.get())) {
+		return;
+	}
+
+	if (replicationContainers.find(child.get()) == replicationContainers.end()) {
+		addReplicationData(child, true);
+
+		pendingItems.push_back(boost::shared_ptr<Item>(new NewInstanceItem(*this, child)));
+
+		child->visitChildren(boost::bind(&Replicator::onChildAdded, this, _1));
+	}
+}
+
+// STUB: WEBSERVICE 0x101a1c20
+void Replicator::onPropertyChanged(
+	boost::shared_ptr<Instance> instance,
+	const Reflection::PropertyDescriptor* descriptor
+)
+{
+	STUB(0x101a1c20);
 }
 
 // FUNCTION: WEBSERVICE 0x101a4ad0
@@ -400,14 +479,41 @@ void Replicator::createStatsItems(Stats::StatsService* stats)
 	}
 }
 
-// STUB: WEBSERVICE 0x101a78c0
-Replicator::ReplicationData& Replicator::addReplicationData(
-	boost::shared_ptr<Instance> instance,
-	bool deleteOnDisconnect
-)
+// FUNCTION: WEBSERVICE 0x101a78c0
+Replicator::ReplicationData& Replicator::addReplicationData(boost::shared_ptr<Instance> instance, bool listenToChanges)
 {
-	STUB(0x101a78c0);
-	return replicationContainers[instance.get()];
+	std::pair<RepConts::iterator, bool> pair =
+		replicationContainers.insert(RepConts::value_type(instance.get(), ReplicationData()));
+
+	if (pair.second) {
+		ReplicationData& data = pair.first->second;
+		data.instance = instance;
+		data.deleteOnDisconnect = false;
+		data.childAdded =
+			Instance::event_childAdded.connect(instance.get(), boost::bind(&Replicator::onChildAdded, this, _1), 0);
+		if (listenToChanges) {
+			data.changed = Instance::event_propertyChanged.connect(
+				instance.get(),
+				boost::bind(&Replicator::onPropertyChanged, this, instance, _1),
+				0
+			);
+		}
+		return data;
+	}
+	else {
+		ReplicationData& oldData = pair.first->second;
+		if (!listenToChanges) {
+			oldData.changed.disconnect();
+		}
+		else if (!oldData.changed.connected()) {
+			oldData.changed = Instance::event_propertyChanged.connect(
+				instance.get(),
+				boost::bind(&Replicator::onPropertyChanged, this, instance, _1),
+				0
+			);
+		}
+		return oldData;
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x101a8e40
@@ -459,6 +565,12 @@ PluginReceiveResult Replicator::OnReceive(RakPeerInterface* peer, Packet* packet
 {
 	STUB(0x101a9220);
 	return RR_CONTINUE_PROCESSING;
+}
+
+// STUB: WEBSERVICE 0x101a9890
+inline void Replicator::NewInstanceItem::write(RakNet::BitStream& bitStream)
+{
+	STUB(0x101a9890);
 }
 
 // FUNCTION: WEBSERVICE 0x101aa110
