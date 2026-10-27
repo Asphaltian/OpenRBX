@@ -70,7 +70,7 @@ void Seat::seatCharacter(Humanoid* h)
 	weld->setParent(this);
 }
 
-// STUB: WEBSERVICE 0x100fcd50
+// FUNCTION: WEBSERVICE 0x100fcd50
 void Seat::onEvent_seatTouched(boost::shared_ptr<Instance> other)
 {
 	if (charSeated() || G3D::System::getLocalTime() - sleepTime < 3.0) {

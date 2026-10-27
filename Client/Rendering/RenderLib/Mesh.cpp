@@ -426,7 +426,7 @@ void Mesh::computeShadowSurface(const LevelRef& level)
 	G3D::Array<G3D::Vector3> newVertexPositions;
 	G3D::Array<int> toNew;
 	G3D::Array<int> toOld;
-	G3D::MeshAlg::computeWeld(rawGeometry, shadowSurface.geometry, toNew, toOld, 1e-05);
+	G3D::MeshAlg::computeWeld(rawGeometry, shadowSurface.geometry, toNew, toOld);
 
 	for (int i = 0; i < indexArray.size(); i++) {
 		indexArray[i] = toNew[indexArray[i]];
