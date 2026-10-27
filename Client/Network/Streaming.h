@@ -105,7 +105,11 @@ class StringSender
 	int nextIndex;            // 0xe0c
 
 public:
+	// FUNCTION: WEBSERVICE 0x101a3ad0
 	StringSender() : nextIndex(1) {}
+
+	// SYNTHETIC: WEBSERVICE 0x101a3750
+	// RBX::Network::StringSender::~StringSender
 
 	void serializeString(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream);
 	void send(RakNet::BitStream& stream, const std::string& value);
@@ -139,6 +143,12 @@ DECOMP_SIZE_ASSERT(StringReceiver, 0x0c)
 // SIZE 0xe20
 class SharedStringDictionary : public StringSender, public StringReceiver, private boost::noncopyable
 {
+public:
+	// SYNTHETIC: WEBSERVICE 0x101a49b0
+	// RBX::Network::SharedStringDictionary::SharedStringDictionary
+
+	// SYNTHETIC: WEBSERVICE 0x101a4a30
+	// RBX::Network::SharedStringDictionary::~SharedStringDictionary
 };
 
 DECOMP_SIZE_ASSERT(SharedStringDictionary, 0xe20)
@@ -163,6 +173,9 @@ protected:
 	static void setRefValue(WaitItem& wi, Instance* instance);
 
 public:
+	// FUNCTION: WEBSERVICE 0x101a9ea0
+	IdSerializer() {}
+
 	void serializeId(RakNet::BitStream& stream, const Instance* instance);
 	bool trySerializeId(RakNet::BitStream& stream, const Instance* instance);
 	void deserializeId(RakNet::BitStream& stream, Guid::Data& id);
@@ -171,6 +184,12 @@ public:
 	unsigned int numWaitingRefs() const { return waitItems.size(); }
 	void serializeRef(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream);
 	void deserializeRef(Reflection::Property& property, RakNet::BitStream& bitStream);
+
+	// SYNTHETIC: WEBSERVICE 0x101a9df0
+	// RBX::Network::IdSerializer::~IdSerializer
+
+	// SYNTHETIC: WEBSERVICE 0x101aa0f0 FOLDED
+	// RBX::Network::IdSerializer::`scalar deleting destructor'
 };
 
 } // namespace Network

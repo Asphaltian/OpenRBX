@@ -1,12 +1,18 @@
 #include "network/Replicator.h"
 
 #include "network/NetworkSettings.h"
+#include "network/Player.h"
+#include "network/Players.h"
 #include "util/Log.h"
 #include "util/Name.h"
 #include "util/Profiling.h"
 #include "util/StandardOut.h"
+#include "v8datamodel/Camera.h"
+#include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Stats.h"
 
+#include <BitStream.h>
 #include <G3D/System.h>
 #include <GetTime.h>
 #include <PacketLogger.h>
@@ -40,11 +46,9 @@ namespace Network {
 const char sPeer[] = "NetworkPeer";
 const char sReplicator[] = "NetworkReplicator";
 
-// STUB: WEBSERVICE 0x10196760
-bool Peer::askAddChild(const Instance* instance) const
+// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+void Replicator::onSentMarker(long id)
 {
-	STUB(0x10196760);
-	return false;
 }
 
 } // namespace Network
@@ -66,11 +70,49 @@ void FilePacketLogger::WriteLog(const char* str)
 	}
 }
 
-// STUB: WEBSERVICE 0x1019bd50
+// FUNCTION: WEBSERVICE 0x1019bd50
 static void checkDisconnect(RBX::Instance* instance)
 {
-	STUB(0x1019bd50);
+	RBX::Network::Replicator* replicator = dynamic_cast<RBX::Network::Replicator*>(instance);
+	if (replicator && replicator->disconnected) {
+		replicator->setParent(NULL);
+	}
 }
+
+namespace RBX {
+namespace Network {
+
+// FUNCTION: WEBSERVICE 0x1019bd90
+void Replicator::writeValueType(bool includeLength, ValueType vt, RakNet::BitStream& outBitStream)
+{
+	if (includeLength) {
+		unsigned char c = vt;
+		outBitStream.WriteBits(&c, 4);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1019bdc0
+bool Replicator::wantReplicate(const Instance* source) const
+{
+	return dynamic_cast<const Camera*>(source) ? false : true;
+}
+
+// FUNCTION: WEBSERVICE 0x1019bf10
+bool Replicator::canSendItems()
+{
+	return receivedGlobals;
+}
+
+// FUNCTION: WEBSERVICE 0x1019bf20
+void Replicator::closeConnection()
+{
+	peer->CloseConnection(remotePlayerId, true);
+
+	setParent(NULL);
+}
+
+} // namespace Network
+} // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x1019c7c0
 FilePacketLogger::FilePacketLogger(RBX::Network::Peer* peer) : packetLogFile(NULL)
@@ -101,6 +143,26 @@ RakPeerInterface* Peer::peerInterface()
 	return rakPeer.get();
 }
 
+// FUNCTION: WEBSERVICE 0x1019ca00
+void Replicator::closeReplicationItem(const std::pair<const Instance* const, ReplicationData>& pair)
+{
+	pair.second.childAdded.disconnect();
+	pair.second.changed.disconnect();
+	if (pair.second.deleteOnDisconnect) {
+		pair.second.instance->setParent(NULL);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1019cd10
+bool Replicator::remoteDeleteOnDisconnect(const Instance* instance) const
+{
+	if (instance->isDescendentOf(players)) {
+		return true;
+	}
+
+	return instance == Players::findLocalCharacter(instance) ? true : false;
+}
+
 // FUNCTION: WEBSERVICE 0x1019cd50
 void Peer::Update(RakPeerInterface* peer)
 {
@@ -109,10 +171,30 @@ void Peer::Update(RakPeerInterface* peer)
 	PluginInterface::Update(peer);
 }
 
+// FUNCTION: WEBSERVICE 0x1019cd80
+Player* Replicator::findTargetPlayer()
+{
+	return players ? players->getLocalPlayer() : NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x1019cda0
+Mechanism* Replicator::findTargetPlayerCharacterMechanism()
+{
+	if (Player* player = findTargetPlayer()) {
+		if (ModelInstance* character = player->getCharacter()) {
+			if (PartInstance* part = character->getPrimaryPart()) {
+				return Mechanism::getMechanismFromPrimitive(part->getPrimitive());
+			}
+		}
+	}
+
+	return NULL;
+}
+
 // FUNCTION: WEBSERVICE 0x1019dfe0
 void Peer::onEvent(const RunService* source, Heartbeat event)
 {
-	double maxTime = G3D::System::getTick() + event.step / 5.0;
+	double timeUp = G3D::System::getTick() + event.step / 5.0;
 
 	do {
 		Packet* packet = rakPeer->Receive();
@@ -121,9 +203,15 @@ void Peer::onEvent(const RunService* source, Heartbeat event)
 		}
 
 		rakPeer->DeallocatePacket(packet);
-	} while (G3D::System::getTick() < maxTime);
+	} while (G3D::System::getTick() < timeUp);
 
 	for_eachChild(checkDisconnect);
+}
+
+// FUNCTION: WEBSERVICE 0x1019e990
+bool Replicator::isSerializePending(const Instance* instance) const
+{
+	return pendingNewInstances.find(instance) != pendingNewInstances.end();
 }
 
 // FUNCTION: WEBSERVICE 0x1019fa80
@@ -185,6 +273,55 @@ void Peer::onServiceProvider(const ServiceProvider* oldProvider, const ServicePr
 		item->setParent(stats);
 		item->createBoundChildItem(*profilePacketsThread);
 	}
+}
+
+// STUB: WEBSERVICE 0x101a5a40
+void Replicator::Update(RakPeerInterface* peer)
+{
+	STUB(0x101a5a40);
+}
+
+// STUB: WEBSERVICE 0x101a8eb0
+void Replicator::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	STUB(0x101a8eb0);
+}
+
+// STUB: WEBSERVICE 0x101a9220
+PluginReceiveResult Replicator::OnReceive(RakPeerInterface* peer, Packet* packet)
+{
+	STUB(0x101a9220);
+	return RR_CONTINUE_PROCESSING;
+}
+
+// FUNCTION: WEBSERVICE 0x101aa110
+Replicator::~Replicator()
+{
+	if (peer) {
+		peer->DetachPlugin(this);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101aa600
+Replicator::Replicator(SystemAddress remotePlayerId, RakPeerInterface* peer)
+	: lastSendTime(G3D::System::getLocalTime()), lastCharacterSendTime(G3D::System::getLocalTime()), players(NULL),
+	  sendPhysicsEnabled(false), deserializingProperty(NULL), removingInstance(NULL),
+	  profileReplication(new Profiling::CodeProfiler("Replication")),
+	  profileDataListening(new Profiling::CodeProfiler("Data Listening")),
+	  profileDataIn(new Profiling::CodeProfiler("Data In")), profileDataOut(new Profiling::CodeProfiler("Data Out")),
+	  profilePhysicsIn(new Profiling::CodeProfiler("Physics In")),
+	  profilePhysicsOut(new Profiling::CodeProfiler("Physics Out")), receivedGlobals(false), disconnected(false),
+	  peer(peer), remotePlayerId(remotePlayerId)
+{
+	peer->AttachPlugin(this);
+
+	setName(remotePlayerId.ToString());
+
+	profileDataListening->parent = profileReplication.get();
+	profileDataIn->parent = profileReplication.get();
+	profileDataOut->parent = profileReplication.get();
+	profilePhysicsIn->parent = profileReplication.get();
+	profilePhysicsOut->parent = profileReplication.get();
 }
 
 } // namespace Network
