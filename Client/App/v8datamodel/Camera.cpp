@@ -40,6 +40,12 @@ bool Camera::setDistanceFromTarget(float newDistance)
 	return false;
 }
 
+// FUNCTION: WEBSERVICE 0x100c29e0
+Instance* Camera::getCameraSubjectInstance() const
+{
+	return cameraSubject.get();
+}
+
 // FUNCTION: WEBSERVICE 0x100c29f0
 ICameraSubject* Camera::getCameraSubject() const
 {

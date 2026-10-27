@@ -182,6 +182,8 @@ Item* Item::createChildItem(const char* name, boost::function0<T> func)
 
 // TEMPLATE: WEBSERVICE 0x10066a00
 // RBX::Stats::Item::createBoundChildItem<bool>
+// TEMPLATE: WEBSERVICE 0x10083160
+// RBX::Stats::Item::createBoundChildItem<unsigned int>
 template <class T>
 Item* Item::createBoundChildItem(const char* name, const T& v)
 {

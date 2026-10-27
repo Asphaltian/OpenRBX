@@ -147,7 +147,7 @@ public:
 
 	void playSound(SoundType soundType);
 
-	unsigned int getfmod_version() const;
+	unsigned int getfmod_version() const { return fmod_version; }
 
 private:
 	static void getSoundStats(const LoadedSounds& sounds, unsigned int& numSounds, unsigned int& numUnusedSounds);

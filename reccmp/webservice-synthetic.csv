@@ -167,7 +167,9 @@ address,type,symbol
 0x10081f40,synthetic,??$?0P8SoundChannel@Soundscape@RBX@@BE?AVSoundId@12@XZP8012@AEXV312@@Z@?$PropDescriptor@VSoundChannel@Soundscape@RBX@@VSoundId@23@@Reflection@RBX@@QAE@PBD0P8SoundChannel@Soundscape@2@BE?AVSoundId@42@XZP8342@AEXV542@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100824b0,synthetic,?getStringValue@?$EnumPropDescriptor@VSoundService@Soundscape@RBX@@W4ReverbType@23@@Reflection@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@23@@Z
 0x100824f0,synthetic,?setStringValue@?$EnumPropDescriptor@VSoundService@Soundscape@RBX@@W4ReverbType@23@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
+0x100830e0,synthetic,??$create@V?$TypedStatsItem@I@Stats@RBX@@PBI@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@V?$TypedStatsItem@I@Stats@RBX@@@boost@@PBI@Z
 0x10083270,synthetic,??$create@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@SAPAVSoundService@Soundscape@1@PBVInstance@1@@Z
+0x100838a0,synthetic,??_E?$FactoryProduct@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@MAEPAXI@Z
 0x1008c690,synthetic,??_G?$FactoryProduct@VMessage@RBX@@VInstance@2@$1?sMessage@2@3PADA@RBX@@MAEPAXI@Z
 0x1008c9a0,synthetic,?getClassName@?$FactoryProduct@VMessage@RBX@@VInstance@2@$1?sMessage@2@3PADA@RBX@@UBEABVName@2@XZ
 0x1008c9c0,synthetic,?getClassName@?$FactoryProduct@VHint@RBX@@VMessage@2@$1?sHint@2@3PADA@RBX@@UBEABVName@2@XZ

@@ -132,6 +132,10 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hat>
 	// TEMPLATE: WEBSERVICE 0x1007e750
 	// RBX::Creatable<RBX::Instance>::create<RBX::GameSettings>
+	// TEMPLATE: WEBSERVICE 0x100838c0
+	// RBX::Creatable<RBX::Instance>::create<SoundServiceStatsItem,RBX::Soundscape::SoundService *>
+	// TEMPLATE: WEBSERVICE 0x10083ce0
+	// RBX::Creatable<RBX::Instance>::create<StockSound>
 	// TEMPLATE: WEBSERVICE 0x10089930
 	// RBX::Creatable<RBX::Instance>::create<RBX::ShirtGraphic>
 	// TEMPLATE: WEBSERVICE 0x10089ba0
@@ -436,10 +440,14 @@ public:
 	// RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1007d040
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
+	// TEMPLATE: WEBSERVICE 0x1007dc70
+	// RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>::~FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>
 	// TEMPLATE: WEBSERVICE 0x1007e870
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100815c0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x10083070
+	// RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>
 	// TEMPLATE: WEBSERVICE 0x100899b0
 	// RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10089c20

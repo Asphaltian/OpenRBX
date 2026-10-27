@@ -51,7 +51,11 @@ public:
 	void lookAt(const G3D::Vector3& point);
 
 	ICameraSubject* getCameraSubject() const;
+	Instance* getCameraSubjectInstance() const;
 	void setCameraSubject(Instance* value);
+
+	// FUNCTION: WEBSERVICE 0x1007c9c0
+	G3D::CoordinateFrame getCameraCoordinateFrame() const { return gCamera.getCoordinateFrame(); }
 
 	CameraType getCameraType() const { return cameraType; }
 	void setCameraType(CameraType value);

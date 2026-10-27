@@ -6,14 +6,18 @@
 #include "util/Name.h"
 #include "util/StandardOut.h"
 #include "util/Velocity.h"
+#include "v8datamodel/Camera.h"
 #include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/GameSettings.h"
+#include "v8datamodel/PVInstance.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Stats.h"
 #include "v8datamodel/Workspace.h"
 #include "v8xml/XmlElement.h"
 
 #include <G3D/System.h>
 #include <G3D/format.h>
+#include <G3D/g3dmath.h>
 #include <algorithm>
 #include <fmod.hpp>
 #include <fmod_errors.h>
@@ -21,12 +25,39 @@
 
 char sStockSound[] = "StockSound";
 
+static const double gcTime = 5.0;
+
+class StockSound : public RBX::DescribedCreatable<StockSound, RBX::Soundscape::SoundChannel, sStockSound>
+{
+public:
+	StockSound();
+};
+
+// SIZE 0x138
+class SoundServiceStatsItem : public RBX::Stats::Item
+{
+private:
+	const RBX::Soundscape::SoundService* service; // 0x120
+	unsigned int currentalloced;                  // 0x124
+	unsigned int maxalloced;                      // 0x128
+	unsigned int numSounds;                       // 0x12c
+	unsigned int numUnusedSounds;                 // 0x130
+
+public:
+	SoundServiceStatsItem(const RBX::Soundscape::SoundService* service);
+
+	virtual void update();
+};
+
 namespace RBX {
 namespace Soundscape {
 
 char sSoundService[] = "SoundService";
 
 char sSoundChannel[] = "Sound";
+
+// GLOBAL: WEBSERVICE 0x102f6f89
+bool SoundService::soundDisabled = false;
 
 // FUNCTION: WEBSERVICE 0x1007c9b0
 int SoundChannel::getPlayCount() const
@@ -294,6 +325,29 @@ SoundChannel::~SoundChannel()
 } // namespace Soundscape
 } // namespace RBX
 
+namespace RBX {
+namespace Soundscape {
+
+// FUNCTION: WEBSERVICE 0x1007e5a0
+void SoundService::getSoundStats(const LoadedSounds& sounds, unsigned int& numSounds, unsigned int& numUnusedSounds)
+{
+	for (LoadedSounds::const_iterator iter = sounds.begin(); iter != sounds.end(); ++iter) {
+		numSounds++;
+		if (iter->second->refCount == 0) {
+			numUnusedSounds++;
+		}
+	}
+}
+
+void SoundService::getSoundStats(unsigned int& numSounds, unsigned int& numUnusedSounds) const
+{
+	getSoundStats(loadedSounds, numSounds, numUnusedSounds);
+	getSoundStats(loaded3DSounds, numSounds, numUnusedSounds);
+}
+
+} // namespace Soundscape
+} // namespace RBX
+
 // FUNCTION: WEBSERVICE 0x1007ebe0
 void checkResultNoThrow(FMOD_RESULT result)
 {
@@ -308,6 +362,137 @@ void checkResultNoThrow(FMOD_RESULT result)
 
 namespace RBX {
 namespace Soundscape {
+
+// FUNCTION: WEBSERVICE 0x1007ecc0
+void SoundService::updateAmbientReverb()
+{
+	if (!system) {
+		return;
+	}
+
+	switch (ambientReverb) {
+	case NoReverb: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_OFF;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case GenericReverb: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_GENERIC;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case PaddedCell: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_PADDEDCELL;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Room: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_PADDEDCELL;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Bathroom: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_BATHROOM;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case LivingRoom: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_LIVINGROOM;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case StoneRoom: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_STONEROOM;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Auditorium: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_AUDITORIUM;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case ConcertHall: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_CONCERTHALL;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Cave: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_CAVE;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Arena: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_ARENA;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Hangar: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_HANGAR;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case CarpettedHallway: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_CARPETTEDHALLWAY;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Hallway: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_HALLWAY;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case StoneCorridor: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_STONECORRIDOR;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Alley: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_ALLEY;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Forest: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_FOREST;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case City: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_CITY;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Mountains: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_MOUNTAINS;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Quarry: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_QUARRY;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case Plain: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_PLAIN;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case ParkingLot: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_PARKINGLOT;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case SewerPipe: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_SEWERPIPE;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	case UnderWater: {
+		FMOD_REVERB_PROPERTIES p = FMOD_PRESET_UNDERWATER;
+		checkResultNoThrow(system->setReverbProperties(&p));
+		break;
+	}
+	}
+}
 
 // FUNCTION: WEBSERVICE 0x1007fbf0
 void SoundService::update3DSettings()
@@ -389,6 +574,96 @@ FMOD::Sound* Sound::get()
 	return fmod_sound;
 }
 
+// FUNCTION: WEBSERVICE 0x10080490
+void SoundService::openFmod()
+{
+	if (soundDisabled || mySoundDisabled || !GameSettings::singleton().soundEnabled) {
+		return;
+	}
+
+	try {
+		checkResult(FMOD::System_Create(&system));
+
+		checkResult(system->getVersion(&fmod_version));
+		if (fmod_version < FMOD_VERSION) {
+			throw std::runtime_error("Incorrect FMODEX DLL version");
+		}
+
+		int driver = -1;
+		checkResultNoThrow(system->getDriver(&driver));
+		if (driver >= 0) {
+			char name[256] = "?";
+			checkResultNoThrow(system->getDriverName(driver, name, 256));
+		}
+		else {
+			StandardOut::singleton()->print(MESSAGE_WARNING, "No active sound driver detected");
+		}
+
+		FMOD_CAPS caps;
+		FMOD_SPEAKERMODE speakermode;
+		checkResult(system->getDriverCaps(0, &caps, 0, 0, &speakermode));
+
+		checkResult(system->setSpeakerMode(speakermode));
+
+		if (caps & FMOD_CAPS_HARDWARE_EMULATED) {
+			StandardOut::singleton()->print(
+				MESSAGE_WARNING,
+				"The acceleration slider in the Sound Control Panel set to 'off'"
+			);
+			checkResult(system->setDSPBufferSize(1024, 10));
+		}
+
+		FMOD_RESULT result = system->init(100, FMOD_INIT_NORMAL, 0);
+		if (result == FMOD_ERR_OUTPUT_CREATEBUFFER) {
+			StandardOut::singleton()->print(
+				MESSAGE_WARNING,
+				"The speaker mode selected isn't supported by this soundcard.  Using Stereo"
+			);
+			checkResult(system->setSpeakerMode(FMOD_SPEAKERMODE_STEREO));
+
+			checkResult(system->init(100, FMOD_INIT_NORMAL, 0));
+		}
+
+		update3DSettings();
+		if (ambientReverb != NoReverb) {
+			updateAmbientReverb();
+		}
+	}
+	catch (const std::exception&) {
+		if (system) {
+			checkResultNoThrow(system->release());
+			system = NULL;
+		}
+	}
+}
+
+} // namespace Soundscape
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x10080720
+static void releaseSound(const std::pair<RBX::Soundscape::SoundId, boost::shared_ptr<RBX::Soundscape::Sound> >& item)
+{
+	item.second->release();
+}
+
+namespace RBX {
+namespace Soundscape {
+
+// FUNCTION: WEBSERVICE 0x10080750
+void SoundService::gcSounds(LoadedSounds& sounds)
+{
+	LoadedSounds::iterator iter = sounds.begin();
+	while (iter != sounds.end()) {
+		if (iter->second->refCount == 0 && G3D::uniformRandom() >= 0.7f) {
+			iter->second->release();
+			iter = sounds.erase(iter);
+		}
+		else {
+			++iter;
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10080830
 void SoundChannel::onEvent(const RunService* source, Heartbeat event)
 {
@@ -409,6 +684,25 @@ void Sound::release()
 Sound::~Sound()
 {
 	release();
+}
+
+// FUNCTION: WEBSERVICE 0x10080d80
+void SoundService::closeFmod()
+{
+	stockSounds.clear();
+	removeAllChildren();
+
+	std::for_each(loadedSounds.begin(), loadedSounds.end(), releaseSound);
+	std::for_each(loaded3DSounds.begin(), loaded3DSounds.end(), releaseSound);
+
+	loadedSounds.clear();
+	loaded3DSounds.clear();
+
+	if (system) {
+		checkResultNoThrow(system->release());
+
+		system = NULL;
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10081200
@@ -454,12 +748,32 @@ EnumDesc<Soundscape::ReverbType>::EnumDesc() : EnumDescriptor("ReverbType", type
 
 namespace Soundscape {
 
-// STUB: WEBSERVICE 0x10081930
+// FUNCTION: WEBSERVICE 0x10081930
 boost::shared_ptr<Sound> SoundService::loadSound(SoundId id, bool is3D)
 {
-	STUB(0x10081930);
-	return boost::shared_ptr<Sound>();
+	LoadedSounds& sounds = is3D ? loaded3DSounds : loadedSounds;
+
+	LoadedSounds::iterator iter = sounds.find(id);
+	if (iter != sounds.end()) {
+		return iter->second;
+	}
+
+	boost::shared_ptr<Sound> sound(new Sound(system, id, is3D));
+	sounds[id] = sound;
+	return sound;
 }
+
+} // namespace Soundscape
+
+// FUNCTION: WEBSERVICE 0x10082330
+void registerSound()
+{
+	Soundscape::SoundChannel::classDescriptor();
+	StockSound::classDescriptor();
+	Soundscape::SoundService::classDescriptor();
+}
+
+namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x10082a30
 SoundService::SoundService()
@@ -469,10 +783,57 @@ SoundService::SoundService()
 	setName("Soundscape");
 }
 
-// STUB: WEBSERVICE 0x10082bd0
+void SoundService::garbageCollectSounds()
+{
+	if (!(G3D::System::getTick() < nextGarbageCollectTime)) {
+		gcSounds(loadedSounds);
+		gcSounds(loaded3DSounds);
+		nextGarbageCollectTime = G3D::System::getTick() + gcTime;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x10082bd0
 void SoundService::onEvent(const RunService* source, Heartbeat event)
 {
-	STUB(0x10082bd0);
+	if (system) {
+		Workspace* workspace = ServiceProvider::find<Workspace>(this);
+		if (workspace) {
+			Camera* camera = workspace->getCamera();
+			if (camera) {
+				G3D::CoordinateFrame cf = camera->getCameraCoordinateFrame();
+
+				FMOD_VECTOR listener_pos;
+				if (convert(cf.translation, listener_pos)) {
+					FMOD_VECTOR listener_forward;
+					if (convert(-cf.lookVector(), listener_forward)) {
+						FMOD_VECTOR listener_up;
+						if (convert(cf.upVector(), listener_up)) {
+							FMOD_VECTOR listener_vel;
+							listener_vel.x = listener_vel.y = listener_vel.z = 0.0f;
+							PVInstance* pvInstance = dynamic_cast<PVInstance*>(camera->getCameraSubjectInstance());
+							if (pvInstance) {
+								PartInstance* part = static_cast<IPrimaryPart*>(pvInstance)->getPrimaryPart();
+								if (part) {
+									convert(part->getVelocity().linear, listener_vel);
+								}
+							}
+
+							checkResultNoThrow(system->set3DListenerAttributes(
+								0,
+								&listener_pos,
+								&listener_vel,
+								&listener_forward,
+								&listener_up
+							));
+						}
+					}
+				}
+			}
+		}
+
+		garbageCollectSounds();
+		checkResultNoThrow(system->update());
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
@@ -530,6 +891,44 @@ void SoundChannel::onChannelEnd()
 	updateListenState();
 }
 
+} // namespace Soundscape
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x100832c0
+SoundServiceStatsItem::SoundServiceStatsItem(const RBX::Soundscape::SoundService* service)
+	: service(service), currentalloced(0), maxalloced(0)
+{
+	setName("Sound");
+	createBoundMemChildItem("Current", currentalloced);
+	createBoundMemChildItem("Max", maxalloced);
+	createBoundChildItem("# Sounds", numSounds);
+	createBoundChildItem("# Unused", numUnusedSounds);
+}
+
+// FUNCTION: WEBSERVICE 0x10083410
+void SoundServiceStatsItem::update()
+{
+	if (service->enabled()) {
+		formatValue(service->getfmod_version(), "fmod %08x", service->getfmod_version());
+
+		int a, b;
+		if (FMOD_Memory_GetStats(&a, &b) == FMOD_OK) {
+			currentalloced = a;
+			maxalloced = b;
+		}
+
+		numUnusedSounds = 0;
+		numSounds = 0;
+		service->getSoundStats(numSounds, numUnusedSounds);
+	}
+	else {
+		setValue(0, "-disabled-");
+	}
+}
+
+namespace RBX {
+namespace Soundscape {
+
 // FUNCTION: WEBSERVICE 0x10083540
 void SoundChannel::playSound(Instance* context)
 {
@@ -583,10 +982,27 @@ void SoundChannel::playSound(Instance* context)
 	}
 }
 
-// STUB: WEBSERVICE 0x10083a00
+} // namespace Soundscape
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x10083940
+StockSound::StockSound()
+{
+	propArchivable.setValue(this, false);
+}
+
+namespace RBX {
+namespace Soundscape {
+
+// FUNCTION: WEBSERVICE 0x10083a00
 void SoundService::setAmbientReverb(const ReverbType& value)
 {
-	STUB(0x10083a00);
+	if (value != ambientReverb) {
+		ambientReverb = value;
+
+		raisePropertyChanged(prop_AmbientReverb);
+		updateAmbientReverb();
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10083a30
@@ -670,6 +1086,18 @@ void SoundChannel::stop()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x10083d60
+void SoundService::loadStockSound(SoundType soundType, std::string file)
+{
+	boost::shared_ptr<StockSound> sound = Creatable<Instance>::create<StockSound>();
+
+	sound->setName(Reflection::EnumDesc<SoundType>::singleton().convertToString(soundType));
+	sound->setSoundId(ContentId::fromAssets(file));
+
+	sound->setParent(this);
+	stockSounds[soundType] = sound;
+}
+
 // FUNCTION: WEBSERVICE 0x10083eb0
 void SoundChannel::onAncestorChanged(const AncestorChanged& event)
 {
@@ -741,10 +1169,56 @@ void SoundChannel::setPlayCount(int value)
 	}
 }
 
-// STUB: WEBSERVICE 0x10084350
+// FUNCTION: WEBSERVICE 0x10084170
+void SoundService::loadStockSounds()
+{
+	stockSounds.clear();
+	removeAllChildren();
+
+	loadStockSound(BOING_SOUND, "Sounds\\bass.wav");
+	loadStockSound(BOMB_SOUND, "Sounds\\collide.wav");
+	loadStockSound(BREAK_SOUND, "Sounds\\glassbreak.wav");
+	loadStockSound(CLICK_SOUND, "Sounds\\switch.wav");
+	loadStockSound(CLOCK_SOUND, "Sounds\\clickfast.wav");
+	loadStockSound(RUBBERBAND_SOUND, "Sounds\\Rubber band sling shot.wav");
+	loadStockSound(PAGE_SOUND, "Sounds\\pageturn.wav");
+	loadStockSound(PING_SOUND, "Sounds\\electronicpingshort.wav");
+	loadStockSound(SNAP_SOUND, "Sounds\\snap.wav");
+	loadStockSound(SPLAT_SOUND, "Sounds\\splat.wav");
+	loadStockSound(STEP_SOUND, "Sounds\\SWITCH3.wav");
+	loadStockSound(STEP_ON_SOUND, "Sounds\\flashbulb.wav");
+	loadStockSound(SWOOSH_SOUND, "Sounds\\swoosh.wav");
+	loadStockSound(VICTORY_SOUND, "Sounds\\victory.wav");
+}
+
+// FUNCTION: WEBSERVICE 0x10084350
 void SoundService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
-	STUB(0x10084350);
+	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);
+
+	if (statsItem) {
+		statsItem->setParent(NULL);
+		statsItem.reset();
+	}
+
+	if (oldProvider) {
+		closeFmod();
+	}
+
+	Instance::onServiceProvider(oldProvider, newProvider);
+
+	startListening(newProvider ? newProvider->find<RunService>() : NULL, this);
+
+	if (newProvider) {
+		openFmod();
+		loadStockSounds();
+
+		Stats::StatsService* stats = newProvider->create<Stats::StatsService>();
+		if (stats) {
+			statsItem = Creatable<Instance>::create<SoundServiceStatsItem>(this);
+			statsItem->setParent(stats);
+		}
+	}
 }
 
 } // namespace Soundscape

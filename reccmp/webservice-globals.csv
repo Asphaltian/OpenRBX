@@ -7045,3 +7045,25 @@ address,type,symbol
 0x10233e5c,global,??_7SoundService@Soundscape@RBX@@6B@
 0x10233ea8,global,??_7SoundService@Soundscape@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@2@@
 0x10233ed8,global,??_7SoundService@Soundscape@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@
+0x102345fc,global,??_7StockSound@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@RBX@@@
+0x102345ac,global,??_7StockSound@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@@
+0x102345bc,global,??_7StockSound@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@@
+0x102345cc,global,??_7StockSound@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@@
+0x1023460c,global,??_7StockSound@@6BDebugable@RBX@@@
+0x102345ec,global,??_7StockSound@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@RBX@@@
+0x102345dc,global,??_7StockSound@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@@
+0x10234624,global,??_7StockSound@@6B?$GuidItem@VInstance@RBX@@@RBX@@@
+0x102345a0,global,??_7StockSound@@6B@
+0x10234614,global,??_7StockSound@@6B?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@@
+0x10234668,global,??_7StockSound@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@RBX@@@
+0x10234450,global,??_7SoundServiceStatsItem@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@RBX@@@
+0x10234438,global,??_7SoundServiceStatsItem@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@RBX@@@
+0x10234458,global,??_7SoundServiceStatsItem@@6B?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@@
+0x102343e8,global,??_7SoundServiceStatsItem@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@@
+0x10234418,global,??_7SoundServiceStatsItem@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@@
+0x10234428,global,??_7SoundServiceStatsItem@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@RBX@@@
+0x10234464,global,??_7SoundServiceStatsItem@@6B?$GuidItem@VInstance@RBX@@@RBX@@@
+0x10234408,global,??_7SoundServiceStatsItem@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@@
+0x102343f8,global,??_7SoundServiceStatsItem@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@@
+0x10234448,global,??_7SoundServiceStatsItem@@6BDebugable@RBX@@@
+0x102f73d8,global,s___RBX::Reflection::EnumDesc<enum RBX::SoundType>::singleton
