@@ -1115,6 +1115,13 @@ public:
 
 	const PropertyDescriptor& getDescriptor() const { return *descriptor; }
 
+	ConstProperty& operator=(const ConstProperty& other)
+	{
+		descriptor = other.descriptor;
+		instance = other.instance;
+		return *this;
+	}
+
 	const Name& getName() const { return descriptor->name; }
 
 	// FUNCTION: WEBSERVICE 0x100aaf40
@@ -1135,10 +1142,17 @@ public:
 
 	Property(const PropertyDescriptor& descriptor, DescribedBase* instance) : ConstProperty(descriptor, instance) {}
 
+	Property& operator=(const Property& other)
+	{
+		ConstProperty::operator=(other);
+		return *this;
+	}
+
 	bool operator==(const Property& other) const
 	{
 		return descriptor == other.descriptor && instance == other.instance;
 	}
+	bool operator!=(const Property& other) const { return !(*this == other); }
 
 	DescribedBase* getInstance() const { return const_cast<DescribedBase*>(instance); }
 

@@ -189,6 +189,12 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::find<RBX::StarterPackService>
 // TEMPLATE: WEBSERVICE 0x1018f3b0
 // RBX::ServiceProvider::create<RBX::TimerService>
+// TEMPLATE: WEBSERVICE 0x10196910
+// RBX::ServiceProvider::doGetClassIndex<RBX::Network::Client>
+// TEMPLATE: WEBSERVICE 0x10196c00
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::Network::Client>
+// TEMPLATE: WEBSERVICE 0x10197890
+// RBX::ServiceProvider::find<RBX::Network::Client>
 // SYNTHETIC: WEBSERVICE 0x102218d0
 // `RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on

@@ -201,6 +201,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1012d2d0
 // RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x1018c0f0
+// RBX::Reflection::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c170
 // RBX::Reflection::Described<RBX::Network::Player,&RBX::Network::sPlayer,RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c270
@@ -371,6 +373,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::Network::Players,&RBX::Network::sPlayers,RBX::NonFactoryProduct<RBX::Instance,&RBX::Network::sPlayers> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10225d50
 // `RBX::Reflection::Described<RBX::Network::Player,&RBX::Network::sPlayer,RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10225d60
+// `RBX::Reflection::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on
 
 template <class T, const char* sName, class Base>
@@ -382,6 +386,8 @@ public:
 	// RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::~Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>
 	// TEMPLATE: WEBSERVICE 0x1004e950
 	// RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>
+	// TEMPLATE: WEBSERVICE 0x10197b40
+	// RBX::Reflection::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >
 	// TEMPLATE: WEBSERVICE 0x1019b860
 	// RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >
 	// clang-format on
@@ -1026,6 +1032,10 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x101975b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::~BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
+	// TEMPLATE: WEBSERVICE 0x101983b0
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>
+	// TEMPLATE: WEBSERVICE 0x10198480
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x10198560
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::`scalar deleting destructor'
 	// clang-format on
@@ -1188,6 +1198,74 @@ private:
 	}
 
 public:
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		Arg1 default1,
+		const char* arg2Name,
+		Arg2 default2,
+		const char* arg3Name,
+		Arg3 default3,
+		const char* arg4Name,
+		Arg4 default4,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function), default1(default1), default2(default2),
+		  default3(default3), default4(default4)
+	{
+		declareSignature(arg1Name, arg2Name, arg3Name, arg4Name);
+	}
+
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		const char* arg2Name,
+		Arg2 default2,
+		const char* arg3Name,
+		Arg3 default3,
+		const char* arg4Name,
+		Arg4 default4,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function), default2(default2), default3(default3),
+		  default4(default4)
+	{
+		declareSignature(arg1Name, arg2Name, arg3Name, arg4Name);
+	}
+
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		const char* arg2Name,
+		const char* arg3Name,
+		Arg3 default3,
+		const char* arg4Name,
+		Arg4 default4,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function), default3(default3), default4(default4)
+	{
+		declareSignature(arg1Name, arg2Name, arg3Name, arg4Name);
+	}
+
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		const char* arg2Name,
+		const char* arg3Name,
+		const char* arg4Name,
+		Arg4 default4,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function), default4(default4)
+	{
+		declareSignature(arg1Name, arg2Name, arg3Name, arg4Name);
+	}
+
 	BoundFuncDesc(
 		Function function,
 		const char* name,

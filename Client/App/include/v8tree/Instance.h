@@ -758,6 +758,10 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::~DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
 	// TEMPLATE: WEBSERVICE 0x1018edc0
 	// RBX::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::DescribedCreatable<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
+	// TEMPLATE: WEBSERVICE 0x10196c10
+	// RBX::DescribedCreatable<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::~DescribedCreatable<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>
+	// TEMPLATE: WEBSERVICE 0x10197ca0
+	// RBX::DescribedCreatable<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::DescribedCreatable<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>
 // TEMPLATE: WEBSERVICE 0x1019b4a0
 // RBX::DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~DescribedCreatable<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 // TEMPLATE: WEBSERVICE 0x1019b8b0
