@@ -1,5 +1,7 @@
 #include "v8datamodel/Workspace.h"
 
+#include "network/Players.h"
+#include "tool/NullTool.h"
 #include "tool/ToolsArrow.h"
 #include "util/Name.h"
 #include "util/standardout.h"
@@ -42,6 +44,12 @@ void Workspace::stop()
 	getCamera()->autoMode();
 }
 
+// FUNCTION: WEBSERVICE 0x1006a140
+MouseCommand* newNullTool(Workspace* workspace)
+{
+	return new NewNullTool(workspace);
+}
+
 // FUNCTION: WEBSERVICE 0x1006a7c0
 Workspace* Workspace::getMyWorkspaceFast(const Instance* context)
 {
@@ -60,6 +68,13 @@ Workspace* Workspace::getMyWorkspaceFast(const Instance* context)
 World* Workspace::getMyWorldFast(const Instance* context)
 {
 	return getMyWorkspaceFast(context)->getWorld();
+}
+
+// FUNCTION: WEBSERVICE 0x1006a830
+void Workspace::setNullMouseCommand()
+{
+	stickyCommand.reset();
+	currentCommand.reset(newNullTool(this));
 }
 
 // FUNCTION: WEBSERVICE 0x1006a880

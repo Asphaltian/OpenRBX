@@ -86,6 +86,7 @@ public:
 	static PartInstance* getLocalHeadFromContext(const Instance* context);
 	static ModelInstance* getCharacterFromHumanoid(Humanoid* humanoid);
 	static PartInstance* getHeadFromCharacter(const ModelInstance* character);
+	static void renderWaypoint(Adorn* adorn, const G3D::Vector3& waypoint);
 
 	Body* getTorsoBody();
 	Body* getRootBody();

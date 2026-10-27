@@ -102,6 +102,7 @@ public:
 
 	void setMouseCommand(MouseCommand* command);
 	void setDefaultMouseCommand();
+	void setNullMouseCommand();
 
 	void zoomToExtents();
 

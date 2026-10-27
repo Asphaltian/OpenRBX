@@ -544,6 +544,8 @@ public:
 	virtual const Name& getName() const { return name(); }
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x100c5340
+	// RBX::Named<RBX::MouseCommand,&RBX::sNewNullTool>::getName
 	// TEMPLATE: WEBSERVICE 0x100cabf0
 	// RBX::Named<RBX::ScriptMouseCommand,&RBX::sToolMouseCommand>::getName
 	// TEMPLATE: WEBSERVICE 0x10106770

@@ -1,5 +1,6 @@
 #include "humanoid/Humanoid.h"
 
+#include "appdraw/DrawAdorn.h"
 #include "humanoid/FallingDown.h"
 #include "network/Players.h"
 #include "rbxgraphics/Adorn.h"
@@ -173,6 +174,19 @@ ModelInstance* Humanoid::getCharacterFromHumanoid(Humanoid* humanoid)
 G3D::CoordinateFrame Humanoid::getTopOfHead() const
 {
 	return G3D::CoordinateFrame(G3D::Matrix3::identity(), G3D::Vector3(0, 0.5f, 0));
+}
+
+// FUNCTION: WEBSERVICE 0x100a0930
+void Humanoid::renderWaypoint(Adorn* adorn, const G3D::Vector3& waypoint)
+{
+	DrawAdorn::cylinder(
+		adorn,
+		G3D::CoordinateFrame(G3D::Matrix3::identity(), waypoint),
+		1,
+		0.2f,
+		1.0f,
+		G3D::Color3::green()
+	);
 }
 
 // FUNCTION: WEBSERVICE 0x100a0990
