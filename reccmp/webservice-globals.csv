@@ -7268,3 +7268,5 @@ address,type,symbol
 0x10230fec,global,??_8Workspace@RBX@@7B?$DescribedCreatable@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@1@@
 0x1023a4ec,global,??_7NewNullTool@RBX@@6BINamed@1@@
 0x1023a4d4,global,??_7NewNullTool@RBX@@6BIRenderable@1@@
+0x1023090c,global,??_7ArrowTool@RBX@@6BINamed@1@@
+0x102308f0,global,??_7ArrowTool@RBX@@6BIRenderable@1@@

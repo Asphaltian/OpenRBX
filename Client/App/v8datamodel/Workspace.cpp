@@ -160,7 +160,30 @@ void Workspace::onDescendentAdded(Instance* instance)
 // STUB: WEBSERVICE 0x1006c9e0
 void Workspace::setMouseCommand(MouseCommand* command)
 {
-	STUB(0x1006c9e0);
+	if (!command) {
+		if (stickyCommand.get()) {
+			command = stickyCommand->isSticky();
+		}
+
+		if (!command) {
+			if (!Network::Players::findLocalPlayer(this)) {
+				command = new ArrowTool(this);
+			}
+			else {
+				command = newNullTool(this);
+			}
+		}
+	}
+
+	if (command != currentCommand.get()) {
+		currentCommand.reset(command);
+
+		if (MouseCommand* sticky = command->isSticky()) {
+			stickyCommand.reset(sticky);
+		}
+
+		Notifier<Workspace, ToolChanged>::raise(ToolChanged());
+	}
 }
 
 // STUB: WEBSERVICE 0x1006ccb0
@@ -186,10 +209,11 @@ void Workspace::cameraMoved()
 	Notifier<Workspace, DrawChanged>::raise(DrawChanged());
 }
 
-// STUB: WEBSERVICE 0x1006d410
+// FUNCTION: WEBSERVICE 0x1006d410
 void Workspace::setDefaultMouseCommand()
 {
-	STUB(0x1006d410);
+	stickyCommand.reset();
+	setMouseCommand(NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x1006d440

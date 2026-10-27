@@ -38,6 +38,9 @@ public:
 	virtual void setCursorId(Adorn* adorn, const TextureId& cursorId); // vtable+0x1c
 
 	void getNavKeys(NavKeys& navKeys) const;
+	bool altKeyDown() const { return keyDown(SDLK_RALT) || keyDown(SDLK_LALT); }
+	bool shiftKeyDown() const { return keyDown(SDLK_RSHIFT) || keyDown(SDLK_LSHIFT); }
+	bool ctrlKeyDown() const { return keyDown(SDLK_RCTRL) || keyDown(SDLK_LCTRL); }
 
 private:
 	undefined m_unk0x04[0x28 - 0x04]; // 0x04

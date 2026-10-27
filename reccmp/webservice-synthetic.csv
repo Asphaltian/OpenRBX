@@ -153,6 +153,8 @@ address,type,symbol
 0x10069950,synthetic,??$find@VScriptContext@RBX@@@ServiceProvider@RBX@@SAPAVScriptContext@1@PBVInstance@1@@Z
 0x1006a0b0,synthetic,??1?$DescribedNonCreatable@VWorkspace@RBX@@VRootInstance@2@$1?sWorkspace@2@3PADA@RBX@@UAE@XZ
 0x1006a7b0,synthetic,?getNumPrimitives@World@RBX@@QBEHXZ
+0x1006b5c0,synthetic,?raise@?$Notifier@VWorkspace@RBX@@VToolChanged@2@@RBX@@IBEXVToolChanged@2@PAV?$Listener@VWorkspace@RBX@@VToolChanged@2@@2@@Z
+0x1006bce0,synthetic,?raise@?$Notifier@VWorkspace@RBX@@VToolChanged@2@@RBX@@IBEXVToolChanged@2@@Z
 0x1006c0d0,synthetic,?getClassName@?$NonFactoryProduct@VRootInstance@RBX@@$1?sWorkspace@2@3PADA@RBX@@UBEABVName@2@XZ
 0x1006cd10,synthetic,??1?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@MAE@XZ
 0x1006d720,synthetic,??$find@VSelection@RBX@@@ServiceProvider@RBX@@QBEPAVSelection@1@XZ

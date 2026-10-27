@@ -175,7 +175,6 @@ address,size,symbol,name
 0x100b2fc0,0x40a,?gfxcard@DebugSettings@RBX@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
 0x100b74f0,0xb7,?singleton@GlobalSettings@RBX@@SA?AV?$shared_ptr@VGlobalSettings@RBX@@@boost@@XZ,
 0x100beda0,0x22,?getCursorName@MouseCommand@RBX@@EBE?BV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
-0x100bf110,0x2d,?getCursorName@ArrowToolBase@RBX@@MBE?BV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,
 0x100bfd10,0x78,??$create@V?$FilteredSelection@VInstance@RBX@@@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@V?$FilteredSelection@VInstance@RBX@@@RBX@@@boost@@XZ,
 0x100bfe60,0x209,?getMouseInstances@BoxSelectCommand@RBX@@AAEXAAV?$set@PAVInstance@RBX@@U?$less@PAVInstance@RBX@@@std@@V?$allocator@PAVInstance@RBX@@@4@@std@@ABVUIEvent@2@AAVRect2D@G3D@@@Z,
 0x100c09e0,0xc5,?selectAnd@BoxSelectCommand@RBX@@AAEXABV?$set@PAVInstance@RBX@@U?$less@PAVInstance@RBX@@@std@@V?$allocator@PAVInstance@RBX@@@4@@std@@@Z,
