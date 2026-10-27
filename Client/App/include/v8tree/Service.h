@@ -129,6 +129,10 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::find<RBX::Teams>
 // FUNCTION: WEBSERVICE 0x10078670
 // RBX::ServiceProvider::find<RBX::Network::Players>
+// STUB: WEBSERVICE 0x10078cf0
+// RBX::ServiceProvider::create<RBX::JointsService>
+// TEMPLATE: WEBSERVICE 0x10078de0
+// RBX::ServiceProvider::create<RBX::Network::Players>
 // FUNCTION: WEBSERVICE 0x10079520
 // RBX::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>
 // SYNTHETIC: WEBSERVICE 0x10079940

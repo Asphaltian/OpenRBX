@@ -7378,3 +7378,13 @@ address,type,symbol
 0x10250c04,global,??_7IdSerializer@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
 0x10250bd4,global,??_7IdSerializer@Network@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
 0x10250be4,global,??_7IdSerializer@Network@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@2@@
+0x102508e0,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@3@@
+0x10250910,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6BDebugable@3@@
+0x102508f0,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@3@@
+0x102508c0,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@3@@
+0x10250920,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@3@@
+0x102508b0,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@3@@
+0x10250918,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@3@@
+0x102508d0,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@3@@
+0x1025092c,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$GuidItem@VInstance@RBX@@@3@@
+0x10250900,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@3@@

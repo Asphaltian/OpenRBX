@@ -109,7 +109,7 @@ struct RAK_DLL_EXPORT RakNetStatistics
 	double bitsPerSecond;
 	///  connection start time
 	RakNetTime connectionStartTime;
-	bool isLimitedByCongestionControl;
+	bool bandwidthExceeded;
 
 	RakNetStatistics operator +=(const RakNetStatistics& other);
 };

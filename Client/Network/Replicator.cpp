@@ -8,15 +8,23 @@
 #include "util/Profiling.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/Camera.h"
+#include "v8datamodel/Hopper.h"
+#include "v8datamodel/JointsService.h"
+#include "v8datamodel/Lighting.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Stats.h"
+#include "v8datamodel/Teams.h"
+#include "v8datamodel/Workspace.h"
 
 #include <BitStream.h>
 #include <G3D/System.h>
 #include <GetTime.h>
 #include <PacketLogger.h>
+#include <RakNetStatistics.h>
 #include <RakPeer.h>
+#include <algorithm>
+#include <boost/bind.hpp>
 #include <stdio.h>
 
 // SIZE 0x210
@@ -45,6 +53,26 @@ namespace Network {
 
 const char sPeer[] = "NetworkPeer";
 const char sReplicator[] = "NetworkReplicator";
+
+// SIZE 0x148
+class Replicator::ReplicatorStatsItem : public Stats::Item
+{
+	Item* waitingRefs;                              // 0x120
+	Item* packetLoss;                               // 0x124
+	Item* ping;                                     // 0x128
+	Item* instanceSize;                             // 0x12c
+	Item* bps;                                      // 0x130
+	const boost::shared_ptr<Replicator> replicator; // 0x134
+	const RakNetStatistics* statistics;             // 0x13c
+
+public:
+	unsigned int instanceCount; // 0x140
+	unsigned int instanceBits;  // 0x144
+
+	ReplicatorStatsItem(const boost::shared_ptr<Replicator>& replicator, const RakNetStatistics* statistics);
+
+	virtual void update();
+};
 
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
 void Replicator::onSentMarker(long id)
@@ -242,6 +270,28 @@ void Peer::updateNetworkSimulator()
 	);
 }
 
+// FUNCTION: WEBSERVICE 0x101a1410
+bool Replicator::disconnectReplicationData(boost::shared_ptr<Instance> instance)
+{
+	RepConts::iterator iter = replicationContainers.find(instance.get());
+	if (iter == replicationContainers.end()) {
+		return false;
+	}
+
+	instance->visitChildren(boost::bind(&Replicator::disconnectReplicationData, this, _1));
+
+	closeReplicationItem(*iter);
+	replicationContainers.erase(iter);
+
+	return true;
+}
+
+// STUB: WEBSERVICE 0x101a1580
+void Replicator::onChildAdded(boost::shared_ptr<Instance> child)
+{
+	STUB(0x101a1580);
+}
+
 // FUNCTION: WEBSERVICE 0x101a4ad0
 Peer::Peer() : profilePacketsThread(new Profiling::ThreadProfiler("Packets Thread")), rakPeer(new RakPeer())
 {
@@ -281,10 +331,127 @@ void Replicator::Update(RakPeerInterface* peer)
 	STUB(0x101a5a40);
 }
 
+// FUNCTION: WEBSERVICE 0x101a6200
+Replicator::ReplicatorStatsItem::ReplicatorStatsItem(
+	const boost::shared_ptr<Replicator>& replicator,
+	const RakNetStatistics* statistics
+)
+	: replicator(replicator), statistics(statistics), instanceCount(0), instanceBits(0)
+{
+	bps = createChildItem("Bytes/s");
+	bps->createBoundChildItem("Bandwidth Exceeded", statistics->bandwidthExceeded);
+	packetLoss = bps->createChildItem("Packet Loss");
+
+	ping = createChildItem("Ping");
+
+	Item* replication = createBoundChildItem(*replicator->profileReplication);
+	replication->createBoundChildItem(*replicator->profileDataListening);
+	replication->createBoundChildItem(*replicator->profileDataOut);
+	replication->createBoundChildItem(*replicator->profilePhysicsOut);
+	replication->createBoundChildItem(*replicator->profileDataIn);
+	replication->createBoundChildItem(*replicator->profilePhysicsIn);
+
+	instanceSize = replication->createChildItem("Instance size (In)");
+
+	waitingRefs = createChildItem("Waiting Refs");
+}
+
+// FUNCTION: WEBSERVICE 0x101a6430
+void Replicator::ReplicatorStatsItem::update()
+{
+	if (replicator->peer) {
+		bps->formatMem((unsigned int) statistics->bitsPerSecond / 8);
+
+		ping->formatValue(
+			replicator->peer->GetLastPing(replicator->remotePlayerId),
+			"%d avg:%d best:%d",
+			replicator->peer->GetLastPing(replicator->remotePlayerId),
+			replicator->peer->GetAveragePing(replicator->remotePlayerId),
+			replicator->peer->GetLowestPing(replicator->remotePlayerId)
+		);
+		waitingRefs->formatValue(replicator->numWaitingRefs());
+
+		float loss = (float) statistics->messagesTotalBitsResent / (float) statistics->totalBitsSent;
+		packetLoss->formatValue(loss, "%.1g%%", 100.0 * loss);
+
+		instanceSize->formatMem(instanceCount ? instanceBits / (8 * instanceCount) : 0);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101a6e20
+void Replicator::createStatsItems(Stats::StatsService* stats)
+{
+	if (statsItem) {
+		statsItem->setParent(NULL);
+		statsItem.reset();
+	}
+
+	if (stats) {
+		boost::shared_ptr<Stats::Item> network =
+			shared_from_polymorphic_downcast<Stats::Item>(stats->findFirstChildByName("Network"));
+		if (network) {
+			statsItem = Creatable<Instance>::create<ReplicatorStatsItem>(
+				shared_from(this),
+				peer->GetStatistics(remotePlayerId)
+			);
+			statsItem->setName(getName());
+			statsItem->setParent2(network);
+		}
+	}
+}
+
+// STUB: WEBSERVICE 0x101a78c0
+Replicator::ReplicationData& Replicator::addReplicationData(
+	boost::shared_ptr<Instance> instance,
+	bool deleteOnDisconnect
+)
+{
+	STUB(0x101a78c0);
+	return replicationContainers[instance.get()];
+}
+
+// FUNCTION: WEBSERVICE 0x101a8e40
+void Replicator::addTopReplicationContainer(Instance* instance, bool replicateProperties)
+{
+	if (instance) {
+		topReplicationContainers.push_back(instance);
+
+		addReplicationData(shared_from(instance), replicateProperties);
+
+		instance->visitChildren(boost::bind(&Replicator::onChildAdded, this, _1));
+	}
+}
+
 // STUB: WEBSERVICE 0x101a8eb0
 void Replicator::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
-	STUB(0x101a8eb0);
+	std::for_each(replicationContainers.begin(), replicationContainers.end(), boost::bind(&closeReplicationItem, _1));
+	replicationContainers.clear();
+	pendingItems.clear();
+	topReplicationContainers.clear();
+
+	DescribedNonCreatable<Replicator, IdSerializer, sReplicator>::onServiceProvider(oldProvider, newProvider);
+
+	createStatsItems(newProvider ? newProvider->find<Stats::StatsService>() : NULL);
+
+	if (newProvider) {
+		Instance* lighting = newProvider->create<Lighting>();
+		addTopReplicationContainer(lighting, true);
+		Instance* starterPack = newProvider->create<StarterPackService>();
+		addTopReplicationContainer(starterPack, false);
+		Instance* workspace = newProvider->find<Workspace>();
+		addTopReplicationContainer(workspace, false);
+		Instance* joints = newProvider->create<JointsService>();
+		addTopReplicationContainer(joints, false);
+		players = newProvider->create<Players>();
+		addTopReplicationContainer(players, false);
+		Instance* teams = newProvider->create<Teams>();
+		addTopReplicationContainer(teams, false);
+	}
+	else if (peer) {
+		peer->DetachPlugin(this);
+		peer = NULL;
+	}
 }
 
 // STUB: WEBSERVICE 0x101a9220

@@ -2361,7 +2361,7 @@ RakNetStatistics * const ReliabilityLayer::GetStatistics( void )
 	for (i=0; i < splitPacketChannelList.Size(); i++)
 		statistics.messagesWaitingForReassembly+=splitPacketChannelList[i]->splitPacketList.Size();
 	statistics.internalOutputQueueSize = outputQueue.Size();
-	statistics.isLimitedByCongestionControl = continuousSend && lastUpdateTime - lastTimeBetweenPacketsIncrease > 1000000;
+	statistics.bandwidthExceeded = continuousSend && lastUpdateTime - lastTimeBetweenPacketsIncrease > 1000000;
 	//statistics.lossySize = lossyWindowSize == MAXIMUM_WINDOW_SIZE + 1 ? 0 : lossyWindowSize;
 //	statistics.lossySize=0;
 	statistics.messagesOnResendQueue = GetResendListDataSize();
