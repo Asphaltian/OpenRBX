@@ -1,17 +1,23 @@
 #include "humanoid/Humanoid.h"
 
+#include "humanoid/FallingDown.h"
 #include "network/Players.h"
 #include "rbxgraphics/Adorn.h"
 #include "reflection/property.h"
 #include "util/Color.h"
 #include "v8datamodel/Camera.h"
+#include "v8datamodel/ForceField.h"
 #include "v8datamodel/JointInstance.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Body.h"
 #include "v8tree/Service.h"
+#include "v8world/Joint.h"
+#include "v8world/Primitive.h"
 #include "v8world/World.h"
+
+#include <stdexcept>
 
 namespace RBX {
 
@@ -19,11 +25,52 @@ char sHumanoid[] = "Humanoid";
 
 using namespace Reflection;
 
-static PropDescriptor<Humanoid, float> propMaxHealth(
-	"MaxHealth",
-	"Game",
-	&RBX::Humanoid::getMaxHealth,
-	&RBX::Humanoid::setMaxHealth
+static RefPropDescriptor<Humanoid, PartInstance> propTorso(
+	"Torso",
+	"Data",
+	&RBX::Humanoid::getTorso,
+	&RBX::Humanoid::setTorso,
+	Reflection::PropertyDescriptor::UI
+);
+
+static RefPropDescriptor<Humanoid, PartInstance> propLeftLeg(
+	"LeftLeg",
+	"Data",
+	&RBX::Humanoid::getLeftLeg,
+	&RBX::Humanoid::setLeftLeg,
+	Reflection::PropertyDescriptor::UI
+);
+
+static RefPropDescriptor<Humanoid, PartInstance> propRightLeg(
+	"RightLeg",
+	"Data",
+	&RBX::Humanoid::getRightLeg,
+	&RBX::Humanoid::setRightLeg,
+	Reflection::PropertyDescriptor::UI
+);
+
+static RefPropDescriptor<Humanoid, PartInstance> propWalkToPart(
+	"WalkToPart",
+	"Control",
+	&RBX::Humanoid::getWalkToPart,
+	&RBX::Humanoid::setWalkToPart,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, G3D::Vector3> propWalkToPoint(
+	"WalkToPoint",
+	"Control",
+	&RBX::Humanoid::getWalkToPoint,
+	&RBX::Humanoid::setWalkToPoint,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, G3D::Vector3> propWalkDirection(
+	"WalkDirection",
+	"Control",
+	&RBX::Humanoid::getWalkDirection,
+	&RBX::Humanoid::setWalkDirection,
+	Reflection::PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<Humanoid, float> propWalkRotationalVelocity(
@@ -42,12 +89,49 @@ static PropDescriptor<Humanoid, bool> propJump(
 	Reflection::PropertyDescriptor::STREAMING
 );
 
+static PropDescriptor<Humanoid, G3D::Vector3> propTargetPoint(
+	"TargetPoint",
+	"Control",
+	&RBX::Humanoid::getTargetPoint,
+	&RBX::Humanoid::setTargetPoint,
+	Reflection::PropertyDescriptor::STREAMING
+);
+
 static PropDescriptor<Humanoid, bool> propSit(
 	"Sit",
 	"Control",
 	&RBX::Humanoid::getSit,
 	&RBX::Humanoid::setSit,
 	Reflection::PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, float> propHealth(
+	"Health",
+	"Game",
+	&RBX::Humanoid::getHealth,
+	&RBX::Humanoid::setHealth
+);
+
+static PropDescriptor<Humanoid, float> propMaxHealth(
+	"MaxHealth",
+	"Game",
+	&RBX::Humanoid::getMaxHealth,
+	&RBX::Humanoid::setMaxHealth
+);
+
+static BoundFuncDesc<Humanoid, void(float), 1> func_TakeDamage(
+	&RBX::Humanoid::takeDamage,
+	"TakeDamage",
+	"amount",
+	Reflection::FunctionDescriptor::AnyCaller
+);
+
+static BoundFuncDesc<Humanoid, void(G3D::Vector3, boost::shared_ptr<Instance>), 2> func_MoveTo(
+	&RBX::Humanoid::moveTo2,
+	"MoveTo",
+	"location",
+	"part",
+	Reflection::FunctionDescriptor::AnyCaller
 );
 
 SignalDesc<Humanoid, void()> Humanoid::event_Died("Died");
@@ -63,6 +147,20 @@ SignalDesc<Humanoid, void(bool)> Humanoid::event_Seated("Seated", "active");
 PartInstance* Humanoid::getHeadFromCharacter(const ModelInstance* character)
 {
 	return character ? dynamic_cast<PartInstance*>(character->findFirstChildByName("Head")) : NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100a08d0
+ModelInstance* Humanoid::getCharacterFromHumanoid(Humanoid* humanoid)
+{
+	if (humanoid != NULL) {
+		Instance* parent = humanoid->getParent();
+		ModelInstance* model = dynamic_cast<ModelInstance*>(parent);
+		if (model != NULL) {
+			return model;
+		}
+	}
+
+	return NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a0900
@@ -125,6 +223,14 @@ void Humanoid::computeForce(float dt, bool throttling)
 {
 	if (currentState.get() != NULL) {
 		currentState->onComputeForce(dt);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a0d60
+void Humanoid::setState(State* state)
+{
+	if (state != currentState.get()) {
+		currentState.reset(state);
 	}
 }
 
@@ -482,12 +588,58 @@ void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
 	STUB(0x100a4bf0);
 }
 
+// FUNCTION: WEBSERVICE 0x100a4d50
+void Humanoid::setHealth(float value)
+{
+	float newHealth = G3D::clamp(value, 0.0f, maxHealth);
+
+	if (health != newHealth) {
+		health = newHealth;
+		raisePropertyChanged(propHealth);
+
+		if (health == 0.0f && !imDead) {
+			imDead = true;
+			setState(new FallingDown(this, Math::inf()));
+
+			if (ModelInstance* character = getCharacterFromHumanoid(this)) {
+				character->breakJoints();
+			}
+
+			event_Died.fire(this);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100a4e80
 void Humanoid::setMaxHealth(float value)
 {
 	if (maxHealth != value) {
 		maxHealth = value;
 		raisePropertyChanged(propMaxHealth);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a4eb0
+void Humanoid::takeDamage(float value)
+{
+	if (getTorso() && !ForceField::partInForceField(getTorso())) {
+		setHealth(health - value);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a4ef0
+void Humanoid::setWalkDirection(const G3D::Vector3& value)
+{
+	if (walkDirection != value) {
+		if (value == G3D::Vector3::zero()) {
+			walkDirection = value;
+		}
+		else {
+			walkDirection = G3D::Vector3(value.x, 0.0f, value.z).direction();
+			walkMode = DIRECTION_MOVE;
+		}
+
+		raisePropertyChanged(propWalkDirection);
 	}
 }
 
@@ -498,6 +650,30 @@ void Humanoid::setWalkRotationalVelocity(const float& value)
 		walkRotationalVelocity = value;
 		raisePropertyChanged(propWalkRotationalVelocity);
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a5030
+void Humanoid::setWalkToPoint(const G3D::Vector3& value)
+{
+	if (walkToPoint != value) {
+		walkToPoint = value;
+		raisePropertyChanged(propWalkToPoint);
+	}
+
+	walkMode = walkMode == HAS_PART ? CLICK_TO_MOVE : HAS_POINT;
+	walkTimer = walkMode == CLICK_TO_MOVE ? 240 : 0;
+}
+
+// FUNCTION: WEBSERVICE 0x100a50c0
+void Humanoid::setWalkToPart(PartInstance* value)
+{
+	if (walkToPart.get() != value) {
+		walkToPart = shared_from(value);
+		raisePropertyChanged(propWalkToPart);
+	}
+
+	walkMode = walkMode == HAS_POINT ? CLICK_TO_MOVE : HAS_PART;
+	walkTimer = walkMode == CLICK_TO_MOVE ? 240 : 0;
 }
 
 // FUNCTION: WEBSERVICE 0x100a51b0
@@ -524,6 +700,68 @@ void Humanoid::setTargetPoint(const G3D::Vector3& value)
 	STUB(0x100a5230);
 }
 
+// FUNCTION: WEBSERVICE 0x100a5310
+void Humanoid::moveTo(const G3D::Vector3& worldPosition, PartInstance* part)
+{
+	if (part) {
+		G3D::Vector3 local = part->getCoordinateFrame().pointToObjectSpace(worldPosition);
+		walkToPoint = local + G3D::Vector3::unitX();
+		walkToPart.reset();
+
+		setWalkToPart(part);
+		setWalkToPoint(local);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a5400
+void Humanoid::setLeftLeg(PartInstance* value)
+{
+	if (leftLeg.get() != value) {
+		leftLeg = shared_from(value);
+		raisePropertyChanged(propLeftLeg);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a54c0
+void Humanoid::setRightLeg(PartInstance* value)
+{
+	if (rightLeg.get() != value) {
+		rightLeg = shared_from(value);
+		raisePropertyChanged(propRightLeg);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a5580
+void Humanoid::setTorso(PartInstance* value)
+{
+	if (torso.get() != value) {
+		torso = shared_from(value);
+		raisePropertyChanged(propTorso);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a5640
+void Humanoid::checkForJointDeath()
+{
+	if (Primitive* headPrim = getHeadPrimitive()) {
+		if (Primitive* torsoPrim = getTorsoPrimitive()) {
+			Joint* joint = headPrim->getFirstJoint();
+			while (joint) {
+				if (joint->otherPrimitive(headPrim) == torsoPrim) {
+					hadHeadJoint = true;
+					return;
+				}
+
+				joint = headPrim->getNextJoint(joint);
+			}
+		}
+	}
+
+	if (hadHeadJoint) {
+		setHealth(0.0f);
+	}
+}
+
 // STUB: WEBSERVICE 0x100a56c0
 void Humanoid::onEvent(const RunService* source, Stepped event)
 {
@@ -542,6 +780,17 @@ void Humanoid::onEvent(const RunService* source, Stepped event)
 void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
 {
 	STUB(0x100a5770);
+}
+
+// FUNCTION: WEBSERVICE 0x100a58a0
+void Humanoid::moveTo2(G3D::Vector3 worldPosition, boost::shared_ptr<Instance> part)
+{
+	PartInstance* p = dynamic_cast<PartInstance*>(part.get());
+	if (!p) {
+		throw std::runtime_error("Argument error: A Part is required");
+	}
+
+	moveTo(worldPosition, p);
 }
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED

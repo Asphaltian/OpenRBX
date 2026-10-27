@@ -84,25 +84,36 @@ public:
 	static Humanoid* modelIsCharacter(const Instance* instance);
 	static Humanoid* getLocalHumanoidFromContext(const Instance* context);
 	static PartInstance* getLocalHeadFromContext(const Instance* context);
+	static ModelInstance* getCharacterFromHumanoid(Humanoid* humanoid);
 	static PartInstance* getHeadFromCharacter(const ModelInstance* character);
 
 	Body* getTorsoBody();
 	Body* getRootBody();
 
+	void setHealth(float value);
+	// FUNCTION: WEBSERVICE 0x100a0740
 	float getHealth() const { return health; }
 
 	void setMaxHealth(float value);
 	// FUNCTION: WEBSERVICE 0x100a0750
 	float getMaxHealth() const { return maxHealth; }
 
+	void takeDamage(float value);
+
+	void setWalkDirection(const G3D::Vector3& value);
+	// FUNCTION: WEBSERVICE 0x100a0760
 	G3D::Vector3 getWalkDirection() const { return walkDirection; }
 
 	void setWalkRotationalVelocity(const float& value);
 	// FUNCTION: WEBSERVICE 0x100a0790
 	float getWalkRotationalVelocity() const { return walkRotationalVelocity; }
 
+	void setWalkToPoint(const G3D::Vector3& value);
+	// FUNCTION: WEBSERVICE 0x100a07a0
 	const G3D::Vector3& getWalkToPoint() const { return walkToPoint; }
 
+	void setWalkToPart(PartInstance* value);
+	// FUNCTION: WEBSERVICE 0x100a0ba0
 	PartInstance* getWalkToPart() const { return walkToPart.get(); }
 
 	void setJump(bool value);
@@ -116,11 +127,21 @@ public:
 	bool canSit() const { return !sit && currentState->getName() == "Running"; }
 	World* getWorld() const { return world; }
 
+	// FUNCTION: WEBSERVICE 0x100a07d0
 	const G3D::Vector3& getTargetPoint() const { return targetPoint; }
+
+	void moveTo(const G3D::Vector3& worldPosition, PartInstance* part);
+	void moveTo2(G3D::Vector3 worldPosition, boost::shared_ptr<Instance> part);
 
 	G3D::Vector3 updateWalkDirection();
 	float getTorsoHeading() const;
 
+	Primitive* getHeadPrimitive()
+	{
+		PartInstance* part = getHead();
+
+		return part != NULL ? part->getPrimitive() : NULL;
+	}
 	Primitive* getTorsoPrimitive() const;
 	Primitive* getLeftLegPrimitive();
 	Primitive* getRightLegPrimitive();
@@ -136,8 +157,13 @@ public:
 	PartInstance* findRightArm() const;
 	JointInstance* findRightShoulder() const;
 	void setTargetPoint(const G3D::Vector3& value);
+	void setTorso(PartInstance* value);
+	void setLeftLeg(PartInstance* value);
+	void setRightLeg(PartInstance* value);
 
 private:
+	void setState(State* state);
+	void checkForJointDeath();
 	bool hasWalkToPoint(G3D::Vector3& worldPosition) const;
 
 	virtual bool shouldRender2d() const;
@@ -193,14 +219,34 @@ DECOMP_SIZE_ASSERT(Humanoid, 0x1f0)
 DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021b0d0
+// RBX::`dynamic initializer for 'propTorso''
+// SYNTHETIC: WEBSERVICE 0x1021b130
+// RBX::`dynamic initializer for 'propLeftLeg''
+// SYNTHETIC: WEBSERVICE 0x1021b190
+// RBX::`dynamic initializer for 'propRightLeg''
+// SYNTHETIC: WEBSERVICE 0x1021b1f0
+// RBX::`dynamic initializer for 'propWalkToPart''
+// SYNTHETIC: WEBSERVICE 0x1021b250
+// RBX::`dynamic initializer for 'propWalkToPoint''
+// SYNTHETIC: WEBSERVICE 0x1021b2b0
+// RBX::`dynamic initializer for 'propWalkDirection''
 // SYNTHETIC: WEBSERVICE 0x1021b310
 // RBX::`dynamic initializer for 'propWalkRotationalVelocity''
 // SYNTHETIC: WEBSERVICE 0x1021b370
 // RBX::`dynamic initializer for 'propJump''
+// SYNTHETIC: WEBSERVICE 0x1021b3d0
+// RBX::`dynamic initializer for 'propTargetPoint''
 // SYNTHETIC: WEBSERVICE 0x1021b430
 // RBX::`dynamic initializer for 'propSit''
+// SYNTHETIC: WEBSERVICE 0x1021b490
+// RBX::`dynamic initializer for 'propHealth''
 // SYNTHETIC: WEBSERVICE 0x1021b4f0
 // RBX::`dynamic initializer for 'propMaxHealth''
+// SYNTHETIC: WEBSERVICE 0x1021b550
+// RBX::`dynamic initializer for 'func_TakeDamage''
+// SYNTHETIC: WEBSERVICE 0x1021b590
+// RBX::`dynamic initializer for 'func_MoveTo''
 // SYNTHETIC: WEBSERVICE 0x1021b5e0
 // `dynamic initializer for 'RBX::Humanoid::event_Died''
 // SYNTHETIC: WEBSERVICE 0x1021b610
@@ -217,14 +263,30 @@ DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 // `dynamic initializer for 'RBX::Humanoid::event_FallingDown''
 // SYNTHETIC: WEBSERVICE 0x1021b6d0
 // `dynamic initializer for 'RBX::Humanoid::event_Seated''
+// SYNTHETIC: WEBSERVICE 0x10223380
+// RBX::`dynamic atexit destructor for 'propRightLeg''
+// SYNTHETIC: WEBSERVICE 0x102233a0
+// RBX::`dynamic atexit destructor for 'propWalkToPart''
+// SYNTHETIC: WEBSERVICE 0x102233c0
+// RBX::`dynamic atexit destructor for 'propLeftLeg''
+// SYNTHETIC: WEBSERVICE 0x102233e0
+// RBX::`dynamic atexit destructor for 'propTorso''
 // SYNTHETIC: WEBSERVICE 0x10223400
 // RBX::`dynamic atexit destructor for 'propSit''
 // SYNTHETIC: WEBSERVICE 0x10223420
 // RBX::`dynamic atexit destructor for 'propMaxHealth''
+// SYNTHETIC: WEBSERVICE 0x10223440
+// RBX::`dynamic atexit destructor for 'propHealth''
+// SYNTHETIC: WEBSERVICE 0x10223460
+// RBX::`dynamic atexit destructor for 'propTargetPoint''
 // SYNTHETIC: WEBSERVICE 0x10223480
 // RBX::`dynamic atexit destructor for 'propJump''
 // SYNTHETIC: WEBSERVICE 0x102234a0
 // RBX::`dynamic atexit destructor for 'propWalkRotationalVelocity''
+// SYNTHETIC: WEBSERVICE 0x102234c0
+// RBX::`dynamic atexit destructor for 'propWalkDirection''
+// SYNTHETIC: WEBSERVICE 0x102234e0
+// RBX::`dynamic atexit destructor for 'propWalkToPoint''
 // SYNTHETIC: WEBSERVICE 0x10223500
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Climbing''
 // SYNTHETIC: WEBSERVICE 0x10223510
@@ -235,10 +297,14 @@ DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 // `dynamic atexit destructor for 'RBX::Humanoid::event_FallingDown''
 // SYNTHETIC: WEBSERVICE 0x10223540
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Seated''
+// SYNTHETIC: WEBSERVICE 0x10223550
+// RBX::`dynamic atexit destructor for 'func_MoveTo''
 // SYNTHETIC: WEBSERVICE 0x10223560
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Running''
 // SYNTHETIC: WEBSERVICE 0x10223570
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Jumping''
+// SYNTHETIC: WEBSERVICE 0x10223580
+// RBX::`dynamic atexit destructor for 'func_TakeDamage''
 // SYNTHETIC: WEBSERVICE 0x10223590
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Died''
 // clang-format on

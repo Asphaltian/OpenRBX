@@ -7250,3 +7250,5 @@ address,type,symbol
 0x10241a14,global,??_8FlagStand@RBX@@7B?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@1@@
 0x102417e4,global,??_8FlagStand@RBX@@7BICameraSubject@1@@
 0x10230f54,global,??_8?$FactoryProduct@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@7B?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@1@@
+0x1023730c,global,??_7?$RefPropDescriptor@VHumanoid@RBX@@VPartInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
+0x10237304,global,??_7?$RefPropDescriptor@VHumanoid@RBX@@VPartInstance@2@@Reflection@RBX@@6BIIDREF@2@@

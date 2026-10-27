@@ -182,7 +182,7 @@ address,type,symbol
 0x1008e4d0,synthetic,??0ObjectValue@RBX@@QAE@XZ
 0x1008eba0,stub,?halfSpaceContains@Plane@G3D@@QBE_NVVector3@2@@Z
 0x10091000,synthetic,??1?$bind_t@W4work_result@worker_thread@RBX@@P6A?AW4123@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@ZV?$list2@V?$value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@_bi@boost@@V?$value@H@23@@_bi@boost@@@_bi@boost@@QAE@XZ
-0x10093e50,stub,?closest@BrickColor@RBX@@SA?AV12@VColor4@G3D@@@Z
+0x10093e50,synthetic,?closest@BrickColor@RBX@@SA?AV12@VColor4@G3D@@@Z
 0x10094cc0,synthetic,?equalValues@?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 0x10096090,synthetic,??1IDREFItem@MergeBinder@RBX@@QAE@XZ
 0x10096330,stub,??$_Copy_opt@PAUIDREFItem@MergeBinder@RBX@@PAU123@Uforward_iterator_tag@std@@@std@@YAPAUIDREFItem@MergeBinder@RBX@@PAU123@00Uforward_iterator_tag@0@U_Nonscalar_ptr_iterator_tag@0@U_Range_checked_iterator_tag@0@@Z
@@ -474,6 +474,7 @@ address,type,symbol
 0x100fff70,synthetic,??0Decal@RBX@@QAE@XZ
 0x101003c0,synthetic,??0Texture@RBX@@QAE@XZ
 0x101004b0,synthetic,??_E?$FactoryProduct@VTexture@RBX@@VDecal@2@$1?sTexture@2@3PADA@RBX@@MAEPAXI@Z
+0x10101960,synthetic,??_GRefType@Reflection@RBX@@UAEPAXI@Z
 0x10101b90,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$00W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
 0x10101cd0,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$03W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z
 0x10101e10,synthetic,??$?0P8Surface@RBX@@BE?AW4InputType@Controller@1@XZP801@AEXW4231@@Z@?$SurfaceEnumPropDescriptor@$02W4InputType@Controller@RBX@@@RBX@@QAE@PBD0P8Surface@1@BE?AW4InputType@Controller@1@XZP821@AEXW4341@@ZW4Functionality@PropertyDescriptor@Reflection@1@@Z

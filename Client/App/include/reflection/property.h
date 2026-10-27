@@ -524,6 +524,12 @@ public:
 	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::Soundscape::SoundService>
 	// TEMPLATE: WEBSERVICE 0x10082260
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Soundscape::SoundChannel>
+	// TEMPLATE: WEBSERVICE 0x100a14a0
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(RBX::PartInstance *)>
+	// TEMPLATE: WEBSERVICE 0x100a1510
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::getset<G3D::Vector3 const & (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x100a1580
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::getset<G3D::Vector3 (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x100ca2f0
 	// RBX::Reflection::PropDescriptor<RBX::Tool,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(G3D::CoordinateFrame const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100ca390
@@ -912,6 +918,12 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::getset<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>
 	// TEMPLATE: WEBSERVICE 0x1012cca0
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::getset<enum RBX::SpecialShape::MeshType const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(enum RBX::SpecialShape::MeshType)>
+	// TEMPLATE: WEBSERVICE 0x100a0eb0
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::GetSetImpl<G3D::Vector3 const & (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>::getValue
+	// TEMPLATE: WEBSERVICE 0x100a36b0
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::PropDescriptor<RBX::Humanoid,G3D::Vector3><G3D::Vector3 const & (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x100a3770
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::PropDescriptor<RBX::Humanoid,G3D::Vector3><G3D::Vector3 (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>
 	// clang-format on
 	template <class Getter, class Setter>
 	PropDescriptor(
