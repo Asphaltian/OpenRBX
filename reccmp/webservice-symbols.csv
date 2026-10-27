@@ -130,7 +130,6 @@ address,size,symbol,name
 0x10085990,0x97,??$addAttribute@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@XmlElement@@QAEXABVName@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x10085a30,0x44e,??$get@V?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@V?$ostreambuf_iterator@DU?$char_traits@D@std@@@2@H@?$base64@DU?$char_traits@D@std@@@@QBE?AV?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@V12@0V?$ostreambuf_iterator@DU?$char_traits@D@std@@@2@AAH@Z,
 0x10086310,0x27b,?parseAttributes@TextXmlParser@@AAEPAVXmlElement@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
-0x10087650,0x8eb,?parse@TextXmlParser@@UAE?AV?$auto_ptr@VXmlElement@@@std@@XZ,
 0x1008acb0,0x7a,??$create@VFlagStand@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VFlagStand@RBX@@@boost@@XZ,
 0x1008ad30,0xaf,?create@Creator@?$FactoryProduct@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ,
 0x1008d7d0,0x7a,??$create@VSpawnLocation@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VSpawnLocation@RBX@@@boost@@XZ,

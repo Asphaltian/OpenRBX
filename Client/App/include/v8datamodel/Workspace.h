@@ -58,6 +58,7 @@ class Workspace : public DescribedNonCreatable<Workspace, RootInstance, sWorkspa
 {
 public:
 	static bool showWorldCoord;
+	static bool showHashGrid;
 
 	static Workspace* findWorkspace(const Instance* context);
 	static Workspace* getMyWorkspaceFast(const Instance* context);
@@ -74,6 +75,7 @@ private:
 
 public:
 	virtual void render2d(Adorn* adorn);
+	virtual void render3dAdorn(Adorn* adorn);
 
 private:
 	virtual IScriptOwner* scriptShouldRun(Script* script);
@@ -120,6 +122,7 @@ public:
 
 	virtual GuiResponse process(const GuiEvent& guiEvent);
 
+	void start();
 	void stop();
 	void reset();
 	void setThrottleEnabled(bool value);

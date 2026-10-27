@@ -7291,3 +7291,4 @@ address,type,symbol
 0x10230da8,global,??_7?$TypedStatsItem@N@Stats@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
 0x10230ce8,global,??_7?$RefPropDescriptor@VWorkspace@RBX@@VCamera@2@@Reflection@RBX@@6BIIDREF@2@@
 0x10230cf0,global,??_7?$RefPropDescriptor@VWorkspace@RBX@@VCamera@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
+0x1022e8f0,global,??_7TextXmlParser@@6B@

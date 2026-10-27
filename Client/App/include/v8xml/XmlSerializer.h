@@ -105,6 +105,7 @@ DECOMP_SIZE_ASSERT(XmlParser, 0x1c)
 class TextXmlParser : public XmlParser
 {
 public:
+	// FUNCTION: WEBSERVICE 0x10053e80
 	TextXmlParser(std::streambuf* buffer) : XmlParser(buffer) {}
 
 	virtual std::auto_ptr<XmlElement> parse();
@@ -113,6 +114,10 @@ private:
 	void skipWhitespace();
 
 	std::map<std::string, std::string> legacyHashes; // 0x1c
+
+public:
+	// SYNTHETIC: WEBSERVICE 0x10053c60
+	// TextXmlParser::~TextXmlParser
 };
 
 DECOMP_SIZE_ASSERT(TextXmlParser, 0x28)

@@ -2,6 +2,7 @@
 
 #include "humanoid/Humanoid.h"
 #include "network/Players.h"
+#include "rbxgraphics/Adorn.h"
 #include "reflection/reflection.h"
 #include "script/ScriptContext.h"
 #include "tool/NullTool.h"
@@ -17,12 +18,16 @@
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Selection.h"
 #include "v8datamodel/Stats.h"
 #include "v8datamodel/Tool.h"
 #include "v8datamodel/UserController.h"
 #include "v8kernel/Kernel.h"
 #include "v8world/SleepStage2.h"
 #include "v8world/World.h"
+#include "v8xml/SerializerV2.h"
+#include "v8xml/XmlElement.h"
+#include "v8xml/XmlSerializer.h"
 
 #include <boost/bind.hpp>
 
@@ -31,6 +36,7 @@ namespace RBX {
 char sWorkspace[] = "Workspace";
 
 bool Workspace::showWorldCoord;
+bool Workspace::showHashGrid;
 
 static Reflection::
 	BoundFuncDesc<Workspace, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(ContentId), 1>
@@ -145,6 +151,16 @@ void Workspace::render2d(Adorn* adorn)
 {
 	currentCommand->render2d(adorn);
 	render2dItems(adorn);
+}
+
+// FUNCTION: WEBSERVICE 0x1006a8b0
+static void DrawAdorn(boost::shared_ptr<Instance> wsi, Adorn* adorn, SelectState selectState, Workspace* workspace)
+{
+	if (IRenderable* renderable = dynamic_cast<IRenderable*>(wsi.get())) {
+		if (workspace->contains(wsi.get())) {
+			renderable->render3dSelect(adorn, selectState);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x1006a960
@@ -546,7 +562,7 @@ void Workspace::setImageServerView(const G3D::Rect2D& viewPortRect)
 	imageServerViewHack = imageServerViewHack <= 0;
 }
 
-// STUB: WEBSERVICE 0x1006eeb0
+// FUNCTION: WEBSERVICE 0x1006eeb0
 void Workspace::insertContent(
 	ContentId contentId,
 	std::vector<boost::shared_ptr<Instance> >& items,
@@ -554,14 +570,93 @@ void Workspace::insertContent(
 	PromptMode promptMode
 )
 {
-	STUB(0x1006eeb0);
+	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
+
+	TextXmlParser machine(stream->rdbuf());
+	std::auto_ptr<XmlElement> root = machine.parse();
+
+	SerializerV2().loadInstances(root.get(), items);
+	if (items.size() > 0) {
+		insertInstances(items, this, insertMode, promptMode);
+	}
 }
 
-// STUB: WEBSERVICE 0x1006f380
+// FUNCTION: WEBSERVICE 0x1006f030
+static void append(const boost::shared_ptr<Instance>& item, std::vector<boost::shared_ptr<Instance> >* values)
+{
+	values->push_back(item);
+}
+
+// FUNCTION: WEBSERVICE 0x1006f040
+void Workspace::start()
+{
+	isSimulating = true;
+	getCamera()->alwaysMode();
+
+	if (scriptContext) {
+		std::vector<boost::shared_ptr<Script> > startScripts;
+
+		std::set<Script*>::const_iterator iter = pendingScripts.begin();
+		std::set<Script*>::const_iterator end = pendingScripts.end();
+		while (iter != end) {
+			startScripts.push_back(shared_from(*iter));
+			++iter;
+		}
+
+		pendingScripts.clear();
+
+		std::for_each(
+			startScripts.begin(),
+			startScripts.end(),
+			boost::bind(&ScriptContext::addScript, scriptContext, boost::bind(&boost::shared_ptr<Script>::get, _1))
+		);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1006f380
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Workspace::insertContent(ContentId contentId)
 {
-	STUB(0x1006f380);
-	return boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >();
+	std::vector<boost::shared_ptr<Instance> > items;
+	insertContent(contentId, items, INSERT_TO_TREE, SUPPRESS_PROMPTS);
+
+	boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > > values(
+		new std::vector<boost::shared_ptr<Instance> >()
+	);
+
+	std::for_each(items.begin(), items.end(), boost::bind(&append, _1, values.get()));
+	return values;
+}
+
+// FUNCTION: WEBSERVICE 0x1006f6e0
+void Workspace::render3dAdorn(Adorn* adorn)
+{
+	viewPort = adorn->getViewport();
+
+	ServiceClient<Selection> selection(this);
+	if (selection) {
+		std::for_each(selection->begin(), selection->end(), boost::bind(&DrawAdorn, _1, adorn, SELECT_NORMAL, this));
+	}
+
+	render3dAdornItems(adorn);
+
+	if (showWorldCoord) {
+		adorn->setObjectToWorldMatrix(CoordinateFrame());
+		adorn->axes(
+			G3D::Color4(G3D::Color3::red()),
+			G3D::Color4(G3D::Color3::green()),
+			G3D::Color4(G3D::Color3::blue()),
+			50.0f
+		);
+	}
+
+	if (showHashGrid) {
+		adorn->setObjectToWorldMatrix(CoordinateFrame());
+		adorn->box(
+			G3D::AABox(G3D::Vector3(28, 4, 12), G3D::Vector3(32, 8, 16)),
+			G3D::Color4(1.0f, 0.2f, 0.2f, 0.5f),
+			G3D::Color4::clear()
+		);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100703e0

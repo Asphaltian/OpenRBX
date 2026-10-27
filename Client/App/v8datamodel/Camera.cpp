@@ -22,6 +22,12 @@ ICameraOwner* Camera::getCameraOwner()
 	return NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x100c2670
+void Camera::alwaysMode()
+{
+	animationType = ALWAYS;
+}
+
 // FUNCTION: WEBSERVICE 0x100c2680
 void Camera::lookAt(const G3D::Vector3& point)
 {

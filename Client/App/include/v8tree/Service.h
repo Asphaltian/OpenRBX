@@ -358,6 +358,8 @@ public:
 	ServiceClient(Instance* context) : context(context) {}
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x1006f250
+	// RBX::ServiceClient<RBX::Selection>::createService
 	// TEMPLATE: WEBSERVICE 0x100a49c0
 	// RBX::ServiceClient<RBX::FilteredSelection<RBX::PartInstance> >::createService
 	// clang-format on

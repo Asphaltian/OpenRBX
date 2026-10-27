@@ -60,6 +60,7 @@ onEvent_seatTouched: 'Seat method, misparsed as a variable without boost on the 
 onEvent_spawnerTouched: 'SpawnLocation method, misparsed as a variable without boost on the include path'
 onEvent_flagTouched: 'Flag method, misparsed as a variable without boost on the include path'
 onEvent_standTouched: 'FlagStand method, misparsed as a variable without boost on the include path'
+DrawAdorn: 'Workspace.cpp static, misparsed as a variable without boost on the include path'
 onEvent_AddedBackend: 'Accoutrement method, misparsed as a variable without boost on the include path'
 onEvent_RemovedBackend: 'Accoutrement method, misparsed as a variable without boost on the include path'
 onEvent_HandleTouched: 'Accoutrement method, misparsed as a variable without boost on the include path'

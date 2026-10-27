@@ -233,6 +233,13 @@ void TextXmlWriterWithEmbeddedContent::serializeNode(const XmlElement* xmlNode, 
 	}
 }
 
+// STUB: WEBSERVICE 0x10087650
+std::auto_ptr<XmlElement> TextXmlParser::parse()
+{
+	STUB(0x10087650);
+	return std::auto_ptr<XmlElement>();
+}
+
 // FUNCTION: WEBSERVICE 0x10087f40
 XmlWriter::XmlWriter(std::ostream& stream) : stream(stream)
 {
