@@ -14,6 +14,7 @@ class Http
 public:
 	const std::string url; // 0x00
 
+	// FUNCTION: WEBSERVICE 0x10001070
 	Http(const std::string& url) : url(url) {}
 	Http(const char* url) : url(url) {}
 
@@ -26,6 +27,9 @@ public:
 	static bool isScript(const char* url);
 	static bool isRobloxSite(const char* url);
 	static bool isCached(const char* url);
+
+	// SYNTHETIC: WEBSERVICE 0x1000d910
+	// RBX::Http::~Http
 };
 
 DECOMP_SIZE_ASSERT(Http, 0x38)

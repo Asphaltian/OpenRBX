@@ -61,6 +61,8 @@ struct AbuseReport
 // RBX::Network::AbuseReport::AbuseReport
 // SYNTHETIC: WEBSERVICE 0x10192a30
 // RBX::Network::AbuseReport::~AbuseReport
+// SYNTHETIC: WEBSERVICE 0x101930b0
+// RBX::Network::AbuseReport::operator=
 // clang-format on
 
 DECOMP_SIZE_ASSERT(AbuseReport::Message, 0x20)

@@ -138,7 +138,7 @@ DECOMP_SIZE_ASSERT(Hat, 0x1a0)
 // RBX::`dynamic initializer for 'prop_AttachmentUp''
 // FUNCTION: WEBSERVICE 0x1021c810
 // RBX::`dynamic initializer for 'prop_AttachmentRight''
-// STUB: WEBSERVICE 0x1021c870
+// SYNTHETIC: WEBSERVICE 0x1021c870
 // RBX::`dynamic initializer for 'prop_BackendAccoutrementState''
 // SYNTHETIC: WEBSERVICE 0x10223ea0
 // RBX::`dynamic atexit destructor for 'prop_AttachmentUp''

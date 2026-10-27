@@ -175,7 +175,7 @@ void FlagStand::onEvent_standTouched(boost::shared_ptr<Instance> other)
 	}
 }
 
-// STUB: WEBSERVICE 0x100e9120
+// FUNCTION: WEBSERVICE 0x100e9120
 void FlagStand::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Instance::onServiceProvider(oldProvider, newProvider);

@@ -347,7 +347,7 @@ void ContentProvider::setAssetFolder(const char* sPath)
 	assetFolderPath = path;
 }
 
-// STUB: WEBSERVICE 0x10052d90
+// FUNCTION: WEBSERVICE 0x10052d90
 worker_thread::work_result ContentProvider::processRequests()
 {
 	ContentId id;
@@ -385,7 +385,7 @@ worker_thread::work_result ContentProvider::processRequests()
 	return worker_thread::more;
 }
 
-// STUB: WEBSERVICE 0x10053050
+// FUNCTION: WEBSERVICE 0x10053050
 ContentProvider::CachedContent* ContentProvider::loadContent(ContentId id, HttpRequestType httpRequestType)
 {
 	if (id.isNull()) {

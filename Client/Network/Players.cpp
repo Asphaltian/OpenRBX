@@ -4,15 +4,19 @@
 #include "network/Client.h"
 #include "network/Server.h"
 #include "reflection/property.h"
+#include "util/Http.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/GameSettings.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Teams.h"
+#include "v8xml/XmlElement.h"
+#include "v8xml/XmlSerializer.h"
 
 #include <PluginInterface.h>
 #include <RakPeerInterface.h>
 #include <algorithm>
 #include <boost/bind.hpp>
+#include <sstream>
 #include <stdexcept>
 
 template <class T>
@@ -162,6 +166,20 @@ void Players::onEvent(const Player* source, CharacterAdded event)
 	const_cast<Player*>(source)->rebuildBackpack();
 }
 
+} // namespace Network
+} // namespace RBX
+
+// FUNCTION: WEBSERVICE 0x10191ac0
+static void writeMessage(const RBX::Network::AbuseReport::Message& msg, XmlElement* messages)
+{
+	XmlElement* message = messages->addChild(RBX::Name::declare("message", -1));
+	message->setValue(msg.text);
+	message->addAttribute(RBX::Name::declare("userID", -1), msg.userID);
+}
+
+namespace RBX {
+namespace Network {
+
 // FUNCTION: WEBSERVICE 0x10191c10
 boost::shared_ptr<Instance> Players::getPlayerByID(int userID)
 {
@@ -265,11 +283,51 @@ void AbuseReporter::add(AbuseReport& r, const std::list<ChatMessage>& chatHistor
 	requestProcessor->wake();
 }
 
-// STUB: WEBSERVICE 0x10194680
+// FUNCTION: WEBSERVICE 0x10194680
 worker_thread::work_result AbuseReporter::processRequests(boost::shared_ptr<data> _data, std::string abuseUrl)
 {
-	STUB(0x10194680);
-	return worker_thread::done;
+	try {
+		AbuseReport r;
+
+		{
+			boost::mutex::scoped_lock lock(_data->requestSync);
+			if (_data->queue.empty()) {
+				return worker_thread::done;
+			}
+			r = _data->queue.front();
+		}
+
+		std::stringstream body;
+
+		{
+			TextXmlWriter writer(body);
+			XmlElement root(Name::declare("report", -1));
+			root.addAttribute(Name::declare("userID", -1), r.submitterID);
+
+			root.addChild(new XmlElement(Name::declare("comment", -1), r.comment));
+			XmlElement* messages = root.addChild(new XmlElement(Name::declare("messages", -1)));
+			std::for_each(r.messages.begin(), r.messages.end(), boost::bind(writeMessage, _1, messages));
+			writer.serialize(&root);
+
+			body.flush();
+		}
+
+		std::string response;
+
+		Http(abuseUrl).post(body, false, response);
+		StandardOut::singleton()->print(MESSAGE_INFO, "Posted abuse report to %s", abuseUrl.c_str());
+	}
+	catch (std::exception& e) {
+		StandardOut::singleton()
+			->print(MESSAGE_WARNING, "Unable to post abuse report to %s. %s", abuseUrl.c_str(), e.what());
+	}
+
+	{
+		boost::mutex::scoped_lock lock(_data->requestSync);
+		_data->queue.pop();
+	}
+
+	return worker_thread::more;
 }
 
 // FUNCTION: WEBSERVICE 0x10194b30

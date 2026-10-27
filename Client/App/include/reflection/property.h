@@ -740,7 +740,7 @@ public:
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::GameSettings>
 	// TEMPLATE: WEBSERVICE 0x100de3f0
 	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::GameSettings>
-	// STUB: WEBSERVICE 0x100dc050
+	// TEMPLATE: WEBSERVICE 0x100dc050
 	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,int>::getset<int (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x100e2110
 	// RBX::Reflection::PropDescriptor<RBX::Explosion,float>::getset<float (__thiscall RBX::Explosion::*)(void)const ,void (__thiscall RBX::Explosion::*)(float)>

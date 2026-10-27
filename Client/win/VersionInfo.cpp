@@ -80,7 +80,7 @@ int CVersionInfo::Load(const CString& fileName)
 	return 0;
 }
 
-// STUB: WEBSERVICE 0x1000cb20
+// FUNCTION: WEBSERVICE 0x1000cb20
 CString CVersionInfo::GetValue(const CString& sKey)
 {
 	CString strResult;

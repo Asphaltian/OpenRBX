@@ -7324,3 +7324,4 @@ address,type,symbol
 0x10239e5c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6BDebugable@1@@
 0x10239dfc,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10239e2c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x102318b4,global,??_7TextXmlWriter@@6B@

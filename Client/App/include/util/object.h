@@ -142,9 +142,9 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100779a0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Teams>
-	// STUB: WEBSERVICE 0x10077c10
+	// TEMPLATE: WEBSERVICE 0x10077c10
 	// RBX::Creatable<RBX::Instance>::create<RBX::Accoutrement>
-	// STUB: WEBSERVICE 0x10077e80
+	// TEMPLATE: WEBSERVICE 0x10077e80
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hat>
 	// TEMPLATE: WEBSERVICE 0x1007e750
 	// RBX::Creatable<RBX::Instance>::create<RBX::GameSettings>
@@ -702,11 +702,11 @@ public:
 	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::~FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>
 	// FUNCTION: WEBSERVICE 0x100db5e0
 	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>
-	// STUB: WEBSERVICE 0x100dbdf0
+	// FUNCTION: WEBSERVICE 0x100dbdf0
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::~FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>
 	// FUNCTION: WEBSERVICE 0x100dcce0
 	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::`scalar deleting destructor'
-	// STUB: WEBSERVICE 0x100dcec0
+	// FUNCTION: WEBSERVICE 0x100dcec0
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>
 	// FUNCTION: WEBSERVICE 0x100dd950
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::`scalar deleting destructor'
