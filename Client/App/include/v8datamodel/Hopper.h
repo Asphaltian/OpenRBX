@@ -21,7 +21,26 @@ extern const char sBackpackItem[];
 // SIZE 0x168
 class BackpackItem : public DescribedNonCreatable<BackpackItem, Widget, sBackpackItem>
 {
+private:
+	GuiDrawImage guiImageDraw; // 0x110
+	TextureId textureId;       // 0x148
+
+	bool inBackpack();
+
+	virtual bool askSetParent(const Instance* instance) const { return true; }
+	virtual bool askAddChild(const Instance* instance) const { return true; }
+
+protected:
+	virtual G3D::Vector2 getSize() const;
+	virtual void render2d(Adorn* adorn);
+
+	// FUNCTION: WEBSERVICE 0x100c7fd0
+	virtual bool isEnabled() { return inBackpack(); }
+
+	int getBinId() const;
+
 public:
+	void setTextureId(const TextureId& value);
 	const TextureId getTextureId() const;
 
 	virtual bool drawEnabled() const { return true; }   // vtable+0x7c
@@ -29,9 +48,14 @@ public:
 	virtual void onLocalClicked() {}                    // vtable+0x84
 	virtual void onLocalOtherClicked() {}               // vtable+0x88
 
-private:
-	GuiDrawImage guiImageDraw; // 0x110
-	TextureId textureId;       // 0x148
+	// SYNTHETIC: WEBSERVICE 0x100c7e40
+	// RBX::BackpackItem::~BackpackItem
+
+	// SYNTHETIC: WEBSERVICE 0x100c93b0
+	// RBX::BackpackItem::BackpackItem
+
+	// SYNTHETIC: WEBSERVICE 0x100c9500
+	// RBX::BackpackItem::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(BackpackItem, 0x168)
@@ -52,13 +76,32 @@ public:
 		LASER_TOOL = 7,
 	};
 
-	virtual ~HopperBin();
-
-	BinType getBinType() const { return binType; }
-
 private:
 	BinType binType; // 0x168
 	bool active;     // 0x16c
+
+	void onSelectScript();
+	void onSelectCommand();
+	int getCursor();
+
+	// FUNCTION: WEBSERVICE 0x100c9ca0
+	virtual bool drawSelected() const { return active; }
+
+public:
+	HopperBin();
+
+	// FUNCTION: WEBSERVICE 0x100c70e0
+	BinType getBinType() const { return binType; }
+
+	void setBinType(const BinType value);
+
+	virtual void onLocalClicked();
+	virtual void onLocalOtherClicked();
+
+	void setLegacyCommand(const std::string& text);
+	void setLegacyTextureName(const std::string& value);
+
+	virtual ~HopperBin() {}
 };
 
 DECOMP_SIZE_ASSERT(HopperBin, 0x170)
@@ -88,6 +131,51 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(StarterPackService, 0x130)
+
+// SIZE 0x130
+class LegacyHopperService : public DescribedCreatable<LegacyHopperService, Hopper, sLegacyHopperService>, public Service
+{
+private:
+	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
+
+public:
+	LegacyHopperService();
+	virtual ~LegacyHopperService();
+
+	// SYNTHETIC: WEBSERVICE 0x100c7dc0
+	// RBX::LegacyHopperService::`scalar deleting destructor'
+};
+
+DECOMP_SIZE_ASSERT(LegacyHopperService, 0x130)
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x100c73f0
+// RBX::NonFactoryProduct<RBX::Widget,&RBX::sBackpackItem>::NonFactoryProduct<RBX::Widget,&RBX::sBackpackItem>
+// SYNTHETIC: WEBSERVICE 0x1021bf30
+// RBX::`dynamic initializer for 'desc_TextureId''
+// SYNTHETIC: WEBSERVICE 0x1021bf70
+// RBX::`dynamic initializer for 'desc_BinType''
+// SYNTHETIC: WEBSERVICE 0x1021bfb0
+// RBX::`dynamic initializer for 'desc_Selected''
+// SYNTHETIC: WEBSERVICE 0x1021bfd0
+// RBX::`dynamic initializer for 'desc_Deselected''
+// SYNTHETIC: WEBSERVICE 0x1021c000
+// RBX::`dynamic initializer for 'desc_legacyCommand''
+// SYNTHETIC: WEBSERVICE 0x1021c030
+// RBX::`dynamic initializer for 'desc_legacyTextureName''
+// SYNTHETIC: WEBSERVICE 0x10223b50
+// RBX::`dynamic atexit destructor for 'desc_BinType''
+// SYNTHETIC: WEBSERVICE 0x10223b70
+// RBX::`dynamic atexit destructor for 'desc_TextureId''
+// SYNTHETIC: WEBSERVICE 0x10223b90
+// RBX::`dynamic atexit destructor for 'desc_legacyTextureName''
+// SYNTHETIC: WEBSERVICE 0x10223bb0
+// RBX::`dynamic atexit destructor for 'desc_legacyCommand''
+// SYNTHETIC: WEBSERVICE 0x10223bf0
+// RBX::`dynamic atexit destructor for 'desc_Deselected''
+// SYNTHETIC: WEBSERVICE 0x10223c00
+// RBX::`dynamic atexit destructor for 'desc_Selected''
+// clang-format on
 
 } // namespace RBX
 

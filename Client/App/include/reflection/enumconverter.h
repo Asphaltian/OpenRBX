@@ -125,6 +125,8 @@ private:
 // RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::~EnumDesc<enum RBX::Soundscape::ReverbType>
 // TEMPLATE: WEBSERVICE 0x10082790
 // RBX::Reflection::EnumDesc<enum RBX::SoundType>::~EnumDesc<enum RBX::SoundType>
+// TEMPLATE: WEBSERVICE 0x100c8290
+// RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::~EnumDesc<enum RBX::HopperBin::BinType>
 // clang-format on
 
 // SYNTHETIC: WEBSERVICE 0x10082a10
@@ -148,7 +150,7 @@ private:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100dfff0
-// RBX::Reflection::EnumDesc<enum RBX::NormalId>::addPair
+// RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::addPair
 // clang-format on
 template <class T>
 void EnumDesc<T>::addPair(T value, const char* name)
@@ -209,8 +211,10 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton
 // TEMPLATE: WEBSERVICE 0x10081e50
 // RBX::Reflection::EnumDescriptor::equalValue
+// TEMPLATE: WEBSERVICE 0x100c8600
+// RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton
 // TEMPLATE: WEBSERVICE 0x100e5f90
-// RBX::Reflection::EnumDesc<enum RBX::SpecialShape::MeshType>::convertToIndex
+// RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::convertToIndex
 // TEMPLATE: WEBSERVICE 0x1009ed00
 // RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::singleton
 // TEMPLATE: WEBSERVICE 0x100b4230
@@ -245,6 +249,8 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // `RBX::Reflection::EnumDesc<enum RBX::Debugable::AssertAction>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10223980
 // `RBX::Reflection::EnumDesc<enum RBX::DebugSettings::ErrorReporting>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10223be0
+// `RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10224310
 // `RBX::Reflection::EnumDesc<enum RBX::Feature::InOut>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10224320

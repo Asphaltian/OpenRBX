@@ -580,8 +580,14 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::~DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
 	// FUNCTION: WEBSERVICE 0x100c6a90
 	// RBX::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::DescribedCreatable<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
+	// TEMPLATE: WEBSERVICE 0x100c8770
+	// RBX::DescribedNonCreatable<RBX::BackpackItem,RBX::Widget,&RBX::sBackpackItem>::DescribedNonCreatable<RBX::BackpackItem,RBX::Widget,&RBX::sBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100c90f0
 	// RBX::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
+	// TEMPLATE: WEBSERVICE 0x100c91d0
+	// RBX::DescribedCreatable<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>::DescribedCreatable<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>
+	// TEMPLATE: WEBSERVICE 0x100c9ae0
+	// RBX::DescribedCreatable<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::DescribedCreatable<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
 	// SYNTHETIC: WEBSERVICE 0x100ca200
 	// RBX::Instance::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100d7050
@@ -788,6 +794,8 @@ protected:
 // RBX::Instance::findFirstChildOfType<RBX::Sky>
 // TEMPLATE: WEBSERVICE 0x1005aff0
 // RBX::Instance::findFirstChildOfType<RBX::Humanoid>
+// TEMPLATE: WEBSERVICE 0x100c79f0
+// RBX::Instance::findFirstChildOfType<RBX::BackpackItem>
 // TEMPLATE: WEBSERVICE 0x100e07a0
 // RBX::Instance::findFirstChildOfType<RBX::Decal>
 // TEMPLATE: WEBSERVICE 0x100e0820

@@ -16,6 +16,7 @@ address,type,symbol
 0x10006340,stub,??1FunctionDescriptor@Reflection@RBX@@UAE@XZ
 0x100063b0,synthetic,??1SignatureDescriptor@Reflection@RBX@@QAE@XZ
 0x100063d0,synthetic,??1?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@0HH@Z$03@Reflection@RBX@@UAE@XZ
+0x10007050,stub,??1GuiDrawImage@RBX@@QAE@XZ
 0x100078c0,synthetic,??1?$vector@PAV?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@V?$allocator@PAV?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@@std@@@std@@QAE@XZ
 0x100078f0,synthetic,??3?$Creatable@VInstance@RBX@@@RBX@@CAXPAX@Z
 0x100080a0,synthetic,??0?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@HH_N@Z$03@Reflection@RBX@@QAE@P8ThumbnailGenerator@@AE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V45@HH_N@ZPBD3333W4Security@FunctionDescriptor@12@@Z
@@ -271,6 +272,8 @@ address,type,symbol
 0x100c78f0,synthetic,??_EGuiItem@RBX@@UAEPAXI@Z
 0x100c7b80,synthetic,??1?$DescribedCreatable@VStarterPackService@RBX@@VHopper@2@$1?sStarterPackService@2@3QBDB@RBX@@UAE@XZ
 0x100c7e00,synthetic,?getClassName@?$FactoryProduct@VStarterPackService@RBX@@VHopper@2@$1?sStarterPackService@2@3QBDB@RBX@@UBEABVName@2@XZ
+0x100c7e20,synthetic,?getClassName@?$FactoryProduct@VLegacyHopperService@RBX@@VHopper@2@$1?sLegacyHopperService@2@3QBDB@RBX@@UBEABVName@2@XZ
+0x100c8000,synthetic,?getClassName@?$FactoryProduct@VHopperBin@RBX@@VBackpackItem@2@$1?sHopperBin@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100c8810,synthetic,??_EGuiItem@RBX@@WBE@AEPAXI@Z
 0x100c8820,synthetic,??_EGuiItem@RBX@@WCE@AEPAXI@Z
 0x100c9600,synthetic,??_G?$FactoryProduct@VStarterPackService@RBX@@VHopper@2@$1?sStarterPackService@2@3QBDB@RBX@@MAEPAXI@Z
@@ -287,7 +290,9 @@ address,type,symbol
 0x100d15e0,synthetic,??_EGuiItem@RBX@@WDM@AEPAXI@Z
 0x100d16e0,synthetic,??_EGuiItem@RBX@@WBA@AEPAXI@Z
 0x100d16f0,synthetic,??_EGuiItem@RBX@@WIE@AEPAXI@Z
+0x100d60e0,synthetic,??1?$DescribedCreatable@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@UAE@XZ
 0x100d6370,synthetic,?getClassName@?$FactoryProduct@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@UBEABVName@2@XZ
+0x100d7150,synthetic,??_G?$FactoryProduct@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@MAEPAXI@Z
 0x100d7290,stub,??$create@VPlayers@Network@RBX@@@ServiceProvider@RBX@@SAPAVPlayers@Network@1@PBVInstance@1@@Z
 0x100d7ab0,synthetic,??0?$NonFactoryProduct@VInstance@RBX@@$1?sJointInstance@2@3QBDB@RBX@@QAE@XZ
 0x100d8010,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sJointInstance@2@3QBDB@RBX@@UBEABVName@2@XZ

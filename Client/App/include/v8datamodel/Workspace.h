@@ -15,6 +15,7 @@
 namespace RBX {
 
 class IDataState;
+class MouseCommand;
 class World;
 
 extern char sWorkspace[];
@@ -82,12 +83,18 @@ public:
 
 	bool getInMouselookMode() { return inMouselookMode; }
 
+	void setMouseCommand(MouseCommand* command);
 	void setDefaultMouseCommand();
+
+	void raiseDrawChanged() const { Notifier<Workspace, DrawChanged>::raise(DrawChanged()); }
 
 private:
 	undefined m_unk0x310[0x35c - 0x310]; // 0x310
 	bool inMouselookMode;                // 0x35c
-	undefined m_unk0x35d[0x374 - 0x35d]; // 0x35d
+	undefined m_unk0x35d[0x370 - 0x35d]; // 0x35d
+
+public:
+	int imageServerViewHack; // 0x370
 };
 
 DECOMP_SIZE_ASSERT(Workspace, 0x394)

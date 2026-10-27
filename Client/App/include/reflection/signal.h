@@ -533,6 +533,8 @@ public:
 	// RBX::Reflection::SignalDesc<RBX::RunService,void __cdecl(float,float)>::SignalDesc<RBX::RunService,void __cdecl(float,float)>
 	// TEMPLATE: WEBSERVICE 0x10056690
 	// RBX::Reflection::SignalDesc<RBX::RunService,void __cdecl(float)>::SignalDesc<RBX::RunService,void __cdecl(float)>
+	// TEMPLATE: WEBSERVICE 0x100c92c0
+	// RBX::Reflection::SignalDesc<RBX::HopperBin,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::HopperBin,void __cdecl(boost::shared_ptr<RBX::Instance>)>
 	// SYNTHETIC: WEBSERVICE 0x100c9390
 	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(void)>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1009e9f0

@@ -5730,7 +5730,7 @@ address,type,symbol
 0x102f694c,global,??_B?3??resize@?$Array@PAVPrimitive@RBX@@@G3D@@QAEXH_N@Z@53
 0x102f6950,global,type___RBX::Reflection::RefType::singleton<RBX::Camera *>
 0x102f6960,global,??_B?1???$singleton@PAVCamera@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
-0x102f6964,global,?minSize@?3??resize@?$Array@V?$shared_ptr@VPartInstance@RBX@@@boost@@@G3D@@QAEXH_N@Z@4HB
+0x102f6964,global,minSize___G3D::Array<boost::shared_ptr<RBX::PartInstance> >::resize
 0x102f6968,global,??_B?3??resize@?$Array@V?$shared_ptr@VPartInstance@RBX@@@boost@@@G3D@@QAEXH_N@Z@53
 0x102f696c,global,flag___RBX::Name::declare<&RBX::sControllerService>
 0x102f6970,global,flag___RBX::Name::declare<&RBX::sCamera>
@@ -6164,9 +6164,9 @@ address,type,symbol
 0x102f9e68,global,flag___RBX::Name::declare<&RBX::sGlobalSettings>
 0x102f9e6c,global,sing___RBX::GlobalSettings::singleton
 0x102f9e7c,global,?mutex@GlobalSettings@RBX@@2Vrecursive_mutex@boost@@A
-0x102f9e88,global,?obj@?1??instance@?$singleton_default@Upool_type@?$singleton_pool@VLuaAllocator@@$0CA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@boost@@@pool@details@boost@@SAAAUpool_type@?$singleton_pool@VLuaAllocator@@$0CA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@5@XZ@4U675@A
+0x102f9e88,global,"obj___boost::details::pool::singleton_default<boost::singleton_pool<LuaAllocator,32,boost::default_user_allocator_new_delete,boost::details::pool::win32_mutex,32>::pool_type>::instance"
 0x102f9eb4,global,??_B?1??instance@?$singleton_default@Upool_type@?$singleton_pool@VLuaAllocator@@$0CA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@boost@@@pool@details@boost@@SAAAUpool_type@?$singleton_pool@VLuaAllocator@@$0CA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@4@XZ@51
-0x102f9eb8,global,?obj@?1??instance@?$singleton_default@Upool_type@?$singleton_pool@VLuaAllocator@@$0BA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@boost@@@pool@details@boost@@SAAAUpool_type@?$singleton_pool@VLuaAllocator@@$0BA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@5@XZ@4U675@A
+0x102f9eb8,global,"obj___boost::details::pool::singleton_default<boost::singleton_pool<LuaAllocator,16,boost::default_user_allocator_new_delete,boost::details::pool::win32_mutex,32>::pool_type>::instance"
 0x102f9ee4,global,??_B?1??instance@?$singleton_default@Upool_type@?$singleton_pool@VLuaAllocator@@$0BA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@boost@@@pool@details@boost@@SAAAUpool_type@?$singleton_pool@VLuaAllocator@@$0BA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@4@XZ@51
 0x102f9ee8,global,?create_object@?$singleton_default@Upool_type@?$singleton_pool@VLuaAllocator@@$0CA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@boost@@@pool@details@boost@@0Uobject_creator@1234@A
 0x102f9ee9,global,?create_object@?$singleton_default@Upool_type@?$singleton_pool@VLuaAllocator@@$0BA@Udefault_user_allocator_new_delete@boost@@Vwin32_mutex@pool@details@3@$0CA@@boost@@@pool@details@boost@@0Uobject_creator@1234@A
@@ -6897,7 +6897,7 @@ address,type,symbol
 0x10301820,global,sing___RBX::ContentProvider::singleton
 0x10301874,global,??_B?1??rootDescriptor@ClassDescriptor@Reflection@RBX@@SAAAV123@XZ@51
 0x10301900,global,??_B?1??classDescriptor@?$Described@VThumbnailGenerator@@$1?sThumbnailGenerator@@3QBDBV?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
-0x10301908,global,?foo@?1??classDescriptor@?$Described@VThumbnailGenerator@@$1?sThumbnailGenerator@@3QBDBV?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@@Reflection@RBX@@SAAAVClassDescriptor@34@XZ@4V534@A
+0x10301908,global,"foo___RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor"
 0x10301908,global,"foo___RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor"
 0x10301990,global,??_B?1??classDescriptor@?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0x10301998,global,"foo___RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor"
@@ -7095,3 +7095,52 @@ address,type,symbol
 0x1023cdec,global,??_7LocalBackpackItem@RBX@@6BDebugable@1@@
 0x1023cdf4,global,??_7LocalBackpackItem@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x1023cd9c,global,??_7LocalBackpackItem@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x1023af00,global,??_7LegacyHopperService@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x1023af30,global,??_7LegacyHopperService@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x1023af50,global,??_7LegacyHopperService@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x1023af10,global,??_7LegacyHopperService@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x1023af60,global,??_7LegacyHopperService@RBX@@6BDebugable@1@@
+0x1023af70,global,??_7LegacyHopperService@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x1023af40,global,??_7LegacyHopperService@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x1023aef8,global,??_7LegacyHopperService@RBX@@6B@
+0x1023af68,global,??_7LegacyHopperService@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x1023af7c,global,??_7LegacyHopperService@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1023af20,global,??_7LegacyHopperService@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x1023b884,global,??_7HopperBin@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1023b854,global,??_7HopperBin@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x1023b844,global,??_7HopperBin@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x1023b7fc,global,??_7HopperBin@RBX@@6B@
+0x1023b824,global,??_7HopperBin@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x1023b864,global,??_7HopperBin@RBX@@6BDebugable@1@@
+0x1023b814,global,??_7HopperBin@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x1023b86c,global,??_7HopperBin@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x1023b834,global,??_7HopperBin@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x1023b804,global,??_7HopperBin@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x1023b874,global,??_7HopperBin@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x1023b514,global,??_7BackpackItem@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x1023b54c,global,??_7BackpackItem@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x1023b4dc,global,??_7BackpackItem@RBX@@6B@
+0x1023b4f4,global,??_7BackpackItem@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x1023b4e4,global,??_7BackpackItem@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x1023b524,global,??_7BackpackItem@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x1023b544,global,??_7BackpackItem@RBX@@6BDebugable@1@@
+0x1023b504,global,??_7BackpackItem@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x1023b534,global,??_7BackpackItem@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x1023b554,global,??_7BackpackItem@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x1023b564,global,??_7BackpackItem@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1023b60c,global,??_7StarterPackService@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x1023b66c,global,??_7StarterPackService@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x1023b5f4,global,??_7StarterPackService@RBX@@6B@
+0x1023b5fc,global,??_7StarterPackService@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x1023b63c,global,??_7StarterPackService@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x1023b65c,global,??_7StarterPackService@RBX@@6BDebugable@1@@
+0x1023b62c,global,??_7StarterPackService@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x1023b64c,global,??_7StarterPackService@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x1023b67c,global,??_7StarterPackService@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x1023b61c,global,??_7StarterPackService@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x1023b664,global,??_7StarterPackService@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x1023b0fc,global,??_7?$EnumDesc@W4BinType@HopperBin@RBX@@@Reflection@RBX@@6B@
+0x1023b4bc,global,??_7?$SignalDesc@VHopperBin@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@6B@
+0x1023b4cc,global,??_7?$SignalDesc@VHopperBin@RBX@@$$A6AXXZ@Reflection@RBX@@6B@
+0x102d882c,global,??_R0?AW4BinType@HopperBin@RBX@@@8
+0x102fa1f8,global,s___RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton

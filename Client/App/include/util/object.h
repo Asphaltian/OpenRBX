@@ -110,6 +110,12 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::ControllerService>
 	// TEMPLATE: WEBSERVICE 0x1006bed0
 	// RBX::Creatable<RBX::Instance>::create<RBX::StarterPackService>
+	// TEMPLATE: WEBSERVICE 0x1006db70
+	// RBX::Creatable<RBX::Instance>::create<RBX::HopperBin>
+	// TEMPLATE: WEBSERVICE 0x1006de90
+	// RBX::Creatable<RBX::Instance>::create<RBX::LegacyHopperService>
+	// TEMPLATE: WEBSERVICE 0x10076300
+	// RBX::Creatable<RBX::Instance>::create<RBX::LocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x10076620
 	// RBX::Creatable<RBX::Instance>::create<RBX::Snap>
 	// TEMPLATE: WEBSERVICE 0x10076890
@@ -406,8 +412,12 @@ public:
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1006d980
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1006dbf0
+	// RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1006dca0
 	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1006df10
+	// RBX::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10074490
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100766a0
@@ -566,8 +576,16 @@ public:
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::getClassName
 	// TEMPLATE: WEBSERVICE 0x100c7250
 	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::~FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
+	// TEMPLATE: WEBSERVICE 0x100c7330
+	// RBX::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>::~FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>
 	// TEMPLATE: WEBSERVICE 0x100c7910
 	// RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
+	// TEMPLATE: WEBSERVICE 0x100c7980
+	// RBX::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>
+	// TEMPLATE: WEBSERVICE 0x100c7f60
+	// RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::~FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
+	// TEMPLATE: WEBSERVICE 0x100c96f0
+	// RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
 	// TEMPLATE: WEBSERVICE 0x100d5c10
 	// RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::~FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100d5c90

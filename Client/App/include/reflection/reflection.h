@@ -65,6 +65,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Hat,&RBX::sHat,RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088de0
 // RBX::Reflection::Described<RBX::StarterPackService,&RBX::sStarterPackService,RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x10088e50
+// RBX::Reflection::Described<RBX::LegacyHopperService,&RBX::sLegacyHopperService,RBX::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088ec0
 // RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088f30
@@ -147,6 +149,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100c3a60
 // RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x100c8700
+// RBX::Reflection::Described<RBX::HopperBin,&RBX::sHopperBin,RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100cb390
 // RBX::Reflection::Described<RBX::Mouse,&RBX::sMouse,RBX::NonFactoryProduct<RBX::Instance,&RBX::sMouse> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100d8960
@@ -293,6 +297,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::ShirtGraphic,&RBX::sShirtGraphic,RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222700
 // `RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10222710
+// `RBX::Reflection::Described<RBX::LegacyHopperService,&RBX::sLegacyHopperService,RBX::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222720
 // `RBX::Reflection::Described<RBX::StarterPackService,&RBX::sStarterPackService,RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222730
@@ -321,6 +327,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223b30
 // `RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10223bd0
+// `RBX::Reflection::Described<RBX::HopperBin,&RBX::sHopperBin,RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223d10
 // `RBX::Reflection::Described<RBX::Mouse,&RBX::sMouse,RBX::NonFactoryProduct<RBX::Instance,&RBX::sMouse> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223e70
@@ -543,6 +551,8 @@ public:
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100b4c90
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x100c8830
+	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType><enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>
 	// TEMPLATE: WEBSERVICE 0x100e61d0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100e6210

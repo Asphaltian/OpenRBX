@@ -55,6 +55,12 @@ Camera* Workspace::getCamera() const
 	return NULL;
 }
 
+// STUB: WEBSERVICE 0x1006c9e0
+void Workspace::setMouseCommand(MouseCommand* command)
+{
+	STUB(0x1006c9e0);
+}
+
 // STUB: WEBSERVICE 0x1006ccb0
 void Workspace::runScript(Script* script, ScriptContext* context)
 {
