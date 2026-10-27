@@ -674,6 +674,8 @@ template <class T, class Base, const char* sName>
 	// RBX::DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>::DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>
 	// FUNCTION: WEBSERVICE 0x100e8050
 	// RBX::DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::~DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
+	// TEMPLATE: WEBSERVICE 0x100e8860
+	// RBX::DescribedCreatable<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>::DescribedCreatable<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>
 	// FUNCTION: WEBSERVICE 0x100e89f0
 	// RBX::DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
 	// FUNCTION: WEBSERVICE 0x100e9460
@@ -814,6 +816,8 @@ protected:
 // RBX::Instance::findFirstChildOfType<RBX::Shirt>
 // TEMPLATE: WEBSERVICE 0x100e08a0
 // RBX::Instance::findFirstChildOfType<RBX::Skin>
+// TEMPLATE: WEBSERVICE 0x100e80a0
+// RBX::Instance::findFirstChildOfType<RBX::Flag>
 // TEMPLATE: WEBSERVICE 0x1018cbc0
 // RBX::Instance::findFirstChildOfType<RBX::Backpack>
 // clang-format on

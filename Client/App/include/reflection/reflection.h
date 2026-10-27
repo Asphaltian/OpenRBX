@@ -139,6 +139,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Motor,&RBX::sMotor,RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008e1e0
 // RBX::Reflection::Described<RBX::Flag,&RBX::sFlag,RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x1008e250
+// RBX::Reflection::Described<RBX::FlagStand,&RBX::sFlagStand,RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand> >::classDescriptor
 // FUNCTION: WEBSERVICE 0x1008e390
 // RBX::Reflection::Described<RBX::Seat,&RBX::sSeat,RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10094d80
@@ -269,6 +271,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::ForceField,&RBX::sForceField,RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222600
 // `RBX::Reflection::Described<RBX::FlagStandService,&RBX::sFlagStandService,RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10222610
+// `RBX::Reflection::Described<RBX::FlagStand,&RBX::sFlagStand,RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222620
 // `RBX::Reflection::Described<RBX::Flag,&RBX::sFlag,RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222630

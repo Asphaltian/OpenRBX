@@ -162,6 +162,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hole>
 	// TEMPLATE: WEBSERVICE 0x1008aa40
 	// RBX::Creatable<RBX::Instance>::create<RBX::VelocityMotor>
+	// TEMPLATE: WEBSERVICE 0x1008acb0
+	// RBX::Creatable<RBX::Instance>::create<RBX::FlagStand>
 	// TEMPLATE: WEBSERVICE 0x1008af20
 	// RBX::Creatable<RBX::Instance>::create<RBX::FlagStandService>
 	// TEMPLATE: WEBSERVICE 0x1008b190
@@ -484,6 +486,8 @@ public:
 	// RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole>::Creator::create
 	// FUNCTION: WEBSERVICE 0x1008aac0
 	// RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1008ad30
+	// RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1008afa0
 	// RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1008b210
@@ -750,12 +754,16 @@ public:
 	// RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100e7ab0
 	// RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100e7ae0
+	// RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>::~FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>
 	// FUNCTION: WEBSERVICE 0x100e7be0
 	// RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::~FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
 	// FUNCTION: WEBSERVICE 0x100e7c30
 	// RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
 	// FUNCTION: WEBSERVICE 0x100e7d00
 	// RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100e7e60
+	// RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>
 	// FUNCTION: WEBSERVICE 0x100e92a0
 	// RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>::~FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>
 	// FUNCTION: WEBSERVICE 0x100e92f0

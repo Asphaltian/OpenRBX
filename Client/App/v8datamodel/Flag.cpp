@@ -22,14 +22,20 @@ static Reflection::PropDescriptor<Flag, BrickColor> prop_Color(
 	&RBX::Flag::setTeamColor
 );
 
-// STUB: WEBSERVICE 0x100cd0b0
-bool Flag::canBePickedUpByPlayer(Network::Player* player)
+// FUNCTION: WEBSERVICE 0x100cd0a0
+BrickColor Flag::getTeamColor() const
 {
-	if (player->getNeutral()) {
+	return teamColor;
+}
+
+// FUNCTION: WEBSERVICE 0x100cd0b0
+bool Flag::canBePickedUpByPlayer(Network::Player* p)
+{
+	if (p->getNeutral()) {
 		return false;
 	}
 
-	return player->getTeamColor() != teamColor;
+	return p->getTeamColor() == getTeamColor() ? false : true;
 }
 
 // FUNCTION: WEBSERVICE 0x100cd520
@@ -75,23 +81,33 @@ void Flag::onServiceProvider(const ServiceProvider* oldProvider, const ServicePr
 	}
 }
 
-// STUB: WEBSERVICE 0x100ceae0
+// FUNCTION: WEBSERVICE 0x100ceae0
 void Flag::onEvent_flagTouched(boost::shared_ptr<Instance> other)
 {
 	Instance* character = other->getParent();
-
-	Network::Player* player;
-	if (!Humanoid::modelIsCharacter(character) || !(player = Network::Players::getPlayerFromCharacter(character))) {
+	if (!Humanoid::modelIsCharacter(character)) {
 		return;
 	}
 
-	if (!player->getNeutral() && teamColor == player->getTeamColor()) {
-		FlagStandService* flagStandService = ServiceProvider::create<FlagStandService>(this);
-		if (!flagStandService->FindStandWithFlag(this)) {
-			if (FlagStand* stand = flagStandService->FindClosestEmptyStandForFlag(this)) {
-				stand->AffixFlag(this);
-			}
-		}
+	Network::Player* player = Network::Players::getPlayerFromCharacter(character);
+	if (!player) {
+		return;
+	}
+	if (player->getNeutral()) {
+		return;
+	}
+	if (player->getTeamColor() != getTeamColor()) {
+		return;
+	}
+
+	FlagStandService* flagStandService = ServiceProvider::create<FlagStandService>(this);
+	if (flagStandService->FindStandWithFlag(this)) {
+		return;
+	}
+
+	FlagStand* stand = flagStandService->FindClosestEmptyStandForFlag(this);
+	if (stand) {
+		stand->AffixFlag(this);
 	}
 }
 

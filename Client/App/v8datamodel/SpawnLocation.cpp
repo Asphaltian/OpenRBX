@@ -38,7 +38,7 @@ BrickColor SpawnLocation::getTeamColor() const
 	return teamColor;
 }
 
-// STUB: WEBSERVICE 0x100fdc00
+// FUNCTION: WEBSERVICE 0x100fdc00
 void SpawnLocation::onEvent_spawnerTouched(boost::shared_ptr<Instance> other)
 {
 	if (!allowTeamChangeOnTouch) {
@@ -51,7 +51,7 @@ void SpawnLocation::onEvent_spawnerTouched(boost::shared_ptr<Instance> other)
 		if (humanoid) {
 			Network::Player* player = Network::Players::getPlayerFromCharacter(character);
 			if (player) {
-				player->setTeamColor(teamColor);
+				player->setTeamColor(getTeamColor());
 				player->setNeutral(neutral);
 			}
 		}

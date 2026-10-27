@@ -42,13 +42,12 @@ protected:
 	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
 	virtual bool canUnequip() { return false; }
 
-	virtual bool canBePickedUpByPlayer(Network::Player* player);
+	virtual bool canBePickedUpByPlayer(Network::Player* p);
 
 public:
 	BrickColor teamColor; // 0x254
 
-	// FUNCTION: WEBSERVICE 0x100cd0a0
-	BrickColor getTeamColor() const { return teamColor; }
+	BrickColor getTeamColor() const;
 
 	void setTeamColor(BrickColor value);
 

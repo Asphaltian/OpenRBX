@@ -554,6 +554,8 @@ public:
 	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::BodyColors>
 	// TEMPLATE: WEBSERVICE 0x100e49e0
 	// RBX::Reflection::PropDescriptor<RBX::VelocityMotor,RBX::Hole *>::getset<RBX::Hole * (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(RBX::Hole *)>
+	// TEMPLATE: WEBSERVICE 0x100e8120
+	// RBX::Reflection::PropDescriptor<RBX::FlagStand,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::FlagStand::*)(void)const ,void (__thiscall RBX::FlagStand::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100ebfe0
 	// RBX::Reflection::PropDescriptor<RBX::Rocket,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Rocket::*)(void)const ,void (__thiscall RBX::Rocket::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100ec280
@@ -838,6 +840,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,int>::PropDescriptor<RBX::DebugSettings,int><int (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x100b44a0
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > ><std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::DebugSettings::*)(void)const ,int>
+	// TEMPLATE: WEBSERVICE 0x100e86d0
+	// RBX::Reflection::PropDescriptor<RBX::FlagStand,RBX::BrickColor>::PropDescriptor<RBX::FlagStand,RBX::BrickColor><RBX::BrickColor (__thiscall RBX::FlagStand::*)(void)const ,void (__thiscall RBX::FlagStand::*)(RBX::BrickColor)>
 	// FUNCTION: WEBSERVICE 0x100ffd30
 	// RBX::Reflection::PropDescriptor<RBX::Decal,float>::PropDescriptor<RBX::Decal,float><float (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100ffdd0
