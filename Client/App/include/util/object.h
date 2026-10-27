@@ -222,6 +222,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedMemItem,unsigned int const *>
 	// TEMPLATE: WEBSERVICE 0x100b7470
 	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
+	// TEMPLATE: WEBSERVICE 0x100bfd10
+	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x100dda40
 	// RBX::Creatable<RBX::Instance>::create<RBX::Snap,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100ddac0

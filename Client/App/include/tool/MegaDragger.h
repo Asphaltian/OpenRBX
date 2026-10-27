@@ -39,6 +39,10 @@ public:
 	void continueDragging();
 	void finishDragging();
 	bool mousePartAlive();
+
+	// FUNCTION: WEBSERVICE 0x10126410
+	boost::weak_ptr<PartInstance> getMousePart() { return mousePart; }
+
 	void alignAndCleanParts();
 	G3D::Vector3 hitObjectOrPlane(const UIEvent& uiEvent);
 	G3D::Vector3 safeMoveYDrop(const G3D::Vector3& tryDrag);

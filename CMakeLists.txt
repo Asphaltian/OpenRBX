@@ -219,12 +219,14 @@ set(OPENRBX_APP_SOURCES
   Client/App/script/ScriptEvent.cpp
   Client/App/script/ThreadRef.cpp
   Client/App/script/ScriptContext.cpp
+  Client/App/tool/DragTool.cpp
   Client/App/tool/DragUtilities.cpp
   Client/App/tool/Dragger.cpp
   Client/App/tool/GroupDragTool.cpp
   Client/App/tool/MegaDragger.cpp
   Client/App/tool/NullTool.cpp
   Client/App/tool/PartDragTool.cpp
+  Client/App/tool/RunDragger.cpp
   Client/App/tool/ToolsArrow.cpp
   Client/App/util/RunStateOwner.cpp
   Client/App/util/Sound.cpp

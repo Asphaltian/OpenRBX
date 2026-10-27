@@ -83,6 +83,7 @@ public:
 	void toggleSelection(Instance* instance);
 	void removeFromSelection(const Instance* instance);
 
+	// FUNCTION: WEBSERVICE 0x100bfd90
 	bool isSelected(const Instance* instance) const
 	{
 		return std::find(selection->begin(), selection->end(), shared_from(instance)) != selection->end();
@@ -184,6 +185,8 @@ public:
 		}
 	}
 
+	const std::vector<T*>& items() const { return filteredSelection; }
+
 	typename std::vector<T*>::const_iterator begin() const { return filteredSelection.begin(); }
 	typename std::vector<T*>::const_iterator end() const { return filteredSelection.end(); }
 
@@ -235,6 +238,16 @@ protected:
 	// RBX::FilteredSelection<RBX::PartInstance>::onSelectionChanged
 	// TEMPLATE: WEBSERVICE 0x100a4a80
 	// RBX::FilteredSelection<RBX::PartInstance>::onAncestorChanged
+	// TEMPLATE: WEBSERVICE 0x100bf860
+	// RBX::FilteredSelection<RBX::Instance>::FilteredSelection<RBX::Instance>
+	// TEMPLATE: WEBSERVICE 0x100bfa30
+	// RBX::FilteredSelection<RBX::Instance>::~FilteredSelection<RBX::Instance>
+	// SYNTHETIC: WEBSERVICE 0x100bfb40
+	// RBX::FilteredSelection<RBX::Instance>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x100c01e0
+	// RBX::FilteredSelection<RBX::Instance>::onSelectionChanged
+	// TEMPLATE: WEBSERVICE 0x100c0630
+	// RBX::FilteredSelection<RBX::Instance>::onAncestorChanged
 	// clang-format on
 
 private:

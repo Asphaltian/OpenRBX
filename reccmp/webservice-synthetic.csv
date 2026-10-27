@@ -265,6 +265,8 @@ address,type,symbol
 0x100be2b0,synthetic,??$?0P8Team@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VTeam@RBX@@H@Reflection@RBX@@QAE@PBD0P8Team@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100be350,synthetic,??$?0P8Team@RBX@@BE?AVBrickColor@1@XZP801@AEXV21@@Z@?$PropDescriptor@VTeam@RBX@@VBrickColor@2@@Reflection@RBX@@QAE@PBD0P8Team@2@BE?AVBrickColor@2@XZP832@AEXV42@@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100be3f0,synthetic,??$?0P8Team@RBX@@BE_NXZP801@AEX_N@Z@?$PropDescriptor@VTeam@RBX@@_N@Reflection@RBX@@QAE@PBD0P8Team@2@BE_NXZP832@AEX_N@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100c0430,synthetic,??$create@V?$FilteredSelection@VInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VInstance@RBX@@@1@XZ
+0x100c0520,synthetic,??$create@V?$FilteredSelection@VInstance@RBX@@@RBX@@@ServiceProvider@RBX@@SAPAV?$FilteredSelection@VInstance@RBX@@@1@PBVInstance@1@@Z
 0x100c0d40,synthetic,??1?$Described@VRootInstance@RBX@@$1?sRootInstance@2@3PADAVModelInstance@2@@Reflection@RBX@@UAE@XZ
 0x100c19f0,synthetic,??_GRootInstance@RBX@@MAEPAXI@Z
 0x100c1a10,synthetic,??$create@VTeams@RBX@@@ServiceProvider@RBX@@QBEPAVTeams@1@XZ
@@ -509,6 +511,8 @@ address,type,symbol
 0x10121b90,synthetic,?setStringValue@?$EnumPropDescriptor@VFaceInstance@RBX@@W4NormalId@2@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 0x10122140,stub,?onComputeForce@Balancing@RBX@@MAEXM@Z
 0x101231d0,synthetic,??1?$Named@VFlying@RBX@@$1?sJumping@2@3QBDB@RBX@@UAE@XZ
+0x10126350,synthetic,??1?$Named@VMouseCommand@RBX@@$1?sPartDragTool@2@3PADA@RBX@@UAE@XZ
+0x1012aa90,synthetic,??_9Contact@RBX@@$BBM@AE
 0x1012ca90,synthetic,??_G?$FactoryProduct@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@MAEPAXI@Z
 0x1012cbe0,synthetic,?setValue@?$GetSetImpl@P8Message@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP812@AEXABV34@@Z@?$PropDescriptor@VMessage@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 0x1012cef0,synthetic,?getClassName@?$FactoryProduct@VSpecialShape@RBX@@VInstance@2@$1?sSpecialShape@2@3PADA@RBX@@UBEABVName@2@XZ

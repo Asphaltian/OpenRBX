@@ -564,6 +564,8 @@ public:
 	// RBX::Named<RBX::Balancing,&RBX::sGettingUp>::getName
 	// TEMPLATE: WEBSERVICE 0x10126330
 	// RBX::Named<RBX::MouseCommand,&RBX::sGroupDragTool>::getName
+	// TEMPLATE: WEBSERVICE 0x10126a20
+	// RBX::Named<RBX::MouseCommand,&RBX::sPartDragTool>::getName
 	// TEMPLATE: WEBSERVICE 0x1012a510
 	// RBX::Named<RBX::Balancing,&RBX::sFlying>::getName
 	// TEMPLATE: WEBSERVICE 0x1012a650

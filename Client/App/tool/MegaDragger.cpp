@@ -3,6 +3,7 @@
 #include "tool/DragUtilities.h"
 #include "tool/Dragger.h"
 #include "util/Math.h"
+#include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/RootInstance.h"
 #include "v8world/SpatialHash.h"
@@ -34,11 +35,21 @@ void MegaDragger::startDragging()
 	joined = false;
 }
 
-// STUB: WEBSERVICE 0x101162f0
+// FUNCTION: WEBSERVICE 0x101162f0
 G3D::Vector3 MegaDragger::hitObjectOrPlane(const UIEvent& uiEvent)
 {
-	STUB(0x101162f0);
-	return G3D::Vector3::zero();
+	G3D::Vector3 hitPoint;
+	G3D::Array<Primitive*> primitives;
+	DragUtilities::partsToPrimitives(dragParts, primitives);
+
+	DragUtilities::hitObjectOrPlane(
+		*contactManager,
+		MouseCommand::getUnitMouseRay(uiEvent, rootInstance),
+		&primitives,
+		hitPoint
+	);
+
+	return hitPoint;
 }
 
 // FUNCTION: WEBSERVICE 0x101163b0

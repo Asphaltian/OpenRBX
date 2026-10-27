@@ -143,6 +143,12 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::PartInstance> >
 // TEMPLATE: WEBSERVICE 0x100a41f0
 // RBX::ServiceProvider::find<RBX::Teams>
+// TEMPLATE: WEBSERVICE 0x100bf1d0
+// RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::Instance> >
+// TEMPLATE: WEBSERVICE 0x100bf300
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::FilteredSelection<RBX::Instance> >
+// TEMPLATE: WEBSERVICE 0x100c0280
+// RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::Instance> >
 // TEMPLATE: WEBSERVICE 0x100cd240
 // RBX::ServiceProvider::doGetClassIndex<RBX::TimerService>
 // TEMPLATE: WEBSERVICE 0x100cd2a0
@@ -362,6 +368,8 @@ public:
 	// RBX::ServiceClient<RBX::Selection>::createService
 	// TEMPLATE: WEBSERVICE 0x100a49c0
 	// RBX::ServiceClient<RBX::FilteredSelection<RBX::PartInstance> >::createService
+	// TEMPLATE: WEBSERVICE 0x100c0570
+	// RBX::ServiceClient<RBX::FilteredSelection<RBX::Instance> >::createService
 	// clang-format on
 	operator T*() { return createService(true); }
 	T* operator->() { return createService(true); }

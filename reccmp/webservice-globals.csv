@@ -5645,6 +5645,7 @@ address,type,symbol
 0x102f6144,global,type___RBX::Reflection::RefType::singleton<RBX::PartInstance *>
 0x102f6154,global,??_B?1???$singleton@PAVPartInstance@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102f6990,global,flag___RBX::ServiceProvider::getClassIndex<RBX::StarterPackService>
+0x102fa014,global,flag___RBX::ServiceProvider::getClassIndex<RBX::FilteredSelection<RBX::Instance> >
 0x102fae7c,global,??_B?1???$singleton@PAVHole@RBX@@@RefType@Reflection@RBX@@SAABVType@12@XZ@51
 0x102f6158,global,flag___RBX::Name::declare<&RBX::sPart>
 0x102f615c,global,flag___RBX::Name::declare<&RBX::sHumanoid>
@@ -7310,3 +7311,14 @@ address,type,symbol
 0x10239edc,global,??_7BoxSelectCommand@RBX@@6BINamed@1@@
 0x102484c4,global,??_7GroupDragTool@RBX@@6BIRenderable@1@@
 0x102484dc,global,??_7GroupDragTool@RBX@@6BINamed@1@@
+0x1024853c,global,??_7PartDragTool@RBX@@6BIRenderable@1@@
+0x10248554,global,??_7PartDragTool@RBX@@6BINamed@1@@
+0x10239e64,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x10239e7c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x10239e1c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x10239e3c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x10239e4c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x10239e0c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x10239e5c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6BDebugable@1@@
+0x10239dfc,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10239e2c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@

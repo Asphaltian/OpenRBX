@@ -1,6 +1,7 @@
 #include "tool/ToolsArrow.h"
 
 #include "rbxgraphics/Adorn.h"
+#include "tool/DragTool.h"
 #include "util/ISelectable3d.h"
 #include "util/Name.h"
 #include "util/UIEvent.h"
@@ -75,7 +76,39 @@ BoxSelectCommand::BoxSelectCommand(Workspace* workspace)
 // STUB: WEBSERVICE 0x100c0790
 MouseCommand* ArrowToolBase::onMouseDown(const UIEvent& uiEvent)
 {
-	STUB(0x100c0790);
+	G3D::Vector3 hitWorld;
+	PartInstance* hitPart = getUnlockedPart(uiEvent, hitWorld);
+
+	if (hitPart) {
+		Instance* topSelectable = getTopSelectable3d(hitPart);
+
+		ServiceClient<Selection> selection(workspace);
+
+		if (uiEvent.userInput->shiftKeyDown() || uiEvent.userInput->ctrlKeyDown()) {
+			if (selection->isSelected(topSelectable)) {
+				selection->removeFromSelection(topSelectable);
+			}
+			else {
+				selection->addToSelection(topSelectable);
+			}
+		}
+		else {
+			if (!selection->isSelected(topSelectable)) {
+				selection->setSelection(topSelectable);
+			}
+
+			if (uiEvent.eventType == UIEvent::MOUSE_LEFT_BUTTON_DOWN) {
+				ServiceClient<FilteredSelection<Instance> > instanceSelection(workspace);
+
+				return DragTool::onMouseDown(hitPart, hitWorld, instanceSelection->items(), uiEvent, workspace);
+			}
+		}
+	}
+	else {
+		MouseCommand* boxSelect = new BoxSelectCommand(workspace);
+		return boxSelect->onMouseDown(uiEvent);
+	}
+
 	return NULL;
 }
 
