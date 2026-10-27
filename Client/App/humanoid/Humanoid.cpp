@@ -5,6 +5,7 @@
 #include "reflection/property.h"
 #include "util/Color.h"
 #include "v8datamodel/Camera.h"
+#include "v8datamodel/JointInstance.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/Workspace.h"
@@ -101,6 +102,22 @@ bool Humanoid::hasWalkToPoint(G3D::Vector3& worldPosition) const
 	}
 
 	return false;
+}
+
+// FUNCTION: WEBSERVICE 0x100a0c50
+G3D::CoordinateFrame Humanoid::getRightArmGrip() const
+{
+	G3D::CoordinateFrame grip;
+	grip.lookAt(G3D::Vector3(0, -1, 0), G3D::Vector3(0, 0, -1));
+	grip.translation = G3D::Vector3(0, -1, 0);
+
+	return grip;
+}
+
+// FUNCTION: WEBSERVICE 0x100a0cb0
+PartInstance* Humanoid::findRightArm() const
+{
+	return static_cast<PartInstance*>(getParent() ? getParent()->findFirstChildByName("Right Arm") : NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x100a0d40
@@ -202,6 +219,13 @@ PartInstance* Humanoid::getRightArm() const
 	}
 
 	return rightArm.get();
+}
+
+// FUNCTION: WEBSERVICE 0x100a2610
+JointInstance* Humanoid::findRightShoulder() const
+{
+	PartInstance* torso = getTorso();
+	return static_cast<JointInstance*>(torso ? torso->findFirstChildByName("Right Shoulder") : NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x100a26a0
@@ -492,6 +516,12 @@ void Humanoid::setSit(bool value)
 		sit = value;
 		raisePropertyChanged(propSit);
 	}
+}
+
+// STUB: WEBSERVICE 0x100a5230
+void Humanoid::setTargetPoint(const G3D::Vector3& value)
+{
+	STUB(0x100a5230);
 }
 
 // STUB: WEBSERVICE 0x100a56c0

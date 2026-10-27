@@ -543,6 +543,8 @@ public:
 	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(float)>::SignalDesc<RBX::Humanoid,void __cdecl(float)>
 	// TEMPLATE: WEBSERVICE 0x100a3cf0
 	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(bool)>::SignalDesc<RBX::Humanoid,void __cdecl(bool)>
+	// TEMPLATE: WEBSERVICE 0x100cbe90
+	// RBX::Reflection::SignalDesc<RBX::Tool,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::Tool,void __cdecl(boost::shared_ptr<RBX::Instance>)>
 	// TEMPLATE: WEBSERVICE 0x100f2420
 	// RBX::Reflection::SignalDesc<RBX::ObjectValue,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::ObjectValue,void __cdecl(boost::shared_ptr<RBX::Instance>)>
 	// TEMPLATE: WEBSERVICE 0x100f2560

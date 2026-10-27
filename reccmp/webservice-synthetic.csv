@@ -278,6 +278,8 @@ address,type,symbol
 0x100c8820,synthetic,??_EGuiItem@RBX@@WCE@AEPAXI@Z
 0x100c9600,synthetic,??_G?$FactoryProduct@VStarterPackService@RBX@@VHopper@2@$1?sStarterPackService@2@3QBDB@RBX@@MAEPAXI@Z
 0x100c9de0,synthetic,??1?$DescribedNonCreatable@VItem@Stats@RBX@@VInstance@3@$1?sStatsItem@23@3PADA@RBX@@UAE@XZ
+0x100ca350,synthetic,?setValue@?$GetSetImpl@P8Tool@RBX@@BEABVCoordinateFrame@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VTool@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABVCoordinateFrame@G3D@@@Z
+0x100cae00,synthetic,?getClassName@?$FactoryProduct@VTool@RBX@@VBackpackItem@2@$1?sTool@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100cb580,synthetic,??$?0P8Tool@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VTool@RBX@@H@Reflection@RBX@@QAE@PBD0P8Tool@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
 0x100cd0a0,synthetic,?getTeamColor@Flag@RBX@@QBE?AVBrickColor@2@XZ
 0x100ce6d0,synthetic,??$?0P8Flag@RBX@@BE?AVBrickColor@1@XZP801@AEXV21@@Z@?$PropDescriptor@VFlag@RBX@@VBrickColor@2@@Reflection@RBX@@QAE@PBD0P8Flag@2@BE?AVBrickColor@2@XZP832@AEXV42@@ZW4Functionality@PropertyDescriptor@12@@Z

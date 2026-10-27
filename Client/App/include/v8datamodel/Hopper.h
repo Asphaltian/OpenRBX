@@ -100,8 +100,6 @@ public:
 
 	void setLegacyCommand(const std::string& text);
 	void setLegacyTextureName(const std::string& value);
-
-	virtual ~HopperBin() {}
 };
 
 DECOMP_SIZE_ASSERT(HopperBin, 0x170)

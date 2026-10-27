@@ -17,6 +17,7 @@
 
 namespace RBX {
 
+class JointInstance;
 class ModelInstance;
 class Body;
 class Controller;
@@ -131,6 +132,10 @@ public:
 	PartInstance* getRightLeg() const;
 	PartInstance* getLeftArm() const;
 	PartInstance* getRightArm() const;
+	G3D::CoordinateFrame getRightArmGrip() const;
+	PartInstance* findRightArm() const;
+	JointInstance* findRightShoulder() const;
+	void setTargetPoint(const G3D::Vector3& value);
 
 private:
 	bool hasWalkToPoint(G3D::Vector3& worldPosition) const;

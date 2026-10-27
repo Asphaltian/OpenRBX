@@ -148,7 +148,6 @@ private:
 	{
 	public:
 		ScriptImpersonator(lua_State* thread);
-		~ScriptImpersonator() {}
 	};
 
 public:

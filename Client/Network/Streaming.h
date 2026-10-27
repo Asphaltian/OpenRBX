@@ -171,8 +171,6 @@ public:
 	unsigned int numWaitingRefs() const { return waitItems.size(); }
 	void serializeRef(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream);
 	void deserializeRef(Reflection::Property& property, RakNet::BitStream& bitStream);
-
-	virtual ~IdSerializer() {}
 };
 
 } // namespace Network

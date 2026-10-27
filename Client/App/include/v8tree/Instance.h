@@ -592,6 +592,8 @@ template <class T, class Base, const char* sName>
 	// RBX::Instance::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100cbe00
 	// RBX::DescribedNonCreatable<RBX::Mouse,RBX::Instance,&RBX::sMouse>::DescribedNonCreatable<RBX::Mouse,RBX::Instance,&RBX::sMouse>
+	// TEMPLATE: WEBSERVICE 0x100ccc60
+	// RBX::DescribedCreatable<RBX::Tool,RBX::BackpackItem,&RBX::sTool>::DescribedCreatable<RBX::Tool,RBX::BackpackItem,&RBX::sTool>
 	// TEMPLATE: WEBSERVICE 0x100d7050
 	// RBX::DescribedCreatable<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::DescribedCreatable<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100d7170
@@ -800,6 +802,8 @@ protected:
 // RBX::Instance::findFirstChildOfType<RBX::Humanoid>
 // TEMPLATE: WEBSERVICE 0x100c79f0
 // RBX::Instance::findFirstChildOfType<RBX::BackpackItem>
+// TEMPLATE: WEBSERVICE 0x100ca6d0
+// RBX::Instance::findFirstChildOfType<RBX::Tool>
 // TEMPLATE: WEBSERVICE 0x100dbef0
 // RBX::Instance::findFirstChildOfType<RBX::Accoutrement>
 // TEMPLATE: WEBSERVICE 0x100e07a0

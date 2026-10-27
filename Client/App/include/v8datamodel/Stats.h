@@ -164,7 +164,6 @@ protected:
 	virtual XmlElement* write() { return NULL; }
 
 public:
-	virtual ~StatsService() {}
 };
 
 DECOMP_SIZE_ASSERT(StatsService, 0xf8)

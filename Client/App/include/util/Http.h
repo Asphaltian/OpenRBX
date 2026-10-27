@@ -26,8 +26,6 @@ public:
 	static bool isScript(const char* url);
 	static bool isRobloxSite(const char* url);
 	static bool isCached(const char* url);
-
-	~Http() {}
 };
 
 DECOMP_SIZE_ASSERT(Http, 0x38)
