@@ -109,6 +109,9 @@ address,type,symbol
 0x1005cec0,synthetic,??_G?$DescribedCreatable@VSelection@RBX@@VInstance@2@$1?sSelection@2@3QBDB@RBX@@UAEPAXI@Z
 0x1005d5c0,synthetic,?getClassName@?$FactoryProduct@VSelection@RBX@@VInstance@2@$1?sSelection@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x1005d7b0,synthetic,??_GSelection@RBX@@UAEPAXI@Z
+0x1005d860,synthetic,??0?$CopyOnWrite@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@RBX@@QAE@ABV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@Z
+0x1005e4b0,synthetic,??0?$BoundFuncDesc@VSelection@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZ$0A@@Reflection@RBX@@QAE@P8Selection@2@AE?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZPBDW4Security@FunctionDescriptor@12@@Z
+0x1005e580,synthetic,??0?$BoundFuncDesc@VSelection@RBX@@$$A6AXV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@Z$00@Reflection@RBX@@QAE@P8Selection@2@AEXV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@ZPBD2W4Security@FunctionDescriptor@12@@Z
 0x1005ed10,synthetic,?on_tostring@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHABVCoordinateFrame@G3D@@PAUlua_State@@@Z
 0x1005ef10,synthetic,?on_newindex@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHPAUlua_State@@@Z
 0x1005ef40,synthetic,?on_index@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHPAUlua_State@@@Z

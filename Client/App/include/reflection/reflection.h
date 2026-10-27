@@ -848,6 +848,8 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1005c300
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x1005e520
+	// RBX::Reflection::BoundFuncDesc<RBX::Selection,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10082940
 	// RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1009eac0
@@ -996,6 +998,8 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::~BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
 	// SYNTHETIC: WEBSERVICE 0x10198560
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x1005e620
+	// RBX::Reflection::BoundFuncDesc<RBX::Selection,void __cdecl(boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const >),1>::execute
 	// TEMPLATE: WEBSERVICE 0x100a3dc0
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>
 	// TEMPLATE: WEBSERVICE 0x100a3e70

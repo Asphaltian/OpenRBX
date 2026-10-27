@@ -34,8 +34,10 @@ DECOMP_SIZE_ASSERT(SelectionChanged, 0x10)
 // SIZE 0x4
 class __declspec(novtable) ISelectionBase
 {
-public:
-	virtual void VTable0x00(const SelectionChanged& event) = 0; // vtable+0x00
+private:
+	friend class Selection;
+
+	virtual void onSelectionChanged(const SelectionChanged& event) = 0; // vtable+0x00
 };
 
 DECOMP_SIZE_ASSERT(ISelectionBase, 0x4)
@@ -51,13 +53,40 @@ public:
 	Selection();
 	virtual ~Selection();
 
-	void raiseRemoved(boost::shared_ptr<Instance> item);
+	template <class _InIt>
+	void setSelection(_InIt _First, _InIt _Last)
+	{
+		clearSelection();
+		for (; _First != _Last; ++_First) {
+			addToSelection(*_First);
+		}
+	}
 
+	void clearSelection();
+
+	// FUNCTION: WEBSERVICE 0x1005d130
+	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > getSelection2() { return selection.read(); }
+	// FUNCTION: WEBSERVICE 0x1005e920
+	void setSelection(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > selection)
+	{
+		setSelection(selection->begin(), selection->end());
+	}
+	void setSelection(Instance* instance);
+
+	void addToSelection(const boost::shared_ptr<Instance>& instance) { addToSelection(instance.get()); }
+	void addToSelection(Instance* instance);
+	void toggleSelection(Instance* instance);
 	void removeFromSelection(const Instance* instance);
 
 	virtual void onEvent(const Instance* source, AncestorChanged event);
 
+	void addFilteredSelection(ISelectionBase* fs);
+	void removeFilteredSelection(ISelectionBase* fs);
+
 private:
+	void raiseAdded(boost::shared_ptr<Instance> instance);
+	void raiseRemoved(boost::shared_ptr<Instance> source);
+
 	CopyOnWrite<std::vector<boost::shared_ptr<Instance> > > selection; // 0x114
 	std::vector<ISelectionBase*> filteredSelections;                   // 0x11c
 };
@@ -65,6 +94,8 @@ private:
 DECOMP_SIZE_ASSERT(Selection, 0x12c)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x1005e8c0
+// RBX::Selection::setSelection<std::_Vector_const_iterator<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > >
 // FUNCTION: WEBSERVICE 0x10047e10
 // RBX::DescendentRemoving::~DescendentRemoving
 // FUNCTION: WEBSERVICE 0x1005cf20
@@ -77,6 +108,14 @@ DECOMP_SIZE_ASSERT(Selection, 0x12c)
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::addListener
 // FUNCTION: WEBSERVICE 0x100ddf60
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::removeListener
+// SYNTHETIC: WEBSERVICE 0x10218b30
+// `dynamic initializer for 'func_getSelection''
+// SYNTHETIC: WEBSERVICE 0x10218b60
+// `dynamic initializer for 'func_setSelection''
+// SYNTHETIC: WEBSERVICE 0x10221a40
+// `dynamic atexit destructor for 'func_setSelection''
+// SYNTHETIC: WEBSERVICE 0x10221a50
+// `dynamic atexit destructor for 'func_getSelection''
 // clang-format on
 
 } // namespace RBX
