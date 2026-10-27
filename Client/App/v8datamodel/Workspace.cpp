@@ -332,6 +332,65 @@ void Workspace::setMouseCommand(MouseCommand* command)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1006cb00
+GuiResponse Workspace::process(const GuiEvent& guiEvent)
+{
+	switch (guiEvent.eventType) {
+	default:
+		return GuiResponse::notUsed();
+
+	case UIEvent::KEY_DOWN:
+		currentCommand->onPeekKeyDown(guiEvent);
+		if (!currentCommand->captured()) {
+			return GuiResponse::notUsed();
+		}
+		setMouseCommand(currentCommand->onKeyDown(guiEvent));
+		break;
+
+	case UIEvent::MOUSE_RIGHT_BUTTON_DOWN:
+		inMouselookMode = true;
+		guiEvent.userInput->setWrapMode(UserInputBase::WRAP_CENTER);
+		break;
+
+	case UIEvent::MOUSE_RIGHT_BUTTON_UP:
+		inMouselookMode = false;
+		guiEvent.userInput->setWrapMode(UserInputBase::WRAP_AUTO);
+		break;
+
+	case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
+		if (!currentCommand->captured()) {
+			setMouseCommand(currentCommand->onMouseDown(guiEvent));
+		}
+		break;
+
+	case UIEvent::MOUSE_MOVE:
+		if (currentCommand->captured()) {
+			currentCommand->onMouseMove(guiEvent);
+		}
+		else {
+			currentCommand->onMouseHover(guiEvent);
+		}
+		break;
+
+	case UIEvent::MOUSE_DELTA:
+		if (currentCommand->captured()) {
+			currentCommand->onMouseDelta(guiEvent);
+		}
+		break;
+
+	case UIEvent::MOUSE_LEFT_BUTTON_UP:
+		setMouseCommand(currentCommand->onMouseUp(guiEvent));
+		break;
+	}
+
+	if (guiEvent.isMouseEvent()) {
+		idleMouseEvent = guiEvent;
+		idleMouseEvent.eventType = UIEvent::MOUSE_IDLE;
+	}
+
+	return GuiResponse::used(currentCommand->captured() ? this : NULL);
+}
+
 // FUNCTION: WEBSERVICE 0x1006ccb0
 void Workspace::runScript(Script* script, ScriptContext* context)
 {
@@ -457,6 +516,34 @@ void Workspace::onEvent(const RunService* source, Heartbeat event)
 			flySteps = 0;
 		}
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x1006ed50
+void Workspace::setImageServerView(const G3D::Rect2D& viewPortRect)
+{
+	HopperBin* superHack = NULL;
+
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		HopperBin* hopperBin = dynamic_cast<HopperBin*>(getChild(i));
+		ILocation* location = dynamic_cast<ILocation*>(getChild(i));
+		IRenderable* renderable = dynamic_cast<IRenderable*>(getChild(i));
+
+		if (location && renderable) {
+			CoordinateFrame modelCoord = location->getLocation();
+
+			getCamera()->setImageServerViewNoLerp(modelCoord, viewPortRect);
+		}
+
+		if (hopperBin) {
+			superHack = hopperBin;
+		}
+	}
+
+	if (superHack) {
+		superHack->setParent(ServiceProvider::create<StarterPackService>(this));
+	}
+
+	imageServerViewHack = imageServerViewHack <= 0;
 }
 
 // STUB: WEBSERVICE 0x1006eeb0

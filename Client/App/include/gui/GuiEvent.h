@@ -6,7 +6,7 @@
 
 namespace RBX {
 
-class GuiItem;
+class GuiTarget;
 
 // SIZE 0x18
 class GuiEvent : public UIEvent
@@ -29,22 +29,24 @@ public:
 	};
 
 	bool wasUsed() { return response != NOT_USED; }
+	bool wasNotUsed() { return response == NOT_USED; }
+	bool wasFinished() { return response == USED_AND_FINISHED; }
 
-	GuiItem* getTarget() { return target; }
+	GuiTarget* getTarget() { return target; }
 
 	static GuiResponse notUsed() { return GuiResponse(NOT_USED, NULL); }
 	static GuiResponse used() { return GuiResponse(USED, NULL); }
-	static GuiResponse used(GuiItem* target) { return GuiResponse(USED, target); }
+	static GuiResponse used(GuiTarget* target) { return GuiResponse(USED, target); }
 	static GuiResponse finished() { return GuiResponse(USED_AND_FINISHED, NULL); }
 
 private:
-	GuiResponse(ResponseType response, GuiItem* target) : response(response), target(target) {}
+	GuiResponse(ResponseType response, GuiTarget* target) : response(response), target(target) {}
 
 public:
 
 private:
 	ResponseType response; // 0x00
-	GuiItem* target;       // 0x04
+	GuiTarget* target;     // 0x04
 };
 
 DECOMP_SIZE_ASSERT(GuiResponse, 0x8)

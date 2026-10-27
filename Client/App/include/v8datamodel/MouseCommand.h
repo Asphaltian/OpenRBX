@@ -106,7 +106,7 @@ protected:
 public:
 	virtual ~MouseCommand(); // vtable+0x30
 
-	bool captured() const;
+	bool captured() const { return capturedMouse; }
 
 	virtual MouseCommand* isSticky() const { return NULL; } // vtable+0x34
 	virtual TextureId getCursorId() const;                  // vtable+0x38

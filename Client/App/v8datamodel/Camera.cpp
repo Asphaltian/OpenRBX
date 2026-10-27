@@ -112,6 +112,12 @@ bool Camera::zoomExtents(const G3D::Rect2D& viewPort)
 	return false;
 }
 
+// STUB: WEBSERVICE 0x100c4b20
+void Camera::setImageServerViewNoLerp(const G3D::CoordinateFrame& modelCoord, const G3D::Rect2D& viewPortRect)
+{
+	STUB(0x100c4b20);
+}
+
 // STUB: WEBSERVICE 0x100c4d80
 void Camera::doFly(const NavKeys& navKeys, int steps)
 {

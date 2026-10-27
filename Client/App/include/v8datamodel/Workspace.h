@@ -115,7 +115,10 @@ public:
 	void setDefaultMouseCommand();
 	void setNullMouseCommand();
 
+	void setImageServerView(const G3D::Rect2D& viewPortRect);
 	void zoomToExtents();
+
+	virtual GuiResponse process(const GuiEvent& guiEvent);
 
 	void stop();
 	void reset();
