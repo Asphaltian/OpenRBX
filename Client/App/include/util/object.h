@@ -263,6 +263,12 @@ public:
 		return boost::shared_ptr<U>(new U(argument), Deleter());
 	}
 
+	template <class U, class A, class B>
+	static boost::shared_ptr<U> create(A a, B b)
+	{
+		return boost::shared_ptr<U>(new U(a, b), Deleter());
+	}
+
 protected:
 	Creatable() {}
 	virtual ~Creatable() {}

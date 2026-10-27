@@ -89,6 +89,7 @@ private:
 	}
 
 	virtual void onEvent(const RunService* source, Heartbeat event);
+	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
 
 public:
 	virtual ~Workspace();
@@ -119,6 +120,9 @@ public:
 	void joinAllHack();
 
 	float step(float timeInterval);
+
+	void makeJoints(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > instances);
+	void breakJoints(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > instances);
 
 private:
 	void handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstance> >& fallenParts);
@@ -151,6 +155,14 @@ public:
 DECOMP_SIZE_ASSERT(Workspace, 0x394)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x1006bf50
+// RBX::wrapper<1>
+// TEMPLATE: WEBSERVICE 0x1006bf90
+// RBX::wrapper<0>
+// TEMPLATE: WEBSERVICE 0x1006c130
+// RBX::wrapper2<1>
+// TEMPLATE: WEBSERVICE 0x1006c1d0
+// RBX::wrapper2<0>
 // TEMPLATE: WEBSERVICE 0x1006fab0
 // RBX::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>
 // clang-format on

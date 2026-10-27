@@ -7,6 +7,7 @@
 #include "tool/ToolsArrow.h"
 #include "util/Name.h"
 #include "util/NavKeys.h"
+#include "util/RunStateOwner.h"
 #include "util/UserInputBase.h"
 #include "util/standardout.h"
 #include "v8datamodel/Camera.h"
@@ -15,9 +16,14 @@
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Stats.h"
 #include "v8datamodel/Tool.h"
 #include "v8datamodel/UserController.h"
+#include "v8kernel/Kernel.h"
+#include "v8world/SleepStage2.h"
 #include "v8world/World.h"
+
+#include <boost/bind.hpp>
 
 namespace RBX {
 
@@ -54,6 +60,12 @@ void Workspace::stop()
 MouseCommand* newNullTool(Workspace* workspace)
 {
 	return new NewNullTool(workspace);
+}
+
+// FUNCTION: WEBSERVICE 0x1006a1a0
+static double getFPS(Profiling::CodeProfiler* profiler)
+{
+	return profiler->getData(3.0).getActualFPS();
 }
 
 // FUNCTION: WEBSERVICE 0x1006a7c0
@@ -125,6 +137,23 @@ void Workspace::reset()
 	world->reset();
 }
 
+template <int i>
+static void wrapper(Instance* instance)
+{
+	PartInstance* part = dynamic_cast<PartInstance*>(instance);
+	if (part) {
+		if (i) {
+			part->join();
+		}
+		else {
+			part->destroyJoints();
+		}
+	}
+	else {
+		instance->for_eachChild(wrapper<i>);
+	}
+}
+
 // STUB: WEBSERVICE 0x1006bfd0
 Camera* Workspace::getCamera() const
 {
@@ -174,6 +203,24 @@ void Workspace::onDescendentAdded(Instance* instance)
 			legacyOffset.reset();
 		}
 	}
+}
+
+template <int i>
+static void wrapper2(boost::shared_ptr<Instance> instance)
+{
+	wrapper<i>(instance.get());
+}
+
+// FUNCTION: WEBSERVICE 0x1006c5b0
+void Workspace::makeJoints(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > instances)
+{
+	std::for_each(instances->begin(), instances->end(), wrapper2<1>);
+}
+
+// FUNCTION: WEBSERVICE 0x1006c650
+void Workspace::breakJoints(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > instances)
+{
+	std::for_each(instances->begin(), instances->end(), wrapper2<0>);
 }
 
 // FUNCTION: WEBSERVICE 0x1006c6f0
@@ -379,6 +426,87 @@ Workspace::Workspace(IDataState* dataState)
 	world->getProfileWorldStep().parent = profileWorkspaceStep.get();
 	profileRunServiceStepped->parent = profileWorkspaceStep.get();
 	profileRunServiceHeartbeat->parent = profileWorkspaceStep.get();
+}
+
+// SIZE 0x120
+class WorkspaceStatsItem : public Stats::Item
+{
+public:
+	WorkspaceStatsItem(const Workspace* workspace, const World* world);
+};
+
+DECOMP_SIZE_ASSERT(WorkspaceStatsItem, 0x120)
+
+// FUNCTION: WEBSERVICE 0x10070a20
+WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* world)
+{
+	setName("Workspace");
+
+	createChildItem<double>("FPS", boost::bind(&getFPS, workspace->profileWorkspaceStep.get()));
+	createBoundChildItem(*workspace->profileRun);
+
+	Stats::Item* pWorkspaceStep = createBoundChildItem(*workspace->profileWorkspaceStep);
+	Stats::Item* worldStep = pWorkspaceStep->createBoundChildItem(world->getProfileWorldStep());
+	worldStep->createBoundChildItem(world->getProfileUiStep());
+	worldStep->createBoundChildItem(world->getProfileBroadphase());
+	worldStep->createBoundChildItem(*world->getSleepStage()->profilingWake);
+	worldStep->createBoundChildItem(*world->getSleepStage()->profilingCollision);
+	worldStep->createBoundChildItem(*world->getSleepStage()->profilingSleep);
+	worldStep->createBoundChildItem(*world->getKernel()->profilingKernel);
+	pWorkspaceStep->createBoundChildItem(*workspace->profileRunServiceStepped);
+	pWorkspaceStep->createBoundChildItem(*workspace->profileRunServiceHeartbeat);
+
+	Stats::Item* worldItem = createChildItem("World");
+	worldItem->createChildItem<int>("Primitives", boost::bind(&World::getNumPrimitives, world));
+	worldItem->createChildItem<int>("Joints", boost::bind(&World::getNumJoints, world));
+	worldItem->createChildItem<int>("Contacts", boost::bind(&World::getNumContacts, world));
+
+	Stats::Item* contacts = createChildItem("Contacts");
+	contacts->createChildItem<int>(
+		"CtctStageCtcts",
+		boost::bind(&World::getMetric, world, IWorldStage::NUM_CONTACTSTAGE_CONTACTS)
+	);
+	contacts->createChildItem<int>(
+		"SteppingCtcts",
+		boost::bind(&World::getMetric, world, IWorldStage::NUM_STEPPING_CONTACTS)
+	);
+	contacts->createChildItem<int>(
+		"TouchingCtcts",
+		boost::bind(&World::getMetric, world, IWorldStage::NUM_TOUCHING_CONTACTS)
+	);
+	contacts->createChildItem<int>("MaxTreeDepth", boost::bind(&World::getMetric, world, IWorldStage::MAX_TREE_DEPTH));
+	contacts->createChildItem<int>("# link(p)", boost::bind(&World::getNumLinkCalls, world));
+	contacts->createChildItem<int>("Hash Nodes Out", boost::bind(&World::getNumHashNodes, world));
+	contacts->createChildItem<int>("Max Bucket Size", boost::bind(&World::getMaxBucketSize, world));
+
+	Stats::Item* kernel = createChildItem("Kernel");
+	kernel->createChildItem<int>("Bodies", boost::bind(&World::getNumBodies, world));
+	kernel->createChildItem<int>("Constraints", boost::bind(&World::getNumConstraints, world));
+	kernel->createChildItem<int>("Points", boost::bind(&World::getNumPoints, world));
+}
+
+// FUNCTION: WEBSERVICE 0x10070ff0
+void Workspace::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);
+
+	if (statsItem) {
+		statsItem->setParent(NULL);
+		statsItem.reset();
+	}
+
+	Instance::onServiceProvider(oldProvider, newProvider);
+
+	scriptContext = newProvider ? newProvider->create<ScriptContext>() : NULL;
+
+	if (newProvider) {
+		if (Stats::StatsService* stats = newProvider->create<Stats::StatsService>()) {
+			statsItem = Creatable<Instance>::create<WorkspaceStatsItem>(this, world.get());
+			statsItem->setParent(stats);
+		}
+	}
+
+	startListening(newProvider ? newProvider->find<RunService>() : NULL, this);
 }
 
 } // namespace RBX

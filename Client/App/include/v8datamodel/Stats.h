@@ -128,6 +128,8 @@ public:
 	// RBX::Stats::TypedStatsItem<int>::update
 	// TEMPLATE: WEBSERVICE 0x10065ef0
 	// RBX::Stats::TypedStatsItem<int>::~TypedStatsItem<int>
+	// TEMPLATE: WEBSERVICE 0x1006f990
+	// RBX::Stats::TypedStatsItem<double>::TypedStatsItem<double>
 	// TEMPLATE: WEBSERVICE 0x10082f50
 	// RBX::Stats::TypedStatsItem<unsigned int>::TypedStatsItem<unsigned int>
 	// clang-format on
@@ -170,6 +172,8 @@ DECOMP_SIZE_ASSERT(StatsService, 0xf8)
 
 // TEMPLATE: WEBSERVICE 0x10066b10
 // RBX::Stats::Item::createChildItem<int>
+// TEMPLATE: WEBSERVICE 0x100708b0
+// RBX::Stats::Item::createChildItem<double>
 template <class T>
 Item* Item::createChildItem(const char* name, boost::function0<T> func)
 {
