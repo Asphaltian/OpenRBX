@@ -932,6 +932,8 @@ public:
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1018bce0
 	// RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1018bf70
+	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1018c030
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1018c410
@@ -948,6 +950,14 @@ public:
 	// RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::getClassName
 	// TEMPLATE: WEBSERVICE 0x10197d40
 	// RBX::DescribedCreatable<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::`scalar deleting destructor'
+	// TEMPLATE: WEBSERVICE 0x10199290
+	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::~FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>
+	// TEMPLATE: WEBSERVICE 0x10199360
+	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>
+	// TEMPLATE: WEBSERVICE 0x1019a190
+	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::getClassName
+	// TEMPLATE: WEBSERVICE 0x1019aa50
+	// RBX::DescribedCreatable<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1019b3a0
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::~FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1019b420
@@ -1107,6 +1117,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::creator''
 // SYNTHETIC: WEBSERVICE 0x1021f160
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::creator''
+// SYNTHETIC: WEBSERVICE 0x1021f1a0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::creator''
 // SYNTHETIC: WEBSERVICE 0x1021f1e0
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221020
@@ -1237,6 +1249,8 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::creator''
 // SYNTHETIC: WEBSERVICE 0x10225d80
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::creator''
+// SYNTHETIC: WEBSERVICE 0x10225dc0
+// `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::creator''
 // SYNTHETIC: WEBSERVICE 0x10225e00
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::creator''
 // clang-format on

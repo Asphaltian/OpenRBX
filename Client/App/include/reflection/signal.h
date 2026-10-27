@@ -603,6 +603,8 @@ public:
 	// RBX::Reflection::SignalDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::SignalDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>
 	// TEMPLATE: WEBSERVICE 0x10197fe0
 	// RBX::Reflection::SignalDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::SignalDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>
+	// TEMPLATE: WEBSERVICE 0x1019aa70
+	// RBX::Reflection::SignalDesc<RBX::Network::Server,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::Network::Server,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,boost::shared_ptr<RBX::Instance>)>
 	// clang-format on
 	SignalDesc(const char* name, const char* arg1name)
 		: SignalDescImpl<boost::function_traits<Signature>::arity, Signature>(Class::classDescriptor(), name)

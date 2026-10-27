@@ -23,3 +23,5 @@ template void RBX::Name::callDoDeclare<RBX::sNetworkSettings>();
 
 template const RBX::FactoryProduct<RBX::Network::Client, RBX::Network::Peer, RBX::Network::sClient>::Creator
 	RBX::FactoryProduct<RBX::Network::Client, RBX::Network::Peer, RBX::Network::sClient>::creator;
+template const RBX::FactoryProduct<RBX::Network::Server, RBX::Network::Peer, RBX::Network::sServer>::Creator
+	RBX::FactoryProduct<RBX::Network::Server, RBX::Network::Peer, RBX::Network::sServer>::creator;
