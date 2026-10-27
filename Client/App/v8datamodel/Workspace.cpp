@@ -17,10 +17,29 @@ char sWorkspace[] = "Workspace";
 
 bool Workspace::showWorldCoord;
 
+// FUNCTION: WEBSERVICE 0x1006a0c0
+bool Workspace::askAddChild(const Instance* instance) const
+{
+	return dynamic_cast<const IRenderable*>(instance) != NULL;
+}
+
 // FUNCTION: WEBSERVICE 0x1006a0f0
 const G3D::GCamera& Workspace::getGCamera() const
 {
 	return getCamera()->getGCamera();
+}
+
+// FUNCTION: WEBSERVICE 0x1006a100
+void Workspace::zoomToExtents()
+{
+	getCamera()->zoomExtents(viewPort);
+}
+
+// FUNCTION: WEBSERVICE 0x1006a120
+void Workspace::stop()
+{
+	isSimulating = false;
+	getCamera()->autoMode();
 }
 
 // FUNCTION: WEBSERVICE 0x1006a7c0
@@ -43,6 +62,13 @@ World* Workspace::getMyWorldFast(const Instance* context)
 	return getMyWorkspaceFast(context)->getWorld();
 }
 
+// FUNCTION: WEBSERVICE 0x1006a880
+void Workspace::render2d(Adorn* adorn)
+{
+	currentCommand->render2d(adorn);
+	render2dItems(adorn);
+}
+
 // STUB: WEBSERVICE 0x1006a960
 IScriptOwner* Workspace::scriptShouldRun(Script* script)
 {
@@ -50,11 +76,70 @@ IScriptOwner* Workspace::scriptShouldRun(Script* script)
 	return NULL;
 }
 
+// FUNCTION: WEBSERVICE 0x1006b2d0
+void Workspace::setThrottleEnabled(bool value)
+{
+	world->setCanThrottle(value);
+}
+
+// FUNCTION: WEBSERVICE 0x1006b2e0
+void Workspace::joinAllHack()
+{
+	world->joinAll();
+}
+
+// FUNCTION: WEBSERVICE 0x1006b2f0
+void Workspace::reset()
+{
+	isSimulating = false;
+	getCamera()->autoMode();
+	world->reset();
+}
+
 // STUB: WEBSERVICE 0x1006bfd0
 Camera* Workspace::getCamera() const
 {
 	STUB(0x1006bfd0);
 	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x1006c460
+void Workspace::onChildChanged(Instance* instance, const PropertyChanged& event)
+{
+	Instance::onChildChanged(instance, event);
+	raiseDrawChanged();
+}
+
+// FUNCTION: WEBSERVICE 0x1006c490
+void Workspace::onDescendentRemoving(const boost::shared_ptr<Instance>& instance)
+{
+	if (IRenderable* renderable = dynamic_cast<IRenderable*>(instance.get())) {
+		onRemoving(renderable);
+	}
+
+	RootInstance::onDescendentRemoving(instance);
+	raiseDrawChanged();
+}
+
+// FUNCTION: WEBSERVICE 0x1006c4f0
+void Workspace::onDescendentAdded(Instance* instance)
+{
+	RootInstance::onDescendentAdded(instance);
+	raiseDrawChanged();
+
+	if (IRenderable* renderable = dynamic_cast<IRenderable*>(instance)) {
+		onAdded(renderable);
+	}
+
+	PVInstance* pvInstance = dynamic_cast<PVInstance*>(instance);
+	if (pvInstance && pvInstance->getLegacyOffset()) {
+		pvInstance->legacyTraverseState(CoordinateFrame());
+		pvInstance->clearLegacyOffset();
+
+		if (legacyOffset) {
+			legacyOffset.reset();
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x1006c9e0
@@ -92,10 +177,10 @@ void Workspace::setDefaultMouseCommand()
 	STUB(0x1006d410);
 }
 
-// STUB: WEBSERVICE 0x1006d440
+// FUNCTION: WEBSERVICE 0x1006d440
 void Workspace::releaseScript(Script* script)
 {
-	STUB(0x1006d440);
+	pendingScripts.erase(script);
 }
 
 // FUNCTION: WEBSERVICE 0x1006ebc0

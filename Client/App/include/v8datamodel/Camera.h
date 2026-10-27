@@ -11,6 +11,7 @@
 
 namespace RBX {
 
+class ICameraOwner;
 class ICameraSubject;
 
 extern char sCamera[];
@@ -48,6 +49,7 @@ public:
 
 	void zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType zoomType);
 	bool zoomExtents(const G3D::Rect2D& viewPort);
+	void autoMode();
 	void lookAt(const G3D::Vector3& point);
 
 	ICameraSubject* getCameraSubject() const;
@@ -74,6 +76,8 @@ public:
 	static float getNewZoomDistance(float currentDistance, float in);
 
 private:
+	ICameraOwner* getCameraOwner();
+
 	G3D::GCamera gCamera;                      // 0x0f8
 	G3D::CoordinateFrame cameraGoal;           // 0x13c
 	G3D::CoordinateFrame cameraFocus;          // 0x16c

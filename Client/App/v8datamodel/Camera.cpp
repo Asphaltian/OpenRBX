@@ -1,10 +1,26 @@
 #include "v8datamodel/Camera.h"
 
 #include "util/ICameraSubject.h"
+#include "v8datamodel/ICameraOwner.h"
 
 namespace RBX {
 
 char sCamera[] = "Camera";
+
+// FUNCTION: WEBSERVICE 0x100c2630
+ICameraOwner* Camera::getCameraOwner()
+{
+	Instance* parent = getParent();
+	while (parent) {
+		if (ICameraOwner* owner = dynamic_cast<ICameraOwner*>(parent)) {
+			return owner;
+		}
+
+		parent = parent->getParent();
+	}
+
+	return NULL;
+}
 
 // FUNCTION: WEBSERVICE 0x100c2680
 void Camera::lookAt(const G3D::Vector3& point)
@@ -50,6 +66,18 @@ Instance* Camera::getCameraSubjectInstance() const
 ICameraSubject* Camera::getCameraSubject() const
 {
 	return cameraSubject ? dynamic_cast<ICameraSubject*>(cameraSubject.get()) : NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100c2a20
+void Camera::autoMode()
+{
+	if (animationType != AUTO) {
+		animationType = AUTO;
+
+		if (ICameraOwner* owner = getCameraOwner()) {
+			owner->cameraMoved();
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x100c31e0

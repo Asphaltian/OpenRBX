@@ -131,6 +131,9 @@ public:
 	void insertContact(Contact* c);
 	void destroyContact(Contact* c);
 
+	void setCanThrottle(bool value) { canThrottle = value; }
+	void reset() { worldStepId = 0; }
+
 	const Profiling::CodeProfiler& getProfileWorldStep() const { return *profilingWorldStep; }
 	Profiling::CodeProfiler& getProfileWorldStep() { return *profilingWorldStep; }
 	const Profiling::CodeProfiler& getProfileBroadphase() const { return *profilingBroadphase; }

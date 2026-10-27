@@ -108,7 +108,7 @@ public:
 	}
 
 	void setPVGridOffsetLegacy(const CoordinateFrame& _offset);
-	CoordinateFrame* getLegacyOffset();
+	CoordinateFrame* getLegacyOffset() { return legacyOffset.get(); }
 	void clearLegacyOffset();
 
 	virtual void legacyTraverseState(const CoordinateFrame& state) = 0; // vtable+0x64

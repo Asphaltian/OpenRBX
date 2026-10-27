@@ -65,6 +65,15 @@ public:
 	static World* getMyWorldFast(const Instance* context);
 
 private:
+	virtual bool askAddChild(const Instance* instance) const;
+	virtual void onChildChanged(Instance* instance, const PropertyChanged& event);
+	virtual void onDescendentAdded(Instance* instance);
+	virtual void onDescendentRemoving(const boost::shared_ptr<Instance>& instance);
+
+public:
+	virtual void render2d(Adorn* adorn);
+
+private:
 	virtual IScriptOwner* scriptShouldRun(Script* script);
 	virtual void runScript(Script* script, ScriptContext* context);
 	virtual void releaseScript(Script* script);
@@ -93,6 +102,13 @@ public:
 
 	void setMouseCommand(MouseCommand* command);
 	void setDefaultMouseCommand();
+
+	void zoomToExtents();
+
+	void stop();
+	void reset();
+	void setThrottleEnabled(bool value);
+	void joinAllHack();
 
 	void raiseDrawChanged() const { Notifier<Workspace, DrawChanged>::raise(DrawChanged()); }
 
