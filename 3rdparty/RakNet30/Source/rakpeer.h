@@ -42,6 +42,12 @@ int RAK_DLL_EXPORT SystemAddressAndIndexComp( const SystemAddress &key, const Sy
 /// \brief The main interface for network communications
 class NetworkIDManager;
 
+namespace RBX {
+namespace Network {
+class Peer;
+}
+} // namespace RBX
+
 // VTABLE: WEBSERVICE 0x10251ddc
 // class RakPeer
 class RAK_DLL_EXPORT RakPeer : public RakPeerInterface
@@ -487,6 +493,7 @@ public:
 	};
 
 protected:
+	friend class RBX::Network::Peer;
 
 #ifdef _WIN32
 	// friend unsigned __stdcall RecvFromNetworkLoop(LPVOID arguments);
