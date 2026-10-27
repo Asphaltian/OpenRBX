@@ -215,6 +215,7 @@ address,type,name
 0x102fa168,global,desc_Focus
 0x102fa184,global,cameraSubjectProp
 0x102fa1a4,global,desc_cameraType
+0x102fa1c4,global,desc_CoordFrame
 0x102fa328,global,desc_TextureId
 0x102fa344,global,desc_legacyCommand
 0x102fa360,global,desc_BinType

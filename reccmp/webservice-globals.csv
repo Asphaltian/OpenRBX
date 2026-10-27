@@ -4957,6 +4957,7 @@ address,type,symbol
 0x102d77cc,global,?sRootInstance@RBX@@3PADA
 0x102d7800,global,?sCamera@RBX@@3PADA
 0x102d7808,global,??_R0?AV?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@@8
+0x102d7b4c,global,??_R0?AW4CameraType@Camera@RBX@@@8
 0x102d7c70,global,??_R0?AV?$DescribedCreatable@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@@8
 0x102d7cc8,global,??_R0?AV?$Described@VCamera@RBX@@$1?sCamera@2@3PADAV?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@2@@Reflection@RBX@@@8
 0x102d7d58,global,?sNullTool@RBX@@3PADA
@@ -7144,6 +7145,7 @@ address,type,symbol
 0x1023b4bc,global,??_7?$SignalDesc@VHopperBin@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@6B@
 0x1023b4cc,global,??_7?$SignalDesc@VHopperBin@RBX@@$$A6AXXZ@Reflection@RBX@@6B@
 0x102d882c,global,??_R0?AW4BinType@HopperBin@RBX@@@8
+0x102fa038,global,s___RBX::Reflection::EnumDesc<enum RBX::Camera::CameraType>::singleton
 0x102fa1f8,global,s___RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton
 0x10245cec,global,??_7SpawnLocation@RBX@@6BILocation@1@@
 0x10245d40,global,??_7SpawnLocation@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
@@ -7292,3 +7294,5 @@ address,type,symbol
 0x10230ce8,global,??_7?$RefPropDescriptor@VWorkspace@RBX@@VCamera@2@@Reflection@RBX@@6BIIDREF@2@@
 0x10230cf0,global,??_7?$RefPropDescriptor@VWorkspace@RBX@@VCamera@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x1022e8f0,global,??_7TextXmlParser@@6B@
+0x1023a2c0,global,??_7?$RefPropDescriptor@VCamera@RBX@@VInstance@2@@Reflection@RBX@@6BIIDREF@2@@
+0x1023a2c8,global,??_7?$RefPropDescriptor@VCamera@RBX@@VInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@

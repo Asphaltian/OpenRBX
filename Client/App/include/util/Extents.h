@@ -77,8 +77,9 @@ public:
 	Extents toWorldSpace(const CoordinateFrame& coordinateFrame);
 	Extents express(const CoordinateFrame& from, const CoordinateFrame& to);
 
-	void expand(float distance);
 	void unionWith(const Extents& other);
+	void scale(float value);
+	void expand(float distance);
 
 private:
 	static float epsilon();
@@ -99,6 +100,12 @@ inline void Extents::unionWith(const Extents& other)
 {
 	low = low.min(other.low);
 	high = high.max(other.high);
+}
+
+inline void Extents::scale(float value)
+{
+	low *= value;
+	high *= value;
 }
 
 inline void Extents::expand(float distance)

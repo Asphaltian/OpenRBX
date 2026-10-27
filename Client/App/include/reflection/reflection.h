@@ -555,6 +555,12 @@ public:
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100b4c90
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::getIndexValue
+	// TEMPLATE: WEBSERVICE 0x100c3ad0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType><enum RBX::Camera::CameraType (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(enum RBX::Camera::CameraType)>
+	// TEMPLATE: WEBSERVICE 0x100c3d60
+	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::setEnumValue
+	// TEMPLATE: WEBSERVICE 0x100c3da0
+	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100c8830
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType><enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>
 	// TEMPLATE: WEBSERVICE 0x100e61d0
@@ -733,6 +739,8 @@ public:
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::writeValue
 	// TEMPLATE: WEBSERVICE 0x100b4750
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::equalValues
+	// TEMPLATE: WEBSERVICE 0x100c3cb0
+	// RBX::Reflection::RefPropDescriptor<RBX::Camera,RBX::Instance>::RefPropDescriptor<RBX::Camera,RBX::Instance><RBX::Instance * (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x100d8810
 	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(RBX::PartInstance *)>
 	// SYNTHETIC: WEBSERVICE 0x100e5fe0

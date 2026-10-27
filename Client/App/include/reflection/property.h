@@ -532,6 +532,14 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::getset<G3D::Vector3 const & (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x100a1580
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::getset<G3D::Vector3 (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>
+	// TEMPLATE: WEBSERVICE 0x100c3380
+	// RBX::Reflection::PropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::getset<enum RBX::Camera::CameraType (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(enum RBX::Camera::CameraType)>
+	// TEMPLATE: WEBSERVICE 0x100c33e0
+	// RBX::Reflection::PropDescriptor<RBX::Camera,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(G3D::CoordinateFrame const &)>
+	// TEMPLATE: WEBSERVICE 0x100c3440
+	// RBX::Reflection::PropDescriptor<RBX::Camera,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(G3D::CoordinateFrame const &)>
+	// TEMPLATE: WEBSERVICE 0x100c34a0
+	// RBX::Reflection::PropDescriptor<RBX::Camera,RBX::Instance *>::getset<RBX::Instance * (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x100ca2f0
 	// RBX::Reflection::PropDescriptor<RBX::Tool,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(G3D::CoordinateFrame const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100ca390

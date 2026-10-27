@@ -125,6 +125,8 @@ private:
 // RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::~EnumDesc<enum RBX::Soundscape::ReverbType>
 // TEMPLATE: WEBSERVICE 0x10082790
 // RBX::Reflection::EnumDesc<enum RBX::SoundType>::~EnumDesc<enum RBX::SoundType>
+// TEMPLATE: WEBSERVICE 0x100c36b0
+// RBX::Reflection::EnumDesc<enum RBX::Camera::CameraType>::~EnumDesc<enum RBX::Camera::CameraType>
 // TEMPLATE: WEBSERVICE 0x100c8290
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::~EnumDesc<enum RBX::HopperBin::BinType>
 // clang-format on
@@ -147,6 +149,9 @@ private:
 
 // SYNTHETIC: WEBSERVICE 0x1009e090
 // RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::`scalar deleting destructor'
+
+// SYNTHETIC: WEBSERVICE 0x100c39e0
+// RBX::Reflection::EnumDesc<enum RBX::Camera::CameraType>::`scalar deleting destructor'
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100dfff0
@@ -221,6 +226,8 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // RBX::Reflection::EnumDesc<enum RBX::DebugSettings::ErrorReporting>::singleton
 // TEMPLATE: WEBSERVICE 0x100b4290
 // RBX::Reflection::EnumDesc<enum RBX::Debugable::AssertAction>::singleton
+// TEMPLATE: WEBSERVICE 0x100c3a00
+// RBX::Reflection::EnumDesc<enum RBX::Camera::CameraType>::singleton
 // TEMPLATE: WEBSERVICE 0x100e5dd0
 // RBX::Reflection::EnumDesc<enum RBX::Feature::TopBottom>::singleton
 // TEMPLATE: WEBSERVICE 0x100e5e30
@@ -249,6 +256,8 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // `RBX::Reflection::EnumDesc<enum RBX::Debugable::AssertAction>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10223980
 // `RBX::Reflection::EnumDesc<enum RBX::DebugSettings::ErrorReporting>::singleton'::`2'::`dynamic atexit destructor for 's''
+// SYNTHETIC: WEBSERVICE 0x10223b40
+// `RBX::Reflection::EnumDesc<enum RBX::Camera::CameraType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10223be0
 // `RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10224310
