@@ -51,6 +51,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::RootInstance,&RBX::sRootInstance,RBX::ModelInstance>::classDescriptor
 // FUNCTION: WEBSERVICE 0x1006f520
 // RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x100794b0
+// RBX::Reflection::Described<RBX::DataModel,&RBX::sDataModel,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1007d7d0
 // RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::GetSetImpl<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>::setValue
 // TEMPLATE: WEBSERVICE 0x10081b20
@@ -241,6 +243,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221c80
 // `RBX::Reflection::Described<RBX::RootInstance,&RBX::sRootInstance,RBX::ModelInstance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x10221eb0
+// `RBX::Reflection::Described<RBX::DataModel,&RBX::sDataModel,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222420
 // `RBX::Reflection::Described<StockSound,&sStockSound,RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222430
@@ -1227,6 +1231,82 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1019ac70
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::execute
 	// clang-format on
+};
+
+template <class Class, class Signature>
+class BoundFuncDesc<Class, Signature, 3> : public FuncDesc<Class>
+{
+public:
+	typedef typename boost::function_traits<Signature>::result_type result_type;
+	typedef typename boost::function_traits<Signature>::arg1_type Arg1;
+	typedef typename boost::function_traits<Signature>::arg2_type Arg2;
+	typedef typename boost::function_traits<Signature>::arg3_type Arg3;
+	typedef result_type (Class::*Function)(Arg1, Arg2, Arg3);
+
+private:
+	Function function; // 0x28
+	Value default1;    // 0x30
+	Value default2;    // 0x38
+	Value default3;    // 0x40
+
+	void declareSignature(const char* arg1Name, const char* arg2Name, const char* arg3Name)
+	{
+		this->signature.resultType = &Type::singleton<result_type>();
+		this->signature.addArgument(Name::declare(arg1Name, -1), Type::singleton<Arg1>(), default1);
+		this->signature.addArgument(Name::declare(arg2Name, -1), Type::singleton<Arg2>(), default2);
+		this->signature.addArgument(Name::declare(arg3Name, -1), Type::singleton<Arg3>(), default3);
+	}
+
+	template <class R>
+	void call(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3) const
+	{
+		returnValue = (o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>(), arg3.convert<Arg3>());
+	}
+
+	template <>
+	void call<void>(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3) const
+	{
+		(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>(), arg3.convert<Arg3>());
+	}
+
+public:
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		const char* arg2Name,
+		const char* arg3Name,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function)
+	{
+		declareSignature(arg1Name, arg2Name, arg3Name);
+	}
+
+	BoundFuncDesc(
+		Function function,
+		const char* name,
+		const char* arg1Name,
+		const char* arg2Name,
+		const char* arg3Name,
+		Arg3 default3,
+		typename FunctionDescriptor::Security security
+	)
+		: FuncDesc<Class>(name, security), function(function), default3(default3)
+	{
+		declareSignature(arg1Name, arg2Name, arg3Name);
+	}
+
+	virtual void execute(DescribedBase* instance, typename FunctionDescriptor::Arguments& arguments) const
+	{
+		Value arg1(default1);
+		arguments.get(1, arg1);
+		Value arg2(default2);
+		arguments.get(2, arg2);
+		Value arg3(default3);
+		arguments.get(3, arg3);
+		call<result_type>(boost::polymorphic_cast<Class*>(instance), arguments.returnValue, arg1, arg2, arg3);
+	}
 };
 
 template <class Class, class Signature>

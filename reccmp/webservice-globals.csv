@@ -7442,6 +7442,7 @@ address,type,symbol
 0x1024e254,global,??_7View@0RBX@@6B@
 0x10301aa4,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Lighting>
 0x1025bbc4,global,??_7OSContext@@6B@
+0x102cbddc,global,??_R0?AVDataModel@RBX@@@8
 0x102f4fdb,global,firstTime___initRoblox
 0x10301af4,global,_m___StaticMutex<OSContext>::init
 0x10301afc,global,??_B?1??init@?$StaticMutex@VOSContext@@@@CAXXZ@51
