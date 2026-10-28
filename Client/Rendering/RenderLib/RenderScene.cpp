@@ -357,7 +357,7 @@ void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& cam
 
 		bool farCulled = cspace.z + chunk->radius < farZ && chunk->cullable();
 		bool nearCulled = cspace.z - chunk->radius > nearZ;
-		bool shadowFarCulled = cspace.z + chunk->radius < farZ * 1.2f && chunk->cullable();
+		bool shadowFarCulled = cspace.z + chunk->radius < farZ * 1.2 && chunk->cullable();
 
 		if (chunk->castsShadows() && !shadowFarCulled && !chunk->getMaterial()->veryTransparent()) {
 			if (chunk->cachesShadows()) {

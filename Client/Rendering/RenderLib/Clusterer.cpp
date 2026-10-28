@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <functional>
 
 namespace RBX {
 namespace Render {
@@ -41,25 +42,26 @@ void Clusterer::Cluster::computeCentroid()
 	centroid = c / (float) samples.size();
 }
 
-// STUB: WEBSERVICE 0x101fa2c0
+// FUNCTION: WEBSERVICE 0x101fa2c0
 unsigned int Clusterer::moveSample(Sample* sample, Cluster* cluster)
 {
-	while (cluster->visitIndex != cluster->samples.size()) {
+	while (true) {
+		if (cluster->visitIndex == cluster->samples.size()) {
+			cluster->samples.push_back(sample);
+			cluster->visitIndex++;
+			return 1;
+		}
+
 		Sample* visited = cluster->samples[cluster->visitIndex];
 		Cluster* bestCluster = findClosestCluster(visited);
-
-		if (bestCluster != cluster) {
+		if (bestCluster == cluster) {
+			cluster->visitIndex++;
+		}
+		else {
 			cluster->samples[cluster->visitIndex] = sample;
 			return moveSample(visited, bestCluster) + 1;
 		}
-
-		cluster->visitIndex++;
 	}
-
-	cluster->samples.push_back(sample);
-	cluster->visitIndex++;
-
-	return 1;
 }
 
 // FUNCTION: WEBSERVICE 0x101fa380
@@ -92,27 +94,27 @@ unsigned int Clusterer::moveSamples()
 	return moveCount;
 }
 
-// STUB: WEBSERVICE 0x101fa520
+// FUNCTION: WEBSERVICE 0x101fa520
 Clusterer::Clusters* Clusterer::go(unsigned int maxSteps)
 {
 	if (clusterCount > 1) {
+		Clusters::iterator it = clusters.begin();
 		Clusters::iterator end = clusters.end();
-
-		for (Clusters::iterator it = clusters.begin(); it != end; ++it) {
+		for (; it != end; ++it) {
 			if (it->samples.size() != 0) {
-				it->centroid = it->samples[rand() % it->samples.size()]->cframe().translation;
+				unsigned int index = rand() % it->samples.size();
+				it->centroid = it->samples[index]->cframe().translation;
 			}
 		}
 
-		unsigned int threshold = std::max(sampleSize / 20, 1u);
-		unsigned int step = 1;
+		const unsigned int threshold = std::max(1u, sampleSize / 20);
 
-		while (moveSamples() > threshold && step != maxSteps) {
-			for (Clusters::iterator it = clusters.begin(); it != clusters.end(); ++it) {
-				it->computeCentroid();
+		for (unsigned int step = 1; moveSamples() > threshold; step++) {
+			if (step == maxSteps) {
+				break;
 			}
 
-			step++;
+			std::for_each(clusters.begin(), clusters.end(), std::mem_fun_ref(&Cluster::computeCentroid));
 		}
 	}
 
