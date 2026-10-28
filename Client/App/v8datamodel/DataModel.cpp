@@ -67,3 +67,9 @@ template void RBX::Name::callDoDeclare<RBX::sHat>();
 template void RBX::Name::callDoDeclare<RBX::Network::sPlayers>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sDataModel>();
 template void RBX::Name::callDoDeclare<RBX::sDataModel>();
+template const RBX::FactoryProduct<RBX::LocalBackpackItem, RBX::Widget, RBX::sLocalBackpackItem>::Creator
+	RBX::FactoryProduct<RBX::LocalBackpackItem, RBX::Widget, RBX::sLocalBackpackItem>::creator;
+template const RBX::FactoryProduct<RBX::LocalBackpack, RBX::RelativePanel, RBX::sLocalBackpack>::Creator
+	RBX::FactoryProduct<RBX::LocalBackpack, RBX::RelativePanel, RBX::sLocalBackpack>::creator;
+template const RBX::FactoryProduct<RBX::Motor, RBX::AutoJoint, RBX::sMotor>::Creator
+	RBX::FactoryProduct<RBX::Motor, RBX::AutoJoint, RBX::sMotor>::creator;

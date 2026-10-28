@@ -250,3 +250,5 @@ template class RBX::FactoryProduct<RBX::Lighting, RBX::Instance, RBX::sLighting>
 template class RBX::Reflection::
 	Described<RBX::Lighting, RBX::sLighting, RBX::FactoryProduct<RBX::Lighting, RBX::Instance, RBX::sLighting> >;
 template class RBX::DescribedCreatable<RBX::Lighting, RBX::Instance, RBX::sLighting>;
+template const RBX::FactoryProduct<RBX::Sky, RBX::Instance, RBX::sSky>::Creator
+	RBX::FactoryProduct<RBX::Sky, RBX::Instance, RBX::sSky>::creator;
