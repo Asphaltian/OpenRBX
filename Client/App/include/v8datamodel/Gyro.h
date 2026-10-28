@@ -200,6 +200,8 @@ protected:
 	virtual void onEvent(const RunService* source, Stepped event);
 
 private:
+	G3D::Vector3 turn(Body* body, const G3D::Vector3& targetDir);
+
 	PartInstance* getTarget() const { return target.get(); }
 	void setTarget(PartInstance* value);
 

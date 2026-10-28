@@ -154,16 +154,114 @@ void BodyMover::onEvent(const RunService* source, Stepped event)
 	}
 }
 
-// STUB: WEBSERVICE 0x100ea7c0
+// FUNCTION: WEBSERVICE 0x100ea3e0
+Vector3 Rocket::turn(Body* body, const Vector3& targetDir)
+{
+	Vector3 targetDirBody = body->getPV().position.vectorToObjectSpace(targetDir);
+
+	Body* root = body->getRoot();
+
+	Vector3 oldTorqueWorld = root->getBranchTorque();
+
+	const float desiredTorqueX = kTurnP * root->getBranchIBodyV3().x * targetDirBody.y;
+	const float desiredTorqueY = -kTurnP * root->getBranchIBodyV3().y * targetDirBody.x;
+
+	Vector3 torqueBody = body->getPV().position.vectorToObjectSpace(oldTorqueWorld);
+
+	if (fabs(desiredTorqueX - torqueBody.x) < root->getBranchIBodyV3().x * maxTorque.x) {
+		torqueBody.x = desiredTorqueX;
+	}
+	else {
+		torqueBody.x += desiredTorqueX;
+	}
+
+	if (fabs(desiredTorqueY - torqueBody.y) < root->getBranchIBodyV3().y * maxTorque.y) {
+		torqueBody.y = desiredTorqueY;
+	}
+	else {
+		torqueBody.y += desiredTorqueY;
+	}
+
+	Vector3 angVelBody = body->getPV().position.vectorToObjectSpace(body->getPV().velocity.rotational);
+
+	torqueBody.x -= kTurnD * (root->getBranchIBodyV3().x * angVelBody.x);
+	torqueBody.y -= kTurnD * (root->getBranchIBodyV3().y * angVelBody.y);
+
+	Vector3 addedTorque = body->getPV().position.vectorToWorldSpace(torqueBody) - oldTorqueWorld;
+
+	root->accumulateTorque(addedTorque);
+
+	return targetDirBody;
+}
+
+// FUNCTION: WEBSERVICE 0x100ea7c0
 void BodyGyro::computeOrientation(Body* body)
 {
-	STUB(0x100ea7c0);
+	if (!G3D::fuzzyEq(maxTorque.y, 0.0f)) {
+		Body* root = body->getRoot();
+
+		Vector3 oldTorqueWorld = root->getBranchTorque();
+
+		Vector3 localZNegAxis = body->getPV().position.vectorToObjectSpace(cframe.lookVector());
+
+		const float desiredTorqueY = -kP * root->getBranchIBodyV3().y * localZNegAxis.x;
+
+		Vector3 torqueBody = body->getPV().position.vectorToObjectSpace(oldTorqueWorld);
+
+		if (fabs(desiredTorqueY - torqueBody.y) < root->getBranchIBodyV3().y * maxTorque.y) {
+			torqueBody.y = desiredTorqueY;
+		}
+		else {
+			torqueBody.y += desiredTorqueY;
+		}
+
+		Vector3 angVelBody = body->getPV().position.vectorToObjectSpace(body->getPV().velocity.rotational);
+
+		torqueBody.y -= kD * root->getBranchIBodyV3().y * angVelBody.y;
+
+		Vector3 addedTorque = body->getPV().position.vectorToWorldSpace(torqueBody) - oldTorqueWorld;
+		root->accumulateTorque(addedTorque);
+	}
 }
 
 // STUB: WEBSERVICE 0x100eaaf0
 void BodyGyro::computeBalance(Body* body)
 {
-	STUB(0x100eaaf0);
+	if (!G3D::fuzzyEq(maxTorque.x, 0.0f) || !G3D::fuzzyEq(maxTorque.z, 0.0f)) {
+		Body* root = body->getRoot();
+
+		Vector3 oldTorqueWorld = root->getBranchTorque();
+
+		Vector3 localYAxis = body->getPV().position.vectorToObjectSpace(cframe.upVector());
+
+		const float desiredTorqueX = kP * root->getBranchIBodyV3().x * localYAxis.z;
+		const float desiredTorqueZ = -kP * root->getBranchIBodyV3().z * localYAxis.x;
+
+		Vector3 torqueBody = body->getPV().position.vectorToObjectSpace(oldTorqueWorld);
+
+		if (fabs(desiredTorqueX - torqueBody.x) < root->getBranchIBodyV3().x * maxTorque.x) {
+			torqueBody.x = desiredTorqueX;
+		}
+		else {
+			torqueBody.x += desiredTorqueX;
+		}
+
+		if (fabs(desiredTorqueZ - torqueBody.z) < root->getBranchIBodyV3().z * maxTorque.z) {
+			torqueBody.z = desiredTorqueZ;
+		}
+		else {
+			torqueBody.z += desiredTorqueZ;
+		}
+
+		Vector3 angVelBody = body->getPV().position.vectorToObjectSpace(body->getPV().velocity.rotational);
+
+		torqueBody.x -= kD * root->getBranchIBodyV3().x * angVelBody.x;
+		torqueBody.z -= kD * root->getBranchIBodyV3().z * angVelBody.z;
+
+		Vector3 addedTorque = body->getPV().position.vectorToWorldSpace(torqueBody) - oldTorqueWorld;
+
+		root->accumulateTorque(addedTorque);
+	}
 }
 
 // STUB: WEBSERVICE 0x100eaf60
@@ -216,10 +314,45 @@ void BodyThrust::computeForce(float dt, bool throttling)
 // STUB: WEBSERVICE 0x100ebb10
 void Rocket::computeForce(float dt, bool throttling)
 {
-	STUB(0x100ebb10);
+	if (active) {
+		Body* body = part->getPrimitive()->getBody();
+
+		Vector3 targetPos = target ? target->getCoordinateFrame().pointToWorldSpace(targetOffset) : targetOffset;
+		targetPos -= body->getPV().position.translation;
+
+		Body* root = body->getRoot();
+
+		Vector3 targetDir = targetPos.direction();
+		Vector3 pAccel = targetPos * kThrustP;
+
+		Vector3 force = pAccel * root->getBranchMass();
+
+		if (root->getPV().velocity.linear.squaredLength() > maxSpeed * maxSpeed) {
+			Vector3 velDir = root->getPV().velocity.linear.direction();
+			float dot = velDir.dot(force);
+
+			if (dot > 0.0f) {
+				force -= velDir * dot;
+				force -= root->getBranchMass() * (root->getPV().velocity.linear - velDir * maxSpeed) / dt;
+			}
+		}
+
+		force -= root->getBranchMass() * kThrustD * root->getPV().velocity.linear;
+		force -= body->getBranchForce();
+
+		Math::fixDenorm(force);
+
+		force = force.clamp(Vector3(-maxThrust, -maxThrust, -maxThrust), Vector3(maxThrust, maxThrust, maxThrust));
+
+		root->accumulateForceAtBranchCofm(force);
+
+		const Vector3& forceDir = force.squaredLength() > 1e-6f ? force.direction() : Vector3::zero();
+
+		turn(body, (targetDir * cartoonFactor + forceDir * (1.0f - cartoonFactor)).direction());
+	}
 }
 
-// STUB: WEBSERVICE 0x100ebfb0
+// FUNCTION: WEBSERVICE 0x100ebfb0
 void BodyGyro::computeForce(float dt, bool throttling)
 {
 	Body* body = part->getPrimitive()->getBody();
