@@ -135,7 +135,7 @@ public:
 	HRESULT __stdcall GetVersion(wchar_t** result);
 	HRESULT __stdcall GetStatus(Status* result);
 	HRESULT __stdcall Update(wchar_t* url);
-	HRESULT __stdcall GetStandardOutMessages(int lastId, StandardOutMessages* result);
+	HRESULT __stdcall GetStandardOutMessages(int maxCount, StandardOutMessages* result);
 
 	// FUNCTION: WEBSERVICE 0x1000dcc0
 	const _soapmap** GetFunctionMap() { return ___Roblox_CWebService_funcs; }
@@ -227,6 +227,19 @@ private:
 	std::map<std::string, Job>::iterator getJob(wchar_t* jobID);
 	void touch(Job& job, double timeout) { job.expiration = G3D::System::getLocalTime() + timeout; }
 	double secondsToTimeout(const Job& job) { return job.expiration - G3D::System::getLocalTime(); }
+
+	template <class T>
+	T* allocate(int count)
+	{
+		if (count == 0) {
+			return NULL;
+		}
+
+		size_t bytes = count * sizeof(T);
+		T* items = (T*) GetMemMgr()->Allocate(bytes);
+		memset(items, 0, bytes);
+		return items;
+	}
 
 	static std::map<std::string, Job> jobs;
 	static boost::mutex sync;
@@ -326,42 +339,37 @@ extern "C" BOOL WINAPI TerminateExtension(DWORD dwFlags)
 
 namespace Roblox {
 
-// STUB: WEBSERVICE 0x1000e3b0
+// FUNCTION: WEBSERVICE 0x1000e3b0
 HRESULT CWebService::ReportException(const std::exception& e)
 {
 	std::stringstream ss;
 	TextXmlWriter::encodedWrite(ss, e.what());
-	errorMessage = ss.str().c_str();
+	errorMessage = ATL::CStringW(ss.str().c_str());
 	return E_FAIL;
 }
 
-// STUB: WEBSERVICE 0x1000e4d0
+// FUNCTION: WEBSERVICE 0x1000e4d0
 HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
 {
 	boost::mutex::scoped_lock lock(sync);
 
-	wchar_t** items = NULL;
 	result->count = jobs.size();
+	result->items = allocate<wchar_t*>(result->count);
 
-	if (result->count != 0) {
-		size_t bytes = result->count * sizeof(wchar_t*);
-		items = (wchar_t**) GetMemMgr()->Allocate(bytes);
-		memset(items, 0, bytes);
-	}
-
-	result->items = items;
-
-	int index = 0;
-	for (std::map<std::string, Job>::const_iterator it = jobs.begin(); it != jobs.end(); ++it) {
-		ATL::CComBSTR jobID(ATL::CStringA(it->first.c_str()));
-		result->items[index] = jobID.Detach();
-		index++;
+	int i = 0;
+	std::map<std::string, Job>::iterator iter = jobs.begin();
+	std::map<std::string, Job>::iterator end = jobs.end();
+	while (iter != end) {
+		ATL::CComBSTR bstr(ATL::CStringA(iter->first.c_str()));
+		result->items[i] = bstr.Detach();
+		++iter;
+		++i;
 	}
 
 	return S_OK;
 }
 
-// STUB: WEBSERVICE 0x1000e650
+// FUNCTION: WEBSERVICE 0x1000e650
 HRESULT __stdcall CWebService::TouchJob(wchar_t* jobID, double timeout)
 {
 	try {
@@ -382,14 +390,14 @@ HRESULT __stdcall CWebService::OpenJob(wchar_t* jobID, ScriptExecution script, d
 	return E_NOTIMPL;
 }
 
-// STUB: WEBSERVICE 0x1000e980
+// FUNCTION: WEBSERVICE 0x1000e980
 HRESULT __stdcall CWebService::CloseJob(wchar_t* jobID)
 {
 	try {
 		boost::shared_ptr<RBX::DataModel> dataModel;
 		{
 			boost::mutex::scoped_lock lock(sync);
-			std::map<std::string, Job>::iterator iter = jobs.find(std::string(ATL::CStringA(jobID)));
+			std::map<std::string, Job>::iterator iter = jobs.find(ATL::CStringA(jobID).GetString());
 			if (iter != jobs.end()) {
 				dataModel = iter->second.dataModel;
 				jobs.erase(iter);
@@ -398,7 +406,7 @@ HRESULT __stdcall CWebService::CloseJob(wchar_t* jobID)
 
 		if (dataModel) {
 			RBX::DataModel::closeDataModel(dataModel, true);
-			RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Closed Job %s", ATL::CStringA(jobID));
+			RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Closed Job %s", ATL::CStringA(jobID).GetString());
 		}
 	}
 	catch (std::exception& e) {
@@ -408,7 +416,7 @@ HRESULT __stdcall CWebService::CloseJob(wchar_t* jobID)
 	return S_OK;
 }
 
-// STUB: WEBSERVICE 0x1000ebd0
+// FUNCTION: WEBSERVICE 0x1000ebd0
 HRESULT __stdcall CWebService::CloseTimedoutJobs(int* result)
 {
 	*result = 0;
@@ -421,22 +429,23 @@ HRESULT __stdcall CWebService::CloseTimedoutJobs(int* result)
 			std::map<std::string, Job> keep;
 			std::map<std::string, Job>::iterator end = jobs.end();
 			for (std::map<std::string, Job>::iterator iter = jobs.begin(); iter != end; ++iter) {
-				if (secondsToTimeout(iter->second) < 0) {
-					dataModels.push_back(iter->second.dataModel);
+				if (secondsToTimeout(iter->second) >= 0) {
+					keep.insert(*iter);
 				}
 				else {
-					keep.insert(*iter);
+					dataModels.push_back(iter->second.dataModel);
 				}
 			}
 
 			jobs = keep;
 		}
 
-		for (std::vector<boost::shared_ptr<RBX::DataModel> >::iterator iter = dataModels.begin();
-			 iter != dataModels.end();
-			 ++iter) {
+		std::vector<boost::shared_ptr<RBX::DataModel> >::iterator iter = dataModels.begin();
+		std::vector<boost::shared_ptr<RBX::DataModel> >::iterator end = dataModels.end();
+		while (iter != end) {
 			RBX::DataModel::closeDataModel(*iter, true);
 			(*result)++;
+			++iter;
 		}
 	}
 	catch (std::exception& e) {
@@ -446,11 +455,47 @@ HRESULT __stdcall CWebService::CloseTimedoutJobs(int* result)
 	return S_OK;
 }
 
-// STUB: WEBSERVICE 0x1000ee00
+// FUNCTION: WEBSERVICE 0x1000ee00
 HRESULT __stdcall CWebService::CloseOrphanedJobs(Strings activeJobs, int* result)
 {
-	STUB(0x1000ee00);
-	return E_NOTIMPL;
+	*result = 0;
+
+	try {
+		std::vector<boost::shared_ptr<RBX::DataModel> > dataModels;
+		{
+			std::map<std::string, Job> keep;
+			boost::mutex::scoped_lock lock(sync);
+			std::map<std::string, Job>::iterator end = jobs.end();
+			for (std::map<std::string, Job>::iterator iter = jobs.begin(); iter != end; ++iter) {
+				bool found = false;
+				for (int i = 0; i < activeJobs.count; ++i) {
+					if (iter->first == ATL::CStringA(activeJobs.items[i]).GetString()) {
+						keep.insert(*iter);
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					dataModels.push_back(iter->second.dataModel);
+				}
+			}
+
+			jobs = keep;
+		}
+
+		std::vector<boost::shared_ptr<RBX::DataModel> >::iterator iter = dataModels.begin();
+		std::vector<boost::shared_ptr<RBX::DataModel> >::iterator end = dataModels.end();
+		while (iter != end) {
+			RBX::DataModel::closeDataModel(*iter, true);
+			(*result)++;
+			++iter;
+		}
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
+
+	return S_OK;
 }
 
 // FUNCTION: WEBSERVICE 0x1000f0e0
@@ -474,7 +519,7 @@ HRESULT __stdcall CWebService::CloseAllJobs()
 	return S_OK;
 }
 
-// STUB: WEBSERVICE 0x1000f2e0
+// FUNCTION: WEBSERVICE 0x1000f2e0
 HRESULT __stdcall CWebService::GetTimeout(wchar_t* jobID, double* timeout)
 {
 	try {
@@ -488,13 +533,13 @@ HRESULT __stdcall CWebService::GetTimeout(wchar_t* jobID, double* timeout)
 	return S_OK;
 }
 
-// STUB: WEBSERVICE 0x1000f3c0
+// FUNCTION: WEBSERVICE 0x1000f3c0
 std::map<std::string, CWebService::Job>::iterator CWebService::getJob(wchar_t* jobID)
 {
-	std::map<std::string, Job>::iterator job = jobs.find(std::string(ATL::CStringA(jobID)));
+	std::map<std::string, Job>::iterator job = jobs.find(ATL::CStringA(jobID).GetString());
 
 	if (job == jobs.end()) {
-		throw std::runtime_error(G3D::format("Job %s not found", ATL::CStringA(jobID)));
+		throw std::runtime_error(G3D::format("Job %s not found", ATL::CStringA(jobID).GetString()));
 	}
 
 	return job;
@@ -549,38 +594,32 @@ HRESULT __stdcall CWebService::Update(wchar_t* url)
 	throw std::runtime_error("Update not implemented");
 }
 
-// STUB: WEBSERVICE 0x1000fb80
-HRESULT __stdcall CWebService::GetStandardOutMessages(int lastId, StandardOutMessages* result)
+// FUNCTION: WEBSERVICE 0x1000fb80
+HRESULT __stdcall CWebService::GetStandardOutMessages(int maxCount, StandardOutMessages* result)
 {
-	boost::mutex::scoped_lock lock(standardOutLog->messagesMutex);
+	try {
+		boost::mutex::scoped_lock lock(standardOutLog->messagesMutex);
 
-	while (standardOutLog->messages.size() > lastId) {
-		standardOutLog->messages.pop();
+		while (standardOutLog->messages.size() > maxCount) {
+			standardOutLog->messages.pop();
+		}
+
+		result->count = standardOutLog->messages.size();
+		result->items = allocate<StandardOutMessage>(result->count);
+
+		int i = 0;
+		while (standardOutLog->messages.size() > 0) {
+			const RBX::StandardOutMessage& message = standardOutLog->messages.front();
+			result->items[i].type = (MessageType) message.type;
+			result->items[i].time = message.time;
+			ATL::CComBSTR bstr(ATL::CStringA(message.message.c_str()));
+			result->items[i].text = bstr.Detach();
+			i++;
+			standardOutLog->messages.pop();
+		}
 	}
-
-	StandardOutMessage* items = NULL;
-	result->count = standardOutLog->messages.size();
-
-	if (result->count != 0) {
-		size_t bytes = result->count * sizeof(StandardOutMessage);
-		items = (StandardOutMessage*) GetMemMgr()->Allocate(bytes);
-		memset(items, 0, bytes);
-	}
-
-	result->items = items;
-
-	int i = 0;
-	while (!standardOutLog->messages.empty()) {
-		const RBX::StandardOutMessage& message = standardOutLog->messages.front();
-
-		result->items[i].type = (MessageType) message.type;
-		result->items[i].time = message.time;
-
-		ATL::CComBSTR text(ATL::CStringA(message.message.c_str()));
-		result->items[i].text = text.Detach();
-
-		standardOutLog->messages.pop();
-		i++;
+	catch (std::exception& e) {
+		return ReportException(e);
 	}
 
 	return S_OK;
