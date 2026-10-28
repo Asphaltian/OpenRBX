@@ -77,6 +77,9 @@ public:
 	virtual void render2d(Adorn* adorn);
 	virtual void render3dAdorn(Adorn* adorn);
 
+	// FUNCTION: WEBSERVICE 0x101019f0 FOLDED
+	virtual void render3dSelect(Adorn* adorn, SelectState selectState) {}
+
 private:
 	virtual IScriptOwner* scriptShouldRun(Script* script);
 	virtual void runScript(Script* script, ScriptContext* context);

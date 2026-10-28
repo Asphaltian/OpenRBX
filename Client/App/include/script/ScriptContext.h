@@ -84,6 +84,9 @@ public:
 
 	static ScriptContext& getContext(lua_State* L);
 
+	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	virtual XmlElement* write() { return NULL; }
+
 	unsigned int getThreadCount() const;
 
 	void closeState();

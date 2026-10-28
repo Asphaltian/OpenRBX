@@ -299,6 +299,12 @@ float Humanoid::getIntendedRotationAboutYAxis()
 	return 0;
 }
 
+// FUNCTION: WEBSERVICE 0x10059c10 FOLDED
+bool Humanoid::askSetParent(const Instance* instance) const
+{
+	return dynamic_cast<const ModelInstance*>(instance) != NULL;
+}
+
 // FUNCTION: WEBSERVICE 0x100a1840
 Humanoid* Humanoid::modelIsCharacter(const Instance* instance)
 {

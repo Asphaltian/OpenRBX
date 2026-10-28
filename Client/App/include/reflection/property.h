@@ -1004,9 +1004,15 @@ public:
 
 		virtual bool isReadOnly() const { return false; }
 
-		virtual T getValue(const DescribedBase* instance) const { return static_cast<const Class*>(instance)->*member; }
+		virtual T getValue(const DescribedBase* object) const
+		{
+			const Class* instance = static_cast<const Class*>(object);
+			return instance->*member;
+		}
 
 		// clang-format off
+		// TEMPLATE: WEBSERVICE 0x100ca2a0
+		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::Tool>::getValue
 		// TEMPLATE: WEBSERVICE 0x100ccd50
 		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::Tool>::setValue
 		// TEMPLATE: WEBSERVICE 0x100de0f0
@@ -1017,6 +1023,10 @@ public:
 		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Soundscape::SoundService>::getValue
 		// TEMPLATE: WEBSERVICE 0x100eb7c0
 		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::getValue
+		// TEMPLATE: WEBSERVICE 0x100fd9b0
+		// RBX::Reflection::BoundProp<int,1>::BoundPropGetSet<RBX::SpawnLocation>::getValue
+		// TEMPLATE: WEBSERVICE 0x100fd9e0
+		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::SpawnLocation>::getValue
 		// TEMPLATE: WEBSERVICE 0x100b53a0
 		// RBX::Reflection::BoundProp<bool,1>::BoundPropGetSet<RBX::Sky>::setValue
 		// TEMPLATE: WEBSERVICE 0x100e1920

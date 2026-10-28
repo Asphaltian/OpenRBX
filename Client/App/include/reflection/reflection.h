@@ -902,6 +902,8 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10082940
 	// RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x100829b0
+	// RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1009eac0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1009eb40

@@ -1,6 +1,7 @@
 #include "v8datamodel/FaceInstance.h"
 
 #include "reflection/property.h"
+#include "v8datamodel/PartInstance.h"
 
 namespace RBX {
 
@@ -17,6 +18,12 @@ const Reflection::EnumPropDescriptor<FaceInstance, NormalId> FaceInstance::prop_
 	&RBX::FaceInstance::getFace,
 	&RBX::FaceInstance::setFace
 );
+
+// FUNCTION: WEBSERVICE 0x100ea070 FOLDED
+bool FaceInstance::askSetParent(const Instance* instance) const
+{
+	return dynamic_cast<const PartInstance*>(instance) != NULL;
+}
 
 // FUNCTION: WEBSERVICE 0x10121d10
 void FaceInstance::setFace(NormalId value)

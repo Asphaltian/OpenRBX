@@ -122,6 +122,10 @@ public:
 
 	virtual void render2d(Adorn* adorn);
 
+protected:
+	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	virtual bool askSetParent(const Instance* instance) const { return true; }
+
 private:
 	// FUNCTION: WEBSERVICE 0x100d16c0
 	virtual G3D::Vector2 getSize() const { return canvasSize; }

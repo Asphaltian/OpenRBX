@@ -7300,6 +7300,7 @@ address,type,symbol
 0x1023c528,global,??_8?$FactoryProduct@VFlag@RBX@@VTool@2@$1?sFlag@2@3QBDB@RBX@@7B@
 0x1023c534,global,??_8Flag@RBX@@7B@
 0x102ce930,global,??_R0?AVFlag@RBX@@@8
+0x102d1720,global,??_R0?AVSoundChannel@Soundscape@RBX@@@8
 0x102fa61c,global,flag___RBX::ServiceProvider::getClassIndex<RBX::FlagStandService>
 0x102418c0,global,??_7FlagStand@RBX@@6BICameraSubject@1@@
 0x10241908,global,??_7FlagStand@RBX@@6BIMoving@1@@

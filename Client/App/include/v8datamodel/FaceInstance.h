@@ -23,6 +23,9 @@ public:
 
 	void setFace(NormalId value);
 
+protected:
+	virtual bool askSetParent(const Instance* instance) const;
+
 private:
 	NormalId face; // 0x0f8
 };

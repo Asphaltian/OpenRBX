@@ -51,6 +51,9 @@ public:
 	static const Reflection::PropDescriptor<Script, ContentId> prop_SourceCodeId;
 	static Reflection::BoundProp<bool, 1> prop_Disabled;
 
+	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	virtual bool askSetParent(const Instance* instance) const { return true; }
+
 protected:
 	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
 	virtual void onAncestorChanged(const AncestorChanged& event);

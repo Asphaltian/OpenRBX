@@ -176,6 +176,7 @@ private:
 	virtual bool isControllable() const;
 	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
 	virtual void onAncestorChanged(const AncestorChanged& event);
+	virtual bool askSetParent(const Instance* instance) const;
 	virtual void onEvent(const RunService* source, Stepped event);
 	void onLocalHumanoidEnteringWorkspace();
 	virtual void computeForce(float dt, bool throttling);
