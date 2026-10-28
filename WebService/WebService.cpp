@@ -383,11 +383,26 @@ HRESULT __stdcall CWebService::TouchJob(wchar_t* jobID, double timeout)
 	return S_OK;
 }
 
-// STUB: WEBSERVICE 0x1000e730
+// FUNCTION: WEBSERVICE 0x1000e730
 HRESULT __stdcall CWebService::OpenJob(wchar_t* jobID, ScriptExecution script, double timeout, LuaArguments* result)
 {
-	STUB(0x1000e730);
-	return E_NOTIMPL;
+	try {
+		std::string id(ATL::CStringA(jobID).GetString());
+		boost::shared_ptr<RBX::DataModel> dataModel = RBX::DataModel::createDataModel();
+		{
+			boost::mutex::scoped_lock lock(sync);
+			Job job;
+			job.dataModel = dataModel;
+			touch(job, timeout);
+			jobs[id] = job;
+		}
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Opened Job %s", id.c_str());
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
+
+	return Execute(jobID, script, result);
 }
 
 // FUNCTION: WEBSERVICE 0x1000e980
@@ -588,10 +603,17 @@ HRESULT __stdcall CWebService::GetStatus(Status* result)
 	return S_OK;
 }
 
-// STUB: WEBSERVICE 0x1000faf0
+// FUNCTION: WEBSERVICE 0x1000faf0
 HRESULT __stdcall CWebService::Update(wchar_t* url)
 {
-	throw std::runtime_error("Update not implemented");
+	try {
+		throw std::runtime_error("Update not implemented");
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
+
+	return S_OK;
 }
 
 // FUNCTION: WEBSERVICE 0x1000fb80
