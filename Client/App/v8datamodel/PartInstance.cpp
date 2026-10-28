@@ -615,9 +615,16 @@ bool PartInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint
 	return false;
 }
 
+static float readFloat(const XmlElement* element, const Name& tag)
+{
+	float value;
+	element->findFirstChildByTag(tag)->getValue(value);
+	return value;
+}
+
 namespace Reflection {
 
-// STUB: WEBSERVICE 0x1009c1c0
+// FUNCTION: WEBSERVICE 0x1009c1c0
 template <>
 void TypedPropertyDescriptor<CoordinateFrame>::readValue(
 	DescribedBase* instance,
@@ -625,14 +632,41 @@ void TypedPropertyDescriptor<CoordinateFrame>::readValue(
 	IReferenceBinder& binder
 ) const
 {
-	STUB(0x1009c1c0);
+	if (!element->isXsiNil()) {
+		CoordinateFrame c;
+		c.translation.x = readFloat(element, tag_X);
+		c.translation.y = readFloat(element, tag_Y);
+		c.translation.z = readFloat(element, tag_Z);
+		c.rotation[0][0] = readFloat(element, tag_R00);
+		c.rotation[0][1] = readFloat(element, tag_R01);
+		c.rotation[0][2] = readFloat(element, tag_R02);
+		c.rotation[1][0] = readFloat(element, tag_R10);
+		c.rotation[1][1] = readFloat(element, tag_R11);
+		c.rotation[1][2] = readFloat(element, tag_R12);
+		c.rotation[2][0] = readFloat(element, tag_R20);
+		c.rotation[2][1] = readFloat(element, tag_R21);
+		c.rotation[2][2] = readFloat(element, tag_R22);
+		setValue(instance, c);
+	}
 }
 
-// STUB: WEBSERVICE 0x1009c3c0
+// FUNCTION: WEBSERVICE 0x1009c3c0
 template <>
 void TypedPropertyDescriptor<CoordinateFrame>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
-	STUB(0x1009c3c0);
+	CoordinateFrame c = getValue(instance);
+	element->addChild(new XmlElement(tag_X, c.translation.x));
+	element->addChild(new XmlElement(tag_Y, c.translation.y));
+	element->addChild(new XmlElement(tag_Z, c.translation.z));
+	element->addChild(new XmlElement(tag_R00, c.rotation[0][0]));
+	element->addChild(new XmlElement(tag_R01, c.rotation[0][1]));
+	element->addChild(new XmlElement(tag_R02, c.rotation[0][2]));
+	element->addChild(new XmlElement(tag_R10, c.rotation[1][0]));
+	element->addChild(new XmlElement(tag_R11, c.rotation[1][1]));
+	element->addChild(new XmlElement(tag_R12, c.rotation[1][2]));
+	element->addChild(new XmlElement(tag_R20, c.rotation[2][0]));
+	element->addChild(new XmlElement(tag_R21, c.rotation[2][1]));
+	element->addChild(new XmlElement(tag_R22, c.rotation[2][2]));
 }
 
 } // namespace Reflection

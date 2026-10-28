@@ -131,7 +131,6 @@ address,size,symbol,name
 0x100b74f0,0xb7,?singleton@GlobalSettings@RBX@@SA?AV?$shared_ptr@VGlobalSettings@RBX@@@boost@@XZ,
 0x100c25f0,0x7,?getCameraFocus@Camera@RBX@@QBEABVCoordinateFrame@G3D@@XZ,
 0x100ca350,0x36,?setValue@?$GetSetImpl@P8Tool@RBX@@BE?BVVector3@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VTool@RBX@@VVector3@G3D@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABVVector3@G3D@@@Z,
-0x100d0b10,0x5d,?getVerb@VerbContainer@RBX@@QAEPAVVerb@2@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 0x100d0fc0,0x3d,?disabledFill@GuiItem@RBX@@SAABVColor4@G3D@@XZ,
 0x100d1000,0x37,?translucentBackdrop@GuiItem@RBX@@SAABVColor4@G3D@@XZ,
 0x100d10b0,0xcb,?label2d@GuiItem@RBX@@IBEXPAVAdorn@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVColor4@G3D@@2W4XAlign@32@@Z,

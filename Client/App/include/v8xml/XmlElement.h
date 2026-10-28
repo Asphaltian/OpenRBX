@@ -134,6 +134,7 @@ public:
 
 	XmlNameValuePair(const RBX::Name& tag, const RBX::Name* value) : tag(tag), valueType(NAME), nameValue(value) {}
 	XmlNameValuePair(const RBX::Name& tag, const int value) : tag(tag), valueType(INT), intValue(value) {}
+	XmlNameValuePair(const RBX::Name& tag, float value) : tag(tag), valueType(FLOAT), floatValue(value) {}
 	XmlNameValuePair(const RBX::Name& tag, const char* text);
 
 	// FUNCTION: WEBSERVICE 0x1003e8a0

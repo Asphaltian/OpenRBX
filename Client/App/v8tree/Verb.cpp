@@ -1,17 +1,49 @@
 #include "v8tree/Verb.h"
 
+#include "util/Name.h"
+
 namespace RBX {
 
-// STUB: WEBSERVICE 0x100d0a60
-VerbContainer::~VerbContainer()
+// FUNCTION: WEBSERVICE 0x100d09b0
+void VerbContainer::setVerbParent(VerbContainer* parent)
 {
-	STUB(0x100d0a60);
+	this->parent = parent;
 }
 
-// STUB: WEBSERVICE 0x100d0b70
+// FUNCTION: WEBSERVICE 0x100d09c0
+Verb* VerbContainer::getVerb(const Name& name)
+{
+	if (name != Name::getNullName()) {
+		std::map<const Name*, Verb*>::iterator iter = verbs.find(&name);
+		if (iter != verbs.end()) {
+			return iter->second;
+		}
+
+		if (parent) {
+			return parent->getVerb(name);
+		}
+	}
+
+	return NULL;
+}
+
+// FUNCTION: WEBSERVICE 0x100d0a60
+VerbContainer::~VerbContainer()
+{
+	while (verbs.begin() != verbs.end()) {
+		delete verbs.begin()->second;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100d0b10
+Verb* VerbContainer::getVerb(std::string name)
+{
+	return getVerb(Name::lookup(name));
+}
+
+// FUNCTION: WEBSERVICE 0x100d0b70
 VerbContainer::VerbContainer(VerbContainer* parent) : parent(parent)
 {
-	STUB(0x100d0b70);
 }
 
 } // namespace RBX
