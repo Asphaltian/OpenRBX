@@ -978,6 +978,7 @@ address,type,name,module
 0x102fd0dc,global,toTouching,
 0x102fd0ec,global,toStepping,
 0x102fd13c,global,once_SafeChat_singleton,
+0x102fd140,global,sing,SafeChat.obj
 0x102fd144,global,utterance,
 0x102fd148,global,denormFix,
 0x102fd320,global,desc_textureId,
