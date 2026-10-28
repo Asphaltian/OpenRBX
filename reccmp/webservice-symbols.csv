@@ -196,7 +196,6 @@ address,size,symbol,name
 0x1017aaa0,0x120,?create@BrickMesh@View@RBX@@SA?AV?$ReferenceCountedPointer@VMesh@Render@RBX@@@G3D@@ABVVector3@5@VRenderSurfaceTypes@23@VBrickColor@3@@Z,
 0x1019cc30,0x38,??0ChangePropertyItem@Replicator@Network@RBX@@QAE@AAV123@ABV?$shared_ptr@$$CBVInstance@RBX@@@boost@@ABVPropertyDescriptor@Reflection@3@@Z,
 0x101a1c20,0x36c,?onPropertyChanged@Replicator@Network@RBX@@IAEXV?$shared_ptr@VInstance@RBX@@@boost@@PBVPropertyDescriptor@Reflection@3@@Z,
-0x101a5f00,0x87,?fire@?$SignalDescImpl@$01$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z@Reflection@RBX@@QAEXPAVSignalSource@23@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z,
 0x101ec780,0x39,?selectColor@Draw@RBX@@SAABVColor3@G3D@@XZ,
 0x101eccb0,0xb3,?getTextureProxy@Textures@RBX@@SA?AV?$ReferenceCountedPointer@VTextureProxyBase@RBX@@@G3D@@PAVAdorn@2@ABVContentId@2@@Z,
 0x101ecd70,0xd2,?hitTestBall@HitTest@RBX@@CA_NABVPart@2@AAVRay@G3D@@AAVVector3@5@M@Z,

@@ -22,8 +22,18 @@ namespace RBX {
 // RBX::Association<RBX::Instance>::TItem<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x10064150
 // RBX::Association<RBX::Instance>::get<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >
+// TEMPLATE: WEBSERVICE 0x1019c630
+// RBX::Association<RBX::Instance>::TItem<RBX::Network::ClientPhysics>::TItem<RBX::Network::ClientPhysics><RBX::PartInstance *>
+// SYNTHETIC: WEBSERVICE 0x1019c690
+// RBX::Association<RBX::Instance>::TItem<RBX::Network::ClientPhysics>::~TItem<RBX::Network::ClientPhysics>
 // SYNTHETIC: WEBSERVICE 0x1019d160
 // RBX::Association<RBX::Instance>::Item::`scalar deleting destructor'
+// SYNTHETIC: WEBSERVICE 0x1019d4b0
+// RBX::Association<RBX::Instance>::TItem<RBX::Network::ClientPhysics>::`scalar deleting destructor'
+// TEMPLATE: WEBSERVICE 0x101a2b80
+// RBX::Association<RBX::Instance>::get<TimeStamp>
+// TEMPLATE: WEBSERVICE 0x101a2cb0
+// RBX::Association<RBX::Instance>::get<RBX::Network::ClientPhysics,RBX::PartInstance *>
 // clang-format on
 template <class T>
 // SIZE 0x10
@@ -101,6 +111,19 @@ public:
 		Item*& item = items[index<U>()];
 		if (!item) {
 			item = new TItem<U>();
+		}
+		return static_cast<TItem<U>*>(item)->t;
+	}
+
+	template <class U, class Arg>
+	U& get(Arg arg)
+	{
+		while (items.size() <= index<U>()) {
+			items.push_back(NULL);
+		}
+		Item*& item = items[index<U>()];
+		if (!item) {
+			item = new TItem<U>(arg);
 		}
 		return static_cast<TItem<U>*>(item)->t;
 	}

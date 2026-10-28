@@ -1,14 +1,18 @@
 #include "network/Replicator.h"
 
+#include "ClientPhysics.h"
 #include "PacketIds.h"
 #include "network/NetworkSettings.h"
 #include "network/Player.h"
 #include "network/Players.h"
 #include "security/SecurityContext.h"
 #include "util/Log.h"
+#include "util/Math.h"
 #include "util/Name.h"
 #include "util/Profiling.h"
+#include "util/Quaternion.h"
 #include "util/StandardOut.h"
+#include "util/Velocity.h"
 #include "util/scopedassign.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Hopper.h"
@@ -19,6 +23,9 @@
 #include "v8datamodel/Stats.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/Workspace.h"
+#include "v8world/Assembly2.h"
+#include "v8world/MotorJoint.h"
+#include "v8world/Primitive.h"
 
 #include <BitStream.h>
 #include <G3D/System.h>
@@ -32,6 +39,18 @@
 #include <boost/noncopyable.hpp>
 #include <stdexcept>
 #include <stdio.h>
+
+// SIZE 0x04
+struct TimeStamp
+{
+	unsigned int time; // 0x00
+
+	TimeStamp() : time(0) {}
+};
+
+static const int positionBits[3] = {15, 14, 15};
+static const float positionMin[3] = {-1024.0f, -512.0f, -1024.0f};
+static const float positionMax[3] = {1024.0f, 512.0f, 1024.0f};
 
 // SIZE 0x210
 class FilePacketLogger : public PacketLogger
@@ -489,6 +508,29 @@ inline Replicator::ItemSender::~ItemSender()
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1019d8c0
+static void readPosition(RakNet::BitStream& bitStream, G3D::Vector3& position)
+{
+	bool compressed;
+	bitStream >> compressed;
+
+	if (compressed) {
+		unsigned short x;
+		unsigned short y;
+		unsigned short z = 0;
+		bitStream.ReadBits((unsigned char*) &x, positionBits[0]);
+		bitStream.ReadBits((unsigned char*) &y, positionBits[1]);
+		bitStream.ReadBits((unsigned char*) &z, positionBits[2]);
+
+		position.x = x / (double) (1 << positionBits[0]) * (positionMax[0] - positionMin[0]) + positionMin[0];
+		position.y = y / (double) (1 << positionBits[1]) * (positionMax[1] - positionMin[1]) + positionMin[1];
+		position.z = z / (double) (1 << positionBits[2]) * (positionMax[2] - positionMin[2]) + positionMin[2];
+	}
+	else {
+		bitStream.ReadVector(position.x, position.y, position.z);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1019dfe0
 void Peer::onEvent(const RunService* source, Heartbeat event)
 {
@@ -557,7 +599,7 @@ inline Replicator::DeleteInstanceItem::DeleteInstanceItem(
 	replicator.pendingDeleteInstances.insert(instance.get());
 }
 
-// STUB: WEBSERVICE 0x1019fe60
+// FUNCTION: WEBSERVICE 0x1019fe60
 inline void Replicator::MarkerItem::write(RakNet::BitStream& bitStream)
 {
 	writeItemType(bitStream, ItemTypeMarker);
@@ -796,6 +838,136 @@ void Replicator::readInstanceDelete(RakNet::BitStream& inBitstream)
 Peer::Peer() : profilePacketsThread(new Profiling::ThreadProfiler("Packets Thread")), rakPeer(new RakPeer())
 {
 	rakPeer->AttachPlugin(this);
+}
+
+// FUNCTION: WEBSERVICE 0x101a4da0
+PluginReceiveResult Replicator::OnReceive_ID_TIMESTAMP(Packet* packet)
+{
+	RakNet::BitStream inBitstream(packet->data, packet->length, false);
+	inBitstream.IgnoreBits(8);
+
+	unsigned int timeStamp;
+	inBitstream >> timeStamp;
+
+	unsigned char id;
+	inBitstream >> id;
+
+	if (id != ID_PHYSICS) {
+		return RR_CONTINUE_PROCESSING;
+	}
+
+	boost::shared_ptr<RunService> runService = shared_from(ServiceProvider::find<RunService>(this));
+
+	Profiling::Mark mark(*profilePhysicsIn, false);
+	bool firstIteration = true;
+	bool inPhysics = false;
+
+	while (true) {
+		boost::shared_ptr<PartInstance> part;
+		Instance* instance;
+		Guid::Data id;
+		if (deserializeInstanceRef(inBitstream, instance, id)) {
+			if (!instance) {
+				if (!inPhysics) {
+					break;
+				}
+				inPhysics = false;
+				continue;
+			}
+
+			part = shared_from_polymorphic_downcast<PartInstance>(instance);
+		}
+		else {
+			if (NetworkSettings::singleton().printPhysicsErrors) {
+				StandardOut::singleton()
+					->print(MESSAGE_WARNING, "   Physics-in of unidentified %s", id.readableString(4).c_str());
+			}
+			return RR_STOP_PROCESSING_AND_DEALLOCATE;
+		}
+
+		inPhysics = true;
+
+		if (!PartInstance::nonNullInWorkspace(part)) {
+			if (NetworkSettings::singleton().printPhysicsErrors) {
+				StandardOut::singleton()
+					->print(MESSAGE_INFO, "Physics-in of part not in workspace %s", id.readableString(4).c_str());
+			}
+			return RR_STOP_PROCESSING_AND_DEALLOCATE;
+		}
+
+		if (!PartInstance::nonNullInWorkspace(part)) {
+			if (NetworkSettings::singleton().printPhysicsErrors) {
+				StandardOut::singleton()
+					->print(MESSAGE_INFO, "Physics-in of part not in workspace %s", id.readableString(4).c_str());
+			}
+			return RR_STOP_PROCESSING_AND_DEALLOCATE;
+		}
+
+		if (!part->getPrimitive()->getAssembly()) {
+			if (NetworkSettings::singleton().printPhysicsErrors) {
+				StandardOut::singleton()
+					->print(MESSAGE_INFO, "Physics-in of primitive with no assembly %s", id.readableString(4).c_str());
+			}
+			return RR_STOP_PROCESSING_AND_DEALLOCATE;
+		}
+
+		if (part->getPrimitive()->getClump()->getAnchored()) {
+			if (NetworkSettings::singleton().printPhysicsErrors) {
+				StandardOut::singleton()
+					->print(MESSAGE_INFO, "Physics-in of anchored primitive %s", id.readableString(4).c_str());
+			}
+			return RR_STOP_PROCESSING_AND_DEALLOCATE;
+		}
+
+		TimeStamp& stamp = part->association().get<TimeStamp>();
+		if (firstIteration && stamp.time > timeStamp) {
+			if (NetworkSettings::singleton().printPhysicsErrors) {
+				StandardOut::singleton()->print(MESSAGE_INFO, "Physics-in dropping old packet");
+			}
+			return RR_STOP_PROCESSING_AND_DEALLOCATE;
+		}
+
+		G3D::CoordinateFrame cf;
+		Velocity vel;
+
+		readPosition(inBitstream, cf.translation);
+
+		Quaternion q(0.0f, 0.0f, 0.0f, 1.0f);
+		inBitstream.ReadNormQuat(q.w, q.x, q.y, q.z);
+		q.toRotationMatrix(cf.rotation);
+
+		stamp.time = timeStamp;
+
+		if (!part->getPrimitive()->getClump()->getAnchored()) {
+			part->setPhysics(cf, vel);
+
+			if (NetworkSettings::singleton().clientPhysics) {
+				ClientPhysics& clientPhysics = part->association().get<ClientPhysics>(part.get());
+				clientPhysics.update(runService);
+			}
+		}
+
+		Assembly* assembly = part->getPrimitive()->getAssembly();
+
+		unsigned char compactNum;
+		inBitstream >> compactNum;
+		int num = compactNum;
+		for (int i = 0; i < num; ++i) {
+			unsigned char byteAngle = 0;
+			inBitstream >> byteAngle;
+			MotorJoint* motor = assembly->getMotor(i);
+			if (motor) {
+				float fromByte = Math::rotationFromByte(byteAngle);
+				motor->setCurrentAngle(fromByte);
+			}
+		}
+
+		firstIteration = false;
+	}
+
+	peer->Send(&inBitstream, MEDIUM_PRIORITY, UNRELIABLE, 0, remotePlayerId, true);
+
+	return RR_STOP_PROCESSING_AND_DEALLOCATE;
 }
 
 // FUNCTION: WEBSERVICE 0x101a5840
@@ -1414,7 +1586,75 @@ void Replicator::receiveData(Packet* packet)
 // STUB: WEBSERVICE 0x101a9220
 PluginReceiveResult Replicator::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
-	STUB(0x101a9220);
+	if (packet->systemAddress == remotePlayerId) {
+		Profiling::Mark mark(*profileReplication, false);
+
+		try {
+			switch (packet->data[0]) {
+			case ID_TIMESTAMP:
+				return OnReceive_ID_TIMESTAMP(packet);
+
+			case ID_CONNECTION_LOST:
+				StandardOut::singleton()
+					->print(MESSAGE_WARNING, "Lost connection to %s\n", packet->systemAddress.ToString());
+				event_Disconnection.fire(this, packet->systemAddress.ToString(), true);
+				disconnected = true;
+				break;
+
+			case ID_DISCONNECTION_NOTIFICATION:
+				StandardOut::singleton()->print(MESSAGE_INFO, "Disconnect from %s", packet->systemAddress.ToString());
+				event_Disconnection.fire(this, packet->systemAddress.ToString(), false);
+				disconnected = true;
+				break;
+
+			case ID_DATA:
+				receiveData(packet);
+				return RR_STOP_PROCESSING_AND_DEALLOCATE;
+
+			case ID_REQUEST_MARKER: {
+				RakNet::BitStream inBitstream(packet->data, packet->length, false);
+				inBitstream.IgnoreBits(8);
+
+				long id;
+				inBitstream >> id;
+
+				pendingItems.push_back(boost::shared_ptr<Item>(new MarkerItem(*this, id)));
+			}
+				return RR_STOP_PROCESSING_AND_DEALLOCATE;
+
+			case ID_SET_GLOBALS: {
+				RakNet::BitStream inBitstream(packet->data, packet->length, false);
+				inBitstream.IgnoreBits(8);
+
+				std::string remoteScope;
+				inBitstream >> remoteScope;
+
+				if (Name::lookup(remoteScope) == Guid::getLocalScope()) {
+					throw std::exception("Remote peer is running in the same process");
+				}
+
+				TopReplConts::iterator end = topReplicationContainers.end();
+				for (TopReplConts::iterator iter = topReplicationContainers.begin(); iter != end; ++iter) {
+					Guid::Data id;
+					deserializeId(inBitstream, id);
+					(*iter)->assignGuid(id);
+					resolvePendingReferences(*iter, id);
+				}
+
+				readProperties(inBitstream, topReplicationContainers[0]);
+			}
+				receivedGlobals = true;
+				return RR_STOP_PROCESSING_AND_DEALLOCATE;
+			}
+		}
+		catch (std::exception& e) {
+			disconnected = true;
+			StandardOut::singleton()
+				->print(MESSAGE_ERROR, "Replicator::OnReceive packet %d: %s", packet->data[0], e.what());
+			return RR_STOP_PROCESSING_AND_DEALLOCATE;
+		}
+	}
+
 	return RR_CONTINUE_PROCESSING;
 }
 

@@ -1330,6 +1330,8 @@ namespace RakNet
 		return true;
 	}
 
+	// TEMPLATE: WEBSERVICE 0x1019cf60
+	// RakNet::BitStream::ReadVector<float>
 	template <class templateType> // templateType for this function must be a float or double
 		bool BitStream::ReadVector( templateType &x, templateType &y, templateType &z )
 	{

@@ -6714,7 +6714,9 @@ address,type,symbol
 0x102ff15c,global,?prop_PrintInstances@RBX@@3V?$BoundProp@_N$00@Reflection@1@A
 0x102ff178,global,?prop_MinExtraPing@RBX@@3V?$BoundProp@H$00@Reflection@1@A
 0x102ff194,global,?prop_PrintPhysicsErrors@RBX@@3V?$BoundProp@_N$00@Reflection@1@A
+0x102ff1b0,global,"i___RBX::Association<RBX::Instance>::index<TimeStamp>"
 0x102ff1b4,global,??_B?1???$index@UTimeStamp@@@?$Association@VInstance@RBX@@@RBX@@ABEIXZ@51
+0x102ff1b8,global,"i___RBX::Association<RBX::Instance>::index<RBX::Network::ClientPhysics>"
 0x102ff1bc,global,??_B?1???$index@VClientPhysics@Network@RBX@@@?$Association@VInstance@RBX@@@RBX@@ABEIXZ@51
 0x102ff1c8,global,??_B?1???$assign_to@V?$bind_t@XV?$mf1@XVReplicator@Network@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVReplicator@Network@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXV?$bind_t@XV?$mf1@XVReplicator@Network@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVReplicator@Network@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z@51
 0x102ff1d0,global,"foo___RBX::Reflection::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >::classDescriptor"
