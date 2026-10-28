@@ -13,12 +13,6 @@ namespace RBX {
 
 const char sDataModel[] = "DataModel";
 
-// STUB: WEBSERVICE 0x1000cd40
-DataModel::Lock::Lock(boost::shared_ptr<const DataModel> dataModel)
-{
-	STUB(0x1000cd40);
-}
-
 // STUB: WEBSERVICE 0x10072640
 float DataModel::step(float distributedGameTime)
 {
@@ -27,10 +21,19 @@ float DataModel::step(float distributedGameTime)
 	return 0.0f;
 }
 
-// STUB: WEBSERVICE 0x100743f0
+// FUNCTION: WEBSERVICE 0x10073de0
+void DataModel::Lock::doLock(const DataModel* dataModel)
+{
+	if (dataModel) {
+		mutex = dataModel->mutex;
+		lock = new boost::recursive_mutex::scoped_lock(*mutex);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x100743f0
 DataModel::Lock::~Lock()
 {
-	STUB(0x100743f0);
+	delete lock;
 }
 
 // STUB: WEBSERVICE 0x1007bb20

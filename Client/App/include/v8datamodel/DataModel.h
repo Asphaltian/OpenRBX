@@ -18,20 +18,28 @@ extern const char sDataModel[];
 class DataModel : public DescribedNonCreatable<DataModel, ServiceProvider, sDataModel>
 {
 private:
-	undefined m_unk0x15c[0x190 - 0x15c];            // 0x15c
-	boost::shared_ptr<LocalBackpack> localBackpack; // 0x190
-	boost::shared_ptr<Workspace> workspace;         // 0x198
-	undefined m_unk0x1a0[0x1fc - 0x1a0];            // 0x1a0
+	undefined m_unk0x15c[0x190 - 0x15c];             // 0x15c
+	boost::shared_ptr<LocalBackpack> localBackpack;  // 0x190
+	boost::shared_ptr<Workspace> workspace;          // 0x198
+	undefined m_unk0x1a0[0x1f0 - 0x1a0];             // 0x1a0
+	boost::shared_ptr<boost::recursive_mutex> mutex; // 0x1f0
+	undefined m_unk0x1f8[0x1fc - 0x1f8];             // 0x1f8
 
 public:
 	// SIZE 0xc
 	class Lock
 	{
 	public:
-		Lock(boost::shared_ptr<const DataModel> dataModel);
+		Lock(const DataModel* dataModel);
+
+		// FUNCTION: WEBSERVICE 0x1000cd40
+		Lock(boost::shared_ptr<const DataModel> dataModel) : lock(NULL) { doLock(dataModel.get()); }
+
 		~Lock();
 
 	private:
+		void doLock(const DataModel* dataModel);
+
 		boost::shared_ptr<boost::recursive_mutex> mutex; // 0x00
 		boost::recursive_mutex::scoped_lock* lock;       // 0x08
 	};
