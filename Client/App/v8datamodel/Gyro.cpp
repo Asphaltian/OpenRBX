@@ -228,6 +228,17 @@ void BodyGyro::computeForce(float dt, bool throttling)
 	computeOrientation(body);
 }
 
+// FUNCTION: WEBSERVICE 0x100ec120
+void registerBodyMovers()
+{
+	BodyGyro::className();
+	BodyPosition::className();
+	BodyVelocity::className();
+	BodyForce::className();
+	BodyThrust::className();
+	Rocket::className();
+}
+
 // FUNCTION: WEBSERVICE 0x100ed460
 BodyGyro::BodyGyro()
 	: DescribedCreatable<BodyGyro, BodyMover, sBodyGyro>(sBodyGyro), kP(3000.0f), kD(500.0f),
@@ -327,6 +338,23 @@ void BodyMover::onAncestorChanged(const AncestorChanged& event)
 	}
 
 	updateWorld();
+}
+
+// FUNCTION: WEBSERVICE 0x100ee240
+void Rocket::onEvent(const RunService* source, Stepped event)
+{
+	BodyMover::onEvent(source, event);
+
+	if (active && !firedEvent && part) {
+		G3D::Vector3 pos = part->getCoordinateFrame().translation;
+		G3D::Vector3 goal = target ? target->getCoordinateFrame().pointToWorldSpace(targetOffset) : targetOffset;
+		G3D::Vector3 delta = pos - goal;
+
+		if (delta.squaredLength() <= targetRadius * targetRadius) {
+			event_ReachedTarget.fire(this);
+			firedEvent = true;
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100ee350

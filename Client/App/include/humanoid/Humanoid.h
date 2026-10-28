@@ -175,6 +175,7 @@ private:
 	void renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera);
 	virtual bool isControllable() const;
 	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
+	virtual void onAncestorChanged(const AncestorChanged& event);
 	virtual void onEvent(const RunService* source, Stepped event);
 	void onLocalHumanoidEnteringWorkspace();
 	virtual void computeForce(float dt, bool throttling);

@@ -17,6 +17,7 @@
 #include "v8datamodel/Tool.h"
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Body.h"
+#include "v8kernel/Kernel.h"
 #include "v8tree/Service.h"
 #include "v8world/Joint.h"
 #include "v8world/Primitive.h"
@@ -254,6 +255,27 @@ void Humanoid::setState(State* state)
 	if (state != currentState.get()) {
 		currentState.reset(state);
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x100a0da0
+void Humanoid::onAncestorChanged(const AncestorChanged& event)
+{
+	World* newWorld = Workspace::getWorldIfInWorkspace(this);
+	if (newWorld != world) {
+		currentState.reset();
+
+		if (world) {
+			world->getKernel()->removeConnector2ndPass(this);
+		}
+
+		world = newWorld;
+		if (world) {
+			setState(new Running(this));
+			world->getKernel()->insertConnector2ndPass(this);
+		}
+	}
+
+	Instance::onAncestorChanged(event);
 }
 
 // FUNCTION: WEBSERVICE 0x100a1100

@@ -196,6 +196,9 @@ public:
 
 	virtual void computeForce(float dt, bool throttling);
 
+protected:
+	virtual void onEvent(const RunService* source, Stepped event);
+
 private:
 	PartInstance* getTarget() const { return target.get(); }
 	void setTarget(PartInstance* value);
@@ -357,6 +360,8 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x100ee110
 // RBX::Rocket::`scalar deleting destructor'
 // clang-format on
+
+void registerBodyMovers();
 
 } // namespace RBX
 
