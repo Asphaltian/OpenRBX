@@ -36,6 +36,11 @@ public:
 	// RBX::View::BrickMesh::`scalar deleting destructor'
 };
 
+// SYNTHETIC: WEBSERVICE 0x1021f100
+// `dynamic initializer for 'cache''
+// SYNTHETIC: WEBSERVICE 0x10225cd0
+// `dynamic atexit destructor for 'cache''
+
 DECOMP_SIZE_ASSERT(BrickMesh, 0x50)
 
 } // namespace View

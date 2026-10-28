@@ -8,6 +8,58 @@
 
 namespace RBX {
 
+template <>
+const Reflection::Type& Reflection::Type::singleton<Surface>();
+
+// SIZE 0x18
+template <int normalId>
+class SurfaceDescriptor : public Reflection::PropertyDescriptor
+{
+public:
+	SurfaceDescriptor(const char* name)
+		: Reflection::PropertyDescriptor(
+			  PartInstance::classDescriptor(),
+			  Reflection::Type::singleton<Surface>(),
+			  name,
+			  "Data",
+			  Reflection::PropertyDescriptor::LEGACY
+		  )
+	{
+	}
+
+	virtual bool equalValues(const Reflection::DescribedBase* a, const Reflection::DescribedBase* b) const
+	{
+		return false;
+	}
+
+	virtual bool isReadOnly() const { return false; }
+
+	virtual void readValue(
+		Reflection::DescribedBase* instance,
+		const XmlElement* element,
+		IReferenceBinder& binder
+	) const
+	{
+		static_cast<PartInstance*>(instance)->getSurfaces()[static_cast<NormalId>(normalId)].readValue(element, binder);
+	}
+
+	virtual void writeValue(const Reflection::DescribedBase* instance, XmlElement* element) const {}
+
+	virtual bool hasStringValue() const { return false; }
+
+	virtual std::string getStringValue(const Reflection::DescribedBase* instance) const
+	{
+		return PropertyDescriptor::getStringValue(instance);
+	}
+
+	virtual bool setStringValue(Reflection::DescribedBase* instance, const std::string& value) const
+	{
+		hasStringValue();
+
+		return false;
+	}
+};
+
 // SIZE 0x0c
 template <int normalId, class T, class Getter, class Setter>
 class SurfaceGetSet : public Reflection::TypedPropertyDescriptor<T>::GetSet
@@ -196,6 +248,13 @@ public:
 		element->setValue(static_cast<int>(getValue(instance)));
 	}
 };
+
+static SurfaceDescriptor<NORM_Y> desc_LegacyTop("Top");
+static SurfaceDescriptor<NORM_Y_NEG> desc_LegacyBottom("Bottom");
+static SurfaceDescriptor<NORM_X_NEG> desc_LegacyLeft("Back");
+static SurfaceDescriptor<NORM_X> desc_LegacyRight("Front");
+static SurfaceDescriptor<NORM_Z_NEG> desc_LegacyFront("Right");
+static SurfaceDescriptor<NORM_Z> desc_LegacyBack("Left");
 
 static SurfaceEnumPropDescriptor<NORM_Y, SurfaceType> desc_TopType(
 	"TopSurface",
@@ -517,6 +576,15 @@ const bool Surfaces::isStandardPart() const
 	return Bottom.getSurfaceType() == INLET && Front.getSurfaceType() == NO_SURFACE &&
 		   Back.getSurfaceType() == NO_SURFACE && Left.getSurfaceType() == NO_SURFACE &&
 		   Right.getSurfaceType() == NO_SURFACE;
+}
+
+// FUNCTION: WEBSERVICE 0x10100ea0
+template <>
+const Reflection::Type& Reflection::Type::singleton<Surface>()
+{
+	static Type type("Surface", typeid(Surface), "Complex");
+
+	return type;
 }
 
 } // namespace RBX

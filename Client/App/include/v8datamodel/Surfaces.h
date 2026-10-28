@@ -56,6 +56,52 @@ public:
 DECOMP_SIZE_ASSERT(Surfaces, 0x30)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x101018b0
+// RBX::SurfaceDescriptor<1>::readValue
+// TEMPLATE: WEBSERVICE 0x101018e0
+// RBX::SurfaceDescriptor<4>::readValue
+// TEMPLATE: WEBSERVICE 0x10101930
+// RBX::SurfaceDescriptor<3>::readValue
+// SYNTHETIC: WEBSERVICE 0x10101960
+// RBX::SurfaceDescriptor<1>::`scalar deleting destructor'
+// TEMPLATE: WEBSERVICE 0x10101980
+// RBX::SurfaceDescriptor<0>::readValue
+// TEMPLATE: WEBSERVICE 0x101019c0
+// RBX::SurfaceDescriptor<5>::readValue
+// TEMPLATE: WEBSERVICE 0x10101a00
+// RBX::SurfaceDescriptor<2>::readValue
+// clang-format on
+
+// clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021dde0
+// RBX::`dynamic initializer for 'desc_LegacyTop''
+// SYNTHETIC: WEBSERVICE 0x1021de20
+// RBX::`dynamic initializer for 'desc_LegacyBottom''
+// SYNTHETIC: WEBSERVICE 0x1021de60
+// RBX::`dynamic initializer for 'desc_LegacyLeft''
+// SYNTHETIC: WEBSERVICE 0x1021dea0
+// RBX::`dynamic initializer for 'desc_LegacyRight''
+// SYNTHETIC: WEBSERVICE 0x1021dee0
+// RBX::`dynamic initializer for 'desc_LegacyFront''
+// SYNTHETIC: WEBSERVICE 0x1021df20
+// RBX::`dynamic initializer for 'desc_LegacyBack''
+// SYNTHETIC: WEBSERVICE 0x10224da0
+// `RBX::Reflection::Type::singleton<RBX::Surface>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: WEBSERVICE 0x10224db0
+// RBX::`dynamic atexit destructor for 'desc_LegacyTop''
+// SYNTHETIC: WEBSERVICE 0x10224dc0
+// RBX::`dynamic atexit destructor for 'desc_LegacyBottom''
+// SYNTHETIC: WEBSERVICE 0x10224dd0
+// RBX::`dynamic atexit destructor for 'desc_LegacyLeft''
+// SYNTHETIC: WEBSERVICE 0x10224de0
+// RBX::`dynamic atexit destructor for 'desc_LegacyRight''
+// SYNTHETIC: WEBSERVICE 0x10224df0
+// RBX::`dynamic atexit destructor for 'desc_LegacyFront''
+// SYNTHETIC: WEBSERVICE 0x10224e00
+// RBX::`dynamic atexit destructor for 'desc_LegacyBack''
+// clang-format on
+
+// clang-format off
 // TEMPLATE: WEBSERVICE 0x101022b0
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::Controller::InputType>::setEnumValue
 // TEMPLATE: WEBSERVICE 0x10102440

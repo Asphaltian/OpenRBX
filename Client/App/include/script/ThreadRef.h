@@ -79,6 +79,8 @@ DECOMP_SIZE_ASSERT(ThreadRef, 0x20)
 DECOMP_SIZE_ASSERT(ThreadRef::Node, 0xc)
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x1021b770
+// `dynamic initializer for 'RBX::Lua::ThreadRef::syncSingleton''
 // SYNTHETIC: WEBSERVICE 0x10223640
 // `dynamic atexit destructor for 'RBX::Lua::ThreadRef::syncSingleton''
 // clang-format on

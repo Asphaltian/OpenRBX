@@ -106,6 +106,10 @@ public:
 	void makeMesh();
 
 	// clang-format off
+	// SYNTHETIC: WEBSERVICE 0x10220f10
+	// `dynamic initializer for 'RBX::Render::AggregateChunk::identity''
+	// SYNTHETIC: WEBSERVICE 0x102264b0
+	// `dynamic atexit destructor for 'RBX::Render::AggregateChunk::identity''
 	// SYNTHETIC: WEBSERVICE 0x10226500
 	// `RBX::Render::AggregateChunk::renderShadows'::`8'::`dynamic atexit destructor for 'shadowVertex''
 	// clang-format on

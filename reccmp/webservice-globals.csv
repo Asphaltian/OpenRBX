@@ -5045,6 +5045,7 @@ address,type,symbol
 0x102d9810,global,??_R0?AVKernel@RBX@@@8
 0x102d982c,global,??_R0?AVIStage@RBX@@@8
 0x102d991c,global,??_R0?AVPlayer@Network@RBX@@@8
+0x102e4734,global,??_R0?AVSurface@RBX@@@8
 0x102ea714,global,??_R0?AVClient@Network@RBX@@@8
 0x102ea568,global,??_R0?AVExposer@@@8
 0x102eb144,global,??_R0?AVClientProxy@Server@Network@RBX@@@8
