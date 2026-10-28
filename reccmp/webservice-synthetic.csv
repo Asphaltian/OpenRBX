@@ -165,6 +165,7 @@ address,type,symbol
 0x1006fc30,synthetic,??0?$BoundFuncDesc@VWorkspace@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@VContentId@2@@Z$00@Reflection@RBX@@QAE@P8Workspace@2@AE?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@VContentId@2@@ZPBD2W4Security@FunctionDescriptor@12@@Z
 0x1006fce0,synthetic,??$call@V?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@?$BoundFuncDesc@VWorkspace@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@VContentId@2@@Z$00@Reflection@RBX@@ABEXPAVWorkspace@2@AAVValue@12@1@Z
 0x1006fe90,synthetic,??0?$BoundFuncDesc@VWorkspace@RBX@@$$A6AXV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@Z$00@Reflection@RBX@@QAE@P8Workspace@2@AEXV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@ZPBD2W4Security@FunctionDescriptor@12@@Z
+0x100744b0,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$0A@@RBX@@UBEABVName@2@XZ
 0x100788b0,synthetic,??1?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAE@XZ
 0x10078c00,synthetic,??$create@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@QBEPAVSoundService@Soundscape@1@XZ
 0x1007a4b0,synthetic,??_G?$BoundFuncDesc@VDebrisService@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@N@Z$01@Reflection@RBX@@UAEPAXI@Z
@@ -177,6 +178,7 @@ address,type,symbol
 0x1007e0e0,synthetic,??$getset@P8SoundChannel@Soundscape@RBX@@BE?AVSoundId@23@XZP8123@AEXV423@@Z@?$PropDescriptor@VSoundChannel@Soundscape@RBX@@VSoundId@23@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@RBX@@@std@@P8SoundChannel@Soundscape@2@BE?AVSoundId@62@XZP8562@AEXV762@@Z@Z
 0x1007e0e0,synthetic,??$getset@P8SoundChannel@Soundscape@RBX@@BE?AVSoundId@23@XZP8123@AEXV423@@Z@?$PropDescriptor@VSoundChannel@Soundscape@RBX@@VSoundId@23@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@RBX@@@std@@P8SoundChannel@Soundscape@2@BE?AVSoundId@62@XZP8562@AEXV762@@Z@Z
 0x1007e620,synthetic,?equalValues@?$TypedPropertyDescriptor@H@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
+0x1007e7d0,synthetic,??1?$DescribedCreatable@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@UAE@XZ
 0x1007e7e0,synthetic,?getClassName@?$FactoryProduct@VSoundService@Soundscape@RBX@@VInstance@3@$1?sSoundService@23@3PADA@RBX@@UBEABVName@2@XZ
 0x1007e9a0,synthetic,?getClassName@?$FactoryProduct@VStockSound@@VSoundChannel@Soundscape@RBX@@$1?sStockSound@@3PADA@RBX@@UBEABVName@2@XZ
 0x10081e70,synthetic,?getEnumValue@?$SurfaceEnumPropDescriptor@$01W4SurfaceType@RBX@@@RBX@@UBEHPBVDescribedBase@Reflection@2@@Z
@@ -291,10 +293,13 @@ address,type,symbol
 0x100c78e0,synthetic,??_EGuiItem@RBX@@WGM@AEPAXI@Z
 0x100c78f0,synthetic,??_EGuiItem@RBX@@UAEPAXI@Z
 0x100c7b80,synthetic,??1?$DescribedCreatable@VStarterPackService@RBX@@VHopper@2@$1?sStarterPackService@2@3QBDB@RBX@@UAE@XZ
+0x100c7c90,synthetic,??1?$DescribedCreatable@VLegacyHopperService@RBX@@VHopper@2@$1?sLegacyHopperService@2@3QBDB@RBX@@UAE@XZ
+0x100c7de0,synthetic,?getClassName@?$NonFactoryProduct@VWidget@RBX@@$1?sBackpackItem@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100c7e00,synthetic,?getClassName@?$FactoryProduct@VStarterPackService@RBX@@VHopper@2@$1?sStarterPackService@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100c7e20,synthetic,?getClassName@?$FactoryProduct@VLegacyHopperService@RBX@@VHopper@2@$1?sLegacyHopperService@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100c8000,synthetic,?getClassName@?$FactoryProduct@VHopperBin@RBX@@VBackpackItem@2@$1?sHopperBin@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100c8020,synthetic,??_G?$FactoryProduct@VHopperBin@RBX@@VBackpackItem@2@$1?sHopperBin@2@3QBDB@RBX@@MAEPAXI@Z
+0x100c8280,synthetic,??1?$DescribedCreatable@VHopperBin@RBX@@VBackpackItem@2@$1?sHopperBin@2@3QBDB@RBX@@UAE@XZ
 0x100c8810,synthetic,??_EGuiItem@RBX@@WBE@AEPAXI@Z
 0x100c8820,synthetic,??_EGuiItem@RBX@@WCE@AEPAXI@Z
 0x100c89d0,synthetic,?setStringValue@?$EnumPropDescriptor@VHopperBin@RBX@@W4BinType@12@@Reflection@RBX@@UBE_NPAVDescribedBase@23@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
@@ -303,9 +308,12 @@ address,type,symbol
 0x100c9de0,synthetic,??1?$DescribedNonCreatable@VItem@Stats@RBX@@VInstance@3@$1?sStatsItem@23@3PADA@RBX@@UAE@XZ
 0x100ca350,synthetic,?setValue@?$GetSetImpl@P8Tool@RBX@@BEABVCoordinateFrame@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VTool@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABVCoordinateFrame@G3D@@@Z
 0x100cae00,synthetic,?getClassName@?$FactoryProduct@VTool@RBX@@VBackpackItem@2@$1?sTool@2@3QBDB@RBX@@UBEABVName@2@XZ
+0x100cafc0,synthetic,??1?$DescribedCreatable@VTool@RBX@@VBackpackItem@2@$1?sTool@2@3QBDB@RBX@@UAE@XZ
 0x100cb580,synthetic,??$?0P8Tool@RBX@@BEHXZP801@AEXH@Z@?$PropDescriptor@VTool@RBX@@H@Reflection@RBX@@QAE@PBD0P8Tool@2@BEHXZP832@AEXH@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100ccd30,synthetic,??_G?$FactoryProduct@VTool@RBX@@VBackpackItem@2@$1?sTool@2@3QBDB@RBX@@MAEPAXI@Z
 0x100cd0a0,synthetic,?getTeamColor@Flag@RBX@@QBE?AVBrickColor@2@XZ
 0x100cd370,synthetic,??_G?$FactoryProduct@VFlag@RBX@@VTool@2@$1?sFlag@2@3QBDB@RBX@@MAEPAXI@Z
+0x100cd510,synthetic,??1?$DescribedCreatable@VFlag@RBX@@VTool@2@$1?sFlag@2@3QBDB@RBX@@UAE@XZ
 0x100cd7f0,synthetic,?getClassName@?$FactoryProduct@VFlag@RBX@@VTool@2@$1?sFlag@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100ce140,synthetic,??$find@VFlagStandService@RBX@@@ServiceProvider@RBX@@QBEPAVFlagStandService@1@XZ
 0x100ce5e0,synthetic,??$create@VFlagStandService@RBX@@@ServiceProvider@RBX@@QBEPAVFlagStandService@1@XZ
@@ -321,6 +329,7 @@ address,type,symbol
 0x100d16e0,synthetic,??_EGuiItem@RBX@@WBA@AEPAXI@Z
 0x100d16f0,synthetic,??_EGuiItem@RBX@@WIE@AEPAXI@Z
 0x100d60e0,synthetic,??1?$DescribedCreatable@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@UAE@XZ
+0x100d60f0,synthetic,??1?$DescribedCreatable@VLocalBackpack@RBX@@VRelativePanel@2@$1?sLocalBackpack@2@3QBDB@RBX@@UAE@XZ
 0x100d6370,synthetic,?getClassName@?$FactoryProduct@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100d6390,synthetic,?getClassName@?$FactoryProduct@VLocalBackpack@RBX@@VRelativePanel@2@$1?sLocalBackpack@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100d7150,synthetic,??_G?$FactoryProduct@VLocalBackpackItem@RBX@@VWidget@2@$1?sLocalBackpackItem@2@3QBDB@RBX@@MAEPAXI@Z
@@ -408,6 +417,8 @@ address,type,symbol
 0x100e7890,synthetic,??_E?$FactoryProduct@VHole@RBX@@VFeature@2@$1?sHole@2@3QBDB@RBX@@MAEPAXI@Z
 0x100e7ab0,synthetic,??_GMotorFeature@RBX@@UAEPAXI@Z
 0x100e7d00,synthetic,??_G?$FactoryProduct@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@MAEPAXI@Z
+0x100e7e40,synthetic,??_G?$FactoryProduct@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@MAEPAXI@Z
+0x100e8040,synthetic,??1?$DescribedCreatable@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@UAE@XZ
 0x100e8050,synthetic,??1?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@UAE@XZ
 0x100e8390,synthetic,?getClassName@?$FactoryProduct@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100e83b0,synthetic,?getClassName@?$FactoryProduct@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@UBEABVName@2@XZ
@@ -486,6 +497,7 @@ address,type,symbol
 0x100fc820,synthetic,?getClassName@?$FactoryProduct@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100fd4d0,synthetic,??_ESeat@RBX@@UAEPAXI@Z
 0x100fd500,synthetic,?getTeamColor@SpawnLocation@RBX@@QBE?AVBrickColor@2@XZ
+0x100fda70,synthetic,??1?$DescribedCreatable@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@UAE@XZ
 0x100fda80,synthetic,??1?$DescribedCreatable@VSpawnerService@RBX@@VInstance@2@$1?sSpawnerService@2@3QBDB@RBX@@UAE@XZ
 0x100fdd30,synthetic,?getClassName@?$FactoryProduct@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100fdd50,synthetic,?getClassName@?$FactoryProduct@VSpawnerService@RBX@@VInstance@2@$1?sSpawnerService@2@3QBDB@RBX@@UBEABVName@2@XZ
@@ -658,6 +670,7 @@ address,type,symbol
 0x101a4210,synthetic,??0?$SignalDesc@VReplicator@Network@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z@Reflection@RBX@@QAE@PBD00@Z
 0x101a65e0,synthetic,??1ReplicatorStatsItem@Replicator@Network@RBX@@UAE@XZ
 0x101a6670,synthetic,??_GReplicatorStatsItem@Replicator@Network@RBX@@UAEPAXI@Z
+0x101a9e90,synthetic,??1?$NonFactoryProduct@VIdSerializer@Network@RBX@@$1?sReplicator@23@3QBDB@RBX@@UAE@XZ
 0x101af920,synthetic,??0RemoteSystemStruct@RakPeer@@QAE@XZ
 0x101af980,synthetic,??1RemoteSystemStruct@RakPeer@@QAE@XZ
 0x101b0fd0,synthetic,??$umultiply@$$BY03I$$BY07I@big@@YAXAAY07IAAY03I@Z
