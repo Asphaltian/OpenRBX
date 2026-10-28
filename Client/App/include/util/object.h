@@ -134,7 +134,7 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalBackpack>
 	// TEMPLATE: WEBSERVICE 0x10074260
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Players>
-	// STUB: WEBSERVICE 0x10075300
+	// TEMPLATE: WEBSERVICE 0x10075300
 	// RBX::Creatable<RBX::Instance>::create<RBX::JointsService>
 	// TEMPLATE: WEBSERVICE 0x10076300
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalBackpackItem>

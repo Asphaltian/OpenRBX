@@ -7367,6 +7367,18 @@ address,type,symbol
 0x10230ce8,global,??_7?$RefPropDescriptor@VWorkspace@RBX@@VCamera@2@@Reflection@RBX@@6BIIDREF@2@@
 0x10230cf0,global,??_7?$RefPropDescriptor@VWorkspace@RBX@@VCamera@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x1022e8f0,global,??_7TextXmlParser@@6B@
+0x1023162c,global,??_7JointsService@RBX@@6B?$Listener@VWorld@RBX@@UAutoDestroy@2@@1@@
+0x10231638,global,??_7JointsService@RBX@@6B?$Listener@VWorld@RBX@@UAutoJoin@2@@1@@
+0x10231644,global,??_7JointsService@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0x10231654,global,??_7JointsService@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0x10231664,global,??_7JointsService@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0x10231674,global,??_7JointsService@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0x10231684,global,??_7JointsService@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0x10231694,global,??_7JointsService@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0x102316a4,global,??_7JointsService@RBX@@6BDebugable@1@@
+0x102316ac,global,??_7JointsService@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0x102316b4,global,??_7JointsService@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0x102316c4,global,??_7JointsService@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x1023a2c0,global,??_7?$RefPropDescriptor@VCamera@RBX@@VInstance@2@@Reflection@RBX@@6BIIDREF@2@@
 0x1023a2c8,global,??_7?$RefPropDescriptor@VCamera@RBX@@VInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 0x1023a658,global,??_7SteppingController@RBX@@6B?$Listener@VRunService@RBX@@VHeartbeat@2@@1@@
@@ -7444,6 +7456,8 @@ address,type,symbol
 0x1025bbc4,global,??_7OSContext@@6B@
 0x102cbddc,global,??_R0?AVDataModel@RBX@@@8
 0x102f4fdb,global,firstTime___initRoblox
+0x102f6bf4,global,flag___RBX::ServiceProvider::getClassIndex<RBX::LocalBackpack>
+0x102f6bfc,global,flag___RBX::ServiceProvider::getClassIndex<RBX::JointsService>
 0x10301af4,global,_m___StaticMutex<OSContext>::init
 0x10301afc,global,??_B?1??init@?$StaticMutex@VOSContext@@@@CAXXZ@51
 0x10301aa8,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Workspace>

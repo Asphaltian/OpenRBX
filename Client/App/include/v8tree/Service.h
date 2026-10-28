@@ -119,14 +119,18 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::create<RBX::ControllerService>
 // FUNCTION: WEBSERVICE 0x10071ad0
 // RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>
+// TEMPLATE: WEBSERVICE 0x100722f0
+// RBX::ServiceProvider::doGetClassIndex<RBX::LocalBackpack>
 // TEMPLATE: WEBSERVICE 0x10072350
 // RBX::ServiceProvider::doGetClassIndex<RBX::Soundscape::SoundService>
-// STUB: WEBSERVICE 0x100723b0
+// TEMPLATE: WEBSERVICE 0x100723b0
 // RBX::ServiceProvider::doGetClassIndex<RBX::JointsService>
 // TEMPLATE: WEBSERVICE 0x10072450
 // RBX::ServiceProvider::doGetClassIndex<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x100724b0
 // RBX::ServiceProvider::doGetClassIndex<RBX::Teams>
+// TEMPLATE: WEBSERVICE 0x100731f0
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::LocalBackpack>
 // TEMPLATE: WEBSERVICE 0x10073200
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Soundscape::SoundService>
 // TEMPLATE: WEBSERVICE 0x10073210
@@ -135,15 +139,19 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x100733b0
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Teams>
+// TEMPLATE: WEBSERVICE 0x10077fb0
+// RBX::ServiceProvider::find<RBX::LocalBackpack>
 // TEMPLATE: WEBSERVICE 0x10078160
 // RBX::ServiceProvider::find<RBX::Soundscape::SoundService>
-// STUB: WEBSERVICE 0x10078310
+// TEMPLATE: WEBSERVICE 0x10078310
 // RBX::ServiceProvider::find<RBX::JointsService>
 // FUNCTION: WEBSERVICE 0x100784c0
 // RBX::ServiceProvider::find<RBX::Teams>
 // FUNCTION: WEBSERVICE 0x10078670
 // RBX::ServiceProvider::find<RBX::Network::Players>
-// STUB: WEBSERVICE 0x10078cf0
+// TEMPLATE: WEBSERVICE 0x10078b10
+// RBX::ServiceProvider::create<RBX::LocalBackpack>
+// TEMPLATE: WEBSERVICE 0x10078cf0
 // RBX::ServiceProvider::create<RBX::JointsService>
 // TEMPLATE: WEBSERVICE 0x10078de0
 // RBX::ServiceProvider::create<RBX::Network::Players>

@@ -8,6 +8,7 @@
 #include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/Backpack.h"
 #include "v8datamodel/JointInstance.h"
+#include "v8datamodel/JointsService.h"
 #include "v8datamodel/LocalBackpack.h"
 #include "v8datamodel/Teams.h"
 #include "v8tree/Service.h"
@@ -175,6 +176,9 @@ std::string DataModel::httpPost(std::string url, std::string data, bool synchron
 }
 
 } // namespace RBX
+
+template RBX::JointsService* RBX::ServiceProvider::create<RBX::JointsService>() const;
+template RBX::LocalBackpack* RBX::ServiceProvider::create<RBX::LocalBackpack>() const;
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sServiceProvider>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::sLocalBackpackItem>();
