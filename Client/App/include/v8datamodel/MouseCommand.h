@@ -106,6 +106,9 @@ protected:
 public:
 	virtual ~MouseCommand(); // vtable+0x30
 
+	// SYNTHETIC: WEBSERVICE 0x1006a790
+	// RBX::MouseCommand::`scalar deleting destructor'
+
 	bool captured() const { return capturedMouse; }
 
 	virtual MouseCommand* isSticky() const { return NULL; } // vtable+0x34

@@ -130,6 +130,10 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<double>,boost::function0<double,std::allocator<boost::function_base> > >
 	// TEMPLATE: WEBSERVICE 0x10070f60
 	// RBX::Creatable<RBX::Instance>::create<RBX::WorkspaceStatsItem,RBX::Workspace *,RBX::World *>
+	// TEMPLATE: WEBSERVICE 0x10073e70
+	// RBX::Creatable<RBX::Instance>::create<RBX::Workspace,RBX::DataModel *>
+	// TEMPLATE: WEBSERVICE 0x10073f10
+	// RBX::Creatable<RBX::Instance>::create<RBX::GuiRoot>
 	// TEMPLATE: WEBSERVICE 0x10074110
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalBackpack>
 	// TEMPLATE: WEBSERVICE 0x10074260
@@ -506,6 +510,8 @@ public:
 	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10077f00
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1007b030
+	// RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1007ce00
 	// RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::~FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1007ce50

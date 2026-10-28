@@ -116,7 +116,7 @@ MouseCommand::MouseCommand(Workspace* workspace) : capturedMouse(false), workspa
 {
 }
 
-// STUB: WEBSERVICE 0x100bedd0
+// FUNCTION: WEBSERVICE 0x100bedd0
 MouseCommand::~MouseCommand()
 {
 }

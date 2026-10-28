@@ -28,7 +28,7 @@ private:
 	std::vector<StateEntry> stack; // 0x08
 
 public:
-	StateStack();
+	StateStack() { currentState = -1; }
 
 	~StateStack() { clearStack(); }
 
@@ -47,7 +47,7 @@ public:
 	T* redo();
 
 protected:
-	unsigned int getStackSize() const;
+	unsigned int getStackSize() const { return stack.size(); }
 
 	virtual bool isStackTooBig() const { return false; } // vtable+0x00
 

@@ -73,7 +73,7 @@ DECOMP_SIZE_ASSERT(GlobalSettings::Item, 0xf8)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x100b72a0
-// RBX::GlobalSettings::`scalar deleting destructor'
+// ??_GServiceProvider@RBX@@UAEPAXI@Z
 // clang-format on
 
 template <class T, const char* sName>

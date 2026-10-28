@@ -1,18 +1,22 @@
 #include "v8datamodel/DataModel.h"
 
 #include "compat.h"
+#include "gui/GUI.h"
 #include "network/Players.h"
 #include "reflection/reflection.h"
 #include "reflection/signal.h"
+#include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
 #include "util/Http.h"
 #include "util/IMetric.h"
 #include "util/Log.h"
 #include "util/Name.h"
+#include "util/Sound.h"
 #include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/Backpack.h"
 #include "v8datamodel/JointInstance.h"
 #include "v8datamodel/JointsService.h"
+#include "v8datamodel/Lighting.h"
 #include "v8datamodel/LocalBackpack.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/TimeState.h"
@@ -315,10 +319,57 @@ DataModel::Lock::~Lock()
 	delete lock;
 }
 
-// STUB: WEBSERVICE 0x100793b0
+// FUNCTION: WEBSERVICE 0x10079120
+void DataModel::initializeContents()
+{
+	workspace->setParent(this);
+	guiRoot->setParent(this);
+	guiHooks->setParent(this);
+
+	localBackpack = shared_from(create<LocalBackpack>());
+
+	starterPackService = shared_from(create<StarterPackService>());
+
+	runService = shared_from(create<RunService>());
+
+	create<Soundscape::SoundService>();
+
+	workspace->setDefaultMouseCommand();
+
+	workspace->setVerbParent(this);
+
+	runService->start();
+
+	startListening(runService, this);
+
+	create<JointsService>();
+}
+
+// FUNCTION: WEBSERVICE 0x100793b0
 void DataModel::clearContents()
 {
-	STUB(0x100793b0);
+	workspace->setMouseCommand(NULL);
+
+	workspace->removeAllChildren();
+	workspace->setCamera(NULL);
+
+	starterPackService->removeAllChildren();
+
+	Teams* teams = find<Teams>();
+	if (teams) {
+		teams->removeAllChildren();
+	}
+
+	Lighting* lighting = find<Lighting>();
+	if (lighting) {
+		lighting->removeAllChildren();
+	}
+
+	ScriptContext* context = find<ScriptContext>();
+	if (context) {
+		context->closeState();
+		ScriptContext::propScriptsDisabled.setValue(context, false);
+	}
 }
 
 // STUB: WEBSERVICE 0x10079a70
@@ -334,17 +385,66 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > DataModel::g
 	return boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >();
 }
 
-// STUB: WEBSERVICE 0x1007bb20
-void DataModel::closeDataModel(boost::shared_ptr<DataModel> dataModel, bool joinRunThread)
+void DataModel::raiseClose()
 {
-	STUB(0x1007bb20);
+	Notifier<ServiceProvider, Closing>::raise(Closing());
+	event_Closing.fire(this);
 }
 
-// STUB: WEBSERVICE 0x1007c120
+// FUNCTION: WEBSERVICE 0x1007b450
+DataModel::~DataModel()
+{
+	stopListening(runService, this);
+}
+
+// FUNCTION: WEBSERVICE 0x1007bb20
+void DataModel::closeDataModel(boost::shared_ptr<DataModel> dataModel, bool joinRunThread)
+{
+	dataModel->isInitialized = false;
+
+	boost::shared_ptr<RunService> runService;
+	{
+		DataModel::Lock lock(dataModel);
+		runService = dataModel->runService;
+	}
+
+	if (runService) {
+		runService->endRunThread(joinRunThread);
+	}
+
+	DataModel::Lock lock(dataModel);
+
+	dataModel->raiseClose();
+
+	dataModel->clearContents();
+	dataModel->removeAllChildren();
+	dataModel->clearServices();
+}
+
+// FUNCTION: WEBSERVICE 0x1007bcd0
+DataModel::DataModel()
+	: VerbContainer(NULL), workspace(Creatable<Instance>::create<Workspace>(this)),
+	  guiRoot(Creatable<Instance>::create<GuiRoot>()), guiHooks(Creatable<Instance>::create<GuiRoot>()),
+	  guiTarget(NULL), forceArrowCursor(true), drawId(0), dirty(false), isInitialized(false),
+	  mutex(new boost::recursive_mutex()), timeState(new TimeState())
+{
+	setName("Level");
+}
+
+// FUNCTION: WEBSERVICE 0x1007c120
 boost::shared_ptr<DataModel> DataModel::createDataModel()
 {
-	STUB(0x1007c120);
-	return boost::shared_ptr<DataModel>();
+	ContentProvider::singleton().clearContentCache();
+
+	boost::shared_ptr<DataModel> dataModel = Creatable<Instance>::create<DataModel>();
+
+	{
+		DataModel::Lock lock(dataModel);
+		dataModel->initializeContents();
+		dataModel->isInitialized = true;
+	}
+
+	return dataModel;
 }
 
 // STUB: WEBSERVICE 0x1007c4a0

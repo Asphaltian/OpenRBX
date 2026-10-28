@@ -51,6 +51,8 @@ private:
 	bool isInitialized;                                       // 0x1ed
 	boost::shared_ptr<boost::recursive_mutex> mutex;          // 0x1f0
 
+	void initializeContents();
+
 public:
 	// SIZE 0xc
 	class Lock
@@ -75,12 +77,16 @@ public:
 	static boost::shared_ptr<DataModel> createDataModel();
 	static void closeDataModel(boost::shared_ptr<DataModel> dataModel, bool joinRunThread);
 
+	DataModel();
+	virtual ~DataModel();
+
 	void loadContent(ContentId contentId);
 	void save(ContentId contentId);
 	std::string httpGet(std::string url, bool synchronous);
 	std::string httpPost(std::string url, std::string data, bool synchronous);
 	void close();
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > get(ContentId contentId);
+	void raiseClose();
 	void clearContents();
 
 	virtual void setDirty(bool dirty) { this->dirty = dirty; }
@@ -137,8 +143,16 @@ private:
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::declareSignature
 // TEMPLATE: WEBSERVICE 0x10071a50
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::declareSignature
+// TEMPLATE: WEBSERVICE 0x10072ce0
+// ?raise@?$Notifier@VServiceProvider@RBX@@VClosing@2@@RBX@@IBEXVClosing@2@PAV?$Listener@VServiceProvider@RBX@@VClosing@2@@2@@Z
+// TEMPLATE: WEBSERVICE 0x100735b0
+// ?raise@?$Notifier@VServiceProvider@RBX@@VClosing@2@@RBX@@IBEXVClosing@2@@Z
 // TEMPLATE: WEBSERVICE 0x10078920
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::~BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>
+// TEMPLATE: WEBSERVICE 0x10078a10
+// RBX::StateStack<RBX::XmlState>::clearStackAfter
+// TEMPLATE: WEBSERVICE 0x10079df0
+// RBX::StateStack<RBX::XmlState>::~StateStack<RBX::XmlState>
 // TEMPLATE: WEBSERVICE 0x10079e50
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(RBX::ContentId),1>::BoundFuncDesc<RBX::DataModel,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(RBX::ContentId),1>
 // TEMPLATE: WEBSERVICE 0x10079ef0
@@ -171,6 +185,28 @@ private:
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::BoundFuncDesc<RBX::DataModel,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>
 // TEMPLATE: WEBSERVICE 0x1007a980
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::execute
+// SYNTHETIC: WEBSERVICE 0x1007aef0
+// RBX::IDataState::~IDataState
+// FUNCTION: WEBSERVICE 0x1007af10
+// RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel>::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel>
+// FUNCTION: WEBSERVICE 0x1007b720
+// RBX::DataModel::setDirty
+// FUNCTION: WEBSERVICE 0x1007b730
+// RBX::DataModel::isDirty
+// FUNCTION: WEBSERVICE 0x1007b740
+// RBX::DataModel::onChildChanged
+// FUNCTION: WEBSERVICE 0x1007b770
+// RBX::DataModel::onDescendentAdded
+// FUNCTION: WEBSERVICE 0x1007b7a0
+// RBX::DataModel::onDescendentRemoving
+// FUNCTION: WEBSERVICE 0x1007b8a0
+// RBX::DataModel::isStackTooBig
+// FUNCTION: WEBSERVICE 0x1007b8e0
+// RBX::DescribedNonCreatable<RBX::DataModel,RBX::ServiceProvider,&RBX::sDataModel>::DescribedNonCreatable<RBX::DataModel,RBX::ServiceProvider,&RBX::sDataModel>
+// SYNTHETIC: WEBSERVICE 0x1007bf10
+// RBX::DataModel::`scalar deleting destructor'
+// TEMPLATE: WEBSERVICE 0x1007bf30
+// RBX::Creatable<RBX::Instance>::create<RBX::DataModel>
 // SYNTHETIC: WEBSERVICE 0x102190a0
 // RBX::`dynamic initializer for 'getContentFunctionOld''
 // SYNTHETIC: WEBSERVICE 0x102190d0

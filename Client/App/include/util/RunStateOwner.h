@@ -106,6 +106,8 @@ private:
 
 	void start();
 
+	friend class DataModel;
+
 public:
 	bool runDisabled; // 0x1bc
 
