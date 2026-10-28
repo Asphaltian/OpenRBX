@@ -10,8 +10,15 @@ class Instance;
 class InstanceHandle
 {
 public:
-	InstanceHandle() {}
+	InstanceHandle(const InstanceHandle& other) : target(other.target) {}
 	InstanceHandle(Instance* target);
+	InstanceHandle() {}
+
+	InstanceHandle& operator=(const InstanceHandle& other)
+	{
+		target = other.target;
+		return *this;
+	}
 
 	void linkTo(boost::shared_ptr<Instance> target);
 
