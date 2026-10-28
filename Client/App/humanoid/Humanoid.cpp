@@ -418,6 +418,12 @@ const CoordinateFrame Humanoid::getLocation() const
 	return getHead() != NULL ? getHead()->getCoordinateFrame() : CoordinateFrame();
 }
 
+// STUB: WEBSERVICE 0x100a2840
+void Humanoid::buildJoints()
+{
+	STUB(0x100a2840);
+}
+
 // FUNCTION: WEBSERVICE 0x100a2f70
 G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
 {

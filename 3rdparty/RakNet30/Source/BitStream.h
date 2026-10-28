@@ -903,6 +903,8 @@ namespace RakNet
 	}
 
 	/// For values between -1 and 1
+	// TEMPLATE: WEBSERVICE 0x1019c6e0
+	// RakNet::BitStream::WriteCompressed<float>
 	template <>
 		inline void BitStream::WriteCompressed(float var)
 	{
@@ -1215,6 +1217,8 @@ namespace RakNet
 		}
 	}
 
+	// TEMPLATE: WEBSERVICE 0x1019d090
+	// RakNet::BitStream::WriteVector<float>
 	template <class templateType> // templateType for this function must be a float or double
 		void BitStream::WriteVector( templateType x, templateType y, templateType z )
 	{

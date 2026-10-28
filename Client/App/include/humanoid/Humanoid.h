@@ -135,6 +135,7 @@ public:
 	void moveTo2(G3D::Vector3 worldPosition, boost::shared_ptr<Instance> part);
 
 	G3D::Vector3 updateWalkDirection();
+	void buildJoints();
 	float getTorsoHeading() const;
 
 	Primitive* getHeadPrimitive()

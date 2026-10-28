@@ -66,3 +66,4 @@ onEvent_RemovedBackend: 'Accoutrement method, misparsed as a variable without bo
 onEvent_HandleTouched: 'Accoutrement method, misparsed as a variable without boost on the include path'
 '': 'Unnamed catch parameter; the EH tables record the handler type with no object'
 shared_ptr: 'libclang misparse of boost::shared_ptr<T>(boost::shared_ptr<T>) once RunStateOwner.h opens namespace boost without the boost headers'
+SpawnPlayer: 'libclang misparse of SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance>, Network::Player*) as a variable without the boost headers; recorded name, from WebService.pdb'

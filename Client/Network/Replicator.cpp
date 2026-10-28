@@ -26,6 +26,7 @@
 #include "v8world/Assembly2.h"
 #include "v8world/MotorJoint.h"
 #include "v8world/Primitive.h"
+#include "v8world/SimJobStage.h"
 
 #include <BitStream.h>
 #include <G3D/System.h>
@@ -302,6 +303,70 @@ bool Replicator::wantReplicate(const Instance* source) const
 	return dynamic_cast<const Camera*>(source) ? false : true;
 }
 
+// SIZE 0x130
+class Replicator::JobSender : boost::noncopyable
+{
+	const Assembly* firstA;  // 0x00
+	const Mechanism* firstM; // 0x04
+	Replicator& replicator;  // 0x08
+	RakPeerInterface* peer;  // 0x0c
+	bool hasOpenPacket;      // 0x10
+	static const unsigned int maxStreamSize = 1364;
+	RakNet::BitStream bitStream;   // 0x14
+	PacketPriority packetPriority; // 0x128
+
+	void openPacket()
+	{
+		bitStream.Reset();
+		bitStream << (unsigned char) ID_TIMESTAMP;
+		bitStream << RakNet::GetTime();
+		bitStream << (unsigned char) ID_PHYSICS;
+		hasOpenPacket = true;
+		sentPacket = true;
+	}
+
+	// FUNCTION: WEBSERVICE 0x1019bdf0
+	void closePacket()
+	{
+		replicator.serializeId(bitStream, NULL);
+
+		peer->Send(&bitStream, packetPriority, UNRELIABLE, 0, replicator.remotePlayerId, false);
+
+		hasOpenPacket = false;
+	}
+
+public:
+	bool sentPacket; // 0x12c
+
+	// FUNCTION: WEBSERVICE 0x1019be40
+	JobSender(Replicator& replicator, RakPeerInterface* peer)
+		: firstA(NULL), firstM(NULL), replicator(replicator), peer(peer), hasOpenPacket(false),
+		  bitStream(maxStreamSize), packetPriority(MEDIUM_PRIORITY), sentPacket(false)
+	{
+	}
+
+	void close()
+	{
+		if (hasOpenPacket) {
+			closePacket();
+		}
+	}
+
+	// FUNCTION: WEBSERVICE 0x1019be90
+	~JobSender() { close(); }
+
+	// FUNCTION: WEBSERVICE 0x1019bef0
+	void setPacketPriority(PacketPriority value)
+	{
+		if (packetPriority != value) {
+			closePacket();
+			packetPriority = value;
+		}
+	}
+
+	inline bool report(const Mechanism& m);
+};
+
 // FUNCTION: WEBSERVICE 0x1019bf10
 bool Replicator::canSendItems()
 {
@@ -531,6 +596,40 @@ static void readPosition(RakNet::BitStream& bitStream, G3D::Vector3& position)
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1019d990
+static void writePosition(RakNet::BitStream& bitStream, const G3D::Vector3& position, bool forceDetailed)
+{
+	if (forceDetailed || position.x > positionMax[0] || position.x < positionMin[0] || position.y > positionMax[1] ||
+		position.y < positionMin[1] || position.z > positionMax[2] || position.z < positionMin[2]) {
+		bitStream << false;
+		bitStream.WriteVector(position.x, position.y, position.z);
+	}
+	else {
+		bitStream << true;
+
+		unsigned short x = (unsigned short) ((position.x - positionMin[0]) * (double) (1 << positionBits[0]) /
+											 (positionMax[0] - positionMin[0]));
+		unsigned short y = (unsigned short) ((position.y - positionMin[1]) * (double) (1 << positionBits[1]) /
+											 (positionMax[1] - positionMin[1]));
+		unsigned short z = (unsigned short) ((position.z - positionMin[2]) * (double) (1 << positionBits[2]) /
+											 (positionMax[2] - positionMin[2]));
+
+		if (x >= (1 << positionBits[0])) {
+			x = 0xffff;
+		}
+		if (y >= (1 << positionBits[1])) {
+			y = 0xffff;
+		}
+		if (z >= (1 << positionBits[2])) {
+			z = 0xffff;
+		}
+
+		bitStream.WriteBits((const unsigned char*) &x, positionBits[0]);
+		bitStream.WriteBits((const unsigned char*) &y, positionBits[1]);
+		bitStream.WriteBits((const unsigned char*) &z, positionBits[2]);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1019dfe0
 void Peer::onEvent(const RunService* source, Heartbeat event)
 {
@@ -552,6 +651,69 @@ void Peer::onEvent(const RunService* source, Heartbeat event)
 bool Replicator::isSerializePending(const Instance* instance) const
 {
 	return pendingNewInstances.find(instance) != pendingNewInstances.end();
+}
+
+// FUNCTION: WEBSERVICE 0x1019e9e0
+void Replicator::sendPhysicsData(RakNet::BitStream& bitStream, const Assembly& assembly)
+{
+	const PartInstance* part = PartInstance::fromPrimitiveConst(assembly.getAssemblyPrimitiveConst());
+
+	if (part && !isSerializePending(part)) {
+		if (trySerializeId(bitStream, part)) {
+			const CoordinateFrame& cf = part->getCoordinateFrame();
+			const Velocity& velocity = part->getVelocity();
+
+			Player* player = findTargetPlayer();
+			ModelInstance* character = player ? player->getCharacter() : NULL;
+
+			writePosition(bitStream, cf.translation, character && character->isAncestorOf(part));
+
+			Quaternion q(cf.rotation);
+			q.normalize();
+			bitStream.WriteNormQuat(q.w, q.x, q.y, q.z);
+
+			int num = assembly.numMotors();
+
+			unsigned char compactNum = assembly.numMotors();
+			bitStream << compactNum;
+
+			for (int i = 0; i < num; ++i) {
+				float floatAngle = 0.0f;
+				const MotorJoint* motor = assembly.getMotorConst(i);
+				if (motor) {
+					floatAngle = motor->getCurrentAngle();
+				}
+
+				unsigned char byteAngle = Math::rotationToByte(floatAngle);
+				bitStream << byteAngle;
+			}
+		}
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1019eb30
+void Replicator::sendPhysicsData(RakNet::BitStream& bitStream, const Mechanism& mechanism)
+{
+	Mechanism::AssemblySet::const_iterator it;
+	for (it = mechanism.getAssemblies().begin(); it != mechanism.getAssemblies().end(); ++it) {
+		sendPhysicsData(bitStream, **it);
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x1019ebb0
+inline bool Replicator::JobSender::report(const Mechanism& m)
+{
+	if (!hasOpenPacket) {
+		openPacket();
+	}
+
+	replicator.sendPhysicsData(bitStream, m);
+
+	replicator.serializeId(bitStream, NULL);
+
+	unsigned int numBytes = bitStream.GetNumberOfBytesUsed();
+
+	return numBytes < maxStreamSize;
 }
 
 // FUNCTION: WEBSERVICE 0x1019f9f0
@@ -840,6 +1002,45 @@ Peer::Peer() : profilePacketsThread(new Profiling::ThreadProfiler("Packets Threa
 	rakPeer->AttachPlugin(this);
 }
 
+// FUNCTION: WEBSERVICE 0x101a4c10
+bool Replicator::sendPhysicsPacket()
+{
+	if (!sendPhysicsEnabled) {
+		return false;
+	}
+
+	if (!peer->GetStatistics(remotePlayerId)) {
+		return false;
+	}
+
+	Profiling::Mark mark(*profilePhysicsOut, false);
+
+	JobSender jobSender(*this, peer);
+
+	if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
+		SimJobStage& stage = workspace->getWorld()->getSimJobStage();
+
+		Mechanism* characterMechanism = findTargetPlayerCharacterMechanism();
+
+		if (characterMechanism) {
+			double t = G3D::System::getLocalTime();
+			if (t > lastCharacterSendTime + 0.1f) {
+				jobSender.setPacketPriority(MEDIUM_PRIORITY);
+				jobSender.report(*characterMechanism);
+				jobSender.setPacketPriority(MEDIUM_PRIORITY);
+				lastCharacterSendTime = t;
+			}
+			else {
+				characterMechanism = NULL;
+			}
+		}
+
+		stage.reportMechanisms(jobSender, jobStagePos, characterMechanism);
+	}
+
+	return jobSender.sentPacket;
+}
+
 // FUNCTION: WEBSERVICE 0x101a4da0
 PluginReceiveResult Replicator::OnReceive_ID_TIMESTAMP(Packet* packet)
 {
@@ -997,10 +1198,47 @@ void Peer::onServiceProvider(const ServiceProvider* oldProvider, const ServicePr
 	}
 }
 
-// STUB: WEBSERVICE 0x101a5a40
+// FUNCTION: WEBSERVICE 0x101a5a40
 void Replicator::Update(RakPeerInterface* peer)
 {
-	STUB(0x101a5a40);
+	PluginInterface::Update(peer);
+
+	if (!getParent()) {
+		return;
+	}
+
+	Profiling::Mark mark(*profileReplication, false);
+
+	RakNetStatistics* stats = peer->GetStatistics(remotePlayerId);
+
+	if (stats) {
+		double t = G3D::System::getLocalTime();
+
+		if (t > lastSendTime + 1.0 / NetworkSettings::singleton().sendRate) {
+			int maxSendBuffer = NetworkSettings::singleton().maxDataModelSendBuffer;
+
+			int queued = stats->messageSendBuffer[MEDIUM_PRIORITY] + stats->messageSendBuffer[HIGH_PRIORITY];
+
+			if (maxSendBuffer - queued >= 2) {
+				if (!stats->bandwidthExceeded) {
+					sendPhysicsPacket();
+					sendItems();
+					lastSendTime = t;
+				}
+			}
+		}
+
+		if (NetworkSettings::singleton().printPacketBuffer) {
+			unsigned int sendBuffer =
+				2 * stats->messageSendBuffer[HIGH_PRIORITY] + stats->messageSendBuffer[MEDIUM_PRIORITY];
+			if (sendBuffer > (unsigned int) NetworkSettings::singleton().maxDataModelSendBuffer) {
+				StandardOut::singleton()->print(MESSAGE_WARNING, "SendBuffer = %d", sendBuffer);
+			}
+			else if (sendBuffer > 0) {
+				StandardOut::singleton()->print(MESSAGE_INFO, "SendBuffer = %d", sendBuffer);
+			}
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x101a6200

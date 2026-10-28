@@ -103,6 +103,7 @@ public:
 
 	unsigned int numMotors() const;
 	MotorJoint* getMotor(unsigned int index);
+	const MotorJoint* getMotorConst(unsigned int index) const;
 
 	void stepUi(int frameCount);
 

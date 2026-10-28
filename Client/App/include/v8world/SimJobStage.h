@@ -43,6 +43,34 @@ public:
 		return it == list.end() ? *list.begin() : *it;
 	}
 
+	template <class Callback>
+	void reportMechanisms(Callback& callback, MechanismTracker& tracker, const Mechanism* ignore)
+	{
+		if (mechanisms.size() == 0) {
+			return;
+		}
+
+		if (!tracker.tracking()) {
+			tracker.setMechanism(*mechanisms.begin());
+		}
+
+		unsigned int reported = 0;
+		Mechanism* current = tracker.getMechanism();
+		while (reported < mechanisms.size()) {
+			reported++;
+			Mechanism* mechanism = current;
+			current = nextMechanism(mechanisms, current);
+
+			if (mechanism != ignore) {
+				if (!callback.report(*mechanism)) {
+					break;
+				}
+			}
+		}
+
+		tracker.setMechanism(current);
+	}
+
 private:
 	void combineMechanisms(Edge* edge);
 	void destroyMechanism(Mechanism* mechanism);
@@ -55,6 +83,11 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(SimJobStage, 0x1c)
+
+// clang-format off
+// TEMPLATE: WEBSERVICE 0x1019f800
+// RBX::SimJobStage::reportMechanisms<RBX::Network::Replicator::JobSender>
+// clang-format on
 
 } // namespace RBX
 

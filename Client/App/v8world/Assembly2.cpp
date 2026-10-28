@@ -243,12 +243,20 @@ const MotorJoint* Assembly::getMotorImp(unsigned int& motorId) const
 	return NULL;
 }
 
-// FUNCTION: WEBSERVICE 0x10102f00
+// FUNCTION: WEBSERVICE 0x10102f00 FOLDED
 MotorJoint* Assembly::getMotor(unsigned int index)
 {
 	unsigned int i = index;
 
 	return const_cast<MotorJoint*>(getMotorImp(i));
+}
+
+// FUNCTION: WEBSERVICE 0x10102f00 FOLDED
+const MotorJoint* Assembly::getMotorConst(unsigned int index) const
+{
+	unsigned int i = index;
+
+	return getMotorImp(i);
 }
 
 // FUNCTION: WEBSERVICE 0x10102f20

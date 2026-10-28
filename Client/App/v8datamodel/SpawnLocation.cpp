@@ -63,6 +63,12 @@ SpawnerService::~SpawnerService()
 {
 }
 
+// STUB: WEBSERVICE 0x100fe770
+void SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network::Player* p)
+{
+	STUB(0x100fe770);
+}
+
 // FUNCTION: WEBSERVICE 0x100febd0
 SpawnerService::SpawnerService()
 {
