@@ -72,6 +72,13 @@ void Reflection::TypedPropertyDescriptor<TextureId>::writeValue(
 	element->setValue(getValue(instance));
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool Reflection::TypedPropertyDescriptor<TextureId>::hasStringValue() const
+{
+	return true;
+}
+
 // FUNCTION: WEBSERVICE 0x100417d0 FOLDED
 template <>
 std::string Reflection::TypedPropertyDescriptor<TextureId>::getStringValue(const DescribedBase* instance) const

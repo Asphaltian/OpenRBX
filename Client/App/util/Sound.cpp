@@ -290,6 +290,13 @@ void TypedPropertyDescriptor<Soundscape::SoundId>::writeValue(const DescribedBas
 	element->setValue(getValue(instance));
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<Soundscape::SoundId>::hasStringValue() const
+{
+	return true;
+}
+
 template <>
 std::string TypedPropertyDescriptor<Soundscape::SoundId>::getStringValue(const DescribedBase* instance) const
 {

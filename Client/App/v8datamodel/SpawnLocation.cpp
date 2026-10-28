@@ -132,7 +132,7 @@ void SpawnLocation::setTeamColor(BrickColor color)
 	raisePropertyChanged(prop_TeamColor);
 }
 
-// FUNCTION: WEBSERVICE 0x100ff2d0
+// STUB: WEBSERVICE 0x100ff2d0
 void SpawnLocation::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Instance::onServiceProvider(oldProvider, newProvider);

@@ -137,7 +137,7 @@ public:
 		return getValue(a) == getValue(b);
 	}
 
-	virtual bool hasStringValue() const { return false; }
+	virtual bool hasStringValue() const;
 
 	virtual std::string getStringValue(const DescribedBase* instance) const;
 
@@ -177,6 +177,12 @@ protected:
 };
 
 template <class T>
+bool TypedPropertyDescriptor<T>::hasStringValue() const
+{
+	return false;
+}
+
+template <class T>
 std::string TypedPropertyDescriptor<T>::getStringValue(const DescribedBase* instance) const
 {
 	return PropertyDescriptor::getStringValue(instance);
@@ -188,6 +194,8 @@ bool TypedPropertyDescriptor<T>::setStringValue(DescribedBase* instance, const s
 	return PropertyDescriptor::setStringValue(instance, value);
 }
 
+template <>
+bool TypedPropertyDescriptor<std::string>::hasStringValue() const;
 template <>
 std::string TypedPropertyDescriptor<std::string>::getStringValue(const DescribedBase* instance) const;
 template <>
@@ -202,6 +210,8 @@ template <>
 void TypedPropertyDescriptor<std::string>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 template <>
+bool TypedPropertyDescriptor<bool>::hasStringValue() const;
+template <>
 std::string TypedPropertyDescriptor<bool>::getStringValue(const DescribedBase* instance) const;
 template <>
 bool TypedPropertyDescriptor<bool>::setStringValue(DescribedBase* instance, const std::string& text) const;
@@ -214,6 +224,8 @@ void TypedPropertyDescriptor<bool>::readValue(
 template <>
 void TypedPropertyDescriptor<bool>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
+template <>
+bool TypedPropertyDescriptor<float>::hasStringValue() const;
 template <>
 std::string TypedPropertyDescriptor<float>::getStringValue(const DescribedBase* instance) const;
 template <>
@@ -228,6 +240,8 @@ template <>
 void TypedPropertyDescriptor<float>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 template <>
+bool TypedPropertyDescriptor<double>::hasStringValue() const;
+template <>
 std::string TypedPropertyDescriptor<double>::getStringValue(const DescribedBase* instance) const;
 template <>
 bool TypedPropertyDescriptor<double>::setStringValue(DescribedBase* instance, const std::string& text) const;
@@ -240,6 +254,8 @@ void TypedPropertyDescriptor<double>::readValue(
 template <>
 void TypedPropertyDescriptor<double>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
+template <>
+bool TypedPropertyDescriptor<int>::hasStringValue() const;
 template <>
 std::string TypedPropertyDescriptor<int>::getStringValue(const DescribedBase* instance) const;
 template <>
@@ -254,6 +270,8 @@ template <>
 void TypedPropertyDescriptor<int>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 template <>
+bool TypedPropertyDescriptor<G3D::Vector3>::hasStringValue() const;
+template <>
 std::string TypedPropertyDescriptor<G3D::Vector3>::getStringValue(const DescribedBase* instance) const;
 template <>
 bool TypedPropertyDescriptor<G3D::Vector3>::setStringValue(DescribedBase* instance, const std::string& text) const;
@@ -266,6 +284,8 @@ void TypedPropertyDescriptor<G3D::Vector3>::readValue(
 template <>
 void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
+template <>
+bool TypedPropertyDescriptor<G3D::Color3>::hasStringValue() const;
 template <>
 std::string TypedPropertyDescriptor<G3D::Color3>::getStringValue(const DescribedBase* instance) const;
 template <>
@@ -280,6 +300,12 @@ template <>
 void TypedPropertyDescriptor<G3D::Color3>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 template <>
+bool TypedPropertyDescriptor<BrickColor>::hasStringValue() const;
+template <>
+std::string TypedPropertyDescriptor<BrickColor>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<BrickColor>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
 void TypedPropertyDescriptor<BrickColor>::readValue(
 	DescribedBase* instance,
 	const XmlElement* element,
@@ -288,6 +314,8 @@ void TypedPropertyDescriptor<BrickColor>::readValue(
 template <>
 void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
+template <>
+bool TypedPropertyDescriptor<ContentId>::hasStringValue() const;
 template <>
 std::string TypedPropertyDescriptor<ContentId>::getStringValue(const DescribedBase* instance) const;
 template <>
@@ -302,6 +330,8 @@ template <>
 void TypedPropertyDescriptor<ContentId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 template <>
+bool TypedPropertyDescriptor<TextureId>::hasStringValue() const;
+template <>
 std::string TypedPropertyDescriptor<TextureId>::getStringValue(const DescribedBase* instance) const;
 template <>
 bool TypedPropertyDescriptor<TextureId>::setStringValue(DescribedBase* instance, const std::string& text) const;
@@ -314,6 +344,8 @@ void TypedPropertyDescriptor<TextureId>::readValue(
 template <>
 void TypedPropertyDescriptor<TextureId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
+template <>
+bool TypedPropertyDescriptor<MeshId>::hasStringValue() const;
 template <>
 std::string TypedPropertyDescriptor<MeshId>::getStringValue(const DescribedBase* instance) const;
 template <>

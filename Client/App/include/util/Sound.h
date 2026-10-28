@@ -323,6 +323,23 @@ namespace Reflection {
 
 template <>
 const Type& Type::singleton<Soundscape::SoundId>();
+template <>
+void TypedPropertyDescriptor<Soundscape::SoundId>::readValue(
+	DescribedBase* instance,
+	const XmlElement* element,
+	IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<Soundscape::SoundId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+template <>
+bool TypedPropertyDescriptor<Soundscape::SoundId>::hasStringValue() const;
+template <>
+std::string TypedPropertyDescriptor<Soundscape::SoundId>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<Soundscape::SoundId>::setStringValue(
+	DescribedBase* instance,
+	const std::string& text
+) const;
 
 } // namespace Reflection
 

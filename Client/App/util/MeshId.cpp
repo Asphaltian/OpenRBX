@@ -50,6 +50,13 @@ void TypedPropertyDescriptor<MeshId>::writeValue(const DescribedBase* instance, 
 	element->setValue(getValue(instance));
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<MeshId>::hasStringValue() const
+{
+	return true;
+}
+
 template <>
 std::string TypedPropertyDescriptor<MeshId>::getStringValue(const DescribedBase* instance) const
 {

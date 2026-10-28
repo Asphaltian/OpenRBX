@@ -157,6 +157,13 @@ const Type& Type::singleton<BrickColor>()
 	return type;
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<std::string>::hasStringValue() const
+{
+	return true;
+}
+
 // FUNCTION: WEBSERVICE 0x10040410
 template <>
 std::string TypedPropertyDescriptor<std::string>::getStringValue(const DescribedBase* instance) const
@@ -169,6 +176,13 @@ template <>
 bool TypedPropertyDescriptor<std::string>::setStringValue(DescribedBase* instance, const std::string& text) const
 {
 	setValue(instance, text);
+	return true;
+}
+
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<bool>::hasStringValue() const
+{
 	return true;
 }
 
@@ -192,6 +206,13 @@ bool TypedPropertyDescriptor<bool>::setStringValue(DescribedBase* instance, cons
 	return false;
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<float>::hasStringValue() const
+{
+	return true;
+}
+
 // FUNCTION: WEBSERVICE 0x100404d0
 template <>
 std::string TypedPropertyDescriptor<float>::getStringValue(const DescribedBase* instance) const
@@ -210,6 +231,13 @@ bool TypedPropertyDescriptor<float>::setStringValue(DescribedBase* instance, con
 	}
 
 	return false;
+}
+
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<double>::hasStringValue() const
+{
+	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x10040550
@@ -232,6 +260,13 @@ bool TypedPropertyDescriptor<double>::setStringValue(DescribedBase* instance, co
 	return false;
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<int>::hasStringValue() const
+{
+	return true;
+}
+
 // FUNCTION: WEBSERVICE 0x100405e0
 template <>
 std::string TypedPropertyDescriptor<int>::getStringValue(const DescribedBase* instance) const
@@ -250,6 +285,13 @@ bool TypedPropertyDescriptor<int>::setStringValue(DescribedBase* instance, const
 	}
 
 	return false;
+}
+
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<G3D::Vector3>::hasStringValue() const
+{
+	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x10040660
@@ -567,6 +609,13 @@ std::string& Value::convert<std::string>()
 	throw std::runtime_error("Unable to cast value to std::string");
 }
 
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<G3D::Color3>::hasStringValue() const
+{
+	return true;
+}
+
 // FUNCTION: WEBSERVICE 0x10041430
 template <>
 std::string TypedPropertyDescriptor<G3D::Color3>::getStringValue(const DescribedBase* instance) const
@@ -623,6 +672,27 @@ void TypedPropertyDescriptor<G3D::Color3>::writeValue(const DescribedBase* insta
 	element->setValue(v.asUInt32());
 }
 
+// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
+template <>
+bool TypedPropertyDescriptor<BrickColor>::hasStringValue() const
+{
+	return false;
+}
+
+// FUNCTION: WEBSERVICE 0x10101910 FOLDED
+template <>
+std::string TypedPropertyDescriptor<BrickColor>::getStringValue(const DescribedBase* instance) const
+{
+	return PropertyDescriptor::getStringValue(instance);
+}
+
+// FUNCTION: WEBSERVICE 0x1003ea80 FOLDED
+template <>
+bool TypedPropertyDescriptor<BrickColor>::setStringValue(DescribedBase* instance, const std::string& text) const
+{
+	return PropertyDescriptor::setStringValue(instance, text);
+}
+
 // FUNCTION: WEBSERVICE 0x10041620
 template <>
 void TypedPropertyDescriptor<BrickColor>::readValue(
@@ -667,6 +737,13 @@ template <>
 void TypedPropertyDescriptor<ContentId>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
 	element->setValue(ContentId(getValue(instance)));
+}
+
+// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+template <>
+bool TypedPropertyDescriptor<ContentId>::hasStringValue() const
+{
+	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x100417d0 FOLDED
