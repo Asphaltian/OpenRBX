@@ -113,10 +113,11 @@ public:
 	Workspace(IDataState* dataState);
 
 	World* getWorld() const { return world.get(); }
+	IDataState* getDataState() const { return dataState; }
 
 	bool getInMouselookMode() { return inMouselookMode; }
 
-	void setMouseCommand(MouseCommand* command);
+	void setMouseCommand(MouseCommand* newMouseCommand);
 	void setDefaultMouseCommand();
 	void setNullMouseCommand();
 

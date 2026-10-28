@@ -1,9 +1,11 @@
 #include "util/RunStateOwner.h"
 
 #include "util/Timer.h"
+#include "util/boost.hpp"
 #include "v8datamodel/DataModel.h"
 
 #include <algorithm>
+#include <boost/bind.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/thread/xtime.hpp>
 
@@ -146,10 +148,14 @@ RunService::RunService()
 	setName("Run Service");
 }
 
-// STUB: WEBSERVICE 0x100573e0
+// FUNCTION: WEBSERVICE 0x100573e0
 void RunService::start()
 {
-	STUB(0x100573e0);
+	boost::shared_ptr<DataModel> dataModel = shared_from(dynamic_cast<DataModel*>(getParent()));
+
+	runThread.reset(new boost::thread(
+		background_function(boost::bind(&RunService::runProc, shared_from(this), dataModel), "rbx_runProc")
+	));
 }
 
 // FUNCTION: WEBSERVICE 0x100577f0

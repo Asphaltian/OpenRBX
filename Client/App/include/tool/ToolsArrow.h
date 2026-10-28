@@ -62,7 +62,6 @@ protected:
 
 public:
 	ArrowToolBase(Workspace* workspace) : MouseCommand(workspace), overInstance(false) {}
-	virtual ~ArrowToolBase() {}
 };
 
 DECOMP_SIZE_ASSERT(ArrowToolBase, 0x24)
@@ -75,7 +74,6 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x1006a710
 	virtual MouseCommand* isSticky() const { return new ArrowTool(workspace); }
-	virtual ~ArrowTool() {}
 };
 
 DECOMP_SIZE_ASSERT(ArrowTool, 0x24)

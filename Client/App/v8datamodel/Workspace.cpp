@@ -219,9 +219,9 @@ static void wrapper(Instance* instance)
 Camera* Workspace::getCamera() const
 {
 	if (!currentCamera || !currentCamera->isDescendentOf(this)) {
-		boost::shared_ptr<Camera> camera = Creatable<Instance>::create<Camera>();
-		camera->setParent(const_cast<Workspace*>(this));
-		const_cast<Workspace*>(this)->currentCamera = camera;
+		boost::shared_ptr<Camera> newCam = Creatable<Instance>::create<Camera>();
+		newCam->setParent(const_cast<Workspace*>(this));
+		const_cast<Workspace*>(this)->currentCamera = newCam;
 	}
 
 	return currentCamera.get();
@@ -320,27 +320,27 @@ void Workspace::handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstanc
 }
 
 // STUB: WEBSERVICE 0x1006c9e0
-void Workspace::setMouseCommand(MouseCommand* command)
+void Workspace::setMouseCommand(MouseCommand* newMouseCommand)
 {
-	if (!command) {
+	if (!newMouseCommand) {
 		if (stickyCommand.get()) {
-			command = stickyCommand->isSticky();
+			newMouseCommand = stickyCommand->isSticky();
 		}
 
-		if (!command) {
+		if (!newMouseCommand) {
 			if (!Network::Players::findLocalPlayer(this)) {
-				command = new ArrowTool(this);
+				newMouseCommand = new ArrowTool(this);
 			}
 			else {
-				command = newNullTool(this);
+				newMouseCommand = newNullTool(this);
 			}
 		}
 	}
 
-	if (command != currentCommand.get()) {
-		currentCommand.reset(command);
+	if (newMouseCommand != currentCommand.get()) {
+		currentCommand.reset(newMouseCommand);
 
-		if (MouseCommand* sticky = command->isSticky()) {
+		if (MouseCommand* sticky = newMouseCommand->isSticky()) {
 			stickyCommand.reset(sticky);
 		}
 

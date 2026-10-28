@@ -6,6 +6,7 @@
 #include "reflection/signal.h"
 #include "util/Name.h"
 #include "v8datamodel/Backpack.h"
+#include "v8datamodel/DataModel.h"
 #include "v8datamodel/ScriptMouseCommand.h"
 #include "v8datamodel/Workspace.h"
 
@@ -168,10 +169,20 @@ void BackpackItem::render2d(Adorn* adorn)
 	}
 }
 
-// STUB: WEBSERVICE 0x100c8f80
+// FUNCTION: WEBSERVICE 0x100c8f80
 void HopperBin::onSelectCommand()
 {
-	STUB(0x100c8f80);
+	DataModel* dataModel = static_cast<DataModel*>(getRootAncestor());
+
+	std::string command = Reflection::EnumDesc<BinType>::singleton().convertToString(binType) + "Tool";
+
+	Verb* verb = dataModel->getVerb(command);
+
+	if (verb->isEnabled()) {
+		if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
+			verb->doIt(workspace->getDataState());
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100c9070
