@@ -115,6 +115,8 @@ public:
 		double expiration;                           // 0x08
 	};
 
+	virtual ~CWebService() {}
+
 	HRESULT __stdcall HelloWorld(wchar_t** result);
 	HRESULT __stdcall GetAllJobs(Strings* result);
 	HRESULT __stdcall TouchJob(wchar_t* jobID, double expiration);
@@ -202,6 +204,17 @@ public:
 	// FUNCTION: WEBSERVICE 0x1000df70
 	const char* GetServiceName() { return "Service"; }
 
+protected:
+	// FUNCTION: WEBSERVICE 0x1000df80
+	virtual HRESULT GenerateAppError(ATL::IWriteStream* pStream, HRESULT hr)
+	{
+		if (errorMessage.GetLength() > 0) {
+			return SoapFault(SOAP_E_SERVER, errorMessage, -1);
+		}
+
+		return ATL::CSoapHandler<CWebService>::GenerateAppError(pStream, hr);
+	}
+
 private:
 	friend BOOL WINAPI ::TerminateExtension(DWORD flags);
 
@@ -210,7 +223,7 @@ private:
 	static std::map<std::string, Job> jobs;
 	static boost::mutex sync;
 
-	ATL::CComBSTR errorMessage; // 0x17c
+	CStringW errorMessage; // 0x17c
 };
 
 DECOMP_SIZE_ASSERT(CWebService, 0x180)

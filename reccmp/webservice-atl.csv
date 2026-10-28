@@ -753,3 +753,7 @@ address,size,type,symbol,name
 0x100051b0,24,library,,ATL::AtlThrowImpl
 0x100052c0,143,library,,"ATL::CStringT<char,ATL::StrTraitATL<char,ATL::ChTraitsCRT<char> > >::CStringT<char,ATL::StrTraitATL<char,ATL::ChTraitsCRT<char> > >"
 0x100307f0,125,library,,A2WBSTR
+0x100211f0,,library,?AddRef@?$CIsapiExtension@V?$CThreadPool@VCIsapiWorker@ATL@@VCRTThreadTraits@2@VWin32WaitTraits@2@@ATL@@VCNoRequestStats@2@UCDefaultErrorProvider@2@VCRTThreadTraits@2@VCNoStatClass@2@V62@@ATL@@W3AGKXZ,
+0x10021220,,library,?QueryInterface@?$CIsapiExtension@V?$CThreadPool@VCIsapiWorker@ATL@@VCRTThreadTraits@2@VWin32WaitTraits@2@@ATL@@VCNoRequestStats@2@UCDefaultErrorProvider@2@VCRTThreadTraits@2@VCNoStatClass@2@V62@@ATL@@W3AGJABU_GUID@@PAPAX@Z,
+0x100212b0,,library,?QueryInterface@?$CIsapiExtension@V?$CThreadPool@VCIsapiWorker@ATL@@VCRTThreadTraits@2@VWin32WaitTraits@2@@ATL@@VCNoRequestStats@2@UCDefaultErrorProvider@2@VCRTThreadTraits@2@VCNoStatClass@2@V62@@ATL@@W7AGJABU_GUID@@PAPAX@Z,
+0x100212e0,,library,?AddRef@?$CIsapiExtension@V?$CThreadPool@VCIsapiWorker@ATL@@VCRTThreadTraits@2@VWin32WaitTraits@2@@ATL@@VCNoRequestStats@2@UCDefaultErrorProvider@2@VCRTThreadTraits@2@VCNoStatClass@2@V62@@ATL@@W7AGKXZ,
