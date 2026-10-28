@@ -34,6 +34,10 @@ public:
 DECOMP_SIZE_ASSERT(ThumbnailGenerator, 0xf8)
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x10217da0
+// `dynamic initializer for 'clickFunction''
+// SYNTHETIC: WEBSERVICE 0x10217dc0
+// `dynamic initializer for 'clickTextureFunction''
 // SYNTHETIC: WEBSERVICE 0x10220fb0
 // `dynamic atexit destructor for 'clickFunction''
 // SYNTHETIC: WEBSERVICE 0x10220fc0
