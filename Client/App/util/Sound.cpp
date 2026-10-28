@@ -253,6 +253,7 @@ std::string StringConverter<Soundscape::SoundId>::convertToString(const Soundsca
 	return value.toString();
 }
 
+// FUNCTION: WEBSERVICE 0x1007da70 FOLDED
 template <>
 bool StringConverter<Soundscape::SoundId>::convertToValue(const std::string& text, Soundscape::SoundId& value)
 {
@@ -284,6 +285,7 @@ void TypedPropertyDescriptor<Soundscape::SoundId>::readValue(
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1007e3c0 FOLDED
 template <>
 void TypedPropertyDescriptor<Soundscape::SoundId>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -297,12 +299,14 @@ bool TypedPropertyDescriptor<Soundscape::SoundId>::hasStringValue() const
 	return true;
 }
 
+// FUNCTION: WEBSERVICE 0x1007e440 FOLDED
 template <>
 std::string TypedPropertyDescriptor<Soundscape::SoundId>::getStringValue(const DescribedBase* instance) const
 {
 	return StringConverter<Soundscape::SoundId>::convertToString(getValue(instance));
 }
 
+// FUNCTION: WEBSERVICE 0x1007e4c0 FOLDED
 template <>
 bool TypedPropertyDescriptor<Soundscape::SoundId>::setStringValue(
 	DescribedBase* instance,

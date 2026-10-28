@@ -13,6 +13,7 @@ std::string StringConverter<MeshId>::convertToString(const MeshId& value)
 	return value.toString();
 }
 
+// FUNCTION: WEBSERVICE 0x1007da70 FOLDED
 template <>
 bool StringConverter<MeshId>::convertToValue(const std::string& text, MeshId& value)
 {
@@ -29,6 +30,7 @@ const Type& Type::singleton<MeshId>()
 	return singleton<ContentId>();
 }
 
+// FUNCTION: WEBSERVICE 0x1012dd70 FOLDED
 template <>
 void TypedPropertyDescriptor<MeshId>::readValue(
 	DescribedBase* instance,
@@ -44,6 +46,7 @@ void TypedPropertyDescriptor<MeshId>::readValue(
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x1007e3c0 FOLDED
 template <>
 void TypedPropertyDescriptor<MeshId>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -57,12 +60,14 @@ bool TypedPropertyDescriptor<MeshId>::hasStringValue() const
 	return true;
 }
 
+// FUNCTION: WEBSERVICE 0x1007e440 FOLDED
 template <>
 std::string TypedPropertyDescriptor<MeshId>::getStringValue(const DescribedBase* instance) const
 {
 	return StringConverter<MeshId>::convertToString(getValue(instance));
 }
 
+// FUNCTION: WEBSERVICE 0x1007e4c0 FOLDED
 template <>
 bool TypedPropertyDescriptor<MeshId>::setStringValue(DescribedBase* instance, const std::string& text) const
 {
