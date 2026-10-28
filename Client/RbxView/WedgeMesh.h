@@ -1,6 +1,7 @@
 #ifndef RBXVIEW_WEDGEMESH_H
 #define RBXVIEW_WEDGEMESH_H
 
+#include "BevelMesh.h"
 #include "MeshFactory.h"
 #include "decomp.h"
 #include "renderlib/Mesh.h"
@@ -13,7 +14,7 @@ namespace RBX {
 namespace View {
 
 // SIZE 0x50
-class WedgeMesh : public Render::Mesh, public MeshFactory<WedgeMesh, 1>
+class WedgeMesh : public BevelMesh, public MeshFactory<WedgeMesh, 1>
 {
 private:
 	friend class MeshFactory<WedgeMesh, 1>;

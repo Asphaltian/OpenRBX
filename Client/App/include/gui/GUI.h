@@ -28,6 +28,9 @@ private:
 	// FUNCTION: WEBSERVICE 0x100c7460
 	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const GuiItem*>(instance) != NULL; }
 
+	// FUNCTION: WEBSERVICE 0x100c7730 FOLDED
+	virtual const Name& getClassName() const { return Name::getNullName(); }
+
 public:
 
 protected:

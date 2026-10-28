@@ -199,6 +199,12 @@ public:
 	virtual void Update(RakPeerInterface* peer);
 	virtual PluginReceiveResult OnReceive(RakPeerInterface* peer, Packet* packet);
 
+	// FUNCTION: WEBSERVICE 0x100c7730 FOLDED
+	virtual const Name& getClassName() const { return Name::getNullName(); }
+
+	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	virtual XmlElement* write() { return NULL; }
+
 	boost::shared_ptr<Reflection::DescribedBase> sendMarker();
 	bool isSerializePending(const Instance* instance) const;
 	bool isPropertyChangedPending(const Reflection::Property& property) const;

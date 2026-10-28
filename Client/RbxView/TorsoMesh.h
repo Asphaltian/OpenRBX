@@ -1,6 +1,7 @@
 #ifndef RBXVIEW_TORSOMESH_H
 #define RBXVIEW_TORSOMESH_H
 
+#include "BevelMesh.h"
 #include "MeshFactory.h"
 #include "decomp.h"
 #include "renderlib/Mesh.h"
@@ -13,10 +14,12 @@ namespace RBX {
 namespace View {
 
 // SIZE 0x50
-class TorsoMesh : public Render::Mesh, public MeshFactory<TorsoMesh, 1>
+class TorsoMesh : public BevelMesh, public MeshFactory<TorsoMesh, 1>
 {
 private:
 	friend class MeshFactory<TorsoMesh, 1>;
+
+	Render::Mesh::Level& addTorso(float, float) const;
 
 	TorsoMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes);
 

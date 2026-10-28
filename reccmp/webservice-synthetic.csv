@@ -662,6 +662,7 @@ address,type,symbol
 0x10197150,synthetic,?getClassName@?$FactoryProduct@VClient@Network@RBX@@VPeer@23@$1?sClient@23@3PADA@RBX@@UBEABVName@2@XZ
 0x10197770,synthetic,??1?$BoundFuncDesc@VClient@Network@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HHH@Z$03@Reflection@RBX@@UAE@XZ
 0x101980b0,synthetic,??0?$BoundFuncDesc@VClient@Network@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HHH@Z$03@Reflection@RBX@@QAE@P8Client@Network@2@AEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HHH@ZPBD2222HW4Security@FunctionDescriptor@12@@Z
+0x10199650,synthetic,??_EClientProxy@Server@Network@RBX@@WBA@AEPAXI@Z
 0x1019a190,synthetic,?getClassName@?$FactoryProduct@VServer@Network@RBX@@VPeer@23@$1?sServer@23@3PADA@RBX@@UBEABVName@2@XZ
 0x1019b420,synthetic,??_E?$DescribedCreatable@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UAEPAXI@Z
 0x1019b580,synthetic,?getClassName@?$FactoryProduct@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UBEABVName@2@XZ
@@ -674,6 +675,7 @@ address,type,symbol
 0x101a65e0,synthetic,??1ReplicatorStatsItem@Replicator@Network@RBX@@UAE@XZ
 0x101a6670,synthetic,??_GReplicatorStatsItem@Replicator@Network@RBX@@UAEPAXI@Z
 0x101a9e90,synthetic,??1?$NonFactoryProduct@VIdSerializer@Network@RBX@@$1?sReplicator@23@3QBDB@RBX@@UAE@XZ
+0x101aa4b0,synthetic,??_EReplicator@Network@RBX@@WBA@AEPAXI@Z
 0x101af920,synthetic,??0RemoteSystemStruct@RakPeer@@QAE@XZ
 0x101af980,synthetic,??1RemoteSystemStruct@RakPeer@@QAE@XZ
 0x101b0fd0,synthetic,??$umultiply@$$BY03I$$BY07I@big@@YAXAAY07IAAY03I@Z
