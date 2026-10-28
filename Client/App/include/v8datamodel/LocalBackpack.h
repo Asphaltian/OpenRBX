@@ -106,6 +106,8 @@ DECOMP_SIZE_ASSERT(LocalBackpack, 0x174)
 
 // SYNTHETIC: WEBSERVICE 0x100d7410
 // RBX::LocalBackpackItem::~LocalBackpackItem
+// SYNTHETIC: WEBSERVICE 0x100d74a0
+// RBX::LocalBackpackItem::`scalar deleting destructor'
 
 } // namespace RBX
 

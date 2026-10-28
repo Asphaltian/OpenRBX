@@ -58,6 +58,43 @@ namespace Network {
 
 const char sPeer[] = "NetworkPeer";
 const char sReplicator[] = "NetworkReplicator";
+const char sMarker[] = "NetworkMarker";
+
+Reflection::SignalDesc<Replicator, void(std::string, bool)> Replicator::event_Disconnection(
+	"Disconnection",
+	"peer",
+	"lostConnection"
+);
+} // namespace Network
+} // namespace RBX
+
+static RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator, boost::shared_ptr<RBX::Reflection::DescribedBase>(), 0>
+	func_SendMarker(
+		&RBX::Network::Replicator::sendMarker,
+		"SendMarker",
+		RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+	);
+static RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator, void(), 0> func_requestCharacter(
+	&RBX::Network::Replicator::requestCharacter,
+	"RequestCharacter",
+	RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator, void(), 0> func_closeConnection(
+	&RBX::Network::Replicator::closeConnection,
+	"CloseConnection",
+	RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+static RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator, boost::shared_ptr<RBX::Instance>(), 0>
+	prop_RemotePlayer(
+		&RBX::Network::Replicator::getPlayer,
+		"GetPlayer",
+		RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+	);
+
+namespace RBX {
+namespace Network {
+
+Reflection::SignalDesc<Marker, void()> Marker::event_Returned("Received");
 
 // SIZE 0x148
 class Replicator::ReplicatorStatsItem : public Stats::Item
@@ -1092,6 +1129,20 @@ void Replicator::readProperties(RakNet::BitStream& inBitstream, Instance* instan
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101a84a0
+void Replicator::readMarker(RakNet::BitStream& inBitstream)
+{
+	long id;
+	inBitstream >> id;
+
+	if (NetworkSettings::singleton().printInstances) {
+		StandardOut::singleton()->print(MESSAGE_INFO, "Received marker %d from %s", id, remotePlayerId.ToString());
+	}
+
+	incomingMarkers.front()->fireReturned();
+	incomingMarkers.pop();
+}
+
 // FUNCTION: WEBSERVICE 0x101a8aa0
 void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitStream)
 {
@@ -1228,6 +1279,28 @@ inline void Replicator::NewInstanceItem::write(RakNet::BitStream& bitStream)
 
 		replicator.serializeValue(property, false, bitStream);
 	}
+}
+
+// FUNCTION: WEBSERVICE 0x101a9c00
+boost::shared_ptr<Reflection::DescribedBase> Replicator::sendMarker()
+{
+	boost::shared_ptr<Marker> marker = Marker::newMarker();
+
+	RakNet::BitStream bitStream;
+	bitStream << (unsigned char) ID_REQUEST_MARKER;
+
+	bitStream << (int) marker->id();
+
+	if (NetworkSettings::singleton().printInstances) {
+		StandardOut::singleton()
+			->print(MESSAGE_INFO, "Replicator: Requesting Marker %d of %s", marker->id(), remotePlayerId.ToString());
+	}
+
+	incomingMarkers.push(marker);
+
+	peer->Send(&bitStream, HIGH_PRIORITY, RELIABLE, 0, remotePlayerId, false);
+
+	return marker;
 }
 
 // FUNCTION: WEBSERVICE 0x101aa110

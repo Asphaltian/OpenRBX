@@ -6701,6 +6701,8 @@ address,type,symbol
 0x102fef9c,global,isNullClassName___RBX::ServiceProvider::find<RBX::Network::Server>
 0x102fefa0,global,??_B?8???$find@VServer@Network@RBX@@@ServiceProvider@RBX@@QBEPAVServer@Network@1@XZ@58
 0x102fefac,global,?event_IncommingConnection@Server@Network@RBX@@2V?$SignalDesc@VServer@Network@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@3@A
+0x102ff340,global,?event_Returned@Marker@Network@RBX@@2V?$SignalDesc@VMarker@Network@RBX@@$$A6AXXZ@Reflection@3@A
+0x102ff3f8,global,?event_Disconnection@Replicator@Network@RBX@@2V?$SignalDesc@VReplicator@Network@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z@Reflection@3@A
 0x102ff07c,global,?prop_MaxSendBPS@RBX@@3V?$BoundProp@H$00@Reflection@1@A
 0x102ff098,global,?prop_MaxDataModelSendBuffer@RBX@@3V?$BoundProp@H$00@Reflection@1@A
 0x102ff0b4,global,?prop_PrintPacketBuffer@RBX@@3V?$BoundProp@_N$00@Reflection@1@A

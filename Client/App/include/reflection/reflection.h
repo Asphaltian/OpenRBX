@@ -211,6 +211,8 @@ namespace Reflection {
 // RBX::Reflection::Described<RBX::Network::Players,&RBX::Network::sPlayers,RBX::NonFactoryProduct<RBX::Instance,&RBX::Network::sPlayers> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c2f0
 // RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor
+// TEMPLATE: WEBSERVICE 0x101a3140
+// RBX::Reflection::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >::classDescriptor
 // SYNTHETIC: WEBSERVICE 0x10221000
 // `RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221010
@@ -379,6 +381,8 @@ namespace Reflection {
 // `RBX::Reflection::Described<RBX::Network::Player,&RBX::Network::sPlayer,RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10225d60
 // `RBX::Reflection::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x102262b0
+// `RBX::Reflection::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on
 
 template <class T, const char* sName, class Base>
@@ -396,6 +400,8 @@ public:
 	// RBX::Reflection::Described<RBX::Network::Server,&RBX::Network::sServer,RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer> >::Described<RBX::Network::Server,&RBX::Network::sServer,RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer> >
 	// TEMPLATE: WEBSERVICE 0x1019b860
 	// RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >
+	// TEMPLATE: WEBSERVICE 0x101a96a0
+	// RBX::Reflection::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >
 	// clang-format on
 	Described() { this->descriptor = &classDescriptor(); }
 
@@ -948,6 +954,22 @@ public:
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,int __cdecl(void),0>::BoundFuncDesc<RBX::Network::Server,int __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1019afe0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,int __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x101a4420
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x101a44a0
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>::call<boost::shared_ptr<RBX::Reflection::DescribedBase> >
+	// TEMPLATE: WEBSERVICE 0x101a4550
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x101a45b0
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,void __cdecl(void),0>::BoundFuncDesc<RBX::Network::Replicator,void __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x101a4630
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,void __cdecl(void),0>::execute
+	// TEMPLATE: WEBSERVICE 0x101a4690
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> __cdecl(void),0>
+	// TEMPLATE: WEBSERVICE 0x101a4710
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::call<boost::shared_ptr<RBX::Instance> >
+	// TEMPLATE: WEBSERVICE 0x101a47c0
+	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::execute
 	// clang-format on
 };
 

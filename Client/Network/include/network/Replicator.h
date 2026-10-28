@@ -11,6 +11,7 @@
 
 #include <PluginInterface.h>
 #include <RakNetTypes.h>
+#include <boost/noncopyable.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/signals/connection.hpp>
@@ -53,12 +54,37 @@ class StatsService;
 
 namespace Network {
 
-class Marker;
 class Player;
 class Players;
 
 extern const char sPeer[];
 extern const char sReplicator[];
+extern const char sMarker[];
+
+// VTABLE: WEBSERVICE 0x10250ba4
+// SIZE 0x10
+class Marker : public DescribedNonCreatable<Marker, Reflection::DescribedBase, sMarker>, private boost::noncopyable
+{
+	bool returned; // 0x0c
+
+	Marker() : returned(false) {}
+
+public:
+	// FUNCTION: WEBSERVICE 0x101a9b70
+	static boost::shared_ptr<Marker> newMarker() { return boost::shared_ptr<Marker>(new Marker()); }
+
+	long id() const { return reinterpret_cast<long>(this); }
+	static Marker* fromId(long id) { return reinterpret_cast<Marker*>(id); }
+	void fireReturned() { event_Returned.fire(this); }
+
+	static Reflection::SignalDesc<Marker, void()> event_Returned;
+	static Reflection::SignalDesc<Marker, void(float)> event_Progress;
+
+	// SYNTHETIC: WEBSERVICE 0x101a89d0
+	// RBX::Network::Marker::`scalar deleting destructor'
+};
+
+DECOMP_SIZE_ASSERT(Marker, 0x10)
 
 // SIZE 0x2c30
 class Replicator : public DescribedNonCreatable<Replicator, IdSerializer, sReplicator>, public PluginInterface
@@ -166,6 +192,9 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x1019f930
 	boost::shared_ptr<Instance> getPlayer() { return shared_from(findTargetPlayer()); }
+
+	static Reflection::BoundProp<int, 1> prop_maxDataModelSendBuffer;
+	static Reflection::SignalDesc<Replicator, void(std::string, bool)> event_Disconnection;
 
 	virtual void Update(RakPeerInterface* peer);
 	virtual PluginReceiveResult OnReceive(RakPeerInterface* peer, Packet* packet);
@@ -284,8 +313,32 @@ DECOMP_SIZE_ASSERT(Peer, 0x10c)
 // RBX::Reflection::Described<RBX::Network::Peer,&RBX::Network::sPeer,RBX::Instance>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x101a43d0
 // RBX::Reflection::Described<RBX::Network::Peer,&RBX::Network::sPeer,RBX::Instance>::Described<RBX::Network::Peer,&RBX::Network::sPeer,RBX::Instance>
+// SYNTHETIC: WEBSERVICE 0x1021fb20
+// `dynamic initializer for 'RBX::Network::Replicator::event_Disconnection''
+// SYNTHETIC: WEBSERVICE 0x1021fb50
+// `dynamic initializer for 'func_SendMarker''
+// SYNTHETIC: WEBSERVICE 0x1021fb80
+// `dynamic initializer for 'func_requestCharacter''
+// SYNTHETIC: WEBSERVICE 0x1021fbb0
+// `dynamic initializer for 'func_closeConnection''
+// SYNTHETIC: WEBSERVICE 0x1021fbe0
+// `dynamic initializer for 'prop_RemotePlayer''
+// SYNTHETIC: WEBSERVICE 0x1021fc10
+// `dynamic initializer for 'RBX::Network::Marker::event_Returned''
 // SYNTHETIC: WEBSERVICE 0x10225d70
 // `RBX::Reflection::Described<RBX::Network::Peer,&RBX::Network::sPeer,RBX::Instance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: WEBSERVICE 0x102262c0
+// `dynamic atexit destructor for 'func_closeConnection''
+// SYNTHETIC: WEBSERVICE 0x102262d0
+// `dynamic atexit destructor for 'func_requestCharacter''
+// SYNTHETIC: WEBSERVICE 0x102262e0
+// `dynamic atexit destructor for 'prop_RemotePlayer''
+// SYNTHETIC: WEBSERVICE 0x102262f0
+// `dynamic atexit destructor for 'func_SendMarker''
+// SYNTHETIC: WEBSERVICE 0x10226300
+// `dynamic atexit destructor for 'RBX::Network::Marker::event_Returned''
+// SYNTHETIC: WEBSERVICE 0x10226310
+// `dynamic atexit destructor for 'RBX::Network::Replicator::event_Disconnection''
 // clang-format on
 
 } // namespace Network

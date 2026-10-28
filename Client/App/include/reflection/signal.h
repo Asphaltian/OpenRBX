@@ -247,6 +247,8 @@ public:
 		// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x10197810
 		// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::TSignalInstance::TSignalInstance
+		// TEMPLATE: WEBSERVICE 0x101a38d0
+		// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool)>::TSignalInstance::TSignalInstance
 		// clang-format on
 	};
 
@@ -290,6 +292,8 @@ private:
 	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x10197ac0
 	// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::newSignalInstance
+	// TEMPLATE: WEBSERVICE 0x101a4350
+	// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool)>::newSignalInstance
 	// clang-format on
 
 protected:
@@ -382,6 +386,8 @@ protected:
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,boost::shared_ptr<RBX::Instance>)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x10197610
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::GenericSlotAdapter::operator()
+		// TEMPLATE: WEBSERVICE 0x101a35b0
+		// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool)>::GenericSlotAdapter::operator()
 		// clang-format on
 	};
 
@@ -533,6 +539,8 @@ protected:
 	// RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x10199190
 	// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::connectGeneric
+	// TEMPLATE: WEBSERVICE 0x101a9a80
+	// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool)>::connectGeneric
 	// clang-format on
 
 	virtual boost::signals::connection connectGeneric(

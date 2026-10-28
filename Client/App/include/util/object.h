@@ -1284,7 +1284,7 @@ public:
 
 	static const Name& className() { return Name::declare<sName>(); }
 
-	virtual const Name& getClassName() const { return className(); }
+	const Name& getClassName() const { return className(); }
 };
 
 } // namespace RBX
