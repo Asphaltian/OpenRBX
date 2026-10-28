@@ -53,6 +53,11 @@ protected:
 
 DECOMP_SIZE_ASSERT(Client, 0x118)
 
+// SYNTHETIC: WEBSERVICE 0x101966c0
+// Exposer::~Exposer
+// SYNTHETIC: WEBSERVICE 0x101966d0
+// Exposer::`scalar deleting destructor'
+
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021f750
 // RBX::Network::`dynamic initializer for 'f_connect''

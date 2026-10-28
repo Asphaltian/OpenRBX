@@ -14,6 +14,9 @@ class BrickColor;
 
 namespace View {
 
+// SYNTHETIC: WEBSERVICE 0x10175df0
+// Variations::~Variations
+
 // SIZE 0x50
 class BrickMesh : public Render::Mesh
 {
