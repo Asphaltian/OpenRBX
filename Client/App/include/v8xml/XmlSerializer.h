@@ -116,6 +116,13 @@ public:
 
 private:
 	void skipWhitespace();
+	std::string readTag();
+	std::string readFirstTag();
+	std::string readText(bool decode);
+	std::string removeTag(const std::string& contents, int& index);
+	std::string findNextToken(const std::string& contents, int& index);
+	std::string findText(const std::string& tag);
+	XmlElement* parseAttributes(const std::string& currentTag);
 
 	std::map<std::string, std::string> legacyHashes; // 0x1c
 

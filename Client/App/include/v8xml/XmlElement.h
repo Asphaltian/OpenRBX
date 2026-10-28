@@ -120,7 +120,7 @@ public:
 		DOUBLE = 9,
 	};
 
-	// STUB: WEBSERVICE 0x10084a50
+	// FUNCTION: WEBSERVICE 0x10084a50
 	XmlNameValuePair(const RBX::Name& tag, const std::string& text) : tag(tag), valueType(STRING)
 	{
 		stringValue = new std::string(text);
@@ -273,6 +273,11 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10048d50
 	// XmlAttribute::XmlAttribute<RBX::InstanceHandle>
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10085670
+	// XmlAttribute::XmlAttribute<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// clang-format on
+
 	template <class T>
 	XmlAttribute(const RBX::Name& tag, T value) : XmlNameValuePair(tag, value)
 	{
@@ -362,6 +367,8 @@ public:
 	// XmlElement::addAttribute<RBX::Name const *>
 	// TEMPLATE: WEBSERVICE 0x10049980
 	// XmlElement::addAttribute<RBX::InstanceHandle>
+	// TEMPLATE: WEBSERVICE 0x10085990
+	// XmlElement::addAttribute<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// TEMPLATE: WEBSERVICE 0x10096250
 	// XmlElement::addAttribute<char const *>
 	// clang-format on
