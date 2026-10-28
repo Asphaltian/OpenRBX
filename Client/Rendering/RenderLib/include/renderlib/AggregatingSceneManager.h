@@ -3,29 +3,100 @@
 
 #include "decomp.h"
 #include "renderlib/Chunk.h"
+#include "renderlib/Material.h"
+#include "renderlib/RenderScene.h"
 
 #include <G3D/ReferenceCount.h>
+#include <boost/noncopyable.hpp>
+#include <map>
+#include <set>
+#include <vector>
 
 namespace RBX {
 namespace Render {
 
-class RenderScene;
-
-// SIZE 0x8
-class __declspec(novtable) SceneManager
+// VTABLE: WEBSERVICE 0x10259d60
+// SIZE 0x2c
+class AggregatingSceneManager : public SceneManager
 {
 public:
-	virtual void invalidateModel(const G3D::ReferenceCountedPointer<Chunk>&, bool) = 0; // vtable+0x00
-	virtual void addModel(const G3D::ReferenceCountedPointer<Chunk>&) = 0;              // vtable+0x04
-	virtual void removeModel(const G3D::ReferenceCountedPointer<Chunk>&) = 0;           // vtable+0x08
-	virtual void clear() = 0;                                                           // vtable+0x0c
-	virtual void setSleeping(const G3D::ReferenceCountedPointer<Chunk>&, bool) = 0;     // vtable+0x10
+	// SIZE 0x0c
+	struct BucketKey
+	{
+		bool castsShadows;                               // 0x00
+		bool cullable;                                   // 0x01
+		float polygonOffset;                             // 0x04
+		G3D::ReferenceCountedPointer<Material> material; // 0x08
 
-protected:
-	RenderScene* renderScene; // 0x04
+		BucketKey(const G3D::ReferenceCountedPointer<Chunk>& chunk)
+			: castsShadows(chunk->castsShadows()), cullable(chunk->cullable()), polygonOffset(chunk->polygonOffset),
+			  material(chunk->getMaterial())
+		{
+		}
+
+		bool operator<(const BucketKey& that) const;
+
+		// SYNTHETIC: WEBSERVICE 0x101f2b70
+		// RBX::Render::AggregatingSceneManager::BucketKey::~BucketKey
+	};
+
+	// VTABLE: WEBSERVICE 0x10259d58
+	// SIZE 0x1c
+	class Bucket : public G3D::ReferenceCountedObject, public boost::noncopyable
+	{
+	public:
+		bool dequeueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+		void addToQueue(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+		void clear() { queue.clear(); }
+		void optimize(AggregatingSceneManager& sceneManager, double maxTime);
+
+		typedef std::vector<G3D::ReferenceCountedPointer<Chunk> > Queue;
+
+	private:
+		Queue queue; // 0x0c
+
+	public:
+		// SYNTHETIC: WEBSERVICE 0x101f44a0
+		// RBX::Render::AggregatingSceneManager::Bucket::Bucket
+		// SYNTHETIC: WEBSERVICE 0x101f44f0
+		// RBX::Render::AggregatingSceneManager::Bucket::~Bucket
+		// SYNTHETIC: WEBSERVICE 0x101f4cf0
+		// RBX::Render::AggregatingSceneManager::Bucket::`scalar deleting destructor'
+	};
+
+	typedef G3D::ReferenceCountedPointer<Bucket> BucketRef;
+
+private:
+	std::map<BucketKey, BucketRef> buckets;                                   // 0x08
+	std::set<G3D::WeakReferenceCountedPointer<Chunk> > invalidSleepingModels; // 0x14
+	std::set<G3D::WeakReferenceCountedPointer<Chunk> > invalidMovingModels;   // 0x20
+
+public:
+	static unsigned int aggregationSize;
+
+	AggregatingSceneManager(RenderScene* renderScene);
+	virtual ~AggregatingSceneManager();
+
+	virtual void invalidateModel(const G3D::ReferenceCountedPointer<Chunk>& chunk, bool isSleeping);
+	virtual void addModel(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+	virtual void removeModel(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+	virtual void clear();
+	virtual void setSleeping(const G3D::ReferenceCountedPointer<Chunk>& chunk, bool sleeping);
+	virtual void prerender(double optimizationTime);
+
+private:
+	void dequeueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+	void queueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+	void deconstructAggregate(G3D::ReferenceCountedPointer<AggregateChunk> aggregate);
+
+public:
+	// SYNTHETIC: WEBSERVICE 0x101f5d90
+	// RBX::Render::AggregatingSceneManager::`scalar deleting destructor'
 };
 
-DECOMP_SIZE_ASSERT(SceneManager, 0x8)
+DECOMP_SIZE_ASSERT(AggregatingSceneManager, 0x2c)
+DECOMP_SIZE_ASSERT(AggregatingSceneManager::BucketKey, 0x0c)
+DECOMP_SIZE_ASSERT(AggregatingSceneManager::Bucket, 0x1c)
 
 } // namespace Render
 } // namespace RBX

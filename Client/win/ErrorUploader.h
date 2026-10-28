@@ -19,6 +19,11 @@ class ErrorUploader
 		std::queue<std::string> files; // 0x00
 		boost::recursive_mutex sync;   // 0x14
 		std::string url;               // 0x20
+
+		// SYNTHETIC: WEBSERVICE 0x1000cf10
+		// ErrorUploader::data::data
+		// SYNTHETIC: WEBSERVICE 0x1001ddc0
+		// ErrorUploader::data::~data
 	};
 
 	boost::shared_ptr<data> _data; // 0x00

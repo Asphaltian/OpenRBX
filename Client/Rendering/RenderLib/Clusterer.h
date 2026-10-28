@@ -49,6 +49,24 @@ private:
 public:
 	Clusterer(unsigned int clusterCount);
 
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x101f52e0
+	// RBX::Render::Clusterer::addSamples<std::_Vector_iterator<G3D::ReferenceCountedPointer<RBX::Render::Chunk>,std::allocator<G3D::ReferenceCountedPointer<RBX::Render::Chunk> > > >
+	// clang-format on
+	template <class Iterator>
+	void addSamples(Iterator _Iter, Iterator _End)
+	{
+		unsigned int i = 0;
+		for (; _Iter != _End; ++_Iter) {
+			clusters[i].samples.push_back(&**_Iter);
+			i = (i + 1) % clusterCount;
+			sampleSize++;
+		}
+	}
+
+	// SYNTHETIC: WEBSERVICE 0x101f5db0
+	// RBX::Render::Clusterer::~Clusterer
+
 	Clusters* go(unsigned int maxSteps);
 };
 

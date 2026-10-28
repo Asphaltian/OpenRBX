@@ -637,6 +637,7 @@ address,type,symbol
 0x10191380,synthetic,?setValue@?$GetImpl@P8Players@Network@RBX@@BEHXZ@?$PropDescriptor@VPlayers@Network@RBX@@H@Reflection@RBX@@UBEXPAVDescribedBase@34@ABH@Z
 0x10191970,synthetic,??$getset@P8Players@Network@RBX@@BEPAVPlayer@23@XZH@?$PropDescriptor@VPlayers@Network@RBX@@PAVPlayer@23@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@PAVPlayer@Network@RBX@@@Reflection@RBX@@@std@@P8Players@Network@2@BEPAVPlayer@62@XZH@Z
 0x10192250,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sPlayers@Network@2@3PADA@RBX@@UBEABVName@2@XZ
+0x10192ad0,synthetic,??0AbuseReport@Network@RBX@@QAE@ABU012@@Z
 0x10193000,synthetic,??1?$FuncDesc@VModelInstance@RBX@@@Reflection@RBX@@UAE@XZ
 0x10193010,synthetic,??1?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$01@Reflection@RBX@@UAE@XZ
 0x10193210,synthetic,??0?$Described@VPlayers@Network@RBX@@$1?sPlayers@23@3PADAV?$NonFactoryProduct@VInstance@RBX@@$1?sPlayers@Network@2@3PADA@3@@Reflection@RBX@@QAE@XZ

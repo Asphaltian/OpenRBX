@@ -318,6 +318,7 @@ set(OPENRBX_RBXVIEW_SOURCES
   Client/RbxView/Part.cpp
 )
 set(OPENRBX_RENDERLIB_SOURCES
+  Client/Rendering/RenderLib/AggregatingSceneManager.cpp
   Client/Rendering/RenderLib/Chunk.cpp
   Client/Rendering/RenderLib/Clusterer.cpp
   Client/Rendering/RenderLib/DepthBlur.cpp

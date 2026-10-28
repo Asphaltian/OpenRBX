@@ -24,6 +24,8 @@ namespace Render {
 // SIZE 0x4f0
 class RenderScene
 {
+	friend class SceneManager;
+
 private:
 	G3D::Array<RenderSurface> proxyArray;                                     // 0x000
 	G3D::Array<RenderSurface*> diffuseProxyArray;                             // 0x00c
@@ -120,6 +122,45 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(RenderScene, 0x4f0)
+
+// VTABLE: WEBSERVICE 0x10259d24
+// SIZE 0x08
+class SceneManager
+{
+public:
+	virtual void invalidateModel(const G3D::ReferenceCountedPointer<Chunk>& chunk, bool isSleeping) = 0; // vtable+0x00
+	virtual void addModel(const G3D::ReferenceCountedPointer<Chunk>& chunk) = 0;                         // vtable+0x04
+	virtual void removeModel(const G3D::ReferenceCountedPointer<Chunk>& chunk) = 0;                      // vtable+0x08
+	virtual void clear() = 0;                                                                            // vtable+0x0c
+	virtual void setSleeping(const G3D::ReferenceCountedPointer<Chunk>& chunk, bool sleeping) = 0;       // vtable+0x10
+	virtual void prerender(double optimizationTime) = 0;                                                 // vtable+0x14
+
+	// FUNCTION: WEBSERVICE 0x101f2610
+	virtual ~SceneManager() // vtable+0x18
+	{
+	}
+
+	// SYNTHETIC: WEBSERVICE 0x101f2620
+	// RBX::Render::SceneManager::`scalar deleting destructor'
+
+	RenderScene* renderScene; // 0x04
+
+protected:
+	SceneManager(RenderScene* renderScene) : renderScene(renderScene) {}
+
+	void clearScene() { renderScene->chunkArray.resize(0); }
+
+	void addToScene(const G3D::ReferenceCountedPointer<Chunk>& chunk) { renderScene->chunkArray.append(chunk); }
+
+	// FUNCTION: WEBSERVICE 0x101f33f0
+	void removeFromScene(const G3D::ReferenceCountedPointer<Chunk>& chunk)
+	{
+		int index = renderScene->chunkArray.findIndex(chunk);
+		renderScene->chunkArray.fastRemove(index);
+	}
+};
+
+DECOMP_SIZE_ASSERT(SceneManager, 0x08)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10226490
