@@ -7,7 +7,9 @@
 #include "v8datamodel/Workspace.h"
 #include "v8world/World.h"
 
+#include <G3D/RegistryUtil.h>
 #include <G3D/format.h>
+#include <setupapi.h>
 #include <windows.h>
 
 namespace RBX {
@@ -209,8 +211,93 @@ std::string DebugSettings::glVendor() const
 // STUB: WEBSERVICE 0x100b2fc0
 std::string DebugSettings::gfxcard() const
 {
-	STUB(0x100b2fc0);
-	return std::string();
+	DISPLAY_DEVICE displayDevice;
+	memset(&displayDevice, 0, sizeof(displayDevice));
+	displayDevice.cb = sizeof(displayDevice);
+	EnumDisplayDevices(NULL, 0, &displayDevice, 0);
+
+	SP_CLASSIMAGELIST_DATA _spImageData = {0};
+	SetupDiDestroyClassImageList(&_spImageData);
+	ZeroMemory(&_spImageData, sizeof(SP_CLASSIMAGELIST_DATA));
+	_spImageData.cbSize = sizeof(SP_CLASSIMAGELIST_DATA);
+	SetupDiGetClassImageList(&_spImageData);
+
+	SP_DEVINFO_DATA spDevInfoData = {0};
+	char szName[64] = {0};
+
+	HDEVINFO hDevInfo = SetupDiGetClassDevs(NULL, NULL, NULL, DIGCF_PRESENT | DIGCF_ALLCLASSES | DIGCF_PROFILE);
+	if (hDevInfo == INVALID_HANDLE_VALUE) {
+		return "";
+	}
+
+	short wIndex = 0;
+	spDevInfoData.cbSize = sizeof(SP_DEVINFO_DATA);
+	while (SetupDiEnumDeviceInfo(hDevInfo, wIndex, &spDevInfoData)) {
+		char szBuf[MAX_PATH] = {0};
+		int wImageIdx = 0;
+
+		if (SetupDiGetDeviceRegistryProperty(
+				hDevInfo,
+				&spDevInfoData,
+				SPDRP_CLASS,
+				NULL,
+				(PBYTE) szBuf,
+				MAX_PATH - 1,
+				NULL
+			)) {
+			if (SetupDiGetClassImageIndex(&_spImageData, &spDevInfoData.ClassGuid, &wImageIdx)) {
+				DWORD dwRequireSize;
+				if (SetupDiGetClassDescription(&spDevInfoData.ClassGuid, szBuf, MAX_PATH, &dwRequireSize)) {
+					if (SetupDiGetDeviceRegistryProperty(
+							hDevInfo,
+							&spDevInfoData,
+							SPDRP_FRIENDLYNAME,
+							NULL,
+							(PBYTE) szName,
+							63,
+							NULL
+						)) {
+						if (strcmp(szName, displayDevice.DeviceString) == 0) {
+							break;
+						}
+					}
+					else if (
+						SetupDiGetDeviceRegistryProperty(
+							hDevInfo,
+							&spDevInfoData,
+							SPDRP_DEVICEDESC,
+							NULL,
+							(PBYTE) szName,
+							63,
+							NULL
+						)
+					) {
+						if (strcmp(szName, displayDevice.DeviceString) == 0) {
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		wIndex++;
+	}
+
+	std::string deviceKey = "unknown";
+
+	char buf[64] = {0};
+	spDevInfoData.cbSize = sizeof(SP_DEVINFO_DATA);
+	if (SetupDiGetDeviceRegistryProperty(hDevInfo, &spDevInfoData, SPDRP_DRIVER, NULL, (PBYTE) buf, 63, NULL)) {
+		deviceKey = buf;
+	}
+
+	std::string driverVersion = "?";
+	G3D::RegistryUtil::readString(
+		"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Class\\" + deviceKey + "\\DriverVersion",
+		driverVersion
+	);
+
+	return std::string(displayDevice.DeviceString) + " drv=" + driverVersion;
 }
 
 // FUNCTION: WEBSERVICE 0x100b33d0
