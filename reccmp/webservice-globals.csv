@@ -7233,6 +7233,7 @@ address,type,symbol
 0x10245dbc,global,??_7SpawnLocation@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0x10245d34,global,??_7SpawnLocation@RBX@@6BIControllable@1@@
 0x102fc3ac,global,flag___RBX::ServiceProvider::getClassIndex<RBX::SpawnerService>
+0x102fc3b0,global,flag___RBX::ServiceProvider::getClassIndex<RBX::DebrisService>
 0x10245e24,global,??_8SpawnLocation@RBX@@7B?$DescribedCreatable@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@1@@
 0x102fc39c,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::SpawnerService>
 0x1023ee84,global,??_7Accoutrement@RBX@@6BILocation@1@@

@@ -4,8 +4,14 @@
 #include "network/Player.h"
 #include "network/Players.h"
 #include "reflection/property.h"
+#include "v8datamodel/DebrisService.h"
+#include "v8datamodel/ForceField.h"
+#include "v8datamodel/Workspace.h"
 
 #include <boost/bind.hpp>
+#include <stdexcept>
+#include <stdlib.h>
+#include <vector>
 
 namespace RBX {
 
@@ -66,7 +72,44 @@ SpawnerService::~SpawnerService()
 // STUB: WEBSERVICE 0x100fe770
 void SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network::Player* p)
 {
-	STUB(0x100fe770);
+	Workspace* workspace = ServiceProvider::find<Workspace>(this);
+	if (!workspace) {
+		throw std::runtime_error("SpawnPlayer couldn't get the workspace");
+	}
+
+	if (spawners.size() == 0) {
+		workspace->moveToPoint(model.get(), G3D::Vector3(0.0f, 100.0f, 0.0f));
+		return;
+	}
+
+	std::vector<SpawnLocation*> possibleLocations;
+
+	std::list<SpawnLocation*>::iterator it;
+	for (it = spawners.begin(); it != spawners.end(); ++it) {
+		if ((*it)->neutral || (!p->getNeutral() && p->getTeamColor() == (*it)->getTeamColor())) {
+			possibleLocations.push_back(*it);
+		}
+	}
+
+	if (possibleLocations.size() == 0) {
+		workspace->moveToPoint(model.get(), G3D::Vector3(0.0f, 100.0f, 0.0f));
+		return;
+	}
+
+	SpawnLocation* location = possibleLocations[rand() % possibleLocations.size()];
+
+	G3D::Vector3 dropPoint = location->getCoordinateFrame().translation;
+	dropPoint.y += 7.0f;
+
+	if (location->forcefieldDuration > 0) {
+		boost::shared_ptr<ForceField> f = Creatable<Instance>::create<ForceField>();
+		f->setParent(model.get());
+		DebrisService* debris = ServiceProvider::create<DebrisService>(this);
+
+		debris->addItem(f, location->forcefieldDuration);
+	}
+
+	workspace->moveToPoint(model.get(), dropPoint);
 }
 
 // FUNCTION: WEBSERVICE 0x100febd0

@@ -181,8 +181,14 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::find<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x100fd6c0
 // RBX::ServiceProvider::doGetClassIndex<RBX::SpawnerService>
+// TEMPLATE: WEBSERVICE 0x100fd720
+// RBX::ServiceProvider::doGetClassIndex<RBX::DebrisService>
 // TEMPLATE: WEBSERVICE 0x100fda50
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::SpawnerService>
+// TEMPLATE: WEBSERVICE 0x100fda60
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::DebrisService>
+// TEMPLATE: WEBSERVICE 0x100fdf10
+// RBX::ServiceProvider::find<RBX::DebrisService>
 // TEMPLATE: WEBSERVICE 0x100fe0c0
 // RBX::ServiceProvider::find<RBX::SpawnerService>
 // TEMPLATE: WEBSERVICE 0x100feea0

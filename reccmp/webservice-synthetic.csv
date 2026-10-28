@@ -483,7 +483,9 @@ address,type,symbol
 0x100fda80,synthetic,??1?$DescribedCreatable@VSpawnerService@RBX@@VInstance@2@$1?sSpawnerService@2@3QBDB@RBX@@UAE@XZ
 0x100fdd50,synthetic,?getClassName@?$FactoryProduct@VSpawnerService@RBX@@VInstance@2@$1?sSpawnerService@2@3QBDB@RBX@@UBEABVName@2@XZ
 0x100fde70,synthetic,??_ESpawnerService@RBX@@UAEPAXI@Z
+0x100fe270,synthetic,??$create@VDebrisService@RBX@@@ServiceProvider@RBX@@QBEPAVDebrisService@1@XZ
 0x100fe590,synthetic,??$?0P8SpawnLocation@RBX@@BE?AVBrickColor@1@XZP801@AEXV21@@Z@?$PropDescriptor@VSpawnLocation@RBX@@VBrickColor@2@@Reflection@RBX@@QAE@PBD0P8SpawnLocation@2@BE?AVBrickColor@2@XZP832@AEXV42@@ZW4Functionality@PropertyDescriptor@12@@Z
+0x100fe720,synthetic,??$create@VDebrisService@RBX@@@ServiceProvider@RBX@@SAPAVDebrisService@1@PBVInstance@1@@Z
 0x100fee80,synthetic,??_G?$DescribedCreatable@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@UAEPAXI@Z
 0x100ff690,synthetic,?getValue@?$GetSetImpl@P8SpecialShape@RBX@@BE?BVTextureId@2@XZP812@AEXABV32@@Z@?$PropDescriptor@VSpecialShape@RBX@@VTextureId@2@@Reflection@RBX@@UBE?AVTextureId@4@PBVDescribedBase@34@@Z
 0x100ffa80,synthetic,?getClassName@?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@UBEABVName@2@XZ
