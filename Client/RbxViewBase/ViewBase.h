@@ -17,6 +17,7 @@ class ViewBase
 public:
 	ViewBase() {}
 
+	// FUNCTION: WEBSERVICE 0x1016a250
 	virtual ~ViewBase() {} // vtable+0x00
 
 	virtual void render(void* rd) = 0;                          // vtable+0x04
@@ -38,6 +39,9 @@ private:
 	virtual void onWorkspaceDescendentAdded(boost::shared_ptr<Instance>) = 0; // vtable+0x20
 	virtual void updateLighting() = 0;                                        // vtable+0x24
 	virtual void invalidateLighting(bool) = 0;                                // vtable+0x28
+
+	// SYNTHETIC: WEBSERVICE 0x1016a260
+	// RBX::ViewBase::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(ViewBase, 0x4)

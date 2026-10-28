@@ -410,6 +410,12 @@ void RenderScene::computeProxyArrays(G3D::RenderDevice* rd, const G3D::GCamera& 
 	renderStats.diffuseProxyCount = diffuseProxyArray.size();
 }
 
+// STUB: WEBSERVICE 0x101f2090
+void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
+{
+	STUB(0x101f2090);
+}
+
 // FUNCTION: WEBSERVICE 0x101f2450
 RenderScene::RenderScene()
 	: shadingQuality(-1.0f), meshDetail(-1.0f), shadows(false), cameraDistance((float) G3D::inf()),

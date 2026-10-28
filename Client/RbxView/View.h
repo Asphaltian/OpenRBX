@@ -71,6 +71,9 @@ private:
 	virtual void onWorkspaceDescendentAdded(boost::shared_ptr<Instance> descendent); // vtable+0x20
 	virtual void updateLighting();                                                   // vtable+0x24
 	virtual void invalidateLighting(bool updateSkybox);                              // vtable+0x28
+
+	// SYNTHETIC: WEBSERVICE 0x1016c220
+	// RBX::View::View::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(View, 0x58)

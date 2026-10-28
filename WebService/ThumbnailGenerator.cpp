@@ -100,6 +100,8 @@ template InstanceVector::iterator InstanceVector::end();
 template InstanceVector::iterator InstanceVector::erase(InstanceVector::iterator);
 template void InstanceVector::resize(InstanceVector::size_type);
 
+template RBX::Lighting* RBX::ServiceProvider::find<RBX::Lighting>() const;
+
 template boost::shared_ptr<RBX::Instance>::~shared_ptr();
 template boost::shared_ptr<RBX::ModelInstance>::~shared_ptr();
 template boost::shared_ptr<RBX::Selection>::~shared_ptr();

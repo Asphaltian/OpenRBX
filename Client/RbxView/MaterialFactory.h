@@ -62,6 +62,9 @@ private:
 
 	Database database;     // 0x10
 	Database megaDatabase; // 0x1c
+
+	// SYNTHETIC: WEBSERVICE 0x1016bbe0
+	// RBX::View::MaterialFactory::~MaterialFactory
 };
 
 DECOMP_SIZE_ASSERT(MaterialFactory, 0x28)

@@ -7438,3 +7438,6 @@ address,type,symbol
 0x102508d0,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@3@@
 0x1025092c,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$GuidItem@VInstance@RBX@@@3@@
 0x10250900,global,??_7ReplicatorStatsItem@Replicator@Network@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@3@@
+0x1024e200,global,??_7?$Table@VTextureArgs@TextureManager@G3D@@V?$ReferenceCountedPointer@VTexture@G3D@@@3@@G3D@@6B@
+0x1024e254,global,??_7View@0RBX@@6B@
+0x10301aa4,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Lighting>
