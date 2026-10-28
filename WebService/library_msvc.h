@@ -71,6 +71,30 @@
 // `dynamic atexit destructor for 'G3D::CollisionDetection::ignoreArray''
 // LIBRARY: WEBSERVICE 0x10225730
 // G3D::_internal::`dynamic atexit destructor for 'currentFilesUsed''
+// LIBRARY: WEBSERVICE 0x10226340
+// `dynamic atexit destructor for 'G3D::RenderDevice::dummyString''
+// LIBRARY: WEBSERVICE 0x10226350
+// `dynamic atexit destructor for 'G3D::VARArea::allVARAreas''
+// LIBRARY: WEBSERVICE 0x10226360
+// G3D::`dynamic atexit destructor for '_textureFormatCleanup''
+// LIBRARY: WEBSERVICE 0x10226370
+// `G3D::GLCaps::getDriverVersion'::`5'::`dynamic atexit destructor for '_glVersion''
+// LIBRARY: WEBSERVICE 0x10226380
+// `G3D::GLCaps::glVersion'::`9'::`dynamic atexit destructor for '_glVersion''
+// LIBRARY: WEBSERVICE 0x10226390
+// `G3D::GLCaps::driverVersion'::`9'::`dynamic atexit destructor for '_driverVersion''
+// LIBRARY: WEBSERVICE 0x102263a0
+// `G3D::GLCaps::vendor'::`9'::`dynamic atexit destructor for '_driverVendor''
+// LIBRARY: WEBSERVICE 0x102263b0
+// `G3D::GLCaps::renderer'::`9'::`dynamic atexit destructor for '_glRenderer''
+// LIBRARY: WEBSERVICE 0x102263c0
+// G3D::`dynamic atexit destructor for '_supportedTextureFormat''
+// LIBRARY: WEBSERVICE 0x102263e0
+// `dynamic atexit destructor for 'G3D::GLCaps::extensionSet''
+// LIBRARY: WEBSERVICE 0x10226400
+// `dynamic atexit destructor for 'G3D::Milestone::factory''
+// LIBRARY: WEBSERVICE 0x10226420
+// `dynamic atexit destructor for 'G3D::Win32Window::_shareWindow''
 // LIBRARY: WEBSERVICE 0x10226437
 // ATL::`dynamic atexit destructor for '_AtlBaseModule''
 // LIBRARY: WEBSERVICE 0x10226441
@@ -81,6 +105,14 @@
 // ATL::`dynamic atexit destructor for 'g_strmgr''
 // LIBRARY: WEBSERVICE 0x10226460
 // ATL::`dynamic atexit destructor for '_AtlComModule''
+// LIBRARY: WEBSERVICE 0x10226470
+// G3D::`dynamic atexit destructor for 'edgeTable''
+// LIBRARY: WEBSERVICE 0x10226520
+// `dynamic atexit destructor for 'G3D::ToneMap::bloomShader''
+// LIBRARY: WEBSERVICE 0x10226540
+// `dynamic atexit destructor for 'G3D::ToneMap::RG''
+// LIBRARY: WEBSERVICE 0x10226580
+// `dynamic atexit destructor for 'G3D::ToneMap::B''
 // clang-format on
 
 #endif

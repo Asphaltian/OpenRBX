@@ -319,6 +319,8 @@ DECOMP_SIZE_ASSERT(SoundChannel, 0x138)
 
 } // namespace Soundscape
 
+void registerSound();
+
 namespace Reflection {
 
 template <>
