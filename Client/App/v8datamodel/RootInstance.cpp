@@ -10,8 +10,10 @@
 #include "v8datamodel/Backpack.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Hopper.h"
+#include "v8datamodel/Lighting.h"
 #include "v8datamodel/PVInstance.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Sky.h"
 #include "v8datamodel/SpawnLocation.h"
 #include "v8datamodel/Team.h"
 #include "v8datamodel/Teams.h"
@@ -309,7 +311,7 @@ void RootInstance::insertSpawnLocation(SpawnLocation* s)
 	}
 }
 
-// STUB: WEBSERVICE 0x100c1ee0
+// FUNCTION: WEBSERVICE 0x100c1ee0
 void RootInstance::insertInstances(
 	const std::vector<boost::shared_ptr<Instance> >& instances,
 	Instance* requestedParent,
@@ -317,7 +319,63 @@ void RootInstance::insertInstances(
 	PromptMode promptMode
 )
 {
-	STUB(0x100c1ee0);
+	std::vector<boost::shared_ptr<Instance> > remaining;
+
+	for (unsigned int i = 0; i < instances.size(); ++i) {
+		Instance* instance = instances[i].get();
+
+		if (Sky* sky = dynamic_cast<Sky*>(instance)) {
+			Lighting* lighting = ServiceProvider::create<Lighting>(this);
+			lighting->replaceSky(sky);
+		}
+		else if (dynamic_cast<Team*>(instance)) {
+			instance->setParent(ServiceProvider::create<Teams>(this));
+		}
+		else if (HopperBin* hopperBin = dynamic_cast<HopperBin*>(instance)) {
+			if (Network::Player* player = Network::Players::findLocalPlayer(this)) {
+				hopperBin->setParent(player->getPlayerBackpack());
+			}
+			else {
+				hopperBin->setParent(ServiceProvider::create<StarterPackService>(this));
+			}
+		}
+		else if (SpawnLocation* spawnLocation = dynamic_cast<SpawnLocation*>(instance)) {
+			insertSpawnLocation(spawnLocation);
+			remaining.push_back(instances[i]);
+		}
+		else {
+			remaining.push_back(instances[i]);
+		}
+	}
+
+	if (remaining.size() > 0) {
+		if (requestedParent) {
+			if (!contains(requestedParent)) {
+				std::for_each(
+					remaining.begin(),
+					remaining.end(),
+					boost::bind(&Instance::setParent, _1, requestedParent)
+				);
+			}
+		}
+		else {
+			requestedParent = this;
+		}
+
+		switch (insertMode) {
+		case INSERT_RAW: {
+			std::vector<boost::weak_ptr<PartInstance> > partArray;
+			insertRaw(remaining, requestedParent, partArray);
+			return;
+		}
+		case INSERT_TO_TREE:
+			insertToTree(remaining, requestedParent);
+			return;
+		case INSERT_TO_3D_VIEW:
+			insert3dView(remaining, promptMode);
+			return;
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100c22b0

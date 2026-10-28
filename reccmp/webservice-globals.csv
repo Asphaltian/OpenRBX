@@ -5012,6 +5012,7 @@ address,type,symbol
 0x102d7684,global,?sArrowTool@RBX@@3PADA
 0x102d768c,global,?sBoxSelectCommand@RBX@@3PADA
 0x102d77cc,global,?sRootInstance@RBX@@3PADA
+0x102d77dc,global,??_R0?AVSpawnLocation@RBX@@@8
 0x102d7800,global,?sCamera@RBX@@3PADA
 0x102d7808,global,??_R0?AV?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@@8
 0x102d7b4c,global,??_R0?AW4CameraType@Camera@RBX@@@8

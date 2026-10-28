@@ -26,6 +26,7 @@ address,type,symbol
 0x100086d0,synthetic,??_E?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@0HH@Z$03@Reflection@RBX@@UAEPAXI@Z
 0x10008880,synthetic,?declareSignature@?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@HH_N@Z$03@Reflection@RBX@@AAEXPBD000@Z
 0x10008920,synthetic,?declareSignature@?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@0HH@Z$03@Reflection@RBX@@AAEXPBD000@Z
+0x100091a0,stub,??$create@VLighting@RBX@@@ServiceProvider@RBX@@SAPAVLighting@1@PBVInstance@1@@Z
 0x100091f0,synthetic,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@SAPAVWorkspace@1@PBVInstance@1@@Z
 0x10009840,synthetic,??$call@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@HH_N@Z$03@Reflection@RBX@@ABEXPAVThumbnailGenerator@@AAVValue@12@1111@Z
 0x10009910,synthetic,??$call@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@0HH@Z$03@Reflection@RBX@@ABEXPAVThumbnailGenerator@@AAVValue@12@1111@Z
