@@ -16,6 +16,18 @@ namespace View {
 
 // SYNTHETIC: WEBSERVICE 0x10175df0
 // Variations::~Variations
+// STUB: WEBSERVICE 0x10176170
+// meshFace<0>
+// STUB: WEBSERVICE 0x10176a60
+// meshFace<1>
+// STUB: WEBSERVICE 0x10177350
+// meshFace<2>
+// STUB: WEBSERVICE 0x10177c40
+// meshFace<3>
+// STUB: WEBSERVICE 0x10178530
+// meshFace<4>
+// STUB: WEBSERVICE 0x10178e20
+// meshFace<5>
 
 // SIZE 0x50
 class BrickMesh : public Render::Mesh
