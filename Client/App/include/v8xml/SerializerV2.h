@@ -133,6 +133,7 @@ public:
 
 	static void load(XmlElement* root, RBX::DataModel* dataModel);
 	void load(std::istream& stream, RBX::DataModel* dataModel);
+	void loadXML(std::istream& stream, RBX::DataModel* dataModel);
 };
 
 DECOMP_SIZE_ASSERT(SerializerV2, 0x04)

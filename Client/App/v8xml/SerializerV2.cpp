@@ -1,15 +1,21 @@
 #include "v8xml/SerializerV2.h"
 
 #include "decomp.h"
+#include "util/ContentProvider.h"
 #include "util/Name.h"
 #include "util/standardout.h"
+#include "v8datamodel/DataModel.h"
 #include "v8xml/XmlElement.h"
+#include "v8xml/XmlSerializer.h"
 
 #include <G3D/Log.h>
 #include <algorithm>
+#include <cstring>
 #include <functional>
 #include <list>
 #include <map>
+#include <memory>
+#include <stdexcept>
 #include <string>
 
 // SIZE 0x2c
@@ -216,18 +222,110 @@ void SerializerV2::isolateHandles(XmlElement* root)
 	isolate(root, isolationMap);
 }
 
-// STUB: WEBSERVICE 0x100988e0
+// FUNCTION: WEBSERVICE 0x100988e0
 void SerializerV2::load(XmlElement* root, RBX::DataModel* dataModel)
 {
-	STUB(0x100988e0);
-
 	ArchiveBinder binder;
 
+	dataModel->readChildren(root, binder);
+
 	binder.resolveRefs();
+}
+
+// FUNCTION: WEBSERVICE 0x10098970
+void SerializerV2::loadXML(std::istream& stream, RBX::DataModel* dataModel)
+{
+	TextXmlParser machine(stream.rdbuf());
+	std::auto_ptr<XmlElement> root = machine.parse();
+
+	if (root->getTag() == tag_roblox) {
+		const XmlAttribute* version = root->findAttribute(tag_version);
+
+		if (!version->getValue(schemaVersionLoading)) {
+			throw std::runtime_error("SerializerV2::loadXML no version number");
+		}
+
+		if (schemaVersionLoading < 4) {
+			throw std::runtime_error("SerializerV2::loadXML schemaVersionLoading<4");
+		}
+
+		load(root.get(), dataModel);
+	}
+	else {
+		schemaVersionLoading = 1;
+		throw std::runtime_error("SerializerV2::loadXML ill-formed XML. No Roblox tag");
+	}
+
+	dataModel->setDirty(false);
 }
 
 // STUB: WEBSERVICE 0x10098b30
 void SerializerV2::load(std::istream& stream, RBX::DataModel* dataModel)
 {
-	STUB(0x10098b30);
+	char header[5];
+	header[4] = 0;
+	if (!stream.read(header, 4).good()) {
+		throw std::runtime_error("SerializerV2::load can't read header");
+	}
+
+	if (strcmp(header, "RBX_") != 0) {
+		stream.clear();
+		stream.seekg(0, std::ios_base::beg);
+	}
+	else {
+		unsigned long fileFormatVersion;
+		if (!stream.read((char*) &fileFormatVersion, 4).good()) {
+			throw std::runtime_error("SerializerV2::load can't read old fileFormatVersion");
+		}
+		if (fileFormatVersion != 1) {
+			throw std::runtime_error("SerializerV2::load canfileFormatVersion!=1");
+		}
+
+		unsigned long contentPos = 0;
+		if (!stream.read((char*) &contentPos, 4).good()) {
+			throw std::runtime_error("SerializerV2::load can't read contentPos");
+		}
+
+		if (contentPos != 0) {
+			std::streamoff xmlPos = stream.tellg();
+			stream.clear();
+			stream.seekg(contentPos, std::ios_base::beg);
+
+			while (stream.peek()) {
+				char id[33];
+				id[32] = 0;
+				if (!stream.read(id, 32).good()) {
+					throw std::runtime_error("SerializerV2::load error reading compound file (1)");
+				}
+
+				unsigned long contentLength;
+				if (!stream.read((char*) &contentLength, 4).good()) {
+					throw std::runtime_error("SerializerV2::load error reading compound file (2)");
+				}
+
+				char compression;
+				if (!stream.read(&compression, 1).good()) {
+					throw std::runtime_error("SerializerV2::load error reading compound file (3)");
+				}
+				if (compression != 0) {
+					throw std::runtime_error("SerializerV2::load error reading compound file (4)");
+				}
+
+				RBX::ContentProvider::singleton().readContent(id, stream, contentLength);
+			}
+
+			stream.clear();
+			stream.seekg(xmlPos, std::ios_base::beg);
+		}
+
+		char xmlCompression;
+		if (!stream.read(&xmlCompression, 1).good()) {
+			throw std::runtime_error("SerializerV2::load error reading compound file (5)");
+		}
+		if (xmlCompression != 0) {
+			throw std::runtime_error("SerializerV2::load error reading compound file (6)");
+		}
+	}
+
+	loadXML(stream, dataModel);
 }
