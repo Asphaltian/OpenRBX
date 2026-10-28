@@ -306,6 +306,8 @@ public:
 	// RBX::Instance::visitDescendents<boost::_bi::bind_t<void,void (__cdecl*)(boost::shared_ptr<RBX::Instance>,RBX::Adorn *,int),boost::_bi::list3<boost::arg<1>,boost::_bi::value<RBX::Adorn *>,boost::_bi::value<int> > > >
 	// TEMPLATE: WEBSERVICE 0x100a1e70
 	// RBX::Instance::visitDescendents<boost::_bi::bind_t<void,void (__cdecl*)(boost::shared_ptr<RBX::Instance>,std::vector<RBX::Primitive *,std::allocator<RBX::Primitive *> > &),boost::_bi::list2<boost::arg<1>,boost::reference_wrapper<std::vector<RBX::Primitive *,std::allocator<RBX::Primitive *> > > > > >
+	// TEMPLATE: WEBSERVICE 0x1016a8f0
+	// RBX::Instance::visitDescendents<boost::_bi::bind_t<void,boost::_mfi::mf1<void,RBX::View::View,boost::shared_ptr<RBX::Instance> >,boost::_bi::list2<boost::_bi::value<RBX::View::View *>,boost::arg<1> > > >
 	// clang-format on
 	template <class Func>
 	void visitDescendents(Func func) const

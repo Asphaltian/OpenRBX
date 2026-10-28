@@ -410,10 +410,140 @@ void RenderScene::computeProxyArrays(G3D::RenderDevice* rd, const G3D::GCamera& 
 	renderStats.diffuseProxyCount = diffuseProxyArray.size();
 }
 
-// STUB: WEBSERVICE 0x101f2090
+// FUNCTION: WEBSERVICE 0x101f2090
 void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 {
-	STUB(0x101f2090);
+	int startTriCount = rd->getTriangleCount();
+	int markShadowsTriCount = 0;
+	int unshadowedTriCount = 0;
+	int shadowedTriCount = 0;
+
+	renderStats.cpuRenderTotal.tick();
+
+	rd->setStencilConstant(0);
+	rd->setStencilClearValue(0);
+
+	rd->setProjectionAndCameraMatrix(camera);
+	if (effectSettings.applyToneMap()) {
+		EffectSettings::getToneMap()->beginFrame(rd);
+	}
+
+	rd->setColorClearValue(colorClearValue);
+
+	rd->clear(sky.isNull() || !effectSettings.skyBox(), true, true);
+	if (sky.notNull() && effectSettings.skyBox()) {
+		sky->render(rd, skyParameters);
+	}
+
+	computeProxyArrays(rd, camera);
+
+	rd->setShadeMode(G3D::RenderDevice::SHADE_SMOOTH);
+	rd->setDepthTest(G3D::RenderDevice::DEPTH_LEQUAL);
+	rd->setAlphaTest(G3D::RenderDevice::ALPHA_GREATER, 0.1);
+
+	rd->pushState();
+
+	turnOnLights(rd, effectSettings.useAllLightsInUnshadowedPass());
+
+	Mesh::beginRender(rd, true, false);
+	if (!debugShadowVolumes) {
+		unshadowedTriCount = rd->getTriangleCount();
+		sendDiffuseProxyMeshGeometry(rd);
+		unshadowedTriCount = rd->getTriangleCount() - unshadowedTriCount;
+	}
+	Mesh::endRender(rd);
+
+	rd->popState();
+
+	if (effectSettings.stencilShadows()) {
+		rd->pushState();
+
+		rd->disableDepthWrite();
+		rd->setDepthTest(G3D::RenderDevice::DEPTH_LEQUAL);
+
+		for (int L = 0; L < lighting->shadowedLightArray.size(); ++L) {
+			if (L > 0) {
+				rd->clear(false, false, true);
+			}
+
+			const G3D::GLight& light = lighting->shadowedLightArray[L];
+
+			if (effectSettings.alphaBlendShadowLights()) {
+				rd->setBlendFunc(
+					G3D::RenderDevice::BLEND_ONE,
+					G3D::RenderDevice::BLEND_ONE,
+					G3D::RenderDevice::BLENDEQ_ADD
+				);
+				rd->enableLighting();
+				rd->setLight(0, light);
+			}
+			else {
+				turnOnLights(rd, true);
+			}
+
+			int triCount = rd->getTriangleCount();
+			markStencilShadows(rd, camera, light);
+			markShadowsTriCount += rd->getTriangleCount() - triCount;
+
+			if (!debugShadowVolumes) {
+				rd->setStencilConstant(0);
+				rd->setDepthTest(G3D::RenderDevice::DEPTH_LEQUAL);
+
+				int lightTriCount = rd->getTriangleCount();
+				rd->setPolygonOffset(0);
+				rd->setStencilTest(G3D::RenderDevice::STENCIL_EQUAL);
+
+				Mesh::beginRender(rd, true, false);
+				sendDiffuseProxyMeshGeometry(rd);
+				Mesh::endRender(rd);
+
+				shadowedTriCount += rd->getTriangleCount() - lightTriCount;
+			}
+		}
+
+		rd->popState();
+	}
+	else {
+		renderStats.cpuShadow.tick();
+		renderStats.cpuShadow.tock();
+	}
+
+	rd->pushState();
+	Mesh::beginRender(rd, true, false);
+	reflectionPass(rd);
+	Mesh::endRender(rd);
+	rd->popState();
+
+	rd->pushState();
+	turnOnLights(rd, true);
+	Mesh::beginRender(rd, true, false);
+	transparentPass(rd);
+	Mesh::endRender(rd);
+	rd->popState();
+
+	if (sky.notNull() && effectSettings.skyBox()) {
+		sky->renderLensFlare(rd, skyParameters);
+	}
+
+	if (effectSettings.applyDepthBlur()) {
+		EffectSettings::getDepthBlur()->apply(rd);
+	}
+
+	if (effectSettings.applyToneMap()) {
+		EffectSettings::getToneMap()->endFrame(rd);
+	}
+
+	renderStats.cpuRenderTotal.tock();
+
+	renderStats.pushPopCount = rd->debugNumPushStateCalls();
+	renderStats.totalTriangles = rd->getTriangleCount() - startTriCount;
+	renderStats.markShadowsTriangles = markShadowsTriCount;
+	renderStats.shadowedLightTriangles = shadowedTriCount;
+	renderStats.unshadowedTriangles = unshadowedTriCount;
+	renderStats.majorGLStateChanges = rd->debugNumMajorOpenGLStateChanges();
+	renderStats.minorGLStateChanges = rd->debugNumMinorOpenGLStateChanges();
+	renderStats.majorStateChanges = rd->debugNumMajorStateChanges();
+	renderStats.minorStateChanges = rd->debugNumMinorStateChanges();
 }
 
 // FUNCTION: WEBSERVICE 0x101f2450

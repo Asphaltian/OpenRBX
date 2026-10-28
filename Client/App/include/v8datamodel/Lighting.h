@@ -37,13 +37,13 @@ public:
 
 	static Reflection::SignalDesc<Lighting, void(bool)> event_LightingChanged;
 
-	bool isSkySuppressed() const;
+	bool isSkySuppressed() const { return !hasSky; }
 	void suppressSky(const bool value);
 
 	boost::shared_ptr<Sky> sky; // 0x228
 
-	const G3D::LightingParameters& getSkyParameters() const;
-	G3D::Color4 getClearColor() const;
+	const G3D::LightingParameters& getSkyParameters() const { return skyParameters; }
+	G3D::Color4 getClearColor() const { return clearColor; }
 	void setClearColor(G3D::Color4 value);
 
 	// FUNCTION: WEBSERVICE 0x10042590

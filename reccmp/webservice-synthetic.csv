@@ -1627,6 +1627,8 @@ address,type,symbol
 0x10136e40,stub,?fromEulerAnglesXYZ@Matrix3@G3D@@SA?AV12@MMM@Z
 0x10137500,synthetic,??__G@YGXPAX0IHP6EPAX00@Z@Z
 0x1013ab30,stub,??0Plane@G3D@@QAE@ABVVector3@1@00@Z
+0x1016a490,synthetic,??_9View@0RBX@@$BCA@AE
+0x1016a4a0,synthetic,??_9View@0RBX@@$BCI@AE
 0x1016c6c0,synthetic,??_9PartChunk@View@RBX@@$BCE@AE
 0x10170410,synthetic,??_EPart@View@RBX@@WMM@AEPAXI@Z
 0x10174e60,synthetic,??_GMegaTextureProxy@View@RBX@@UAEPAXI@Z
