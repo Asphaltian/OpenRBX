@@ -706,53 +706,51 @@ void Humanoid::onServiceProvider(const ServiceProvider* oldProvider, const Servi
 // STUB: WEBSERVICE 0x100a4690
 void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
 {
-	if (getHead() != NULL) {
-		const CoordinateFrame& headCoord = head->getCoordinateFrame();
+	if (getHead()) {
+		Vector3 aboveHead = head->getCoordinateFrame().translation;
+		aboveHead.y += 1.5f;
 
-		Vector3 headPosition(headCoord.translation.x, headCoord.translation.y + 1.5f, headCoord.translation.z);
-
-		Vector3 projected = camera.project(headPosition, adorn->getViewport());
-
-		float distance = (camera.getCoordinateFrame().translation - headPosition).magnitude();
+		Vector3 screenLoc = camera.project(aboveHead, adorn->getViewport());
+		float distance = (camera.getCoordinateFrame().translation - aboveHead).magnitude();
 
 		if (distance < 100.0f) {
 			int fontSize = 8;
-
-			if (20.0f <= distance) {
-				if (distance < 50.0f) {
-					fontSize = 10;
-				}
-			}
-			else {
+			if (distance < 20.0f) {
 				fontSize = 12;
+			}
+			else if (50.0f > distance) {
+				fontSize = 10;
 			}
 
 			Teams* teams = ServiceProvider::find<Teams>(this);
-
-			G3D::Color3 nameColor = teams == NULL ? G3D::Color3::white() : teams->getTeamColorForHumanoid(this);
+			G3D::Color3 nameTagColor = teams ? teams->getTeamColorForHumanoid(this) : G3D::Color3::white();
 
 			adorn->drawFont2D(
-				getName(),
-				projected.xy(),
+				getParent()->getName(),
+				screenLoc.xy(),
 				fontSize,
-				G3D::Color4(nameColor, 1.0f),
+				G3D::Color4(nameTagColor, 1.0f),
 				G3D::Color4(G3D::Color3::black(), 1.0f),
 				Adorn::XALIGN_CENTER,
-				Adorn::YALIGN_CENTER,
+				Adorn::YALIGN_BOTTOM,
 				Adorn::PROPORTIONAL_SPACING
 			);
 
-			float width = (float) (fontSize * 4);
+			float width = fontSize * 4;
+			float height = fontSize / 2;
+			Rect fullRect(
+				screenLoc.x - 0.5f * width,
+				screenLoc.y,
+				screenLoc.x - 0.5f * width + width,
+				screenLoc.y + height
+			);
+			float mid = fullRect.low.x + (health / maxHealth) * width;
 
-			headPosition.x -= 0.5f * width;
+			Rect greenRect(fullRect.low.x, fullRect.low.y, mid, fullRect.high.y);
+			Rect redRect(mid, fullRect.low.y, fullRect.high.x, fullRect.high.y);
 
-			Vector2 barLow(headPosition.x, headPosition.y);
-			Vector2 barHigh(headPosition.x + width, headPosition.y + (float) (fontSize / 2));
-
-			Vector2 healthHigh(headPosition.x + (health / maxHealth) * width, headPosition.y);
-
-			adorn->rect2d(G3D::Rect2D::xyxy(barLow, healthHigh), G3D::Color4(Color::lightGreen(), 1.0f));
-			adorn->rect2d(G3D::Rect2D::xyxy(healthHigh, barHigh), G3D::Color4(G3D::Color3::red(), 1.0f));
+			adorn->rect2d(greenRect.toRect2D(), G3D::Color4(Color::lightGreen(), 1.0f));
+			adorn->rect2d(redRect.toRect2D(), G3D::Color4(G3D::Color3::red(), 1.0f));
 		}
 	}
 }
