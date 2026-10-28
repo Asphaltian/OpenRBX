@@ -127,33 +127,28 @@ inline Mark::Mark(CodeProfiler& section, bool frameTick) : section(section), fra
 	}
 }
 
-// STUB: WEBSERVICE 0x10071560
+// FUNCTION: WEBSERVICE 0x10071560
 inline Mark::~Mark()
 {
 	if (markTlsIndex != 0) {
 		TlsSetValue(markTlsIndex, enclosingSection);
 
-		__int64 endKernelTime;
-		__int64 endUserTime;
+		FILETIME endKernelTime;
+		FILETIME endUserTime;
+		GetThreadTimes(GetCurrentThread(), &creationTime, &exitTime, &endKernelTime, &endUserTime);
 
-		GetThreadTimes(
-			GetCurrentThread(),
-			&creationTime,
-			&exitTime,
-			(FILETIME*) &endKernelTime,
-			(FILETIME*) &endUserTime
-		);
+		ULARGE_INTEGER kernelStart = {kernelTime.dwLowDateTime, kernelTime.dwHighDateTime};
+		ULARGE_INTEGER kernelEnd = {endKernelTime.dwLowDateTime, endKernelTime.dwHighDateTime};
+		ULARGE_INTEGER userStart = {userTime.dwLowDateTime, userTime.dwHighDateTime};
+		ULARGE_INTEGER userEnd = {endUserTime.dwLowDateTime, endUserTime.dwHighDateTime};
 
-		__int64 kern = *(const __int64*) &kernelTime;
-		__int64 user = *(const __int64*) &userTime;
+		__int64 kernel = kernelEnd.QuadPart - kernelStart.QuadPart;
+		__int64 user = userEnd.QuadPart - userStart.QuadPart;
 
-		__int64 kernelSpan = endKernelTime - kern;
-		__int64 userSpan = endUserTime - user;
-
-		section.log(kernelSpan, userSpan, frameTick);
+		section.log(kernel, user, frameTick);
 
 		if (enclosingSection != NULL && enclosingSection != &section && enclosingSection != section.parent) {
-			enclosingSection->log(-kernelSpan, -userSpan, false);
+			enclosingSection->log(-kernel, -user, false);
 		}
 	}
 }
