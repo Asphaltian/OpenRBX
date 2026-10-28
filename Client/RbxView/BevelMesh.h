@@ -53,6 +53,9 @@ public:
 			}
 		}
 	};
+
+	// SYNTHETIC: WEBSERVICE 0x1017df90
+	// ??1BevelMesh@View@RBX@@UAE@XZ
 };
 
 DECOMP_SIZE_ASSERT(BevelMesh::Builder, 0x24)

@@ -662,6 +662,8 @@ public:
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x1012cc30
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::MeshId>::TypedPropertyDescriptor<RBX::MeshId>
+	// TEMPLATE: WEBSERVICE 0x1012ce50
+	// ?equalValues@?$TypedPropertyDescriptor@VMeshId@RBX@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 	// TEMPLATE: WEBSERVICE 0x1005b070
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::CoordinateFrame>::TypedPropertyDescriptor<G3D::CoordinateFrame>
 	// TEMPLATE: WEBSERVICE 0x1005b480
@@ -912,6 +914,8 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,RBX::TextureId>::PropDescriptor<RBX::Mouse,RBX::TextureId><RBX::TextureId (__thiscall RBX::Mouse::*)(void)const ,void (__thiscall RBX::Mouse::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x1012cb10
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::GetSetImpl<G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>::getValue
+	// TEMPLATE: WEBSERVICE 0x1012cb50
+	// ?getValue@?$GetSetImpl@P8SpecialShape@RBX@@BE?BVMeshId@2@XZP812@AEXABV32@@Z@?$PropDescriptor@VSpecialShape@RBX@@VMeshId@2@@Reflection@RBX@@UBE?AVMeshId@4@PBVDescribedBase@34@@Z
 	// TEMPLATE: WEBSERVICE 0x1012cd00
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::getset<G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1012cd60
