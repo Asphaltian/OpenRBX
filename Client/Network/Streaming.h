@@ -210,8 +210,10 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x101a9df0
 	// RBX::Network::IdSerializer::~IdSerializer
 
+	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x101aa0f0 FOLDED
-	// RBX::Network::IdSerializer::`scalar deleting destructor'
+	// RBX::DescribedNonCreatable<RBX::Network::Replicator,RBX::Network::IdSerializer,&RBX::Network::sReplicator>::`scalar deleting destructor'
+	// clang-format on
 };
 
 } // namespace Network

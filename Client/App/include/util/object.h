@@ -733,7 +733,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100dbdf0
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::~FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>
 	// FUNCTION: WEBSERVICE 0x100dcce0
-	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::`scalar deleting destructor'
+	// RBX::DescribedCreatable<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100dcec0
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>
 	// FUNCTION: WEBSERVICE 0x100dd950
@@ -937,7 +937,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100fd880
 	// RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>
 	// FUNCTION: WEBSERVICE 0x100febb0
-	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::`scalar deleting destructor'
+	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100ff600
 	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// TEMPLATE: WEBSERVICE 0x100ff720

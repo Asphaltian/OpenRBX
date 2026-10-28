@@ -595,7 +595,7 @@ template <class T, class Base, const char* sName>
 	// TEMPLATE: WEBSERVICE 0x100c9ae0
 	// RBX::DescribedCreatable<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::DescribedCreatable<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
 	// SYNTHETIC: WEBSERVICE 0x100ca200
-	// RBX::Instance::`scalar deleting destructor'
+	// RBX::NonFactoryProduct<RBX::Instance,0>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100cbe00
 	// RBX::DescribedNonCreatable<RBX::Mouse,RBX::Instance,&RBX::sMouse>::DescribedNonCreatable<RBX::Mouse,RBX::Instance,&RBX::sMouse>
 	// TEMPLATE: WEBSERVICE 0x100ccc60

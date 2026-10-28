@@ -582,7 +582,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100c92c0
 	// RBX::Reflection::SignalDesc<RBX::HopperBin,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::HopperBin,void __cdecl(boost::shared_ptr<RBX::Instance>)>
 	// SYNTHETIC: WEBSERVICE 0x100c9390
-	// RBX::Reflection::SignalDesc<RBX::Humanoid,void __cdecl(void)>::`scalar deleting destructor'
+	// RBX::Reflection::SignalDesc<RBX::HopperBin,void __cdecl(boost::shared_ptr<RBX::Instance>)>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1009e9f0
 	// RBX::Reflection::SignalDesc<RBX::PartInstance,void __cdecl(boost::shared_ptr<RBX::Instance>)>::SignalDesc<RBX::PartInstance,void __cdecl(boost::shared_ptr<RBX::Instance>)>
 	// TEMPLATE: WEBSERVICE 0x100a3c20

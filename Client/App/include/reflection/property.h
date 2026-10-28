@@ -471,7 +471,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10099380
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::SetImpl<void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100c75e0
-	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::SetImpl<void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>::getValue
+	// RBX::Reflection::PropDescriptor<RBX::HopperBin,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::SetImpl<void (__thiscall RBX::HopperBin::*)(std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100c7650
 	// RBX::Reflection::PropDescriptor<RBX::HopperBin,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::SetImpl<void (__thiscall RBX::HopperBin::*)(std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &)>::setValue
 	// clang-format on
@@ -553,9 +553,9 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100db740
 	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::CoordinateFrame const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100db7e0
-	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::Vector3>::GetSetImpl<G3D::Vector3 const (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::Vector3 const &)>::getValue
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::GetSetImpl<G3D::Vector3 (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100db840
-	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,int>::GetSetImpl<int (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(int)>::setValue
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,RBX::PartInstance *>::GetSetImpl<RBX::PartInstance * (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(RBX::PartInstance *)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100dbf70
 	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100dbfe0
@@ -659,7 +659,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100439d0
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::equalValues
 	// SYNTHETIC: WEBSERVICE 0x1004b730
-	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::`scalar deleting destructor'
+	// RBX::Reflection::PropDescriptor<RBX::HopperBin,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1007dcd0
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::getValue
 	// TEMPLATE: WEBSERVICE 0x1009bb10
@@ -699,9 +699,9 @@ public:
 	// FUNCTION: WEBSERVICE 0x100ca3f0
 	// RBX::Reflection::PropDescriptor<RBX::Tool,int>::GetSetImpl<int (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(int)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100a0f40
-	// RBX::Reflection::PropDescriptor<RBX::Humanoid,bool>::GetSetImpl<bool (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(bool)>::getValue
+	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::GetSetImpl<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float)>::getValue
 	// TEMPLATE: WEBSERVICE 0x1009b390
-	// RBX::Reflection::PropDescriptor<RBX::ModelInstance,RBX::PartInstance *>::GetSetImpl<RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>::setValue
+	// RBX::Reflection::PropDescriptor<RBX::FlagStand,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::FlagStand::*)(void)const ,void (__thiscall RBX::FlagStand::*)(RBX::BrickColor)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100a0f80
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::GetSetImpl<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100db7a0
@@ -713,15 +713,15 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1018c890
 	// RBX::Reflection::PropDescriptor<RBX::Team,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(RBX::BrickColor)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100fda10
-	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>::getValue
+	// RBX::Reflection::PropDescriptor<RBX::FlagStand,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::FlagStand::*)(void)const ,void (__thiscall RBX::FlagStand::*)(RBX::BrickColor)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100b37a0
-	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::GetSetImpl<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>::getValue
+	// RBX::Reflection::PropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::GetSetImpl<enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>::getValue
 	// TEMPLATE: WEBSERVICE 0x1005a6b0
 	// RBX::Reflection::PropDescriptor<RBX::ModelInstance,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(G3D::CoordinateFrame const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100cd400
 	// RBX::Reflection::PropDescriptor<RBX::Flag,RBX::BrickColor>::GetSetImpl<RBX::BrickColor (__thiscall RBX::Flag::*)(void)const ,void (__thiscall RBX::Flag::*)(RBX::BrickColor)>::setValue
 	// TEMPLATE: WEBSERVICE 0x1018c8c0
-	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::GetSetImpl<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>::setValue
+	// RBX::Reflection::PropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::GetSetImpl<enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100e20d0
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::GetSetImpl<float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100b37d0
@@ -982,7 +982,7 @@ public:
 		// TEMPLATE: WEBSERVICE 0x100e0760
 		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::ShirtGraphic>::getValue
 		// TEMPLATE: WEBSERVICE 0x100eb7a0
-		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::getValue
+		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Soundscape::SoundService>::getValue
 		// TEMPLATE: WEBSERVICE 0x100eb7c0
 		// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundPropGetSet<RBX::Explosion>::getValue
 		// TEMPLATE: WEBSERVICE 0x100b53a0
@@ -990,7 +990,7 @@ public:
 		// TEMPLATE: WEBSERVICE 0x100e1920
 		// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundPropGetSet<RBX::ShirtGraphic>::setValue
 		// TEMPLATE: WEBSERVICE 0x100ee410
-		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Explosion>::setValue
+		// RBX::Reflection::BoundProp<float,1>::BoundPropGetSet<RBX::Soundscape::SoundService>::setValue
 		// TEMPLATE: WEBSERVICE 0x100eef70
 		// RBX::Reflection::BoundProp<double,1>::BoundPropGetSet<RBX::Value<double,&RBX::sDoubleValue> >::getValue
 		// TEMPLATE: WEBSERVICE 0x100eef90
