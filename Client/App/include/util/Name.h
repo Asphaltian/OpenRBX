@@ -60,7 +60,7 @@ public:
 	bool operator==(const std::string& other) const;
 	bool operator==(const char* other) const { return name.compare(other) == 0; }
 
-	bool operator!=(const Name& other) const;
+	bool operator!=(const Name& other) const { return this != &other; }
 	bool operator!=(const std::string& other) const;
 	bool operator!=(const char* other) const { return name.compare(other) != 0; }
 

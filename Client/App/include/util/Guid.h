@@ -84,7 +84,13 @@ public:
 	// RBX::GuidItem<RBX::Instance>::~GuidItem<RBX::Instance>
 	// clang-format on
 	~GuidItem() { unregisterGuid(); }
-	void assignGuid(const Guid::Data& guidData);
+	void assignGuid(const Guid::Data& guidData)
+	{
+		unregisterGuid();
+		guid.assign(guidData);
+		registerGuid();
+		onGuidChanged();
+	}
 	const Guid& getGuid() const
 	{
 		registerGuid();
@@ -152,6 +158,11 @@ private:
 		}
 		registeredGuid = true;
 	}
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x101a3820
+	// RBX::GuidItem<RBX::Instance>::assignGuid
+	// clang-format on
 };
 
 template <class T>

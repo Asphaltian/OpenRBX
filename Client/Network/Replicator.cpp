@@ -22,6 +22,7 @@
 
 #include <BitStream.h>
 #include <G3D/System.h>
+#include <G3D/format.h>
 #include <GetTime.h>
 #include <PacketLogger.h>
 #include <RakNetStatistics.h>
@@ -306,6 +307,15 @@ void Replicator::Item::writeItemType(RakNet::BitStream& stream, ItemType value)
 		unsigned char zero = 0;
 		stream.WriteBits(&zero, 2);
 		stream.Write(value);
+	}
+}
+
+inline void Replicator::Item::readItemType(RakNet::BitStream& stream, ItemType& value)
+{
+	value = ItemTypeEnd;
+	stream.ReadBits((unsigned char*) &value, 2);
+	if (value < ItemTypeDelete || value > ItemTypeChangeProperty) {
+		stream.Read(value);
 	}
 }
 
@@ -1129,6 +1139,81 @@ void Replicator::readProperties(RakNet::BitStream& inBitstream, Instance* instan
 	}
 }
 
+// FUNCTION: WEBSERVICE 0x101a7de0
+void Replicator::readInstanceNew(RakNet::BitStream& inBitstream)
+{
+	int start = inBitstream.GetReadOffset();
+
+	Guid::Data id;
+	deserializeId(inBitstream, id);
+
+	const Name* className;
+	classNames.receive(inBitstream, className);
+
+	if (NetworkSettings::singleton().printInstances) {
+		StandardOut::singleton()->print(
+			MESSAGE_INFO,
+			"Replication: %s:%s << %s",
+			className->c_str(),
+			id.readableString(4).c_str(),
+			remotePlayerId.ToString()
+		);
+	}
+
+	boost::shared_ptr<Instance> instance;
+	Instance* i;
+	if (Instance::lookupByGuid(id, i)) {
+		instance = shared_from(i);
+
+		if (instance->getClassName() != *className) {
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR,
+				"Replication: Bad re-binding %s-%s << %s, %s-%s",
+				className->c_str(),
+				id.readableString(4).c_str(),
+				remotePlayerId.ToString(),
+				instance->getClassName().c_str(),
+				id.readableString(4).c_str()
+			);
+		}
+	}
+	else {
+		instance = Instance::create(*className);
+		if (!instance) {
+			std::string message = G3D::format("Replication: Can't create object of type %s", className->c_str());
+			StandardOut::singleton()->print(MESSAGE_ERROR, message.c_str());
+			throw std::runtime_error(message);
+		}
+
+		instance->assignGuid(id);
+	}
+
+	ReplicationData& data = addReplicationData(instance, false);
+
+	inBitstream >> data.deleteOnDisconnect;
+
+	readProperties(inBitstream, instance.get());
+
+	if (dynamic_cast<Service*>(instance.get())) {
+		Guid::Data id;
+		deserializeId(inBitstream, id);
+	}
+	else {
+		data.changed = Instance::event_propertyChanged
+						   .connect(instance.get(), boost::bind(&Replicator::onPropertyChanged, this, instance, _1), 0);
+
+		Reflection::Property property(Instance::propParent, instance.get());
+		deserializeValue(inBitstream, property);
+	}
+
+	resolvePendingReferences(instance.get(), id);
+
+	int end = inBitstream.GetReadOffset();
+
+	statsItem->instanceCount++;
+	statsItem->instanceBits += end - start;
+}
+
 // FUNCTION: WEBSERVICE 0x101a84a0
 void Replicator::readMarker(RakNet::BitStream& inBitstream)
 {
@@ -1141,6 +1226,52 @@ void Replicator::readMarker(RakNet::BitStream& inBitstream)
 
 	incomingMarkers.front()->fireReturned();
 	incomingMarkers.pop();
+}
+
+// FUNCTION: WEBSERVICE 0x101a85f0
+void Replicator::readChangedProperty(RakNet::BitStream& inBitstream)
+{
+	Instance* instance;
+	const Name* name;
+	Guid::Data id;
+	deserializeInstanceRef(inBitstream, instance, id);
+	propNames.receive(inBitstream, name);
+
+	if (NetworkSettings::singleton().printProperties) {
+		StandardOut::singleton()->print(
+			MESSAGE_INFO,
+			"Replication: %s-%s.%s << %s",
+			instance ? instance->getClassName().c_str() : "?",
+			id.readableString(4).c_str(),
+			name->c_str(),
+			remotePlayerId.ToString()
+		);
+	}
+
+	ValueType type = ValueType_nil;
+	inBitstream.ReadBits((unsigned char*) &type, 4);
+
+	if (instance) {
+		Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator iter =
+			instance->findProperty(*name);
+		if (iter == instance->properties_end()) {
+			std::string message = G3D::format(
+				"ID_CHANGEPROPERTY bad property %s-%s.%s from %s",
+				instance->getClassName().c_str(),
+				id.readableString(4).c_str(),
+				name->c_str(),
+				remotePlayerId.ToString()
+			);
+			StandardOut::singleton()->print(MESSAGE_ERROR, message.c_str());
+			throw std::runtime_error(message.c_str());
+		}
+
+		Reflection::Property prop = *iter;
+		deserializeValue(inBitstream, prop);
+	}
+	else {
+		skipValue(inBitstream, type);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x101a8aa0
@@ -1239,6 +1370,44 @@ void Replicator::onServiceProvider(const ServiceProvider* oldProvider, const Ser
 	else if (peer) {
 		peer->DetachPlugin(this);
 		peer = NULL;
+	}
+}
+
+// FUNCTION: WEBSERVICE 0x101a9020
+void Replicator::receiveData(Packet* packet)
+{
+	Profiling::Mark mark(*profileDataIn, false);
+
+	RakNet::BitStream inBitstream(packet->data, packet->length, false);
+
+	inBitstream.IgnoreBits(8);
+
+	Security::Impersonator impersonate(Security::Replicator);
+
+	while (true) {
+		Item::ItemType itemType;
+		Item::readItemType(inBitstream, itemType);
+
+		switch (itemType) {
+		case Item::ItemTypeDelete:
+			readInstanceDelete(inBitstream);
+			break;
+
+		case Item::ItemTypeNew:
+			readInstanceNew(inBitstream);
+			break;
+
+		case Item::ItemTypeChangeProperty:
+			readChangedProperty(inBitstream);
+			break;
+
+		case Item::ItemTypeMarker:
+			readMarker(inBitstream);
+			break;
+
+		case Item::ItemTypeEnd:
+			return;
+		}
 	}
 }
 
