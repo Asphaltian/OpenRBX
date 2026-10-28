@@ -299,6 +299,7 @@ Where the line records show lines that generate no code, the original named some
 ### Loops and control flow
 
 - **A dense switch lowers to descending `sub eax, N / je`.** An if/else chain emits repeated `cmp` against each value. Ghidra prints both as `if` chains when the cases are sparse, so the bytes are the only witness.
+- **A jump table that keeps entries whose target is the default block had a statement in each of those cases.** MSVC trims leading and trailing cases that `break` to the default before it builds the table, but it merges identical `return` blocks only after. `Math::getAxisRotationMatrix`'s table runs from `NORM_X` because `NORM_X` and `NORM_X_NEG` each `return Matrix3::identity()`. Written as labels that `break`, the table starts at 1 and the body sat at 94.
 - **A `switch` case is not a scope MSVC 8 reuses a temporary in.** Six bodies written as case bodies give four `Vector3` slots each where the same six at function scope share four. The frame size is the evidence, and dispatching with `case NORM_X: goto x;` over labelled statements below is the one sanctioned goto.
 - **The comma operator decides how many temporaries stay live.** `c0 = f(4), c1 = f(6), c2 = f(7), c3 = f(5);` keeps four alive at once where four statements reuse one.
 - **A `for` increment is attributed to the last statement of the body,** not to the `for` line. A loop with no record at its `_Inc` call has its step written out at the bottom of a `while`.

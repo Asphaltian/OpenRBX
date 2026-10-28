@@ -491,7 +491,7 @@ const Matrix3& Math::matrixTiltZ()
 	return m;
 }
 
-// STUB: WEBSERVICE 0x100df8e0
+// FUNCTION: WEBSERVICE 0x100df8e0
 const Matrix3& Math::getAxisRotationMatrix(int face)
 {
 	static const Matrix3 y = Matrix3::fromEulerAnglesXYZ(0.0f, 0.0f, 1.57079637f);
@@ -501,12 +501,13 @@ const Matrix3& Math::getAxisRotationMatrix(int face)
 
 	switch (face) {
 	case NORM_X:
-	case NORM_X_NEG:
-		break;
+		return Matrix3::identity();
 	case NORM_Y:
 		return y;
 	case NORM_Z:
 		return z;
+	case NORM_X_NEG:
+		return Matrix3::identity();
 	case NORM_Y_NEG:
 		return y_neg;
 	case NORM_Z_NEG:
