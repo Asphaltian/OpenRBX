@@ -1,4 +1,4 @@
-#include "View.h"
+#include "rbxview/View.h"
 
 #include "BrickMesh.h"
 #include "CylinderMesh.h"

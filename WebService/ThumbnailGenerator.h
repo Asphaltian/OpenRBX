@@ -34,6 +34,8 @@ public:
 DECOMP_SIZE_ASSERT(ThumbnailGenerator, 0xf8)
 
 // clang-format off
+// TEMPLATE: WEBSERVICE 0x100089c0
+// StaticMutex<OSContext>::init
 // SYNTHETIC: WEBSERVICE 0x10217da0
 // `dynamic initializer for 'clickFunction''
 // SYNTHETIC: WEBSERVICE 0x10217dc0
@@ -42,6 +44,8 @@ DECOMP_SIZE_ASSERT(ThumbnailGenerator, 0xf8)
 // `dynamic atexit destructor for 'clickFunction''
 // SYNTHETIC: WEBSERVICE 0x10220fc0
 // `dynamic atexit destructor for 'clickTextureFunction''
+// SYNTHETIC: WEBSERVICE 0x10220ff0
+// `StaticMutex<OSContext>::init'::`2'::`dynamic atexit destructor for '_m''
 // clang-format on
 
 #endif // THUMBNAILGENERATOR_H

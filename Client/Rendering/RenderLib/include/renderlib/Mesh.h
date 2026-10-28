@@ -13,6 +13,8 @@
 #include <GLG3D/VAR.h>
 #include <vector>
 
+class ThumbnailGenerator;
+
 namespace RBX {
 namespace Render {
 
@@ -59,6 +61,8 @@ public:
 	};
 
 private:
+	friend class ::ThumbnailGenerator;
+
 	static G3D::MeshAlg::Geometry visibleGeometry;
 	static G3D::Array<G3D::Vector2> texCoordArray;
 	static G3D::Array<G3D::Vector3> tangentArray;

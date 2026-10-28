@@ -38,7 +38,7 @@ public:
 	static Reflection::SignalDesc<Lighting, void(bool)> event_LightingChanged;
 
 	bool isSkySuppressed() const { return !hasSky; }
-	void suppressSky(const bool value);
+	void suppressSky(const bool value) { hasSky = !value; }
 
 	boost::shared_ptr<Sky> sky; // 0x228
 

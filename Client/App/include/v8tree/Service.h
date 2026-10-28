@@ -55,7 +55,7 @@ private:
 DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 
 // clang-format off
-// STUB: WEBSERVICE 0x1000a7b0
+// TEMPLATE: WEBSERVICE 0x1000a7b0
 // RBX::ServiceProvider::create<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000bb10
 // RBX::ServiceProvider::find<RBX::Lighting>

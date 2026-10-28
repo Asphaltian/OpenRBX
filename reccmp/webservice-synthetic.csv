@@ -15,6 +15,7 @@ address,type,symbol
 0x10006340,synthetic,??1FunctionDescriptor@Reflection@RBX@@UAE@XZ
 0x100063b0,synthetic,??1SignatureDescriptor@Reflection@RBX@@QAE@XZ
 0x100063d0,synthetic,??1?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@0HH@Z$03@Reflection@RBX@@UAE@XZ
+0x10006990,stub,??_GOSContext@@UAEPAXI@Z
 0x10007050,stub,??1GuiDrawImage@RBX@@QAE@XZ
 0x100078c0,synthetic,??1?$vector@PAV?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@V?$allocator@PAV?$MemberDescriptorContainer@VFunctionDescriptor@Reflection@RBX@@@Reflection@RBX@@@std@@@std@@QAE@XZ
 0x100078f0,synthetic,??3?$Creatable@VInstance@RBX@@@RBX@@CAXPAX@Z
@@ -31,8 +32,8 @@ address,type,symbol
 0x10009840,synthetic,??$call@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@HH_N@Z$03@Reflection@RBX@@ABEXPAVThumbnailGenerator@@AAVValue@12@1111@Z
 0x10009910,synthetic,??$call@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$BoundFuncDesc@VThumbnailGenerator@@$$A6A?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V23@0HH@Z$03@Reflection@RBX@@ABEXPAVThumbnailGenerator@@AAVValue@12@1111@Z
 0x10009a20,synthetic,??1Item@SignatureDescriptor@Reflection@RBX@@QAE@XZ
-0x1000a8b0,stub,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@QBEPAVWorkspace@1@XZ
-0x1000c370,stub,??$doGetClassIndex@VWorkspace@RBX@@@ServiceProvider@RBX@@CAIXZ
+0x1000a8b0,synthetic,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@QBEPAVWorkspace@1@XZ
+0x1000c370,synthetic,??$doGetClassIndex@VWorkspace@RBX@@@ServiceProvider@RBX@@CAIXZ
 0x1000c7f0,synthetic,??_E?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@ODM@AEPAXI@Z
 0x1000c800,synthetic,??_EThumbnailGenerator@@WGM@AEPAXI@Z
 0x1000c810,synthetic,??_EThumbnailGenerator@@WFE@AEPAXI@Z
