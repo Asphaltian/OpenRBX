@@ -30,7 +30,11 @@ class ErrorUploader
 	RBX::worker_thread thread;     // 0x08
 
 public:
+	// FUNCTION: WEBSERVICE 0x1000cdf0
 	ErrorUploader() : _data(new data()), thread(boost::bind(&ErrorUploader::run, _data), "rbx_erroruploader") {}
+
+	// SYNTHETIC: WEBSERVICE 0x1000da60
+	// ErrorUploader::~ErrorUploader
 
 	void Cancel();
 	void Upload(std::string url, bool synchronous);

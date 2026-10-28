@@ -224,6 +224,8 @@ struct __declspec(uuid("6d7e5c9a-0000-0000-0000-000000000000")) IWebService : pu
 // `dynamic initializer for '_AtlModule''
 // SYNTHETIC: WEBSERVICE 0x10218040
 // `dynamic initializer for 'theExtension''
+// SYNTHETIC: WEBSERVICE 0x10218070
+// `dynamic initializer for 'Roblox::CWebService::jobs''
 // SYNTHETIC: WEBSERVICE 0x102180b0
 // `dynamic initializer for 'Roblox::CWebService::sync''
 // SYNTHETIC: WEBSERVICE 0x10221270
@@ -236,6 +238,8 @@ struct __declspec(uuid("6d7e5c9a-0000-0000-0000-000000000000")) IWebService : pu
 // `dynamic atexit destructor for '_AtlModule''
 // SYNTHETIC: WEBSERVICE 0x102212e0
 // `dynamic atexit destructor for 'theExtension''
+// SYNTHETIC: WEBSERVICE 0x102212f0
+// `dynamic atexit destructor for 'Roblox::CWebService::jobs''
 // SYNTHETIC: WEBSERVICE 0x10221300
 // `dynamic atexit destructor for 'Roblox::CWebService::sync''
 // clang-format on
