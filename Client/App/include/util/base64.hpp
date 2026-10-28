@@ -150,6 +150,14 @@ public:
 
 
 
+	// TEMPLATE: WEBSERVICE 0x100855f0
+	// base64<char,std::char_traits<char> >::_getCharType
+
+	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10085a30
+	// base64<char,std::char_traits<char> >::get<std::istreambuf_iterator<char,std::char_traits<char> >,std::ostreambuf_iterator<char,std::char_traits<char> >,int>
+	// clang-format on
+
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10085e80
 	// base64<char,std::char_traits<char> >::put<std::istreambuf_iterator<char,std::char_traits<char> >,std::ostreambuf_iterator<char,std::char_traits<char> >,int,base64<char,std::char_traits<char> >::crlf>

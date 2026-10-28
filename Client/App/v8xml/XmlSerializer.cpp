@@ -1,10 +1,12 @@
 #include "v8xml/XmlSerializer.h"
 
+#include "reflection/type.h"
 #include "util/ContentProvider.h"
 #include "util/Name.h"
 #include "util/base64.hpp"
 #include "v8xml/XmlElement.h"
 
+#include <G3D/format.h>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -12,6 +14,7 @@
 #include <iterator>
 #include <memory>
 #include <ostream>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -402,7 +405,12 @@ void TextXmlWriterWithEmbeddedContent::serializeNode(const XmlElement* xmlNode, 
 
 				std::auto_ptr<std::istream> contentStream;
 
-				contentStream = RBX::ContentProvider::singleton().getContent(contentId);
+				try {
+					contentStream = RBX::ContentProvider::singleton().getContent(contentId);
+				}
+				catch (std::exception&) {
+					goto hash;
+				}
 
 				if (&contentId.mimeType() == &RBX::Name::getNullName()) {
 					stream << "<binary>";
@@ -411,20 +419,17 @@ void TextXmlWriterWithEmbeddedContent::serializeNode(const XmlElement* xmlNode, 
 					stream << "<binary xmime:contentType=\"" << contentId.mimeType().name.c_str() << "\">";
 				}
 
-				int state;
+				std::istreambuf_iterator<char> _From(contentStream->rdbuf());
+				std::ostreambuf_iterator<char> _Out(stream.rdbuf());
+				std::istreambuf_iterator<char> _To;
+				int _State;
 				base64<char> encoder;
-
-				encoder.put(
-					std::istreambuf_iterator<char>(contentStream->rdbuf()),
-					std::istreambuf_iterator<char>(),
-					std::ostreambuf_iterator<char>(stream.rdbuf()),
-					state,
-					base64<char>::crlf()
-				);
+				encoder.put(_From, _To, _Out, _State, base64<char>::crlf());
 
 				stream << "</binary>";
 			}
 			else {
+			hash:
 				embeddedContent.insert(contentId);
 
 				stream << "<hash>";
@@ -438,11 +443,129 @@ void TextXmlWriterWithEmbeddedContent::serializeNode(const XmlElement* xmlNode, 
 	}
 }
 
-// STUB: WEBSERVICE 0x10087650
+// FUNCTION: WEBSERVICE 0x10087650
 std::auto_ptr<XmlElement> TextXmlParser::parse()
 {
-	STUB(0x10087650);
-	return std::auto_ptr<XmlElement>();
+	if (buffer->sgetc() == EOF) {
+		throw std::runtime_error("TextXmlParser::parse empty file");
+	}
+
+	bool firstTimeThrough = true;
+	while (true) {
+		std::string currentTag;
+
+		if (firstTimeThrough) {
+			firstTimeThrough = false;
+			currentTag = readFirstTag();
+			if (currentTag.substr(0, 2) == "<?") {
+				continue;
+			}
+		}
+		else {
+			currentTag = readTag();
+		}
+
+		XmlElement* currentElement = elements.empty() ? NULL : elements.top();
+
+		if (isCloseTag(currentTag)) {
+			if (currentElement == NULL) {
+				throw std::runtime_error(
+					G3D::format("TextXmlParser::parse - Got close tag %s without open tag.", currentTag.c_str())
+				);
+			}
+
+			elements.pop();
+
+			if (elements.empty()) {
+				return std::auto_ptr<XmlElement>(currentElement);
+			}
+		}
+		else {
+			XmlElement* newElement = parseAttributes(currentTag);
+			elements.push(newElement);
+
+			if (newElement->getTag() == RBX::Reflection::Type::singleton<RBX::ContentId>().tag) {
+				bool nil;
+				XmlAttribute* xsinil = newElement->findAttribute(name_xsinil);
+				if (xsinil != NULL && xsinil->getValue(nil) && nil) {
+				}
+				else if (readText(false) != "") {
+				}
+				else {
+					const RBX::Name* mimeType;
+					XmlAttribute* mimeTypeAttribute = newElement->findAttribute(tag_mimeType);
+					if (mimeTypeAttribute != NULL) {
+						mimeTypeAttribute->getValue(mimeType);
+					}
+					else {
+						mimeType = &RBX::Name::getNullName();
+					}
+
+					std::string contentChild = readTag();
+					std::string tagName = contentChild.substr(1, contentChild.size() - 2);
+
+					if (tagName.substr(0, 6) == "binary") {
+						std::stringbuf encoded(readText(false), std::ios_base::in);
+						std::istreambuf_iterator<char> _From(&encoded);
+						std::istreambuf_iterator<char> _To;
+						std::stringstream decoded;
+						std::ostreambuf_iterator<char> _Out(decoded.rdbuf());
+						base64<char> encoder;
+						int _State = 0;
+						encoder.get(_From, _To, _Out, _State);
+
+						decoded.flush();
+						RBX::ContentId contentId =
+							RBX::ContentProvider::singleton().registerContent(decoded, *mimeType);
+
+						std::string hash = RBX::MD5Hasher::convertToLegacyHash(contentId.toString());
+						legacyHashes[hash] = contentId.toString();
+
+						newElement->setValue(contentId);
+					}
+					else if (tag_hash == tagName) {
+						std::string hash = readText(false);
+						if (legacyHashes.find(hash) != legacyHashes.end()) {
+							hash = legacyHashes[hash];
+						}
+						newElement->setValue(RBX::ContentId(hash.c_str(), *mimeType));
+					}
+					else if (tagName.substr(0, 3) == "url") {
+						newElement->setValue(RBX::ContentId(readText(true).c_str(), *mimeType));
+					}
+					else if (tag_null == tagName) {
+						newElement->setValue(RBX::ContentId());
+					}
+					else {
+						throw std::runtime_error(
+							G3D::format("TextXmlParser::parse - Unknown tag '%s'.", tagName.substr(0, 32).c_str())
+						);
+					}
+
+					std::string closingTag = readTag();
+					if (!isCloseTag(closingTag)) {
+						throw std::runtime_error(
+							G3D::format(
+								"TextXmlParser::parse - '%s' should be a closing tag",
+								closingTag.substr(0, 32).c_str()
+							)
+						);
+					}
+				}
+			}
+			else {
+				newElement->setValue(readText(true));
+			}
+
+			if (currentElement != NULL) {
+				currentElement->addChild(newElement);
+			}
+
+			if (endsWithClose(currentTag)) {
+				elements.pop();
+			}
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10087f40
