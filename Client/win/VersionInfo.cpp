@@ -2,12 +2,12 @@
 
 CVersionInfo::CVersionInfo()
 {
-	m_pffi = NULL;
 	m_pVerData = NULL;
+	m_pffi = NULL;
 	m_wLangID = 0;
+	m_wCharset = 1252;
 	m_pTranslations = NULL;
 	m_nTranslations = 0;
-	m_wCharset = 1252;
 }
 
 // FUNCTION: WEBSERVICE 0x1000c890

@@ -469,6 +469,7 @@ set(OPENRBX_WEBSERVICE_SOURCES
   WebService/WebService.cpp
   WebService/WebServiceMaps.cpp
   Client/win/ErrorUploader.cpp
+  Client/win/LogManager.cpp
   Client/win/VersionInfo.cpp
 )
 

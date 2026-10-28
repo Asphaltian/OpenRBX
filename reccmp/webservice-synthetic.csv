@@ -1,4 +1,5 @@
 address,type,symbol
+0x10004bb0,synthetic,??_EMainLogManager@@W3AEPAXI@Z
 0x10004ec0,stub,??0?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QAE@PBD@Z
 0x100052c0,stub,??0?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QAE@PB_W@Z
 0x100054a0,stub,?Format@?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@ATL@@QAAXPBDZZ

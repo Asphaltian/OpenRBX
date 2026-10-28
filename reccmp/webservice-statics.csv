@@ -1055,6 +1055,7 @@ address,type,name,module
 0x10300fc0,global,__proc_attached,
 0x1030137c,global,toneMap,
 0x10301384,global,depthBlur,
+0x103013b8,global,ts,LogManager.obj
 0x103013bd,global,initRobloxFailed,
 0x103013d0,global,clickFunction,
 0x10301420,global,clickTextureFunction,

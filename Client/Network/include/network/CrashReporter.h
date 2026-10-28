@@ -37,7 +37,7 @@ public:
 
 	CrashReportControls controls; // 0x004
 
-	CrashReporter();
+	CrashReporter() { singleton = this; }
 
 	void Start();
 
