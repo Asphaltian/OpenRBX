@@ -5,6 +5,12 @@
 
 #include <windows.h>
 
+enum CrashReportAction
+{
+	AOC_WRITE_TO_DISK = 4,
+	AOC_SILENT_MODE = 8
+};
+
 // SIZE 0x7cc
 struct CrashReportControls
 {
@@ -35,7 +41,7 @@ public:
 
 	void Start();
 
-	virtual LONG ProcessException(_EXCEPTION_POINTERS* exceptionInfo); // vtable+0x00
+	virtual LONG ProcessException(_EXCEPTION_POINTERS* ExceptionInfo); // vtable+0x00
 };
 
 DECOMP_SIZE_ASSERT(CrashReporter, 0x7d0)

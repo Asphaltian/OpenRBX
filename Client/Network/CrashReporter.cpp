@@ -1,54 +1,114 @@
 #include "network/CrashReporter.h"
 
+#include "FileOperations.h"
 #include "decomp.h"
+
+#include <dbghelp.h>
+#include <stdio.h>
+#include <string.h>
 
 CrashReporter* CrashReporter::singleton;
 
-// STUB: WEBSERVICE 0x1018b340
-LONG CrashReporter::ProcessException(_EXCEPTION_POINTERS* exceptionInfo)
+// FUNCTION: WEBSERVICE 0x1018b340
+LONG CrashReporter::ProcessException(_EXCEPTION_POINTERS* ExceptionInfo)
 {
-	STUB(0x1018b340);
+	_MINIDUMP_EXCEPTION_INFORMATION eInfo;
+	char dumpFilepath[MAX_PATH];
+	char appDescriptor[MAX_PATH];
+	char dumpFilename[MAX_PATH];
 
-	return EXCEPTION_CONTINUE_SEARCH;
+	if (!(controls.actionToTake & AOC_SILENT_MODE)) {
+		sprintf(appDescriptor, "%s has crashed.\nGenerate a report?", controls.appName);
+		if (MessageBox(NULL, appDescriptor, "Crash Reporter", MB_YESNO) == IDNO) {
+			return EXCEPTION_CONTINUE_SEARCH;
+		}
+	}
+
+	sprintf(appDescriptor, "%s %s", controls.appName, controls.appVersion);
+
+	if (controls.actionToTake & AOC_WRITE_TO_DISK) {
+		strcpy(dumpFilepath, controls.pathToMinidump);
+		WriteFileWithDirectories(dumpFilepath, NULL, 0);
+		AddSlash(dumpFilepath);
+
+		strcpy(dumpFilename, appDescriptor);
+		unsigned int length = strlen(appDescriptor);
+		for (unsigned int i = 0; i < length; i++) {
+			if (dumpFilename[i] == ':') {
+				dumpFilename[i] = '.';
+			}
+		}
+
+		strcat(dumpFilepath, dumpFilename);
+		strcat(dumpFilepath, ".dmp");
+
+		HANDLE hFile =
+			CreateFile(dumpFilepath, GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (hFile == INVALID_HANDLE_VALUE) {
+			return EXCEPTION_CONTINUE_SEARCH;
+		}
+
+		eInfo.ThreadId = GetCurrentThreadId();
+		eInfo.ExceptionPointers = ExceptionInfo;
+		eInfo.ClientPointers = FALSE;
+
+		LONG result = EXCEPTION_EXECUTE_HANDLER;
+		if (!MiniDumpWriteDump(
+				GetCurrentProcess(),
+				GetCurrentProcessId(),
+				hFile,
+				(MINIDUMP_TYPE) controls.minidumpType,
+				ExceptionInfo ? &eInfo : NULL,
+				NULL,
+				NULL
+			)) {
+			result = EXCEPTION_CONTINUE_SEARCH;
+		}
+
+		CloseHandle(hFile);
+		return result;
+	}
+
+	return EXCEPTION_EXECUTE_HANDLER;
 }
 
-// STUB: WEBSERVICE 0x1018b550
-static LONG WINAPI CrashExceptionFilter(_EXCEPTION_POINTERS* exceptionInfo)
+// FUNCTION: WEBSERVICE 0x1018b550
+LONG WINAPI CrashExceptionFilter(_EXCEPTION_POINTERS* ExceptionInfo)
 {
-	STUB(0x1018b550);
-
-	return EXCEPTION_CONTINUE_SEARCH;
+	return CrashReporter::singleton->ProcessException(ExceptionInfo);
 }
 
-static LPTOP_LEVEL_EXCEPTION_FILTER WINAPI
-DummySetUnhandledExceptionFilter(LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter)
+LPTOP_LEVEL_EXCEPTION_FILTER WINAPI
+MyDummySetUnhandledExceptionFilter(LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExceptionFilter)
 {
 	return NULL;
 }
 
-// STUB: WEBSERVICE 0x1018b560
-static void PreventSetUnhandledExceptionFilter()
+// FUNCTION: WEBSERVICE 0x1018b560
+BOOL PreventSetUnhandledExceptionFilter()
 {
-	HMODULE kernel32 = LoadLibraryA("kernel32.dll");
-
-	if (kernel32 == NULL) {
-		return;
+	HMODULE hKernel32 = LoadLibrary("kernel32.dll");
+	if (hKernel32 == NULL) {
+		return FALSE;
 	}
 
-	void* entry = GetProcAddress(kernel32, "SetUnhandledExceptionFilter");
-
-	if (entry == NULL) {
-		return;
+	void* pOrgEntry = GetProcAddress(hKernel32, "SetUnhandledExceptionFilter");
+	if (pOrgEntry == NULL) {
+		return FALSE;
 	}
 
-	unsigned char jump[5];
-	SIZE_T written;
+	unsigned char newJump[100];
+	DWORD dwOrgEntryAddr = (DWORD) pOrgEntry;
+	dwOrgEntryAddr += 5;
+	void* pNewFunc = &MyDummySetUnhandledExceptionFilter;
+	DWORD dwNewEntryAddr = (DWORD) pNewFunc;
+	DWORD dwRelativeAddr = dwNewEntryAddr - dwOrgEntryAddr;
 
-	jump[0] = 0xe9;
-	*reinterpret_cast<DWORD*>(jump + 1) =
-		reinterpret_cast<DWORD>(DummySetUnhandledExceptionFilter) - reinterpret_cast<DWORD>(entry) - 5;
-
-	WriteProcessMemory(GetCurrentProcess(), entry, jump, 5, &written);
+	newJump[0] = 0xe9;
+	memcpy(&newJump[1], &dwRelativeAddr, sizeof(pNewFunc));
+	SIZE_T bytesWritten;
+	BOOL bRet = WriteProcessMemory(GetCurrentProcess(), pOrgEntry, newJump, sizeof(pNewFunc) + 1, &bytesWritten);
+	return bRet;
 }
 
 // FUNCTION: WEBSERVICE 0x1018b5e0
