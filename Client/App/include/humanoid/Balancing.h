@@ -24,7 +24,7 @@ private:
 	const float kD; // 0x10
 
 protected:
-	static const float maxTorqueComponent();
+	static const float maxTorqueComponent() { return 4000.0f; }
 	static const float fallCutoff() { return 0.85f; }
 	static const float maxClimbDistance();
 

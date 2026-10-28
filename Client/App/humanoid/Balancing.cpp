@@ -53,7 +53,40 @@ G3D::Vector3 Balancing::getYAxis() const
 // STUB: WEBSERVICE 0x10122140
 void Balancing::onComputeForce(const float dt)
 {
-	STUB(0x10122140);
+	Body* torso = humanoid->getTorsoBody();
+
+	if (torso) {
+		Body* root = humanoid->getRootBody();
+
+		if (root) {
+			G3D::Vector3 yAxisWorld = torso->getPV().position.rotation.getColumn(1);
+			G3D::Vector3 tiltWorld = G3D::Vector3::unitY().cross(yAxisWorld);
+			G3D::Vector3 angVelWorld = torso->getPV().velocity.rotational;
+			G3D::Vector3 oldTorqueWorld = root->getBranchTorque();
+
+			const PV& rootPV = root->getPV();
+
+			G3D::Vector3 tiltRoot = rootPV.position.vectorToObjectSpace(tiltWorld);
+			G3D::Vector3 angVelRoot = rootPV.position.vectorToObjectSpace(angVelWorld);
+			G3D::Vector3 oldTorqueRoot = rootPV.position.vectorToObjectSpace(oldTorqueWorld);
+
+			G3D::Vector3 desiredTorque = (-kP * root->getBranchIBody()) * tiltRoot;
+			G3D::Vector3 torqueRoot = oldTorqueRoot + desiredTorque;
+
+			G3D::Vector3 branchIBody = Math::toDiagonal(root->getBranchIBody());
+
+			for (int i = 0; i < 3; i += 2) {
+				if (fabs(desiredTorque[i] - oldTorqueRoot[i]) < branchIBody[i] * maxTorqueComponent()) {
+					torqueRoot[i] = desiredTorque[i];
+				}
+			}
+
+			torqueRoot -= branchIBody * kD * angVelRoot;
+
+			G3D::Vector3 addedTorque = rootPV.position.vectorToWorldSpace(torqueRoot) - oldTorqueWorld;
+			root->accumulateTorque(addedTorque);
+		}
+	}
 }
 
 // STUB: WEBSERVICE 0x10122520
