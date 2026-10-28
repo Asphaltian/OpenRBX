@@ -225,3 +225,9 @@ void SerializerV2::load(XmlElement* root, RBX::DataModel* dataModel)
 
 	binder.resolveRefs();
 }
+
+// STUB: WEBSERVICE 0x10098b30
+void SerializerV2::load(std::istream& stream, RBX::DataModel* dataModel)
+{
+	STUB(0x10098b30);
+}

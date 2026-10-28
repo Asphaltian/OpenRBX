@@ -8,6 +8,7 @@
 #include "v8xml/Serializer.h"
 #include "v8xml/XmlElement.h"
 
+#include <iosfwd>
 #include <vector>
 
 class XmlElement;
@@ -131,6 +132,7 @@ public:
 	void loadInstances(XmlElement* root, std::vector<boost::shared_ptr<RBX::Instance> >& instances);
 
 	static void load(XmlElement* root, RBX::DataModel* dataModel);
+	void load(std::istream& stream, RBX::DataModel* dataModel);
 };
 
 DECOMP_SIZE_ASSERT(SerializerV2, 0x04)

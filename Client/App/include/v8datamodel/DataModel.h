@@ -95,7 +95,7 @@ public:
 	virtual bool isStackTooBig() const { return getStackSize() > 10; }
 
 	Workspace* getWorkspace() const { return workspace.get(); }
-	float step(float distributedGameTime);
+	float step(float timeInterval);
 	float getSimTime() const;
 	TimeState* getTimeState();
 
@@ -151,6 +151,10 @@ private:
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::~BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>
 // TEMPLATE: WEBSERVICE 0x10078a10
 // RBX::StateStack<RBX::XmlState>::clearStackAfter
+// SYNTHETIC: WEBSERVICE 0x10079310
+// TextXmlWriterWithEmbeddedContent::~TextXmlWriterWithEmbeddedContent
+// FUNCTION: WEBSERVICE 0x100798c0
+// TextXmlWriterWithEmbeddedContent::TextXmlWriterWithEmbeddedContent
 // TEMPLATE: WEBSERVICE 0x10079df0
 // RBX::StateStack<RBX::XmlState>::~StateStack<RBX::XmlState>
 // TEMPLATE: WEBSERVICE 0x10079e50

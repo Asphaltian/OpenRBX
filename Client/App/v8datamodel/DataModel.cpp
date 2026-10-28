@@ -12,8 +12,10 @@
 #include "util/Log.h"
 #include "util/Name.h"
 #include "util/Sound.h"
+#include "util/standardout.h"
 #include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/Backpack.h"
+#include "v8datamodel/Camera.h"
 #include "v8datamodel/JointInstance.h"
 #include "v8datamodel/JointsService.h"
 #include "v8datamodel/Lighting.h"
@@ -25,6 +27,8 @@
 #include "v8tree/Service.h"
 #include "v8world/Contact.h"
 #include "v8world/World.h"
+#include "v8xml/SerializerV2.h"
+#include "v8xml/XmlSerializer.h"
 
 #include <G3D/format.h>
 #include <sstream>
@@ -169,12 +173,39 @@ void DataModel::onChildAdded(Instance* child)
 	}
 }
 
-// STUB: WEBSERVICE 0x10072640
-float DataModel::step(float distributedGameTime)
+// FUNCTION: WEBSERVICE 0x10072640
+float DataModel::step(float timeInterval)
 {
-	STUB(0x10072640);
+	if (!isInitialized) {
+		return timeInterval;
+	}
 
-	return 0.0f;
+	workspace->profileRun->sample(GetCurrentThread());
+	Profiling::Mark mark(*workspace->profileWorkspaceStep, true);
+
+	timeState->fpsStopwatch.tick();
+	timeState->fpsStopwatch.tock();
+
+	if (runService->getRunState() == RS_RUNNING) {
+		timeState->simulationStopwatch.tick();
+		timeInterval = workspace->step(timeInterval);
+		timeState->simulationStopwatch.tock();
+		timeState->totalVirtualTime += timeInterval;
+
+		Profiling::Mark mark(*workspace->profileRunServiceStepped, true);
+		runService->raiseStepped(getSimTime(), timeInterval);
+	}
+
+	{
+		Profiling::Mark mark(*workspace->profileRunServiceHeartbeat, true);
+		runService->raiseHeartbeat(getSimTime(), timeInterval);
+	}
+
+	workspace->getCamera()->onHeartbeat();
+
+	localBackpack->onHeartbeat();
+
+	return timeInterval;
 }
 
 // FUNCTION: WEBSERVICE 0x10072810
@@ -298,10 +329,16 @@ std::string DataModel::evaluate(const std::string& valueName) const
 	return "?";
 }
 
-// STUB: WEBSERVICE 0x10073460
+// FUNCTION: WEBSERVICE 0x10073460
 void DataModel::loadContent(ContentId contentId)
 {
-	STUB(0x10073460);
+	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
+
+	StandardOut::singleton()->print(MESSAGE_INFO, "DataModel Loading %s", contentId.c_str());
+
+	Serializer serializer;
+	serializer.load(*stream, this);
+	workspace->joinAllHack();
 }
 
 // FUNCTION: WEBSERVICE 0x10073de0
@@ -372,17 +409,39 @@ void DataModel::clearContents()
 	}
 }
 
-// STUB: WEBSERVICE 0x10079a70
+// FUNCTION: WEBSERVICE 0x10079a70
 void DataModel::save(ContentId contentId)
 {
-	STUB(0x10079a70);
+	std::stringstream stream;
+	{
+		boost::scoped_ptr<XmlElement> root(SerializerV2::newRootElement());
+
+		writeChildren(root.get());
+
+		TextXmlWriterWithEmbeddedContent machine(stream);
+		machine.serialize(root.get());
+		stream.flush();
+	}
+
+	std::string response;
+	Http(contentId.toString()).post(stream, true, response);
 }
 
-// STUB: WEBSERVICE 0x10079bf0
+// FUNCTION: WEBSERVICE 0x10079bf0
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > DataModel::get(ContentId contentId)
 {
-	STUB(0x10079bf0);
-	return boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >();
+	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
+	TextXmlParser machine(stream->rdbuf());
+	std::auto_ptr<XmlElement> root = machine.parse();
+
+	boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > > result(
+		new std::vector<boost::shared_ptr<Instance> >()
+	);
+
+	Serializer serializer;
+	serializer.loadInstances(root.get(), *result);
+
+	return result;
 }
 
 void DataModel::raiseClose()

@@ -7408,6 +7408,7 @@ address,type,symbol
 0x10239dfc,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 0x10239e2c,global,??_7?$FilteredSelection@VInstance@RBX@@@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
 0x102318b4,global,??_7TextXmlWriter@@6B@
+0x10231980,global,??_7TextXmlWriterWithEmbeddedContent@@6B@
 0x102505ac,global,??_7Peer@Network@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@
 0x10250574,global,??_7Peer@Network@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@2@@
 0x10250544,global,??_7Peer@Network@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@2@@
