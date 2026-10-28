@@ -74,7 +74,7 @@ private:
 	mutable RaiseRange* raiseRange;                          // 0x14
 };
 
-// STUB: WEBSERVICE 0x1001acb0
+// FUNCTION: WEBSERVICE 0x1001acb0
 // RBX::Notifier<RBX::StandardOut,RBX::StandardOutMessage>::addListener
 template <class Source, class Event>
 void Notifier<Source, Event>::addListener(Listener<Source, Event>* listener) const

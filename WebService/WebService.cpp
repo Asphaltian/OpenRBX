@@ -11,12 +11,20 @@ class DataModel;
 }
 
 #include "ErrorUploader.h"
+#include "LogManager.h"
+#include "ThumbnailGenerator.h"
+#include "VersionInfo.h"
+#include "ViewBase.h"
 #include "WebServiceMaps.h"
 #include "decomp.h"
+#include "network/API.h"
 #include "reflection/type.h"
+#include "util/ContentProvider.h"
+#include "util/Profiling.h"
 #include "util/standardout.h"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Workspace.h"
+#include "v8datamodel/factoryregistration.h"
 #include "v8xml/XmlSerializer.h"
 
 #include <G3D/System.h>
@@ -29,8 +37,10 @@ class DataModel;
 #include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/once.hpp>
+#include <boost/tokenizer.hpp>
 #include <map>
 #include <queue>
+#include <shlobj.h>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -44,6 +54,8 @@ static std::string dotVersion;
 
 extern "C" BOOL WINAPI TerminateExtension(DWORD flags);
 
+static boost::scoped_ptr<MainLogManager> mainLogManager;
+
 // VTABLE: WEBSERVICE 0x10261998
 // SIZE 0x28
 class StandardOutLog : public RBX::Listener<RBX::StandardOut, RBX::StandardOutMessage>
@@ -52,51 +64,105 @@ private:
 	boost::shared_ptr<RBX::StandardOut> standardOut; // 0x04
 
 public:
-	StandardOutLog();
-	virtual ~StandardOutLog();
-
 	boost::mutex messagesMutex;                   // 0x0c
 	std::queue<RBX::StandardOutMessage> messages; // 0x14
 
+	// FUNCTION: WEBSERVICE 0x1000d010
+	StandardOutLog() : standardOut(RBX::StandardOut::singleton())
+	{
+		boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
+		RBX::startListening(standardOut, this);
+	}
+
+	// STUB: WEBSERVICE 0x1000d110
+	virtual ~StandardOutLog()
+	{
+		boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
+		RBX::stopListening(standardOut, this);
+	}
+
 protected:
-	virtual void onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage event);
+	// FUNCTION: WEBSERVICE 0x1000d230
+	virtual void onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage event)
+	{
+		boost::mutex::scoped_lock lock(messagesMutex);
+
+		messages.push(event);
+
+		if (messages.size() > 1000) {
+			messages.pop();
+		}
+	}
 };
 
 DECOMP_SIZE_ASSERT(StandardOutLog, 0x28)
 
 static boost::scoped_ptr<StandardOutLog> standardOutLog;
 
-// STUB: WEBSERVICE 0x1000d010
-StandardOutLog::StandardOutLog() : standardOut(RBX::StandardOut::singleton())
-{
-	boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
-	standardOut->addListener(this);
-}
-
-// STUB: WEBSERVICE 0x1000d110
-StandardOutLog::~StandardOutLog()
-{
-	boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
-	standardOut->removeListener(this);
-}
-
-// FUNCTION: WEBSERVICE 0x1000d230
-void StandardOutLog::onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage event)
-{
-	boost::mutex::scoped_lock lock(messagesMutex);
-
-	messages.push(event);
-
-	if (messages.size() > 1000) {
-		messages.pop();
-	}
-}
-
 // STUB: WEBSERVICE 0x1000d380
 static void initRoblox()
 {
-	STUB(0x1000d380);
-	static ErrorUploader errorUploader;
+	static bool firstTime = true;
+	if (!firstTime) {
+		return;
+	}
+
+	firstTime = false;
+	initRobloxFailed = false;
+
+	try {
+		RBX::Profiling::init(true);
+
+		mainLogManager.reset(new MainLogManager("Roblox Web Service"));
+
+		RobloxCrashReporter::silent = true;
+		mainLogManager->WriteCrashDump();
+
+		standardOutLog.reset(new StandardOutLog());
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Intializing Roblox Web Service");
+
+		RBX::ContentProvider::singleton();
+
+		char szPath[MAX_PATH] = "";
+		if (SHGetFolderPathAndSubDir(NULL, CSIDL_COMMON_APPDATA, NULL, 0, "Roblox\\content\\", szPath) != S_OK) {
+			RBX::StandardOut::singleton()->print(
+				RBX::MESSAGE_ERROR,
+				"Unable to find CSIDL_COMMON_APPDATA\\Roblox\\content"
+			);
+		}
+		else {
+			RBX::ContentProvider::singleton().setAssetFolder(szPath);
+		}
+
+		static RBX::FactoryRegistrator registerFactoryObjects;
+		ThumbnailGenerator::classDescriptor();
+
+		RBX::Soundscape::SoundService::soundDisabled = true;
+		RBX::ViewBase::getShadowsEnabled() = false;
+
+		CVersionInfo vi;
+		vi.Load(ATL::_AtlBaseModule.GetModuleInstance());
+
+		std::string v = (LPCSTR) vi.GetFileVersionAsString();
+
+		RBX::Network::API::init(v.c_str());
+
+		boost::tokenizer<boost::char_separator<char> > tokens(v, boost::char_separator<char>(" ,."));
+		for (boost::tokenizer<boost::char_separator<char> >::iterator tok_iter = tokens.begin();
+			 tok_iter != tokens.end();
+			 ++tok_iter) {
+			if (tok_iter != tokens.begin()) {
+				dotVersion += ".";
+			}
+			dotVersion += *tok_iter;
+		}
+
+		static ErrorUploader errorUploader;
+		errorUploader.Upload("http://www.roblox.com/Error/Grid.ashx", true);
+	}
+	catch (...) {
+		initRobloxFailed = true;
+	}
 }
 
 // SIZE 0x2c

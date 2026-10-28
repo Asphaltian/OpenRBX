@@ -725,7 +725,6 @@ address,type,name,module
 0x102f2168,global,_base64Chars,ThumbnailGenerator.obj
 0x102f2268,global,_bad_alloc_Message,StdAfx.obj
 0x102f4fdb,global,firstTime,
-0x102f4fdb,global,firstTime___initRoblox,
 0x102f5228,global,methods,
 0x102f5594,global,standardOut,
 0x102f55a0,global,foo,
@@ -1069,6 +1068,4 @@ address,type,name,module
 0x10301ab8,global,bDynArrWrapper,
 0x10301b08,global,showedMessage,
 0x10301b18,global,errorUploader,
-0x10301b18,global,errorUploader___initRoblox,
 0x10301bd8,global,registerFactoryObjects,
-0x10301bd8,global,registerFactoryObjects___initRoblox,

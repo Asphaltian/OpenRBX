@@ -214,6 +214,8 @@ struct __declspec(uuid("6d7e5c9a-0000-0000-0000-000000000000")) IWebService : pu
 };
 
 // clang-format off
+// SYNTHETIC: WEBSERVICE 0x10217fe0
+// `dynamic initializer for 'mainLogManager''
 // SYNTHETIC: WEBSERVICE 0x10217ff0
 // `dynamic initializer for 'standardOutLog''
 // SYNTHETIC: WEBSERVICE 0x10218000
@@ -224,6 +226,8 @@ struct __declspec(uuid("6d7e5c9a-0000-0000-0000-000000000000")) IWebService : pu
 // `dynamic initializer for 'theExtension''
 // SYNTHETIC: WEBSERVICE 0x102180b0
 // `dynamic initializer for 'Roblox::CWebService::sync''
+// SYNTHETIC: WEBSERVICE 0x10221270
+// `dynamic atexit destructor for 'mainLogManager''
 // SYNTHETIC: WEBSERVICE 0x10221290
 // `dynamic atexit destructor for 'standardOutLog''
 // SYNTHETIC: WEBSERVICE 0x102212b0

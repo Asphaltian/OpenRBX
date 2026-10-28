@@ -8,8 +8,8 @@
 
 #include <atlpath.h>
 #include <boost/scoped_ptr.hpp>
-#include <dbghelp.h>
 #include <exception>
+#include <imagehlp.h>
 #include <string>
 #include <vector>
 #include <windows.h>

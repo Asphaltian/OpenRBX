@@ -126,7 +126,7 @@ static void __cdecl purecallHandler()
 	*p = p[1];
 }
 
-// STUB: WEBSERVICE 0x10002530
+// FUNCTION: WEBSERVICE 0x10002530
 MainLogManager::MainLogManager(const char* productName) : LogManager(productName)
 {
 	RBX::Guid::generateGUID(guid);
