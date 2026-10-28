@@ -15,7 +15,9 @@ class DataModel;
 #include "decomp.h"
 #include "reflection/type.h"
 #include "util/standardout.h"
+#include "v8datamodel/DataModel.h"
 #include "v8datamodel/Workspace.h"
+#include "v8xml/XmlSerializer.h"
 
 #include <G3D/System.h>
 #include <G3D/format.h>
@@ -29,8 +31,10 @@ class DataModel;
 #include <boost/thread/once.hpp>
 #include <map>
 #include <queue>
+#include <sstream>
 #include <stdexcept>
 #include <string>
+#include <vector>
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sWorkspace>();
 
@@ -218,7 +222,11 @@ protected:
 private:
 	friend BOOL WINAPI ::TerminateExtension(DWORD flags);
 
+	HRESULT ReportException(const std::exception& e);
+
 	std::map<std::string, Job>::iterator getJob(wchar_t* jobID);
+	void touch(Job& job, double timeout) { job.expiration = G3D::System::getLocalTime() + timeout; }
+	double secondsToTimeout(const Job& job) { return job.expiration - G3D::System::getLocalTime(); }
 
 	static std::map<std::string, Job> jobs;
 	static boost::mutex sync;
@@ -318,6 +326,15 @@ extern "C" BOOL WINAPI TerminateExtension(DWORD dwFlags)
 
 namespace Roblox {
 
+// STUB: WEBSERVICE 0x1000e3b0
+HRESULT CWebService::ReportException(const std::exception& e)
+{
+	std::stringstream ss;
+	TextXmlWriter::encodedWrite(ss, e.what());
+	errorMessage = ss.str().c_str();
+	return E_FAIL;
+}
+
 // STUB: WEBSERVICE 0x1000e4d0
 HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
 {
@@ -347,10 +364,13 @@ HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
 // STUB: WEBSERVICE 0x1000e650
 HRESULT __stdcall CWebService::TouchJob(wchar_t* jobID, double timeout)
 {
-	boost::mutex::scoped_lock lock(sync);
-
-	std::map<std::string, Job>::iterator job = getJob(jobID);
-	job->second.expiration = G3D::System::getLocalTime() + timeout;
+	try {
+		boost::mutex::scoped_lock lock(sync);
+		touch(getJob(jobID)->second, timeout);
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
 
 	return S_OK;
 }
@@ -365,15 +385,65 @@ HRESULT __stdcall CWebService::OpenJob(wchar_t* jobID, ScriptExecution script, d
 // STUB: WEBSERVICE 0x1000e980
 HRESULT __stdcall CWebService::CloseJob(wchar_t* jobID)
 {
-	STUB(0x1000e980);
-	return E_NOTIMPL;
+	try {
+		boost::shared_ptr<RBX::DataModel> dataModel;
+		{
+			boost::mutex::scoped_lock lock(sync);
+			std::map<std::string, Job>::iterator iter = jobs.find(std::string(ATL::CStringA(jobID)));
+			if (iter != jobs.end()) {
+				dataModel = iter->second.dataModel;
+				jobs.erase(iter);
+			}
+		}
+
+		if (dataModel) {
+			RBX::DataModel::closeDataModel(dataModel, true);
+			RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Closed Job %s", ATL::CStringA(jobID));
+		}
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
+
+	return S_OK;
 }
 
 // STUB: WEBSERVICE 0x1000ebd0
 HRESULT __stdcall CWebService::CloseTimedoutJobs(int* result)
 {
-	STUB(0x1000ebd0);
-	return E_NOTIMPL;
+	*result = 0;
+
+	try {
+		std::vector<boost::shared_ptr<RBX::DataModel> > dataModels;
+		{
+			boost::mutex::scoped_lock lock(sync);
+
+			std::map<std::string, Job> keep;
+			std::map<std::string, Job>::iterator end = jobs.end();
+			for (std::map<std::string, Job>::iterator iter = jobs.begin(); iter != end; ++iter) {
+				if (secondsToTimeout(iter->second) < 0) {
+					dataModels.push_back(iter->second.dataModel);
+				}
+				else {
+					keep.insert(*iter);
+				}
+			}
+
+			jobs = keep;
+		}
+
+		for (std::vector<boost::shared_ptr<RBX::DataModel> >::iterator iter = dataModels.begin();
+			 iter != dataModels.end();
+			 ++iter) {
+			RBX::DataModel::closeDataModel(*iter, true);
+			(*result)++;
+		}
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
+
+	return S_OK;
 }
 
 // STUB: WEBSERVICE 0x1000ee00
@@ -383,20 +453,37 @@ HRESULT __stdcall CWebService::CloseOrphanedJobs(Strings activeJobs, int* result
 	return E_NOTIMPL;
 }
 
-// STUB: WEBSERVICE 0x1000f0e0
+// FUNCTION: WEBSERVICE 0x1000f0e0
 HRESULT __stdcall CWebService::CloseAllJobs()
 {
-	STUB(0x1000f0e0);
-	return E_NOTIMPL;
+	try {
+		boost::mutex::scoped_lock lock(sync);
+
+		std::map<std::string, Job>::iterator end = jobs.end();
+		for (std::map<std::string, Job>::iterator iter = jobs.begin(); iter != end; ++iter) {
+			RBX::DataModel::closeDataModel(iter->second.dataModel, true);
+			RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Closed Job %s", iter->first.c_str());
+		}
+
+		jobs.clear();
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
+
+	return S_OK;
 }
 
 // STUB: WEBSERVICE 0x1000f2e0
 HRESULT __stdcall CWebService::GetTimeout(wchar_t* jobID, double* timeout)
 {
-	boost::mutex::scoped_lock lock(sync);
-
-	std::map<std::string, Job>::iterator job = getJob(jobID);
-	*timeout = job->second.expiration - G3D::System::getLocalTime();
+	try {
+		boost::mutex::scoped_lock lock(sync);
+		*timeout = secondsToTimeout(getJob(jobID)->second);
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
 
 	return S_OK;
 }

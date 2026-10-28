@@ -34,6 +34,9 @@ public:
 		undefined m_unk0x00[0xc]; // 0x00
 	};
 
+	static boost::shared_ptr<DataModel> createDataModel();
+	static void closeDataModel(boost::shared_ptr<DataModel> dataModel, bool joinRunThread);
+
 	Workspace* getWorkspace() const { return workspace.get(); }
 	float step(float distributedGameTime);
 };

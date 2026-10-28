@@ -33,6 +33,19 @@ DataModel::Lock::~Lock()
 	STUB(0x100743f0);
 }
 
+// STUB: WEBSERVICE 0x1007bb20
+void DataModel::closeDataModel(boost::shared_ptr<DataModel> dataModel, bool joinRunThread)
+{
+	STUB(0x1007bb20);
+}
+
+// STUB: WEBSERVICE 0x1007c120
+boost::shared_ptr<DataModel> DataModel::createDataModel()
+{
+	STUB(0x1007c120);
+	return boost::shared_ptr<DataModel>();
+}
+
 } // namespace RBX
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::sServiceProvider>();
