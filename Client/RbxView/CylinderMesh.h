@@ -23,11 +23,6 @@ private:
 	CylinderAlongXMesh(const G3D::Vector3& size, NormalId decalFace);
 
 	CylinderAlongXMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile);
-
-	// clang-format off
-	// SYNTHETIC: WEBSERVICE 0x1018a8d0
-	// RBX::View::CylinderAlongXMesh::`scalar deleting destructor'
-	// clang-format on
 };
 
 DECOMP_SIZE_ASSERT(CylinderAlongXMesh, 0x50)

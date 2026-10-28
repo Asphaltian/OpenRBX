@@ -4957,6 +4957,7 @@ address,type,symbol
 0x102d584c,global,??_R0?AVICharacterSubject@RBX@@@8
 0x102d5870,global,??_R0?AV?$Listener@VRunService@RBX@@VStepped@2@@RBX@@@8
 0x102d590c,global,??_R0?AVState@Humanoid@RBX@@@8
+0x102d5930,global,??_R0?AVRunning@RBX@@@8
 0x102d594c,global,??_R0?AVWeld@RBX@@@8
 0x102d5964,global,??_R0?AVTool@RBX@@@8
 0x102d5a5c,global,??_R0?AV?$PropDescriptor@VHumanoid@RBX@@M@Reflection@RBX@@@8

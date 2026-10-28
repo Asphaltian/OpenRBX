@@ -50,9 +50,9 @@ public:
 	static Extents computeExtents(const std::vector<boost::weak_ptr<PartInstance> >& parts);
 	static bool hitObjectOrPlane(
 		const ContactManager& contactManager,
-		const G3D::Ray& unitMouseRay,
-		const G3D::Array<Primitive*>* ignore,
-		G3D::Vector3& hitPoint
+		const G3D::Ray& unitSearchRay,
+		const G3D::Array<Primitive*>* ignorePrims,
+		G3D::Vector3& hit
 	);
 	static bool anyPartAlive(const std::vector<boost::weak_ptr<PartInstance> >& parts);
 	static void getPrimitivesConst(const Instance* instance, std::vector<const Primitive*>& primitives);

@@ -2,6 +2,7 @@
 
 #include "appdraw/DrawAdorn.h"
 #include "humanoid/FallingDown.h"
+#include "humanoid/Running.h"
 #include "network/Players.h"
 #include "rbxgraphics/Adorn.h"
 #include "reflection/property.h"
@@ -301,10 +302,23 @@ boost::shared_ptr<AutoJoint> newJoint(bool animated)
 	return s;
 }
 
-// STUB: WEBSERVICE 0x100a1b00
+// FUNCTION: WEBSERVICE 0x100a1b00
 void Humanoid::render3dAdorn(Adorn* adorn)
 {
-	STUB(0x100a1b00);
+	if (walkMode == CLICK_TO_MOVE) {
+		if (this == getLocalHumanoidFromContext(this)) {
+			if (Workspace::findWorkspace(this)) {
+				G3D::Vector3 worldPosition;
+				if (hasWalkToPoint(worldPosition)) {
+					renderWaypoint(adorn, worldPosition);
+				}
+			}
+		}
+	}
+
+	if (Running* running = dynamic_cast<Running*>(currentState.get())) {
+		running->render3dAdorn(adorn);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a2010

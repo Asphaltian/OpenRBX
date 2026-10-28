@@ -177,7 +177,6 @@ address,size,symbol,name
 0x10177c40,0x8ec,??$meshFace@$02@@YAXABVVector3@G3D@@MVRenderSurfaceTypes@View@RBX@@MAAV?$ReferenceCountedPointer@VLevel@Mesh@Render@RBX@@@1@@Z,
 0x10178530,0x8ec,??$meshFace@$03@@YAXABVVector3@G3D@@MVRenderSurfaceTypes@View@RBX@@MAAV?$ReferenceCountedPointer@VLevel@Mesh@Render@RBX@@@1@@Z,
 0x10178e20,0x8ec,??$meshFace@$04@@YAXABVVector3@G3D@@MVRenderSurfaceTypes@View@RBX@@MAAV?$ReferenceCountedPointer@VLevel@Mesh@Render@RBX@@@1@@Z,
-0x10179d10,0x754,??0BrickMesh@View@RBX@@AAE@ABVVector3@G3D@@VRenderSurfaceTypes@12@VBrickColor@2@@Z,
 0x1017aaa0,0x120,?create@BrickMesh@View@RBX@@SA?AV?$ReferenceCountedPointer@VMesh@Render@RBX@@@G3D@@ABVVector3@5@VRenderSurfaceTypes@23@VBrickColor@3@@Z,
 0x1019cc30,0x38,??0ChangePropertyItem@Replicator@Network@RBX@@QAE@AAV123@ABV?$shared_ptr@$$CBVInstance@RBX@@@boost@@ABVPropertyDescriptor@Reflection@3@@Z,
 0x101a1c20,0x36c,?onPropertyChanged@Replicator@Network@RBX@@IAEXV?$shared_ptr@VInstance@RBX@@@boost@@PBVPropertyDescriptor@Reflection@3@@Z,

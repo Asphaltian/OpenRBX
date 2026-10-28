@@ -121,7 +121,7 @@ public:
 		const G3D::Array<const Primitive*>* ignore,
 		const HitTestFilter* filter,
 		Vector3& hitPoint,
-		bool& hitSurface
+		bool& hitSurface = ignoreBool
 	) const;
 
 	Primitive* getHit(

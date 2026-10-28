@@ -31,6 +31,9 @@ public:
 		BrickColor color
 	);
 	static void flushCache();
+
+	// SYNTHETIC: WEBSERVICE 0x1018a8d0
+	// RBX::View::BrickMesh::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(BrickMesh, 0x50)

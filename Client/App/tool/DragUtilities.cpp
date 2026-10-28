@@ -3,8 +3,10 @@
 #include "decomp.h"
 #include "tool/Dragger.h"
 #include "util/Math.h"
+#include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Workspace.h"
+#include "v8world/SpatialHash.h"
 #include "v8world/World.h"
 
 namespace RBX {
@@ -44,16 +46,25 @@ void DragUtilities::instancesToParts(
 	}
 }
 
-// STUB: WEBSERVICE 0x100a6b70
+// FUNCTION: WEBSERVICE 0x100a6b70
 bool DragUtilities::hitObjectOrPlane(
 	const ContactManager& contactManager,
-	const G3D::Ray& unitMouseRay,
-	const G3D::Array<Primitive*>* ignore,
-	G3D::Vector3& hitPoint
+	const G3D::Ray& unitSearchRay,
+	const G3D::Array<Primitive*>* ignorePrims,
+	G3D::Vector3& hit
 )
 {
-	STUB(0x100a6b70);
-	return false;
+	G3D::Ray searchRay = MouseCommand::getSearchRay(unitSearchRay);
+
+	if (!contactManager.getHit(searchRay, (const G3D::Array<const Primitive*>*) ignorePrims, NULL, hit)) {
+		if (!Math::intersectRayPlane(searchRay, G3D::Plane(G3D::Vector3::unitY(), G3D::Vector3::zero()), hit)) {
+			hit = G3D::Vector3::zero();
+			return false;
+		}
+	}
+
+	hit = Dragger::toGrid(hit);
+	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x100a6cd0
