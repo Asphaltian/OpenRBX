@@ -374,8 +374,6 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100079f0
 	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::~FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>
-	// TEMPLATE: WEBSERVICE 0x10007a40
-	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::getClassName
 	// TEMPLATE: WEBSERVICE 0x10007a60
 	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007b20
@@ -592,8 +590,6 @@ public:
 	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::~FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x10094610
 	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
-	// TEMPLATE: WEBSERVICE 0x10094d60
-	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1009a8f0
 	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::~FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>
 	// TEMPLATE: WEBSERVICE 0x1009ab10
@@ -976,16 +972,12 @@ public:
 	// RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::~FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>
 	// TEMPLATE: WEBSERVICE 0x10196830
 	// RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>
-	// TEMPLATE: WEBSERVICE 0x10197150
-	// RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::getClassName
 	// TEMPLATE: WEBSERVICE 0x10197d40
 	// RBX::DescribedCreatable<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10199290
 	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::~FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>
 	// TEMPLATE: WEBSERVICE 0x10199360
 	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>
-	// TEMPLATE: WEBSERVICE 0x1019a190
-	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1019aa50
 	// RBX::DescribedCreatable<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1019b3a0
