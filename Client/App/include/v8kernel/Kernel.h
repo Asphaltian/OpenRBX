@@ -41,6 +41,9 @@ public:
 	float connectorSpringEnergy() const;
 	float bodyKineticEnergy() const;
 
+	// FUNCTION: WEBSERVICE 0x100714e0
+	float totalKineticEnergy() const { return connectorSpringEnergy() + bodyKineticEnergy(); }
+
 	void insertConnector(Connector* connector);
 	void insertConnector2ndPass(Connector* connector);
 	void removeConnector(Connector* connector);

@@ -7006,6 +7006,7 @@ address,type,symbol
 0x10301aa0,global,flag___RBX::Name::declare<&RBX::sWorkspace>
 0x10301aac,global,flag___RBX::Name::declare<&RBX::Soundscape::sSoundService>
 0x10301ab0,global,flag___RBX::Name::declare<&RBX::Soundscape::sSoundChannel>
+0x10301ab4,global,flag___RBX::ServiceProvider::getClassIndex<RBX::ScriptContext>
 0x10301abc,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::ScriptContext>
 0x10301ac0,global,??_B?1???$doGetClassIndex@VScriptContext@RBX@@@ServiceProvider@RBX@@CAIXZ@51
 0x10301ac4,global,n___RBX::Name::doDeclare<&RBX::Soundscape::sSoundChannel>

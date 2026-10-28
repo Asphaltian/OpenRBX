@@ -2,6 +2,9 @@
 #define V8DATAMODEL_DATAMODEL_H
 
 #include "decomp.h"
+#include "util/Evaluator.h"
+#include "util/Events.h"
+#include "util/RunStateOwner.h"
 #include "v8tree/Service.h"
 #include "v8tree/Verb.h"
 
@@ -26,10 +29,13 @@ class Workspace;
 extern const char sDataModel[];
 
 // SIZE 0x1fc
-class DataModel : public DescribedNonCreatable<DataModel, ServiceProvider, sDataModel>, public VerbContainer
+class DataModel : public DescribedNonCreatable<DataModel, ServiceProvider, sDataModel>,
+				  public VerbContainer,
+				  public IDataState,
+				  public Evaluator,
+				  public Listener<RunService, RunTransition>
 {
 private:
-	undefined m_unk0x170[0x190 - 0x170];                      // 0x170
 	boost::shared_ptr<LocalBackpack> localBackpack;           // 0x190
 	boost::shared_ptr<Workspace> workspace;                   // 0x198
 	boost::shared_ptr<RunService> runService;                 // 0x1a0
@@ -44,9 +50,6 @@ private:
 	bool dirty;                                               // 0x1ec
 	bool isInitialized;                                       // 0x1ed
 	boost::shared_ptr<boost::recursive_mutex> mutex;          // 0x1f0
-
-	static std::string doHttpGet(std::string url);
-	static std::string doHttpPost(std::string url, std::string data);
 
 public:
 	// SIZE 0xc
@@ -80,8 +83,17 @@ public:
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > get(ContentId contentId);
 	void clearContents();
 
+	virtual void setDirty(bool dirty) { this->dirty = dirty; }
+	virtual bool isDirty() const { return dirty; }
+
+	virtual bool isStackTooBig() const { return getStackSize() > 10; }
+
 	Workspace* getWorkspace() const { return workspace.get(); }
 	float step(float distributedGameTime);
+	float getSimTime() const;
+	TimeState* getTimeState();
+
+	virtual std::string evaluate(const std::string& valueName) const;
 
 	// FUNCTION: WEBSERVICE 0x10071420
 	void setUiMessage(std::string message) { uiMessage = message; }
@@ -91,6 +103,33 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x10071490
 	void setUiMessageBrickCount() { uiMessage = "[[[progress]]]"; }
+
+protected:
+	virtual void onChildAdded(Instance* child);
+
+	virtual void onChildChanged(Instance* instance, const PropertyChanged& event)
+	{
+		ServiceProvider::onChildChanged(instance, event);
+		setDirty(true);
+	}
+
+	virtual void onDescendentAdded(Instance* instance)
+	{
+		ServiceProvider::onDescendentAdded(instance);
+		setDirty(true);
+	}
+
+	virtual void onDescendentRemoving(const boost::shared_ptr<Instance>& instance)
+	{
+		ServiceProvider::onDescendentRemoving(instance);
+		setDirty(true);
+	}
+
+	virtual void onEvent(const RunService* source, RunTransition event);
+
+private:
+	static std::string doHttpGet(std::string url);
+	static std::string doHttpPost(std::string url, std::string data);
 };
 
 // clang-format off

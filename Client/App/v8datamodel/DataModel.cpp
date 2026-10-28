@@ -6,6 +6,8 @@
 #include "reflection/signal.h"
 #include "util/ContentProvider.h"
 #include "util/Http.h"
+#include "util/IMetric.h"
+#include "util/Log.h"
 #include "util/Name.h"
 #include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/Backpack.h"
@@ -13,8 +15,14 @@
 #include "v8datamodel/JointsService.h"
 #include "v8datamodel/LocalBackpack.h"
 #include "v8datamodel/Teams.h"
+#include "v8datamodel/TimeState.h"
+#include "v8datamodel/Workspace.h"
+#include "v8kernel/Kernel.h"
 #include "v8tree/Service.h"
+#include "v8world/Contact.h"
+#include "v8world/World.h"
 
+#include <G3D/format.h>
 #include <sstream>
 
 namespace RBX {
@@ -129,12 +137,161 @@ void DataModel::close()
 	verb->doIt(NULL);
 }
 
+// FUNCTION: WEBSERVICE 0x10071890
+static std::string report(const G3D::Stopwatch& timer)
+{
+	char buffer[256];
+	if (timer.smoothElapsedTime() > 0) {
+		std::string t = Log::formatTime(timer.smoothElapsedTime());
+		sprintf(buffer, "%s (%.3gfps)", t.c_str(), 1.0 / timer.smoothElapsedTime());
+		return buffer;
+	}
+
+	return Log::formatTime(timer.smoothElapsedTime());
+}
+
+// FUNCTION: WEBSERVICE 0x100725c0
+void DataModel::onChildAdded(Instance* child)
+{
+	ServiceProvider::onChildAdded(child);
+
+	if (child->getClassName() == "NetworkClient") {
+		Verb* verb = getVerb("LockPlayMode");
+		if (verb) {
+			verb->doIt(NULL);
+		}
+
+		workspace->setNullMouseCommand();
+	}
+}
+
 // STUB: WEBSERVICE 0x10072640
 float DataModel::step(float distributedGameTime)
 {
 	STUB(0x10072640);
 
 	return 0.0f;
+}
+
+// FUNCTION: WEBSERVICE 0x10072810
+void DataModel::onEvent(const RunService* source, RunTransition event)
+{
+	switch (event.newState) {
+	case RS_NORMAL:
+		if (event.oldState == RS_RUNNING) {
+			workspace->reset();
+		}
+		timeState->clear();
+		break;
+	case RS_RUNNING:
+		workspace->start();
+		break;
+	case RS_PAUSED:
+		workspace->stop();
+		break;
+	}
+}
+
+float DataModel::getSimTime() const
+{
+	return timeState->totalVirtualTime;
+}
+
+// FUNCTION: WEBSERVICE 0x10072860
+std::string DataModel::evaluate(const std::string& valueName) const
+{
+	World* world = workspace->getWorld();
+
+	if (valueName == "timer") {
+		return StringConverter<float>::convertToString(getSimTime());
+	}
+	if (valueName == "FPS") {
+		return G3D::format("%.3g", timeState->fpsStopwatch.smoothFPS());
+	}
+	if (valueName == "simDC") {
+		return report(timeState->simulationStopwatch);
+	}
+	if (valueName == "drawId") {
+		return StringConverter<int>::convertToString(drawId);
+	}
+	if (valueName == "graphicsMode") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "FRM") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "Shadows") {
+		return tempMetric->getMetric(valueName);
+	}
+
+	if (valueName == "antiAliasing") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "bevels") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "videoMemory") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "GfxTime") {
+		return tempMetric->getMetric(valueName);
+	}
+
+	if (valueName == "numPrimitives") {
+		return StringConverter<int>::convertToString(world->getNumPrimitives());
+	}
+	if (valueName == "numJoints") {
+		return StringConverter<int>::convertToString(world->getNumJoints());
+	}
+	if (valueName == "numContacts") {
+		return StringConverter<int>::convertToString(world->getNumContacts());
+	}
+	if (valueName == "numContactsInCollisionStage") {
+		return StringConverter<int>::convertToString(world->getMetric(IWorldStage::NUM_CONTACTSTAGE_CONTACTS));
+	}
+	if (valueName == "numSteppingContacts") {
+		return StringConverter<int>::convertToString(world->getMetric(IWorldStage::NUM_STEPPING_CONTACTS));
+	}
+	if (valueName == "numTouchingContacts") {
+		return StringConverter<int>::convertToString(world->getMetric(IWorldStage::NUM_TOUCHING_CONTACTS));
+	}
+	if (valueName == "maxTreeDepth") {
+		return StringConverter<int>::convertToString(world->getMetric(IWorldStage::MAX_TREE_DEPTH));
+	}
+	if (valueName == "contactPairHitRatio") {
+		return StringConverter<float>::convertToString(BlockBlockContact::contactPairHitRatio());
+	}
+
+	if (valueName == "numLinkCalls") {
+		return StringConverter<int>::convertToString(world->getNumLinkCalls());
+	}
+	if (valueName == "numHashNodes") {
+		return StringConverter<int>::convertToString(world->getNumHashNodes());
+	}
+	if (valueName == "maxBucketSize") {
+		return StringConverter<int>::convertToString(world->getMaxBucketSize());
+	}
+
+	if (valueName == "numBodies") {
+		return StringConverter<int>::convertToString(world->getNumBodies());
+	}
+	if (valueName == "numConstraints") {
+		return StringConverter<int>::convertToString(world->getNumConstraints());
+	}
+	if (valueName == "numPoints") {
+		return StringConverter<int>::convertToString(world->getNumPoints());
+	}
+	if (valueName == "energyBody") {
+		return StringConverter<float>::convertToString(world->getKernel()->bodyKineticEnergy());
+	}
+	if (valueName == "energyConnector") {
+		return StringConverter<float>::convertToString(world->getKernel()->connectorSpringEnergy());
+	}
+	if (valueName == "energyTotal") {
+		return StringConverter<float>::convertToString(world->getKernel()->totalKineticEnergy());
+	}
+
+	return "?";
 }
 
 // STUB: WEBSERVICE 0x10073460

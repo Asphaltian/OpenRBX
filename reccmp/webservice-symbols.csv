@@ -53,7 +53,6 @@ address,size,symbol,name
 0x1006e390,0x7a,??$create@VFlag@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VFlag@RBX@@@boost@@XZ,
 0x1006e410,0xaf,?create@Creator@?$FactoryProduct@VFlag@RBX@@VTool@2@$1?sFlag@2@3QBDB@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ,
 0x10071420,0x50,?setUiMessage@DataModel@RBX@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
-0x10072860,0x424,?evaluate@DataModel@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABV34@@Z,
 0x10073e70,0x97,??$create@VWorkspace@RBX@@PAVDataModel@2@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VWorkspace@RBX@@@boost@@PAVDataModel@1@@Z,
 0x10073f10,0x78,??$create@VGuiRoot@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VGuiRoot@RBX@@@boost@@XZ,
 0x10076300,0x78,??$create@VLocalBackpackItem@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VLocalBackpackItem@RBX@@@boost@@XZ,

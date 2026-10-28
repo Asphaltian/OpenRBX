@@ -168,15 +168,12 @@ private:
 
 DECOMP_SIZE_ASSERT(BlockBlockContact, 0x78)
 
+// FUNCTION: WEBSERVICE 0x100714b0
 inline float BlockBlockContact::contactPairHitRatio()
 {
 	int denom = contactPairMatches + contactPairMisses;
 
-	if (denom == 0) {
-		return -1.0f;
-	}
-
-	return (float) contactPairMatches / denom;
+	return denom == 0 ? -1.0f : (float) contactPairMatches / denom;
 }
 
 // FUNCTION: WEBSERVICE 0x10107fd0
