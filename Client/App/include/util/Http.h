@@ -29,7 +29,7 @@ public:
 	static bool isCached(const char* url);
 
 	// SYNTHETIC: WEBSERVICE 0x1000d910
-	// RBX::Http::~Http
+	// ??1Http@RBX@@QAE@XZ
 };
 
 DECOMP_SIZE_ASSERT(Http, 0x38)

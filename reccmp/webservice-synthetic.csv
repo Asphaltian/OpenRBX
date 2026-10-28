@@ -56,7 +56,7 @@ address,type,symbol
 0x1001b1f0,stub,?push_back@?$vector@PAV?$Listener@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@V?$allocator@PAV?$Listener@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@@std@@@std@@QAEXABQAV?$Listener@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@@Z
 0x1001c240,stub,??$create@VScriptContext@RBX@@@ServiceProvider@RBX@@QBEPAVScriptContext@1@XZ
 0x1001d5e0,stub,??$find@VScriptContext@RBX@@@ServiceProvider@RBX@@QBEPAVScriptContext@1@XZ
-0x1001e350,stub,??$doGetClassIndex@VScriptContext@RBX@@@ServiceProvider@RBX@@CAIXZ
+0x1001e350,synthetic,??$doGetClassIndex@VScriptContext@RBX@@@ServiceProvider@RBX@@CAIXZ
 0x100210d0,synthetic,??_ECWebService@Roblox@@WBCM@AEPAXI@Z
 0x100211d0,synthetic,??_ECWebService@Roblox@@W3AEPAXI@Z
 0x10024110,synthetic,?AtlSoapGetArrayDims@@YAIPBH@Z

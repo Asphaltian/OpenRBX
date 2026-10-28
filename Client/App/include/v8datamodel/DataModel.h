@@ -5,6 +5,7 @@
 #include "v8tree/Service.h"
 
 #include <boost/shared_ptr.hpp>
+#include <boost/thread/recursive_mutex.hpp>
 
 namespace RBX {
 
@@ -31,7 +32,8 @@ public:
 		~Lock();
 
 	private:
-		undefined m_unk0x00[0xc]; // 0x00
+		boost::shared_ptr<boost::recursive_mutex> mutex; // 0x00
+		boost::recursive_mutex::scoped_lock* lock;       // 0x08
 	};
 
 	static boost::shared_ptr<DataModel> createDataModel();

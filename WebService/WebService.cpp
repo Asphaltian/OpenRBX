@@ -19,6 +19,7 @@ class DataModel;
 #include "decomp.h"
 #include "network/API.h"
 #include "reflection/type.h"
+#include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
 #include "util/Profiling.h"
 #include "util/standardout.h"
@@ -295,17 +296,19 @@ private:
 	double secondsToTimeout(const Job& job) { return job.expiration - G3D::System::getLocalTime(); }
 
 	template <class T>
-	T* allocate(int count)
+	T* allocate(T*, int count)
 	{
 		if (count == 0) {
 			return NULL;
 		}
 
-		size_t bytes = count * sizeof(T);
-		T* items = (T*) GetMemMgr()->Allocate(bytes);
-		memset(items, 0, bytes);
+		T* items = (T*) GetMemMgr()->Allocate(count * sizeof(T));
+		memset(items, 0, count * sizeof(T));
 		return items;
 	}
+
+	template <class T>
+	void convertToLua(const RBX::Reflection::Value& source, T& dest);
 
 	static std::map<std::string, Job> jobs;
 	static boost::mutex sync;
@@ -420,7 +423,7 @@ HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
 	boost::mutex::scoped_lock lock(sync);
 
 	result->count = jobs.size();
-	result->items = allocate<wchar_t*>(result->count);
+	result->items = allocate(result->items, result->count);
 
 	int i = 0;
 	std::map<std::string, Job>::iterator iter = jobs.begin();
@@ -626,11 +629,220 @@ std::map<std::string, CWebService::Job>::iterator CWebService::getJob(wchar_t* j
 	return job;
 }
 
-// STUB: WEBSERVICE 0x1000f4e0
+template <class T>
+static void convert(const T& source, RBX::Reflection::Value& dest)
+{
+	switch (source.type) {
+	case LUA_TNUMBER:
+		dest = std::string(ATL::CStringA(source.value));
+		dest.convert<double>();
+		break;
+
+	case LUA_TBOOLEAN:
+		dest = std::string(ATL::CStringA(source.value));
+		dest.convert<bool>();
+		break;
+
+	case LUA_TSTRING:
+		dest = std::string(ATL::CStringA(source.value));
+		break;
+
+	case LUA_TTABLE: {
+		dest = std::vector<RBX::Reflection::Value>(source.tableLength);
+
+		std::vector<RBX::Reflection::Value>& table = dest.convert<std::vector<RBX::Reflection::Value> >();
+		for (int i = 0; i < source.tableLength; ++i) {
+			convert(source.table[i], table[i]);
+		}
+		break;
+	}
+	}
+}
+
+template <class T>
+void CWebService::convertToLua(const RBX::Reflection::Value& source, T& dest)
+{
+	if (source.isType<void>()) {
+		dest.type = (LuaType) LUA_TNIL;
+		return;
+	}
+
+	if (source.isType<int>()) {
+		dest.type = (LuaType) LUA_TNUMBER;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<float>()) {
+		dest.type = (LuaType) LUA_TNUMBER;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<double>()) {
+		dest.type = (LuaType) LUA_TNUMBER;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<bool>()) {
+		dest.type = (LuaType) LUA_TBOOLEAN;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<std::string>()) {
+		dest.type = (LuaType) LUA_TSTRING;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<RBX::ContentId>()) {
+		dest.type = (LuaType) LUA_TSTRING;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<std::vector<RBX::Reflection::Value> >()) {
+		const std::vector<RBX::Reflection::Value>& table = source.cast<const std::vector<RBX::Reflection::Value>&>();
+
+		dest.type = (LuaType) LUA_TTABLE;
+		dest.tableLength = table.size();
+		dest.table = allocate(dest.table, table.size());
+		for (size_t i = 0; i < table.size(); ++i) {
+			convertToLua(table[i], dest.table[i]);
+		}
+		return;
+	}
+	dest.type = (LuaType) LUA_TNIL;
+}
+
+template <>
+void convert<LuaValue10>(const LuaValue10& source, RBX::Reflection::Value& dest)
+{
+	switch (source.type) {
+	case LUA_TNUMBER:
+		dest = std::string(ATL::CStringA(source.value));
+		dest.convert<double>();
+		break;
+
+	case LUA_TBOOLEAN:
+		dest = std::string(ATL::CStringA(source.value));
+		dest.convert<bool>();
+		break;
+
+	case LUA_TSTRING:
+		dest = std::string(ATL::CStringA(source.value));
+		break;
+	}
+}
+
+template <>
+void CWebService::convertToLua<LuaValue10>(const RBX::Reflection::Value& source, LuaValue10& dest)
+{
+	if (source.isType<void>()) {
+		dest.type = (LuaType) LUA_TNIL;
+		return;
+	}
+
+	if (source.isType<int>()) {
+		dest.type = (LuaType) LUA_TNUMBER;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<float>()) {
+		dest.type = (LuaType) LUA_TNUMBER;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<double>()) {
+		dest.type = (LuaType) LUA_TNUMBER;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<bool>()) {
+		dest.type = (LuaType) LUA_TBOOLEAN;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<std::string>()) {
+		dest.type = (LuaType) LUA_TSTRING;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+
+	if (source.isType<RBX::ContentId>()) {
+		dest.type = (LuaType) LUA_TSTRING;
+		ATL::CComBSTR str(source.get<std::string>().c_str());
+		dest.value = str.Detach();
+		return;
+	}
+	dest.type = (LuaType) LUA_TNIL;
+}
+
+// FUNCTION: WEBSERVICE 0x1000f4e0
 HRESULT __stdcall CWebService::Execute(wchar_t* jobID, ScriptExecution script, LuaArguments* result)
 {
-	STUB(0x1000f4e0);
-	return E_NOTIMPL;
+	try {
+		std::string code;
+		code = ATL::CStringA(script.script);
+		if (RBX::ContentProvider::isHttpUrl(code)) {
+			std::auto_ptr<std::istream> stream = RBX::ContentProvider::singleton().getContent(RBX::ContentId(code));
+			std::stringstream out;
+			out << stream->rdbuf();
+			code = out.str();
+		}
+
+		boost::shared_ptr<RBX::DataModel> dataModel;
+		{
+			boost::mutex::scoped_lock lock(sync);
+			std::map<std::string, Job>::iterator iter = getJob(jobID);
+			dataModel = iter->second.dataModel;
+		}
+
+		std::auto_ptr<std::vector<RBX::Reflection::Value> > tuple;
+		{
+			std::vector<RBX::Reflection::Value> args(script.arguments.count);
+			for (int i = 0; i < script.arguments.count; ++i) {
+				convert(script.arguments.items[i], args[i]);
+			}
+
+			RBX::DataModel::Lock lock(dataModel);
+			RBX::ScriptContext* context = dataModel ? dataModel->create<RBX::ScriptContext>() : NULL;
+			tuple = context->executeInNewThread(
+				RBX::Security::TrustedWebService,
+				code.c_str(),
+				ATL::CStringA(script.name),
+				args
+			);
+		}
+
+		result->count = tuple->size();
+		result->items = allocate(result->items, tuple->size());
+		for (size_t i = 0; i < tuple->size(); ++i) {
+			convertToLua((*tuple)[i], result->items[i]);
+		}
+	}
+	catch (std::exception& e) {
+		return ReportException(e);
+	}
+
+	return S_OK;
 }
 
 // FUNCTION: WEBSERVICE 0x1000f990
@@ -693,7 +905,7 @@ HRESULT __stdcall CWebService::GetStandardOutMessages(int maxCount, StandardOutM
 		}
 
 		result->count = standardOutLog->messages.size();
-		result->items = allocate<StandardOutMessage>(result->count);
+		result->items = allocate(result->items, result->count);
 
 		int i = 0;
 		while (standardOutLog->messages.size() > 0) {
