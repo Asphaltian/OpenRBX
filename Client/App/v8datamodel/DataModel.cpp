@@ -12,6 +12,7 @@
 #include "util/Log.h"
 #include "util/Name.h"
 #include "util/Sound.h"
+#include "util/boost.hpp"
 #include "util/standardout.h"
 #include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/Backpack.h"
@@ -31,6 +32,8 @@
 #include "v8xml/XmlSerializer.h"
 
 #include <G3D/format.h>
+#include <boost/bind.hpp>
+#include <boost/thread/thread.hpp>
 #include <sstream>
 
 namespace RBX {
@@ -506,18 +509,34 @@ boost::shared_ptr<DataModel> DataModel::createDataModel()
 	return dataModel;
 }
 
-// STUB: WEBSERVICE 0x1007c4a0
+// FUNCTION: WEBSERVICE 0x1007c4a0
 std::string DataModel::httpGet(std::string url, bool synchronous)
 {
-	STUB(0x1007c4a0);
-	return std::string();
+	if (synchronous) {
+		return doHttpGet(url);
+	}
+
+	if (url.size() > 0) {
+		boost::function0<void> f = boost::bind(&doHttpGet, url);
+		boost::function0<void> g = boost::bind(&StandardOut::print_exception, f, MESSAGE_ERROR, false);
+		boost::thread(background_function(g, "rbx_httpGet"));
+	}
+
+	return "";
 }
 
-// STUB: WEBSERVICE 0x1007c6b0
+// FUNCTION: WEBSERVICE 0x1007c6b0
 std::string DataModel::httpPost(std::string url, std::string data, bool synchronous)
 {
-	STUB(0x1007c6b0);
-	return std::string();
+	if (synchronous) {
+		return doHttpPost(url, data);
+	}
+
+	boost::function0<void> f = boost::bind(&doHttpPost, url, data);
+	boost::function0<void> g = boost::bind(&StandardOut::print_exception, f, MESSAGE_ERROR, false);
+	boost::thread(background_function(g, "rbx_httpPost"));
+
+	return "";
 }
 
 } // namespace RBX
