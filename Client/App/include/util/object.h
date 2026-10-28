@@ -142,6 +142,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateP>
 	// TEMPLATE: WEBSERVICE 0x10077250
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateV>
+	// TEMPLATE: WEBSERVICE 0x100774c0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Motor>
 	// TEMPLATE: WEBSERVICE 0x10077730
 	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100779a0

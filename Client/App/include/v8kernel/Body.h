@@ -146,6 +146,7 @@ public:
 
 	void setCoordinateFrame(const CoordinateFrame& value);
 	void setVelocity(const Velocity& velocity);
+	void setCanThrottle(bool value) { canThrottle = value; }
 	void setMass(float value);
 	void setMoment(const Matrix3& value);
 

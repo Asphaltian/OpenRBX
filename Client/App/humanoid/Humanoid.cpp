@@ -6,6 +6,7 @@
 #include "rbxgraphics/Adorn.h"
 #include "reflection/property.h"
 #include "util/Color.h"
+#include "util/NormalId.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/ForceField.h"
 #include "v8datamodel/JointInstance.h"
@@ -287,6 +288,19 @@ Humanoid* Humanoid::getLocalHumanoidFromContext(const Instance* context)
 	return modelIsCharacter(Network::Players::findLocalCharacter(context));
 }
 
+// FUNCTION: WEBSERVICE 0x100a1a00
+boost::shared_ptr<AutoJoint> newJoint(bool animated)
+{
+	if (animated) {
+		boost::shared_ptr<Motor> m = Creatable<Instance>::create<Motor>();
+		m->setMaxVelocity(0.1f);
+		return m;
+	}
+
+	boost::shared_ptr<Snap> s = Creatable<Instance>::create<Snap>();
+	return s;
+}
+
 // STUB: WEBSERVICE 0x100a1b00
 void Humanoid::render3dAdorn(Adorn* adorn)
 {
@@ -418,10 +432,86 @@ const CoordinateFrame Humanoid::getLocation() const
 	return getHead() != NULL ? getHead()->getCoordinateFrame() : CoordinateFrame();
 }
 
-// STUB: WEBSERVICE 0x100a2840
+// FUNCTION: WEBSERVICE 0x100a2840
 void Humanoid::buildJoints()
 {
-	STUB(0x100a2840);
+	ModelInstance* character = getCharacterFromHumanoid(this);
+
+	if (character) {
+		PartInstance* head = getHead();
+		PartInstance* torso = getTorso();
+		PartInstance* rightArm = getRightArm();
+		PartInstance* leftArm = getLeftArm();
+		PartInstance* rightLeg = getRightLeg();
+		PartInstance* leftLeg = getLeftLeg();
+
+		if (torso) {
+			head->getPrimitive()->getBody()->setCanThrottle(false);
+			torso->getPrimitive()->getBody()->setCanThrottle(false);
+			rightArm->getPrimitive()->getBody()->setCanThrottle(false);
+			leftArm->getPrimitive()->getBody()->setCanThrottle(false);
+			rightLeg->getPrimitive()->getBody()->setCanThrottle(false);
+			leftLeg->getPrimitive()->getBody()->setCanThrottle(false);
+
+			boost::shared_ptr<AutoJoint> rightShoulder = newJoint(true);
+			boost::shared_ptr<AutoJoint> leftShoulder = newJoint(true);
+			boost::shared_ptr<AutoJoint> rightHip = newJoint(true);
+			boost::shared_ptr<AutoJoint> leftHip = newJoint(true);
+			boost::shared_ptr<AutoJoint> neck = newJoint(false);
+
+			rightShoulder->setName("Right Shoulder");
+			leftShoulder->setName("Left Shoulder");
+			rightHip->setName("Right Hip");
+			leftHip->setName("Left Hip");
+			neck->setName("Neck");
+
+			rightShoulder->setPart0(torso);
+			leftShoulder->setPart0(torso);
+			rightHip->setPart0(torso);
+			leftHip->setPart0(torso);
+			neck->setPart0(torso);
+
+			rightShoulder->setPart1(rightArm);
+			leftShoulder->setPart1(leftArm);
+			rightHip->setPart1(rightLeg);
+			leftHip->setPart1(leftLeg);
+			neck->setPart1(head);
+
+			G3D::Matrix3 xPos = normalIdToMatrix3(NORM_X);
+			G3D::Matrix3 xNeg = normalIdToMatrix3(NORM_X_NEG);
+			G3D::Matrix3 yPos = normalIdToMatrix3(NORM_Y);
+
+			G3D::CoordinateFrame rightShoulderP(xPos, G3D::Vector3(1.0f, 0.5f, 0.0f));
+			G3D::CoordinateFrame leftShoulderP(xNeg, G3D::Vector3(-1.0f, 0.5f, 0.0f));
+			G3D::CoordinateFrame rightHipP(xPos, G3D::Vector3(1.0f, -1.0f, 0.0f));
+			G3D::CoordinateFrame leftHipP(xNeg, G3D::Vector3(-1.0f, -1.0f, 0.0f));
+			G3D::CoordinateFrame neckP(yPos, G3D::Vector3(0.0f, 1.0f, 0.0f));
+
+			G3D::CoordinateFrame rightArmP(xPos, G3D::Vector3(-0.5f, 0.5f, 0.0f));
+			G3D::CoordinateFrame leftArmP(xNeg, G3D::Vector3(0.5f, 0.5f, 0.0f));
+			G3D::CoordinateFrame rightLegP(xPos, G3D::Vector3(0.5f, 1.0f, 0.0f));
+			G3D::CoordinateFrame leftLegP(xNeg, G3D::Vector3(-0.5f, 1.0f, 0.0f));
+			G3D::CoordinateFrame headP(yPos, G3D::Vector3(0.0f, -0.5f, 0.0f));
+
+			rightShoulder->setC0(rightShoulderP);
+			leftShoulder->setC0(leftShoulderP);
+			rightHip->setC0(rightHipP);
+			leftHip->setC0(leftHipP);
+			neck->setC0(neckP);
+
+			rightShoulder->setC1(rightArmP);
+			leftShoulder->setC1(leftArmP);
+			rightHip->setC1(rightLegP);
+			leftHip->setC1(leftLegP);
+			neck->setC1(headP);
+
+			rightShoulder->setParent(torso);
+			leftShoulder->setParent(torso);
+			rightHip->setParent(torso);
+			leftHip->setParent(torso);
+			neck->setParent(torso);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a2f70
