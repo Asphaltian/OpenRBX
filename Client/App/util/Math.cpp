@@ -57,27 +57,19 @@ bool Math::fixDenorm(Vector3& v)
 	return fixed;
 }
 
-// STUB: WEBSERVICE 0x100de9a0
+// FUNCTION: WEBSERVICE 0x100de9a0
 bool Math::legalCameraCoord(const CoordinateFrame& c)
 {
 	for (int i = 0; i < 3; ++i) {
 		for (int j = 0; j < 3; ++j) {
-			const float value = c.rotation[i][j];
-
-			if (value <= -1.2f) {
-				return false;
-			}
-			if (value >= 1.2f) {
+			const float value = c.rotation[i][i];
+			if (!(value > -1.2f && value < 1.2f)) {
 				return false;
 			}
 		}
 
 		const float value = c.translation[i];
-
-		if (value <= -1000000.0f) {
-			return false;
-		}
-		if (value >= 1000000.0f) {
+		if (!(value > -1000000.0f && value < 1000000.0f)) {
 			return false;
 		}
 	}
@@ -93,24 +85,21 @@ float Math::rotationFromByte(unsigned char byteAngle)
 	return value * rotationStep() - 3.14159274f;
 }
 
-// STUB: WEBSERVICE 0x100dea70
+// FUNCTION: WEBSERVICE 0x100dea70
 Matrix3 Math::getIWorldAtPoint(const Vector3& cofmPos, const Vector3& worldPos, const Matrix3& iWorldAtCofm, float mass)
 {
 	const float x = worldPos.x - cofmPos.x;
 	const float y = worldPos.y - cofmPos.y;
 	const float z = worldPos.z - cofmPos.z;
 
-	return iWorldAtCofm + mass * Matrix3(
-									 z * z + y * y,
-									 -(y * x),
-									 -(z * x),
-									 -(y * x),
-									 z * z + x * x,
-									 -(z * y),
-									 -(z * x),
-									 -(z * y),
-									 y * y + x * x
-								 );
+	const float xx = x * x;
+	const float yy = y * y;
+	const float zz = z * z;
+	const float xy = x * y;
+	const float xz = x * z;
+	const float yz = y * z;
+
+	return iWorldAtCofm + mass * Matrix3(yy + zz, -xy, -xz, -xy, xx + zz, -yz, -xz, -yz, xx + yy);
 }
 
 // FUNCTION: WEBSERVICE 0x100deb30
@@ -354,9 +343,9 @@ Matrix3 Math::alignAxesClosest(const Matrix3& align, const Matrix3& target)
 {
 	float dots[3][3];
 
-	float tBest = 0.0f;
+	float best = 0.0f;
 	int aBest = -1;
-	int best = -1;
+	int iBest = -1;
 
 	for (int a = 0; a < 3; ++a) {
 		Vector3 aAxis = align.getColumn(a);
@@ -364,48 +353,48 @@ Matrix3 Math::alignAxesClosest(const Matrix3& align, const Matrix3& target)
 		for (int i = 0; i < 3; ++i) {
 			Vector3 tAxis = target.getColumn(i);
 
-			float t = tAxis.dot(aAxis);
+			dots[a][i] = tAxis.dot(aAxis);
 
-			dots[a][i] = t;
-
-			if (fabs(t) > fabs(tBest)) {
-				best = i;
+			if (fabs(dots[a][i]) > fabs(best)) {
 				aBest = a;
-				tBest = t;
+				best = dots[a][i];
+				iBest = i;
 			}
 		}
 	}
 
-	Vector3 bestV = align.getColumn(aBest) * Math::sign(tBest);
+	Vector3 bestV = align.getColumn(aBest) * (best >= 0.0f ? 1.0f : -1.0f);
 
-	float tSecond = 0.0f;
+	float second = 0.0f;
 	int aSecond = -1;
-	int second = -1;
+	int iSecond = -1;
 
 	for (int a = 0; a < 3; ++a) {
 		if (a != aBest) {
 			for (int i = 0; i < 3; ++i) {
-				if (i != best && fabs(dots[a][i]) > fabs(tSecond)) {
-					tSecond = dots[a][i];
-					second = i;
-					aSecond = a;
+				if (i != iBest) {
+					if (fabs(dots[a][i]) > fabs(second)) {
+						aSecond = a;
+						second = dots[a][i];
+						iSecond = i;
+					}
 				}
 			}
 		}
 	}
 
-	Vector3 secondV = align.getColumn(aSecond) * Math::sign(tSecond);
+	Vector3 secondV = align.getColumn(aSecond) * (second >= 0.0f ? 1.0f : -1.0f);
 
 	int aThird = (3 - aSecond) - aBest;
-	int third = (3 - second) - best;
+	int iThird = (3 - iSecond) - iBest;
 
-	Vector3 thirdV = align.getColumn(aThird) * Math::sign(dots[aThird][third]);
+	Vector3 thirdV = align.getColumn(aThird) * (dots[aThird][iThird] >= 0.0f ? 1.0f : -1.0f);
 
 	Matrix3 answer;
 
-	answer.setColumn(best, bestV);
-	answer.setColumn(second, secondV);
-	answer.setColumn(third, thirdV);
+	answer.setColumn(iBest, bestV);
+	answer.setColumn(iSecond, secondV);
+	answer.setColumn(iThird, thirdV);
 
 	return answer;
 }
@@ -587,17 +576,18 @@ bool Math::fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float radToler
 	}
 
 	for (int i = 0; i < 3; ++i) {
-		const Vector3 a0 = m0.getColumn(i);
+		Vector3 a0 = m0.getColumn(i);
 
-		int j;
+		bool found = false;
 
-		for (j = 0; j < 3; ++j) {
+		for (int j = 0; j < 3; ++j) {
 			if (a0.cross(a1[j]).magnitude() < radTolerance) {
+				found = true;
 				break;
 			}
 		}
 
-		if (j == 3) {
+		if (!found) {
 			return false;
 		}
 	}

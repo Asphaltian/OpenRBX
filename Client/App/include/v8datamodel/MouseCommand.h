@@ -107,7 +107,7 @@ public:
 	virtual ~MouseCommand(); // vtable+0x30
 
 	// SYNTHETIC: WEBSERVICE 0x1006a790
-	// RBX::MouseCommand::`scalar deleting destructor'
+	// ??_GMouseCommand@RBX@@UAEPAXI@Z
 
 	bool captured() const { return capturedMouse; }
 
