@@ -1,12 +1,17 @@
 #include "ThumbnailGenerator.h"
 
+#include "appdraw/AdornG3D.h"
+#include "gui/GuiDraw.h"
 #include "rbxgraphics/TextureProxyBase.h"
 #include "rbxview/View.h"
 #include "renderlib/Mesh.h"
 #include "script/Script.h"
 #include "script/ScriptContext.h"
+#include "util/ContentProvider.h"
 #include "util/Name.h"
 #include "util/RunStateOwner.h"
+#include "util/StandardOut.h"
+#include "util/base64.hpp"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Lighting.h"
 #include "v8datamodel/ModelInstance.h"
@@ -19,7 +24,10 @@
 #include <GLG3D/RenderDevice.h>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/once.hpp>
+#include <boost/thread/thread.hpp>
+#include <boost/thread/xtime.hpp>
 #include <memory>
+#include <sstream>
 #include <stdexcept>
 
 const char sThumbnailGenerator[] = "ThumbnailGenerator";
@@ -230,18 +238,131 @@ public:
 
 DECOMP_SIZE_ASSERT(OSContext, 0x34)
 
+// FUNCTION: WEBSERVICE 0x10006a50
+static void waitForContent()
+{
+	while (!RBX::ContentProvider::singleton().isRequestQueueEmpty()) {
+		boost::xtime xt;
+		boost::xtime_get(&xt, boost::TIME_UTC);
+		boost::thread::sleep(xt);
+	}
+}
+
 // STUB: WEBSERVICE 0x10006af0
 std::string ThumbnailGenerator::clickTexture(std::string textureId, std::string fileType, int cx, int cy)
 {
-	STUB(0x10006af0);
-	return std::string();
+	try {
+		RBX::StandardOut::singleton()->print(
+			RBX::MESSAGE_INFO,
+			"ThumbnailGenerator::clickTexture(%s, %s, %d, %d)",
+			textureId.c_str(),
+			fileType.c_str(),
+			cx,
+			cy
+		);
+
+		RBX::ContentProvider::singleton().getContent(textureId);
+
+		G3D::BinaryOutput binaryOutput;
+		binaryOutput.setEndian(G3D::G3D_LITTLE_ENDIAN);
+
+		G3D::GImage::Format format = G3D::GImage::stringToFormat(fileType);
+
+		OSContext context(cx, cy, true);
+
+		boost::mutex::scoped_lock lock(StaticMutex<OSContext>::get());
+
+		context.makeCurrent();
+
+		RBX::Render::Mesh::makeVAR();
+
+		{
+			RBX::Render::Mesh::varDirty = true;
+			G3D::RenderDevice renderDevice;
+			renderDevice.init(&context);
+			renderDevice.pushState();
+			renderDevice.push2D();
+
+			renderDevice.setProjectionMatrix(G3D::Matrix4::orthogonalProjection(0, cx, 0, cy, -1, 1));
+
+			{
+				RBX::AdornG3D adorn(&renderDevice);
+				RBX::GuiDrawImage image;
+				if (image.setImage(&adorn, RBX::TextureId(textureId))) {
+					RBX::Rect rect(0, 0, cx, cy);
+					image.render2d(&adorn, true, rect, RBX::Widget::NOTHING);
+				}
+			}
+
+			context.image.encode(format, binaryOutput);
+
+			renderDevice.pop2D();
+			renderDevice.popState();
+			renderDevice.cleanup();
+		}
+
+		int size = binaryOutput.size();
+		std::string data;
+		data.resize(size);
+		memcpy(const_cast<char*>(data.c_str()), binaryOutput.getCArray(), size);
+
+		std::stringstream stream;
+
+		std::ostreambuf_iterator<char> out(stream);
+		int state = 0;
+		base64<char>().put(data.begin(), data.end(), out, state, base64<char>::noline());
+
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "ThumbnailGenerator::click() success");
+
+		return stream.str();
+	}
+	catch (std::exception& e) {
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, e.what());
+		throw;
+	}
 }
 
 // STUB: WEBSERVICE 0x10007170
 std::string ThumbnailGenerator::click(std::string fileType, int cx, int cy, bool hideSky)
 {
-	STUB(0x10007170);
-	return std::string();
+	try {
+		RBX::StandardOut::singleton()->print(
+			RBX::MESSAGE_INFO,
+			"ThumbnailGenerator::click(%s, %d, %d, %s)",
+			fileType.c_str(),
+			cx,
+			cy,
+			hideSky ? "true" : "false"
+		);
+
+		G3D::BinaryOutput binaryOutput;
+		binaryOutput.setEndian(G3D::G3D_LITTLE_ENDIAN);
+
+		doClick(fileType, cx, cy, hideSky, NULL);
+
+		waitForContent();
+
+		doClick(fileType, cx, cy, hideSky, &binaryOutput);
+
+		int size = binaryOutput.size();
+		std::string data;
+		data.resize(size);
+		memcpy(const_cast<char*>(data.c_str()), binaryOutput.getCArray(), size);
+
+		std::stringstream stream;
+
+		std::ostreambuf_iterator<char> out(stream);
+		int state = 0;
+		base64<char>().put(data.begin(), data.end(), out, state, base64<char>::noline());
+
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "ThumbnailGenerator::click() success");
+
+		return stream.str();
+	}
+	catch (std::exception& e) {
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, e.what());
+		throw;
+	}
 }
 
 // STUB: WEBSERVICE 0x10007470

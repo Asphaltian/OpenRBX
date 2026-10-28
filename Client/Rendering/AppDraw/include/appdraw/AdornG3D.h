@@ -18,6 +18,8 @@ private:
 	G3D::TextureManager textureManager; // 0x08
 
 public:
+	AdornG3D(G3D::RenderDevice* renderDevice) : renderDevice(renderDevice) {}
+
 	G3D::RenderDevice* getRenderDevice() { return renderDevice; }
 
 	virtual G3D::ReferenceCountedPointer<TextureProxyBase> createTextureProxy(const std::string& filename);
@@ -70,6 +72,11 @@ public:
 		const G3D::Vector3& v3,
 		const G3D::Color4& color
 	);
+
+	// SYNTHETIC: WEBSERVICE 0x100062e0
+	// RBX::AdornG3D::`scalar deleting destructor'
+	// SYNTHETIC: WEBSERVICE 0x10006310
+	// RBX::AdornG3D::~AdornG3D
 };
 
 DECOMP_SIZE_ASSERT(AdornG3D, 0x20)

@@ -22,7 +22,7 @@ namespace RBX {
 class Instance;
 
 // clang-format off
-// STUB: WEBSERVICE 0x10005a80
+// FUNCTION: WEBSERVICE 0x10005a80
 // RBX::ContentProvider::singleton
 // clang-format on
 

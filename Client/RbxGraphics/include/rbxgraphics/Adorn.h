@@ -43,13 +43,13 @@ public:
 		FIXED_SPACING = 1
 	};
 
-	virtual ~Adorn(); // vtable+0x00
+	virtual ~Adorn() {} // vtable+0x00
 
 	virtual G3D::ReferenceCountedPointer<TextureProxyBase> createTextureProxy(
 		const std::string& name
 	) = 0;                                       // vtable+0x04
-	virtual void prepareRenderPass() = 0;        // vtable+0x08
-	virtual void finishRenderPass() = 0;         // vtable+0x0c
+	virtual void prepareRenderPass() {}          // vtable+0x08
+	virtual void finishRenderPass() {}           // vtable+0x0c
 	virtual G3D::Rect2D getViewport() const = 0; // vtable+0x10
 	virtual int getWidth() const = 0;            // vtable+0x14
 	virtual int getHeight() const = 0;           // vtable+0x18

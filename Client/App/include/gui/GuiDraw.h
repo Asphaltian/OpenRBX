@@ -34,6 +34,9 @@ private:
 	);
 
 public:
+	// FUNCTION: WEBSERVICE 0x10006260
+	GuiDrawImage() {}
+
 	void render2d(Adorn* adorn, bool enabled, Rect& rect, Widget::WidgetState state);
 
 	void setImageSize(const G3D::Vector2& value) { size = value; }

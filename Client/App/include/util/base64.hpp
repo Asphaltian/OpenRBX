@@ -159,6 +159,8 @@ public:
 	// clang-format on
 
 	// clang-format off
+	// TEMPLATE: WEBSERVICE 0x10008e70
+	// base64<char,std::char_traits<char> >::put<std::_String_iterator<char,std::char_traits<char>,std::allocator<char> >,std::ostreambuf_iterator<char,std::char_traits<char> >,int,base64<char,std::char_traits<char> >::noline>
 	// TEMPLATE: WEBSERVICE 0x10085e80
 	// base64<char,std::char_traits<char> >::put<std::istreambuf_iterator<char,std::char_traits<char> >,std::ostreambuf_iterator<char,std::char_traits<char> >,int,base64<char,std::char_traits<char> >::crlf>
 	// clang-format on
