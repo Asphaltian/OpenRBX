@@ -238,9 +238,9 @@ public:
 		// TEMPLATE: WEBSERVICE 0x100f30b0
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::CoordinateFrame)>::TSignalInstance::TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3120
-		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::~TSignalInstance
+		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::~TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3170
-		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::`scalar deleting destructor'
+		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::`scalar deleting destructor'
 		// TEMPLATE: WEBSERVICE 0x100f3190
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Color3)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f3200

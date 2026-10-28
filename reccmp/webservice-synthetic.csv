@@ -159,6 +159,7 @@ address,type,symbol
 0x1005a000,synthetic,??_E?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@OIE@AEPAXI@Z
 0x1005aa60,synthetic,??_EModelInstance@RBX@@WBE@AEPAXI@Z
 0x1005aa70,synthetic,??_EModelInstance@RBX@@WFE@AEPAXI@Z
+0x1005aa80,synthetic,??_EModelInstance@RBX@@$4PPPPPPPM@CEM@AEPAXI@Z
 0x1005aa90,synthetic,??_EModelInstance@RBX@@WDM@AEPAXI@Z
 0x1005aaa0,synthetic,??_EModelInstance@RBX@@WPI@AEPAXI@Z
 0x1005aab0,synthetic,??_EModelInstance@RBX@@WJM@AEPAXI@Z
@@ -294,18 +295,23 @@ address,type,symbol
 0x1006c0d0,synthetic,?getClassName@?$NonFactoryProduct@VRootInstance@RBX@@$1?sWorkspace@2@3PADA@RBX@@UBEABVName@2@XZ
 0x1006cd10,synthetic,??1?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@MAE@XZ
 0x1006d0f0,synthetic,??_EWorkspace@RBX@@WCE@AEPAXI@Z
+0x1006d100,synthetic,??_EWorkspace@RBX@@$4PPPPPPPM@DIM@AEPAXI@Z
 0x1006d110,synthetic,??_EWorkspace@RBX@@WIE@AEPAXI@Z
 0x1006d120,synthetic,??_EWorkspace@RBX@@WCJE@AEPAXI@Z
 0x1006d130,synthetic,??_EWorkspace@RBX@@WCDI@AEPAXI@Z
+0x1006d140,synthetic,?getLocation@ModelInstance@RBX@@$4PPPPPPPM@BEA@BE?BVCoordinateFrame@G3D@@XZ
 0x1006d150,synthetic,??_EWorkspace@RBX@@WCPE@AEPAXI@Z
+0x1006d160,synthetic,?getCameraIgnorePrimitives@ModelInstance@RBX@@$4PPPPPPPM@BEA@AEXAAV?$vector@PBVPrimitive@RBX@@V?$allocator@PBVPrimitive@RBX@@@std@@@std@@@Z
 0x1006d170,synthetic,??_EWorkspace@RBX@@WGM@AEPAXI@Z
 0x1006d180,synthetic,??_EWorkspace@RBX@@WBA@AEPAXI@Z
 0x1006d190,synthetic,??_EWorkspace@RBX@@WCNM@AEPAXI@Z
 0x1006d1a0,synthetic,??_EWorkspace@RBX@@WBE@AEPAXI@Z
 0x1006d1b0,synthetic,??_EWorkspace@RBX@@WFE@AEPAXI@Z
+0x1006d1c0,synthetic,?getPrimaryPart@ModelInstance@RBX@@$4PPPPPPPM@BEA@AEPAVPartInstance@2@XZ
 0x1006d1d0,synthetic,??_EWorkspace@RBX@@WCME@AEPAXI@Z
 0x1006d1e0,synthetic,??_EWorkspace@RBX@@WCKI@AEPAXI@Z
 0x1006d1f0,synthetic,??_EWorkspace@RBX@@WDM@AEPAXI@Z
+0x1006d200,synthetic,?onCameraNear@ModelInstance@RBX@@$4PPPPPPPM@BEA@AEXM@Z
 0x1006d210,synthetic,??_EWorkspace@RBX@@WPI@AEPAXI@Z
 0x1006d220,synthetic,??_EWorkspace@RBX@@WJM@AEPAXI@Z
 0x1006d720,synthetic,??$find@VSelection@RBX@@@ServiceProvider@RBX@@QBEPAVSelection@1@XZ
@@ -474,6 +480,7 @@ address,type,symbol
 0x1009ccf0,synthetic,?getClassName@?$FactoryProduct@VPartInstance@RBX@@VPVInstance@2@$1?sPart@2@3PADA@RBX@@UBEABVName@2@XZ
 0x1009d2f0,synthetic,??_EPartInstance@RBX@@WBE@AEPAXI@Z
 0x1009d300,synthetic,??_EPartInstance@RBX@@WFE@AEPAXI@Z
+0x1009d310,synthetic,??_EPartInstance@RBX@@$4PPPPPPPM@CKE@AEPAXI@Z
 0x1009d330,synthetic,??_EPartInstance@RBX@@WDM@AEPAXI@Z
 0x1009d340,synthetic,??_EPartInstance@RBX@@WPI@AEPAXI@Z
 0x1009d350,synthetic,??_EPartInstance@RBX@@WJM@AEPAXI@Z
@@ -616,6 +623,7 @@ address,type,symbol
 0x100c13e0,synthetic,??_ERootInstance@RBX@@OGM@AEPAXI@Z
 0x100c13f0,synthetic,??_ERootInstance@RBX@@OBA@AEPAXI@Z
 0x100c1400,synthetic,??_ERootInstance@RBX@@OBE@AEPAXI@Z
+0x100c1410,synthetic,??_ERootInstance@RBX@@$2PPPPPPPM@CKE@AEPAXI@Z
 0x100c1420,synthetic,??_ERootInstance@RBX@@ODM@AEPAXI@Z
 0x100c19f0,synthetic,??_GRootInstance@RBX@@MAEPAXI@Z
 0x100c1a10,synthetic,??$create@VTeams@RBX@@@ServiceProvider@RBX@@QBEPAVTeams@1@XZ
@@ -965,6 +973,7 @@ address,type,symbol
 0x100dbad0,synthetic,??_EAccoutrement@RBX@@WDM@AEPAXI@Z
 0x100dbae0,synthetic,??_EAccoutrement@RBX@@WPI@AEPAXI@Z
 0x100dbaf0,synthetic,??_EAccoutrement@RBX@@WJM@AEPAXI@Z
+0x100dbb00,synthetic,??_EAccoutrement@RBX@@$4PPPPPPPM@BJI@AEPAXI@Z
 0x100dbb10,synthetic,??_EAccoutrement@RBX@@WCE@AEPAXI@Z
 0x100dbb20,synthetic,??_EAccoutrement@RBX@@WIE@AEPAXI@Z
 0x100dbeb0,synthetic,??_E?$DescribedCreatable@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@WBE@AEPAXI@Z
@@ -983,6 +992,7 @@ address,type,symbol
 0x100dd7a0,synthetic,??_E?$DescribedCreatable@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@WBA@AEPAXI@Z
 0x100dd7b0,synthetic,??_EHat@RBX@@WDM@AEPAXI@Z
 0x100dd7c0,synthetic,??_EHat@RBX@@WPI@AEPAXI@Z
+0x100dd7d0,synthetic,??_E?$FactoryProduct@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@$2PPPPPPPM@BJI@AEPAXI@Z
 0x100dd930,synthetic,??_E?$DescribedCreatable@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@WGM@AEPAXI@Z
 0x100dd940,synthetic,??_E?$FactoryProduct@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@OIE@AEPAXI@Z
 0x100dd950,synthetic,??_G?$FactoryProduct@VHat@RBX@@VAccoutrement@2@$1?sHat@2@3QBDB@RBX@@MAEPAXI@Z
@@ -1146,6 +1156,7 @@ address,type,symbol
 0x100e7d90,synthetic,??_E?$DescribedCreatable@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@WBGI@AEPAXI@Z
 0x100e7da0,synthetic,??_E?$DescribedCreatable@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@WFE@AEPAXI@Z
 0x100e7db0,synthetic,??_E?$FactoryProduct@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@OIE@AEPAXI@Z
+0x100e7dc0,synthetic,??_E?$DescribedCreatable@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@$4PPPPPPPM@CKE@AEPAXI@Z
 0x100e7e40,synthetic,??_G?$FactoryProduct@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@MAEPAXI@Z
 0x100e8040,synthetic,??1?$DescribedCreatable@VFlagStand@RBX@@VPartInstance@2@$1?sFlagStand@2@3PADA@RBX@@UAE@XZ
 0x100e8050,synthetic,??1?$DescribedCreatable@VFlagStandService@RBX@@VInstance@2@$1?sFlagStandService@2@3QBDB@RBX@@UAE@XZ
@@ -1174,6 +1185,7 @@ address,type,symbol
 0x100e8d90,synthetic,??_EFlagStand@RBX@@WIE@AEPAXI@Z
 0x100e8da0,synthetic,??_EFlagStand@RBX@@WGM@AEPAXI@Z
 0x100e8db0,synthetic,??_EFlagStand@RBX@@WBA@AEPAXI@Z
+0x100e8dc0,synthetic,??_EFlagStand@RBX@@$4PPPPPPPM@CLM@AEPAXI@Z
 0x100e8de0,synthetic,??_EFlagStand@RBX@@WBGI@AEPAXI@Z
 0x100e8e00,synthetic,??_EFlagStand@RBX@@WBE@AEPAXI@Z
 0x100e8e10,synthetic,??_EFlagStand@RBX@@WFE@AEPAXI@Z
@@ -1475,12 +1487,14 @@ address,type,symbol
 0x100fc400,synthetic,?sig@?$TSignalDesc@$$A6AX_N@Z@Reflection@RBX@@IBEAAVTSignalInstance@123@AAVSignalSource@23@@Z
 0x100fc820,synthetic,?getClassName@?$FactoryProduct@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@UBEABVName@2@XZ
 0x100fd130,synthetic,??_E?$FactoryProduct@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@OBE@AEPAXI@Z
+0x100fd140,synthetic,??_E?$FactoryProduct@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@$2PPPPPPPM@CKE@AEPAXI@Z
 0x100fd150,synthetic,??_E?$DescribedCreatable@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@WJM@AEPAXI@Z
 0x100fd160,synthetic,??_E?$FactoryProduct@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@OCE@AEPAXI@Z
 0x100fd170,synthetic,??_E?$DescribedCreatable@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@RBX@@WIE@AEPAXI@Z
 0x100fd350,synthetic,??_ESeat@RBX@@WIE@AEPAXI@Z
 0x100fd380,synthetic,??_ESeat@RBX@@WGM@AEPAXI@Z
 0x100fd390,synthetic,??_ESeat@RBX@@WBA@AEPAXI@Z
+0x100fd3a0,synthetic,??_ESeat@RBX@@$4PPPPPPPM@CNM@AEPAXI@Z
 0x100fd3b0,synthetic,??_ESeat@RBX@@WBGI@AEPAXI@Z
 0x100fd3c0,synthetic,??_ESeat@RBX@@WBE@AEPAXI@Z
 0x100fd3d0,synthetic,??_ESeat@RBX@@WFE@AEPAXI@Z
@@ -1524,6 +1538,7 @@ address,type,symbol
 0x100fee40,synthetic,??_E?$DescribedCreatable@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@WCE@AEPAXI@Z
 0x100fee50,synthetic,??_E?$DescribedCreatable@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@WGM@AEPAXI@Z
 0x100fee60,synthetic,??_E?$DescribedCreatable@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@WBE@AEPAXI@Z
+0x100fee70,synthetic,??_E?$DescribedCreatable@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@$4PPPPPPPM@CKE@AEPAXI@Z
 0x100fee80,synthetic,??_G?$DescribedCreatable@VSpawnLocation@RBX@@VPartInstance@2@$1?sSpawnLocation@2@3PADA@RBX@@UAEPAXI@Z
 0x100ff160,synthetic,??_ESpawnLocation@RBX@@WDM@AEPAXI@Z
 0x100ff170,synthetic,??_ESpawnLocation@RBX@@WPI@AEPAXI@Z
@@ -1535,6 +1550,7 @@ address,type,symbol
 0x100ff1e0,synthetic,??_ESpawnLocation@RBX@@WBGI@AEPAXI@Z
 0x100ff1f0,synthetic,??_ESpawnLocation@RBX@@WBE@AEPAXI@Z
 0x100ff200,synthetic,??_ESpawnLocation@RBX@@WFE@AEPAXI@Z
+0x100ff210,synthetic,??_ESpawnLocation@RBX@@$4PPPPPPPM@CME@AEPAXI@Z
 0x100ff660,synthetic,??_E?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@OBE@AEPAXI@Z
 0x100ff670,synthetic,??_E?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@ODM@AEPAXI@Z
 0x100ff680,synthetic,??_E?$DescribedCreatable@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@WJM@AEPAXI@Z
