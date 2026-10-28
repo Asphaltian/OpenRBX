@@ -381,7 +381,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100079f0
-	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::~FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>
+	// ??1?$FactoryProduct@VThumbnailGenerator@@VInstance@RBX@@$1?sThumbnailGenerator@@3QBDB@RBX@@MAE@XZ
 	// TEMPLATE: WEBSERVICE 0x10007a60
 	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007b20

@@ -31,7 +31,7 @@ private:
 
 		// clang-format off
 		// SYNTHETIC: WEBSERVICE 0x100fb7e0
-		// RBX::TimerService::Item::~Item
+		// ??1Item@TimerService@RBX@@QAE@XZ
 		// clang-format on
 	};
 
