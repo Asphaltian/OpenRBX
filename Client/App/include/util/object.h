@@ -90,6 +90,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::Script>
 	// FUNCTION: WEBSERVICE 0x100097b0
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalScript>
+	// STUB: WEBSERVICE 0x10019d00
+	// RBX::Creatable<RBX::Instance>::create<RBX::Soundscape::SoundChannel>
 	// TEMPLATE: WEBSERVICE 0x10045340
 	// RBX::Creatable<RBX::Instance>::create<RBX::Sky>
 	// TEMPLATE: WEBSERVICE 0x1005b840
@@ -392,6 +394,10 @@ public:
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007fa0
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::Creator::create
+	// TEMPLATE: WEBSERVICE 0x1000fdf0
+	// RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::Creator::create
+	// STUB: WEBSERVICE 0x1000feb0
+	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10008b90
 	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>
 	// TEMPLATE: WEBSERVICE 0x10042700
@@ -1029,6 +1035,10 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::creator''
 // SYNTHETIC: WEBSERVICE 0x10217fa0
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::creator''
+// SYNTHETIC: WEBSERVICE 0x102180d0
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::creator''
+// SYNTHETIC: WEBSERVICE 0x10218110
+// `dynamic initializer for 'RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::creator''
 // SYNTHETIC: WEBSERVICE 0x10218410
 // `dynamic initializer for 'RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::creator''
 // SYNTHETIC: WEBSERVICE 0x10218ab0
@@ -1183,6 +1193,10 @@ const typename FactoryProduct<T, Base, sName>::Creator FactoryProduct<T, Base, s
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::creator''
 // SYNTHETIC: WEBSERVICE 0x102211e0
 // `dynamic atexit destructor for 'RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::creator''
+// SYNTHETIC: WEBSERVICE 0x10221310
+// `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::creator''
+// SYNTHETIC: WEBSERVICE 0x10221350
+// `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221630
 // `dynamic atexit destructor for 'RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::creator''
 // SYNTHETIC: WEBSERVICE 0x10221980

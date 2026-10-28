@@ -932,6 +932,11 @@ template const RBX::Name& RBX::Name::doDeclare<RBX::Soundscape::sSoundService>()
 template void RBX::Name::callDoDeclare<RBX::Soundscape::sSoundChannel>();
 template const RBX::Name& RBX::Name::doDeclare<RBX::Soundscape::sSoundChannel>();
 
+template const RBX::FactoryProduct<RBX::Soundscape::SoundService, RBX::Instance, RBX::Soundscape::sSoundService>::
+	Creator RBX::FactoryProduct<RBX::Soundscape::SoundService, RBX::Instance, RBX::Soundscape::sSoundService>::creator;
+template const RBX::FactoryProduct<RBX::Soundscape::SoundChannel, RBX::Instance, RBX::Soundscape::sSoundChannel>::
+	Creator RBX::FactoryProduct<RBX::Soundscape::SoundChannel, RBX::Instance, RBX::Soundscape::sSoundChannel>::creator;
+
 typedef std::vector<RBX::Reflection::Value> ValueVector;
 template ValueVector::const_iterator ValueVector::begin() const;
 template ValueVector::const_iterator ValueVector::end() const;
