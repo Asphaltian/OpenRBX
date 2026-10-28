@@ -40,6 +40,12 @@ public:
 	World* world; // 0x118
 
 	JointsService() : world(NULL) { setName("JointsService"); }
+
+	// SYNTHETIC: WEBSERVICE 0x10075090
+	// RBX::JointsService::~JointsService
+
+	// SYNTHETIC: WEBSERVICE 0x100750f0
+	// RBX::JointsService::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(JointsService, 0x11c)

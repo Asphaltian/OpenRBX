@@ -1,9 +1,11 @@
 #include "v8datamodel/DataModel.h"
 
+#include "compat.h"
 #include "network/Players.h"
 #include "reflection/reflection.h"
 #include "reflection/signal.h"
 #include "util/ContentProvider.h"
+#include "util/Http.h"
 #include "util/Name.h"
 #include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/Backpack.h"
@@ -12,6 +14,8 @@
 #include "v8datamodel/LocalBackpack.h"
 #include "v8datamodel/Teams.h"
 #include "v8tree/Service.h"
+
+#include <sstream>
 
 namespace RBX {
 
@@ -94,10 +98,35 @@ static Reflection::BoundFuncDesc<DataModel, void(), 0> func_SetUIMessageBrickCou
 
 static Reflection::SignalDesc<DataModel, void()> event_Closing("Close");
 
-// STUB: WEBSERVICE 0x10071800
+// FUNCTION: WEBSERVICE 0x10071620
+std::string DataModel::doHttpGet(std::string url)
+{
+	std::string response;
+	Http(url.c_str()).get(response);
+	return response;
+}
+
+// FUNCTION: WEBSERVICE 0x100716e0
+std::string DataModel::doHttpPost(std::string url, std::string data)
+{
+	std::string response;
+#ifdef COMPAT_MODE
+	std::istringstream input(data);
+	Http(url).post(input, true, response);
+#else
+	Http(url).post(std::istringstream(data), true, response);
+#endif
+	return response;
+}
+
+// FUNCTION: WEBSERVICE 0x10071800
 void DataModel::close()
 {
-	STUB(0x10071800);
+	Verb* verb = getVerb("Exit");
+	if (!verb) {
+		throw std::runtime_error("Couldn't find Exit Verb");
+	}
+	verb->doIt(NULL);
 }
 
 // STUB: WEBSERVICE 0x10072640

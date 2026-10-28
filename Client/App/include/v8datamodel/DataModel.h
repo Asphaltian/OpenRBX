@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "v8tree/Service.h"
+#include "v8tree/Verb.h"
 
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
@@ -25,10 +26,10 @@ class Workspace;
 extern const char sDataModel[];
 
 // SIZE 0x1fc
-class DataModel : public DescribedNonCreatable<DataModel, ServiceProvider, sDataModel>
+class DataModel : public DescribedNonCreatable<DataModel, ServiceProvider, sDataModel>, public VerbContainer
 {
 private:
-	undefined m_unk0x15c[0x190 - 0x15c];                      // 0x15c
+	undefined m_unk0x170[0x190 - 0x170];                      // 0x170
 	boost::shared_ptr<LocalBackpack> localBackpack;           // 0x190
 	boost::shared_ptr<Workspace> workspace;                   // 0x198
 	boost::shared_ptr<RunService> runService;                 // 0x1a0
@@ -43,6 +44,9 @@ private:
 	bool dirty;                                               // 0x1ec
 	bool isInitialized;                                       // 0x1ed
 	boost::shared_ptr<boost::recursive_mutex> mutex;          // 0x1f0
+
+	static std::string doHttpGet(std::string url);
+	static std::string doHttpPost(std::string url, std::string data);
 
 public:
 	// SIZE 0xc
