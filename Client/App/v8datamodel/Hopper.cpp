@@ -240,7 +240,7 @@ void HopperBin::onSelectScript()
 	}
 }
 
-// STUB: WEBSERVICE 0x100c9950
+// FUNCTION: WEBSERVICE 0x100c9950
 void HopperBin::onLocalClicked()
 {
 	if (!active) {

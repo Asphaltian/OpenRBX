@@ -24,7 +24,7 @@ public:
 DECOMP_SIZE_ASSERT(Object, 0x04)
 
 // clang-format off
-// STUB: WEBSERVICE 0x10009240
+// TEMPLATE: WEBSERVICE 0x10009240
 // RBX::shared_from<RBX::DataModel>
 // TEMPLATE: WEBSERVICE 0x1006c2e0
 // RBX::shared_from<RBX::Selection>
