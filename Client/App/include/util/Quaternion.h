@@ -47,6 +47,7 @@ public:
 	}
 
 	const G3D::Vector3& imag() const { return *reinterpret_cast<const G3D::Vector3*>(this); }
+	G3D::Vector3& imag();
 
 	Quaternion operator*(float value) const { return Quaternion(value * x, value * y, value * z, value * w); }
 

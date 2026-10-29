@@ -17,10 +17,11 @@
 
 namespace RBX {
 
-class JointInstance;
-class ModelInstance;
 class Body;
 class Controller;
+class JointInstance;
+class ModelInstance;
+class Weld;
 class World;
 
 extern char sHumanoid[];
@@ -86,6 +87,8 @@ public:
 	static PartInstance* getLocalHeadFromContext(const Instance* context);
 	static ModelInstance* getCharacterFromHumanoid(Humanoid* humanoid);
 	static PartInstance* getHeadFromCharacter(const ModelInstance* character);
+	static Weld* getGrip(const Instance*);
+	static const float walkSpeed();
 	static void renderWaypoint(Adorn* adorn, const G3D::Vector3& waypoint);
 
 	Body* getTorsoBody();
@@ -100,6 +103,7 @@ public:
 	float getMaxHealth() const { return maxHealth; }
 
 	void takeDamage(float value);
+	float relativeHealth() const;
 
 	void setWalkDirection(const G3D::Vector3& value);
 	// FUNCTION: WEBSERVICE 0x100a0760
@@ -147,6 +151,8 @@ public:
 	Primitive* getTorsoPrimitive() const;
 	Primitive* getLeftLegPrimitive();
 	Primitive* getRightLegPrimitive();
+	Primitive* getLeftArmPrimitive();
+	Primitive* getRightArmPrimitive();
 
 	PartInstance* getHead() const;
 	PartInstance* getTorso() const;

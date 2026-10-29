@@ -40,6 +40,7 @@ public:
 	~SpatialHash();
 
 	static Vector3int32 realToHashGrid(const Vector3& realPoint);
+	static G3D::Vector3 hashGridToReal(const G3D::Vector3&);
 	static Extents hashGridToRealExtents(const Vector3& hashGrid);
 
 	bool getNextGrid(Vector3int32& grid, const G3D::Ray& unitRay, float maxDistance);
@@ -54,6 +55,7 @@ public:
 
 	int getNodesOut() const { return nodesOut; }
 	int getMaxBucket() const { return maxBucket; }
+	void doStats() const;
 
 private:
 	static unsigned int numBits() { return 16; }
@@ -78,10 +80,14 @@ private:
 	void returnNode(SpatialNode* node);
 	void destroyNode(SpatialNode* destroy);
 	bool shareCommonGrid(Primitive* me, Primitive* other);
+	bool hashHasPrimitive(Primitive*, int, const Vector3int32&);
+	static void computeMinMax(const Primitive*, Vector3int32&, Vector3int32&);
 	static void computeMinMax(const Extents& extents, Vector3int32& min, Vector3int32& max);
+	static Extents computeMinMax(const Extents&);
 
 	void changeMinMax(Primitive* p, const Extents& change, const Extents& oldBox, const Extents& newBox);
 	void primitiveExtentsChanged(Primitive* p);
+	unsigned int numNodes(unsigned int) const;
 
 	World* world;                    // 0x00
 	ContactManager* contactManager;  // 0x04
@@ -141,10 +147,11 @@ public:
 		const float& maxDistance
 	) const;
 
-	SpatialHash* getSpatialHash() { return spatialHash; }
+	const SpatialHash& getSpatialHash() { return *spatialHash; }
 
 private:
 	Contact* createContact(Primitive* p0, Primitive* p1);
+	void stepBroadPhase();
 
 	Primitive* getSlowHit(
 		const G3D::Array<Primitive*>& primitives,

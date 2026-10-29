@@ -16,6 +16,7 @@ namespace RBX {
 class ICameraOwner;
 class NavKeys;
 class ICameraSubject;
+class ContactManager;
 
 extern char sCamera[];
 // SIZE 0x1b0
@@ -25,6 +26,7 @@ public:
 	static float distanceMin() { return 0.5f; }
 	static float distanceMax() { return 1000.0f; }
 	static float distanceMaxCharacter() { return 400.0f; }
+	static float distanceMinOcclude();
 
 	enum AnimationType
 	{
@@ -58,6 +60,7 @@ private:
 	bool characterZoom(float in);
 	bool nonCharacterZoom(float in);
 	void tryZoomExtents(float low, float current, float high, const Extents& extents, const G3D::Rect2D& viewPort);
+	ContactManager& getContactManager();
 
 	float goalToFocusDistance() const { return (cameraGoal.translation - cameraFocus.translation).magnitude(); }
 
@@ -67,6 +70,7 @@ private:
 			gCamera.setCoordinateFrame(value);
 		}
 	}
+	G3D::CoordinateFrame computeLineOfSiteGoal();
 
 	void getHeadingElevationDistance(float& heading, float& elevation, float& distance);
 	void setHeadingElevationDistance(float heading, float elevation, float distance);
@@ -77,6 +81,7 @@ private:
 			owner->cameraMoved();
 		}
 	}
+	void getIgnorePrims(const G3D::Array<Primitive*>&);
 
 	virtual bool askSetParent(const Instance* instance) const;
 
@@ -97,6 +102,7 @@ public:
 		return cameraSubject &&
 			   (cameraType == FOLLOW_CAMERA || cameraType == ATTACH_CAMERA || cameraType == TRACK_CAMERA);
 	}
+	bool isFirstPersonCamera() const;
 
 	ICameraSubject* getCameraSubject() const;
 	Instance* getCameraSubjectInstance() const;
@@ -115,6 +121,9 @@ public:
 
 	CameraType getCameraType() const { return cameraType; }
 	void setCameraType(CameraType value);
+	bool canZoom(int) const;
+	bool canTilt(int) const;
+	void onWrapMouse(const G3D::Vector2&);
 
 	bool zoom(float in);
 	bool setDistanceFromTarget(float newDistance);
@@ -129,6 +138,9 @@ public:
 	void zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType zoomType);
 	bool zoomExtents(const G3D::Rect2D& viewPort);
 	void panRadians(float angle);
+	void panUnits(int);
+	bool tiltRadians(float);
+	bool tiltUnits(int);
 	void lookAt(const G3D::Vector3& point);
 	void setImageServerViewNoLerp(const G3D::CoordinateFrame& modelCoord, const G3D::Rect2D& viewPort);
 	void doFly(const NavKeys& nav, int steps);

@@ -39,6 +39,7 @@ public:
 	virtual void setCursorId(Adorn* adorn, const TextureId& cursorId); // vtable+0x1c
 
 	void getNavKeys(NavKeys& navKeys) const;
+	void renderGameCursor(Adorn*);
 	bool altKeyDown() const { return keyDown(SDLK_RALT) || keyDown(SDLK_LALT); }
 	bool shiftKeyDown() const { return keyDown(SDLK_RSHIFT) || keyDown(SDLK_LSHIFT); }
 

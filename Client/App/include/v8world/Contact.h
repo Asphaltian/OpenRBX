@@ -28,6 +28,7 @@ public:
 	bool step(int uiStepId);
 
 	bool computeIsAdjacent(float spaceAllowed);
+	static bool isContact(Edge*);
 
 	void onPrimitiveContactParametersChanged();
 

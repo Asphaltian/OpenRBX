@@ -36,6 +36,8 @@ private:
 
 public:
 	Body* getParent() const { return parent; }
+	Link* getLink() const;
+	const Body* getRootConst() const;
 
 	Body* getRoot() { return root; }
 
@@ -48,6 +50,8 @@ public:
 	Body* getChild(int index) const { return children[index]; }
 
 	const Vector3& getCofmOffset() const { return cofm != NULL ? cofm->getCofmInBody() : Vector3::zero(); }
+	G3D::CoordinateFrame getMeInDescendant(const Body*) const;
+	G3D::CoordinateFrame getMeInRoot() const;
 
 	const Vector3& getPos() const
 	{
@@ -91,8 +95,10 @@ public:
 	Matrix3 getIWorldAtPoint(const Vector3& point) const;
 
 	float kineticEnergy() const;
+	float potentialEnergy() const;
 
 	void step(float dt, bool throttling);
+	bool cofmIsClean();
 
 	CoordinateFrame getBranchCofmCoordinateFrame() const;
 
@@ -128,6 +134,7 @@ public:
 	static int getNextStateIndex();
 
 	void advanceStateIndex();
+	void makeStateDirty();
 
 	void makeCofmDirty();
 
@@ -156,8 +163,11 @@ private:
 
 	void onChildAdded(Body* child);
 	void onChildRemoved(Body* child);
+	const Body* calcRootConst() const;
 
 	void resetRoot(Body* value);
+	bool validateParentCofmDirty();
+	const G3D::CoordinateFrame& getMeInParent() const;
 
 	Body* calcRoot();
 

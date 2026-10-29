@@ -1,5 +1,5 @@
 ClassName: '^(HttpRequest_source|String_sink)$|^[A-Z][a-zA-Z0-9]*$'
-CppMethod: '^operator|^__uuidof$|^OnReceive_ID_TIMESTAMP$|^on_[a-z][a-zA-Z0-9]*$|^onEvent_[a-z][a-zA-Z0-9]*$|^onEvent_HoleAncestorChanged$|^onEvent_(AddedBackend|RemovedBackend|HandleTouched)$|^(upTo|downFrom)_[A-Z][a-zA-Z0-9]*$|^FUN_[a-f0-9]{8}$|^print_exception$|^getfmod_version$|^LEGO_(GRID_MASS|JOINT_K|DEFAULT_ELASTIC_K)$|^disconnect_all_slots$|^c_str$|^(descriptors|members|properties|functions|signals|derivedClasses)_(begin|end)$|^[a-zA-Z][a-zA-Z0-9]*$'
+CppMethod: '^operator|^__uuidof$|^OnReceive_ID_TIMESTAMP$|^on_[a-z][a-zA-Z0-9]*$|^onEvent_[a-z][a-zA-Z0-9]*$|^onEvent_HoleAncestorChanged$|^onEvent_(AddedBackend|RemovedBackend|HandleTouched)$|^(upTo|downFrom)_[A-Z][a-zA-Z0-9]*$|^FUN_[a-f0-9]{8}$|^print_exception$|^getfmod_version$|^LEGO_(GRID_MASS|JOINT_K|DEFAULT_ELASTIC_K)$|^disconnect_all_slots$|^c_str$|^(descriptors|members|properties|functions|signals|derivedClasses|chatHistory)_(begin|end)$|^[a-zA-Z][a-zA-Z0-9]*$'
 EnumName: '^\(unnamed|^[A-Z][a-zA-Z0-9]*$'
 EnumConstantName: '^ValueType_[A-Za-z0-9]+$|^lego_[0-9]+$|^[A-Z][A-Z0-9_]*$|^[A-Z][a-zA-Z0-9]*$'
 FunctionName: '^operator|^FUN_[a-f0-9]{8}$|^lua_(pushfunction|tofunction|tofloat)$|^[a-zA-Z][a-zA-Z0-9]*$'

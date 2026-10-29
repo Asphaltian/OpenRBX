@@ -32,6 +32,7 @@ private:
 		const G3D::Color4& behind,
 		const G3D::Color4& inFront
 	);
+	void setImageFromName(Adorn*, const std::string&);
 
 public:
 	// FUNCTION: WEBSERVICE 0x10006260

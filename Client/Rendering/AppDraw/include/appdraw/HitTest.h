@@ -26,6 +26,8 @@ public:
 	static bool hitTest(
 		const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 	);
+	static const float handleOffset();
+	static float distanceToHandleRadius(const G3D::Vector3&, const G3D::Vector3&);
 };
 
 } // namespace RBX

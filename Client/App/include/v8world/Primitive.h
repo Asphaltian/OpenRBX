@@ -30,6 +30,7 @@ class Controller;
 class IMoving;
 class Joint;
 class Primitive;
+class PV;
 class RigidJoint;
 class SpatialNode;
 class Velocity;
@@ -79,10 +80,14 @@ public:
 			next1 = edge;
 		}
 	}
+	bool links(const Primitive*) const;
+	bool links(Primitive*, Primitive*) const;
 
 	Primitive* getPrimitive(int index) const { return (&prim0)[index]; }
 
 	Primitive* otherPrimitive(const Primitive* primitive) const { return primitive == prim0 ? prim1 : prim0; }
+	Primitive* otherPrimitive(int) const;
+	int getPrimitiveId(const Primitive*) const;
 
 	bool getInEdgeList() const { return inEdgeList; }
 	void setInEdgeList(bool value) { inEdgeList = value; }
@@ -173,7 +178,8 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x100a8740
 	// RBX::Primitive::`scalar deleting destructor'
 
-	Body* getBody() const { return body; }
+	Body* getBody() { return body; }
+	const Body* getBody() const { return body; }
 	Extents getExtentsLocal() const
 	{
 		const Vector3 corner = geometry->getGridSize() * 0.5f;
@@ -214,14 +220,23 @@ public:
 
 	unsigned int getSizeMultiplier() const { return sizeMultiplier; }
 	void setSizeMultiplier(unsigned int multiplier);
+	World* getWorld() const;
+	void setWorld(World*);
 
 	static void insertEdge(Edge* edge);
 	static void removeEdge(Edge* edge);
+	int getNumJoints2() const;
+	int countNumJoints() const;
+	int getNumContacts() const;
+	int getNumEdges() const;
+	bool hasEdge();
 
 	void setClump(Clump* value);
 
 	int getClumpDepth() const { return clumpDepth; }
 	void setClumpDepth(int value) { clumpDepth = value; }
+	int getTraverseId() const;
+	void setTraverseId(int);
 
 	Assembly* getAssembly() const;
 
@@ -234,6 +249,7 @@ public:
 
 	const CoordinateFrame& getCoordinateFrame() const;
 	void setVelocity(const Velocity& velocity);
+	void setMassInertia(float);
 
 	static void onNewTouch(Primitive* p0, Primitive* p1);
 
@@ -251,6 +267,7 @@ private:
 
 public:
 	const Extents& getFastFuzzyExtents() const;
+	static float squaredDistance(const Primitive&, const Primitive&);
 
 	void setSurfaceData(NormalId normalId, const SurfaceData& value);
 	void setSurfaceType(NormalId normalId, SurfaceType surfaceType);
@@ -258,6 +275,8 @@ public:
 	SurfaceType getSurfaceType(NormalId normalId) const { return surfaceType[normalId]; }
 
 	float getJointK() const { return JointK; }
+	static float defaultElasticity();
+	static float defaultFriction();
 
 	const SurfaceData& getSurfaceData(NormalId normalId) const
 	{
@@ -268,6 +287,7 @@ public:
 
 	CoordinateFrame getGridCorner() const;
 	void setGridCorner(const CoordinateFrame& corner);
+	void setPV(const PV&);
 
 	void setCoordinateFrame(const CoordinateFrame& value);
 
@@ -285,6 +305,7 @@ public:
 
 private:
 	RigidJoint* getFirstRigidAt(Edge* edge);
+	float getPlanarSize() const;
 
 public:
 	Edge* getFirstEdge() const;

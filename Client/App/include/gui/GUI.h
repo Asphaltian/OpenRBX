@@ -117,6 +117,8 @@ public:
 	static int normalizedFontSize(int size);
 
 	virtual void render2d(Adorn* adorn);
+	static GuiResponse processTarget(const GuiEvent&, GuiTarget*);
+	static void render2dItem(Adorn*, GuiItem*);
 
 protected:
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED

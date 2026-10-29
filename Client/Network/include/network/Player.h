@@ -110,6 +110,7 @@ public:
 	void removeCharacter();
 	void removeCharacterAppearance();
 	void loadCharacterAppearance();
+	static void onLocalPlayerNotIdle(ServiceProvider*);
 
 private:
 	void doPeriodicIdleCheck();

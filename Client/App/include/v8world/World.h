@@ -15,12 +15,13 @@ namespace RBX {
 
 class Assembly;
 class ClumpStage;
+class CollisionStage;
 class Contact;
 class ContactManager;
 class Joint;
-class MotorJoint;
 class JointStage;
 class Kernel;
+class MotorJoint;
 class Primitive;
 class SimJobStage;
 class SleepStage;
@@ -49,7 +50,7 @@ struct AutoDestroy
 class World : public Notifier<World, AutoJoin>, public Notifier<World, AutoDestroy>
 {
 public:
-	ContactManager* getContactManager() { return contactManager; }
+	ContactManager& getContactManager() { return *contactManager; }
 
 	World();
 
@@ -82,9 +83,12 @@ public:
 
 	const G3D::Array<Primitive*>& getPrimitives() const { return primitives.underlyingArray(); }
 
-	Kernel* getKernel() const;
+	Kernel& getKernel();
+	const Kernel& getKernel() const;
 
 	ClumpStage* getClumpStage();
+	CollisionStage* getCollisionStage();
+	const CollisionStage* getCollisionStage() const;
 
 	SimJobStage& getSimJobStage();
 
@@ -136,6 +140,7 @@ public:
 
 	void setCanThrottle(bool value) { canThrottle = value; }
 	void reset() { worldStepId = 0; }
+	int getWorldStepId();
 
 	const Profiling::CodeProfiler& getProfileWorldStep() const { return *profilingWorldStep; }
 	Profiling::CodeProfiler& getProfileWorldStep() { return *profilingWorldStep; }

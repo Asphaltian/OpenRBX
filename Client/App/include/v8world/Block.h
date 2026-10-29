@@ -25,6 +25,7 @@ private:
 
 	const Vector3* getEdgePoint(const Vector3int16& clip, NormalId& normalID) const;
 	const Vector3* getPlanePoint(const Vector3int16& clip, NormalId& normalID) const;
+	G3D::Matrix3 getMomentSolid(float) const;
 
 	Matrix3 getMomentHollow(float mass) const;
 
@@ -52,7 +53,8 @@ public:
 	void projectToFace(Vector3& ray, Vector3int16& clip, int& onBorder);
 
 	GeoPairType getBallInsideInfo(const Vector3& ray, const Vector3*& offset, NormalId& normalID);
-	GeoPairType getBallBlockInfo(int onBorder, Vector3int16 clip, const Vector3*& offset, NormalId& normalID);
+	const float* getVertices() const;
+	GeoPairType getBallBlockInfo(int onBorder, const Vector3int16 clip, const Vector3*& offset, NormalId& normalID);
 
 	const Vector3& getExtent() const { return *vertices; }
 
@@ -61,6 +63,7 @@ public:
 	int getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis);
 
 	int faceVertexToEdge(NormalId faceId, int vertexId);
+	int faceVertexToClockwiseEdge(NormalId, int);
 
 	const Vector3* getEdgeVertex(int edgeId) const;
 	NormalId getEdgeNormal(int edgeId);

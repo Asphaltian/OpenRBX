@@ -56,6 +56,8 @@ public:
 	virtual ~Selection();
 
 	unsigned int size() const;
+	boost::shared_ptr<Instance> front() const;
+	boost::shared_ptr<Instance> back() const;
 
 	template <class _InIt>
 	void setSelection(_InIt _First, _InIt _Last)
@@ -68,6 +70,7 @@ public:
 
 	std::vector<boost::shared_ptr<Instance> >::const_iterator begin() const { return selection->begin(); }
 	std::vector<boost::shared_ptr<Instance> >::const_iterator end() const { return selection->end(); }
+	const CopyOnWrite<std::vector<boost::shared_ptr<Instance> > >& getSelection() const;
 
 	void clearSelection();
 

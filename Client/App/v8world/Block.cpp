@@ -137,7 +137,7 @@ const Vector3* Block::getPlanePoint(const Vector3int16& clip, NormalId& normalID
 }
 
 // FUNCTION: WEBSERVICE 0x10109330
-GeoPairType Block::getBallBlockInfo(int onBorder, Vector3int16 clip, const Vector3*& offset, NormalId& normalID)
+GeoPairType Block::getBallBlockInfo(int onBorder, const Vector3int16 clip, const Vector3*& offset, NormalId& normalID)
 {
 	if (onBorder == 1) {
 		offset = getPlanePoint(clip, normalID);

@@ -39,6 +39,7 @@ public:
 	void continueDragging();
 	void finishDragging();
 	bool mousePartAlive();
+	bool anyDragPartAlive();
 
 	// FUNCTION: WEBSERVICE 0x10126410
 	boost::weak_ptr<PartInstance> getMousePart() { return mousePart; }
@@ -46,6 +47,7 @@ public:
 	void alignAndCleanParts();
 	G3D::Vector3 hitObjectOrPlane(const UIEvent& uiEvent);
 	G3D::Vector3 safeMoveYDrop(const G3D::Vector3& tryDrag);
+	G3D::Vector3 safeMoveAlongLine(const G3D::Vector3&);
 	G3D::Vector3 safeMoveNoDrop(const G3D::Vector3& tryDrag);
 	void safeRotate(const G3D::Matrix3& rotMatrix);
 };

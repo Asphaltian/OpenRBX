@@ -72,7 +72,7 @@ private:
 
 	bool fallOffPart(bool& snapped);
 
-	bool colliding() { return workspace->getWorld()->getContactManager()->intersectingOthers(drag, 0.01f); }
+	bool colliding() { return workspace->getWorld()->getContactManager().intersectingOthers(drag, 0.01f); }
 
 	bool rayHitsCloserPart();
 	bool tooCloseToCamera();

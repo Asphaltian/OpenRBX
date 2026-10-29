@@ -5,6 +5,7 @@
 
 #include <G3D/Color3.h>
 #include <G3D/Color4.h>
+#include <G3D/Rect2D.h>
 
 namespace RBX {
 
@@ -16,6 +17,7 @@ class Draw
 	static void spokes(float radius, float axis, Adorn* adorn);
 
 	static void adornSurfaces(const Part& part, Adorn* adorn, const G3D::Color3& controllerColor);
+	static void adornCylinder(const Part&, Adorn*);
 
 	static void frameBox(const Part& part, Adorn* adorn, const G3D::Color4& selectColor);
 
@@ -23,6 +25,7 @@ class Draw
 
 public:
 	static const G3D::Color3& selectColor();
+	static void selectionSquare(const G3D::Rect2D&, float);
 
 	static void partAdorn(const Part& part, Adorn* adorn, const G3D::Color3& controllerColor);
 

@@ -1,6 +1,7 @@
 #ifndef UTIL_INDEXBOX_H
 #define UTIL_INDEXBOX_H
 
+#include <G3D/Plane.h>
 #include <G3D/Vector3.h>
 
 namespace RBX {
@@ -25,8 +26,19 @@ public:
 	{
 		return Vector3(INDEXBOX_FACE_TO_NORMAL[f][0], INDEXBOX_FACE_TO_NORMAL[f][1], INDEXBOX_FACE_TO_NORMAL[f][2]);
 	}
+	G3D::Vector3 getEdgeNormal(int, int) const;
 
 	void getFaceCorners(int f, Vector3& v0, Vector3& v1, Vector3& v2, Vector3& v3) const;
+	void getEdge(int, G3D::Vector3&, G3D::Vector3&, G3D::Vector3&, G3D::Vector3&) const;
+	void getEdge(int, G3D::Vector4&, G3D::Vector4&, G3D::Vector3&, G3D::Vector3&) const;
+	static void getTextureCornersCentered(
+		int, const G3D::Vector3&, G3D::Vector2&, G3D::Vector2&, G3D::Vector2&, G3D::Vector2&
+	);
+	static void getTextureCornersGrid(
+		int, const G3D::Vector3&, G3D::Vector2&, G3D::Vector2&, G3D::Vector2&, G3D::Vector2&
+	);
+	bool culledBy(const G3D::Plane*, int) const;
+	bool contains(const G3D::Vector3&) const;
 
 	static const int INDEXBOX_FACE_TO_VERTEX[6][4];
 	static const float INDEXBOX_FACE_TO_NORMAL[6][3];

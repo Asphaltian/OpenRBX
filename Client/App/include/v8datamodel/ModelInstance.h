@@ -89,9 +89,13 @@ public:
 
 	virtual PartInstance* getPrimaryPart();
 	virtual const PartInstance* getPrimaryPartConst() const;
+	void setFrontAndTop(const G3D::Vector3&);
+	void destroyIfNoParts(const ModelInstance*);
 
 	void makeJoints();
 	void breakJoints();
+	float computeTotalMass() const;
+	float computeLargestMoment() const;
 
 protected:
 	virtual void legacyTraverseState(const CoordinateFrame& parentState);

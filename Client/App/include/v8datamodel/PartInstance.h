@@ -19,6 +19,7 @@
 #include <G3D/Color3.h>
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 
 namespace RBX {
 
@@ -123,6 +124,7 @@ public:
 	bool getPartLocked() const { return locked; }
 
 	Surfaces& getSurfaces();
+	Surface* getSurface(const G3D::Ray&, int&);
 	const Surfaces& getSurfaces() const;
 
 	// FUNCTION: WEBSERVICE 0x10115a90
@@ -171,6 +173,7 @@ public:
 	void setColor3(const G3D::Color3& value);
 
 	float alpha() const { return 1.0f - getTransparencyUi(); }
+	bool lockedInPlace() const;
 
 	void setColor(BrickColor value);
 
@@ -178,6 +181,10 @@ private:
 	friend class Surface;
 
 	void onSurfaceChanged(NormalId normalId);
+	void writeSize(XmlState*);
+	void raiseSurfacePropertyChanged(const Reflection::PropertyDescriptor&);
+	static float defaultFriction();
+	static float defaultElasticity();
 
 public:
 	virtual void onCanAggregateChanged(bool canAggregate);
@@ -211,9 +218,12 @@ public:
 	static void primitivesToParts(
 		const G3D::Array<Primitive*>& primitives, G3D::Array<shared_ptr<PartInstance> >& parts
 	);
+	static void primitivesToParts(const G3D::Array<Primitive*>&, std::vector<boost::weak_ptr<PartInstance> >&);
 	static bool getLocked(Instance* instance);
+	static void setLocked(Instance*, bool);
 
 	void setPhysics(const CoordinateFrame& cf, const Velocity& vel);
+	void setPhysics(const CoordinateFrame&);
 	void setFormFactorUi(FormFactor value);
 	void onTouchThisStep(shared_ptr<PartInstance> other);
 

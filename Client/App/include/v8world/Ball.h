@@ -11,6 +11,7 @@ class Ball : public Geometry
 {
 private:
 	Matrix3 getMomentSolid(float mass) const;
+	G3D::Matrix3 getMomentHollow(float) const;
 
 	virtual void onSetSize();
 

@@ -24,28 +24,34 @@ namespace RBX {
 
 bool World::disableEnvironmentalThrottle;
 
-// FUNCTION: WEBSERVICE 0x100cef80
-Kernel* World::getKernel() const
+// FUNCTION: WEBSERVICE 0x100cef80 FOLDED
+Kernel& World::getKernel()
 {
-	return jointStage->getKernel();
+	return *jointStage->getKernel();
+}
+
+// FUNCTION: WEBSERVICE 0x100cef80 FOLDED
+const Kernel& World::getKernel() const
+{
+	return *jointStage->getKernel();
 }
 
 // FUNCTION: WEBSERVICE 0x100cef90
 int World::getNumBodies() const
 {
-	return getKernel()->numBodies();
+	return getKernel().numBodies();
 }
 
 // FUNCTION: WEBSERVICE 0x100cefb0
 int World::getNumPoints() const
 {
-	return getKernel()->numPoints();
+	return getKernel().numPoints();
 }
 
 // FUNCTION: WEBSERVICE 0x100cefd0
 int World::getNumConstraints() const
 {
-	return getKernel()->numConnectors();
+	return getKernel().numConnectors();
 }
 
 // FUNCTION: WEBSERVICE 0x100ceff0
@@ -57,13 +63,13 @@ int World::getMetric(IWorldStage::MetricType metricType) const
 // FUNCTION: WEBSERVICE 0x100cf000
 int World::getNumHashNodes() const
 {
-	return contactManager->getSpatialHash()->getNodesOut();
+	return contactManager->getSpatialHash().getNodesOut();
 }
 
 // FUNCTION: WEBSERVICE 0x100cf010
 int World::getMaxBucketSize() const
 {
-	return contactManager->getSpatialHash()->getMaxBucket();
+	return contactManager->getSpatialHash().getMaxBucket();
 }
 
 // FUNCTION: WEBSERVICE 0x100cf020
@@ -475,7 +481,7 @@ World::World()
 	getSleepStage()->profilingWake->parent = profilingWorldStep.get();
 	getSleepStage()->profilingSleep->parent = profilingWorldStep.get();
 
-	getKernel()->profilingKernel->parent = profilingWorldStep.get();
+	getKernel().profilingKernel->parent = profilingWorldStep.get();
 }
 
 // FUNCTION: WEBSERVICE 0x100d07f0

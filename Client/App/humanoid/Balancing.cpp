@@ -30,7 +30,7 @@ HitTestFilter::Result Balancing::filterResult(const Primitive* testMe) const
 PartInstance* Balancing::tryFloor(const G3D::Ray& ray, float maxDistance)
 {
 	float distance;
-	Primitive* hit = humanoid->getWorld()->getContactManager()->getHitLegacy(
+	Primitive* hit = humanoid->getWorld()->getContactManager().getHitLegacy(
 		ray, NULL, this, floorTouchInWorld, distance, maxDistance
 	);
 

@@ -53,6 +53,7 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return true; }
+	bool isCodeEmbedded() const;
 
 protected:
 	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);

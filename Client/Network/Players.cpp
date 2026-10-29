@@ -190,7 +190,7 @@ boost::shared_ptr<Instance> Players::playerFromCharacter(boost::shared_ptr<Insta
 // FUNCTION: WEBSERVICE 0x101921d0
 void Players::onChildChanged(Instance* instance, const PropertyChanged& event)
 {
-	if (instance == localPlayer.get() && &event.getDescriptor() == &Player::prop_SuperSafeChat) {
+	if (instance == localPlayer.get() && &event.getProperty().getDescriptor() == &Player::prop_SuperSafeChat) {
 		Notifier<Players, SuperSafeChanged>::raise(SuperSafeChanged(superSafeOn()));
 	}
 }

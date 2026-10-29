@@ -31,10 +31,13 @@ public:
 	virtual void stepUi(int frameCount); // vtable+0x30
 
 	RevoluteLink* resetLink();
+	int getParentId() const;
+	void setJointAngle(float);
 
 	float getCurrentAngle() const { return currentAngle; }
 
 	void setCurrentAngle(float value);
+	G3D::CoordinateFrame getMeInOther(Primitive*);
 
 private:
 	RevoluteLink* link; // 0x88

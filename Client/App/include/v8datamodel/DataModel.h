@@ -16,6 +16,7 @@
 
 namespace RBX {
 
+class Adorn;
 class ContentId;
 class GuiRoot;
 class GuiTarget;
@@ -24,6 +25,7 @@ class LocalBackpack;
 class RunService;
 class StarterPackService;
 class TimeState;
+class UIEvent;
 class Workspace;
 
 extern const char sDataModel[];
@@ -87,7 +89,14 @@ public:
 	void close();
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > get(ContentId contentId);
 	void raiseClose();
+	int numChatOptions();
+	void buildGui(Adorn*);
+	void processGui(const UIEvent&);
+	GuiRoot* getGuiRoot() const;
+	GuiRoot* getGuiHooks() const;
 	void clearContents();
+	boost::shared_ptr<boost::recursive_mutex> getMutex() const;
+	static boost::shared_ptr<boost::recursive_mutex> getMutex(Instance*);
 
 	virtual void setDirty(bool dirty) { this->dirty = dirty; }
 	virtual bool isDirty() const { return dirty; }
@@ -100,6 +109,8 @@ public:
 	TimeState* getTimeState();
 
 	virtual std::string evaluate(const std::string& valueName) const;
+	void renderPass2d(Adorn*, IMetric*);
+	void renderPass3dAdorn(Adorn*);
 
 	// FUNCTION: WEBSERVICE 0x10071420
 	void setUiMessage(std::string message) { uiMessage = message; }
@@ -109,6 +120,7 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x10071490
 	void setUiMessageBrickCount() { uiMessage = "[[[progress]]]"; }
+	bool canDelaySwapBuffer() const;
 
 protected:
 	virtual void onChildAdded(Instance* child);

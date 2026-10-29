@@ -228,7 +228,7 @@ void SleepStage::onAssemblyAdded(Assembly* assembly)
 {
 	assembly->putInPipeline(this);
 	assembly->setSleepInfo(new SleepInfo());
-	assembly->getAssemblyPrimitiveConst()->getBody()->resetAccumulators();
+	assembly->getAssemblyPrimitive()->getBody()->resetAccumulators();
 
 	wakePending.insert(assembly);
 }
@@ -273,7 +273,7 @@ void SleepStage::changeAssemblyState(Assembly* a, Sim::AssemblyState newState)
 
 	if ((oldState == Sim::SLEEPING_CHECKING || oldState == Sim::SLEEPING_DEEPLY) &&
 		newState != Sim::SLEEPING_CHECKING && newState != Sim::SLEEPING_DEEPLY) {
-		a->getAssemblyPrimitiveConst()->getBody()->resetAccumulators();
+		a->getAssemblyPrimitive()->getBody()->resetAccumulators();
 	}
 
 	if (newState == Sim::AWAKE) {
@@ -286,7 +286,7 @@ void SleepStage::changeAssemblyState(Assembly* a, Sim::AssemblyState newState)
 		}
 	}
 	else if (newState == Sim::SLEEPING_CHECKING || newState == Sim::SLEEPING_DEEPLY) {
-		a->getAssemblyPrimitiveConst()->getBody()->setVelocity(Velocity::zero());
+		a->getAssemblyPrimitive()->getBody()->setVelocity(Velocity::zero());
 
 		if (a->downstreamOfStage(this)) {
 			static_cast<SimJobStage*>(getDownstream())->onAssemblyRemoving(a);

@@ -142,7 +142,7 @@ ContactManager* Humanoid::getContactManager()
 	World* world = Workspace::getWorldIfInWorkspace(this);
 
 	if (world != NULL) {
-		return world->getContactManager();
+		return &world->getContactManager();
 	}
 
 	return NULL;
@@ -209,13 +209,13 @@ void Humanoid::onAncestorChanged(const AncestorChanged& event)
 		currentState.reset();
 
 		if (world) {
-			world->getKernel()->removeConnector2ndPass(this);
+			world->getKernel().removeConnector2ndPass(this);
 		}
 
 		world = newWorld;
 		if (world) {
 			setState(new Running(this));
-			world->getKernel()->insertConnector2ndPass(this);
+			world->getKernel().insertConnector2ndPass(this);
 		}
 	}
 

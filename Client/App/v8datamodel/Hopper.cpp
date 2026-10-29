@@ -167,7 +167,7 @@ void HopperBin::onSelectCommand()
 
 	if (verb->isEnabled()) {
 		if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
-			verb->doIt(workspace->getDataState());
+			verb->doIt(&workspace->getDataState());
 		}
 	}
 }

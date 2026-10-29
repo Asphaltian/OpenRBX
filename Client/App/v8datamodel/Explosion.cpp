@@ -135,7 +135,7 @@ void Explosion::onEvent(const RunService* source, Stepped event)
 			float radius = blastRadius;
 			Extents blastExtents = Extents::fromCenterCorner(position, G3D::Vector3(radius, radius, radius));
 
-			world->getContactManager()->getPrimitivesTouchingExtents(blastExtents, NULL, primitives);
+			world->getContactManager().getPrimitivesTouchingExtents(blastExtents, NULL, primitives);
 
 			signalBlast(primitives);
 			doBlast(primitives);

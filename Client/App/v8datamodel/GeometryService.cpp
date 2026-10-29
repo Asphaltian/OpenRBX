@@ -18,7 +18,7 @@ G3D::Vector3 GeometryService::getHitLocationFilterDescendants(Instance* ancestor
 
 	IgnoreDescendantsOf filter(ancestor);
 
-	ContactManager* contactManager = workspace->getWorld()->getContactManager();
+	ContactManager* contactManager = &workspace->getWorld()->getContactManager();
 	G3D::Vector3 hitPoint;
 	std::vector<const Primitive*> dummy;
 

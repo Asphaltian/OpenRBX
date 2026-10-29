@@ -297,13 +297,13 @@ std::string DataModel::evaluate(const std::string& valueName) const
 		return StringConverter<int>::convertToString(world->getNumPoints());
 	}
 	if (valueName == "energyBody") {
-		return StringConverter<float>::convertToString(world->getKernel()->bodyKineticEnergy());
+		return StringConverter<float>::convertToString(world->getKernel().bodyKineticEnergy());
 	}
 	if (valueName == "energyConnector") {
-		return StringConverter<float>::convertToString(world->getKernel()->connectorSpringEnergy());
+		return StringConverter<float>::convertToString(world->getKernel().connectorSpringEnergy());
 	}
 	if (valueName == "energyTotal") {
-		return StringConverter<float>::convertToString(world->getKernel()->totalKineticEnergy());
+		return StringConverter<float>::convertToString(world->getKernel().totalKineticEnergy());
 	}
 
 	return "?";

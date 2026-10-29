@@ -55,6 +55,7 @@ public:
 	{
 		return isJoint(edge) && static_cast<Joint*>(edge)->getJointType() >= ANCHOR_JOINT;
 	}
+	static bool isGroundJoint(Joint*);
 
 	static bool isAutoJoinJoint(Joint* joint)
 	{
@@ -65,6 +66,7 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
 	virtual JointType getJointType() const { return NO_JOINT; } // vtable+0x14
+	static JointType getJointType(Edge*);
 	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
 	virtual bool isBreakable() const { return false; } // vtable+0x18
 
@@ -88,6 +90,7 @@ public:
 	void setJointCoord(int index, const CoordinateFrame& value);
 
 	const CoordinateFrame& getJointCoord(int index) const { return index == 0 ? jointCoord0 : jointCoord1; }
+	NormalId getNormalId(int) const;
 
 	bool getActive() const { return active; }
 	void setActive(bool value) { active = value; }

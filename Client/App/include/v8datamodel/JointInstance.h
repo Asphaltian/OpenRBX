@@ -92,6 +92,7 @@ class Motor : public DescribedCreatable<Motor, AutoJoint, sMotor>
 {
 private:
 	MotorJoint* getMotorJoint() { return static_cast<MotorJoint*>(joint); }
+	void renderJointCylinder(Adorn*, int);
 	const MotorJoint* getMotorJoint() const { return static_cast<const MotorJoint*>(joint); }
 
 public:

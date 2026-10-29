@@ -34,6 +34,7 @@ public:
 	// RBX::ForceField::`scalar deleting destructor'
 
 	static bool partInForceField(PartInstance* part);
+	static int cycles();
 };
 
 DECOMP_SIZE_ASSERT(ForceField, 0x10c)

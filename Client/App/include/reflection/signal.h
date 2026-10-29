@@ -152,6 +152,7 @@ private:
 
 public:
 	boost::shared_ptr<SignalInstance> getSignalInstance(SignalSource& source) const;
+	const SignatureDescriptor& getSignature() const;
 
 protected:
 	SignalDescriptor(ClassDescriptor& classDescriptor, const char* name);

@@ -691,7 +691,7 @@ WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* 
 	worldStep->createBoundChildItem(*world->getSleepStage()->profilingWake);
 	worldStep->createBoundChildItem(*world->getSleepStage()->profilingCollision);
 	worldStep->createBoundChildItem(*world->getSleepStage()->profilingSleep);
-	worldStep->createBoundChildItem(*world->getKernel()->profilingKernel);
+	worldStep->createBoundChildItem(*world->getKernel().profilingKernel);
 	pWorkspaceStep->createBoundChildItem(*workspace->profileRunServiceStepped);
 	pWorkspaceStep->createBoundChildItem(*workspace->profileRunServiceHeartbeat);
 

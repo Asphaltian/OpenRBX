@@ -31,6 +31,10 @@ public:
 	// RBX::Reflection::ClassDescriptor::~ClassDescriptor
 
 	const ClassDescriptor* getBase() const { return base; }
+	bool isBaseOf(const ClassDescriptor&) const;
+	bool isBaseOf(const char*) const;
+	bool isA(const ClassDescriptor&) const;
+	bool isA(const char*) const;
 
 	bool operator==(const ClassDescriptor& other) const;
 	bool operator!=(const ClassDescriptor& other) const;
@@ -42,6 +46,8 @@ public:
 
 		return root;
 	}
+	std::vector<ClassDescriptor*>::const_iterator derivedClasses_begin() const;
+	std::vector<ClassDescriptor*>::const_iterator derivedClasses_end() const;
 
 	static bool lockedDown;
 

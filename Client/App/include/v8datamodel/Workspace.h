@@ -113,9 +113,12 @@ public:
 	Workspace(IDataState* dataState);
 
 	World* getWorld() const { return world.get(); }
-	IDataState* getDataState() const { return dataState; }
+	MouseCommand* getCurrentMouseCommand();
+	void cancelMouseCommand();
+	IDataState& getDataState() const { return *dataState; }
 
 	bool getInMouselookMode() { return inMouselookMode; }
+	void setInMouselookMode(bool);
 
 	void setMouseCommand(MouseCommand* newMouseCommand);
 	void setDefaultMouseCommand();
@@ -123,14 +126,17 @@ public:
 
 	void setImageServerView(const G3D::Rect2D& viewPortRect);
 	void zoomToExtents();
+	void onWrapMouse(const G3D::Vector2&);
 
 	virtual GuiResponse process(const GuiEvent& guiEvent);
+	void selectAll();
 
 	void start();
 	void stop();
 	void reset();
 	void setThrottleEnabled(bool value);
 	void joinAllHack();
+	void insertItems(XmlElement*, std::vector<boost::shared_ptr<Instance> >&, InsertMode, PromptMode);
 
 	float step(float timeInterval);
 

@@ -59,6 +59,9 @@ public:
 	static boost::recursive_mutex mutex;
 
 	static boost::shared_ptr<GlobalSettings> singleton();
+	void loadState();
+	void saveState();
+	void eraseSettingsStore();
 
 	// SIZE 0xf8
 	class Item : public NonFactoryProduct<Instance, static_cast<const char*>(0)>

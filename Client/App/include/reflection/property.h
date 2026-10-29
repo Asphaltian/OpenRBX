@@ -1138,9 +1138,11 @@ public:
 	}
 
 	const Name& getName() const { return descriptor->name; }
+	bool hasStringValue() const;
 
 	// FUNCTION: WEBSERVICE 0x100aaf40
 	std::string getStringValue() const { return descriptor->getStringValue(instance); }
+	XmlElement* write() const;
 
 protected:
 	const PropertyDescriptor* descriptor; // 0x00

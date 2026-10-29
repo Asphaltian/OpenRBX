@@ -13,8 +13,9 @@ class Name : public boost::noncopyable
 {
 public:
 	static const Name& declare(const char* name, int dictionaryIndex);
-	static const Name& lookup(const char* name);
 	static const Name& lookup(const std::string& name);
+	static const Name& lookup(const char* name);
+	static const Name& lookup(int);
 	static const Name& getNullName();
 
 private:

@@ -422,13 +422,13 @@ void BodyMover::updateWorld()
 
 	if (world != newWorld) {
 		if (world) {
-			world->getKernel()->removeConnector2ndPass(this);
+			world->getKernel().removeConnector2ndPass(this);
 		}
 
 		world = newWorld;
 
 		if (world) {
-			world->getKernel()->insertConnector2ndPass(this);
+			world->getKernel().insertConnector2ndPass(this);
 
 			startListening(ServiceProvider::create<RunService>(this), this);
 		}

@@ -47,7 +47,9 @@ public:
 	virtual void cameraSetWalkOrientation(float angle, bool value) = 0; // vtable+0x2c
 
 	void onHeartBeat(CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus);
+	float panAdjust();
 	void setCursorCenterLocked(bool value);
+	bool getCursorCenterLocked() const;
 };
 
 DECOMP_SIZE_ASSERT(ICharacterSubject, 0x58)

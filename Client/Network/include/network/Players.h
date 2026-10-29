@@ -136,6 +136,7 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x10072560
 	Player* getLocalPlayer() const { return localPlayer.get(); }
+	int getNumPlayers() const;
 
 	// FUNCTION: WEBSERVICE 0x10120bc0
 	int numPlayers() const { return players->size(); }
@@ -150,6 +151,9 @@ public:
 
 	void chat(std::string message);
 	void reportAbuse(Player* player, std::string comment);
+	std::list<ChatMessage>::const_iterator chatHistory_begin();
+	std::list<ChatMessage>::const_iterator chatHistory_end();
+	bool canReportAbuse() const;
 	void reportAbuse(boost::shared_ptr<Instance> player, std::string comment);
 
 	void setAbuseReportUrl(std::string value);
@@ -166,6 +170,7 @@ public:
 	static Player* findLocalPlayer(const Instance* context);
 
 	static bool clientIsPresent(const Instance* context, bool testInDatamodel);
+	static bool serverIsPresent(const Instance*, bool);
 	static bool frontendProcessing(const Instance* context, bool testInDatamodel);
 	static bool backendProcessing(const Instance* context, bool testInDatamodel);
 

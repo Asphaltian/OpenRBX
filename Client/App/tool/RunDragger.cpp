@@ -185,7 +185,7 @@ RunDragger::SnapInfo RunDragger::rayHitsPart(const G3D::Array<Primitive*>& tried
 	PartByLocalCharacter filter(workspace);
 
 	if (PartInstance* part = MouseCommand::getMousePart(
-			mouseRay, *workspace->getWorld()->getContactManager(), drag, &filter, answer.hitWorld, 2048.0f
+			mouseRay, workspace->getWorld()->getContactManager(), drag, &filter, answer.hitWorld, 2048.0f
 		)) {
 		answer.snap = part->getPrimitive();
 		if (notTried(answer.snap, triedSnap)) {
@@ -306,7 +306,7 @@ void RunDragger::findSafeY()
 		temp.append(part->getPrimitive());
 
 		G3D::Vector3 moved =
-			Dragger::safeMoveNoDrop(temp, G3D::Vector3::zero(), *workspace->getWorld()->getContactManager());
+			Dragger::safeMoveNoDrop(temp, G3D::Vector3::zero(), workspace->getWorld()->getContactManager());
 
 		G3D::CoordinateFrame newC = drag->getCoordinateFrame();
 		newC.translation += moved;

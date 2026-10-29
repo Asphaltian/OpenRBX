@@ -102,6 +102,7 @@ public:
 		G3D::CoordinateFrame& outCFrame,
 		float& outBoundingRadius
 	);
+	static unsigned int findVertex(const G3D::Vector3&, const G3D::Vector3&, const G3D::Vector2&);
 
 	virtual ~Mesh();
 

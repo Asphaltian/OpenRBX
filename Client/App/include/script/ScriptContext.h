@@ -74,6 +74,7 @@ public:
 	);
 
 	Result resume(lua_State* thread, int narg);
+	void gc();
 	void resume(
 		lua_State* thread,
 		boost::function1<unsigned int, lua_State*> pushArguments,
@@ -88,6 +89,8 @@ public:
 	virtual XmlElement* write() { return NULL; }
 
 	unsigned int getThreadCount() const;
+	bool hasState() const;
+	lua_State* state();
 
 	void closeState();
 	void addScript(Script* script);
@@ -125,6 +128,8 @@ private:
 	static int loadfile(lua_State* L);
 	static int settings(lua_State* thread);
 	static int stats(lua_State* L);
+	static int statsitemvalue(lua_State*);
+	static int onError(lua_State*);
 	static int dofile(lua_State* L);
 
 	static void reportError(lua_State* thread);

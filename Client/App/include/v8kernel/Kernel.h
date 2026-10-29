@@ -22,44 +22,6 @@ using G3D::Vector3;
 // SIZE 0x30
 class Kernel : public IStage
 {
-public:
-	Kernel(IStage* upstream);
-
-	// SYNTHETIC: WEBSERVICE 0x100d5bc0
-	// RBX::Kernel::`scalar deleting destructor'
-
-	virtual ~Kernel(); // vtable+0x00
-
-	virtual StageType getStageType() { return KERNEL_STAGE; }
-
-	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling);
-
-	int numBodies() const;
-	int numPoints() const;
-	int numConnectors() const;
-
-	float connectorSpringEnergy() const;
-	float bodyKineticEnergy() const;
-
-	// FUNCTION: WEBSERVICE 0x100714e0
-	float totalKineticEnergy() const { return connectorSpringEnergy() + bodyKineticEnergy(); }
-
-	void insertConnector(Connector* connector);
-	void insertConnector2ndPass(Connector* connector);
-	void removeConnector(Connector* connector);
-	void removeConnector2ndPass(Connector* connector);
-
-	Kernel* getKernel();
-
-	Point* newPoint(Body* body, const Vector3& worldPos);
-	void deletePoint(Point* point);
-
-	void insertBody(Body* body);
-	void removeBody(Body* body);
-
-public:
-	void removePoint(Point* point);
-
 private:
 	static int numKernels;
 
@@ -71,6 +33,46 @@ private:
 	int maxConnectors;                         // 0x28
 
 public:
+	Kernel(IStage* upstream);
+
+	// SYNTHETIC: WEBSERVICE 0x100d5bc0
+	// RBX::Kernel::`scalar deleting destructor'
+
+	virtual ~Kernel(); // vtable+0x00
+
+	virtual StageType getStageType() { return KERNEL_STAGE; } // vtable+0x04
+
+	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling); // vtable+0x08
+
+	virtual Kernel* getKernel(); // vtable+0x0c
+
+	void insertBody(Body* body);
+	void insertPoint(Point*);
+	void insertConnector(Connector* connector);
+	void insertConnector2ndPass(Connector* connector);
+	void removeBody(Body* body);
+	void removePoint(Point* point);
+	void removeConnector(Connector* connector);
+	void removeConnector2ndPass(Connector* connector);
+
+	Point* newPoint(Body* body, const Vector3& worldPos);
+	void deletePoint(Point* point);
+
+	void report();
+	static void reportMemorySizes();
+
+	float connectorSpringEnergy() const;
+	float bodyPotentialEnergy() const;
+	float bodyKineticEnergy() const;
+	float totalEnergy() const;
+
+	// FUNCTION: WEBSERVICE 0x100714e0
+	float totalKineticEnergy() const { return connectorSpringEnergy() + bodyKineticEnergy(); }
+
+	int numBodies() const;
+	int numPoints() const;
+	int numConnectors() const;
+
 	boost::scoped_ptr<Profiling::CodeProfiler> profilingKernel; // 0x2c
 };
 

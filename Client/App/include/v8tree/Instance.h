@@ -99,8 +99,10 @@ public:
 	PropertyChanged(const PropertyChanged& other) : property(other.property) {}
 
 	const Reflection::Property& getProperty() const { return property; }
+	bool getProperty(Reflection::Property*&);
+	const Name& getName();
 
-	const Reflection::PropertyDescriptor& getDescriptor() const { return property.getDescriptor(); }
+	const Reflection::PropertyDescriptor& getDescriptor() { return property.getDescriptor(); }
 
 private:
 	friend class Instance;
@@ -249,8 +251,12 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x100ab0a0
 	void setParent2(boost::shared_ptr<Instance> instance) { setParent(instance.get()); }
+	void promoteChildren();
 
 	Instance* getRootAncestor() { return parent != NULL ? parent->getRootAncestor() : this; }
+	const Instance* getRootAncestor() const;
+	static const Instance* getRootAncestor(const Instance*);
+	static Instance* getRootAncestor(Instance*);
 
 	int findChildIndex(const Instance* instance) const;
 	void removeAllChildren();
@@ -373,6 +379,7 @@ public:
 	void readChildren(const XmlElement* element, IReferenceBinder& binder);
 	void readChild(const XmlElement* childElement, IReferenceBinder& binder);
 	void writeChildren(XmlElement* element);
+	XmlElement* writeDelete();
 
 	bool contains(const Instance* instance) const;
 

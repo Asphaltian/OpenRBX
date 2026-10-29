@@ -45,6 +45,7 @@ public:
 	bool operator!=(const PrimIterator& other) const { return primitive != other.primitive; }
 
 	PrimIterator& operator++();
+	static Primitive* getNextPrimitive(Primitive*, PrimIterator::SearchType);
 
 	static Primitive* findParent(Primitive* primitive, SearchType searchType);
 };
@@ -73,6 +74,8 @@ public:
 
 private:
 	static Edge* getNextExternalUtil(Primitive* primitive, Edge* edge);
+	static Edge* getFirstExternalEdge(Primitive*);
+	static Edge* getNextExternalEdge(Primitive*, Edge*);
 
 	void findEdgeOnNextPrimitive();
 

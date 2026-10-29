@@ -28,11 +28,7 @@ public:
 		return Velocity(linearVelocityAtOffset(offset), rotational);
 	}
 
-	void rotateBy(const Matrix3& rotation) const
-	{
-		linear = rotation * linear;
-		rotational = rotation * rotational;
-	}
+	Velocity rotateBy(const Matrix3&) const;
 
 	static const Velocity& zero()
 	{

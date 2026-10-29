@@ -654,7 +654,7 @@ void PartInstance::safeMove()
 
 		temp.append(primitive.get());
 
-		Dragger::safeMoveNoDrop(temp, Vector3::zero(), *world->getContactManager());
+		Dragger::safeMoveNoDrop(temp, Vector3::zero(), world->getContactManager());
 	}
 }
 

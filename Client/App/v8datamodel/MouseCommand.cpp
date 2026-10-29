@@ -125,7 +125,7 @@ MouseCommand::~MouseCommand()
 PartInstance* MouseCommand::getPart(const UIEvent& uiEvent, const HitTestFilter* filter, G3D::Vector3& hitWorld)
 {
 	G3D::Ray unitRay = getUnitMouseRay(uiEvent);
-	ContactManager& contactManager = *workspace->getWorld()->getContactManager();
+	ContactManager& contactManager = workspace->getWorld()->getContactManager();
 
 	std::vector<const Primitive*> ignorePrims;
 	static_cast<ICameraOwner*>(workspace)->getCameraIgnorePrimitives(ignorePrims);
