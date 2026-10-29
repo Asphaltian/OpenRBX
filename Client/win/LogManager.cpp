@@ -21,6 +21,11 @@ bool LogManager::logsEnabled = true;
 MainLogManager* LogManager::mainLogManager;
 bool RobloxCrashReporter::silent;
 
+MainLogManager* LogManager::getMainLogManger()
+{
+	return mainLogManager;
+}
+
 // FUNCTION: WEBSERVICE 0x10001df0
 ATL::CPath LogManager::GetLogPath() const
 {

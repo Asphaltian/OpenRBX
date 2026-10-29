@@ -1,18 +1,36 @@
 #include "ErrorUploader.h"
 
+#include "LogManager.h"
 #include "util/Http.h"
 #include "util/StandardOut.h"
 
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 
-// STUB: WEBSERVICE 0x10001100
+// FUNCTION: WEBSERVICE 0x10001100
 void ErrorUploader::Upload(std::string url, bool synchronous)
 {
-	STUB(0x10001100);
+	std::vector<std::string> f = LogManager::getMainLogManger()->archiveCrashLogs();
+
+	{
+		boost::recursive_mutex::scoped_lock lock(_data->sync);
+		_data->url = url;
+
+		for (unsigned int i = std::max<int>(0, f.size() - 12); i < f.size(); ++i) {
+			_data->files.push(f[i]);
+		}
+	}
+	if (!synchronous) {
+		thread.wake();
+	}
+	else {
+		while (run(_data) != RBX::worker_thread::done) {
+		}
+	}
 }
 
-// STUB: WEBSERVICE 0x10001350
+// FUNCTION: WEBSERVICE 0x10001350
 RBX::worker_thread::work_result ErrorUploader::run(boost::shared_ptr<data> _data)
 {
 	std::string file;
@@ -39,7 +57,7 @@ RBX::worker_thread::work_result ErrorUploader::run(boost::shared_ptr<data> _data
 			RBX::Http(url).post(data, true, response);
 		}
 		else {
-			std::stringstream data(std::string("Empty!!!"));
+			std::stringstream data("Empty!!!");
 			std::string response;
 			RBX::Http(url).post(data, true, response);
 		}
