@@ -8,21 +8,25 @@ namespace RBX {
 
 char sTimerService[] = "Timer";
 
-// STUB: WEBSERVICE 0x100fba10
+// FUNCTION: WEBSERVICE 0x100fba10
 void TimerService::delay(boost::function0<void> func, double seconds)
 {
 	Item item;
 	item.time = G3D::System::getLocalTime() + seconds;
 	item.func = func;
 
+	bool inserted = false;
 	for (std::list<Item>::iterator iter = items.begin(); iter != items.end(); ++iter) {
 		if (iter->time > item.time) {
 			items.insert(iter, item);
-			return;
+			inserted = true;
+			break;
 		}
 	}
 
-	items.push_back(item);
+	if (!inserted) {
+		items.push_back(item);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100fbb60
