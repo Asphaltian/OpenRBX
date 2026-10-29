@@ -110,46 +110,46 @@ CoordinateFrame Feature::computeLocalCoordinateFrame() const
 	}
 
 	Extents extents = part->getPrimitive()->getExtentsLocal();
-	Vector3 halfSize = extents.max();
+	Vector3 corner = extents.max();
 
-	Vector3 uvw = Math::vector3Abs(objectToUvw(halfSize, faceId));
-	uvw.z = 0.0f;
+	Vector3 uv = Math::vector3Abs(objectToUvw(corner, faceId));
+	uv.z = 0.0f;
 
 	switch (leftRight) {
 	case LEFT:
-		uvw.x = -uvw.x;
+		uv.x = -uv.x;
 		break;
 	case CENTER_LR:
-		uvw.x = 0.0f;
+		uv.x = 0.0f;
 		break;
 	}
 
 	switch (topBottom) {
 	case CENTER_TB:
-		uvw.y = 0.0f;
+		uv.y = 0.0f;
 		break;
 	case BOTTOM:
-		uvw.y = -uvw.y;
+		uv.y = -uv.y;
 		break;
 	}
 
 	switch (inOut) {
 	case INSET:
-		uvw.x = Math::sign(uvw.x) * std::max(fabs(uvw.x) - 1.0f, 0.0f);
-		uvw.y = Math::sign(uvw.y) * std::max(fabs(uvw.y) - 1.0f, 0.0f);
+		uv.x = Math::sign(uv.x) * std::max(fabs(uv.x) - 1.0f, 0.0f);
+		uv.y = Math::sign(uv.y) * std::max(fabs(uv.y) - 1.0f, 0.0f);
 		break;
 	case CENTER_IO:
-		uvw.x = 0.0f;
-		uvw.y = 0.0f;
+		uv.x = 0.0f;
+		uv.y = 0.0f;
 		break;
 	}
 
-	Vector3 offset = uvwToObject(uvw, faceId);
-	Vector3 position = extents.faceCenter(faceId) + offset;
+	Vector3 uvInObject = uvwToObject(uv, faceId);
+	Vector3 ptInObject = extents.faceCenter(faceId) + uvInObject;
 
 	NormalId normalId = getCoordOrientation() == Z_OUT ? faceId : intToNormalId((faceId + 3) % 6);
 
-	return CoordinateFrame(normalIdToMatrix3(normalId), position);
+	return CoordinateFrame(normalIdToMatrix3(normalId), ptInObject);
 }
 
 // FUNCTION: WEBSERVICE 0x100e40b0
