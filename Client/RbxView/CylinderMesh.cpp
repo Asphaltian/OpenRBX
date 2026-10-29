@@ -80,7 +80,12 @@ static void EndcapTransform(
 	vertex.y *= ratio;
 }
 
-// STUB: WEBSERVICE 0x10187190
+static G3D::Vector2 unitVector(const G3D::Vector2& v)
+{
+	return v * (1.0f / v.length());
+}
+
+// FUNCTION: WEBSERVICE 0x10187190
 static void CylinderTransform(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,
@@ -89,7 +94,7 @@ static void CylinderTransform(
 	const G3D::Vector2int16& ivertex
 )
 {
-	G3D::Vector2 v = G3D::normalize(vertex.yz());
+	G3D::Vector2 v = unitVector(vertex.yz());
 	vertex.y = v.x * radius.x;
 	vertex.z = v.y * radius.y;
 	normal = G3D::Vector3(0, v.x, v.y);
