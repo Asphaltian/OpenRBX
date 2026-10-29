@@ -73,7 +73,7 @@ BoxSelectCommand::BoxSelectCommand(Workspace* workspace)
 {
 }
 
-// STUB: WEBSERVICE 0x100c0790
+// FUNCTION: WEBSERVICE 0x100c0790
 MouseCommand* ArrowToolBase::onMouseDown(const UIEvent& uiEvent)
 {
 	G3D::Vector3 hitWorld;
@@ -81,10 +81,11 @@ MouseCommand* ArrowToolBase::onMouseDown(const UIEvent& uiEvent)
 
 	if (hitPart) {
 		Instance* topSelectable = getTopSelectable3d(hitPart);
+		UserInputBase* userInput = uiEvent.userInput;
 
 		ServiceClient<Selection> selection(workspace);
 
-		if (uiEvent.userInput->shiftKeyDown() || uiEvent.userInput->ctrlKeyDown()) {
+		if (userInput->shiftKeyDown() || userInput->ctrlKeyDown()) {
 			if (selection->isSelected(topSelectable)) {
 				selection->removeFromSelection(topSelectable);
 			}

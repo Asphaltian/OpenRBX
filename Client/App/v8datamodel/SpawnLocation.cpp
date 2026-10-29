@@ -69,7 +69,7 @@ SpawnerService::~SpawnerService()
 {
 }
 
-// STUB: WEBSERVICE 0x100fe770
+// FUNCTION: WEBSERVICE 0x100fe770
 void SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network::Player* p)
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(this);
@@ -101,7 +101,8 @@ void SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network
 	G3D::Vector3 dropPoint = location->getCoordinateFrame().translation;
 	dropPoint.y += 7.0f;
 
-	if (location->forcefieldDuration > 0) {
+	int duration = location->forcefieldDuration;
+	if (duration > 0) {
 		boost::shared_ptr<ForceField> f = Creatable<Instance>::create<ForceField>();
 		f->setParent(model.get());
 		DebrisService* debris = ServiceProvider::create<DebrisService>(this);
