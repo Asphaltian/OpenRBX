@@ -135,8 +135,6 @@ public:
 	/// \return A pointer to a static struct, filled out with current statistical information.
 	RakNetStatistics * const GetStatistics( void );
 
-	///Are we waiting for any data to be sent out or be processed by the player?
-	bool IsDataWaiting(void);
 	bool AreAcksWaiting(void);
 
 	// Set outgoing lag and packet loss properties

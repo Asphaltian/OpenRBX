@@ -496,7 +496,7 @@ void TreeStage::rebuildClump(Joint* joint, Primitive* parent)
 	Primitive* child = joint->otherPrimitive(parent);
 
 	Clump* clump = child->getClump();
-	bool isRoot = clump != NULL && clump->getRootPrimitive() == child;
+	bool isRoot = clump != NULL && clump->getClumpPrimitive() == child;
 
 	if (RigidJoint::isRigidJoint(joint)) {
 		if (isRoot) {

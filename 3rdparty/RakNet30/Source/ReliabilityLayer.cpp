@@ -1393,21 +1393,6 @@ END_OF_GENERATE_FRAME:
 	return wroteAcks || wroteData;
 }
 
-//-------------------------------------------------------------------------------------------------------
-// Are we waiting for any data to be sent out or be processed by the player?
-//-------------------------------------------------------------------------------------------------------
-bool ReliabilityLayer::IsDataWaiting(void)
-{
-	unsigned i;
-	for ( i = 0; i < NUMBER_OF_PRIORITIES; i++ )
-	{
-		if (sendPacketSet[ i ].Size() > 0)
-			return true;
-	}
-
-	return acknowlegements.Size() > 0 || resendList.IsEmpty()==false || outputQueue.Size() > 0 || orderingList.Size() > 0 || splitPacketChannelList.Size() > 0;
-}
-
 // FUNCTION: WEBSERVICE 0x101bda40
 bool ReliabilityLayer::AreAcksWaiting(void)
 {

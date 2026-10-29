@@ -94,7 +94,8 @@ public:
 
 	Assembly* otherAssembly(Edge* edge) const;
 
-	const Primitive* getRootPrimitive() const { return rootPrimitive; }
+	const Primitive* getClumpPrimitive() const { return rootPrimitive; }
+	Primitive* getClumpPrimitive() { return rootPrimitive; }
 
 	Mechanism* getMechanism();
 	void setMechanism(Mechanism* value) { mechanism = value; }
