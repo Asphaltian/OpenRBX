@@ -11,10 +11,7 @@ namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101ecd70
 bool HitTest::hitTestBall(
-	const Part& part,
-	G3D::Ray& rayInPartCoords,
-	G3D::Vector3& hitPointInPartCoords,
-	float gridToReal
+	const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 )
 {
 	float radius = part.gridSize.x * gridToReal * 0.5;
@@ -33,10 +30,7 @@ bool HitTest::hitTestBall(
 
 // FUNCTION: WEBSERVICE 0x101ece50
 bool HitTest::hitTestCylinder(
-	const Part& part,
-	G3D::Ray& rayInPartCoords,
-	G3D::Vector3& hitPointInPartCoords,
-	float gridToReal
+	const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 )
 {
 	float radius = part.gridSize.z * gridToReal * 0.5;
@@ -51,19 +45,13 @@ bool HitTest::hitTestCylinder(
 
 // FUNCTION: WEBSERVICE 0x101ecf00
 bool HitTest::hitTestBox(
-	const Part& part,
-	G3D::Ray& rayInPartCoords,
-	G3D::Vector3& hitPointInPartCoords,
-	float gridToReal
+	const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 )
 {
 	G3D::Vector3 halfRealSize = part.gridSize * gridToReal * 0.5;
 
 	return G3D::CollisionDetection::collisionLocationForMovingPointFixedAABox(
-		rayInPartCoords.origin,
-		rayInPartCoords.direction,
-		G3D::AABox(-halfRealSize, halfRealSize),
-		hitPointInPartCoords
+		rayInPartCoords.origin, rayInPartCoords.direction, G3D::AABox(-halfRealSize, halfRealSize), hitPointInPartCoords
 	);
 }
 

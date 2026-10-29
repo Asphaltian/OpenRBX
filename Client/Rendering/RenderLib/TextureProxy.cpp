@@ -58,12 +58,7 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 			char encodedFileName[1024];
 
 			sprintf(
-				encodedFileName,
-				"%g%g%g%s",
-				shadeColor.r,
-				shadeColor.g,
-				shadeColor.b,
-				shadeTexture->filename.c_str()
+				encodedFileName, "%g%g%g%s", shadeColor.r, shadeColor.g, shadeColor.b, shadeTexture->filename.c_str()
 			);
 
 			texture = textureManager->findTexture(encodedFileName);
@@ -119,13 +114,15 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 				}
 			}
 			catch (std::exception& e) {
-				StandardOut::singleton()
-					->print(MESSAGE_ERROR, "Failed to load texture '%s', %s", filename.c_str(), e.what());
+				StandardOut::singleton()->print(
+					MESSAGE_ERROR, "Failed to load texture '%s', %s", filename.c_str(), e.what()
+				);
 				texture = NULL;
 			}
 			catch (...) {
-				StandardOut::singleton()
-					->print(MESSAGE_ERROR, "Failed to load texture '%s', unknown exception", filename.c_str());
+				StandardOut::singleton()->print(
+					MESSAGE_ERROR, "Failed to load texture '%s', unknown exception", filename.c_str()
+				);
 				texture = NULL;
 			}
 		}

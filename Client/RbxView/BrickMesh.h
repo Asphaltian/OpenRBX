@@ -41,9 +41,7 @@ public:
 	static const float bevel;
 
 	static G3D::ReferenceCountedPointer<Render::Mesh> create(
-		const G3D::Vector3& size,
-		RenderSurfaceTypes surfaceTypes,
-		BrickColor color
+		const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color
 	);
 	static void flushCache();
 

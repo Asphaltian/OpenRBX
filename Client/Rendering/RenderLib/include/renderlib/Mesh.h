@@ -77,9 +77,7 @@ private:
 	static void makeVAR();
 
 	static void computeAABounds(
-		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
-		G3D::Vector3& lo,
-		G3D::Vector3& hi
+		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray, G3D::Vector3& lo, G3D::Vector3& hi
 	);
 
 	static G3D::Vector3 findScale;
@@ -114,10 +112,7 @@ public:
 	static unsigned int allocVertex(unsigned int i, unsigned int count);
 
 	static unsigned int allocVertex(
-		const G3D::Vector3& vertex,
-		const G3D::Vector3& normal,
-		const G3D::Vector2& tex,
-		bool share
+		const G3D::Vector3& vertex, const G3D::Vector3& normal, const G3D::Vector2& tex, bool share
 	);
 
 	static void beginRender(G3D::RenderDevice* rd, bool usetexCoords, bool useTangent);

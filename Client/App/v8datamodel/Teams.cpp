@@ -14,12 +14,11 @@ namespace RBX {
 const char sTeams[] = "Teams";
 
 static Reflection::BoundFuncDesc<Teams, void(), 0> teams_rebalanceTeamsFunction(
-	&RBX::Teams::rebalanceTeams,
-	"RebalanceTeams",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Teams::rebalanceTeams, "RebalanceTeams", Reflection::FunctionDescriptor::AnyCaller
 );
+
 static Reflection::BoundFuncDesc<Teams, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(), 0>
-	func_teams(&RBX::Teams::getTeams, "GetTeams", Reflection::FunctionDescriptor::AnyCaller);
+	func_teams(&Teams::getTeams, "GetTeams", Reflection::FunctionDescriptor::AnyCaller);
 
 // FUNCTION: WEBSERVICE 0x100da970
 Teams::~Teams()

@@ -317,9 +317,7 @@ bool TypedPropertyDescriptor<G3D::Vector3>::setStringValue(DescribedBase* instan
 // FUNCTION: WEBSERVICE 0x100406f0
 template <>
 void TypedPropertyDescriptor<std::string>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -340,9 +338,7 @@ void TypedPropertyDescriptor<std::string>::writeValue(const DescribedBase* insta
 // FUNCTION: WEBSERVICE 0x100407b0
 template <>
 void TypedPropertyDescriptor<float>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -363,9 +359,7 @@ void TypedPropertyDescriptor<float>::writeValue(const DescribedBase* instance, X
 // FUNCTION: WEBSERVICE 0x10040830
 template <>
 void TypedPropertyDescriptor<bool>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -386,9 +380,7 @@ void TypedPropertyDescriptor<double>::writeValue(const DescribedBase* instance, 
 // FUNCTION: WEBSERVICE 0x100408b0
 template <>
 void TypedPropertyDescriptor<double>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -409,9 +401,7 @@ void TypedPropertyDescriptor<bool>::writeValue(const DescribedBase* instance, Xm
 // FUNCTION: WEBSERVICE 0x10040930
 template <>
 void TypedPropertyDescriptor<int>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -432,9 +422,7 @@ void TypedPropertyDescriptor<int>::writeValue(const DescribedBase* instance, Xml
 // FUNCTION: WEBSERVICE 0x100409a0
 template <>
 void TypedPropertyDescriptor<G3D::Vector3>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -639,9 +627,7 @@ bool TypedPropertyDescriptor<G3D::Color3>::setStringValue(DescribedBase* instanc
 // FUNCTION: WEBSERVICE 0x100414c0
 template <>
 void TypedPropertyDescriptor<G3D::Color3>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -696,9 +682,7 @@ bool TypedPropertyDescriptor<BrickColor>::setStringValue(DescribedBase* instance
 // FUNCTION: WEBSERVICE 0x10041620
 template <>
 void TypedPropertyDescriptor<BrickColor>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -719,9 +703,7 @@ void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instan
 // FUNCTION: WEBSERVICE 0x100416b0
 template <>
 void TypedPropertyDescriptor<ContentId>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {

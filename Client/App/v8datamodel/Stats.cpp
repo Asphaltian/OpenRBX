@@ -15,14 +15,11 @@ char sStats[] = "Stats";
 char sStatsItem[] = "Item";
 
 static Reflection::BoundFuncDesc<Item, std::string(), 0> func_values(
-	&RBX::Stats::Item::getStringValue2,
-	"GetValueString",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Item::getStringValue2, "GetValueString", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Item, double(), 0> func_value(
-	&RBX::Stats::Item::getValue,
-	"GetValue",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Item::getValue, "GetValue", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
 
 // FUNCTION: WEBSERVICE 0x100b1f60

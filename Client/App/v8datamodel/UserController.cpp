@@ -360,8 +360,7 @@ ControllerService::ControllerService()
 
 // FUNCTION: WEBSERVICE 0x100c6f00
 G3D::ReferenceCountedPointer<Controller> ControllerService::getController(
-	Controller::ControllerType type,
-	const PVInstance* controlledInstance
+	Controller::ControllerType type, const PVInstance* controlledInstance
 )
 {
 	switch (type) {

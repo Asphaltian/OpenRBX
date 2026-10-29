@@ -15,18 +15,14 @@ char sScript[] = "Script";
 char sLocalScript[] = "LocalScript";
 
 const Reflection::PropDescriptor<Script, std::string> Script::prop_EmbeddedSourceCode(
-	"Source",
-	"Data",
-	&RBX::Script::getEmbeddedCode,
-	&RBX::Script::setEmbeddedCode
+	"Source", "Data", &Script::getEmbeddedCode, &Script::setEmbeddedCode
 );
+
 const Reflection::PropDescriptor<Script, ContentId> Script::prop_SourceCodeId(
-	"LinkedSource",
-	"Data",
-	&RBX::Script::getScriptId,
-	&RBX::Script::setScriptId
+	"LinkedSource", "Data", &Script::getScriptId, &Script::setScriptId
 );
-Reflection::BoundProp<bool, 1> Script::prop_Disabled("Disabled", "Behavior", &RBX::Script::disabled);
+
+Reflection::BoundProp<bool, 1> Script::prop_Disabled("Disabled", "Behavior", &Script::disabled);
 
 } // namespace RBX
 

@@ -32,21 +32,21 @@ static std::string testImage(const std::string& filename, G3D::GImage& reference
 
 using namespace Reflection;
 
-BoundProp<TextureId, 1> Sky::prop_SkyUp("SkyboxUp", "Appearance", &RBX::Sky::skyUp);
+BoundProp<TextureId, 1> Sky::prop_SkyUp("SkyboxUp", "Appearance", &Sky::skyUp);
 
-BoundProp<TextureId, 1> Sky::prop_SkyLf("SkyboxLf", "Appearance", &RBX::Sky::skyLf);
+BoundProp<TextureId, 1> Sky::prop_SkyLf("SkyboxLf", "Appearance", &Sky::skyLf);
 
-BoundProp<TextureId, 1> Sky::prop_SkyRt("SkyboxRt", "Appearance", &RBX::Sky::skyRt);
+BoundProp<TextureId, 1> Sky::prop_SkyRt("SkyboxRt", "Appearance", &Sky::skyRt);
 
-BoundProp<TextureId, 1> Sky::prop_SkyBk("SkyboxBk", "Appearance", &RBX::Sky::skyBk);
+BoundProp<TextureId, 1> Sky::prop_SkyBk("SkyboxBk", "Appearance", &Sky::skyBk);
 
-BoundProp<TextureId, 1> Sky::prop_SkyFt("SkyboxFt", "Appearance", &RBX::Sky::skyFt);
+BoundProp<TextureId, 1> Sky::prop_SkyFt("SkyboxFt", "Appearance", &Sky::skyFt);
 
-BoundProp<TextureId, 1> Sky::prop_SkyDn("SkyboxDn", "Appearance", &RBX::Sky::skyDn);
+BoundProp<TextureId, 1> Sky::prop_SkyDn("SkyboxDn", "Appearance", &Sky::skyDn);
 
-BoundProp<bool, 1> Sky::prop_CelestialBodiesShown("CelestialBodiesShown", "Appearance", &RBX::Sky::drawCelestialBodies);
+BoundProp<bool, 1> Sky::prop_CelestialBodiesShown("CelestialBodiesShown", "Appearance", &Sky::drawCelestialBodies);
 
-BoundProp<int, 1> Sky::prop_StarCount("StarCount", "Appearance", &RBX::Sky::numStars);
+BoundProp<int, 1> Sky::prop_StarCount("StarCount", "Appearance", &Sky::numStars);
 
 // FUNCTION: WEBSERVICE 0x10094700
 G3D::SkyRef Sky::getG3DSky(Sky* sky)

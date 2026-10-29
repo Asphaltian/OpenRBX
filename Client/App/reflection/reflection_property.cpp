@@ -66,11 +66,7 @@ EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
 
 // FUNCTION: WEBSERVICE 0x10094410
 PropertyDescriptor::PropertyDescriptor(
-	ClassDescriptor& classDescriptor,
-	const Type& type,
-	const char* name,
-	const char* category,
-	Functionality flags
+	ClassDescriptor& classDescriptor, const Type& type, const char* name, const char* category, Functionality flags
 )
 	: MemberDescriptor(classDescriptor, name, category), type(type), bIsPublic(flags), bCanStreamWrite(flags >> 2)
 {

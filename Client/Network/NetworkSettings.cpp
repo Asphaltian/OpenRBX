@@ -8,27 +8,22 @@ const char sNetworkSettings[] = "NetworkSettings";
 
 using namespace Reflection;
 
-BoundProp<bool, 1> prop_LogPackets("LogPackets", "Diagnostics", &RBX::NetworkSettings::logPackets);
-BoundProp<bool, 1> prop_PrintInstances("PrintInstances", "Diagnostics", &RBX::NetworkSettings::printInstances);
-BoundProp<bool, 1> prop_PrintProperties("PrintProperties", "Diagnostics", &RBX::NetworkSettings::printProperties);
-BoundProp<bool, 1> prop_PrintPacketBuffer("PrintPacketBuffer", "Diagnostics", &RBX::NetworkSettings::printPacketBuffer);
-BoundProp<bool, 1> prop_PrintPhysicsErrors(
-	"PrintPhysicsErrors",
-	"Diagnostics",
-	&RBX::NetworkSettings::printPhysicsErrors
-);
+BoundProp<bool, 1> prop_LogPackets("LogPackets", "Diagnostics", &NetworkSettings::logPackets);
+BoundProp<bool, 1> prop_PrintInstances("PrintInstances", "Diagnostics", &NetworkSettings::printInstances);
+BoundProp<bool, 1> prop_PrintProperties("PrintProperties", "Diagnostics", &NetworkSettings::printProperties);
+BoundProp<bool, 1> prop_PrintPacketBuffer("PrintPacketBuffer", "Diagnostics", &NetworkSettings::printPacketBuffer);
+BoundProp<bool, 1> prop_PrintPhysicsErrors("PrintPhysicsErrors", "Diagnostics", &NetworkSettings::printPhysicsErrors);
 
-BoundProp<int, 1> prop_MaxSendBPS("MaxSendBPS", "Simulator", &RBX::NetworkSettings::maxSendBPS);
-BoundProp<int, 1> prop_MinExtraPing("MinExtraPing", "Simulator", &RBX::NetworkSettings::minExtraPing);
-BoundProp<int, 1> prop_ExtraPingVariance("ExtraPingVariance", "Simulator", &RBX::NetworkSettings::extraPingVariance);
+BoundProp<int, 1> prop_MaxSendBPS("MaxSendBPS", "Simulator", &NetworkSettings::maxSendBPS);
+BoundProp<int, 1> prop_MinExtraPing("MinExtraPing", "Simulator", &NetworkSettings::minExtraPing);
+BoundProp<int, 1> prop_ExtraPingVariance("ExtraPingVariance", "Simulator", &NetworkSettings::extraPingVariance);
 
 BoundProp<int, 1> prop_MaxDataModelSendBuffer(
-	"MaxDataModelSendBuffer",
-	"Replication",
-	&RBX::NetworkSettings::maxDataModelSendBuffer
+	"MaxDataModelSendBuffer", "Replication", &NetworkSettings::maxDataModelSendBuffer
 );
-BoundProp<float, 1> prop_DataPacketSize("DataPacketSize", "Replication", &RBX::NetworkSettings::dataPacketSize);
-BoundProp<float, 1> prop_SendRate("SendRate", "Replication", &RBX::NetworkSettings::sendRate);
+
+BoundProp<float, 1> prop_DataPacketSize("DataPacketSize", "Replication", &NetworkSettings::dataPacketSize);
+BoundProp<float, 1> prop_SendRate("SendRate", "Replication", &NetworkSettings::sendRate);
 
 // FUNCTION: WEBSERVICE 0x1019ba30
 NetworkSettings::NetworkSettings()

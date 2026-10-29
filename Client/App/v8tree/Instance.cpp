@@ -22,54 +22,37 @@ static Reflection::BoundFuncDesc<Instance, boost::shared_ptr<Instance>(std::stri
 	false,
 	Reflection::FunctionDescriptor::AnyCaller
 );
+
 static Reflection::BoundFuncDesc<Instance, boost::shared_ptr<Instance>(), 0> func_clone(
-	&Instance::clone,
-	"Clone",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Instance::clone, "Clone", Reflection::FunctionDescriptor::AnyCaller
 );
+
 static Reflection::BoundFuncDesc<Instance, void(), 0> func_Remove(
-	&Instance::remove,
-	"Remove",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Instance::remove, "Remove", Reflection::FunctionDescriptor::AnyCaller
 );
+
 static Reflection::BoundFuncDesc<Instance, boost::shared_ptr<const std::vector<shared_ptr<Instance> > >(), 0>
 	func_childrenOld(&Instance::getChildren2, "children", Reflection::FunctionDescriptor::AnyCaller);
 static Reflection::BoundFuncDesc<Instance, boost::shared_ptr<const std::vector<shared_ptr<Instance> > >(), 0>
 	func_children(&Instance::getChildren2, "GetChildren", Reflection::FunctionDescriptor::AnyCaller);
 static Reflection::BoundFuncDesc<Instance, bool(shared_ptr<Instance>), 1> func_isDescendentOf(
-	&Instance::isDescendentOf2,
-	"IsDescendentOf",
-	"ancestor",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Instance::isDescendentOf2, "IsDescendentOf", "ancestor", Reflection::FunctionDescriptor::AnyCaller
 );
+
 static Reflection::BoundFuncDesc<Instance, bool(shared_ptr<Instance>), 1> func_isAncestorOf(
-	&Instance::isAncestorOf2,
-	"IsAncestorOf",
-	"descendent",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Instance::isAncestorOf2, "IsAncestorOf", "descendent", Reflection::FunctionDescriptor::AnyCaller
 );
+
 static const Reflection::PropDescriptor<Instance, std::string> prop_className(
-	"className",
-	"Data",
-	&Instance::getClassNameStr,
-	NULL,
-	Reflection::PropertyDescriptor::UI
+	"className", "Data", &Instance::getClassNameStr, NULL, Reflection::PropertyDescriptor::UI
 );
 
 const Reflection::PropDescriptor<Instance, std::string> Instance::desc_Name(
-	"Name",
-	"Data",
-	&Instance::getName,
-	&Instance::setName,
-	Reflection::PropertyDescriptor::STANDARD
+	"Name", "Data", &Instance::getName, &Instance::setName, Reflection::PropertyDescriptor::STANDARD
 );
 
 const Reflection::RefPropDescriptor<Instance, Instance> Instance::propParent(
-	"Parent",
-	"Data",
-	&Instance::getParent,
-	&Instance::setParent,
-	Reflection::PropertyDescriptor::UI
+	"Parent", "Data", &Instance::getParent, &Instance::setParent, Reflection::PropertyDescriptor::UI
 );
 
 Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_childAdded("ChildAdded", "child");
@@ -77,23 +60,19 @@ Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_chi
 Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_childRemoved("ChildRemoved", "child");
 
 Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_descendentAdded(
-	"DescendentAdded",
-	"descendent"
+	"DescendentAdded", "descendent"
 );
 
 Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_descendentRemoving(
-	"DescendentRemoving",
-	"descendent"
+	"DescendentRemoving", "descendent"
 );
 
 Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> Instance::event_ancestryChanged(
-	"AncestryChanged",
-	"child"
+	"AncestryChanged", "child"
 );
 
 Reflection::SignalDesc<Instance, void(const Reflection::PropertyDescriptor*)> Instance::event_propertyChanged(
-	"Changed",
-	"property"
+	"Changed", "property"
 );
 
 static const Name& nameName = Name::declare("Name", 3000);
@@ -219,9 +198,7 @@ void Instance::signalDescendentAdded(Instance* instance, Instance* beginParent, 
 
 // FUNCTION: WEBSERVICE 0x100490d0
 void Instance::signalDescendentRemoving(
-	const shared_ptr<Instance>& instance,
-	Instance* beginParent,
-	Instance* newParent
+	const shared_ptr<Instance>& instance, Instance* beginParent, Instance* newParent
 )
 {
 	for (Instance* walk = beginParent; walk != NULL; walk = walk->parent) {

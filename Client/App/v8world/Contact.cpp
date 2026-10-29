@@ -133,10 +133,7 @@ bool BallBallContact::stepContact()
 
 // FUNCTION: WEBSERVICE 0x100d24c0
 bool BallBlockContact::computeIsColliding(
-	int& onBorder,
-	G3D::Vector3int16& clip,
-	Vector3& projectionInBlock,
-	float overlapIgnored
+	int& onBorder, G3D::Vector3int16& clip, Vector3& projectionInBlock, float overlapIgnored
 )
 {
 	if (Primitive::aaBoxCollide(*getPrimitive(0), *getPrimitive(1))) {
@@ -386,11 +383,7 @@ void BlockBlockContact::deleteUnmatchedConnectors()
 
 // FUNCTION: WEBSERVICE 0x100d42f0
 ContactConnector* BlockBlockContact::matchContactConnector(
-	Body* b0,
-	Body* b1,
-	GeoPairType _pairType,
-	int param0,
-	int param1
+	Body* b0, Body* b1, GeoPairType _pairType, int param0, int param1
 )
 {
 	for (unsigned int i = 0; i < matched.size(); i++) {
@@ -427,22 +420,13 @@ void BlockBlockContact::loadGeoPairEdgeEdge(int b0, int b1, int edge0, int edge1
 	ContactConnector* c = matchContactConnector(getBody(b0), getBody(b1), EDGE_EDGE_PAIR, normalID0, normalID1);
 
 	c->setEdgeEdge(
-		getBody(b0),
-		getBody(b1),
-		block(b0)->getEdgeVertex(edge0),
-		block(b1)->getEdgeVertex(edge1),
-		normalID0,
-		normalID1
+		getBody(b0), getBody(b1), block(b0)->getEdgeVertex(edge0), block(b1)->getEdgeVertex(edge1), normalID0, normalID1
 	);
 }
 
 // FUNCTION: WEBSERVICE 0x100d45e0
 void BlockBlockContact::loadGeoPairPointPlane(
-	int pointBody,
-	int planeBody,
-	int pointID,
-	NormalId pointFaceID,
-	NormalId planeFaceID
+	int pointBody, int planeBody, int pointID, NormalId pointFaceID, NormalId planeFaceID
 )
 {
 	ContactConnector* c =
@@ -629,9 +613,7 @@ int BlockBlockContact::computePlaneContact()
 
 	otherPlaneID = Math::getClosestObjectNormalId(
 		-(Vector3(
-			  planeCoord.rotation[0][planeAxis],
-			  planeCoord.rotation[1][planeAxis],
-			  planeCoord.rotation[2][planeAxis]
+			  planeCoord.rotation[0][planeAxis], planeCoord.rotation[1][planeAxis], planeCoord.rotation[2][planeAxis]
 		  ) *
 		  (float) (1 - 2 * planeFlip)),
 		otherCoord.rotation

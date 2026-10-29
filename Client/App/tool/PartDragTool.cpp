@@ -97,8 +97,7 @@ MouseCommand* PartDragTool::onKeyDown(const UIEvent& uiEvent)
 
 			case SDLK_t:
 				RunDragger::tiltPart(
-					megaDragger->getMousePart().lock().get(),
-					workspace->getCamera()->getCameraCoordinateFrame()
+					megaDragger->getMousePart().lock().get(), workspace->getCamera()->getCameraCoordinateFrame()
 				);
 				break;
 			}

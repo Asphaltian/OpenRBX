@@ -13,10 +13,7 @@ FaceInstance::FaceInstance() : face(NORM_Z_NEG)
 }
 
 const Reflection::EnumPropDescriptor<FaceInstance, NormalId> FaceInstance::prop_Face(
-	"Face",
-	"Data",
-	&RBX::FaceInstance::getFace,
-	&RBX::FaceInstance::setFace
+	"Face", "Data", &FaceInstance::getFace, &FaceInstance::setFace
 );
 
 // FUNCTION: WEBSERVICE 0x100ea070 FOLDED

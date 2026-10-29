@@ -158,8 +158,7 @@ protected:
 
 public:
 	virtual void onServiceProvider(
-		const ServiceProvider* oldProvider,
-		const ServiceProvider* newProvider
+		const ServiceProvider* oldProvider, const ServiceProvider* newProvider
 	);                                                               // vtable+0x30
 	virtual shared_ptr<Instance> createChild(const Name& className); // vtable+0x34
 	virtual XmlElement* write();                                     // vtable+0x38
@@ -469,9 +468,7 @@ private:
 
 	static void signalDescendentAdded(Instance* instance, Instance* beginParent, Instance* oldParent);
 	static void signalDescendentRemoving(
-		const shared_ptr<Instance>& instance,
-		Instance* beginParent,
-		Instance* newParent
+		const shared_ptr<Instance>& instance, Instance* beginParent, Instance* newParent
 	);
 	void writeProperties(XmlElement* container) const;
 

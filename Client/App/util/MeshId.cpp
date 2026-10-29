@@ -33,9 +33,7 @@ const Type& Type::singleton<MeshId>()
 // FUNCTION: WEBSERVICE 0x1012dd70 FOLDED
 template <>
 void TypedPropertyDescriptor<MeshId>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {

@@ -66,6 +66,7 @@ static RBX::Reflection::BoundFuncDesc<ThumbnailGenerator, std::string(std::strin
 	"hideSky",
 	RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<ThumbnailGenerator, std::string(std::string, std::string, int, int), 4>
 	clickTextureFunction(
 		&ThumbnailGenerator::clickTexture,
@@ -129,11 +130,7 @@ public:
 	virtual void reallyMakeCurrent() const
 	{
 		if (!OSMesaMakeCurrent(
-				ctx,
-				const_cast<G3D::uint8*>(image.byte()),
-				GL_UNSIGNED_BYTE,
-				image.width,
-				image.height
+				ctx, const_cast<G3D::uint8*>(image.byte()), GL_UNSIGNED_BYTE, image.width, image.height
 			)) {
 			throw std::runtime_error("OSMesaMakeCurrent failed");
 		}
@@ -409,18 +406,12 @@ void ThumbnailGenerator::doClick(std::string fileType, int cx, int cy, bool hide
 
 	if (alphaChannel) {
 		G3D::GImage::flipRGBAVertical(
-			context.image.byte(),
-			context.image.byte(),
-			context.image.width,
-			context.image.height
+			context.image.byte(), context.image.byte(), context.image.width, context.image.height
 		);
 	}
 	else {
 		G3D::GImage::flipRGBVertical(
-			context.image.byte(),
-			context.image.byte(),
-			context.image.width,
-			context.image.height
+			context.image.byte(), context.image.byte(), context.image.width, context.image.height
 		);
 	}
 

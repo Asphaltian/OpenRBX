@@ -27,60 +27,32 @@ const char sFeature[] = "Feature";
 using namespace Reflection;
 
 static RefPropDescriptor<VelocityMotor, Hole> prop_Hole(
-	"Hole",
-	"Data",
-	&RBX::VelocityMotor::getHole,
-	&RBX::VelocityMotor::setHole
+	"Hole", "Data", &VelocityMotor::getHole, &VelocityMotor::setHole
 );
 
 static PropDescriptor<VelocityMotor, float> prop_MaxVelocity(
-	"MaxVelocity",
-	"Data",
-	&RBX::VelocityMotor::getMaxVelocity,
-	&RBX::VelocityMotor::setMaxVelocity
+	"MaxVelocity", "Data", &VelocityMotor::getMaxVelocity, &VelocityMotor::setMaxVelocity
 );
 
 static PropDescriptor<VelocityMotor, float> prop_DesiredAngle(
-	"DesiredAngle",
-	"Data",
-	&RBX::VelocityMotor::getDesiredAngle,
-	&RBX::VelocityMotor::setDesiredAngle
+	"DesiredAngle", "Data", &VelocityMotor::getDesiredAngle, &VelocityMotor::setDesiredAngle
 );
 
 static PropDescriptor<VelocityMotor, float> prop_CurrentAngle(
-	"CurrentAngle",
-	"Data",
-	&RBX::VelocityMotor::getCurrentAngle,
-	&RBX::VelocityMotor::setCurrentAngle
+	"CurrentAngle", "Data", &VelocityMotor::getCurrentAngle, &VelocityMotor::setCurrentAngle
 );
 
-static EnumPropDescriptor<Feature, NormalId> prop_FaceId(
-	"FaceId",
-	"Data",
-	&RBX::Feature::getFaceId,
-	&RBX::Feature::setFaceId
-);
+static EnumPropDescriptor<Feature, NormalId> prop_FaceId("FaceId", "Data", &Feature::getFaceId, &Feature::setFaceId);
 
 static EnumPropDescriptor<Feature, Feature::TopBottom> prop_TopBottom(
-	"TopBottom",
-	"Data",
-	&RBX::Feature::getTopBottom,
-	&RBX::Feature::setTopBottom
+	"TopBottom", "Data", &Feature::getTopBottom, &Feature::setTopBottom
 );
 
 static EnumPropDescriptor<Feature, Feature::LeftRight> prop_LeftRight(
-	"LeftRight",
-	"Data",
-	&RBX::Feature::getLeftRight,
-	&RBX::Feature::setLeftRight
+	"LeftRight", "Data", &Feature::getLeftRight, &Feature::setLeftRight
 );
 
-static EnumPropDescriptor<Feature, Feature::InOut> prop_InOut(
-	"InOut",
-	"Data",
-	&RBX::Feature::getInOut,
-	&RBX::Feature::setInOut
-);
+static EnumPropDescriptor<Feature, Feature::InOut> prop_InOut("InOut", "Data", &Feature::getInOut, &Feature::setInOut);
 
 // FUNCTION: WEBSERVICE 0x100d7d70 FOLDED
 float VelocityMotor::getMaxVelocity() const
@@ -334,9 +306,7 @@ void VelocityMotor::setHole(Hole* value)
 		setPart(1, hole.get());
 		if (hole) {
 			holeAncestorChanged = Instance::event_ancestryChanged.connect(
-				hole.get(),
-				boost::bind(&VelocityMotor::onEvent_HoleAncestorChanged, this),
-				10
+				hole.get(), boost::bind(&VelocityMotor::onEvent_HoleAncestorChanged, this), 10
 			);
 		}
 		else {

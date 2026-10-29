@@ -18,29 +18,19 @@ private:
 	static bool intersectingWorldOrOthers(const G3D::Array<Primitive*>& primitives, ContactManager& contactManager);
 	static void movePrimitives(const G3D::Array<Primitive*>& primitives, const G3D::Vector3& delta);
 	static void movePrimitivesDelta(
-		const G3D::Array<Primitive*>& primitives,
-		const G3D::Vector3& delta,
-		G3D::Vector3& movedSoFar
+		const G3D::Array<Primitive*>& primitives, const G3D::Vector3& delta, G3D::Vector3& movedSoFar
 	);
 	static void searchUpFine(
-		const G3D::Array<Primitive*>& primitives,
-		G3D::Vector3& movedSoFar,
-		ContactManager& contactManager
+		const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 	);
 	static void searchDownFine(
-		const G3D::Array<Primitive*>& primitives,
-		G3D::Vector3& movedSoFar,
-		ContactManager& contactManager
+		const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 	);
 	static void searchUpGross(
-		const G3D::Array<Primitive*>& primitives,
-		G3D::Vector3& movedSoFar,
-		ContactManager& contactManager
+		const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 	);
 	static void searchDownGross(
-		const G3D::Array<Primitive*>& primitives,
-		G3D::Vector3& movedSoFar,
-		ContactManager& contactManager
+		const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 	);
 
 public:
@@ -53,19 +43,13 @@ public:
 
 	static G3D::Vector3 toGrid(const G3D::Vector3& v);
 	static G3D::Vector3 safeMoveNoDrop(
-		const G3D::Array<Primitive*>& primitives,
-		const G3D::Vector3& tryMove,
-		ContactManager& contactManager
+		const G3D::Array<Primitive*>& primitives, const G3D::Vector3& tryMove, ContactManager& contactManager
 	);
 	static G3D::Vector3 safeMoveYDrop(
-		const G3D::Array<Primitive*>& primitives,
-		const G3D::Vector3& tryMove,
-		ContactManager& contactManager
+		const G3D::Array<Primitive*>& primitives, const G3D::Vector3& tryMove, ContactManager& contactManager
 	);
 	static void safeRotate(
-		const G3D::Array<Primitive*>& primitives,
-		const G3D::Matrix3& rotate,
-		ContactManager& contactManager
+		const G3D::Array<Primitive*>& primitives, const G3D::Matrix3& rotate, ContactManager& contactManager
 	);
 	static Extents computeExtents(const G3D::Array<Primitive*>& primitives);
 };

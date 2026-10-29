@@ -36,23 +36,18 @@ public:
 	static void clean(const std::vector<boost::weak_ptr<PartInstance> >& parts);
 	static void clean(PartInstance* part);
 	static void move(
-		const std::vector<boost::weak_ptr<PartInstance> >& parts,
-		G3D::CoordinateFrame start,
-		G3D::CoordinateFrame end
+		const std::vector<boost::weak_ptr<PartInstance> >& parts, G3D::CoordinateFrame start, G3D::CoordinateFrame end
 	);
 	static void alignToGrid(PartInstance*);
 	static void moveAndClean(PartInstance* part, const G3D::Vector3& delta);
 	static void pvsToParts(
-		const std::vector<PVInstance*>& pvInstances,
-		std::vector<boost::weak_ptr<PartInstance> >& parts
+		const std::vector<PVInstance*>& pvInstances, std::vector<boost::weak_ptr<PartInstance> >& parts
 	);
 	static void instancesToParts(
-		const std::vector<Instance*>& instances,
-		std::vector<boost::weak_ptr<PartInstance> >& parts
+		const std::vector<Instance*>& instances, std::vector<boost::weak_ptr<PartInstance> >& parts
 	);
 	static World* partsToPrimitives(
-		const std::vector<boost::weak_ptr<PartInstance> >& parts,
-		G3D::Array<Primitive*>& primitives
+		const std::vector<boost::weak_ptr<PartInstance> >& parts, G3D::Array<Primitive*>& primitives
 	);
 	static Extents computeExtents(const std::vector<boost::weak_ptr<PartInstance> >& parts);
 	static bool hitObjectOrPlane(

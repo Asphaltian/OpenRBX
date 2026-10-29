@@ -546,8 +546,7 @@ std::auto_ptr<XmlElement> TextXmlParser::parse()
 					if (!isCloseTag(closingTag)) {
 						throw std::runtime_error(
 							G3D::format(
-								"TextXmlParser::parse - '%s' should be a closing tag",
-								closingTag.substr(0, 32).c_str()
+								"TextXmlParser::parse - '%s' should be a closing tag", closingTag.substr(0, 32).c_str()
 							)
 						);
 					}

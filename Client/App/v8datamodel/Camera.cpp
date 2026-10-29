@@ -15,11 +15,9 @@ char sCamera[] = "Camera";
 static const char category_Camera[] = "Camera";
 
 static Reflection::EnumPropDescriptor<Camera, Camera::CameraType> desc_cameraType(
-	"CameraType",
-	category_Camera,
-	&Camera::getCameraType,
-	&Camera::setCameraType
+	"CameraType", category_Camera, &Camera::getCameraType, &Camera::setCameraType
 );
+
 static Reflection::PropDescriptor<Camera, G3D::CoordinateFrame> desc_CoordFrame(
 	"CoordinateFrame",
 	"Data",
@@ -27,18 +25,13 @@ static Reflection::PropDescriptor<Camera, G3D::CoordinateFrame> desc_CoordFrame(
 	&Camera::setCameraCoordinateFrameNoLerp,
 	Reflection::PropertyDescriptor::STREAMING
 );
+
 static Reflection::PropDescriptor<Camera, G3D::CoordinateFrame> desc_Focus(
-	"Focus",
-	"Data",
-	&Camera::getCameraFocus,
-	&Camera::setCameraFocus,
-	Reflection::PropertyDescriptor::STREAMING
+	"Focus", "Data", &Camera::getCameraFocus, &Camera::setCameraFocus, Reflection::PropertyDescriptor::STREAMING
 );
+
 static Reflection::RefPropDescriptor<Camera, Instance> cameraSubjectProp(
-	"CameraSubject",
-	category_Camera,
-	&Camera::getCameraSubjectInstance,
-	&Camera::setCameraSubject
+	"CameraSubject", category_Camera, &Camera::getCameraSubjectInstance, &Camera::setCameraSubject
 );
 
 // FUNCTION: WEBSERVICE 0x100c2600

@@ -43,10 +43,7 @@ G3D::Vector3 MegaDragger::hitObjectOrPlane(const UIEvent& uiEvent)
 	DragUtilities::partsToPrimitives(dragParts, primitives);
 
 	DragUtilities::hitObjectOrPlane(
-		*contactManager,
-		MouseCommand::getUnitMouseRay(uiEvent, rootInstance),
-		&primitives,
-		hitPoint
+		*contactManager, MouseCommand::getUnitMouseRay(uiEvent, rootInstance), &primitives, hitPoint
 	);
 
 	return hitPoint;
@@ -98,9 +95,7 @@ void MegaDragger::safeRotate(const G3D::Matrix3& rotMatrix)
 
 // FUNCTION: WEBSERVICE 0x10116790
 MegaDragger::MegaDragger(
-	PartInstance* mousePartPtr,
-	const std::vector<PVInstance*>& pvInstances,
-	RootInstance* rootInstance
+	PartInstance* mousePartPtr, const std::vector<PVInstance*>& pvInstances, RootInstance* rootInstance
 )
 	: mousePart(shared_from(mousePartPtr)), joined(true), rootInstance(rootInstance),
 	  contactManager(rootInstance->getWorld()->getContactManager())
@@ -110,9 +105,7 @@ MegaDragger::MegaDragger(
 
 // FUNCTION: WEBSERVICE 0x10116870
 MegaDragger::MegaDragger(
-	PartInstance* mousePartPtr,
-	const std::vector<boost::weak_ptr<PartInstance> >& partArray,
-	RootInstance* rootInstance
+	PartInstance* mousePartPtr, const std::vector<boost::weak_ptr<PartInstance> >& partArray, RootInstance* rootInstance
 )
 	: mousePart(shared_from(mousePartPtr)), dragParts(partArray), joined(true), rootInstance(rootInstance),
 	  contactManager(rootInstance->getWorld()->getContactManager())

@@ -72,15 +72,10 @@ HRESULT STDMETHODCALLTYPE VistaAPIs::GetIntegrity(BYTE* pVal)
 				PTOKEN_MANDATORY_LABEL pTIL = (PTOKEN_MANDATORY_LABEL) LocalAlloc(0, dwLengthNeeded);
 				if (pTIL != NULL) {
 					if (GetTokenInformation(
-							hToken,
-							(TOKEN_INFORMATION_CLASS) 25,
-							pTIL,
-							dwLengthNeeded,
-							&dwLengthNeeded
+							hToken, (TOKEN_INFORMATION_CLASS) 25, pTIL, dwLengthNeeded, &dwLengthNeeded
 						)) {
 						DWORD dwIntegrityLevel = *GetSidSubAuthority(
-							pTIL->Label.Sid,
-							(DWORD) (UCHAR) (*GetSidSubAuthorityCount(pTIL->Label.Sid) - 1)
+							pTIL->Label.Sid, (DWORD) (UCHAR) (*GetSidSubAuthorityCount(pTIL->Label.Sid) - 1)
 						);
 
 						if (dwIntegrityLevel < 0x2000) {
@@ -157,12 +152,7 @@ std::string FileSystem::getUserAppDataDirectory(bool create, const char* subDire
 		SHGetFolderPathAndSubDir(NULL, flags | CSIDL_APPDATA, NULL, 0, s.c_str(), path.m_strPath.GetBuffer(MAX_PATH));
 	if (hr != S_OK) {
 		hr = SHGetFolderPathAndSubDir(
-			NULL,
-			flags | CSIDL_COMMON_APPDATA,
-			NULL,
-			0,
-			s.c_str(),
-			path.m_strPath.GetBuffer(MAX_PATH)
+			NULL, flags | CSIDL_COMMON_APPDATA, NULL, 0, s.c_str(), path.m_strPath.GetBuffer(MAX_PATH)
 		);
 	}
 	if (hr == S_OK) {
@@ -206,12 +196,7 @@ std::string FileSystem::getCacheDirectory(bool create)
 
 	char path[MAX_PATH];
 	if (SHGetFolderPathAndSubDir(
-			NULL,
-			(create ? CSIDL_FLAG_CREATE : 0) | CSIDL_COMMON_APPDATA,
-			NULL,
-			0,
-			"Roblox\\Cache",
-			path
+			NULL, (create ? CSIDL_FLAG_CREATE : 0) | CSIDL_COMMON_APPDATA, NULL, 0, "Roblox\\Cache", path
 		) == S_OK) {
 		return path;
 	}

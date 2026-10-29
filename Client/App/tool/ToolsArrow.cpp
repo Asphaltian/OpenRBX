@@ -187,9 +187,7 @@ void BoxSelectCommand::onMouseMove(const UIEvent& uiEvent)
 	getMouseInstances(instances, uiEvent, selectBox);
 #else
 	getMouseInstances(
-		instances,
-		uiEvent,
-		G3D::Rect2D::xyxy(mouseDownView.x, mouseDownView.y, mouseCurrentView.x, mouseCurrentView.y)
+		instances, uiEvent, G3D::Rect2D::xyxy(mouseDownView.x, mouseDownView.y, mouseCurrentView.x, mouseCurrentView.y)
 	);
 #endif
 

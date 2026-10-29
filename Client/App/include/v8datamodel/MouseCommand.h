@@ -48,9 +48,7 @@ public:
 	static G3D::Ray getSearchRay(const UIEvent& uiEvent, ICameraOwner* _workspace);
 	static Instance* getTopSelectable3d(PartInstance* part);
 	PartInstance* getPart(
-		const UIEvent& uiEvent,
-		const HitTestFilter* filter = NULL,
-		G3D::Vector3& hitWorld = ignoreVector3
+		const UIEvent& uiEvent, const HitTestFilter* filter = NULL, G3D::Vector3& hitWorld = ignoreVector3
 	);
 	PartInstance* getUnlockedPart(const UIEvent& uiEvent, G3D::Vector3& hitWorld = ignoreVector3);
 	PartInstance* getPartByLocalCharacter(const UIEvent& uiEvent, G3D::Vector3& hitWorld = ignoreVector3);

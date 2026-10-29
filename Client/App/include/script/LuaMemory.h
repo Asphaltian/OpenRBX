@@ -14,10 +14,7 @@ public:
 	void clearHeapMax();
 	void getHeapStats(unsigned int& heapSize, unsigned int& heapCount) const;
 	void getHeapStats(
-		unsigned int& heapSize,
-		unsigned int& heapCount,
-		unsigned int& maxHeapSize,
-		unsigned int& maxHeapCount
+		unsigned int& heapSize, unsigned int& heapCount, unsigned int& maxHeapSize, unsigned int& maxHeapCount
 	) const;
 
 	static void* alloc(void* ud, void* ptr, size_t osize, size_t nsize);

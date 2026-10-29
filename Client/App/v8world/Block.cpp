@@ -311,11 +311,7 @@ bool Block::hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside)
 	inside = false;
 
 	bool hit = CollisionDetection::collisionLocationForMovingPointFixedAABox(
-		rayInMe.origin,
-		rayInMe.direction,
-		AABox(-halfSize, halfSize),
-		localHitPoint,
-		inside
+		rayInMe.origin, rayInMe.direction, AABox(-halfSize, halfSize), localHitPoint, inside
 	);
 
 	if (!inside) {
@@ -327,11 +323,7 @@ bool Block::hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside)
 	Ray outsideRay = Ray::fromOriginAndDirection(rayInMe.origin - rayInMe.direction * 1000.0f, rayInMe.direction);
 
 	CollisionDetection::collisionLocationForMovingPointFixedAABox(
-		outsideRay.origin,
-		outsideRay.direction,
-		AABox(-halfSize, halfSize),
-		localHitPoint,
-		inside
+		outsideRay.origin, outsideRay.direction, AABox(-halfSize, halfSize), localHitPoint, inside
 	);
 
 	return true;

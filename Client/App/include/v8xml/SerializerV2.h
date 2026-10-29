@@ -52,9 +52,7 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x10097040
 	virtual void announceIDREF(
-		const XmlNameValuePair* valueIDREF,
-		Reflection::DescribedBase* propertyOwner,
-		const IIDREF* idref
+		const XmlNameValuePair* valueIDREF, Reflection::DescribedBase* propertyOwner, const IIDREF* idref
 	) // vtable+0x04
 	{
 		processIDREF(valueIDREF, propertyOwner, idref);
@@ -82,9 +80,7 @@ protected:
 
 	// FUNCTION: WEBSERVICE 0x100979e0
 	virtual bool processIDREF(
-		const XmlNameValuePair* valueIDREF,
-		Reflection::DescribedBase* propertyOwner,
-		const IIDREF* idref
+		const XmlNameValuePair* valueIDREF, Reflection::DescribedBase* propertyOwner, const IIDREF* idref
 	) // vtable+0x10
 	{
 		InstanceHandle value;

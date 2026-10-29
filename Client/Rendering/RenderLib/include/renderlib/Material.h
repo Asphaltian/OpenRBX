@@ -92,12 +92,7 @@ public:
 	const Level& appendEmptyLevel();
 	const Level& appendLevel(G3D::Color3 color, float specular, float shiny, float reflect, float transparent);
 	const Level& appendLevel(
-		TextureProxyRef baseTexture,
-		G3D::Color3 color,
-		float specular,
-		float shiny,
-		float reflect,
-		float transparent
+		TextureProxyRef baseTexture, G3D::Color3 color, float specular, float shiny, float reflect, float transparent
 	);
 
 	unsigned int levelCount() const;

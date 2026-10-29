@@ -18,9 +18,7 @@ ContactManager::ContactManager(World* world) : spatialHash(new SpatialHash(world
 
 // FUNCTION: WEBSERVICE 0x10108130
 void ContactManager::getPrimitivesTouchingExtents(
-	const Extents& extents,
-	const Primitive* ignore,
-	G3D::Array<Primitive*>& found
+	const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& found
 )
 {
 	spatialHash->getPrimitivesTouchingExtents(extents, ignore, found);

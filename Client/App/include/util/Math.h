@@ -77,10 +77,7 @@ public:
 	static bool fuzzyEq(const Vector3& v0, const Vector3& v1, float epsilon);
 	static bool fuzzyEq(const Matrix3& m0, const Matrix3& m1, float epsilon);
 	static bool fuzzyEq(
-		const CoordinateFrame& c0,
-		const CoordinateFrame& c1,
-		float translationEpsilon,
-		float rotationEpsilon
+		const CoordinateFrame& c0, const CoordinateFrame& c1, float translationEpsilon, float rotationEpsilon
 	);
 	static bool fuzzyAxisAligned(const Matrix3& m0, const Matrix3& m1, float epsilon);
 	static bool isEven(int);

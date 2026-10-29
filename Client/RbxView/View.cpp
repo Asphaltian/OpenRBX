@@ -94,8 +94,9 @@ void View::suppressSkybox()
 {
 	Lighting* lighting = dataModel ? dataModel->create<Lighting>() : NULL;
 
-	renderLibScene
-		->presetLighting(NULL, lighting->getSkyParameters(), lighting->getAmbientTop(), lighting->getAmbientBottom());
+	renderLibScene->presetLighting(
+		NULL, lighting->getSkyParameters(), lighting->getAmbientTop(), lighting->getAmbientBottom()
+	);
 
 	sky = NULL;
 
@@ -125,10 +126,7 @@ void View::updateLighting()
 		}
 
 		renderLibScene->presetLighting(
-			sky,
-			lighting->getSkyParameters(),
-			lighting->getAmbientTop(),
-			lighting->getAmbientBottom()
+			sky, lighting->getSkyParameters(), lighting->getAmbientTop(), lighting->getAmbientBottom()
 		);
 		renderLibScene->colorClearValue = lighting->getClearColor();
 
@@ -153,9 +151,7 @@ View::View(boost::shared_ptr<DataModel> dataModel)
 
 	dataModel->getWorkspace()->visitDescendents(boost::bind(&View::onWorkspaceDescendentAdded, this, _1));
 	workspaceDescendentAddedConnection = Instance::event_descendentAdded.connect(
-		dataModel->getWorkspace(),
-		boost::bind(&View::onWorkspaceDescendentAdded, this, _1),
-		10
+		dataModel->getWorkspace(), boost::bind(&View::onWorkspaceDescendentAdded, this, _1), 10
 	);
 }
 

@@ -17,12 +17,7 @@ Material::Level::Level()
 
 // FUNCTION: WEBSERVICE 0x101f67f0
 Material::Level::Level(
-	TextureProxyRef baseTexture,
-	G3D::Color3 color,
-	float specular,
-	float shiny,
-	float reflect,
-	float transparent
+	TextureProxyRef baseTexture, G3D::Color3 color, float specular, float shiny, float reflect, float transparent
 )
 	: emptyLevel(false), mBaseTexture(baseTexture), mColor(color), mSpecular(specular), mShiny(shiny),
 	  mReflect(reflect), mTransparent(transparent)
@@ -64,12 +59,7 @@ const Material::Level& Material::appendEmptyLevel()
 
 // FUNCTION: WEBSERVICE 0x101f6ef0
 const Material::Level& Material::appendLevel(
-	TextureProxyRef baseTexture,
-	G3D::Color3 color,
-	float specular,
-	float shiny,
-	float reflect,
-	float transparent
+	TextureProxyRef baseTexture, G3D::Color3 color, float specular, float shiny, float reflect, float transparent
 )
 {
 	levels.append(Level(baseTexture, color, specular, shiny, reflect, transparent));

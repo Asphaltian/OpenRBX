@@ -3,8 +3,8 @@ Standard: Cpp03
 
 AccessModifierOffset: -4
 AlignAfterOpenBracket: BlockIndent
-AllowAllArgumentsOnNextLine: false
-AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortFunctionsOnASingleLine: InlineOnly
 AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false

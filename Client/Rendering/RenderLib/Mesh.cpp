@@ -50,9 +50,7 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 
 // FUNCTION: WEBSERVICE 0x10166980
 void Mesh::computeAABounds(
-	const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
-	G3D::Vector3& lo,
-	G3D::Vector3& hi
+	const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray, G3D::Vector3& lo, G3D::Vector3& hi
 )
 {
 	lo = G3D::Vector3::inf();
@@ -86,10 +84,7 @@ void Mesh::computeAABounds(
 
 // FUNCTION: WEBSERVICE 0x10166cc0
 unsigned int Mesh::allocVertex(
-	const G3D::Vector3& vertex,
-	const G3D::Vector3& normal,
-	const G3D::Vector2& tex,
-	bool share
+	const G3D::Vector3& vertex, const G3D::Vector3& normal, const G3D::Vector2& tex, bool share
 )
 {
 	if (!varDirty) {
@@ -237,8 +232,9 @@ void Mesh::computeDirectionalShadowVolume(
 				const G3D::Vector3& v1 = geometry[face.vertexIndex[1]];
 				const G3D::Vector3& v2 = geometry[face.vertexIndex[2]];
 
-				shadowVertex
-					.append(cframe.pointToWorldSpace(v0), cframe.pointToWorldSpace(v1), cframe.pointToWorldSpace(v2));
+				shadowVertex.append(
+					cframe.pointToWorldSpace(v0), cframe.pointToWorldSpace(v1), cframe.pointToWorldSpace(v2)
+				);
 			}
 		}
 	}
@@ -434,11 +430,7 @@ void Mesh::computeShadowSurface(const LevelRef& level)
 
 	G3D::Array<G3D::MeshAlg::Vertex> vertexArray;
 	G3D::MeshAlg::computeAdjacency(
-		shadowSurface.geometry,
-		indexArray,
-		shadowSurface.faceArray,
-		shadowSurface.edgeArray,
-		vertexArray
+		shadowSurface.geometry, indexArray, shadowSurface.faceArray, shadowSurface.edgeArray, vertexArray
 	);
 
 	for (int i = 0; i < shadowSurface.edgeArray.size(); i++) {

@@ -13,23 +13,17 @@ const char sShirtGraphic[] = "ShirtGraphic";
 using namespace Reflection;
 
 BoundProp<TextureId, 1> ShirtGraphic::prop_Graphic(
-	"Graphic",
-	"Appearance",
-	&ShirtGraphic::graphic,
-	&ShirtGraphic::dataChanged
+	"Graphic", "Appearance", &ShirtGraphic::graphic, &ShirtGraphic::dataChanged
 );
+
 BoundProp<BrickColor, 1> Shirt::prop_leftSleeveColor(
-	"LeftSleeveColor",
-	"Appearance",
-	&Shirt::leftSleeveColor,
-	&Shirt::dataChanged
+	"LeftSleeveColor", "Appearance", &Shirt::leftSleeveColor, &Shirt::dataChanged
 );
+
 BoundProp<BrickColor, 1> Shirt::prop_rightSleeveColor(
-	"RightSleeveColor",
-	"Appearance",
-	&Shirt::rightSleeveColor,
-	&Shirt::dataChanged
+	"RightSleeveColor", "Appearance", &Shirt::rightSleeveColor, &Shirt::dataChanged
 );
+
 BoundProp<BrickColor, 1> Shirt::prop_torsoColor("TorsoColor", "Appearance", &Shirt::torsoColor, &Shirt::dataChanged);
 
 const char sSkin[] = "Skin";
@@ -39,40 +33,27 @@ BoundProp<BrickColor, 1> Skin::prop_skinColor("SkinColor", "Appearance", &Skin::
 const char sBodyColors[] = "BodyColors";
 
 BoundProp<BrickColor, 1> BodyColors::prop_HeadColor(
-	"HeadColor",
-	"Appearance",
-	&BodyColors::headColor,
-	&BodyColors::dataChanged
+	"HeadColor", "Appearance", &BodyColors::headColor, &BodyColors::dataChanged
 );
+
 BoundProp<BrickColor, 1> BodyColors::prop_LeftArmColor(
-	"LeftArmColor",
-	"Appearance",
-	&BodyColors::leftArmColor,
-	&BodyColors::dataChanged
+	"LeftArmColor", "Appearance", &BodyColors::leftArmColor, &BodyColors::dataChanged
 );
+
 BoundProp<BrickColor, 1> BodyColors::prop_RightArmColor(
-	"RightArmColor",
-	"Appearance",
-	&BodyColors::rightArmColor,
-	&BodyColors::dataChanged
+	"RightArmColor", "Appearance", &BodyColors::rightArmColor, &BodyColors::dataChanged
 );
+
 BoundProp<BrickColor, 1> BodyColors::prop_TorsoColor(
-	"TorsoColor",
-	"Appearance",
-	&BodyColors::torsoColor,
-	&BodyColors::dataChanged
+	"TorsoColor", "Appearance", &BodyColors::torsoColor, &BodyColors::dataChanged
 );
+
 BoundProp<BrickColor, 1> BodyColors::prop_LeftLegColor(
-	"LeftLegColor",
-	"Appearance",
-	&BodyColors::leftLegColor,
-	&BodyColors::dataChanged
+	"LeftLegColor", "Appearance", &BodyColors::leftLegColor, &BodyColors::dataChanged
 );
+
 BoundProp<BrickColor, 1> BodyColors::prop_RightLegColor(
-	"RightLegColor",
-	"Appearance",
-	&BodyColors::rightLegColor,
-	&BodyColors::dataChanged
+	"RightLegColor", "Appearance", &BodyColors::rightLegColor, &BodyColors::dataChanged
 );
 
 // FUNCTION: WEBSERVICE 0x10059c10 FOLDED

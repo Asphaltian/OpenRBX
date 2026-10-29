@@ -286,8 +286,9 @@ bool MainLogManager::handleDebugAssert(
 {
 	CString eventMessage;
 	if (message.size() > 0) {
-		eventMessage
-			.Format("Assertion failed: %s\n\nMessage: %s\n\n%s(%d)", expression, message.c_str(), filename, lineNumber);
+		eventMessage.Format(
+			"Assertion failed: %s\n\nMessage: %s\n\n%s(%d)", expression, message.c_str(), filename, lineNumber
+		);
 	}
 	else {
 		eventMessage.Format("Assertion failed: %s\n%s(%d)", expression, filename, lineNumber);
@@ -309,8 +310,9 @@ bool MainLogManager::handleG3DFailure(
 {
 	CString eventMessage;
 	if (message.size() > 0) {
-		eventMessage
-			.Format("G3D Error: %s\n\nMessage: %s\n\n%s(%d)", expression, message.c_str(), filename, lineNumber);
+		eventMessage.Format(
+			"G3D Error: %s\n\nMessage: %s\n\n%s(%d)", expression, message.c_str(), filename, lineNumber
+		);
 	}
 	else {
 		eventMessage.Format("G3D Error: %s\n%s(%d)", expression, filename, lineNumber);

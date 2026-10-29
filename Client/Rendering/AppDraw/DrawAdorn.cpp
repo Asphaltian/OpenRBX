@@ -8,12 +8,7 @@ namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101ed030
 void DrawAdorn::cylinder(
-	Adorn* adorn,
-	const G3D::CoordinateFrame& worldC,
-	int axis,
-	float length,
-	float radius,
-	const G3D::Color3& color
+	Adorn* adorn, const G3D::CoordinateFrame& worldC, int axis, float length, float radius, const G3D::Color3& color
 )
 {
 	const G3D::Matrix3& axisRotation = Math::getAxisRotationMatrix(axis);
@@ -26,11 +21,7 @@ void DrawAdorn::cylinder(
 
 // FUNCTION: WEBSERVICE 0x101ed0e0
 void DrawAdorn::surfaceBorder(
-	Adorn* adorn,
-	const G3D::Vector3& halfRealSize,
-	float highlight,
-	int surfaceId,
-	const G3D::Color4& color
+	Adorn* adorn, const G3D::Vector3& halfRealSize, float highlight, int surfaceId, const G3D::Color4& color
 )
 {
 	int axis = surfaceId % 3;

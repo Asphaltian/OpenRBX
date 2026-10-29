@@ -1012,10 +1012,7 @@ private:
 
 public:
 	BoundFuncDesc(
-		Function function,
-		const char* name,
-		const char* arg1Name,
-		typename FunctionDescriptor::Security security
+		Function function, const char* name, const char* arg1Name, typename FunctionDescriptor::Security security
 	)
 		: FuncDesc<Class>(name, security), function(function)
 	{

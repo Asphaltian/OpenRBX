@@ -14,6 +14,7 @@ static void EndcapTransform(
 	const G3D::Vector3& radius,
 	const G3D::Vector2int16& ivertex
 );
+
 static void CylinderTransform(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,
@@ -183,9 +184,7 @@ template CylinderAlongXMesh* MeshFactory<CylinderAlongXMesh, 1>::create(const G3
 template CylinderAlongXMesh* MeshFactory<CylinderAlongXMesh, 1>::createDecal(const G3D::Vector3&, NormalId);
 
 template CylinderAlongXMesh* MeshFactory<CylinderAlongXMesh, 1>::createTexture(
-	const G3D::Vector3&,
-	NormalId,
-	const G3D::Vector2&
+	const G3D::Vector3&, NormalId, const G3D::Vector2&
 );
 
 } // namespace View

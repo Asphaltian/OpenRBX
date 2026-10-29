@@ -13,38 +13,21 @@ char sDecal[] = "Decal";
 using namespace Reflection;
 
 const PropDescriptor<Decal, TextureId> Decal::prop_Texture(
-	"Texture",
-	"Appearance",
-	&RBX::Decal::getTexture,
-	&RBX::Decal::setTexture
+	"Texture", "Appearance", &Decal::getTexture, &Decal::setTexture
 );
 
 const PropDescriptor<Decal, float> Decal::prop_Specular(
-	"Specular",
-	"Appearance",
-	&RBX::Decal::getSpecular,
-	&RBX::Decal::setSpecular
+	"Specular", "Appearance", &Decal::getSpecular, &Decal::setSpecular
 );
 
-const PropDescriptor<Decal, float> Decal::prop_Shiny(
-	"Shiny",
-	"Appearance",
-	&RBX::Decal::getShiny,
-	&RBX::Decal::setShiny
-);
+const PropDescriptor<Decal, float> Decal::prop_Shiny("Shiny", "Appearance", &Decal::getShiny, &Decal::setShiny);
 
 const PropDescriptor<Texture, float> Texture::prop_StudsPerTileU(
-	"StudsPerTileU",
-	"Appearance",
-	&RBX::Texture::getStudsPerTileU,
-	&RBX::Texture::setStudsPerTileU
+	"StudsPerTileU", "Appearance", &Texture::getStudsPerTileU, &Texture::setStudsPerTileU
 );
 
 const PropDescriptor<Texture, float> Texture::prop_StudsPerTileV(
-	"StudsPerTileV",
-	"Appearance",
-	&RBX::Texture::getStudsPerTileV,
-	&RBX::Texture::setStudsPerTileV
+	"StudsPerTileV", "Appearance", &Texture::getStudsPerTileV, &Texture::setStudsPerTileV
 );
 
 // FUNCTION: WEBSERVICE 0x100ff530 FOLDED
@@ -65,8 +48,7 @@ bool StringConverter<TextureId>::convertToValue(const std::string& text, Texture
 // FUNCTION: WEBSERVICE 0x10041750 FOLDED
 template <>
 void Reflection::TypedPropertyDescriptor<TextureId>::writeValue(
-	const DescribedBase* instance,
-	XmlElement* element
+	const DescribedBase* instance, XmlElement* element
 ) const
 {
 	element->setValue(getValue(instance));
@@ -89,9 +71,7 @@ std::string Reflection::TypedPropertyDescriptor<TextureId>::getStringValue(const
 // FUNCTION: WEBSERVICE 0x100ff890
 template <>
 void Reflection::TypedPropertyDescriptor<TextureId>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -105,8 +85,7 @@ void Reflection::TypedPropertyDescriptor<TextureId>::readValue(
 // FUNCTION: WEBSERVICE 0x100ff960 FOLDED
 template <>
 bool Reflection::TypedPropertyDescriptor<TextureId>::setStringValue(
-	DescribedBase* instance,
-	const std::string& text
+	DescribedBase* instance, const std::string& text
 ) const
 {
 	TextureId value;

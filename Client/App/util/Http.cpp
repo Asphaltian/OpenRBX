@@ -252,14 +252,7 @@ static void httpGetPost(
 
 	CHINTERNET session(InternetOpen("Roblox", INTERNET_OPEN_TYPE_PRECONFIG, NULL, NULL, 0));
 	CHINTERNET connection(InternetConnect(
-		session,
-		u.GetHostName(),
-		u.GetPortNumber(),
-		u.GetUserName(),
-		u.GetPassword(),
-		INTERNET_SERVICE_HTTP,
-		0,
-		1
+		session, u.GetHostName(), u.GetPortNumber(), u.GetUserName(), u.GetPassword(), INTERNET_SERVICE_HTTP, 0, 1
 	));
 
 	CString s = u.GetUrlPath();
@@ -305,10 +298,7 @@ static void httpGetPost(
 			if (compressData) {
 				std::string contentEncodingHeader = "Content-Encoding: gzip\r\n";
 				if (!HttpAddRequestHeaders(
-						request,
-						contentEncodingHeader.c_str(),
-						contentEncodingHeader.size(),
-						HTTP_ADDREQ_FLAG_ADD
+						request, contentEncodingHeader.c_str(), contentEncodingHeader.size(), HTTP_ADDREQ_FLAG_ADD
 					)) {
 					ThrowIfFailure(false, "HttpAddRequestHeaders failed");
 				}
@@ -328,30 +318,21 @@ static void httpGetPost(
 		if (uploadSize > 10000) {
 			std::string contentSizeHeader = G3D::format("Roblox-Content-Size: %d\r\n", uploadSize);
 			if (!HttpAddRequestHeaders(
-					request,
-					contentSizeHeader.c_str(),
-					contentSizeHeader.size(),
-					HTTP_ADDREQ_FLAG_ADD
+					request, contentSizeHeader.c_str(), contentSizeHeader.size(), HTTP_ADDREQ_FLAG_ADD
 				)) {
 				ThrowIfFailure(false, "HttpAddRequestHeaders failed");
 			}
 
 			std::string contentFirstHeader = G3D::format("Roblox-Content-First: %d\r\n", uploadData[0]);
 			if (!HttpAddRequestHeaders(
-					request,
-					contentFirstHeader.c_str(),
-					contentFirstHeader.size(),
-					HTTP_ADDREQ_FLAG_ADD
+					request, contentFirstHeader.c_str(), contentFirstHeader.size(), HTTP_ADDREQ_FLAG_ADD
 				)) {
 				ThrowIfFailure(false, "HttpAddRequestHeaders failed");
 			}
 
 			std::string contentLastHeader = G3D::format("Roblox-Content-Last: %d\r\n", uploadData[uploadSize - 1]);
 			if (!HttpAddRequestHeaders(
-					request,
-					contentLastHeader.c_str(),
-					contentLastHeader.size(),
-					HTTP_ADDREQ_FLAG_ADD
+					request, contentLastHeader.c_str(), contentLastHeader.size(), HTTP_ADDREQ_FLAG_ADD
 				)) {
 				ThrowIfFailure(false, "HttpAddRequestHeaders failed");
 			}
@@ -360,10 +341,7 @@ static void httpGetPost(
 			hasher->addData(uploadData);
 			std::string contentHashHeader = G3D::format("Roblox-Content-Hash: %s\r\n", hasher->c_str());
 			if (!HttpAddRequestHeaders(
-					request,
-					contentHashHeader.c_str(),
-					contentHashHeader.size(),
-					HTTP_ADDREQ_FLAG_ADD
+					request, contentHashHeader.c_str(), contentHashHeader.size(), HTTP_ADDREQ_FLAG_ADD
 				)) {
 				ThrowIfFailure(false, "HttpAddRequestHeaders failed");
 			}

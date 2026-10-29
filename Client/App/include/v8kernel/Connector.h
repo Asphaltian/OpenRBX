@@ -151,24 +151,14 @@ public:
 	}
 
 	void setBallBlock(
-		Body* body0,
-		Body* body1,
-		float radius0,
-		const Vector3* offset1,
-		NormalId normalID1,
-		GeoPairType geoPairType
+		Body* body0, Body* body1, float radius0, const Vector3* offset1, NormalId normalID1, GeoPairType geoPairType
 	)
 	{
 		geoPair.setBallBlock(body0, body1, radius0, offset1, normalID1, geoPairType);
 	}
 
 	void setPointPlane(
-		Body* body0,
-		Body* body1,
-		const Vector3* offset0,
-		const Vector3* offset1,
-		int point0ID,
-		NormalId planeID
+		Body* body0, Body* body1, const Vector3* offset0, const Vector3* offset1, int point0ID, NormalId planeID
 	)
 	{
 		geoPair.setPointPlane(body0, body1, offset0, offset1, point0ID, planeID);
@@ -189,12 +179,7 @@ public:
 	}
 
 	void setEdgeEdge(
-		Body* body0,
-		Body* body1,
-		const Vector3* offset0,
-		const Vector3* offset1,
-		NormalId normalID0,
-		NormalId normalID1
+		Body* body0, Body* body1, const Vector3* offset0, const Vector3* offset1, NormalId normalID0, NormalId normalID1
 	)
 	{
 		geoPair.setEdgeEdge(body0, body1, offset0, offset1, normalID0, normalID1);

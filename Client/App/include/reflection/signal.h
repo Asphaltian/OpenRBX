@@ -145,9 +145,7 @@ protected:
 
 private:
 	virtual boost::signals::connection connectGeneric(
-		SignalInstance* instance,
-		GenericSlotWrapper* wrapper,
-		boost::signals::connect_position position
+		SignalInstance* instance, GenericSlotWrapper* wrapper, boost::signals::connect_position position
 	) const = 0; // vtable+0x04
 
 	virtual SignalInstance* newSignalInstance(SignalSource& source) const = 0; // vtable+0x08
@@ -392,14 +390,11 @@ protected:
 	};
 
 	virtual boost::signals::connection connectGeneric(
-		SignalInstance* si,
-		GenericSlotWrapper* wrapper,
-		boost::signals::connect_position pos
+		SignalInstance* si, GenericSlotWrapper* wrapper, boost::signals::connect_position pos
 	) const // vtable+0x04
 	{
 		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(si)->connect(
-			GenericSlotAdapter(wrapper),
-			pos
+			GenericSlotAdapter(wrapper), pos
 		);
 	}
 
@@ -475,14 +470,11 @@ protected:
 	// clang-format on
 
 	virtual boost::signals::connection connectGeneric(
-		SignalInstance* si,
-		GenericSlotWrapper* wrapper,
-		boost::signals::connect_position pos
+		SignalInstance* si, GenericSlotWrapper* wrapper, boost::signals::connect_position pos
 	) const // vtable+0x04
 	{
 		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(si)->connect(
-			GenericSlotAdapter(wrapper),
-			pos
+			GenericSlotAdapter(wrapper), pos
 		);
 	}
 
@@ -544,14 +536,11 @@ protected:
 	// clang-format on
 
 	virtual boost::signals::connection connectGeneric(
-		SignalInstance* si,
-		GenericSlotWrapper* wrapper,
-		boost::signals::connect_position pos
+		SignalInstance* si, GenericSlotWrapper* wrapper, boost::signals::connect_position pos
 	) const // vtable+0x04
 	{
 		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(si)->connect(
-			GenericSlotAdapter(wrapper),
-			pos
+			GenericSlotAdapter(wrapper), pos
 		);
 	}
 

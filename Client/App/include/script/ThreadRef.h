@@ -115,22 +115,17 @@ void lua_pushfunction(lua_State* L, const FunctionRef& ref);
 
 template <>
 int Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::on_index(
-	const boost::shared_ptr<ThreadRef::Node>& value,
-	const char* name,
-	lua_State* L
+	const boost::shared_ptr<ThreadRef::Node>& value, const char* name, lua_State* L
 );
 
 template <>
 void Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::on_newindex(
-	boost::shared_ptr<ThreadRef::Node>& value,
-	const char* name,
-	lua_State* L
+	boost::shared_ptr<ThreadRef::Node>& value, const char* name, lua_State* L
 );
 
 template <>
 inline int Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::on_tostring(
-	const boost::shared_ptr<ThreadRef::Node>& value,
-	lua_State* L
+	const boost::shared_ptr<ThreadRef::Node>& value, lua_State* L
 )
 {
 	lua_pushstring(L, "ThreadRef");

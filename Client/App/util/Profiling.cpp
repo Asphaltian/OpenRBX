@@ -33,11 +33,7 @@ void ThreadProfiler::sample(void* thread)
 		__int64 userTime;
 
 		if (GetThreadTimes(
-				thread,
-				(FILETIME*) &creationTime,
-				(FILETIME*) &exitTime,
-				(FILETIME*) &kernelTime,
-				(FILETIME*) &userTime
+				thread, (FILETIME*) &creationTime, (FILETIME*) &exitTime, (FILETIME*) &kernelTime, (FILETIME*) &userTime
 			)) {
 			__int64 kern = kernelTime;
 			__int64 user = userTime;

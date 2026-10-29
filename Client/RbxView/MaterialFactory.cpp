@@ -98,12 +98,7 @@ G3D::ReferenceCountedPointer<Render::Material> MaterialFactory::getMegaMaterial(
 		}
 		else {
 			result->appendLevel(
-				megaTexture,
-				G3D::Color3::white(),
-				specular,
-				shiny,
-				attributes.reflectance,
-				attributes.transparency
+				megaTexture, G3D::Color3::white(), specular, shiny, attributes.reflectance, attributes.transparency
 			);
 		}
 		megaDatabase[filteredAttributes] = result;
@@ -131,12 +126,7 @@ G3D::ReferenceCountedPointer<Render::Material> MaterialFactory::getMaterial(Attr
 		}
 		else {
 			result->appendLevel(
-				texture,
-				G3D::Color3::WHITE,
-				specular,
-				shiny,
-				attributes.reflectance,
-				attributes.transparency
+				texture, G3D::Color3::WHITE, specular, shiny, attributes.reflectance, attributes.transparency
 			);
 		}
 		database[attributes] = result;
@@ -149,14 +139,10 @@ G3D::ReferenceCountedPointer<Render::Material> MaterialFactory::getMaterial(Attr
 MaterialFactory::MaterialFactory(G3D::TextureManager* textureManager)
 {
 	surfacesTexture = new Render::TextureProxy(
-		*textureManager,
-		ContentProvider::singleton().getAssetFile("textures\\surfaces.png"),
-		true
+		*textureManager, ContentProvider::singleton().getAssetFile("textures\\surfaces.png"), true
 	);
 	fileMeshTexture = new Render::TextureProxy(
-		*textureManager,
-		ContentProvider::singleton().getAssetFile("textures\\JohnTex.png"),
-		false
+		*textureManager, ContentProvider::singleton().getAssetFile("textures\\JohnTex.png"), false
 	);
 	megaTexture =
 		new MegaTextureProxy(*textureManager, ContentProvider::singleton().getAssetFile("textures\\SurfacesStrip.png"));

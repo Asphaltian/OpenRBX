@@ -43,38 +43,23 @@ const char sDataModel[] = "DataModel";
 typedef boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Instances;
 
 static Reflection::BoundFuncDesc<DataModel, Instances(ContentId), 1> getContentFunctionOld(
-	&DataModel::get,
-	"get",
-	"url",
-	Reflection::FunctionDescriptor::AnyCaller
+	&DataModel::get, "get", "url", Reflection::FunctionDescriptor::AnyCaller
 );
+
 static Reflection::BoundFuncDesc<DataModel, Instances(ContentId), 1> getContentFunction(
-	&DataModel::get,
-	"GetObjects",
-	"url",
-	Reflection::FunctionDescriptor::AnyCaller
+	&DataModel::get, "GetObjects", "url", Reflection::FunctionDescriptor::AnyCaller
 );
 
 static Reflection::BoundFuncDesc<DataModel, void(ContentId), 1> loadFunction(
-	&DataModel::loadContent,
-	"Load",
-	"url",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&DataModel::loadContent, "Load", "url", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<DataModel, void(ContentId), 1> saveFunction(
-	&DataModel::save,
-	"Save",
-	"url",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&DataModel::save, "Save", "url", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
 
 static Reflection::BoundFuncDesc<DataModel, std::string(std::string, bool), 2> httpGetFunction(
-	&DataModel::httpGet,
-	"HttpGet",
-	"url",
-	"synchronous",
-	false,
-	Reflection::FunctionDescriptor::AnyCaller
+	&DataModel::httpGet, "HttpGet", "url", "synchronous", false, Reflection::FunctionDescriptor::AnyCaller
 );
 
 static Reflection::BoundFuncDesc<DataModel, std::string(std::string, std::string, bool), 3> httpPostFunction(
@@ -88,31 +73,23 @@ static Reflection::BoundFuncDesc<DataModel, std::string(std::string, std::string
 );
 
 static Reflection::BoundFuncDesc<DataModel, void(), 0> sanitizeFunction(
-	&DataModel::clearContents,
-	"ClearContent",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&DataModel::clearContents, "ClearContent", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<DataModel, void(), 0> closeFunction(
-	&DataModel::close,
-	"Close",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&DataModel::close, "Close", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
 
 static Reflection::BoundFuncDesc<DataModel, void(std::string), 1> func_SetUiMessage(
-	&DataModel::setUiMessage,
-	"SetMessage",
-	"message",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&DataModel::setUiMessage, "SetMessage", "message", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<DataModel, void(), 0> func_ClearUIMessage(
-	&DataModel::clearUiMessage,
-	"ClearMessage",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&DataModel::clearUiMessage, "ClearMessage", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<DataModel, void(), 0> func_SetUIMessageBrickCount(
-	&DataModel::setUiMessageBrickCount,
-	"SetMessageBrickCount",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&DataModel::setUiMessageBrickCount, "SetMessageBrickCount", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
 
 static Reflection::SignalDesc<DataModel, void()> event_Closing("Close");

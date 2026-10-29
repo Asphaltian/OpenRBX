@@ -33,9 +33,7 @@ public:
 	virtual void announceID(const XmlNameValuePair* valueID, Instance* instance) = 0; // vtable+0x00
 
 	virtual void announceIDREF(
-		const XmlNameValuePair* valueIDREF,
-		Reflection::DescribedBase* propertyOwner,
-		const IIDREF* idref
+		const XmlNameValuePair* valueIDREF, Reflection::DescribedBase* propertyOwner, const IIDREF* idref
 	) = 0; // vtable+0x04
 };
 

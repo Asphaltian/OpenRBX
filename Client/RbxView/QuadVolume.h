@@ -44,9 +44,7 @@ public:
 
 protected:
 	LevelBuilder(
-		G3D::ReferenceCountedPointer<Render::Mesh::Level>& level,
-		G3D::Vector3 size,
-		RenderSurfaceTypes surfaceTypes
+		G3D::ReferenceCountedPointer<Render::Mesh::Level>& level, G3D::Vector3 size, RenderSurfaceTypes surfaceTypes
 	);
 
 public:
@@ -152,13 +150,7 @@ protected:
 			}
 
 			buildFace<face>(
-				deform,
-				G3D::Rect2D::xyxy(minCorner, maxCorner),
-				faceZ,
-				texCoord,
-				texDelta,
-				stripIndex,
-				stripElements
+				deform, G3D::Rect2D::xyxy(minCorner, maxCorner), faceZ, texCoord, texDelta, stripIndex, stripElements
 			);
 
 			minCorner[stripIndex] = maxCorner[stripIndex];

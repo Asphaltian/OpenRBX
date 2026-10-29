@@ -55,10 +55,7 @@ public:
 	virtual void explosion(const G3D::Sphere& sph, const G3D::Color4& solidColor, const G3D::Color4& wireColor);
 
 	virtual void cylinderAlongX(
-		float radius,
-		float length,
-		const G3D::Color4& solidColor,
-		const G3D::Color4& wireColor
+		float radius, float length, const G3D::Color4& solidColor, const G3D::Color4& wireColor
 	);
 
 	virtual void ray(const G3D::Ray& ray, const G3D::Color4& color, float scale);

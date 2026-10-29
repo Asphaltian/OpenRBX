@@ -85,10 +85,7 @@ private:
 	void debugShowTextures(G3D::RenderDevice* rd, const G3D::GCamera& camera);
 
 	void renderShadowVolumeGeometry(
-		G3D::RenderDevice* rd,
-		const G3D::GLight& light,
-		bool caps,
-		float shadowVertexDistance
+		G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance
 	);
 
 	G3D::Array<G3D::ReferenceCountedPointer<Chunk> > chunkArray; // 0x098

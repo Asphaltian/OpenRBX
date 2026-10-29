@@ -42,10 +42,7 @@ bool Ball::hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside)
 	G3D::Sphere sphere(Vector3::zero(), realRadius);
 
 	return G3D::CollisionDetection::collisionTimeForMovingPointFixedSphere(
-			   rayInMe.origin,
-			   rayInMe.direction,
-			   sphere,
-			   localHitPoint
+			   rayInMe.origin, rayInMe.direction, sphere, localHitPoint
 		   ) != G3D::inf();
 }
 

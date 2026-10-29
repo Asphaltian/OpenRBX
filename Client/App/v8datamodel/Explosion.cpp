@@ -19,13 +19,11 @@ namespace RBX {
 char sExplosion[] = "Explosion";
 
 static Reflection::PropDescriptor<Explosion, float> propBlastRadius(
-	"BlastRadius",
-	"Data",
-	&RBX::Explosion::getBlastRadius,
-	&RBX::Explosion::setBlastRadius
+	"BlastRadius", "Data", &Explosion::getBlastRadius, &Explosion::setBlastRadius
 );
-Reflection::BoundProp<float, 1> Explosion::propBlastPressure("BlastPressure", "Data", &RBX::Explosion::blastPressure);
-Reflection::BoundProp<G3D::Vector3, 1> Explosion::propPosition("Position", "Data", &RBX::Explosion::position);
+
+Reflection::BoundProp<float, 1> Explosion::propBlastPressure("BlastPressure", "Data", &Explosion::blastPressure);
+Reflection::BoundProp<G3D::Vector3, 1> Explosion::propPosition("Position", "Data", &Explosion::position);
 Reflection::SignalDesc<Explosion, void(boost::shared_ptr<Instance>, float)> signal_Hit("Hit", "part", "distance");
 
 // FUNCTION: WEBSERVICE 0x100e1c60

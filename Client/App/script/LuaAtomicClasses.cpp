@@ -248,8 +248,7 @@ template G3D::Vector3* Bridge<G3D::Vector3, 1>::pushNewObject<G3D::Vector3>(lua_
 template G3D::Color3* Bridge<G3D::Color3, 1>::pushNewObject<G3D::Color3>(lua_State* L, G3D::Color3 value);
 
 template RBX::BrickColor* Bridge<RBX::BrickColor, 1>::pushNewObject<RBX::BrickColor>(
-	lua_State* L,
-	RBX::BrickColor value
+	lua_State* L, RBX::BrickColor value
 );
 
 } // namespace Lua
@@ -801,9 +800,7 @@ int CoordinateFrameBridge::on_mul(lua_State* L)
 }
 
 template bool Bridge<G3D::CoordinateFrame, 1>::getValue<G3D::CoordinateFrame>(
-	lua_State* L,
-	unsigned int index,
-	G3D::CoordinateFrame& value
+	lua_State* L, unsigned int index, G3D::CoordinateFrame& value
 );
 
 template void Bridge<G3D::Color3, 1>::on_newindex(G3D::Color3& value, const char* name, lua_State* L);

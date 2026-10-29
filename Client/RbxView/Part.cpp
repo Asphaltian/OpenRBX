@@ -82,8 +82,9 @@ G3D::ReferenceCountedPointer<Render::Material> Part::getMaterial()
 {
 	try {
 		if (materialInvalid) {
-			MaterialFactory::Attributes attr =
-				{partInstance->getColor(), partInstance->getTransparencyUi(), partInstance->getReflectance()};
+			MaterialFactory::Attributes attr = {
+				partInstance->getColor(), partInstance->getTransparencyUi(), partInstance->getReflectance()
+			};
 
 			if (usesMegaTexture()) {
 				material = view->materialFactory->getMegaMaterial(attr);
@@ -379,16 +380,13 @@ void Part::updateMesh()
 	surfaceTypes.setSurfaceType(NORM_Y, renderSurfaceType(partInstance->getSurfaces()[NORM_Y].getSurfaceType()));
 	surfaceTypes.setSurfaceType(NORM_Z, renderSurfaceType(partInstance->getSurfaces()[NORM_Z].getSurfaceType()));
 	surfaceTypes.setSurfaceType(
-		NORM_X_NEG,
-		renderSurfaceType(partInstance->getSurfaces()[NORM_X_NEG].getSurfaceType())
+		NORM_X_NEG, renderSurfaceType(partInstance->getSurfaces()[NORM_X_NEG].getSurfaceType())
 	);
 	surfaceTypes.setSurfaceType(
-		NORM_Y_NEG,
-		renderSurfaceType(partInstance->getSurfaces()[NORM_Y_NEG].getSurfaceType())
+		NORM_Y_NEG, renderSurfaceType(partInstance->getSurfaces()[NORM_Y_NEG].getSurfaceType())
 	);
 	surfaceTypes.setSurfaceType(
-		NORM_Z_NEG,
-		renderSurfaceType(partInstance->getSurfaces()[NORM_Z_NEG].getSurfaceType())
+		NORM_Z_NEG, renderSurfaceType(partInstance->getSurfaces()[NORM_Z_NEG].getSurfaceType())
 	);
 
 	G3D::Vector3 size = partInstance->getPartSizeXml();
@@ -510,9 +508,7 @@ void Texture::updateMesh()
 				break;
 			case RBX::Part::CYLINDER_PART:
 				mesh = MeshFactory<CylinderAlongXMesh, 1>::createTexture(
-					size,
-					texture->getFace(),
-					texture->getStudsPerTile()
+					size, texture->getFace(), texture->getStudsPerTile()
 				);
 				break;
 			}
@@ -533,9 +529,7 @@ void Texture::updateMesh()
 				break;
 			case SpecialShape::CYLINDER_MESH:
 				mesh = MeshFactory<CylinderAlongXMesh, 1>::createTexture(
-					size,
-					texture->getFace(),
-					texture->getStudsPerTile()
+					size, texture->getFace(), texture->getStudsPerTile()
 				);
 				break;
 			case SpecialShape::BRICK_MESH:
@@ -557,9 +551,7 @@ void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 		this->specialShape = specialShape;
 
 		shapePropertyChangedConnection = Instance::event_propertyChanged.connect(
-			specialShape,
-			boost::bind(&PartChunk::onSpecialShapeChanged, this),
-			10
+			specialShape, boost::bind(&PartChunk::onSpecialShapeChanged, this), 10
 		);
 
 		invalidateMesh();
@@ -577,14 +569,10 @@ PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>&
 	childRemovedConnection =
 		Instance::event_childRemoved.connect(partInstance.get(), boost::bind(&PartChunk::onChildRemoved, this, _1), 10);
 	ancestorChangedConnection = Instance::event_ancestryChanged.connect(
-		partInstance.get(),
-		boost::bind(&PartChunk::onAncestorChanged, this, _1),
-		10
+		partInstance.get(), boost::bind(&PartChunk::onAncestorChanged, this, _1), 10
 	);
 	propertyChangedConnection = Instance::event_propertyChanged.connect(
-		partInstance.get(),
-		boost::bind(&PartChunk::onPropertyChanged, this, _1),
-		10
+		partInstance.get(), boost::bind(&PartChunk::onPropertyChanged, this, _1), 10
 	);
 
 	partInstance->visitChildren(boost::bind(&PartChunk::onChildAdded, this, _1));
@@ -605,14 +593,10 @@ Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 	: PartChunk(Render::Chunk::TEXTURE_OFFSET, shared_from(&parentPart), view), texture(shared_from(&texture))
 {
 	textureAncestorChangedConnection = Instance::event_ancestryChanged.connect(
-		&texture,
-		boost::bind(&Texture::onTextureAncestorChanged, this, _1),
-		10
+		&texture, boost::bind(&Texture::onTextureAncestorChanged, this, _1), 10
 	);
 	texturePropertyChangedConnection = Instance::event_propertyChanged.connect(
-		&texture,
-		boost::bind(&Texture::onTexturePropertyChanged, this, _1),
-		10
+		&texture, boost::bind(&Texture::onTexturePropertyChanged, this, _1), 10
 	);
 }
 

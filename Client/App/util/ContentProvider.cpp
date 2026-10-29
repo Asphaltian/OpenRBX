@@ -105,13 +105,15 @@ std::string MD5Hasher::convertToLegacyHash(std::string hash)
 MD5HasherImpl::MD5HasherImpl() : hProv(0), hHash(0)
 {
 	if (!CryptAcquireContext(&hProv, NULL, NULL, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT)) {
-		StandardOut::singleton()
-			->print(MESSAGE_ERROR, "Error during CryptAcquireContext. GetLastError = %d", GetLastError());
+		StandardOut::singleton()->print(
+			MESSAGE_ERROR, "Error during CryptAcquireContext. GetLastError = %d", GetLastError()
+		);
 	}
 
 	if (!CryptCreateHash(hProv, CALG_MD5, 0, 0, &hHash)) {
-		StandardOut::singleton()
-			->print(MESSAGE_ERROR, "Error during CryptCreateHash. GetLastError = %d", GetLastError());
+		StandardOut::singleton()->print(
+			MESSAGE_ERROR, "Error during CryptCreateHash. GetLastError = %d", GetLastError()
+		);
 	}
 }
 
@@ -171,14 +173,16 @@ const char* MD5HasherImpl::c_str()
 		DWORD hashLength;
 		DWORD foo = sizeof(DWORD);
 		if (!CryptGetHashParam(hHash, HP_HASHSIZE, (BYTE*) &hashLength, &foo, 0)) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Error during CryptGetHashParam. GetLastError = %d", GetLastError());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Error during CryptGetHashParam. GetLastError = %d", GetLastError()
+			);
 		}
 
 		BYTE* hash = new BYTE[hashLength];
 		if (!CryptGetHashParam(hHash, HP_HASHVAL, hash, &hashLength, 0)) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Error during CryptGetHashParam. GetLastError = %d", GetLastError());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Error during CryptGetHashParam. GetLastError = %d", GetLastError()
+			);
 		}
 
 		for (DWORD i = 0; i < hashLength; i++) {

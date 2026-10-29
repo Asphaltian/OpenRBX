@@ -28,8 +28,7 @@ void LocalBackpackItem::render2d(Adorn* adorn)
 	Rect draw = getMyRect();
 	float numberSize = draw.size().x * 0.2f;
 	Rect numberRect = Rect::fromLowSize(
-		G3D::Vector2(draw.low.x + 2, draw.high.y - 2 - numberSize),
-		G3D::Vector2(numberSize, numberSize)
+		G3D::Vector2(draw.low.x + 2, draw.high.y - 2 - numberSize), G3D::Vector2(numberSize, numberSize)
 	);
 
 	adorn->rect2d(draw.toRect2D(), GuiItem::translucentBackdrop());

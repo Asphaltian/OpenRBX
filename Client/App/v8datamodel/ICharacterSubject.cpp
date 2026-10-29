@@ -13,8 +13,7 @@ namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10107360
 CoordinateFrame ICharacterSubject::getFocusLookingAtGoal(
-	const CoordinateFrame& cameraFocus,
-	const CoordinateFrame& cameraGoal
+	const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal
 )
 {
 	CoordinateFrame answer = cameraFocus;
@@ -24,9 +23,7 @@ CoordinateFrame ICharacterSubject::getFocusLookingAtGoal(
 
 // FUNCTION: WEBSERVICE 0x101073a0
 CoordinateFrame ICharacterSubject::goalFromDistance(
-	const CoordinateFrame& cameraFocus,
-	const CoordinateFrame& cameraGoal,
-	const float distance
+	const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal, const float distance
 )
 {
 	CoordinateFrame manLookCamera = getFocusLookingAtGoal(cameraFocus, cameraGoal);
@@ -65,9 +62,7 @@ bool ICharacterSubject::zoom(const float in, CoordinateFrame& cameraGoal, Coordi
 
 // FUNCTION: WEBSERVICE 0x101075c0
 bool ICharacterSubject::testOcclusion(
-	const CoordinateFrame& cameraFocus,
-	const CoordinateFrame& cameraGoal,
-	float& distance
+	const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal, float& distance
 )
 {
 	ContactManager* contactManager = getContactManager();
@@ -110,9 +105,7 @@ bool ICharacterSubject::testOcclusion(
 
 // STUB: WEBSERVICE 0x10107860
 void ICharacterSubject::stepGoalAndFocus(
-	CoordinateFrame& cameraGoal,
-	CoordinateFrame& cameraFocus,
-	bool cameraExternallyAdjusted
+	CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus, bool cameraExternallyAdjusted
 )
 {
 	G3D::Vector3 Offset;

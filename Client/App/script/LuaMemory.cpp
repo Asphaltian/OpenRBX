@@ -21,10 +21,7 @@ void LuaAllocator::clearHeapMax()
 
 // FUNCTION: WEBSERVICE 0x100b8500
 void LuaAllocator::getHeapStats(
-	unsigned int& heapSize,
-	unsigned int& heapCount,
-	unsigned int& maxHeapSize,
-	unsigned int& maxHeapCount
+	unsigned int& heapSize, unsigned int& heapCount, unsigned int& maxHeapSize, unsigned int& maxHeapCount
 ) const
 {
 	heapSize = this->heapSize;

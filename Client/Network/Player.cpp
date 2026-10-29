@@ -28,74 +28,48 @@ namespace Network {
 char sPlayer[] = "Player";
 
 static Reflection::BoundFuncDesc<Player, void(), 0> loadCharacterFunction(
-	&RBX::Network::Player::loadCharacter,
-	"LoadCharacter",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Player::loadCharacter, "LoadCharacter", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Player, void(), 0> removeCharacterFunction(
-	&RBX::Network::Player::removeCharacter,
-	"RemoveCharacter",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Player::removeCharacter, "RemoveCharacter", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Player, void(bool), 1> func_SetUnder13(
-	&RBX::Network::Player::setUnder13,
-	"SetUnder13",
-	"value",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Player::setUnder13, "SetUnder13", "value", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Player, void(bool), 1> func_SetSuperSafeChat(
-	&RBX::Network::Player::setSuperSafeChat,
-	"SetSuperSafeChat",
-	"value",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Player::setSuperSafeChat, "SetSuperSafeChat", "value", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
 
 static Reflection::RefPropDescriptor<Player, ModelInstance> prop_Character(
-	"Character",
-	"Data",
-	&RBX::Network::Player::getCharacter,
-	&RBX::Network::Player::setCharacter
+	"Character", "Data", &Player::getCharacter, &Player::setCharacter
 );
 
 static Reflection::PropDescriptor<Player, std::string> prop_characterAppearance(
-	"CharacterAppearance",
-	"Data",
-	&RBX::Network::Player::getCharacterAppearance,
-	&RBX::Network::Player::setCharacterAppearance
+	"CharacterAppearance", "Data", &Player::getCharacterAppearance, &Player::setCharacterAppearance
 );
 
-Reflection::BoundProp<int, 1> Player::prop_userId("userId", "Data", &RBX::Network::Player::userId);
+Reflection::BoundProp<int, 1> Player::prop_userId("userId", "Data", &Player::userId);
 Reflection::BoundProp<bool, 1> Player::prop_Under13(
-	"Under13",
-	"Data",
-	&RBX::Network::Player::under13,
-	Reflection::PropertyDescriptor::STREAMING
+	"Under13", "Data", &Player::under13, Reflection::PropertyDescriptor::STREAMING
 );
+
 Reflection::BoundProp<bool, 1> Player::prop_SuperSafeChat(
-	"SuperSafeChat",
-	"Data",
-	&RBX::Network::Player::superSafeChat,
-	Reflection::PropertyDescriptor::STREAMING
+	"SuperSafeChat", "Data", &Player::superSafeChat, Reflection::PropertyDescriptor::STREAMING
 );
 
 Reflection::SignalDesc<Player, void(std::string, boost::shared_ptr<Instance>)> Player::event_Chatted(
-	"Chatted",
-	"message",
-	"recipient"
+	"Chatted", "message", "recipient"
 );
 
 static Reflection::PropDescriptor<Player, BrickColor> prop_teamColor(
-	"TeamColor",
-	"Team",
-	&RBX::Network::Player::getTeamColor,
-	&RBX::Network::Player::setTeamColor
+	"TeamColor", "Team", &Player::getTeamColor, &Player::setTeamColor
 );
 
 static Reflection::PropDescriptor<Player, bool> prop_neutral(
-	"Neutral",
-	"Team",
-	&RBX::Network::Player::getNeutral,
-	&RBX::Network::Player::setNeutral
+	"Neutral", "Team", &Player::getNeutral, &Player::setNeutral
 );
 
 static Reflection::SignalDesc<Player, void(float)> event_Idled("Idled", "time");
@@ -350,9 +324,7 @@ void Player::loadCharacterAppearance()
 		}
 
 		std::for_each(
-			characterApperance.begin(),
-			characterApperance.end(),
-			boost::bind(&setAppearanceParent, character, _1)
+			characterApperance.begin(), characterApperance.end(), boost::bind(&setAppearanceParent, character, _1)
 		);
 
 		Workspace* workspace = ServiceProvider::find<Workspace>(this);

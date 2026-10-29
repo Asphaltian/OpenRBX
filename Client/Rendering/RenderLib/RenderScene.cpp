@@ -80,10 +80,7 @@ void RenderScene::transparentPass(G3D::RenderDevice* rd)
 
 // FUNCTION: WEBSERVICE 0x101eff30
 void RenderScene::renderShadowVolumeGeometry(
-	G3D::RenderDevice* rd,
-	const G3D::GLight& light,
-	bool caps,
-	float shadowVertexDistance
+	G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance
 )
 {
 	rd->beginIndexedPrimitives();
@@ -137,13 +134,7 @@ void RenderScene::setThrottle(float t, float m, bool s, float c)
 		shadows = s;
 
 		lighting = effectSettings.update(
-			shadingQuality,
-			meshDetail,
-			shadows,
-			cameraDistance,
-			desiredLighting,
-			desiredSkyParameters,
-			skyParameters
+			shadingQuality, meshDetail, shadows, cameraDistance, desiredLighting, desiredSkyParameters, skyParameters
 		);
 	}
 }
@@ -153,13 +144,7 @@ void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>&
 {
 	desiredLighting = L;
 	lighting = effectSettings.update(
-		shadingQuality,
-		meshDetail,
-		shadows,
-		cameraDistance,
-		desiredLighting,
-		desiredSkyParameters,
-		skyParameters
+		shadingQuality, meshDetail, shadows, cameraDistance, desiredLighting, desiredSkyParameters, skyParameters
 	);
 }
 
@@ -184,8 +169,9 @@ void RenderScene::computeShadowVolumeGeometry(
 	for (int i = 0; i < shadowProxyArray.size(); i++) {
 		const RenderSurface& proxy = shadowProxyArray[i];
 
-		proxy.fullMesh
-			->computeDirectionalShadowVolume(proxy.cframe, worldLight, indexArray, shadowVertex, generateLightCap);
+		proxy.fullMesh->computeDirectionalShadowVolume(
+			proxy.cframe, worldLight, indexArray, shadowVertex, generateLightCap
+		);
 	}
 
 	renderStats.cpuShadow.tock();
@@ -298,9 +284,7 @@ void RenderScene::markStencilShadows(G3D::RenderDevice* rd, const G3D::GCamera& 
 		else {
 			rd->setCullFace(G3D::RenderDevice::CULL_BACK);
 			rd->setStencilOp(
-				G3D::RenderDevice::STENCIL_KEEP,
-				G3D::RenderDevice::STENCIL_DECR_WRAP,
-				G3D::RenderDevice::STENCIL_KEEP
+				G3D::RenderDevice::STENCIL_KEEP, G3D::RenderDevice::STENCIL_DECR_WRAP, G3D::RenderDevice::STENCIL_KEEP
 			);
 		}
 
@@ -314,16 +298,12 @@ void RenderScene::markStencilShadows(G3D::RenderDevice* rd, const G3D::GCamera& 
 	if (!G3D::GLCaps::supports_two_sided_stencil() && !debugShadowVolumes) {
 		rd->setCullFace(G3D::RenderDevice::CULL_FRONT);
 		rd->setStencilOp(
-			G3D::RenderDevice::STENCIL_KEEP,
-			G3D::RenderDevice::STENCIL_INCR_WRAP,
-			G3D::RenderDevice::STENCIL_KEEP
+			G3D::RenderDevice::STENCIL_KEEP, G3D::RenderDevice::STENCIL_INCR_WRAP, G3D::RenderDevice::STENCIL_KEEP
 		);
 		renderShadowVolumeGeometry(rd, light, true, shadowVertexDistance);
 		rd->setCullFace(G3D::RenderDevice::CULL_BACK);
 		rd->setStencilOp(
-			G3D::RenderDevice::STENCIL_KEEP,
-			G3D::RenderDevice::STENCIL_DECR_WRAP,
-			G3D::RenderDevice::STENCIL_KEEP
+			G3D::RenderDevice::STENCIL_KEEP, G3D::RenderDevice::STENCIL_DECR_WRAP, G3D::RenderDevice::STENCIL_KEEP
 		);
 	}
 
@@ -470,9 +450,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 
 			if (effectSettings.alphaBlendShadowLights()) {
 				rd->setBlendFunc(
-					G3D::RenderDevice::BLEND_ONE,
-					G3D::RenderDevice::BLEND_ONE,
-					G3D::RenderDevice::BLENDEQ_ADD
+					G3D::RenderDevice::BLEND_ONE, G3D::RenderDevice::BLEND_ONE, G3D::RenderDevice::BLENDEQ_ADD
 				);
 				rd->enableLighting();
 				rd->setLight(0, light);

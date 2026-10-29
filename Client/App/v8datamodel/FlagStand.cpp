@@ -21,15 +21,11 @@ const char sFlagStandService[] = "FlagStandService";
 char sFlagStand[] = "FlagStand";
 
 static Reflection::PropDescriptor<FlagStand, BrickColor> prop_Color(
-	"TeamColor",
-	"Data",
-	&RBX::FlagStand::getTeamColor,
-	&RBX::FlagStand::setTeamColor
+	"TeamColor", "Data", &FlagStand::getTeamColor, &FlagStand::setTeamColor
 );
 
 static Reflection::SignalDesc<FlagStand, void(boost::shared_ptr<Instance>)> event_FlagCaptured(
-	"FlagCaptured",
-	"Player"
+	"FlagCaptured", "Player"
 );
 
 // FUNCTION: WEBSERVICE 0x100e7ad0

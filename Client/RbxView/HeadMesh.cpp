@@ -63,9 +63,7 @@ public:
 		float bevel
 	)
 		: RBX::View::LevelBuilder(
-			  level,
-			  G3D::Vector3(std::min(size.x, size.z), size.y, std::min(size.x, size.z)),
-			  surfaceTypes
+			  level, G3D::Vector3(std::min(size.x, size.z), size.y, std::min(size.x, size.z)), surfaceTypes
 		  ),
 		  bevel(bevel), elements(elements)
 	{

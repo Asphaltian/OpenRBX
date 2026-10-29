@@ -9,27 +9,17 @@
 namespace RBX {
 
 static const Reflection::PropDescriptor<PVInstance, CoordinateFrame> desc_CoordFrame(
-	"CoordinateFrame",
-	"Data",
-	NULL,
-	&PVInstance::setPVGridOffsetLegacy,
-	Reflection::PropertyDescriptor::LEGACY
+	"CoordinateFrame", "Data", NULL, &PVInstance::setPVGridOffsetLegacy, Reflection::PropertyDescriptor::LEGACY
 );
 
 static Reflection::PropDescriptor<PVInstance, bool> prop_ControllerFlagShown(
-	"ControllerFlagShown",
-	"Appearance",
-	&RBX::PVInstance::getShowControllerFlag,
-	&RBX::PVInstance::setShowControllerFlag
+	"ControllerFlagShown", "Appearance", &PVInstance::getShowControllerFlag, &PVInstance::setShowControllerFlag
 );
 
 const char sPVInstance[] = "PVInstance";
 
 const Reflection::EnumPropDescriptor<PVInstance, Controller::ControllerType> PVInstance::prop_ControllerType(
-	"Controller",
-	"Behavior",
-	&RBX::PVInstance::getControllerType,
-	&RBX::PVInstance::setControllerType
+	"Controller", "Behavior", &PVInstance::getControllerType, &PVInstance::setControllerType
 );
 
 // FUNCTION: WEBSERVICE 0x10059d20 FOLDED

@@ -11,32 +11,20 @@ class Part;
 class HitTest
 {
 	static bool hitTestBox(
-		const Part& part,
-		G3D::Ray& rayInPartCoords,
-		G3D::Vector3& hitPointInPartCoords,
-		float gridToReal
+		const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 	);
 
 	static bool hitTestBall(
-		const Part& part,
-		G3D::Ray& rayInPartCoords,
-		G3D::Vector3& hitPointInPartCoords,
-		float gridToReal
+		const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 	);
 
 	static bool hitTestCylinder(
-		const Part& part,
-		G3D::Ray& rayInPartCoords,
-		G3D::Vector3& hitPointInPartCoords,
-		float gridToReal
+		const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 	);
 
 public:
 	static bool hitTest(
-		const Part& part,
-		G3D::Ray& rayInPartCoords,
-		G3D::Vector3& hitPointInPartCoords,
-		float gridToReal
+		const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 	);
 };
 

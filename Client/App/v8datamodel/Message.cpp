@@ -12,10 +12,7 @@ char sHint[] = "Hint";
 char sMessage[] = "Message";
 
 static Reflection::PropDescriptor<Message, std::string> desc_Text(
-	"Text",
-	"Appearance",
-	&RBX::Message::getText,
-	&RBX::Message::setText
+	"Text", "Appearance", &Message::getText, &Message::setText
 );
 
 // FUNCTION: WEBSERVICE 0x100ee4d0

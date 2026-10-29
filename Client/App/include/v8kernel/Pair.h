@@ -85,20 +85,10 @@ public:
 
 	void setBallBall(Body* body0, Body* body1, float radius0, float radiusSum);
 	void setBallBlock(
-		Body* body0,
-		Body* body1,
-		float radius0,
-		const Vector3* offset1,
-		NormalId normalID1,
-		GeoPairType geoPairType
+		Body* body0, Body* body1, float radius0, const Vector3* offset1, NormalId normalID1, GeoPairType geoPairType
 	);
 	void setPointPlane(
-		Body* body0,
-		Body* body1,
-		const Vector3* offset0,
-		const Vector3* offset1,
-		int point0ID,
-		NormalId planeID
+		Body* body0, Body* body1, const Vector3* offset0, const Vector3* offset1, int point0ID, NormalId planeID
 	);
 	void setEdgeEdgePlane(
 		Body* body0,
@@ -111,12 +101,7 @@ public:
 		float edgeLength0
 	);
 	void setEdgeEdge(
-		Body* body0,
-		Body* body1,
-		const Vector3* offset0,
-		const Vector3* offset1,
-		NormalId normalID0,
-		NormalId normalID1
+		Body* body0, Body* body1, const Vector3* offset0, const Vector3* offset1, NormalId normalID0, NormalId normalID1
 	);
 
 private:
@@ -184,12 +169,7 @@ inline void GeoPair::setBallBall(Body* body0, Body* body1, float radius0, float 
 }
 
 inline void GeoPair::setBallBlock(
-	Body* body0,
-	Body* body1,
-	float radius0,
-	const Vector3* offset1,
-	NormalId normalID1,
-	GeoPairType geoPairType
+	Body* body0, Body* body1, float radius0, const Vector3* offset1, NormalId normalID1, GeoPairType geoPairType
 )
 {
 	this->body0 = body0;
@@ -204,12 +184,7 @@ inline void GeoPair::setBallBlock(
 }
 
 inline void GeoPair::setPointPlane(
-	Body* body0,
-	Body* body1,
-	const Vector3* offset0,
-	const Vector3* offset1,
-	int point0ID,
-	NormalId planeID
+	Body* body0, Body* body1, const Vector3* offset0, const Vector3* offset1, int point0ID, NormalId planeID
 )
 {
 	this->body0 = body0;
@@ -251,12 +226,7 @@ inline void GeoPair::setEdgeEdgePlane(
 }
 
 inline void GeoPair::setEdgeEdge(
-	Body* body0,
-	Body* body1,
-	const Vector3* offset0,
-	const Vector3* offset1,
-	NormalId normalID0,
-	NormalId normalID1
+	Body* body0, Body* body1, const Vector3* offset0, const Vector3* offset1, NormalId normalID0, NormalId normalID1
 )
 {
 	this->body0 = body0;

@@ -8,26 +8,16 @@ const char sTeam[] = "Team";
 
 using namespace Reflection;
 
-static PropDescriptor<Team, int> prop_Score("Score", "Data", &RBX::Team::getScore, &RBX::Team::setScore);
+static PropDescriptor<Team, int> prop_Score("Score", "Data", &Team::getScore, &Team::setScore);
 
-static PropDescriptor<Team, BrickColor> prop_Color(
-	"TeamColor",
-	"Data",
-	&RBX::Team::getTeamColor,
-	&RBX::Team::setTeamColor
-);
+static PropDescriptor<Team, BrickColor> prop_Color("TeamColor", "Data", &Team::getTeamColor, &Team::setTeamColor);
 
 static PropDescriptor<Team, bool> prop_AutoAssignable(
-	"AutoAssignable",
-	"Data",
-	&RBX::Team::getAutoAssignable,
-	&RBX::Team::setAutoAssignable
+	"AutoAssignable", "Data", &Team::getAutoAssignable, &Team::setAutoAssignable
 );
 
 Reflection::BoundProp<bool, 1> Team::prop_AutoColorCharacters(
-	"AutoColorCharacters",
-	"Data",
-	&RBX::Team::autoColorCharacters
+	"AutoColorCharacters", "Data", &Team::autoColorCharacters
 );
 
 // FUNCTION: WEBSERVICE 0x10068b70 FOLDED

@@ -16,61 +16,45 @@ Reflection::SignalDesc<Lighting, void(bool)> Lighting::event_LightingChanged("Li
 } // namespace RBX
 
 static RBX::Reflection::PropDescriptor<RBX::Lighting, G3D::Color3> desc_AmbientTop(
-	"TopAmbientV9",
-	"Appearance",
-	&RBX::Lighting::getAmbientTop,
-	&RBX::Lighting::setAmbientTop
+	"TopAmbientV9", "Appearance", &RBX::Lighting::getAmbientTop, &RBX::Lighting::setAmbientTop
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Lighting, G3D::Color3> desc_AmbientBottom(
-	"BottomAmbientV9",
-	"Appearance",
-	&RBX::Lighting::getAmbientBottom,
-	&RBX::Lighting::setAmbientBottom
+	"BottomAmbientV9", "Appearance", &RBX::Lighting::getAmbientBottom, &RBX::Lighting::setAmbientBottom
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Lighting, G3D::Color3> desc_LightColor(
-	"SpotLightV9",
-	"Appearance",
-	&RBX::Lighting::getLightColor,
-	&RBX::Lighting::setLightColor
+	"SpotLightV9", "Appearance", &RBX::Lighting::getLightColor, &RBX::Lighting::setLightColor
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Lighting, G3D::Color3> desc_ClearColor(
-	"ClearColor",
-	"Appearance",
-	&RBX::Lighting::getClearColor3,
-	&RBX::Lighting::setClearColor3
+	"ClearColor", "Appearance", &RBX::Lighting::getClearColor3, &RBX::Lighting::setClearColor3
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Lighting, std::string> prop_Time(
-	"TimeOfDay",
-	"Data",
-	&RBX::Lighting::getTimeStr,
-	&RBX::Lighting::setTimeStr
+	"TimeOfDay", "Data", &RBX::Lighting::getTimeStr, &RBX::Lighting::setTimeStr
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Lighting, float> prop_GeographicLatitude(
-	"GeographicLatitude",
-	"Data",
-	&RBX::Lighting::getGeographicLatitude,
-	&RBX::Lighting::setGeographicLatitude
+	"GeographicLatitude", "Data", &RBX::Lighting::getGeographicLatitude, &RBX::Lighting::setGeographicLatitude
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Lighting, float(), 0> prop_GetMoonPhase(
-	&RBX::Lighting::getMoonPhase,
-	"GetMoonPhase",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::Lighting::getMoonPhase, "GetMoonPhase", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Lighting, G3D::Vector3(), 0> prop_GetMoonPosition(
-	&RBX::Lighting::getMoonPosition,
-	"GetMoonDirection",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::Lighting::getMoonPosition, "GetMoonDirection", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Lighting, G3D::Vector3(), 0> prop_GetSunPosition(
-	&RBX::Lighting::getSunPosition,
-	"GetSunDirection",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::Lighting::getSunPosition, "GetSunDirection", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Lighting, double(), 0> func_GetMinutesAfterMidnight(
-	&RBX::Lighting::getMinutesAfterMidnight,
-	"GetMinutesAfterMidnight",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::Lighting::getMinutesAfterMidnight, "GetMinutesAfterMidnight", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Lighting, void(double), 1> func_SetMinutesAfterMidnight(
 	&RBX::Lighting::setMinutesAfterMidnight,
 	"SetMinutesAfterMidnight",

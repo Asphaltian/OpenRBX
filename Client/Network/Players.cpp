@@ -38,17 +38,11 @@ namespace Network {
 char sPlayers[] = "Players";
 
 static Reflection::PropDescriptor<Players, int> propPlayerCount(
-	"NumPlayers",
-	"Data",
-	&RBX::Network::Players::numPlayers,
-	0,
-	Reflection::PropertyDescriptor::UI
+	"NumPlayers", "Data", &Players::numPlayers, 0, Reflection::PropertyDescriptor::UI
 );
+
 static Reflection::PropDescriptor<Players, int> propPlayerMaxCount(
-	"MaxPlayers",
-	"Data",
-	&RBX::Network::Players::getMaxPlayers,
-	&RBX::Network::Players::setMaxPlayers
+	"MaxPlayers", "Data", &Players::getMaxPlayers, &Players::setMaxPlayers
 );
 
 // SIZE 0x08
@@ -59,65 +53,44 @@ public:
 };
 
 Reflection::RefPropDescriptor<Players, Player> Players::propLocalPlayer(
-	"LocalPlayer",
-	"Data",
-	&RBX::Network::Players::getLocalPlayer,
-	0
+	"LocalPlayer", "Data", &Players::getLocalPlayer, 0
 );
 
 static Reflection::BoundFuncDesc<Players, boost::shared_ptr<Instance>(int), 1> func_GetPlayerByID(
-	&RBX::Network::Players::getPlayerByID,
-	"GetPlayerByID",
-	"userID",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Players::getPlayerByID, "GetPlayerByID", "userID", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Players, void(std::string), 1> funcChat(
-	&RBX::Network::Players::chat,
-	"Chat",
-	"message",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Players::chat, "Chat", "message", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Players, void(boost::shared_ptr<Instance>, std::string), 2> funcReportAbuse(
-	&RBX::Network::Players::reportAbuse,
-	"ReportAbuse",
-	"player",
-	"message",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Players::reportAbuse, "ReportAbuse", "player", "message", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Players, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(), 0>
-	func_players(&RBX::Network::Players::getPlayers, "players", Reflection::FunctionDescriptor::AnyCaller);
+	func_players(&Players::getPlayers, "players", Reflection::FunctionDescriptor::AnyCaller);
 static Reflection::BoundFuncDesc<Players, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(), 0>
-	func_GetPlayers(&RBX::Network::Players::getPlayers, "GetPlayers", Reflection::FunctionDescriptor::AnyCaller);
+	func_GetPlayers(&Players::getPlayers, "GetPlayers", Reflection::FunctionDescriptor::AnyCaller);
 static Reflection::BoundFuncDesc<Players, boost::shared_ptr<Instance>(int), 1> func_createLocalPlayer(
-	&RBX::Network::Players::createLocalPlayer,
-	"CreateLocalPlayer",
-	"userId",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Players::createLocalPlayer, "CreateLocalPlayer", "userId", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Players, void(std::string), 1> func_setAbuseReportUrl(
-	&RBX::Network::Players::setAbuseReportUrl,
-	"SetAbuseReportUrl",
-	"url",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Players::setAbuseReportUrl, "SetAbuseReportUrl", "url", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Players, boost::shared_ptr<Instance>(boost::shared_ptr<Instance>), 1>
 	func_playerFromCharacterOld(
-		&RBX::Network::Players::playerFromCharacter,
-		"playerFromCharacter",
-		"character",
-		Reflection::FunctionDescriptor::AnyCaller
+		&Players::playerFromCharacter, "playerFromCharacter", "character", Reflection::FunctionDescriptor::AnyCaller
 	);
 static Reflection::BoundFuncDesc<Players, boost::shared_ptr<Instance>(boost::shared_ptr<Instance>), 1>
 	func_playerFromCharacter(
-		&RBX::Network::Players::playerFromCharacter,
-		"GetPlayerFromCharacter",
-		"character",
-		Reflection::FunctionDescriptor::AnyCaller
+		&Players::playerFromCharacter, "GetPlayerFromCharacter", "character", Reflection::FunctionDescriptor::AnyCaller
 	);
 static Reflection::SignalDesc<Players, void(boost::shared_ptr<Instance>)> event_PlayerAdded("PlayerAdded", "player");
 static Reflection::SignalDesc<Players, void(boost::shared_ptr<Instance>)> event_PlayerRemoving(
-	"PlayerRemoving",
-	"player"
+	"PlayerRemoving", "player"
 );
 
 // FUNCTION: WEBSERVICE 0x10190c50
@@ -320,8 +293,9 @@ worker_thread::work_result AbuseReporter::processRequests(boost::shared_ptr<data
 		StandardOut::singleton()->print(MESSAGE_INFO, "Posted abuse report to %s", abuseUrl.c_str());
 	}
 	catch (std::exception& e) {
-		StandardOut::singleton()
-			->print(MESSAGE_WARNING, "Unable to post abuse report to %s. %s", abuseUrl.c_str(), e.what());
+		StandardOut::singleton()->print(
+			MESSAGE_WARNING, "Unable to post abuse report to %s. %s", abuseUrl.c_str(), e.what()
+		);
 	}
 
 	{
@@ -337,9 +311,7 @@ void Players::reportAbuse(Player* player, std::string comment)
 {
 	if (abuseReporter) {
 		StandardOut::singleton()->print(
-			MESSAGE_INFO,
-			"Submitting abuse report from %s",
-			player ? player->getName().c_str() : "[[[anonymous]]]"
+			MESSAGE_INFO, "Submitting abuse report from %s", player ? player->getName().c_str() : "[[[anonymous]]]"
 		);
 
 		AbuseReport r;
@@ -479,8 +451,9 @@ bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 			}
 		}
 		catch (std::exception& e) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Players::OnReceive packet %d: %s", packet->data[0], e.what());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Players::OnReceive packet %d: %s", packet->data[0], e.what()
+			);
 		}
 
 		return false;
@@ -501,8 +474,9 @@ bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 			}
 		}
 		catch (std::exception& e) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Players::OnReceive packet %d: %s", packet->data[0], e.what());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Players::OnReceive packet %d: %s", packet->data[0], e.what()
+			);
 		}
 
 		return false;

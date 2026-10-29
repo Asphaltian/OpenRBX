@@ -133,8 +133,7 @@ bool RunDragger::notTried(Primitive* check, const G3D::Array<Primitive*>& tried)
 
 // FUNCTION: WEBSERVICE 0x1012af90
 RunDragger::SnapInfo RunDragger::bestProximatePart(
-	const G3D::Array<Primitive*>& triedSnap,
-	bool (Contact::*proximityTest)(float)
+	const G3D::Array<Primitive*>& triedSnap, bool (Contact::*proximityTest)(float)
 )
 {
 	SnapInfo answer;
@@ -186,12 +185,7 @@ RunDragger::SnapInfo RunDragger::rayHitsPart(const G3D::Array<Primitive*>& tried
 	PartByLocalCharacter filter(workspace);
 
 	if (PartInstance* part = MouseCommand::getMousePart(
-			mouseRay,
-			*workspace->getWorld()->getContactManager(),
-			drag,
-			&filter,
-			answer.hitWorld,
-			2048.0f
+			mouseRay, *workspace->getWorld()->getContactManager(), drag, &filter, answer.hitWorld, 2048.0f
 		)) {
 		answer.snap = part->getPrimitive();
 		if (notTried(answer.snap, triedSnap)) {
@@ -247,9 +241,7 @@ void RunDragger::smartPtrHackPre()
 
 // FUNCTION: WEBSERVICE 0x1012b7b0
 void RunDragger::init(
-	Workspace* _workspace,
-	boost::weak_ptr<PartInstance> _dragPart,
-	const G3D::Vector3& _dragPointWorld
+	Workspace* _workspace, boost::weak_ptr<PartInstance> _dragPart, const G3D::Vector3& _dragPointWorld
 )
 {
 	workspace = _workspace;

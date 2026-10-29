@@ -26,8 +26,7 @@ void DragUtilities::moveAndClean(PartInstance* part, const G3D::Vector3& delta)
 
 // FUNCTION: WEBSERVICE 0x100a6b10 FOLDED
 void DragUtilities::pvsToParts(
-	const std::vector<PVInstance*>& pvInstances,
-	std::vector<boost::weak_ptr<PartInstance> >& parts
+	const std::vector<PVInstance*>& pvInstances, std::vector<boost::weak_ptr<PartInstance> >& parts
 )
 {
 	for (unsigned int i = 0; i < pvInstances.size(); i++) {
@@ -37,8 +36,7 @@ void DragUtilities::pvsToParts(
 
 // FUNCTION: WEBSERVICE 0x100a6b10 FOLDED
 void DragUtilities::instancesToParts(
-	const std::vector<Instance*>& instances,
-	std::vector<boost::weak_ptr<PartInstance> >& parts
+	const std::vector<Instance*>& instances, std::vector<boost::weak_ptr<PartInstance> >& parts
 )
 {
 	for (unsigned int i = 0; i < instances.size(); i++) {
@@ -81,8 +79,7 @@ bool DragUtilities::anyPartAlive(const std::vector<boost::weak_ptr<PartInstance>
 
 // FUNCTION: WEBSERVICE 0x100a6d50
 World* DragUtilities::partsToPrimitives(
-	const std::vector<boost::weak_ptr<PartInstance> >& parts,
-	G3D::Array<Primitive*>& primitives
+	const std::vector<boost::weak_ptr<PartInstance> >& parts, G3D::Array<Primitive*>& primitives
 )
 {
 	World* answer = NULL;
@@ -195,9 +192,7 @@ void DragUtilities::clean(const std::vector<boost::weak_ptr<PartInstance> >& par
 
 // FUNCTION: WEBSERVICE 0x100a7440
 void DragUtilities::move(
-	const std::vector<boost::weak_ptr<PartInstance> >& parts,
-	G3D::CoordinateFrame from,
-	G3D::CoordinateFrame to
+	const std::vector<boost::weak_ptr<PartInstance> >& parts, G3D::CoordinateFrame from, G3D::CoordinateFrame to
 )
 {
 	for (unsigned int i = 0; i < parts.size(); i++) {

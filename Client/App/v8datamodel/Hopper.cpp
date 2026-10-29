@@ -13,34 +13,22 @@
 namespace RBX {
 
 static Reflection::PropDescriptor<BackpackItem, TextureId> desc_TextureId(
-	"TextureId",
-	"Data",
-	&BackpackItem::getTextureId,
-	&BackpackItem::setTextureId
+	"TextureId", "Data", &BackpackItem::getTextureId, &BackpackItem::setTextureId
 );
 
 static Reflection::EnumPropDescriptor<HopperBin, HopperBin::BinType> desc_BinType(
-	"BinType",
-	"Data",
-	&HopperBin::getBinType,
-	&HopperBin::setBinType
+	"BinType", "Data", &HopperBin::getBinType, &HopperBin::setBinType
 );
+
 static Reflection::SignalDesc<HopperBin, void(boost::shared_ptr<Instance>)> desc_Selected("Selected", "mouse");
 static Reflection::SignalDesc<HopperBin, void()> desc_Deselected("Deselected");
 
 static Reflection::PropDescriptor<HopperBin, std::string> desc_legacyCommand(
-	"Command",
-	"Data",
-	NULL,
-	&HopperBin::setLegacyCommand,
-	Reflection::PropertyDescriptor::LEGACY
+	"Command", "Data", NULL, &HopperBin::setLegacyCommand, Reflection::PropertyDescriptor::LEGACY
 );
+
 static Reflection::PropDescriptor<HopperBin, std::string> desc_legacyTextureName(
-	"TextureName",
-	"Data",
-	NULL,
-	&HopperBin::setLegacyTextureName,
-	Reflection::PropertyDescriptor::LEGACY
+	"TextureName", "Data", NULL, &HopperBin::setLegacyTextureName, Reflection::PropertyDescriptor::LEGACY
 );
 
 bool BackpackItem::inBackpack()
@@ -129,8 +117,7 @@ void BackpackItem::render2d(Adorn* adorn)
 
 	float numberSize = draw.size().x * 0.2f;
 	Rect numberRect = Rect::fromLowSize(
-		G3D::Vector2(draw.low.x + 2, draw.high.y - 2 - numberSize),
-		G3D::Vector2(numberSize, numberSize)
+		G3D::Vector2(draw.low.x + 2, draw.high.y - 2 - numberSize), G3D::Vector2(numberSize, numberSize)
 	);
 
 	if (!viewHack) {

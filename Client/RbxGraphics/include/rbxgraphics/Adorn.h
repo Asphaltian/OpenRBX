@@ -61,15 +61,11 @@ public:
 	virtual G3D::Rect2D getTextureSize(G3D::ReferenceCountedPointer<TextureProxyBase> texture) const = 0; // vtable+0x20
 
 	virtual void line2d(
-		const G3D::Vector2& from,
-		const G3D::Vector2& to,
-		const G3D::Color4& color
+		const G3D::Vector2& from, const G3D::Vector2& to, const G3D::Color4& color
 	) const = 0; // vtable+0x24
 
 	virtual void outlineRect2d(
-		const G3D::Rect2D& rect,
-		float thickness,
-		const G3D::Color4& color
+		const G3D::Rect2D& rect, float thickness, const G3D::Color4& color
 	) const = 0; // vtable+0x28
 
 	virtual void rect2d(const G3D::Rect2D& rect, const G3D::Color4& color) const = 0; // vtable+0x2c
@@ -92,21 +88,14 @@ public:
 
 	virtual void box(const G3D::AABox& box, const G3D::Color4& solid, const G3D::Color4& wire) = 0; // vtable+0x40
 	virtual void sphere(
-		const G3D::Sphere& sphere,
-		const G3D::Color4& solid,
-		const G3D::Color4& wire
+		const G3D::Sphere& sphere, const G3D::Color4& solid, const G3D::Color4& wire
 	) = 0; // vtable+0x44
 	virtual void explosion(
-		const G3D::Sphere& sphere,
-		const G3D::Color4& solid,
-		const G3D::Color4& wire
+		const G3D::Sphere& sphere, const G3D::Color4& solid, const G3D::Color4& wire
 	) = 0; // vtable+0x48
 
 	virtual void cylinderAlongX(
-		float radius,
-		float length,
-		const G3D::Color4& solid,
-		const G3D::Color4& wire
+		float radius, float length, const G3D::Color4& solid, const G3D::Color4& wire
 	) = 0; // vtable+0x4c
 
 	virtual void ray(const G3D::Ray& ray, const G3D::Color4& color, float scale) = 0;                     // vtable+0x50

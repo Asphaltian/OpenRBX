@@ -34,8 +34,7 @@ public:
 	ControllerService();
 
 	G3D::ReferenceCountedPointer<Controller> getController(
-		Controller::ControllerType type,
-		const PVInstance* controlledInstance
+		Controller::ControllerType type, const PVInstance* controlledInstance
 	);
 
 	const UserInputBase* getHardwareDevice() const { return hardwareDevice; }

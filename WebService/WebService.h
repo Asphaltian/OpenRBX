@@ -167,19 +167,13 @@ struct IWebService : public IUnknown
 	virtual HRESULT __stdcall GetStatus(Status* result) = 0;    // vtable+0x14
 	virtual HRESULT __stdcall Update(BSTR url) = 0;             // vtable+0x18
 	virtual HRESULT __stdcall OpenJob(
-		BSTR jobID,
-		ScriptExecution script,
-		double timeout,
-		LuaArguments* result
+		BSTR jobID, ScriptExecution script, double timeout, LuaArguments* result
 	) = 0;                                                                                           // vtable+0x1c
 	virtual HRESULT __stdcall TouchJob(BSTR jobID, double timeout) = 0;                              // vtable+0x20
 	virtual HRESULT __stdcall Execute(BSTR jobID, ScriptExecution script, LuaArguments* result) = 0; // vtable+0x24
 	virtual HRESULT __stdcall CloseJob(BSTR jobID) = 0;                                              // vtable+0x28
 	virtual HRESULT __stdcall BatchJob(
-		BSTR jobID,
-		ScriptExecution script,
-		double timeout,
-		LuaArguments* result
+		BSTR jobID, ScriptExecution script, double timeout, LuaArguments* result
 	) = 0;                                                                                           // vtable+0x2c
 	virtual HRESULT __stdcall GetTimeout(BSTR jobID, double* timeout) = 0;                           // vtable+0x30
 	virtual HRESULT __stdcall GetAllJobs(Strings* result) = 0;                                       // vtable+0x34
@@ -2378,10 +2372,7 @@ ATL_NOINLINE inline void* CWebService::GetHeaderValue()
 
 // FUNCTION: WEBSERVICE 0x1000dcf0
 ATL_NOINLINE inline HRESULT CWebService::CallFunction(
-	void* pvParam,
-	const wchar_t* wszLocalName,
-	int cchLocalName,
-	size_t nItem
+	void* pvParam, const wchar_t* wszLocalName, int cchLocalName, size_t nItem
 )
 {
 	wszLocalName;

@@ -17,8 +17,7 @@ namespace Lua {
 // FUNCTION: WEBSERVICE 0x10064440
 template <>
 inline int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_tostring(
-	const boost::shared_ptr<Reflection::DescribedBase>& value,
-	lua_State* L
+	const boost::shared_ptr<Reflection::DescribedBase>& value, lua_State* L
 )
 {
 	if (Instance* instance = dynamic_cast<Instance*>(value.get())) {
@@ -32,16 +31,12 @@ inline int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_tostring(
 
 template <>
 int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_index(
-	const boost::shared_ptr<Reflection::DescribedBase>& value,
-	const char* name,
-	lua_State* L
+	const boost::shared_ptr<Reflection::DescribedBase>& value, const char* name, lua_State* L
 );
 
 template <>
 void Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_newindex(
-	boost::shared_ptr<Reflection::DescribedBase>& value,
-	const char* name,
-	lua_State* L
+	boost::shared_ptr<Reflection::DescribedBase>& value, const char* name, lua_State* L
 );
 
 void newweaktable(lua_State* L, const char* mode);

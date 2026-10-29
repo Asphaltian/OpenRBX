@@ -98,10 +98,7 @@ void DrawPrimitives::outlineRect2d(const Rect& rect, float thick, G3D::RenderDev
 
 // FUNCTION: WEBSERVICE 0x10031930
 void DrawPrimitives::line2d(
-	const G3D::Vector2& p0,
-	const G3D::Vector2& p1,
-	G3D::RenderDevice* rd,
-	const G3D::Color4& color
+	const G3D::Vector2& p0, const G3D::Vector2& p1, G3D::RenderDevice* rd, const G3D::Color4& color
 )
 {
 	rd->setColor(color);

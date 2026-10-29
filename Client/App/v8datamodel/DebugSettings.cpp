@@ -31,57 +31,48 @@ static PropDescriptor<DebugSettings, std::string> prop_gfxcard("GfxCard", "Profi
 static PropDescriptor<DebugSettings, std::string> prop_cpu("CPU", "Profile", &DebugSettings::cpu, 0);
 static PropDescriptor<DebugSettings, int> prop_ram("RAM", "Profile", &DebugSettings::ram, 0);
 static PropDescriptor<DebugSettings, std::string> prop_resolution(
-	"Resolution",
-	"Profile",
-	&DebugSettings::resolution,
-	0
+	"Resolution", "Profile", &DebugSettings::resolution, 0
 );
 
 BoundProp<bool, 1> prop_SoundWarnings("SoundWarnings", "Errors", &DebugSettings::soundWarnings);
 
 BoundProp<bool, 1> DebugSettings::prop_stackTracingEnabled(
-	"stackTracingEnabled",
-	"Scripts",
-	&DebugSettings::stackTracingEnabled
+	"stackTracingEnabled", "Scripts", &DebugSettings::stackTracingEnabled
 );
 
 BoundProp<bool, 1> DebugSettings::prop_ioEnabled(
-	"ioEnabled",
-	"Scripts",
-	&DebugSettings::ioEnabled,
-	PropertyDescriptor::STREAMING
+	"ioEnabled", "Scripts", &DebugSettings::ioEnabled, PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<DebugSettings, bool> prop_AnchoredParts(
-	"ShowAnchors",
-	"Display",
-	&DebugSettings::getShowAnchoredParts,
-	&DebugSettings::setShowAnchoredParts
+	"ShowAnchors", "Display", &DebugSettings::getShowAnchoredParts, &DebugSettings::setShowAnchoredParts
 );
+
 static PropDescriptor<DebugSettings, bool> prop_PartCoordinateFrames(
 	"ShowPartCoords",
 	"Display",
 	&DebugSettings::getShowPartCoordinateFrames,
 	&DebugSettings::setShowPartCoordinateFrames
 );
+
 static PropDescriptor<DebugSettings, bool> prop_UnalignedParts(
-	"ShowUnalignedParts",
-	"Display",
-	&DebugSettings::getShowUnalignedParts,
-	&DebugSettings::setShowUnalignedParts
+	"ShowUnalignedParts", "Display", &DebugSettings::getShowUnalignedParts, &DebugSettings::setShowUnalignedParts
 );
+
 static PropDescriptor<DebugSettings, bool> prop_ModelCoordinateFrames(
 	"ShowModelCoords",
 	"Display",
 	&DebugSettings::getShowModelCoordinateFrames,
 	&DebugSettings::setShowModelCoordinateFrames
 );
+
 static PropDescriptor<DebugSettings, bool> prop_WorldCoordinateFrames(
 	"ShowWorldCoords",
 	"Display",
 	&DebugSettings::getShowWorldCoordinateFrames,
 	&DebugSettings::setShowWorldCoordinateFrames
 );
+
 static PropDescriptor<DebugSettings, bool> prop_DisableEnvironmentalThrottle(
 	"DisableEnvironmentalThrottle",
 	"Display",
@@ -90,22 +81,15 @@ static PropDescriptor<DebugSettings, bool> prop_DisableEnvironmentalThrottle(
 );
 
 static PropDescriptor<DebugSettings, bool> prop_ValidatingDebug(
-	"ValidatingDebug",
-	"Errors",
-	&DebugSettings::getValidatingDebug,
-	&DebugSettings::setValidatingDebug
+	"ValidatingDebug", "Errors", &DebugSettings::getValidatingDebug, &DebugSettings::setValidatingDebug
 );
+
 static EnumPropDescriptor<DebugSettings, Debugable::AssertAction> prop_assertAction(
-	"AssertAction",
-	"Errors",
-	&DebugSettings::getAssertAction,
-	&DebugSettings::setAssertAction
+	"AssertAction", "Errors", &DebugSettings::getAssertAction, &DebugSettings::setAssertAction
 );
+
 static EnumPropDescriptor<DebugSettings, DebugSettings::ErrorReporting> prop_errorReporting(
-	"errorReporting",
-	"Errors",
-	&DebugSettings::getErrorReporting,
-	&DebugSettings::setErrorReporting
+	"errorReporting", "Errors", &DebugSettings::getErrorReporting, &DebugSettings::setErrorReporting
 );
 
 namespace RBX {
@@ -184,11 +168,7 @@ std::string DebugSettings::osVer() const
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
 	GetVersionEx(&osvi);
 	return G3D::format(
-		"%d.%d.%d.%d",
-		osvi.dwOSVersionInfoSize,
-		osvi.dwMajorVersion,
-		osvi.dwMinorVersion,
-		osvi.dwBuildNumber
+		"%d.%d.%d.%d", osvi.dwOSVersionInfoSize, osvi.dwMajorVersion, osvi.dwMinorVersion, osvi.dwBuildNumber
 	);
 }
 
@@ -237,25 +217,13 @@ std::string DebugSettings::gfxcard() const
 		int wImageIdx = 0;
 
 		if (SetupDiGetDeviceRegistryProperty(
-				hDevInfo,
-				&spDevInfoData,
-				SPDRP_CLASS,
-				NULL,
-				(PBYTE) szBuf,
-				MAX_PATH - 1,
-				NULL
+				hDevInfo, &spDevInfoData, SPDRP_CLASS, NULL, (PBYTE) szBuf, MAX_PATH - 1, NULL
 			)) {
 			if (SetupDiGetClassImageIndex(&_spImageData, &spDevInfoData.ClassGuid, &wImageIdx)) {
 				DWORD dwRequireSize;
 				if (SetupDiGetClassDescription(&spDevInfoData.ClassGuid, szBuf, MAX_PATH, &dwRequireSize)) {
 					if (SetupDiGetDeviceRegistryProperty(
-							hDevInfo,
-							&spDevInfoData,
-							SPDRP_FRIENDLYNAME,
-							NULL,
-							(PBYTE) szName,
-							63,
-							NULL
+							hDevInfo, &spDevInfoData, SPDRP_FRIENDLYNAME, NULL, (PBYTE) szName, 63, NULL
 						)) {
 						if (strcmp(szName, displayDevice.DeviceString) == 0) {
 							break;
@@ -263,13 +231,7 @@ std::string DebugSettings::gfxcard() const
 					}
 					else if (
 						SetupDiGetDeviceRegistryProperty(
-							hDevInfo,
-							&spDevInfoData,
-							SPDRP_DEVICEDESC,
-							NULL,
-							(PBYTE) szName,
-							63,
-							NULL
+							hDevInfo, &spDevInfoData, SPDRP_DEVICEDESC, NULL, (PBYTE) szName, 63, NULL
 						)
 					) {
 						if (strcmp(szName, displayDevice.DeviceString) == 0) {
@@ -293,8 +255,7 @@ std::string DebugSettings::gfxcard() const
 
 	std::string driverVersion = "?";
 	G3D::RegistryUtil::readString(
-		"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Class\\" + deviceKey + "\\DriverVersion",
-		driverVersion
+		"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\Class\\" + deviceKey + "\\DriverVersion", driverVersion
 	);
 
 	return std::string(displayDevice.DeviceString) + " drv=" + driverVersion;

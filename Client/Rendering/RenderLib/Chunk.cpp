@@ -27,10 +27,7 @@ void AggregateChunk::makeMesh()
 
 // FUNCTION: WEBSERVICE 0x101f9740
 void AggregateChunk::renderShadows(
-	G3D::RenderDevice* rd,
-	const G3D::GLight& light,
-	bool caps,
-	float shadowVertexDistance
+	G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance
 )
 {
 	if (light != shadowSource) {

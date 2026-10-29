@@ -21,29 +21,19 @@ namespace Network {
 char sServer[] = "NetworkServer";
 
 static Reflection::BoundFuncDesc<Server, void(int, int), 2> server_startFunction(
-	&Server::start,
-	"Start",
-	"port",
-	"threadSleepTime",
-	30,
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Server::start, "Start", "port", "threadSleepTime", 30, Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Server, void(int), 1> f_disconnect(
-	&Server::stop,
-	"Stop",
-	"blockDuration",
-	1000,
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Server::stop, "Stop", "blockDuration", 1000, Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Server, int(), 0> f_GetClientCount(
-	&Server::getClientCount,
-	"GetClientCount",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Server::getClientCount, "GetClientCount", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 Reflection::SignalDesc<Server, void(std::string, boost::shared_ptr<Instance>)> Server::event_IncommingConnection(
-	"IncommingConnection",
-	"peer",
-	"replicator"
+	"IncommingConnection", "peer", "replicator"
 );
 
 // FUNCTION: WEBSERVICE 0x10199280
@@ -178,8 +168,9 @@ PluginReceiveResult Server::ClientProxy::OnReceive(RakPeerInterface* peer, Packe
 			}
 		}
 		catch (std::exception& e) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Replicator::ClientProxy::OnReceive packet %d: %s", packet->data[0], e.what());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Replicator::ClientProxy::OnReceive packet %d: %s", packet->data[0], e.what()
+			);
 		}
 		return RR_STOP_PROCESSING_AND_DEALLOCATE;
 
@@ -244,8 +235,9 @@ PluginReceiveResult Server::OnReceive(RakPeerInterface* peer, Packet* packet)
 			event_IncommingConnection.fire(this, packet->systemAddress.ToString(), proxy);
 		}
 		catch (std::exception& e) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Server::OnReceive packet %d: %s", packet->data[0], e.what());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Server::OnReceive packet %d: %s", packet->data[0], e.what()
+			);
 		}
 		break;
 	}

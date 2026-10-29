@@ -33,9 +33,7 @@ public:
 	virtual bool processID(const XmlNameValuePair* valueID, RBX::Instance* source);
 
 	virtual bool processIDREF(
-		const XmlNameValuePair* valueIDREF,
-		RBX::Reflection::DescribedBase* propertyOwner,
-		const RBX::IIDREF* idref
+		const XmlNameValuePair* valueIDREF, RBX::Reflection::DescribedBase* propertyOwner, const RBX::IIDREF* idref
 	);
 
 	bool resolveIDREF(IDREFBinding binding);
@@ -121,9 +119,7 @@ bool ArchiveBinder::resolveIDREF(IDREFBinding binding)
 bool ArchiveBinder::resolveRefs()
 {
 	size_t resolvedCount = std::count_if(
-		idrefBindings.begin(),
-		idrefBindings.end(),
-		std::bind1st(std::mem_fun(&ArchiveBinder::resolveIDREF), this)
+		idrefBindings.begin(), idrefBindings.end(), std::bind1st(std::mem_fun(&ArchiveBinder::resolveIDREF), this)
 	);
 
 	return MergeBinder::resolveRefs() && resolvedCount == idrefBindings.size();
@@ -162,9 +158,7 @@ bool ArchiveBinder::processID(const XmlNameValuePair* valueID, RBX::Instance* so
 
 // FUNCTION: WEBSERVICE 0x10098500
 bool ArchiveBinder::processIDREF(
-	const XmlNameValuePair* valueIDREF,
-	RBX::Reflection::DescribedBase* propertyOwner,
-	const RBX::IIDREF* idref
+	const XmlNameValuePair* valueIDREF, RBX::Reflection::DescribedBase* propertyOwner, const RBX::IIDREF* idref
 )
 {
 	if (!MergeBinder::processIDREF(valueIDREF, propertyOwner, idref)) {

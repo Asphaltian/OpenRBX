@@ -75,8 +75,7 @@ static void pushLuaValue(RBX::Reflection::ConstProperty p, lua_State* L)
 
 	if (p.getDescriptor().type == RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Instance> >()) {
 		RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(
-			L,
-			p.getValue<boost::shared_ptr<RBX::Instance> >()
+			L, p.getValue<boost::shared_ptr<RBX::Instance> >()
 		);
 		return;
 	}
@@ -84,8 +83,7 @@ static void pushLuaValue(RBX::Reflection::ConstProperty p, lua_State* L)
 	if (p.getDescriptor().type ==
 		RBX::Reflection::Type::singleton<boost::shared_ptr<RBX::Reflection::DescribedBase> >()) {
 		RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(
-			L,
-			p.getValue<boost::shared_ptr<RBX::Reflection::DescribedBase> >()
+			L, p.getValue<boost::shared_ptr<RBX::Reflection::DescribedBase> >()
 		);
 		return;
 	}
@@ -155,8 +153,7 @@ static void pushLuaValue(RBX::Reflection::ConstProperty p, lua_State* L)
 		RBX::Reflection::DescribedBase* value = refDescriptor->getRefValue(p.getInstance());
 		if (value) {
 			RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(
-				L,
-				static_cast<RBX::Instance*>(value)->shared_from_this()
+				L, static_cast<RBX::Instance*>(value)->shared_from_this()
 			);
 		}
 		else {
@@ -289,9 +286,7 @@ namespace Lua {
 // FUNCTION: WEBSERVICE 0x100ac9b0
 template <>
 void Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_newindex(
-	boost::shared_ptr<Reflection::DescribedBase>& object,
-	const char* name,
-	lua_State* L
+	boost::shared_ptr<Reflection::DescribedBase>& object, const char* name, lua_State* L
 )
 {
 	if (!object) {
@@ -335,9 +330,7 @@ void Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_newindex(
 	else {
 		throw std::runtime_error(
 			G3D::format(
-				"%s is not a valid member of %s",
-				name,
-				Reflection::ClassDescriptor::rootDescriptor().name.name.c_str()
+				"%s is not a valid member of %s", name, Reflection::ClassDescriptor::rootDescriptor().name.name.c_str()
 			)
 		);
 	}
@@ -399,9 +392,7 @@ int ObjectBridge::callMemberFunction(lua_State* L)
 // FUNCTION: WEBSERVICE 0x100ad4b0
 template <>
 int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_index(
-	const boost::shared_ptr<Reflection::DescribedBase>& object,
-	const char* name,
-	lua_State* L
+	const boost::shared_ptr<Reflection::DescribedBase>& object, const char* name, lua_State* L
 )
 {
 	if (!object) {
@@ -477,9 +468,7 @@ int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_index(
 
 template bool RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::DescribedBase>, 0>::getValue<
 	boost::shared_ptr<RBX::Reflection::DescribedBase> >(
-	lua_State* L,
-	unsigned int index,
-	boost::shared_ptr<RBX::Reflection::DescribedBase>& value
+	lua_State* L, unsigned int index, boost::shared_ptr<RBX::Reflection::DescribedBase>& value
 );
 
 template boost::shared_ptr<RBX::Reflection::DescribedBase> RBX::Lua::SharedPtrBridge<

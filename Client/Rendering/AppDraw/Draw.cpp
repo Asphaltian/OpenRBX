@@ -101,9 +101,7 @@ void Draw::selectionBox(const Part& part, Adorn* adorn, const G3D::Color4& selec
 void Draw::selectionBox(const Part& part, Adorn* adorn, SelectState selectState)
 {
 	selectionBox(
-		part,
-		adorn,
-		G3D::Color4(selectState == SELECT_NORMAL ? selectColor() : G3D::Color3(0.2f, 0.7f, 1.0f), 1.0f)
+		part, adorn, G3D::Color4(selectState == SELECT_NORMAL ? selectColor() : G3D::Color3(0.2f, 0.7f, 1.0f), 1.0f)
 	);
 }
 

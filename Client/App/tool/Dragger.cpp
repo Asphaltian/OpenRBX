@@ -48,9 +48,7 @@ bool Dragger::intersectingWorldOrOthers(const G3D::Array<Primitive*>& primitives
 
 // FUNCTION: WEBSERVICE 0x10105870
 void Dragger::movePrimitivesDelta(
-	const G3D::Array<Primitive*>& primitives,
-	const G3D::Vector3& delta,
-	G3D::Vector3& movedSoFar
+	const G3D::Array<Primitive*>& primitives, const G3D::Vector3& delta, G3D::Vector3& movedSoFar
 )
 {
 	movePrimitives(primitives, delta);
@@ -59,9 +57,7 @@ void Dragger::movePrimitivesDelta(
 
 // FUNCTION: WEBSERVICE 0x10105910
 void Dragger::searchUpFine(
-	const G3D::Array<Primitive*>& primitives,
-	G3D::Vector3& movedSoFar,
-	ContactManager& contactManager
+	const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 )
 {
 	movePrimitivesDelta(primitives, G3D::Vector3(0.0f, 0.1f, 0.0f), movedSoFar);
@@ -73,9 +69,7 @@ void Dragger::searchUpFine(
 
 // FUNCTION: WEBSERVICE 0x10105990
 void Dragger::searchDownFine(
-	const G3D::Array<Primitive*>& primitives,
-	G3D::Vector3& movedSoFar,
-	ContactManager& contactManager
+	const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 )
 {
 	movePrimitivesDelta(primitives, G3D::Vector3(0.0f, -0.1f, 0.0f), movedSoFar);
@@ -90,9 +84,7 @@ void Dragger::searchDownFine(
 
 // FUNCTION: WEBSERVICE 0x10105a10
 void Dragger::searchUpGross(
-	const G3D::Array<Primitive*>& primitives,
-	G3D::Vector3& movedSoFar,
-	ContactManager& contactManager
+	const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 )
 {
 	movePrimitivesDelta(primitives, G3D::Vector3(0.0f, 1.2f, 0.0f), movedSoFar);
@@ -107,9 +99,7 @@ void Dragger::searchUpGross(
 
 // FUNCTION: WEBSERVICE 0x10105a90
 void Dragger::searchDownGross(
-	const G3D::Array<Primitive*>& primitives,
-	G3D::Vector3& movedSoFar,
-	ContactManager& contactManager
+	const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 )
 {
 	movePrimitivesDelta(primitives, G3D::Vector3(0.0f, -1.2f, 0.0f), movedSoFar);
@@ -124,9 +114,7 @@ void Dragger::searchDownGross(
 
 // FUNCTION: WEBSERVICE 0x10105b10
 G3D::Vector3 Dragger::safeMoveYDrop(
-	const G3D::Array<Primitive*>& primitives,
-	const G3D::Vector3& tryMove,
-	ContactManager& contactManager
+	const G3D::Array<Primitive*>& primitives, const G3D::Vector3& tryMove, ContactManager& contactManager
 )
 {
 	if (primitives.size() == 0) {
@@ -150,9 +138,7 @@ G3D::Vector3 Dragger::safeMoveYDrop(
 
 // FUNCTION: WEBSERVICE 0x10105c10
 G3D::Vector3 Dragger::safeMoveNoDrop(
-	const G3D::Array<Primitive*>& primitives,
-	const G3D::Vector3& tryMove,
-	ContactManager& contactManager
+	const G3D::Array<Primitive*>& primitives, const G3D::Vector3& tryMove, ContactManager& contactManager
 )
 {
 	G3D::Vector3 movedSoFar(0.0f, 0.0f, 0.0f);
@@ -175,9 +161,7 @@ G3D::Vector3 Dragger::safeMoveNoDrop(
 
 // FUNCTION: WEBSERVICE 0x10105d40
 void Dragger::safeRotate(
-	const G3D::Array<Primitive*>& primitives,
-	const G3D::Matrix3& rotate,
-	ContactManager& contactManager
+	const G3D::Array<Primitive*>& primitives, const G3D::Matrix3& rotate, ContactManager& contactManager
 )
 {
 	if (primitives.size() != 0) {

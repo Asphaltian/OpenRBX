@@ -188,8 +188,7 @@ public:
 
 		if (value.isType<boost::shared_ptr<Reflection::DescribedBase> >()) {
 			SharedPtrBridge<Reflection::DescribedBase>::push(
-				L,
-				value.cast<const boost::shared_ptr<Reflection::DescribedBase>&>()
+				L, value.cast<const boost::shared_ptr<Reflection::DescribedBase>&>()
 			);
 			return 1;
 		}

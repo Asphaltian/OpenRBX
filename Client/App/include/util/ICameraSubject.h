@@ -32,9 +32,7 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x1005aa10
 	virtual void stepGoalAndFocus(
-		CoordinateFrame& cameraGoal,
-		CoordinateFrame& cameraFocus,
-		bool cameraExternallyAdjusted
+		CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus, bool cameraExternallyAdjusted
 	) // vtable+0x14
 	{
 		cameraFocus = getLocation();

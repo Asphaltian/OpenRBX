@@ -48,11 +48,7 @@ Rect GuiItem::getMyRect() const
 
 // STUB: WEBSERVICE 0x100d10b0
 void GuiItem::label2d(
-	Adorn* adorn,
-	const std::string& label,
-	const G3D::Color4& fill,
-	const G3D::Color4& border,
-	Adorn::XAlign align
+	Adorn* adorn, const std::string& label, const G3D::Color4& fill, const G3D::Color4& border, Adorn::XAlign align
 ) const
 {
 	if (label.size() == 0) {
@@ -77,8 +73,9 @@ void GuiItem::label2d(
 		break;
 	}
 
-	adorn
-		->drawFont2D(label, pos, getFontSize(), fill, border, align, Adorn::YALIGN_CENTER, Adorn::PROPORTIONAL_SPACING);
+	adorn->drawFont2D(
+		label, pos, getFontSize(), fill, border, align, Adorn::YALIGN_CENTER, Adorn::PROPORTIONAL_SPACING
+	);
 }
 
 // FUNCTION: WEBSERVICE 0x100d1180

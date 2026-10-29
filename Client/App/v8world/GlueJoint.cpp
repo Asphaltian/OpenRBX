@@ -29,10 +29,7 @@ float GlueJoint::getMaxForce()
 
 // FUNCTION: WEBSERVICE 0x10120340
 GlueJoint::GlueJoint(
-	Primitive* p0,
-	Primitive* p1,
-	const CoordinateFrame& jointCoord0,
-	const CoordinateFrame& jointCoord1
+	Primitive* p0, Primitive* p1, const CoordinateFrame& jointCoord0, const CoordinateFrame& jointCoord1
 )
 	: MultiJoint(p0, p1, jointCoord0, jointCoord1, 4)
 {

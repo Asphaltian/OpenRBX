@@ -24,53 +24,38 @@ namespace RBX {
 const char sTool[] = "Tool";
 
 static Reflection::PropDescriptor<Tool, CoordinateFrame> prop_Grip(
-	"Grip",
-	"Appearance",
-	&RBX::Tool::getGrip,
-	&RBX::Tool::setGrip,
-	Reflection::PropertyDescriptor::STREAMING
+	"Grip", "Appearance", &Tool::getGrip, &Tool::setGrip, Reflection::PropertyDescriptor::STREAMING
 );
+
 static Reflection::PropDescriptor<Tool, G3D::Vector3> prop_GripPos(
-	"GripPos",
-	"Appearance",
-	&RBX::Tool::getGripPos,
-	&RBX::Tool::setGripPos,
-	Reflection::PropertyDescriptor::UI
+	"GripPos", "Appearance", &Tool::getGripPos, &Tool::setGripPos, Reflection::PropertyDescriptor::UI
 );
+
 static Reflection::PropDescriptor<Tool, G3D::Vector3> prop_GripForward(
-	"GripForward",
-	"Appearance",
-	&RBX::Tool::getGripForward,
-	&RBX::Tool::setGripForward,
-	Reflection::PropertyDescriptor::UI
+	"GripForward", "Appearance", &Tool::getGripForward, &Tool::setGripForward, Reflection::PropertyDescriptor::UI
 );
+
 static Reflection::PropDescriptor<Tool, G3D::Vector3> prop_GripUp(
-	"GripUp",
-	"Appearance",
-	&RBX::Tool::getGripUp,
-	&RBX::Tool::setGripUp,
-	Reflection::PropertyDescriptor::UI
+	"GripUp", "Appearance", &Tool::getGripUp, &Tool::setGripUp, Reflection::PropertyDescriptor::UI
 );
+
 static Reflection::PropDescriptor<Tool, G3D::Vector3> prop_GripRight(
-	"GripRight",
-	"Appearance",
-	&RBX::Tool::getGripRight,
-	&RBX::Tool::setGripRight,
-	Reflection::PropertyDescriptor::UI
+	"GripRight", "Appearance", &Tool::getGripRight, &Tool::setGripRight, Reflection::PropertyDescriptor::UI
 );
 
 static Reflection::PropDescriptor<Tool, int> prop_BackendToolState(
 	"BackendToolState",
 	"Appearance",
-	&RBX::Tool::getBackendToolState,
-	&RBX::Tool::setBackendToolState,
+	&Tool::getBackendToolState,
+	&Tool::setBackendToolState,
 	Reflection::PropertyDescriptor::STREAMING
 );
+
 static Reflection::PropDescriptor<Tool, int> prop_FrontendActivationState(
 	"ActivationState",
 	"Appearance",
-	&RBX::Tool::getFrontendActivationState,
-	&RBX::Tool::setFrontendActivationState,
+	&Tool::getFrontendActivationState,
+	&Tool::setFrontendActivationState,
 	Reflection::PropertyDescriptor::STREAMING
 );
 
@@ -325,9 +310,7 @@ void Tool::connectTouchEvent()
 {
 	if (const PartInstance* handle = getHandleConst()) {
 		handleTouched = PartInstance::event_Touched.connect(
-			const_cast<PartInstance*>(handle),
-			boost::bind(&Tool::onEvent_HandleTouched, this, _1),
-			10
+			const_cast<PartInstance*>(handle), boost::bind(&Tool::onEvent_HandleTouched, this, _1), 10
 		);
 	}
 	else {

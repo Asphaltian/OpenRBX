@@ -28,16 +28,12 @@ private:
 	CoordinateFrame getFocusLookingAtGoal(const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal);
 	bool testOcclusion(const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal, float& distance);
 	CoordinateFrame goalFromDistance(
-		const CoordinateFrame& cameraFocus,
-		const CoordinateFrame& cameraGoal,
-		const float distance
+		const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal, const float distance
 	);
 
 	virtual bool zoom(const float in, CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus); // vtable+0x10
 	virtual void stepGoalAndFocus(
-		CoordinateFrame& cameraGoal,
-		CoordinateFrame& cameraFocus,
-		bool cameraExternallyAdjusted
+		CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus, bool cameraExternallyAdjusted
 	); // vtable+0x14
 
 public:

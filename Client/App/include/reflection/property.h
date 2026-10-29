@@ -60,9 +60,7 @@ public:
 	virtual std::string getStringValue(const DescribedBase* instance) const = 0;              // vtable+0x10
 	virtual bool setStringValue(DescribedBase* instance, const std::string& value) const = 0; // vtable+0x14
 	virtual void read(
-		DescribedBase* instance,
-		const XmlElement* element,
-		IReferenceBinder& binder
+		DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 	) const; // vtable+0x18
 
 	XmlElement* write(const DescribedBase* instance, bool ignoreWriteProtection) const;
@@ -81,19 +79,13 @@ public:
 
 protected:
 	PropertyDescriptor(
-		ClassDescriptor& classDescriptor,
-		const Type& type,
-		const char* name,
-		const char* category,
-		Functionality flags
+		ClassDescriptor& classDescriptor, const Type& type, const char* name, const char* category, Functionality flags
 	);
 
 private:
 	virtual void writeValue(const DescribedBase* instance, XmlElement* element) const = 0; // vtable+0x1c
 	virtual void readValue(
-		DescribedBase* instance,
-		const XmlElement* element,
-		IReferenceBinder& binder
+		DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 	) const = 0; // vtable+0x20
 };
 
@@ -204,9 +196,7 @@ template <>
 bool TypedPropertyDescriptor<std::string>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<std::string>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<std::string>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -219,9 +209,7 @@ template <>
 bool TypedPropertyDescriptor<bool>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<bool>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<bool>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -234,9 +222,7 @@ template <>
 bool TypedPropertyDescriptor<float>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<float>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<float>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -249,9 +235,7 @@ template <>
 bool TypedPropertyDescriptor<double>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<double>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<double>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -264,9 +248,7 @@ template <>
 bool TypedPropertyDescriptor<int>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<int>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<int>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -279,9 +261,7 @@ template <>
 bool TypedPropertyDescriptor<G3D::Vector3>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<G3D::Vector3>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -294,9 +274,7 @@ template <>
 bool TypedPropertyDescriptor<G3D::Color3>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<G3D::Color3>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<G3D::Color3>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -309,9 +287,7 @@ template <>
 bool TypedPropertyDescriptor<BrickColor>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<BrickColor>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -324,9 +300,7 @@ template <>
 bool TypedPropertyDescriptor<ContentId>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<ContentId>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<ContentId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -339,9 +313,7 @@ template <>
 bool TypedPropertyDescriptor<TextureId>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<TextureId>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<TextureId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
@@ -354,23 +326,18 @@ template <>
 bool TypedPropertyDescriptor<MeshId>::setStringValue(DescribedBase* instance, const std::string& text) const;
 template <>
 void TypedPropertyDescriptor<MeshId>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<MeshId>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 template <>
 void TypedPropertyDescriptor<G3D::CoordinateFrame>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const;
 template <>
 void TypedPropertyDescriptor<G3D::CoordinateFrame>::writeValue(
-	const DescribedBase* instance,
-	XmlElement* element
+	const DescribedBase* instance, XmlElement* element
 ) const;
 
 // SIZE 0x1c

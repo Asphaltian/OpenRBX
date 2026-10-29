@@ -9,17 +9,12 @@
 static RBX::Reflection::
 	BoundFuncDesc<RBX::Selection, boost::shared_ptr<const std::vector<boost::shared_ptr<RBX::Instance> > >(), 0>
 		func_getSelection(
-			&RBX::Selection::getSelection2,
-			"Get",
-			RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+			&RBX::Selection::getSelection2, "Get", RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
 		);
 static RBX::Reflection::
 	BoundFuncDesc<RBX::Selection, void(boost::shared_ptr<const std::vector<boost::shared_ptr<RBX::Instance> > >), 1>
 		func_setSelection(
-			&RBX::Selection::setSelection,
-			"Set",
-			"selection",
-			RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+			&RBX::Selection::setSelection, "Set", "selection", RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
 		);
 
 namespace RBX {

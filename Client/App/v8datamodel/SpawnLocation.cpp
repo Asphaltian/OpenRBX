@@ -20,22 +20,16 @@ const char sSpawnerService[] = "SpawnerService";
 char sSpawnLocation[] = "SpawnLocation";
 
 static Reflection::PropDescriptor<SpawnLocation, BrickColor> prop_TeamColor(
-	"TeamColor",
-	"Teams",
-	&RBX::SpawnLocation::getTeamColor,
-	&RBX::SpawnLocation::setTeamColor
+	"TeamColor", "Teams", &SpawnLocation::getTeamColor, &SpawnLocation::setTeamColor
 );
 
 Reflection::BoundProp<int, 1> SpawnLocation::prop_SpawnForcefieldDuration(
-	"Duration",
-	"Forcefield",
-	&SpawnLocation::forcefieldDuration
+	"Duration", "Forcefield", &SpawnLocation::forcefieldDuration
 );
+
 Reflection::BoundProp<bool, 1> SpawnLocation::prop_Neutral("Neutral", "Teams", &SpawnLocation::neutral);
 Reflection::BoundProp<bool, 1> SpawnLocation::prop_AllowTeamChangeOnTouch(
-	"AllowTeamChangeOnTouch",
-	"Teams",
-	&SpawnLocation::allowTeamChangeOnTouch
+	"AllowTeamChangeOnTouch", "Teams", &SpawnLocation::allowTeamChangeOnTouch
 );
 
 // FUNCTION: WEBSERVICE 0x100fd500
@@ -139,8 +133,9 @@ void SpawnLocation::onServiceProvider(const ServiceProvider* oldProvider, const 
 	Instance::onServiceProvider(oldProvider, newProvider);
 
 	if (oldProvider == NULL) {
-		spawnerTouched = PartInstance::event_Touched
-							 .connect(this, boost::bind(&SpawnLocation::onEvent_spawnerTouched, this, _1), 10);
+		spawnerTouched = PartInstance::event_Touched.connect(
+			this, boost::bind(&SpawnLocation::onEvent_spawnerTouched, this, _1), 10
+		);
 
 		SpawnerService* spawnerService = newProvider ? newProvider->create<SpawnerService>() : NULL;
 		spawnerService->RegisterSpawner(this);

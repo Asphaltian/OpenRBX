@@ -43,8 +43,8 @@ char sScriptContext[] = "ScriptContext";
 Reflection::BoundProp<bool, 1> ScriptContext::propScriptsDisabled(
 	"ScriptsDisabled",
 	"State",
-	&RBX::ScriptContext::scriptsDisabled,
-	&RBX::ScriptContext::onChangedScriptEnabled,
+	&ScriptContext::scriptsDisabled,
+	&ScriptContext::onChangedScriptEnabled,
 	Reflection::PropertyDescriptor::UI
 );
 
@@ -206,8 +206,9 @@ int ScriptContext::print(lua_State* L)
 static int panic(lua_State* L)
 {
 	std::string error = lua_tostring(L, -1);
-	RBX::StandardOut::singleton()
-		->print(RBX::MESSAGE_ERROR, "Unprotected error in call to Lua API (%s)\n", error.c_str());
+	RBX::StandardOut::singleton()->print(
+		RBX::MESSAGE_ERROR, "Unprotected error in call to Lua API (%s)\n", error.c_str()
+	);
 
 	int* crash = NULL;
 	*crash = crash[1];
@@ -247,12 +248,7 @@ void ScriptContext::reportError(lua_State* thread)
 					level++;
 					lua_getinfo(thread, "nSlu", &ar);
 					StandardOut::singleton()->print(
-						MESSAGE_INFO,
-						"   stack %s, line %d: %s %s",
-						ar.source,
-						ar.currentline,
-						ar.namewhat,
-						ar.name
+						MESSAGE_INFO, "   stack %s, line %d: %s %s", ar.source, ar.currentline, ar.namewhat, ar.name
 					);
 				} while (lua_getstack(thread, level, &ar));
 
@@ -292,9 +288,7 @@ void ScriptContext::removeScript(Script* script)
 
 // FUNCTION: WEBSERVICE 0x10065240
 static void readResults(
-	std::auto_ptr<std::vector<RBX::Reflection::Value> >& result,
-	lua_State* thread,
-	unsigned int returnCount
+	std::auto_ptr<std::vector<RBX::Reflection::Value> >& result, lua_State* thread, unsigned int returnCount
 )
 {
 	result.reset(new std::vector<RBX::Reflection::Value>(returnCount));
@@ -338,16 +332,14 @@ void ScriptContext::closeState()
 		unsigned int maxHeapCount;
 		allocator->getHeapStats(heapSize, heapCount, maxHeapSize, maxHeapCount);
 		StandardOut::singleton()->print(
-			MESSAGE_INFO,
-			"Script Heap Stats: Max Size = %d bytes, Max Count = %d blocks",
-			maxHeapSize,
-			maxHeapCount
+			MESSAGE_INFO, "Script Heap Stats: Max Size = %d bytes, Max Count = %d blocks", maxHeapSize, maxHeapCount
 		);
 		allocator->clearHeapMax();
 
 		if (contextCount == 0 && (heapSize > 0 || heapCount > 0)) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Script memory leaks: %d bytes, %d blocks", heapSize, heapCount);
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Script memory leaks: %d bytes, %d blocks", heapSize, heapCount
+			);
 		}
 	}
 
@@ -419,8 +411,7 @@ int ScriptContext::stats(lua_State* L)
 	Security::Context::current().requirePermission(Security::Administrator, "Stats");
 
 	Lua::SharedPtrBridge<Reflection::DescribedBase>::push(
-		L,
-		shared_from(ServiceProvider::create<Stats::StatsService>(&getContext(L)))
+		L, shared_from(ServiceProvider::create<Stats::StatsService>(&getContext(L)))
 	);
 
 	return 1;
@@ -564,8 +555,7 @@ void ScriptContext::openState()
 
 		lua_pushstring(globalState, "workspace");
 		Lua::SharedPtrBridge<Reflection::DescribedBase>::push(
-			globalState,
-			ServiceProvider::find<Workspace>(this)->shared_from_this()
+			globalState, ServiceProvider::find<Workspace>(this)->shared_from_this()
 		);
 		lua_settable(globalState, LUA_GLOBALSINDEX);
 
@@ -677,9 +667,7 @@ void ScriptContext::startScript(boost::shared_ptr<Script> script)
 	lua_State* thread = lua_newthread(globalState);
 	if (!thread) {
 		StandardOut::singleton()->print(
-			MESSAGE_ERROR,
-			"Unable to create a new thread for %s. It did not execute",
-			script->getName().c_str()
+			MESSAGE_ERROR, "Unable to create a new thread for %s. It did not execute", script->getName().c_str()
 		);
 		return;
 	}
@@ -805,10 +793,7 @@ void ScriptContext::addScript(Script* script)
 
 // FUNCTION: WEBSERVICE 0x100687d0
 std::auto_ptr<std::vector<Reflection::Value> > ScriptContext::executeInNewThread(
-	Security::Identities identity,
-	const char* script,
-	const char* name,
-	const std::vector<Reflection::Value>& arguments
+	Security::Identities identity, const char* script, const char* name, const std::vector<Reflection::Value>& arguments
 )
 {
 	std::auto_ptr<std::vector<Reflection::Value> > result;
@@ -844,13 +829,11 @@ void ScriptContext::onEvent(const RunService* source, Heartbeat event)
 } // namespace RBX
 
 template void RBX::Lua::SharedPtrBridge<RBX::Reflection::DescribedBase>::push(
-	lua_State* L,
-	boost::shared_ptr<RBX::Reflection::DescribedBase> instance
+	lua_State* L, boost::shared_ptr<RBX::Reflection::DescribedBase> instance
 );
 
 template void RBX::Lua::SharedPtrBridge<RBX::Reflection::SignalInstance>::push(
-	lua_State* L,
-	boost::shared_ptr<RBX::Reflection::SignalInstance> instance
+	lua_State* L, boost::shared_ptr<RBX::Reflection::SignalInstance> instance
 );
 
 template const RBX::FactoryProduct<RBX::DebugSettings, RBX::GlobalSettings::Item, RBX::sDebugSettings>::Creator

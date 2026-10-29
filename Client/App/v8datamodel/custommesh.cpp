@@ -8,34 +8,23 @@ namespace RBX {
 char sSpecialShape[] = "SpecialMesh";
 
 static Reflection::EnumPropDescriptor<SpecialShape, SpecialShape::MeshType> desc_meshType(
-	"MeshType",
-	"Data",
-	&SpecialShape::getMeshType,
-	&SpecialShape::setMeshType
+	"MeshType", "Data", &SpecialShape::getMeshType, &SpecialShape::setMeshType
 );
+
 static Reflection::PropDescriptor<SpecialShape, G3D::Vector3> desc_scale(
-	"Scale",
-	"Data",
-	&SpecialShape::getScale,
-	&SpecialShape::setScale
+	"Scale", "Data", &SpecialShape::getScale, &SpecialShape::setScale
 );
+
 static Reflection::PropDescriptor<SpecialShape, MeshId> desc_meshId(
-	"MeshId",
-	"Data",
-	&SpecialShape::getMeshId,
-	&SpecialShape::setMeshId
+	"MeshId", "Data", &SpecialShape::getMeshId, &SpecialShape::setMeshId
 );
+
 static Reflection::PropDescriptor<SpecialShape, TextureId> desc_textureId(
-	"TextureId",
-	"Data",
-	&SpecialShape::getTextureId,
-	&SpecialShape::setTextureId
+	"TextureId", "Data", &SpecialShape::getTextureId, &SpecialShape::setTextureId
 );
+
 static Reflection::PropDescriptor<SpecialShape, G3D::Vector3> desc_vertColor(
-	"VertexColor",
-	"Data",
-	&SpecialShape::getVertColor,
-	&SpecialShape::setVertColor
+	"VertexColor", "Data", &SpecialShape::getVertColor, &SpecialShape::setVertColor
 );
 
 // FUNCTION: WEBSERVICE 0x100ea070 FOLDED

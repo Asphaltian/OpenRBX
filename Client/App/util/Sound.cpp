@@ -128,18 +128,21 @@ RBX::Reflection::BoundProp<float, 1> RBX::Soundscape::SoundService::prop_doppler
 	&RBX::Soundscape::SoundService::dopplerscale,
 	&RBX::Soundscape::SoundService::on3DSettingChanged
 );
+
 RBX::Reflection::BoundProp<float, 1> RBX::Soundscape::SoundService::prop_distancefactor(
 	"DistanceFactor",
 	"Data",
 	&RBX::Soundscape::SoundService::distancefactor,
 	&RBX::Soundscape::SoundService::on3DSettingChanged
 );
+
 RBX::Reflection::BoundProp<float, 1> RBX::Soundscape::SoundService::prop_rolloffscale(
 	"RolloffScale",
 	"Data",
 	&RBX::Soundscape::SoundService::rolloffscale,
 	&RBX::Soundscape::SoundService::on3DSettingChanged
 );
+
 RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService, RBX::Soundscape::ReverbType> RBX::Soundscape::
 	SoundService::prop_AmbientReverb(
 		"AmbientReverb",
@@ -148,17 +151,13 @@ RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService, RBX::Soundsca
 		&RBX::Soundscape::SoundService::setAmbientReverb
 	);
 static RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel, RBX::Soundscape::SoundId> sound_desc_SoundId(
-	"SoundId",
-	"Data",
-	&RBX::Soundscape::SoundChannel::getSoundId,
-	&RBX::Soundscape::SoundChannel::setSoundId
+	"SoundId", "Data", &RBX::Soundscape::SoundChannel::getSoundId, &RBX::Soundscape::SoundChannel::setSoundId
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel, float> sound_desc_Volume(
-	"Volume",
-	"Data",
-	&RBX::Soundscape::SoundChannel::getVolume,
-	&RBX::Soundscape::SoundChannel::setVolume
+	"Volume", "Data", &RBX::Soundscape::SoundChannel::getVolume, &RBX::Soundscape::SoundChannel::setVolume
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel, int> sound_desc_PlayCount(
 	"PlayCount",
 	"Data",
@@ -166,45 +165,33 @@ static RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel, int> sound
 	&RBX::Soundscape::SoundChannel::setPlayCount,
 	RBX::Reflection::PropertyDescriptor::STREAMING
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel, bool> sound_desc_Looped(
-	"Looped",
-	"Behavior",
-	&RBX::Soundscape::SoundChannel::getLooped,
-	&RBX::Soundscape::SoundChannel::setLooped
+	"Looped", "Behavior", &RBX::Soundscape::SoundChannel::getLooped, &RBX::Soundscape::SoundChannel::setLooped
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel, bool> sound_desc_IsPlaying(
-	"IsPlaying",
-	"Data",
-	&RBX::Soundscape::SoundChannel::isPlaying,
-	0,
-	RBX::Reflection::PropertyDescriptor::UI
+	"IsPlaying", "Data", &RBX::Soundscape::SoundChannel::isPlaying, 0, RBX::Reflection::PropertyDescriptor::UI
 );
+
 static RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel, bool> sound_desc_isPaused(
-	"IsPaused",
-	"Data",
-	&RBX::Soundscape::SoundChannel::isPaused,
-	0,
-	RBX::Reflection::PropertyDescriptor::UI
+	"IsPaused", "Data", &RBX::Soundscape::SoundChannel::isPaused, 0, RBX::Reflection::PropertyDescriptor::UI
 );
+
 RBX::Reflection::BoundProp<bool, 1> RBX::Soundscape::SoundChannel::sound_desc_playOnRemove(
-	"PlayOnRemove",
-	"Behavior",
-	&RBX::Soundscape::SoundChannel::playOnRemove
+	"PlayOnRemove", "Behavior", &RBX::Soundscape::SoundChannel::playOnRemove
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel, void(), 0> sound_playFunction(
-	&RBX::Soundscape::SoundChannel::play,
-	"Play",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::Soundscape::SoundChannel::play, "Play", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel, void(), 0> sound_pauseFunction(
-	&RBX::Soundscape::SoundChannel::pause,
-	"Pause",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::Soundscape::SoundChannel::pause, "Pause", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel, void(), 0> sound_stopFunction(
-	&RBX::Soundscape::SoundChannel::stop,
-	"Stop",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::Soundscape::SoundChannel::stop, "Stop", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
 
 // FUNCTION: WEBSERVICE 0x1007d490
@@ -272,9 +259,7 @@ const Type& Type::singleton<Soundscape::SoundId>()
 // FUNCTION: WEBSERVICE 0x1012dd70 FOLDED
 template <>
 void TypedPropertyDescriptor<Soundscape::SoundId>::readValue(
-	DescribedBase* instance,
-	const XmlElement* element,
-	IReferenceBinder& binder
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
 ) const
 {
 	if (!element->isXsiNil()) {
@@ -309,8 +294,7 @@ std::string TypedPropertyDescriptor<Soundscape::SoundId>::getStringValue(const D
 // FUNCTION: WEBSERVICE 0x1007e4c0 FOLDED
 template <>
 bool TypedPropertyDescriptor<Soundscape::SoundId>::setStringValue(
-	DescribedBase* instance,
-	const std::string& text
+	DescribedBase* instance, const std::string& text
 ) const
 {
 	Soundscape::SoundId value;
@@ -618,8 +602,7 @@ void SoundService::openFmod()
 
 		if (caps & FMOD_CAPS_HARDWARE_EMULATED) {
 			StandardOut::singleton()->print(
-				MESSAGE_WARNING,
-				"The acceleration slider in the Sound Control Panel set to 'off'"
+				MESSAGE_WARNING, "The acceleration slider in the Sound Control Panel set to 'off'"
 			);
 			checkResult(system->setDSPBufferSize(1024, 10));
 		}
@@ -627,8 +610,7 @@ void SoundService::openFmod()
 		FMOD_RESULT result = system->init(100, FMOD_INIT_NORMAL, 0);
 		if (result == FMOD_ERR_OUTPUT_CREATEBUFFER) {
 			StandardOut::singleton()->print(
-				MESSAGE_WARNING,
-				"The speaker mode selected isn't supported by this soundcard.  Using Stereo"
+				MESSAGE_WARNING, "The speaker mode selected isn't supported by this soundcard.  Using Stereo"
 			);
 			checkResult(system->setSpeakerMode(FMOD_SPEAKERMODE_STEREO));
 
@@ -830,11 +812,7 @@ void SoundService::onEvent(const RunService* source, Heartbeat event)
 							}
 
 							checkResultNoThrow(system->set3DListenerAttributes(
-								0,
-								&listener_pos,
-								&listener_vel,
-								&listener_forward,
-								&listener_up
+								0, &listener_pos, &listener_vel, &listener_forward, &listener_up
 							));
 						}
 					}

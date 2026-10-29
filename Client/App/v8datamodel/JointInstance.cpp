@@ -33,48 +33,31 @@ const char sSnap[] = "Snap";
 using namespace RBX;
 
 static Reflection::RefPropDescriptor<AutoJoint, PartInstance> prop_Part0(
-	"Part0",
-	"Data",
-	&RBX::AutoJoint::getPart0,
-	&RBX::AutoJoint::setPart0
+	"Part0", "Data", &RBX::AutoJoint::getPart0, &RBX::AutoJoint::setPart0
 );
+
 static Reflection::RefPropDescriptor<AutoJoint, PartInstance> prop_Part1(
-	"Part1",
-	"Data",
-	&RBX::AutoJoint::getPart1,
-	&RBX::AutoJoint::setPart1
+	"Part1", "Data", &RBX::AutoJoint::getPart1, &RBX::AutoJoint::setPart1
 );
 
 static Reflection::PropDescriptor<AutoJoint, CoordinateFrame> prop_C1(
-	"C1",
-	"Data",
-	&RBX::AutoJoint::getC1,
-	&RBX::AutoJoint::setC1
+	"C1", "Data", &RBX::AutoJoint::getC1, &RBX::AutoJoint::setC1
 );
+
 static Reflection::PropDescriptor<AutoJoint, CoordinateFrame> prop_C0(
-	"C0",
-	"Data",
-	&RBX::AutoJoint::getC0,
-	&RBX::AutoJoint::setC0
+	"C0", "Data", &RBX::AutoJoint::getC0, &RBX::AutoJoint::setC0
 );
 
 static Reflection::PropDescriptor<Motor, float> prop_MaxVelocity(
-	"MaxVelocity",
-	"Data",
-	&RBX::Motor::getMaxVelocity,
-	&RBX::Motor::setMaxVelocity
+	"MaxVelocity", "Data", &RBX::Motor::getMaxVelocity, &RBX::Motor::setMaxVelocity
 );
+
 static Reflection::PropDescriptor<Motor, float> prop_DesiredAngle(
-	"DesiredAngle",
-	"Data",
-	&RBX::Motor::getDesiredAngle,
-	&RBX::Motor::setDesiredAngle
+	"DesiredAngle", "Data", &RBX::Motor::getDesiredAngle, &RBX::Motor::setDesiredAngle
 );
+
 static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle(
-	"CurrentAngle",
-	"Data",
-	&RBX::Motor::getCurrentAngle,
-	&RBX::Motor::setCurrentAngle
+	"CurrentAngle", "Data", &RBX::Motor::getCurrentAngle, &RBX::Motor::setCurrentAngle
 );
 
 namespace RBX {

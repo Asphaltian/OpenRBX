@@ -25,8 +25,7 @@ Vector3int32 SpatialHash::realToHashGrid(const Vector3& realPoint)
 Extents SpatialHash::hashGridToRealExtents(const Vector3& hashGrid)
 {
 	return Extents(
-		hashGrid * hashGridSize(),
-		Vector3(hashGrid.x + 1.0f, hashGrid.y + 1.0f, hashGrid.z + 1.0f) * hashGridSize()
+		hashGrid * hashGridSize(), Vector3(hashGrid.x + 1.0f, hashGrid.y + 1.0f, hashGrid.z + 1.0f) * hashGridSize()
 	);
 }
 
@@ -85,10 +84,7 @@ bool SpatialHash::getNextGrid(Vector3int32& grid, const G3D::Ray& unitRay, float
 						Vector3 location;
 
 						if (G3D::CollisionDetection::collisionLocationForMovingPointFixedAABox(
-								unitRay.origin,
-								unitRay.direction,
-								box,
-								location
+								unitRay.origin, unitRay.direction, box, location
 							)) {
 							if ((location - unitRay.origin).squaredLength() < maxDistanceSquared) {
 								grid = Vector3int32::floor(gridF + offset);
@@ -378,9 +374,7 @@ void SpatialHash::getPrimitivesInGrid(const Vector3int32& grid, G3D::Array<Primi
 
 // FUNCTION: WEBSERVICE 0x10124100
 void SpatialHash::getPrimitivesTouchingExtents(
-	const Extents& extents,
-	const Primitive* ignore,
-	G3D::Array<Primitive*>& answer
+	const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& answer
 )
 {
 	Vector3int32 min;

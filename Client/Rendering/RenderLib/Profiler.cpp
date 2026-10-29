@@ -114,8 +114,7 @@ static std::string getCPUMake()
 	std::string cpu_name;
 
 	if (G3D::RegistryUtil::readString(
-			"HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0\\ProcessorNameString",
-			cpu_name
+			"HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0\\ProcessorNameString", cpu_name
 		)) {
 		return cpu_name;
 	}
@@ -129,8 +128,7 @@ static int getCPUSpeed()
 	int speed;
 
 	if (G3D::RegistryUtil::read32bitNumber(
-			"HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0\\~MHz",
-			speed
+			"HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0\\~MHz", speed
 		)) {
 		if (speed > 300) {
 			return speed;

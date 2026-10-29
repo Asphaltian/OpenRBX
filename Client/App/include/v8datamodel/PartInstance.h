@@ -209,8 +209,7 @@ public:
 	static PartInstance* fromPrimitive(Primitive* primitive);
 	static const PartInstance* fromPrimitiveConst(const Primitive* primitive);
 	static void primitivesToParts(
-		const G3D::Array<Primitive*>& primitives,
-		G3D::Array<shared_ptr<PartInstance> >& parts
+		const G3D::Array<Primitive*>& primitives, G3D::Array<shared_ptr<PartInstance> >& parts
 	);
 	static bool getLocked(Instance* instance);
 

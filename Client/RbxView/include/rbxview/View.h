@@ -58,10 +58,7 @@ public:
 	virtual float getShadingQuality() const; // vtable+0x08
 	virtual float getMeshDetail() const;     // vtable+0x0c
 	virtual void updateSettings(
-		float shadingQuality,
-		float meshDetail,
-		bool shadows,
-		float cameraDistance
+		float shadingQuality, float meshDetail, bool shadows, float cameraDistance
 	);                                     // vtable+0x10
 	virtual void suppressSkybox();         // vtable+0x14
 	virtual Instance* getWorkspace();      // vtable+0x18

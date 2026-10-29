@@ -126,8 +126,7 @@ static void initRoblox()
 		char szPath[MAX_PATH] = "";
 		if (SHGetFolderPathAndSubDir(NULL, CSIDL_COMMON_APPDATA, NULL, 0, "Roblox\\content\\", szPath) != S_OK) {
 			RBX::StandardOut::singleton()->print(
-				RBX::MESSAGE_ERROR,
-				"Unable to find CSIDL_COMMON_APPDATA\\Roblox\\content"
+				RBX::MESSAGE_ERROR, "Unable to find CSIDL_COMMON_APPDATA\\Roblox\\content"
 			);
 		}
 		else {
@@ -165,8 +164,9 @@ static void initRoblox()
 	}
 }
 
-extern "C" const __declspec(selectany) GUID
-	__LIBID_ = {0x7424937a, 0xe183, 0x3486, {0xa9, 0x8f, 0x2c, 0x3b, 0x62, 0xad, 0x01, 0xf3}};
+extern "C" const __declspec(selectany) GUID __LIBID_ = {
+	0x7424937a, 0xe183, 0x3486, {0xa9, 0x8f, 0x2c, 0x3b, 0x62, 0xad, 0x01, 0xf3}
+};
 struct __declspec(uuid("7424937a-e183-3486-a98f-2c3b62ad01f3")) RobloxWebService;
 
 // SIZE 0x2c
@@ -707,10 +707,7 @@ HRESULT __stdcall CWebService::Execute(wchar_t* jobID, ScriptExecution script, L
 			RBX::DataModel::Lock lock(dataModel);
 			RBX::ScriptContext* context = dataModel ? dataModel->create<RBX::ScriptContext>() : NULL;
 			tuple = context->executeInNewThread(
-				RBX::Security::TrustedWebService,
-				code.c_str(),
-				ATL::CStringA(script.name),
-				args
+				RBX::Security::TrustedWebService, code.c_str(), ATL::CStringA(script.name), args
 			);
 		}
 

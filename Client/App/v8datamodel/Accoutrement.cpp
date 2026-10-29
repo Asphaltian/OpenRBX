@@ -20,44 +20,48 @@ const char sAccoutrement[] = "Accoutrement";
 static Reflection::PropDescriptor<Accoutrement, CoordinateFrame> prop_AttachmentPoint(
 	"AttachmentPoint",
 	"Appearance",
-	&RBX::Accoutrement::getAttachmentPoint,
-	&RBX::Accoutrement::setAttachmentPoint,
+	&Accoutrement::getAttachmentPoint,
+	&Accoutrement::setAttachmentPoint,
 	Reflection::PropertyDescriptor::STREAMING
 );
+
 static Reflection::PropDescriptor<Accoutrement, G3D::Vector3> prop_AttachmentPos(
 	"AttachmentPos",
 	"Appearance",
-	&RBX::Accoutrement::getAttachmentPos,
-	&RBX::Accoutrement::setAttachmentPos,
+	&Accoutrement::getAttachmentPos,
+	&Accoutrement::setAttachmentPos,
 	Reflection::PropertyDescriptor::UI
 );
+
 static Reflection::PropDescriptor<Accoutrement, G3D::Vector3> prop_AttachmentForward(
 	"AttachmentForward",
 	"Appearance",
-	&RBX::Accoutrement::getAttachmentForward,
-	&RBX::Accoutrement::setAttachmentForward,
+	&Accoutrement::getAttachmentForward,
+	&Accoutrement::setAttachmentForward,
 	Reflection::PropertyDescriptor::UI
 );
+
 static Reflection::PropDescriptor<Accoutrement, G3D::Vector3> prop_AttachmentUp(
 	"AttachmentUp",
 	"Appearance",
-	&RBX::Accoutrement::getAttachmentUp,
-	&RBX::Accoutrement::setAttachmentUp,
+	&Accoutrement::getAttachmentUp,
+	&Accoutrement::setAttachmentUp,
 	Reflection::PropertyDescriptor::UI
 );
+
 static Reflection::PropDescriptor<Accoutrement, G3D::Vector3> prop_AttachmentRight(
 	"AttachmentRight",
 	"Appearance",
-	&RBX::Accoutrement::getAttachmentRight,
-	&RBX::Accoutrement::setAttachmentRight,
+	&Accoutrement::getAttachmentRight,
+	&Accoutrement::setAttachmentRight,
 	Reflection::PropertyDescriptor::UI
 );
 
 static Reflection::PropDescriptor<Accoutrement, int> prop_BackendAccoutrementState(
 	"BackendAccoutrementState",
 	"Appearance",
-	&RBX::Accoutrement::getBackendAccoutrementState,
-	&RBX::Accoutrement::setBackendAccoutrementState,
+	&Accoutrement::getBackendAccoutrementState,
+	&Accoutrement::setBackendAccoutrementState,
 	Reflection::PropertyDescriptor::STREAMING
 );
 
@@ -275,9 +279,7 @@ void Accoutrement::connectTouchEvent()
 {
 	if (const PartInstance* handle = getHandleConst()) {
 		handleTouched = PartInstance::event_Touched.connect(
-			const_cast<PartInstance*>(handle),
-			boost::bind(&Accoutrement::onEvent_HandleTouched, this, _1),
-			10
+			const_cast<PartInstance*>(handle), boost::bind(&Accoutrement::onEvent_HandleTouched, this, _1), 10
 		);
 	}
 	else {
@@ -290,8 +292,9 @@ void Accoutrement::upTo_InCharacter()
 {
 	characterChildAdded =
 		Instance::event_childAdded.connect(getParent(), boost::bind(&Accoutrement::onEvent_AddedBackend, this, _1), 10);
-	characterChildRemoved = Instance::event_childRemoved
-								.connect(getParent(), boost::bind(&Accoutrement::onEvent_RemovedBackend, this, _1), 10);
+	characterChildRemoved = Instance::event_childRemoved.connect(
+		getParent(), boost::bind(&Accoutrement::onEvent_RemovedBackend, this, _1), 10
+	);
 }
 
 // FUNCTION: WEBSERVICE 0x100dca60

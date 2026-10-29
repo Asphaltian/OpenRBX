@@ -21,34 +21,25 @@ static const Reflection::PropDescriptor<ModelInstance, CoordinateFrame> desc_Mod
 	&ModelInstance::setModelInPrimary,
 	Reflection::PropertyDescriptor::STREAMING
 );
+
 static const Reflection::RefPropDescriptor<ModelInstance, PartInstance> primaryPartProp(
-	"PrimaryPart",
-	"Data",
-	&ModelInstance::getPrimaryPartInternal,
-	&ModelInstance::setPrimaryPart
+	"PrimaryPart", "Data", &ModelInstance::getPrimaryPartInternal, &ModelInstance::setPrimaryPart
 );
+
 static Reflection::BoundFuncDesc<ModelInstance, void(), 0> desc_breakJoints(
-	&ModelInstance::breakJoints,
-	"BreakJoints",
-	Reflection::FunctionDescriptor::AnyCaller
+	&ModelInstance::breakJoints, "BreakJoints", Reflection::FunctionDescriptor::AnyCaller
 );
+
 static Reflection::BoundFuncDesc<ModelInstance, void(), 0> desc_makeJoints(
-	&ModelInstance::makeJoints,
-	"MakeJoints",
-	Reflection::FunctionDescriptor::AnyCaller
+	&ModelInstance::makeJoints, "MakeJoints", Reflection::FunctionDescriptor::AnyCaller
 );
 
 static Reflection::BoundFuncDesc<ModelInstance, void(G3D::Vector3), 1> model_moveFunctionOld(
-	&ModelInstance::moveToPoint,
-	"move",
-	"location",
-	Reflection::FunctionDescriptor::AnyCaller
+	&ModelInstance::moveToPoint, "move", "location", Reflection::FunctionDescriptor::AnyCaller
 );
+
 static Reflection::BoundFuncDesc<ModelInstance, void(G3D::Vector3), 1> model_moveFunction(
-	&ModelInstance::moveToPoint,
-	"MoveTo",
-	"location",
-	Reflection::FunctionDescriptor::AnyCaller
+	&ModelInstance::moveToPoint, "MoveTo", "location", Reflection::FunctionDescriptor::AnyCaller
 );
 
 // FUNCTION: WEBSERVICE 0x10059c10 FOLDED

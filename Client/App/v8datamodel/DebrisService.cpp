@@ -13,18 +13,11 @@ namespace RBX {
 char sDebrisService[] = "Debris";
 
 static Reflection::PropDescriptor<DebrisService, int> prop_MaxItems(
-	"MaxItems",
-	"Data",
-	&RBX::DebrisService::getMaxItems,
-	&RBX::DebrisService::setMaxItems
+	"MaxItems", "Data", &DebrisService::getMaxItems, &DebrisService::setMaxItems
 );
+
 static Reflection::BoundFuncDesc<DebrisService, void(boost::shared_ptr<Instance>, double), 2> func_AddItem(
-	&RBX::DebrisService::addItem,
-	"AddItem",
-	"item",
-	"lifetime",
-	10.0,
-	Reflection::FunctionDescriptor::AnyCaller
+	&DebrisService::addItem, "AddItem", "item", "lifetime", 10.0, Reflection::FunctionDescriptor::AnyCaller
 );
 
 // FUNCTION: WEBSERVICE 0x100fa130

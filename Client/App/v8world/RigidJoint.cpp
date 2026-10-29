@@ -40,12 +40,7 @@ CoordinateFrame RigidJoint::getChildInParent(Primitive* parent, Primitive* child
 
 // FUNCTION: WEBSERVICE 0x1011ecd0
 void RigidJoint::faceIdToCoords(
-	Primitive* p0,
-	Primitive* p1,
-	NormalId nId0,
-	NormalId nId1,
-	CoordinateFrame& c0,
-	CoordinateFrame& c1
+	Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1, CoordinateFrame& c0, CoordinateFrame& c1
 )
 {
 	c0 = p0->getFaceCoordInObject(nId0);

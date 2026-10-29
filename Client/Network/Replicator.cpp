@@ -82,34 +82,30 @@ const char sReplicator[] = "NetworkReplicator";
 const char sMarker[] = "NetworkMarker";
 
 Reflection::SignalDesc<Replicator, void(std::string, bool)> Replicator::event_Disconnection(
-	"Disconnection",
-	"peer",
-	"lostConnection"
+	"Disconnection", "peer", "lostConnection"
 );
 } // namespace Network
 } // namespace RBX
 
 static RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator, boost::shared_ptr<RBX::Reflection::DescribedBase>(), 0>
 	func_SendMarker(
-		&RBX::Network::Replicator::sendMarker,
-		"SendMarker",
-		RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+		&RBX::Network::Replicator::sendMarker, "SendMarker", RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
 	);
 static RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator, void(), 0> func_requestCharacter(
 	&RBX::Network::Replicator::requestCharacter,
 	"RequestCharacter",
 	RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator, void(), 0> func_closeConnection(
 	&RBX::Network::Replicator::closeConnection,
 	"CloseConnection",
 	RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator, boost::shared_ptr<RBX::Instance>(), 0>
 	prop_RemotePlayer(
-		&RBX::Network::Replicator::getPlayer,
-		"GetPlayer",
-		RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
+		&RBX::Network::Replicator::getPlayer, "GetPlayer", RBX::Reflection::FunctionDescriptor::NeedTrustedCaller
 	);
 
 namespace RBX {
@@ -753,8 +749,7 @@ void Peer::updateNetworkSimulator()
 
 // FUNCTION: WEBSERVICE 0x1019fd80
 inline Replicator::DeleteInstanceItem::DeleteInstanceItem(
-	Replicator& replicator,
-	const boost::shared_ptr<const Instance>& instance
+	Replicator& replicator, const boost::shared_ptr<const Instance>& instance
 )
 	: Item(replicator), instance(instance)
 {
@@ -768,8 +763,9 @@ inline void Replicator::MarkerItem::write(RakNet::BitStream& bitStream)
 	bitStream << (int) id;
 
 	if (NetworkSettings::singleton().printInstances) {
-		StandardOut::singleton()
-			->print(MESSAGE_INFO, "Replication: Sending marker %d to %s", id, replicator.remotePlayerId.ToString());
+		StandardOut::singleton()->print(
+			MESSAGE_INFO, "Replication: Sending marker %d to %s", id, replicator.remotePlayerId.ToString()
+		);
 	}
 
 	replicator.onSentMarker(id);
@@ -843,8 +839,7 @@ void Replicator::onParentChanged(boost::shared_ptr<Instance> instance)
 
 // FUNCTION: WEBSERVICE 0x101a1c20
 void Replicator::onPropertyChanged(
-	boost::shared_ptr<Instance> instance,
-	const Reflection::PropertyDescriptor* descriptor
+	boost::shared_ptr<Instance> instance, const Reflection::PropertyDescriptor* descriptor
 )
 {
 	Profiling::Mark mark(*profileReplication, false);
@@ -909,8 +904,9 @@ inline void Replicator::DeleteInstanceItem::write(RakNet::BitStream& bitStream)
 {
 	if (replicator.pendingDeleteInstances.erase(instance.get())) {
 		if (!instance) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Replication: ~NULL >> %s", replicator.remotePlayerId.ToString());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Replication: ~NULL >> %s", replicator.remotePlayerId.ToString()
+			);
 		}
 		else {
 			try {
@@ -958,8 +954,9 @@ void Replicator::requestCharacter()
 	if (NetworkSettings::singleton().printInstances) {
 		Guid::Data id;
 		player->getGuid().extract(id);
-		StandardOut::singleton()
-			->print(MESSAGE_INFO, "Replicator: Requesting character for %s", id.readableString(4).c_str());
+		StandardOut::singleton()->print(
+			MESSAGE_INFO, "Replicator: Requesting character for %s", id.readableString(4).c_str()
+		);
 	}
 
 	peer->Send(&bitStream, MEDIUM_PRIORITY, RELIABLE_ORDERED, 0, remotePlayerId, false);
@@ -1081,8 +1078,9 @@ PluginReceiveResult Replicator::OnReceive_ID_TIMESTAMP(Packet* packet)
 		}
 		else {
 			if (NetworkSettings::singleton().printPhysicsErrors) {
-				StandardOut::singleton()
-					->print(MESSAGE_WARNING, "   Physics-in of unidentified %s", id.readableString(4).c_str());
+				StandardOut::singleton()->print(
+					MESSAGE_WARNING, "   Physics-in of unidentified %s", id.readableString(4).c_str()
+				);
 			}
 			return RR_STOP_PROCESSING_AND_DEALLOCATE;
 		}
@@ -1091,32 +1089,36 @@ PluginReceiveResult Replicator::OnReceive_ID_TIMESTAMP(Packet* packet)
 
 		if (!PartInstance::nonNullInWorkspace(part)) {
 			if (NetworkSettings::singleton().printPhysicsErrors) {
-				StandardOut::singleton()
-					->print(MESSAGE_INFO, "Physics-in of part not in workspace %s", id.readableString(4).c_str());
+				StandardOut::singleton()->print(
+					MESSAGE_INFO, "Physics-in of part not in workspace %s", id.readableString(4).c_str()
+				);
 			}
 			return RR_STOP_PROCESSING_AND_DEALLOCATE;
 		}
 
 		if (!PartInstance::nonNullInWorkspace(part)) {
 			if (NetworkSettings::singleton().printPhysicsErrors) {
-				StandardOut::singleton()
-					->print(MESSAGE_INFO, "Physics-in of part not in workspace %s", id.readableString(4).c_str());
+				StandardOut::singleton()->print(
+					MESSAGE_INFO, "Physics-in of part not in workspace %s", id.readableString(4).c_str()
+				);
 			}
 			return RR_STOP_PROCESSING_AND_DEALLOCATE;
 		}
 
 		if (!part->getPrimitive()->getAssembly()) {
 			if (NetworkSettings::singleton().printPhysicsErrors) {
-				StandardOut::singleton()
-					->print(MESSAGE_INFO, "Physics-in of primitive with no assembly %s", id.readableString(4).c_str());
+				StandardOut::singleton()->print(
+					MESSAGE_INFO, "Physics-in of primitive with no assembly %s", id.readableString(4).c_str()
+				);
 			}
 			return RR_STOP_PROCESSING_AND_DEALLOCATE;
 		}
 
 		if (part->getPrimitive()->getClump()->getAnchored()) {
 			if (NetworkSettings::singleton().printPhysicsErrors) {
-				StandardOut::singleton()
-					->print(MESSAGE_INFO, "Physics-in of anchored primitive %s", id.readableString(4).c_str());
+				StandardOut::singleton()->print(
+					MESSAGE_INFO, "Physics-in of anchored primitive %s", id.readableString(4).c_str()
+				);
 			}
 			return RR_STOP_PROCESSING_AND_DEALLOCATE;
 		}
@@ -1244,8 +1246,7 @@ void Replicator::Update(RakPeerInterface* peer)
 
 // FUNCTION: WEBSERVICE 0x101a6200
 Replicator::ReplicatorStatsItem::ReplicatorStatsItem(
-	const boost::shared_ptr<Replicator>& replicator,
-	const RakNetStatistics* statistics
+	const boost::shared_ptr<Replicator>& replicator, const RakNetStatistics* statistics
 )
 	: replicator(replicator), statistics(statistics), instanceCount(0), instanceBits(0)
 {
@@ -1298,8 +1299,9 @@ const Instance* Replicator::getDefault(const Name& className)
 	if (iter == defaultObjects.end()) {
 		boost::shared_ptr<Instance> instance = Instance::create(className);
 		if (!instance) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Replication: Can't create default object of type %s", className.c_str());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Replication: Can't create default object of type %s", className.c_str()
+			);
 		}
 		defaultObjects[&className] = instance;
 		return instance.get();
@@ -1321,8 +1323,7 @@ void Replicator::createStatsItems(Stats::StatsService* stats)
 			shared_from_polymorphic_downcast<Stats::Item>(stats->findFirstChildByName("Network"));
 		if (network) {
 			statsItem = Creatable<Instance>::create<ReplicatorStatsItem>(
-				shared_from(this),
-				peer->GetStatistics(remotePlayerId)
+				shared_from(this), peer->GetStatistics(remotePlayerId)
 			);
 			statsItem->setName(getName());
 			statsItem->setParent2(network);
@@ -1345,9 +1346,7 @@ SharedStringDictionary& Replicator::getSharedDictionary(const Reflection::Proper
 
 // FUNCTION: WEBSERVICE 0x101a7180
 void Replicator::serializeValue(
-	const Reflection::ConstProperty& property,
-	bool includeLength,
-	RakNet::BitStream& outBitStream
+	const Reflection::ConstProperty& property, bool includeLength, RakNet::BitStream& outBitStream
 )
 {
 	if (property.getDescriptor().type == Reflection::Type::singleton<std::string>()) {
@@ -1502,9 +1501,7 @@ Replicator::ReplicationData& Replicator::addReplicationData(boost::shared_ptr<In
 			Instance::event_childAdded.connect(instance.get(), boost::bind(&Replicator::onChildAdded, this, _1), 0);
 		if (listenToChanges) {
 			data.changed = Instance::event_propertyChanged.connect(
-				instance.get(),
-				boost::bind(&Replicator::onPropertyChanged, this, instance, _1),
-				0
+				instance.get(), boost::bind(&Replicator::onPropertyChanged, this, instance, _1), 0
 			);
 		}
 		return data;
@@ -1516,9 +1513,7 @@ Replicator::ReplicationData& Replicator::addReplicationData(boost::shared_ptr<In
 		}
 		else if (!oldData.changed.connected()) {
 			oldData.changed = Instance::event_propertyChanged.connect(
-				instance.get(),
-				boost::bind(&Replicator::onPropertyChanged, this, instance, _1),
-				0
+				instance.get(), boost::bind(&Replicator::onPropertyChanged, this, instance, _1), 0
 			);
 		}
 		return oldData;
@@ -1610,8 +1605,9 @@ void Replicator::readInstanceNew(RakNet::BitStream& inBitstream)
 		deserializeId(inBitstream, id);
 	}
 	else {
-		data.changed = Instance::event_propertyChanged
-						   .connect(instance.get(), boost::bind(&Replicator::onPropertyChanged, this, instance, _1), 0);
+		data.changed = Instance::event_propertyChanged.connect(
+			instance.get(), boost::bind(&Replicator::onPropertyChanged, this, instance, _1), 0
+		);
 
 		Reflection::Property property(Instance::propParent, instance.get());
 		deserializeValue(inBitstream, property);
@@ -1701,11 +1697,7 @@ void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitst
 				serializeValue(property, false, outBitstream);
 				if (NetworkSettings::singleton().printInstances && NetworkSettings::singleton().printProperties) {
 					StandardOut::singleton()->print(
-						MESSAGE_INFO,
-						"   %s %s, %d bit",
-						descriptor.type.name.c_str(),
-						descriptor.name.c_str(),
-						1
+						MESSAGE_INFO, "   %s %s, %d bit", descriptor.type.name.c_str(), descriptor.name.c_str(), 1
 					);
 				}
 			}
@@ -1713,10 +1705,7 @@ void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitst
 				outBitstream << true;
 				if (NetworkSettings::singleton().printInstances && NetworkSettings::singleton().printProperties) {
 					StandardOut::singleton()->print(
-						MESSAGE_INFO,
-						"   %s %s, 1 bit (default)",
-						descriptor.type.name.c_str(),
-						descriptor.name.c_str()
+						MESSAGE_INFO, "   %s %s, 1 bit (default)", descriptor.type.name.c_str(), descriptor.name.c_str()
 					);
 				}
 			}
@@ -1834,8 +1823,9 @@ PluginReceiveResult Replicator::OnReceive(RakPeerInterface* peer, Packet* packet
 				return OnReceive_ID_TIMESTAMP(packet);
 
 			case ID_CONNECTION_LOST:
-				StandardOut::singleton()
-					->print(MESSAGE_WARNING, "Lost connection to %s\n", packet->systemAddress.ToString());
+				StandardOut::singleton()->print(
+					MESSAGE_WARNING, "Lost connection to %s\n", packet->systemAddress.ToString()
+				);
 				event_Disconnection.fire(this, packet->systemAddress.ToString(), true);
 				disconnected = true;
 				break;
@@ -1888,8 +1878,9 @@ PluginReceiveResult Replicator::OnReceive(RakPeerInterface* peer, Packet* packet
 		}
 		catch (std::exception& e) {
 			disconnected = true;
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Replicator::OnReceive packet %d: %s", packet->data[0], e.what());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Replicator::OnReceive packet %d: %s", packet->data[0], e.what()
+			);
 			return RR_STOP_PROCESSING_AND_DEALLOCATE;
 		}
 	}
@@ -1940,8 +1931,9 @@ boost::shared_ptr<Reflection::DescribedBase> Replicator::sendMarker()
 	bitStream << (int) marker->id();
 
 	if (NetworkSettings::singleton().printInstances) {
-		StandardOut::singleton()
-			->print(MESSAGE_INFO, "Replicator: Requesting Marker %d of %s", marker->id(), remotePlayerId.ToString());
+		StandardOut::singleton()->print(
+			MESSAGE_INFO, "Replicator: Requesting Marker %d of %s", marker->id(), remotePlayerId.ToString()
+		);
 	}
 
 	incomingMarkers.push(marker);

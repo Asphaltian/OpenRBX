@@ -70,10 +70,7 @@ bool Joint::canBuildJointLoose(Primitive* p0, Primitive* p1, NormalId nId0, Norm
 
 // FUNCTION: WEBSERVICE 0x1011e9a0
 Joint::Joint(
-	Primitive* prim0,
-	Primitive* prim1,
-	const CoordinateFrame& _jointCoord0,
-	const CoordinateFrame& _jointCoord1
+	Primitive* prim0, Primitive* prim1, const CoordinateFrame& _jointCoord0, const CoordinateFrame& _jointCoord1
 )
 	: Edge(prim0, prim1), jointOwner(NULL), active(false)
 {

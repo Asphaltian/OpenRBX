@@ -91,10 +91,7 @@ float RotateJoint::getChannelValue(int uiStepId)
 
 // FUNCTION: WEBSERVICE 0x1011f030
 RotatePJoint::RotatePJoint(
-	Primitive* axlePrim,
-	Primitive* holePrim,
-	const CoordinateFrame& c0,
-	const CoordinateFrame& c1
+	Primitive* axlePrim, Primitive* holePrim, const CoordinateFrame& c0, const CoordinateFrame& c1
 )
 	: RotateJoint(axlePrim, holePrim, c0, c1)
 {
@@ -102,10 +99,7 @@ RotatePJoint::RotatePJoint(
 
 // FUNCTION: WEBSERVICE 0x1011f070
 RotateVJoint::RotateVJoint(
-	Primitive* axlePrim,
-	Primitive* holePrim,
-	const CoordinateFrame& c0,
-	const CoordinateFrame& c1
+	Primitive* axlePrim, Primitive* holePrim, const CoordinateFrame& c0, const CoordinateFrame& c1
 )
 	: RotateJoint(axlePrim, holePrim, c0, c1)
 {

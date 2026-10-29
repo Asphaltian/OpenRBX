@@ -240,14 +240,10 @@ void meshFace(
 static void appendTriangles(RBX::Render::Mesh::Level& level, int a, int b, int c, int d)
 {
 	level.indexArray.append(
-		RBX::Render::Mesh::allocVertex(a, 1),
-		RBX::Render::Mesh::allocVertex(b, 1),
-		RBX::Render::Mesh::allocVertex(c, 1)
+		RBX::Render::Mesh::allocVertex(a, 1), RBX::Render::Mesh::allocVertex(b, 1), RBX::Render::Mesh::allocVertex(c, 1)
 	);
 	level.indexArray.append(
-		RBX::Render::Mesh::allocVertex(a, 1),
-		RBX::Render::Mesh::allocVertex(c, 1),
-		RBX::Render::Mesh::allocVertex(d, 1)
+		RBX::Render::Mesh::allocVertex(a, 1), RBX::Render::Mesh::allocVertex(c, 1), RBX::Render::Mesh::allocVertex(d, 1)
 	);
 }
 
@@ -280,52 +276,28 @@ BrickMesh::BrickMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, 
 								G3D::Vector3(widthInset + bevel, bevel, widthInset + bevel);
 
 		unsigned int xyz = allocVertex(
-			G3D::Vector3(-halfSize.x, -halfSize.y, -halfSize.z),
-			G3D::Vector3::zero(),
-			G3D::Vector2::zero(),
-			true
+			G3D::Vector3(-halfSize.x, -halfSize.y, -halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
 		);
 		unsigned int xyZ = allocVertex(
-			G3D::Vector3(-halfSize.x, -halfSize.y, halfSize.z),
-			G3D::Vector3::zero(),
-			G3D::Vector2::zero(),
-			true
+			G3D::Vector3(-halfSize.x, -halfSize.y, halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
 		);
 		unsigned int xYz = allocVertex(
-			G3D::Vector3(-halfSize.x, halfSize.y, -halfSize.z),
-			G3D::Vector3::zero(),
-			G3D::Vector2::zero(),
-			true
+			G3D::Vector3(-halfSize.x, halfSize.y, -halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
 		);
 		unsigned int xYZ = allocVertex(
-			G3D::Vector3(-halfSize.x, halfSize.y, halfSize.z),
-			G3D::Vector3::zero(),
-			G3D::Vector2::zero(),
-			true
+			G3D::Vector3(-halfSize.x, halfSize.y, halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
 		);
 		unsigned int Xyz = allocVertex(
-			G3D::Vector3(halfSize.x, -halfSize.y, -halfSize.z),
-			G3D::Vector3::zero(),
-			G3D::Vector2::zero(),
-			true
+			G3D::Vector3(halfSize.x, -halfSize.y, -halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
 		);
 		unsigned int XyZ = allocVertex(
-			G3D::Vector3(halfSize.x, -halfSize.y, halfSize.z),
-			G3D::Vector3::zero(),
-			G3D::Vector2::zero(),
-			true
+			G3D::Vector3(halfSize.x, -halfSize.y, halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
 		);
 		unsigned int XYz = allocVertex(
-			G3D::Vector3(halfSize.x, halfSize.y, -halfSize.z),
-			G3D::Vector3::zero(),
-			G3D::Vector2::zero(),
-			true
+			G3D::Vector3(halfSize.x, halfSize.y, -halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
 		);
 		unsigned int XYZ = allocVertex(
-			G3D::Vector3(halfSize.x, halfSize.y, halfSize.z),
-			G3D::Vector3::zero(),
-			G3D::Vector2::zero(),
-			true
+			G3D::Vector3(halfSize.x, halfSize.y, halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
 		);
 
 		appendTriangles(*shadowLevel, XYZ, XyZ, Xyz, XYz);
@@ -356,9 +328,7 @@ void BrickMesh::flushCache()
 
 // FUNCTION: WEBSERVICE 0x1017aaa0
 G3D::ReferenceCountedPointer<Render::Mesh> BrickMesh::create(
-	const G3D::Vector3& size,
-	RenderSurfaceTypes surfaceTypes,
-	BrickColor color
+	const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color
 )
 {
 	Lookup lookup = {size, surfaceTypes, color};

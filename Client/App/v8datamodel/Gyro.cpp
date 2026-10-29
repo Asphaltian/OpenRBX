@@ -24,91 +24,77 @@ char sBodyForce[] = "BodyForce";
 char sBodyGyro[] = "BodyGyro";
 
 Reflection::RefPropDescriptor<Rocket, PartInstance> Rocket::prop_Target(
-	"Target",
-	"Goals",
-	&RBX::Rocket::getTarget,
-	&RBX::Rocket::setTarget
+	"Target", "Goals", &Rocket::getTarget, &Rocket::setTarget
 );
+
 Reflection::BoundProp<G3D::Vector3, 1> Rocket::prop_targetOffset(
-	"TargetOffset",
-	"Goals",
-	&RBX::Rocket::targetOffset,
-	&RBX::Rocket::onGoalChanged
+	"TargetOffset", "Goals", &Rocket::targetOffset, &Rocket::onGoalChanged
 );
+
 Reflection::BoundProp<float, 1> Rocket::prop_targetRadius(
-	"TargetRadius",
-	"Goals",
-	&RBX::Rocket::targetRadius,
-	&RBX::Rocket::onGoalChanged
+	"TargetRadius", "Goals", &Rocket::targetRadius, &Rocket::onGoalChanged
 );
-Reflection::BoundProp<float, 1> Rocket::prop_MaxSpeed("MaxSpeed", "Thrust", &RBX::Rocket::maxSpeed);
-Reflection::BoundProp<float, 1> Rocket::prop_MaxThrust("MaxThrust", "Thrust", &RBX::Rocket::maxThrust);
-Reflection::BoundProp<float, 1> Rocket::prop_ThrustP("ThrustP", "Thrust", &RBX::Rocket::kThrustP);
-Reflection::BoundProp<float, 1> Rocket::prop_ThrustD("ThrustD", "Thrust", &RBX::Rocket::kThrustD);
-Reflection::BoundProp<float, 1> Rocket::prop_TurnP("TurnP", "Turn", &RBX::Rocket::kTurnP);
-Reflection::BoundProp<float, 1> Rocket::prop_TurnD("TurnD", "Turn", &RBX::Rocket::kTurnD);
-Reflection::BoundProp<G3D::Vector3, 1> Rocket::prop_MaxTorque("MaxTorque", "Turn", &RBX::Rocket::maxTorque);
-Reflection::BoundProp<float, 1> Rocket::prop_CartoonFactor("CartoonFactor", "Goals", &RBX::Rocket::cartoonFactor);
+
+Reflection::BoundProp<float, 1> Rocket::prop_MaxSpeed("MaxSpeed", "Thrust", &Rocket::maxSpeed);
+Reflection::BoundProp<float, 1> Rocket::prop_MaxThrust("MaxThrust", "Thrust", &Rocket::maxThrust);
+Reflection::BoundProp<float, 1> Rocket::prop_ThrustP("ThrustP", "Thrust", &Rocket::kThrustP);
+Reflection::BoundProp<float, 1> Rocket::prop_ThrustD("ThrustD", "Thrust", &Rocket::kThrustD);
+Reflection::BoundProp<float, 1> Rocket::prop_TurnP("TurnP", "Turn", &Rocket::kTurnP);
+Reflection::BoundProp<float, 1> Rocket::prop_TurnD("TurnD", "Turn", &Rocket::kTurnD);
+Reflection::BoundProp<G3D::Vector3, 1> Rocket::prop_MaxTorque("MaxTorque", "Turn", &Rocket::maxTorque);
+Reflection::BoundProp<float, 1> Rocket::prop_CartoonFactor("CartoonFactor", "Goals", &Rocket::cartoonFactor);
 Reflection::BoundFuncDesc<Rocket, void(), 0> Rocket::func_Fire(
-	&RBX::Rocket::fire,
-	"Fire",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Rocket::fire, "Fire", Reflection::FunctionDescriptor::AnyCaller
 );
+
 Reflection::BoundFuncDesc<Rocket, void(), 0> Rocket::func_Abort(
-	&RBX::Rocket::abort,
-	"Abort",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Rocket::abort, "Abort", Reflection::FunctionDescriptor::AnyCaller
 );
+
 Reflection::SignalDesc<Rocket, void()> Rocket::event_ReachedTarget("ReachedTarget");
 
-Reflection::BoundProp<float, 1> BodyGyro::prop_kP("P", "Goals", &RBX::BodyGyro::kP);
-Reflection::BoundProp<float, 1> BodyGyro::prop_kD("D", "Goals", &RBX::BodyGyro::kD);
-Reflection::BoundProp<G3D::Vector3, 1> BodyGyro::prop_maxTorque("maxTorque", "Goals", &RBX::BodyGyro::maxTorque);
-Reflection::BoundProp<G3D::CoordinateFrame, 1> BodyGyro::prop_cframe("cframe", "Goals", &RBX::BodyGyro::cframe);
+Reflection::BoundProp<float, 1> BodyGyro::prop_kP("P", "Goals", &BodyGyro::kP);
+Reflection::BoundProp<float, 1> BodyGyro::prop_kD("D", "Goals", &BodyGyro::kD);
+Reflection::BoundProp<G3D::Vector3, 1> BodyGyro::prop_maxTorque("maxTorque", "Goals", &BodyGyro::maxTorque);
+Reflection::BoundProp<G3D::CoordinateFrame, 1> BodyGyro::prop_cframe("cframe", "Goals", &BodyGyro::cframe);
 
-Reflection::BoundProp<float, 1> BodyPosition::prop_kP("P", "Goals", &RBX::BodyPosition::kP);
-Reflection::BoundProp<float, 1> BodyPosition::prop_kD("D", "Goals", &RBX::BodyPosition::kD);
-Reflection::BoundProp<G3D::Vector3, 1> BodyPosition::prop_maxForce("maxForce", "Goals", &RBX::BodyPosition::maxForce);
-Reflection::BoundProp<G3D::Vector3, 1> BodyPosition::prop_position("position", "Goals", &RBX::BodyPosition::position);
+Reflection::BoundProp<float, 1> BodyPosition::prop_kP("P", "Goals", &BodyPosition::kP);
+Reflection::BoundProp<float, 1> BodyPosition::prop_kD("D", "Goals", &BodyPosition::kD);
+Reflection::BoundProp<G3D::Vector3, 1> BodyPosition::prop_maxForce("maxForce", "Goals", &BodyPosition::maxForce);
+Reflection::BoundProp<G3D::Vector3, 1> BodyPosition::prop_position("position", "Goals", &BodyPosition::position);
 
 } // namespace RBX
 
 RBX::Reflection::BoundFuncDesc<RBX::BodyPosition, G3D::Vector3(), 0> func_getLastForceOld(
-	&RBX::BodyPosition::getLastForce,
-	"lastForce",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::BodyPosition::getLastForce, "lastForce", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
 RBX::Reflection::BoundFuncDesc<RBX::BodyPosition, G3D::Vector3(), 0> func_getLastForce(
-	&RBX::BodyPosition::getLastForce,
-	"GetLastForce",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::BodyPosition::getLastForce, "GetLastForce", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
 
 namespace RBX {
 
-Reflection::BoundProp<float, 1> BodyVelocity::prop_kP("P", "Goals", &RBX::BodyVelocity::kP);
-Reflection::BoundProp<G3D::Vector3, 1> BodyVelocity::prop_maxForce("maxForce", "Goals", &RBX::BodyVelocity::maxForce);
-Reflection::BoundProp<G3D::Vector3, 1> BodyVelocity::prop_velocity("velocity", "Goals", &RBX::BodyVelocity::velocity);
+Reflection::BoundProp<float, 1> BodyVelocity::prop_kP("P", "Goals", &BodyVelocity::kP);
+Reflection::BoundProp<G3D::Vector3, 1> BodyVelocity::prop_maxForce("maxForce", "Goals", &BodyVelocity::maxForce);
+Reflection::BoundProp<G3D::Vector3, 1> BodyVelocity::prop_velocity("velocity", "Goals", &BodyVelocity::velocity);
 
 } // namespace RBX
 
 RBX::Reflection::BoundFuncDesc<RBX::BodyVelocity, G3D::Vector3(), 0> func_getLastForceVOld(
-	&RBX::BodyVelocity::getLastForce,
-	"lastForce",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::BodyVelocity::getLastForce, "lastForce", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
 RBX::Reflection::BoundFuncDesc<RBX::BodyVelocity, G3D::Vector3(), 0> func_getLastForceV(
-	&RBX::BodyVelocity::getLastForce,
-	"GetLastForce",
-	RBX::Reflection::FunctionDescriptor::AnyCaller
+	&RBX::BodyVelocity::getLastForce, "GetLastForce", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
 
 namespace RBX {
 
-Reflection::BoundProp<G3D::Vector3, 1> BodyForce::prop_Force("force", "Goals", &RBX::BodyForce::force);
+Reflection::BoundProp<G3D::Vector3, 1> BodyForce::prop_Force("force", "Goals", &BodyForce::force);
 
-Reflection::BoundProp<G3D::Vector3, 1> BodyThrust::prop_force("force", "Goals", &RBX::BodyThrust::force);
-Reflection::BoundProp<G3D::Vector3, 1> BodyThrust::prop_location("location", "Goals", &RBX::BodyThrust::location);
+Reflection::BoundProp<G3D::Vector3, 1> BodyThrust::prop_force("force", "Goals", &BodyThrust::force);
+Reflection::BoundProp<G3D::Vector3, 1> BodyThrust::prop_location("location", "Goals", &BodyThrust::location);
 
 // FUNCTION: WEBSERVICE 0x100ea070 FOLDED
 bool BodyMover::askSetParent(const Instance* instance) const

@@ -41,26 +41,17 @@ bool Workspace::showHashGrid;
 static Reflection::
 	BoundFuncDesc<Workspace, boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >(ContentId), 1>
 		workspace_insertContent(
-			&Workspace::insertContent,
-			"InsertContent",
-			"url",
-			Reflection::FunctionDescriptor::NeedTrustedCaller
+			&Workspace::insertContent, "InsertContent", "url", Reflection::FunctionDescriptor::NeedTrustedCaller
 		);
 static Reflection::
 	BoundFuncDesc<Workspace, void(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >), 1>
 		workspace_makeJoints(
-			&Workspace::makeJoints,
-			"MakeJoints",
-			"objects",
-			Reflection::FunctionDescriptor::NeedTrustedCaller
+			&Workspace::makeJoints, "MakeJoints", "objects", Reflection::FunctionDescriptor::NeedTrustedCaller
 		);
 static Reflection::
 	BoundFuncDesc<Workspace, void(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >), 1>
 		workspace_breakJoints(
-			&Workspace::breakJoints,
-			"BreakJoints",
-			"objects",
-			Reflection::FunctionDescriptor::NeedTrustedCaller
+			&Workspace::breakJoints, "BreakJoints", "objects", Reflection::FunctionDescriptor::NeedTrustedCaller
 		);
 static Reflection::BoundFuncDesc<Workspace, void(bool), 1> workspace_SetThrottleEnabled(
 	&Workspace::setThrottleEnabled,
@@ -70,16 +61,11 @@ static Reflection::BoundFuncDesc<Workspace, void(bool), 1> workspace_SetThrottle
 );
 
 static Reflection::BoundFuncDesc<Workspace, void(), 0> workspace_zoomToExtents(
-	&Workspace::zoomToExtents,
-	"ZoomToExtents",
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Workspace::zoomToExtents, "ZoomToExtents", Reflection::FunctionDescriptor::NeedTrustedCaller
 );
 
 static Reflection::RefPropDescriptor<Workspace, Camera> currentCameraProxyProp(
-	"CurrentCamera",
-	"Data",
-	&Workspace::getCamera,
-	&Workspace::setCamera
+	"CurrentCamera", "Data", &Workspace::getCamera, &Workspace::setCamera
 );
 
 // FUNCTION: WEBSERVICE 0x1006a0c0
@@ -565,10 +551,7 @@ void Workspace::setImageServerView(const G3D::Rect2D& viewPortRect)
 
 // FUNCTION: WEBSERVICE 0x1006eeb0
 void Workspace::insertContent(
-	ContentId contentId,
-	std::vector<boost::shared_ptr<Instance> >& items,
-	InsertMode insertMode,
-	PromptMode promptMode
+	ContentId contentId, std::vector<boost::shared_ptr<Instance> >& items, InsertMode insertMode, PromptMode promptMode
 )
 {
 	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
@@ -643,10 +626,7 @@ void Workspace::render3dAdorn(Adorn* adorn)
 	if (showWorldCoord) {
 		adorn->setObjectToWorldMatrix(CoordinateFrame());
 		adorn->axes(
-			G3D::Color4(G3D::Color3::red()),
-			G3D::Color4(G3D::Color3::green()),
-			G3D::Color4(G3D::Color3::blue()),
-			50.0f
+			G3D::Color4(G3D::Color3::red()), G3D::Color4(G3D::Color3::green()), G3D::Color4(G3D::Color3::blue()), 50.0f
 		);
 	}
 
@@ -722,16 +702,13 @@ WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* 
 
 	Stats::Item* contacts = createChildItem("Contacts");
 	contacts->createChildItem<int>(
-		"CtctStageCtcts",
-		boost::bind(&World::getMetric, world, IWorldStage::NUM_CONTACTSTAGE_CONTACTS)
+		"CtctStageCtcts", boost::bind(&World::getMetric, world, IWorldStage::NUM_CONTACTSTAGE_CONTACTS)
 	);
 	contacts->createChildItem<int>(
-		"SteppingCtcts",
-		boost::bind(&World::getMetric, world, IWorldStage::NUM_STEPPING_CONTACTS)
+		"SteppingCtcts", boost::bind(&World::getMetric, world, IWorldStage::NUM_STEPPING_CONTACTS)
 	);
 	contacts->createChildItem<int>(
-		"TouchingCtcts",
-		boost::bind(&World::getMetric, world, IWorldStage::NUM_TOUCHING_CONTACTS)
+		"TouchingCtcts", boost::bind(&World::getMetric, world, IWorldStage::NUM_TOUCHING_CONTACTS)
 	);
 	contacts->createChildItem<int>("MaxTreeDepth", boost::bind(&World::getMetric, world, IWorldStage::MAX_TREE_DEPTH));
 	contacts->createChildItem<int>("# link(p)", boost::bind(&World::getNumLinkCalls, world));

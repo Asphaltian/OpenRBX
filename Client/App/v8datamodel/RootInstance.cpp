@@ -54,9 +54,7 @@ void RootInstance::moveSafe(MegaDragger& megaDragger, G3D::Vector3 move, MoveTyp
 
 // FUNCTION: WEBSERVICE 0x100c0df0
 void RootInstance::moveSafe(
-	std::vector<boost::weak_ptr<PartInstance> >& partArray,
-	G3D::Vector3 move,
-	MoveType moveType
+	std::vector<boost::weak_ptr<PartInstance> >& partArray, G3D::Vector3 move, MoveType moveType
 )
 {
 	MegaDragger megaDragger(NULL, partArray, this);
@@ -216,8 +214,7 @@ void RootInstance::insertToTree(const std::vector<boost::shared_ptr<Instance> >&
 
 // FUNCTION: WEBSERVICE 0x100c1960
 void RootInstance::insertCharacterView(
-	const std::vector<boost::shared_ptr<Instance> >& instances,
-	std::vector<boost::weak_ptr<PartInstance> >& partArray
+	const std::vector<boost::shared_ptr<Instance> >& instances, std::vector<boost::weak_ptr<PartInstance> >& partArray
 )
 {
 	if (instances.size() == 1) {
@@ -352,9 +349,7 @@ void RootInstance::insertInstances(
 		if (requestedParent) {
 			if (!contains(requestedParent)) {
 				std::for_each(
-					remaining.begin(),
-					remaining.end(),
-					boost::bind(&Instance::setParent, _1, requestedParent)
+					remaining.begin(), remaining.end(), boost::bind(&Instance::setParent, _1, requestedParent)
 				);
 			}
 		}

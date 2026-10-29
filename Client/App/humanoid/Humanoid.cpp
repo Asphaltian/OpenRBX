@@ -36,112 +36,61 @@ char sHumanoid[] = "Humanoid";
 using namespace Reflection;
 
 static RefPropDescriptor<Humanoid, PartInstance> propTorso(
-	"Torso",
-	"Data",
-	&RBX::Humanoid::getTorso,
-	&RBX::Humanoid::setTorso,
-	Reflection::PropertyDescriptor::UI
+	"Torso", "Data", &Humanoid::getTorso, &Humanoid::setTorso, PropertyDescriptor::UI
 );
 
 static RefPropDescriptor<Humanoid, PartInstance> propLeftLeg(
-	"LeftLeg",
-	"Data",
-	&RBX::Humanoid::getLeftLeg,
-	&RBX::Humanoid::setLeftLeg,
-	Reflection::PropertyDescriptor::UI
+	"LeftLeg", "Data", &Humanoid::getLeftLeg, &Humanoid::setLeftLeg, PropertyDescriptor::UI
 );
 
 static RefPropDescriptor<Humanoid, PartInstance> propRightLeg(
-	"RightLeg",
-	"Data",
-	&RBX::Humanoid::getRightLeg,
-	&RBX::Humanoid::setRightLeg,
-	Reflection::PropertyDescriptor::UI
+	"RightLeg", "Data", &Humanoid::getRightLeg, &Humanoid::setRightLeg, PropertyDescriptor::UI
 );
 
 static RefPropDescriptor<Humanoid, PartInstance> propWalkToPart(
-	"WalkToPart",
-	"Control",
-	&RBX::Humanoid::getWalkToPart,
-	&RBX::Humanoid::setWalkToPart,
-	Reflection::PropertyDescriptor::STREAMING
+	"WalkToPart", "Control", &Humanoid::getWalkToPart, &Humanoid::setWalkToPart, PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<Humanoid, G3D::Vector3> propWalkToPoint(
-	"WalkToPoint",
-	"Control",
-	&RBX::Humanoid::getWalkToPoint,
-	&RBX::Humanoid::setWalkToPoint,
-	Reflection::PropertyDescriptor::STREAMING
+	"WalkToPoint", "Control", &Humanoid::getWalkToPoint, &Humanoid::setWalkToPoint, PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<Humanoid, G3D::Vector3> propWalkDirection(
-	"WalkDirection",
-	"Control",
-	&RBX::Humanoid::getWalkDirection,
-	&RBX::Humanoid::setWalkDirection,
-	Reflection::PropertyDescriptor::STREAMING
+	"WalkDirection", "Control", &Humanoid::getWalkDirection, &Humanoid::setWalkDirection, PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<Humanoid, float> propWalkRotationalVelocity(
 	"WalkRotationalVelocity",
 	"Control",
-	&RBX::Humanoid::getWalkRotationalVelocity,
-	&RBX::Humanoid::setWalkRotationalVelocity,
-	Reflection::PropertyDescriptor::STREAMING
+	&Humanoid::getWalkRotationalVelocity,
+	&Humanoid::setWalkRotationalVelocity,
+	PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<Humanoid, bool> propJump(
-	"Jump",
-	"Control",
-	&RBX::Humanoid::getJump,
-	&RBX::Humanoid::setJump,
-	Reflection::PropertyDescriptor::STREAMING
+	"Jump", "Control", &Humanoid::getJump, &Humanoid::setJump, PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<Humanoid, G3D::Vector3> propTargetPoint(
-	"TargetPoint",
-	"Control",
-	&RBX::Humanoid::getTargetPoint,
-	&RBX::Humanoid::setTargetPoint,
-	Reflection::PropertyDescriptor::STREAMING
+	"TargetPoint", "Control", &Humanoid::getTargetPoint, &Humanoid::setTargetPoint, PropertyDescriptor::STREAMING
 );
 
 static PropDescriptor<Humanoid, bool> propSit(
-	"Sit",
-	"Control",
-	&RBX::Humanoid::getSit,
-	&RBX::Humanoid::setSit,
-	Reflection::PropertyDescriptor::STREAMING
+	"Sit", "Control", &Humanoid::getSit, &Humanoid::setSit, PropertyDescriptor::STREAMING
 );
 
-static PropDescriptor<Humanoid, float> propHealth(
-	"Health",
-	"Game",
-	&RBX::Humanoid::getHealth,
-	&RBX::Humanoid::setHealth
-);
+static PropDescriptor<Humanoid, float> propHealth("Health", "Game", &Humanoid::getHealth, &Humanoid::setHealth);
 
 static PropDescriptor<Humanoid, float> propMaxHealth(
-	"MaxHealth",
-	"Game",
-	&RBX::Humanoid::getMaxHealth,
-	&RBX::Humanoid::setMaxHealth
+	"MaxHealth", "Game", &Humanoid::getMaxHealth, &Humanoid::setMaxHealth
 );
 
 static BoundFuncDesc<Humanoid, void(float), 1> func_TakeDamage(
-	&RBX::Humanoid::takeDamage,
-	"TakeDamage",
-	"amount",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Humanoid::takeDamage, "TakeDamage", "amount", FunctionDescriptor::AnyCaller
 );
 
 static BoundFuncDesc<Humanoid, void(G3D::Vector3, boost::shared_ptr<Instance>), 2> func_MoveTo(
-	&RBX::Humanoid::moveTo2,
-	"MoveTo",
-	"location",
-	"part",
-	Reflection::FunctionDescriptor::AnyCaller
+	&Humanoid::moveTo2, "MoveTo", "location", "part", FunctionDescriptor::AnyCaller
 );
 
 SignalDesc<Humanoid, void()> Humanoid::event_Died("Died");
@@ -183,12 +132,7 @@ G3D::CoordinateFrame Humanoid::getTopOfHead() const
 void Humanoid::renderWaypoint(Adorn* adorn, const G3D::Vector3& waypoint)
 {
 	DrawAdorn::cylinder(
-		adorn,
-		G3D::CoordinateFrame(G3D::Matrix3::identity(), waypoint),
-		1,
-		0.2f,
-		1.0f,
-		G3D::Color3::green()
+		adorn, G3D::CoordinateFrame(G3D::Matrix3::identity(), waypoint), 1, 0.2f, 1.0f, G3D::Color3::green()
 	);
 }
 
@@ -612,8 +556,7 @@ G3D::Vector3 Humanoid::updateWalkDirection()
 
 // FUNCTION: WEBSERVICE 0x100a3110
 static void collectAllDescendantCharacterPrims(
-	boost::shared_ptr<Instance> descendent,
-	std::vector<Primitive*>& primitives
+	boost::shared_ptr<Instance> descendent, std::vector<Primitive*>& primitives
 )
 {
 	PartInstance* part = dynamic_cast<PartInstance*>(descendent.get());
@@ -775,9 +718,7 @@ void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
 	if (ModelInstance* character = getCharacterFromHumanoid(this)) {
 		character->visitDescendents(
 			boost::bind(
-				&collectAllDescendantCharacterPrims,
-				_1,
-				boost::ref(reinterpret_cast<std::vector<Primitive*>&>(ignore))
+				&collectAllDescendantCharacterPrims, _1, boost::ref(reinterpret_cast<std::vector<Primitive*>&>(ignore))
 			)
 		);
 	}

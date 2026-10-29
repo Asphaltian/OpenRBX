@@ -27,23 +27,18 @@ static Reflection::BoundFuncDesc<Client, void(std::string, int, int, int), 4> f_
 	30,
 	Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 static Reflection::BoundFuncDesc<Client, void(int), 1> f_disconnect(
-	&Client::disconnect,
-	"Disconnect",
-	"blockDuration",
-	3000,
-	Reflection::FunctionDescriptor::NeedTrustedCaller
+	&Client::disconnect, "Disconnect", "blockDuration", 3000, Reflection::FunctionDescriptor::NeedTrustedCaller
 );
+
 Reflection::SignalDesc<Client, void(std::string, boost::shared_ptr<Instance>)> Client::event_ConnectionAccepted(
-	"ConnectionAccepted",
-	"peer",
-	"replicator"
+	"ConnectionAccepted", "peer", "replicator"
 );
+
 Reflection::SignalDesc<Client, void(std::string)> Client::event_ConnectionRejected("ConnectionRejected", "peer");
 Reflection::SignalDesc<Client, void(std::string, int)> Client::event_ConnectionFailed(
-	"ConnectionFailed",
-	"peer",
-	"code"
+	"ConnectionFailed", "peer", "code"
 );
 
 // FUNCTION: WEBSERVICE 0x101969f0
@@ -170,8 +165,9 @@ PluginReceiveResult Client::OnReceive(RakPeerInterface* peer, Packet* packet)
 			event_ConnectionAccepted.fire(this, systemAddress.ToString(), proxy);
 		}
 		catch (std::exception& e) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Client::OnReceive packet %d: %s", packet->data[0], e.what());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Client::OnReceive packet %d: %s", packet->data[0], e.what()
+			);
 		}
 		break;
 
@@ -189,8 +185,9 @@ PluginReceiveResult Client::OnReceive(RakPeerInterface* peer, Packet* packet)
 			event_ConnectionFailed.fire(this, systemAddress.ToString(), packet->data[0]);
 		}
 		catch (std::exception& e) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Client::OnReceive packet %d: %s", packet->data[0], e.what());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Client::OnReceive packet %d: %s", packet->data[0], e.what()
+			);
 		}
 		break;
 
@@ -202,8 +199,9 @@ PluginReceiveResult Client::OnReceive(RakPeerInterface* peer, Packet* packet)
 			event_ConnectionRejected.fire(this, systemAddress.ToString());
 		}
 		catch (std::exception& e) {
-			StandardOut::singleton()
-				->print(MESSAGE_ERROR, "Client::OnReceive packet %d: %s", packet->data[0], e.what());
+			StandardOut::singleton()->print(
+				MESSAGE_ERROR, "Client::OnReceive packet %d: %s", packet->data[0], e.what()
+			);
 		}
 		break;
 

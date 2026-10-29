@@ -41,9 +41,7 @@ void LevelBuilder::build(Purpose purpose)
 
 // FUNCTION: WEBSERVICE 0x1018af40
 LevelBuilder::LevelBuilder(
-	G3D::ReferenceCountedPointer<Render::Mesh::Level>& level,
-	G3D::Vector3 size,
-	RenderSurfaceTypes surfaceTypes
+	G3D::ReferenceCountedPointer<Render::Mesh::Level>& level, G3D::Vector3 size, RenderSurfaceTypes surfaceTypes
 )
 	: halfSize(size * 0.5f), surfaceTypes(surfaceTypes), level(level), textureScale(2.0f, 2.0f)
 {
@@ -62,8 +60,9 @@ void LevelBuilder::appendQuadFromVertexIndices(unsigned int a, unsigned int b, u
 		);
 		break;
 	case G3D::RenderDevice::TRIANGLES:
-		level->indexArray
-			.append(Render::Mesh::allocVertex(a, 1), Render::Mesh::allocVertex(b, 1), Render::Mesh::allocVertex(c, 1));
+		level->indexArray.append(
+			Render::Mesh::allocVertex(a, 1), Render::Mesh::allocVertex(b, 1), Render::Mesh::allocVertex(c, 1)
+		);
 		break;
 	}
 }
@@ -81,10 +80,12 @@ void LevelBuilder::appendQuadFromVertexIndices(unsigned int a, unsigned int b, u
 		);
 		break;
 	case G3D::RenderDevice::TRIANGLES:
-		level->indexArray
-			.append(Render::Mesh::allocVertex(a, 1), Render::Mesh::allocVertex(b, 1), Render::Mesh::allocVertex(c, 1));
-		level->indexArray
-			.append(Render::Mesh::allocVertex(c, 1), Render::Mesh::allocVertex(d, 1), Render::Mesh::allocVertex(a, 1));
+		level->indexArray.append(
+			Render::Mesh::allocVertex(a, 1), Render::Mesh::allocVertex(b, 1), Render::Mesh::allocVertex(c, 1)
+		);
+		level->indexArray.append(
+			Render::Mesh::allocVertex(c, 1), Render::Mesh::allocVertex(d, 1), Render::Mesh::allocVertex(a, 1)
+		);
 		break;
 	}
 }
