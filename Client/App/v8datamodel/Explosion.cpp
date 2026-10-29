@@ -58,11 +58,11 @@ void Explosion::doBlast(const G3D::Array<Primitive*>& primitives)
 
 				float radius = primitive->getRadius();
 				float area = radius * radius;
-				G3D::Vector3 force = normal * blastPressure * area * 0.00021929825f;
-				G3D::Vector3 impulse = force * Constants::kernelStepsPerSec();
+				G3D::Vector3 impulse = normal * blastPressure * area * 0.00021929825f;
+				G3D::Vector3 force = impulse * Constants::kernelStepsPerSec();
 				world->ticklePrimitive(primitive, false);
-				primitive->getBody()->accumulateForce(impulse, primitive->getCoordinateFrame().translation);
-				primitive->getBody()->accumulateTorque(impulse * 0.5f * radius);
+				primitive->getBody()->accumulateForce(force, primitive->getCoordinateFrame().translation);
+				primitive->getBody()->accumulateTorque(force * 0.5f * radius);
 				world->addedBodyForce();
 			}
 		}

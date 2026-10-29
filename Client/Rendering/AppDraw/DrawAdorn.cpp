@@ -34,11 +34,11 @@ void DrawAdorn::surfaceBorder(
 )
 {
 	int axis = surfaceId % 3;
-	int polarity = surfaceId < 3 ? 1 : -1;
+	int side = surfaceId < 3 ? 1 : -1;
 
-	float cZ = polarity * halfRealSize[axis];
+	float cZ = side * halfRealSize[axis];
 
-	int cY = (axis + 1) % 3;
+	int c2 = (axis + 1) % 3;
 
 	G3D::Vector3 p0;
 	G3D::Vector3 p1;
@@ -46,17 +46,17 @@ void DrawAdorn::surfaceBorder(
 	p0[axis] = cZ - highlight;
 	p1[axis] = cZ + highlight;
 
-	int cX = (axis + 2) % 3;
+	int c3 = (axis + 2) % 3;
 
 	for (int direction = 0; direction < 2; ++direction) {
-		int c2 = direction != 0 ? cY : cX;
-		int c3 = direction != 0 ? cX : cY;
+		int cY = direction != 0 ? c2 : c3;
+		int cX = direction != 0 ? c3 : c2;
 
-		for (int c = -1; c <= 1; c += 2) {
-			p0[c2] = c * halfRealSize[c2] - highlight;
-			p1[c2] = c * halfRealSize[c2] + highlight;
-			p0[c3] = -halfRealSize[c3] - highlight;
-			p1[c3] = halfRealSize[c3] + highlight;
+		for (int polarity = -1; polarity <= 1; polarity += 2) {
+			p0[cY] = polarity * halfRealSize[cY] - highlight;
+			p1[cY] = polarity * halfRealSize[cY] + highlight;
+			p0[cX] = -halfRealSize[cX] - highlight;
+			p1[cX] = halfRealSize[cX] + highlight;
 
 			adorn->box(G3D::AABox(p0, p1), color, G3D::Color4::clear());
 		}

@@ -356,11 +356,11 @@ public:
 	~JobSender() { close(); }
 
 	// FUNCTION: WEBSERVICE 0x1019bef0
-	void setPacketPriority(PacketPriority value)
+	void setPacketPriority(PacketPriority packetPriority)
 	{
-		if (packetPriority != value) {
+		if (this->packetPriority != packetPriority) {
 			closePacket();
-			packetPriority = value;
+			this->packetPriority = packetPriority;
 		}
 	}
 

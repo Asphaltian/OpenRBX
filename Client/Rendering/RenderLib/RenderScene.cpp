@@ -66,15 +66,15 @@ void RenderScene::transparentPass(G3D::RenderDevice* rd)
 	rd->setBlendFunc(G3D::RenderDevice::BLEND_SRC_ALPHA, G3D::RenderDevice::BLEND_ONE_MINUS_SRC_ALPHA);
 	rd->setDepthWrite(false);
 
-	for (int i = 0; i < transparentProxyArray.size(); i++) {
-		RenderSurface* p = transparentProxyArray[i];
-		const Material::Level* material = p->material;
+	for (int p = 0; p < transparentProxyArray.size(); p++) {
+		RenderSurface* proxy = transparentProxyArray[p];
+		const Material::Level* material = proxy->material;
 
-		rd->setObjectToWorldMatrix(p->cframe);
-		rd->setPolygonOffset(p->polygonOffset);
-		p->material->configureRenderDevice(rd);
+		rd->setObjectToWorldMatrix(proxy->cframe);
+		rd->setPolygonOffset(proxy->polygonOffset);
+		proxy->material->configureRenderDevice(rd);
 		rd->setColor(G3D::Color4(material->color(), 1.0f - material->transparent()));
-		Mesh::sendGeometry(p->mesh, rd);
+		Mesh::sendGeometry(proxy->mesh, rd);
 	}
 }
 
@@ -110,15 +110,15 @@ void RenderScene::reflectionPass(G3D::RenderDevice* rd)
 		rd->configureReflectionMap(1, lighting->environmentMap);
 		rd->setDepthWrite(false);
 
-		for (int i = 0; i < reflectProxyArray.size(); i++) {
-			RenderSurface* p = reflectProxyArray[i];
-			const Material::Level* material = p->material;
+		for (int p = 0; p < reflectProxyArray.size(); p++) {
+			RenderSurface* proxy = reflectProxyArray[p];
+			const Material::Level* material = proxy->material;
 
-			rd->setPolygonOffset(p->polygonOffset);
-			rd->setObjectToWorldMatrix(p->cframe);
+			rd->setPolygonOffset(proxy->polygonOffset);
+			rd->setObjectToWorldMatrix(proxy->cframe);
 			rd->setTexture(0, material->matte(rd));
 			rd->setColor(material->reflect() * G3D::Color3::white());
-			Mesh::sendGeometry(p->mesh, rd);
+			Mesh::sendGeometry(proxy->mesh, rd);
 		}
 
 		rd->popState();

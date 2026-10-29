@@ -78,16 +78,16 @@ bool SpatialHash::getNextGrid(Vector3int32& grid, const G3D::Ray& unitRay, float
 					if (abs(i) + abs(j) + abs(k) == nz) {
 						Vector3 offset((float) i, (float) j, (float) k);
 
-						Extents box = hashGridToRealExtents(gridF + offset);
+						Extents extents = hashGridToRealExtents(gridF + offset);
 
-						G3D::AABox aaBox(box.min(), box.max());
+						G3D::AABox box(extents.min(), extents.max());
 
 						Vector3 location;
 
 						if (G3D::CollisionDetection::collisionLocationForMovingPointFixedAABox(
 								unitRay.origin,
 								unitRay.direction,
-								aaBox,
+								box,
 								location
 							)) {
 							if ((location - unitRay.origin).squaredLength() < maxDistanceSquared) {

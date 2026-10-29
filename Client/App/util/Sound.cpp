@@ -769,9 +769,9 @@ boost::shared_ptr<Sound> SoundService::loadSound(SoundId id, bool is3D)
 		return iter->second;
 	}
 
-	boost::shared_ptr<Sound> sound(new Sound(system, id, is3D));
-	sounds[id] = sound;
-	return sound;
+	boost::shared_ptr<Sound> result(new Sound(system, id, is3D));
+	sounds[id] = result;
+	return result;
 }
 
 } // namespace Soundscape
