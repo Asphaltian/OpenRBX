@@ -333,14 +333,14 @@
 ** CHANGE it to undefined as soon as your programs use only '...' to
 ** access vararg parameters (instead of the old 'arg' table).
 */
-#define LUA_COMPAT_VARARG
+#undef LUA_COMPAT_VARARG
 
 /*
 @@ LUA_COMPAT_MOD controls compatibility with old math.mod function.
 ** CHANGE it to undefined as soon as your programs use 'math.fmod' or
 ** the new '%' operator instead of 'math.mod'.
 */
-#define LUA_COMPAT_MOD
+#undef LUA_COMPAT_MOD
 
 /*
 @@ LUA_COMPAT_LSTR controls compatibility with old long string nesting
@@ -348,14 +348,14 @@
 ** CHANGE it to 2 if you want the old behaviour, or undefine it to turn
 ** off the advisory error when nesting [[...]].
 */
-#define LUA_COMPAT_LSTR		1
+#undef LUA_COMPAT_LSTR
 
 /*
 @@ LUA_COMPAT_GFIND controls compatibility with old 'string.gfind' name.
 ** CHANGE it to undefined as soon as you rename 'string.gfind' to
 ** 'string.gmatch'.
 */
-#define LUA_COMPAT_GFIND
+#undef LUA_COMPAT_GFIND
 
 /*
 @@ LUA_COMPAT_OPENLIB controls compatibility with old 'luaL_openlib'
@@ -760,10 +760,10 @@ inline RobloxExtraSpace::RobloxExtraSpace(RobloxExtraSpace* parent) : yieldCaptu
 ** extra when a thread is created/deleted/resumed/yielded.
 */
 #define luai_userstateopen(L)		RobloxExtraSpace::construct(L, NULL)
-#define luai_userstateclose(L)		((void)L)
+#define luai_userstateclose(L)		RobloxExtraSpace::destroy(L)
 #define luai_userstatethread(L,L1)	RobloxExtraSpace::construct(L1, RobloxExtraSpace::get(L))
 #define luai_userstatefree(L)		RobloxExtraSpace::destroy(L)
-#define luai_userstateresume(L,n)	((void)L)
+#define luai_userstateresume(L,n)	(RobloxExtraSpace::get(L)->yieldCaptured = false)
 #define luai_userstateyield(L,n)	((void)L)
 
 
