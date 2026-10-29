@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 
+class ArchiveBinder;
 class XmlNameValuePair;
 
 namespace RBX {
@@ -17,7 +18,10 @@ class DescribedBase;
 // SIZE 0x04
 class __declspec(novtable) IIDREF
 {
-public:
+	friend class ::ArchiveBinder;
+	friend class MergeBinder;
+
+private:
 	virtual void assignIDREF(Reflection::DescribedBase* propertyOwner, const InstanceHandle& value) const = 0;
 	// vtable+0x00
 };

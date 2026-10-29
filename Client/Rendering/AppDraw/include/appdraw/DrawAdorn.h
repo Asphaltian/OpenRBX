@@ -14,7 +14,18 @@ class Part;
 
 class DrawAdorn
 {
+private:
+	static void surfaceBorder(
+		Adorn* adorn,
+		const G3D::Vector3& halfRealSize,
+		float highlight,
+		int surfaceId,
+		const G3D::Color4& color
+	);
+
 public:
+	static const G3D::Color3& resizeColor();
+
 	static void cylinder(
 		Adorn* adorn,
 		const G3D::CoordinateFrame& worldC,
@@ -25,15 +36,6 @@ public:
 	);
 
 	static void partSurface(const Part& part, int surfaceId, Adorn* adorn, const G3D::Color4& color);
-
-private:
-	static void surfaceBorder(
-		Adorn* adorn,
-		const G3D::Vector3& halfRealSize,
-		float highlight,
-		int surfaceId,
-		const G3D::Color4& color
-	);
 };
 
 } // namespace RBX
