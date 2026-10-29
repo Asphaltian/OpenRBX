@@ -26,18 +26,19 @@ private:
 
 public:
 	Face() {}
-	Face(const Vector3& c0, const Vector3& c1, const Vector3& c2, const Vector3& c3) : c0(c0), c1(c1), c2(c2), c3(c3) {}
 
 private:
+	Face(const Vector3& c0, const Vector3& c1, const Vector3& c2, const Vector3& c3) : c0(c0), c1(c1), c2(c2), c3(c3) {}
+
 	// STUB: WEBSERVICE 0x1010b320
 	Vector3 getAxis(int i) const { return i == 0 ? (c1 - c0).direction() : (c3 - c0).direction(); }
 
 	void minMax(const Vector3& point, const Vector3& normal, float& min, float& max) const;
 
-public:
 	Face operator*(const Vector3& scale) const;
 	Face operator*(float scale) const;
 
+public:
 	static Face fromExtentsSide(const Extents& e, NormalId faceId);
 
 	void snapToGrid(float grid);

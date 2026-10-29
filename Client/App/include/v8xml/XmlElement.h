@@ -243,7 +243,7 @@ public:
 	template <class T>
 	bool isValueType() const;
 
-protected:
+public:
 	XmlNameValuePair(const RBX::Name& tag) : tag(tag), valueType(NONE) {}
 
 private:

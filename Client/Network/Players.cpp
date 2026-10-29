@@ -25,9 +25,10 @@ class PluginInterfaceAdapter : public PluginInterface
 {
 	T* c; // 0x04
 
-public:
+protected:
 	PluginInterfaceAdapter(T* c) : c(c) {}
 
+public:
 	virtual PluginReceiveResult OnReceive(RakPeerInterface* peer, Packet* packet);
 };
 

@@ -85,13 +85,13 @@ static EnumPropDescriptor<Feature, Feature::InOut> prop_InOut(
 // FUNCTION: WEBSERVICE 0x100d7d70 FOLDED
 float VelocityMotor::getMaxVelocity() const
 {
-	return static_cast<MotorJoint*>(joint)->getMaxVelocity();
+	return static_cast<MotorJoint*>(joint)->maxVelocity;
 }
 
 // FUNCTION: WEBSERVICE 0x100d7d80 FOLDED
 float VelocityMotor::getDesiredAngle() const
 {
-	return static_cast<MotorJoint*>(joint)->getDesiredAngle();
+	return static_cast<MotorJoint*>(joint)->desiredAngle;
 }
 
 // FUNCTION: WEBSERVICE 0x100e42d0 FOLDED
@@ -348,8 +348,8 @@ void VelocityMotor::setHole(Hole* value)
 // FUNCTION: WEBSERVICE 0x100e7670
 void VelocityMotor::setMaxVelocity(float value)
 {
-	if (value != static_cast<MotorJoint*>(joint)->getMaxVelocity()) {
-		static_cast<MotorJoint*>(joint)->setMaxVelocity(value);
+	if (value != static_cast<MotorJoint*>(joint)->maxVelocity) {
+		static_cast<MotorJoint*>(joint)->maxVelocity = value;
 		raisePropertyChanged(prop_MaxVelocity);
 	}
 }
@@ -357,8 +357,8 @@ void VelocityMotor::setMaxVelocity(float value)
 // FUNCTION: WEBSERVICE 0x100e76b0
 void VelocityMotor::setDesiredAngle(float value)
 {
-	if (value != static_cast<MotorJoint*>(joint)->getDesiredAngle()) {
-		static_cast<MotorJoint*>(joint)->setDesiredAngle(value);
+	if (value != static_cast<MotorJoint*>(joint)->desiredAngle) {
+		static_cast<MotorJoint*>(joint)->desiredAngle = value;
 		raisePropertyChanged(prop_DesiredAngle);
 	}
 }

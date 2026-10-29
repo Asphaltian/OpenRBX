@@ -573,6 +573,8 @@ namespace RakNet
 			bool ReadCompressedDelta(bool &var);
 #endif
 	private:
+		BitStream( const BitStream &invalid );
+
 		/// Assume the input source points to a native type, compress and write it.
 		void WriteCompressed( const unsigned char* input,	const int size, const bool unsignedData );
 		

@@ -118,13 +118,13 @@ void JointInstance::render3dAdorn(Adorn* adorn)
 // FUNCTION: WEBSERVICE 0x100d7d70 FOLDED
 float Motor::getMaxVelocity() const
 {
-	return getMotorJoint()->getMaxVelocity();
+	return getMotorJoint()->maxVelocity;
 }
 
 // FUNCTION: WEBSERVICE 0x100d7d80 FOLDED
 float Motor::getDesiredAngle() const
 {
-	return getMotorJoint()->getDesiredAngle();
+	return getMotorJoint()->desiredAngle;
 }
 
 // FUNCTION: WEBSERVICE 0x100d7df0
@@ -235,8 +235,8 @@ void AutoJoint::setC1(const CoordinateFrame& value)
 // FUNCTION: WEBSERVICE 0x100d9020
 void Motor::setMaxVelocity(float value)
 {
-	if (value != getMotorJoint()->getMaxVelocity()) {
-		getMotorJoint()->setMaxVelocity(value);
+	if (value != getMotorJoint()->maxVelocity) {
+		getMotorJoint()->maxVelocity = value;
 		raisePropertyChanged(prop_MaxVelocity);
 	}
 }
@@ -244,8 +244,8 @@ void Motor::setMaxVelocity(float value)
 // FUNCTION: WEBSERVICE 0x100d9060
 void Motor::setDesiredAngle(float value)
 {
-	if (!Math::fuzzyEq(value, getMotorJoint()->getDesiredAngle(), 0.034906585f)) {
-		getMotorJoint()->setDesiredAngle(value);
+	if (!Math::fuzzyEq(value, getMotorJoint()->desiredAngle, 0.034906585f)) {
+		getMotorJoint()->desiredAngle = value;
 		raisePropertyChanged(prop_DesiredAngle);
 	}
 }

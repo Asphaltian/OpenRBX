@@ -33,13 +33,8 @@ public:
 	RevoluteLink* resetLink();
 
 	float getCurrentAngle() const { return currentAngle; }
-	float getMaxVelocity() const { return maxVelocity; }
 
 	void setCurrentAngle(float value);
-	void setMaxVelocity(float value) { maxVelocity = value; }
-
-	float getDesiredAngle() const { return desiredAngle; }
-	void setDesiredAngle(float value) { desiredAngle = value; }
 
 private:
 	RevoluteLink* link; // 0x88
