@@ -1,5 +1,7 @@
 # OpenRBX
 
+[Discord](https://discord.gg/2JcBQFxVPv) | [Contributing](/CONTRIBUTING.md)
+
 This is a decompilation of Roblox as it was released in December 2007. We're writing the source back until Visual C++ compiles it into the same binaries, instruction for instruction, and the end goal is a codebase we can build on.
 
 We follow the conventions and tooling of the [LEGO Racers decompilation](https://github.com/isledecomp/racers).
