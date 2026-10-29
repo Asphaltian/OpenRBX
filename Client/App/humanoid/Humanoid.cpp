@@ -703,7 +703,7 @@ void Humanoid::onServiceProvider(const ServiceProvider* oldProvider, const Servi
 	}
 }
 
-// STUB: WEBSERVICE 0x100a4690
+// FUNCTION: WEBSERVICE 0x100a4690
 void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
 {
 	if (getHead()) {
@@ -738,12 +738,8 @@ void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
 
 			float width = fontSize * 4;
 			float height = fontSize / 2;
-			Rect fullRect(
-				screenLoc.x - 0.5f * width,
-				screenLoc.y,
-				screenLoc.x - 0.5f * width + width,
-				screenLoc.y + height
-			);
+			G3D::Vector2 low(screenLoc.x - 0.5f * width, screenLoc.y);
+			Rect fullRect = Rect::fromLowSize(low, G3D::Vector2(width, height));
 			float mid = fullRect.low.x + (health / maxHealth) * width;
 
 			Rect greenRect(fullRect.low.x, fullRect.low.y, mid, fullRect.high.y);
