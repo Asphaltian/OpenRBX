@@ -510,14 +510,14 @@ bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 	}
 }
 
-// STUB: WEBSERVICE 0x10195db0
+// FUNCTION: WEBSERVICE 0x10195db0
 void Players::onChildRemoving(Instance* child)
 {
 	if (Player* player = dynamic_cast<Player*>(child)) {
 		boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > >& list = players.write();
 		list->erase(std::find(list->begin(), list->end(), shared_from(child)));
 
-		if (ServiceProvider::findServiceProvider(this) && !Client::clientIsPresent(this, false)) {
+		if (backendProcessing(this, false)) {
 			event_PlayerRemoving.fire(this, shared_from(player));
 		}
 
@@ -525,7 +525,7 @@ void Players::onChildRemoving(Instance* child)
 	}
 }
 
-// STUB: WEBSERVICE 0x10195f90
+// FUNCTION: WEBSERVICE 0x10195f90
 void Players::onChildAdded(Instance* child)
 {
 	if (Player* player = dynamic_cast<Player*>(child)) {
@@ -540,7 +540,7 @@ void Players::onChildAdded(Instance* child)
 		boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > >& list = players.write();
 		list->push_back(shared_from(child));
 
-		if (ServiceProvider::findServiceProvider(this) && !Client::clientIsPresent(this, true)) {
+		if (backendProcessing(this, true)) {
 			startListening(player, this);
 			player->rebuildBackpack();
 
