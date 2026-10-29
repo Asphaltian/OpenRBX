@@ -27,10 +27,8 @@ class ClassDescriptor : public Descriptor,
 public:
 	ClassDescriptor(ClassDescriptor& base, const char* name);
 
-	// STUB: WEBSERVICE 0x10005bd0
-	virtual ~ClassDescriptor() // vtable+0x00
-	{
-	}
+	// SYNTHETIC: WEBSERVICE 0x10005bd0
+	// RBX::Reflection::ClassDescriptor::~ClassDescriptor
 
 	const ClassDescriptor* getBase() const { return base; }
 

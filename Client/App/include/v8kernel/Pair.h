@@ -38,8 +38,6 @@ public:
 
 	Vector3 position; // 0x10
 	float rotVel;     // 0x1c
-
-	PairParams() {}
 };
 
 DECOMP_SIZE_ASSERT(PairParams, 0x20)

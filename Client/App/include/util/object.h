@@ -335,6 +335,8 @@ template <class T>
 class AbstractFactoryProduct : public Creatable<T>
 {
 protected:
+	AbstractFactoryProduct() {}
+
 	// TEMPLATE: WEBSERVICE 0x10009a60
 	// RBX::AbstractFactoryProduct<RBX::Instance>::getCreators
 	static std::map<const Name*, const ICreator*>& getCreators()
@@ -359,8 +361,6 @@ public:
 
 		return boost::shared_dynamic_cast<T>(iter->second->create());
 	}
-
-	virtual ~AbstractFactoryProduct() {}
 };
 
 template <class T, class Base, const char* sName>
