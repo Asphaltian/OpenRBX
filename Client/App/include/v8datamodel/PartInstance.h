@@ -156,6 +156,8 @@ public:
 	void setTransparency(float value);
 	void setAlphaModifier(float value);
 	void setReflectance(float value);
+	bool resize(NormalId, int);
+	void writeResizeData(XmlState*);
 	void setFormFactorXml(FormFactor value);
 	void setDragging(bool value);
 	void setCanCollide(bool value);

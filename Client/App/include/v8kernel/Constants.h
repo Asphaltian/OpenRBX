@@ -9,7 +9,17 @@ using G3D::Vector3;
 
 class Constants
 {
+private:
+	static const float LEGO_GRID_MASS();
+	static const float LEGO_JOINT_K();
+	static const float LEGO_DEFAULT_ELASTIC_K();
+	static const float unitJointK();
+	static const float getJointKMultiplier(const Vector3& size, bool isBall);
+
+	Constants();
+
 public:
+	static const int uiStepsPerSec();
 	static const int worldStepsPerUiStep();
 	static const int kernelStepsPerWorldStep();
 	static const int worldStepsPerSec();
@@ -20,22 +30,16 @@ public:
 	static const float worldDt();
 	static const float kernelDt();
 
-	static const float getElasticMultiplier(float elasticity);
-
-private:
-	static const float getJointKMultiplier(const Vector3& size, bool isBall);
-
-public:
-	static const float getKmsMaxJointForce(float studsA, float studsB);
-
-	static const float getJointK(const Vector3& size, bool isBall);
-
 	static const Vector3& getKmsGravity()
 	{
 		static Vector3 g(0.0f, -9.81f, 0.0f);
 
 		return g;
 	}
+
+	static const float getKmsMaxJointForce(float studsA, float studsB);
+	static const float getElasticMultiplier(float elasticity);
+	static const float getJointK(const Vector3& size, bool isBall);
 };
 
 } // namespace RBX

@@ -18,6 +18,12 @@ using G3D::Vector3;
 
 class Extents
 {
+private:
+	Vector3 low;  // 0x00
+	Vector3 high; // 0x0c
+
+	static float epsilon();
+
 public:
 	Extents() : low(Vector3::inf()), high(-Vector3::inf()) {}
 	Extents(const Vector3& low, const Vector3& high) : low(low), high(high) {}
@@ -28,9 +34,11 @@ public:
 	}
 
 	static Extents fromCenterCorner(const Vector3& center, const Vector3& corner);
-	static Extents vv(const Vector3& v0, const Vector3& v1);
+	static Extents fromCenterRadius(const Vector3&, float);
 
-	static const Extents& zero();
+	bool operator==(const Extents&) const;
+	bool operator!=(const Extents&) const;
+
 	Extents& operator=(const Extents& other)
 	{
 		low = other.low;
@@ -38,10 +46,12 @@ public:
 		return *this;
 	}
 
-	static const Extents& negativeInfiniteExtents();
+	static Extents vv(const Vector3& v0, const Vector3& v1);
 
 	const Vector3& min() const { return low; }
 	const Vector3& max() const { return high; }
+
+	Vector3 getCorner(int index) const;
 
 	Vector3 size() const { return high - low; }
 
@@ -63,36 +73,44 @@ public:
 		return answer;
 	}
 
-	Vector3 getCorner(int index) const;
-	Vector3 faceCenter(NormalId normalId) const;
-	Plane getPlane(NormalId normalId) const;
-
-	Vector3 clip(const Vector3& point) const { return point.clamp(low, high); }
-
-	void getFaceCorners(NormalId normalId, Vector3& c0, Vector3& c1, Vector3& c2, Vector3& c3) const;
-
+	float longestSide() const;
+	float volume() const;
 	float areaXZ() const;
-
-	NormalId closestFace(const Vector3& point);
-
-	bool contains(const Vector3& point) const;
-	bool fuzzyContains(const Vector3& point, float epsilon) const;
-	bool overlapsOrTouches(const Extents& other) const;
-	bool separatedByMoreThan(const Extents& other, float distance) const;
-	bool containedByFrustum(const G3D::GCamera::Frustum& frustum) const;
 
 	Extents toWorldSpace(const CoordinateFrame& coordinateFrame);
 	Extents express(const CoordinateFrame& from, const CoordinateFrame& to);
 
+	Vector3 faceCenter(NormalId normalId) const;
+	void getFaceCorners(NormalId normalId, Vector3& c0, Vector3& c1, Vector3& c2, Vector3& c3) const;
+	Plane getPlane(NormalId normalId) const;
+
+	Vector3 clip(const Vector3& point) const { return point.clamp(low, high); }
+
+	Vector3 clamp(const Extents&) const;
+	NormalId closestFace(const Vector3& point);
+
 	void unionWith(const Extents& other);
+	void shift(const Vector3&);
 	void scale(float value);
 	void expand(float distance);
 
-private:
-	static float epsilon();
+	const Vector3& operator[](int) const;
+	Vector3& operator[](int);
+	operator Vector3*();
+	operator const Vector3*() const;
 
-	Vector3 low;  // 0x00
-	Vector3 high; // 0x0c
+	bool contains(const Vector3& point) const;
+	bool overlapsOrTouches(const Extents& other) const;
+	static bool overlapsOrTouches(const Extents&, const Extents&);
+	bool fuzzyContains(const Vector3& point, float epsilon) const;
+	bool containedByFrustum(const G3D::GCamera::Frustum& frustum) const;
+	bool partiallyContainedByFrustum(const G3D::GCamera::Frustum&) const;
+	bool separatedByMoreThan(const Extents& other, float distance) const;
+
+	static const Extents& zero();
+	static const Extents& unit();
+	static const Extents& infiniteExtents();
+	static const Extents& negativeInfiniteExtents();
 };
 
 DECOMP_SIZE_ASSERT(Extents, 0x18)
