@@ -167,6 +167,7 @@ public:
 
 protected:
 	virtual void onChildChanged(Instance* child, const PropertyChanged& event); // vtable+0x3c
+	void raiseChanged(const Reflection::PropertyDescriptor&);
 
 public:
 	static Reflection::SignalDesc<Instance, void(shared_ptr<Instance>)> event_childAdded;

@@ -18,6 +18,8 @@ namespace RBX {
 
 class Adorn;
 class ContentId;
+class GuiEvent;
+class GuiResponse;
 class GuiRoot;
 class GuiTarget;
 class IMetric;
@@ -37,6 +39,9 @@ class DataModel : public DescribedNonCreatable<DataModel, ServiceProvider, sData
 				  public Evaluator,
 				  public Listener<RunService, RunTransition>
 {
+	GuiResponse processAccelerators(const GuiEvent&);
+	void processEvent(const UIEvent&);
+
 private:
 	boost::shared_ptr<LocalBackpack> localBackpack;           // 0x190
 	boost::shared_ptr<Workspace> workspace;                   // 0x198

@@ -21,18 +21,20 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x1009add0
 	static bool isMotorJoint(Edge* e) { return isJoint(e) && static_cast<Joint*>(e)->getJointType() == MOTOR_JOINT; }
+	unsigned int hashCode() const;
 
 private:
 	virtual JointType getJointType() const; // vtable+0x14
 
 	virtual bool isAligned(); // vtable+0x24
 
+	int getParentId() const;
+	void setJointAngle(float);
+
 public:
 	virtual void stepUi(int frameCount); // vtable+0x30
 
 	RevoluteLink* resetLink();
-	int getParentId() const;
-	void setJointAngle(float);
 
 	float getCurrentAngle() const { return currentAngle; }
 

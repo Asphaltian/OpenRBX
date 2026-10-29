@@ -66,6 +66,7 @@ public:
 	static Workspace* getWorkspaceIfInWorkspace(const Instance* context);
 	static bool contextInWorkspace(const Instance* context);
 	static World* getMyWorldFast(const Instance* context);
+	static Instance* findTopInstance(Instance*);
 
 private:
 	virtual bool askAddChild(const Instance* instance) const;
@@ -150,6 +151,7 @@ public:
 
 	void makeJoints(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > instances);
 	void breakJoints(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > instances);
+	void setCursor(Adorn*);
 
 private:
 	void handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstance> >& fallenParts);

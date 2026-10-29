@@ -156,11 +156,15 @@ DECOMP_SIZE_ASSERT(Hole, 0x118)
 // SIZE 0x118
 class MotorFeature : public DescribedCreatable<MotorFeature, Feature, sMotorFeature>
 {
+	void otherFeatureChanged();
+
 private:
 	virtual void render3dAdorn(Adorn* adorn);
 
 public:
 	MotorFeature();
+	static bool canJoin(Instance*, Instance*);
+	static void join(Instance*, Instance*);
 };
 
 DECOMP_SIZE_ASSERT(MotorFeature, 0x118)

@@ -42,9 +42,6 @@ protected:
 	bool operatorEqual(const InstanceHandle&) const;
 	bool operatorLess(const InstanceHandle& other) const;
 	bool operatorGreater(const InstanceHandle&) const;
-
-public:
-	~InstanceHandle() {}
 };
 
 } // namespace RBX

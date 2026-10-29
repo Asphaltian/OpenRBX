@@ -15,6 +15,8 @@ class PVInstance;
 
 class Dragger
 {
+	static void primitivesFromInstances(const std::vector<PVInstance*>&, G3D::Array<Primitive*>&);
+
 private:
 	static bool intersectingWorldOrOthers(const G3D::Array<Primitive*>& primitives, ContactManager& contactManager);
 	static void movePrimitives(const G3D::Array<Primitive*>& primitives, const G3D::Vector3& delta);

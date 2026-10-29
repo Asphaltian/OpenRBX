@@ -24,6 +24,7 @@ public:
 		WRAP_AUTO = 0,
 		WRAP_CENTER = 1,
 	};
+	void init(Adorn*);
 
 protected:
 	virtual G3D::Vector2 getCursorPosition() = 0; // vtable+0x00

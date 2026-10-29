@@ -24,12 +24,13 @@ private:
 	Vector3 c2; // 0x18
 	Vector3 c3; // 0x24
 
-public:
-	Face() {}
-
-private:
 	Face(const Vector3& c0, const Vector3& c1, const Vector3& c2, const Vector3& c3) : c0(c0), c1(c1), c2(c2), c3(c3) {}
 
+public:
+	Face() {}
+	Face(const Face& other) : c0(other.c0), c1(other.c1), c2(other.c2), c3(other.c3) {}
+
+private:
 	// STUB: WEBSERVICE 0x1010b320
 	Vector3 getAxis(int i) const { return i == 0 ? (c1 - c0).direction() : (c3 - c0).direction(); }
 

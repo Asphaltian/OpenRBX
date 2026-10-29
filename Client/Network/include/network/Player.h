@@ -116,6 +116,7 @@ private:
 	void doPeriodicIdleCheck();
 
 	double lastActivityTime; // 0x170
+	void onCharacterDied();
 };
 
 DECOMP_SIZE_ASSERT(Player, 0x178)

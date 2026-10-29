@@ -13,6 +13,8 @@ class Point;
 // SIZE 0xc0
 class MultiJoint : public Joint
 {
+	bool pointsAligned() const;
+
 private:
 	void init(int numBreakingConnectors);
 

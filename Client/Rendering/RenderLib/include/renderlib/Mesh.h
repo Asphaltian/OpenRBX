@@ -59,6 +59,7 @@ public:
 		G3D::Array<G3D::Vector3> geometry;        // 0x24
 		LevelRef dropShadowGeometry;              // 0x30
 	};
+	static void setShadowVertex(const G3D::Vector3&);
 
 private:
 	friend class ::ThumbnailGenerator;
@@ -82,6 +83,11 @@ private:
 
 	static G3D::Vector3 findScale;
 	static VertexList findGrid[32][32][32];
+	static G3D::Array<int>& getFindGridCell(const G3D::Vector3&);
+	static unsigned int findVertex(
+		const G3D::Array<int>&, const G3D::Vector3&, const G3D::Vector3&, const G3D::Vector2&
+	);
+	static void toFindGridCoords(const G3D::Vector3&, int&, int&, int&);
 
 protected:
 	static void initStatics();
@@ -179,6 +185,7 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x102258b0
 	// `dynamic atexit destructor for 'RBX::Render::Mesh::vertexVAR''
 	// clang-format on
+	static void flushVAR();
 };
 
 DECOMP_SIZE_ASSERT(Mesh, 0x50)

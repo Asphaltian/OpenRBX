@@ -17,6 +17,7 @@
 
 namespace RBX {
 
+class Accoutrement;
 class Body;
 class Controller;
 class JointInstance;
@@ -34,6 +35,9 @@ class Humanoid : public DescribedCreatable<Humanoid, Instance, sHumanoid>,
 				 public ICharacterSubject,
 				 public Listener<RunService, Stepped>
 {
+	void resetTimer();
+	void getPrimitives(std::vector<Primitive*>&);
+	void getAccoutrements(std::vector<boost::shared_ptr<Accoutrement> >&);
 
 public:
 	enum WalkMode
@@ -192,6 +196,7 @@ private:
 	virtual float getIntendedRotationAboutYAxis();
 	virtual void getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives);
 	virtual void cameraSetWalkOrientation(float rad, bool noAdjust);
+	void onChangedHealth(const Reflection::PropertyDescriptor&);
 
 public:
 	virtual void getIgnorePrims(std::vector<const Primitive*>& ignore);

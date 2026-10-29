@@ -42,6 +42,8 @@ public:
 
 	static const int INDEXBOX_FACE_TO_VERTEX[6][4];
 	static const float INDEXBOX_FACE_TO_NORMAL[6][3];
+	G3D::Vector3 getCenter() const;
+	G3D::Vector3 getCorner(int) const;
 
 private:
 	Vector3 corner[8]; // 0x04

@@ -117,6 +117,7 @@ public:
 
 	Edge* first; // 0x00
 	int num;     // 0x04
+	bool hasEdge();
 };
 
 DECOMP_SIZE_ASSERT(EdgeList, 0x08)
@@ -264,6 +265,8 @@ protected:
 
 private:
 	Extents computeFuzzyExtents() const;
+	void onChangedInKernel();
+	static const int fuzzyExtentsReset();
 
 public:
 	const Extents& getFastFuzzyExtents() const;
@@ -303,9 +306,10 @@ public:
 	// FUNCTION: WEBSERVICE 0x100a8240
 	virtual float getRadius() const { return geometry->getRadius(); } // vtable+0x0c
 
+	float getPlanarSize() const;
+
 private:
 	RigidJoint* getFirstRigidAt(Edge* edge);
-	float getPlanarSize() const;
 
 public:
 	Edge* getFirstEdge() const;

@@ -55,6 +55,8 @@ DECOMP_SIZE_ASSERT(PrimIterator, 0x08)
 // SIZE 0x08
 class EdgeIterator
 {
+	static bool isExternalEdge(Primitive*, const Edge*);
+
 public:
 	static EdgeIterator begin(Primitive* primitive);
 

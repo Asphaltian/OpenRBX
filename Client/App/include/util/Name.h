@@ -2,6 +2,7 @@
 #define UTIL_NAME_H
 
 #include <boost/noncopyable.hpp>
+#include <boost/thread/mutex.hpp>
 #include <boost/thread/once.hpp>
 #include <map>
 #include <string>
@@ -11,6 +12,8 @@ namespace RBX {
 // SIZE 0x20
 class Name : public boost::noncopyable
 {
+	static boost::mutex& mutex();
+
 public:
 	static const Name& declare(const char* name, int dictionaryIndex);
 	static const Name& lookup(const std::string& name);
@@ -64,6 +67,7 @@ public:
 	bool operator!=(const Name& other) const { return this != &other; }
 	bool operator!=(const std::string& other) const;
 	bool operator!=(const char* other) const { return name.compare(other) != 0; }
+	int getDictionaryIndex() const;
 
 private:
 	// TEMPLATE: WEBSERVICE 0x1000b0b0

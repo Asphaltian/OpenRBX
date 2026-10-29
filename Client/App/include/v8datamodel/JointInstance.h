@@ -43,6 +43,7 @@ public:
 	JointInstance(Joint* joint);
 
 	virtual ~JointInstance();
+	Joint::JointType getJointType() const;
 
 protected:
 	Joint* joint; // 0x108

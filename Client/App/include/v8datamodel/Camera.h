@@ -44,6 +44,7 @@ public:
 		CUSTOM_CAMERA = 5,
 		NUM_CAMERA_TYPE = 6
 	};
+	static float distanceDefault();
 
 private:
 	G3D::GCamera gCamera;                      // 0x0f8

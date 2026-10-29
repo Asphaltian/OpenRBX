@@ -108,6 +108,8 @@ DECOMP_SIZE_ASSERT(GuiItem, 0x10c)
 // SIZE 0x10c
 class GuiRoot : public GuiItem
 {
+	static bool preProcess(const GuiEvent&);
+
 public:
 	GuiRoot();
 

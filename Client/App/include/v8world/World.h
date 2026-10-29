@@ -149,6 +149,8 @@ public:
 
 	void onJointPrimitiveNulling(Joint* joint, Primitive* primitive);
 	void onJointPrimitiveSet(Joint* joint, Primitive* primitive);
+	void assertNotInStep();
+	void assertInStep();
 
 private:
 	void createJoints(Primitive* p, std::set<Primitive*>* ignoreGroup);
