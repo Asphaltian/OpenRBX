@@ -168,7 +168,7 @@ bool ContactManager::intersectingOthers(Primitive* check, const std::set<Primiti
 
 // FUNCTION: WEBSERVICE 0x101086c0
 Primitive* ContactManager::getFastHit(
-	const G3D::Ray& ray,
+	const G3D::Ray& worldRay,
 	const G3D::Array<const Primitive*>* ignorePrim,
 	const HitTestFilter* filter,
 	Vector3& hitPointWorld,
@@ -176,26 +176,27 @@ Primitive* ContactManager::getFastHit(
 	bool& stopped
 ) const
 {
-	G3D::Array<Primitive*> found;
+	G3D::Array<Primitive*> primitives;
 
-	Vector3int32 grid = SpatialHash::realToHashGrid(ray.origin);
+	Vector3int32 grid = SpatialHash::realToHashGrid(worldRay.origin);
 
-	float length = ray.direction.magnitude();
+	float length = worldRay.direction.magnitude();
 	float maxDistance = std::min(5000.0f, length);
 
-	G3D::Ray unitRay = ray.unit();
+	G3D::Ray unitRay = worldRay.unit();
 
 	do {
-		found.resize(0, false);
-		spatialHash->getPrimitivesInGrid(grid, found);
+		primitives.resize(0, false);
+		spatialHash->getPrimitivesInGrid(grid, primitives);
 
-		Primitive* hit = getSlowHit(found, unitRay, ignorePrim, filter, hitPointWorld, maxDistance, inside, stopped);
+		Primitive* hit =
+			getSlowHit(primitives, unitRay, ignorePrim, filter, hitPointWorld, maxDistance, inside, stopped);
 
 		if (hit != NULL) {
 			Vector3 gridCenter((float) grid.x, (float) grid.y, (float) grid.z);
-			Extents extents = SpatialHash::hashGridToRealExtents(gridCenter);
+			Extents hashGrid = SpatialHash::hashGridToRealExtents(gridCenter);
 
-			if (extents.fuzzyContains(hitPointWorld, 0.001f)) {
+			if (hashGrid.fuzzyContains(hitPointWorld, 0.001f)) {
 				return hit;
 			}
 		}

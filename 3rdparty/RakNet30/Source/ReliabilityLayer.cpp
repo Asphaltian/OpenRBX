@@ -997,7 +997,7 @@ void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSiz
 		return;
 	}
 
-	RakNetTimeNS elapsedTime = time - lastUpdateTime;
+	RakNetTimeNS elapsed = time - lastUpdateTime;
 	lastUpdateTime=time;
 
 	// unsigned resendListSize;
@@ -1033,7 +1033,7 @@ void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSiz
 	// still positive nothing is sent this update and the connection is marked not-continuous.
 	if (bitsPerSecondLimit && throughputCapCountdown > 0)
 	{
-		throughputCapCountdown -= elapsedTime;
+		throughputCapCountdown -= elapsed;
 		if (throughputCapCountdown < 0)
 		{
 			throughputCapCountdown = 0;
@@ -1049,14 +1049,14 @@ void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSiz
 	{
 		// One datagram per timeBetweenPackets of elapsed time, capped at a hundred packets'
 		// worth so a long stall does not turn into a burst.
-		RakNetTimeNS timeSpent = 0;
-		RakNetTimeNS timeSinceLastSend = time - nextSendTime;
-		if (timeSinceLastSend > timeBetweenPackets*100)
+		RakNetTimeNS usedTime = 0;
+		RakNetTimeNS availableTime = time - nextSendTime;
+		if (availableTime > timeBetweenPackets*100)
 		{
-			timeSinceLastSend = timeBetweenPackets*100;
+			availableTime = timeBetweenPackets*100;
 			nextSendTime = time;
 		}
-		while (timeSpent < timeSinceLastSend)
+		while (usedTime < availableTime)
 		{
 			updateBitStream.Reset();
 			if ( GenerateDatagram( &updateBitStream, MTUSize, &reliableDataSent, time, systemAddress, messageHandlerList )==false )
@@ -1086,13 +1086,13 @@ void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSiz
 					break;
 			}
 
-			timeSpent += timeBetweenPackets;
+			usedTime += timeBetweenPackets;
 		}
 
-		nextSendTime += timeSpent;
+		nextSendTime += usedTime;
 
 		// The send loop ran to completion, so there is more waiting than the window allows.
-		if (timeSpent >= timeSinceLastSend)
+		if (usedTime >= availableTime)
 			continuousSend = true;
 		else
 			continuousSend = false;

@@ -407,7 +407,7 @@ const char* Bridge<RBX::BrickColor, 1>::className = "BrickColor";
 // FUNCTION: WEBSERVICE 0x100ae950
 int CoordinateFrameBridge::newCoordinateFrame(lua_State* L)
 {
-	G3D::CoordinateFrame result;
+	G3D::CoordinateFrame cf;
 
 	int count = lua_gettop(L);
 
@@ -416,46 +416,46 @@ int CoordinateFrameBridge::newCoordinateFrame(lua_State* L)
 		break;
 
 	case 1:
-		result.translation = Vector3Bridge::getObject(L, 1);
+		cf.translation = Vector3Bridge::getObject(L, 1);
 		break;
 
 	case 2:
-		result.translation = Vector3Bridge::getObject(L, 1);
-		result.lookAt(Vector3Bridge::getObject(L, 2));
+		cf.translation = Vector3Bridge::getObject(L, 1);
+		cf.lookAt(Vector3Bridge::getObject(L, 2));
 		break;
 
 	case 3:
 		for (int i = 0; i < 3; i++) {
-			result.translation[i] = lua_tofloat(L, i + 1);
+			cf.translation[i] = lua_tofloat(L, i + 1);
 		}
 		break;
 
 	case 7: {
 		for (int i = 0; i < 3; i++) {
-			result.translation[i] = lua_tofloat(L, i + 1);
+			cf.translation[i] = lua_tofloat(L, i + 1);
 		}
 
-		G3D::Quat quaternion;
+		G3D::Quat q;
 
-		quaternion.x = lua_tofloat(L, 4);
-		quaternion.y = lua_tofloat(L, 5);
-		quaternion.z = lua_tofloat(L, 6);
-		quaternion.w = lua_tofloat(L, 7);
+		q.x = lua_tofloat(L, 4);
+		q.y = lua_tofloat(L, 5);
+		q.z = lua_tofloat(L, 6);
+		q.w = lua_tofloat(L, 7);
 
-		G3D::Matrix3 rotation(quaternion);
+		G3D::Matrix3 rotation(q);
 
-		result.rotation = rotation;
+		cf.rotation = rotation;
 		break;
 	}
 
 	case 12: {
 		for (int i = 0; i < 3; i++) {
-			result.translation[i] = lua_tofloat(L, i + 1);
+			cf.translation[i] = lua_tofloat(L, i + 1);
 		}
 
 		int index = 4;
 
-		float* element = result.rotation[0];
+		float* element = cf.rotation[0];
 
 		while (index < 13) {
 			for (int c = 0; c < 3; c++) {
@@ -471,7 +471,7 @@ int CoordinateFrameBridge::newCoordinateFrame(lua_State* L)
 		throw std::runtime_error(G3D::format("Invalid number of arguments: %d", count));
 	}
 
-	pushNewObject(L, result);
+	pushNewObject(L, cf);
 	return 1;
 }
 
@@ -536,19 +536,19 @@ int CoordinateFrameBridge::on_toWorldSpace(lua_State* L)
 // FUNCTION: WEBSERVICE 0x100aee30
 int CoordinateFrameBridge::on_toObjectSpace(lua_State* L)
 {
-	const G3D::CoordinateFrame& value = getObject(L, 1);
+	const G3D::CoordinateFrame& a = getObject(L, 1);
 
 	int count = lua_gettop(L) - 1;
 
 	if (count == 0) {
-		G3D::CoordinateFrame result = value.inverse();
+		G3D::CoordinateFrame result = a.inverse();
 
 		pushNewObject(L, result);
 		return 1;
 	}
 
 	for (int i = 0; i < count; i++) {
-		G3D::CoordinateFrame result = value.toObjectSpace(getObject(L, i + 2));
+		G3D::CoordinateFrame result = a.toObjectSpace(getObject(L, i + 2));
 
 		pushNewObject(L, result);
 	}
@@ -787,10 +787,10 @@ int CoordinateFrameBridge::on_mul(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
 
-	G3D::CoordinateFrame other;
+	G3D::CoordinateFrame b;
 
-	if (getValue(L, 2, other)) {
-		G3D::CoordinateFrame result = value * other;
+	if (getValue(L, 2, b)) {
+		G3D::CoordinateFrame result = value * b;
 
 		pushNewObject(L, result);
 		return 1;

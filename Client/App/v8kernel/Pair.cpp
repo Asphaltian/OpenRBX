@@ -149,35 +149,35 @@ void GeoPair::computeEdgeEdge(PairParams& _params)
 	const CoordinateFrame& coord0 = body0->getCoordinateFrame();
 	const CoordinateFrame& coord1 = body1->getCoordinateFrame();
 
-	Vector3 p0 = coord0.pointToWorldSpace(*offset0);
-	Vector3 p1 = coord1.pointToWorldSpace(*offset1);
+	Vector3 pa = coord0.pointToWorldSpace(*offset0);
+	Vector3 pb = coord1.pointToWorldSpace(*offset1);
 
 	Vector3 e0 = Math::getWorldNormal(pairData.normalID0, coord0);
-	Vector3 e1 = Math::getWorldNormal(pairData.normalID1, coord1);
+	Vector3 ub = Math::getWorldNormal(pairData.normalID1, coord1);
 
-	Vector3 delta = p1 - p0;
+	Vector3 p = pb - pa;
 
-	float dot = e1.dot(e0);
-	float t0 = delta.dot(e0);
-	float t1 = -e1.dot(delta);
+	float dot = ub.dot(e0);
+	float q1 = p.dot(e0);
+	float q2 = -ub.dot(p);
 
 	float denom = 1.0f - dot * dot;
 
 	if (denom > 1e-06f) {
 		float recip = 1.0f / denom;
 
-		float s0 = (t1 * dot + t0) * recip;
-		float s1 = (t0 * dot + t1) * recip;
+		float s0 = (q2 * dot + q1) * recip;
+		float s1 = (q1 * dot + q2) * recip;
 
-		Vector3 c0 = p0 + e0 * s0;
-		Vector3 c1 = p1 + e1 * s1;
+		Vector3 c0 = pa + e0 * s0;
+		Vector3 c1 = pb + ub * s1;
 
 		_params.position = (c1 + c0) * 0.5f;
 		_params.normal = c0 - c1;
 		_params.length = -_params.normal.unitize();
 	}
 	else {
-		_params.position = p0;
+		_params.position = pa;
 		_params.normal = e0;
 		_params.length = 0.0f;
 	}

@@ -15,20 +15,20 @@ namespace RBX {
 // FUNCTION: WEBSERVICE 0x1011cdb0
 Joint* JointBuilder::canJoin(Primitive* p0, Primitive* p1)
 {
-	const Extents& r0 = p0->getFastFuzzyExtents();
-	const Extents& r1 = p1->getFastFuzzyExtents();
+	const Extents& e0 = p0->getFastFuzzyExtents();
+	const Extents& e1 = p1->getFastFuzzyExtents();
 
-	if (r0.separatedByMoreThan(r1, 0.05f)) {
+	if (e0.separatedByMoreThan(e1, 0.05f)) {
 		return NULL;
 	}
 
-	const CoordinateFrame& coord0 = p0->getCoordinateFrame();
-	const CoordinateFrame& coord1 = p1->getCoordinateFrame();
+	const Matrix3& r0 = p0->getCoordinateFrame().rotation;
+	const Matrix3& r1 = p1->getCoordinateFrame().rotation;
 
 	for (int i = 0; i < 6; ++i) {
 		NormalId normalId0 = (NormalId) i;
-		Vector3 normal = -Math::getWorldNormal(normalId0, coord0);
-		NormalId normalId1 = Math::getClosestObjectNormalId(normal, coord1.rotation);
+		Vector3 normal = -Math::getWorldNormal(normalId0, r0);
+		NormalId normalId1 = Math::getClosestObjectNormalId(normal, r1);
 
 		if (Joint* joint = RotateJoint::canBuildJoint(p0, p1, normalId0, normalId1)) {
 			return joint;

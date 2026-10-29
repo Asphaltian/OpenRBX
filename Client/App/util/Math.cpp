@@ -184,9 +184,9 @@ Matrix3 Math::snapToAxes(const Matrix3& align)
 {
 	float dots[3][3];
 
-	float tBest = 0.0f;
+	float best = 0.0f;
 	int aBest = -1;
-	int best = -1;
+	int tBest = -1;
 
 	for (int a = 0; a < 3; ++a) {
 		Vector3 aAxis = align.getColumn(a);
@@ -196,48 +196,48 @@ Matrix3 Math::snapToAxes(const Matrix3& align)
 
 			dots[a][i] = t;
 
-			if (fabs(t) > fabs(tBest)) {
-				best = i;
-				tBest = t;
+			if (fabs(t) > fabs(best)) {
+				tBest = i;
+				best = t;
 				aBest = a;
 			}
 		}
 	}
 
-	Vector3 bestV = Matrix3::identity().getColumn(best);
+	Vector3 bestV = Matrix3::identity().getColumn(tBest);
 
-	if (tBest < 0.0f) {
+	if (best < 0.0f) {
 		bestV.x = bestV.x * -1.0f;
 		bestV.y = bestV.y * -1.0f;
 		bestV.z = bestV.z * -1.0f;
 	}
 
-	float tSecond = 0.0f;
+	float second = 0.0f;
 	int aSecond = -1;
-	int second = -1;
+	int tSecond = -1;
 
 	for (int a = 0; a < 3; ++a) {
 		if (a != aBest) {
 			for (int i = 0; i < 3; ++i) {
-				if (i != best && fabs(dots[a][i]) > fabs(tSecond)) {
-					tSecond = dots[a][i];
-					second = i;
+				if (i != tBest && fabs(dots[a][i]) > fabs(second)) {
+					second = dots[a][i];
+					tSecond = i;
 					aSecond = a;
 				}
 			}
 		}
 	}
 
-	Vector3 secondV = Matrix3::identity().getColumn(second);
+	Vector3 secondV = Matrix3::identity().getColumn(tSecond);
 
-	if (tSecond < 0.0f) {
+	if (second < 0.0f) {
 		secondV.x = secondV.x * -1.0f;
 		secondV.y = secondV.y * -1.0f;
 		secondV.z = secondV.z * -1.0f;
 	}
 
 	int aThird = (3 - aSecond) - aBest;
-	int third = (3 - second) - best;
+	int third = (3 - tSecond) - tBest;
 
 	Vector3 thirdV = Matrix3::identity().getColumn(third);
 
