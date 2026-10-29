@@ -80,7 +80,7 @@ void StarterPackService::render2d(Adorn* adorn)
 		G3D::Rect2D viewPort = adorn->getViewport();
 
 		int fontSize = GuiRoot::normalizedFontSize(12);
-		G3D::Vector2 pos2d(viewPort.x0() + 4, viewPort.y1() - 4);
+		G3D::Vector2 pos2d = viewPort.x0y1() + G3D::Vector2(4, -4);
 
 		adorn->drawFont2D(
 			"StarterPack - these items will be given to each new player",
