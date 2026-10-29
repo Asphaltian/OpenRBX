@@ -9,12 +9,14 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10105680
+// FUNCTION: ROBLOX 0x0061da40
 G3D::Vector3 Dragger::toGrid(const G3D::Vector3& v)
 {
 	return Math::toGrid(v, dragSnap());
 }
 
 // FUNCTION: WEBSERVICE 0x101056d0
+// FUNCTION: ROBLOX 0x0061da90
 void Dragger::movePrimitives(const G3D::Array<Primitive*>& primitives, const G3D::Vector3& delta)
 {
 	if (delta != G3D::Vector3::zero()) {
@@ -27,6 +29,7 @@ void Dragger::movePrimitives(const G3D::Array<Primitive*>& primitives, const G3D
 }
 
 // FUNCTION: WEBSERVICE 0x10105760
+// FUNCTION: ROBLOX 0x0061dc20
 Extents Dragger::computeExtents(const G3D::Array<Primitive*>& primitives)
 {
 	Extents answer = Extents::negativeInfiniteExtents();
@@ -39,6 +42,7 @@ Extents Dragger::computeExtents(const G3D::Array<Primitive*>& primitives)
 }
 
 // FUNCTION: WEBSERVICE 0x10105820
+// FUNCTION: ROBLOX 0x0061dce0
 bool Dragger::intersectingWorldOrOthers(const G3D::Array<Primitive*>& primitives, ContactManager& contactManager)
 {
 	Extents group = computeExtents(primitives);
@@ -47,6 +51,7 @@ bool Dragger::intersectingWorldOrOthers(const G3D::Array<Primitive*>& primitives
 }
 
 // FUNCTION: WEBSERVICE 0x10105870
+// FUNCTION: ROBLOX 0x0061de20
 void Dragger::movePrimitivesDelta(
 	const G3D::Array<Primitive*>& primitives, const G3D::Vector3& delta, G3D::Vector3& movedSoFar
 )
@@ -56,6 +61,7 @@ void Dragger::movePrimitivesDelta(
 }
 
 // FUNCTION: WEBSERVICE 0x10105910
+// FUNCTION: ROBLOX 0x0061dec0
 void Dragger::searchUpFine(
 	const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 )
@@ -68,6 +74,7 @@ void Dragger::searchUpFine(
 }
 
 // FUNCTION: WEBSERVICE 0x10105990
+// FUNCTION: ROBLOX 0x0061df40
 void Dragger::searchDownFine(
 	const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 )
@@ -83,6 +90,7 @@ void Dragger::searchDownFine(
 }
 
 // FUNCTION: WEBSERVICE 0x10105a10
+// FUNCTION: ROBLOX 0x0061dfc0
 void Dragger::searchUpGross(
 	const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 )
@@ -98,6 +106,7 @@ void Dragger::searchUpGross(
 }
 
 // FUNCTION: WEBSERVICE 0x10105a90
+// FUNCTION: ROBLOX 0x0061e040
 void Dragger::searchDownGross(
 	const G3D::Array<Primitive*>& primitives, G3D::Vector3& movedSoFar, ContactManager& contactManager
 )
@@ -113,6 +122,7 @@ void Dragger::searchDownGross(
 }
 
 // FUNCTION: WEBSERVICE 0x10105b10
+// FUNCTION: ROBLOX 0x0061e370
 G3D::Vector3 Dragger::safeMoveYDrop(
 	const G3D::Array<Primitive*>& primitives, const G3D::Vector3& tryMove, ContactManager& contactManager
 )
@@ -137,6 +147,7 @@ G3D::Vector3 Dragger::safeMoveYDrop(
 }
 
 // FUNCTION: WEBSERVICE 0x10105c10
+// FUNCTION: ROBLOX 0x0061e470
 G3D::Vector3 Dragger::safeMoveNoDrop(
 	const G3D::Array<Primitive*>& primitives, const G3D::Vector3& tryMove, ContactManager& contactManager
 )
@@ -160,6 +171,7 @@ G3D::Vector3 Dragger::safeMoveNoDrop(
 }
 
 // FUNCTION: WEBSERVICE 0x10105d40
+// FUNCTION: ROBLOX 0x0061e5a0
 void Dragger::safeRotate(
 	const G3D::Array<Primitive*>& primitives, const G3D::Matrix3& rotate, ContactManager& contactManager
 )

@@ -18,6 +18,7 @@ public:
 	TextureId(const char* id) : ContentId(id) {}
 
 	// FUNCTION: WEBSERVICE 0x1003e930 FOLDED
+	// FUNCTION: ROBLOX 0x00412910 FOLDED
 	TextureId(const ContentId& id) : ContentId(id) {}
 };
 

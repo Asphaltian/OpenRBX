@@ -103,6 +103,7 @@ bool BodyMover::askSetParent(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100ea0a0
+// FUNCTION: ROBLOX 0x00629160
 void Rocket::fire()
 {
 	if (!Workspace::findWorkspace(this)) {
@@ -123,16 +124,19 @@ void Rocket::abort()
 }
 
 // FUNCTION: WEBSERVICE 0x100ea200
+// FUNCTION: ROBLOX 0x006292c0
 BodyMover::BodyMover(const char* name) : Instance(name), world(NULL), part(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100ea340
+// FUNCTION: ROBLOX 0x00629400
 BodyMover::~BodyMover()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100ea3b0
+// FUNCTION: ROBLOX 0x00629470
 void BodyMover::onEvent(const RunService* source, Stepped event)
 {
 	if (preventBodySleep()) {
@@ -141,6 +145,7 @@ void BodyMover::onEvent(const RunService* source, Stepped event)
 }
 
 // FUNCTION: WEBSERVICE 0x100ea3e0
+// FUNCTION: ROBLOX 0x006294a0
 Vector3 Rocket::turn(Body* body, const Vector3& targetDir)
 {
 	Vector3 targetDirBody = body->getPV().position.vectorToObjectSpace(targetDir);
@@ -181,6 +186,7 @@ Vector3 Rocket::turn(Body* body, const Vector3& targetDir)
 }
 
 // FUNCTION: WEBSERVICE 0x100ea7c0
+// FUNCTION: ROBLOX 0x00629880
 void BodyGyro::computeOrientation(Body* body)
 {
 	if (!G3D::fuzzyEq(maxTorque.y, 0.0f)) {
@@ -211,6 +217,7 @@ void BodyGyro::computeOrientation(Body* body)
 }
 
 // STUB: WEBSERVICE 0x100eaaf0
+// STUB: ROBLOX 0x00629bb0
 void BodyGyro::computeBalance(Body* body)
 {
 	if (!G3D::fuzzyEq(maxTorque.x, 0.0f) || !G3D::fuzzyEq(maxTorque.z, 0.0f)) {
@@ -279,6 +286,7 @@ void BodyVelocity::computeForce(float dt, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x100eb1e0
+// FUNCTION: ROBLOX 0x0062a2a0
 void BodyForce::computeForce(float dt, bool throttling)
 {
 	part->getPrimitive()->getBody()->getRoot()->accumulateForceAtBranchCofm(force);
@@ -296,6 +304,7 @@ void BodyThrust::computeForce(float dt, bool throttling)
 }
 
 // STUB: WEBSERVICE 0x100ebb10
+// STUB: ROBLOX 0x0062abc0
 void Rocket::computeForce(float dt, bool throttling)
 {
 	if (active) {
@@ -337,6 +346,7 @@ void Rocket::computeForce(float dt, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x100ebfb0
+// FUNCTION: ROBLOX 0x0062b060
 void BodyGyro::computeForce(float dt, bool throttling)
 {
 	Body* body = part->getPrimitive()->getBody();
@@ -346,6 +356,7 @@ void BodyGyro::computeForce(float dt, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x100ec120
+// FUNCTION: ROBLOX 0x0062b1d0
 void registerBodyMovers()
 {
 	BodyGyro::className();
@@ -357,6 +368,7 @@ void registerBodyMovers()
 }
 
 // FUNCTION: WEBSERVICE 0x100ed460
+// FUNCTION: ROBLOX 0x0062c530
 BodyGyro::BodyGyro()
 	: DescribedCreatable<BodyGyro, BodyMover, sBodyGyro>(sBodyGyro), kP(3000.0f), kD(500.0f),
 	  maxTorque(400000.0f, 0.0f, 400000.0f)
@@ -364,6 +376,7 @@ BodyGyro::BodyGyro()
 }
 
 // FUNCTION: WEBSERVICE 0x100ed570
+// FUNCTION: ROBLOX 0x0062c690
 BodyPosition::BodyPosition()
 	: DescribedCreatable<BodyPosition, BodyMover, sBodyPosition>(sBodyPosition), kP(10000.0f), kD(1250.0f),
 	  maxForce(4000.0f, 4000.0f, 4000.0f), position(0.0f, 50.0f, 0.0f)
@@ -371,6 +384,7 @@ BodyPosition::BodyPosition()
 }
 
 // FUNCTION: WEBSERVICE 0x100ed6a0
+// FUNCTION: ROBLOX 0x0062c790
 BodyVelocity::BodyVelocity()
 	: DescribedCreatable<BodyVelocity, BodyMover, sBodyVelocity>(sBodyVelocity), kP(1250.0f),
 	  maxForce(4000.0f, 4000.0f, 4000.0f), velocity(0.0f, 2.0f, 0.0f)
@@ -378,29 +392,34 @@ BodyVelocity::BodyVelocity()
 }
 
 // FUNCTION: WEBSERVICE 0x100ed7b0
+// FUNCTION: ROBLOX 0x0062c870
 bool BodyVelocity::preventBodySleep() const
 {
 	return velocity != G3D::Vector3::zero();
 }
 
 // FUNCTION: WEBSERVICE 0x100ed840
+// FUNCTION: ROBLOX 0x0062c8e0
 BodyForce::BodyForce() : DescribedCreatable<BodyForce, BodyMover, sBodyForce>(sBodyForce), force(G3D::Vector3::unitY())
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100ed950 FOLDED
+// FUNCTION: ROBLOX 0x0062c9d0 FOLDED
 bool BodyForce::preventBodySleep() const
 {
 	return force != G3D::Vector3::zero();
 }
 
 // FUNCTION: WEBSERVICE 0x100ed950 FOLDED
+// FUNCTION: ROBLOX 0x0062c9d0 FOLDED
 bool BodyThrust::preventBodySleep() const
 {
 	return force != G3D::Vector3::zero();
 }
 
 // FUNCTION: WEBSERVICE 0x100ed9e0
+// FUNCTION: ROBLOX 0x0062ca40
 BodyThrust::BodyThrust()
 	: DescribedCreatable<BodyThrust, BodyMover, sBodyThrust>(sBodyThrust), force(G3D::Vector3::unitY()),
 	  location(G3D::Vector3::zero())
@@ -408,6 +427,7 @@ BodyThrust::BodyThrust()
 }
 
 // FUNCTION: WEBSERVICE 0x100eded0
+// FUNCTION: ROBLOX 0x0062cf10
 Rocket::Rocket()
 	: DescribedCreatable<Rocket, BodyMover, sRocket>(sRocket), active(false), targetRadius(4.0f), firedEvent(false),
 	  maxThrust(4000.0f), kThrustP(5.0f), kThrustD(0.001f), maxSpeed(30.0f), kTurnP(3000.0f), kTurnD(500.0f),
@@ -416,6 +436,7 @@ Rocket::Rocket()
 }
 
 // FUNCTION: WEBSERVICE 0x100ee130
+// FUNCTION: ROBLOX 0x0062d170
 void BodyMover::updateWorld()
 {
 	World* newWorld = part ? Workspace::getWorldIfInWorkspace(this) : NULL;
@@ -436,6 +457,7 @@ void BodyMover::updateWorld()
 }
 
 // FUNCTION: WEBSERVICE 0x100ee1b0
+// FUNCTION: ROBLOX 0x0062d1f0
 void BodyMover::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->create<RunService>() : NULL, this);
@@ -446,6 +468,7 @@ void BodyMover::onServiceProvider(const ServiceProvider* oldProvider, const Serv
 }
 
 // FUNCTION: WEBSERVICE 0x100ee200
+// FUNCTION: ROBLOX 0x0062d240
 void BodyMover::onAncestorChanged(const AncestorChanged& event)
 {
 	Instance::onAncestorChanged(event);
@@ -458,6 +481,7 @@ void BodyMover::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100ee240
+// FUNCTION: ROBLOX 0x0062d280
 void Rocket::onEvent(const RunService* source, Stepped event)
 {
 	BodyMover::onEvent(source, event);
@@ -475,6 +499,7 @@ void Rocket::onEvent(const RunService* source, Stepped event)
 }
 
 // FUNCTION: WEBSERVICE 0x100ee350
+// FUNCTION: ROBLOX 0x0062d390
 void Rocket::setTarget(PartInstance* value)
 {
 	if (target.get() != value) {

@@ -14,6 +14,7 @@ using G3D::Ray;
 using G3D::Vector3;
 
 // VTABLE: WEBSERVICE 0x1023762c
+// VTABLE: ROBLOX 0x00831f6c
 // SIZE 0x10
 class Geometry
 {
@@ -63,6 +64,7 @@ inline float Geometry::getGridVolume() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a7660
+// FUNCTION: ROBLOX 0x005f5f40
 inline void Geometry::setGridSize(const Vector3& _gridSize)
 {
 	gridSize = _gridSize;
@@ -70,6 +72,7 @@ inline void Geometry::setGridSize(const Vector3& _gridSize)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7680
+// FUNCTION: ROBLOX 0x005f5f60
 inline Matrix3 Geometry::getMoment(float mass) const
 {
 	return Matrix3::zero();
@@ -82,6 +85,7 @@ inline bool Geometry::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7de0
+// FUNCTION: ROBLOX 0x005f6690
 inline Geometry* Geometry::nullGeometry()
 {
 	static Geometry g;
@@ -89,6 +93,7 @@ inline Geometry* Geometry::nullGeometry()
 }
 
 // FUNCTION: WEBSERVICE 0x100a7e30
+// FUNCTION: ROBLOX 0x005f66e0
 inline Vector3 Geometry::getCenterToCorner(const Matrix3& rotation) const
 {
 	return Vector3::zero();
@@ -101,11 +106,13 @@ inline Geometry::GeometryType Geometry::getGeometryType() const
 }
 
 // FUNCTION: WEBSERVICE 0x1015b610 FOLDED
+// FUNCTION: ROBLOX 0x00751160 FOLDED
 inline void Geometry::onSetSize()
 {
 }
 
 // SYNTHETIC: WEBSERVICE 0x102235a0
+// SYNTHETIC: ROBLOX 0x007f4540
 // `RBX::Geometry::nullGeometry'::`2'::`dynamic atexit destructor for 'g''
 
 } // namespace RBX

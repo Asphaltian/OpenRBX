@@ -42,6 +42,7 @@ public:
 	bool anyDragPartAlive();
 
 	// FUNCTION: WEBSERVICE 0x10126410
+	// FUNCTION: ROBLOX 0x006628d0
 	boost::weak_ptr<PartInstance> getMousePart() { return mousePart; }
 
 	void alignAndCleanParts();

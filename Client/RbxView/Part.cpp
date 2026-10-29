@@ -36,6 +36,7 @@ bool PartChunk::cullable() const
 }
 
 // FUNCTION: WEBSERVICE 0x1016c240
+// FUNCTION: ROBLOX 0x00477940
 float primaryComponent(const G3D::Vector3& v)
 {
 	float nx = fabs(v.x);
@@ -58,6 +59,7 @@ float primaryComponent(const G3D::Vector3& v)
 }
 
 // FUNCTION: WEBSERVICE 0x1016c6d0
+// FUNCTION: ROBLOX 0x00477c90
 bool Part::usesMegaTexture() const
 {
 	if (specialShape == NULL && partInstance->getPartType() == RBX::Part::BLOCK_PART) {
@@ -70,6 +72,7 @@ bool Part::usesMegaTexture() const
 }
 
 // FUNCTION: WEBSERVICE 0x1016c740
+// FUNCTION: ROBLOX 0x00477d00
 const G3D::CoordinateFrame& PartChunk::cframe()
 {
 	coordinateFrame = partInstance->getCoordinateFrame();
@@ -78,6 +81,7 @@ const G3D::CoordinateFrame& PartChunk::cframe()
 }
 
 // FUNCTION: WEBSERVICE 0x1016cd00
+// FUNCTION: ROBLOX 0x004780c0
 G3D::ReferenceCountedPointer<Render::Material> Part::getMaterial()
 {
 	try {
@@ -124,12 +128,14 @@ G3D::ReferenceCountedPointer<Render::Material> Part::getMaterial()
 }
 
 // FUNCTION: WEBSERVICE 0x1016d060
+// FUNCTION: ROBLOX 0x00478420
 void Part::onEvent(const PartInstance* source, CanAggregateChanged event)
 {
 	view->sceneManager->setSleeping(this, event.canClump);
 }
 
 // FUNCTION: WEBSERVICE 0x1016d100
+// FUNCTION: ROBLOX 0x004784c0
 void PartChunk::onAncestorChanged(boost::shared_ptr<Instance> ancestor)
 {
 	Workspace* workspace = Workspace::findWorkspace(partInstance.get());
@@ -142,6 +148,7 @@ void PartChunk::onAncestorChanged(boost::shared_ptr<Instance> ancestor)
 }
 
 // FUNCTION: WEBSERVICE 0x1016d210 FOLDED
+// FUNCTION: ROBLOX 0x004785d0 FOLDED
 void Decal::onDecalAncestorChanged(boost::shared_ptr<Instance> ancestor)
 {
 	Workspace* workspace = Workspace::findWorkspace(decal.get());
@@ -154,6 +161,7 @@ void Decal::onDecalAncestorChanged(boost::shared_ptr<Instance> ancestor)
 }
 
 // FUNCTION: WEBSERVICE 0x1016d210 FOLDED
+// FUNCTION: ROBLOX 0x004785d0 FOLDED
 void Texture::onTextureAncestorChanged(boost::shared_ptr<Instance> ancestor)
 {
 	Workspace* workspace = Workspace::findWorkspace(texture.get());
@@ -166,6 +174,7 @@ void Texture::onTextureAncestorChanged(boost::shared_ptr<Instance> ancestor)
 }
 
 // FUNCTION: WEBSERVICE 0x1016d320
+// FUNCTION: ROBLOX 0x004786e0
 void PartChunk::invalidateMesh()
 {
 	mesh = NULL;
@@ -174,6 +183,7 @@ void PartChunk::invalidateMesh()
 }
 
 // FUNCTION: WEBSERVICE 0x1016d410
+// FUNCTION: ROBLOX 0x004787d0
 void PartChunk::invalidateMaterial()
 {
 	material = NULL;
@@ -183,6 +193,7 @@ void PartChunk::invalidateMaterial()
 }
 
 // FUNCTION: WEBSERVICE 0x1016d500
+// FUNCTION: ROBLOX 0x004788c0
 void PartChunk::onSpecialShapeChanged()
 {
 	invalidateMesh();
@@ -190,6 +201,7 @@ void PartChunk::onSpecialShapeChanged()
 }
 
 // FUNCTION: WEBSERVICE 0x1016d510
+// FUNCTION: ROBLOX 0x004788d0
 void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	if (descriptor == &PartInstance::prop_Size) {
@@ -205,6 +217,7 @@ void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor* descript
 }
 
 // FUNCTION: WEBSERVICE 0x1016d550
+// FUNCTION: ROBLOX 0x00478910
 void Part::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	PartChunk::onPropertyChanged(descriptor);
@@ -222,6 +235,7 @@ void Part::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 }
 
 // FUNCTION: WEBSERVICE 0x1016d5d0
+// FUNCTION: ROBLOX 0x00478990
 G3D::ReferenceCountedPointer<Render::Mesh> PartChunk::getMesh()
 {
 	if (mesh.isNull()) {
@@ -232,6 +246,7 @@ G3D::ReferenceCountedPointer<Render::Mesh> PartChunk::getMesh()
 }
 
 // FUNCTION: WEBSERVICE 0x1016d610
+// FUNCTION: ROBLOX 0x004789d0
 void Decal::onDecalPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	if (descriptor == &FaceInstance::prop_Face) {
@@ -249,6 +264,7 @@ void Decal::onDecalPropertyChanged(const Reflection::PropertyDescriptor* descrip
 }
 
 // FUNCTION: WEBSERVICE 0x1016d640
+// FUNCTION: ROBLOX 0x00478a00
 G3D::ReferenceCountedPointer<Render::Material> Decal::getMaterial()
 {
 	try {
@@ -275,6 +291,7 @@ G3D::ReferenceCountedPointer<Render::Material> Decal::getMaterial()
 }
 
 // FUNCTION: WEBSERVICE 0x1016d810
+// FUNCTION: ROBLOX 0x00478bd0
 void Texture::onTexturePropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	if (descriptor == &FaceInstance::prop_Face) {
@@ -298,6 +315,7 @@ void Texture::onTexturePropertyChanged(const Reflection::PropertyDescriptor* des
 }
 
 // FUNCTION: WEBSERVICE 0x1016d850
+// FUNCTION: ROBLOX 0x00478c10
 G3D::ReferenceCountedPointer<Render::Material> Texture::getMaterial()
 {
 	try {
@@ -324,6 +342,7 @@ G3D::ReferenceCountedPointer<Render::Material> Texture::getMaterial()
 }
 
 // FUNCTION: WEBSERVICE 0x1016e0e0
+// FUNCTION: ROBLOX 0x004792e0
 void PartChunk::onChildRemoved(boost::shared_ptr<Instance> child)
 {
 	if (child.get() == specialShape) {
@@ -334,6 +353,7 @@ void PartChunk::onChildRemoved(boost::shared_ptr<Instance> child)
 }
 
 // FUNCTION: WEBSERVICE 0x1016f210
+// FUNCTION: ROBLOX 0x00479e00
 PartChunk::~PartChunk()
 {
 }
@@ -349,6 +369,7 @@ Texture::~Texture()
 }
 
 // FUNCTION: WEBSERVICE 0x101703a0
+// FUNCTION: ROBLOX 0x0047aba0
 Part::~Part()
 {
 	if (partInstance) {
@@ -373,6 +394,7 @@ static RenderSurfaceType renderSurfaceType(SurfaceType surfaceType)
 }
 
 // FUNCTION: WEBSERVICE 0x101722a0
+// FUNCTION: ROBLOX 0x0047c660
 void Part::updateMesh()
 {
 	RenderSurfaceTypes surfaceTypes;
@@ -543,6 +565,7 @@ void Texture::updateMesh()
 }
 
 // FUNCTION: WEBSERVICE 0x10173c90
+// FUNCTION: ROBLOX 0x0047e0e0
 void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 {
 	SpecialShape* specialShape = dynamic_cast<SpecialShape*>(child.get());
@@ -559,6 +582,7 @@ void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 }
 
 // FUNCTION: WEBSERVICE 0x10174160
+// FUNCTION: ROBLOX 0x0047e5b0
 PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>& partInstance, View* view)
 	: Render::Chunk(polygonOffset), partInstance(partInstance), materialInvalid(true), view(view), specialShape(NULL)
 {
@@ -579,6 +603,7 @@ PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>&
 }
 
 // FUNCTION: WEBSERVICE 0x10174480
+// FUNCTION: ROBLOX 0x0047e8d0
 Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
 	: PartChunk(Render::Chunk::DECAL_OFFSET, shared_from(&parentPart), view), decal(shared_from(&decal))
 {
@@ -589,6 +614,7 @@ Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
 }
 
 // FUNCTION: WEBSERVICE 0x10174640
+// FUNCTION: ROBLOX 0x0047ea90
 Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 	: PartChunk(Render::Chunk::TEXTURE_OFFSET, shared_from(&parentPart), view), texture(shared_from(&texture))
 {
@@ -601,6 +627,7 @@ Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 }
 
 // FUNCTION: WEBSERVICE 0x10174800
+// FUNCTION: ROBLOX 0x0047ec50
 Part::Part(const boost::shared_ptr<PartInstance>& partInstance, View* view) : PartChunk(0.0f, partInstance, view)
 {
 	if (partInstance->getCanAggregate()) {

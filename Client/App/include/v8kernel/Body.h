@@ -67,6 +67,7 @@ public:
 	Vector3 getBranchIBodyV3() const { return Math::toDiagonal(getBranchIBody()); }
 
 	// FUNCTION: WEBSERVICE 0x100ea180
+	// FUNCTION: ROBLOX 0x00629240
 	const Vector3& getBranchForce() const
 	{
 		const SimBody* simBody = getRootSimBody();
@@ -196,6 +197,7 @@ private:
 DECOMP_SIZE_ASSERT(Body, 0xd0)
 
 // FUNCTION: WEBSERVICE 0x100ea020
+// FUNCTION: ROBLOX 0x00629110
 inline void Body::accumulateForceAtBranchCofm(const Vector3& force)
 {
 	SimBody* simBody = getRootSimBody();
@@ -224,6 +226,7 @@ inline void Body::accumulateTorque(const Vector3& torque)
 }
 
 // FUNCTION: WEBSERVICE 0x10118c80
+// FUNCTION: ROBLOX 0x00642b00
 inline void Body::resetAccumulators()
 {
 	SimBody* simBody = getRootSimBody();
@@ -233,9 +236,11 @@ inline void Body::resetAccumulators()
 }
 
 // SYNTHETIC: WEBSERVICE 0x10225130
+// SYNTHETIC: ROBLOX 0x007f4860
 // `RBX::Body::getWorldBody'::`2'::`dynamic atexit destructor for 'b''
 
 // FUNCTION: WEBSERVICE 0x101049e0
+// FUNCTION: ROBLOX 0x0061e920
 inline Body* Body::calcRoot()
 {
 	return parent != NULL ? parent->calcRoot() : this;
@@ -243,8 +248,10 @@ inline Body* Body::calcRoot()
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100e9fe0
+// FUNCTION: ROBLOX 0x006290d0
 // RBX::Body::getBranchIBodyV3
 // FUNCTION: WEBSERVICE 0x100ea1c0
+// FUNCTION: ROBLOX 0x00629280
 // RBX::Body::getBranchTorque
 // clang-format on
 

@@ -77,6 +77,7 @@ char* my_itoa( int value, char* result, int base ) {
 
 SocketDescriptor::SocketDescriptor() {port=0; hostAddress[0]=0;}
 // FUNCTION: WEBSERVICE 0x101ae2c0
+// FUNCTION: ROBLOX 0x004c18c0
 SocketDescriptor::SocketDescriptor(unsigned short _port, const char *_hostAddress)
 {
 	port=_port;
@@ -94,12 +95,14 @@ SocketDescriptor::SocketDescriptor(unsigned short _port, const char *_hostAddres
 bool RAK_DLL_EXPORT NetworkID::peerToPeerMode=false;
 
 // FUNCTION: WEBSERVICE 0x101ae300
+// FUNCTION: ROBLOX 0x004c1900
 bool SystemAddress::operator==( const SystemAddress& right ) const
 {
 	return binaryAddress == right.binaryAddress && port == right.port;
 }
 
 // FUNCTION: WEBSERVICE 0x101ae330
+// FUNCTION: ROBLOX 0x004c1930
 bool SystemAddress::operator!=( const SystemAddress& right ) const
 {
 	return binaryAddress != right.binaryAddress || port != right.port;
@@ -111,11 +114,13 @@ bool SystemAddress::operator>( const SystemAddress& right ) const
 }
 
 // FUNCTION: WEBSERVICE 0x101ae360
+// FUNCTION: ROBLOX 0x004c1960
 bool SystemAddress::operator<( const SystemAddress& right ) const
 {
 	return ( ( binaryAddress < right.binaryAddress ) || ( ( binaryAddress == right.binaryAddress ) && ( port < right.port ) ) );
 }
 // FUNCTION: WEBSERVICE 0x101ae390
+// FUNCTION: ROBLOX 0x004c1990
 char *SystemAddress::ToString(bool writePort) const
 {
 #ifdef _COMPATIBILITY_1
@@ -139,6 +144,7 @@ char *SystemAddress::ToString(bool writePort) const
 #endif
 }
 // FUNCTION: WEBSERVICE 0x101ae410
+// FUNCTION: ROBLOX 0x004c1a10
 void SystemAddress::SetBinaryAddress(const char *str)
 {
 #ifdef _COMPATIBILITY_1
@@ -187,6 +193,7 @@ NetworkID& NetworkID::operator = ( const NetworkID& input )
 }
 
 // FUNCTION: WEBSERVICE 0x101ae4f0
+// FUNCTION: ROBLOX 0x004c1af0
 bool NetworkID::operator==( const NetworkID& right ) const
 {
 	if (NetworkID::peerToPeerMode)
@@ -220,6 +227,7 @@ bool NetworkID::operator<( const NetworkID& right ) const
 }
 
 // FUNCTION: WEBSERVICE 0x101ae540
+// FUNCTION: ROBLOX 0x004c1b40
 bool NetworkID::IsPeerToPeerMode(void)
 {
 	return peerToPeerMode;

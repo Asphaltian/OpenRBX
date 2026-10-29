@@ -24,18 +24,21 @@
 #endif
 
 // FUNCTION: WEBSERVICE 0x10030fa0
+// FUNCTION: ROBLOX 0x004779b0
 HuffmanEncodingTree::HuffmanEncodingTree()
 {
 	root = 0;
 }
 
 // FUNCTION: WEBSERVICE 0x101c1b90
+// FUNCTION: ROBLOX 0x004e1410
 HuffmanEncodingTree::~HuffmanEncodingTree()
 {
 	FreeMemory();
 }
 
 // FUNCTION: WEBSERVICE 0x101c1890
+// FUNCTION: ROBLOX 0x004e1110
 void HuffmanEncodingTree::FreeMemory( void )
 {
 	if ( root == 0 )
@@ -73,6 +76,7 @@ void HuffmanEncodingTree::FreeMemory( void )
 
 // Given a frequency table of 256 elements, all with a frequency of 1 or more, generate the tree
 // FUNCTION: WEBSERVICE 0x101c1ba0
+// FUNCTION: ROBLOX 0x004e1420
 void HuffmanEncodingTree::GenerateFromFrequencyTable( unsigned int frequencyTable[ 256 ] )
 {
 	int counter;
@@ -177,6 +181,7 @@ void HuffmanEncodingTree::GenerateFromFrequencyTable( unsigned int frequencyTabl
 
 // Pass an array of bytes to array and a preallocated BitStream to receive the output
 // FUNCTION: WEBSERVICE 0x101c1a00
+// FUNCTION: ROBLOX 0x004e1280
 void HuffmanEncodingTree::EncodeArray( unsigned char *input, unsigned sizeInBytes, RakNet::BitStream * output )
 {		
 	unsigned counter;
@@ -209,6 +214,7 @@ void HuffmanEncodingTree::EncodeArray( unsigned char *input, unsigned sizeInByte
 }
 
 // FUNCTION: WEBSERVICE 0x101c1580
+// FUNCTION: ROBLOX 0x004e0ed0
 unsigned HuffmanEncodingTree::DecodeArray( RakNet::BitStream * input, unsigned sizeInBits, unsigned maxCharsToWrite, unsigned char *output )
 {
 	HuffmanEncodingTreeNode * currentNode;
@@ -243,6 +249,7 @@ unsigned HuffmanEncodingTree::DecodeArray( RakNet::BitStream * input, unsigned s
 
 // Pass an array of encoded bytes to array and a preallocated BitStream to receive the output
 // FUNCTION: WEBSERVICE 0x101c15f0
+// FUNCTION: ROBLOX 0x004e0f40
 void HuffmanEncodingTree::DecodeArray( unsigned char *input, unsigned sizeInBits, RakNet::BitStream * output )
 {
 	HuffmanEncodingTreeNode * currentNode;
@@ -272,6 +279,7 @@ void HuffmanEncodingTree::DecodeArray( unsigned char *input, unsigned sizeInBits
 
 // Insertion sort.  Slow but easy to write in this case
 // FUNCTION: WEBSERVICE 0x101c1aa0
+// FUNCTION: ROBLOX 0x004e1320
 void HuffmanEncodingTree::InsertNodeIntoSortedList( HuffmanEncodingTreeNode * node, DataStructures::LinkedList<HuffmanEncodingTreeNode *> *huffmanEncodingTreeNodeList ) const
 {
 	if ( huffmanEncodingTreeNodeList->Size() == 0 )

@@ -8,6 +8,7 @@ namespace RBX {
 const char sGettingUp[] = "GettingUp";
 
 // FUNCTION: WEBSERVICE 0x101230a0
+// FUNCTION: ROBLOX 0x00664170
 Humanoid::State* GettingUp::onStep(const float stepDt, Controller& controller)
 {
 	State* answer = Balancing::onStep(stepDt, controller);
@@ -24,6 +25,7 @@ Humanoid::State* GettingUp::onStep(const float stepDt, Controller& controller)
 }
 
 // FUNCTION: WEBSERVICE 0x10123200
+// FUNCTION: ROBLOX 0x006642c0
 GettingUp::GettingUp(Humanoid* humanoid) : Named<Balancing, sGettingUp>(humanoid, 5000.0f, 300.0f)
 {
 	Humanoid::event_GettingUp.fire(humanoid, true);

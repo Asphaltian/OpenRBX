@@ -1,0 +1,2200 @@
+address,type,x-text
+007ff084,string,HKEY_CLASSES_ROOT
+007ff098,string,HKEY_CURRENT_USER
+007ff0ac,string,HKEY_LOCAL_MACHINE
+007ff0cc,string,HKEY_PERFORMANCE_DATA
+007ff0f4,string,HKEY_CURRENT_CONFIG
+007ff194,string,invalid map/set<T> iterator
+007ff248,string,map/set<T> too long
+007ff404,string,http
+007ff414,string,file
+007ff6b0,string,
+007ff6de,string,
+007ffcbc,string,list<T> too long
+00800044,string,about:blank
+008008a8,string,vector<T> too long
+008010b0,string,Roblox
+00801174,string,NetworkClient
+0080119c,string,bad cast
+008012fc,string,;
+00801300,string,POST
+00801308,string,GET
+0080132c,string,
+00801338,string,Connection
+00801344,string,;
+00801354,string,comment
+0080135c,string,port
+00801368,string,=
+008014d8,string,call to empty boost::function
+008014f8,string,deque<T> too long
+00801b40,string,url
+00801b74,string,x
+00801b78,string,y
+0080208c,string,Name
+00802094,string,Type
+00803d18,string,An unexpected error occurred and ROBLOX needs to quit.  We're sorry!
+00803d60,string,ROBLOX Crash
+00803dac,string,%s
+008048c0,string,PNG
+00804968,string,table
+00804970,string,report
+00804a60,string,Color
+00804cb0,string,Exception caught in onEvent. %s
+00804e5c,string,Camera
+008057f8,string,Software/ROBLOX Corporation/Roblox
+008069c8,string,","
+00806e08,string,-
+00806ef8,string,%.3g
+00806f00,string,%d
+008083dc,string,z
+0080995c,string,None
+00809d80,string,graphicsMode
+0080a26c,string,open
+0080a358,widechar,APPID
+0080a514,string,Software/Roblox
+0080a700,string,Script
+0080ac78,string,Exit
+0080b818,string,NoVisit
+0080bd68,string,Value
+0080c494,string,Stats
+0080c928,string,LockPlayMode
+0080c98c,string,Players
+0080cf70,string,nodefault
+0080d1dc,string,GDI Generic
+0080d4e8,string,MOBILITY RADEON 7500
+0080d75c,string,GfxTime
+0080d764,string,videoMemory
+0080d770,string,bevels
+0080d778,string,antiAliasing
+0080d798,string,?
+0080d79c,string,Shadows
+0080d7c4,string,FRM
+0080e2dc,string,
+0080ff04,string,color
+0080ff30,string,part
+0080ff38,string,name
+0080ffa8,string,invalid vector<T> subscript
+00810058,string,'
+0081005c,string,.
+00810238,widechar,
+00810318,string,Failed to load sky box
+00810330,string,Failed to load sky box. %s
+008104ac,string,MegaTexture
+008104b8,string,textures/SurfacesStrip.png
+008104d4,string,textures/JohnTex.png
+008104ec,string,textures/surfaces.png
+00810720,string,"[%f,%f,%f][%f,%f,%f][%f,%f,%f]"
+00810740,string,%d
+00810744,string,version 1.00
+00810754,string,r
+00810854,string,GL_NV_register_combiners
+00810874,string,GL_NV_texture_shader3
+0081088c,string,GL_ATI_texture_env_combine3
+008108a8,string,GL_NV_fragement_program
+008108c0,string,GL_ATI_fragment_shader
+008108d8,string,Could not determine CPU name
+008108f8,string,HKEY_LOCAL_MACHINE/HARDWARE/DESCRIPTION/System/CentralProcessor/0/Proc
+00810950,string,HKEY_LOCAL_MACHINE/HARDWARE/DESCRIPTION/System/CentralProcessor/0/~MHz
+00810998,string,Intel
+008109a0,string,ATI
+00810a28,string,"Failed to load texture '%s', unknown exception"
+00810a58,string,"Failed to load texture '%s', %s"
+00810a78,string,Texture
+00810a80,string,"Generated bump texture, color = (%3.1f, %3.1f, %3.1f)"
+00810ab8,string,%g%g%g%s
+00810b40,string,depth
+00810b48,string,Color Buffer
+00810b58,string,Depth Buffer
+00810b88,string,uniform sampler2D depth; uniform sampler2D color; void main(void) { fl
+00810f20,string,Ref
+00810f28,string,The current security context cannot perform the requested operation
+00811090,string,Attempt to add a non-CharacterAppearance/Accoutrement object to a char
+008110fc,string,Object
+00811160,string,RemoveCharacterAppearance can only be called by the backend server
+008113cc,string,rebuildBackpack can only be called by the backend server
+00811504,string,RemoveCharacter can only be called by the backend server
+00811624,string,set a Player's name
+00811638,string,create a Player
+00811648,string,LoadCharacterAppearance can only be called by the backend server
+00811690,string,fonts/humanoidAnimate.rbxm
+008116ac,string,fonts/humanoidHealth.rbxm
+008116c8,string,fonts/humanoidSound.rbxm
+008116e4,string,character.rbxm should contain a humanoid
+00811710,string,character.rbxm should contain a Character model
+00811740,string,fonts/character.rbxm
+00811758,string,LoadCharacter can only be called by the backend server
+00811790,string,LoadCharacter can only be called when Player is in the world
+00811868,string,message
+00811890,string,Neutral
+008119dc,string,can't set value
+00811a0c,string,userID
+00811cc0,string,Unable to post abuse report to %s. %s
+00811ce8,string,Posted abuse report to %s
+00811d04,string,messages
+00811d10,string,Can't report abuse: Not in a networked game
+00811d3c,string,Sending abuse report to game server via Raknet
+00811d6c,string,Submitting abuse report from %s
+00811d8c,string,[[[anonymous]]]
+00811d9c,string,No local Player to chat from
+00811dbc,string,Local player already exists
+00811dd8,string,Chat message from unknown Player %s %s
+00811e00,string,Players::OnReceive packet %d: %s
+00811e24,string,rbx_abusereporter
+00811f0c,string,.dmp
+00811f14,string,%s %s
+00811f1c,string,Crash Reporter
+00811f2c,string,%s has crashed. Generate a report?
+0081224c,string,Connecting to %s:%d
+00812260,string,Failed to connect to server
+0081227c,string,Failed to start network client
+008123fc,string,Invalid version from %s
+00812414,string,Failed to connect to %s. %s
+00812434,string,Client::OnReceive packet %d: %s
+00812454,string,Connection accepted from %s
+00812474,string,Connect
+0081247c,string,server
+00812484,string,serverPort
+00812490,string,clientPort
+0081249c,string,threadSleepTime
+008124ac,string,Disconnect
+008124b8,string,blockDuration
+0081283c,string,IP addresses:
+0081284c,string,Starting network server on port %d
+00812870,string,Failed to start network server
+00812890,string,Replicator::ClientProxy::OnReceive packet %d: %s
+008128c4,string,Couldn't resolve remotePlayer %s from %s
+008128f0,string,remotePlayer is NULL
+00812908,string,Received remotePlayer %s from %s
+00812a60,string,Server::OnReceive packet %d: %s
+00812a80,string,New connection from %s
+00812a98,string,Start
+00812aa0,string,Stop
+00812b00,string,:
+00812b04,string,127.0.0.1
+00812b10,string,localhost
+00812b1c,string,wb
+00812e94,string,Network
+00812ea8,string,Diagnostics
+00813118,string,Failed to create log file %s
+00813138,string,Logging packets to %s
+00813150,string,wt
+00813154,string,PacketLog%i.csv
+008132e0,string,Replication: Sending marker %d to %s
+008134f8,string,"Replication: ~%s >> %s, %s"
+00813514,string,Replication: ~%s:%s >> %s
+00813530,string,Replication: ~NULL >> %s
+0081354c,string,Replicator: Requesting character for %s
+00813574,string,Attempting to send a Character request without a local Player
+008135b4,string,Replication ~??? << %s
+008135cc,string,Replication: ~%s:%d << %s
+0081362c,string,Packets Thread
+0081363c,string,Physics-in of unidentified %s
+00813660,string,Physics-in dropping old packet
+00813680,string,Physics-in of anchored primitive %s
+008136a4,string,Physics-in of primitive with no assembly %s
+008136d0,string,Physics-in of part not in workspace %s
+008137c0,string,SendBuffer = %d
+008137d0,string,Waiting Refs
+008137e0,string,Instance size (In)
+008137f4,string,Ping
+008137fc,string,Packet Loss
+00813808,string,Bandwidth Exceeded
+0081381c,string,Bytes/s
+008138e8,string,%.1g%%
+008138f0,string,%d avg:%d best:%d
+00813904,string,Replication: Can't create default object of type %s
+00813938,string,Replication: %s:%s.%s >> %s
+00813954,string,Replication: Can't create object of type %s
+00813980,string,"Replication: Bad re-binding %s-%s << %s, %s-%s"
+008139b0,string,Replication: %s:%s << %s
+008139cc,string,Received marker %d from %s
+008139e8,string,ID_CHANGEPROPERTY bad property %s-%s.%s from %s
+00813a18,string,Replication: %s-%s.%s << %s
+00813a3c,string,"%s %s, %d bits"
+00813a50,string,"%s %s, 1 bit (default)"
+00813a6c,string,"%s %s, %d bit"
+00813a80,string,Replicator::OnReceive packet %d: %s
+00813aa4,string,Remote peer is running in the same process
+00813ad0,string,Disconnect from %s
+00813ae4,string,Lost connection to %s
+00813afc,string,Replication: %s:%s >> %s
+00813b20,string,Replicator: Requesting Marker %d of %s
+00813e94,string,Physics Out
+00813ea0,string,Physics In
+00813eac,string,Data Out
+00813eb8,string,Data In
+00813ec0,string,Data Listening
+00813fd4,string,ID_READY_EVENT_QUERY
+00813fec,string,ID_READY_EVENT_ALL_SET
+00814004,string,ID_READY_EVENT_UNSET
+0081401c,string,ID_READY_EVENT_SET
+00814030,string,ID_DATABASE_INCORRECT_PASSWORD
+00814050,string,ID_DATABASE_UNKNOWN_TABLE
+0081406c,string,ID_DATABASE_QUERY_REPLY
+00814084,string,ID_DATABASE_REMOVE_ROW
+0081409c,string,ID_DATABASE_UPDATE_ROW
+008140b4,string,ID_DATABASE_QUERY_REQUEST
+008140d0,string,ID_NAT_SEND_OFFLINE_MESSAGE_AT_TIME
+008140f4,string,ID_NAT_CONNECT_AT_TIME
+0081410c,string,ID_NAT_TARGET_CONNECTION_LOST
+0081412c,string,ID_NAT_TARGET_NOT_CONNECTED
+00814148,string,ID_NAT_PUNCHTHROUGH_REQUEST
+00814164,string,ID_AUTOPATCHER_RESTART_APPLICATION
+00814188,string,ID_AUTOPATCHER_FINISHED
+008141a0,string,ID_AUTOPATCHER_FINISHED_INTERNAL
+008141c4,string,ID_AUTOPATCHER_REPOSITORY_FATAL_ERROR
+008141ec,string,ID_AUTOPATCHER_PATCH_LIST
+00814208,string,ID_AUTOPATCHER_GET_PATCH
+00814224,string,ID_AUTOPATCHER_DELETION_LIST
+00814244,string,ID_AUTOPATCHER_CREATION_LIST
+00814264,string,ID_AUTOPATCHER_GET_CHANGELIST_SINCE_DATE
+00814290,string,ID_RAKVOICE_DATA
+008142a4,string,ID_RAKVOICE_CLOSE_CHANNEL
+008142c0,string,ID_RAKVOICE_OPEN_CHANNEL_REPLY
+008142e0,string,ID_RAKVOICE_OPEN_CHANNEL_REQUEST
+00814304,string,ID_ROUTE_AND_MULTICAST
+0081431c,string,ID_CONNECTION_GRAPH_DISCONNECTION_NOTIFICATION
+0081434c,string,ID_CONNECTION_GRAPH_CONNECTION_LOST
+00814370,string,ID_CONNECTION_GRAPH_NEW_CONNECTION
+00814394,string,ID_CONNECTION_GRAPH_UPDATE
+008143b0,string,ID_CONNECTION_GRAPH_REPLY
+008143cc,string,ID_CONNECTION_GRAPH_REQUEST
+008143e8,string,ID_REPLICA_MANAGER_DOWNLOAD_COMPLETE
+00814410,string,ID_REPLICA_MANAGER_SERIALIZE
+00814430,string,ID_REPLICA_MANAGER_SCOPE_CHANGE
+00814450,string,ID_REPLICA_MANAGER_DESTRUCTION
+00814470,string,ID_REPLICA_MANAGER_CONSTRUCTION
+00814490,string,ID_TRANSPORT_STRING
+008144a4,string,ID_DDT_DOWNLOAD_REQUEST
+008144bc,string,ID_FILE_LIST_TRANSFER_FILE
+008144d8,string,ID_FILE_LIST_TRANSFER_HEADER
+008144f8,string,ID_DOWNLOAD_PROGRESS
+00814510,string,ID_REMOTE_NEW_INCOMING_CONNECTION
+00814534,string,ID_REMOTE_CONNECTION_LOST
+00814550,string,ID_REMOTE_DISCONNECTION_NOTIFICATION
+00814578,string,ID_ADVERTISE_SYSTEM
+0081458c,string,ID_PONG
+00814594,string,ID_TIMESTAMP
+008145a4,string,ID_MODIFIED_PACKET
+008145b8,string,ID_INVALID_PASSWORD
+008145cc,string,ID_CONNECTION_BANNED
+008145e4,string,ID_RSA_PUBLIC_KEY_MISMATCH
+00814600,string,ID_CONNECTION_LOST
+00814614,string,ID_DISCONNECTION_NOTIFICATION
+00814634,string,ID_NO_FREE_INCOMING_CONNECTIONS
+00814654,string,ID_NEW_INCOMING_CONNECTION
+00814670,string,ID_ALREADY_CONNECTED
+00814688,string,ID_CONNECTION_ATTEMPT_FAILED
+008146a8,string,ID_CONNECTION_REQUEST_ACCEPTED
+008146c8,string,ID_RPC_REPLY
+008146d8,string,ID_RPC
+008146e0,string,ID_OPEN_CONNECTION_REPLY
+008146fc,string,ID_OPEN_CONNECTION_REQUEST
+00814718,string,ID_DETECT_LOST_CONNECTIONS
+00814734,string,ID_RPC_MAPPING
+00814744,string,ID_SECURED_CONNECTION_CONFIRMATION
+00814768,string,ID_SECURED_CONNECTION_RESPONSE
+00814788,string,ID_CONNECTION_REQUEST
+008147a0,string,ID_CONNECTED_PONG
+008147b4,string,ID_PING_OPEN_CONNECTIONS
+008147d0,string,ID_PING
+008147d8,string,ID_INTERNAL_PING
+008147ec,string,Unknown
+008148ac,string,"%s%s,Rpc,%5i,%5i,%s,%5i,%i,%u:%i,%u:%i%s"
+008148d8,string,"%s%s,RpT,%5i,%5i,%s,%5i,%i,%u:%i,%u:%i%s"
+00814904,string,"%s%s,Nrm,%i,%i,%s,%i,%i,%u:%i,%u:%i%s"
+0081492c,string,"%s%s,Nrm,%5i,%5i,%5i,%5i,%i,%u:%i,%u:%i%s"
+00814958,string,"%s%s,Tms,%i,%i,%s,%i,%i,%u:%i,%u:%i%s"
+00814980,string,"%s%s,Tms,%5i,%5i,%5i,%5i,%i,%u:%i,%u:%i%s"
+00814df8,string,[UNKNOWN]
+00814e04,string,0.0.0.0
+00814e28,string,rb
+00814e2c,string,
+00814e30,string,
+00814e34,string,%u
+00814e48,string,_initialized
+00814e58,string,./glg3dcpp/GLCaps.cpp
+00814e70,string,GLCaps has not been initialized.
+00814fc0,string,GL_EXT_texture_cube_map
+00814fd8,string,GL_SGIS_generate_mipmap
+00815000,string,_loadedExtensions
+00815014,string,Cannot call GLCaps::glVersion before GLCaps::init().
+0081504c,string,Cannot call GLCaps::vendor before GLCaps::init().
+00815080,string,Cannot call GLCaps::renderer before GLCaps::init().
+008150b4,string,GL_ARB_vertex_buffer_object
+008150d0,string,Brian Paul
+008150dc,string,NVIDIA Corporation
+008150f0,string,ATI Technologies Inc.
+00815108,string,%d.%d.%d.%d
+00815114,string,Unknown (No information)
+00815130,string,Unknown (Can't find driver)
+0081514c,string,/ati2dvag.dll
+0081515c,string,/nv4_disp.dll
+0081516c,string,Unknown (Unknown vendor)
+00815188,string,Unknown (can't find Windows directory)
+008151b0,string,Unknown (bad MESA driver string)
+008151d4,string,Cannot call GLCaps::driverVersion before GLCaps::init().
+00815210,string,Intel 854G
+0081521c,string,Intel 845G
+00815228,string,MOBILITY RADEON 57
+0081523c,string,MOBILITY RADEON 90
+00815250,string,Cannot check for OpenGL bugs before extensions are loaded.
+00815290,string,No GL_ARB_multitexture support: forcing number of texture units to no 
+008152e4,string,GL_NV_fragment_program
+00815300,string,WARNING: This ATI Radeon Mobility card has a known bug with cube maps.
+008153a4,string,6.14.10.6
+008153b0,string,MOBILITY RADEON
+008153c0,string,GL_NV_texture_rectangle
+008153d8,string,GL_EXT_framebuffer_object
+008153f4,string,GL_ARB_vertex_shader
+0081540c,string,GL_ARB_fragment_shader
+00815424,string,GL_ARB_shading_language_100
+00815440,string,GL_ARB_shader_objects
+00815458,string,GL_ARB_shadow
+00815468,string,GL_EXT_texture_compression_s3tc
+00815488,string,GL_ATI_separate_stencil
+008154a0,string,GL_EXT_stencil_two_side
+008154b8,string,GL_EXT_stencil_wrap
+008154cc,string,GL_ARB_multitexture
+008154e0,string,GL_ARB_fragment_program
+008154f8,string,GL_EXT_texture_3D
+0081550c,string,GL_ARB_texture_border_clamp
+00815528,string,GL_EXT_texture_edge_clamp
+00815544,string,GL_NV_vertex_program2
+0081555c,string,GL_ARB_vertex_program
+00815574,string,GL_EXT_texture_rectangle
+00815590,string,GL_ARB_texture_non_power_of_two
+008155b0,string,glIsQueryARB
+008155c0,string,glGetQueryObjectuivARB
+008155d8,string,glGetQueryObjectivARB
+008155f0,string,glGetQueryivARB
+00815600,string,glGenQueriesARB
+00815610,string,glEndQueryARB
+00815620,string,glDeleteQueriesARB
+00815634,string,glBeginQueryARB
+00815644,string,glGenerateMipmapEXT
+00815658,string,glGetFramebufferAttachmentParameterivEXT
+00815684,string,glFramebufferRenderbufferEXT
+008156a4,string,glFramebufferTexture3DEXT
+008156c0,string,glFramebufferTexture2DEXT
+008156dc,string,glFramebufferTexture1DEXT
+008156f8,string,glCheckFramebufferStatusEXT
+00815714,string,glGenFramebuffersEXT
+0081572c,string,glDeleteFramebuffersEXT
+00815744,string,glBindFramebufferEXT
+0081575c,string,glIsFramebufferEXT
+00815770,string,glGetRenderbufferParameterivEXT
+00815790,string,glRenderbufferStorageEXT
+008157ac,string,glGenRenderbuffersEXT
+008157c4,string,glDeleteRenderbuffersEXT
+008157e0,string,glBindRenderbufferEXT
+008157f8,string,glIsRenderBufferEXT
+0081580c,string,wglDestroyPbufferEXT
+00815824,string,wglCreatePbufferEXT
+00815838,string,wglEnableGenlockI3D
+0081584c,string,glStencilOpSeparateATI
+00815864,string,glStencilFuncSeparateATI
+00815880,string,glTexImage3DEXT
+00815890,string,glDrawBuffersARB
+008158a4,string,glAlphaFragmentOp3ATI
+008158bc,string,glAlphaFragmentOp2ATI
+008158d4,string,glAlphaFragmentOp1ATI
+008158ec,string,glColorFragmentOp3ATI
+00815904,string,glColorFragmentOp2ATI
+0081591c,string,glColorFragmentOp1ATI
+00815934,string,glSetFragmentShaderConstantATI
+00815954,string,glSampleMapATI
+00815964,string,glPassTexCoordATI
+00815978,string,glEndFragmentShaderATI
+00815990,string,glBeginFragmentShaderATI
+008159ac,string,glBindFragmentShaderATI
+008159c4,string,glDeleteFragmentShaderATI
+008159e0,string,glGenFragmentShadersATI
+008159f8,string,glGetActiveUniformARB
+00815a10,string,glGetObjectParameterivARB
+00815a2c,string,glGetAttribLocationARB
+00815a44,string,glGetUniformLocationARB
+00815a5c,string,glGetInfoLogARB
+00815a6c,string,glUniformMatrix4fvARB
+00815a84,string,glUniformMatrix3fvARB
+00815a9c,string,glUniformMatrix2fvARB
+00815ab4,string,glUniform4iARB
+00815ac4,string,glUniform3iARB
+00815ad4,string,glUniform2iARB
+00815ae4,string,glUniform1iARB
+00815af4,string,glUniform4fvARB
+00815b04,string,glUniform3fvARB
+00815b14,string,glUniform2fvARB
+00815b24,string,glUniform1fvARB
+00815b34,string,glValidateProgramARB
+00815b4c,string,glUseProgramObjectARB
+00815b64,string,glLinkProgramARB
+00815b78,string,glAttachObjectARB
+00815b8c,string,glCreateProgramObjectARB
+00815ba8,string,glCompileShaderARB
+00815bbc,string,glShaderSourceARB
+00815bd0,string,glCreateShaderObjectARB
+00815be8,string,glDetachObjectARB
+00815bfc,string,glGetHandleARB
+00815c0c,string,glDeleteObjectARB
+00815c20,string,glDrawRangeElements
+00815c34,string,glGetBufferPointervARB
+00815c4c,string,glGetBufferParameterivARB
+00815c68,string,glUnmapBufferARB
+00815c7c,string,glMapBufferARB
+00815c8c,string,glGetBufferSubDataARB
+00815ca4,string,glBufferSubDataARB
+00815cb8,string,glBufferDataARB
+00815cc8,string,glIsBufferARB
+00815cd8,string,glGenBuffersARB
+00815ce8,string,glDeleteBuffersARB
+00815cfc,string,glBindBufferARB
+00815d0c,string,glGetProgramParameterdvNV
+00815d28,string,glGetProgramParameterfvNV
+00815d44,string,glActiveStencilFaceEXT
+00815d5c,string,glProgramParameter4fvNV
+00815d74,string,glTrackMatrixNV
+00815d84,string,glLoadProgramNV
+00815d94,string,glBindProgramNV
+00815da4,string,glDeleteProgramsNV
+00815db8,string,glGenProgramsNV
+00815dc8,string,glGetCombinerStageParameterfvNV
+00815de8,string,glCombinerStageParameterfvNV
+00815e08,string,glGetFinalCombinerInputParameterivNV
+00815e30,string,glGetFinalCombinerInputParameterfvNV
+00815e58,string,glGetCombinerOutputParameterivNV
+00815e7c,string,glGetCombinerOutputParameterfvNV
+00815ea0,string,glGetCombinerInputParameterivNV
+00815ec0,string,glGetCombinerInputParameterfvNV
+00815ee0,string,glFinalCombinerInputNV
+00815ef8,string,glCombinerOutputNV
+00815f0c,string,glCombinerInputNV
+00815f20,string,glCombinerParameteriNV
+00815f38,string,glCombinerParameterivNV
+00815f50,string,glCombinerParameterfNV
+00815f68,string,glCombinerParameterfvNV
+00815f80,string,glMultiDrawElementsEXT
+00815f98,string,glMultiDrawArraysEXT
+00815fb0,string,glPointParameterfvARB
+00815fc8,string,glPointParameterfARB
+00815fe0,string,glDisableVertexAttribArrayARB
+00816000,string,glEnableVertexAttribArrayARB
+00816020,string,glVertexAttribPointerARB
+0081603c,string,glProgramLocalParameter4dvARB
+0081605c,string,glProgramEnvParameter4dvARB
+00816078,string,glProgramLocalParameter4fvARB
+00816098,string,glProgramLocalParameter4fARB
+008160b8,string,glProgramEnvParameter4fARB
+008160d4,string,glProgramStringARB
+008160e8,string,glDeleteProgramsARB
+008160fc,string,glBindProgramARB
+00816110,string,glGenProgramsARB
+00816124,string,glFinishFenceNV
+00816134,string,glFlushVertexArrayRangeNV
+00816150,string,glSetFenceNV
+00816160,string,glDeleteFencesNV
+00816174,string,glGenFencesNV
+00816184,string,glGetCompressedTexImageARB
+008161a0,string,glCompressedTexImage2DARB
+008161bc,string,glVertexArrayRangeNV
+008161d4,string,wglFreeMemoryNV
+008161e4,string,wglAllocateMemoryNV
+008161f8,string,wglChoosePixelFormatARB
+00816210,string,wglSwapIntervalEXT
+00816224,string,glBlendEquationEXT
+00816238,string,glClientActiveTextureARB
+00816254,string,glActiveTextureARB
+00816268,string,glMultiTexCoord4dvARB
+00816280,string,glMultiTexCoord3dvARB
+00816298,string,glMultiTexCoord2dvARB
+008162b0,string,glMultiTexCoord1dARB
+008162c8,string,glMultiTexCoord4fvARB
+008162e0,string,glMultiTexCoord3fvARB
+008162f8,string,glMultiTexCoord2fvARB
+00816310,string,glMultiTexCoord1fARB
+00816328,string,glMultiTexCoord2fARB
+00816340,string,! _initialized
+00816350,string,Internal error.
+00816374,string,up
+008163a0,string,GL_EXT_texture_filter_anisotropic
+008163c4,string,GL_EXT_texture_lod
+008163d8,string,false
+008163e0,string,./glg3dcpp/Texture.cpp
+008163f8,string,Illegal interpolate mode
+00816418,string,Cube map filenames must contain '*' as a placeholder for up/lf/rt/bk/f
+00816464,string,*
+00816468,string,glGetError() != GL_INVALID_OPERATION
+00816490,string,GL_INVALID_OPERATION: Probably caused by invoking glGenTextures betwee
+008164ec,string,e == GL_NONE
+008164fc,string,Error encountered during glBindTexture:
+0081653c,string,GImage has an unexpected number of channels (%d)
+00816570,string,Alpha
+00816578,string,DDS
+0081657c,string,**************************  Loading '%s' failed. %s
+008165c0,string,./glg3dcpp/VARArea.cpp
+008165d8,string,Fell through switch.
+00816628,string,UNSUPPORTED
+00816634,string,ok
+00816638,string,GL_EXT_blend_minmax
+0081664c,string,GL_ARB_texture_env_dot3
+00816664,string,GL_ARB_texture_env_combine
+00816680,string,GL_EXT_texture_env_add
+008166b0,string,Left
+008166b8,string,Top
+008166e0,string,(b >= BUFFER_CURRENT) && (b <= BUFFER_COLOR15)
+00816710,string,Visible buffers cannot be specified for application-created framebuffe
+0081675c,string,(b >= BUFFER_NONE) && (b <= BUFFER_CURRENT)
+00816788,string,./glg3dcpp/RenderDevice.cpp
+008167a8,string,Drawing to a color buffer is only supported by application-created fra
+008167fc,string,s->ok()
+00816804,string,currentVARArea.isNull() || (v.area == currentVARArea)
+00816840,string,All vertex arrays used within a single begin/endIndexedPrimitive block
+008168a4,string,VAR Milestone
+008168c4,string,Setting initial rendering state.
+008168f0,string,Done setting initial state.
+00816910,string,GL_NV_multisample_filter_hint
+00816930,string,GL_ARB_multisample
+00816948,string,"Cannot enable separate specular lighting, extension not supported."
+0081698c,string,Enabling separate specular lighting.
+008169b4,string,GL_EXT_separate_specular_color
+008169d4,string,Brightness set.
+008169e4,string,Setting brightness to %g
+00816a00,string,wglSwapIntervalEXT(1);
+00816a18,string,wglSwapIntervalEXT(0);
+00816a30,string,Deleting window.
+00816a44,string,Freeing all VAR memory
+00816a5c,string,Restoring gamma.
+00816a70,string,Shutting down RenderDevice.
+00816a8c,string,3D
+00816a90,string,Done initializing RenderDevice.
+00816ab8,string,Capability    Minimum   Desired   Received  Ok? ----------------------
+00816ce8,string,Windowed
+00816cf4,string,Fullscreen
+00816d00,string,Video Status
+00816d10,string,GL extensions: '%s'
+00816d28,string,Driver version: %s
+00816d40,string,GL Version:     %s
+00816d54,string,GL Renderer:    %s
+00816d68,string,GL Vendor:      %s
+00816d7c,string,Processor Architecture: %s
+00816d9c,string,Operating System: %s
+00816db8,string,********************************************************* * WARNING: T
+00816f8c,string,Setting video mode
+00816fa0,string,numTextureCoords                      = %d numTextures                
+00817078,string,Initialization
+008170a8,string,n != NULL
+008170b8,string,c:/Roblox/Releases/2007.12.20/Client/Rendering/g3d/include/G3D/Table.h
+00817100,string,Tried to remove a key that was not in the table.
+00817134,string,CheckCacheSize is removing %s
+00817158,string,texture != NULL
+00817168,string,./glg3dcpp/TextureManager.cpp
+00817188,string,Texture not found
+0081733c,string,requiresMainLoop() == false
+00817358,string,c:/Roblox/Releases/2007.12.20/Client/Rendering/g3d/include/glg3d/GWind
+008173a8,string,This GWindow implementation failed to overwrite runMainLoop even thoug
+00817790,string,./glg3dcpp/VAR.cpp
+008177a4,string,Fell through switch
+008177b8,string,newAlignedSize <= area->freeSize()
+008177e0,string,VARArea too small to hold new VAR (possibly due to rounding to 8-byte 
+00817834,string,! _area.isNull()
+00817848,string,Bad VARArea
+008178d8,string,B Gamma
+008178e0,string,RG Gamma
+008178f8,string,Bloom map
+00817904,string,Bloom map intermediate
+0081791c,string,Copied Screen Image
+00817930,string,gamma
+00817938,string,oldBloom
+00817944,string,bloomImage
+00817950,string,screenImage
+00817960,string,uniform sampler2D screenImage; uniform sampler2D bloomImage; uniform s
+00817ba0,string,uniform sampler2D bloomImage; uniform sampler2D oldBloom; vec3 sample(
+00817e18,string,const int kernelSize = 17;         const float gaussCoef[kernelSize] =
+00817f70,string,uniform sampler2D screenImage; vec3 threshold(vec3 v) { const float T 
+00818220,string,/* Amount to brighten the bloom*/          const float scale = 3.0;   
+00818458,string,GL_NV_texture_shader
+00818470,string,GL_ARB_texture_env_crossbar
+008185f0,string,real.str
+008185fc,string,sun-rays.jpg
+0081860c,string,lensflare.jpg
+0081861c,string,sun.jpg
+00818624,string,moon.jpg
+00818630,string,moon-alpha.jpg
+00818750,string,
+00818760,string,sampler2DRectShadow
+00818774,string,sampler2DShadow
+00818784,string,sampler2DRect
+00818794,string,samplerCube
+008187a0,string,sampler3D
+008187ac,string,sampler2D
+008187b8,string,sampler1D
+008187c4,string,mat4
+008187cc,string,mat3
+008187d4,string,mat2
+008187dc,string,bool
+008187e4,string,int
+008187e8,string,vec4
+008187f0,string,vec3
+008187f8,string,vec2
+00818800,string,float
+00818808,string,Variable %s was declared as type %s (%s) and the value provided at run
+00818868,string,No value provided for VertexAndPixelShader uniform variable %s of type
+008188b8,string,No value provided for VertexAndPixelShader uniform variable %s.
+008188f8,string,Extra VertexAndPixelShader uniform variable provided at runtime:
+0081893c,string,g3d_sz2D_
+00818948,string,./glg3dcpp/Shader.cpp
+00818960,string,Unsupported argument type: %s
+00818980,string,gl_
+00818984,string,uniform vec4
+00818994,string,.zw)
+0081899c,string,(
+008189a8,string,g3d_sampler2DInvSize(
+008189c0,string,nameEnd != std::string::npos
+008189e0,string,) expression
+008189f0,string,Could not find the end of
+00818a0c,string,.xy)
+00818a14,string,(
+00818a1c,string,g3d_sampler2DSize(
+00818a30,string,ok()
+00818a38,string,[Line numbers in the following shader errors are shifted by one.]
+00818a7c,string,Could not load shader file '%s'.
+00818aa0,string,This graphics card does not support pixel shaders.
+00818ad4,string,This graphics card does not support vertex shaders.
+00818b08,string,uniform mat4 g3d_WorldToObjectMatrix; uniform mat4 g3d_ObjectToWorldMa
+00818c00,string,g3d_NumTextures
+00818c10,string,g3d_ObjectLight0
+00818c24,string,g3d_NumLights
+00818c34,string,g3d_WorldToCameraMatrix
+00818c4c,string,g3d_WorldToObjectMatrix
+00818c64,string,g3d_CameraToWorldMatrix
+00818c7c,string,g3d_ObjectToWorldMatrix
+00818c94,string,]
+00818c98,string,[
+00818c9c,string,const
+00818ca4,string,uniform
+00818cac,string,_ok
+00818cb0,string,Linking
+00818cbc,string,Compiling
+00818cc8,string,Pixel Shader
+00818cd8,string,Vertex Shader
+00818ce8,string,This graphics card does not support GL_ARB_shader_objects.
+00818d38,string,?0x%x?
+00818d40,string,GL_EVAL_BIT
+00818d4c,string,GL_SAMPLER_2D_RECT_SHADOW_ARB
+00818d6c,string,GL_SAMPLER_2D_RECT_ARB
+00818d84,string,GL_SAMPLER_2D_SHADOW_ARB
+00818da0,string,GL_SAMPLER_1D_SHADOW_ARB
+00818dbc,string,GL_SAMPLER_CUBE_ARB
+00818dd0,string,GL_SAMPLER_3D_ARB
+00818de4,string,GL_SAMPLER_2D_ARB
+00818df8,string,GL_SAMPLER_1D_ARB
+00818e0c,string,GL_FLOAT_MAT4_ARB
+00818e20,string,GL_FLOAT_MAT3_ARB
+00818e34,string,GL_FLOAT_MAT2_ARB
+00818e48,string,GL_BOOL_VEC4_ARB
+00818e5c,string,GL_BOOL_VEC3_ARB
+00818e70,string,GL_BOOL_VEC2_ARB
+00818e84,string,GL_BOOL_ARB
+00818e90,string,GL_INT_VEC4_ARB
+00818ea0,string,GL_INT_VEC3_ARB
+00818eb0,string,GL_INT_VEC2_ARB
+00818ec0,string,GL_FLOAT_VEC4_ARB
+00818ed4,string,GL_FLOAT_VEC3_ARB
+00818ee8,string,GL_FLOAT_VEC2_ARB
+00818efc,string,GL_SHADER_OBJECT_ARB
+00818f14,string,GL_INCR_WRAP_EXT
+00818f28,string,GL_DECR_WRAP_EXT
+00818f3c,string,GL_TEXTURE_RECTANGLE_EXT
+00818f58,string,GL_TEXTURE_BINDING_3D
+00818f70,string,GL_TEXTURE_BINDING_2D
+00818f88,string,GL_TEXTURE_BINDING_1D
+00818fa0,string,GL_TEXTURE_3D
+00818fb0,string,GL_FOG_SPECULAR_TEXTURE_WIN
+00818fcc,string,GL_PHONG_HINT_WIN
+00818fe0,string,GL_PHONG_WIN
+00818ff0,string,GL_EDGE_FLAG_ARRAY_POINTER_EXT
+00819010,string,GL_TEXTURE_COORD_ARRAY_POINTER_EXT
+00819034,string,GL_INDEX_ARRAY_POINTER_EXT
+00819050,string,GL_COLOR_ARRAY_POINTER_EXT
+0081906c,string,GL_NORMAL_ARRAY_POINTER_EXT
+00819088,string,GL_VERTEX_ARRAY_POINTER_EXT
+008190a4,string,GL_EDGE_FLAG_ARRAY_COUNT_EXT
+008190c4,string,GL_EDGE_FLAG_ARRAY_STRIDE_EXT
+008190e4,string,GL_TEXTURE_COORD_ARRAY_COUNT_EXT
+00819108,string,GL_TEXTURE_COORD_ARRAY_STRIDE_EXT
+0081912c,string,GL_TEXTURE_COORD_ARRAY_TYPE_EXT
+0081914c,string,GL_TEXTURE_COORD_ARRAY_SIZE_EXT
+0081916c,string,GL_INDEX_ARRAY_COUNT_EXT
+00819188,string,GL_COLOR_ARRAY_COUNT_EXT
+008191a4,string,GL_NORMAL_ARRAY_COUNT_EXT
+008191c0,string,GL_VERTEX_ARRAY_COUNT_EXT
+008191dc,string,GL_INDEX_ARRAY_STRIDE
+008191f4,string,GL_INDEX_ARRAY_TYPE
+00819208,string,GL_COLOR_ARRAY_STRIDE
+00819220,string,GL_COLOR_ARRAY_TYPE
+00819234,string,GL_COLOR_ARRAY_SIZE
+00819248,string,GL_NORMAL_ARRAY_STRIDE
+00819260,string,GL_NORMAL_ARRAY_TYPE
+00819278,string,GL_VERTEX_ARRAY_STRIDE
+00819290,string,GL_VERTEX_ARRAY_TYPE
+008192a8,string,GL_VERTEX_ARRAY_SIZE
+008192c0,string,GL_EDGE_FLAG_ARRAY
+008192d4,string,GL_TEXTURE_COORD_ARRAY
+008192ec,string,GL_INDEX_ARRAY
+008192fc,string,GL_COLOR_ARRAY
+0081930c,string,GL_NORMAL_ARRAY
+0081931c,string,GL_VERTEX_ARRAY
+0081932c,string,GL_POLYGON_OFFSET_FILL
+00819344,string,GL_POLYGON_OFFSET_FACTOR
+00819360,string,GL_CLAMP_TO_EDGE
+00819374,string,GL_TEXTURE_WRAP_R
+00819388,string,GL_HINT_BIT
+00819394,string,GL_LIGHT7
+008193a0,string,GL_LIGHT6
+008193ac,string,GL_LIGHT5
+008193b8,string,GL_LIGHT4
+008193c4,string,GL_LIGHT3
+008193d0,string,GL_LIGHT2
+008193dc,string,GL_LIGHT1
+008193e8,string,GL_LIGHT0
+008193f4,string,GL_CLIP_PLANE5
+00819404,string,GL_CLIP_PLANE4
+00819414,string,GL_CLIP_PLANE3
+00819424,string,GL_CLIP_PLANE2
+00819434,string,GL_CLIP_PLANE1
+00819444,string,GL_CLIP_PLANE0
+00819454,string,GL_POLYGON_OFFSET_LINE
+0081946c,string,GL_POLYGON_OFFSET_POINT
+00819484,string,GL_REPEAT
+00819490,string,GL_POLYGON_OFFSET_UNITS
+008194a8,string,GL_CLAMP
+008194b4,string,GL_TEXTURE_MIN_FILTER
+008194cc,string,GL_TEXTURE_WRAP_S
+008194e0,string,GL_TEXTURE_WRAP_T
+008194f4,string,GL_TEXTURE_MAG_FILTER
+0081950c,string,GL_LINEAR_MIPMAP_NEAREST
+00819528,string,GL_NEAREST_MIPMAP_LINEAR
+00819544,string,GL_LINEAR_MIPMAP_LINEAR
+0081955c,string,GL_NEAREST_MIPMAP_NEAREST
+00819578,string,GL_LINEAR
+00819584,string,GL_NEAREST
+00819590,string,GL_TEXTURE_GEN_MODE
+008195a4,string,GL_OBJECT_PLANE
+008195b4,string,GL_EYE_PLANE
+008195c4,string,GL_SPHERE_MAP
+008195d4,string,GL_OBJECT_LINEAR
+008195e8,string,GL_EYE_LINEAR
+008195f8,string,GL_TEXTURE_ENV_COLOR
+00819610,string,GL_TEXTURE_ENV
+00819620,string,GL_TEXTURE_ENV_MODE
+00819634,string,GL_MODULATE
+00819640,string,GL_DECAL
+0081964c,string,GL_Q
+00819654,string,GL_T
+0081965c,string,GL_R
+00819664,string,GL_ENABLE_BIT
+00819674,string,GL_RENDERER
+00819680,string,GL_VERSION
+0081968c,string,GL_EXTENSIONS
+0081969c,string,GL_VENDOR
+008196a8,string,GL_REPLACE
+008196b4,string,GL_INCR
+008196bc,string,GL_DECR
+008196c4,string,GL_KEEP
+008196cc,string,GL_SMOOTH
+008196d8,string,GL_FLAT
+008196e0,string,GL_FEEDBACK
+008196ec,string,GL_SELECT
+008196f8,string,GL_RENDER
+00819704,string,GL_POINT
+00819710,string,GL_LINE
+00819718,string,GL_FILL
+00819720,string,GL_BITMAP
+0081972c,string,GL_LUMINANCE_ALPHA
+00819740,string,GL_LUMINANCE
+00819750,string,GL_RGBA
+00819758,string,GL_RGB
+00819760,string,GL_ALPHA
+0081976c,string,GL_BLUE
+00819774,string,GL_GREEN
+00819780,string,GL_RED
+00819788,string,GL_DEPTH_COMPONENT
+0081979c,string,GL_STENCIL_INDEX
+008197b0,string,GL_COLOR_INDEX
+008197c0,string,GL_STENCIL
+008197cc,string,GL_DEPTH
+008197d8,string,GL_TEXTURE
+008197e4,string,GL_COLOR
+008197f0,string,GL_PROJECTION
+00819800,string,GL_MODELVIEW
+00819810,string,GL_COLOR_INDEXES
+00819824,string,GL_SHININESS
+00819834,string,GL_AMBIENT_AND_DIFFUSE
+0081984c,string,GL_EMISSION
+00819858,string,GL_SET
+00819860,string,GL_NAND
+00819868,string,GL_OR_INVERTED
+00819878,string,GL_COPY_INVERTED
+0081988c,string,GL_OR_REVERSE
+0081989c,string,GL_INVERT
+008198a8,string,GL_EQUIV
+008198b4,string,GL_NOR
+008198bc,string,GL_OR
+008198c4,string,GL_XOR
+008198cc,string,GL_NOOP
+008198d4,string,GL_AND_INVERTED
+008198e4,string,GL_COPY
+008198ec,string,GL_AND_REVERSE
+008198fc,string,GL_AND
+00819904,string,GL_CLEAR
+00819910,string,GL_DOUBLE
+0081991c,string,GL_4_BYTES
+00819928,string,GL_3_BYTES
+00819934,string,GL_2_BYTES
+00819940,string,GL_FLOAT
+0081994c,string,GL_UNSIGNED_INT
+0081995c,string,GL_INT
+00819964,string,GL_UNSIGNED_SHORT
+00819978,string,GL_SHORT
+00819984,string,GL_UNSIGNED_BYTE
+00819998,string,GL_BYTE
+008199a0,string,GL_COMPILE_AND_EXECUTE
+008199b8,string,GL_COMPILE
+008199c4,string,GL_CONSTANT_ATTENUATION
+008199dc,string,GL_SPOT_CUTOFF
+008199ec,string,GL_SPOT_EXPONENT
+00819a00,string,GL_SPOT_DIRECTION
+00819a14,string,GL_POSITION
+00819a20,string,GL_SPECULAR
+00819a2c,string,GL_DIFFUSE
+00819a38,string,GL_AMBIENT
+00819a44,string,GL_FASTEST
+00819a50,string,GL_NICEST
+00819a5c,string,GL_DONT_CARE
+00819a6c,string,GL_TEXTURE_BORDER
+00819a80,string,GL_TEXTURE_BORDER_COLOR
+00819a98,string,GL_TEXTURE_INTERNAL_FORMAT
+00819ab4,string,GL_TEXTURE_HEIGHT
+00819ac8,string,GL_TRANSFORM_BIT
+00819adc,string,GL_TEXTURE_2D
+00819aec,string,GL_TEXTURE_1D
+00819afc,string,GL_MAP2_VERTEX_4
+00819b10,string,GL_MAP2_VERTEX_3
+00819b24,string,GL_MAP2_TEXTURE_COORD_4
+00819b3c,string,GL_MAP2_TEXTURE_COORD_3
+00819b54,string,GL_MAP2_TEXTURE_COORD_2
+00819b6c,string,GL_MAP2_TEXTURE_COORD_1
+00819b84,string,GL_MAP2_NORMAL
+00819b94,string,GL_MAP2_INDEX
+00819ba4,string,GL_MAP2_COLOR_4
+00819bb4,string,GL_MAP1_VERTEX_4
+00819bc8,string,GL_MAP1_VERTEX_3
+00819bdc,string,GL_MAP1_TEXTURE_COORD_4
+00819bf4,string,GL_MAP1_TEXTURE_COORD_3
+00819c0c,string,GL_MAP1_TEXTURE_COORD_2
+00819c24,string,GL_MAP1_TEXTURE_COORD_1
+00819c3c,string,GL_MAP1_NORMAL
+00819c4c,string,GL_MAP1_INDEX
+00819c5c,string,GL_MAP1_COLOR_4
+00819c6c,string,GL_AUTO_NORMAL
+00819c7c,string,GL_TEXTURE_GEN_T
+00819c90,string,GL_TEXTURE_GEN_R
+00819ca4,string,GL_TEXTURE_GEN_Q
+00819cb8,string,GL_MAX_PIXEL_MAP_TABLE
+00819cd0,string,GL_MAX_TEXTURE_SIZE
+00819ce4,string,GL_MAX_CLIP_PLANES
+00819cf8,string,GL_MAX_LIGHTS
+00819d08,string,GL_MAX_EVAL_ORDER
+00819d1c,string,GL_DEPTH_BIAS
+00819d2c,string,GL_DEPTH_SCALE
+00819d3c,string,GL_ALPHA_BIAS
+00819d4c,string,GL_ALPHA_SCALE
+00819d5c,string,GL_BLUE_BIAS
+00819d6c,string,GL_BLUE_SCALE
+00819d7c,string,GL_GREEN_BIAS
+00819d8c,string,GL_GREEN_SCALE
+00819d9c,string,GL_ZOOM_Y
+00819da8,string,GL_ZOOM_X
+00819db4,string,GL_RED_BIAS
+00819dc0,string,GL_TEXTURE_GEN_S
+00819dd4,string,GL_SCISSOR_TEST
+00819de4,string,GL_INDEX_LOGIC_OP
+00819df8,string,GL_FOG
+00819e00,string,GL_DITHER
+00819e0c,string,GL_CULL_FACE
+00819e1c,string,GL_LINE_STIPPLE
+00819e2c,string,GL_POLYGON_SMOOTH
+00819e40,string,GL_POLYGON_STIPPLE
+00819e54,string,GL_STENCIL_TEST
+00819e64,string,GL_NORMALIZE
+00819e74,string,GL_DEPTH_TEST
+00819e84,string,GL_ALPHA_TEST
+00819e94,string,GL_BLEND_SRC
+00819ea4,string,GL_BLEND_DST
+00819eb4,string,GL_BLEND
+00819ec0,string,GL_COLOR_MATERIAL
+00819ed4,string,GL_COLOR_LOGIC_OP
+00819ee8,string,GL_LINE_WIDTH
+00819ef8,string,GL_LINE_SMOOTH
+00819f08,string,GL_POINT_SIZE_GRANULARITY
+00819f24,string,GL_POINT_SIZE_RANGE
+00819f38,string,GL_POINT_SIZE
+00819f48,string,GL_POINT_SMOOTH
+00819f58,string,GL_CURRENT_RASTER_DISTANCE
+00819f74,string,GL_CURRENT_RASTER_POSITION_VALID
+00819f98,string,GL_CURRENT_RASTER_POSITION
+00819fb4,string,GL_CURRENT_RASTER_TEXTURE_COORDS
+00819fd8,string,GL_CURRENT_RASTER_INDEX
+00819ff0,string,GL_CURRENT_RASTER_COLOR
+0081a008,string,GL_CURRENT_TEXTURE_COORDS
+0081a024,string,GL_CURRENT_NORMAL
+0081a038,string,GL_CURRENT_INDEX
+0081a04c,string,GL_LIGHTING
+0081a058,string,GL_CURRENT_COLOR
+0081a06c,string,GL_EXP2
+0081a074,string,GL_CW
+0081a07c,string,GL_CCW
+0081a084,string,GL_VIEWPORT_BIT
+0081a094,string,GL_4D_COLOR_TEXTURE
+0081a0a8,string,GL_3D_COLOR_TEXTURE
+0081a0bc,string,GL_3D_COLOR
+0081a0c8,string,GL_3D
+0081a0d0,string,GL_2D
+0081a0d8,string,GL_OUT_OF_MEMORY
+0081a0ec,string,GL_STACK_UNDERFLOW
+0081a100,string,GL_STACK_OVERFLOW
+0081a114,string,GL_INVALID_OPERATION
+0081a12c,string,GL_INVALID_VALUE
+0081a140,string,GL_INVALID_ENUM
+0081a150,string,GL_FRONT_AND_BACK
+0081a164,string,GL_RIGHT
+0081a170,string,GL_LEFT
+0081a178,string,GL_BACK
+0081a180,string,GL_FRONT
+0081a18c,string,GL_BACK_RIGHT
+0081a19c,string,GL_BACK_LEFT
+0081a1ac,string,GL_FRONT_RIGHT
+0081a1bc,string,GL_STENCIL_BUFFER_BIT
+0081a1d4,string,GL_ONE_MINUS_SRC_COLOR
+0081a1ec,string,GL_SRC_ALPHA
+0081a1fc,string,GL_ONE_MINUS_SRC_ALPHA
+0081a214,string,GL_SRC_COLOR
+0081a224,string,GL_ALWAYS
+0081a230,string,GL_GEQUAL
+0081a23c,string,GL_NOTEQUAL
+0081a248,string,GL_GREATER
+0081a254,string,GL_LEQUAL
+0081a260,string,GL_EQUAL
+0081a26c,string,GL_LESS
+0081a274,string,GL_NEVER
+0081a280,string,GL_ADD
+0081a288,string,GL_MULT
+0081a290,string,GL_RETURN
+0081a29c,string,GL_LOAD
+0081a2a4,string,GL_ACCUM
+0081a2b0,string,GL_ONE
+0081a2b8,string,GL_ZERO
+0081a2c0,string,GL_POLYGON
+0081a2cc,string,GL_QUADS
+0081a2d8,string,GL_TRIANGLE_FAN
+0081a2e8,string,GL_TRIANGLE_STRIP
+0081a2fc,string,GL_TRIANGLES
+0081a30c,string,GL_LINE_STRIP
+0081a31c,string,GL_FOG_BIT
+0081a328,string,GL_LIGHTING_BIT
+0081a338,string,GL_PIXEL_MODE_BIT
+0081a34c,string,GL_POLYGON_STIPPLE_BIT
+0081a364,string,GL_POLYGON_BIT
+0081a374,string,GL_POINT_BIT
+0081a390,string,Cannot getCArray for a huge file
+0081a3b4,string,Loading '%s' failed. Unknown DDS format.
+0081a3e0,string,Loading '%s' failed. Unsupported RGBA DDS format.
+0081a414,string,Loading '%s' failed. Unsupported DDS FourCC format.
+0081a44c,string,Loading '%s' failed. Not a DDS file.
+0081a474,string,DDS
+0081a498,string,Critical Error
+0081a4b0,string,PPM
+0081a4b4,string,ICO
+0081a4b8,string,PCX
+0081a4bc,string,TGA
+0081a4c0,string,BMP
+0081a4c4,string,JPG
+0081a61c,string,Sky/
+0081a624,string,Sky/null_plainsky512_dn.jpg
+0081a640,string,Sky/null_plainsky512_ft.jpg
+0081a65c,string,Sky/null_plainsky512_bk.jpg
+0081a678,string,Sky/null_plainsky512_rt.jpg
+0081a694,string,Sky/null_plainsky512_lf.jpg
+0081a6b0,string,Sky/null_plainsky512_up.jpg
+0081b108,string,Windows
+0081b110,string,Windows %d.%d build %d Platform %d %s
+0081b138,string,%d x %d-bit %s processor
+0081b154,string,Power PC
+0081b160,string,Alpha
+0081b168,string,MIPS
+0081b170,string,AMD Processor
+0081b180,string,Cyrix Processor
+0081b190,string,Intel Processor
+0081b1a0,string,Unknown Processor Vendor
+0081b1bc,string,G3D %d.%02d
+0081b1c8,string,isPow2(alignment)
+0081b1dc,string,./g3dcpp/System.cpp
+0081b1f0,string,alignment must be a power of 2
+0081b28c,string,data
+0081b2c0,string,Start: %s
+0081b2cc,string,Application Log
+0081b2e0,string,w
+0081b2ec,string,log.txt
+0081b2f4,string,###    %s    ###
+0081b30c,string,_____________________________________________________
+0081b344,string,%s
+0081b348,string,[Error getting time]
+0081b360,string,Closing log file
+0081b374,string,Shutdown
+0081b380,string,%s%s%sExpression: %s%s%s:%d%s%s%s
+0081b3a4,string,Last Error (0x%08X): %s
+0081b3c0,string,Last error code does not exist.
+0081b3e0,string,**************************
+0081b434,string,Error
+0081b43c,string,'.
+0081b440,string,An internal error has occured in your program and it will now close.  
+0081b6cc,string,1.2.7
+0081b6d4,string,TGA files must be 24 or 32 bit.
+0081b6f4,string,TGA images must be type 2 (Uncompressed truecolor)
+0081b728,string,Not a TGA file
+0081b738,string,TRUEVISION-XFILE
+0081b74c,string,Not a bitmap!
+0081b75c,string,32 bit bitmaps not supported
+0081b77c,string,16-bit bitmaps not supported
+0081b79c,string,BMP images must be uncompressed
+0081b7bc,string,Not a BMP file
+0081b7cc,string,BM
+0081b7d0,string,Unexpected number6 of channels.
+0081b7f0,string,Unsupported PNG bit-depth or type.
+0081b814,string,Unsupported PNG color type - PNG_COLOR_TYPE_GRAY_ALPHA.
+0081b84c,string,Unable to initialize PNG decoder.
+0081b870,string,JPEG
+0081b888,string,PCX file is corrupted
+0081b8a0,string,Only 8-bit paletted and 24-bit PCX files supported.
+0081b8d4,string,Unsupported PCX file type.
+0081b8f0,string,Warning: Corrupted PCX file (palette marker byte was missing) '%s' Loa
+0081b944,string,*********************
+0081b95c,string,JFIF
+0081b964,string,Invalid PPM Header.
+0081b978,string,Invalid PPM size in header.
+0081b994,string,File not found.
+0081b9b0,string,Unsupported ICO color count.
+0081b9d0,string,P1
+0081b9d4,string,P3
+0081b9d8,string,P2
+0081ba18,string,! inBetween
+0081ba24,string,./g3dcpp/Stopwatch.cpp
+0081ba3c,string,Stopwatch::tick() called twice in a row.
+0081ba68,string,inBetween
+0081ba74,string,Stopwatch::tock() called without matching tick.
+0081bb88,string,HKEY_PERFORMANCE_TEXT
+0081bba0,string,HKEY_PERFORMANCE_NLSTEXT
+0081bbc8,string,"Sphere(<%g, %g, %g>, %g)"
+0081c02c,string,/r
+0081c044,string,true
+0081c0d8,string,Tried to read a larger memory chunk than could fit in memory. (2)
+0081c13c,string,File not found: '%s'
+0081c154,string,Not enough memory to load compressed file. (2)
+0081c184,string,Not enough memory to load compressed file. (1)
+0081c1c0,string,%lg
+0081c1c4,string,%x
+0081c1c8,string,-1.#INF00
+0081c1d4,string,1.#INF00
+0081c1e0,string,-1.#IND00
+0081c1f4,string,%s(%d) :
+0081c200,string,Token::END
+0081c20c,string,Token::NUMBER
+0081c21c,string,Token::STRING
+0081c22c,string,Token::SYMBOL
+0081c23c,string,"Expected token of type %s, found type %s."
+0081c278,string,"Expected symbol '%s', found symbol '%s'."
+0081c2ac,string,Incorrect floating-point special (inf ornan) format.
+0081c2e4,string,#IN
+0081c2e8,string,0x
+0081c2ec,string,Incorrect floating-point special (inf or nan) format.
+0081c324,string,-
+0081c328,string,...'
+0081c330,string,+
+0081c33c,string,Courier New
+0081c348,string,Press any key...
+0081c35c,string,Press any key for '%s'...
+0081c378,string,'%d' is not a valid choice.
+0081c394,string,>
+0081c398,string,(%d) %s
+0081c3a4,string,(%d) %s
+0081c3b0,string,Choose an option by number:
+0081c3cc,string,___________________________________________________
+0081c404,string,Edit
+0081c40c,string,Tahoma
+0081c420,string,MNG features are not allowed in a PNG datastream
+0081c454,string,zlib error
+0081c468,string,Incompatible libpng version in application and library
+0081c4a0,string,Application  is  running with png.c from libpng-%.20s
+0081c4d8,string,Application was compiled with png.h from libpng-%.20s
+0081c510,string,Ignoring attempt to set negative chromaticity value
+0081c544,string,Ignoring attempt to set chromaticity value exceeding 21474.83
+0081c5a0,string,Setting gamma=0
+0081c5b0,string,Limiting gamma to 21474.83
+0081c5cc,string,Setting negative gamma to zero
+0081c5ec,string,Insufficient memory for hIST chunk data.
+0081c618,string,"Palette size 0, hIST allocation skipped."
+0081c644,string,Invalid filter method in IHDR
+0081c664,string,Unknown filter method in IHDR
+0081c684,string,Unknown compression method in IHDR
+0081c6a8,string,Unknown interlace method in IHDR
+0081c6cc,string,Invalid color type/bit depth combination in IHDR
+0081c700,string,Invalid color type in IHDR
+0081c71c,string,Invalid bit depth in IHDR
+0081c738,string,Width is too large for libpng to process pixels
+0081c768,string,Invalid image size in IHDR
+0081c784,string,image size exceeds user limits in IHDR
+0081c7ac,string,Image width or height is zero in IHDR
+0081c7d4,string,Insufficient memory for pCAL parameter.
+0081c7fc,string,Insufficient memory for pCAL params.
+0081c824,string,Insufficient memory for pCAL units.
+0081c848,string,Insufficient memory for pCAL purpose.
+0081c8a0,string,Insufficient memory to process iCCP profile.
+0081c8d0,string,Insufficient memory to process iCCP chunk.
+0081c8fc,string,iTXt chunk not supported.
+0081c918,string,No memory for sPLT palettes.
+0081c938,string,Out of memory processing unknown chunk.
+0081c960,string,Out of memory while processing unknown chunk.
+0081cb50,string,Potential overflow in png_zalloc()
+0081dffc,string,Unknown zlib error
+0081e010,string,zlib version error
+0081e024,string,zlib memory error
+0081e038,string,1.2.3
+0081e040,string,Missing PLTE before IDAT
+0081e05c,string,Missing IHDR before IDAT
+0081e078,string,PNG file corrupted by ASCII conversion
+0081e0a0,string,Not a PNG file
+0081e0b0,string,Ignoring extra png_read_update_info() call; row buffer not reallocated
+0081e0f8,string,Extra compressed data
+0081e110,string,Decompression error
+0081e124,string,Not enough image data
+0081e13c,string,Invalid attempt to read row data
+0081e160,string,Too many IDAT's found
+0081e1b8,string,png_do_dither returned rowbytes=0
+0081e1dc,string,png_do_rgb_to_gray found nongray pixel
+0081e204,string,"NULL row buffer for row %ld, pass %d"
+0081e22c,string,Width too large for libpng to process image data.
+0081e260,string,Invalid image height
+0081e278,string,Invalid image width
+0081e28c,string,Invalid color type
+0081e2a0,string,Invalid bit depth
+0081e2b4,string,Call to NULL read function
+0081e2dc,string,same structure.  Resetting write_data_fn to NULL.
+0081e310,string,It's an error to set both read_data_fn and write_data_fn in the
+0081e858,string,Unable to create a temporary file; robustTmpfile returning NULL
+0081e89c,string,tmp%d
+0081e8a4,string,c:/temp
+0081e8ac,string,/tmp
+0081e8b4,string,%s/tmp%d
+0081e8c0,string,c:/tmp
+0081e8c8,string,./
+0081e8cc,string,c:/temp/
+0081e8d8,string,c:/tmp/
+0081e8e0,string,t
+0081e8e4,string,w+
+0081e8fc,string,Unrecognized equation type for pCAL chunk
+0081e938,string,libpng error: %s
+0081e94c,string,"libpng error: %s, offset=%d"
+0081e96c,string,libpng error no. %s: %s
+0081e988,string,libpng warning: %s
+0081e99c,string,libpng warning no. %s: %s
+0081e9b8,string,Out of Memory!
+0081e9d8,string,%ld%c
+0081e9e0,string,JPEGMEM
+0081e9e8,string,Unknown zTXt compression type %d
+0081ea0c,string,Not enough memory for text.
+0081ea28,string,Incomplete compressed datastream in %s chunk
+0081ea58,string,Data error in compressed datastream in %s chunk
+0081ea88,string,Buffer error in compressed datastream in %s chunk
+0081eabc,string,Not enough memory to decompress chunk
+0081eae4,string,Not enough memory to decompress chunk..
+0081eb0c,string,Not enough memory to decompress chunk.
+0081eb34,string,invalid chunk type
+0081eb48,string,Ignoring bad adaptive filter type
+0081eb6c,string,Row has too many bytes to allocate in memory.
+0081eb9c,string,PNG unsigned integer out of range.
+0081ebc0,string,CRC error
+0081ebcc,string,Invalid IHDR chunk
+0081ebe0,string,Out of place IHDR
+0081ebf4,string,Truncating incorrect info tRNS chunk length
+0081ec20,string,Truncating incorrect tRNS chunk length
+0081ec48,string,Invalid palette chunk
+0081ec60,string,Ignoring PLTE chunk in grayscale PNG
+0081ec88,string,Duplicate PLTE chunk
+0081eca0,string,Invalid PLTE after IDAT
+0081ecb8,string,Missing IHDR before PLTE
+0081ecd4,string,Incorrect IEND chunk length
+0081ecf0,string,No image in file
+0081ed04,string,gamma = (%d/100000)
+0081ed1c,string,Ignoring incorrect gAMA value when sRGB is also present
+0081ed54,string,Ignoring gAMA chunk with gamma=0
+0081ed78,string,Incorrect gAMA chunk length
+0081ed94,string,Duplicate gAMA chunk
+0081edac,string,Out of place gAMA chunk
+0081edc4,string,Invalid gAMA after IDAT
+0081eddc,string,Missing IHDR before gAMA
+0081edf8,string,Incorrect sBIT chunk length
+0081ee14,string,Duplicate sBIT chunk
+0081ee2c,string,Out of place sBIT chunk
+0081ee44,string,Invalid sBIT after IDAT
+0081ee5c,string,Missing IHDR before sBIT
+0081ee78,string,Invalid cHRM white point
+0081ee94,string,Invalid cHRM red point
+0081eeac,string,Invalid cHRM green point
+0081eec8,string,Invalid cHRM blue point
+0081eee0,string,"gx=%f, gy=%f, bx=%f, by=%f"
+0081eefc,string,"wx=%f, wy=%f, rx=%f, ry=%f"
+0081ef18,string,Ignoring incorrect cHRM value when sRGB is also present
+0081ef50,string,Incorrect cHRM chunk length
+0081ef6c,string,Duplicate cHRM chunk
+0081ef84,string,Missing PLTE before cHRM
+0081efa0,string,Invalid cHRM after IDAT
+0081efb8,string,Missing IHDR before cHRM
+0081efd4,string,incorrect gamma=(%d/100000)
+0081eff4,string,Unknown sRGB intent
+0081f008,string,Incorrect sRGB chunk length
+0081f024,string,Duplicate sRGB chunk
+0081f03c,string,Out of place sRGB chunk
+0081f054,string,Invalid sRGB after IDAT
+0081f06c,string,Missing IHDR before sRGB
+0081f088,string,Profile size field missing from iCCP chunk
+0081f0b4,string,Ignoring truncated iCCP profile.
+0081f0d8,string,Ignoring nonzero compression type in iCCP chunk
+0081f108,string,Malformed iCCP chunk
+0081f120,string,Duplicate iCCP chunk
+0081f138,string,Out of place iCCP chunk
+0081f150,string,Invalid iCCP after IDAT
+0081f168,string,Missing IHDR before iCCP
+0081f184,string,sPLT chunk requires too much memory
+0081f1a8,string,sPLT chunk too long
+0081f1bc,string,sPLT chunk has bad length
+0081f1d8,string,malformed sPLT chunk
+0081f1f0,string,Invalid sPLT after IDAT
+0081f208,string,Missing IHDR before sPLT
+0081f224,string,tRNS chunk not allowed with alpha channel
+0081f250,string,Zero length tRNS chunk
+0081f268,string,Missing PLTE before tRNS
+0081f284,string,Duplicate tRNS chunk
+0081f29c,string,Invalid tRNS after IDAT
+0081f2b4,string,Incorrect tRNS chunk length
+0081f2d0,string,Missing IHDR before tRNS
+0081f2ec,string,Incorrect bKGD chunk index value
+0081f310,string,Incorrect bKGD chunk length
+0081f32c,string,Duplicate bKGD chunk
+0081f344,string,Missing PLTE before bKGD
+0081f360,string,Invalid bKGD after IDAT
+0081f378,string,Missing IHDR before bKGD
+0081f394,string,Incorrect hIST chunk length
+0081f3b0,string,Duplicate hIST chunk
+0081f3c8,string,Missing PLTE before hIST
+0081f3e4,string,Invalid hIST after IDAT
+0081f3fc,string,Missing IHDR before hIST
+0081f418,string,Duplicate pHYs chunk
+0081f430,string,Invalid pHYs after IDAT
+0081f448,string,Incorrect pHYs chunk length
+0081f464,string,Missing IHDR before pHYs
+0081f480,string,Duplicate oFFs chunk
+0081f498,string,Invalid oFFs after IDAT
+0081f4b0,string,Incorrect oFFs chunk length
+0081f4cc,string,Missing IHDR before oFFs
+0081f4e8,string,No memory for pCAL params.
+0081f504,string,Invalid pCAL parameters for equation type
+0081f530,string,Invalid pCAL data
+0081f544,string,Duplicate pCAL chunk
+0081f55c,string,Invalid pCAL after IDAT
+0081f574,string,No memory for pCAL purpose.
+0081f590,string,Missing IHDR before pCAL
+0081f5ac,string,Invalid sCAL data
+0081f5c0,string,malformed height string in sCAL chunk
+0081f5e8,string,malformed width string in sCAL chunk
+0081f610,string,Duplicate sCAL chunk
+0081f628,string,Invalid sCAL after IDAT
+0081f640,string,Out of memory while processing sCAL chunk
+0081f66c,string,Missing IHDR before sCAL
+0081f688,string,Duplicate tIME chunk
+0081f6a0,string,Incorrect tIME chunk length
+0081f6bc,string,Out of place tIME chunk
+0081f6d4,string,Insufficient memory to process text chunk.
+0081f700,string,Not enough memory to process text chunk.
+0081f72c,string,No memory to process text chunk.
+0081f750,string,Missing IHDR before tEXt
+0081f76c,string,Insufficient memory to store zTXt chunk.
+0081f798,string,Not enough memory to process zTXt chunk.
+0081f7c4,string,Unknown compression type in zTXt chunk
+0081f7ec,string,Zero length zTXt chunk
+0081f804,string,Out of memory processing zTXt chunk.
+0081f82c,string,Missing IHDR before zTXt
+0081f848,string,unknown critical chunk
+0081f860,string,Extra compression data
+0081f878,string,Extra compressed data.
+0081f890,string,Decompression Error
+00820064,string,PhysicalCharacter
+00820078,string,Model
+008200e8,string,location
+008200f4,string,MoveTo
+0082038c,string,Selection
+00820698,string,Run Service
+008206a8,string,rbx_runProc
+00820704,string,Day of month value is out of range 1..31
+0082073c,string,Year is out of valid range: 1400..10000
+00820770,string,Month number is out of range 1..12
+00820794,string,ThreadRef
+008207a0,string,Instance
+008207ac,string,__index
+008208d4,string,Signal
+008208dc,string,delay function requires 2 arguments
+00820900,string,'tostring' must return a string to 'print'
+0082092c,string,
+00820930,string,tostring
+0082094c,string,Day of month is not valid for year
+00820970,string,__unm
+00820978,string,__div
+00820980,string,__mul
+00820988,string,__sub
+00820990,string,__add
+00820998,string,__tostring
+008209a4,string,__eq
+008209ac,string,__gc
+008209b4,string,__newindex
+008209c0,string,inverse
+008209c8,string,Unprotected error in call to Lua API (%s)
+008209fc,string,v
+00820a00,string,stack end
+00820a10,string,"stack %s, line %d: %s %s"
+00820a2c,string,nSlu
+00820b04,string,"Script memory leaks: %d bytes, %d blocks"
+00820b30,string,"Script Heap Stats: Max Size = %d bytes, Max Count = %d blocks"
+00820b70,string,Exception thrown while cleaning up Lua: %s
+00820b9c,string,Script Context
+00820c84,string,loadfile
+00820c90,string,dofile
+00820c98,string,threads
+00820ca0,string,disabled
+00820cac,string,Lua
+00820cb0,string,stats
+00820cb8,string,trustedThread
+00820cc8,string,delay
+00820cd0,string,wait
+00820cd8,string,tick
+00820ce0,string,print
+00820ce8,string,shared
+00820cf0,string,workspace
+00820cfc,string,game
+00820d04,string,math
+00820d0c,string,string
+00820d14,string,Failed to create Lua state
+00820d30,string,settings
+00820d3c,string,io
+00820d40,string,script
+00820d48,string,Unable to create a new thread for %s. It did not execute
+00820d84,string,Unable to create a new thread
+00820da4,string,ScriptContext::execute: Unable to create a new thread
+00820ddc,string,Unable to create trusted sandbox thread
+00820e20,string,ScriptsDisabled
+00820e30,string,State
+008210f4,string,print('Hello world!')
+0082139c,string,LocalScript
+008213c0,string,BlastPressure
+008215fc,string,Clone
+00821604,string,GetLastForce
+00821668,string,Parent
+008216e8,string,drv=
+008216f0,string,/DriverVersion
+00821700,string,HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Control/Class/
+0082173c,string,unknown
+00821970,string,IgnoreAssert
+00821980,string,CrashOnAssert
+00821990,string,AssertAction
+00821da0,string,file://
+00821da8,string,rbxasset://
+00821db4,string,https://
+00821dc0,string,http://
+00821dc8,string,Error during CryptCreateHash. GetLastError = %d
+00821df8,string,Error during CryptAcquireContext. GetLastError = %d
+00821e44,string,Error during CryptHashData. GetLastError = %d
+00821e74,string,%02x
+00821e7c,string,Error during CryptGetHashParam. GetLastError = %d
+00821eb0,string,The path '%s' does not exist
+00821ed0,string,The path '%s' is a relative path
+00821ef4,string,setAssetFolder %s
+00821f08,string,Content failed for %s because %s
+00821f2c,string,Unable to load %s
+00821f50,string,rbx_content
+00821f5c,string,Failed to get asset folder
+00821f78,string,Roblox/content/
+00822534,string,Global Settings
+008225a0,string,"%s, %s"
+008225a8,string,"%s, err=0x%X"
+00822638,string,no read access
+00822648,string,no random access
+0082265c,string,putback buffer full
+00822670,string,no write access
+00822680,string,InternetReadFile failed
+00822698,string,already open
+00822850,string,chain complete
+0082286c,string,gzip error
+00822878,string,jscript:
+00822884,string,javascript:
+00822890,string,roblox.com
+0082289c,string,googlesyndication.com
+008228b4,string,res:
+008228bc,string,SkipTrustCheck
+00822990,string,HttpQueryInfo failed
+008229a8,string,HttpSendRequest failed
+008229c0,string,trust check failed for %s
+00822a14,string,"Upload GZip error %d, ZLib error %d, '%s'"
+00822a40,string,"ZLib error %d, '%s'"
+00822a54,string,"GZip error %d, ZLib error %d, '%s'"
+00822a78,string,statusCode = %d
+00822a88,string,gzip
+00822a90,string,HttpEndRequest failed
+00822aa8,string,Failed to upload content
+00822ac4,string,InternetWriteFile failed
+00822ae0,string,HttpSendRequestEx failed
+00822afc,string,Roblox-Content-Hash: %s
+00822b18,string,Roblox-Content-Last: %d
+00822b34,string,Roblox-Content-First: %d
+00822b50,string,Roblox-Content-Size: %d
+00822b6c,string,Content-Encoding: gzip
+00822b88,string,Accept-Encoding: gzip
+00822ba0,string,HttpAddRequestHeaders failed
+00822bc0,string,HttpOpenRequest failed for %s
+00822be0,string,'%s' is missing a hostName
+00822bfc,string,empty url
+00822c08,string,"httpGet failed, trying again"
+00822f78,string,'%s' is not a valid Service name
+00822fd4,string,RelativePanel
+00823004,string,Unnamed GuiItem
+008231f0,string,GuiRoot
+00823504,string,Couldn't find Exit Verb
+0082351c,string,%s (%.3gfps)
+00823590,string,energyTotal
+0082359c,string,energyConnector
+008235ac,string,energyBody
+008235b8,string,numPoints
+008235c4,string,numConstraints
+008235d4,string,numBodies
+008235e0,string,maxBucketSize
+008235f0,string,numHashNodes
+00823600,string,numLinkCalls
+00823610,string,contactPairHitRatio
+00823624,string,maxTreeDepth
+00823634,string,numTouchingContacts
+00823648,string,numSteppingContacts
+0082365c,string,numContactsInCollisionStage
+00823678,string,numContacts
+00823684,string,numJoints
+00823690,string,numPrimitives
+008236a0,string,drawId
+008236a8,string,simDC
+008236b0,string,FPS
+008236b4,string,timer
+008236bc,string,DataModel Loading %s
+00823aac,string,Level
+00823ab4,string,rbx_httpGet
+00823ac0,string,rbx_httpPost
+00823af8,string,synchronous
+00823b04,string,HttpPost
+00823b60,string,RBX%d
+00823bc8,string,token
+00823c18,string,Item
+00823c2c,string,Feature
+00823e20,string,FilteredSelection
+00824238,string,</
+0082423c,string,/>
+00824240,string,Expected '>' but got EOF in Xml stream
+00824268,string,Expected '<' but got EOF in Xml stream
+00824290,string,tag expected after Byte-Order-Mark
+008242b4,string,tag expected
+008242c4,string,apos
+008242cc,string,quot
+008242d4,string,amp
+008242d8,string,gt
+008242dc,string,lt
+008242e0,string,&#%d;
+008242e8,string,&apos;
+008242f0,string,&quot;
+008242f8,string,&amp;
+00824300,string,&gt;
+00824308,string,&lt;
+00824310,string,='
+0082431c,string,</hash>
+00824324,string,<hash>
+0082432c,string,<null></null>
+0082433c,string,</url>
+00824344,string,<url>
+0082434c,string,</binary>
+00824358,string,<binary xmime:contentType='
+00824374,string,'>
+00824378,string,<binary>
+00824384,string,TextXmlParser::parse - Unknown tag '%s'.
+008243b0,string,TextXmlParser::parse - '%s' should be a closing tag
+008243e4,string,TextXmlParser::parse - Got close tag %s without open tag.
+00824420,string,binary
+00824428,string,<?
+0082442c,string,TextXmlParser::parse empty file
+008245b0,string,Put this tool into the starter pack (otherwise drop into the 3d view)?
+008245f8,string,Inserting Tool
+00824608,string,Team
+00824620,string,http://www.roblox.com/roblox.xsd
+00824644,string,http://www.w3.org/2001/XMLSchema-instance
+00824670,string,http://www.w3.org/2005/05/xmlmime
+00824694,string,xmlns:xmime
+008246b8,string,Version 1.0 - 3.0 model files not supported - all future version will 
+0082470c,string,Unknown object class '%s' while reading XML
+00824738,string,SerializerV2::loadXML ill-formed XML. No Roblox tag
+0082476c,string,SerializerV2::loadXML schemaVersionLoading<4
+0082479c,string,SerializerV2::loadXML no version number
+008247c4,string,SerializerV2::load error reading compound file (6)
+008247f8,string,SerializerV2::load error reading compound file (4)
+0082482c,string,SerializerV2::load error reading compound file (3)
+00824860,string,SerializerV2::load error reading compound file (2)
+00824894,string,SerializerV2::load error reading compound file (1)
+008248c8,string,SerializerV2::load error reading compound file (5)
+008248fc,string,SerializerV2::load can't read contentPos
+00824928,string,SerializerV2::load canfileFormatVersion!=1
+00824954,string,SerializerV2::load can't read old fileFormatVersion
+00824988,string,RBX_
+00824990,string,SerializerV2::load can't read header
+008249e0,string,%s is not a valid member
+008249fc,string,%s cannot be assigned to
+00824a40,string,Function
+00824a88,string,void
+00824aa8,string,Objects
+00824ab0,string,double
+00824ab8,string,Content
+00824ac0,string,Vector3
+00824ad8,string,Color3
+00824b08,string,BrickColor
+00824b14,string,Unable to cast %s to %s
+00824b2c,string,Unable to cast value to std::string
+00824b50,string,Unable to cast value to Object
+00824b70,string,Right
+00824b78,string,Front
+00824b80,string,Back
+00824b88,string,Bottom
+00824b98,string,NormalId
+00824bc4,string,Signals
+00824be0,string,<<<ROOT>>>
+00824c18,string,Crashed via C++ exception in run_in_background:
+00824f64,string,Decal
+008251ac,string,Appearance
+008251ec,string,Part
+00825330,string,Torso
+00825338,string,CoordinateFrame
+0082558c,string,Block
+00825594,string,Plate
+0082559c,string,Brick
+008255a4,string,Symmetric
+008255b0,string,FormFactor
+0082585c,string,CFrame
+00825864,string,Position
+00825a6c,string,FileMesh
+00825a78,string,Cylinder
+00825a84,string,Sphere
+00825a8c,string,Wedge
+00825a94,string,Head
+00825a9c,string,MeshType
+00825c1c,string,Mesh
+0082635c,string,Workspace
+00826368,string,Run Thread
+00826374,string,RunService Heartbeat
+0082638c,string,RunService Stepped
+008263a0,string,DataModel Step
+008263c4,string,Points
+008263cc,string,Constraints
+008263d8,string,Bodies
+008263e0,string,Kernel
+008263e8,string,Max Bucket Size
+008263f8,string,Hash Nodes Out
+00826408,string,# link(p)
+00826414,string,MaxTreeDepth
+00826424,string,TouchingCtcts
+00826434,string,SteppingCtcts
+00826444,string,CtctStageCtcts
+00826454,string,Contacts
+00826460,string,Joints
+00826468,string,Primitives
+00826474,string,World
+00826574,string,ZoomToExtents
+00826584,string,CurrentCamera
+008265a0,string,%dGB
+008265a8,string,%dMB
+008265b0,string,%dKB
+008265b8,string,%dB
+008265bc,string,%.3gms
+008265c4,string,%.3gs
+008265cc,string,0s
+008265d0,string,%02u:%02u.%03u
+008265e0,string,%02u.%02u.%u
+008265f0,string,Log '
+008265f8,string,'
+00826604,string,End Log
+00826654,string,SHGetKnownFolderPath
+0082666c,string,Shell32.dll
+00826678,string,Roblox/
+00826680,string,/Roblox/
+00826690,widechar,{F1B32785-6FBA-4FCF-9D55-7B8E7F157091}
+008266e0,widechar,{A520A1A4-1780-4FF6-BD18-167343C5AF16}
+00826730,string,Roblox/Cache
+00826740,widechar,{352481E8-33BE-4251-BA85-6007CAEDCF9D
+0082678c,string,RBX
+00826790,string,%s_%d
+008267b4,string,BackendAccoutrementState
+008267d0,string,Handle
+00826adc,string,HeadWeld
+00826ea0,string,Medium lilac
+00826eb0,string,Dove blue
+00826ebc,string,Cool yellow
+00826ec8,string,Warm yellowish orange
+00826ee0,string,Light brick yellow
+00826ef4,string,Light pink
+00826f00,string,Light purple
+00826f10,string,Bright purple
+00826f20,string,Light lilac
+00826f2c,string,Lilac
+00826f34,string,Reddish lilac
+00826f44,string,Brown
+00826f4c,string,Rust
+00826f54,string,Medium Royal blue
+00826f68,string,Light Royal blue
+00826f7c,string,Turquoise
+00826f88,string,Faded green
+00826f94,string,Dark Curry
+00826fa0,string,Light stone grey
+00826fb4,string,Lemon metalic
+00826fc4,string,Dark stone grey
+00826fd4,string,Bright reddish lilac
+00826fec,string,Dark Royal blue
+00826ffc,string,Royal blue
+00827008,string,Medium stone grey
+0082701c,string,Flame reddish orange
+00827034,string,Reddish brown
+00827044,string,Flame yellowish orange
+0082705c,string,Fire Yellow
+00827068,string,Curry
+00827070,string,Silver flip/flop
+00827084,string,Yellow flip/flop
+00827098,string,Red flip/flop
+008270a8,string,Gun metallic
+008270b8,string,Tr. Flu. Red
+008270c8,string,Tr. Flu. Yellow
+008270d8,string,Dark red
+008270e4,string,Sand red
+008270f0,string,Sand green
+008270fc,string,Light grey metallic
+00827110,string,Black metallic
+00827120,string,Dark grey metallic
+00827134,string,Sand yellow metallic
+0082714c,string,Sand violet metallic
+00827164,string,Sand blue metallic
+00827178,string,Tr. Flu. Blue
+00827188,string,Earth green
+00827194,string,Earth blue
+008271a0,string,Sand yellow
+008271ac,string,Medium orange
+008271bc,string,Sand violet
+008271c8,string,Sand blue
+008271d4,string,Neon green
+008271e0,string,Neon orange
+008271ec,string,Silver
+008271f4,string,Dark nougat
+00827200,string,Gold
+00827208,string,Tr. Bright bluish violet
+00827224,string,Light orange
+00827234,string,Bright reddish violet
+0082724c,string,Br. reddish orange
+00827260,string,Med. yellowish orange
+00827278,string,Lig. yellowish green
+00827290,string,Br. yellowish green
+008272a4,string,Light bluish green
+008272b8,string,Med. bluish green
+008272cc,string,Med. yellowish green
+008272e4,string,Tr. Medi. reddish violet
+00827300,string,Medium bluish violet
+00827318,string,Tr. Brown
+00827324,string,Bright bluish violet
+0082733c,string,Earth yellow
+0082734c,string,Bright bluish green
+00827360,string,Bright orange
+00827370,string,Br. yellowish orange
+00827388,string,Bright violet
+00827398,string,Light grey
+008273a4,string,Medium blue
+008273b0,string,Medium red
+008273bc,string,Light red
+008273c8,string,Phosph. White
+008273d8,string,Tr. Flu. Green
+008273e8,string,Tr. Green
+008273f4,string,Tr. Flu. Reddish orange
+0082740c,string,Light blue
+00827418,string,Tr. Yellow
+00827424,string,Tr. Blue
+00827430,string,Tr. Lg blue
+0082743c,string,Tr. Red
+00827444,string,Transparent
+00827450,string,Light bluish violet
+00827464,string,Dark orange
+00827470,string,Bright green
+00827480,string,Lig. Yellowich orange
+00827498,string,Medium green
+008274a8,string,Dark green
+008274b4,string,Dark grey
+008274c0,string,Black
+008274c8,string,Earth orange
+008274d8,string,Bright yellow
+008274e8,string,Bright blue
+008274f4,string,Med. reddish violet
+00827508,string,Bright red
+00827514,string,Nougat
+0082751c,string,Light orange brown
+00827530,string,Pastel Blue
+0082753c,string,Light reddish violet
+00827554,string,Light green (Mint)
+00827568,string,Brick yellow
+00827578,string,Light yellow
+00827588,string,Grey
+00827590,string,White
+008275fc,string,ArrowCursor
+0082918c,string,FMOD %d: %s
+008294c8,string,The speaker mode selected isn't supported by this soundcard.  Using St
+00829518,string,The acceleration slider in the Sound Control Panel set to 'off'
+00829558,string,No active sound driver detected
+00829578,string,Incorrect FMODEX DLL version
+00829674,string,UnderWater
+00829680,string,SewerPipe
+0082968c,string,ParkingLot
+00829698,string,Plain
+008296a0,string,Quarry
+008296a8,string,Mountains
+008296b4,string,City
+008296bc,string,Forest
+008296c4,string,Alley
+008296cc,string,StoneCorridor
+008296dc,string,Hallway
+008296e4,string,CarpettedHallway
+008296f8,string,Hangar
+00829700,string,Arena
+00829708,string,Cave
+00829710,string,ConcertHall
+0082971c,string,Auditorium
+00829728,string,StoneRoom
+00829734,string,LivingRoom
+00829740,string,Bathroom
+0082974c,string,Room
+00829754,string,PaddedCell
+00829760,string,GenericReverb
+00829770,string,NoReverb
+0082977c,string,ReverbType
+008299f8,string,Soundscape
+00829a04,string,Sound
+00829ad0,string,# Unused
+00829adc,string,# Sounds
+00829ae8,string,Max
+00829aec,string,Current
+00829bb8,string,-disabled-
+00829bc4,string,fmod %08x
+00829d6c,string,Sounds/victory.wav
+00829d80,string,Sounds/swoosh.wav
+00829d94,string,Sounds/flashbulb.wav
+00829dac,string,Sounds/SWITCH3.wav
+00829dc0,string,Sounds/splat.wav
+00829dd4,string,Sounds/snap.wav
+00829de4,string,Sounds/electronicpingshort.wav
+00829e04,string,Sounds/pageturn.wav
+00829e18,string,Sounds/Rubber band sling shot.wav
+00829e3c,string,Sounds/clickfast.wav
+00829e54,string,Sounds/switch.wav
+00829e68,string,Sounds/glassbreak.wav
+00829e80,string,Sounds/collide.wav
+00829e94,string,Sounds/bass.wav
+00829ea4,string,DopplerScale
+00829eb4,string,DistanceFactor
+00829f38,string,FALSE
+00829f40,string,False
+00829f48,string,TRUE
+00829f50,string,True
+00829f58,string,%.9g
+00829f60,string,NAN
+00829f64,string,-INF
+00829f6c,string,INF
+00829f78,string,",;"
+00829f7c,string,"%g, %g, %g"
+0082a2d4,string,Game Options
+0082a2e4,string,AnimatedCharacter
+0082a2f8,string,Control
+0082a300,string,ChatHistory
+0082a30c,string,Online
+0082a314,string,ChatScrollLength
+0082a328,string,SoundEnabled
+0082ab84,string,ping %s failed: %s
+0082ad40,string,rbx_visit
+0082af40,string,Tool
+0082bb30,string,%.3g%%
+0082bb38,string,"%s, %.3gfps (%.3g%%)"
+0082c0e8,string,Custom
+0082c0f0,string,Follow
+0082c0f8,string,Track
+0082c100,string,Attach
+0082c108,string,Watch
+0082c110,string,Fixed
+0082c118,string,CameraType
+0082c498,string,not-a-date-time
+0082c4a8,string,-infinity
+0082c4b4,string,+infinity
+0082c644,string,Lighting
+0082c658,string,14:00:00
+0082c838,string,skybox images have different numbers of channels
+0082c86c,string,skybox images have different heights
+0082c894,string,skybox images have different widths
+0082c9ac,string,null_plainsky512_*.jpg
+0082caac,string,Sky
+0082d480,string,Constraint
+0082d48c,string,ParamB
+0082d494,string,ParamA
+0082d49c,string,SurfaceInput
+0082d9f8,string,StarterPack - these items will be given to each new player
+0082dc40,string,Laser
+0082dc48,string,Rocket
+0082dc50,string,Slingshot
+0082dc5c,string,Hammer
+0082dc64,string,Grab
+0082dc6c,string,GameTool
+0082dc78,string,BinType
+0082e218,string,.png
+0082e220,string,Textures/
+0082e458,string,HopperBin
+0082e780,string,Backpack
+0082eaf4,string,SpawnPlayer couldn't get the workspace
+0082eea0,string,Duration
+0082eeac,string,Forcefield
+0082eeb8,string,Teams
+0082eec0,string,AllowTeamChangeOnTouch
+0082f4e8,string,Shirt Graphic
+0082f5c0,string,Skin
+0082f690,string,Body Colors
+0082f828,string,Shirt
+0082f910,string,RightSleeveColor
+0082f924,string,TorsoColor
+0082f948,string,LeftArmColor
+0082f958,string,RightArmColor
+0082f968,string,LeftLegColor
+0082f978,string,RightLegColor
+0082ff70,string,Right Arm
+008301ec,string,Left Leg
+008301f8,string,Right Leg
+00830204,string,Left Arm
+00830210,string,Right Shoulder
+00830220,string,RightGrip
+0083022c,string,Neck
+00830234,string,Left Hip
+00830240,string,Right Hip
+0083024c,string,Left Shoulder
+00830414,string,Humanoid
+00830428,string,Argument error: A Part is required
+008304d4,string,TakeDamage
+008304e0,string,amount
+008304f0,string,Running
+00830574,string,Broadphase
+00830580,string,UI Step
+00830588,string,World Step
+0083198c,string,Snap
+00831ea4,string,Motor
+00832100,string,no calling environment
+00832118,string,no value
+00832124,string,%s:%d:
+0083212c,string,Sl
+00832130,string,stack overflow (%s)
+00832144,string,cannot %s %s: %s
+00832158,string,read
+00832160,string,@%s
+00832164,string,reopen
+0083216c,string,=stdin
+00832174,string,bad argument #%d to '%s' (%s)
+00832194,string,calling '%s' on bad self (%s)
+008321b4,string,method
+008321bc,string,n
+008321c0,string,bad argument #%d (%s)
+008321d8,string,"%s expected, got %s"
+008321ec,string,value expected
+008321fc,string,name conflict for module '%s'
+0083221c,string,_LOADED
+00832224,string,invalid option '%s'
+00832258,string,__mode
+0083226c,string,"Unable to get property %s, type %s"
+00832290,string,Object %s is not an Instance
+008322b0,string,"Unable to set property %s, type %s"
+008322d4,string,%s should not be a child of %s
+008322f4,string,%s is not a valid member of %s
+00832314,string,The object has been deleted
+00832330,string,Did you forget a semicolon?  The first argument of member function %s 
+00832388,string,The function %s is not a member of '%s'
+008324d8,string,b
+008324dc,string,g
+008324e0,string,lerp
+008324e8,string,magnitude
+008324f4,string,unit
+008324fc,string,Number
+00832504,string,number
+0083250c,string,Invalid number of arguments: %d
+0083252c,string,components
+00832538,string,toEulerAnglesXYZ
+0083254c,string,vectorToObjectSpace
+00832560,string,vectorToWorldSpace
+00832574,string,pointToObjectSpace
+00832588,string,pointToWorldSpace
+0083259c,string,toObjectSpace
+008325ac,string,toWorldSpace
+008325bc,string,lookVector
+008325c8,string,p
+0083260c,string,The %s event has been deleted
+0083262c,string,connected
+00832638,string,disconnect
+0083265c,string,lua_newthread failed
+00832674,string,maximum event re-entrancy depth exceeded
+008326a0,string,Exception caught in TGenericSlotWrapper. %s
+008326d0,string,Event:disconnect() has been deprecated. Use connection object returned
+00832724,string,connect
+0083274c,string,error in error handling
+00832764,string,not enough memory
+00832784,string,call
+0083278c,string,attempt to yield across metamethod/C-call boundary
+008327c0,string,stack overflow
+008327d0,string,C stack overflow
+008327e4,string,cannot resume non-suspended coroutine
+0083280c,string,cannot resume dead coroutine
+0083282c,string,(*temporary)
+0083283c,string,main
+00832844,string,C
+00832848,string,=[C]
+00832850,string,tail
+00832858,string,=(tail call)
+00832868,string,upvalue
+00832870,string,field
+00832878,string,global
+00832880,string,local
+00832888,string,%s:%d: %s
+00832894,string,attempt to %s %s '%s' (a %s value)
+008328b8,string,attempt to %s a %s value
+008328d4,string,concatenate
+008328e0,string,perform arithmetic on
+008328f8,string,attempt to compare %s with %s
+00832918,string,attempt to compare two %s values
+00832a14,string,table contains non-strings
+00832a30,string,invalid order function for sorting
+00832c00,string,interval is empty
+00832c14,string,wrong number of arguments
+00832c38,string,huge
+00832c40,string,pi
+00832d40,string,string slice too long
+00832d58,string,invalid value
+00832d68,string,unable to dump given function
+00832d88,string,invalid capture index
+00832da0,string,invalid pattern capture
+00832db8,string,malformed pattern (ends with '%%')
+00832ddc,string,malformed pattern (missing ']')
+00832dfc,string,unbalanced pattern
+00832e10,string,too many captures
+00832e24,string,missing '[' after '%%f' in pattern
+00832e48,string,unfinished capture
+00832e5c,string,^$*+?.([%-
+00832e98,string,string/function/table expected
+00832eb8,string,invalid replacement value (a %s)
+00832edc,string,/000
+00832ee4,string,invalid format (width or precision too long)
+00832f14,string,invalid format (repeated flags)
+00832f34,string,-+ #0
+00832f3c,string,invalid option '%%%c' to 'format'
+00832f78,string,running
+00833158,string,base out of range
+0083316c,string,__metatable
+008331b4,string,no function environment for tail call at level %d
+008331e8,string,f
+008331ec,string,invalid level
+008331fc,string,level must be non-negative
+00833218,string,'setfenv' cannot change environment of given object
+008332b8,string,reader function must return a string
+008332e0,string,too many nested functions
+008332fc,string,=(load)
+00833304,string,assertion failed!
+00833318,string,table too big to unpack
+00833330,string,index out of range
+0083334c,string,boolean or proxy expected
+00833368,string,too many results to resume
+00833384,string,too many arguments to resume
+008333a4,string,coroutine expected
+008333b8,string,Lua function expected
+008333d0,string,suspended
+008333dc,string,normal
+008333e4,string,dead
+008333ec,string,newproxy
+008333f8,string,kv
+008333fc,string,pairs
+00833404,string,ipairs
+0083340c,string,_VERSION
+00833418,string,Lua 5.1
+00833420,string,_G
+00833424,string,coroutine
+00833450,string,popen
+00833528,string,%s: %s
+00833530,string,closed file
+0083353c,string,FILE*
+00833544,string,attempt to use a closed file
+00833564,string,__close
+0083356c,string,file (%p)
+00833578,string,file (closed)
+00833588,string,standard %s file is closed
+008335a4,string,%lf
+008335a8,string,invalid format
+008335b8,string,invalid option
+008335c8,string,too many arguments
+008335dc,string,file is already closed
+008335f4,string,%.14g
+00833608,string,cur
+00833654,string,stderr
+0083365c,string,stdout
+00833664,string,stdin
+00833d70,string,ActivationState
+00833d80,string,BackendToolState
+008344c0,string,Enabled
+00834aac,string,Message
+00835524,string,VelocityMotor
+00835aa8,string,Sin
+00835aac,string,Constant
+00835ab8,string,Action5
+00835ac0,string,Action4
+00835ac8,string,Action3
+00835ad0,string,Action2
+00835ad8,string,Action1
+00835ae0,string,UpDown
+00835ae8,string,Throtle
+00835af0,string,Steer
+00835af8,string,RightTread
+00835b04,string,LeftTread
+00835b10,string,NoInput
+00835b18,string,InputType
+00835b24,string,Flee
+00835b2c,string,Chase
+00835b34,string,Joypad2
+00835b3c,string,Joypad1
+00835b44,string,KeyboardLeft
+00835b54,string,KeyboardRight
+00835b64,string,Player
+00835b6c,string,ControllerType
+00835c18,string,DragCursor
+00835dcc,string,ArrowFarCursor
+00836288,string,Victory
+00836290,string,Swoosh
+00836298,string,StepOn
+008362a0,string,Step
+008362a8,string,Splat
+008362b0,string,Page
+008362b8,string,Clock
+008362c0,string,Click
+008362c8,string,Break
+008362d0,string,Bomb
+008362d8,string,Boing
+008362e0,string,NoSound
+008362e8,string,SoundType
+00836538,string,Explosion
+00836f94,string,ForceField
+008371f8,string,Rocket:Fire may not be called from a client
+00837228,string,Rocket:Fire may only be called when the Rocket is in the Workspace
+00838538,string,TargetRadius
+0083a020,string,DebrisService MaxItems must be greater than 0
+0083a05c,string,AddItem
+0083a064,string,item
+0083a06c,string,lifetime
+0083a1dc,string,SeatWeld
+0083a970,string,Bumps
+0083a978,string,SteppingMotor
+0083a988,string,Hinge
+0083a990,string,Spawn
+0083a998,string,Inlet
+0083a9a0,string,Studs
+0083a9a8,string,Weld
+0083a9b0,string,Glue
+0083a9b8,string,Smooth
+0083a9c0,string,SurfaceType
+0083abf0,string,_ds.png
+0083abf8,string,_dn.png
+0083ac00,string,_ovr.png
+0083ac18,string,This Mouse is no longer active
+0083adbc,string,Sleep
+0083adc4,string,Wake
+0083adcc,string,Collision
+0083b2c0,string,%
+0083b2c4,string,%p
+0083b2c8,string,(null)
+0083b2d0,string,']
+0083b2d4,string,[string '
+0083b2e0,string,...
+0083b3c0,string,loop in gettable
+0083b3d4,string,index
+0083b3dc,string,loop in settable
+0083b3f0,string,string length overflow
+0083b4a0,string,invalid key to 'next'
+0083b4b8,string,table overflow
+0083b4c8,string,table index is NaN
+0083b4dc,string,table index is nil
+0083b4f0,string,memory allocation error: block too big
+0083b538,string,'%s' expected
+0083b548,string,function at line %d has more than %d %s
+0083b570,string,main function has more than %d %s
+0083b594,string,'%s' expected (to close '%s' at line %d)
+0083b5c0,string,too many local variables
+0083b5dc,string,local variables
+0083b5ec,string,upvalues
+0083b5f8,string,chunk has too many syntax levels
+0083b61c,string,constant table overflow
+0083b634,string,items in a constructor
+0083b64c,string,<name> or '...' expected
+0083b668,string,self
+0083b670,string,ambiguous syntax (function call x new statement)
+0083b6a4,string,function arguments expected
+0083b6c0,string,unexpected symbol
+0083b6d4,string,cannot use '...' outside a vararg function
+0083b700,string,syntax error
+0083b710,string,no loop to break
+0083b724,string,(for step)
+0083b730,string,(for limit)
+0083b73c,string,(for index)
+0083b748,string,(for control)
+0083b758,string,(for state)
+0083b764,string,(for generator)
+0083b774,string,'=' or 'in' expected
+0083b78c,string,%s: %s in precompiled chunk
+0083b7a8,string,unexpected end
+0083b7b8,string,bad integer
+0083b7c4,string,bad constant
+0083b7d4,string,bad code
+0083b7e0,string,bad header
+0083b7ec,string,=?
+0083b7f0,string,binary string
+0083baf8,string,lexical element too long
+0083bb14,string,%c
+0083bb18,string,char(%d)
+0083bb24,string,%s near '%s'
+0083bb34,string,chunk has too many lines
+0083bb50,string,malformed number
+0083bb64,string,+-
+0083bb68,string,Ee
+0083bb6c,string,unfinished long comment
+0083bb84,string,unfinished long string
+0083bb9c,string,escape sequence too large
+0083bbb8,string,unfinished string
+0083bbcc,string,invalid long string delimiter
+0083cc64,string,GrabRotateCursor
+0083cd90,string,control structure too long
+0083cdac,string,function or expression too complex
+0083cdd0,string,code size overflow
+0083d048,string,Fonts/comics.fnt

@@ -10,6 +10,7 @@ class Connector;
 class Point;
 
 // VTABLE: WEBSERVICE 0x10248074
+// VTABLE: ROBLOX 0x0083b034
 // SIZE 0xc0
 class MultiJoint : public Joint
 {

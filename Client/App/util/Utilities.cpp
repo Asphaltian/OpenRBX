@@ -15,6 +15,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10090030
+// FUNCTION: ROBLOX 0x005c8080
 template <>
 std::string StringConverter<bool>::convertToString(const bool& value)
 {
@@ -22,6 +23,7 @@ std::string StringConverter<bool>::convertToString(const bool& value)
 }
 
 // FUNCTION: WEBSERVICE 0x10090060
+// FUNCTION: ROBLOX 0x005c80b0
 template <>
 bool StringConverter<bool>::convertToValue(const std::string& text, bool& value)
 {
@@ -39,6 +41,7 @@ bool StringConverter<bool>::convertToValue(const std::string& text, bool& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100900f0
+// FUNCTION: ROBLOX 0x005c8140
 template <>
 std::string StringConverter<int>::convertToString(const int& value)
 {
@@ -50,6 +53,7 @@ std::string StringConverter<int>::convertToString(const int& value)
 }
 
 // FUNCTION: WEBSERVICE 0x10090130
+// FUNCTION: ROBLOX 0x005c8180
 template <>
 std::string StringConverter<unsigned int>::convertToString(const unsigned int& value)
 {
@@ -61,6 +65,7 @@ std::string StringConverter<unsigned int>::convertToString(const unsigned int& v
 }
 
 // FUNCTION: WEBSERVICE 0x10090170
+// FUNCTION: ROBLOX 0x005c81c0
 template <>
 std::string StringConverter<double>::convertToString(const double& value)
 {
@@ -82,6 +87,7 @@ std::string StringConverter<double>::convertToString(const double& value)
 }
 
 // FUNCTION: WEBSERVICE 0x10090240
+// FUNCTION: ROBLOX 0x005c8290
 template <>
 std::string StringConverter<float>::convertToString(const float& value)
 {
@@ -103,6 +109,7 @@ std::string StringConverter<float>::convertToString(const float& value)
 }
 
 // FUNCTION: WEBSERVICE 0x10090670
+// FUNCTION: ROBLOX 0x005c87f0
 template <>
 bool StringConverter<int>::convertToValue(const std::string& text, int& value)
 {
@@ -121,6 +128,7 @@ bool StringConverter<int>::convertToValue(const std::string& text, int& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100906e0
+// FUNCTION: ROBLOX 0x005c8860
 template <>
 bool StringConverter<unsigned int>::convertToValue(const std::string& text, unsigned int& value)
 {
@@ -139,6 +147,7 @@ bool StringConverter<unsigned int>::convertToValue(const std::string& text, unsi
 }
 
 // FUNCTION: WEBSERVICE 0x10090750
+// FUNCTION: ROBLOX 0x005c88d0
 template <>
 bool StringConverter<double>::convertToValue(const std::string& text, double& value)
 {
@@ -168,6 +177,7 @@ bool StringConverter<double>::convertToValue(const std::string& text, double& va
 }
 
 // FUNCTION: WEBSERVICE 0x10090860
+// FUNCTION: ROBLOX 0x005c89e0
 template <>
 bool StringConverter<float>::convertToValue(const std::string& text, float& value)
 {
@@ -197,6 +207,7 @@ bool StringConverter<float>::convertToValue(const std::string& text, float& valu
 }
 
 // FUNCTION: WEBSERVICE 0x10090970
+// FUNCTION: ROBLOX 0x005c8c60
 template <>
 std::string StringConverter<G3D::Vector3>::convertToString(const G3D::Vector3& value)
 {
@@ -211,6 +222,7 @@ std::string StringConverter<G3D::Vector3>::convertToString(const G3D::Vector3& v
 }
 
 // FUNCTION: WEBSERVICE 0x10090a50
+// FUNCTION: ROBLOX 0x005c8d40
 template <>
 std::string StringConverter<G3D::CoordinateFrame>::convertToString(const G3D::CoordinateFrame& value)
 {
@@ -227,6 +239,7 @@ std::string StringConverter<G3D::CoordinateFrame>::convertToString(const G3D::Co
 }
 
 // FUNCTION: WEBSERVICE 0x10090b10
+// FUNCTION: ROBLOX 0x005c8e00
 template <>
 bool StringConverter<G3D::Vector3>::convertToValue(const std::string& text, G3D::Vector3& value)
 {
@@ -256,6 +269,7 @@ bool StringConverter<G3D::Vector3>::convertToValue(const std::string& text, G3D:
 }
 
 // FUNCTION: WEBSERVICE 0x10090c20
+// FUNCTION: ROBLOX 0x005c8f10
 template <>
 std::string StringConverter<BrickColor>::convertToString(const BrickColor& value)
 {
@@ -263,6 +277,7 @@ std::string StringConverter<BrickColor>::convertToString(const BrickColor& value
 }
 
 // FUNCTION: WEBSERVICE 0x10090c50
+// FUNCTION: ROBLOX 0x005c8f40
 template <>
 std::string StringConverter<G3D::Color3>::convertToString(const G3D::Color3& value)
 {
@@ -272,6 +287,7 @@ std::string StringConverter<G3D::Color3>::convertToString(const G3D::Color3& val
 }
 
 // FUNCTION: WEBSERVICE 0x10090cb0
+// FUNCTION: ROBLOX 0x005c8fa0
 template <>
 bool StringConverter<G3D::Color3>::convertToValue(const std::string& text, G3D::Color3& value)
 {
@@ -321,6 +337,7 @@ bool StringConverter<G3D::Color3>::convertToValue(const std::string& text, G3D::
 }
 
 // FUNCTION: WEBSERVICE 0x100ff530 FOLDED
+// FUNCTION: ROBLOX 0x005ac0a0 FOLDED
 template <>
 std::string StringConverter<ContentId>::convertToString(const ContentId& value)
 {
@@ -328,6 +345,7 @@ std::string StringConverter<ContentId>::convertToString(const ContentId& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100ff580 FOLDED
+// FUNCTION: ROBLOX 0x005ac0c0 FOLDED
 template <>
 bool StringConverter<ContentId>::convertToValue(const std::string& text, ContentId& value)
 {

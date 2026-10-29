@@ -18,15 +18,18 @@
 #include <string.h>
 
 // FUNCTION: WEBSERVICE 0x101c1230
+// FUNCTION: ROBLOX 0x004e7220
 RPCMap::RPCMap()
 {
 }
 // FUNCTION: WEBSERVICE 0x101c14e0
+// FUNCTION: ROBLOX 0x004e74d0
 RPCMap::~RPCMap()
 {
 	Clear();
 }
 // FUNCTION: WEBSERVICE 0x101c1240
+// FUNCTION: ROBLOX 0x004e7230
 void RPCMap::Clear(void)
 {
 	unsigned i;
@@ -43,6 +46,7 @@ void RPCMap::Clear(void)
 	rpcSet.Clear();
 }
 // FUNCTION: WEBSERVICE 0x101c12b0
+// FUNCTION: ROBLOX 0x004e72a0
 RPCNode *RPCMap::GetNodeFromIndex(RPCIndex index)
 {
 	if ((unsigned)index < rpcSet.Size())
@@ -58,6 +62,7 @@ RPCNode *RPCMap::GetNodeFromFunctionName(char *uniqueIdentifier)
 	return 0;
 }
 // FUNCTION: WEBSERVICE 0x101c12d0
+// FUNCTION: ROBLOX 0x004e72c0
 RPCIndex RPCMap::GetIndexFromFunctionName(const char *uniqueIdentifier)
 {
 	unsigned index;
@@ -69,6 +74,7 @@ RPCIndex RPCMap::GetIndexFromFunctionName(const char *uniqueIdentifier)
 
 // Called from the user thread for the local system
 // FUNCTION: WEBSERVICE 0x101c1330
+// FUNCTION: ROBLOX 0x004e7320
 void RPCMap::AddIdentifierWithFunction(const char *uniqueIdentifier, void *functionPointer, bool isPointerToMember)
 {
 #ifdef _DEBUG
@@ -111,6 +117,7 @@ void RPCMap::AddIdentifierWithFunction(const char *uniqueIdentifier, void *funct
 
 }
 // FUNCTION: WEBSERVICE 0x101c13d0
+// FUNCTION: ROBLOX 0x004e73c0
 void RPCMap::AddIdentifierAtIndex(const char *uniqueIdentifier, RPCIndex insertionIndex)
 {
 #ifdef _DEBUG
@@ -159,6 +166,7 @@ void RPCMap::AddIdentifierAtIndex(const char *uniqueIdentifier, RPCIndex inserti
 }
 
 // FUNCTION: WEBSERVICE 0x101c14a0
+// FUNCTION: ROBLOX 0x004e7490
 void RPCMap::RemoveNode(const char *uniqueIdentifier)
 {
 	unsigned index;

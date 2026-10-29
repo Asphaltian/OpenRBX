@@ -79,6 +79,7 @@ public:
 	virtual void render3dAdorn(Adorn* adorn);
 
 	// FUNCTION: WEBSERVICE 0x101019f0 FOLDED
+	// FUNCTION: ROBLOX 0x007859e0 FOLDED
 	virtual void render3dSelect(Adorn* adorn, SelectState selectState) {}
 
 private:
@@ -90,6 +91,7 @@ private:
 	virtual void cameraMoved();                  // ICameraOwner vtable+0x0c
 
 	// FUNCTION: WEBSERVICE 0x1006d250
+	// FUNCTION: ROBLOX 0x005b67d0
 	virtual void onExtentsChanged() const
 	{
 		ModelInstance::onExtentsChanged();
@@ -193,6 +195,7 @@ DECOMP_SIZE_ASSERT(Workspace, 0x394)
 // TEMPLATE: WEBSERVICE 0x1006c1d0
 // RBX::wrapper2<0>
 // TEMPLATE: WEBSERVICE 0x1006fab0
+// TEMPLATE: ROBLOX 0x005b7e90
 // RBX::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>
 // clang-format on
 
@@ -206,10 +209,13 @@ DECOMP_SIZE_ASSERT(Workspace, 0x394)
 // SYNTHETIC: WEBSERVICE 0x10218e00
 // RBX::`dynamic initializer for 'workspace_SetThrottleEnabled''
 // SYNTHETIC: WEBSERVICE 0x10218e40
+// SYNTHETIC: ROBLOX 0x007ea660
 // RBX::`dynamic initializer for 'workspace_zoomToExtents''
 // SYNTHETIC: WEBSERVICE 0x10218e80
+// SYNTHETIC: ROBLOX 0x007ea6a0
 // RBX::`dynamic initializer for 'currentCameraProxyProp''
 // SYNTHETIC: WEBSERVICE 0x10221c50
+// SYNTHETIC: ROBLOX 0x007f2cb0
 // RBX::`dynamic atexit destructor for 'currentCameraProxyProp''
 // SYNTHETIC: WEBSERVICE 0x10221c90
 // RBX::`dynamic atexit destructor for 'workspace_breakJoints''
@@ -218,6 +224,7 @@ DECOMP_SIZE_ASSERT(Workspace, 0x394)
 // SYNTHETIC: WEBSERVICE 0x10221e70
 // RBX::`dynamic atexit destructor for 'workspace_SetThrottleEnabled''
 // SYNTHETIC: WEBSERVICE 0x10221e80
+// SYNTHETIC: ROBLOX 0x007f2d50
 // RBX::`dynamic atexit destructor for 'workspace_zoomToExtents''
 // SYNTHETIC: WEBSERVICE 0x10221e90
 // RBX::`dynamic atexit destructor for 'workspace_insertContent''

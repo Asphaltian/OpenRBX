@@ -22,6 +22,7 @@ static Vector3 vector3Abs(const Vector3& value)
 struct myLess : public std::binary_function<Vector3, Vector3, bool>
 {
 	// FUNCTION: WEBSERVICE 0x10109060
+	// FUNCTION: ROBLOX 0x00648ca0
 	bool operator()(const Vector3& a, const Vector3& b) const
 	{
 		if (a.x < b.x) {
@@ -66,9 +67,11 @@ private:
 DECOMP_SIZE_ASSERT(BlockTemplate, 0x60)
 
 // GLOBAL: WEBSERVICE 0x102fce48
+// GLOBAL: ROBLOX 0x00960f80
 BlockTemplate::BlockTemplates BlockTemplate::blockTemplates;
 
 // STUB: WEBSERVICE 0x101090b0
+// STUB: ROBLOX 0x00648cf0
 Matrix3 Block::getMomentHollow(float mass) const
 {
 	float x = gridSize.x, y = gridSize.y, z = gridSize.z;
@@ -97,6 +100,7 @@ float Block::getGridVolume() const
 }
 
 // FUNCTION: WEBSERVICE 0x10109200
+// FUNCTION: ROBLOX 0x00648e40
 const Vector3* Block::getEdgePoint(const Vector3int16& clip, NormalId& normalID) const
 {
 	if (clip.x == 0) {
@@ -117,6 +121,7 @@ const Vector3* Block::getEdgePoint(const Vector3int16& clip, NormalId& normalID)
 }
 
 // FUNCTION: WEBSERVICE 0x10109290
+// FUNCTION: ROBLOX 0x00648ed0
 const Vector3* Block::getPlanePoint(const Vector3int16& clip, NormalId& normalID) const
 {
 	if (clip.x != 0) {
@@ -137,6 +142,7 @@ const Vector3* Block::getPlanePoint(const Vector3int16& clip, NormalId& normalID
 }
 
 // FUNCTION: WEBSERVICE 0x10109330
+// FUNCTION: ROBLOX 0x00648f70
 GeoPairType Block::getBallBlockInfo(int onBorder, const Vector3int16 clip, const Vector3*& offset, NormalId& normalID)
 {
 	if (onBorder == 1) {
@@ -157,6 +163,7 @@ GeoPairType Block::getBallBlockInfo(int onBorder, const Vector3int16 clip, const
 }
 
 // FUNCTION: WEBSERVICE 0x101093c0
+// FUNCTION: ROBLOX 0x00649000
 GeoPairType Block::getBallInsideInfo(const Vector3& ray, const Vector3*& offset, NormalId& normalID)
 {
 	float smallest = 1e30f;
@@ -184,6 +191,7 @@ GeoPairType Block::getBallInsideInfo(const Vector3& ray, const Vector3*& offset,
 }
 
 // FUNCTION: WEBSERVICE 0x101094c0
+// FUNCTION: ROBLOX 0x00649100
 void Block::projectToFace(Vector3& ray, Vector3int16& clip, int& onBorder)
 {
 	onBorder = 0;
@@ -228,6 +236,7 @@ void Block::projectToFace(Vector3& ray, Vector3int16& clip, int& onBorder)
 }
 
 // FUNCTION: WEBSERVICE 0x10109590
+// FUNCTION: ROBLOX 0x006491d0
 Vector2 Block::getProjectedVertex(const Vector3& vertex, NormalId normalID)
 {
 	Vector2 answer(0, 0);
@@ -263,6 +272,7 @@ Vector2 Block::getProjectedVertex(const Vector3& vertex, NormalId normalID)
 }
 
 // STUB: WEBSERVICE 0x10109630
+// STUB: ROBLOX 0x00649270
 int Block::getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& crossAxis)
 {
 	Vector3 axisInBody = crossAxis * rotation;
@@ -285,6 +295,7 @@ int Block::getClosestEdge(const Matrix3& rotation, NormalId normalID, Vector3& c
 }
 
 // FUNCTION: WEBSERVICE 0x10109770
+// FUNCTION: ROBLOX 0x00649350
 BlockTemplate::BlockTemplate(const Vector3& _corner)
 {
 	float x = -fabsf(_corner.x);
@@ -304,6 +315,7 @@ BlockTemplate::BlockTemplate(const Vector3& _corner)
 }
 
 // FUNCTION: WEBSERVICE 0x10109840
+// FUNCTION: ROBLOX 0x00649420
 bool Block::hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside)
 {
 	Vector3 halfSize = gridSize * 0.5f;
@@ -330,6 +342,7 @@ bool Block::hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside)
 }
 
 // FUNCTION: WEBSERVICE 0x10109a70
+// FUNCTION: ROBLOX 0x00649600
 Vector3 Block::getCenterToCorner(const Matrix3& rotation) const
 {
 	if (cornerRadius < 5.0f) {
@@ -346,6 +359,7 @@ Vector3 Block::getCenterToCorner(const Matrix3& rotation) const
 }
 
 // FUNCTION: WEBSERVICE 0x1010a5e0
+// FUNCTION: ROBLOX 0x0064a170
 const Vector3* BlockTemplate::getVertices(const Vector3& corner)
 {
 	BlockTemplates::iterator iter = blockTemplates.find(corner);
@@ -361,6 +375,7 @@ const Vector3* BlockTemplate::getVertices(const Vector3& corner)
 }
 
 // FUNCTION: WEBSERVICE 0x1010a680
+// FUNCTION: ROBLOX 0x0064a210
 void Block::onSetSize()
 {
 	vertices = BlockTemplate::getVertices(gridSize * -0.5f);
@@ -368,6 +383,7 @@ void Block::onSetSize()
 }
 
 // FUNCTION: WEBSERVICE 0x1010a6e0
+// FUNCTION: ROBLOX 0x0064a270
 BlockTemplate::BlockTemplates::~BlockTemplates()
 {
 	iterator iter = begin();

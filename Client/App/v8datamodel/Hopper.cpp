@@ -42,6 +42,7 @@ int BackpackItem::getBinId() const
 }
 
 // FUNCTION: WEBSERVICE 0x100c70f0
+// FUNCTION: ROBLOX 0x005e13b0
 const TextureId BackpackItem::getTextureId() const
 {
 	return textureId;
@@ -54,12 +55,14 @@ bool Hopper::askAddChild(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100c7870
+// FUNCTION: ROBLOX 0x005e1ab0
 Hopper::Hopper()
 {
 	yLocation = Rect::BOTTOM;
 }
 
 // STUB: WEBSERVICE 0x100c7b90
+// STUB: ROBLOX 0x005e1da0
 void StarterPackService::render2d(Adorn* adorn)
 {
 	Hopper::render2d(adorn);
@@ -89,6 +92,7 @@ LegacyHopperService::~LegacyHopperService()
 }
 
 // FUNCTION: WEBSERVICE 0x100c8440
+// FUNCTION: ROBLOX 0x005e2520
 template <>
 Reflection::EnumDesc<HopperBin::BinType>::EnumDesc() : EnumDescriptor("BinType", typeid(HopperBin::BinType))
 {
@@ -103,6 +107,7 @@ Reflection::EnumDesc<HopperBin::BinType>::EnumDesc() : EnumDescriptor("BinType",
 }
 
 // FUNCTION: WEBSERVICE 0x100c8c40
+// FUNCTION: ROBLOX 0x005e2d10
 void BackpackItem::render2d(Adorn* adorn)
 {
 	bool viewHack = false;
@@ -157,6 +162,7 @@ void BackpackItem::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100c8f80
+// FUNCTION: ROBLOX 0x005e3050
 void HopperBin::onSelectCommand()
 {
 	DataModel* dataModel = static_cast<DataModel*>(getRootAncestor());
@@ -173,6 +179,7 @@ void HopperBin::onSelectCommand()
 }
 
 // FUNCTION: WEBSERVICE 0x100c9070
+// FUNCTION: ROBLOX 0x005e3140
 void LegacyHopperService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Instance::onServiceProvider(oldProvider, newProvider);
@@ -201,6 +208,7 @@ LegacyHopperService::LegacyHopperService()
 }
 
 // FUNCTION: WEBSERVICE 0x100c9760
+// FUNCTION: ROBLOX 0x005e3810
 void BackpackItem::setTextureId(const TextureId& value)
 {
 	if (value != textureId) {
@@ -218,6 +226,7 @@ void BackpackItem::setTextureId(const TextureId& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100c9850
+// FUNCTION: ROBLOX 0x005e3900
 void HopperBin::onSelectScript()
 {
 	if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
@@ -228,6 +237,7 @@ void HopperBin::onSelectScript()
 }
 
 // FUNCTION: WEBSERVICE 0x100c9950
+// FUNCTION: ROBLOX 0x005e3a00
 void HopperBin::onLocalClicked()
 {
 	if (!active) {
@@ -245,6 +255,7 @@ void HopperBin::onLocalClicked()
 }
 
 // FUNCTION: WEBSERVICE 0x100c9980
+// FUNCTION: ROBLOX 0x005e3a30
 void HopperBin::onLocalOtherClicked()
 {
 	if (active) {
@@ -260,6 +271,7 @@ void HopperBin::onLocalOtherClicked()
 }
 
 // FUNCTION: WEBSERVICE 0x100c99e0
+// FUNCTION: ROBLOX 0x005e3a90
 void HopperBin::setLegacyTextureName(const std::string& value)
 {
 	TextureId textureId = ContentId::fromAssets("Textures\\" + value + ".png");
@@ -267,12 +279,14 @@ void HopperBin::setLegacyTextureName(const std::string& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100c9bd0
+// FUNCTION: ROBLOX 0x005e3c80
 HopperBin::HopperBin() : binType(SCRIPT_BIN), active(false)
 {
 	setName("HopperBin");
 }
 
 // FUNCTION: WEBSERVICE 0x100c9cd0
+// FUNCTION: ROBLOX 0x005e3da0
 void HopperBin::setBinType(const BinType value)
 {
 	if (value != binType) {
@@ -298,6 +312,7 @@ void HopperBin::setLegacyCommand(const std::string& text)
 }
 
 // FUNCTION: WEBSERVICE 0x100d5be0 FOLDED
+// FUNCTION: ROBLOX 0x0060cb80 FOLDED
 G3D::Vector2 BackpackItem::getSize() const
 {
 	float size = GuiRoot::toPixelSize(G3D::Vector2(10, 10)).x;

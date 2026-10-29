@@ -113,6 +113,7 @@ class lua_exception : public std::exception
 
 public:
 	// FUNCTION: WEBSERVICE 0x100b6af0
+	// FUNCTION: ROBLOX 0x006032e0
 	lua_exception(const lua_exception& other)
 		: L(other.L), errorJmp(other.errorJmp), committed(other.committed)
 	{ other.committed = true; }
@@ -122,6 +123,7 @@ public:
 	{ return lua_tostring(L, -1); }
 
 	// FUNCTION: WEBSERVICE 0x100b6290
+	// FUNCTION: ROBLOX 0x00602a80
 	virtual ~lua_exception()
 	{
 		if (!committed)
@@ -136,6 +138,7 @@ public:
 };
 
 // FUNCTION: WEBSERVICE 0x100b6a70
+// FUNCTION: ROBLOX 0x00603260
 void luaD_throw (lua_State *L, int errcode) {
   if (L->errorJmp) {
     L->errorJmp->status = errcode;
@@ -154,6 +157,7 @@ void luaD_throw (lua_State *L, int errcode) {
 
 
 // FUNCTION: WEBSERVICE 0x100b6320
+// FUNCTION: ROBLOX 0x00602b10
 int luaD_rawrunprotected (lua_State *L, Pfunc f, void *ud) {
   struct lua_longjmp lj;
 

@@ -111,6 +111,7 @@ public:
 
 	void setWalkDirection(const G3D::Vector3& value);
 	// FUNCTION: WEBSERVICE 0x100a0760
+	// FUNCTION: ROBLOX 0x005e8cf0
 	G3D::Vector3 getWalkDirection() const { return walkDirection; }
 
 	void setWalkRotationalVelocity(const float& value);
@@ -133,6 +134,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100a07c0
 	bool getSit() const { return sit; }
 	// FUNCTION: WEBSERVICE 0x100fc260
+	// FUNCTION: ROBLOX 0x006386e0
 	bool canSit() const { return !sit && currentState->getName() == "Running"; }
 	World* getWorld() const { return world; }
 
@@ -260,8 +262,10 @@ DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 // SYNTHETIC: WEBSERVICE 0x1021b4f0
 // RBX::`dynamic initializer for 'propMaxHealth''
 // SYNTHETIC: WEBSERVICE 0x1021b550
+// SYNTHETIC: ROBLOX 0x007ec720
 // RBX::`dynamic initializer for 'func_TakeDamage''
 // SYNTHETIC: WEBSERVICE 0x1021b590
+// SYNTHETIC: ROBLOX 0x007ec760
 // RBX::`dynamic initializer for 'func_MoveTo''
 // SYNTHETIC: WEBSERVICE 0x1021b5e0
 // `dynamic initializer for 'RBX::Humanoid::event_Died''
@@ -314,12 +318,14 @@ DECOMP_SIZE_ASSERT(Humanoid::State, 0x08)
 // SYNTHETIC: WEBSERVICE 0x10223540
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Seated''
 // SYNTHETIC: WEBSERVICE 0x10223550
+// SYNTHETIC: ROBLOX 0x007f4410
 // RBX::`dynamic atexit destructor for 'func_MoveTo''
 // SYNTHETIC: WEBSERVICE 0x10223560
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Running''
 // SYNTHETIC: WEBSERVICE 0x10223570
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Jumping''
 // SYNTHETIC: WEBSERVICE 0x10223580
+// SYNTHETIC: ROBLOX 0x007f4440
 // RBX::`dynamic atexit destructor for 'func_TakeDamage''
 // SYNTHETIC: WEBSERVICE 0x10223590
 // `dynamic atexit destructor for 'RBX::Humanoid::event_Died''

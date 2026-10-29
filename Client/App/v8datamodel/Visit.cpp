@@ -32,6 +32,7 @@ static RBX::Reflection::BoundFuncDesc<RBX::Visit, void(std::string, int), 2> des
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100f8d60
+// FUNCTION: ROBLOX 0x005cea20
 worker_thread::work_result Visit::ping(std::string url, int interval)
 {
 	try {
@@ -52,16 +53,19 @@ worker_thread::work_result Visit::ping(std::string url, int interval)
 }
 
 // FUNCTION: WEBSERVICE 0x100f8f20
+// FUNCTION: ROBLOX 0x005cebe0
 Visit::~Visit()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100f9a70
+// FUNCTION: ROBLOX 0x005cf7b0
 Visit::Visit() : uploadUrl("NoVisit")
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100f9c80
+// FUNCTION: ROBLOX 0x005cf9c0
 void Visit::setPing(std::string url, int interval)
 {
 	if (url != "") {

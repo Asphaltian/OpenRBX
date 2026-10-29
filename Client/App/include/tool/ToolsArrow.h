@@ -42,6 +42,7 @@ public:
 DECOMP_SIZE_ASSERT(BoxSelectCommand, 0x44)
 
 // SYNTHETIC: WEBSERVICE 0x100c0110
+// SYNTHETIC: ROBLOX 0x00621b30
 // RBX::BoxSelectCommand::~BoxSelectCommand
 
 // SYNTHETIC: WEBSERVICE 0x100c01c0
@@ -73,6 +74,7 @@ public:
 	ArrowTool(Workspace* workspace) : Named<ArrowToolBase, sArrowTool>(workspace) {}
 
 	// FUNCTION: WEBSERVICE 0x1006a710
+	// FUNCTION: ROBLOX 0x005b4930
 	virtual MouseCommand* isSticky() const { return new ArrowTool(workspace); }
 };
 

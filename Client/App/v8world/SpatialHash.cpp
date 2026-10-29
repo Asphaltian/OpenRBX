@@ -14,6 +14,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101233c0
+// FUNCTION: ROBLOX 0x0061a9a0
 Vector3int32 SpatialHash::realToHashGrid(const Vector3& realPoint)
 {
 	Vector3 gridPoint = realPoint * hashGridRecip();
@@ -22,6 +23,7 @@ Vector3int32 SpatialHash::realToHashGrid(const Vector3& realPoint)
 }
 
 // FUNCTION: WEBSERVICE 0x10123410
+// FUNCTION: ROBLOX 0x0061a9f0
 Extents SpatialHash::hashGridToRealExtents(const Vector3& hashGrid)
 {
 	return Extents(
@@ -30,6 +32,7 @@ Extents SpatialHash::hashGridToRealExtents(const Vector3& hashGrid)
 }
 
 // FUNCTION: WEBSERVICE 0x10123460
+// FUNCTION: ROBLOX 0x0061aa40
 void SpatialHash::computeMinMax(const Extents& extents, Vector3int32& min, Vector3int32& max)
 {
 	min = realToHashGrid(extents.min());
@@ -54,6 +57,7 @@ void SpatialHash::removeNodeFromPrimitive(SpatialNode* remove)
 }
 
 // FUNCTION: WEBSERVICE 0x10123500
+// FUNCTION: ROBLOX 0x0061ab70
 bool SpatialHash::getNextGrid(Vector3int32& grid, const G3D::Ray& unitRay, float maxDistance)
 {
 	Vector3int32 low;
@@ -102,6 +106,7 @@ bool SpatialHash::getNextGrid(Vector3int32& grid, const G3D::Ray& unitRay, float
 }
 
 // FUNCTION: WEBSERVICE 0x10123840
+// FUNCTION: ROBLOX 0x0061af10
 void SpatialHash::removeNodeFromHash(SpatialNode* remove)
 {
 	SpatialNode** link = &nodes[remove->hashId];
@@ -118,6 +123,7 @@ int SpatialHash::getHash(const Vector3int32& grid)
 }
 
 // FUNCTION: WEBSERVICE 0x10123890
+// FUNCTION: ROBLOX 0x0061af60
 SpatialNode* SpatialHash::findNode(Primitive* p, const Vector3int32& grid)
 {
 	int hash = getHash(grid);
@@ -132,6 +138,7 @@ SpatialNode* SpatialHash::findNode(Primitive* p, const Vector3int32& grid)
 }
 
 // FUNCTION: WEBSERVICE 0x10123910
+// FUNCTION: ROBLOX 0x0061afe0
 bool SpatialHash::shareCommonGrid(Primitive* me, Primitive* other)
 {
 	for (SpatialNode* node = me->spatialNodes; node != NULL; node = node->nextPrimitiveLink) {
@@ -153,6 +160,7 @@ void SpatialHash::returnNode(SpatialNode* node)
 }
 
 // FUNCTION: WEBSERVICE 0x10123990
+// FUNCTION: ROBLOX 0x0061b060
 void SpatialHash::destroyNode(SpatialNode* destroy)
 {
 	removeNodeFromPrimitive(destroy);
@@ -215,6 +223,7 @@ void SpatialHash::insertNodeToPrimitive(SpatialNode* node, Primitive* p, const V
 }
 
 // FUNCTION: WEBSERVICE 0x10123a70
+// FUNCTION: ROBLOX 0x0061b140
 void SpatialHash::addNode(Primitive* p, const Vector3int32& grid)
 {
 	int hash = getHash(grid);
@@ -248,6 +257,7 @@ void SpatialHash::addNode(Primitive* p, const Vector3int32& grid)
 }
 
 // FUNCTION: WEBSERVICE 0x10123bd0
+// FUNCTION: ROBLOX 0x0061b2a0
 void SpatialHash::onPrimitiveAdded(Primitive* p)
 {
 	Vector3int32 newMin;
@@ -270,6 +280,7 @@ void SpatialHash::onPrimitiveAdded(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x10123cc0
+// FUNCTION: ROBLOX 0x0061b390
 void SpatialHash::changeMinMax(Primitive* p, const Extents& change, const Extents& oldBox, const Extents& newBox)
 {
 	Vector3int32 min = Vector3int32::floor(change.min());
@@ -297,6 +308,7 @@ void SpatialHash::changeMinMax(Primitive* p, const Extents& change, const Extent
 }
 
 // FUNCTION: WEBSERVICE 0x10123e20
+// FUNCTION: ROBLOX 0x0061b4f0
 void SpatialHash::primitiveExtentsChanged(Primitive* p)
 {
 	Vector3int32 newMin;
@@ -327,6 +339,7 @@ void SpatialHash::primitiveExtentsChanged(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x10123fb0
+// FUNCTION: ROBLOX 0x0061b680
 void SpatialHash::onPrimitiveRemoved(Primitive* p)
 {
 	while (p->spatialNodes != NULL) {
@@ -335,12 +348,14 @@ void SpatialHash::onPrimitiveRemoved(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x10123fe0
+// FUNCTION: ROBLOX 0x0061b6b0
 void SpatialHash::onPrimitiveExtentsChanged(Primitive* p)
 {
 	primitiveExtentsChanged(p);
 }
 
 // FUNCTION: WEBSERVICE 0x10123ff0
+// FUNCTION: ROBLOX 0x0061b6c0
 void SpatialHash::onAllPrimitivesMoved()
 {
 	const G3D::Array<Primitive*>& primitives = world->getPrimitives();
@@ -357,6 +372,7 @@ void SpatialHash::onAllPrimitivesMoved()
 }
 
 // FUNCTION: WEBSERVICE 0x10124030
+// FUNCTION: ROBLOX 0x0061b9d0
 void SpatialHash::getPrimitivesInGrid(const Vector3int32& grid, G3D::Array<Primitive*>& found)
 {
 	int hash = getHash(grid);
@@ -373,6 +389,7 @@ void SpatialHash::getPrimitivesInGrid(const Vector3int32& grid, G3D::Array<Primi
 }
 
 // FUNCTION: WEBSERVICE 0x10124100
+// FUNCTION: ROBLOX 0x0061c0a0
 void SpatialHash::getPrimitivesTouchingExtents(
 	const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& answer
 )
@@ -404,6 +421,7 @@ void SpatialHash::getPrimitivesTouchingExtents(
 }
 
 // FUNCTION: WEBSERVICE 0x101242e0
+// FUNCTION: ROBLOX 0x0061c4a0
 SpatialHash::~SpatialHash()
 {
 	for (unsigned int i = 0; i < numBuckets(); i++) {
@@ -430,6 +448,7 @@ SpatialHash::~SpatialHash()
 }
 
 // FUNCTION: WEBSERVICE 0x10124480
+// FUNCTION: ROBLOX 0x0061c7c0
 SpatialHash::SpatialHash(World* world, ContactManager* contactManager)
 	: world(world), contactManager(contactManager), extraNodes(NULL), nodesOut(0), maxBucket(0)
 {

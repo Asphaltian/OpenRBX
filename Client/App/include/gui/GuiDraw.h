@@ -36,6 +36,7 @@ private:
 
 public:
 	// FUNCTION: WEBSERVICE 0x10006260
+	// FUNCTION: ROBLOX 0x005e1a20
 	GuiDrawImage() {}
 
 	void render2d(Adorn* adorn, bool enabled, Rect& rect, Widget::WidgetState state);

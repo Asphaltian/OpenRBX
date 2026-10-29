@@ -9,6 +9,7 @@
 using G3D::CoordinateFrame;
 
 // FUNCTION: WEBSERVICE 0x101af0d0
+// FUNCTION: ROBLOX 0x004d4f70
 bool areClose(const CoordinateFrame& c1, const CoordinateFrame& c2)
 {
 	if (fabs(c1.translation.x - c2.translation.x) > 0.2f) {
@@ -44,17 +45,20 @@ namespace RBX {
 namespace Network {
 
 // FUNCTION: WEBSERVICE 0x101af210
+// FUNCTION: ROBLOX 0x004d5100
 ClientPhysics::ClientPhysics(PartInstance* part) : part(part)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101af320
+// FUNCTION: ROBLOX 0x004d5210
 ClientPhysics::~ClientPhysics()
 {
 	stopListening(runService.lock(), this);
 }
 
 // FUNCTION: WEBSERVICE 0x101af3f0
+// FUNCTION: ROBLOX 0x004d52e0
 void ClientPhysics::sleep()
 {
 	stopListening(runService.lock(), this);
@@ -64,6 +68,7 @@ void ClientPhysics::sleep()
 }
 
 // FUNCTION: WEBSERVICE 0x101af4e0
+// FUNCTION: ROBLOX 0x004d53d0
 void ClientPhysics::onEvent(const RunService* source, Heartbeat event)
 {
 	if (G3D::System::getLocalTime() > lastUpdateTime + NetworkSettings::singleton().clientPhysicsLifetime) {
@@ -72,6 +77,7 @@ void ClientPhysics::onEvent(const RunService* source, Heartbeat event)
 }
 
 // FUNCTION: WEBSERVICE 0x101af540
+// FUNCTION: ROBLOX 0x004d5430
 void ClientPhysics::update(const boost::shared_ptr<RunService>& runService)
 {
 	lastUpdateTime = G3D::System::getLocalTime();

@@ -14,6 +14,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1012a690
+// FUNCTION: ROBLOX 0x00667990
 void RunDragger::SnapInfo::updateSurfaceFromHit()
 {
 	const G3D::CoordinateFrame& snapCoord = snap->getCoordinateFrame();
@@ -24,6 +25,7 @@ void RunDragger::SnapInfo::updateSurfaceFromHit()
 }
 
 // FUNCTION: WEBSERVICE 0x1012a760
+// FUNCTION: ROBLOX 0x00667a60
 void RunDragger::SnapInfo::updateHitFromSurface(const G3D::Ray& mouseRay)
 {
 	Extents snapExtents = snap->getExtentsLocal();
@@ -41,11 +43,13 @@ void RunDragger::SnapInfo::updateHitFromSurface(const G3D::Ray& mouseRay)
 }
 
 // FUNCTION: WEBSERVICE 0x1012a890
+// FUNCTION: ROBLOX 0x00667b90
 RunDragger::~RunDragger()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1012a950
+// FUNCTION: ROBLOX 0x00667c50
 bool RunDragger::adjacent(Primitive* p0, Primitive* p1)
 {
 	for (Contact* contact = p0->getFirstContact(); contact; contact = p0->getNextContact(contact)) {
@@ -58,6 +62,7 @@ bool RunDragger::adjacent(Primitive* p0, Primitive* p1)
 }
 
 // FUNCTION: WEBSERVICE 0x1012a9a0
+// FUNCTION: ROBLOX 0x00667ca0
 bool RunDragger::tooCloseToCamera()
 {
 	G3D::Vector3 dragPointWorld = drag->getCoordinateFrame().pointToWorldSpace(dragPointLocal);
@@ -66,6 +71,7 @@ bool RunDragger::tooCloseToCamera()
 }
 
 // FUNCTION: WEBSERVICE 0x1012aa30
+// FUNCTION: ROBLOX 0x00667d30
 void RunDragger::rotatePart(PartInstance* part)
 {
 	G3D::CoordinateFrame rotated = part->getCoordinateFrame();
@@ -74,6 +80,7 @@ void RunDragger::rotatePart(PartInstance* part)
 }
 
 // FUNCTION: WEBSERVICE 0x1012aae0
+// FUNCTION: ROBLOX 0x00667de0
 float RunDragger::SnapInfo::hitOutsideExtents()
 {
 	Extents snapExtents = snap->getExtentsLocal();
@@ -84,11 +91,13 @@ float RunDragger::SnapInfo::hitOutsideExtents()
 }
 
 // FUNCTION: WEBSERVICE 0x1012abd0
+// FUNCTION: ROBLOX 0x00667ed0
 RunDragger::RunDragger() : workspace(NULL), drag(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1012ac40
+// FUNCTION: ROBLOX 0x00667f40
 RunDragger::SnapInfo RunDragger::createSnapSurface(Primitive* snap, G3D::Array<NormalId>* ignore)
 {
 	SnapInfo answer;
@@ -126,12 +135,14 @@ RunDragger::SnapInfo RunDragger::createSnapSurface(Primitive* snap, G3D::Array<N
 }
 
 // FUNCTION: WEBSERVICE 0x1012af40
+// FUNCTION: ROBLOX 0x00668240
 bool RunDragger::notTried(Primitive* check, const G3D::Array<Primitive*>& tried)
 {
 	return check && tried.find(check) == tried.end();
 }
 
 // FUNCTION: WEBSERVICE 0x1012af90
+// FUNCTION: ROBLOX 0x00668290
 RunDragger::SnapInfo RunDragger::bestProximatePart(
 	const G3D::Array<Primitive*>& triedSnap, bool (Contact::*proximityTest)(float)
 )
@@ -156,6 +167,7 @@ RunDragger::SnapInfo RunDragger::bestProximatePart(
 }
 
 // FUNCTION: WEBSERVICE 0x1012b0f0
+// FUNCTION: ROBLOX 0x006683f0
 void RunDragger::turnUpright(PartInstance* part)
 {
 	if (part->getSurfaces().isStandardPart()) {
@@ -168,6 +180,7 @@ void RunDragger::turnUpright(PartInstance* part)
 }
 
 // FUNCTION: WEBSERVICE 0x1012b1a0
+// FUNCTION: ROBLOX 0x006684a0
 void RunDragger::tiltPart(PartInstance* part, const G3D::CoordinateFrame& camera)
 {
 	G3D::CoordinateFrame dragCoord = part->getCoordinateFrame();
@@ -179,6 +192,7 @@ void RunDragger::tiltPart(PartInstance* part, const G3D::CoordinateFrame& camera
 }
 
 // FUNCTION: WEBSERVICE 0x1012b3a0
+// FUNCTION: ROBLOX 0x006686a0
 RunDragger::SnapInfo RunDragger::rayHitsPart(const G3D::Array<Primitive*>& triedSnap, bool forceAdjacent)
 {
 	SnapInfo answer;
@@ -200,6 +214,7 @@ RunDragger::SnapInfo RunDragger::rayHitsPart(const G3D::Array<Primitive*>& tried
 }
 
 // FUNCTION: WEBSERVICE 0x1012b520
+// FUNCTION: ROBLOX 0x00668820
 RunDragger::SnapInfo RunDragger::findSnap(const G3D::Array<Primitive*>& triedSnap)
 {
 	SnapInfo answer;
@@ -228,6 +243,7 @@ RunDragger::SnapInfo RunDragger::findSnap(const G3D::Array<Primitive*>& triedSna
 }
 
 // FUNCTION: WEBSERVICE 0x1012b6f0
+// FUNCTION: ROBLOX 0x006689f0
 void RunDragger::smartPtrHackPre()
 {
 	boost::shared_ptr<PartInstance> p = snapPart.lock();
@@ -240,6 +256,7 @@ void RunDragger::smartPtrHackPre()
 }
 
 // FUNCTION: WEBSERVICE 0x1012b7b0
+// FUNCTION: ROBLOX 0x00668ab0
 void RunDragger::init(
 	Workspace* _workspace, boost::weak_ptr<PartInstance> _dragPart, const G3D::Vector3& _dragPointWorld
 )
@@ -254,6 +271,7 @@ void RunDragger::init(
 }
 
 // FUNCTION: WEBSERVICE 0x1012b9d0
+// FUNCTION: ROBLOX 0x00668cd0
 bool RunDragger::snapDragPart()
 {
 	Face snapFace = snapInfo.snap->getFaceInWorld(snapInfo.surface);
@@ -282,6 +300,7 @@ bool RunDragger::snapDragPart()
 }
 
 // FUNCTION: WEBSERVICE 0x1012bcb0
+// FUNCTION: ROBLOX 0x00668fb0
 bool RunDragger::rayHitsCloserPart()
 {
 	G3D::Array<Primitive*> ignoreNone;
@@ -298,6 +317,7 @@ bool RunDragger::rayHitsCloserPart()
 }
 
 // FUNCTION: WEBSERVICE 0x1012bdb0
+// FUNCTION: ROBLOX 0x006690b0
 void RunDragger::findSafeY()
 {
 	if (colliding()) {
@@ -315,6 +335,7 @@ void RunDragger::findSafeY()
 }
 
 // FUNCTION: WEBSERVICE 0x1012bf40
+// FUNCTION: ROBLOX 0x00669240
 void RunDragger::smartPtrHackPost()
 {
 	if (snapInfo.snap) {
@@ -326,6 +347,7 @@ void RunDragger::smartPtrHackPost()
 }
 
 // STUB: WEBSERVICE 0x1012c040
+// STUB: ROBLOX 0x00669340
 bool RunDragger::moveDragPart()
 {
 	const G3D::CoordinateFrame& snapCoord = snapInfo.snap->getCoordinateFrame();
@@ -367,6 +389,7 @@ bool RunDragger::moveDragPart()
 }
 
 // FUNCTION: WEBSERVICE 0x1012c440
+// FUNCTION: ROBLOX 0x00669740
 bool RunDragger::fallOffPart(bool& snapped)
 {
 	G3D::Array<NormalId> triedSurfaces;
@@ -383,6 +406,7 @@ bool RunDragger::fallOffPart(bool& snapped)
 }
 
 // FUNCTION: WEBSERVICE 0x1012c5e0
+// FUNCTION: ROBLOX 0x006698e0
 void RunDragger::findNoSnapPosition(const G3D::CoordinateFrame& original)
 {
 	dragPart.lock()->setCoordinateFrame(original);
@@ -390,6 +414,7 @@ void RunDragger::findNoSnapPosition(const G3D::CoordinateFrame& original)
 }
 
 // FUNCTION: WEBSERVICE 0x1012c680
+// FUNCTION: ROBLOX 0x00669980
 bool RunDragger::snap(const G3D::Ray& _mouseRay)
 {
 	smartPtrHackPre();

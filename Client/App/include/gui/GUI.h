@@ -38,9 +38,11 @@ protected:
 	virtual bool canLoseFocus() { return false; } // vtable+0x44
 
 	// FUNCTION: WEBSERVICE 0x100c7490
+	// FUNCTION: ROBLOX 0x0040ddd0
 	virtual G3D::Vector2 getPosition() const { return getGuiParent()->getChildPosition(this); } // vtable+0x48
 
 	// FUNCTION: WEBSERVICE 0x100c74b0
+	// FUNCTION: ROBLOX 0x0040ddf0
 	virtual G3D::Vector2 getChildPosition(const GuiItem* child) const { return G3D::Vector2::zero(); } // vtable+0x4c
 
 	// FUNCTION: WEBSERVICE 0x100c72b0
@@ -49,10 +51,12 @@ protected:
 	virtual bool isVisible() const { return true; } // vtable+0x54
 
 	// FUNCTION: WEBSERVICE 0x100c72c0
+	// FUNCTION: ROBLOX 0x0040de20
 	virtual std::string getTitle() { return getName(); } // vtable+0x58
 
 public:
 	// FUNCTION: WEBSERVICE 0x100c75b0
+	// FUNCTION: ROBLOX 0x0040de50
 	virtual G3D::Vector2 getSize() const { return guiSize; } // vtable+0x5c
 
 	virtual void render2d(Adorn* adorn) {} // vtable+0x60
@@ -91,6 +95,7 @@ protected:
 		Adorn* adorn, const std::string& label, const G3D::Color4& fill, const G3D::Color4& border, Adorn::XAlign align
 	) const;
 	// FUNCTION: WEBSERVICE 0x100d1460
+	// FUNCTION: ROBLOX 0x0058d2c0
 	G3D::Rect2D getMyRect2D() const { return getMyRect().toRect2D(); }
 
 private:
@@ -128,6 +133,7 @@ protected:
 
 private:
 	// FUNCTION: WEBSERVICE 0x100d16c0
+	// FUNCTION: ROBLOX 0x0058d540
 	virtual G3D::Vector2 getSize() const { return canvasSize; }
 
 	static G3D::Vector2 canvasSize;
@@ -142,6 +148,7 @@ class TopMenuBar : public GuiItem
 {
 public:
 	// FUNCTION: WEBSERVICE 0x100c7690
+	// FUNCTION: ROBLOX 0x005e1880
 	TopMenuBar() { init(); }
 
 	virtual GuiResponse process(const GuiEvent& event);
@@ -170,6 +177,7 @@ class RelativePanel : public TopMenuBar
 {
 public:
 	// FUNCTION: WEBSERVICE 0x100c7740
+	// FUNCTION: ROBLOX 0x005e1920
 	RelativePanel()
 	{
 		offset.x = 0;

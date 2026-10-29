@@ -8,6 +8,7 @@ namespace RBX {
 class Primitive;
 
 // VTABLE: WEBSERVICE 0x10239d50
+// VTABLE: ROBLOX 0x00835b98
 // SIZE 0x04
 class HitTestFilter
 {

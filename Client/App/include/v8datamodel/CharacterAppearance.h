@@ -58,6 +58,7 @@ protected:
 
 private:
 	// FUNCTION: WEBSERVICE 0x100e0460 FOLDED
+	// FUNCTION: ROBLOX 0x005e5f90 FOLDED
 	void dataChanged(const Reflection::PropertyDescriptor&) { CharacterAppearance::apply(); }
 };
 
@@ -82,6 +83,7 @@ private:
 	virtual void apply(Humanoid* humanoid);
 
 	// FUNCTION: WEBSERVICE 0x100e0460 FOLDED
+	// FUNCTION: ROBLOX 0x005e5f90 FOLDED
 	void dataChanged(const Reflection::PropertyDescriptor&) { CharacterAppearance::apply(); }
 };
 
@@ -102,6 +104,7 @@ private:
 	virtual void apply(Humanoid* humanoid);
 
 	// FUNCTION: WEBSERVICE 0x100e0460 FOLDED
+	// FUNCTION: ROBLOX 0x005e5f90 FOLDED
 	void dataChanged(const Reflection::PropertyDescriptor&) { CharacterAppearance::apply(); }
 };
 
@@ -132,6 +135,7 @@ private:
 	virtual void apply(Humanoid* humanoid);
 
 	// FUNCTION: WEBSERVICE 0x100e0460 FOLDED
+	// FUNCTION: ROBLOX 0x005e5f90 FOLDED
 	void dataChanged(const Reflection::PropertyDescriptor&) { CharacterAppearance::apply(); }
 };
 
@@ -147,40 +151,54 @@ DECOMP_SIZE_ASSERT(BodyColors, 0x110)
 // SYNTHETIC: WEBSERVICE 0x1021c9f0
 // `dynamic initializer for 'RBX::Shirt::prop_leftSleeveColor''
 // SYNTHETIC: WEBSERVICE 0x1021ca20
+// SYNTHETIC: ROBLOX 0x007ec090
 // `dynamic initializer for 'RBX::Shirt::prop_rightSleeveColor''
 // SYNTHETIC: WEBSERVICE 0x1021ca50
+// SYNTHETIC: ROBLOX 0x007ec0c0
 // `dynamic initializer for 'RBX::Shirt::prop_torsoColor''
 // SYNTHETIC: WEBSERVICE 0x1021ca80
 // `dynamic initializer for 'RBX::Skin::prop_skinColor''
 // SYNTHETIC: WEBSERVICE 0x1021cab0
 // `dynamic initializer for 'RBX::BodyColors::prop_HeadColor''
 // SYNTHETIC: WEBSERVICE 0x1021cae0
+// SYNTHETIC: ROBLOX 0x007ec150
 // `dynamic initializer for 'RBX::BodyColors::prop_LeftArmColor''
 // SYNTHETIC: WEBSERVICE 0x1021cb10
+// SYNTHETIC: ROBLOX 0x007ec180
 // `dynamic initializer for 'RBX::BodyColors::prop_RightArmColor''
 // SYNTHETIC: WEBSERVICE 0x1021cb40
+// SYNTHETIC: ROBLOX 0x007ec1b0
 // `dynamic initializer for 'RBX::BodyColors::prop_TorsoColor''
 // SYNTHETIC: WEBSERVICE 0x1021cb70
+// SYNTHETIC: ROBLOX 0x007ec1e0
 // `dynamic initializer for 'RBX::BodyColors::prop_LeftLegColor''
 // SYNTHETIC: WEBSERVICE 0x1021cba0
+// SYNTHETIC: ROBLOX 0x007ec210
 // `dynamic initializer for 'RBX::BodyColors::prop_RightLegColor''
 // SYNTHETIC: WEBSERVICE 0x10224000
+// SYNTHETIC: ROBLOX 0x007f4090
 // `dynamic atexit destructor for 'RBX::Shirt::prop_torsoColor''
 // SYNTHETIC: WEBSERVICE 0x10224020
 // `dynamic atexit destructor for 'RBX::Skin::prop_skinColor''
 // SYNTHETIC: WEBSERVICE 0x10224040
+// SYNTHETIC: ROBLOX 0x007f40d0
 // `dynamic atexit destructor for 'RBX::BodyColors::prop_LeftArmColor''
 // SYNTHETIC: WEBSERVICE 0x10224060
 // `dynamic atexit destructor for 'RBX::BodyColors::prop_HeadColor''
 // SYNTHETIC: WEBSERVICE 0x10224080
+// SYNTHETIC: ROBLOX 0x007f4110
 // `dynamic atexit destructor for 'RBX::BodyColors::prop_RightArmColor''
 // SYNTHETIC: WEBSERVICE 0x102240a0
+// SYNTHETIC: ROBLOX 0x007f4130
 // `dynamic atexit destructor for 'RBX::BodyColors::prop_TorsoColor''
 // SYNTHETIC: WEBSERVICE 0x102240c0
+// SYNTHETIC: ROBLOX 0x007f4150
 // `dynamic atexit destructor for 'RBX::BodyColors::prop_LeftLegColor''
 // SYNTHETIC: WEBSERVICE 0x102240e0
+// SYNTHETIC: ROBLOX 0x007f4170
 // `dynamic atexit destructor for 'RBX::BodyColors::prop_RightLegColor''
 // SYNTHETIC: WEBSERVICE 0x10224100
+// SYNTHETIC: ROBLOX 0x007f4190
 // `dynamic atexit destructor for 'RBX::Shirt::prop_rightSleeveColor''
 // SYNTHETIC: WEBSERVICE 0x10224120
 // `dynamic atexit destructor for 'RBX::Shirt::prop_leftSleeveColor''

@@ -51,6 +51,7 @@ public:
 	UIEvent() : eventType(NO_EVENT), userInput(NULL) {}
 
 	// FUNCTION: WEBSERVICE 0x10069fa0
+	// FUNCTION: ROBLOX 0x0058ca60
 	bool isMouseEvent() const
 	{
 		return eventType == MOUSE_RIGHT_BUTTON_DOWN || eventType == MOUSE_RIGHT_BUTTON_UP ||

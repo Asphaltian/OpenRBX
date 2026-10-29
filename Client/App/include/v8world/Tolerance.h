@@ -15,6 +15,7 @@ public:
 	static float jointOverlapMin();
 
 	// FUNCTION: WEBSERVICE 0x1011ed70
+	// FUNCTION: ROBLOX 0x006472f0
 	static bool pointsUnaligned(const Vector3& p0, const Vector3& p1)
 	{
 		return 0.05f * 0.05f < (p1 - p0).squaredMagnitude();

@@ -10,6 +10,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101ecd70
+// FUNCTION: ROBLOX 0x006708d0
 bool HitTest::hitTestBall(
 	const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 )
@@ -29,6 +30,7 @@ bool HitTest::hitTestBall(
 }
 
 // FUNCTION: WEBSERVICE 0x101ece50
+// FUNCTION: ROBLOX 0x006709b0
 bool HitTest::hitTestCylinder(
 	const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 )
@@ -44,6 +46,7 @@ bool HitTest::hitTestCylinder(
 }
 
 // FUNCTION: WEBSERVICE 0x101ecf00
+// FUNCTION: ROBLOX 0x00670a60
 bool HitTest::hitTestBox(
 	const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal
 )
@@ -56,6 +59,7 @@ bool HitTest::hitTestBox(
 }
 
 // FUNCTION: WEBSERVICE 0x101ecfc0
+// FUNCTION: ROBLOX 0x00670b20
 bool HitTest::hitTest(const Part& part, G3D::Ray& rayInPartCoords, G3D::Vector3& hitPointInPartCoords, float gridToReal)
 {
 	switch (part.type) {

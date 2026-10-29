@@ -23,12 +23,14 @@
 
 
 // FUNCTION: WEBSERVICE 0x101c37e0
+// FUNCTION: ROBLOX 0x004e8e40
 CSHA1::CSHA1()
 {
 	Reset();
 }
 
 // FUNCTION: WEBSERVICE 0x101c3820
+// FUNCTION: ROBLOX 0x004e8e80
 CSHA1::~CSHA1()
 {
 	Reset();
@@ -36,6 +38,7 @@ CSHA1::~CSHA1()
 
 
 // FUNCTION: WEBSERVICE 0x101c2200
+// FUNCTION: ROBLOX 0x004e7860
 void CSHA1::Reset()
 {
 	// SHA1 initialization constants
@@ -50,6 +53,7 @@ void CSHA1::Reset()
 }
 
 // FUNCTION: WEBSERVICE 0x101c2230
+// FUNCTION: ROBLOX 0x004e7890
 void CSHA1::Transform( unsigned int state[ 5 ], unsigned char buffer[ 64 ] )
 {
 	unsigned int a = 0, b = 0, c = 0, d = 0, e = 0;
@@ -165,6 +169,7 @@ void CSHA1::Transform( unsigned int state[ 5 ], unsigned char buffer[ 64 ] )
 
 // Use this function to hash in binary data and strings
 // FUNCTION: WEBSERVICE 0x101c3600
+// FUNCTION: ROBLOX 0x004e8c60
 void CSHA1::Update( unsigned char* data, unsigned int len )
 {
 	unsigned int i = 0, j = 0;
@@ -243,6 +248,7 @@ bool CSHA1::HashFile( char *szFileName )
 }
 
 // FUNCTION: WEBSERVICE 0x101c36c0
+// FUNCTION: ROBLOX 0x004e8d20
 void CSHA1::Final()
 {
 	unsigned int i = 0, j = 0;
@@ -327,6 +333,7 @@ void CSHA1::GetHash( unsigned char *uDest )
 // Get the raw message digest
 // Added by Kevin to be quicker
 // FUNCTION: WEBSERVICE 0x101c37d0
+// FUNCTION: ROBLOX 0x004e8e30
 unsigned char * CSHA1::GetHash( void ) const
 {
 	return ( unsigned char * ) m_digest;

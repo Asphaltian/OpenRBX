@@ -130,6 +130,7 @@ Reflection::SignalDesc<ObjectValue, void(boost::shared_ptr<Instance>)> ObjectVal
 );
 
 // FUNCTION: WEBSERVICE 0x100f3b60
+// FUNCTION: ROBLOX 0x00632820
 void registerValueClasses()
 {
 	Value<int, sIntValue>::classDescriptor();
@@ -144,6 +145,7 @@ void registerValueClasses()
 }
 
 // FUNCTION: WEBSERVICE 0x100f71b0
+// FUNCTION: ROBLOX 0x006359a0
 void ObjectValue::setValue(Instance* value)
 {
 	if (this->value.get() != value) {

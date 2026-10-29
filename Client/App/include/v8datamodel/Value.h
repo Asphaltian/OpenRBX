@@ -56,12 +56,16 @@ private:
 	// TEMPLATE: WEBSERVICE 0x1008e6a0
 	// RBX::ObjectValue::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100f44d0
+	// TEMPLATE: ROBLOX 0x00633040
 	// RBX::Value<int,&RBX::sIntValue>::Value<int,&RBX::sIntValue>
 	// TEMPLATE: WEBSERVICE 0x100f45f0
+	// TEMPLATE: ROBLOX 0x00633150
 	// RBX::Value<bool,&RBX::sBoolValue>::Value<bool,&RBX::sBoolValue>
 	// TEMPLATE: WEBSERVICE 0x100f46f0
+	// TEMPLATE: ROBLOX 0x00633260
 	// RBX::Value<double,&RBX::sDoubleValue>::Value<double,&RBX::sDoubleValue>
 	// TEMPLATE: WEBSERVICE 0x100f47c0
+	// TEMPLATE: ROBLOX 0x00633380
 	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>
 	// TEMPLATE: WEBSERVICE 0x100f4910
 	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::~Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>
@@ -70,22 +74,28 @@ private:
 	// TEMPLATE: WEBSERVICE 0x100f4980
 	// RBX::Value<G3D::Vector3,&RBX::sVector3Value>::Value<G3D::Vector3,&RBX::sVector3Value>
 	// TEMPLATE: WEBSERVICE 0x100f4aa0
+	// TEMPLATE: ROBLOX 0x00633640
 	// RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>
 	// TEMPLATE: WEBSERVICE 0x100f4bf0
 	// RBX::Value<G3D::Color3,&RBX::sColor3Value>::Value<G3D::Color3,&RBX::sColor3Value>
 	// TEMPLATE: WEBSERVICE 0x100f4cf0
+	// TEMPLATE: ROBLOX 0x006338b0
 	// RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>::Value<RBX::BrickColor,&RBX::sBrickColorValue>
 	// TEMPLATE: WEBSERVICE 0x100f72a0
 	// RBX::Value<int,&RBX::sIntValue>::onValueChanged
 	// TEMPLATE: WEBSERVICE 0x100f72e0
+	// TEMPLATE: ROBLOX 0x00635ad0
 	// RBX::Value<bool,&RBX::sBoolValue>::onValueChanged
 	// TEMPLATE: WEBSERVICE 0x100f7320
+	// TEMPLATE: ROBLOX 0x00635b10
 	// RBX::Value<double,&RBX::sDoubleValue>::onValueChanged
 	// TEMPLATE: WEBSERVICE 0x100f7370
+	// TEMPLATE: ROBLOX 0x00635b60
 	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::onValueChanged
 	// TEMPLATE: WEBSERVICE 0x100f73b0
 	// RBX::Value<G3D::Vector3,&RBX::sVector3Value>::onValueChanged
 	// TEMPLATE: WEBSERVICE 0x100f7420
+	// TEMPLATE: ROBLOX 0x00635c10
 	// RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>::onValueChanged
 	// TEMPLATE: WEBSERVICE 0x100f74b0
 	// RBX::Value<G3D::Color3,&RBX::sColor3Value>::onValueChanged
@@ -118,6 +128,7 @@ private:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x1008e620
+	// SYNTHETIC: ROBLOX 0x005cdea0
 	// RBX::ObjectValue::~ObjectValue
 };
 
@@ -189,20 +200,28 @@ DECOMP_SIZE_ASSERT(ObjectValue, 0x100)
 // SYNTHETIC: WEBSERVICE 0x102248b0
 // `dynamic atexit destructor for 'RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>::desc_Value''
 // SYNTHETIC: WEBSERVICE 0x102248d0
+// SYNTHETIC: ROBLOX 0x007f4e80
 // `RBX::Reflection::Described<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,&RBX::sBrickColorValue,RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102248e0
+// SYNTHETIC: ROBLOX 0x007f4e90
 // `RBX::Reflection::Described<RBX::Value<G3D::Color3,&RBX::sColor3Value>,&RBX::sColor3Value,RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102248f0
+// SYNTHETIC: ROBLOX 0x007f4ea0
 // `RBX::Reflection::Described<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,&RBX::sCFrameValue,RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224900
+// SYNTHETIC: ROBLOX 0x007f4eb0
 // `RBX::Reflection::Described<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,&RBX::sVector3Value,RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224910
+// SYNTHETIC: ROBLOX 0x007f4ec0
 // `RBX::Reflection::Described<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>,&RBX::sStringValue,RBX::FactoryProduct<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>,RBX::Instance,&RBX::sStringValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224920
+// SYNTHETIC: ROBLOX 0x007f4ed0
 // `RBX::Reflection::Described<RBX::Value<double,&RBX::sDoubleValue>,&RBX::sDoubleValue,RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224930
+// SYNTHETIC: ROBLOX 0x007f4ee0
 // `RBX::Reflection::Described<RBX::Value<bool,&RBX::sBoolValue>,&RBX::sBoolValue,RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224940
+// SYNTHETIC: ROBLOX 0x007f4ef0
 // `RBX::Reflection::Described<RBX::Value<int,&RBX::sIntValue>,&RBX::sIntValue,RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224b50
 // `dynamic atexit destructor for 'RBX::Value<bool,&RBX::sBoolValue>::desc_ValueChanged''

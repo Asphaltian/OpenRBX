@@ -15,6 +15,7 @@ namespace Network {
 const float brickEpsilon = 0.0005f;
 
 // FUNCTION: WEBSERVICE 0x101ab330
+// FUNCTION: ROBLOX 0x004bdec0
 void serializeEnum(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
 {
 	const Reflection::EnumPropertyDescriptor& descriptor =
@@ -25,6 +26,7 @@ void serializeEnum(const Reflection::ConstProperty& property, RakNet::BitStream&
 }
 
 // FUNCTION: WEBSERVICE 0x101ab370
+// FUNCTION: ROBLOX 0x004bdf00
 void deserializeEnum(Reflection::Property& property, RakNet::BitStream& bitStream)
 {
 	const Reflection::EnumPropertyDescriptor& descriptor =
@@ -36,6 +38,7 @@ void deserializeEnum(Reflection::Property& property, RakNet::BitStream& bitStrea
 }
 
 // FUNCTION: WEBSERVICE 0x101ab3b0
+// FUNCTION: ROBLOX 0x004bdf40
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, bool value)
 {
 	stream.Write(value);
@@ -43,6 +46,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab3d0
+// FUNCTION: ROBLOX 0x004bdf60
 template <>
 RakNet::BitStream& operator>> <bool>(RakNet::BitStream& stream, bool& value)
 {
@@ -51,12 +55,14 @@ RakNet::BitStream& operator>> <bool>(RakNet::BitStream& stream, bool& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab410
+// FUNCTION: ROBLOX 0x004bdfa0
 bool brickEq(float a, float b)
 {
 	return a == b || fabsf(a - b) <= brickEpsilon;
 }
 
 // FUNCTION: WEBSERVICE 0x101ab460
+// FUNCTION: ROBLOX 0x004bdff0
 static bool isBrickLocation(const G3D::Vector3& v, short& x, unsigned short& y, short& z)
 {
 	if (v.x >= 512.0f) {
@@ -96,6 +102,7 @@ static bool isBrickLocation(const G3D::Vector3& v, short& x, unsigned short& y, 
 }
 
 // FUNCTION: WEBSERVICE 0x101ab600 FOLDED
+// FUNCTION: ROBLOX 0x004be610 FOLDED
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, int value)
 {
 	stream.Write(value);
@@ -103,6 +110,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, int value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab600 FOLDED
+// FUNCTION: ROBLOX 0x004be610 FOLDED
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, unsigned int value)
 {
 	stream.Write(value);
@@ -110,6 +118,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, unsigned int value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab630 FOLDED
+// FUNCTION: ROBLOX 0x004be640 FOLDED
 template <>
 RakNet::BitStream& operator>> <int>(RakNet::BitStream& stream, int& value)
 {
@@ -118,6 +127,7 @@ RakNet::BitStream& operator>> <int>(RakNet::BitStream& stream, int& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab630 FOLDED
+// FUNCTION: ROBLOX 0x004be640 FOLDED
 template <>
 RakNet::BitStream& operator>> <long>(RakNet::BitStream& stream, long& value)
 {
@@ -126,6 +136,7 @@ RakNet::BitStream& operator>> <long>(RakNet::BitStream& stream, long& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab630 FOLDED
+// FUNCTION: ROBLOX 0x004be640 FOLDED
 template <>
 RakNet::BitStream& operator>> <unsigned int>(RakNet::BitStream& stream, unsigned int& value)
 {
@@ -134,6 +145,7 @@ RakNet::BitStream& operator>> <unsigned int>(RakNet::BitStream& stream, unsigned
 }
 
 // FUNCTION: WEBSERVICE 0x101ab650
+// FUNCTION: ROBLOX 0x004be660
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, unsigned char value)
 {
 	stream.Write(value);
@@ -141,6 +153,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, unsigned char value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab680
+// FUNCTION: ROBLOX 0x004be690
 template <>
 RakNet::BitStream& operator>> <unsigned char>(RakNet::BitStream& stream, unsigned char& value)
 {
@@ -149,6 +162,7 @@ RakNet::BitStream& operator>> <unsigned char>(RakNet::BitStream& stream, unsigne
 }
 
 // FUNCTION: WEBSERVICE 0x101ab6a0
+// FUNCTION: ROBLOX 0x004be6b0
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, float value)
 {
 	stream.Write(value);
@@ -156,6 +170,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, float value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab630 FOLDED
+// FUNCTION: ROBLOX 0x004be640 FOLDED
 template <>
 RakNet::BitStream& operator>> <float>(RakNet::BitStream& stream, float& value)
 {
@@ -164,6 +179,7 @@ RakNet::BitStream& operator>> <float>(RakNet::BitStream& stream, float& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab6d0
+// FUNCTION: ROBLOX 0x004be6e0
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, double value)
 {
 	stream.Write(value);
@@ -171,6 +187,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, double value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab700
+// FUNCTION: ROBLOX 0x004be710
 template <>
 RakNet::BitStream& operator>> <double>(RakNet::BitStream& stream, double& value)
 {
@@ -179,6 +196,7 @@ RakNet::BitStream& operator>> <double>(RakNet::BitStream& stream, double& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab720
+// FUNCTION: ROBLOX 0x004be730
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, const std::string& value)
 {
 	stream.Write(value.size());
@@ -188,6 +206,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, const std::string& valu
 }
 
 // FUNCTION: WEBSERVICE 0x101ab770
+// FUNCTION: ROBLOX 0x004be780
 template <>
 RakNet::BitStream& operator>> <std::string>(RakNet::BitStream& stream, std::string& value)
 {
@@ -203,6 +222,7 @@ RakNet::BitStream& operator>> <std::string>(RakNet::BitStream& stream, std::stri
 }
 
 // FUNCTION: WEBSERVICE 0x101ab7d0
+// FUNCTION: ROBLOX 0x004be7e0
 template <>
 RakNet::BitStream& operator>> <ContentId>(RakNet::BitStream& stream, ContentId& value)
 {
@@ -213,6 +233,7 @@ RakNet::BitStream& operator>> <ContentId>(RakNet::BitStream& stream, ContentId& 
 }
 
 // FUNCTION: WEBSERVICE 0x101ab890 FOLDED
+// FUNCTION: ROBLOX 0x004bea80 FOLDED
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::Color3& value)
 {
 	stream << value.r;
@@ -223,6 +244,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::Color3& valu
 }
 
 // FUNCTION: WEBSERVICE 0x101ab890 FOLDED
+// FUNCTION: ROBLOX 0x004bea80 FOLDED
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::Vector3& value)
 {
 	stream << value.x;
@@ -233,6 +255,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::Vector3& val
 }
 
 // FUNCTION: WEBSERVICE 0x101ab8f0
+// FUNCTION: ROBLOX 0x004be8a0
 void writeBrickVector(RakNet::BitStream& stream, const G3D::Vector3& value)
 {
 	short x;
@@ -254,6 +277,7 @@ void writeBrickVector(RakNet::BitStream& stream, const G3D::Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ab9b0
+// FUNCTION: ROBLOX 0x004be960
 void readBrickVector(RakNet::BitStream& stream, G3D::Vector3& value)
 {
 	bool isBrickLocation;
@@ -287,6 +311,7 @@ void readBrickVector(RakNet::BitStream& stream, G3D::Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101abad0 FOLDED
+// FUNCTION: ROBLOX 0x004bed30 FOLDED
 template <>
 RakNet::BitStream& operator>> <G3D::Color3>(RakNet::BitStream& stream, G3D::Color3& value)
 {
@@ -298,6 +323,7 @@ RakNet::BitStream& operator>> <G3D::Color3>(RakNet::BitStream& stream, G3D::Colo
 }
 
 // FUNCTION: WEBSERVICE 0x101abb10
+// FUNCTION: ROBLOX 0x004beae0
 void rationalize(G3D::CoordinateFrame& value)
 {
 	if (!value.translation.isFinite()) {
@@ -311,6 +337,7 @@ void rationalize(G3D::CoordinateFrame& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101abbc0
+// FUNCTION: ROBLOX 0x004beb90
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::CoordinateFrame& cf)
 {
 	G3D::CoordinateFrame value = cf;
@@ -334,6 +361,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, const G3D::CoordinateFr
 }
 
 // FUNCTION: WEBSERVICE 0x101abc90
+// FUNCTION: ROBLOX 0x004bec60
 template <>
 RakNet::BitStream& operator>> <G3D::CoordinateFrame>(RakNet::BitStream& stream, G3D::CoordinateFrame& value)
 {
@@ -358,6 +386,7 @@ RakNet::BitStream& operator>> <G3D::CoordinateFrame>(RakNet::BitStream& stream, 
 }
 
 // FUNCTION: WEBSERVICE 0x101abad0 FOLDED
+// FUNCTION: ROBLOX 0x004bed30 FOLDED
 template <>
 RakNet::BitStream& operator>> <G3D::Vector3>(RakNet::BitStream& stream, G3D::Vector3& value)
 {
@@ -369,6 +398,7 @@ RakNet::BitStream& operator>> <G3D::Vector3>(RakNet::BitStream& stream, G3D::Vec
 }
 
 // FUNCTION: WEBSERVICE 0x101abd60
+// FUNCTION: ROBLOX 0x004bed70
 template <>
 void serialize<ContentId>(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
 {
@@ -376,6 +406,7 @@ void serialize<ContentId>(const Reflection::ConstProperty& property, RakNet::Bit
 }
 
 // FUNCTION: WEBSERVICE 0x101abe10
+// FUNCTION: ROBLOX 0x004bee20
 template <>
 void deserialize<ContentId>(Reflection::Property& property, RakNet::BitStream& bitStream)
 {
@@ -385,6 +416,7 @@ void deserialize<ContentId>(Reflection::Property& property, RakNet::BitStream& b
 }
 
 // FUNCTION: WEBSERVICE 0x101abeb0
+// FUNCTION: ROBLOX 0x004beec0
 void IdSerializer::setRefValue(WaitItem& wi, Instance* instance)
 {
 	wi.desc->setRefValue(wi.instance.get(), instance);
@@ -398,6 +430,7 @@ RakNet::BitStream& operator<<(RakNet::BitStream& stream, BrickColor value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ac010
+// FUNCTION: ROBLOX 0x004bf0c0
 template <>
 RakNet::BitStream& operator>> <BrickColor>(RakNet::BitStream& stream, BrickColor& value)
 {
@@ -408,6 +441,7 @@ RakNet::BitStream& operator>> <BrickColor>(RakNet::BitStream& stream, BrickColor
 }
 
 // FUNCTION: WEBSERVICE 0x101ac720
+// FUNCTION: ROBLOX 0x004bf890
 template <>
 void serialize<BrickColor>(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
 {
@@ -415,6 +449,7 @@ void serialize<BrickColor>(const Reflection::ConstProperty& property, RakNet::Bi
 }
 
 // FUNCTION: WEBSERVICE 0x101ac760
+// FUNCTION: ROBLOX 0x004bf8d0
 template <>
 void deserialize<BrickColor>(Reflection::Property& property, RakNet::BitStream& bitStream)
 {
@@ -424,6 +459,7 @@ void deserialize<BrickColor>(Reflection::Property& property, RakNet::BitStream& 
 }
 
 // FUNCTION: WEBSERVICE 0x101aca80
+// FUNCTION: ROBLOX 0x004bfc40
 bool StringSender::trySend(RakNet::BitStream& stream, const std::string& value)
 {
 	if (value == "") {
@@ -441,6 +477,7 @@ bool StringSender::trySend(RakNet::BitStream& stream, const std::string& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101ace20
+// FUNCTION: ROBLOX 0x004c0000
 void StringReceiver::receive(RakNet::BitStream& stream, std::string& value)
 {
 	unsigned char id;
@@ -459,6 +496,7 @@ void StringReceiver::receive(RakNet::BitStream& stream, std::string& value)
 }
 
 // FUNCTION: WEBSERVICE 0x101acf50
+// FUNCTION: ROBLOX 0x004c0220
 void IdSerializer::deserializeId(RakNet::BitStream& stream, Guid::Data& id)
 {
 	scopeNames.receive(stream, id.scope);
@@ -473,6 +511,7 @@ void IdSerializer::deserializeId(RakNet::BitStream& stream, Guid::Data& id)
 }
 
 // FUNCTION: WEBSERVICE 0x101acfa0
+// FUNCTION: ROBLOX 0x004c0270
 void StringSender::send(RakNet::BitStream& stream, const std::string& value)
 {
 	if (value == "") {
@@ -498,6 +537,7 @@ void StringSender::send(RakNet::BitStream& stream, const std::string& value)
 }
 
 // STUB: WEBSERVICE 0x101ad130
+// STUB: ROBLOX 0x004c0400
 void StringReceiver::deserializeString(Reflection::Property& property, RakNet::BitStream& bitStream)
 {
 	std::string value;
@@ -509,6 +549,7 @@ void StringReceiver::deserializeString(Reflection::Property& property, RakNet::B
 }
 
 // STUB: WEBSERVICE 0x101ad620
+// STUB: ROBLOX 0x004c08f0
 void StringSender::serializeString(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
 {
 	const Instance* instance = static_cast<const Instance*>(property.getInstance());
@@ -518,6 +559,7 @@ void StringSender::serializeString(const Reflection::ConstProperty& property, Ra
 }
 
 // FUNCTION: WEBSERVICE 0x101adac0
+// FUNCTION: ROBLOX 0x004c0dd0
 void IdSerializer::serializeId(RakNet::BitStream& stream, const Instance* instance)
 {
 	if (instance) {
@@ -533,6 +575,7 @@ void IdSerializer::serializeId(RakNet::BitStream& stream, const Instance* instan
 }
 
 // FUNCTION: WEBSERVICE 0x101adb40
+// FUNCTION: ROBLOX 0x004c0e50
 bool IdSerializer::deserializeInstanceRef(RakNet::BitStream& stream, Instance*& instance, Guid::Data& id)
 {
 	deserializeId(stream, id);
@@ -540,6 +583,7 @@ bool IdSerializer::deserializeInstanceRef(RakNet::BitStream& stream, Instance*& 
 }
 
 // FUNCTION: WEBSERVICE 0x101adbb0
+// FUNCTION: ROBLOX 0x004c0ec0
 void IdSerializer::serializeRef(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream)
 {
 	const Reflection::RefPropertyDescriptor& desc =
@@ -549,6 +593,7 @@ void IdSerializer::serializeRef(const Reflection::ConstProperty& property, RakNe
 }
 
 // FUNCTION: WEBSERVICE 0x101adce0
+// FUNCTION: ROBLOX 0x004c0ff0
 bool IdSerializer::trySerializeId(RakNet::BitStream& stream, const Instance* instance)
 {
 	if (instance) {
@@ -568,6 +613,7 @@ bool IdSerializer::trySerializeId(RakNet::BitStream& stream, const Instance* ins
 }
 
 // FUNCTION: WEBSERVICE 0x101adf70
+// FUNCTION: ROBLOX 0x004c1570
 void IdSerializer::resolvePendingReferences(Instance* instance, Guid::Data id)
 {
 	WaitItemMap::iterator iter = waitItems.find(id);
@@ -578,6 +624,7 @@ void IdSerializer::resolvePendingReferences(Instance* instance, Guid::Data id)
 }
 
 // FUNCTION: WEBSERVICE 0x101ae170
+// FUNCTION: ROBLOX 0x004c1770
 void IdSerializer::deserializeRef(Reflection::Property& property, RakNet::BitStream& bitStream)
 {
 	Instance* owner = static_cast<Instance*>(property.getInstance());

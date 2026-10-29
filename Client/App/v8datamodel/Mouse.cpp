@@ -28,6 +28,7 @@ static Reflection::PropDescriptor<Mouse, int> desc_Mouse_ViewSizeY("ViewSizeY", 
 static Reflection::PropDescriptor<Mouse, TextureId> desc_Mouse_Icon("Icon", "Data", &Mouse::getIcon, &Mouse::setIcon);
 
 // FUNCTION: WEBSERVICE 0x10117410
+// FUNCTION: ROBLOX 0x00656ba0
 PartInstance* Mouse::getTarget() const
 {
 	checkActive();
@@ -35,6 +36,7 @@ PartInstance* Mouse::getTarget() const
 }
 
 // FUNCTION: WEBSERVICE 0x10117440
+// FUNCTION: ROBLOX 0x00656bd0
 G3D::CoordinateFrame Mouse::getOrigin() const
 {
 	checkActive();
@@ -49,6 +51,7 @@ G3D::CoordinateFrame Mouse::getOrigin() const
 }
 
 // FUNCTION: WEBSERVICE 0x10117540
+// FUNCTION: ROBLOX 0x00656d20
 G3D::CoordinateFrame Mouse::getHit() const
 {
 	checkActive();
@@ -61,6 +64,7 @@ G3D::CoordinateFrame Mouse::getHit() const
 }
 
 // FUNCTION: WEBSERVICE 0x10117a20
+// FUNCTION: ROBLOX 0x006572a0
 void Mouse::update(const UIEvent& uiEvent)
 {
 	switch (uiEvent.eventType) {

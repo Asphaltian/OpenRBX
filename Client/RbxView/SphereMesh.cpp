@@ -6,6 +6,7 @@
 #include <G3D/Vector2int16.h>
 
 // FUNCTION: WEBSERVICE 0x101840e0
+// FUNCTION: ROBLOX 0x0048e600
 static void SphereTransform(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,
@@ -79,6 +80,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x10186970
+// FUNCTION: ROBLOX 0x00490e90
 SphereMesh::SphereMesh(const G3D::Vector3& diameter, RenderSurfaceTypes surfaceTypes)
 {
 	levels.append(new Render::Mesh::Level(G3D::RenderDevice::QUADS));
@@ -99,6 +101,7 @@ SphereMesh::SphereMesh(const G3D::Vector3& diameter, RenderSurfaceTypes surfaceT
 }
 
 // FUNCTION: WEBSERVICE 0x10186c90
+// FUNCTION: ROBLOX 0x004911b0
 SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	if (false) {
@@ -118,6 +121,7 @@ SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId decalFace)
 }
 
 // FUNCTION: WEBSERVICE 0x10186e10
+// FUNCTION: ROBLOX 0x00491330
 SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);

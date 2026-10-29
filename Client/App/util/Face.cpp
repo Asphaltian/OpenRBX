@@ -9,12 +9,14 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1010ae60
+// FUNCTION: ROBLOX 0x0064a4a0
 Vector3& Face::operator[](int i)
 {
 	return (&c0)[i];
 }
 
 // FUNCTION: WEBSERVICE 0x1010ae70
+// FUNCTION: ROBLOX 0x0064a4b0
 void Face::snapToGrid(float grid)
 {
 	for (int i = 0; i < 4; ++i) {
@@ -23,6 +25,7 @@ void Face::snapToGrid(float grid)
 }
 
 // FUNCTION: WEBSERVICE 0x1010aec0
+// FUNCTION: ROBLOX 0x0064a500
 bool Face::fuzzyContainsInExtrusion(const Vector3& point, float tolerance) const
 {
 	for (int i = 0; i < 4; ++i) {
@@ -38,6 +41,7 @@ bool Face::fuzzyContainsInExtrusion(const Vector3& point, float tolerance) const
 }
 
 // FUNCTION: WEBSERVICE 0x1010af40
+// FUNCTION: ROBLOX 0x0064a580
 bool Face::cornersAligned(const Face& f0, const Face& f1, float tolerance)
 {
 	for (int i = 0; i < 4; ++i) {
@@ -59,6 +63,7 @@ bool Face::cornersAligned(const Face& f0, const Face& f1, float tolerance)
 }
 
 // FUNCTION: WEBSERVICE 0x1010afb0
+// FUNCTION: ROBLOX 0x0064a5f0
 Face Face::fromExtentsSide(const Extents& e, NormalId faceId)
 {
 	Face answer;
@@ -67,6 +72,7 @@ Face Face::fromExtentsSide(const Extents& e, NormalId faceId)
 }
 
 // FUNCTION: WEBSERVICE 0x1010b000
+// FUNCTION: ROBLOX 0x0064a640
 Face Face::toWorldSpace(const CoordinateFrame& objectCoord) const
 {
 	Face answer;
@@ -77,6 +83,7 @@ Face Face::toWorldSpace(const CoordinateFrame& objectCoord) const
 }
 
 // FUNCTION: WEBSERVICE 0x1010b180
+// FUNCTION: ROBLOX 0x0064a7c0
 Face Face::toObjectSpace(const CoordinateFrame& objectCoord) const
 {
 	Face answer;
@@ -87,6 +94,7 @@ Face Face::toObjectSpace(const CoordinateFrame& objectCoord) const
 }
 
 // FUNCTION: WEBSERVICE 0x1010b3c0
+// FUNCTION: ROBLOX 0x0064aa00
 void Face::minMax(const Vector3& point, const Vector3& normal, float& min, float& max) const
 {
 	min = 1e10f;
@@ -100,6 +108,7 @@ void Face::minMax(const Vector3& point, const Vector3& normal, float& min, float
 }
 
 // FUNCTION: WEBSERVICE 0x1010b520
+// FUNCTION: ROBLOX 0x0064ab60
 bool Face::hasOverlap(const Face& f0, const Face& f1, float byAtLeast)
 {
 	for (int i = 0; i < 2; ++i) {
@@ -118,6 +127,7 @@ bool Face::hasOverlap(const Face& f0, const Face& f1, float byAtLeast)
 }
 
 // FUNCTION: WEBSERVICE 0x1010b5b0
+// FUNCTION: ROBLOX 0x0064abf0
 Face Face::projectOverlapOnMe(const Face& other) const
 {
 	float f0min, f0max, f1min, f1max;
@@ -143,6 +153,7 @@ Face Face::projectOverlapOnMe(const Face& other) const
 }
 
 // STUB: WEBSERVICE 0x1010b890
+// STUB: ROBLOX 0x0064aed0
 bool Face::overlapWithinPlanes(const Face& f0, const Face& f1, float tolerance)
 {
 	for (int i = 0; i < 2; ++i) {

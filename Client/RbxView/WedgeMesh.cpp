@@ -161,6 +161,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x10180a60
+// FUNCTION: ROBLOX 0x0048ae90
 WedgeMesh::WedgeMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
 	levels.append(new Render::Mesh::Level(G3D::RenderDevice::QUADS));
@@ -171,6 +172,7 @@ WedgeMesh::WedgeMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 }
 
 // FUNCTION: WEBSERVICE 0x10180be0
+// FUNCTION: ROBLOX 0x0048b010
 WedgeMesh::WedgeMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);
@@ -183,6 +185,7 @@ WedgeMesh::WedgeMesh(const G3D::Vector3& size, NormalId decalFace)
 }
 
 // FUNCTION: WEBSERVICE 0x10180d60
+// FUNCTION: ROBLOX 0x0048b190
 WedgeMesh::WedgeMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);

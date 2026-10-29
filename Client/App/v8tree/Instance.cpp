@@ -87,6 +87,7 @@ ChildRemoved::ChildRemoved(Instance* child) : child(shared_from(child))
 }
 
 // FUNCTION: WEBSERVICE 0x10047af0
+// FUNCTION: ROBLOX 0x00576310
 void Instance::onChildChanged(Instance* instance, const PropertyChanged& event)
 {
 	if (getParent() != NULL) {
@@ -95,6 +96,7 @@ void Instance::onChildChanged(Instance* instance, const PropertyChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10047b20
+// FUNCTION: ROBLOX 0x00576340
 bool Instance::contains(const Instance* child) const
 {
 	while (child != 0) {
@@ -109,6 +111,7 @@ bool Instance::contains(const Instance* child) const
 }
 
 // FUNCTION: WEBSERVICE 0x10048340
+// FUNCTION: ROBLOX 0x00576740
 void Instance::readProperties(const XmlElement* container, IReferenceBinder& binder)
 {
 	for (XmlElement* child = container->firstChild(); child != NULL; child = child->nextSibling()) {
@@ -117,6 +120,7 @@ void Instance::readProperties(const XmlElement* container, IReferenceBinder& bin
 }
 
 // FUNCTION: WEBSERVICE 0x10048370
+// FUNCTION: ROBLOX 0x00576770
 void Instance::writeChildren(XmlElement* container)
 {
 	const std::vector<shared_ptr<Instance> >* kids = children.operator->();
@@ -133,6 +137,7 @@ void Instance::writeChildren(XmlElement* container)
 }
 
 // FUNCTION: WEBSERVICE 0x100483f0
+// FUNCTION: ROBLOX 0x005767f0
 Instance* Instance::findFirstChildByName(const std::string& findName) const
 {
 	const std::vector<shared_ptr<Instance> >* c = children.operator->();
@@ -150,6 +155,7 @@ Instance* Instance::findFirstChildByName(const std::string& findName) const
 }
 
 // FUNCTION: WEBSERVICE 0x10048f30
+// FUNCTION: ROBLOX 0x005770a0
 Instance* Instance::findFirstChildByNameRecursive(const std::string& findName) const
 {
 	Instance* result = findFirstChildByName(findName);
@@ -173,6 +179,7 @@ Instance* Instance::findFirstChildByNameRecursive(const std::string& findName) c
 }
 
 // FUNCTION: WEBSERVICE 0x10048fb0
+// FUNCTION: ROBLOX 0x00577120
 void Instance::signalDescendentAdded(Instance* instance, Instance* beginParent, Instance* oldParent)
 {
 	for (Instance* walk = beginParent; walk != NULL; walk = walk->parent) {
@@ -197,6 +204,7 @@ void Instance::signalDescendentAdded(Instance* instance, Instance* beginParent, 
 }
 
 // FUNCTION: WEBSERVICE 0x100490d0
+// FUNCTION: ROBLOX 0x00577240
 void Instance::signalDescendentRemoving(
 	const shared_ptr<Instance>& instance, Instance* beginParent, Instance* newParent
 )
@@ -223,6 +231,7 @@ void Instance::signalDescendentRemoving(
 }
 
 // FUNCTION: WEBSERVICE 0x10049b30
+// FUNCTION: ROBLOX 0x005777d0
 boost::shared_ptr<Instance> Instance::findFirstChildByName2(std::string findName, bool recursive)
 {
 	return recursive ? shared_from(findFirstChildByNameRecursive(findName))
@@ -230,6 +239,7 @@ boost::shared_ptr<Instance> Instance::findFirstChildByName2(std::string findName
 }
 
 // FUNCTION: WEBSERVICE 0x10049c80
+// FUNCTION: ROBLOX 0x00577980
 void Instance::writeProperties(XmlElement* container) const
 {
 	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::ConstIterator iter = properties_begin();
@@ -246,6 +256,7 @@ void Instance::writeProperties(XmlElement* container) const
 }
 
 // FUNCTION: WEBSERVICE 0x10049d40
+// FUNCTION: ROBLOX 0x00577a40
 XmlElement* Instance::write()
 {
 	if (!archivable || getClassName() == Name::getNullName()) {
@@ -266,6 +277,7 @@ XmlElement* Instance::write()
 }
 
 // FUNCTION: WEBSERVICE 0x10049e80
+// FUNCTION: ROBLOX 0x00577b80
 int Instance::findChildIndex(const Instance* instance) const
 {
 	const std::vector<shared_ptr<Instance> >& c = *children;
@@ -275,6 +287,7 @@ int Instance::findChildIndex(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x1004a010
+// FUNCTION: ROBLOX 0x00577c40
 void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
 	const Name* name = NULL;
@@ -287,6 +300,7 @@ void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder&
 }
 
 // FUNCTION: WEBSERVICE 0x1004a0e0
+// FUNCTION: ROBLOX 0x00577d10
 void Instance::onAddListener(Listener<Instance, ChildAdded>* listener) const
 {
 	if (children) {
@@ -324,6 +338,7 @@ void Instance::onAddListener(Listener<Instance, DescendentAdded>* listener) cons
 }
 
 // FUNCTION: WEBSERVICE 0x1004a9c0
+// FUNCTION: ROBLOX 0x00578000
 boost::shared_ptr<Instance> Instance::fromXmlRoot(XmlElement* xmlRoot)
 {
 	Serializer serializer;
@@ -346,6 +361,7 @@ inline XmlElement* Instance::toNewXmlRoot(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1004ab00
+// FUNCTION: ROBLOX 0x00578140
 boost::shared_ptr<Instance> Instance::clone()
 {
 	boost::scoped_ptr<XmlElement> root(toNewXmlRoot(this));
@@ -359,11 +375,13 @@ shared_ptr<Instance> Instance::createChild(const Name& className)
 }
 
 // FUNCTION: WEBSERVICE 0x1004d0b0
+// FUNCTION: ROBLOX 0x00579580
 Instance::~Instance()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1004da80
+// FUNCTION: ROBLOX 0x005799c0
 void Instance::setParent(Instance* newParent)
 {
 	if (newParent == parent) {
@@ -423,6 +441,7 @@ void Instance::setParent(Instance* newParent)
 }
 
 // FUNCTION: WEBSERVICE 0x1004ddb0
+// FUNCTION: ROBLOX 0x00579cf0
 void Instance::onAncestorChanged(const AncestorChanged& event)
 {
 	if (children) {
@@ -438,6 +457,7 @@ void Instance::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x1004dee0
+// FUNCTION: ROBLOX 0x00579e20
 void Instance::onDescendentAdded(Instance* instance)
 {
 	if (Notifier<Instance, DescendentAdded>::hasListeners()) {
@@ -447,6 +467,7 @@ void Instance::onDescendentAdded(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1004df50
+// FUNCTION: ROBLOX 0x00579e90
 void Instance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 {
 	event_descendentRemoving.fire(this, instance);
@@ -456,6 +477,7 @@ void Instance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1004e040
+// FUNCTION: ROBLOX 0x00579f80
 void Instance::setName(const std::string& value)
 {
 	if (name != value) {
@@ -465,6 +487,7 @@ void Instance::setName(const std::string& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1004e080
+// FUNCTION: ROBLOX 0x00579fc0
 void Instance::removeAllChildren()
 {
 	while (children) {
@@ -473,6 +496,7 @@ void Instance::removeAllChildren()
 }
 
 // FUNCTION: WEBSERVICE 0x1004e0f0
+// FUNCTION: ROBLOX 0x0057a030
 void Instance::predelete()
 {
 	while (children) {
@@ -502,6 +526,7 @@ void Instance::predelete()
 }
 
 // FUNCTION: WEBSERVICE 0x1004e4f0
+// FUNCTION: ROBLOX 0x005663a0
 void Instance::remove()
 {
 	boost::shared_ptr<const std::vector<shared_ptr<Instance> > > c = children.read();
@@ -512,6 +537,7 @@ void Instance::remove()
 }
 
 // FUNCTION: WEBSERVICE 0x1004e5e0
+// FUNCTION: ROBLOX 0x0057a3f0
 void Instance::readChild(const XmlElement* childElement, IReferenceBinder& binder)
 {
 	const Name* className = NULL;
@@ -534,6 +560,7 @@ void Instance::readChild(const XmlElement* childElement, IReferenceBinder& binde
 }
 
 // FUNCTION: WEBSERVICE 0x1004e6e0
+// FUNCTION: ROBLOX 0x0057a4f0
 void Instance::readChildren(const XmlElement* element, IReferenceBinder& binder)
 {
 	if (element != NULL) {
@@ -547,6 +574,7 @@ void Instance::readChildren(const XmlElement* element, IReferenceBinder& binder)
 }
 
 // FUNCTION: WEBSERVICE 0x1004e730
+// FUNCTION: ROBLOX 0x0057a540
 void Instance::read(const XmlElement* element, IReferenceBinder& binder)
 {
 	const XmlAttribute* referent = element->findAttribute(name_referent);
@@ -568,22 +596,26 @@ void Instance::read(const XmlElement* element, IReferenceBinder& binder)
 }
 
 // FUNCTION: WEBSERVICE 0x1004e7b0
+// FUNCTION: ROBLOX 0x0057a5c0
 void Instance::predelete(Instance* instance)
 {
 	instance->predelete();
 }
 
 // FUNCTION: WEBSERVICE 0x1004eb10
+// FUNCTION: ROBLOX 0x0057a780
 Instance::Instance() : parent(NULL), name("Instance"), archivable(true)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1004ec70
+// FUNCTION: ROBLOX 0x0057a8e0
 Instance::Instance(const char* name) : parent(NULL), name(name), archivable(true)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101019f0 FOLDED
+// FUNCTION: ROBLOX 0x007859e0 FOLDED
 void Instance::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 }

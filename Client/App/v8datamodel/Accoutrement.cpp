@@ -122,12 +122,14 @@ PartInstance* Accoutrement::getHandle()
 }
 
 // FUNCTION: WEBSERVICE 0x100c9e70 FOLDED
+// FUNCTION: ROBLOX 0x0060eb20 FOLDED
 const PartInstance* Accoutrement::getHandleConst() const
 {
 	return dynamic_cast<const PartInstance*>(findFirstChildByName("Handle"));
 }
 
 // FUNCTION: WEBSERVICE 0x100db450
+// FUNCTION: ROBLOX 0x005ba700
 void Accoutrement::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
 	const Name* name = NULL;
@@ -141,6 +143,7 @@ void Accoutrement::readProperty(const XmlElement* propertyElement, IReferenceBin
 }
 
 // FUNCTION: WEBSERVICE 0x100db4b0
+// FUNCTION: ROBLOX 0x005ba760
 void Accoutrement::downFrom_InCharacter()
 {
 	characterChildAdded.disconnect();
@@ -148,24 +151,28 @@ void Accoutrement::downFrom_InCharacter()
 }
 
 // FUNCTION: WEBSERVICE 0x100db4d0
+// FUNCTION: ROBLOX 0x005ba780
 const G3D::Vector3 Accoutrement::getAttachmentPos() const
 {
 	return attachmentPoint.translation;
 }
 
 // FUNCTION: WEBSERVICE 0x100db500
+// FUNCTION: ROBLOX 0x005ba7b0
 const G3D::Vector3 Accoutrement::getAttachmentForward() const
 {
 	return attachmentPoint.lookVector();
 }
 
 // FUNCTION: WEBSERVICE 0x100db550
+// FUNCTION: ROBLOX 0x005ba800
 const G3D::Vector3 Accoutrement::getAttachmentUp() const
 {
 	return attachmentPoint.upVector();
 }
 
 // FUNCTION: WEBSERVICE 0x100db570
+// FUNCTION: ROBLOX 0x005ba820
 const G3D::Vector3 Accoutrement::getAttachmentRight() const
 {
 	return attachmentPoint.rightVector();
@@ -180,6 +187,7 @@ const CoordinateFrame Accoutrement::getLocation() const
 }
 
 // FUNCTION: WEBSERVICE 0x100db940
+// FUNCTION: ROBLOX 0x005bab30
 Accoutrement::~Accoutrement()
 {
 }
@@ -197,6 +205,7 @@ void Accoutrement::onCameraNear(float distance)
 }
 
 // FUNCTION: WEBSERVICE 0x100dbbd0
+// FUNCTION: ROBLOX 0x005badc0
 void Accoutrement::render3dSelect(Adorn* adorn, SelectState selectState)
 {
 	for (unsigned int i = 0; i < numChildren(); i++) {
@@ -209,6 +218,7 @@ void Accoutrement::render3dSelect(Adorn* adorn, SelectState selectState)
 }
 
 // FUNCTION: WEBSERVICE 0x100dbc60
+// FUNCTION: ROBLOX 0x005bae50
 void Accoutrement::rebuildBackendState()
 {
 	AccoutrementState desiredState = computeDesiredState();
@@ -216,6 +226,7 @@ void Accoutrement::rebuildBackendState()
 }
 
 // FUNCTION: WEBSERVICE 0x100dbcd0
+// FUNCTION: ROBLOX 0x005baec0
 void Accoutrement::onEvent_AddedBackend(boost::shared_ptr<Instance> child)
 {
 	if (child.get() != this) {
@@ -224,6 +235,7 @@ void Accoutrement::onEvent_AddedBackend(boost::shared_ptr<Instance> child)
 }
 
 // FUNCTION: WEBSERVICE 0x100dbd50
+// FUNCTION: ROBLOX 0x005baf40
 void Accoutrement::onEvent_RemovedBackend(boost::shared_ptr<Instance> child)
 {
 	if (child.get() != this) {
@@ -236,6 +248,7 @@ void Accoutrement::onEvent_RemovedBackend(boost::shared_ptr<Instance> child)
 }
 
 // FUNCTION: WEBSERVICE 0x100dc110
+// FUNCTION: ROBLOX 0x005bb2f0
 XmlElement* Accoutrement::write()
 {
 	if (!writeUnlocked) {
@@ -246,6 +259,7 @@ XmlElement* Accoutrement::write()
 }
 
 // FUNCTION: WEBSERVICE 0x100dc1b0
+// FUNCTION: ROBLOX 0x005bb3d0
 void Accoutrement::onEvent_HandleTouched(boost::shared_ptr<Instance> other)
 {
 	if (backendAccoutrementState == IN_WORKSPACE) {
@@ -260,6 +274,7 @@ void Accoutrement::onEvent_HandleTouched(boost::shared_ptr<Instance> other)
 }
 
 // FUNCTION: WEBSERVICE 0x100dc3f0
+// FUNCTION: ROBLOX 0x005bb620
 void Accoutrement::upTo_Equipped()
 {
 	handleTouched.disconnect();
@@ -275,6 +290,7 @@ void Accoutrement::upTo_Equipped()
 }
 
 // FUNCTION: WEBSERVICE 0x100dc810
+// FUNCTION: ROBLOX 0x005bbb20
 void Accoutrement::connectTouchEvent()
 {
 	if (const PartInstance* handle = getHandleConst()) {
@@ -288,6 +304,7 @@ void Accoutrement::connectTouchEvent()
 }
 
 // FUNCTION: WEBSERVICE 0x100dc8f0
+// FUNCTION: ROBLOX 0x005bbc00
 void Accoutrement::upTo_InCharacter()
 {
 	characterChildAdded =
@@ -298,6 +315,7 @@ void Accoutrement::upTo_InCharacter()
 }
 
 // FUNCTION: WEBSERVICE 0x100dca60
+// FUNCTION: ROBLOX 0x005bbd70
 void Accoutrement::downFrom_Equipped()
 {
 	ModelInstance* character = NULL;
@@ -329,12 +347,14 @@ void Accoutrement::downFrom_Equipped()
 }
 
 // FUNCTION: WEBSERVICE 0x100dcd00
+// FUNCTION: ROBLOX 0x005bc030
 Accoutrement::Accoutrement() : backendAccoutrementState(NOTHING)
 {
 	setName(sAccoutrement);
 }
 
 // FUNCTION: WEBSERVICE 0x100dcfb0
+// FUNCTION: ROBLOX 0x005bc2e0
 void Accoutrement::setBackendAccoutrementState(int value)
 {
 	if (value != backendAccoutrementState) {
@@ -344,6 +364,7 @@ void Accoutrement::setBackendAccoutrementState(int value)
 }
 
 // STUB: WEBSERVICE 0x100dcfe0
+// STUB: ROBLOX 0x005bc310
 void Accoutrement::setDesiredState(AccoutrementState desiredState, const ServiceProvider* serviceProvider)
 {
 	do {
@@ -387,6 +408,7 @@ void Accoutrement::setDesiredState(AccoutrementState desiredState, const Service
 }
 
 // FUNCTION: WEBSERVICE 0x100dd0c0
+// FUNCTION: ROBLOX 0x005bc3f0
 void Accoutrement::onAncestorChanged(const AncestorChanged& event)
 {
 	const ServiceProvider* oldProvider = ServiceProvider::findServiceProvider(event.oldParent);
@@ -409,6 +431,7 @@ void Accoutrement::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100dd140
+// FUNCTION: ROBLOX 0x005bc470
 void Accoutrement::setAttachmentPoint(const CoordinateFrame& value)
 {
 	if (value != attachmentPoint) {
@@ -427,12 +450,14 @@ void Accoutrement::setAttachmentPoint(const CoordinateFrame& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100dd1d0
+// FUNCTION: ROBLOX 0x005bc500
 void Accoutrement::setAttachmentPos(const G3D::Vector3& v)
 {
 	setAttachmentPoint(CoordinateFrame(getAttachmentPoint().rotation, v));
 }
 
 // FUNCTION: WEBSERVICE 0x100dd220
+// FUNCTION: ROBLOX 0x005bc550
 void Accoutrement::setAttachmentForward(const G3D::Vector3& v)
 {
 	CoordinateFrame c = getAttachmentPoint();
@@ -450,6 +475,7 @@ void Accoutrement::setAttachmentForward(const G3D::Vector3& v)
 }
 
 // STUB: WEBSERVICE 0x100dd3a0
+// STUB: ROBLOX 0x005bc6d0
 void Accoutrement::setAttachmentUp(const G3D::Vector3& v)
 {
 	CoordinateFrame c = getAttachmentPoint();
@@ -467,6 +493,7 @@ void Accoutrement::setAttachmentUp(const G3D::Vector3& v)
 }
 
 // STUB: WEBSERVICE 0x100dd510
+// STUB: ROBLOX 0x005bc840
 void Accoutrement::setAttachmentRight(const G3D::Vector3& v)
 {
 	CoordinateFrame c = getAttachmentPoint();
@@ -484,6 +511,7 @@ void Accoutrement::setAttachmentRight(const G3D::Vector3& v)
 }
 
 // FUNCTION: WEBSERVICE 0x100dd7e0
+// FUNCTION: ROBLOX 0x005bcb20
 Hat::Hat()
 {
 	setName(sHat);

@@ -149,18 +149,21 @@ bool DebugSettings::getDisableEnvironmentalThrottle() const
 }
 
 // FUNCTION: WEBSERVICE 0x100b2e30
+// FUNCTION: ROBLOX 0x0057ac10
 int DebugSettings::videoMemory() const
 {
 	return Render::SpecData().videoMemory;
 }
 
 // FUNCTION: WEBSERVICE 0x100b2e60
+// FUNCTION: ROBLOX 0x0057ac40
 int DebugSettings::cpuSpeed() const
 {
 	return Render::SpecData().CPUSpeed;
 }
 
 // FUNCTION: WEBSERVICE 0x100b2e90
+// FUNCTION: ROBLOX 0x0057ac70
 std::string DebugSettings::osVer() const
 {
 	OSVERSIONINFO osvi = {0};
@@ -173,6 +176,7 @@ std::string DebugSettings::osVer() const
 }
 
 // FUNCTION: WEBSERVICE 0x100b2f00
+// FUNCTION: ROBLOX 0x0057ace0
 int DebugSettings::osPlatformId() const
 {
 	OSVERSIONINFO osvi = {0};
@@ -183,12 +187,14 @@ int DebugSettings::osPlatformId() const
 }
 
 // FUNCTION: WEBSERVICE 0x100b2f40
+// FUNCTION: ROBLOX 0x0057ad20
 std::string DebugSettings::glVendor() const
 {
 	return Render::SpecData().glVendor;
 }
 
 // STUB: WEBSERVICE 0x100b2fc0
+// STUB: ROBLOX 0x0057ada0
 std::string DebugSettings::gfxcard() const
 {
 	DISPLAY_DEVICE displayDevice;
@@ -262,24 +268,28 @@ std::string DebugSettings::gfxcard() const
 }
 
 // FUNCTION: WEBSERVICE 0x100b33d0
+// FUNCTION: ROBLOX 0x0057b1b0
 std::string DebugSettings::cpu() const
 {
 	return Render::SpecData().cpu;
 }
 
 // FUNCTION: WEBSERVICE 0x100b3450
+// FUNCTION: ROBLOX 0x0057b230
 int DebugSettings::ram() const
 {
 	return Render::SpecData().ram;
 }
 
 // FUNCTION: WEBSERVICE 0x100b3480
+// FUNCTION: ROBLOX 0x0057b260
 std::string DebugSettings::resolution() const
 {
 	return Render::SpecData().resolution;
 }
 
 // FUNCTION: WEBSERVICE 0x100b3610
+// FUNCTION: ROBLOX 0x0057b350
 float DebugSettings::shaderModel() const
 {
 	return Render::SpecData().shaderModel;
@@ -298,6 +308,7 @@ EnumDesc<DebugSettings::ErrorReporting>::EnumDesc()
 }
 
 // FUNCTION: WEBSERVICE 0x100b40c0
+// FUNCTION: ROBLOX 0x0057c0c0
 template <>
 EnumDesc<Debugable::AssertAction>::EnumDesc() : EnumDescriptor("AssertAction", typeid(Debugable::AssertAction))
 {
@@ -308,6 +319,7 @@ EnumDesc<Debugable::AssertAction>::EnumDesc() : EnumDescriptor("AssertAction", t
 } // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x100b5090
+// FUNCTION: ROBLOX 0x0057d040
 DebugSettings::DebugSettings()
 	: stackTracingEnabled(true), ioEnabled(false), soundWarnings(false), errorReporting(Prompt)
 {

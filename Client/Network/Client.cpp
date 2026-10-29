@@ -42,6 +42,7 @@ Reflection::SignalDesc<Client, void(std::string, int)> Client::event_ConnectionF
 );
 
 // FUNCTION: WEBSERVICE 0x101969f0
+// FUNCTION: ROBLOX 0x004b8bd0
 void Client::disconnect(int blockDuration)
 {
 	removeAllChildren();
@@ -51,6 +52,7 @@ void Client::disconnect(int blockDuration)
 }
 
 // FUNCTION: WEBSERVICE 0x10196a30
+// FUNCTION: ROBLOX 0x004b8c10
 void Client::onEvent(const ServiceProvider* source, Closing event)
 {
 	disconnect(3000);
@@ -63,6 +65,7 @@ class Exposer : protected PacketLogger
 {
 public:
 	// FUNCTION: WEBSERVICE 0x10196a80
+	// FUNCTION: ROBLOX 0x004b8c60
 	static const char* IDTOString(int id)
 	{
 		Exposer exposer;
@@ -74,12 +77,14 @@ namespace RBX {
 namespace Network {
 
 // FUNCTION: WEBSERVICE 0x10196c20
+// FUNCTION: ROBLOX 0x004b8dc0
 Client::~Client()
 {
 	rakPeer->CloseConnection(serverId, true);
 }
 
 // FUNCTION: WEBSERVICE 0x10196db0
+// FUNCTION: ROBLOX 0x004b8f50
 void Client::connect(std::string server, int serverPort, int clientPort, int threadSleepTime)
 {
 	SocketDescriptor d(clientPort, "");
@@ -97,6 +102,7 @@ void Client::connect(std::string server, int serverPort, int clientPort, int thr
 }
 
 // FUNCTION: WEBSERVICE 0x10197b90
+// FUNCTION: ROBLOX 0x004b9e30
 bool Client::clientIsPresent(const Instance* context, bool testInDatamodel)
 {
 	const ServiceProvider* serviceProvider = ServiceProvider::findServiceProvider(context);
@@ -104,6 +110,7 @@ bool Client::clientIsPresent(const Instance* context, bool testInDatamodel)
 }
 
 // FUNCTION: WEBSERVICE 0x10197bc0
+// FUNCTION: ROBLOX 0x004b9e60
 void Client::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<ServiceProvider, Closing>(oldProvider, this);
@@ -136,6 +143,7 @@ void Client::onServiceProvider(const ServiceProvider* oldProvider, const Service
 }
 
 // FUNCTION: WEBSERVICE 0x101986d0
+// FUNCTION: ROBLOX 0x004ba950
 Client::Client()
 {
 	setName(sClient);
@@ -143,6 +151,7 @@ Client::Client()
 }
 
 // STUB: WEBSERVICE 0x10198ba0
+// STUB: ROBLOX 0x004bae20
 PluginReceiveResult Client::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
 	PluginReceiveResult result = Peer::OnReceive(peer, packet);

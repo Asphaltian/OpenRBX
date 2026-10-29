@@ -120,6 +120,7 @@ private:
 };
 
 // FUNCTION: WEBSERVICE 0x10060e20
+// FUNCTION: ROBLOX 0x0056df80
 template <>
 inline void Bridge<G3D::Vector3, 1>::registerClass(lua_State* L)
 {
@@ -169,6 +170,7 @@ inline void Bridge<G3D::Vector3, 1>::registerClass(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10060f90
+// FUNCTION: ROBLOX 0x0056e0f0
 template <>
 inline void Bridge<G3D::CoordinateFrame, 1>::registerClass(lua_State* L)
 {

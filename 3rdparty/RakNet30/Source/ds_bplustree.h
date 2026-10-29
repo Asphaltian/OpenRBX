@@ -114,6 +114,7 @@ namespace DataStructures
 		leftmostLeaf=0;
 	}
 	// FUNCTION: WEBSERVICE 0x101bfa30
+	// FUNCTION: ROBLOX 0x004e5a20
 	template<class KeyType, class DataType, int order>
 		BPlusTree<KeyType, DataType, order>::~BPlusTree ()
 	{
@@ -136,6 +137,7 @@ namespace DataStructures
 		return false;
 	}
 	// FUNCTION: WEBSERVICE 0x101bc570
+	// FUNCTION: ROBLOX 0x004e2580
 	template<class KeyType, class DataType, int order>
 	void BPlusTree<KeyType, DataType, order>::DeleteFromPageAtIndex(const int index, Page<KeyType, DataType, order> *cur)
 	{
@@ -161,6 +163,7 @@ namespace DataStructures
 		return Delete(key, temp);
 	}
 	// FUNCTION: WEBSERVICE 0x101bebf0
+	// FUNCTION: ROBLOX 0x004e4be0
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::Delete(const KeyType key, DataType &out)
 	{
@@ -201,6 +204,7 @@ namespace DataStructures
 		return true;
 	}
 	// FUNCTION: WEBSERVICE 0x101be430
+	// FUNCTION: ROBLOX 0x004e4420
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::FindDeleteRebalance(const KeyType key, Page<KeyType, DataType, order> *cur, bool *underflow, KeyType rightRootKey, ReturnAction *returnAction, DataType &out)
 	{
@@ -277,6 +281,7 @@ namespace DataStructures
 		return true;
 	}
 	// FUNCTION: WEBSERVICE 0x101bd700
+	// FUNCTION: ROBLOX 0x004e36f0
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::FixUnderflow(int branchIndex, Page<KeyType, DataType, order> *cur, KeyType rightRootKey, ReturnAction *returnAction)
 	{
@@ -457,6 +462,7 @@ namespace DataStructures
 		}
 	}
 	// FUNCTION: WEBSERVICE 0x101bcb50
+	// FUNCTION: ROBLOX 0x004e2a20
 	template<class KeyType, class DataType, int order>
 		void BPlusTree<KeyType, DataType, order>::ShiftNodeRight(Page<KeyType, DataType, order> *cur)
 	{
@@ -477,6 +483,7 @@ namespace DataStructures
 		cur->size++;
 	}
 	// FUNCTION: WEBSERVICE 0x101bcad0
+	// FUNCTION: ROBLOX 0x004e29a0
 	template<class KeyType, class DataType, int order>
 		void BPlusTree<KeyType, DataType, order>::ShiftNodeLeft(Page<KeyType, DataType, order> *cur)
 	{
@@ -496,6 +503,7 @@ namespace DataStructures
 		cur->size--;
 	}
 	// FUNCTION: WEBSERVICE 0x101bd310
+	// FUNCTION: ROBLOX 0x004e3300
 	template<class KeyType, class DataType, int order>
 	Page<KeyType, DataType, order>* BPlusTree<KeyType, DataType, order>::InsertIntoNode(const KeyType key, const DataType &leafData, int insertionIndex, Page<KeyType, DataType, order> *nodeData, Page<KeyType, DataType, order> *cur, ReturnAction* returnAction)
 	{
@@ -636,6 +644,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc8d0
+	// FUNCTION: ROBLOX 0x004e27a0
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::CanRotateLeft(Page<KeyType, DataType, order> *cur, int childIndex)
 	{
@@ -643,6 +652,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc9c0
+	// FUNCTION: ROBLOX 0x004e2890
 	template<class KeyType, class DataType, int order>
 	void BPlusTree<KeyType, DataType, order>::RotateLeft(Page<KeyType, DataType, order> *cur, int childIndex, ReturnAction *returnAction)
 	{
@@ -663,6 +673,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc900
+	// FUNCTION: ROBLOX 0x004e27d0
 	template<class KeyType, class DataType, int order>
 	bool BPlusTree<KeyType, DataType, order>::CanRotateRight(Page<KeyType, DataType, order> *cur, int childIndex)
 	{
@@ -670,6 +681,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc930
+	// FUNCTION: ROBLOX 0x004e2800
 	template<class KeyType, class DataType, int order>
 	void BPlusTree<KeyType, DataType, order>::RotateRight(Page<KeyType, DataType, order> *cur, int childIndex, ReturnAction *returnAction)
 	{
@@ -705,6 +717,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101be1b0
+	// FUNCTION: ROBLOX 0x004e41a0
 	template<class KeyType, class DataType, int order>
 	Page<KeyType, DataType, order>* BPlusTree<KeyType, DataType, order>::InsertBranchDown(const KeyType key, const DataType &data,Page<KeyType, DataType, order> *cur, ReturnAction *returnAction, bool *success)
 	{
@@ -814,6 +827,7 @@ namespace DataStructures
 		return 0;
 	}
 	// FUNCTION: WEBSERVICE 0x101becc0
+	// FUNCTION: ROBLOX 0x004e4cb0
 	template<class KeyType, class DataType, int order>
 		bool BPlusTree<KeyType, DataType, order>::Insert(const KeyType key, const DataType &data)
 	{
@@ -903,6 +917,7 @@ namespace DataStructures
 		return root==0;
 	}
 	// FUNCTION: WEBSERVICE 0x101bc610
+	// FUNCTION: ROBLOX 0x004e2620
 	template<class KeyType, class DataType, int order>
 		bool BPlusTree<KeyType, DataType, order>::GetIndexOf(const KeyType key, Page<KeyType, DataType, order> *page, int *out) const
 	{
@@ -937,6 +952,7 @@ namespace DataStructures
 		}
 	}
 	// FUNCTION: WEBSERVICE 0x101be080
+	// FUNCTION: ROBLOX 0x004e4070
 	template<class KeyType, class DataType, int order>
 		void BPlusTree<KeyType, DataType, order>::FreePages(void)
 	{

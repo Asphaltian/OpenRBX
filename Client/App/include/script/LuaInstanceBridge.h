@@ -15,6 +15,7 @@ namespace RBX {
 namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x10064440
+// FUNCTION: ROBLOX 0x00571a30
 template <>
 inline int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_tostring(
 	const boost::shared_ptr<Reflection::DescribedBase>& value, lua_State* L

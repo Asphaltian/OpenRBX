@@ -33,6 +33,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1008e6c0
+// FUNCTION: ROBLOX 0x005cdf40
 FactoryRegistrator::FactoryRegistrator()
 {
 	Accoutrement::classDescriptor();

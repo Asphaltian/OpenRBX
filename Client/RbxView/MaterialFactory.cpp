@@ -37,6 +37,7 @@ DECOMP_SIZE_ASSERT(MegaTextureProxy, 0x50)
 const unsigned int MegaTextureProxy::numStrips = 32;
 
 // FUNCTION: WEBSERVICE 0x101749c0
+// FUNCTION: ROBLOX 0x0047ee80
 G3D::ReferenceCountedPointer<G3D::Texture> MegaTextureProxy::resolve(G3D::RenderDevice* rd)
 {
 	if (!loaded) {
@@ -75,12 +76,14 @@ G3D::ReferenceCountedPointer<G3D::Texture> MegaTextureProxy::resolve(G3D::Render
 }
 
 // FUNCTION: WEBSERVICE 0x10174d40
+// FUNCTION: ROBLOX 0x0047f200
 G3D::ReferenceCountedPointer<Render::TextureProxy> MaterialFactory::getSurfacesTexture(G3D::Color3 tint)
 {
 	return surfacesTexture->shade(tint, Render::TextureProxyRef());
 }
 
 // FUNCTION: WEBSERVICE 0x10175620
+// FUNCTION: ROBLOX 0x0047fa00
 G3D::ReferenceCountedPointer<Render::Material> MaterialFactory::getMegaMaterial(Attributes attributes)
 {
 	Attributes filteredAttributes = {BrickColor::legoGray(), attributes.transparency, attributes.reflectance};
@@ -108,6 +111,7 @@ G3D::ReferenceCountedPointer<Render::Material> MaterialFactory::getMegaMaterial(
 }
 
 // FUNCTION: WEBSERVICE 0x10175800
+// FUNCTION: ROBLOX 0x0047fbe0
 G3D::ReferenceCountedPointer<Render::Material> MaterialFactory::getMaterial(Attributes attributes)
 {
 	G3D::ReferenceCountedPointer<Render::Material> result;
@@ -136,6 +140,7 @@ G3D::ReferenceCountedPointer<Render::Material> MaterialFactory::getMaterial(Attr
 }
 
 // FUNCTION: WEBSERVICE 0x10175a30
+// FUNCTION: ROBLOX 0x0047fe10
 MaterialFactory::MaterialFactory(G3D::TextureManager* textureManager)
 {
 	surfacesTexture = new Render::TextureProxy(

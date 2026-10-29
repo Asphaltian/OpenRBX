@@ -29,3 +29,28 @@ targets:
       icon: assets/webservice.png
       ignore-variables:
         - _tls_used
+  ROBLOX:
+    filename: Roblox.exe
+    source-root:
+      - Client
+      - WebService
+      - 3rdparty/RakNet30
+      - 3rdparty/lua-5.1.1
+    hash:
+      sha256: f16069abb753483338ec0ff3a508dc2ee7c696f30997664816446e80863096cc
+    data-sources:
+      - reccmp/roblox-function-size.csv
+      - reccmp/roblox-atl.csv
+      - reccmp/roblox-boost.csv
+      - reccmp/roblox-crt.csv
+      - reccmp/roblox-g3d.csv
+      - reccmp/roblox-ijg.csv
+      - reccmp/roblox-libpng.csv
+      - reccmp/roblox-lua.csv
+      - reccmp/roblox-stl.csv
+      - reccmp/roblox-symbols.csv
+      - reccmp/roblox-floats.csv
+      - reccmp/roblox-globals.csv
+      - reccmp/roblox-statics.csv
+      - reccmp/roblox-strings.csv
+      - reccmp/roblox-synthetic.csv

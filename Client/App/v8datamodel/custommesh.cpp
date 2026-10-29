@@ -34,6 +34,7 @@ bool SpecialShape::askSetParent(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x1012c930
+// FUNCTION: ROBLOX 0x005b3330
 const float SpecialShape::getAlpha() const
 {
 	if (getParent()) {
@@ -49,6 +50,7 @@ const float SpecialShape::getAlpha() const
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x1012d0c0
+// FUNCTION: ROBLOX 0x005b3980
 template <>
 EnumDesc<SpecialShape::MeshType>::EnumDesc() : EnumDescriptor("MeshType", typeid(SpecialShape::MeshType))
 {
@@ -64,6 +66,7 @@ EnumDesc<SpecialShape::MeshType>::EnumDesc() : EnumDescriptor("MeshType", typeid
 } // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x1012d970
+// FUNCTION: ROBLOX 0x005b4270
 SpecialShape::SpecialShape() : meshType(HEAD_MESH), scale(1.0f, 1.0f, 1.0f), vertColor(1.0f, 1.0f, 1.0f)
 {
 	setName("Mesh");
@@ -79,6 +82,7 @@ void SpecialShape::setMeshType(MeshType value)
 }
 
 // FUNCTION: WEBSERVICE 0x1012dbe0
+// FUNCTION: ROBLOX 0x005b44e0
 void SpecialShape::setScale(const G3D::Vector3& value)
 {
 	if (scale != value) {
@@ -88,6 +92,7 @@ void SpecialShape::setScale(const G3D::Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1012dc40
+// FUNCTION: ROBLOX 0x005b4540
 void SpecialShape::setVertColor(const G3D::Vector3& value)
 {
 	if (vertColor != value) {
@@ -97,6 +102,7 @@ void SpecialShape::setVertColor(const G3D::Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1012dca0
+// FUNCTION: ROBLOX 0x005b45a0
 void SpecialShape::setMeshId(const MeshId& value)
 {
 	if (meshId != value) {
@@ -107,6 +113,7 @@ void SpecialShape::setMeshId(const MeshId& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1012dd00
+// FUNCTION: ROBLOX 0x005b4600
 void SpecialShape::setTextureId(const TextureId& value)
 {
 	if (textureId != value) {

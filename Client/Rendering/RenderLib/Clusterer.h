@@ -51,6 +51,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x101f52e0
+	// TEMPLATE: ROBLOX 0x00497a70
 	// RBX::Render::Clusterer::addSamples<std::_Vector_iterator<G3D::ReferenceCountedPointer<RBX::Render::Chunk>,std::allocator<G3D::ReferenceCountedPointer<RBX::Render::Chunk> > > >
 	// clang-format on
 	template <class Iterator>

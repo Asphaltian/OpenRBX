@@ -35,6 +35,7 @@ BrickColor FlagStand::getTeamColor() const
 }
 
 // FUNCTION: WEBSERVICE 0x100e7dd0
+// FUNCTION: ROBLOX 0x00627010
 Flag* FlagStand::GetFlag()
 {
 	Primitive* primitive = getPrimitive();
@@ -56,6 +57,7 @@ Flag* FlagStand::GetFlag()
 }
 
 // FUNCTION: WEBSERVICE 0x100e81d0
+// FUNCTION: ROBLOX 0x00627360
 void FlagStand::AffixFlag(Flag* flag)
 {
 	if (!HasFlag()) {
@@ -75,6 +77,7 @@ void FlagStand::AffixFlag(Flag* flag)
 }
 
 // FUNCTION: WEBSERVICE 0x100e8270
+// FUNCTION: ROBLOX 0x00627400
 FlagStand* FlagStandService::FindStandWithFlag(Flag* f)
 {
 	if (flagStands.size() == 0) {
@@ -96,6 +99,7 @@ FlagStandService::~FlagStandService()
 }
 
 // FUNCTION: WEBSERVICE 0x100e84e0
+// FUNCTION: ROBLOX 0x00627670
 FlagStand* FlagStandService::FindClosestEmptyStandForFlag(Flag* f)
 {
 	if (flagStands.empty()) {
@@ -120,12 +124,14 @@ FlagStand* FlagStandService::FindClosestEmptyStandForFlag(Flag* f)
 }
 
 // FUNCTION: WEBSERVICE 0x100e8b90
+// FUNCTION: ROBLOX 0x00627d40
 FlagStand::FlagStand()
 {
 	setName(sFlagStand);
 }
 
 // FUNCTION: WEBSERVICE 0x100e8ea0
+// FUNCTION: ROBLOX 0x00628050
 FlagStandService::FlagStandService()
 {
 	setName(sFlagStandService);
@@ -140,6 +146,7 @@ void FlagStand::setTeamColor(BrickColor color)
 }
 
 // FUNCTION: WEBSERVICE 0x100e8fc0
+// FUNCTION: ROBLOX 0x00628170
 void FlagStand::onEvent_standTouched(boost::shared_ptr<Instance> other)
 {
 	Instance* character = other->getParent();
@@ -172,6 +179,7 @@ void FlagStand::onEvent_standTouched(boost::shared_ptr<Instance> other)
 }
 
 // FUNCTION: WEBSERVICE 0x100e9120
+// FUNCTION: ROBLOX 0x006282d0
 void FlagStand::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Instance::onServiceProvider(oldProvider, newProvider);

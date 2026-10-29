@@ -10,6 +10,7 @@ namespace RBX {
 char sGeometryService[] = "Geometry";
 
 // FUNCTION: WEBSERVICE 0x100e9b90
+// FUNCTION: ROBLOX 0x00628d40
 G3D::Vector3 GeometryService::getHitLocationFilterDescendants(Instance* ancestor, G3D::Ray ray)
 {
 	if (workspace == NULL) {
@@ -32,6 +33,7 @@ G3D::Vector3 GeometryService::getHitLocationFilterDescendants(Instance* ancestor
 }
 
 // FUNCTION: WEBSERVICE 0x100e9d00
+// FUNCTION: ROBLOX 0x00628eb0
 void GeometryService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	DescribedCreatable<GeometryService, Instance, sGeometryService>::onServiceProvider(oldProvider, newProvider);
@@ -42,6 +44,7 @@ void GeometryService::onServiceProvider(const ServiceProvider* oldProvider, cons
 }
 
 // FUNCTION: WEBSERVICE 0x100e9e10
+// FUNCTION: ROBLOX 0x00628fa0
 inline GeometryService::GeometryService()
 	: DescribedCreatable<GeometryService, Instance, sGeometryService>(sGeometryService), workspace(NULL)
 {

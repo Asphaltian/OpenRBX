@@ -11,6 +11,7 @@ namespace RBX {
 class RotateConnector;
 
 // VTABLE: WEBSERVICE 0x10248028
+// VTABLE: ROBLOX 0x0083aff0
 // SIZE 0xc4
 class RotateJoint : public MultiJoint
 {
@@ -59,6 +60,7 @@ private:
 DECOMP_SIZE_ASSERT(RotateJoint, 0xc4)
 
 // VTABLE: WEBSERVICE 0x1023cf98
+// VTABLE: ROBLOX 0x008306d8
 // SIZE 0xc4
 class RotatePJoint : public RotateJoint
 {
@@ -82,6 +84,7 @@ private:
 DECOMP_SIZE_ASSERT(RotatePJoint, 0xc4)
 
 // VTABLE: WEBSERVICE 0x1023cfd0
+// VTABLE: ROBLOX 0x00830710
 // SIZE 0xc4
 class RotateVJoint : public RotateJoint
 {

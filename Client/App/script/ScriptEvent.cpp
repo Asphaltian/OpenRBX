@@ -8,17 +8,20 @@ namespace RBX {
 namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x100b5790
+// FUNCTION: ROBLOX 0x00601f80
 YieldingThreads::WaitingThread::WaitingThread(lua_State* L, double requestedDelay)
 	: thread(new ThreadRef(L)), requestedDelay(requestedDelay), elapsedTime(0.0)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100b5e00
+// FUNCTION: ROBLOX 0x006025f0
 YieldingThreads::YieldingThreads(ScriptContext* context) : context(context)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100b5f80
+// FUNCTION: ROBLOX 0x00602770
 void YieldingThreads::queueWaiter(lua_State* L, double requestedDelay)
 {
 	RobloxExtraSpace::get(L)->yieldCaptured = true;
@@ -27,6 +30,7 @@ void YieldingThreads::queueWaiter(lua_State* L, double requestedDelay)
 }
 
 // FUNCTION: WEBSERVICE 0x100b6030
+// FUNCTION: ROBLOX 0x00602820
 void YieldingThreads::resume(Heartbeat event)
 {
 	if (waitingThreads.size() == 0) {
@@ -61,6 +65,7 @@ void YieldingThreads::resume(Heartbeat event)
 }
 
 // FUNCTION: WEBSERVICE 0x100b61d0
+// FUNCTION: ROBLOX 0x006029c0
 void YieldingThreads::queueWaiter(lua_State* L)
 {
 	queueWaiter(L, 0.0);

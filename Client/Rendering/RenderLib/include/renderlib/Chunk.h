@@ -32,6 +32,7 @@ public:
 	Chunk(float polygonOffset);
 
 	// FUNCTION: WEBSERVICE 0x1016f1a0
+	// FUNCTION: ROBLOX 0x00479d90
 	virtual ~Chunk() { RenderStats::chunkCount--; }
 
 	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
@@ -53,6 +54,7 @@ public:
 DECOMP_SIZE_ASSERT(Chunk, 0x1c)
 
 // VTABLE: WEBSERVICE 0x1025a1a4
+// VTABLE: ROBLOX 0x00810ae4
 // SIZE 0xf0
 class AggregateChunk : public Chunk
 {
@@ -84,9 +86,11 @@ public:
 	virtual const G3D::CoordinateFrame& cframe() { return _cframe; }
 
 	// FUNCTION: WEBSERVICE 0x101f9d10
+	// FUNCTION: ROBLOX 0x004a2150
 	virtual G3D::ReferenceCountedPointer<Material> getMaterial() { return material; }
 
 	// FUNCTION: WEBSERVICE 0x101f9d40
+	// FUNCTION: ROBLOX 0x004a2180
 	virtual G3D::ReferenceCountedPointer<Mesh> getMesh() { return mesh; }
 
 	virtual void renderShadows(G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance);
@@ -111,6 +115,7 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x102264b0
 	// `dynamic atexit destructor for 'RBX::Render::AggregateChunk::identity''
 	// SYNTHETIC: WEBSERVICE 0x10226500
+	// SYNTHETIC: ROBLOX 0x007f0760
 	// `RBX::Render::AggregateChunk::renderShadows'::`8'::`dynamic atexit destructor for 'shadowVertex''
 	// clang-format on
 };

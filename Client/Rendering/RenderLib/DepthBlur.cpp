@@ -7,6 +7,7 @@ namespace RBX {
 namespace Render {
 
 // FUNCTION: WEBSERVICE 0x101f8fe0
+// FUNCTION: ROBLOX 0x004a4510
 void DepthBlur::allocateTextures(const G3D::Rect2D& screenRect)
 {
 	if (!depth.isNull() && depth->vector2Bounds() == screenRect.wh()) {
@@ -36,6 +37,7 @@ void DepthBlur::allocateTextures(const G3D::Rect2D& screenRect)
 }
 
 // FUNCTION: WEBSERVICE 0x101f9260
+// FUNCTION: ROBLOX 0x004a4790
 void DepthBlur::apply(G3D::RenderDevice* rd)
 {
 	if (!shader.isNull()) {
@@ -57,6 +59,7 @@ void DepthBlur::apply(G3D::RenderDevice* rd)
 }
 
 // FUNCTION: WEBSERVICE 0x101f9590
+// FUNCTION: ROBLOX 0x004a4bb0
 DepthBlur::DepthBlur()
 {
 	if (G3D::GLCaps::supports_GL_ARB_shader_objects() && G3D::GLCaps::supports_GL_ARB_shading_language_100() &&

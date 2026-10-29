@@ -9,6 +9,7 @@ namespace RBX {
 char sTimerService[] = "Timer";
 
 // FUNCTION: WEBSERVICE 0x100fba10
+// FUNCTION: ROBLOX 0x005e8670
 void TimerService::delay(boost::function0<void> func, double seconds)
 {
 	Item item;
@@ -30,6 +31,7 @@ void TimerService::delay(boost::function0<void> func, double seconds)
 }
 
 // FUNCTION: WEBSERVICE 0x100fbb60
+// FUNCTION: ROBLOX 0x005e87c0
 void TimerService::onEvent(const RunService* source, Heartbeat event)
 {
 	double time = G3D::System::getLocalTime();
@@ -54,11 +56,13 @@ void TimerService::onEvent(const RunService* source, Heartbeat event)
 }
 
 // FUNCTION: WEBSERVICE 0x100fbd30
+// FUNCTION: ROBLOX 0x005e8980
 TimerService::TimerService()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100fbf40
+// FUNCTION: ROBLOX 0x005e8b90
 void TimerService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(runService, this);

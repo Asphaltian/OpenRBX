@@ -14,6 +14,7 @@ class Joint;
 class Primitive;
 
 // VTABLE: WEBSERVICE 0x10247dcc
+// VTABLE: ROBLOX 0x0083ad74
 // SIZE 0x28
 class JointStage : public IWorldStage
 {
@@ -29,6 +30,7 @@ public:
 	// RBX::JointStage::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual StageType getStageType() { return JOINT_STAGE; } // vtable+0x04
 
 	virtual void onEdgeAdded(Edge* edge);    // vtable+0x10

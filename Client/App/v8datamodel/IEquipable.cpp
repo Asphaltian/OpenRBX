@@ -8,16 +8,19 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10117c00
+// FUNCTION: ROBLOX 0x004c4040
 IEquipable::~IEquipable()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10117c40
+// FUNCTION: ROBLOX 0x00624890
 IEquipable::IEquipable() : workspace(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10117c50
+// FUNCTION: ROBLOX 0x006248a0
 void IEquipable::buildWeld(
 	PartInstance* humanoidPart,
 	PartInstance* gadgetPart,

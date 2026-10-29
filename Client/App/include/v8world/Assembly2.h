@@ -59,6 +59,7 @@ private:
 DECOMP_SIZE_ASSERT(SleepInfo, 0x24)
 
 // VTABLE: WEBSERVICE 0x10246c4c
+// VTABLE: ROBLOX 0x00831efc
 // SIZE 0x50
 class Assembly : public IPipelined, public boost::noncopyable
 {
@@ -150,11 +151,13 @@ public:
 DECOMP_SIZE_ASSERT(Assembly, 0x50)
 
 // VTABLE: WEBSERVICE 0x10247e3c
+// VTABLE: ROBLOX 0x0083ade4
 // SIZE 0x50
 class Clump : public Assembly
 {
 public:
 	// FUNCTION: WEBSERVICE 0x1011b310
+	// FUNCTION: ROBLOX 0x00644e00
 	Clump(Primitive* root) : Assembly(root) {}
 };
 

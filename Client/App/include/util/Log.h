@@ -16,6 +16,7 @@ public:
 };
 
 // VTABLE: WEBSERVICE 0x1022d894
+// VTABLE: ROBLOX 0x00826600
 // SIZE 0xac
 class Log
 {

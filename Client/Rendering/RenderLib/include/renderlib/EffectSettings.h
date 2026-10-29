@@ -43,8 +43,10 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x102264c0
+	// SYNTHETIC: ROBLOX 0x007f0780
 	// `RBX::Render::EffectSettings::getToneMap'::`2'::`dynamic atexit destructor for 'toneMap''
 	// SYNTHETIC: WEBSERVICE 0x102264e0
+	// SYNTHETIC: ROBLOX 0x007f07a0
 	// `RBX::Render::EffectSettings::getDepthBlur'::`2'::`dynamic atexit destructor for 'depthBlur''
 	// clang-format on
 

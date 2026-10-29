@@ -28,6 +28,7 @@ class worker_thread : public boost::noncopyable
 		bool endRequest;                // 0x20
 
 		// FUNCTION: WEBSERVICE 0x10032340
+		// FUNCTION: ROBLOX 0x005a9d90
 		data() : endRequest(false) {}
 	};
 
@@ -55,6 +56,7 @@ DECOMP_SIZE_ASSERT(worker_thread, 0x14)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10221410
+// SYNTHETIC: ROBLOX 0x007f27d0
 // `RBX::boost_detail::init_foo'::`2'::`dynamic atexit destructor for 'value''
 // clang-format on
 

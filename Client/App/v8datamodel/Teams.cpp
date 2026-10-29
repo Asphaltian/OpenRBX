@@ -21,11 +21,13 @@ static Reflection::BoundFuncDesc<Teams, boost::shared_ptr<const std::vector<boos
 	func_teams(&Teams::getTeams, "GetTeams", Reflection::FunctionDescriptor::AnyCaller);
 
 // FUNCTION: WEBSERVICE 0x100da970
+// FUNCTION: ROBLOX 0x005e7730
 Teams::~Teams()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100daac0
+// FUNCTION: ROBLOX 0x005e7880
 Team* Teams::getTeamFromTeamColor(BrickColor c)
 {
 	for (unsigned int i = 0; i < numChildren(); i++) {
@@ -46,12 +48,14 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Teams::getTe
 }
 
 // FUNCTION: WEBSERVICE 0x100daba0
+// FUNCTION: ROBLOX 0x005e7990
 bool Teams::teamExists(BrickColor color)
 {
 	return getTeamFromTeamColor(color) != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100daca0
+// FUNCTION: ROBLOX 0x005e7ad0
 int Teams::getNumPlayersInTeam(BrickColor color)
 {
 	int count = 0;
@@ -69,6 +73,7 @@ int Teams::getNumPlayersInTeam(BrickColor color)
 }
 
 // FUNCTION: WEBSERVICE 0x100dad30
+// FUNCTION: ROBLOX 0x005e7b60
 G3D::Color3 Teams::getTeamColorForHumanoid(Humanoid* h)
 {
 	Network::Players* players = ServiceProvider::find<Network::Players>(this);
@@ -89,6 +94,7 @@ G3D::Color3 Teams::getTeamColorForHumanoid(Humanoid* h)
 }
 
 // FUNCTION: WEBSERVICE 0x100dae00
+// FUNCTION: ROBLOX 0x005e7c30
 void Teams::assignNewPlayerToTeam(Network::Player* p)
 {
 	BrickColor best = BrickColor(BrickColor::lego_28);
@@ -115,6 +121,7 @@ void Teams::assignNewPlayerToTeam(Network::Player* p)
 }
 
 // FUNCTION: WEBSERVICE 0x100daf00
+// FUNCTION: ROBLOX 0x005e7d30
 void Teams::onChildAdded(Instance* child)
 {
 	if (dynamic_cast<Team*>(child)) {
@@ -124,6 +131,7 @@ void Teams::onChildAdded(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x100dafc0
+// FUNCTION: ROBLOX 0x005e7df0
 void Teams::onChildRemoving(Instance* child)
 {
 	if (dynamic_cast<Team*>(child)) {
@@ -133,12 +141,14 @@ void Teams::onChildRemoving(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x100db320
+// FUNCTION: ROBLOX 0x005e8160
 Teams::Teams() : teams(std::vector<boost::shared_ptr<Instance> >())
 {
 	setName(sTeams);
 }
 
 // FUNCTION: WEBSERVICE 0x1015b610 FOLDED
+// FUNCTION: ROBLOX 0x00751160 FOLDED
 void Teams::rebalanceTeams()
 {
 }

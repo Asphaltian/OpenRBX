@@ -31,6 +31,7 @@ namespace DataStructures
 	/// The default comparison has to be first so it can be called as a default parameter.
 	/// It then is followed by MapNode, followed by NodeComparisonFunc
 	// FUNCTION: WEBSERVICE 0x101bb0d0
+	// FUNCTION: ROBLOX 0x004d4560
 	template <class key_type>
 		int defaultMapKeyComparison(const key_type &a, const key_type &b)
 	{
@@ -47,6 +48,7 @@ namespace DataStructures
 		struct MapNode
 		{
 			// FUNCTION: WEBSERVICE 0x100d5ad0 FOLDED
+			// FUNCTION: ROBLOX 0x0060ca70 FOLDED
 			MapNode() {}
 			MapNode(key_type _key, data_type _data) : mapNodeKey(_key), mapNodeData(_data) {}
 			MapNode& operator = ( const MapNode& input ) {mapNodeKey=input.mapNodeKey; mapNodeData=input.mapNodeData; return *this;}
@@ -104,6 +106,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bb600
+	// FUNCTION: ROBLOX 0x004d4a90
 	template <class key_type, class data_type, int (*key_comparison_func)(const key_type&,const key_type&)>
 	Map<key_type, data_type, key_comparison_func>::~Map()
 	{
@@ -130,6 +133,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bb2e0
+	// FUNCTION: ROBLOX 0x004d46e0
 	template <class key_type, class data_type, int (*key_comparison_func)(const key_type&,const key_type&)>
 	data_type& Map<key_type, data_type, key_comparison_func>::Get(const key_type &key)
 	{
@@ -184,6 +188,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bb680
+	// FUNCTION: ROBLOX 0x004d4b10
 	template <class key_type, class data_type, int (*key_comparison_func)(const key_type&,const key_type&)>
 	void Map<key_type, data_type, key_comparison_func>::Set(const key_type &key, const data_type &data)
 	{

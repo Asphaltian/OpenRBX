@@ -12,6 +12,7 @@ namespace RBX {
 class Assembly;
 
 // VTABLE: WEBSERVICE 0x10247f04
+// VTABLE: ROBLOX 0x0083af54
 // SIZE 0x1c
 class SimJobStage : public IWorldStage
 {
@@ -21,6 +22,7 @@ public:
 	virtual ~SimJobStage() {} // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011ca20
+	// SYNTHETIC: ROBLOX 0x006468b0
 	// RBX::SimJobStage::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x100c66c0 FOLDED
@@ -35,6 +37,7 @@ public:
 	void notifyMovingPrimitives();
 
 	// FUNCTION: WEBSERVICE 0x1011c920
+	// FUNCTION: ROBLOX 0x004c57a0
 	Mechanism* nextMechanism(std::list<Mechanism*>& list, const Mechanism* current)
 	{
 		std::list<Mechanism*>::iterator it = current->myIt;
@@ -86,6 +89,7 @@ DECOMP_SIZE_ASSERT(SimJobStage, 0x1c)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1019f800
+// TEMPLATE: ROBLOX 0x004c6210
 // RBX::SimJobStage::reportMechanisms<RBX::Network::Replicator::JobSender>
 // clang-format on
 

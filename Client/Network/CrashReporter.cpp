@@ -10,6 +10,7 @@
 CrashReporter* CrashReporter::singleton;
 
 // FUNCTION: WEBSERVICE 0x1018b340
+// FUNCTION: ROBLOX 0x004b7e20
 LONG CrashReporter::ProcessException(_EXCEPTION_POINTERS* ExceptionInfo)
 {
 	_MINIDUMP_EXCEPTION_INFORMATION eInfo;

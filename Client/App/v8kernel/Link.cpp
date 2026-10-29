@@ -8,6 +8,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101027f0
+// FUNCTION: ROBLOX 0x0061e740
 void Link::dirty()
 {
 	if (body != NULL) {
@@ -16,6 +17,7 @@ void Link::dirty()
 }
 
 // FUNCTION: WEBSERVICE 0x10102800
+// FUNCTION: ROBLOX 0x0061e750
 void RevoluteLink::computeChildInParent(CoordinateFrame& answer) const
 {
 	CoordinateFrame rotatedParentCoord(Math::rotateAboutZ(parentCoord.rotation, jointAngle), parentCoord.translation);
@@ -24,11 +26,13 @@ void RevoluteLink::computeChildInParent(CoordinateFrame& answer) const
 }
 
 // FUNCTION: WEBSERVICE 0x10102880
+// FUNCTION: ROBLOX 0x0061e7d0
 Link::Link() : body(NULL), stateIndex(Body::getNextStateIndex())
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101028c0
+// FUNCTION: ROBLOX 0x0061e810
 const CoordinateFrame& Link::getChildInParent() const
 {
 	int index = body->getParent()->getStateIndex();
@@ -43,6 +47,7 @@ const CoordinateFrame& Link::getChildInParent() const
 }
 
 // FUNCTION: WEBSERVICE 0x10102900
+// FUNCTION: ROBLOX 0x0061e850
 void Link::reset(const CoordinateFrame& parentC, const CoordinateFrame& childC)
 {
 	parentCoord = parentC;

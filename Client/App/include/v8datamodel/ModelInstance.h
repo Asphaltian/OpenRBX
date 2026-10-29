@@ -72,6 +72,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x10059bd0
 	const CoordinateFrame& getModelInPrimary() const { return modelInPrimary; }
 	// FUNCTION: WEBSERVICE 0x10059be0
+	// FUNCTION: ROBLOX 0x00564ae0
 	void setModelInPrimary(const CoordinateFrame& set) { modelInPrimary = set; }
 
 	virtual void onExtentsChanged() const;
@@ -107,6 +108,7 @@ DECOMP_SIZE_ASSERT(ModelInstance, 0x254)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x102188d0
+// SYNTHETIC: ROBLOX 0x007e82e0
 // RBX::`dynamic initializer for 'partName''
 // SYNTHETIC: WEBSERVICE 0x102188f0
 // RBX::`dynamic initializer for 'desc_ModelInPrimary''

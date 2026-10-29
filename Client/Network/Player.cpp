@@ -75,12 +75,14 @@ static Reflection::PropDescriptor<Player, bool> prop_neutral(
 static Reflection::SignalDesc<Player, void(float)> event_Idled("Idled", "time");
 
 // FUNCTION: WEBSERVICE 0x1018c3b0
+// FUNCTION: ROBLOX 0x004a4da0
 std::string Player::getCharacterAppearance() const
 {
 	return characterAppearance;
 }
 
 // FUNCTION: WEBSERVICE 0x1018c3e0
+// FUNCTION: ROBLOX 0x004a4ea0
 static void setAppearanceParentNull(Instance* instance)
 {
 	if (dynamic_cast<CharacterAppearance*>(instance)) {
@@ -89,12 +91,14 @@ static void setAppearanceParentNull(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1018c520
+// FUNCTION: ROBLOX 0x004a5a50
 static void addChild(const boost::shared_ptr<ModelInstance>& parent, const boost::shared_ptr<Instance>& child)
 {
 	child->setParent(parent.get());
 }
 
 // FUNCTION: WEBSERVICE 0x1018c540
+// FUNCTION: ROBLOX 0x004a5a70
 static void setAppearanceParent(boost::shared_ptr<Instance> parent, boost::shared_ptr<Instance> instance)
 {
 	if (dynamic_cast<CharacterAppearance*>(instance.get())) {
@@ -121,6 +125,7 @@ void Player::setSuperSafeChat(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1018cf20
+// FUNCTION: ROBLOX 0x004a6a90
 void Player::removeCharacterAppearance()
 {
 	if (!Players::backendProcessing(this, true)) {
@@ -133,12 +138,14 @@ void Player::removeCharacterAppearance()
 }
 
 // FUNCTION: WEBSERVICE 0x1018cfb0
+// FUNCTION: ROBLOX 0x004a6b20
 Backpack* Player::getPlayerBackpack() const
 {
 	return findFirstChildOfType<Backpack>();
 }
 
 // FUNCTION: WEBSERVICE 0x1018eae0
+// FUNCTION: ROBLOX 0x004ac2f0
 void Player::onCharacterChangedFrontend()
 {
 	if (this == Players::findLocalPlayer(this)) {
@@ -160,6 +167,7 @@ void Player::onCharacterChangedFrontend()
 }
 
 // FUNCTION: WEBSERVICE 0x1018ebc0
+// FUNCTION: ROBLOX 0x004ac3d0
 void Player::rebuildBackpack()
 {
 	if (!Players::backendProcessing(this, true)) {
@@ -183,6 +191,7 @@ void Player::rebuildBackpack()
 }
 
 // FUNCTION: WEBSERVICE 0x1018f870
+// FUNCTION: ROBLOX 0x004ada20
 void Player::setCharacter(ModelInstance* value)
 {
 	if (value != character.get()) {
@@ -208,6 +217,7 @@ void Player::setCharacter(ModelInstance* value)
 }
 
 // FUNCTION: WEBSERVICE 0x1018f9c0
+// FUNCTION: ROBLOX 0x004adb70
 void Player::setTeamColor(BrickColor value)
 {
 	if (value.number != teamColor.number) {
@@ -217,6 +227,7 @@ void Player::setTeamColor(BrickColor value)
 }
 
 // FUNCTION: WEBSERVICE 0x1018f9f0
+// FUNCTION: ROBLOX 0x004adba0
 void Player::setNeutral(bool value)
 {
 	if (value != neutral) {
@@ -226,6 +237,7 @@ void Player::setNeutral(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1018fa20
+// FUNCTION: ROBLOX 0x004adbd0
 void Player::doPeriodicIdleCheck()
 {
 	if (!ServiceProvider::findServiceProvider(this)) {
@@ -252,6 +264,7 @@ void Player::doPeriodicIdleCheck()
 }
 
 // FUNCTION: WEBSERVICE 0x1018fb20
+// FUNCTION: ROBLOX 0x004adcd0
 void Player::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	if (oldProvider && Players::backendProcessing(oldProvider, true)) {
@@ -271,6 +284,7 @@ void Player::onServiceProvider(const ServiceProvider* oldProvider, const Service
 }
 
 // FUNCTION: WEBSERVICE 0x1018fba0
+// FUNCTION: ROBLOX 0x004add50
 void Player::removeCharacter()
 {
 	if (!Players::backendProcessing(this, true)) {
@@ -281,12 +295,14 @@ void Player::removeCharacter()
 }
 
 // FUNCTION: WEBSERVICE 0x1018fce0
+// FUNCTION: ROBLOX 0x004ae180
 Player::~Player()
 {
 	setCharacter(NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x1018fef0
+// FUNCTION: ROBLOX 0x004ae390
 void Player::setName(const std::string& value)
 {
 	Security::Context::current().requirePermission(Security::Administrator, "set a Player's name");
@@ -294,6 +310,7 @@ void Player::setName(const std::string& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1018ffd0
+// FUNCTION: ROBLOX 0x004ae6a0
 Player::Player()
 	: teamColor(BrickColor::legoWhite()), neutral(true), under13(false), superSafeChat(false), userId(0),
 	  lastActivityTime(0.0)
@@ -303,6 +320,7 @@ Player::Player()
 }
 
 // FUNCTION: WEBSERVICE 0x10190340
+// FUNCTION: ROBLOX 0x004af070
 void Player::loadCharacterAppearance()
 {
 	if (!Players::backendProcessing(this, true)) {
@@ -336,6 +354,7 @@ void Player::loadCharacterAppearance()
 }
 
 // FUNCTION: WEBSERVICE 0x101905d0
+// FUNCTION: ROBLOX 0x004af300
 void Player::loadCharacter()
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(this);
@@ -403,6 +422,7 @@ void Player::loadCharacter()
 }
 
 // FUNCTION: WEBSERVICE 0x10190bf0
+// FUNCTION: ROBLOX 0x004af920
 void Player::setCharacterAppearance(const std::string& value)
 {
 	if (value != characterAppearance) {

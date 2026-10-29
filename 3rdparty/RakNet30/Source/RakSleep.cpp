@@ -9,6 +9,7 @@
 #endif
 
 // FUNCTION: WEBSERVICE 0x101c38b0
+// FUNCTION: ROBLOX 0x004e8f10
 void RakSleep(unsigned int ms)
 {
 #ifdef _WIN32

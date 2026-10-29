@@ -14,6 +14,7 @@ namespace RBX {
 char sPartDragTool[] = "PartDragTool";
 
 // FUNCTION: WEBSERVICE 0x10126360
+// FUNCTION: ROBLOX 0x00662820
 MouseCommand* PartDragTool::onMouseDown(const UIEvent& uiEvent)
 {
 	downPoint = G3D::Vector2(uiEvent.mousePosition);
@@ -22,6 +23,7 @@ MouseCommand* PartDragTool::onMouseDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10126470
+// FUNCTION: ROBLOX 0x00662930
 void PartDragTool::onMouseDelta(const UIEvent& uiEvent)
 {
 	if (!dragging && megaDragger->mousePartAlive()) {
@@ -35,6 +37,7 @@ void PartDragTool::onMouseDelta(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101264d0
+// FUNCTION: ROBLOX 0x00662990
 void PartDragTool::onMouseIdle(const UIEvent& uiEvent)
 {
 	if (captured() && dragging && megaDragger->mousePartAlive()) {
@@ -45,6 +48,7 @@ void PartDragTool::onMouseIdle(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10126540
+// FUNCTION: ROBLOX 0x00662a00
 MouseCommand* PartDragTool::onMouseUp(const UIEvent& uiEvent)
 {
 	if (dragging) {
@@ -62,11 +66,13 @@ MouseCommand* PartDragTool::onMouseUp(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101265d0
+// FUNCTION: ROBLOX 0x00662a90
 PartDragTool::~PartDragTool()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101266b0
+// FUNCTION: ROBLOX 0x00662b70
 void PartDragTool::onMouseMove(const UIEvent& uiEvent)
 {
 	if (!dragging && megaDragger->mousePartAlive()) {
@@ -86,6 +92,7 @@ void PartDragTool::onMouseMove(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10126800
+// FUNCTION: ROBLOX 0x00662cc0
 MouseCommand* PartDragTool::onKeyDown(const UIEvent& uiEvent)
 {
 	if (megaDragger->mousePartAlive()) {
@@ -110,6 +117,7 @@ MouseCommand* PartDragTool::onKeyDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10126940
+// FUNCTION: ROBLOX 0x00662e00
 void PartDragTool::render3dAdorn(Adorn* adorn)
 {
 	if (megaDragger->mousePartAlive()) {
@@ -118,6 +126,7 @@ void PartDragTool::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x10126a40
+// FUNCTION: ROBLOX 0x00662f00
 PartDragTool::PartDragTool(PartInstance* mousePart, const G3D::Vector3& hitPointWorld, Workspace* workspace)
 	: Named<MouseCommand, sPartDragTool>(workspace), dragging(false), hitWorld(hitPointWorld)
 {

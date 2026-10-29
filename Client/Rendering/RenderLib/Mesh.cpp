@@ -20,12 +20,14 @@ static int vertexRefCount;
 static bool init;
 
 // FUNCTION: WEBSERVICE 0x101655f0
+// FUNCTION: ROBLOX 0x00498f20
 void Mesh::endRender(G3D::RenderDevice* rd)
 {
 	rd->endIndexedPrimitives();
 }
 
 // FUNCTION: WEBSERVICE 0x10165830
+// FUNCTION: ROBLOX 0x004993b0
 unsigned int Mesh::allocVertex(unsigned int i, unsigned int count)
 {
 	vertexRefCounts[i] += count;
@@ -35,12 +37,14 @@ unsigned int Mesh::allocVertex(unsigned int i, unsigned int count)
 }
 
 // FUNCTION: WEBSERVICE 0x10165fc0
+// FUNCTION: ROBLOX 0x00499d10
 const Mesh::LevelRef Mesh::detailLevel(float meshLOD) const
 {
 	return levels[detailIndex(levels.size() * meshLOD)].getPointer();
 }
 
 // FUNCTION: WEBSERVICE 0x10166020
+// FUNCTION: ROBLOX 0x00499d70
 void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 {
 	if (lvl != NULL && lvl->indexArray.size() > 0) {
@@ -49,6 +53,7 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 }
 
 // FUNCTION: WEBSERVICE 0x10166980
+// FUNCTION: ROBLOX 0x0049a500
 void Mesh::computeAABounds(
 	const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray, G3D::Vector3& lo, G3D::Vector3& hi
 )
@@ -83,6 +88,7 @@ void Mesh::computeAABounds(
 }
 
 // FUNCTION: WEBSERVICE 0x10166cc0
+// FUNCTION: ROBLOX 0x0049a840
 unsigned int Mesh::allocVertex(
 	const G3D::Vector3& vertex, const G3D::Vector3& normal, const G3D::Vector2& tex, bool share
 )
@@ -118,6 +124,7 @@ unsigned int Mesh::allocVertex(
 }
 
 // FUNCTION: WEBSERVICE 0x10166e40
+// FUNCTION: ROBLOX 0x0049a9c0
 void Mesh::freeVertex(unsigned int index)
 {
 	if (vertexRefCounts.getCArray() != NULL) {
@@ -135,6 +142,7 @@ void Mesh::freeVertex(unsigned int index)
 }
 
 // FUNCTION: WEBSERVICE 0x10166e80
+// FUNCTION: ROBLOX 0x0049aa00
 Mesh::Level::~Level()
 {
 	for (int i = 0; i < indexArray.size(); i++) {
@@ -143,11 +151,13 @@ Mesh::Level::~Level()
 }
 
 // FUNCTION: WEBSERVICE 0x10166f50
+// FUNCTION: ROBLOX 0x0049aad0
 Mesh::~Mesh()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10166fc0
+// FUNCTION: ROBLOX 0x0049ab40
 void Mesh::makeVAR()
 {
 	if (varDirty) {
@@ -164,6 +174,7 @@ void Mesh::makeVAR()
 }
 
 // FUNCTION: WEBSERVICE 0x10167400
+// FUNCTION: ROBLOX 0x0049af80
 void Mesh::beginRender(G3D::RenderDevice* rd, bool usetexCoords, bool useTangent)
 {
 	makeVAR();
@@ -191,6 +202,7 @@ void Mesh::beginRender(G3D::RenderDevice* rd, bool usetexCoords, bool useTangent
 }
 
 // FUNCTION: WEBSERVICE 0x10167600
+// FUNCTION: ROBLOX 0x0049b020
 void Mesh::initStatics()
 {
 	visibleGeometry.vertexArray.resize(1);
@@ -203,6 +215,7 @@ void Mesh::initStatics()
 }
 
 // STUB: WEBSERVICE 0x101676c0
+// STUB: ROBLOX 0x0049b0e0
 void Mesh::computeDirectionalShadowVolume(
 	const G3D::CoordinateFrame& cframe,
 	const G3D::Vector3& wsLightVector,
@@ -270,6 +283,7 @@ void Mesh::computeDirectionalShadowVolume(
 }
 
 // FUNCTION: WEBSERVICE 0x10167bb0
+// FUNCTION: ROBLOX 0x0049b570
 Mesh::Mesh()
 {
 	if (!init) {
@@ -281,6 +295,7 @@ Mesh::Mesh()
 }
 
 // STUB: WEBSERVICE 0x10167d70
+// STUB: ROBLOX 0x0049b730
 G3D::ReferenceCountedPointer<Mesh> Mesh::aggregate(
 	const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
 	G3D::CoordinateFrame& outCFrame,
@@ -396,6 +411,7 @@ G3D::ReferenceCountedPointer<Mesh> Mesh::aggregate(
 }
 
 // FUNCTION: WEBSERVICE 0x101689d0
+// FUNCTION: ROBLOX 0x0049c390
 void Mesh::computeShadowSurface(const LevelRef& level)
 {
 	shadowSurface.dropShadowGeometry = level;

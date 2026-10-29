@@ -62,6 +62,7 @@ extern const char sReplicator[];
 extern const char sMarker[];
 
 // VTABLE: WEBSERVICE 0x10250ba4
+// VTABLE: ROBLOX 0x00813b1c
 // SIZE 0x10
 class Marker : public DescribedNonCreatable<Marker, Reflection::DescribedBase, sMarker>, private boost::noncopyable
 {
@@ -71,6 +72,7 @@ class Marker : public DescribedNonCreatable<Marker, Reflection::DescribedBase, s
 
 public:
 	// FUNCTION: WEBSERVICE 0x101a9b70
+	// FUNCTION: ROBLOX 0x004d2ca0
 	static boost::shared_ptr<Marker> newMarker() { return boost::shared_ptr<Marker>(new Marker()); }
 
 	long id() const { return reinterpret_cast<long>(this); }
@@ -137,9 +139,11 @@ protected:
 		bool deleteOnDisconnect;               // 0x28
 
 		// SYNTHETIC: WEBSERVICE 0x1019cc70
+		// SYNTHETIC: ROBLOX 0x004c3610
 		// RBX::Network::Replicator::ReplicationData::~ReplicationData
 
 		// SYNTHETIC: WEBSERVICE 0x1019ce80
+		// SYNTHETIC: ROBLOX 0x004c3830
 		// RBX::Network::Replicator::ReplicationData::ReplicationData
 	};
 
@@ -191,6 +195,7 @@ public:
 	virtual ~Replicator();
 
 	// FUNCTION: WEBSERVICE 0x1019f930
+	// FUNCTION: ROBLOX 0x004c64e0
 	boost::shared_ptr<Instance> getPlayer() { return shared_from(findTargetPlayer()); }
 
 	static Reflection::BoundProp<int, 1> prop_maxDataModelSendBuffer;
@@ -203,6 +208,7 @@ public:
 	virtual const Name& getClassName() const { return Name::getNullName(); }
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual XmlElement* write() { return NULL; }
 
 	boost::shared_ptr<Reflection::DescribedBase> sendMarker();
@@ -265,16 +271,21 @@ DECOMP_SIZE_ASSERT(Replicator, 0x2c30)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x101a3850
+// TEMPLATE: ROBLOX 0x004cbc80
 // RBX::Reflection::Described<RBX::Network::Replicator,&RBX::Network::sReplicator,RBX::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x101a9f90
+// TEMPLATE: ROBLOX 0x004d30d0
 // RBX::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator>::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator>
 // TEMPLATE: WEBSERVICE 0x101aa0d0
 // RBX::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator>::getClassName
 // TEMPLATE: WEBSERVICE 0x101aa510
+// TEMPLATE: ROBLOX 0x004d3630
 // RBX::Reflection::Described<RBX::Network::Replicator,&RBX::Network::sReplicator,RBX::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator> >::Described<RBX::Network::Replicator,&RBX::Network::sReplicator,RBX::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator> >
 // TEMPLATE: WEBSERVICE 0x101aa580
+// TEMPLATE: ROBLOX 0x004d36a0
 // RBX::DescribedNonCreatable<RBX::Network::Replicator,RBX::Network::IdSerializer,&RBX::Network::sReplicator>::DescribedNonCreatable<RBX::Network::Replicator,RBX::Network::IdSerializer,&RBX::Network::sReplicator>
 // SYNTHETIC: WEBSERVICE 0x102262a0
+// SYNTHETIC: ROBLOX 0x007f10b0
 // `RBX::Reflection::Described<RBX::Network::Replicator,&RBX::Network::sReplicator,RBX::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on
 
@@ -316,8 +327,10 @@ DECOMP_SIZE_ASSERT(Peer, 0x10c)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1018ba90
+// TEMPLATE: ROBLOX 0x004b84d0
 // RBX::Reflection::Described<RBX::Network::Peer,&RBX::Network::sPeer,RBX::Instance>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x101a43d0
+// TEMPLATE: ROBLOX 0x004ccbc0
 // RBX::Reflection::Described<RBX::Network::Peer,&RBX::Network::sPeer,RBX::Instance>::Described<RBX::Network::Peer,&RBX::Network::sPeer,RBX::Instance>
 // SYNTHETIC: WEBSERVICE 0x1021fb20
 // `dynamic initializer for 'RBX::Network::Replicator::event_Disconnection''
@@ -332,6 +345,7 @@ DECOMP_SIZE_ASSERT(Peer, 0x10c)
 // SYNTHETIC: WEBSERVICE 0x1021fc10
 // `dynamic initializer for 'RBX::Network::Marker::event_Returned''
 // SYNTHETIC: WEBSERVICE 0x10225d70
+// SYNTHETIC: ROBLOX 0x007f0e60
 // `RBX::Reflection::Described<RBX::Network::Peer,&RBX::Network::sPeer,RBX::Instance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102262c0
 // `dynamic atexit destructor for 'func_closeConnection''

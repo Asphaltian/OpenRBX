@@ -58,10 +58,13 @@ struct AbuseReport
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x101929c0
+// SYNTHETIC: ROBLOX 0x004b2650
 // RBX::Network::AbuseReport::AbuseReport
 // SYNTHETIC: WEBSERVICE 0x10192a30
+// SYNTHETIC: ROBLOX 0x004b26c0
 // RBX::Network::AbuseReport::~AbuseReport
 // SYNTHETIC: WEBSERVICE 0x101930b0
+// SYNTHETIC: ROBLOX 0x004b2fa0
 // RBX::Network::AbuseReport::operator=
 // clang-format on
 
@@ -92,10 +95,13 @@ private:
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10191750
+// SYNTHETIC: ROBLOX 0x004b09a0
 // RBX::Network::AbuseReporter::~AbuseReporter
 // SYNTHETIC: WEBSERVICE 0x10195460
+// SYNTHETIC: ROBLOX 0x004b6770
 // RBX::Network::AbuseReporter::data::~data
 // SYNTHETIC: WEBSERVICE 0x101954c0
+// SYNTHETIC: ROBLOX 0x004b6890
 // RBX::Network::AbuseReporter::data::data
 // clang-format on
 
@@ -139,6 +145,7 @@ public:
 	int getNumPlayers() const;
 
 	// FUNCTION: WEBSERVICE 0x10120bc0
+	// FUNCTION: ROBLOX 0x004b05d0
 	int numPlayers() const { return players->size(); }
 
 	// FUNCTION: WEBSERVICE 0x10190c40
@@ -147,6 +154,7 @@ public:
 	void setMaxPlayers(int value);
 
 	// FUNCTION: WEBSERVICE 0x10120d00
+	// FUNCTION: ROBLOX 0x004b0de0
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > getPlayers() { return players.read(); }
 
 	void chat(std::string message);
@@ -245,6 +253,7 @@ DECOMP_SIZE_ASSERT(Players, 0x158)
 // SYNTHETIC: WEBSERVICE 0x102260a0
 // RBX::Network::`dynamic atexit destructor for 'event_PlayerAdded''
 // TEMPLATE: WEBSERVICE 0x10193670
+// TEMPLATE: ROBLOX 0x004b4460
 // RBX::DescribedNonCreatable<RBX::Network::Players,RBX::Instance,&RBX::Network::sPlayers>::DescribedNonCreatable<RBX::Network::Players,RBX::Instance,&RBX::Network::sPlayers>
 // clang-format on
 

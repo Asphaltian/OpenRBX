@@ -137,9 +137,11 @@ private:
 };
 
 // SYNTHETIC: WEBSERVICE 0x1021fc40
+// SYNTHETIC: ROBLOX 0x007e6890
 // `dynamic initializer for 'SocketLayer::I''
 
 // SYNTHETIC: WEBSERVICE 0x10226320
+// SYNTHETIC: ROBLOX 0x007f12f0
 // `dynamic atexit destructor for 'SocketLayer::I''
 
 #endif

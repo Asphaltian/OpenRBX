@@ -26,6 +26,7 @@ BoundProp<float, 1> prop_DataPacketSize("DataPacketSize", "Replication", &Networ
 BoundProp<float, 1> prop_SendRate("SendRate", "Replication", &NetworkSettings::sendRate);
 
 // FUNCTION: WEBSERVICE 0x1019ba30
+// FUNCTION: ROBLOX 0x004c22b0
 NetworkSettings::NetworkSettings()
 	: clientPhysics(false), clientPhysicsSpeed(1.0f), clientPhysicsLifetime(0.5f), printPhysicsErrors(false),
 	  printInstances(false), printProperties(false), printPacketBuffer(false), logPackets(false),

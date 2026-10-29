@@ -48,6 +48,7 @@ protected:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x100fbe80
+	// SYNTHETIC: ROBLOX 0x005e8ad0
 	// RBX::TimerService::~TimerService
 
 	// SYNTHETIC: WEBSERVICE 0x100fbf20

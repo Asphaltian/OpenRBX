@@ -198,8 +198,10 @@ DECOMP_SIZE_ASSERT(BrickColor, 0x04)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10092580
+// SYNTHETIC: ROBLOX 0x005be540
 // RBX::BrickColor::BrickMap::~BrickMap
 // SYNTHETIC: WEBSERVICE 0x10222e80
+// SYNTHETIC: ROBLOX 0x007f2e50
 // `RBX::BrickColor::BrickMap::singleton'::`2'::`dynamic atexit destructor for 's''
 // clang-format on
 

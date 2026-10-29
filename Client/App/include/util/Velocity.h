@@ -18,6 +18,7 @@ public:
 	mutable Vector3 rotational; // 0x0c
 
 	// FUNCTION: WEBSERVICE 0x10104d20
+	// FUNCTION: ROBLOX 0x004c2ee0
 	Velocity() : linear(Vector3::zero()), rotational(Vector3::zero()) {}
 	Velocity(const Vector3& linear, const Vector3& rotational) : linear(linear), rotational(rotational) {}
 	Velocity(const Velocity& other) : linear(other.linear), rotational(other.rotational) {}

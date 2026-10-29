@@ -28,12 +28,14 @@ public:
 	DebrisService();
 
 	// SYNTHETIC: WEBSERVICE 0x100faf40
+	// SYNTHETIC: ROBLOX 0x00637e70
 	// RBX::DebrisService::~DebrisService
 
 	void addItem(boost::shared_ptr<Instance> item, double lifetime);
 	void setMaxItems(int value);
 
 	// FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
+	// FUNCTION: ROBLOX 0x006171e0 FOLDED
 	int getMaxItems() const { return maxItems; }
 
 protected:
@@ -49,10 +51,12 @@ DECOMP_SIZE_ASSERT(DebrisService, 0x114)
 // SYNTHETIC: WEBSERVICE 0x1021db30
 // RBX::`dynamic initializer for 'prop_MaxItems''
 // SYNTHETIC: WEBSERVICE 0x1021db70
+// SYNTHETIC: ROBLOX 0x007ede70
 // RBX::`dynamic initializer for 'func_AddItem''
 // SYNTHETIC: WEBSERVICE 0x10224c10
 // RBX::`dynamic atexit destructor for 'prop_MaxItems''
 // SYNTHETIC: WEBSERVICE 0x10224c30
+// SYNTHETIC: ROBLOX 0x007f51b0
 // RBX::`dynamic atexit destructor for 'func_AddItem''
 // clang-format on
 

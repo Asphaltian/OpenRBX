@@ -19,6 +19,7 @@ namespace DataStructures
 
 
     // FUNCTION: WEBSERVICE 0x101bc550
+    // FUNCTION: ROBLOX 0x004e2560
     template <class range_type>
     int RangeNodeComp(const range_type &a, const RangeNode<range_type> &b)
     {
@@ -46,6 +47,7 @@ namespace DataStructures
 	};
 
 	// FUNCTION: WEBSERVICE 0x101bde50
+	// FUNCTION: ROBLOX 0x004e3e40
 	template <class range_type>
 	unsigned RangeList<range_type>::Serialize(RakNet::BitStream *in, int maxBits, bool clearSerialized)
 	{
@@ -91,6 +93,7 @@ namespace DataStructures
 		return bitsWritten;
 	}
 	// FUNCTION: WEBSERVICE 0x101beaf0
+	// FUNCTION: ROBLOX 0x004e4ae0
 	template <class range_type>
 	bool RangeList<range_type>::Deserialize(RakNet::BitStream *out)
 	{
@@ -128,6 +131,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bf990
+	// FUNCTION: ROBLOX 0x004e5980
 	template <class range_type>
 	RangeList<range_type>::~RangeList()
 	{
@@ -135,6 +139,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101be990
+	// FUNCTION: ROBLOX 0x004e4980
 	template <class range_type>
 	void RangeList<range_type>::Insert(range_type index)
 	{

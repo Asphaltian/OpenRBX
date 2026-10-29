@@ -3,6 +3,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100d0ec0
+// FUNCTION: ROBLOX 0x005d8b60
 void UserInputBase::getNavKeys(NavKeys& navKeys) const
 {
 	navKeys.forward_arrow = keyDown(SDLK_UP);

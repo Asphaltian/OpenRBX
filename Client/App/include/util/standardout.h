@@ -32,6 +32,7 @@ struct StandardOutMessage
 };
 
 // VTABLE: WEBSERVICE 0x1022cfe0
+// VTABLE: ROBLOX 0x00822568
 // SIZE 0x28
 class StandardOut : public boost::enable_shared_from_this<StandardOut>, public Notifier<StandardOut, StandardOutMessage>
 {
@@ -44,16 +45,20 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10031c40
+	// TEMPLATE: ROBLOX 0x00582a60
 	// ?raise@?$Notifier@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@IBEXUStandardOutMessage@2@@Z
 	// clang-format on
 
 	// SYNTHETIC: WEBSERVICE 0x10031fe0
+	// SYNTHETIC: ROBLOX 0x00582e00
 	// RBX::StandardOut::StandardOut
 
 	// SYNTHETIC: WEBSERVICE 0x102213d0
+	// SYNTHETIC: ROBLOX 0x007f22f0
 	// `RBX::StandardOut::singleton'::`2'::`dynamic atexit destructor for 'standardOut''
 
 	// SYNTHETIC: WEBSERVICE 0x10032040
+	// SYNTHETIC: ROBLOX 0x00582e60
 	// RBX::StandardOut::~StandardOut
 
 	// SYNTHETIC: WEBSERVICE 0x10032190

@@ -10,6 +10,7 @@
 #include <map>
 
 // FUNCTION: WEBSERVICE 0x10175d10
+// FUNCTION: ROBLOX 0x004800f0
 static int orderedCompare(const G3D::Vector3& a, const G3D::Vector3& b)
 {
 	if (a.x < b.x) {
@@ -237,6 +238,7 @@ void meshFace(
 }
 
 // FUNCTION: WEBSERVICE 0x10179710
+// FUNCTION: ROBLOX 0x00483cd0
 static void appendTriangles(RBX::Render::Mesh::Level& level, int a, int b, int c, int d)
 {
 	level.indexArray.append(
@@ -251,6 +253,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x10179d10
+// FUNCTION: ROBLOX 0x004841a0
 BrickMesh::BrickMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color)
 {
 	{
@@ -321,12 +324,14 @@ BrickMesh::BrickMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, 
 }
 
 // FUNCTION: WEBSERVICE 0x1017a900
+// FUNCTION: ROBLOX 0x00484c90
 void BrickMesh::flushCache()
 {
 	cache.clear();
 }
 
 // FUNCTION: WEBSERVICE 0x1017aaa0
+// FUNCTION: ROBLOX 0x00484e30
 G3D::ReferenceCountedPointer<Render::Mesh> BrickMesh::create(
 	const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color
 )

@@ -24,23 +24,27 @@
 #include "Types.h"
 
 // FUNCTION: WEBSERVICE 0x101c38c0
+// FUNCTION: ROBLOX 0x004e8f20
 DataBlockEncryptor::DataBlockEncryptor()
 {
 	keySet = false;
 }
 
 // FUNCTION: WEBSERVICE 0x1015b610 FOLDED
+// FUNCTION: ROBLOX 0x00751160 FOLDED
 DataBlockEncryptor::~DataBlockEncryptor()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101c38d0
+// FUNCTION: ROBLOX 0x004e8f30
 bool DataBlockEncryptor::IsKeySet( void ) const
 {
 	return keySet;
 }
 
 // FUNCTION: WEBSERVICE 0x101c38e0
+// FUNCTION: ROBLOX 0x004e8f40
 void DataBlockEncryptor::SetKey( const unsigned char key[ 16 ] )
 {
 	keySet = true;
@@ -51,12 +55,14 @@ void DataBlockEncryptor::SetKey( const unsigned char key[ 16 ] )
 }
 
 // FUNCTION: WEBSERVICE 0x101c3930
+// FUNCTION: ROBLOX 0x004e8f90
 void DataBlockEncryptor::UnsetKey( void )
 {
 	keySet = false;
 }
 
 // FUNCTION: WEBSERVICE 0x101c3940
+// FUNCTION: ROBLOX 0x004e8fa0
 void DataBlockEncryptor::Encrypt( unsigned char *input, int inputLength, unsigned char *output, int *outputLength )
 {
 	unsigned index, byteIndex, lastBlock;
@@ -141,6 +147,7 @@ void DataBlockEncryptor::Encrypt( unsigned char *input, int inputLength, unsigne
 }
 
 // FUNCTION: WEBSERVICE 0x101c3aa0
+// FUNCTION: ROBLOX 0x004e9100
 bool DataBlockEncryptor::Decrypt( unsigned char *input, int inputLength, unsigned char *output, int *outputLength )
 {
 	unsigned index, byteIndex, lastBlock;

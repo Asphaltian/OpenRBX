@@ -13,6 +13,7 @@ namespace Network {
 std::string API::version;
 
 // FUNCTION: WEBSERVICE 0x1018c370
+// FUNCTION: ROBLOX 0x004b8810
 void API::init(const char* version)
 {
 	API::version = version;

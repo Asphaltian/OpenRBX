@@ -49,6 +49,7 @@ DECOMP_SIZE_ASSERT(ArchiveBinder, 0x2c)
 DECOMP_SIZE_ASSERT(ArchiveBinder::IDREFBinding, 0x0c)
 
 // FUNCTION: WEBSERVICE 0x100963c0
+// FUNCTION: ROBLOX 0x005a2040
 XmlElement* SerializerV2::newRootElement()
 {
 	static const RBX::Name& tag_xmlnsxmime = RBX::Name::declare("xmlns:xmime", -1);
@@ -67,6 +68,7 @@ XmlElement* SerializerV2::newRootElement()
 }
 
 // FUNCTION: WEBSERVICE 0x10096560
+// FUNCTION: ROBLOX 0x005a22a0
 void XmlNameValuePair::replaceHandles(const std::map<RBX::Instance*, RBX::InstanceHandle>& isolationMap)
 {
 	if (valueType == HANDLE) {
@@ -80,6 +82,7 @@ void XmlNameValuePair::replaceHandles(const std::map<RBX::Instance*, RBX::Instan
 }
 
 // FUNCTION: WEBSERVICE 0x10096620
+// FUNCTION: ROBLOX 0x005a2360
 static void isolate(XmlElement* element, const std::map<RBX::Instance*, RBX::InstanceHandle>& isolationMap)
 {
 	element->replaceHandles(isolationMap);
@@ -95,6 +98,7 @@ static void isolate(XmlElement* element, const std::map<RBX::Instance*, RBX::Ins
 }
 
 // FUNCTION: WEBSERVICE 0x10096730
+// FUNCTION: ROBLOX 0x005a2420
 bool ArchiveBinder::resolveIDREF(IDREFBinding binding)
 {
 	std::string s;
@@ -116,6 +120,7 @@ bool ArchiveBinder::resolveIDREF(IDREFBinding binding)
 }
 
 // FUNCTION: WEBSERVICE 0x10096ff0
+// FUNCTION: ROBLOX 0x005a3270
 bool ArchiveBinder::resolveRefs()
 {
 	size_t resolvedCount = std::count_if(
@@ -126,6 +131,7 @@ bool ArchiveBinder::resolveRefs()
 }
 
 // FUNCTION: WEBSERVICE 0x10097740
+// FUNCTION: ROBLOX 0x005a32b0
 static void buildIsolationMap(XmlElement* element, std::map<RBX::Instance*, RBX::InstanceHandle>& isolationMap)
 {
 	const XmlAttribute* referent = element->findAttribute(name_referent);
@@ -144,6 +150,7 @@ static void buildIsolationMap(XmlElement* element, std::map<RBX::Instance*, RBX:
 }
 
 // FUNCTION: WEBSERVICE 0x10098450
+// FUNCTION: ROBLOX 0x005a3ee0
 bool ArchiveBinder::processID(const XmlNameValuePair* valueID, RBX::Instance* source)
 {
 	if (!MergeBinder::processID(valueID, source)) {
@@ -157,6 +164,7 @@ bool ArchiveBinder::processID(const XmlNameValuePair* valueID, RBX::Instance* so
 }
 
 // FUNCTION: WEBSERVICE 0x10098500
+// FUNCTION: ROBLOX 0x005a3f90
 bool ArchiveBinder::processIDREF(
 	const XmlNameValuePair* valueIDREF, RBX::Reflection::DescribedBase* propertyOwner, const RBX::IIDREF* idref
 )
@@ -171,6 +179,7 @@ bool ArchiveBinder::processIDREF(
 }
 
 // FUNCTION: WEBSERVICE 0x10098620
+// FUNCTION: ROBLOX 0x005a40b0
 void SerializerV2::loadInstances(XmlElement* root, std::vector<boost::shared_ptr<RBX::Instance> >& instances)
 {
 	if (root->getTag() == tag_roblox) {
@@ -207,6 +216,7 @@ void SerializerV2::loadInstances(XmlElement* root, std::vector<boost::shared_ptr
 }
 
 // FUNCTION: WEBSERVICE 0x10098830
+// FUNCTION: ROBLOX 0x005a42c0
 void SerializerV2::isolateHandles(XmlElement* root)
 {
 	std::map<RBX::Instance*, RBX::InstanceHandle> isolationMap;
@@ -217,6 +227,7 @@ void SerializerV2::isolateHandles(XmlElement* root)
 }
 
 // FUNCTION: WEBSERVICE 0x100988e0
+// FUNCTION: ROBLOX 0x005a4370
 void SerializerV2::load(XmlElement* root, RBX::DataModel* dataModel)
 {
 	ArchiveBinder binder;
@@ -227,6 +238,7 @@ void SerializerV2::load(XmlElement* root, RBX::DataModel* dataModel)
 }
 
 // FUNCTION: WEBSERVICE 0x10098970
+// FUNCTION: ROBLOX 0x005a4400
 void SerializerV2::loadXML(std::istream& stream, RBX::DataModel* dataModel)
 {
 	TextXmlParser machine(stream.rdbuf());
@@ -254,6 +266,7 @@ void SerializerV2::loadXML(std::istream& stream, RBX::DataModel* dataModel)
 }
 
 // STUB: WEBSERVICE 0x10098b30
+// STUB: ROBLOX 0x005a45c0
 void SerializerV2::load(std::istream& stream, RBX::DataModel* dataModel)
 {
 	char header[5];

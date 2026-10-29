@@ -11,6 +11,7 @@ const Name& ScriptMouseCommand::getName() const
 }
 
 // FUNCTION: WEBSERVICE 0x10116ff0
+// FUNCTION: ROBLOX 0x006405c0
 ScriptMouseCommand::~ScriptMouseCommand()
 {
 	mouse->setCommand(NULL);
@@ -19,18 +20,21 @@ ScriptMouseCommand::~ScriptMouseCommand()
 }
 
 // FUNCTION: WEBSERVICE 0x101170a0
+// FUNCTION: ROBLOX 0x00640670
 TextureId ScriptMouseCommand::getCursorId() const
 {
 	return mouse->getIcon();
 }
 
 // FUNCTION: WEBSERVICE 0x101170c0 FOLDED
+// FUNCTION: ROBLOX 0x00640690 FOLDED
 void ScriptMouseCommand::onMouseHover(const UIEvent& uiEvent)
 {
 	mouse->update(uiEvent);
 }
 
 // FUNCTION: WEBSERVICE 0x101170c0 FOLDED
+// FUNCTION: ROBLOX 0x00640690 FOLDED
 void ScriptMouseCommand::onMouseIdle(const UIEvent& uiEvent)
 {
 	mouse->update(uiEvent);
@@ -58,6 +62,7 @@ MouseCommand* ScriptMouseCommand::onPeekKeyDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10117110
+// FUNCTION: ROBLOX 0x00640700
 ScriptMouseCommand::ScriptMouseCommand(Workspace* workspace) : MouseCommand(workspace)
 {
 	mouse = Creatable<Instance>::create<Mouse>();

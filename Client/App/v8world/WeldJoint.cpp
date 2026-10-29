@@ -17,6 +17,7 @@ bool WeldJoint::compatibleSurfaces(Primitive* prim0, Primitive* prim1, NormalId 
 }
 
 // FUNCTION: WEBSERVICE 0x10127730
+// FUNCTION: ROBLOX 0x00664bd0
 WeldJoint* WeldJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1)
 {
 	if (compatibleSurfaces(p0, p1, nId0, nId1) && canBuildJointTight(p0, p1, nId0, nId1)) {

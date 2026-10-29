@@ -18,6 +18,7 @@
 #include <assert.h>
 
 // FUNCTION: WEBSERVICE 0x101c1540
+// FUNCTION: ROBLOX 0x006e15a0
 SimpleMutex::SimpleMutex()
 {
 #ifdef _WIN32
@@ -31,6 +32,7 @@ SimpleMutex::SimpleMutex()
 }
 
 // FUNCTION: WEBSERVICE 0x101c1550
+// FUNCTION: ROBLOX 0x00436af0
 SimpleMutex::~SimpleMutex()
 {
 #ifdef _WIN32
@@ -48,6 +50,7 @@ SimpleMutex::~SimpleMutex()
 #endif
 
 // FUNCTION: WEBSERVICE 0x101c1560
+// FUNCTION: ROBLOX 0x004e7530
 void SimpleMutex::Lock(void)
 {
 #ifdef _WIN32
@@ -89,6 +92,7 @@ void SimpleMutex::Lock(void)
 }
 
 // FUNCTION: WEBSERVICE 0x101c1570
+// FUNCTION: ROBLOX 0x004e7540
 void SimpleMutex::Unlock(void)
 {
 #ifdef _WIN32

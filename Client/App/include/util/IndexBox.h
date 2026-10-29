@@ -9,6 +9,7 @@ namespace RBX {
 using G3D::Vector3;
 
 // VTABLE: WEBSERVICE 0x1022cf1c
+// VTABLE: ROBLOX 0x0083cf14
 class IndexBox
 {
 public:

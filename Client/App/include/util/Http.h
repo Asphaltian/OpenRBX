@@ -15,6 +15,7 @@ public:
 	const std::string url; // 0x00
 
 	// FUNCTION: WEBSERVICE 0x10001070
+	// FUNCTION: ROBLOX 0x0041ddc0
 	Http(const std::string& url) : url(url) {}
 	Http(const char* url) : url(url) {}
 
@@ -29,6 +30,7 @@ public:
 	static bool isCached(const char* url);
 
 	// SYNTHETIC: WEBSERVICE 0x1000d910
+	// SYNTHETIC: ROBLOX 0x004edf30 FOLDED
 	// ??1Http@RBX@@QAE@XZ
 };
 
@@ -40,6 +42,7 @@ DECOMP_SIZE_ASSERT(Http, 0x38)
 // SYNTHETIC: WEBSERVICE 0x10221420
 // RBX::`dynamic atexit destructor for 'trustCheckMutex''
 // SYNTHETIC: WEBSERVICE 0x10221430
+// SYNTHETIC: ROBLOX 0x007f2340
 // `RBX::Http::trustCheck'::`3'::`dynamic atexit destructor for 'skipTrustCheck''
 // clang-format on
 

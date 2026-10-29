@@ -106,6 +106,7 @@ class BodyPosition : public DescribedCreatable<BodyPosition, BodyMover, sBodyPos
 public:
 	BodyPosition();
 	// FUNCTION: WEBSERVICE 0x100e9f50
+	// FUNCTION: ROBLOX 0x00629060
 	G3D::Vector3 getLastForce() { return lastForce; }
 
 	static Reflection::BoundProp<float, 1> prop_kP;
@@ -151,6 +152,7 @@ class BodyVelocity : public DescribedCreatable<BodyVelocity, BodyMover, sBodyVel
 public:
 	BodyVelocity();
 	// FUNCTION: WEBSERVICE 0x100e9f80
+	// FUNCTION: ROBLOX 0x00629090
 	G3D::Vector3 getLastForce() { return lastForce; }
 
 	static Reflection::BoundProp<float, 1> prop_kP;
@@ -206,6 +208,7 @@ private:
 	void setTarget(PartInstance* value);
 
 	// FUNCTION: WEBSERVICE 0x100e9fb0
+	// FUNCTION: ROBLOX 0x006290c0
 	void onGoalChanged(const Reflection::PropertyDescriptor&) { firedEvent = false; }
 
 	bool active;                            // 0x10c
@@ -231,6 +234,7 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x1021cf60
 // `dynamic initializer for 'RBX::Rocket::prop_targetOffset''
 // SYNTHETIC: WEBSERVICE 0x1021cf90
+// SYNTHETIC: ROBLOX 0x007ed320
 // `dynamic initializer for 'RBX::Rocket::prop_targetRadius''
 // SYNTHETIC: WEBSERVICE 0x1021cfc0
 // `dynamic initializer for 'RBX::Rocket::prop_MaxSpeed''
@@ -261,6 +265,7 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x1021d230
 // `dynamic initializer for 'RBX::BodyGyro::prop_maxTorque''
 // SYNTHETIC: WEBSERVICE 0x1021d260
+// SYNTHETIC: ROBLOX 0x007ed1a0 FOLDED
 // `dynamic initializer for 'RBX::BodyGyro::prop_cframe''
 // SYNTHETIC: WEBSERVICE 0x1021d290
 // `dynamic initializer for 'RBX::BodyPosition::prop_kP''
@@ -269,10 +274,12 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x1021d2f0
 // `dynamic initializer for 'RBX::BodyPosition::prop_maxForce''
 // SYNTHETIC: WEBSERVICE 0x1021d320
+// SYNTHETIC: ROBLOX 0x007ed1a0 FOLDED
 // `dynamic initializer for 'RBX::BodyPosition::prop_position''
 // SYNTHETIC: WEBSERVICE 0x1021d350
 // `dynamic initializer for 'func_getLastForceOld''
 // SYNTHETIC: WEBSERVICE 0x1021d380
+// SYNTHETIC: ROBLOX 0x007e8790
 // `dynamic initializer for 'func_getLastForce''
 // SYNTHETIC: WEBSERVICE 0x1021d3b0
 // `dynamic initializer for 'RBX::BodyVelocity::prop_kP''
@@ -287,6 +294,7 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x1021d4a0
 // `dynamic initializer for 'RBX::BodyForce::prop_Force''
 // SYNTHETIC: WEBSERVICE 0x1021d4d0
+// SYNTHETIC: ROBLOX 0x007ed560
 // `dynamic initializer for 'RBX::BodyThrust::prop_force''
 // SYNTHETIC: WEBSERVICE 0x1021d500
 // `dynamic initializer for 'RBX::BodyThrust::prop_location''
@@ -331,16 +339,20 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x102245e0
 // `dynamic atexit destructor for 'RBX::BodyThrust::prop_location''
 // SYNTHETIC: WEBSERVICE 0x10224600
+// SYNTHETIC: ROBLOX 0x007f4a50
 // `dynamic atexit destructor for 'RBX::BodyThrust::prop_force''
 // SYNTHETIC: WEBSERVICE 0x10224620
 // `dynamic atexit destructor for 'RBX::Rocket::prop_MaxSpeed''
 // SYNTHETIC: WEBSERVICE 0x10224640
+// SYNTHETIC: ROBLOX 0x007f4bf0
 // `dynamic atexit destructor for 'RBX::Rocket::prop_targetRadius''
 // SYNTHETIC: WEBSERVICE 0x10224660
 // `dynamic atexit destructor for 'RBX::Rocket::prop_targetOffset''
 // SYNTHETIC: WEBSERVICE 0x10224680
+// SYNTHETIC: ROBLOX 0x007f48b0
 // `dynamic atexit destructor for 'RBX::BodyGyro::prop_cframe''
 // SYNTHETIC: WEBSERVICE 0x10224700
+// SYNTHETIC: ROBLOX 0x007f1ef0
 // `dynamic atexit destructor for 'func_getLastForce''
 // SYNTHETIC: WEBSERVICE 0x10224710
 // `dynamic atexit destructor for 'func_getLastForceV''
@@ -358,6 +370,7 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x100ee090
+// SYNTHETIC: ROBLOX 0x0062d0d0
 // RBX::Rocket::~Rocket
 // SYNTHETIC: WEBSERVICE 0x100ee110
 // RBX::Rocket::`scalar deleting destructor'

@@ -43,6 +43,7 @@ DECOMP_SIZE_ASSERT(Sky, 0x1c0)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x100956c0
+// SYNTHETIC: ROBLOX 0x005ddf20
 // RBX::Sky::~Sky
 // FUNCTION: WEBSERVICE 0x10095770
 // RBX::Sky::`scalar deleting destructor'

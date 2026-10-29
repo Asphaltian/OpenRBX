@@ -82,6 +82,7 @@ private:
 DECOMP_SIZE_ASSERT(SimBody, 0x98)
 
 // FUNCTION: WEBSERVICE 0x101049a0
+// FUNCTION: ROBLOX 0x0061e8e0
 inline void SimBody::resetAccumulators()
 {
 	updateIfDirty();
@@ -89,6 +90,7 @@ inline void SimBody::resetAccumulators()
 }
 
 // FUNCTION: WEBSERVICE 0x100e1a80
+// FUNCTION: ROBLOX 0x00624cc0
 inline void SimBody::accumulateForce(const Vector3& _force, const Vector3& worldPos)
 {
 	updateIfDirty();

@@ -21,6 +21,7 @@ static Reflection::BoundFuncDesc<DebrisService, void(boost::shared_ptr<Instance>
 );
 
 // FUNCTION: WEBSERVICE 0x100fa130
+// FUNCTION: ROBLOX 0x006370d0
 static void cleanup(boost::weak_ptr<Instance> item)
 {
 	try {
@@ -35,6 +36,7 @@ static void cleanup(boost::weak_ptr<Instance> item)
 }
 
 // FUNCTION: WEBSERVICE 0x100fa780
+// FUNCTION: ROBLOX 0x006376c0
 void DebrisService::cleanup()
 {
 	while ((int) queue.size() > maxItems) {
@@ -44,12 +46,14 @@ void DebrisService::cleanup()
 }
 
 // FUNCTION: WEBSERVICE 0x100fae30
+// FUNCTION: ROBLOX 0x00637d60
 DebrisService::DebrisService()
 	: DescribedCreatable<DebrisService, Instance, sDebrisService>(sDebrisService), maxItems(300), timer(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100fb270
+// FUNCTION: ROBLOX 0x006381a0
 void DebrisService::addItem(boost::shared_ptr<Instance> item, double lifetime)
 {
 	if (timer) {
@@ -61,6 +65,7 @@ void DebrisService::addItem(boost::shared_ptr<Instance> item, double lifetime)
 }
 
 // FUNCTION: WEBSERVICE 0x100fb3a0
+// FUNCTION: ROBLOX 0x006382d0
 void DebrisService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	while ((int) queue.size() > 0) {
@@ -74,6 +79,7 @@ void DebrisService::onServiceProvider(const ServiceProvider* oldProvider, const 
 }
 
 // FUNCTION: WEBSERVICE 0x100fb4f0
+// FUNCTION: ROBLOX 0x00638420
 void DebrisService::setMaxItems(int value)
 {
 	if (value != maxItems) {

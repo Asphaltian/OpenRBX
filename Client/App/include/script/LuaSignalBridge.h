@@ -38,6 +38,7 @@ void Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_newindex(
 );
 
 // FUNCTION: WEBSERVICE 0x1005f7f0
+// FUNCTION: ROBLOX 0x0056ca00
 template <>
 inline int Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>, 0>::on_tostring(
 	const boost::shared_ptr<RBX::Reflection::SignalInstance>& value, lua_State* L

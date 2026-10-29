@@ -66,16 +66,22 @@ T& Bridge<T, Tag>::pushNewObject(lua_State* L)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10061220
+// TEMPLATE: ROBLOX 0x0056e330
 // RBX::Lua::Bridge<boost::signals::connection,1>::registerClass
 // TEMPLATE: WEBSERVICE 0x10061410
+// TEMPLATE: ROBLOX 0x0056e520
 // RBX::Lua::Bridge<G3D::Color3,1>::registerClass
 // TEMPLATE: WEBSERVICE 0x100614e0
+// TEMPLATE: ROBLOX 0x0056e5f0
 // RBX::Lua::Bridge<RBX::BrickColor,1>::registerClass
 // TEMPLATE: WEBSERVICE 0x10062680
+// TEMPLATE: ROBLOX 0x0056f5b0
 // RBX::Lua::Bridge<boost::shared_ptr<RBX::Lua::ThreadRef::Node>,1>::registerClass
 // TEMPLATE: WEBSERVICE 0x10062750
+// TEMPLATE: ROBLOX 0x0056f740
 // RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>,0>::registerClass
 // TEMPLATE: WEBSERVICE 0x10064ad0
+// TEMPLATE: ROBLOX 0x00571df0
 // RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::DescribedBase>,0>::registerClass
 // clang-format on
 template <class T, int Tag>
@@ -110,12 +116,16 @@ void Bridge<T, Tag>::registerClass(lua_State* L)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1005f1b0
+// TEMPLATE: ROBLOX 0x0056c5d0
 // ??$pushNewObject@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SAPAVVector3@G3D@@PAUlua_State@@V23@@Z
 // TEMPLATE: WEBSERVICE 0x1005f250
+// TEMPLATE: ROBLOX 0x0056c670
 // ??$pushNewObject@VBrickColor@RBX@@@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@SAPAVBrickColor@2@PAUlua_State@@V32@@Z
 // TEMPLATE: WEBSERVICE 0x10060550
+// TEMPLATE: ROBLOX 0x0056d830
 // ??$pushNewObject@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@SAPAV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@V34@@Z
 // TEMPLATE: WEBSERVICE 0x100afbe0
+// TEMPLATE: ROBLOX 0x006005d0
 // ??$pushNewObject@Vconnection@signals@boost@@@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@SAPAVconnection@signals@boost@@PAUlua_State@@V345@@Z
 // clang-format on
 template <class T, int Tag>
@@ -134,18 +144,25 @@ U* Bridge<T, Tag>::pushNewObject(lua_State* L, U param1)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100630c0
+// TEMPLATE: ROBLOX 0x00570520
 // ??$getValue@VValue@Reflection@RBX@@@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
 // TEMPLATE: WEBSERVICE 0x10063140
+// TEMPLATE: ROBLOX 0x005705a0
 // ??$getValue@VValue@Reflection@RBX@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
 // TEMPLATE: WEBSERVICE 0x100631c0
+// TEMPLATE: ROBLOX 0x00570620
 // ??$getValue@VValue@Reflection@RBX@@@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
 // TEMPLATE: WEBSERVICE 0x10063240
+// TEMPLATE: ROBLOX 0x005706a0
 // ??$getValue@VValue@Reflection@RBX@@@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
 // TEMPLATE: WEBSERVICE 0x10063550
+// TEMPLATE: ROBLOX 0x005709b0
 // ??$getValue@VValue@Reflection@RBX@@@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
 // TEMPLATE: WEBSERVICE 0x100ab220
+// TEMPLATE: ROBLOX 0x005fc6d0
 // ??$getValue@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@?$Bridge@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@SA_NPAUlua_State@@IAAV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Z
 // TEMPLATE: WEBSERVICE 0x100adbf0
+// TEMPLATE: ROBLOX 0x005fe5e0
 // ??$getValue@VVector3@G3D@@@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KA_NPAUlua_State@@IAAVVector3@G3D@@@Z
 // clang-format on
 template <class T, int Tag>
@@ -175,14 +192,19 @@ bool Bridge<T, Tag>::getValue(lua_State* L, unsigned int index, U& value)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1005fd30
+// TEMPLATE: ROBLOX 0x0056cf00
 // ?on_gc@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x1005fe50
+// TEMPLATE: ROBLOX 0x0056d020
 // ?on_gc@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x1005ff60
+// TEMPLATE: ROBLOX 0x0056d220
 // ?on_gc@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x100600f0
+// TEMPLATE: ROBLOX 0x0056d3b0
 // ?on_gc@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x10060200
+// TEMPLATE: ROBLOX 0x0056d4c0
 // ?on_gc@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // clang-format on
 template <class T, int Tag>
@@ -195,6 +217,7 @@ int Bridge<T, Tag>::on_gc(lua_State* L)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1005edb0
+// TEMPLATE: ROBLOX 0x0056c020
 // ?on_tostring@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHABVVector3@G3D@@PAUlua_State@@@Z
 // clang-format on
 template <class T, int Tag>
@@ -209,6 +232,7 @@ int Bridge<T, Tag>::on_tostring(const T& value, lua_State* L)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1005fe70
+// TEMPLATE: ROBLOX 0x0056d040
 // ?on_tostring@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // clang-format on
 template <class T, int Tag>
@@ -219,8 +243,10 @@ int Bridge<T, Tag>::on_tostring(lua_State* L)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x1005ffb0
+// FUNCTION: ROBLOX 0x0056d270
 // ?on_newindex@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // FUNCTION: WEBSERVICE 0x10060360
+// FUNCTION: ROBLOX 0x0056d5c0
 // ?on_newindex@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHPAUlua_State@@@Z
 // clang-format on
 template <class T, int Tag>
@@ -236,14 +262,19 @@ int Bridge<T, Tag>::on_newindex(lua_State* L)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1005fdd0
+// TEMPLATE: ROBLOX 0x0056cfa0
 // ?on_eq@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x1005fef0
+// TEMPLATE: ROBLOX 0x0056d0c0
 // ?on_eq@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x10060010
+// TEMPLATE: ROBLOX 0x0056d2d0
 // ?on_eq@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x10060190
+// TEMPLATE: ROBLOX 0x0056d450
 // ?on_eq@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x100602a0
+// TEMPLATE: ROBLOX 0x0056d560
 // ?on_eq@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // clang-format on
 template <class T, int Tag>
@@ -256,16 +287,22 @@ int Bridge<T, Tag>::on_eq(lua_State* L)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1005fda0
+// TEMPLATE: ROBLOX 0x0056cf70
 // ?on_index@?$Bridge@VCoordinateFrame@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x1005fec0
+// TEMPLATE: ROBLOX 0x0056d090
 // ?on_index@?$Bridge@VVector3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x1005ffe0
+// TEMPLATE: ROBLOX 0x0056d2a0
 // ?on_index@?$Bridge@Vconnection@signals@boost@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x10060160
+// TEMPLATE: ROBLOX 0x0056d420
 // ?on_index@?$Bridge@VColor3@G3D@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x10060270
+// TEMPLATE: ROBLOX 0x0056d530
 // ?on_index@?$Bridge@VBrickColor@RBX@@$00@Lua@RBX@@KAHPAUlua_State@@@Z
 // TEMPLATE: WEBSERVICE 0x10060390
+// TEMPLATE: ROBLOX 0x0056d5f0
 // ?on_index@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHPAUlua_State@@@Z
 // clang-format on
 template <class T, int Tag>
@@ -294,8 +331,10 @@ public:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10063970
+// TEMPLATE: ROBLOX 0x00570e20
 // ??$getPtr@VValue@Reflection@RBX@@@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA_NPAUlua_State@@IAAVValue@Reflection@2@@Z
 // TEMPLATE: WEBSERVICE 0x100ab580
+// TEMPLATE: ROBLOX 0x005fc890
 // ??$getPtr@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA_NPAUlua_State@@IAAV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Z
 // clang-format on
 template <class T>
@@ -312,8 +351,10 @@ bool SharedPtrBridge<T>::getPtr(lua_State* L, unsigned int index, U& value)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100612f0
+// TEMPLATE: ROBLOX 0x0056e400
 // ?push@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SAXPAUlua_State@@V?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@@Z
 // TEMPLATE: WEBSERVICE 0x10061640
+// TEMPLATE: ROBLOX 0x0056e750
 // ?push@?$SharedPtrBridge@VSignalInstance@Reflection@RBX@@@Lua@RBX@@SAXPAUlua_State@@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@@Z
 // clang-format on
 template <class T>
@@ -347,22 +388,31 @@ void SharedPtrBridge<T>::push(lua_State* L, boost::shared_ptr<T> instance)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100ab1b0
+// TEMPLATE: ROBLOX 0x005fc660
 // ?getPtr@?$SharedPtrBridge@VDescribedBase@Reflection@RBX@@@Lua@RBX@@SA?AV?$shared_ptr@VDescribedBase@Reflection@RBX@@@boost@@PAUlua_State@@I@Z
 // TEMPLATE: WEBSERVICE 0x1005f010
+// TEMPLATE: ROBLOX 0x0056c2e0
 // RBX::Lua::Bridge<RBX::BrickColor,1>::getObject
 // TEMPLATE: WEBSERVICE 0x1005ecf0
+// TEMPLATE: ROBLOX 0x0056bf60
 // RBX::Lua::Bridge<G3D::CoordinateFrame,1>::getObject
 // TEMPLATE: WEBSERVICE 0x1005ed90
+// TEMPLATE: ROBLOX 0x0056c000
 // RBX::Lua::Bridge<G3D::Vector3,1>::getObject
 // TEMPLATE: WEBSERVICE 0x1005ef70
+// TEMPLATE: ROBLOX 0x0056c240
 // RBX::Lua::Bridge<G3D::Color3,1>::getObject
 // TEMPLATE: WEBSERVICE 0x1005f110
+// TEMPLATE: ROBLOX 0x0056c530
 // RBX::Lua::Bridge<G3D::CoordinateFrame,1>::pushNewObject<G3D::CoordinateFrame>
 // TEMPLATE: WEBSERVICE 0x1005f200
+// TEMPLATE: ROBLOX 0x0056c620
 // RBX::Lua::Bridge<G3D::Color3,1>::pushNewObject<G3D::Color3>
 // TEMPLATE: WEBSERVICE 0x10060610
+// TEMPLATE: ROBLOX 0x0056da70
 // RBX::Lua::Bridge<boost::shared_ptr<RBX::Reflection::SignalInstance>,0>::pushNewObject<boost::shared_ptr<RBX::Reflection::SignalInstance> >
 // TEMPLATE: WEBSERVICE 0x100afa60
+// TEMPLATE: ROBLOX 0x00600450
 // RBX::Lua::Bridge<G3D::CoordinateFrame,1>::getValue<G3D::CoordinateFrame>
 // clang-format on
 template <class T>

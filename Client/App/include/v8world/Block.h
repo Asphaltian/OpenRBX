@@ -14,6 +14,7 @@ using G3D::Vector2;
 using G3D::Vector3int16;
 
 // VTABLE: WEBSERVICE 0x10237654
+// VTABLE: ROBLOX 0x00831f94
 // SIZE 0x18
 class Block : public Geometry
 {
@@ -106,6 +107,7 @@ inline const Vector3* Block::getFaceVertex(NormalId faceId, int vertexId) const
 }
 
 // FUNCTION: WEBSERVICE 0x100d1f50
+// FUNCTION: ROBLOX 0x00609f80
 inline const Vector3* Block::getEdgeVertex(int edgeId) const
 {
 	if (edgeId < 12) {
@@ -135,8 +137,10 @@ inline int Block::faceVertexToEdge(NormalId faceId, int vertexId)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021e3e0
+// SYNTHETIC: ROBLOX 0x007edeb0
 // `dynamic initializer for 'RBX::BlockTemplate::blockTemplates''
 // SYNTHETIC: WEBSERVICE 0x10225140
+// SYNTHETIC: ROBLOX 0x007f5440
 // `dynamic atexit destructor for 'RBX::BlockTemplate::blockTemplates''
 // clang-format on
 

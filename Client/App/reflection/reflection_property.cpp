@@ -22,6 +22,7 @@ const Type& Type::singleton<const PropertyDescriptor*>()
 }
 
 // FUNCTION: WEBSERVICE 0x100941a0
+// FUNCTION: ROBLOX 0x005c0760
 XmlElement* PropertyDescriptor::write(const DescribedBase* instance, bool ignoreWriteProtection) const
 {
 	if (!ignoreWriteProtection) {
@@ -44,6 +45,7 @@ XmlElement* PropertyDescriptor::write(const DescribedBase* instance, bool ignore
 }
 
 // FUNCTION: WEBSERVICE 0x10094250
+// FUNCTION: ROBLOX 0x005c0810
 std::vector<const EnumDescriptor*>& EnumDescriptor::allEnums()
 {
 	static std::vector<const EnumDescriptor*> s;
@@ -52,12 +54,14 @@ std::vector<const EnumDescriptor*>& EnumDescriptor::allEnums()
 }
 
 // FUNCTION: WEBSERVICE 0x100942b0
+// FUNCTION: ROBLOX 0x005c08d0
 EnumDescriptor::~EnumDescriptor()
 {
 	allEnums().erase(std::find(allEnums().begin(), allEnums().end(), this));
 }
 
 // FUNCTION: WEBSERVICE 0x10094390
+// FUNCTION: ROBLOX 0x005c09b0
 EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
 	: Type(typeName, type, "token"), enumCount(0), enumCountMSB(0)
 {
@@ -65,6 +69,7 @@ EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
 }
 
 // FUNCTION: WEBSERVICE 0x10094410
+// FUNCTION: ROBLOX 0x005c0a30
 PropertyDescriptor::PropertyDescriptor(
 	ClassDescriptor& classDescriptor, const Type& type, const char* name, const char* category, Functionality flags
 )

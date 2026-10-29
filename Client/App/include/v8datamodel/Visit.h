@@ -28,12 +28,15 @@ public:
 	static worker_thread::work_result ping(std::string url, int interval);
 
 	// FUNCTION: WEBSERVICE 0x100f8b10
+	// FUNCTION: ROBLOX 0x005ce7f0
 	void setUploadUrl(std::string value) { uploadUrl = value; }
 
 	// FUNCTION: WEBSERVICE 0x100f8b60
+	// FUNCTION: ROBLOX 0x00453e60
 	std::string getUploadUrl() { return uploadUrl; }
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual XmlElement* write() { return NULL; }
 
 	// SYNTHETIC: WEBSERVICE 0x100f9060

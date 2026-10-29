@@ -7,6 +7,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101ed030
+// FUNCTION: ROBLOX 0x00670b90
 void DrawAdorn::cylinder(
 	Adorn* adorn, const G3D::CoordinateFrame& worldC, int axis, float length, float radius, const G3D::Color3& color
 )
@@ -20,6 +21,7 @@ void DrawAdorn::cylinder(
 }
 
 // FUNCTION: WEBSERVICE 0x101ed0e0
+// FUNCTION: ROBLOX 0x00670c40
 void DrawAdorn::surfaceBorder(
 	Adorn* adorn, const G3D::Vector3& halfRealSize, float highlight, int surfaceId, const G3D::Color4& color
 )
@@ -55,6 +57,7 @@ void DrawAdorn::surfaceBorder(
 }
 
 // FUNCTION: WEBSERVICE 0x101ed270
+// FUNCTION: ROBLOX 0x00670dd0
 void DrawAdorn::partSurface(const Part& part, int surfaceId, Adorn* adorn, const G3D::Color4& color)
 {
 	adorn->setObjectToWorldMatrix(part.coordinateFrame);

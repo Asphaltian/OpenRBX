@@ -32,19 +32,24 @@ public:
 
 	bool arrowKeyDown() const { return forward_arrow || backward_arrow || left_arrow || right_arrow; }
 	// FUNCTION: WEBSERVICE 0x1006a020
+	// FUNCTION: ROBLOX 0x005b4680
 	bool asdwKeyDown() const { return forward_asdw || backward_asdw || left_asdw || right_asdw; }
 	// FUNCTION: WEBSERVICE 0x1006a050
+	// FUNCTION: ROBLOX 0x005b46b0
 	bool navKeyDown() const { return arrowKeyDown() || asdwKeyDown() || space; }
 
 	// FUNCTION: WEBSERVICE 0x100c5400
+	// FUNCTION: ROBLOX 0x005d4520
 	float leftRightASDW() const { return left_asdw ? 1.0f : (right_asdw ? -1.0f : 0.0f); }
 
 	// FUNCTION: WEBSERVICE 0x100c5420
+	// FUNCTION: ROBLOX 0x005d4540
 	float leftRightArrow() const { return left_arrow ? 1.0f : (right_arrow ? -1.0f : 0.0f); }
 
 	float forwardBackwardArrow() const { return forward_arrow ? 1.0f : (backward_arrow ? -1.0f : 0.0f); }
 
 	// FUNCTION: WEBSERVICE 0x100c5440
+	// FUNCTION: ROBLOX 0x005d4560
 	float forwardBackwardASDW() const { return forward_asdw ? 1.0f : (backward_asdw ? -1.0f : 0.0f); }
 };
 

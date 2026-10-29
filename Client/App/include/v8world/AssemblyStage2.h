@@ -13,6 +13,7 @@ class Joint;
 class SleepStage;
 
 // VTABLE: WEBSERVICE 0x102485b4
+// VTABLE: ROBLOX 0x0083cd64
 // SIZE 0x28
 class AssemblyStage : public IWorldStage
 {

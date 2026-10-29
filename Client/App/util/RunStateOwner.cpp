@@ -30,6 +30,7 @@ static Reflection::BoundFuncDesc<RunService, void(), 0> resetFunction(
 );
 
 // FUNCTION: WEBSERVICE 0x10054320
+// FUNCTION: ROBLOX 0x00568ae0
 void RunService::endRunThread(bool join)
 {
 	stopRequested = true;
@@ -49,6 +50,7 @@ void RunService::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10054cb0
+// FUNCTION: ROBLOX 0x005694e0
 void RunService::runProc(boost::shared_ptr<DataModel> dataModel)
 {
 	double desiredTime = getRealTime();
@@ -111,6 +113,7 @@ void RunService::runProc(boost::shared_ptr<DataModel> dataModel)
 }
 
 // FUNCTION: WEBSERVICE 0x10054fd0
+// FUNCTION: ROBLOX 0x00569800
 void RunService::invalidateRunViews()
 {
 	boost::mutex::scoped_lock lock(viewMutex);
@@ -132,11 +135,13 @@ void RunService::invalidateRunViews()
 }
 
 // FUNCTION: WEBSERVICE 0x10055380
+// FUNCTION: ROBLOX 0x00569c40
 RunService::~RunService()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10056950
+// FUNCTION: ROBLOX 0x0056add0
 RunService::RunService()
 	: runState(RS_NORMAL), stopRequested(false), framePeriod(1.0f / 30.0f), runThread(NULL), invalidRunViewCount(0),
 	  runDisabled(false)
@@ -145,6 +150,7 @@ RunService::RunService()
 }
 
 // FUNCTION: WEBSERVICE 0x100573e0
+// FUNCTION: ROBLOX 0x0056b4e0
 void RunService::start()
 {
 	boost::shared_ptr<DataModel> dataModel = shared_from(dynamic_cast<DataModel*>(getParent()));
@@ -155,6 +161,7 @@ void RunService::start()
 }
 
 // FUNCTION: WEBSERVICE 0x100577f0
+// FUNCTION: ROBLOX 0x0056b7d0
 void RunService::raiseHeartbeat(float time, float step)
 {
 	Notifier<RunService, Heartbeat>::raise(Heartbeat(time, step));
@@ -162,6 +169,7 @@ void RunService::raiseHeartbeat(float time, float step)
 }
 
 // FUNCTION: WEBSERVICE 0x10057860
+// FUNCTION: ROBLOX 0x0056b840
 void RunService::raiseStepped(float time, float step)
 {
 	Notifier<RunService, Stepped>::raise(Stepped(time, step));

@@ -19,6 +19,7 @@ class Point;
 using G3D::Vector3;
 
 // VTABLE: WEBSERVICE 0x1023c81c
+// VTABLE: ROBLOX 0x008336f4
 // SIZE 0x30
 class Kernel : public IStage
 {
@@ -67,6 +68,7 @@ public:
 	float totalEnergy() const;
 
 	// FUNCTION: WEBSERVICE 0x100714e0
+	// FUNCTION: ROBLOX 0x0058e9b0
 	float totalKineticEnergy() const { return connectorSpringEnergy() + bodyKineticEnergy(); }
 
 	int numBodies() const;

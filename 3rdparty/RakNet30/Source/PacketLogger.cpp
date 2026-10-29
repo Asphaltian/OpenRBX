@@ -31,6 +31,7 @@
 #endif
 
 // FUNCTION: WEBSERVICE 0x101ae550
+// FUNCTION: ROBLOX 0x004d3b80
 PacketLogger::PacketLogger()
 {
 	rakPeer=0;
@@ -40,10 +41,12 @@ PacketLogger::PacketLogger()
 	suffix[0]=0;
 }
 // FUNCTION: WEBSERVICE 0x101ae580
+// FUNCTION: ROBLOX 0x004d3bb0
 PacketLogger::~PacketLogger()
 {
 }
 // FUNCTION: WEBSERVICE 0x101ae590 FOLDED
+// FUNCTION: ROBLOX 0x00647120 FOLDED
 void PacketLogger::OnAttach(RakPeerInterface *peer)
 {
 	rakPeer=peer;
@@ -52,6 +55,7 @@ void PacketLogger::OnAttach(RakPeerInterface *peer)
 #pragma warning( disable : 4100 ) // warning C4100 : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+// FUNCTION: ROBLOX 0x0045e450 FOLDED
 void PacketLogger::Update(RakPeerInterface *peer)
 {
 
@@ -101,6 +105,7 @@ void PacketLogger::OnDirectSocketReceive(const char *data, const unsigned bitsUs
 	AddToLog(str);
 }
 // FUNCTION: WEBSERVICE 0x101aec00
+// FUNCTION: ROBLOX 0x004d4220
 void PacketLogger::OnInternalPacket(InternalPacket *internalPacket, unsigned frameNumber, SystemAddress remoteSystemAddress, RakNetTime time, bool isSend)
 {
 	char str[256];
@@ -202,6 +207,7 @@ void PacketLogger::SetPrintAcks(bool print)
 	printAcks=print;
 }
 // FUNCTION: WEBSERVICE 0x101ae600
+// FUNCTION: ROBLOX 0x004d3c20
 char* PacketLogger::BaseIDTOString(unsigned char Id)
 {
 	if (Id >= ID_USER_PACKET_ENUM)
@@ -299,6 +305,7 @@ char* PacketLogger::UserIDTOString(unsigned char Id)
 	return "Unknown";
 }
 // FUNCTION: WEBSERVICE 0x101ae910
+// FUNCTION: ROBLOX 0x004d3f30
 char* PacketLogger::IDTOString(unsigned char Id)
 {
 	char *out;
@@ -308,12 +315,14 @@ char* PacketLogger::IDTOString(unsigned char Id)
 	return UserIDTOString(Id);
 }
 // FUNCTION: WEBSERVICE 0x101ae930
+// FUNCTION: ROBLOX 0x004d3f50
 void PacketLogger::SetPrefix(const char *_prefix)
 {
 	strncpy(prefix, _prefix, 255);
 	prefix[255]=0;
 }
 // FUNCTION: WEBSERVICE 0x101ae960
+// FUNCTION: ROBLOX 0x004d3f80
 void PacketLogger::SetSuffix(const char *_suffix)
 {
 	strncpy(suffix, _suffix, 255);

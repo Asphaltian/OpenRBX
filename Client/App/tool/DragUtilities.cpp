@@ -12,6 +12,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100a6970
+// FUNCTION: ROBLOX 0x005f9500
 void DragUtilities::moveAndClean(PartInstance* part, const G3D::Vector3& delta)
 {
 	G3D::CoordinateFrame coord = part->getCoordinateFrame();
@@ -25,6 +26,7 @@ void DragUtilities::moveAndClean(PartInstance* part, const G3D::Vector3& delta)
 }
 
 // FUNCTION: WEBSERVICE 0x100a6b10 FOLDED
+// FUNCTION: ROBLOX 0x005f95e0 FOLDED
 void DragUtilities::pvsToParts(
 	const std::vector<PVInstance*>& pvInstances, std::vector<boost::weak_ptr<PartInstance> >& parts
 )
@@ -35,6 +37,7 @@ void DragUtilities::pvsToParts(
 }
 
 // FUNCTION: WEBSERVICE 0x100a6b10 FOLDED
+// FUNCTION: ROBLOX 0x005f95e0 FOLDED
 void DragUtilities::instancesToParts(
 	const std::vector<Instance*>& instances, std::vector<boost::weak_ptr<PartInstance> >& parts
 )
@@ -45,6 +48,7 @@ void DragUtilities::instancesToParts(
 }
 
 // FUNCTION: WEBSERVICE 0x100a6b70
+// FUNCTION: ROBLOX 0x005f9640
 bool DragUtilities::hitObjectOrPlane(
 	const ContactManager& contactManager,
 	const G3D::Ray& unitSearchRay,
@@ -66,6 +70,7 @@ bool DragUtilities::hitObjectOrPlane(
 }
 
 // FUNCTION: WEBSERVICE 0x100a6cd0
+// FUNCTION: ROBLOX 0x005f9840
 bool DragUtilities::anyPartAlive(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	for (unsigned int i = 0; i < parts.size(); i++) {
@@ -78,6 +83,7 @@ bool DragUtilities::anyPartAlive(const std::vector<boost::weak_ptr<PartInstance>
 }
 
 // FUNCTION: WEBSERVICE 0x100a6d50
+// FUNCTION: ROBLOX 0x005f98c0
 World* DragUtilities::partsToPrimitives(
 	const std::vector<boost::weak_ptr<PartInstance> >& parts, G3D::Array<Primitive*>& primitives
 )
@@ -100,6 +106,7 @@ World* DragUtilities::partsToPrimitives(
 }
 
 // FUNCTION: WEBSERVICE 0x100a6e90
+// FUNCTION: ROBLOX 0x005f9a00
 void DragUtilities::unJoinFromOutsiders(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	G3D::Array<Primitive*> primitives;
@@ -111,6 +118,7 @@ void DragUtilities::unJoinFromOutsiders(const std::vector<boost::weak_ptr<PartIn
 }
 
 // FUNCTION: WEBSERVICE 0x100a6f00
+// FUNCTION: ROBLOX 0x005f9a70
 void DragUtilities::joinToOutsiders(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	G3D::Array<Primitive*> primitives;
@@ -122,6 +130,7 @@ void DragUtilities::joinToOutsiders(const std::vector<boost::weak_ptr<PartInstan
 }
 
 // FUNCTION: WEBSERVICE 0x100a6f70
+// FUNCTION: ROBLOX 0x005f9ae0
 void DragUtilities::join(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	for (unsigned int i = 0; i < parts.size(); i++) {
@@ -134,6 +143,7 @@ void DragUtilities::join(const std::vector<boost::weak_ptr<PartInstance> >& part
 }
 
 // FUNCTION: WEBSERVICE 0x100a7070
+// FUNCTION: ROBLOX 0x005f9be0
 void DragUtilities::unJoinAndSetDragging(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	unJoinFromOutsiders(parts);
@@ -148,6 +158,7 @@ void DragUtilities::unJoinAndSetDragging(const std::vector<boost::weak_ptr<PartI
 }
 
 // FUNCTION: WEBSERVICE 0x100a7180
+// FUNCTION: ROBLOX 0x005f9cf0
 void DragUtilities::joinAndStopDragging(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	joinToOutsiders(parts);
@@ -179,6 +190,7 @@ void DragUtilities::clean(PartInstance* part)
 }
 
 // FUNCTION: WEBSERVICE 0x100a7300
+// FUNCTION: ROBLOX 0x005f9e70
 void DragUtilities::clean(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	for (unsigned int i = 0; i < parts.size(); i++) {
@@ -191,6 +203,7 @@ void DragUtilities::clean(const std::vector<boost::weak_ptr<PartInstance> >& par
 }
 
 // FUNCTION: WEBSERVICE 0x100a7440
+// FUNCTION: ROBLOX 0x005f9fb0
 void DragUtilities::move(
 	const std::vector<boost::weak_ptr<PartInstance> >& parts, G3D::CoordinateFrame from, G3D::CoordinateFrame to
 )
@@ -207,6 +220,7 @@ void DragUtilities::move(
 }
 
 // FUNCTION: WEBSERVICE 0x100a7550
+// FUNCTION: ROBLOX 0x005fa0c0
 Extents DragUtilities::computeExtents(const std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	G3D::Array<Primitive*> primitives;
@@ -216,6 +230,7 @@ Extents DragUtilities::computeExtents(const std::vector<boost::weak_ptr<PartInst
 }
 
 // FUNCTION: WEBSERVICE 0x100a75c0
+// FUNCTION: ROBLOX 0x005fa130
 void DragUtilities::getPrimitivesConst(const Instance* instance, std::vector<const Primitive*>& primitives)
 {
 	if (const PartInstance* part = dynamic_cast<const PartInstance*>(instance)) {

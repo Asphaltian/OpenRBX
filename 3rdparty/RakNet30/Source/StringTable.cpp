@@ -19,6 +19,7 @@ StringTable::StringTable()
 }
 
 // FUNCTION: WEBSERVICE 0x101c2100
+// FUNCTION: ROBLOX 0x004e7760
 StringTable::~StringTable()
 {
 	unsigned i;
@@ -30,6 +31,7 @@ StringTable::~StringTable()
 }
 
 // FUNCTION: WEBSERVICE 0x101c2180
+// FUNCTION: ROBLOX 0x004e77e0
 void StringTable::AddReference(void)
 {
 	if (++referenceCount==1)
@@ -38,6 +40,7 @@ void StringTable::AddReference(void)
 	}
 }
 // FUNCTION: WEBSERVICE 0x101c21c0
+// FUNCTION: ROBLOX 0x004e7820
 void StringTable::RemoveReference(void)
 {
 	assert(referenceCount > 0);

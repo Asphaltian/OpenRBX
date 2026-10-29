@@ -41,6 +41,7 @@ public:
 	Balancing(Humanoid* humanoid, const float kP, const float kD);
 
 	// SYNTHETIC: WEBSERVICE 0x10106680
+	// SYNTHETIC: ROBLOX 0x00640cf0
 	// RBX::Balancing::~Balancing
 	// SYNTHETIC: WEBSERVICE 0x101228b0
 	// RBX::Balancing::`scalar deleting destructor'

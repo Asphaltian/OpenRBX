@@ -35,6 +35,7 @@ protected:
 	virtual void render2d(Adorn* adorn);
 
 	// FUNCTION: WEBSERVICE 0x100c7fd0
+	// FUNCTION: ROBLOX 0x005e20e0
 	virtual bool isEnabled() { return inBackpack(); }
 
 	int getBinId() const;
@@ -49,9 +50,11 @@ public:
 	virtual void onLocalOtherClicked() {}               // vtable+0x88
 
 	// SYNTHETIC: WEBSERVICE 0x100c7e40
+	// SYNTHETIC: ROBLOX 0x005e2010
 	// RBX::BackpackItem::~BackpackItem
 
 	// SYNTHETIC: WEBSERVICE 0x100c93b0
+	// SYNTHETIC: ROBLOX 0x005e3460
 	// RBX::BackpackItem::BackpackItem
 
 	// SYNTHETIC: WEBSERVICE 0x100c9500
@@ -148,6 +151,7 @@ DECOMP_SIZE_ASSERT(LegacyHopperService, 0x130)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100c73f0
+// TEMPLATE: ROBLOX 0x005e1660
 // RBX::NonFactoryProduct<RBX::Widget,&RBX::sBackpackItem>::NonFactoryProduct<RBX::Widget,&RBX::sBackpackItem>
 // SYNTHETIC: WEBSERVICE 0x1021bf30
 // RBX::`dynamic initializer for 'desc_TextureId''

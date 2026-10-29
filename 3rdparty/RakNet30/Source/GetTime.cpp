@@ -29,23 +29,30 @@
 #endif
 
 // GLOBAL: WEBSERVICE 0x102ff45c
+// GLOBAL: ROBLOX 0x00956824
 static bool initialized=false;
 // GLOBAL: WEBSERVICE 0x102ff460
+// GLOBAL: ROBLOX 0x00956828
 static int queryCount=0;
 #ifdef _WIN32
 // GLOBAL: WEBSERVICE 0x102ff450
+// GLOBAL: ROBLOX 0x00956818
 static LARGE_INTEGER yo;
 // GLOBAL: WEBSERVICE 0x102ff448
+// GLOBAL: ROBLOX 0x00956810
 static HANDLE threadHandle;
 // GLOBAL: WEBSERVICE 0x102ff44c
+// GLOBAL: ROBLOX 0x00956814
 static DWORD_PTR processAffinityMask;
 // GLOBAL: WEBSERVICE 0x102ff458
+// GLOBAL: ROBLOX 0x00956820
 static DWORD_PTR systemAffinityMask;
 #else
 static timeval tp, initialTime;
 #endif
 
 // FUNCTION: WEBSERVICE 0x101af0b0
+// FUNCTION: ROBLOX 0x004d4f30
 RakNetTime RakNet::GetTime( void )
 {
 	return (RakNetTime)(GetTimeNS()/1000);
@@ -53,6 +60,7 @@ RakNetTime RakNet::GetTime( void )
 
 
 // FUNCTION: WEBSERVICE 0x101aef30
+// FUNCTION: ROBLOX 0x004d4db0
 RakNetTimeNS RakNet::GetTimeNS( void )
 {
 	if ( initialized==false || ++queryCount==200 )
@@ -77,8 +85,10 @@ RakNetTimeNS RakNet::GetTimeNS( void )
 
 #ifdef _WIN32
 	// GLOBAL: WEBSERVICE 0x102ff470
+	// GLOBAL: ROBLOX 0x00956838
 	static RakNetTime lastTickCountVal = GetTickCount();
 	// GLOBAL: WEBSERVICE 0x102ff468
+	// GLOBAL: ROBLOX 0x00956830
 	static RakNetTimeNS lastQueryVal = 0;
 
 	LARGE_INTEGER PerfVal;

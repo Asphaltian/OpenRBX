@@ -55,8 +55,10 @@ DECOMP_SIZE_ASSERT(Team, 0x104)
 // SYNTHETIC: WEBSERVICE 0x1021bdc0
 // RBX::`dynamic initializer for 'prop_AutoAssignable''
 // SYNTHETIC: WEBSERVICE 0x1021be00
+// SYNTHETIC: ROBLOX 0x007ead80 FOLDED
 // `dynamic initializer for 'RBX::Team::prop_AutoColorCharacters''
 // SYNTHETIC: WEBSERVICE 0x10223a20
+// SYNTHETIC: ROBLOX 0x007f3130
 // `dynamic atexit destructor for 'RBX::Team::prop_AutoColorCharacters''
 // SYNTHETIC: WEBSERVICE 0x10223a40
 // RBX::`dynamic atexit destructor for 'prop_AutoAssignable''

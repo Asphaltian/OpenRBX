@@ -350,10 +350,13 @@ namespace big
 	
 	// a > b
 	// FUNCTION: WEBSERVICE 0x101b0970
+	// FUNCTION: ROBLOX 0x004d6780
 	// big::ugreater<unsigned int [4]>
 	// FUNCTION: WEBSERVICE 0x101b0c00
+	// FUNCTION: ROBLOX 0x004d6a10
 	// big::ugreater<unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b0ca0
+	// FUNCTION: ROBLOX 0x004d6ab0
 	// big::ugreater<unsigned int [16]>
 	BIGONETYPE bool ugreater( T &a, T &b )
 	{
@@ -480,10 +483,13 @@ namespace big
 	
 	// n <<= s (s <= WORDBITS)
 	// FUNCTION: WEBSERVICE 0x101b0b20
+	// FUNCTION: ROBLOX 0x004d6930
 	// big::shiftLeft<unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b0ce0
+	// FUNCTION: ROBLOX 0x004d6af0
 	// big::shiftLeft<unsigned int [16]>
 	// FUNCTION: WEBSERVICE 0x101b0f30
+	// FUNCTION: ROBLOX 0x004d6d40
 	// big::shiftLeft<unsigned int [4]>
 	BIGONETYPE void shiftLeft( T &n, u32 s )
 	{
@@ -520,8 +526,10 @@ namespace big
 	
 	// n >>= 1 (unsigned)
 	// FUNCTION: WEBSERVICE 0x101b0d70
+	// FUNCTION: ROBLOX 0x004d6b80
 	// big::ushiftRight1<unsigned int [16]>
 	// FUNCTION: WEBSERVICE 0x101b0da0
+	// FUNCTION: ROBLOX 0x004d6bb0
 	// big::ushiftRight1<unsigned int [8]>
 	BIGONETYPE void ushiftRight1( T &n )
 	{
@@ -671,8 +679,10 @@ namespace big
 	
 	// a += b
 	// FUNCTION: WEBSERVICE 0x101b0a60
+	// FUNCTION: ROBLOX 0x004d6870
 	// big::add<unsigned int [4]>
 	// FUNCTION: WEBSERVICE 0x101b0ac0
+	// FUNCTION: ROBLOX 0x004d68d0
 	// big::add<unsigned int [8]>
 	BIGONETYPE void add ( T &a, T &b )
 	{
@@ -797,8 +807,10 @@ namespace big
 	
 	// a -= b
 	// FUNCTION: WEBSERVICE 0x101b0a00
+	// FUNCTION: ROBLOX 0x004d6810
 	// big::subtract<unsigned int [4]>
 	// FUNCTION: WEBSERVICE 0x101b0c40
+	// FUNCTION: ROBLOX 0x004d6a50
 	// big::subtract<unsigned int [8]>
 	BIGONETYPE void subtract( T &a, T &b )
 	{
@@ -869,6 +881,7 @@ namespace big
 	
 	// --n
 	// FUNCTION: WEBSERVICE 0x101b09b0
+	// FUNCTION: ROBLOX 0x004d67c0
 	// big::decrement<unsigned int [16]>
 	BIGONETYPE void decrement( T &n )
 	{
@@ -894,8 +907,10 @@ namespace big
 	
 	// a *= a, unsigned
 	// FUNCTION: WEBSERVICE 0x101b0e20
+	// FUNCTION: ROBLOX 0x004d6c30
 	// big::usquare<unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b29b0
+	// FUNCTION: ROBLOX 0x004d87c0
 	// big::usquare<unsigned int [16]>
 	BIGONETYPE void usquare( T &a )
 	{
@@ -943,10 +958,13 @@ namespace big
 	
 	// m = a * b (&a != &b != &m), unsigned
 	// FUNCTION: WEBSERVICE 0x101b2ad0
+	// FUNCTION: ROBLOX 0x004d88e0
 	// big::umultiply<unsigned int [16],unsigned int [16]>
 	// FUNCTION: WEBSERVICE 0x101b1fe0
+	// FUNCTION: ROBLOX 0x004d7df0
 	// big::umultiply<unsigned int [4],unsigned int [8]>(unsigned int (&)[4], unsigned int (&)[4], unsigned int (&)[8])
 	// FUNCTION: WEBSERVICE 0x101b37b0
+	// FUNCTION: ROBLOX 0x004d95c0
 	// big::umultiply<unsigned int [8],unsigned int [8]>(unsigned int (&)[8], unsigned int (&)[8], unsigned int (&)[8])
 	BIGTWOTYPES void umultiply( T &a0, T &b0, Bigger &m )
 	{
@@ -989,10 +1007,13 @@ namespace big
 	
 	// a *= b (&a != &b), unsigned
 	// FUNCTION: WEBSERVICE 0x101b10d0
+	// FUNCTION: ROBLOX 0x004d6ee0
 	// big::umultiply<unsigned int [8],unsigned int [16]>
 	// FUNCTION: WEBSERVICE 0x101b0fd0
+	// FUNCTION: ROBLOX 0x004d6de0
 	// big::umultiply<unsigned int [4],unsigned int [8]>(unsigned int (&)[8], unsigned int (&)[4])
 	// FUNCTION: WEBSERVICE 0x101b28b0
+	// FUNCTION: ROBLOX 0x004d86c0
 	// big::umultiply<unsigned int [8],unsigned int [8]>(unsigned int (&)[8], unsigned int (&)[8])
 	BIGTWOTYPES void umultiply( Bigger &a0, T &b0 )
 	{
@@ -1207,10 +1228,13 @@ namespace big
 	
 	// {q, r} = a / b (&q != &r), unsigned
 	// FUNCTION: WEBSERVICE 0x101b2100
+	// FUNCTION: ROBLOX 0x004d7f10
 	// big::udivide<unsigned int [16]>
 	// FUNCTION: WEBSERVICE 0x101b2c90
+	// FUNCTION: ROBLOX 0x004d8aa0
 	// big::udivide<unsigned int [4]>
 	// FUNCTION: WEBSERVICE 0x101b3070
+	// FUNCTION: ROBLOX 0x004d8e80
 	// big::udivide<unsigned int [8]>
 	BIGONETYPE void udivide( T &a, T &b0, T &q, T &r )
 	{
@@ -1295,10 +1319,13 @@ namespace big
 	
 	// r = a Mod b, unsigned
 	// FUNCTION: WEBSERVICE 0x101b2360
+	// FUNCTION: ROBLOX 0x004d8170
 	// big::umodulo<unsigned int [16]>
 	// FUNCTION: WEBSERVICE 0x101b2580
+	// FUNCTION: ROBLOX 0x004d8390
 	// big::umodulo<unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b3410
+	// FUNCTION: ROBLOX 0x004d9220
 	// big::umodulo<unsigned int [4]>
 	BIGONETYPE void umodulo( T &a, T &b0, T &r )
 	{

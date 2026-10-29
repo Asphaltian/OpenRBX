@@ -27,6 +27,7 @@ Reflection::BoundProp<G3D::Vector3, 1> Explosion::propPosition("Position", "Data
 Reflection::SignalDesc<Explosion, void(boost::shared_ptr<Instance>, float)> signal_Hit("Hit", "part", "distance");
 
 // FUNCTION: WEBSERVICE 0x100e1c60
+// FUNCTION: ROBLOX 0x00624ea0
 void Explosion::doBlast(const G3D::Array<Primitive*>& primitives)
 {
 	if (blastPressure > 0.0f) {
@@ -68,6 +69,7 @@ void Explosion::doBlast(const G3D::Array<Primitive*>& primitives)
 }
 
 // FUNCTION: WEBSERVICE 0x100e1f70
+// FUNCTION: ROBLOX 0x006251b0
 void Explosion::render3dAdorn(Adorn* adorn)
 {
 	adorn->setObjectToWorldMatrix(CoordinateFrame(position));
@@ -77,12 +79,14 @@ void Explosion::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100e2ea0
+// FUNCTION: ROBLOX 0x00625fb0
 Explosion::Explosion() : age(0.0f), blastRadius(4.0f), blastPressure(500000.0f)
 {
 	setName("Explosion");
 }
 
 // FUNCTION: WEBSERVICE 0x100e3120
+// FUNCTION: ROBLOX 0x00626230
 void Explosion::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);
@@ -93,6 +97,7 @@ void Explosion::onServiceProvider(const ServiceProvider* oldProvider, const Serv
 }
 
 // FUNCTION: WEBSERVICE 0x100e3700
+// FUNCTION: ROBLOX 0x00626810
 void Explosion::setBlastRadius(float _blastRadius)
 {
 	_blastRadius = G3D::clamp(_blastRadius, 0.0f, 100.0f);
@@ -104,6 +109,7 @@ void Explosion::setBlastRadius(float _blastRadius)
 }
 
 // FUNCTION: WEBSERVICE 0x100e3750
+// FUNCTION: ROBLOX 0x00626860
 void Explosion::signalBlast(const G3D::Array<Primitive*>& primitives)
 {
 	if (!signal_Hit.empty(this)) {
@@ -123,6 +129,7 @@ void Explosion::signalBlast(const G3D::Array<Primitive*>& primitives)
 }
 
 // STUB: WEBSERVICE 0x100e3840
+// STUB: ROBLOX 0x00626950
 void Explosion::onEvent(const RunService* source, Stepped event)
 {
 	age += event.step;

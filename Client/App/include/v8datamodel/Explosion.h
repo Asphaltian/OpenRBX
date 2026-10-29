@@ -53,6 +53,7 @@ public:
 	Explosion();
 
 	// FUNCTION: WEBSERVICE 0x100e3050
+	// FUNCTION: ROBLOX 0x00626160
 	virtual ~Explosion() {}
 
 	static Reflection::BoundProp<G3D::Vector3, 1> propPosition;
@@ -71,6 +72,7 @@ DECOMP_SIZE_ASSERT(Explosion, 0x124)
 // SYNTHETIC: WEBSERVICE 0x1021cbd0
 // RBX::`dynamic initializer for 'propBlastRadius''
 // SYNTHETIC: WEBSERVICE 0x1021cc10
+// SYNTHETIC: ROBLOX 0x007e86b0
 // `dynamic initializer for 'RBX::Explosion::propBlastPressure''
 // SYNTHETIC: WEBSERVICE 0x1021cc40
 // `dynamic initializer for 'RBX::Explosion::propPosition''
@@ -79,6 +81,7 @@ DECOMP_SIZE_ASSERT(Explosion, 0x124)
 // SYNTHETIC: WEBSERVICE 0x10224180
 // `dynamic atexit destructor for 'RBX::Explosion::propPosition''
 // SYNTHETIC: WEBSERVICE 0x102241a0
+// SYNTHETIC: ROBLOX 0x007f1db0
 // `dynamic atexit destructor for 'RBX::Explosion::propBlastPressure''
 // SYNTHETIC: WEBSERVICE 0x102241c0
 // RBX::`dynamic atexit destructor for 'propBlastRadius''

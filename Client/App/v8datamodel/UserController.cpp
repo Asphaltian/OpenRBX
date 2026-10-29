@@ -22,6 +22,7 @@ float AIController::getValue(InputType inputType) const
 }
 
 // FUNCTION: WEBSERVICE 0x100c5490
+// FUNCTION: ROBLOX 0x005d4590
 void AIController::chaseTarget(const G3D::Vector3& localChasePoint)
 {
 	float angle = atan2(-localChasePoint.x, -localChasePoint.z);
@@ -57,6 +58,7 @@ void AIController::chaseTarget(const G3D::Vector3& localChasePoint)
 }
 
 // FUNCTION: WEBSERVICE 0x100c5560
+// FUNCTION: ROBLOX 0x005d4660
 float KeyboardPrimaryController::getValue(InputType inputType) const
 {
 	if (!getHardwareDevice()) {
@@ -121,6 +123,7 @@ float KeyboardPrimaryController::getValue(InputType inputType) const
 }
 
 // FUNCTION: WEBSERVICE 0x100c57c0
+// FUNCTION: ROBLOX 0x005d48c0
 float KeyboardSecondaryController::getValue(InputType inputType) const
 {
 	if (!getHardwareDevice()) {
@@ -172,12 +175,14 @@ float KeyboardSecondaryController::getValue(InputType inputType) const
 }
 
 // FUNCTION: WEBSERVICE 0x100c5c20
+// FUNCTION: ROBLOX 0x005d4c40
 const UserInputBase* PlayerController::getHardwareDevice() const
 {
 	return controllerService.expired() ? NULL : controllerService.lock()->getHardwareDevice();
 }
 
 // FUNCTION: WEBSERVICE 0x100c5ca0
+// FUNCTION: ROBLOX 0x005d4cc0
 G3D::Vector3 AIController::getLocalTargetPosition() const
 {
 	G3D::Vector3 answer(0, 0, 0);
@@ -195,6 +200,7 @@ G3D::Vector3 AIController::getLocalTargetPosition() const
 }
 
 // FUNCTION: WEBSERVICE 0x100c5fb0
+// FUNCTION: ROBLOX 0x005d4e60
 void AIController::updateTarget(ControllerType excludeType, float time)
 {
 	if (!(time < retargetTime)) {
@@ -230,6 +236,7 @@ void AIController::updateTarget(ControllerType excludeType, float time)
 }
 
 // FUNCTION: WEBSERVICE 0x100c6280
+// FUNCTION: ROBLOX 0x005d5130
 void AIChaseController::updateBuffer(float time)
 {
 	updateTarget(AI_CHASE_CONTROLLER, time);
@@ -244,6 +251,7 @@ void AIChaseController::updateBuffer(float time)
 }
 
 // FUNCTION: WEBSERVICE 0x100c62e0
+// FUNCTION: ROBLOX 0x005d5190
 void AIFleeController::updateBuffer(float time)
 {
 	updateTarget(AI_FLEE_CONTROLLER, time);
@@ -253,17 +261,20 @@ void AIFleeController::updateBuffer(float time)
 }
 
 // FUNCTION: WEBSERVICE 0x100c6340
+// FUNCTION: ROBLOX 0x005d51f0
 SteppingController::~SteppingController()
 {
 	stopListening(runService, this);
 }
 
 // FUNCTION: WEBSERVICE 0x100c6410
+// FUNCTION: ROBLOX 0x005d52c0
 AIController::~AIController()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100c6510
+// FUNCTION: ROBLOX 0x005d5370
 SteppingController::SteppingController(const PVInstance* _controlledInstance)
 	: runService(shared_from(ServiceProvider::create<RunService>(_controlledInstance))),
 	  controlledInstance(shared_from(_controlledInstance))
@@ -272,12 +283,14 @@ SteppingController::SteppingController(const PVInstance* _controlledInstance)
 }
 
 // FUNCTION: WEBSERVICE 0x100c6600
+// FUNCTION: ROBLOX 0x005d5460
 PlayerController::PlayerController(ControllerService* _controllerService, const PVInstance* _controlledInstance)
 	: SteppingController(_controlledInstance), controllerService(shared_from(_controllerService)), stepsRotating(0)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100c6760
+// FUNCTION: ROBLOX 0x005d55b0
 void PlayerController::onEvent(const RunService* source, Heartbeat event)
 {
 	const UserInputBase* hardware = getHardwareDevice();
@@ -342,6 +355,7 @@ void PlayerController::onEvent(const RunService* source, Heartbeat event)
 }
 
 // FUNCTION: WEBSERVICE 0x100c6a30
+// FUNCTION: ROBLOX 0x005d5880
 AIController::AIController(const PVInstance* controlledInstance)
 	: SteppingController(controlledInstance), retargetTime(0.0f)
 {
@@ -352,6 +366,7 @@ AIController::AIController(const PVInstance* controlledInstance)
 }
 
 // FUNCTION: WEBSERVICE 0x100c6be0
+// FUNCTION: ROBLOX 0x005d5a30
 ControllerService::ControllerService()
 	: hardwareDevice(NULL), keyboardPrimaryController(new KeyboardPrimaryController(this)),
 	  keyboardSecondaryController(new KeyboardSecondaryController(this)), nullController(new NullController())
@@ -359,6 +374,7 @@ ControllerService::ControllerService()
 }
 
 // FUNCTION: WEBSERVICE 0x100c6f00
+// FUNCTION: ROBLOX 0x005d5d50
 G3D::ReferenceCountedPointer<Controller> ControllerService::getController(
 	Controller::ControllerType type, const PVInstance* controlledInstance
 )

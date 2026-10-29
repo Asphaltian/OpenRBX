@@ -11,6 +11,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10121f90
+// FUNCTION: ROBLOX 0x00663110
 HitTestFilter::Result Balancing::filterResult(const Primitive* testMe) const
 {
 	Primitive* torsoPrimitive = humanoid->getTorsoPrimitive();
@@ -27,6 +28,7 @@ HitTestFilter::Result Balancing::filterResult(const Primitive* testMe) const
 }
 
 // FUNCTION: WEBSERVICE 0x10121fe0
+// FUNCTION: ROBLOX 0x00663160
 PartInstance* Balancing::tryFloor(const G3D::Ray& ray, float maxDistance)
 {
 	float distance;
@@ -38,6 +40,7 @@ PartInstance* Balancing::tryFloor(const G3D::Ray& ray, float maxDistance)
 }
 
 // FUNCTION: WEBSERVICE 0x10122030
+// FUNCTION: ROBLOX 0x006631b0
 G3D::Vector3 Balancing::getYAxis() const
 {
 	Body* body = humanoid->getTorsoBody();
@@ -51,6 +54,7 @@ G3D::Vector3 Balancing::getYAxis() const
 }
 
 // STUB: WEBSERVICE 0x10122140
+// STUB: ROBLOX 0x006632c0
 void Balancing::onComputeForce(const float dt)
 {
 	Body* torso = humanoid->getTorsoBody();
@@ -90,6 +94,7 @@ void Balancing::onComputeForce(const float dt)
 }
 
 // STUB: WEBSERVICE 0x10122520
+// STUB: ROBLOX 0x006636a0
 PartInstance* Balancing::findFloor(bool existingFloor)
 {
 	if (humanoid->getTorsoBody()) {
@@ -132,12 +137,14 @@ PartInstance* Balancing::findFloor(bool existingFloor)
 }
 
 // FUNCTION: WEBSERVICE 0x10122860
+// FUNCTION: ROBLOX 0x006639e0
 Balancing::Balancing(Humanoid* humanoid, const float kP, const float kD)
 	: Humanoid::State(humanoid), kP(kP), kD(kD), floorTouchInWorld(0, 0, 0)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101228d0
+// FUNCTION: ROBLOX 0x00663a50
 Humanoid::State* Balancing::onStep(const float stepDt, Controller& controller)
 {
 	if (humanoid->getTorsoBody() != NULL) {

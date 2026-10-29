@@ -7,6 +7,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100ff530 FOLDED
+// FUNCTION: ROBLOX 0x005ac0a0 FOLDED
 template <>
 std::string StringConverter<MeshId>::convertToString(const MeshId& value)
 {
@@ -14,6 +15,7 @@ std::string StringConverter<MeshId>::convertToString(const MeshId& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1007da70 FOLDED
+// FUNCTION: ROBLOX 0x005ac0c0 FOLDED
 template <>
 bool StringConverter<MeshId>::convertToValue(const std::string& text, MeshId& value)
 {
@@ -31,6 +33,7 @@ const Type& Type::singleton<MeshId>()
 }
 
 // FUNCTION: WEBSERVICE 0x1012dd70 FOLDED
+// FUNCTION: ROBLOX 0x006202c0 FOLDED
 template <>
 void TypedPropertyDescriptor<MeshId>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -45,6 +48,7 @@ void TypedPropertyDescriptor<MeshId>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x1007e3c0 FOLDED
+// FUNCTION: ROBLOX 0x00620390 FOLDED
 template <>
 void TypedPropertyDescriptor<MeshId>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -59,6 +63,7 @@ bool TypedPropertyDescriptor<MeshId>::hasStringValue() const
 }
 
 // FUNCTION: WEBSERVICE 0x1007e440 FOLDED
+// FUNCTION: ROBLOX 0x005a8230 FOLDED
 template <>
 std::string TypedPropertyDescriptor<MeshId>::getStringValue(const DescribedBase* instance) const
 {
@@ -66,6 +71,7 @@ std::string TypedPropertyDescriptor<MeshId>::getStringValue(const DescribedBase*
 }
 
 // FUNCTION: WEBSERVICE 0x1007e4c0 FOLDED
+// FUNCTION: ROBLOX 0x005ac440 FOLDED
 template <>
 bool TypedPropertyDescriptor<MeshId>::setStringValue(DescribedBase* instance, const std::string& text) const
 {

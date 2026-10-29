@@ -49,6 +49,7 @@ class Peer;
 } // namespace RBX
 
 // VTABLE: WEBSERVICE 0x10251ddc
+// VTABLE: ROBLOX 0x00814ce4
 // class RakPeer
 class RAK_DLL_EXPORT RakPeer : public RakPeerInterface
 {

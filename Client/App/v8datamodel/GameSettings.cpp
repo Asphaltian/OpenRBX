@@ -13,6 +13,7 @@ Reflection::BoundProp<bool, 1> prop_SoundEnabled("SoundEnabled", "Sound", &GameS
 Reflection::BoundProp<bool, 1> prop_SoftwareSound("SoftwareSound", "Sound", &GameSettings::softwareSound);
 
 // FUNCTION: WEBSERVICE 0x100de660
+// FUNCTION: ROBLOX 0x005c9940
 GameSettings::GameSettings()
 	: chatHistory(50), chatScrollLength(5), soundEnabled(true), softwareSound(false), animatedCharacter(true)
 {

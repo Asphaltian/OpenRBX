@@ -50,8 +50,10 @@ namespace big
 
 	// r = x^y Mod n (fast for small y)
 	// FUNCTION: WEBSERVICE 0x101b4820
+	// FUNCTION: ROBLOX 0x004da630
 	// big::simpleModExp<unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b51c0
+	// FUNCTION: ROBLOX 0x004dafd0
 	// big::simpleModExp<unsigned int [4]>
 	BIGONETYPE void simpleModExp( T &x0, T &y0, T &n0, T &r0 )
 	{
@@ -106,8 +108,10 @@ namespace big
 
 	// computes Rn = 2^k (mod n), n < 2^k
 	// FUNCTION: WEBSERVICE 0x101b4750
+	// FUNCTION: ROBLOX 0x004da560
 	// big::rModn<unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b4e20
+	// FUNCTION: ROBLOX 0x004dac30
 	// big::rModn<unsigned int [4]>
 	BIGONETYPE void rModn( T &n, T &Rn )
 	{
@@ -128,6 +132,7 @@ namespace big
 
 	// computes c = GCD(a, b)
 	// FUNCTION: WEBSERVICE 0x101b2bd0
+	// FUNCTION: ROBLOX 0x004d89e0
 	BIGONETYPE void GCD( T &a0, T &b0, T &c )
 	{
 		T a;
@@ -171,8 +176,10 @@ namespace big
 
 	// directly computes x = c - a * b (mod n) > 0, c < n
 	// FUNCTION: WEBSERVICE 0x101b2f50
+	// FUNCTION: ROBLOX 0x004d8d60
 	// big::SubMulMod<unsigned int [4]>
 	// FUNCTION: WEBSERVICE 0x101b3670
+	// FUNCTION: ROBLOX 0x004d9480
 	// big::SubMulMod<unsigned int [8]>
 	BIGONETYPE void SubMulMod( T &a, T &b, T &c, T &n, T &x )
 	{
@@ -219,8 +226,10 @@ namespace big
 	Trying to keep everything positive
 	*/
 	// FUNCTION: WEBSERVICE 0x101b4ec0
+	// FUNCTION: ROBLOX 0x004dacd0
 	// big::computeRinverse<unsigned int [8]>
 	// FUNCTION: WEBSERVICE 0x101b5600
+	// FUNCTION: ROBLOX 0x004db410
 	// big::computeRinverse<unsigned int [4]>
 	BIGONETYPE void computeRinverse( T &n0, T &rp )
 	{
@@ -546,8 +555,10 @@ namespace big
 	*/
 	// directly compute a^-1 s.t. a^-1 a (mod b) = 1, a < b, GCD(a, b)
 	// FUNCTION: WEBSERVICE 0x101b4b70
+	// FUNCTION: ROBLOX 0x004da980
 	// big::computeModularInverse<unsigned int [4]>
 	// FUNCTION: WEBSERVICE 0x101b5370
+	// FUNCTION: ROBLOX 0x004db180
 	// big::computeModularInverse<unsigned int [8]>
 	BIGONETYPE void computeModularInverse( T &a0, T &b0, T &ap )
 	{
@@ -671,8 +682,10 @@ namespace big
 
 	// indirectly computes  n' s.t. 1 = r' r - n' n = GCD(r, n)
 	// FUNCTION: WEBSERVICE 0x101b78f0
+	// FUNCTION: ROBLOX 0x004dd700
 	// big::computeNRinverse<unsigned int [4]>
 	// FUNCTION: WEBSERVICE 0x101b7550
+	// FUNCTION: ROBLOX 0x004dd360
 	// big::computeNRinverse<unsigned int [8]>
 	BIGONETYPE void computeNRinverse( T &n0, T &np )
 	{
@@ -821,6 +834,7 @@ start_squaring:
 	#pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 	// FUNCTION: WEBSERVICE 0x101b7620
+	// FUNCTION: ROBLOX 0x004dd430
 	BIGTWOTYPES void CRTModExp( Bigger &x, Bigger &C, Bigger &d, T &p, T &q, T &pInverse, T &pnp, T &pxp, T &qnp, T &qxp )
 	{
 		// d1 = d mod (p - 1)
@@ -900,6 +914,7 @@ start_squaring:
 
 	// generates a suitable public exponent s.t. 4 < e << phi, GCD(e, phi) = 1
 	// FUNCTION: WEBSERVICE 0x101b49e0
+	// FUNCTION: ROBLOX 0x004da7f0
 	BIGONETYPE void computePublicExponent( T &phi, T &e )
 	{
 		T r, one, two;
@@ -979,6 +994,7 @@ start_squaring:
 	...
 	*/
 	// FUNCTION: WEBSERVICE 0x101b79b0
+	// FUNCTION: ROBLOX 0x004dd7c0
 	BIGONETYPE bool RabinMillerPrimalityTest( T &n, u32 insurance )
 	{
 		// check divisibility by small primes <= 1621 (speeds up computation)
@@ -1068,6 +1084,7 @@ start_squaring:
 
 	// generates a strong pseudo-prime
 	// FUNCTION: WEBSERVICE 0x101b9070
+	// FUNCTION: ROBLOX 0x004dee80
 	BIGONETYPE void generateStrongPseudoPrime( T &n )
 	{
 		do
@@ -1122,6 +1139,7 @@ start_squaring:
 
 	public:
 		// FUNCTION: WEBSERVICE 0x101b1c00
+		// FUNCTION: ROBLOX 0x004d7a10
 		void reset()
 		{
 			zero( d );
@@ -1134,6 +1152,7 @@ start_squaring:
 #ifdef RSASUPPORTGENPRIME
 
 		// FUNCTION: WEBSERVICE 0x101bab40
+		// FUNCTION: ROBLOX 0x004e0950
 		void generateKeys()
 		{
 			BIGHALFSIZE( T, p0 );
@@ -1148,6 +1167,7 @@ start_squaring:
 #endif // RSASUPPORTGENPRIME
 
 		// FUNCTION: WEBSERVICE 0x101b8ec0
+		// FUNCTION: ROBLOX 0x004decd0
 		BIGSMALLTYPE void setPrivateKey( Smaller &c_p, Smaller &c_q )
 		{
 			factorsAvailable = true;
@@ -1225,6 +1245,7 @@ start_squaring:
 		}
 
 		// FUNCTION: WEBSERVICE 0x101b8d90
+		// FUNCTION: ROBLOX 0x004deba0
 		void setPublicKey( u32 c_e, T &c_n )
 		{
 			reset(); // in case we knew a private key
@@ -1264,6 +1285,7 @@ start_squaring:
 
 	public:
 		// FUNCTION: WEBSERVICE 0x101b8df0
+		// FUNCTION: ROBLOX 0x004dec00
 		void encrypt( T &M, T &x )
 		{
 			if ( factorsAvailable )
@@ -1273,6 +1295,7 @@ start_squaring:
 		}
 
 		// FUNCTION: WEBSERVICE 0x101b8e60
+		// FUNCTION: ROBLOX 0x004dec70
 		void decrypt( T &C, T &x )
 		{
 			if ( factorsAvailable )

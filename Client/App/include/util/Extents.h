@@ -121,6 +121,7 @@ inline Extents Extents::fromCenterCorner(const Vector3& center, const Vector3& c
 }
 
 // FUNCTION: WEBSERVICE 0x1005a750
+// FUNCTION: ROBLOX 0x005654c0
 inline void Extents::unionWith(const Extents& other)
 {
 	low = low.min(other.low);

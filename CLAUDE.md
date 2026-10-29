@@ -4,7 +4,9 @@ Decompilation of Roblox as of 2007-12-20 using MSVC 8.0 SP1 (cl.exe 14.00.50727.
 
 One target: **WEBSERVICE**, `WebService.dll`, an ATL Server ISAPI extension with 12,633 functions.
 
-RBXGS, the game server, comes first because its binary ships an unstripped PDB, and the engine libraries under `Client/` were shared with the client anyway. Three of the six LTCG objects in `WebService.dll` are `Client\win` sources. The client is in scope eventually.
+RBXGS, the game server, comes first because its binary ships an unstripped PDB, and the engine libraries under `Client/` were shared with the client anyway. Three of the six LTCG objects in `WebService.dll` are `Client\win` sources.
+
+Second target: **ROBLOX**, `Roblox.exe` 0.3.676.0, the client. It ships no PDB but links the same engine libraries byte for byte, so `tools/roblox_transfer.py WebService.dll Roblox.exe` carries every name it can prove: it matches bodies with relocations masked, then propagates through call and data references. It writes `reccmp/roblox-*.csv` and a `ROBLOX` marker under each transferred `WEBSERVICE` marker; rerun it rather than editing either. Until client-only code exists the target scores against our `WebService.dll` (`reccmp-build.yml` points ROBLOX at it). CI has no source for `Roblox.exe` yet, so only WEBSERVICE runs there.
 
 ## Building
 

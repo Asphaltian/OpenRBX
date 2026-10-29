@@ -49,6 +49,7 @@ bool ModelInstance::askSetParent(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x10059c40
+// FUNCTION: ROBLOX 0x00564b40
 float ModelInstance::computeFlagHeight() const
 {
 	float height = 6.0f;
@@ -63,6 +64,7 @@ float ModelInstance::computeFlagHeight() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005a1a0
+// FUNCTION: ROBLOX 0x00564e90
 void ModelInstance::onExtentsChanged() const
 {
 	LocalGridExtents.setDirty();
@@ -73,6 +75,7 @@ void ModelInstance::onExtentsChanged() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005a1c0
+// FUNCTION: ROBLOX 0x00564eb0
 const Primitive* ModelInstance::getBiggestPrimitive() const
 {
 	const PartInstance* part = getPrimaryPartConst();
@@ -85,6 +88,7 @@ const Primitive* ModelInstance::getBiggestPrimitive() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005a1f0
+// FUNCTION: ROBLOX 0x00564ee0
 void ModelInstance::updatePrimaryPart(PartInstance* set) const
 {
 	if (primaryPart != set) {
@@ -109,6 +113,7 @@ void ModelInstance::updatePrimaryPart(PartInstance* set) const
 }
 
 // FUNCTION: WEBSERVICE 0x1005a350
+// FUNCTION: ROBLOX 0x00565130
 Extents ModelInstance::computeWorldGridExtents() const
 {
 	return LocalGridExtents.getValue().express(getLocation(), CoordinateFrame());
@@ -126,6 +131,7 @@ const CoordinateFrame ModelInstance::getLocation() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005a460
+// FUNCTION: ROBLOX 0x00565240
 void ModelInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 {
 	Extents localExtents = getExtentsLocal();
@@ -139,23 +145,27 @@ void ModelInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 }
 
 // FUNCTION: WEBSERVICE 0x1005a890
+// FUNCTION: ROBLOX 0x00565600
 ModelInstance::~ModelInstance()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1005ab00
+// FUNCTION: ROBLOX 0x00565880
 Extents ModelInstance::getExtentsWorld() const
 {
 	return WorldGridExtents;
 }
 
 // FUNCTION: WEBSERVICE 0x1005ab50
+// FUNCTION: ROBLOX 0x005658d0
 Extents ModelInstance::getExtentsLocal() const
 {
 	return LocalGridExtents;
 }
 
 // FUNCTION: WEBSERVICE 0x1005abb0
+// FUNCTION: ROBLOX 0x00565930
 PartInstance* ModelInstance::getPrimaryPartInternal() const
 {
 	if (primaryPart != NULL) {
@@ -190,6 +200,7 @@ PartInstance* ModelInstance::getPrimaryPartInternal() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005ac90
+// FUNCTION: ROBLOX 0x00565a10
 void ModelInstance::legacyTraverseState(const CoordinateFrame& parentState)
 {
 	int count = numChildren();
@@ -208,6 +219,7 @@ void ModelInstance::legacyTraverseState(const CoordinateFrame& parentState)
 }
 
 // FUNCTION: WEBSERVICE 0x1005ad40
+// FUNCTION: ROBLOX 0x00565ac0
 bool ModelInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint)
 {
 	for (unsigned int i = 0; i < numChildren(); i++) {
@@ -222,12 +234,14 @@ bool ModelInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoin
 }
 
 // FUNCTION: WEBSERVICE 0x1005add0
+// FUNCTION: ROBLOX 0x00565b50
 bool ModelInstance::shouldRender3dAdorn() const
 {
 	return isTopLevelPVInstance() && showModelCoord;
 }
 
 // FUNCTION: WEBSERVICE 0x1005ae20
+// FUNCTION: ROBLOX 0x00565ba0
 void ModelInstance::render3dAdorn(Adorn* adorn)
 {
 	if (!isTopLevelPVInstance()) {
@@ -264,6 +278,7 @@ const PartInstance* ModelInstance::getPrimaryPartConst() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005b230
+// FUNCTION: ROBLOX 0x00565e80
 void ModelInstance::onDescendentAdded(Instance* instance)
 {
 	PVInstance::onDescendentAdded(instance);
@@ -282,6 +297,7 @@ void ModelInstance::onDescendentAdded(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1005b2c0
+// FUNCTION: ROBLOX 0x00565f10
 void ModelInstance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 {
 	if (primaryPart == instance.get()) {
@@ -319,6 +335,7 @@ void ModelInstance::makeJoints()
 }
 
 // FUNCTION: WEBSERVICE 0x1005b3d0
+// FUNCTION: ROBLOX 0x00566020
 static void breakJ(Instance* instance)
 {
 	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
@@ -330,6 +347,7 @@ static void breakJ(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1005b430
+// FUNCTION: ROBLOX 0x00566080
 void ModelInstance::breakJoints()
 {
 	for_eachChild(breakJ);
@@ -346,6 +364,7 @@ void ModelInstance::getCameraIgnorePrimitives(std::vector<const Primitive*>& pri
 }
 
 // FUNCTION: WEBSERVICE 0x1005b560
+// FUNCTION: ROBLOX 0x005661b0
 Extents ModelInstance::computeLocalGridExtents() const
 {
 	std::vector<const Primitive*> primitives;
@@ -366,6 +385,7 @@ Extents ModelInstance::computeLocalGridExtents() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005c000
+// FUNCTION: ROBLOX 0x00566880
 ModelInstance::ModelInstance()
 	: DescribedCreatable<ModelInstance, PVInstance, sModel>("Model"), primaryPart(NULL),
 	  FlagHeight(this, &ModelInstance::computeFlagHeight),
@@ -382,6 +402,7 @@ ModelInstance::ModelInstance()
 }
 
 // FUNCTION: WEBSERVICE 0x1005c520
+// FUNCTION: ROBLOX 0x00566d50
 void ModelInstance::setPrimaryPart(PartInstance* set)
 {
 	if (set == NULL || set->isDescendentOf(this)) {
@@ -397,6 +418,7 @@ void ModelInstance::setPrimaryPart(PartInstance* set)
 }
 
 // FUNCTION: WEBSERVICE 0x1015b610 FOLDED
+// FUNCTION: ROBLOX 0x00751160 FOLDED
 void ModelInstance::onLastChildRemoved()
 {
 }

@@ -345,6 +345,7 @@ static SurfacePropDescriptor<NORM_Z, float> desc_BackParamB(
 );
 
 // FUNCTION: WEBSERVICE 0x10100bd0
+// FUNCTION: ROBLOX 0x005ddff0
 const bool Surfaces::isSurfaceDescriptor(const Reflection::PropertyDescriptor& desc)
 {
 	if (&desc == &desc_TopType) {
@@ -371,6 +372,7 @@ const bool Surfaces::isSurfaceDescriptor(const Reflection::PropertyDescriptor& d
 }
 
 // FUNCTION: WEBSERVICE 0x10100c10
+// FUNCTION: ROBLOX 0x005de030
 const Reflection::PropertyDescriptor& Surfaces::getSurfaceType(NormalId face) const
 {
 	switch (face) {
@@ -390,6 +392,7 @@ const Reflection::PropertyDescriptor& Surfaces::getSurfaceType(NormalId face) co
 }
 
 // FUNCTION: WEBSERVICE 0x10100c70
+// FUNCTION: ROBLOX 0x005de090
 const Reflection::PropertyDescriptor& Surfaces::getSurfaceInput(NormalId face) const
 {
 	switch (face) {
@@ -409,6 +412,7 @@ const Reflection::PropertyDescriptor& Surfaces::getSurfaceInput(NormalId face) c
 }
 
 // FUNCTION: WEBSERVICE 0x10100cd0
+// FUNCTION: ROBLOX 0x005de0f0
 const Reflection::PropertyDescriptor& Surfaces::getParamA(NormalId face) const
 {
 	switch (face) {
@@ -428,6 +432,7 @@ const Reflection::PropertyDescriptor& Surfaces::getParamA(NormalId face) const
 }
 
 // FUNCTION: WEBSERVICE 0x10100d30
+// FUNCTION: ROBLOX 0x005de150
 const Reflection::PropertyDescriptor& Surfaces::getParamB(NormalId face) const
 {
 	switch (face) {
@@ -447,6 +452,7 @@ const Reflection::PropertyDescriptor& Surfaces::getParamB(NormalId face) const
 }
 
 // FUNCTION: WEBSERVICE 0x10100d90
+// FUNCTION: ROBLOX 0x005de1b0
 Surfaces::Surfaces(PartInstance* container)
 	: Top(container, NORM_Y), Bottom(container, NORM_Y_NEG), Left(container, NORM_X_NEG), Right(container, NORM_X),
 	  Front(container, NORM_Z_NEG), Back(container, NORM_Z)
@@ -454,6 +460,7 @@ Surfaces::Surfaces(PartInstance* container)
 }
 
 // FUNCTION: WEBSERVICE 0x10100de0
+// FUNCTION: ROBLOX 0x005de200
 const Surface& Surfaces::operator[](NormalId normalId) const
 {
 	switch (normalId) {
@@ -491,6 +498,7 @@ Surface& Surfaces::operator[](NormalId normalId)
 }
 
 // FUNCTION: WEBSERVICE 0x10100e30
+// FUNCTION: ROBLOX 0x005de250
 const bool Surfaces::isStandardPart() const
 {
 	return Bottom.getSurfaceType() == INLET && Front.getSurfaceType() == NO_SURFACE &&

@@ -9,30 +9,39 @@ namespace RBX {
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1004a1e0
+// TEMPLATE: ROBLOX 0x00577e10
 // RBX::Association<RBX::Instance>::~Association<RBX::Instance>
 // TEMPLATE: WEBSERVICE 0x1005f2f0
 // RBX::Association<RBX::Instance>::Item::~Item
 // TEMPLATE: WEBSERVICE 0x10061860
+// TEMPLATE: ROBLOX 0x0056ea90
 // RBX::Association<RBX::Instance>::contains<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >
 // TEMPLATE: WEBSERVICE 0x10061910
+// TEMPLATE: ROBLOX 0x0056eb40
 // RBX::Association<RBX::Instance>::remove<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >
 // SYNTHETIC: WEBSERVICE 0x10061a10
+// SYNTHETIC: ROBLOX 0x0056ec40 FOLDED
 // RBX::Association<RBX::Instance>::TItem<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >::~TItem<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >
 // SYNTHETIC: WEBSERVICE 0x10061a80
 // RBX::Association<RBX::Instance>::TItem<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x10064150
+// TEMPLATE: ROBLOX 0x00571780
 // RBX::Association<RBX::Instance>::get<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >
 // TEMPLATE: WEBSERVICE 0x1019c630
+// TEMPLATE: ROBLOX 0x004c2a00
 // RBX::Association<RBX::Instance>::TItem<RBX::Network::ClientPhysics>::TItem<RBX::Network::ClientPhysics><RBX::PartInstance *>
 // SYNTHETIC: WEBSERVICE 0x1019c690
+// SYNTHETIC: ROBLOX 0x004c2de0
 // RBX::Association<RBX::Instance>::TItem<RBX::Network::ClientPhysics>::~TItem<RBX::Network::ClientPhysics>
 // SYNTHETIC: WEBSERVICE 0x1019d160
 // RBX::Association<RBX::Instance>::Item::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x1019d4b0
 // RBX::Association<RBX::Instance>::TItem<RBX::Network::ClientPhysics>::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x101a2b80
+// TEMPLATE: ROBLOX 0x004c9630
 // RBX::Association<RBX::Instance>::get<TimeStamp>
 // TEMPLATE: WEBSERVICE 0x101a2cb0
+// TEMPLATE: ROBLOX 0x004c9760
 // RBX::Association<RBX::Instance>::get<RBX::Network::ClientPhysics,RBX::PartInstance *>
 // clang-format on
 template <class T>

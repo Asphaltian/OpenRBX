@@ -97,6 +97,7 @@ RobloxCrashReporter::RobloxCrashReporter(const char* outputPath, const char* app
 }
 
 // FUNCTION: WEBSERVICE 0x100022e0
+// FUNCTION: ROBLOX 0x0042a4f0
 LONG RobloxCrashReporter::ProcessException(_EXCEPTION_POINTERS* info)
 {
 	LONG result = CrashReporter::ProcessException(info);

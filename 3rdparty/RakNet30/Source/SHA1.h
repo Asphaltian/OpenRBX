@@ -29,11 +29,13 @@
 #define SHA1_LENGTH 20
 
 // VTABLE: WEBSERVICE 0x10251f28
+// VTABLE: ROBLOX 0x00814e3c
 // class CSHA1
 class RAK_DLL_EXPORT CSHA1
 {
 
 // SYNTHETIC: WEBSERVICE 0x101c3860
+// SYNTHETIC: ROBLOX 0x004e8ec0
 // CSHA1::`scalar deleting destructor'
 
 public:

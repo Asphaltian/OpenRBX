@@ -4,6 +4,7 @@ namespace RBX {
 namespace Security {
 
 // FUNCTION: WEBSERVICE 0x100a8aa0
+// FUNCTION: ROBLOX 0x005e1370
 bool Context::isInRole(Identities identity, Permissions permission)
 {
 	switch (identity) {

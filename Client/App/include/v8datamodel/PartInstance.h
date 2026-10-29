@@ -128,6 +128,7 @@ public:
 	const Surfaces& getSurfaces() const;
 
 	// FUNCTION: WEBSERVICE 0x10115a90
+	// FUNCTION: ROBLOX 0x006620f0
 	bool getIsTransparent() const { return 1.0f - (1.0f - transparency) * alphaModifier > 0.1f; }
 
 	const CoordinateFrame& getCoordinateFrame() const;
@@ -255,17 +256,22 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1009b970
+// TEMPLATE: ROBLOX 0x005aea40
 // ?raise@?$Notifier@VPartInstance@RBX@@UCanAggregateChanged@2@@RBX@@IBEXUCanAggregateChanged@2@PAV?$Listener@VPartInstance@RBX@@UCanAggregateChanged@2@@2@@Z
 // TEMPLATE: WEBSERVICE 0x1009c730
+// TEMPLATE: ROBLOX 0x005af850
 // ?raise@?$Notifier@VPartInstance@RBX@@UCanAggregateChanged@2@@RBX@@IBEXUCanAggregateChanged@2@@Z
 // clang-format on
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x1021a7b0
+// FUNCTION: ROBLOX 0x007e9b00
 // RBX::`dynamic initializer for 'namePart''
 // FUNCTION: WEBSERVICE 0x1021a7d0
+// FUNCTION: ROBLOX 0x007e9b20
 // RBX::`dynamic initializer for 'nameCFrame''
 // FUNCTION: WEBSERVICE 0x1021a7f0
+// FUNCTION: ROBLOX 0x007e9b40
 // RBX::`dynamic initializer for 'namePosition''
 // FUNCTION: WEBSERVICE 0x1021a810
 // `dynamic initializer for 'RBX::PartInstance::prop_CFrame''

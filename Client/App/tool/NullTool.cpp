@@ -20,6 +20,7 @@ NewNullTool::~NewNullTool()
 }
 
 // FUNCTION: WEBSERVICE 0x100c50a0
+// FUNCTION: ROBLOX 0x00622830
 void NewNullTool::onMouseIdle(const UIEvent& uiEvent)
 {
 	if (getPartByLocalCharacter(uiEvent, waypoint) && characterCanReach(waypoint)) {
@@ -31,6 +32,7 @@ void NewNullTool::onMouseIdle(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x100c50f0
+// FUNCTION: ROBLOX 0x00622880
 void NewNullTool::onMouseHover(const UIEvent& uiEvent)
 {
 	if (getPartByLocalCharacter(uiEvent, waypoint) && characterCanReach(waypoint)) {
@@ -44,6 +46,7 @@ void NewNullTool::onMouseHover(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x100c5140
+// FUNCTION: ROBLOX 0x006228d0
 MouseCommand* NewNullTool::onMouseDown(const UIEvent& uiEvent)
 {
 	G3D::Vector3 hitPoint;
@@ -62,12 +65,14 @@ MouseCommand* NewNullTool::onMouseDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x100c5240
+// FUNCTION: ROBLOX 0x00622a20
 NewNullTool::NewNullTool(Workspace* workspace)
 	: Named<MouseCommand, sNewNullTool>(workspace), cursor("ArrowCursor"), hasWaypoint(false)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100c5360
+// FUNCTION: ROBLOX 0x00622bc0
 void NewNullTool::render3dAdorn(Adorn* adorn)
 {
 	if (hasWaypoint) {

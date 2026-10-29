@@ -71,6 +71,7 @@ public:
 	);
 
 	// SYNTHETIC: WEBSERVICE 0x100062e0
+	// SYNTHETIC: ROBLOX 0x004619b0
 	// RBX::AdornG3D::`scalar deleting destructor'
 	// SYNTHETIC: WEBSERVICE 0x10006310
 	// RBX::AdornG3D::~AdornG3D

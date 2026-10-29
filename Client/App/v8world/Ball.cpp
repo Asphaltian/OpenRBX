@@ -9,6 +9,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1010a780
+// FUNCTION: ROBLOX 0x0064a310
 Matrix3 Ball::getMomentSolid(float mass) const
 {
 	Vector3 diagonal;
@@ -33,6 +34,7 @@ void Ball::onSetSize()
 }
 
 // FUNCTION: WEBSERVICE 0x1010a7f0
+// FUNCTION: ROBLOX 0x0064a380
 bool Ball::hitTest(const Ray& rayInMe, Vector3& localHitPoint, bool& inside)
 {
 	float distanceSquared = rayInMe.origin.squaredMagnitude();

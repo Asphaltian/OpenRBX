@@ -8,6 +8,7 @@
 namespace RBX {
 
 // VTABLE: WEBSERVICE 0x102480bc
+// VTABLE: ROBLOX 0x00831f2c
 // SIZE 0x98
 class MotorJoint : public Joint
 {
@@ -20,6 +21,7 @@ public:
 	// RBX::MotorJoint::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x1009add0
+	// FUNCTION: ROBLOX 0x005ad810
 	static bool isMotorJoint(Edge* e) { return isJoint(e) && static_cast<Joint*>(e)->getJointType() == MOTOR_JOINT; }
 	unsigned int hashCode() const;
 

@@ -18,12 +18,14 @@ IStage::StageType AssemblyStage::getStageType()
 }
 
 // FUNCTION: WEBSERVICE 0x10126de0
+// FUNCTION: ROBLOX 0x00664640
 void AssemblyStage::wakeAssembly(Assembly* a)
 {
 	static_cast<SleepStage*>(getDownstream())->onWakeUpRequest(a, false);
 }
 
 // FUNCTION: WEBSERVICE 0x10126e00
+// FUNCTION: ROBLOX 0x00664660
 void AssemblyStage::stepUi(int uiStepId)
 {
 	for (std::set<Assembly*>::iterator it = assemblies.begin(); it != assemblies.end(); ++it) {
@@ -36,6 +38,7 @@ void AssemblyStage::stepUi(int uiStepId)
 }
 
 // FUNCTION: WEBSERVICE 0x10126ee0
+// FUNCTION: ROBLOX 0x00664740
 void AssemblyStage::onAssemblyAdded(Assembly* assembly)
 {
 	assembly->putInPipeline(this);
@@ -60,6 +63,7 @@ void AssemblyStage::onJointRemoving(Joint* joint)
 }
 
 // FUNCTION: WEBSERVICE 0x10126f20
+// FUNCTION: ROBLOX 0x00664780
 void AssemblyStage::onEdgeAdded(Edge* e)
 {
 	e->putInPipeline(this);
@@ -92,6 +96,7 @@ AssemblyStage::~AssemblyStage()
 }
 
 // FUNCTION: WEBSERVICE 0x101270c0
+// FUNCTION: ROBLOX 0x00664920
 void AssemblyStage::onAssemblyRemoving(Assembly* assembly)
 {
 	static_cast<SleepStage*>(getDownstream())->onAssemblyRemoving(assembly);
@@ -102,6 +107,7 @@ void AssemblyStage::onAssemblyRemoving(Assembly* assembly)
 }
 
 // FUNCTION: WEBSERVICE 0x101270f0
+// FUNCTION: ROBLOX 0x00664950
 void AssemblyStage::onEdgeRemoving(Edge* e)
 {
 	if (e->downstreamOfStage(this)) {
@@ -124,6 +130,7 @@ void AssemblyStage::onEdgeRemoving(Edge* e)
 }
 
 // FUNCTION: WEBSERVICE 0x10127180
+// FUNCTION: ROBLOX 0x006649e0
 AssemblyStage::AssemblyStage(IStage* upstream, World* world) : IWorldStage(upstream, new SleepStage(this, world), world)
 {
 }

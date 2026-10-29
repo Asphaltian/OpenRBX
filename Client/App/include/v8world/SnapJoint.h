@@ -10,6 +10,7 @@ namespace RBX {
 class Primitive;
 
 // VTABLE: WEBSERVICE 0x1023cf60
+// VTABLE: ROBLOX 0x008306a0
 // SIZE 0x88
 class SnapJoint : public RigidJoint
 {

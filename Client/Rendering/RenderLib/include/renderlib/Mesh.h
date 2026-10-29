@@ -37,6 +37,7 @@ public:
 		Level();
 
 		// STUB: WEBSERVICE 0x10167b50
+		// STUB: ROBLOX 0x00484130
 		Level(G3D::RenderDevice::Primitive primitive) : primitive(primitive) {}
 
 		virtual ~Level();
@@ -127,6 +128,7 @@ public:
 	static void sendGeometry(const Level* lvl, G3D::RenderDevice* rd);
 
 	// FUNCTION: WEBSERVICE 0x101eff00
+	// FUNCTION: ROBLOX 0x0049e040
 	LevelRef dropShadowMesh() { return shadowSurface.dropShadowGeometry; }
 
 	static void endRender(G3D::RenderDevice* rd);
@@ -143,8 +145,10 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x10165ee0
+	// SYNTHETIC: ROBLOX 0x00499c30
 	// RBX::Render::Mesh::ShadowSurface::~ShadowSurface
 	// SYNTHETIC: WEBSERVICE 0x10167660
+	// SYNTHETIC: ROBLOX 0x0049b080
 	// RBX::Render::Mesh::ShadowSurface::ShadowSurface
 	// SYNTHETIC: WEBSERVICE 0x1021eb80
 	// `dynamic initializer for 'RBX::Render::Mesh::visibleGeometry''
@@ -173,6 +177,7 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x102257a0
 	// `dynamic atexit destructor for 'RBX::Render::Mesh::freeList''
 	// SYNTHETIC: WEBSERVICE 0x102257c0
+	// SYNTHETIC: ROBLOX 0x007f05f0
 	// `RBX::Render::Mesh::computeDirectionalShadowVolume'::`2'::`dynamic atexit destructor for 'backface''
 	// SYNTHETIC: WEBSERVICE 0x102257e0
 	// `dynamic atexit destructor for 'RBX::Render::Mesh::visibleGeometry''

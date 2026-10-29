@@ -25,6 +25,7 @@ struct SpecData
 	SpecData();
 
 	// SYNTHETIC: WEBSERVICE 0x100b2dc0
+	// SYNTHETIC: ROBLOX 0x0057aba0
 	// RBX::Render::SpecData::~SpecData
 };
 

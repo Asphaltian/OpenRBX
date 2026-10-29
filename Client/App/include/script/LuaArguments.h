@@ -29,6 +29,7 @@ public:
 	virtual unsigned int size() const { return lua_gettop(L) - 1; }
 
 	// STUB: WEBSERVICE 0x10064ef0
+	// STUB: ROBLOX 0x00572030
 	static bool get(lua_State* L, int luaIndex, Reflection::Value& value)
 	{
 		if (luaIndex > lua_gettop(L)) {
@@ -101,6 +102,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x100ad2c0
+	// FUNCTION: ROBLOX 0x005fdda0
 	virtual void get(int index, Reflection::Value& value) const { get(L, offset + index, value); }
 
 	template <class Iterator>
@@ -120,6 +122,7 @@ public:
 	int push(const Reflection::Value& value) const { return push(value, L); }
 
 	// FUNCTION: WEBSERVICE 0x10062a40
+	// FUNCTION: ROBLOX 0x0056fe60
 	static int push(const Reflection::Value& value, lua_State* const L)
 	{
 		if (value.isType<void>()) {
@@ -214,8 +217,10 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10060490
+	// TEMPLATE: ROBLOX 0x0056d740
 	// ??$pushTable@V?$_Vector_const_iterator@VValue@Reflection@RBX@@V?$allocator@VValue@Reflection@RBX@@@std@@@std@@@LuaArguments@Lua@RBX@@SAHV?$_Vector_const_iterator@VValue@Reflection@RBX@@V?$allocator@VValue@Reflection@RBX@@@std@@@std@@0QAUlua_State@@@Z
 	// TEMPLATE: WEBSERVICE 0x100632c0
+	// TEMPLATE: ROBLOX 0x00570720
 	// ??$pushTable@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@LuaArguments@Lua@RBX@@SAHV?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@0QAUlua_State@@@Z
 	// clang-format on
 

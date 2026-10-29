@@ -46,6 +46,7 @@ public:
 	void set(const BrickColor& value);
 
 	// SYNTHETIC: WEBSERVICE 0x10129d20
+	// SYNTHETIC: ROBLOX 0x005c04f0
 	// RBX::FillToolColor::`scalar deleting destructor'
 };
 

@@ -61,6 +61,7 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x1017ad00
+	// FUNCTION: ROBLOX 0x00485090
 	static float offset(RenderSurfaceType surfaceType)
 	{
 		switch (surfaceType) {

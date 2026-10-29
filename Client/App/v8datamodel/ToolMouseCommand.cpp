@@ -12,6 +12,7 @@ namespace RBX {
 char sToolMouseCommand[] = "ToolMouseCommand";
 
 // STUB: WEBSERVICE 0x101171e0
+// STUB: ROBLOX 0x00656970
 void ToolMouseCommand::updateTargetPoint(const UIEvent& uiEvent)
 {
 	G3D::Vector3 hitWorld(0, 0, 0);
@@ -37,6 +38,7 @@ MouseCommand* ToolMouseCommand::onMouseDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10117300 FOLDED
+// FUNCTION: ROBLOX 0x00656a90 FOLDED
 void ToolMouseCommand::onMouseHover(const UIEvent& uiEvent)
 {
 	updateTargetPoint(uiEvent);
@@ -45,6 +47,7 @@ void ToolMouseCommand::onMouseHover(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10117300 FOLDED
+// FUNCTION: ROBLOX 0x00656a90 FOLDED
 void ToolMouseCommand::onMouseIdle(const UIEvent& uiEvent)
 {
 	updateTargetPoint(uiEvent);

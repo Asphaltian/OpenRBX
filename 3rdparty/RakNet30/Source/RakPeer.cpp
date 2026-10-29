@@ -68,6 +68,7 @@ void* UpdateNetworkLoop( void* arguments );
 #endif
 
 // FUNCTION: WEBSERVICE 0x101af8a0
+// FUNCTION: ROBLOX 0x004d5790
 int SystemAddressAndIndexComp( const SystemAddress &key, const SystemAddressAndIndex &data )
 {
 	if (key < data.systemAddress)
@@ -129,6 +130,7 @@ static const int MAX_OFFLINE_DATA_LENGTH=400; // I set this because I limit ID_C
 //#define _TEST_AES
 
 // FUNCTION: WEBSERVICE 0x101af8d0
+// FUNCTION: ROBLOX 0x004d57c0
 Packet *AllocPacket(unsigned dataSize)
 {
 	Packet *p = (Packet *)malloc(sizeof(Packet)+dataSize);
@@ -139,6 +141,7 @@ Packet *AllocPacket(unsigned dataSize)
 }
 
 // FUNCTION: WEBSERVICE 0x101af900
+// FUNCTION: ROBLOX 0x004d57f0
 Packet *AllocPacket(unsigned dataSize, unsigned char *data)
 {
 	Packet *p = (Packet *)malloc(sizeof(Packet));
@@ -152,6 +155,7 @@ Packet *AllocPacket(unsigned dataSize, unsigned char *data)
 // Constructor
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b58d0
+// FUNCTION: ROBLOX 0x004db6e0
 RakPeer::RakPeer() : processPacketsThreadHandle(0)
 {
 	StringCompressor::AddReference();
@@ -204,6 +208,7 @@ RakPeer::RakPeer() : processPacketsThreadHandle(0)
 // Destructor
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b90b0
+// FUNCTION: ROBLOX 0x004deec0
 RakPeer::~RakPeer()
 {
 //	unsigned i;
@@ -233,6 +238,7 @@ RakPeer::~RakPeer()
 /// \return False on failure (can't create socket or thread), true on success.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101baba0
+// FUNCTION: ROBLOX 0x004e09b0
 bool RakPeer::Startup( unsigned short maxConnections, int _threadSleepTimer, SocketDescriptor *socketDescriptors, unsigned socketDescriptorCount )
 {
 	if (IsActive())
@@ -451,6 +457,7 @@ bool RakPeer::Startup( unsigned short maxConnections, int _threadSleepTimer, Soc
 // If the private keys are 0, then a new key will be generated when this function is called
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bafc0
+// FUNCTION: ROBLOX 0x004e0dd0
 void RakPeer::InitializeSecurity(const char *pubKeyE, const char *pubKeyN, const char *privKeyP, const char *privKeyQ )
 {
 #if !defined(_COMPATIBILITY_1)
@@ -552,6 +559,7 @@ unsigned short RakPeer::GetMaximumIncomingConnections( void ) const
 /// \return the number of open connections
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afa10
+// FUNCTION: ROBLOX 0x004d5900
 unsigned short RakPeer::NumberOfConnections(void) const
 {
 	unsigned short i, count=0;
@@ -572,6 +580,7 @@ unsigned short RakPeer::NumberOfConnections(void) const
 // passwordDataLength: The length in bytes of passwordData
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afa40
+// FUNCTION: ROBLOX 0x004d5930
 void RakPeer::SetIncomingPassword( const char* passwordData, int passwordDataLength )
 {
 	//if (passwordDataLength > MAX_OFFLINE_DATA_LENGTH)
@@ -592,6 +601,7 @@ void RakPeer::SetIncomingPassword( const char* passwordData, int passwordDataLen
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afa90
+// FUNCTION: ROBLOX 0x004d5980
 void RakPeer::GetIncomingPassword( char* passwordData, int *passwordDataLength  )
 {
 	if (passwordData==0)
@@ -626,6 +636,7 @@ void RakPeer::GetIncomingPassword( char* passwordData, int *passwordDataLength  
 // True on successful initiation. False on incorrect parameters, internal error, or too many existing peers
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b7ec0
+// FUNCTION: ROBLOX 0x004ddcd0
 bool RakPeer::Connect( const char* host, unsigned short remotePort, const char* passwordData, int passwordDataLength, unsigned connectionSocketIndex )
 {
 	// If endThreads is true here you didn't call Startup() first.
@@ -674,6 +685,7 @@ bool RakPeer::Connect( const char* host, unsigned short remotePort, const char* 
 // Stops the network threads and close all connections.  Multiple calls are ok.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b7fa0
+// FUNCTION: ROBLOX 0x004dddb0
 void RakPeer::Shutdown( unsigned int blockDuration, unsigned char orderingChannel )
 {
 	unsigned i,j;
@@ -827,6 +839,7 @@ inline bool RakPeer::IsActive( void ) const
 // numberOfSystems (int, out): As input, the size of remoteSystems array.  As output, the number of elements put into the array
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afad0
+// FUNCTION: ROBLOX 0x004d59c0
 bool RakPeer::GetConnectionList( SystemAddress *remoteSystems, unsigned short *numberOfSystems ) const
 {
 	int count, index;
@@ -885,6 +898,7 @@ bool RakPeer::GetConnectionList( SystemAddress *remoteSystems, unsigned short *n
 // False if we are not connected to the specified recipient.  True otherwise
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b38c0
+// FUNCTION: ROBLOX 0x004d96d0
 bool RakPeer::Send( const char *data, const int length, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast )
 {
 #ifdef _DEBUG
@@ -913,6 +927,7 @@ bool RakPeer::Send( const char *data, const int length, PacketPriority priority,
 }
 
 // FUNCTION: WEBSERVICE 0x101b39b0
+// FUNCTION: ROBLOX 0x004d97c0
 bool RakPeer::Send( const RakNet::BitStream * bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast )
 {
 #ifdef _DEBUG
@@ -953,6 +968,7 @@ bool RakPeer::Send( const RakNet::BitStream * bitStream, PacketPriority priority
 // This also updates all memory blocks associated with synchronized memory and distributed objects
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101af6f0
+// FUNCTION: ROBLOX 0x004d55e0
 RakNetStatistics RakNetStatistics::operator +=(const RakNetStatistics& other)
 {
 	unsigned i;
@@ -999,6 +1015,7 @@ RakNetStatistics RakNetStatistics::operator +=(const RakNetStatistics& other)
 }
 
 // FUNCTION: WEBSERVICE 0x101b5b20
+// FUNCTION: ROBLOX 0x004db930
 bool RakPeer::IsConnected(SystemAddress systemAddress)
 {
 	int index = GetIndexFromSystemAddress(systemAddress, false);
@@ -1006,6 +1023,7 @@ bool RakPeer::IsConnected(SystemAddress systemAddress)
 }
 
 // FUNCTION: WEBSERVICE 0x101b01d0
+// FUNCTION: ROBLOX 0x004d60c0
 Packet* RakPeer::AllocatePacket(unsigned dataSize)
 {
 	Packet *p = (Packet *) malloc(sizeof(Packet) + dataSize);
@@ -1016,6 +1034,7 @@ Packet* RakPeer::AllocatePacket(unsigned dataSize)
 }
 
 // FUNCTION: WEBSERVICE 0x101affa0
+// FUNCTION: ROBLOX 0x004d5e90
 void RakPeer::SendTTL1( const char* host, unsigned short remotePort, unsigned connectionSocketIndex )
 {
 	char fakeData[2];
@@ -1043,6 +1062,7 @@ void RakPeer::SetPerConnectionOutgoingBandwidthLimit( unsigned maxBitsPerSecond 
 }
 
 // FUNCTION: WEBSERVICE 0x101b9220
+// FUNCTION: ROBLOX 0x004df030
 Packet* RakPeer::Receive( void )
 {
 	Packet *packet = ReceiveIgnoreRPC();
@@ -1066,6 +1086,7 @@ Packet* RakPeer::Receive( void )
 #pragma warning( disable : 4701 ) // warning C4701: local variable <variable name> may be used without having been initialized
 #endif
 // FUNCTION: WEBSERVICE 0x101b82a0
+// FUNCTION: ROBLOX 0x004de0b0
 Packet* RakPeer::ReceiveIgnoreRPC( void )
 {
 	if ( !( IsActive() ) )
@@ -1165,6 +1186,7 @@ Packet* RakPeer::ReceiveIgnoreRPC( void )
 // Call this to deallocate a packet returned by Receive, in the same order returned to you from Receive
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afbb0
+// FUNCTION: ROBLOX 0x004d5aa0
 void RakPeer::DeallocatePacket( Packet *packet )
 {
 	if ( packet == 0 )
@@ -1196,6 +1218,7 @@ unsigned short RakPeer::GetMaximumNumberOfPeers( void ) const
 // UnregisterAsRemoteProcedureCall
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afbf0
+// FUNCTION: ROBLOX 0x004d5ae0
 void RakPeer::RegisterAsRemoteProcedureCall( const char* uniqueID, void ( *functionPointer ) ( RPCParameters *rpcParms ) )
 {
 	if ( uniqueID == 0 || uniqueID[ 0 ] == 0 || functionPointer == 0 )
@@ -1229,6 +1252,7 @@ void RakPeer::RegisterAsRemoteProcedureCall( const char* uniqueID, void ( *funct
 }
 
 // FUNCTION: WEBSERVICE 0x101afc20
+// FUNCTION: ROBLOX 0x004d5b10
 void RakPeer::RegisterClassMemberRPC( const char* uniqueID, void *functionPointer )
 {
 	if ( uniqueID == 0 || uniqueID[ 0 ] == 0 || functionPointer == 0 )
@@ -1247,6 +1271,7 @@ void RakPeer::RegisterClassMemberRPC( const char* uniqueID, void *functionPointe
 // passed to RegisterAsRemoteProcedureCall
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afc50
+// FUNCTION: ROBLOX 0x004d5b40
 void RakPeer::UnregisterAsRemoteProcedureCall( const char* uniqueID )
 {
 	if ( uniqueID == 0 || uniqueID[ 0 ] == 0 )
@@ -1286,6 +1311,7 @@ void RakPeer::UnregisterAsRemoteProcedureCall( const char* uniqueID )
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b84e0
+// FUNCTION: ROBLOX 0x004de2f0
 bool RakPeer::RPC( const char* uniqueID, const char *data, unsigned int bitLength, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RakNetTime *includedTimestamp, NetworkID networkID, RakNet::BitStream *replyFromTarget )
 {
 #ifdef _DEBUG
@@ -1517,6 +1543,7 @@ bool RakPeer::RPC( const char* uniqueID, const char *data, unsigned int bitLengt
 #pragma warning( disable : 4701 ) // warning C4701: local variable <variable name> may be used without having been initialized
 #endif
 // FUNCTION: WEBSERVICE 0x101b1270
+// FUNCTION: ROBLOX 0x004d7080
 bool RakPeer::RPC( const char* uniqueID, const RakNet::BitStream *bitStream, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RakNetTime *includedTimestamp, NetworkID networkID, RakNet::BitStream *replyFromTarget )
 {
 	if (bitStream)
@@ -1535,6 +1562,7 @@ bool RakPeer::RPC( const char* uniqueID, const RakNet::BitStream *bitStream, Pac
 // channel: If blockDuration > 0, the disconnect packet will be sent on this channel
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b8b90
+// FUNCTION: ROBLOX 0x004de9a0
 void RakPeer::CloseConnection( const SystemAddress target, bool sendDisconnectionNotification, unsigned char orderingChannel )
 {
 	CloseConnectionInternal(target, sendDisconnectionNotification, false, orderingChannel);
@@ -1570,6 +1598,7 @@ int RakPeer::GetIndexFromSystemAddress( const SystemAddress systemAddress )
 // A valid systemAddress or UNASSIGNED_SYSTEM_ADDRESS if no such player at that index
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afc90
+// FUNCTION: ROBLOX 0x004d5b80
 SystemAddress RakPeer::GetSystemAddressFromIndex( int index )
 {
 	// remoteSystemList in user thread
@@ -1591,6 +1620,7 @@ SystemAddress RakPeer::GetSystemAddressFromIndex( int index )
 // milliseconds - how many ms for a temporary ban.  Use 0 for a permanent ban
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b1330
+// FUNCTION: ROBLOX 0x004d7140
 void RakPeer::AddToBanList( const char *IP, RakNetTime milliseconds )
 {
 	unsigned index;
@@ -1641,6 +1671,7 @@ void RakPeer::AddToBanList( const char *IP, RakNetTime milliseconds )
 // All IP addresses starting with 128.0.0
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b3a90
+// FUNCTION: ROBLOX 0x004d98a0
 void RakPeer::RemoveFromBanList( const char *IP )
 {
 	unsigned index;
@@ -1680,6 +1711,7 @@ void RakPeer::RemoveFromBanList( const char *IP )
 // Allows all previously banned IPs to connect.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b14a0
+// FUNCTION: ROBLOX 0x004d72b0
 void RakPeer::ClearBanList( void )
 {
 	unsigned index;
@@ -1709,6 +1741,7 @@ void RakPeer::ClearBanList( void )
 // False otherwise.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b3b90
+// FUNCTION: ROBLOX 0x004d99a0
 bool RakPeer::IsBanned( const char *IP )
 {
 	unsigned banListIndex, characterIndex;
@@ -1820,6 +1853,7 @@ void RakPeer::Ping( const SystemAddress target )
 // connectionSocketIndex Index into the array of socket descriptors passed to socketDescriptors in RakPeer::Startup() to send on.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b1540
+// FUNCTION: ROBLOX 0x004d7350
 void RakPeer::Ping( const char* host, unsigned short remotePort, bool onlyReplyOnAcceptingConnections, unsigned connectionSocketIndex )
 {
 	if ( host == 0 )
@@ -1872,6 +1906,7 @@ void RakPeer::Ping( const char* host, unsigned short remotePort, bool onlyReplyO
 // target - whose time to read
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5b80
+// FUNCTION: ROBLOX 0x004db990
 int RakPeer::GetAveragePing( const SystemAddress systemAddress )
 {
 	int sum, quantity;
@@ -1902,6 +1937,7 @@ int RakPeer::GetAveragePing( const SystemAddress systemAddress )
 // target - whose time to read
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5bd0
+// FUNCTION: ROBLOX 0x004db9e0
 int RakPeer::GetLastPing( const SystemAddress systemAddress ) const
 {
 	RemoteSystemStruct * remoteSystem = GetRemoteSystemFromSystemAddress( systemAddress, false, false );
@@ -1920,6 +1956,7 @@ int RakPeer::GetLastPing( const SystemAddress systemAddress ) const
 // target - whose time to read
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5c10
+// FUNCTION: ROBLOX 0x004dba20
 int RakPeer::GetLowestPing( const SystemAddress systemAddress ) const
 {
 	RemoteSystemStruct * remoteSystem = GetRemoteSystemFromSystemAddress( systemAddress, false, false );
@@ -1971,6 +2008,7 @@ void RakPeer::SetOfflinePingResponse( const char *data, const unsigned int lengt
 // Note that unlike in previous versions, this is a struct and is not sequential
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5c40
+// FUNCTION: ROBLOX 0x004dba50
 SystemAddress RakPeer::GetInternalID( const SystemAddress systemAddress ) const
 {
 	if (systemAddress==UNASSIGNED_SYSTEM_ADDRESS)
@@ -2010,6 +2048,7 @@ SystemAddress RakPeer::GetInternalID( const SystemAddress systemAddress ) const
 // target: Which remote system you are referring to for your external ID
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afd40
+// FUNCTION: ROBLOX 0x004d5c30
 SystemAddress RakPeer::GetExternalID( const SystemAddress target ) const
 {
 	unsigned i;
@@ -2037,6 +2076,7 @@ SystemAddress RakPeer::GetExternalID( const SystemAddress target ) const
 // \param[in] time Time, in MS
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5d30
+// FUNCTION: ROBLOX 0x004dbb40
 void RakPeer::SetTimeoutTime( RakNetTime timeMS, const SystemAddress target )
 {
 	RemoteSystemStruct * remoteSystem = GetRemoteSystemFromSystemAddress( target, false, true );
@@ -2068,6 +2108,7 @@ void RakPeer::SetTimeoutTime( RakNetTime timeMS, const SystemAddress target )
 // False on failure (we are connected).  True on success.  Maximum allowed size is MAXIMUM_MTU_SIZE
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afe00
+// FUNCTION: ROBLOX 0x004d5cf0
 bool RakPeer::SetMTUSize( int size )
 {
 	if ( IsActive() )
@@ -2091,6 +2132,7 @@ bool RakPeer::SetMTUSize( int size )
 // The MTU sized specified in SetMTUSize
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5d60
+// FUNCTION: ROBLOX 0x004dbb70
 int RakPeer::GetMTUSize( const SystemAddress target ) const
 {
 	if (target!=UNASSIGNED_SYSTEM_ADDRESS)
@@ -2107,6 +2149,7 @@ int RakPeer::GetMTUSize( const SystemAddress target ) const
 // Returns the number of IP addresses we have
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afe50
+// FUNCTION: ROBLOX 0x004d5d40
 unsigned int RakPeer::GetNumberOfAddresses( void )
 {
 #if !defined(_COMPATIBILITY_1)
@@ -2131,6 +2174,7 @@ unsigned int RakPeer::GetNumberOfAddresses( void )
 // Returns an IP address at index 0 to GetNumberOfAddresses-1
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afeb0
+// FUNCTION: ROBLOX 0x004d5da0
 const char* RakPeer::GetLocalIP( unsigned int index )
 {
 #if !defined(_COMPATIBILITY_1)
@@ -2176,6 +2220,7 @@ void RakPeer::AllowConnectionResponseIPMigration( bool allow )
 // remotePort: Which port to connect to on the remote machine.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b16c0
+// FUNCTION: ROBLOX 0x004d74d0
 void RakPeer::AdvertiseSystem( const char *host, unsigned short remotePort, const char *data, int dataLength, unsigned connectionSocketIndex )
 {
 	if ( IsActive() == false )
@@ -2267,6 +2312,7 @@ void RakPeer::AdvertiseSystem( const char *host, unsigned short remotePort, cons
 // Defaults to 0 (never return this notification)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101aff00
+// FUNCTION: ROBLOX 0x004d5df0
 void RakPeer::SetSplitMessageProgressInterval(int interval)
 {
 	RakAssert(interval>=0);
@@ -2282,6 +2328,7 @@ void RakPeer::SetSplitMessageProgressInterval(int interval)
 // timeoutMS How many ms to wait before simply not sending an unreliable message.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101aff50
+// FUNCTION: ROBLOX 0x004d5e40
 void RakPeer::SetUnreliableTimeout(RakNetTime timeoutMS)
 {
 	RakAssert(timeoutMS>=0);
@@ -2322,6 +2369,7 @@ void RakPeer::SetCompileFrequencyTable( bool doCompile )
 // Ffalse (failure) if connected or if frequency table tracking is not enabled.  Otherwise true (success)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101afff0
+// FUNCTION: ROBLOX 0x004d5ee0
 bool RakPeer::GetOutgoingFrequencyTable( unsigned int outputFrequencyTable[ 256 ] )
 {
 	if ( IsActive() )
@@ -2352,6 +2400,7 @@ bool RakPeer::GetOutgoingFrequencyTable( unsigned int outputFrequencyTable[ 256 
 // False on failure (we are connected).  True otherwise
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b0030
+// FUNCTION: ROBLOX 0x004d5f20
 bool RakPeer::GenerateCompressionLayer( unsigned int inputFrequencyTable[ 256 ], bool inputLayer )
 {
 	if ( IsActive() )
@@ -2386,6 +2435,7 @@ bool RakPeer::GenerateCompressionLayer( unsigned int inputFrequencyTable[ 256 ],
 // False on failure (we are connected).  True otherwise
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b1860
+// FUNCTION: ROBLOX 0x004d7670
 bool RakPeer::DeleteCompressionLayer( bool inputLayer )
 {
 	if ( IsActive() )
@@ -2417,6 +2467,7 @@ bool RakPeer::DeleteCompressionLayer( bool inputLayer )
 // The compression ratio.  A low compression ratio is good.  Compression is for outgoing data
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b0120
+// FUNCTION: ROBLOX 0x004d6010
 float RakPeer::GetCompressionRatio( void ) const
 {
 	if ( rawBytesSent > 0 )
@@ -2433,6 +2484,7 @@ float RakPeer::GetCompressionRatio( void ) const
 // The decompression ratio.  A high decompression ratio is good.  Decompression is for incoming data
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b0160
+// FUNCTION: ROBLOX 0x004d6050
 float RakPeer::GetDecompressionRatio( void ) const
 {
 	if ( rawBytesReceived > 0 )
@@ -2450,6 +2502,7 @@ float RakPeer::GetDecompressionRatio( void ) const
 // \param messageHandler Pointer to a plugin to attach
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b18e0
+// FUNCTION: ROBLOX 0x004d76f0
 void RakPeer::AttachPlugin( PluginInterface *plugin )
 {
 	if (messageHandlerList.GetIndexOf(plugin)==MAX_UNSIGNED_LONG)
@@ -2465,6 +2518,7 @@ void RakPeer::AttachPlugin( PluginInterface *plugin )
 // \param messageHandler Pointer to a plugin to detach
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b1930
+// FUNCTION: ROBLOX 0x004d7740
 void RakPeer::DetachPlugin( PluginInterface *plugin )
 {
 	if (plugin==0)
@@ -2488,6 +2542,7 @@ void RakPeer::DetachPlugin( PluginInterface *plugin )
 // pushAtHead True to push the packet so that the next receive call returns it.  False to push it at the end of the queue (obviously pushing it at the end makes the packets out of order)
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b19a0
+// FUNCTION: ROBLOX 0x004d77b0
 void RakPeer::PushBackPacket( Packet *packet, bool pushAtHead)
 {
 #ifdef _RAKNET_THREADSAFE
@@ -2512,6 +2567,7 @@ void RakPeer::SetRouterInterface( RouterInterface *routerInterface )
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b01b0
+// FUNCTION: ROBLOX 0x004d60a0
 void RakPeer::RemoveRouterInterface( RouterInterface *routerInterface )
 {
 	if (router==routerInterface)
@@ -2523,6 +2579,7 @@ void RakPeer::RemoveRouterInterface( RouterInterface *routerInterface )
 // To simulate bi-directional ping and packet loss, you should call this on both the sender and the recipient, with half the total ping and maxSendBPS value on each.
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b0200
+// FUNCTION: ROBLOX 0x004d60f0
 void RakPeer::ApplyNetworkSimulator( double maxSendBPS, unsigned short minExtraPing, unsigned short extraPingVariance)
 {
 #ifndef _RELEASE
@@ -2544,6 +2601,7 @@ void RakPeer::ApplyNetworkSimulator( double maxSendBPS, unsigned short minExtraP
 // Returns if you previously called ApplyNetworkSimulator
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b0290
+// FUNCTION: ROBLOX 0x004d6180
 bool RakPeer::IsNetworkSimulatorActive( void )
 {
 #ifndef _RELEASE
@@ -2557,6 +2615,7 @@ bool RakPeer::IsNetworkSimulatorActive( void )
 // For internal use
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5db0
+// FUNCTION: ROBLOX 0x004dbbc0
 char *RakPeer::GetRPCString( const char *data, const unsigned int bitSize, const SystemAddress systemAddress)
 {
 	bool nameIsEncoded;
@@ -2604,6 +2663,7 @@ char *RakPeer::GetRPCString( const char *data, const unsigned int bitSize, const
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b5f70
+// FUNCTION: ROBLOX 0x004dbd80
 RakNetStatistics * const RakPeer::GetStatistics( const SystemAddress systemAddress )
 {
 	if (systemAddress==UNASSIGNED_SYSTEM_ADDRESS)
@@ -2663,6 +2723,7 @@ void RakPeer::RemoveFromRequestedConnectionsList( const SystemAddress systemAddr
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b3ce0
+// FUNCTION: ROBLOX 0x004d9af0
 int RakPeer::GetIndexFromSystemAddress( const SystemAddress systemAddress, bool calledFromNetworkThread )
 {
 	unsigned i;
@@ -2695,6 +2756,7 @@ int RakPeer::GetIndexFromSystemAddress( const SystemAddress systemAddress, bool 
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b6050
+// FUNCTION: ROBLOX 0x004dbe60
 bool RakPeer::SendConnectionRequest( const char* host, unsigned short remotePort, const char* passwordData, int passwordDataLength, unsigned connectionSocketIndex )
 {
 	SystemAddress systemAddress;
@@ -2729,6 +2791,7 @@ bool RakPeer::SendConnectionRequest( const char* host, unsigned short remotePort
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b3d90
+// FUNCTION: ROBLOX 0x004d9ba0
 RakPeer::RemoteSystemStruct *RakPeer::GetRemoteSystemFromSystemAddress( const SystemAddress systemAddress, bool calledFromNetworkThread, bool onlyActive ) const
 {
 	unsigned i;
@@ -2773,6 +2836,7 @@ RakPeer::RemoteSystemStruct *RakPeer::GetRemoteSystemFromSystemAddress( const Sy
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b8c10
+// FUNCTION: ROBLOX 0x004dea20
 void RakPeer::ParseConnectionRequestPacket( RakPeer::RemoteSystemStruct *remoteSystem, SystemAddress systemAddress, const char *data, int byteSize )
 {
 	// If we are full tell the sender.
@@ -2824,6 +2888,7 @@ void RakPeer::ParseConnectionRequestPacket( RakPeer::RemoteSystemStruct *remoteS
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b6120
+// FUNCTION: ROBLOX 0x004dbf30
 void RakPeer::OnConnectionRequest( RakPeer::RemoteSystemStruct *remoteSystem, unsigned char *AESKey, bool setAESKey )
 {
 	// Already handled by caller
@@ -2862,6 +2927,7 @@ void RakPeer::OnConnectionRequest( RakPeer::RemoteSystemStruct *remoteSystem, un
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b62a0
+// FUNCTION: ROBLOX 0x004dc0b0
 void RakPeer::NotifyAndFlagForShutdown( const SystemAddress systemAddress, bool performImmediate, unsigned char orderingChannel )
 {
 	RakNet::BitStream temp( sizeof(unsigned char) );
@@ -2879,6 +2945,7 @@ void RakPeer::NotifyAndFlagForShutdown( const SystemAddress systemAddress, bool 
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b02c0
+// FUNCTION: ROBLOX 0x004d61b0
 unsigned short RakPeer::GetNumberOfRemoteInitiatedConnections( void ) const
 {
 	unsigned short i, numberOfIncomingConnections;
@@ -2901,6 +2968,7 @@ unsigned short RakPeer::GetNumberOfRemoteInitiatedConnections( void ) const
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b63e0
+// FUNCTION: ROBLOX 0x004dc1f0
 RakPeer::RemoteSystemStruct * RakPeer::AssignSystemAddressToRemoteSystemList( const SystemAddress systemAddress, RemoteSystemStruct::ConnectMode connectionMode, unsigned connectionSocketIndex )
 {
 	RemoteSystemStruct * remoteSystem;
@@ -2962,6 +3030,7 @@ RakPeer::RemoteSystemStruct * RakPeer::AssignSystemAddressToRemoteSystemList( co
 // Adjust the first four bytes (treated as unsigned int) of the pointer
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b6590
+// FUNCTION: ROBLOX 0x004dc3a0
 void RakPeer::ShiftIncomingTimestamp( unsigned char *data, SystemAddress systemAddress ) const
 {
 #ifdef _DEBUG
@@ -2981,6 +3050,7 @@ void RakPeer::ShiftIncomingTimestamp( unsigned char *data, SystemAddress systemA
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Thanks to Chris Taylor (cat02e@fsu.edu) for the improved timestamping algorithm
 // FUNCTION: WEBSERVICE 0x101b3e80
+// FUNCTION: ROBLOX 0x004d9c90
 RakNetTime RakPeer::GetBestClockDifferential( const SystemAddress systemAddress ) const
 {
 	int counter, lowestPingSoFar;
@@ -3024,6 +3094,7 @@ RakNetTime RakPeer::GetBestClockDifferential( const SystemAddress systemAddress 
 #pragma warning( disable : 4701 ) // warning C4701: local variable <variable name> may be used without having been initialized
 #endif
 // FUNCTION: WEBSERVICE 0x101b3ee0
+// FUNCTION: ROBLOX 0x004d9cf0
 bool RakPeer::HandleRPCPacket( const char *data, int length, SystemAddress systemAddress )
 {
 	// RPC BitStream format is
@@ -3297,6 +3368,7 @@ void RakPeer::HandleRPCReplyPacket( const char *data, int length, SystemAddress 
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b0310
+// FUNCTION: ROBLOX 0x004d6200
 void RakPeer::GenerateSYNCookieRandomNumber( void )
 {
 #if !defined(_COMPATIBILITY_1)
@@ -3316,6 +3388,7 @@ void RakPeer::GenerateSYNCookieRandomNumber( void )
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b6680
+// FUNCTION: ROBLOX 0x004dc490
 void RakPeer::SecuredConnectionResponse( const SystemAddress systemAddress )
 {
 #if !defined(_COMPATIBILITY_1)
@@ -3361,6 +3434,7 @@ void RakPeer::SecuredConnectionResponse( const SystemAddress systemAddress )
 }
 
 // FUNCTION: WEBSERVICE 0x101b9280
+// FUNCTION: ROBLOX 0x004df090
 void RakPeer::SecuredConnectionConfirmation( RakPeer::RemoteSystemStruct * remoteSystem, char* data )
 {
 #if !defined(_COMPATIBILITY_1)
@@ -3474,6 +3548,7 @@ bool RakPeer::AllowIncomingConnections(void) const
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b6810
+// FUNCTION: ROBLOX 0x004dc620
 void RakPeer::PingInternal( const SystemAddress target, bool performImmediate, PacketReliability reliability )
 {
 	if ( IsActive() == false )
@@ -3491,6 +3566,7 @@ void RakPeer::PingInternal( const SystemAddress target, bool performImmediate, P
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b6960
+// FUNCTION: ROBLOX 0x004dc770
 void RakPeer::CloseConnectionInternal( const SystemAddress target, bool sendDisconnectionNotification, bool performImmediate, unsigned char orderingChannel )
 {
 	unsigned i;
@@ -3555,6 +3631,7 @@ void RakPeer::CloseConnectionInternal( const SystemAddress target, bool sendDisc
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b0380
+// FUNCTION: ROBLOX 0x004d6270
 bool RakPeer::ValidSendTarget(SystemAddress systemAddress, bool broadcast)
 {
 	unsigned remoteSystemIndex;
@@ -3575,6 +3652,7 @@ bool RakPeer::ValidSendTarget(SystemAddress systemAddress, bool broadcast)
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b19d0
+// FUNCTION: ROBLOX 0x004d77e0
 void RakPeer::SendBuffered( const char *data, int numberOfBitsToSend, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, RemoteSystemStruct::ConnectMode connectionMode )
 {
 #ifdef _DEBUG
@@ -3611,6 +3689,7 @@ void RakPeer::SendBuffered( const char *data, int numberOfBitsToSend, PacketPrio
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b4390
+// FUNCTION: ROBLOX 0x004da1a0
 bool RakPeer::SendImmediate( char *data, int numberOfBitsToSend, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, bool useCallerDataAllocation, RakNetTimeNS currentTime )
 {
 	unsigned *sendList;
@@ -3830,6 +3909,7 @@ bool RakPeer::HandleBufferedRPC(BufferedCommandStruct *bcs, RakNetTime time)
 */
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b1ac0
+// FUNCTION: ROBLOX 0x004d78d0
 void RakPeer::ClearBufferedCommands(void)
 {
 	BufferedCommandStruct *bcs;
@@ -3851,6 +3931,7 @@ void RakPeer::ClearBufferedCommands(void)
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b1b10
+// FUNCTION: ROBLOX 0x004d7920
 void RakPeer::ClearRequestedConnectionList(void)
 {
 	RequestedConnectionStruct *bcs;
@@ -3870,6 +3951,7 @@ void RakPeer::ClearRequestedConnectionList(void)
 #endif
 }
 // FUNCTION: WEBSERVICE 0x101b1b70
+// FUNCTION: ROBLOX 0x004d7980
 inline void RakPeer::AddPacketToProducer(Packet *p)
 {
 	Packet **packetPtr=packetSingleProducerConsumer.WriteLock();
@@ -3890,6 +3972,7 @@ void ProcessPortUnreachable( unsigned int binaryAddress, unsigned short port, Ra
 }
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b6a80
+// FUNCTION: ROBLOX 0x004dc890
 #ifdef _WIN32
 void __stdcall ProcessNetworkPacket( const unsigned int binaryAddress, const unsigned short port, const char *data, const int length, RakPeer *rakPeer, unsigned connectionSocketIndex )
 #else
@@ -4222,6 +4305,7 @@ void ProcessNetworkPacket( const unsigned int binaryAddress, const unsigned shor
 
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101b9650
+// FUNCTION: ROBLOX 0x004df460
 bool RakPeer::RunUpdateCycle( void )
 {
 	RakPeer::RemoteSystemStruct * remoteSystem;
@@ -4906,6 +4990,7 @@ bool RakPeer::RunUpdateCycle( void )
 unsigned __stdcall UpdateNetworkLoop( LPVOID arguments )
 #else
 // FUNCTION: WEBSERVICE 0x101bab00
+// FUNCTION: ROBLOX 0x004e0910
 void* UpdateNetworkLoop( void* arguments )
 #endif
 {

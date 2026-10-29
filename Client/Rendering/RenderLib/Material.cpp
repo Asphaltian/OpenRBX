@@ -4,18 +4,21 @@ namespace RBX {
 namespace Render {
 
 // FUNCTION: WEBSERVICE 0x101f6640
+// FUNCTION: ROBLOX 0x004a0f70
 bool Material::veryTransparent() const
 {
 	return levels.size() > 0 && levels[0].transparent() > 0.25f;
 }
 
 // FUNCTION: WEBSERVICE 0x101f6770
+// FUNCTION: ROBLOX 0x004a10a0
 Material::Level::Level()
 	: emptyLevel(true), mColor(G3D::Color3::white()), mSpecular(0), mShiny(0), mReflect(0), mTransparent(0)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101f67f0
+// FUNCTION: ROBLOX 0x004a1120
 Material::Level::Level(
 	TextureProxyRef baseTexture, G3D::Color3 color, float specular, float shiny, float reflect, float transparent
 )
@@ -32,11 +35,13 @@ Material::Level::Level(
 }
 
 // FUNCTION: WEBSERVICE 0x101f6930
+// FUNCTION: ROBLOX 0x004a1260
 Material::Level::~Level()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101f69e0
+// FUNCTION: ROBLOX 0x004a1310
 void Material::Level::configureRenderDevice(G3D::RenderDevice* renderDevice) const
 {
 	renderDevice->setColor(mColor);
@@ -51,6 +56,7 @@ Material::~Material()
 }
 
 // FUNCTION: WEBSERVICE 0x101f6ec0
+// FUNCTION: ROBLOX 0x004a17f0
 const Material::Level& Material::appendEmptyLevel()
 {
 	levels.resize(levels.size() + 1, false);
@@ -58,6 +64,7 @@ const Material::Level& Material::appendEmptyLevel()
 }
 
 // FUNCTION: WEBSERVICE 0x101f6ef0
+// FUNCTION: ROBLOX 0x004a1820
 const Material::Level& Material::appendLevel(
 	TextureProxyRef baseTexture, G3D::Color3 color, float specular, float shiny, float reflect, float transparent
 )
@@ -68,6 +75,7 @@ const Material::Level& Material::appendLevel(
 }
 
 // FUNCTION: WEBSERVICE 0x101f6ff0
+// FUNCTION: ROBLOX 0x004a1920
 Material::Material()
 {
 }

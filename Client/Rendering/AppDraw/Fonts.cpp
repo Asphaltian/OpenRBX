@@ -7,6 +7,7 @@ namespace RBX {
 G3D::ReferenceCountedPointer<G3D::GFont> Fonts::fontRef;
 
 // FUNCTION: WEBSERVICE 0x10031af0
+// FUNCTION: ROBLOX 0x00671af0
 G3D::ReferenceCountedPointer<G3D::GFont> Fonts::getFont()
 {
 	if (fontRef.isNull()) {

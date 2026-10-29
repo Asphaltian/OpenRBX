@@ -25,18 +25,21 @@ void ArrowToolBase::onMouseHover(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x100bf0f0
+// FUNCTION: ROBLOX 0x00620d50
 void ArrowToolBase::onMouseIdle(const UIEvent& uiEvent)
 {
 	overInstance = getUnlockedPart(uiEvent) != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100bf110
+// FUNCTION: ROBLOX 0x00620d70
 const std::string ArrowToolBase::getCursorName() const
 {
 	return overInstance ? "DragCursor" : "ArrowCursor";
 }
 
 // FUNCTION: WEBSERVICE 0x100bf3a0
+// FUNCTION: ROBLOX 0x00620fa0
 void BoxSelectCommand::render2d(Adorn* adorn)
 {
 	G3D::Rect2D temp = G3D::Rect2D::xyxy(mouseDownView.x, mouseDownView.y, mouseCurrentView.x, mouseCurrentView.y);
@@ -45,6 +48,7 @@ void BoxSelectCommand::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100bfe60
+// FUNCTION: ROBLOX 0x00621880
 void BoxSelectCommand::getMouseInstances(std::set<Instance*>& instances, const UIEvent& uiEvent, G3D::Rect2D& selectBox)
 {
 	Camera* camera = workspace->getCamera();
@@ -67,6 +71,7 @@ void BoxSelectCommand::getMouseInstances(std::set<Instance*>& instances, const U
 }
 
 // FUNCTION: WEBSERVICE 0x100c0070
+// FUNCTION: ROBLOX 0x00621a90
 BoxSelectCommand::BoxSelectCommand(Workspace* workspace)
 	: Named<MouseCommand, sBoxSelectCommand>(workspace), selection(workspace), mouseDownView(0, 0),
 	  mouseCurrentView(0, 0)
@@ -74,6 +79,7 @@ BoxSelectCommand::BoxSelectCommand(Workspace* workspace)
 }
 
 // FUNCTION: WEBSERVICE 0x100c0790
+// FUNCTION: ROBLOX 0x006221b0
 MouseCommand* ArrowToolBase::onMouseDown(const UIEvent& uiEvent)
 {
 	G3D::Vector3 hitWorld;
@@ -114,6 +120,7 @@ MouseCommand* ArrowToolBase::onMouseDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x100c09e0
+// FUNCTION: ROBLOX 0x00622400
 void BoxSelectCommand::selectAnd(const std::set<Instance*>& newItemsInBox)
 {
 	std::set_difference(
@@ -136,6 +143,7 @@ void BoxSelectCommand::selectAnd(const std::set<Instance*>& newItemsInBox)
 }
 
 // FUNCTION: WEBSERVICE 0x100c0ab0
+// FUNCTION: ROBLOX 0x006224d0
 void BoxSelectCommand::selectReverse(const std::set<Instance*>& newItemsInBox)
 {
 	std::set_difference(
@@ -158,6 +166,7 @@ void BoxSelectCommand::selectReverse(const std::set<Instance*>& newItemsInBox)
 }
 
 // FUNCTION: WEBSERVICE 0x100c0b80
+// FUNCTION: ROBLOX 0x006225a0
 MouseCommand* BoxSelectCommand::onMouseDown(const UIEvent& uiEvent)
 {
 	previousItemsInBox.clear();
@@ -176,6 +185,7 @@ MouseCommand* BoxSelectCommand::onMouseDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x100c0c20
+// FUNCTION: ROBLOX 0x00622640
 void BoxSelectCommand::onMouseMove(const UIEvent& uiEvent)
 {
 	mouseCurrentView = uiEvent.mousePosition;

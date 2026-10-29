@@ -45,6 +45,7 @@ public:
 	SoundId(const char* id) : ContentId(id) {}
 
 	// FUNCTION: WEBSERVICE 0x1003e930 FOLDED
+	// FUNCTION: ROBLOX 0x00412910 FOLDED
 	SoundId(const ContentId& id) : ContentId(id) {}
 };
 
@@ -180,6 +181,7 @@ private:
 	void loadStockSound(SoundType soundType, std::string file);
 	void update3DSettings();
 	// FUNCTION: WEBSERVICE 0x10080450
+	// FUNCTION: ROBLOX 0x005c3fd0
 	void on3DSettingChanged(const Reflection::PropertyDescriptor&) { update3DSettings(); }
 	void updateAmbientReverb();
 
@@ -260,8 +262,10 @@ DECOMP_SIZE_ASSERT(SoundChannel, 0x138)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10219640
+// SYNTHETIC: ROBLOX 0x007ea990
 // `dynamic initializer for 'RBX::Soundscape::SoundService::prop_dopplerscale''
 // SYNTHETIC: WEBSERVICE 0x10219670
+// SYNTHETIC: ROBLOX 0x007ea9c0
 // `dynamic initializer for 'RBX::Soundscape::SoundService::prop_distancefactor''
 // SYNTHETIC: WEBSERVICE 0x102196a0
 // `dynamic initializer for 'RBX::Soundscape::SoundService::prop_rolloffscale''
@@ -296,8 +300,10 @@ DECOMP_SIZE_ASSERT(SoundChannel, 0x138)
 // SYNTHETIC: WEBSERVICE 0x10222320
 // `dynamic atexit destructor for 'RBX::Soundscape::SoundChannel::sound_desc_playOnRemove''
 // SYNTHETIC: WEBSERVICE 0x10222340
+// SYNTHETIC: ROBLOX 0x007f2f70
 // `dynamic atexit destructor for 'RBX::Soundscape::SoundService::prop_distancefactor''
 // SYNTHETIC: WEBSERVICE 0x10222360
+// SYNTHETIC: ROBLOX 0x007f2f90
 // `dynamic atexit destructor for 'RBX::Soundscape::SoundService::prop_dopplerscale''
 // SYNTHETIC: WEBSERVICE 0x10222380
 // `dynamic atexit destructor for 'sound_desc_isPaused''

@@ -86,6 +86,7 @@ public:
 	static ScriptContext& getContext(lua_State* L);
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual XmlElement* write() { return NULL; }
 
 	unsigned int getThreadCount() const;
@@ -166,8 +167,10 @@ DECOMP_SIZE_ASSERT(ScriptContext, 0x168)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10218b90
+// SYNTHETIC: ROBLOX 0x007e8600
 // `dynamic initializer for 'RBX::ScriptContext::propScriptsDisabled''
 // SYNTHETIC: WEBSERVICE 0x10221a70
+// SYNTHETIC: ROBLOX 0x007f1d40
 // `dynamic atexit destructor for 'RBX::ScriptContext::propScriptsDisabled''
 // clang-format on
 

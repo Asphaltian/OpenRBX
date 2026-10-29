@@ -41,6 +41,7 @@ bool Camera::askSetParent(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100c2630
+// FUNCTION: ROBLOX 0x005d5f90
 ICameraOwner* Camera::getCameraOwner()
 {
 	Instance* parent = getParent();
@@ -56,12 +57,14 @@ ICameraOwner* Camera::getCameraOwner()
 }
 
 // FUNCTION: WEBSERVICE 0x100c2670
+// FUNCTION: ROBLOX 0x005d6040
 void Camera::alwaysMode()
 {
 	animationType = ALWAYS;
 }
 
 // FUNCTION: WEBSERVICE 0x100c2680
+// FUNCTION: ROBLOX 0x005d6050
 void Camera::lookAt(const G3D::Vector3& point)
 {
 	cameraFocus.translation = point;
@@ -69,6 +72,7 @@ void Camera::lookAt(const G3D::Vector3& point)
 }
 
 // FUNCTION: WEBSERVICE 0x100c26b0
+// FUNCTION: ROBLOX 0x005d6100
 void Camera::getHeadingElevationDistance(float& heading, float& elevation, float& distance)
 {
 	Math::getHeadingElevation(cameraGoal, heading, elevation);
@@ -77,6 +81,7 @@ void Camera::getHeadingElevationDistance(float& heading, float& elevation, float
 }
 
 // FUNCTION: WEBSERVICE 0x100c2810
+// FUNCTION: ROBLOX 0x005d6290
 float Camera::getNewZoomDistance(float currentDistance, float in)
 {
 	static const float ZOOM_FACTOR = 0.25f;
@@ -97,6 +102,7 @@ float Camera::getNewZoomDistance(float currentDistance, float in)
 }
 
 // FUNCTION: WEBSERVICE 0x100c28a0
+// FUNCTION: ROBLOX 0x005d6320
 bool Camera::setDistanceFromTarget(float newDistance)
 {
 	G3D::Vector3 lookVector = cameraFocus.translation - cameraGoal.translation;
@@ -123,18 +129,21 @@ bool Camera::setDistanceFromTarget(float newDistance)
 }
 
 // FUNCTION: WEBSERVICE 0x100c29e0
+// FUNCTION: ROBLOX 0x005d6460
 Instance* Camera::getCameraSubjectInstance() const
 {
 	return cameraSubject.get();
 }
 
 // FUNCTION: WEBSERVICE 0x100c29f0
+// FUNCTION: ROBLOX 0x005d6470
 ICameraSubject* Camera::getCameraSubject() const
 {
 	return cameraSubject ? dynamic_cast<ICameraSubject*>(cameraSubject.get()) : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100c2a20
+// FUNCTION: ROBLOX 0x005d64a0
 void Camera::autoMode()
 {
 	if (animationType != AUTO) {
@@ -144,6 +153,7 @@ void Camera::autoMode()
 }
 
 // FUNCTION: WEBSERVICE 0x100c2a50
+// FUNCTION: ROBLOX 0x005d64d0
 bool Camera::nonCharacterZoom(float in)
 {
 	G3D::Vector3 lookVector = cameraFocus.translation - cameraGoal.translation;
@@ -161,6 +171,7 @@ bool Camera::nonCharacterZoom(float in)
 }
 
 // FUNCTION: WEBSERVICE 0x100c2b30
+// FUNCTION: ROBLOX 0x005d65b0
 bool Camera::characterZoom(float in)
 {
 	G3D::Vector3 focusToGoal = cameraGoal.translation - cameraFocus.translation;
@@ -182,6 +193,7 @@ bool Camera::characterZoom(float in)
 }
 
 // FUNCTION: WEBSERVICE 0x100c2c60
+// FUNCTION: ROBLOX 0x005d66e0
 void Camera::setHeadingElevationDistance(float heading, float elevation, float distance)
 {
 	Math::setHeadingElevation(cameraGoal, heading, elevation);
@@ -194,6 +206,7 @@ void Camera::setHeadingElevationDistance(float heading, float elevation, float d
 }
 
 // FUNCTION: WEBSERVICE 0x100c2d10
+// FUNCTION: ROBLOX 0x005d6860
 void Camera::panRadians(float angle)
 {
 	if (angle != 0.0f) {
@@ -212,6 +225,7 @@ void Camera::panRadians(float angle)
 }
 
 // FUNCTION: WEBSERVICE 0x100c2ef0
+// FUNCTION: ROBLOX 0x005d6b50
 void Camera::updateFocus()
 {
 	if (cameraSubject) {
@@ -220,6 +234,7 @@ void Camera::updateFocus()
 }
 
 // FUNCTION: WEBSERVICE 0x100c2f60
+// FUNCTION: ROBLOX 0x005d6bc0
 void Camera::updateGoal()
 {
 	switch (cameraType) {
@@ -277,6 +292,7 @@ void Camera::updateGoal()
 }
 
 // FUNCTION: WEBSERVICE 0x100c31e0
+// FUNCTION: ROBLOX 0x005d6e80
 bool Camera::zoom(float in)
 {
 	if (cameraType == CUSTOM_CAMERA) {
@@ -290,6 +306,7 @@ bool Camera::zoom(float in)
 }
 
 // FUNCTION: WEBSERVICE 0x100c3500
+// FUNCTION: ROBLOX 0x005d7110
 void Camera::onHeartbeat()
 {
 	updateGoal();
@@ -310,6 +327,7 @@ void Camera::onHeartbeat()
 }
 
 // FUNCTION: WEBSERVICE 0x100c3860
+// FUNCTION: ROBLOX 0x005d7400
 template <>
 Reflection::EnumDesc<Camera::CameraType>::EnumDesc() : EnumDescriptor("CameraType", typeid(Camera::CameraType))
 {
@@ -322,6 +340,7 @@ Reflection::EnumDesc<Camera::CameraType>::EnumDesc() : EnumDescriptor("CameraTyp
 }
 
 // FUNCTION: WEBSERVICE 0x100c4120
+// FUNCTION: ROBLOX 0x005d7c80
 Camera::Camera()
 	: gCamera(), cameraGoal(), cameraFocus(G3D::Vector3(0, 0, -5)), cameraType(FIXED_CAMERA), animationType(AUTO),
 	  cameraSubject(), cameraExternallyAdjusted(false)
@@ -339,6 +358,7 @@ Camera::Camera()
 }
 
 // FUNCTION: WEBSERVICE 0x100c4470
+// FUNCTION: ROBLOX 0x005d7fd0
 void Camera::setCameraType(CameraType value)
 {
 	if (cameraType != value) {
@@ -349,6 +369,7 @@ void Camera::setCameraType(CameraType value)
 }
 
 // FUNCTION: WEBSERVICE 0x100c44b0
+// FUNCTION: ROBLOX 0x005d8010
 void Camera::setCameraSubject(Instance* newSubject)
 {
 	if (newSubject != cameraSubject.get() && dynamic_cast<ICameraSubject*>(newSubject)) {
@@ -359,6 +380,7 @@ void Camera::setCameraSubject(Instance* newSubject)
 }
 
 // FUNCTION: WEBSERVICE 0x100c45a0
+// FUNCTION: ROBLOX 0x005d8100
 void Camera::setCameraFocus(const G3D::CoordinateFrame& value)
 {
 	if (value != cameraFocus) {
@@ -369,6 +391,7 @@ void Camera::setCameraFocus(const G3D::CoordinateFrame& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100c4610
+// FUNCTION: ROBLOX 0x005d8170
 void Camera::goalToCamera()
 {
 	if (gCamera.getCoordinateFrame() != cameraGoal) {
@@ -380,6 +403,7 @@ void Camera::goalToCamera()
 }
 
 // FUNCTION: WEBSERVICE 0x100c4690
+// FUNCTION: ROBLOX 0x005d81f0
 void Camera::tryZoomExtents(float low, float current, float high, const Extents& extents, const G3D::Rect2D& viewPort)
 {
 	if (!(high - low < 0.1)) {
@@ -400,6 +424,7 @@ void Camera::tryZoomExtents(float low, float current, float high, const Extents&
 }
 
 // FUNCTION: WEBSERVICE 0x100c4770
+// FUNCTION: ROBLOX 0x005d82d0
 void Camera::zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType zoomType)
 {
 	G3D::CoordinateFrame currentCoord = gCamera.getCoordinateFrame();
@@ -436,6 +461,7 @@ void Camera::zoomExtents(Extents extents, const G3D::Rect2D& viewPort, ZoomType 
 }
 
 // FUNCTION: WEBSERVICE 0x100c4aa0
+// FUNCTION: ROBLOX 0x005d8600
 bool Camera::zoomExtents(const G3D::Rect2D& viewPort)
 {
 	if (ICameraOwner* owner = getCameraOwner()) {
@@ -447,6 +473,7 @@ bool Camera::zoomExtents(const G3D::Rect2D& viewPort)
 }
 
 // FUNCTION: WEBSERVICE 0x100c4ae0
+// FUNCTION: ROBLOX 0x005d8640
 void Camera::setCameraCoordinateFrameNoLerp(const G3D::CoordinateFrame& value)
 {
 	cameraGoal = value;
@@ -454,6 +481,7 @@ void Camera::setCameraCoordinateFrameNoLerp(const G3D::CoordinateFrame& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100c4b20
+// FUNCTION: ROBLOX 0x005d8680
 void Camera::setImageServerViewNoLerp(const G3D::CoordinateFrame& modelCoord, const G3D::Rect2D& viewPort)
 {
 	G3D::Vector3 look = modelCoord.lookVector();
@@ -483,6 +511,7 @@ void Camera::setImageServerViewNoLerp(const G3D::CoordinateFrame& modelCoord, co
 }
 
 // FUNCTION: WEBSERVICE 0x100c4d80
+// FUNCTION: ROBLOX 0x005d88e0
 void Camera::doFly(const NavKeys& nav, int steps)
 {
 	if (!nav.navKeyDown()) {

@@ -3,6 +3,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10116aa0
+// FUNCTION: ROBLOX 0x0063f590
 GuiResponse Widget::processMouse(const GuiEvent& event)
 {
 	bool inRect = getMyRect().pointInRect(event.mousePosition);
@@ -95,6 +96,7 @@ GuiResponse Widget::processMouse(const GuiEvent& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10116cd0
+// FUNCTION: ROBLOX 0x0063f7c0
 GuiResponse Widget::process(const GuiEvent& event)
 {
 	if (isEnabled() && event.isMouseEvent()) {
@@ -105,12 +107,14 @@ GuiResponse Widget::process(const GuiEvent& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10116d40
+// FUNCTION: ROBLOX 0x0063f870
 Widget::Widget() : widgetState(NOTHING)
 {
 	setGuiSize(G3D::Vector2(100, 24));
 }
 
 // FUNCTION: WEBSERVICE 0x10116dd0
+// FUNCTION: ROBLOX 0x0063fae0
 void Widget::render2d(Adorn* adorn)
 {
 	if (!isVisible()) {

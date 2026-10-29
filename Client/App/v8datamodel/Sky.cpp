@@ -12,6 +12,7 @@ namespace RBX {
 char sSky[] = "Sky";
 
 // FUNCTION: WEBSERVICE 0x10094490
+// FUNCTION: ROBLOX 0x005dce00
 static std::string testImage(const std::string& filename, G3D::GImage& reference)
 {
 	G3D::GImage image;
@@ -49,6 +50,7 @@ BoundProp<bool, 1> Sky::prop_CelestialBodiesShown("CelestialBodiesShown", "Appea
 BoundProp<int, 1> Sky::prop_StarCount("StarCount", "Appearance", &Sky::numStars);
 
 // FUNCTION: WEBSERVICE 0x10094700
+// FUNCTION: ROBLOX 0x005dd020
 G3D::SkyRef Sky::getG3DSky(Sky* sky)
 {
 	if (sky) {
@@ -87,6 +89,7 @@ G3D::SkyRef Sky::getG3DSky(Sky* sky)
 }
 
 // FUNCTION: WEBSERVICE 0x10095110
+// FUNCTION: ROBLOX 0x005dd970
 Sky::Sky() : drawCelestialBodies(true), numStars(3000)
 {
 	setName("Sky");

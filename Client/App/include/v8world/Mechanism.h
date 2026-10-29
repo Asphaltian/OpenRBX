@@ -48,9 +48,11 @@ public:
 	static Mechanism* getMechanismFromPrimitive(const Primitive* primitive);
 
 	// FUNCTION: WEBSERVICE 0x1011ca90
+	// FUNCTION: ROBLOX 0x00646920
 	~Mechanism() {}
 
 	// SYNTHETIC: WEBSERVICE 0x1011cae0
+	// SYNTHETIC: ROBLOX 0x00646970
 	// RBX::Mechanism::Mechanism
 
 	const AssemblySet& getAssemblies() const { return assemblies; }

@@ -90,6 +90,7 @@ public:
 	Controller* getTopPVController() const;
 
 	// FUNCTION: WEBSERVICE 0x100c5b00
+	// FUNCTION: ROBLOX 0x005d4bc0
 	bool isChaseable() const { return getTopPVController()->hasIntelligence() && IsControllable.getValue(); }
 
 	virtual Extents getExtentsWorld() const = 0;                           // vtable+0x54
@@ -104,6 +105,7 @@ public:
 	PVInstance* getTopLevelPVParent();
 
 	// FUNCTION: WEBSERVICE 0x1005a830
+	// FUNCTION: ROBLOX 0x005655a0
 	bool isTopLevelPVInstance() const
 	{
 		return dynamic_cast<const PVInstance*>(getParent()) == NULL || getTypedRoot<PVInstance>() == getParent();
@@ -120,6 +122,7 @@ DECOMP_SIZE_ASSERT(PVInstance, 0x170)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021a6b0
+// SYNTHETIC: ROBLOX 0x007eca80
 // RBX::`dynamic initializer for 'desc_CoordFrame''
 // FUNCTION: WEBSERVICE 0x1021a6f0
 // RBX::`dynamic initializer for 'prop_ControllerFlagShown''
@@ -130,6 +133,7 @@ DECOMP_SIZE_ASSERT(PVInstance, 0x170)
 // SYNTHETIC: WEBSERVICE 0x10223020
 // RBX::`dynamic atexit destructor for 'prop_ControllerFlagShown''
 // SYNTHETIC: WEBSERVICE 0x10223040
+// SYNTHETIC: ROBLOX 0x007f4590
 // RBX::`dynamic atexit destructor for 'desc_CoordFrame''
 // clang-format on
 

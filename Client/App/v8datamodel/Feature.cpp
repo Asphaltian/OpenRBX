@@ -73,6 +73,7 @@ float VelocityMotor::getCurrentAngle() const
 }
 
 // STUB: WEBSERVICE 0x100e3e30
+// STUB: ROBLOX 0x006174a0
 CoordinateFrame Feature::computeLocalCoordinateFrame() const
 {
 	PartInstance* part = dynamic_cast<PartInstance*>(getParent());
@@ -125,6 +126,7 @@ CoordinateFrame Feature::computeLocalCoordinateFrame() const
 }
 
 // FUNCTION: WEBSERVICE 0x100e40b0
+// FUNCTION: ROBLOX 0x00617720
 void VelocityMotor::setPart(int i, Feature* feature)
 {
 	PartInstance* part = feature ? dynamic_cast<PartInstance*>(feature->getParent()) : NULL;
@@ -163,6 +165,7 @@ void VelocityMotor::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100e42c0
+// FUNCTION: ROBLOX 0x00617930
 void VelocityMotor::onEvent_HoleAncestorChanged()
 {
 	setPart(1, hole.get());
@@ -174,6 +177,7 @@ Feature::~Feature()
 }
 
 // FUNCTION: WEBSERVICE 0x100e4540
+// FUNCTION: ROBLOX 0x00617b50
 bool Feature::getRenderCoord(CoordinateFrame& c) const
 {
 	if (PartInstance* part = dynamic_cast<PartInstance*>(getParent())) {
@@ -187,6 +191,7 @@ bool Feature::getRenderCoord(CoordinateFrame& c) const
 }
 
 // FUNCTION: WEBSERVICE 0x100e45d0
+// FUNCTION: ROBLOX 0x00617be0
 void Feature::render3dSelect(Adorn* adorn, SelectState selectState)
 {
 	CoordinateFrame worldCoord;
@@ -196,6 +201,7 @@ void Feature::render3dSelect(Adorn* adorn, SelectState selectState)
 }
 
 // FUNCTION: WEBSERVICE 0x100e4630
+// FUNCTION: ROBLOX 0x00617c40
 void Hole::render3dAdorn(Adorn* adorn)
 {
 	CoordinateFrame worldCoord;
@@ -205,6 +211,7 @@ void Hole::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100e4690
+// FUNCTION: ROBLOX 0x00617ca0
 void MotorFeature::render3dAdorn(Adorn* adorn)
 {
 	CoordinateFrame worldCoord;
@@ -214,6 +221,7 @@ void MotorFeature::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100e4700
+// FUNCTION: ROBLOX 0x00617d10
 VelocityMotor::~VelocityMotor()
 {
 }
@@ -250,18 +258,21 @@ EnumDesc<Feature::InOut>::EnumDesc() : EnumDescriptor("InOut", typeid(Feature::I
 } // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x100e6dd0
+// FUNCTION: ROBLOX 0x00619c90
 VelocityMotor::VelocityMotor() : DescribedCreatable<VelocityMotor, JointInstance, sVelocityMotor>(new MotorJoint())
 {
 	setName("VelocityMotor");
 }
 
 // FUNCTION: WEBSERVICE 0x100e7160
+// FUNCTION: ROBLOX 0x00619ef0
 Feature::Feature() : faceId(NORM_X), topBottom(CENTER_TB), leftRight(CENTER_LR), inOut(CENTER_IO)
 {
 	setName("Feature");
 }
 
 // FUNCTION: WEBSERVICE 0x100e7430
+// FUNCTION: ROBLOX 0x0061a160
 void Feature::setFaceId(NormalId value)
 {
 	if (faceId != value) {
@@ -271,6 +282,7 @@ void Feature::setFaceId(NormalId value)
 }
 
 // FUNCTION: WEBSERVICE 0x100e7460
+// FUNCTION: ROBLOX 0x0061a190
 void Feature::setTopBottom(TopBottom value)
 {
 	if (topBottom != value) {
@@ -280,6 +292,7 @@ void Feature::setTopBottom(TopBottom value)
 }
 
 // FUNCTION: WEBSERVICE 0x100e7490
+// FUNCTION: ROBLOX 0x0061a1c0
 void Feature::setLeftRight(LeftRight value)
 {
 	if (leftRight != value) {
@@ -289,6 +302,7 @@ void Feature::setLeftRight(LeftRight value)
 }
 
 // FUNCTION: WEBSERVICE 0x100e74c0
+// FUNCTION: ROBLOX 0x0061a1f0
 void Feature::setInOut(InOut value)
 {
 	if (inOut != value) {
@@ -298,6 +312,7 @@ void Feature::setInOut(InOut value)
 }
 
 // FUNCTION: WEBSERVICE 0x100e74f0
+// FUNCTION: ROBLOX 0x0061a220
 void VelocityMotor::setHole(Hole* value)
 {
 	if (value != hole.get()) {
@@ -325,6 +340,7 @@ void VelocityMotor::setMaxVelocity(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x100e76b0
+// FUNCTION: ROBLOX 0x0061a3e0
 void VelocityMotor::setDesiredAngle(float value)
 {
 	if (value != static_cast<MotorJoint*>(joint)->desiredAngle) {
@@ -354,6 +370,7 @@ MotorFeature::MotorFeature()
 }
 
 // FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
+// FUNCTION: ROBLOX 0x006171e0 FOLDED
 Hole* VelocityMotor::getHole() const
 {
 	return hole.get();

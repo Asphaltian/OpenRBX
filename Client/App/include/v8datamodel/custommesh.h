@@ -55,11 +55,13 @@ public:
 	const float getAlpha() const;
 
 	// FUNCTION: WEBSERVICE 0x1012cae0
+	// FUNCTION: ROBLOX 0x00477c60
 	const MeshId getMeshId() const { return meshId; }
 
 	void setMeshId(const MeshId& value);
 
 	// FUNCTION: WEBSERVICE 0x1007cdb0 FOLDED
+	// FUNCTION: ROBLOX 0x005c0ea0 FOLDED
 	const TextureId getTextureId() const { return textureId; }
 
 	void setTextureId(const TextureId& value);
@@ -69,6 +71,7 @@ protected:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x1012db20
+	// SYNTHETIC: ROBLOX 0x005b4420
 	// RBX::SpecialShape::~SpecialShape
 
 	// SYNTHETIC: WEBSERVICE 0x1012db90

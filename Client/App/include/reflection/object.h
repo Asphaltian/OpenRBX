@@ -17,6 +17,7 @@ namespace Reflection {
 // RBX::Reflection::ClassDescriptor::`scalar deleting destructor'
 
 // VTABLE: WEBSERVICE 0x1022e264
+// VTABLE: ROBLOX 0x00824bdc
 // class ClassDescriptor
 // SIZE 0x88
 class ClassDescriptor : public Descriptor,
@@ -28,6 +29,7 @@ public:
 	ClassDescriptor(ClassDescriptor& base, const char* name);
 
 	// SYNTHETIC: WEBSERVICE 0x10005bd0
+	// SYNTHETIC: ROBLOX 0x00418550
 	// RBX::Reflection::ClassDescriptor::~ClassDescriptor
 
 	const ClassDescriptor* getBase() const { return base; }
@@ -40,6 +42,7 @@ public:
 	bool operator!=(const ClassDescriptor& other) const;
 
 	// FUNCTION: WEBSERVICE 0x10005b60
+	// FUNCTION: ROBLOX 0x00419e70
 	static ClassDescriptor& rootDescriptor()
 	{
 		static ClassDescriptor root;
@@ -67,6 +70,7 @@ public:
 	static ClassDescriptor& classDescriptor() { return ClassDescriptor::rootDescriptor(); }
 
 	// FUNCTION: WEBSERVICE 0x1004e900
+	// FUNCTION: ROBLOX 0x004cfd40
 	DescribedBase()
 	{
 		ClassDescriptor::lockedDown = true;
@@ -122,6 +126,7 @@ public:
 	}
 	// clang-format off
 	// FUNCTION: WEBSERVICE 0x100ac2c0
+	// FUNCTION: ROBLOX 0x005fd280
 	// ?findSignal@DescribedBase@Reflection@RBX@@QAE?AVIterator@?$MemberDescriptorContainer@VSignalDescriptor@Reflection@RBX@@@23@ABVName@3@@Z
 	// clang-format on
 	MemberDescriptorContainer<SignalDescriptor>::Iterator findSignal(const Name& name)
@@ -140,6 +145,7 @@ public:
 
 	// clang-format off
 	// FUNCTION: WEBSERVICE 0x100abd10
+	// FUNCTION: ROBLOX 0x005fccd0
 	// ?signals_end@DescribedBase@Reflection@RBX@@QAE?AVIterator@?$MemberDescriptorContainer@VSignalDescriptor@Reflection@RBX@@@23@XZ
 	// clang-format on
 	MemberDescriptorContainer<SignalDescriptor>::Iterator signals_end()
@@ -159,6 +165,7 @@ DECOMP_SIZE_ASSERT(DescribedBase, 0x0c)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10220fa0
+// SYNTHETIC: ROBLOX 0x007ef5c0
 // `RBX::Reflection::ClassDescriptor::rootDescriptor'::`2'::`dynamic atexit destructor for 'root''
 // clang-format on
 

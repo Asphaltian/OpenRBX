@@ -47,14 +47,17 @@ public:
 	void setClearColor(G3D::Color4 value);
 
 	// FUNCTION: WEBSERVICE 0x10042590
+	// FUNCTION: ROBLOX 0x005d9290
 	G3D::Color3 getLightColor() const { return skyParameters.lightColor; }
 	void setLightColor(G3D::Color3 value);
 
 	// FUNCTION: WEBSERVICE 0x100425c0
+	// FUNCTION: ROBLOX 0x004745a0
 	G3D::Color3 getAmbientTop() const { return ambientTop; }
 	void setAmbientTop(G3D::Color3 value);
 
 	// FUNCTION: WEBSERVICE 0x100425f0
+	// FUNCTION: ROBLOX 0x004745d0
 	G3D::Color3 getAmbientBottom() const { return ambientBottom; }
 	void setAmbientBottom(G3D::Color3 value);
 
@@ -76,9 +79,11 @@ public:
 	void setGeographicLatitude(float value);
 
 	// FUNCTION: WEBSERVICE 0x10042640
+	// FUNCTION: ROBLOX 0x005d92e0
 	G3D::Color3 getClearColor3() const { return G3D::Color3(clearColor.r, clearColor.g, clearColor.b); }
 
 	// FUNCTION: WEBSERVICE 0x10005d40
+	// FUNCTION: ROBLOX 0x005dc900
 	void setClearColor3(G3D::Color3 value) { setClearColor(G3D::Color4(value, 1.0f)); }
 
 protected:
@@ -145,6 +150,7 @@ DECOMP_SIZE_ASSERT(Lighting, 0x230)
 // clang-format on
 
 // SYNTHETIC: WEBSERVICE 0x100463f0
+// SYNTHETIC: ROBLOX 0x005dbf10
 // RBX::Lighting::~Lighting
 
 } // namespace RBX

@@ -121,6 +121,7 @@ public:
 DECOMP_SIZE_ASSERT(RenderScene, 0x4f0)
 
 // VTABLE: WEBSERVICE 0x10259d24
+// VTABLE: ROBLOX 0x00810774
 // SIZE 0x08
 class SceneManager
 {
@@ -150,6 +151,7 @@ protected:
 	void addToScene(const G3D::ReferenceCountedPointer<Chunk>& chunk) { renderScene->chunkArray.append(chunk); }
 
 	// FUNCTION: WEBSERVICE 0x101f33f0
+	// FUNCTION: ROBLOX 0x00496250
 	void removeFromScene(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 	{
 		int index = renderScene->chunkArray.findIndex(chunk);
@@ -161,6 +163,7 @@ DECOMP_SIZE_ASSERT(SceneManager, 0x08)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10226490
+// SYNTHETIC: ROBLOX 0x007f0720
 // `RBX::Render::RenderScene::markStencilShadows'::`2'::`dynamic atexit destructor for 'shadowVertex''
 // clang-format on
 

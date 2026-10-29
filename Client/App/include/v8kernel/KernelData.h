@@ -21,6 +21,7 @@ public:
 	IndexArray<Connector, &Connector::getKernelIndex> connectors2ndPass; // 0x24
 
 	// FUNCTION: WEBSERVICE 0x100d5270
+	// FUNCTION: ROBLOX 0x0060c200
 	~KernelData() {}
 };
 

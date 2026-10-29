@@ -8,6 +8,7 @@ namespace RBX {
 const char sBackpack[] = "Backpack";
 
 // FUNCTION: WEBSERVICE 0x100da590
+// FUNCTION: ROBLOX 0x005e3fd0
 IScriptOwner* Backpack::scriptShouldRun(Script* script)
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(this);
@@ -27,6 +28,7 @@ IScriptOwner* Backpack::scriptShouldRun(Script* script)
 }
 
 // FUNCTION: WEBSERVICE 0x100da740
+// FUNCTION: ROBLOX 0x005e4140
 Backpack::Backpack()
 {
 	setName("Backpack");

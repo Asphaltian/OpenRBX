@@ -13,6 +13,7 @@ namespace RBX {
 char sGroupDragTool[] = "GroupDragTool";
 
 // FUNCTION: WEBSERVICE 0x10125e40
+// FUNCTION: ROBLOX 0x006674a0
 MouseCommand* GroupDragTool::onMouseDown(const UIEvent& uiEvent)
 {
 	downPoint = G3D::Vector2(uiEvent.mousePosition);
@@ -21,6 +22,7 @@ MouseCommand* GroupDragTool::onMouseDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10125f20
+// FUNCTION: ROBLOX 0x00667560
 GroupDragTool::GroupDragTool(
 	PartInstance* mousePart,
 	const G3D::Vector3& hitPointWorld,
@@ -33,6 +35,7 @@ GroupDragTool::GroupDragTool(
 }
 
 // FUNCTION: WEBSERVICE 0x10126020
+// FUNCTION: ROBLOX 0x00667660
 void GroupDragTool::onMouseMove(const UIEvent& uiEvent)
 {
 	if (!dragging) {
@@ -48,6 +51,7 @@ void GroupDragTool::onMouseMove(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101260b0
+// FUNCTION: ROBLOX 0x006676f0
 void GroupDragTool::onMouseIdle(const UIEvent& uiEvent)
 {
 	G3D::Vector3 hit;
@@ -69,6 +73,7 @@ void GroupDragTool::onMouseIdle(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10126220
+// FUNCTION: ROBLOX 0x00667860
 MouseCommand* GroupDragTool::onMouseUp(const UIEvent& uiEvent)
 {
 	if (dragging) {
@@ -81,6 +86,7 @@ MouseCommand* GroupDragTool::onMouseUp(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10126250
+// FUNCTION: ROBLOX 0x00667890
 MouseCommand* GroupDragTool::onKeyDown(const UIEvent& uiEvent)
 {
 	if (dragging) {
@@ -101,6 +107,7 @@ MouseCommand* GroupDragTool::onKeyDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101262a0
+// FUNCTION: ROBLOX 0x006678e0
 GroupDragTool::~GroupDragTool()
 {
 }

@@ -56,6 +56,7 @@ const char* Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::className =
 } // namespace Lua
 
 // FUNCTION: WEBSERVICE 0x1005eaa0
+// FUNCTION: ROBLOX 0x0056bd10
 void ScriptContext::sandboxThread(lua_State* thread)
 {
 	lua_newtable(thread);
@@ -68,6 +69,7 @@ void ScriptContext::sandboxThread(lua_State* thread)
 }
 
 // FUNCTION: WEBSERVICE 0x1005eb00
+// FUNCTION: ROBLOX 0x0056bd90
 ScriptContext& ScriptContext::getContext(lua_State* thread)
 {
 	lua_pushlightuserdata(thread, (void*) 0x43);
@@ -81,6 +83,7 @@ ScriptContext& ScriptContext::getContext(lua_State* thread)
 }
 
 // FUNCTION: WEBSERVICE 0x1005eb40
+// FUNCTION: ROBLOX 0x0056bdd0
 int ScriptContext::tick(lua_State* L)
 {
 	lua_pushnumber(L, G3D::System::getTick());
@@ -98,6 +101,7 @@ void ScriptContext::onEvent(const RunService* source, RunTransition event)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x1005eb80
+// FUNCTION: ROBLOX 0x0056be10
 static std::string getFullName(RBX::Instance* instance)
 {
 	if (instance->getParent() != NULL) {
@@ -114,30 +118,35 @@ static std::string getFullName(RBX::Instance* instance)
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1005f880
+// FUNCTION: ROBLOX 0x0056ca90
 void Lua::CoordinateFrameBridge::pushCoordinateFrame(lua_State* L, G3D::CoordinateFrame CF)
 {
 	pushNewObject(L, CF);
 }
 
 // FUNCTION: WEBSERVICE 0x1005f8c0
+// FUNCTION: ROBLOX 0x0056cad0
 void Lua::Vector3Bridge::pushVector3(lua_State* L, G3D::Vector3 color)
 {
 	pushNewObject(L, color);
 }
 
 // FUNCTION: WEBSERVICE 0x1005f910
+// FUNCTION: ROBLOX 0x0056cb20
 void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 color)
 {
 	pushNewObject(L, color);
 }
 
 // FUNCTION: WEBSERVICE 0x1005f9a0
+// FUNCTION: ROBLOX 0x0056cb70
 unsigned int ScriptContext::getThreadCount() const
 {
 	return globalState ? RobloxExtraSpace::get(globalState)->getThreadCount() : 0;
 }
 
 // FUNCTION: WEBSERVICE 0x1005f9c0
+// FUNCTION: ROBLOX 0x0056cb90
 int ScriptContext::delay(lua_State* thread)
 {
 	if (lua_gettop(thread) != 2) {
@@ -160,6 +169,7 @@ int ScriptContext::delay(lua_State* thread)
 }
 
 // FUNCTION: WEBSERVICE 0x1005fb00
+// FUNCTION: ROBLOX 0x0056ccd0
 int ScriptContext::wait(lua_State* thread)
 {
 	double timout = lua_tonumber(thread, 1);
@@ -170,6 +180,7 @@ int ScriptContext::wait(lua_State* thread)
 }
 
 // FUNCTION: WEBSERVICE 0x1005fb70
+// FUNCTION: ROBLOX 0x0056cd40
 int ScriptContext::print(lua_State* L)
 {
 	std::string message;
@@ -203,6 +214,7 @@ int ScriptContext::print(lua_State* L)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10061130
+// FUNCTION: ROBLOX 0x0056e240
 static int panic(lua_State* L)
 {
 	std::string error = lua_tostring(L, -1);
@@ -217,6 +229,7 @@ static int panic(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10062ef0
+// FUNCTION: ROBLOX 0x00570310
 static unsigned int pushArguments(const std::vector<RBX::Reflection::Value>& arguments, lua_State* thread)
 {
 	unsigned int count = 0;
@@ -234,6 +247,7 @@ static unsigned int pushArguments(const std::vector<RBX::Reflection::Value>& arg
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100636b0
+// FUNCTION: ROBLOX 0x00570a60
 void ScriptContext::reportError(lua_State* thread)
 {
 	lua_Debug ar;
@@ -262,6 +276,7 @@ void ScriptContext::reportError(lua_State* thread)
 }
 
 // FUNCTION: WEBSERVICE 0x100644e0
+// FUNCTION: ROBLOX 0x00571ad0
 void ScriptContext::disassociateState(Script* script)
 {
 	if (script->association().contains<boost::shared_ptr<Lua::ThreadRef::Node> >()) {
@@ -271,6 +286,7 @@ void ScriptContext::disassociateState(Script* script)
 }
 
 // FUNCTION: WEBSERVICE 0x10064510
+// FUNCTION: ROBLOX 0x00571b00
 void ScriptContext::removeScript(Script* script)
 {
 	if (scripts.erase(script)) {
@@ -287,6 +303,7 @@ void ScriptContext::removeScript(Script* script)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10065240
+// FUNCTION: ROBLOX 0x00572380
 static void readResults(
 	std::auto_ptr<std::vector<RBX::Reflection::Value> >& result, lua_State* thread, unsigned int returnCount
 )
@@ -302,6 +319,7 @@ static void readResults(
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10065f80
+// FUNCTION: ROBLOX 0x00572880
 void ScriptContext::closeState()
 {
 	if (!globalState) {
@@ -347,6 +365,7 @@ void ScriptContext::closeState()
 }
 
 // FUNCTION: WEBSERVICE 0x10066200
+// FUNCTION: ROBLOX 0x00572b00
 ScriptContext::ScriptContext()
 	: globalState(NULL), nextPendingScripts(boost::posix_time::second_clock::local_time()), scriptsDisabled(false)
 {
@@ -354,16 +373,19 @@ ScriptContext::ScriptContext()
 }
 
 // FUNCTION: WEBSERVICE 0x10066460
+// FUNCTION: ROBLOX 0x00572d60
 ScriptContext::~ScriptContext()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10066990
+// FUNCTION: ROBLOX 0x00573070
 ScriptContext::ScriptImpersonator::ScriptImpersonator(lua_State* thread) : Impersonator(getThreadIdentity(thread))
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10066ce0
+// FUNCTION: ROBLOX 0x005732a0
 int ScriptContext::settings(lua_State* thread)
 {
 	Security::Context::current().requirePermission(Security::Administrator, NULL);
@@ -374,6 +396,7 @@ int ScriptContext::settings(lua_State* thread)
 }
 
 // FUNCTION: WEBSERVICE 0x10066de0
+// FUNCTION: ROBLOX 0x005733a0
 int ScriptContext::trustedThread(lua_State* thread)
 {
 	bool trusted = Security::Context::current().hasPermission(Security::Administrator);
@@ -395,6 +418,7 @@ static int loadAux(lua_State* L, int status)
 }
 
 // FUNCTION: WEBSERVICE 0x10066e10
+// FUNCTION: ROBLOX 0x005733d0
 int ScriptContext::loadfile(lua_State* L)
 {
 	Security::Context::current().requirePermission(Security::Administrator, "loadfile");
@@ -406,6 +430,7 @@ int ScriptContext::loadfile(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10066f20
+// FUNCTION: ROBLOX 0x005734e0
 int ScriptContext::stats(lua_State* L)
 {
 	Security::Context::current().requirePermission(Security::Administrator, "Stats");
@@ -418,6 +443,7 @@ int ScriptContext::stats(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10067020
+// FUNCTION: ROBLOX 0x005735e0
 int ScriptContext::dofile(lua_State* L)
 {
 	Security::Context::current().requirePermission(Security::Administrator, "dofile");
@@ -438,6 +464,7 @@ int ScriptContext::dofile(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10067140
+// FUNCTION: ROBLOX 0x00573700
 void ScriptContext::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<RunService, RunTransition>(runService, this);
@@ -469,6 +496,7 @@ void ScriptContext::onServiceProvider(const ServiceProvider* oldProvider, const 
 }
 
 // FUNCTION: WEBSERVICE 0x100673d0
+// FUNCTION: ROBLOX 0x00573990
 ScriptContext::Result ScriptContext::resume(lua_State* thread, int narg)
 {
 	int result;
@@ -495,6 +523,7 @@ ScriptContext::Result ScriptContext::resume(lua_State* thread, int narg)
 }
 
 // FUNCTION: WEBSERVICE 0x100674d0
+// FUNCTION: ROBLOX 0x00573a90
 void ScriptContext::openState()
 {
 	if (!globalState) {
@@ -600,6 +629,7 @@ void ScriptContext::openState()
 }
 
 // FUNCTION: WEBSERVICE 0x10067c20
+// FUNCTION: ROBLOX 0x005741e0
 void ScriptContext::setThreadIdentity(lua_State* thread, Security::Identities identity)
 {
 	lua_pushlightuserdata(thread, (void*) 0x54);
@@ -618,6 +648,7 @@ void ScriptContext::setThreadIdentity(lua_State* thread, Security::Identities id
 }
 
 // FUNCTION: WEBSERVICE 0x10067cb0
+// FUNCTION: ROBLOX 0x00574270
 void ScriptContext::resume(
 	lua_State* thread,
 	boost::function1<unsigned int, lua_State*> pushArguments,
@@ -649,6 +680,7 @@ void ScriptContext::resume(
 }
 
 // FUNCTION: WEBSERVICE 0x10067e00
+// FUNCTION: ROBLOX 0x005743c0
 void ScriptContext::startScript(boost::shared_ptr<Script> script)
 {
 	if (scriptsDisabled) {
@@ -702,6 +734,7 @@ void ScriptContext::startScript(boost::shared_ptr<Script> script)
 }
 
 // FUNCTION: WEBSERVICE 0x10068220
+// FUNCTION: ROBLOX 0x005747e0
 void ScriptContext::executeInNewThread(
 	Security::Identities identity,
 	const char* script,
@@ -763,6 +796,7 @@ void ScriptContext::executeInNewThread(
 }
 
 // FUNCTION: WEBSERVICE 0x10068640
+// FUNCTION: ROBLOX 0x00574d60
 void ScriptContext::startPendingScripts()
 {
 	if (!scriptsDisabled) {
@@ -774,6 +808,7 @@ void ScriptContext::startPendingScripts()
 }
 
 // FUNCTION: WEBSERVICE 0x10068760
+// FUNCTION: ROBLOX 0x00574e80
 void ScriptContext::onChangedScriptEnabled(const Reflection::PropertyDescriptor&)
 {
 	if (scriptsDisabled) {
@@ -782,6 +817,7 @@ void ScriptContext::onChangedScriptEnabled(const Reflection::PropertyDescriptor&
 }
 
 // FUNCTION: WEBSERVICE 0x10068780
+// FUNCTION: ROBLOX 0x00574ea0
 void ScriptContext::addScript(Script* script)
 {
 	if (scripts.insert(script).second == true) {
@@ -792,6 +828,7 @@ void ScriptContext::addScript(Script* script)
 }
 
 // FUNCTION: WEBSERVICE 0x100687d0
+// FUNCTION: ROBLOX 0x00575000
 std::auto_ptr<std::vector<Reflection::Value> > ScriptContext::executeInNewThread(
 	Security::Identities identity, const char* script, const char* name, const std::vector<Reflection::Value>& arguments
 )
@@ -810,6 +847,7 @@ std::auto_ptr<std::vector<Reflection::Value> > ScriptContext::executeInNewThread
 }
 
 // FUNCTION: WEBSERVICE 0x10068880
+// FUNCTION: ROBLOX 0x005750b0
 void ScriptContext::onEvent(const RunService* source, Heartbeat event)
 {
 	if (boost::posix_time::second_clock::local_time() >= nextPendingScripts) {

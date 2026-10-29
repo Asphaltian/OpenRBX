@@ -9,6 +9,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x1018a8f0
+// FUNCTION: ROBLOX 0x00494bd0
 bool FileMesh::loadFromMeshFile(const G3D::Vector3& scale, const MeshId meshFile)
 {
 	try {
@@ -58,6 +59,7 @@ bool FileMesh::loadFromMeshFile(const G3D::Vector3& scale, const MeshId meshFile
 }
 
 // FUNCTION: WEBSERVICE 0x1018ad50
+// FUNCTION: ROBLOX 0x00495030
 G3D::ReferenceCountedPointer<Render::Mesh> FileMesh::create(const G3D::Vector3& scale, const MeshId meshFile)
 {
 	FileMesh* mesh = new FileMesh();

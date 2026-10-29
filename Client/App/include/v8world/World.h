@@ -44,7 +44,9 @@ struct AutoDestroy
 
 // clang-format off
 // VTABLE: WEBSERVICE 0x1023c550 RBX::Notifier<RBX::World, struct RBX::AutoDestroy>
+// VTABLE: ROBLOX 0x00830558 RBX::Notifier<RBX::World, struct RBX::AutoDestroy>
 // VTABLE: WEBSERVICE 0x1023c560 RBX::Notifier<RBX::World, struct RBX::AutoJoin>
+// VTABLE: ROBLOX 0x00830568 RBX::Notifier<RBX::World, struct RBX::AutoJoin>
 // clang-format on
 // SIZE 0x94
 class World : public Notifier<World, AutoJoin>, public Notifier<World, AutoDestroy>

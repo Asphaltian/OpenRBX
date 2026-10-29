@@ -67,6 +67,7 @@ static Reflection::SignalDesc<Tool, void()> event_Activated("Activated");
 static Reflection::SignalDesc<Tool, void()> event_Deactivated("Deactivated");
 
 // FUNCTION: WEBSERVICE 0x100c9df0
+// FUNCTION: ROBLOX 0x0060eaa0
 void Tool::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
 	const Name* name = NULL;
@@ -86,12 +87,14 @@ void Tool::readProperty(const XmlElement* propertyElement, IReferenceBinder& bin
 }
 
 // FUNCTION: WEBSERVICE 0x100c9e70 FOLDED
+// FUNCTION: ROBLOX 0x0060eb20 FOLDED
 const PartInstance* Tool::getHandleConst() const
 {
 	return dynamic_cast<const PartInstance*>(findFirstChildByName("Handle"));
 }
 
 // FUNCTION: WEBSERVICE 0x100c9ef0
+// FUNCTION: ROBLOX 0x0060eba0
 Tool::ToolState Tool::computeDesiredState(Instance* testParent)
 {
 	Humanoid* humanoid = Humanoid::modelIsCharacter(testParent);
@@ -125,30 +128,35 @@ void Tool::downFrom_HasTorso()
 }
 
 // FUNCTION: WEBSERVICE 0x100c9f90
+// FUNCTION: ROBLOX 0x0060ec40
 const G3D::Vector3 Tool::getGripPos() const
 {
 	return grip.translation;
 }
 
 // FUNCTION: WEBSERVICE 0x100c9fc0
+// FUNCTION: ROBLOX 0x0060ec70
 const G3D::Vector3 Tool::getGripForward() const
 {
 	return grip.lookVector();
 }
 
 // FUNCTION: WEBSERVICE 0x100ca010
+// FUNCTION: ROBLOX 0x0060ecc0
 const G3D::Vector3 Tool::getGripUp() const
 {
 	return grip.upVector();
 }
 
 // FUNCTION: WEBSERVICE 0x100ca030
+// FUNCTION: ROBLOX 0x0060ece0
 const G3D::Vector3 Tool::getGripRight() const
 {
 	return grip.rightVector();
 }
 
 // FUNCTION: WEBSERVICE 0x100ca230
+// FUNCTION: ROBLOX 0x0060eea0
 PartInstance* Tool::getHandle()
 {
 	return const_cast<PartInstance*>(getHandleConst());
@@ -163,6 +171,7 @@ const CoordinateFrame Tool::getLocation() const
 }
 
 // FUNCTION: WEBSERVICE 0x100ca4c0
+// FUNCTION: ROBLOX 0x0060f1e0
 void Tool::render3dSelect(Adorn* adorn, SelectState selectState)
 {
 	for (unsigned int i = 0; i < numChildren(); i++) {
@@ -188,6 +197,7 @@ Tool::ToolState Tool::computeDesiredState()
 }
 
 // FUNCTION: WEBSERVICE 0x100ca550
+// FUNCTION: ROBLOX 0x0060f270
 void Tool::rebuildBackendState()
 {
 	ToolState desiredState = computeDesiredState();
@@ -195,6 +205,7 @@ void Tool::rebuildBackendState()
 }
 
 // FUNCTION: WEBSERVICE 0x100ca5a0
+// FUNCTION: ROBLOX 0x0060f2c0
 void Tool::onEvent_AddedBackend(boost::shared_ptr<Instance> child)
 {
 	if (child.get() != this) {
@@ -203,6 +214,7 @@ void Tool::onEvent_AddedBackend(boost::shared_ptr<Instance> child)
 }
 
 // FUNCTION: WEBSERVICE 0x100ca620
+// FUNCTION: ROBLOX 0x0060f340
 void Tool::onEvent_RemovedBackend(boost::shared_ptr<Instance> child)
 {
 	if (ServiceProvider::findServiceProvider(this) && child.get() != this) {
@@ -215,6 +227,7 @@ void Tool::onEvent_RemovedBackend(boost::shared_ptr<Instance> child)
 }
 
 // FUNCTION: WEBSERVICE 0x100ca990
+// FUNCTION: ROBLOX 0x0060f6f0
 void Tool::moveAllToolsToBackpack(Network::Player* player)
 {
 	if (player && player->getCharacter()) {
@@ -238,6 +251,7 @@ bool Tool::characterCanUnequipTool(ModelInstance* character)
 }
 
 // FUNCTION: WEBSERVICE 0x100ca9e0
+// FUNCTION: ROBLOX 0x0060f740
 void Tool::onEvent_HandleTouched(boost::shared_ptr<Instance> other)
 {
 	if (backendToolState == IN_WORKSPACE) {
@@ -256,6 +270,7 @@ void Tool::onEvent_HandleTouched(boost::shared_ptr<Instance> other)
 }
 
 // FUNCTION: WEBSERVICE 0x100caaf0
+// FUNCTION: ROBLOX 0x0060f850
 void Tool::onLocalClicked()
 {
 	Network::Player* player = Network::Players::findLocalPlayer(this);
@@ -272,6 +287,7 @@ void Tool::onLocalClicked()
 }
 
 // FUNCTION: WEBSERVICE 0x100cab80
+// FUNCTION: ROBLOX 0x0060f8e0
 void Tool::onLocalOtherClicked()
 {
 	Network::Player* player = Network::Players::findLocalPlayer(this);
@@ -282,11 +298,13 @@ void Tool::onLocalOtherClicked()
 }
 
 // FUNCTION: WEBSERVICE 0x100cafd0
+// FUNCTION: ROBLOX 0x0060fba0
 Tool::~Tool()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100cb270
+// FUNCTION: ROBLOX 0x0060fe40
 void Tool::upTo_Equipped()
 {
 	handleTouched.disconnect();
@@ -306,6 +324,7 @@ void Tool::upTo_Equipped()
 }
 
 // FUNCTION: WEBSERVICE 0x100cb7f0
+// FUNCTION: ROBLOX 0x006103c0
 void Tool::connectTouchEvent()
 {
 	if (const PartInstance* handle = getHandleConst()) {
@@ -319,6 +338,7 @@ void Tool::connectTouchEvent()
 }
 
 // FUNCTION: WEBSERVICE 0x100cb8d0
+// FUNCTION: ROBLOX 0x006104a0
 void Tool::upTo_InCharacter()
 {
 	characterChildAdded =
@@ -328,6 +348,7 @@ void Tool::upTo_InCharacter()
 }
 
 // FUNCTION: WEBSERVICE 0x100cba40
+// FUNCTION: ROBLOX 0x00610610
 void Tool::upTo_HasTorso()
 {
 	PartInstance* torso = Humanoid::modelIsCharacter(getParent())->getTorso();
@@ -370,6 +391,7 @@ void Tool::downFrom_Equipped()
 }
 
 // FUNCTION: WEBSERVICE 0x100cbd60
+// FUNCTION: ROBLOX 0x00610930
 void Tool::onEquipping()
 {
 	if (getParent() && getParent() == Network::Players::findLocalCharacter(this)) {
@@ -380,6 +402,7 @@ void Tool::onEquipping()
 }
 
 // FUNCTION: WEBSERVICE 0x100cc230
+// FUNCTION: ROBLOX 0x00610e00
 boost::shared_ptr<Mouse> Tool::getMouse()
 {
 	boost::shared_ptr<Mouse> mouse;
@@ -404,6 +427,7 @@ void Tool::onUnequipped()
 }
 
 // FUNCTION: WEBSERVICE 0x100cc300
+// FUNCTION: ROBLOX 0x00610ed0
 void Tool::setBackendToolStateNoReplicate(int value)
 {
 	if (backendToolState < EQUIPPED && value >= EQUIPPED) {
@@ -428,6 +452,7 @@ void Tool::setBackendToolStateNoReplicate(int value)
 }
 
 // FUNCTION: WEBSERVICE 0x100cc480
+// FUNCTION: ROBLOX 0x00611050
 void Tool::setBackendToolState(int value)
 {
 	if (value != backendToolState) {
@@ -463,6 +488,7 @@ inline void Tool::downFrom_HasHandle()
 }
 
 // STUB: WEBSERVICE 0x100cc4b0
+// STUB: ROBLOX 0x00611080
 void Tool::setDesiredState(ToolState desiredState, const ServiceProvider* serviceProvider)
 {
 	do {
@@ -521,6 +547,7 @@ void Tool::setDesiredState(ToolState desiredState, const ServiceProvider* servic
 }
 
 // FUNCTION: WEBSERVICE 0x100cc5c0
+// FUNCTION: ROBLOX 0x00611190
 void Tool::onAncestorChanged(const AncestorChanged& event)
 {
 	int oldState = backendToolState;
@@ -553,6 +580,7 @@ void Tool::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100cc720
+// FUNCTION: ROBLOX 0x006112f0
 void Tool::setGrip(const CoordinateFrame& value)
 {
 	if (value != grip) {
@@ -571,12 +599,14 @@ void Tool::setGrip(const CoordinateFrame& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100cc7b0
+// FUNCTION: ROBLOX 0x00611380
 void Tool::setGripPos(const G3D::Vector3& v)
 {
 	setGrip(CoordinateFrame(getGrip().rotation, v));
 }
 
 // FUNCTION: WEBSERVICE 0x100cc800
+// FUNCTION: ROBLOX 0x006113d0
 void Tool::setGripForward(const G3D::Vector3& v)
 {
 	CoordinateFrame c = getGrip();
@@ -594,6 +624,7 @@ void Tool::setGripForward(const G3D::Vector3& v)
 }
 
 // STUB: WEBSERVICE 0x100cc980
+// STUB: ROBLOX 0x00611550
 void Tool::setGripUp(const G3D::Vector3& v)
 {
 	CoordinateFrame c = getGrip();
@@ -611,6 +642,7 @@ void Tool::setGripUp(const G3D::Vector3& v)
 }
 
 // STUB: WEBSERVICE 0x100ccaf0
+// STUB: ROBLOX 0x006116c0
 void Tool::setGripRight(const G3D::Vector3& v)
 {
 	CoordinateFrame c = getGrip();
@@ -628,12 +660,14 @@ void Tool::setGripRight(const G3D::Vector3& v)
 }
 
 // FUNCTION: WEBSERVICE 0x100ccdc0
+// FUNCTION: ROBLOX 0x00611960
 Tool::Tool() : backendToolState(NOTHING), frontendActivationState(0), enabled(true), toolMouseCommand(NULL)
 {
 	setName(sTool);
 }
 
 // FUNCTION: WEBSERVICE 0x100ccfa0
+// FUNCTION: ROBLOX 0x00611b40
 void Tool::setFrontendActivationState(int value)
 {
 	int oldState = frontendActivationState;
@@ -654,12 +688,14 @@ void Tool::setFrontendActivationState(int value)
 }
 
 // FUNCTION: WEBSERVICE 0x100cd030
+// FUNCTION: ROBLOX 0x00611bd0
 void Tool::activate()
 {
 	setFrontendActivationState(frontendActivationState + frontendActivationState % 2 + 1);
 }
 
 // FUNCTION: WEBSERVICE 0x100cd050
+// FUNCTION: ROBLOX 0x00611bf0
 void Tool::deactivate()
 {
 	setFrontendActivationState(frontendActivationState + (frontendActivationState + 1) % 2 + 1);

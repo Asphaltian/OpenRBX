@@ -23,12 +23,14 @@ static Reflection::BoundFuncDesc<Item, double(), 0> func_value(
 );
 
 // FUNCTION: WEBSERVICE 0x100b1f60
+// FUNCTION: ROBLOX 0x005d3720
 void Item::formatMem(unsigned int bytes)
 {
 	setValue(bytes, Log::formatMem(bytes));
 }
 
 // FUNCTION: WEBSERVICE 0x100b1fe0
+// FUNCTION: ROBLOX 0x005d37a0
 void Item::formatValue(double val, const char* fmt, ...)
 {
 	va_list argList;
@@ -38,6 +40,7 @@ void Item::formatValue(double val, const char* fmt, ...)
 }
 
 // FUNCTION: WEBSERVICE 0x100b2060
+// FUNCTION: ROBLOX 0x005d3930
 template <>
 void Item::formatValue<double>(const double& value)
 {
@@ -45,6 +48,7 @@ void Item::formatValue<double>(const double& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100b2090
+// FUNCTION: ROBLOX 0x005d3960
 template <>
 void Item::formatValue<int>(const int& value)
 {
@@ -52,6 +56,7 @@ void Item::formatValue<int>(const int& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100b20c0
+// FUNCTION: ROBLOX 0x005d3990
 template <>
 void Item::formatValue<unsigned int>(const unsigned int& value)
 {
@@ -59,6 +64,7 @@ void Item::formatValue<unsigned int>(const unsigned int& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100b20f0
+// FUNCTION: ROBLOX 0x005d39c0
 template <>
 void Item::formatValue<bool>(const bool& value)
 {
@@ -76,9 +82,11 @@ class ProfilingItem : public RBX::Stats::Item
 
 public:
 	// FUNCTION: WEBSERVICE 0x100b25e0
+	// FUNCTION: ROBLOX 0x005d3e30
 	ProfilingItem(const RBX::Profiling::Profiler* p) : p(*p) {}
 
 	// FUNCTION: WEBSERVICE 0x100b2650
+	// FUNCTION: ROBLOX 0x005d3ea0
 	virtual void update()
 	{
 		RBX::Profiling::Bucket b = p.getData(5.0);
@@ -107,6 +115,7 @@ namespace RBX {
 namespace Stats {
 
 // FUNCTION: WEBSERVICE 0x100b29a0
+// FUNCTION: ROBLOX 0x005d4140
 Item* Item::createChildItem(const char* name)
 {
 	boost::shared_ptr<Item> item = Creatable<Instance>::create<Item>();
@@ -116,6 +125,7 @@ Item* Item::createChildItem(const char* name)
 }
 
 // FUNCTION: WEBSERVICE 0x100b2a70
+// FUNCTION: ROBLOX 0x005d4210
 Item* Item::createBoundChildItem(const Profiling::Profiler& p)
 {
 	boost::shared_ptr<Item> item = Creatable<Instance>::create<ProfilingItem>(&p);
@@ -125,6 +135,7 @@ Item* Item::createBoundChildItem(const Profiling::Profiler& p)
 }
 
 // FUNCTION: WEBSERVICE 0x100b2c20
+// FUNCTION: ROBLOX 0x005d43c0
 Item* Item::createBoundMemChildItem(const char* name, const unsigned int& v)
 {
 	boost::shared_ptr<Item> item = Creatable<Instance>::create<TypedMemItem>(&v);

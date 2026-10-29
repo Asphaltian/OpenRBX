@@ -15,6 +15,7 @@ class PartInstance;
 namespace Network {
 
 // VTABLE: WEBSERVICE 0x10251ab4
+// VTABLE: ROBLOX 0x008149c0
 // SIZE 0x50
 class ClientPhysics : public Listener<RunService, Heartbeat>
 {

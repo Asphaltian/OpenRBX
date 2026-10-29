@@ -103,12 +103,14 @@ SignalDesc<Humanoid, void(bool)> Humanoid::event_FallingDown("FallingDown", "act
 SignalDesc<Humanoid, void(bool)> Humanoid::event_Seated("Seated", "active");
 
 // FUNCTION: WEBSERVICE 0x100a0830
+// FUNCTION: ROBLOX 0x005e8db0
 PartInstance* Humanoid::getHeadFromCharacter(const ModelInstance* character)
 {
 	return character ? dynamic_cast<PartInstance*>(character->findFirstChildByName("Head")) : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a08d0
+// FUNCTION: ROBLOX 0x005e8e50
 ModelInstance* Humanoid::getCharacterFromHumanoid(Humanoid* humanoid)
 {
 	if (humanoid != NULL) {
@@ -123,12 +125,14 @@ ModelInstance* Humanoid::getCharacterFromHumanoid(Humanoid* humanoid)
 }
 
 // FUNCTION: WEBSERVICE 0x100a0900
+// FUNCTION: ROBLOX 0x005e8e80
 G3D::CoordinateFrame Humanoid::getTopOfHead() const
 {
 	return G3D::CoordinateFrame(G3D::Matrix3::identity(), G3D::Vector3(0, 0.5f, 0));
 }
 
 // FUNCTION: WEBSERVICE 0x100a0930
+// FUNCTION: ROBLOX 0x005e8eb0
 void Humanoid::renderWaypoint(Adorn* adorn, const G3D::Vector3& waypoint)
 {
 	DrawAdorn::cylinder(
@@ -137,6 +141,7 @@ void Humanoid::renderWaypoint(Adorn* adorn, const G3D::Vector3& waypoint)
 }
 
 // FUNCTION: WEBSERVICE 0x100a0990
+// FUNCTION: ROBLOX 0x005e8f10
 ContactManager* Humanoid::getContactManager()
 {
 	World* world = Workspace::getWorldIfInWorkspace(this);
@@ -149,6 +154,7 @@ ContactManager* Humanoid::getContactManager()
 }
 
 // FUNCTION: WEBSERVICE 0x100a0bb0
+// FUNCTION: ROBLOX 0x005e90f0
 PartInstance* Humanoid::getLocalHeadFromContext(const Instance* context)
 {
 	ModelInstance* character = Network::Players::findLocalCharacter(context);
@@ -157,6 +163,7 @@ PartInstance* Humanoid::getLocalHeadFromContext(const Instance* context)
 }
 
 // FUNCTION: WEBSERVICE 0x100a0bd0
+// FUNCTION: ROBLOX 0x005e9110
 bool Humanoid::hasWalkToPoint(G3D::Vector3& worldPosition) const
 {
 	if (walkToPart != NULL && Workspace::findWorkspace(this) != NULL &&
@@ -170,6 +177,7 @@ bool Humanoid::hasWalkToPoint(G3D::Vector3& worldPosition) const
 }
 
 // FUNCTION: WEBSERVICE 0x100a0c50
+// FUNCTION: ROBLOX 0x005e9190
 G3D::CoordinateFrame Humanoid::getRightArmGrip() const
 {
 	G3D::CoordinateFrame grip;
@@ -180,12 +188,14 @@ G3D::CoordinateFrame Humanoid::getRightArmGrip() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a0cb0
+// FUNCTION: ROBLOX 0x005e91f0
 PartInstance* Humanoid::findRightArm() const
 {
 	return static_cast<PartInstance*>(getParent() ? getParent()->findFirstChildByName("Right Arm") : NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x100a0d40
+// FUNCTION: ROBLOX 0x005e9280
 void Humanoid::computeForce(float dt, bool throttling)
 {
 	if (currentState.get() != NULL) {
@@ -194,6 +204,7 @@ void Humanoid::computeForce(float dt, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x100a0d60
+// FUNCTION: ROBLOX 0x005e92a0
 void Humanoid::setState(State* state)
 {
 	if (state != currentState.get()) {
@@ -202,6 +213,7 @@ void Humanoid::setState(State* state)
 }
 
 // FUNCTION: WEBSERVICE 0x100a0da0
+// FUNCTION: ROBLOX 0x005e92e0
 void Humanoid::onAncestorChanged(const AncestorChanged& event)
 {
 	World* newWorld = Workspace::getWorldIfInWorkspace(this);
@@ -223,6 +235,7 @@ void Humanoid::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100a1100
+// FUNCTION: ROBLOX 0x005e96f0
 Humanoid::~Humanoid()
 {
 }
@@ -250,18 +263,21 @@ bool Humanoid::askSetParent(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100a1840
+// FUNCTION: ROBLOX 0x005e9e30
 Humanoid* Humanoid::modelIsCharacter(const Instance* testModel)
 {
 	return testModel ? testModel->findFirstChildOfType<Humanoid>() : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a19e0
+// FUNCTION: ROBLOX 0x005e9fb0
 Humanoid* Humanoid::getLocalHumanoidFromContext(const Instance* context)
 {
 	return modelIsCharacter(Network::Players::findLocalCharacter(context));
 }
 
 // FUNCTION: WEBSERVICE 0x100a1a00
+// FUNCTION: ROBLOX 0x005e9fd0
 boost::shared_ptr<AutoJoint> newJoint(bool animated)
 {
 	if (animated) {
@@ -275,6 +291,7 @@ boost::shared_ptr<AutoJoint> newJoint(bool animated)
 }
 
 // FUNCTION: WEBSERVICE 0x100a1b00
+// FUNCTION: ROBLOX 0x005ea0d0
 void Humanoid::render3dAdorn(Adorn* adorn)
 {
 	if (walkMode == CLICK_TO_MOVE) {
@@ -294,6 +311,7 @@ void Humanoid::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100a2010
+// FUNCTION: ROBLOX 0x005ea5e0
 PartInstance* Humanoid::getHead() const
 {
 	if (head == NULL && getParent() != NULL) {
@@ -304,6 +322,7 @@ PartInstance* Humanoid::getHead() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a2110
+// FUNCTION: ROBLOX 0x005ea6e0
 PartInstance* Humanoid::getTorso() const
 {
 	if (torso == NULL && getParent() != NULL) {
@@ -314,6 +333,7 @@ PartInstance* Humanoid::getTorso() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a2210
+// FUNCTION: ROBLOX 0x005ea7e0
 PartInstance* Humanoid::getLeftLeg() const
 {
 	if (leftLeg == NULL && getParent() != NULL) {
@@ -324,6 +344,7 @@ PartInstance* Humanoid::getLeftLeg() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a2310
+// FUNCTION: ROBLOX 0x005ea8e0
 PartInstance* Humanoid::getRightLeg() const
 {
 	if (rightLeg == NULL && getParent() != NULL) {
@@ -334,6 +355,7 @@ PartInstance* Humanoid::getRightLeg() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a2410
+// FUNCTION: ROBLOX 0x005ea9e0
 PartInstance* Humanoid::getLeftArm() const
 {
 	if (leftArm == NULL && getParent() != NULL) {
@@ -344,6 +366,7 @@ PartInstance* Humanoid::getLeftArm() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a2510
+// FUNCTION: ROBLOX 0x005eaae0
 PartInstance* Humanoid::getRightArm() const
 {
 	if (rightArm == NULL && getParent() != NULL) {
@@ -354,6 +377,7 @@ PartInstance* Humanoid::getRightArm() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a2610
+// FUNCTION: ROBLOX 0x005eabe0
 JointInstance* Humanoid::findRightShoulder() const
 {
 	PartInstance* torso = getTorso();
@@ -361,6 +385,7 @@ JointInstance* Humanoid::findRightShoulder() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a26a0
+// FUNCTION: ROBLOX 0x005eac70
 Primitive* Humanoid::getTorsoPrimitive() const
 {
 	PartInstance* part = getTorso();
@@ -369,6 +394,7 @@ Primitive* Humanoid::getTorsoPrimitive() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a26c0
+// FUNCTION: ROBLOX 0x005eac90
 Primitive* Humanoid::getLeftLegPrimitive()
 {
 	PartInstance* part = getLeftLeg();
@@ -377,6 +403,7 @@ Primitive* Humanoid::getLeftLegPrimitive()
 }
 
 // FUNCTION: WEBSERVICE 0x100a26e0
+// FUNCTION: ROBLOX 0x005eacb0
 Primitive* Humanoid::getRightLegPrimitive()
 {
 	PartInstance* part = getRightLeg();
@@ -385,6 +412,7 @@ Primitive* Humanoid::getRightLegPrimitive()
 }
 
 // FUNCTION: WEBSERVICE 0x100a2700
+// FUNCTION: ROBLOX 0x005eacd0
 Body* Humanoid::getTorsoBody()
 {
 	PartInstance* part = getTorso();
@@ -393,6 +421,7 @@ Body* Humanoid::getTorsoBody()
 }
 
 // FUNCTION: WEBSERVICE 0x100a2720
+// FUNCTION: ROBLOX 0x005eacf0
 Body* Humanoid::getRootBody()
 {
 	Body* body = getTorsoBody();
@@ -401,6 +430,7 @@ Body* Humanoid::getRootBody()
 }
 
 // FUNCTION: WEBSERVICE 0x100a2750
+// FUNCTION: ROBLOX 0x005ead20
 float Humanoid::getTorsoHeading() const
 {
 	Primitive* torso = getTorsoPrimitive();
@@ -419,6 +449,7 @@ const CoordinateFrame Humanoid::getLocation() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a2840
+// FUNCTION: ROBLOX 0x005eae10
 void Humanoid::buildJoints()
 {
 	ModelInstance* character = getCharacterFromHumanoid(this);
@@ -501,6 +532,7 @@ void Humanoid::buildJoints()
 }
 
 // FUNCTION: WEBSERVICE 0x100a2f70
+// FUNCTION: ROBLOX 0x005eb540
 G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
 {
 	G3D::Vector3 result = G3D::Vector3::zero();
@@ -543,18 +575,21 @@ G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
 }
 
 // FUNCTION: WEBSERVICE 0x100a30d0
+// FUNCTION: ROBLOX 0x005eb6a0
 G3D::Vector3 Humanoid::getIntendedMovementVector()
 {
 	return getIntendedMovementVector(false);
 }
 
 // FUNCTION: WEBSERVICE 0x100a30f0
+// FUNCTION: ROBLOX 0x005eb6c0
 G3D::Vector3 Humanoid::updateWalkDirection()
 {
 	return getIntendedMovementVector(true);
 }
 
 // FUNCTION: WEBSERVICE 0x100a3110
+// FUNCTION: ROBLOX 0x005eb750
 static void collectAllDescendantCharacterPrims(
 	boost::shared_ptr<Instance> descendent, std::vector<Primitive*>& primitives
 )
@@ -566,6 +601,7 @@ static void collectAllDescendantCharacterPrims(
 }
 
 // FUNCTION: WEBSERVICE 0x100a31b0
+// FUNCTION: ROBLOX 0x005eb7f0
 void Humanoid::tellCameraNear(float distance)
 {
 	std::vector<Primitive*> primitives;
@@ -590,6 +626,7 @@ void Humanoid::tellCameraNear(float distance)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4290
+// FUNCTION: ROBLOX 0x005ec930
 Humanoid::Humanoid()
 	: health(100), maxHealth(100), walkRotationalVelocity(0), walkTimer(0), walkMode(DIRECTION_MOVE), jump(false),
 	  imDead(false), hadHeadJoint(false), sit(false), world(NULL)
@@ -598,6 +635,7 @@ Humanoid::Humanoid()
 }
 
 // FUNCTION: WEBSERVICE 0x100a44c0
+// FUNCTION: ROBLOX 0x005ecb60
 void Humanoid::onLocalHumanoidEnteringWorkspace()
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(this);
@@ -633,6 +671,7 @@ void Humanoid::onLocalHumanoidEnteringWorkspace()
 }
 
 // FUNCTION: WEBSERVICE 0x100a4610
+// FUNCTION: ROBLOX 0x005eccb0
 void Humanoid::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->create<RunService>() : NULL, this);
@@ -647,6 +686,7 @@ void Humanoid::onServiceProvider(const ServiceProvider* oldProvider, const Servi
 }
 
 // FUNCTION: WEBSERVICE 0x100a4690
+// FUNCTION: ROBLOX 0x005ecd30
 void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
 {
 	if (getHead()) {
@@ -695,6 +735,7 @@ void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4960
+// FUNCTION: ROBLOX 0x005ed000
 void Humanoid::render2d(Adorn* adorn)
 {
 	Humanoid* self = this;
@@ -713,6 +754,7 @@ void Humanoid::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4bf0
+// FUNCTION: ROBLOX 0x005ed290
 void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
 {
 	if (ModelInstance* character = getCharacterFromHumanoid(this)) {
@@ -733,6 +775,7 @@ void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4d50
+// FUNCTION: ROBLOX 0x005ed3f0
 void Humanoid::setHealth(float value)
 {
 	float newHealth = G3D::clamp(value, 0.0f, maxHealth);
@@ -755,6 +798,7 @@ void Humanoid::setHealth(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4e80
+// FUNCTION: ROBLOX 0x005ed520
 void Humanoid::setMaxHealth(float value)
 {
 	if (maxHealth != value) {
@@ -764,6 +808,7 @@ void Humanoid::setMaxHealth(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4eb0
+// FUNCTION: ROBLOX 0x005ed550
 void Humanoid::takeDamage(float value)
 {
 	if (getTorso() && !ForceField::partInForceField(getTorso())) {
@@ -772,6 +817,7 @@ void Humanoid::takeDamage(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4ef0
+// FUNCTION: ROBLOX 0x005ed590
 void Humanoid::setWalkDirection(const G3D::Vector3& value)
 {
 	if (walkDirection != value) {
@@ -788,6 +834,7 @@ void Humanoid::setWalkDirection(const G3D::Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5000
+// FUNCTION: ROBLOX 0x005ed6a0
 void Humanoid::setWalkRotationalVelocity(const float& value)
 {
 	if (walkRotationalVelocity != value) {
@@ -797,6 +844,7 @@ void Humanoid::setWalkRotationalVelocity(const float& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5030
+// FUNCTION: ROBLOX 0x005ed6d0
 void Humanoid::setWalkToPoint(const G3D::Vector3& value)
 {
 	if (walkToPoint != value) {
@@ -809,6 +857,7 @@ void Humanoid::setWalkToPoint(const G3D::Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a50c0
+// FUNCTION: ROBLOX 0x005ed760
 void Humanoid::setWalkToPart(PartInstance* value)
 {
 	if (walkToPart.get() != value) {
@@ -821,6 +870,7 @@ void Humanoid::setWalkToPart(PartInstance* value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a51b0
+// FUNCTION: ROBLOX 0x005ed850
 void Humanoid::setJump(bool value)
 {
 	if (jump != value) {
@@ -830,6 +880,7 @@ void Humanoid::setJump(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a51f0
+// FUNCTION: ROBLOX 0x005ed890
 void Humanoid::setSit(bool value)
 {
 	if (sit != value) {
@@ -839,6 +890,7 @@ void Humanoid::setSit(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5230
+// FUNCTION: ROBLOX 0x005ed8d0
 void Humanoid::setTargetPoint(const G3D::Vector3& value)
 {
 	float tolerance = 1.0f;
@@ -854,6 +906,7 @@ void Humanoid::setTargetPoint(const G3D::Vector3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5310
+// FUNCTION: ROBLOX 0x005ed9b0
 void Humanoid::moveTo(const G3D::Vector3& worldPosition, PartInstance* part)
 {
 	if (part) {
@@ -867,6 +920,7 @@ void Humanoid::moveTo(const G3D::Vector3& worldPosition, PartInstance* part)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5400
+// FUNCTION: ROBLOX 0x005edaa0
 void Humanoid::setLeftLeg(PartInstance* value)
 {
 	if (leftLeg.get() != value) {
@@ -876,6 +930,7 @@ void Humanoid::setLeftLeg(PartInstance* value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a54c0
+// FUNCTION: ROBLOX 0x005edb60
 void Humanoid::setRightLeg(PartInstance* value)
 {
 	if (rightLeg.get() != value) {
@@ -885,6 +940,7 @@ void Humanoid::setRightLeg(PartInstance* value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5580
+// FUNCTION: ROBLOX 0x005edc20
 void Humanoid::setTorso(PartInstance* value)
 {
 	if (torso.get() != value) {
@@ -894,6 +950,7 @@ void Humanoid::setTorso(PartInstance* value)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5640
+// FUNCTION: ROBLOX 0x005edce0
 void Humanoid::checkForJointDeath()
 {
 	if (Primitive* headPrim = getHeadPrimitive()) {
@@ -916,6 +973,7 @@ void Humanoid::checkForJointDeath()
 }
 
 // FUNCTION: WEBSERVICE 0x100a56c0
+// FUNCTION: ROBLOX 0x005edd60
 void Humanoid::onEvent(const RunService* source, Stepped event)
 {
 	if (State* state = currentState.get()) {
@@ -939,6 +997,7 @@ void Humanoid::onEvent(const RunService* source, Stepped event)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5770
+// FUNCTION: ROBLOX 0x005ede10
 void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
 {
 	if (noAdjust) {
@@ -960,6 +1019,7 @@ void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
 }
 
 // FUNCTION: WEBSERVICE 0x100a58a0
+// FUNCTION: ROBLOX 0x005edf40
 void Humanoid::moveTo2(G3D::Vector3 worldPosition, boost::shared_ptr<Instance> part)
 {
 	PartInstance* p = dynamic_cast<PartInstance*>(part.get());

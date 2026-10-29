@@ -97,8 +97,10 @@ DECOMP_SIZE_ASSERT(RunDragger, 0x70)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1012a910
+// SYNTHETIC: ROBLOX 0x00667c10
 // RBX::RunDragger::SnapInfo::operator=
 // FUNCTION: WEBSERVICE 0x1012aaa0
+// FUNCTION: ROBLOX 0x00667da0
 // RBX::RunDragger::SnapInfo::SnapInfo
 // clang-format on
 

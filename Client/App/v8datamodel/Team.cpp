@@ -27,12 +27,14 @@ int Team::getScore() const
 }
 
 // FUNCTION: WEBSERVICE 0x100bded0
+// FUNCTION: ROBLOX 0x0058b480
 BrickColor Team::getTeamColor() const
 {
 	return color;
 }
 
 // FUNCTION: WEBSERVICE 0x100bdee0
+// FUNCTION: ROBLOX 0x0058b490
 bool Team::getAutoAssignable() const
 {
 	return autoAssignable;
@@ -44,6 +46,7 @@ Team::~Team()
 }
 
 // FUNCTION: WEBSERVICE 0x100be630
+// FUNCTION: ROBLOX 0x0058bc20
 Team::Team() : score(0), autoAssignable(true), autoColorCharacters(true)
 {
 	setName(sTeam);
@@ -58,6 +61,7 @@ void Team::setScore(int score)
 }
 
 // FUNCTION: WEBSERVICE 0x100be730
+// FUNCTION: ROBLOX 0x0058bd20
 void Team::setTeamColor(BrickColor color)
 {
 	this->color = color;

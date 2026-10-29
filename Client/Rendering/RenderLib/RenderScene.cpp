@@ -4,12 +4,14 @@ namespace RBX {
 namespace Render {
 
 // FUNCTION: WEBSERVICE 0x101ef3f0
+// FUNCTION: ROBLOX 0x0049d490
 static float detailLevel(float x, float lo, float hi)
 {
 	return G3D::clamp(1.0f - (x - lo) / (hi - lo), 0.0f, 1.0f);
 }
 
 // FUNCTION: WEBSERVICE 0x101ef6c0
+// FUNCTION: ROBLOX 0x0049d840
 void RenderScene::turnOnLights(G3D::RenderDevice* rd, bool allLights) const
 {
 	rd->enableLighting();
@@ -47,6 +49,7 @@ void RenderScene::turnOnLights(G3D::RenderDevice* rd, bool allLights) const
 }
 
 // FUNCTION: WEBSERVICE 0x101ef990
+// FUNCTION: ROBLOX 0x0049db10
 void RenderScene::sendDiffuseProxyMeshGeometry(G3D::RenderDevice* rd) const
 {
 	for (int i = diffuseProxyArray.size() - 1; i >= 0; i--) {
@@ -60,6 +63,7 @@ void RenderScene::sendDiffuseProxyMeshGeometry(G3D::RenderDevice* rd) const
 }
 
 // FUNCTION: WEBSERVICE 0x101efa00
+// FUNCTION: ROBLOX 0x0049db80
 void RenderScene::transparentPass(G3D::RenderDevice* rd)
 {
 	rd->setDepthTest(G3D::RenderDevice::DEPTH_LEQUAL);
@@ -79,6 +83,7 @@ void RenderScene::transparentPass(G3D::RenderDevice* rd)
 }
 
 // FUNCTION: WEBSERVICE 0x101eff30
+// FUNCTION: ROBLOX 0x0049e070
 void RenderScene::renderShadowVolumeGeometry(
 	G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance
 )
@@ -94,6 +99,7 @@ void RenderScene::renderShadowVolumeGeometry(
 }
 
 // FUNCTION: WEBSERVICE 0x101effc0
+// FUNCTION: ROBLOX 0x0049e100
 void RenderScene::reflectionPass(G3D::RenderDevice* rd)
 {
 	if (G3D::GLCaps::supports_GL_EXT_texture_cube_map() && !lighting->environmentMap.isNull() &&
@@ -123,6 +129,7 @@ void RenderScene::reflectionPass(G3D::RenderDevice* rd)
 }
 
 // FUNCTION: WEBSERVICE 0x101f01b0
+// FUNCTION: ROBLOX 0x0049e2f0
 void RenderScene::setThrottle(float t, float m, bool s, float c)
 {
 	t = G3D::clamp(t, 0.0f, 100.0f);
@@ -140,6 +147,7 @@ void RenderScene::setThrottle(float t, float m, bool s, float c)
 }
 
 // FUNCTION: WEBSERVICE 0x101f0320
+// FUNCTION: ROBLOX 0x0049e460
 void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>& L)
 {
 	desiredLighting = L;
@@ -149,6 +157,7 @@ void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>&
 }
 
 // FUNCTION: WEBSERVICE 0x101f06a0
+// FUNCTION: ROBLOX 0x0049e7e0
 void RenderScene::computeShadowVolumeGeometry(
 	G3D::Array<unsigned int>& indexArray,
 	G3D::Array<G3D::Vector3>& shadowVertex,
@@ -178,6 +187,7 @@ void RenderScene::computeShadowVolumeGeometry(
 }
 
 // FUNCTION: WEBSERVICE 0x101f07a0
+// FUNCTION: ROBLOX 0x0049e8e0
 void RenderScene::updateShadowVAR(const G3D::Array<G3D::Vector3>& shadowVertex)
 {
 	size_t size = shadowVertex.size() * sizeof(G3D::Vector3) + 16;
@@ -193,6 +203,7 @@ void RenderScene::updateShadowVAR(const G3D::Array<G3D::Vector3>& shadowVertex)
 }
 
 // FUNCTION: WEBSERVICE 0x101f0900
+// FUNCTION: ROBLOX 0x0049ea40
 void RenderScene::classifyProxies()
 {
 	for (int i = 0; i < proxyArray.size(); i++) {
@@ -214,11 +225,13 @@ void RenderScene::classifyProxies()
 }
 
 // FUNCTION: WEBSERVICE 0x101f0ff0
+// FUNCTION: ROBLOX 0x0049efa0
 RenderScene::~RenderScene()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101f1200
+// FUNCTION: ROBLOX 0x0049f1b0
 void RenderScene::presetLighting(
 	G3D::ReferenceCountedPointer<G3D::Sky> sky,
 	G3D::LightingParameters skyParameters,
@@ -244,6 +257,7 @@ void RenderScene::presetLighting(
 }
 
 // FUNCTION: WEBSERVICE 0x101f1680
+// FUNCTION: ROBLOX 0x0049f4f0
 void RenderScene::markStencilShadows(G3D::RenderDevice* rd, const G3D::GCamera& camera, const G3D::GLight& light)
 {
 	static G3D::Array<G3D::Vector3> shadowVertex;
@@ -311,6 +325,7 @@ void RenderScene::markStencilShadows(G3D::RenderDevice* rd, const G3D::GCamera& 
 }
 
 // STUB: WEBSERVICE 0x101f1960
+// STUB: ROBLOX 0x0049f7d0
 void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 {
 	G3D::CoordinateFrame cameraCFrame;
@@ -376,6 +391,7 @@ void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& cam
 }
 
 // FUNCTION: WEBSERVICE 0x101f1fd0
+// FUNCTION: ROBLOX 0x0049fe40
 void RenderScene::computeProxyArrays(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 {
 	renderStats.computeProxyArrays.tick();
@@ -391,6 +407,7 @@ void RenderScene::computeProxyArrays(G3D::RenderDevice* rd, const G3D::GCamera& 
 }
 
 // FUNCTION: WEBSERVICE 0x101f2090
+// FUNCTION: ROBLOX 0x0049ff00
 void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 {
 	int startTriCount = rd->getTriangleCount();
@@ -525,6 +542,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 }
 
 // FUNCTION: WEBSERVICE 0x101f2450
+// FUNCTION: ROBLOX 0x004a02c0
 RenderScene::RenderScene()
 	: shadingQuality(-1.0f), meshDetail(-1.0f), shadows(false), cameraDistance((float) G3D::inf()),
 	  debugShadowVolumes(false), colorClearValue(0.5f, 0.5f, 1.0f, 1.0f)

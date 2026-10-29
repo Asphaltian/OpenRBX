@@ -178,18 +178,21 @@ void PartInstance::onChildAdded(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x1009a8e0 FOLDED
+// FUNCTION: ROBLOX 0x005ad340 FOLDED
 Surfaces& PartInstance::getSurfaces()
 {
 	return surfaces;
 }
 
 // FUNCTION: WEBSERVICE 0x1009a8e0 FOLDED
+// FUNCTION: ROBLOX 0x005ad340 FOLDED
 const Surfaces& PartInstance::getSurfaces() const
 {
 	return surfaces;
 }
 
 // FUNCTION: WEBSERVICE 0x1009ae00
+// FUNCTION: ROBLOX 0x005ad840
 void PartInstance::setName(const std::string& value)
 {
 	Instance::setName(value);
@@ -203,12 +206,14 @@ void PartInstance::setName(const std::string& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009ae40
+// FUNCTION: ROBLOX 0x005ad950
 bool PartInstance::nonNullInWorkspace(shared_ptr<PartInstance> part)
 {
 	return part.get() != NULL && part->myWorld != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1009ae90 FOLDED
+// FUNCTION: ROBLOX 0x005ae5d0 FOLDED
 PartInstance* PartInstance::fromPrimitive(Primitive* p)
 {
 	if (p != NULL) {
@@ -223,6 +228,7 @@ PartInstance* PartInstance::fromPrimitive(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x1009ae90 FOLDED
+// FUNCTION: ROBLOX 0x005ae5d0 FOLDED
 const PartInstance* PartInstance::fromPrimitiveConst(const Primitive* p)
 {
 	if (p != NULL) {
@@ -237,6 +243,7 @@ const PartInstance* PartInstance::fromPrimitiveConst(const Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x1009aeb0
+// FUNCTION: ROBLOX 0x005ad9a0
 void PartInstance::destroyJoints()
 {
 	if (World* world = Workspace::getWorldIfInWorkspace(this)) {
@@ -245,6 +252,7 @@ void PartInstance::destroyJoints()
 }
 
 // FUNCTION: WEBSERVICE 0x1009aed0
+// FUNCTION: ROBLOX 0x005ad9c0
 void PartInstance::join()
 {
 	if (World* world = Workspace::getWorldIfInWorkspace(this)) {
@@ -253,6 +261,7 @@ void PartInstance::join()
 }
 
 // FUNCTION: WEBSERVICE 0x1009aef0
+// FUNCTION: ROBLOX 0x005ad9e0
 bool PartInstance::computeSurfacesNeedAdorn() const
 {
 	for (int i = 0; i < 6; i++) {
@@ -276,6 +285,7 @@ void PartInstance::legacyTraverseState(const CoordinateFrame& parentState)
 }
 
 // FUNCTION: WEBSERVICE 0x1009af90
+// FUNCTION: ROBLOX 0x005ada80
 bool PartInstance::isControllable() const
 {
 	for (int i = 0; i < 6; i++) {
@@ -291,6 +301,7 @@ bool PartInstance::isControllable() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009aff0
+// FUNCTION: ROBLOX 0x005adae0
 void PartInstance::onSurfaceChanged(NormalId surfId)
 {
 	PersistentPart.setDirty();
@@ -300,6 +311,7 @@ void PartInstance::onSurfaceChanged(NormalId surfId)
 }
 
 // FUNCTION: WEBSERVICE 0x1009b020
+// FUNCTION: ROBLOX 0x005adb10
 void PartInstance::setPhysics(const CoordinateFrame& cf, const Velocity& vel)
 {
 	primitive->getBody()->setVelocity(vel);
@@ -312,12 +324,14 @@ void PartInstance::setPhysics(const CoordinateFrame& cf, const Velocity& vel)
 }
 
 // FUNCTION: WEBSERVICE 0x1009b080
+// FUNCTION: ROBLOX 0x005adb70
 const CoordinateFrame& PartInstance::getCoordinateFrame() const
 {
 	return primitive->getCoordinateFrame();
 }
 
 // FUNCTION: WEBSERVICE 0x1009b090
+// FUNCTION: ROBLOX 0x005adb80
 const Vector3& PartInstance::getTranslationUi() const
 {
 	return primitive->getBody()->getCoordinateFrame().translation;
@@ -330,30 +344,35 @@ float PartInstance::getMass()
 }
 
 // FUNCTION: WEBSERVICE 0x1009b0c0 FOLDED
+// FUNCTION: ROBLOX 0x005adbb0 FOLDED
 const Velocity& PartInstance::getVelocity() const
 {
 	return primitive->getBody()->getVelocity();
 }
 
 // FUNCTION: WEBSERVICE 0x1009b0c0 FOLDED
+// FUNCTION: ROBLOX 0x005adbb0 FOLDED
 const Vector3& PartInstance::getLinearVelocity() const
 {
 	return primitive->getBody()->getVelocity().linear;
 }
 
 // FUNCTION: WEBSERVICE 0x1009b0e0
+// FUNCTION: ROBLOX 0x005adbd0
 const Vector3& PartInstance::getRotationalVelocity() const
 {
 	return primitive->getBody()->getVelocity().rotational;
 }
 
 // FUNCTION: WEBSERVICE 0x1009b100
+// FUNCTION: ROBLOX 0x005adbf0
 const Vector3& PartInstance::getPartSizeXml() const
 {
 	return primitive->getGeometry()->getGridSize();
 }
 
 // FUNCTION: WEBSERVICE 0x1009b110
+// FUNCTION: ROBLOX 0x005adc00
 Vector3 PartInstance::getPartSizeUi() const
 {
 	return primitive->getGeometry()->getGridSize();
@@ -366,6 +385,7 @@ bool PartInstance::getDragging() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b150
+// FUNCTION: ROBLOX 0x005adc40
 bool PartInstance::getCanCollide() const
 {
 	if (!primitive->getDragging() && primitive->getCanCollide()) {
@@ -400,6 +420,7 @@ Extents PartInstance::getExtentsWorld() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b1d0
+// FUNCTION: ROBLOX 0x005adcc0
 Extents PartInstance::getExtentsLocal() const
 {
 	const Vector3 corner = primitive->getGeometry()->getGridSize() * 0.5f;
@@ -426,6 +447,7 @@ Vector3 PartInstance::xmlToUiSize(const Vector3& size) const
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x1009b220
+// FUNCTION: ROBLOX 0x005ade80
 template <>
 const Type& Type::singleton<CoordinateFrame>()
 {
@@ -437,6 +459,7 @@ const Type& Type::singleton<CoordinateFrame>()
 } // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x1009b4c0
+// FUNCTION: ROBLOX 0x005ae3b0
 CoordinateFrame PartInstance::worldSnapLocation() const
 {
 	Vector3 halfSize = primitive->getGeometry()->getGridSize() * 0.5f;
@@ -452,6 +475,7 @@ CoordinateFrame PartInstance::worldSnapLocation() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b5a0
+// FUNCTION: ROBLOX 0x005ae490
 bool PartInstance::aligned() const
 {
 	CoordinateFrame myCoord = worldSnapLocation();
@@ -462,6 +486,7 @@ bool PartInstance::aligned() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b610
+// FUNCTION: ROBLOX 0x005ae500
 Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 {
 	Vector3 gridUiSize = Math::iRoundVector3(uiSize.max(Vector3(1, 1, 1)));
@@ -481,12 +506,14 @@ Vector3 PartInstance::uiToXmlSize(const Vector3& uiSize) const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b6e0
+// FUNCTION: ROBLOX 0x005ae5f0
 Part PartInstance::computePersistentPart() const
 {
 	return Part(partType, getPartSizeXml(), G3D::Color4(getColor3(), alpha()), surfaces.surf6(), getCoordinateFrame());
 }
 
 // FUNCTION: WEBSERVICE 0x1009b780
+// FUNCTION: ROBLOX 0x005ae690
 bool PartInstance::shouldRender3dAdorn() const
 {
 	return partType == Part::CYLINDER_PART || SurfacesNeedAdorn || highlightSleepParts || highlightAwakeParts ||
@@ -494,6 +521,7 @@ bool PartInstance::shouldRender3dAdorn() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b820
+// FUNCTION: ROBLOX 0x005ae730
 bool PartInstance::getLocked(Instance* instance)
 {
 	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
@@ -510,12 +538,14 @@ bool PartInstance::getLocked(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1009bf50
+// FUNCTION: ROBLOX 0x005af070
 bool PartInstance::reportTouches() const
 {
 	return !event_Touched.empty(this);
 }
 
 // FUNCTION: WEBSERVICE 0x1009bfa0
+// FUNCTION: ROBLOX 0x005af0c0
 const Part& PartInstance::getPart() const
 {
 	Part& part = const_cast<Part&>(PersistentPart.getValueRef());
@@ -526,6 +556,7 @@ const Part& PartInstance::getPart() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009bff0
+// FUNCTION: ROBLOX 0x005af110
 void PartInstance::onAncestorChanged(const AncestorChanged& event)
 {
 	Instance::onAncestorChanged(event);
@@ -552,6 +583,7 @@ void PartInstance::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x1009c090
+// FUNCTION: ROBLOX 0x005af1b0
 void PartInstance::onParentControllerChanged()
 {
 	PVInstance::onParentControllerChanged();
@@ -568,6 +600,7 @@ void PartInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 }
 
 // FUNCTION: WEBSERVICE 0x1009c0f0
+// FUNCTION: ROBLOX 0x005af210
 bool PartInstance::hitTest(const G3D::Ray& worldRay, G3D::Vector3& worldHitPoint)
 {
 	G3D::Ray rayInPartCoords = getCoordinateFrame().toObjectSpace(worldRay);
@@ -594,6 +627,7 @@ static float readFloat(const XmlElement* element, const Name& tag)
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x1009c1c0
+// FUNCTION: ROBLOX 0x005af2e0
 template <>
 void TypedPropertyDescriptor<CoordinateFrame>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -618,6 +652,7 @@ void TypedPropertyDescriptor<CoordinateFrame>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x1009c3c0
+// FUNCTION: ROBLOX 0x005af4e0
 template <>
 void TypedPropertyDescriptor<CoordinateFrame>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -639,6 +674,7 @@ void TypedPropertyDescriptor<CoordinateFrame>::writeValue(const DescribedBase* i
 } // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x1009cc10
+// FUNCTION: ROBLOX 0x005afb20
 void PartInstance::onCanAggregateChanged(bool canAggregate)
 {
 	Notifier<PartInstance, CanAggregateChanged>::raise(canAggregate);
@@ -647,6 +683,7 @@ void PartInstance::onCanAggregateChanged(bool canAggregate)
 }
 
 // FUNCTION: WEBSERVICE 0x1009cc30
+// FUNCTION: ROBLOX 0x005afb40
 void PartInstance::safeMove()
 {
 	if (World* world = Workspace::getWorldIfInWorkspace(this)) {
@@ -659,6 +696,7 @@ void PartInstance::safeMove()
 }
 
 // FUNCTION: WEBSERVICE 0x1009ce00
+// FUNCTION: ROBLOX 0x005afc20
 void PartInstance::primitivesToParts(
 	const G3D::Array<Primitive*>& primitives, G3D::Array<shared_ptr<PartInstance> >& parts
 )
@@ -670,6 +708,7 @@ void PartInstance::primitivesToParts(
 }
 
 // FUNCTION: WEBSERVICE 0x1009d150
+// FUNCTION: ROBLOX 0x005afd20
 PartInstance::~PartInstance()
 {
 }
@@ -707,6 +746,7 @@ void PartInstance::getCameraIgnorePrimitives(std::vector<const Primitive*>& prim
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x1009daf0
+// FUNCTION: ROBLOX 0x005b0600
 template <>
 EnumDesc<PartInstance::FormFactor>::EnumDesc() : EnumDescriptor("FormFactor", typeid(PartInstance::FormFactor))
 {
@@ -720,6 +760,7 @@ EnumDesc<PartInstance::FormFactor>::EnumDesc() : EnumDescriptor("FormFactor", ty
 } // namespace Reflection
 
 // FUNCTION: WEBSERVICE 0x1009dca0
+// FUNCTION: ROBLOX 0x005b07b0
 void PartInstance::findParts(Instance* instance, std::vector<boost::weak_ptr<PartInstance> >& parts)
 {
 	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
@@ -732,12 +773,14 @@ void PartInstance::findParts(Instance* instance, std::vector<boost::weak_ptr<Par
 }
 
 // FUNCTION: WEBSERVICE 0x1009ef30
+// FUNCTION: ROBLOX 0x005b19c0
 void PartInstance::onGuidChanged()
 {
 	getPrimitive()->setGuid(getGuid());
 }
 
 // FUNCTION: WEBSERVICE 0x1009f220
+// FUNCTION: ROBLOX 0x005b1cb0
 PartInstance::PartInstance()
 	: DescribedCreatable<PartInstance, PVInstance, sPart>("Part"), partType(Part::BLOCK_PART), formFactor(BRICK),
 	  transparency(0.0f), reflectance(0.0f), locked(false), surfaces(this), renderImportance(0.0f),
@@ -758,12 +801,14 @@ PartInstance::PartInstance()
 }
 
 // FUNCTION: WEBSERVICE 0x1009f560
+// FUNCTION: ROBLOX 0x005b1ff0
 void PartInstance::onTouchThisStep(shared_ptr<PartInstance> other)
 {
 	event_Touched.fire(this, other);
 }
 
 // FUNCTION: WEBSERVICE 0x1009f610
+// FUNCTION: ROBLOX 0x005b20a0
 void PartInstance::setCoordinateFrame(const CoordinateFrame& value)
 {
 	if (value != primitive->getCoordinateFrame()) {
@@ -782,6 +827,7 @@ void PartInstance::setCoordinateFrame(const CoordinateFrame& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009f6c0
+// FUNCTION: ROBLOX 0x005b2150
 void PartInstance::setTranslationUi(const Vector3& set)
 {
 	CoordinateFrame current = getCoordinateFrame();
@@ -796,6 +842,7 @@ void PartInstance::setTranslationUi(const Vector3& set)
 }
 
 // FUNCTION: WEBSERVICE 0x1009f790
+// FUNCTION: ROBLOX 0x005b2220
 void PartInstance::setLinearVelocity(const Vector3& set)
 {
 	Velocity vel = getVelocity();
@@ -808,6 +855,7 @@ void PartInstance::setLinearVelocity(const Vector3& set)
 }
 
 // FUNCTION: WEBSERVICE 0x1009f850
+// FUNCTION: ROBLOX 0x005b22e0
 void PartInstance::setRotationalVelocity(const Vector3& set)
 {
 	Velocity vel = getVelocity();
@@ -820,6 +868,7 @@ void PartInstance::setRotationalVelocity(const Vector3& set)
 }
 
 // FUNCTION: WEBSERVICE 0x1009f910
+// FUNCTION: ROBLOX 0x005b23a0
 void PartInstance::setPartSizeXml(const Vector3& rbxSize)
 {
 	if (rbxSize != getPartSizeXml()) {
@@ -845,6 +894,7 @@ void PartInstance::setPartSizeXml(const Vector3& rbxSize)
 }
 
 // FUNCTION: WEBSERVICE 0x1009f9f0
+// FUNCTION: ROBLOX 0x005b2480
 void PartInstance::setPartSizeUi(const Vector3& uiSize)
 {
 	World* world = Workspace::getWorldIfInWorkspace(this);
@@ -865,6 +915,7 @@ void PartInstance::setPartSizeUi(const Vector3& uiSize)
 }
 
 // FUNCTION: WEBSERVICE 0x1009faa0
+// FUNCTION: ROBLOX 0x005b2530
 void PartInstance::setDragging(bool value)
 {
 	if (value != primitive->getDragging()) {
@@ -874,6 +925,7 @@ void PartInstance::setDragging(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fad0
+// FUNCTION: ROBLOX 0x005b2560
 void PartInstance::setRenderImportance(float value)
 {
 	if (value != renderImportance) {
@@ -883,6 +935,7 @@ void PartInstance::setRenderImportance(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fb00
+// FUNCTION: ROBLOX 0x005b2590
 void PartInstance::setCanCollide(bool value)
 {
 	if (value != getCanCollide()) {
@@ -892,6 +945,7 @@ void PartInstance::setCanCollide(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fb40
+// FUNCTION: ROBLOX 0x005b25d0
 void PartInstance::setAnchored(bool value)
 {
 	if (value != getAnchored()) {
@@ -901,6 +955,7 @@ void PartInstance::setAnchored(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fb80
+// FUNCTION: ROBLOX 0x005b2610
 void PartInstance::setPartLocked(bool value)
 {
 	if (value != locked) {
@@ -910,6 +965,7 @@ void PartInstance::setPartLocked(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fbb0
+// FUNCTION: ROBLOX 0x005b26e0
 void PartInstance::setTransparency(float value)
 {
 	if (value != transparency) {
@@ -919,6 +975,7 @@ void PartInstance::setTransparency(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fbe0
+// FUNCTION: ROBLOX 0x005b2710
 void PartInstance::setAlphaModifier(float value)
 {
 	if (value != alphaModifier) {
@@ -928,6 +985,7 @@ void PartInstance::setAlphaModifier(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fc10
+// FUNCTION: ROBLOX 0x005b2740
 void PartInstance::setReflectance(float value)
 {
 	if (value != reflectance) {
@@ -937,6 +995,7 @@ void PartInstance::setReflectance(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fc40
+// FUNCTION: ROBLOX 0x005b2770
 void PartInstance::setColor(BrickColor value)
 {
 	if (value.number != color.number) {
@@ -947,6 +1006,7 @@ void PartInstance::setColor(BrickColor value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fc70
+// FUNCTION: ROBLOX 0x005b27a0
 void PartInstance::setFormFactorXml(FormFactor value)
 {
 	if (value != formFactor) {
@@ -956,6 +1016,7 @@ void PartInstance::setFormFactorXml(FormFactor value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fca0
+// FUNCTION: ROBLOX 0x005b27d0
 void PartInstance::setFormFactorUi(FormFactor value)
 {
 	if (partType != Part::BLOCK_PART) {
@@ -976,6 +1037,7 @@ void PartInstance::setFormFactorUi(FormFactor value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fda0
+// FUNCTION: ROBLOX 0x005b28d0
 void PartInstance::setFriction(float friction)
 {
 	friction = G3D::clamp(friction, 0.0f, 2.0f);
@@ -987,6 +1049,7 @@ void PartInstance::setFriction(float friction)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fe00
+// FUNCTION: ROBLOX 0x005b2930
 void PartInstance::setElasticity(float elasticity)
 {
 	elasticity = G3D::clamp(elasticity, 0.0f, 1.0f);
@@ -998,6 +1061,7 @@ void PartInstance::setElasticity(float elasticity)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fe60
+// FUNCTION: ROBLOX 0x005b2be0
 void PartInstance::setColor3(const G3D::Color3& value)
 {
 	setColor(BrickColor::closest(value));
@@ -1018,6 +1082,7 @@ void PartInstance::onCameraNear(float distance)
 }
 
 // STUB: WEBSERVICE 0x1009ff60
+// STUB: ROBLOX 0x005b2ce0
 void PartInstance::render3dAdorn(Adorn* adorn)
 {
 	if (partType == Part::CYLINDER_PART || SurfacesNeedAdorn) {
@@ -1108,6 +1173,7 @@ void PartInstance::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100a0450
+// FUNCTION: ROBLOX 0x005b31d0
 void PartInstance::setPartTypeXml(Part::PartType _type)
 {
 	if (partType != _type) {
@@ -1133,6 +1199,7 @@ void PartInstance::setPartTypeXml(Part::PartType _type)
 }
 
 // FUNCTION: WEBSERVICE 0x100a04e0
+// FUNCTION: ROBLOX 0x005b3260
 void PartInstance::setPartTypeUi(Part::PartType _type)
 {
 	if (partType != _type) {

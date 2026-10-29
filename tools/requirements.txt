@@ -1,1 +1,3 @@
 reccmp @ git+https://github.com/Asphaltian/reccmp@msvc800
+capstone
+pefile

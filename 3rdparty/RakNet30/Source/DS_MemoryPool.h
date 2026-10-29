@@ -66,8 +66,10 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc7b0
+	// FUNCTION: ROBLOX 0x004e2680
 	// DataStructures::MemoryPool<InternalPacket>::InitPage
 	// FUNCTION: WEBSERVICE 0x101bca50
+	// FUNCTION: ROBLOX 0x004e2920
 	// DataStructures::MemoryPool<DataStructures::Page<unsigned int,InternalPacket *,32> >::InitPage
 	template <class MemoryBlockType>
 	void MemoryPool<MemoryBlockType>::InitPage(Page *page, Page *prev)
@@ -92,8 +94,10 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bcd10
+	// FUNCTION: ROBLOX 0x004e2c80
 	// DataStructures::MemoryPool<InternalPacket>::Allocate
 	// FUNCTION: WEBSERVICE 0x101bceb0
+	// FUNCTION: ROBLOX 0x004e2ea0
 	// DataStructures::MemoryPool<DataStructures::Page<unsigned int,InternalPacket *,32> >::Allocate
 	template <class MemoryBlockType>
 	MemoryBlockType *MemoryPool<MemoryBlockType>::Allocate(void)
@@ -160,8 +164,10 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bcdb0
+	// FUNCTION: ROBLOX 0x004e2d20
 	// DataStructures::MemoryPool<InternalPacket>::Release
 	// FUNCTION: WEBSERVICE 0x101bcf50
+	// FUNCTION: ROBLOX 0x004e2f40
 	// DataStructures::MemoryPool<DataStructures::Page<unsigned int,InternalPacket *,32> >::Release
 	template <class MemoryBlockType>
 	void MemoryPool<MemoryBlockType>::Release(MemoryBlockType *m)
@@ -217,6 +223,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc670
+	// FUNCTION: ROBLOX 0x004e22d0
 	template <class MemoryBlockType>
 	void MemoryPool<MemoryBlockType>::Clear(void)
 	{

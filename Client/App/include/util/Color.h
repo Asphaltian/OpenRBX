@@ -27,6 +27,7 @@ public:
 	static const G3D::Color3& lightGray();
 
 	// FUNCTION: WEBSERVICE 0x100a07f0
+	// FUNCTION: ROBLOX 0x005e8d70
 	static const G3D::Color3& lightGreen()
 	{
 		static G3D::Color3 c(129 / 255.0f, 197 / 255.0f, 22 / 255.0f);

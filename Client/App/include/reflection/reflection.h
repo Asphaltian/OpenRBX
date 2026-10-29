@@ -22,370 +22,546 @@ namespace Reflection {
 // TEMPLATE: WEBSERVICE 0x10008b10
 // RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10008d50
+// TEMPLATE: ROBLOX 0x00419fb0
 // RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10045560
+// TEMPLATE: ROBLOX 0x005db300
 // RBX::Reflection::Described<RBX::Lighting,&RBX::sLighting,RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1004b760
 // RBX::Reflection::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::PropDescriptor<RBX::Instance,std::basic_string<char,std::char_traits<char>,std::allocator<char> > ><std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::Instance::*)(void)const ,int>
 // TEMPLATE: WEBSERVICE 0x100561a0
+// TEMPLATE: ROBLOX 0x0056a730
 // RBX::Reflection::Described<RBX::RunService,&RBX::sRunService,RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100596e0
+// TEMPLATE: ROBLOX 0x004b8450
 // RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1005bbe0
+// TEMPLATE: ROBLOX 0x00566490
 // RBX::Reflection::Described<RBX::PVInstance,&RBX::sPVInstance,RBX::Instance>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1005bc50
+// TEMPLATE: ROBLOX 0x00566500
 // RBX::Reflection::Described<RBX::ModelInstance,&RBX::sModel,RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1005d7f0
+// TEMPLATE: ROBLOX 0x00567890
 // RBX::Reflection::Described<RBX::Selection,&RBX::sSelection,RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064820
+// TEMPLATE: ROBLOX 0x0045c030
 // RBX::Reflection::Described<RBX::Stats::StatsService,&RBX::Stats::sStats,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064b80
+// TEMPLATE: ROBLOX 0x00571ea0
 // RBX::Reflection::Described<RBX::ScriptContext,&RBX::sScriptContext,RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064bf0
+// TEMPLATE: ROBLOX 0x00461f40
 // RBX::Reflection::Described<RBX::Stats::Item,&RBX::Stats::sStatsItem,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10069590
+// TEMPLATE: ROBLOX 0x005758b0
 // RBX::Reflection::Described<RBX::Script,&RBX::sScript,RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10069810
+// TEMPLATE: ROBLOX 0x00575b30
 // RBX::Reflection::Described<RBX::LocalScript,&RBX::sLocalScript,RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1006f310
+// TEMPLATE: ROBLOX 0x005a1a30
 // RBX::Reflection::Described<RBX::RootInstance,&RBX::sRootInstance,RBX::ModelInstance>::classDescriptor
 // FUNCTION: WEBSERVICE 0x1006f520
+// FUNCTION: ROBLOX 0x005b77f0
 // RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100794b0
+// TEMPLATE: ROBLOX 0x00592780
 // RBX::Reflection::Described<RBX::DataModel,&RBX::sDataModel,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1007d7d0
+// TEMPLATE: ROBLOX 0x005c16f0
 // RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::GetSetImpl<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>::setValue
 // TEMPLATE: WEBSERVICE 0x10081b20
+// TEMPLATE: ROBLOX 0x005c5670
 // RBX::Reflection::Described<RBX::Soundscape::SoundService,&RBX::Soundscape::sSoundService,RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10081b90
+// TEMPLATE: ROBLOX 0x005c56e0
 // RBX::Reflection::Described<RBX::Soundscape::SoundChannel,&RBX::Soundscape::sSoundChannel,RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10081c00
+// TEMPLATE: ROBLOX 0x005c5750
 // RBX::Reflection::Described<StockSound,&sStockSound,RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088d00
+// TEMPLATE: ROBLOX 0x005bb730
 // RBX::Reflection::Described<RBX::Accoutrement,&RBX::sAccoutrement,RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088d70
+// TEMPLATE: ROBLOX 0x005bb7a0
 // RBX::Reflection::Described<RBX::Hat,&RBX::sHat,RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088de0
+// TEMPLATE: ROBLOX 0x005ca290
 // RBX::Reflection::Described<RBX::StarterPackService,&RBX::sStarterPackService,RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088e50
+// TEMPLATE: ROBLOX 0x005ca300
 // RBX::Reflection::Described<RBX::LegacyHopperService,&RBX::sLegacyHopperService,RBX::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088ec0
+// TEMPLATE: ROBLOX 0x005ca370
 // RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088f30
+// TEMPLATE: ROBLOX 0x005ca3e0
 // RBX::Reflection::Described<RBX::ShirtGraphic,&RBX::sShirtGraphic,RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10088fa0
+// TEMPLATE: ROBLOX 0x005ca450
 // RBX::Reflection::Described<RBX::BodyColors,&RBX::sBodyColors,RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089010
+// TEMPLATE: ROBLOX 0x005ca4c0
 // RBX::Reflection::Described<RBX::Explosion,&RBX::sExplosion,RBX::FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089080
+// TEMPLATE: ROBLOX 0x005ca530
 // RBX::Reflection::Described<RBX::FlagStandService,&RBX::sFlagStandService,RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100890f0
+// TEMPLATE: ROBLOX 0x005ca5a0
 // RBX::Reflection::Described<RBX::ForceField,&RBX::sForceField,RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089160
+// TEMPLATE: ROBLOX 0x005c95a0
 // RBX::Reflection::Described<RBX::GameSettings,&RBX::sGameSettings,RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100891d0
+// TEMPLATE: ROBLOX 0x005ca610
 // RBX::Reflection::Described<RBX::GeometryService,&RBX::sGeometryService,RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089240
+// TEMPLATE: ROBLOX 0x005ca680
 // RBX::Reflection::Described<RBX::LocalBackpackItem,&RBX::sLocalBackpackItem,RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100892b0
+// TEMPLATE: ROBLOX 0x005ca6f0
 // RBX::Reflection::Described<RBX::LocalBackpack,&RBX::sLocalBackpack,RBX::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089320
+// TEMPLATE: ROBLOX 0x005ca760
 // RBX::Reflection::Described<RBX::Message,&RBX::sMessage,RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089390
+// TEMPLATE: ROBLOX 0x005ca7d0
 // RBX::Reflection::Described<RBX::Hint,&RBX::sHint,RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089400
+// TEMPLATE: ROBLOX 0x005ca840
 // RBX::Reflection::Described<RBX::Visit,&RBX::sVisit,RBX::FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089470
+// TEMPLATE: ROBLOX 0x005ca8b0
 // RBX::Reflection::Described<RBX::ControllerService,&RBX::sControllerService,RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100894e0
+// TEMPLATE: ROBLOX 0x005ca920
 // RBX::Reflection::Described<RBX::DebrisService,&RBX::sDebrisService,RBX::FactoryProduct<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089550
+// TEMPLATE: ROBLOX 0x005ca990
 // RBX::Reflection::Described<RBX::TimerService,&RBX::sTimerService,RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100895c0
+// TEMPLATE: ROBLOX 0x005caa00
 // RBX::Reflection::Described<RBX::SpawnerService,&RBX::sSpawnerService,RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089630
+// TEMPLATE: ROBLOX 0x005caa70
 // RBX::Reflection::Described<RBX::Humanoid,&RBX::sHumanoid,RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100896a0
+// TEMPLATE: ROBLOX 0x005caae0
 // RBX::Reflection::Described<RBX::Feature,&RBX::sFeature,RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089710
+// TEMPLATE: ROBLOX 0x005cab50
 // RBX::Reflection::Described<RBX::BackpackItem,&RBX::sBackpackItem,RBX::NonFactoryProduct<RBX::Widget,&RBX::sBackpackItem> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10089780
+// TEMPLATE: ROBLOX 0x005cabc0
 // RBX::Reflection::Described<RBX::JointInstance,&RBX::sJointInstance,RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008cc60
+// TEMPLATE: ROBLOX 0x005ccf90
 // RBX::Reflection::Described<RBX::ObjectValue,&RBX::sObjectValue,RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008db70
+// TEMPLATE: ROBLOX 0x004b8710
 // RBX::Reflection::Described<RBX::GlobalSettings,&RBX::sGlobalSettings,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008dbe0
+// TEMPLATE: ROBLOX 0x005cd4e0
 // RBX::Reflection::Described<RBX::MotorFeature,&RBX::sMotorFeature,RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008dc50
+// TEMPLATE: ROBLOX 0x005cd550
 // RBX::Reflection::Described<RBX::Hole,&RBX::sHole,RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008dcc0
+// TEMPLATE: ROBLOX 0x005cd5c0
 // RBX::Reflection::Described<RBX::AutoJoint,&RBX::sAutoJoint,RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008dd30
+// TEMPLATE: ROBLOX 0x005cd630
 // RBX::Reflection::Described<RBX::Tool,&RBX::sTool,RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008dda0
+// TEMPLATE: ROBLOX 0x005b0950
 // RBX::Reflection::Described<RBX::PartInstance,&RBX::sPart,RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008ded0
+// TEMPLATE: ROBLOX 0x005cd760
 // RBX::Reflection::Described<RBX::Snap,&RBX::sSnap,RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008df40
+// TEMPLATE: ROBLOX 0x005cd7d0
 // RBX::Reflection::Described<RBX::Weld,&RBX::sWeld,RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008dfb0
+// TEMPLATE: ROBLOX 0x005cd840
 // RBX::Reflection::Described<RBX::Glue,&RBX::sGlue,RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008e020
+// TEMPLATE: ROBLOX 0x005cd8b0
 // RBX::Reflection::Described<RBX::Rotate,&RBX::sRotate,RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008e090
+// TEMPLATE: ROBLOX 0x005cd920
 // RBX::Reflection::Described<RBX::RotateP,&RBX::sRotateP,RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008e100
+// TEMPLATE: ROBLOX 0x005cd990
 // RBX::Reflection::Described<RBX::RotateV,&RBX::sRotateV,RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008e170
+// TEMPLATE: ROBLOX 0x005cda00
 // RBX::Reflection::Described<RBX::Motor,&RBX::sMotor,RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008e1e0
+// TEMPLATE: ROBLOX 0x005cda70
 // RBX::Reflection::Described<RBX::Flag,&RBX::sFlag,RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008e250
+// TEMPLATE: ROBLOX 0x005cdae0
 // RBX::Reflection::Described<RBX::FlagStand,&RBX::sFlagStand,RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand> >::classDescriptor
 // FUNCTION: WEBSERVICE 0x1008e390
+// FUNCTION: ROBLOX 0x005cdc50
 // RBX::Reflection::Described<RBX::Seat,&RBX::sSeat,RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10094d80
+// TEMPLATE: ROBLOX 0x005dd590
 // RBX::Reflection::Described<RBX::Sky,&RBX::sSky,RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100b42f0
+// TEMPLATE: ROBLOX 0x0057c2f0
 // RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100be240
+// TEMPLATE: ROBLOX 0x0058b850
 // RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100c3a60
+// TEMPLATE: ROBLOX 0x005d7600
 // RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100c8700
+// TEMPLATE: ROBLOX 0x005e27e0
 // RBX::Reflection::Described<RBX::HopperBin,&RBX::sHopperBin,RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100cb390
+// TEMPLATE: ROBLOX 0x0060ff60
 // RBX::Reflection::Described<RBX::Mouse,&RBX::sMouse,RBX::NonFactoryProduct<RBX::Instance,&RBX::sMouse> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100d8960
 // RBX::Reflection::PropDescriptor<RBX::Motor,float>::PropDescriptor<RBX::Motor,float><float (__thiscall RBX::Motor::*)(void)const ,void (__thiscall RBX::Motor::*)(float)>
 // TEMPLATE: WEBSERVICE 0x100dabe0
+// TEMPLATE: ROBLOX 0x005e79d0
 // RBX::Reflection::Described<RBX::Teams,&RBX::sTeams,RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100e0d60
+// TEMPLATE: ROBLOX 0x005e6810
 // RBX::Reflection::Described<RBX::Shirt,&RBX::sShirt,RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100e0dd0
+// TEMPLATE: ROBLOX 0x005e6880
 // RBX::Reflection::Described<RBX::Skin,&RBX::sSkin,RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100e6160
+// TEMPLATE: ROBLOX 0x00619050
 // RBX::Reflection::Described<RBX::VelocityMotor,&RBX::sVelocityMotor,RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec1a0
+// TEMPLATE: ROBLOX 0x0062b250
 // RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec210
+// TEMPLATE: ROBLOX 0x0062b2c0
 // RBX::Reflection::Described<RBX::BodyVelocity,&RBX::sBodyVelocity,RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec5c0
+// TEMPLATE: ROBLOX 0x0062b670
 // RBX::Reflection::Described<RBX::BodyGyro,&RBX::sBodyGyro,RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec630
+// TEMPLATE: ROBLOX 0x0062b6e0
 // RBX::Reflection::Described<RBX::BodyForce,&RBX::sBodyForce,RBX::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec6a0
 // RBX::Reflection::Described<RBX::BodyThrust,&RBX::sBodyThrust,RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec710
+// TEMPLATE: ROBLOX 0x0062b7c0
 // RBX::Reflection::Described<RBX::Rocket,&RBX::sRocket,RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100f24f0
+// TEMPLATE: ROBLOX 0x00631240
 // RBX::Reflection::Described<RBX::Value<int,&RBX::sIntValue>,&RBX::sIntValue,RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100f2630
+// TEMPLATE: ROBLOX 0x00631380
 // RBX::Reflection::Described<RBX::Value<bool,&RBX::sBoolValue>,&RBX::sBoolValue,RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100f2770
+// TEMPLATE: ROBLOX 0x006314c0
 // RBX::Reflection::Described<RBX::Value<double,&RBX::sDoubleValue>,&RBX::sDoubleValue,RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100f29f0
+// TEMPLATE: ROBLOX 0x00631740
 // RBX::Reflection::Described<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,&RBX::sVector3Value,RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100f2b30
+// TEMPLATE: ROBLOX 0x00631880
 // RBX::Reflection::Described<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,&RBX::sCFrameValue,RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100f2c70
+// TEMPLATE: ROBLOX 0x006319c0
 // RBX::Reflection::Described<RBX::Value<G3D::Color3,&RBX::sColor3Value>,&RBX::sColor3Value,RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100f2db0
+// TEMPLATE: ROBLOX 0x00631b00
 // RBX::Reflection::Described<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,&RBX::sBrickColorValue,RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue> >::classDescriptor
 // FUNCTION: WEBSERVICE 0x100fe360
+// FUNCTION: ROBLOX 0x005e4d80
 // RBX::Reflection::Described<RBX::SpawnLocation,&RBX::sSpawnLocation,RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ffb40
+// TEMPLATE: ROBLOX 0x005ac6a0
 // RBX::Reflection::Described<RBX::FaceInstance,&RBX::sFaceInstance,RBX::Instance>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ffbb0
+// TEMPLATE: ROBLOX 0x005ac710
 // RBX::Reflection::Described<RBX::Decal,&RBX::sDecal,RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal> >::classDescriptor
 // FUNCTION: WEBSERVICE 0x100ffc20
+// FUNCTION: ROBLOX 0x005ac780
 // RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1012d2d0
+// TEMPLATE: ROBLOX 0x005b3b90
 // RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c0f0
+// TEMPLATE: ROBLOX 0x004b8610
 // RBX::Reflection::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c170
+// TEMPLATE: ROBLOX 0x004ab470
 // RBX::Reflection::Described<RBX::Network::Player,&RBX::Network::sPlayer,RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c1f0
+// TEMPLATE: ROBLOX 0x004b8690
 // RBX::Reflection::Described<RBX::Network::Server,&RBX::Network::sServer,RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c270
+// TEMPLATE: ROBLOX 0x004b3af0
 // RBX::Reflection::Described<RBX::Network::Players,&RBX::Network::sPlayers,RBX::NonFactoryProduct<RBX::Instance,&RBX::Network::sPlayers> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1018c2f0
+// TEMPLATE: ROBLOX 0x004b8790
 // RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x101a3140
+// TEMPLATE: ROBLOX 0x004c9a70
 // RBX::Reflection::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >::classDescriptor
 // SYNTHETIC: WEBSERVICE 0x10221000
 // `RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221010
+// SYNTHETIC: ROBLOX 0x007ef5b0
 // `RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102215d0
+// SYNTHETIC: ROBLOX 0x007f3a00
 // `RBX::Reflection::Described<RBX::Lighting,&RBX::sLighting,RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221810
+// SYNTHETIC: ROBLOX 0x007f1ce0
 // `RBX::Reflection::Described<RBX::RunService,&RBX::sRunService,RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221950
+// SYNTHETIC: ROBLOX 0x007f1c50
 // `RBX::Reflection::Described<RBX::ModelInstance,&RBX::sModel,RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221960
+// SYNTHETIC: ROBLOX 0x007f1c60
 // `RBX::Reflection::Described<RBX::PVInstance,&RBX::sPVInstance,RBX::Instance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221a30
+// SYNTHETIC: ROBLOX 0x007f1cb0
 // `RBX::Reflection::Described<RBX::Selection,&RBX::sSelection,RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221a90
 // `RBX::Reflection::Described<RBX::Stats::Item,&RBX::Stats::sStatsItem,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221aa0
+// SYNTHETIC: ROBLOX 0x007f1d60
 // `RBX::Reflection::Described<RBX::ScriptContext,&RBX::sScriptContext,RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221ab0
 // `RBX::Reflection::Described<RBX::Stats::StatsService,&RBX::Stats::sStats,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221ba0
+// SYNTHETIC: ROBLOX 0x007f1e10
 // `RBX::Reflection::Described<RBX::LocalScript,&RBX::sLocalScript,RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221bb0
+// SYNTHETIC: ROBLOX 0x007f1e20
 // `RBX::Reflection::Described<RBX::Script,&RBX::sScript,RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221c70
+// SYNTHETIC: ROBLOX 0x007f2cd0
 // `RBX::Reflection::Described<RBX::Workspace,&RBX::sWorkspace,RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221c80
+// SYNTHETIC: ROBLOX 0x007f2660
 // `RBX::Reflection::Described<RBX::RootInstance,&RBX::sRootInstance,RBX::ModelInstance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221eb0
+// SYNTHETIC: ROBLOX 0x007f2410
 // `RBX::Reflection::Described<RBX::DataModel,&RBX::sDataModel,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222420
+// SYNTHETIC: ROBLOX 0x007f3050
 // `RBX::Reflection::Described<StockSound,&sStockSound,RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222430
+// SYNTHETIC: ROBLOX 0x007f3060
 // `RBX::Reflection::Described<RBX::Soundscape::SoundChannel,&RBX::Soundscape::sSoundChannel,RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222440
+// SYNTHETIC: ROBLOX 0x007f3070
 // `RBX::Reflection::Described<RBX::Soundscape::SoundService,&RBX::Soundscape::sSoundService,RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222520
+// SYNTHETIC: ROBLOX 0x007f31c0
 // `RBX::Reflection::Described<RBX::Humanoid,&RBX::sHumanoid,RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222530
+// SYNTHETIC: ROBLOX 0x007f31d0
 // `RBX::Reflection::Described<RBX::SpawnerService,&RBX::sSpawnerService,RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222540
+// SYNTHETIC: ROBLOX 0x007f31e0
 // `RBX::Reflection::Described<RBX::Seat,&RBX::sSeat,RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222550
+// SYNTHETIC: ROBLOX 0x007f31f0
 // `RBX::Reflection::Described<RBX::TimerService,&RBX::sTimerService,RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222560
+// SYNTHETIC: ROBLOX 0x007f3200
 // `RBX::Reflection::Described<RBX::DebrisService,&RBX::sDebrisService,RBX::FactoryProduct<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222570
+// SYNTHETIC: ROBLOX 0x007f3210
 // `RBX::Reflection::Described<RBX::ControllerService,&RBX::sControllerService,RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222580
+// SYNTHETIC: ROBLOX 0x007f3220
 // `RBX::Reflection::Described<RBX::Visit,&RBX::sVisit,RBX::FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222590
+// SYNTHETIC: ROBLOX 0x007f3230
 // `RBX::Reflection::Described<RBX::Hint,&RBX::sHint,RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225a0
+// SYNTHETIC: ROBLOX 0x007f3240
 // `RBX::Reflection::Described<RBX::Message,&RBX::sMessage,RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225b0
+// SYNTHETIC: ROBLOX 0x007f3250
 // `RBX::Reflection::Described<RBX::LocalBackpack,&RBX::sLocalBackpack,RBX::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225c0
+// SYNTHETIC: ROBLOX 0x007f3260
 // `RBX::Reflection::Described<RBX::LocalBackpackItem,&RBX::sLocalBackpackItem,RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225d0
+// SYNTHETIC: ROBLOX 0x007f3270
 // `RBX::Reflection::Described<RBX::GeometryService,&RBX::sGeometryService,RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225e0
+// SYNTHETIC: ROBLOX 0x007f31b0
 // `RBX::Reflection::Described<RBX::GameSettings,&RBX::sGameSettings,RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102225f0
+// SYNTHETIC: ROBLOX 0x007f3280
 // `RBX::Reflection::Described<RBX::ForceField,&RBX::sForceField,RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222600
+// SYNTHETIC: ROBLOX 0x007f3290
 // `RBX::Reflection::Described<RBX::FlagStandService,&RBX::sFlagStandService,RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222610
+// SYNTHETIC: ROBLOX 0x007f32a0
 // `RBX::Reflection::Described<RBX::FlagStand,&RBX::sFlagStand,RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222620
+// SYNTHETIC: ROBLOX 0x007f32b0
 // `RBX::Reflection::Described<RBX::Flag,&RBX::sFlag,RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222630
+// SYNTHETIC: ROBLOX 0x007f32c0
 // `RBX::Reflection::Described<RBX::Hole,&RBX::sHole,RBX::FactoryProduct<RBX::Hole,RBX::Feature,&RBX::sHole> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222640
+// SYNTHETIC: ROBLOX 0x007f32d0
 // `RBX::Reflection::Described<RBX::MotorFeature,&RBX::sMotorFeature,RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222650
+// SYNTHETIC: ROBLOX 0x007f32e0
 // `RBX::Reflection::Described<RBX::Motor,&RBX::sMotor,RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222660
+// SYNTHETIC: ROBLOX 0x007f32f0
 // `RBX::Reflection::Described<RBX::RotateV,&RBX::sRotateV,RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222670
+// SYNTHETIC: ROBLOX 0x007f3300
 // `RBX::Reflection::Described<RBX::RotateP,&RBX::sRotateP,RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222680
+// SYNTHETIC: ROBLOX 0x007f3310
 // `RBX::Reflection::Described<RBX::Rotate,&RBX::sRotate,RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222690
+// SYNTHETIC: ROBLOX 0x007f3320
 // `RBX::Reflection::Described<RBX::Glue,&RBX::sGlue,RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102226a0
+// SYNTHETIC: ROBLOX 0x007f3330
 // `RBX::Reflection::Described<RBX::Weld,&RBX::sWeld,RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102226b0
+// SYNTHETIC: ROBLOX 0x007f3340
 // `RBX::Reflection::Described<RBX::Snap,&RBX::sSnap,RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102226c0
+// SYNTHETIC: ROBLOX 0x007f3350
 // `RBX::Reflection::Described<RBX::Explosion,&RBX::sExplosion,RBX::FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102226d0
+// SYNTHETIC: ROBLOX 0x007f3360
 // `RBX::Reflection::Described<RBX::BodyColors,&RBX::sBodyColors,RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102226e0
+// SYNTHETIC: ROBLOX 0x007f3370
 // `RBX::Reflection::Described<RBX::ShirtGraphic,&RBX::sShirtGraphic,RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222700
+// SYNTHETIC: ROBLOX 0x007f3380
 // `RBX::Reflection::Described<RBX::Backpack,&RBX::sBackpack,RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222710
+// SYNTHETIC: ROBLOX 0x007f3390
 // `RBX::Reflection::Described<RBX::LegacyHopperService,&RBX::sLegacyHopperService,RBX::FactoryProduct<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222720
+// SYNTHETIC: ROBLOX 0x007f33a0
 // `RBX::Reflection::Described<RBX::StarterPackService,&RBX::sStarterPackService,RBX::FactoryProduct<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222730
+// SYNTHETIC: ROBLOX 0x007f2e30
 // `RBX::Reflection::Described<RBX::Hat,&RBX::sHat,RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222740
+// SYNTHETIC: ROBLOX 0x007f2e40
 // `RBX::Reflection::Described<RBX::Accoutrement,&RBX::sAccoutrement,RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222750
+// SYNTHETIC: ROBLOX 0x007f2b70
 // `RBX::Reflection::Described<RBX::PartInstance,&RBX::sPart,RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222760
+// SYNTHETIC: ROBLOX 0x007f33b0
 // `RBX::Reflection::Described<RBX::Tool,&RBX::sTool,RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222770
+// SYNTHETIC: ROBLOX 0x007f33c0
 // `RBX::Reflection::Described<RBX::Feature,&RBX::sFeature,RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222780
+// SYNTHETIC: ROBLOX 0x007f33d0
 // `RBX::Reflection::Described<RBX::AutoJoint,&RBX::sAutoJoint,RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222790
+// SYNTHETIC: ROBLOX 0x007f33e0
 // `RBX::Reflection::Described<RBX::ObjectValue,&RBX::sObjectValue,RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102227a0
+// SYNTHETIC: ROBLOX 0x007f33f0
 // `RBX::Reflection::Described<RBX::JointInstance,&RBX::sJointInstance,RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102227b0
+// SYNTHETIC: ROBLOX 0x007f3400
 // `RBX::Reflection::Described<RBX::BackpackItem,&RBX::sBackpackItem,RBX::NonFactoryProduct<RBX::Widget,&RBX::sBackpackItem> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10222fe0
+// SYNTHETIC: ROBLOX 0x007f3b70
 // `RBX::Reflection::Described<RBX::Sky,&RBX::sSky,RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223960
+// SYNTHETIC: ROBLOX 0x007f2250
 // `RBX::Reflection::Described<RBX::DebugSettings,&RBX::sDebugSettings,RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223aa0
+// SYNTHETIC: ROBLOX 0x007f23d0
 // `RBX::Reflection::Described<RBX::Team,&RBX::sTeam,RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223b30
+// SYNTHETIC: ROBLOX 0x007f3920
 // `RBX::Reflection::Described<RBX::Camera,&RBX::sCamera,RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223bd0
+// SYNTHETIC: ROBLOX 0x007f3fc0
 // `RBX::Reflection::Described<RBX::HopperBin,&RBX::sHopperBin,RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223d10
+// SYNTHETIC: ROBLOX 0x007f46c0
 // `RBX::Reflection::Described<RBX::Mouse,&RBX::sMouse,RBX::NonFactoryProduct<RBX::Instance,&RBX::sMouse> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10223e70
+// SYNTHETIC: ROBLOX 0x007f4210
 // `RBX::Reflection::Described<RBX::Teams,&RBX::sTeams,RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224160
+// SYNTHETIC: ROBLOX 0x007f41f0
 // `RBX::Reflection::Described<RBX::Skin,&RBX::sSkin,RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224170
+// SYNTHETIC: ROBLOX 0x007f4200
 // `RBX::Reflection::Described<RBX::Shirt,&RBX::sShirt,RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224300
+// SYNTHETIC: ROBLOX 0x007f4820
 // `RBX::Reflection::Described<RBX::VelocityMotor,&RBX::sVelocityMotor,RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246a0
+// SYNTHETIC: ROBLOX 0x007f4c50
 // `RBX::Reflection::Described<RBX::Rocket,&RBX::sRocket,RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246b0
+// SYNTHETIC: ROBLOX 0x007f4c60
 // `RBX::Reflection::Described<RBX::BodyVelocity,&RBX::sBodyVelocity,RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246c0
+// SYNTHETIC: ROBLOX 0x007f4c70
 // `RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246d0
 // `RBX::Reflection::Described<RBX::BodyThrust,&RBX::sBodyThrust,RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246e0
+// SYNTHETIC: ROBLOX 0x007f4c90
 // `RBX::Reflection::Described<RBX::BodyForce,&RBX::sBodyForce,RBX::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246f0
+// SYNTHETIC: ROBLOX 0x007f4ca0
 // `RBX::Reflection::Described<RBX::BodyGyro,&RBX::sBodyGyro,RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224cc0
+// SYNTHETIC: ROBLOX 0x007f4080
 // `RBX::Reflection::Described<RBX::SpawnLocation,&RBX::sSpawnLocation,RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224d70
+// SYNTHETIC: ROBLOX 0x007f2880
 // `RBX::Reflection::Described<RBX::Texture,&RBX::sTexture,RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224d80
+// SYNTHETIC: ROBLOX 0x007f2890
 // `RBX::Reflection::Described<RBX::Decal,&RBX::sDecal,RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224d90
+// SYNTHETIC: ROBLOX 0x007f28a0
 // `RBX::Reflection::Described<RBX::FaceInstance,&RBX::sFaceInstance,RBX::Instance>::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102256d0
+// SYNTHETIC: ROBLOX 0x007f2c80
 // `RBX::Reflection::Described<RBX::SpecialShape,&RBX::sSpecialShape,RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10225d20
+// SYNTHETIC: ROBLOX 0x007f0e20
 // `RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10225d30
+// SYNTHETIC: ROBLOX 0x007f0cd0
 // `RBX::Reflection::Described<RBX::Network::Players,&RBX::Network::sPlayers,RBX::NonFactoryProduct<RBX::Instance,&RBX::Network::sPlayers> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10225d40
+// SYNTHETIC: ROBLOX 0x007f0e40
 // `RBX::Reflection::Described<RBX::Network::Server,&RBX::Network::sServer,RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10225d50
+// SYNTHETIC: ROBLOX 0x007f08b0
 // `RBX::Reflection::Described<RBX::Network::Player,&RBX::Network::sPlayer,RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10225d60
+// SYNTHETIC: ROBLOX 0x007f0e50
 // `RBX::Reflection::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102262b0
+// SYNTHETIC: ROBLOX 0x007f10c0
 // `RBX::Reflection::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on
 
@@ -397,14 +573,19 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x10047b10
 	// RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::~Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>
 	// TEMPLATE: WEBSERVICE 0x1004e950
+	// TEMPLATE: ROBLOX 0x0057a670
 	// RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>
 	// TEMPLATE: WEBSERVICE 0x10197b40
+	// TEMPLATE: ROBLOX 0x004b9de0
 	// RBX::Reflection::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >::Described<RBX::Network::Client,&RBX::Network::sClient,RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient> >
 	// TEMPLATE: WEBSERVICE 0x1019a7a0
+	// TEMPLATE: ROBLOX 0x004bc990
 	// RBX::Reflection::Described<RBX::Network::Server,&RBX::Network::sServer,RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer> >::Described<RBX::Network::Server,&RBX::Network::sServer,RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer> >
 	// TEMPLATE: WEBSERVICE 0x1019b860
+	// TEMPLATE: ROBLOX 0x004c20b0
 	// RBX::Reflection::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >::Described<RBX::NetworkSettings,&RBX::sNetworkSettings,RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings> >
 	// TEMPLATE: WEBSERVICE 0x101a96a0
+	// TEMPLATE: ROBLOX 0x004d27d0
 	// RBX::Reflection::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >::Described<RBX::Network::Marker,&RBX::Network::sMarker,RBX::NonFactoryProduct<RBX::Reflection::DescribedBase,&RBX::Network::sMarker> >
 	// clang-format on
 	Described() { this->descriptor = &classDescriptor(); }
@@ -687,6 +868,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100e6910
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::readValue
 	// TEMPLATE: WEBSERVICE 0x10102130
+	// TEMPLATE: ROBLOX 0x005b3ca0
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::writeValue
 	// TEMPLATE: WEBSERVICE 0x10121b30
 	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::setIndexValue
@@ -758,36 +940,44 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004b8a0
+	// TEMPLATE: ROBLOX 0x005787f0
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::RefPropDescriptor<RBX::Instance,RBX::Instance><RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x1004ba50
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x1004ba90
+	// TEMPLATE: ROBLOX 0x00656ff0
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::assignIDREF
 	// TEMPLATE: WEBSERVICE 0x1005bd80
 	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x1005be40
+	// TEMPLATE: ROBLOX 0x005ebcc0
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::readValue
 	// TEMPLATE: WEBSERVICE 0x1006f590
+	// TEMPLATE: ROBLOX 0x005b7860
 	// RBX::Reflection::RefPropDescriptor<RBX::Workspace,RBX::Camera>::RefPropDescriptor<RBX::Workspace,RBX::Camera><RBX::Camera * (__thiscall RBX::Workspace::*)(void)const ,void (__thiscall RBX::Workspace::*)(RBX::Camera *)>
 	// TEMPLATE: WEBSERVICE 0x1006f6a0
 	// RBX::Reflection::RefPropDescriptor<RBX::Workspace,RBX::Camera>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100a35c0
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100a3680
+	// TEMPLATE: ROBLOX 0x005ebd40
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::writeValue
 	// TEMPLATE: WEBSERVICE 0x100b4750
+	// TEMPLATE: ROBLOX 0x005df170
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::equalValues
 	// TEMPLATE: WEBSERVICE 0x100c3cb0
 	// RBX::Reflection::RefPropDescriptor<RBX::Camera,RBX::Instance>::RefPropDescriptor<RBX::Camera,RBX::Instance><RBX::Instance * (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x100d8810
 	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(RBX::PartInstance *)>
 	// SYNTHETIC: WEBSERVICE 0x100e5fe0
+	// SYNTHETIC: ROBLOX 0x005f80d0
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100e6a40
 	// RBX::Reflection::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole>::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole><RBX::Hole * (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(RBX::Hole *)>
 	// TEMPLATE: WEBSERVICE 0x100e6b40
 	// RBX::Reflection::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100ec830
+	// TEMPLATE: ROBLOX 0x004ab840
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::getRefValue
 	// TEMPLATE: WEBSERVICE 0x100ec850
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::setRefValue
@@ -796,12 +986,15 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10102200
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::isReadOnly
 	// TEMPLATE: WEBSERVICE 0x10117770
+	// TEMPLATE: ROBLOX 0x00656f50
 	// RBX::Reflection::RefPropDescriptor<RBX::Mouse,RBX::PartInstance>::RefPropDescriptor<RBX::Mouse,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::Mouse::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x1018e3e0
+	// TEMPLATE: ROBLOX 0x004ab640
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance>::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance><RBX::ModelInstance * (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(RBX::ModelInstance *)>
 	// TEMPLATE: WEBSERVICE 0x1018e490
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x101933c0
+	// TEMPLATE: ROBLOX 0x004b3e20
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player>::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player><RBX::Network::Player * (__thiscall RBX::Network::Players::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x10193470
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player>::setRefValue
@@ -863,6 +1056,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10045be0
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10045c50
+	// TEMPLATE: ROBLOX 0x005db860
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>::call<float>
 	// TEMPLATE: WEBSERVICE 0x10045cb0
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>::execute
@@ -901,6 +1095,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1005e520
 	// RBX::Reflection::BoundFuncDesc<RBX::Selection,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10070210
+	// TEMPLATE: ROBLOX 0x005b8600
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10070290
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>::execute
@@ -915,12 +1110,14 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1009ebb0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1009ec30
+	// TEMPLATE: ROBLOX 0x005b16a0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::call<float>
 	// TEMPLATE: WEBSERVICE 0x1009eca0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100b23b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100b2420
+	// TEMPLATE: ROBLOX 0x005cf470
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::call<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// TEMPLATE: WEBSERVICE 0x100b24b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::execute
@@ -939,6 +1136,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100edb90
 	// RBX::Reflection::BoundFuncDesc<RBX::Rocket,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100edbf0
+	// TEMPLATE: ROBLOX 0x00579000
 	// RBX::Reflection::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100edc60
 	// RBX::Reflection::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>::execute
@@ -959,6 +1157,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1019af60
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,int __cdecl(void),0>::BoundFuncDesc<RBX::Network::Server,int __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1019afe0
+	// TEMPLATE: ROBLOX 0x004bd200
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,int __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x101a4420
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>
@@ -1042,38 +1241,50 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10045fc0
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,void __cdecl(double),1>::BoundFuncDesc<RBX::Lighting,void __cdecl(double),1>
 	// TEMPLATE: WEBSERVICE 0x10046060
+	// TEMPLATE: ROBLOX 0x005dbbd0
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,void __cdecl(double),1>::execute
 	// TEMPLATE: WEBSERVICE 0x1004ca50
+	// TEMPLATE: ROBLOX 0x005792e0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::call<bool>
 	// TEMPLATE: WEBSERVICE 0x1004cad0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::execute
 	// TEMPLATE: WEBSERVICE 0x100598b0
+	// TEMPLATE: ROBLOX 0x0058c8b0
 	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x10059970
 	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::execute
 	// TEMPLATE: WEBSERVICE 0x1005c370
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
 	// TEMPLATE: WEBSERVICE 0x1005c420
+	// TEMPLATE: ROBLOX 0x00566c50
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::execute
 	// TEMPLATE: WEBSERVICE 0x1005e620
+	// TEMPLATE: ROBLOX 0x00568650
 	// RBX::Reflection::BoundFuncDesc<RBX::Selection,void __cdecl(boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const >),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x1006ea20 FOLDED
+	// SYNTHETIC: ROBLOX 0x005b6e40 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::~BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
 	// SYNTHETIC: WEBSERVICE 0x1006ea20 FOLDED
+	// SYNTHETIC: ROBLOX 0x005b6e40 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::~BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>
 	// TEMPLATE: WEBSERVICE 0x1006fdc0
+	// TEMPLATE: ROBLOX 0x005b81b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(RBX::ContentId),1>::execute
 	// TEMPLATE: WEBSERVICE 0x1006ff40
+	// TEMPLATE: ROBLOX 0x005b8330
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const >),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x10070050
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10070070
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>
 	// TEMPLATE: WEBSERVICE 0x10070120
+	// TEMPLATE: ROBLOX 0x005b8510
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>::execute
 	// TEMPLATE: WEBSERVICE 0x100a3dc0
+	// TEMPLATE: ROBLOX 0x005ec4b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>
 	// TEMPLATE: WEBSERVICE 0x100a3e70
+	// TEMPLATE: ROBLOX 0x005ec560
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::execute
 	// TEMPLATE: WEBSERVICE 0x100f95d0
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>
@@ -1082,16 +1293,20 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1018f150
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
 	// TEMPLATE: WEBSERVICE 0x1018f200
+	// TEMPLATE: ROBLOX 0x004acad0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x101975b0
+	// SYNTHETIC: ROBLOX 0x004b3a30
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::~BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
 	// TEMPLATE: WEBSERVICE 0x101983b0
+	// TEMPLATE: ROBLOX 0x004ba650
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>
 	// TEMPLATE: WEBSERVICE 0x10198480
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x10198560
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1019adb0
+	// TEMPLATE: ROBLOX 0x004bcfd0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int),1>::BoundFuncDesc<RBX::Network::Server,void __cdecl(int),1>
 	// TEMPLATE: WEBSERVICE 0x1019ae80
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int),1>::execute
@@ -1184,46 +1399,63 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10047b70
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x1004c330
+	// TEMPLATE: ROBLOX 0x00578cb0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x1004c3f0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::execute
 	// TEMPLATE: WEBSERVICE 0x100f8be0
+	// TEMPLATE: ROBLOX 0x005ce890
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x100f9820
+	// TEMPLATE: ROBLOX 0x005cf560
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>
 	// TEMPLATE: WEBSERVICE 0x100f98b0
+	// TEMPLATE: ROBLOX 0x005cf5f0
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int),2>::execute
 	// TEMPLATE: WEBSERVICE 0x100f9e40
+	// TEMPLATE: ROBLOX 0x00636f50
 	// RBX::Reflection::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x100fafb0
+	// TEMPLATE: ROBLOX 0x00637ee0
 	// RBX::Reflection::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>
 	// TEMPLATE: WEBSERVICE 0x100fb070
+	// TEMPLATE: ROBLOX 0x00637fa0
 	// RBX::Reflection::BoundFuncDesc<RBX::DebrisService,void __cdecl(boost::shared_ptr<RBX::Instance>,double),2>::execute
 	// TEMPLATE: WEBSERVICE 0x100a0a10
+	// TEMPLATE: ROBLOX 0x005e8f80
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>::declareSignature
 	// SYNTHETIC: WEBSERVICE 0x100a33a0
+	// SYNTHETIC: ROBLOX 0x005eb9e0
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>::~BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>
 	// TEMPLATE: WEBSERVICE 0x100a3f60
+	// TEMPLATE: ROBLOX 0x005ec650
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>
 	// TEMPLATE: WEBSERVICE 0x100a4000
+	// TEMPLATE: ROBLOX 0x005ec6f0
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>::call<void>
 	// TEMPLATE: WEBSERVICE 0x100a40b0
+	// TEMPLATE: ROBLOX 0x005ec7a0
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>::execute
 	// SYNTHETIC: WEBSERVICE 0x100a41d0
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10193010
+	// TEMPLATE: ROBLOX 0x00418c90
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::~BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>
 	// TEMPLATE: WEBSERVICE 0x10193d30
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Players,void __cdecl(boost::shared_ptr<RBX::Instance>,std::basic_string<char,std::char_traits<char>,std::allocator<char> >),2>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10196790
+	// TEMPLATE: ROBLOX 0x004b8970
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x101981a0
+	// TEMPLATE: ROBLOX 0x004ba440
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::execute
 	// SYNTHETIC: WEBSERVICE 0x10198390
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10199300
+	// TEMPLATE: ROBLOX 0x004bb580
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x1019abb0
+	// TEMPLATE: ROBLOX 0x004bcdd0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>
 	// TEMPLATE: WEBSERVICE 0x1019ac70
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::execute

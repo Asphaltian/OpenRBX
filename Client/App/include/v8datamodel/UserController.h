@@ -180,16 +180,19 @@ DECOMP_SIZE_ASSERT(PlayerController, 0x2c)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100c53e0
+// FUNCTION: ROBLOX 0x005d44d0
 // RBX::HardwareController::getHardwareDevice
 // FUNCTION: WEBSERVICE 0x100c6480
 // RBX::AIController::onEvent
 // SYNTHETIC: WEBSERVICE 0x100c64a0
 // RBX::SteppingController::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x100c66e0
+// SYNTHETIC: ROBLOX 0x005d5530
 // RBX::PlayerController::~PlayerController
 // SYNTHETIC: WEBSERVICE 0x100c6740
 // RBX::PlayerController::`scalar deleting destructor'
 // FUNCTION: WEBSERVICE 0x100c6b60
+// FUNCTION: ROBLOX 0x005d59c0
 // RBX::AIChaseController::AIChaseController
 // SYNTHETIC: WEBSERVICE 0x100c6b90 FOLDED
 // RBX::AIController::`scalar deleting destructor'
@@ -198,8 +201,10 @@ DECOMP_SIZE_ASSERT(PlayerController, 0x2c)
 // SYNTHETIC: WEBSERVICE 0x100c6b90 FOLDED
 // RBX::AIFleeController::`scalar deleting destructor'
 // FUNCTION: WEBSERVICE 0x100c6bb0
+// FUNCTION: ROBLOX 0x005d59e0
 // RBX::AIFleeController::AIFleeController
 // SYNTHETIC: WEBSERVICE 0x100c6da0
+// SYNTHETIC: ROBLOX 0x005d5bf0
 // RBX::ControllerService::~ControllerService
 // SYNTHETIC: WEBSERVICE 0x100c6ee0
 // RBX::ControllerService::`scalar deleting destructor'

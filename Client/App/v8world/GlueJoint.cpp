@@ -14,11 +14,13 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101201d0
+// FUNCTION: ROBLOX 0x00648420
 GlueJoint::GlueJoint() : MultiJoint(4)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10120290
+// FUNCTION: ROBLOX 0x006484d0
 float GlueJoint::getMaxForce()
 {
 	Vector2 size = overlapInP0.size();
@@ -28,6 +30,7 @@ float GlueJoint::getMaxForce()
 }
 
 // FUNCTION: WEBSERVICE 0x10120340
+// FUNCTION: ROBLOX 0x00648580
 GlueJoint::GlueJoint(
 	Primitive* p0, Primitive* p1, const CoordinateFrame& jointCoord0, const CoordinateFrame& jointCoord1
 )
@@ -56,6 +59,7 @@ bool GlueJoint::compatibleSurfaces(Primitive* prim0, Primitive* prim1, NormalId 
 }
 
 // FUNCTION: WEBSERVICE 0x101205e0
+// FUNCTION: ROBLOX 0x00648820
 GlueJoint* GlueJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1)
 {
 	if (compatibleSurfaces(p0, p1, nId0, nId1) && canBuildJointLoose(p0, p1, nId0, nId1)) {
@@ -89,6 +93,7 @@ GlueJoint* GlueJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0,
 }
 
 // STUB: WEBSERVICE 0x10120810
+// STUB: ROBLOX 0x00648a50
 void GlueJoint::putInKernel(Kernel* _kernel)
 {
 	MultiJoint::putInKernel(_kernel);

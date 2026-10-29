@@ -54,6 +54,7 @@ class Server : public DescribedCreatable<Server, Peer, sServer>, public Service
 
 	private:
 		// FUNCTION: WEBSERVICE 0x1019a0d0
+		// FUNCTION: ROBLOX 0x004bc2c0
 		virtual bool remoteDeleteOnDisconnect(const Instance* instance) const
 		{
 			TopReplConts::const_iterator begin = topReplicationContainers.begin();
@@ -81,6 +82,7 @@ public:
 	int getClientCount();
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual XmlElement* write() { return NULL; }
 
 	virtual PluginReceiveResult OnReceive(RakPeerInterface* peer, Packet* packet);
@@ -99,18 +101,22 @@ DECOMP_SIZE_ASSERT(Server, 0x118)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021f840
+// SYNTHETIC: ROBLOX 0x007e62d0
 // RBX::Network::`dynamic initializer for 'server_startFunction''
 // SYNTHETIC: WEBSERVICE 0x1021f880
+// SYNTHETIC: ROBLOX 0x007e6310
 // RBX::Network::`dynamic initializer for 'f_disconnect''
 // SYNTHETIC: WEBSERVICE 0x1021f8b0
 // RBX::Network::`dynamic initializer for 'f_GetClientCount''
 // SYNTHETIC: WEBSERVICE 0x1021f8e0
 // `dynamic initializer for 'RBX::Network::Server::event_IncommingConnection''
 // SYNTHETIC: WEBSERVICE 0x10226100
+// SYNTHETIC: ROBLOX 0x007f0f10
 // RBX::Network::`dynamic atexit destructor for 'f_disconnect''
 // SYNTHETIC: WEBSERVICE 0x10226110
 // RBX::Network::`dynamic atexit destructor for 'f_GetClientCount''
 // SYNTHETIC: WEBSERVICE 0x10226120
+// SYNTHETIC: ROBLOX 0x007f0f30
 // RBX::Network::`dynamic atexit destructor for 'server_startFunction''
 // SYNTHETIC: WEBSERVICE 0x10226130
 // `dynamic atexit destructor for 'RBX::Network::Server::event_IncommingConnection''

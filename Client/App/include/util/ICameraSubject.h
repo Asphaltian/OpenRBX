@@ -31,6 +31,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x1005aa10
+	// FUNCTION: ROBLOX 0x00565790
 	virtual void stepGoalAndFocus(
 		CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus, bool cameraExternallyAdjusted
 	) // vtable+0x14

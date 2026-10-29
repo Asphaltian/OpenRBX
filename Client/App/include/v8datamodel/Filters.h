@@ -13,6 +13,7 @@ class ModelInstance;
 class PartInstance;
 
 // VTABLE: WEBSERVICE 0x10239d58
+// VTABLE: ROBLOX 0x00835ba0
 // SIZE 0x04
 class Unlocked : public HitTestFilter
 {
@@ -29,6 +30,7 @@ public:
 DECOMP_SIZE_ASSERT(Unlocked, 0x04)
 
 // VTABLE: WEBSERVICE 0x10247a34
+// VTABLE: ROBLOX 0x0083cbe4
 // SIZE 0x14
 class PartByLocalCharacter : public HitTestFilter
 {
@@ -42,12 +44,14 @@ public:
 	virtual Result filterResult(const Primitive* testMe) const; // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x100beb70
+	// SYNTHETIC: ROBLOX 0x00620730
 	// RBX::PartByLocalCharacter::~PartByLocalCharacter
 };
 
 DECOMP_SIZE_ASSERT(PartByLocalCharacter, 0x14)
 
 // VTABLE: WEBSERVICE 0x10247a3c
+// VTABLE: ROBLOX 0x0083cbec
 // SIZE 0x0c
 class IgnoreDescendantsOf : public HitTestFilter
 {

@@ -8,6 +8,7 @@ namespace RBX {
 const char sFallingDown[] = "FallingDown";
 
 // FUNCTION: WEBSERVICE 0x10107d90
+// FUNCTION: ROBLOX 0x006419e0
 Humanoid::State* FallingDown::onStep(const float stepDt, Controller& controller)
 {
 	time += stepDt;
@@ -20,6 +21,7 @@ Humanoid::State* FallingDown::onStep(const float stepDt, Controller& controller)
 }
 
 // FUNCTION: WEBSERVICE 0x10107ec0
+// FUNCTION: ROBLOX 0x00641b10
 FallingDown::FallingDown(Humanoid* humanoid, float timeToGetUp)
 	: Named<Humanoid::State, sFallingDown>(humanoid), time(0.0f), timeToGetUp(timeToGetUp)
 {

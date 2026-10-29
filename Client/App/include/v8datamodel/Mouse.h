@@ -25,6 +25,7 @@ private:
 	MouseCommand* command; // 0x12c
 
 	// FUNCTION: WEBSERVICE 0x10117350
+	// FUNCTION: ROBLOX 0x00656ae0
 	void cacheUIEvent(const UIEvent& uiEvent)
 	{
 		lastEvent = uiEvent;
@@ -32,6 +33,7 @@ private:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10116f40
+	// FUNCTION: ROBLOX 0x00640510
 	void checkActive() const
 	{
 		if (command == NULL) {
@@ -41,6 +43,7 @@ private:
 
 public:
 	// FUNCTION: WEBSERVICE 0x100cbf60
+	// FUNCTION: ROBLOX 0x00610b30
 	Mouse() : command(NULL) {}
 
 	// SYNTHETIC: WEBSERVICE 0x100cc0d0
@@ -56,6 +59,7 @@ public:
 	void setCommand(MouseCommand* value) { command = value; }
 
 	// FUNCTION: WEBSERVICE 0x10116fb0
+	// FUNCTION: ROBLOX 0x00640580
 	TextureId getIcon() const
 	{
 		checkActive();
@@ -63,6 +67,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10117520
+	// FUNCTION: ROBLOX 0x00656d00
 	void setIcon(const TextureId& value) { icon = value; }
 
 	// FUNCTION: WEBSERVICE 0x10117390

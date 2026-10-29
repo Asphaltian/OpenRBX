@@ -17,11 +17,13 @@
 #include "PluginInterface.h"
 
 // FUNCTION: WEBSERVICE 0x101aaa50
+// FUNCTION: ROBLOX 0x004b8850
 PluginInterface::PluginInterface()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101aaa60
+// FUNCTION: ROBLOX 0x004b8860
 PluginInterface::~PluginInterface()
 {
 }
@@ -34,6 +36,7 @@ PluginInterface::~PluginInterface()
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+// FUNCTION: ROBLOX 0x0045e450 FOLDED
 void PluginInterface::OnAttach(RakPeerInterface *peer)
 {
 }
@@ -41,6 +44,7 @@ void PluginInterface::OnAttach(RakPeerInterface *peer)
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+// FUNCTION: ROBLOX 0x0045e450 FOLDED
 void PluginInterface::OnDetach(RakPeerInterface *peer)
 {
 }
@@ -48,6 +52,7 @@ void PluginInterface::OnDetach(RakPeerInterface *peer)
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+// FUNCTION: ROBLOX 0x0045e450 FOLDED
 void PluginInterface::OnStartup(RakPeerInterface *peer)
 {
 }
@@ -55,6 +60,7 @@ void PluginInterface::OnStartup(RakPeerInterface *peer)
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+// FUNCTION: ROBLOX 0x0045e450 FOLDED
 void PluginInterface::Update(RakPeerInterface *peer)
 {
 }
@@ -62,6 +68,7 @@ void PluginInterface::Update(RakPeerInterface *peer)
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x101aaa70
+// FUNCTION: ROBLOX 0x0073b8d0
 PluginReceiveResult PluginInterface::OnReceive(RakPeerInterface *peer, Packet *packet)
 {
 	return RR_CONTINUE_PROCESSING;
@@ -70,6 +77,7 @@ PluginReceiveResult PluginInterface::OnReceive(RakPeerInterface *peer, Packet *p
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+// FUNCTION: ROBLOX 0x0045e450 FOLDED
 void PluginInterface::OnShutdown(RakPeerInterface *peer)
 {
 }

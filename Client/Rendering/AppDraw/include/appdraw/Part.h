@@ -23,12 +23,14 @@ public:
 	};
 
 	// FUNCTION: WEBSERVICE 0x1005a120
+	// FUNCTION: ROBLOX 0x00564e10
 	Part(PartType _type, const G3D::Vector3& _gridSize, G3D::Color4 _color, const G3D::CoordinateFrame& c)
 		: type(_type), gridSize(_gridSize), color(_color), surfaceType(NO_SURFACE), coordinateFrame(c)
 	{
 	}
 
 	// FUNCTION: WEBSERVICE 0x1009a700
+	// FUNCTION: ROBLOX 0x005ad160
 	Part(
 		PartType type,
 		const G3D::Vector3& gridSize,
@@ -41,8 +43,10 @@ public:
 	}
 
 	// SYNTHETIC: WEBSERVICE 0x1009aa30
+	// SYNTHETIC: ROBLOX 0x005ad470
 	// RBX::Part::Part
 	// FUNCTION: WEBSERVICE 0x1009a9a0
+	// FUNCTION: ROBLOX 0x005ad3e0
 	// RBX::Part::operator=
 
 	Part() {}

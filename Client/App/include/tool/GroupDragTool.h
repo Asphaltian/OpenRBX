@@ -50,6 +50,7 @@ DECOMP_SIZE_ASSERT(GroupDragTool, 0x3c)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x10125ff0
+// FUNCTION: ROBLOX 0x00667630
 // RBX::GroupDragTool::getCursorName
 // SYNTHETIC: WEBSERVICE 0x10126310
 // RBX::GroupDragTool::`scalar deleting destructor'

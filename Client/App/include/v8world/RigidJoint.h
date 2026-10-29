@@ -14,6 +14,7 @@ public:
 	virtual ~RigidJoint() {} // vtable+0x00
 
 	// FUNCTION: WEBSERVICE 0x1009ada0
+	// FUNCTION: ROBLOX 0x005ad7e0
 	static bool isRigidJoint(Edge* e) { return isJoint(e) && jointIsRigid(static_cast<Joint*>(e)); }
 
 	// SYNTHETIC: WEBSERVICE 0x100d7a40

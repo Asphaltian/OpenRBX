@@ -95,6 +95,7 @@ static Reflection::BoundFuncDesc<DataModel, void(), 0> func_SetUIMessageBrickCou
 static Reflection::SignalDesc<DataModel, void()> event_Closing("Close");
 
 // FUNCTION: WEBSERVICE 0x10071620
+// FUNCTION: ROBLOX 0x0058e9d0
 std::string DataModel::doHttpGet(std::string url)
 {
 	std::string response;
@@ -103,6 +104,7 @@ std::string DataModel::doHttpGet(std::string url)
 }
 
 // FUNCTION: WEBSERVICE 0x100716e0
+// FUNCTION: ROBLOX 0x0058ea90
 std::string DataModel::doHttpPost(std::string url, std::string data)
 {
 	std::string response;
@@ -116,6 +118,7 @@ std::string DataModel::doHttpPost(std::string url, std::string data)
 }
 
 // FUNCTION: WEBSERVICE 0x10071800
+// FUNCTION: ROBLOX 0x0058ebb0
 void DataModel::close()
 {
 	Verb* verb = getVerb("Exit");
@@ -126,6 +129,7 @@ void DataModel::close()
 }
 
 // FUNCTION: WEBSERVICE 0x10071890
+// FUNCTION: ROBLOX 0x0058ec40
 static std::string report(const G3D::Stopwatch& timer)
 {
 	char buffer[256];
@@ -139,6 +143,7 @@ static std::string report(const G3D::Stopwatch& timer)
 }
 
 // FUNCTION: WEBSERVICE 0x100725c0
+// FUNCTION: ROBLOX 0x0058f080
 void DataModel::onChildAdded(Instance* child)
 {
 	ServiceProvider::onChildAdded(child);
@@ -154,6 +159,7 @@ void DataModel::onChildAdded(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x10072640
+// FUNCTION: ROBLOX 0x0058f130
 float DataModel::step(float timeInterval)
 {
 	if (!isInitialized) {
@@ -189,6 +195,7 @@ float DataModel::step(float timeInterval)
 }
 
 // FUNCTION: WEBSERVICE 0x10072810
+// FUNCTION: ROBLOX 0x0058f300
 void DataModel::onEvent(const RunService* source, RunTransition event)
 {
 	switch (event.newState) {
@@ -213,6 +220,7 @@ float DataModel::getSimTime() const
 }
 
 // FUNCTION: WEBSERVICE 0x10072860
+// FUNCTION: ROBLOX 0x0058f860
 std::string DataModel::evaluate(const std::string& valueName) const
 {
 	World* world = workspace->getWorld();
@@ -310,6 +318,7 @@ std::string DataModel::evaluate(const std::string& valueName) const
 }
 
 // FUNCTION: WEBSERVICE 0x10073460
+// FUNCTION: ROBLOX 0x00590230
 void DataModel::loadContent(ContentId contentId)
 {
 	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
@@ -322,6 +331,7 @@ void DataModel::loadContent(ContentId contentId)
 }
 
 // FUNCTION: WEBSERVICE 0x10073de0
+// FUNCTION: ROBLOX 0x005909f0
 void DataModel::Lock::doLock(const DataModel* dataModel)
 {
 	if (dataModel) {
@@ -331,12 +341,14 @@ void DataModel::Lock::doLock(const DataModel* dataModel)
 }
 
 // FUNCTION: WEBSERVICE 0x100743f0
+// FUNCTION: ROBLOX 0x00590f30
 DataModel::Lock::~Lock()
 {
 	delete lock;
 }
 
 // FUNCTION: WEBSERVICE 0x10079120
+// FUNCTION: ROBLOX 0x00592490
 void DataModel::initializeContents()
 {
 	workspace->setParent(this);
@@ -363,6 +375,7 @@ void DataModel::initializeContents()
 }
 
 // FUNCTION: WEBSERVICE 0x100793b0
+// FUNCTION: ROBLOX 0x005926f0
 void DataModel::clearContents()
 {
 	workspace->setMouseCommand(NULL);
@@ -390,6 +403,7 @@ void DataModel::clearContents()
 }
 
 // FUNCTION: WEBSERVICE 0x10079a70
+// FUNCTION: ROBLOX 0x00592a40
 void DataModel::save(ContentId contentId)
 {
 	std::stringstream stream;
@@ -408,6 +422,7 @@ void DataModel::save(ContentId contentId)
 }
 
 // FUNCTION: WEBSERVICE 0x10079bf0
+// FUNCTION: ROBLOX 0x00592bc0
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > DataModel::get(ContentId contentId)
 {
 	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
@@ -431,12 +446,14 @@ void DataModel::raiseClose()
 }
 
 // FUNCTION: WEBSERVICE 0x1007b450
+// FUNCTION: ROBLOX 0x00594360
 DataModel::~DataModel()
 {
 	stopListening(runService, this);
 }
 
 // FUNCTION: WEBSERVICE 0x1007bb20
+// FUNCTION: ROBLOX 0x00594980
 void DataModel::closeDataModel(boost::shared_ptr<DataModel> dataModel, bool joinRunThread)
 {
 	dataModel->isInitialized = false;
@@ -461,6 +478,7 @@ void DataModel::closeDataModel(boost::shared_ptr<DataModel> dataModel, bool join
 }
 
 // FUNCTION: WEBSERVICE 0x1007bcd0
+// FUNCTION: ROBLOX 0x00594b30
 DataModel::DataModel()
 	: VerbContainer(NULL), workspace(Creatable<Instance>::create<Workspace>(this)),
 	  guiRoot(Creatable<Instance>::create<GuiRoot>()), guiHooks(Creatable<Instance>::create<GuiRoot>()),
@@ -471,6 +489,7 @@ DataModel::DataModel()
 }
 
 // FUNCTION: WEBSERVICE 0x1007c120
+// FUNCTION: ROBLOX 0x00594ed0
 boost::shared_ptr<DataModel> DataModel::createDataModel()
 {
 	ContentProvider::singleton().clearContentCache();
@@ -487,6 +506,7 @@ boost::shared_ptr<DataModel> DataModel::createDataModel()
 }
 
 // FUNCTION: WEBSERVICE 0x1007c4a0
+// FUNCTION: ROBLOX 0x00595170
 std::string DataModel::httpGet(std::string url, bool synchronous)
 {
 	if (synchronous) {
@@ -503,6 +523,7 @@ std::string DataModel::httpGet(std::string url, bool synchronous)
 }
 
 // FUNCTION: WEBSERVICE 0x1007c6b0
+// FUNCTION: ROBLOX 0x00595380
 std::string DataModel::httpPost(std::string url, std::string data, bool synchronous)
 {
 	if (synchronous) {

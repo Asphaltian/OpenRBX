@@ -19,6 +19,7 @@ static void deleteChatOption(ChatOption* option)
 }
 
 // FUNCTION: WEBSERVICE 0x10120d60
+// FUNCTION: ROBLOX 0x00660f20
 ChatOption::~ChatOption()
 {
 	std::for_each(children.begin(), children.end(), deleteChatOption);

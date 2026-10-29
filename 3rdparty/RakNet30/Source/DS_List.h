@@ -194,12 +194,16 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc710
+	// FUNCTION: ROBLOX 0x004e24c0
 	// DataStructures::List<SplitPacketChannel *>::Insert
 	// FUNCTION: WEBSERVICE 0x101b1ea0
+	// FUNCTION: ROBLOX 0x004d7cb0
 	// DataStructures::List<SystemAddressAndIndex>::Insert(struct SystemAddressAndIndex, unsigned int)
 	// FUNCTION: WEBSERVICE 0x101bb220
+	// FUNCTION: ROBLOX 0x004d4620
 	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::Insert(int const &, int const &)>::MapNode>::Insert(struct DataStructures::Map<int, class HuffmanEncodingTree *, &int __cdecl DataStructures::defaultMapKeyComparison<int>(int const &, int const &)>::MapNode, unsigned int)
 	// FUNCTION: WEBSERVICE 0x101bd180
+	// FUNCTION: ROBLOX 0x004e3170
 	// DataStructures::List<DataStructures::RangeNode<unsigned int> >::Insert(struct DataStructures::RangeNode<unsigned int>, unsigned int)
 	template <class list_type>
 		void List<list_type>::Insert( const list_type input, const unsigned int position )
@@ -243,12 +247,16 @@ namespace DataStructures
 
 
 	// FUNCTION: WEBSERVICE 0x101bc440
+	// FUNCTION: ROBLOX 0x004e2440
 	// DataStructures::List<RPCNode *>::Insert
 	// FUNCTION: WEBSERVICE 0x101b1df0
+	// FUNCTION: ROBLOX 0x004d7c00
 	// DataStructures::List<SystemAddressAndIndex>::Insert(struct SystemAddressAndIndex)
 	// FUNCTION: WEBSERVICE 0x101bb180
+	// FUNCTION: ROBLOX 0x004d4580
 	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::Insert(int const &, int const &)>::MapNode>::Insert(struct DataStructures::Map<int, class HuffmanEncodingTree *, &int __cdecl DataStructures::defaultMapKeyComparison<int>(int const &, int const &)>::MapNode)
 	// FUNCTION: WEBSERVICE 0x101bd060
+	// FUNCTION: ROBLOX 0x004e3050
 	// DataStructures::List<DataStructures::RangeNode<unsigned int> >::Insert(struct DataStructures::RangeNode<unsigned int>)
 	template <class list_type>
 		void List<list_type>::Insert( const list_type input )
@@ -287,6 +295,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c1190
+	// FUNCTION: ROBLOX 0x004e7180
 	// DataStructures::List<RPCNode *>::Replace
 	template <class list_type>
 		inline void List<list_type>::Replace( const list_type input, const list_type filler, const unsigned int position )
@@ -340,10 +349,13 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101b1d30
+	// FUNCTION: ROBLOX 0x004d7b40
 	// DataStructures::List<RakPeer::BanStruct *>::RemoveAtIndex
 	// FUNCTION: WEBSERVICE 0x101b1f80
+	// FUNCTION: ROBLOX 0x004d7d90
 	// DataStructures::List<SystemAddressAndIndex>::RemoveAtIndex
 	// FUNCTION: WEBSERVICE 0x101bd2d0
+	// FUNCTION: ROBLOX 0x004e32c0
 	// DataStructures::List<DataStructures::RangeNode<unsigned int> >::RemoveAtIndex
 	template <class list_type>
 		void List<list_type>::RemoveAtIndex( const unsigned int position )

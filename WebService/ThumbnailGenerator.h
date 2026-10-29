@@ -35,6 +35,7 @@ DECOMP_SIZE_ASSERT(ThumbnailGenerator, 0xf8)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100089c0
+// TEMPLATE: ROBLOX 0x0042d490
 // StaticMutex<OSContext>::init
 // SYNTHETIC: WEBSERVICE 0x10217da0
 // `dynamic initializer for 'clickFunction''
@@ -45,6 +46,7 @@ DECOMP_SIZE_ASSERT(ThumbnailGenerator, 0xf8)
 // SYNTHETIC: WEBSERVICE 0x10220fc0
 // `dynamic atexit destructor for 'clickTextureFunction''
 // SYNTHETIC: WEBSERVICE 0x10220ff0
+// SYNTHETIC: ROBLOX 0x007ef9e0
 // `StaticMutex<OSContext>::init'::`2'::`dynamic atexit destructor for '_m''
 // clang-format on
 

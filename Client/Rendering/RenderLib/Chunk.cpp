@@ -14,18 +14,21 @@ bool AggregateChunk::randomColors;
 const G3D::CoordinateFrame AggregateChunk::identity;
 
 // FUNCTION: WEBSERVICE 0x1016f140
+// FUNCTION: ROBLOX 0x00479d30
 Chunk::Chunk(float polygonOffset) : polygonOffset(polygonOffset), radius(G3D::inf())
 {
 	RenderStats::chunkCount++;
 }
 
 // FUNCTION: WEBSERVICE 0x101f96a0
+// FUNCTION: ROBLOX 0x004a1ae0
 void AggregateChunk::makeMesh()
 {
 	mesh = Mesh::aggregate(components, _cframe, radius);
 }
 
 // FUNCTION: WEBSERVICE 0x101f9740
+// FUNCTION: ROBLOX 0x004a1b80
 void AggregateChunk::renderShadows(
 	G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance
 )
@@ -79,6 +82,7 @@ void AggregateChunk::renderShadows(
 }
 
 // FUNCTION: WEBSERVICE 0x101f9ad0
+// FUNCTION: ROBLOX 0x004a1f10
 AggregateChunk::AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& firstChunk)
 	: Chunk(firstChunk->polygonOffset), _castsShadows(firstChunk->castsShadows()), _cullable(firstChunk->cullable())
 {
@@ -96,6 +100,7 @@ AggregateChunk::AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& firstC
 }
 
 // FUNCTION: WEBSERVICE 0x101f9d70
+// FUNCTION: ROBLOX 0x004a21b0
 AggregateChunk::~AggregateChunk()
 {
 	RenderStats::chunkCount++;

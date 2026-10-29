@@ -116,6 +116,7 @@ private:
 DECOMP_SIZE_ASSERT(Mark, 0x2c)
 
 // FUNCTION: WEBSERVICE 0x10071500
+// FUNCTION: ROBLOX 0x0045f510
 inline Mark::Mark(CodeProfiler& section, bool frameTick) : section(section), frameTick(frameTick)
 {
 	if (markTlsIndex != 0) {
@@ -128,6 +129,7 @@ inline Mark::Mark(CodeProfiler& section, bool frameTick) : section(section), fra
 }
 
 // FUNCTION: WEBSERVICE 0x10071560
+// FUNCTION: ROBLOX 0x0045f570
 inline Mark::~Mark()
 {
 	if (markTlsIndex != 0) {

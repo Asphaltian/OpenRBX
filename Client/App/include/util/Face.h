@@ -32,6 +32,7 @@ public:
 
 private:
 	// STUB: WEBSERVICE 0x1010b320
+	// STUB: ROBLOX 0x0064a960
 	Vector3 getAxis(int i) const { return i == 0 ? (c1 - c0).direction() : (c3 - c0).direction(); }
 
 	void minMax(const Vector3& point, const Vector3& normal, float& min, float& max) const;

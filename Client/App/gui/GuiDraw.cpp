@@ -9,6 +9,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1005c680
+// FUNCTION: ROBLOX 0x0063fcb0
 static G3D::ReferenceCountedPointer<TextureProxyBase> silentGetTextureProxyBase(Adorn* adorn, const ContentId& id)
 {
 	if (ContentProvider::singleton().hasContent(id)) {
@@ -18,6 +19,7 @@ static G3D::ReferenceCountedPointer<TextureProxyBase> silentGetTextureProxyBase(
 }
 
 // FUNCTION: WEBSERVICE 0x1005c720
+// FUNCTION: ROBLOX 0x0063fd50
 bool GuiDrawImage::setImage(Adorn* adorn, const TextureId& textureId)
 {
 	if (textureId != currentTexture) {
@@ -48,6 +50,7 @@ bool GuiDrawImage::setImage(Adorn* adorn, const TextureId& textureId)
 }
 
 // FUNCTION: WEBSERVICE 0x1005cb60
+// FUNCTION: ROBLOX 0x00640290
 void GuiDrawImage::draw(
 	Adorn* adorn,
 	G3D::ReferenceCountedPointer<TextureProxyBase> texture,
@@ -71,6 +74,7 @@ void GuiDrawImage::draw(
 }
 
 // FUNCTION: WEBSERVICE 0x1005ccb0
+// FUNCTION: ROBLOX 0x006403e0
 void GuiDrawImage::render2d(Adorn* adorn, bool enabled, Rect& rect, Widget::WidgetState state)
 {
 	if (!enabled) {

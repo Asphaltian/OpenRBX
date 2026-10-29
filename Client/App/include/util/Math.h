@@ -38,6 +38,7 @@ public:
 	static const float twoPi();
 
 	// FUNCTION: WEBSERVICE 0x100a0670
+	// FUNCTION: ROBLOX 0x005e8c90
 	static const float& inf()
 	{
 		static const float i = std::numeric_limits<float>::infinity();
@@ -172,6 +173,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x100a06a0
+	// FUNCTION: ROBLOX 0x005d5f00
 	static float radWrap(float rad)
 	{
 		if (rad >= -3.1415927f && rad < 3.1415927f) {

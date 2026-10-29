@@ -51,6 +51,7 @@ VistaAPIs::~VistaAPIs()
 }
 
 // FUNCTION: WEBSERVICE 0x1003e170
+// FUNCTION: ROBLOX 0x005b9a00
 HRESULT STDMETHODCALLTYPE VistaAPIs::GetIntegrity(BYTE* pVal)
 {
 	*pVal = 0;
@@ -99,6 +100,7 @@ HRESULT STDMETHODCALLTYPE VistaAPIs::GetIntegrity(BYTE* pVal)
 }
 
 // FUNCTION: WEBSERVICE 0x1003e280
+// FUNCTION: ROBLOX 0x005b9c50
 std::string FileSystem::getUserAppDataDirectory(bool create, const char* subDirectory)
 {
 	VistaAPIs apis;
@@ -166,6 +168,7 @@ std::string FileSystem::getUserAppDataDirectory(bool create, const char* subDire
 }
 
 // FUNCTION: WEBSERVICE 0x1003e670
+// FUNCTION: ROBLOX 0x005ba040
 std::string FileSystem::getCacheDirectory(bool create)
 {
 	VistaAPIs apis;

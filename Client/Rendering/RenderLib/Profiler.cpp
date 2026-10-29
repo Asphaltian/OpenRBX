@@ -23,6 +23,7 @@ static int getRam();
 bool SpecData::glLoaded;
 
 // FUNCTION: WEBSERVICE 0x10169a30
+// FUNCTION: ROBLOX 0x0049c8b0
 static float getShaderModel()
 {
 	if ((G3D::GLCaps::supports_GL_ARB_fragment_shader() && G3D::GLCaps::supports_GL_ARB_vertex_shader()) ||
@@ -46,6 +47,7 @@ static float getShaderModel()
 }
 
 // FUNCTION: WEBSERVICE 0x10169c60
+// FUNCTION: ROBLOX 0x0049cae0
 static __int64 GetCyclesDifference(DelayFunction DelayFunction, unsigned int uiParameter)
 {
 	unsigned int t0Lo, t0Hi;
@@ -77,6 +79,7 @@ static __int64 GetCyclesDifference(DelayFunction DelayFunction, unsigned int uiP
 }
 
 // FUNCTION: WEBSERVICE 0x10169d20
+// FUNCTION: ROBLOX 0x0049cba0
 static void Delay(unsigned int time)
 {
 	LARGE_INTEGER Frequency, StartCounter, EndCounter;
@@ -93,6 +96,7 @@ static void Delay(unsigned int time)
 }
 
 // FUNCTION: WEBSERVICE 0x10169d90
+// FUNCTION: ROBLOX 0x0049cc10
 static void DelayOverhead(unsigned int time)
 {
 	LARGE_INTEGER Frequency, StartCounter, EndCounter;
@@ -109,6 +113,7 @@ static void DelayOverhead(unsigned int time)
 }
 
 // FUNCTION: WEBSERVICE 0x10169e00
+// FUNCTION: ROBLOX 0x0049cc80
 static std::string getCPUMake()
 {
 	std::string cpu_name;
@@ -123,6 +128,7 @@ static std::string getCPUMake()
 }
 
 // FUNCTION: WEBSERVICE 0x10169ee0
+// FUNCTION: ROBLOX 0x0049cd60
 static int getCPUSpeed()
 {
 	int speed;
@@ -155,6 +161,7 @@ static int getCPUSpeed()
 }
 
 // FUNCTION: WEBSERVICE 0x10169ff0
+// FUNCTION: ROBLOX 0x0049d080
 static std::string getMaxRes()
 {
 	int width = GetSystemMetrics(SM_CXSCREEN);
@@ -176,6 +183,7 @@ static int getRam()
 }
 
 // FUNCTION: WEBSERVICE 0x1016a100
+// FUNCTION: ROBLOX 0x0049d190
 SpecData::SpecData()
 	: shaderModel(glLoaded ? getShaderModel() : 0.0f),
 	  videoMemory((int) (G3D::DXCaps::videoMemorySize() / (1024 * 1024))), CPUSpeed(getCPUSpeed()),

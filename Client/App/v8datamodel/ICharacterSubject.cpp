@@ -12,6 +12,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10107360
+// FUNCTION: ROBLOX 0x0063d580
 CoordinateFrame ICharacterSubject::getFocusLookingAtGoal(
 	const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal
 )
@@ -22,6 +23,7 @@ CoordinateFrame ICharacterSubject::getFocusLookingAtGoal(
 }
 
 // FUNCTION: WEBSERVICE 0x101073a0
+// FUNCTION: ROBLOX 0x0063d5c0
 CoordinateFrame ICharacterSubject::goalFromDistance(
 	const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal, const float distance
 )
@@ -34,6 +36,7 @@ CoordinateFrame ICharacterSubject::goalFromDistance(
 }
 
 // FUNCTION: WEBSERVICE 0x10107440
+// FUNCTION: ROBLOX 0x0063d660
 ICharacterSubject::ICharacterSubject()
 	: focusERA(1.0f), focusOffsetERA(1.0f), lastOffset(G3D::Vector3::ZERO), rotationERA(1.0f), cursorLocked(false),
 	  wasOccluded(false), hasGoalInFocus(false)
@@ -41,6 +44,7 @@ ICharacterSubject::ICharacterSubject()
 }
 
 // FUNCTION: WEBSERVICE 0x101074b0
+// FUNCTION: ROBLOX 0x0063d6d0
 bool ICharacterSubject::zoom(const float in, CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus)
 {
 	G3D::Vector3 focusToGoal = cameraGoal.translation - cameraFocus.translation;
@@ -61,6 +65,7 @@ bool ICharacterSubject::zoom(const float in, CoordinateFrame& cameraGoal, Coordi
 }
 
 // FUNCTION: WEBSERVICE 0x101075c0
+// FUNCTION: ROBLOX 0x0063d7e0
 bool ICharacterSubject::testOcclusion(
 	const CoordinateFrame& cameraFocus, const CoordinateFrame& cameraGoal, float& distance
 )
@@ -104,6 +109,7 @@ bool ICharacterSubject::testOcclusion(
 }
 
 // STUB: WEBSERVICE 0x10107860
+// STUB: ROBLOX 0x0063da80
 void ICharacterSubject::stepGoalAndFocus(
 	CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus, bool cameraExternallyAdjusted
 )
@@ -184,6 +190,7 @@ inline void ICharacterSubject::setCursorCenterLocked(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x10107c40
+// FUNCTION: ROBLOX 0x0063de60
 void ICharacterSubject::onHeartBeat(CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus)
 {
 	if (2.75f > (cameraGoal.translation - cameraFocus.translation).magnitude()) {

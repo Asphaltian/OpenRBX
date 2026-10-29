@@ -24,6 +24,7 @@ public:
 		float reflectance;      // 0x08
 
 		// FUNCTION: WEBSERVICE 0x101748f0
+		// FUNCTION: ROBLOX 0x0047ed40
 		bool operator<(const Attributes& other) const
 		{
 			if (color < other.color) {

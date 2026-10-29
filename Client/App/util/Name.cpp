@@ -18,6 +18,7 @@ public:
 static boost::once_flag flag = BOOST_ONCE_INIT;
 
 // FUNCTION: WEBSERVICE 0x10057ed0
+// FUNCTION: ROBLOX 0x005640f0
 boost::mutex& moo2()
 {
 	static boost::mutex mutex2;
@@ -26,12 +27,14 @@ boost::mutex& moo2()
 }
 
 // FUNCTION: WEBSERVICE 0x10057f30
+// FUNCTION: ROBLOX 0x00564150
 void initMoo()
 {
 	moo2();
 }
 
 // FUNCTION: WEBSERVICE 0x10058640
+// FUNCTION: ROBLOX 0x005644f0
 std::map<int, Name*>& Name::dictionary()
 {
 	static std::map<int, Name*> d;
@@ -40,6 +43,7 @@ std::map<int, Name*>& Name::dictionary()
 }
 
 // FUNCTION: WEBSERVICE 0x100586d0
+// FUNCTION: ROBLOX 0x00564580
 Name::NamMap::~NamMap()
 {
 	for (iterator iter = begin(); iter != end(); ++iter) {
@@ -48,6 +52,7 @@ Name::NamMap::~NamMap()
 }
 
 // FUNCTION: WEBSERVICE 0x100587b0
+// FUNCTION: ROBLOX 0x00564660
 Name::NamMap& Name::namMap()
 {
 	static NamMap n;
@@ -56,6 +61,7 @@ Name::NamMap& Name::namMap()
 }
 
 // FUNCTION: WEBSERVICE 0x10058840
+// FUNCTION: ROBLOX 0x005646f0
 const Name& Name::declare(const char* sName, int dictionaryIndex)
 {
 	if (sName == NULL) {
@@ -84,6 +90,7 @@ const Name& Name::declare(const char* sName, int dictionaryIndex)
 }
 
 // FUNCTION: WEBSERVICE 0x10058a30
+// FUNCTION: ROBLOX 0x005648e0
 const Name& Name::getNullName()
 {
 	boost::call_once(initMoo, flag);
@@ -95,6 +102,7 @@ const Name& Name::getNullName()
 }
 
 // FUNCTION: WEBSERVICE 0x10058ad0
+// FUNCTION: ROBLOX 0x00564980
 const Name& Name::lookup(const std::string& sName)
 {
 	boost::call_once(initMoo, flag);
@@ -110,6 +118,7 @@ const Name& Name::lookup(const std::string& sName)
 }
 
 // FUNCTION: WEBSERVICE 0x10058ba0
+// FUNCTION: ROBLOX 0x00564a50
 const Name& Name::lookup(const char* sName)
 {
 	if (sName == NULL) {
@@ -120,6 +129,7 @@ const Name& Name::lookup(const char* sName)
 }
 
 // FUNCTION: WEBSERVICE 0x10058c70
+// FUNCTION: ROBLOX 0x004afe40
 bool Name::empty() const
 {
 	return this == &getNullName();

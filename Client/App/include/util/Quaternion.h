@@ -36,6 +36,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10120fb0
+	// FUNCTION: ROBLOX 0x00661720
 	Quaternion operator*(const Quaternion& other) const
 	{
 		const G3D::Vector3& v0 = imag();
@@ -76,9 +77,11 @@ public:
 	float magnitude() const { return sqrtf(dot(*this)); }
 
 	// FUNCTION: WEBSERVICE 0x10121060
+	// FUNCTION: ROBLOX 0x004c30a0
 	void normalize() { *this *= 1.0f / magnitude(); }
 
 	// FUNCTION: WEBSERVICE 0x10126ba0
+	// FUNCTION: ROBLOX 0x00664400
 	float maxComponent() const { return std::max(std::max(fabsf(x), fabsf(y)), std::max(fabsf(z), fabsf(w))); }
 };
 

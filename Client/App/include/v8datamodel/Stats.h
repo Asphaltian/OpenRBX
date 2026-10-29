@@ -32,8 +32,10 @@ protected:
 
 public:
 	// FUNCTION: WEBSERVICE 0x10065a50
+	// FUNCTION: ROBLOX 0x00462b00
 	Item() : val(0) {}
 	// FUNCTION: WEBSERVICE 0x10065510
+	// FUNCTION: ROBLOX 0x00572500
 	Item(const char* name) : DescribedNonCreatable<Item, Instance, sStatsItem>(name), val(0) {}
 
 	const std::string& getStringValue()
@@ -50,6 +52,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x100b1f30
+	// FUNCTION: ROBLOX 0x005d36f0
 	std::string getStringValue2()
 	{
 		update();
@@ -88,6 +91,7 @@ protected:
 	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const Item*>(instance) != NULL; }
 
 	// SYNTHETIC: WEBSERVICE 0x100610e0
+	// SYNTHETIC: ROBLOX 0x004600c0
 	// RBX::Stats::Item::~Item
 };
 
@@ -121,18 +125,24 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10065c90
 	// RBX::Stats::TypedStatsItem<bool>::TypedStatsItem<bool>
 	// TEMPLATE: WEBSERVICE 0x10065da0
+	// TEMPLATE: ROBLOX 0x004ce200
 	// RBX::Stats::TypedStatsItem<bool>::update
 	// TEMPLATE: WEBSERVICE 0x10065dd0
+	// TEMPLATE: ROBLOX 0x005727a0
 	// RBX::Stats::TypedStatsItem<int>::TypedStatsItem<int>
 	// TEMPLATE: WEBSERVICE 0x10065ec0
 	// RBX::Stats::TypedStatsItem<int>::update
 	// TEMPLATE: WEBSERVICE 0x10065ef0
+	// TEMPLATE: ROBLOX 0x005c6b20
 	// RBX::Stats::TypedStatsItem<int>::~TypedStatsItem<int>
 	// TEMPLATE: WEBSERVICE 0x1006f990
+	// TEMPLATE: ROBLOX 0x005b7d60
 	// RBX::Stats::TypedStatsItem<double>::TypedStatsItem<double>
 	// TEMPLATE: WEBSERVICE 0x1006fa80
+	// TEMPLATE: ROBLOX 0x005b7e60
 	// RBX::Stats::TypedStatsItem<double>::update
 	// TEMPLATE: WEBSERVICE 0x10082f50
+	// TEMPLATE: ROBLOX 0x005c6a10
 	// RBX::Stats::TypedStatsItem<unsigned int>::TypedStatsItem<unsigned int>
 	// TEMPLATE: WEBSERVICE 0x10082fe0
 	// RBX::Stats::TypedStatsItem<unsigned int>::update
@@ -144,9 +154,11 @@ class TypedMemItem : public TypedStatsItem<unsigned int>
 {
 public:
 	// FUNCTION: WEBSERVICE 0x100b2910
+	// FUNCTION: ROBLOX 0x005d4080
 	TypedMemItem(const unsigned int* value) : TypedStatsItem<unsigned int>(value) {}
 
 	// FUNCTION: WEBSERVICE 0x100b2980
+	// FUNCTION: ROBLOX 0x005d4100
 	virtual void update() { formatMem(func()); }
 
 	// SYNTHETIC: WEBSERVICE 0x10065f60
@@ -160,6 +172,7 @@ class StatsService : public DescribedNonCreatable<StatsService, Instance, sStats
 {
 public:
 	// FUNCTION: WEBSERVICE 0x10065600
+	// FUNCTION: ROBLOX 0x0045ca90
 	StatsService() : DescribedNonCreatable<StatsService, Instance, sStats>("Stats") {}
 
 protected:
@@ -167,6 +180,7 @@ protected:
 	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const Item*>(instance) != NULL; }
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual XmlElement* write() { return NULL; }
 
 public:
@@ -175,8 +189,10 @@ public:
 DECOMP_SIZE_ASSERT(StatsService, 0xf8)
 
 // TEMPLATE: WEBSERVICE 0x10066b10
+// TEMPLATE: ROBLOX 0x005730e0
 // RBX::Stats::Item::createChildItem<int>
 // TEMPLATE: WEBSERVICE 0x100708b0
+// TEMPLATE: ROBLOX 0x005b8cc0
 // RBX::Stats::Item::createChildItem<double>
 template <class T>
 Item* Item::createChildItem(const char* name, boost::function0<T> func)
@@ -188,8 +204,10 @@ Item* Item::createChildItem(const char* name, boost::function0<T> func)
 }
 
 // TEMPLATE: WEBSERVICE 0x10066a00
+// TEMPLATE: ROBLOX 0x004cef20
 // RBX::Stats::Item::createBoundChildItem<bool>
 // TEMPLATE: WEBSERVICE 0x10083160
+// TEMPLATE: ROBLOX 0x005c6d10
 // RBX::Stats::Item::createBoundChildItem<unsigned int>
 template <class T>
 Item* Item::createBoundChildItem(const char* name, const T& v)

@@ -19,6 +19,7 @@ private:
 	virtual State* onStep(const float stepDt, Controller& controller); // vtable+0x0c
 
 	// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+	// FUNCTION: ROBLOX 0x0045e450 FOLDED
 	virtual void onComputeForce(const float dt) // vtable+0x08
 	{
 	}

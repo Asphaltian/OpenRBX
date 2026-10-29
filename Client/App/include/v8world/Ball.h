@@ -6,6 +6,7 @@
 namespace RBX {
 
 // VTABLE: WEBSERVICE 0x1023767c
+// VTABLE: ROBLOX 0x00831fbc
 // SIZE 0x14
 class Ball : public Geometry
 {
@@ -28,6 +29,7 @@ public:
 	virtual float getRadius() const { return realRadius; }
 
 	// FUNCTION: WEBSERVICE 0x100a7790
+	// FUNCTION: ROBLOX 0x005f6030
 	virtual Vector3 getCenterToCorner(const Matrix3& rotation) const
 	{
 		return Vector3(realRadius, realRadius, realRadius);

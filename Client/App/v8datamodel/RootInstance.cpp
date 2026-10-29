@@ -30,12 +30,14 @@ namespace RBX {
 char sRootInstance[] = "RootInstance";
 
 // FUNCTION: WEBSERVICE 0x100c0d50
+// FUNCTION: ROBLOX 0x005a04f0
 void RootInstance::setInsertPoint(const G3D::Vector3& topCenter)
 {
 	insertPoint = Dragger::toGrid(topCenter);
 }
 
 // FUNCTION: WEBSERVICE 0x100c0d90
+// FUNCTION: ROBLOX 0x005a0530
 void RootInstance::moveSafe(MegaDragger& megaDragger, G3D::Vector3 move, MoveType moveType)
 {
 	megaDragger.startDragging();
@@ -53,6 +55,7 @@ void RootInstance::moveSafe(MegaDragger& megaDragger, G3D::Vector3 move, MoveTyp
 }
 
 // FUNCTION: WEBSERVICE 0x100c0df0
+// FUNCTION: ROBLOX 0x005a0590
 void RootInstance::moveSafe(
 	std::vector<boost::weak_ptr<PartInstance> >& partArray, G3D::Vector3 move, MoveType moveType
 )
@@ -63,6 +66,7 @@ void RootInstance::moveSafe(
 }
 
 // FUNCTION: WEBSERVICE 0x100c0e80
+// FUNCTION: ROBLOX 0x005a0620
 void RootInstance::onDescendentAdded(Instance* instance)
 {
 	ModelInstance::onDescendentAdded(instance);
@@ -71,6 +75,7 @@ void RootInstance::onDescendentAdded(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x100c0ea0
+// FUNCTION: ROBLOX 0x005a0640
 void RootInstance::onDescendentRemoving(const boost::shared_ptr<Instance>& instance)
 {
 	ControllersUsed.setDirty();
@@ -78,6 +83,7 @@ void RootInstance::onDescendentRemoving(const boost::shared_ptr<Instance>& insta
 }
 
 // FUNCTION: WEBSERVICE 0x100c0eb0
+// FUNCTION: ROBLOX 0x005a0650
 G3D::Vector3 RootInstance::computeIdeInsertPoint() const
 {
 	float tempY = insertPoint.y = std::max(0.0f, insertPoint.y);
@@ -90,6 +96,7 @@ G3D::Vector3 RootInstance::computeIdeInsertPoint() const
 }
 
 // FUNCTION: WEBSERVICE 0x100c0f60
+// FUNCTION: ROBLOX 0x005a0700
 void RootInstance::moveToIdeInsertPoint(std::vector<boost::weak_ptr<PartInstance> >& partArray)
 {
 	if (!partArray.empty()) {
@@ -106,6 +113,7 @@ void RootInstance::moveToIdeInsertPoint(std::vector<boost::weak_ptr<PartInstance
 }
 
 // FUNCTION: WEBSERVICE 0x100c1020
+// FUNCTION: ROBLOX 0x005a07c0
 ControllerTypeArray RootInstance::computeControllersUsed() const
 {
 	ControllerTypeArray result;
@@ -122,6 +130,7 @@ ControllerTypeArray RootInstance::computeControllersUsed() const
 }
 
 // FUNCTION: WEBSERVICE 0x100c1110
+// FUNCTION: ROBLOX 0x005a08c0
 void RootInstance::insertRaw(
 	const std::vector<boost::shared_ptr<Instance> >& instances,
 	Instance* requestedParent,
@@ -138,11 +147,13 @@ void RootInstance::insertRaw(
 }
 
 // FUNCTION: WEBSERVICE 0x100c1250
+// FUNCTION: ROBLOX 0x005a0a00
 RootInstance::~RootInstance()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100c1430
+// FUNCTION: ROBLOX 0x005a0c20
 G3D::Vector3 RootInstance::computeCharacterInsertPoint(const Extents& extents) const
 {
 	ModelInstance* character = Network::Players::findLocalCharacter(this);
@@ -171,6 +182,7 @@ G3D::Vector3 RootInstance::computeCharacterInsertPoint(const Extents& extents) c
 }
 
 // FUNCTION: WEBSERVICE 0x100c1640
+// FUNCTION: ROBLOX 0x005a0e30
 void RootInstance::moveToPoint(PVInstance* pv, G3D::Vector3 point)
 {
 	if (contains(pv)) {
@@ -186,6 +198,7 @@ void RootInstance::moveToPoint(PVInstance* pv, G3D::Vector3 point)
 }
 
 // FUNCTION: WEBSERVICE 0x100c17a0
+// FUNCTION: ROBLOX 0x005a0f90
 void RootInstance::moveToCharacterInsertPoint(std::vector<boost::weak_ptr<PartInstance> >& partArray)
 {
 	if (!partArray.empty()) {
@@ -202,6 +215,7 @@ void RootInstance::moveToCharacterInsertPoint(std::vector<boost::weak_ptr<PartIn
 }
 
 // FUNCTION: WEBSERVICE 0x100c1860
+// FUNCTION: ROBLOX 0x005a1050
 void RootInstance::insertToTree(const std::vector<boost::shared_ptr<Instance> >& instances, Instance* requestedParent)
 {
 	std::vector<boost::weak_ptr<PartInstance> > partArray;
@@ -213,6 +227,7 @@ void RootInstance::insertToTree(const std::vector<boost::shared_ptr<Instance> >&
 }
 
 // FUNCTION: WEBSERVICE 0x100c1960
+// FUNCTION: ROBLOX 0x005a1150
 void RootInstance::insertCharacterView(
 	const std::vector<boost::shared_ptr<Instance> >& instances, std::vector<boost::weak_ptr<PartInstance> >& partArray
 )
@@ -236,6 +251,7 @@ void RootInstance::insertCharacterView(
 }
 
 // FUNCTION: WEBSERVICE 0x100c1b50
+// FUNCTION: ROBLOX 0x005a12d0
 void RootInstance::insertIdeView(
 	const std::vector<boost::shared_ptr<Instance> >& instances,
 	std::vector<boost::weak_ptr<PartInstance> >& partArray,
@@ -275,6 +291,7 @@ void RootInstance::insertIdeView(
 }
 
 // FUNCTION: WEBSERVICE 0x100c1c90
+// FUNCTION: ROBLOX 0x005a1410
 void RootInstance::insert3dView(const std::vector<boost::shared_ptr<Instance> >& instances, PromptMode promptMode)
 {
 	std::vector<boost::weak_ptr<PartInstance> > partArray;
@@ -294,6 +311,7 @@ void RootInstance::insert3dView(const std::vector<boost::shared_ptr<Instance> >&
 }
 
 // FUNCTION: WEBSERVICE 0x100c1db0
+// FUNCTION: ROBLOX 0x005a1530
 void RootInstance::insertSpawnLocation(SpawnLocation* s)
 {
 	if (!s->neutral) {
@@ -309,6 +327,7 @@ void RootInstance::insertSpawnLocation(SpawnLocation* s)
 }
 
 // FUNCTION: WEBSERVICE 0x100c1ee0
+// FUNCTION: ROBLOX 0x005a1660
 void RootInstance::insertInstances(
 	const std::vector<boost::shared_ptr<Instance> >& instances,
 	Instance* requestedParent,
@@ -374,6 +393,7 @@ void RootInstance::insertInstances(
 }
 
 // FUNCTION: WEBSERVICE 0x100c22b0
+// FUNCTION: ROBLOX 0x005a1aa0
 RootInstance::RootInstance()
 	: ControllersUsed(this, &RootInstance::computeControllersUsed), insertPoint(G3D::Vector3::zero()),
 	  viewPort(G3D::Vector2(800.0f, 600.0f)), world(new World())

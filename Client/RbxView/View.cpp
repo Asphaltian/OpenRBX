@@ -27,6 +27,7 @@ Instance* View::getWorkspace()
 }
 
 // FUNCTION: WEBSERVICE 0x1016a590
+// FUNCTION: ROBLOX 0x00474ad0
 void View::invalidateLighting(bool updateSkybox)
 {
 	lightingValid = false;
@@ -48,12 +49,14 @@ float View::getMeshDetail() const
 }
 
 // FUNCTION: WEBSERVICE 0x1016a600
+// FUNCTION: ROBLOX 0x00474b40
 void View::updateSettings(float shadingQuality, float meshDetail, bool shadows, float cameraDistance)
 {
 	renderLibScene->setThrottle(shadingQuality, meshDetail, shadows, cameraDistance);
 }
 
 // FUNCTION: WEBSERVICE 0x1016a630
+// FUNCTION: ROBLOX 0x00474b70
 void View::render(void* rd)
 {
 	updateLighting();
@@ -68,6 +71,7 @@ RenderStats& View::getRenderStats()
 }
 
 // FUNCTION: WEBSERVICE 0x1016aa20
+// FUNCTION: ROBLOX 0x00475260
 void View::onWorkspaceDescendentAdded(boost::shared_ptr<Instance> descendent)
 {
 	PartInstance* part = dynamic_cast<PartInstance*>(descendent.get());
@@ -90,6 +94,7 @@ void View::onWorkspaceDescendentAdded(boost::shared_ptr<Instance> descendent)
 }
 
 // FUNCTION: WEBSERVICE 0x1016b800
+// FUNCTION: ROBLOX 0x00476d20
 void View::suppressSkybox()
 {
 	Lighting* lighting = dataModel ? dataModel->create<Lighting>() : NULL;
@@ -105,6 +110,7 @@ void View::suppressSkybox()
 }
 
 // STUB: WEBSERVICE 0x1016b950
+// STUB: ROBLOX 0x00476e70
 void View::updateLighting()
 {
 	if (!lightingValid) {
@@ -135,6 +141,7 @@ void View::updateLighting()
 }
 
 // FUNCTION: WEBSERVICE 0x1016bd60
+// FUNCTION: ROBLOX 0x00477280
 View::View(boost::shared_ptr<DataModel> dataModel)
 	: dataModel(dataModel), lightingValid(false), renderLibScene(new Render::RenderScene()),
 	  textureManager(new G3D::TextureManager())
@@ -156,6 +163,7 @@ View::View(boost::shared_ptr<DataModel> dataModel)
 }
 
 // FUNCTION: WEBSERVICE 0x1016c080
+// FUNCTION: ROBLOX 0x004775a0
 View::~View()
 {
 	sceneManager->clear();

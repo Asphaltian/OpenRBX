@@ -72,12 +72,16 @@ void readBrickVector(RakNet::BitStream& stream, G3D::Vector3& value);
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1019dcd0
+// TEMPLATE: ROBLOX 0x004c4980
 // RBX::Network::serialize<G3D::Vector3>
 // TEMPLATE: WEBSERVICE 0x1019e6d0
+// TEMPLATE: ROBLOX 0x004c5480
 // RBX::Network::serialize<G3D::Color3>
 // TEMPLATE: WEBSERVICE 0x1019e6f0
+// TEMPLATE: ROBLOX 0x004c54a0
 // RBX::Network::serialize<G3D::CoordinateFrame>
 // TEMPLATE: WEBSERVICE 0x1019f7b0
+// TEMPLATE: ROBLOX 0x004c61c0
 // RBX::Network::serialize<double>
 // clang-format on
 template <class T>
@@ -88,14 +92,19 @@ void serialize(const Reflection::ConstProperty& property, RakNet::BitStream& bit
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1019dcf0
+// TEMPLATE: ROBLOX 0x004c4a00
 // RBX::Network::deserialize<G3D::Vector3>
 // TEMPLATE: WEBSERVICE 0x1019e710
+// TEMPLATE: ROBLOX 0x004c54c0
 // RBX::Network::deserialize<float>
 // TEMPLATE: WEBSERVICE 0x1019e740
+// TEMPLATE: ROBLOX 0x004c54f0
 // RBX::Network::deserialize<G3D::Color3>
 // TEMPLATE: WEBSERVICE 0x1019e770
+// TEMPLATE: ROBLOX 0x004c5520
 // RBX::Network::deserialize<G3D::CoordinateFrame>
 // TEMPLATE: WEBSERVICE 0x1019f7d0
+// TEMPLATE: ROBLOX 0x004c61e0
 // RBX::Network::deserialize<double>
 // clang-format on
 template <class T>
@@ -128,9 +137,11 @@ class StringSender
 
 public:
 	// FUNCTION: WEBSERVICE 0x101a3ad0
+	// FUNCTION: ROBLOX 0x004cc240
 	StringSender() : nextIndex(1) {}
 
 	// SYNTHETIC: WEBSERVICE 0x101a3750
+	// SYNTHETIC: ROBLOX 0x004cbb80
 	// RBX::Network::StringSender::~StringSender
 
 	void serializeString(const Reflection::ConstProperty& property, RakNet::BitStream& bitStream);
@@ -152,6 +163,7 @@ public:
 	void receive(RakNet::BitStream& stream, std::string& value);
 
 	// FUNCTION: WEBSERVICE 0x1019bc60
+	// FUNCTION: ROBLOX 0x004c0170
 	void receive(RakNet::BitStream& stream, const Name*& value)
 	{
 		std::string s;
@@ -167,9 +179,11 @@ class SharedStringDictionary : public StringSender, public StringReceiver, priva
 {
 public:
 	// SYNTHETIC: WEBSERVICE 0x101a49b0
+	// SYNTHETIC: ROBLOX 0x004cd340
 	// RBX::Network::SharedStringDictionary::SharedStringDictionary
 
 	// SYNTHETIC: WEBSERVICE 0x101a4a30
+	// SYNTHETIC: ROBLOX 0x004cd3c0
 	// RBX::Network::SharedStringDictionary::~SharedStringDictionary
 };
 
@@ -196,6 +210,7 @@ protected:
 
 public:
 	// FUNCTION: WEBSERVICE 0x101a9ea0
+	// FUNCTION: ROBLOX 0x004d2fc0
 	IdSerializer() {}
 
 	void serializeId(RakNet::BitStream& stream, const Instance* instance);
@@ -208,6 +223,7 @@ public:
 	void deserializeRef(Reflection::Property& property, RakNet::BitStream& bitStream);
 
 	// SYNTHETIC: WEBSERVICE 0x101a9df0
+	// SYNTHETIC: ROBLOX 0x004d2f20
 	// RBX::Network::IdSerializer::~IdSerializer
 
 	// clang-format off

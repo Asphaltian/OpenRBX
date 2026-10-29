@@ -23,6 +23,7 @@ class Instance;
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x10005a80
+// FUNCTION: ROBLOX 0x004078d0
 // RBX::ContentProvider::singleton
 // clang-format on
 
@@ -38,6 +39,7 @@ public:
 	ContentId(const std::string& id, const Name& mimeType) : id(id), mimeTypePtr(&mimeType) {}
 
 	// FUNCTION: WEBSERVICE 0x1004f100
+	// FUNCTION: ROBLOX 0x0043bb30
 	ContentId(const char* id) : id(id), mimeTypePtr(&Name::getNullName()) {}
 
 	ContentId(const std::string& id) : id(id), mimeTypePtr(&Name::getNullName()) {}
@@ -53,12 +55,15 @@ public:
 	bool isNull() const { return id.empty(); }
 
 	// FUNCTION: WEBSERVICE 0x1004f150
+	// FUNCTION: ROBLOX 0x0057d350
 	bool isFile() const { return id.substr(0, 7) == "file://"; }
 
 	// FUNCTION: WEBSERVICE 0x1004f1c0
+	// FUNCTION: ROBLOX 0x0057d3c0
 	bool isAsset() const { return id.substr(0, 11) == "rbxasset://"; }
 
 	// FUNCTION: WEBSERVICE 0x1004f230
+	// FUNCTION: ROBLOX 0x0057d430
 	bool isHttp() const { return id.substr(0, 4) == "http"; }
 
 private:
@@ -188,12 +193,16 @@ DECOMP_SIZE_ASSERT(ContentProvider, 0x54)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x100547e0
+// SYNTHETIC: ROBLOX 0x00568f50 FOLDED
 // RBX::ContentProvider::CachedContent::~CachedContent
 // SYNTHETIC: WEBSERVICE 0x10220f90
+// SYNTHETIC: ROBLOX 0x007ef430
 // `RBX::ContentProvider::singleton'::`2'::`dynamic atexit destructor for 'sing''
 // SYNTHETIC: WEBSERVICE 0x102217f0
+// SYNTHETIC: ROBLOX 0x007f2280
 // `RBX::getLocalCachePath'::`7'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10221800
+// SYNTHETIC: ROBLOX 0x007f2290
 // `RBX::getLocalCachePath'::`5'::`dynamic atexit destructor for 's''
 // clang-format on
 

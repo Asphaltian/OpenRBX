@@ -11,6 +11,7 @@ namespace RBX {
 namespace Profiling {
 
 // GLOBAL: WEBSERVICE 0x102f7474
+// GLOBAL: ROBLOX 0x0095d9ec
 DWORD Mark::markTlsIndex = 0;
 
 // FUNCTION: WEBSERVICE 0x100844e0
@@ -22,6 +23,7 @@ void init(bool enabled)
 }
 
 // FUNCTION: WEBSERVICE 0x10084500
+// FUNCTION: ROBLOX 0x005ce2a0
 void ThreadProfiler::sample(void* thread)
 {
 	double time = G3D::System::getTick();
@@ -58,6 +60,7 @@ void ThreadProfiler::sample(void* thread)
 }
 
 // FUNCTION: WEBSERVICE 0x10084600
+// FUNCTION: ROBLOX 0x005ce3a0
 void CodeProfiler::log(__int64 kern, __int64 user, bool frameTick)
 {
 	double now = G3D::System::getTick();
@@ -84,6 +87,7 @@ void CodeProfiler::log(__int64 kern, __int64 user, bool frameTick)
 }
 
 // FUNCTION: WEBSERVICE 0x100846d0
+// FUNCTION: ROBLOX 0x005ce470
 double Bucket::getActualFPS() const
 {
 	if (sampleTimeSpan > 0.0) {
@@ -94,34 +98,40 @@ double Bucket::getActualFPS() const
 }
 
 // FUNCTION: WEBSERVICE 0x100846f0
+// FUNCTION: ROBLOX 0x005ce490
 double Bucket::getFrameTime() const
 {
 	return getTotalTime() / frames;
 }
 
 // FUNCTION: WEBSERVICE 0x10084720
+// FUNCTION: ROBLOX 0x005ce4c0
 double Bucket::getTotalTime() const
 {
 	return (kernTimeSpan + userTimeSpan) * 1e-7;
 }
 
 // FUNCTION: WEBSERVICE 0x10084750
+// FUNCTION: ROBLOX 0x005ce4f0
 Profiler::Profiler(const char* name)
 	: bucketTimeSpan(1.0), currentBucket(0), lastSampleTime(G3D::System::getTick()), name(name)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100847b0
+// FUNCTION: ROBLOX 0x005ce550
 CodeProfiler::CodeProfiler(const char* name) : Profiler(name), parent(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100847d0
+// FUNCTION: ROBLOX 0x005ce570
 ThreadProfiler::ThreadProfiler(const char* name) : Profiler(name), initialized(false)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100847f0
+// FUNCTION: ROBLOX 0x005ce590
 Bucket Profiler::getData(double seconds) const
 {
 	Bucket result;
@@ -146,6 +156,7 @@ Bucket Profiler::getData(double seconds) const
 }
 
 // FUNCTION: WEBSERVICE 0x10084a20
+// FUNCTION: ROBLOX 0x005ce7c0
 double Bucket::getNominalFPS() const
 {
 	return frames / getTotalTime();

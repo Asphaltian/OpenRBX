@@ -16,13 +16,16 @@ public:
 	std::string filename; // 0x0c
 
 	// FUNCTION: WEBSERVICE 0x10030b90
+	// FUNCTION: ROBLOX 0x00477790
 	TextureProxyBase() {}
 
 	// FUNCTION: WEBSERVICE 0x10030be0
+	// FUNCTION: ROBLOX 0x004777e0
 	virtual ~TextureProxyBase() {}
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x10030c30
+	// SYNTHETIC: ROBLOX 0x00477830
 	// RBX::TextureProxyBase::`scalar deleting destructor'
 	// clang-format on
 

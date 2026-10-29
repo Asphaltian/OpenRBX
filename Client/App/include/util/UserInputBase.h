@@ -45,6 +45,7 @@ public:
 	bool shiftKeyDown() const { return keyDown(SDLK_RSHIFT) || keyDown(SDLK_LSHIFT); }
 
 	// FUNCTION: WEBSERVICE 0x100bf0b0
+	// FUNCTION: ROBLOX 0x005d44f0
 	bool ctrlKeyDown() const { return keyDown(SDLK_RCTRL) || keyDown(SDLK_LCTRL); }
 
 private:

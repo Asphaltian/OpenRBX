@@ -43,6 +43,7 @@ public:
 	void setTeamColor(BrickColor value);
 
 	// SYNTHETIC: WEBSERVICE 0x100e8e20
+	// SYNTHETIC: ROBLOX 0x00627fd0
 	// RBX::FlagStand::~FlagStand
 
 	// SYNTHETIC: WEBSERVICE 0x100e8e70

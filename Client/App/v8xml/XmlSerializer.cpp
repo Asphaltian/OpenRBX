@@ -19,6 +19,7 @@
 #include <string>
 
 // GLOBAL: WEBSERVICE 0x102d21b0
+// GLOBAL: ROBLOX 0x00933258
 // clang-format off
 static bool whitespaces[256] = {
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0,
@@ -28,6 +29,7 @@ static bool whitespaces[256] = {
 // clang-format on
 
 // FUNCTION: WEBSERVICE 0x10084b30
+// FUNCTION: ROBLOX 0x0059d1e0
 bool isCloseTag(const std::string& test)
 {
 	if (test.length() >= 2) {
@@ -38,6 +40,7 @@ bool isCloseTag(const std::string& test)
 }
 
 // FUNCTION: WEBSERVICE 0x10084bc0
+// FUNCTION: ROBLOX 0x0059d270
 bool endsWithClose(const std::string& test)
 {
 	size_t length = test.length();
@@ -49,6 +52,7 @@ bool endsWithClose(const std::string& test)
 }
 
 // FUNCTION: WEBSERVICE 0x10084c50
+// FUNCTION: ROBLOX 0x0059d300
 void TextXmlParser::skipWhitespace()
 {
 	while (whitespaces[(char) buffer->sgetc()]) {
@@ -57,6 +61,7 @@ void TextXmlParser::skipWhitespace()
 }
 
 // FUNCTION: WEBSERVICE 0x10084c90
+// FUNCTION: ROBLOX 0x0059d340
 std::string TextXmlParser::readFirstTag()
 {
 	skipWhitespace();
@@ -88,6 +93,7 @@ std::string TextXmlParser::readFirstTag()
 }
 
 // FUNCTION: WEBSERVICE 0x10084e20
+// FUNCTION: ROBLOX 0x0059d4d0
 std::string TextXmlParser::readTag()
 {
 	skipWhitespace();
@@ -107,6 +113,7 @@ std::string TextXmlParser::readTag()
 }
 
 // FUNCTION: WEBSERVICE 0x10084ef0
+// FUNCTION: ROBLOX 0x0059d5a0
 std::string decodeString(std::string source)
 {
 	std::string result;
@@ -150,6 +157,7 @@ std::string decodeString(std::string source)
 }
 
 // FUNCTION: WEBSERVICE 0x10085160
+// FUNCTION: ROBLOX 0x0059d810
 std::string TextXmlParser::readText(bool decode)
 {
 	skipWhitespace();
@@ -167,6 +175,7 @@ std::string TextXmlParser::readText(bool decode)
 }
 
 // FUNCTION: WEBSERVICE 0x10085230
+// FUNCTION: ROBLOX 0x0059d8e0
 std::string TextXmlParser::removeTag(const std::string& contents, int& index)
 {
 	unsigned int start = 0;
@@ -185,6 +194,7 @@ std::string TextXmlParser::removeTag(const std::string& contents, int& index)
 }
 
 // FUNCTION: WEBSERVICE 0x100852d0
+// FUNCTION: ROBLOX 0x0059d980
 std::string TextXmlParser::findNextToken(const std::string& contents, int& index)
 {
 	unsigned int start = index;
@@ -214,6 +224,7 @@ std::string TextXmlParser::findNextToken(const std::string& contents, int& index
 }
 
 // FUNCTION: WEBSERVICE 0x10085810
+// FUNCTION: ROBLOX 0x0059df50
 void TextXmlWriter::writeCloseTag(const XmlElement* element, int depth)
 {
 	for (int i = 0; i < depth; ++i) {
@@ -224,6 +235,7 @@ void TextXmlWriter::writeCloseTag(const XmlElement* element, int depth)
 }
 
 // FUNCTION: WEBSERVICE 0x10085870
+// FUNCTION: ROBLOX 0x0059dfb0
 void TextXmlWriter::serialize(const XmlElement* xmlNode, int depth)
 {
 	if (xmlNode != NULL) {
@@ -249,6 +261,7 @@ void TextXmlWriter::serialize(const XmlElement* xmlNode, int depth)
 }
 
 // FUNCTION: WEBSERVICE 0x10086220
+// FUNCTION: ROBLOX 0x0059e960
 void TextXmlWriter::encodedWrite(std::ostream& stream, const char* text)
 {
 	size_t num = strlen(text);
@@ -285,6 +298,7 @@ void TextXmlWriter::encodedWrite(std::ostream& stream, const char* text)
 }
 
 // FUNCTION: WEBSERVICE 0x10086310
+// FUNCTION: ROBLOX 0x0059ea50
 XmlElement* TextXmlParser::parseAttributes(const std::string& currentTag)
 {
 	std::string tagGuts = currentTag.substr(1, currentTag.size() - 2);
@@ -309,12 +323,14 @@ XmlElement* TextXmlParser::parseAttributes(const std::string& currentTag)
 }
 
 // FUNCTION: WEBSERVICE 0x10086590
+// FUNCTION: ROBLOX 0x0059ecd0
 void TextXmlWriter::serialize(const XmlElement* xmlNode)
 {
 	serialize(xmlNode, 0);
 }
 
 // FUNCTION: WEBSERVICE 0x10086af0
+// FUNCTION: ROBLOX 0x0059f230
 void TextXmlWriter::writeOpenTag(const XmlElement* element, int depth, const XmlAttribute* extraAttribute)
 {
 	for (int i = 0; i < depth; ++i) {
@@ -344,11 +360,13 @@ void TextXmlWriter::writeOpenTag(const XmlElement* element, int depth, const Xml
 }
 
 // FUNCTION: WEBSERVICE 0x10086c90
+// FUNCTION: ROBLOX 0x0059f3d0
 XmlParser::XmlParser(std::streambuf* buffer) : buffer(buffer)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10086cb0
+// FUNCTION: ROBLOX 0x0059f3f0
 void TextXmlWriter::serializeNode(const XmlElement* xmlNode, int depth)
 {
 	if (xmlNode->isValueType<RBX::ContentId>()) {
@@ -375,6 +393,7 @@ void TextXmlWriter::serializeNode(const XmlElement* xmlNode, int depth)
 }
 
 // STUB: WEBSERVICE 0x10086e00
+// STUB: ROBLOX 0x0059f540
 void TextXmlWriterWithEmbeddedContent::serializeNode(const XmlElement* xmlNode, int depth)
 {
 	if (xmlNode->isValueType<RBX::ContentId>()) {
@@ -444,6 +463,7 @@ void TextXmlWriterWithEmbeddedContent::serializeNode(const XmlElement* xmlNode, 
 }
 
 // FUNCTION: WEBSERVICE 0x10087650
+// FUNCTION: ROBLOX 0x0059fbb0
 std::auto_ptr<XmlElement> TextXmlParser::parse()
 {
 	if (buffer->sgetc() == EOF) {
@@ -568,6 +588,7 @@ std::auto_ptr<XmlElement> TextXmlParser::parse()
 }
 
 // FUNCTION: WEBSERVICE 0x10087f40
+// FUNCTION: ROBLOX 0x005a04a0
 XmlWriter::XmlWriter(std::ostream& stream) : stream(stream)
 {
 }

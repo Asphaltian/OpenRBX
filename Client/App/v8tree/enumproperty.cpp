@@ -17,6 +17,7 @@ namespace RBX {
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x1003ef60
+// FUNCTION: ROBLOX 0x005a5a90
 template <>
 const Type& Type::singleton<boost::shared_ptr<DescribedBase> >()
 {
@@ -26,6 +27,7 @@ const Type& Type::singleton<boost::shared_ptr<DescribedBase> >()
 }
 
 // FUNCTION: WEBSERVICE 0x1003efd0
+// FUNCTION: ROBLOX 0x005a5b00
 template <>
 const Type& Type::singleton<boost::shared_ptr<Instance> >()
 {
@@ -35,6 +37,7 @@ const Type& Type::singleton<boost::shared_ptr<Instance> >()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f040
+// FUNCTION: ROBLOX 0x005a5b70
 template <>
 const Type& Type::singleton<boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > >()
 {
@@ -44,6 +47,7 @@ const Type& Type::singleton<boost::shared_ptr<const std::vector<boost::shared_pt
 }
 
 // FUNCTION: WEBSERVICE 0x1003f0b0
+// FUNCTION: ROBLOX 0x005a5be0
 template <>
 const Type& Type::singleton<int>()
 {
@@ -53,6 +57,7 @@ const Type& Type::singleton<int>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f120
+// FUNCTION: ROBLOX 0x005a5c50
 template <>
 const Type& Type::singleton<bool>()
 {
@@ -62,6 +67,7 @@ const Type& Type::singleton<bool>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f190
+// FUNCTION: ROBLOX 0x005a5cc0
 template <>
 const Type& Type::singleton<float>()
 {
@@ -71,6 +77,7 @@ const Type& Type::singleton<float>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f200
+// FUNCTION: ROBLOX 0x005a5d30
 template <>
 const Type& Type::singleton<double>()
 {
@@ -80,6 +87,7 @@ const Type& Type::singleton<double>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f270
+// FUNCTION: ROBLOX 0x005a5da0
 template <>
 const Type& Type::singleton<ContentId>()
 {
@@ -89,6 +97,7 @@ const Type& Type::singleton<ContentId>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f2e0
+// FUNCTION: ROBLOX 0x005a5e10
 template <>
 const Type& Type::singleton<std::string>()
 {
@@ -98,6 +107,7 @@ const Type& Type::singleton<std::string>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f350
+// FUNCTION: ROBLOX 0x005a5e80
 template <>
 const Type& Type::singleton<G3D::Vector3>()
 {
@@ -107,6 +117,7 @@ const Type& Type::singleton<G3D::Vector3>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f3c0
+// FUNCTION: ROBLOX 0x005a5f60
 template <>
 const Type& Type::singleton<G3D::Color3>()
 {
@@ -125,6 +136,7 @@ const Type& Type::singleton<std::vector<Value> >()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f4a0
+// FUNCTION: ROBLOX 0x005a6040 FOLDED
 template <>
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >& Value::convert<
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > >()
@@ -138,6 +150,7 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >& Value::conv
 }
 
 // FUNCTION: WEBSERVICE 0x1003f530
+// FUNCTION: ROBLOX 0x005a6040 FOLDED
 template <>
 std::vector<Value>& Value::convert<std::vector<Value> >()
 {
@@ -149,6 +162,7 @@ std::vector<Value>& Value::convert<std::vector<Value> >()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f5c0
+// FUNCTION: ROBLOX 0x005a60d0
 template <>
 const Type& Type::singleton<BrickColor>()
 {
@@ -172,6 +186,7 @@ std::string TypedPropertyDescriptor<std::string>::getStringValue(const Described
 }
 
 // FUNCTION: WEBSERVICE 0x10040430
+// FUNCTION: ROBLOX 0x005a6d10
 template <>
 bool TypedPropertyDescriptor<std::string>::setStringValue(DescribedBase* instance, const std::string& text) const
 {
@@ -187,6 +202,7 @@ bool TypedPropertyDescriptor<bool>::hasStringValue() const
 }
 
 // FUNCTION: WEBSERVICE 0x10040450
+// FUNCTION: ROBLOX 0x005a6d30
 template <>
 std::string TypedPropertyDescriptor<bool>::getStringValue(const DescribedBase* instance) const
 {
@@ -214,6 +230,7 @@ bool TypedPropertyDescriptor<float>::hasStringValue() const
 }
 
 // FUNCTION: WEBSERVICE 0x100404d0
+// FUNCTION: ROBLOX 0x005a6db0
 template <>
 std::string TypedPropertyDescriptor<float>::getStringValue(const DescribedBase* instance) const
 {
@@ -241,6 +258,7 @@ bool TypedPropertyDescriptor<double>::hasStringValue() const
 }
 
 // FUNCTION: WEBSERVICE 0x10040550
+// FUNCTION: ROBLOX 0x005a6e30
 template <>
 std::string TypedPropertyDescriptor<double>::getStringValue(const DescribedBase* instance) const
 {
@@ -248,6 +266,7 @@ std::string TypedPropertyDescriptor<double>::getStringValue(const DescribedBase*
 }
 
 // FUNCTION: WEBSERVICE 0x10040590
+// FUNCTION: ROBLOX 0x005a6e70
 template <>
 bool TypedPropertyDescriptor<double>::setStringValue(DescribedBase* instance, const std::string& text) const
 {
@@ -268,6 +287,7 @@ bool TypedPropertyDescriptor<int>::hasStringValue() const
 }
 
 // FUNCTION: WEBSERVICE 0x100405e0
+// FUNCTION: ROBLOX 0x005a6ec0
 template <>
 std::string TypedPropertyDescriptor<int>::getStringValue(const DescribedBase* instance) const
 {
@@ -302,6 +322,7 @@ std::string TypedPropertyDescriptor<G3D::Vector3>::getStringValue(const Describe
 }
 
 // FUNCTION: WEBSERVICE 0x100406a0
+// FUNCTION: ROBLOX 0x005a6f80
 template <>
 bool TypedPropertyDescriptor<G3D::Vector3>::setStringValue(DescribedBase* instance, const std::string& text) const
 {
@@ -315,6 +336,7 @@ bool TypedPropertyDescriptor<G3D::Vector3>::setStringValue(DescribedBase* instan
 }
 
 // FUNCTION: WEBSERVICE 0x100406f0
+// FUNCTION: ROBLOX 0x005a71d0
 template <>
 void TypedPropertyDescriptor<std::string>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -329,6 +351,7 @@ void TypedPropertyDescriptor<std::string>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x10040780
+// FUNCTION: ROBLOX 0x005a7260
 template <>
 void TypedPropertyDescriptor<std::string>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -350,6 +373,7 @@ void TypedPropertyDescriptor<float>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x100407f0
+// FUNCTION: ROBLOX 0x005a72d0
 template <>
 void TypedPropertyDescriptor<float>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -371,6 +395,7 @@ void TypedPropertyDescriptor<bool>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x10040870
+// FUNCTION: ROBLOX 0x005a7350
 template <>
 void TypedPropertyDescriptor<double>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -378,6 +403,7 @@ void TypedPropertyDescriptor<double>::writeValue(const DescribedBase* instance, 
 }
 
 // FUNCTION: WEBSERVICE 0x100408b0
+// FUNCTION: ROBLOX 0x005a7390
 template <>
 void TypedPropertyDescriptor<double>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -392,6 +418,7 @@ void TypedPropertyDescriptor<double>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x10040900
+// FUNCTION: ROBLOX 0x005a73e0
 template <>
 void TypedPropertyDescriptor<bool>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -413,6 +440,7 @@ void TypedPropertyDescriptor<int>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x10040970
+// FUNCTION: ROBLOX 0x005a7450
 template <>
 void TypedPropertyDescriptor<int>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -420,6 +448,7 @@ void TypedPropertyDescriptor<int>::writeValue(const DescribedBase* instance, Xml
 }
 
 // FUNCTION: WEBSERVICE 0x100409a0
+// FUNCTION: ROBLOX 0x005a7480
 template <>
 void TypedPropertyDescriptor<G3D::Vector3>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -441,6 +470,7 @@ void TypedPropertyDescriptor<G3D::Vector3>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x10040a50
+// FUNCTION: ROBLOX 0x005a7530
 template <>
 void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -455,6 +485,7 @@ void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* inst
 }
 
 // FUNCTION: WEBSERVICE 0x10040bb0
+// FUNCTION: ROBLOX 0x005a7690
 template <>
 int& Value::convert<int>()
 {
@@ -477,6 +508,7 @@ int& Value::convert<int>()
 }
 
 // FUNCTION: WEBSERVICE 0x10040ce0
+// FUNCTION: ROBLOX 0x005a77c0
 template <>
 bool& Value::convert<bool>()
 {
@@ -499,6 +531,7 @@ bool& Value::convert<bool>()
 }
 
 // FUNCTION: WEBSERVICE 0x10040e10
+// FUNCTION: ROBLOX 0x005a78f0
 template <>
 float& Value::convert<float>()
 {
@@ -521,6 +554,7 @@ float& Value::convert<float>()
 }
 
 // FUNCTION: WEBSERVICE 0x10040f40
+// FUNCTION: ROBLOX 0x005a7a20
 template <>
 double& Value::convert<double>()
 {
@@ -543,6 +577,7 @@ double& Value::convert<double>()
 }
 
 // FUNCTION: WEBSERVICE 0x10041070
+// FUNCTION: ROBLOX 0x005a7b50
 template <>
 G3D::Vector3& Value::convert<G3D::Vector3>()
 {
@@ -550,6 +585,7 @@ G3D::Vector3& Value::convert<G3D::Vector3>()
 }
 
 // FUNCTION: WEBSERVICE 0x10041080
+// FUNCTION: ROBLOX 0x005a7b60
 template <>
 ContentId& Value::convert<ContentId>()
 {
@@ -562,6 +598,7 @@ ContentId& Value::convert<ContentId>()
 }
 
 // FUNCTION: WEBSERVICE 0x10041140
+// FUNCTION: ROBLOX 0x005a7c20
 template <>
 std::string& Value::convert<std::string>()
 {
@@ -612,6 +649,7 @@ std::string TypedPropertyDescriptor<G3D::Color3>::getStringValue(const Described
 }
 
 // FUNCTION: WEBSERVICE 0x10041470
+// FUNCTION: ROBLOX 0x005a7f50
 template <>
 bool TypedPropertyDescriptor<G3D::Color3>::setStringValue(DescribedBase* instance, const std::string& text) const
 {
@@ -625,6 +663,7 @@ bool TypedPropertyDescriptor<G3D::Color3>::setStringValue(DescribedBase* instanc
 }
 
 // FUNCTION: WEBSERVICE 0x100414c0
+// FUNCTION: ROBLOX 0x005a7fa0
 template <>
 void TypedPropertyDescriptor<G3D::Color3>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -651,6 +690,7 @@ void TypedPropertyDescriptor<G3D::Color3>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x100415b0
+// FUNCTION: ROBLOX 0x005a8090
 template <>
 void TypedPropertyDescriptor<G3D::Color3>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -680,6 +720,7 @@ bool TypedPropertyDescriptor<BrickColor>::setStringValue(DescribedBase* instance
 }
 
 // FUNCTION: WEBSERVICE 0x10041620
+// FUNCTION: ROBLOX 0x005a8100
 template <>
 void TypedPropertyDescriptor<BrickColor>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -694,6 +735,7 @@ void TypedPropertyDescriptor<BrickColor>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x10041670
+// FUNCTION: ROBLOX 0x005a8150
 template <>
 void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -701,6 +743,7 @@ void TypedPropertyDescriptor<BrickColor>::writeValue(const DescribedBase* instan
 }
 
 // FUNCTION: WEBSERVICE 0x100416b0
+// FUNCTION: ROBLOX 0x005a8190
 template <>
 void TypedPropertyDescriptor<ContentId>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -715,6 +758,7 @@ void TypedPropertyDescriptor<ContentId>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x10041750 FOLDED
+// FUNCTION: ROBLOX 0x00620390 FOLDED
 template <>
 void TypedPropertyDescriptor<ContentId>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -729,6 +773,7 @@ bool TypedPropertyDescriptor<ContentId>::hasStringValue() const
 }
 
 // FUNCTION: WEBSERVICE 0x100417d0 FOLDED
+// FUNCTION: ROBLOX 0x005a8230 FOLDED
 template <>
 std::string TypedPropertyDescriptor<ContentId>::getStringValue(const DescribedBase* instance) const
 {
@@ -736,6 +781,7 @@ std::string TypedPropertyDescriptor<ContentId>::getStringValue(const DescribedBa
 }
 
 // FUNCTION: WEBSERVICE 0x10041850
+// FUNCTION: ROBLOX 0x005a8580
 template <>
 boost::shared_ptr<Instance>& Value::convert<boost::shared_ptr<Instance> >()
 {
@@ -769,6 +815,7 @@ boost::shared_ptr<Instance>& Value::convert<boost::shared_ptr<Instance> >()
 }
 
 // FUNCTION: WEBSERVICE 0x100421f0
+// FUNCTION: ROBLOX 0x005a8890
 template <>
 EnumDesc<NormalId>::EnumDesc() : EnumDescriptor("NormalId", typeid(NormalId))
 {
@@ -781,6 +828,7 @@ EnumDesc<NormalId>::EnumDesc() : EnumDescriptor("NormalId", typeid(NormalId))
 }
 
 // FUNCTION: WEBSERVICE 0x100ff960 FOLDED
+// FUNCTION: ROBLOX 0x005ac440 FOLDED
 template <>
 bool TypedPropertyDescriptor<ContentId>::setStringValue(DescribedBase* instance, const std::string& text) const
 {

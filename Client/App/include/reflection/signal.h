@@ -91,8 +91,10 @@ public:
 private:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100b0060
+	// TEMPLATE: ROBLOX 0x00600a50
 	// RBX::Reflection::TGenericSlotWrapper<WaitScriptSlot>::TGenericSlotWrapper<WaitScriptSlot>
 	// TEMPLATE: WEBSERVICE 0x100b0870
+	// TEMPLATE: ROBLOX 0x00601190
 	// RBX::Reflection::TGenericSlotWrapper<FunctionScriptSlot>::TGenericSlotWrapper<FunctionScriptSlot>
 	// clang-format on
 	TGenericSlotWrapper(const Slot& slot) : slot(slot) {}
@@ -102,8 +104,10 @@ private:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100b0b50
+// TEMPLATE: ROBLOX 0x00601470
 // RBX::Reflection::TGenericSlotWrapper<FunctionScriptSlot>::execute
 // TEMPLATE: WEBSERVICE 0x100b0be0
+// TEMPLATE: ROBLOX 0x00601500
 // RBX::Reflection::TGenericSlotWrapper<WaitScriptSlot>::execute
 // clang-format on
 template <class Slot>
@@ -119,8 +123,10 @@ void TGenericSlotWrapper<Slot>::execute(const std::vector<boost::any>& arguments
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100b0800
+// TEMPLATE: ROBLOX 0x00601120
 // RBX::Reflection::GenericSlotWrapper::create<WaitScriptSlot>
 // TEMPLATE: WEBSERVICE 0x100b0e90
+// TEMPLATE: ROBLOX 0x006017b0
 // RBX::Reflection::GenericSlotWrapper::create<FunctionScriptSlot>
 // clang-format on
 template <class Slot>
@@ -184,10 +190,12 @@ DECOMP_SIZE_ASSERT(Signal, 0x08)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100b0e00
+// TEMPLATE: ROBLOX 0x00601720
 // RBX::Reflection::SignalInstance::connectGeneric<WaitScriptSlot>
 // FUNCTION: WEBSERVICE 0x100447e0
 // RBX::Reflection::SignalInstance::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x100b1020
+// TEMPLATE: ROBLOX 0x00601940
 // RBX::Reflection::SignalInstance::connectGeneric<FunctionScriptSlot>
 // clang-format on
 template <class Slot>
@@ -237,6 +245,7 @@ public:
 		// TEMPLATE: WEBSERVICE 0x100f30b0
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::CoordinateFrame)>::TSignalInstance::TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3120
+		// SYNTHETIC: ROBLOX 0x00631e70
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::~TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3170
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::`scalar deleting destructor'
@@ -325,12 +334,15 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100caf70
+	// TEMPLATE: ROBLOX 0x00475b00
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::connect
 	// TEMPLATE: WEBSERVICE 0x100e28b0
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::TSignalInstance::TSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100fca60
+	// TEMPLATE: ROBLOX 0x00475b50
 	// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::connect
 	// TEMPLATE: WEBSERVICE 0x10170460
+	// TEMPLATE: ROBLOX 0x0042f400
 	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::connect
 	// clang-format on
 };
@@ -354,38 +366,46 @@ protected:
 
 		// clang-format off
 		// TEMPLATE: WEBSERVICE 0x10045470
+		// TEMPLATE: ROBLOX 0x005db210
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(bool)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x1004bce0
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x1004be30
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x10055f60
+		// TEMPLATE: ROBLOX 0x0056a5e0
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(float,float)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100560b0
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(float)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x10076130
 		// RBX::Reflection::SignalDescImpl<0,void __cdecl(void)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100e2710
+		// TEMPLATE: ROBLOX 0x00625820
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f1d60
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(int)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f1e50
+		// TEMPLATE: ROBLOX 0x00630ca0
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(double)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f1f40
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2040
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Vector3)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2140
+		// TEMPLATE: ROBLOX 0x00630e90
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::CoordinateFrame)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2230
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Color3)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2330
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::BrickColor)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x1018e0e0
+		// TEMPLATE: ROBLOX 0x004aaf50
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,boost::shared_ptr<RBX::Instance>)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x10197610
+		// TEMPLATE: ROBLOX 0x004b98b0
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x101a35b0
+		// TEMPLATE: ROBLOX 0x004cba20
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool)>::GenericSlotAdapter::operator()
 		// clang-format on
 	};
@@ -405,6 +425,7 @@ protected:
 
 public:
 	// TEMPLATE: WEBSERVICE 0x1007b390
+	// TEMPLATE: ROBLOX 0x004cee70
 	// RBX::Reflection::SignalDescImpl<0,void __cdecl(void)>::fire
 	void fire(SignalSource* source)
 	{

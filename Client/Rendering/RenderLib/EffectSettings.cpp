@@ -8,12 +8,14 @@ namespace RBX {
 namespace Render {
 
 // FUNCTION: WEBSERVICE 0x101f7750
+// FUNCTION: ROBLOX 0x00536d60
 inline static bool brighter(const G3D::GLight& A, const G3D::GLight& B)
 {
 	return A.color.average() * (1.2 - A.position.w) > B.color.average() * (1.2 - B.position.w);
 }
 
 // FUNCTION: WEBSERVICE 0x101f8950
+// FUNCTION: ROBLOX 0x004a3e80
 G3D::ToneMap* EffectSettings::getToneMap()
 {
 	static std::auto_ptr<G3D::ToneMap> toneMap(new G3D::ToneMap());
@@ -21,6 +23,7 @@ G3D::ToneMap* EffectSettings::getToneMap()
 }
 
 // FUNCTION: WEBSERVICE 0x101f89e0
+// FUNCTION: ROBLOX 0x004a3f10
 DepthBlur* EffectSettings::getDepthBlur()
 {
 	static std::auto_ptr<DepthBlur> depthBlur(new DepthBlur());
@@ -28,6 +31,7 @@ DepthBlur* EffectSettings::getDepthBlur()
 }
 
 // STUB: WEBSERVICE 0x101f8bc0
+// STUB: ROBLOX 0x004a40f0
 G3D::ReferenceCountedPointer<G3D::Lighting> EffectSettings::update(
 	float shadingDetail,
 	float meshDetail,

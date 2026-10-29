@@ -20,11 +20,13 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011edc0
+// FUNCTION: ROBLOX 0x00647340
 RotateJoint::RotateJoint() : MultiJoint(2), rotateConnector(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1011ede0
+// FUNCTION: ROBLOX 0x00647360
 RotateJoint::RotateJoint(Primitive* axlePrim, Primitive* holePrim, const CoordinateFrame& c0, const CoordinateFrame& c1)
 	: MultiJoint(axlePrim, holePrim, c0, c1, 2), rotateConnector(NULL)
 {
@@ -44,6 +46,7 @@ void RotateJoint::removeFromKernel()
 }
 
 // FUNCTION: WEBSERVICE 0x1011ee40
+// FUNCTION: ROBLOX 0x006473c0
 float RotateJoint::getChannelValue(int uiStepId)
 {
 	const SurfaceData& surfaceData = getAxlePrim()->getSurfaceData(getAxleId());
@@ -90,6 +93,7 @@ float RotateJoint::getChannelValue(int uiStepId)
 }
 
 // FUNCTION: WEBSERVICE 0x1011f030
+// FUNCTION: ROBLOX 0x00647580
 RotatePJoint::RotatePJoint(
 	Primitive* axlePrim, Primitive* holePrim, const CoordinateFrame& c0, const CoordinateFrame& c1
 )
@@ -98,6 +102,7 @@ RotatePJoint::RotatePJoint(
 }
 
 // FUNCTION: WEBSERVICE 0x1011f070
+// FUNCTION: ROBLOX 0x006475c0
 RotateVJoint::RotateVJoint(
 	Primitive* axlePrim, Primitive* holePrim, const CoordinateFrame& c0, const CoordinateFrame& c1
 )
@@ -106,6 +111,7 @@ RotateVJoint::RotateVJoint(
 }
 
 // FUNCTION: WEBSERVICE 0x1011f0e0
+// FUNCTION: ROBLOX 0x00647630
 RotateJoint* RotateJoint::surfaceTypeToJoint(
 	SurfaceType surfaceType,
 	Primitive* axlePrim,
@@ -127,6 +133,7 @@ RotateJoint* RotateJoint::surfaceTypeToJoint(
 }
 
 // FUNCTION: WEBSERVICE 0x1011f200
+// FUNCTION: ROBLOX 0x00647750
 RotateJoint* RotateJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1)
 {
 	SurfaceType t0 = p0->getSurfaceType(nId0);
@@ -207,6 +214,7 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId n
 }
 
 // FUNCTION: WEBSERVICE 0x1011f690
+// FUNCTION: ROBLOX 0x00647be0
 void RotatePJoint::stepUi(int uiStepId)
 {
 	float value = getChannelValue(uiStepId);
@@ -224,6 +232,7 @@ void RotatePJoint::stepUi(int uiStepId)
 }
 
 // FUNCTION: WEBSERVICE 0x1011f730
+// FUNCTION: ROBLOX 0x00647c80
 void RotateVJoint::stepUi(int uiStepId)
 {
 	float value = getChannelValue(uiStepId);
@@ -241,6 +250,7 @@ void RotateVJoint::stepUi(int uiStepId)
 }
 
 // FUNCTION: WEBSERVICE 0x1011f7d0
+// FUNCTION: ROBLOX 0x00647d20
 float RotateJoint::getTorqueArmLength()
 {
 	Vector3 ownerSize = getAxlePrim()->getGeometry()->getGridSize();
@@ -259,6 +269,7 @@ float RotateJoint::getTorqueArmLength()
 }
 
 // FUNCTION: WEBSERVICE 0x1011f8c0
+// FUNCTION: ROBLOX 0x00647e10
 void RotateJoint::putInKernel(Kernel* _kernel)
 {
 	MultiJoint::putInKernel(_kernel);

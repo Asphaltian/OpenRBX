@@ -48,6 +48,7 @@ inline Vector3 PV::linearVelocityAtPoint(const Vector3& worldPos) const
 }
 
 // FUNCTION: WEBSERVICE 0x1009a610
+// FUNCTION: ROBLOX 0x005ad070
 inline Velocity PV::velocityAtPoint(const Vector3& worldPos) const
 {
 	Vector3 offset = worldPos - position.translation;
@@ -56,6 +57,7 @@ inline Velocity PV::velocityAtPoint(const Vector3& worldPos) const
 }
 
 // FUNCTION: WEBSERVICE 0x1009a680
+// FUNCTION: ROBLOX 0x005ad0e0
 inline PV PV::pvAtLocalCoord(const CoordinateFrame& localCoord) const
 {
 	CoordinateFrame worldPos = position * localCoord;
@@ -65,6 +67,7 @@ inline PV PV::pvAtLocalCoord(const CoordinateFrame& localCoord) const
 }
 
 // FUNCTION: WEBSERVICE 0x10120f60
+// FUNCTION: ROBLOX 0x006616d0
 inline PV PV::pvAtLocalOffset(const Vector3& localOffset) const
 {
 	return pvAtLocalCoord(CoordinateFrame(localOffset));

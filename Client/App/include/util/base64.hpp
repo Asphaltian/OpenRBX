@@ -151,10 +151,12 @@ public:
 
 
 	// TEMPLATE: WEBSERVICE 0x100855f0
+	// TEMPLATE: ROBLOX 0x0059dca0
 	// base64<char,std::char_traits<char> >::_getCharType
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10085a30
+	// TEMPLATE: ROBLOX 0x0059e170
 	// base64<char,std::char_traits<char> >::get<std::istreambuf_iterator<char,std::char_traits<char> >,std::ostreambuf_iterator<char,std::char_traits<char> >,int>
 	// clang-format on
 
@@ -162,6 +164,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10008e70
 	// base64<char,std::char_traits<char> >::put<std::_String_iterator<char,std::char_traits<char>,std::allocator<char> >,std::ostreambuf_iterator<char,std::char_traits<char> >,int,base64<char,std::char_traits<char> >::noline>
 	// TEMPLATE: WEBSERVICE 0x10085e80
+	// TEMPLATE: ROBLOX 0x0059e5c0
 	// base64<char,std::char_traits<char> >::put<std::istreambuf_iterator<char,std::char_traits<char> >,std::ostreambuf_iterator<char,std::char_traits<char> >,int,base64<char,std::char_traits<char> >::crlf>
 	// clang-format on
 	template<class _II, class _OI, class _State, class _Endline>

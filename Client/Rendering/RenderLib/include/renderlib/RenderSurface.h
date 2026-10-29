@@ -25,6 +25,7 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x101efb70
+	// SYNTHETIC: ROBLOX 0x0049dcf0
 	// RBX::Render::RenderSurface::operator=
 	// clang-format on
 

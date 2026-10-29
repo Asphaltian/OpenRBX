@@ -70,6 +70,7 @@ inline World* IPipelined::getWorld()
 }
 
 // FUNCTION: WEBSERVICE 0x10118120
+// FUNCTION: ROBLOX 0x00641fb0
 inline bool IPipelined::downstreamOfStage(IStage* iStage) const
 {
 	return currentStage->getStageType() > iStage->getStageType();

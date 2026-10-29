@@ -94,12 +94,14 @@ static Reflection::SignalDesc<Players, void(boost::shared_ptr<Instance>)> event_
 );
 
 // FUNCTION: WEBSERVICE 0x10190c50
+// FUNCTION: ROBLOX 0x004afa90
 bool Players::clientIsPresent(const Instance* context, bool testInDatamodel)
 {
 	return Client::clientIsPresent(context, testInDatamodel);
 }
 
 // FUNCTION: WEBSERVICE 0x10190c60
+// FUNCTION: ROBLOX 0x004afab0
 bool Players::frontendProcessing(const Instance* context, bool testInDatamodel)
 {
 	const ServiceProvider* serviceProvider = ServiceProvider::findServiceProvider(context);
@@ -108,6 +110,7 @@ bool Players::frontendProcessing(const Instance* context, bool testInDatamodel)
 }
 
 // FUNCTION: WEBSERVICE 0x10190c90
+// FUNCTION: ROBLOX 0x004afae0
 bool Players::backendProcessing(const Instance* context, bool testInDatamodel)
 {
 	const ServiceProvider* serviceProvider = ServiceProvider::findServiceProvider(context);
@@ -122,6 +125,7 @@ bool Players::askAddChild(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x10190e80
+// FUNCTION: ROBLOX 0x004affc0
 void Players::setConnection(RakPeerInterface* peer)
 {
 	if (this->peer) {
@@ -136,6 +140,7 @@ void Players::setConnection(RakPeerInterface* peer)
 }
 
 // FUNCTION: WEBSERVICE 0x101913e0
+// FUNCTION: ROBLOX 0x004b05f0
 void Players::onEvent(const Player* source, CharacterAdded event)
 {
 	const_cast<Player*>(source)->rebuildBackpack();
@@ -145,6 +150,7 @@ void Players::onEvent(const Player* source, CharacterAdded event)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10191ac0
+// FUNCTION: ROBLOX 0x004b0e30
 static void writeMessage(const RBX::Network::AbuseReport::Message& msg, XmlElement* messages)
 {
 	XmlElement* message = messages->addChild(RBX::Name::declare("message", -1));
@@ -156,6 +162,7 @@ namespace RBX {
 namespace Network {
 
 // FUNCTION: WEBSERVICE 0x10191c10
+// FUNCTION: ROBLOX 0x004b0f80
 boost::shared_ptr<Instance> Players::getPlayerByID(int userID)
 {
 	std::vector<boost::shared_ptr<Instance> >::const_iterator iter = players->begin();
@@ -171,6 +178,7 @@ boost::shared_ptr<Instance> Players::getPlayerByID(int userID)
 }
 
 // FUNCTION: WEBSERVICE 0x10191cd0
+// FUNCTION: ROBLOX 0x004b1040
 boost::shared_ptr<Instance> Players::playerFromCharacter(boost::shared_ptr<Instance> character)
 {
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > myPlayers = getPlayers();
@@ -188,6 +196,7 @@ boost::shared_ptr<Instance> Players::playerFromCharacter(boost::shared_ptr<Insta
 }
 
 // FUNCTION: WEBSERVICE 0x101921d0
+// FUNCTION: ROBLOX 0x004b1a20
 void Players::onChildChanged(Instance* instance, const PropertyChanged& event)
 {
 	if (instance == localPlayer.get() && &event.getProperty().getDescriptor() == &Player::prop_SuperSafeChat) {
@@ -196,6 +205,7 @@ void Players::onChildChanged(Instance* instance, const PropertyChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10192860
+// FUNCTION: ROBLOX 0x004b2470
 void AbuseReport::addMessage(const ChatMessage& cm)
 {
 	int userID = cm.source ? Player::prop_userId.getValue(cm.source.get()) : 0;
@@ -204,12 +214,14 @@ void AbuseReport::addMessage(const ChatMessage& cm)
 }
 
 // FUNCTION: WEBSERVICE 0x10192bb0
+// FUNCTION: ROBLOX 0x004b2880
 Players::~Players()
 {
 	setConnection(NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x101935a0
+// FUNCTION: ROBLOX 0x004b40f0
 Player* Players::findLocalPlayer(const Instance* context)
 {
 	const Players* players = ServiceProvider::find<Players>(context);
@@ -218,6 +230,7 @@ Player* Players::findLocalPlayer(const Instance* context)
 }
 
 // FUNCTION: WEBSERVICE 0x101935c0
+// FUNCTION: ROBLOX 0x004b4110
 RBX::ModelInstance* Players::findLocalCharacter(const Instance* context)
 {
 	if (Player* player = findLocalPlayer(context)) {
@@ -228,6 +241,7 @@ RBX::ModelInstance* Players::findLocalCharacter(const Instance* context)
 }
 
 // FUNCTION: WEBSERVICE 0x101935f0
+// FUNCTION: ROBLOX 0x004b4140
 Player* Players::getPlayerFromCharacter(Instance* character)
 {
 	if (Players* players = ServiceProvider::find<Players>(character)) {
@@ -239,6 +253,7 @@ Player* Players::getPlayerFromCharacter(Instance* character)
 }
 
 // FUNCTION: WEBSERVICE 0x101943e0
+// FUNCTION: ROBLOX 0x004b5390
 Players::Players() : players(std::vector<boost::shared_ptr<Instance> >()), peer(NULL), maxPlayers(12)
 {
 	setName("Players");
@@ -246,6 +261,7 @@ Players::Players() : players(std::vector<boost::shared_ptr<Instance> >()), peer(
 }
 
 // FUNCTION: WEBSERVICE 0x101945e0
+// FUNCTION: ROBLOX 0x004b5590
 void AbuseReporter::add(AbuseReport& r, const std::list<ChatMessage>& chatHistory)
 {
 	std::for_each(chatHistory.begin(), chatHistory.end(), boost::bind(&AbuseReport::addMessage, boost::ref(r), _1));
@@ -259,6 +275,7 @@ void AbuseReporter::add(AbuseReport& r, const std::list<ChatMessage>& chatHistor
 }
 
 // FUNCTION: WEBSERVICE 0x10194680
+// FUNCTION: ROBLOX 0x004b5630
 worker_thread::work_result AbuseReporter::processRequests(boost::shared_ptr<data> _data, std::string abuseUrl)
 {
 	try {
@@ -307,6 +324,7 @@ worker_thread::work_result AbuseReporter::processRequests(boost::shared_ptr<data
 }
 
 // FUNCTION: WEBSERVICE 0x10194b30
+// FUNCTION: ROBLOX 0x004b5ae0
 void Players::reportAbuse(Player* player, std::string comment)
 {
 	if (abuseReporter) {
@@ -338,12 +356,14 @@ void Players::reportAbuse(Player* player, std::string comment)
 }
 
 // FUNCTION: WEBSERVICE 0x10194e10
+// FUNCTION: ROBLOX 0x004b5dc0
 void Players::reportAbuse(boost::shared_ptr<Instance> player, std::string comment)
 {
 	reportAbuse(dynamic_cast<Player*>(player.get()), comment);
 }
 
 // FUNCTION: WEBSERVICE 0x10194ff0
+// FUNCTION: ROBLOX 0x004b60f0
 void Players::chat(std::string message)
 {
 	if (!localPlayer) {
@@ -367,6 +387,7 @@ void Players::chat(std::string message)
 }
 
 // FUNCTION: WEBSERVICE 0x101956e0
+// FUNCTION: ROBLOX 0x004b6c70
 void Players::setMaxPlayers(int value)
 {
 	if (value != maxPlayers) {
@@ -376,6 +397,7 @@ void Players::setMaxPlayers(int value)
 }
 
 // FUNCTION: WEBSERVICE 0x10195710
+// FUNCTION: ROBLOX 0x004b6ca0
 boost::shared_ptr<Instance> Players::createLocalPlayer(int userId)
 {
 	if (localPlayer) {
@@ -393,6 +415,7 @@ boost::shared_ptr<Instance> Players::createLocalPlayer(int userId)
 }
 
 // FUNCTION: WEBSERVICE 0x10195890
+// FUNCTION: ROBLOX 0x004b6e20
 void Players::addChatMessage(const ChatMessage& message)
 {
 	chatHistory.push_front(message);
@@ -406,6 +429,7 @@ void Players::addChatMessage(const ChatMessage& message)
 }
 
 // FUNCTION: WEBSERVICE 0x10195a30
+// FUNCTION: ROBLOX 0x004b6fc0
 bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
 	switch (packet->data[0]) {
@@ -487,6 +511,7 @@ bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 }
 
 // FUNCTION: WEBSERVICE 0x10195db0
+// FUNCTION: ROBLOX 0x004b7340
 void Players::onChildRemoving(Instance* child)
 {
 	if (Player* player = dynamic_cast<Player*>(child)) {
@@ -502,6 +527,7 @@ void Players::onChildRemoving(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x10195f90
+// FUNCTION: ROBLOX 0x004b7520
 void Players::onChildAdded(Instance* child)
 {
 	if (Player* player = dynamic_cast<Player*>(child)) {
@@ -533,6 +559,7 @@ void Players::onChildAdded(Instance* child)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x101961a0
+// FUNCTION: ROBLOX 0x004b7730
 template <class T>
 PluginReceiveResult PluginInterfaceAdapter<T>::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
@@ -543,6 +570,7 @@ namespace RBX {
 namespace Network {
 
 // FUNCTION: WEBSERVICE 0x10196310
+// FUNCTION: ROBLOX 0x004b7ac0
 AbuseReporter::AbuseReporter(std::string abuseUrl) : _data(new data())
 {
 	requestProcessor.reset(
@@ -551,6 +579,7 @@ AbuseReporter::AbuseReporter(std::string abuseUrl) : _data(new data())
 }
 
 // FUNCTION: WEBSERVICE 0x101964b0
+// FUNCTION: ROBLOX 0x004b7c60
 void Players::setAbuseReportUrl(std::string value)
 {
 	if (value.empty()) {

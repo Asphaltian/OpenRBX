@@ -15,17 +15,20 @@ namespace RBX {
 namespace Reflection {
 
 // SYNTHETIC: WEBSERVICE 0x10222ea0
+// SYNTHETIC: ROBLOX 0x007f2eb0
 // `RBX::Reflection::EnumDescriptor::allEnums'::`2'::`dynamic atexit destructor for 's''
 
 // SYNTHETIC: WEBSERVICE 0x10094370
 // RBX::Reflection::EnumDescriptor::`scalar deleting destructor'
 
 // VTABLE: WEBSERVICE 0x10235de0
+// VTABLE: ROBLOX 0x00827630
 // SIZE 0x28
 class EnumDescriptor : public Type
 {
 public:
 	// VTABLE: WEBSERVICE 0x1022da64
+	// VTABLE: ROBLOX 0x00809520
 	// SIZE 0x10
 	class Item : public Descriptor
 	{
@@ -46,6 +49,7 @@ public:
 	std::vector<const Item*>::const_iterator end() const { return allItems.end(); }
 
 	// FUNCTION: WEBSERVICE 0x10081ec0
+	// FUNCTION: ROBLOX 0x0044af70
 	bool isValue(int intValue) const
 	{
 		return std::find_if(allItems.begin(), allItems.end(), boost::bind(&equalValue, _1, intValue)) != allItems.end();
@@ -69,14 +73,18 @@ DECOMP_SIZE_ASSERT(EnumDescriptor, 0x28)
 DECOMP_SIZE_ASSERT(EnumDescriptor::Item, 0x10)
 
 // VTABLE: WEBSERVICE 0x102342d8
+// VTABLE: ROBLOX 0x008299e8
 // class EnumDesc<enum RBX::SoundType>
 // VTABLE: WEBSERVICE 0x102366e8
+// VTABLE: ROBLOX 0x00832040
 // class EnumDesc<enum RBX::Controller::ControllerType>
 // VTABLE: WEBSERVICE 0x10236b58
 // class EnumDesc<enum RBX::Part::PartType>
 // VTABLE: WEBSERVICE 0x1024646c
+// VTABLE: ROBLOX 0x0082cd24
 // class EnumDesc<enum RBX::Controller::InputType>
 // VTABLE: WEBSERVICE 0x10246614
+// VTABLE: ROBLOX 0x0082cd1c
 // class EnumDesc<enum RBX::SurfaceType>
 // SIZE 0x98
 template <class T>
@@ -124,10 +132,12 @@ private:
 // TEMPLATE: WEBSERVICE 0x10081410
 // RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::~EnumDesc<enum RBX::Soundscape::ReverbType>
 // TEMPLATE: WEBSERVICE 0x10082790
+// TEMPLATE: ROBLOX 0x005c6250
 // RBX::Reflection::EnumDesc<enum RBX::SoundType>::~EnumDesc<enum RBX::SoundType>
 // TEMPLATE: WEBSERVICE 0x100c36b0
 // RBX::Reflection::EnumDesc<enum RBX::Camera::CameraType>::~EnumDesc<enum RBX::Camera::CameraType>
 // TEMPLATE: WEBSERVICE 0x100c8290
+// TEMPLATE: ROBLOX 0x005e2140
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::~EnumDesc<enum RBX::HopperBin::BinType>
 // clang-format on
 
@@ -159,6 +169,7 @@ private:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100dfff0
+// TEMPLATE: ROBLOX 0x005e22f0
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::addPair
 // clang-format on
 template <class T>
@@ -213,16 +224,20 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // TEMPLATE: WEBSERVICE 0x10081c70
 // RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::singleton
 // TEMPLATE: WEBSERVICE 0x10083010
+// TEMPLATE: ROBLOX 0x005c6bc0
 // RBX::Reflection::EnumDesc<enum RBX::SoundType>::singleton
 // TEMPLATE: WEBSERVICE 0x10099d80
 // RBX::Reflection::EnumDesc<enum RBX::Controller::ControllerType>::singleton
 // TEMPLATE: WEBSERVICE 0x1009dde0
 // RBX::Reflection::EnumDesc<enum RBX::PartInstance::FormFactor>::singleton
 // TEMPLATE: WEBSERVICE 0x10081e50
+// TEMPLATE: ROBLOX 0x0044ae50
 // RBX::Reflection::EnumDescriptor::equalValue
 // TEMPLATE: WEBSERVICE 0x100c8600
+// TEMPLATE: ROBLOX 0x005e26e0
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton
 // TEMPLATE: WEBSERVICE 0x100e5f90
+// TEMPLATE: ROBLOX 0x0057c7f0
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::convertToIndex
 // TEMPLATE: WEBSERVICE 0x1009ed00
 // RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::singleton
@@ -241,14 +256,17 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // TEMPLATE: WEBSERVICE 0x100e6f90
 // RBX::Reflection::EnumDesc<enum RBX::NormalId>::singleton
 // TEMPLATE: WEBSERVICE 0x10101a30
+// TEMPLATE: ROBLOX 0x005df010
 // RBX::Reflection::EnumDesc<enum RBX::SurfaceType>::singleton
 // TEMPLATE: WEBSERVICE 0x10101a90
+// TEMPLATE: ROBLOX 0x005df070
 // RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::singleton
 // TEMPLATE: WEBSERVICE 0x1012d270
 // RBX::Reflection::EnumDesc<enum RBX::SpecialShape::MeshType>::singleton
 // SYNTHETIC: WEBSERVICE 0x10222450
 // `RBX::Reflection::EnumDesc<enum RBX::Soundscape::ReverbType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10222500
+// SYNTHETIC: ROBLOX 0x007f30f0
 // `RBX::Reflection::EnumDesc<enum RBX::SoundType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10223060
 // `RBX::Reflection::EnumDesc<enum RBX::Controller::ControllerType>::singleton'::`2'::`dynamic atexit destructor for 's''
@@ -263,6 +281,7 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // SYNTHETIC: WEBSERVICE 0x10223b40
 // `RBX::Reflection::EnumDesc<enum RBX::Camera::CameraType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10223be0
+// SYNTHETIC: ROBLOX 0x007f3fd0
 // `RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10224310
 // `RBX::Reflection::EnumDesc<enum RBX::Feature::InOut>::singleton'::`2'::`dynamic atexit destructor for 's''
@@ -273,8 +292,10 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // SYNTHETIC: WEBSERVICE 0x10224340
 // `RBX::Reflection::EnumDesc<enum RBX::NormalId>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10225110
+// SYNTHETIC: ROBLOX 0x007f3ef0
 // `RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x10225120
+// SYNTHETIC: ROBLOX 0x007f3f00
 // `RBX::Reflection::EnumDesc<enum RBX::SurfaceType>::singleton'::`2'::`dynamic atexit destructor for 's''
 // SYNTHETIC: WEBSERVICE 0x102256e0
 // `RBX::Reflection::EnumDesc<enum RBX::SpecialShape::MeshType>::singleton'::`2'::`dynamic atexit destructor for 's''
@@ -353,6 +374,7 @@ unsigned int EnumDesc<T>::convertToIndex(T value) const
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10100860
+// TEMPLATE: ROBLOX 0x005de890
 // RBX::Reflection::EnumDesc<enum RBX::Controller::InputType>::~EnumDesc<enum RBX::Controller::InputType>
 // clang-format on
 template <class T>
@@ -366,6 +388,7 @@ EnumDesc<T>::~EnumDesc()
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x101012c0
+// TEMPLATE: ROBLOX 0x005de6e0
 // RBX::Reflection::EnumDesc<enum RBX::SurfaceType>::~EnumDesc<enum RBX::SurfaceType>
 // clang-format on
 

@@ -31,6 +31,7 @@ private:
 DECOMP_SIZE_ASSERT(BrickColor::BrickMap, 0x50)
 
 // FUNCTION: WEBSERVICE 0x100921f0
+// FUNCTION: ROBLOX 0x005be1b0
 void BrickColor::BrickMap::generatePaletteMap(Number number)
 {
 	float closestDistance = 10000.0f;
@@ -69,6 +70,7 @@ void BrickColor::BrickMap::generatePaletteMap(Number number)
 }
 
 // FUNCTION: WEBSERVICE 0x10092360
+// FUNCTION: ROBLOX 0x005be320
 void BrickColor::BrickMap::generatePaletteMap()
 {
 	std::vector<BrickColor>::iterator iter = allColors.begin();
@@ -81,6 +83,7 @@ void BrickColor::BrickMap::generatePaletteMap()
 }
 
 // FUNCTION: WEBSERVICE 0x100923f0
+// FUNCTION: ROBLOX 0x005be3b0
 void BrickColor::BrickMap::insert(Number number, unsigned char r, unsigned char g, unsigned char b, std::string name)
 {
 	G3D::Color4uint8 c;
@@ -100,6 +103,7 @@ void BrickColor::BrickMap::insert(Number number, unsigned char r, unsigned char 
 }
 
 // FUNCTION: WEBSERVICE 0x100926b0
+// FUNCTION: ROBLOX 0x005be670
 BrickColor::BrickMap::BrickMap()
 {
 	insert(lego_1, 242, 243, 242, "White");
@@ -252,6 +256,7 @@ BrickColor::BrickMap::BrickMap()
 }
 
 // FUNCTION: WEBSERVICE 0x10093cb0
+// FUNCTION: ROBLOX 0x005bfc70
 BrickColor::BrickMap& BrickColor::BrickMap::singleton()
 {
 	static BrickMap s;
@@ -259,18 +264,21 @@ BrickColor::BrickMap& BrickColor::BrickMap::singleton()
 }
 
 // FUNCTION: WEBSERVICE 0x10093d10
+// FUNCTION: ROBLOX 0x005bfcd0
 const BrickColor::Colors& BrickColor::colorPalette()
 {
 	return BrickMap::singleton().colorPalette;
 }
 
 // FUNCTION: WEBSERVICE 0x10093d20
+// FUNCTION: ROBLOX 0x005bfce0
 unsigned int BrickColor::getClosestPaletteIndex() const
 {
 	return BrickMap::singleton().paletteMap[number];
 }
 
 // FUNCTION: WEBSERVICE 0x10093d40
+// FUNCTION: ROBLOX 0x005bfd00
 BrickColor BrickColor::parse(const char* name)
 {
 	std::map<Number, std::string>::const_iterator iter = BrickMap::singleton().map3.begin();
@@ -286,6 +294,7 @@ BrickColor BrickColor::parse(const char* name)
 }
 
 // FUNCTION: WEBSERVICE 0x10093df0
+// FUNCTION: ROBLOX 0x005bfed0
 BrickColor BrickColor::random()
 {
 	int i = G3D::iRandom(0, BrickMap::singleton().colorPalette.size() - 1);
@@ -293,6 +302,7 @@ BrickColor BrickColor::random()
 }
 
 // FUNCTION: WEBSERVICE 0x10093e50
+// FUNCTION: ROBLOX 0x005bff30
 BrickColor BrickColor::closest(G3D::Color4 color)
 {
 	float closestDistance = 10000.0f;
@@ -323,6 +333,7 @@ BrickColor BrickColor::closest(G3D::Color4 color)
 }
 
 // FUNCTION: WEBSERVICE 0x10093f70
+// FUNCTION: ROBLOX 0x005c0050
 BrickColor::BrickColor(int number)
 {
 	std::map<Number, G3D::Color4uint8>::iterator result = BrickMap::singleton().map1.find((Number) number);
@@ -335,24 +346,28 @@ BrickColor::BrickColor(int number)
 }
 
 // FUNCTION: WEBSERVICE 0x10094000
+// FUNCTION: ROBLOX 0x005c0190
 const std::string& BrickColor::name() const
 {
 	return BrickMap::singleton().map3.find(number)->second;
 }
 
 // FUNCTION: WEBSERVICE 0x10094050
+// FUNCTION: ROBLOX 0x005c01e0
 G3D::Color4 BrickColor::color4() const
 {
 	return BrickMap::singleton().map2.find(number)->second;
 }
 
 // FUNCTION: WEBSERVICE 0x100940b0
+// FUNCTION: ROBLOX 0x005c0240
 G3D::Color3 BrickColor::color3() const
 {
 	return G3D::Color3(color4());
 }
 
 // FUNCTION: WEBSERVICE 0x100940e0
+// FUNCTION: ROBLOX 0x005c02b0
 BrickColor BrickColor::closest(G3D::Color3 color)
 {
 	G3D::Color4 c4;

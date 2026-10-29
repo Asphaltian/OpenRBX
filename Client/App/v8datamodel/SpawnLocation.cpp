@@ -33,12 +33,14 @@ Reflection::BoundProp<bool, 1> SpawnLocation::prop_AllowTeamChangeOnTouch(
 );
 
 // FUNCTION: WEBSERVICE 0x100fd500
+// FUNCTION: ROBLOX 0x005e4230
 BrickColor SpawnLocation::getTeamColor() const
 {
 	return teamColor;
 }
 
 // FUNCTION: WEBSERVICE 0x100fdc00
+// FUNCTION: ROBLOX 0x005e4830
 void SpawnLocation::onEvent_spawnerTouched(boost::shared_ptr<Instance> other)
 {
 	if (!allowTeamChangeOnTouch) {
@@ -64,6 +66,7 @@ SpawnerService::~SpawnerService()
 }
 
 // FUNCTION: WEBSERVICE 0x100fe770
+// FUNCTION: ROBLOX 0x005e5190
 void SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network::Player* p)
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(this);
@@ -115,6 +118,7 @@ SpawnerService::SpawnerService()
 }
 
 // FUNCTION: WEBSERVICE 0x100fef90
+// FUNCTION: ROBLOX 0x005e59e0
 SpawnLocation::SpawnLocation() : neutral(true), allowTeamChangeOnTouch(false), forcefieldDuration(10)
 {
 	setName(sSpawnLocation);
@@ -128,6 +132,7 @@ void SpawnLocation::setTeamColor(BrickColor color)
 }
 
 // FUNCTION: WEBSERVICE 0x100ff2d0
+// FUNCTION: ROBLOX 0x005e5d20
 void SpawnLocation::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Instance::onServiceProvider(oldProvider, newProvider);

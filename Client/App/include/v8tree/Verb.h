@@ -68,6 +68,7 @@ public:
 DECOMP_SIZE_ASSERT(Verb, 0x0c)
 
 // VTABLE: WEBSERVICE 0x1023c59c
+// VTABLE: ROBLOX 0x0082420c
 // SIZE 0x14
 class VerbContainer
 {

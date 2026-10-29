@@ -10,6 +10,7 @@ namespace RBX {
 class Primitive;
 
 // VTABLE: WEBSERVICE 0x1023cf28
+// VTABLE: ROBLOX 0x00830668
 // SIZE 0x88
 class WeldJoint : public RigidJoint
 {

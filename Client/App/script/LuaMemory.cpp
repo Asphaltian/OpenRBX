@@ -8,11 +8,13 @@
 #include <string.h>
 
 // FUNCTION: WEBSERVICE 0x100b84e0
+// FUNCTION: ROBLOX 0x005d31a0
 LuaAllocator::LuaAllocator() : heapSize(0), heapCount(0), maxHeapSize(0), maxHeapCount(0)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100b84f0
+// FUNCTION: ROBLOX 0x005d31b0
 void LuaAllocator::clearHeapMax()
 {
 	maxHeapSize = 0;
@@ -20,6 +22,7 @@ void LuaAllocator::clearHeapMax()
 }
 
 // FUNCTION: WEBSERVICE 0x100b8500
+// FUNCTION: ROBLOX 0x005d31e0
 void LuaAllocator::getHeapStats(
 	unsigned int& heapSize, unsigned int& heapCount, unsigned int& maxHeapSize, unsigned int& maxHeapCount
 ) const
@@ -31,6 +34,7 @@ void LuaAllocator::getHeapStats(
 }
 
 // FUNCTION: WEBSERVICE 0x100b87e0
+// FUNCTION: ROBLOX 0x005d34c0
 template <size_t smallSize, size_t largeSize>
 void* bucketRealloc(void* ptr, size_t osize, size_t nsize)
 {
@@ -103,6 +107,7 @@ void* bucketRealloc(void* ptr, size_t osize, size_t nsize)
 }
 
 // FUNCTION: WEBSERVICE 0x100b8970
+// FUNCTION: ROBLOX 0x005d3650
 void* LuaAllocator::alloc(void* ptr, size_t osize, size_t nsize)
 {
 	void* result = bucketRealloc<16, 32>(ptr, osize, nsize);
@@ -124,6 +129,7 @@ void* LuaAllocator::alloc(void* ptr, size_t osize, size_t nsize)
 }
 
 // FUNCTION: WEBSERVICE 0x100b89d0
+// FUNCTION: ROBLOX 0x005d36b0
 void* LuaAllocator::alloc(void* ud, void* ptr, size_t osize, size_t nsize)
 {
 	return static_cast<LuaAllocator*>(ud)->alloc(ptr, osize, nsize);

@@ -49,6 +49,7 @@ enum PluginReceiveResult
 /// \sa PacketLogger
 /// \ingroup PLUGINS_GROUP
 // VTABLE: WEBSERVICE 0x10250fc4
+// VTABLE: ROBLOX 0x00811fa8
 // class PluginInterface
 class RAK_DLL_EXPORT PluginInterface
 {

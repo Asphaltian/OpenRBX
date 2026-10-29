@@ -96,10 +96,13 @@ namespace DataStructures
 	};
 
 	// FUNCTION: WEBSERVICE 0x101b0410
+	// FUNCTION: ROBLOX 0x004d62f0
 	// DataStructures::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>
 	// FUNCTION: WEBSERVICE 0x101b05f0
+	// FUNCTION: ROBLOX 0x004d64d0
 	// DataStructures::SingleProducerConsumer<RakPeer::BufferedCommandStruct>::SingleProducerConsumer<RakPeer::BufferedCommandStruct>
 	// FUNCTION: WEBSERVICE 0x101b0770
+	// FUNCTION: ROBLOX 0x004d6650
 	// DataStructures::SingleProducerConsumer<Packet *>::SingleProducerConsumer<Packet *>
 	template <class SingleProducerConsumerType>
 		SingleProducerConsumer<SingleProducerConsumerType>::SingleProducerConsumer()
@@ -127,10 +130,13 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101b04b0
+	// FUNCTION: ROBLOX 0x004d6390
 	// DataStructures::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>::~SingleProducerConsumer<RakPeer::RequestedConnectionStruct>
 	// FUNCTION: WEBSERVICE 0x101b0670
+	// FUNCTION: ROBLOX 0x004d6550
 	// DataStructures::SingleProducerConsumer<RakPeer::BufferedCommandStruct>::~SingleProducerConsumer<RakPeer::BufferedCommandStruct>
 	// FUNCTION: WEBSERVICE 0x101b07f0
+	// FUNCTION: ROBLOX 0x004d66d0
 	// DataStructures::SingleProducerConsumer<Packet *>::~SingleProducerConsumer<Packet *>
 	template <class SingleProducerConsumerType>
 		SingleProducerConsumer<SingleProducerConsumerType>::~SingleProducerConsumer()
@@ -147,8 +153,10 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101b0500
+	// FUNCTION: ROBLOX 0x004d63e0
 	// DataStructures::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>::WriteLock
 	// FUNCTION: WEBSERVICE 0x101b06b0
+	// FUNCTION: ROBLOX 0x004d6590
 	// DataStructures::SingleProducerConsumer<RakPeer::BufferedCommandStruct>::WriteLock
 	template <class SingleProducerConsumerType>
 		SingleProducerConsumerType* SingleProducerConsumer<SingleProducerConsumerType>::WriteLock( void )
@@ -207,6 +215,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101aaec0
+	// FUNCTION: ROBLOX 0x004bd9f0
 	template <class SingleProducerConsumerType>
 		void SingleProducerConsumer<SingleProducerConsumerType>::CancelReadLock( SingleProducerConsumerType* cancelToLocation )
 	{
@@ -231,10 +240,13 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101b0570
+	// FUNCTION: ROBLOX 0x004d6450
 	// DataStructures::SingleProducerConsumer<RakPeer::RequestedConnectionStruct>::Clear
 	// FUNCTION: WEBSERVICE 0x101b0700
+	// FUNCTION: ROBLOX 0x004d65e0
 	// DataStructures::SingleProducerConsumer<RakPeer::BufferedCommandStruct>::Clear
 	// FUNCTION: WEBSERVICE 0x101b0830
+	// FUNCTION: ROBLOX 0x004d6710
 	// DataStructures::SingleProducerConsumer<Packet *>::Clear
 	template <class SingleProducerConsumerType>
 		void SingleProducerConsumer<SingleProducerConsumerType>::Clear( void )

@@ -21,6 +21,7 @@
 #pragma warning( disable : 4966 ) // mkdir declared depreciated by Microsoft in order to make it harder to be cross platform.  I don't agree it's depreciated.
 #endif
 // FUNCTION: WEBSERVICE 0x10196580
+// FUNCTION: ROBLOX 0x004c1b50
 bool WriteFileWithDirectories( const char *path, char *data, unsigned dataLength )
 {
 	int index;
@@ -104,6 +105,7 @@ bool IsSlash(unsigned char c)
 }
 
 // FUNCTION: WEBSERVICE 0x10196680
+// FUNCTION: ROBLOX 0x004c1c50
 void AddSlash( char *input )
 {
 	if (input==0 || input[0]==0)

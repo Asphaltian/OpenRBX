@@ -8,6 +8,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10115ac0
+// FUNCTION: ROBLOX 0x00662120
 bool Unlocked::unlocked(const Primitive* testMe)
 {
 	return !PartInstance::fromPrimitiveConst(testMe)->getPartLocked();
@@ -28,6 +29,7 @@ HitTestFilter::Result PartByLocalCharacter::filterResult(const Primitive* testMe
 }
 
 // FUNCTION: WEBSERVICE 0x10115b30
+// FUNCTION: ROBLOX 0x006621f0
 HitTestFilter::Result IgnoreDescendantsOf::filterResult(const Primitive* testMe) const
 {
 	if (inst) {
@@ -42,6 +44,7 @@ HitTestFilter::Result IgnoreDescendantsOf::filterResult(const Primitive* testMe)
 }
 
 // FUNCTION: WEBSERVICE 0x10115b80
+// FUNCTION: ROBLOX 0x00662240
 PartByLocalCharacter::PartByLocalCharacter(Instance* root)
 {
 	character = shared_from(Network::Players::findLocalCharacter(root));
@@ -49,6 +52,7 @@ PartByLocalCharacter::PartByLocalCharacter(Instance* root)
 }
 
 // FUNCTION: WEBSERVICE 0x10115ca0
+// FUNCTION: ROBLOX 0x00662360
 IgnoreDescendantsOf::IgnoreDescendantsOf(Instance* i)
 {
 	inst = shared_from(i);

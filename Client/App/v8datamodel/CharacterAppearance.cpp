@@ -63,6 +63,7 @@ bool CharacterAppearance::askSetParent(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100e0420
+// FUNCTION: ROBLOX 0x005e5f50
 void CharacterAppearance::onAncestorChanged(const AncestorChanged& event)
 {
 	if (event.child == this) {
@@ -71,6 +72,7 @@ void CharacterAppearance::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100e0980
+// FUNCTION: ROBLOX 0x005e6440
 void ShirtGraphic::apply(Humanoid* humanoid)
 {
 	if (PartInstance* torso = humanoid->getTorso()) {
@@ -81,6 +83,7 @@ void ShirtGraphic::apply(Humanoid* humanoid)
 }
 
 // FUNCTION: WEBSERVICE 0x100e09d0
+// FUNCTION: ROBLOX 0x005e6490
 void Shirt::apply(Humanoid* humanoid)
 {
 	ShirtGraphic::apply(humanoid);
@@ -97,6 +100,7 @@ void Shirt::apply(Humanoid* humanoid)
 }
 
 // FUNCTION: WEBSERVICE 0x100e0a90
+// FUNCTION: ROBLOX 0x005e6550
 void Skin::apply(Humanoid* humanoid)
 {
 	bool hasShirt = getParent()->findFirstChildOfType<Shirt>() != NULL;
@@ -124,6 +128,7 @@ void Skin::apply(Humanoid* humanoid)
 }
 
 // FUNCTION: WEBSERVICE 0x100e0b60
+// FUNCTION: ROBLOX 0x005e6620
 void BodyColors::apply(Humanoid* humanoid)
 {
 	bool hasSkin = getParent()->findFirstChildOfType<Skin>() != NULL;
@@ -155,18 +160,21 @@ void BodyColors::apply(Humanoid* humanoid)
 }
 
 // FUNCTION: WEBSERVICE 0x100e1440
+// FUNCTION: ROBLOX 0x005e6f40
 ShirtGraphic::ShirtGraphic()
 {
 	setName("Shirt Graphic");
 }
 
 // FUNCTION: WEBSERVICE 0x100e15c0
+// FUNCTION: ROBLOX 0x005e70c0
 Skin::Skin() : skinColor(BrickColor::lego_226)
 {
 	setName("Skin");
 }
 
 // FUNCTION: WEBSERVICE 0x100e16d0
+// FUNCTION: ROBLOX 0x005e71e0
 BodyColors::BodyColors()
 	: headColor(BrickColor::lego_226), leftArmColor(BrickColor::lego_226), rightArmColor(BrickColor::lego_226),
 	  torsoColor(BrickColor::lego_28), leftLegColor(BrickColor::lego_23), rightLegColor(BrickColor::lego_23)
@@ -175,6 +183,7 @@ BodyColors::BodyColors()
 }
 
 // FUNCTION: WEBSERVICE 0x100e1990
+// FUNCTION: ROBLOX 0x005e74f0
 Shirt::Shirt()
 	: leftSleeveColor(BrickColor::lego_23), rightSleeveColor(BrickColor::lego_23), torsoColor(BrickColor::lego_1)
 {

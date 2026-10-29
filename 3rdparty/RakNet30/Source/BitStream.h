@@ -768,6 +768,7 @@ namespace RakNet
 	/// Write an networkID to a bitstream
 	/// \param[in] var The value to write
 	// FUNCTION: WEBSERVICE 0x101b11c0
+	// FUNCTION: ROBLOX 0x004d6fd0
 	template <>
 		inline void BitStream::Write(NetworkID var)
 	{
@@ -906,6 +907,7 @@ namespace RakNet
 
 	/// For values between -1 and 1
 	// TEMPLATE: WEBSERVICE 0x1019c6e0
+	// TEMPLATE: ROBLOX 0x004c3020
 	// RakNet::BitStream::WriteCompressed<float>
 	template <>
 		inline void BitStream::WriteCompressed(float var)
@@ -1016,6 +1018,7 @@ namespace RakNet
 	/// Read a bool from a bitstream
 	/// \param[in] var The value to read
 	// FUNCTION: WEBSERVICE 0x1019bc20
+	// FUNCTION: ROBLOX 0x004bd5c0
 	template <>
 		inline bool BitStream::Read(bool &var)
 	{
@@ -1045,6 +1048,7 @@ namespace RakNet
 	/// Read an networkID from a bitstream
 	/// \param[in] var The value to read
 	// FUNCTION: WEBSERVICE 0x101b1230
+	// FUNCTION: ROBLOX 0x004d7040
 	template <>
 		inline bool BitStream::Read(NetworkID &var)
 	{
@@ -1220,6 +1224,7 @@ namespace RakNet
 	}
 
 	// TEMPLATE: WEBSERVICE 0x1019d090
+	// TEMPLATE: ROBLOX 0x004c3b40
 	// RakNet::BitStream::WriteVector<float>
 	template <class templateType> // templateType for this function must be a float or double
 		void BitStream::WriteVector( templateType x, templateType y, templateType z )
@@ -1238,6 +1243,7 @@ namespace RakNet
 	}
 
 	// TEMPLATE: WEBSERVICE 0x1019c1d0
+	// TEMPLATE: ROBLOX 0x004be190
 	// RakNet::BitStream::WriteNormQuat<float>
 	template <class templateType> // templateType for this function must be a float or double
 		void BitStream::WriteNormQuat( templateType w, templateType x, templateType y, templateType z)
@@ -1337,6 +1343,7 @@ namespace RakNet
 	}
 
 	// TEMPLATE: WEBSERVICE 0x1019cf60
+	// TEMPLATE: ROBLOX 0x004c3a10
 	// RakNet::BitStream::ReadVector<float>
 	template <class templateType> // templateType for this function must be a float or double
 		bool BitStream::ReadVector( templateType &x, templateType &y, templateType &z )
@@ -1376,6 +1383,7 @@ namespace RakNet
 	}
 
 	// TEMPLATE: WEBSERVICE 0x1019c330
+	// TEMPLATE: ROBLOX 0x004be2f0
 	// RakNet::BitStream::ReadNormQuat<float>
 	template <class templateType> // templateType for this function must be a float or double
 		bool BitStream::ReadNormQuat( templateType &w, templateType &x, templateType &y, templateType &z)

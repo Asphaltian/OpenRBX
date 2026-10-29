@@ -16,6 +16,7 @@ class KernelData;
 using G3D::Vector3;
 
 // VTABLE: WEBSERVICE 0x10247f9c
+// VTABLE: ROBLOX 0x0083bc3c
 // SIZE 0x34
 class Point : public KernelIndex
 {
@@ -24,6 +25,7 @@ private:
 	friend class KernelData;
 
 	// FUNCTION: WEBSERVICE 0x100d4ec0 FOLDED
+	// FUNCTION: ROBLOX 0x0060bea0 FOLDED
 	int& getKernelIndex() { return kernelIndex; }
 
 	int numOwners; // 0x08

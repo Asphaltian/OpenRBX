@@ -7,11 +7,13 @@ IRenderable::~IRenderable()
 }
 
 // FUNCTION: WEBSERVICE 0x100a66c0
+// FUNCTION: ROBLOX 0x005f5320
 IRenderableBucket::~IRenderableBucket()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100a6730
+// FUNCTION: ROBLOX 0x005f5390
 void IRenderableBucket::render2dItems(Adorn* adorn)
 {
 	for (int i = 0; i < renderable2ds.size(); i++) {
@@ -20,6 +22,7 @@ void IRenderableBucket::render2dItems(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100a6760
+// FUNCTION: ROBLOX 0x005f53c0
 void IRenderableBucket::render3dAdornItems(Adorn* adorn)
 {
 	for (int i = 0; i < renderable3ds.size(); i++) {
@@ -28,6 +31,7 @@ void IRenderableBucket::render3dAdornItems(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100a6800
+// FUNCTION: ROBLOX 0x005f5460
 void IRenderableBucket::recomputeShouldRender(IRenderable* iR)
 {
 	if (iR->shouldRender2d()) {
@@ -50,6 +54,7 @@ void IRenderableBucket::recomputeShouldRender(IRenderable* iR)
 }
 
 // FUNCTION: WEBSERVICE 0x100a68d0
+// FUNCTION: ROBLOX 0x005f5530
 void IRenderableBucket::onAdded(IRenderable* iR)
 {
 	iR->bucket = this;
@@ -58,6 +63,7 @@ void IRenderableBucket::onAdded(IRenderable* iR)
 }
 
 // FUNCTION: WEBSERVICE 0x100a68e0
+// FUNCTION: ROBLOX 0x005f5540
 void IRenderableBucket::onRemoving(IRenderable* iR)
 {
 	if (iR->index2d >= 0) {
@@ -72,6 +78,7 @@ void IRenderableBucket::onRemoving(IRenderable* iR)
 }
 
 // FUNCTION: WEBSERVICE 0x100a6960
+// FUNCTION: ROBLOX 0x005f55c0
 void IRenderable::shouldRenderSetDirty()
 {
 	if (bucket != NULL) {

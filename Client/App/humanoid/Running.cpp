@@ -29,6 +29,7 @@ const float Running::kAltitudeD = 1250.0f;
 const G3D::Vector3 Running::maxMoveAccelerationGrid(1000.0f, 10000.0f, 200.0f);
 
 // STUB: WEBSERVICE 0x10106260
+// STUB: ROBLOX 0x006408d0
 void Running::onComputeForce(const float dt)
 {
 	Balancing::onComputeForce(dt);
@@ -115,6 +116,7 @@ void Running::onComputeForce(const float dt)
 }
 
 // STUB: WEBSERVICE 0x10106a80
+// STUB: ROBLOX 0x00641100
 bool Running::isFacingLadder(bool buffered)
 {
 	Body* body = humanoid->getTorsoBody();
@@ -175,6 +177,7 @@ bool Running::isFacingLadder(bool buffered)
 }
 
 // FUNCTION: WEBSERVICE 0x10106d70
+// FUNCTION: ROBLOX 0x006413f0
 Running::Running(Humanoid* humanoid)
 	: Named<Balancing, sRunning>(humanoid, 300.0f, 50.0f), floorRotationalVelocity(0.0f), jumpWarmup(-0.45f),
 	  lastLadderResult(false), lastLadderTime(0.0), desiredYRotationalVelocity(0.0f), desiredAltitude(0.0f),
@@ -190,6 +193,7 @@ Running::Running(Humanoid* humanoid)
 }
 
 // FUNCTION: WEBSERVICE 0x10106ea0
+// FUNCTION: ROBLOX 0x00641520
 Running::~Running()
 {
 	Humanoid::event_Running.fire(humanoid, 0.0f);
@@ -203,11 +207,13 @@ Running::~Running()
 }
 
 // FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+// FUNCTION: ROBLOX 0x0045e450 FOLDED
 void Running::render3dAdorn(Adorn* adorn)
 {
 }
 
 // STUB: WEBSERVICE 0x10106f80
+// STUB: ROBLOX 0x00641600
 void Running::updateGoals(Controller& controller)
 {
 	float oldMag = desiredVelocity.magnitude();
@@ -242,6 +248,7 @@ void Running::updateGoals(Controller& controller)
 }
 
 // FUNCTION: WEBSERVICE 0x10107110
+// FUNCTION: ROBLOX 0x00641790
 Humanoid::State* Running::onStep(const float stepDt, Controller& controller)
 {
 	State* answer = Balancing::onStep(stepDt, controller);

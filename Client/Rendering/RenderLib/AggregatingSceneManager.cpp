@@ -12,6 +12,7 @@ namespace Render {
 unsigned int AggregatingSceneManager::aggregationSize = 40;
 
 // FUNCTION: WEBSERVICE 0x101f2640
+// FUNCTION: ROBLOX 0x00495610
 static bool isFinite(const G3D::Matrix3& m)
 {
 	for (int i = 0; i < 3; ++i) {
@@ -26,6 +27,7 @@ static bool isFinite(const G3D::Matrix3& m)
 }
 
 // FUNCTION: WEBSERVICE 0x101f26b0
+// FUNCTION: ROBLOX 0x0052fa10
 static bool isReasonable(const G3D::Vector3& v)
 {
 	if (!v.isFinite()) {
@@ -42,6 +44,7 @@ static bool isReasonable(const G3D::Vector3& v)
 }
 
 // FUNCTION: WEBSERVICE 0x101f29f0
+// FUNCTION: ROBLOX 0x0052fb30
 bool AggregatingSceneManager::BucketKey::operator<(const BucketKey& that) const
 {
 	if (material < that.material) {
@@ -79,6 +82,7 @@ void AggregatingSceneManager::addModel(const G3D::ReferenceCountedPointer<Chunk>
 }
 
 // FUNCTION: WEBSERVICE 0x101f4570
+// FUNCTION: ROBLOX 0x00530be0
 bool AggregatingSceneManager::Bucket::dequeueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
 	Queue::iterator iter = std::find(queue.begin(), queue.end(), chunk);
@@ -91,6 +95,7 @@ bool AggregatingSceneManager::Bucket::dequeueSleepingChunk(const G3D::ReferenceC
 }
 
 // FUNCTION: WEBSERVICE 0x101f4600
+// FUNCTION: ROBLOX 0x00496e30
 void AggregatingSceneManager::invalidateModel(const G3D::ReferenceCountedPointer<Chunk>& chunk, bool isSleeping)
 {
 	if (isSleeping) {
@@ -102,6 +107,7 @@ void AggregatingSceneManager::invalidateModel(const G3D::ReferenceCountedPointer
 }
 
 // FUNCTION: WEBSERVICE 0x101f4d10
+// FUNCTION: ROBLOX 0x004974a0
 void AggregatingSceneManager::dequeueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
 	std::map<BucketKey, BucketRef>::iterator iter = buckets.begin();
@@ -115,6 +121,7 @@ void AggregatingSceneManager::dequeueSleepingChunk(const G3D::ReferenceCountedPo
 }
 
 // FUNCTION: WEBSERVICE 0x101f4d90
+// FUNCTION: ROBLOX 0x00497520
 void AggregatingSceneManager::clear()
 {
 	invalidSleepingModels.clear();
@@ -131,6 +138,7 @@ void AggregatingSceneManager::clear()
 }
 
 // FUNCTION: WEBSERVICE 0x101f4ea0
+// FUNCTION: ROBLOX 0x00497630
 void AggregatingSceneManager::deconstructAggregate(G3D::ReferenceCountedPointer<AggregateChunk> aggregate)
 {
 	AggregateChunk::Components::iterator iter = aggregate->components.begin();
@@ -155,6 +163,7 @@ void AggregatingSceneManager::deconstructAggregate(G3D::ReferenceCountedPointer<
 }
 
 // FUNCTION: WEBSERVICE 0x101f5460
+// FUNCTION: ROBLOX 0x00497bb0
 void AggregatingSceneManager::removeModel(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
 	invalidSleepingModels.erase(chunk);
@@ -171,6 +180,7 @@ void AggregatingSceneManager::removeModel(const G3D::ReferenceCountedPointer<Chu
 }
 
 // FUNCTION: WEBSERVICE 0x101f5610
+// FUNCTION: ROBLOX 0x00497d60
 void AggregatingSceneManager::Bucket::addToQueue(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
 	if (chunk->aggregate.createStrongPtr().notNull()) {
@@ -198,11 +208,13 @@ void AggregatingSceneManager::Bucket::addToQueue(const G3D::ReferenceCountedPoin
 }
 
 // FUNCTION: WEBSERVICE 0x101f5850
+// FUNCTION: ROBLOX 0x00497fa0
 AggregatingSceneManager::~AggregatingSceneManager()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101f5930
+// FUNCTION: ROBLOX 0x00498080
 void AggregatingSceneManager::queueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
 	BucketRef queue;
@@ -223,6 +235,7 @@ void AggregatingSceneManager::queueSleepingChunk(const G3D::ReferenceCountedPoin
 }
 
 // FUNCTION: WEBSERVICE 0x101f5ae0
+// FUNCTION: ROBLOX 0x00498230
 void AggregatingSceneManager::setSleeping(const G3D::ReferenceCountedPointer<Chunk>& chunk, bool sleeping)
 {
 	if (sleeping) {
@@ -247,11 +260,13 @@ void AggregatingSceneManager::setSleeping(const G3D::ReferenceCountedPointer<Chu
 }
 
 // FUNCTION: WEBSERVICE 0x101f5cc0
+// FUNCTION: ROBLOX 0x00498410
 AggregatingSceneManager::AggregatingSceneManager(RenderScene* renderScene) : SceneManager(renderScene)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x101f5df0
+// FUNCTION: ROBLOX 0x00498540
 void AggregatingSceneManager::Bucket::optimize(AggregatingSceneManager& sceneManager, double maxTime)
 {
 	if (queue.size() * 4 < aggregationSize) {
@@ -295,6 +310,7 @@ void AggregatingSceneManager::Bucket::optimize(AggregatingSceneManager& sceneMan
 }
 
 // FUNCTION: WEBSERVICE 0x101f62c0
+// FUNCTION: ROBLOX 0x00498a10
 void AggregatingSceneManager::prerender(double optimizationTime)
 {
 	const double timeUp = G3D::System::getTick() + optimizationTime * 1000.0;

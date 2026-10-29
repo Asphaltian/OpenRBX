@@ -43,12 +43,14 @@ void Server::ClientProxy::onSentMarker(long id)
 }
 
 // FUNCTION: WEBSERVICE 0x10199490
+// FUNCTION: ROBLOX 0x004bb6e0
 static bool isReplicator(boost::shared_ptr<Instance> instance)
 {
 	return dynamic_cast<Replicator*>(instance.get()) != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x10199530
+// FUNCTION: ROBLOX 0x004bb780
 void Server::stop(int blockDuration)
 {
 	if (rakPeer->IsActive()) {
@@ -59,16 +61,19 @@ void Server::stop(int blockDuration)
 }
 
 // FUNCTION: WEBSERVICE 0x10199570
+// FUNCTION: ROBLOX 0x004bb7c0
 Server::ClientProxy::~ClientProxy()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10199900
+// FUNCTION: ROBLOX 0x004bbaf0
 Server::~Server()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10199ac0
+// FUNCTION: ROBLOX 0x004bbcb0
 void Server::start(int port, int threadSleepTime)
 {
 	SocketDescriptor d(port, "");
@@ -89,12 +94,14 @@ void Server::start(int port, int threadSleepTime)
 }
 
 // FUNCTION: WEBSERVICE 0x10199d10
+// FUNCTION: ROBLOX 0x004bbf00
 Server::ClientProxy::ClientProxy(SystemAddress systemAddress, Server* server)
 	: Replicator(systemAddress, server->peerInterface()), server(server)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10199ed0
+// FUNCTION: ROBLOX 0x004bc0c0
 void Server::ClientProxy::sendTop()
 {
 	RakNet::BitStream bitStream;
@@ -113,6 +120,7 @@ void Server::ClientProxy::sendTop()
 }
 
 // FUNCTION: WEBSERVICE 0x1019a140
+// FUNCTION: ROBLOX 0x004bc330
 int Server::getClientCount()
 {
 	if (getChildren()) {
@@ -123,6 +131,7 @@ int Server::getClientCount()
 }
 
 // FUNCTION: WEBSERVICE 0x1019a330
+// FUNCTION: ROBLOX 0x004bc520
 PluginReceiveResult Server::ClientProxy::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
 	const SystemAddress& systemAddress = packet->systemAddress;
@@ -180,6 +189,7 @@ PluginReceiveResult Server::ClientProxy::OnReceive(RakPeerInterface* peer, Packe
 }
 
 // FUNCTION: WEBSERVICE 0x1019a7f0
+// FUNCTION: ROBLOX 0x004bc9e0
 bool Server::serverIsPresent(const Instance* context, bool testInDatamodel)
 {
 	const ServiceProvider* serviceProvider = ServiceProvider::findServiceProvider(context);
@@ -187,6 +197,7 @@ bool Server::serverIsPresent(const Instance* context, bool testInDatamodel)
 }
 
 // FUNCTION: WEBSERVICE 0x1019a820
+// FUNCTION: ROBLOX 0x004bca10
 void Server::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	if (oldProvider) {
@@ -204,6 +215,7 @@ void Server::onServiceProvider(const ServiceProvider* oldProvider, const Service
 }
 
 // FUNCTION: WEBSERVICE 0x1019b080
+// FUNCTION: ROBLOX 0x004bd2a0
 Server::Server() : outgoingPort(0)
 {
 	setName(sServer);
@@ -215,6 +227,7 @@ Server::Server() : outgoingPort(0)
 }
 
 // FUNCTION: WEBSERVICE 0x1019b1b0
+// FUNCTION: ROBLOX 0x004bd3d0
 PluginReceiveResult Server::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
 	PluginReceiveResult result = Peer::OnReceive(peer, packet);

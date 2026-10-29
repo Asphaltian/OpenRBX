@@ -11,12 +11,14 @@ namespace RBX {
 char sForceField[] = "ForceField";
 
 // FUNCTION: WEBSERVICE 0x100e9270
+// FUNCTION: ROBLOX 0x00628420
 bool ForceField::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const Workspace*>(instance) == NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100e9370
+// FUNCTION: ROBLOX 0x00628560
 void renderForceField(boost::shared_ptr<Instance> descendent, Adorn* adorn, int cycle)
 {
 	if (PartInstance* part = dynamic_cast<PartInstance*>(descendent.get())) {
@@ -27,6 +29,7 @@ void renderForceField(boost::shared_ptr<Instance> descendent, Adorn* adorn, int 
 }
 
 // FUNCTION: WEBSERVICE 0x100e9470
+// FUNCTION: ROBLOX 0x00628660
 bool containsForceField(Instance* instance)
 {
 	for (unsigned int i = 0; i < instance->numChildren(); ++i) {
@@ -39,6 +42,7 @@ bool containsForceField(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x100e94f0
+// FUNCTION: ROBLOX 0x006286e0
 bool ancestorContainsForceField(Instance* instance)
 {
 	if (containsForceField(instance)) {
@@ -54,12 +58,14 @@ bool ancestorContainsForceField(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x100e9540
+// FUNCTION: ROBLOX 0x00628730
 bool ForceField::partInForceField(PartInstance* part)
 {
 	return ancestorContainsForceField(part);
 }
 
 // FUNCTION: WEBSERVICE 0x100e96a0
+// FUNCTION: ROBLOX 0x00628890
 void ForceField::render3dAdorn(Adorn* adorn)
 {
 	cycle = (cycle + 1) % 30;
@@ -68,6 +74,7 @@ void ForceField::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100e97f0
+// FUNCTION: ROBLOX 0x006289a0
 ForceField::ForceField() : cycle(0)
 {
 	setName("ForceField");

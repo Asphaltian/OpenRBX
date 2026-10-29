@@ -38,6 +38,7 @@ public:
 	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
 
 	// SYNTHETIC: WEBSERVICE 0x100fd430
+	// SYNTHETIC: ROBLOX 0x00639750
 	// RBX::Seat::~Seat
 };
 

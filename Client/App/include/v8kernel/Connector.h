@@ -19,6 +19,7 @@ class KernelData;
 using G3D::Vector3;
 
 // VTABLE: WEBSERVICE 0x10236efc
+// VTABLE: ROBLOX 0x0082fe7c
 // SIZE 0x08
 class Connector : public KernelIndex
 {
@@ -45,6 +46,7 @@ private:
 DECOMP_SIZE_ASSERT(Connector, 0x08)
 
 // VTABLE: WEBSERVICE 0x10247f5c
+// VTABLE: ROBLOX 0x0083bc0c
 // SIZE 0x34
 class RotateConnector : public Connector
 {
@@ -122,11 +124,13 @@ private:
 DECOMP_SIZE_ASSERT(NormalBreakConnector, 0x20)
 
 // VTABLE: WEBSERVICE 0x1023c7f4
+// VTABLE: ROBLOX 0x008336cc
 // SIZE 0x50
 class ContactConnector : public Connector
 {
 public:
 	// FUNCTION: WEBSERVICE 0x100d2120
+	// FUNCTION: ROBLOX 0x0060a0d0
 	ContactConnector(float _k, float _kNeg, float _kFriction)
 	{
 		k = _k;

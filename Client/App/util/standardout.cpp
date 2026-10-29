@@ -13,12 +13,14 @@ DECOMP_SIZE_ASSERT(StandardOut, 0x28)
 DECOMP_SIZE_ASSERT(StandardOutMessage, 0x28)
 
 // FUNCTION: WEBSERVICE 0x100010d0
+// FUNCTION: ROBLOX 0x00413eb0
 void StandardOut::print(MessageType type, const std::exception& exp)
 {
 	print(type, exp.what());
 }
 
 // FUNCTION: WEBSERVICE 0x10031e40
+// FUNCTION: ROBLOX 0x00582c60
 void StandardOut::print(MessageType type, const char* format, ...)
 {
 	va_list arguments;
@@ -48,6 +50,7 @@ void StandardOut::print(MessageType type, const char* format, ...)
 }
 
 // FUNCTION: WEBSERVICE 0x100320e0
+// FUNCTION: ROBLOX 0x00582f00
 boost::shared_ptr<StandardOut> StandardOut::singleton()
 {
 	static boost::shared_ptr<StandardOut> standardOut(new StandardOut());
@@ -56,6 +59,7 @@ boost::shared_ptr<StandardOut> StandardOut::singleton()
 }
 
 // FUNCTION: WEBSERVICE 0x100321b0
+// FUNCTION: ROBLOX 0x00582fd0
 void StandardOut::print_exception(const boost::function0<void>& f, MessageType type, bool rethrow)
 {
 	try {

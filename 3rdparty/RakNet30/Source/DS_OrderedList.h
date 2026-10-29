@@ -71,8 +71,10 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c2070
+	// FUNCTION: ROBLOX 0x004d4730
 	// DataStructures::OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>::~OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>
 	// FUNCTION: WEBSERVICE 0x101bedb0
+	// FUNCTION: ROBLOX 0x004e4da0
 	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::~OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	OrderedList<key_type, data_type, comparison_function>::~OrderedList()
@@ -122,10 +124,13 @@ namespace DataStructures
 		return objectExists;
 	}
 	// FUNCTION: WEBSERVICE 0x101b1c90
+	// FUNCTION: ROBLOX 0x004d7aa0
 	// DataStructures::OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>::GetIndexFromKey
 	// FUNCTION: WEBSERVICE 0x101bb0f0
+	// FUNCTION: ROBLOX 0x004e2e10
 	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::GetIndexFromKey
 	// FUNCTION: WEBSERVICE 0x101bc4c0
+	// FUNCTION: ROBLOX 0x004e2be0
 	// DataStructures::OrderedList<unsigned short,SplitPacketChannel *,&SplitPacketChannelComp>::GetIndexFromKey
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	unsigned OrderedList<key_type, data_type, comparison_function>::GetIndexFromKey(const key_type &key, bool *objectExists, int (*cf)(const key_type&, const data_type&)) const
@@ -174,8 +179,10 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bb330
+	// FUNCTION: ROBLOX 0x004d47c0
 	// DataStructures::OrderedList<int,DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode,&DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::NodeComparisonFunc>::Insert
 	// FUNCTION: WEBSERVICE 0x101be020
+	// FUNCTION: ROBLOX 0x004e4010
 	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::Insert
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	unsigned OrderedList<key_type, data_type, comparison_function>::Insert(const key_type &key, const data_type &data, bool assertOnDuplicate, int (*cf)(const key_type&, const data_type&))
@@ -203,6 +210,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101b4710
+	// FUNCTION: ROBLOX 0x004da520
 	template <class key_type, class data_type, int (*comparison_function)(const key_type&, const data_type&)>
 	unsigned OrderedList<key_type, data_type, comparison_function>::Remove(const key_type &key, int (*cf)(const key_type&, const data_type&))
 	{

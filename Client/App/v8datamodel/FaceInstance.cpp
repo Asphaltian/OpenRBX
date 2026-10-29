@@ -8,6 +8,7 @@ namespace RBX {
 const char sFaceInstance[] = "FaceInstance";
 
 // FUNCTION: WEBSERVICE 0x101219f0
+// FUNCTION: ROBLOX 0x005dfe80
 FaceInstance::FaceInstance() : face(NORM_Z_NEG)
 {
 }

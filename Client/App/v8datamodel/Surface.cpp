@@ -6,35 +6,41 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10104260
+// FUNCTION: ROBLOX 0x005e0290
 Surface::Surface(PartInstance* partInstance, NormalId surfId) : partInstance(partInstance), surfId(surfId)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10104280
+// FUNCTION: ROBLOX 0x005e02b0
 SurfaceType Surface::getSurfaceType() const
 {
 	return partInstance->getPrimitive()->getSurfaceType(surfId);
 }
 
 // FUNCTION: WEBSERVICE 0x101042a0
+// FUNCTION: ROBLOX 0x005e02d0
 Controller::InputType Surface::getInput() const
 {
 	return partInstance->getPrimitive()->getSurfaceData(surfId).inputType;
 }
 
 // FUNCTION: WEBSERVICE 0x10104300
+// FUNCTION: ROBLOX 0x005e0330
 float Surface::getParamA() const
 {
 	return partInstance->getPrimitive()->getSurfaceData(surfId).paramA;
 }
 
 // FUNCTION: WEBSERVICE 0x10104360
+// FUNCTION: ROBLOX 0x005e0390
 float Surface::getParamB() const
 {
 	return partInstance->getPrimitive()->getSurfaceData(surfId).paramB;
 }
 
 // FUNCTION: WEBSERVICE 0x101043c0
+// FUNCTION: ROBLOX 0x005e03f0
 bool Surface::isControllable() const
 {
 	Controller::InputType input = getInput();
@@ -43,6 +49,7 @@ bool Surface::isControllable() const
 }
 
 // FUNCTION: WEBSERVICE 0x101043e0
+// FUNCTION: ROBLOX 0x005e0410
 void Surface::setSurfaceType(SurfaceType type)
 {
 	if (type != getSurfaceType()) {
@@ -53,6 +60,7 @@ void Surface::setSurfaceType(SurfaceType type)
 }
 
 // FUNCTION: WEBSERVICE 0x10104430
+// FUNCTION: ROBLOX 0x005e0460
 void Surface::setSurfaceInput(Controller::InputType value)
 {
 	SurfaceData current = partInstance->getPrimitive()->getSurfaceData(surfId);
@@ -66,6 +74,7 @@ void Surface::setSurfaceInput(Controller::InputType value)
 }
 
 // FUNCTION: WEBSERVICE 0x101044f0
+// FUNCTION: ROBLOX 0x005e0520
 void Surface::setParamA(float value)
 {
 	SurfaceData current = partInstance->getPrimitive()->getSurfaceData(surfId);
@@ -79,6 +88,7 @@ void Surface::setParamA(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x101045c0
+// FUNCTION: ROBLOX 0x005e05f0
 void Surface::setParamB(float value)
 {
 	SurfaceData current = partInstance->getPrimitive()->getSurfaceData(surfId);
@@ -92,6 +102,7 @@ void Surface::setParamB(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x10104690
+// FUNCTION: ROBLOX 0x005e07d0
 void Surface::readValue(const XmlElement* element, IReferenceBinder& binder)
 {
 	static const Name& desc_LegacyType = Name::declare("Type", -1);

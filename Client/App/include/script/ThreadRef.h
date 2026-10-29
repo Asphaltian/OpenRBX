@@ -13,6 +13,7 @@ namespace RBX {
 namespace Lua {
 
 // VTABLE: WEBSERVICE 0x1022f964
+// VTABLE: ROBLOX 0x00801510
 // SIZE 0x20
 class ThreadRef
 {
@@ -80,12 +81,15 @@ DECOMP_SIZE_ASSERT(ThreadRef::Node, 0xc)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021b770
+// SYNTHETIC: ROBLOX 0x007e9940
 // `dynamic initializer for 'RBX::Lua::ThreadRef::syncSingleton''
 // SYNTHETIC: WEBSERVICE 0x10223640
+// SYNTHETIC: ROBLOX 0x007f2680
 // `dynamic atexit destructor for 'RBX::Lua::ThreadRef::syncSingleton''
 // clang-format on
 
 // VTABLE: WEBSERVICE 0x10237ddc
+// VTABLE: ROBLOX 0x00801518
 // SIZE 0x24
 class FunctionRef : public ThreadRef
 {

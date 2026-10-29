@@ -13,15 +13,19 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1005a5b0
+	// TEMPLATE: ROBLOX 0x00565380
 	// RBX::ComputeProp<RBX::Extents,RBX::ModelInstance>::ComputeProp<RBX::Extents,RBX::ModelInstance>
 	// clang-format on
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10059d30
+	// TEMPLATE: ROBLOX 0x00564c20
 	// RBX::ComputeProp<RBX::Extents,RBX::ModelInstance>::getValue
 	// TEMPLATE: WEBSERVICE 0x10099560
+	// TEMPLATE: ROBLOX 0x005ae7c0
 	// RBX::ComputeProp<G3D::ReferenceCountedPointer<RBX::Controller>,RBX::PVInstance>::getValue
 	// FUNCTION: WEBSERVICE 0x1009b290
+	// FUNCTION: ROBLOX 0x005adef0
 	// RBX::ComputeProp<RBX::Part,RBX::PartInstance>::getValue
 	// clang-format on
 	T getValue() const

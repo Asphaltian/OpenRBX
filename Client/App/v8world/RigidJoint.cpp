@@ -7,6 +7,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011ebc0
+// FUNCTION: ROBLOX 0x00647140
 bool RigidJoint::isAligned()
 {
 	Primitive* prim0 = getPrimitive(0);
@@ -19,6 +20,7 @@ bool RigidJoint::isAligned()
 }
 
 // FUNCTION: WEBSERVICE 0x1011ec20
+// FUNCTION: ROBLOX 0x006471a0
 CoordinateFrame RigidJoint::align(Primitive* pMove, Primitive* pStay)
 {
 	CoordinateFrame& coord0 = pMove == getPrimitive(0) ? jointCoord0 : jointCoord1;
@@ -30,6 +32,7 @@ CoordinateFrame RigidJoint::align(Primitive* pMove, Primitive* pStay)
 }
 
 // FUNCTION: WEBSERVICE 0x1011ec80
+// FUNCTION: ROBLOX 0x00647200
 CoordinateFrame RigidJoint::getChildInParent(Primitive* parent, Primitive* child)
 {
 	CoordinateFrame& parentCoord = parent == getPrimitive(0) ? jointCoord0 : jointCoord1;
@@ -39,6 +42,7 @@ CoordinateFrame RigidJoint::getChildInParent(Primitive* parent, Primitive* child
 }
 
 // FUNCTION: WEBSERVICE 0x1011ecd0
+// FUNCTION: ROBLOX 0x00647250
 void RigidJoint::faceIdToCoords(
 	Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1, CoordinateFrame& c0, CoordinateFrame& c1
 )

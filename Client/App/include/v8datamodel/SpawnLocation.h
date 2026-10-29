@@ -51,6 +51,7 @@ public:
 	void setTeamColor(BrickColor value);
 
 	// SYNTHETIC: WEBSERVICE 0x100ff230
+	// SYNTHETIC: ROBLOX 0x005e5c80
 	// RBX::SpawnLocation::~SpawnLocation
 
 	// SYNTHETIC: WEBSERVICE 0x100ff280
@@ -78,18 +79,24 @@ DECOMP_SIZE_ASSERT(SpawnerService, 0x104)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x1021dbb0
+// FUNCTION: ROBLOX 0x007ebf40
 // `dynamic initializer for 'RBX::SpawnLocation::prop_SpawnForcefieldDuration''
 // FUNCTION: WEBSERVICE 0x1021dbe0
+// FUNCTION: ROBLOX 0x007ebf70
 // `dynamic initializer for 'RBX::SpawnLocation::prop_Neutral''
 // FUNCTION: WEBSERVICE 0x1021dc10
+// FUNCTION: ROBLOX 0x007ebfa0
 // `dynamic initializer for 'RBX::SpawnLocation::prop_AllowTeamChangeOnTouch''
 // FUNCTION: WEBSERVICE 0x1021dc40
 // RBX::`dynamic initializer for 'prop_TeamColor''
 // SYNTHETIC: WEBSERVICE 0x10224c40
+// SYNTHETIC: ROBLOX 0x007f4000
 // `dynamic atexit destructor for 'RBX::SpawnLocation::prop_AllowTeamChangeOnTouch''
 // SYNTHETIC: WEBSERVICE 0x10224c60
+// SYNTHETIC: ROBLOX 0x007f4020
 // `dynamic atexit destructor for 'RBX::SpawnLocation::prop_Neutral''
 // SYNTHETIC: WEBSERVICE 0x10224c80
+// SYNTHETIC: ROBLOX 0x007f4040
 // `dynamic atexit destructor for 'RBX::SpawnLocation::prop_SpawnForcefieldDuration''
 // SYNTHETIC: WEBSERVICE 0x10224ca0
 // RBX::`dynamic atexit destructor for 'prop_TeamColor''

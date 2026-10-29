@@ -33,6 +33,7 @@ public:
 	void copyDataFrom(const Guid& other) { assign(other.data); }
 
 	// FUNCTION: WEBSERVICE 0x1019bbd0
+	// FUNCTION: ROBLOX 0x004c24e0
 	std::string readableString(int scopeLength) const { return data.readableString(4); }
 
 	static int compare(const Guid* a, const Guid* b);
@@ -67,6 +68,7 @@ class __declspec(novtable) GuidItem
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004b3f0
+	// TEMPLATE: ROBLOX 0x004b3010
 	// RBX::GuidItem<RBX::Instance>::initStaticData
 	// clang-format on
 	static void initStaticData() { staticData = new StaticData(); }
@@ -102,6 +104,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10194230
+	// TEMPLATE: ROBLOX 0x004b5130
 	// RBX::GuidItem<RBX::Instance>::lookupByGuid
 	// clang-format on
 	static bool lookupByGuid(const Guid::Data& data, T*& result)
@@ -134,6 +137,7 @@ protected:
 private:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004cbc0
+	// TEMPLATE: ROBLOX 0x004c99c0
 	// RBX::GuidItem<RBX::Instance>::unregisterGuid
 	// clang-format on
 	void unregisterGuid() const
@@ -150,6 +154,7 @@ private:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1009de40
+	// TEMPLATE: ROBLOX 0x004b5260
 	// RBX::GuidItem<RBX::Instance>::registerGuid
 	// clang-format on
 	void registerGuid() const
@@ -166,6 +171,7 @@ private:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x101a3820
+	// TEMPLATE: ROBLOX 0x004cbc50
 	// RBX::GuidItem<RBX::Instance>::assignGuid
 	// clang-format on
 };

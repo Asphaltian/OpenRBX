@@ -7,6 +7,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100dd9a0
+// FUNCTION: ROBLOX 0x005f55d0
 void JointsService::onDescendentAdded(Instance* instance)
 {
 	Instance::onDescendentAdded(instance);
@@ -27,6 +28,7 @@ void JointsService::onEvent(const World* source, AutoDestroy event)
 }
 
 // FUNCTION: WEBSERVICE 0x100dda00
+// FUNCTION: ROBLOX 0x005f5630
 void JointsService::onDescendentRemoving(const boost::shared_ptr<Instance>& instance)
 {
 	IRenderable* renderable = dynamic_cast<IRenderable*>(instance.get());
@@ -38,6 +40,7 @@ void JointsService::onDescendentRemoving(const boost::shared_ptr<Instance>& inst
 }
 
 // FUNCTION: WEBSERVICE 0x100ddd40
+// FUNCTION: ROBLOX 0x005f5970
 void JointsService::onEvent(const World* source, AutoJoin event)
 {
 	boost::shared_ptr<JointInstance> ji;
@@ -67,6 +70,7 @@ void JointsService::onEvent(const World* source, AutoJoin event)
 }
 
 // FUNCTION: WEBSERVICE 0x100de040
+// FUNCTION: ROBLOX 0x005f5b90
 void JointsService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<World, AutoJoin>(world, this);

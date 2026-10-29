@@ -37,6 +37,7 @@ class NetworkIDManager;
 /// See the individual functions for what the class can do.
 /// \brief The main interface for network communications
 // VTABLE: WEBSERVICE 0x10251cc4
+// VTABLE: ROBLOX 0x00814bcc
 // class RakPeerInterface
 class RAK_DLL_EXPORT RakPeerInterface
 {

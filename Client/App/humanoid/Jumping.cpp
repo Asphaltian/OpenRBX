@@ -18,6 +18,7 @@ const float Jumping::kJumpP = 5000.0f;
 const float Jumping::jumpVelocityGrid = 50.0f;
 
 // FUNCTION: WEBSERVICE 0x10122be0
+// FUNCTION: ROBLOX 0x00663d60
 Humanoid::State* Jumping::onStep(const float stepDt, Controller& controller)
 {
 	if (done) {
@@ -38,6 +39,7 @@ Humanoid::State* Jumping::onStep(const float stepDt, Controller& controller)
 }
 
 // FUNCTION: WEBSERVICE 0x10122cd0
+// FUNCTION: ROBLOX 0x00663e50
 void Jumping::onComputeForce(const float dt)
 {
 	Flying::onComputeForce(dt);
@@ -73,6 +75,7 @@ void Jumping::onComputeForce(const float dt)
 }
 
 // FUNCTION: WEBSERVICE 0x10122ec0
+// FUNCTION: ROBLOX 0x00664040
 Jumping::Jumping(Humanoid* humanoid) : Named<Flying, sJumping>(humanoid), done(false), timeout(0.5f)
 {
 	Humanoid::event_Jumping.fire(humanoid, true);

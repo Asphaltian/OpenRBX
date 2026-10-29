@@ -51,6 +51,7 @@ static const RakNetTimeNS MAX_TIME_TO_SAMPLE=250000; // How many ns to sample th
 #endif
 
 // FUNCTION: WEBSERVICE 0x101bcbd0
+// FUNCTION: ROBLOX 0x004e2aa0
 int SplitPacketChannelComp( SplitPacketIdType const &key, SplitPacketChannel* const &data )
 {
 	if (key < data->splitPacketList[0]->splitPacketId)
@@ -61,30 +62,35 @@ int SplitPacketChannelComp( SplitPacketIdType const &key, SplitPacketChannel* co
 }
 
 // FUNCTION: WEBSERVICE 0x101bc140
+// FUNCTION: ROBLOX 0x004e1ef0
 RakNetTimeNS ReliabilityLayer::GetLastTimeBetweenPacketsIncrease(void) const
 {
 	return lastTimeBetweenPacketsIncrease;
 }
 
 // FUNCTION: WEBSERVICE 0x101bc130
+// FUNCTION: ROBLOX 0x004e1ee0
 RakNetTimeNS ReliabilityLayer::GetLastTimeBetweenPacketsDecrease(void) const
 {
 	return lastTimeBetweenPacketsDecrease;
 }
 
 // FUNCTION: WEBSERVICE 0x101bc150
+// FUNCTION: ROBLOX 0x004e1f00
 RakNetTimeNS ReliabilityLayer::GetAckPing(void) const
 {
 	return ackPing;
 }
 
 // FUNCTION: WEBSERVICE 0x101bc0d0
+// FUNCTION: ROBLOX 0x004e1e80
 bool ReliabilityLayer::AckTimeout( RakNetTimeNS curTime )
 {
 	return curTime > lastAckTime && lastAckTime && curTime - lastAckTime > (RakNetTimeNS) timeoutTime * 1000;
 }
 
 // FUNCTION: WEBSERVICE 0x101bd9f0
+// FUNCTION: ROBLOX 0x004e39e0
 bool ReliabilityLayer::IsOutgoingDataWaiting(void)
 {
 	unsigned i;
@@ -98,6 +104,7 @@ bool ReliabilityLayer::IsOutgoingDataWaiting(void)
 }
 
 // FUNCTION: WEBSERVICE 0x101bbde0
+// FUNCTION: ROBLOX 0x004e1ba0
 int SplitPacketIndexComp( SplitPacketIndexType const &key, InternalPacket* const &data )
 {
 	if (key < data->splitPacketIndex)
@@ -113,6 +120,7 @@ int SplitPacketIndexComp( SplitPacketIndexType const &key, InternalPacket* const
 //-------------------------------------------------------------------------------------------------------
 // Add 21 to the default MTU so if we encrypt it can hold potentially 21 more bytes of extra data + padding.
 // FUNCTION: WEBSERVICE 0x101bfaa0
+// FUNCTION: ROBLOX 0x004e5a90
 ReliabilityLayer::ReliabilityLayer() : updateBitStream( DEFAULT_MTU_SIZE + 21 )   // preallocate the update bitstream so we can avoid a lot of reallocs at runtime
 {
 	freeThreadedMemoryOnNextUpdate = false;
@@ -134,6 +142,7 @@ ReliabilityLayer::ReliabilityLayer() : updateBitStream( DEFAULT_MTU_SIZE + 21 ) 
 // Destructor
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101c1030
+// FUNCTION: ROBLOX 0x004e7020
 ReliabilityLayer::~ReliabilityLayer()
 {
 	FreeMemory( true ); // Free all memory immediately
@@ -143,6 +152,7 @@ ReliabilityLayer::~ReliabilityLayer()
 // Resets the layer for reuse
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101c1170
+// FUNCTION: ROBLOX 0x004e7160
 void ReliabilityLayer::Reset( bool resetVariables )
 {
 	FreeMemory( true ); // true because making a memory reset pending in the update cycle causes resets after reconnects.  Instead, just call Reset from a single thread
@@ -154,6 +164,7 @@ void ReliabilityLayer::Reset( bool resetVariables )
 // Sets up encryption
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bbe10
+// FUNCTION: ROBLOX 0x004e1bd0
 void ReliabilityLayer::SetEncryptionKey( const unsigned char* key )
 {
 	if ( key )
@@ -166,6 +177,7 @@ void ReliabilityLayer::SetEncryptionKey( const unsigned char* key )
 // Set the time, in MS, to use before considering ourselves disconnected after not being able to deliver a reliable packet
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bbe30
+// FUNCTION: ROBLOX 0x004e1bf0
 void ReliabilityLayer::SetTimeoutTime( RakNetTime time )
 {
 	timeoutTime=time;
@@ -175,6 +187,7 @@ void ReliabilityLayer::SetTimeoutTime( RakNetTime time )
 // Returns the value passed to SetTimeoutTime. or the default if it was never called
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bbe40
+// FUNCTION: ROBLOX 0x004e1c00
 RakNetTime ReliabilityLayer::GetTimeoutTime(void)
 {
 	return timeoutTime;
@@ -186,6 +199,7 @@ RakNetTime ReliabilityLayer::GetTimeoutTime(void)
 static const RakNetTimeNS STARTING_TIME_BETWEEN_PACKETS=100000;
 
 // FUNCTION: WEBSERVICE 0x101bbe50
+// FUNCTION: ROBLOX 0x004e1c10
 void ReliabilityLayer::InitializeVariables( void )
 {
 	memset( waitingForOrderedPacketReadIndex, 0, NUMBER_OF_ORDERED_STREAMS * sizeof(OrderingIndexType));
@@ -237,6 +251,7 @@ void ReliabilityLayer::FreeThreadedMemory( void )
 }
 
 // FUNCTION: WEBSERVICE 0x101bfc50
+// FUNCTION: ROBLOX 0x004e5c40
 void ReliabilityLayer::FreeThreadSafeMemory( void )
 {
 	unsigned i,j;
@@ -332,6 +347,7 @@ void ReliabilityLayer::FreeThreadSafeMemory( void )
 #pragma warning( disable : 4100 ) // warning C4100 : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x101c0140
+// FUNCTION: ROBLOX 0x004e6130
 bool ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer( const char *buffer, int length, SystemAddress systemAddress, DataStructures::List<PluginInterface*> &messageHandlerList, int MTUSize )
 {
 #ifdef _DEBUG
@@ -822,6 +838,7 @@ bool ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer( const char *buffe
 // This gets an end-user packet already parsed out. Returns number of BITS put into the buffer
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bd970
+// FUNCTION: ROBLOX 0x004e3960
 int ReliabilityLayer::Receive( unsigned char **data )
 {
 	// Wait until the clear occurs
@@ -859,6 +876,7 @@ int ReliabilityLayer::Receive( unsigned char **data )
 // ordering channel is from 0 to 255 and specifies what stream to use
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101be5a0
+// FUNCTION: ROBLOX 0x004e4590
 bool ReliabilityLayer::Send( char *data, int numberOfBitsToSend, PacketPriority priority, PacketReliability reliability, unsigned char orderingChannel, bool makeDataCopy, int MTUSize, RakNetTimeNS currentTime )
 {
 #ifdef _DEBUG
@@ -987,6 +1005,7 @@ bool ReliabilityLayer::Send( char *data, int numberOfBitsToSend, PacketPriority 
 // Run this once per game cycle.  Handles internal lists and actually does the send
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101c0b10
+// FUNCTION: ROBLOX 0x004e6b00
 void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSize, RakNetTimeNS time, unsigned bitsPerSecondLimit, DataStructures::List<PluginInterface*> &messageHandlerList )
 {
 	// This line is necessary because the timer isn't accurate
@@ -1141,6 +1160,7 @@ DO_LAGGED_SENDS:
 // Writes a bitstream to the socket
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bbfb0
+// FUNCTION: ROBLOX 0x004e1d70
 void ReliabilityLayer::SendBitStream( SOCKET s, SystemAddress systemAddress, RakNet::BitStream *bitStream )
 {
 	// SHOW - showing reliable flow
@@ -1182,6 +1202,7 @@ void ReliabilityLayer::SendBitStream( SOCKET s, SystemAddress systemAddress, Rak
 // Generates a datagram (coalesced packets)
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bee70
+// FUNCTION: ROBLOX 0x004e4e60
 bool ReliabilityLayer::GenerateDatagram( RakNet::BitStream *output, int MTUSize, bool *reliableDataSent, RakNetTimeNS time, SystemAddress systemAddress, DataStructures::List<PluginInterface*> &messageHandlerList  )
 {
 	InternalPacket * internalPacket;
@@ -1394,6 +1415,7 @@ END_OF_GENERATE_FRAME:
 }
 
 // FUNCTION: WEBSERVICE 0x101bda40
+// FUNCTION: ROBLOX 0x004e3a30
 bool ReliabilityLayer::AreAcksWaiting(void)
 {
 	return acknowlegements.Size() > 0;
@@ -1401,6 +1423,7 @@ bool ReliabilityLayer::AreAcksWaiting(void)
 
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bc050
+// FUNCTION: ROBLOX 0x004e1e10
 void ReliabilityLayer::ApplyNetworkSimulator( double _maxSendBPS, RakNetTime _minExtraPing, RakNetTime _extraPingVariance )
 {
 #ifndef _RELEASE
@@ -1411,12 +1434,14 @@ void ReliabilityLayer::ApplyNetworkSimulator( double _maxSendBPS, RakNetTime _mi
 }
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bc080
+// FUNCTION: ROBLOX 0x0079ad50
 void ReliabilityLayer::SetSplitMessageProgressInterval(int interval)
 {
 	splitMessageProgressInterval=interval;
 }
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bc090
+// FUNCTION: ROBLOX 0x004e1e40
 void ReliabilityLayer::SetUnreliableTimeout(RakNetTime timeoutMS)
 {
 	unreliableTimeout=(RakNetTimeNS)timeoutMS*(RakNetTimeNS)1000;
@@ -1543,6 +1568,7 @@ int ReliabilityLayer::GetBitStreamHeaderLength( const InternalPacket *const inte
 // Parse an internalPacket and create a bitstream to represent this data
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bcc00
+// FUNCTION: ROBLOX 0x004e2ad0
 int ReliabilityLayer::WriteToBitStreamFromInternalPacket( RakNet::BitStream *bitStream, const InternalPacket *const internalPacket, RakNetTimeNS curTime )
 {
 #ifdef _DEBUG
@@ -1617,6 +1643,7 @@ int ReliabilityLayer::WriteToBitStreamFromInternalPacket( RakNet::BitStream *bit
 // Parse a bitstream and create an internal packet to represent this data
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bda50
+// FUNCTION: ROBLOX 0x004e3a40
 InternalPacket* ReliabilityLayer::CreateInternalPacketFromBitStream( RakNet::BitStream *bitStream, RakNetTimeNS time )
 {
 	bool bitStreamSucceeded;
@@ -1946,6 +1973,7 @@ bool ReliabilityLayer::IsOlderOrderedPacket( OrderingIndexType newPacketOrdering
 // Optimized version
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bdbf0
+// FUNCTION: ROBLOX 0x004e3be0
 void ReliabilityLayer::SplitPacket( InternalPacket *internalPacket, int MTUSize )
 {
 	// Doing all sizes in bytes in this function so I don't write partial bytes with split packets
@@ -2067,6 +2095,7 @@ void ReliabilityLayer::SplitPacket( InternalPacket *internalPacket, int MTUSize 
 // Insert a packet into the split packet list
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bf4c0
+// FUNCTION: ROBLOX 0x004e54b0
 void ReliabilityLayer::InsertIntoSplitPacketList( InternalPacket * internalPacket, RakNetTimeNS time )
 {
 	bool objectExists;
@@ -2119,6 +2148,7 @@ void ReliabilityLayer::InsertIntoSplitPacketList( InternalPacket * internalPacke
 // Optimized version
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bf6a0
+// FUNCTION: ROBLOX 0x004e5690
 InternalPacket * ReliabilityLayer::BuildPacketFromSplitPacketList( SplitPacketIdType splitPacketId, RakNetTimeNS time )
 {
 	unsigned i, j;
@@ -2164,6 +2194,7 @@ InternalPacket * ReliabilityLayer::BuildPacketFromSplitPacketList( SplitPacketId
 
 // Delete any unreliable split packets that have long since expired
 // FUNCTION: WEBSERVICE 0x101bf870
+// FUNCTION: ROBLOX 0x004e5860
 void ReliabilityLayer::DeleteOldUnreliableSplitPackets( RakNetTimeNS time )
 {
 	unsigned i,j;
@@ -2234,6 +2265,7 @@ DataStructures::LinkedList<InternalPacket*> *ReliabilityLayer::GetOrderingListAt
 // Add the internal packet to the ordering list in order based on order index
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101be740
+// FUNCTION: ROBLOX 0x004e4730
 void ReliabilityLayer::AddToOrderingList( InternalPacket * internalPacket )
 {
 #ifdef _DEBUG
@@ -2302,6 +2334,7 @@ void ReliabilityLayer::InsertPacketIntoResendList( InternalPacket *internalPacke
 // If Read returns -1 and this returns true then a modified packet was detected
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bc0b0
+// FUNCTION: ROBLOX 0x004e1e60
 bool ReliabilityLayer::IsCheater( void ) const
 {
 	return cheater;
@@ -2311,6 +2344,7 @@ bool ReliabilityLayer::IsCheater( void ) const
 //  Were you ever unable to deliver a packet despite retries?
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101bc0c0
+// FUNCTION: ROBLOX 0x004e1e70
 bool ReliabilityLayer::IsDeadConnection( void ) const
 {
 	return deadConnection;

@@ -30,6 +30,7 @@ class RakPeerInterface;
 /// This will write all incoming and outgoing messages to the console window, or to a file if you override it and give it this functionality.
 /// \ingroup PACKETLOGGER_GROUP
 // VTABLE: WEBSERVICE 0x1025102c
+// VTABLE: ROBLOX 0x00813f3c
 // class PacketLogger
 class RAK_DLL_EXPORT PacketLogger : public PluginInterface
 {

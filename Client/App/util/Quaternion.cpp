@@ -5,6 +5,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10129fd0
+// FUNCTION: ROBLOX 0x005ef7b0
 Quaternion& Quaternion::operator=(const Quaternion& other)
 {
 	w = other.w;
@@ -15,6 +16,7 @@ Quaternion& Quaternion::operator=(const Quaternion& other)
 }
 
 // FUNCTION: WEBSERVICE 0x10129ff0
+// FUNCTION: ROBLOX 0x005ef7d0
 Quaternion::Quaternion(const G3D::Matrix3& rot)
 {
 	float trace = rot[0][0] + rot[1][1] + rot[2][2];
@@ -54,6 +56,7 @@ Quaternion::Quaternion(const G3D::Matrix3& rot)
 }
 
 // FUNCTION: WEBSERVICE 0x1012a150
+// FUNCTION: ROBLOX 0x005ef930
 void Quaternion::toRotationMatrix(G3D::Matrix3& rot) const
 {
 	float tx = x * 2.0f;

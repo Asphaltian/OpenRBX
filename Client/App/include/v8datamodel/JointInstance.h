@@ -172,10 +172,13 @@ DECOMP_SIZE_ASSERT(Weld, 0x11c)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100d8a40
+// TEMPLATE: ROBLOX 0x005f2900
 // RBX::DescribedNonCreatable<RBX::JointInstance,RBX::Instance,&RBX::sJointInstance>::DescribedNonCreatable<RBX::JointInstance,RBX::Instance,&RBX::sJointInstance>
 // TEMPLATE: WEBSERVICE 0x100d8c40
+// TEMPLATE: ROBLOX 0x005f2b00
 // RBX::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint>::NonFactoryProduct<RBX::JointInstance,&RBX::sAutoJoint><RBX::Joint *>
 // TEMPLATE: WEBSERVICE 0x100d8cf0
+// TEMPLATE: ROBLOX 0x005f2b90
 // RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint><RBX::Joint *>
 // FUNCTION: WEBSERVICE 0x1021c470
 // `dynamic initializer for 'prop_Part0''

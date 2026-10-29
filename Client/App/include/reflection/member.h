@@ -20,6 +20,7 @@ class MemberDescriptorContainer
 public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10047440
+	// TEMPLATE: ROBLOX 0x005a9410
 	// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::compare
 	// clang-format on
 	static bool compare(const T* a, const T* b)
@@ -81,6 +82,7 @@ public:
 
 		// clang-format off
 		// TEMPLATE: WEBSERVICE 0x10047dd0
+		// TEMPLATE: ROBLOX 0x005fc620
 		// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::Iterator::operator*
 		// clang-format on
 		MemberType operator*() const { return MemberType(**iter, instance); }
@@ -148,6 +150,7 @@ protected:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100495f0
+// TEMPLATE: ROBLOX 0x005fc920
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::findDescriptor
 // clang-format on
 template <class T>
@@ -238,6 +241,7 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x10071340
+	// FUNCTION: ROBLOX 0x005a8be0
 	MemberDescriptor(const ClassDescriptor& owner, const char* name, const char* category)
 		: Descriptor(name), category(Name::declare(category, -1)), owner(owner)
 	{

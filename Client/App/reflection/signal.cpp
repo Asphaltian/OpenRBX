@@ -12,11 +12,13 @@ GenericSlotWrapper::~GenericSlotWrapper()
 }
 
 // FUNCTION: WEBSERVICE 0x10095790
+// FUNCTION: ROBLOX 0x005a8c50
 SignalInstance::~SignalInstance()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10095a50
+// FUNCTION: ROBLOX 0x005a8e40
 SignalInstance* SignalDescriptor::findSignalInstance(const SignalSource* source) const
 {
 	if (source == NULL) {
@@ -37,6 +39,7 @@ SignalInstance* SignalDescriptor::findSignalInstance(const SignalSource* source)
 }
 
 // FUNCTION: WEBSERVICE 0x10095b90
+// FUNCTION: ROBLOX 0x005a8fe0
 SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char* name)
 	: MemberDescriptor(classDescriptor, name, "Signals"), signalCreatedHook(NULL)
 {
@@ -44,6 +47,7 @@ SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char*
 }
 
 // FUNCTION: WEBSERVICE 0x10095c50
+// FUNCTION: ROBLOX 0x005a90a0
 boost::shared_ptr<SignalInstance> SignalDescriptor::getSignalInstance(SignalSource& source) const
 {
 	if (source.signals.get() == NULL) {
@@ -69,17 +73,20 @@ boost::shared_ptr<SignalInstance> SignalDescriptor::getSignalInstance(SignalSour
 }
 
 // FUNCTION: WEBSERVICE 0x10095e50
+// FUNCTION: ROBLOX 0x005a92a0
 boost::shared_ptr<SignalInstance> Signal::getSignalInstance() const
 {
 	return descriptor->getSignalInstance(*instance);
 }
 
 // FUNCTION: WEBSERVICE 0x10095e80
+// FUNCTION: ROBLOX 0x005a92d0
 SignalSource::~SignalSource()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10095ed0
+// FUNCTION: ROBLOX 0x005a9320
 void SignalSource::disconnect_all_slots()
 {
 	signals.reset();

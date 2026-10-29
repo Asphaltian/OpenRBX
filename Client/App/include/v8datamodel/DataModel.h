@@ -68,6 +68,7 @@ public:
 		Lock(const DataModel* dataModel);
 
 		// FUNCTION: WEBSERVICE 0x1000cd40
+		// FUNCTION: ROBLOX 0x0040e150
 		Lock(boost::shared_ptr<const DataModel> dataModel) : lock(NULL) { doLock(dataModel.get()); }
 
 		~Lock();
@@ -118,6 +119,7 @@ public:
 	void renderPass3dAdorn(Adorn*);
 
 	// FUNCTION: WEBSERVICE 0x10071420
+	// FUNCTION: ROBLOX 0x0058e8d0
 	void setUiMessage(std::string message) { uiMessage = message; }
 
 	// FUNCTION: WEBSERVICE 0x10071470
@@ -159,42 +161,56 @@ private:
 // TEMPLATE: WEBSERVICE 0x100719f0
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::declareSignature
 // TEMPLATE: WEBSERVICE 0x10071a50
+// TEMPLATE: ROBLOX 0x0058ed80
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::declareSignature
 // TEMPLATE: WEBSERVICE 0x10072ce0
+// TEMPLATE: ROBLOX 0x0058fca0
 // ?raise@?$Notifier@VServiceProvider@RBX@@VClosing@2@@RBX@@IBEXVClosing@2@PAV?$Listener@VServiceProvider@RBX@@VClosing@2@@2@@Z
 // TEMPLATE: WEBSERVICE 0x100735b0
+// TEMPLATE: ROBLOX 0x00590380
 // ?raise@?$Notifier@VServiceProvider@RBX@@VClosing@2@@RBX@@IBEXVClosing@2@@Z
 // TEMPLATE: WEBSERVICE 0x10078920
+// TEMPLATE: ROBLOX 0x00592110
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::~BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>
 // TEMPLATE: WEBSERVICE 0x10078a10
+// TEMPLATE: ROBLOX 0x00411b10
 // RBX::StateStack<RBX::XmlState>::clearStackAfter
 // SYNTHETIC: WEBSERVICE 0x10079310
+// SYNTHETIC: ROBLOX 0x0046f580
 // TextXmlWriterWithEmbeddedContent::~TextXmlWriterWithEmbeddedContent
 // FUNCTION: WEBSERVICE 0x100798c0
+// FUNCTION: ROBLOX 0x0046fd90
 // TextXmlWriterWithEmbeddedContent::TextXmlWriterWithEmbeddedContent
 // TEMPLATE: WEBSERVICE 0x10079df0
+// TEMPLATE: ROBLOX 0x005932f0
 // RBX::StateStack<RBX::XmlState>::~StateStack<RBX::XmlState>
 // TEMPLATE: WEBSERVICE 0x10079e50
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(RBX::ContentId),1>::BoundFuncDesc<RBX::DataModel,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(RBX::ContentId),1>
 // TEMPLATE: WEBSERVICE 0x10079ef0
+// TEMPLATE: ROBLOX 0x005933f0
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(RBX::ContentId),1>::call<boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > >
 // TEMPLATE: WEBSERVICE 0x10079fb0
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(RBX::ContentId),1>::execute
 // TEMPLATE: WEBSERVICE 0x1007a080
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,void __cdecl(RBX::ContentId),1>::BoundFuncDesc<RBX::DataModel,void __cdecl(RBX::ContentId),1>
 // TEMPLATE: WEBSERVICE 0x1007a120
+// TEMPLATE: ROBLOX 0x00593620
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,void __cdecl(RBX::ContentId),1>::execute
 // TEMPLATE: WEBSERVICE 0x1007a210
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>
 // TEMPLATE: WEBSERVICE 0x1007a2d0
+// TEMPLATE: ROBLOX 0x005937d0
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::call<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 // TEMPLATE: WEBSERVICE 0x1007a390
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::execute
 // TEMPLATE: WEBSERVICE 0x1007a4d0
+// TEMPLATE: ROBLOX 0x005939b0
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>
 // TEMPLATE: WEBSERVICE 0x1007a5a0
+// TEMPLATE: ROBLOX 0x00593a80
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::call<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 // TEMPLATE: WEBSERVICE 0x1007a680
+// TEMPLATE: ROBLOX 0x00593b60
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::execute
 // SYNTHETIC: WEBSERVICE 0x1007a7f0
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::`scalar deleting destructor'
@@ -209,24 +225,29 @@ private:
 // SYNTHETIC: WEBSERVICE 0x1007aef0
 // RBX::IDataState::~IDataState
 // FUNCTION: WEBSERVICE 0x1007af10
+// FUNCTION: ROBLOX 0x005940d0
 // RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel>::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel>
 // FUNCTION: WEBSERVICE 0x1007b720
 // RBX::DataModel::setDirty
 // FUNCTION: WEBSERVICE 0x1007b730
 // RBX::DataModel::isDirty
 // FUNCTION: WEBSERVICE 0x1007b740
+// FUNCTION: ROBLOX 0x00594650
 // RBX::DataModel::onChildChanged
 // FUNCTION: WEBSERVICE 0x1007b770
 // RBX::DataModel::onDescendentAdded
 // FUNCTION: WEBSERVICE 0x1007b7a0
 // RBX::DataModel::onDescendentRemoving
 // FUNCTION: WEBSERVICE 0x1007b8a0
+// FUNCTION: ROBLOX 0x005947b0
 // RBX::DataModel::isStackTooBig
 // FUNCTION: WEBSERVICE 0x1007b8e0
+// FUNCTION: ROBLOX 0x005947f0
 // RBX::DescribedNonCreatable<RBX::DataModel,RBX::ServiceProvider,&RBX::sDataModel>::DescribedNonCreatable<RBX::DataModel,RBX::ServiceProvider,&RBX::sDataModel>
 // SYNTHETIC: WEBSERVICE 0x1007bf10
 // RBX::DataModel::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x1007bf30
+// TEMPLATE: ROBLOX 0x00594d90
 // RBX::Creatable<RBX::Instance>::create<RBX::DataModel>
 // SYNTHETIC: WEBSERVICE 0x102190a0
 // RBX::`dynamic initializer for 'getContentFunctionOld''
@@ -239,6 +260,7 @@ private:
 // SYNTHETIC: WEBSERVICE 0x10219160
 // RBX::`dynamic initializer for 'httpGetFunction''
 // SYNTHETIC: WEBSERVICE 0x102191a0
+// SYNTHETIC: ROBLOX 0x007e91a0
 // RBX::`dynamic initializer for 'httpPostFunction''
 // SYNTHETIC: WEBSERVICE 0x102191e0
 // RBX::`dynamic initializer for 'sanitizeFunction''
@@ -267,6 +289,7 @@ private:
 // SYNTHETIC: WEBSERVICE 0x10222260
 // RBX::`dynamic atexit destructor for 'httpGetFunction''
 // SYNTHETIC: WEBSERVICE 0x10222270
+// SYNTHETIC: ROBLOX 0x007f2550
 // RBX::`dynamic atexit destructor for 'httpPostFunction''
 // SYNTHETIC: WEBSERVICE 0x10222280
 // RBX::`dynamic atexit destructor for 'sanitizeFunction''

@@ -34,6 +34,7 @@ public:
 	const Surface& operator[](NormalId normalId) const;
 
 	// FUNCTION: WEBSERVICE 0x1009ace0
+	// FUNCTION: ROBLOX 0x005ad720
 	Vector6<SurfaceType> surf6() const
 	{
 		Vector6<SurfaceType> answer;
@@ -57,18 +58,24 @@ DECOMP_SIZE_ASSERT(Surfaces, 0x30)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x101018b0
+// TEMPLATE: ROBLOX 0x005deea0
 // RBX::SurfaceDescriptor<1>::readValue
 // TEMPLATE: WEBSERVICE 0x101018e0
+// TEMPLATE: ROBLOX 0x005deef0
 // RBX::SurfaceDescriptor<4>::readValue
 // TEMPLATE: WEBSERVICE 0x10101930
+// TEMPLATE: ROBLOX 0x005def20
 // RBX::SurfaceDescriptor<3>::readValue
 // SYNTHETIC: WEBSERVICE 0x10101960
 // RBX::SurfaceDescriptor<1>::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x10101980
+// TEMPLATE: ROBLOX 0x005def50
 // RBX::SurfaceDescriptor<0>::readValue
 // TEMPLATE: WEBSERVICE 0x101019c0
+// TEMPLATE: ROBLOX 0x005def80
 // RBX::SurfaceDescriptor<5>::readValue
 // TEMPLATE: WEBSERVICE 0x10101a00
+// TEMPLATE: ROBLOX 0x005defe0
 // RBX::SurfaceDescriptor<2>::readValue
 // clang-format on
 
@@ -176,40 +183,58 @@ DECOMP_SIZE_ASSERT(Surfaces, 0x30)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10100f10
+// TEMPLATE: ROBLOX 0x005de330
 // RBX::SurfaceGetSet<1,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
 // TEMPLATE: WEBSERVICE 0x10100f40
+// TEMPLATE: ROBLOX 0x005de360
 // RBX::SurfaceGetSet<1,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
 // TEMPLATE: WEBSERVICE 0x10100f70
+// TEMPLATE: ROBLOX 0x005de390
 // RBX::SurfaceGetSet<1,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
 // TEMPLATE: WEBSERVICE 0x10100fa0
+// TEMPLATE: ROBLOX 0x005de400
 // RBX::SurfaceGetSet<4,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
 // TEMPLATE: WEBSERVICE 0x10100fd0
+// TEMPLATE: ROBLOX 0x005de3c0
 // RBX::SurfaceGetSet<4,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
 // TEMPLATE: WEBSERVICE 0x10101010
+// TEMPLATE: ROBLOX 0x005de430
 // RBX::SurfaceGetSet<4,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
 // TEMPLATE: WEBSERVICE 0x10101040
+// TEMPLATE: ROBLOX 0x005de460
 // RBX::SurfaceGetSet<3,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
 // TEMPLATE: WEBSERVICE 0x10101070
+// TEMPLATE: ROBLOX 0x005de4c0
 // RBX::SurfaceGetSet<3,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
 // TEMPLATE: WEBSERVICE 0x101010b0
+// TEMPLATE: ROBLOX 0x005de490
 // RBX::SurfaceGetSet<3,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
 // TEMPLATE: WEBSERVICE 0x101010e0
+// TEMPLATE: ROBLOX 0x005de500
 // RBX::SurfaceGetSet<0,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
 // TEMPLATE: WEBSERVICE 0x10101110
+// TEMPLATE: ROBLOX 0x005de560
 // RBX::SurfaceGetSet<0,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
 // TEMPLATE: WEBSERVICE 0x10101150
+// TEMPLATE: ROBLOX 0x005de530
 // RBX::SurfaceGetSet<0,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
 // TEMPLATE: WEBSERVICE 0x10101180
+// TEMPLATE: ROBLOX 0x005de5e0
 // RBX::SurfaceGetSet<5,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
 // TEMPLATE: WEBSERVICE 0x101011b0
+// TEMPLATE: ROBLOX 0x005de5a0
 // RBX::SurfaceGetSet<5,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
 // TEMPLATE: WEBSERVICE 0x101011f0
+// TEMPLATE: ROBLOX 0x005de610
 // RBX::SurfaceGetSet<5,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
 // TEMPLATE: WEBSERVICE 0x10101220
+// TEMPLATE: ROBLOX 0x005de680
 // RBX::SurfaceGetSet<2,enum RBX::Controller::InputType,enum RBX::Controller::InputType (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(enum RBX::Controller::InputType)>::setValue
 // TEMPLATE: WEBSERVICE 0x10101250
+// TEMPLATE: ROBLOX 0x005de6b0
 // RBX::SurfaceGetSet<2,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::setValue
 // TEMPLATE: WEBSERVICE 0x10101280
+// TEMPLATE: ROBLOX 0x005de640
 // RBX::SurfaceGetSet<2,float,float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>::getValue
 // TEMPLATE: WEBSERVICE 0x10101490
 // RBX::SurfacePropDescriptor<1,float>::SurfacePropDescriptor<1,float><float (__thiscall RBX::Surface::*)(void)const ,void (__thiscall RBX::Surface::*)(float)>

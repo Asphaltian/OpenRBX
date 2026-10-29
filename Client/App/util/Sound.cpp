@@ -57,6 +57,7 @@ char sSoundService[] = "SoundService";
 char sSoundChannel[] = "Sound";
 
 // GLOBAL: WEBSERVICE 0x102f6f89
+// GLOBAL: ROBLOX 0x0095be61
 bool SoundService::soundDisabled = false;
 
 // FUNCTION: WEBSERVICE 0x1007c9b0
@@ -96,6 +97,7 @@ bool SoundChannel::isPlaying() const
 }
 
 // FUNCTION: WEBSERVICE 0x1007cdb0 FOLDED
+// FUNCTION: ROBLOX 0x005c0ea0 FOLDED
 SoundId SoundChannel::getSoundId() const
 {
 	return soundId;
@@ -114,6 +116,7 @@ bool SoundChannel::getLooped() const
 }
 
 // FUNCTION: WEBSERVICE 0x1007d420
+// FUNCTION: ROBLOX 0x005c1280
 Sound::Sound(FMOD::System* system, SoundId id, bool is3D)
 	: fmod_sound(NULL), system(system), refCount(0), id(id), is3D(is3D)
 {
@@ -195,6 +198,7 @@ static RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel, void(), 0> 
 );
 
 // FUNCTION: WEBSERVICE 0x1007d490
+// FUNCTION: ROBLOX 0x005c12f0
 void checkResult(FMOD_RESULT result)
 {
 	if (result != FMOD_OK) {
@@ -205,6 +209,7 @@ void checkResult(FMOD_RESULT result)
 }
 
 // FUNCTION: WEBSERVICE 0x1007d570
+// FUNCTION: ROBLOX 0x005c13d0
 bool convert(const G3D::Vector3& src, FMOD_VECTOR& dst)
 {
 	G3D::Vector3 filter = src;
@@ -234,6 +239,7 @@ bool convert(const G3D::Vector3& src, FMOD_VECTOR& dst)
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100ff530 FOLDED
+// FUNCTION: ROBLOX 0x005ac0a0 FOLDED
 template <>
 std::string StringConverter<Soundscape::SoundId>::convertToString(const Soundscape::SoundId& value)
 {
@@ -241,6 +247,7 @@ std::string StringConverter<Soundscape::SoundId>::convertToString(const Soundsca
 }
 
 // FUNCTION: WEBSERVICE 0x1007da70 FOLDED
+// FUNCTION: ROBLOX 0x005ac0c0 FOLDED
 template <>
 bool StringConverter<Soundscape::SoundId>::convertToValue(const std::string& text, Soundscape::SoundId& value)
 {
@@ -257,6 +264,7 @@ const Type& Type::singleton<Soundscape::SoundId>()
 }
 
 // FUNCTION: WEBSERVICE 0x1012dd70 FOLDED
+// FUNCTION: ROBLOX 0x006202c0 FOLDED
 template <>
 void TypedPropertyDescriptor<Soundscape::SoundId>::readValue(
 	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
@@ -271,6 +279,7 @@ void TypedPropertyDescriptor<Soundscape::SoundId>::readValue(
 }
 
 // FUNCTION: WEBSERVICE 0x1007e3c0 FOLDED
+// FUNCTION: ROBLOX 0x00620390 FOLDED
 template <>
 void TypedPropertyDescriptor<Soundscape::SoundId>::writeValue(const DescribedBase* instance, XmlElement* element) const
 {
@@ -285,6 +294,7 @@ bool TypedPropertyDescriptor<Soundscape::SoundId>::hasStringValue() const
 }
 
 // FUNCTION: WEBSERVICE 0x1007e440 FOLDED
+// FUNCTION: ROBLOX 0x005a8230 FOLDED
 template <>
 std::string TypedPropertyDescriptor<Soundscape::SoundId>::getStringValue(const DescribedBase* instance) const
 {
@@ -292,6 +302,7 @@ std::string TypedPropertyDescriptor<Soundscape::SoundId>::getStringValue(const D
 }
 
 // FUNCTION: WEBSERVICE 0x1007e4c0 FOLDED
+// FUNCTION: ROBLOX 0x005ac440 FOLDED
 template <>
 bool TypedPropertyDescriptor<Soundscape::SoundId>::setStringValue(
 	DescribedBase* instance, const std::string& text
@@ -313,6 +324,7 @@ namespace RBX {
 namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x1007db00
+// FUNCTION: ROBLOX 0x005c1940
 SoundChannel::~SoundChannel()
 {
 }
@@ -324,6 +336,7 @@ namespace RBX {
 namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x1007e5a0
+// FUNCTION: ROBLOX 0x005c20f0
 void SoundService::getSoundStats(const LoadedSounds& sounds, unsigned int& numSounds, unsigned int& numUnusedSounds)
 {
 	for (LoadedSounds::const_iterator iter = sounds.begin(); iter != sounds.end(); ++iter) {
@@ -344,6 +357,7 @@ void SoundService::getSoundStats(unsigned int& numSounds, unsigned int& numUnuse
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x1007ebe0
+// FUNCTION: ROBLOX 0x005c2550
 void checkResultNoThrow(FMOD_RESULT result)
 {
 	if (result != FMOD_OK) {
@@ -359,6 +373,7 @@ namespace RBX {
 namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x1007ecc0
+// FUNCTION: ROBLOX 0x005c2630
 void SoundService::updateAmbientReverb()
 {
 	if (!system) {
@@ -490,6 +505,7 @@ void SoundService::updateAmbientReverb()
 }
 
 // FUNCTION: WEBSERVICE 0x1007fbf0
+// FUNCTION: ROBLOX 0x005c3560
 void SoundService::update3DSettings()
 {
 	if (system) {
@@ -498,6 +514,7 @@ void SoundService::update3DSettings()
 }
 
 // FUNCTION: WEBSERVICE 0x1007fc30
+// FUNCTION: ROBLOX 0x005c35a0
 void SoundChannel::releaseChannel()
 {
 	if (fmod_channel) {
@@ -520,6 +537,7 @@ void SoundChannel::onServiceProvider(const ServiceProvider* oldProvider, const S
 }
 
 // FUNCTION: WEBSERVICE 0x1007fce0
+// FUNCTION: ROBLOX 0x005c3650
 void SoundChannel::updateLooped()
 {
 	if (fmod_channel) {
@@ -533,6 +551,7 @@ void SoundChannel::updateLooped()
 }
 
 // FUNCTION: WEBSERVICE 0x1007fd70
+// FUNCTION: ROBLOX 0x005c36e0
 void SoundChannel::update3D(FMOD::Channel* channel)
 {
 	if (is3D && part) {
@@ -547,6 +566,7 @@ void SoundChannel::update3D(FMOD::Channel* channel)
 }
 
 // FUNCTION: WEBSERVICE 0x1007fdf0
+// FUNCTION: ROBLOX 0x005c3760
 FMOD::Sound* Sound::get()
 {
 	if (!fmod_sound) {
@@ -570,6 +590,7 @@ FMOD::Sound* Sound::get()
 }
 
 // FUNCTION: WEBSERVICE 0x10080490
+// FUNCTION: ROBLOX 0x005c4010
 void SoundService::openFmod()
 {
 	if (soundDisabled || mySoundDisabled || !GameSettings::singleton().soundEnabled) {
@@ -634,6 +655,7 @@ void SoundService::openFmod()
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10080720
+// FUNCTION: ROBLOX 0x005c42a0
 static void releaseSound(const std::pair<RBX::Soundscape::SoundId, boost::shared_ptr<RBX::Soundscape::Sound> >& p)
 {
 	p.second->release();
@@ -643,6 +665,7 @@ namespace RBX {
 namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x10080750
+// FUNCTION: ROBLOX 0x005c42d0
 void SoundService::gcSounds(LoadedSounds& sounds)
 {
 	LoadedSounds::iterator iter = sounds.begin();
@@ -658,6 +681,7 @@ void SoundService::gcSounds(LoadedSounds& sounds)
 }
 
 // FUNCTION: WEBSERVICE 0x10080830
+// FUNCTION: ROBLOX 0x005c43b0
 void SoundChannel::onEvent(const RunService* source, Heartbeat event)
 {
 	if (!isPaused()) {
@@ -674,12 +698,14 @@ void Sound::release()
 }
 
 // FUNCTION: WEBSERVICE 0x10080870
+// FUNCTION: ROBLOX 0x005c43f0
 Sound::~Sound()
 {
 	release();
 }
 
 // FUNCTION: WEBSERVICE 0x10080d80
+// FUNCTION: ROBLOX 0x005c49c0
 void SoundService::closeFmod()
 {
 	stockSounds.clear();
@@ -699,6 +725,7 @@ void SoundService::closeFmod()
 }
 
 // FUNCTION: WEBSERVICE 0x10081200
+// FUNCTION: ROBLOX 0x005c4e00
 SoundService::~SoundService()
 {
 }
@@ -708,6 +735,7 @@ SoundService::~SoundService()
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x10081670
+// FUNCTION: ROBLOX 0x005c51c0
 template <>
 EnumDesc<Soundscape::ReverbType>::EnumDesc() : EnumDescriptor("ReverbType", typeid(Soundscape::ReverbType))
 {
@@ -742,6 +770,7 @@ EnumDesc<Soundscape::ReverbType>::EnumDesc() : EnumDescriptor("ReverbType", type
 namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x10081930
+// FUNCTION: ROBLOX 0x005c5480
 boost::shared_ptr<Sound> SoundService::loadSound(SoundId id, bool is3D)
 {
 	LoadedSounds& sounds = is3D ? loaded3DSounds : loadedSounds;
@@ -759,6 +788,7 @@ boost::shared_ptr<Sound> SoundService::loadSound(SoundId id, bool is3D)
 } // namespace Soundscape
 
 // FUNCTION: WEBSERVICE 0x10082330
+// FUNCTION: ROBLOX 0x005c5da0
 void registerSound()
 {
 	Soundscape::SoundChannel::classDescriptor();
@@ -769,6 +799,7 @@ void registerSound()
 namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x10082a30
+// FUNCTION: ROBLOX 0x005c64f0
 SoundService::SoundService()
 	: system(NULL), fmod_version(0), dopplerscale(1.0f), distancefactor(10.0f), rolloffscale(1.0f),
 	  ambientReverb(NoReverb), nextGarbageCollectTime(G3D::System::getTick()), mySoundDisabled(false)
@@ -786,6 +817,7 @@ void SoundService::garbageCollectSounds()
 }
 
 // FUNCTION: WEBSERVICE 0x10082bd0
+// FUNCTION: ROBLOX 0x005c6690
 void SoundService::onEvent(const RunService* source, Heartbeat event)
 {
 	if (system) {
@@ -832,6 +864,7 @@ bool SoundChannel::askSetParent(const Instance* parent) const
 }
 
 // FUNCTION: WEBSERVICE 0x10082d90
+// FUNCTION: ROBLOX 0x005c6850
 SoundChannel::SoundChannel()
 	: sound(), fmod_channel(NULL), volume(0.5f), playOnRemove(false), is3D(0), looped(0), soundDisabled(0),
 	  playCount(-1), part(NULL)
@@ -840,6 +873,7 @@ SoundChannel::SoundChannel()
 }
 
 // FUNCTION: WEBSERVICE 0x10082ec0
+// FUNCTION: ROBLOX 0x005c6980
 void SoundChannel::updateListenState()
 {
 	if (part && is3D && fmod_channel) {
@@ -854,6 +888,7 @@ void SoundChannel::updateListenState()
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10082f20
+// FUNCTION: ROBLOX 0x005c69e0
 FMOD_RESULT F_CALLBACK callbackChannelEnd(
 	FMOD_CHANNEL* channel,
 	FMOD_CHANNEL_CALLBACKTYPE type,
@@ -884,6 +919,7 @@ void SoundChannel::onChannelEnd()
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x100832c0
+// FUNCTION: ROBLOX 0x005c6e20
 SoundServiceStatsItem::SoundServiceStatsItem(const RBX::Soundscape::SoundService* service)
 	: service(service), currentalloced(0), maxalloced(0)
 {
@@ -895,6 +931,7 @@ SoundServiceStatsItem::SoundServiceStatsItem(const RBX::Soundscape::SoundService
 }
 
 // FUNCTION: WEBSERVICE 0x10083410
+// FUNCTION: ROBLOX 0x005c6f70
 void SoundServiceStatsItem::update()
 {
 	if (service->enabled()) {
@@ -919,6 +956,7 @@ namespace RBX {
 namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x10083540
+// FUNCTION: ROBLOX 0x005c70a0
 void SoundChannel::playSound(Instance* context)
 {
 	if (soundDisabled) {
@@ -975,6 +1013,7 @@ void SoundChannel::playSound(Instance* context)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10083940
+// FUNCTION: ROBLOX 0x005c7450
 StockSound::StockSound()
 {
 	propArchivable.setValue(this, false);
@@ -984,6 +1023,7 @@ namespace RBX {
 namespace Soundscape {
 
 // FUNCTION: WEBSERVICE 0x10083a00
+// FUNCTION: ROBLOX 0x005c7540
 void SoundService::setAmbientReverb(const ReverbType& value)
 {
 	if (value != ambientReverb) {
@@ -995,6 +1035,7 @@ void SoundService::setAmbientReverb(const ReverbType& value)
 }
 
 // FUNCTION: WEBSERVICE 0x10083a30
+// FUNCTION: ROBLOX 0x005c7570
 void SoundChannel::setSoundId(SoundId value)
 {
 	if (soundId != value) {
@@ -1011,6 +1052,7 @@ void SoundChannel::setSoundId(SoundId value)
 }
 
 // FUNCTION: WEBSERVICE 0x10083b10
+// FUNCTION: ROBLOX 0x005c7650
 void SoundChannel::setVolume(float value)
 {
 	value = G3D::clamp(value, 0.0f, 1.0f);
@@ -1025,6 +1067,7 @@ void SoundChannel::setVolume(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x10083b90
+// FUNCTION: ROBLOX 0x005c76d0
 void SoundChannel::setLooped(bool value)
 {
 	if (looped != value) {
@@ -1036,6 +1079,7 @@ void SoundChannel::setLooped(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x10083bd0
+// FUNCTION: ROBLOX 0x005c7710
 void SoundChannel::play()
 {
 	playSound(this);
@@ -1044,6 +1088,7 @@ void SoundChannel::play()
 }
 
 // FUNCTION: WEBSERVICE 0x10083c20
+// FUNCTION: ROBLOX 0x005c7760
 void SoundChannel::pause()
 {
 	if (fmod_channel) {
@@ -1059,6 +1104,7 @@ void SoundChannel::pause()
 }
 
 // FUNCTION: WEBSERVICE 0x10083c70
+// FUNCTION: ROBLOX 0x005c77b0
 void SoundChannel::stop()
 {
 	if (fmod_channel) {
@@ -1076,6 +1122,7 @@ void SoundChannel::stop()
 }
 
 // FUNCTION: WEBSERVICE 0x10083d60
+// FUNCTION: ROBLOX 0x005c78a0
 void SoundService::loadStockSound(SoundType soundType, std::string file)
 {
 	boost::shared_ptr<StockSound> sound = Creatable<Instance>::create<StockSound>();
@@ -1088,6 +1135,7 @@ void SoundService::loadStockSound(SoundType soundType, std::string file)
 }
 
 // FUNCTION: WEBSERVICE 0x10083eb0
+// FUNCTION: ROBLOX 0x005c7a50
 void SoundChannel::onAncestorChanged(const AncestorChanged& event)
 {
 	const ServiceProvider* oldProvider = ServiceProvider::findServiceProvider(event.oldParent);
@@ -1143,6 +1191,7 @@ void SoundChannel::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10084070
+// FUNCTION: ROBLOX 0x005c7c10
 void SoundChannel::setPlayCount(int value)
 {
 	if (value == -1) {
@@ -1159,6 +1208,7 @@ void SoundChannel::setPlayCount(int value)
 }
 
 // FUNCTION: WEBSERVICE 0x10084170
+// FUNCTION: ROBLOX 0x005c7d10
 void SoundService::loadStockSounds()
 {
 	stockSounds.clear();
@@ -1181,6 +1231,7 @@ void SoundService::loadStockSounds()
 }
 
 // FUNCTION: WEBSERVICE 0x10084350
+// FUNCTION: ROBLOX 0x005c7ef0
 void SoundService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);

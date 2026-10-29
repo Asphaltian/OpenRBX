@@ -14,6 +14,7 @@ const float Flying::kTurnP = 7500.0f;
 const float Flying::kTurnAccelMax = 120000.0f;
 
 // FUNCTION: WEBSERVICE 0x1012a200
+// FUNCTION: ROBLOX 0x00669c10
 Humanoid::State* Flying::onStep(const float stepDt, Controller& controller)
 {
 	State* answer = Balancing::onStep(stepDt, controller);
@@ -32,6 +33,7 @@ Humanoid::State* Flying::onStep(const float stepDt, Controller& controller)
 }
 
 // FUNCTION: WEBSERVICE 0x1012a2e0
+// FUNCTION: ROBLOX 0x00669cf0
 void Flying::onComputeForce(const float dt)
 {
 	Balancing::onComputeForce(dt);
@@ -50,6 +52,7 @@ void Flying::onComputeForce(const float dt)
 }
 
 // FUNCTION: WEBSERVICE 0x1012a4d0
+// FUNCTION: ROBLOX 0x00669ee0
 Flying::Flying(Humanoid* humanoid) : Named<Balancing, sFlying>(humanoid, 300.0f, 50.0f), desiredYRotationalVelocity(0)
 {
 }

@@ -30,6 +30,7 @@ public:
 	const unsigned int elements; // 0x20
 
 	// FUNCTION: WEBSERVICE 0x10187030
+	// FUNCTION: ROBLOX 0x00491510
 	CylinderBuilder(
 		G3D::ReferenceCountedPointer<RBX::Render::Mesh::Level>& level,
 		G3D::Vector3 size,
@@ -52,6 +53,7 @@ protected:
 DECOMP_SIZE_ASSERT(CylinderBuilder, 0x24)
 
 // FUNCTION: WEBSERVICE 0x101870a0
+// FUNCTION: ROBLOX 0x00528830
 static void EndcapTransform(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,
@@ -87,6 +89,7 @@ static G3D::Vector2 unitVector(const G3D::Vector2& v)
 }
 
 // FUNCTION: WEBSERVICE 0x10187190
+// FUNCTION: ROBLOX 0x00491580
 static void CylinderTransform(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,
@@ -141,6 +144,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x10187350
+// FUNCTION: ROBLOX 0x00491740
 CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
 	levels.append(new Render::Mesh::Level(G3D::RenderDevice::QUADS));
@@ -152,6 +156,7 @@ CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, RenderSurfaceTy
 }
 
 // FUNCTION: WEBSERVICE 0x101874a0
+// FUNCTION: ROBLOX 0x00491890
 CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);
@@ -164,6 +169,7 @@ CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId decalF
 }
 
 // FUNCTION: WEBSERVICE 0x10187600
+// FUNCTION: ROBLOX 0x004919f0
 CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);

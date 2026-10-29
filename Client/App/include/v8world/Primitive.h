@@ -123,6 +123,7 @@ public:
 DECOMP_SIZE_ASSERT(EdgeList, 0x08)
 
 // VTABLE: WEBSERVICE 0x102376a4
+// VTABLE: ROBLOX 0x00831fe4
 // SIZE 0xd4
 class Primitive : public IPipelined
 {
@@ -189,6 +190,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x1009a860
+	// FUNCTION: ROBLOX 0x005ad290
 	Extents getExtentsWorld() const
 	{
 		const Vector3 corner = geometry->getGridSize() * 0.5f;
@@ -325,6 +327,7 @@ public:
 	static Contact* getContact(Primitive* p0, Primitive* p1);
 
 	// FUNCTION: WEBSERVICE 0x100d21e0
+	// FUNCTION: ROBLOX 0x0060a190
 	static bool aaBoxCollide(const Primitive& p0, const Primitive& p1)
 	{
 		Vector3 delta = p0.getCoordinateFrame().translation - p1.getCoordinateFrame().translation;

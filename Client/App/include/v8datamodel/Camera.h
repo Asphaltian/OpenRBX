@@ -90,6 +90,7 @@ public:
 	Camera();
 
 	// FUNCTION: WEBSERVICE 0x100c4370
+	// FUNCTION: ROBLOX 0x005d7ed0
 	virtual ~Camera() {}
 
 	const G3D::GCamera& getGCamera() const { return gCamera; }
@@ -115,6 +116,7 @@ public:
 	void setCameraFocus(const G3D::CoordinateFrame& value);
 
 	// FUNCTION: WEBSERVICE 0x1007c9c0
+	// FUNCTION: ROBLOX 0x0045f4f0
 	G3D::CoordinateFrame getCameraCoordinateFrame() const { return gCamera.getCoordinateFrame(); }
 
 	void setCameraCoordinateFrameNoLerp(const G3D::CoordinateFrame& value);

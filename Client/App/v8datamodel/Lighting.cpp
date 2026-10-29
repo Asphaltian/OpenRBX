@@ -74,12 +74,14 @@ void Lighting::fireLightingChanged(bool skyChanged)
 }
 
 // FUNCTION: WEBSERVICE 0x10042670
+// FUNCTION: ROBLOX 0x005d9310
 G3D::Vector3 Lighting::getMoonPosition()
 {
 	return skyParameters.physicallyCorrect ? skyParameters.trueMoonPosition : skyParameters.moonPosition;
 }
 
 // FUNCTION: WEBSERVICE 0x100426a0
+// FUNCTION: ROBLOX 0x005d9340
 G3D::Vector3 Lighting::getSunPosition()
 {
 	return skyParameters.physicallyCorrect ? skyParameters.trueSunPosition : skyParameters.sunPosition;
@@ -92,6 +94,7 @@ bool Lighting::askAddChild(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100438e0
+// FUNCTION: ROBLOX 0x005da4b0
 void Lighting::replaceSky(Sky* newSky)
 {
 	while (Sky* oldSky = findFirstChildOfType<Sky>()) {
@@ -102,18 +105,21 @@ void Lighting::replaceSky(Sky* newSky)
 }
 
 // FUNCTION: WEBSERVICE 0x10043c40
+// FUNCTION: ROBLOX 0x005da5a0
 double Lighting::getMinutesAfterMidnight()
 {
 	return timeOfDay.total_milliseconds() / 60000.0;
 }
 
 // FUNCTION: WEBSERVICE 0x10044080
+// FUNCTION: ROBLOX 0x005dab00
 std::string Lighting::getTimeStr() const
 {
 	return boost::posix_time::to_simple_string(timeOfDay);
 }
 
 // FUNCTION: WEBSERVICE 0x10046190
+// FUNCTION: ROBLOX 0x005dbcb0
 Lighting::Lighting()
 	: ambientTop(209 / 255.0f, 208 / 255.0f, 217 / 255.0f), ambientBottom(122 / 255.0f, 134 / 255.0f, 120 / 255.0f),
 	  hasSky(true), clearColor(G3D::Color3::white()),
@@ -125,6 +131,7 @@ Lighting::Lighting()
 }
 
 // FUNCTION: WEBSERVICE 0x10046a90
+// FUNCTION: ROBLOX 0x005dc430
 void Lighting::setClearColor(G3D::Color4 value)
 {
 	if (value != clearColor) {
@@ -135,6 +142,7 @@ void Lighting::setClearColor(G3D::Color4 value)
 }
 
 // FUNCTION: WEBSERVICE 0x10046b60
+// FUNCTION: ROBLOX 0x005dc500
 void Lighting::setLightColor(G3D::Color3 value)
 {
 	if (value != skyParameters.lightColor) {
@@ -145,6 +153,7 @@ void Lighting::setLightColor(G3D::Color3 value)
 }
 
 // FUNCTION: WEBSERVICE 0x10046c10
+// FUNCTION: ROBLOX 0x005dc5b0
 void Lighting::setAmbientBottom(G3D::Color3 value)
 {
 	if (value != ambientBottom) {
@@ -155,6 +164,7 @@ void Lighting::setAmbientBottom(G3D::Color3 value)
 }
 
 // FUNCTION: WEBSERVICE 0x10046cc0
+// FUNCTION: ROBLOX 0x005dc660
 void Lighting::onChildRemoving(Instance* child)
 {
 	if (sky.get() == child) {
@@ -164,6 +174,7 @@ void Lighting::onChildRemoving(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x10046d60
+// FUNCTION: ROBLOX 0x005dc700
 void Lighting::onChildAdded(Instance* child)
 {
 	if (Sky* s = dynamic_cast<Sky*>(child)) {
@@ -173,6 +184,7 @@ void Lighting::onChildAdded(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x10046e60
+// FUNCTION: ROBLOX 0x005dc800
 void Lighting::onChildChanged(Instance* instance, const PropertyChanged& event)
 {
 	Instance::onChildChanged(instance, event);
@@ -182,6 +194,7 @@ void Lighting::onChildChanged(Instance* instance, const PropertyChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10046f60
+// FUNCTION: ROBLOX 0x005dc930
 void Lighting::setTime(const boost::posix_time::time_duration& value)
 {
 	int seconds = value.total_seconds();
@@ -197,6 +210,7 @@ void Lighting::setTime(const boost::posix_time::time_duration& value)
 }
 
 // FUNCTION: WEBSERVICE 0x10047060
+// FUNCTION: ROBLOX 0x005dca30
 void Lighting::setAmbientTop(G3D::Color3 value)
 {
 	if (value != ambientTop) {
@@ -207,6 +221,7 @@ void Lighting::setAmbientTop(G3D::Color3 value)
 }
 
 // FUNCTION: WEBSERVICE 0x10047110
+// FUNCTION: ROBLOX 0x005dcae0
 void Lighting::setGeographicLatitude(float value)
 {
 	if (value != skyParameters.geoLatitude) {
@@ -217,12 +232,14 @@ void Lighting::setGeographicLatitude(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x10047220
+// FUNCTION: ROBLOX 0x005dcbf0
 void Lighting::setMinutesAfterMidnight(double value)
 {
 	setTime(boost::posix_time::seconds(static_cast<long>(value * 60.0)));
 }
 
 // FUNCTION: WEBSERVICE 0x10047270
+// FUNCTION: ROBLOX 0x005dcc40
 void Lighting::setTimeStr(const std::string& value)
 {
 	setTime(boost::posix_time::duration_from_string(value));

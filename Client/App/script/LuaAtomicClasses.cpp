@@ -21,6 +21,7 @@ namespace RBX {
 namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x100ada30
+// FUNCTION: ROBLOX 0x005fe480
 float lua_tofloat(lua_State* L, int idx)
 {
 	double value = lua_tonumber(L, idx);
@@ -52,6 +53,7 @@ template <>
 const char* Bridge<G3D::Color3, 1>::className = "Color3";
 
 // FUNCTION: WEBSERVICE 0x100adac0
+// FUNCTION: ROBLOX 0x005fe510
 template <>
 int Bridge<G3D::Color3, 1>::on_index(const G3D::Color3& value, const char* name, lua_State* L)
 {
@@ -74,6 +76,7 @@ int Bridge<G3D::Color3, 1>::on_index(const G3D::Color3& value, const char* name,
 }
 
 // FUNCTION: WEBSERVICE 0x100adb90 FOLDED
+// FUNCTION: ROBLOX 0x005a4b00 FOLDED
 template <class T, int Tag>
 void Bridge<T, Tag>::on_newindex(T& value, const char* name, lua_State* L)
 {
@@ -100,6 +103,7 @@ int Color3Bridge::newColor3(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100add30
+// FUNCTION: ROBLOX 0x005fe720
 int Vector3Bridge::on_add(lua_State* L)
 {
 	pushNewObject(L, getObject(L, 2) + getObject(L, 1));
@@ -107,6 +111,7 @@ int Vector3Bridge::on_add(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100addc0
+// FUNCTION: ROBLOX 0x005fe7b0
 int Vector3Bridge::on_sub(lua_State* L)
 {
 	const G3D::Vector3& left = getObject(L, 1);
@@ -117,6 +122,7 @@ int Vector3Bridge::on_sub(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ade50
+// FUNCTION: ROBLOX 0x005fe840
 int Vector3Bridge::on_mul(lua_State* L)
 {
 	G3D::Vector3 a;
@@ -140,6 +146,7 @@ int Vector3Bridge::on_mul(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100adf30
+// FUNCTION: ROBLOX 0x005fe920
 int Vector3Bridge::on_div(lua_State* L)
 {
 	G3D::Vector3 a;
@@ -165,6 +172,7 @@ int Vector3Bridge::on_div(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae030
+// FUNCTION: ROBLOX 0x005fea20
 int Vector3Bridge::on_unm(lua_State* L)
 {
 	pushNewObject(L, -getObject(L, 1));
@@ -191,6 +199,7 @@ int Vector3Bridge::newVector3(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae160
+// FUNCTION: ROBLOX 0x005feb50
 static int lerp(lua_State* L)
 {
 	const G3D::Vector3& value = Vector3Bridge::getObject(L, 1);
@@ -202,6 +211,7 @@ static int lerp(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae210
+// FUNCTION: ROBLOX 0x005fec00
 template <>
 int Bridge<G3D::Vector3, 1>::on_index(const G3D::Vector3& value, const char* name, lua_State* L)
 {
@@ -255,6 +265,7 @@ template RBX::BrickColor* Bridge<RBX::BrickColor, 1>::pushNewObject<RBX::BrickCo
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x100ae380
+// FUNCTION: ROBLOX 0x005fed70
 static int pushRed(lua_State* L)
 {
 	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoRed());
@@ -262,6 +273,7 @@ static int pushRed(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae3c0
+// FUNCTION: ROBLOX 0x005fedb0
 static int pushWhite(lua_State* L)
 {
 	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoWhite());
@@ -269,6 +281,7 @@ static int pushWhite(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae400
+// FUNCTION: ROBLOX 0x005fedf0
 static int pushGray(lua_State* L)
 {
 	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoGray());
@@ -276,6 +289,7 @@ static int pushGray(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae440
+// FUNCTION: ROBLOX 0x005fee30
 static int pushDarkGray(lua_State* L)
 {
 	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoDarkGray());
@@ -283,6 +297,7 @@ static int pushDarkGray(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae480
+// FUNCTION: ROBLOX 0x005fee70
 static int pushBlack(lua_State* L)
 {
 	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoBlack());
@@ -290,6 +305,7 @@ static int pushBlack(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae4c0
+// FUNCTION: ROBLOX 0x005feeb0
 static int pushYellow(lua_State* L)
 {
 	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoYellow());
@@ -297,6 +313,7 @@ static int pushYellow(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae500
+// FUNCTION: ROBLOX 0x005feef0
 static int pushGreen(lua_State* L)
 {
 	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoGreen());
@@ -304,6 +321,7 @@ static int pushGreen(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae540
+// FUNCTION: ROBLOX 0x005fef30
 static int pushBlue(lua_State* L)
 {
 	RBX::Lua::BrickColorBridge::pushNewObject(L, RBX::BrickColor::legoBlue());
@@ -314,6 +332,7 @@ namespace RBX {
 namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x100ae580
+// FUNCTION: ROBLOX 0x005fef70
 int BrickColorBridge::newBrickColor(lua_State* L)
 {
 	int count = std::min(4, lua_gettop(L));
@@ -354,6 +373,7 @@ int BrickColorBridge::randomBrickColor(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae790
+// FUNCTION: ROBLOX 0x005ff180
 template <>
 int Bridge<RBX::BrickColor, 1>::on_index(const RBX::BrickColor& value, const char* name, lua_State* L)
 {
@@ -404,6 +424,7 @@ template <>
 const char* Bridge<RBX::BrickColor, 1>::className = "BrickColor";
 
 // FUNCTION: WEBSERVICE 0x100ae950
+// FUNCTION: ROBLOX 0x005ff340
 int CoordinateFrameBridge::newCoordinateFrame(lua_State* L)
 {
 	G3D::CoordinateFrame cf;
@@ -475,6 +496,7 @@ int CoordinateFrameBridge::newCoordinateFrame(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100aebc0
+// FUNCTION: ROBLOX 0x005ff5b0
 int CoordinateFrameBridge::on_add(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
@@ -487,6 +509,7 @@ int CoordinateFrameBridge::on_add(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100aec40
+// FUNCTION: ROBLOX 0x005ff630
 int CoordinateFrameBridge::on_sub(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
@@ -499,6 +522,7 @@ int CoordinateFrameBridge::on_sub(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100aecc0
+// FUNCTION: ROBLOX 0x005ff6b0
 int CoordinateFrameBridge::on_inverse(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
@@ -510,6 +534,7 @@ int CoordinateFrameBridge::on_inverse(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100aed30
+// FUNCTION: ROBLOX 0x005ff720
 int CoordinateFrameBridge::on_toWorldSpace(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
@@ -533,6 +558,7 @@ int CoordinateFrameBridge::on_toWorldSpace(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100aee30
+// FUNCTION: ROBLOX 0x005ff820
 int CoordinateFrameBridge::on_toObjectSpace(lua_State* L)
 {
 	const G3D::CoordinateFrame& a = getObject(L, 1);
@@ -556,6 +582,7 @@ int CoordinateFrameBridge::on_toObjectSpace(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100aef20
+// FUNCTION: ROBLOX 0x005ff910
 int CoordinateFrameBridge::on_pointToWorldSpace(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
@@ -575,6 +602,7 @@ int CoordinateFrameBridge::on_pointToWorldSpace(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100af060
+// FUNCTION: ROBLOX 0x005ffa50
 int CoordinateFrameBridge::on_pointToObjectSpace(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
@@ -594,6 +622,7 @@ int CoordinateFrameBridge::on_pointToObjectSpace(lua_State* L)
 }
 
 // STUB: WEBSERVICE 0x100af1a0
+// STUB: ROBLOX 0x005ffb90
 int CoordinateFrameBridge::on_vectorToWorldSpace(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
@@ -613,6 +642,7 @@ int CoordinateFrameBridge::on_vectorToWorldSpace(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100af340
+// FUNCTION: ROBLOX 0x005ffd30
 int CoordinateFrameBridge::on_components(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);
@@ -631,6 +661,7 @@ int CoordinateFrameBridge::on_components(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100af3d0
+// FUNCTION: ROBLOX 0x005ffdc0
 int CoordinateFrameBridge::on_toEulerAnglesXYZ(lua_State* L)
 {
 	float x;
@@ -648,6 +679,7 @@ int CoordinateFrameBridge::on_toEulerAnglesXYZ(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100af440
+// FUNCTION: ROBLOX 0x005ffe30
 int CoordinateFrameBridge::on_vectorToObjectSpace(lua_State* L)
 {
 	const G3D::CoordinateFrame& a = getObject(L, 1);
@@ -679,6 +711,7 @@ int CoordinateFrameBridge::fromEulerAnglesXYZ(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100af6b0
+// FUNCTION: ROBLOX 0x006000a0
 int CoordinateFrameBridge::fromAxisAngle(lua_State* L)
 {
 	G3D::CoordinateFrame cf;
@@ -696,6 +729,7 @@ template <>
 const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
 
 // FUNCTION: WEBSERVICE 0x100af750
+// FUNCTION: ROBLOX 0x00600140
 template <>
 int Bridge<G3D::CoordinateFrame, 1>::on_index(const G3D::CoordinateFrame& value, const char* name, lua_State* L)
 {
@@ -782,6 +816,7 @@ int Bridge<G3D::CoordinateFrame, 1>::on_index(const G3D::CoordinateFrame& value,
 }
 
 // FUNCTION: WEBSERVICE 0x100afaf0
+// FUNCTION: ROBLOX 0x006004e0
 int CoordinateFrameBridge::on_mul(lua_State* L)
 {
 	const G3D::CoordinateFrame& value = getObject(L, 1);

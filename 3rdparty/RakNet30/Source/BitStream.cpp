@@ -55,6 +55,7 @@ using namespace RakNet;
 #endif
 
 // FUNCTION: WEBSERVICE 0x101aaad0
+// FUNCTION: ROBLOX 0x004bd600
 BitStream::BitStream()
 {
 	numberOfBitsUsed = 0;
@@ -72,6 +73,7 @@ BitStream::BitStream()
 }
 
 // FUNCTION: WEBSERVICE 0x101aab00
+// FUNCTION: ROBLOX 0x004bd630
 BitStream::BitStream( int initialBytesToAllocate )
 {
 	numberOfBitsUsed = 0;
@@ -94,6 +96,7 @@ BitStream::BitStream( int initialBytesToAllocate )
 }
 
 // FUNCTION: WEBSERVICE 0x101aab60
+// FUNCTION: ROBLOX 0x004bd690
 BitStream::BitStream( unsigned char* _data, unsigned int lengthInBytes, bool _copyData )
 {
 	numberOfBitsUsed = lengthInBytes << 3;
@@ -136,6 +139,7 @@ void BitStream::SetNumberOfBitsAllocated( const unsigned int lengthInBits )
 }
 
 // FUNCTION: WEBSERVICE 0x101aabe0
+// FUNCTION: ROBLOX 0x004bd710
 BitStream::~BitStream()
 {
 	if ( copyData && numberOfBitsAllocated > BITSTREAM_STACK_ALLOCATION_SIZE << 3)
@@ -143,6 +147,7 @@ BitStream::~BitStream()
 }
 
 // FUNCTION: WEBSERVICE 0x101aac00
+// FUNCTION: ROBLOX 0x004bd730
 void BitStream::Reset( void )
 {
 	// Note:  Do NOT reallocate memory because BitStream is used
@@ -168,6 +173,7 @@ void BitStream::Reset( void )
 
 // Write an array or casted stream
 // FUNCTION: WEBSERVICE 0x101ab0e0
+// FUNCTION: ROBLOX 0x004bdc70
 void BitStream::Write( const char* input, const int numberOfBytes )
 {
 	if (numberOfBytes==0)
@@ -191,6 +197,7 @@ void BitStream::Write( BitStream *bitStream)
 	Write(bitStream, bitStream->GetNumberOfBitsUsed());
 }
 // FUNCTION: WEBSERVICE 0x101aaed0
+// FUNCTION: ROBLOX 0x004bda00
 void BitStream::Write( BitStream *bitStream, int numberOfBits )
 {
 	AddBitsAndReallocate( numberOfBits );
@@ -255,6 +262,7 @@ void BitStream::ResetReadPointer( void )
 
 // Sets the write pointer back to the beginning of your data.
 // FUNCTION: WEBSERVICE 0x101aac10
+// FUNCTION: ROBLOX 0x004bd740
 void BitStream::ResetWritePointer( void )
 {
 	numberOfBitsUsed = 0;
@@ -262,6 +270,7 @@ void BitStream::ResetWritePointer( void )
 
 // Write a 0
 // FUNCTION: WEBSERVICE 0x101aaf80
+// FUNCTION: ROBLOX 0x004bdab0
 void BitStream::Write0( void )
 {
 	AddBitsAndReallocate( 1 );
@@ -275,6 +284,7 @@ void BitStream::Write0( void )
 
 // Write a 1
 // FUNCTION: WEBSERVICE 0x101aafa0
+// FUNCTION: ROBLOX 0x004bdad0
 void BitStream::Write1( void )
 {
 	AddBitsAndReallocate( 1 );
@@ -294,6 +304,7 @@ void BitStream::Write1( void )
 #endif
 // Returns true if the next data read is a 1, false if it is a 0
 // FUNCTION: WEBSERVICE 0x101aac20
+// FUNCTION: ROBLOX 0x004bd750
 bool BitStream::ReadBit( void )
 {
 	bool result = ( data[ readOffset >> 3 ] & ( 0x80 >> ( readOffset & 7 ) ) ) != 0;
@@ -305,6 +316,7 @@ bool BitStream::ReadBit( void )
 // This is faster than WriteBits but wastes the bits to do the alignment and requires you to call
 // SetReadToByteAlignment at the corresponding read position
 // FUNCTION: WEBSERVICE 0x101ab150
+// FUNCTION: ROBLOX 0x004bdce0
 void BitStream::WriteAlignedBytes( const unsigned char* input,
 	const int numberOfBytesToWrite )
 {
@@ -320,6 +332,7 @@ void BitStream::WriteAlignedBytes( const unsigned char* input,
 // sequence must be the same as was used with WriteBits. This will be a problem with packet coalescence
 // unless you byte align the coalesced packets.
 // FUNCTION: WEBSERVICE 0x101aafe0
+// FUNCTION: ROBLOX 0x004bdb10
 bool BitStream::ReadAlignedBytes( unsigned char* output, const int numberOfBytesToRead )
 {
 #ifdef _DEBUG
@@ -359,6 +372,7 @@ void BitStream::AlignReadToByteBoundary( void )
 
 // Write numberToWrite bits from the input source
 // FUNCTION: WEBSERVICE 0x101ab040
+// FUNCTION: ROBLOX 0x004bdb70
 void BitStream::WriteBits( const unsigned char *input, int numberOfBitsToWrite, const bool rightAlignedBits )
 {
 	if (numberOfBitsToWrite<=0)
@@ -415,6 +429,7 @@ void BitStream::SetData( unsigned char *input )
 
 // Assume the input source points to a native type, compress and write it
 // FUNCTION: WEBSERVICE 0x101ab170
+// FUNCTION: ROBLOX 0x004bdd00
 void BitStream::WriteCompressed( const unsigned char* input,
 	const int size, const bool unsignedData )
 {
@@ -478,6 +493,7 @@ void BitStream::WriteCompressed( const unsigned char* input,
 // alignBitsToRight should be set to true to convert internal bitstream data to userdata
 // It should be false if you used WriteBits with rightAlignedBits false
 // FUNCTION: WEBSERVICE 0x101aac50
+// FUNCTION: ROBLOX 0x004bd780
 bool BitStream::ReadBits( unsigned char* output, int numberOfBitsToRead, const bool alignBitsToRight )
 {
 #ifdef _DEBUG
@@ -530,6 +546,7 @@ bool BitStream::ReadBits( unsigned char* output, int numberOfBitsToRead, const b
 
 // Assume the input source points to a compressed native type. Decompress and read it
 // FUNCTION: WEBSERVICE 0x101aad00
+// FUNCTION: ROBLOX 0x004bd830
 bool BitStream::ReadCompressed( unsigned char* output,
 	const int size, const bool unsignedData )
 {
@@ -607,6 +624,7 @@ bool BitStream::ReadCompressed( unsigned char* output,
 
 // Reallocates (if necessary) in preparation of writing numberOfBitsToWrite
 // FUNCTION: WEBSERVICE 0x101aadf0
+// FUNCTION: ROBLOX 0x004bd920
 void BitStream::AddBitsAndReallocate( const int numberOfBitsToWrite )
 {
 	if (numberOfBitsToWrite <= 0)
@@ -693,6 +711,7 @@ void BitStream::PrintBits( void ) const
 // Exposes the data for you to look at, like PrintBits does.
 // Data will point to the stream.  Returns the length in bits of the stream.
 // FUNCTION: WEBSERVICE 0x101aae70
+// FUNCTION: ROBLOX 0x004bd9a0
 int BitStream::CopyData( unsigned char** _data ) const
 {
 #ifdef _DEBUG
@@ -706,6 +725,7 @@ int BitStream::CopyData( unsigned char** _data ) const
 
 // Ignore data we don't intend to read
 // FUNCTION: WEBSERVICE 0x101aaeb0
+// FUNCTION: ROBLOX 0x004bd9e0
 void BitStream::IgnoreBits( const int numberOfBits )
 {
 	readOffset += numberOfBits;

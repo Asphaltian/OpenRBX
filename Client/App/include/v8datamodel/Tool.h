@@ -168,6 +168,7 @@ DECOMP_SIZE_ASSERT(Tool, 0x238)
 // FUNCTION: WEBSERVICE 0x1021c2a0
 // RBX::`dynamic initializer for 'prop_FrontendActivationState''
 // FUNCTION: WEBSERVICE 0x1021c300
+// FUNCTION: ROBLOX 0x007ece20
 // `dynamic initializer for 'RBX::Tool::prop_Enabled''
 // FUNCTION: WEBSERVICE 0x1021c330
 // RBX::`dynamic initializer for 'event_Equipped''
@@ -192,6 +193,7 @@ DECOMP_SIZE_ASSERT(Tool, 0x238)
 // SYNTHETIC: WEBSERVICE 0x10223cd0
 // RBX::`dynamic atexit destructor for 'prop_BackendToolState''
 // SYNTHETIC: WEBSERVICE 0x10223cf0
+// SYNTHETIC: ROBLOX 0x007f46a0
 // `dynamic atexit destructor for 'RBX::Tool::prop_Enabled''
 // SYNTHETIC: WEBSERVICE 0x10223d20
 // RBX::`dynamic atexit destructor for 'event_Activated''

@@ -28,6 +28,7 @@ public:
 };
 
 // VTABLE: WEBSERVICE 0x10247edc
+// VTABLE: ROBLOX 0x0083ae84
 // SIZE 0x30
 class TreeStage : public IWorldStage
 {
@@ -97,6 +98,7 @@ public:
 DECOMP_SIZE_ASSERT(TreeStage, 0x30)
 
 // VTABLE: WEBSERVICE 0x10247e4c
+// VTABLE: ROBLOX 0x0083adf4
 // SIZE 0x10
 class ClumpStage : public IWorldStage
 {
@@ -114,6 +116,7 @@ public:
 	void onMotorAngleChanged(MotorJoint* motorJoint);
 
 	// SYNTHETIC: WEBSERVICE 0x1011b710
+	// SYNTHETIC: ROBLOX 0x00645100
 	// RBX::ClumpStage::`scalar deleting destructor'
 
 	virtual StageType getStageType(); // vtable+0x04

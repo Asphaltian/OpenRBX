@@ -18,6 +18,7 @@ bool Seat::charSeated()
 }
 
 // FUNCTION: WEBSERVICE 0x100fc4e0
+// FUNCTION: ROBLOX 0x00638990
 void Seat::unseatCharacter()
 {
 	sleepTime = G3D::System::getLocalTime();
@@ -29,6 +30,7 @@ void Seat::unseatCharacter()
 }
 
 // FUNCTION: WEBSERVICE 0x100fc550
+// FUNCTION: ROBLOX 0x00638a00
 void Seat::onEvent_humanoidJumped(bool active)
 {
 	unseatCharacter();
@@ -36,6 +38,7 @@ void Seat::onEvent_humanoidJumped(bool active)
 }
 
 // FUNCTION: WEBSERVICE 0x100fc5a0
+// FUNCTION: ROBLOX 0x00638a50
 void Seat::seatCharacter(Humanoid* h)
 {
 	CoordinateFrame seatCoord;
@@ -71,6 +74,7 @@ void Seat::seatCharacter(Humanoid* h)
 }
 
 // FUNCTION: WEBSERVICE 0x100fcd50
+// FUNCTION: ROBLOX 0x00639060
 void Seat::onEvent_seatTouched(boost::shared_ptr<Instance> other)
 {
 	if (charSeated() || G3D::System::getLocalTime() - sleepTime < 3.0) {
@@ -92,6 +96,7 @@ void Seat::onEvent_seatTouched(boost::shared_ptr<Instance> other)
 }
 
 // FUNCTION: WEBSERVICE 0x100fcef0
+// FUNCTION: ROBLOX 0x00639200
 void Seat::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Instance::onServiceProvider(oldProvider, newProvider);
@@ -106,6 +111,7 @@ void Seat::onServiceProvider(const ServiceProvider* oldProvider, const ServicePr
 }
 
 // FUNCTION: WEBSERVICE 0x100fd180
+// FUNCTION: ROBLOX 0x006394a0
 Seat::Seat() : sleepTime(0.0)
 {
 	setName(sSeat);

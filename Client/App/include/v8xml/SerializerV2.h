@@ -33,6 +33,7 @@ public:
 	};
 
 	// STUB: WEBSERVICE 0x10096f20
+	// STUB: ROBLOX 0x00446aa0
 	virtual bool resolveRefs() // vtable+0x08
 	{
 		for (std::vector<IDREFItem>::iterator it = deferredIDREFItems.begin(); it != deferredIDREFItems.end(); ++it) {
@@ -60,6 +61,7 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x10097200
+	// FUNCTION: ROBLOX 0x00446d30
 	virtual bool processID(const XmlNameValuePair* valueID, Instance* source) // vtable+0x0c
 	{
 		InstanceHandle h;
@@ -79,6 +81,7 @@ protected:
 	// RBX::MergeBinder::~MergeBinder
 
 	// FUNCTION: WEBSERVICE 0x100979e0
+	// FUNCTION: ROBLOX 0x004477c0
 	virtual bool processIDREF(
 		const XmlNameValuePair* valueIDREF, Reflection::DescribedBase* propertyOwner, const IIDREF* idref
 	) // vtable+0x10

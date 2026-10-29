@@ -41,6 +41,7 @@ protected:
 	virtual void onUp(const UIEvent& event) {}   // vtable+0x70
 
 	// FUNCTION: WEBSERVICE 0x100c7500
+	// FUNCTION: ROBLOX 0x005e16f0
 	virtual G3D::Color4 getFontColor() { return G3D::Color4(G3D::Color3::white(), 1); } // vtable+0x74
 
 	// FUNCTION: WEBSERVICE 0x100c7530

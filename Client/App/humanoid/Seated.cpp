@@ -8,6 +8,7 @@ namespace RBX {
 const char sSeated[] = "Seated";
 
 // FUNCTION: WEBSERVICE 0x101229b0
+// FUNCTION: ROBLOX 0x00663b30
 Humanoid::State* Seated::onStep(const float stepDt, Controller& controller)
 {
 	if (humanoid->getJump()) {
@@ -19,6 +20,7 @@ Humanoid::State* Seated::onStep(const float stepDt, Controller& controller)
 }
 
 // FUNCTION: WEBSERVICE 0x10122ae0
+// FUNCTION: ROBLOX 0x00663c60
 Seated::Seated(Humanoid* humanoid) : Named<Humanoid::State, sSeated>(humanoid)
 {
 	Humanoid::event_Seated.fire(humanoid, true);

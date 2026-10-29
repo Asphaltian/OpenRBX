@@ -10,11 +10,13 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011cfc0
+// FUNCTION: ROBLOX 0x006550a0
 GeoPair::GeoPair() : body0(NULL), body1(NULL), offset0(NULL), offset1(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1011cfe0
+// FUNCTION: ROBLOX 0x006550c0
 void GeoPair::forceToBodies(const Vector3& _force, const Vector3& _position)
 {
 	body0->accumulateForce(-_force, _position);
@@ -22,6 +24,7 @@ void GeoPair::forceToBodies(const Vector3& _force, const Vector3& _position)
 }
 
 // FUNCTION: WEBSERVICE 0x1011d040
+// FUNCTION: ROBLOX 0x00655120
 void GeoPair::computeNormalPerpVel(float& normalVel, Vector3& perpVel, const PairParams& _params)
 {
 	Vector3 v0 = body0->getPV().linearVelocityAtPoint(_params.position);
@@ -35,6 +38,7 @@ void GeoPair::computeNormalPerpVel(float& normalVel, Vector3& perpVel, const Pai
 }
 
 // FUNCTION: WEBSERVICE 0x1011d1a0
+// FUNCTION: ROBLOX 0x00655280
 void GeoPair::computeBallBall(PairParams& _params)
 {
 	const Vector3& pos0 = body0->getPos();
@@ -46,6 +50,7 @@ void GeoPair::computeBallBall(PairParams& _params)
 }
 
 // FUNCTION: WEBSERVICE 0x1011d240
+// FUNCTION: ROBLOX 0x00655320
 void GeoPair::computeBallPoint(PairParams& _params)
 {
 	const Vector3& pos0 = body0->getPos();
@@ -57,6 +62,7 @@ void GeoPair::computeBallPoint(PairParams& _params)
 }
 
 // FUNCTION: WEBSERVICE 0x1011d320
+// FUNCTION: ROBLOX 0x00655400
 void GeoPair::computeBallEdge(PairParams& _params)
 {
 	const Vector3& pos0 = body0->getPos();
@@ -75,6 +81,7 @@ void GeoPair::computeBallEdge(PairParams& _params)
 }
 
 // FUNCTION: WEBSERVICE 0x1011d480
+// FUNCTION: ROBLOX 0x00655560
 void GeoPair::computeBallPlane(PairParams& _params)
 {
 	const Vector3& pos0 = body0->getPos();
@@ -92,6 +99,7 @@ void GeoPair::computeBallPlane(PairParams& _params)
 }
 
 // FUNCTION: WEBSERVICE 0x1011d5e0
+// FUNCTION: ROBLOX 0x006556c0
 void GeoPair::computePointPlane(PairParams& _params)
 {
 	_params.position = body0->getCoordinateFrame().pointToWorldSpace(*offset0);
@@ -106,6 +114,7 @@ void GeoPair::computePointPlane(PairParams& _params)
 }
 
 // FUNCTION: WEBSERVICE 0x1011d770
+// FUNCTION: ROBLOX 0x00655850
 void GeoPair::computeEdgeEdgePlane(PairParams& _params)
 {
 	const CoordinateFrame& coord0 = body0->getCoordinateFrame();
@@ -144,6 +153,7 @@ void GeoPair::computeEdgeEdgePlane(PairParams& _params)
 }
 
 // FUNCTION: WEBSERVICE 0x1011daf0
+// FUNCTION: ROBLOX 0x00655bd0
 void GeoPair::computeEdgeEdge(PairParams& _params)
 {
 	const CoordinateFrame& coord0 = body0->getCoordinateFrame();

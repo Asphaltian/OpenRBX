@@ -5,6 +5,7 @@ namespace RBX {
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x10121d40
+// FUNCTION: ROBLOX 0x0063f380
 template <>
 EnumDesc<SurfaceType>::EnumDesc() : EnumDescriptor("SurfaceType", typeid(SurfaceType))
 {

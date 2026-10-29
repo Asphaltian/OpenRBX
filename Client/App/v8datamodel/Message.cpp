@@ -16,6 +16,7 @@ static Reflection::PropDescriptor<Message, std::string> desc_Text(
 );
 
 // FUNCTION: WEBSERVICE 0x100ee4d0
+// FUNCTION: ROBLOX 0x0062d5d0
 void Message::renderFullScreen(Adorn* adorn)
 {
 	G3D::Rect2D rect = adorn->getViewport();
@@ -38,6 +39,7 @@ void Message::renderFullScreen(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100ee5e0
+// FUNCTION: ROBLOX 0x0062d6e0
 void Message::renderPersonalMsg(Adorn* adorn)
 {
 	G3D::Rect2D rect = adorn->getViewport();
@@ -60,6 +62,7 @@ void Message::renderPersonalMsg(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100ee710
+// FUNCTION: ROBLOX 0x0062d810
 void Message::render2d(Adorn* adorn)
 {
 	if (text.size() > 0) {
@@ -75,6 +78,7 @@ void Message::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100ee760
+// FUNCTION: ROBLOX 0x0062d860
 void Hint::render2d(Adorn* adorn)
 {
 	G3D::Rect2D rect = adorn->getViewport();
@@ -97,11 +101,13 @@ void Hint::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100eea50
+// FUNCTION: ROBLOX 0x0062db60
 Message::Message() : DescribedCreatable<Message, Instance, sMessage>("Message")
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100eebb0
+// FUNCTION: ROBLOX 0x0062dcc0
 void Message::setText(const std::string& value)
 {
 	if (text != value) {

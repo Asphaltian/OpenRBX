@@ -36,6 +36,7 @@ inline bool SurfaceData::operator==(const SurfaceData& other) const
 }
 
 // FUNCTION: WEBSERVICE 0x100a76d0
+// FUNCTION: ROBLOX 0x005f5f80
 inline bool SurfaceData::isEmpty() const
 {
 	return *this == empty();

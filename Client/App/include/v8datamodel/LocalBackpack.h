@@ -42,6 +42,7 @@ public:
 	LocalBackpackItem();
 
 	// FUNCTION: WEBSERVICE 0x100d63b0
+	// FUNCTION: ROBLOX 0x0060d470
 	void setItem(BackpackItem* item) { myItem = shared_from(item); }
 
 	BackpackItem* getItem() { return myItem.get(); }
@@ -105,6 +106,7 @@ public:
 DECOMP_SIZE_ASSERT(LocalBackpack, 0x174)
 
 // SYNTHETIC: WEBSERVICE 0x100d7410
+// SYNTHETIC: ROBLOX 0x0060e4b0
 // RBX::LocalBackpackItem::~LocalBackpackItem
 // SYNTHETIC: WEBSERVICE 0x100d74a0
 // RBX::LocalBackpackItem::`scalar deleting destructor'

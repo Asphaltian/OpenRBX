@@ -185,6 +185,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x10183a90
+// FUNCTION: ROBLOX 0x0048df00
 TorsoMesh::TorsoMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
 	const float shoulderInset = size.z * 0.3f;
@@ -197,6 +198,7 @@ TorsoMesh::TorsoMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 }
 
 // FUNCTION: WEBSERVICE 0x10183c20
+// FUNCTION: ROBLOX 0x0048e090
 TorsoMesh::TorsoMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	const float shoulderInset = size.z * 0.3f;
@@ -211,6 +213,7 @@ TorsoMesh::TorsoMesh(const G3D::Vector3& size, NormalId decalFace)
 }
 
 // FUNCTION: WEBSERVICE 0x10183db0
+// FUNCTION: ROBLOX 0x0048e220
 TorsoMesh::TorsoMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	const float shoulderInset = size.z * 0.3f;

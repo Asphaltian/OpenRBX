@@ -89,6 +89,7 @@ void CheckSum::Add ( unsigned char value )
 ****************************************************************************/
 
 // FUNCTION: WEBSERVICE 0x101c4ef0
+// FUNCTION: ROBLOX 0x004ea550
 void CheckSum::Add ( unsigned char *b, unsigned int length )
 {
 	for ( unsigned int i = 0; i < length; i++ )

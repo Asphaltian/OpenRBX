@@ -13,6 +13,7 @@ G3D::Matrix4 GuiRoot::oldProjectionMatrix;
 G3D::CoordinateFrame GuiRoot::oldCameraWorld;
 
 // FUNCTION: WEBSERVICE 0x100d0fc0
+// FUNCTION: ROBLOX 0x0058caf0
 const G3D::Color4& GuiItem::disabledFill()
 {
 	static G3D::Color4 c(0.7f, 0.7f, 0.7f, 0.5f);
@@ -20,6 +21,7 @@ const G3D::Color4& GuiItem::disabledFill()
 }
 
 // FUNCTION: WEBSERVICE 0x100d1000
+// FUNCTION: ROBLOX 0x0058cbf0
 const G3D::Color4& GuiItem::translucentBackdrop()
 {
 	static G3D::Color4 c(0.6f, 0.6f, 0.6f, 0.6f);
@@ -27,18 +29,21 @@ const G3D::Color4& GuiItem::translucentBackdrop()
 }
 
 // FUNCTION: WEBSERVICE 0x100d1040 FOLDED
+// FUNCTION: ROBLOX 0x0058cc50 FOLDED
 GuiItem* GuiItem::getGuiParent()
 {
 	return dynamic_cast<GuiItem*>(getParent());
 }
 
 // FUNCTION: WEBSERVICE 0x100d1040 FOLDED
+// FUNCTION: ROBLOX 0x0058cc50 FOLDED
 const GuiItem* GuiItem::getGuiParent() const
 {
 	return dynamic_cast<const GuiItem*>(getParent());
 }
 
 // FUNCTION: WEBSERVICE 0x100d1060
+// FUNCTION: ROBLOX 0x0058cc70
 Rect GuiItem::getMyRect() const
 {
 	Vector2 pos = getPosition();
@@ -47,6 +52,7 @@ Rect GuiItem::getMyRect() const
 }
 
 // STUB: WEBSERVICE 0x100d10b0
+// STUB: ROBLOX 0x0058ccc0
 void GuiItem::label2d(
 	Adorn* adorn, const std::string& label, const G3D::Color4& fill, const G3D::Color4& border, Adorn::XAlign align
 ) const
@@ -79,6 +85,7 @@ void GuiItem::label2d(
 }
 
 // FUNCTION: WEBSERVICE 0x100d1180
+// FUNCTION: ROBLOX 0x0058cde0
 void RelativePanel::init(const Layout& layout)
 {
 	setName("RelativePanel");
@@ -90,6 +97,7 @@ void RelativePanel::init(const Layout& layout)
 }
 
 // FUNCTION: WEBSERVICE 0x100d1230
+// FUNCTION: ROBLOX 0x0058ce90
 void TopMenuBar::init()
 {
 	layoutStyle = Layout::HORIZONTAL;
@@ -98,6 +106,7 @@ void TopMenuBar::init()
 }
 
 // FUNCTION: WEBSERVICE 0x100d1270
+// FUNCTION: ROBLOX 0x0058d050
 G3D::Vector2 GuiRoot::toPixelSize(const G3D::Vector2& percent)
 {
 	G3D::Vector2 pixelSize(0, 0);
@@ -113,6 +122,7 @@ G3D::Vector2 GuiRoot::toPixelSize(const G3D::Vector2& percent)
 }
 
 // FUNCTION: WEBSERVICE 0x100d12f0
+// FUNCTION: ROBLOX 0x0058d0d0
 int GuiRoot::normalizedFontSize(int fontSize)
 {
 	static G3D::Vector2 percentSize(100.0f, 75.0f);
@@ -121,6 +131,7 @@ int GuiRoot::normalizedFontSize(int fontSize)
 }
 
 // FUNCTION: WEBSERVICE 0x100d1360
+// FUNCTION: ROBLOX 0x0058d140
 G3D::Vector2 RelativePanel::getPosition() const
 {
 	Rect canvas(G3D::Vector2::zero(), GuiRoot::getCanvasSize());
@@ -132,18 +143,21 @@ G3D::Vector2 RelativePanel::getPosition() const
 }
 
 // FUNCTION: WEBSERVICE 0x100d14d0
+// FUNCTION: ROBLOX 0x0058d330
 GuiItem::GuiItem() : guiSize(0, 0)
 {
 	setName("Unnamed GuiItem");
 }
 
 // FUNCTION: WEBSERVICE 0x100d15f0
+// FUNCTION: ROBLOX 0x0058d470
 GuiRoot::GuiRoot()
 {
 	setName("GuiRoot");
 }
 
 // FUNCTION: WEBSERVICE 0x100d1700
+// FUNCTION: ROBLOX 0x0058d560
 void GuiRoot::render2d(Adorn* adorn)
 {
 	setCanvasSize(G3D::Vector2(G3D::Vector2int16(adorn->getWidth(), adorn->getHeight())));
@@ -159,6 +173,7 @@ void GuiRoot::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100d17c0
+// FUNCTION: ROBLOX 0x0058d790
 G3D::Vector2 TopMenuBar::getSize() const
 {
 	G3D::Vector2 size(0, 0);
@@ -187,6 +202,7 @@ G3D::Vector2 TopMenuBar::getSize() const
 }
 
 // FUNCTION: WEBSERVICE 0x100d18d0
+// FUNCTION: ROBLOX 0x0058d8a0
 G3D::Vector2 TopMenuBar::getChildPosition(const GuiItem* child) const
 {
 	G3D::Vector2 position = getPosition();
@@ -220,6 +236,7 @@ G3D::Vector2 TopMenuBar::getChildPosition(const GuiItem* child) const
 }
 
 // FUNCTION: WEBSERVICE 0x100d19f0
+// FUNCTION: ROBLOX 0x0058d9c0
 void TopMenuBar::render2d(Adorn* adorn)
 {
 	if (!isVisible()) {
@@ -241,6 +258,7 @@ void TopMenuBar::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100d1ae0
+// FUNCTION: ROBLOX 0x0058e010
 void GuiItem::loseFocus()
 {
 	if (focus != NULL) {
@@ -251,6 +269,7 @@ void GuiItem::loseFocus()
 }
 
 // FUNCTION: WEBSERVICE 0x100d1b50
+// FUNCTION: ROBLOX 0x0058e080
 void GuiItem::onDescendentRemoving(const shared_ptr<Instance>& instance)
 {
 	if (instance.get() == focus.get()) {
@@ -261,6 +280,7 @@ void GuiItem::onDescendentRemoving(const shared_ptr<Instance>& instance)
 }
 
 // FUNCTION: WEBSERVICE 0x100d1b80
+// FUNCTION: ROBLOX 0x0058e320
 GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
 {
 	for (unsigned int i = 0; i < numChildren(); ++i) {
@@ -284,6 +304,7 @@ GuiResponse GuiItem::processNonFocus(const GuiEvent& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100d1cf0
+// FUNCTION: ROBLOX 0x0058e490
 GuiResponse GuiItem::process(const GuiEvent& event)
 {
 	if (event.isMouseEvent() && event.eventType == UIEvent::MOUSE_IDLE) {
@@ -312,6 +333,7 @@ GuiResponse GuiItem::process(const GuiEvent& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100d1de0
+// FUNCTION: ROBLOX 0x0058e580
 GuiResponse TopMenuBar::process(const GuiEvent& event)
 {
 	if (isVisible()) {

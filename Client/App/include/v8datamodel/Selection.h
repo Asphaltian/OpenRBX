@@ -77,6 +77,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x1005d130
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > getSelection2() { return selection.read(); }
 	// FUNCTION: WEBSERVICE 0x1005e920
+	// FUNCTION: ROBLOX 0x00568950
 	void setSelection(boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > selection)
 	{
 		setSelection(selection->begin(), selection->end());
@@ -89,6 +90,7 @@ public:
 	void removeFromSelection(const Instance* instance);
 
 	// FUNCTION: WEBSERVICE 0x100bfd90
+	// FUNCTION: ROBLOX 0x004259e0
 	bool isSelected(const Instance* instance) const
 	{
 		return std::find(selection->begin(), selection->end(), shared_from(instance)) != selection->end();
@@ -235,6 +237,7 @@ protected:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100a1850
+	// TEMPLATE: ROBLOX 0x005e9e40
 	// RBX::FilteredSelection<RBX::PartInstance>::FilteredSelection<RBX::PartInstance>
 	// TEMPLATE: WEBSERVICE 0x100a1bd0
 	// RBX::FilteredSelection<RBX::PartInstance>::~FilteredSelection<RBX::PartInstance>
@@ -245,14 +248,17 @@ protected:
 	// TEMPLATE: WEBSERVICE 0x100a4a80
 	// RBX::FilteredSelection<RBX::PartInstance>::onAncestorChanged
 	// TEMPLATE: WEBSERVICE 0x100bf860
+	// TEMPLATE: ROBLOX 0x006212e0
 	// RBX::FilteredSelection<RBX::Instance>::FilteredSelection<RBX::Instance>
 	// TEMPLATE: WEBSERVICE 0x100bfa30
 	// RBX::FilteredSelection<RBX::Instance>::~FilteredSelection<RBX::Instance>
 	// SYNTHETIC: WEBSERVICE 0x100bfb40
 	// RBX::FilteredSelection<RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100c01e0
+	// TEMPLATE: ROBLOX 0x00621c00
 	// RBX::FilteredSelection<RBX::Instance>::onSelectionChanged
 	// TEMPLATE: WEBSERVICE 0x100c0630
+	// TEMPLATE: ROBLOX 0x00622050
 	// RBX::FilteredSelection<RBX::Instance>::onAncestorChanged
 	// clang-format on
 
@@ -263,18 +269,24 @@ private:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1005e8c0
+// TEMPLATE: ROBLOX 0x005688f0
 // RBX::Selection::setSelection<std::_Vector_const_iterator<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > >
 // FUNCTION: WEBSERVICE 0x10047e10
+// FUNCTION: ROBLOX 0x00568f50 FOLDED
 // RBX::DescendentRemoving::~DescendentRemoving
 // FUNCTION: WEBSERVICE 0x1005cf20
+// FUNCTION: ROBLOX 0x00566fc0
 // RBX::SelectionChanged::SelectionChanged
 // TEMPLATE: WEBSERVICE 0x1005d010
+// TEMPLATE: ROBLOX 0x005670b0
 // ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@PAV?$Listener@VSelection@RBX@@VSelectionChanged@2@@2@@Z
 // TEMPLATE: WEBSERVICE 0x1005d160
+// TEMPLATE: ROBLOX 0x00567200
 // ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@@Z
 // FUNCTION: WEBSERVICE 0x100d6c30
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::addListener
 // FUNCTION: WEBSERVICE 0x100ddf60
+// FUNCTION: ROBLOX 0x0060d390
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::removeListener
 // SYNTHETIC: WEBSERVICE 0x10218b30
 // `dynamic initializer for 'func_getSelection''

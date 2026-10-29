@@ -18,9 +18,11 @@
 namespace RBX {
 
 // GLOBAL: WEBSERVICE 0x102f9ff4
+// GLOBAL: ROBLOX 0x0095fd08
 G3D::Vector3 MouseCommand::ignoreVector3;
 
 // FUNCTION: WEBSERVICE 0x100be7d0
+// FUNCTION: ROBLOX 0x00620410
 Instance* MouseCommand::getTopSelectable3d(PartInstance* part)
 {
 	Instance* answer = part;
@@ -42,6 +44,7 @@ void MouseCommand::capture()
 }
 
 // FUNCTION: WEBSERVICE 0x100be860
+// FUNCTION: ROBLOX 0x006204a0
 bool MouseCommand::characterCanReach(const G3D::Vector3& hitPoint) const
 {
 	if (PartInstance* head = Humanoid::getLocalHeadFromContext(workspace)) {
@@ -53,12 +56,14 @@ bool MouseCommand::characterCanReach(const G3D::Vector3& hitPoint) const
 }
 
 // FUNCTION: WEBSERVICE 0x100be8c0
+// FUNCTION: ROBLOX 0x00620500
 G3D::Ray MouseCommand::getSearchRay(const G3D::Ray& unitRay)
 {
 	return G3D::Ray::fromOriginAndDirection(unitRay.origin, unitRay.direction * maxSearch());
 }
 
 // FUNCTION: WEBSERVICE 0x100be910
+// FUNCTION: ROBLOX 0x00620550
 PartInstance* MouseCommand::getMousePart(
 	const G3D::Ray& unitRay,
 	const ContactManager& contactManager,
@@ -76,12 +81,14 @@ PartInstance* MouseCommand::getMousePart(
 }
 
 // FUNCTION: WEBSERVICE 0x100be9c0
+// FUNCTION: ROBLOX 0x00620600
 TextureId MouseCommand::getCursorId() const
 {
 	return ContentId::fromAssets("Textures\\" + getCursorName() + ".png");
 }
 
 // FUNCTION: WEBSERVICE 0x100bec20
+// FUNCTION: ROBLOX 0x006207e0
 G3D::Ray MouseCommand::getUnitMouseRay(const UIEvent& uiEvent, ICameraOwner* _workspace)
 {
 	return _workspace->getGCamera().worldRay(
@@ -92,6 +99,7 @@ G3D::Ray MouseCommand::getUnitMouseRay(const UIEvent& uiEvent, ICameraOwner* _wo
 }
 
 // FUNCTION: WEBSERVICE 0x100becb0
+// FUNCTION: ROBLOX 0x00620870
 G3D::Ray MouseCommand::getSearchRay(const UIEvent& uiEvent, ICameraOwner* _workspace)
 {
 	G3D::Ray unitRay = getUnitMouseRay(uiEvent, _workspace);
@@ -100,28 +108,33 @@ G3D::Ray MouseCommand::getSearchRay(const UIEvent& uiEvent, ICameraOwner* _works
 }
 
 // FUNCTION: WEBSERVICE 0x100becf0
+// FUNCTION: ROBLOX 0x006208b0
 G3D::Ray MouseCommand::getUnitMouseRay(const UIEvent& uiEvent) const
 {
 	return getUnitMouseRay(uiEvent, workspace);
 }
 
 // FUNCTION: WEBSERVICE 0x100bed30
+// FUNCTION: ROBLOX 0x006208f0
 G3D::Ray MouseCommand::getSearchRay(const UIEvent& uiEvent) const
 {
 	return getSearchRay(uiEvent, workspace);
 }
 
 // FUNCTION: WEBSERVICE 0x100bed70
+// FUNCTION: ROBLOX 0x00620940
 MouseCommand::MouseCommand(Workspace* workspace) : capturedMouse(false), workspace(workspace)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100bedd0
+// FUNCTION: ROBLOX 0x00620970
 MouseCommand::~MouseCommand()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100bee40
+// FUNCTION: ROBLOX 0x006209e0
 PartInstance* MouseCommand::getPart(const UIEvent& uiEvent, const HitTestFilter* filter, G3D::Vector3& hitWorld)
 {
 	G3D::Ray unitRay = getUnitMouseRay(uiEvent);
@@ -145,6 +158,7 @@ PartInstance* MouseCommand::getPart(const UIEvent& uiEvent, const HitTestFilter*
 }
 
 // FUNCTION: WEBSERVICE 0x100bef80
+// FUNCTION: ROBLOX 0x00620ba0
 PartInstance* MouseCommand::getPartByLocalCharacter(const UIEvent& uiEvent, G3D::Vector3& hitWorld)
 {
 	PartByLocalCharacter filter(workspace);
@@ -152,6 +166,7 @@ PartInstance* MouseCommand::getPartByLocalCharacter(const UIEvent& uiEvent, G3D:
 }
 
 // FUNCTION: WEBSERVICE 0x100beff0
+// FUNCTION: ROBLOX 0x00620c90
 PartInstance* MouseCommand::getUnlockedPart(const UIEvent& uiEvent, G3D::Vector3& hitWorld)
 {
 	Unlocked filter;
@@ -159,6 +174,7 @@ PartInstance* MouseCommand::getUnlockedPart(const UIEvent& uiEvent, G3D::Vector3
 }
 
 // FUNCTION: WEBSERVICE 0x100bf020
+// FUNCTION: ROBLOX 0x00620cc0
 PartInstance* MouseCommand::getMousePart(
 	const G3D::Ray& unitRay,
 	const ContactManager& contactManager,

@@ -14,6 +14,7 @@ class IJointOwner;
 using G3D::CoordinateFrame;
 
 // VTABLE: WEBSERVICE 0x10247fb0
+// VTABLE: ROBLOX 0x0083af84
 // SIZE 0x88
 class Joint : public Edge
 {
@@ -44,6 +45,7 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual EdgeType getEdgeType() const { return JOINT; } // vtable+0x0c
 
 public:
@@ -65,6 +67,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual JointType getJointType() const { return NO_JOINT; } // vtable+0x14
 	static JointType getJointType(Edge*);
 	// FUNCTION: WEBSERVICE 0x100eb790 FOLDED
@@ -121,6 +124,7 @@ protected:
 DECOMP_SIZE_ASSERT(Joint, 0x88)
 
 // VTABLE: WEBSERVICE 0x10247e6c
+// VTABLE: ROBLOX 0x0083ae14
 // SIZE 0x88
 class AnchorJoint : public Joint
 {
@@ -137,6 +141,7 @@ private:
 DECOMP_SIZE_ASSERT(AnchorJoint, 0x88)
 
 // VTABLE: WEBSERVICE 0x10247ea4
+// VTABLE: ROBLOX 0x0083ae4c
 // SIZE 0x88
 class FreeJoint : public Joint
 {

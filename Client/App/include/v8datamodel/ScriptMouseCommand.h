@@ -20,6 +20,7 @@ public:
 	virtual ~ScriptMouseCommand();
 
 	// FUNCTION: WEBSERVICE 0x100c7840
+	// FUNCTION: ROBLOX 0x005e1a80
 	boost::shared_ptr<Mouse> getMouse() { return mouse; }
 
 	virtual TextureId getCursorId() const;

@@ -55,6 +55,7 @@ public:
 	const unsigned int elements; // 0x24
 
 	// FUNCTION: WEBSERVICE 0x101877c0
+	// FUNCTION: ROBLOX 0x00491bb0
 	HeadBuilder(
 		G3D::ReferenceCountedPointer<RBX::Render::Mesh::Level> level,
 		G3D::Vector3 size,
@@ -81,6 +82,7 @@ protected:
 DECOMP_SIZE_ASSERT(HeadBuilder, 0x28)
 
 // FUNCTION: WEBSERVICE 0x101878b0
+// FUNCTION: ROBLOX 0x00528f90
 inline void CylinderTransform::operator()(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,
@@ -114,6 +116,7 @@ inline void CylinderTransform::operator()(
 }
 
 // FUNCTION: WEBSERVICE 0x10187a30
+// FUNCTION: ROBLOX 0x00491ca0
 inline void EndcapTransform::operator()(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,
@@ -185,6 +188,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x1018a360
+// FUNCTION: ROBLOX 0x004945d0
 HeadMesh::HeadMesh(const G3D::Vector3& partSize, RenderSurfaceTypes surfaceTypes)
 {
 	const float bevel = std::min(partSize.x, partSize.z) * 0.25f;
@@ -198,6 +202,7 @@ HeadMesh::HeadMesh(const G3D::Vector3& partSize, RenderSurfaceTypes surfaceTypes
 }
 
 // FUNCTION: WEBSERVICE 0x1018a550
+// FUNCTION: ROBLOX 0x004947c0
 HeadMesh::HeadMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	const float bevel = std::min(size.x, size.z) * 0.25f;
@@ -212,6 +217,7 @@ HeadMesh::HeadMesh(const G3D::Vector3& size, NormalId decalFace)
 }
 
 // FUNCTION: WEBSERVICE 0x1018a6e0
+// FUNCTION: ROBLOX 0x00494950
 HeadMesh::HeadMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	const float bevel = std::min(size.x, size.z) * 0.25f;

@@ -44,6 +44,7 @@ protected:
 DECOMP_SIZE_ASSERT(Link, 0xcc)
 
 // VTABLE: WEBSERVICE 0x102480b4
+// VTABLE: ROBLOX 0x00831f24
 // SIZE 0xd0
 class RevoluteLink : public Link
 {

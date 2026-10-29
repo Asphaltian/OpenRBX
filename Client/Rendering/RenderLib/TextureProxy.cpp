@@ -11,6 +11,7 @@ namespace RBX {
 namespace Render {
 
 // STUB: WEBSERVICE 0x10168ea0
+// STUB: ROBLOX 0x004a0480
 void TextureProxy::shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& lighting)
 {
 	for (int i = 0; i < 3; i++) {
@@ -32,6 +33,7 @@ void TextureProxy::shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& li
 }
 
 // FUNCTION: WEBSERVICE 0x10169100
+// FUNCTION: ROBLOX 0x004a0670
 TextureProxyRef TextureProxy::shade(const G3D::Color3& baseColor, const TextureProxyRef& baseTex)
 {
 	TextureProxy* answer = new TextureProxy(baseTex);
@@ -45,12 +47,14 @@ TextureProxyRef TextureProxy::shade(const G3D::Color3& baseColor, const TextureP
 }
 
 // FUNCTION: WEBSERVICE 0x101691d0
+// FUNCTION: ROBLOX 0x00534670
 G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::getIfResolved() const
 {
 	return texture;
 }
 
 // FUNCTION: WEBSERVICE 0x10169200
+// FUNCTION: ROBLOX 0x004a0740
 G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevice* rd)
 {
 	if (!loaded) {
@@ -143,12 +147,14 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 }
 
 // FUNCTION: WEBSERVICE 0x10169920
+// FUNCTION: ROBLOX 0x004a0e60
 TextureProxyRef TextureProxy::alphaOnlyVersion()
 {
 	return new TextureProxy(this);
 }
 
 // FUNCTION: WEBSERVICE 0x101699c0
+// FUNCTION: ROBLOX 0x004a0f00
 G3D::Vector2 TextureProxy::getSize()
 {
 	G3D::TextureRef t = getIfResolved();

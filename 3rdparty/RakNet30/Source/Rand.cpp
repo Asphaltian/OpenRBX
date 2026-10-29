@@ -71,6 +71,7 @@ static int left = -1; // can *next++ this many times before reloading
 
 
 // FUNCTION: WEBSERVICE 0x101c1e60
+// FUNCTION: ROBLOX 0x004e7550
 void seedMT( unsigned int seed )   // Defined in cokus_c.c
 {
 	//
@@ -130,6 +131,7 @@ void seedMT( unsigned int seed )   // Defined in cokus_c.c
 
 
 // FUNCTION: WEBSERVICE 0x101c1ea0
+// FUNCTION: ROBLOX 0x004e7590
 unsigned int reloadMT( void )
 {
 	register unsigned int * p0 = state, *p2 = state + 2, *pM = state + M, s0, s1;
@@ -159,6 +161,7 @@ unsigned int reloadMT( void )
 
 
 // FUNCTION: WEBSERVICE 0x101c1fc0
+// FUNCTION: ROBLOX 0x004e76b0
 unsigned int randomMT( void )
 {
 	unsigned int y;

@@ -185,12 +185,16 @@ DECOMP_SIZE_ASSERT(RunService, 0x1c0)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100543f0
+// FUNCTION: ROBLOX 0x00568b60
 // RBX::Notifier<RBX::RunService,RBX::Heartbeat>::raise
 // FUNCTION: WEBSERVICE 0x100544b0
+// FUNCTION: ROBLOX 0x00568c20
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::raise
 // FUNCTION: WEBSERVICE 0x10054890
+// FUNCTION: ROBLOX 0x00569000
 // RBX::Notifier<RBX::RunService,RBX::Heartbeat>::raise
 // FUNCTION: WEBSERVICE 0x10054930
+// FUNCTION: ROBLOX 0x005690a0
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::raise
 // clang-format on
 

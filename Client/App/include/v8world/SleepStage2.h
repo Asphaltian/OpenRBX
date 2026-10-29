@@ -19,6 +19,7 @@ class Joint;
 class SimJobStage;
 
 // VTABLE: WEBSERVICE 0x10247df8
+// VTABLE: ROBLOX 0x0083ada0
 // SIZE 0x90
 class SleepStage : public IWorldStage
 {
@@ -137,33 +138,43 @@ DECOMP_SIZE_ASSERT(SleepStage, 0x90)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x102252e0
+// SYNTHETIC: ROBLOX 0x007f51c0
 // `RBX::SleepStage::stepAssembliesRecursiveWakePending'::`2'::`dynamic atexit destructor for 'toWake''
 
 // SYNTHETIC: WEBSERVICE 0x10225320
+// SYNTHETIC: ROBLOX 0x007f5200
 // `RBX::SleepStage::stepAssembliesWakePending'::`2'::`dynamic atexit destructor for 'toWake''
 
 // SYNTHETIC: WEBSERVICE 0x10225360
+// SYNTHETIC: ROBLOX 0x007f5240
 // `RBX::SleepStage::stepContacts'::`2'::`dynamic atexit destructor for 'toTouchingSleeping''
 
 // SYNTHETIC: WEBSERVICE 0x102253a0
+// SYNTHETIC: ROBLOX 0x007f5280
 // `RBX::SleepStage::stepContacts'::`2'::`dynamic atexit destructor for 'toTouching''
 
 // SYNTHETIC: WEBSERVICE 0x102253e0
+// SYNTHETIC: ROBLOX 0x007f52c0
 // `RBX::SleepStage::stepContacts'::`2'::`dynamic atexit destructor for 'toStepping''
 
 // SYNTHETIC: WEBSERVICE 0x10225420
+// SYNTHETIC: ROBLOX 0x007f5300
 // `RBX::SleepStage::stepContacts'::`2'::`dynamic atexit destructor for 'toSleeping''
 
 // SYNTHETIC: WEBSERVICE 0x10225460
+// SYNTHETIC: ROBLOX 0x007f5340
 // `RBX::SleepStage::stepJoints'::`2'::`dynamic atexit destructor for 'toSleeping''
 
 // SYNTHETIC: WEBSERVICE 0x102254a0
+// SYNTHETIC: ROBLOX 0x007f5380
 // `RBX::SleepStage::stepAssembliesAwake'::`2'::`dynamic atexit destructor for 'toSleepingChecking''
 
 // SYNTHETIC: WEBSERVICE 0x102254e0
+// SYNTHETIC: ROBLOX 0x007f53c0
 // `RBX::SleepStage::stepAssembliesSleepingChecking'::`2'::`dynamic atexit destructor for 'toDeep''
 
 // SYNTHETIC: WEBSERVICE 0x10225520
+// SYNTHETIC: ROBLOX 0x007f5400
 // `RBX::SleepStage::stepAssembliesSleepingChecking'::`2'::`dynamic atexit destructor for 'toWake''
 // clang-format on
 

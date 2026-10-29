@@ -28,6 +28,7 @@ public:
 	static const Reflection::PropDescriptor<Decal, float> prop_Shiny;
 
 	// FUNCTION: WEBSERVICE 0x100ff550
+	// FUNCTION: ROBLOX 0x004778f0
 	TextureId getTexture() const { return texture; }
 
 	void setTexture(TextureId value);
@@ -79,6 +80,7 @@ DECOMP_SIZE_ASSERT(Texture, 0x12c)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100ffa30
+// FUNCTION: ROBLOX 0x005ac510
 // RBX::Decal::~Decal
 // clang-format on
 

@@ -65,6 +65,7 @@ public:
 DECOMP_SIZE_ASSERT(Controller, 0x0c)
 
 // VTABLE: WEBSERVICE 0x10236688
+// VTABLE: ROBLOX 0x00825204
 // SIZE 0x0c
 class NullController : public Controller
 {
@@ -106,6 +107,7 @@ public:
 DECOMP_SIZE_ASSERT(ControllerTypeArray, 0x8)
 
 // FUNCTION: WEBSERVICE 0x10099400
+// FUNCTION: ROBLOX 0x005ae350
 inline NullController* NullController::getStaticNullController()
 {
 	static NullController n;
@@ -113,6 +115,7 @@ inline NullController* NullController::getStaticNullController()
 }
 
 // SYNTHETIC: WEBSERVICE 0x10222ff0
+// SYNTHETIC: ROBLOX 0x007f28c0
 // `RBX::NullController::getStaticNullController'::`2'::`dynamic atexit destructor for 'n''
 
 } // namespace RBX

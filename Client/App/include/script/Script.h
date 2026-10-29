@@ -91,11 +91,13 @@ protected:
 	virtual IScriptOwner* scriptShouldRun(Script* script) = 0; // vtable+0x00
 
 	// FUNCTION: WEBSERVICE 0x101019f0 FOLDED
+	// FUNCTION: ROBLOX 0x007859e0 FOLDED
 	virtual void runScript(Script* script, ScriptContext* scriptContext) // vtable+0x04
 	{
 	}
 
 	// FUNCTION: WEBSERVICE 0x100d15c0 FOLDED
+	// FUNCTION: ROBLOX 0x0045e450 FOLDED
 	virtual void releaseScript(Script* script) // vtable+0x08
 	{
 	}

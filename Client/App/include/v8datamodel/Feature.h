@@ -81,10 +81,12 @@ public:
 	virtual ~Feature();
 
 	// FUNCTION: WEBSERVICE 0x1019c9f0 FOLDED
+	// FUNCTION: ROBLOX 0x00776c70 FOLDED
 	NormalId getFaceId() const { return faceId; }
 
 	void setFaceId(NormalId value);
 	// FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
+	// FUNCTION: ROBLOX 0x006171e0 FOLDED
 	TopBottom getTopBottom() const { return topBottom; }
 
 	void setTopBottom(TopBottom value);
@@ -93,6 +95,7 @@ public:
 
 	void setLeftRight(LeftRight value);
 	// FUNCTION: WEBSERVICE 0x100e3c30 FOLDED
+	// FUNCTION: ROBLOX 0x004f1410 FOLDED
 	InOut getInOut() const { return inOut; }
 
 	void setInOut(InOut value);
@@ -145,6 +148,7 @@ private:
 	virtual void render3dAdorn(Adorn* adorn);
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual InOutZ getCoordOrientation() const { return Z_IN; }
 
 public:

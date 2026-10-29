@@ -7,11 +7,13 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x101216f0
+// FUNCTION: ROBLOX 0x00661e10
 Cofm::Cofm(Body* body) : body(body), dirty(true), cofmInBody(0, 0, 0)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10121710
+// FUNCTION: ROBLOX 0x00661e30
 const float Cofm::getMass() const
 {
 	updateIfDirty();
@@ -20,6 +22,7 @@ const float Cofm::getMass() const
 }
 
 // FUNCTION: WEBSERVICE 0x10121720
+// FUNCTION: ROBLOX 0x00661e40
 void Cofm::updateIfDirty() const
 {
 	if (dirty) {
@@ -52,6 +55,7 @@ void Cofm::updateIfDirty() const
 }
 
 // FUNCTION: WEBSERVICE 0x10121970
+// FUNCTION: ROBLOX 0x00662090
 const Vector3& Cofm::getCofmInBody() const
 {
 	updateIfDirty();
@@ -60,6 +64,7 @@ const Vector3& Cofm::getCofmInBody() const
 }
 
 // FUNCTION: WEBSERVICE 0x10121980
+// FUNCTION: ROBLOX 0x006620a0
 const Matrix3& Cofm::getMoment() const
 {
 	updateIfDirty();

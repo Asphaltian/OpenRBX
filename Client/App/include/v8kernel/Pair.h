@@ -143,6 +143,7 @@ private:
 DECOMP_SIZE_ASSERT(GeoPair, 0x24)
 
 // FUNCTION: WEBSERVICE 0x100d1ea0
+// FUNCTION: ROBLOX 0x00609ed0
 inline bool GeoPair::match(Body* _b0, Body* _b1, GeoPairType _pairType, int param0, int param1)
 {
 	if (_pairType == POINT_PLANE_PAIR) {

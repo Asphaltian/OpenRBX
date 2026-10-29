@@ -48,6 +48,7 @@ DECOMP_SIZE_ASSERT(PartDragTool, 0x40)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x10126660
+// FUNCTION: ROBLOX 0x00662b20
 // RBX::PartDragTool::getCursorName
 // SYNTHETIC: WEBSERVICE 0x10126690
 // RBX::PartDragTool::`scalar deleting destructor'

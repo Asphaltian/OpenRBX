@@ -32,11 +32,13 @@ static boost::once_flag flagInitScriptCpp = BOOST_ONCE_INIT;
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10068bf0
+// FUNCTION: ROBLOX 0x00575380
 Script::~Script()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10068d50
+// FUNCTION: ROBLOX 0x005754e0
 boost::shared_ptr<const std::string> Script::requestCode()
 {
 	if (scriptId.isNull()) {
@@ -49,6 +51,7 @@ boost::shared_ptr<const std::string> Script::requestCode()
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10069000
+// FUNCTION: ROBLOX 0x00575800
 static void initScriptCpp()
 {
 	helloWorld.reset(new std::string("print(\"Hello world!\")\r\n"));
@@ -57,6 +60,7 @@ static void initScriptCpp()
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100699a0
+// FUNCTION: ROBLOX 0x00575cf0
 Script::Script() : DescribedCreatable<Script, Instance, sScript>("Script"), disabled(false), owner(NULL)
 {
 	boost::call_once(initScriptCpp, flagInitScriptCpp);
@@ -65,6 +69,7 @@ Script::Script() : DescribedCreatable<Script, Instance, sScript>("Script"), disa
 }
 
 // FUNCTION: WEBSERVICE 0x10069aa0
+// FUNCTION: ROBLOX 0x00575df0
 void Script::onAncestorChanged(const AncestorChanged& event)
 {
 	Instance::onAncestorChanged(event);
@@ -97,6 +102,7 @@ void Script::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10069b40
+// FUNCTION: ROBLOX 0x00575e90
 void Script::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	if (ScriptContext* scriptContext = oldProvider ? oldProvider->find<ScriptContext>() : NULL) {
@@ -107,12 +113,14 @@ void Script::onServiceProvider(const ServiceProvider* oldProvider, const Service
 }
 
 // FUNCTION: WEBSERVICE 0x10069cd0
+// FUNCTION: ROBLOX 0x00576020
 LocalScript::LocalScript()
 {
 	setName("LocalScript");
 }
 
 // FUNCTION: WEBSERVICE 0x10069e80
+// FUNCTION: ROBLOX 0x005761d0
 void Script::setEmbeddedCode(const std::string& value)
 {
 	if (*embeddedSource != value) {

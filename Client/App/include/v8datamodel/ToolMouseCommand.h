@@ -23,12 +23,14 @@ private:
 
 public:
 	// FUNCTION: WEBSERVICE 0x100cac30
+	// FUNCTION: ROBLOX 0x0060f970
 	ToolMouseCommand(Workspace* workspace, Tool* tool)
 		: Named<ScriptMouseCommand, sToolMouseCommand>(workspace), tool(shared_from(tool))
 	{
 	}
 
 	// FUNCTION: WEBSERVICE 0x100caca0
+	// FUNCTION: ROBLOX 0x0060f9e0
 	virtual ~ToolMouseCommand() {}
 
 	// SYNTHETIC: WEBSERVICE 0x100cad30

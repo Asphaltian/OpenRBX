@@ -25,6 +25,7 @@ StringCompressor* StringCompressor::instance=0;
 int StringCompressor::referenceCount=0;
 
 // FUNCTION: WEBSERVICE 0x101bb860
+// FUNCTION: ROBLOX 0x004d4cf0
 void StringCompressor::AddReference(void)
 {
 	if (++referenceCount==1)
@@ -33,6 +34,7 @@ void StringCompressor::AddReference(void)
 	}
 }
 // FUNCTION: WEBSERVICE 0x101bb8e0
+// FUNCTION: ROBLOX 0x004d4d70
 void StringCompressor::RemoveReference(void)
 {
 	assert(referenceCount > 0);
@@ -48,6 +50,7 @@ void StringCompressor::RemoveReference(void)
 }
 
 // FUNCTION: WEBSERVICE 0x101bb0c0
+// FUNCTION: ROBLOX 0x004d4550
 StringCompressor* StringCompressor::Instance(void)
 {
 	return instance;
@@ -314,6 +317,7 @@ unsigned int englishCharacterFrequencies[ 256 ] =
 };
 
 // FUNCTION: WEBSERVICE 0x101bb730
+// FUNCTION: ROBLOX 0x004d4bc0
 StringCompressor::StringCompressor()
 {
 	DataStructures::Map<int, HuffmanEncodingTree *>::IMPLEMENT_DEFAULT_COMPARISON();
@@ -352,6 +356,7 @@ void StringCompressor::GenerateTreeFromStrings( unsigned char *input, unsigned i
 }
 
 // FUNCTION: WEBSERVICE 0x101bb7d0
+// FUNCTION: ROBLOX 0x004d4c60
 StringCompressor::~StringCompressor()
 {
 	for (unsigned i=0; i < huffmanEncodingTrees.Size(); i++)
@@ -359,6 +364,7 @@ StringCompressor::~StringCompressor()
 }
 
 // FUNCTION: WEBSERVICE 0x101bb3b0
+// FUNCTION: ROBLOX 0x004d4840
 void StringCompressor::EncodeString( const char *input, int maxCharsToWrite, RakNet::BitStream *output, int languageID )
 {
 	HuffmanEncodingTree *huffmanEncodingTree;
@@ -393,6 +399,7 @@ void StringCompressor::EncodeString( const char *input, int maxCharsToWrite, Rak
 }
 
 // FUNCTION: WEBSERVICE 0x101bb530
+// FUNCTION: ROBLOX 0x004d49c0
 bool StringCompressor::DecodeString( char *output, int maxCharsToWrite, RakNet::BitStream *input, int languageID )
 {
 	HuffmanEncodingTree *huffmanEncodingTree;

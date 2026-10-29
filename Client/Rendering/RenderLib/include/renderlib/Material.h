@@ -14,6 +14,7 @@ namespace RBX {
 namespace Render {
 
 // VTABLE: WEBSERVICE 0x10259d8c
+// VTABLE: ROBLOX 0x00810ad4
 // SIZE 0x18
 class Material : public G3D::ReferenceCountedObject
 {
@@ -47,6 +48,7 @@ public:
 		~Level();
 
 		// FUNCTION: WEBSERVICE 0x101efe80
+		// FUNCTION: ROBLOX 0x0052d3a0
 		G3D::TextureRef baseTexture(G3D::RenderDevice* rd) const
 		{
 			if (mBaseTexture.isNull()) {
@@ -58,6 +60,7 @@ public:
 
 		void setBaseTexture(TextureProxyRef baseTexture);
 		// FUNCTION: WEBSERVICE 0x101efec0
+		// FUNCTION: ROBLOX 0x0049e000
 		G3D::TextureRef matte(G3D::RenderDevice* rd) const
 		{
 			if (mMatte.isNull()) {
@@ -98,6 +101,7 @@ public:
 	unsigned int levelCount() const;
 	Level& getLevel(int index);
 	// FUNCTION: WEBSERVICE 0x101ef660
+	// FUNCTION: ROBLOX 0x0049d7e0
 	const Level* detailLevel(float lvl) const
 	{
 		if (levels.size() == 0) {

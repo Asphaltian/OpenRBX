@@ -81,12 +81,14 @@ const G3D::GCamera& Workspace::getGCamera() const
 }
 
 // FUNCTION: WEBSERVICE 0x1006a100
+// FUNCTION: ROBLOX 0x005b4750
 void Workspace::zoomToExtents()
 {
 	getCamera()->zoomExtents(viewPort);
 }
 
 // FUNCTION: WEBSERVICE 0x1006a120
+// FUNCTION: ROBLOX 0x005b4770
 void Workspace::stop()
 {
 	isSimulating = false;
@@ -94,18 +96,21 @@ void Workspace::stop()
 }
 
 // FUNCTION: WEBSERVICE 0x1006a140
+// FUNCTION: ROBLOX 0x005b4790
 MouseCommand* newNullTool(Workspace* workspace)
 {
 	return new NewNullTool(workspace);
 }
 
 // FUNCTION: WEBSERVICE 0x1006a1a0
+// FUNCTION: ROBLOX 0x005b47f0
 static double getFPS(Profiling::CodeProfiler* profiler)
 {
 	return profiler->getData(3.0).getActualFPS();
 }
 
 // FUNCTION: WEBSERVICE 0x1006a7c0
+// FUNCTION: ROBLOX 0x005b49c0
 Workspace* Workspace::getMyWorkspaceFast(const Instance* context)
 {
 	const Instance* workspace = context->getParent();
@@ -120,12 +125,14 @@ Workspace* Workspace::getMyWorkspaceFast(const Instance* context)
 }
 
 // FUNCTION: WEBSERVICE 0x1006a7f0
+// FUNCTION: ROBLOX 0x005b49f0
 World* Workspace::getMyWorldFast(const Instance* context)
 {
 	return getMyWorkspaceFast(context)->getWorld();
 }
 
 // FUNCTION: WEBSERVICE 0x1006a830
+// FUNCTION: ROBLOX 0x005b4a70
 void Workspace::setNullMouseCommand()
 {
 	stickyCommand.reset();
@@ -133,6 +140,7 @@ void Workspace::setNullMouseCommand()
 }
 
 // FUNCTION: WEBSERVICE 0x1006a880
+// FUNCTION: ROBLOX 0x005b4ac0
 void Workspace::render2d(Adorn* adorn)
 {
 	currentCommand->render2d(adorn);
@@ -140,6 +148,7 @@ void Workspace::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x1006a8b0
+// FUNCTION: ROBLOX 0x005b4af0
 static void DrawAdorn(boost::shared_ptr<Instance> wsi, Adorn* adorn, SelectState selectState, Workspace* workspace)
 {
 	if (IRenderable* renderable = dynamic_cast<IRenderable*>(wsi.get())) {
@@ -150,6 +159,7 @@ static void DrawAdorn(boost::shared_ptr<Instance> wsi, Adorn* adorn, SelectState
 }
 
 // FUNCTION: WEBSERVICE 0x1006a960
+// FUNCTION: ROBLOX 0x005b4ba0
 IScriptOwner* Workspace::scriptShouldRun(Script* script)
 {
 	bool shouldRun;
@@ -171,12 +181,14 @@ void Workspace::setThrottleEnabled(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1006b2e0
+// FUNCTION: ROBLOX 0x005b5050
 void Workspace::joinAllHack()
 {
 	world->joinAll();
 }
 
 // FUNCTION: WEBSERVICE 0x1006b2f0
+// FUNCTION: ROBLOX 0x005b5060
 void Workspace::reset()
 {
 	isSimulating = false;
@@ -202,6 +214,7 @@ static void wrapper(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1006bfd0
+// FUNCTION: ROBLOX 0x005b5720
 Camera* Workspace::getCamera() const
 {
 	if (!currentCamera || !currentCamera->isDescendentOf(this)) {
@@ -215,6 +228,7 @@ Camera* Workspace::getCamera() const
 }
 
 // FUNCTION: WEBSERVICE 0x1006c460
+// FUNCTION: ROBLOX 0x005b5a20
 void Workspace::onChildChanged(Instance* instance, const PropertyChanged& event)
 {
 	Instance::onChildChanged(instance, event);
@@ -222,6 +236,7 @@ void Workspace::onChildChanged(Instance* instance, const PropertyChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x1006c490
+// FUNCTION: ROBLOX 0x005b5a50
 void Workspace::onDescendentRemoving(const boost::shared_ptr<Instance>& instance)
 {
 	if (IRenderable* renderable = dynamic_cast<IRenderable*>(instance.get())) {
@@ -233,6 +248,7 @@ void Workspace::onDescendentRemoving(const boost::shared_ptr<Instance>& instance
 }
 
 // FUNCTION: WEBSERVICE 0x1006c4f0
+// FUNCTION: ROBLOX 0x005b5ab0
 void Workspace::onDescendentAdded(Instance* instance)
 {
 	RootInstance::onDescendentAdded(instance);
@@ -272,6 +288,7 @@ void Workspace::breakJoints(boost::shared_ptr<const std::vector<boost::shared_pt
 }
 
 // FUNCTION: WEBSERVICE 0x1006c6f0
+// FUNCTION: ROBLOX 0x005b5cb0
 void clearEmptiedModels(boost::shared_ptr<Instance> test, Instance* workspace)
 {
 	if (test.get() != workspace) {
@@ -296,6 +313,7 @@ void clearEmptiedModels(boost::shared_ptr<Instance> test, Instance* workspace)
 }
 
 // FUNCTION: WEBSERVICE 0x1006c890
+// FUNCTION: ROBLOX 0x005b5e50
 void Workspace::handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstance> >& fallenParts)
 {
 	for (int i = 0; i < fallenParts.size(); ++i) {
@@ -307,6 +325,7 @@ void Workspace::handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstanc
 }
 
 // STUB: WEBSERVICE 0x1006c9e0
+// STUB: ROBLOX 0x005b5fa0
 void Workspace::setMouseCommand(MouseCommand* newMouseCommand)
 {
 	if (!newMouseCommand) {
@@ -336,6 +355,7 @@ void Workspace::setMouseCommand(MouseCommand* newMouseCommand)
 }
 
 // FUNCTION: WEBSERVICE 0x1006cb00
+// FUNCTION: ROBLOX 0x005b60c0
 GuiResponse Workspace::process(const GuiEvent& event)
 {
 	switch (event.eventType) {
@@ -395,6 +415,7 @@ GuiResponse Workspace::process(const GuiEvent& event)
 }
 
 // FUNCTION: WEBSERVICE 0x1006ccb0
+// FUNCTION: ROBLOX 0x005b6270
 void Workspace::runScript(Script* script, ScriptContext* context)
 {
 	if (Network::Players::backendProcessing(this, true) && !isSimulating) {
@@ -406,11 +427,13 @@ void Workspace::runScript(Script* script, ScriptContext* context)
 }
 
 // FUNCTION: WEBSERVICE 0x1006cd70
+// FUNCTION: ROBLOX 0x005b62f0
 Workspace::~Workspace()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1006d0d0
+// FUNCTION: ROBLOX 0x005b6650
 Extents Workspace::computeCameraOwnerExtents()
 {
 	return getExtentsWorld();
@@ -423,6 +446,7 @@ void Workspace::cameraMoved()
 }
 
 // FUNCTION: WEBSERVICE 0x1006d280
+// FUNCTION: ROBLOX 0x005b6800
 float Workspace::step(float timeInterval)
 {
 	timeInterval = world->step(timeInterval);
@@ -449,6 +473,7 @@ float Workspace::step(float timeInterval)
 }
 
 // FUNCTION: WEBSERVICE 0x1006d410
+// FUNCTION: ROBLOX 0x005b6990
 void Workspace::setDefaultMouseCommand()
 {
 	stickyCommand.reset();
@@ -462,12 +487,14 @@ void Workspace::releaseScript(Script* script)
 }
 
 // FUNCTION: WEBSERVICE 0x1006ebc0
+// FUNCTION: ROBLOX 0x005b6f40
 Workspace* Workspace::findWorkspace(const Instance* context)
 {
 	return ServiceProvider::find<Workspace>(context);
 }
 
 // FUNCTION: WEBSERVICE 0x1006ebd0
+// FUNCTION: ROBLOX 0x005b6f50
 Workspace* Workspace::getWorkspaceIfInWorkspace(const Instance* context)
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(context);
@@ -480,6 +507,7 @@ Workspace* Workspace::getWorkspaceIfInWorkspace(const Instance* context)
 }
 
 // FUNCTION: WEBSERVICE 0x1006ec00
+// FUNCTION: ROBLOX 0x005b6f80
 World* Workspace::getWorldIfInWorkspace(const Instance* context)
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(context);
@@ -492,12 +520,14 @@ World* Workspace::getWorldIfInWorkspace(const Instance* context)
 }
 
 // FUNCTION: WEBSERVICE 0x1006ec40
+// FUNCTION: ROBLOX 0x005b6fc0
 bool Workspace::contextInWorkspace(const Instance* context)
 {
 	return getWorkspaceIfInWorkspace(context) != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1006ec80
+// FUNCTION: ROBLOX 0x005b7000
 void Workspace::onEvent(const RunService* source, Heartbeat event)
 {
 	onMovingHeartbeat();
@@ -522,6 +552,7 @@ void Workspace::onEvent(const RunService* source, Heartbeat event)
 }
 
 // FUNCTION: WEBSERVICE 0x1006ed50
+// FUNCTION: ROBLOX 0x005b70d0
 void Workspace::setImageServerView(const G3D::Rect2D& viewPortRect)
 {
 	HopperBin* superHack = NULL;
@@ -550,6 +581,7 @@ void Workspace::setImageServerView(const G3D::Rect2D& viewPortRect)
 }
 
 // FUNCTION: WEBSERVICE 0x1006eeb0
+// FUNCTION: ROBLOX 0x005b7230
 void Workspace::insertContent(
 	ContentId contentId, std::vector<boost::shared_ptr<Instance> >& items, InsertMode insertMode, PromptMode promptMode
 )
@@ -566,12 +598,14 @@ void Workspace::insertContent(
 }
 
 // FUNCTION: WEBSERVICE 0x1006f030
+// FUNCTION: ROBLOX 0x005b73b0
 static void append(const boost::shared_ptr<Instance>& item, std::vector<boost::shared_ptr<Instance> >* values)
 {
 	values->push_back(item);
 }
 
 // FUNCTION: WEBSERVICE 0x1006f040
+// FUNCTION: ROBLOX 0x005b73c0
 void Workspace::start()
 {
 	isSimulating = true;
@@ -598,6 +632,7 @@ void Workspace::start()
 }
 
 // FUNCTION: WEBSERVICE 0x1006f380
+// FUNCTION: ROBLOX 0x005b7650
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Workspace::insertContent(ContentId contentId)
 {
 	std::vector<boost::shared_ptr<Instance> > items;
@@ -612,6 +647,7 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Workspace::i
 }
 
 // FUNCTION: WEBSERVICE 0x1006f6e0
+// FUNCTION: ROBLOX 0x005b7ab0
 void Workspace::render3dAdorn(Adorn* adorn)
 {
 	viewPort = adorn->getViewport();
@@ -641,6 +677,7 @@ void Workspace::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100703e0
+// FUNCTION: ROBLOX 0x005b87f0
 Workspace::Workspace(IDataState* dataState)
 	: VerbContainer(NULL), dataState(dataState), arrowCameraControls(false), flySteps(0), isSimulating(false),
 	  scriptContext(NULL), inMouselookMode(false), profileWorkspaceStep(new Profiling::CodeProfiler("DataModel Step")),
@@ -664,6 +701,7 @@ public:
 DECOMP_SIZE_ASSERT(WorkspaceStatsItem, 0x120)
 
 // FUNCTION: WEBSERVICE 0x100707e0
+// FUNCTION: ROBLOX 0x005b8bf0
 void Workspace::setCamera(Camera* value)
 {
 	if (value != currentCamera.get()) {
@@ -677,6 +715,7 @@ void Workspace::setCamera(Camera* value)
 }
 
 // FUNCTION: WEBSERVICE 0x10070a20
+// FUNCTION: ROBLOX 0x005b8e30
 WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* world)
 {
 	setName("Workspace");
@@ -722,6 +761,7 @@ WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* 
 }
 
 // FUNCTION: WEBSERVICE 0x10070ff0
+// FUNCTION: ROBLOX 0x005b9400
 void Workspace::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);

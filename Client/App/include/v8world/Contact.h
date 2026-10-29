@@ -69,6 +69,7 @@ private:
 DECOMP_SIZE_ASSERT(Contact, 0x34)
 
 // VTABLE: WEBSERVICE 0x10246ddc
+// VTABLE: ROBLOX 0x0083a8fc
 // SIZE 0x38
 class BallBallContact : public Contact
 {
@@ -93,6 +94,7 @@ private:
 DECOMP_SIZE_ASSERT(BallBallContact, 0x38)
 
 // VTABLE: WEBSERVICE 0x10246e00
+// VTABLE: ROBLOX 0x0083a920
 // SIZE 0x38
 class BallBlockContact : public Contact
 {
@@ -123,6 +125,7 @@ private:
 DECOMP_SIZE_ASSERT(BallBlockContact, 0x38)
 
 // VTABLE: WEBSERVICE 0x10246e24
+// VTABLE: ROBLOX 0x0083a944
 // SIZE 0x78
 class BlockBlockContact : public Contact
 {
@@ -130,6 +133,7 @@ public:
 	BlockBlockContact(Primitive* p0, Primitive* p1);
 
 	// SYNTHETIC: WEBSERVICE 0x10108e40
+	// SYNTHETIC: ROBLOX 0x0063f130
 	// RBX::BlockBlockContact::`scalar deleting destructor'
 
 	static float contactPairHitRatio();
@@ -171,6 +175,7 @@ private:
 DECOMP_SIZE_ASSERT(BlockBlockContact, 0x78)
 
 // FUNCTION: WEBSERVICE 0x100714b0
+// FUNCTION: ROBLOX 0x0058e980
 inline float BlockBlockContact::contactPairHitRatio()
 {
 	int denom = contactPairMatches + contactPairMisses;
@@ -179,6 +184,7 @@ inline float BlockBlockContact::contactPairHitRatio()
 }
 
 // FUNCTION: WEBSERVICE 0x10107fd0
+// FUNCTION: ROBLOX 0x0063e260
 inline BallBallContact::BallBallContact(Primitive* p0, Primitive* p1) : Contact(p0, p1), ballBallConnector(NULL)
 {
 }
@@ -218,11 +224,13 @@ inline void BallBlockContact::deleteAllConnectors()
 }
 
 // FUNCTION: WEBSERVICE 0x10108080
+// FUNCTION: ROBLOX 0x0063e2f0
 inline BallBlockContact::BallBlockContact(Primitive* p0, Primitive* p1) : Contact(p0, p1), ballBlockConnector(NULL)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10108a30
+// FUNCTION: ROBLOX 0x0063ed20
 inline BlockBlockContact::BlockBlockContact(Primitive* p0, Primitive* p1)
 	: Contact(p0, p1), separatingAxisId(0), separatingBodyId(0)
 {

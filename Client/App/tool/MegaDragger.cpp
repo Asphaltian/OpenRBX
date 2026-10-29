@@ -12,18 +12,21 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10116200
+// FUNCTION: ROBLOX 0x0061cfa0
 void MegaDragger::continueDragging()
 {
 	DragUtilities::unJoinAndSetDragging(dragParts);
 }
 
 // FUNCTION: WEBSERVICE 0x10116210
+// FUNCTION: ROBLOX 0x0061d020
 bool MegaDragger::mousePartAlive()
 {
 	return PartInstance::nonNullInWorkspace(mousePart.lock());
 }
 
 // FUNCTION: WEBSERVICE 0x10116230
+// FUNCTION: ROBLOX 0x0061d040
 void MegaDragger::startDragging()
 {
 	DragUtilities::unJoinAndSetDragging(dragParts);
@@ -36,6 +39,7 @@ void MegaDragger::startDragging()
 }
 
 // FUNCTION: WEBSERVICE 0x101162f0
+// FUNCTION: ROBLOX 0x0061d100
 G3D::Vector3 MegaDragger::hitObjectOrPlane(const UIEvent& uiEvent)
 {
 	G3D::Vector3 hitPoint;
@@ -50,6 +54,7 @@ G3D::Vector3 MegaDragger::hitObjectOrPlane(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101163b0
+// FUNCTION: ROBLOX 0x0061d1c0
 void MegaDragger::alignAndCleanParts()
 {
 	if (mousePartAlive()) {
@@ -66,6 +71,7 @@ void MegaDragger::alignAndCleanParts()
 }
 
 // FUNCTION: WEBSERVICE 0x10116530
+// FUNCTION: ROBLOX 0x0061d340
 G3D::Vector3 MegaDragger::safeMoveYDrop(const G3D::Vector3& tryDrag)
 {
 	G3D::Array<Primitive*> primitives;
@@ -75,6 +81,7 @@ G3D::Vector3 MegaDragger::safeMoveYDrop(const G3D::Vector3& tryDrag)
 }
 
 // FUNCTION: WEBSERVICE 0x101165b0
+// FUNCTION: ROBLOX 0x0061d3c0
 G3D::Vector3 MegaDragger::safeMoveNoDrop(const G3D::Vector3& tryDrag)
 {
 	G3D::Array<Primitive*> primitives;
@@ -84,6 +91,7 @@ G3D::Vector3 MegaDragger::safeMoveNoDrop(const G3D::Vector3& tryDrag)
 }
 
 // FUNCTION: WEBSERVICE 0x10116630
+// FUNCTION: ROBLOX 0x0061d550
 void MegaDragger::safeRotate(const G3D::Matrix3& rotMatrix)
 {
 	G3D::Array<Primitive*> primitives;
@@ -94,6 +102,7 @@ void MegaDragger::safeRotate(const G3D::Matrix3& rotMatrix)
 }
 
 // FUNCTION: WEBSERVICE 0x10116790
+// FUNCTION: ROBLOX 0x0061d730
 MegaDragger::MegaDragger(
 	PartInstance* mousePartPtr, const std::vector<PVInstance*>& pvInstances, RootInstance* rootInstance
 )
@@ -104,6 +113,7 @@ MegaDragger::MegaDragger(
 }
 
 // FUNCTION: WEBSERVICE 0x10116870
+// FUNCTION: ROBLOX 0x0061d810
 MegaDragger::MegaDragger(
 	PartInstance* mousePartPtr, const std::vector<boost::weak_ptr<PartInstance> >& partArray, RootInstance* rootInstance
 )
@@ -113,6 +123,7 @@ MegaDragger::MegaDragger(
 }
 
 // FUNCTION: WEBSERVICE 0x10116930
+// FUNCTION: ROBLOX 0x0061d8d0
 MegaDragger::~MegaDragger()
 {
 	if (!joined) {
@@ -121,6 +132,7 @@ MegaDragger::~MegaDragger()
 }
 
 // FUNCTION: WEBSERVICE 0x101169e0
+// FUNCTION: ROBLOX 0x0061d980
 void MegaDragger::finishDragging()
 {
 	rootInstance->clearCameraIgnoreParts();

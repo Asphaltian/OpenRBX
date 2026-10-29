@@ -115,6 +115,7 @@ protected:
 DECOMP_SIZE_ASSERT(PBBBuilder, 0x28)
 
 // FUNCTION: WEBSERVICE 0x1017abc0
+// FUNCTION: ROBLOX 0x00484f50
 PBBBuilder::PBBBuilder(
 	G3D::ReferenceCountedPointer<RBX::Render::Mesh::Level>& level,
 	G3D::Vector3 size,
@@ -182,6 +183,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x1017da00
+// FUNCTION: ROBLOX 0x00487e30
 PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);
@@ -194,6 +196,7 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId decalFace)
 }
 
 // FUNCTION: WEBSERVICE 0x1017db60
+// FUNCTION: ROBLOX 0x00487f90
 PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	Render::Mesh::LevelRef level = new Render::Mesh::Level(G3D::RenderDevice::QUADS);
@@ -208,6 +211,7 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vect
 }
 
 // FUNCTION: WEBSERVICE 0x1017dd20
+// FUNCTION: ROBLOX 0x00488150
 PBBMesh::PBBMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
 	{

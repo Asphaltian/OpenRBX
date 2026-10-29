@@ -135,6 +135,7 @@ SOCKET SocketLayer::Connect( SOCKET writeSocket, unsigned int binaryAddress, uns
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x101bb920
+// FUNCTION: ROBLOX 0x004e16e0
 SOCKET SocketLayer::CreateBoundSocket( unsigned short port, bool blockingSocket, const char *forceHostAddress )
 {
 	SOCKET listenSocket;
@@ -278,6 +279,7 @@ SOCKET SocketLayer::CreateBoundSocket( unsigned short port, bool blockingSocket,
 
 #if !defined(_COMPATIBILITY_1) && !defined(_COMPATIBILITY_2)
 // FUNCTION: WEBSERVICE 0x101bba50
+// FUNCTION: ROBLOX 0x004e1810
 const char* SocketLayer::DomainNameToIP( const char *domainName )
 {
 	struct hostent * phe = gethostbyname( domainName );
@@ -305,6 +307,7 @@ void SocketLayer::Write( const SOCKET writeSocket, const char* data, const int l
 	send( writeSocket, data, length, 0 );
 }
 // FUNCTION: WEBSERVICE 0x101bba80
+// FUNCTION: ROBLOX 0x004e1840
 int SocketLayer::RecvFrom( const SOCKET s, RakPeer *rakPeer, int *errorCode, unsigned connectionSocketIndex )
 {
 	int len;
@@ -404,6 +407,7 @@ int SocketLayer::RecvFrom( const SOCKET s, RakPeer *rakPeer, int *errorCode, uns
 #pragma warning( disable : 4702 ) // warning C4702: unreachable code
 #endif
 // FUNCTION: WEBSERVICE 0x101bbb50
+// FUNCTION: ROBLOX 0x004e1910
 int SocketLayer::SendTo( SOCKET s, const char *data, int length, unsigned int binaryAddress, unsigned short port )
 {
 	if ( s == INVALID_SOCKET )
@@ -461,6 +465,7 @@ int SocketLayer::SendTo( SOCKET s, const char *data, int length, unsigned int bi
 }
 
 // FUNCTION: WEBSERVICE 0x101bbc30
+// FUNCTION: ROBLOX 0x004e19f0
 int SocketLayer::SendToTTL1( SOCKET s, const char *data, int length, char ip[ 16 ], unsigned short port )
 {
 	int oldTTL;
@@ -475,6 +480,7 @@ int SocketLayer::SendToTTL1( SOCKET s, const char *data, int length, char ip[ 16
 }
 
 // FUNCTION: WEBSERVICE 0x101bbc00
+// FUNCTION: ROBLOX 0x004e19c0
 int SocketLayer::SendTo( SOCKET s, const char *data, int length, char ip[ 16 ], unsigned short port )
 {
 	unsigned int binaryAddress;
@@ -484,6 +490,7 @@ int SocketLayer::SendTo( SOCKET s, const char *data, int length, char ip[ 16 ], 
 
 #if !defined(_COMPATIBILITY_1) && !defined(_COMPATIBILITY_2)
 // FUNCTION: WEBSERVICE 0x101bbcc0
+// FUNCTION: ROBLOX 0x004e1a80
 void SocketLayer::GetMyIP( char ipList[ 10 ][ 16 ] )
 {
 	char ac[ 80 ];
@@ -538,6 +545,7 @@ void SocketLayer::GetMyIP( char ipList[ 10 ][ 16 ] )
 #endif
 
 // FUNCTION: WEBSERVICE 0x101bbd60
+// FUNCTION: ROBLOX 0x004e1b20
 unsigned short SocketLayer::GetLocalPort ( SOCKET s )
 {
 	sockaddr_in sa;

@@ -33,10 +33,12 @@ protected:
 	G3D::Color3 shadeColor;                             // 0x40
 
 	// FUNCTION: WEBSERVICE 0x10169050
+	// FUNCTION: ROBLOX 0x004a05c0
 	TextureProxy(TextureProxyRef root) : loaded(false), textureManager(NULL), root(root) { filename = ""; }
 
 public:
 	// FUNCTION: WEBSERVICE 0x10030fd0
+	// FUNCTION: ROBLOX 0x00477f60
 	TextureProxy(G3D::TextureManager& textureManager, const std::string& filename, bool tiled)
 		: loaded(false), textureManager(&textureManager), tiled(tiled)
 	{
@@ -56,10 +58,13 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x10031040
+	// SYNTHETIC: ROBLOX 0x00477fd0
 	// RBX::Render::TextureProxy::~TextureProxy
 	// SYNTHETIC: WEBSERVICE 0x102258f0
+	// SYNTHETIC: ROBLOX 0x007f0740
 	// `RBX::Render::TextureProxy::resolve'::`11'::`dynamic atexit destructor for 'cachedBumpImage''
 	// SYNTHETIC: WEBSERVICE 0x10225900
+	// SYNTHETIC: ROBLOX 0x007f0750
 	// `RBX::Render::TextureProxy::resolve'::`11'::`dynamic atexit destructor for 'lastFilename''
 	// clang-format on
 };

@@ -70,6 +70,7 @@ public:
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10034b40
+// FUNCTION: ROBLOX 0x00583210
 void ThrowIfFailure(bool success, const char* message)
 {
 	if (!success) {
@@ -95,6 +96,7 @@ void ThrowIfFailure(bool success, const char* message)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10035950
+// FUNCTION: ROBLOX 0x00583e70
 int HttpRequest_source::read(char* s, int n)
 {
 	DWORD numBytes;
@@ -115,6 +117,7 @@ int HttpRequest_source::read(char* s, int n)
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1003a9e0
+// FUNCTION: ROBLOX 0x00588a50
 bool Http::isScript(const char* url)
 {
 	CUrl crack;
@@ -138,6 +141,7 @@ bool Http::isScript(const char* url)
 }
 
 // FUNCTION: WEBSERVICE 0x1003ab10
+// FUNCTION: ROBLOX 0x00588b80
 bool Http::isRobloxSite(const char* url)
 {
 	CUrl crack;
@@ -163,6 +167,7 @@ bool Http::isRobloxSite(const char* url)
 static boost::mutex trustCheckMutex;
 
 // FUNCTION: WEBSERVICE 0x1003ac90
+// FUNCTION: ROBLOX 0x00588d00
 bool Http::trustCheck(const char* url)
 {
 	{
@@ -226,6 +231,7 @@ bool Http::trustCheck(const char* url)
 }
 
 // STUB: WEBSERVICE 0x1003c960
+// STUB: ROBLOX 0x0058a9d0
 static void httpGetPost(
 	bool isPost,
 	const std::string& url,
@@ -419,6 +425,7 @@ static void httpGetPost(
 }
 
 // FUNCTION: WEBSERVICE 0x1003d2c0
+// FUNCTION: ROBLOX 0x0058b330
 void Http::post(std::istream& input, bool compress, std::string& response)
 {
 	if (additionalHeaders.empty()) {
@@ -430,6 +437,7 @@ void Http::post(std::istream& input, bool compress, std::string& response)
 }
 
 // FUNCTION: WEBSERVICE 0x1003d320
+// FUNCTION: ROBLOX 0x0058b390
 void Http::get(std::string& response)
 {
 	const char* h = NULL;

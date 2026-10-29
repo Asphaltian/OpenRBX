@@ -12,11 +12,13 @@ namespace RBX {
 bool ContactManager::ignoreBool;
 
 // FUNCTION: WEBSERVICE 0x101080d0
+// FUNCTION: ROBLOX 0x0063e350
 ContactManager::ContactManager(World* world) : spatialHash(new SpatialHash(world, this)), world(world)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10108130
+// FUNCTION: ROBLOX 0x0063e3b0
 void ContactManager::getPrimitivesTouchingExtents(
 	const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& found
 )
@@ -25,6 +27,7 @@ void ContactManager::getPrimitivesTouchingExtents(
 }
 
 // FUNCTION: WEBSERVICE 0x10108140
+// FUNCTION: ROBLOX 0x0063e3c0
 void ContactManager::onReleasePair(Primitive* p0, Primitive* p1)
 {
 	Contact* contact = Primitive::getContact(p0, p1);
@@ -33,36 +36,42 @@ void ContactManager::onReleasePair(Primitive* p0, Primitive* p1)
 }
 
 // FUNCTION: WEBSERVICE 0x10108170
+// FUNCTION: ROBLOX 0x0063e3f0
 void ContactManager::onPrimitiveAdded(Primitive* p)
 {
 	spatialHash->onPrimitiveAdded(p);
 }
 
 // FUNCTION: WEBSERVICE 0x10108180
+// FUNCTION: ROBLOX 0x0063e400
 void ContactManager::onPrimitiveRemoved(Primitive* p)
 {
 	spatialHash->onPrimitiveRemoved(p);
 }
 
 // FUNCTION: WEBSERVICE 0x10108190
+// FUNCTION: ROBLOX 0x0063e410
 void ContactManager::onPrimitiveExtentsChanged(Primitive* p)
 {
 	spatialHash->onPrimitiveExtentsChanged(p);
 }
 
 // FUNCTION: WEBSERVICE 0x101081a0
+// FUNCTION: ROBLOX 0x0063e420
 void ContactManager::stepWorld()
 {
 	spatialHash->onAllPrimitivesMoved();
 }
 
 // FUNCTION: WEBSERVICE 0x101081b0
+// FUNCTION: ROBLOX 0x0063e430 FOLDED
 ContactManager::~ContactManager()
 {
 	delete spatialHash;
 }
 
 // FUNCTION: WEBSERVICE 0x101081d0
+// FUNCTION: ROBLOX 0x0063e450
 Primitive* ContactManager::getSlowHit(
 	const G3D::Array<Primitive*>& primitives,
 	const G3D::Ray& unitRay,
@@ -147,6 +156,7 @@ Primitive* ContactManager::getSlowHit(
 }
 
 // FUNCTION: WEBSERVICE 0x10108620
+// FUNCTION: ROBLOX 0x0063e910
 bool ContactManager::intersectingOthers(Primitive* check, const std::set<Primitive*>& checkSet, float overlapIgnored)
 {
 	Contact* c = check->getFirstContact();
@@ -165,6 +175,7 @@ bool ContactManager::intersectingOthers(Primitive* check, const std::set<Primiti
 }
 
 // FUNCTION: WEBSERVICE 0x101086c0
+// FUNCTION: ROBLOX 0x0063e9b0
 Primitive* ContactManager::getFastHit(
 	const G3D::Ray& worldRay,
 	const G3D::Array<const Primitive*>* ignorePrim,
@@ -204,6 +215,7 @@ Primitive* ContactManager::getFastHit(
 }
 
 // FUNCTION: WEBSERVICE 0x10108890
+// FUNCTION: ROBLOX 0x0063eb80
 Primitive* ContactManager::getHit(
 	const G3D::Ray& ray,
 	const G3D::Array<const Primitive*>* ignore,
@@ -231,6 +243,7 @@ Primitive* ContactManager::getHit(
 }
 
 // FUNCTION: WEBSERVICE 0x10108920
+// FUNCTION: ROBLOX 0x0063ec10
 Primitive* ContactManager::getHitLegacy(
 	const G3D::Ray& originDirection,
 	const Primitive* ignorePrim,
@@ -257,6 +270,7 @@ Primitive* ContactManager::getHitLegacy(
 }
 
 // FUNCTION: WEBSERVICE 0x10108aa0
+// FUNCTION: ROBLOX 0x0063ed90
 Primitive* ContactManager::getHit(
 	const G3D::Ray& ray,
 	const std::vector<const Primitive*>* ignore,
@@ -273,6 +287,7 @@ Primitive* ContactManager::getHit(
 }
 
 // FUNCTION: WEBSERVICE 0x10108b30
+// FUNCTION: ROBLOX 0x0063ee20
 Contact* ContactManager::createContact(Primitive* p0, Primitive* p1)
 {
 	if (p0->getPrimitiveType() > p1->getPrimitiveType()) {
@@ -303,6 +318,7 @@ Contact* ContactManager::createContact(Primitive* p0, Primitive* p1)
 }
 
 // FUNCTION: WEBSERVICE 0x10108c60
+// FUNCTION: ROBLOX 0x0063ef50
 void ContactManager::onNewPair(Primitive* p0, Primitive* p1)
 {
 	Contact* contact = createContact(p0, p1);
@@ -311,6 +327,7 @@ void ContactManager::onNewPair(Primitive* p0, Primitive* p1)
 }
 
 // FUNCTION: WEBSERVICE 0x10108c90
+// FUNCTION: ROBLOX 0x0063ef80
 void ContactManager::onPrimitiveGeometryTypeChanged(Primitive* p)
 {
 	G3D::Array<Contact*> newContacts;
@@ -329,6 +346,7 @@ void ContactManager::onPrimitiveGeometryTypeChanged(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x10108ea0
+// FUNCTION: ROBLOX 0x0063f190
 bool ContactManager::intersectingOthers(const G3D::Array<Primitive*>& check, float overlapIgnored)
 {
 	std::set<Primitive*> checkSet(check.begin(), check.end());
@@ -343,6 +361,7 @@ bool ContactManager::intersectingOthers(const G3D::Array<Primitive*>& check, flo
 }
 
 // FUNCTION: WEBSERVICE 0x10108fa0
+// FUNCTION: ROBLOX 0x0063f290
 bool ContactManager::intersectingOthers(Primitive* check, float overlapIgnored)
 {
 	std::set<Primitive*> checkSet;

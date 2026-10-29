@@ -13,6 +13,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011cdb0
+// FUNCTION: ROBLOX 0x00646c40
 Joint* JointBuilder::canJoin(Primitive* p0, Primitive* p1)
 {
 	const Extents& e0 = p0->getFastFuzzyExtents();

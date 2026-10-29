@@ -73,6 +73,7 @@ private:
 	// TEMPLATE: WEBSERVICE 0x1000b0b0
 	// RBX::Name::doDeclare<&sThumbnailGenerator>
 	// FUNCTION: WEBSERVICE 0x10071c60
+	// FUNCTION: ROBLOX 0x00448410
 	// RBX::Name::doDeclare<0>
 	// TEMPLATE: WEBSERVICE 0x1000b140
 	// RBX::Name::doDeclare<&RBX::sLighting>
@@ -131,6 +132,7 @@ private:
 	// TEMPLATE: WEBSERVICE 0x10071cd0
 	// RBX::Name::doDeclare<&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x10071d40
+	// TEMPLATE: ROBLOX 0x0058eed0
 	// RBX::Name::doDeclare<&RBX::sLocalBackpack>
 	// TEMPLATE: WEBSERVICE 0x10071db0
 	// RBX::Name::doDeclare<&RBX::sSnap>
@@ -181,22 +183,30 @@ private:
 	// TEMPLATE: WEBSERVICE 0x10088300
 	// RBX::Name::doDeclare<&RBX::sFlagStand>
 	// TEMPLATE: WEBSERVICE 0x10088370
+	// TEMPLATE: ROBLOX 0x005c9b70
 	// RBX::Name::doDeclare<&RBX::sFlagStandService>
 	// TEMPLATE: WEBSERVICE 0x100883e0
 	// RBX::Name::doDeclare<&RBX::sForceField>
 	// TEMPLATE: WEBSERVICE 0x10088450
+	// TEMPLATE: ROBLOX 0x005c9c50
 	// RBX::Name::doDeclare<&RBX::sGeometryService>
 	// TEMPLATE: WEBSERVICE 0x100884c0
+	// TEMPLATE: ROBLOX 0x005c9cc0
 	// RBX::Name::doDeclare<&RBX::sBodyGyro>
 	// TEMPLATE: WEBSERVICE 0x10088530
+	// TEMPLATE: ROBLOX 0x005c9d30
 	// RBX::Name::doDeclare<&RBX::sBodyForce>
 	// TEMPLATE: WEBSERVICE 0x100885a0
+	// TEMPLATE: ROBLOX 0x005c9da0
 	// RBX::Name::doDeclare<&RBX::sBodyThrust>
 	// TEMPLATE: WEBSERVICE 0x10088610
+	// TEMPLATE: ROBLOX 0x005c9e10
 	// RBX::Name::doDeclare<&RBX::sBodyPosition>
 	// TEMPLATE: WEBSERVICE 0x10088680
+	// TEMPLATE: ROBLOX 0x005c9e80
 	// RBX::Name::doDeclare<&RBX::sBodyVelocity>
 	// TEMPLATE: WEBSERVICE 0x100886f0
+	// TEMPLATE: ROBLOX 0x005c9ef0
 	// RBX::Name::doDeclare<&RBX::sRocket>
 	// TEMPLATE: WEBSERVICE 0x10088760
 	// RBX::Name::doDeclare<&RBX::sMessage>
@@ -207,6 +217,7 @@ private:
 	// TEMPLATE: WEBSERVICE 0x100888b0
 	// RBX::Name::doDeclare<&RBX::sVisit>
 	// TEMPLATE: WEBSERVICE 0x10088920
+	// TEMPLATE: ROBLOX 0x005ca0b0
 	// RBX::Name::doDeclare<&RBX::sDebrisService>
 	// TEMPLATE: WEBSERVICE 0x10088990
 	// RBX::Name::doDeclare<&RBX::sTimerService>
@@ -275,8 +286,10 @@ private:
 	// TEMPLATE: WEBSERVICE 0x1012a5d0
 	// RBX::Name::doDeclare<&RBX::sFreefall>
 	// TEMPLATE: WEBSERVICE 0x1018b5f0
+	// TEMPLATE: ROBLOX 0x004afca0
 	// RBX::Name::doDeclare<&RBX::Network::sClient>
 	// TEMPLATE: WEBSERVICE 0x1018b670
+	// TEMPLATE: ROBLOX 0x004afd20
 	// RBX::Name::doDeclare<&RBX::Network::sServer>
 	// TEMPLATE: WEBSERVICE 0x1018b6f0
 	// RBX::Name::doDeclare<&RBX::sNetworkSettings>
@@ -347,10 +360,12 @@ private:
 	// TEMPLATE: WEBSERVICE 0x10072f00
 	// RBX::Name::callDoDeclare<&RBX::sServiceProvider>
 	// TEMPLATE: WEBSERVICE 0x10072f10
+	// TEMPLATE: ROBLOX 0x00448590
 	// RBX::Name::callDoDeclare<0>
 	// TEMPLATE: WEBSERVICE 0x10072f20
 	// RBX::Name::callDoDeclare<&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x10072f30
+	// TEMPLATE: ROBLOX 0x0058ff90
 	// RBX::Name::callDoDeclare<&RBX::sLocalBackpack>
 	// TEMPLATE: WEBSERVICE 0x10072f40
 	// RBX::Name::callDoDeclare<&RBX::sSnap>
@@ -401,22 +416,30 @@ private:
 	// TEMPLATE: WEBSERVICE 0x10088bd0
 	// RBX::Name::callDoDeclare<&RBX::sFlagStand>
 	// TEMPLATE: WEBSERVICE 0x10088be0
+	// TEMPLATE: ROBLOX 0x005ca1b0
 	// RBX::Name::callDoDeclare<&RBX::sFlagStandService>
 	// TEMPLATE: WEBSERVICE 0x10088bf0
 	// RBX::Name::callDoDeclare<&RBX::sForceField>
 	// TEMPLATE: WEBSERVICE 0x10088c00
+	// TEMPLATE: ROBLOX 0x005ca1d0
 	// RBX::Name::callDoDeclare<&RBX::sGeometryService>
 	// TEMPLATE: WEBSERVICE 0x10088c10
+	// TEMPLATE: ROBLOX 0x005ca1e0
 	// RBX::Name::callDoDeclare<&RBX::sBodyGyro>
 	// TEMPLATE: WEBSERVICE 0x10088c20
+	// TEMPLATE: ROBLOX 0x005ca1f0
 	// RBX::Name::callDoDeclare<&RBX::sBodyForce>
 	// TEMPLATE: WEBSERVICE 0x10088c30
+	// TEMPLATE: ROBLOX 0x005ca200
 	// RBX::Name::callDoDeclare<&RBX::sBodyThrust>
 	// TEMPLATE: WEBSERVICE 0x10088c40
+	// TEMPLATE: ROBLOX 0x005ca210
 	// RBX::Name::callDoDeclare<&RBX::sBodyPosition>
 	// TEMPLATE: WEBSERVICE 0x10088c50
+	// TEMPLATE: ROBLOX 0x005ca220
 	// RBX::Name::callDoDeclare<&RBX::sBodyVelocity>
 	// TEMPLATE: WEBSERVICE 0x10088c60
+	// TEMPLATE: ROBLOX 0x005ca230
 	// RBX::Name::callDoDeclare<&RBX::sRocket>
 	// TEMPLATE: WEBSERVICE 0x10088c70
 	// RBX::Name::callDoDeclare<&RBX::sMessage>
@@ -427,6 +450,7 @@ private:
 	// TEMPLATE: WEBSERVICE 0x10088ca0
 	// RBX::Name::callDoDeclare<&RBX::sVisit>
 	// TEMPLATE: WEBSERVICE 0x10088cb0
+	// TEMPLATE: ROBLOX 0x005ca270
 	// RBX::Name::callDoDeclare<&RBX::sDebrisService>
 	// TEMPLATE: WEBSERVICE 0x10088cc0
 	// RBX::Name::callDoDeclare<&RBX::sTimerService>
@@ -495,8 +519,10 @@ private:
 	// TEMPLATE: WEBSERVICE 0x1012a640
 	// RBX::Name::callDoDeclare<&RBX::sFreefall>
 	// TEMPLATE: WEBSERVICE 0x1018b770
+	// TEMPLATE: ROBLOX 0x004b04f0
 	// RBX::Name::callDoDeclare<&RBX::Network::sClient>
 	// TEMPLATE: WEBSERVICE 0x1018b780
+	// TEMPLATE: ROBLOX 0x004b0500
 	// RBX::Name::callDoDeclare<&RBX::Network::sServer>
 	// TEMPLATE: WEBSERVICE 0x1018b790
 	// RBX::Name::callDoDeclare<&RBX::sNetworkSettings>
@@ -510,10 +536,13 @@ private:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x10221870
+	// SYNTHETIC: ROBLOX 0x007f1ba0
 	// `RBX::moo2'::`2'::`dynamic atexit destructor for 'mutex2''
 	// SYNTHETIC: WEBSERVICE 0x10221880
+	// SYNTHETIC: ROBLOX 0x007f1bb0
 	// `RBX::Name::dictionary'::`2'::`dynamic atexit destructor for 'd''
 	// SYNTHETIC: WEBSERVICE 0x102218c0
+	// SYNTHETIC: ROBLOX 0x007f1bf0
 	// `RBX::Name::namMap'::`2'::`dynamic atexit destructor for 'n''
 	// clang-format on
 

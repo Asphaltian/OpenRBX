@@ -42,6 +42,7 @@ public:
 	virtual PluginReceiveResult OnReceive(RakPeerInterface* peer, Packet* packet);
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
+	// FUNCTION: ROBLOX 0x00407390 FOLDED
 	virtual XmlElement* write() { return NULL; }
 
 	static bool clientIsPresent(const Instance* context, bool testInDatamodel);
@@ -60,8 +61,10 @@ DECOMP_SIZE_ASSERT(Client, 0x118)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021f750
+// SYNTHETIC: ROBLOX 0x007e61e0
 // RBX::Network::`dynamic initializer for 'f_connect''
 // SYNTHETIC: WEBSERVICE 0x1021f790
+// SYNTHETIC: ROBLOX 0x007e6220
 // RBX::Network::`dynamic initializer for 'f_disconnect''
 // SYNTHETIC: WEBSERVICE 0x1021f7c0
 // `dynamic initializer for 'RBX::Network::Client::event_ConnectionAccepted''
@@ -70,12 +73,14 @@ DECOMP_SIZE_ASSERT(Client, 0x118)
 // SYNTHETIC: WEBSERVICE 0x1021f810
 // `dynamic initializer for 'RBX::Network::Client::event_ConnectionFailed''
 // SYNTHETIC: WEBSERVICE 0x102260b0
+// SYNTHETIC: ROBLOX 0x007f0ec0
 // RBX::Network::`dynamic atexit destructor for 'f_disconnect''
 // SYNTHETIC: WEBSERVICE 0x102260c0
 // `dynamic atexit destructor for 'RBX::Network::Client::event_ConnectionRejected''
 // SYNTHETIC: WEBSERVICE 0x102260d0
 // `dynamic atexit destructor for 'RBX::Network::Client::event_ConnectionFailed''
 // SYNTHETIC: WEBSERVICE 0x102260e0
+// SYNTHETIC: ROBLOX 0x007f0ef0
 // RBX::Network::`dynamic atexit destructor for 'f_connect''
 // SYNTHETIC: WEBSERVICE 0x102260f0
 // `dynamic atexit destructor for 'RBX::Network::Client::event_ConnectionAccepted''

@@ -9,6 +9,7 @@
 namespace RBX {
 
 // VTABLE: WEBSERVICE 0x10248114
+// VTABLE: ROBLOX 0x0083b08c
 // SIZE 0x120
 class GlueJoint : public MultiJoint
 {

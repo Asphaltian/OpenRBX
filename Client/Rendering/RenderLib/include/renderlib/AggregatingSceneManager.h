@@ -16,6 +16,7 @@ namespace RBX {
 namespace Render {
 
 // VTABLE: WEBSERVICE 0x10259d60
+// VTABLE: ROBLOX 0x008107b0
 // SIZE 0x2c
 class AggregatingSceneManager : public SceneManager
 {
@@ -41,6 +42,7 @@ public:
 	};
 
 	// VTABLE: WEBSERVICE 0x10259d58
+	// VTABLE: ROBLOX 0x008107a8
 	// SIZE 0x1c
 	class Bucket : public G3D::ReferenceCountedObject, public boost::noncopyable
 	{
@@ -57,8 +59,10 @@ public:
 
 	public:
 		// SYNTHETIC: WEBSERVICE 0x101f44a0
+		// SYNTHETIC: ROBLOX 0x00496d60
 		// RBX::Render::AggregatingSceneManager::Bucket::Bucket
 		// SYNTHETIC: WEBSERVICE 0x101f44f0
+		// SYNTHETIC: ROBLOX 0x00496db0
 		// RBX::Render::AggregatingSceneManager::Bucket::~Bucket
 		// SYNTHETIC: WEBSERVICE 0x101f4cf0
 		// RBX::Render::AggregatingSceneManager::Bucket::`scalar deleting destructor'

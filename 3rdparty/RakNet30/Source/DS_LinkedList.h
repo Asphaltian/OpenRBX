@@ -623,6 +623,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c1700
+	// FUNCTION: ROBLOX 0x004e1040
 	template <class CircularLinkedListType>
 		void CircularLinkedList<CircularLinkedListType>::Insert( const CircularLinkedListType& input )
 	{
@@ -701,6 +702,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c17d0
+	// FUNCTION: ROBLOX 0x004e2370
 	// DataStructures::CircularLinkedList<HuffmanEncodingTreeNode *>::Add
 	template <class CircularLinkedListType>
 		CircularLinkedListType& CircularLinkedList<CircularLinkedListType>::Add ( const CircularLinkedListType& input )
@@ -787,6 +789,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc820
+	// FUNCTION: ROBLOX 0x004e26f0
 	template <class CircularLinkedListType>
 		void CircularLinkedList<CircularLinkedListType>::Del()
 	{
@@ -962,6 +965,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc880
+	// FUNCTION: ROBLOX 0x004e2750
 	// DataStructures::CircularLinkedList<HuffmanEncodingTreeNode *>::Clear
 	template <class CircularLinkedListType>
 		void CircularLinkedList<CircularLinkedListType>::Clear( void )

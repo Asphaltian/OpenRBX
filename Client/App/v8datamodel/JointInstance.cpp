@@ -81,6 +81,7 @@ const CoordinateFrame& AutoJoint::getC1() const
 }
 
 // FUNCTION: WEBSERVICE 0x100d7bc0
+// FUNCTION: ROBLOX 0x005f1ae0
 void JointInstance::render3dAdorn(Adorn* adorn)
 {
 	if (Joint::isAssemblyJoint(joint)) {
@@ -111,6 +112,7 @@ float Motor::getDesiredAngle() const
 }
 
 // FUNCTION: WEBSERVICE 0x100d7df0
+// FUNCTION: ROBLOX 0x005f1d10
 JointInstance::~JointInstance()
 {
 	joint->setJointOwner(NULL);
@@ -119,6 +121,7 @@ JointInstance::~JointInstance()
 }
 
 // FUNCTION: WEBSERVICE 0x100d8030
+// FUNCTION: ROBLOX 0x005f1f60
 void AutoJoint::setPart(int i, PartInstance* value)
 {
 	if (part[i].get() == value) {
@@ -130,6 +133,7 @@ void AutoJoint::setPart(int i, PartInstance* value)
 }
 
 // FUNCTION: WEBSERVICE 0x100d8110
+// FUNCTION: ROBLOX 0x005f2040
 AutoJoint::~AutoJoint()
 {
 	setPart(0, NULL);
@@ -137,6 +141,7 @@ AutoJoint::~AutoJoint()
 }
 
 // FUNCTION: WEBSERVICE 0x100d8a00
+// FUNCTION: ROBLOX 0x005f28c0
 bool AutoJoint::askSetParent(const Instance* instance) const
 {
 	return instance->getDescriptor() == Instance::classDescriptor() ||
@@ -144,6 +149,7 @@ bool AutoJoint::askSetParent(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100d8ad0
+// FUNCTION: ROBLOX 0x005f2990
 JointInstance::JointInstance(Joint* joint) : joint(joint)
 {
 	joint->setJointOwner(this);
@@ -160,6 +166,7 @@ World* AutoJoint::computeWorld()
 }
 
 // FUNCTION: WEBSERVICE 0x100d8b90
+// FUNCTION: ROBLOX 0x005f2a50
 void AutoJoint::onAncestorChanged(const AncestorChanged& event)
 {
 	Instance::onAncestorChanged(event);
@@ -179,6 +186,7 @@ void AutoJoint::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x100d8de0
+// FUNCTION: ROBLOX 0x005f2c90
 AutoJoint::AutoJoint(Joint* _joint) : DescribedNonCreatable<AutoJoint, JointInstance, sAutoJoint>(_joint)
 {
 	PartInstance* p0 = const_cast<PartInstance*>(PartInstance::fromPrimitiveConst(joint->getPrimitive(0)));
@@ -188,6 +196,7 @@ AutoJoint::AutoJoint(Joint* _joint) : DescribedNonCreatable<AutoJoint, JointInst
 }
 
 // FUNCTION: WEBSERVICE 0x100d8f80
+// FUNCTION: ROBLOX 0x005f2e30
 void AutoJoint::setPart0(PartInstance* value)
 {
 	setPart(0, value);
@@ -195,6 +204,7 @@ void AutoJoint::setPart0(PartInstance* value)
 }
 
 // FUNCTION: WEBSERVICE 0x100d8fa0
+// FUNCTION: ROBLOX 0x005f2e50
 void AutoJoint::setPart1(PartInstance* value)
 {
 	setPart(1, value);
@@ -202,6 +212,7 @@ void AutoJoint::setPart1(PartInstance* value)
 }
 
 // FUNCTION: WEBSERVICE 0x100d8fc0
+// FUNCTION: ROBLOX 0x005f2e70
 void AutoJoint::setC0(const CoordinateFrame& value)
 {
 	joint->setJointCoord(0, value);
@@ -209,6 +220,7 @@ void AutoJoint::setC0(const CoordinateFrame& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100d8ff0
+// FUNCTION: ROBLOX 0x005f2ea0
 void AutoJoint::setC1(const CoordinateFrame& value)
 {
 	joint->setJointCoord(1, value);
@@ -216,6 +228,7 @@ void AutoJoint::setC1(const CoordinateFrame& value)
 }
 
 // FUNCTION: WEBSERVICE 0x100d9020
+// FUNCTION: ROBLOX 0x005f2ed0
 void Motor::setMaxVelocity(float value)
 {
 	if (value != getMotorJoint()->maxVelocity) {
@@ -225,6 +238,7 @@ void Motor::setMaxVelocity(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x100d9060
+// FUNCTION: ROBLOX 0x005f2f10
 void Motor::setDesiredAngle(float value)
 {
 	if (!Math::fuzzyEq(value, getMotorJoint()->desiredAngle, 0.034906585f)) {
@@ -243,48 +257,57 @@ void Motor::setCurrentAngle(float value)
 }
 
 // FUNCTION: WEBSERVICE 0x100d9a10
+// FUNCTION: ROBLOX 0x005f3920
 Snap::Snap(Joint* joint) : DescribedCreatable<Snap, AutoJoint, sSnap>(joint)
 {
 	setName("Snap");
 }
 
 // FUNCTION: WEBSERVICE 0x100d9b20
+// FUNCTION: ROBLOX 0x005f3a40
 Snap::Snap() : DescribedCreatable<Snap, AutoJoint, sSnap>(new SnapJoint())
 {
 	setName("Snap");
 }
 
 // FUNCTION: WEBSERVICE 0x100d9c20
+// FUNCTION: ROBLOX 0x005f3b40
 Weld::Weld(Joint* joint) : DescribedCreatable<Weld, AutoJoint, sWeld>(joint)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100d9cb0
+// FUNCTION: ROBLOX 0x005f3be0
 Weld::Weld() : DescribedCreatable<Weld, AutoJoint, sWeld>(new WeldJoint())
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100d9d80
+// FUNCTION: ROBLOX 0x005f3cb0
 Glue::Glue(Joint* joint) : DescribedCreatable<Glue, AutoJoint, sGlue>(joint)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100d9e00
+// FUNCTION: ROBLOX 0x005f3d60
 Glue::Glue() : DescribedCreatable<Glue, AutoJoint, sGlue>(new GlueJoint())
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100d9ec0
+// FUNCTION: ROBLOX 0x005f3e20
 Rotate::Rotate(Joint* joint) : DescribedCreatable<Rotate, AutoJoint, sRotate>(joint)
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100d9f90
+// FUNCTION: ROBLOX 0x005f3ea0
 Rotate::Rotate() : DescribedCreatable<Rotate, AutoJoint, sRotate>(new RotateJoint())
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100da050
+// FUNCTION: ROBLOX 0x005f3f60
 RotateP::RotateP(Joint* joint) : DescribedCreatable<RotateP, AutoJoint, sRotateP>(joint)
 {
 }
@@ -295,6 +318,7 @@ RotateP::RotateP() : DescribedCreatable<RotateP, AutoJoint, sRotateP>(new Rotate
 }
 
 // FUNCTION: WEBSERVICE 0x100da1d0
+// FUNCTION: ROBLOX 0x005f40d0
 RotateV::RotateV(Joint* joint) : DescribedCreatable<RotateV, AutoJoint, sRotateV>(joint)
 {
 }
@@ -309,12 +333,14 @@ Motor::Motor(Joint* joint) : DescribedCreatable<Motor, AutoJoint, sMotor>(joint)
 }
 
 // FUNCTION: WEBSERVICE 0x100da370
+// FUNCTION: ROBLOX 0x005f4290
 Motor::Motor() : DescribedCreatable<Motor, AutoJoint, sMotor>(new MotorJoint())
 {
 	setName("Motor");
 }
 
 // FUNCTION: WEBSERVICE 0x100e3c30 FOLDED
+// FUNCTION: ROBLOX 0x004f1410 FOLDED
 PartInstance* AutoJoint::getPart1() const
 {
 	return part[1].get();
@@ -327,6 +353,7 @@ float Motor::getCurrentAngle() const
 }
 
 // FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
+// FUNCTION: ROBLOX 0x006171e0 FOLDED
 PartInstance* AutoJoint::getPart0() const
 {
 	return part[0].get();

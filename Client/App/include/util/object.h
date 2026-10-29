@@ -14,6 +14,7 @@ namespace RBX {
 class Instance;
 
 // VTABLE: WEBSERVICE 0x1022e290
+// VTABLE: ROBLOX 0x008213f0
 // SIZE 0x04
 class Object
 {
@@ -25,14 +26,19 @@ DECOMP_SIZE_ASSERT(Object, 0x04)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10009240
+// TEMPLATE: ROBLOX 0x004a7290
 // RBX::shared_from<RBX::DataModel>
 // TEMPLATE: WEBSERVICE 0x1006c2e0
+// TEMPLATE: ROBLOX 0x0065f1f0 FOLDED
 // RBX::shared_from<RBX::Selection>
 // TEMPLATE: WEBSERVICE 0x100c5e40
+// TEMPLATE: ROBLOX 0x0065f1f0 FOLDED
 // RBX::shared_from<RBX::Instance const >
 // TEMPLATE: WEBSERVICE 0x1016ef10
+// TEMPLATE: ROBLOX 0x0065f1f0 FOLDED
 // RBX::shared_from<RBX::GuiItem>
 // TEMPLATE: WEBSERVICE 0x1019f630
+// TEMPLATE: ROBLOX 0x004a7290
 // RBX::shared_from<RBX::Network::Replicator>
 // clang-format on
 template <class T>
@@ -49,6 +55,7 @@ boost::shared_ptr<T> shared_from_dynamic_cast(boost::enable_shared_from_this<Bas
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1019f4b0
+// TEMPLATE: ROBLOX 0x004c6300
 // RBX::shared_from_polymorphic_downcast<RBX::Network::Player,RBX::Instance>
 // clang-format on
 template <class T, class Base>
@@ -65,6 +72,7 @@ public:
 	{
 	public:
 		// TEMPLATE: WEBSERVICE 0x1000c260
+		// TEMPLATE: ROBLOX 0x00406200
 		// RBX::Creatable<RBX::Instance>::Deleter::operator()
 		void operator()(T* instance)
 		{
@@ -93,6 +101,7 @@ public:
 	// STUB: WEBSERVICE 0x10019d00
 	// RBX::Creatable<RBX::Instance>::create<RBX::Soundscape::SoundChannel>
 	// TEMPLATE: WEBSERVICE 0x10045340
+	// TEMPLATE: ROBLOX 0x004763e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Sky>
 	// TEMPLATE: WEBSERVICE 0x1005b840
 	// RBX::Creatable<RBX::Instance>::create<RBX::PartInstance>
@@ -101,50 +110,67 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10062870
 	// RBX::Creatable<RBX::Instance>::create<RBX::DebugSettings>
 	// TEMPLATE: WEBSERVICE 0x100657f0
+	// TEMPLATE: ROBLOX 0x005726b0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item,char const *>
 	// TEMPLATE: WEBSERVICE 0x100659d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::StatsService>
 	// TEMPLATE: WEBSERVICE 0x100666f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<bool>,bool const *>
 	// TEMPLATE: WEBSERVICE 0x10066770
+	// TEMPLATE: ROBLOX 0x00572f70
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<int>,boost::function0<int,std::allocator<boost::function_base> > >
 	// TEMPLATE: WEBSERVICE 0x100691f0
+	// TEMPLATE: ROBLOX 0x0040ed10
 	// RBX::Creatable<RBX::Instance>::create<RBX::Team>
 	// TEMPLATE: WEBSERVICE 0x10069460
+	// TEMPLATE: ROBLOX 0x0040efa0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x1006bd80
+	// TEMPLATE: ROBLOX 0x00461df0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Camera>
 	// TEMPLATE: WEBSERVICE 0x1006be50
 	// RBX::Creatable<RBX::Instance>::create<RBX::ControllerService>
 	// TEMPLATE: WEBSERVICE 0x1006bed0
+	// TEMPLATE: ROBLOX 0x00610d80 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::StarterPackService>
 	// TEMPLATE: WEBSERVICE 0x1006db70
 	// RBX::Creatable<RBX::Instance>::create<RBX::HopperBin>
 	// TEMPLATE: WEBSERVICE 0x1006de90
+	// TEMPLATE: ROBLOX 0x00610d80 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::LegacyHopperService>
 	// TEMPLATE: WEBSERVICE 0x1006e120
+	// TEMPLATE: ROBLOX 0x00591db0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Tool>
 	// TEMPLATE: WEBSERVICE 0x1006e390
+	// TEMPLATE: ROBLOX 0x005b6c30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Flag>
 	// TEMPLATE: WEBSERVICE 0x10070300
+	// TEMPLATE: ROBLOX 0x005b8710
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<double>,boost::function0<double,std::allocator<boost::function_base> > >
 	// TEMPLATE: WEBSERVICE 0x10070f60
+	// TEMPLATE: ROBLOX 0x005b9370
 	// RBX::Creatable<RBX::Instance>::create<RBX::WorkspaceStatsItem,RBX::Workspace *,RBX::World *>
 	// TEMPLATE: WEBSERVICE 0x10073e70
+	// TEMPLATE: ROBLOX 0x00590a80
 	// RBX::Creatable<RBX::Instance>::create<RBX::Workspace,RBX::DataModel *>
 	// TEMPLATE: WEBSERVICE 0x10073f10
+	// TEMPLATE: ROBLOX 0x00590b20
 	// RBX::Creatable<RBX::Instance>::create<RBX::GuiRoot>
 	// TEMPLATE: WEBSERVICE 0x10074110
+	// TEMPLATE: ROBLOX 0x00590d20
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalBackpack>
 	// TEMPLATE: WEBSERVICE 0x10074260
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Players>
 	// TEMPLATE: WEBSERVICE 0x10075300
 	// RBX::Creatable<RBX::Instance>::create<RBX::JointsService>
 	// TEMPLATE: WEBSERVICE 0x10076300
+	// TEMPLATE: ROBLOX 0x00591a90
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x10076620
+	// TEMPLATE: ROBLOX 0x004ca7a0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Snap>
 	// TEMPLATE: WEBSERVICE 0x10076890
+	// TEMPLATE: ROBLOX 0x004caa30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Weld>
 	// TEMPLATE: WEBSERVICE 0x10076b00
 	// RBX::Creatable<RBX::Instance>::create<RBX::Glue>
@@ -155,8 +181,10 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10077250
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateV>
 	// TEMPLATE: WEBSERVICE 0x100774c0
+	// TEMPLATE: ROBLOX 0x004cb700
 	// RBX::Creatable<RBX::Instance>::create<RBX::Motor>
 	// TEMPLATE: WEBSERVICE 0x10077730
+	// TEMPLATE: ROBLOX 0x005cc360 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100779a0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Teams>
@@ -167,8 +195,10 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1007e750
 	// RBX::Creatable<RBX::Instance>::create<RBX::GameSettings>
 	// TEMPLATE: WEBSERVICE 0x100838c0
+	// TEMPLATE: ROBLOX 0x005c73d0
 	// RBX::Creatable<RBX::Instance>::create<SoundServiceStatsItem,RBX::Soundscape::SoundService *>
 	// TEMPLATE: WEBSERVICE 0x10083ce0
+	// TEMPLATE: ROBLOX 0x005c7820
 	// RBX::Creatable<RBX::Instance>::create<StockSound>
 	// TEMPLATE: WEBSERVICE 0x10089930
 	// RBX::Creatable<RBX::Instance>::create<RBX::ShirtGraphic>
@@ -187,12 +217,16 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1008aa40
 	// RBX::Creatable<RBX::Instance>::create<RBX::VelocityMotor>
 	// TEMPLATE: WEBSERVICE 0x1008acb0
+	// TEMPLATE: ROBLOX 0x005cafe0
 	// RBX::Creatable<RBX::Instance>::create<RBX::FlagStand>
 	// TEMPLATE: WEBSERVICE 0x1008af20
+	// TEMPLATE: ROBLOX 0x005cb250
 	// RBX::Creatable<RBX::Instance>::create<RBX::FlagStandService>
 	// TEMPLATE: WEBSERVICE 0x1008b190
+	// TEMPLATE: ROBLOX 0x005cb4c0
 	// RBX::Creatable<RBX::Instance>::create<RBX::ForceField>
 	// TEMPLATE: WEBSERVICE 0x1008b400
+	// TEMPLATE: ROBLOX 0x005cb730
 	// RBX::Creatable<RBX::Instance>::create<RBX::GeometryService>
 	// TEMPLATE: WEBSERVICE 0x1008b670
 	// RBX::Creatable<RBX::Instance>::create<RBX::BodyGyro>
@@ -203,58 +237,77 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1008bdc0
 	// RBX::Creatable<RBX::Instance>::create<RBX::BodyPosition>
 	// TEMPLATE: WEBSERVICE 0x1008c030
+	// TEMPLATE: ROBLOX 0x005cc360 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::BodyVelocity>
 	// TEMPLATE: WEBSERVICE 0x1008c2a0
+	// TEMPLATE: ROBLOX 0x005cc5d0 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::Rocket>
 	// TEMPLATE: WEBSERVICE 0x1008c510
 	// RBX::Creatable<RBX::Instance>::create<RBX::Message>
 	// TEMPLATE: WEBSERVICE 0x1008ce10
 	// RBX::Creatable<RBX::Instance>::create<RBX::Visit>
 	// TEMPLATE: WEBSERVICE 0x1008d080
+	// TEMPLATE: ROBLOX 0x005cd140
 	// RBX::Creatable<RBX::Instance>::create<RBX::DebrisService>
 	// TEMPLATE: WEBSERVICE 0x1008d2f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::TimerService>
 	// FUNCTION: WEBSERVICE 0x1008d560
+	// FUNCTION: ROBLOX 0x005cd3b0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Seat>
 	// TEMPLATE: WEBSERVICE 0x1008d7d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpawnLocation>
 	// TEMPLATE: WEBSERVICE 0x1008da40
+	// TEMPLATE: ROBLOX 0x004a94d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpawnerService>
 	// TEMPLATE: WEBSERVICE 0x1008e7a0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hint>
 	// TEMPLATE: WEBSERVICE 0x1008e820
 	// RBX::Creatable<RBX::Instance>::create<RBX::ObjectValue>
 	// TEMPLATE: WEBSERVICE 0x100a1d00
+	// TEMPLATE: ROBLOX 0x005ea2d0
 	// RBX::shared_from_dynamic_cast<RBX::PartInstance,RBX::Instance>
 	// TEMPLATE: WEBSERVICE 0x100a1f90
+	// TEMPLATE: ROBLOX 0x005ea560
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::PartInstance> >
 	// TEMPLATE: WEBSERVICE 0x100acde0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Decal>
 	// TEMPLATE: WEBSERVICE 0x100ad050
 	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
 	// TEMPLATE: WEBSERVICE 0x100b2810
+	// TEMPLATE: ROBLOX 0x004cdf50
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item>
 	// TEMPLATE: WEBSERVICE 0x100b2890
+	// TEMPLATE: ROBLOX 0x005d4000
 	// RBX::Creatable<RBX::Instance>::create<ProfilingItem,RBX::Profiling::Profiler const *>
 	// TEMPLATE: WEBSERVICE 0x100b2ba0
+	// TEMPLATE: ROBLOX 0x005d4340
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedMemItem,unsigned int const *>
 	// TEMPLATE: WEBSERVICE 0x100b7470
+	// TEMPLATE: ROBLOX 0x00582920
 	// RBX::Creatable<RBX::Instance>::create<RBX::GlobalSettings>
 	// TEMPLATE: WEBSERVICE 0x100bfd10
+	// TEMPLATE: ROBLOX 0x00621800
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x100cc1b0
+	// TEMPLATE: ROBLOX 0x00610d80 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::Mouse>
 	// TEMPLATE: WEBSERVICE 0x100dda40
+	// TEMPLATE: ROBLOX 0x005f5670
 	// RBX::Creatable<RBX::Instance>::create<RBX::Snap,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100ddac0
+	// TEMPLATE: ROBLOX 0x005f56f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Weld,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100ddb40
+	// TEMPLATE: ROBLOX 0x005f5770
 	// RBX::Creatable<RBX::Instance>::create<RBX::Glue,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100ddbc0
+	// TEMPLATE: ROBLOX 0x005f57f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Rotate,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100ddc40
+	// TEMPLATE: ROBLOX 0x005f5870
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateP,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100ddcc0
+	// TEMPLATE: ROBLOX 0x005f58f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateV,RBX::Joint *>
 	// TEMPLATE: WEBSERVICE 0x100f5c50
 	// RBX::Creatable<RBX::Instance>::create<RBX::Value<int,&RBX::sIntValue> >
@@ -273,20 +326,26 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100f5fd0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >
 	// TEMPLATE: WEBSERVICE 0x10129ea0
+	// TEMPLATE: ROBLOX 0x005cc5d0 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpecialShape>
 	// TEMPLATE: WEBSERVICE 0x1018b8e0
+	// TEMPLATE: ROBLOX 0x004b82a0
 	// RBX::Creatable<RBX::Instance>::create<RBX::NetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1018bc50
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Client>
 	// TEMPLATE: WEBSERVICE 0x1018bee0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Server>
 	// TEMPLATE: WEBSERVICE 0x10197080
+	// TEMPLATE: ROBLOX 0x004b9250
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Replicator,SystemAddress,RakPeer *>
 	// TEMPLATE: WEBSERVICE 0x1019a030
+	// TEMPLATE: ROBLOX 0x004bc220
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Server::ClientProxy,SystemAddress,RBX::Network::Server *>
 	// TEMPLATE: WEBSERVICE 0x1019a1b0
+	// TEMPLATE: ROBLOX 0x004bc3a0
 	// RBX::shared_from_dynamic_cast<RBX::Network::Player,RBX::Instance>
 	// TEMPLATE: WEBSERVICE 0x101a6bc0
+	// TEMPLATE: ROBLOX 0x004cfa30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Replicator::ReplicatorStatsItem,boost::shared_ptr<RBX::Network::Replicator>,RakNetStatistics *>
 	// clang-format on
 	template <class U>
@@ -329,6 +388,7 @@ DECOMP_SIZE_ASSERT(ICreator, 0x4)
 // TEMPLATE: WEBSERVICE 0x10047dc0
 // RBX::AbstractFactoryProduct<RBX::Instance>::~AbstractFactoryProduct<RBX::Instance>
 // FUNCTION: WEBSERVICE 0x10048490
+// FUNCTION: ROBLOX 0x00576890
 // RBX::AbstractFactoryProduct<RBX::Instance>::`scalar deleting destructor'
 // clang-format on
 template <class T>
@@ -338,6 +398,7 @@ protected:
 	AbstractFactoryProduct() {}
 
 	// TEMPLATE: WEBSERVICE 0x10009a60
+	// TEMPLATE: ROBLOX 0x00406150
 	// RBX::AbstractFactoryProduct<RBX::Instance>::getCreators
 	static std::map<const Name*, const ICreator*>& getCreators()
 	{
@@ -350,6 +411,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004bf20
+	// TEMPLATE: ROBLOX 0x0041fa20
 	// RBX::AbstractFactoryProduct<RBX::Instance>::create
 	// clang-format on
 	static boost::shared_ptr<T> create(const Name& name)
@@ -405,22 +467,28 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10008b90
 	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>
 	// TEMPLATE: WEBSERVICE 0x10042700
+	// TEMPLATE: ROBLOX 0x005d93a0
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>
 	// TEMPLATE: WEBSERVICE 0x10042760
+	// TEMPLATE: ROBLOX 0x005d93f0
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>
 	// FUNCTION: WEBSERVICE 0x100429e0
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100453c0
 	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10054250
+	// TEMPLATE: ROBLOX 0x00568a00
 	// RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::~FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>
 	// TEMPLATE: WEBSERVICE 0x100542a0
+	// TEMPLATE: ROBLOX 0x00568a50
 	// RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>
 	// FUNCTION: WEBSERVICE 0x100564d0
 	// RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10059c90
+	// TEMPLATE: ROBLOX 0x00564b90
 	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::~FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>
 	// TEMPLATE: WEBSERVICE 0x10059f00
+	// TEMPLATE: ROBLOX 0x00564d10
 	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel><char const *>
 	// TEMPLATE: WEBSERVICE 0x1005b540
 	// RBX::FactoryProduct<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::getClassName
@@ -431,18 +499,23 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1005bfe0
 	// RBX::DescribedCreatable<RBX::ModelInstance,RBX::PVInstance,&RBX::sModel>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1005ce00
+	// TEMPLATE: ROBLOX 0x00566eb0
 	// RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>::~FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>
 	// TEMPLATE: WEBSERVICE 0x1005ce50
+	// TEMPLATE: ROBLOX 0x00566f00
 	// RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>
 	// FUNCTION: WEBSERVICE 0x1005cec0
 	// RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1005ec80
+	// TEMPLATE: ROBLOX 0x0056bf10
 	// RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::~FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
 	// TEMPLATE: WEBSERVICE 0x1005eeb0
+	// TEMPLATE: ROBLOX 0x0056c180
 	// RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>
 	// TEMPLATE: WEBSERVICE 0x1005f0b0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>
 	// TEMPLATE: WEBSERVICE 0x1005f450
+	// TEMPLATE: ROBLOX 0x0056c6b0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem><char const *>
 	// TEMPLATE: WEBSERVICE 0x1005f4b0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats><char const *>
@@ -453,8 +526,10 @@ public:
 	// FUNCTION: WEBSERVICE 0x10065740
 	// RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10068970
+	// TEMPLATE: ROBLOX 0x00575190
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::~FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>
 	// FUNCTION: WEBSERVICE 0x10068aa0
+	// FUNCTION: ROBLOX 0x005751e0
 	// RBX::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript>::FactoryProduct<RBX::Script,RBX::Instance,&RBX::sScript><char const *>
 	// FUNCTION: WEBSERVICE 0x10068e10
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::~FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
@@ -465,8 +540,10 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100694e0
 	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10069b80
+	// TEMPLATE: ROBLOX 0x00575ed0
 	// RBX::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::FactoryProduct<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
 	// TEMPLATE: WEBSERVICE 0x1006a9d0
+	// TEMPLATE: ROBLOX 0x005b4c10
 	// RBX::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>::NonFactoryProduct<RBX::RootInstance,&RBX::sWorkspace>
 	// TEMPLATE: WEBSERVICE 0x1006d8d0
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::Creator::create
@@ -513,12 +590,16 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1007b030
 	// RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sDataModel>::getClassName
 	// TEMPLATE: WEBSERVICE 0x1007ce00
+	// TEMPLATE: ROBLOX 0x005c0ee0
 	// RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::~FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1007ce50
+	// TEMPLATE: ROBLOX 0x005c0f30
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::~FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
 	// TEMPLATE: WEBSERVICE 0x1007cfe0
+	// TEMPLATE: ROBLOX 0x005c1000
 	// RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1007d040
+	// TEMPLATE: ROBLOX 0x005c1060
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
 	// TEMPLATE: WEBSERVICE 0x1007dc70
 	// RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>::~FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>
@@ -527,6 +608,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100815c0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10083070
+	// TEMPLATE: ROBLOX 0x005c6c20
 	// RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>
 	// TEMPLATE: WEBSERVICE 0x100840c0
 	// RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>::Creator::create
@@ -569,6 +651,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1008c590
 	// RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1008c640
+	// TEMPLATE: ROBLOX 0x005cc970
 	// RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage>::~FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage>
 	// FUNCTION: WEBSERVICE 0x1008c690
 	// RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage>::`scalar deleting destructor'
@@ -577,8 +660,10 @@ public:
 	// FUNCTION: WEBSERVICE 0x1008c940
 	// RBX::FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint>::~FactoryProduct<RBX::Hint,RBX::Message,&RBX::sHint>
 	// TEMPLATE: WEBSERVICE 0x1008c9e0
+	// TEMPLATE: ROBLOX 0x005ccd40
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::~FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
 	// TEMPLATE: WEBSERVICE 0x1008ca30
+	// TEMPLATE: ROBLOX 0x005ccd90
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
 	// FUNCTION: WEBSERVICE 0x1008caa0
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::`scalar deleting destructor'
@@ -601,16 +686,22 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1008e950
 	// RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x100945c0
+	// TEMPLATE: ROBLOX 0x005dcf30
 	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::~FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x10094610
+	// TEMPLATE: ROBLOX 0x005dcf80
 	// RBX::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>::FactoryProduct<RBX::Sky,RBX::Instance,&RBX::sSky>
 	// TEMPLATE: WEBSERVICE 0x1009a8f0
+	// TEMPLATE: ROBLOX 0x005ad350
 	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::~FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>
 	// TEMPLATE: WEBSERVICE 0x1009ab10
+	// TEMPLATE: ROBLOX 0x005ad570
 	// RBX::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::FactoryProduct<RBX::PartInstance,RBX::PVInstance,&RBX::sPart><char const *>
 	// TEMPLATE: WEBSERVICE 0x100a09b0
+	// TEMPLATE: ROBLOX 0x005e8f30
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::~FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// TEMPLATE: WEBSERVICE 0x100a0a70
+	// TEMPLATE: ROBLOX 0x005e8fe0
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>
 	// FUNCTION: WEBSERVICE 0x100a0b40
 	// RBX::FactoryProduct<RBX::Humanoid,RBX::Instance,&RBX::sHumanoid>::`scalar deleting destructor'
@@ -623,6 +714,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100b38c0
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100b38e0
+	// FUNCTION: ROBLOX 0x0057b540
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>
 	// FUNCTION: WEBSERVICE 0x100b3bc0
 	// RBX::FactoryProduct<RBX::DebugSettings,RBX::GlobalSettings::Item,&RBX::sDebugSettings>::getClassName
@@ -631,18 +723,23 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100bdef0
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::~FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>
 	// TEMPLATE: WEBSERVICE 0x100bdf40
+	// TEMPLATE: ROBLOX 0x0058b4f0
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>
 	// FUNCTION: WEBSERVICE 0x100bdfa0
 	// RBX::FactoryProduct<RBX::Team,RBX::Instance,&RBX::sTeam>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100c2710
+	// TEMPLATE: ROBLOX 0x005d6160
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::~FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>
 	// TEMPLATE: WEBSERVICE 0x100c2770
+	// TEMPLATE: ROBLOX 0x005d61b0
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>
 	// FUNCTION: WEBSERVICE 0x100c4100
 	// RBX::FactoryProduct<RBX::Camera,RBX::Instance,&RBX::sCamera>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100c59a0
+	// TEMPLATE: ROBLOX 0x005d4aa0
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::~FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
 	// TEMPLATE: WEBSERVICE 0x100c59f0
+	// TEMPLATE: ROBLOX 0x005d4af0
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>
 	// FUNCTION: WEBSERVICE 0x100c5ab0
 	// RBX::FactoryProduct<RBX::ControllerService,RBX::Instance,&RBX::sControllerService>::`scalar deleting destructor'
@@ -659,26 +756,37 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100c7f60
 	// RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::~FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
 	// TEMPLATE: WEBSERVICE 0x100c96f0
+	// TEMPLATE: ROBLOX 0x005e37a0
 	// RBX::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>::FactoryProduct<RBX::HopperBin,RBX::BackpackItem,&RBX::sHopperBin>
 	// TEMPLATE: WEBSERVICE 0x100ca050
+	// TEMPLATE: ROBLOX 0x0060ed00
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sMouse>::NonFactoryProduct<RBX::Instance,&RBX::sMouse>
 	// TEMPLATE: WEBSERVICE 0x100cad50
+	// TEMPLATE: ROBLOX 0x0060fa90
 	// RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>::~FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>
 	// TEMPLATE: WEBSERVICE 0x100cc140
+	// TEMPLATE: ROBLOX 0x00610d10
 	// RBX::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>::FactoryProduct<RBX::Tool,RBX::BackpackItem,&RBX::sTool>
 	// TEMPLATE: WEBSERVICE 0x100cd0e0
+	// TEMPLATE: ROBLOX 0x00622c80
 	// RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>::~FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>
 	// TEMPLATE: WEBSERVICE 0x100cd180
+	// TEMPLATE: ROBLOX 0x00622d20
 	// RBX::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>::FactoryProduct<RBX::Flag,RBX::Tool,&RBX::sFlag>
 	// TEMPLATE: WEBSERVICE 0x100d5c10
+	// TEMPLATE: ROBLOX 0x0060cbb0
 	// RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::~FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100d5c90
+	// TEMPLATE: ROBLOX 0x0060cc50
 	// RBX::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>::~FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>
 	// TEMPLATE: WEBSERVICE 0x100d5d10
+	// TEMPLATE: ROBLOX 0x0060ccf0
 	// RBX::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>::FactoryProduct<RBX::LocalBackpackItem,RBX::Widget,&RBX::sLocalBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100d6070
+	// TEMPLATE: ROBLOX 0x0060d050
 	// RBX::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>::FactoryProduct<RBX::LocalBackpack,RBX::RelativePanel,&RBX::sLocalBackpack>
 	// TEMPLATE: WEBSERVICE 0x100d7ab0
+	// TEMPLATE: ROBLOX 0x005f19c0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>
 	// TEMPLATE: WEBSERVICE 0x100d8010
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sJointInstance>::getClassName
@@ -707,18 +815,25 @@ public:
 	// FUNCTION: WEBSERVICE 0x100d87b0
 	// RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100d9100
+	// FUNCTION: ROBLOX 0x005f2fb0
 	// RBX::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap>::FactoryProduct<RBX::Snap,RBX::AutoJoint,&RBX::sSnap><RBX::SnapJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9170
+	// FUNCTION: ROBLOX 0x005f3020
 	// RBX::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld>::FactoryProduct<RBX::Weld,RBX::AutoJoint,&RBX::sWeld><RBX::WeldJoint *>
 	// FUNCTION: WEBSERVICE 0x100d91e0
+	// FUNCTION: ROBLOX 0x005f3090
 	// RBX::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue>::FactoryProduct<RBX::Glue,RBX::AutoJoint,&RBX::sGlue><RBX::GlueJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9250
+	// FUNCTION: ROBLOX 0x005f3100
 	// RBX::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate>::FactoryProduct<RBX::Rotate,RBX::AutoJoint,&RBX::sRotate><RBX::RotateJoint *>
 	// FUNCTION: WEBSERVICE 0x100d92c0
+	// FUNCTION: ROBLOX 0x005f3170
 	// RBX::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP>::FactoryProduct<RBX::RotateP,RBX::AutoJoint,&RBX::sRotateP><RBX::RotatePJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9330
+	// FUNCTION: ROBLOX 0x005f31e0
 	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV><RBX::RotateVJoint *>
 	// FUNCTION: WEBSERVICE 0x100d93a0
+	// FUNCTION: ROBLOX 0x005f3250
 	// RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor><RBX::MotorJoint *>
 	// FUNCTION: WEBSERVICE 0x100d9950
 	// RBX::FactoryProduct<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::`scalar deleting destructor'
@@ -729,26 +844,33 @@ public:
 	// FUNCTION: WEBSERVICE 0x100da260
 	// RBX::FactoryProduct<RBX::RotateV,RBX::AutoJoint,&RBX::sRotateV>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100da470
+	// TEMPLATE: ROBLOX 0x005e3e70
 	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
 	// TEMPLATE: WEBSERVICE 0x100da500
 	// RBX::FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>::~FactoryProduct<RBX::Backpack,RBX::Hopper,&RBX::sBackpack>
 	// FUNCTION: WEBSERVICE 0x100da830
+	// FUNCTION: ROBLOX 0x005e7600
 	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::~FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>
 	// FUNCTION: WEBSERVICE 0x100da880
+	// FUNCTION: ROBLOX 0x005e7650
 	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>
 	// FUNCTION: WEBSERVICE 0x100da8e0
 	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100dabc0
 	// RBX::FactoryProduct<RBX::Teams,RBX::Instance,&RBX::sTeams>::className
 	// FUNCTION: WEBSERVICE 0x100db590
+	// FUNCTION: ROBLOX 0x005ba840
 	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::~FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>
 	// FUNCTION: WEBSERVICE 0x100db5e0
+	// FUNCTION: ROBLOX 0x005ba890
 	// RBX::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::FactoryProduct<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>
 	// FUNCTION: WEBSERVICE 0x100dbdf0
+	// FUNCTION: ROBLOX 0x005bafe0
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::~FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>
 	// FUNCTION: WEBSERVICE 0x100dcce0
 	// RBX::DescribedCreatable<RBX::Accoutrement,RBX::Instance,&RBX::sAccoutrement>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100dcec0
+	// FUNCTION: ROBLOX 0x005bc1f0
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>
 	// FUNCTION: WEBSERVICE 0x100dd950
 	// RBX::FactoryProduct<RBX::Hat,RBX::Accoutrement,&RBX::sHat>::`scalar deleting destructor'
@@ -757,6 +879,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100de1b0
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100de1d0
+	// TEMPLATE: ROBLOX 0x005c9470
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>
 	// FUNCTION: WEBSERVICE 0x100e04a0
 	// RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::~FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
@@ -765,10 +888,13 @@ public:
 	// FUNCTION: WEBSERVICE 0x100e05a0
 	// RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::~FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>
 	// TEMPLATE: WEBSERVICE 0x100e0640
+	// TEMPLATE: ROBLOX 0x005e6100
 	// RBX::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>::FactoryProduct<RBX::ShirtGraphic,RBX::CharacterAppearance,&RBX::sShirtGraphic>
 	// TEMPLATE: WEBSERVICE 0x100e06a0
+	// TEMPLATE: ROBLOX 0x005e6160
 	// RBX::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>::FactoryProduct<RBX::BodyColors,RBX::CharacterAppearance,&RBX::sBodyColors>
 	// TEMPLATE: WEBSERVICE 0x100e0700
+	// TEMPLATE: ROBLOX 0x005e61c0
 	// RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>
 	// FUNCTION: WEBSERVICE 0x100e0c40
 	// RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>::~FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>
@@ -781,18 +907,24 @@ public:
 	// FUNCTION: WEBSERVICE 0x100e16b0
 	// RBX::FactoryProduct<RBX::Skin,RBX::CharacterAppearance,&RBX::sSkin>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100e17e0
+	// FUNCTION: ROBLOX 0x005e7300
 	// RBX::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>::FactoryProduct<RBX::Shirt,RBX::ShirtGraphic,&RBX::sShirt>
 	// FUNCTION: WEBSERVICE 0x100e1b80
+	// FUNCTION: ROBLOX 0x00624dc0
 	// RBX::FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::~FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion>
 	// FUNCTION: WEBSERVICE 0x100e1bd0
+	// FUNCTION: ROBLOX 0x00624e10
 	// RBX::FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion>
 	// FUNCTION: WEBSERVICE 0x100e2ce0
 	// RBX::FactoryProduct<RBX::Explosion,RBX::Instance,&RBX::sExplosion>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100e3c40
+	// FUNCTION: ROBLOX 0x00617290
 	// RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::~FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>
 	// TEMPLATE: WEBSERVICE 0x100e3ca0
+	// TEMPLATE: ROBLOX 0x006172f0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::sFeature>::NonFactoryProduct<RBX::Instance,&RBX::sFeature>
 	// FUNCTION: WEBSERVICE 0x100e3d70
+	// FUNCTION: ROBLOX 0x006173c0
 	// RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor><RBX::MotorJoint *>
 	// FUNCTION: WEBSERVICE 0x100e4860
 	// RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::~FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>
@@ -813,24 +945,29 @@ public:
 	// FUNCTION: WEBSERVICE 0x100e7ab0
 	// RBX::FactoryProduct<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100e7ae0
+	// TEMPLATE: ROBLOX 0x00626d40
 	// RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>::~FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>
 	// FUNCTION: WEBSERVICE 0x100e7be0
 	// RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::~FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
 	// FUNCTION: WEBSERVICE 0x100e7c30
+	// FUNCTION: ROBLOX 0x00626e90
 	// RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
 	// FUNCTION: WEBSERVICE 0x100e7d00
 	// RBX::FactoryProduct<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100e7e60
+	// TEMPLATE: ROBLOX 0x006270a0
 	// RBX::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>::FactoryProduct<RBX::FlagStand,RBX::PartInstance,&RBX::sFlagStand>
 	// FUNCTION: WEBSERVICE 0x100e92a0
 	// RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>::~FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>
 	// FUNCTION: WEBSERVICE 0x100e92f0
+	// FUNCTION: ROBLOX 0x006284a0
 	// RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>
 	// FUNCTION: WEBSERVICE 0x100e97d0
 	// RBX::FactoryProduct<RBX::ForceField,RBX::Instance,&RBX::sForceField>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100e9a10
 	// RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>::~FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>
 	// FUNCTION: WEBSERVICE 0x100e9a60
+	// FUNCTION: ROBLOX 0x00628c10
 	// RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService><char *>
 	// FUNCTION: WEBSERVICE 0x100e9ac0
 	// RBX::FactoryProduct<RBX::GeometryService,RBX::Instance,&RBX::sGeometryService>::`scalar deleting destructor'
@@ -847,6 +984,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100eb5d0
 	// RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>::~FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>
 	// FUNCTION: WEBSERVICE 0x100eb670
+	// FUNCTION: ROBLOX 0x0062a720
 	// RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::~FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>
 	// FUNCTION: WEBSERVICE 0x100eb730
 	// RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>::`scalar deleting destructor'
@@ -855,16 +993,22 @@ public:
 	// FUNCTION: WEBSERVICE 0x100eb770
 	// RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100eb7f0
+	// FUNCTION: ROBLOX 0x0062a8a0
 	// RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket><char *>
 	// FUNCTION: WEBSERVICE 0x100eb870
+	// FUNCTION: ROBLOX 0x0062a920
 	// RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro>::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro><char *>
 	// FUNCTION: WEBSERVICE 0x100eb8f0
+	// FUNCTION: ROBLOX 0x0062a9a0
 	// RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition>::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition><char *>
 	// FUNCTION: WEBSERVICE 0x100eb970
+	// FUNCTION: ROBLOX 0x0062aa20
 	// RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity><char *>
 	// FUNCTION: WEBSERVICE 0x100eb9f0
+	// FUNCTION: ROBLOX 0x0062aaa0
 	// RBX::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce>::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce><char *>
 	// FUNCTION: WEBSERVICE 0x100eba70
+	// FUNCTION: ROBLOX 0x0062ab20
 	// RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust>::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust><char *>
 	// FUNCTION: WEBSERVICE 0x100ed820
 	// RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>::`scalar deleting destructor'
@@ -873,18 +1017,22 @@ public:
 	// FUNCTION: WEBSERVICE 0x100edeb0
 	// RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100ee470
+	// FUNCTION: ROBLOX 0x0062d530
 	// RBX::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage>::FactoryProduct<RBX::Message,RBX::Instance,&RBX::sMessage><char const *>
 	// TEMPLATE: WEBSERVICE 0x100f0a90
 	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::~FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
 	// TEMPLATE: WEBSERVICE 0x100f0ae0
+	// TEMPLATE: ROBLOX 0x0062f8e0
 	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>
 	// TEMPLATE: WEBSERVICE 0x100f0d00
 	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::~FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
 	// TEMPLATE: WEBSERVICE 0x100f0d50
+	// TEMPLATE: ROBLOX 0x0062fb60
 	// RBX::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>::FactoryProduct<RBX::Value<bool,&RBX::sBoolValue>,RBX::Instance,&RBX::sBoolValue>
 	// TEMPLATE: WEBSERVICE 0x100f0f50
 	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::~FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
 	// TEMPLATE: WEBSERVICE 0x100f0fa0
+	// TEMPLATE: ROBLOX 0x0062fdb0
 	// RBX::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::FactoryProduct<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
 	// TEMPLATE: WEBSERVICE 0x100f1400
 	// RBX::FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::~FactoryProduct<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
@@ -893,6 +1041,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100f1670
 	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::~FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
 	// TEMPLATE: WEBSERVICE 0x100f16c0
+	// TEMPLATE: ROBLOX 0x00630510
 	// RBX::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::FactoryProduct<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
 	// TEMPLATE: WEBSERVICE 0x100f18c0
 	// RBX::FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::~FactoryProduct<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
@@ -901,6 +1050,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100f1b10
 	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::~FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
 	// TEMPLATE: WEBSERVICE 0x100f1b60
+	// TEMPLATE: ROBLOX 0x006309b0
 	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>
 	// TEMPLATE: WEBSERVICE 0x100f6520
 	// RBX::FactoryProduct<RBX::Value<int,&RBX::sIntValue>,RBX::Instance,&RBX::sIntValue>::Creator::create
@@ -919,54 +1069,69 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100f69f0
 	// RBX::FactoryProduct<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue>,RBX::Instance,&RBX::sBrickColorValue>::Creator::create
 	// FUNCTION: WEBSERVICE 0x100f8b90
+	// FUNCTION: ROBLOX 0x005ce840
 	// RBX::FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit>::~FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit>
 	// FUNCTION: WEBSERVICE 0x100f8c40
+	// FUNCTION: ROBLOX 0x005ce8f0
 	// RBX::FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit>::FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit>
 	// FUNCTION: WEBSERVICE 0x100f95b0
 	// RBX::FactoryProduct<RBX::Visit,RBX::Instance,&RBX::sVisit>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100f9df0
+	// FUNCTION: ROBLOX 0x00636f00
 	// RBX::FactoryProduct<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService>::~FactoryProduct<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService>
 	// FUNCTION: WEBSERVICE 0x100f9f20
+	// FUNCTION: ROBLOX 0x00636fb0
 	// RBX::FactoryProduct<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService>::FactoryProduct<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService><char *>
 	// FUNCTION: WEBSERVICE 0x100fad10
 	// RBX::FactoryProduct<RBX::DebrisService,RBX::Instance,&RBX::sDebrisService>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100fb580
+	// FUNCTION: ROBLOX 0x005e8270
 	// RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::~FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>
 	// FUNCTION: WEBSERVICE 0x100fb5d0
+	// FUNCTION: ROBLOX 0x005e82c0
 	// RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>
 	// FUNCTION: WEBSERVICE 0x100fb630
 	// RBX::FactoryProduct<RBX::TimerService,RBX::Instance,&RBX::sTimerService>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100fc040
+	// FUNCTION: ROBLOX 0x006384b0
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::~FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>
 	// FUNCTION: WEBSERVICE 0x100fc2a0
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100fc2c0
+	// FUNCTION: ROBLOX 0x00638720
 	// RBX::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>::FactoryProduct<RBX::Seat,RBX::PartInstance,&RBX::sSeat>
 	// TEMPLATE: WEBSERVICE 0x100fd510
+	// TEMPLATE: ROBLOX 0x005e4240
 	// RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>::~FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>
 	// FUNCTION: WEBSERVICE 0x100fd610
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::~FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// FUNCTION: WEBSERVICE 0x100fd660
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// TEMPLATE: WEBSERVICE 0x100fd880
+	// TEMPLATE: ROBLOX 0x005e4520
 	// RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>
 	// FUNCTION: WEBSERVICE 0x100febb0
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100ff600
+	// TEMPLATE: ROBLOX 0x005ac140
 	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// TEMPLATE: WEBSERVICE 0x100ff720
+	// TEMPLATE: ROBLOX 0x005ac1c0
 	// RBX::FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::~FactoryProduct<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 	// FUNCTION: WEBSERVICE 0x100ffaa0
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::~FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// FUNCTION: WEBSERVICE 0x10100110
+	// FUNCTION: ROBLOX 0x005acc80
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>
 	// FUNCTION: WEBSERVICE 0x101004b0
 	// RBX::FactoryProduct<RBX::Texture,RBX::Decal,&RBX::sTexture>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10129f20
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::Creator::create
 	// FUNCTION: WEBSERVICE 0x1012c970
+	// FUNCTION: ROBLOX 0x005b3370
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::~FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 	// FUNCTION: WEBSERVICE 0x1012c9c0
+	// FUNCTION: ROBLOX 0x005b33c0
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>
 	// FUNCTION: WEBSERVICE 0x1012ca90
 	// RBX::FactoryProduct<RBX::SpecialShape,RBX::Instance,&RBX::sSpecialShape>::`scalar deleting destructor'
@@ -977,20 +1142,26 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1018c030
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1018c410
+	// TEMPLATE: ROBLOX 0x004a4ed0
 	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::~FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
 	// TEMPLATE: WEBSERVICE 0x1018c460
+	// TEMPLATE: ROBLOX 0x004a4f20
 	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>
 	// SYNTHETIC: WEBSERVICE 0x1018c4d0
 	// RBX::FactoryProduct<RBX::Network::Player,RBX::Instance,&RBX::Network::sPlayer>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x101966f0
+	// TEMPLATE: ROBLOX 0x004b88d0
 	// RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::~FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>
 	// TEMPLATE: WEBSERVICE 0x10196830
+	// TEMPLATE: ROBLOX 0x004b8a10
 	// RBX::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::FactoryProduct<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>
 	// TEMPLATE: WEBSERVICE 0x10197d40
 	// RBX::DescribedCreatable<RBX::Network::Client,RBX::Network::Peer,&RBX::Network::sClient>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10199290
+	// TEMPLATE: ROBLOX 0x004bb510
 	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::~FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>
 	// TEMPLATE: WEBSERVICE 0x10199360
+	// TEMPLATE: ROBLOX 0x004bb5e0
 	// RBX::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::FactoryProduct<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>
 	// TEMPLATE: WEBSERVICE 0x1019aa50
 	// RBX::DescribedCreatable<RBX::Network::Server,RBX::Network::Peer,&RBX::Network::sServer>::`scalar deleting destructor'
@@ -999,6 +1170,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1019b420
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1019b440
+	// TEMPLATE: ROBLOX 0x004c1d20
 	// RBX::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>::FactoryProduct<RBX::NetworkSettings,RBX::GlobalSettings::Item,&RBX::sNetworkSettings>
 	// clang-format on
 	const Creator& getCreator() const { return creator; }

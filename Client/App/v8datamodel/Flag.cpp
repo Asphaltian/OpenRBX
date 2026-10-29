@@ -20,12 +20,14 @@ static Reflection::PropDescriptor<Flag, BrickColor> prop_Color(
 );
 
 // FUNCTION: WEBSERVICE 0x100cd0a0
+// FUNCTION: ROBLOX 0x00622c40
 BrickColor Flag::getTeamColor() const
 {
 	return teamColor;
 }
 
 // FUNCTION: WEBSERVICE 0x100cd0b0
+// FUNCTION: ROBLOX 0x00622c50
 bool Flag::canBePickedUpByPlayer(Network::Player* p)
 {
 	if (p->getNeutral()) {
@@ -36,11 +38,13 @@ bool Flag::canBePickedUpByPlayer(Network::Player* p)
 }
 
 // FUNCTION: WEBSERVICE 0x100cd520
+// FUNCTION: ROBLOX 0x00622fc0
 Flag::~Flag()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x100ce8a0
+// FUNCTION: ROBLOX 0x006241d0
 void Flag::doUglyPeriodicCloneHack()
 {
 	evilClone = clone();
@@ -51,6 +55,7 @@ void Flag::doUglyPeriodicCloneHack()
 }
 
 // FUNCTION: WEBSERVICE 0x100ce9c0
+// FUNCTION: ROBLOX 0x006242f0
 void Flag::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Instance::onServiceProvider(oldProvider, newProvider);
@@ -79,6 +84,7 @@ void Flag::onServiceProvider(const ServiceProvider* oldProvider, const ServicePr
 }
 
 // FUNCTION: WEBSERVICE 0x100ceae0
+// FUNCTION: ROBLOX 0x00624410
 void Flag::onEvent_flagTouched(boost::shared_ptr<Instance> other)
 {
 	Instance* character = other->getParent();
@@ -109,6 +115,7 @@ void Flag::onEvent_flagTouched(boost::shared_ptr<Instance> other)
 }
 
 // FUNCTION: WEBSERVICE 0x100cebe0
+// FUNCTION: ROBLOX 0x00624510
 void Flag::onChildAdded(Instance* instance)
 {
 	if (dynamic_cast<PartInstance*>(instance)) {
@@ -120,6 +127,7 @@ void Flag::onChildAdded(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x100cee10
+// FUNCTION: ROBLOX 0x00624720
 Flag::Flag() : timer(NULL)
 {
 	setName(sFlag);
