@@ -80,7 +80,7 @@ public:
 
 	typedef IndexArray<Primitive, &Primitive::worldIndexFunc> PrimitiveArray;
 
-	const G3D::Array<Primitive*>& getPrimitives() const { return primitives.getArray(); }
+	const G3D::Array<Primitive*>& getPrimitives() const { return primitives.underlyingArray(); }
 
 	Kernel* getKernel() const;
 

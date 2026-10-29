@@ -12,34 +12,41 @@ namespace RBX {
 template <class T, int& (T::*getIndex)()>
 class IndexArray : public boost::noncopyable
 {
+private:
+	G3D::Array<T*> array; // 0x00
+
+	int& indexOf(T* element) const { return (element->*getIndex)(); }
+
 public:
-	const G3D::Array<T*>& getArray() const { return array; }
-
-	int size() const { return array.size(); }
-
-	T* operator[](int index) const { return array[index]; }
-
 	void fastAppend(T* element)
 	{
-		(element->*getIndex)() = array.size();
+		indexOf(element) = array.size();
 		array.append(element);
 	}
 
 	void fastRemove(T* element)
 	{
-		int index = (element->*getIndex)();
+		int index = indexOf(element);
 		T* last = array[array.size() - 1];
 
 		array[index] = last;
-		(last->*getIndex)() = index;
+		indexOf(last) = index;
 
 		array.resize(array.size() - 1, false);
 
-		(element->*getIndex)() = -1;
+		indexOf(element) = -1;
 	}
 
-private:
-	G3D::Array<T*> array; // 0x00
+	bool fastContains(T* element) const;
+
+	const G3D::Array<T*>& underlyingArray() const { return array; }
+
+	T* operator[](unsigned int index) const { return array[index]; }
+	T* operator[](int index) const { return array[index]; }
+	T* operator[](unsigned int index) { return array[index]; }
+	T* operator[](int index) { return array[index]; }
+
+	int size() const { return array.size(); }
 };
 
 } // namespace RBX
