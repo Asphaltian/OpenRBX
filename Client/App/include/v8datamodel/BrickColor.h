@@ -134,21 +134,26 @@ public:
 		lego_268 = 268
 	};
 
+	Number number; // 0x00
+
 	typedef std::vector<BrickColor> Colors;
 
 	static const Colors& colorPalette();
 	static const Colors& allColors();
 
-	BrickColor(int number);
-	BrickColor() : number(lego_194) {}
-	BrickColor(Number number) : number(number) {}
-
 	unsigned int getClosestPaletteIndex() const;
 
-	static BrickColor closest(G3D::Color4 color);
-	static BrickColor closest(G3D::Color3 color);
-	static BrickColor closest(G3D::Color4uint8 color);
+	static const unsigned int paletteSize;
+	static const unsigned int paletteSizeMSB;
+
+	BrickColor(Number number) : number(number) {}
+	BrickColor() : number(lego_194) {}
+	BrickColor(int number);
+
 	static BrickColor closest(G3D::Color3uint8 color);
+	static BrickColor closest(G3D::Color4uint8 color);
+	static BrickColor closest(G3D::Color3 color);
+	static BrickColor closest(G3D::Color4 color);
 
 	static BrickColor parse(const char* name);
 
@@ -161,8 +166,18 @@ public:
 	static BrickColor legoRed() { return BrickColor(lego_21); }
 	static BrickColor legoYellow() { return BrickColor(lego_24); }
 	static BrickColor legoGreen() { return BrickColor(lego_28); }
+	static BrickColor baseplateGreen();
 	static BrickColor legoBlue() { return BrickColor(lego_23); }
+	static BrickColor defaultColor();
 
+	BrickColor& operator=(const BrickColor& other)
+	{
+		number = other.number;
+		return *this;
+	}
+
+	G3D::Color4uint8 color4uint8() const;
+	G3D::Color3uint8 color3uint8() const;
 	G3D::Color4 color4() const;
 	G3D::Color3 color3() const;
 
@@ -174,11 +189,9 @@ public:
 
 	bool operator!=(const BrickColor& other) const { return number != other.number; }
 
-	bool operator<(const BrickColor& other) const { return number < other.number; }
-
 	bool operator>(const BrickColor& other) const { return number > other.number; }
 
-	Number number; // 0x00
+	bool operator<(const BrickColor& other) const { return number < other.number; }
 };
 
 DECOMP_SIZE_ASSERT(BrickColor, 0x04)

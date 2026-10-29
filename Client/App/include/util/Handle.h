@@ -9,10 +9,14 @@ class Instance;
 
 class InstanceHandle
 {
+private:
+	boost::shared_ptr<Instance> target; // 0x00
+
 public:
-	InstanceHandle(const InstanceHandle& other) : target(other.target) {}
-	InstanceHandle(Instance* target);
 	InstanceHandle() {}
+	InstanceHandle(Instance* target);
+	InstanceHandle(boost::shared_ptr<Instance>);
+	InstanceHandle(const InstanceHandle& other) : target(other.target) {}
 
 	InstanceHandle& operator=(const InstanceHandle& other)
 	{
@@ -20,21 +24,27 @@ public:
 		return *this;
 	}
 
-	void linkTo(boost::shared_ptr<Instance> target);
+	InstanceHandle& operator=(boost::shared_ptr<Instance>);
 
 	bool empty() const;
 
 	// FUNCTION: WEBSERVICE 0x100484b0 FOLDED
 	boost::shared_ptr<Instance> getTarget() const { return target; }
 
+	void linkTo(boost::shared_ptr<Instance> target);
+
+	bool operator==(const InstanceHandle&) const;
+	bool operator!=(const InstanceHandle&) const;
+	bool operator<(const InstanceHandle& other) const { return operatorLess(other); }
+	bool operator>(const InstanceHandle&) const;
+
 protected:
+	bool operatorEqual(const InstanceHandle&) const;
 	bool operatorLess(const InstanceHandle& other) const;
+	bool operatorGreater(const InstanceHandle&) const;
 
 public:
-	bool operator<(const InstanceHandle& other) const { return operatorLess(other); }
-
-private:
-	boost::shared_ptr<Instance> target; // 0x00
+	~InstanceHandle() {}
 };
 
 } // namespace RBX

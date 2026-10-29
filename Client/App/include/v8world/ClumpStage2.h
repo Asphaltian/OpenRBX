@@ -32,8 +32,16 @@ public:
 class TreeStage : public IWorldStage
 {
 private:
+	int maxTreeDepth;               // 0x10
+	bool dirty;                     // 0x14
+	std::set<Assembly*> assemblies; // 0x18
+	std::set<Edge*> edges;          // 0x24
+
 	void insertEdge(Edge* e);
+	void eraseEdge(Edge* e);
+	void eraseEdge(std::set<Edge*>::iterator&);
 	void insertJoint(Joint* j);
+	void removeJoint(Joint*);
 
 	void swap(Joint* deactivate, Joint* activate, Primitive* newParent);
 	void findHeaviestUpstream(Primitive* p0, Primitive* p1, Joint*& answer, int& heavySide);
@@ -41,12 +49,15 @@ private:
 
 	void buildDownstreamTree(Primitive* p, std::set<Primitive*>& tree);
 	Joint* findLightestDownstream(Primitive* p, Primitive*& newParent);
+	bool existingActiveJoint(Joint*, Joint*&, int&);
 
 	void traverse(Joint* joint, Primitive* parent);
 	void rebuildClump(Joint* joint, Primitive* parent);
+	Joint* getActiveGroundJoint(Primitive*);
 
 	int getClumpDepth(Primitive* p);
 
+	void dirtyEdge(Edge*);
 	void cleanEdge(Edge* e);
 
 	void dirtyAssemblies(Joint* j);
@@ -55,7 +66,13 @@ private:
 	void undirtyAssembly(Assembly* a);
 	void cleanAssembly(Assembly* assembly);
 
+	bool validateAssemblyEdgesNotDownstream(Assembly*);
+	void validateInactiveJoint(Joint*);
+	bool validateTree(Primitive*);
+
 public:
+	TreeStage(IStage* upstream, World* world);
+
 	virtual ~TreeStage(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011c1e0
@@ -68,21 +85,13 @@ public:
 	virtual void onEdgeRemoving(Edge* edge);      // vtable+0x14
 	virtual int getMetric(MetricType metricType); // vtable+0x18
 
+	void onPrimitiveAdded(Primitive*);
+	void onPrimitiveRemoving(Primitive*);
+
 	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling); // vtable+0x08
 
+	void stepUi(int);
 	void process();
-
-private:
-	void eraseEdge(Edge* e);
-
-public:
-	TreeStage(IStage* upstream, World* world);
-
-private:
-	int maxTreeDepth;               // 0x10
-	bool dirty;                     // 0x14
-	std::set<Assembly*> assemblies; // 0x18
-	std::set<Edge*> edges;          // 0x24
 };
 
 DECOMP_SIZE_ASSERT(TreeStage, 0x30)

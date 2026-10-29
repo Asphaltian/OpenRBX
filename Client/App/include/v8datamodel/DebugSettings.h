@@ -33,16 +33,26 @@ public:
 
 	bool getShowAnchoredParts() const;
 	void setShowAnchoredParts(bool value);
+	bool getShowAggregation() const;
+	void setShowAggregation(bool);
 	bool getShowUnalignedParts() const;
 	void setShowUnalignedParts(bool value);
+	bool getHighlightSleepParts() const;
+	void setHighlightSleepParts(bool);
+	bool getHighlightAwakeParts() const;
+	void setHighlightAwakeParts(bool);
 	bool getShowPartCoordinateFrames() const;
 	void setShowPartCoordinateFrames(bool value);
 	bool getShowModelCoordinateFrames() const;
 	void setShowModelCoordinateFrames(bool value);
 	bool getShowWorldCoordinateFrames() const;
 	void setShowWorldCoordinateFrames(bool value);
+	bool getDisableSleep() const;
+	void setDisableSleep(bool);
 	bool getDisableEnvironmentalThrottle() const;
 	void setDisableEnvironmentalThrottle(bool value);
+	bool getUseNewGraphics() const;
+	void setUseNewGraphics(bool);
 	bool getShowSpanningTree() const;
 	void setShowSpanningTree(bool value);
 	bool getValidatingDebug() const;

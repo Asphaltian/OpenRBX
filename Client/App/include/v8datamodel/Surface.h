@@ -20,7 +20,14 @@ private:
 	NormalId surfId;            // 0x04
 
 public:
+	void flat();
+
 	Surface(PartInstance* partInstance, NormalId surfId);
+
+	PartInstance* getPartInstance() const;
+	NormalId getNormalId() const;
+
+	bool isControllable() const;
 
 	SurfaceType getSurfaceType() const;
 	void setSurfaceType(SurfaceType type);
@@ -29,13 +36,13 @@ public:
 	void setSurfaceInput(Controller::InputType value);
 
 	float getParamA() const;
-	void setParamA(float value);
-
 	float getParamB() const;
+	void setParamA(float value);
 	void setParamB(float value);
 
-	bool isControllable() const;
+	void toggleSurfaceType();
 
+	void writeValue(XmlElement*) const;
 	void readValue(const XmlElement* element, IReferenceBinder& binder);
 };
 
