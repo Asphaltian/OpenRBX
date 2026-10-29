@@ -1685,7 +1685,7 @@ void Replicator::readChangedProperty(RakNet::BitStream& inBitstream)
 }
 
 // FUNCTION: WEBSERVICE 0x101a8aa0
-void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitStream)
+void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitstream)
 {
 	const Instance* defaultInstance = getDefault(instance->getClassName());
 
@@ -1697,7 +1697,7 @@ void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitSt
 
 		if (descriptor.canStreamWrite()) {
 			if (typeid(bool) == descriptor.type.type) {
-				serializeValue(property, false, outBitStream);
+				serializeValue(property, false, outBitstream);
 				if (NetworkSettings::singleton().printInstances && NetworkSettings::singleton().printProperties) {
 					StandardOut::singleton()->print(
 						MESSAGE_INFO,
@@ -1709,7 +1709,7 @@ void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitSt
 				}
 			}
 			else if (defaultInstance && descriptor.equalValues(instance, defaultInstance)) {
-				outBitStream << true;
+				outBitstream << true;
 				if (NetworkSettings::singleton().printInstances && NetworkSettings::singleton().printProperties) {
 					StandardOut::singleton()->print(
 						MESSAGE_INFO,
@@ -1720,16 +1720,16 @@ void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitSt
 				}
 			}
 			else {
-				int start = outBitStream.GetNumberOfBitsUsed();
-				outBitStream << false;
-				serializeValue(property, false, outBitStream);
+				int start = outBitstream.GetNumberOfBitsUsed();
+				outBitstream << false;
+				serializeValue(property, false, outBitstream);
 				if (NetworkSettings::singleton().printInstances && NetworkSettings::singleton().printProperties) {
 					StandardOut::singleton()->print(
 						MESSAGE_INFO,
 						"   %s %s, %d bits",
 						descriptor.type.name.c_str(),
 						descriptor.name.c_str(),
-						outBitStream.GetNumberOfBitsUsed() - start
+						outBitstream.GetNumberOfBitsUsed() - start
 					);
 				}
 			}

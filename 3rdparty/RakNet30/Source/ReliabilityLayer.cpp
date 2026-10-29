@@ -987,7 +987,7 @@ bool ReliabilityLayer::Send( char *data, int numberOfBitsToSend, PacketPriority 
 // Run this once per game cycle.  Handles internal lists and actually does the send
 //-------------------------------------------------------------------------------------------------------
 // FUNCTION: WEBSERVICE 0x101c0b10
-void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSize, RakNetTimeNS time, unsigned maxBitsPerSecond, DataStructures::List<PluginInterface*> &messageHandlerList )
+void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSize, RakNetTimeNS time, unsigned bitsPerSecondLimit, DataStructures::List<PluginInterface*> &messageHandlerList )
 {
 	// This line is necessary because the timer isn't accurate
 	if (time <= lastUpdateTime)
@@ -1031,7 +1031,7 @@ void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSiz
 
 	// The throughput cap is a countdown in nanoseconds, not a bandwidth accumulator. While it is
 	// still positive nothing is sent this update and the connection is marked not-continuous.
-	if (maxBitsPerSecond && throughputCapCountdown > 0)
+	if (bitsPerSecondLimit && throughputCapCountdown > 0)
 	{
 		throughputCapCountdown -= elapsedTime;
 		if (throughputCapCountdown < 0)
@@ -1079,9 +1079,9 @@ void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSiz
 #endif
 			SendBitStream( s, systemAddress, &updateBitStream );
 
-			if (maxBitsPerSecond > 0)
+			if (bitsPerSecondLimit > 0)
 			{
-				throughputCapCountdown += (RakNetTimeNS)((double)updateBitStream.GetNumberOfBitsUsed() * 1000000.0 / (double)maxBitsPerSecond);
+				throughputCapCountdown += (RakNetTimeNS)((double)updateBitStream.GetNumberOfBitsUsed() * 1000000.0 / (double)bitsPerSecondLimit);
 				if (throughputCapCountdown > 30000)
 					break;
 			}
@@ -1106,8 +1106,8 @@ void ReliabilityLayer::Update( SOCKET s, SystemAddress systemAddress, int MTUSiz
 		statistics.acknowlegementBitsSent += acknowlegements.Serialize(&updateBitStream, (MTUSize-UDP_HEADER_SIZE)*8-1, true);
 		SendBitStream( s, systemAddress, &updateBitStream );
 
-		if (maxBitsPerSecond > 0)
-			throughputCapCountdown += (RakNetTimeNS)((double)updateBitStream.GetNumberOfBitsUsed() * 1000000.0 / (double)maxBitsPerSecond);
+		if (bitsPerSecondLimit > 0)
+			throughputCapCountdown += (RakNetTimeNS)((double)updateBitStream.GetNumberOfBitsUsed() * 1000000.0 / (double)bitsPerSecondLimit);
 	}
 
 DO_LAGGED_SENDS:

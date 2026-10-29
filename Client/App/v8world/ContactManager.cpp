@@ -68,28 +68,28 @@ ContactManager::~ContactManager()
 Primitive* ContactManager::getSlowHit(
 	const G3D::Array<Primitive*>& primitives,
 	const G3D::Ray& unitRay,
-	const G3D::Array<const Primitive*>* ignore,
+	const G3D::Array<const Primitive*>* ignorePrim,
 	const HitTestFilter* filter,
 	Vector3& hitPoint,
 	float maxDistance,
-	bool& hitSurface,
-	bool& blocked
+	bool& inside,
+	bool& stopped
 ) const
 {
-	float closestHit = maxDistance;
-	float closestBlock = maxDistance;
-	Primitive* answer = NULL;
+	float bestOffset = maxDistance;
+	float stopOffset = maxDistance;
+	Primitive* bestPrimitive = NULL;
 
-	blocked = false;
-	hitSurface = false;
+	stopped = false;
+	inside = false;
 
 	for (int i = 0; i < primitives.size(); ++i) {
 		Primitive* primitive = primitives[i];
 
 		bool notIgnored;
 
-		if (ignore != NULL) {
-			notIgnored = ignore->find(primitive) == ignore->end();
+		if (ignorePrim != NULL) {
+			notIgnored = ignorePrim->find(primitive) == ignorePrim->end();
 		}
 		else {
 			notIgnored = true;
@@ -105,33 +105,33 @@ Primitive* ContactManager::getSlowHit(
 		}
 
 		if (notIgnored && result != HitTestFilter::IGNORE_PRIM) {
-			Vector3 center = primitive->getCoordinateFrame().translation;
+			Vector3 worldPos = primitive->getCoordinateFrame().translation;
 			float radius = primitive->getRadius();
 
-			float along = (center - unitRay.origin).dot(unitRay.direction);
+			float along = (worldPos - unitRay.origin).dot(unitRay.direction);
 
-			if ((center - (unitRay.origin + unitRay.direction * along)).magnitude() <= radius) {
-				Vector3 surface(0.0f, 0.0f, 0.0f);
-				bool inside;
+			if ((worldPos - (unitRay.origin + unitRay.direction * along)).magnitude() <= radius) {
+				Vector3 thisHitPoint(0.0f, 0.0f, 0.0f);
+				bool thisInside;
 
-				if (primitive->hitTest(unitRay, surface, inside)) {
-					float distance = (surface - unitRay.origin).dot(unitRay.direction);
+				if (primitive->hitTest(unitRay, thisHitPoint, thisInside)) {
+					float distance = (thisHitPoint - unitRay.origin).dot(unitRay.direction);
 
 					if (distance > 0.0f) {
 						switch (result) {
 						case HitTestFilter::STOP_TEST:
-							if (distance < closestBlock) {
-								blocked = true;
-								closestBlock = distance;
+							if (distance < stopOffset) {
+								stopped = true;
+								stopOffset = distance;
 							}
 							break;
 
 						case HitTestFilter::INCLUDE_PRIM:
-							if (distance < closestHit) {
-								hitSurface = inside;
-								closestHit = distance;
-								hitPoint = surface;
-								answer = primitive;
+							if (distance < bestOffset) {
+								inside = thisInside;
+								bestOffset = distance;
+								hitPoint = thisHitPoint;
+								bestPrimitive = primitive;
 							}
 							break;
 						}
@@ -141,11 +141,11 @@ Primitive* ContactManager::getSlowHit(
 		}
 	}
 
-	if (blocked && answer != NULL && closestHit < closestBlock) {
-		blocked = false;
+	if (stopped && bestPrimitive != NULL && bestOffset < stopOffset) {
+		stopped = false;
 	}
 
-	return answer;
+	return bestPrimitive;
 }
 
 // FUNCTION: WEBSERVICE 0x10108620
@@ -169,11 +169,11 @@ bool ContactManager::intersectingOthers(Primitive* check, const std::set<Primiti
 // FUNCTION: WEBSERVICE 0x101086c0
 Primitive* ContactManager::getFastHit(
 	const G3D::Ray& ray,
-	const G3D::Array<const Primitive*>* ignore,
+	const G3D::Array<const Primitive*>* ignorePrim,
 	const HitTestFilter* filter,
-	Vector3& hitPoint,
-	bool& hitSurface,
-	bool& blocked
+	Vector3& hitPointWorld,
+	bool& inside,
+	bool& stopped
 ) const
 {
 	G3D::Array<Primitive*> found;
@@ -189,13 +189,13 @@ Primitive* ContactManager::getFastHit(
 		found.resize(0, false);
 		spatialHash->getPrimitivesInGrid(grid, found);
 
-		Primitive* hit = getSlowHit(found, unitRay, ignore, filter, hitPoint, maxDistance, hitSurface, blocked);
+		Primitive* hit = getSlowHit(found, unitRay, ignorePrim, filter, hitPointWorld, maxDistance, inside, stopped);
 
 		if (hit != NULL) {
 			Vector3 gridCenter((float) grid.x, (float) grid.y, (float) grid.z);
 			Extents extents = SpatialHash::hashGridToRealExtents(gridCenter);
 
-			if (extents.fuzzyContains(hitPoint, 0.001f)) {
+			if (extents.fuzzyContains(hitPointWorld, 0.001f)) {
 				return hit;
 			}
 		}
