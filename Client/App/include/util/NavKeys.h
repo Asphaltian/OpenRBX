@@ -9,11 +9,26 @@ namespace RBX {
 class NavKeys
 {
 public:
+	bool forward_arrow;  // 0x00
+	bool backward_arrow; // 0x01
+	bool left_arrow;     // 0x02
+	bool right_arrow;    // 0x03
+	bool forward_asdw;   // 0x04
+	bool backward_asdw;  // 0x05
+	bool left_asdw;      // 0x06
+	bool right_asdw;     // 0x07
+	bool space;          // 0x08
+
 	NavKeys()
 		: forward_arrow(false), backward_arrow(false), left_arrow(false), right_arrow(false), forward_asdw(false),
 		  backward_asdw(false), left_asdw(false), right_asdw(false), space(false)
 	{
 	}
+
+	bool forward() const;
+	bool backward() const;
+	bool left() const;
+	bool right() const;
 
 	bool arrowKeyDown() const { return forward_arrow || backward_arrow || left_arrow || right_arrow; }
 	// FUNCTION: WEBSERVICE 0x1006a020
@@ -31,16 +46,6 @@ public:
 
 	// FUNCTION: WEBSERVICE 0x100c5440
 	float forwardBackwardASDW() const { return forward_asdw ? 1.0f : (backward_asdw ? -1.0f : 0.0f); }
-
-	bool forward_arrow;  // 0x00
-	bool backward_arrow; // 0x01
-	bool left_arrow;     // 0x02
-	bool right_arrow;    // 0x03
-	bool forward_asdw;   // 0x04
-	bool backward_asdw;  // 0x05
-	bool left_asdw;      // 0x06
-	bool right_asdw;     // 0x07
-	bool space;          // 0x08
 };
 
 DECOMP_SIZE_ASSERT(NavKeys, 0x09)

@@ -18,17 +18,28 @@ public:
 	CoordinateFrame position; // 0x00
 	Velocity velocity;        // 0x30
 
+	bool operator==(const PV&) const;
+	bool operator!=(const PV&) const;
+
 	PV() {}
 	PV(const CoordinateFrame& position, const Velocity& velocity) : position(position), velocity(velocity) {}
+	PV(const PV& other) : position(other.position), velocity(other.velocity) {}
 	~PV() {}
+
+	PV inverse() const;
+	PV toObjectSpace(const PV&) const;
 
 	Vector3 linearVelocityAtPoint(const Vector3& worldPos) const;
 
 	Velocity velocityAtPoint(const Vector3& worldPos) const;
 
+	Velocity velocityAtLocalOffset(const Vector3&) const;
+
 	PV pvAtLocalOffset(const Vector3& localOffset) const;
 
 	PV pvAtLocalCoord(const CoordinateFrame& localCoord) const;
+
+	PV operator*(const PV&) const;
 };
 
 inline Vector3 PV::linearVelocityAtPoint(const Vector3& worldPos) const
