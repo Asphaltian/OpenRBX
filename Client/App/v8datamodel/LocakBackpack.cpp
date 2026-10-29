@@ -68,7 +68,7 @@ void LocalBackpackItem::render2d(Adorn* adorn)
 	Widget::render2d(adorn);
 }
 
-// STUB: WEBSERVICE 0x100d6100
+// FUNCTION: WEBSERVICE 0x100d6100
 void LocalBackpack::removeBackpackItem(BackpackItem* item)
 {
 	for (unsigned int i = 0; i < numChildren(); ++i) {
@@ -82,6 +82,8 @@ void LocalBackpack::removeBackpackItem(BackpackItem* item)
 			return;
 		}
 	}
+
+	debugAssert(false);
 }
 
 // FUNCTION: WEBSERVICE 0x100d61c0

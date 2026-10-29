@@ -132,7 +132,7 @@ int Server::getClientCount()
 	return 0;
 }
 
-// STUB: WEBSERVICE 0x1019a330
+// FUNCTION: WEBSERVICE 0x1019a330
 PluginReceiveResult Server::ClientProxy::OnReceive(RakPeerInterface* peer, Packet* packet)
 {
 	const SystemAddress& systemAddress = packet->systemAddress;
@@ -155,7 +155,7 @@ PluginReceiveResult Server::ClientProxy::OnReceive(RakPeerInterface* peer, Packe
 						"Received remotePlayer %s from %s",
 						this,
 						id.readableString(4).c_str(),
-						remotePlayerId.ToString()
+						systemAddress.ToString()
 					);
 				}
 
@@ -172,7 +172,7 @@ PluginReceiveResult Server::ClientProxy::OnReceive(RakPeerInterface* peer, Packe
 					G3D::format(
 						"Couldn't resolve remotePlayer %s from %s",
 						id.readableString(4).c_str(),
-						remotePlayerId.ToString()
+						systemAddress.ToString()
 					)
 				);
 			}
