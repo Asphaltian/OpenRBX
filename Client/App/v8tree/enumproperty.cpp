@@ -702,9 +702,9 @@ void TypedPropertyDescriptor<BrickColor>::readValue(
 ) const
 {
 	if (!element->isXsiNil()) {
-		int value;
-		if (element->getValue(value)) {
-			setValue(instance, BrickColor(value));
+		int number;
+		if (element->getValue(number)) {
+			setValue(instance, BrickColor(number));
 		}
 	}
 }

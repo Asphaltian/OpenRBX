@@ -183,9 +183,9 @@ void World::onPrimitiveCanCollideChanged(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x100cf2b0 FOLDED
-void World::onMotorAngleChanged(MotorJoint* motorJoint)
+void World::onMotorAngleChanged(MotorJoint* m)
 {
-	getClumpStage()->onMotorAngleChanged(motorJoint);
+	getClumpStage()->onMotorAngleChanged(m);
 }
 
 // FUNCTION: WEBSERVICE 0x100cf2f0

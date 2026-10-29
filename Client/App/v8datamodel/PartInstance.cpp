@@ -240,10 +240,10 @@ bool PartInstance::nonNullInWorkspace(shared_ptr<PartInstance> part)
 }
 
 // FUNCTION: WEBSERVICE 0x1009ae90 FOLDED
-PartInstance* PartInstance::fromPrimitive(Primitive* primitive)
+PartInstance* PartInstance::fromPrimitive(Primitive* p)
 {
-	if (primitive != NULL) {
-		IMoving* owner = primitive->getOwner();
+	if (p != NULL) {
+		IMoving* owner = p->getOwner();
 
 		if (owner != NULL) {
 			return static_cast<PartInstance*>(owner);
@@ -254,10 +254,10 @@ PartInstance* PartInstance::fromPrimitive(Primitive* primitive)
 }
 
 // FUNCTION: WEBSERVICE 0x1009ae90 FOLDED
-const PartInstance* PartInstance::fromPrimitiveConst(const Primitive* primitive)
+const PartInstance* PartInstance::fromPrimitiveConst(const Primitive* p)
 {
-	if (primitive != NULL) {
-		IMoving* owner = primitive->getOwner();
+	if (p != NULL) {
+		IMoving* owner = p->getOwner();
 
 		if (owner != NULL) {
 			return static_cast<const PartInstance*>(owner);

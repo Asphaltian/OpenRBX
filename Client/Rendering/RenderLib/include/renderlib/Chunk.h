@@ -38,7 +38,7 @@ public:
 	virtual bool cachesShadows() const { return false; }
 
 	// FUNCTION: WEBSERVICE 0x101aaa90 FOLDED
-	virtual void renderShadows(G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance)
+	virtual void renderShadows(G3D::RenderDevice* rd, const G3D::GLight& source, bool caps, float shadowVertexDistance)
 	{
 	}
 	virtual bool castsShadows() const = 0;

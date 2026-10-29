@@ -214,8 +214,8 @@ protected:
 
 	virtual void onSelectionChanged(const SelectionChanged& event)
 	{
-		if (T* item = dynamic_cast<T*>(event.addedItem.get())) {
-			filteredSelection.push_back(item);
+		if (T* c = dynamic_cast<T*>(event.addedItem.get())) {
+			filteredSelection.push_back(c);
 		}
 
 		if (event.removedItem) {
