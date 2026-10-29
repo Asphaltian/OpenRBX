@@ -2,6 +2,7 @@
 #define UTIL_USERINPUTBASE_H
 
 #include "decomp.h"
+#include "util/ContentProvider.h"
 #include "util/NavKeys.h"
 
 #include <G3D/ReferenceCount.h>
@@ -45,7 +46,8 @@ public:
 	bool ctrlKeyDown() const { return keyDown(SDLK_RCTRL) || keyDown(SDLK_LCTRL); }
 
 private:
-	undefined m_unk0x04[0x28 - 0x04]; // 0x04
+	ContentId currentCursorId;                                    // 0x04
+	G3D::ReferenceCountedPointer<TextureProxyBase> currentCursor; // 0x24
 };
 
 DECOMP_SIZE_ASSERT(UserInputBase, 0x28)

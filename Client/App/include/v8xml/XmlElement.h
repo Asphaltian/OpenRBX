@@ -19,9 +19,10 @@ class Name;
 template <class T>
 class Sibling
 {
-public:
+protected:
 	Sibling() : next(NULL) {}
 
+public:
 	T* nextSibling() const { return next; }
 
 private:
@@ -245,6 +246,7 @@ public:
 protected:
 	XmlNameValuePair(const RBX::Name& tag) : tag(tag), valueType(NONE) {}
 
+private:
 	const RBX::Name& tag;        // 0x00
 	mutable ValueType valueType; // 0x04
 

@@ -44,6 +44,8 @@ public:
 private:
 	RevoluteLink* link; // 0x88
 	float currentAngle; // 0x8c
+
+public:
 	float maxVelocity;  // 0x90
 	float desiredAngle; // 0x94
 };

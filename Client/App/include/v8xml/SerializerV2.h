@@ -109,7 +109,7 @@ protected:
 		return false;
 	}
 
-protected:
+private:
 	std::vector<IDREFItem> deferredIDREFItems; // 0x04
 };
 

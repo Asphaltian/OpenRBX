@@ -172,8 +172,12 @@ public:
 
 	void setColor(BrickColor value);
 
+private:
+	friend class Surface;
+
 	void onSurfaceChanged(NormalId normalId);
 
+public:
 	virtual void onCanAggregateChanged(bool canAggregate);
 	virtual bool reportTouches() const;
 

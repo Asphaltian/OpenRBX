@@ -380,7 +380,8 @@ void Players::chat(std::string message)
 	RakNet::BitStream bitStream;
 	bitStream << (unsigned char) ID_CHAT_ALL;
 
-	Guid::Data id = localPlayer->getGuid().data;
+	Guid::Data id;
+	localPlayer->getGuid().extract(id);
 
 	bitStream << id.scope->toString();
 	bitStream << id.index;

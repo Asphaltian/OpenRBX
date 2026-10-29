@@ -45,33 +45,37 @@ protected:
 	friend class Notifier<Source, Event>;
 
 	virtual void onEvent(const Source* source, Event event) = 0; // vtable+0x00
-	virtual ~Listener() {}                                       // vtable+0x04
+	Listener& operator=(const Listener&);
+	virtual ~Listener() {} // vtable+0x04
 };
 
 // SIZE 0x18
 template <class Source, class Event>
 class __declspec(novtable) Notifier
 {
+private:
+	mutable std::vector<Listener<Source, Event>*> listeners; // 0x04
+	mutable RaiseRange* raiseRange;                          // 0x14
+
+protected:
+	Notifier() : raiseRange(NULL) {}
+	Notifier(const Notifier&);
+	Notifier& operator=(const Notifier&);
+	virtual ~Notifier() {} // vtable+0x00
+
 public:
 	void addListener(Listener<Source, Event>* listener) const;
 	void removeListener(Listener<Source, Event>* listener) const;
 
 protected:
-	Notifier() : raiseRange(NULL) {}
-
-	virtual ~Notifier() {}                                                    // vtable+0x00
-	virtual void onAddListener(Listener<Source, Event>* listener) const {}    // vtable+0x04
-	virtual void onRemoveListener(Listener<Source, Event>* listener) const {} // vtable+0x08
-
 	bool hasListeners() const { return !listeners.empty(); }
 
 	void raise(Event event, Listener<Source, Event>* listener) const;
-
 	void raise(Event event) const throw();
+	void raise() const;
 
-private:
-	mutable std::vector<Listener<Source, Event>*> listeners; // 0x04
-	mutable RaiseRange* raiseRange;                          // 0x14
+	virtual void onAddListener(Listener<Source, Event>* listener) const {}    // vtable+0x04
+	virtual void onRemoveListener(Listener<Source, Event>* listener) const {} // vtable+0x08
 };
 
 // FUNCTION: WEBSERVICE 0x1001acb0

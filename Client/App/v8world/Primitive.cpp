@@ -42,7 +42,7 @@ const Guid& Primitive::getGuid() const
 // FUNCTION: WEBSERVICE 0x100a7800
 void Primitive::setGuid(const Guid& value)
 {
-	guid.assign(value.data);
+	guid.copyDataFrom(value);
 	guidSetExternally = true;
 }
 

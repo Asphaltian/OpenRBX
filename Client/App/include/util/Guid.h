@@ -29,6 +29,8 @@ public:
 	Guid();
 
 	void assign(Data data);
+	void extract(Data& result) const { result = data; }
+	void copyDataFrom(const Guid& other) { assign(other.data); }
 
 	// FUNCTION: WEBSERVICE 0x1019bbd0
 	std::string readableString(int scopeLength) const { return data.readableString(4); }
@@ -39,6 +41,7 @@ public:
 	static const Name& getLocalScope();
 	static void generateGUID(std::string& result);
 
+private:
 	Data data; // 0x00
 };
 
@@ -136,7 +139,8 @@ private:
 	void unregisterGuid() const
 	{
 		if (registeredGuid) {
-			Guid::Data data = guid.data;
+			Guid::Data data;
+			guid.extract(data);
 			StaticData& s = getStaticData();
 			boost::recursive_mutex::scoped_lock lock(s.mutex);
 			s.map.erase(data);
@@ -151,7 +155,8 @@ private:
 	void registerGuid() const
 	{
 		if (!registeredGuid) {
-			Guid::Data data = guid.data;
+			Guid::Data data;
+			guid.extract(data);
 			StaticData& s = getStaticData();
 			boost::recursive_mutex::scoped_lock lock(s.mutex);
 			s.map[data] = const_cast<T*>(static_cast<const T*>(this));

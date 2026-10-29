@@ -521,7 +521,8 @@ void StringSender::serializeString(const Reflection::ConstProperty& property, Ra
 void IdSerializer::serializeId(RakNet::BitStream& stream, const Instance* instance)
 {
 	if (instance) {
-		Guid::Data id = instance->getGuid().data;
+		Guid::Data id;
+		instance->getGuid().extract(id);
 		scopeNames.send(stream, id.scope->toString());
 
 		stream.WriteBits(reinterpret_cast<unsigned char*>(&id.index), 24);
@@ -551,7 +552,8 @@ void IdSerializer::serializeRef(const Reflection::ConstProperty& property, RakNe
 bool IdSerializer::trySerializeId(RakNet::BitStream& stream, const Instance* instance)
 {
 	if (instance) {
-		Guid::Data id = instance->getGuid().data;
+		Guid::Data id;
+		instance->getGuid().extract(id);
 		if (!scopeNames.trySend(stream, id.scope->toString())) {
 			return false;
 		}

@@ -72,9 +72,11 @@ public:
 
 	bool operator==(const PropertyDescriptor& other) const { return this == &other; }
 
+private:
 	unsigned int bIsPublic : 1;       // 0x10
 	unsigned int bCanStreamWrite : 1; // 0x10
 
+public:
 	const Type& type; // 0x14
 
 protected:

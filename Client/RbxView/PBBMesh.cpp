@@ -12,10 +12,11 @@
 // SIZE 0xc
 class Face
 {
-public:
+private:
 	G3D::Vector2 perturbation; // 0x00
 	bool bulge[2];             // 0x08
 
+public:
 	Face();
 
 	void operator()(

@@ -304,7 +304,7 @@ bool Replicator::wantReplicate(const Instance* source) const
 }
 
 // SIZE 0x130
-class Replicator::JobSender : boost::noncopyable
+class Replicator::JobSender : public boost::noncopyable
 {
 	const Assembly* firstA;  // 0x00
 	const Mechanism* firstM; // 0x04
@@ -956,7 +956,8 @@ void Replicator::requestCharacter()
 	serializeId(bitStream, player);
 
 	if (NetworkSettings::singleton().printInstances) {
-		Guid::Data id = player->getGuid().data;
+		Guid::Data id;
+		player->getGuid().extract(id);
 		StandardOut::singleton()
 			->print(MESSAGE_INFO, "Replicator: Requesting character for %s", id.readableString(4).c_str());
 	}

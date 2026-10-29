@@ -51,7 +51,7 @@ public:
 DECOMP_SIZE_ASSERT(SoundId, 0x20)
 
 // SIZE 0x30
-class Sound : public boost::noncopyable
+class Sound : private boost::noncopyable
 {
 public:
 	Sound(FMOD::System* system, SoundId id, bool is3D);
