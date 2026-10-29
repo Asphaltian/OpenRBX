@@ -631,7 +631,7 @@ void MD2Model::getGeometry(const Pose& pose, MeshAlg::Geometry& out) const {
     const PackedGeometry& frame1 = keyFrame[i1];
 
     // To use SSE both the compiler and the processor must support it
-    #if defined(SSE) && defined(G3D_WIN32)
+    #if defined(SSE) && defined(G3D_WIN32) && defined(_M_IX86)
         bool useSSE = System::hasSSE();
     #else
         bool useSSE = false;
@@ -658,7 +658,7 @@ void MD2Model::getGeometry(const Pose& pose, MeshAlg::Geometry& out) const {
 
     // Put this code inside an ifdef because it won't compile
     // on non-SSE compilers otherwise.
-    #if defined(SSE) && defined(G3D_WIN32)
+    #if defined(SSE) && defined(G3D_WIN32) && defined(_M_IX86)
         // The high performance path interpolates between two arrays of floats.
         // We first convert the vertices and normals into this format.
 

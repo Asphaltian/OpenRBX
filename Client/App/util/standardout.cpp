@@ -12,6 +12,13 @@ namespace RBX {
 DECOMP_SIZE_ASSERT(StandardOut, 0x28)
 DECOMP_SIZE_ASSERT(StandardOutMessage, 0x28)
 
+#ifndef _MSC_VER
+void printListenerException(const std::string& what)
+{
+	StandardOut::singleton()->print(MESSAGE_WARNING, "Exception caught in onEvent. %s", what.c_str());
+}
+#endif
+
 // FUNCTION: WEBSERVICE 0x100010d0
 void StandardOut::print(MessageType type, const std::exception& exp)
 {

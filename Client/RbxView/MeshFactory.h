@@ -346,4 +346,12 @@ inline unsigned int hashCode(const RBX::View::RenderSurfaceTypes& surfaceTypes)
 	return surfaceTypes.hashCode();
 }
 
+#ifndef _MSC_VER
+namespace RBX {
+namespace View {
+using ::hashCode;
+} // namespace View
+} // namespace RBX
+#endif
+
 #endif // RBXVIEW_MESHFACTORY_H

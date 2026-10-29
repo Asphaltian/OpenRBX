@@ -7,6 +7,8 @@
 #define __forceinline inline
 #define __int64 long long
 
+#include "msvcrt.h"
+
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,8 +20,6 @@
 #define _strnicmp strncasecmp
 #define stricmp strcasecmp
 #define strnicmp strncasecmp
-#define _snprintf snprintf
-#define _vsnprintf vsnprintf
 #define _strdup strdup
 #define __time64_t long long
 

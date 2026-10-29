@@ -996,7 +996,7 @@ public:
          */
         BoxIntersectionIterator operator++(int) {
             BoxIntersectionIterator old = *this;
-            ++this;
+            ++(*this);
             return old;
         }
 

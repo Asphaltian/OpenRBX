@@ -576,8 +576,14 @@ union luai_Cast { double l_d; long l_l; };
 
 /* this option always works, but may be slow */
 #else
-#define lua_number2int(i,d)	((i)=(int)(d))
-#define lua_number2integer(i,d)	((i)=(lua_Integer)(d))
+#include <math.h>
+static __inline int luai_fistp(double d)
+{
+  long long v = llrint(d);
+  return v == (int)v ? (int)v : INT_MIN;
+}
+#define lua_number2int(i,d)	((i)=luai_fistp(d))
+#define lua_number2integer(i,d)	((i)=luai_fistp(d))
 
 #endif
 
@@ -779,11 +785,19 @@ inline RobloxExtraSpace::RobloxExtraSpace(RobloxExtraSpace* parent) : yieldCaptu
 
 #define LUA_INTFRMLEN		"ll"
 #define LUA_INTFRM_T		long long
+#define luai_ftol(n)		(n)
 
-#else
+#elif defined(_MSC_VER) && defined(_M_IX86)
 
 #define LUA_INTFRMLEN		"l"
 #define LUA_INTFRM_T		long
+#define luai_ftol(n)		(n)
+
+#else
+
+#define LUA_INTFRMLEN		""
+#define LUA_INTFRM_T		int
+#define luai_ftol(n)		((long long)(n))
 
 #endif
 

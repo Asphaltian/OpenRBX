@@ -32,6 +32,7 @@ public:
 
 	EventType eventType;      // 0x00
 	UserInputBase* userInput; // 0x04
+#ifdef _MSC_VER
 	union {
 		struct
 		{
@@ -45,6 +46,13 @@ public:
 			SDLMod mod; // 0x0c
 		};
 	};
+#else
+	G3D::Vector2int16 mousePosition;
+	G3D::Vector2int16 mouseDelta;
+	G3D::Vector2int16 windowSize;
+	SDLKey key;
+	SDLMod mod;
+#endif
 
 	UIEvent(UserInputBase* userInput, EventType eventType, SDLKey key, SDLMod mod);
 	UIEvent(UserInputBase* userInput, EventType eventType, G3D::Vector2int16, G3D::Vector2int16);

@@ -2168,9 +2168,9 @@ void RenderDevice::setAmbientLightColor(
     minStateChange();
     if (color != state.lights.ambient) {
         float c[] =
-            {color.r / lightSaturation,
-             color.g / lightSaturation,
-             color.b / lightSaturation,
+            {(float)(color.r / lightSaturation),
+             (float)(color.g / lightSaturation),
+             (float)(color.b / lightSaturation),
              1.0f};
     
         state.lights.changed = true;

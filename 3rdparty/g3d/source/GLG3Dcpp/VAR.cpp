@@ -128,7 +128,7 @@ void VAR::set(int index, const void* value, GLenum glformat, size_t eltSize) {
 
 
 void VAR::uploadToCard(const void* sourcePtr, int dstPtrOffset, size_t size) {
-    void* ptr = (void*)((uint)_pointer + dstPtrOffset);
+    void* ptr = (void*)((size_t)_pointer + dstPtrOffset);
 
     switch (VARArea::mode) {
     case VARArea::VBO_MEMORY:

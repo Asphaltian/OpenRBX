@@ -69,7 +69,7 @@ public:
 
 
 G3D::uint32 hashCode(const G3D::_internal::Welder::List* x) {
-    return (G3D::uint32)x;
+    return (G3D::uint32)(size_t)x;
 }
 
 namespace G3D {

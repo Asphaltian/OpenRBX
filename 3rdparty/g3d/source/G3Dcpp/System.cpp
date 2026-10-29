@@ -302,7 +302,7 @@ void System::init() {
         // We read the standard CPUID level 0x00000000 which should
         // be available on every x86 processor.  This fills out
         // a string with the processor vendor tag.
-        #ifdef _MSC_VER
+        #if defined(_MSC_VER) && defined(_M_IX86)
             __asm {
                 push eax
                 push ebx
@@ -352,7 +352,7 @@ void System::init() {
         maxSupportedCPUIDLevel = eaxreg & 0xFFFF;
 
         // Then we read the ext. CPUID level 0x80000000
-        #ifdef _MSC_VER
+        #if defined(_MSC_VER) && defined(_M_IX86)
             __asm {
                 push eax
                 push ebx
@@ -522,7 +522,7 @@ void checkForCPUID() {
     // We've to check if we can toggle the flag register bit 21.
     // If we can't the processor does not support the CPUID command.
     
-#   ifdef _MSC_VER
+#   if defined(_MSC_VER) && defined(_M_IX86)
         __asm {
                 push eax
                 push ebx
@@ -581,7 +581,7 @@ void getStandardProcessorExtensions() {
     // Invoking CPUID with '1' in EAX fills out edx with a bit string.
     // The bits of this value indicate the presence or absence of 
     // useful processor features.
-    #ifdef _MSC_VER
+    #if defined(_MSC_VER) && defined(_M_IX86)
         // Windows
 
             __asm {
@@ -719,7 +719,7 @@ void memcpySSE2(void* dst, const void* src, int nbytes) {
 
 #endif
 
-#if defined(G3D_WIN32) && defined(SSE)
+#if defined(G3D_WIN32) && defined(SSE) && defined(_M_IX86)
 /** Michael Herf's fast memcpy */
 void memcpyMMX(void* dst, const void* src, int nbytes) {
     int remainingBytes = nbytes;
@@ -788,7 +788,7 @@ void System::memcpy(void* dst, const void* src, size_t numBytes) {
 
 /** Michael Herf's fastest memset. n32 must be filled with the same
     character repeated. */
-#if defined(G3D_WIN32) && defined(SSE)
+#if defined(G3D_WIN32) && defined(SSE) && defined(_M_IX86)
 
 // On x86 processors, use MMX
 void memfill(void *dst, int n32, unsigned long i) {
@@ -1537,15 +1537,7 @@ void* System::alignedMalloc(size_t bytes, size_t alignment) {
 
     // The return pointer will be the next aligned location (we must at least
     // leave space for the redirect pointer, however).
-    size_t  alignedPtr = truePtr + sizeof(void*);
-
-    // 2^n - 1 has the form 1111... in binary.
-    uint32 bitMask = (alignment - 1);
-
-    // Advance forward until we reach an aligned location.
-    while ((alignedPtr & bitMask) != 0) {
-        alignedPtr += sizeof(void*);
-    }
+    size_t  alignedPtr = (truePtr + sizeof(void*) + alignment - 1) & ~(size_t)(alignment - 1);
 
     debugAssert(alignedPtr - truePtr + bytes <= totalBytes);
 

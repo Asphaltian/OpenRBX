@@ -10,10 +10,6 @@ if (NOT MSVC)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
   add_compile_options(-pthread -fno-strict-aliasing -Wno-deprecated-declarations $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics>)
   add_link_options(-pthread)
-  if (NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    message(FATAL_ERROR "Non-MSVC builds require Clang")
-  endif()
-  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fdelayed-template-parsing> -fms-extensions)
   add_compile_options(-include "${PROJECT_SOURCE_DIR}/util/portable.h")
 endif()
 
@@ -34,15 +30,23 @@ endif()
 
 math(EXPR bits "8 * ${CMAKE_SIZEOF_VOID_P}")
 message(STATUS "Building ${bits}-bit RBXGS")
-if (WIN32 AND NOT bits EQUAL 32)
-  message(WARNING "Only 32-bit binaries are supported")
-endif()
-
 set(MSVC_FOR_DECOMP FALSE)
 if (MSVC)
   if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "14.0" AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS "15.0")
     set(MSVC_FOR_DECOMP TRUE)
   endif()
+endif()
+
+if (MSVC_FOR_DECOMP AND NOT bits EQUAL 32)
+  message(FATAL_ERROR "The MSVC 8 decomp build is 32-bit only")
+endif()
+
+if (MSVC AND NOT MSVC_FOR_DECOMP)
+  add_compile_options("/FI${PROJECT_SOURCE_DIR}/util/msvcrt.h" /Zc:threadSafeInit-)
+endif()
+
+if (NOT MSVC_FOR_DECOMP)
+  add_library(rbxcrt STATIC util/msvcrt.cpp)
 endif()
 message(STATUS "MSVC for decompilation: ${MSVC_FOR_DECOMP}")
 
@@ -464,7 +468,7 @@ if (NOT WIN32)
   list(APPEND OPENRBX_NETWORK_SOURCES util/posix/CrashReporter.cpp)
 endif()
 
-if (NOT MSVC)
+if (NOT MSVC_FOR_DECOMP)
   set_source_files_properties(${OPENRBX_LUA_SOURCES} PROPERTIES LANGUAGE CXX)
 endif()
 
@@ -474,8 +478,11 @@ add_engine_library(lua
   SOURCES ${OPENRBX_LUA_SOURCES}
 )
 
-if (MSVC_FOR_DECOMP OR NOT WIN32)
-  list(APPEND OPENRBX_APP_SOURCES 3rdparty/boost_1_34_1/libs/iostreams/src/zlib.cpp)
+list(APPEND OPENRBX_APP_SOURCES 3rdparty/boost_1_34_1/libs/iostreams/src/zlib.cpp)
+set_source_files_properties(3rdparty/boost_1_34_1/libs/iostreams/src/zlib.cpp PROPERTIES SKIP_LINTING ON)
+if (MSVC AND NOT MSVC_FOR_DECOMP)
+  set_source_files_properties(3rdparty/boost_1_34_1/libs/iostreams/src/zlib.cpp
+    PROPERTIES COMPILE_OPTIONS "/FI${PROJECT_SOURCE_DIR}/util/compat.h")
 endif()
 
 add_engine_library(app
@@ -587,33 +594,69 @@ if (WIN32)
   set_property(TARGET webservice PROPERTY SUFFIX ".dll")
 
   add_custom_target(rbxgs DEPENDS webservice)
-else()
-  add_library(rbxgs_engine STATIC)
-  foreach(lib ${OPENRBX_ENGINE_LIBRARIES})
-    target_sources(rbxgs_engine PRIVATE $<TARGET_OBJECTS:${lib}>)
-  endforeach()
-  find_package(OpenGL REQUIRED)
-  find_package(X11 REQUIRED)
-  find_package(ZLIB REQUIRED)
-  find_library(OPENRBX_SDL_LIBRARY NAMES SDL-1.2 SDL REQUIRED)
-  add_library(rbxgs SHARED util/decomp.cpp)
-  target_link_libraries(rbxgs PRIVATE
-    -Wl,--whole-archive rbxgs_engine -Wl,--no-whole-archive
-    -Wl,--start-group ${OPENRBX_G3D_LIBS} ${OPENRBX_BOOST_LIBS} -Wl,--end-group
-    fmodex ${OPENRBX_SDL_LIBRARY} ZLIB::ZLIB OpenGL::GL OpenGL::GLU X11::X11
-  )
-  target_link_options(rbxgs PRIVATE -Wl,--no-undefined)
-  set_property(TARGET rbxgs PROPERTY BUILD_RPATH "$ORIGIN")
-  add_custom_command(TARGET rbxgs POST_BUILD
-    COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${OPENRBX_FMOD_RUNTIME}" "$<TARGET_FILE_DIR:rbxgs>"
-  )
+endif()
 
-  add_executable(rbxgs_run util/posix/rbxgs.cpp)
-  target_include_directories(rbxgs_run PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS} ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
+if (NOT MSVC_FOR_DECOMP)
+  add_executable(rbxgs_run util/rbxgs.cpp)
+  target_include_directories(rbxgs_run PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS})
+  target_include_directories(rbxgs_run SYSTEM PRIVATE ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
   target_compile_definitions(rbxgs_run PRIVATE ${OPENRBX_COMMON_DEFINITIONS})
-  target_link_libraries(rbxgs_run PRIVATE rbxgs)
   set_property(TARGET rbxgs_run PROPERTY OUTPUT_NAME "rbxgs")
-  set_property(TARGET rbxgs_run PROPERTY BUILD_RPATH "$ORIGIN")
+
+  if (WIN32)
+    foreach(lib ${OPENRBX_ENGINE_LIBRARIES})
+      target_sources(rbxgs_run PRIVATE $<TARGET_OBJECTS:${lib}>)
+    endforeach()
+    target_link_libraries(rbxgs_run PRIVATE
+      ${OPENRBX_G3D_LIBS}
+      ${OPENRBX_BOOST_LIBS}
+      ${OPENRBX_MESA_LIBS}
+      rbxcrt
+      fmodex
+      advapi32
+      dbghelp
+      gdi32
+      ole32
+      oleaut32
+      setupapi
+      shell32
+      shlwapi
+      user32
+      version
+      wininet
+      winmm
+      ws2_32
+    )
+    foreach(lib zlib.lib G3D.lib G3D-debug.lib GLG3D.lib GLG3D-debug.lib sdl.lib sdlmain.lib glut32.lib)
+      target_link_options(rbxgs_run PRIVATE "/NODEFAULTLIB:${lib}")
+    endforeach()
+    add_custom_command(TARGET rbxgs_run POST_BUILD
+      COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${OPENRBX_FMOD_RUNTIME}" "$<TARGET_FILE_DIR:rbxgs_run>"
+      COMMAND "${CMAKE_COMMAND}" -E copy_if_different $<TARGET_FILE:opengl32> $<TARGET_FILE:glu32> $<TARGET_FILE:osmesa32> "$<TARGET_FILE_DIR:rbxgs_run>"
+    )
+  else()
+    find_package(OpenGL REQUIRED)
+    find_package(X11 REQUIRED)
+    find_package(ZLIB REQUIRED)
+    find_library(OPENRBX_SDL_LIBRARY NAMES SDL-1.2 SDL REQUIRED)
+    add_library(rbxgs_engine STATIC)
+    foreach(lib ${OPENRBX_ENGINE_LIBRARIES})
+      target_sources(rbxgs_engine PRIVATE $<TARGET_OBJECTS:${lib}>)
+    endforeach()
+    add_library(rbxgs SHARED util/decomp.cpp)
+    target_link_libraries(rbxgs PRIVATE
+      -Wl,--whole-archive rbxgs_engine -Wl,--no-whole-archive
+      -Wl,--start-group ${OPENRBX_G3D_LIBS} ${OPENRBX_BOOST_LIBS} rbxcrt -Wl,--end-group
+      fmodex ${OPENRBX_SDL_LIBRARY} ZLIB::ZLIB OpenGL::GL OpenGL::GLU X11::X11
+    )
+    target_link_options(rbxgs PRIVATE -Wl,--no-undefined)
+    set_property(TARGET rbxgs PROPERTY BUILD_RPATH "$ORIGIN")
+    add_custom_command(TARGET rbxgs POST_BUILD
+      COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${OPENRBX_FMOD_RUNTIME}" "$<TARGET_FILE_DIR:rbxgs>"
+    )
+    target_link_libraries(rbxgs_run PRIVATE rbxgs)
+    set_property(TARGET rbxgs_run PROPERTY BUILD_RPATH "$ORIGIN")
+  endif()
 endif()
 
 if (MSVC)

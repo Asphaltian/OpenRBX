@@ -173,7 +173,7 @@ Win32Window::Win32Window(const GWindow::Settings& s, bool creatingShareWindow)
     // Set early so windows messages have value
     this->window = window;
 
-    SetWindowLong(window, GWL_USERDATA, (LONG)this);
+    SetWindowLongPtr(window, GWLP_USERDATA, (LONG_PTR)this);
 
     if (s.visible) {
         ShowWindow(window, SW_SHOW);
@@ -542,7 +542,7 @@ Win32Window::~Win32Window() {
 	}
 
 	if (createdWindow) {
-        SetWindowLong(window, GWL_USERDATA, (LONG)NULL);
+        SetWindowLongPtr(window, GWLP_USERDATA, (LONG_PTR)NULL);
 		close();
 	}
 
@@ -1331,7 +1331,7 @@ static LRESULT WINAPI window_proc(
     WPARAM              wparam,
     LPARAM              lparam) {
     
-    Win32Window* this_window = (Win32Window*)GetWindowLong(window, GWL_USERDATA);
+    Win32Window* this_window = (Win32Window*)GetWindowLongPtr(window, GWLP_USERDATA);
     
     if (this_window != NULL) {
         switch (message) {

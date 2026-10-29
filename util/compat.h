@@ -22,6 +22,20 @@ T& temporaryRef(const T& value)
 #define RBX_INLINE inline
 #endif
 
+#ifdef _MSC_VER
+#define RBX_NONVOID_CALL(R) void
+#define RBX_VOID_CALL(name)                                                                                            \
+	template <>                                                                                                        \
+	void name<void>
+#else
+#include <boost/type_traits/is_void.hpp>
+#include <boost/utility/enable_if.hpp>
+#define RBX_NONVOID_CALL(R) typename boost::disable_if<boost::is_void<R> >::type
+#define RBX_VOID_CALL(name)                                                                                            \
+	template <class R>                                                                                                 \
+	typename boost::enable_if<boost::is_void<R> >::type name
+#endif
+
 #if __cplusplus < 201103L && !defined(COMPAT_MODE)
 #define override
 #define static_assert(expr, msg)

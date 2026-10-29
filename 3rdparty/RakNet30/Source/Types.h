@@ -89,7 +89,7 @@
 # define HOST_ENDIAN_IS_BIG
 
 #elif defined(__i386__) || defined(i386) || defined(intel) || defined(_M_IX86) || \
-	defined(__amd64) || defined(__amd64__)	|| \
+	defined(__amd64) || defined(__amd64__)	|| defined(_M_X64) || defined(__x86_64__) || \
 	defined(__alpha__) || defined(__alpha) || defined(__ia64) || defined(__ia64__) || \
 	defined(_M_ALPHA) || defined(ns32000) || defined(__ns32000__) || defined(sequent) || \
 	defined(MIPSEL) || defined(_MIPSEL) || defined(sun386) || defined(__sun386__)
@@ -125,7 +125,7 @@ namespace cat
 # define BIG_ENDIAN
 
 #elif defined(__i386__) || defined(i386) || defined(intel) || defined(_M_IX86) || \
-	defined(__amd64) || defined(__amd64__)	|| \
+	defined(__amd64) || defined(__amd64__)	|| defined(_M_X64) || defined(__x86_64__) || \
 	defined(__alpha__) || defined(__alpha) || defined(__ia64) || defined(__ia64__) || \
 	defined(_M_ALPHA) || defined(ns32000) || defined(__ns32000__) || defined(sequent) || \
 	defined(MIPSEL) || defined(_MIPSEL) || defined(sun386) || defined(__sun386__)
@@ -313,8 +313,10 @@ namespace cat
 	typedef signed __int64 s64;
 # endif
 
+# if defined(_M_IX86)
 # define ASSEMBLY_INTEL_SYNTAX
 # define ASSEMBLY_BLOCK __asm
+# endif
 
 # if (_MSC_VER <= 1200)
 #  pragma warning(disable : 4786) // truncation to 255 chars

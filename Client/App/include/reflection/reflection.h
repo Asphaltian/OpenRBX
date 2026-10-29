@@ -1,6 +1,7 @@
 #ifndef REFLECTION_REFLECTION_H
 #define REFLECTION_REFLECTION_H
 
+#include "compat.h"
 #include "decomp.h"
 #include "reflection/object.h"
 #include "reflection/property.h"
@@ -834,16 +835,12 @@ private:
 	Function function; // 0x28
 
 	template <class R>
-	void call(Class* o, Value& returnValue) const
+	RBX_NONVOID_CALL(R) call(Class* o, Value& returnValue) const
 	{
 		returnValue = (o->*function)();
 	}
 
-	template <>
-	void call<void>(Class* o, Value& returnValue) const
-	{
-		(o->*function)();
-	}
+	RBX_VOID_CALL(call)(Class* o, Value& returnValue) const { (o->*function)(); }
 
 	void declareSignature() { this->signature.resultType = &Type::singleton<result_type>(); }
 
@@ -999,16 +996,12 @@ private:
 	}
 
 	template <class R>
-	void call(Class* o, Value& returnValue, Value& arg1) const
+	RBX_NONVOID_CALL(R) call(Class* o, Value& returnValue, Value& arg1) const
 	{
 		returnValue = (o->*function)(arg1.convert<Arg1>());
 	}
 
-	template <>
-	void call<void>(Class* o, Value& returnValue, Value& arg1) const
-	{
-		(o->*function)(arg1.convert<Arg1>());
-	}
+	RBX_VOID_CALL(call)(Class* o, Value& returnValue, Value& arg1) const { (o->*function)(arg1.convert<Arg1>()); }
 
 public:
 	BoundFuncDesc(
@@ -1120,13 +1113,12 @@ private:
 	}
 
 	template <class R>
-	void call(Class* o, Value& returnValue, Value& arg1, Value& arg2) const
+	RBX_NONVOID_CALL(R) call(Class* o, Value& returnValue, Value& arg1, Value& arg2) const
 	{
 		returnValue = (o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>());
 	}
 
-	template <>
-	void call<void>(Class* o, Value& returnValue, Value& arg1, Value& arg2) const
+	RBX_VOID_CALL(call)(Class* o, Value& returnValue, Value& arg1, Value& arg2) const
 	{
 		(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>());
 	}
@@ -1255,13 +1247,12 @@ private:
 	}
 
 	template <class R>
-	void call(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3) const
+	RBX_NONVOID_CALL(R) call(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3) const
 	{
 		returnValue = (o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>(), arg3.convert<Arg3>());
 	}
 
-	template <>
-	void call<void>(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3) const
+	RBX_VOID_CALL(call)(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3) const
 	{
 		(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>(), arg3.convert<Arg3>());
 	}
@@ -1334,14 +1325,13 @@ private:
 	}
 
 	template <class R>
-	void call(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3, Value& arg4) const
+	RBX_NONVOID_CALL(R) call(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3, Value& arg4) const
 	{
 		returnValue =
 			(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>(), arg3.convert<Arg3>(), arg4.convert<Arg4>());
 	}
 
-	template <>
-	void call<void>(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3, Value& arg4) const
+	RBX_VOID_CALL(call)(Class* o, Value& returnValue, Value& arg1, Value& arg2, Value& arg3, Value& arg4) const
 	{
 		(o->*function)(arg1.convert<Arg1>(), arg2.convert<Arg2>(), arg3.convert<Arg3>(), arg4.convert<Arg4>());
 	}

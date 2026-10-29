@@ -315,7 +315,12 @@ private:
 };
 
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(_M_IX86)
+    inline uint64 System::getCycleCount() {
+        return __rdtsc();
+    }
+
+#elif defined(_MSC_VER)
     inline uint64 System::getCycleCount() {
         uint32 timehi, timelo;
 

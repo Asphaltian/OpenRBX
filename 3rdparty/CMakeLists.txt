@@ -353,7 +353,7 @@ target_include_directories(opengl32 PRIVATE
 target_compile_definitions(opengl32 PRIVATE
   NDEBUG WIN32 _WINDOWS _MBCS _USRDLL GDI_EXPORTS _DLL BUILD_GL32 MESA_MINWARN)
 target_compile_options(opengl32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
-target_link_libraries(opengl32 PRIVATE mesa_core winmm msvcrt kernel32 user32 gdi32 advapi32)
+target_link_libraries(opengl32 PRIVATE mesa_core $<$<TARGET_EXISTS:rbxcrt>:rbxcrt> winmm msvcrt kernel32 user32 gdi32 advapi32)
 target_link_options(opengl32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/mesa/drivers/windows/gdi/mesa.def")
 
@@ -367,7 +367,7 @@ target_include_directories(osmesa32 PRIVATE
 target_compile_definitions(osmesa32 PRIVATE
   WIN32 NDEBUG _WINDOWS _MBCS _USRDLL OSMESA_EXPORTS)
 target_compile_options(osmesa32 PRIVATE ${OPENRBX_MESA_COMPILE_OPTIONS})
-target_link_libraries(osmesa32 PRIVATE opengl32 winmm msvcrt kernel32 user32 gdi32 advapi32)
+target_link_libraries(osmesa32 PRIVATE opengl32 $<$<TARGET_EXISTS:rbxcrt>:rbxcrt> winmm msvcrt kernel32 user32 gdi32 advapi32)
 target_link_options(osmesa32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/mesa/drivers/osmesa/osmesa.def")
 
@@ -386,7 +386,7 @@ set(OPENRBX_MESA_GLU_NURBS_SOURCES ${OPENRBX_MESA_GLU_SOURCES})
 list(FILTER OPENRBX_MESA_GLU_NURBS_SOURCES INCLUDE REGEX "[.]cc$")
 set_source_files_properties(${OPENRBX_MESA_GLU_NURBS_SOURCES} DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
   PROPERTIES COMPILE_OPTIONS "/EHs-c-" COMPILE_DEFINITIONS "LIBRARYBUILD")
-target_link_libraries(glu32 PRIVATE msvcrt winmm opengl32 kernel32 user32 gdi32 advapi32)
+target_link_libraries(glu32 PRIVATE $<$<TARGET_EXISTS:rbxcrt>:rbxcrt> msvcrt winmm opengl32 kernel32 user32 gdi32 advapi32)
 target_link_options(glu32 PRIVATE ${OPENRBX_MESA_LINK_OPTIONS}
   "/DEF:${MESA}/src/glu/sgi/glu.def")
 

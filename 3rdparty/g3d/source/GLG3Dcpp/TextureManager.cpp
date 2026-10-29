@@ -16,7 +16,7 @@ TextureManager::TextureManager(size_t _sizeHint) : size(0), sizeHint(_sizeHint) 
 
 unsigned int TextureManager::TextureArgs::hashCode() const {
     return 
-        (int)format +
+        (int)(size_t)format +
         (int)wrap + 
         (int)interpolate * 1027 +
         (int)dimension +

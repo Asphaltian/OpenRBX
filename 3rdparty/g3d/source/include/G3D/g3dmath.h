@@ -48,9 +48,23 @@
 #undef min
 #undef max
 
+#if defined(_MSC_VER) && !defined(_M_IX86)
+#include <intrin.h>
+#endif
+
 namespace G3D {
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(_M_IX86)
+
+__inline long int lrint(double flt) {
+    return _mm_cvtsd_si32(_mm_set_sd(flt));
+}
+
+__inline long int lrintf(float flt) {
+    return _mm_cvtss_si32(_mm_set_ss(flt));
+}
+
+#elif defined(_MSC_VER)
 
 /**
    Win32 implementation of the C99 fast rounding routines.
@@ -385,7 +399,7 @@ inline float rsq(float x) {
  */
 inline float SSErsq(float x) {
 
-    #if defined(SSE) && defined(G3D_WIN32)
+    #if defined(SSE) && defined(G3D_WIN32) && defined(_M_IX86)
         __asm {
            movss xmm0, x
            rsqrtss xmm0, xmm0

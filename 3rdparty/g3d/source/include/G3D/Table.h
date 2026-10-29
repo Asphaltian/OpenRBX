@@ -88,6 +88,21 @@ inline unsigned int hashCode(const std::string& a) {
     return G3D::Crypto::crc32(a.c_str(), a.size());
 }
 
+#ifdef _MSC_VER
+#define G3D_TABLE_HASHCODE(key) ::hashCode(key)
+#else
+namespace G3D {
+namespace _internal {
+template <class Key>
+inline unsigned int tableHashCode(const Key& key) {
+    using ::hashCode;
+    return hashCode(key);
+}
+}
+}
+#define G3D_TABLE_HASHCODE(key) G3D::_internal::tableHashCode(key)
+#endif
+
 namespace G3D {
 
 
@@ -471,7 +486,7 @@ public:
      key into a table is O(1), but may cause a potentially slow rehashing.
      */
     void set(const Key& key, const Value& value) {
-        unsigned int code = ::hashCode(key);
+        unsigned int code = G3D_TABLE_HASHCODE(key);
         unsigned int b = code % numBuckets;
         
         // Go to the bucket
@@ -524,7 +539,7 @@ public:
     */
    void remove(const Key& key) {
       
-      unsigned int code = ::hashCode(key);
+      unsigned int code = G3D_TABLE_HASHCODE(key);
       unsigned int b = code % numBuckets;
 
       // Go to the bucket
@@ -564,7 +579,7 @@ public:
     */
    Value& get(const Key& key) const {
 
-       unsigned int code = ::hashCode(key);
+       unsigned int code = G3D_TABLE_HASHCODE(key);
       unsigned int b = code % numBuckets;
 
       Node* node = bucket[b];
@@ -587,7 +602,7 @@ public:
     If the key is not present, returns false.
     */
    bool get(const Key& key, Value& val) const {
-	  unsigned int code = ::hashCode(key);
+	  unsigned int code = G3D_TABLE_HASHCODE(key);
       unsigned int b = code % numBuckets;
 
       Node* node = bucket[b];
@@ -609,7 +624,7 @@ public:
     Returns true if key is in the table.
     */
    bool containsKey(const Key& key) const {
-       unsigned int code = ::hashCode(key);
+       unsigned int code = G3D_TABLE_HASHCODE(key);
        unsigned int b = code % numBuckets;
 
        Node* node = bucket[b];

@@ -8,6 +8,11 @@
 #include <boost/lexical_cast.hpp>
 #include <string>
 #include <windows.h>
+#if defined(_MSC_VER) && !defined(_M_IX86)
+#include <intrin.h>
+#elif !defined(_MSC_VER)
+#include <x86intrin.h>
+#endif
 
 namespace RBX {
 namespace Render {
@@ -48,7 +53,7 @@ static float getShaderModel()
 // FUNCTION: WEBSERVICE 0x10169c60
 static __int64 GetCyclesDifference(DelayFunction DelayFunction, unsigned int uiParameter)
 {
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && defined(_M_IX86)
 	unsigned int t0Lo, t0Hi;
 	unsigned int t1Lo, t1Hi;
 
@@ -76,9 +81,9 @@ static __int64 GetCyclesDifference(DelayFunction DelayFunction, unsigned int uiP
 
 	return (__int64) t1Hi * 0x100000000 - ((__int64) t0Hi << 32) - t0Lo + t1Lo;
 #else
-	unsigned long long start = __builtin_ia32_rdtsc();
+	unsigned long long start = __rdtsc();
 	DelayFunction(uiParameter);
-	return (__int64) (__builtin_ia32_rdtsc() - start);
+	return (__int64) (__rdtsc() - start);
 #endif
 }
 
