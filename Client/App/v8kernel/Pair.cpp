@@ -111,34 +111,34 @@ void GeoPair::computeEdgeEdgePlane(PairParams& _params)
 	const CoordinateFrame& coord0 = body0->getCoordinateFrame();
 	const CoordinateFrame& coord1 = body1->getCoordinateFrame();
 
-	Vector3 p0 = coord0.pointToWorldSpace(*offset0);
-	Vector3 p1 = coord1.pointToWorldSpace(*offset1);
+	Vector3 pa = coord0.pointToWorldSpace(*offset0);
+	Vector3 pPlane = coord1.pointToWorldSpace(*offset1);
 
 	Vector3 e0 = Math::getWorldNormal(pairData.normalID0, coord0);
-	Vector3 e1 = Math::getWorldNormal(pairData.normalID1, coord1);
+	Vector3 ub = Math::getWorldNormal(pairData.normalID1, coord1);
 
-	Vector3 delta = p1 - p0;
+	Vector3 p = pPlane - pa;
 
-	float dot = e1.dot(e0);
-	float denom = 1.0f - dot * dot;
+	float dot = ub.dot(e0);
+	float d = 1.0f - dot * dot;
 
 	_params.normal = -Math::getWorldNormal(pairData.planeID, coord1);
 
-	if (denom > 1e-05) {
-		float t0 = delta.dot(e0);
-		float t1 = -delta.dot(e1);
+	if (d > 1e-05) {
+		float t0 = p.dot(e0);
+		float t1 = -p.dot(ub);
 
-		float t = (t1 * dot + t0) / denom;
+		float t = (t1 * dot + t0) / d;
 
 		if (6.0f < fabs(t)) {
 			t = 6.0f * Math::sign(t);
 		}
 
-		_params.position = p0 + e0 * t;
-		_params.length = (p1 - _params.position).dot(_params.normal);
+		_params.position = pa + e0 * t;
+		_params.length = (pPlane - _params.position).dot(_params.normal);
 	}
 	else {
-		_params.position = p0;
+		_params.position = pa;
 		_params.length = 0.0f;
 	}
 }

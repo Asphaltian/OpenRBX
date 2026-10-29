@@ -124,16 +124,16 @@ const PartInstance* Accoutrement::getHandleConst() const
 }
 
 // FUNCTION: WEBSERVICE 0x100db450
-void Accoutrement::readProperty(const XmlElement* element, IReferenceBinder& binder)
+void Accoutrement::readProperty(const XmlElement* propertyElement, IReferenceBinder& binder)
 {
 	const Name* name = NULL;
-	const XmlAttribute* nameAttribute = element->findAttribute(name_name);
+	const XmlAttribute* nameAttribute = propertyElement->findAttribute(name_name);
 
 	if (nameAttribute && nameAttribute->getValue(name) && name->name == "BackendAccoutrementState") {
 		return;
 	}
 
-	Instance::readProperty(element, binder);
+	Instance::readProperty(propertyElement, binder);
 }
 
 // FUNCTION: WEBSERVICE 0x100db4b0
@@ -212,18 +212,18 @@ void Accoutrement::rebuildBackendState()
 }
 
 // FUNCTION: WEBSERVICE 0x100dbcd0
-void Accoutrement::onEvent_AddedBackend(boost::shared_ptr<Instance> instance)
+void Accoutrement::onEvent_AddedBackend(boost::shared_ptr<Instance> child)
 {
-	if (instance.get() != this) {
+	if (child.get() != this) {
 		rebuildBackendState();
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x100dbd50
-void Accoutrement::onEvent_RemovedBackend(boost::shared_ptr<Instance> instance)
+void Accoutrement::onEvent_RemovedBackend(boost::shared_ptr<Instance> child)
 {
-	if (instance.get() != this) {
-		if (instance.get() == weld.get()) {
+	if (child.get() != this) {
+		if (child.get() == weld.get()) {
 			setDesiredState(NOTHING, ServiceProvider::findServiceProvider(this));
 		}
 

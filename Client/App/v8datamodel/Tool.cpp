@@ -210,18 +210,18 @@ void Tool::rebuildBackendState()
 }
 
 // FUNCTION: WEBSERVICE 0x100ca5a0
-void Tool::onEvent_AddedBackend(boost::shared_ptr<Instance> instance)
+void Tool::onEvent_AddedBackend(boost::shared_ptr<Instance> child)
 {
-	if (instance.get() != this) {
+	if (child.get() != this) {
 		rebuildBackendState();
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x100ca620
-void Tool::onEvent_RemovedBackend(boost::shared_ptr<Instance> instance)
+void Tool::onEvent_RemovedBackend(boost::shared_ptr<Instance> child)
 {
-	if (ServiceProvider::findServiceProvider(this) && instance.get() != this) {
-		if (instance.get() == weld.get()) {
+	if (ServiceProvider::findServiceProvider(this) && child.get() != this) {
+		if (child.get() == weld.get()) {
 			setDesiredState(HAS_TORSO, ServiceProvider::findServiceProvider(this));
 		}
 
@@ -311,13 +311,13 @@ void Tool::upTo_Equipped()
 	DragUtilities::unJoinFromOutsiders(parts);
 
 	Humanoid* humanoid = Humanoid::modelIsCharacter(getParent());
-	PartInstance* rightArm = humanoid->getRightArm();
+	PartInstance* arm = humanoid->getRightArm();
 	PartInstance* handle = getHandle();
 	if (handle) {
 		handle->setCanCollide(false);
 	}
 
-	buildWeld(rightArm, handle, humanoid->getRightArmGrip(), grip, "RightGrip");
+	buildWeld(arm, handle, humanoid->getRightArmGrip(), grip, "RightGrip");
 }
 
 // FUNCTION: WEBSERVICE 0x100cb7f0

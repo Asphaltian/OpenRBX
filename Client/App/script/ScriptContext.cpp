@@ -68,14 +68,14 @@ void ScriptContext::sandboxThread(lua_State* thread)
 }
 
 // FUNCTION: WEBSERVICE 0x1005eb00
-ScriptContext& ScriptContext::getContext(lua_State* L)
+ScriptContext& ScriptContext::getContext(lua_State* thread)
 {
-	lua_pushlightuserdata(L, (void*) 0x43);
-	lua_gettable(L, LUA_GLOBALSINDEX);
+	lua_pushlightuserdata(thread, (void*) 0x43);
+	lua_gettable(thread, LUA_GLOBALSINDEX);
 
-	ScriptContext* context = static_cast<ScriptContext*>(lua_touserdata(L, -1));
+	ScriptContext* context = static_cast<ScriptContext*>(lua_touserdata(thread, -1));
 
-	lua_settop(L, -2);
+	lua_settop(thread, -2);
 
 	return *context;
 }
@@ -114,21 +114,21 @@ static std::string getFullName(RBX::Instance* instance)
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1005f880
-void Lua::CoordinateFrameBridge::pushCoordinateFrame(lua_State* L, G3D::CoordinateFrame value)
+void Lua::CoordinateFrameBridge::pushCoordinateFrame(lua_State* L, G3D::CoordinateFrame CF)
 {
-	pushNewObject(L, value);
+	pushNewObject(L, CF);
 }
 
 // FUNCTION: WEBSERVICE 0x1005f8c0
-void Lua::Vector3Bridge::pushVector3(lua_State* L, G3D::Vector3 value)
+void Lua::Vector3Bridge::pushVector3(lua_State* L, G3D::Vector3 color)
 {
-	pushNewObject(L, value);
+	pushNewObject(L, color);
 }
 
 // FUNCTION: WEBSERVICE 0x1005f910
-void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 value)
+void Lua::Color3Bridge::pushColor3(lua_State* L, G3D::Color3 color)
 {
-	pushNewObject(L, value);
+	pushNewObject(L, color);
 }
 
 // FUNCTION: WEBSERVICE 0x1005f9a0

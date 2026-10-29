@@ -301,9 +301,9 @@ bool PartInstance::computeSurfacesNeedAdorn() const
 // FUNCTION: WEBSERVICE 0x1009af50
 void PartInstance::legacyTraverseState(const CoordinateFrame& parentState)
 {
-	CoordinateFrame gridCorner = parentState * *legacyOffset;
+	CoordinateFrame myState = parentState * *legacyOffset;
 
-	primitive->setGridCorner(gridCorner);
+	primitive->setGridCorner(myState);
 }
 
 // FUNCTION: WEBSERVICE 0x1009af90
@@ -322,7 +322,7 @@ bool PartInstance::isControllable() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009aff0
-void PartInstance::onSurfaceChanged(NormalId normalId)
+void PartInstance::onSurfaceChanged(NormalId surfId)
 {
 	PersistentPart.setDirty();
 	IsControllable.setDirty();

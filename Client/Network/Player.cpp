@@ -313,10 +313,10 @@ Player::~Player()
 }
 
 // FUNCTION: WEBSERVICE 0x1018fef0
-void Player::setName(const std::string& name)
+void Player::setName(const std::string& value)
 {
 	Security::Context::current().requirePermission(Security::Administrator, "set a Player's name");
-	Instance::setName(name);
+	Instance::setName(value);
 }
 
 // FUNCTION: WEBSERVICE 0x1018ffd0

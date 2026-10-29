@@ -47,24 +47,24 @@ public:
 		~Level();
 
 		// FUNCTION: WEBSERVICE 0x101efe80
-		G3D::TextureRef baseTexture(G3D::RenderDevice* renderDevice) const
+		G3D::TextureRef baseTexture(G3D::RenderDevice* rd) const
 		{
 			if (mBaseTexture.isNull()) {
 				return NULL;
 			}
 
-			return mBaseTexture->resolve(renderDevice);
+			return mBaseTexture->resolve(rd);
 		}
 
 		void setBaseTexture(TextureProxyRef baseTexture);
 		// FUNCTION: WEBSERVICE 0x101efec0
-		G3D::TextureRef matte(G3D::RenderDevice* renderDevice) const
+		G3D::TextureRef matte(G3D::RenderDevice* rd) const
 		{
 			if (mMatte.isNull()) {
 				return NULL;
 			}
 
-			return mMatte->resolve(renderDevice);
+			return mMatte->resolve(rd);
 		}
 
 		const G3D::Color3& color() const { return mColor; }
@@ -103,13 +103,13 @@ public:
 	unsigned int levelCount() const;
 	Level& getLevel(int index);
 	// FUNCTION: WEBSERVICE 0x101ef660
-	const Level* detailLevel(float detail) const
+	const Level* detailLevel(float lvl) const
 	{
 		if (levels.size() == 0) {
 			return NULL;
 		}
 
-		const Level* level = &levels[G3D::iClamp((int) (levels.size() * detail), 0, levels.size() - 1)];
+		const Level* level = &levels[G3D::iClamp((int) (levels.size() * lvl), 0, levels.size() - 1)];
 
 		return level->isEmptyLevel() ? NULL : level;
 	}

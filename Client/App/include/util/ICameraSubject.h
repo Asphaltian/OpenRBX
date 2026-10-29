@@ -29,9 +29,13 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x1005aa10
-	virtual void stepGoalAndFocus(CoordinateFrame& goal, CoordinateFrame& focus, bool zoom) // vtable+0x14
+	virtual void stepGoalAndFocus(
+		CoordinateFrame& cameraGoal,
+		CoordinateFrame& cameraFocus,
+		bool cameraExternallyAdjusted
+	) // vtable+0x14
 	{
-		focus = getLocation();
+		cameraFocus = getLocation();
 	}
 };
 

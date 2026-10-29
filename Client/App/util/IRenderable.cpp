@@ -28,47 +28,47 @@ void IRenderableBucket::render3dAdornItems(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100a6800
-void IRenderableBucket::recomputeShouldRender(IRenderable* renderable)
+void IRenderableBucket::recomputeShouldRender(IRenderable* iR)
 {
-	if (renderable->shouldRender2d()) {
-		if (renderable->index2d < 0) {
-			renderable2ds.fastAppend(renderable);
+	if (iR->shouldRender2d()) {
+		if (iR->index2d < 0) {
+			renderable2ds.fastAppend(iR);
 		}
 	}
-	else if (renderable->index2d >= 0) {
-		renderable2ds.fastRemove(renderable);
+	else if (iR->index2d >= 0) {
+		renderable2ds.fastRemove(iR);
 	}
 
-	if (renderable->shouldRender3dAdorn()) {
-		if (renderable->index3d < 0) {
-			renderable3ds.fastAppend(renderable);
+	if (iR->shouldRender3dAdorn()) {
+		if (iR->index3d < 0) {
+			renderable3ds.fastAppend(iR);
 		}
 	}
-	else if (renderable->index3d >= 0) {
-		renderable3ds.fastRemove(renderable);
+	else if (iR->index3d >= 0) {
+		renderable3ds.fastRemove(iR);
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x100a68d0
-void IRenderableBucket::onAdded(IRenderable* renderable)
+void IRenderableBucket::onAdded(IRenderable* iR)
 {
-	renderable->bucket = this;
+	iR->bucket = this;
 
-	recomputeShouldRender(renderable);
+	recomputeShouldRender(iR);
 }
 
 // FUNCTION: WEBSERVICE 0x100a68e0
-void IRenderableBucket::onRemoving(IRenderable* renderable)
+void IRenderableBucket::onRemoving(IRenderable* iR)
 {
-	if (renderable->index2d >= 0) {
-		renderable2ds.fastRemove(renderable);
+	if (iR->index2d >= 0) {
+		renderable2ds.fastRemove(iR);
 	}
 
-	if (renderable->index3d >= 0) {
-		renderable3ds.fastRemove(renderable);
+	if (iR->index3d >= 0) {
+		renderable3ds.fastRemove(iR);
 	}
 
-	renderable->bucket = NULL;
+	iR->bucket = NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a6960

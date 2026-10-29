@@ -225,8 +225,8 @@ void Players::onChildChanged(Instance* instance, const PropertyChanged& event)
 void AbuseReport::addMessage(const ChatMessage& cm)
 {
 	int userID = cm.source ? Player::prop_userId.getValue(cm.source.get()) : 0;
-	Message message = {userID, cm.message};
-	messages.push_back(message);
+	Message m = {userID, cm.message};
+	messages.push_back(m);
 }
 
 // FUNCTION: WEBSERVICE 0x10192bb0

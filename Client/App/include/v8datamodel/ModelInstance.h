@@ -72,7 +72,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x10059bd0
 	const CoordinateFrame& getModelInPrimary() const { return modelInPrimary; }
 	// FUNCTION: WEBSERVICE 0x10059be0
-	void setModelInPrimary(const CoordinateFrame& value) { modelInPrimary = value; }
+	void setModelInPrimary(const CoordinateFrame& set) { modelInPrimary = set; }
 
 	virtual void onExtentsChanged() const;
 

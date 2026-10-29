@@ -79,14 +79,14 @@ void FlagStand::AffixFlag(Flag* flag)
 }
 
 // FUNCTION: WEBSERVICE 0x100e8270
-FlagStand* FlagStandService::FindStandWithFlag(Flag* flag)
+FlagStand* FlagStandService::FindStandWithFlag(Flag* f)
 {
 	if (flagStands.size() == 0) {
 		return NULL;
 	}
 
 	for (std::list<FlagStand*>::const_iterator iter = flagStands.begin(); iter != flagStands.end(); ++iter) {
-		if ((*iter)->GetFlag() == flag) {
+		if ((*iter)->GetFlag() == f) {
 			return *iter;
 		}
 	}

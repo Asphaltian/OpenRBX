@@ -217,27 +217,27 @@ bool Feature::getRenderCoord(CoordinateFrame& c) const
 // FUNCTION: WEBSERVICE 0x100e45d0
 void Feature::render3dSelect(Adorn* adorn, SelectState selectState)
 {
-	CoordinateFrame c;
-	if (getRenderCoord(c)) {
-		DrawAdorn::cylinder(adorn, c, 2, 0.3f, 0.6f, Draw::selectColor());
+	CoordinateFrame worldCoord;
+	if (getRenderCoord(worldCoord)) {
+		DrawAdorn::cylinder(adorn, worldCoord, 2, 0.3f, 0.6f, Draw::selectColor());
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x100e4630
 void Hole::render3dAdorn(Adorn* adorn)
 {
-	CoordinateFrame c;
-	if (getRenderCoord(c)) {
-		DrawAdorn::cylinder(adorn, c, 2, 0.2f, 0.3f, G3D::Color3::black());
+	CoordinateFrame worldCoord;
+	if (getRenderCoord(worldCoord)) {
+		DrawAdorn::cylinder(adorn, worldCoord, 2, 0.2f, 0.3f, G3D::Color3::black());
 	}
 }
 
 // FUNCTION: WEBSERVICE 0x100e4690
 void MotorFeature::render3dAdorn(Adorn* adorn)
 {
-	CoordinateFrame c;
-	if (getRenderCoord(c)) {
-		DrawAdorn::cylinder(adorn, c, 2, 1.0f, 0.3f, G3D::Color3::yellow());
+	CoordinateFrame worldCoord;
+	if (getRenderCoord(worldCoord)) {
+		DrawAdorn::cylinder(adorn, worldCoord, 2, 1.0f, 0.3f, G3D::Color3::yellow());
 	}
 }
 

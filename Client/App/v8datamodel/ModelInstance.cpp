@@ -63,9 +63,9 @@ float ModelInstance::computeFlagHeight() const
 	float height = 6.0f;
 
 	if (primaryPart != NULL) {
-		float partTop = primaryPart->getExtentsWorld().max().y;
+		float primaryTop = primaryPart->getExtentsWorld().max().y;
 
-		height = getExtentsWorld().max().y - partTop + 6.0f;
+		height = getExtentsWorld().max().y - primaryTop + 6.0f;
 	}
 
 	return height;
@@ -94,21 +94,21 @@ const Primitive* ModelInstance::getBiggestPrimitive() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005a1f0
-void ModelInstance::updatePrimaryPart(PartInstance* part) const
+void ModelInstance::updatePrimaryPart(PartInstance* set) const
 {
-	if (primaryPart != part) {
-		if (part != NULL) {
+	if (primaryPart != set) {
+		if (set != NULL) {
 			if (primaryPart != NULL) {
-				Matrix3 rotation = getLocation().rotation;
+				Matrix3 meOld = getLocation().rotation;
 
 				modelInPrimary =
-					CoordinateFrame(primaryPart->getCoordinateFrame().rotation.transpose() * rotation, Vector3::zero());
+					CoordinateFrame(primaryPart->getCoordinateFrame().rotation.transpose() * meOld, Vector3::zero());
 			}
 			else {
 				modelInPrimary = CoordinateFrame();
 			}
 
-			primaryPart = part;
+			primaryPart = set;
 		}
 		else {
 			modelInPrimary = CoordinateFrame();
@@ -171,7 +171,7 @@ PartInstance* ModelInstance::getPrimaryPartInternal() const
 		return primaryPart;
 	}
 
-	float bestArea = -1.0f;
+	float biggest = -1.0f;
 	PartInstance* best = NULL;
 
 	for (unsigned int i = 0; i < numChildren(); i++) {
@@ -185,8 +185,8 @@ PartInstance* ModelInstance::getPrimaryPartInternal() const
 
 				float area = part->getExtentsWorld().areaXZ();
 
-				if (area > bestArea) {
-					bestArea = area;
+				if (area > biggest) {
+					biggest = area;
 					best = part;
 				}
 			}
@@ -204,13 +204,13 @@ void ModelInstance::legacyTraverseState(const CoordinateFrame& parentState)
 	int count = numChildren();
 
 	if (count > 0) {
-		CoordinateFrame state = parentState * *legacyOffset;
+		CoordinateFrame myState = parentState * *legacyOffset;
 
 		for (int i = 0; i < count; i++) {
 			PVInstance* pv = dynamic_cast<PVInstance*>(getChild(i));
 
 			if (pv != NULL) {
-				pv->legacyTraverseState(state);
+				pv->legacyTraverseState(myState);
 			}
 		}
 	}

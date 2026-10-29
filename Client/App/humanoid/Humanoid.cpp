@@ -306,9 +306,9 @@ bool Humanoid::askSetParent(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100a1840
-Humanoid* Humanoid::modelIsCharacter(const Instance* instance)
+Humanoid* Humanoid::modelIsCharacter(const Instance* testModel)
 {
-	return instance ? instance->findFirstChildOfType<Humanoid>() : NULL;
+	return testModel ? testModel->findFirstChildOfType<Humanoid>() : NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x100a19e0
@@ -612,11 +612,11 @@ G3D::Vector3 Humanoid::updateWalkDirection()
 
 // FUNCTION: WEBSERVICE 0x100a3110
 static void collectAllDescendantCharacterPrims(
-	boost::shared_ptr<Instance> descendant,
+	boost::shared_ptr<Instance> descendent,
 	std::vector<Primitive*>& primitives
 )
 {
-	PartInstance* part = dynamic_cast<PartInstance*>(descendant.get());
+	PartInstance* part = dynamic_cast<PartInstance*>(descendent.get());
 	if (part) {
 		primitives.push_back(part->getPrimitive());
 	}

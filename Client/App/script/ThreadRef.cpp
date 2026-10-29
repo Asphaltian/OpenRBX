@@ -96,9 +96,9 @@ int Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::on_index(
 }
 
 // FUNCTION: WEBSERVICE 0x100b13d0
-void lua_pushfunction(lua_State* L, const FunctionRef& ref)
+void lua_pushfunction(lua_State* L, const FunctionRef& function)
 {
-	lua_rawgeti(L, LUA_REGISTRYINDEX, ref.functionId);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, function.functionId);
 }
 
 // FUNCTION: WEBSERVICE 0x100b13f0
@@ -114,14 +114,14 @@ void FunctionRef::removeRef()
 }
 
 // FUNCTION: WEBSERVICE 0x100b1440
-boost::shared_ptr<ThreadRef::Node> ThreadRef::Node::get(lua_State* L)
+boost::shared_ptr<ThreadRef::Node> ThreadRef::Node::get(lua_State* thread)
 {
-	lua_pushlightuserdata(L, (void*) 0x4e);
-	lua_gettable(L, LUA_GLOBALSINDEX);
+	lua_pushlightuserdata(thread, (void*) 0x4e);
+	lua_gettable(thread, LUA_GLOBALSINDEX);
 
-	boost::shared_ptr<Node>& node = Bridge<boost::shared_ptr<Node>, 1>::getObject(L, lua_gettop(L));
+	boost::shared_ptr<Node>& node = Bridge<boost::shared_ptr<Node>, 1>::getObject(thread, lua_gettop(thread));
 
-	lua_settop(L, -2);
+	lua_settop(thread, -2);
 
 	return node;
 }
@@ -266,13 +266,13 @@ FunctionRef lua_tofunction(lua_State* L, int index)
 }
 
 // FUNCTION: WEBSERVICE 0x100b1db0
-boost::shared_ptr<ThreadRef::Node> ThreadRef::Node::create(lua_State* L)
+boost::shared_ptr<ThreadRef::Node> ThreadRef::Node::create(lua_State* thread)
 {
-	lua_pushlightuserdata(L, (void*) 0x4e);
+	lua_pushlightuserdata(thread, (void*) 0x4e);
 
-	boost::shared_ptr<Node>& node = Bridge<boost::shared_ptr<Node>, 1>::pushNewObject(L);
+	boost::shared_ptr<Node>& node = Bridge<boost::shared_ptr<Node>, 1>::pushNewObject(thread);
 
-	lua_settable(L, LUA_GLOBALSINDEX);
+	lua_settable(thread, LUA_GLOBALSINDEX);
 
 	node = boost::shared_ptr<Node>(new Node());
 

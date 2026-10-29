@@ -61,8 +61,8 @@ void StandardOut::print_exception(const boost::function0<void>& f, MessageType t
 	try {
 		f();
 	}
-	catch (const std::exception& error) {
-		singleton()->print(type, error);
+	catch (const std::exception& e) {
+		singleton()->print(type, e);
 
 		if (rethrow) {
 			throw;

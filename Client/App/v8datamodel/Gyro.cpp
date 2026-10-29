@@ -283,9 +283,9 @@ void BodyVelocity::computeForce(float dt, bool throttling)
 {
 	Body* body = part->getPrimitive()->getBody();
 
-	Vector3 goalForce = (velocity - body->getPV().velocity.linear) * kP;
+	Vector3 pAccel = (velocity - body->getPV().velocity.linear) * kP;
 
-	lastForce = goalForce * body->getRoot()->getBranchMass();
+	lastForce = pAccel * body->getRoot()->getBranchMass();
 
 	lastForce = lastForce.clamp(-maxForce, maxForce);
 

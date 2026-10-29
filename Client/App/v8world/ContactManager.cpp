@@ -233,25 +233,26 @@ Primitive* ContactManager::getHit(
 
 // FUNCTION: WEBSERVICE 0x10108920
 Primitive* ContactManager::getHitLegacy(
-	const G3D::Ray& ray,
-	const Primitive* ignore,
+	const G3D::Ray& originDirection,
+	const Primitive* ignorePrim,
 	const HitTestFilter* filter,
-	Vector3& hitPoint,
-	float& distance,
-	const float& maxDistance
+	Vector3& hitPointWorld,
+	float& distanceToHit,
+	const float& maxSearchDepth
 ) const
 {
-	G3D::Ray scaled = G3D::Ray::fromOriginAndDirection(ray.origin, ray.direction * maxDistance);
+	G3D::Ray worldRay =
+		G3D::Ray::fromOriginAndDirection(originDirection.origin, originDirection.direction * maxSearchDepth);
 
-	G3D::Array<const Primitive*> ignored;
+	G3D::Array<const Primitive*> ignorePrims;
 
-	if (ignore != NULL) {
-		ignored.append(ignore);
+	if (ignorePrim != NULL) {
+		ignorePrims.append(ignorePrim);
 	}
 
-	Primitive* hit = getHit(scaled, &ignored, filter, hitPoint, ignoreBool);
+	Primitive* hit = getHit(worldRay, &ignorePrims, filter, hitPointWorld, ignoreBool);
 
-	distance = hit != NULL ? (hitPoint - scaled.origin).magnitude() : 0.0f;
+	distanceToHit = hit != NULL ? (hitPointWorld - worldRay.origin).magnitude() : 0.0f;
 
 	return hit;
 }

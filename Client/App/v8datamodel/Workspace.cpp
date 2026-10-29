@@ -350,58 +350,58 @@ void Workspace::setMouseCommand(MouseCommand* newMouseCommand)
 }
 
 // FUNCTION: WEBSERVICE 0x1006cb00
-GuiResponse Workspace::process(const GuiEvent& guiEvent)
+GuiResponse Workspace::process(const GuiEvent& event)
 {
-	switch (guiEvent.eventType) {
+	switch (event.eventType) {
 	default:
 		return GuiResponse::notUsed();
 
 	case UIEvent::KEY_DOWN:
-		currentCommand->onPeekKeyDown(guiEvent);
+		currentCommand->onPeekKeyDown(event);
 		if (!currentCommand->captured()) {
 			return GuiResponse::notUsed();
 		}
-		setMouseCommand(currentCommand->onKeyDown(guiEvent));
+		setMouseCommand(currentCommand->onKeyDown(event));
 		break;
 
 	case UIEvent::MOUSE_RIGHT_BUTTON_DOWN:
 		inMouselookMode = true;
-		guiEvent.userInput->setWrapMode(UserInputBase::WRAP_CENTER);
+		event.userInput->setWrapMode(UserInputBase::WRAP_CENTER);
 		break;
 
 	case UIEvent::MOUSE_RIGHT_BUTTON_UP:
 		inMouselookMode = false;
-		guiEvent.userInput->setWrapMode(UserInputBase::WRAP_AUTO);
+		event.userInput->setWrapMode(UserInputBase::WRAP_AUTO);
 		break;
 
 	case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
 		if (!currentCommand->captured()) {
-			setMouseCommand(currentCommand->onMouseDown(guiEvent));
+			setMouseCommand(currentCommand->onMouseDown(event));
 		}
 		break;
 
 	case UIEvent::MOUSE_MOVE:
 		if (currentCommand->captured()) {
-			currentCommand->onMouseMove(guiEvent);
+			currentCommand->onMouseMove(event);
 		}
 		else {
-			currentCommand->onMouseHover(guiEvent);
+			currentCommand->onMouseHover(event);
 		}
 		break;
 
 	case UIEvent::MOUSE_DELTA:
 		if (currentCommand->captured()) {
-			currentCommand->onMouseDelta(guiEvent);
+			currentCommand->onMouseDelta(event);
 		}
 		break;
 
 	case UIEvent::MOUSE_LEFT_BUTTON_UP:
-		setMouseCommand(currentCommand->onMouseUp(guiEvent));
+		setMouseCommand(currentCommand->onMouseUp(event));
 		break;
 	}
 
-	if (guiEvent.isMouseEvent()) {
-		idleMouseEvent = guiEvent;
+	if (event.isMouseEvent()) {
+		idleMouseEvent = event;
 		idleMouseEvent.eventType = UIEvent::MOUSE_IDLE;
 	}
 
@@ -633,9 +633,9 @@ void Workspace::render3dAdorn(Adorn* adorn)
 {
 	viewPort = adorn->getViewport();
 
-	ServiceClient<Selection> selection(this);
-	if (selection) {
-		std::for_each(selection->begin(), selection->end(), boost::bind(&DrawAdorn, _1, adorn, SELECT_NORMAL, this));
+	ServiceClient<Selection> sel(this);
+	if (sel) {
+		std::for_each(sel->begin(), sel->end(), boost::bind(&DrawAdorn, _1, adorn, SELECT_NORMAL, this));
 	}
 
 	render3dAdornItems(adorn);

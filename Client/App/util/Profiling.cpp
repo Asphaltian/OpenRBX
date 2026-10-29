@@ -24,9 +24,9 @@ void init(bool enabled)
 // FUNCTION: WEBSERVICE 0x10084500
 void ThreadProfiler::sample(void* thread)
 {
-	double now = G3D::System::getTick();
+	double time = G3D::System::getTick();
 
-	if (now >= lastSampleTime + bucketTimeSpan) {
+	if (time >= lastSampleTime + bucketTimeSpan) {
 		__int64 creationTime;
 		__int64 exitTime;
 		__int64 kernelTime;
@@ -43,7 +43,7 @@ void ThreadProfiler::sample(void* thread)
 			__int64 user = userTime;
 
 			if (initialized) {
-				buckets[currentBucket].sampleTimeSpan = now - lastSampleTime;
+				buckets[currentBucket].sampleTimeSpan = time - lastSampleTime;
 				buckets[currentBucket].kernTimeSpan += kern;
 				buckets[currentBucket].userTimeSpan += user;
 
@@ -53,7 +53,7 @@ void ThreadProfiler::sample(void* thread)
 				initialized = true;
 			}
 
-			lastSampleTime = now;
+			lastSampleTime = time;
 
 			buckets[currentBucket].kernTimeSpan = -kern;
 			buckets[currentBucket].userTimeSpan = -user;
@@ -133,7 +133,7 @@ Bucket Profiler::getData(double seconds) const
 	if (Mark::markTlsIndex != 0) {
 		double span = seconds - (G3D::System::getTick() - lastSampleTime);
 
-		unsigned int index = currentBucket + bucketCount - 1;
+		unsigned int firstBucket = currentBucket + bucketCount - 1;
 
 		unsigned int count = std::min((unsigned int) (span / bucketTimeSpan), bucketCount - 2);
 
@@ -142,7 +142,7 @@ Bucket Profiler::getData(double seconds) const
 				break;
 			}
 
-			result += buckets[(index - i) % bucketCount];
+			result += buckets[(firstBucket - i) % bucketCount];
 		}
 	}
 

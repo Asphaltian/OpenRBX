@@ -1176,10 +1176,10 @@ void Peer::onServiceProvider(const ServiceProvider* oldProvider, const ServicePr
 {
 	Stats::StatsService* stats = oldProvider ? oldProvider->find<Stats::StatsService>() : NULL;
 	if (stats) {
-		boost::shared_ptr<Stats::Item> item =
+		boost::shared_ptr<Stats::Item> network =
 			shared_from_polymorphic_downcast<Stats::Item>(stats->findFirstChildByName("Network"));
-		if (item) {
-			item->setParent(NULL);
+		if (network) {
+			network->setParent(NULL);
 		}
 	}
 
@@ -1191,10 +1191,10 @@ void Peer::onServiceProvider(const ServiceProvider* oldProvider, const ServicePr
 
 	stats = newProvider ? newProvider->find<Stats::StatsService>() : NULL;
 	if (stats) {
-		boost::shared_ptr<Stats::Item> item = Creatable<Instance>::create<Stats::Item>();
-		item->setName("Network");
-		item->setParent(stats);
-		item->createBoundChildItem(*profilePacketsThread);
+		boost::shared_ptr<Stats::Item> network = Creatable<Instance>::create<Stats::Item>();
+		network->setName("Network");
+		network->setParent(stats);
+		network->createBoundChildItem(*profilePacketsThread);
 	}
 }
 

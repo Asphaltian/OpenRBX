@@ -47,13 +47,13 @@ int Kernel::numPoints() const
 // FUNCTION: WEBSERVICE 0x100d5330
 float Kernel::bodyKineticEnergy() const
 {
-	float answer = 0.0f;
+	float kineticEnergy = 0.0f;
 
 	for (int i = 0; i < kernelData->bodies.size(); ++i) {
-		answer += kernelData->bodies[i]->kineticEnergy();
+		kineticEnergy += kernelData->bodies[i]->kineticEnergy();
 	}
 
-	return answer;
+	return kineticEnergy;
 }
 
 // FUNCTION: WEBSERVICE 0x100d54c0

@@ -108,13 +108,13 @@ bool Lighting::askAddChild(const Instance* instance) const
 }
 
 // FUNCTION: WEBSERVICE 0x100438e0
-void Lighting::replaceSky(Sky* sky)
+void Lighting::replaceSky(Sky* newSky)
 {
 	while (Sky* oldSky = findFirstChildOfType<Sky>()) {
 		oldSky->setParent(NULL);
 	}
 
-	sky->setParent(this);
+	newSky->setParent(this);
 }
 
 // FUNCTION: WEBSERVICE 0x10043c40

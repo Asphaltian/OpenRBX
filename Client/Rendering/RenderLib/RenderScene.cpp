@@ -247,8 +247,8 @@ void RenderScene::presetLighting(
 	lighting->ambientTop = ambientTop;
 	lighting->ambientBottom = ambientBottom;
 
-	G3D::GLight light = G3D::GLight::directional(skyParameters.lightDirection, skyParameters.lightColor * 0.9);
-	lighting->shadowedLightArray.append(light);
+	G3D::GLight sun = G3D::GLight::directional(skyParameters.lightDirection, skyParameters.lightColor * 0.9);
+	lighting->shadowedLightArray.append(sun);
 
 	if (!sky.isNull()) {
 		lighting->environmentMap = sky->getEnvironmentMap();

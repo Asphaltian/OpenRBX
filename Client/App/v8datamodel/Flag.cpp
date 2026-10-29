@@ -112,9 +112,9 @@ void Flag::onEvent_flagTouched(boost::shared_ptr<Instance> other)
 }
 
 // FUNCTION: WEBSERVICE 0x100cebe0
-void Flag::onChildAdded(Instance* child)
+void Flag::onChildAdded(Instance* instance)
 {
-	if (dynamic_cast<PartInstance*>(child)) {
+	if (dynamic_cast<PartInstance*>(instance)) {
 		if (PartInstance* handle = getHandle()) {
 			flagTouched =
 				PartInstance::event_Touched.connect(handle, boost::bind(&Flag::onEvent_flagTouched, this, _1), 10);

@@ -652,9 +652,9 @@ void SoundService::openFmod()
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10080720
-static void releaseSound(const std::pair<RBX::Soundscape::SoundId, boost::shared_ptr<RBX::Soundscape::Sound> >& item)
+static void releaseSound(const std::pair<RBX::Soundscape::SoundId, boost::shared_ptr<RBX::Soundscape::Sound> >& p)
 {
-	item.second->release();
+	p.second->release();
 }
 
 namespace RBX {

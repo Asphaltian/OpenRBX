@@ -161,20 +161,20 @@ Guid::Guid()
 // FUNCTION: WEBSERVICE 0x1003d730
 std::string Guid::Data::readableString(int scopeLength) const
 {
-	char buffer[64];
+	char result[64];
 
 	if (scopeLength > 0) {
 		std::string s = scope->name;
 
 		s = s.substr(std::min<size_t>(3, s.size()), std::min(scopeLength, 32));
 
-		sprintf(buffer, "%s_%d", s.c_str(), index);
+		sprintf(result, "%s_%d", s.c_str(), index);
 	}
 	else {
-		sprintf(buffer, "%d", index);
+		sprintf(result, "%d", index);
 	}
 
-	return std::string(buffer);
+	return std::string(result);
 }
 
 } // namespace RBX

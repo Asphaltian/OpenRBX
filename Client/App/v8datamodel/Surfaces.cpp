@@ -451,9 +451,9 @@ const bool Surfaces::isSurfaceDescriptor(const Reflection::PropertyDescriptor& d
 }
 
 // FUNCTION: WEBSERVICE 0x10100c10
-const Reflection::PropertyDescriptor& Surfaces::getSurfaceType(NormalId normalId) const
+const Reflection::PropertyDescriptor& Surfaces::getSurfaceType(NormalId face) const
 {
-	switch (normalId) {
+	switch (face) {
 	default:
 		return desc_TopType;
 	case NORM_Y_NEG:
@@ -470,9 +470,9 @@ const Reflection::PropertyDescriptor& Surfaces::getSurfaceType(NormalId normalId
 }
 
 // FUNCTION: WEBSERVICE 0x10100c70
-const Reflection::PropertyDescriptor& Surfaces::getSurfaceInput(NormalId normalId) const
+const Reflection::PropertyDescriptor& Surfaces::getSurfaceInput(NormalId face) const
 {
-	switch (normalId) {
+	switch (face) {
 	default:
 		return desc_TopSurfaceInput;
 	case NORM_Y_NEG:
@@ -489,9 +489,9 @@ const Reflection::PropertyDescriptor& Surfaces::getSurfaceInput(NormalId normalI
 }
 
 // FUNCTION: WEBSERVICE 0x10100cd0
-const Reflection::PropertyDescriptor& Surfaces::getParamA(NormalId normalId) const
+const Reflection::PropertyDescriptor& Surfaces::getParamA(NormalId face) const
 {
-	switch (normalId) {
+	switch (face) {
 	default:
 		return desc_TopParamA;
 	case NORM_Y_NEG:
@@ -508,9 +508,9 @@ const Reflection::PropertyDescriptor& Surfaces::getParamA(NormalId normalId) con
 }
 
 // FUNCTION: WEBSERVICE 0x10100d30
-const Reflection::PropertyDescriptor& Surfaces::getParamB(NormalId normalId) const
+const Reflection::PropertyDescriptor& Surfaces::getParamB(NormalId face) const
 {
-	switch (normalId) {
+	switch (face) {
 	default:
 		return desc_TopParamB;
 	case NORM_Y_NEG:
@@ -527,9 +527,9 @@ const Reflection::PropertyDescriptor& Surfaces::getParamB(NormalId normalId) con
 }
 
 // FUNCTION: WEBSERVICE 0x10100d90
-Surfaces::Surfaces(PartInstance* partInstance)
-	: Top(partInstance, NORM_Y), Bottom(partInstance, NORM_Y_NEG), Left(partInstance, NORM_X_NEG),
-	  Right(partInstance, NORM_X), Front(partInstance, NORM_Z_NEG), Back(partInstance, NORM_Z)
+Surfaces::Surfaces(PartInstance* container)
+	: Top(container, NORM_Y), Bottom(container, NORM_Y_NEG), Left(container, NORM_X_NEG), Right(container, NORM_X),
+	  Front(container, NORM_Z_NEG), Back(container, NORM_Z)
 {
 }
 

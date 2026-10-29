@@ -135,10 +135,10 @@ RotateJoint* RotateJoint::surfaceTypeToJoint(
 // FUNCTION: WEBSERVICE 0x1011f200
 RotateJoint* RotateJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId nId0, NormalId nId1)
 {
-	SurfaceType surfaceType0 = p0->getSurfaceType(nId0);
-	SurfaceType surfaceType1 = p1->getSurfaceType(nId1);
+	SurfaceType t0 = p0->getSurfaceType(nId0);
+	SurfaceType t1 = p1->getSurfaceType(nId1);
 
-	if (surfaceType0 < ROTATE && surfaceType1 < ROTATE) {
+	if (t0 < ROTATE && t1 < ROTATE) {
 		return NULL;
 	}
 
@@ -169,15 +169,15 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId n
 	bool touchCenter0 = f1.fuzzyContainsInExtrusion(center0, 0.05f);
 	bool contains1 = f0.fuzzyContainsInExtrusion(center1, 0.05f);
 
-	bool axle0 = surfaceType0 >= ROTATE && touchCenter0;
-	bool axle1 = surfaceType1 >= ROTATE && contains1;
+	bool axle0 = t0 >= ROTATE && touchCenter0;
+	bool axle1 = t1 >= ROTATE && contains1;
 
 	if (!axle0 && !axle1) {
 		return NULL;
 	}
 
 	if (!axle0 || (axle1 && p1->getGeometry()->getGridSize().sum() > p0->getGeometry()->getGridSize().sum())) {
-		surfaceType0 = surfaceType1;
+		t0 = t1;
 		std::swap(p0, p1);
 		std::swap(nId0, nId1);
 		std::swap(center0, center1);
@@ -209,7 +209,7 @@ RotateJoint* RotateJoint::canBuildJoint(Primitive* p0, Primitive* p1, NormalId n
 		}
 	}
 
-	return surfaceTypeToJoint(surfaceType0, p0, p1, axleInP0, holeInP1);
+	return surfaceTypeToJoint(t0, p0, p1, axleInP0, holeInP1);
 }
 
 // FUNCTION: WEBSERVICE 0x1011f690

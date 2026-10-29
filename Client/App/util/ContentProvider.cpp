@@ -82,10 +82,10 @@ bool operator==(const ContentId& a, const ContentId& b)
 }
 
 // FUNCTION: WEBSERVICE 0x1004f340
-ContentId ContentId::fromAssets(const std::string& id)
+ContentId ContentId::fromAssets(const std::string& filePath)
 {
-	std::string prefix("rbxasset://");
-	return ContentId(prefix + id);
+	std::string header("rbxasset://");
+	return ContentId(header + filePath);
 }
 
 // FUNCTION: WEBSERVICE 0x1004f3f0

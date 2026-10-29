@@ -21,9 +21,9 @@ namespace RBX {
 namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x100ada30
-float lua_tofloat(lua_State* L, int index)
+float lua_tofloat(lua_State* L, int idx)
 {
-	double value = lua_tonumber(L, index);
+	double value = lua_tonumber(L, idx);
 
 	if (value == std::numeric_limits<double>::infinity()) {
 		return std::numeric_limits<float>::infinity();
@@ -119,48 +119,48 @@ int Vector3Bridge::on_sub(lua_State* L)
 // FUNCTION: WEBSERVICE 0x100ade50
 int Vector3Bridge::on_mul(lua_State* L)
 {
-	G3D::Vector3 vector;
+	G3D::Vector3 a;
 
-	if (getValue(L, 1, vector)) {
-		G3D::Vector3 other;
+	if (getValue(L, 1, a)) {
+		G3D::Vector3 b;
 
-		if (getValue(L, 2, other)) {
-			pushVector3(L, vector * other);
+		if (getValue(L, 2, b)) {
+			pushVector3(L, a * b);
 			return 1;
 		}
 
-		pushVector3(L, vector * lua_tofloat(L, 2));
+		pushVector3(L, a * lua_tofloat(L, 2));
 		return 1;
 	}
 
-	vector = getObject(L, 2);
+	a = getObject(L, 2);
 
-	pushVector3(L, vector * lua_tofloat(L, 1));
+	pushVector3(L, a * lua_tofloat(L, 1));
 	return 1;
 }
 
 // FUNCTION: WEBSERVICE 0x100adf30
 int Vector3Bridge::on_div(lua_State* L)
 {
-	G3D::Vector3 vector;
+	G3D::Vector3 a;
 
-	if (getValue(L, 1, vector)) {
-		G3D::Vector3 other;
+	if (getValue(L, 1, a)) {
+		G3D::Vector3 b;
 
-		if (getValue(L, 2, other)) {
-			pushVector3(L, vector / other);
+		if (getValue(L, 2, b)) {
+			pushVector3(L, a / b);
 			return 1;
 		}
 
-		pushVector3(L, vector / lua_tofloat(L, 2));
+		pushVector3(L, a / lua_tofloat(L, 2));
 		return 1;
 	}
 
-	vector = getObject(L, 2);
+	a = getObject(L, 2);
 
 	float scalar = lua_tofloat(L, 1);
 
-	pushVector3(L, G3D::Vector3(scalar, scalar, scalar) / vector);
+	pushVector3(L, G3D::Vector3(scalar, scalar, scalar) / a);
 	return 1;
 }
 
@@ -651,17 +651,17 @@ int CoordinateFrameBridge::on_toEulerAnglesXYZ(lua_State* L)
 // FUNCTION: WEBSERVICE 0x100af440
 int CoordinateFrameBridge::on_vectorToObjectSpace(lua_State* L)
 {
-	const G3D::CoordinateFrame& value = getObject(L, 1);
+	const G3D::CoordinateFrame& a = getObject(L, 1);
 
 	int count = lua_gettop(L) - 1;
 
 	if (count == 0) {
-		Vector3Bridge::pushVector3(L, value.vectorToObjectSpace(G3D::Vector3::zero()));
+		Vector3Bridge::pushVector3(L, a.vectorToObjectSpace(G3D::Vector3::zero()));
 		return 1;
 	}
 
 	for (int i = 0; i < count; i++) {
-		Vector3Bridge::pushNewObject(L, value.vectorToObjectSpace(Vector3Bridge::getObject(L, i + 2)));
+		Vector3Bridge::pushNewObject(L, a.vectorToObjectSpace(Vector3Bridge::getObject(L, i + 2)));
 	}
 
 	return count;
@@ -670,26 +670,26 @@ int CoordinateFrameBridge::on_vectorToObjectSpace(lua_State* L)
 // FUNCTION: WEBSERVICE 0x100af610
 int CoordinateFrameBridge::fromEulerAnglesXYZ(lua_State* L)
 {
-	G3D::CoordinateFrame result;
+	G3D::CoordinateFrame cf;
 
-	result.rotation =
+	cf.rotation =
 		G3D::Matrix3::fromEulerAnglesXYZ(luaL_checknumber(L, 1), luaL_checknumber(L, 2), luaL_checknumber(L, 3));
 
-	pushNewObject(L, result);
+	pushNewObject(L, cf);
 	return 1;
 }
 
 // FUNCTION: WEBSERVICE 0x100af6b0
 int CoordinateFrameBridge::fromAxisAngle(lua_State* L)
 {
-	G3D::CoordinateFrame result;
+	G3D::CoordinateFrame cf;
 
 	const G3D::Vector3& axis = Vector3Bridge::getObject(L, 1);
 	float angle = luaL_checknumber(L, 2);
 
-	result.rotation = G3D::Matrix3::fromAxisAngle(axis, angle);
+	cf.rotation = G3D::Matrix3::fromAxisAngle(axis, angle);
 
-	pushNewObject(L, result);
+	pushNewObject(L, cf);
 	return 1;
 }
 

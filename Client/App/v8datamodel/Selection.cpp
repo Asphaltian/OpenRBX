@@ -147,19 +147,19 @@ void Selection::setSelection(Instance* instance)
 // FUNCTION: WEBSERVICE 0x1005e1f0
 void Selection::removeFromSelection(const Instance* instance)
 {
-	boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > > items = selection.write();
+	boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > > sel = selection.write();
 
 	std::vector<boost::shared_ptr<Instance> >::iterator iter =
-		std::find(items->begin(), items->end(), shared_from(instance));
+		std::find(sel->begin(), sel->end(), shared_from(instance));
 
-	if (iter != items->end()) {
-		boost::shared_ptr<Instance> removedItem = *iter;
+	if (iter != sel->end()) {
+		boost::shared_ptr<Instance> nonConst = *iter;
 
-		items->erase(iter);
+		sel->erase(iter);
 
 		instance->Notifier<Instance, AncestorChanged>::removeListener(this);
 
-		raiseRemoved(removedItem);
+		raiseRemoved(nonConst);
 	}
 }
 
