@@ -50,7 +50,7 @@ protected:
 	virtual bool askSetParent(const Instance* instance) const { return true; }
 
 private:
-	void onValueChanged(const Reflection::PropertyDescriptor& descriptor) { desc_ValueChanged.fire(this, value); }
+	void onValueChanged(const Reflection::PropertyDescriptor&) { desc_ValueChanged.fire(this, value); }
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1008e6a0

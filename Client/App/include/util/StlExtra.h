@@ -34,18 +34,18 @@ template <class T>
 unsigned int fastRemoveShort(std::vector<T>& vec, const T& item)
 {
 	typename std::vector<T>::iterator found = std::find(vec.begin(), vec.end(), item);
-	unsigned int lastOne = found - vec.begin();
-	typename std::vector<T>::iterator last = vec.end();
+	unsigned int index = found - vec.begin();
+	typename std::vector<T>::iterator lastOne = vec.end();
 
-	--last;
+	--lastOne;
 
-	if (found != last) {
-		*found = *last;
+	if (found != lastOne) {
+		*found = *lastOne;
 	}
 
 	vec.resize(vec.size() - 1);
 
-	return lastOne;
+	return index;
 }
 
 } // namespace RBX

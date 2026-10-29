@@ -112,8 +112,8 @@ void TGenericSlotWrapper<Slot>::execute(const std::vector<boost::any>& arguments
 	try {
 		slot(arguments);
 	}
-	catch (const std::exception& error) {
-		StandardOut::singleton()->print(MESSAGE_ERROR, "Exception caught in TGenericSlotWrapper. %s", error.what());
+	catch (const std::exception& e) {
+		StandardOut::singleton()->print(MESSAGE_ERROR, "Exception caught in TGenericSlotWrapper. %s", e.what());
 	}
 }
 
@@ -192,9 +192,9 @@ DECOMP_SIZE_ASSERT(Signal, 0x08)
 // RBX::Reflection::SignalInstance::connectGeneric<FunctionScriptSlot>
 // clang-format on
 template <class Slot>
-boost::signals::connection SignalInstance::connectGeneric(Slot slot, boost::signals::connect_position position)
+boost::signals::connection SignalInstance::connectGeneric(Slot slot, boost::signals::connect_position pos)
 {
-	return descriptor.connectGeneric(this, GenericSlotWrapper::create(slot), position);
+	return descriptor.connectGeneric(this, GenericSlotWrapper::create(slot), pos);
 }
 
 // SIZE 0x24
@@ -392,14 +392,14 @@ protected:
 	};
 
 	virtual boost::signals::connection connectGeneric(
-		SignalInstance* instance,
+		SignalInstance* si,
 		GenericSlotWrapper* wrapper,
-		boost::signals::connect_position position
+		boost::signals::connect_position pos
 	) const // vtable+0x04
 	{
-		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(instance)->connect(
+		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(si)->connect(
 			GenericSlotAdapter(wrapper),
-			position
+			pos
 		);
 	}
 
@@ -442,11 +442,11 @@ protected:
 
 		void operator()(typename boost::function_traits<Signature>::arg1_type arg1) const
 		{
-			std::vector<boost::any> arguments(1);
+			std::vector<boost::any> args(1);
 
-			arguments[0] = arg1;
+			args[0] = arg1;
 
-			wrapper->execute(arguments);
+			wrapper->execute(args);
 		}
 
 	private:
@@ -475,14 +475,14 @@ protected:
 	// clang-format on
 
 	virtual boost::signals::connection connectGeneric(
-		SignalInstance* instance,
+		SignalInstance* si,
 		GenericSlotWrapper* wrapper,
-		boost::signals::connect_position position
+		boost::signals::connect_position pos
 	) const // vtable+0x04
 	{
-		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(instance)->connect(
+		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(si)->connect(
 			GenericSlotAdapter(wrapper),
-			position
+			pos
 		);
 	}
 
@@ -520,12 +520,12 @@ protected:
 			typename boost::function_traits<Signature>::arg2_type arg2
 		) const
 		{
-			std::vector<boost::any> arguments(2);
+			std::vector<boost::any> args(2);
 
-			arguments[0] = arg1;
-			arguments[1] = arg2;
+			args[0] = arg1;
+			args[1] = arg2;
 
-			wrapper->execute(arguments);
+			wrapper->execute(args);
 		}
 
 	private:
@@ -544,14 +544,14 @@ protected:
 	// clang-format on
 
 	virtual boost::signals::connection connectGeneric(
-		SignalInstance* instance,
+		SignalInstance* si,
 		GenericSlotWrapper* wrapper,
-		boost::signals::connect_position position
+		boost::signals::connect_position pos
 	) const // vtable+0x04
 	{
-		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(instance)->connect(
+		return static_cast<typename TSignalDesc<Signature>::TSignalInstance*>(si)->connect(
 			GenericSlotAdapter(wrapper),
-			position
+			pos
 		);
 	}
 

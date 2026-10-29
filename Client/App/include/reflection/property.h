@@ -126,7 +126,7 @@ public:
 		virtual void setValue(DescribedBase* instance, const T& value) const = 0; // vtable+0x08
 	};
 
-	T getValue(const DescribedBase* instance) const { return getset->getValue(instance); }
+	T getValue(const DescribedBase* object) const { return getset->getValue(object); }
 
 	void setValue(DescribedBase* instance, const T& value) const { getset->setValue(instance, value); }
 
@@ -838,7 +838,7 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getset<std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// clang-format on
 	template <class Getter, class Setter>
-	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, int)
+	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, int set)
 	{
 		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new GetImpl<Getter>(get));
 	}
@@ -848,7 +848,7 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::getset<int,void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>
 	// clang-format on
 	template <class Getter, class Setter>
-	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(int, Setter set)
+	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(int get, Setter set)
 	{
 		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new SetImpl<Setter>(set));
 	}

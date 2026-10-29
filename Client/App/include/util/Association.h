@@ -55,7 +55,7 @@ public:
 		TItem() {}
 
 		template <class Arg>
-		TItem(Arg arg) : t(arg)
+		TItem(Arg param0) : t(param0)
 		{
 		}
 	};
@@ -116,14 +116,14 @@ public:
 	}
 
 	template <class U, class Arg>
-	U& get(Arg arg)
+	U& get(Arg param0)
 	{
 		while (items.size() <= index<U>()) {
 			items.push_back(NULL);
 		}
 		Item*& item = items[index<U>()];
 		if (!item) {
-			item = new TItem<U>(arg);
+			item = new TItem<U>(param0);
 		}
 		return static_cast<TItem<U>*>(item)->t;
 	}

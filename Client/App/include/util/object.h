@@ -296,15 +296,15 @@ public:
 	}
 
 	template <class U, class A>
-	static boost::shared_ptr<U> create(A argument)
+	static boost::shared_ptr<U> create(A p1)
 	{
-		return boost::shared_ptr<U>(new U(argument), Deleter());
+		return boost::shared_ptr<U>(new U(p1), Deleter());
 	}
 
 	template <class U, class A, class B>
-	static boost::shared_ptr<U> create(A a, B b)
+	static boost::shared_ptr<U> create(A p1, B p2)
 	{
-		return boost::shared_ptr<U>(new U(a, b), Deleter());
+		return boost::shared_ptr<U>(new U(p1, p2), Deleter());
 	}
 
 protected:

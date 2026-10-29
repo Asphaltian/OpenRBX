@@ -202,8 +202,8 @@ protected:
 				for (std::vector<boost::shared_ptr<Instance> >::const_iterator iter = rootSelection->begin();
 					 iter != rootSelection->end();
 					 ++iter) {
-					if (T* item = dynamic_cast<T*>(iter->get())) {
-						filteredSelection.push_back(item);
+					if (T* c = dynamic_cast<T*>(iter->get())) {
+						filteredSelection.push_back(c);
 					}
 				}
 

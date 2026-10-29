@@ -712,9 +712,9 @@ public:
 		const char* category,
 		Getter get,
 		Setter set,
-		typename PropertyDescriptor::Functionality functionality = PropertyDescriptor::STANDARD
+		typename PropertyDescriptor::Functionality flags = PropertyDescriptor::STANDARD
 	)
-		: RefPropertyDescriptor(Class::classDescriptor(), RefType::singleton<T*>(), name, category, functionality),
+		: RefPropertyDescriptor(Class::classDescriptor(), RefType::singleton<T*>(), name, category, flags),
 		  getset(PropDescriptor<Class, T*>::template getset<Getter, Setter>(get, set))
 	{
 	}

@@ -120,16 +120,16 @@ void Bridge<T, Tag>::registerClass(lua_State* L)
 // clang-format on
 template <class T, int Tag>
 template <class U>
-U* Bridge<T, Tag>::pushNewObject(lua_State* L, U value)
+U* Bridge<T, Tag>::pushNewObject(lua_State* L, U param1)
 {
-	U* object = static_cast<U*>(lua_newuserdata(L, sizeof(U)));
+	U* data = static_cast<U*>(lua_newuserdata(L, sizeof(U)));
 
-	new (object) U(value);
+	new (data) U(param1);
 
 	lua_getfield(L, LUA_REGISTRYINDEX, className);
 	lua_setmetatable(L, -2);
 
-	return object;
+	return data;
 }
 
 // clang-format off
