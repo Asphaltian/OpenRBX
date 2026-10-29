@@ -357,7 +357,7 @@ void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& cam
 
 		bool farCulled = cspace.z + chunk->radius < farZ && chunk->cullable();
 		bool nearCulled = cspace.z - chunk->radius > nearZ;
-		bool shadowFarCulled = cspace.z + chunk->radius < farZ * 1.2 && chunk->cullable();
+		bool shadowFarCulled = cspace.z + chunk->radius < farZ * 1.2f && chunk->cullable();
 
 		if (chunk->castsShadows() && !shadowFarCulled && !chunk->getMaterial()->veryTransparent()) {
 			if (chunk->cachesShadows()) {
@@ -381,10 +381,10 @@ void RenderScene::allocateProxies(G3D::RenderDevice* rd, const G3D::GCamera& cam
 			proxy.z = cspace.z - chunk->polygonOffset;
 			proxy.fullMesh = chunk->getMesh();
 
-			float rawLvl = detailLevel(fabs(proxy.z), -nearZ, -farZ) + effectSettings.LODShift();
-			float lvl = G3D::clamp(rawLvl, 0.0f, 1.0f);
+			float rawLvl = detailLevel(fabs(proxy.z), -nearZ, -farZ);
+			float lvl = G3D::clamp(rawLvl + effectSettings.LODShift(), 0.0f, 1.0f);
 
-			proxy.material = chunk->getMaterial()->detailLevel(rawLvl);
+			proxy.material = chunk->getMaterial()->detailLevel(lvl);
 
 			if (proxy.material != NULL) {
 				proxy.material->baseTexture(rd);
