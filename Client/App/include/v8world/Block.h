@@ -68,6 +68,7 @@ public:
 	Vector2 getProjectedVertex(const Vector3& vertex, NormalId normalID);
 
 	Block() : vertices(NULL), cornerRadius(0) {}
+	virtual ~Block() {} // vtable+0x00
 
 private:
 	const Vector3* vertices; // 0x10

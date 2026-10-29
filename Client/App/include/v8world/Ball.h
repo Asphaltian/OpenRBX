@@ -38,6 +38,7 @@ public:
 	virtual float getGridVolume() const;
 
 	Ball() : realRadius(0) {}
+	virtual ~Ball() {} // vtable+0x00
 
 private:
 	float realRadius; // 0x10

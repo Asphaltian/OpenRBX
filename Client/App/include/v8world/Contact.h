@@ -21,6 +21,7 @@ class __declspec(novtable) Contact : public Edge
 {
 public:
 	Contact(Primitive* p0, Primitive* p1);
+	virtual ~Contact() {} // vtable+0x00
 
 	int& steppingIndexFunc() { return steppingIndex; }
 

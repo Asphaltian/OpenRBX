@@ -63,6 +63,7 @@ public:
 	};
 
 	Edge(Primitive* prim0, Primitive* prim1);
+	virtual ~Edge() {} // vtable+0x00
 
 	virtual EdgeType getEdgeType() const = 0;                   // vtable+0x0c
 	virtual void setPrimitive(int index, Primitive* primitive); // vtable+0x10

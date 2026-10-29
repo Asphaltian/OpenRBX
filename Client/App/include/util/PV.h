@@ -20,6 +20,7 @@ public:
 
 	PV() {}
 	PV(const CoordinateFrame& position, const Velocity& velocity) : position(position), velocity(velocity) {}
+	~PV() {}
 
 	Vector3 linearVelocityAtPoint(const Vector3& worldPos) const;
 
