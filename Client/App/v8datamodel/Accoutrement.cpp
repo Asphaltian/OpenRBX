@@ -94,21 +94,21 @@ void Accoutrement::setBackendAccoutrementStateNoReplicate(int value)
 	}
 }
 
-void Accoutrement::upTo_HasHandle()
+inline void Accoutrement::upTo_HasHandle()
 {
 	connectTouchEvent();
 }
 
-void Accoutrement::upTo_InWorkspace()
+inline void Accoutrement::upTo_InWorkspace()
 {
 }
 
-void Accoutrement::downFrom_HasHandle()
+inline void Accoutrement::downFrom_HasHandle()
 {
 	handleTouched.disconnect();
 }
 
-void Accoutrement::downFrom_InWorkspace()
+inline void Accoutrement::downFrom_InWorkspace()
 {
 }
 

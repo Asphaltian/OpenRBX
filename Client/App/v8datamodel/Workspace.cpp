@@ -215,12 +215,13 @@ static void wrapper(Instance* instance)
 	}
 }
 
-// STUB: WEBSERVICE 0x1006bfd0
+// FUNCTION: WEBSERVICE 0x1006bfd0
 Camera* Workspace::getCamera() const
 {
 	if (!currentCamera || !currentCamera->isDescendentOf(this)) {
 		boost::shared_ptr<Camera> newCam = Creatable<Instance>::create<Camera>();
-		newCam->setParent(const_cast<Workspace*>(this));
+		Workspace* workspace = const_cast<Workspace*>(this);
+		newCam->setParent(workspace);
 		const_cast<Workspace*>(this)->currentCamera = newCam;
 	}
 

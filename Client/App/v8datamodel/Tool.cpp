@@ -453,28 +453,28 @@ void Tool::setBackendToolState(int value)
 	}
 }
 
-void Tool::upTo_Activated()
+inline void Tool::upTo_Activated()
 {
 }
 
-void Tool::upTo_InWorkspace()
+inline void Tool::upTo_InWorkspace()
 {
 }
 
-void Tool::upTo_HasHandle()
+inline void Tool::upTo_HasHandle()
 {
 	connectTouchEvent();
 }
 
-void Tool::downFrom_Activated()
+inline void Tool::downFrom_Activated()
 {
 }
 
-void Tool::downFrom_InWorkspace()
+inline void Tool::downFrom_InWorkspace()
 {
 }
 
-void Tool::downFrom_HasHandle()
+inline void Tool::downFrom_HasHandle()
 {
 	handleTouched.disconnect();
 }
