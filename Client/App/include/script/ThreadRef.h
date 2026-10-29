@@ -96,6 +96,10 @@ public:
 
 	~FunctionRef();
 
+	FunctionRef& operator=(const FunctionRef& other);
+	bool operator==(const FunctionRef& other) const;
+	bool operator!=(const FunctionRef& other) const;
+
 protected:
 	virtual void removeRef(); // vtable+0x00
 

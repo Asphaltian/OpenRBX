@@ -31,6 +31,13 @@ public:
 	static Extents vv(const Vector3& v0, const Vector3& v1);
 
 	static const Extents& zero();
+	Extents& operator=(const Extents& other)
+	{
+		low = other.low;
+		high = other.high;
+		return *this;
+	}
+
 	static const Extents& negativeInfiniteExtents();
 
 	const Vector3& min() const { return low; }
