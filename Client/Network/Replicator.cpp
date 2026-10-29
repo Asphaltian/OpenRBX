@@ -11,9 +11,9 @@
 #include "util/Name.h"
 #include "util/Profiling.h"
 #include "util/Quaternion.h"
-#include "util/StandardOut.h"
 #include "util/Velocity.h"
 #include "util/scopedassign.h"
+#include "util/standardout.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Hopper.h"
 #include "v8datamodel/JointsService.h"
@@ -536,7 +536,9 @@ bool Replicator::remoteDeleteOnDisconnect(const Instance* instance) const
 // FUNCTION: WEBSERVICE 0x1019cd50
 void Peer::Update(RakPeerInterface* peer)
 {
+#ifdef _WIN32
 	profilePacketsThread->sample(static_cast<RakPeer*>(peer)->processPacketsThreadHandle);
+#endif
 
 	PluginInterface::Update(peer);
 }
@@ -1859,7 +1861,11 @@ PluginReceiveResult Replicator::OnReceive(RakPeerInterface* peer, Packet* packet
 				inBitstream >> remoteScope;
 
 				if (Name::lookup(remoteScope) == Guid::getLocalScope()) {
+#ifdef _MSC_VER
 					throw std::exception("Remote peer is running in the same process");
+#else
+					throw std::runtime_error("Remote peer is running in the same process");
+#endif
 				}
 
 				TopReplConts::iterator end = topReplicationContainers.end();

@@ -116,7 +116,7 @@ public:
     }
 
     /** q = [sin(angle/2)*axis, cos(angle/2)] */
-    static Quat Quat::fromAxisAngleRotation(
+    static Quat fromAxisAngleRotation(
         const Vector3&      axis,
         float               angle);
 

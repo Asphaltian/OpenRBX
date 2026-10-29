@@ -37,9 +37,8 @@
 #ifdef G3D_LINUX
     // Needed so we can define a global display
     // pointer for debugAssert.
-    #include <X11/Xlib.h>
-    #include <X11/Xutil.h>
-    #include <X11/Xatom.h>
+    typedef struct _XDisplay Display;
+    typedef unsigned long Window;
 #endif
 
 #ifdef G3D_OSX

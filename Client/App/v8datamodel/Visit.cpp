@@ -3,7 +3,7 @@
 
 #include "reflection/reflection.h"
 #include "util/Http.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 #include "v8datamodel/Visit.h"
 
 #include <G3D/format.h>

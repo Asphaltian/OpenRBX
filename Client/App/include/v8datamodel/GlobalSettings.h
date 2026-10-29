@@ -88,7 +88,7 @@ private:
 protected:
 	GlobalSettingsItem()
 	{
-		setName(sName);
+		this->setName(sName);
 		sing = this;
 	}
 

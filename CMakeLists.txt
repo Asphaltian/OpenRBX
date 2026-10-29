@@ -4,8 +4,17 @@ cmake_policy(SET CMP0091 NEW)
 
 project(openrbx C CXX)
 
-if (NOT WIN32)
-  message(FATAL_ERROR "Windows is the only supported platform (for now...)")
+if (NOT MSVC)
+  set(CMAKE_CXX_STANDARD 11)
+  set(CMAKE_CXX_EXTENSIONS ON)
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+  add_compile_options(-pthread -fno-strict-aliasing -Wno-deprecated-declarations $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics>)
+  add_link_options(-pthread)
+  if (NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    message(FATAL_ERROR "Non-MSVC builds require Clang")
+  endif()
+  add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fdelayed-template-parsing> -fms-extensions)
+  add_compile_options(-include "${PROJECT_SOURCE_DIR}/util/portable.h")
 endif()
 
 include(CheckCXXSourceCompiles)
@@ -25,7 +34,7 @@ endif()
 
 math(EXPR bits "8 * ${CMAKE_SIZEOF_VOID_P}")
 message(STATUS "Building ${bits}-bit RBXGS")
-if (NOT bits EQUAL 32)
+if (WIN32 AND NOT bits EQUAL 32)
   message(WARNING "Only 32-bit binaries are supported")
 endif()
 
@@ -82,8 +91,27 @@ set(OPENRBX_G3D_EXTRA_INCLUDE_DIRS
   "${OPENRBX_3RDPARTY}/g3d/source/zlib"
 )
 
-add_library(fmodex IMPORTED UNKNOWN)
-set_property(TARGET fmodex PROPERTY IMPORTED_LOCATION "${OPENRBX_3RDPARTY}/fmod/api/lib/fmodex_vc.lib")
+if (WIN32 AND bits EQUAL 64)
+  set(OPENRBX_FMOD_LIBRARY "${OPENRBX_3RDPARTY}/fmod/api/lib/fmodex64_vc.lib")
+  set(OPENRBX_FMOD_RUNTIME "${OPENRBX_3RDPARTY}/fmod/api/fmodex64.dll")
+elseif (WIN32)
+  set(OPENRBX_FMOD_LIBRARY "${OPENRBX_3RDPARTY}/fmod/api/lib/fmodex_vc.lib")
+  set(OPENRBX_FMOD_RUNTIME "${OPENRBX_3RDPARTY}/fmod/api/fmodex.dll")
+elseif (bits EQUAL 64)
+  set(OPENRBX_FMOD_LIBRARY "${OPENRBX_3RDPARTY}/fmod/api/lib/libfmodex64.so")
+  set(OPENRBX_FMOD_RUNTIME "${OPENRBX_FMOD_LIBRARY}")
+else()
+  set(OPENRBX_FMOD_LIBRARY "${OPENRBX_3RDPARTY}/fmod/api/lib/libfmodex.so")
+  set(OPENRBX_FMOD_RUNTIME "${OPENRBX_FMOD_LIBRARY}")
+endif()
+
+if (WIN32)
+  add_library(fmodex IMPORTED UNKNOWN)
+else()
+  add_library(fmodex SHARED IMPORTED)
+  set_property(TARGET fmodex PROPERTY IMPORTED_NO_SONAME TRUE)
+endif()
+set_property(TARGET fmodex PROPERTY IMPORTED_LOCATION "${OPENRBX_FMOD_LIBRARY}")
 set_property(TARGET fmodex PROPERTY INTERFACE_INCLUDE_DIRECTORIES "${OPENRBX_3RDPARTY}/fmod/api/inc")
 
 add_subdirectory(3rdparty)
@@ -354,6 +382,10 @@ set(OPENRBX_ENGINE_INCLUDE_DIRS
   "${PROJECT_SOURCE_DIR}/util"
 )
 
+if (NOT WIN32)
+  list(APPEND OPENRBX_ENGINE_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}/util/posix" "${PROJECT_SOURCE_DIR}/Client/Network")
+endif()
+
 set(OPENRBX_3RDPARTY_INCLUDE_DIRS
   "${OPENRBX_BOOST_INCLUDE_DIR}"
   "${OPENRBX_G3D_INCLUDE_DIR}"
@@ -363,12 +395,15 @@ set(OPENRBX_3RDPARTY_INCLUDE_DIRS
 )
 
 set(OPENRBX_COMMON_DEFINITIONS
-  WIN32
   NDEBUG
   _LIB
   _VC80_UPGRADE=0x0710
   _MBCS
 )
+
+if (WIN32)
+  list(APPEND OPENRBX_COMMON_DEFINITIONS WIN32)
+endif()
 
 set(OPENRBX_ENGINE_LIBRARIES)
 
@@ -380,7 +415,12 @@ function(add_engine_library NAME)
   endif()
   add_library(${NAME} OBJECT ${ARGS_SOURCES})
   target_compile_definitions(${NAME} PRIVATE ${OPENRBX_COMMON_DEFINITIONS} ${ARGS_DEFINITIONS})
-  target_include_directories(${NAME} PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS} ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
+  if (MSVC)
+    target_include_directories(${NAME} PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS} ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
+  else()
+    target_include_directories(${NAME} PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS})
+    target_include_directories(${NAME} SYSTEM PRIVATE ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
+  endif()
   if (MSVC_FOR_DECOMP AND ARGS_OPTIONS)
     target_compile_options(${NAME} PRIVATE ${ARGS_OPTIONS})
   elseif (MSVC)
@@ -417,13 +457,24 @@ set(OPENRBX_LUA_SOURCES
   "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lzio.c"
 )
 
+if (NOT WIN32)
+  list(REMOVE_ITEM OPENRBX_APP_SOURCES Client/App/util/FileSystem.cpp)
+  list(APPEND OPENRBX_APP_SOURCES util/posix/FileSystem.cpp util/posix/support.cpp)
+  list(REMOVE_ITEM OPENRBX_NETWORK_SOURCES Client/Network/CrashReporter.cpp)
+  list(APPEND OPENRBX_NETWORK_SOURCES util/posix/CrashReporter.cpp)
+endif()
+
+if (NOT MSVC)
+  set_source_files_properties(${OPENRBX_LUA_SOURCES} PROPERTIES LANGUAGE CXX)
+endif()
+
 add_engine_library(lua
   DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE
   OPTIONS /O2 /Ob2 /Oi /Oy /GF /GS- /fp:fast /TP /EHsc
   SOURCES ${OPENRBX_LUA_SOURCES}
 )
 
-if (MSVC_FOR_DECOMP)
+if (MSVC_FOR_DECOMP OR NOT WIN32)
   list(APPEND OPENRBX_APP_SOURCES 3rdparty/boost_1_34_1/libs/iostreams/src/zlib.cpp)
 endif()
 
@@ -464,77 +515,106 @@ add_engine_library(renderlib
   SOURCES ${OPENRBX_RENDERLIB_SOURCES}
 )
 
-set(OPENRBX_WEBSERVICE_SOURCES
-  WebService/ThumbnailGenerator.cpp
-  WebService/WebService.cpp
-  Client/win/ErrorUploader.cpp
-  Client/win/LogManager.cpp
-  Client/win/VersionInfo.cpp
-)
+if (WIN32)
+  set(OPENRBX_WEBSERVICE_SOURCES
+    WebService/ThumbnailGenerator.cpp
+    WebService/WebService.cpp
+    Client/win/ErrorUploader.cpp
+    Client/win/LogManager.cpp
+    Client/win/VersionInfo.cpp
+  )
 
-add_library(webservice SHARED
-  ${OPENRBX_WEBSERVICE_SOURCES}
-  util/decomp.cpp
-)
-target_compile_definitions(webservice PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _USRDLL _CRT_SECURE_NO_WARNINGS
-  _ATL_NO_COM_SUPPORT)
-reccmp_add_target(webservice ID WEBSERVICE)
+  add_library(webservice SHARED
+    ${OPENRBX_WEBSERVICE_SOURCES}
+    util/decomp.cpp
+  )
+  target_compile_definitions(webservice PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _USRDLL _CRT_SECURE_NO_WARNINGS
+    _ATL_NO_COM_SUPPORT)
+  reccmp_add_target(webservice ID WEBSERVICE)
 
-target_include_directories(webservice PRIVATE
-  "${PROJECT_SOURCE_DIR}/WebService"
-  "${PROJECT_SOURCE_DIR}/Client/win"
-  ${OPENRBX_ENGINE_INCLUDE_DIRS}
-  ${OPENRBX_3RDPARTY_INCLUDE_DIRS}
-  "${OPENRBX_MESA_INCLUDE_DIR}"
-)
+  target_include_directories(webservice PRIVATE
+    "${PROJECT_SOURCE_DIR}/WebService"
+    "${PROJECT_SOURCE_DIR}/Client/win"
+    ${OPENRBX_ENGINE_INCLUDE_DIRS}
+    ${OPENRBX_3RDPARTY_INCLUDE_DIRS}
+    "${OPENRBX_MESA_INCLUDE_DIR}"
+  )
 
 
-if (OPENRBX_ENGINE_LIBRARIES)
-  target_link_libraries(webservice PRIVATE ${OPENRBX_ENGINE_LIBRARIES})
-endif()
+  if (OPENRBX_ENGINE_LIBRARIES)
+    target_link_libraries(webservice PRIVATE ${OPENRBX_ENGINE_LIBRARIES})
+  endif()
 
-target_link_libraries(webservice PRIVATE
-  ${OPENRBX_G3D_LIBS}
-  ${OPENRBX_BOOST_LIBS}
-  ${OPENRBX_MESA_LIBS}
-)
+  target_link_libraries(webservice PRIVATE
+    ${OPENRBX_G3D_LIBS}
+    ${OPENRBX_BOOST_LIBS}
+    ${OPENRBX_MESA_LIBS}
+  )
 
-target_link_libraries(webservice PRIVATE fmodex)
-add_custom_command(TARGET webservice POST_BUILD
-  COMMAND "${CMAKE_COMMAND}" -E copy_if_different
-    "${OPENRBX_3RDPARTY}/fmod/api/fmodex.dll" "$<TARGET_FILE_DIR:webservice>"
-  COMMENT "Copying fmodex.dll next to WebService.dll"
-)
+  target_link_libraries(webservice PRIVATE fmodex)
+  add_custom_command(TARGET webservice POST_BUILD
+    COMMAND "${CMAKE_COMMAND}" -E copy_if_different
+      "${OPENRBX_FMOD_RUNTIME}" "$<TARGET_FILE_DIR:webservice>"
+    COMMENT "Copying FMOD next to WebService.dll"
+  )
 
-target_link_libraries(webservice PRIVATE
-  advapi32
-  dbghelp
-  gdi32
-  ole32
-  oleaut32
-  setupapi
-  shell32
-  shlwapi
-  user32
-  version
-  wininet
-  winmm
-  ws2_32
-)
+  target_link_libraries(webservice PRIVATE
+    advapi32
+    dbghelp
+    gdi32
+    ole32
+    oleaut32
+    setupapi
+    shell32
+    shlwapi
+    user32
+    version
+    wininet
+    winmm
+    ws2_32
+  )
 
-if (MSVC)
-  target_sources(webservice PRIVATE WebService/WebService.def WebService/WebService.rc)
-  target_link_options(webservice PRIVATE "-MAP:$<TARGET_FILE_DIR:webservice>/$<TARGET_FILE_BASE_NAME:webservice>.map")
-  foreach(lib zlib.lib G3D.lib G3D-debug.lib GLG3D.lib GLG3D-debug.lib sdl.lib sdlmain.lib glut32.lib)
-    target_link_options(webservice PRIVATE "/NODEFAULTLIB:${lib}")
+  if (MSVC)
+    target_sources(webservice PRIVATE WebService/WebService.def WebService/WebService.rc)
+    target_link_options(webservice PRIVATE "-MAP:$<TARGET_FILE_DIR:webservice>/$<TARGET_FILE_BASE_NAME:webservice>.map")
+    foreach(lib zlib.lib G3D.lib G3D-debug.lib GLG3D.lib GLG3D-debug.lib sdl.lib sdlmain.lib glut32.lib)
+      target_link_options(webservice PRIVATE "/NODEFAULTLIB:${lib}")
+    endforeach()
+  endif()
+
+  set_property(TARGET webservice PROPERTY OUTPUT_NAME "WebService")
+  set_property(TARGET webservice PROPERTY PREFIX "")
+  set_property(TARGET webservice PROPERTY SUFFIX ".dll")
+
+  add_custom_target(rbxgs DEPENDS webservice)
+else()
+  add_library(rbxgs_engine STATIC)
+  foreach(lib ${OPENRBX_ENGINE_LIBRARIES})
+    target_sources(rbxgs_engine PRIVATE $<TARGET_OBJECTS:${lib}>)
   endforeach()
+  find_package(OpenGL REQUIRED)
+  find_package(X11 REQUIRED)
+  find_package(ZLIB REQUIRED)
+  find_library(OPENRBX_SDL_LIBRARY NAMES SDL-1.2 SDL REQUIRED)
+  add_library(rbxgs SHARED util/decomp.cpp)
+  target_link_libraries(rbxgs PRIVATE
+    -Wl,--whole-archive rbxgs_engine -Wl,--no-whole-archive
+    -Wl,--start-group ${OPENRBX_G3D_LIBS} ${OPENRBX_BOOST_LIBS} -Wl,--end-group
+    fmodex ${OPENRBX_SDL_LIBRARY} ZLIB::ZLIB OpenGL::GL OpenGL::GLU X11::X11
+  )
+  target_link_options(rbxgs PRIVATE -Wl,--no-undefined)
+  set_property(TARGET rbxgs PROPERTY BUILD_RPATH "$ORIGIN")
+  add_custom_command(TARGET rbxgs POST_BUILD
+    COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${OPENRBX_FMOD_RUNTIME}" "$<TARGET_FILE_DIR:rbxgs>"
+  )
+
+  add_executable(rbxgs_run util/posix/rbxgs.cpp)
+  target_include_directories(rbxgs_run PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS} ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
+  target_compile_definitions(rbxgs_run PRIVATE ${OPENRBX_COMMON_DEFINITIONS})
+  target_link_libraries(rbxgs_run PRIVATE rbxgs)
+  set_property(TARGET rbxgs_run PROPERTY OUTPUT_NAME "rbxgs")
+  set_property(TARGET rbxgs_run PROPERTY BUILD_RPATH "$ORIGIN")
 endif()
-
-set_property(TARGET webservice PROPERTY OUTPUT_NAME "WebService")
-set_property(TARGET webservice PROPERTY PREFIX "")
-set_property(TARGET webservice PROPERTY SUFFIX ".dll")
-
-add_custom_target(rbxgs DEPENDS webservice)
 
 if (MSVC)
   if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "15")
@@ -547,8 +627,11 @@ endif()
 
 if (OPENRBX_DECOMP_ASSERT)
   message(STATUS "Decomp asserts enabled")
-  set_property(TARGET webservice ${OPENRBX_ENGINE_LIBRARIES}
+  set_property(TARGET ${OPENRBX_ENGINE_LIBRARIES}
     APPEND PROPERTY COMPILE_DEFINITIONS "ENABLE_DECOMP_ASSERTS")
+  if (TARGET webservice)
+    set_property(TARGET webservice APPEND PROPERTY COMPILE_DEFINITIONS "ENABLE_DECOMP_ASSERTS")
+  endif()
 endif()
 
 if (MSVC_FOR_DECOMP)

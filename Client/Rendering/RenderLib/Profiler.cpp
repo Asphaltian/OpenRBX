@@ -48,6 +48,7 @@ static float getShaderModel()
 // FUNCTION: WEBSERVICE 0x10169c60
 static __int64 GetCyclesDifference(DelayFunction DelayFunction, unsigned int uiParameter)
 {
+#ifdef _MSC_VER
 	unsigned int t0Lo, t0Hi;
 	unsigned int t1Lo, t1Hi;
 
@@ -74,6 +75,11 @@ static __int64 GetCyclesDifference(DelayFunction DelayFunction, unsigned int uiP
 	}
 
 	return (__int64) t1Hi * 0x100000000 - ((__int64) t0Hi << 32) - t0Lo + t1Lo;
+#else
+	unsigned long long start = __builtin_ia32_rdtsc();
+	DelayFunction(uiParameter);
+	return (__int64) (__builtin_ia32_rdtsc() - start);
+#endif
 }
 
 // FUNCTION: WEBSERVICE 0x10169d20

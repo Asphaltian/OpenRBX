@@ -2,7 +2,7 @@
 
 #include "LogManager.h"
 #include "util/Http.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include <algorithm>
 #include <fstream>

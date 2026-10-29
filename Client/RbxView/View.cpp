@@ -7,7 +7,7 @@
 #include "Part.h"
 #include "SphereMesh.h"
 #include "renderlib/RenderScene.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Decal.h"
 #include "v8datamodel/Lighting.h"

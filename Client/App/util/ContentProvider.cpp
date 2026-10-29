@@ -4,7 +4,7 @@
 #include "decomp.h"
 #include "util/FileSystem.h"
 #include "util/Http.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 #include "v8xml/SerializerV2.h"
 #include "v8xml/XmlElement.h"
 #include "v8xml/XmlSerializer.h"
@@ -593,7 +593,11 @@ ContentProvider::ContentProvider()
 {
 	char path[MAX_PATH];
 	if (SHGetFolderPathAndSubDir(NULL, CSIDL_COMMON_APPDATA, NULL, 0, "Roblox\\content\\", path) == S_OK) {
+#ifdef _MSC_VER
 		ContentProvider::singleton().setAssetFolder(path);
+#else
+		setAssetFolder(path);
+#endif
 	}
 	else {
 		StandardOut::singleton()->print(MESSAGE_WARNING, "Failed to get asset folder");

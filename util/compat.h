@@ -9,6 +9,19 @@
 
 #pragma warning(disable : 4786)
 
+#ifdef COMPAT_MODE
+template <class T>
+T& temporaryRef(const T& value)
+{
+	return const_cast<T&>(value);
+}
+#define RBX_TEMP_REF(x) temporaryRef(x)
+#define RBX_INLINE
+#else
+#define RBX_TEMP_REF(x) x
+#define RBX_INLINE inline
+#endif
+
 #if __cplusplus < 201103L && !defined(COMPAT_MODE)
 #define override
 #define static_assert(expr, msg)

@@ -194,7 +194,11 @@ void timed_mutex::do_unlock(cv_state&)
 mutex::mutex()
 {
     int res = 0;
-    res = pthread_mutex_init(&m_mutex, 0);
+    pthread_mutexattr_t attr;
+    pthread_mutexattr_init(&attr);
+    pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
+    res = pthread_mutex_init(&m_mutex, &attr);
+    pthread_mutexattr_destroy(&attr);
     if (res != 0)
         throw thread_resource_error();
 }

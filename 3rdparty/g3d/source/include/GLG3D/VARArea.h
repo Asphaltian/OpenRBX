@@ -113,7 +113,7 @@ private:
     static Mode         mode;
 
     /** Updates allocation and peakAllocation based off of new allocation. */
-    inline void VARArea::updateAllocation(size_t newAllocation) {
+    inline void updateAllocation(size_t newAllocation) {
         allocated += newAllocation;
         peakAllocated = (size_t)iMax((int)peakAllocated, (int)allocated);
     }
@@ -219,7 +219,7 @@ inline unsigned int hashCode(const G3D::VARArea* v) {
 #       pragma warning (push)
 #       pragma warning (disable : 4311)
 #   endif
-    return (unsigned int)v;
+    return (unsigned int)(size_t)v;
 
 #   if defined(G3D_WIN32)
 #       pragma warning (push)

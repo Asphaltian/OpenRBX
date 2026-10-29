@@ -41,7 +41,6 @@
     #include <sys/types.h>
     #include <sys/select.h>
     #include <termios.h>
-    #include <stropts.h>
     #include <unistd.h>
     #include <sys/ioctl.h>
     #include <sys/time.h>

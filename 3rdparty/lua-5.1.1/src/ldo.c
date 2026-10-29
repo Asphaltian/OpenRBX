@@ -118,7 +118,11 @@ public:
 	{ other.committed = true; }
 
 	// FUNCTION: WEBSERVICE 0x100b6270
+#ifdef _MSC_VER
 	virtual const char* what() const
+#else
+	virtual const char* what() const throw()
+#endif
 	{ return lua_tostring(L, -1); }
 
 	// FUNCTION: WEBSERVICE 0x100b6290

@@ -3,7 +3,7 @@
 #include "VersionInfo.h"
 #include "util/FileSystem.h"
 #include "util/Guid.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include <G3D/Log.h>
 #include <G3D/debugAssert.h>

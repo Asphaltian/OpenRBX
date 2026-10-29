@@ -1,5 +1,6 @@
 #include "v8datamodel/GeometryService.h"
 
+#include "compat.h"
 #include "v8datamodel/Filters.h"
 #include "v8datamodel/Workspace.h"
 #include "v8world/SpatialHash.h"
@@ -42,7 +43,7 @@ void GeometryService::onServiceProvider(const ServiceProvider* oldProvider, cons
 }
 
 // FUNCTION: WEBSERVICE 0x100e9e10
-inline GeometryService::GeometryService()
+RBX_INLINE GeometryService::GeometryService()
 	: DescribedCreatable<GeometryService, Instance, sGeometryService>(sGeometryService), workspace(NULL)
 {
 }

@@ -1,6 +1,6 @@
 #include "util/boost.hpp"
 
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include <boost/bind.hpp>
 #include <boost/thread/once.hpp>
@@ -44,6 +44,7 @@ void SetThreadName(DWORD dwThreadID, LPCSTR szThreadName)
 	info.dwThreadID = dwThreadID;
 	info.dwFlags = 0;
 
+#ifdef _MSC_VER
 	__try {
 #ifdef _DEBUG
 		RaiseException(0x406D1388, 0, sizeof(info) / sizeof(DWORD), (ULONG_PTR*) &info);
@@ -51,6 +52,7 @@ void SetThreadName(DWORD dwThreadID, LPCSTR szThreadName)
 	}
 	__except (EXCEPTION_CONTINUE_EXECUTION) {
 	}
+#endif
 }
 
 // SIZE 0x8

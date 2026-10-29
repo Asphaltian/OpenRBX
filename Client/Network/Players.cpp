@@ -6,7 +6,7 @@
 #include "network/Server.h"
 #include "reflection/property.h"
 #include "util/Http.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 #include "v8datamodel/GameSettings.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Teams.h"

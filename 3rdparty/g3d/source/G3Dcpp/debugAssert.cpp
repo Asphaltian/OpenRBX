@@ -10,6 +10,11 @@
  */
 
 #include "G3D/debugAssert.h"
+#ifdef G3D_LINUX
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/Xatom.h>
+#endif
 #include "G3D/platform.h"
 #ifdef G3D_WIN32
     #include <tchar.h>

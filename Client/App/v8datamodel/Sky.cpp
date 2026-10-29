@@ -1,7 +1,7 @@
 #include "v8datamodel/Sky.h"
 
 #include "util/ContentProvider.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include <G3D/GImage.h>
 #include <GLG3D/Sky.h>

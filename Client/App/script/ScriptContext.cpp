@@ -12,7 +12,7 @@
 #include "security/SecurityContext.h"
 #include "util/ContentProvider.h"
 #include "util/Name.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 #include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/Stats.h"
 #include "v8datamodel/Workspace.h"

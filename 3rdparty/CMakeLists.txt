@@ -1,5 +1,7 @@
 if (MSVC)
   add_compile_options(/W0)
+else()
+  add_compile_options(-w)
 endif()
 
 set(G3D "${CMAKE_CURRENT_SOURCE_DIR}/g3d/source")
@@ -15,7 +17,7 @@ foreach(name graphics3d glg3d)
     "${G3D}/include" "${G3D}/png" "${G3D}/zlib" "${G3D}/IJG"
     "${CMAKE_CURRENT_SOURCE_DIR}/SDL-1.2.6/include"
   )
-  target_compile_definitions(${name} PRIVATE WIN32 _LIB _MBCS _CRT_SECURE_NO_WARNINGS)
+  target_compile_definitions(${name} PRIVATE $<$<BOOL:${WIN32}>:WIN32> _LIB _MBCS _CRT_SECURE_NO_WARNINGS)
 endforeach()
 
 set(BOOST "${CMAKE_CURRENT_SOURCE_DIR}/boost_1_34_1")
@@ -59,6 +61,7 @@ foreach(name boost_signals boost_thread boost_date_time)
   target_include_directories(${name} PRIVATE "${BOOST}")
 endforeach()
 
+if (WIN32)
 set(MESA "${CMAKE_CURRENT_SOURCE_DIR}/mesa-6.5")
 
 set(OPENRBX_MESA_CORE_SOURCES
@@ -391,3 +394,4 @@ foreach(name graphics3d glg3d boost_signals boost_thread mesa_core opengl32 osme
   set_target_properties(${name} PROPERTIES
     C_CLANG_TIDY "" CXX_CLANG_TIDY "" CXX_INCLUDE_WHAT_YOU_USE "")
 endforeach()
+endif()

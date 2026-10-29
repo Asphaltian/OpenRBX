@@ -822,6 +822,20 @@ public:
 		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new SetImpl<Setter>(set));
 	}
 
+#if defined(__GNUC__) && !defined(_MSC_VER)
+	template <class Getter, class Setter>
+	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(Getter get, long set)
+	{
+		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new GetImpl<Getter>(get));
+	}
+
+	template <class Getter, class Setter>
+	static std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet> getset(long get, Setter set)
+	{
+		return std::auto_ptr<typename TypedPropertyDescriptor<T>::GetSet>(new SetImpl<Setter>(set));
+	}
+#endif
+
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10045640
 	// RBX::Reflection::PropDescriptor<RBX::Lighting,G3D::Color3>::PropDescriptor<RBX::Lighting,G3D::Color3><G3D::Color3 (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(G3D::Color3)>

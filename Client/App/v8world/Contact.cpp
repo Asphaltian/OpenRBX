@@ -1,5 +1,6 @@
 #include "v8world/Contact.h"
 
+#include "compat.h"
 #include "decomp.h"
 #include "util/Math.h"
 #include "util/StlExtra.h"
@@ -297,7 +298,7 @@ bool BlockBlockContact::getBestPlaneEdge(bool& planeContact, float overlapIgnore
 
 					if (p0p1inCrossAxis > 0) {
 						feature[0] = block(0)->getClosestEdge(c0.rotation, (NormalId) i, crossAxis) + 6;
-						feature[1] = block(1)->getClosestEdge(c1.rotation, (NormalId) j, -crossAxis) + 6;
+						feature[1] = block(1)->getClosestEdge(c1.rotation, (NormalId) j, RBX_TEMP_REF(-crossAxis)) + 6;
 					}
 					else {
 						Vector3 negCrossAxis = -crossAxis;

@@ -6,7 +6,7 @@
 #include "network/NetworkSettings.h"
 #include "network/Player.h"
 #include "network/Players.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include <BitStream.h>
 #include <G3D/format.h>

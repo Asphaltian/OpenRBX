@@ -10,6 +10,10 @@
 #include <boost/thread/detail/config.hpp>
 
 #include <boost/cstdint.hpp>
+#ifndef _MSC_VER
+#include <time.h>
+#undef TIME_UTC
+#endif
 
 namespace boost {
 

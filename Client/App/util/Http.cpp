@@ -2,7 +2,7 @@
 
 #include "compat.h"
 #include "util/ContentProvider.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include <G3D/format.h>
 #include <atlbase.h>
@@ -316,7 +316,7 @@ static void httpGetPost(
 		const size_t uploadSize = uploadData.size();
 
 		if (uploadSize > 10000) {
-			std::string contentSizeHeader = G3D::format("Roblox-Content-Size: %d\r\n", uploadSize);
+			std::string contentSizeHeader = G3D::format("Roblox-Content-Size: %d\r\n", (int) uploadSize);
 			if (!HttpAddRequestHeaders(
 					request, contentSizeHeader.c_str(), contentSizeHeader.size(), HTTP_ADDREQ_FLAG_ADD
 				)) {

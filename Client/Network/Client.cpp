@@ -5,7 +5,7 @@
 #include "network/Player.h"
 #include "network/Players.h"
 #include "util/RunStateOwner.h"
-#include "util/StandardOut.h"
+#include "util/standardout.h"
 
 #include <MessageIdentifiers.h>
 #include <PacketLogger.h>
