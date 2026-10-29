@@ -144,16 +144,16 @@ void SystemAddress::SetBinaryAddress(const char *str)
 #ifdef _COMPATIBILITY_1
 	binaryAddress=UNASSIGNED_SYSTEM_ADDRESS.binaryAddress;
 #else
-	char ip[22+1];
+	char IPPart[22+1];
 	char portPart[10+1];
 	int i=0;
 
 	while (str[i] && str[i]!=':' && i<22)
 	{
-		ip[i]=str[i];
+		IPPart[i]=str[i];
 		i++;
 	}
-	ip[i]=0;
+	IPPart[i]=0;
 	portPart[0]=0;
 
 	if (str[i] && str[i+1])
@@ -171,8 +171,8 @@ void SystemAddress::SetBinaryAddress(const char *str)
 
 	if (_strnicmp(str, "localhost", 9)==0)
 		binaryAddress=inet_addr("127.0.0.1");
-	else if (ip[0])
-		binaryAddress=inet_addr(ip);
+	else if (IPPart[0])
+		binaryAddress=inet_addr(IPPart);
 
 	if (portPart[0])
 		port=(unsigned short) atoi(portPart);

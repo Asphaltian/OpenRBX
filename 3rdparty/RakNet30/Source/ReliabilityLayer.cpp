@@ -377,8 +377,8 @@ bool ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer( const char *buffe
 	if (hasAcks)
 	{
 		MessageNumberType messageNumber;
-		RakNetTime remoteTime;
-		socketData.Read(remoteTime);
+		RakNetTime ourSystemTime;
+		socketData.Read(ourSystemTime);
 		if (incomingAcks.Deserialize(&socketData)==false)
 			return false;
 		for (i=0; i<incomingAcks.ranges.Size();i++)
@@ -410,7 +410,7 @@ bool ReliabilityLayer::HandleSocketReceiveFromConnectedPlayer( const char *buffe
 			}
 		}
 
-		ackPing = time - (RakNetTimeNS)remoteTime * (RakNetTimeNS)1000;
+		ackPing = time - (RakNetTimeNS)ourSystemTime * (RakNetTimeNS)1000;
 
 		RakNetTimeNS avePing;
 		if (ackPingCount!=0)
@@ -1192,7 +1192,7 @@ bool ReliabilityLayer::GenerateDatagram( RakNet::BitStream *output, int MTUSize,
 	unsigned i, messageHandlerIndex;
 	bool isReliable, onlySendUnreliable;
 	bool wroteData;
-	bool hasAcks;
+	bool wroteAcks;
 	unsigned messagesSent=0;
 
 	maxDataBitSize = MTUSize - UDP_HEADER_SIZE;
@@ -1209,12 +1209,12 @@ bool ReliabilityLayer::GenerateDatagram( RakNet::BitStream *output, int MTUSize,
 		output->Write(true);
 		output->Write(remoteSystemTime);
 		messagesSent++;
-		hasAcks=true;
+		wroteAcks=true;
 		statistics.acknowlegementBitsSent +=acknowlegements.Serialize(output, (MTUSize-UDP_HEADER_SIZE)*8-1, true);
 	}
 	else
 	{
-		hasAcks=false;
+		wroteAcks=false;
 		output->Write(false);
 	}
 	wroteData=false;
@@ -1387,10 +1387,10 @@ END_OF_GENERATE_FRAME:
 	if (wroteData==false)
 		output->Write(false);
 
-	if (hasAcks || wroteData)
+	if (wroteAcks || wroteData)
 		sendPacketCount++;
 
-	return hasAcks || wroteData;
+	return wroteAcks || wroteData;
 }
 
 //-------------------------------------------------------------------------------------------------------
