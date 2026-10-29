@@ -477,7 +477,7 @@ std::string ContentProvider::getFile(ContentId ticket)
 	return *content->filename;
 }
 
-// STUB: WEBSERVICE 0x100535f0
+// FUNCTION: WEBSERVICE 0x100535f0
 std::auto_ptr<std::istream> ContentProvider::getContent(ContentId ticket)
 {
 	CachedContent* content = loadContent(ticket, SyncHttpRequest);
@@ -489,9 +489,8 @@ std::auto_ptr<std::istream> ContentProvider::getContent(ContentId ticket)
 		return std::auto_ptr<std::istream>(new std::istringstream(*content->data));
 	}
 	else {
-		return std::auto_ptr<std::istream>(
-			new std::ifstream(content->filename->c_str(), std::ios_base::in | std::ios_base::binary)
-		);
+		std::istream* stream = new std::ifstream(content->filename->c_str(), std::ios_base::in | std::ios_base::binary);
+		return std::auto_ptr<std::istream>(stream);
 	}
 }
 

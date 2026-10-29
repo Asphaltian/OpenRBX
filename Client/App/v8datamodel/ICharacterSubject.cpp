@@ -190,7 +190,7 @@ inline void ICharacterSubject::setCursorCenterLocked(bool value)
 	}
 }
 
-// STUB: WEBSERVICE 0x10107c40
+// FUNCTION: WEBSERVICE 0x10107c40
 void ICharacterSubject::onHeartBeat(CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus)
 {
 	if (2.75f > (cameraGoal.translation - cameraFocus.translation).magnitude()) {
@@ -204,8 +204,8 @@ void ICharacterSubject::onHeartBeat(CoordinateFrame& cameraGoal, CoordinateFrame
 	if (cursorLocked) {
 		G3D::Vector3 look = cameraFocus.translation - cameraGoal.translation;
 		look.y = 0.0f;
-		G3D::Vector3 lookDirection = look.direction();
-		walkAngle = Math::angleToE0(G3D::Vector2(lookDirection.x, lookDirection.z));
+		const G3D::Vector3& lookDirection = look.direction();
+		walkAngle = Math::angleToE0(G3D::Vector2(lookDirection.z, lookDirection.x));
 	}
 
 	cameraSetWalkOrientation(walkAngle, !cursorLocked);
