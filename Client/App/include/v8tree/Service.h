@@ -34,6 +34,7 @@ struct ServiceAdded
 	const boost::shared_ptr<Instance> service; // 0x00
 
 	ServiceAdded(Instance* service) : service(shared_from(service)) {}
+	ServiceAdded(const ServiceAdded& other) : service(other.service) {}
 
 private:
 	ServiceAdded& operator=(const ServiceAdded& other);
@@ -47,6 +48,7 @@ struct ServiceRemoving
 	const boost::shared_ptr<Instance> service; // 0x00
 
 	ServiceRemoving(Instance* service) : service(shared_from(service)) {}
+	ServiceRemoving(const ServiceRemoving& other) : service(other.service) {}
 
 private:
 	ServiceRemoving& operator=(const ServiceRemoving& other);

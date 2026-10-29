@@ -33,6 +33,7 @@ struct ChildAdded
 	const boost::shared_ptr<Instance> child; // 0x00
 
 	ChildAdded(Instance* child);
+	ChildAdded(const ChildAdded& other) : child(other.child) {}
 
 private:
 	ChildAdded& operator=(const ChildAdded& other);
@@ -44,6 +45,7 @@ struct ChildRemoved
 	const boost::shared_ptr<Instance> child; // 0x00
 
 	ChildRemoved(Instance* child);
+	ChildRemoved(const ChildRemoved& other) : child(other.child) {}
 
 private:
 	ChildRemoved& operator=(const ChildRemoved& other);
