@@ -14,6 +14,8 @@ using G3D::Color3;
 class __declspec(novtable) Controller : public G3D::ReferenceCountedObject
 {
 public:
+	Controller() {}
+
 	enum ControllerType
 	{
 		NO_CONTROLLER = 0,

@@ -15,6 +15,8 @@ class Primitive;
 class __declspec(novtable) ICameraSubject : public virtual ILocation
 {
 public:
+	ICameraSubject() {}
+
 	virtual ~ICameraSubject() {} // vtable+0x00
 
 	virtual void onCameraNear(float distance) {} // vtable+0x04

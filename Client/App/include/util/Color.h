@@ -18,6 +18,8 @@ public:
 	}
 
 private:
+	Color(float r, float g, float b);
+
 	G3D::Color3 rgb; // 0x00
 };
 

@@ -9,6 +9,8 @@ namespace RBX {
 class __declspec(novtable) IControllable
 {
 public:
+	IControllable() {}
+
 	virtual ~IControllable() {}              // vtable+0x00
 	virtual bool isControllable() const = 0; // vtable+0x04
 };

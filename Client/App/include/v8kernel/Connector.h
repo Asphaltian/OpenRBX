@@ -23,6 +23,8 @@ using G3D::Vector3;
 class Connector : public KernelIndex
 {
 public:
+	Connector() {}
+
 	// FUNCTION: WEBSERVICE 0x100a0700
 	virtual ~Connector() // vtable+0x00
 	{

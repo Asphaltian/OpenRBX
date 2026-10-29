@@ -13,6 +13,8 @@ namespace RBX {
 class KernelData
 {
 public:
+	KernelData() {}
+
 	IndexArray<Body, &Body::getKernelIndex> bodies;                      // 0x00
 	IndexArray<Point, &Point::getKernelIndex> points;                    // 0x0c
 	IndexArray<Connector, &Connector::getKernelIndex> connectors;        // 0x18

@@ -18,6 +18,8 @@ using G3D::Vector3;
 class Geometry
 {
 public:
+	Geometry() {}
+
 	enum GeometryType
 	{
 		GEOMETRY_BALL = 1,

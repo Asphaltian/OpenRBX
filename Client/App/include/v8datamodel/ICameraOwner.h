@@ -20,6 +20,9 @@ class Primitive;
 // SIZE 0x14
 class __declspec(novtable) ICameraOwner
 {
+public:
+	ICameraOwner() {}
+
 private:
 	std::vector<boost::weak_ptr<PartInstance> > cameraIgnoreParts; // 0x04
 

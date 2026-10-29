@@ -13,6 +13,8 @@ namespace RBX {
 class Layout
 {
 public:
+	Layout() {}
+
 	enum Style
 	{
 		HORIZONTAL = 0,

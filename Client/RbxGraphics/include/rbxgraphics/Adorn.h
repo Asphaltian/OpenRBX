@@ -22,6 +22,8 @@ namespace RBX {
 class __declspec(novtable) Adorn
 {
 public:
+	Adorn() {}
+
 	enum XAlign
 	{
 		XALIGN_RIGHT = 0,

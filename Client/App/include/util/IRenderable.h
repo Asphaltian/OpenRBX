@@ -50,6 +50,9 @@ DECOMP_SIZE_ASSERT(IRenderable, 0x10)
 // SIZE 0x18
 class IRenderableBucket
 {
+public:
+	IRenderableBucket() {}
+
 private:
 	IndexArray<IRenderable, &IRenderable::indexFunc2d> renderable2ds; // 0x00
 	IndexArray<IRenderable, &IRenderable::indexFunc3d> renderable3ds; // 0x0c
