@@ -220,7 +220,7 @@ void GLCaps::loadExtensions(Log* debugLog) {
     alwaysAssertM(! _initialized, "Internal error.");
 
     // Require an OpenGL context to continue
-    alwaysAssertM(glGetCurrentContext(), "Unable to load OpenGL extensions without a current context.");
+
 
     // Initialize statically cached strings
 	vendor();
@@ -416,10 +416,6 @@ void GLCaps::loadExtensions(Log* debugLog) {
     LOAD_EXTENSION(glGetQueryObjectivARB);
     LOAD_EXTENSION(glGetQueryObjectuivARB);
     LOAD_EXTENSION(glIsQueryARB);
-
-    // Depth bounds
-    LOAD_EXTENSION(glDepthBoundsEXT);
-
     #undef LOAD_EXTENSION
 
     std::istringstream extensions;
@@ -631,7 +627,8 @@ const std::string& GLCaps::driverVersion() {
 
 const std::string& GLCaps::vendor() {
     alwaysAssertM(_loadedExtensions, "Cannot call GLCaps::vendor before GLCaps::init().");
-    static std::string _driverVendor = (char*)glGetString(GL_VENDOR);
+    const char* str = (const char*)glGetString(GL_VENDOR);
+    static std::string _driverVendor = (str != NULL) ? str : "";
 	return _driverVendor;
 }
 

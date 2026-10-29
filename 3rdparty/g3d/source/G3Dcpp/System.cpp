@@ -409,8 +409,6 @@ void System::init() {
     }
 
     #ifdef G3D_WIN32
-        bool success = RegistryUtil::read32bitNumber("HKEY_LOCAL_MACHINE\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0\\~MHz", _CPUSpeed);
-
         SYSTEM_INFO systemInfo;
         GetSystemInfo(&systemInfo);
         char* arch;
@@ -436,15 +434,14 @@ void System::init() {
         }
 
         uint32 maxAddr = (uint32)systemInfo.lpMaximumApplicationAddress;
-        sprintf(_cpuArchCstr, "%d x %d-bit %s processor @ %4.1 GHz",
+        sprintf(_cpuArchCstr, "%d x %d-bit %s processor",
                     systemInfo.dwNumberOfProcessors,
                     (int)(::log((double)maxAddr) / ::log(2.0) + 2.0),
-                    arch,
-                    _CPUSpeed / (1024.0 * 1024));
+                    arch);
 
         OSVERSIONINFO osVersionInfo;
         osVersionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-        success = GetVersionEx(&osVersionInfo) != 0;
+        bool success = GetVersionEx(&osVersionInfo) != 0;
 
         if (success) {
             sprintf(_operatingSystemCstr, "Windows %d.%d build %d Platform %d %s",
