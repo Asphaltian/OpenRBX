@@ -7482,3 +7482,7 @@ address,type,symbol
 0x10231c94,global,??_7DataModel@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 0x10231c9c,global,??_7DataModel@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 0x10231cac,global,??_7DataModel@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+0x102387e4,global,??_7lua_exception@@6B@
+0x102aaba4,global,__TI2?AVlua_exception@@
+0x102aabb4,global,__CTA2?AVlua_exception@@
+0x102aabc0,global,__CT??_R0?AVlua_exception@@@8??0lua_exception@@QAE@ABV0@@Z24

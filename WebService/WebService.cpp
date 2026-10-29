@@ -15,7 +15,6 @@ class DataModel;
 #include "ThumbnailGenerator.h"
 #include "VersionInfo.h"
 #include "ViewBase.h"
-#include "WebServiceMaps.h"
 #include "decomp.h"
 #include "network/API.h"
 #include "reflection/type.h"
@@ -166,207 +165,90 @@ static void initRoblox()
 	}
 }
 
+extern "C" const __declspec(selectany) GUID
+	__LIBID_ = {0x7424937a, 0xe183, 0x3486, {0xa9, 0x8f, 0x2c, 0x3b, 0x62, 0xad, 0x01, 0xf3}};
+struct __declspec(uuid("7424937a-e183-3486-a98f-2c3b62ad01f3")) RobloxWebService;
+
 // SIZE 0x2c
 class CDllMainOverride : public ATL::CAtlDllModuleT<CDllMainOverride>
 {
+public:
+	DECLARE_LIBID(__uuidof(RobloxWebService))
+
+	BOOL WINAPI DllMain(DWORD dwReason, LPVOID lpReserved) { return __super::DllMain(dwReason, lpReserved); }
 };
+
+extern CDllMainOverride _AtlModule;
+
+#ifndef DLLMAIN_HINSTANCE
+#ifndef _WIN32_WCE
+#define DLLMAIN_HINSTANCE HINSTANCE
+#else
+#define DLLMAIN_HINSTANCE HANDLE
+#endif
+#endif
+
+extern "C" STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, void** ppv);
+extern "C" STDAPI DllRegisterServer(void);
+extern "C" STDAPI DllUnregisterServer(void);
+extern "C" STDAPI DllCanUnloadNow(void);
+BOOL WINAPI DllMain(DLLMAIN_HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved);
 
 CDllMainOverride _AtlModule;
 
-namespace Roblox {
-
-// SIZE 0x180
-class CWebService : public IWebService, public ATL::CSoapHandler<CWebService>
-{
-public:
-	// SIZE 0x10
-	struct Job
-	{
-		boost::shared_ptr<RBX::DataModel> dataModel; // 0x00
-		double expiration;                           // 0x08
-	};
-
-	virtual ~CWebService() {}
-
-	HRESULT __stdcall HelloWorld(wchar_t** result);
-	HRESULT __stdcall GetAllJobs(Strings* result);
-	HRESULT __stdcall TouchJob(wchar_t* jobID, double expiration);
-	HRESULT __stdcall OpenJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result);
-	HRESULT __stdcall CloseJob(wchar_t* jobID);
-	HRESULT __stdcall CloseTimedoutJobs(int* result);
-	HRESULT __stdcall CloseOrphanedJobs(Strings jobs, int* result);
-	HRESULT __stdcall CloseAllJobs();
-	HRESULT __stdcall GetTimeout(wchar_t* jobID, double* timeout);
-	HRESULT __stdcall Execute(wchar_t* jobID, ScriptExecution script, LuaArguments* result);
-	HRESULT __stdcall BatchJob(wchar_t* jobID, ScriptExecution script, double expiration, LuaArguments* result);
-	HRESULT __stdcall GetVersion(wchar_t** result);
-	HRESULT __stdcall GetStatus(Status* result);
-	HRESULT __stdcall Update(wchar_t* url);
-	HRESULT __stdcall GetStandardOutMessages(int maxCount, StandardOutMessages* result);
-
-	// FUNCTION: WEBSERVICE 0x1000dcc0
-	const _soapmap** GetFunctionMap() { return ___Roblox_CWebService_funcs; }
-
-	// FUNCTION: WEBSERVICE 0x1000dcd0
-	const _soapmap** GetHeaderMap() { return ___Roblox_CWebService_headers; }
-
-	// FUNCTION: WEBSERVICE 0x1000dce0
-	void* GetHeaderValue() { return this; }
-
-	// FUNCTION: WEBSERVICE 0x1000dcf0
-	HRESULT CallFunction(void* pvParam, const wchar_t* wszLocalName, int cchLocalName, size_t nItem)
-	{
-		switch (nItem) {
-		case 0:
-			return HelloWorld((wchar_t**) pvParam);
-		case 1:
-			return GetVersion((wchar_t**) pvParam);
-		case 2:
-			return GetStatus((Status*) pvParam);
-		case 3:
-			return Update(*(wchar_t**) pvParam);
-		case 4: {
-			OpenJobParams* p = (OpenJobParams*) pvParam;
-			return OpenJob(p->jobID, p->script, p->expiration, &p->result);
-		}
-		case 5: {
-			TouchJobParams* p = (TouchJobParams*) pvParam;
-			return TouchJob(p->jobID, p->expiration);
-		}
-		case 6: {
-			ExecuteParams* p = (ExecuteParams*) pvParam;
-			return Execute(p->jobID, p->script, &p->result);
-		}
-		case 7:
-			return CloseJob(*(wchar_t**) pvParam);
-		case 8: {
-			OpenJobParams* p = (OpenJobParams*) pvParam;
-			return BatchJob(p->jobID, p->script, p->expiration, &p->result);
-		}
-		case 9: {
-			GetTimeoutParams* p = (GetTimeoutParams*) pvParam;
-			return GetTimeout(p->jobID, &p->timeout);
-		}
-		case 10: {
-			CloseOrphanedJobsParams* p = (CloseOrphanedJobsParams*) pvParam;
-			return CloseOrphanedJobs(p->jobs, &p->result);
-		}
-		case 11:
-			return CloseAllJobs();
-		case 12:
-			return CloseTimedoutJobs((int*) pvParam);
-		case 13:
-			return GetAllJobs((Strings*) pvParam);
-		case 14: {
-			GetStandardOutMessagesParams* p = (GetStandardOutMessagesParams*) pvParam;
-			return GetStandardOutMessages(p->lastId, &p->result);
-		}
-		}
-
-		return E_FAIL;
-	}
-
-	// FUNCTION: WEBSERVICE 0x1000df50
-	const wchar_t* GetNamespaceUri() { return L"urn:Roblox"; }
-
-	// FUNCTION: WEBSERVICE 0x1000df60
-	const char* GetNamespaceUriA() { return "urn:Roblox"; }
-
-	// FUNCTION: WEBSERVICE 0x1000df70
-	const char* GetServiceName() { return "Service"; }
-
-protected:
-	// FUNCTION: WEBSERVICE 0x1000df80
-	virtual HRESULT GenerateAppError(ATL::IWriteStream* pStream, HRESULT hr)
-	{
-		if (errorMessage.GetLength() > 0) {
-			return SoapFault(SOAP_E_SERVER, errorMessage, -1);
-		}
-
-		return ATL::CSoapHandler<CWebService>::GenerateAppError(pStream, hr);
-	}
-
-private:
-	friend BOOL WINAPI ::TerminateExtension(DWORD flags);
-
-	HRESULT ReportException(const std::exception& e);
-
-	std::map<std::string, Job>::iterator getJob(wchar_t* jobID);
-	void touch(Job& job, double timeout) { job.expiration = G3D::System::getLocalTime() + timeout; }
-	double secondsToTimeout(const Job& job) { return job.expiration - G3D::System::getLocalTime(); }
-
-	template <class T>
-	T* allocate(T*, int count)
-	{
-		if (count == 0) {
-			return NULL;
-		}
-
-		T* items = (T*) GetMemMgr()->Allocate(count * sizeof(T));
-		memset(items, 0, count * sizeof(T));
-		return items;
-	}
-
-	template <class T>
-	void convertToLua(const RBX::Reflection::Value& source, T& dest);
-
-	static std::map<std::string, Job> jobs;
-	static boost::mutex sync;
-
-	CStringW errorMessage; // 0x17c
-};
-
-DECOMP_SIZE_ASSERT(CWebService, 0x180)
-
-} // namespace Roblox
-
-DECLARE_REQUEST_HANDLER("Default", CWebService, Roblox::CWebService)
-
-namespace Roblox {
-
-std::map<std::string, CWebService::Job> CWebService::jobs;
-boost::mutex CWebService::sync;
-
-// FUNCTION: WEBSERVICE 0x1000dfb0
-HRESULT __stdcall CWebService::HelloWorld(wchar_t** bstrOutput)
-{
-	ATL::CComBSTR answer(L"Hello World!");
-	*bstrOutput = answer.Detach();
-
-	return S_OK;
-}
-
-} // namespace Roblox
-
 // FUNCTION: WEBSERVICE 0x1000e070
-STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
+extern "C" STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, void** ppv)
 {
 	return _AtlModule.DllGetClassObject(rclsid, riid, ppv);
 }
 
 // FUNCTION: WEBSERVICE 0x1000e090
-STDAPI DllRegisterServer()
+extern "C" STDAPI DllRegisterServer(void)
 {
-	return _AtlModule.DllRegisterServer(FALSE);
+	return _AtlModule.DllRegisterServer();
 }
 
 // FUNCTION: WEBSERVICE 0x1000e0d0
-STDAPI DllUnregisterServer()
+extern "C" STDAPI DllUnregisterServer(void)
 {
-	return _AtlModule.DllUnregisterServer(FALSE);
+	return _AtlModule.DllUnregisterServer();
 }
 
 // FUNCTION: WEBSERVICE 0x1000e110
-STDAPI DllCanUnloadNow()
+extern "C" STDAPI DllCanUnloadNow(void)
 {
 	return _AtlModule.DllCanUnloadNow();
 }
 
+#pragma managed(push, off)
 // FUNCTION: WEBSERVICE 0x1000e130
-extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
+BOOL WINAPI DllMain(DLLMAIN_HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 {
+	hInstance;
 	return _AtlModule.DllMain(dwReason, lpReserved);
 }
+#pragma managed(pop)
+
+#if defined(_M_IX86)
+#pragma comment(linker, "/EXPORT:DllMain=_DllMain@12,PRIVATE")
+#pragma comment(linker, "/EXPORT:DllRegisterServer=_DllRegisterServer@0,PRIVATE")
+#pragma comment(linker, "/EXPORT:DllUnregisterServer=_DllUnregisterServer@0,PRIVATE")
+#pragma comment(linker, "/EXPORT:DllGetClassObject=_DllGetClassObject@12,PRIVATE")
+#pragma comment(linker, "/EXPORT:DllCanUnloadNow=_DllCanUnloadNow@0,PRIVATE")
+#elif defined(_M_IA64) || defined(_M_AMD64)
+#pragma comment(linker, "/EXPORT:DllMain,PRIVATE")
+#pragma comment(linker, "/EXPORT:DllRegisterServer,PRIVATE")
+#pragma comment(linker, "/EXPORT:DllUnregisterServer,PRIVATE")
+#pragma comment(linker, "/EXPORT:DllGetClassObject,PRIVATE")
+#pragma comment(linker, "/EXPORT:DllCanUnloadNow,PRIVATE")
+#endif
+
+namespace Roblox {
+
+CWebService::Jobs CWebService::jobs;
+boost::mutex CWebService::sync;
+
+} // namespace Roblox
 
 // SIZE 0x328
 class CRbxIsapiExtension : public ATL::CIsapiExtension<>
@@ -399,7 +281,7 @@ extern "C" BOOL WINAPI GetExtensionVersion(HSE_VERSION_INFO* pVer)
 // FUNCTION: WEBSERVICE 0x1000e380
 extern "C" BOOL WINAPI TerminateExtension(DWORD dwFlags)
 {
-	if (dwFlags & HSE_TERM_ADVISORY_UNLOAD && Roblox::CWebService::jobs.size() > 0) {
+	if (dwFlags & HSE_TERM_ADVISORY_UNLOAD && Roblox::CWebService::hasOpenEnvironments()) {
 		return FALSE;
 	}
 
@@ -426,8 +308,8 @@ HRESULT __stdcall CWebService::GetAllJobs(Strings* result)
 	result->items = allocate(result->items, result->count);
 
 	int i = 0;
-	std::map<std::string, Job>::iterator iter = jobs.begin();
-	std::map<std::string, Job>::iterator end = jobs.end();
+	Jobs::iterator iter = jobs.begin();
+	Jobs::iterator end = jobs.end();
 	while (iter != end) {
 		ATL::CComBSTR bstr(ATL::CStringA(iter->first.c_str()));
 		result->items[i] = bstr.Detach();
@@ -481,7 +363,7 @@ HRESULT __stdcall CWebService::CloseJob(wchar_t* jobID)
 		boost::shared_ptr<RBX::DataModel> dataModel;
 		{
 			boost::mutex::scoped_lock lock(sync);
-			std::map<std::string, Job>::iterator iter = jobs.find(ATL::CStringA(jobID).GetString());
+			Jobs::iterator iter = jobs.find(ATL::CStringA(jobID).GetString());
 			if (iter != jobs.end()) {
 				dataModel = iter->second.dataModel;
 				jobs.erase(iter);
@@ -511,8 +393,8 @@ HRESULT __stdcall CWebService::CloseTimedoutJobs(int* result)
 			boost::mutex::scoped_lock lock(sync);
 
 			std::map<std::string, Job> keep;
-			std::map<std::string, Job>::iterator end = jobs.end();
-			for (std::map<std::string, Job>::iterator iter = jobs.begin(); iter != end; ++iter) {
+			Jobs::iterator end = jobs.end();
+			for (Jobs::iterator iter = jobs.begin(); iter != end; ++iter) {
 				if (secondsToTimeout(iter->second) >= 0) {
 					keep.insert(*iter);
 				}
@@ -549,8 +431,8 @@ HRESULT __stdcall CWebService::CloseOrphanedJobs(Strings activeJobs, int* result
 		{
 			std::map<std::string, Job> keep;
 			boost::mutex::scoped_lock lock(sync);
-			std::map<std::string, Job>::iterator end = jobs.end();
-			for (std::map<std::string, Job>::iterator iter = jobs.begin(); iter != end; ++iter) {
+			Jobs::iterator end = jobs.end();
+			for (Jobs::iterator iter = jobs.begin(); iter != end; ++iter) {
 				bool found = false;
 				for (int i = 0; i < activeJobs.count; ++i) {
 					if (iter->first == ATL::CStringA(activeJobs.items[i]).GetString()) {
@@ -588,8 +470,8 @@ HRESULT __stdcall CWebService::CloseAllJobs()
 	try {
 		boost::mutex::scoped_lock lock(sync);
 
-		std::map<std::string, Job>::iterator end = jobs.end();
-		for (std::map<std::string, Job>::iterator iter = jobs.begin(); iter != end; ++iter) {
+		Jobs::iterator end = jobs.end();
+		for (Jobs::iterator iter = jobs.begin(); iter != end; ++iter) {
 			RBX::DataModel::closeDataModel(iter->second.dataModel, true);
 			RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Closed Job %s", iter->first.c_str());
 		}
@@ -618,9 +500,9 @@ HRESULT __stdcall CWebService::GetTimeout(wchar_t* jobID, double* timeout)
 }
 
 // FUNCTION: WEBSERVICE 0x1000f3c0
-std::map<std::string, CWebService::Job>::iterator CWebService::getJob(wchar_t* jobID)
+CWebService::Jobs::iterator CWebService::getJob(wchar_t* jobID)
 {
-	std::map<std::string, Job>::iterator job = jobs.find(ATL::CStringA(jobID).GetString());
+	Jobs::iterator job = jobs.find(ATL::CStringA(jobID).GetString());
 
 	if (job == jobs.end()) {
 		throw std::runtime_error(G3D::format("Job %s not found", ATL::CStringA(jobID).GetString()));
@@ -811,7 +693,7 @@ HRESULT __stdcall CWebService::Execute(wchar_t* jobID, ScriptExecution script, L
 		boost::shared_ptr<RBX::DataModel> dataModel;
 		{
 			boost::mutex::scoped_lock lock(sync);
-			std::map<std::string, Job>::iterator iter = getJob(jobID);
+			Jobs::iterator iter = getJob(jobID);
 			dataModel = iter->second.dataModel;
 		}
 

@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <exception>
+
 #define ldo_c
 #define LUA_CORE
 
@@ -91,10 +93,53 @@ static void resetstack (lua_State *L, int status) {
 }
 
 
+class lua_exception : public std::exception
+{
+	lua_State* const L;
+	lua_longjmp* const errorJmp;
+	mutable bool committed;
+
+	lua_exception(lua_State* L, lua_longjmp* errorJmp)
+		: L(L)
+		, errorJmp(errorJmp)
+		, committed(false)
+	{
+	}
+
+	void commit() const { committed = true; }
+
+	friend void luaD_throw(lua_State* L, int errcode);
+	friend int luaD_rawrunprotected(lua_State* L, Pfunc f, void* ud);
+
+public:
+	// FUNCTION: WEBSERVICE 0x100b6af0
+	lua_exception(const lua_exception& other)
+		: L(other.L), errorJmp(other.errorJmp), committed(other.committed)
+	{ other.committed = true; }
+
+	// FUNCTION: WEBSERVICE 0x100b6270
+	virtual const char* what() const
+	{ return lua_tostring(L, -1); }
+
+	// FUNCTION: WEBSERVICE 0x100b6290
+	virtual ~lua_exception()
+	{
+		if (!committed)
+		{
+			errorJmp->status = 0;
+			lua_pop(L, 1);
+		}
+	}
+
+	// SYNTHETIC: WEBSERVICE 0x100b6300
+	// lua_exception::`scalar deleting destructor'
+};
+
+// FUNCTION: WEBSERVICE 0x100b6a70
 void luaD_throw (lua_State *L, int errcode) {
   if (L->errorJmp) {
     L->errorJmp->status = errcode;
-    LUAI_THROW(L, L->errorJmp);
+    throw lua_exception(L, L->errorJmp);
   }
   else {
     L->status = cast_byte(errcode);
@@ -108,14 +153,39 @@ void luaD_throw (lua_State *L, int errcode) {
 }
 
 
+// FUNCTION: WEBSERVICE 0x100b6320
 int luaD_rawrunprotected (lua_State *L, Pfunc f, void *ud) {
   struct lua_longjmp lj;
+
   lj.status = 0;
   lj.previous = L->errorJmp;  /* chain new error handler */
   L->errorJmp = &lj;
-  LUAI_TRY(L, &lj,
+
+  try
+  {
     (*f)(L, ud);
-  );
+  }
+  catch (lua_exception& e)
+  {
+    e.commit();
+    if (lj.status == 0)
+      lj.status = -1;
+  }
+  catch (std::exception& e)
+  {
+    try
+    {
+      lua_pushstring(L, e.what());
+      lua_error(L);
+    }
+    catch (lua_exception& e)
+    {
+      e.commit();
+      if (lj.status == 0)
+        lj.status = -1;
+    }
+  }
+
   L->errorJmp = lj.previous;  /* restore old error handler */
   return lj.status;
 }

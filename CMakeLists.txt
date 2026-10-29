@@ -467,7 +467,6 @@ add_engine_library(renderlib
 set(OPENRBX_WEBSERVICE_SOURCES
   WebService/ThumbnailGenerator.cpp
   WebService/WebService.cpp
-  WebService/WebServiceMaps.cpp
   Client/win/ErrorUploader.cpp
   Client/win/LogManager.cpp
   Client/win/VersionInfo.cpp
@@ -524,7 +523,7 @@ target_link_libraries(webservice PRIVATE
 )
 
 if (MSVC)
-  target_sources(webservice PRIVATE WebService/WebService.def)
+  target_sources(webservice PRIVATE WebService/WebService.def WebService/WebService.rc)
   target_link_options(webservice PRIVATE "-MAP:$<TARGET_FILE_DIR:webservice>/$<TARGET_FILE_BASE_NAME:webservice>.map")
   foreach(lib zlib.lib G3D.lib G3D-debug.lib GLG3D.lib GLG3D-debug.lib sdl.lib sdlmain.lib glut32.lib)
     target_link_options(webservice PRIVATE "/NODEFAULTLIB:${lib}")

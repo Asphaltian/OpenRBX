@@ -102,10 +102,6 @@ address,type,name
 0x100aae70,library,luaL_checkoption
 0x100aaf20,library,luaL_register
 0x100b61f0,library,luaD_seterrorobj
-0x100b6270,library,lua_exception::what
-0x100b6290,library,lua_exception::~lua_exception
-0x100b6300,library,lua_exception::`scalar deleting destructor'
-0x100b6320,library,luaD_rawrunprotected
 0x100b63f0,library,correctstack
 0x100b6480,library,luaD_reallocstack
 0x100b64e0,library,luaD_reallocCI
@@ -119,8 +115,6 @@ address,type,name
 0x100b68e0,library,lua_yield
 0x100b6920,library,f_parser
 0x100b6a00,library,resetstack
-0x100b6a70,library,luaD_throw
-0x100b6af0,library,lua_exception::lua_exception
 0x100b6b20,library,growCI
 0x100b6b60,library,luaD_precall
 0x100b6d20,library,luaD_call
