@@ -1,5 +1,6 @@
 #include "BrickMesh.h"
 
+#include "QuadVolume.h"
 #include "ViewBase.h"
 #include "util/Math.h"
 #include "v8datamodel/BrickColor.h"
@@ -86,9 +87,8 @@ void meshFace(
 	RBX::Render::Mesh::LevelRef& level
 )
 {
-	G3D::Vector3 faceCorner = RBX::uvwToObject<N>(halfSize);
-	faceCorner = G3D::Vector3(fabs(faceCorner.x), fabs(faceCorner.y), fabs(faceCorner.z)) -
-				 G3D::Vector3(inset, inset, RBX::View::BrickMesh::bevel);
+	G3D::Vector3 faceCorner =
+		G3D::abs(RBX::uvwToObject<N>(halfSize)) - G3D::Vector3(inset, inset, RBX::View::BrickMesh::bevel);
 
 	G3D::Vector2 studsPerTile(0.0f, 0.0f);
 	G3D::Vector2 textureOffset(0.0f, 0.0f);
