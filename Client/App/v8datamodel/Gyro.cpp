@@ -269,11 +269,9 @@ void BodyPosition::computeForce(float dt, bool throttling)
 {
 	Body* body = part->getPrimitive()->getBody();
 
-	Vector3 positionForce = (position - body->getPV().position.translation) * kP;
+	Vector3 pAccel = (position - body->getPV().position.translation) * kP;
 
-	Vector3 goalForce = positionForce + body->getPV().velocity.linear * -kD;
-
-	lastForce = goalForce * body->getRoot()->getBranchMass();
+	lastForce = body->getRoot()->getBranchMass() * (pAccel + body->getPV().velocity.linear * -kD);
 
 	lastForce = lastForce.clamp(-maxForce, maxForce);
 
