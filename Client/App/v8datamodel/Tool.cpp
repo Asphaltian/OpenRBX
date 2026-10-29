@@ -16,6 +16,7 @@
 #include "v8datamodel/Workspace.h"
 #include "v8xml/XmlElement.h"
 
+#include <G3D/debugAssert.h>
 #include <boost/bind.hpp>
 
 namespace RBX {
@@ -485,6 +486,7 @@ void Tool::setDesiredState(ToolState desiredState, const ServiceProvider* servic
 		if (desiredState > backendToolState) {
 			switch (backendToolState) {
 			case ACTIVATED:
+				debugAssert(false);
 				break;
 			case EQUIPPED:
 				upTo_Activated();
@@ -526,6 +528,7 @@ void Tool::setDesiredState(ToolState desiredState, const ServiceProvider* servic
 				downFrom_HasHandle();
 				break;
 			case NOTHING:
+				debugAssert(false);
 				break;
 			}
 
