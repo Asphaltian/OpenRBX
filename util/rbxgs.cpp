@@ -1,3 +1,4 @@
+#include "ThumbnailGenerator.h"
 #include "ViewBase.h"
 #include "network/API.h"
 #include "reflection/type.h"
@@ -410,6 +411,7 @@ void initRoblox()
 	}
 
 	static RBX::FactoryRegistrator registerFactoryObjects;
+	ThumbnailGenerator::classDescriptor();
 
 	RBX::Soundscape::SoundService::soundDisabled = true;
 	RBX::ViewBase::getShadowsEnabled() = false;
@@ -503,3 +505,13 @@ int main(int argc, char** argv)
 	service.closeAllJobs();
 	return 0;
 }
+
+template void RBX::Name::callDoDeclare<RBX::Soundscape::sSoundService>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::Soundscape::sSoundService>();
+template void RBX::Name::callDoDeclare<RBX::Soundscape::sSoundChannel>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::Soundscape::sSoundChannel>();
+
+template const RBX::FactoryProduct<RBX::Soundscape::SoundService, RBX::Instance, RBX::Soundscape::sSoundService>::
+	Creator RBX::FactoryProduct<RBX::Soundscape::SoundService, RBX::Instance, RBX::Soundscape::sSoundService>::creator;
+template const RBX::FactoryProduct<RBX::Soundscape::SoundChannel, RBX::Instance, RBX::Soundscape::sSoundChannel>::
+	Creator RBX::FactoryProduct<RBX::Soundscape::SoundChannel, RBX::Instance, RBX::Soundscape::sSoundChannel>::creator;

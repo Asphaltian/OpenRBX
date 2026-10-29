@@ -181,7 +181,7 @@ RakNet::BitStream& operator>> <double>(RakNet::BitStream& stream, double& value)
 // FUNCTION: WEBSERVICE 0x101ab720
 RakNet::BitStream& operator<<(RakNet::BitStream& stream, const std::string& value)
 {
-	stream.Write(value.size());
+	stream.Write(static_cast<unsigned int>(value.size()));
 
 	stringCompressor->EncodeString(value.c_str(), value.size() + 1, &stream);
 	return stream;

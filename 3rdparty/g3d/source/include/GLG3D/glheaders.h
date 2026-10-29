@@ -342,4 +342,10 @@ extern PFNWGLDESTROYPBUFFEREXTPROC wglDestroyPbufferEXT;
 
 extern PFNGLDEPTHBOUNDSEXTPROC glDepthBoundsEXT;
 
+#ifdef G3D_LINUX
+#undef None
+#undef Success
+#undef Status
+#endif
+
 #endif

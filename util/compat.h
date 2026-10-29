@@ -22,6 +22,16 @@ T& temporaryRef(const T& value)
 #define RBX_INLINE inline
 #endif
 
+#ifdef COMPAT_MODE
+inline int normalizedOrder(int order)
+{
+	return order < 0 ? -1 : order > 0 ? 1 : 0;
+}
+#define RBX_ORDER(x) normalizedOrder(x)
+#else
+#define RBX_ORDER(x) (x)
+#endif
+
 #ifdef _MSC_VER
 #define RBX_NONVOID_CALL(R) void
 #define RBX_VOID_CALL(name)                                                                                            \

@@ -1,5 +1,6 @@
 #include "util/Guid.h"
 
+#include "compat.h"
 #include "decomp.h"
 #include "util/Name.h"
 
@@ -55,7 +56,7 @@ bool Guid::Data::operator<(const Data& other) const
 	int order = 0;
 
 	if (thisScope != otherScope) {
-		order = thisScope->name.compare(otherScope->name);
+		order = RBX_ORDER(thisScope->name.compare(otherScope->name));
 
 		if (order != -1 && order != 0) {
 			return false;
@@ -86,7 +87,7 @@ int Guid::compare(const Guid* a, const Guid* b)
 		order = 0;
 	}
 	else {
-		order = scopeA->name.compare(scopeB->name);
+		order = RBX_ORDER(scopeA->name.compare(scopeB->name));
 	}
 
 	if (order != -1) {

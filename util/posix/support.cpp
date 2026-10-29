@@ -27,28 +27,32 @@ uint64 DXCaps::videoMemorySize()
 extern "C"
 {
 
-	void glActiveTexture(GLenum texture);
-	void glClientActiveTexture(GLenum texture);
-	void glMultiTexCoord3fv(GLenum target, const GLfloat* v);
-	void glMultiTexCoord4fv(GLenum target, const GLfloat* v);
+	typedef void (*GlProc)();
 
-	void glActiveTextureARB(GLenum texture)
+	GlProc _glapi_get_proc_address(const char* name);
+
+	GlProc glXGetProcAddressARB(const GLubyte* name)
 	{
-		glActiveTexture(texture);
+		return _glapi_get_proc_address(reinterpret_cast<const char*>(name));
 	}
 
-	void glClientActiveTextureARB(GLenum texture)
+	void* glXGetCurrentContext()
 	{
-		glClientActiveTexture(texture);
+		return NULL;
 	}
 
-	void glMultiTexCoord3fvARB(GLenum target, const GLfloat* v)
+	void* glXGetCurrentDisplay()
 	{
-		glMultiTexCoord3fv(target, v);
+		return NULL;
 	}
 
-	void glMultiTexCoord4fvARB(GLenum target, const GLfloat* v)
+	unsigned long glXGetCurrentDrawable()
 	{
-		glMultiTexCoord4fv(target, v);
+		return 0;
+	}
+
+	int glXMakeCurrent(void*, unsigned long, void*)
+	{
+		return 0;
 	}
 }

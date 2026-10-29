@@ -142,7 +142,7 @@ typedef union { GLfloat f; GLint i; } fi_type;
 /***
  *** USE_IEEE: Determine if we're using IEEE floating point
  ***/
-#if defined(__i386__) || defined(__386__) || defined(__sparc__) || \
+#if !defined(MESA_NO_IEEE) && (defined(__i386__) || defined(__386__) || defined(__sparc__) || \
     defined(__s390x__) || defined(__powerpc__) || \
     defined(__amd64__) || \
     defined(ia64) || defined(__ia64__) || \
@@ -150,7 +150,7 @@ typedef union { GLfloat f; GLint i; } fi_type;
     defined(__mips) || defined(_MIPS_ARCH) || \
     defined(__arm__) || \
     defined(__sh__) || \
-    (defined(__alpha__) && (defined(__IEEE_FLOAT) || !defined(VMS)))
+    (defined(__alpha__) && (defined(__IEEE_FLOAT) || !defined(VMS))))
 #define USE_IEEE
 #define IEEE_ONE 0x3f800000
 #endif

@@ -61,7 +61,6 @@ foreach(name boost_signals boost_thread boost_date_time)
   target_include_directories(${name} PRIVATE "${BOOST}")
 endforeach()
 
-if (WIN32)
 set(MESA "${CMAKE_CURRENT_SOURCE_DIR}/mesa-6.5")
 
 set(OPENRBX_MESA_CORE_SOURCES
@@ -330,6 +329,30 @@ set(OPENRBX_MESA_GLU_SOURCES
   "${MESA}/src/glu/sgi/libutil/registry.c"
 )
 
+if (NOT WIN32)
+  set(OPENRBX_MESA_EXPORTS "{\n  global:\n    _glapi_get_proc_address;\n")
+  foreach(def src/mesa/drivers/windows/gdi/mesa.def src/mesa/drivers/osmesa/osmesa.def src/glu/sgi/glu.def)
+    file(STRINGS "${MESA}/${def}" exports REGEX "^[ \t]+[A-Za-z_]")
+    foreach(line ${exports})
+      string(REGEX MATCH "[A-Za-z_][A-Za-z0-9_]*" name "${line}")
+      string(APPEND OPENRBX_MESA_EXPORTS "    ${name};\n")
+    endforeach()
+  endforeach()
+  string(APPEND OPENRBX_MESA_EXPORTS "  local:\n    *;\n};\n")
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/mesa.map" "${OPENRBX_MESA_EXPORTS}")
+
+  add_library(mesa SHARED ${OPENRBX_MESA_CORE_SOURCES} ${OPENRBX_MESA_OSMESA_SOURCES} ${OPENRBX_MESA_GLU_SOURCES})
+  set_target_properties(mesa PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+  target_include_directories(mesa PRIVATE
+    "${MESA}/include" "${MESA}/src/mesa" "${MESA}/src/mesa/glapi" "${MESA}/src/mesa/main"
+    "${MESA}/src/mesa/swrast" "${MESA}/src/mesa/shader" "${MESA}/src/mesa/shader/slang" "${MESA}/src/mesa/shader/grammar"
+    "${MESA}/src/glu/sgi/include" "${MESA}/src/glu/sgi/libnurbs/interface"
+    "${MESA}/src/glu/sgi/libnurbs/internals" "${MESA}/src/glu/sgi/libnurbs/nurbtess"
+  )
+  target_compile_definitions(mesa PRIVATE NDEBUG PTHREADS MESA_MINWARN MESA_NO_IEEE LIBRARYBUILD)
+  target_link_options(mesa PRIVATE "-Wl,--version-script=${CMAKE_CURRENT_BINARY_DIR}/mesa.map" -Wl,-Bsymbolic)
+  target_link_libraries(mesa PRIVATE m)
+else()
 set(OPENRBX_MESA_LINK_OPTIONS "/INCREMENTAL:NO")
 
 set(OPENRBX_MESA_COMPILE_OPTIONS "/GF" "/Gy")

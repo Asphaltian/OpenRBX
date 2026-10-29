@@ -71,7 +71,7 @@ void GImage::encodePNG(
 
     debugAssert( channels == 1 || channels == 3 || channels == 4 );
 
-    if (this->height > (int)(PNG_UINT_32_MAX/png_sizeof(png_bytep)))
+    if (this->height > (int)(0xFFFFFFFFUL/png_sizeof(png_bytep)))
         throw GImage::Error("Unsupported PNG height.", out.getFilename());
 
     out.setEndian(G3D_LITTLE_ENDIAN);
@@ -162,10 +162,10 @@ void GImage::decodePNG(
     //read in sequentially so that three copies of the file are not in memory at once
     png_read_info(png_ptr, info_ptr);
 
-    uint32 png_width, png_height;
+    png_uint_32 png_width, png_height;
     int bit_depth, color_type, interlace_type;
     //this will validate the data it extracts from info_ptr
-    png_get_IHDR(png_ptr, info_ptr, (png_uint_32*)&png_width, (png_uint_32*)&png_height, &bit_depth, &color_type,
+    png_get_IHDR(png_ptr, info_ptr, &png_width, &png_height, &bit_depth, &color_type,
        &interlace_type, int_p_NULL, int_p_NULL);
 
     if (color_type == PNG_COLOR_TYPE_GRAY_ALPHA) {

@@ -8,7 +8,7 @@ if (NOT MSVC)
   set(CMAKE_CXX_STANDARD 11)
   set(CMAKE_CXX_EXTENSIONS ON)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-  add_compile_options(-pthread -fno-strict-aliasing -Wno-deprecated-declarations $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics>)
+  add_compile_options(-pthread -fno-strict-aliasing -Wno-deprecated-declarations $<$<COMPILE_LANGUAGE:CXX>:-fno-threadsafe-statics> $<$<COMPILE_LANGUAGE:C>:-fexceptions>)
   add_link_options(-pthread)
   add_compile_options(-include "${PROJECT_SOURCE_DIR}/util/portable.h")
 endif()
@@ -597,9 +597,9 @@ if (WIN32)
 endif()
 
 if (NOT MSVC_FOR_DECOMP)
-  add_executable(rbxgs_run util/rbxgs.cpp)
-  target_include_directories(rbxgs_run PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS})
-  target_include_directories(rbxgs_run SYSTEM PRIVATE ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
+  add_executable(rbxgs_run util/rbxgs.cpp WebService/ThumbnailGenerator.cpp)
+  target_include_directories(rbxgs_run PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS} "${PROJECT_SOURCE_DIR}/WebService")
+  target_include_directories(rbxgs_run SYSTEM PRIVATE ${OPENRBX_3RDPARTY_INCLUDE_DIRS} "${OPENRBX_MESA_INCLUDE_DIR}")
   target_compile_definitions(rbxgs_run PRIVATE ${OPENRBX_COMMON_DEFINITIONS})
   set_property(TARGET rbxgs_run PROPERTY OUTPUT_NAME "rbxgs")
 
@@ -635,7 +635,6 @@ if (NOT MSVC_FOR_DECOMP)
       COMMAND "${CMAKE_COMMAND}" -E copy_if_different $<TARGET_FILE:opengl32> $<TARGET_FILE:glu32> $<TARGET_FILE:osmesa32> "$<TARGET_FILE_DIR:rbxgs_run>"
     )
   else()
-    find_package(OpenGL REQUIRED)
     find_package(X11 REQUIRED)
     find_package(ZLIB REQUIRED)
     find_library(OPENRBX_SDL_LIBRARY NAMES SDL-1.2 SDL REQUIRED)
@@ -647,14 +646,14 @@ if (NOT MSVC_FOR_DECOMP)
     target_link_libraries(rbxgs PRIVATE
       -Wl,--whole-archive rbxgs_engine -Wl,--no-whole-archive
       -Wl,--start-group ${OPENRBX_G3D_LIBS} ${OPENRBX_BOOST_LIBS} rbxcrt -Wl,--end-group
-      fmodex ${OPENRBX_SDL_LIBRARY} ZLIB::ZLIB OpenGL::GL OpenGL::GLU X11::X11
+      mesa fmodex ${OPENRBX_SDL_LIBRARY} ZLIB::ZLIB X11::X11
     )
     target_link_options(rbxgs PRIVATE -Wl,--no-undefined)
     set_property(TARGET rbxgs PROPERTY BUILD_RPATH "$ORIGIN")
     add_custom_command(TARGET rbxgs POST_BUILD
       COMMAND "${CMAKE_COMMAND}" -E copy_if_different "${OPENRBX_FMOD_RUNTIME}" "$<TARGET_FILE_DIR:rbxgs>"
     )
-    target_link_libraries(rbxgs_run PRIVATE rbxgs)
+    target_link_libraries(rbxgs_run PRIVATE rbxgs mesa)
     set_property(TARGET rbxgs_run PROPERTY BUILD_RPATH "$ORIGIN")
   endif()
 endif()

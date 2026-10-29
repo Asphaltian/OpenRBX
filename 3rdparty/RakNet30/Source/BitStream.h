@@ -242,6 +242,17 @@ namespace RakNet
 		template <class templateType>
 			bool ReadCompressed(templateType &var);
 
+#if defined(__LP64__)
+		void Write(long var) { Write((int)var); }
+		void Write(unsigned long var) { Write((unsigned int)var); }
+		void WriteCompressed(long var) { WriteCompressed((int)var); }
+		void WriteCompressed(unsigned long var) { WriteCompressed((unsigned int)var); }
+		bool Read(long &var) { int value; if (!Read(value)) return false; var = value; return true; }
+		bool Read(unsigned long &var) { unsigned int value; if (!Read(value)) return false; var = value; return true; }
+		bool ReadCompressed(long &var) { int value; if (!ReadCompressed(value)) return false; var = value; return true; }
+		bool ReadCompressed(unsigned long &var) { unsigned int value; if (!ReadCompressed(value)) return false; var = value; return true; }
+#endif
+
 		/// Read any integral type from a bitstream.  If the written value differed from the value compared against in the write function,
 		/// var will be updated.  Otherwise it will retain the current value.
 		/// the current value will be updated.

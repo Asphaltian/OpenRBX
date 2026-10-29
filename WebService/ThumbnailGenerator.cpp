@@ -477,6 +477,7 @@ template const RBX::FactoryProduct<RBX::Script, RBX::Instance, RBX::sScript>::Cr
 template const RBX::FactoryProduct<RBX::LocalScript, RBX::Script, RBX::sLocalScript>::Creator
 	RBX::FactoryProduct<RBX::LocalScript, RBX::Script, RBX::sLocalScript>::creator;
 
+#if defined(_MSC_VER) && _MSC_VER == 1400
 typedef std::vector<boost::shared_ptr<RBX::Instance> > InstanceVector;
 template InstanceVector::size_type InstanceVector::size() const;
 template InstanceVector::iterator InstanceVector::begin();
@@ -496,3 +497,4 @@ template boost::shared_ptr<RBX::Lighting>::~shared_ptr();
 
 template G3D::ReferenceCountedPointer<G3D::Texture>::~ReferenceCountedPointer();
 template G3D::ReferenceCountedPointer<RBX::TextureProxyBase>::~ReferenceCountedPointer();
+#endif
