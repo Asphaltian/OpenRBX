@@ -10,11 +10,11 @@ Keep in mind that this code reproduces the original release as it was, bugs incl
 
 ## Progress
 
-<p align="center"><a href="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.HTML"><img src="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.SVG" width="50%"></a></p>
+<p align="center"><a href="https://asphaltian.github.io/OpenRBX/ROBLOXPROGRESS.HTML"><img src="https://asphaltian.github.io/OpenRBX/ROBLOXPROGRESS.SVG" width="45%"></a> <a href="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.HTML"><img src="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.SVG" width="45%"></a></p>
 
 `WebService.dll` from RBXGS, the game server, is nearly done. All but about 150 of its Roblox functions compile to the same instructions as the original.
 
-We started with RBXGS because it ships with its debug symbols and the client doesn't. The client is next, and a lot of it is already here, since both were built from the same engine libraries.
+We started with RBXGS because it ships with its debug symbols and the client doesn't. `Roblox.exe`, the client, was built from the same engine libraries, so everything we match in RBXGS carries over. About 3,900 of its functions already compile to the same instructions. The client's own code, the app and its windows, is next.
 
 ## Building
 

@@ -6,7 +6,7 @@ One target: **WEBSERVICE**, `WebService.dll`, an ATL Server ISAPI extension with
 
 RBXGS, the game server, comes first because its binary ships an unstripped PDB, and the engine libraries under `Client/` were shared with the client anyway. Three of the six LTCG objects in `WebService.dll` are `Client\win` sources.
 
-Second target: **ROBLOX**, `Roblox.exe` 0.3.676.0, the client. It ships no PDB but links the same engine libraries byte for byte, so `tools/roblox_transfer.py WebService.dll Roblox.exe` carries every name it can prove: it matches bodies with relocations masked, then propagates through call and data references. It writes `reccmp/roblox-*.csv` and a `ROBLOX` marker under each transferred `WEBSERVICE` marker; rerun it rather than editing either. Until client-only code exists the target scores against our `WebService.dll` (`reccmp-build.yml` points ROBLOX at it). CI has no source for `Roblox.exe` yet, so only WEBSERVICE runs there.
+Second target: **ROBLOX**, `Roblox.exe` 0.3.676.0, the client. It ships no PDB but links the same engine libraries byte for byte, so its names come from WEBSERVICE: a body that matches with relocations masked, and every call and data reference reached through matched bodies, carries the RBXGS name. `reccmp/roblox-*.csv` and each `ROBLOX` marker under a `WEBSERVICE` marker were generated that way. Until client-only code exists the target scores against our `WebService.dll`, so `reccmp-build.yml` points ROBLOX at it. CI fetches `Roblox.exe` from archive.org.
 
 ## Building
 
@@ -52,7 +52,7 @@ python tools/reccmp_addr_padding.py
 
 `WebService.pdb` ships alongside the binary and is not stripped. Check whether it answers a question before working the answer out from disassembly. It carries symbol names, namespaces, class hierarchies, source paths, line numbers, per-object compiler command lines and the toolchain version.
 
-Both files come out of the RBXGS installer on archive.org, extracted with [lessmsi](https://github.com/activescott/lessmsi) into `SourceDir/`. See the README for the URL and hashes. `.github/workflows/rbxgsbin.yml` does the same fetch for CI.
+Both files come out of the RBXGS installer on archive.org, extracted with [lessmsi](https://github.com/activescott/lessmsi) into `SourceDir/`. See the README for the URL and hashes. `.github/workflows/robloxbin.yml` does the same fetch for CI.
 
 Load the PDB into Ghidra before writing anything. Reading the decompiler's pseudocode is faster than inferring structure from raw bytes and it recovers control flow a byte diff will not show.
 

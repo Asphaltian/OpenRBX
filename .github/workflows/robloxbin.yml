@@ -1,4 +1,4 @@
-name: Download rbxgsbin
+name: Download robloxbin
 
 on:
   workflow_call:
@@ -7,6 +7,8 @@ env:
   MSI_URL: https://archive.org/download/rbxgssetup/S3FileHandler_RBXGSSetup_0.3.676.0.msi
   MSI_SHA256: 43935127301bf4189b2cec13bceef23bc32538bd4cd3fed94b14b1143a38e5e0
   LESSMSI_VERSION: v2.12.9
+  ROBLOX_URL: https://archive.org/download/ROBLOX20072013/December%2029%202007%20%280.3.676.0%29.zip/Roblox.exe
+  ROBLOX_SHA256: f16069abb753483338ec0ff3a508dc2ee7c696f30997664816446e80863096cc
 
 jobs:
   fetch:
@@ -18,8 +20,8 @@ jobs:
       uses: actions/cache/restore@v5
       with:
         enableCrossOsArchive: true
-        path: rbxgsbin
-        key: rbxgsbin
+        path: robloxbin
+        key: robloxbin
 
     - name: Download RBXGS installer
       if: ${{ !steps.cache-original-binaries.outputs.cache-hit }}
@@ -40,14 +42,24 @@ jobs:
         $exe = Get-ChildItem lessmsi -Recurse -Filter lessmsi.exe | Select-Object -First 1
         if (-not $exe) { throw "lessmsi.exe not found in the release archive" }
         & $exe.FullName x rbxgs.msi "$PWD\msi\"
-        New-Item -ItemType Directory -Force rbxgsbin | Out-Null
-        Copy-Item msi\SourceDir\WebService.dll rbxgsbin\
-        Write-Output "WebService.dll SHA256: $((Get-FileHash rbxgsbin\WebService.dll -Algorithm SHA256).Hash)"
+        New-Item -ItemType Directory -Force robloxbin | Out-Null
+        Copy-Item msi\SourceDir\WebService.dll robloxbin\
+        Write-Output "WebService.dll SHA256: $((Get-FileHash robloxbin\WebService.dll -Algorithm SHA256).Hash)"
+
+    - name: Download Roblox.exe
+      if: ${{ !steps.cache-original-binaries.outputs.cache-hit }}
+      shell: pwsh
+      run: |
+        Invoke-WebRequest "$env:ROBLOX_URL" -OutFile robloxbin\Roblox.exe
+        $hash = (Get-FileHash robloxbin\Roblox.exe -Algorithm SHA256).Hash
+        if ($hash -ne $env:ROBLOX_SHA256) {
+          throw "Roblox.exe hash mismatch: got $hash, expected $env:ROBLOX_SHA256"
+        }
 
     - name: Cache original binaries
       if: ${{ !steps.cache-original-binaries.outputs.cache-hit }}
       uses: actions/cache/save@v5
       with:
         enableCrossOsArchive: true
-        path: rbxgsbin
-        key: rbxgsbin
+        path: robloxbin
+        key: robloxbin

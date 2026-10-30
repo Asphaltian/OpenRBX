@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   fetch-deps:
     name: Download original binaries
-    uses: ./.github/workflows/rbxgsbin.yml
+    uses: ./.github/workflows/robloxbin.yml
 
   build-current-toolchain:
     name: Current MSVC
@@ -143,8 +143,8 @@ jobs:
       uses: actions/cache/restore@v5
       with:
         enableCrossOsArchive: true
-        path: rbxgsbin
-        key: rbxgsbin
+        path: robloxbin
+        key: robloxbin
 
     - name: Install python packages
       shell: bash
@@ -154,13 +154,15 @@ jobs:
     - name: Detect binaries
       id: detection
       run: |
-        reccmp-project detect --what original   --search-path rbxgsbin
+        reccmp-project detect --what original   --search-path robloxbin
         reccmp-project detect --what recompiled --search-path build
+        Add-Content reccmp-build.yml "  ROBLOX:`n    path: build\WebService.dll`n    pdb: build\WebService.pdb"
 
     - name: Summarize Accuracy
       shell: bash
       run: |
         reccmp-reccmp -S WEBSERVICEPROGRESS.SVG --target WEBSERVICE --nolib --json WEBSERVICEPROGRESS.json --html WEBSERVICEPROGRESS.HTML
+        reccmp-reccmp -S ROBLOXPROGRESS.SVG --target ROBLOX --nolib --json ROBLOXPROGRESS.json --html ROBLOXPROGRESS.HTML
 
     - name: Compare Accuracy With Current Master
       shell: bash
@@ -172,6 +174,12 @@ jobs:
         (reccmp-reccmp --target WEBSERVICE --nolib --diff progress-old.json || echo "Current master not found")>"WEBSERVICE-diff.txt"
 
         cat WEBSERVICE-diff.txt
+
+        curl -fLSs -o roblox-old.json $RELEASE_URL/ROBLOXPROGRESS.json || echo "" >roblox-old.json
+
+        (reccmp-reccmp --target ROBLOX --nolib --diff roblox-old.json || echo "Current master not found")>"ROBLOX-diff.txt"
+
+        cat ROBLOX-diff.txt
 
     - name: Check Vtables
       if: ${{ steps.detection.conclusion == 'success' && always() }}
@@ -212,6 +220,7 @@ jobs:
         {
           echo '# reccmp report'
           section 'WEBSERVICE (WebService.dll)' WEBSERVICE-diff.txt
+          section 'ROBLOX (Roblox.exe)' ROBLOX-diff.txt
         } >reccmp-pr-message.txt
 
         echo "${{ github.event.number }}" >pr-number.txt
@@ -224,6 +233,7 @@ jobs:
         name: Accuracy Report
         path: |
           WEBSERVICEPROGRESS*
+          ROBLOXPROGRESS*
 
     - name: Upload PR comment payload
       if: ${{ github.event_name == 'pull_request' && always() }}
@@ -263,13 +273,16 @@ jobs:
       run: |
         ./upload.sh \
           build/WebService.dll \
-          WEBSERVICEPROGRESS*
+          WEBSERVICEPROGRESS* \
+          ROBLOXPROGRESS*
 
     - name: Prepare Pages
       run: |
         mkdir -p progress
         cp WEBSERVICEPROGRESS.SVG progress/
         cp WEBSERVICEPROGRESS.HTML progress/
+        cp ROBLOXPROGRESS.SVG progress/
+        cp ROBLOXPROGRESS.HTML progress/
 
     - uses: actions/upload-pages-artifact@v3
       with:
