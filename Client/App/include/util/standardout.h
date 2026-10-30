@@ -50,7 +50,7 @@ public:
 	// clang-format on
 
 	// SYNTHETIC: WEBSERVICE 0x10031fe0
-	// STUB: ROBLOX 0x00582e00
+	// SYNTHETIC: ROBLOX 0x00582e00
 	// RBX::StandardOut::StandardOut
 
 	// SYNTHETIC: WEBSERVICE 0x102213d0

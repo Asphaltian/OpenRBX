@@ -173,7 +173,7 @@ private:
 // TEMPLATE: ROBLOX 0x00592110
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>::~BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),3>
 // TEMPLATE: WEBSERVICE 0x10078a10
-// STUB: ROBLOX 0x00411b10
+// TEMPLATE: ROBLOX 0x00411b10
 // RBX::StateStack<RBX::XmlState>::clearStackAfter
 // SYNTHETIC: WEBSERVICE 0x10079310
 // STUB: ROBLOX 0x0046f580

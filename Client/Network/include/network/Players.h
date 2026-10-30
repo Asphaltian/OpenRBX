@@ -101,7 +101,7 @@ private:
 // SYNTHETIC: ROBLOX 0x004b6770
 // RBX::Network::AbuseReporter::data::~data
 // SYNTHETIC: WEBSERVICE 0x101954c0
-// STUB: ROBLOX 0x004b6890
+// SYNTHETIC: ROBLOX 0x004b6890
 // RBX::Network::AbuseReporter::data::data
 // clang-format on
 

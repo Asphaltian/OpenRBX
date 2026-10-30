@@ -18,7 +18,7 @@ public:
 static boost::once_flag flag = BOOST_ONCE_INIT;
 
 // FUNCTION: WEBSERVICE 0x10057ed0
-// STUB: ROBLOX 0x005640f0
+// FUNCTION: ROBLOX 0x005640f0
 boost::mutex& moo2()
 {
 	static boost::mutex mutex2;

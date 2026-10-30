@@ -404,7 +404,7 @@ void DataModel::clearContents()
 }
 
 // FUNCTION: WEBSERVICE 0x10079a70
-// STUB: ROBLOX 0x00592a40
+// FUNCTION: ROBLOX 0x00592a40
 void DataModel::save(ContentId contentId)
 {
 	std::stringstream stream;
@@ -423,7 +423,7 @@ void DataModel::save(ContentId contentId)
 }
 
 // FUNCTION: WEBSERVICE 0x10079bf0
-// STUB: ROBLOX 0x00592bc0
+// FUNCTION: ROBLOX 0x00592bc0
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > DataModel::get(ContentId contentId)
 {
 	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);

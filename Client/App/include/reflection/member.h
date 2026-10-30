@@ -178,7 +178,7 @@ typename MemberDescriptorContainer<T>::Collection::const_iterator MemberDescript
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100475e0
-// STUB: ROBLOX 0x005a9790
+// TEMPLATE: ROBLOX 0x005a9790
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::declare
 // clang-format on
 template <class T>

@@ -476,7 +476,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10007a60
 	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007b20
-	// STUB: ROBLOX 0x004761f0
+	// FUNCTION: ROBLOX 0x004761f0
 	// RBX::FactoryProduct<RBX::Lighting,RBX::Instance,&RBX::sLighting>::Creator::create
 	// FUNCTION: WEBSERVICE 0x10007be0
 	// STUB: ROBLOX 0x00406920

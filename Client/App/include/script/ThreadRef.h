@@ -81,7 +81,7 @@ DECOMP_SIZE_ASSERT(ThreadRef::Node, 0xc)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021b770
-// STUB: ROBLOX 0x007e9940
+// SYNTHETIC: ROBLOX 0x007e9940
 // `dynamic initializer for 'RBX::Lua::ThreadRef::syncSingleton''
 // SYNTHETIC: WEBSERVICE 0x10223640
 // SYNTHETIC: ROBLOX 0x007f2680

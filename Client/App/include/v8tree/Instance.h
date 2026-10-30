@@ -802,7 +802,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: ROBLOX 0x0062c280
 	// RBX::DescribedCreatable<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce>::DescribedCreatable<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce><char *>
 	// FUNCTION: WEBSERVICE 0x100ed380
-	// STUB: ROBLOX 0x0062c430
+	// FUNCTION: ROBLOX 0x0062c430
 	// RBX::DescribedCreatable<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust>::DescribedCreatable<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust><char *>
 	// FUNCTION: WEBSERVICE 0x100eddb0
 	// FUNCTION: ROBLOX 0x0062ce30

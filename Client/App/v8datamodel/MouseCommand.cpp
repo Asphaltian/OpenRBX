@@ -129,7 +129,7 @@ MouseCommand::MouseCommand(Workspace* workspace) : capturedMouse(false), workspa
 }
 
 // FUNCTION: WEBSERVICE 0x100bedd0
-// STUB: ROBLOX 0x00620970
+// FUNCTION: ROBLOX 0x00620970
 MouseCommand::~MouseCommand()
 {
 }

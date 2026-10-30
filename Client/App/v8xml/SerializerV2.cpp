@@ -238,7 +238,7 @@ void SerializerV2::load(XmlElement* root, RBX::DataModel* dataModel)
 }
 
 // FUNCTION: WEBSERVICE 0x10098970
-// STUB: ROBLOX 0x005a4400
+// FUNCTION: ROBLOX 0x005a4400
 void SerializerV2::loadXML(std::istream& stream, RBX::DataModel* dataModel)
 {
 	TextXmlParser machine(stream.rdbuf());

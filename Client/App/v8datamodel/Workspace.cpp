@@ -585,7 +585,7 @@ void Workspace::setImageServerView(const G3D::Rect2D& viewPortRect)
 }
 
 // FUNCTION: WEBSERVICE 0x1006eeb0
-// STUB: ROBLOX 0x005b7230
+// FUNCTION: ROBLOX 0x005b7230
 void Workspace::insertContent(
 	ContentId contentId, std::vector<boost::shared_ptr<Instance> >& items, InsertMode insertMode, PromptMode promptMode
 )
@@ -765,7 +765,7 @@ WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* 
 }
 
 // FUNCTION: WEBSERVICE 0x10070ff0
-// STUB: ROBLOX 0x005b9400
+// FUNCTION: ROBLOX 0x005b9400
 void Workspace::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);

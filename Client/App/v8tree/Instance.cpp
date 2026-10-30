@@ -362,7 +362,7 @@ inline XmlElement* Instance::toNewXmlRoot(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1004ab00
-// STUB: ROBLOX 0x00578140
+// FUNCTION: ROBLOX 0x00578140
 boost::shared_ptr<Instance> Instance::clone()
 {
 	boost::scoped_ptr<XmlElement> root(toNewXmlRoot(this));

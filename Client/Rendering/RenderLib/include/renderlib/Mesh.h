@@ -37,7 +37,7 @@ public:
 		Level();
 
 		// STUB: WEBSERVICE 0x10167b50
-		// STUB: ROBLOX 0x00484130
+		// FUNCTION: ROBLOX 0x00484130
 		Level(G3D::RenderDevice::Primitive primitive) : primitive(primitive) {}
 
 		virtual ~Level();

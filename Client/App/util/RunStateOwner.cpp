@@ -142,7 +142,7 @@ RunService::~RunService()
 }
 
 // FUNCTION: WEBSERVICE 0x10056950
-// STUB: ROBLOX 0x0056add0
+// FUNCTION: ROBLOX 0x0056add0
 RunService::RunService()
 	: runState(RS_NORMAL), stopRequested(false), framePeriod(1.0f / 30.0f), runThread(NULL), invalidRunViewCount(0),
 	  runDisabled(false)

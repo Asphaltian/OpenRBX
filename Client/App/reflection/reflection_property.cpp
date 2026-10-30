@@ -70,7 +70,7 @@ EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
 }
 
 // FUNCTION: WEBSERVICE 0x10094410
-// STUB: ROBLOX 0x005c0a30
+// FUNCTION: ROBLOX 0x005c0a30
 PropertyDescriptor::PropertyDescriptor(
 	ClassDescriptor& classDescriptor, const Type& type, const char* name, const char* category, Functionality flags
 )

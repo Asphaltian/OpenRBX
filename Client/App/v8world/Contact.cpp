@@ -397,7 +397,7 @@ void BlockBlockContact::deleteUnmatchedConnectors()
 }
 
 // FUNCTION: WEBSERVICE 0x100d42f0
-// STUB: ROBLOX 0x0060b2d0
+// FUNCTION: ROBLOX 0x0060b2d0
 ContactConnector* BlockBlockContact::matchContactConnector(
 	Body* b0, Body* b1, GeoPairType _pairType, int param0, int param1
 )

@@ -1227,7 +1227,7 @@ PluginReceiveResult Replicator::OnReceive_ID_TIMESTAMP(Packet* packet)
 }
 
 // FUNCTION: WEBSERVICE 0x101a5840
-// STUB: ROBLOX 0x004ce4f0
+// FUNCTION: ROBLOX 0x004ce4f0
 void Peer::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Stats::StatsService* stats = oldProvider ? oldProvider->find<Stats::StatsService>() : NULL;
