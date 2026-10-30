@@ -483,7 +483,7 @@ if (MSVC_FOR_DECOMP)
   endforeach()
 
   add_library(toolkitpro STATIC ${OPENRBX_TOOLKITPRO_SOURCES})
-  target_compile_definitions(toolkitpro PRIVATE WIN32 _LIB NDEBUG _MBCS _AFXDLL)
+  target_compile_definitions(toolkitpro PRIVATE WIN32 _LIB NDEBUG _MBCS _AFXDLL ZLIB_WINAPI)
   target_include_directories(toolkitpro PRIVATE
     "${OPENRBX_TOOLKITPRO_WORKSPACE}"
     "${OPENRBX_TOOLKITPRO}/Source"
@@ -578,14 +578,16 @@ add_custom_target(rbxgs DEPENDS webservice)
 
 if (MSVC_FOR_DECOMP)
   add_executable(roblox WIN32
+    Client/win/ChildFrm.cpp
     Client/win/ErrorUploader.cpp
     Client/win/LogManager.cpp
+    Client/win/MainFrm.cpp
     Client/win/Roblox.cpp
     Client/win/VersionInfo.cpp
     Client/win/Roblox.rc
     util/decomp.cpp
   )
-  target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS _AFXDLL)
+  target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS _AFXDLL _XTP_STATICLINK)
   target_compile_options(roblox PRIVATE $<$<COMPILE_LANGUAGE:CXX>:/FIStdAfx.h>)
   reccmp_add_target(roblox ID ROBLOX)
 

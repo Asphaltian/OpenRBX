@@ -438,7 +438,7 @@ public:
 	// RBX::Instance::getTypedRoot<RBX::PVInstance>
 	// FUNCTION: WEBSERVICE 0x10005d00
 	// FUNCTION: ROBLOX 0x0041f870
-	// RBX::Instance::getParent
+	// ?getParent@Instance@RBX@@QBEPAV12@XZ
 	// clang-format on
 	template <class T>
 	const T* getTypedRoot() const

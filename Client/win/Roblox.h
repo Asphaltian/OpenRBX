@@ -22,6 +22,9 @@ public:
 	// SYNTHETIC: ROBLOX 0x00451530
 	// CRobloxApp::`scalar deleting destructor'
 
+	BOOL FUN_0044dac0(bool p_unk0x04);
+	void FUN_0044e250();
+
 	afx_msg void OnAppAbout();
 	afx_msg void FUN_0044dc90();
 	afx_msg void FUN_0044e270();

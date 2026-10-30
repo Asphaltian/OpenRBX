@@ -1,5 +1,6 @@
 #include "Roblox.h"
 
+#include "MainFrm.h"
 #include "VersionInfo.h"
 #include "network/API.h"
 #include "security/SecurityContext.h"
@@ -60,6 +61,41 @@ static void FUN_0044d4a0()
 	frame->Create(wc.lpszClassName, "ROBLOX");
 }
 
+// STUB: ROBLOX 0x0044dac0
+BOOL CRobloxApp::FUN_0044dac0(bool p_unk0x04)
+{
+	if (m_pMainWnd != NULL) {
+		if (!m_pMainWnd->IsWindowVisible()) {
+			static_cast<CMainFrame*>(m_pMainWnd)->FUN_00432550(m_nCmdShow);
+		}
+
+		return m_pMainWnd->m_hWnd != NULL;
+	}
+
+	CMainFrame* frame = new CMainFrame;
+
+	if (frame == NULL || !frame->LoadFrame(128)) {
+		return FALSE;
+	}
+
+	if (p_unk0x04) {
+		frame->FUN_00434b80();
+	}
+	else {
+		frame->FUN_00435230(false);
+	}
+
+	frame->DragAcceptFiles();
+	frame->FUN_00432550(m_nCmdShow);
+	m_pMainWnd = frame;
+
+	if (m_atomApp == 0 && m_atomSystemTopic == 0) {
+		EnableShellOpen();
+	}
+
+	return TRUE;
+}
+
 // STUB: ROBLOX 0x0044dc00
 void CRobloxApp::OnAppAbout()
 {
@@ -70,6 +106,12 @@ void CRobloxApp::OnAppAbout()
 void CRobloxApp::FUN_0044dc90()
 {
 	STUB(0x44dc90);
+}
+
+// STUB: ROBLOX 0x0044e250
+void CRobloxApp::FUN_0044e250()
+{
+	STUB(0x44e250);
 }
 
 // STUB: ROBLOX 0x0044e270
@@ -161,6 +203,10 @@ BOOL CRobloxApp::InitInstance()
 	static RBX::FactoryRegistrator registrator;
 	RBX::Network::API::init(m_unk0xf0.c_str());
 	AfxEnableControlContainer();
+
+	if (!FUN_0044dac0(false)) {
+		return FALSE;
+	}
 
 	return ProcessShellCommand(cmdInfo);
 }

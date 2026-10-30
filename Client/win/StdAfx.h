@@ -11,6 +11,7 @@
 #include <afxdisp.h>
 #include <afxcmn.h>
 #include <atlbase.h>
+#include <XTToolkitPro.h>
 // clang-format on
 
 #endif // STDAFX_H
