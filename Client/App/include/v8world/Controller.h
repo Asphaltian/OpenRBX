@@ -100,7 +100,7 @@ public:
 	}
 
 	void setController(Controller::ControllerType controllerType, bool value) { values[controllerType] = value; }
-	bool hasController(Controller::ControllerType controllerType) const;
+	bool hasController(Controller::ControllerType controllerType) const { return values[controllerType]; }
 
 	ControllerTypeArray& operator|=(const ControllerTypeArray& other);
 };

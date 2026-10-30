@@ -66,7 +66,8 @@ public:
 
 	virtual GuiResponse process(const GuiEvent& event);
 
-	void addGuiItem(shared_ptr<GuiItem> item);
+	// FUNCTION: ROBLOX 0x00612660
+	void addGuiItem(shared_ptr<GuiItem> item) { item->setParent(this); }
 
 	void setGuiSize(const G3D::Vector2& value) { guiSize = value; }
 	const G3D::Vector2& getGuiSize() const { return guiSize; }
@@ -154,7 +155,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100c7690
 	// FUNCTION: ROBLOX 0x005e1880
 	TopMenuBar() { init(); }
-	TopMenuBar(const std::string& p_unk0x04, Layout::Style p_unk0x08, bool p_unk0x0c);
+	TopMenuBar(const std::string& p_unk0x04, Layout::Style p_unk0x08, bool p_unk0x0c = false);
 	TopMenuBar(const std::string& p_unk0x04, Layout::Style p_unk0x08, G3D::Color4 p_unk0x0c);
 
 	virtual GuiResponse process(const GuiEvent& event);
@@ -276,6 +277,19 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(UnifiedWidget, 0x110)
+
+// SIZE 0x10c
+class MenuSpacer : public GuiItem
+{
+protected:
+	void addItem(GuiItem* item);
+
+public:
+	// FUNCTION: ROBLOX 0x00611d60
+	MenuSpacer(float x, float y) { setGuiSize(G3D::Vector2(x, y)); }
+};
+
+DECOMP_SIZE_ASSERT(MenuSpacer, 0x10c)
 
 // SIZE 0x150
 class TextDisplay : public GuiItem

@@ -376,6 +376,16 @@ public:
 	// TEMPLATE: WEBSERVICE 0x101a6bc0
 	// TEMPLATE: ROBLOX 0x004cfa30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Replicator::ReplicatorStatsItem,boost::shared_ptr<RBX::Network::Replicator>,RakNetStatistics *>
+	// TEMPLATE: ROBLOX 0x00613750
+	// RBX::Creatable<RBX::Instance>::create<RBX::TopMenuBar,char const *,enum RBX::Layout::Style>
+	// TEMPLATE: ROBLOX 0x00613e60
+	// RBX::Creatable<RBX::Instance>::create<RBX::MenuSpacer,float,float>
+	// TEMPLATE: ROBLOX 0x0065fc80
+	// RBX::Creatable<RBX::Instance>::create<RBX::ImageWidget,RBX::Adorn *,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: ROBLOX 0x0065fd20
+	// RBX::Creatable<RBX::Instance>::create<RBX::TopMenuBar,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,enum RBX::Layout::Style>
+	// TEMPLATE: ROBLOX 0x0065fe70
+	// RBX::Creatable<RBX::Instance>::create<RBX::ArrowButton,RBX::Adorn *,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,enum SDLKey,enum RBX::Controller::ControllerType,RBX::DataModel *>
 	// clang-format on
 	template <class U>
 	static boost::shared_ptr<U> create()
@@ -393,6 +403,30 @@ public:
 	static boost::shared_ptr<U> create(A p1, B p2)
 	{
 		return boost::shared_ptr<U>(new U(p1, p2), Deleter());
+	}
+
+	template <class U, class A, class B, class C>
+	static boost::shared_ptr<U> create(A p1, B p2, C p3)
+	{
+		return boost::shared_ptr<U>(new U(p1, p2, p3), Deleter());
+	}
+
+	template <class U, class A, class B, class C, class D>
+	static boost::shared_ptr<U> create(A p1, B p2, C p3, D p4)
+	{
+		return boost::shared_ptr<U>(new U(p1, p2, p3, p4), Deleter());
+	}
+
+	template <class U, class A, class B, class C, class D, class E>
+	static boost::shared_ptr<U> create(A p1, B p2, C p3, D p4, E p5)
+	{
+		return boost::shared_ptr<U>(new U(p1, p2, p3, p4, p5), Deleter());
+	}
+
+	template <class U, class A, class B, class C, class D, class E, class F>
+	static boost::shared_ptr<U> create(A p1, B p2, C p3, D p4, E p5, F p6)
+	{
+		return boost::shared_ptr<U>(new U(p1, p2, p3, p4, p5, p6), Deleter());
 	}
 
 protected:

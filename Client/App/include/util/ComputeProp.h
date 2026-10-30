@@ -27,6 +27,8 @@ public:
 	// FUNCTION: WEBSERVICE 0x1009b290
 	// FUNCTION: ROBLOX 0x005adef0
 	// RBX::ComputeProp<RBX::Part,RBX::PartInstance>::getValue
+	// TEMPLATE: ROBLOX 0x0065f950
+	// RBX::ComputeProp<RBX::ControllerTypeArray,RBX::RootInstance>::getValue
 	// clang-format on
 	T getValue() const
 	{
