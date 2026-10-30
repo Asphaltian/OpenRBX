@@ -59,7 +59,7 @@ boost::shared_ptr<StandardOut> StandardOut::singleton()
 }
 
 // FUNCTION: WEBSERVICE 0x100321b0
-// FUNCTION: ROBLOX 0x00582fd0
+// STUB: ROBLOX 0x00582fd0
 void StandardOut::print_exception(const boost::function0<void>& f, MessageType type, bool rethrow)
 {
 	try {

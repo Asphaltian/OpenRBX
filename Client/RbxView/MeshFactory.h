@@ -175,28 +175,40 @@ public:
 	// TEMPLATE: ROBLOX 0x0047c030
 	// RBX::View::MeshFactory<RBX::View::HeadMesh,1>::create
 	// TEMPLATE: WEBSERVICE 0x101727e0
+	// TEMPLATE: ROBLOX 0x0047cba0
 	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::createDecal
 	// TEMPLATE: WEBSERVICE 0x101728f0
+	// TEMPLATE: ROBLOX 0x0047ccb0
 	// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::createTexture
 	// TEMPLATE: WEBSERVICE 0x10172a10
+	// TEMPLATE: ROBLOX 0x0047cdd0
 	// RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::createDecal
 	// TEMPLATE: WEBSERVICE 0x10172b20
+	// TEMPLATE: ROBLOX 0x0047cee0
 	// RBX::View::MeshFactory<RBX::View::WedgeMesh,1>::createTexture
 	// TEMPLATE: WEBSERVICE 0x10172c40
+	// TEMPLATE: ROBLOX 0x0047d000
 	// RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::createDecal
 	// TEMPLATE: WEBSERVICE 0x10172d50
+	// TEMPLATE: ROBLOX 0x0047d110
 	// RBX::View::MeshFactory<RBX::View::TorsoMesh,1>::createTexture
 	// TEMPLATE: WEBSERVICE 0x10172e70
+	// TEMPLATE: ROBLOX 0x0047d230
 	// RBX::View::MeshFactory<RBX::View::SphereMesh,1>::createDecal
 	// TEMPLATE: WEBSERVICE 0x10172f80
+	// TEMPLATE: ROBLOX 0x0047d340
 	// RBX::View::MeshFactory<RBX::View::SphereMesh,1>::createTexture
 	// TEMPLATE: WEBSERVICE 0x101730a0
+	// TEMPLATE: ROBLOX 0x0047d460
 	// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::createDecal
 	// TEMPLATE: WEBSERVICE 0x101731b0
+	// TEMPLATE: ROBLOX 0x0047d570
 	// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::createTexture
 	// TEMPLATE: WEBSERVICE 0x101732d0
+	// TEMPLATE: ROBLOX 0x0047d690
 	// RBX::View::MeshFactory<RBX::View::HeadMesh,1>::createDecal
 	// TEMPLATE: WEBSERVICE 0x101733e0
+	// TEMPLATE: ROBLOX 0x0047d7a0
 	// RBX::View::MeshFactory<RBX::View::HeadMesh,1>::createTexture
 	// clang-format on
 };

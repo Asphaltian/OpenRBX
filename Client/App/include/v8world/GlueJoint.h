@@ -18,6 +18,7 @@ public:
 	GlueJoint(Primitive* p0, Primitive* p1, const CoordinateFrame& jointCoord0, const CoordinateFrame& jointCoord1);
 
 	// SYNTHETIC: WEBSERVICE 0x10120320
+	// SYNTHETIC: ROBLOX 0x00648560
 	// RBX::GlueJoint::`scalar deleting destructor'
 
 	static GlueJoint* canBuildJoint(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1);
@@ -30,9 +31,11 @@ private:
 	virtual void putInKernel(Kernel* _kernel); // vtable+0x04
 
 	// FUNCTION: WEBSERVICE 0x10120280
+	// FUNCTION: ROBLOX 0x007337c0
 	virtual JointType getJointType() const { return GLUE_JOINT; } // vtable+0x14
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool isBreakable() const { return true; } // vtable+0x18
 
 	Face overlapInP0; // 0xc0

@@ -27,6 +27,7 @@ Seated::Seated(Humanoid* humanoid) : Named<Humanoid::State, sSeated>(humanoid)
 }
 
 // FUNCTION: WEBSERVICE 0x10122b50
+// FUNCTION: ROBLOX 0x00663cd0
 Seated::~Seated()
 {
 	Humanoid::event_Seated.fire(humanoid, false);

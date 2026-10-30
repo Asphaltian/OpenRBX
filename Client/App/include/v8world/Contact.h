@@ -77,6 +77,7 @@ public:
 	BallBallContact(Primitive* p0, Primitive* p1);
 
 	// SYNTHETIC: WEBSERVICE 0x10108060
+	// SYNTHETIC: ROBLOX 0x0063e2d0
 	// RBX::BallBallContact::`scalar deleting destructor'
 
 	virtual ~BallBallContact() {} // vtable+0x00
@@ -102,6 +103,7 @@ public:
 	BallBlockContact(Primitive* p0, Primitive* p1);
 
 	// SYNTHETIC: WEBSERVICE 0x101080b0
+	// SYNTHETIC: ROBLOX 0x0063e330
 	// RBX::BallBlockContact::`scalar deleting destructor'
 
 	virtual ~BallBlockContact() {} // vtable+0x00
@@ -190,6 +192,7 @@ inline BallBallContact::BallBallContact(Primitive* p0, Primitive* p1) : Contact(
 }
 
 // FUNCTION: WEBSERVICE 0x10108000
+// FUNCTION: ROBLOX 0x0063e290
 inline void Contact::putInKernel(Kernel* _kernel)
 {
 	IPipelined::putInKernel(_kernel);
@@ -198,6 +201,7 @@ inline void Contact::putInKernel(Kernel* _kernel)
 }
 
 // FUNCTION: WEBSERVICE 0x10108020
+// FUNCTION: ROBLOX 0x0063e2b0
 inline void Contact::removeFromKernel()
 {
 	deleteAllConnectors();
@@ -206,18 +210,21 @@ inline void Contact::removeFromKernel()
 }
 
 // FUNCTION: WEBSERVICE 0x10108040 FOLDED
+// FUNCTION: ROBLOX 0x006a0740 FOLDED
 inline Edge::EdgeType Contact::getEdgeType() const
 {
 	return CONTACT;
 }
 
 // FUNCTION: WEBSERVICE 0x10108050 FOLDED
+// FUNCTION: ROBLOX 0x0063e320 FOLDED
 inline void BallBallContact::deleteAllConnectors()
 {
 	deleteConnector(ballBallConnector);
 }
 
 // FUNCTION: WEBSERVICE 0x10108050 FOLDED
+// FUNCTION: ROBLOX 0x0063e320 FOLDED
 inline void BallBlockContact::deleteAllConnectors()
 {
 	deleteConnector(ballBlockConnector);

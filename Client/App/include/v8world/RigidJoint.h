@@ -7,6 +7,7 @@
 namespace RBX {
 
 // VTABLE: WEBSERVICE 0x1023cef0
+// VTABLE: ROBLOX 0x00830630
 // SIZE 0x88
 class RigidJoint : public Joint
 {
@@ -18,6 +19,7 @@ public:
 	static bool isRigidJoint(Edge* e) { return isJoint(e) && jointIsRigid(static_cast<Joint*>(e)); }
 
 	// SYNTHETIC: WEBSERVICE 0x100d7a40
+	// SYNTHETIC: ROBLOX 0x005f1950
 	// RBX::WeldJoint::`scalar deleting destructor'
 
 	virtual bool isAligned();                                          // vtable+0x24

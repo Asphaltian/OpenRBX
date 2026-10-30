@@ -44,6 +44,7 @@ DECOMP_SIZE_ASSERT(ICameraSubject, 0x0c)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x1005aa00
+// FUNCTION: ROBLOX 0x00565770
 // RBX::ICameraSubject::getLerp
 // clang-format on
 

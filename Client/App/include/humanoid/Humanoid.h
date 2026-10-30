@@ -58,6 +58,7 @@ public:
 		virtual State* onStep(const float stepDt, Controller& controller) = 0; // vtable+0x0c
 
 		// FUNCTION: WEBSERVICE 0x100a0710 FOLDED
+		// FUNCTION: ROBLOX 0x00640840 FOLDED
 		virtual float getIntendedRotationAboutYAxis() const // vtable+0x10
 		{
 			return 0;
@@ -67,6 +68,7 @@ public:
 		// RBX::Humanoid::State::~State
 
 		// SYNTHETIC: WEBSERVICE 0x10106120
+		// SYNTHETIC: ROBLOX 0x00640850
 		// RBX::Humanoid::State::`scalar deleting destructor'
 
 	protected:

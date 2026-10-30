@@ -88,6 +88,7 @@ public:
 	VerbContainer* getVerbParent() const;
 
 	// SYNTHETIC: WEBSERVICE 0x100d0bc0
+	// SYNTHETIC: ROBLOX 0x0059d0d0
 	// RBX::VerbContainer::`scalar deleting destructor'
 
 private:

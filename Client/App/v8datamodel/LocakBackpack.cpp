@@ -110,7 +110,7 @@ void LocalBackpack::onHeartbeat()
 }
 
 // FUNCTION: WEBSERVICE 0x100d6300
-// FUNCTION: ROBLOX 0x0060d2e0
+// STUB: ROBLOX 0x0060d2e0
 void LocalBackpack::onEvent(const Instance* source, DescendentRemoving event)
 {
 	if (BackpackItem* item = dynamic_cast<BackpackItem*>(event.instance.get())) {
@@ -126,6 +126,7 @@ void LocalBackpack::onClick(LocalBackpackItem* clickedItem)
 }
 
 // FUNCTION: WEBSERVICE 0x100d6520
+// FUNCTION: ROBLOX 0x0060d5b0
 void LocalBackpackItem::onClick(const GuiEvent& event)
 {
 	static_cast<LocalBackpack*>(getParent())->onClick(this);
@@ -220,7 +221,7 @@ LocalBackpack::~LocalBackpack()
 }
 
 // FUNCTION: WEBSERVICE 0x100d6ce0
-// FUNCTION: ROBLOX 0x0060ddc0
+// STUB: ROBLOX 0x0060ddc0
 void LocalBackpack::onLocalCharacterAdded(Instance* added)
 {
 	localCharacter = shared_from(added);
@@ -230,7 +231,7 @@ void LocalBackpack::onLocalCharacterAdded(Instance* added)
 }
 
 // FUNCTION: WEBSERVICE 0x100d6dc0
-// FUNCTION: ROBLOX 0x0060dea0
+// STUB: ROBLOX 0x0060dea0
 void LocalBackpack::onLocalPlayerAdded(Network::Player* added)
 {
 	localPlayer = shared_from(added);
@@ -242,7 +243,7 @@ void LocalBackpack::onLocalPlayerAdded(Network::Player* added)
 }
 
 // FUNCTION: WEBSERVICE 0x100d6ef0
-// FUNCTION: ROBLOX 0x0060dfd0
+// STUB: ROBLOX 0x0060dfd0
 void LocalBackpack::onLocalBackpackAdded(Backpack* added)
 {
 	localBackpack = shared_from(added);
@@ -272,7 +273,7 @@ LocalBackpack::LocalBackpack() : lastRemovedIndex(-1)
 }
 
 // FUNCTION: WEBSERVICE 0x100d75b0
-// FUNCTION: ROBLOX 0x0060e650
+// STUB: ROBLOX 0x0060e650
 void LocalBackpack::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	if (oldProvider) {
@@ -329,7 +330,7 @@ void LocalBackpack::onEvent(const Instance* source, ChildAdded event)
 }
 
 // FUNCTION: WEBSERVICE 0x100d7950
-// FUNCTION: ROBLOX 0x0060e9f0
+// STUB: ROBLOX 0x0060e9f0
 void LocalBackpack::onEvent(const Instance* source, DescendentAdded event)
 {
 	if (BackpackItem* item = dynamic_cast<BackpackItem*>(event.instance.get())) {

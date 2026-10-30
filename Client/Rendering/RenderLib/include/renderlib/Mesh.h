@@ -44,6 +44,7 @@ public:
 
 		// clang-format off
 		// SYNTHETIC: WEBSERVICE 0x101675e0
+		// SYNTHETIC: ROBLOX 0x00484180
 		// RBX::Render::Mesh::Level::`scalar deleting destructor'
 		// clang-format on
 	};

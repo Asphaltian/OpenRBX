@@ -12,10 +12,12 @@ address,type,x-text
 007ff6de,string,
 007ffcbc,string,list<T> too long
 00800044,string,about:blank
+008007c8,string,tr1::bad_weak_ptr
 008008a8,string,vector<T> too long
 008010b0,string,Roblox
 00801174,string,NetworkClient
 0080119c,string,bad cast
+008011a8,string,boost::bad_any_cast: failed conversion using boost::any_cast
 008012fc,string,;
 00801300,string,POST
 00801308,string,GET
@@ -87,6 +89,7 @@ address,type,x-text
 00810740,string,%d
 00810744,string,version 1.00
 00810754,string,r
+00810808,string,bad lexical cast: source type value could not be interpreted as target
 00810854,string,GL_NV_register_combiners
 00810874,string,GL_NV_texture_shader3
 0081088c,string,GL_ATI_texture_env_combine3
@@ -224,6 +227,7 @@ address,type,x-text
 00813eac,string,Data Out
 00813eb8,string,Data In
 00813ec0,string,Data Listening
+00813f88,string,"S|R,Typ,Pckt#,Frm #,PktID,BitLn,Time     ,Local IP:Port   ,RemoteIP:Po"
 00813fd4,string,ID_READY_EVENT_QUERY
 00813fec,string,ID_READY_EVENT_ALL_SET
 00814004,string,ID_READY_EVENT_UNSET
@@ -300,6 +304,10 @@ address,type,x-text
 008147d0,string,ID_PING
 008147d8,string,ID_INTERNAL_PING
 008147ec,string,Unknown
+008147f4,string,"%sSnd,Raw,NIL,NIL,%s,%i,%i,%u:%i,%u:%i%s"
+00814820,string,"%sSnd,Raw,  NIL,  NIL,%5i,%5i,%i,%u:%i,%u:%i%s"
+00814850,string,"%sRcv,Raw,NIL,NIL,%s,%i,%i,%u:%i,%u:%i%s"
+0081487c,string,"%sRcv,Raw,  NIL,  NIL,%5i,%5i,%i,%u:%i,%u:%i%s"
 008148ac,string,"%s%s,Rpc,%5i,%5i,%s,%5i,%i,%u:%i,%u:%i%s"
 008148d8,string,"%s%s,RpT,%5i,%5i,%s,%5i,%i,%u:%i,%u:%i%s"
 00814904,string,"%s%s,Nrm,%i,%i,%s,%i,%i,%u:%i,%u:%i%s"
@@ -1413,6 +1421,10 @@ address,type,x-text
 008216f0,string,/DriverVersion
 00821700,string,HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Control/Class/
 0082173c,string,unknown
+00821944,string,Report
+0082194c,string,Prompt
+00821954,string,DontReport
+00821960,string,ErrorReporting
 00821970,string,IgnoreAssert
 00821980,string,CrashOnAssert
 00821990,string,AssertAction
@@ -1868,6 +1880,7 @@ address,type,x-text
 0082d48c,string,ParamB
 0082d494,string,ParamA
 0082d49c,string,SurfaceInput
+0082d808,string,can't get value
 0082d9f8,string,StarterPack - these items will be given to each new player
 0082dc40,string,Laser
 0082dc48,string,Rocket
@@ -2073,7 +2086,17 @@ address,type,x-text
 00833d80,string,BackendToolState
 008344c0,string,Enabled
 00834aac,string,Message
+00835300,string,Center
+00835308,string,TopBottom
+00835314,string,LeftRight
+00835320,string,Inset
+00835328,string,Edge
+00835330,string,InOut
 00835524,string,VelocityMotor
+008358d0,string,Hole
+008359b8,string,MotorFeature
+00835a88,string,Ball
+00835a90,string,PartType
 00835aa8,string,Sin
 00835aac,string,Constant
 00835ab8,string,Action5

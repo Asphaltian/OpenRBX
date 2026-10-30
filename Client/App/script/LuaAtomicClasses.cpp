@@ -211,7 +211,7 @@ static int lerp(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae210
-// FUNCTION: ROBLOX 0x005fec00
+// STUB: ROBLOX 0x005fec00
 template <>
 int Bridge<G3D::Vector3, 1>::on_index(const G3D::Vector3& value, const char* name, lua_State* L)
 {
@@ -729,7 +729,7 @@ template <>
 const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
 
 // FUNCTION: WEBSERVICE 0x100af750
-// FUNCTION: ROBLOX 0x00600140
+// STUB: ROBLOX 0x00600140
 template <>
 int Bridge<G3D::CoordinateFrame, 1>::on_index(const G3D::CoordinateFrame& value, const char* name, lua_State* L)
 {

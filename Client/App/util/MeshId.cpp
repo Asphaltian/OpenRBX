@@ -56,6 +56,7 @@ void TypedPropertyDescriptor<MeshId>::writeValue(const DescribedBase* instance, 
 }
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+// FUNCTION: ROBLOX 0x005df250 FOLDED
 template <>
 bool TypedPropertyDescriptor<MeshId>::hasStringValue() const
 {

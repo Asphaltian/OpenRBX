@@ -32,6 +32,7 @@ public:
 	virtual const Name& getName() const;
 
 	// SYNTHETIC: WEBSERVICE 0x101170f0
+	// SYNTHETIC: ROBLOX 0x006406c0
 	// RBX::ScriptMouseCommand::`scalar deleting destructor'
 };
 

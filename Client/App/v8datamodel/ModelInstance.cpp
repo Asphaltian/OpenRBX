@@ -43,6 +43,7 @@ static Reflection::BoundFuncDesc<ModelInstance, void(G3D::Vector3), 1> model_mov
 );
 
 // FUNCTION: WEBSERVICE 0x10059c10 FOLDED
+// FUNCTION: ROBLOX 0x00564b10 FOLDED
 bool ModelInstance::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const ModelInstance*>(instance) != NULL;
@@ -385,7 +386,7 @@ Extents ModelInstance::computeLocalGridExtents() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005c000
-// FUNCTION: ROBLOX 0x00566880
+// STUB: ROBLOX 0x00566880
 ModelInstance::ModelInstance()
 	: DescribedCreatable<ModelInstance, PVInstance, sModel>("Model"), primaryPart(NULL),
 	  FlagHeight(this, &ModelInstance::computeFlagHeight),

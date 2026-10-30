@@ -18,6 +18,7 @@ public:
 	virtual ~MotorJoint(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x101201b0
+	// SYNTHETIC: ROBLOX 0x005f5f20
 	// RBX::MotorJoint::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x1009add0

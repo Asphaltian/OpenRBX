@@ -149,36 +149,42 @@ inline void EndcapTransform::operator()(
 }
 
 // FUNCTION: WEBSERVICE 0x1018a200
+// FUNCTION: ROBLOX 0x00494470
 inline void HeadBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(EndcapTransform(bevel), elements, elements, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1018a230
+// FUNCTION: ROBLOX 0x004944a0
 inline void HeadBuilder::buildBottom(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y_NEG>(EndcapTransform(bevel), elements, elements, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1018a260
+// FUNCTION: ROBLOX 0x004944d0
 inline void HeadBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(CylinderTransform(bevel, elements), elements, elements, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1018a2a0
+// FUNCTION: ROBLOX 0x00494510
 inline void HeadBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(CylinderTransform(bevel, elements), elements, elements, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1018a2e0
+// FUNCTION: ROBLOX 0x00494550
 inline void HeadBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(CylinderTransform(bevel, elements), elements, elements, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1018a320
+// FUNCTION: ROBLOX 0x00494590
 inline void HeadBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(CylinderTransform(bevel, elements), elements, elements, purpose);

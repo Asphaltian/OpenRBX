@@ -287,6 +287,7 @@ void TypedPropertyDescriptor<Soundscape::SoundId>::writeValue(const DescribedBas
 }
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+// FUNCTION: ROBLOX 0x005df250 FOLDED
 template <>
 bool TypedPropertyDescriptor<Soundscape::SoundId>::hasStringValue() const
 {
@@ -530,6 +531,7 @@ void SoundChannel::releaseChannel()
 }
 
 // FUNCTION: WEBSERVICE 0x1007fcc0
+// FUNCTION: ROBLOX 0x005c3630
 void SoundChannel::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	releaseChannel();
@@ -725,7 +727,7 @@ void SoundService::closeFmod()
 }
 
 // FUNCTION: WEBSERVICE 0x10081200
-// FUNCTION: ROBLOX 0x005c4e00
+// STUB: ROBLOX 0x005c4e00
 SoundService::~SoundService()
 {
 }
@@ -817,7 +819,7 @@ void SoundService::garbageCollectSounds()
 }
 
 // FUNCTION: WEBSERVICE 0x10082bd0
-// FUNCTION: ROBLOX 0x005c6690
+// STUB: ROBLOX 0x005c6690
 void SoundService::onEvent(const RunService* source, Heartbeat event)
 {
 	if (system) {
@@ -858,6 +860,7 @@ void SoundService::onEvent(const RunService* source, Heartbeat event)
 }
 
 // FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+// FUNCTION: ROBLOX 0x00633110 FOLDED
 bool SoundChannel::askSetParent(const Instance* parent) const
 {
 	return true;
@@ -873,7 +876,7 @@ SoundChannel::SoundChannel()
 }
 
 // FUNCTION: WEBSERVICE 0x10082ec0
-// FUNCTION: ROBLOX 0x005c6980
+// STUB: ROBLOX 0x005c6980
 void SoundChannel::updateListenState()
 {
 	if (part && is3D && fmod_channel) {
@@ -1013,7 +1016,7 @@ void SoundChannel::playSound(Instance* context)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10083940
-// FUNCTION: ROBLOX 0x005c7450
+// STUB: ROBLOX 0x005c7450
 StockSound::StockSound()
 {
 	propArchivable.setValue(this, false);
@@ -1231,7 +1234,7 @@ void SoundService::loadStockSounds()
 }
 
 // FUNCTION: WEBSERVICE 0x10084350
-// FUNCTION: ROBLOX 0x005c7ef0
+// STUB: ROBLOX 0x005c7ef0
 void SoundService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);

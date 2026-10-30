@@ -28,6 +28,7 @@ public:
 
 private:
 	// FUNCTION: WEBSERVICE 0x100c66c0 FOLDED
+	// FUNCTION: ROBLOX 0x00646810 FOLDED
 	virtual JointType getJointType() const { return SNAP_JOINT; } // vtable+0x14
 
 	static bool compatibleSurfaces(Primitive* prim0, Primitive* prim1, NormalId normalId0, NormalId normalId1);

@@ -5,6 +5,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100cac10 FOLDED
+// FUNCTION: ROBLOX 0x006406e0 FOLDED
 const Name& ScriptMouseCommand::getName() const
 {
 	return Name::declare<sMouse>();
@@ -41,6 +42,7 @@ void ScriptMouseCommand::onMouseIdle(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101170d0 FOLDED
+// FUNCTION: ROBLOX 0x006406a0 FOLDED
 MouseCommand* ScriptMouseCommand::onMouseDown(const UIEvent& uiEvent)
 {
 	mouse->update(uiEvent);
@@ -48,6 +50,7 @@ MouseCommand* ScriptMouseCommand::onMouseDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101170d0 FOLDED
+// FUNCTION: ROBLOX 0x006406a0 FOLDED
 MouseCommand* ScriptMouseCommand::onMouseUp(const UIEvent& uiEvent)
 {
 	mouse->update(uiEvent);
@@ -55,6 +58,7 @@ MouseCommand* ScriptMouseCommand::onMouseUp(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101170d0 FOLDED
+// FUNCTION: ROBLOX 0x006406a0 FOLDED
 MouseCommand* ScriptMouseCommand::onPeekKeyDown(const UIEvent& uiEvent)
 {
 	mouse->update(uiEvent);
@@ -62,7 +66,7 @@ MouseCommand* ScriptMouseCommand::onPeekKeyDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10117110
-// FUNCTION: ROBLOX 0x00640700
+// STUB: ROBLOX 0x00640700
 ScriptMouseCommand::ScriptMouseCommand(Workspace* workspace) : MouseCommand(workspace)
 {
 	mouse = Creatable<Instance>::create<Mouse>();

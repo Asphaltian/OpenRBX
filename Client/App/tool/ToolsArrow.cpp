@@ -19,6 +19,7 @@ char sBoxSelectCommand[] = "BoxSelect";
 char sArrowTool[] = "Arrow";
 
 // FUNCTION: WEBSERVICE 0x100bf0e0
+// FUNCTION: ROBLOX 0x0063c600
 void ArrowToolBase::onMouseHover(const UIEvent& uiEvent)
 {
 	onMouseIdle(uiEvent);

@@ -27,6 +27,7 @@ public:
 	virtual ~Seated(); // vtable+0x04
 
 	// SYNTHETIC: WEBSERVICE 0x10122bc0
+	// SYNTHETIC: ROBLOX 0x00663d40
 	// RBX::Seated::`scalar deleting destructor'
 };
 

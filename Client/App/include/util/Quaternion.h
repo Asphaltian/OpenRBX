@@ -77,7 +77,7 @@ public:
 	float magnitude() const { return sqrtf(dot(*this)); }
 
 	// FUNCTION: WEBSERVICE 0x10121060
-	// FUNCTION: ROBLOX 0x004c30a0
+	// STUB: ROBLOX 0x004c30a0
 	void normalize() { *this *= 1.0f / magnitude(); }
 
 	// FUNCTION: WEBSERVICE 0x10126ba0

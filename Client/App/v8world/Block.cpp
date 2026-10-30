@@ -94,6 +94,7 @@ Matrix3 Block::getMomentHollow(float mass) const
 }
 
 // FUNCTION: WEBSERVICE 0x101091f0
+// FUNCTION: ROBLOX 0x00648e30
 float Block::getGridVolume() const
 {
 	return gridSize.z * gridSize.y * gridSize.x;

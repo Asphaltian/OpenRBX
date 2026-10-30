@@ -230,7 +230,7 @@ Extents DragUtilities::computeExtents(const std::vector<boost::weak_ptr<PartInst
 }
 
 // FUNCTION: WEBSERVICE 0x100a75c0
-// FUNCTION: ROBLOX 0x005fa130
+// STUB: ROBLOX 0x005fa130
 void DragUtilities::getPrimitivesConst(const Instance* instance, std::vector<const Primitive*>& primitives)
 {
 	if (const PartInstance* part = dynamic_cast<const PartInstance*>(instance)) {

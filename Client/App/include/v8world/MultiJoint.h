@@ -36,6 +36,7 @@ protected:
 	virtual ~MultiJoint(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011fe30
+	// SYNTHETIC: ROBLOX 0x00648380
 	// RBX::MultiJoint::`scalar deleting destructor'
 
 	MultiJoint(int numBreakingConnectors);

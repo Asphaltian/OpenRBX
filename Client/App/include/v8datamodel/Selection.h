@@ -90,7 +90,7 @@ public:
 	void removeFromSelection(const Instance* instance);
 
 	// FUNCTION: WEBSERVICE 0x100bfd90
-	// FUNCTION: ROBLOX 0x004259e0
+	// STUB: ROBLOX 0x004259e0
 	bool isSelected(const Instance* instance) const
 	{
 		return std::find(selection->begin(), selection->end(), shared_from(instance)) != selection->end();
@@ -244,8 +244,10 @@ protected:
 	// SYNTHETIC: WEBSERVICE 0x100a1ce0
 	// RBX::FilteredSelection<RBX::PartInstance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100a32e0
+	// STUB: ROBLOX 0x005eb920
 	// RBX::FilteredSelection<RBX::PartInstance>::onSelectionChanged
 	// TEMPLATE: WEBSERVICE 0x100a4a80
+	// STUB: ROBLOX 0x005ed120
 	// RBX::FilteredSelection<RBX::PartInstance>::onAncestorChanged
 	// TEMPLATE: WEBSERVICE 0x100bf860
 	// TEMPLATE: ROBLOX 0x006212e0
@@ -255,10 +257,10 @@ protected:
 	// SYNTHETIC: WEBSERVICE 0x100bfb40
 	// RBX::FilteredSelection<RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100c01e0
-	// TEMPLATE: ROBLOX 0x00621c00
+	// STUB: ROBLOX 0x00621c00
 	// RBX::FilteredSelection<RBX::Instance>::onSelectionChanged
 	// TEMPLATE: WEBSERVICE 0x100c0630
-	// TEMPLATE: ROBLOX 0x00622050
+	// STUB: ROBLOX 0x00622050
 	// RBX::FilteredSelection<RBX::Instance>::onAncestorChanged
 	// clang-format on
 
@@ -278,10 +280,10 @@ private:
 // FUNCTION: ROBLOX 0x00566fc0
 // RBX::SelectionChanged::SelectionChanged
 // TEMPLATE: WEBSERVICE 0x1005d010
-// TEMPLATE: ROBLOX 0x005670b0
+// STUB: ROBLOX 0x005670b0
 // ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@PAV?$Listener@VSelection@RBX@@VSelectionChanged@2@@2@@Z
 // TEMPLATE: WEBSERVICE 0x1005d160
-// TEMPLATE: ROBLOX 0x00567200
+// STUB: ROBLOX 0x00567200
 // ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@@Z
 // FUNCTION: WEBSERVICE 0x100d6c30
 // RBX::Notifier<RBX::RunService,RBX::Stepped>::addListener

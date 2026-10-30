@@ -21,6 +21,7 @@ public:
 	static bool unlocked(const Primitive* testMe);
 
 	// FUNCTION: WEBSERVICE 0x100bead0
+	// FUNCTION: ROBLOX 0x00620710
 	virtual Result filterResult(const Primitive* testMe) const // vtable+0x00
 	{
 		return unlocked(testMe) ? INCLUDE_PRIM : STOP_TEST;

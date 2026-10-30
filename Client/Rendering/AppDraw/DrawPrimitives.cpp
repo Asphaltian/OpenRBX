@@ -56,7 +56,7 @@ void DrawPrimitives::rawCylinderAlongX(float radius, float axis, G3D::RenderDevi
 }
 
 // FUNCTION: WEBSERVICE 0x100316a0
-// FUNCTION: ROBLOX 0x00671740
+// STUB: ROBLOX 0x00671740
 void DrawPrimitives::rawBox(const G3D::AABox& box, G3D::RenderDevice* rd)
 {
 	IndexBox indexBox(box.low(), box.high());

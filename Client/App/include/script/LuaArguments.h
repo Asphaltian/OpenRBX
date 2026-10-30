@@ -26,6 +26,7 @@ public:
 	LuaArguments(lua_State* L, int offset) : offset(offset), L(L) {}
 
 	// FUNCTION: WEBSERVICE 0x100ab2d0
+	// FUNCTION: ROBLOX 0x005fc760
 	virtual unsigned int size() const { return lua_gettop(L) - 1; }
 
 	// STUB: WEBSERVICE 0x10064ef0
@@ -122,7 +123,7 @@ public:
 	int push(const Reflection::Value& value) const { return push(value, L); }
 
 	// FUNCTION: WEBSERVICE 0x10062a40
-	// FUNCTION: ROBLOX 0x0056fe60
+	// STUB: ROBLOX 0x0056fe60
 	static int push(const Reflection::Value& value, lua_State* const L)
 	{
 		if (value.isType<void>()) {

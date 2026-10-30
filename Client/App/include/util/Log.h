@@ -44,6 +44,7 @@ public:
 	virtual ~Log(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1003e140
+	// SYNTHETIC: ROBLOX 0x005b99d0
 	// RBX::Log::`scalar deleting destructor'
 
 	std::string logFile; // 0x08

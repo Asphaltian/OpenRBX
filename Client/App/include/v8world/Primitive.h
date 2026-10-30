@@ -178,6 +178,7 @@ public:
 	virtual ~Primitive(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x100a8740
+	// SYNTHETIC: ROBLOX 0x005f6ff0
 	// RBX::Primitive::`scalar deleting destructor'
 
 	Body* getBody() { return body; }
@@ -306,6 +307,7 @@ public:
 	void setPrimitiveType(Geometry::GeometryType geometryType);
 
 	// FUNCTION: WEBSERVICE 0x100a8240
+	// FUNCTION: ROBLOX 0x005f6af0
 	virtual float getRadius() const { return geometry->getRadius(); } // vtable+0x0c
 
 	float getPlanarSize() const;

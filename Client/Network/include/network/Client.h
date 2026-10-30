@@ -57,6 +57,7 @@ DECOMP_SIZE_ASSERT(Client, 0x118)
 // SYNTHETIC: WEBSERVICE 0x101966c0
 // Exposer::~Exposer
 // SYNTHETIC: WEBSERVICE 0x101966d0
+// SYNTHETIC: ROBLOX 0x004b88b0
 // Exposer::`scalar deleting destructor'
 
 // clang-format off

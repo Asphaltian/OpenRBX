@@ -32,6 +32,7 @@ GettingUp::GettingUp(Humanoid* humanoid) : Named<Balancing, sGettingUp>(humanoid
 }
 
 // FUNCTION: WEBSERVICE 0x101232a0
+// FUNCTION: ROBLOX 0x00664360
 GettingUp::~GettingUp()
 {
 	Humanoid::event_GettingUp.fire(humanoid, false);

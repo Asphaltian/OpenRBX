@@ -419,7 +419,7 @@ void SleepStage::onWakeUpRequest(Assembly* assembly, bool recursive)
 }
 
 // FUNCTION: WEBSERVICE 0x1011a020
-// FUNCTION: ROBLOX 0x00643b10
+// STUB: ROBLOX 0x00643b10
 void SleepStage::stepJoints()
 {
 	static std::vector<Joint*> toSleeping;
@@ -445,7 +445,7 @@ void SleepStage::stepJoints()
 }
 
 // FUNCTION: WEBSERVICE 0x1011a1b0
-// FUNCTION: ROBLOX 0x00643ca0
+// STUB: ROBLOX 0x00643ca0
 void SleepStage::stepAssembliesAwake()
 {
 	static std::vector<Assembly*> toSleepingChecking;
@@ -473,7 +473,7 @@ void SleepStage::stepAssembliesAwake()
 }
 
 // FUNCTION: WEBSERVICE 0x1011a310
-// FUNCTION: ROBLOX 0x00643e00
+// STUB: ROBLOX 0x00643e00
 void SleepStage::stepAssembliesSleepingChecking()
 {
 	static std::vector<Assembly*> toWake;
@@ -622,7 +622,7 @@ void SleepStage::changeContactState(const std::vector<Contact*>& contacts, Sim::
 }
 
 // FUNCTION: WEBSERVICE 0x1011a7e0
-// FUNCTION: ROBLOX 0x006442d0
+// STUB: ROBLOX 0x006442d0
 void SleepStage::stepContacts(ContactList& contacts)
 {
 	static std::vector<Contact*> toSleeping;
@@ -740,7 +740,7 @@ void SleepStage::stepAssembliesRecursiveWakePending()
 }
 
 // FUNCTION: WEBSERVICE 0x1011afa0
-// FUNCTION: ROBLOX 0x00644a90
+// STUB: ROBLOX 0x00644a90
 void SleepStage::stepAssembliesWakePending()
 {
 	static std::vector<Assembly*> toWake;

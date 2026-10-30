@@ -46,12 +46,14 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10097030
+	// FUNCTION: ROBLOX 0x0063c2b0
 	virtual void announceID(const XmlNameValuePair* valueID, Instance* target) // vtable+0x00
 	{
 		processID(valueID, target);
 	}
 
 	// FUNCTION: WEBSERVICE 0x10097040
+	// FUNCTION: ROBLOX 0x00446b70
 	virtual void announceIDREF(
 		const XmlNameValuePair* valueIDREF, Reflection::DescribedBase* propertyOwner, const IIDREF* idref
 	) // vtable+0x04
@@ -61,7 +63,7 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x10097200
-	// FUNCTION: ROBLOX 0x00446d30
+	// STUB: ROBLOX 0x00446d30
 	virtual bool processID(const XmlNameValuePair* valueID, Instance* source) // vtable+0x0c
 	{
 		InstanceHandle h;
@@ -81,7 +83,7 @@ protected:
 	// RBX::MergeBinder::~MergeBinder
 
 	// FUNCTION: WEBSERVICE 0x100979e0
-	// FUNCTION: ROBLOX 0x004477c0
+	// STUB: ROBLOX 0x004477c0
 	virtual bool processIDREF(
 		const XmlNameValuePair* valueIDREF, Reflection::DescribedBase* propertyOwner, const IIDREF* idref
 	) // vtable+0x10

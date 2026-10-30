@@ -42,6 +42,7 @@ void ThreadRef::addToNode()
 }
 
 // FUNCTION: WEBSERVICE 0x100b1340
+// FUNCTION: ROBLOX 0x005a4a70
 void ThreadRef::removeRef()
 {
 	if (L != NULL) {

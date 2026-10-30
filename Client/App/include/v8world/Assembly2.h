@@ -94,6 +94,7 @@ public:
 	virtual ~Assembly(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011b5c0
+	// SYNTHETIC: ROBLOX 0x00644fb0
 	// RBX::Assembly::`scalar deleting destructor'
 
 	void setParent(Assembly* value);

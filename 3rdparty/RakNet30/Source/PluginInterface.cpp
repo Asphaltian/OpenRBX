@@ -85,6 +85,7 @@ void PluginInterface::OnShutdown(RakPeerInterface *peer)
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x101aaa80
+// FUNCTION: ROBLOX 0x006a0720
 void PluginInterface::OnCloseConnection(RakPeerInterface *peer, SystemAddress systemAddress)
 {
 }
@@ -92,6 +93,7 @@ void PluginInterface::OnCloseConnection(RakPeerInterface *peer, SystemAddress sy
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x101aaa90 FOLDED
+// FUNCTION: ROBLOX 0x004b8870 FOLDED
 void PluginInterface::OnDirectSocketSend(const char *data, const unsigned bitsUsed, SystemAddress remoteSystemAddress)
 {
 }
@@ -99,6 +101,7 @@ void PluginInterface::OnDirectSocketSend(const char *data, const unsigned bitsUs
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x101aaa90 FOLDED
+// FUNCTION: ROBLOX 0x004b8870 FOLDED
 void PluginInterface::OnDirectSocketReceive(const char *data, const unsigned bitsUsed, SystemAddress remoteSystemAddress)
 {
 }
@@ -106,6 +109,7 @@ void PluginInterface::OnDirectSocketReceive(const char *data, const unsigned bit
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x101aaaa0
+// FUNCTION: ROBLOX 0x006ee4c0
 void PluginInterface::OnInternalPacket(InternalPacket *internalPacket, unsigned frameNumber, SystemAddress remoteSystemAddress, RakNetTime time, bool isSend)
 {
 }

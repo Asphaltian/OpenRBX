@@ -52,6 +52,7 @@ public:
 	static Reflection::BoundProp<bool, 1> prop_Disabled;
 
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	// FUNCTION: ROBLOX 0x00633110 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return true; }
 	bool isCodeEmbedded() const;
 

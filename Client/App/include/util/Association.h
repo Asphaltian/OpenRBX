@@ -23,9 +23,10 @@ namespace RBX {
 // SYNTHETIC: ROBLOX 0x0056ec40 FOLDED
 // RBX::Association<RBX::Instance>::TItem<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >::~TItem<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >
 // SYNTHETIC: WEBSERVICE 0x10061a80
+// SYNTHETIC: ROBLOX 0x0056ecb0
 // RBX::Association<RBX::Instance>::TItem<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x10064150
-// TEMPLATE: ROBLOX 0x00571780
+// STUB: ROBLOX 0x00571780
 // RBX::Association<RBX::Instance>::get<boost::shared_ptr<RBX::Lua::ThreadRef::Node> >
 // TEMPLATE: WEBSERVICE 0x1019c630
 // TEMPLATE: ROBLOX 0x004c2a00
@@ -34,14 +35,16 @@ namespace RBX {
 // SYNTHETIC: ROBLOX 0x004c2de0
 // RBX::Association<RBX::Instance>::TItem<RBX::Network::ClientPhysics>::~TItem<RBX::Network::ClientPhysics>
 // SYNTHETIC: WEBSERVICE 0x1019d160
+// SYNTHETIC: ROBLOX 0x004c3c10
 // RBX::Association<RBX::Instance>::Item::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x1019d4b0
+// SYNTHETIC: ROBLOX 0x004c4020
 // RBX::Association<RBX::Instance>::TItem<RBX::Network::ClientPhysics>::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x101a2b80
-// TEMPLATE: ROBLOX 0x004c9630
+// STUB: ROBLOX 0x004c9630
 // RBX::Association<RBX::Instance>::get<TimeStamp>
 // TEMPLATE: WEBSERVICE 0x101a2cb0
-// TEMPLATE: ROBLOX 0x004c9760
+// STUB: ROBLOX 0x004c9760
 // RBX::Association<RBX::Instance>::get<RBX::Network::ClientPhysics,RBX::PartInstance *>
 // clang-format on
 template <class T>

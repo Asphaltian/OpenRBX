@@ -50,7 +50,7 @@ public:
 	// clang-format on
 
 	// SYNTHETIC: WEBSERVICE 0x10031fe0
-	// SYNTHETIC: ROBLOX 0x00582e00
+	// STUB: ROBLOX 0x00582e00
 	// RBX::StandardOut::StandardOut
 
 	// SYNTHETIC: WEBSERVICE 0x102213d0
@@ -62,6 +62,7 @@ public:
 	// RBX::StandardOut::~StandardOut
 
 	// SYNTHETIC: WEBSERVICE 0x10032190
+	// SYNTHETIC: ROBLOX 0x00582fb0
 	// RBX::StandardOut::`scalar deleting destructor'
 
 	boost::mutex sync; // 0x20

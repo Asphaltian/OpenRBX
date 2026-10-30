@@ -52,12 +52,14 @@ protected:
 DECOMP_SIZE_ASSERT(Geometry, 0x10)
 
 // FUNCTION: WEBSERVICE 0x100a0710 FOLDED
+// FUNCTION: ROBLOX 0x00640840 FOLDED
 inline float Geometry::getRadius() const
 {
 	return 0;
 }
 
 // FUNCTION: WEBSERVICE 0x100a0710 FOLDED
+// FUNCTION: ROBLOX 0x00640840 FOLDED
 inline float Geometry::getGridVolume() const
 {
 	return 0;
@@ -79,6 +81,7 @@ inline Matrix3 Geometry::getMoment(float mass) const
 }
 
 // FUNCTION: WEBSERVICE 0x100a76a0 FOLDED
+// FUNCTION: ROBLOX 0x00565780 FOLDED
 inline bool Geometry::hitTest(const Ray& ray, Vector3& hitPoint, bool& inside)
 {
 	return false;
@@ -100,6 +103,7 @@ inline Vector3 Geometry::getCenterToCorner(const Matrix3& rotation) const
 }
 
 // FUNCTION: WEBSERVICE 0x100d7a70 FOLDED
+// FUNCTION: ROBLOX 0x00737080 FOLDED
 inline Geometry::GeometryType Geometry::getGeometryType() const
 {
 	return GEOMETRY_NONE;

@@ -12,6 +12,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x1011c900
+// FUNCTION: ROBLOX 0x006467f0
 void SimJobStage::onEdgeRemoving(Edge* e)
 {
 	e->removeFromKernel();

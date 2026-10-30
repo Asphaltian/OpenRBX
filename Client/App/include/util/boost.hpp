@@ -28,7 +28,7 @@ class worker_thread : public boost::noncopyable
 		bool endRequest;                // 0x20
 
 		// FUNCTION: WEBSERVICE 0x10032340
-		// FUNCTION: ROBLOX 0x005a9d90
+		// STUB: ROBLOX 0x005a9d90
 		data() : endRequest(false) {}
 	};
 

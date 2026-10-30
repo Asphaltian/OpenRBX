@@ -44,7 +44,7 @@ protected:
 	Type(const char* name, const std::type_info& type) : Descriptor(name), type(type), tag(Name::lookup(name)) {}
 
 	// FUNCTION: WEBSERVICE 0x1003e9c0
-	// FUNCTION: ROBLOX 0x004a4cc0
+	// STUB: ROBLOX 0x004a4cc0
 	Type(const char* name, const std::type_info& type, const char* tag)
 		: Descriptor(name), type(type), tag(Name::declare(tag, -1))
 	{
@@ -151,7 +151,7 @@ public:
 	// TEMPLATE: ROBLOX 0x0056fc00
 	// RBX::Reflection::Value::operator=<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// TEMPLATE: WEBSERVICE 0x1001bf90
-	// TEMPLATE: ROBLOX 0x00571f10
+	// STUB: ROBLOX 0x00571f10
 	// RBX::Reflection::Value::operator=<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value> > >
 	// TEMPLATE: WEBSERVICE 0x10045d80
 	// TEMPLATE: ROBLOX 0x0056fcf0
@@ -193,7 +193,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00412bc0
 	// RBX::Reflection::Value::isType<RBX::ContentId>
 	// TEMPLATE: WEBSERVICE 0x1001c450
-	// TEMPLATE: ROBLOX 0x00412be0
+	// STUB: ROBLOX 0x00412be0
 	// RBX::Reflection::Value::isType<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value> > >
 	// TEMPLATE: WEBSERVICE 0x1003f630
 	// TEMPLATE: ROBLOX 0x0056d680
@@ -258,7 +258,7 @@ DECOMP_SIZE_ASSERT(Value, 0x08)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1003fa40
-// TEMPLATE: ROBLOX 0x005a63f0
+// STUB: ROBLOX 0x005a63f0
 // RBX::Reflection::Value::genericConvert<int>
 // TEMPLATE: WEBSERVICE 0x1003fc30
 // TEMPLATE: ROBLOX 0x005a65a0

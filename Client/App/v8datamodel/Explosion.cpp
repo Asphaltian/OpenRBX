@@ -86,7 +86,7 @@ Explosion::Explosion() : age(0.0f), blastRadius(4.0f), blastPressure(500000.0f)
 }
 
 // FUNCTION: WEBSERVICE 0x100e3120
-// FUNCTION: ROBLOX 0x00626230
+// STUB: ROBLOX 0x00626230
 void Explosion::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);
@@ -109,7 +109,7 @@ void Explosion::setBlastRadius(float _blastRadius)
 }
 
 // FUNCTION: WEBSERVICE 0x100e3750
-// FUNCTION: ROBLOX 0x00626860
+// STUB: ROBLOX 0x00626860
 void Explosion::signalBlast(const G3D::Array<Primitive*>& primitives)
 {
 	if (!signal_Hit.empty(this)) {
@@ -153,6 +153,7 @@ void Explosion::onEvent(const RunService* source, Stepped event)
 }
 
 // FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+// FUNCTION: ROBLOX 0x00633110 FOLDED
 bool Explosion::askSetParent(const Instance* instance) const
 {
 	return true;

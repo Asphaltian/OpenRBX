@@ -70,6 +70,7 @@ private:
 	virtual void invalidateLighting(bool updateSkybox);                              // vtable+0x28
 
 	// SYNTHETIC: WEBSERVICE 0x1016c220
+	// SYNTHETIC: ROBLOX 0x00477740
 	// RBX::View::View::`scalar deleting destructor'
 };
 

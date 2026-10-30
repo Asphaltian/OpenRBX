@@ -161,7 +161,7 @@ static int getCPUSpeed()
 }
 
 // FUNCTION: WEBSERVICE 0x10169ff0
-// FUNCTION: ROBLOX 0x0049d080
+// STUB: ROBLOX 0x0049d080
 static std::string getMaxRes()
 {
 	int width = GetSystemMetrics(SM_CXSCREEN);

@@ -53,7 +53,7 @@ DECOMP_SIZE_ASSERT(NetworkSettings, 0x124)
 // SYNTHETIC: WEBSERVICE 0x1021fa60
 // RBX::`dynamic initializer for 'prop_ExtraPingVariance''
 // SYNTHETIC: WEBSERVICE 0x1021fa90
-// SYNTHETIC: ROBLOX 0x007ed620
+// STUB: ROBLOX 0x007ed620
 // RBX::`dynamic initializer for 'prop_MaxDataModelSendBuffer''
 // SYNTHETIC: WEBSERVICE 0x1021fac0
 // RBX::`dynamic initializer for 'prop_DataPacketSize''

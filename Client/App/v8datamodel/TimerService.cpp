@@ -62,7 +62,7 @@ TimerService::TimerService()
 }
 
 // FUNCTION: WEBSERVICE 0x100fbf40
-// FUNCTION: ROBLOX 0x005e8b90
+// STUB: ROBLOX 0x005e8b90
 void TimerService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(runService, this);

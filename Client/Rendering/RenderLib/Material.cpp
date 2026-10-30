@@ -51,6 +51,7 @@ void Material::Level::configureRenderDevice(G3D::RenderDevice* renderDevice) con
 }
 
 // FUNCTION: WEBSERVICE 0x101f6d40
+// FUNCTION: ROBLOX 0x004a1670
 Material::~Material()
 {
 }

@@ -15,6 +15,7 @@ namespace RBX {
 char sNewNullTool[] = "NewNullTool";
 
 // FUNCTION: WEBSERVICE 0x100c5000
+// FUNCTION: ROBLOX 0x00622790
 NewNullTool::~NewNullTool()
 {
 }

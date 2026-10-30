@@ -23,7 +23,7 @@ ClassDescriptor::ClassDescriptor()
 }
 
 // FUNCTION: WEBSERVICE 0x100478c0
-// FUNCTION: ROBLOX 0x005a9b70
+// STUB: ROBLOX 0x005a9b70
 ClassDescriptor::ClassDescriptor(ClassDescriptor& base, const char* name)
 	: Descriptor(name), MemberDescriptorContainer<PropertyDescriptor>(&base),
 	  MemberDescriptorContainer<SignalDescriptor>(&base), MemberDescriptorContainer<FunctionDescriptor>(&base),

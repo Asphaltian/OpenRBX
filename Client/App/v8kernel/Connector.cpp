@@ -12,6 +12,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100a0710 FOLDED
+// FUNCTION: ROBLOX 0x00640840 FOLDED
 float Connector::potentialEnergy()
 {
 	return 0.0f;
@@ -192,6 +193,7 @@ void ContactConnector::computeForce(const float dt, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x1011edb0
+// FUNCTION: ROBLOX 0x00647330
 bool PointToPointBreakConnector::getBroken()
 {
 	return broken;

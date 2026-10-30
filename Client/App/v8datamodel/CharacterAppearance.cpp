@@ -57,6 +57,7 @@ BoundProp<BrickColor, 1> BodyColors::prop_RightLegColor(
 );
 
 // FUNCTION: WEBSERVICE 0x10059c10 FOLDED
+// FUNCTION: ROBLOX 0x00564b10 FOLDED
 bool CharacterAppearance::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const ModelInstance*>(instance) != NULL;

@@ -24,12 +24,14 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+// FUNCTION: ROBLOX 0x005df250 FOLDED
 bool PartChunk::castsShadows() const
 {
 	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+// FUNCTION: ROBLOX 0x005df250 FOLDED
 bool PartChunk::cullable() const
 {
 	return true;
@@ -359,11 +361,13 @@ PartChunk::~PartChunk()
 }
 
 // FUNCTION: WEBSERVICE 0x1016f360
+// FUNCTION: ROBLOX 0x00479f50
 Decal::~Decal()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1016f400
+// FUNCTION: ROBLOX 0x00479ff0
 Texture::~Texture()
 {
 }
@@ -461,6 +465,7 @@ void Part::updateMesh()
 }
 
 // FUNCTION: WEBSERVICE 0x10173790
+// FUNCTION: ROBLOX 0x0047dbe0
 void Decal::updateMesh()
 {
 	if (partInstance) {
@@ -511,6 +516,7 @@ void Decal::updateMesh()
 }
 
 // FUNCTION: WEBSERVICE 0x101739a0
+// FUNCTION: ROBLOX 0x0047ddf0
 void Texture::updateMesh()
 {
 	if (partInstance) {
@@ -565,7 +571,7 @@ void Texture::updateMesh()
 }
 
 // FUNCTION: WEBSERVICE 0x10173c90
-// FUNCTION: ROBLOX 0x0047e0e0
+// STUB: ROBLOX 0x0047e0e0
 void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 {
 	SpecialShape* specialShape = dynamic_cast<SpecialShape*>(child.get());
@@ -582,7 +588,7 @@ void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 }
 
 // FUNCTION: WEBSERVICE 0x10174160
-// FUNCTION: ROBLOX 0x0047e5b0
+// STUB: ROBLOX 0x0047e5b0
 PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>& partInstance, View* view)
 	: Render::Chunk(polygonOffset), partInstance(partInstance), materialInvalid(true), view(view), specialShape(NULL)
 {
@@ -603,7 +609,7 @@ PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>&
 }
 
 // FUNCTION: WEBSERVICE 0x10174480
-// FUNCTION: ROBLOX 0x0047e8d0
+// STUB: ROBLOX 0x0047e8d0
 Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
 	: PartChunk(Render::Chunk::DECAL_OFFSET, shared_from(&parentPart), view), decal(shared_from(&decal))
 {
@@ -614,7 +620,7 @@ Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
 }
 
 // FUNCTION: WEBSERVICE 0x10174640
-// FUNCTION: ROBLOX 0x0047ea90
+// STUB: ROBLOX 0x0047ea90
 Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 	: PartChunk(Render::Chunk::TEXTURE_OFFSET, shared_from(&parentPart), view), texture(shared_from(&texture))
 {
@@ -627,7 +633,7 @@ Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 }
 
 // FUNCTION: WEBSERVICE 0x10174800
-// FUNCTION: ROBLOX 0x0047ec50
+// STUB: ROBLOX 0x0047ec50
 Part::Part(const boost::shared_ptr<PartInstance>& partInstance, View* view) : PartChunk(0.0f, partInstance, view)
 {
 	if (partInstance->getCanAggregate()) {

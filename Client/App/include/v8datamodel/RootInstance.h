@@ -74,6 +74,7 @@ protected:
 	virtual void onDescendentRemoving(const boost::shared_ptr<Instance>& instance);
 	virtual void onLastChildRemoved() {}
 	// FUNCTION: WEBSERVICE 0x1006ab60
+	// FUNCTION: ROBLOX 0x005a0c10
 	virtual void onChildControllerChanged() { ControllersUsed.setDirty(); }
 
 	G3D::Rect2D viewPort;       // 0x27c

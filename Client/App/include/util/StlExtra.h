@@ -10,7 +10,7 @@ namespace RBX {
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100d3720
-// TEMPLATE: ROBLOX 0x0060aee0
+// STUB: ROBLOX 0x0060aee0
 // RBX::fastRemoveIndex<RBX::ContactConnector *>
 // TEMPLATE: WEBSERVICE 0x100d40c0
 // TEMPLATE: ROBLOX 0x0060b0a0
@@ -30,7 +30,7 @@ void fastRemoveIndex(std::vector<T>& vec, unsigned int index)
 }
 
 // TEMPLATE: WEBSERVICE 0x10103660
-// TEMPLATE: ROBLOX 0x005f4fb0
+// STUB: ROBLOX 0x005f4fb0
 // RBX::fastRemoveShort<RBX::Assembly *>
 
 template <class T>

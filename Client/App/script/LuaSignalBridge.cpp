@@ -118,7 +118,7 @@ int Bridge<boost::signals::connection, 1>::on_index(
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x100b0440
-// FUNCTION: ROBLOX 0x00600d60
+// STUB: ROBLOX 0x00600d60
 static unsigned int pushArgs(lua_State* L, const std::vector<boost::any>& arguments)
 {
 	for (std::vector<boost::any>::const_iterator iter = arguments.begin(), end = arguments.end(); iter != end; ++iter) {

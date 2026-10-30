@@ -88,6 +88,7 @@ private:
 	int getCursor();
 
 	// FUNCTION: WEBSERVICE 0x100c9ca0
+	// FUNCTION: ROBLOX 0x005e3d50
 	virtual bool drawSelected() const { return active; }
 
 public:

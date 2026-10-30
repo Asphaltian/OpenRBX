@@ -21,9 +21,11 @@ public:
 	// RBX::Team::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	// FUNCTION: ROBLOX 0x00633110 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return true; }
 
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	// FUNCTION: ROBLOX 0x00633110 FOLDED
 	virtual bool askAddChild(const Instance* instance) const { return true; }
 
 	int getScore() const;
@@ -55,10 +57,10 @@ DECOMP_SIZE_ASSERT(Team, 0x104)
 // SYNTHETIC: WEBSERVICE 0x1021bdc0
 // RBX::`dynamic initializer for 'prop_AutoAssignable''
 // SYNTHETIC: WEBSERVICE 0x1021be00
-// SYNTHETIC: ROBLOX 0x007ead80 FOLDED
+// STUB: ROBLOX 0x007ead80 FOLDED
 // `dynamic initializer for 'RBX::Team::prop_AutoColorCharacters''
 // SYNTHETIC: WEBSERVICE 0x10223a20
-// SYNTHETIC: ROBLOX 0x007f3130
+// STUB: ROBLOX 0x007f3130
 // `dynamic atexit destructor for 'RBX::Team::prop_AutoColorCharacters''
 // SYNTHETIC: WEBSERVICE 0x10223a40
 // RBX::`dynamic atexit destructor for 'prop_AutoAssignable''

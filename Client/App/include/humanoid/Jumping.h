@@ -29,6 +29,7 @@ public:
 	virtual ~Jumping(); // vtable+0x04
 
 	// SYNTHETIC: WEBSERVICE 0x10122fd0
+	// SYNTHETIC: ROBLOX 0x00664150
 	// RBX::Jumping::`scalar deleting destructor'
 };
 

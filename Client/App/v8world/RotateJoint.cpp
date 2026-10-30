@@ -33,11 +33,13 @@ RotateJoint::RotateJoint(Primitive* axlePrim, Primitive* holePrim, const Coordin
 }
 
 // FUNCTION: WEBSERVICE 0x1011ee20
+// FUNCTION: ROBLOX 0x006473a0
 RotateJoint::~RotateJoint()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x1011ee30
+// FUNCTION: ROBLOX 0x006473b0
 void RotateJoint::removeFromKernel()
 {
 	rotateConnector = NULL;

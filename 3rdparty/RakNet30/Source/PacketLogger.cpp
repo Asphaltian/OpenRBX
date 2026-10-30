@@ -61,6 +61,7 @@ void PacketLogger::Update(RakPeerInterface *peer)
 
 }
 // FUNCTION: WEBSERVICE 0x101ae9c0
+// FUNCTION: ROBLOX 0x004d3fe0
 void PacketLogger::OnDirectSocketSend(const char *data, const unsigned bitsUsed, SystemAddress remoteSystemAddress)
 {
 	char str[256];
@@ -81,11 +82,13 @@ void PacketLogger::OnDirectSocketSend(const char *data, const unsigned bitsUsed,
 }
 
 // FUNCTION: WEBSERVICE 0x101ae5a0
+// FUNCTION: ROBLOX 0x004d3bc0
 void PacketLogger::LogHeader(void)
 {
 	AddToLog("S|R,Typ,Pckt#,Frm #,PktID,BitLn,Time     ,Local IP:Port   ,RemoteIP:Port\n");
 }
 // FUNCTION: WEBSERVICE 0x101aeae0
+// FUNCTION: ROBLOX 0x004d4100
 void PacketLogger::OnDirectSocketReceive(const char *data, const unsigned bitsUsed, SystemAddress remoteSystemAddress)
 {
 	char str[256];
@@ -187,21 +190,25 @@ void PacketLogger::OnInternalPacket(InternalPacket *internalPacket, unsigned fra
 	AddToLog(str);
 }
 // FUNCTION: WEBSERVICE 0x101ae5b0
+// FUNCTION: ROBLOX 0x004d3bd0
 void PacketLogger::AddToLog(const char *str)
 {
 	WriteLog(str);
 }
 // FUNCTION: WEBSERVICE 0x101ae5c0
+// FUNCTION: ROBLOX 0x004d3be0
 void PacketLogger::WriteLog(const char *str)
 {
 	printf("%s", str);
 }
 // FUNCTION: WEBSERVICE 0x101ae5e0
+// FUNCTION: ROBLOX 0x004d3c00
 void PacketLogger::SetPrintID(bool print)
 {
 	printId=print;
 }
 // FUNCTION: WEBSERVICE 0x101ae5f0
+// FUNCTION: ROBLOX 0x004d3c10
 void PacketLogger::SetPrintAcks(bool print)
 {
 	printAcks=print;
@@ -299,6 +306,7 @@ char* PacketLogger::BaseIDTOString(unsigned char Id)
 #pragma warning( disable : 4100 ) // warning C4100: <variable name> : unreferenced formal parameter
 #endif
 // FUNCTION: WEBSERVICE 0x101ae900
+// FUNCTION: ROBLOX 0x004d3f20
 char* PacketLogger::UserIDTOString(unsigned char Id)
 {
 	// Users should override this

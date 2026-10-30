@@ -44,6 +44,7 @@ public:
 	// SYNTHETIC: ROBLOX 0x00640cf0
 	// RBX::Balancing::~Balancing
 	// SYNTHETIC: WEBSERVICE 0x101228b0
+	// SYNTHETIC: ROBLOX 0x00663a30
 	// RBX::Balancing::`scalar deleting destructor'
 };
 

@@ -37,6 +37,7 @@ public:
 	Kernel(IStage* upstream);
 
 	// SYNTHETIC: WEBSERVICE 0x100d5bc0
+	// SYNTHETIC: ROBLOX 0x0060cb60
 	// RBX::Kernel::`scalar deleting destructor'
 
 	virtual ~Kernel(); // vtable+0x00

@@ -333,7 +333,7 @@ Assembly::Assembly(Primitive* root)
 }
 
 // FUNCTION: WEBSERVICE 0x10103750
-// FUNCTION: ROBLOX 0x005f50a0
+// STUB: ROBLOX 0x005f50a0
 void Assembly::addChild(Assembly* child)
 {
 	children.push_back(child);

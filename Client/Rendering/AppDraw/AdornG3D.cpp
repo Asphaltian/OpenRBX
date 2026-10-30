@@ -11,18 +11,21 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10030c90
+// FUNCTION: ROBLOX 0x0066fac0
 G3D::Rect2D AdornG3D::getViewport() const
 {
 	return renderDevice->getViewport();
 }
 
 // FUNCTION: WEBSERVICE 0x10030cb0
+// FUNCTION: ROBLOX 0x0066fae0
 int AdornG3D::getWidth() const
 {
 	return renderDevice->getWidth();
 }
 
 // FUNCTION: WEBSERVICE 0x10030cc0
+// FUNCTION: ROBLOX 0x0066faf0
 int AdornG3D::getHeight() const
 {
 	return renderDevice->getHeight();
@@ -50,6 +53,7 @@ void AdornG3D::line2d(const G3D::Vector2& p0, const G3D::Vector2& p1, const G3D:
 }
 
 // FUNCTION: WEBSERVICE 0x10030dc0
+// FUNCTION: ROBLOX 0x0066fbf0
 void AdornG3D::setObjectToWorldMatrix(const G3D::CoordinateFrame& c)
 {
 	renderDevice->setObjectToWorldMatrix(c);
@@ -72,6 +76,7 @@ void AdornG3D::sphere(const G3D::Sphere& sphere, const G3D::Color4& solidColor, 
 }
 
 // FUNCTION: WEBSERVICE 0x10030e30
+// FUNCTION: ROBLOX 0x0066fc60
 void AdornG3D::explosion(const G3D::Sphere& sph, const G3D::Color4& solidColor, const G3D::Color4& wireColor)
 {
 	sphere(sph, solidColor, wireColor);
@@ -86,12 +91,14 @@ void AdornG3D::cylinderAlongX(float radius, float length, const G3D::Color4& sol
 }
 
 // FUNCTION: WEBSERVICE 0x10030e80
+// FUNCTION: ROBLOX 0x0066fcb0
 void AdornG3D::ray(const G3D::Ray& ray, const G3D::Color4& color, float scale)
 {
 	G3D::Draw::ray(ray, renderDevice, color, scale);
 }
 
 // FUNCTION: WEBSERVICE 0x10030eb0
+// FUNCTION: ROBLOX 0x0066fce0
 void AdornG3D::lineSegment(const G3D::LineSegment& lineSegment, const G3D::Color4& color, float scale)
 {
 	G3D::Draw::lineSegment(lineSegment, renderDevice, color, scale);
@@ -105,6 +112,7 @@ void AdornG3D::axes(const G3D::Color4& xColor, const G3D::Color4& yColor, const 
 }
 
 // FUNCTION: WEBSERVICE 0x10030f10
+// FUNCTION: ROBLOX 0x0066fd40
 void AdornG3D::quad(
 	const G3D::Vector3& v0,
 	const G3D::Vector3& v1,

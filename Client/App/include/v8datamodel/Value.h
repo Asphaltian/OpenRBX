@@ -72,11 +72,13 @@ private:
 	// TEMPLATE: WEBSERVICE 0x100f4960
 	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100f4980
+	// TEMPLATE: ROBLOX 0x00633540
 	// RBX::Value<G3D::Vector3,&RBX::sVector3Value>::Value<G3D::Vector3,&RBX::sVector3Value>
 	// TEMPLATE: WEBSERVICE 0x100f4aa0
 	// TEMPLATE: ROBLOX 0x00633640
 	// RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>
 	// TEMPLATE: WEBSERVICE 0x100f4bf0
+	// TEMPLATE: ROBLOX 0x00633780
 	// RBX::Value<G3D::Color3,&RBX::sColor3Value>::Value<G3D::Color3,&RBX::sColor3Value>
 	// TEMPLATE: WEBSERVICE 0x100f4cf0
 	// TEMPLATE: ROBLOX 0x006338b0

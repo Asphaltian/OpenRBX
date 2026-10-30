@@ -241,12 +241,14 @@ Humanoid::~Humanoid()
 }
 
 // FUNCTION: WEBSERVICE 0x100a13b0
+// FUNCTION: ROBLOX 0x005e99a0
 void Humanoid::getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives)
 {
 	getIgnorePrims(primitives);
 }
 
 // FUNCTION: WEBSERVICE 0x100a1480
+// FUNCTION: ROBLOX 0x005e9a70
 float Humanoid::getIntendedRotationAboutYAxis()
 {
 	if (currentState.get() != NULL) {
@@ -257,6 +259,7 @@ float Humanoid::getIntendedRotationAboutYAxis()
 }
 
 // FUNCTION: WEBSERVICE 0x10059c10 FOLDED
+// FUNCTION: ROBLOX 0x00564b10 FOLDED
 bool Humanoid::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const ModelInstance*>(instance) != NULL;
@@ -532,7 +535,7 @@ void Humanoid::buildJoints()
 }
 
 // FUNCTION: WEBSERVICE 0x100a2f70
-// FUNCTION: ROBLOX 0x005eb540
+// STUB: ROBLOX 0x005eb540
 G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
 {
 	G3D::Vector3 result = G3D::Vector3::zero();
@@ -589,7 +592,7 @@ G3D::Vector3 Humanoid::updateWalkDirection()
 }
 
 // FUNCTION: WEBSERVICE 0x100a3110
-// FUNCTION: ROBLOX 0x005eb750
+// STUB: ROBLOX 0x005eb750
 static void collectAllDescendantCharacterPrims(
 	boost::shared_ptr<Instance> descendent, std::vector<Primitive*>& primitives
 )
@@ -671,7 +674,7 @@ void Humanoid::onLocalHumanoidEnteringWorkspace()
 }
 
 // FUNCTION: WEBSERVICE 0x100a4610
-// FUNCTION: ROBLOX 0x005eccb0
+// STUB: ROBLOX 0x005eccb0
 void Humanoid::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->create<RunService>() : NULL, this);
@@ -754,7 +757,7 @@ void Humanoid::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4bf0
-// FUNCTION: ROBLOX 0x005ed290
+// STUB: ROBLOX 0x005ed290
 void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
 {
 	if (ModelInstance* character = getCharacterFromHumanoid(this)) {
@@ -997,7 +1000,7 @@ void Humanoid::onEvent(const RunService* source, Stepped event)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5770
-// FUNCTION: ROBLOX 0x005ede10
+// STUB: ROBLOX 0x005ede10
 void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
 {
 	if (noAdjust) {
@@ -1031,18 +1034,21 @@ void Humanoid::moveTo2(G3D::Vector3 worldPosition, boost::shared_ptr<Instance> p
 }
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+// FUNCTION: ROBLOX 0x005df250 FOLDED
 bool Humanoid::isControllable() const
 {
 	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+// FUNCTION: ROBLOX 0x005df250 FOLDED
 bool Humanoid::shouldRender2d() const
 {
 	return true;
 }
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+// FUNCTION: ROBLOX 0x005df250 FOLDED
 bool Humanoid::shouldRender3dAdorn() const
 {
 	return true;

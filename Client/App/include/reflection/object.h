@@ -14,6 +14,7 @@ namespace RBX {
 namespace Reflection {
 
 // SYNTHETIC: WEBSERVICE 0x100478a0
+// SYNTHETIC: ROBLOX 0x005a9b50
 // RBX::Reflection::ClassDescriptor::`scalar deleting destructor'
 
 // VTABLE: WEBSERVICE 0x1022e264
@@ -42,7 +43,7 @@ public:
 	bool operator!=(const ClassDescriptor& other) const;
 
 	// FUNCTION: WEBSERVICE 0x10005b60
-	// FUNCTION: ROBLOX 0x00419e70
+	// STUB: ROBLOX 0x00419e70
 	static ClassDescriptor& rootDescriptor()
 	{
 		static ClassDescriptor root;
@@ -70,7 +71,7 @@ public:
 	static ClassDescriptor& classDescriptor() { return ClassDescriptor::rootDescriptor(); }
 
 	// FUNCTION: WEBSERVICE 0x1004e900
-	// FUNCTION: ROBLOX 0x004cfd40
+	// STUB: ROBLOX 0x004cfd40
 	DescribedBase()
 	{
 		ClassDescriptor::lockedDown = true;

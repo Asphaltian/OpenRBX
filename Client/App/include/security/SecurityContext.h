@@ -48,7 +48,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x1005e9c0
-	// FUNCTION: ROBLOX 0x004a4dd0
+	// STUB: ROBLOX 0x004a4dd0
 	void requirePermission(Permissions permission, const char* operation) const
 	{
 		if (!isInRole(identity, permission)) {
@@ -73,7 +73,7 @@ private:
 	Context(Identities identity) : identity(identity) {}
 
 	// FUNCTION: WEBSERVICE 0x10066850
-	// FUNCTION: ROBLOX 0x00452830
+	// STUB: ROBLOX 0x00452830
 	static boost::thread_specific_ptr<Context>& ptr()
 	{
 		static boost::thread_specific_ptr<Context> value;

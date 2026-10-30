@@ -20,6 +20,7 @@ private:
 	virtual bool askSetParent(const Instance* instance) const;
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool shouldRender3dAdorn() const { return true; }
 
 	virtual void render3dAdorn(Adorn* adorn);

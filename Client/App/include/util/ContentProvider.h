@@ -23,7 +23,7 @@ class Instance;
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x10005a80
-// FUNCTION: ROBLOX 0x004078d0
+// STUB: ROBLOX 0x004078d0
 // RBX::ContentProvider::singleton
 // clang-format on
 
@@ -39,7 +39,7 @@ public:
 	ContentId(const std::string& id, const Name& mimeType) : id(id), mimeTypePtr(&mimeType) {}
 
 	// FUNCTION: WEBSERVICE 0x1004f100
-	// FUNCTION: ROBLOX 0x0043bb30
+	// STUB: ROBLOX 0x0043bb30
 	ContentId(const char* id) : id(id), mimeTypePtr(&Name::getNullName()) {}
 
 	ContentId(const std::string& id) : id(id), mimeTypePtr(&Name::getNullName()) {}

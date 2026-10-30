@@ -57,6 +57,7 @@ public:
 	Surface* getSurface(const UIEvent& uiEvent);
 
 	// FUNCTION: WEBSERVICE 0x10069fd0 FOLDED
+	// FUNCTION: ROBLOX 0x005c0390 FOLDED
 	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent) // vtable+0x04
 	{
 		return this;
@@ -67,6 +68,7 @@ protected:
 	virtual void onMouseHover(const UIEvent& uiEvent) {} // vtable+0x0c
 
 	// FUNCTION: WEBSERVICE 0x10069fd0 FOLDED
+	// FUNCTION: ROBLOX 0x005c0390 FOLDED
 	virtual MouseCommand* onKeyDown(const UIEvent& uiEvent) // vtable+0x10
 	{
 		return this;
@@ -77,6 +79,7 @@ protected:
 	virtual void onMouseDelta(const UIEvent& uiEvent) {}                         // vtable+0x1c
 
 	// FUNCTION: WEBSERVICE 0x10069fe0
+	// FUNCTION: ROBLOX 0x005b4660
 	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent) // vtable+0x20
 	{
 		releaseCapture();
@@ -86,9 +89,11 @@ protected:
 	virtual void capture(); // vtable+0x24
 
 	// FUNCTION: WEBSERVICE 0x10069ff0
+	// FUNCTION: ROBLOX 0x005b4670
 	virtual void releaseCapture() { capturedMouse = false; } // vtable+0x28
 
 	// FUNCTION: WEBSERVICE 0x1006a700
+	// FUNCTION: ROBLOX 0x005b4920
 	virtual void cancel() // vtable+0x2c
 	{
 		if (capturedMouse) {
@@ -105,6 +110,7 @@ public:
 	virtual ~MouseCommand(); // vtable+0x30
 
 	// SYNTHETIC: WEBSERVICE 0x1006a790
+	// SYNTHETIC: ROBLOX 0x005d25f0
 	// ??_GMouseCommand@RBX@@UAEPAXI@Z
 
 	bool captured() const { return capturedMouse; }
@@ -131,6 +137,7 @@ public:
 
 private:
 	// FUNCTION: WEBSERVICE 0x100beda0
+	// FUNCTION: ROBLOX 0x005c03a0
 	virtual const std::string getCursorName() const { return "ArrowCursor"; } // vtable+0x3c
 };
 

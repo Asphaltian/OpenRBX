@@ -166,12 +166,14 @@ static Reflection::PropDescriptor<PartInstance, bool> prop_Dragging(
 );
 
 // FUNCTION: WEBSERVICE 0x10059c10 FOLDED
+// FUNCTION: ROBLOX 0x00564b10 FOLDED
 bool PartInstance::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const ModelInstance*>(instance) != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1009a8d0
+// FUNCTION: ROBLOX 0x005ad300
 void PartInstance::onChildAdded(Instance* child)
 {
 	PVInstance::onChildAdded(child);
@@ -277,6 +279,7 @@ bool PartInstance::computeSurfacesNeedAdorn() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009af50
+// FUNCTION: ROBLOX 0x005ada40
 void PartInstance::legacyTraverseState(const CoordinateFrame& parentState)
 {
 	CoordinateFrame myState = parentState * *legacyOffset;
@@ -414,6 +417,7 @@ float PartInstance::getElasticity() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b1b0
+// FUNCTION: ROBLOX 0x005adca0
 Extents PartInstance::getExtentsWorld() const
 {
 	return primitive->getExtentsWorld();
@@ -594,6 +598,7 @@ void PartInstance::onParentControllerChanged()
 }
 
 // FUNCTION: WEBSERVICE 0x1009c0c0
+// FUNCTION: ROBLOX 0x005af1e0
 void PartInstance::render3dSelect(Adorn* adorn, SelectState selectState)
 {
 	Draw::selectionBox(getPart(), adorn, selectState);
@@ -726,6 +731,7 @@ const PartInstance* PartInstance::getPrimaryPartConst() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009d3b0
+// FUNCTION: ROBLOX 0x005aff80
 const Primitive* PartInstance::getBiggestPrimitive() const
 {
 	return primitive.get();

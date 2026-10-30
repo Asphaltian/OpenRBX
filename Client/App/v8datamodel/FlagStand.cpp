@@ -99,7 +99,7 @@ FlagStandService::~FlagStandService()
 }
 
 // FUNCTION: WEBSERVICE 0x100e84e0
-// FUNCTION: ROBLOX 0x00627670
+// STUB: ROBLOX 0x00627670
 FlagStand* FlagStandService::FindClosestEmptyStandForFlag(Flag* f)
 {
 	if (flagStands.empty()) {
@@ -131,7 +131,7 @@ FlagStand::FlagStand()
 }
 
 // FUNCTION: WEBSERVICE 0x100e8ea0
-// FUNCTION: ROBLOX 0x00628050
+// STUB: ROBLOX 0x00628050
 FlagStandService::FlagStandService()
 {
 	setName(sFlagStandService);
@@ -146,7 +146,7 @@ void FlagStand::setTeamColor(BrickColor color)
 }
 
 // FUNCTION: WEBSERVICE 0x100e8fc0
-// FUNCTION: ROBLOX 0x00628170
+// STUB: ROBLOX 0x00628170
 void FlagStand::onEvent_standTouched(boost::shared_ptr<Instance> other)
 {
 	Instance* character = other->getParent();

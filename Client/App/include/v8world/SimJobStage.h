@@ -26,6 +26,7 @@ public:
 	// RBX::SimJobStage::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x100c66c0 FOLDED
+	// FUNCTION: ROBLOX 0x00646810 FOLDED
 	virtual StageType getStageType() { return SIMJOB_STAGE; } // vtable+0x04
 
 	virtual void onEdgeAdded(Edge* edge);    // vtable+0x10

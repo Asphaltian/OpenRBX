@@ -59,6 +59,7 @@ public:
 	virtual ~World(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x100d0790
+	// SYNTHETIC: ROBLOX 0x005ef5d0
 	// RBX::World::`scalar deleting destructor'
 
 	static bool disableEnvironmentalThrottle;

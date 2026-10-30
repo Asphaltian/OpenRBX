@@ -41,6 +41,7 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool preventBodySleep() const { return true; } // vtable+0x40
 
 	virtual void onAncestorChanged(const AncestorChanged& event);
@@ -265,7 +266,7 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x1021d230
 // `dynamic initializer for 'RBX::BodyGyro::prop_maxTorque''
 // SYNTHETIC: WEBSERVICE 0x1021d260
-// SYNTHETIC: ROBLOX 0x007ed1a0 FOLDED
+// STUB: ROBLOX 0x007ed1a0 FOLDED
 // `dynamic initializer for 'RBX::BodyGyro::prop_cframe''
 // SYNTHETIC: WEBSERVICE 0x1021d290
 // `dynamic initializer for 'RBX::BodyPosition::prop_kP''
@@ -274,12 +275,12 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x1021d2f0
 // `dynamic initializer for 'RBX::BodyPosition::prop_maxForce''
 // SYNTHETIC: WEBSERVICE 0x1021d320
-// SYNTHETIC: ROBLOX 0x007ed1a0 FOLDED
+// STUB: ROBLOX 0x007ed1a0 FOLDED
 // `dynamic initializer for 'RBX::BodyPosition::prop_position''
 // SYNTHETIC: WEBSERVICE 0x1021d350
 // `dynamic initializer for 'func_getLastForceOld''
 // SYNTHETIC: WEBSERVICE 0x1021d380
-// SYNTHETIC: ROBLOX 0x007e8790
+// STUB: ROBLOX 0x007e8790
 // `dynamic initializer for 'func_getLastForce''
 // SYNTHETIC: WEBSERVICE 0x1021d3b0
 // `dynamic initializer for 'RBX::BodyVelocity::prop_kP''
@@ -294,7 +295,7 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: WEBSERVICE 0x1021d4a0
 // `dynamic initializer for 'RBX::BodyForce::prop_Force''
 // SYNTHETIC: WEBSERVICE 0x1021d4d0
-// SYNTHETIC: ROBLOX 0x007ed560
+// STUB: ROBLOX 0x007ed560
 // `dynamic initializer for 'RBX::BodyThrust::prop_force''
 // SYNTHETIC: WEBSERVICE 0x1021d500
 // `dynamic initializer for 'RBX::BodyThrust::prop_location''

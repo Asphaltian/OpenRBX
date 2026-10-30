@@ -28,6 +28,7 @@ static Reflection::PropDescriptor<SpecialShape, G3D::Vector3> desc_vertColor(
 );
 
 // FUNCTION: WEBSERVICE 0x100ea070 FOLDED
+// FUNCTION: ROBLOX 0x005dfdf0 FOLDED
 bool SpecialShape::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const PartInstance*>(instance) != NULL;

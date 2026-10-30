@@ -231,7 +231,7 @@ void Instance::signalDescendentRemoving(
 }
 
 // FUNCTION: WEBSERVICE 0x10049b30
-// FUNCTION: ROBLOX 0x005777d0
+// STUB: ROBLOX 0x005777d0
 boost::shared_ptr<Instance> Instance::findFirstChildByName2(std::string findName, bool recursive)
 {
 	return recursive ? shared_from(findFirstChildByNameRecursive(findName))
@@ -300,7 +300,7 @@ void Instance::readProperty(const XmlElement* propertyElement, IReferenceBinder&
 }
 
 // FUNCTION: WEBSERVICE 0x1004a0e0
-// FUNCTION: ROBLOX 0x00577d10
+// STUB: ROBLOX 0x00577d10
 void Instance::onAddListener(Listener<Instance, ChildAdded>* listener) const
 {
 	if (children) {
@@ -332,6 +332,7 @@ public:
 };
 
 // FUNCTION: WEBSERVICE 0x1004a470
+// FUNCTION: ROBLOX 0x00577fe0
 void Instance::onAddListener(Listener<Instance, DescendentAdded>* listener) const
 {
 	for_eachChild(RaiseDescendentAdded2(this, listener));
@@ -361,7 +362,7 @@ inline XmlElement* Instance::toNewXmlRoot(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1004ab00
-// FUNCTION: ROBLOX 0x00578140
+// STUB: ROBLOX 0x00578140
 boost::shared_ptr<Instance> Instance::clone()
 {
 	boost::scoped_ptr<XmlElement> root(toNewXmlRoot(this));
@@ -369,6 +370,7 @@ boost::shared_ptr<Instance> Instance::clone()
 }
 
 // FUNCTION: WEBSERVICE 0x1004cdf0
+// FUNCTION: ROBLOX 0x005794d0
 shared_ptr<Instance> Instance::createChild(const Name& className)
 {
 	return Instance::create(className);
@@ -381,7 +383,7 @@ Instance::~Instance()
 }
 
 // FUNCTION: WEBSERVICE 0x1004da80
-// FUNCTION: ROBLOX 0x005799c0
+// STUB: ROBLOX 0x005799c0
 void Instance::setParent(Instance* newParent)
 {
 	if (newParent == parent) {
@@ -441,7 +443,7 @@ void Instance::setParent(Instance* newParent)
 }
 
 // FUNCTION: WEBSERVICE 0x1004ddb0
-// FUNCTION: ROBLOX 0x00579cf0
+// STUB: ROBLOX 0x00579cf0
 void Instance::onAncestorChanged(const AncestorChanged& event)
 {
 	if (children) {
@@ -457,7 +459,7 @@ void Instance::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x1004dee0
-// FUNCTION: ROBLOX 0x00579e20
+// STUB: ROBLOX 0x00579e20
 void Instance::onDescendentAdded(Instance* instance)
 {
 	if (Notifier<Instance, DescendentAdded>::hasListeners()) {
@@ -467,7 +469,7 @@ void Instance::onDescendentAdded(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1004df50
-// FUNCTION: ROBLOX 0x00579e90
+// STUB: ROBLOX 0x00579e90
 void Instance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 {
 	event_descendentRemoving.fire(this, instance);
@@ -496,7 +498,7 @@ void Instance::removeAllChildren()
 }
 
 // FUNCTION: WEBSERVICE 0x1004e0f0
-// FUNCTION: ROBLOX 0x0057a030
+// STUB: ROBLOX 0x0057a030
 void Instance::predelete()
 {
 	while (children) {

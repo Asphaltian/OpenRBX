@@ -37,6 +37,7 @@ Reflection::SignalDesc<Server, void(std::string, boost::shared_ptr<Instance>)> S
 );
 
 // FUNCTION: WEBSERVICE 0x10199280
+// FUNCTION: ROBLOX 0x004bb500
 void Server::ClientProxy::onSentMarker(long id)
 {
 	sendPhysicsEnabled = true;
@@ -197,7 +198,7 @@ bool Server::serverIsPresent(const Instance* context, bool testInDatamodel)
 }
 
 // FUNCTION: WEBSERVICE 0x1019a820
-// FUNCTION: ROBLOX 0x004bca10
+// STUB: ROBLOX 0x004bca10
 void Server::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	if (oldProvider) {

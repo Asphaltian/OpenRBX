@@ -182,7 +182,7 @@ G3D::Vector3 RootInstance::computeCharacterInsertPoint(const Extents& extents) c
 }
 
 // FUNCTION: WEBSERVICE 0x100c1640
-// FUNCTION: ROBLOX 0x005a0e30
+// STUB: ROBLOX 0x005a0e30
 void RootInstance::moveToPoint(PVInstance* pv, G3D::Vector3 point)
 {
 	if (contains(pv)) {

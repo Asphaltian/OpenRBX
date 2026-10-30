@@ -56,6 +56,7 @@ class GuiTarget
 {
 public:
 	// FUNCTION: WEBSERVICE 0x1006a090
+	// FUNCTION: ROBLOX 0x0058cc30
 	virtual GuiResponse process(const GuiEvent& guiEvent) { return GuiResponse::notUsed(); } // vtable+0x00
 };
 

@@ -88,6 +88,7 @@ G3D::Vector3 Lighting::getSunPosition()
 }
 
 // FUNCTION: WEBSERVICE 0x100426d0
+// FUNCTION: ROBLOX 0x005d9370
 bool Lighting::askAddChild(const Instance* instance) const
 {
 	return dynamic_cast<const Sky*>(instance) != NULL;

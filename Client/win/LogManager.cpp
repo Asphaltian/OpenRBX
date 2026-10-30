@@ -34,6 +34,7 @@ ATL::CPath LogManager::GetLogPath() const
 }
 
 // FUNCTION: WEBSERVICE 0x10001ea0
+// STUB: ROBLOX 0x0042a630
 std::string MainLogManager::getLogFileName()
 {
 	ATL::CPath path = GetLogPath();
@@ -51,6 +52,7 @@ std::string MainLogManager::getLogFileName()
 }
 
 // FUNCTION: WEBSERVICE 0x10001fd0
+// STUB: ROBLOX 0x0042a250
 std::string ThreadLogManager::getLogFileName()
 {
 	std::string fileName = mainLogManager->getLogFileName();
@@ -71,6 +73,7 @@ RBX::Log* LogManager::getLog()
 }
 
 // FUNCTION: WEBSERVICE 0x10002190
+// STUB: ROBLOX 0x0042d5e0
 RBX::Log* MainLogManager::provideLog()
 {
 	if (GetCurrentThreadId() == threadID) {
@@ -258,6 +261,7 @@ MainLogManager::~MainLogManager()
 }
 
 // FUNCTION: WEBSERVICE 0x10002fe0
+// STUB: ROBLOX 0x0042b110
 LogManager::~LogManager()
 {
 	if (log) {

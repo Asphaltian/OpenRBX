@@ -38,6 +38,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x101187f0
+	// FUNCTION: ROBLOX 0x00642670
 	virtual Kernel* getKernel() { return getDownstream()->getKernel(); }
 
 	IStage* getUpstream() { return upstream; }

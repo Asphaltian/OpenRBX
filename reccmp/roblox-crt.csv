@@ -20,6 +20,7 @@ address,size,type,symbol,name
 0069ae28,,library,__CxxThrowException@8,
 0069ae40,0x2c,library,__alloca_probe_16,
 0069ae6c,0x65,library,??_L@YGXPAXIHP6EX0@Z1@Z,
+0069aed2,,library,__purecall,
 0069aee0,0x34,library,__allmul,
 0069af14,,library,_memset,
 0069af1a,0xa5,library,__onexit,

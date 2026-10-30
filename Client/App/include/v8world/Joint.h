@@ -41,6 +41,7 @@ public:
 	virtual ~Joint(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011ea60
+	// SYNTHETIC: ROBLOX 0x00646f50
 	// RBX::Joint::`scalar deleting destructor'
 
 protected:
@@ -78,6 +79,7 @@ public:
 	virtual bool joinsFace(Primitive* primitive, NormalId normalId) const; // vtable+0x20
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool isAligned() { return true; } // vtable+0x24
 
 	virtual CoordinateFrame align(Primitive* prim0, Primitive* prim1); // vtable+0x28
@@ -135,6 +137,7 @@ public:
 
 private:
 	// FUNCTION: WEBSERVICE 0x1011b580 FOLDED
+	// FUNCTION: ROBLOX 0x00644f70 FOLDED
 	virtual JointType getJointType() const { return ANCHOR_JOINT; } // vtable+0x14
 };
 
@@ -149,12 +152,14 @@ public:
 	FreeJoint(Primitive* p) : Joint(p, NULL, CoordinateFrame(), CoordinateFrame()) {}
 
 	// SYNTHETIC: WEBSERVICE 0x1011b590
+	// SYNTHETIC: ROBLOX 0x00644f90
 	// RBX::FreeJoint::`scalar deleting destructor'
 
 	static bool isFreeJoint(const Joint* joint) { return joint->getJointType() == FREE_JOINT; }
 
 private:
 	// FUNCTION: WEBSERVICE 0x1011b5b0
+	// FUNCTION: ROBLOX 0x00644f80
 	virtual JointType getJointType() const { return FREE_JOINT; } // vtable+0x14
 };
 

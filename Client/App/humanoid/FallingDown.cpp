@@ -29,6 +29,7 @@ FallingDown::FallingDown(Humanoid* humanoid, float timeToGetUp)
 }
 
 // FUNCTION: WEBSERVICE 0x10107f40
+// FUNCTION: ROBLOX 0x00641b90
 FallingDown::~FallingDown()
 {
 	Humanoid::event_FallingDown.fire(humanoid, false);

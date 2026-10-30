@@ -119,6 +119,7 @@ public:
 	{ other.committed = true; }
 
 	// FUNCTION: WEBSERVICE 0x100b6270
+	// FUNCTION: ROBLOX 0x00602a60
 	virtual const char* what() const
 	{ return lua_tostring(L, -1); }
 
@@ -134,6 +135,7 @@ public:
 	}
 
 	// SYNTHETIC: WEBSERVICE 0x100b6300
+	// SYNTHETIC: ROBLOX 0x00602af0
 	// lua_exception::`scalar deleting destructor'
 };
 

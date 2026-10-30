@@ -150,7 +150,7 @@ static void buildIsolationMap(XmlElement* element, std::map<RBX::Instance*, RBX:
 }
 
 // FUNCTION: WEBSERVICE 0x10098450
-// FUNCTION: ROBLOX 0x005a3ee0
+// STUB: ROBLOX 0x005a3ee0
 bool ArchiveBinder::processID(const XmlNameValuePair* valueID, RBX::Instance* source)
 {
 	if (!MergeBinder::processID(valueID, source)) {
@@ -216,7 +216,7 @@ void SerializerV2::loadInstances(XmlElement* root, std::vector<boost::shared_ptr
 }
 
 // FUNCTION: WEBSERVICE 0x10098830
-// FUNCTION: ROBLOX 0x005a42c0
+// STUB: ROBLOX 0x005a42c0
 void SerializerV2::isolateHandles(XmlElement* root)
 {
 	std::map<RBX::Instance*, RBX::InstanceHandle> isolationMap;
@@ -238,7 +238,7 @@ void SerializerV2::load(XmlElement* root, RBX::DataModel* dataModel)
 }
 
 // FUNCTION: WEBSERVICE 0x10098970
-// FUNCTION: ROBLOX 0x005a4400
+// STUB: ROBLOX 0x005a4400
 void SerializerV2::loadXML(std::istream& stream, RBX::DataModel* dataModel)
 {
 	TextXmlParser machine(stream.rdbuf());

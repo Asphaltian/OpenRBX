@@ -298,6 +298,7 @@ float DebugSettings::shaderModel() const
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x100b3f40
+// FUNCTION: ROBLOX 0x0057bf40
 template <>
 EnumDesc<DebugSettings::ErrorReporting>::EnumDesc()
 	: EnumDescriptor("ErrorReporting", typeid(DebugSettings::ErrorReporting))

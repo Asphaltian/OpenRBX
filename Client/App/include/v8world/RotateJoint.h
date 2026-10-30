@@ -22,6 +22,7 @@ public:
 	virtual ~RotateJoint(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011f0b0
+	// SYNTHETIC: ROBLOX 0x00647600
 	// RBX::RotateJoint::`scalar deleting destructor'
 
 private:
@@ -54,6 +55,7 @@ private:
 	virtual void putInKernel(Kernel* _kernel); // vtable+0x04
 
 	// FUNCTION: WEBSERVICE 0x10108040 FOLDED
+	// FUNCTION: ROBLOX 0x006a0740 FOLDED
 	virtual JointType getJointType() const { return ROTATE_JOINT; } // vtable+0x14
 };
 
@@ -69,13 +71,16 @@ public:
 	RotatePJoint(Primitive* prim0, Primitive* prim1, const CoordinateFrame& coord0, const CoordinateFrame& coord1);
 
 	// SYNTHETIC: WEBSERVICE 0x100d7ba0
+	// SYNTHETIC: ROBLOX 0x005f1ac0
 	// RBX::RotateVJoint::`scalar deleting destructor'
 
 private:
 	// FUNCTION: WEBSERVICE 0x100a7740 FOLDED
+	// FUNCTION: ROBLOX 0x00645990 FOLDED
 	virtual JointType getJointType() const { return ROTATE_P_JOINT; } // vtable+0x14
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool canStepUi() const { return true; } // vtable+0x2c
 
 	virtual void stepUi(int uiStepId); // vtable+0x30
@@ -94,9 +99,11 @@ public:
 
 private:
 	// FUNCTION: WEBSERVICE 0x100d7a70 FOLDED
+	// FUNCTION: ROBLOX 0x00737080 FOLDED
 	virtual JointType getJointType() const { return ROTATE_V_JOINT; } // vtable+0x14
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool canStepUi() const { return true; } // vtable+0x2c
 
 	virtual void stepUi(int frameCount); // vtable+0x30

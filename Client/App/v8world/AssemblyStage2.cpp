@@ -12,6 +12,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100d7a70 FOLDED
+// FUNCTION: ROBLOX 0x00737080 FOLDED
 IStage::StageType AssemblyStage::getStageType()
 {
 	return ASSEMBLY_STAGE;
@@ -91,6 +92,7 @@ void AssemblyStage::onEdgeAdded(Edge* e)
 }
 
 // FUNCTION: WEBSERVICE 0x10127000
+// FUNCTION: ROBLOX 0x00664860
 AssemblyStage::~AssemblyStage()
 {
 }

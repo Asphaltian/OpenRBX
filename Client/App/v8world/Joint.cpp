@@ -11,12 +11,14 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100d7b80
+// FUNCTION: ROBLOX 0x005f1aa0
 CoordinateFrame Joint::align(Primitive* pMove, Primitive* pStay)
 {
 	return CoordinateFrame();
 }
 
 // FUNCTION: WEBSERVICE 0x101019b0 FOLDED
+// FUNCTION: ROBLOX 0x005defd0 FOLDED
 bool Joint::joinsFace(Primitive* primitive, NormalId normalId) const
 {
 	return false;

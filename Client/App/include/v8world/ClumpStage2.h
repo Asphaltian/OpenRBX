@@ -77,9 +77,11 @@ public:
 	virtual ~TreeStage(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011c1e0
+	// SYNTHETIC: ROBLOX 0x00645b90
 	// RBX::TreeStage::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x100a7740 FOLDED
+	// FUNCTION: ROBLOX 0x00645990 FOLDED
 	virtual StageType getStageType() { return TREE_STAGE; } // vtable+0x04
 
 	virtual void onEdgeAdded(Edge* edge);         // vtable+0x10
@@ -122,6 +124,7 @@ public:
 	virtual StageType getStageType(); // vtable+0x04
 
 	// FUNCTION: WEBSERVICE 0x101187e0 FOLDED
+	// FUNCTION: ROBLOX 0x00645130 FOLDED
 	virtual void stepWorld(int worldStepId, int uiStepId, bool throttling) // vtable+0x08
 	{
 		getDownstream()->stepWorld(worldStepId, uiStepId, throttling);

@@ -39,6 +39,7 @@ public:
 	virtual bool cachesShadows() const { return false; }
 
 	// FUNCTION: WEBSERVICE 0x101aaa90 FOLDED
+	// FUNCTION: ROBLOX 0x004b8870 FOLDED
 	virtual void renderShadows(G3D::RenderDevice* rd, const G3D::GLight& source, bool caps, float shadowVertexDistance)
 	{
 	}
@@ -74,15 +75,19 @@ public:
 	static const G3D::CoordinateFrame identity;
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool cachesShadows() const { return true; }
 
 	// FUNCTION: WEBSERVICE 0x101f9ce0
+	// FUNCTION: ROBLOX 0x004a2120
 	virtual bool castsShadows() const { return _castsShadows; }
 
 	// FUNCTION: WEBSERVICE 0x101f9cf0
+	// FUNCTION: ROBLOX 0x004a2130
 	virtual bool cullable() const { return _cullable; }
 
 	// FUNCTION: WEBSERVICE 0x101f9d00
+	// FUNCTION: ROBLOX 0x004a2140
 	virtual const G3D::CoordinateFrame& cframe() { return _cframe; }
 
 	// FUNCTION: WEBSERVICE 0x101f9d10
@@ -104,6 +109,7 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x101f9f20
+	// SYNTHETIC: ROBLOX 0x004a2360
 	// RBX::Render::AggregateChunk::`scalar deleting destructor'
 	// clang-format on
 

@@ -122,7 +122,7 @@ public:
 	};
 
 	// FUNCTION: WEBSERVICE 0x10084a50
-	// FUNCTION: ROBLOX 0x0059d170 FOLDED
+	// STUB: ROBLOX 0x0059d170 FOLDED
 	XmlNameValuePair(const RBX::Name& tag, const std::string& text) : tag(tag), valueType(STRING)
 	{
 		stringValue = new std::string(text);
@@ -160,7 +160,7 @@ public:
 	bool isValueEqual(const RBX::Name* value) const;
 
 	// FUNCTION: WEBSERVICE 0x1003e8b0
-	// FUNCTION: ROBLOX 0x004af9f0
+	// STUB: ROBLOX 0x004af9f0
 	void setValue(std::string value)
 	{
 		clearValue();
@@ -180,7 +180,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x1004b9a0
-	// FUNCTION: ROBLOX 0x004ab780
+	// STUB: ROBLOX 0x004ab780
 	void setValue(RBX::InstanceHandle handle)
 	{
 		clearValue();
@@ -284,7 +284,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10085670
-	// TEMPLATE: ROBLOX 0x0059dd20
+	// STUB: ROBLOX 0x0059dd20
 	// XmlAttribute::XmlAttribute<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// clang-format on
 
@@ -325,7 +325,7 @@ public:
 	// XmlElement::XmlElement<RBX::InstanceHandle>
 
 	// TEMPLATE: WEBSERVICE 0x10190db0
-	// TEMPLATE: ROBLOX 0x004afc20
+	// STUB: ROBLOX 0x004afc20
 	// XmlElement::XmlElement<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 
 	template <class T>
@@ -386,7 +386,7 @@ public:
 	// TEMPLATE: ROBLOX 0x0059e0d0
 	// XmlElement::addAttribute<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// TEMPLATE: WEBSERVICE 0x10096250
-	// TEMPLATE: ROBLOX 0x005a1f60
+	// STUB: ROBLOX 0x005a1f60
 	// XmlElement::addAttribute<char const *>
 	// clang-format on
 	template <class T>

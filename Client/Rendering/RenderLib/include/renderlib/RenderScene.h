@@ -139,6 +139,7 @@ public:
 	}
 
 	// SYNTHETIC: WEBSERVICE 0x101f2620
+	// SYNTHETIC: ROBLOX 0x004955f0
 	// RBX::Render::SceneManager::`scalar deleting destructor'
 
 	RenderScene* renderScene; // 0x04

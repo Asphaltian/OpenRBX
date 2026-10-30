@@ -42,6 +42,7 @@ void RunService::endRunThread(bool join)
 }
 
 // FUNCTION: WEBSERVICE 0x100543b0
+// FUNCTION: ROBLOX 0x00568b20
 void RunService::onAncestorChanged(const AncestorChanged& event)
 {
 	if (getParent() == NULL) {
@@ -135,13 +136,13 @@ void RunService::invalidateRunViews()
 }
 
 // FUNCTION: WEBSERVICE 0x10055380
-// FUNCTION: ROBLOX 0x00569c40
+// STUB: ROBLOX 0x00569c40
 RunService::~RunService()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10056950
-// FUNCTION: ROBLOX 0x0056add0
+// STUB: ROBLOX 0x0056add0
 RunService::RunService()
 	: runState(RS_NORMAL), stopRequested(false), framePeriod(1.0f / 30.0f), runThread(NULL), invalidRunViewCount(0),
 	  runDisabled(false)
@@ -150,7 +151,7 @@ RunService::RunService()
 }
 
 // FUNCTION: WEBSERVICE 0x100573e0
-// FUNCTION: ROBLOX 0x0056b4e0
+// STUB: ROBLOX 0x0056b4e0
 void RunService::start()
 {
 	boost::shared_ptr<DataModel> dataModel = shared_from(dynamic_cast<DataModel*>(getParent()));

@@ -55,6 +55,7 @@ class RAK_DLL_EXPORT PluginInterface
 {
 
 // SYNTHETIC: WEBSERVICE 0x101aaab0
+// SYNTHETIC: ROBLOX 0x004b8880
 // PluginInterface::`scalar deleting destructor'
 public:
 	PluginInterface();

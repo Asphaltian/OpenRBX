@@ -65,6 +65,7 @@ public:
 		// SYNTHETIC: ROBLOX 0x00496db0
 		// RBX::Render::AggregatingSceneManager::Bucket::~Bucket
 		// SYNTHETIC: WEBSERVICE 0x101f4cf0
+		// SYNTHETIC: ROBLOX 0x00497480
 		// RBX::Render::AggregatingSceneManager::Bucket::`scalar deleting destructor'
 	};
 
@@ -95,6 +96,7 @@ private:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x101f5d90
+	// SYNTHETIC: ROBLOX 0x004984e0
 	// RBX::Render::AggregatingSceneManager::`scalar deleting destructor'
 };
 

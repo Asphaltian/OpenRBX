@@ -119,6 +119,7 @@ bool Players::backendProcessing(const Instance* context, bool testInDatamodel)
 }
 
 // FUNCTION: WEBSERVICE 0x10190cc0
+// FUNCTION: ROBLOX 0x004afb10
 bool Players::askAddChild(const Instance* instance) const
 {
 	return dynamic_cast<const Player*>(instance) != NULL;
@@ -205,7 +206,7 @@ void Players::onChildChanged(Instance* instance, const PropertyChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10192860
-// FUNCTION: ROBLOX 0x004b2470
+// STUB: ROBLOX 0x004b2470
 void AbuseReport::addMessage(const ChatMessage& cm)
 {
 	int userID = cm.source ? Player::prop_userId.getValue(cm.source.get()) : 0;
@@ -241,7 +242,7 @@ RBX::ModelInstance* Players::findLocalCharacter(const Instance* context)
 }
 
 // FUNCTION: WEBSERVICE 0x101935f0
-// FUNCTION: ROBLOX 0x004b4140
+// STUB: ROBLOX 0x004b4140
 Player* Players::getPlayerFromCharacter(Instance* character)
 {
 	if (Players* players = ServiceProvider::find<Players>(character)) {
@@ -275,7 +276,7 @@ void AbuseReporter::add(AbuseReport& r, const std::list<ChatMessage>& chatHistor
 }
 
 // FUNCTION: WEBSERVICE 0x10194680
-// FUNCTION: ROBLOX 0x004b5630
+// STUB: ROBLOX 0x004b5630
 worker_thread::work_result AbuseReporter::processRequests(boost::shared_ptr<data> _data, std::string abuseUrl)
 {
 	try {
@@ -397,7 +398,7 @@ void Players::setMaxPlayers(int value)
 }
 
 // FUNCTION: WEBSERVICE 0x10195710
-// FUNCTION: ROBLOX 0x004b6ca0
+// STUB: ROBLOX 0x004b6ca0
 boost::shared_ptr<Instance> Players::createLocalPlayer(int userId)
 {
 	if (localPlayer) {
@@ -511,7 +512,7 @@ bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 }
 
 // FUNCTION: WEBSERVICE 0x10195db0
-// FUNCTION: ROBLOX 0x004b7340
+// STUB: ROBLOX 0x004b7340
 void Players::onChildRemoving(Instance* child)
 {
 	if (Player* player = dynamic_cast<Player*>(child)) {
@@ -527,7 +528,7 @@ void Players::onChildRemoving(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x10195f90
-// FUNCTION: ROBLOX 0x004b7520
+// STUB: ROBLOX 0x004b7520
 void Players::onChildAdded(Instance* child)
 {
 	if (Player* player = dynamic_cast<Player*>(child)) {

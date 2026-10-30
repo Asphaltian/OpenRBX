@@ -92,7 +92,7 @@ void MechanismTracker::stopTracking()
 }
 
 // FUNCTION: WEBSERVICE 0x101274f0
-// FUNCTION: ROBLOX 0x005f1800
+// STUB: ROBLOX 0x005f1800
 void MechanismTracker::setMechanism(Mechanism* m)
 {
 	stopTracking();
@@ -105,7 +105,7 @@ void MechanismTracker::setMechanism(Mechanism* m)
 }
 
 // FUNCTION: WEBSERVICE 0x10127540
-// FUNCTION: ROBLOX 0x005f1850
+// STUB: ROBLOX 0x005f1850
 void MechanismTracker::transferTrackers(Mechanism* from, Mechanism* to)
 {
 	while (from->trackers.size() != 0) {

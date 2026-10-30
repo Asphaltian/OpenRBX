@@ -76,6 +76,7 @@ bool AggregatingSceneManager::BucketKey::operator<(const BucketKey& that) const
 }
 
 // FUNCTION: WEBSERVICE 0x101f3200
+// FUNCTION: ROBLOX 0x00496170
 void AggregatingSceneManager::addModel(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
 	addToScene(chunk);
@@ -208,7 +209,7 @@ void AggregatingSceneManager::Bucket::addToQueue(const G3D::ReferenceCountedPoin
 }
 
 // FUNCTION: WEBSERVICE 0x101f5850
-// FUNCTION: ROBLOX 0x00497fa0
+// STUB: ROBLOX 0x00497fa0
 AggregatingSceneManager::~AggregatingSceneManager()
 {
 }

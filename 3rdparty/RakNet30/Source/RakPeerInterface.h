@@ -43,6 +43,7 @@ class RAK_DLL_EXPORT RakPeerInterface
 {
 public:
 	// SYNTHETIC: WEBSERVICE 0x101af880
+	// SYNTHETIC: ROBLOX 0x004d5770
 	// RakPeerInterface::`scalar deleting destructor'
 
 	///Destructor

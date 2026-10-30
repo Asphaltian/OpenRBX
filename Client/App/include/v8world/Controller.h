@@ -71,6 +71,7 @@ class NullController : public Controller
 {
 public:
 	// SYNTHETIC: WEBSERVICE 0x10099080
+	// SYNTHETIC: ROBLOX 0x005d4ba0
 	// RBX::NullController::`scalar deleting destructor'
 
 	virtual ControllerType getControllerType() const; // vtable+0x08

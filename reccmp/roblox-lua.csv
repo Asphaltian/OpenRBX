@@ -1,5 +1,6 @@
 address,type,name
 0042dac0,library,boost::detail::shared_count::shared_count<int>
+0042db50,library,boost::detail::sp_counted_impl_p<int>::dispose
 005fa210,library,index2adr
 005fa290,library,luaA_pushobject
 005fa2c0,library,lua_checkstack

@@ -83,6 +83,7 @@ public:
 	static Reflection::SignalDesc<Marker, void(float)> event_Progress;
 
 	// SYNTHETIC: WEBSERVICE 0x101a89d0
+	// SYNTHETIC: ROBLOX 0x004d1950
 	// RBX::Network::Marker::`scalar deleting destructor'
 };
 
@@ -195,7 +196,7 @@ public:
 	virtual ~Replicator();
 
 	// FUNCTION: WEBSERVICE 0x1019f930
-	// FUNCTION: ROBLOX 0x004c64e0
+	// STUB: ROBLOX 0x004c64e0
 	boost::shared_ptr<Instance> getPlayer() { return shared_from(findTargetPlayer()); }
 
 	static Reflection::BoundProp<int, 1> prop_maxDataModelSendBuffer;
@@ -205,6 +206,7 @@ public:
 	virtual PluginReceiveResult OnReceive(RakPeerInterface* peer, Packet* packet);
 
 	// FUNCTION: WEBSERVICE 0x100c7730 FOLDED
+	// FUNCTION: ROBLOX 0x0040ddc0 FOLDED
 	virtual const Name& getClassName() const { return Name::getNullName(); }
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED
@@ -277,6 +279,7 @@ DECOMP_SIZE_ASSERT(Replicator, 0x2c30)
 // TEMPLATE: ROBLOX 0x004d30d0
 // RBX::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator>::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator>
 // TEMPLATE: WEBSERVICE 0x101aa0d0
+// TEMPLATE: ROBLOX 0x004d3200
 // RBX::NonFactoryProduct<RBX::Network::IdSerializer,&RBX::Network::sReplicator>::getClassName
 // TEMPLATE: WEBSERVICE 0x101aa510
 // TEMPLATE: ROBLOX 0x004d3630
@@ -304,6 +307,7 @@ protected:
 	virtual ~Peer();
 
 	// FUNCTION: WEBSERVICE 0x10196760
+	// FUNCTION: ROBLOX 0x004b8940
 	virtual bool askAddChild(const Instance* instance) const
 	{
 		return dynamic_cast<const Replicator*>(instance) != NULL;

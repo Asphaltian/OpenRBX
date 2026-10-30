@@ -6,7 +6,7 @@
 #include <G3D/Vector2int16.h>
 
 // FUNCTION: WEBSERVICE 0x101840e0
-// FUNCTION: ROBLOX 0x0048e600
+// STUB: ROBLOX 0x0048e600
 static void SphereTransform(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,
@@ -38,36 +38,42 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x10186850
+	// FUNCTION: ROBLOX 0x00490d70
 	virtual void buildRight(Purpose purpose) // vtable+0x10
 	{
 		buildFace<RBX::NORM_X>(SphereTransform, elements, elements, purpose);
 	}
 
 	// FUNCTION: WEBSERVICE 0x10186880
+	// FUNCTION: ROBLOX 0x00490da0
 	virtual void buildTop(Purpose purpose) // vtable+0x04
 	{
 		buildFace<RBX::NORM_Y>(SphereTransform, elements, elements, purpose);
 	}
 
 	// FUNCTION: WEBSERVICE 0x101868b0
+	// FUNCTION: ROBLOX 0x00490dd0
 	virtual void buildBack(Purpose purpose) // vtable+0x18
 	{
 		buildFace<RBX::NORM_Z>(SphereTransform, elements, elements, purpose);
 	}
 
 	// FUNCTION: WEBSERVICE 0x101868e0
+	// FUNCTION: ROBLOX 0x00490e00
 	virtual void buildLeft(Purpose purpose) // vtable+0x0c
 	{
 		buildFace<RBX::NORM_X_NEG>(SphereTransform, elements, elements, purpose);
 	}
 
 	// FUNCTION: WEBSERVICE 0x10186910
+	// FUNCTION: ROBLOX 0x00490e30
 	virtual void buildBottom(Purpose purpose) // vtable+0x08
 	{
 		buildFace<RBX::NORM_Y_NEG>(SphereTransform, elements, elements, purpose);
 	}
 
 	// FUNCTION: WEBSERVICE 0x10186940
+	// FUNCTION: ROBLOX 0x00490e60
 	virtual void buildFront(Purpose purpose) // vtable+0x14
 	{
 		buildFace<RBX::NORM_Z_NEG>(SphereTransform, elements, elements, purpose);

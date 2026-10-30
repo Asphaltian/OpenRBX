@@ -46,6 +46,7 @@ MultiJoint::MultiJoint(
 }
 
 // FUNCTION: WEBSERVICE 0x1011fcd0
+// FUNCTION: ROBLOX 0x00648220
 MultiJoint::~MultiJoint()
 {
 }

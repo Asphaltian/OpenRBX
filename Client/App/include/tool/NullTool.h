@@ -26,16 +26,20 @@ private:
 	virtual void onMouseHover(const UIEvent& uiEvent);
 	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
 	// FUNCTION: WEBSERVICE 0x100c5060
+	// FUNCTION: ROBLOX 0x006227f0
 	virtual const std::string getCursorName() const { return cursor; }
 	// FUNCTION: WEBSERVICE 0x100c52e0
+	// FUNCTION: ROBLOX 0x00622b20
 	virtual MouseCommand* isSticky() const { return new NewNullTool(workspace); }
 	// FUNCTION: WEBSERVICE 0x100c5090
+	// FUNCTION: ROBLOX 0x00622820
 	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent)
 	{
 		releaseCapture();
 		return this;
 	}
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool shouldRender3dAdorn() const { return true; }
 	virtual void render3dAdorn(Adorn* adorn);
 
@@ -44,6 +48,7 @@ public:
 	virtual ~NewNullTool();
 
 	// SYNTHETIC: WEBSERVICE 0x100c52b0
+	// SYNTHETIC: ROBLOX 0x00622a90
 	// RBX::NewNullTool::`scalar deleting destructor'
 };
 

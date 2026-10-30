@@ -35,6 +35,7 @@ static Reflection::RefPropDescriptor<Camera, Instance> cameraSubjectProp(
 );
 
 // FUNCTION: WEBSERVICE 0x100c2600
+// FUNCTION: ROBLOX 0x005d5f60
 bool Camera::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const Workspace*>(instance) != NULL;
@@ -234,7 +235,7 @@ void Camera::updateFocus()
 }
 
 // FUNCTION: WEBSERVICE 0x100c2f60
-// FUNCTION: ROBLOX 0x005d6bc0
+// STUB: ROBLOX 0x005d6bc0
 void Camera::updateGoal()
 {
 	switch (cameraType) {
@@ -369,7 +370,7 @@ void Camera::setCameraType(CameraType value)
 }
 
 // FUNCTION: WEBSERVICE 0x100c44b0
-// FUNCTION: ROBLOX 0x005d8010
+// STUB: ROBLOX 0x005d8010
 void Camera::setCameraSubject(Instance* newSubject)
 {
 	if (newSubject != cameraSubject.get() && dynamic_cast<ICameraSubject*>(newSubject)) {

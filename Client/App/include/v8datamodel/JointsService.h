@@ -27,6 +27,7 @@ private:
 	// RBX::JointsService::JointsService
 
 	// FUNCTION: WEBSERVICE 0x10074fc0
+	// FUNCTION: ROBLOX 0x004c7d60
 	virtual bool askAddChild(const Instance* instance) const
 	{
 		return dynamic_cast<const JointInstance*>(instance) != NULL;

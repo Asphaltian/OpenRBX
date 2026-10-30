@@ -23,6 +23,7 @@ public:
 	virtual ~AssemblyStage(); // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x10127260
+	// SYNTHETIC: ROBLOX 0x00664ac0
 	// RBX::AssemblyStage::`scalar deleting destructor'
 
 	virtual StageType getStageType(); // vtable+0x04

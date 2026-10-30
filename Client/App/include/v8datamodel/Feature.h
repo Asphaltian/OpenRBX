@@ -57,9 +57,11 @@ public:
 
 private:
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	// FUNCTION: ROBLOX 0x00633110 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return true; }
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool shouldRender3dAdorn() const { return true; }
 
 	virtual void render3dSelect(Adorn* adorn, SelectState selectState);
@@ -74,6 +76,7 @@ protected:
 	};
 
 	// FUNCTION: WEBSERVICE 0x10108040 FOLDED
+	// FUNCTION: ROBLOX 0x006a0740 FOLDED
 	virtual InOutZ getCoordOrientation() const { return Z_OUT; } // vtable+0x40
 
 public:
@@ -119,6 +122,7 @@ private:
 	void setPart(int i, Feature* feature);
 
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	// FUNCTION: ROBLOX 0x00633110 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return true; }
 
 	virtual void onAncestorChanged(const AncestorChanged& event);

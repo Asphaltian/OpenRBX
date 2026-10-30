@@ -34,6 +34,7 @@ public:
 	virtual ~ToolMouseCommand() {}
 
 	// SYNTHETIC: WEBSERVICE 0x100cad30
+	// SYNTHETIC: ROBLOX 0x0060fa70
 	// RBX::ToolMouseCommand::`scalar deleting destructor'
 
 	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);

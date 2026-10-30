@@ -41,6 +41,7 @@ protected:
 	virtual ~Point() {} // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x1011e6b0
+	// SYNTHETIC: ROBLOX 0x006567b0
 	// RBX::Point::`scalar deleting destructor'
 
 public:

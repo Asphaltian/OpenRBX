@@ -612,7 +612,7 @@ ContentId ContentProvider::readContent(const char* id, std::istream& stream, uns
 }
 
 // FUNCTION: WEBSERVICE 0x10053f00
-// FUNCTION: ROBLOX 0x00581910
+// STUB: ROBLOX 0x00581910
 void ContentProvider::load(ContentId id, std::vector<boost::shared_ptr<Instance> >& instances)
 {
 	boost::scoped_ptr<std::istream> stream(getContent(id));
@@ -624,7 +624,7 @@ void ContentProvider::load(ContentId id, std::vector<boost::shared_ptr<Instance>
 }
 
 // FUNCTION: WEBSERVICE 0x10054040
-// FUNCTION: ROBLOX 0x00581a50
+// STUB: ROBLOX 0x00581a50
 ContentProvider::ContentProvider()
 {
 	char path[MAX_PATH];

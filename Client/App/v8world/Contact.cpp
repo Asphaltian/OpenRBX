@@ -367,7 +367,7 @@ bool BlockBlockContact::computeIsColliding(float overlapIgnored)
 }
 
 // FUNCTION: WEBSERVICE 0x100d4150
-// FUNCTION: ROBLOX 0x0060b130
+// STUB: ROBLOX 0x0060b130
 void BlockBlockContact::deleteAllConnectors()
 {
 	for (unsigned int i = 0; i < connectors.size(); i++) {
@@ -397,7 +397,7 @@ void BlockBlockContact::deleteUnmatchedConnectors()
 }
 
 // FUNCTION: WEBSERVICE 0x100d42f0
-// FUNCTION: ROBLOX 0x0060b2d0
+// STUB: ROBLOX 0x0060b2d0
 ContactConnector* BlockBlockContact::matchContactConnector(
 	Body* b0, Body* b1, GeoPairType _pairType, int param0, int param1
 )

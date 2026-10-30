@@ -348,7 +348,7 @@ DataModel::Lock::~Lock()
 }
 
 // FUNCTION: WEBSERVICE 0x10079120
-// FUNCTION: ROBLOX 0x00592490
+// STUB: ROBLOX 0x00592490
 void DataModel::initializeContents()
 {
 	workspace->setParent(this);
@@ -403,7 +403,7 @@ void DataModel::clearContents()
 }
 
 // FUNCTION: WEBSERVICE 0x10079a70
-// FUNCTION: ROBLOX 0x00592a40
+// STUB: ROBLOX 0x00592a40
 void DataModel::save(ContentId contentId)
 {
 	std::stringstream stream;
@@ -422,7 +422,7 @@ void DataModel::save(ContentId contentId)
 }
 
 // FUNCTION: WEBSERVICE 0x10079bf0
-// FUNCTION: ROBLOX 0x00592bc0
+// STUB: ROBLOX 0x00592bc0
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > DataModel::get(ContentId contentId)
 {
 	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
@@ -506,7 +506,7 @@ boost::shared_ptr<DataModel> DataModel::createDataModel()
 }
 
 // FUNCTION: WEBSERVICE 0x1007c4a0
-// FUNCTION: ROBLOX 0x00595170
+// STUB: ROBLOX 0x00595170
 std::string DataModel::httpGet(std::string url, bool synchronous)
 {
 	if (synchronous) {
@@ -523,7 +523,7 @@ std::string DataModel::httpGet(std::string url, bool synchronous)
 }
 
 // FUNCTION: WEBSERVICE 0x1007c6b0
-// FUNCTION: ROBLOX 0x00595380
+// STUB: ROBLOX 0x00595380
 std::string DataModel::httpPost(std::string url, std::string data, bool synchronous)
 {
 	if (synchronous) {

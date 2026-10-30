@@ -24,9 +24,11 @@ public:
 	JointStage(IStage* upstream, World* world);
 
 	// FUNCTION: WEBSERVICE 0x10118810
+	// FUNCTION: ROBLOX 0x00642690
 	virtual ~JointStage() {} // vtable+0x00
 
 	// SYNTHETIC: WEBSERVICE 0x101188d0
+	// SYNTHETIC: ROBLOX 0x00642750
 	// RBX::JointStage::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x10059d20 FOLDED

@@ -126,7 +126,7 @@ void PartDragTool::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x10126a40
-// FUNCTION: ROBLOX 0x00662f00
+// STUB: ROBLOX 0x00662f00
 PartDragTool::PartDragTool(PartInstance* mousePart, const G3D::Vector3& hitPointWorld, Workspace* workspace)
 	: Named<MouseCommand, sPartDragTool>(workspace), dragging(false), hitWorld(hitPointWorld)
 {

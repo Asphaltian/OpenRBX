@@ -15,6 +15,7 @@ Controller::ControllerType NullController::getControllerType() const
 }
 
 // FUNCTION: WEBSERVICE 0x10099070 FOLDED
+// FUNCTION: ROBLOX 0x005ad010 FOLDED
 float Controller::getValue(InputType inputType) const
 {
 	return 0;

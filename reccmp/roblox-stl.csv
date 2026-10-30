@@ -1,4 +1,5 @@
 address,size,type,symbol,name
+00402220,0x25,library,??_Ebad_alloc@std@@UAEPAXI@Z,
 00402250,0x5f,library,??0logic_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z,
 00403ce0,0x35,library,?_Erase@?$_Tree@V?$_Tmap_traits@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@$0A@@std@@@std@@IAEXPAU_Node@?$_Tree_nod@V?$_Tmap_traits@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@$0A@@std@@@2@@Z,
 00403ce0,0x35,library,?_Erase@?$_Tree@V?$_Tmap_traits@HPAVName@RBX@@U?$less@H@std@@V?$allocator@U?$pair@$$CBHPAVName@RBX@@@std@@@4@$0A@@std@@@std@@IAEXPAU_Node@?$_Tree_nod@V?$_Tmap_traits@HPAVName@RBX@@U?$less@H@std@@V?$allocator@U?$pair@$$CBHPAVName@RBX@@@std@@@4@$0A@@std@@@2@@Z,
@@ -51,6 +52,7 @@ address,size,type,symbol,name
 00411880,0x111,library,?resize@?$vector@UStateEntry@?$StateStack@VXmlState@RBX@@@RBX@@V?$allocator@UStateEntry@?$StateStack@VXmlState@RBX@@@RBX@@@std@@@std@@QAEXIUStateEntry@?$StateStack@VXmlState@RBX@@@RBX@@@Z,
 004140a0,0x5f,library,??0runtime_error@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z,
 004140a0,95,library,,std::runtime_error::runtime_error
+00414100,0xe,library,?what@logic_error@std@@UBEPBDXZ,
 00414240,0x65,library,??0runtime_error@std@@QAE@ABV01@@Z,
 004145c0,0x60,library,?_Xlen@?$deque@VToken@G3D@@V?$allocator@VToken@G3D@@@std@@@std@@KAXXZ,
 00414c30,0x9a,library,?_Incsize@?$list@UItem@SignatureDescriptor@Reflection@RBX@@V?$allocator@UItem@SignatureDescriptor@Reflection@RBX@@@std@@@std@@IAEXI@Z,
@@ -498,6 +500,8 @@ address,size,type,symbol,name
 0057fe20,0x206,library,?insert@?$_Tree@V?$_Tmap_traits@VContentId@RBX@@UCachedContent@ContentProvider@2@U?$less@VContentId@RBX@@@std@@V?$allocator@U?$pair@$$CBVContentId@RBX@@UCachedContent@ContentProvider@2@@std@@@6@$0A@@std@@@std@@QAE?AViterator@12@V312@ABU?$pair@$$CBVContentId@RBX@@UCachedContent@ContentProvider@2@@2@@Z,
 00580030,0xcb,library,?erase@?$_Tree@V?$_Tmap_traits@VContentId@RBX@@UCachedContent@ContentProvider@2@U?$less@VContentId@RBX@@@std@@V?$allocator@U?$pair@$$CBVContentId@RBX@@UCachedContent@ContentProvider@2@@std@@@6@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z,
 00580740,0xd4,library,??A?$map@VContentId@RBX@@UCachedContent@ContentProvider@2@U?$less@VContentId@RBX@@@std@@V?$allocator@U?$pair@$$CBVContentId@RBX@@UCachedContent@ContentProvider@2@@std@@@6@@std@@QAEAAUCachedContent@ContentProvider@RBX@@ABVContentId@4@@Z,
+00581270,0x22,library,??_E?$basic_istringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@UAEPAXI@Z,
+005812a0,0x22,library,??_E?$basic_ifstream@DU?$char_traits@D@std@@@std@@UAEPAXI@Z,
 00583860,0x1a,library,?_Buynode@?$list@P6AXXZV?$allocator@P6AXXZ@std@@@std@@IAEPAU_Node@?$_List_nod@P6AXXZV?$allocator@P6AXXZ@std@@@2@XZ,
 00583860,0x1a,library,?_Buynode@?$list@PAVMechanism@RBX@@V?$allocator@PAVMechanism@RBX@@@std@@@std@@IAEPAU_Node@?$_List_nod@PAVMechanism@RBX@@V?$allocator@PAVMechanism@RBX@@@std@@@2@XZ,
 00583860,,library,,"std::list<RBX::Mechanism *,std::allocator<RBX::Mechanism *> >::_Buynode"

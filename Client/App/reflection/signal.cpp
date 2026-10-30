@@ -39,7 +39,7 @@ SignalInstance* SignalDescriptor::findSignalInstance(const SignalSource* source)
 }
 
 // FUNCTION: WEBSERVICE 0x10095b90
-// FUNCTION: ROBLOX 0x005a8fe0
+// STUB: ROBLOX 0x005a8fe0
 SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char* name)
 	: MemberDescriptor(classDescriptor, name, "Signals"), signalCreatedHook(NULL)
 {
@@ -80,13 +80,13 @@ boost::shared_ptr<SignalInstance> Signal::getSignalInstance() const
 }
 
 // FUNCTION: WEBSERVICE 0x10095e80
-// FUNCTION: ROBLOX 0x005a92d0
+// STUB: ROBLOX 0x005a92d0
 SignalSource::~SignalSource()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10095ed0
-// FUNCTION: ROBLOX 0x005a9320
+// STUB: ROBLOX 0x005a9320
 void SignalSource::disconnect_all_slots()
 {
 	signals.reset();

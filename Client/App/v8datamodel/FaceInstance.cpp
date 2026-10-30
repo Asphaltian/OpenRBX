@@ -18,6 +18,7 @@ const Reflection::EnumPropDescriptor<FaceInstance, NormalId> FaceInstance::prop_
 );
 
 // FUNCTION: WEBSERVICE 0x100ea070 FOLDED
+// FUNCTION: ROBLOX 0x005dfdf0 FOLDED
 bool FaceInstance::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const PartInstance*>(instance) != NULL;

@@ -22,7 +22,7 @@ inline boost::recursive_mutex& sync()
 // SYNTHETIC: WEBSERVICE 0x10005990
 // RBX::Reflection::Descriptor::`scalar deleting destructor'
 // FUNCTION: WEBSERVICE 0x1004d7f0
-// FUNCTION: ROBLOX 0x004b68f0
+// STUB: ROBLOX 0x004b68f0
 // RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::fire
 // FUNCTION: WEBSERVICE 0x100575e0
 // FUNCTION: ROBLOX 0x004ad660
@@ -32,7 +32,7 @@ inline boost::recursive_mutex& sync()
 // RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::fire
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100f6aa0
-// FUNCTION: ROBLOX 0x00430960
+// STUB: ROBLOX 0x00430960
 // RBX::Reflection::SignalDescImpl<1,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::fire
 // FUNCTION: WEBSERVICE 0x10198a10
 // FUNCTION: ROBLOX 0x004bac90

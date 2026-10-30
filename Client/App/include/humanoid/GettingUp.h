@@ -21,6 +21,7 @@ public:
 	virtual ~GettingUp(); // vtable+0x04
 
 	// SYNTHETIC: WEBSERVICE 0x10123320
+	// SYNTHETIC: ROBLOX 0x006643e0
 	// RBX::GettingUp::`scalar deleting destructor'
 };
 

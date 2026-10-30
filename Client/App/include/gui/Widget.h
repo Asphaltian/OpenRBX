@@ -28,6 +28,7 @@ protected:
 	virtual GuiResponse process(const GuiEvent& event);
 
 	// FUNCTION: WEBSERVICE 0x100c74d0
+	// FUNCTION: ROBLOX 0x005e16d0
 	virtual void onLoseFocus() { widgetState = NOTHING; }
 
 	virtual void render2d(Adorn* adorn);
@@ -45,9 +46,11 @@ protected:
 	virtual G3D::Color4 getFontColor() { return G3D::Color4(G3D::Color3::white(), 1); } // vtable+0x74
 
 	// FUNCTION: WEBSERVICE 0x100c7530
+	// FUNCTION: ROBLOX 0x005e1720
 	virtual bool isEnabled() { return isVisible(); } // vtable+0x78
 
 	// FUNCTION: WEBSERVICE 0x100c74f0
+	// FUNCTION: ROBLOX 0x005e16e0
 	virtual int getFontSize() const { return 12; }
 
 	WidgetState widgetState; // 0x10c

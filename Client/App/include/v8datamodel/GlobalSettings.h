@@ -14,7 +14,7 @@ extern const char sGlobalSettings[];
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10062fb0
-// TEMPLATE: ROBLOX 0x00408c00
+// STUB: ROBLOX 0x00408c00
 // RBX::GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>::singleton
 // TEMPLATE: WEBSERVICE 0x10065760
 // RBX::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>
@@ -22,12 +22,13 @@ extern const char sGlobalSettings[];
 // FUNCTION: ROBLOX 0x00448330
 // RBX::NonFactoryProduct<RBX::Instance,0>::NonFactoryProduct<RBX::Instance,0>
 // TEMPLATE: WEBSERVICE 0x1007e890
-// TEMPLATE: ROBLOX 0x00450230
+// STUB: ROBLOX 0x00450230
 // RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::singleton
 // FUNCTION: WEBSERVICE 0x100b3640
 // FUNCTION: ROBLOX 0x004484a0
 // RBX::GlobalSettings::Item::Item
 // FUNCTION: WEBSERVICE 0x100b36a0
+// FUNCTION: ROBLOX 0x00448500
 // RBX::GlobalSettings::Item::askAddChild
 // TEMPLATE: WEBSERVICE 0x100b3b40
 // RBX::GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>::~GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>

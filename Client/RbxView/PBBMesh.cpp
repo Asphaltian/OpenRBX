@@ -133,6 +133,7 @@ PBBBuilder::PBBBuilder(
 }
 
 // FUNCTION: WEBSERVICE 0x1017ad40
+// FUNCTION: ROBLOX 0x004850d0
 Face::Face()
 {
 	perturbation.x =
@@ -144,36 +145,42 @@ Face::Face()
 }
 
 // FUNCTION: WEBSERVICE 0x1017d7c0
+// FUNCTION: ROBLOX 0x00487bf0
 void PBBBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(TopBottom(), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1017d820
+// FUNCTION: ROBLOX 0x00487c50
 void PBBBuilder::buildBottom(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y_NEG>(TopBottom(), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1017d880
+// FUNCTION: ROBLOX 0x00487cb0
 void PBBBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(Side(), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1017d8e0
+// FUNCTION: ROBLOX 0x00487d10
 void PBBBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(Side(), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1017d940
+// FUNCTION: ROBLOX 0x00487d70
 void PBBBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(Side(), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x1017d9a0
+// FUNCTION: ROBLOX 0x00487dd0
 void PBBBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(Side(), 1, 1, purpose);

@@ -110,23 +110,31 @@ DECOMP_SIZE_ASSERT(Surfaces, 0x30)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x101022b0
+// TEMPLATE: ROBLOX 0x005dfaf0
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::Controller::InputType>::setEnumValue
 // TEMPLATE: WEBSERVICE 0x10102440
+// TEMPLATE: ROBLOX 0x005dfb30
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::SurfaceType>::getIndexValue
 // TEMPLATE: WEBSERVICE 0x101024a0
+// TEMPLATE: ROBLOX 0x005df8f0
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::Controller::InputType>::getIndexValue
 // TEMPLATE: WEBSERVICE 0x10102740
+// TEMPLATE: ROBLOX 0x005df9c0
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::SurfaceType>::setEnumValue
 // clang-format on
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x101022f0
+// TEMPLATE: ROBLOX 0x005dfca0
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::SurfaceType>::readValue
 // TEMPLATE: WEBSERVICE 0x10102500
+// TEMPLATE: ROBLOX 0x005dfb50
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::Controller::InputType>::readValue
 // TEMPLATE: WEBSERVICE 0x10102690
+// TEMPLATE: ROBLOX 0x005dfa00
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::SurfaceType>::setIndexValue
 // TEMPLATE: WEBSERVICE 0x10102780
+// TEMPLATE: ROBLOX 0x005df910
 // RBX::SurfaceEnumPropDescriptor<2,enum RBX::Controller::InputType>::setIndexValue
 // clang-format on
 

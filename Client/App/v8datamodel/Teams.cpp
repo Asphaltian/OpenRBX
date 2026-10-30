@@ -121,7 +121,7 @@ void Teams::assignNewPlayerToTeam(Network::Player* p)
 }
 
 // FUNCTION: WEBSERVICE 0x100daf00
-// FUNCTION: ROBLOX 0x005e7d30
+// STUB: ROBLOX 0x005e7d30
 void Teams::onChildAdded(Instance* child)
 {
 	if (dynamic_cast<Team*>(child)) {
@@ -131,7 +131,7 @@ void Teams::onChildAdded(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x100dafc0
-// FUNCTION: ROBLOX 0x005e7df0
+// STUB: ROBLOX 0x005e7df0
 void Teams::onChildRemoving(Instance* child)
 {
 	if (dynamic_cast<Team*>(child)) {

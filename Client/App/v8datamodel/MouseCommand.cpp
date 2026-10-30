@@ -38,6 +38,7 @@ Instance* MouseCommand::getTopSelectable3d(PartInstance* part)
 }
 
 // FUNCTION: WEBSERVICE 0x100be850
+// FUNCTION: ROBLOX 0x00620490
 void MouseCommand::capture()
 {
 	capturedMouse = true;
@@ -128,7 +129,7 @@ MouseCommand::MouseCommand(Workspace* workspace) : capturedMouse(false), workspa
 }
 
 // FUNCTION: WEBSERVICE 0x100bedd0
-// FUNCTION: ROBLOX 0x00620970
+// STUB: ROBLOX 0x00620970
 MouseCommand::~MouseCommand()
 {
 }
@@ -174,7 +175,7 @@ PartInstance* MouseCommand::getUnlockedPart(const UIEvent& uiEvent, G3D::Vector3
 }
 
 // FUNCTION: WEBSERVICE 0x100bf020
-// FUNCTION: ROBLOX 0x00620cc0
+// STUB: ROBLOX 0x00620cc0
 PartInstance* MouseCommand::getMousePart(
 	const G3D::Ray& unitRay,
 	const ContactManager& contactManager,

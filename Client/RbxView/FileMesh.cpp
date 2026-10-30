@@ -9,7 +9,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x1018a8f0
-// FUNCTION: ROBLOX 0x00494bd0
+// STUB: ROBLOX 0x00494bd0
 bool FileMesh::loadFromMeshFile(const G3D::Vector3& scale, const MeshId meshFile)
 {
 	try {

@@ -58,6 +58,7 @@ public:
 	virtual void computeForce(float dt, bool throttling); // vtable+0x04
 
 	// FUNCTION: WEBSERVICE 0x100a0720
+	// FUNCTION: ROBLOX 0x00655fe0
 	// RBX::RotateConnector::`scalar deleting destructor'
 
 private:

@@ -21,6 +21,7 @@ Matrix3 Ball::getMomentSolid(float mass) const
 }
 
 // FUNCTION: WEBSERVICE 0x1010a7c0
+// FUNCTION: ROBLOX 0x0064a350
 float Ball::getGridVolume() const
 {
 	float radius = gridSize.x * 0.5f;
@@ -28,6 +29,7 @@ float Ball::getGridVolume() const
 }
 
 // FUNCTION: WEBSERVICE 0x1010a7e0
+// FUNCTION: ROBLOX 0x0064a370
 void Ball::onSetSize()
 {
 	realRadius = gridSize.x * 0.5f;

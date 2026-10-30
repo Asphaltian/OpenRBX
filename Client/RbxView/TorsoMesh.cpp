@@ -152,30 +152,35 @@ protected:
 DECOMP_SIZE_ASSERT(TorsoBuilder, 0x28)
 
 // FUNCTION: WEBSERVICE 0x10183500
+// FUNCTION: ROBLOX 0x0048d970
 inline void TorsoBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(DeformSide(bevel, shoulderInset), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10183540
+// FUNCTION: ROBLOX 0x0048d9b0
 inline void TorsoBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(DeformTop(bevel, shoulderInset), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10183580
+// FUNCTION: ROBLOX 0x0048d9f0
 inline void TorsoBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(DeformFrontBack(bevel, shoulderInset), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x101835c0
+// FUNCTION: ROBLOX 0x0048da30
 inline void TorsoBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(DeformSide(bevel, shoulderInset), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10183600
+// FUNCTION: ROBLOX 0x0048da70
 inline void TorsoBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(DeformFrontBack(bevel, shoulderInset), 1, 1, purpose);
@@ -239,6 +244,7 @@ template TorsoMesh* MeshFactory<TorsoMesh, 1>::createTexture(const G3D::Vector3&
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x101840a0
+// FUNCTION: ROBLOX 0x0048e510
 inline void TorsoBuilder::buildBottom(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y_NEG>(*this, 1, 1, purpose);

@@ -22,7 +22,7 @@ namespace Reflection {
 // TEMPLATE: WEBSERVICE 0x10008b10
 // RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10008d50
-// TEMPLATE: ROBLOX 0x00419fb0
+// STUB: ROBLOX 0x00419fb0
 // RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10045560
 // TEMPLATE: ROBLOX 0x005db300
@@ -33,7 +33,7 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x0056a730
 // RBX::Reflection::Described<RBX::RunService,&RBX::sRunService,RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100596e0
-// TEMPLATE: ROBLOX 0x004b8450
+// STUB: ROBLOX 0x004b8450
 // RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1005bbe0
 // TEMPLATE: ROBLOX 0x00566490
@@ -45,13 +45,13 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x00567890
 // RBX::Reflection::Described<RBX::Selection,&RBX::sSelection,RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064820
-// TEMPLATE: ROBLOX 0x0045c030
+// STUB: ROBLOX 0x0045c030
 // RBX::Reflection::Described<RBX::Stats::StatsService,&RBX::Stats::sStats,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064b80
 // TEMPLATE: ROBLOX 0x00571ea0
 // RBX::Reflection::Described<RBX::ScriptContext,&RBX::sScriptContext,RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064bf0
-// TEMPLATE: ROBLOX 0x00461f40
+// STUB: ROBLOX 0x00461f40
 // RBX::Reflection::Described<RBX::Stats::Item,&RBX::Stats::sStatsItem,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10069590
 // TEMPLATE: ROBLOX 0x005758b0
@@ -159,7 +159,7 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x005ccf90
 // RBX::Reflection::Described<RBX::ObjectValue,&RBX::sObjectValue,RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008db70
-// TEMPLATE: ROBLOX 0x004b8710
+// STUB: ROBLOX 0x004b8710
 // RBX::Reflection::Described<RBX::GlobalSettings,&RBX::sGlobalSettings,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008dbe0
 // TEMPLATE: ROBLOX 0x005cd4e0
@@ -239,13 +239,13 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x00619050
 // RBX::Reflection::Described<RBX::VelocityMotor,&RBX::sVelocityMotor,RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec1a0
-// TEMPLATE: ROBLOX 0x0062b250
+// STUB: ROBLOX 0x0062b250
 // RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec210
 // TEMPLATE: ROBLOX 0x0062b2c0
 // RBX::Reflection::Described<RBX::BodyVelocity,&RBX::sBodyVelocity,RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec5c0
-// TEMPLATE: ROBLOX 0x0062b670
+// STUB: ROBLOX 0x0062b670
 // RBX::Reflection::Described<RBX::BodyGyro,&RBX::sBodyGyro,RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec630
 // TEMPLATE: ROBLOX 0x0062b6e0
@@ -520,7 +520,7 @@ namespace Reflection {
 // SYNTHETIC: ROBLOX 0x007f4c60
 // `RBX::Reflection::Described<RBX::BodyVelocity,&RBX::sBodyVelocity,RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246c0
-// SYNTHETIC: ROBLOX 0x007f4c70
+// STUB: ROBLOX 0x007f4c70
 // `RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246d0
 // `RBX::Reflection::Described<RBX::BodyThrust,&RBX::sBodyThrust,RBX::FactoryProduct<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
@@ -528,7 +528,7 @@ namespace Reflection {
 // SYNTHETIC: ROBLOX 0x007f4c90
 // `RBX::Reflection::Described<RBX::BodyForce,&RBX::sBodyForce,RBX::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246f0
-// SYNTHETIC: ROBLOX 0x007f4ca0
+// STUB: ROBLOX 0x007f4ca0
 // `RBX::Reflection::Described<RBX::BodyGyro,&RBX::sBodyGyro,RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224cc0
 // SYNTHETIC: ROBLOX 0x007f4080
@@ -735,60 +735,86 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x100823f0
+	// TEMPLATE: ROBLOX 0x005c5ea0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x10082430
+	// TEMPLATE: ROBLOX 0x005c5ee0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009a0e0
+	// TEMPLATE: ROBLOX 0x005f83b0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x1009a120
+	// TEMPLATE: ROBLOX 0x005f83f0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009e720
+	// TEMPLATE: ROBLOX 0x005b1190
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x1009e760
+	// TEMPLATE: ROBLOX 0x005b11d0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009ef50
+	// TEMPLATE: ROBLOX 0x005b19e0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x1009ef90
+	// TEMPLATE: ROBLOX 0x005b1a20
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100b4980
+	// TEMPLATE: ROBLOX 0x0057c920
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100b49c0
+	// TEMPLATE: ROBLOX 0x0057c960
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100b4c50
+	// TEMPLATE: ROBLOX 0x0057cbf0
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100b4c90
+	// TEMPLATE: ROBLOX 0x0057cc30
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100c3ad0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType><enum RBX::Camera::CameraType (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(enum RBX::Camera::CameraType)>
 	// TEMPLATE: WEBSERVICE 0x100c3d60
+	// TEMPLATE: ROBLOX 0x005d7900
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100c3da0
+	// TEMPLATE: ROBLOX 0x005d7940
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100c8830
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType><enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>
 	// TEMPLATE: WEBSERVICE 0x100c88d0
+	// TEMPLATE: ROBLOX 0x005e29a0
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100c8910
+	// TEMPLATE: ROBLOX 0x005e29e0
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100e61d0
+	// TEMPLATE: ROBLOX 0x006190c0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100e6210
+	// TEMPLATE: ROBLOX 0x00619100
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100e64a0
+	// TEMPLATE: ROBLOX 0x00619390
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100e64e0
+	// TEMPLATE: ROBLOX 0x006193d0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100e6770
+	// TEMPLATE: ROBLOX 0x00619660
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100e67b0
+	// TEMPLATE: ROBLOX 0x006196a0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100e7260
+	// TEMPLATE: ROBLOX 0x005e0020
 	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x100e72a0
+	// TEMPLATE: ROBLOX 0x005e0060
 	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x1012d5c0
+	// TEMPLATE: ROBLOX 0x005b3eb0
 	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::setEnumValue
 	// TEMPLATE: WEBSERVICE 0x1012d600
+	// TEMPLATE: ROBLOX 0x005b3ef0
 	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::getIndexValue
 	// clang-format on
 
@@ -796,89 +822,126 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10081db0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType><enum RBX::Soundscape::ReverbType (__thiscall RBX::Soundscape::SoundService::*)(void)const ,void (__thiscall RBX::Soundscape::SoundService::*)(enum RBX::Soundscape::ReverbType const &)>
 	// TEMPLATE: WEBSERVICE 0x10082450
+	// TEMPLATE: ROBLOX 0x005c5f00
 	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x10082590
+	// TEMPLATE: ROBLOX 0x005c6040
 	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::readValue
 	// TEMPLATE: WEBSERVICE 0x10099de0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType><enum RBX::Controller::ControllerType (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(enum RBX::Controller::ControllerType)>
 	// TEMPLATE: WEBSERVICE 0x1009a140
+	// TEMPLATE: ROBLOX 0x005f8410
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009a280
+	// TEMPLATE: ROBLOX 0x005f8550
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::readValue
 	// TEMPLATE: WEBSERVICE 0x1009e780
+	// TEMPLATE: ROBLOX 0x005b11f0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009a1a0
+	// TEMPLATE: ROBLOX 0x005f8470
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x1009e7e0
+	// TEMPLATE: ROBLOX 0x005b1250
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x1009f010
+	// TEMPLATE: ROBLOX 0x005b1aa0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100b4a40
+	// TEMPLATE: ROBLOX 0x0057c9e0
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100b4d10
+	// TEMPLATE: ROBLOX 0x0057ccb0
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100c3dc0
+	// TEMPLATE: ROBLOX 0x005d7960
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x100c3e20
+	// TEMPLATE: ROBLOX 0x005d79c0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100c3f00
+	// TEMPLATE: ROBLOX 0x005d7aa0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::readValue
 	// TEMPLATE: WEBSERVICE 0x100c8930
+	// TEMPLATE: ROBLOX 0x005e2a00
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x100c8990
+	// TEMPLATE: ROBLOX 0x005e2a60
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100c8a70
+	// TEMPLATE: ROBLOX 0x005e2b40
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::readValue
 	// TEMPLATE: WEBSERVICE 0x100e6560
+	// TEMPLATE: ROBLOX 0x00619450
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100e6830
+	// TEMPLATE: ROBLOX 0x00619720
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x1012d680
+	// TEMPLATE: ROBLOX 0x005b3f70
 	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x1009e8c0
+	// TEMPLATE: ROBLOX 0x005b1330
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::readValue
 	// TEMPLATE: WEBSERVICE 0x1009efb0
+	// TEMPLATE: ROBLOX 0x005b1a40
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x1009f0f0
+	// TEMPLATE: ROBLOX 0x005b1b80
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::readValue
 	// TEMPLATE: WEBSERVICE 0x100b46b0
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction><enum RBX::Debugable::AssertAction (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::Debugable::AssertAction)>
 	// TEMPLATE: WEBSERVICE 0x100b48e0
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting><enum RBX::DebugSettings::ErrorReporting (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::DebugSettings::ErrorReporting)>
 	// TEMPLATE: WEBSERVICE 0x100b49e0
+	// TEMPLATE: ROBLOX 0x0057c980
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x100b4b20
+	// TEMPLATE: ROBLOX 0x0057cac0
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::readValue
 	// TEMPLATE: WEBSERVICE 0x100b4cb0
+	// TEMPLATE: ROBLOX 0x0057cc50
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x100b4df0
+	// TEMPLATE: ROBLOX 0x0057cd90
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::readValue
 	// TEMPLATE: WEBSERVICE 0x100e6230
+	// TEMPLATE: ROBLOX 0x00619120
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x100e6290
+	// TEMPLATE: ROBLOX 0x00619180
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::getStringValue
 	// TEMPLATE: WEBSERVICE 0x100e6370
+	// TEMPLATE: ROBLOX 0x00619260
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::TopBottom>::readValue
 	// TEMPLATE: WEBSERVICE 0x100e6500
+	// TEMPLATE: ROBLOX 0x006193f0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x100e6640
+	// TEMPLATE: ROBLOX 0x00619530
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::LeftRight>::readValue
 	// TEMPLATE: WEBSERVICE 0x100e67d0
+	// TEMPLATE: ROBLOX 0x006196c0
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x100e6910
+	// TEMPLATE: ROBLOX 0x00619800
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::readValue
 	// TEMPLATE: WEBSERVICE 0x10102130
 	// TEMPLATE: ROBLOX 0x005b3ca0
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::writeValue
 	// TEMPLATE: WEBSERVICE 0x10121b30
+	// TEMPLATE: ROBLOX 0x005e0080
 	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x10121be0
+	// TEMPLATE: ROBLOX 0x005e0130
 	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::readValue
 	// TEMPLATE: WEBSERVICE 0x1012d340
 	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType><enum RBX::SpecialShape::MeshType const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(enum RBX::SpecialShape::MeshType)>
 	// TEMPLATE: WEBSERVICE 0x1012d620
+	// TEMPLATE: ROBLOX 0x005b3f10
 	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::setIndexValue
 	// TEMPLATE: WEBSERVICE 0x1012d760
+	// TEMPLATE: ROBLOX 0x005b4050
 	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::readValue
 	// clang-format on
 };
@@ -943,6 +1006,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005787f0
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::RefPropDescriptor<RBX::Instance,RBX::Instance><RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x1004ba50
+	// TEMPLATE: ROBLOX 0x00632700
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x1004ba90
 	// TEMPLATE: ROBLOX 0x00656ff0
@@ -956,6 +1020,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005b7860
 	// RBX::Reflection::RefPropDescriptor<RBX::Workspace,RBX::Camera>::RefPropDescriptor<RBX::Workspace,RBX::Camera><RBX::Camera * (__thiscall RBX::Workspace::*)(void)const ,void (__thiscall RBX::Workspace::*)(RBX::Camera *)>
 	// TEMPLATE: WEBSERVICE 0x1006f6a0
+	// TEMPLATE: ROBLOX 0x005b7970
 	// RBX::Reflection::RefPropDescriptor<RBX::Workspace,RBX::Camera>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100a35c0
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(RBX::PartInstance *)>
@@ -975,15 +1040,18 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100e6a40
 	// RBX::Reflection::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole>::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole><RBX::Hole * (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(RBX::Hole *)>
 	// TEMPLATE: WEBSERVICE 0x100e6b40
+	// TEMPLATE: ROBLOX 0x00619a30
 	// RBX::Reflection::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100ec830
 	// TEMPLATE: ROBLOX 0x004ab840
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::getRefValue
 	// TEMPLATE: WEBSERVICE 0x100ec850
+	// TEMPLATE: ROBLOX 0x005ebd00
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100f3970
 	// RBX::Reflection::RefPropDescriptor<RBX::ObjectValue,RBX::Instance>::RefPropDescriptor<RBX::ObjectValue,RBX::Instance><RBX::Instance * (__thiscall RBX::ObjectValue::*)(void)const ,void (__thiscall RBX::ObjectValue::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x10102200
+	// TEMPLATE: ROBLOX 0x005df580
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::isReadOnly
 	// TEMPLATE: WEBSERVICE 0x10117770
 	// TEMPLATE: ROBLOX 0x00656f50
@@ -992,11 +1060,13 @@ public:
 	// TEMPLATE: ROBLOX 0x004ab640
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance>::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance><RBX::ModelInstance * (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(RBX::ModelInstance *)>
 	// TEMPLATE: WEBSERVICE 0x1018e490
+	// TEMPLATE: ROBLOX 0x004ab860
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Player,RBX::ModelInstance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x101933c0
 	// TEMPLATE: ROBLOX 0x004b3e20
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player>::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player><RBX::Network::Player * (__thiscall RBX::Network::Players::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x10193470
+	// TEMPLATE: ROBLOX 0x004b3ed0
 	// RBX::Reflection::RefPropDescriptor<RBX::Network::Players,RBX::Network::Player>::setRefValue
 	// clang-format on
 
@@ -1059,53 +1129,68 @@ public:
 	// TEMPLATE: ROBLOX 0x005db860
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>::call<float>
 	// TEMPLATE: WEBSERVICE 0x10045cb0
+	// TEMPLATE: ROBLOX 0x005db8c0
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,float __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10045d10
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,G3D::Vector3 __cdecl(void),0>::BoundFuncDesc<RBX::Lighting,G3D::Vector3 __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10045dd0
+	// TEMPLATE: ROBLOX 0x005db990
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,G3D::Vector3 __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10045e40
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10045f00 FOLDED
+	// TEMPLATE: ROBLOX 0x005dba70 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::call<double>
 	// TEMPLATE: WEBSERVICE 0x10045f00 FOLDED
+	// TEMPLATE: ROBLOX 0x005dba70 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>::call<double>
 	// TEMPLATE: WEBSERVICE 0x10045f60
+	// TEMPLATE: ROBLOX 0x005dbad0
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1004c510
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1004c580
+	// TEMPLATE: ROBLOX 0x00578f00
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x1004c620
+	// TEMPLATE: ROBLOX 0x00578fa0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1004c680
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,void __cdecl(void),0>::BoundFuncDesc<RBX::Instance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1004c6f0
+	// TEMPLATE: ROBLOX 0x00579070
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1004c900
+	// TEMPLATE: ROBLOX 0x005791e0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100567d0
 	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10056840
+	// TEMPLATE: ROBLOX 0x0056acc0
 	// RBX::Reflection::BoundFuncDesc<RBX::RunService,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1005c230
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1005c300
+	// TEMPLATE: ROBLOX 0x00566b30
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1005e520
+	// TEMPLATE: ROBLOX 0x00568550
 	// RBX::Reflection::BoundFuncDesc<RBX::Selection,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10070210
 	// TEMPLATE: ROBLOX 0x005b8600
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x10070290
+	// TEMPLATE: ROBLOX 0x005b8680
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10082940
 	// RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100829b0
+	// TEMPLATE: ROBLOX 0x005c6470
 	// RBX::Reflection::BoundFuncDesc<RBX::Soundscape::SoundChannel,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1009eac0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1009eb40
+	// TEMPLATE: ROBLOX 0x005b15b0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1009ebb0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>
@@ -1113,6 +1198,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005b16a0
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::call<float>
 	// TEMPLATE: WEBSERVICE 0x1009eca0
+	// TEMPLATE: ROBLOX 0x005b1710
 	// RBX::Reflection::BoundFuncDesc<RBX::PartInstance,float __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100b23b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
@@ -1120,37 +1206,46 @@ public:
 	// TEMPLATE: ROBLOX 0x005cf470
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::call<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// TEMPLATE: WEBSERVICE 0x100b24b0
+	// TEMPLATE: ROBLOX 0x005d3d00
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100b2510
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100b2580
+	// TEMPLATE: ROBLOX 0x005d3dd0
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100db180
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100db1f0
+	// TEMPLATE: ROBLOX 0x005e8030
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100db2c0
+	// TEMPLATE: ROBLOX 0x005e8100
 	// RBX::Reflection::BoundFuncDesc<RBX::Teams,boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100edb20
 	// RBX::Reflection::BoundFuncDesc<RBX::Rocket,void __cdecl(void),0>::BoundFuncDesc<RBX::Rocket,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100edb90
+	// TEMPLATE: ROBLOX 0x0062cc10
 	// RBX::Reflection::BoundFuncDesc<RBX::Rocket,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100edbf0
-	// TEMPLATE: ROBLOX 0x00579000
+	// STUB: ROBLOX 0x00579000
 	// RBX::Reflection::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100edc60
+	// TEMPLATE: ROBLOX 0x0062cce0
 	// RBX::Reflection::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100edcd0
 	// RBX::Reflection::BoundFuncDesc<RBX::BodyVelocity,G3D::Vector3 __cdecl(void),0>::BoundFuncDesc<RBX::BodyVelocity,G3D::Vector3 __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100edd40
+	// TEMPLATE: ROBLOX 0x0062cdc0
 	// RBX::Reflection::BoundFuncDesc<RBX::BodyVelocity,G3D::Vector3 __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100f9750
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100f97c0
+	// TEMPLATE: ROBLOX 0x005cf500
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1018f020
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(void),0>::BoundFuncDesc<RBX::Network::Player,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1018f0f0
+	// TEMPLATE: ROBLOX 0x004ac9c0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x10193ee0
 	// RBX::Reflection::FuncDesc<RBX::Humanoid>::`scalar deleting destructor'
@@ -1162,18 +1257,23 @@ public:
 	// TEMPLATE: WEBSERVICE 0x101a4420
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x101a44a0
+	// TEMPLATE: ROBLOX 0x004ccd60
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>::call<boost::shared_ptr<RBX::Reflection::DescribedBase> >
 	// TEMPLATE: WEBSERVICE 0x101a4550
+	// TEMPLATE: ROBLOX 0x004cce10
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Reflection::DescribedBase> __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x101a45b0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,void __cdecl(void),0>::BoundFuncDesc<RBX::Network::Replicator,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x101a4630
+	// TEMPLATE: ROBLOX 0x004ccef0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x101a4690
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x101a4710
+	// TEMPLATE: ROBLOX 0x004ccfd0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x101a47c0
+	// TEMPLATE: ROBLOX 0x004cd080
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Replicator,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::execute
 	// clang-format on
 };
@@ -1247,11 +1347,13 @@ public:
 	// TEMPLATE: ROBLOX 0x005792e0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::call<bool>
 	// TEMPLATE: WEBSERVICE 0x1004cad0
+	// TEMPLATE: ROBLOX 0x00579360
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,bool __cdecl(boost::shared_ptr<RBX::Instance>),1>::execute
 	// TEMPLATE: WEBSERVICE 0x100598b0
 	// TEMPLATE: ROBLOX 0x0058c8b0
 	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x10059970
+	// TEMPLATE: ROBLOX 0x0058c970
 	// RBX::Reflection::BoundFuncDesc<RBX::ServiceProvider,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::execute
 	// TEMPLATE: WEBSERVICE 0x1005c370
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
@@ -1274,6 +1376,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005b8330
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const >),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x10070050
+	// SYNTHETIC: ROBLOX 0x005b8440
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10070070
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>
@@ -1289,6 +1392,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100f95d0
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>
 	// TEMPLATE: WEBSERVICE 0x100f9670
+	// TEMPLATE: ROBLOX 0x005cf320
 	// RBX::Reflection::BoundFuncDesc<RBX::Visit,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::execute
 	// TEMPLATE: WEBSERVICE 0x1018f150
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
@@ -1302,13 +1406,16 @@ public:
 	// TEMPLATE: ROBLOX 0x004ba650
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>
 	// TEMPLATE: WEBSERVICE 0x10198480
+	// TEMPLATE: ROBLOX 0x004ba720
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x10198560
+	// SYNTHETIC: ROBLOX 0x004b4700
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1019adb0
 	// TEMPLATE: ROBLOX 0x004bcfd0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int),1>::BoundFuncDesc<RBX::Network::Server,void __cdecl(int),1>
 	// TEMPLATE: WEBSERVICE 0x1019ae80
+	// TEMPLATE: ROBLOX 0x004bd0a0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int),1>::execute
 	// clang-format on
 };
@@ -1402,6 +1509,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00578cb0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::call<boost::shared_ptr<RBX::Instance> >
 	// TEMPLATE: WEBSERVICE 0x1004c3f0
+	// TEMPLATE: ROBLOX 0x00578d70
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::execute
 	// TEMPLATE: WEBSERVICE 0x100f8be0
 	// TEMPLATE: ROBLOX 0x005ce890
@@ -1437,11 +1545,13 @@ public:
 	// TEMPLATE: ROBLOX 0x005ec7a0
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>::execute
 	// SYNTHETIC: WEBSERVICE 0x100a41d0
+	// SYNTHETIC: ROBLOX 0x005ec8c0
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(G3D::Vector3,boost::shared_ptr<RBX::Instance>),2>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10193010
 	// TEMPLATE: ROBLOX 0x00418c90
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::~BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>
 	// TEMPLATE: WEBSERVICE 0x10193d30
+	// TEMPLATE: ROBLOX 0x0041b7c0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Players,void __cdecl(boost::shared_ptr<RBX::Instance>,std::basic_string<char,std::char_traits<char>,std::allocator<char> >),2>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10196790
 	// TEMPLATE: ROBLOX 0x004b8970
@@ -1450,6 +1560,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004ba440
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::execute
 	// SYNTHETIC: WEBSERVICE 0x10198390
+	// SYNTHETIC: ROBLOX 0x004ba630
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10199300
 	// TEMPLATE: ROBLOX 0x004bb580
@@ -1458,6 +1569,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004bcdd0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>
 	// TEMPLATE: WEBSERVICE 0x1019ac70
+	// TEMPLATE: ROBLOX 0x004bce90
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::execute
 	// clang-format on
 };

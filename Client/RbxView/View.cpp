@@ -21,6 +21,7 @@ namespace RBX {
 namespace View {
 
 // FUNCTION: WEBSERVICE 0x1016a4b0
+// FUNCTION: ROBLOX 0x00474910
 Instance* View::getWorkspace()
 {
 	return dataModel->getWorkspace();
@@ -37,12 +38,14 @@ void View::invalidateLighting(bool updateSkybox)
 }
 
 // FUNCTION: WEBSERVICE 0x1016a5e0
+// FUNCTION: ROBLOX 0x00474b20
 float View::getShadingQuality() const
 {
 	return renderLibScene->getShadingQuality();
 }
 
 // FUNCTION: WEBSERVICE 0x1016a5f0
+// FUNCTION: ROBLOX 0x00474b30
 float View::getMeshDetail() const
 {
 	return renderLibScene->getMeshDetail();
@@ -65,6 +68,7 @@ void View::render(void* rd)
 }
 
 // FUNCTION: WEBSERVICE 0x1016a680
+// FUNCTION: ROBLOX 0x00474bc0
 RenderStats& View::getRenderStats()
 {
 	return renderLibScene->renderStats;
@@ -141,7 +145,7 @@ void View::updateLighting()
 }
 
 // FUNCTION: WEBSERVICE 0x1016bd60
-// FUNCTION: ROBLOX 0x00477280
+// STUB: ROBLOX 0x00477280
 View::View(boost::shared_ptr<DataModel> dataModel)
 	: dataModel(dataModel), lightingValid(false), renderLibScene(new Render::RenderScene()),
 	  textureManager(new G3D::TextureManager())
@@ -163,7 +167,7 @@ View::View(boost::shared_ptr<DataModel> dataModel)
 }
 
 // FUNCTION: WEBSERVICE 0x1016c080
-// FUNCTION: ROBLOX 0x004775a0
+// STUB: ROBLOX 0x004775a0
 View::~View()
 {
 	sceneManager->clear();

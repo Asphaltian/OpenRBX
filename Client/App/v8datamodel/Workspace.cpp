@@ -69,12 +69,14 @@ static Reflection::RefPropDescriptor<Workspace, Camera> currentCameraProxyProp(
 );
 
 // FUNCTION: WEBSERVICE 0x1006a0c0
+// FUNCTION: ROBLOX 0x005b46f0
 bool Workspace::askAddChild(const Instance* instance) const
 {
 	return dynamic_cast<const IRenderable*>(instance) != NULL;
 }
 
 // FUNCTION: WEBSERVICE 0x1006a0f0
+// FUNCTION: ROBLOX 0x005b4720
 const G3D::GCamera& Workspace::getGCamera() const
 {
 	return getCamera()->getGCamera();
@@ -288,7 +290,7 @@ void Workspace::breakJoints(boost::shared_ptr<const std::vector<boost::shared_pt
 }
 
 // FUNCTION: WEBSERVICE 0x1006c6f0
-// FUNCTION: ROBLOX 0x005b5cb0
+// STUB: ROBLOX 0x005b5cb0
 void clearEmptiedModels(boost::shared_ptr<Instance> test, Instance* workspace)
 {
 	if (test.get() != workspace) {
@@ -313,7 +315,7 @@ void clearEmptiedModels(boost::shared_ptr<Instance> test, Instance* workspace)
 }
 
 // FUNCTION: WEBSERVICE 0x1006c890
-// FUNCTION: ROBLOX 0x005b5e50
+// STUB: ROBLOX 0x005b5e50
 void Workspace::handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstance> >& fallenParts)
 {
 	for (int i = 0; i < fallenParts.size(); ++i) {
@@ -440,6 +442,7 @@ Extents Workspace::computeCameraOwnerExtents()
 }
 
 // FUNCTION: WEBSERVICE 0x1006d230
+// FUNCTION: ROBLOX 0x005b67b0
 void Workspace::cameraMoved()
 {
 	Notifier<Workspace, DrawChanged>::raise(DrawChanged());
@@ -481,6 +484,7 @@ void Workspace::setDefaultMouseCommand()
 }
 
 // FUNCTION: WEBSERVICE 0x1006d440
+// FUNCTION: ROBLOX 0x005b69c0
 void Workspace::releaseScript(Script* script)
 {
 	pendingScripts.erase(script);
@@ -581,7 +585,7 @@ void Workspace::setImageServerView(const G3D::Rect2D& viewPortRect)
 }
 
 // FUNCTION: WEBSERVICE 0x1006eeb0
-// FUNCTION: ROBLOX 0x005b7230
+// STUB: ROBLOX 0x005b7230
 void Workspace::insertContent(
 	ContentId contentId, std::vector<boost::shared_ptr<Instance> >& items, InsertMode insertMode, PromptMode promptMode
 )
@@ -605,7 +609,7 @@ static void append(const boost::shared_ptr<Instance>& item, std::vector<boost::s
 }
 
 // FUNCTION: WEBSERVICE 0x1006f040
-// FUNCTION: ROBLOX 0x005b73c0
+// STUB: ROBLOX 0x005b73c0
 void Workspace::start()
 {
 	isSimulating = true;
@@ -761,7 +765,7 @@ WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* 
 }
 
 // FUNCTION: WEBSERVICE 0x10070ff0
-// FUNCTION: ROBLOX 0x005b9400
+// STUB: ROBLOX 0x005b9400
 void Workspace::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);

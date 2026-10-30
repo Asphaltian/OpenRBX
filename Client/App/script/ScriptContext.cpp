@@ -91,6 +91,7 @@ int ScriptContext::tick(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x1005eb60
+// FUNCTION: ROBLOX 0x0056bdf0
 void ScriptContext::onEvent(const RunService* source, RunTransition event)
 {
 	if (globalState) {
@@ -286,7 +287,7 @@ void ScriptContext::disassociateState(Script* script)
 }
 
 // FUNCTION: WEBSERVICE 0x10064510
-// FUNCTION: ROBLOX 0x00571b00
+// STUB: ROBLOX 0x00571b00
 void ScriptContext::removeScript(Script* script)
 {
 	if (scripts.erase(script)) {
@@ -430,7 +431,7 @@ int ScriptContext::loadfile(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10066f20
-// FUNCTION: ROBLOX 0x005734e0
+// STUB: ROBLOX 0x005734e0
 int ScriptContext::stats(lua_State* L)
 {
 	Security::Context::current().requirePermission(Security::Administrator, "Stats");
@@ -464,7 +465,7 @@ int ScriptContext::dofile(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10067140
-// FUNCTION: ROBLOX 0x00573700
+// STUB: ROBLOX 0x00573700
 void ScriptContext::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<RunService, RunTransition>(runService, this);
@@ -680,7 +681,7 @@ void ScriptContext::resume(
 }
 
 // FUNCTION: WEBSERVICE 0x10067e00
-// FUNCTION: ROBLOX 0x005743c0
+// STUB: ROBLOX 0x005743c0
 void ScriptContext::startScript(boost::shared_ptr<Script> script)
 {
 	if (scriptsDisabled) {
@@ -817,7 +818,7 @@ void ScriptContext::onChangedScriptEnabled(const Reflection::PropertyDescriptor&
 }
 
 // FUNCTION: WEBSERVICE 0x10068780
-// FUNCTION: ROBLOX 0x00574ea0
+// STUB: ROBLOX 0x00574ea0
 void ScriptContext::addScript(Script* script)
 {
 	if (scripts.insert(script).second == true) {

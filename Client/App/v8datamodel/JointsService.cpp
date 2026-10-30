@@ -19,6 +19,7 @@ void JointsService::onDescendentAdded(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x100dd9e0
+// FUNCTION: ROBLOX 0x005f5610
 void JointsService::onEvent(const World* source, AutoDestroy event)
 {
 	IJointOwner* owner = event.joint->getJointOwner();
@@ -70,7 +71,7 @@ void JointsService::onEvent(const World* source, AutoJoin event)
 }
 
 // FUNCTION: WEBSERVICE 0x100de040
-// FUNCTION: ROBLOX 0x005f5b90
+// STUB: ROBLOX 0x005f5b90
 void JointsService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<World, AutoJoin>(world, this);

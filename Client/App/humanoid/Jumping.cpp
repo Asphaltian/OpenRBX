@@ -82,6 +82,7 @@ Jumping::Jumping(Humanoid* humanoid) : Named<Flying, sJumping>(humanoid), done(f
 }
 
 // FUNCTION: WEBSERVICE 0x10122f50
+// FUNCTION: ROBLOX 0x006640d0
 Jumping::~Jumping()
 {
 	Humanoid::event_Jumping.fire(humanoid, false);

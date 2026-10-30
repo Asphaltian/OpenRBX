@@ -142,6 +142,7 @@ void VelocityMotor::setPart(int i, Feature* feature)
 }
 
 // FUNCTION: WEBSERVICE 0x100e4180
+// FUNCTION: ROBLOX 0x006177f0
 void VelocityMotor::onAncestorChanged(const AncestorChanged& event)
 {
 	Instance::onAncestorChanged(event);
@@ -229,6 +230,7 @@ VelocityMotor::~VelocityMotor()
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x100e5950
+// FUNCTION: ROBLOX 0x006188d0
 template <>
 EnumDesc<Feature::TopBottom>::EnumDesc() : EnumDescriptor("TopBottom", typeid(Feature::TopBottom))
 {
@@ -238,6 +240,7 @@ EnumDesc<Feature::TopBottom>::EnumDesc() : EnumDescriptor("TopBottom", typeid(Fe
 }
 
 // FUNCTION: WEBSERVICE 0x100e5ad0
+// FUNCTION: ROBLOX 0x00618a50
 template <>
 EnumDesc<Feature::LeftRight>::EnumDesc() : EnumDescriptor("LeftRight", typeid(Feature::LeftRight))
 {
@@ -247,6 +250,7 @@ EnumDesc<Feature::LeftRight>::EnumDesc() : EnumDescriptor("LeftRight", typeid(Fe
 }
 
 // FUNCTION: WEBSERVICE 0x100e5c50
+// FUNCTION: ROBLOX 0x00618bd0
 template <>
 EnumDesc<Feature::InOut>::EnumDesc() : EnumDescriptor("InOut", typeid(Feature::InOut))
 {
@@ -358,12 +362,14 @@ void VelocityMotor::setCurrentAngle(float value)
 	}
 }
 // FUNCTION: WEBSERVICE 0x100e78b0
+// FUNCTION: ROBLOX 0x0061a630
 Hole::Hole()
 {
 	setName("Hole");
 }
 
 // FUNCTION: WEBSERVICE 0x100e79a0
+// FUNCTION: ROBLOX 0x0061a760
 MotorFeature::MotorFeature()
 {
 	setName("MotorFeature");

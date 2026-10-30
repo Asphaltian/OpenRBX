@@ -80,6 +80,7 @@ void PVInstance::readProperty(const XmlElement* propertyElement, IReferenceBinde
 }
 
 // FUNCTION: WEBSERVICE 0x100991c0 FOLDED
+// FUNCTION: ROBLOX 0x005f7490 FOLDED
 void PVInstance::onChildAdded(Instance* instance)
 {
 	PVInstance* pvInstance = dynamic_cast<PVInstance*>(instance);
@@ -91,6 +92,7 @@ void PVInstance::onChildAdded(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x100991c0 FOLDED
+// FUNCTION: ROBLOX 0x005f7490 FOLDED
 void PVInstance::onChildRemoving(Instance* instance)
 {
 	PVInstance* pvInstance = dynamic_cast<PVInstance*>(instance);

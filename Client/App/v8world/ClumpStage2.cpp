@@ -453,6 +453,7 @@ TreeStage::~TreeStage()
 }
 
 // FUNCTION: WEBSERVICE 0x1011bff0
+// FUNCTION: ROBLOX 0x006459a0
 void TreeStage::stepWorld(int worldStepId, int uiStepId, bool throttling)
 {
 	process();
@@ -509,6 +510,7 @@ TreeStage::TreeStage(IStage* upstream, World* world)
 }
 
 // FUNCTION: WEBSERVICE 0x10108040 FOLDED
+// FUNCTION: ROBLOX 0x006a0740 FOLDED
 IStage::StageType ClumpStage::getStageType()
 {
 	return CLUMP_STAGE;

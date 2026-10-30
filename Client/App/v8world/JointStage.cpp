@@ -174,7 +174,7 @@ void JointStage::onPrimitiveAdded(Primitive* p)
 }
 
 // FUNCTION: WEBSERVICE 0x10118b40
-// FUNCTION: ROBLOX 0x006429c0
+// STUB: ROBLOX 0x006429c0
 void JointStage::onPrimitiveRemoving(Primitive* p)
 {
 	std::vector<Joint*> jointsToPop;

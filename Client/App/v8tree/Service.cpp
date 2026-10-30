@@ -61,7 +61,7 @@ Instance* ServiceProvider::create(Instance* context, const Name& name)
 }
 
 // FUNCTION: WEBSERVICE 0x100591a0
-// FUNCTION: ROBLOX 0x0058c2a0
+// STUB: ROBLOX 0x0058c2a0
 boost::shared_ptr<Instance> ServiceProvider::findServiceByClassNameString(std::string sName)
 {
 	const Name& name = Name::lookup(sName);
@@ -86,7 +86,7 @@ boost::shared_ptr<Instance> ServiceProvider::findServiceByClassName(const Name& 
 }
 
 // FUNCTION: WEBSERVICE 0x10059320
-// FUNCTION: ROBLOX 0x0058c420
+// STUB: ROBLOX 0x0058c420
 void ServiceProvider::onChildRemoving(Instance* instance)
 {
 	std::map<const Name*, boost::shared_ptr<Instance> >::iterator iter = serviceMap.find(&instance->getClassName());
@@ -97,7 +97,7 @@ void ServiceProvider::onChildRemoving(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x100593a0
-// FUNCTION: ROBLOX 0x0058c4a0
+// STUB: ROBLOX 0x0058c4a0
 void ServiceProvider::onAddListener(Listener<ServiceProvider, ServiceAdded>* listener) const
 {
 	if (getChildren()) {
@@ -112,7 +112,7 @@ void ServiceProvider::onAddListener(Listener<ServiceProvider, ServiceAdded>* lis
 }
 
 // FUNCTION: WEBSERVICE 0x10059550
-// FUNCTION: ROBLOX 0x0058c560
+// STUB: ROBLOX 0x0058c560
 void ServiceProvider::onChildAdded(Instance* instance)
 {
 	if (dynamic_cast<Service*>(instance) != NULL) {
@@ -147,6 +147,7 @@ shared_ptr<Instance> ServiceProvider::createChild(const Name& className)
 }
 
 // FUNCTION: WEBSERVICE 0x1007ab90
+// FUNCTION: ROBLOX 0x005825b0
 bool ServiceProvider::askAddChild(const Instance* instance) const
 {
 	return dynamic_cast<const Service*>(instance) != NULL;

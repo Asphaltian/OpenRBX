@@ -34,6 +34,7 @@ public:
 	virtual ~ClientPhysics(); // vtable+0x04
 
 	// SYNTHETIC: WEBSERVICE 0x101af520
+	// SYNTHETIC: ROBLOX 0x004d5410
 	// RBX::Network::ClientPhysics::`scalar deleting destructor'
 
 protected:

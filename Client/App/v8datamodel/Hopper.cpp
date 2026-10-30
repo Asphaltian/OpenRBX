@@ -49,6 +49,7 @@ const TextureId BackpackItem::getTextureId() const
 }
 
 // FUNCTION: WEBSERVICE 0x100c7120
+// FUNCTION: ROBLOX 0x005e13e0
 bool Hopper::askAddChild(const Instance* instance) const
 {
 	return dynamic_cast<const BackpackItem*>(instance) != NULL;
@@ -320,6 +321,7 @@ G3D::Vector2 BackpackItem::getSize() const
 }
 
 // FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+// FUNCTION: ROBLOX 0x00633110 FOLDED
 bool Hopper::askSetParent(const Instance* instance) const
 {
 	return true;

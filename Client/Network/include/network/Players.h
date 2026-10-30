@@ -101,7 +101,7 @@ private:
 // SYNTHETIC: ROBLOX 0x004b6770
 // RBX::Network::AbuseReporter::data::~data
 // SYNTHETIC: WEBSERVICE 0x101954c0
-// SYNTHETIC: ROBLOX 0x004b6890
+// STUB: ROBLOX 0x004b6890
 // RBX::Network::AbuseReporter::data::data
 // clang-format on
 
@@ -195,6 +195,7 @@ DECOMP_SIZE_ASSERT(Players, 0x158)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10190e60
+// SYNTHETIC: ROBLOX 0x004afe60
 // RBX::Network::Players::Plugin::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x1021f4c0
 // RBX::Network::`dynamic initializer for 'propPlayerCount''

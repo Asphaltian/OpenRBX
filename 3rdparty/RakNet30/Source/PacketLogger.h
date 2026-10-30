@@ -36,6 +36,7 @@ class RAK_DLL_EXPORT PacketLogger : public PluginInterface
 {
 
 // SYNTHETIC: WEBSERVICE 0x101ae990
+// SYNTHETIC: ROBLOX 0x004d3fb0
 // PacketLogger::`scalar deleting destructor'
 public:
 	PacketLogger();

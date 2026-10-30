@@ -49,6 +49,7 @@ private:
 	virtual State* onStep(const float stepDt, Controller& controller); // vtable+0x0c
 
 	// FUNCTION: WEBSERVICE 0x10106e90
+	// FUNCTION: ROBLOX 0x00641510
 	virtual float getIntendedRotationAboutYAxis() const // vtable+0x10
 	{
 		return intendedYRotation;
@@ -66,6 +67,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool shouldRender3dAdorn() const // IRenderable vtable+0x04
 	{
 		return true;
@@ -74,6 +76,7 @@ public:
 	virtual void render3dAdorn(Adorn* adorn); // IRenderable vtable+0x0c
 
 	// SYNTHETIC: WEBSERVICE 0x101070f0
+	// SYNTHETIC: ROBLOX 0x00641770
 	// RBX::Running::`scalar deleting destructor'
 };
 

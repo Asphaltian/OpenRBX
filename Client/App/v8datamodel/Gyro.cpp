@@ -97,6 +97,7 @@ Reflection::BoundProp<G3D::Vector3, 1> BodyThrust::prop_force("force", "Goals", 
 Reflection::BoundProp<G3D::Vector3, 1> BodyThrust::prop_location("location", "Goals", &BodyThrust::location);
 
 // FUNCTION: WEBSERVICE 0x100ea070 FOLDED
+// FUNCTION: ROBLOX 0x005dfdf0 FOLDED
 bool BodyMover::askSetParent(const Instance* instance) const
 {
 	return dynamic_cast<const PartInstance*>(instance) != NULL;
@@ -258,6 +259,7 @@ void BodyGyro::computeBalance(Body* body)
 }
 
 // STUB: WEBSERVICE 0x100eaf60
+// STUB: ROBLOX 0x0062a020
 void BodyPosition::computeForce(float dt, bool throttling)
 {
 	Body* body = part->getPrimitive()->getBody();
@@ -272,6 +274,7 @@ void BodyPosition::computeForce(float dt, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x100eb0c0
+// FUNCTION: ROBLOX 0x0062a180
 void BodyVelocity::computeForce(float dt, bool throttling)
 {
 	Body* body = part->getPrimitive()->getBody();
@@ -293,6 +296,7 @@ void BodyForce::computeForce(float dt, bool throttling)
 }
 
 // FUNCTION: WEBSERVICE 0x100eb240
+// FUNCTION: ROBLOX 0x0062a300
 void BodyThrust::computeForce(float dt, bool throttling)
 {
 	Body* body = part->getPrimitive()->getBody();
@@ -436,7 +440,7 @@ Rocket::Rocket()
 }
 
 // FUNCTION: WEBSERVICE 0x100ee130
-// FUNCTION: ROBLOX 0x0062d170
+// STUB: ROBLOX 0x0062d170
 void BodyMover::updateWorld()
 {
 	World* newWorld = part ? Workspace::getWorldIfInWorkspace(this) : NULL;

@@ -167,7 +167,7 @@ void Player::onCharacterChangedFrontend()
 }
 
 // FUNCTION: WEBSERVICE 0x1018ebc0
-// FUNCTION: ROBLOX 0x004ac3d0
+// STUB: ROBLOX 0x004ac3d0
 void Player::rebuildBackpack()
 {
 	if (!Players::backendProcessing(this, true)) {
@@ -191,7 +191,7 @@ void Player::rebuildBackpack()
 }
 
 // FUNCTION: WEBSERVICE 0x1018f870
-// FUNCTION: ROBLOX 0x004ada20
+// STUB: ROBLOX 0x004ada20
 void Player::setCharacter(ModelInstance* value)
 {
 	if (value != character.get()) {
@@ -237,7 +237,7 @@ void Player::setNeutral(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1018fa20
-// FUNCTION: ROBLOX 0x004adbd0
+// STUB: ROBLOX 0x004adbd0
 void Player::doPeriodicIdleCheck()
 {
 	if (!ServiceProvider::findServiceProvider(this)) {
@@ -354,7 +354,7 @@ void Player::loadCharacterAppearance()
 }
 
 // FUNCTION: WEBSERVICE 0x101905d0
-// FUNCTION: ROBLOX 0x004af300
+// STUB: ROBLOX 0x004af300
 void Player::loadCharacter()
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(this);

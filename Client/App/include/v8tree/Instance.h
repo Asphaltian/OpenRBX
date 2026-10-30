@@ -62,7 +62,7 @@ private:
 	friend class RaiseDescendentAdded2;
 
 	// FUNCTION: WEBSERVICE 0x10049ad0
-	// FUNCTION: ROBLOX 0x00577770
+	// STUB: ROBLOX 0x00577770
 	// RBX::DescendentAdded::DescendentAdded
 
 	DescendentAdded(Instance* instance, Instance* parent) : instance(shared_from(instance)), parent(shared_from(parent))
@@ -182,19 +182,19 @@ public:
 	static const Reflection::PropDescriptor<Instance, std::string> desc_Name;
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10047f40
-	// TEMPLATE: ROBLOX 0x005764f0
+	// STUB: ROBLOX 0x005764f0
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@IBEXUDescendentAdded@2@PAV?$Listener@VInstance@RBX@@UDescendentAdded@2@@2@@Z
 	// TEMPLATE: WEBSERVICE 0x100487e0
-	// TEMPLATE: ROBLOX 0x00576af0
+	// STUB: ROBLOX 0x00576af0
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@IBEXUDescendentRemoving@2@PAV?$Listener@VInstance@RBX@@UDescendentRemoving@2@@2@@Z
 	// TEMPLATE: WEBSERVICE 0x100488f0
 	// TEMPLATE: ROBLOX 0x00576c00
 	// ?raise@?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@IBEXUAncestorChanged@2@PAV?$Listener@VInstance@RBX@@UAncestorChanged@2@@2@@Z
 	// TEMPLATE: WEBSERVICE 0x10048af0
-	// TEMPLATE: ROBLOX 0x00576dd0
+	// STUB: ROBLOX 0x00576dd0
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@IBEXUDescendentAdded@2@@Z
 	// TEMPLATE: WEBSERVICE 0x100493e0
-	// TEMPLATE: ROBLOX 0x00577520
+	// STUB: ROBLOX 0x00577520
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@IBEXUDescendentRemoving@2@@Z
 	// TEMPLATE: WEBSERVICE 0x100494c0
 	// TEMPLATE: ROBLOX 0x00577600
@@ -262,7 +262,7 @@ public:
 	void setParent(Instance* newParent);
 
 	// FUNCTION: WEBSERVICE 0x100ab0a0
-	// FUNCTION: ROBLOX 0x004c2f70
+	// STUB: ROBLOX 0x004c2f70
 	void setParent2(boost::shared_ptr<Instance> instance) { setParent(instance.get()); }
 	void promoteChildren();
 
@@ -306,10 +306,10 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004a340
-	// TEMPLATE: ROBLOX 0x00577eb0
+	// STUB: ROBLOX 0x00577eb0
 	// ??$for_eachChild@VRaiseDescendentAdded2@RBX@@@Instance@RBX@@QBEXVRaiseDescendentAdded2@1@@Z
 	// TEMPLATE: WEBSERVICE 0x1005af10
-	// TEMPLATE: ROBLOX 0x004a6400
+	// STUB: ROBLOX 0x004a6400
 	// ??$for_eachChild@P6AXPAVInstance@RBX@@@Z@Instance@RBX@@QBEXP6AXPAV01@@Z@Z
 	// clang-format on
 	template <class Func>
@@ -379,7 +379,7 @@ public:
 	Instance* getChild(unsigned int index) { return (*children)[index].get(); }
 
 	// FUNCTION: WEBSERVICE 0x100469f0
-	// FUNCTION: ROBLOX 0x00447c60
+	// STUB: ROBLOX 0x00447c60
 	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
 	{
 		Reflection::Property property(descriptor, this);
@@ -539,7 +539,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
 	// FUNCTION: WEBSERVICE 0x10043270
-	// FUNCTION: ROBLOX 0x00446240
+	// STUB: ROBLOX 0x00446240
 	// RBX::Notifier<RBX::Instance,RBX::PropertyChanged>::raise
 	// FUNCTION: WEBSERVICE 0x10043920
 	// FUNCTION: ROBLOX 0x00446530
@@ -573,7 +573,7 @@ template <class T, class Base, const char* sName>
 	// TEMPLATE: ROBLOX 0x00572460
 	// RBX::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem><char const *>
 	// TEMPLATE: WEBSERVICE 0x100653c0
-	// TEMPLATE: ROBLOX 0x0045ca30
+	// STUB: ROBLOX 0x0045ca30
 	// RBX::DescribedNonCreatable<RBX::Stats::StatsService,RBX::Instance,&RBX::Stats::sStats>::DescribedNonCreatable<RBX::Stats::StatsService,RBX::Instance,&RBX::Stats::sStats><char const *>
 	// FUNCTION: WEBSERVICE 0x10065660
 	// FUNCTION: ROBLOX 0x005725b0
@@ -606,6 +606,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: WEBSERVICE 0x1008cb80
 	// RBX::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::~DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
 	// FUNCTION: WEBSERVICE 0x1008de10
+	// FUNCTION: ROBLOX 0x005cd6a0
 	// RBX::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>::DescribedCreatable<RBX::Hint,RBX::Message,&RBX::sHint>
 	// FUNCTION: WEBSERVICE 0x1008e2c0
 	// FUNCTION: ROBLOX 0x005cdb50
@@ -763,8 +764,10 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: ROBLOX 0x00619b10
 	// RBX::DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor>::DescribedCreatable<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor><RBX::MotorJoint *>
 	// FUNCTION: WEBSERVICE 0x100e7730
+	// FUNCTION: ROBLOX 0x0061a460
 	// RBX::DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>::DescribedCreatable<RBX::MotorFeature,RBX::Feature,&RBX::sMotorFeature>
 	// FUNCTION: WEBSERVICE 0x100e77d0
+	// FUNCTION: ROBLOX 0x0061a560
 	// RBX::DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>::DescribedCreatable<RBX::Hole,RBX::Feature,&RBX::sHole>
 	// FUNCTION: WEBSERVICE 0x100e8050
 	// RBX::DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>::~DescribedCreatable<RBX::FlagStandService,RBX::Instance,&RBX::sFlagStandService>
@@ -799,7 +802,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: ROBLOX 0x0062c280
 	// RBX::DescribedCreatable<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce>::DescribedCreatable<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce><char *>
 	// FUNCTION: WEBSERVICE 0x100ed380
-	// FUNCTION: ROBLOX 0x0062c430
+	// STUB: ROBLOX 0x0062c430
 	// RBX::DescribedCreatable<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust>::DescribedCreatable<RBX::BodyThrust,RBX::BodyMover,&RBX::sBodyThrust><char *>
 	// FUNCTION: WEBSERVICE 0x100eddb0
 	// FUNCTION: ROBLOX 0x0062ce30
@@ -817,11 +820,13 @@ template <class T, class Base, const char* sName>
 	// TEMPLATE: ROBLOX 0x00632c40
 	// RBX::DescribedCreatable<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>::DescribedCreatable<RBX::Value<double,&RBX::sDoubleValue>,RBX::Instance,&RBX::sDoubleValue>
 	// TEMPLATE: WEBSERVICE 0x100f41f0
+	// TEMPLATE: ROBLOX 0x00632db0
 	// RBX::DescribedCreatable<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>::DescribedCreatable<RBX::Value<G3D::Vector3,&RBX::sVector3Value>,RBX::Instance,&RBX::sVector3Value>
 	// TEMPLATE: WEBSERVICE 0x100f4290
 	// TEMPLATE: ROBLOX 0x00632e50
 	// RBX::DescribedCreatable<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>::DescribedCreatable<RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue>,RBX::Instance,&RBX::sCFrameValue>
 	// TEMPLATE: WEBSERVICE 0x100f4330
+	// TEMPLATE: ROBLOX 0x00632f00
 	// RBX::DescribedCreatable<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>::DescribedCreatable<RBX::Value<G3D::Color3,&RBX::sColor3Value>,RBX::Instance,&RBX::sColor3Value>
 	// TEMPLATE: WEBSERVICE 0x100f4410
 	// TEMPLATE: ROBLOX 0x00632fb0

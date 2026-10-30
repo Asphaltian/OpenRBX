@@ -193,6 +193,7 @@ DECOMP_SIZE_ASSERT(Signal, 0x08)
 // TEMPLATE: ROBLOX 0x00601720
 // RBX::Reflection::SignalInstance::connectGeneric<WaitScriptSlot>
 // FUNCTION: WEBSERVICE 0x100447e0
+// FUNCTION: ROBLOX 0x00419080
 // RBX::Reflection::SignalInstance::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x100b1020
 // TEMPLATE: ROBLOX 0x00601940
@@ -223,39 +224,51 @@ public:
 
 		// clang-format off
 		// TEMPLATE: WEBSERVICE 0x100455d0
+		// TEMPLATE: ROBLOX 0x005db370
 		// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x1004cc60
 		// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x1004ccd0
+		// TEMPLATE: ROBLOX 0x00579450
 		// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x10056210
+		// TEMPLATE: ROBLOX 0x0056a7a0
 		// RBX::Reflection::TSignalDesc<void __cdecl(float,float)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x10056280
 		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100789a0
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f2ef0
+		// TEMPLATE: ROBLOX 0x00631c40
 		// RBX::Reflection::TSignalDesc<void __cdecl(int)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f2f60
+		// TEMPLATE: ROBLOX 0x00631cb0
 		// RBX::Reflection::TSignalDesc<void __cdecl(double)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f2fd0
 		// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f3040
+		// TEMPLATE: ROBLOX 0x00631d20
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Vector3)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f30b0
+		// TEMPLATE: ROBLOX 0x00631d90
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::CoordinateFrame)>::TSignalInstance::TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3120
 		// SYNTHETIC: ROBLOX 0x00631e70
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::~TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3170
+		// SYNTHETIC: ROBLOX 0x00631ec0
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::`scalar deleting destructor'
 		// TEMPLATE: WEBSERVICE 0x100f3190
+		// TEMPLATE: ROBLOX 0x00631e00
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Color3)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f3200
+		// TEMPLATE: ROBLOX 0x00631ee0
 		// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x10197810
+		// TEMPLATE: ROBLOX 0x004b9ab0
 		// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x101a38d0
+		// TEMPLATE: ROBLOX 0x004cbd80
 		// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool)>::TSignalInstance::TSignalInstance
 		// clang-format on
 	};
@@ -271,36 +284,52 @@ private:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10045b70
+	// TEMPLATE: ROBLOX 0x005db780
 	// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x1004cfd0
+	// STUB: ROBLOX 0x004b43e0
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x1004d040
+	// TEMPLATE: ROBLOX 0x00579510
 	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x10056620
+	// TEMPLATE: ROBLOX 0x0056ab10
 	// RBX::Reflection::TSignalDesc<void __cdecl(float,float)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x10056760
+	// STUB: ROBLOX 0x004ac870
 	// RBX::Reflection::TSignalDesc<void __cdecl(float)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x10079440
+	// STUB: ROBLOX 0x004cc980
 	// RBX::Reflection::TSignalDesc<void __cdecl(void)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100e2e30
+	// TEMPLATE: ROBLOX 0x00625f40
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3b90
+	// TEMPLATE: ROBLOX 0x00632850
 	// RBX::Reflection::TSignalDesc<void __cdecl(int)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3c00
+	// TEMPLATE: ROBLOX 0x006328c0
 	// RBX::Reflection::TSignalDesc<void __cdecl(double)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3c70
+	// STUB: ROBLOX 0x0041add0
 	// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3ce0
+	// TEMPLATE: ROBLOX 0x00632930
 	// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Vector3)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3d50
+	// TEMPLATE: ROBLOX 0x006329a0
 	// RBX::Reflection::TSignalDesc<void __cdecl(G3D::CoordinateFrame)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3dc0
+	// TEMPLATE: ROBLOX 0x00632a10
 	// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Color3)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3e30
+	// TEMPLATE: ROBLOX 0x00632a80
 	// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x10197ac0
+	// TEMPLATE: ROBLOX 0x004b9d60
 	// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x101a4350
+	// TEMPLATE: ROBLOX 0x004ccb40
 	// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool)>::newSignalInstance
 	// clang-format on
 
@@ -337,6 +366,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00475b00
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::connect
 	// TEMPLATE: WEBSERVICE 0x100e28b0
+	// TEMPLATE: ROBLOX 0x006259c0
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::TSignalInstance::TSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100fca60
 	// TEMPLATE: ROBLOX 0x00475b50
@@ -371,6 +401,7 @@ protected:
 		// TEMPLATE: WEBSERVICE 0x1004bce0
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x1004be30
+		// TEMPLATE: ROBLOX 0x005788f0
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x10055f60
 		// TEMPLATE: ROBLOX 0x0056a5e0
@@ -383,6 +414,7 @@ protected:
 		// TEMPLATE: ROBLOX 0x00625820
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f1d60
+		// TEMPLATE: ROBLOX 0x00630bb0
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(int)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f1e50
 		// TEMPLATE: ROBLOX 0x00630ca0
@@ -390,13 +422,16 @@ protected:
 		// TEMPLATE: WEBSERVICE 0x100f1f40
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2040
+		// TEMPLATE: ROBLOX 0x00630d90
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Vector3)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2140
 		// TEMPLATE: ROBLOX 0x00630e90
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::CoordinateFrame)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2230
+		// TEMPLATE: ROBLOX 0x00630f80
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Color3)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100f2330
+		// TEMPLATE: ROBLOX 0x00631080
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::BrickColor)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x1018e0e0
 		// TEMPLATE: ROBLOX 0x004aaf50
@@ -472,22 +507,31 @@ protected:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004edd0
+	// STUB: ROBLOX 0x004b7d30
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x1004eeb0
+	// STUB: ROBLOX 0x0057aa40
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x10057d90
+	// STUB: ROBLOX 0x004aeb70
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(float)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100f84f0
+	// TEMPLATE: ROBLOX 0x006369c0
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(int)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100f85d0
+	// TEMPLATE: ROBLOX 0x00636aa0
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(double)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100f8790
+	// TEMPLATE: ROBLOX 0x00636b80
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Vector3)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100f8870
+	// TEMPLATE: ROBLOX 0x00636c60
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::CoordinateFrame)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100f8950
+	// TEMPLATE: ROBLOX 0x00636d40
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(G3D::Color3)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100f8a30
+	// TEMPLATE: ROBLOX 0x00636e20
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::BrickColor)>::connectGeneric
 	// clang-format on
 
@@ -548,12 +592,16 @@ protected:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10057cb0
+	// TEMPLATE: ROBLOX 0x0056baa0
 	// RBX::Reflection::SignalDescImpl<2,void __cdecl(float,float)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100e3b40
+	// TEMPLATE: ROBLOX 0x00626c50
 	// RBX::Reflection::SignalDescImpl<2,void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x10199190
+	// TEMPLATE: ROBLOX 0x004bb410
 	// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x101a9a80
+	// TEMPLATE: ROBLOX 0x004d2bb0
 	// RBX::Reflection::SignalDescImpl<2,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool)>::connectGeneric
 	// clang-format on
 

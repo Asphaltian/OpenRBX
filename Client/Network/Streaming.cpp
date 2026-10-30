@@ -624,7 +624,7 @@ void IdSerializer::resolvePendingReferences(Instance* instance, Guid::Data id)
 }
 
 // FUNCTION: WEBSERVICE 0x101ae170
-// FUNCTION: ROBLOX 0x004c1770
+// STUB: ROBLOX 0x004c1770
 void IdSerializer::deserializeRef(Reflection::Property& property, RakNet::BitStream& bitStream)
 {
 	Instance* owner = static_cast<Instance*>(property.getInstance());

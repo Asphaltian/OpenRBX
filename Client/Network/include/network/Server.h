@@ -48,6 +48,7 @@ class Server : public DescribedCreatable<Server, Peer, sServer>, public Service
 
 	protected:
 		// FUNCTION: WEBSERVICE 0x101996e0
+		// FUNCTION: ROBLOX 0x004bb930
 		virtual Player* findTargetPlayer() { return remotePlayer.get(); }
 
 		virtual void onSentMarker(long id);
@@ -63,6 +64,7 @@ class Server : public DescribedCreatable<Server, Peer, sServer>, public Service
 		}
 
 		// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+		// FUNCTION: ROBLOX 0x005df250 FOLDED
 		virtual bool canSendItems() { return true; }
 	};
 
@@ -91,6 +93,7 @@ protected:
 	virtual void onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider);
 
 	// FUNCTION: WEBSERVICE 0x101999f0
+	// FUNCTION: ROBLOX 0x004bbbe0
 	virtual bool askAddChild(const Instance* instance) const
 	{
 		return dynamic_cast<const ClientProxy*>(instance) != NULL;

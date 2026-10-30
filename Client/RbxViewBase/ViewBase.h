@@ -41,6 +41,7 @@ private:
 	virtual void invalidateLighting(bool) = 0;                                // vtable+0x28
 
 	// SYNTHETIC: WEBSERVICE 0x1016a260
+	// SYNTHETIC: ROBLOX 0x00474550
 	// RBX::ViewBase::`scalar deleting destructor'
 };
 

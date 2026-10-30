@@ -16,6 +16,7 @@ namespace RBX {
 char sControllerService[] = "ControllerService";
 
 // FUNCTION: WEBSERVICE 0x100c5480
+// FUNCTION: ROBLOX 0x005d4580
 float AIController::getValue(InputType inputType) const
 {
 	return buffer[inputType];
@@ -274,7 +275,7 @@ AIController::~AIController()
 }
 
 // FUNCTION: WEBSERVICE 0x100c6510
-// FUNCTION: ROBLOX 0x005d5370
+// STUB: ROBLOX 0x005d5370
 SteppingController::SteppingController(const PVInstance* _controlledInstance)
 	: runService(shared_from(ServiceProvider::create<RunService>(_controlledInstance))),
 	  controlledInstance(shared_from(_controlledInstance))
@@ -290,7 +291,7 @@ PlayerController::PlayerController(ControllerService* _controllerService, const 
 }
 
 // FUNCTION: WEBSERVICE 0x100c6760
-// FUNCTION: ROBLOX 0x005d55b0
+// STUB: ROBLOX 0x005d55b0
 void PlayerController::onEvent(const RunService* source, Heartbeat event)
 {
 	const UserInputBase* hardware = getHardwareDevice();

@@ -105,36 +105,42 @@ static void CylinderTransform(
 }
 
 // FUNCTION: WEBSERVICE 0x10187230
+// FUNCTION: ROBLOX 0x00491620
 inline void CylinderBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(EndcapTransform, elements, elements, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10187260
+// FUNCTION: ROBLOX 0x00491650
 inline void CylinderBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(CylinderTransform, elements, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10187290
+// FUNCTION: ROBLOX 0x00491680
 inline void CylinderBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(CylinderTransform, elements, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x101872c0
+// FUNCTION: ROBLOX 0x004916b0
 inline void CylinderBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(EndcapTransform, elements, elements, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x101872f0
+// FUNCTION: ROBLOX 0x004916e0
 inline void CylinderBuilder::buildBottom(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y_NEG>(CylinderTransform, elements, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10187320
+// FUNCTION: ROBLOX 0x00491710
 inline void CylinderBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(CylinderTransform, elements, 1, purpose);

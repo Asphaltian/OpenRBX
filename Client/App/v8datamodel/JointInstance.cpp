@@ -63,6 +63,7 @@ static Reflection::PropDescriptor<Motor, float> prop_CurrentAngle(
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x100d7a80
+// FUNCTION: ROBLOX 0x005f1990
 bool JointInstance::shouldRender3dAdorn() const
 {
 	return PartInstance::showSpanningTree;

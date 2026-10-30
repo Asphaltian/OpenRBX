@@ -18,14 +18,17 @@ private:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x100a76b0 FOLDED
+	// SYNTHETIC: ROBLOX 0x005f6070 FOLDED
 	// RBX::Ball::`scalar deleting destructor'
 
 	virtual bool hitTest(const Ray& ray, Vector3& hitPoint, bool& inside);
 
 	// FUNCTION: WEBSERVICE 0x10108040 FOLDED
+	// FUNCTION: ROBLOX 0x006a0740 FOLDED
 	virtual GeometryType getGeometryType() const { return GEOMETRY_BALL; }
 
 	// FUNCTION: WEBSERVICE 0x100a7780
+	// FUNCTION: ROBLOX 0x005f6020
 	virtual float getRadius() const { return realRadius; }
 
 	// FUNCTION: WEBSERVICE 0x100a7790
@@ -36,6 +39,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x100a77b0
+	// FUNCTION: ROBLOX 0x005f6050
 	virtual Matrix3 getMoment(float mass) const { return getMomentSolid(mass); }
 
 	virtual float getGridVolume() const;

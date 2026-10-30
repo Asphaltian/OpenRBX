@@ -27,6 +27,7 @@ public:
 	virtual void onEdgeRemoving(Edge* edge); // vtable+0x14
 
 	// FUNCTION: WEBSERVICE 0x10118800
+	// FUNCTION: ROBLOX 0x00642680
 	virtual int getMetric(MetricType metricType) { return getDownstreamWS()->getMetric(metricType); } // vtable+0x18
 
 	IWorldStage* getUpstreamWS() { return static_cast<IWorldStage*>(getUpstream()); }

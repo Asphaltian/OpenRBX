@@ -76,7 +76,7 @@ public:
 };
 
 // FUNCTION: WEBSERVICE 0x100325a0
-// FUNCTION: ROBLOX 0x005aa010
+// STUB: ROBLOX 0x005aa010
 worker_thread::~worker_thread()
 {
 	boost::mutex::scoped_lock lock(_data->sync);
@@ -123,7 +123,7 @@ void worker_thread::threadProc(boost::shared_ptr<data> data, const boost::functi
 namespace boost_detail {
 
 // FUNCTION: WEBSERVICE 0x10033f30
-// FUNCTION: ROBLOX 0x005ab940
+// STUB: ROBLOX 0x005ab940
 void init_foo()
 {
 	static boost::thread_specific_ptr<std::string> value;
@@ -152,7 +152,7 @@ const char* get_thread_name()
 }
 
 // FUNCTION: WEBSERVICE 0x10034080
-// FUNCTION: ROBLOX 0x005aba90
+// STUB: ROBLOX 0x005aba90
 void run_in_background(const boost::function0<void>& threadfunc, std::string name)
 {
 	try {

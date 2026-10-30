@@ -25,7 +25,7 @@ bool InstanceHandle::operatorLess(const InstanceHandle& other) const
 }
 
 // FUNCTION: WEBSERVICE 0x10099020
-// FUNCTION: ROBLOX 0x005c93a0
+// STUB: ROBLOX 0x005c93a0
 InstanceHandle::InstanceHandle(Instance* target) : target(shared_from(target))
 {
 }

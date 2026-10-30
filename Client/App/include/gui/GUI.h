@@ -26,9 +26,11 @@ public:
 
 private:
 	// FUNCTION: WEBSERVICE 0x100c7460
+	// FUNCTION: ROBLOX 0x0040dd90
 	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const GuiItem*>(instance) != NULL; }
 
 	// FUNCTION: WEBSERVICE 0x100c7730 FOLDED
+	// FUNCTION: ROBLOX 0x0040ddc0 FOLDED
 	virtual const Name& getClassName() const { return Name::getNullName(); }
 
 public:
@@ -46,6 +48,7 @@ protected:
 	virtual G3D::Vector2 getChildPosition(const GuiItem* child) const { return G3D::Vector2::zero(); } // vtable+0x4c
 
 	// FUNCTION: WEBSERVICE 0x100c72b0
+	// FUNCTION: ROBLOX 0x0040de10
 	virtual int getFontSize() const { return 14; } // vtable+0x50
 
 	virtual bool isVisible() const { return true; } // vtable+0x54
@@ -129,6 +132,7 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	// FUNCTION: ROBLOX 0x00633110 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return true; }
 
 private:
@@ -155,6 +159,7 @@ public:
 	virtual void render2d(Adorn* adorn);
 	virtual G3D::Vector2 getSize() const;
 	// FUNCTION: WEBSERVICE 0x100c72f0
+	// FUNCTION: ROBLOX 0x0058d770
 	virtual bool isVisible() const { return visible; }
 
 	void setVisible(bool value) { visible = value; }

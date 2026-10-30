@@ -58,6 +58,7 @@ void Reflection::TypedPropertyDescriptor<TextureId>::writeValue(
 }
 
 // FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+// FUNCTION: ROBLOX 0x005df250 FOLDED
 template <>
 bool Reflection::TypedPropertyDescriptor<TextureId>::hasStringValue() const
 {

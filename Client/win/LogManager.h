@@ -45,6 +45,7 @@ public:
 	virtual std::string getLogFileName() = 0; // vtable+0x04
 
 	// SYNTHETIC: WEBSERVICE 0x10001dd0
+	// SYNTHETIC: ROBLOX 0x0042b9b0
 	// LogManager::`scalar deleting destructor'
 
 protected:
@@ -116,6 +117,7 @@ private:
 DECOMP_SIZE_ASSERT(MainLogManager, 0x4c)
 
 // VTABLE: WEBSERVICE 0x1025af6c
+// VTABLE: ROBLOX 0x00803e9c
 // SIZE 0x28
 class ThreadLogManager : public LogManager
 {
@@ -127,6 +129,7 @@ public:
 	virtual ~ThreadLogManager() {}
 
 	// SYNTHETIC: WEBSERVICE 0x10002810
+	// SYNTHETIC: ROBLOX 0x0042bf40
 	// ThreadLogManager::`scalar deleting destructor'
 
 protected:

@@ -29,6 +29,7 @@ void ToolMouseCommand::updateTargetPoint(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x101172d0
+// FUNCTION: ROBLOX 0x00656a60
 MouseCommand* ToolMouseCommand::onMouseDown(const UIEvent& uiEvent)
 {
 	updateTargetPoint(uiEvent);
@@ -56,6 +57,7 @@ void ToolMouseCommand::onMouseIdle(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10117320
+// FUNCTION: ROBLOX 0x00656ab0
 MouseCommand* ToolMouseCommand::onMouseUp(const UIEvent& uiEvent)
 {
 	updateTargetPoint(uiEvent);

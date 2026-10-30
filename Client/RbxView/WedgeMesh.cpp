@@ -134,24 +134,28 @@ protected:
 DECOMP_SIZE_ASSERT(WedgeBuilder, 0x24)
 
 // FUNCTION: WEBSERVICE 0x101800c0
+// FUNCTION: ROBLOX 0x0048a4f0
 inline void WedgeBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(DeformSide3(bevel, true), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10180100
+// FUNCTION: ROBLOX 0x0048a530
 inline void WedgeBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(DeformTop3(bevel), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10180140
+// FUNCTION: ROBLOX 0x0048a570
 inline void WedgeBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(DeformSide3(bevel, false), 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10180180
+// FUNCTION: ROBLOX 0x0048a5b0
 inline void WedgeBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(DeformFront(bevel), 1, 1, purpose);
@@ -209,12 +213,14 @@ template WedgeMesh* MeshFactory<WedgeMesh, 1>::createTexture(const G3D::Vector3&
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10181100
+// FUNCTION: ROBLOX 0x0048b530
 inline void WedgeBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(*this, 1, 1, purpose);
 }
 
 // FUNCTION: WEBSERVICE 0x10181130
+// FUNCTION: ROBLOX 0x0048b560
 inline void WedgeBuilder::buildBottom(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y_NEG>(*this, 1, 1, purpose);

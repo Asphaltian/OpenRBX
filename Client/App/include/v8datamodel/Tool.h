@@ -94,6 +94,7 @@ private:
 	virtual void onAncestorChanged(const AncestorChanged& event);
 
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	// FUNCTION: ROBLOX 0x00633110 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return true; }
 
 	virtual bool askAddChild(const Instance* instance) const { return true; }
@@ -101,6 +102,7 @@ private:
 	virtual const CoordinateFrame getLocation() const;
 
 	// FUNCTION: WEBSERVICE 0x100cb120
+	// FUNCTION: ROBLOX 0x0060fcf0
 	virtual bool drawSelected() const { return backendToolState >= EQUIPPED; }
 
 	virtual void onLocalClicked();

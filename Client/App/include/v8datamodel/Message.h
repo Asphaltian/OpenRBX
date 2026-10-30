@@ -27,11 +27,13 @@ public:
 	Message();
 
 	// FUNCTION: WEBSERVICE 0x100e6150 FOLDED
+	// FUNCTION: ROBLOX 0x005df250 FOLDED
 	virtual bool shouldRender2d() const { return true; }
 
 	virtual void render2d(Adorn* adorn);
 
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED
+	// FUNCTION: ROBLOX 0x00633110 FOLDED
 	virtual bool askSetParent(const Instance* instance) const { return true; }
 
 	// FUNCTION: WEBSERVICE 0x100ee460
@@ -50,6 +52,7 @@ private:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x1008e400
+	// SYNTHETIC: ROBLOX 0x005cdcc0
 	// RBX::Hint::Hint
 };
 

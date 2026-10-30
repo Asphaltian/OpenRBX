@@ -89,6 +89,7 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x10171280
+	// SYNTHETIC: ROBLOX 0x0047b830
 	// RBX::View::Part::`scalar deleting destructor'
 	// clang-format on
 
@@ -121,6 +122,7 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x10170420
+	// SYNTHETIC: ROBLOX 0x0047ac20
 	// RBX::View::Decal::`scalar deleting destructor'
 	// clang-format on
 
@@ -151,6 +153,7 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x10170440
+	// SYNTHETIC: ROBLOX 0x0047ac40
 	// RBX::View::Texture::`scalar deleting destructor'
 	// clang-format on
 

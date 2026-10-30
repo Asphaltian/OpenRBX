@@ -7,6 +7,7 @@ namespace RBX {
 namespace Reflection {
 
 // FUNCTION: WEBSERVICE 0x10094120
+// FUNCTION: ROBLOX 0x00774720
 void PropertyDescriptor::read(DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder) const
 {
 	readValue(instance, element, binder);
@@ -61,7 +62,7 @@ EnumDescriptor::~EnumDescriptor()
 }
 
 // FUNCTION: WEBSERVICE 0x10094390
-// FUNCTION: ROBLOX 0x005c09b0
+// STUB: ROBLOX 0x005c09b0
 EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
 	: Type(typeName, type, "token"), enumCount(0), enumCountMSB(0)
 {
@@ -69,7 +70,7 @@ EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
 }
 
 // FUNCTION: WEBSERVICE 0x10094410
-// FUNCTION: ROBLOX 0x005c0a30
+// STUB: ROBLOX 0x005c0a30
 PropertyDescriptor::PropertyDescriptor(
 	ClassDescriptor& classDescriptor, const Type& type, const char* name, const char* category, Functionality flags
 )

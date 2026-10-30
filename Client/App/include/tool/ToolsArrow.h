@@ -46,6 +46,7 @@ DECOMP_SIZE_ASSERT(BoxSelectCommand, 0x44)
 // RBX::BoxSelectCommand::~BoxSelectCommand
 
 // SYNTHETIC: WEBSERVICE 0x100c01c0
+// SYNTHETIC: ROBLOX 0x00621be0
 // RBX::BoxSelectCommand::`scalar deleting destructor'
 
 extern char sArrowTool[];

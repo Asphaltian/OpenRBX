@@ -30,6 +30,7 @@ public:
 	virtual ~FallingDown(); // vtable+0x04
 
 	// SYNTHETIC: WEBSERVICE 0x10107fb0
+	// SYNTHETIC: ROBLOX 0x00641c00
 	// RBX::FallingDown::`scalar deleting destructor'
 };
 

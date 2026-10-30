@@ -21,6 +21,7 @@ public:
 	}
 
 	// SYNTHETIC: WEBSERVICE 0x100314f0
+	// SYNTHETIC: ROBLOX 0x0066a0b0
 	// RBX::IndexBox::`scalar deleting destructor'
 
 	Vector3 getFaceNormal(int f) const

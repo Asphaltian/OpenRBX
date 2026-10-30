@@ -15,6 +15,7 @@ void IWorldStage::onEdgeAdded(Edge* e)
 }
 
 // FUNCTION: WEBSERVICE 0x10126dc0
+// FUNCTION: ROBLOX 0x00664620
 void IWorldStage::onEdgeRemoving(Edge* e)
 {
 	static_cast<IWorldStage*>(getDownstream())->onEdgeRemoving(e);
