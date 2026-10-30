@@ -100,6 +100,13 @@ public:
 	void FUN_00434b80();
 	void FUN_00435230(bool p_unk0x04);
 
+	// clang-format off
+	// STUB: ROBLOX 0x00434730
+	// ?raise@?$Notifier@VFillToolColor@RBX@@VBrickColor@2@@RBX@@IBEXVBrickColor@2@PAV?$Listener@VFillToolColor@RBX@@VBrickColor@2@@2@@Z
+	// STUB: ROBLOX 0x00435100
+	// ?raise@?$Notifier@VFillToolColor@RBX@@VBrickColor@2@@RBX@@IBEXVBrickColor@2@@Z
+	// clang-format on
+
 	// SYNTHETIC: ROBLOX 0x00436320
 	// CMainFrame::`scalar deleting destructor'
 

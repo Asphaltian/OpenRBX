@@ -293,6 +293,36 @@ BrickColor BrickColor::parse(const char* name)
 	return BrickColor();
 }
 
+// FUNCTION: ROBLOX 0x005bfdb0
+BrickColor BrickColor::closest(G3D::Color4uint8 color)
+{
+	int closestDistance = 10000;
+	Number result = lego_194;
+
+	std::map<Number, G3D::Color4uint8>::const_iterator iter = BrickMap::singleton().map1.begin();
+	std::map<Number, G3D::Color4uint8>::const_iterator end = BrickMap::singleton().map1.end();
+
+	while (iter != end) {
+		int distance = abs(iter->second.r - color.r);
+		distance += abs(iter->second.g - color.g);
+		distance += abs(iter->second.b - color.b);
+
+		if (distance < closestDistance) {
+			result = iter->first;
+
+			if (distance == 0) {
+				break;
+			}
+
+			closestDistance = distance;
+		}
+
+		++iter;
+	}
+
+	return BrickColor(result);
+}
+
 // FUNCTION: WEBSERVICE 0x10093df0
 // FUNCTION: ROBLOX 0x005bfed0
 BrickColor BrickColor::random()
@@ -364,6 +394,12 @@ G3D::Color4 BrickColor::color4() const
 G3D::Color3 BrickColor::color3() const
 {
 	return G3D::Color3(color4());
+}
+
+// FUNCTION: ROBLOX 0x005c0270
+BrickColor BrickColor::closest(G3D::Color3uint8 color)
+{
+	return closest(G3D::Color4uint8(color, 0));
 }
 
 // FUNCTION: WEBSERVICE 0x100940e0

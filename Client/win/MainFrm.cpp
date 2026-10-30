@@ -246,10 +246,25 @@ void CMainFrame::FUN_00433d10()
 	FUN_004325e0(0xc0, CRect(0, 0, 640, 200), xtpPaneDockBottom);
 }
 
-// STUB: ROBLOX 0x00433d50
+// FUNCTION: ROBLOX 0x00433d50
 void CMainFrame::FUN_00433d50()
 {
-	STUB(0x433d50);
+	CXTPCommandBars* commandBars = GetCommandBars();
+
+	if (commandBars != NULL) {
+		CXTPCustomizeSheet sheet(commandBars);
+
+		CXTPCustomizeOptionsPage options(&sheet);
+		sheet.AddPage(&options);
+
+		CXTPCustomizeCommandsPage* commands = sheet.GetCommandsPage();
+		commands->AddCategories(129);
+		commands->InsertAllCommandsCategory();
+		commands->InsertBuiltInMenus(129);
+		commands->InsertNewMenuCategory();
+
+		sheet.DoModal();
+	}
 }
 
 // FUNCTION: ROBLOX 0x00433e60
@@ -490,10 +505,20 @@ void CMainFrame::FUN_00435230(bool p_unk0x04)
 	}
 }
 
-// STUB: ROBLOX 0x00435460
+// FUNCTION: ROBLOX 0x00435460
 void CMainFrame::FUN_00435460(NMHDR* pNMHDR, LRESULT* pResult)
 {
-	STUB(0x435460);
+	G3D::Color3uint8 color(RBX::FillTool::color.get().color3());
+	COLORREF rgb = RGB(color.r, color.g, color.b);
+
+	CXTColorDialog dialog(rgb, rgb, CPS_XT_SHOW3DSELECTION, this);
+
+	if (dialog.DoModal() == IDOK) {
+		COLORREF selected = dialog.GetColor();
+		RBX::FillTool::color.set(
+			RBX::BrickColor::closest(G3D::Color3uint8(GetRValue(selected), GetGValue(selected), GetBValue(selected)))
+		);
+	}
 }
 
 // STUB: ROBLOX 0x00435570

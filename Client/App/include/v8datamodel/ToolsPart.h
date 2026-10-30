@@ -42,8 +42,15 @@ private:
 public:
 	FillToolColor() {}
 
-	BrickColor get() const;
-	void set(const BrickColor& value);
+	BrickColor get() const { return color; }
+
+	void set(const BrickColor& value)
+	{
+		if (color != value) {
+			color = value;
+			raise(color);
+		}
+	}
 
 	// SYNTHETIC: WEBSERVICE 0x10129d20
 	// SYNTHETIC: ROBLOX 0x005c04f0
