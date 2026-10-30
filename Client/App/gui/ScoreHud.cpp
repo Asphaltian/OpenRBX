@@ -153,7 +153,7 @@ void LeaderboardData::CompileData()
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > teamList = teams->getTeams();
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > playerList = players->getPlayers();
 
-	for (unsigned int i = 0; i < playerList->size(); ++i) {
+	for (unsigned int i = 0; playerList->size() > i; ++i) {
 		Network::Player* player = static_cast<Network::Player*>((playerList->begin() + i)->get());
 		Team* team = teams->getTeamFromPlayer(player);
 		playersByTeamList[team].push_back(player->getName());
@@ -182,7 +182,8 @@ void LeaderboardData::CompileData()
 				teamTotals[team][statNamesList[j]] = 0;
 
 				for (unsigned int k = 0; k < playersByTeamList[team].size(); ++k) {
-					teamTotals[team][statNamesList[j]] += statMap[playersByTeamList[team][k]][statNamesList[j]];
+					int value = statMap[playersByTeamList[team][k]][statNamesList[j]];
+					teamTotals[team][statNamesList[j]] += value;
 				}
 			}
 		}
