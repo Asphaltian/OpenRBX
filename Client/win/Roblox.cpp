@@ -1,6 +1,14 @@
 #include "Roblox.h"
 
+#include "BrowserView.h"
+#include "ChildFrm.h"
 #include "MainFrm.h"
+#include "NullDoc.h"
+#include "ObjectBrowser.h"
+#include "RobloxDoc.h"
+#include "RobloxReportView.h"
+#include "RobloxView.h"
+#include "ScriptDoc.h"
 #include "VersionInfo.h"
 #include "network/API.h"
 #include "security/SecurityContext.h"
@@ -17,6 +25,60 @@ public:
 };
 
 CRobloxModule _AtlModule;
+
+// SIZE 0x90
+class CRbxDocTemplate : public CMultiDocTemplate
+{
+public:
+	CRbxDocTemplate(UINT nIDResource, CRuntimeClass* pDocClass, CRuntimeClass* pFrameClass, CRuntimeClass* pViewClass)
+		: CMultiDocTemplate(nIDResource, pDocClass, pFrameClass, pViewClass)
+	{
+	}
+
+	virtual CFrameWnd* CreateNewFrame(CDocument* pDoc, CFrameWnd* pOther); // vtable+0x78
+};
+
+DECOMP_SIZE_ASSERT(CRbxDocTemplate, 0x90)
+
+// SIZE 0x98
+class CRbxPlayDocTemplate : public CMultiDocTemplate
+{
+public:
+	CRbxPlayDocTemplate(
+		UINT nIDResource, CRuntimeClass* pDocClass, CRuntimeClass* pFrameClass, CRuntimeClass* pViewClass
+	)
+		: CMultiDocTemplate(nIDResource, pDocClass, pFrameClass, pViewClass), m_unk0x90(NULL)
+	{
+	}
+
+	virtual void RemoveDocument(CDocument* pDoc);                          // vtable+0x68
+	virtual CFrameWnd* CreateNewFrame(CDocument* pDoc, CFrameWnd* pOther); // vtable+0x78
+
+private:
+	CDocument* m_unk0x90; // 0x90
+	CString m_unk0x94;    // 0x94
+};
+
+DECOMP_SIZE_ASSERT(CRbxPlayDocTemplate, 0x98)
+
+// SIZE 0x30
+class CIDEDocManager : public CDocManager
+{
+public:
+	CIDEDocManager(bool p_unk0x04);
+
+	virtual BOOL DoPromptFileName(
+		CString& fileName, UINT nIDSTitle, DWORD lFlags, BOOL bOpenFileDialog, CDocTemplate* pTemplate
+	);                        // vtable+0x34
+	virtual void OnFileNew(); // vtable+0x3c
+
+	CRbxDocTemplate* m_unk0x20;     // 0x20
+	CRbxPlayDocTemplate* m_unk0x24; // 0x24
+	CRbxDocTemplate* m_unk0x28;     // 0x28
+	CRbxDocTemplate* m_unk0x2c;     // 0x2c
+};
+
+DECOMP_SIZE_ASSERT(CIDEDocManager, 0x30)
 
 // clang-format off
 BEGIN_MESSAGE_MAP(CRobloxApp, CWinApp)
@@ -59,6 +121,53 @@ static void FUN_0044d4a0()
 
 	CFrameWnd* frame = static_cast<CFrameWnd*>(RUNTIME_CLASS(CFrameWnd)->CreateObject());
 	frame->Create(wc.lpszClassName, "ROBLOX");
+}
+
+// FUNCTION: ROBLOX 0x0044d5f0
+void CRbxPlayDocTemplate::RemoveDocument(CDocument* pDoc)
+{
+	CMultiDocTemplate::RemoveDocument(pDoc);
+
+	if (pDoc == m_unk0x90) {
+		m_unk0x90 = NULL;
+	}
+}
+
+// FUNCTION: ROBLOX 0x0044d7d0
+CIDEDocManager::CIDEDocManager(bool p_unk0x04)
+{
+	m_unk0x24 = new CRbxPlayDocTemplate(
+		129,
+		RUNTIME_CLASS(CRobloxDoc),
+		RUNTIME_CLASS(CRbxChildFrame),
+		p_unk0x04 ? RUNTIME_CLASS(CRobloxReportDocView) : RUNTIME_CLASS(CRobloxView)
+	);
+	AddDocTemplate(m_unk0x24);
+
+	m_unk0x20 = new CRbxDocTemplate(
+		185, RUNTIME_CLASS(CBrowserDoc), RUNTIME_CLASS(CChildFrame), RUNTIME_CLASS(CIDEBrowserView)
+	);
+	AddDocTemplate(m_unk0x20);
+
+	m_unk0x28 =
+		new CRbxDocTemplate(207, RUNTIME_CLASS(CScriptDoc), RUNTIME_CLASS(CMDIChildWnd), RUNTIME_CLASS(CScriptEditor));
+	AddDocTemplate(m_unk0x28);
+
+	m_unk0x2c =
+		new CRbxDocTemplate(138, RUNTIME_CLASS(CNullDoc), RUNTIME_CLASS(CMDIChildWnd), RUNTIME_CLASS(CObjectBrowser));
+	AddDocTemplate(m_unk0x2c);
+}
+
+// FUNCTION: ROBLOX 0x0044d9b0
+BOOL CIDEDocManager::DoPromptFileName(
+	CString& fileName, UINT nIDSTitle, DWORD lFlags, BOOL bOpenFileDialog, CDocTemplate* pTemplate
+)
+{
+	if (pTemplate == NULL) {
+		pTemplate = m_unk0x24;
+	}
+
+	return CDocManager::DoPromptFileName(fileName, nIDSTitle, lFlags, bOpenFileDialog, pTemplate);
 }
 
 // STUB: ROBLOX 0x0044dac0
@@ -108,10 +217,24 @@ void CRobloxApp::FUN_0044dc90()
 	STUB(0x44dc90);
 }
 
-// STUB: ROBLOX 0x0044e250
+// FUNCTION: ROBLOX 0x0044e100
+CFrameWnd* CRbxDocTemplate::CreateNewFrame(CDocument* pDoc, CFrameWnd* pOther)
+{
+	theApp.FUN_0044dac0(true);
+	return CMultiDocTemplate::CreateNewFrame(pDoc, pOther);
+}
+
+// FUNCTION: ROBLOX 0x0044e100 FOLDED
+CFrameWnd* CRbxPlayDocTemplate::CreateNewFrame(CDocument* pDoc, CFrameWnd* pOther)
+{
+	theApp.FUN_0044dac0(true);
+	return CMultiDocTemplate::CreateNewFrame(pDoc, pOther);
+}
+
+// FUNCTION: ROBLOX 0x0044e250
 void CRobloxApp::FUN_0044e250()
 {
-	STUB(0x44e250);
+	static_cast<CIDEDocManager*>(m_pDocManager)->m_unk0x20->OpenDocumentFile(NULL);
 }
 
 // STUB: ROBLOX 0x0044e270
@@ -124,6 +247,13 @@ void CRobloxApp::FUN_0044e270()
 void CRobloxApp::FUN_0044e290()
 {
 	STUB(0x44e290);
+}
+
+// STUB: ROBLOX 0x0044ed40
+void CIDEDocManager::OnFileNew()
+{
+	STUB(0x44ed40);
+	m_unk0x24->OpenDocumentFile(NULL);
 }
 
 // FUNCTION: ROBLOX 0x0044eee0
@@ -203,6 +333,8 @@ BOOL CRobloxApp::InitInstance()
 	static RBX::FactoryRegistrator registrator;
 	RBX::Network::API::init(m_unk0xf0.c_str());
 	AfxEnableControlContainer();
+
+	m_pDocManager = new CIDEDocManager(false);
 
 	if (!FUN_0044dac0(false)) {
 		return FALSE;

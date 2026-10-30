@@ -311,7 +311,7 @@ jobs:
       - name: Run decomplint
         if: ${{ steps.install.conclusion == 'success' && always() }}
         run: |
-          reccmp-decomplint WebService $(find Client -type f \( -iname '*.h' -o -iname '*.hpp' -o -iname '*.inl' -o -iname '*.c' -o -iname '*.cpp' \) -not -path 'Client/boost_1_34_1/*' -not -path 'Client/App/lua-5.1.1/*' -not -path 'Client/Network/raknet30/*' -not -path 'Client/fmod/*' -not -path 'Client/Rendering/g3d/*' -not -path 'Client/Rendering/SDL-1.2.6/*' -not -path 'Client/Rendering/Mesa-6.5/*' -not -path 'Client/Rendering/OgreSDK/*') --module WEBSERVICE --warnfail
+          reccmp-decomplint WebService $(find Client -type f \( -iname '*.h' -o -iname '*.hpp' -o -iname '*.inl' -o -iname '*.c' -o -iname '*.cpp' \) -not -path 'Client/boost_1_34_1/*' -not -path 'Client/App/lua-5.1.1/*' -not -path 'Client/Network/raknet30/*' -not -path 'Client/fmod/*' -not -path 'Client/Rendering/g3d/*' -not -path 'Client/Rendering/SDL-1.2.6/*' -not -path 'Client/Rendering/Mesa-6.5/*' -not -path 'Client/Rendering/OgreSDK/*' -not -path 'Client/win/Scintilla*') --module WEBSERVICE --warnfail
 
       - name: Check address padding
         if: ${{ steps.install.conclusion == 'success' && always() }}
@@ -326,7 +326,7 @@ jobs:
 
       - name: Run clang-format
         run: |
-          find WebService Client util tools \( -iname '*.h' -o -iname '*.cpp' \) -not -path 'Client/boost_1_34_1/*' -not -path 'Client/App/lua-5.1.1/*' -not -path 'Client/Network/raknet30/*' -not -path 'Client/fmod/*' -not -path 'Client/Rendering/g3d/*' -not -path 'Client/Rendering/SDL-1.2.6/*' -not -path 'Client/Rendering/Mesa-6.5/*' -not -path 'Client/Rendering/OgreSDK/*' | xargs -r \
+          find WebService Client util tools \( -iname '*.h' -o -iname '*.cpp' \) -not -path 'Client/boost_1_34_1/*' -not -path 'Client/App/lua-5.1.1/*' -not -path 'Client/Network/raknet30/*' -not -path 'Client/fmod/*' -not -path 'Client/Rendering/g3d/*' -not -path 'Client/Rendering/SDL-1.2.6/*' -not -path 'Client/Rendering/Mesa-6.5/*' -not -path 'Client/Rendering/OgreSDK/*' -not -path 'Client/win/Scintilla*' | xargs -r \
           pipx run "clang-format>=22,<23" \
             --style=file \
             -i
@@ -367,5 +367,5 @@ jobs:
               Client/RbxView/include \
               Client/Rendering/RenderLib/include \
               Client/Rendering/AppDraw/include \
-            --exclude 'Client/boost_1_34_1/*' 'Client/App/lua-5.1.1/*' 'Client/Network/raknet30/*' 'Client/fmod/*' 'Client/Rendering/g3d/*' 'Client/Rendering/SDL-1.2.6/*' 'Client/Rendering/Mesa-6.5/*' 'Client/Rendering/OgreSDK/*' \
+            --exclude 'Client/boost_1_34_1/*' 'Client/App/lua-5.1.1/*' 'Client/Network/raknet30/*' 'Client/fmod/*' 'Client/Rendering/g3d/*' 'Client/Rendering/SDL-1.2.6/*' 'Client/Rendering/Mesa-6.5/*' 'Client/Rendering/OgreSDK/*' 'Client/win/Scintilla*' \
             --path WebService Client

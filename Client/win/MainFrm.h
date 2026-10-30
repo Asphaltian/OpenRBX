@@ -16,6 +16,9 @@ class MyXTPCommandBars : public CXTPCommandBars
 {
 	DECLARE_DYNCREATE(MyXTPCommandBars)
 
+	// SYNTHETIC: ROBLOX 0x00432540
+	// ?GetThisClass@MyXTPCommandBars@@SGPAUCRuntimeClass@@XZ
+
 protected:
 	// FUNCTION: ROBLOX 0x00432500
 	virtual CXTPToolBar* AddCustomBar(LPCTSTR lpcstrCaption, UINT nID, BOOL bTearOffBar = FALSE)
@@ -40,6 +43,9 @@ class CPatchedControlComboBox : public CXTPControlComboBox
 {
 	DECLARE_XTP_CONTROL(CPatchedControlComboBox)
 
+	// SYNTHETIC: ROBLOX 0x00432750
+	// ?GetThisClass@CPatchedControlComboBox@@SGPAUCRuntimeClass@@XZ
+
 public:
 	// FUNCTION: ROBLOX 0x00432720
 	CPatchedControlComboBox() {}
@@ -51,6 +57,9 @@ public:
 class CWrapperView : public CView
 {
 	DECLARE_DYNCREATE(CWrapperView)
+
+	// SYNTHETIC: ROBLOX 0x00432970
+	// ?GetThisClass@CWrapperView@@SGPAUCRuntimeClass@@XZ
 
 protected:
 	CWrapperView();
@@ -73,6 +82,11 @@ DECOMP_SIZE_ASSERT(CWrapperView, 0x14c)
 class CMainFrame : public CXTPMDIFrameWnd, public RBX::Listener<RBX::FillToolColor, RBX::BrickColor>
 {
 	DECLARE_DYNAMIC(CMainFrame)
+
+	// SYNTHETIC: ROBLOX 0x004324f0
+	// ?GetThisClass@CMainFrame@@SGPAUCRuntimeClass@@XZ
+	// SYNTHETIC: ROBLOX 0x00436340
+	// ?GetMessageMap@CMainFrame@@MBEPBUAFX_MSGMAP@@XZ
 
 public:
 	CMainFrame();

@@ -8,6 +8,11 @@ class CChildFrame : public CMDIChildWnd
 {
 	DECLARE_DYNCREATE(CChildFrame)
 
+	// SYNTHETIC: ROBLOX 0x0040f820
+	// ?GetThisClass@CChildFrame@@SGPAUCRuntimeClass@@XZ
+	// SYNTHETIC: ROBLOX 0x0040fa00
+	// ?GetMessageMap@CChildFrame@@MBEPBUAFX_MSGMAP@@XZ
+
 public:
 	CChildFrame();
 	virtual ~CChildFrame();
@@ -30,6 +35,11 @@ DECOMP_SIZE_ASSERT(CChildFrame, 0xdc)
 class CRbxChildFrame : public CChildFrame
 {
 	DECLARE_DYNCREATE(CRbxChildFrame)
+
+	// SYNTHETIC: ROBLOX 0x0040f8b0
+	// ?GetThisClass@CRbxChildFrame@@SGPAUCRuntimeClass@@XZ
+	// SYNTHETIC: ROBLOX 0x0040fec0
+	// ?GetMessageMap@CRbxChildFrame@@MBEPBUAFX_MSGMAP@@XZ
 
 protected:
 	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);

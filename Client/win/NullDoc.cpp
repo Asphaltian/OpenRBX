@@ -1,0 +1,17 @@
+#include "NullDoc.h"
+
+IMPLEMENT_DYNCREATE(CNullDoc, CDocument)
+
+// FUNCTION: ROBLOX 0x004374b0
+void CNullDoc::FUN_004374b0(CCmdUI* pCmdUI)
+{
+	pCmdUI->Enable(FALSE);
+}
+
+// clang-format off
+BEGIN_MESSAGE_MAP(CNullDoc, CDocument)
+	ON_UPDATE_COMMAND_UI(ID_FILE_SAVE, FUN_004374b0)
+	ON_UPDATE_COMMAND_UI(ID_FILE_SAVE_AS, FUN_004374b0)
+	ON_UPDATE_COMMAND_UI(0x80b6, FUN_004374b0)
+END_MESSAGE_MAP()
+// clang-format on

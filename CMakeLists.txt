@@ -578,11 +578,21 @@ add_custom_target(rbxgs DEPENDS webservice)
 
 if (MSVC_FOR_DECOMP)
   add_executable(roblox WIN32
+    Client/win/BrowserView.cpp
     Client/win/ChildFrm.cpp
     Client/win/ErrorUploader.cpp
     Client/win/LogManager.cpp
     Client/win/MainFrm.cpp
+    Client/win/NullDoc.cpp
+    Client/win/ObjectBrowser.cpp
     Client/win/Roblox.cpp
+    Client/win/RobloxDoc.cpp
+    Client/win/RobloxReportView.cpp
+    Client/win/RobloxView.cpp
+    Client/win/ScintillaCtrl.cpp
+    Client/win/ScintillaDocView.cpp
+    Client/win/ScriptDoc.cpp
+    Client/win/SecureHtmlView.cpp
     Client/win/VersionInfo.cpp
     Client/win/Roblox.rc
     util/decomp.cpp

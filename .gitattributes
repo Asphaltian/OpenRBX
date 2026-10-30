@@ -16,3 +16,5 @@ Client/Rendering/g3d/** -text
 Client/Rendering/SDL-1.2.6/** -text
 Client/Rendering/Mesa-6.5/** -text
 Client/Rendering/OgreSDK/** -text
+Client/win/ScintillaCtrl.* -text
+Client/win/ScintillaDocView.* -text

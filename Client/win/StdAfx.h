@@ -10,6 +10,7 @@
 #include <afxext.h>
 #include <afxdisp.h>
 #include <afxcmn.h>
+#include <afxtempl.h>
 #include <atlbase.h>
 #include <XTToolkitPro.h>
 // clang-format on
