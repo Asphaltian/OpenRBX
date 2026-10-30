@@ -290,10 +290,62 @@ BOOL CPatchedControlComboBox::Compare(CXTPControl* pOther)
 	return GetListBoxCtrl()->GetCount() == static_cast<CPatchedControlComboBox*>(pOther)->GetListBoxCtrl()->GetCount();
 }
 
-// STUB: ROBLOX 0x00433fc0
+// FUNCTION: ROBLOX 0x00433fc0
 int CMainFrame::OnCreateControl(LPCREATECONTROLSTRUCT lpCreateControl)
 {
-	STUB(0x433fc0);
+	if (lpCreateControl->bToolBar) {
+		CXTPToolBar* pToolBar = DYNAMIC_DOWNCAST(CXTPToolBar, lpCreateControl->pCommandBar);
+		if (pToolBar == NULL) {
+			return FALSE;
+		}
+
+		if (lpCreateControl->nID == ID_EDIT_UNDO) {
+			lpCreateControl->controlType = xtpControlSplitButtonPopup;
+			return TRUE;
+		}
+
+		if (lpCreateControl->nID == ID_EDIT_REDO) {
+			lpCreateControl->controlType = xtpControlSplitButtonPopup;
+			return TRUE;
+		}
+
+		if (lpCreateControl->nID == 0x80db) {
+			lpCreateControl->pControl = (CXTPControl*) CXTPControlLabel::CreateObject();
+			lpCreateControl->pControl->SetFlags(lpCreateControl->pControl->GetFlags() & ~xtpFlagManualUpdate);
+			lpCreateControl->pControl->SetStyle(xtpButtonCaption);
+			return TRUE;
+		}
+
+		if (lpCreateControl->nID == 0x80f6) {
+			lpCreateControl->pControl = (CXTPControl*) CXTPControlLabel::CreateObject();
+			lpCreateControl->pControl->SetFlags(lpCreateControl->pControl->GetFlags() & ~xtpFlagManualUpdate);
+			lpCreateControl->pControl->SetStyle(xtpButtonCaption);
+			return TRUE;
+		}
+
+		if (lpCreateControl->nID == 0x80c3) {
+			CPatchedControlComboBox* pComboBox = new CPatchedControlComboBox();
+			pComboBox->SetDropDownListStyle();
+			pComboBox->SetCaption("Command >");
+			pComboBox->SetStyle(xtpButtonCaption);
+			pComboBox->SetFlags(xtpFlagControlStretched);
+			lpCreateControl->pControl = pComboBox;
+			return TRUE;
+		}
+
+		if (lpCreateControl->nID == 0x8040) {
+			CXTPControlPopupColor* pPopupColor = (CXTPControlPopupColor*) CXTPControlPopupColor::CreateObject();
+			CXTPPopupToolBar* pColorBar = CXTPPopupToolBar::CreatePopupToolBar(GetCommandBars());
+			pPopupColor->SetCommandBar(pColorBar);
+			pColorBar->GetControls()->Add(new CRobloxControlColorSelector(), 0x8d);
+			pColorBar->SetTearOffPopup("Color", 1005, 0);
+			pColorBar->EnableCustomization();
+			pColorBar->InternalRelease();
+			lpCreateControl->pControl = pPopupColor;
+			return TRUE;
+		}
+	}
+
 	return FALSE;
 }
 

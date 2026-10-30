@@ -375,6 +375,13 @@ BrickColor::BrickColor(int number)
 	}
 }
 
+// FUNCTION: ROBLOX 0x005c0130
+G3D::Color3uint8 BrickColor::color3uint8() const
+{
+	G3D::Color4uint8 color = BrickMap::singleton().map1.find(number)->second;
+	return *reinterpret_cast<const G3D::Color3uint8*>(&color);
+}
+
 // FUNCTION: WEBSERVICE 0x10094000
 // FUNCTION: ROBLOX 0x005c0190
 const std::string& BrickColor::name() const

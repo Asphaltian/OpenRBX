@@ -350,6 +350,178 @@ int CRobloxApp::Run()
 	return CWinApp::Run();
 }
 
+IMPLEMENT_XTP_CONTROL(CRobloxControlColorSelector, CXTPControl)
+
+// GLOBAL: ROBLOX 0x00954298
+static int g_unk0x00954298;
+
+// GLOBAL: ROBLOX 0x0095429c
+static std::vector<CRobloxControlColorSelector::CColorInfo> g_unk0x0095429c;
+
+static COLORREF toColorRef(RBX::BrickColor color)
+{
+	return RGB(color.color3uint8().r, color.color3uint8().g, color.color3uint8().b);
+}
+
+// FUNCTION: ROBLOX 0x00452a00
+BOOL CRobloxControlColorSelector::OnSetSelected(int bSelected)
+{
+	if (!bSelected) {
+		m_unk0x16c = -1;
+	}
+
+	return CXTPControl::OnSetSelected(bSelected);
+}
+
+// FUNCTION: ROBLOX 0x00452a20
+COLORREF CRobloxControlColorSelector::GetColor() const
+{
+	return m_unk0x178;
+}
+
+// FUNCTION: ROBLOX 0x00452a30
+void CRobloxControlColorSelector::SetColor(COLORREF clr)
+{
+	m_unk0x178 = toColorRef(RBX::BrickColor::closest(G3D::Color3uint8(GetRValue(clr), GetGValue(clr), GetBValue(clr))));
+	RedrawParent();
+}
+
+// FUNCTION: ROBLOX 0x00452b80
+CSize CRobloxControlColorSelector::GetSize(CDC* pDC)
+{
+	return CSize(260, 132);
+}
+
+CRect CRobloxControlColorSelector::GetRect(int nIndex) const
+{
+	int x = nIndex % 8, y = nIndex / 8;
+
+	return CRect(CPoint(2 + m_rcControl.left + x * 32, 2 + m_rcControl.top + y * 32), CSize(32, 32));
+}
+
+// FUNCTION: ROBLOX 0x00452ba0
+int CRobloxControlColorSelector::HitTest(CPoint point) const
+{
+	int nCount = g_unk0x0095429c.size();
+
+	if (!m_rcControl.PtInRect(point)) {
+		return -1;
+	}
+
+	for (int i = 0; i < nCount; i++) {
+		if (GetRect(i).PtInRect(point)) {
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+// FUNCTION: ROBLOX 0x00452c80
+void CRobloxControlColorSelector::Draw(CDC* pDC)
+{
+	int nCount = g_unk0x0095429c.size();
+
+	for (int i = 0; i < nCount; i++) {
+		CRect rcButton = GetRect(i);
+
+		if (i == m_unk0x16c || g_unk0x0095429c[i].clrButton == m_unk0x178) {
+			BOOL bPressed = GetPressed() && i == m_unk0x16c;
+			GetPaintManager()->DrawRectangle(
+				pDC,
+				rcButton,
+				i == m_unk0x16c,
+				bPressed,
+				GetEnabled(),
+				g_unk0x0095429c[i].clrButton == m_unk0x178,
+				FALSE,
+				xtpBarTypeNormal,
+				xtpBarPopup
+			);
+		}
+
+		rcButton.DeflateRect(3, 3);
+		if (GetEnabled()) {
+			pDC->FillSolidRect(rcButton, g_unk0x0095429c[i].clrButton);
+		}
+
+		pDC->Draw3dRect(rcButton, GetXtremeColor(COLOR_3DSHADOW), GetXtremeColor(COLOR_3DSHADOW));
+	}
+}
+
+// FUNCTION: ROBLOX 0x00452ef0
+void CRobloxControlColorSelector::OnMouseMove(CPoint point)
+{
+	int nHit = HitTest(point);
+	if (nHit != -1) {
+		m_unk0x16c = nHit;
+		RedrawParent();
+	}
+}
+
+// FUNCTION: ROBLOX 0x00452f20
+void CRobloxControlColorSelector::OnExecute()
+{
+	if (m_unk0x170 != -1) {
+		m_unk0x178 = g_unk0x0095429c[m_unk0x170].clrButton;
+		m_unk0x174 = true;
+	}
+
+	CXTPControl::OnExecute();
+}
+
+// FUNCTION: ROBLOX 0x00452f80
+void CRobloxControlColorSelector::OnClick(BOOL bKeyboard, CPoint pt)
+{
+	if (!GetEnabled()) {
+		return;
+	}
+
+	int nHit = HitTest(pt);
+	if (nHit == -1) {
+		return;
+	}
+
+	m_unk0x170 = nHit;
+
+	if (!bKeyboard) {
+		ClickToolBarButton();
+	}
+	else {
+		OnExecute();
+	}
+
+	m_unk0x170 = -1;
+}
+
+void CRobloxControlColorSelector::OnLButtonUp(CPoint point)
+{
+	if (GetEnabled() && m_pParent->GetPosition() == xtpBarPopup) {
+		OnClick(TRUE, point);
+	}
+}
+
+// STUB: ROBLOX 0x00453780
+static void FUN_00453780(RBX::BrickColor color)
+{
+	CRobloxControlColorSelector::CColorInfo info(toColorRef(color), g_unk0x00954298++);
+	info.strTip = color.name().c_str();
+	g_unk0x0095429c.push_back(info);
+}
+
+// FUNCTION: ROBLOX 0x00453860
+CRobloxControlColorSelector::CRobloxControlColorSelector() : m_unk0x174(false)
+{
+	if (g_unk0x0095429c.empty()) {
+		std::for_each(RBX::BrickColor::colorPalette().begin(), RBX::BrickColor::colorPalette().end(), FUN_00453780);
+	}
+
+	m_unk0x16c = -1;
+	m_unk0x178 = (COLORREF) -1;
+	SetFlags(xtpFlagNoMovable);
+	m_unk0x170 = -1;
+}
+
 // FUNCTION: ROBLOX 0x00453eb0 FOLDED
 void CRobloxApp::FUN_00453eb0(CCmdUI* p_unk0x04)
 {
