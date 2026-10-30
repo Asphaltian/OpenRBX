@@ -1,6 +1,8 @@
 address,type,symbol,name,module,size
 0040a690,library,?SetStyle@CXTPControl@@QAEXW4XTPButtonStyle@@@Z,,,
 0041dec0,library,?_Growmap@?$deque@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEXI@Z,,,
+0042ca20,library,??0?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAE@ABV01@@Z,,,
+0042caf0,library,?push_back@?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,,,
 0042d400,library,??0?$thread_specific_ptr@VThreadLogManager@@@boost@@QAE@XZ,,,
 00432c80,library,?EnableCustomization@CXTPCommandBar@@QAEXH@Z,,,
 004344d0,library,?DockRightOf@?$CXTPCommandBarsSiteBase@VCMDIFrameWnd@@@@QAEXPAVCXTPToolBar@@0@Z,,,
@@ -18,6 +20,12 @@ address,type,symbol,name,module,size
 00434730,function,,,,0xd0
 0058e7e0,function,,,,0xb8
 006584a0,function,,,,0x8c
+00658700,library,??$_Transform@PADPADU?$to_lowerF@D@detail@algorithm@boost@@Uforward_iterator_tag@std@@@std@@YAPADPAD00U?$to_lowerF@D@detail@algorithm@boost@@Uforward_iterator_tag@0@U_Range_checked_iterator_tag@0@@Z,,,
+00658aa0,library,??$to_lower@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@algorithm@boost@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVlocale@3@@Z,,,
+00660900,library,?is_space@algorithm@boost@@YA?AUis_classifiedF@detail@12@ABVlocale@std@@@Z,,,
+00660fc0,library,??$trim_if@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@Uis_classifiedF@detail@algorithm@boost@@@algorithm@boost@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@Uis_classifiedF@detail@01@@Z,,,
+00666960,library,?insert@?$_Tree@V?$_Tset_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@$0A@@std@@@std@@QAE?AU?$pair@Viterator@?$_Tree@V?$_Tset_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@$0A@@std@@@std@@_N@2@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,,,
+00666a60,library,?find@?$_Tree@V?$_Tset_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@$0A@@std@@@std@@QAE?AViterator@12@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,,,
 00666ea0,library,?erase@?$_Tree@V?$_Tset_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z,,,
 006884f0,library,?GetShortcutManager@CXTPCommandBars@@QBEPAVCXTPShortcutManager@@XZ,,,
 0069fb50,library,?DoPropExchange@CXTPCommandBarsOptions@@QAEXPAVCXTPPropExchange@@H@Z,,,

@@ -23,7 +23,7 @@ ChatLine::~ChatLine()
 {
 }
 
-// STUB: ROBLOX 0x006587e0
+// FUNCTION: ROBLOX 0x006587e0
 ChatOutput::ChatOutput() : runService(NULL), players(NULL), time(0)
 {
 }
@@ -137,7 +137,7 @@ ChatLine::ChatLine(Network::Player* p_unk0x04, const std::string& p_unk0x08, flo
 	}
 }
 
-// STUB: ROBLOX 0x00659540
+// FUNCTION: ROBLOX 0x00659540
 bool ChatOutput::ParseCommand(Network::ChatMessage p_unk0x04)
 {
 	std::vector<std::string> tokens;
