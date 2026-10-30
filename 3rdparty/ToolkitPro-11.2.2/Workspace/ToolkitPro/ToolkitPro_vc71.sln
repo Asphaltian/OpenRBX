@@ -1,0 +1,5 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Codejock.ToolkitPro.Shared", ".\ToolkitProShared_vc71.vcproj", "{81493226-3511-2742-1324-435536955633}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Codejock.ToolkitPro.Static", ".\ToolkitProStatic_vc71.vcproj", "{87382384-9761-1941-9729-196245811281}"
+EndProject

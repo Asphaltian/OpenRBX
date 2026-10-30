@@ -274,6 +274,7 @@ jobs:
       run: |
         ./upload.sh \
           build/WebService.dll \
+          build/Roblox.exe \
           WEBSERVICEPROGRESS* \
           ROBLOXPROGRESS*
 

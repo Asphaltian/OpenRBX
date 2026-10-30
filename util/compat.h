@@ -30,6 +30,7 @@ struct _Outit
 
 #include <boost/cstdint.hpp>
 #include <ios>
+#include <string>
 
 #define BOOST_IOSTREAMS_POSITIONING_HPP_INCLUDED
 
@@ -53,6 +54,26 @@ inline stream_offset position_to_offset(PosType pos)
 	return std::streamoff(pos);
 }
 } // namespace iostreams
+
+inline std::string::iterator begin(std::string& s)
+{
+	return s.begin();
+}
+
+inline std::string::iterator end(std::string& s)
+{
+	return s.end();
+}
+
+inline std::string::const_iterator begin(const std::string& s)
+{
+	return s.begin();
+}
+
+inline std::string::const_iterator end(const std::string& s)
+{
+	return s.end();
+}
 } // namespace boost
 #endif
 

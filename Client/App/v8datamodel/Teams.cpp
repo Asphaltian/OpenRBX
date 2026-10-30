@@ -41,6 +41,16 @@ Team* Teams::getTeamFromTeamColor(BrickColor c)
 	return NULL;
 }
 
+// FUNCTION: ROBLOX 0x005e7910
+Team* Teams::getTeamFromPlayer(Network::Player* p)
+{
+	if (p->getNeutral()) {
+		return NULL;
+	}
+
+	return getTeamFromTeamColor(p->getTeamColor());
+}
+
 // FUNCTION: WEBSERVICE 0x100dab50
 // FUNCTION: ROBLOX 0x005e7940
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Teams::getTeams()
@@ -53,6 +63,22 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Teams::getTe
 bool Teams::teamExists(BrickColor color)
 {
 	return getTeamFromTeamColor(color) != NULL;
+}
+
+// FUNCTION: ROBLOX 0x005e7a40
+bool Teams::isTeamGame()
+{
+	Network::Players* players = ServiceProvider::find<Network::Players>(this);
+
+	for (unsigned int i = 0; i < players->numChildren(); i++) {
+		if (Network::Player* player = dynamic_cast<Network::Player*>(players->getChild(i))) {
+			if (!player->getNeutral()) {
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x100daca0

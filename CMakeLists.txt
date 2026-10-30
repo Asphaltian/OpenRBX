@@ -100,10 +100,12 @@ set(OPENRBX_APP_SOURCES
   Client/App/security/SecurityContext.cpp
   Client/App/v8datamodel/Hopper.cpp
   Client/App/gui/Button.cpp
+  Client/App/gui/ChatOutput.cpp
   Client/App/gui/ChatWidget.cpp
   Client/App/gui/GUI.cpp
   Client/App/gui/GuiDraw.cpp
   Client/App/gui/MenuItem.cpp
+  Client/App/gui/ProfanityFilter.cpp
   Client/App/gui/Widget.cpp
   Client/App/humanoid/Humanoid.cpp
   Client/App/reflection/reflection_function.cpp
@@ -126,6 +128,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/util/FileSystem.cpp
   Client/App/util/Guid.cpp
   Client/App/util/Handle.cpp
+  Client/App/util/Hash.cpp
   Client/App/util/Http.cpp
   Client/App/util/IndexBox.cpp
   Client/App/util/Log.cpp

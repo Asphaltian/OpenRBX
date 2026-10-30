@@ -286,10 +286,10 @@ private:
 // STUB: ROBLOX 0x00567200
 // ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@@Z
 // FUNCTION: WEBSERVICE 0x100d6c30
-// RBX::Notifier<RBX::RunService,RBX::Stepped>::addListener
+// ?addListener@?$Notifier@VRunService@RBX@@VStepped@2@@RBX@@QBEXPAV?$Listener@VRunService@RBX@@VStepped@2@@2@@Z
 // FUNCTION: WEBSERVICE 0x100ddf60
 // FUNCTION: ROBLOX 0x0060d390
-// RBX::Notifier<RBX::RunService,RBX::Stepped>::removeListener
+// ?removeListener@?$Notifier@VRunService@RBX@@VStepped@2@@RBX@@QBEXPAV?$Listener@VRunService@RBX@@VStepped@2@@2@@Z
 // SYNTHETIC: WEBSERVICE 0x10218b30
 // `dynamic initializer for 'func_getSelection''
 // SYNTHETIC: WEBSERVICE 0x10218b60
