@@ -268,8 +268,14 @@ public:
 
 	Instance* getRootAncestor() { return parent != NULL ? parent->getRootAncestor() : this; }
 	const Instance* getRootAncestor() const;
-	static const Instance* getRootAncestor(const Instance*);
-	static Instance* getRootAncestor(Instance*);
+	static const Instance* getRootAncestor(const Instance* instance)
+	{
+		return instance != NULL ? (instance->parent != NULL ? instance->parent->getRootAncestor() : instance) : NULL;
+	}
+	static Instance* getRootAncestor(Instance* instance)
+	{
+		return instance != NULL ? (instance->parent != NULL ? instance->parent->getRootAncestor() : instance) : NULL;
+	}
 
 	int findChildIndex(const Instance* instance) const;
 	void removeAllChildren();

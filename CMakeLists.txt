@@ -102,6 +102,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/gui/Button.cpp
   Client/App/gui/ChatOutput.cpp
   Client/App/gui/ChatWidget.cpp
+  Client/App/gui/EquationDisplay.cpp
   Client/App/gui/GUI.cpp
   Client/App/gui/GuiDraw.cpp
   Client/App/gui/MenuItem.cpp
