@@ -471,7 +471,7 @@ add_engine_library(renderlib
 )
 
 if (MSVC_FOR_DECOMP)
-  set(OPENRBX_TOOLKITPRO "${OPENRBX_3RDPARTY}/Codejock Software/MFC/Xtreme ToolkitPro v11.2.2")
+  set(OPENRBX_TOOLKITPRO "${OPENRBX_3RDPARTY}/Codejock Software/MFC/Xtreme ToolkitPro v11.2.1")
   set(OPENRBX_TOOLKITPRO_WORKSPACE "${OPENRBX_TOOLKITPRO}/Workspace/ToolkitPro")
   file(READ "${OPENRBX_TOOLKITPRO_WORKSPACE}/ToolkitProStatic_vc80.vcproj" OPENRBX_TOOLKITPRO_VCPROJ)
   string(REGEX MATCHALL "RelativePath=\"[^\"]+\\.cpp\"" OPENRBX_TOOLKITPRO_FILES "${OPENRBX_TOOLKITPRO_VCPROJ}")
@@ -491,7 +491,7 @@ if (MSVC_FOR_DECOMP)
   )
   target_compile_options(toolkitpro PRIVATE /O2 /Ob1 /GF /Gy /Zc:wchar_t)
   set_property(TARGET toolkitpro PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
-  set_property(TARGET toolkitpro PROPERTY OUTPUT_NAME "ToolkitPro1122vc80DS")
+  set_property(TARGET toolkitpro PROPERTY OUTPUT_NAME "ToolkitPro1121vc80DS")
 
   set(OPENRBX_OGRE "${PROJECT_SOURCE_DIR}/Client/Rendering/OgreSDK")
   add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/rgmain.lib"

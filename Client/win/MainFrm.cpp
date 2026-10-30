@@ -205,6 +205,7 @@ void CMainFrame::FUN_00433b20(CXTPPropExchange* pPX, BOOL p_unk0x08)
 
 	XTP_COMMANDBARS_PROPEXCHANGE_PARAM param;
 	param.bSerializeControls = p_unk0x08;
+	param.bLoadSilent = TRUE;
 
 	CXTPPropExchangeSection commandBarsSection(pPX->GetSection("CommandBars"));
 	commandBars->DoPropExchange(&commandBarsSection, &param);
@@ -264,7 +265,7 @@ int CMainFrame::OnCreateCommandBar(LPCREATEBARSTRUCT lpCreatePopup)
 	return FALSE;
 }
 
-// STUB: ROBLOX 0x00433ec0
+// FUNCTION: ROBLOX 0x00433ec0
 BOOL CPatchedControlComboBox::Compare(CXTPControl* pOther)
 {
 	if (!CXTPControlComboBox::Compare(pOther)) {
