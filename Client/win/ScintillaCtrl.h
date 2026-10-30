@@ -21,6 +21,7 @@ to maintain a single distribution point for the source code.
 #define __SCINTILLACTRL_H__
 
 
+
 //////////////////// Includes /////////////////////////////////////////////////
 
 namespace Scintilla
@@ -28,15 +29,17 @@ namespace Scintilla
 #include <Platform.h>
 #ifndef SCINTILLA_H
 #pragma message("To avoid this message, please put scintilla.h in your PCH (normally stdafx.h)")
-#include <Scintilla.h>
+#include <scintilla.h>
 #endif
+
 
 
 //////////////////// Classes //////////////////////////////////////////////////
 
-
 class CScintillaCtrl : public CWnd
 {
+  DECLARE_DYNAMIC(CScintillaCtrl)
+
 public:
 //Constructors / Destructors
   CScintillaCtrl();
@@ -51,48 +54,6 @@ public:
   LRESULT GetDirectFunction();
   LRESULT GetDirectPointer();
   CString GetSelText();
-
-//Unicode support
-#ifdef _UNICODE
-  void AddText(int length, const wchar_t* text, BOOL bDirect = TRUE);
-  void InsertText(long pos, const wchar_t* text, BOOL bDirect = TRUE);
-  int GetSelText(wchar_t* text, BOOL bDirect = TRUE);
-  int GetCurLine(int length, wchar_t* text, BOOL bDirect = TRUE);
-  void StyleSetFont(int style, const wchar_t* fontName, BOOL bDirect = TRUE);
-  void SetWordChars(const wchar_t* characters, BOOL bDirect = TRUE);
-  void AutoCShow(int lenEntered, const wchar_t* itemList, BOOL bDirect = TRUE);
-  void AutoCStops(const wchar_t* characterSet, BOOL bDirect = TRUE);
-  void AutoCSelect(const wchar_t* text, BOOL bDirect = TRUE);
-  void AutoCSetFillUps(const wchar_t* characterSet, BOOL bDirect = TRUE);
-  void UserListShow(int listType, const wchar_t* itemList, BOOL bDirect = TRUE);
-  int GetLine(int line, wchar_t* text, BOOL bDirect = TRUE);
-  void ReplaceSel(const wchar_t* text, BOOL bDirect = TRUE);
-  void SetText(const wchar_t* text, BOOL bDirect = TRUE);
-  int GetText(int length, wchar_t* text, BOOL bDirect = TRUE);
-  int ReplaceTarget(int length, const wchar_t* text, BOOL bDirect = TRUE);
-  int ReplaceTargetRE(int length, const wchar_t* text, BOOL bDirect = TRUE);
-  int SearchInTarget(int length, const wchar_t* text, BOOL bDirect = TRUE);
-  void CallTipShow(long pos, const wchar_t* definition, BOOL bDirect = TRUE);
-  int TextWidth(int style, const wchar_t* text, BOOL bDirect = TRUE);
-  void AppendText(int length, const wchar_t* text, BOOL bDirect = TRUE);
-  int SearchNext(int flags, const wchar_t* text, BOOL bDirect = TRUE);
-  int SearchPrev(int flags, const wchar_t* text, BOOL bDirect = TRUE);
-  void CopyText(int length, const wchar_t* text, BOOL bDirect = TRUE);
-  void SetWhitespaceChars(const wchar_t* characters, BOOL bDirect = TRUE);
-  void SetProperty(const wchar_t* key, const wchar_t* value, BOOL bDirect = TRUE);
-  void SetKeyWords(int keywordSet, const wchar_t* keyWords, BOOL bDirect = TRUE);
-  void SetLexerLanguage(const wchar_t* language, BOOL bDirect = TRUE);
-  void LoadLexerLibrary(const wchar_t* path, BOOL bDirect = TRUE);
-  int GetProperty(const wchar_t* key, wchar_t* buf, BOOL bDirect = TRUE);
-  int GetPropertyExpanded(const wchar_t* key, wchar_t* buf, BOOL bDirect = TRUE);
-  int GetPropertyInt(const wchar_t* key, BOOL bDirect = TRUE);
-
-  static int UTF82W(const char* pszText, int nLength, wchar_t*& pszWText);
-  static int W2UTF8(const wchar_t* pszText, int nLength, char*& pszUTF8Text);
-#endif
-
-//A special version of GetLine which hides the weird semantics of the EM_GETLINE call.  
-  int GetLineEx(int line, TCHAR* text, int nMaxChars, BOOL bDirect = TRUE);
 
 //Auto generated using the "ConvertScintillaiface.js" script
   void AddText(int length, const char* text, BOOL bDirect = TRUE);
@@ -145,7 +106,6 @@ public:
   int MarkerPrevious(int lineStart, int markerMask, BOOL bDirect = TRUE);
   void MarkerDefinePixmap(int markerNumber, const char* pixmap, BOOL bDirect = TRUE);
   void MarkerAddSet(int line, int set, BOOL bDirect = TRUE);
-  void MarkerSetAlpha(int markerNumber, int alpha, BOOL bDirect = TRUE);
   void SetMarginTypeN(int margin, int marginType, BOOL bDirect = TRUE);
   int GetMarginTypeN(int margin, BOOL bDirect = TRUE);
   void SetMarginWidthN(int margin, int pixelWidth, BOOL bDirect = TRUE);
@@ -169,8 +129,6 @@ public:
   void StyleSetHotSpot(int style, BOOL hotspot, BOOL bDirect = TRUE);
   void SetSelFore(BOOL useSetting, COLORREF fore, BOOL bDirect = TRUE);
   void SetSelBack(BOOL useSetting, COLORREF back, BOOL bDirect = TRUE);
-  int GetSelAlpha(BOOL bDirect = TRUE);
-  void SetSelAlpha(int alpha, BOOL bDirect = TRUE);
   void SetCaretFore(COLORREF fore, BOOL bDirect = TRUE);
   void AssignCmdKey(DWORD km, int msg, BOOL bDirect = TRUE);
   void ClearCmdKey(DWORD km, BOOL bDirect = TRUE);
@@ -535,8 +493,6 @@ public:
   int GetStyleBitsNeeded(BOOL bDirect = TRUE);
 
 protected:
-  DECLARE_DYNAMIC(CScintillaCtrl)
-
 //Member variables
   LRESULT m_DirectFunction;
   LRESULT m_DirectPointer;

@@ -68,13 +68,6 @@ History: PJN / 12-08-2004 1. Made all the remaining non virtual functions relate
                           Thanks to Alexander Kirillov for reporting this bug. 
          PJN / 14-03-2006 1. Updated the internal function CScintillaView::SameAsSelected to support regular 
                           expressions. Thanks to Greg Smith for this update.
-         PJN / 22-05-2006 1. Fixed a flicker issue when the view is resized. Thanks to Michael Gunlock for reporting 
-                          this issue.
-         PJN / 29-06-2005 1. Code now uses new C++ style casts rather than old style C casts where necessary. 
-                          2. Code now supports persisting margin settings. Thanks to Krasimir Stoychev for this update
-                          3. Updated the code to clean compile in VC 2005
-         PJN / 17-09-2006 1. Updated OnReplaceSel and OnReplaceAll implementations to use TargetFromSelection and 
-                          ReplaceTargetRE/ReplaceTarget. Thanks to Matt Spear for reporting this issue.
 
 Copyright (c) 2004 - 2006 by PJ Naughter (Web: www.naughter.com, Email: pjna@naughter.com)
 
@@ -174,7 +167,7 @@ BOOL CScintillaFindReplaceDlg::OnInitDialog()
 	BOOL bReturn = CFindReplaceDialog::OnInitDialog();
 
   //Should we check the regular expression check box
-  CButton* pCtrl = static_cast<CButton*>(GetDlgItem(IDC_REGULAR_EXPRESSION));
+  CButton* pCtrl = (CButton*) GetDlgItem(IDC_REGULAR_EXPRESSION);
   ASSERT(pCtrl);
   pCtrl->SetCheck(m_bRegularExpression);
 	
@@ -184,7 +177,7 @@ BOOL CScintillaFindReplaceDlg::OnInitDialog()
 void CScintillaFindReplaceDlg::OnRegularExpression() 
 {
   //Save the state of the Regular expression checkbox into a member variable
-  CButton* pCtrl = static_cast<CButton*>(GetDlgItem(IDC_REGULAR_EXPRESSION));
+  CButton* pCtrl = (CButton*) GetDlgItem(IDC_REGULAR_EXPRESSION);
   ASSERT(pCtrl);
 	m_bRegularExpression = (pCtrl->GetCheck() == 1);
 }
@@ -216,7 +209,6 @@ BEGIN_MESSAGE_MAP(CScintillaView, CView)
 	ON_COMMAND(ID_EDIT_REPEAT, OnEditRepeat)
 	ON_WM_SETFOCUS()
 	ON_WM_SIZE()
-	ON_WM_ERASEBKGND()
 	ON_WM_CREATE()
 	ON_UPDATE_COMMAND_UI(ID_EDIT_COPY, OnUpdateNeedSel)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_CLEAR, OnUpdateNeedTextAndFollowingText)
@@ -235,8 +227,7 @@ CScintillaView::CScintillaView() : m_rMargin(0, 0, 0, 0),
                                    m_bFirstSearch(TRUE),
                                    m_bUseROFileAttributeDuringLoading(TRUE),
                                    m_bPrintHeader(TRUE), 
-                                   m_bPrintFooter(TRUE),
-                                   m_bPersistMarginSettings(TRUE)
+                                   m_bPrintFooter(TRUE)
 {
   m_bUsingMetric = UserWantsMetric();
 }
@@ -246,28 +237,6 @@ CScintillaCtrl& CScintillaView::GetCtrl()
   CScintillaCtrl& ctrl = m_Edit;
 
   return ctrl; 
-}
-
-void CScintillaView::LoadMarginSettings(const CString& sSection)
-{
-  //Get the margin values 
-  CWinApp* pApp = AfxGetApp();
-  ASSERT(pApp);
-	m_rMargin.left = pApp->GetProfileInt(sSection, _T("LeftMargin"), m_rMargin.left);
-	m_rMargin.right = pApp->GetProfileInt(sSection, _T("RightMargin"), m_rMargin.right);
-	m_rMargin.top = pApp->GetProfileInt(sSection, _T("TopMargin"), m_rMargin.top);
-	m_rMargin.bottom = pApp->GetProfileInt(sSection, _T("BottomMargin"), m_rMargin.bottom);
-}
-
-void CScintillaView::SaveMarginSettings(const CString& sSection)
-{
-  //Write out the margin values 
-  CWinApp* pApp = AfxGetApp();
-  ASSERT(pApp);
-	pApp->WriteProfileInt(sSection, _T("LeftMargin"), m_rMargin.left);
-	pApp->WriteProfileInt(sSection, _T("RightMargin"), m_rMargin.right);
-	pApp->WriteProfileInt(sSection, _T("TopMargin"), m_rMargin.top);
-	pApp->WriteProfileInt(sSection, _T("BottomMargin"), m_rMargin.bottom);
 }
 
 void CScintillaView::OnDestroy()
@@ -391,18 +360,18 @@ BOOL CScintillaView::PaginateTo(CDC* pDC, CPrintInfo* pInfo)
   CRect rectSave = pInfo->m_rectDraw;
 	UINT nPageSave = pInfo->m_nCurPage;
 	ASSERT(nPageSave > 1);
-	ASSERT(nPageSave >= static_cast<UINT>(m_aPageStart.GetSize()));
+	ASSERT(nPageSave >= (UINT) m_aPageStart.GetSize());
 	VERIFY(pDC->SaveDC() != 0);
 	pDC->IntersectClipRect(0, 0, 0, 0);
 	pInfo->m_nCurPage = m_aPageStart.GetSize();
 	while (pInfo->m_nCurPage < nPageSave)
 	{
-		ASSERT(pInfo->m_nCurPage == static_cast<UINT>(m_aPageStart.GetSize()));
+		ASSERT(pInfo->m_nCurPage == (UINT) m_aPageStart.GetSize());
 		OnPrepareDC(pDC, pInfo);
 		ASSERT(pInfo->m_bContinuePrinting);
 		pInfo->m_rectDraw.SetRect(0, 0,	pDC->GetDeviceCaps(HORZRES), pDC->GetDeviceCaps(VERTRES));
 		OnPrint(pDC, pInfo);
-		if (pInfo->m_nCurPage == static_cast<UINT>(m_aPageStart.GetSize()))
+		if (pInfo->m_nCurPage == (UINT) m_aPageStart.GetSize())
 			break;
 		++pInfo->m_nCurPage;
 	}
@@ -423,7 +392,7 @@ void CScintillaView::OnPrepareDC(CDC* pDC, CPrintInfo* pInfo)
 
   if (pInfo->m_nCurPage <= pInfo->GetMaxPage())
   {
-	  if ((pInfo->m_nCurPage > static_cast<UINT>(m_aPageStart.GetSize())) &&	!PaginateTo(pDC, pInfo))
+	  if ((pInfo->m_nCurPage > (UINT)m_aPageStart.GetSize()) &&	!PaginateTo(pDC, pInfo))
 	  {
 		  //can't paginate to that page, thus cannot print it.
 		  pInfo->m_bContinuePrinting = FALSE;
@@ -596,7 +565,7 @@ void CScintillaView::OnPrint(CDC* pDC, CPrintInfo* pInfo)
 	}
 	else
 	{
-		ASSERT(nPage+1 <= static_cast<UINT>(m_aPageStart.GetSize()));
+		ASSERT(nPage+1 <= (UINT) m_aPageStart.GetSize());
 		ASSERT(nIndex == m_aPageStart[nPage+1-1]);
 	}
 }
@@ -829,8 +798,6 @@ void CScintillaView::OnReplaceSel(LPCTSTR lpszFind, BOOL bNext, BOOL bCase,	BOOL
 	_scintillaEditState.bNext = bNext;
   _scintillaEditState.bRegularExpression = bRegularExpression;
 
-  CScintillaCtrl& rCtrl = GetCtrl();
-
 	if (!SameAsSelected(_scintillaEditState.strFind, bCase, bWord, bRegularExpression))
 	{
 		if (!FindText(_scintillaEditState.strFind, bNext, bCase, bWord, bRegularExpression))
@@ -840,13 +807,7 @@ void CScintillaView::OnReplaceSel(LPCTSTR lpszFind, BOOL bNext, BOOL bCase,	BOOL
 		return;
 	}
 
-  if (bRegularExpression)
-  {
-    rCtrl.TargetFromSelection();
-    rCtrl.ReplaceTargetRE(_scintillaEditState.strReplace.GetLength(), _scintillaEditState.strReplace);    
-  }
-  else
-  	GetCtrl().ReplaceSel(_scintillaEditState.strReplace);
+	GetCtrl().ReplaceSel(_scintillaEditState.strReplace);
 	if (!FindText(_scintillaEditState.strFind, bNext, bCase, bWord, bRegularExpression))
 		TextNotFound(_scintillaEditState.strFind, bNext, bCase, bWord, bRegularExpression, TRUE);
 	else
@@ -876,13 +837,7 @@ void CScintillaView::OnReplaceAll(LPCTSTR lpszFind, LPCTSTR lpszReplace, BOOL bC
 	while (FindTextSimple(_scintillaEditState.strFind, _scintillaEditState.bNext, bCase, bWord, bRegularExpression))
   {
     bFoundSomething = TRUE;
-    if (bRegularExpression)
-    {
-      rCtrl.TargetFromSelection();
-      rCtrl.ReplaceTargetRE(_scintillaEditState.strReplace.GetLength(), _scintillaEditState.strReplace);
-    }
-    else
-		  rCtrl.ReplaceSel(_scintillaEditState.strReplace);
+		rCtrl.ReplaceSel(_scintillaEditState.strReplace);
   }
 
   //Restore the old selection
@@ -899,7 +854,7 @@ LRESULT CScintillaView::OnFindReplaceCmd(WPARAM /*wParam*/, LPARAM lParam)
 {
 	ASSERT_VALID(this);
 
-	CScintillaFindReplaceDlg* pDialog = static_cast<CScintillaFindReplaceDlg*>(CFindReplaceDialog::GetNotifier(lParam));
+	CScintillaFindReplaceDlg* pDialog = (CScintillaFindReplaceDlg*) CFindReplaceDialog::GetNotifier(lParam);
 	ASSERT(pDialog != NULL);
 	ASSERT(pDialog == _scintillaEditState.pFindReplaceDlg);
 
@@ -939,7 +894,7 @@ BOOL CScintillaView::SameAsSelected(LPCTSTR lpszCompare, BOOL bCase, BOOL bWord,
   iFlags |= bRegularExpression ? SCFIND_REGEXP : 0;
   rCtrl.SetSearchFlags(iFlags);
   rCtrl.TargetFromSelection();                     //set target
-  if (rCtrl.SearchInTarget(static_cast<int>(nLen), lpszCompare) < 0) //see what we got
+  if (rCtrl.SearchInTarget(nLen, lpszCompare) < 0) //see what we got
     return FALSE;                                  //no match
 
   //If we got a match, the target is set to the found text
@@ -966,11 +921,7 @@ BOOL CScintillaView::FindTextSimple(LPCTSTR lpszFind, BOOL bNext, BOOL bCase, BO
 	if (m_bFirstSearch)
 		m_bFirstSearch = FALSE;
 
-#ifdef _UNICODE
-	CScintillaCtrl::W2UTF8(lpszFind, -1, ft.lpstrText);
-#else
-	ft.lpstrText = T2A(const_cast<LPTSTR>(lpszFind));
-#endif
+	ft.lpstrText = T2A((LPTSTR)lpszFind);
 	if (ft.chrg.cpMin != ft.chrg.cpMax) // i.e. there is a selection
 	{
 #ifndef _UNICODE
@@ -1017,15 +968,8 @@ BOOL CScintillaView::FindTextSimple(LPCTSTR lpszFind, BOOL bNext, BOOL bCase, BO
     ft.chrg.cpMax = ncpMinTemp;
   }
 
-	//if we find the text return TRUE
-	BOOL bFound = (FindAndSelect(dwFlags, ft) != -1);
-
-#ifdef _UNICODE
-  //Tidy up the heap memory before we return
-  delete [] ft.lpstrText;
-#endif
-
-  return bFound;
+	// if we find the text return TRUE
+	return (FindAndSelect(dwFlags, ft) != -1);
 }
 
 long CScintillaView::FindAndSelect(DWORD dwFlags, TextToFind& ft)
@@ -1059,13 +1003,6 @@ void CScintillaView::OnSize(UINT nType, int cx, int cy)
   CRect r;
   GetClientRect(&r);
   m_Edit.MoveWindow(&r);	
-}
-
-BOOL CScintillaView::OnEraseBkgnd(CDC* /*pDC*/) 
-{
-  //We do nothing here, because the scintilla control takes up the entire 
-  //client area of our view;
-	return TRUE;
 }
 
 void CScintillaView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView)
@@ -1115,7 +1052,7 @@ void CScintillaView::Dump(CDumpContext& dc) const
 	AFX_DUMP0(dc, "\n Static Member Data:");
 	if (_scintillaEditState.pFindReplaceDlg != NULL)
 	{
-		AFX_DUMP1(dc, "\npFindReplaceDlg = ",	static_cast<void*>(_scintillaEditState.pFindReplaceDlg));
+		AFX_DUMP1(dc, "\npFindReplaceDlg = ",	(void*)_scintillaEditState.pFindReplaceDlg);
 		AFX_DUMP1(dc, "\nbFindOnly = ", _scintillaEditState.bFindOnly);
 	}
 	AFX_DUMP1(dc, "\nstrFind = ", _scintillaEditState.strFind);
@@ -1204,9 +1141,6 @@ void CScintillaView::OnFilePageSetup()
   else
     dlg.m_psd.Flags |= PSD_INTHOUSANDTHSOFINCHES;
 
-  if (m_bPersistMarginSettings)
-    LoadMarginSettings();
-
   //Set the current margin settings to the current value from m_rectMargin 
   dlg.m_psd.rtMargin = m_rMargin;
 
@@ -1223,9 +1157,6 @@ void CScintillaView::OnFilePageSetup()
 	{
     //Save the new margin value in to the member variable
     m_rMargin = dlg.m_psd.rtMargin;
-
-    if (m_bPersistMarginSettings)
-      SaveMarginSettings();
 
     //Update the printer settings
 		pApp->SelectPrinter(dlg.m_psd.hDevNames, dlg.m_psd.hDevMode);
@@ -1352,7 +1283,7 @@ void CScintillaView::OnKillFocus()
 
 BOOL CScintillaView::OnCommand(WPARAM wParam, LPARAM lParam)
 {
-  HWND hWndControl = reinterpret_cast<HWND>(lParam);
+  HWND hWndControl = (HWND) lParam;
   
   if (hWndControl == GetCtrl().GetSafeHwnd())
   {
@@ -1389,14 +1320,14 @@ BOOL CScintillaView::OnCommand(WPARAM wParam, LPARAM lParam)
 
 BOOL CScintillaView::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 {
-  NMHDR* pNMHdr = reinterpret_cast<NMHDR*>(lParam);
+  NMHDR* pNMHdr = (NMHDR*)lParam;
   ASSERT(pNMHdr);
 
   //Is it a notification from the embedded control
   CScintillaCtrl& rCtrl = GetCtrl();
   if (pNMHdr->hwndFrom == rCtrl.GetSafeHwnd())
   {
-    SCNotification* pSCNotification = reinterpret_cast<SCNotification*>(lParam);
+    SCNotification* pSCNotification = (SCNotification*) lParam;
     switch (pNMHdr->code)
     {
       case SCN_STYLENEEDED:
@@ -1538,7 +1469,7 @@ CScintillaView* CScintillaDoc::GetView() const
 	{
 		pView = GetNextView(pos);
 		if (pView->IsKindOf(RUNTIME_CLASS(CScintillaView)))
-			return static_cast<CScintillaView*>(pView);
+			return (CScintillaView*) pView;
 	}
 
 	//can't find one--return NULL
@@ -1589,10 +1520,10 @@ BOOL CScintillaDoc::OnSaveDocument(LPCTSTR lpszPathName)
 	BOOL bSuccess = CDocument::OnSaveDocument(lpszPathName);
   if (bSuccess)
   {
-		CScintillaView* pView = GetView();
+		CScintillaView *pView = GetView();
 		ASSERT(pView);
 		
-		CScintillaCtrl& rCtrl = pView->GetCtrl();
+		CScintillaCtrl &rCtrl = pView->GetCtrl();
 
 		//Tell the control that the document has now been saved
 		rCtrl.SetSavePoint();

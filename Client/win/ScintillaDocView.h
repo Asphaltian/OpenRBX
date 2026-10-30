@@ -22,6 +22,7 @@ to maintain a single distribution point for the source code.
 #define __SCINTILLADOCVIEW_H__
 
 
+
 //////////////////// Includes /////////////////////////////////////////////////
 
 #include "ScintillaCtrl.h"
@@ -32,11 +33,11 @@ to maintain a single distribution point for the source code.
 #endif //__AFXTEMPL_H__
 
 
+
 //////////////////// Classes //////////////////////////////////////////////////
 
 namespace Scintilla
 {
-
 
 class CScintillaFindReplaceDlg : public CFindReplaceDialog
 {
@@ -60,6 +61,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 };
+
 
 class CScintillaView : public CView
 {
@@ -114,8 +116,6 @@ protected:
   virtual BOOL OnCommand(WPARAM wParam, LPARAM lParam);
   virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
   static BOOL UserWantsMetric();
-  virtual void LoadMarginSettings(const CString& sSection = _T("PageSetup"));
-  virtual void SaveMarginSettings(const CString& sSection = _T("PageSetup"));
 
 //Notifications
   virtual void OnStyleNeeded(SCNotification* pSCNotification);
@@ -151,7 +151,6 @@ protected:
   BOOL             m_bPrintHeader;                     //Should Headers be printed?
   BOOL             m_bPrintFooter;                     //Should Footers be printed?
   BOOL             m_bUsingMetric;                     //TRUE if the margin is specified in Metric units, else FALSE implies imperial
-  BOOL             m_bPersistMarginSettings;           //Should we persist the margin settings for the Page Setup dialog
 
 	//{{AFX_MSG(CScintillaView)
 	afx_msg void OnPaint();
@@ -177,7 +176,6 @@ protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnFilePageSetup();
 	afx_msg void OnDestroy();
-	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	//}}AFX_MSG
 	afx_msg LRESULT OnFindReplaceCmd(WPARAM, LPARAM lParam);
 
@@ -187,6 +185,7 @@ protected:
 
   friend class CScintillaDoc;
 };
+
 
 class CScintillaDoc : public CDocument
 {

@@ -77,6 +77,7 @@ address,type,symbol
 00466260,library,??_G?$CArray@HH@@UAEPAXI@Z
 00466290,library,?Create@CScintillaFindReplaceDlg@Scintilla@@UAEHHPBD0KPAVCWnd@@@Z
 004662e0,library,?OnInitDialog@CScintillaFindReplaceDlg@Scintilla@@MAEHXZ
+00466360,library,??0CScintillaView@Scintilla@@QAE@XZ
 004664c0,library,?OnDestroy@CScintillaView@Scintilla@@IAEXXZ
 00466610,library,?PaginateTo@CScintillaView@Scintilla@@MAEHPAVCDC@@PAUCPrintInfo@@@Z
 00466720,library,?OnPrepareDC@CScintillaView@Scintilla@@MAEXPAVCDC@@PAUCPrintInfo@@@Z
@@ -84,9 +85,12 @@ address,type,symbol
 00466f10,library,?FindTextA@CScintillaView@Scintilla@@MAEHPBDHHHH@Z
 00466fa0,library,?FindTextSimple@CScintillaView@Scintilla@@MAEHPBDHHHH@Z
 004670d0,library,?OnSize@CScintillaView@Scintilla@@IAEXIHH@Z
+00467320,library,?OnCommand@CScintillaView@Scintilla@@MAEHIJ@Z
 004675b0,library,??4COleDateTime@ATL@@QAEAAV01@AB_J@Z
+00467630,library,?CreateObject@CScintillaView@Scintilla@@SGPAVCObject@@XZ
 004676c0,library,?PrintPage@CScintillaView@Scintilla@@MAEJPAVCDC@@PAUCPrintInfo@@JJ@Z
 00467870,library,?OnEndPrinting@CScintillaView@Scintilla@@MAEXPAVCDC@@PAUCPrintInfo@@@Z
 004678a0,library,?CreateFindReplaceDialog@CScintillaView@Scintilla@@MAEPAVCScintillaFindReplaceDlg@2@XZ
+00467920,library,?OnFilePageSetup@CScintillaView@Scintilla@@IAEXXZ
 00467a70,library,?OnBeginPrinting@CScintillaView@Scintilla@@MAEXPAVCDC@@PAUCPrintInfo@@@Z
 00467af0,library,?OnPrint@CScintillaView@Scintilla@@MAEXPAVCDC@@PAUCPrintInfo@@@Z

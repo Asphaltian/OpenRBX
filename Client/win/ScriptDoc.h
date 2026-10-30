@@ -41,7 +41,9 @@ public:
 	virtual ~CScriptEditor();
 
 private:
-	undefined m_unk0xf0[0x150 - 0xf0]; // 0xf0
+	undefined m_unk0xec[0x150 - 0xec]; // 0xec
 };
+
+DECOMP_SIZE_ASSERT(CScriptEditor, 0x150)
 
 #endif // SCRIPTDOC_H
