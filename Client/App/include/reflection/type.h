@@ -124,6 +124,12 @@ public:
 	{
 	}
 
+	// SYNTHETIC: ROBLOX 0x00414cc0
+	// ??$?0H@Value@Reflection@RBX@@QAE@ABH@Z
+
+	// SYNTHETIC: ROBLOX 0x004313c0
+	// ??$?0_N@Value@Reflection@RBX@@QAE@AB_N@Z
+
 	template <class T>
 	T get() const
 	{

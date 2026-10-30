@@ -68,7 +68,10 @@ public:
 		}
 	}
 
+	// FUNCTION: ROBLOX 0x00410aa0
 	std::vector<boost::shared_ptr<Instance> >::const_iterator begin() const { return selection->begin(); }
+
+	// FUNCTION: ROBLOX 0x00410ad0
 	std::vector<boost::shared_ptr<Instance> >::const_iterator end() const { return selection->end(); }
 	const CopyOnWrite<std::vector<boost::shared_ptr<Instance> > >& getSelection() const;
 

@@ -10,6 +10,9 @@ class CNullDoc : public CDocument
 
 	// SYNTHETIC: ROBLOX 0x004374a0
 	// ?GetThisClass@CNullDoc@@SGPAUCRuntimeClass@@XZ
+
+	// STUB: ROBLOX 0x004374d0
+	// ?CreateObject@CNullDoc@@SGPAVCObject@@XZ
 	// SYNTHETIC: ROBLOX 0x00437530
 	// ?GetMessageMap@CNullDoc@@MBEPBUAFX_MSGMAP@@XZ
 

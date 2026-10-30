@@ -22,6 +22,7 @@ public:
 	bool operator!=(const PV&) const;
 
 	PV() {}
+	// FUNCTION: ROBLOX 0x005ad020
 	PV(const CoordinateFrame& position, const Velocity& velocity) : position(position), velocity(velocity) {}
 	PV(const PV& other) : position(other.position), velocity(other.velocity) {}
 	~PV() {}

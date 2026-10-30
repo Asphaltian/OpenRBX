@@ -19,6 +19,9 @@ class MyXTPCommandBars : public CXTPCommandBars
 	// SYNTHETIC: ROBLOX 0x00432540
 	// ?GetThisClass@MyXTPCommandBars@@SGPAUCRuntimeClass@@XZ
 
+	// SYNTHETIC: ROBLOX 0x00433aa0
+	// ?CreateObject@MyXTPCommandBars@@SGPAVCObject@@XZ
+
 protected:
 	// FUNCTION: ROBLOX 0x00432500
 	virtual CXTPToolBar* AddCustomBar(LPCTSTR lpcstrCaption, UINT nID, BOOL bTearOffBar = FALSE)
@@ -45,6 +48,9 @@ class CPatchedControlComboBox : public CXTPControlComboBox
 
 	// SYNTHETIC: ROBLOX 0x00432750
 	// ?GetThisClass@CPatchedControlComboBox@@SGPAUCRuntimeClass@@XZ
+
+	// SYNTHETIC: ROBLOX 0x00433f20
+	// ?CreateObject@CPatchedControlComboBox@@SGPAVCObject@@XZ
 
 public:
 	// FUNCTION: ROBLOX 0x00432720
@@ -105,6 +111,8 @@ public:
 	// ?raise@?$Notifier@VFillToolColor@RBX@@VBrickColor@2@@RBX@@IBEXVBrickColor@2@PAV?$Listener@VFillToolColor@RBX@@VBrickColor@2@@2@@Z
 	// TEMPLATE: ROBLOX 0x00435100
 	// ?raise@?$Notifier@VFillToolColor@RBX@@VBrickColor@2@@RBX@@IBEXVBrickColor@2@@Z
+	// STUB: ROBLOX 0x0047d950
+	// ?addListener@?$Notifier@VFillToolColor@RBX@@VBrickColor@2@@RBX@@QBEXPAV?$Listener@VFillToolColor@RBX@@VBrickColor@2@@2@@Z
 	// clang-format on
 
 	// SYNTHETIC: ROBLOX 0x00436320

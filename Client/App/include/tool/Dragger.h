@@ -41,6 +41,7 @@ private:
 	);
 
 public:
+	// STUB: ROBLOX 0x0063c5c0
 	static const G3D::Vector3& dragSnap()
 	{
 		static G3D::Vector3 v(1.0f, 0.1f, 1.0f);

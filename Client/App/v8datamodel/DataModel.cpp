@@ -214,6 +214,7 @@ void DataModel::onEvent(const RunService* source, RunTransition event)
 	}
 }
 
+// FUNCTION: ROBLOX 0x0058f100
 float DataModel::getSimTime() const
 {
 	return timeState->totalVirtualTime;

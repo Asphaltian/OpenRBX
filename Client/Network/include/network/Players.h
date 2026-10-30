@@ -137,6 +137,7 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x10193090
 	// RBX::Network::Players::`scalar deleting destructor'
 
+	// FUNCTION: ROBLOX 0x004b0e10
 	bool superSafeOn() const { return localPlayer ? Player::prop_SuperSafeChat.getValue(localPlayer.get()) : false; }
 	boost::shared_ptr<Instance> createLocalPlayer(int userId);
 
