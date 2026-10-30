@@ -1,0 +1,24 @@
+HKCR
+{
+	Roblox.WebToolboxUI.1 = s 'WebToolboxUI Class'
+	{
+		CLSID = s '{36C9FCD5-0C5D-46EE-8D3D-73D3F91CB295}'
+	}
+	Roblox.WebToolboxUI = s 'WebToolboxUI Class'
+	{
+		CLSID = s '{36C9FCD5-0C5D-46EE-8D3D-73D3F91CB295}'
+		CurVer = s 'Roblox.WebToolboxUI.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {36C9FCD5-0C5D-46EE-8D3D-73D3F91CB295} = s 'WebToolboxUI Class'
+		{
+			ProgID = s 'Roblox.WebToolboxUI.1'
+			VersionIndependentProgID = s 'Roblox.WebToolboxUI'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{03E1C8ED-C1C6-47BF-B9B9-A37B677318DD}'
+		}
+	}
+}

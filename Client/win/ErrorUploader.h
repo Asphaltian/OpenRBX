@@ -31,9 +31,11 @@ class ErrorUploader
 
 public:
 	// FUNCTION: WEBSERVICE 0x1000cdf0
+	// STUB: ROBLOX 0x004520c0
 	ErrorUploader() : _data(new data()), thread(boost::bind(&ErrorUploader::run, _data), "rbx_erroruploader") {}
 
 	// SYNTHETIC: WEBSERVICE 0x1000da60
+	// SYNTHETIC: ROBLOX 0x0044e870
 	// ErrorUploader::~ErrorUploader
 
 	void Cancel();

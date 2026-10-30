@@ -1,4 +1,5 @@
 address,type,symbol,name,module,size
+0044df00,library,?AtlComModuleRevokeClassObjects@ATL@@YGJPAU_ATL_COM_MODULE70@1@@Z,,,
 005c2230,library,?find@?$_Tree@V?$_Tmap_traits@W4SoundType@RBX@@V?$shared_ptr@VSoundChannel@Soundscape@RBX@@@boost@@U?$less@W4SoundType@RBX@@@std@@V?$allocator@U?$pair@$$CBW4SoundType@RBX@@V?$shared_ptr@VSoundChannel@Soundscape@RBX@@@boost@@@std@@@6@$0A@@std@@@std@@QAE?AViterator@12@ABW4SoundType@RBX@@@Z,,,
 006584a0,function,,,,0x8c
 00666ea0,library,?erase@?$_Tree@V?$_Tset_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z,,,
@@ -6,6 +7,7 @@ address,type,symbol,name,module,size
 007ff128,global,??_7logic_error@std@@6B@,,,
 007ff134,global,??_7length_error@std@@6B@,,,
 007ff140,global,??_7out_of_range@std@@6B@,,,
+007ff1b4,global,??_7CRegObject@ATL@@6B@,,,
 007ff2a4,global,??_7Creator@?$FactoryProduct@VModelInstance@RBX@@VPVInstance@2@$1?sModel@2@3PADA@RBX@@6B@,,,
 007ff2ac,global,??_7sp_counted_base@detail@boost@@6B@,,,
 007ff2c0,global,??_7?$sp_counted_impl_pd@PAVModelInstance@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@6B@,,,
@@ -63,7 +65,10 @@ address,type,symbol,name,module,size
 00809240,global,??_7?$TypedPropertyDescriptor@H@Reflection@RBX@@6B@,,,
 008092a8,global,??_7?$BoundProp@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$00@Reflection@RBX@@6B@,,,
 00809840,global,??_7?$TypedPropertyDescriptor@M@Reflection@RBX@@6B@,,,
+0080a2c0,global,??_7?$sp_counted_impl_p@Udata@ErrorUploader@@@detail@boost@@6B@,,,
 0080a2d4,global,??_7?$sp_counted_impl_pd@PAVGameSettings@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@6B@,,,
+0080a398,global,??_7CRobloxModule@@6B@,,,
+0080a444,global,??_7CRobloxApp@@6B@,,,
 0080a71c,global,??_7Creator@?$FactoryProduct@VGameSettings@RBX@@VItem@GlobalSettings@2@$1?sGameSettings@2@3QBDB@RBX@@6B@,,,
 0080b778,global,??_7Creator@?$FactoryProduct@VVisit@RBX@@VInstance@2@$1?sVisit@2@3PADA@RBX@@6B@,,,
 0080b780,global,??_7?$sp_counted_impl_pd@PAVVisit@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@6B@,,,
@@ -866,3 +871,4 @@ address,type,symbol,name,module,size
 00961224,global,??_B?1??pink@Color@RBX@@SAABVColor3@G3D@@XZ@51,,,
 00961230,global,,once_SafeChat_singleton,,
 00961234,global,,sing,SafeChat.obj,
+00962b2c,global,?_AtlComModule@ATL@@3VCAtlComModule@1@A,,,

@@ -136,6 +136,7 @@ static void __cdecl purecallHandler()
 }
 
 // FUNCTION: WEBSERVICE 0x10002530
+// STUB: ROBLOX 0x0042cba0
 MainLogManager::MainLogManager(const char* productName) : LogManager(productName)
 {
 	RBX::Guid::generateGUID(guid);
@@ -243,6 +244,7 @@ void MainLogManager::CullLogs(const char* folder, int maxLogs)
 }
 
 // FUNCTION: WEBSERVICE 0x10002e90
+// STUB: ROBLOX 0x0042b9d0
 MainLogManager::~MainLogManager()
 {
 	if (G3D::Log::common()) {

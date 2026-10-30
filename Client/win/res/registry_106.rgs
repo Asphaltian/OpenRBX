@@ -1,0 +1,24 @@
+HKCR
+{
+	Roblox.Workspace.1 = s 'Workspace Class'
+	{
+		CLSID = s '{ABB1FABF-E42E-45B8-81B4-39B1CF160142}'
+	}
+	Roblox.Workspace = s 'Workspace Class'
+	{
+		CLSID = s '{ABB1FABF-E42E-45B8-81B4-39B1CF160142}'
+		CurVer = s 'Roblox.Workspace.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {ABB1FABF-E42E-45B8-81B4-39B1CF160142} = s 'Workspace Class'
+		{
+			ProgID = s 'Roblox.Workspace.1'
+			VersionIndependentProgID = s 'Roblox.Workspace'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{03E1C8ED-C1C6-47BF-B9B9-A37B677318DD}'
+		}
+	}
+}

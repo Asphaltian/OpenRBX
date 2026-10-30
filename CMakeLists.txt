@@ -470,6 +470,30 @@ add_engine_library(renderlib
   SOURCES ${OPENRBX_RENDERLIB_SOURCES}
 )
 
+if (MSVC_FOR_DECOMP)
+  set(OPENRBX_TOOLKITPRO "${OPENRBX_3RDPARTY}/ToolkitPro-11.2.2")
+  set(OPENRBX_TOOLKITPRO_WORKSPACE "${OPENRBX_TOOLKITPRO}/Workspace/ToolkitPro")
+  file(READ "${OPENRBX_TOOLKITPRO_WORKSPACE}/ToolkitProStatic_vc80.vcproj" OPENRBX_TOOLKITPRO_VCPROJ)
+  string(REGEX MATCHALL "RelativePath=\"[^\"]+\\.cpp\"" OPENRBX_TOOLKITPRO_FILES "${OPENRBX_TOOLKITPRO_VCPROJ}")
+  set(OPENRBX_TOOLKITPRO_SOURCES)
+  foreach(entry ${OPENRBX_TOOLKITPRO_FILES})
+    string(REGEX REPLACE "RelativePath=\"(.*)\"" "\\1" path "${entry}")
+    string(REPLACE "\\" "/" path "${path}")
+    list(APPEND OPENRBX_TOOLKITPRO_SOURCES "${OPENRBX_TOOLKITPRO_WORKSPACE}/${path}")
+  endforeach()
+
+  add_library(toolkitpro STATIC ${OPENRBX_TOOLKITPRO_SOURCES})
+  target_compile_definitions(toolkitpro PRIVATE WIN32 _LIB NDEBUG _MBCS _AFXDLL)
+  target_include_directories(toolkitpro PRIVATE
+    "${OPENRBX_TOOLKITPRO_WORKSPACE}"
+    "${OPENRBX_TOOLKITPRO}/Source"
+    "${OPENRBX_TOOLKITPRO}/Source/Common"
+  )
+  target_compile_options(toolkitpro PRIVATE /O2 /Ob1 /GF /Gy /Zc:wchar_t)
+  set_property(TARGET toolkitpro PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
+  set_property(TARGET toolkitpro PROPERTY OUTPUT_NAME "ToolkitPro1122vc80DS")
+endif()
+
 set(OPENRBX_WEBSERVICE_SOURCES
   WebService/ThumbnailGenerator.cpp
   WebService/WebService.cpp
@@ -546,11 +570,13 @@ if (MSVC_FOR_DECOMP)
   add_executable(roblox WIN32
     Client/win/ErrorUploader.cpp
     Client/win/LogManager.cpp
+    Client/win/Roblox.cpp
     Client/win/VersionInfo.cpp
+    Client/win/Roblox.rc
     util/decomp.cpp
   )
-  target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS
-    _ATL_NO_COM_SUPPORT)
+  target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS _AFXDLL)
+  target_compile_options(roblox PRIVATE $<$<COMPILE_LANGUAGE:CXX>:/FIStdAfx.h>)
   reccmp_add_target(roblox ID ROBLOX)
 
   target_include_directories(roblox PRIVATE
@@ -558,9 +584,11 @@ if (MSVC_FOR_DECOMP)
     ${OPENRBX_ENGINE_INCLUDE_DIRS}
     ${OPENRBX_3RDPARTY_INCLUDE_DIRS}
     "${OPENRBX_MESA_INCLUDE_DIR}"
+    "${OPENRBX_TOOLKITPRO}/Source"
   )
 
   target_link_libraries(roblox PRIVATE
+    toolkitpro
     mfc80
     mfcs80
     ${OPENRBX_ENGINE_LIBRARIES}
@@ -583,7 +611,7 @@ if (MSVC_FOR_DECOMP)
     ws2_32
   )
 
-  target_link_options(roblox PRIVATE "-MAP:$<TARGET_FILE_DIR:roblox>/$<TARGET_FILE_BASE_NAME:roblox>.map" "/FIXED:NO")
+  target_link_options(roblox PRIVATE "-MAP:$<TARGET_FILE_DIR:roblox>/$<TARGET_FILE_BASE_NAME:roblox>.map" "/FIXED:NO" "/MANIFEST:NO")
   foreach(lib zlib.lib G3D.lib G3D-debug.lib GLG3D.lib GLG3D-debug.lib sdl.lib sdlmain.lib glut32.lib)
     target_link_options(roblox PRIVATE "/NODEFAULTLIB:${lib}")
   endforeach()

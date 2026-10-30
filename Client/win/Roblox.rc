@@ -1,0 +1,865 @@
+#include "afxres.h"
+
+LANGUAGE 0, 0
+
+LANGUAGE 9, 1
+
+128 ICON "res\\icon_128.ico"
+
+129 ICON "res\\icon_129.ico"
+
+185 ICON "res\\icon_185.ico"
+
+128 BITMAP "res\\bitmap_128.bmp"
+
+132 BITMAP "res\\bitmap_132.bmp"
+
+135 BITMAP "res\\bitmap_135.bmp"
+
+137 BITMAP "res\\bitmap_137.bmp"
+
+145 BITMAP "res\\bitmap_145.bmp"
+
+147 BITMAP "res\\bitmap_147.bmp"
+
+150 BITMAP "res\\bitmap_150.bmp"
+
+196 BITMAP "res\\bitmap_196.bmp"
+
+128 TOOLBAR 15, 16
+BEGIN
+	BUTTON 57600
+	BUTTON 57601
+	BUTTON 57603
+	SEPARATOR
+	BUTTON 57635
+	BUTTON 57634
+	BUTTON 57637
+	SEPARATOR
+	BUTTON 57643
+	BUTTON 57644
+	SEPARATOR
+	BUTTON 32825
+	BUTTON 32826
+	SEPARATOR
+	BUTTON 32835
+	BUTTON 32836
+	BUTTON 32855
+	BUTTON 32856
+END
+
+135 TOOLBAR 16, 16
+BEGIN
+	BUTTON 32867
+	BUTTON 32871
+	BUTTON 32869
+	BUTTON 32872
+	SEPARATOR
+	BUTTON 32883
+	BUTTON 32884
+	SEPARATOR
+	BUTTON 32832
+	BUTTON 32833
+	SEPARATOR
+	BUTTON 32888
+	BUTTON 32887
+	BUTTON 32889
+	BUTTON 32935
+	BUTTON 32936
+	BUTTON 32892
+	BUTTON 32891
+END
+
+137 TOOLBAR 16, 16
+BEGIN
+	BUTTON 32966
+	BUTTON 32967
+	BUTTON 32968
+END
+
+145 TOOLBAR 16, 16
+BEGIN
+	BUTTON 32807
+	BUTTON 32808
+	BUTTON 32809
+	BUTTON 32810
+	BUTTON 32811
+	BUTTON 32812
+	BUTTON 32934
+	BUTTON 32813
+END
+
+147 TOOLBAR 16, 16
+BEGIN
+	BUTTON 32954
+	BUTTON 32953
+	BUTTON 32955
+	BUTTON 32956
+	BUTTON 32957
+	BUTTON 32969
+	BUTTON 32970
+END
+
+150 TOOLBAR 16, 15
+BEGIN
+	BUTTON 32963
+	BUTTON 32987
+	BUTTON 33014
+	BUTTON 32986
+END
+
+103 MENU
+BEGIN
+	POPUP "Selection"
+	BEGIN
+		MENUITEM "Cu&t\tCtrl+X", 57635
+		MENUITEM "&Copy\tCtrl+C", 57634
+		MENUITEM "&Paste Into\tCtrl+V", 33015
+		MENUITEM SEPARATOR
+		MENUITEM "&Group", 32825
+		MENUITEM "&Ungroup", 32826
+		MENUITEM SEPARATOR
+		MENUITEM "Insert Into from File...", 32801
+		MENUITEM SEPARATOR
+		MENUITEM "&Save to File...", 32805
+		MENUITEM "Save to Roblox...", 32951
+	END
+END
+
+128 MENU
+BEGIN
+	POPUP "&File"
+	BEGIN
+		MENUITEM "&New\tCtrl+N", 57600
+		MENUITEM "&Open...\tCtrl+O", 57601
+		MENUITEM "&Close", 57602
+		MENUITEM SEPARATOR
+		MENUITEM "&Save\tCtrl+S", 57603
+		MENUITEM "Save &As...", 57604
+		MENUITEM "Publish to ROBLOX...", 32950
+		MENUITEM SEPARATOR
+		MENUITEM "&Save Selection as Model...", 32805
+		MENUITEM "Publish Selection to ROBLOX...", 32951
+		MENUITEM SEPARATOR
+		MENUITEM "&Print...\tCtrl+P", 57607
+		MENUITEM "Print Pre&view", 57609
+		MENUITEM "P&rint Setup...", 57606
+		MENUITEM SEPARATOR
+		MENUITEM "Recent File", 57616, GRAYED
+		MENUITEM SEPARATOR
+		MENUITEM "E&xit", 57665
+	END
+	POPUP "&Edit"
+	BEGIN
+		MENUITEM "&Undo\tCtrl+Z", 57643
+		MENUITEM "&Redo\tCtrl+Y", 57644
+		MENUITEM SEPARATOR
+		MENUITEM "Cu&t\tCtrl+X", 57635
+		MENUITEM "&Copy\tCtrl+C", 57634
+		MENUITEM "&Paste\tCtrl+V", 57637
+		MENUITEM SEPARATOR
+		MENUITEM "Clear\tDel", 57632
+		MENUITEM "Select &All\tCtrl+A", 57642
+		MENUITEM "&Duplicate\tCtrl+D", 32773
+		MENUITEM SEPARATOR
+		POPUP "Find and Replace"
+		BEGIN
+			MENUITEM "&Find...\tCtrl+F", 57636
+			MENUITEM "Find &Next\tF3", 57640
+			MENUITEM "&Replace...\tCtrl+H", 57641
+		END
+		POPUP "Script"
+		BEGIN
+			MENUITEM "Display &Line Numbers", 32994
+			MENUITEM "Display &Selection/Bookmark Margin", 32995
+			MENUITEM "Display &folding Margin", 32996
+			MENUITEM SEPARATOR
+			MENUITEM "&Add a Marker", 32997
+			MENUITEM "&Delete Marker", 32998
+			MENUITEM "Find &Next Marker", 32999
+			MENUITEM "Find &Previous Marker", 33000
+		END
+		MENUITEM SEPARATOR
+		MENUITEM "Lock", 32784
+		MENUITEM "Unlock All", 32785
+	END
+	POPUP "&View"
+	BEGIN
+		MENUITEM "&Explorer", 32792
+		MENUITEM "&Properties", 32783
+		MENUITEM "&Output", 32927
+		MENUITEM "&Start Page", 32959
+		MENUITEM "&Report", 33011
+		MENUITEM "Toolbox", 33022
+		MENUITEM SEPARATOR
+		MENUITEM "Game Layout", 33013
+		MENUITEM "Full Screen", 33012
+		POPUP "&Toolbars"
+		BEGIN
+			MENUITEM "&Toolbar", 59392
+			MENUITEM SEPARATOR
+			MENUITEM "Customize...", 35001
+		END
+	END
+	POPUP "&Insert"
+	BEGIN
+		MENUITEM "Model...", 32800
+		MENUITEM "LDraw file...", 33016
+		MENUITEM SEPARATOR
+		MENUITEM "Decal...", 32866
+		MENUITEM "Texture...", 33006
+		MENUITEM "Object...", 32895
+		MENUITEM "Tool", 32780
+		MENUITEM SEPARATOR
+		MENUITEM "Clear Tools in Starterpack", 32781
+		MENUITEM "Clear Tools in My Backpack", 32782
+	END
+	POPUP "For&mat"
+	BEGIN
+		MENUITEM "Rotate\tCtrl+R", 32835
+		MENUITEM "Tilt", 32836
+		POPUP "Camera Positioning"
+		BEGIN
+			MENUITEM "Fixed", 32815
+			MENUITEM "Watching", 32930
+			MENUITEM "Attached", 32816
+			MENUITEM "Tracking", 32931
+			MENUITEM "Following", 32818
+		END
+		MENUITEM SEPARATOR
+		MENUITEM "&Group\tCtrl+G", 32825
+		MENUITEM "&Ungroup\tCtrl+U", 32826
+		MENUITEM SEPARATOR
+		MENUITEM "Set Model Front", 32938
+		MENUITEM "Set Model Primary Part", 32939
+		MENUITEM SEPARATOR
+		MENUITEM "Replace Glue with Welds", 32865
+		MENUITEM "Replace Weld with Snaps", 32933
+	END
+	POPUP "&Tools"
+	BEGIN
+		MENUITEM "E&xecute Script...", 33009
+		MENUITEM "&GC", 32986
+		MENUITEM SEPARATOR
+		POPUP "Test"
+		BEGIN
+			MENUITEM "Solo", 33028
+			MENUITEM "1 Player", 33029
+			MENUITEM "2 Players", 33030
+		END
+		MENUITEM "Join Selected Bricks", 32984
+		MENUITEM "Force Assertion", 32980
+		MENUITEM "Engine Stats", 32981
+		MENUITEM "Insert Model Raw...", 32982
+		MENUITEM "Image Server Model View", 32983
+		MENUITEM "Report Abuse...", 33024
+		MENUITEM "Report Crashes...", 33025
+		MENUITEM SEPARATOR
+		MENUITEM "&Customize...", 35001
+		MENUITEM "&Settings...", 32989
+	END
+	POPUP "&Window"
+	BEGIN
+		MENUITEM "Window List", 35000
+	END
+	POPUP "&Help"
+	BEGIN
+		MENUITEM "&About Roblox...", 57664
+		MENUITEM "Online &Help...\tF1", 57670
+		MENUITEM "&Object Browser", 32990
+	END
+END
+
+129 MENU
+BEGIN
+	POPUP "File"
+	BEGIN
+		MENUITEM "&Close", 57602
+	END
+END
+
+139 MENU
+BEGIN
+	POPUP "Undo"
+	BEGIN
+		MENUITEM "Undo1", 32917
+		MENUITEM "Undo2", 32918
+		MENUITEM "Undo3", 32919
+		MENUITEM "Undo4", 32920
+		MENUITEM "Undo5", 32921
+	END
+END
+
+140 MENU
+BEGIN
+	POPUP "Redo"
+	BEGIN
+		MENUITEM "Redo1", 32912
+		MENUITEM "Redo2", 32913
+		MENUITEM "Redo3", 32914
+		MENUITEM "Redo4", 32915
+		MENUITEM "Redo5", 32916
+	END
+END
+
+185 MENU
+BEGIN
+	POPUP "File"
+	BEGIN
+		MENUITEM "&Close", 57602
+	END
+END
+
+186 MENU
+BEGIN
+	POPUP "&File"
+	BEGIN
+		MENUITEM "E&xit", 57665
+	END
+	POPUP "&Tools"
+	BEGIN
+		MENUITEM "&Settings...", 32989
+	END
+	POPUP "&Help"
+	BEGIN
+		MENUITEM "&About Roblox...", 57664
+	END
+END
+
+101 DIALOGEX 30, 73, 246, 79
+STYLE 0x80c820cc
+EXSTYLE 0x00000080
+CAPTION "Find"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+	CONTROL "Fi&nd what:", 4294967295, "Static", 0x50020000, 9, 8, 42, 8
+	CONTROL "", 1152, "Edit", 0x50830080, 47, 8, 128, 12
+	CONTROL "Match &whole word only", 1040, "Button", 0x50030003, 9, 26, 100, 12
+	CONTROL "Match &case", 1041, "Button", 0x50010003, 9, 42, 64, 12
+	CONTROL "Regular &expression", 1042, "Button", 0x50010003, 9, 58, 83, 12
+	CONTROL "Direction", 1072, "Button", 0x50020007, 107, 26, 68, 28
+	CONTROL "&Up", 1056, "Button", 0x50020009, 111, 38, 25, 12
+	CONTROL "&Down", 1057, "Button", 0x50000009, 138, 38, 35, 12
+	CONTROL "&Find Next", 1, "Button", 0x50030001, 187, 8, 50, 14
+	CONTROL "Close", 2, "Button", 0x50010000, 187, 30, 50, 14
+	CONTROL "&Help", 1038, "Button", 0x50010000, 187, 55, 50, 14
+END
+
+102 DIALOGEX 36, 44, 250, 108
+STYLE 0x80c820cc
+EXSTYLE 0x00000080
+CAPTION "Replace"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+	CONTROL "Fi&nd what:", 4294967295, "Static", 0x50020000, 10, 9, 48, 8
+	CONTROL "", 1152, "Edit", 0x50830080, 54, 9, 114, 12
+	CONTROL "Re&place with:", 4294967295, "Static", 0x50020000, 10, 30, 48, 8
+	CONTROL "", 1153, "Edit", 0x50830080, 54, 28, 114, 12
+	CONTROL "Match &whole word only", 1040, "Button", 0x50030003, 10, 53, 104, 12
+	CONTROL "Match &case", 1041, "Button", 0x50010003, 10, 70, 59, 12
+	CONTROL "Regular &expression", 1042, "Button", 0x50010003, 10, 86, 83, 12
+	CONTROL "&Find Next", 1, "Button", 0x50030001, 190, 9, 50, 14
+	CONTROL "&Replace", 1024, "Button", 0x50010000, 190, 28, 50, 14
+	CONTROL "Replace &All", 1025, "Button", 0x50010000, 190, 46, 50, 14
+	CONTROL "Close", 2, "Button", 0x50010000, 190, 64, 50, 14
+	CONTROL "&Help", 1038, "Button", 0x50010000, 190, 84, 50, 14
+END
+
+107 DIALOGEX 0, 0, 306, 49
+STYLE 0x80c800c0
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+	CONTROL "Class:", 4294967295, "Static", 0x50020000, 7, 7, 40, 14, 0x00001000
+	CONTROL "", 1000, "Edit", 0x50810080, 53, 7, 175, 14
+	CONTROL "OK", 1, "Button", 0x50010001, 249, 7, 50, 16
+	CONTROL "Cancel", 2, "Button", 0x50010000, 249, 26, 50, 16
+END
+
+113 DIALOG 0, 0, 320, 200
+STYLE 0x80c800c0
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif"
+BEGIN
+END
+
+117 DIALOGEX 0, 0, 295, 195
+STYLE 0x80c800c0
+CAPTION ""
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+END
+
+120 DIALOGEX 0, 0, 279, 297
+STYLE 0x80c800c0
+EXSTYLE 0x00000300
+CAPTION "Dialog"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+END
+
+122 DIALOGEX 0, 0, 370, 235
+STYLE 0x80c800c0
+CAPTION "Settings"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+	CONTROL "Close", 1, "Button", 0x50010001, 313, 214, 50, 14
+	CONTROL "", 1001, "Static", 0x40000007 | NOT WS_VISIBLE, 7, 7, 356, 196
+	CONTROL "Reset All Settings", 1002, "Button", 0x50010000, 7, 214, 81, 14
+END
+
+123 DIALOGEX 0, 0, 232, 143
+STYLE 0x80c800c0
+CAPTION "About ROBLOX"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+END
+
+124 DIALOGEX 0, 0, 353, 121
+STYLE 0x80c800c0
+CAPTION "ROBLOX"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+END
+
+128 ACCELERATORS
+BEGIN
+	46, 57632, VIRTKEY, NOINVERT
+	67, 57634, VIRTKEY, NOINVERT, CONTROL
+	45, 57634, VIRTKEY, NOINVERT, CONTROL
+	46, 57635, VIRTKEY, NOINVERT, SHIFT
+	88, 57635, VIRTKEY, NOINVERT, CONTROL
+	68, 32773, VIRTKEY, NOINVERT, CONTROL
+	86, 57637, VIRTKEY, NOINVERT, CONTROL
+	45, 57637, VIRTKEY, NOINVERT, SHIFT
+	89, 57644, VIRTKEY, NOINVERT, CONTROL
+	90, 57644, VIRTKEY, NOINVERT, SHIFT, CONTROL
+	65, 57642, VIRTKEY, NOINVERT, CONTROL
+	8, 57643, VIRTKEY, NOINVERT, ALT
+	90, 57643, VIRTKEY, NOINVERT, CONTROL
+	78, 57600, VIRTKEY, NOINVERT, CONTROL
+	79, 57601, VIRTKEY, NOINVERT, CONTROL
+	80, 57607, VIRTKEY, NOINVERT, CONTROL
+	83, 57603, VIRTKEY, NOINVERT, CONTROL
+	71, 32825, VIRTKEY, NOINVERT, CONTROL
+	82, 32835, VIRTKEY, NOINVERT, CONTROL
+	85, 32826, VIRTKEY, NOINVERT, CONTROL
+	112, 57670, VIRTKEY, NOINVERT
+	117, 57680, VIRTKEY, NOINVERT
+	117, 57681, VIRTKEY, NOINVERT, SHIFT
+	70, 57636, VIRTKEY, NOINVERT, CONTROL
+	114, 57640, VIRTKEY, NOINVERT
+	72, 57641, VIRTKEY, NOINVERT, CONTROL
+END
+
+207 ACCELERATORS
+BEGIN
+	67, 57634, VIRTKEY, NOINVERT, CONTROL
+	45, 57634, VIRTKEY, NOINVERT, CONTROL
+	46, 57635, VIRTKEY, NOINVERT, SHIFT
+	88, 57635, VIRTKEY, NOINVERT, CONTROL
+	86, 57637, VIRTKEY, NOINVERT, CONTROL
+	45, 57637, VIRTKEY, NOINVERT, SHIFT
+	8, 57643, VIRTKEY, NOINVERT, ALT
+	90, 57643, VIRTKEY, NOINVERT, CONTROL
+	80, 57607, VIRTKEY, NOINVERT, CONTROL
+END
+
+1 VERSIONINFO
+FILEVERSION 0, 3, 676, 0
+PRODUCTVERSION 0, 3, 676, 0
+FILEFLAGSMASK 0x3fL
+FILEFLAGS 0x0L
+FILEOS 0x4L
+FILETYPE 0x1L
+FILESUBTYPE 0x0L
+BEGIN
+	BLOCK "StringFileInfo"
+	BEGIN
+		BLOCK "040904e4"
+		BEGIN
+			VALUE "CompanyName", "ROBLOX Corporation"
+			VALUE "FileDescription", "ROBLOX Game"
+			VALUE "FileVersion", "0, 3, 676, 0"
+			VALUE "InternalName", "Roblox.exe"
+			VALUE "LegalCopyright", "ý 2007, ROBLOX Corporation.  All rights reserved."
+			VALUE "OriginalFilename", "Roblox.exe"
+			VALUE "ProductName", "ROBLOX"
+			VALUE "ProductVersion", "0, 3, 676, 0"
+		END
+	END
+	BLOCK "VarFileInfo"
+	BEGIN
+		VALUE "Translation", 0x409, 0x4e4
+	END
+END
+
+114 HTML "res\\html_114.htm"
+
+118 HTML "res\\html_118.htm"
+
+134 HTML "res\\html_134.htm"
+
+210 HTML "res\\html_210.htm"
+
+1 24 "res\\Roblox.manifest"
+
+"ARROWLEFT_GREEN_16" PNG "res\\arrowleft_green_16.png"
+
+"ARROWLEFT_GREEN_16_D" PNG "res\\arrowleft_green_16_d.png"
+
+"ARROWLEFT_GREEN_16_H" PNG "res\\arrowleft_green_16_h.png"
+
+"ARROWLEFT_GREEN_32" PNG "res\\arrowleft_green_32.png"
+
+"ARROWLEFT_GREEN_32_D" PNG "res\\arrowleft_green_32_d.png"
+
+"ARROWLEFT_GREEN_32_H" PNG "res\\arrowleft_green_32_h.png"
+
+"ARROWRIGHT_GREEN_16" PNG "res\\arrowright_green_16.png"
+
+"ARROWRIGHT_GREEN_16_D" PNG "res\\arrowright_green_16_d.png"
+
+"ARROWRIGHT_GREEN_16_H" PNG "res\\arrowright_green_16_h.png"
+
+"ARROWRIGHT_GREEN_32" PNG "res\\arrowright_green_32.png"
+
+"ARROWRIGHT_GREEN_32_D" PNG "res\\arrowright_green_32_d.png"
+
+"ARROWRIGHT_GREEN_32_H" PNG "res\\arrowright_green_32_h.png"
+
+"BUG_ERROR_16" PNG "res\\bug_error_16.png"
+
+"COPY_CLIPBOARD_16" PNG "res\\copy_clipboard_16.png"
+
+"COPY_CLIPBOARD_16_D" PNG "res\\copy_clipboard_16_d.png"
+
+"COPY_CLIPBOARD_16_H" PNG "res\\copy_clipboard_16_h.png"
+
+"COPY_CLIPBOARD_32" PNG "res\\copy_clipboard_32.png"
+
+"COPY_CLIPBOARD_32_D" PNG "res\\copy_clipboard_32_d.png"
+
+"COPY_CLIPBOARD_32_H" PNG "res\\copy_clipboard_32_h.png"
+
+"CUT_CLIPBOARD_16" PNG "res\\cut_clipboard_16.png"
+
+"CUT_CLIPBOARD_16_D" PNG "res\\cut_clipboard_16_d.png"
+
+"CUT_CLIPBOARD_16_H" PNG "res\\cut_clipboard_16_h.png"
+
+"CUT_CLIPBOARD_32" PNG "res\\cut_clipboard_32.png"
+
+"CUT_CLIPBOARD_32_D" PNG "res\\cut_clipboard_32_d.png"
+
+"CUT_CLIPBOARD_32_H" PNG "res\\cut_clipboard_32_h.png"
+
+"DELETE_X_16" PNG "res\\delete_x_16.png"
+
+"DELETE_X_16_D" PNG "res\\delete_x_16_d.png"
+
+"DELETE_X_16_H" PNG "res\\delete_x_16_h.png"
+
+"DELETE_X_32" PNG "res\\delete_x_32.png"
+
+"DELETE_X_32_D" PNG "res\\delete_x_32_d.png"
+
+"DELETE_X_32_H" PNG "res\\delete_x_32_h.png"
+
+"GROUP_16" PNG "res\\group_16.png"
+
+"HOME_BROWN_16" PNG "res\\home_brown_16.png"
+
+"HOME_BROWN_16_D" PNG "res\\home_brown_16_d.png"
+
+"HOME_BROWN_16_H" PNG "res\\home_brown_16_h.png"
+
+"HOME_BROWN_32" PNG "res\\home_brown_32.png"
+
+"HOME_BROWN_32_D" PNG "res\\home_brown_32_d.png"
+
+"HOME_BROWN_32_H" PNG "res\\home_brown_32_h.png"
+
+"LOCK_16" PNG "res\\lock_16.png"
+
+"LOCK_OPEN_16" PNG "res\\lock_open_16.png"
+
+"NEW_DOCUMENT_16" PNG "res\\new_document_16.png"
+
+"NEW_DOCUMENT_16_D" PNG "res\\new_document_16_d.png"
+
+"NEW_DOCUMENT_16_H" PNG "res\\new_document_16_h.png"
+
+"NEW_DOCUMENT_32" PNG "res\\new_document_32.png"
+
+"NEW_DOCUMENT_32_D" PNG "res\\new_document_32_d.png"
+
+"NEW_DOCUMENT_32_H" PNG "res\\new_document_32_h.png"
+
+"OPEN_DOCUMENT_16" PNG "res\\open_document_16.png"
+
+"OPEN_DOCUMENT_16_D" PNG "res\\open_document_16_d.png"
+
+"OPEN_DOCUMENT_16_H" PNG "res\\open_document_16_h.png"
+
+"OPEN_DOCUMENT_32" PNG "res\\open_document_32.png"
+
+"OPEN_DOCUMENT_32_D" PNG "res\\open_document_32_d.png"
+
+"OPEN_DOCUMENT_32_H" PNG "res\\open_document_32_h.png"
+
+"PAINTCAN_16" PNG "res\\paintcan_16.png"
+
+"PASTE_CLIPBOARD_16" PNG "res\\paste_clipboard_16.png"
+
+"PASTE_CLIPBOARD_16_D" PNG "res\\paste_clipboard_16_d.png"
+
+"PASTE_CLIPBOARD_16_H" PNG "res\\paste_clipboard_16_h.png"
+
+"PASTE_CLIPBOARD_32" PNG "res\\paste_clipboard_32.png"
+
+"PASTE_CLIPBOARD_32_D" PNG "res\\paste_clipboard_32_d.png"
+
+"PASTE_CLIPBOARD_32_H" PNG "res\\paste_clipboard_32_h.png"
+
+"RECYCLE_16" PNG "res\\recycle_16.png"
+
+"REDO_16" PNG "res\\redo_16.png"
+
+"REDO_16_D" PNG "res\\redo_16_d.png"
+
+"REDO_16_H" PNG "res\\redo_16_h.png"
+
+"REDO_32" PNG "res\\redo_32.png"
+
+"REDO_32_D" PNG "res\\redo_32_d.png"
+
+"REDO_32_H" PNG "res\\redo_32_h.png"
+
+"REFRESH_DOC_16" PNG "res\\refresh_doc_16.png"
+
+"REFRESH_DOC_16_D" PNG "res\\refresh_doc_16_d.png"
+
+"REFRESH_DOC_16_H" PNG "res\\refresh_doc_16_h.png"
+
+"REFRESH_DOC_32" PNG "res\\refresh_doc_32.png"
+
+"REFRESH_DOC_32_D" PNG "res\\refresh_doc_32_d.png"
+
+"REFRESH_DOC_32_H" PNG "res\\refresh_doc_32_h.png"
+
+"REPORT_16" PNG "res\\report_16.png"
+
+"SAVE_16" PNG "res\\save_16.png"
+
+"SAVE_16_D" PNG "res\\save_16_d.png"
+
+"SAVE_16_H" PNG "res\\save_16_h.png"
+
+"SAVE_32" PNG "res\\save_32.png"
+
+"SAVE_32_D" PNG "res\\save_32_d.png"
+
+"SAVE_32_H" PNG "res\\save_32_h.png"
+
+"SCRIPT_GO_16" PNG "res\\script_go_16.png"
+
+"SHIELD_16" PNG "res\\shield_16.png"
+
+"SHIELD_ADD_16" PNG "res\\shield_add_16.png"
+
+"STOP_16" PNG "res\\stop_16.png"
+
+"STOP_16_D" PNG "res\\stop_16_d.png"
+
+"STOP_16_H" PNG "res\\stop_16_h.png"
+
+"STOP_32" PNG "res\\stop_32.png"
+
+"STOP_32_D" PNG "res\\stop_32_d.png"
+
+"STOP_32_H" PNG "res\\stop_32_h.png"
+
+"TABLE_16" PNG "res\\table_16.png"
+
+"TEXT_LIST_NUMBERS_16" PNG "res\\text_list_numbers_16.png"
+
+"UNDO_16" PNG "res\\undo_16.png"
+
+"UNDO_16_D" PNG "res\\undo_16_d.png"
+
+"UNDO_16_H" PNG "res\\undo_16_h.png"
+
+"UNDO_32" PNG "res\\undo_32.png"
+
+"UNDO_32_D" PNG "res\\undo_32_d.png"
+
+"UNDO_32_H" PNG "res\\undo_32_h.png"
+
+"UNGROUP_16" PNG "res\\ungroup_16.png"
+
+"WORLD_16" PNG "res\\world_16.png"
+
+133 PNG "res\\png_133.png"
+
+103 REGISTRY "res\\registry_103.rgs"
+
+106 REGISTRY "res\\registry_106.rgs"
+
+110 REGISTRY "res\\registry_110.rgs"
+
+112 REGISTRY "res\\registry_112.rgs"
+
+116 REGISTRY "res\\registry_116.rgs"
+
+119 REGISTRY "res\\registry_119.rgs"
+
+1 TYPELIB "res\\Roblox.tlb"
+
+STRINGTABLE
+BEGIN
+	128 "Roblox"
+	129 "ROBLOX\nPlace\nPlace\nPlaces (*.rbxl)\n.rbxl\nRoblox.Level\nRoblox.Level"
+	130 "&Undo %s\tCtrl+Z"
+	131 "&Redo %s\tCtrl+Y"
+	132 "Images (*.jpg;*.jpeg;*.tga;*.bmp;*.ico;*.png)|*.jpg; *.jpeg; *.tga; *.bmp; *.ico; *.png|All Files (*.*)|*.*||"
+	133 "Failed to insert object of type ""%s"". Did you spell it correctly?"
+	134 "Sounds (*.wav;*.mp3;*.mid;*.ogg;*.wma)|*.wav; *.mp3; *.mid; *.ogg; *.wma|All Files (*.*)|*.*||"
+	135 "Pointer"
+	136 "Changing settings may make ROBLOX unstable.\n\nWe recommend that you don't change any ROBLOX settings unless instructed to do so by a ROBLOX engineer."
+	137 "Failed to create Service object of type ""%s"""
+	138 "Object Browser\nObject Browser\n\n\n\n\n"
+	139 "General"
+	140 "Report"
+	141 "LDraw (*.ldr;*.dat;*.mpd;*.txt)|*.ldr; *.dat; *.mpd; *.txt|All Files (*.*)|*.*||"
+	142 "Some setting changes will not take effect until you restart ROBLOX"
+	143 "Resetting settings will not take effect until you restart ROBLOX"
+	180 "%s ""%s"""
+	181 "%s ""%s"" - %d items"
+	182 "%s - %d items"
+	183 "%d items"
+	184 "Models (*.rbxm)|*.rbxm|All Files (*.*)|*.*||"
+	185 "Browser\n\n\n\n\n\n"
+	186 "Frame"
+	187 "00000"
+	188 "Tex 000MB"
+	189 "VAR 000MB"
+	190 "000FPS"
+	191 "Toolbox"
+	192 "Output"
+	193 "Properties"
+	194 "Explorer"
+	196 "ROBLOX needs to quit for the installation to proceed"
+	197 "%1 - Printed on %2"
+	198 "Page %1"
+	200 "Chat"
+	207 "Script\n\n\n\n\n\n"
+	208 "Scripts (*.rbxs;*.lua;*.txt)|*.rbxs; *.lua; *.txt|All Files (*.*)|*.*||"
+	32805 "Save the selection as a Model to a file"
+	32807 "Pan Left\nPan Left"
+	32808 "Pan Right\nPan Right"
+	32809 "Tilt Up\nTilt Up"
+	32810 "Tilt Down\nTilt Down"
+	32811 "Zoom In\nZoom In"
+	32812 "Zoom Out\nZoom Out"
+	32813 "Zoom Extents\nZoom Extents"
+	32825 "Group parts or models\nGroup"
+	32826 "Ungroup models or parts\nUngroup"
+	32832 "Fills a part with a color\nFill With Color"
+	32833 "Picks up a color from a part\nPick Color"
+	32835 "Rotate objects\nRotate objects"
+	32836 "Tilt objects\nTilt Objects"
+	32855 "Move objects up\nMove up"
+	32856 "Move objects down\nMove down"
+	32860 "Reset\nReset"
+	32867 "Drag objects\nDrag"
+	32869 "Resize Object\nResize"
+	32871 "Move Objects\nMove on axis"
+	32872 "Set velocity\nVelocity"
+	32883 "Lock objects\nLock - prevent selection"
+	32884 "Anchor objects\nAnchor - prevent moving"
+	32887 "\nGlue Surface"
+	32888 "\nSmooth Surface"
+	32889 "\nWeld Surface"
+	32891 "\nMotor on Surface"
+	32892 "\nHinge on Surface"
+	32934 "Center View on Object\nLook At Object"
+	32935 "\nStuds"
+	32936 "\nInlet"
+	32950 "Save the active document to Roblox"
+	32951 "Save the selection as a Model to Roblox"
+	32966 "Test-run\nRun"
+	32967 "Pauses the run\nPause"
+	32968 "Stops and reloads the document\nReset"
+	32969 "Address\nAddress"
+	32970 "Go\nGo"
+	57344 "Roblox"
+	57345 "Ready"
+	57600 "Create a new document\nNew"
+	57601 "Open an existing document\nOpen"
+	57602 "Close the active document\nClose"
+	57603 "Save the active document\nSave"
+	57604 "Save the active document with a new name\nSave As"
+	57605 "Change the printing options\nPage Setup"
+	57606 "Change the printer and printing options\nPrint Setup"
+	57607 "Print the active document\nPrint"
+	57609 "Display full pages\nPrint Preview"
+	57616 "Open this document"
+	57617 "Open this document"
+	57618 "Open this document"
+	57619 "Open this document"
+	57620 "Open this document"
+	57621 "Open this document"
+	57622 "Open this document"
+	57623 "Open this document"
+	57624 "Open this document"
+	57625 "Open this document"
+	57626 "Open this document"
+	57627 "Open this document"
+	57628 "Open this document"
+	57629 "Open this document"
+	57630 "Open this document"
+	57631 "Open this document"
+	57632 "Erase the selection\nErase"
+	57633 "Erase everything\nErase All"
+	57634 "Copy the selection and put it on the Clipboard\nCopy"
+	57635 "Cut the selection and put it on the Clipboard\nCut"
+	57636 "Find the specified text\nFind"
+	57637 "Insert Clipboard contents\nPaste"
+	57640 "Repeat the last action\nRepeat"
+	57641 "Replace specific text with different text\nReplace"
+	57642 "Select the entire document\nSelect All"
+	57643 "Undo the last action\nUndo"
+	57644 "Redo the previously undone action\nRedo"
+	57648 "Open another window for the active document\nNew Window"
+	57649 "Arrange icons at the bottom of the window\nArrange Icons"
+	57650 "Arrange windows so they overlap\nCascade Windows"
+	57651 "Arrange windows as non-overlapping tiles\nTile Windows"
+	57652 "Arrange windows as non-overlapping tiles\nTile Windows"
+	57653 "Split the active window into panes\nSplit"
+	57664 "Display program information, version number and copyright\nAbout"
+	57665 "Quit the application; prompts to save documents\nExit"
+	57680 "Switch to the next window pane\nNext Pane"
+	57681 "Switch back to the previous window pane\nPrevious Pane"
+	59136 "EXT"
+	59137 "CAP"
+	59138 "NUM"
+	59139 "SCRL"
+	59140 "OVR"
+	59141 "REC"
+	59392 "Show or hide the toolbar\nToggle ToolBar"
+	59393 "Show or hide the status bar\nToggle StatusBar"
+	61184 "Change the window size"
+	61185 "Change the window position"
+	61186 "Reduce the window to an icon"
+	61187 "Enlarge the window to full size"
+	61188 "Switch to the next document window"
+	61189 "Switch to the previous document window"
+	61190 "Close the active window and prompts to save the documents"
+	61202 "Restore the window to normal size"
+	61203 "Activate Task List"
+	61215 "Activate this window"
+	61445 "Close print preview mode\nCancel Preview"
+END
+
+#include "XTToolkitPro.rc"
