@@ -20,6 +20,27 @@ const G3D::Color4& GuiItem::disabledFill()
 	return c;
 }
 
+// FUNCTION: ROBLOX 0x0058cb30
+const G3D::Color4& GuiItem::menuEnabledFill()
+{
+	static G3D::Color4 c(0.3f, 0.3f, 0.3f, 1.0f);
+	return c;
+}
+
+// FUNCTION: ROBLOX 0x0058cb70
+const G3D::Color4& GuiItem::menuDisabledFill()
+{
+	static G3D::Color4 c(0.6f, 0.6f, 0.6f, 1.0f);
+	return c;
+}
+
+// FUNCTION: ROBLOX 0x0058cbb0
+const G3D::Color4& GuiItem::menuSelect()
+{
+	static G3D::Color4 c(0.7f, 0.7f, 0.7f, 1.0f);
+	return c;
+}
+
 // FUNCTION: WEBSERVICE 0x100d1000
 // FUNCTION: ROBLOX 0x0058cbf0
 const G3D::Color4& GuiItem::translucentBackdrop()
@@ -84,6 +105,13 @@ void GuiItem::label2d(
 	);
 }
 
+// FUNCTION: ROBLOX 0x0058cd90
+void GuiRoot::render2dItem(Adorn* p_unk0x04, GuiItem* p_unk0x08)
+{
+	setCanvasSize(G3D::Vector2(G3D::Vector2int16(p_unk0x04->getWidth(), p_unk0x04->getHeight())));
+	p_unk0x08->render2d(p_unk0x04);
+}
+
 // FUNCTION: WEBSERVICE 0x100d1180
 // FUNCTION: ROBLOX 0x0058cde0
 void RelativePanel::init(const Layout& layout)
@@ -103,6 +131,44 @@ void TopMenuBar::init()
 	layoutStyle = Layout::HORIZONTAL;
 	backdropColor = G3D::Color4::clear();
 	visible = true;
+}
+
+// FUNCTION: ROBLOX 0x0058ced0
+void UnifiedWidget::init()
+{
+	setGuiSize(G3D::Vector2(140, 24));
+	menuState = NOTHING;
+}
+
+// FUNCTION: ROBLOX 0x0058cf00
+G3D::Vector2 UnifiedWidget::childOffset() const
+{
+	return G3D::Vector2(0, 28);
+}
+
+// FUNCTION: ROBLOX 0x0058cf20
+void UnifiedWidget::setMenuState(MenuState p_unk0x04)
+{
+	if (menuState != p_unk0x04) {
+		menuState = p_unk0x04;
+		onMenuStateChanged();
+	}
+}
+
+// FUNCTION: ROBLOX 0x0058cf40
+void TextDisplay::init()
+{
+	setGuiSize(G3D::Vector2(180, 30));
+	fontSize = 18;
+	fontColor = G3D::Color4(G3D::Color3::purple());
+	borderColor = G3D::Color4::clear();
+	align = Adorn::XALIGN_LEFT;
+}
+
+// FUNCTION: ROBLOX 0x0058cfd0
+void TextDisplay::render2d(Adorn* p_unk0x04)
+{
+	label2d(p_unk0x04, getLabel(), fontColor, borderColor, align);
 }
 
 // FUNCTION: WEBSERVICE 0x100d1270
@@ -142,11 +208,32 @@ G3D::Vector2 RelativePanel::getPosition() const
 	return canvas.positionChild(me, xLocation, yLocation).low;
 }
 
+// FUNCTION: ROBLOX 0x0058d240
+G3D::Vector2 PercentPanel::getPosition() const
+{
+	Rect canvas(G3D::Vector2::zero(), GuiRoot::getCanvasSize());
+	G3D::Vector2 pixelPosition = GuiRoot::toPixelSize(position);
+
+	return canvas.positionPoint(pixelPosition, xLocation, yLocation);
+}
+
 // FUNCTION: WEBSERVICE 0x100d14d0
 // FUNCTION: ROBLOX 0x0058d330
 GuiItem::GuiItem() : guiSize(0, 0)
 {
 	setName("Unnamed GuiItem");
+}
+
+// FUNCTION: ROBLOX 0x0058d420 FOLDED
+const GuiItem* GuiItem::getGuiItem(int p_unk0x04) const
+{
+	return dynamic_cast<const GuiItem*>((*getChildren())[p_unk0x04].get());
+}
+
+// FUNCTION: ROBLOX 0x0058d420 FOLDED
+GuiItem* GuiItem::getGuiItem(int p_unk0x04)
+{
+	return dynamic_cast<GuiItem*>((*getChildren())[p_unk0x04].get());
 }
 
 // FUNCTION: WEBSERVICE 0x100d15f0
@@ -169,6 +256,18 @@ void GuiRoot::render2d(Adorn* adorn)
 		if (item != NULL) {
 			item->render2d(adorn);
 		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x0058d620
+TopMenuBar::TopMenuBar(const std::string& p_unk0x04, Layout::Style p_unk0x08, bool p_unk0x0c)
+{
+	init();
+	setName(p_unk0x04);
+	layoutStyle = p_unk0x08;
+
+	if (p_unk0x0c) {
+		backdropColor = translucentBackdrop();
 	}
 }
 
@@ -257,6 +356,105 @@ void TopMenuBar::render2d(Adorn* adorn)
 	}
 }
 
+// FUNCTION: ROBLOX 0x0058dab0
+int UnifiedWidget::getFontSize() const
+{
+	return 10;
+}
+
+// FUNCTION: ROBLOX 0x0058dac0
+void UnifiedWidget::render2dMe(Adorn* p_unk0x04)
+{
+	p_unk0x04->rect2d(getMyRect2D(), menuState != NOTHING ? menuSelect() : G3D::Color4(G3D::Color3::white()));
+	p_unk0x04->outlineRect2d(getMyRect2D(), 1.0f, G3D::Color4(G3D::Color3::black()));
+	label2d(p_unk0x04, getName(), G3D::Color4(G3D::Color3::black()), G3D::Color4::clear(), Adorn::XALIGN_CENTER);
+}
+
+// FUNCTION: ROBLOX 0x0058dbd0
+void UnifiedWidget::render2dChildren(Adorn* p_unk0x04)
+{
+	if (showChildren()) {
+		for (unsigned int i = 0; i < numChildren(); ++i) {
+			GuiItem* item = getGuiItem(i);
+
+			if (item != NULL) {
+				item->render2d(p_unk0x04);
+			}
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x0058dc50
+void UnifiedWidget::render2d(Adorn* p_unk0x04)
+{
+	if (isVisible()) {
+		render2dMe(p_unk0x04);
+		render2dChildren(p_unk0x04);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0058dc80
+G3D::Vector2 UnifiedWidget::firstChildPosition() const
+{
+	G3D::Vector2 position = getPosition();
+	G3D::Vector2 size = getSize();
+
+	float offset = size.x + 4;
+	position.x += offset;
+
+	int step = (int) size.y + 4;
+	int rows = ((int) GuiRoot::getCanvasSize().y - 120) / step;
+	int row = ((int) position.y - 20) / step;
+	int half = (int) numChildren() / 2;
+	int lastRow = rows - half;
+
+	row = std::max(half, row);
+	row = std::min(lastRow, row);
+	position.y = (float) ((row - half) * step + 20);
+
+	return position;
+}
+
+// FUNCTION: ROBLOX 0x0058dd60
+G3D::Vector2 UnifiedWidget::getChildPosition(const GuiItem* p_unk0x04) const
+{
+	G3D::Vector2 position = firstChildPosition();
+
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		const GuiItem* item = getGuiItem(i);
+
+		if (item != NULL) {
+			if (item == p_unk0x04) {
+				return position;
+			}
+
+			position += childOffset();
+		}
+	}
+
+	return position;
+}
+
+// FUNCTION: ROBLOX 0x0058de10
+TextDisplay::TextDisplay(const std::string& p_unk0x04, const std::string& p_unk0x08)
+{
+	init();
+	setName(p_unk0x04);
+	label = p_unk0x08;
+}
+
+// FUNCTION: ROBLOX 0x0058dee0
+int TextDisplay::getFontSize() const
+{
+	return fontSize;
+}
+
+// FUNCTION: ROBLOX 0x0058def0
+std::string TextDisplay::getLabel() const
+{
+	return label;
+}
+
 // FUNCTION: WEBSERVICE 0x100d1ae0
 // FUNCTION: ROBLOX 0x0058e010
 void GuiItem::loseFocus()
@@ -277,6 +475,68 @@ void GuiItem::onDescendentRemoving(const shared_ptr<Instance>& instance)
 	}
 
 	Instance::onDescendentRemoving(instance);
+}
+
+// FUNCTION: ROBLOX 0x0058e0b0
+GuiResponse UnifiedWidget::processShown_InTitle(const GuiEvent& p_unk0x04)
+{
+	loseFocus();
+
+	if (menuState == SHOWN) {
+		if (p_unk0x04.eventType == UIEvent::MOUSE_LEFT_BUTTON_UP) {
+			setMenuState(HOVER);
+		}
+	}
+	else if (p_unk0x04.eventType == UIEvent::MOUSE_LEFT_BUTTON_UP) {
+		setMenuState(SHOWN);
+	}
+
+	return GuiResponse::used();
+}
+
+// FUNCTION: ROBLOX 0x0058e110
+GuiResponse UnifiedWidget::processHover(const GuiEvent& p_unk0x04)
+{
+	loseFocus();
+
+	if (getMyRect().pointInRect(p_unk0x04.mousePosition)) {
+		switch (p_unk0x04.eventType) {
+		case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
+			setMenuState(SHOWN_APPEARING);
+			break;
+		case UIEvent::MOUSE_LEFT_BUTTON_UP:
+			setMenuState(SHOWN);
+			break;
+		}
+
+		return GuiResponse::used();
+	}
+
+	setMenuState(NOTHING);
+	return GuiResponse::notUsed();
+}
+
+// FUNCTION: ROBLOX 0x0058e200
+GuiResponse UnifiedWidget::processNothing(const GuiEvent& p_unk0x04)
+{
+	loseFocus();
+
+	if (getMyRect().pointInRect(p_unk0x04.mousePosition)) {
+		switch (p_unk0x04.eventType) {
+		case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
+		case UIEvent::MOUSE_LEFT_BUTTON_UP:
+			setMenuState(SHOWN_APPEARING);
+			return GuiResponse::used();
+		case UIEvent::MOUSE_MOVE:
+			setMenuState(HOVER);
+			return GuiResponse::used();
+		}
+
+		return GuiResponse::notUsed();
+	}
+
+	setMenuState(NOTHING);
+	return GuiResponse::notUsed();
 }
 
 // FUNCTION: WEBSERVICE 0x100d1b80
@@ -345,6 +605,74 @@ GuiResponse TopMenuBar::process(const GuiEvent& event)
 
 		if (backdropColor.a > 0 && event.isMouseEvent() && getMyRect().pointInRect(event.mousePosition)) {
 			return GuiResponse::used();
+		}
+	}
+
+	return GuiResponse::notUsed();
+}
+
+// STUB: ROBLOX 0x0058e640
+GuiResponse UnifiedWidget::processShown_OutOfTitle(const GuiEvent& p_unk0x04)
+{
+	UnifiedWidget* oldFocus = dynamic_cast<UnifiedWidget*>(getFocus());
+
+	switch (p_unk0x04.eventType) {
+	case UIEvent::MOUSE_LEFT_BUTTON_DOWN:
+	case UIEvent::MOUSE_LEFT_BUTTON_UP: {
+		GuiResponse response = GuiItem::process(p_unk0x04);
+
+		if (response.wasNotUsed() || response.wasFinished()) {
+			if (response.wasFinished()) {
+				loseFocus();
+			}
+
+			setMenuState(NOTHING);
+		}
+
+		return response;
+	}
+	case UIEvent::MOUSE_MOVE: {
+		MenuState state = oldFocus != NULL ? oldFocus->getMenuState() : NOTHING;
+
+		GuiItem::process(p_unk0x04);
+
+		if (oldFocus != NULL) {
+			UnifiedWidget* newFocus = dynamic_cast<UnifiedWidget*>(getFocus());
+
+			if (newFocus != NULL && newFocus != oldFocus) {
+				newFocus->setMenuState(state);
+			}
+		}
+
+		return GuiResponse::used();
+	}
+	}
+
+	return GuiResponse::notUsed();
+}
+
+// FUNCTION: ROBLOX 0x0058e750
+GuiResponse UnifiedWidget::processShown(const GuiEvent& p_unk0x04)
+{
+	if (getMyRect().pointInRect(p_unk0x04.mousePosition)) {
+		return processShown_InTitle(p_unk0x04);
+	}
+
+	return processShown_OutOfTitle(p_unk0x04);
+}
+
+// STUB: ROBLOX 0x0058e7e0
+GuiResponse UnifiedWidget::process(const GuiEvent& p_unk0x04)
+{
+	if (isVisible() && p_unk0x04.isMouseEvent()) {
+		switch (menuState) {
+		case NOTHING:
+			return processNothing(p_unk0x04);
+		case HOVER:
+			return processHover(p_unk0x04);
+		case SHOWN_APPEARING:
+		case SHOWN:
+			return processShown(p_unk0x04);
 		}
 	}
 

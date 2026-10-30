@@ -55,5 +55,6 @@ targets:
       - reccmp/roblox-statics.csv
       - reccmp/roblox-strings.csv
       - reccmp/roblox-synthetic.csv
+      - reccmp/roblox-client.csv
     report:
       icon: assets/roblox.png

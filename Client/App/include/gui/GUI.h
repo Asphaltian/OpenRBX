@@ -89,7 +89,7 @@ public:
 	static const G3D::Color4& toolboxColor();
 
 protected:
-	GuiItem* getFocus();
+	GuiItem* getFocus() { return focus.get(); }
 	void loseFocus();
 
 	Rect getMyRect() const;
@@ -154,6 +154,8 @@ public:
 	// FUNCTION: WEBSERVICE 0x100c7690
 	// FUNCTION: ROBLOX 0x005e1880
 	TopMenuBar() { init(); }
+	TopMenuBar(const std::string& p_unk0x04, Layout::Style p_unk0x08, bool p_unk0x0c);
+	TopMenuBar(const std::string& p_unk0x04, Layout::Style p_unk0x08, G3D::Color4 p_unk0x0c);
 
 	virtual GuiResponse process(const GuiEvent& event);
 	virtual void render2d(Adorn* adorn);
@@ -209,6 +211,106 @@ protected:
 };
 
 DECOMP_SIZE_ASSERT(RelativePanel, 0x130)
+
+// SIZE 0x134
+class PercentPanel : public TopMenuBar
+{
+public:
+	PercentPanel(Rect::Location p_unk0x04, Rect::Location p_unk0x08, const G3D::Vector2 p_unk0x0c);
+
+	virtual G3D::Vector2 getPosition() const;
+
+protected:
+	Rect::Location xLocation; // 0x124
+	Rect::Location yLocation; // 0x128
+	G3D::Vector2 position;    // 0x12c
+};
+
+DECOMP_SIZE_ASSERT(PercentPanel, 0x134)
+
+// SIZE 0x110
+class UnifiedWidget : public GuiItem
+{
+public:
+	enum MenuState
+	{
+		NOTHING = 0,
+		HOVER = 1,
+		SHOWN_APPEARING = 2,
+		SHOWN = 3
+	};
+
+private:
+	MenuState menuState; // 0x10c
+
+	GuiResponse processShown_InTitle(const GuiEvent& p_unk0x04);
+	GuiResponse processShown_OutOfTitle(const GuiEvent& p_unk0x04);
+	GuiResponse processNothing(const GuiEvent& p_unk0x04);
+	GuiResponse processHover(const GuiEvent& p_unk0x04);
+	GuiResponse processShown(const GuiEvent& p_unk0x04);
+	GuiResponse processKey(const GuiEvent& p_unk0x04);
+	void render2dChildren(Adorn* p_unk0x04);
+	virtual G3D::Vector2 getChildPosition(const GuiItem* p_unk0x04) const;
+	virtual bool canLoseFocus() { return true; }
+	virtual void onLoseFocus() { menuState = NOTHING; }
+	virtual int getFontSize() const;
+	void init();
+
+protected:
+	bool showChildren() { return menuState >= SHOWN_APPEARING; }
+	virtual void onMenuStateChanged() {}             // vtable+0x64
+	virtual G3D::Vector2 firstChildPosition() const; // vtable+0x68
+	virtual G3D::Vector2 childOffset() const;        // vtable+0x6c
+	virtual void render2dMe(Adorn* p_unk0x04);       // vtable+0x70
+
+public:
+	UnifiedWidget(const std::string& p_unk0x04);
+	UnifiedWidget();
+
+	MenuState getMenuState() const { return menuState; }
+	void setMenuState(MenuState p_unk0x04);
+
+	virtual GuiResponse process(const GuiEvent& p_unk0x04);
+	virtual void render2d(Adorn* p_unk0x04);
+};
+
+DECOMP_SIZE_ASSERT(UnifiedWidget, 0x110)
+
+// SIZE 0x150
+class TextDisplay : public GuiItem
+{
+private:
+	void init();
+
+protected:
+	std::string label;       // 0x10c
+	int fontSize;            // 0x128
+	G3D::Color4 fontColor;   // 0x12c
+	G3D::Color4 borderColor; // 0x13c
+	Adorn::XAlign align;     // 0x14c
+
+	virtual int getFontSize() const;
+	virtual std::string getLabel() const; // vtable+0x64
+
+public:
+	TextDisplay(const std::string& p_unk0x04, const std::string& p_unk0x08);
+	TextDisplay();
+
+	virtual void render2d(Adorn* p_unk0x04);
+
+	void setLabel(const std::string& p_unk0x04);
+	void setFontSize(int p_unk0x04);
+	void setFontColor(const G3D::Color4& p_unk0x04);
+	void setBorderColor(const G3D::Color4& p_unk0x04);
+	void setAlign(Adorn::XAlign p_unk0x04);
+
+	// SYNTHETIC: ROBLOX 0x0058dfa0
+	// RBX::TextDisplay::~TextDisplay
+	// SYNTHETIC: ROBLOX 0x0058dff0
+	// RBX::TextDisplay::`scalar deleting destructor'
+};
+
+DECOMP_SIZE_ASSERT(TextDisplay, 0x150)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021c440
