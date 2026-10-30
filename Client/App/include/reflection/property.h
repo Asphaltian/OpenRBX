@@ -998,6 +998,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1012d3e0
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::PropDescriptor<RBX::SpecialShape,G3D::Vector3><G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1012d480
+	// STUB: ROBLOX 0x005b3d70
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::MeshId>::PropDescriptor<RBX::SpecialShape,RBX::MeshId><RBX::MeshId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::MeshId const &)>
 	// TEMPLATE: WEBSERVICE 0x1012d520
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::TextureId>::PropDescriptor<RBX::SpecialShape,RBX::TextureId><RBX::TextureId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::TextureId const &)>
@@ -1022,6 +1023,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1009e170
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::PropDescriptor<RBX::PartInstance,G3D::Vector3><G3D::Vector3 const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1009e230
+	// STUB: ROBLOX 0x005b0d10
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Color3>::PropDescriptor<RBX::PartInstance,G3D::Color3><G3D::Color3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Color3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1009e530
 	// STUB: ROBLOX 0x005b0e90

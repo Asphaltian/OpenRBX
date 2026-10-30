@@ -211,6 +211,7 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // SYNTHETIC: WEBSERVICE 0x102242e0
 // RBX::`dynamic atexit destructor for 'prop_MaxVelocity''
 // SYNTHETIC: WEBSERVICE 0x100e4c60
+// SYNTHETIC: ROBLOX 0x006181f0
 // RBX::Feature::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x100e4c80
 // SYNTHETIC: ROBLOX 0x00618210

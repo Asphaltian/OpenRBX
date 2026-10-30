@@ -114,6 +114,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1005b840
 	// RBX::Creatable<RBX::Instance>::create<RBX::PartInstance>
 	// FUNCTION: WEBSERVICE 0x1005bab0
+	// STUB: ROBLOX 0x004aa520
 	// RBX::Creatable<RBX::Instance>::create<RBX::Humanoid>
 	// TEMPLATE: WEBSERVICE 0x10062870
 	// RBX::Creatable<RBX::Instance>::create<RBX::DebugSettings>
@@ -123,6 +124,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100659d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::StatsService>
 	// TEMPLATE: WEBSERVICE 0x100666f0
+	// STUB: ROBLOX 0x004ceb30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<bool>,bool const *>
 	// TEMPLATE: WEBSERVICE 0x10066770
 	// TEMPLATE: ROBLOX 0x00572f70
@@ -142,6 +144,7 @@ public:
 	// STUB: ROBLOX 0x00610d80 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::StarterPackService>
 	// TEMPLATE: WEBSERVICE 0x1006db70
+	// STUB: ROBLOX 0x004a89d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::HopperBin>
 	// TEMPLATE: WEBSERVICE 0x1006de90
 	// STUB: ROBLOX 0x00610d80 FOLDED
@@ -170,6 +173,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10074260
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Players>
 	// TEMPLATE: WEBSERVICE 0x10075300
+	// STUB: ROBLOX 0x004c8de0
 	// RBX::Creatable<RBX::Instance>::create<RBX::JointsService>
 	// TEMPLATE: WEBSERVICE 0x10076300
 	// TEMPLATE: ROBLOX 0x00591a90
@@ -181,12 +185,16 @@ public:
 	// STUB: ROBLOX 0x004caa30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Weld>
 	// TEMPLATE: WEBSERVICE 0x10076b00
+	// STUB: ROBLOX 0x004cacc0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Glue>
 	// TEMPLATE: WEBSERVICE 0x10076d70
+	// STUB: ROBLOX 0x004caf50
 	// RBX::Creatable<RBX::Instance>::create<RBX::Rotate>
 	// TEMPLATE: WEBSERVICE 0x10076fe0
+	// STUB: ROBLOX 0x004cb1e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateP>
 	// TEMPLATE: WEBSERVICE 0x10077250
+	// STUB: ROBLOX 0x004cb470
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateV>
 	// TEMPLATE: WEBSERVICE 0x100774c0
 	// STUB: ROBLOX 0x004cb700
@@ -195,6 +203,7 @@ public:
 	// STUB: ROBLOX 0x005cc360 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100779a0
+	// STUB: ROBLOX 0x004aa1a0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Teams>
 	// TEMPLATE: WEBSERVICE 0x10077c10
 	// RBX::Creatable<RBX::Instance>::create<RBX::Accoutrement>
@@ -209,12 +218,16 @@ public:
 	// TEMPLATE: ROBLOX 0x005c7820
 	// RBX::Creatable<RBX::Instance>::create<StockSound>
 	// TEMPLATE: WEBSERVICE 0x10089930
+	// STUB: ROBLOX 0x004a9760
 	// RBX::Creatable<RBX::Instance>::create<RBX::ShirtGraphic>
 	// TEMPLATE: WEBSERVICE 0x10089ba0
+	// STUB: ROBLOX 0x004a99f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Shirt>
 	// TEMPLATE: WEBSERVICE 0x10089e10
+	// STUB: ROBLOX 0x004a9c80
 	// RBX::Creatable<RBX::Instance>::create<RBX::BodyColors>
 	// TEMPLATE: WEBSERVICE 0x1008a080
+	// STUB: ROBLOX 0x004a9f10
 	// RBX::Creatable<RBX::Instance>::create<RBX::Skin>
 	// TEMPLATE: WEBSERVICE 0x1008a2f0
 	// TEMPLATE: ROBLOX 0x005cad70
@@ -267,11 +280,13 @@ public:
 	// TEMPLATE: ROBLOX 0x005cd140
 	// RBX::Creatable<RBX::Instance>::create<RBX::DebrisService>
 	// TEMPLATE: WEBSERVICE 0x1008d2f0
+	// STUB: ROBLOX 0x004a6dc0
 	// RBX::Creatable<RBX::Instance>::create<RBX::TimerService>
 	// FUNCTION: WEBSERVICE 0x1008d560
 	// FUNCTION: ROBLOX 0x005cd3b0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Seat>
 	// TEMPLATE: WEBSERVICE 0x1008d7d0
+	// STUB: ROBLOX 0x004a9240
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpawnLocation>
 	// TEMPLATE: WEBSERVICE 0x1008da40
 	// STUB: ROBLOX 0x004a94d0

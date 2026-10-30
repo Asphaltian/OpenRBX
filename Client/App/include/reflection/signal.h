@@ -411,6 +411,7 @@ protected:
 		// STUB: ROBLOX 0x004ab100
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(float)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x10076130
+		// STUB: ROBLOX 0x004c9ea0
 		// RBX::Reflection::SignalDescImpl<0,void __cdecl(void)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100e2710
 		// TEMPLATE: ROBLOX 0x00625820

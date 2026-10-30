@@ -44,6 +44,7 @@ public:
 	JointsService() : world(NULL) { setName("JointsService"); }
 
 	// SYNTHETIC: WEBSERVICE 0x10075090
+	// STUB: ROBLOX 0x004c7e30
 	// RBX::JointsService::~JointsService
 
 	// SYNTHETIC: WEBSERVICE 0x100750f0

@@ -190,6 +190,7 @@ public:
 	// SYNTHETIC: WEBSERVICE 0x10225870
 	// `dynamic atexit destructor for 'RBX::Render::Mesh::tangentVAR''
 	// SYNTHETIC: WEBSERVICE 0x102258b0
+	// STUB: ROBLOX 0x0048b590
 	// `dynamic atexit destructor for 'RBX::Render::Mesh::vertexVAR''
 	// clang-format on
 	static void flushVAR();

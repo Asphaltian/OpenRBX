@@ -56,6 +56,7 @@ class __declspec(novtable) GuidItem
 	struct StaticData
 	{
 		// SYNTHETIC: WEBSERVICE 0x1004a660
+		// STUB: ROBLOX 0x004b2d20
 		// RBX::GuidItem<RBX::Instance>::StaticData::StaticData
 
 		typedef std::map<Guid::Data, T*> Map;
