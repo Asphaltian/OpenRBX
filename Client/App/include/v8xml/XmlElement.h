@@ -304,6 +304,7 @@ public:
 	XmlElement(const RBX::Name& tag) : XmlNameValuePair(tag) {}
 
 	// FUNCTION: WEBSERVICE 0x10048200
+	// STUB: ROBLOX 0x004105d0
 	~XmlElement()
 	{
 		XmlAttribute* attribute = attributes.firstChild();
