@@ -626,11 +626,16 @@ address,type,symbol,name,module,size
 006fa030,library,?OnBeforeExchange@CXTPPropExchangeXMLNode@@UAEHXZ,,,
 006ffd00,library,??0CXTColorDialog@@QAE@KKKPAVCWnd@@@Z,,,
 00804ef4,library,??_7?$CXTPFrameWndBase@VCMDIFrameWnd@@@@6B@,,,
+00401110,function,,,,0xf
 0041e020,function,,,,0x2fc
 0042a970,function,,,,0x169
 00434730,function,,,,0xd0
 0058e7e0,function,,,,0xb8
 006584a0,function,,,,0x8c
+007feab8,global,?classCAboutRobloxDialog@CAboutRobloxDialog@@2UCRuntimeClass@@B,,,
+007fead8,global,??_7CAboutRobloxDialog@@6BCDHtmlEventSink@@@,,,
+007feb04,global,??_7CAboutRobloxDialog@@6BCDialog@@@,,,
+007fecb8,global,messageMap___CAboutRobloxDialog::GetThisMessageMap,,,
 007ff11c,global,??_7bad_alloc@std@@6B@,,,
 007ff128,global,??_7logic_error@std@@6B@,,,
 007ff134,global,??_7length_error@std@@6B@,,,
@@ -1514,6 +1519,7 @@ address,type,symbol,name,module,size
 008612c8,global,??_7?$sp_counted_impl_p@Vsignal_base_impl@detail@signals@boost@@@detail@boost@@6B@,,,
 008612dc,global,??_7?$sp_counted_impl_p@Ubasic_connection@detail@signals@boost@@@detail@boost@@6B@,,,
 00863c5c,global,??_7GFont@G3D@@6B@,,,
+00912154,global,_dhtmlEventEntries___CAboutRobloxDialog::GetDHtmlEventMap,,,
 00918870,global,?classCPatchedControlComboBox@CPatchedControlComboBox@@2UCRuntimeClass@@A,,,
 0091b92c,global,?classCRobloxControlColorSelector@CRobloxControlColorSelector@@2UCRuntimeClass@@A,,,
 0091b974,global,?_eventsinkEntryCount@CRobloxDHtmlDialog@@0IA,,,

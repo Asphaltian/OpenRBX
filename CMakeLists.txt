@@ -578,6 +578,7 @@ add_custom_target(rbxgs DEPENDS webservice)
 
 if (MSVC_FOR_DECOMP)
   add_executable(roblox WIN32
+    Client/win/AboutRobloxDialog.cpp
     Client/win/BrowserView.cpp
     Client/win/ChildFrm.cpp
     Client/win/ErrorUploader.cpp

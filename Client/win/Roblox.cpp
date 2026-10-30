@@ -1,5 +1,6 @@
 #include "Roblox.h"
 
+#include "AboutRobloxDialog.h"
 #include "BrowserView.h"
 #include "ChildFrm.h"
 #include "MainFrm.h"
@@ -206,10 +207,11 @@ BOOL CRobloxApp::FUN_0044dac0(bool p_unk0x04)
 	return TRUE;
 }
 
-// STUB: ROBLOX 0x0044dc00
+// FUNCTION: ROBLOX 0x0044dc00
 void CRobloxApp::OnAppAbout()
 {
-	STUB(0x44dc00);
+	CAboutRobloxDialog aboutDlg;
+	aboutDlg.DoModal();
 }
 
 // STUB: ROBLOX 0x0044dc90
