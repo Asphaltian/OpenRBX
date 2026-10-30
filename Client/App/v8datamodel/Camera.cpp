@@ -370,7 +370,7 @@ void Camera::setCameraType(CameraType value)
 }
 
 // FUNCTION: WEBSERVICE 0x100c44b0
-// STUB: ROBLOX 0x005d8010
+// FUNCTION: ROBLOX 0x005d8010
 void Camera::setCameraSubject(Instance* newSubject)
 {
 	if (newSubject != cameraSubject.get() && dynamic_cast<ICameraSubject*>(newSubject)) {

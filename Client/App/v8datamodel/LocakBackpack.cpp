@@ -243,7 +243,7 @@ void LocalBackpack::onLocalPlayerAdded(Network::Player* added)
 }
 
 // FUNCTION: WEBSERVICE 0x100d6ef0
-// FUNCTION: ROBLOX 0x0060dfd0
+// STUB: ROBLOX 0x0060dfd0
 void LocalBackpack::onLocalBackpackAdded(Backpack* added)
 {
 	localBackpack = shared_from(added);

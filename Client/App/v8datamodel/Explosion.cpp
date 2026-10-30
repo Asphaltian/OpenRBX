@@ -109,7 +109,7 @@ void Explosion::setBlastRadius(float _blastRadius)
 }
 
 // FUNCTION: WEBSERVICE 0x100e3750
-// STUB: ROBLOX 0x00626860
+// FUNCTION: ROBLOX 0x00626860
 void Explosion::signalBlast(const G3D::Array<Primitive*>& primitives)
 {
 	if (!signal_Hit.empty(this)) {

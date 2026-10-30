@@ -196,7 +196,7 @@ public:
 	virtual ~Replicator();
 
 	// FUNCTION: WEBSERVICE 0x1019f930
-	// STUB: ROBLOX 0x004c64e0
+	// FUNCTION: ROBLOX 0x004c64e0
 	boost::shared_ptr<Instance> getPlayer() { return shared_from(findTargetPlayer()); }
 
 	static Reflection::BoundProp<int, 1> prop_maxDataModelSendBuffer;

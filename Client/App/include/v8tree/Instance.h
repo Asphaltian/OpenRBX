@@ -62,7 +62,7 @@ private:
 	friend class RaiseDescendentAdded2;
 
 	// FUNCTION: WEBSERVICE 0x10049ad0
-	// STUB: ROBLOX 0x00577770
+	// FUNCTION: ROBLOX 0x00577770
 	// RBX::DescendentAdded::DescendentAdded
 
 	DescendentAdded(Instance* instance, Instance* parent) : instance(shared_from(instance)), parent(shared_from(parent))
@@ -312,7 +312,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004a340
-	// STUB: ROBLOX 0x00577eb0
+	// TEMPLATE: ROBLOX 0x00577eb0
 	// ??$for_eachChild@VRaiseDescendentAdded2@RBX@@@Instance@RBX@@QBEXVRaiseDescendentAdded2@1@@Z
 	// TEMPLATE: WEBSERVICE 0x1005af10
 	// STUB: ROBLOX 0x004a6400

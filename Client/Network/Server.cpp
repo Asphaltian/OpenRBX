@@ -198,7 +198,7 @@ bool Server::serverIsPresent(const Instance* context, bool testInDatamodel)
 }
 
 // FUNCTION: WEBSERVICE 0x1019a820
-// STUB: ROBLOX 0x004bca10
+// FUNCTION: ROBLOX 0x004bca10
 void Server::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	if (oldProvider) {

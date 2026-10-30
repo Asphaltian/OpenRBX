@@ -26,7 +26,6 @@ DECOMP_SIZE_ASSERT(Object, 0x04)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10009240
-// TEMPLATE: ROBLOX 0x004a7290 FOLDED
 // RBX::shared_from<RBX::DataModel>
 // TEMPLATE: WEBSERVICE 0x1006c2e0
 // TEMPLATE: ROBLOX 0x0065f1f0 FOLDED
@@ -36,10 +35,10 @@ DECOMP_SIZE_ASSERT(Object, 0x04)
 // RBX::shared_from<RBX::Instance const >
 // TEMPLATE: WEBSERVICE 0x1016ef10
 // TEMPLATE: ROBLOX 0x0065f1f0 FOLDED
-// RBX::shared_from<RBX::GuiItem>
+// ??$shared_from@VGuiItem@RBX@@@RBX@@YA?AV?$shared_ptr@VGuiItem@RBX@@@boost@@PAVGuiItem@0@@Z
 // TEMPLATE: WEBSERVICE 0x1019f630
 // TEMPLATE: ROBLOX 0x004a7290 FOLDED
-// RBX::shared_from<RBX::Network::Replicator>
+// ??$shared_from@VReplicator@Network@RBX@@@RBX@@YA?AV?$shared_ptr@VReplicator@Network@RBX@@@boost@@PAVReplicator@Network@0@@Z
 // clang-format on
 template <class T>
 boost::shared_ptr<T> shared_from(T* r)
@@ -502,7 +501,7 @@ protected:
 	AbstractFactoryProduct() {}
 
 	// TEMPLATE: WEBSERVICE 0x10009a60
-	// STUB: ROBLOX 0x00406150
+	// TEMPLATE: ROBLOX 0x00406150
 	// RBX::AbstractFactoryProduct<RBX::Instance>::getCreators
 	static std::map<const Name*, const ICreator*>& getCreators()
 	{

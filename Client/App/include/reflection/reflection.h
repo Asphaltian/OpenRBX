@@ -22,7 +22,7 @@ namespace Reflection {
 // TEMPLATE: WEBSERVICE 0x10008b10
 // RBX::Reflection::Described<ThumbnailGenerator,&sThumbnailGenerator,RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10008d50
-// STUB: ROBLOX 0x00419fb0
+// TEMPLATE: ROBLOX 0x00419fb0
 // RBX::Reflection::Described<RBX::Instance,&RBX::sInstance,RBX::Reflection::DescribedBase>::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10045560
 // TEMPLATE: ROBLOX 0x005db300

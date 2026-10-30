@@ -290,7 +290,7 @@ void Workspace::breakJoints(boost::shared_ptr<const std::vector<boost::shared_pt
 }
 
 // FUNCTION: WEBSERVICE 0x1006c6f0
-// STUB: ROBLOX 0x005b5cb0
+// FUNCTION: ROBLOX 0x005b5cb0
 void clearEmptiedModels(boost::shared_ptr<Instance> test, Instance* workspace)
 {
 	if (test.get() != workspace) {
@@ -315,7 +315,7 @@ void clearEmptiedModels(boost::shared_ptr<Instance> test, Instance* workspace)
 }
 
 // FUNCTION: WEBSERVICE 0x1006c890
-// STUB: ROBLOX 0x005b5e50
+// FUNCTION: ROBLOX 0x005b5e50
 void Workspace::handleFallenParts(const G3D::Array<boost::shared_ptr<PartInstance> >& fallenParts)
 {
 	for (int i = 0; i < fallenParts.size(); ++i) {
@@ -765,7 +765,7 @@ WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* 
 }
 
 // FUNCTION: WEBSERVICE 0x10070ff0
-// FUNCTION: ROBLOX 0x005b9400
+// STUB: ROBLOX 0x005b9400
 void Workspace::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);

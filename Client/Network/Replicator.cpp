@@ -1011,7 +1011,7 @@ void Replicator::requestCharacter()
 }
 
 // FUNCTION: WEBSERVICE 0x101a3f80
-// STUB: ROBLOX 0x004cc6f0
+// FUNCTION: ROBLOX 0x004cc6f0
 void Replicator::readInstanceDelete(RakNet::BitStream& inBitstream)
 {
 	Instance* instance;
@@ -1091,7 +1091,7 @@ bool Replicator::sendPhysicsPacket()
 }
 
 // FUNCTION: WEBSERVICE 0x101a4da0
-// STUB: ROBLOX 0x004cd730
+// FUNCTION: ROBLOX 0x004cd730
 PluginReceiveResult Replicator::OnReceive_ID_TIMESTAMP(Packet* packet)
 {
 	RakNet::BitStream inBitstream(packet->data, packet->length, false);
@@ -1227,7 +1227,7 @@ PluginReceiveResult Replicator::OnReceive_ID_TIMESTAMP(Packet* packet)
 }
 
 // FUNCTION: WEBSERVICE 0x101a5840
-// FUNCTION: ROBLOX 0x004ce4f0
+// STUB: ROBLOX 0x004ce4f0
 void Peer::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	Stats::StatsService* stats = oldProvider ? oldProvider->find<Stats::StatsService>() : NULL;
@@ -1347,7 +1347,7 @@ void Replicator::ReplicatorStatsItem::update()
 }
 
 // FUNCTION: WEBSERVICE 0x101a6690
-// STUB: ROBLOX 0x004cf7f0
+// FUNCTION: ROBLOX 0x004cf7f0
 const Instance* Replicator::getDefault(const Name& className)
 {
 	Security::Impersonator impersonate(Security::Replicator);
@@ -1798,7 +1798,7 @@ void Replicator::writeProperties(Instance* instance, RakNet::BitStream& outBitst
 }
 
 // FUNCTION: WEBSERVICE 0x101a8e40
-// STUB: ROBLOX 0x004d1e80
+// FUNCTION: ROBLOX 0x004d1e80
 void Replicator::addTopReplicationContainer(Instance* instance, bool replicateProperties)
 {
 	if (instance) {

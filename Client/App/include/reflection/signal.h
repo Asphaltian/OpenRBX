@@ -224,33 +224,33 @@ public:
 
 		// clang-format off
 		// TEMPLATE: WEBSERVICE 0x100455d0
-		// TEMPLATE: ROBLOX 0x005db370
+		// STUB: ROBLOX 0x005db370
 		// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x1004cc60
 		// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x1004ccd0
-		// TEMPLATE: ROBLOX 0x00579450
+		// STUB: ROBLOX 0x00579450
 		// RBX::Reflection::TSignalDesc<void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x10056210
-		// TEMPLATE: ROBLOX 0x0056a7a0
+		// STUB: ROBLOX 0x0056a7a0
 		// RBX::Reflection::TSignalDesc<void __cdecl(float,float)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x10056280
 		// RBX::Reflection::TSignalDesc<void __cdecl(float)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100789a0
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f2ef0
-		// TEMPLATE: ROBLOX 0x00631c40
+		// STUB: ROBLOX 0x00631c40
 		// RBX::Reflection::TSignalDesc<void __cdecl(int)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f2f60
-		// TEMPLATE: ROBLOX 0x00631cb0
+		// STUB: ROBLOX 0x00631cb0
 		// RBX::Reflection::TSignalDesc<void __cdecl(double)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f2fd0
 		// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f3040
-		// TEMPLATE: ROBLOX 0x00631d20
+		// STUB: ROBLOX 0x00631d20
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Vector3)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f30b0
-		// TEMPLATE: ROBLOX 0x00631d90
+		// STUB: ROBLOX 0x00631d90
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::CoordinateFrame)>::TSignalInstance::TSignalInstance
 		// SYNTHETIC: WEBSERVICE 0x100f3120
 		// SYNTHETIC: ROBLOX 0x00631e70
@@ -259,10 +259,10 @@ public:
 		// SYNTHETIC: ROBLOX 0x00631ec0
 		// RBX::Reflection::TSignalDesc<void __cdecl(void)>::TSignalInstance::`scalar deleting destructor'
 		// TEMPLATE: WEBSERVICE 0x100f3190
-		// TEMPLATE: ROBLOX 0x00631e00
+		// STUB: ROBLOX 0x00631e00
 		// RBX::Reflection::TSignalDesc<void __cdecl(G3D::Color3)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x100f3200
-		// TEMPLATE: ROBLOX 0x00631ee0
+		// STUB: ROBLOX 0x00631ee0
 		// RBX::Reflection::TSignalDesc<void __cdecl(RBX::BrickColor)>::TSignalInstance::TSignalInstance
 		// TEMPLATE: WEBSERVICE 0x10197810
 		// TEMPLATE: ROBLOX 0x004b9ab0
@@ -366,7 +366,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00475b00
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::connect
 	// TEMPLATE: WEBSERVICE 0x100e28b0
-	// TEMPLATE: ROBLOX 0x006259c0
+	// STUB: ROBLOX 0x006259c0
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>,float)>::TSignalInstance::TSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100fca60
 	// TEMPLATE: ROBLOX 0x00475b50
@@ -399,7 +399,7 @@ protected:
 		// TEMPLATE: ROBLOX 0x005db210
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(bool)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x1004bce0
-		// STUB: ROBLOX 0x004b38d0
+		// TEMPLATE: ROBLOX 0x004b38d0
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x1004be30
 		// TEMPLATE: ROBLOX 0x005788f0
@@ -408,10 +408,10 @@ protected:
 		// TEMPLATE: ROBLOX 0x0056a5e0
 		// RBX::Reflection::SignalDescImpl<2,void __cdecl(float,float)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100560b0
-		// STUB: ROBLOX 0x004ab100
+		// TEMPLATE: ROBLOX 0x004ab100
 		// RBX::Reflection::SignalDescImpl<1,void __cdecl(float)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x10076130
-		// STUB: ROBLOX 0x004c9ea0
+		// TEMPLATE: ROBLOX 0x004c9ea0
 		// RBX::Reflection::SignalDescImpl<0,void __cdecl(void)>::GenericSlotAdapter::operator()
 		// TEMPLATE: WEBSERVICE 0x100e2710
 		// TEMPLATE: ROBLOX 0x00625820

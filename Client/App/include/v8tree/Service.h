@@ -187,7 +187,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // FUNCTION: ROBLOX 0x005822b0
 // RBX::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>::DescribedNonCreatable<RBX::ServiceProvider,RBX::Instance,&RBX::sServiceProvider>
 // SYNTHETIC: WEBSERVICE 0x10079940
-// STUB: ROBLOX 0x00582350
+// SYNTHETIC: ROBLOX 0x00582350
 // RBX::ServiceProvider::~ServiceProvider
 // FUNCTION: WEBSERVICE 0x1007aa60
 // FUNCTION: ROBLOX 0x00582480

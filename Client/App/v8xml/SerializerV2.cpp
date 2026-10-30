@@ -150,7 +150,7 @@ static void buildIsolationMap(XmlElement* element, std::map<RBX::Instance*, RBX:
 }
 
 // FUNCTION: WEBSERVICE 0x10098450
-// STUB: ROBLOX 0x005a3ee0
+// FUNCTION: ROBLOX 0x005a3ee0
 bool ArchiveBinder::processID(const XmlNameValuePair* valueID, RBX::Instance* source)
 {
 	if (!MergeBinder::processID(valueID, source)) {

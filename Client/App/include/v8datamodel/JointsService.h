@@ -24,7 +24,7 @@ private:
 	virtual void onDescendentAdded(Instance* instance);
 	virtual void onDescendentRemoving(const boost::shared_ptr<Instance>& instance);
 	// FUNCTION: WEBSERVICE 0x10074ec0
-	// STUB: ROBLOX 0x004c7c50
+	// FUNCTION: ROBLOX 0x004c7c50
 	// RBX::JointsService::JointsService
 
 	// FUNCTION: WEBSERVICE 0x10074fc0
@@ -44,7 +44,7 @@ public:
 	JointsService() : world(NULL) { setName("JointsService"); }
 
 	// SYNTHETIC: WEBSERVICE 0x10075090
-	// STUB: ROBLOX 0x004c7e30
+	// SYNTHETIC: ROBLOX 0x004c7e30
 	// RBX::JointsService::~JointsService
 
 	// SYNTHETIC: WEBSERVICE 0x100750f0

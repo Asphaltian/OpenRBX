@@ -43,7 +43,7 @@ public:
 	bool operator!=(const ClassDescriptor& other) const;
 
 	// FUNCTION: WEBSERVICE 0x10005b60
-	// STUB: ROBLOX 0x00419e70
+	// FUNCTION: ROBLOX 0x00419e70
 	static ClassDescriptor& rootDescriptor()
 	{
 		static ClassDescriptor root;

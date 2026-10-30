@@ -145,7 +145,7 @@ void registerValueClasses()
 }
 
 // FUNCTION: WEBSERVICE 0x100f71b0
-// STUB: ROBLOX 0x006359a0
+// FUNCTION: ROBLOX 0x006359a0
 void ObjectValue::setValue(Instance* value)
 {
 	if (this->value.get() != value) {

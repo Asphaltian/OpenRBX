@@ -191,7 +191,7 @@ void Player::rebuildBackpack()
 }
 
 // FUNCTION: WEBSERVICE 0x1018f870
-// STUB: ROBLOX 0x004ada20
+// FUNCTION: ROBLOX 0x004ada20
 void Player::setCharacter(ModelInstance* value)
 {
 	if (value != character.get()) {
@@ -237,7 +237,7 @@ void Player::setNeutral(bool value)
 }
 
 // FUNCTION: WEBSERVICE 0x1018fa20
-// STUB: ROBLOX 0x004adbd0
+// FUNCTION: ROBLOX 0x004adbd0
 void Player::doPeriodicIdleCheck()
 {
 	if (!ServiceProvider::findServiceProvider(this)) {

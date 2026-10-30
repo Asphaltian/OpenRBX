@@ -801,7 +801,7 @@ std::string TypedPropertyDescriptor<ContentId>::getStringValue(const DescribedBa
 }
 
 // FUNCTION: WEBSERVICE 0x10041850
-// STUB: ROBLOX 0x005a8580
+// FUNCTION: ROBLOX 0x005a8580
 template <>
 boost::shared_ptr<Instance>& Value::convert<boost::shared_ptr<Instance> >()
 {

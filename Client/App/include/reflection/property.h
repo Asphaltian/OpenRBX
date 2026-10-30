@@ -719,7 +719,7 @@ public:
 	// RBX::Reflection::PropDescriptor<RBX::HopperBin,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1007dcd0
 	// TEMPLATE: ROBLOX 0x00441210
-	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::getValue
+	// ?getValue@?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@QBE?AVTextureId@3@PBVDescribedBase@23@@Z
 	// TEMPLATE: WEBSERVICE 0x1009bb10
 	// TEMPLATE: ROBLOX 0x00448910
 	// RBX::Reflection::TypedPropertyDescriptor<bool>::isReadOnly

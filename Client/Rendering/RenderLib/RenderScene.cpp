@@ -157,7 +157,7 @@ void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>&
 }
 
 // FUNCTION: WEBSERVICE 0x101f06a0
-// FUNCTION: ROBLOX 0x0049e7e0
+// STUB: ROBLOX 0x0049e7e0
 void RenderScene::computeShadowVolumeGeometry(
 	G3D::Array<unsigned int>& indexArray,
 	G3D::Array<G3D::Vector3>& shadowVertex,

@@ -242,7 +242,7 @@ RBX::ModelInstance* Players::findLocalCharacter(const Instance* context)
 }
 
 // FUNCTION: WEBSERVICE 0x101935f0
-// STUB: ROBLOX 0x004b4140
+// FUNCTION: ROBLOX 0x004b4140
 Player* Players::getPlayerFromCharacter(Instance* character)
 {
 	if (Players* players = ServiceProvider::find<Players>(character)) {
@@ -512,7 +512,7 @@ bool Players::OnReceive(RakPeerInterface* peer, Packet* packet)
 }
 
 // FUNCTION: WEBSERVICE 0x10195db0
-// STUB: ROBLOX 0x004b7340
+// FUNCTION: ROBLOX 0x004b7340
 void Players::onChildRemoving(Instance* child)
 {
 	if (Player* player = dynamic_cast<Player*>(child)) {

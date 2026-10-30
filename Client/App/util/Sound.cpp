@@ -876,7 +876,7 @@ SoundChannel::SoundChannel()
 }
 
 // FUNCTION: WEBSERVICE 0x10082ec0
-// FUNCTION: ROBLOX 0x005c6980
+// STUB: ROBLOX 0x005c6980
 void SoundChannel::updateListenState()
 {
 	if (part && is3D && fmod_channel) {
@@ -1244,7 +1244,7 @@ void SoundService::loadStockSounds()
 }
 
 // FUNCTION: WEBSERVICE 0x10084350
-// FUNCTION: ROBLOX 0x005c7ef0
+// STUB: ROBLOX 0x005c7ef0
 void SoundService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->find<RunService>() : NULL, this);

@@ -173,7 +173,7 @@ namespace RBX {
 namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x100ac300
-// STUB: ROBLOX 0x005fd2c0
+// FUNCTION: ROBLOX 0x005fd2c0
 boost::shared_ptr<Instance> ObjectBridge::getInstance(lua_State* L, unsigned int index)
 {
 	boost::shared_ptr<Reflection::DescribedBase> object = SharedPtrBridge<Reflection::DescribedBase>::getPtr(L, index);
@@ -397,7 +397,7 @@ int ObjectBridge::callMemberFunction(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ad4b0
-// STUB: ROBLOX 0x005fdf90
+// FUNCTION: ROBLOX 0x005fdf90
 template <>
 int Bridge<boost::shared_ptr<Reflection::DescribedBase>, 0>::on_index(
 	const boost::shared_ptr<Reflection::DescribedBase>& object, const char* name, lua_State* L

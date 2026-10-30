@@ -45,7 +45,7 @@ HitTestFilter::Result IgnoreDescendantsOf::filterResult(const Primitive* testMe)
 }
 
 // FUNCTION: WEBSERVICE 0x10115b80
-// STUB: ROBLOX 0x00662240
+// FUNCTION: ROBLOX 0x00662240
 PartByLocalCharacter::PartByLocalCharacter(Instance* root)
 {
 	character = shared_from(Network::Players::findLocalCharacter(root));
@@ -53,7 +53,7 @@ PartByLocalCharacter::PartByLocalCharacter(Instance* root)
 }
 
 // FUNCTION: WEBSERVICE 0x10115ca0
-// STUB: ROBLOX 0x00662360
+// FUNCTION: ROBLOX 0x00662360
 IgnoreDescendantsOf::IgnoreDescendantsOf(Instance* i)
 {
 	inst = shared_from(i);

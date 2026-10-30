@@ -80,13 +80,13 @@ boost::shared_ptr<SignalInstance> Signal::getSignalInstance() const
 }
 
 // FUNCTION: WEBSERVICE 0x10095e80
-// STUB: ROBLOX 0x005a92d0
+// FUNCTION: ROBLOX 0x005a92d0
 SignalSource::~SignalSource()
 {
 }
 
 // FUNCTION: WEBSERVICE 0x10095ed0
-// STUB: ROBLOX 0x005a9320
+// FUNCTION: ROBLOX 0x005a9320
 void SignalSource::disconnect_all_slots()
 {
 	signals.reset();

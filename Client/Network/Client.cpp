@@ -110,7 +110,7 @@ bool Client::clientIsPresent(const Instance* context, bool testInDatamodel)
 }
 
 // FUNCTION: WEBSERVICE 0x10197bc0
-// FUNCTION: ROBLOX 0x004b9e60
+// STUB: ROBLOX 0x004b9e60
 void Client::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<ServiceProvider, Closing>(oldProvider, this);

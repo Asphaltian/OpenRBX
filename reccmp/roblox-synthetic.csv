@@ -533,7 +533,7 @@ address,type,symbol
 005a8bc0,synthetic,??_G?$EnumDesc@W4NormalId@RBX@@@Reflection@RBX@@EAEPAXI@Z
 005ac1a0,stub,??_E?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@OCE@AEPAXI@Z
 005ac1b0,stub,??_E?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@ODM@AEPAXI@Z
-005ac280,synthetic,?equalValues@?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
+005ac280,stub,?equalValues@?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 005ac560,synthetic,?getClassName@?$FactoryProduct@VDecal@RBX@@VFaceInstance@2@$1?sDecal@2@3PADA@RBX@@UBEABVName@2@XZ
 005ac5e0,stub,??_ETexture@RBX@@WFE@AEPAXI@Z
 005ac5f0,stub,??_ETexture@RBX@@WDM@AEPAXI@Z

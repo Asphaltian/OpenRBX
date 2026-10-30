@@ -260,7 +260,7 @@ protected:
 	// SYNTHETIC: WEBSERVICE 0x100bfb40
 	// RBX::FilteredSelection<RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100c01e0
-	// STUB: ROBLOX 0x00621c00
+	// TEMPLATE: ROBLOX 0x00621c00
 	// RBX::FilteredSelection<RBX::Instance>::onSelectionChanged
 	// TEMPLATE: WEBSERVICE 0x100c0630
 	// STUB: ROBLOX 0x00622050

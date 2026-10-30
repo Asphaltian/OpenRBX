@@ -163,7 +163,7 @@ bool ChatOutput::ParseCommand(Network::ChatMessage p_unk0x04)
 	return false;
 }
 
-// FUNCTION: ROBLOX 0x00659ac0
+// STUB: ROBLOX 0x00659ac0
 void ChatOutput::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<RunService, Heartbeat>(runService, this);

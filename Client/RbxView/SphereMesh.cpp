@@ -6,7 +6,7 @@
 #include <G3D/Vector2int16.h>
 
 // FUNCTION: WEBSERVICE 0x101840e0
-// FUNCTION: ROBLOX 0x0048e600
+// STUB: ROBLOX 0x0048e600
 static void SphereTransform(
 	G3D::Vector3& vertex,
 	G3D::Vector3& normal,

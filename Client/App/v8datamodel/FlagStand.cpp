@@ -146,7 +146,7 @@ void FlagStand::setTeamColor(BrickColor color)
 }
 
 // FUNCTION: WEBSERVICE 0x100e8fc0
-// STUB: ROBLOX 0x00628170
+// FUNCTION: ROBLOX 0x00628170
 void FlagStand::onEvent_standTouched(boost::shared_ptr<Instance> other)
 {
 	Instance* character = other->getParent();

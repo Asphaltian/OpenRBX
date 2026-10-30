@@ -618,12 +618,19 @@ if (MSVC_FOR_DECOMP)
     "${OPENRBX_3RDPARTY}/Microsoft DirectX SDK (November 2007)/Include"
   )
 
+  set(OPENRBX_CLIENT_ENGINE_LIBRARIES)
+  foreach(lib rbxview renderlib network app appdraw lua)
+    if (TARGET ${lib})
+      list(APPEND OPENRBX_CLIENT_ENGINE_LIBRARIES ${lib})
+    endif()
+  endforeach()
+
   target_link_libraries(roblox PRIVATE
     toolkitpro
     rgmain
     mfc80
     mfcs80
-    ${OPENRBX_ENGINE_LIBRARIES}
+    ${OPENRBX_CLIENT_ENGINE_LIBRARIES}
     ${OPENRBX_G3D_LIBS}
     ${OPENRBX_BOOST_LIBS}
     ${OPENRBX_MESA_LIBS}

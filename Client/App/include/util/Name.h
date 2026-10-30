@@ -80,7 +80,7 @@ private:
 	// STUB: ROBLOX 0x004747c0
 	// RBX::Name::doDeclare<&RBX::sLighting>
 	// TEMPLATE: WEBSERVICE 0x1000b1d0
-	// STUB: ROBLOX 0x004023e0
+	// TEMPLATE: ROBLOX 0x004023e0
 	// RBX::Name::doDeclare<&RBX::sRunService>
 	// TEMPLATE: WEBSERVICE 0x1000b260
 	// STUB: ROBLOX 0x004022e0
@@ -98,7 +98,7 @@ private:
 	// STUB: ROBLOX 0x00402560
 	// RBX::Name::doDeclare<&RBX::sLocalScript>
 	// TEMPLATE: WEBSERVICE 0x1000b530
-	// STUB: ROBLOX 0x004a5090
+	// TEMPLATE: ROBLOX 0x004a5090
 	// RBX::Name::doDeclare<&RBX::sWorkspace>
 	// TEMPLATE: WEBSERVICE 0x1001c980
 	// STUB: ROBLOX 0x0043c360

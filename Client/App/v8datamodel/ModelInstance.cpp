@@ -390,7 +390,7 @@ Extents ModelInstance::computeLocalGridExtents() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005c000
-// STUB: ROBLOX 0x00566880
+// FUNCTION: ROBLOX 0x00566880
 ModelInstance::ModelInstance()
 	: DescribedCreatable<ModelInstance, PVInstance, sModel>("Model"), primaryPart(NULL),
 	  FlagHeight(this, &ModelInstance::computeFlagHeight),
