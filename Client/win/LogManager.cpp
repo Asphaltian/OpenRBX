@@ -31,6 +31,7 @@ MainLogManager* LogManager::getMainLogManger()
 }
 
 // FUNCTION: WEBSERVICE 0x10001df0
+// STUB: ROBLOX 0x0042a580
 ATL::CPath LogManager::GetLogPath() const
 {
 	std::string result = RBX::FileSystem::getUserAppDataDirectory(true, "logs");
@@ -67,6 +68,7 @@ std::string ThreadLogManager::getLogFileName()
 }
 
 // FUNCTION: WEBSERVICE 0x100020c0
+// STUB: ROBLOX 0x0042a320
 RBX::Log* LogManager::getLog()
 {
 	if (log == NULL) {
@@ -89,6 +91,7 @@ RBX::Log* MainLogManager::provideLog()
 }
 
 // FUNCTION: WEBSERVICE 0x100021c0
+// STUB: ROBLOX 0x0042a400
 RobloxCrashReporter::RobloxCrashReporter(const char* outputPath, const char* appName, MINIDUMP_TYPE mdType)
 {
 	controls.actionToTake = AOC_WRITE_TO_DISK | AOC_SILENT_MODE;
@@ -118,6 +121,7 @@ LONG RobloxCrashReporter::ProcessException(_EXCEPTION_POINTERS* info)
 }
 
 // FUNCTION: WEBSERVICE 0x10002340
+// STUB: ROBLOX 0x0042ac60
 void MainLogManager::WriteCrashDump()
 {
 	std::string appName = "log_";
@@ -129,6 +133,7 @@ void MainLogManager::WriteCrashDump()
 }
 
 // FUNCTION: WEBSERVICE 0x10002490
+// STUB: ROBLOX 0x0042ada0
 static void __cdecl purecallHandler()
 {
 	CString eventMessage;
@@ -163,6 +168,7 @@ MainLogManager::MainLogManager(const char* productName) : LogManager(productName
 }
 
 // FUNCTION: WEBSERVICE 0x100026d0
+// STUB: ROBLOX 0x0042ae20
 std::string MoveRelative(const char* fileName, std::string path)
 {
 	ATL::CPath dir(fileName);
@@ -223,6 +229,7 @@ struct DateCompare
 };
 
 // STUB: WEBSERVICE 0x10002c00
+// STUB: ROBLOX 0x0042c780
 void MainLogManager::CullLogs(const char* folder, int maxLogs)
 {
 	ATL::CPath path = GetLogPath();
@@ -287,6 +294,7 @@ LogManager::~LogManager()
 }
 
 // FUNCTION: WEBSERVICE 0x10003100
+// STUB: ROBLOX 0x0042b230
 bool MainLogManager::handleDebugAssert(
 	const char* expression,
 	const std::string& message,
@@ -311,6 +319,7 @@ bool MainLogManager::handleDebugAssert(
 }
 
 // FUNCTION: WEBSERVICE 0x100031f0
+// STUB: ROBLOX 0x0042b2f0
 bool MainLogManager::handleG3DFailure(
 	const char* expression,
 	const std::string& message,
@@ -338,6 +347,7 @@ bool MainLogManager::handleG3DFailure(
 }
 
 // FUNCTION: WEBSERVICE 0x100032e0
+// STUB: ROBLOX 0x0042a970
 void LogManager::ReportEvent(WORD type, const char* message)
 {
 	switch (type) {

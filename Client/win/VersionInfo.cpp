@@ -1,5 +1,6 @@
 #include "VersionInfo.h"
 
+// FUNCTION: ROBLOX 0x0046e640
 CVersionInfo::CVersionInfo()
 {
 	m_pVerData = NULL;
@@ -11,7 +12,13 @@ CVersionInfo::CVersionInfo()
 }
 
 // FUNCTION: WEBSERVICE 0x1000c890
+// FUNCTION: ROBLOX 0x0046e900
 CVersionInfo::~CVersionInfo()
+{
+	Unload();
+}
+
+void CVersionInfo::Unload()
 {
 	m_pffi = NULL;
 
@@ -21,12 +28,13 @@ CVersionInfo::~CVersionInfo()
 	}
 
 	m_wLangID = 0;
+	m_wCharset = 1252;
 	m_pTranslations = NULL;
 	m_nTranslations = 0;
-	m_wCharset = 1252;
 }
 
-// STUB: WEBSERVICE 0x1000c8c0
+// FUNCTION: WEBSERVICE 0x1000c8c0
+// FUNCTION: ROBLOX 0x0046e930
 int CVersionInfo::Load(HINSTANCE module)
 {
 	char name[500];
@@ -36,23 +44,15 @@ int CVersionInfo::Load(HINSTANCE module)
 	return Load(strFileName);
 }
 
-// STUB: WEBSERVICE 0x1000c990
+// FUNCTION: WEBSERVICE 0x1000c990
+// FUNCTION: ROBLOX 0x0046e660
 int CVersionInfo::Load(const CString& fileName)
 {
-	m_pffi = NULL;
-
-	if (m_pVerData) {
-		delete[] m_pVerData;
-		m_pVerData = NULL;
-	}
-
-	m_wLangID = 0;
-	m_wCharset = 1252;
-	m_pTranslations = NULL;
-	m_nTranslations = 0;
+	Unload();
 
 	CString sFileName(fileName);
 	DWORD dwHandle = 0;
+	int bSuccess = FALSE;
 	DWORD dwSize = GetFileVersionInfoSize(sFileName.GetBuffer(), &dwHandle);
 
 	if (dwSize) {
@@ -63,24 +63,29 @@ int CVersionInfo::Load(const CString& fileName)
 
 			if (VerQueryValue(m_pVerData, "\\", (LPVOID*) &m_pffi, &nLen)) {
 				if (VerQueryValue(m_pVerData, "\\VarFileInfo\\Translation", (LPVOID*) &m_pTranslations, &nLen) &&
-					nLen > 3) {
-					m_nTranslations = nLen / 4;
+					nLen >= sizeof(TRANSLATION)) {
+					m_nTranslations = nLen / sizeof(TRANSLATION);
 					m_wLangID = m_pTranslations[0].m_wLangID;
 					m_wCharset = m_pTranslations[0].m_wCodePage;
 				}
 
-				return 1;
+				bSuccess = TRUE;
 			}
 		}
-
-		delete[] m_pVerData;
-		m_pVerData = NULL;
 	}
 
-	return 0;
+	if (!bSuccess) {
+		if (m_pVerData) {
+			delete[] m_pVerData;
+			m_pVerData = NULL;
+		}
+	}
+
+	return bSuccess;
 }
 
 // FUNCTION: WEBSERVICE 0x1000cb20
+// FUNCTION: ROBLOX 0x0046e7b0
 CString CVersionInfo::GetValue(const CString& sKey)
 {
 	CString strResult;
@@ -98,8 +103,9 @@ CString CVersionInfo::GetValue(const CString& sKey)
 	return strResult;
 }
 
-// STUB: WEBSERVICE 0x1000cc70
+// FUNCTION: WEBSERVICE 0x1000cc70
+// FUNCTION: ROBLOX 0x0046e890
 CString CVersionInfo::GetFileVersionAsString()
 {
-	return GetValue(CString("FileVersion"));
+	return GetValue("FileVersion");
 }
