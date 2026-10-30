@@ -660,6 +660,8 @@ address,type,symbol
 00812c98,global,??_7?$GlobalSettingsItem@VNetworkSettings@RBX@@$1?sNetworkSettings@2@3QBDB@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
 00812ca0,global,??_7?$GlobalSettingsItem@VNetworkSettings@RBX@@$1?sNetworkSettings@2@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
 00812cac,global,??_7?$GlobalSettingsItem@VNetworkSettings@RBX@@$1?sNetworkSettings@2@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
+00812cf0,global,??_7?$BoundProp@VVector3@G3D@@$00@Reflection@RBX@@6B@
+00812cf0,global,??_7?$BoundProp@VCoordinateFrame@G3D@@$00@Reflection@RBX@@6B@
 00812d18,global,??_7?$DescribedCreatable@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
 00812d28,global,??_7?$DescribedCreatable@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
 00812d38,global,??_7?$DescribedCreatable@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
@@ -4495,6 +4497,8 @@ address,type,symbol
 0095b010,global,??_B?1??sync@Reflection@RBX@@YAAAVrecursive_mutex@boost@@XZ@51
 0095b018,global,?once_init_foo@boost_detail@RBX@@3JA
 0095b024,global,??_B?1???$assign_to@P6AXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@?$function1@XPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@Vfunction_base@boost@@@2@@boost@@AAEXP6AXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@Z@51
+0095b030,global,??_B?1???$assign_to@U?$tss_adapter@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@detail@boost@@@?$function1@XPAXV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXU?$tss_adapter@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@detail@1@@Z@51
+0095b030,global,??_B?1???$assign_to@U?$tss_adapter@VContext@Security@RBX@@@detail@boost@@@?$function1@XPAXV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXU?$tss_adapter@VContext@Security@RBX@@@detail@1@@Z@51
 0095b034,global,value___RBX::boost_detail::init_foo
 0095b044,global,??_B?1???$assign_to@V?$bind_t@XP6AXV?$shared_ptr@Udata@worker_thread@RBX@@@boost@@ABV?$function0@W4work_result@worker_thread@RBX@@V?$allocator@Vfunction_base@boost@@@std@@@2@@ZV?$list2@V?$value@V?$shared_ptr@Udata@worker_thread@RBX@@@boost@@@_bi@boost@@V?$value@V?$function0@W4work_result@worker_thread@RBX@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@@23@@_bi@2@@_bi@boost@@@?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@XP6AXV?$shared_ptr@Udata@worker_thread@RBX@@@boost@@ABV?$function0@W4work_result@worker_thread@RBX@@V?$allocator@Vfunction_base@boost@@@std@@@2@@ZV?$list2@V?$value@V?$shared_ptr@Udata@worker_thread@RBX@@@boost@@@_bi@boost@@V?$value@V?$function0@W4work_result@worker_thread@RBX@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@@23@@_bi@2@@_bi@1@@Z@51
 0095b050,global,??_B?1???$assign_to@V?$bind_t@XP6AXABV?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZV?$list2@V?$value@V?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@@_bi@boost@@V?$value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@@_bi@2@@_bi@boost@@@?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@XP6AXABV?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZV?$list2@V?$value@V?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@@_bi@boost@@V?$value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@@_bi@2@@_bi@1@@Z@51
@@ -4578,6 +4582,8 @@ address,type,symbol
 0095c340,global,"foo___RBX::Reflection::Described<RBX::GameSettings,&RBX::sGameSettings,RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings> >::classDescriptor"
 0095c3c8,global,??_B?1??classDescriptor@?$Described@VGameSettings@RBX@@$1?sGameSettings@2@3QBDBV?$FactoryProduct@VGameSettings@RBX@@VItem@GlobalSettings@2@$1?sGameSettings@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0095c3d0,global,?prop_AnimateCharacter@RBX@@3V?$BoundProp@_N$00@Reflection@1@A
+0095c3ec,global,?prop_AutoColorCharacters@Team@RBX@@2V?$BoundProp@_N$00@Reflection@2@A
+0095c3ec,global,?prop_SoftwareSound@RBX@@3V?$BoundProp@_N$00@Reflection@1@A
 0095c408,global,?prop_SoundEnabled@RBX@@3V?$BoundProp@_N$00@Reflection@1@A
 0095c424,global,?prop_ChatScrollLength@RBX@@3V?$BoundProp@H$00@Reflection@1@A
 0095c440,global,?prop_ChatHistory@RBX@@3V?$BoundProp@H$00@Reflection@1@A
@@ -4815,6 +4821,8 @@ address,type,symbol
 0095fd58,global,isNullClassName___RBX::ServiceProvider::find<RBX::FlagStandService>
 0095fd5c,global,??_B?8???$find@VFlagStandService@RBX@@@ServiceProvider@RBX@@QBEPAVFlagStandService@1@XZ@58
 0095fd68,global,??_B?1???$assign_to@V?$bind_t@XV?$mf0@XVFlag@RBX@@@_mfi@boost@@V?$list1@V?$value@V?$shared_ptr@VFlag@RBX@@@boost@@@_bi@boost@@@_bi@3@@_bi@boost@@@?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@XV?$mf0@XVFlag@RBX@@@_mfi@boost@@V?$list1@V?$value@V?$shared_ptr@VFlag@RBX@@@boost@@@_bi@boost@@@_bi@3@@_bi@1@@Z@51
+0095fdd4,global,?prop_position@BodyPosition@RBX@@2V?$BoundProp@VVector3@G3D@@$00@Reflection@2@A
+0095fdd4,global,?prop_cframe@BodyGyro@RBX@@2V?$BoundProp@VCoordinateFrame@G3D@@$00@Reflection@2@A
 0095fdf0,global,?signal_Hit@RBX@@3V?$SignalDesc@VExplosion@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@M@Z@Reflection@1@A
 0095fe1c,global,??_B?1???$assign_to@V?$bind_t@XV?$mf1@XVFlagStand@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlagStand@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$function1@XV?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@X@std@@@boost@@AAEXV?$bind_t@XV?$mf1@XVFlagStand@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVFlagStand@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z@51
 0095fef8,global,"foo___RBX::Reflection::Described<RBX::BodyVelocity,&RBX::sBodyVelocity,RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity> >::classDescriptor"

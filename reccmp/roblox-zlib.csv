@@ -1,0 +1,7 @@
+address,type,symbol
+007a4b20,library,_uncompress@16
+007a53d0,library,_deflateEnd@4
+007a6770,library,_inflateReset@4
+007a67e0,library,_inflateInit2_@16
+007a68b0,library,_inflateInit_@12
+007a7fa0,library,_inflateEnd@4

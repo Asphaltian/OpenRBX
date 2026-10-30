@@ -224,14 +224,12 @@ public:
 	virtual void setInputCapture(bool c) { throw std::runtime_error("OSContext unimplemented method"); }
 
 	// FUNCTION: WEBSERVICE 0x10001cc0 FOLDED
-	// FUNCTION: ROBLOX 0x005e94e0 FOLDED
 	virtual bool inputCapture() const { return false; }
 
 	// FUNCTION: WEBSERVICE 0x10006930 FOLDED
 	virtual void setMouseVisible(bool b) { throw std::runtime_error("OSContext unimplemented method"); }
 
 	// FUNCTION: WEBSERVICE 0x10001cc0 FOLDED
-	// FUNCTION: ROBLOX 0x005e94e0 FOLDED
 	virtual bool mouseVisible() const { return false; }
 };
 

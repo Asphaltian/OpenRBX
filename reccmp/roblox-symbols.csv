@@ -100,6 +100,7 @@ address,size,symbol,name
 00601940,0x87,??$connectGeneric@VFunctionScriptSlot@@@SignalInstance@Reflection@RBX@@QAE?AVconnection@signals@boost@@VFunctionScriptSlot@@W4connect_position@45@@Z,
 00601b10,0x14a,?on_index@?$Bridge@V?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@$0A@@Lua@RBX@@KAHABV?$shared_ptr@VSignalInstance@Reflection@RBX@@@boost@@PBDPAUlua_State@@@Z,
 0060f020,0x36,?setValue@?$GetSetImpl@P8Tool@RBX@@BE?BVVector3@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VTool@RBX@@VVector3@G3D@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABVVector3@G3D@@@Z,
+00610d80,0x78,??$create@VLegacyHopperService@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VLegacyHopperService@RBX@@@boost@@XZ,
 006294a0,0x3e0,?turn@Rocket@RBX@@AAE?AVVector3@G3D@@PAVBody@2@ABV34@@Z,
 00631600,0x65,?classDescriptor@?$Described@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@$1?sStringValue@2@3PADAV?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ,
 0063e450,0x26e,?getSlowHit@ContactManager@RBX@@ABEPAVPrimitive@2@ABV?$Array@PAVPrimitive@RBX@@@G3D@@ABVRay@5@PBV?$Array@PBVPrimitive@RBX@@@5@PBVHitTestFilter@2@AAVVector3@5@MAA_N5@Z,
@@ -133,4 +134,5 @@ address,size,symbol,name
 00671860,0x16f,?outlineRect2d@DrawPrimitives@RBX@@SAXABVRect@2@MPAVRenderDevice@G3D@@ABVColor4@5@@Z,
 00671a60,0x82,?rect2d@DrawPrimitives@RBX@@SAXABVRect@2@PAVRenderDevice@G3D@@ABVColor4@5@@Z,
 00671af0,0x14f,?getFont@Fonts@RBX@@SA?AV?$ReferenceCountedPointer@VGFont@G3D@@@G3D@@XZ,
+0069b8d8,,?terminate@@YAXXZ,
 007859e0,,?onServiceProvider@Instance@RBX@@UAEXPBVServiceProvider@2@0@Z,

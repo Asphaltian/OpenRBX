@@ -2,6 +2,8 @@ address,size,type,symbol,name
 00401000,0x18,library,?AtlThrowImpl@ATL@@YGXJ@Z,
 00401000,24,library,,ATL::AtlThrowImpl
 00401150,0x24,library,??1?$CAtlSafeAllocBufferManager@VCCRTAllocator@ATL@@@_ATL_SAFE_ALLOCA_IMPL@ATL@@QAE@XZ,
+004017b0,0x20,library,??$AtlMultiply@I@ATL@@YAJPAIII@Z,
+004017b0,0x20,library,??$AtlMultiply@K@ATL@@YAJPAKKK@Z,
 004018c0,0x16,library,??0CComCriticalSection@ATL@@QAE@XZ,
 004018e0,0x7d,library,?Init@CComCriticalSection@ATL@@QAEJXZ,
 004026f0,0x22,library,??$AtlAdd@I@ATL@@YAJPAIII@Z,

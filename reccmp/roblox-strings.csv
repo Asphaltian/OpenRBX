@@ -1188,6 +1188,8 @@ address,type,x-text
 0081e28c,string,Invalid color type
 0081e2a0,string,Invalid bit depth
 0081e2b4,string,Call to NULL read function
+0081e2d0,string,Write Error
+0081e2d0,string,Read Error
 0081e2dc,string,same structure.  Resetting write_data_fn to NULL.
 0081e310,string,It's an error to set both read_data_fn and write_data_fn in the
 0081e858,string,Unable to create a temporary file; robustTmpfile returning NULL
@@ -1574,6 +1576,8 @@ address,type,x-text
 00824ab8,string,Content
 00824ac0,string,Vector3
 00824ad8,string,Color3
+00824ae8,string,Unable to cast value to Objects
+00824ae8,string,Unable to cast value to ValueCollection
 00824b08,string,BrickColor
 00824b14,string,Unable to cast %s to %s
 00824b2c,string,Unable to cast value to std::string
@@ -1836,6 +1840,8 @@ address,type,x-text
 0082a30c,string,Online
 0082a314,string,ChatScrollLength
 0082a328,string,SoundEnabled
+0082a338,string,AutoColorCharacters
+0082a338,string,SoftwareSound
 0082ab84,string,ping %s failed: %s
 0082ad40,string,rbx_visit
 0082af40,string,Tool
@@ -2106,10 +2112,14 @@ address,type,x-text
 008362e0,string,NoSound
 008362e8,string,SoundType
 00836538,string,Explosion
+00836638,string,cframe
+00836638,string,position
 00836f94,string,ForceField
 008371f8,string,Rocket:Fire may not be called from a client
 00837228,string,Rocket:Fire may only be called when the Rocket is in the Workspace
 00838538,string,TargetRadius
+008385cc,string,force
+008385cc,string,MaxDataModelSendBuffer
 0083a020,string,DebrisService MaxItems must be greater than 0
 0083a05c,string,AddItem
 0083a064,string,item

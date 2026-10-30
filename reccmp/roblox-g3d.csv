@@ -488,6 +488,8 @@ address,size,type,symbol,name
 0050b1b0,0x45,library,?executeLoopBody@GWindow@G3D@@IAEXXZ,
 0050b200,0x36,library,?pushLoopBody@GWindow@G3D@@UAEXPAVGApplet@2@@Z,
 0050b240,0x3e,library,?popLoopBody@GWindow@G3D@@UAEXXZ,
+0050b2f0,0x34,library,??1?$ReferenceCountedPointer@VTexture@G3D@@@G3D@@QAE@XZ,
+0050b2f0,0x34,library,??1?$ReferenceCountedPointer@VAggregateChunk@Render@RBX@@@G3D@@QAE@XZ,
 0050ddd0,0x13,library,??4?$ReferenceCountedPointer@VMaterial@Render@RBX@@@G3D@@QAEAAV01@PAVMaterial@Render@RBX@@@Z,
 00514dd0,0x5f,library,?get@?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VPBBMesh@View@RBX@@$03@View@RBX@@@G3D@@QBEAAUVariations@?$MeshFactory@VPBBMesh@View@RBX@@$03@View@RBX@@ABVVector3@2@@Z,
 00514e30,0x65,library,?containsKey@?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VPBBMesh@View@RBX@@$03@View@RBX@@@G3D@@QBE_NABVVector3@2@@Z,

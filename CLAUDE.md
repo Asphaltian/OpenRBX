@@ -6,7 +6,7 @@ One target: **WEBSERVICE**, `WebService.dll`, an ATL Server ISAPI extension with
 
 RBXGS, the game server, comes first because its binary ships an unstripped PDB, and the engine libraries under `Client/` were shared with the client anyway. Three of the six LTCG objects in `WebService.dll` are `Client\win` sources.
 
-Second target: **ROBLOX**, `Roblox.exe` 0.3.676.0, the client. It ships no PDB but links the same engine libraries byte for byte, so its names come from WEBSERVICE: a body that matches with relocations masked, and every call and data reference reached through matched bodies, carries the RBXGS name. `reccmp/roblox-*.csv` and each `ROBLOX` marker under a `WEBSERVICE` marker were generated that way. Until client-only code exists the target scores against our `WebService.dll`, so `reccmp-build.yml` points ROBLOX at it. CI fetches `Roblox.exe` from archive.org.
+Second target: **ROBLOX**, `Roblox.exe` 0.3.676.0, the client. It ships no PDB but links the same engine libraries byte for byte, so its names come from WEBSERVICE: a body that matches with relocations masked, and every call and data reference reached through matched bodies, carries the RBXGS name. `reccmp/roblox-*.csv` and each `ROBLOX` marker under a `WEBSERVICE` marker were generated that way. The `roblox` target links the same engine objects into our own `Roblox.exe`, with `Client/win` compiled the way the client's objects were, `/O2` with stack cookies and no `/GL`. The client is an MFC application, so `mfc80.lib` comes ahead of msvcrt and every `operator new` and `delete` imports from `MFC80.DLL` by ordinal, 762 and 764, as the original's do; scored against the DLL, five hundred engine bodies differed in that one call. It links `/FIXED:NO` because the original carries `.reloc`, and the fork only labels an operand as an address where the image relocates it. CI fetches `Roblox.exe` from archive.org.
 
 ## Building
 
@@ -394,6 +394,8 @@ Each original static library gets its own OBJECT library, because each was compi
 - App carries `/Gy` here and did not in the original, and it has to stay on. Dropping it looks harmless and then fails `check_folded.py` the moment another in-class inline lands.
 - RenderLib is the only one with `/Wp64`.
 - Six translation units are the only objects compiled `/GL`, so the link ran `/LTCG`. Nothing else in the binary is LTCG. A `/GL` function's codegen depends on the whole program, and ours is missing most of the engine, so prove one against an `/FA` listing built without `/GL` rather than against the linked image.
+- `/GL` is a source property scoped to the `webservice` target, because `Client/win` is compiled into both and the client's copies were not LTCG.
+- The client's `.text` records its link order: its own objects, then rbxview, renderlib, network, glg3d, graphics3d, app, appdraw and Lua. Its template copies with stack cookies come from its own objects, which load first. Reordering the exe's object libraries that way takes ROBLOX from 99.01 to 99.30 and flips fifteen held aliases, so it waits until the order within each library is recovered as well.
 
 Within a library, App uses subdirectories (`util`, `v8world`, `v8tree`, `v8kernel`, `v8datamodel`, `v8xml`, `gui`, `humanoid`, `reflection`, `script`, `security`, `tool`) with headers under `include/`. AppDraw, RbxView, RenderLib and the WebService project are flat, and each library's headers live under `include/<libname>/`.
 

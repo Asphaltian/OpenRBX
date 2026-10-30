@@ -18,7 +18,9 @@ address,type,symbol
 00453da0,synthetic,??0ContentId@RBX@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 00458520,synthetic,??$create@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@QBEPAVSoundService@Soundscape@1@XZ
 00469ae0,synthetic,??$find@VRunService@RBX@@@ServiceProvider@RBX@@SAPAVRunService@1@PBVInstance@1@@Z
+00474900,synthetic,??_9View@0RBX@@$BCA@AE
 00474bd0,synthetic,?sig@?$TSignalDesc@$$A6AX_N@Z@Reflection@RBX@@IBEAAVTSignalInstance@123@AAVSignalSource@23@@Z
+00477bc0,synthetic,??_9PartChunk@View@RBX@@$BCE@AE
 00489cd0,stub,??$buildFace@$01VWedgeBuilder@@@LevelBuilder@View@RBX@@IAEXVWedgeBuilder@@VRect2D@G3D@@MVVector2@5@2HVVector2int16@5@@Z
 0048a0b0,stub,??$buildFace@$03VWedgeBuilder@@@LevelBuilder@View@RBX@@IAEXVWedgeBuilder@@VRect2D@G3D@@MVVector2@5@2HVVector2int16@5@@Z
 0048a490,synthetic,??0Builder@BevelMesh@View@RBX@@QAE@ABV0123@@Z
@@ -61,6 +63,7 @@ address,type,symbol
 004c48c0,synthetic,?getValue@?$TypedPropertyDescriptor@VCoordinateFrame@G3D@@@Reflection@RBX@@QBE?AVCoordinateFrame@G3D@@PBVDescribedBase@23@@Z
 004c6630,synthetic,??_GNewInstanceItem@Replicator@Network@RBX@@UAEPAXI@Z
 004cc000,synthetic,??$create@VTeams@RBX@@@ServiceProvider@RBX@@QBEPAVTeams@1@XZ
+004ccc90,synthetic,??0InstanceHandle@RBX@@QAE@ABV01@@Z
 004cf740,synthetic,??1ReplicatorStatsItem@Replicator@Network@RBX@@UAE@XZ
 004d4580,synthetic,?Insert@?$List@UMapNode@?$Map@HPAVHuffmanEncodingTree@@$1??$defaultMapKeyComparison@H@DataStructures@@YAHABH0@Z@DataStructures@@@DataStructures@@QAEXUMapNode@?$Map@HPAVHuffmanEncodingTree@@$1??$defaultMapKeyComparison@H@DataStructures@@YAHABH0@Z@2@@Z
 004d4620,synthetic,?Insert@?$List@UMapNode@?$Map@HPAVHuffmanEncodingTree@@$1??$defaultMapKeyComparison@H@DataStructures@@YAHABH0@Z@DataStructures@@@DataStructures@@QAEXUMapNode@?$Map@HPAVHuffmanEncodingTree@@$1??$defaultMapKeyComparison@H@DataStructures@@YAHABH0@Z@2@I@Z
@@ -76,6 +79,7 @@ address,type,symbol
 004e3170,synthetic,?Insert@?$List@U?$RangeNode@I@DataStructures@@@DataStructures@@QAEXU?$RangeNode@I@2@I@Z
 004e47d0,synthetic,?GetStatistics@ReliabilityLayer@@QAEQAURakNetStatistics@@XZ
 004f2ac0,synthetic,??__G@YGXPAX0IHP6EPAX00@Z@Z
+0050b2d0,synthetic,??_9View@0RBX@@$BCI@AE
 00538520,stub,?getTick@System@G3D@@SANXZ
 00540960,stub,?getColumn@Matrix3@G3D@@QBE?AVVector3@2@H@Z
 005413c0,stub,??0Matrix3@G3D@@QAE@MMMMMMMMM@Z
@@ -128,11 +132,13 @@ address,type,symbol
 005a1280,synthetic,??$create@VLighting@RBX@@@ServiceProvider@RBX@@SAPAVLighting@1@PBVInstance@1@@Z
 005a3600,synthetic,??0ArchiveBinder@@QAE@XZ
 005a4000,synthetic,??1ArchiveBinder@@QAE@XZ
+005ac280,synthetic,?equalValues@?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 005acae0,synthetic,??0Decal@RBX@@QAE@XZ
 005acef0,synthetic,??0Texture@RBX@@QAE@XZ
 005ad240,synthetic,??4PV@RBX@@QAEAAV01@ABV01@@Z
 005ae230,synthetic,?getValue@?$GetSetImpl@P8PartInstance@RBX@@BE?AW4PartType@Part@2@XZP812@AEXW4342@@Z@?$PropDescriptor@VPartInstance@RBX@@W4PartType@Part@2@@Reflection@RBX@@UBE?AW4PartType@Part@4@PBVDescribedBase@34@@Z
 005ae2b0,synthetic,?getValue@?$GetSetImpl@P8PartInstance@RBX@@BE?AVColor3@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VPartInstance@RBX@@VColor3@G3D@@@Reflection@RBX@@UBE?AVColor3@G3D@@PBVDescribedBase@34@@Z
+005b4910,synthetic,??_9Instance@RBX@@$B3AE
 005b49b0,synthetic,?getNumPrimitives@World@RBX@@QBEHXZ
 005b5120,synthetic,?raise@?$Notifier@VWorkspace@RBX@@VToolChanged@2@@RBX@@IBEXVToolChanged@2@PAV?$Listener@VWorkspace@RBX@@VToolChanged@2@@2@@Z
 005b5600,synthetic,?raise@?$Notifier@VWorkspace@RBX@@VToolChanged@2@@RBX@@IBEXVToolChanged@2@@Z
@@ -146,6 +152,7 @@ address,type,symbol
 005d9e70,synthetic,?setValue@?$GetSetImpl@P8Lighting@RBX@@BE?AVColor3@G3D@@XZP812@AEXV34@@Z@?$PropDescriptor@VLighting@RBX@@VColor3@G3D@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABVColor3@G3D@@@Z
 005d9f30,synthetic,?setValue@?$GetSetImpl@P8Message@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP812@AEXABV34@@Z@?$PropDescriptor@VMessage@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
 005e1550,synthetic,??1GuiDrawImage@RBX@@QAE@XZ
+005e17b0,synthetic,?getValue@?$GetSetImpl@P8SpecialShape@RBX@@BE?BVTextureId@2@XZP812@AEXABV32@@Z@?$PropDescriptor@VSpecialShape@RBX@@VTextureId@2@@Reflection@RBX@@UBE?AVTextureId@4@PBVDescribedBase@34@@Z
 005e2c70,synthetic,??$?0HP8HopperBin@RBX@@AEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@?$PropDescriptor@VHopperBin@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@QAE@PBD0HP8HopperBin@2@AEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZW4Functionality@PropertyDescriptor@12@@Z
 005e4230,synthetic,?getTeamColor@SpawnLocation@RBX@@QBE?AVBrickColor@2@XZ
 005e4c90,synthetic,??$create@VDebrisService@RBX@@@ServiceProvider@RBX@@QBEPAVDebrisService@1@XZ
@@ -169,6 +176,7 @@ address,type,symbol
 0060f020,synthetic,?setValue@?$GetSetImpl@P8Tool@RBX@@BEABVCoordinateFrame@G3D@@XZP812@AEXABV34@@Z@?$PropDescriptor@VTool@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@UBEXPAVDescribedBase@34@ABVCoordinateFrame@G3D@@@Z
 006172f0,synthetic,??0?$NonFactoryProduct@VInstance@RBX@@$1?sFeature@2@3QBDB@RBX@@QAE@XZ
 0061e930,synthetic,?getBranchMass@Body@RBX@@QBEMXZ
+0061f820,synthetic,??1TextXmlWriter@@QAE@XZ
 00621e50,synthetic,??$create@V?$FilteredSelection@VInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VInstance@RBX@@@1@XZ
 00621f40,synthetic,??$create@V?$FilteredSelection@VInstance@RBX@@@RBX@@@ServiceProvider@RBX@@SAPAV?$FilteredSelection@VInstance@RBX@@@1@PBVInstance@1@@Z
 00622c40,synthetic,?getTeamColor@Flag@RBX@@QBE?AVBrickColor@2@XZ
@@ -180,11 +188,13 @@ address,type,symbol
 0062d590,synthetic,?getValue@?$GetSetImpl@P8Message@RBX@@BEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZP812@AEXABV34@@Z@?$PropDescriptor@VMessage@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@UBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBVDescribedBase@34@@Z
 0062e0a0,synthetic,?getValue@?$BoundPropGetSet@VSky@RBX@@@?$BoundProp@H$00@Reflection@RBX@@UBEHPBVDescribedBase@34@@Z
 0062e110,synthetic,?getValue@?$BoundPropGetSet@V?$Value@VBrickColor@RBX@@$1?sBrickColorValue@2@3PADA@RBX@@@?$BoundProp@VBrickColor@RBX@@$00@Reflection@RBX@@UBE?AVBrickColor@4@PBVDescribedBase@34@@Z
+0062ea80,synthetic,??1?$shared_ptr@VPartInstance@RBX@@@boost@@QAE@XZ
 0062fff0,synthetic,??0?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@IAE@XZ
 00631600,synthetic,?classDescriptor@?$Described@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@$1?sStringValue@2@3PADAV?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
 00632cf0,synthetic,??0?$DescribedCreatable@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@IAE@XZ
 0063a480,synthetic,?zero@Velocity@RBX@@SAABV12@XZ
 00656cb0,synthetic,?getValue@?$GetImpl@P8Mouse@RBX@@BE?AVCoordinateFrame@G3D@@XZ@?$PropDescriptor@VMouse@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@UBE?AVCoordinateFrame@G3D@@PBVDescribedBase@34@@Z
 006632c0,stub,?onComputeForce@Balancing@RBX@@MAEXM@Z
+00667d90,synthetic,??_9Contact@RBX@@$BBM@AE
 0069afbf,stub,_atexit
 007ef270,synthetic,??__Fcreators@?1??getCreators@?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@KAAAV?$map@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@@std@@XZ@YAXXZ

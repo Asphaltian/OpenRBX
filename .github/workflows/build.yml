@@ -156,7 +156,6 @@ jobs:
       run: |
         reccmp-project detect --what original   --search-path robloxbin
         reccmp-project detect --what recompiled --search-path build
-        Add-Content reccmp-build.yml "  ROBLOX:`n    path: build\WebService.dll`n    pdb: build\WebService.pdb"
 
     - name: Summarize Accuracy
       shell: bash

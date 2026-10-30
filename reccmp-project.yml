@@ -48,6 +48,7 @@ targets:
       - reccmp/roblox-libpng.csv
       - reccmp/roblox-lua.csv
       - reccmp/roblox-stl.csv
+      - reccmp/roblox-zlib.csv
       - reccmp/roblox-symbols.csv
       - reccmp/roblox-floats.csv
       - reccmp/roblox-globals.csv

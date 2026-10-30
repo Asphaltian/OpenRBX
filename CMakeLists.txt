@@ -536,6 +536,55 @@ set_property(TARGET webservice PROPERTY SUFFIX ".dll")
 
 add_custom_target(rbxgs DEPENDS webservice)
 
+if (MSVC_FOR_DECOMP)
+  add_executable(roblox WIN32
+    Client/win/ErrorUploader.cpp
+    Client/win/LogManager.cpp
+    Client/win/VersionInfo.cpp
+    util/decomp.cpp
+  )
+  target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS
+    _ATL_NO_COM_SUPPORT)
+  reccmp_add_target(roblox ID ROBLOX)
+
+  target_include_directories(roblox PRIVATE
+    "${PROJECT_SOURCE_DIR}/Client/win"
+    ${OPENRBX_ENGINE_INCLUDE_DIRS}
+    ${OPENRBX_3RDPARTY_INCLUDE_DIRS}
+    "${OPENRBX_MESA_INCLUDE_DIR}"
+  )
+
+  target_link_libraries(roblox PRIVATE
+    mfc80
+    mfcs80
+    ${OPENRBX_ENGINE_LIBRARIES}
+    ${OPENRBX_G3D_LIBS}
+    ${OPENRBX_BOOST_LIBS}
+    ${OPENRBX_MESA_LIBS}
+    fmodex
+    advapi32
+    dbghelp
+    gdi32
+    ole32
+    oleaut32
+    setupapi
+    shell32
+    shlwapi
+    user32
+    version
+    wininet
+    winmm
+    ws2_32
+  )
+
+  target_link_options(roblox PRIVATE "-MAP:$<TARGET_FILE_DIR:roblox>/$<TARGET_FILE_BASE_NAME:roblox>.map" "/FIXED:NO")
+  foreach(lib zlib.lib G3D.lib G3D-debug.lib GLG3D.lib GLG3D-debug.lib sdl.lib sdlmain.lib glut32.lib)
+    target_link_options(roblox PRIVATE "/NODEFAULTLIB:${lib}")
+  endforeach()
+
+  set_property(TARGET roblox PROPERTY OUTPUT_NAME "Roblox")
+endif()
+
 if (MSVC)
   if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "15")
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
@@ -555,7 +604,7 @@ if (MSVC_FOR_DECOMP)
   if (OPENRBX_WEBSERVICE_SOURCES)
     set_source_files_properties(
       ${OPENRBX_WEBSERVICE_SOURCES}
-      PROPERTIES COMPILE_OPTIONS "/O2;/GL"
+      PROPERTIES COMPILE_OPTIONS "$<$<STREQUAL:$<TARGET_PROPERTY:NAME>,webservice>:/O2;/GL>"
     )
     target_link_options(webservice PRIVATE "/LTCG")
   endif()
@@ -563,13 +612,15 @@ if (MSVC_FOR_DECOMP)
   option(OPENRBX_KEEP_UNREFERENCED "Keep unreferenced functions so reccmp can compare them" ON)
   if (OPENRBX_KEEP_UNREFERENCED)
     target_link_options(webservice PRIVATE "/OPT:NOREF,ICF")
+    target_link_options(roblox PRIVATE "/OPT:NOREF,ICF")
   else()
     target_link_options(webservice PRIVATE "/OPT:REF,ICF")
+    target_link_options(roblox PRIVATE "/OPT:REF,ICF")
   endif()
 
-  set_property(TARGET webservice PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
+  set_property(TARGET webservice roblox PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 
-  set_property(TARGET webservice PROPERTY MSVC_DEBUG_INFORMATION_FORMAT "$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>")
+  set_property(TARGET webservice roblox PROPERTY MSVC_DEBUG_INFORMATION_FORMAT "$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>")
 
   set(CMAKE_CXX_FLAGS "/EHsc /TP /GR /nologo")
   set(CMAKE_CXX_FLAGS_DEBUG "/Od /D_DEBUG")
@@ -590,6 +641,12 @@ if (MSVC_FOR_DECOMP)
   set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "/incremental:no")
   set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO "/incremental:no /debug")
   set(CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL "/incremental:no")
+
+  set(CMAKE_EXE_LINKER_FLAGS "/machine:I386")
+  set(CMAKE_EXE_LINKER_FLAGS_DEBUG "/incremental:yes /debug")
+  set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/incremental:no")
+  set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO "/incremental:no /debug")
+  set(CMAKE_EXE_LINKER_FLAGS_MINSIZEREL "/incremental:no")
 endif()
 
 find_program(CLANGFORMAT_BIN NAMES clang-format)

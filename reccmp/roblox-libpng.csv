@@ -38,6 +38,8 @@ address,size,type,symbol
 0054fd20,0x9a,library,_png_read_rows
 0054fe20,0xe64,library,_png_read_end
 00550c90,0x285,library,_png_read_destroy
+00550f20,0x23,library,_png_create_write_struct
+00550f20,0x23,library,_png_create_read_struct
 00550f50,0xb7,library,_png_destroy_read_struct
 00551010,0x15,library,_png_set_swap
 00551030,0x19,library,_png_set_packing
@@ -70,6 +72,8 @@ address,size,type,symbol
 00555db0,0x1a,library,_png_get_valid
 00555e70,0x11e,library,_png_get_IHDR
 00555f90,0x20,library,_png_read_data
+00555fb0,0x34,library,_png_default_write_data
+00555fb0,0x34,library,_png_default_read_data
 00555ff0,0x52,library,_png_set_read_fn
 00556890,0x9a,library,
 00556930,0x12e,library,
