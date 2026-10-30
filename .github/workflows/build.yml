@@ -117,6 +117,8 @@ jobs:
         path: |
           build/WebService.dll
           build/WebService.pdb
+          build/Roblox.exe
+          build/Roblox.pdb
 
   verify:
     name: Verify decomp
