@@ -130,6 +130,7 @@ void Script::setEmbeddedCode(const std::string& value)
 }
 
 // FUNCTION: WEBSERVICE 0x10069f10
+// FUNCTION: ROBLOX 0x00576260
 void Script::setScriptId(const ContentId& value)
 {
 	if (scriptId != value) {

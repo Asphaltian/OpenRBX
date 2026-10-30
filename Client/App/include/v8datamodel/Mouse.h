@@ -47,6 +47,7 @@ public:
 	Mouse() : command(NULL) {}
 
 	// SYNTHETIC: WEBSERVICE 0x100cc0d0
+	// SYNTHETIC: ROBLOX 0x00610ca0
 	// RBX::Mouse::~Mouse
 
 	// SYNTHETIC: WEBSERVICE 0x100cc120
@@ -71,6 +72,7 @@ public:
 	void setIcon(const TextureId& value) { icon = value; }
 
 	// FUNCTION: WEBSERVICE 0x10117390
+	// FUNCTION: ROBLOX 0x00656b20
 	int getX() const
 	{
 		checkActive();
@@ -78,6 +80,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x101173b0
+	// FUNCTION: ROBLOX 0x00656b40
 	int getY() const
 	{
 		checkActive();
@@ -85,6 +88,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x101173d0
+	// FUNCTION: ROBLOX 0x00656b60
 	int getViewSizeX() const
 	{
 		checkActive();
@@ -92,6 +96,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x101173f0
+	// FUNCTION: ROBLOX 0x00656b80
 	int getViewSizeY() const
 	{
 		checkActive();

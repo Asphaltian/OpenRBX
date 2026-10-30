@@ -85,6 +85,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100093c0
 	// RBX::Creatable<RBX::Instance>::create<ThumbnailGenerator>
 	// FUNCTION: WEBSERVICE 0x10009450
+	// STUB: ROBLOX 0x00474ea0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Lighting>
 	// FUNCTION: WEBSERVICE 0x100094e0
 	// STUB: ROBLOX 0x00406890
@@ -559,6 +560,7 @@ public:
 	// TEMPLATE: ROBLOX 0x0056c6b0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem><char const *>
 	// TEMPLATE: WEBSERVICE 0x1005f4b0
+	// TEMPLATE: ROBLOX 0x0045acb0
 	// RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats>::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats><char const *>
 	// TEMPLATE: WEBSERVICE 0x10062f70
 	// TEMPLATE: ROBLOX 0x00460b00
@@ -1228,6 +1230,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100fd610
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::~FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// FUNCTION: WEBSERVICE 0x100fd660
+	// FUNCTION: ROBLOX 0x005e4390
 	// RBX::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::FactoryProduct<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// TEMPLATE: WEBSERVICE 0x100fd880
 	// TEMPLATE: ROBLOX 0x005e4520

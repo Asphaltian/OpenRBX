@@ -1,4 +1,5 @@
 address,type,x-text
+007fedc4,string,B
 007ff084,string,HKEY_CLASSES_ROOT
 007ff098,string,HKEY_CURRENT_USER
 007ff0ac,string,HKEY_LOCAL_MACHINE
@@ -24,6 +25,7 @@ address,type,x-text
 0080132c,string,
 00801338,string,Connection
 00801344,string,;
+0080134c,string,version
 00801354,string,comment
 0080135c,string,port
 00801368,string,=
@@ -1519,9 +1521,38 @@ address,type,x-text
 00823af8,string,synchronous
 00823b04,string,HttpPost
 00823b60,string,RBX%d
+00823b70,string,nil
+00823b74,string,xsi:nil
+00823b7c,string,xsi:type
+00823b88,string,xmlns:xsi
+00823b94,string,root
+00823b9c,string,referent
+00823ba8,string,DeleteItem
+00823bb4,string,roblox
+00823bbc,string,External
 00823bc8,string,token
+00823bd0,string,Refs
+00823bd8,string,X
+00823bdc,string,Y
+00823be0,string,Z
+00823be4,string,R00
+00823be8,string,R01
+00823bec,string,R02
+00823bf0,string,R10
+00823bf4,string,R11
+00823bf8,string,R12
+00823bfc,string,R20
+00823c00,string,R21
+00823c04,string,R22
+00823c08,string,R
+00823c0c,string,G
+00823c10,string,class
 00823c18,string,Item
+00823c20,string,Properties
 00823c2c,string,Feature
+00823c34,string,hash
+00823c3c,string,mimeType
+00823c48,string,xsi:noNamespaceSchemaLocation
 00823e20,string,FilteredSelection
 00824238,string,</
 0082423c,string,/>
@@ -1876,6 +1907,8 @@ address,type,x-text
 0082c894,string,skybox images have different widths
 0082c9ac,string,null_plainsky512_*.jpg
 0082caac,string,Sky
+0082cbe8,string,Surface
+0082cbf0,string,Complex
 0082d480,string,Constraint
 0082d48c,string,ParamB
 0082d494,string,ParamA
@@ -2226,6 +2259,7 @@ address,type,x-text
 0083bb9c,string,escape sequence too large
 0083bbb8,string,unfinished string
 0083bbcc,string,invalid long string delimiter
+0083cbac,string,utterance
 0083cc64,string,GrabRotateCursor
 0083cd90,string,control structure too long
 0083cdac,string,function or expression too complex

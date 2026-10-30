@@ -276,6 +276,7 @@ class XmlAttribute : public RBX::Sibling<XmlAttribute>, public XmlNameValuePair
 {
 public:
 	// SYNTHETIC: WEBSERVICE 0x10047a90
+	// SYNTHETIC: ROBLOX 0x0040ffa0
 	// XmlAttribute::~XmlAttribute
 
 	// TEMPLATE: WEBSERVICE 0x10048d50
@@ -408,78 +409,114 @@ DECOMP_SIZE_ASSERT(XmlElement, 0x28)
 // SYNTHETIC: WEBSERVICE 0x1021a070
 // `dynamic initializer for 'value_IDREF_null''
 // SYNTHETIC: WEBSERVICE 0x1021a090
+// SYNTHETIC: ROBLOX 0x007e93e0
 // `dynamic initializer for 'value_IDREF_nil''
 // SYNTHETIC: WEBSERVICE 0x1021a0b0
+// SYNTHETIC: ROBLOX 0x007e9400
 // `dynamic initializer for 'name_xsinil''
 // SYNTHETIC: WEBSERVICE 0x1021a0d0
+// SYNTHETIC: ROBLOX 0x007e9420
 // `dynamic initializer for 'name_xsitype''
 // SYNTHETIC: WEBSERVICE 0x1021a0f0
+// SYNTHETIC: ROBLOX 0x007e9440
 // `dynamic initializer for 'tag_xmlnsxsi''
 // SYNTHETIC: WEBSERVICE 0x1021a110
+// SYNTHETIC: ROBLOX 0x007e9460
 // `dynamic initializer for 'name_root''
 // SYNTHETIC: WEBSERVICE 0x1021a130
+// SYNTHETIC: ROBLOX 0x007e9480
 // `dynamic initializer for 'name_referent''
 // SYNTHETIC: WEBSERVICE 0x1021a150
+// SYNTHETIC: ROBLOX 0x007e94a0
 // `dynamic initializer for 'name_DeleteItem''
 // SYNTHETIC: WEBSERVICE 0x1021a170
+// SYNTHETIC: ROBLOX 0x007e94c0
 // `dynamic initializer for 'tag_roblox''
 // SYNTHETIC: WEBSERVICE 0x1021a190
+// SYNTHETIC: ROBLOX 0x007e94e0
 // `dynamic initializer for 'tag_version''
 // SYNTHETIC: WEBSERVICE 0x1021a1b0
+// SYNTHETIC: ROBLOX 0x007e9500
 // `dynamic initializer for 'tag_External''
 // SYNTHETIC: WEBSERVICE 0x1021a1d0
+// SYNTHETIC: ROBLOX 0x007e9520
 // `dynamic initializer for 'name_Ref''
 // SYNTHETIC: WEBSERVICE 0x1021a1f0
+// SYNTHETIC: ROBLOX 0x007e9540
 // `dynamic initializer for 'name_token''
 // SYNTHETIC: WEBSERVICE 0x1021a210
+// SYNTHETIC: ROBLOX 0x007e9560
 // `dynamic initializer for 'name_name''
 // SYNTHETIC: WEBSERVICE 0x1021a230
+// SYNTHETIC: ROBLOX 0x007e9580
 // `dynamic initializer for 'tag_Refs''
 // SYNTHETIC: WEBSERVICE 0x1021a250
+// SYNTHETIC: ROBLOX 0x007e95a0
 // `dynamic initializer for 'tag_X''
 // SYNTHETIC: WEBSERVICE 0x1021a270
+// SYNTHETIC: ROBLOX 0x007e95c0
 // `dynamic initializer for 'tag_Y''
 // SYNTHETIC: WEBSERVICE 0x1021a290
+// SYNTHETIC: ROBLOX 0x007e95e0
 // `dynamic initializer for 'tag_Z''
 // SYNTHETIC: WEBSERVICE 0x1021a2b0
+// SYNTHETIC: ROBLOX 0x007e9600
 // `dynamic initializer for 'tag_R00''
 // SYNTHETIC: WEBSERVICE 0x1021a2d0
+// SYNTHETIC: ROBLOX 0x007e9620
 // `dynamic initializer for 'tag_R01''
 // SYNTHETIC: WEBSERVICE 0x1021a2f0
+// SYNTHETIC: ROBLOX 0x007e9640
 // `dynamic initializer for 'tag_R02''
 // SYNTHETIC: WEBSERVICE 0x1021a310
+// SYNTHETIC: ROBLOX 0x007e9660
 // `dynamic initializer for 'tag_R10''
 // SYNTHETIC: WEBSERVICE 0x1021a330
+// SYNTHETIC: ROBLOX 0x007e9680
 // `dynamic initializer for 'tag_R11''
 // SYNTHETIC: WEBSERVICE 0x1021a350
+// SYNTHETIC: ROBLOX 0x007e96a0
 // `dynamic initializer for 'tag_R12''
 // SYNTHETIC: WEBSERVICE 0x1021a370
+// SYNTHETIC: ROBLOX 0x007e96c0
 // `dynamic initializer for 'tag_R20''
 // SYNTHETIC: WEBSERVICE 0x1021a390
+// SYNTHETIC: ROBLOX 0x007e96e0
 // `dynamic initializer for 'tag_R21''
 // SYNTHETIC: WEBSERVICE 0x1021a3b0
+// SYNTHETIC: ROBLOX 0x007e9700
 // `dynamic initializer for 'tag_R22''
 // SYNTHETIC: WEBSERVICE 0x1021a3d0
+// SYNTHETIC: ROBLOX 0x007e9720
 // `dynamic initializer for 'tag_R''
 // SYNTHETIC: WEBSERVICE 0x1021a3f0
+// SYNTHETIC: ROBLOX 0x007e9740
 // `dynamic initializer for 'tag_G''
 // SYNTHETIC: WEBSERVICE 0x1021a410
+// SYNTHETIC: ROBLOX 0x007e9760
 // `dynamic initializer for 'tag_B''
 // SYNTHETIC: WEBSERVICE 0x1021a430
+// SYNTHETIC: ROBLOX 0x007e9780
 // `dynamic initializer for 'tag_class''
 // SYNTHETIC: WEBSERVICE 0x1021a450
+// SYNTHETIC: ROBLOX 0x007e97a0
 // `dynamic initializer for 'tag_Item''
 // SYNTHETIC: WEBSERVICE 0x1021a470
+// SYNTHETIC: ROBLOX 0x007e97c0
 // `dynamic initializer for 'tag_Properties''
 // SYNTHETIC: WEBSERVICE 0x1021a490
+// SYNTHETIC: ROBLOX 0x007e97e0
 // `dynamic initializer for 'tag_Feature''
 // SYNTHETIC: WEBSERVICE 0x1021a4b0
+// SYNTHETIC: ROBLOX 0x007e9800
 // `dynamic initializer for 'tag_hash''
 // SYNTHETIC: WEBSERVICE 0x1021a4d0
 // `dynamic initializer for 'tag_null''
 // SYNTHETIC: WEBSERVICE 0x1021a4f0
+// SYNTHETIC: ROBLOX 0x007e9840
 // `dynamic initializer for 'tag_mimeType''
 // SYNTHETIC: WEBSERVICE 0x1021a510
+// SYNTHETIC: ROBLOX 0x007e9860
 // `dynamic initializer for 'tag_xsinoNamespaceSchemaLocation''
 // clang-format on
 

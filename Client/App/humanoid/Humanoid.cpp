@@ -446,6 +446,7 @@ float Humanoid::getTorsoHeading() const
 }
 
 // FUNCTION: WEBSERVICE 0x100a27c0
+// FUNCTION: ROBLOX 0x005ead90
 const CoordinateFrame Humanoid::getLocation() const
 {
 	return getHead() != NULL ? getHead()->getCoordinateFrame() : CoordinateFrame();

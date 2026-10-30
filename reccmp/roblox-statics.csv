@@ -238,4 +238,5 @@ address,type,name,module
 009610f8,global,desc_Mouse_Idle,
 00961138,global,desc_Mouse_WheelForward,
 00961178,global,desc_Mouse_KeyDown,
+00961238,global,utterance,
 0096123c,global,denormFix,

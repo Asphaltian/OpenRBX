@@ -121,6 +121,7 @@ Extents ModelInstance::computeWorldGridExtents() const
 }
 
 // FUNCTION: WEBSERVICE 0x1005a3b0
+// FUNCTION: ROBLOX 0x00565190
 const CoordinateFrame ModelInstance::getLocation() const
 {
 	if (getPrimaryPartConst()) {
@@ -319,6 +320,7 @@ void ModelInstance::onDescendentRemoving(const shared_ptr<Instance>& instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1005b360
+// FUNCTION: ROBLOX 0x00565fb0
 static void makeJ(Instance* instance)
 {
 	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
@@ -355,6 +357,7 @@ void ModelInstance::breakJoints()
 }
 
 // FUNCTION: WEBSERVICE 0x1005b440
+// FUNCTION: ROBLOX 0x00566090
 void ModelInstance::getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives)
 {
 	DragUtilities::getPrimitivesConst(this, primitives);

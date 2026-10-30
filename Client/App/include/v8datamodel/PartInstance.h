@@ -169,6 +169,7 @@ public:
 	BrickColor getColor() const { return color; }
 
 	// FUNCTION: WEBSERVICE 0x1009a7e0
+	// FUNCTION: ROBLOX 0x005ad210
 	G3D::Color3 getColor3() const { return color.color3(); }
 
 	void setColor3(const G3D::Color3& value);

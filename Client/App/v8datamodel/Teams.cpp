@@ -42,6 +42,7 @@ Team* Teams::getTeamFromTeamColor(BrickColor c)
 }
 
 // FUNCTION: WEBSERVICE 0x100dab50
+// FUNCTION: ROBLOX 0x005e7940
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Teams::getTeams()
 {
 	return teams.read();

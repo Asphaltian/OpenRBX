@@ -854,6 +854,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: WEBSERVICE 0x100fda80
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::~DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 	// FUNCTION: WEBSERVICE 0x100feae0
+	// FUNCTION: ROBLOX 0x005e5500
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>
 // TEMPLATE: WEBSERVICE 0x100fecd0
 // TEMPLATE: ROBLOX 0x005e56f0

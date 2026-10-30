@@ -507,6 +507,7 @@ const bool Surfaces::isStandardPart() const
 }
 
 // FUNCTION: WEBSERVICE 0x10100ea0
+// FUNCTION: ROBLOX 0x005de2c0
 template <>
 const Reflection::Type& Reflection::Type::singleton<Surface>()
 {

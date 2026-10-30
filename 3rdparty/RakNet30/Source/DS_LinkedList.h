@@ -359,6 +359,7 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c1b30
+	// FUNCTION: ROBLOX 0x004e13b0
 	template <class LinkedListType>
 		LinkedList<LinkedListType>::~LinkedList()
 	{

@@ -49,6 +49,7 @@ DECOMP_SIZE_ASSERT(SafeChat, 0x4)
 } // namespace RBX
 
 // SYNTHETIC: WEBSERVICE 0x1021e750
+// SYNTHETIC: ROBLOX 0x007ee220
 // `dynamic initializer for 'utterance''
 // SYNTHETIC: WEBSERVICE 0x1021e770
 // `dynamic initializer for 'sing''

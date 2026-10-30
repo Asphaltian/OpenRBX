@@ -738,6 +738,7 @@ const Primitive* PartInstance::getBiggestPrimitive() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009d3c0
+// FUNCTION: ROBLOX 0x005aff90
 const CoordinateFrame PartInstance::getLocation() const
 {
 	return primitive->getCoordinateFrame();
@@ -1074,6 +1075,7 @@ void PartInstance::setColor3(const G3D::Color3& value)
 }
 
 // FUNCTION: WEBSERVICE 0x1009fec0
+// FUNCTION: ROBLOX 0x005b2c40
 void PartInstance::onCameraNear(float distance)
 {
 	if (distance < 3.0f) {

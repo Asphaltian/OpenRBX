@@ -141,6 +141,7 @@ address,type,symbol
 004ae370,stub,??_EPlayer@Network@RBX@@WPI@AEPAXI@Z
 004ae380,stub,??_EPlayer@Network@RBX@@WJM@AEPAXI@Z
 004aea80,synthetic,?connectGeneric@?$SignalDescImpl@$01$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@MBE?AVconnection@signals@boost@@PAVSignalInstance@23@PAVGenericSlotWrapper@23@W4connect_position@56@@Z
+004afb40,synthetic,?declareSignature@?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$01@Reflection@RBX@@AAEXPBD0@Z
 004afba0,synthetic,??0?$NonFactoryProduct@VInstance@RBX@@$1?sPlayers@Network@2@3PADA@RBX@@QAE@XZ
 004afeb0,stub,??1ChatMessage@Network@RBX@@QAE@XZ
 004aff70,synthetic,??0ChatMessage@Network@RBX@@QAE@ABU012@@Z
@@ -166,6 +167,7 @@ address,type,symbol
 004b4570,synthetic,??$call@V?$shared_ptr@VInstance@RBX@@@boost@@@?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6A?AV?$shared_ptr@VInstance@RBX@@@boost@@H@Z$00@Reflection@RBX@@ABEXPAVPlayers@Network@2@AAVValue@12@1@Z
 004b4620,synthetic,?execute@?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6A?AV?$shared_ptr@VInstance@RBX@@@boost@@H@Z$00@Reflection@RBX@@UBEXPAVDescribedBase@23@AAVArguments@FunctionDescriptor@23@@Z
 004b47d0,synthetic,?execute@?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$00@Reflection@RBX@@UBEXPAVDescribedBase@23@AAVArguments@FunctionDescriptor@23@@Z
+004b48c0,synthetic,??0?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$01@Reflection@RBX@@QAE@P8Players@Network@2@AEXV?$shared_ptr@VInstance@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZPBD33W4Security@FunctionDescriptor@12@@Z
 004b4960,synthetic,??$call@X@?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$01@Reflection@RBX@@ABEXPAVPlayers@Network@2@AAVValue@12@11@Z
 004b4a00,synthetic,?execute@?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$01@Reflection@RBX@@UBEXPAVDescribedBase@23@AAVArguments@FunctionDescriptor@23@@Z
 004b4cf0,synthetic,??$call@V?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@@?$BoundFuncDesc@VPlayers@Network@RBX@@$$A6A?AV?$shared_ptr@$$CBV?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@boost@@XZ$0A@@Reflection@RBX@@ABEXPAVPlayers@Network@2@AAVValue@12@@Z
@@ -359,6 +361,8 @@ address,type,symbol
 00568ad0,stub,??_E?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@OIE@AEPAXI@Z
 00568ce0,synthetic,?raise@?$Notifier@VRunService@RBX@@VRunTransition@2@@RBX@@IBEXVRunTransition@2@PAV?$Listener@VRunService@RBX@@VRunTransition@2@@2@@Z
 00568da0,synthetic,?raise@?$Notifier@VRunService@RBX@@W4RunState@2@@RBX@@IBEXW4RunState@2@PAV?$Listener@VRunService@RBX@@W4RunState@2@@2@@Z
+00569140,synthetic,?raise@?$Notifier@VRunService@RBX@@VRunTransition@2@@RBX@@IBEXVRunTransition@2@@Z
+005691e0,synthetic,?raise@?$Notifier@VRunService@RBX@@W4RunState@2@@RBX@@IBEXW4RunState@2@@Z
 00569900,synthetic,?getClassName@?$FactoryProduct@VRunService@RBX@@VInstance@2@$1?sRunService@2@3QBDB@RBX@@UBEABVName@2@XZ
 00569e30,stub,??_ERunService@RBX@@WBBA@AEPAXI@Z
 00569e40,stub,??_ERunService@RBX@@WDM@AEPAXI@Z
@@ -612,9 +616,9 @@ address,type,symbol
 005b6690,stub,??_EWorkspace@RBX@@WIE@AEPAXI@Z
 005b66a0,stub,??_EWorkspace@RBX@@WCJE@AEPAXI@Z
 005b66b0,stub,??_EWorkspace@RBX@@WCDI@AEPAXI@Z
-005b66c0,stub,?getLocation@ModelInstance@RBX@@$4PPPPPPPM@BEA@BE?BVCoordinateFrame@G3D@@XZ
+005b66c0,synthetic,?getLocation@ModelInstance@RBX@@$4PPPPPPPM@BEA@BE?BVCoordinateFrame@G3D@@XZ
 005b66d0,stub,??_EWorkspace@RBX@@WCPE@AEPAXI@Z
-005b66e0,stub,?getCameraIgnorePrimitives@ModelInstance@RBX@@$4PPPPPPPM@BEA@AEXAAV?$vector@PBVPrimitive@RBX@@V?$allocator@PBVPrimitive@RBX@@@std@@@std@@@Z
+005b66e0,synthetic,?getCameraIgnorePrimitives@ModelInstance@RBX@@$4PPPPPPPM@BEA@AEXAAV?$vector@PBVPrimitive@RBX@@V?$allocator@PBVPrimitive@RBX@@@std@@@std@@@Z
 005b66f0,stub,??_EWorkspace@RBX@@WGM@AEPAXI@Z
 005b6700,stub,??_EWorkspace@RBX@@WBA@AEPAXI@Z
 005b6710,stub,??_EWorkspace@RBX@@WCNM@AEPAXI@Z

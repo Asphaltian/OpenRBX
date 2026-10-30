@@ -124,6 +124,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10065c90
+	// TEMPLATE: ROBLOX 0x004ce140
 	// RBX::Stats::TypedStatsItem<bool>::TypedStatsItem<bool>
 	// TEMPLATE: WEBSERVICE 0x10065da0
 	// STUB: ROBLOX 0x004ce200

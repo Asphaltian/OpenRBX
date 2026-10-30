@@ -893,7 +893,7 @@ address,type,size
 0041dec0,function,343
 0041e020,function,702
 0041e31c,function,192
-0041e3e0,function,550
+0041e3e0,function,592
 0041e610,function,28
 0041e630,function,119
 0041e6b0,function,27
@@ -2940,7 +2940,7 @@ address,type,size
 00474d90,function,82
 00474df0,function,70
 00474e40,function,90
-00474ea0,function,120
+00474ea0,function,134
 00474f20,function,73
 00474f70,function,95
 00474fd0,function,6
@@ -4441,6 +4441,7 @@ address,type,size
 004c5160,function,161
 004c5210,function,49
 004c5250,function,50
+004c5290,function,82
 004c52f0,function,85
 004c5350,function,167
 004c5400,function,113
@@ -4471,6 +4472,7 @@ address,type,size
 004c6210,function,233
 004c6300,function,370
 004c6480,function,55
+004c64c0,function,18
 004c64e0,function,184
 004c65a0,function,144
 004c6630,function,76
@@ -20152,6 +20154,7 @@ address,type,size
 007f3930,function,10
 007f3a00,function,10
 007f3b70,function,10
+007f3b80,function,11
 007f3ef0,function,10
 007f3f00,function,10
 007f3f30,function,10
@@ -20178,6 +20181,7 @@ address,type,size
 007f45b0,function,10
 007f46a0,function,25
 007f46c0,function,10
+007f4710,function,11
 007f4820,function,10
 007f4830,function,10
 007f4840,function,10
@@ -20189,6 +20193,7 @@ address,type,size
 007f4bf0,function,25
 007f4c50,function,10
 007f4c60,function,10
+007f4c80,function,10
 007f4c90,function,10
 007f4e80,function,10
 007f4e90,function,10

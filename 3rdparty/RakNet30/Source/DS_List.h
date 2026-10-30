@@ -119,6 +119,7 @@ namespace DataStructures
 	// FUNCTION: WEBSERVICE 0x101b0400
 	// DataStructures::List<RPCNode *>::~List<RPCNode *>
 	// FUNCTION: WEBSERVICE 0x101bd030
+	// FUNCTION: ROBLOX 0x004e3020
 	// DataStructures::List<DataStructures::RangeNode<unsigned int> >::~List<DataStructures::RangeNode<unsigned int> >
 	template <class list_type>
 		List<list_type>::~List()

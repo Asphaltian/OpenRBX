@@ -93,6 +93,7 @@ DECOMP_SIZE_ASSERT(Surfaces, 0x30)
 // SYNTHETIC: WEBSERVICE 0x1021df20
 // RBX::`dynamic initializer for 'desc_LegacyBack''
 // SYNTHETIC: WEBSERVICE 0x10224da0
+// SYNTHETIC: ROBLOX 0x007f3b80
 // `RBX::Reflection::Type::singleton<RBX::Surface>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10224db0
 // RBX::`dynamic atexit destructor for 'desc_LegacyTop''

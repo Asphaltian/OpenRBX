@@ -178,6 +178,7 @@ typename MemberDescriptorContainer<T>::Collection::const_iterator MemberDescript
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100475e0
+// STUB: ROBLOX 0x005a9790
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::declare
 // clang-format on
 template <class T>
@@ -199,6 +200,7 @@ void MemberDescriptorContainer<T>::declare(T* descriptor)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10047700
+// TEMPLATE: ROBLOX 0x005a98b0
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::mergeMembers
 // clang-format on
 template <class T>
@@ -215,6 +217,7 @@ void MemberDescriptorContainer<T>::mergeMembers(const MemberDescriptorContainer*
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10047760
+// STUB: ROBLOX 0x005a9a10
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>
 // clang-format on
 template <class T>

@@ -9,6 +9,7 @@
 #include <sstream>
 
 // FUNCTION: WEBSERVICE 0x10001100
+// STUB: ROBLOX 0x0041e3e0
 void ErrorUploader::Upload(std::string url, bool synchronous)
 {
 	std::vector<std::string> f = LogManager::getMainLogManger()->archiveCrashLogs();

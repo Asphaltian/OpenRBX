@@ -699,6 +699,7 @@ int CoordinateFrameBridge::on_vectorToObjectSpace(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100af610
+// FUNCTION: ROBLOX 0x00600000
 int CoordinateFrameBridge::fromEulerAnglesXYZ(lua_State* L)
 {
 	G3D::CoordinateFrame cf;

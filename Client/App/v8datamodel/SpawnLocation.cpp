@@ -111,6 +111,7 @@ void SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network
 }
 
 // FUNCTION: WEBSERVICE 0x100febd0
+// STUB: ROBLOX 0x005e55f0
 SpawnerService::SpawnerService()
 {
 	setName(sSpawnerService);

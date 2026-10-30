@@ -163,6 +163,7 @@ PartInstance* Tool::getHandle()
 }
 
 // FUNCTION: WEBSERVICE 0x100ca240
+// FUNCTION: ROBLOX 0x0060eeb0
 const CoordinateFrame Tool::getLocation() const
 {
 	const PartInstance* handle = getHandleConst();
@@ -359,6 +360,7 @@ void Tool::upTo_HasTorso()
 }
 
 // FUNCTION: WEBSERVICE 0x100cbbc0
+// FUNCTION: ROBLOX 0x00610790
 void Tool::downFrom_Equipped()
 {
 	ModelInstance* character = NULL;

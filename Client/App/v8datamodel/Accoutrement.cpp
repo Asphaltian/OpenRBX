@@ -179,6 +179,7 @@ const G3D::Vector3 Accoutrement::getAttachmentRight() const
 }
 
 // FUNCTION: WEBSERVICE 0x100db6e0
+// FUNCTION: ROBLOX 0x005ba970
 const CoordinateFrame Accoutrement::getLocation() const
 {
 	const PartInstance* handle = getHandleConst();

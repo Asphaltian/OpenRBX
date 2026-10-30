@@ -105,6 +105,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x10066930
+	// FUNCTION: ROBLOX 0x00452920
 	~Impersonator() { Context::ptr().reset(previous); }
 };
 

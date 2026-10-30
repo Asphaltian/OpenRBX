@@ -85,6 +85,7 @@ const Type& RefType::singleton()
 // TEMPLATE: ROBLOX 0x005b4d80
 // RBX::Reflection::RefType::singleton<RBX::Camera *>
 // TEMPLATE: WEBSERVICE 0x100e4330
+// TEMPLATE: ROBLOX 0x00617950
 // RBX::Reflection::RefType::singleton<RBX::Hole *>
 // TEMPLATE: WEBSERVICE 0x1018c680
 // TEMPLATE: ROBLOX 0x004a5c60
@@ -102,6 +103,7 @@ const Type& RefType::singleton()
 // SYNTHETIC: ROBLOX 0x007f2ca0
 // `RBX::Reflection::RefType::singleton<RBX::Camera *>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x102241f0
+// SYNTHETIC: ROBLOX 0x007f4710
 // `RBX::Reflection::RefType::singleton<RBX::Hole *>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10225e40
 // SYNTHETIC: ROBLOX 0x007f07c0

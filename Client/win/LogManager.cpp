@@ -367,6 +367,7 @@ void init()
 } // namespace log_detail
 
 // FUNCTION: WEBSERVICE 0x100034b0
+// STUB: ROBLOX 0x0042d500
 ThreadLogManager* ThreadLogManager::getCurrent()
 {
 	boost::call_once(&log_detail::init, log_detail::once_init);
