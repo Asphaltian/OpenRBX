@@ -265,7 +265,8 @@ protected:
 
 public:
 	UnifiedWidget(const std::string& p_unk0x04);
-	UnifiedWidget();
+	// FUNCTION: ROBLOX 0x00611cc0
+	UnifiedWidget() { init(); }
 
 	MenuState getMenuState() const { return menuState; }
 	void setMenuState(MenuState p_unk0x04);

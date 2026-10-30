@@ -1,5 +1,7 @@
 #include "gui/Widget.h"
 
+#include "v8tree/Verb.h"
+
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10116aa0
@@ -106,11 +108,35 @@ GuiResponse Widget::process(const GuiEvent& event)
 	return GuiResponse::notUsed();
 }
 
+// FUNCTION: ROBLOX 0x0063f830
+void VerbWidget::onClick(const GuiEvent& p_unk0x04)
+{
+	if (verb != NULL && verb->isEnabled()) {
+		verb->doIt(p_unk0x04.iDataState);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10116d40
 // FUNCTION: ROBLOX 0x0063f870
 Widget::Widget() : widgetState(NOTHING)
 {
 	setGuiSize(G3D::Vector2(100, 24));
+}
+
+// FUNCTION: ROBLOX 0x0063f930
+VerbWidget::VerbWidget(Verb* p_unk0x04) : verb(p_unk0x04)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063f9a0
+bool VerbWidget::isEnabled()
+{
+	return isVisible() && verb != NULL && verb->isEnabled();
+}
+
+// FUNCTION: ROBLOX 0x0063fa60
+VerbWidget::~VerbWidget()
+{
 }
 
 // FUNCTION: WEBSERVICE 0x10116dd0

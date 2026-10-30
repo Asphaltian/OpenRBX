@@ -23,7 +23,7 @@ private:
 	G3D::ReferenceCountedPointer<TextureProxyBase> disable; // 0x24
 	G3D::ReferenceCountedPointer<TextureProxyBase> hover;   // 0x28
 	G3D::ReferenceCountedPointer<TextureProxyBase> down;    // 0x2c
-	G3D::Vector2 size;                                      // 0x30
+	mutable G3D::Vector2 size;                              // 0x30
 
 	void draw(
 		Adorn* adorn,
@@ -42,7 +42,7 @@ public:
 	void render2d(Adorn* adorn, bool enabled, Rect& rect, Widget::WidgetState state);
 
 	void setImageSize(const G3D::Vector2& value) { size = value; }
-	G3D::Vector2 getImageSize() const { return size; }
+	G3D::Vector2 getImageSize() const;
 
 	bool setImage(Adorn* adorn, const TextureId& textureId);
 };

@@ -729,6 +729,17 @@ address,type,symbol
 0083915c,global,??_7?$RefPropDescriptor@VObjectValue@RBX@@VInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@
 00839e60,global,??_7?$GetSetImpl@P8DebrisService@RBX@@BEHXZP812@AEXH@Z@?$PropDescriptor@VDebrisService@RBX@@H@Reflection@RBX@@6B@
 00839e70,global,??_7?$PropDescriptor@VDebrisService@RBX@@H@Reflection@RBX@@6B@
+0083aae4,global,??_7VerbWidget@RBX@@6B@
+0083aaec,global,??_7VerbWidget@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@
+0083aafc,global,??_7VerbWidget@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@
+0083ab0c,global,??_7VerbWidget@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@1@@
+0083ab1c,global,??_7VerbWidget@RBX@@6B?$Notifier@VInstance@RBX@@UDescendentAdded@2@@1@@
+0083ab2c,global,??_7VerbWidget@RBX@@6B?$Notifier@VInstance@RBX@@UChildRemoved@2@@1@@
+0083ab3c,global,??_7VerbWidget@RBX@@6B?$Notifier@VInstance@RBX@@UChildAdded@2@@1@@
+0083ab4c,global,??_7VerbWidget@RBX@@6BDebugable@1@@
+0083ab54,global,??_7VerbWidget@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@1@@
+0083ab5c,global,??_7VerbWidget@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@
+0083ab6c,global,??_7VerbWidget@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@
 0083bc5c,global,??_7?$GetImpl@P8Mouse@RBX@@BE?AVCoordinateFrame@G3D@@XZ@?$PropDescriptor@VMouse@RBX@@VCoordinateFrame@G3D@@@Reflection@RBX@@6B@
 0083bc7c,global,??_7?$GetImpl@P8Mouse@RBX@@BEHXZ@?$PropDescriptor@VMouse@RBX@@H@Reflection@RBX@@6B@
 0083bc8c,global,??_7?$GetSetImpl@P8Mouse@RBX@@BE?AVTextureId@2@XZP812@AEXABV32@@Z@?$PropDescriptor@VMouse@RBX@@VTextureId@2@@Reflection@RBX@@6B@

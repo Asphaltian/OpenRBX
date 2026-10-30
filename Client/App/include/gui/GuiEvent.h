@@ -7,12 +7,15 @@
 namespace RBX {
 
 class GuiTarget;
+class IDataState;
 
 // SIZE 0x18
 class GuiEvent : public UIEvent
 {
 public:
-	void* iDataState; // 0x14
+	IDataState* iDataState; // 0x14
+
+	GuiEvent(const UIEvent& p_unk0x04, IDataState* p_unk0x08);
 };
 
 DECOMP_SIZE_ASSERT(GuiEvent, 0x18)

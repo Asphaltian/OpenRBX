@@ -9,6 +9,8 @@
 
 namespace RBX {
 
+class Verb;
+
 // SIZE 0x110
 class Widget : public GuiItem
 {
@@ -61,6 +63,28 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Widget, 0x110)
+
+// SIZE 0x114
+class VerbWidget : public Widget
+{
+private:
+	Verb* verb; // 0x110
+
+protected:
+	Verb* getVerb() { return verb; }
+	virtual bool isEnabled();
+	virtual void onClick(const GuiEvent& p_unk0x04);
+
+public:
+	VerbWidget(Verb* p_unk0x04);
+	VerbWidget();
+	virtual ~VerbWidget();
+
+	// SYNTHETIC: ROBLOX 0x0063fac0
+	// RBX::VerbWidget::`scalar deleting destructor'
+};
+
+DECOMP_SIZE_ASSERT(VerbWidget, 0x114)
 
 } // namespace RBX
 

@@ -8,6 +8,17 @@
 
 namespace RBX {
 
+// FUNCTION: ROBLOX 0x0063fc50
+G3D::Vector2 GuiDrawImage::getImageSize() const
+{
+	if (size.isZero() && normal.notNull()) {
+		G3D::Vector2 textureSize = normal->getSize();
+		size = textureSize;
+	}
+
+	return size;
+}
+
 // FUNCTION: WEBSERVICE 0x1005c680
 // FUNCTION: ROBLOX 0x0063fcb0
 static G3D::ReferenceCountedPointer<TextureProxyBase> silentGetTextureProxyBase(Adorn* adorn, const ContentId& id)
