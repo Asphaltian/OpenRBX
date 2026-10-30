@@ -186,20 +186,14 @@ class RelativePanel : public TopMenuBar
 public:
 	// FUNCTION: WEBSERVICE 0x100c7740
 	// FUNCTION: ROBLOX 0x005e1920
-	RelativePanel()
+	RelativePanel() : offset(0, 0)
 	{
-		offset.x = 0;
-		offset.y = 0;
-
 		Layout layout;
-		layout.xLocation = Rect::LEFT;
-		layout.yLocation = Rect::TOP;
-		layout.offset.x = 0;
-		layout.offset.y = 0;
-		layout.layoutStyle = Layout::HORIZONTAL;
-		layout.backdropColor = G3D::Color4::clear();
 		init(layout);
 	}
+
+	// FUNCTION: ROBLOX 0x006126e0
+	RelativePanel(const Layout& layout) : offset(0, 0) { init(layout); }
 
 	virtual G3D::Vector2 getPosition() const;
 
@@ -217,7 +211,11 @@ DECOMP_SIZE_ASSERT(RelativePanel, 0x130)
 class PercentPanel : public TopMenuBar
 {
 public:
-	PercentPanel(Rect::Location p_unk0x04, Rect::Location p_unk0x08, const G3D::Vector2 p_unk0x0c);
+	// FUNCTION: ROBLOX 0x00612790
+	PercentPanel(Rect::Location xLocation, Rect::Location yLocation, const G3D::Vector2 position)
+		: xLocation(xLocation), yLocation(yLocation), position(position)
+	{
+	}
 
 	virtual G3D::Vector2 getPosition() const;
 
@@ -313,11 +311,17 @@ public:
 
 	virtual void render2d(Adorn* p_unk0x04);
 
-	void setLabel(const std::string& p_unk0x04);
-	void setFontSize(int p_unk0x04);
-	void setFontColor(const G3D::Color4& p_unk0x04);
-	void setBorderColor(const G3D::Color4& p_unk0x04);
-	void setAlign(Adorn::XAlign p_unk0x04);
+	void setLabel(const std::string& value) { label = value; }
+
+	void setFontSize(int value)
+	{
+		fontSize = value;
+		setGuiSize(G3D::Vector2(10.0f * fontSize, 2.0f * fontSize));
+	}
+
+	void setFontColor(const G3D::Color4& value) { fontColor = value; }
+	void setBorderColor(const G3D::Color4& value) { borderColor = value; }
+	void setAlign(Adorn::XAlign value) { align = value; }
 
 	// SYNTHETIC: ROBLOX 0x0058dfa0
 	// RBX::TextDisplay::~TextDisplay

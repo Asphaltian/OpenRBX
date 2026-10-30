@@ -17,7 +17,8 @@ protected:
 	GuiDrawImage guiImageDraw; // 0x110
 
 public:
-	UnifiedImageWidget(Adorn* p_unk0x04, const std::string& p_unk0x08);
+	// FUNCTION: ROBLOX 0x006133c0
+	UnifiedImageWidget(Adorn* adorn, const std::string& image) : guiImageDraw(adorn, image) {}
 
 	Widget::WidgetState getWidgetState() const
 	{
@@ -47,7 +48,8 @@ private:
 	virtual bool isVisible() const;
 
 public:
-	ChatButton(Adorn* p_unk0x04, const std::string& p_unk0x08);
+	// FUNCTION: ROBLOX 0x006134a0
+	ChatButton(Adorn* adorn, const std::string& image) : UnifiedImageWidget(adorn, image) {}
 };
 
 DECOMP_SIZE_ASSERT(ChatButton, 0x148)

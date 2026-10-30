@@ -98,6 +98,7 @@ endif()
 
 set(OPENRBX_APP_SOURCES
   Client/App/security/SecurityContext.cpp
+  Client/App/v8datamodel/GuiBuilder.cpp
   Client/App/v8datamodel/Hopper.cpp
   Client/App/gui/Button.cpp
   Client/App/gui/ChatOutput.cpp

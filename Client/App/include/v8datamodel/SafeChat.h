@@ -33,7 +33,7 @@ public:
 
 	static SafeChat& singleton();
 
-	ChatOption* getChatRoot();
+	ChatOption* getChatRoot() { return chatRoot.get(); }
 	std::string getMessage(std::vector<std::string> path);
 
 private:

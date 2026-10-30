@@ -13,7 +13,11 @@ namespace RBX {
 class Layout
 {
 public:
-	Layout() {}
+	Layout()
+		: xLocation(Rect::LEFT), yLocation(Rect::TOP), offset(0, 0), layoutStyle(HORIZONTAL),
+		  backdropColor(G3D::Color4::clear())
+	{
+	}
 
 	enum Style
 	{

@@ -285,6 +285,8 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100a1d00
 	// TEMPLATE: ROBLOX 0x005ea2d0
 	// RBX::shared_from_dynamic_cast<RBX::PartInstance,RBX::Instance>
+	// TEMPLATE: ROBLOX 0x00615690
+	// RBX::shared_from_dynamic_cast<RBX::TextDisplay,RBX::Instance>
 	// TEMPLATE: WEBSERVICE 0x100a1f90
 	// TEMPLATE: ROBLOX 0x005ea560
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::PartInstance> >
@@ -376,8 +378,32 @@ public:
 	// TEMPLATE: WEBSERVICE 0x101a6bc0
 	// TEMPLATE: ROBLOX 0x004cfa30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Replicator::ReplicatorStatsItem,boost::shared_ptr<RBX::Network::Replicator>,RakNetStatistics *>
+	// TEMPLATE: ROBLOX 0x00613530
+	// RBX::Creatable<RBX::Instance>::create<RBX::RelativePanel,RBX::Layout>
+	// TEMPLATE: ROBLOX 0x006135b0
+	// RBX::Creatable<RBX::Instance>::create<RBX::MenuItem,RBX::Verb *,char const *>
+	// TEMPLATE: ROBLOX 0x00613680
+	// RBX::Creatable<RBX::Instance>::create<RBX::ImageButton,RBX::Adorn *,RBX::Verb *,char const *>
 	// TEMPLATE: ROBLOX 0x00613750
 	// RBX::Creatable<RBX::Instance>::create<RBX::TopMenuBar,char const *,enum RBX::Layout::Style>
+	// TEMPLATE: ROBLOX 0x00613820
+	// RBX::Creatable<RBX::Instance>::create<RBX::ChatOutput>
+	// TEMPLATE: ROBLOX 0x006138a0
+	// RBX::Creatable<RBX::Instance>::create<RBX::ChatWidget,std::basic_string<char,std::char_traits<char>,std::allocator<char> >,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: ROBLOX 0x00613960
+	// RBX::Creatable<RBX::Instance>::create<RBX::PercentPanel,enum RBX::Rect::Location,enum RBX::Rect::Location,G3D::Vector2>
+	// TEMPLATE: ROBLOX 0x00613a00
+	// RBX::Creatable<RBX::Instance>::create<RBX::ChatButton,RBX::Adorn *,char const *>
+	// TEMPLATE: ROBLOX 0x00613ad0
+	// RBX::Creatable<RBX::Instance>::create<RBX::ScoreHud,RBX::DataModel *>
+	// TEMPLATE: ROBLOX 0x00613b50
+	// RBX::Creatable<RBX::Instance>::create<RBX::HealthHud>
+	// TEMPLATE: ROBLOX 0x00613bd0
+	// RBX::Creatable<RBX::Instance>::create<RBX::TextDisplay,char const *,char const *>
+	// TEMPLATE: ROBLOX 0x00613cd0
+	// RBX::Creatable<RBX::Instance>::create<RBX::EquationDisplay,char const *,char const *>
+	// TEMPLATE: ROBLOX 0x00613dd0
+	// RBX::Creatable<RBX::Instance>::create<RBX::ArrowPanel,RBX::Adorn *,RBX::DataModel *,enum RBX::Controller::ControllerType>
 	// TEMPLATE: ROBLOX 0x00613e60
 	// RBX::Creatable<RBX::Instance>::create<RBX::MenuSpacer,float,float>
 	// TEMPLATE: ROBLOX 0x0065fc80

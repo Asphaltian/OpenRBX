@@ -98,7 +98,7 @@ public:
 	int numChatOptions();
 	void buildGui(Adorn*);
 	void processGui(const UIEvent&);
-	GuiRoot* getGuiRoot() const;
+	GuiRoot* getGuiRoot() const { return guiRoot.get(); }
 	GuiRoot* getGuiHooks() const;
 	void clearContents();
 	boost::shared_ptr<boost::recursive_mutex> getMutex() const;
