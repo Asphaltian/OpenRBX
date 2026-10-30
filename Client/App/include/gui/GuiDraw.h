@@ -38,6 +38,11 @@ public:
 	// FUNCTION: WEBSERVICE 0x10006260
 	// FUNCTION: ROBLOX 0x005e1a20
 	GuiDrawImage() {}
+	// FUNCTION: ROBLOX 0x00612850
+	GuiDrawImage(Adorn* p_unk0x04, const std::string& p_unk0x08) : size(0, 0)
+	{
+		setImageFromName(p_unk0x04, p_unk0x08);
+	}
 
 	void render2d(Adorn* adorn, bool enabled, Rect& rect, Widget::WidgetState state);
 

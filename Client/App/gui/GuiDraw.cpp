@@ -60,6 +60,13 @@ bool GuiDrawImage::setImage(Adorn* adorn, const TextureId& textureId)
 	return normal.notNull();
 }
 
+// FUNCTION: ROBLOX 0x00640190
+void GuiDrawImage::setImageFromName(Adorn* p_unk0x04, const std::string& p_unk0x08)
+{
+	ContentId id = ContentId::fromAssets("Textures\\" + p_unk0x08 + ".png");
+	setImage(p_unk0x04, TextureId(id));
+}
+
 // FUNCTION: WEBSERVICE 0x1005cb60
 // FUNCTION: ROBLOX 0x00640290
 void GuiDrawImage::draw(
