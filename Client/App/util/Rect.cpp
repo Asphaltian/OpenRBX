@@ -2,6 +2,34 @@
 
 namespace RBX {
 
+// FUNCTION: ROBLOX 0x005d90c0
+Vector2 Rect::positionPoint(Location xLocation, Location yLocation) const
+{
+	Vector2 point = center();
+
+	switch (xLocation) {
+	case LEFT:
+		point.x = low.x;
+		break;
+	case RIGHT:
+		point.x = high.x;
+		break;
+	}
+
+	switch (yLocation) {
+	case TOP:
+		point.y = low.y;
+		break;
+	case BOTTOM:
+		point.y = high.y;
+		break;
+	case CENTER:
+		return point;
+	}
+
+	return point;
+}
+
 // FUNCTION: ROBLOX 0x005d9120
 Vector2 Rect::positionPoint(const Vector2& p_unk0x04, Location p_unk0x08, Location p_unk0x0c) const
 {
