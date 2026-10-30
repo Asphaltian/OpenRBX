@@ -198,7 +198,7 @@ static void FUN_004335e0(CXTPImageManager* imageManager)
 	STUB(0x4335e0);
 }
 
-// STUB: ROBLOX 0x00433b20
+// FUNCTION: ROBLOX 0x00433b20
 void CMainFrame::FUN_00433b20(CXTPPropExchange* pPX, BOOL p_unk0x08)
 {
 	CXTPCommandBars* commandBars = GetCommandBars();
@@ -633,7 +633,7 @@ void CMainFrame::FUN_00435fa0()
 	FUN_00435e00(!m_unk0xe0);
 }
 
-// STUB: ROBLOX 0x00435fc0
+// FUNCTION: ROBLOX 0x00435fc0
 CMainFrame::~CMainFrame()
 {
 	CMDTARGET_RELEASE(m_unk0xe8);

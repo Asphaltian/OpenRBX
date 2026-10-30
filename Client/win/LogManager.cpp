@@ -15,12 +15,16 @@
 #include <direct.h>
 #include <list>
 
+// GLOBAL: ROBLOX 0x0095389c
 static boost::thread_specific_ptr<ThreadLogManager>* ts;
 
 bool LogManager::logsEnabled = true;
+
+// GLOBAL: ROBLOX 0x009538a8
 MainLogManager* LogManager::mainLogManager;
 bool RobloxCrashReporter::silent;
 
+// FUNCTION: ROBLOX 0x0042a550
 MainLogManager* LogManager::getMainLogManger()
 {
 	return mainLogManager;
@@ -175,6 +179,7 @@ std::string MoveRelative(const char* fileName, std::string path)
 }
 
 // STUB: WEBSERVICE 0x10002840
+// STUB: ROBLOX 0x0042cd30
 std::vector<std::string> MainLogManager::archiveCrashLogs()
 {
 	std::vector<std::string> result;
@@ -356,9 +361,11 @@ void LogManager::ReportEvent(WORD type, const char* message)
 
 namespace log_detail {
 
+// GLOBAL: ROBLOX 0x009538ac
 boost::once_flag once_init = BOOST_ONCE_INIT;
 
 // FUNCTION: WEBSERVICE 0x10003440
+// FUNCTION: ROBLOX 0x0042d490
 void init()
 {
 	static boost::thread_specific_ptr<ThreadLogManager> value;
@@ -369,7 +376,7 @@ void init()
 } // namespace log_detail
 
 // FUNCTION: WEBSERVICE 0x100034b0
-// STUB: ROBLOX 0x0042d500
+// FUNCTION: ROBLOX 0x0042d500
 ThreadLogManager* ThreadLogManager::getCurrent()
 {
 	boost::call_once(&log_detail::init, log_detail::once_init);

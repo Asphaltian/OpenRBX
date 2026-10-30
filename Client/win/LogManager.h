@@ -140,6 +140,7 @@ DECOMP_SIZE_ASSERT(ThreadLogManager, 0x28)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10220f80
+// SYNTHETIC: ROBLOX 0x007ef9e0
 // `log_detail::init'::`2'::`dynamic atexit destructor for 'value''
 // clang-format on
 
