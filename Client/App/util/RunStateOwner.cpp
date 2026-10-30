@@ -136,7 +136,7 @@ void RunService::invalidateRunViews()
 }
 
 // FUNCTION: WEBSERVICE 0x10055380
-// STUB: ROBLOX 0x00569c40
+// FUNCTION: ROBLOX 0x00569c40
 RunService::~RunService()
 {
 }

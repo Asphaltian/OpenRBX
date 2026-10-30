@@ -367,7 +367,7 @@ bool BlockBlockContact::computeIsColliding(float overlapIgnored)
 }
 
 // FUNCTION: WEBSERVICE 0x100d4150
-// STUB: ROBLOX 0x0060b130
+// FUNCTION: ROBLOX 0x0060b130
 void BlockBlockContact::deleteAllConnectors()
 {
 	for (unsigned int i = 0; i < connectors.size(); i++) {

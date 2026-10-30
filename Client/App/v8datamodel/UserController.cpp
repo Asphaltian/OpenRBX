@@ -291,7 +291,7 @@ PlayerController::PlayerController(ControllerService* _controllerService, const 
 }
 
 // FUNCTION: WEBSERVICE 0x100c6760
-// STUB: ROBLOX 0x005d55b0
+// FUNCTION: ROBLOX 0x005d55b0
 void PlayerController::onEvent(const RunService* source, Heartbeat event)
 {
 	const UserInputBase* hardware = getHardwareDevice();

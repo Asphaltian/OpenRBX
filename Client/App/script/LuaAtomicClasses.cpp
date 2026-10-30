@@ -730,7 +730,7 @@ template <>
 const char* Bridge<G3D::CoordinateFrame, 1>::className = "CFrame";
 
 // FUNCTION: WEBSERVICE 0x100af750
-// STUB: ROBLOX 0x00600140
+// FUNCTION: ROBLOX 0x00600140
 template <>
 int Bridge<G3D::CoordinateFrame, 1>::on_index(const G3D::CoordinateFrame& value, const char* name, lua_State* L)
 {

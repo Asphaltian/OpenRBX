@@ -819,7 +819,7 @@ void SoundService::garbageCollectSounds()
 }
 
 // FUNCTION: WEBSERVICE 0x10082bd0
-// STUB: ROBLOX 0x005c6690
+// FUNCTION: ROBLOX 0x005c6690
 void SoundService::onEvent(const RunService* source, Heartbeat event)
 {
 	if (system) {

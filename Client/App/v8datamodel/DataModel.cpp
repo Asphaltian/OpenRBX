@@ -507,7 +507,7 @@ boost::shared_ptr<DataModel> DataModel::createDataModel()
 }
 
 // FUNCTION: WEBSERVICE 0x1007c4a0
-// STUB: ROBLOX 0x00595170
+// FUNCTION: ROBLOX 0x00595170
 std::string DataModel::httpGet(std::string url, bool synchronous)
 {
 	if (synchronous) {
@@ -524,7 +524,7 @@ std::string DataModel::httpGet(std::string url, bool synchronous)
 }
 
 // FUNCTION: WEBSERVICE 0x1007c6b0
-// STUB: ROBLOX 0x00595380
+// FUNCTION: ROBLOX 0x00595380
 std::string DataModel::httpPost(std::string url, std::string data, bool synchronous)
 {
 	if (synchronous) {

@@ -77,7 +77,7 @@ public:
 };
 
 // FUNCTION: WEBSERVICE 0x100325a0
-// STUB: ROBLOX 0x005aa010
+// FUNCTION: ROBLOX 0x005aa010
 worker_thread::~worker_thread()
 {
 	boost::mutex::scoped_lock lock(_data->sync);

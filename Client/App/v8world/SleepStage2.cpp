@@ -740,7 +740,7 @@ void SleepStage::stepAssembliesRecursiveWakePending()
 }
 
 // FUNCTION: WEBSERVICE 0x1011afa0
-// STUB: ROBLOX 0x00644a90
+// FUNCTION: ROBLOX 0x00644a90
 void SleepStage::stepAssembliesWakePending()
 {
 	static std::vector<Assembly*> toWake;

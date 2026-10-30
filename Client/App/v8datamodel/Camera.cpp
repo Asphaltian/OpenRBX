@@ -235,7 +235,7 @@ void Camera::updateFocus()
 }
 
 // FUNCTION: WEBSERVICE 0x100c2f60
-// STUB: ROBLOX 0x005d6bc0
+// FUNCTION: ROBLOX 0x005d6bc0
 void Camera::updateGoal()
 {
 	switch (cameraType) {

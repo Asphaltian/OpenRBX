@@ -536,7 +536,7 @@ void Humanoid::buildJoints()
 }
 
 // FUNCTION: WEBSERVICE 0x100a2f70
-// STUB: ROBLOX 0x005eb540
+// FUNCTION: ROBLOX 0x005eb540
 G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
 {
 	G3D::Vector3 result = G3D::Vector3::zero();
@@ -1001,7 +1001,7 @@ void Humanoid::onEvent(const RunService* source, Stepped event)
 }
 
 // FUNCTION: WEBSERVICE 0x100a5770
-// STUB: ROBLOX 0x005ede10
+// FUNCTION: ROBLOX 0x005ede10
 void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
 {
 	if (noAdjust) {
