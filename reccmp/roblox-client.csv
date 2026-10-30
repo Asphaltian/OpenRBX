@@ -13,7 +13,9 @@ address,type,symbol,name,module,size
 00451f00,library,??$?0V?$bind_t@W4work_result@worker_thread@RBX@@P6A?AW4123@V?$shared_ptr@Udata@ErrorUploader@@@boost@@@ZV?$list1@V?$value@V?$shared_ptr@Udata@ErrorUploader@@@boost@@@_bi@boost@@@_bi@5@@_bi@boost@@@?$function0@W4work_result@worker_thread@RBX@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@QAE@V?$bind_t@W4work_result@worker_thread@RBX@@P6A?AW4123@V?$shared_ptr@Udata@ErrorUploader@@@boost@@@ZV?$list1@V?$value@V?$shared_ptr@Udata@ErrorUploader@@@boost@@@_bi@boost@@@_bi@5@@_bi@1@H@Z,,,
 004536e0,library,?push_back@?$vector@UCColorInfo@CRobloxControlColorSelector@@V?$allocator@UCColorInfo@CRobloxControlColorSelector@@@std@@@std@@QAEXABUCColorInfo@CRobloxControlColorSelector@@@Z,,,
 005c2230,library,?find@?$_Tree@V?$_Tmap_traits@W4SoundType@RBX@@V?$shared_ptr@VSoundChannel@Soundscape@RBX@@@boost@@U?$less@W4SoundType@RBX@@@std@@V?$allocator@U?$pair@$$CBW4SoundType@RBX@@V?$shared_ptr@VSoundChannel@Soundscape@RBX@@@boost@@@std@@@6@$0A@@std@@@std@@QAE?AViterator@12@ABW4SoundType@RBX@@@Z,,,
+0042a970,function,,,,0x169
 00434730,function,,,,0xd0
+0058e7e0,function,,,,0xb8
 006584a0,function,,,,0x8c
 00666ea0,library,?erase@?$_Tree@V?$_Tset_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z,,,
 006884f0,library,?GetShortcutManager@CXTPCommandBars@@QBEPAVCXTPShortcutManager@@XZ,,,

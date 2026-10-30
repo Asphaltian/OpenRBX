@@ -661,7 +661,7 @@ GuiResponse UnifiedWidget::processShown(const GuiEvent& p_unk0x04)
 	return processShown_OutOfTitle(p_unk0x04);
 }
 
-// STUB: ROBLOX 0x0058e7e0
+// FUNCTION: ROBLOX 0x0058e7e0
 GuiResponse UnifiedWidget::process(const GuiEvent& p_unk0x04)
 {
 	if (isVisible() && p_unk0x04.isMouseEvent()) {

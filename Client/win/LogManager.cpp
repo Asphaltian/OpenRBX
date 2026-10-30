@@ -79,7 +79,7 @@ RBX::Log* LogManager::getLog()
 }
 
 // FUNCTION: WEBSERVICE 0x10002190
-// STUB: ROBLOX 0x0042d5e0
+// FUNCTION: ROBLOX 0x0042d5e0
 RBX::Log* MainLogManager::provideLog()
 {
 	if (GetCurrentThreadId() == threadID) {
@@ -347,7 +347,7 @@ bool MainLogManager::handleG3DFailure(
 }
 
 // FUNCTION: WEBSERVICE 0x100032e0
-// STUB: ROBLOX 0x0042a970
+// FUNCTION: ROBLOX 0x0042a970
 void LogManager::ReportEvent(WORD type, const char* message)
 {
 	switch (type) {
