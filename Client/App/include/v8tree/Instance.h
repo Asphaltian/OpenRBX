@@ -80,9 +80,6 @@ struct DescendentRemoving
 		: instance(instance), parent(parent)
 	{
 	}
-
-	// SYNTHETIC: ROBLOX 0x00422c10
-	// ??1DescendentRemoving@RBX@@QAE@XZ
 };
 // SIZE 0xc
 struct AncestorChanged
