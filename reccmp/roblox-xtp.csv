@@ -1737,6 +1737,7 @@ address,type,symbol
 00717910,library,?CreateOriginalAccelTable@CXTPShortcutManager@@QAEXXZ
 00717940,library,?Reset@CXTPShortcutManager@@UAEXXZ
 00717fc0,library,?Format@CXTPShortcutManager@@UAE?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@PAUtagACCEL@@PAH@Z
+00718050,library,?CompareAccelKey@CXTPShortcutManager@@SAHDI@Z
 00718240,library,?DoPropExchange@CXTPShortcutManager@@UAEXPAVCXTPPropExchange@@@Z
 00718d20,library,?Undo@CManageState@CXTPResourceManager@@QAEXXZ
 00718d40,library,?Close@CXTPResourceManager@@UAEXXZ
@@ -2359,11 +2360,13 @@ address,type,symbol
 00754510,library,?KeyboardProc@CXTPDockingPaneKeyboardHook@@KGJHIJ@Z
 00754890,library,?SetupKeyboardHook@CXTPDockingPaneKeyboardHook@@QAEXPAVCXTPDockingPaneManager@@H@Z
 00754980,library,??1CXTPDockingPaneMiniWnd@@MAE@XZ
+00754a20,library,?Copy@CXTPDockingPaneMiniWnd@@MAEXPAV1@PAV?$CMap@PAVCXTPDockingPaneBase@@PAV1@PAV1@PAV1@@@@Z
 00754b90,library,?OnDestroy@CXTPDockingPaneMiniWnd@@IAEXXZ
 00754bb0,library,?IsThemed@CXTPDockingPaneMiniWnd@@IBEHXZ
 00754bd0,library,?OnNcActivate@CXTPDockingPaneMiniWnd@@IAEHH@Z
 00754c00,library,?OnWndMsg@CXTPDockingPaneMiniWnd@@MAEHIIJPAJ@Z
 00754c70,library,?GetPaneHwnd@CXTPDockingPaneMiniWnd@@MBEPAUHWND__@@XZ
+00754ca0,library,?Init@CXTPDockingPaneMiniWnd@@IAEXPAVCXTPDockingPaneBase@@VCRect@@@Z
 00754f50,library,?OnSizing@CXTPDockingPaneMiniWnd@@IAEXIPAUtagRECT@@@Z
 00754f80,library,?UpdateWindowOpacity@CXTPDockingPaneMiniWnd@@MAEXXZ
 00755010,library,?OnIdleUpdateCmdUI@CXTPDockingPaneMiniWnd@@IAEXXZ
@@ -2462,6 +2465,7 @@ address,type,symbol
 00758fa0,library,?AccessibleHitTest@CXTPDockingPaneTabbedContainer@@MAEJJJPAUtagVARIANT@@@Z
 007590c0,library,?OnDragOver@CContainerDropTarget@CXTPDockingPaneTabbedContainer@@EAEKPAVCWnd@@PAVCOleDataObject@@KVCPoint@@@Z
 00759130,library,??0CXTPDockingPaneTabbedContainer@@IAE@PAVCXTPDockingPaneLayout@@@Z
+007593d0,library,?_InsertPane@CXTPDockingPaneTabbedContainer@@IAEXPAVCXTPDockingPane@@H@Z
 007594d0,library,?GetPaneTab@CXTPDockingPaneTabbedContainer@@QBEPAVCXTPTabManagerItem@@PAVCXTPDockingPane@@@Z
 00759520,library,?SelectPane@CXTPDockingPaneTabbedContainer@@UAEXPAVCXTPDockingPane@@HH@Z
 00759a80,library,?Copy@CXTPDockingPaneTabbedContainer@@MAEXPAV1@PAV?$CMap@PAVCXTPDockingPaneBase@@PAV1@PAV1@PAV1@@@K@Z

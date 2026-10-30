@@ -286,8 +286,6 @@ protected:
 	//-----------------------------------------------------------------------
 	BOOL OnAction(XTPDockingPaneAction action);
 
-	void CreateContainer();
-
 //{{AFX_CODEJOCK_PRIVATE
 	DECLARE_MESSAGE_MAP()
 

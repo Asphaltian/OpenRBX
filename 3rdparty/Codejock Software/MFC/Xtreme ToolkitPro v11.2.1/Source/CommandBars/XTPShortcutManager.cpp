@@ -473,9 +473,6 @@ CString CXTPShortcutManager::CKeyHelper::GetLocalKeyNameText(UINT uiVirtKey)
 
 BOOL CXTPShortcutManager::CompareAccelKey(TCHAR chAccel, UINT wParam)
 {
-	if (wParam >= VK_NUMPAD0 && wParam <= VK_NUMPAD9)
-		return (UINT)chAccel == (wParam + '0' - VK_NUMPAD0);
-
 	TCHAR tchVirtualKey = (TCHAR)MapVirtualKey(wParam, 2);
 	if (tchVirtualKey == NULL)
 		return FALSE;

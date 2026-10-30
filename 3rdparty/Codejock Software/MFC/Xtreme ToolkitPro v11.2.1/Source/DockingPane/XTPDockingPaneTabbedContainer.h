@@ -316,12 +316,6 @@ protected:
 	//-----------------------------------------------------------------------
 	virtual void OnTabsChanged();
 
-	//-----------------------------------------------------------------------
-	// Summary:
-	//     This member is called to create pane
-	//-----------------------------------------------------------------------
-	virtual void CreateContainer();
-
 
 protected:
 //{{AFX_CODEJOCK_PRIVATE

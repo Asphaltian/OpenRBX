@@ -316,17 +316,6 @@ void CXTPDockingPaneTabbedContainer::OnTabsChanged()
 	m_bLockReposition -= 1;
 }
 
-void CXTPDockingPaneTabbedContainer::CreateContainer()
-{
-	SAFE_CALLPTR(m_pParentContainer, CreateContainer());
-
-	if (!m_hWnd)
-	{
-		Create(_T("XTPDockingPaneTabbedContainer"), _T(""), WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_CHILD | WS_VISIBLE, CRect(0, 0, 0, 0), GetDockingSite(), 0);
-		m_pDropTarget->Register(this);
-	}
-}
-
 void CXTPDockingPaneTabbedContainer::_InsertPane(CXTPDockingPane* pPane, BOOL bSetFocus)
 {
 	ASSERT(m_pLayout);
@@ -335,7 +324,8 @@ void CXTPDockingPaneTabbedContainer::_InsertPane(CXTPDockingPane* pPane, BOOL bS
 
 	if (!m_hWnd && !m_pLayout->IsUserLayout())
 	{
-		CreateContainer();
+		Create(_T("XTPDockingPaneTabbedContainer"), _T(""), WS_CLIPCHILDREN | WS_CLIPSIBLINGS | WS_CHILD | WS_VISIBLE, CRect(0, 0, 0, 0), GetDockingSite(), 0);
+		m_pDropTarget->Register(this);
 	}
 
 	m_lstPanes.AddTail(pPane);

@@ -92,8 +92,7 @@ CXTPDockingPaneMiniWnd::CXTPDockingPaneMiniWnd(CXTPDockingPaneLayout* pLayout)
 
 void CXTPDockingPaneMiniWnd::Init(CXTPDockingPaneBase* pPane, CRect rc)
 {
-	m_rcWindow = rc;
-	CreateContainer();
+	Create(rc);
 
 	if (pPane->GetType() == xtpPaneTypeDockingPane)
 	{
@@ -144,7 +143,7 @@ void CXTPDockingPaneMiniWnd::Copy(CXTPDockingPaneMiniWnd* pClone, CXTPPaneToPane
 
 	if (!m_pLayout->IsUserLayout())
 	{
-		CreateContainer();
+		Create(m_rcWindow);
 		m_pTopContainer->OnParentContainerChanged(m_pTopContainer);
 		OnChildContainerChanged(m_pTopContainer);
 	}
@@ -234,14 +233,6 @@ void CXTPDockingPaneMiniWnd::InvalidatePane(BOOL /*bSelectionChanged*/)
 	SendMessage(WM_NCPAINT);
 
 	OnFocusChanged();
-}
-
-void CXTPDockingPaneMiniWnd::CreateContainer()
-{
-	if (!m_hWnd)
-	{
-		Create(m_rcWindow);
-	}
 }
 
 void CXTPDockingPaneMiniWnd::OnChildContainerChanged(CXTPDockingPaneBase* /*pContainer*/)

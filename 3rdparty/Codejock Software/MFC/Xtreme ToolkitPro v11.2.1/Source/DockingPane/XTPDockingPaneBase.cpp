@@ -211,11 +211,6 @@ CXTPDockingPanePaintManager* CXTPDockingPaneBase::GetPaintManager() const
 	return pManager->m_pPaintManager;
 }
 
-void CXTPDockingPaneBase::CreateContainer()
-{
-	SAFE_CALLPTR(m_pParentContainer, CreateContainer());
-}
-
 //////////////////////////////////////////////////////////////////////////
 
 CXTPDockingPaneClientContainer::CXTPDockingPaneClientContainer(CXTPDockingPaneLayout* pLayout)
