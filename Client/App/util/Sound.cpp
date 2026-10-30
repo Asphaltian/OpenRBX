@@ -727,7 +727,7 @@ void SoundService::closeFmod()
 }
 
 // FUNCTION: WEBSERVICE 0x10081200
-// STUB: ROBLOX 0x005c4e00
+// FUNCTION: ROBLOX 0x005c4e00
 SoundService::~SoundService()
 {
 }

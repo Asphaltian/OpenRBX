@@ -209,7 +209,7 @@ void AggregatingSceneManager::Bucket::addToQueue(const G3D::ReferenceCountedPoin
 }
 
 // FUNCTION: WEBSERVICE 0x101f5850
-// STUB: ROBLOX 0x00497fa0
+// FUNCTION: ROBLOX 0x00497fa0
 AggregatingSceneManager::~AggregatingSceneManager()
 {
 }

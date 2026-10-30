@@ -47,7 +47,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004ce30
-	// STUB: ROBLOX 0x004b4250
+	// TEMPLATE: ROBLOX 0x004b4250
 	// RBX::CopyOnWrite<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > >::write
 	// clang-format on
 	boost::shared_ptr<T>& write()

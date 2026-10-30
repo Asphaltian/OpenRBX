@@ -216,7 +216,7 @@ void SerializerV2::loadInstances(XmlElement* root, std::vector<boost::shared_ptr
 }
 
 // FUNCTION: WEBSERVICE 0x10098830
-// STUB: ROBLOX 0x005a42c0
+// FUNCTION: ROBLOX 0x005a42c0
 void SerializerV2::isolateHandles(XmlElement* root)
 {
 	std::map<RBX::Instance*, RBX::InstanceHandle> isolationMap;

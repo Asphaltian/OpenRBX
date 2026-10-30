@@ -276,7 +276,7 @@ void AbuseReporter::add(AbuseReport& r, const std::list<ChatMessage>& chatHistor
 }
 
 // FUNCTION: WEBSERVICE 0x10194680
-// STUB: ROBLOX 0x004b5630
+// FUNCTION: ROBLOX 0x004b5630
 worker_thread::work_result AbuseReporter::processRequests(boost::shared_ptr<data> _data, std::string abuseUrl)
 {
 	try {

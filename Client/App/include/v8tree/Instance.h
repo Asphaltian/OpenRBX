@@ -385,7 +385,7 @@ public:
 	Instance* getChild(unsigned int index) { return (*children)[index].get(); }
 
 	// FUNCTION: WEBSERVICE 0x100469f0
-	// STUB: ROBLOX 0x00447c60
+	// FUNCTION: ROBLOX 0x00447c60
 	void raisePropertyChanged(const Reflection::PropertyDescriptor& descriptor)
 	{
 		Reflection::Property property(descriptor, this);
@@ -663,10 +663,10 @@ template <class T, class Base, const char* sName>
 	// TEMPLATE: ROBLOX 0x005e2850
 	// RBX::DescribedNonCreatable<RBX::BackpackItem,RBX::Widget,&RBX::sBackpackItem>::DescribedNonCreatable<RBX::BackpackItem,RBX::Widget,&RBX::sBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100c90f0
-	// STUB: ROBLOX 0x005e31c0
+	// TEMPLATE: ROBLOX 0x005e31c0
 	// RBX::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
 	// TEMPLATE: WEBSERVICE 0x100c91d0
-	// STUB: ROBLOX 0x005e32d0
+	// TEMPLATE: ROBLOX 0x005e32d0
 	// RBX::DescribedCreatable<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>::DescribedCreatable<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>
 	// TEMPLATE: WEBSERVICE 0x100c9ae0
 	// TEMPLATE: ROBLOX 0x005e3b90

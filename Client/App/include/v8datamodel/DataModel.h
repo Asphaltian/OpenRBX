@@ -159,6 +159,7 @@ private:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100719f0
+// TEMPLATE: ROBLOX 0x0058ed20
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::declareSignature
 // TEMPLATE: WEBSERVICE 0x10071a50
 // TEMPLATE: ROBLOX 0x0058ed80
@@ -198,7 +199,7 @@ private:
 // TEMPLATE: ROBLOX 0x00593620
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,void __cdecl(RBX::ContentId),1>::execute
 // TEMPLATE: WEBSERVICE 0x1007a210
-// STUB: ROBLOX 0x00593710
+// TEMPLATE: ROBLOX 0x00593710
 // RBX::Reflection::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::BoundFuncDesc<RBX::DataModel,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>
 // TEMPLATE: WEBSERVICE 0x1007a2d0
 // TEMPLATE: ROBLOX 0x005937d0

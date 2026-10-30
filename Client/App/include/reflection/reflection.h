@@ -773,7 +773,7 @@ public:
 	// TEMPLATE: ROBLOX 0x0057cc30
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100c3ad0
-	// STUB: ROBLOX 0x005d7670
+	// TEMPLATE: ROBLOX 0x005d7670
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType><enum RBX::Camera::CameraType (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(enum RBX::Camera::CameraType)>
 	// TEMPLATE: WEBSERVICE 0x100c3d60
 	// TEMPLATE: ROBLOX 0x005d7900
@@ -782,7 +782,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005d7940
 	// RBX::Reflection::EnumPropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::getIndexValue
 	// TEMPLATE: WEBSERVICE 0x100c8830
-	// STUB: ROBLOX 0x005e2900
+	// TEMPLATE: ROBLOX 0x005e2900
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType><enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>
 	// TEMPLATE: WEBSERVICE 0x100c88d0
 	// TEMPLATE: ROBLOX 0x005e29a0
@@ -833,7 +833,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005c6040
 	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::readValue
 	// TEMPLATE: WEBSERVICE 0x10099de0
-	// STUB: ROBLOX 0x005f7fc0
+	// TEMPLATE: ROBLOX 0x005f7fc0
 	// RBX::Reflection::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::EnumPropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType><enum RBX::Controller::ControllerType (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(enum RBX::Controller::ControllerType)>
 	// TEMPLATE: WEBSERVICE 0x1009a140
 	// TEMPLATE: ROBLOX 0x005f8410
@@ -896,7 +896,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005b1b80
 	// RBX::Reflection::EnumPropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::readValue
 	// TEMPLATE: WEBSERVICE 0x100b46b0
-	// STUB: ROBLOX 0x0057c6b0
+	// TEMPLATE: ROBLOX 0x0057c6b0
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction><enum RBX::Debugable::AssertAction (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::Debugable::AssertAction)>
 	// TEMPLATE: WEBSERVICE 0x100b48e0
 	// STUB: ROBLOX 0x0057c750
@@ -944,7 +944,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005e0130
 	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::readValue
 	// TEMPLATE: WEBSERVICE 0x1012d340
-	// STUB: ROBLOX 0x005b3c00
+	// TEMPLATE: ROBLOX 0x005b3c00
 	// RBX::Reflection::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::EnumPropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType><enum RBX::SpecialShape::MeshType const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(enum RBX::SpecialShape::MeshType)>
 	// TEMPLATE: WEBSERVICE 0x1012d620
 	// TEMPLATE: ROBLOX 0x005b3f10
@@ -1021,7 +1021,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00656ff0
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::assignIDREF
 	// TEMPLATE: WEBSERVICE 0x1005bd80
-	// STUB: ROBLOX 0x00566630
+	// TEMPLATE: ROBLOX 0x00566630
 	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x1005be40
 	// TEMPLATE: ROBLOX 0x005ebcc0
@@ -1033,7 +1033,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005b7970
 	// RBX::Reflection::RefPropDescriptor<RBX::Workspace,RBX::Camera>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100a35c0
-	// STUB: ROBLOX 0x005ebc00
+	// TEMPLATE: ROBLOX 0x005ebc00
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100a3680
 	// TEMPLATE: ROBLOX 0x005ebd40
@@ -1042,16 +1042,16 @@ public:
 	// TEMPLATE: ROBLOX 0x005df170
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::equalValues
 	// TEMPLATE: WEBSERVICE 0x100c3cb0
-	// STUB: ROBLOX 0x005d7850
+	// TEMPLATE: ROBLOX 0x005d7850
 	// RBX::Reflection::RefPropDescriptor<RBX::Camera,RBX::Instance>::RefPropDescriptor<RBX::Camera,RBX::Instance><RBX::Instance * (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x100d8810
-	// STUB: ROBLOX 0x005f26d0
+	// TEMPLATE: ROBLOX 0x005f26d0
 	// RBX::Reflection::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance>::RefPropDescriptor<RBX::AutoJoint,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(RBX::PartInstance *)>
 	// SYNTHETIC: WEBSERVICE 0x100e5fe0
 	// SYNTHETIC: ROBLOX 0x005f80d0
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100e6a40
-	// STUB: ROBLOX 0x00619930
+	// TEMPLATE: ROBLOX 0x00619930
 	// RBX::Reflection::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole>::RefPropDescriptor<RBX::VelocityMotor,RBX::Hole><RBX::Hole * (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(RBX::Hole *)>
 	// TEMPLATE: WEBSERVICE 0x100e6b40
 	// TEMPLATE: ROBLOX 0x00619a30
@@ -1063,7 +1063,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005ebd00
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100f3970
-	// STUB: ROBLOX 0x00632650
+	// TEMPLATE: ROBLOX 0x00632650
 	// RBX::Reflection::RefPropDescriptor<RBX::ObjectValue,RBX::Instance>::RefPropDescriptor<RBX::ObjectValue,RBX::Instance><RBX::Instance * (__thiscall RBX::ObjectValue::*)(void)const ,void (__thiscall RBX::ObjectValue::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x10102200
 	// TEMPLATE: ROBLOX 0x005df580

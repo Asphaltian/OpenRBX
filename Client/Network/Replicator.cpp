@@ -2018,7 +2018,7 @@ boost::shared_ptr<Reflection::DescribedBase> Replicator::sendMarker()
 }
 
 // FUNCTION: WEBSERVICE 0x101aa110
-// STUB: ROBLOX 0x004d3230
+// FUNCTION: ROBLOX 0x004d3230
 Replicator::~Replicator()
 {
 	if (peer) {

@@ -66,6 +66,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // TEMPLATE: WEBSERVICE 0x1000c2e0
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000c2f0
+// STUB: ROBLOX 0x004748a0
 // RBX::ServiceProvider::doGetClassIndex<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000c360
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Workspace>

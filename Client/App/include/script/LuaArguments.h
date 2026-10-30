@@ -123,7 +123,7 @@ public:
 	int push(const Reflection::Value& value) const { return push(value, L); }
 
 	// FUNCTION: WEBSERVICE 0x10062a40
-	// STUB: ROBLOX 0x0056fe60
+	// FUNCTION: ROBLOX 0x0056fe60
 	static int push(const Reflection::Value& value, lua_State* const L)
 	{
 		if (value.isType<void>()) {

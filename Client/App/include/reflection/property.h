@@ -535,6 +535,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005c1c70
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId>::TypedPropertyDescriptor<RBX::Soundscape::SoundId>
 	// TEMPLATE: WEBSERVICE 0x1007e140
+	// TEMPLATE: ROBLOX 0x005c1f00
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,int>::getset<int (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x1007e1a0
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,bool>::getset<bool (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(bool)>
@@ -545,18 +546,21 @@ public:
 	// TEMPLATE: ROBLOX 0x005c5cd0
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Soundscape::SoundChannel>
 	// TEMPLATE: WEBSERVICE 0x100a14a0
+	// TEMPLATE: ROBLOX 0x005e9a90
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100a1510
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::getset<G3D::Vector3 const & (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x100a1580
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,G3D::Vector3>::getset<G3D::Vector3 (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x100c3380
+	// TEMPLATE: ROBLOX 0x005d6f90
 	// RBX::Reflection::PropDescriptor<RBX::Camera,enum RBX::Camera::CameraType>::getset<enum RBX::Camera::CameraType (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(enum RBX::Camera::CameraType)>
 	// TEMPLATE: WEBSERVICE 0x100c33e0
 	// RBX::Reflection::PropDescriptor<RBX::Camera,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100c3440
 	// RBX::Reflection::PropDescriptor<RBX::Camera,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100c34a0
+	// TEMPLATE: ROBLOX 0x005d70b0
 	// RBX::Reflection::PropDescriptor<RBX::Camera,RBX::Instance *>::getset<RBX::Instance * (__thiscall RBX::Camera::*)(void)const ,void (__thiscall RBX::Camera::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x100ca2f0
 	// TEMPLATE: ROBLOX 0x0060ef60
@@ -585,7 +589,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100dbfe0
 	// RBX::Reflection::PropDescriptor<RBX::Accoutrement,G3D::Vector3>::getset<G3D::Vector3 const (__thiscall RBX::Accoutrement::*)(void)const ,void (__thiscall RBX::Accoutrement::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x100e0e40
-	// STUB: ROBLOX 0x005e68f0
+	// TEMPLATE: ROBLOX 0x005e68f0
 	// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundProp<RBX::TextureId,1><RBX::ShirtGraphic>
 	// TEMPLATE: WEBSERVICE 0x100e0f20
 	// TEMPLATE: ROBLOX 0x005e69d0
@@ -597,8 +601,10 @@ public:
 	// TEMPLATE: ROBLOX 0x005e6b90
 	// RBX::Reflection::BoundProp<RBX::BrickColor,1>::BoundProp<RBX::BrickColor,1><RBX::BodyColors>
 	// TEMPLATE: WEBSERVICE 0x100e49e0
+	// TEMPLATE: ROBLOX 0x00617f70
 	// RBX::Reflection::PropDescriptor<RBX::VelocityMotor,RBX::Hole *>::getset<RBX::Hole * (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(RBX::Hole *)>
 	// TEMPLATE: WEBSERVICE 0x100e8120
+	// TEMPLATE: ROBLOX 0x006272b0
 	// RBX::Reflection::PropDescriptor<RBX::FlagStand,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::FlagStand::*)(void)const ,void (__thiscall RBX::FlagStand::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x100ebfe0
 	// RBX::Reflection::PropDescriptor<RBX::Rocket,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Rocket::*)(void)const ,void (__thiscall RBX::Rocket::*)(RBX::PartInstance *)>
@@ -627,6 +633,7 @@ public:
 	// TEMPLATE: ROBLOX 0x0062e1c0
 	// RBX::Reflection::TypedPropertyDescriptor<double>::TypedPropertyDescriptor<double>
 	// TEMPLATE: WEBSERVICE 0x100ef130
+	// TEMPLATE: ROBLOX 0x0062e230
 	// RBX::Reflection::PropDescriptor<RBX::ObjectValue,RBX::Instance *>::getset<RBX::Instance * (__thiscall RBX::ObjectValue::*)(void)const ,void (__thiscall RBX::ObjectValue::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x100ef330
 	// TEMPLATE: ROBLOX 0x0062e3a0
@@ -658,13 +665,16 @@ public:
 	// TEMPLATE: ROBLOX 0x005e4ed0
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::SpawnLocation>
 	// TEMPLATE: WEBSERVICE 0x10117580
+	// TEMPLATE: ROBLOX 0x00656d60
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame (__thiscall RBX::Mouse::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x101175d0
 	// TEMPLATE: ROBLOX 0x00656db0
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::Mouse::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x10117620
+	// TEMPLATE: ROBLOX 0x00656e00
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,int>::getset<int (__thiscall RBX::Mouse::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x10117670
+	// TEMPLATE: ROBLOX 0x00656e50
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,RBX::TextureId>::getset<RBX::TextureId (__thiscall RBX::Mouse::*)(void)const ,void (__thiscall RBX::Mouse::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x1018e580
 	// TEMPLATE: ROBLOX 0x004ab950
@@ -688,6 +698,7 @@ public:
 	// STUB: ROBLOX 0x00448890
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>::TypedPropertyDescriptor<G3D::Vector3>
 	// FUNCTION: WEBSERVICE 0x100434e0
+	// STUB: ROBLOX 0x005aeb70
 	// RBX::Reflection::TypedPropertyDescriptor<float>::TypedPropertyDescriptor<float>
 	// FUNCTION: WEBSERVICE 0x10048bd0
 	// STUB: ROBLOX 0x00446320
@@ -704,6 +715,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100996a0
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,bool>::getset<bool (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(bool)>
 	// FUNCTION: WEBSERVICE 0x10094c50
+	// STUB: ROBLOX 0x005ac210
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::TypedPropertyDescriptor<RBX::TextureId>
 	// FUNCTION: WEBSERVICE 0x1009ba30
 	// STUB: ROBLOX 0x004a65a0
@@ -724,10 +736,13 @@ public:
 	// TEMPLATE: ROBLOX 0x00448910
 	// RBX::Reflection::TypedPropertyDescriptor<bool>::isReadOnly
 	// TEMPLATE: WEBSERVICE 0x1009bb20
+	// TEMPLATE: ROBLOX 0x005aebe0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x1005b100
+	// TEMPLATE: ROBLOX 0x00565d80
 	// RBX::Reflection::PropDescriptor<RBX::ModelInstance,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x1005b170
+	// TEMPLATE: ROBLOX 0x00565df0
 	// RBX::Reflection::PropDescriptor<RBX::ModelInstance,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>
 	// FUNCTION: WEBSERVICE 0x1009bce0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(RBX::BrickColor)>
@@ -742,6 +757,7 @@ public:
 	// FUNCTION: WEBSERVICE 0x100a16d0
 	// RBX::Reflection::PropDescriptor<RBX::Humanoid,float>::getset<float (__thiscall RBX::Humanoid::*)(void)const ,void (__thiscall RBX::Humanoid::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100b36d0
+	// TEMPLATE: ROBLOX 0x0057b380
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,bool>::getset<bool (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(bool)>
 	// TEMPLATE: WEBSERVICE 0x100be0e0
 	// RBX::Reflection::PropDescriptor<RBX::Team,int>::getset<int (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(int)>
@@ -750,8 +766,10 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100be1a0
 	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::getset<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>
 	// TEMPLATE: WEBSERVICE 0x100c7a70
+	// TEMPLATE: ROBLOX 0x005e1c80
 	// RBX::Reflection::PropDescriptor<RBX::BackpackItem,RBX::TextureId>::getset<RBX::TextureId const (__thiscall RBX::BackpackItem::*)(void)const ,void (__thiscall RBX::BackpackItem::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x100c7ad0
+	// TEMPLATE: ROBLOX 0x005e1ce0
 	// RBX::Reflection::PropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::getset<enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>
 	// TEMPLATE: WEBSERVICE 0x100c7b30
 	// TEMPLATE: ROBLOX 0x005e1d40
@@ -844,22 +862,25 @@ public:
 	// TEMPLATE: ROBLOX 0x004b3cc0
 	// RBX::Reflection::PropDescriptor<RBX::Network::Players,int>::PropDescriptor<RBX::Network::Players,int><int (__thiscall RBX::Network::Players::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x10193310
-	// STUB: ROBLOX 0x004b3d70
+	// TEMPLATE: ROBLOX 0x004b3d70
 	// RBX::Reflection::PropDescriptor<RBX::Network::Players,int>::PropDescriptor<RBX::Network::Players,int><int (__thiscall RBX::Network::Players::*)(void)const ,void (__thiscall RBX::Network::Players::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x1018e7f0
-	// STUB: ROBLOX 0x004abbc0
+	// TEMPLATE: ROBLOX 0x004abbc0
 	// RBX::Reflection::PropDescriptor<RBX::Network::Player,bool>::PropDescriptor<RBX::Network::Player,bool><bool (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(bool)>
 	// TEMPLATE: WEBSERVICE 0x1018e740
-	// STUB: ROBLOX 0x004abb10
+	// TEMPLATE: ROBLOX 0x004abb10
 	// RBX::Reflection::PropDescriptor<RBX::Network::Player,RBX::BrickColor>::PropDescriptor<RBX::Network::Player,RBX::BrickColor><RBX::BrickColor (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x1018c700
+	// TEMPLATE: ROBLOX 0x004a5ce0
 	// RBX::Reflection::PropDescriptor<RBX::Network::Player,bool>::getset<bool (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(bool)>
 	// TEMPLATE: WEBSERVICE 0x1018ce60
+	// TEMPLATE: ROBLOX 0x004a67d0
 	// RBX::Reflection::PropDescriptor<RBX::Network::Player,RBX::BrickColor>::getset<RBX::BrickColor (__thiscall RBX::Network::Player::*)(void)const ,void (__thiscall RBX::Network::Player::*)(RBX::BrickColor)>
 	// TEMPLATE: WEBSERVICE 0x101918c0
 	// TEMPLATE: ROBLOX 0x004b0b10
 	// RBX::Reflection::PropDescriptor<RBX::Network::Players,int>::getset<int (__thiscall RBX::Network::Players::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x10191910
+	// TEMPLATE: ROBLOX 0x004b0b60
 	// RBX::Reflection::PropDescriptor<RBX::Network::Players,int>::getset<int (__thiscall RBX::Network::Players::*)(void)const ,void (__thiscall RBX::Network::Players::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x1019b5c0
 	// TEMPLATE: ROBLOX 0x004c1e10
@@ -888,8 +909,10 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100b3980
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,float>::getset<float (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x100b39d0
+	// TEMPLATE: ROBLOX 0x0057b5f0
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,int>::getset<int (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x100b3a20
+	// TEMPLATE: ROBLOX 0x0057b640
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::getset<std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// clang-format on
 	template <class Getter, class Setter>
@@ -918,7 +941,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10081fe0
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,float>::PropDescriptor<RBX::Soundscape::SoundChannel,float><float (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x10082080
-	// STUB: ROBLOX 0x005c5af0
+	// TEMPLATE: ROBLOX 0x005c5af0
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,int>::PropDescriptor<RBX::Soundscape::SoundChannel,int><int (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x10082120
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,bool>::PropDescriptor<RBX::Soundscape::SoundChannel,bool><bool (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(bool)>
@@ -928,13 +951,13 @@ public:
 	// TEMPLATE: ROBLOX 0x005f7df0
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::PVInstance,G3D::CoordinateFrame><int,void (__thiscall RBX::PVInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x1009e0b0
-	// STUB: ROBLOX 0x005b0b90
+	// TEMPLATE: ROBLOX 0x005b0b90
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::PartInstance,G3D::CoordinateFrame><G3D::CoordinateFrame const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x1005bcc0
-	// STUB: ROBLOX 0x00566570
+	// TEMPLATE: ROBLOX 0x00566570
 	// RBX::Reflection::PropDescriptor<RBX::ModelInstance,G3D::CoordinateFrame>::PropDescriptor<RBX::ModelInstance,G3D::CoordinateFrame><G3D::CoordinateFrame const & (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(G3D::CoordinateFrame const &)>
 	// TEMPLATE: WEBSERVICE 0x100c8660
-	// STUB: ROBLOX 0x005e2740
+	// TEMPLATE: ROBLOX 0x005e2740
 	// RBX::Reflection::PropDescriptor<RBX::BackpackItem,RBX::TextureId>::PropDescriptor<RBX::BackpackItem,RBX::TextureId><RBX::TextureId const (__thiscall RBX::BackpackItem::*)(void)const ,void (__thiscall RBX::BackpackItem::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x100cb400
 	// RBX::Reflection::PropDescriptor<RBX::Tool,G3D::CoordinateFrame>::PropDescriptor<RBX::Tool,G3D::CoordinateFrame><G3D::CoordinateFrame const & (__thiscall RBX::Tool::*)(void)const ,void (__thiscall RBX::Tool::*)(G3D::CoordinateFrame const &)>
@@ -945,18 +968,18 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100e2920
 	// RBX::Reflection::PropDescriptor<RBX::Explosion,float>::PropDescriptor<RBX::Explosion,float><float (__thiscall RBX::Explosion::*)(void)const ,void (__thiscall RBX::Explosion::*)(float)>
 	// TEMPLATE: WEBSERVICE 0x100b4610
-	// STUB: ROBLOX 0x0057c610
+	// TEMPLATE: ROBLOX 0x0057c610
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,bool>::PropDescriptor<RBX::DebugSettings,bool><bool (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(bool)>
 	// TEMPLATE: WEBSERVICE 0x100b4360
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,float>::PropDescriptor<RBX::DebugSettings,float><float (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x100b4400
-	// STUB: ROBLOX 0x0057c400
+	// TEMPLATE: ROBLOX 0x0057c400
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,int>::PropDescriptor<RBX::DebugSettings,int><int (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x100b44a0
-	// STUB: ROBLOX 0x0057c4a0
+	// TEMPLATE: ROBLOX 0x0057c4a0
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::PropDescriptor<RBX::DebugSettings,std::basic_string<char,std::char_traits<char>,std::allocator<char> > ><std::basic_string<char,std::char_traits<char>,std::allocator<char> > (__thiscall RBX::DebugSettings::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x100e86d0
-	// STUB: ROBLOX 0x00627860
+	// TEMPLATE: ROBLOX 0x00627860
 	// RBX::Reflection::PropDescriptor<RBX::FlagStand,RBX::BrickColor>::PropDescriptor<RBX::FlagStand,RBX::BrickColor><RBX::BrickColor (__thiscall RBX::FlagStand::*)(void)const ,void (__thiscall RBX::FlagStand::*)(RBX::BrickColor)>
 	// FUNCTION: WEBSERVICE 0x100ffd30
 	// STUB: ROBLOX 0x005ac7f0
@@ -967,6 +990,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005f1cc0
 	// RBX::Reflection::PropDescriptor<RBX::AutoJoint,G3D::CoordinateFrame>::GetSetImpl<G3D::CoordinateFrame const & (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(G3D::CoordinateFrame const &)>::getValue
 	// TEMPLATE: WEBSERVICE 0x100d7ee0
+	// TEMPLATE: ROBLOX 0x005f1e20
 	// RBX::Reflection::PropDescriptor<RBX::AutoJoint,RBX::PartInstance *>::getset<RBX::PartInstance * (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(RBX::PartInstance *)>
 	// TEMPLATE: WEBSERVICE 0x100d7f40
 	// RBX::Reflection::PropDescriptor<RBX::AutoJoint,G3D::CoordinateFrame>::getset<G3D::CoordinateFrame const & (__thiscall RBX::AutoJoint::*)(void)const ,void (__thiscall RBX::AutoJoint::*)(G3D::CoordinateFrame const &)>
@@ -975,13 +999,13 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100faae0
 	// RBX::Reflection::PropDescriptor<RBX::DebrisService,int>::PropDescriptor<RBX::DebrisService,int><int (__thiscall RBX::DebrisService::*)(void)const ,void (__thiscall RBX::DebrisService::*)(int)>
 	// TEMPLATE: WEBSERVICE 0x101176d0
-	// STUB: ROBLOX 0x00656eb0
+	// TEMPLATE: ROBLOX 0x00656eb0
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,G3D::CoordinateFrame>::PropDescriptor<RBX::Mouse,G3D::CoordinateFrame><G3D::CoordinateFrame (__thiscall RBX::Mouse::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x10117810
-	// STUB: ROBLOX 0x00657090
+	// TEMPLATE: ROBLOX 0x00657090
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,int>::PropDescriptor<RBX::Mouse,int><int (__thiscall RBX::Mouse::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x101178b0
-	// STUB: ROBLOX 0x00657130
+	// TEMPLATE: ROBLOX 0x00657130
 	// RBX::Reflection::PropDescriptor<RBX::Mouse,RBX::TextureId>::PropDescriptor<RBX::Mouse,RBX::TextureId><RBX::TextureId (__thiscall RBX::Mouse::*)(void)const ,void (__thiscall RBX::Mouse::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x1012cb10
 	// TEMPLATE: ROBLOX 0x005b3540
@@ -992,13 +1016,14 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1012cd00
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::getset<G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1012cd60
+	// TEMPLATE: ROBLOX 0x005b36c0
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::MeshId>::getset<RBX::MeshId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::MeshId const &)>
 	// TEMPLATE: WEBSERVICE 0x1012cdc0
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::TextureId>::getset<RBX::TextureId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::TextureId const &)>
 	// TEMPLATE: WEBSERVICE 0x1012d3e0
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,G3D::Vector3>::PropDescriptor<RBX::SpecialShape,G3D::Vector3><G3D::Vector3 const & (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1012d480
-	// STUB: ROBLOX 0x005b3d70
+	// TEMPLATE: ROBLOX 0x005b3d70
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::MeshId>::PropDescriptor<RBX::SpecialShape,RBX::MeshId><RBX::MeshId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::MeshId const &)>
 	// TEMPLATE: WEBSERVICE 0x1012d520
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,RBX::TextureId>::PropDescriptor<RBX::SpecialShape,RBX::TextureId><RBX::TextureId const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(RBX::TextureId const &)>
@@ -1006,6 +1031,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00576f60
 	// RBX::Reflection::PropDescriptor<RBX::Instance,RBX::Instance *>::getset<RBX::Instance * (__thiscall RBX::Instance::*)(void)const ,void (__thiscall RBX::Instance::*)(RBX::Instance *)>
 	// TEMPLATE: WEBSERVICE 0x10099710
+	// TEMPLATE: ROBLOX 0x005f7950
 	// RBX::Reflection::PropDescriptor<RBX::PVInstance,enum RBX::Controller::ControllerType>::getset<enum RBX::Controller::ControllerType (__thiscall RBX::PVInstance::*)(void)const ,void (__thiscall RBX::PVInstance::*)(enum RBX::Controller::ControllerType)>
 	// TEMPLATE: WEBSERVICE 0x1009b340
 	// TEMPLATE: ROBLOX 0x005ae160
@@ -1015,20 +1041,23 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1009bc00
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,enum RBX::Part::PartType>::getset<enum RBX::Part::PartType (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(enum RBX::Part::PartType)>
 	// TEMPLATE: WEBSERVICE 0x1009bc70
+	// TEMPLATE: ROBLOX 0x005aed30
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Color3>::getset<G3D::Color3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Color3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1009be30
+	// STUB: ROBLOX 0x005aee10
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::getset<G3D::Vector3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1009bea0
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,enum RBX::PartInstance::FormFactor>::getset<enum RBX::PartInstance::FormFactor (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(enum RBX::PartInstance::FormFactor)>
 	// TEMPLATE: WEBSERVICE 0x1009e170
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::PropDescriptor<RBX::PartInstance,G3D::Vector3><G3D::Vector3 const & (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1009e230
-	// STUB: ROBLOX 0x005b0d10
+	// TEMPLATE: ROBLOX 0x005b0d10
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Color3>::PropDescriptor<RBX::PartInstance,G3D::Color3><G3D::Color3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Color3 const &)>
 	// TEMPLATE: WEBSERVICE 0x1009e530
 	// STUB: ROBLOX 0x005b0e90
 	// RBX::Reflection::PropDescriptor<RBX::PartInstance,G3D::Vector3>::PropDescriptor<RBX::PartInstance,G3D::Vector3><G3D::Vector3 (__thiscall RBX::PartInstance::*)(void)const ,void (__thiscall RBX::PartInstance::*)(G3D::Vector3 const &)>
 	// TEMPLATE: WEBSERVICE 0x100b3a70
+	// TEMPLATE: ROBLOX 0x0057b690
 	// RBX::Reflection::PropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::getset<enum RBX::Debugable::AssertAction (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::Debugable::AssertAction)>
 	// TEMPLATE: WEBSERVICE 0x100e4aa0
 	// RBX::Reflection::PropDescriptor<RBX::Feature,enum RBX::NormalId>::getset<enum RBX::NormalId (__thiscall RBX::Feature::*)(void)const ,void (__thiscall RBX::Feature::*)(enum RBX::NormalId)>
@@ -1041,6 +1070,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100ff770
 	// RBX::Reflection::PropDescriptor<RBX::Decal,RBX::TextureId>::getset<RBX::TextureId (__thiscall RBX::Decal::*)(void)const ,void (__thiscall RBX::Decal::*)(RBX::TextureId)>
 	// TEMPLATE: WEBSERVICE 0x1012cca0
+	// TEMPLATE: ROBLOX 0x005b3600
 	// RBX::Reflection::PropDescriptor<RBX::SpecialShape,enum RBX::SpecialShape::MeshType>::getset<enum RBX::SpecialShape::MeshType const (__thiscall RBX::SpecialShape::*)(void)const ,void (__thiscall RBX::SpecialShape::*)(enum RBX::SpecialShape::MeshType)>
 	// TEMPLATE: WEBSERVICE 0x100a0eb0
 	// TEMPLATE: ROBLOX 0x005e93f0
