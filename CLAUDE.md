@@ -439,6 +439,8 @@ Every registered class hangs off one chain: `X` to `DescribedCreatable<X, Base, 
 
 Everything is vendored under `3rdparty/`. RakNet is the exception, reconstructed rather than vendored, because the 3.0 release RBXGS used was never archived and the closest archived drop still differs in nine files.
 
+The client links Codejock Xtreme ToolkitPro 11.2.2 statically, and every Codejock class its RTTI names is in that source, the theme factories and report allocator data structs coming out of macros. It loads Scintilla 1.71 as `SciLexer.dll` and Ogre 1.4.4 as `rgmain.dll`, with `rgdx`, `rggl` and `rgpar` the Direct3D 9 and OpenGL render systems and the particle plugin, and all 905 of its `rgmain.dll` imports name 1.4.4's OgreMain. `SciLexer.dll` reports 1.71 and `fmodex.dll` 4.8.8 in their version resources. Only what the client compiles against is vendored for those two: Scintilla's tree and OgreMain's headers.
+
 Two dependencies are easy to miss because they were compiled into someone else's `.lib` instead of being linked: Lua 5.1.1 went into app.lib as 25 translation units, and zlib, libpng and IJG jpeg arrive inside G3D as `g3d/zlib`, `g3d/png` and `g3d/ijg`.
 
 `RakPeer`'s vtable annotation needs a commented declaration under it. `class_decl_regex` takes the first identifier after `class`, so `class RAK_DLL_EXPORT RakPeer` reads as a class named `RAK_DLL_EXPORT`; a `// class RakPeer` line under the marker names it. Constness is what stops RakNet slots pairing: the original spells `char*` as `const char*` across `Connect`, `Send`, the RPC registration methods and all four `RPCMap` identifier methods. Compare `?Name@RakPeer@@` across both PDBs to find the rest.
