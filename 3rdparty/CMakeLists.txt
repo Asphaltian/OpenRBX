@@ -1,24 +1,36 @@
 if (MSVC)
-  add_compile_options(/W0)
+  set(CMAKE_CXX_FLAGS "/nologo")
+  set(CMAKE_C_FLAGS "/nologo")
+  set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/Zi")
+  set(CMAKE_C_FLAGS_RELWITHDEBINFO "/Zi")
+  set(CMAKE_CXX_FLAGS_RELEASE "")
+  set(CMAKE_C_FLAGS_RELEASE "")
 endif()
 
-set(G3D "${CMAKE_CURRENT_SOURCE_DIR}/g3d/source")
+set(G3D "${PROJECT_SOURCE_DIR}/Client/Rendering/g3d")
 
-file(GLOB OPENRBX_GRAPHICS3D_SOURCES "${G3D}/G3Dcpp/*.cpp" "${G3D}/IJG/*.c" "${G3D}/png/*.c")
-file(GLOB OPENRBX_GLG3D_SOURCES "${G3D}/GLG3Dcpp/*.cpp" "${G3D}/zlib/*.c")
+file(GLOB OPENRBX_GRAPHICS3D_SOURCES "${G3D}/g3dcpp/*.cpp" "${G3D}/ijg/*.c" "${G3D}/png/*.c")
+file(GLOB OPENRBX_GLG3D_SOURCES "${G3D}/glg3dcpp/*.cpp" "${G3D}/zlib/*.c")
 
 add_library(graphics3d STATIC ${OPENRBX_GRAPHICS3D_SOURCES})
 add_library(glg3d STATIC ${OPENRBX_GLG3D_SOURCES})
 
 foreach(name graphics3d glg3d)
   target_include_directories(${name} PRIVATE
-    "${G3D}/include" "${G3D}/png" "${G3D}/zlib" "${G3D}/IJG"
-    "${CMAKE_CURRENT_SOURCE_DIR}/SDL-1.2.6/include"
+    "${G3D}/include" "${G3D}/png" "${G3D}/zlib" "${G3D}/ijg"
+    "${PROJECT_SOURCE_DIR}/Client/Rendering/SDL-1.2.6/include"
   )
-  target_compile_definitions(${name} PRIVATE WIN32 _LIB _MBCS _CRT_SECURE_NO_WARNINGS)
+  target_compile_definitions(${name} PRIVATE WIN32 NDEBUG _LIB G3D_BUILDING_LIBRARY_DLL _VC80_UPGRADE=0x0710 _MBCS)
+  if (MSVC)
+    target_compile_options(${name} PRIVATE /O2 /Ob1 /GF /EHsc /Gy)
+  endif()
 endforeach()
+if (MSVC)
+  target_compile_options(graphics3d PRIVATE /W2)
+  target_compile_options(glg3d PRIVATE /W3)
+endif()
 
-set(BOOST "${CMAKE_CURRENT_SOURCE_DIR}/boost_1_34_1")
+set(BOOST "${PROJECT_SOURCE_DIR}/Client/boost_1_34_1")
 
 add_library(boost_signals STATIC
   "${BOOST}/libs/signals/src/connection.cpp"
@@ -56,10 +68,14 @@ set_target_properties(boost_thread  PROPERTIES OUTPUT_NAME "libboost_thread-vc80
 set_target_properties(boost_date_time PROPERTIES OUTPUT_NAME "libboost_date_time-vc80-mt-1_34_1")
 
 foreach(name boost_signals boost_thread boost_date_time)
-  target_include_directories(${name} PRIVATE "${BOOST}")
+  target_include_directories(${name} PRIVATE "${BOOST}/src")
+  target_compile_definitions(${name} PRIVATE NDEBUG BOOST_ALL_NO_LIB=1)
+  if (MSVC)
+    target_compile_options(${name} PRIVATE /Zc:forScope /Zc:wchar_t /O2 /Ob2 /W3 /EHs /GR /wd4675)
+  endif()
 endforeach()
 
-set(MESA "${CMAKE_CURRENT_SOURCE_DIR}/mesa-6.5")
+set(MESA "${PROJECT_SOURCE_DIR}/Client/Rendering/Mesa-6.5")
 
 set(OPENRBX_MESA_CORE_SOURCES
   "${MESA}/src/mesa/array_cache/ac_context.c"
@@ -329,7 +345,7 @@ set(OPENRBX_MESA_GLU_SOURCES
 
 set(OPENRBX_MESA_LINK_OPTIONS "/INCREMENTAL:NO")
 
-set(OPENRBX_MESA_COMPILE_OPTIONS "/GF" "/Gy")
+set(OPENRBX_MESA_COMPILE_OPTIONS "/O2" "/Ob1" "/GF" "/Gy" "/Zm1000" "/W0")
 
 add_library(mesa_core STATIC ${OPENRBX_MESA_CORE_SOURCES})
 set_target_properties(mesa_core PROPERTIES MSVC_RUNTIME_LIBRARY "MultiThreaded")

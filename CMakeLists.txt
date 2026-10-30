@@ -72,19 +72,19 @@ endif()
 
 set(OPENRBX_3RDPARTY "${PROJECT_SOURCE_DIR}/3rdparty")
 
-set(OPENRBX_BOOST_INCLUDE_DIR "${OPENRBX_3RDPARTY}/boost_1_34_1")
-set(OPENRBX_G3D_INCLUDE_DIR   "${OPENRBX_3RDPARTY}/g3d/source/include")
-set(OPENRBX_LUA_INCLUDE_DIR   "${OPENRBX_3RDPARTY}/lua-5.1.1/src")
-set(OPENRBX_SDL_INCLUDE_DIR   "${OPENRBX_3RDPARTY}/SDL-1.2.6/include")
-set(OPENRBX_MESA_INCLUDE_DIR  "${OPENRBX_3RDPARTY}/mesa-6.5/include")
+set(OPENRBX_BOOST_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/Client/boost_1_34_1/src")
+set(OPENRBX_G3D_INCLUDE_DIR   "${PROJECT_SOURCE_DIR}/Client/Rendering/g3d/include")
+set(OPENRBX_LUA_INCLUDE_DIR   "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src")
+set(OPENRBX_SDL_INCLUDE_DIR   "${PROJECT_SOURCE_DIR}/Client/Rendering/SDL-1.2.6/include")
+set(OPENRBX_MESA_INCLUDE_DIR  "${PROJECT_SOURCE_DIR}/Client/Rendering/Mesa-6.5/include")
 set(OPENRBX_G3D_EXTRA_INCLUDE_DIRS
-  "${OPENRBX_3RDPARTY}/g3d/source/png"
-  "${OPENRBX_3RDPARTY}/g3d/source/zlib"
+  "${PROJECT_SOURCE_DIR}/Client/Rendering/g3d/png"
+  "${PROJECT_SOURCE_DIR}/Client/Rendering/g3d/zlib"
 )
 
 add_library(fmodex IMPORTED UNKNOWN)
-set_property(TARGET fmodex PROPERTY IMPORTED_LOCATION "${OPENRBX_3RDPARTY}/fmod/api/lib/fmodex_vc.lib")
-set_property(TARGET fmodex PROPERTY INTERFACE_INCLUDE_DIRECTORIES "${OPENRBX_3RDPARTY}/fmod/api/inc")
+set_property(TARGET fmodex PROPERTY IMPORTED_LOCATION "${PROJECT_SOURCE_DIR}/Client/fmod/api/lib/fmodex_vc.lib")
+set_property(TARGET fmodex PROPERTY INTERFACE_INCLUDE_DIRECTORIES "${PROJECT_SOURCE_DIR}/Client/fmod/api/inc")
 
 add_subdirectory(3rdparty)
 
@@ -287,27 +287,27 @@ set(OPENRBX_NETWORK_SOURCES
 )
 
 set(OPENRBX_RAKNET_SOURCES
-  3rdparty/RakNet30/Source/BitStream.cpp
-  3rdparty/RakNet30/Source/CheckSum.cpp
-  3rdparty/RakNet30/Source/DS_HuffmanEncodingTree.cpp
-  3rdparty/RakNet30/Source/DataBlockEncryptor.cpp
-  3rdparty/RakNet30/Source/FileOperations.cpp
-  3rdparty/RakNet30/Source/GetTime.cpp
-  3rdparty/RakNet30/Source/NetworkIDManager.cpp
-  3rdparty/RakNet30/Source/PacketLogger.cpp
-  3rdparty/RakNet30/Source/PluginInterface.cpp
-  3rdparty/RakNet30/Source/RPCMap.cpp
-  3rdparty/RakNet30/Source/RakNetTypes.cpp
-  3rdparty/RakNet30/Source/RakPeer.cpp
-  3rdparty/RakNet30/Source/RakSleep.cpp
-  3rdparty/RakNet30/Source/Rand.cpp
-  3rdparty/RakNet30/Source/ReliabilityLayer.cpp
-  3rdparty/RakNet30/Source/SHA1.cpp
-  3rdparty/RakNet30/Source/SimpleMutex.cpp
-  3rdparty/RakNet30/Source/SocketLayer.cpp
-  3rdparty/RakNet30/Source/StringCompressor.cpp
-  3rdparty/RakNet30/Source/StringTable.cpp
-  3rdparty/RakNet30/Source/rijndael.cpp
+  Client/Network/raknet30/Source/BitStream.cpp
+  Client/Network/raknet30/Source/CheckSum.cpp
+  Client/Network/raknet30/Source/DS_HuffmanEncodingTree.cpp
+  Client/Network/raknet30/Source/DataBlockEncryptor.cpp
+  Client/Network/raknet30/Source/FileOperations.cpp
+  Client/Network/raknet30/Source/GetTime.cpp
+  Client/Network/raknet30/Source/NetworkIDManager.cpp
+  Client/Network/raknet30/Source/PacketLogger.cpp
+  Client/Network/raknet30/Source/PluginInterface.cpp
+  Client/Network/raknet30/Source/RPCMap.cpp
+  Client/Network/raknet30/Source/RakNetTypes.cpp
+  Client/Network/raknet30/Source/RakPeer.cpp
+  Client/Network/raknet30/Source/RakSleep.cpp
+  Client/Network/raknet30/Source/Rand.cpp
+  Client/Network/raknet30/Source/ReliabilityLayer.cpp
+  Client/Network/raknet30/Source/SHA1.cpp
+  Client/Network/raknet30/Source/SimpleMutex.cpp
+  Client/Network/raknet30/Source/SocketLayer.cpp
+  Client/Network/raknet30/Source/StringCompressor.cpp
+  Client/Network/raknet30/Source/StringTable.cpp
+  Client/Network/raknet30/Source/rijndael.cpp
 )
 set(OPENRBX_RBXVIEW_SOURCES
   Client/RbxView/BevelMesh.cpp
@@ -356,7 +356,7 @@ set(OPENRBX_ENGINE_INCLUDE_DIRS
   "${PROJECT_SOURCE_DIR}/Client/Rendering/RenderLib/include"
   "${PROJECT_SOURCE_DIR}/Client/Rendering/AppDraw/include"
   "${PROJECT_SOURCE_DIR}/Client/RbxGraphics/include"
-  "${PROJECT_SOURCE_DIR}/3rdparty/RakNet30/Source"
+  "${PROJECT_SOURCE_DIR}/Client/Network/raknet30/Source"
   "${PROJECT_SOURCE_DIR}/util"
 )
 
@@ -396,31 +396,31 @@ function(add_engine_library NAME)
 endfunction()
 
 set(OPENRBX_LUA_SOURCES
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lapi.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lauxlib.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lbaselib.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lcode.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ldebug.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ldo.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ldump.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lfunc.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lgc.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/liolib.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/llex.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lmathlib.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lmem.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lobject.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lopcodes.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lparser.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lstate.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lstring.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lstrlib.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ltable.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ltablib.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/ltm.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lundump.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lvm.c"
-  "${OPENRBX_3RDPARTY}/lua-5.1.1/src/lzio.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lapi.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lauxlib.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lbaselib.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lcode.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/ldebug.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/ldo.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/ldump.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lfunc.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lgc.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/liolib.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/llex.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lmathlib.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lmem.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lobject.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lopcodes.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lparser.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lstate.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lstring.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lstrlib.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/ltable.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/ltablib.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/ltm.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lundump.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lvm.c"
+  "${PROJECT_SOURCE_DIR}/Client/App/lua-5.1.1/src/lzio.c"
 )
 
 add_engine_library(lua
@@ -430,7 +430,7 @@ add_engine_library(lua
 )
 
 if (MSVC_FOR_DECOMP)
-  list(APPEND OPENRBX_APP_SOURCES 3rdparty/boost_1_34_1/libs/iostreams/src/zlib.cpp)
+  list(APPEND OPENRBX_APP_SOURCES Client/boost_1_34_1/libs/iostreams/src/zlib.cpp)
 endif()
 
 add_engine_library(app
@@ -471,7 +471,7 @@ add_engine_library(renderlib
 )
 
 if (MSVC_FOR_DECOMP)
-  set(OPENRBX_TOOLKITPRO "${OPENRBX_3RDPARTY}/ToolkitPro-11.2.2")
+  set(OPENRBX_TOOLKITPRO "${OPENRBX_3RDPARTY}/Codejock Software/MFC/Xtreme ToolkitPro v11.2.2")
   set(OPENRBX_TOOLKITPRO_WORKSPACE "${OPENRBX_TOOLKITPRO}/Workspace/ToolkitPro")
   file(READ "${OPENRBX_TOOLKITPRO_WORKSPACE}/ToolkitProStatic_vc80.vcproj" OPENRBX_TOOLKITPRO_VCPROJ)
   string(REGEX MATCHALL "RelativePath=\"[^\"]+\\.cpp\"" OPENRBX_TOOLKITPRO_FILES "${OPENRBX_TOOLKITPRO_VCPROJ}")
@@ -492,6 +492,16 @@ if (MSVC_FOR_DECOMP)
   target_compile_options(toolkitpro PRIVATE /O2 /Ob1 /GF /Gy /Zc:wchar_t)
   set_property(TARGET toolkitpro PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreadedDLL")
   set_property(TARGET toolkitpro PROPERTY OUTPUT_NAME "ToolkitPro1122vc80DS")
+
+  set(OPENRBX_OGRE "${PROJECT_SOURCE_DIR}/Client/Rendering/OgreSDK")
+  add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/rgmain.lib"
+    COMMAND lib /nologo /machine:x86 "/def:${OPENRBX_OGRE}/lib/rgmain.def" "/out:${CMAKE_BINARY_DIR}/rgmain.lib"
+    DEPENDS "${OPENRBX_OGRE}/lib/rgmain.def"
+  )
+  add_custom_target(rgmain_implib DEPENDS "${CMAKE_BINARY_DIR}/rgmain.lib")
+  add_library(rgmain UNKNOWN IMPORTED)
+  set_property(TARGET rgmain PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/rgmain.lib")
+  add_dependencies(rgmain rgmain_implib)
 endif()
 
 set(OPENRBX_WEBSERVICE_SOURCES
@@ -532,7 +542,7 @@ target_link_libraries(webservice PRIVATE
 target_link_libraries(webservice PRIVATE fmodex)
 add_custom_command(TARGET webservice POST_BUILD
   COMMAND "${CMAKE_COMMAND}" -E copy_if_different
-    "${OPENRBX_3RDPARTY}/fmod/api/fmodex.dll" "$<TARGET_FILE_DIR:webservice>"
+    "${PROJECT_SOURCE_DIR}/Client/fmod/api/fmodex.dll" "$<TARGET_FILE_DIR:webservice>"
   COMMENT "Copying fmodex.dll next to WebService.dll"
 )
 
@@ -585,10 +595,14 @@ if (MSVC_FOR_DECOMP)
     ${OPENRBX_3RDPARTY_INCLUDE_DIRS}
     "${OPENRBX_MESA_INCLUDE_DIR}"
     "${OPENRBX_TOOLKITPRO}/Source"
+    "${OPENRBX_OGRE}/include"
+    "${OPENRBX_3RDPARTY}/scintilla/include"
+    "${OPENRBX_3RDPARTY}/Microsoft DirectX SDK (November 2007)/Include"
   )
 
   target_link_libraries(roblox PRIVATE
     toolkitpro
+    rgmain
     mfc80
     mfcs80
     ${OPENRBX_ENGINE_LIBRARIES}

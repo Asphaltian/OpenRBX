@@ -8,3 +8,11 @@
 *.rc    text eol=crlf
 
 3rdparty/** -text
+Client/boost_1_34_1/** -text
+Client/App/lua-5.1.1/** -text
+Client/Network/raknet30/** -text
+Client/fmod/** -text
+Client/Rendering/g3d/** -text
+Client/Rendering/SDL-1.2.6/** -text
+Client/Rendering/Mesa-6.5/** -text
+Client/Rendering/OgreSDK/** -text

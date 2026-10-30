@@ -83,8 +83,8 @@ reccmp-reccmp --target ROBLOX -S ROBLOXPROGRESS.SVG
 ## Project Structure
 
 * `WebService/` - the translation units specific to RBXGS
-* `Client/` - the engine's static libraries
-* `3rdparty/` - vendored dependencies
+* `Client/` - the engine's static libraries, the client project, and the libraries Roblox kept in its own tree
+* `3rdparty/` - the SDKs the original built against from outside its tree
 * `util/` - headers the decompilation needs
 * `cmake/` - CMake modules
 * `tools/` - Python tooling and its requirements

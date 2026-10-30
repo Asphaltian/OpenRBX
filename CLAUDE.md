@@ -35,7 +35,7 @@ python tools/check_folded.py --target WEBSERVICE
 python tools/reccmp_addr_padding.py
 ```
 
-- **decomplint** runs with `--warnfail`, so a warning fails the build. It covers `WebService Client` only, so nothing under `3rdparty` is linted and a bad marker there fails silently. Point it at `3rdparty/RakNet30` by hand after touching RakNet.
+- **decomplint** runs with `--warnfail`, so a warning fails the build. It covers `WebService` and `Client` with the vendored trees taken out by path, partly because SDL's sources are not UTF-8 and stop the parser. Nothing vendored is linted and a bad marker there fails silently. Point it at `Client/Network/raknet30` by hand after touching RakNet.
 - **vtable** compares every vtable that has a name on both sides. A marker asserts a layout; a data source only resolves a store. Do not add a `// VTABLE:` marker to a class whose slots cannot all be claimed yet.
 - **datacmp** matches statics by bare name, so a name has to be unique in both builds unless its `webservice-statics.csv` row names the object.
 - **check_folded** asks whether every annotation on a shared address landed on a single recompiled address. MSVC 8 keeps a PDB symbol for every alias the linker folded away, so all `FOLDED` annotations resolve rather than just the survivor.
@@ -437,7 +437,13 @@ Every registered class hangs off one chain: `X` to `DescribedCreatable<X, Base, 
 
 ## Third Party
 
-Everything is vendored under `3rdparty/`. RakNet is the exception, reconstructed rather than vendored, because the 3.0 release RBXGS used was never archived and the closest archived drop still differs in nine files.
+Each dependency sits where the original tree had it. The RBXGS PDB records it four ways: each object's `cwd` and `src`, its `-I` arguments, and the library paths the linker took. boost is `Client/boost_1_34_1`, with its headers under `src/boost` and the sources of the prebuilt libraries under `libs`. Lua is `Client/App/lua-5.1.1`, RakNet `Client/Network/raknet30/Source`, FMOD `Client/fmod/api`, SDL `Client/Rendering/SDL-1.2.6`, Mesa `Client/Rendering/Mesa-6.5` and Ogre's headers `Client/Rendering/OgreSDK/include`. G3D is `Client/Rendering/g3d`, which is the `source` folder of the 6.09 distribution with `g3dcpp`, `glg3dcpp` and `ijg` spelled the way Roblox's own project spelled them. Only `cwd` gives the casing on disk. The other names keep the casing their `-I` and `src` strings were typed with, and `Client/win` has no case-preserving record at all.
+
+`3rdparty/` holds what the original built against from outside its tree. The DirectX SDK is `Microsoft DirectX SDK (November 2007)`, the folder every RBXGS command line names under Program Files, and only `dinput.h` and its two import libraries are vendored from it because nothing else in either binary uses it. Codejock sits at its install path, `Codejock Software/MFC/Xtreme ToolkitPro v11.2.2`, and Scintilla's headers at `scintilla`; the client records neither. Naughter's `CScintillaCtrl` wrapper is not vendored: its objects sort among the client's own in `.text`, so it was a project source in `Client/win`, and it lands there when it is decompiled.
+
+The vendored libraries build with the flags they were built with. G3D's and the engine's come from the command blocks; boost's prebuilt libraries recorded none, so theirs are boost 1.34.1's own `release` variant for msvc-8.0 out of `msvc.jam`; Codejock builds the Dynamic Release configuration of its own `ToolkitProStatic_vc80.vcproj`, read straight from that file. `rgmain.lib` is an import library built from `OgreSDK/lib/rgmain.def`, the export list of the shipped `rgmain.dll`.
+
+RakNet is reconstructed rather than vendored, because the 3.0 release RBXGS used was never archived and the closest archived drop still differs in nine files.
 
 The client links Codejock Xtreme ToolkitPro 11.2.2 statically, and every Codejock class its RTTI names is in that source, the theme factories and report allocator data structs coming out of macros. It loads Scintilla 1.71 as `SciLexer.dll` and Ogre 1.4.4 as `rgmain.dll`, with `rgdx`, `rggl` and `rgpar` the Direct3D 9 and OpenGL render systems and the particle plugin, and all 905 of its `rgmain.dll` imports name 1.4.4's OgreMain. `SciLexer.dll` reports 1.71 and `fmodex.dll` 4.8.8 in their version resources. Only what the client compiles against is vendored for those two: Scintilla's tree and OgreMain's headers.
 
@@ -450,7 +456,7 @@ Two dependencies are easy to miss because they were compiled into someone else's
 - **`reccmp-reccmp --verbose` dies printing a match.** The success line carries an emoji and a cp1252 console cannot encode it, so a 100% match looks like a traceback. Export `PYTHONIOENCODING=utf-8`.
 
 - **`.clang-format` sets `IncludeBlocks: Regroup`,** so it merges include blocks and sorts across them. A blank line will not hold an include in place. `WebService.h` needs `<winsock2.h>` ahead of `<unknwn.h>`, and only `// clang-format off` around it survives.
-- **Never sweep timestamps across the working tree.** `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. The CI workflow's backdate step does exactly this, which is fine on a throwaway runner and destructive in a clone.
+- **Never sweep timestamps across the working tree.** `core.autocrlf` is true and `.gitattributes` marks `3rdparty/**` and every vendored tree under `Client` as `-text`, so git stores those files byte for byte from disk. Touching their mtimes forces a re-stat, and a `git add -A` then rewrites every one of them to whatever line ending the working copy happens to hold. The CI workflow's backdate step does exactly this, which is fine on a throwaway runner and destructive in a clone.
 - **Data past the end of `.data`'s raw bytes is fine;** reccmp zero fills it, as the loader does. An empty base class is what puts a member above offset zero.
 
 ## Project Structure
@@ -467,15 +473,22 @@ Client/RbxView/              # rbxview.lib
 Client/RbxGraphics/          # Headers only; its code was compiled into AppDraw and RenderLib
 Client/Rendering/AppDraw/    # appdraw.lib
 Client/Rendering/RenderLib/  # renderlib.lib
-Client/win/                  # VersionInfo, compiled into the WebService project
+Client/win/                  # The client project; ErrorUploader, LogManager and VersionInfo also build into WebService
+Client/boost_1_34_1/         # boost, headers under src/
+Client/App/lua-5.1.1/        # Lua, compiled into app.lib
+Client/Network/raknet30/     # RakNet 3.0, reconstructed
+Client/fmod/                 # FMOD Ex 4.8.8
+Client/Rendering/g3d/        # G3D 6.09 with zlib, libpng and IJG jpeg
+Client/Rendering/SDL-1.2.6/  # SDL
+Client/Rendering/Mesa-6.5/   # Mesa, the software GL fallback
+Client/Rendering/OgreSDK/    # Ogre 1.4.4 headers and the rgmain export list
 WebService/                  # The DLL project, plus library_msvc.h and WebServiceMaps.cpp
 util/                        # decomp.h, decomp.cpp, compat.h
-3rdparty/                    # Vendored dependencies, RakNet reconstructed
+3rdparty/                    # SDKs the original built against from outside its tree
 reccmp/                      # The six CSVs reccmp reads for the original's side
 cmake/                       # reccmp CMake integration
 tools/                       # check_folded.py, reccmp_addr_padding.py, ncc
 ```
 
-The original also had `Client/RbxViewBase/`, `Client/Rendering/RenderLibNew/` and
-`Client/Rendering/OgreSDK/` on the include path. Nothing in `WebService.dll` comes
-from them, so they have no directory here yet.
+The original also had `Client/Rendering/RenderLibNew/` on the include path. Nothing
+in either binary has been traced to it yet, so it has no directory here.
