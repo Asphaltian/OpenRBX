@@ -1137,6 +1137,16 @@ void SoundService::loadStockSound(SoundType soundType, std::string file)
 	stockSounds[soundType] = sound;
 }
 
+// FUNCTION: ROBLOX 0x005c79f0
+void SoundService::playSound(SoundType soundType)
+{
+	StockSounds::iterator it = stockSounds.find(soundType);
+
+	if (it != stockSounds.end()) {
+		it->second->play();
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10083eb0
 // FUNCTION: ROBLOX 0x005c7a50
 void SoundChannel::onAncestorChanged(const AncestorChanged& event)
