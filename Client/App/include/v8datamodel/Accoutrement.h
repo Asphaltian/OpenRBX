@@ -91,6 +91,7 @@ public:
 	virtual ~Accoutrement();
 
 	// SYNTHETIC: WEBSERVICE 0x100dc260
+	// SYNTHETIC: ROBLOX 0x005bb480
 	// RBX::Accoutrement::`scalar deleting destructor'
 
 	virtual XmlElement* write();

@@ -63,6 +63,7 @@ DECOMP_SIZE_ASSERT(Hint, 0x124)
 // FUNCTION: ROBLOX 0x005ccab0
 // RBX::Message::~Message
 // FUNCTION: WEBSERVICE 0x100eeb90
+// FUNCTION: ROBLOX 0x0062dca0
 // RBX::Message::`scalar deleting destructor'
 // clang-format on
 

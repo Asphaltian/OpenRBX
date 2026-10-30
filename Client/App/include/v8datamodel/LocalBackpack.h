@@ -92,6 +92,7 @@ public:
 	virtual ~LocalBackpack();
 
 	// SYNTHETIC: WEBSERVICE 0x100d6cc0
+	// SYNTHETIC: ROBLOX 0x0060dda0
 	// RBX::LocalBackpack::`scalar deleting destructor'
 
 	void onHeartbeat();
@@ -109,6 +110,7 @@ DECOMP_SIZE_ASSERT(LocalBackpack, 0x174)
 // SYNTHETIC: ROBLOX 0x0060e4b0
 // RBX::LocalBackpackItem::~LocalBackpackItem
 // SYNTHETIC: WEBSERVICE 0x100d74a0
+// SYNTHETIC: ROBLOX 0x0060e540
 // RBX::LocalBackpackItem::`scalar deleting destructor'
 
 } // namespace RBX

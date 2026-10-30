@@ -24,6 +24,7 @@ private:
 	virtual void onDescendentAdded(Instance* instance);
 	virtual void onDescendentRemoving(const boost::shared_ptr<Instance>& instance);
 	// FUNCTION: WEBSERVICE 0x10074ec0
+	// STUB: ROBLOX 0x004c7c50
 	// RBX::JointsService::JointsService
 
 	// FUNCTION: WEBSERVICE 0x10074fc0

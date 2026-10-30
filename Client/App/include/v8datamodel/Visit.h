@@ -40,6 +40,7 @@ public:
 	virtual XmlElement* write() { return NULL; }
 
 	// SYNTHETIC: WEBSERVICE 0x100f9060
+	// SYNTHETIC: ROBLOX 0x005ced20
 	// RBX::Visit::`scalar deleting destructor'
 };
 

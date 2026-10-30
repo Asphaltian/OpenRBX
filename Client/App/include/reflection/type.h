@@ -159,7 +159,7 @@ public:
 	// TEMPLATE: ROBLOX 0x0056fc00
 	// RBX::Reflection::Value::operator=<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// TEMPLATE: WEBSERVICE 0x1001bf90
-	// STUB: ROBLOX 0x00571f10
+	// TEMPLATE: ROBLOX 0x00571f10
 	// RBX::Reflection::Value::operator=<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value> > >
 	// TEMPLATE: WEBSERVICE 0x10045d80
 	// TEMPLATE: ROBLOX 0x0056fcf0
@@ -266,7 +266,7 @@ DECOMP_SIZE_ASSERT(Value, 0x08)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1003fa40
-// STUB: ROBLOX 0x005a63f0
+// TEMPLATE: ROBLOX 0x005a63f0
 // RBX::Reflection::Value::genericConvert<int>
 // TEMPLATE: WEBSERVICE 0x1003fc30
 // TEMPLATE: ROBLOX 0x005a65a0

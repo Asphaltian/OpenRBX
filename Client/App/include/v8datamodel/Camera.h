@@ -151,6 +151,7 @@ public:
 	static float getNewZoomDistance(float currentDistance, float in);
 
 	// SYNTHETIC: WEBSERVICE 0x100c4450
+	// SYNTHETIC: ROBLOX 0x005d7fb0
 	// RBX::Camera::`scalar deleting destructor'
 };
 

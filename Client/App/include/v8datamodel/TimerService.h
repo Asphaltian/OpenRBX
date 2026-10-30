@@ -53,6 +53,7 @@ public:
 	// RBX::TimerService::~TimerService
 
 	// SYNTHETIC: WEBSERVICE 0x100fbf20
+	// SYNTHETIC: ROBLOX 0x005e8b70
 	// RBX::TimerService::`scalar deleting destructor'
 };
 

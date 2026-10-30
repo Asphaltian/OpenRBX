@@ -46,6 +46,7 @@ DECOMP_SIZE_ASSERT(Sky, 0x1c0)
 // SYNTHETIC: ROBLOX 0x005ddf20
 // RBX::Sky::~Sky
 // FUNCTION: WEBSERVICE 0x10095770
+// FUNCTION: ROBLOX 0x005ddfd0
 // RBX::Sky::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x1021a530
 // `dynamic initializer for 'RBX::Sky::prop_SkyUp''

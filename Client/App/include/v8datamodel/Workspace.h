@@ -106,6 +106,7 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x1006d4d0
+	// SYNTHETIC: ROBLOX 0x005b6a50
 	// RBX::Workspace::`scalar deleting destructor'
 	// clang-format on
 

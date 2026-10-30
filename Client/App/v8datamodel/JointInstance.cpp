@@ -314,6 +314,7 @@ RotateP::RotateP(Joint* joint) : DescribedCreatable<RotateP, AutoJoint, sRotateP
 }
 
 // FUNCTION: WEBSERVICE 0x100da100
+// FUNCTION: ROBLOX 0x005f4000
 RotateP::RotateP() : DescribedCreatable<RotateP, AutoJoint, sRotateP>(new RotatePJoint())
 {
 }
@@ -325,6 +326,7 @@ RotateV::RotateV(Joint* joint) : DescribedCreatable<RotateV, AutoJoint, sRotateV
 }
 
 // FUNCTION: WEBSERVICE 0x100da280
+// FUNCTION: ROBLOX 0x005f41a0
 RotateV::RotateV() : DescribedCreatable<RotateV, AutoJoint, sRotateV>(new RotateVJoint())
 {
 }

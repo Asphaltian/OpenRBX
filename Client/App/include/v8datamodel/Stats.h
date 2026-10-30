@@ -167,6 +167,7 @@ public:
 	virtual void update() { formatMem(func()); }
 
 	// SYNTHETIC: WEBSERVICE 0x10065f60
+	// SYNTHETIC: ROBLOX 0x005d4120
 	// RBX::Stats::TypedStatsItem<int>::`scalar deleting destructor'
 };
 

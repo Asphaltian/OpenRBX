@@ -47,6 +47,7 @@ public:
 	// RBX::FlagStand::~FlagStand
 
 	// SYNTHETIC: WEBSERVICE 0x100e8e70
+	// SYNTHETIC: ROBLOX 0x00628020
 	// RBX::FlagStand::`scalar deleting destructor'
 };
 

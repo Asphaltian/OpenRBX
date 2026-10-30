@@ -54,6 +54,7 @@ private:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1008e6a0
+	// TEMPLATE: ROBLOX 0x005cdf20
 	// RBX::ObjectValue::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100f44d0
 	// TEMPLATE: ROBLOX 0x00633040

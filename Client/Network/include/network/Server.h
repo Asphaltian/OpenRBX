@@ -41,6 +41,7 @@ class Server : public DescribedCreatable<Server, Peer, sServer>, public Service
 		virtual ~ClientProxy();
 
 		// SYNTHETIC: WEBSERVICE 0x10199db0
+		// SYNTHETIC: ROBLOX 0x004bbfa0
 		// RBX::Network::Server::ClientProxy::`scalar deleting destructor'
 
 		void sendTop();
@@ -73,6 +74,7 @@ public:
 	virtual ~Server();
 
 	// SYNTHETIC: WEBSERVICE 0x10199eb0
+	// SYNTHETIC: ROBLOX 0x004bc0a0
 	// RBX::Network::Server::`scalar deleting destructor'
 
 	static Reflection::SignalDesc<Server, void(std::string, boost::shared_ptr<Instance>)> event_IncommingConnection;

@@ -197,12 +197,14 @@ void LegacyHopperService::onServiceProvider(const ServiceProvider* oldProvider, 
 }
 
 // FUNCTION: WEBSERVICE 0x100c9520
+// FUNCTION: ROBLOX 0x005e35d0
 StarterPackService::StarterPackService()
 {
 	setName(sStarterPackService);
 }
 
 // FUNCTION: WEBSERVICE 0x100c9620
+// FUNCTION: ROBLOX 0x005e36d0
 LegacyHopperService::LegacyHopperService()
 {
 	setName(sLegacyHopperService);

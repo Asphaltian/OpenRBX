@@ -213,6 +213,7 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // SYNTHETIC: WEBSERVICE 0x100e4c60
 // RBX::Feature::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x100e4c80
+// SYNTHETIC: ROBLOX 0x00618210
 // RBX::VelocityMotor::`scalar deleting destructor'
 // clang-format on
 

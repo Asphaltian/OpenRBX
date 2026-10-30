@@ -67,6 +67,7 @@ public:
 	}
 
 	// SYNTHETIC: WEBSERVICE 0x101f5db0
+	// SYNTHETIC: ROBLOX 0x00498500
 	// RBX::Render::Clusterer::~Clusterer
 
 	Clusters* go(unsigned int maxSteps);

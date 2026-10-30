@@ -14,6 +14,7 @@ void PropertyDescriptor::read(DescribedBase* instance, const XmlElement* element
 }
 
 // FUNCTION: WEBSERVICE 0x10094130
+// STUB: ROBLOX 0x005c06f0
 template <>
 const Type& Type::singleton<const PropertyDescriptor*>()
 {

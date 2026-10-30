@@ -106,6 +106,7 @@ DECOMP_SIZE_ASSERT(Texture, 0x12c)
 // SYNTHETIC: WEBSERVICE 0x10224d50
 // `dynamic atexit destructor for 'RBX::Decal::prop_Texture''
 // SYNTHETIC: WEBSERVICE 0x101000f0
+// SYNTHETIC: ROBLOX 0x005acc60
 // RBX::Decal::`scalar deleting destructor'
 // clang-format on
 

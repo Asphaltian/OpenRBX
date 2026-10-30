@@ -595,6 +595,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: ROBLOX 0x00575f30
 	// RBX::DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>::DescribedCreatable<RBX::LocalScript,RBX::Script,&RBX::sLocalScript>
 // FUNCTION: WEBSERVICE 0x1007d2e0
+// FUNCTION: ROBLOX 0x005c1190
 // RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::`scalar deleting destructor'
 // TEMPLATE: WEBSERVICE 0x1007daf0
 // RBX::DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::~DescribedCreatable<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>
@@ -618,6 +619,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: ROBLOX 0x005cdb50
 	// RBX::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>::DescribedCreatable<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue>
 // FUNCTION: WEBSERVICE 0x10094680
+// FUNCTION: ROBLOX 0x005dd950
 // RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100946f0
 	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::~DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
@@ -625,6 +627,7 @@ template <class T, class Base, const char* sName>
 	// TEMPLATE: ROBLOX 0x005dd870
 	// RBX::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>::DescribedCreatable<RBX::Sky,RBX::Instance,&RBX::sSky>
 // FUNCTION: WEBSERVICE 0x1009ac30
+// FUNCTION: ROBLOX 0x005b19a0
 // RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1009b4b0
 	// RBX::DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>::~DescribedCreatable<RBX::PartInstance,RBX::PVInstance,&RBX::sPart>
@@ -660,8 +663,10 @@ template <class T, class Base, const char* sName>
 	// TEMPLATE: ROBLOX 0x005e2850
 	// RBX::DescribedNonCreatable<RBX::BackpackItem,RBX::Widget,&RBX::sBackpackItem>::DescribedNonCreatable<RBX::BackpackItem,RBX::Widget,&RBX::sBackpackItem>
 	// TEMPLATE: WEBSERVICE 0x100c90f0
+	// STUB: ROBLOX 0x005e31c0
 	// RBX::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>::DescribedCreatable<RBX::StarterPackService,RBX::Hopper,&RBX::sStarterPackService>
 	// TEMPLATE: WEBSERVICE 0x100c91d0
+	// STUB: ROBLOX 0x005e32d0
 	// RBX::DescribedCreatable<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>::DescribedCreatable<RBX::LegacyHopperService,RBX::Hopper,&RBX::sLegacyHopperService>
 	// TEMPLATE: WEBSERVICE 0x100c9ae0
 	// TEMPLATE: ROBLOX 0x005e3b90
@@ -690,6 +695,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: WEBSERVICE 0x100d8800
 	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::~DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>
 	// SYNTHETIC: WEBSERVICE 0x100d8dc0
+	// STUB: ROBLOX 0x005f2c70
 	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100d9440
 	// FUNCTION: ROBLOX 0x005f32e0
@@ -873,6 +879,7 @@ template <class T, class Base, const char* sName>
 	// TEMPLATE: ROBLOX 0x005ac9d0
 	// RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>
 // FUNCTION: WEBSERVICE 0x100fff50
+// FUNCTION: ROBLOX 0x005acac0
 // RBX::DescribedCreatable<RBX::Decal,RBX::FaceInstance,&RBX::sDecal>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x101002f0
 	// TEMPLATE: ROBLOX 0x005ace60

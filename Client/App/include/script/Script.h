@@ -108,6 +108,7 @@ DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x10068fd0
+// SYNTHETIC: ROBLOX 0x00575760
 // RBX::Script::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x10069e60
 // RBX::LocalScript::`scalar deleting destructor'

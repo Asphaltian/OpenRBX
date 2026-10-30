@@ -115,6 +115,7 @@ public:
 	virtual ~Tool();
 
 	// SYNTHETIC: WEBSERVICE 0x100cb1d0
+	// SYNTHETIC: ROBLOX 0x0060fda0
 	// RBX::Tool::`scalar deleting destructor'
 
 	static void dropAll(ModelInstance* model);

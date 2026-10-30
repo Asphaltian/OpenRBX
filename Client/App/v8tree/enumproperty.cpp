@@ -47,7 +47,7 @@ const Type& Type::singleton<boost::shared_ptr<const std::vector<boost::shared_pt
 }
 
 // FUNCTION: WEBSERVICE 0x1003f0b0
-// STUB: ROBLOX 0x005a5be0
+// FUNCTION: ROBLOX 0x005a5be0
 template <>
 const Type& Type::singleton<int>()
 {
@@ -127,6 +127,7 @@ const Type& Type::singleton<G3D::Color3>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f430
+// STUB: ROBLOX 0x005a5fd0
 template <>
 const Type& Type::singleton<std::vector<Value> >()
 {
@@ -522,7 +523,7 @@ int& Value::convert<int>()
 }
 
 // FUNCTION: WEBSERVICE 0x10040ce0
-// STUB: ROBLOX 0x005a77c0
+// FUNCTION: ROBLOX 0x005a77c0
 template <>
 bool& Value::convert<bool>()
 {
@@ -545,7 +546,7 @@ bool& Value::convert<bool>()
 }
 
 // FUNCTION: WEBSERVICE 0x10040e10
-// STUB: ROBLOX 0x005a78f0
+// FUNCTION: ROBLOX 0x005a78f0
 template <>
 float& Value::convert<float>()
 {
@@ -568,7 +569,7 @@ float& Value::convert<float>()
 }
 
 // FUNCTION: WEBSERVICE 0x10040f40
-// STUB: ROBLOX 0x005a7a20
+// FUNCTION: ROBLOX 0x005a7a20
 template <>
 double& Value::convert<double>()
 {
@@ -612,7 +613,7 @@ ContentId& Value::convert<ContentId>()
 }
 
 // FUNCTION: WEBSERVICE 0x10041140
-// STUB: ROBLOX 0x005a7c20
+// FUNCTION: ROBLOX 0x005a7c20
 template <>
 std::string& Value::convert<std::string>()
 {

@@ -135,6 +135,7 @@ public:
 	virtual ~Players();
 
 	// SYNTHETIC: WEBSERVICE 0x10193090
+	// SYNTHETIC: ROBLOX 0x004b2f80
 	// RBX::Network::Players::`scalar deleting destructor'
 
 	// FUNCTION: ROBLOX 0x004b0e10

@@ -51,6 +51,7 @@ public:
 	// RBX::Mouse::~Mouse
 
 	// SYNTHETIC: WEBSERVICE 0x100cc120
+	// SYNTHETIC: ROBLOX 0x00610cf0
 	// RBX::Mouse::`scalar deleting destructor'
 
 	void update(const UIEvent& uiEvent);

@@ -144,6 +144,7 @@ public:
 	virtual ~SoundService();
 
 	// SYNTHETIC: WEBSERVICE 0x10081910
+	// SYNTHETIC: ROBLOX 0x005c5460
 	// RBX::Soundscape::SoundService::`scalar deleting destructor'
 
 	void playSound(SoundType soundType);
@@ -201,6 +202,7 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x1007e580
+	// SYNTHETIC: ROBLOX 0x005c20d0
 	// RBX::Soundscape::SoundChannel::`scalar deleting destructor'
 	// clang-format on
 

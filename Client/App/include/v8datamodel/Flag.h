@@ -57,6 +57,7 @@ public:
 	virtual ~Flag();
 
 	// SYNTHETIC: WEBSERVICE 0x100cd790
+	// SYNTHETIC: ROBLOX 0x00623360
 	// RBX::Flag::`scalar deleting destructor'
 
 	virtual void onChildAdded(Instance* child);

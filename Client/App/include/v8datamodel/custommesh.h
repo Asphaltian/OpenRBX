@@ -75,6 +75,7 @@ public:
 	// RBX::SpecialShape::~SpecialShape
 
 	// SYNTHETIC: WEBSERVICE 0x1012db90
+	// SYNTHETIC: ROBLOX 0x005b4490
 	// RBX::SpecialShape::`scalar deleting destructor'
 };
 

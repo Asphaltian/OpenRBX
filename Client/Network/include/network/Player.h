@@ -71,6 +71,7 @@ public:
 	virtual ~Player();
 
 	// SYNTHETIC: WEBSERVICE 0x10190170
+	// SYNTHETIC: ROBLOX 0x004ae840
 	// RBX::Network::Player::`scalar deleting destructor'
 
 	static Reflection::SignalDesc<Player, void(std::string, boost::shared_ptr<Instance>)> event_Chatted;

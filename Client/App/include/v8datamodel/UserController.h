@@ -213,6 +213,7 @@ DECOMP_SIZE_ASSERT(PlayerController, 0x2c)
 // SYNTHETIC: ROBLOX 0x005d5bf0
 // RBX::ControllerService::~ControllerService
 // SYNTHETIC: WEBSERVICE 0x100c6ee0
+// SYNTHETIC: ROBLOX 0x005d5d30
 // RBX::ControllerService::`scalar deleting destructor'
 // clang-format on
 

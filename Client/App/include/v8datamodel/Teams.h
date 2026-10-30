@@ -30,6 +30,7 @@ public:
 	virtual ~Teams();
 
 	// SYNTHETIC: WEBSERVICE 0x100dab80
+	// SYNTHETIC: ROBLOX 0x005e7970
 	// RBX::Teams::`scalar deleting destructor'
 
 	void assignNewPlayerToTeam(Network::Player* p);

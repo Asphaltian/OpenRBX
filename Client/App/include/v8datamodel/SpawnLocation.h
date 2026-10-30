@@ -55,6 +55,7 @@ public:
 	// RBX::SpawnLocation::~SpawnLocation
 
 	// SYNTHETIC: WEBSERVICE 0x100ff280
+	// SYNTHETIC: ROBLOX 0x005e5cd0
 	// RBX::SpawnLocation::`scalar deleting destructor'
 };
 

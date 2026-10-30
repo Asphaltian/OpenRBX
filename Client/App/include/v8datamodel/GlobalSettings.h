@@ -89,6 +89,7 @@ DECOMP_SIZE_ASSERT(GlobalSettings::Item, 0xf8)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x100b72a0
+// SYNTHETIC: ROBLOX 0x00594200
 // ??_GServiceProvider@RBX@@UAEPAXI@Z
 // clang-format on
 

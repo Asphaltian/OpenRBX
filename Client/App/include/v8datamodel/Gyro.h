@@ -374,6 +374,7 @@ DECOMP_SIZE_ASSERT(Rocket, 0x154)
 // SYNTHETIC: ROBLOX 0x0062d0d0
 // RBX::Rocket::~Rocket
 // SYNTHETIC: WEBSERVICE 0x100ee110
+// SYNTHETIC: ROBLOX 0x0062d150
 // RBX::Rocket::`scalar deleting destructor'
 // clang-format on
 

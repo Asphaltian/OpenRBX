@@ -30,6 +30,7 @@ public:
 	virtual ~Client();
 
 	// SYNTHETIC: WEBSERVICE 0x10197060
+	// SYNTHETIC: ROBLOX 0x004b9230
 	// RBX::Network::Client::`scalar deleting destructor'
 
 	static Reflection::SignalDesc<Client, void(std::string, boost::shared_ptr<Instance>)> event_ConnectionAccepted;

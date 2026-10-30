@@ -266,6 +266,7 @@ private:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x101aa560
+	// SYNTHETIC: ROBLOX 0x004d3680
 	// RBX::Network::Replicator::`scalar deleting destructor'
 };
 
@@ -324,6 +325,7 @@ protected:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x101a13b0
+	// SYNTHETIC: ROBLOX 0x004c7eb0
 	// RBX::Network::Peer::`scalar deleting destructor'
 };
 
