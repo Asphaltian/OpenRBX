@@ -399,6 +399,7 @@ bool PartInstance::getCanCollide() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009b170
+// FUNCTION: ROBLOX 0x005adc60
 bool PartInstance::getAnchored() const
 {
 	return primitive->getAnchorObject() != NULL;
@@ -745,6 +746,7 @@ const CoordinateFrame PartInstance::getLocation() const
 }
 
 // FUNCTION: WEBSERVICE 0x1009d7d0
+// STUB: ROBLOX 0x005b02e0
 void PartInstance::getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives)
 {
 	primitives.push_back(getPrimitive());

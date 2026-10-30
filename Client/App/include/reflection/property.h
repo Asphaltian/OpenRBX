@@ -530,6 +530,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1007d760
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,bool>::getset<bool (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,int>
 	// TEMPLATE: WEBSERVICE 0x1007de40
+	// TEMPLATE: ROBLOX 0x005c1c70
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId>::TypedPropertyDescriptor<RBX::Soundscape::SoundId>
 	// TEMPLATE: WEBSERVICE 0x1007e140
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,int>::getset<int (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(int)>

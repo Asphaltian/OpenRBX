@@ -21,6 +21,7 @@ private:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1019bf50
+// TEMPLATE: ROBLOX 0x004c2750
 // RBX::ScopedAssign<int>::~ScopedAssign<int>
 // clang-format on
 

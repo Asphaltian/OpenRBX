@@ -5,6 +5,7 @@
 namespace RBX {
 
 // FUNCTION: WEBSERVICE 0x10098f70
+// FUNCTION: ROBLOX 0x005c92f0
 bool InstanceHandle::empty() const
 {
 	return target.get() == 0;

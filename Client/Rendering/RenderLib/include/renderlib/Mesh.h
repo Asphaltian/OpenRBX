@@ -152,6 +152,7 @@ public:
 	// SYNTHETIC: ROBLOX 0x0049b080
 	// RBX::Render::Mesh::ShadowSurface::ShadowSurface
 	// SYNTHETIC: WEBSERVICE 0x1021eb80
+	// STUB: ROBLOX 0x007e7fc0
 	// `dynamic initializer for 'RBX::Render::Mesh::visibleGeometry''
 	// SYNTHETIC: WEBSERVICE 0x1021ebc0
 	// `dynamic initializer for 'RBX::Render::Mesh::texCoordArray''

@@ -38,6 +38,7 @@ public:
 		bool operator<(const BucketKey& that) const;
 
 		// SYNTHETIC: WEBSERVICE 0x101f2b70
+		// SYNTHETIC: ROBLOX 0x0052fc70
 		// RBX::Render::AggregatingSceneManager::BucketKey::~BucketKey
 	};
 

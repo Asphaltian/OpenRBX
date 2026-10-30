@@ -32,6 +32,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x1005ea80
+	// FUNCTION: ROBLOX 0x0056bcf0
 	~ScopedPopper() { lua_pop(thread, popCount); }
 };
 

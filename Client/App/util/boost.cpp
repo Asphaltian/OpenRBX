@@ -67,6 +67,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x100323e0
+	// FUNCTION: ROBLOX 0x005a9e30
 	~ThreadPrioritySetter()
 	{
 		if (success) {

@@ -27,6 +27,7 @@ public:
 	IStage(IStage* upstream, IStage* downstream) : upstream(upstream), downstream(downstream) {}
 
 	// FUNCTION: WEBSERVICE 0x100ab1a0
+	// FUNCTION: ROBLOX 0x00641fa0
 	// RBX::IStage::~IStage
 
 	virtual ~IStage() { delete downstream; }

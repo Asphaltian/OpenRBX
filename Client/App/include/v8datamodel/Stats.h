@@ -45,6 +45,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x100b1f10
+	// FUNCTION: ROBLOX 0x005d36d0
 	double getValue()
 	{
 		update();

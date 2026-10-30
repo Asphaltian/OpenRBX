@@ -31,6 +31,7 @@ private:
 
 		// clang-format off
 		// SYNTHETIC: WEBSERVICE 0x100fb7e0
+		// SYNTHETIC: ROBLOX 0x005e8440
 		// ??1Item@TimerService@RBX@@QAE@XZ
 		// clang-format on
 	};

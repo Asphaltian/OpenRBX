@@ -23,6 +23,7 @@ class ErrorUploader
 		// SYNTHETIC: WEBSERVICE 0x1000cf10
 		// ErrorUploader::data::data
 		// SYNTHETIC: WEBSERVICE 0x1001ddc0
+		// SYNTHETIC: ROBLOX 0x00450530
 		// ErrorUploader::data::~data
 	};
 

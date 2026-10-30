@@ -86,6 +86,7 @@ MyDummySetUnhandledExceptionFilter(LPTOP_LEVEL_EXCEPTION_FILTER lpTopLevelExcept
 }
 
 // FUNCTION: WEBSERVICE 0x1018b560
+// STUB: ROBLOX 0x004b8040
 BOOL PreventSetUnhandledExceptionFilter()
 {
 	HMODULE hKernel32 = LoadLibrary("kernel32.dll");

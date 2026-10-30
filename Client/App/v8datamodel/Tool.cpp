@@ -114,6 +114,7 @@ Tool::ToolState Tool::computeDesiredState(Instance* testParent)
 }
 
 // FUNCTION: WEBSERVICE 0x100c9f50
+// FUNCTION: ROBLOX 0x0060ec00
 void Tool::downFrom_InCharacter()
 {
 	characterChildAdded.disconnect();
@@ -121,6 +122,7 @@ void Tool::downFrom_InCharacter()
 }
 
 // FUNCTION: WEBSERVICE 0x100c9f70
+// FUNCTION: ROBLOX 0x0060ec20
 void Tool::downFrom_HasTorso()
 {
 	torsoChildAdded.disconnect();

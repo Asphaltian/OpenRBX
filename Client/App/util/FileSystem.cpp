@@ -43,6 +43,7 @@ public:
 };
 
 // FUNCTION: WEBSERVICE 0x1003e160
+// FUNCTION: ROBLOX 0x005b99f0
 VistaAPIs::~VistaAPIs()
 {
 	if (gShell32DLLInst) {

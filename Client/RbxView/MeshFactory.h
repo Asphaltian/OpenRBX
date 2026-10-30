@@ -58,8 +58,10 @@ private:
 
 		// clang-format off
 		// SYNTHETIC: WEBSERVICE 0x1016a4e0
+		// SYNTHETIC: ROBLOX 0x00474940
 		// RBX::View::MeshFactory<RBX::View::PBBMesh,4>::Variations::~Variations
 		// SYNTHETIC: WEBSERVICE 0x1016c7a0
+		// SYNTHETIC: ROBLOX 0x00474950
 		// RBX::View::MeshFactory<RBX::View::CylinderAlongXMesh,1>::Variations::~Variations
 		// SYNTHETIC: WEBSERVICE 0x1016c7f0
 		// SYNTHETIC: ROBLOX 0x00477d80

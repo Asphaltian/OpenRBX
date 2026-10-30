@@ -15,6 +15,7 @@ namespace Profiling {
 DWORD Mark::markTlsIndex = 0;
 
 // FUNCTION: WEBSERVICE 0x100844e0
+// FUNCTION: ROBLOX 0x005ce280
 void init(bool enabled)
 {
 	if (enabled) {

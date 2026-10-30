@@ -256,6 +256,7 @@ void ModelInstance::render3dAdorn(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x1005ae80
+// FUNCTION: ROBLOX 0x00565c00
 void ModelInstance::onCameraNear(float distance)
 {
 	for (unsigned int i = 0; i < numChildren(); i++) {

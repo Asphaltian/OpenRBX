@@ -27,6 +27,7 @@ public:
 
 		// clang-format off
 		// SYNTHETIC: WEBSERVICE 0x101f33c0
+		// SYNTHETIC: ROBLOX 0x00496220
 		// RBX::Render::Clusterer::Cluster::~Cluster
 		// clang-format on
 

@@ -194,6 +194,7 @@ Accoutrement::~Accoutrement()
 }
 
 // FUNCTION: WEBSERVICE 0x100dbb40
+// FUNCTION: ROBLOX 0x005bad30
 void Accoutrement::onCameraNear(float distance)
 {
 	for (unsigned int i = 0; i < numChildren(); i++) {
