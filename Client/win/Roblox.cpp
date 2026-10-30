@@ -17,6 +17,7 @@
 
 #include <afxpriv.h>
 #include <atlcom.h>
+#include <exdispid.h>
 
 class CRobloxModule : public ATL::CAtlMfcModule
 {
@@ -520,6 +521,78 @@ CRobloxControlColorSelector::CRobloxControlColorSelector() : m_unk0x174(false)
 	m_unk0x178 = (COLORREF) -1;
 	SetFlags(xtpFlagNoMovable);
 	m_unk0x170 = -1;
+}
+
+IMPLEMENT_DYNAMIC(CRobloxDHtmlDialog, CDHtmlDialog)
+
+BEGIN_EVENTSINK_MAP(CRobloxDHtmlDialog, CDHtmlDialog)
+ON_EVENT(
+	CRobloxDHtmlDialog,
+	AFX_IDC_BROWSER,
+	DISPID_BEFORENAVIGATE2,
+	OnBeforeNavigate2,
+	VTS_DISPATCH VTS_PVARIANT VTS_PVARIANT VTS_PVARIANT VTS_PVARIANT VTS_PVARIANT VTS_PBOOL
+)
+ON_EVENT(CRobloxDHtmlDialog, AFX_IDC_BROWSER, DISPID_WINDOWCLOSING, OnWindowClosing, VTS_BOOL VTS_PBOOL)
+END_EVENTSINK_MAP()
+
+// FUNCTION: ROBLOX 0x00453aa0
+CRobloxDHtmlDialog::CRobloxDHtmlDialog(UINT nIDTemplate, const char* url, CWnd* pParentWnd)
+	: CDHtmlDialog(nIDTemplate, 114, pParentWnd), m_unk0x114(url)
+{
+	m_bUseHtmlTitle = TRUE;
+	SetHostFlags(m_dwHostFlags | 0x1844013);
+}
+
+// FUNCTION: ROBLOX 0x00453b40
+CRobloxDHtmlDialog::CRobloxDHtmlDialog(UINT nIDTemplate, UINT nHtmlResID, CWnd* pParentWnd)
+	: CDHtmlDialog(nIDTemplate, nHtmlResID, pParentWnd)
+{
+	m_bUseHtmlTitle = TRUE;
+	SetHostFlags(m_dwHostFlags | 0x1844013);
+}
+
+// STUB: ROBLOX 0x00453be0
+BOOL CRobloxDHtmlDialog::OnInitDialog()
+{
+	CDHtmlDialog::OnInitDialog();
+
+	if (!m_unk0x114.empty()) {
+		Navigate(m_unk0x114.c_str());
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+// STUB: ROBLOX 0x00453c20
+void CRobloxDHtmlDialog::OnBeforeNavigate2(
+	LPDISPATCH pDisp,
+	VARIANT* url,
+	VARIANT* flags,
+	VARIANT* targetFrameName,
+	VARIANT* postData,
+	VARIANT* headers,
+	BOOL* cancel
+)
+{
+	STUB(0x453c20);
+}
+
+// STUB: ROBLOX 0x00453ce0
+void CRobloxDHtmlDialog::OnWindowClosing(BOOL isChildWindow, BOOL* cancel)
+{
+	*cancel = -1;
+
+	CString result;
+	DDX_DHtml_ElementText(_T("DialogResult"), DISPID_A_VALUE, result, TRUE);
+
+	if (result == "") {
+		OnCancel();
+	}
+	else {
+		EndDialog(atoi(result));
+	}
 }
 
 // FUNCTION: ROBLOX 0x00453eb0 FOLDED

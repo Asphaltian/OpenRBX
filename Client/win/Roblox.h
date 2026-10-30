@@ -6,6 +6,7 @@
 #include "decomp.h"
 
 #include <G3D/Color3uint8.h>
+#include <afxdhtml.h>
 #include <boost/scoped_ptr.hpp>
 #include <string>
 
@@ -100,5 +101,45 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(CRobloxControlColorSelector, 0x17c)
+
+// SIZE 0x130
+class CRobloxDHtmlDialog : public CDHtmlDialog
+{
+	DECLARE_DYNAMIC(CRobloxDHtmlDialog)
+
+	// SYNTHETIC: ROBLOX 0x00453a80
+	// ?GetRuntimeClass@CRobloxDHtmlDialog@@UBEPAUCRuntimeClass@@XZ
+
+	// SYNTHETIC: ROBLOX 0x00453a90
+	// ?GetEventSinkMap@CRobloxDHtmlDialog@@MBEPBUAFX_EVENTSINKMAP@@XZ
+
+public:
+	CRobloxDHtmlDialog(UINT nIDTemplate, const char* url, CWnd* pParentWnd);
+	CRobloxDHtmlDialog(UINT nIDTemplate, UINT nHtmlResID, CWnd* pParentWnd);
+
+	// SYNTHETIC: ROBLOX 0x00453cc0
+	// ??_GCRobloxDHtmlDialog@@UAEPAXI@Z
+
+	virtual BOOL OnInitDialog(); // vtable+0x150
+
+protected:
+	void OnBeforeNavigate2(
+		LPDISPATCH pDisp,
+		VARIANT* url,
+		VARIANT* flags,
+		VARIANT* targetFrameName,
+		VARIANT* postData,
+		VARIANT* headers,
+		BOOL* cancel
+	);
+	void OnWindowClosing(BOOL isChildWindow, BOOL* cancel);
+
+	DECLARE_EVENTSINK_MAP()
+
+private:
+	std::string m_unk0x114; // 0x114
+};
+
+DECOMP_SIZE_ASSERT(CRobloxDHtmlDialog, 0x130)
 
 #endif // ROBLOX_H
