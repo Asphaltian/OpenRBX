@@ -109,6 +109,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/gui/GuiDraw.cpp
   Client/App/gui/MenuItem.cpp
   Client/App/gui/ProfanityFilter.cpp
+  Client/App/gui/ScoreHud.cpp
   Client/App/gui/Widget.cpp
   Client/App/humanoid/Humanoid.cpp
   Client/App/reflection/reflection_function.cpp
