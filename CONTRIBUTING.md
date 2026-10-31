@@ -11,7 +11,7 @@ Decompiling takes a while to get good at. You should be comfortable with C++ and
 ## Overview
 
 * [`WebService`](/WebService) - the translation units specific to RBXGS
-* [`Client`](/Client) - the engine's static libraries, shared by RBXGS and the client, plus the libraries Roblox kept in its own tree
+* [`Client`](/Client) - the engine's static libraries, shared by RBXGS and the client
 * [`util`](/util) - headers the decompilation needs
 * [`3rdparty`](/3rdparty) - the SDKs the original built against from outside its tree
 
