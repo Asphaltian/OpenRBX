@@ -14,7 +14,7 @@ Keep in mind that this code reproduces the original release as it was, bugs incl
 
 All but ~140 of the Roblox functions in `WebService.dll` from RBXGS, the game server, compile to the same instructions as the original.
 
-The client, `Roblox.exe`, is next. Both were built from the same engine libraries, so a little over a third of it already matches.
+The client, `Roblox.exe`, is currently being worked on. Both binaries were built from the same engine libraries, so a little over a third of it already matches.
 
 ## Building
 
@@ -83,8 +83,8 @@ reccmp-reccmp --target ROBLOX -S ROBLOXPROGRESS.SVG
 ## Project Structure
 
 * `WebService/` - the translation units specific to RBXGS
-* `Client/` - the engine's static libraries, the client project, and the libraries Roblox kept in its own tree
-* `3rdparty/` - the SDKs the original built against from outside its tree
+* `Client/` - the engine's static libraries and client project
+* `3rdparty/` - third-party SDKs the original built against from outside its tree
 * `util/` - headers the decompilation needs
 * `cmake/` - CMake modules
 * `tools/` - Python tooling and its requirements
