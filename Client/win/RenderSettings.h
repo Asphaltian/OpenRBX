@@ -16,9 +16,15 @@ class CRenderSettings;
 // clang-format off
 // TEMPLATE: ROBLOX 0x00448640
 // RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>::~FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>
+// TEMPLATE: ROBLOX 0x004486d0
+// RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>
 // TEMPLATE: ROBLOX 0x00448d70
 // RBX::GlobalSettingsItem<CRenderSettings,&sRenderSettings>::~GlobalSettingsItem<CRenderSettings,&sRenderSettings>
-// STUB: ROBLOX 0x0044c990
+// TEMPLATE: ROBLOX 0x0044ad20
+// RBX::Reflection::Described<CRenderSettings,&sRenderSettings,RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings> >::classDescriptor
+// TEMPLATE: ROBLOX 0x0044c940
+// RBX::Reflection::Described<CRenderSettings,&sRenderSettings,RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings> >::Described<CRenderSettings,&sRenderSettings,RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings> >
+// TEMPLATE: ROBLOX 0x0044c990
 // RBX::DescribedCreatable<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>::DescribedCreatable<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>
 // TEMPLATE: ROBLOX 0x0044ca50
 // RBX::GlobalSettingsItem<CRenderSettings,&sRenderSettings>::GlobalSettingsItem<CRenderSettings,&sRenderSettings>
@@ -53,5 +59,10 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(CRenderSettings, 0x144)
+
+// clang-format off
+// SYNTHETIC: ROBLOX 0x007efe50
+// `RBX::Reflection::Described<CRenderSettings,&sRenderSettings,RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// clang-format on
 
 #endif // RENDERSETTINGS_H
