@@ -9,6 +9,7 @@
 
 extern const char sRenderSettings[];
 
+extern undefined4 g_unk0x0091a2e8;
 extern G3D::Vector2int16 g_unk0x0091a2ec;
 
 class CRenderSettings;
@@ -35,6 +36,17 @@ class CRenderSettings : public RBX::GlobalSettingsItem<CRenderSettings, sRenderS
 {
 public:
 	CRenderSettings();
+
+	float FUN_00448290() const;
+	float FUN_004482a0() const;
+	float FUN_004482b0() const;
+	float FUN_004482c0() const;
+	undefined4 FUN_004482d0() const;
+	undefined4 FUN_004482e0() const;
+	undefined4 FUN_004482f0() const;
+	G3D::Vector2int16 FUN_00448300() const;
+	G3D::Vector2int16 FUN_00448310() const;
+	unsigned int FUN_00448320() const;
 
 	// clang-format off
 	// SYNTHETIC: ROBLOX 0x0044cd20

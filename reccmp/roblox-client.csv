@@ -2655,3 +2655,4 @@ address,type,symbol,name,module,size
 00809bcc,global,??_7?$DescribedCreatable@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@,,,
 009540f8,global,??_B?1??classDescriptor@?$Described@VCRenderSettings@@$1?sRenderSettings@@3QBDBV?$FactoryProduct@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51,,,
 00954070,global,"foo___RBX::Reflection::Described<CRenderSettings,&sRenderSettings,RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings> >::classDescriptor",,,
+0091a2e8,global,?g_unk0x0091a2e8@@3IA,,,

@@ -6,6 +6,7 @@
 
 const char sRenderSettings[] = "RenderSettings";
 
+undefined4 g_unk0x0091a2e8 = 1;
 G3D::Vector2int16 g_unk0x0091a2ec(800, 600);
 
 static G3D::Vector2int16 defaultFullscreenSize()
@@ -14,6 +15,66 @@ static G3D::Vector2int16 defaultFullscreenSize()
 		return G3D::Vector2int16(1024, 768);
 	}
 	return G3D::Vector2int16(800, 600);
+}
+
+// FUNCTION: ROBLOX 0x00448290
+float CRenderSettings::FUN_00448290() const
+{
+	return m_unk0x10c;
+}
+
+// FUNCTION: ROBLOX 0x004482a0
+float CRenderSettings::FUN_004482a0() const
+{
+	return m_unk0x110;
+}
+
+// FUNCTION: ROBLOX 0x004482b0
+float CRenderSettings::FUN_004482b0() const
+{
+	return m_unk0x114;
+}
+
+// FUNCTION: ROBLOX 0x004482c0
+float CRenderSettings::FUN_004482c0() const
+{
+	return m_unk0x118;
+}
+
+// FUNCTION: ROBLOX 0x004482d0
+undefined4 CRenderSettings::FUN_004482d0() const
+{
+	return m_unk0xfc;
+}
+
+// FUNCTION: ROBLOX 0x004482e0
+undefined4 CRenderSettings::FUN_004482e0() const
+{
+	return m_unk0x100;
+}
+
+// FUNCTION: ROBLOX 0x004482f0
+undefined4 CRenderSettings::FUN_004482f0() const
+{
+	return g_unk0x0091a2e8;
+}
+
+// FUNCTION: ROBLOX 0x00448300
+G3D::Vector2int16 CRenderSettings::FUN_00448300() const
+{
+	return m_unk0x13c;
+}
+
+// FUNCTION: ROBLOX 0x00448310
+G3D::Vector2int16 CRenderSettings::FUN_00448310() const
+{
+	return m_unk0x140;
+}
+
+// FUNCTION: ROBLOX 0x00448320
+unsigned int CRenderSettings::FUN_00448320() const
+{
+	return RBX::Render::AggregatingSceneManager::aggregationSize;
 }
 
 // STUB: ROBLOX 0x0044cb20
