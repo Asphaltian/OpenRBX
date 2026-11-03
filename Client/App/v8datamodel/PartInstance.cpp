@@ -720,6 +720,7 @@ PartInstance::~PartInstance()
 }
 
 // FUNCTION: WEBSERVICE 0x1009d2e0 FOLDED
+// FUNCTION: ROBLOX 0x005afeb0 FOLDED
 PartInstance* PartInstance::getPrimaryPart()
 {
 	return this;

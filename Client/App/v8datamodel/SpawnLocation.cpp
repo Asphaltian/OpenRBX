@@ -61,6 +61,7 @@ void SpawnLocation::onEvent_spawnerTouched(boost::shared_ptr<Instance> other)
 }
 
 // FUNCTION: WEBSERVICE 0x100fdd80
+// FUNCTION: ROBLOX 0x005e4950
 SpawnerService::~SpawnerService()
 {
 }
