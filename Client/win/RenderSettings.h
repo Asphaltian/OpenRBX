@@ -1,0 +1,57 @@
+#ifndef RENDERSETTINGS_H
+#define RENDERSETTINGS_H
+
+#include "decomp.h"
+#include "v8datamodel/GlobalSettings.h"
+
+#include <G3D/Vector2int16.h>
+#include <string>
+
+extern const char sRenderSettings[];
+
+extern G3D::Vector2int16 g_unk0x0091a2ec;
+
+class CRenderSettings;
+
+// clang-format off
+// TEMPLATE: ROBLOX 0x00448640
+// RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>::~FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>
+// TEMPLATE: ROBLOX 0x00448d70
+// RBX::GlobalSettingsItem<CRenderSettings,&sRenderSettings>::~GlobalSettingsItem<CRenderSettings,&sRenderSettings>
+// STUB: ROBLOX 0x0044c990
+// RBX::DescribedCreatable<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>::DescribedCreatable<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>
+// TEMPLATE: ROBLOX 0x0044ca50
+// RBX::GlobalSettingsItem<CRenderSettings,&sRenderSettings>::GlobalSettingsItem<CRenderSettings,&sRenderSettings>
+// clang-format on
+
+// SIZE 0x144
+class CRenderSettings : public RBX::GlobalSettingsItem<CRenderSettings, sRenderSettings>
+{
+public:
+	CRenderSettings();
+
+	// clang-format off
+	// SYNTHETIC: ROBLOX 0x0044cd20
+	// CRenderSettings::~CRenderSettings
+	// SYNTHETIC: ROBLOX 0x0044cd80
+	// CRenderSettings::`scalar deleting destructor'
+	// clang-format on
+
+	undefined4 m_unk0xf8;         // 0x0f8
+	undefined4 m_unk0xfc;         // 0x0fc
+	undefined4 m_unk0x100;        // 0x100
+	undefined4 m_unk0x104;        // 0x104
+	undefined4 m_unk0x108;        // 0x108
+	float m_unk0x10c;             // 0x10c
+	float m_unk0x110;             // 0x110
+	float m_unk0x114;             // 0x114
+	float m_unk0x118;             // 0x118
+	undefined m_unk0x11c;         // 0x11c
+	std::string m_unk0x120;       // 0x120
+	G3D::Vector2int16 m_unk0x13c; // 0x13c
+	G3D::Vector2int16 m_unk0x140; // 0x140
+};
+
+DECOMP_SIZE_ASSERT(CRenderSettings, 0x144)
+
+#endif // RENDERSETTINGS_H
