@@ -80,6 +80,7 @@ public:
 	virtual ~MainLogManager();
 
 	// SYNTHETIC: WEBSERVICE 0x100026b0
+	// SYNTHETIC: ROBLOX 0x0042bf20
 	// MainLogManager::`scalar deleting destructor'
 
 	virtual RBX::Log* provideLog();

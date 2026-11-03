@@ -243,8 +243,10 @@ protected:
 	// TEMPLATE: ROBLOX 0x005e9e40
 	// RBX::FilteredSelection<RBX::PartInstance>::FilteredSelection<RBX::PartInstance>
 	// TEMPLATE: WEBSERVICE 0x100a1bd0
+	// TEMPLATE: ROBLOX 0x005ea1a0
 	// RBX::FilteredSelection<RBX::PartInstance>::~FilteredSelection<RBX::PartInstance>
 	// SYNTHETIC: WEBSERVICE 0x100a1ce0
+	// SYNTHETIC: ROBLOX 0x005ea2b0
 	// RBX::FilteredSelection<RBX::PartInstance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100a32e0
 	// STUB: ROBLOX 0x005eb920
@@ -256,8 +258,10 @@ protected:
 	// TEMPLATE: ROBLOX 0x006212e0
 	// RBX::FilteredSelection<RBX::Instance>::FilteredSelection<RBX::Instance>
 	// TEMPLATE: WEBSERVICE 0x100bfa30
+	// TEMPLATE: ROBLOX 0x00621470
 	// RBX::FilteredSelection<RBX::Instance>::~FilteredSelection<RBX::Instance>
 	// SYNTHETIC: WEBSERVICE 0x100bfb40
+	// SYNTHETIC: ROBLOX 0x00621580
 	// RBX::FilteredSelection<RBX::Instance>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100c01e0
 	// TEMPLATE: ROBLOX 0x00621c00

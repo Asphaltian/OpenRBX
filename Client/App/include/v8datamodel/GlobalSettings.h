@@ -31,6 +31,7 @@ extern const char sGlobalSettings[];
 // FUNCTION: ROBLOX 0x00448500
 // RBX::GlobalSettings::Item::askAddChild
 // TEMPLATE: WEBSERVICE 0x100b3b40
+// TEMPLATE: ROBLOX 0x0057b760
 // RBX::GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>::~GlobalSettingsItem<RBX::DebugSettings,&RBX::sDebugSettings>
 // TEMPLATE: WEBSERVICE 0x100b4fd0
 // TEMPLATE: ROBLOX 0x0057cf80
@@ -42,6 +43,7 @@ extern const char sGlobalSettings[];
 // FUNCTION: ROBLOX 0x00582750
 // RBX::DescribedNonCreatable<RBX::GlobalSettings,RBX::ServiceProvider,&RBX::sGlobalSettings>::DescribedNonCreatable<RBX::GlobalSettings,RBX::ServiceProvider,&RBX::sGlobalSettings>
 // TEMPLATE: WEBSERVICE 0x100de240
+// TEMPLATE: ROBLOX 0x005c94e0
 // RBX::GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>::~GlobalSettingsItem<RBX::GameSettings,&RBX::sGameSettings>
 // TEMPLATE: WEBSERVICE 0x100de5a0
 // TEMPLATE: ROBLOX 0x005c9880
@@ -53,6 +55,7 @@ extern const char sGlobalSettings[];
 // TEMPLATE: ROBLOX 0x004b8330
 // RBX::GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>::singleton
 // TEMPLATE: WEBSERVICE 0x1019b4b0
+// TEMPLATE: ROBLOX 0x004c1d90
 // RBX::GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>::~GlobalSettingsItem<RBX::NetworkSettings,&RBX::sNetworkSettings>
 // TEMPLATE: WEBSERVICE 0x1019b960
 // TEMPLATE: ROBLOX 0x004c21e0

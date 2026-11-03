@@ -143,8 +143,10 @@ DECOMP_SIZE_ASSERT(BodyColors, 0x110)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100e0930
+// FUNCTION: ROBLOX 0x005e63f0
 // RBX::ShirtGraphic::~ShirtGraphic
 // SYNTHETIC: WEBSERVICE 0x100e15a0
+// SYNTHETIC: ROBLOX 0x005e70a0
 // RBX::ShirtGraphic::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x1021c9c0
 // `dynamic initializer for 'RBX::ShirtGraphic::prop_Graphic''
