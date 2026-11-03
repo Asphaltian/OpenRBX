@@ -126,7 +126,7 @@ protected:
 	void RestoreResolution();
 	void getMonitorInfo();
 	bool FUN_00434970(bool p_unk0x04);
-	void FUN_00435b60();
+	void ChangeResolution();
 	void FUN_00435e00(bool p_unk0x04);
 
 	afx_msg void FUN_00432650();

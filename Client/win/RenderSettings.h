@@ -15,6 +15,10 @@ extern G3D::Vector2int16 g_unk0x0091a2ec;
 class CRenderSettings;
 
 // clang-format off
+// STUB: ROBLOX 0x0040fc50
+// RBX::Creatable<RBX::Instance>::create<CRenderSettings>
+// TEMPLATE: ROBLOX 0x0040fce0
+// RBX::GlobalSettingsItem<CRenderSettings,&sRenderSettings>::singleton
 // TEMPLATE: ROBLOX 0x00448640
 // RBX::FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>::~FactoryProduct<CRenderSettings,RBX::GlobalSettings::Item,&sRenderSettings>
 // TEMPLATE: ROBLOX 0x004486d0

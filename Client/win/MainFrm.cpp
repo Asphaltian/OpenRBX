@@ -1,5 +1,6 @@
 #include "MainFrm.h"
 
+#include "RenderSettings.h"
 #include "Roblox.h"
 #include "util/FileSystem.h"
 #include "util/StandardOut.h"
@@ -535,6 +536,37 @@ void CMainFrame::FUN_00434ea0()
 	}
 }
 
+// STUB: ROBLOX 0x00434ec0
+DEVMODE FUN_00434ec0(LPCTSTR device, int pixels)
+{
+	DEVMODE mode;
+	memset(&mode, 0, sizeof(mode));
+	mode.dmSize = sizeof(mode);
+
+	if (!EnumDisplaySettingsEx(device, ENUM_CURRENT_SETTINGS, &mode, 0)) {
+		RBX::StandardOut::singleton()->print(
+			RBX::MESSAGE_ERROR, "EnumDisplaySettings failed. GetLastError() == %d", GetLastError()
+		);
+	}
+
+	double aspect = (double) mode.dmPelsWidth / (double) mode.dmPelsHeight;
+	DEVMODE best = mode;
+
+	DWORD i = 0;
+	while (EnumDisplaySettingsEx(device, i++, &mode, 0)) {
+		double ratio = (double) mode.dmPelsWidth / (double) mode.dmPelsHeight;
+		if (fabs(aspect - ratio) / aspect <= 0.1 && best.dmBitsPerPel == mode.dmBitsPerPel &&
+			best.dmDisplayFrequency == mode.dmDisplayFrequency &&
+			abs(pixels - (int) (mode.dmPelsWidth * mode.dmPelsHeight)) <
+				abs(pixels - (int) (best.dmPelsWidth * best.dmPelsHeight))) {
+			best = mode;
+		}
+	}
+
+	best.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT;
+	return best;
+}
+
 // STUB: ROBLOX 0x00435230
 void CMainFrame::FUN_00435230(bool p_unk0x04)
 {
@@ -597,10 +629,39 @@ LRESULT CMainFrame::FUN_004357f0(WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-// STUB: ROBLOX 0x00435b60
-void CMainFrame::FUN_00435b60()
+// FUNCTION: ROBLOX 0x00435b60
+void CMainFrame::ChangeResolution()
 {
-	STUB(0x435b60);
+	if (m_unk0xe4 == NULL) {
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, "CMainFrame::ChangeResolution hm is NULL");
+		return;
+	}
+
+	RBX::ScopedAssign<bool> changing(m_unk0xe1, true);
+
+	MONITORINFOEX info;
+	info.cbSize = sizeof(info);
+
+	if (!GetMonitorInfo(m_unk0xe4, &info)) {
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, "GetMonitorInfo failed");
+		return;
+	}
+
+	G3D::Vector2int16 size = CRenderSettings::singleton().FUN_00448300();
+	DEVMODE mode = FUN_00434ec0(info.szDevice, size.x * size.y);
+
+	LONG result = ChangeDisplaySettingsEx(info.szDevice, &mode, NULL, CDS_FULLSCREEN, NULL);
+	if (result == DISP_CHANGE_SUCCESSFUL) {
+		ModifyStyle(WS_CAPTION | WS_THICKFRAME, 0);
+
+		CRect rect = XTPMultiMonitor()->GetScreenArea(this);
+		int cx = GetSystemMetrics(SM_CXBORDER);
+		int cy = GetSystemMetrics(SM_CYBORDER);
+		SetWindowPos(NULL, rect.left - cx, rect.top - cy, rect.Width() + 2 * cx, rect.Height() + 2 * cy, SWP_NOZORDER);
+	}
+	else {
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, "ChangeDisplaySettings == %d", result);
+	}
 }
 
 // STUB: ROBLOX 0x00435e00
@@ -609,13 +670,13 @@ void CMainFrame::FUN_00435e00(bool p_unk0x04)
 	STUB(0x435e00);
 }
 
-// STUB: ROBLOX 0x00435eb0
+// FUNCTION: ROBLOX 0x00435eb0
 void CMainFrame::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 {
 	CXTPMDIFrameWnd::OnActivate(nState, pWndOther, bMinimized);
 
 	if (m_unk0xe0 && !m_unk0xe1 && nState != WA_INACTIVE) {
-		FUN_00435b60();
+		ChangeResolution();
 		ShowWindow(SW_RESTORE);
 	}
 }
