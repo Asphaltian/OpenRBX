@@ -2608,3 +2608,5 @@ address,type,symbol,name,module,size
 00639480,synthetic,??_G?$Described@VSeat@RBX@@$1?sSeat@2@3PADAV?$FactoryProduct@VSeat@RBX@@VPartInstance@2@$1?sSeat@2@3PADA@2@@Reflection@RBX@@UAEPAXI@Z,,,
 006397f0,synthetic,??_GSeat@RBX@@UAEPAXI@Z,,,
 007ff7cc,global,??_7CNullDoc@@6B@,,,
+0044e0e0,synthetic,??_ECIDEDocManager@@UAEPAXI@Z,,,
+0044e130,synthetic,??_ECRbxDocTemplate@@UAEPAXI@Z,,,
