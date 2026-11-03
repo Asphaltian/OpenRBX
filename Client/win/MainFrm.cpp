@@ -774,7 +774,8 @@ void CMainFrame::FUN_00453eb0(CCmdUI* pCmdUI)
 	pCmdUI->Enable(TRUE);
 }
 
+// FUNCTION: ROBLOX 0x00465830 FOLDED
 void CMainFrame::OnPaint()
 {
-	CPaintDC dc(this);
+	Default();
 }
