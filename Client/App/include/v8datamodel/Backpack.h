@@ -19,6 +19,7 @@ public:
 	Backpack();
 
 	// SYNTHETIC: WEBSERVICE 0x100da720
+	// SYNTHETIC: ROBLOX 0x005e3f80
 	// RBX::Backpack::`scalar deleting destructor'
 };
 

@@ -16,6 +16,7 @@ public:
 	DebugSettings();
 
 	// SYNTHETIC: WEBSERVICE 0x100b51d0
+	// SYNTHETIC: ROBLOX 0x0057d180
 	// RBX::DebugSettings::`scalar deleting destructor'
 
 	enum ErrorReporting

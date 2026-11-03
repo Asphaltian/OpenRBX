@@ -1372,6 +1372,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005e4520
 	// RBX::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>::FactoryProduct<RBX::SpawnLocation,RBX::PartInstance,&RBX::sSpawnLocation>
 	// FUNCTION: WEBSERVICE 0x100febb0
+	// FUNCTION: ROBLOX 0x005e55d0
 	// RBX::DescribedCreatable<RBX::SpawnerService,RBX::Instance,&RBX::sSpawnerService>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100ff600
 	// TEMPLATE: ROBLOX 0x005ac140

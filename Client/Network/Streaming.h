@@ -228,6 +228,7 @@ public:
 
 	// clang-format off
 	// SYNTHETIC: WEBSERVICE 0x101aa0f0 FOLDED
+	// SYNTHETIC: ROBLOX 0x004d3710
 	// RBX::DescribedNonCreatable<RBX::Network::Replicator,RBX::Network::IdSerializer,&RBX::Network::sReplicator>::`scalar deleting destructor'
 	// clang-format on
 };

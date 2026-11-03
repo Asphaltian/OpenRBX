@@ -15,6 +15,7 @@ public:
 	GameSettings();
 
 	// SYNTHETIC: WEBSERVICE 0x100de300
+	// SYNTHETIC: ROBLOX 0x005c9a70
 	// RBX::GameSettings::`scalar deleting destructor'
 
 	int chatHistory;        // 0x0f8

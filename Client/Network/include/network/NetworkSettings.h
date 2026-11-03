@@ -13,6 +13,7 @@ class NetworkSettings : public GlobalSettingsItem<NetworkSettings, sNetworkSetti
 {
 public:
 	// SYNTHETIC: WEBSERVICE 0x1019b5a0
+	// SYNTHETIC: ROBLOX 0x004c2460
 	// RBX::NetworkSettings::`scalar deleting destructor'
 
 	NetworkSettings();
