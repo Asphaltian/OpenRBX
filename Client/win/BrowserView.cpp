@@ -125,10 +125,28 @@ int CBrowserView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-// STUB: ROBLOX 0x0040a960
+// FUNCTION: ROBLOX 0x0040a960
 int CBrowserView::OnCreateControl(LPCREATECONTROLSTRUCT lpCreateControl)
 {
-	STUB(0x40a960);
+	if (lpCreateControl->bToolBar) {
+		CXTPToolBar* toolBar = DYNAMIC_DOWNCAST(CXTPToolBar, lpCreateControl->pCommandBar);
+
+		if (toolBar && lpCreateControl->nID == 0x80c9) {
+			if (!m_unk0x104) {
+				m_unk0x104 = new CXTPControlComboBox();
+			}
+
+			m_unk0x104->SetDropDownListStyle();
+			m_unk0x104->SetCaption("Address");
+			m_unk0x104->SetStyle(xtpButtonCaption);
+			m_unk0x104->SetFlags(xtpFlagManualUpdate | xtpFlagControlStretched);
+			m_unk0x104->SetEnabled(TRUE);
+
+			lpCreateControl->pControl = m_unk0x104;
+			return TRUE;
+		}
+	}
+
 	return FALSE;
 }
 
