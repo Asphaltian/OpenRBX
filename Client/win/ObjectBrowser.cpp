@@ -42,6 +42,9 @@ CClassTreeView::CClassTreeView() : m_unk0xa8(0)
 
 IMPLEMENT_DYNCREATE(CDeclarationView, CHtmlView)
 
+BEGIN_MESSAGE_MAP(CDeclarationView, CHtmlView)
+END_MESSAGE_MAP()
+
 // FUNCTION: ROBLOX 0x00438b20
 CDeclarationView::CDeclarationView()
 {
@@ -65,6 +68,10 @@ void CObjectBrowser::OnDraw(CDC* pDC)
 
 IMPLEMENT_DYNAMIC(COutputView, CSecureHtmlView)
 IMPLEMENT_DYNCREATE(CStandardOutputView, COutputView)
+
+BEGIN_MESSAGE_MAP(CStandardOutputView, COutputView)
+ON_MESSAGE(WM_USER + 101, FUN_0043b8a0)
+END_MESSAGE_MAP()
 
 // FUNCTION: ROBLOX 0x0043ae20
 CStandardOutputView::~CStandardOutputView()
@@ -92,4 +99,11 @@ CStandardOutputView::CStandardOutputView()
 	m_unk0xf0 = 1;
 	boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
 	RBX::startListening<RBX::StandardOut, RBX::StandardOutMessage>(RBX::StandardOut::singleton(), this);
+}
+
+// STUB: ROBLOX 0x0043b8a0
+LRESULT CStandardOutputView::FUN_0043b8a0(WPARAM wParam, LPARAM lParam)
+{
+	STUB(0x43b8a0);
+	return 0;
 }

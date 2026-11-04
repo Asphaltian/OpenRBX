@@ -27,6 +27,11 @@ public:
 
 	virtual void OnInitialUpdate();
 
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x00437b20
+	// ?GetMessageMap@CDeclarationView@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	CComQIPtr<IHTMLDocument2> m_unk0xf0; // 0xf0
 	CComQIPtr<IHTMLElement> m_unk0xf4;   // 0xf4

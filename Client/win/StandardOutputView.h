@@ -31,6 +31,13 @@ public:
 protected:
 	virtual void onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage message);
 
+	afx_msg LRESULT FUN_0043b8a0(WPARAM wParam, LPARAM lParam);
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x0043bb20
+	// ?GetMessageMap@CStandardOutputView@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	std::deque<RBX::StandardOutMessage> m_unk0x114; // 0x114
 	boost::mutex m_unk0x128;                        // 0x128

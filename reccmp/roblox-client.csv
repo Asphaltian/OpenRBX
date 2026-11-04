@@ -3620,3 +3620,5 @@ address,type,symbol,name,module,size
 008060a4,global,?classCClassTreeView@CClassTreeView@@2UCRuntimeClass@@B,,,
 008060dc,global,?classCMemberTreeView@CMemberTreeView@@2UCRuntimeClass@@B,,,
 00806aec,global,?classCStandardOutputView@CStandardOutputView@@2UCRuntimeClass@@B,,,
+008060f8,global,messageMap___CDeclarationView::GetThisMessageMap,,,
+00806e0c,global,messageMap___CStandardOutputView::GetThisMessageMap,,,
