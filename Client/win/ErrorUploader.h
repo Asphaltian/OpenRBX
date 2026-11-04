@@ -41,7 +41,7 @@ public:
 
 	void Cancel();
 	void Upload(std::string url, bool synchronous);
-	bool IsUploading();
+	bool IsUploading() { return !_data->files.empty(); }
 
 private:
 	static RBX::worker_thread::work_result run(boost::shared_ptr<data> _data);

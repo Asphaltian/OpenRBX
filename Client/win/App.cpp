@@ -53,14 +53,15 @@ STDMETHODIMP CApp::ClearFileCache()
 	return S_OK;
 }
 
-// STUB: ROBLOX 0x00407fd0
+// FUNCTION: ROBLOX 0x00407fd0
 STDMETHODIMP CApp::get_ID(BSTR* pVal)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 
 	IP_ADAPTER_INFO adapterInfo[100];
 	DWORD bufferLength = sizeof(adapterInfo);
-	if (GetAdaptersInfo(adapterInfo, &bufferLength) != ERROR_SUCCESS) {
+	DWORD result = GetAdaptersInfo(adapterInfo, &bufferLength);
+	if (result != ERROR_SUCCESS) {
 		return E_FAIL;
 	}
 
@@ -76,10 +77,11 @@ STDMETHODIMP CApp::get_ID(BSTR* pVal)
 	return id.CopyTo(pVal);
 }
 
-// STUB: ROBLOX 0x004081f0
+// FUNCTION: ROBLOX 0x004081f0
 STDMETHODIMP CApp::get_IsUploadingErrorFiles(VARIANT_BOOL* pVal)
 {
-	STUB(0x4081f0);
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	*pVal = theApp.m_unk0x10c->IsUploading() ? VARIANT_TRUE : VARIANT_FALSE;
 	return S_OK;
 }
 
