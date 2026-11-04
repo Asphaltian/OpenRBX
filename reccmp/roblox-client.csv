@@ -3610,3 +3610,4 @@ address,type,symbol,name,module,size
 008064bc,global,??_7CMemberTreeView@@6BCXTTreeBase@@@,,,
 0080618c,global,??_7CClassTreeView@@6BCTreeView@@@,,,
 00806104,global,??_7CClassTreeView@@6BCXTTreeBase@@@,,,
+0080674c,global,??_7CDeclarationView@@6B@,,,

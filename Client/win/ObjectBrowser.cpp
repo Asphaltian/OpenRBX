@@ -1,6 +1,7 @@
 #include "ObjectBrowser.h"
 
 #include "ClassTreeView.h"
+#include "DeclarationView.h"
 #include "MemberTreeView.h"
 
 IMPLEMENT_DYNCREATE(CClassTreeView, CXTTreeView)
@@ -35,6 +36,25 @@ CMemberTreeView::~CMemberTreeView()
 
 // FUNCTION: ROBLOX 0x00437b30
 CClassTreeView::CClassTreeView() : m_unk0xa8(0)
+{
+}
+
+IMPLEMENT_DYNCREATE(CDeclarationView, CHtmlView)
+
+// FUNCTION: ROBLOX 0x00438b20
+CDeclarationView::CDeclarationView()
+{
+}
+
+// FUNCTION: ROBLOX 0x00438b70
+void CDeclarationView::OnInitialUpdate()
+{
+	CHtmlView::OnInitialUpdate();
+	LoadFromResource(210);
+}
+
+// FUNCTION: ROBLOX 0x00438b90
+CDeclarationView::~CDeclarationView()
 {
 }
 
