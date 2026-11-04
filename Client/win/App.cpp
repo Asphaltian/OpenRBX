@@ -4,6 +4,9 @@
 #include "util/ContentProvider.h"
 #include "v8datamodel/DebugSettings.h"
 
+#include <boost/scoped_ptr.hpp>
+#include <iphlpapi.h>
+
 // FUNCTION: ROBLOX 0x004071d0
 STDMETHODIMP CApp::LaunchIDE()
 {
@@ -53,8 +56,24 @@ STDMETHODIMP CApp::ClearFileCache()
 // STUB: ROBLOX 0x00407fd0
 STDMETHODIMP CApp::get_ID(BSTR* pVal)
 {
-	STUB(0x407fd0);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	IP_ADAPTER_INFO adapterInfo[100];
+	DWORD bufferLength = sizeof(adapterInfo);
+	if (GetAdaptersInfo(adapterInfo, &bufferLength) != ERROR_SUCCESS) {
+		return E_FAIL;
+	}
+
+	CComBSTR id;
+	if (bufferLength > 0) {
+		boost::scoped_ptr<RBX::MD5Hasher> hasher(RBX::MD5Hasher::create());
+		for (unsigned int i = 0; i < bufferLength / sizeof(IP_ADAPTER_INFO); i++) {
+			hasher->addData(adapterInfo[i].AdapterName);
+		}
+		id = CString(hasher->c_str());
+	}
+
+	return id.CopyTo(pVal);
 }
 
 // STUB: ROBLOX 0x004081f0

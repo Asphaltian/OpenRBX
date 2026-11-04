@@ -654,6 +654,7 @@ if (MSVC_FOR_DECOMP)
     advapi32
     dbghelp
     gdi32
+    iphlpapi
     ole32
     oleaut32
     setupapi

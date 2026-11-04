@@ -39,6 +39,7 @@ address,type,symbol,name,module,size
 00405ba0,library,?ResourceRegister@CRegObject@ATL@@QAGJPB_WI0@Z,,,
 00405cc0,library,?ResourceUnregister@CRegObject@ATL@@QAGJPB_WI0@Z,,,
 004071b0,library,??1AFX_MAINTAIN_STATE2@@QAE@XZ,,,
+00407830,library,??4CComBSTR@ATL@@QAEAAV01@PBD@Z,,,
 00408ef0,library,?AddRef@?$CComObjectNoLock@VCBrowserViewExternal@@@ATL@@WBE@AGKXZ,,,
 0040a120,library,?DeleteString@CListBox@@QAEHI@Z,,,
 0040a140,library,?InsertString@CListBox@@QAEHHPBD@Z,,,
