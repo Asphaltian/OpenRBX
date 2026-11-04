@@ -9,6 +9,7 @@
 #include <G3D/debugAssert.h>
 #include <algorithm>
 #include <atlbase.h>
+#include <atlcom.h>
 #include <atltime.h>
 #include <boost/thread/once.hpp>
 #include <boost/thread/tss.hpp>
@@ -367,6 +368,13 @@ void LogManager::ReportEvent(WORD type, const char* message)
 		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, "%s", message);
 		break;
 	}
+}
+
+// FUNCTION: ROBLOX 0x0042bf70
+HRESULT LogManager::ReportCOMError(const GUID& guid, const char* message, HRESULT hr)
+{
+	ReportEvent(EVENTLOG_ERROR_TYPE, message);
+	return AtlReportError(guid, message, GUID_NULL, hr);
 }
 
 namespace log_detail {
