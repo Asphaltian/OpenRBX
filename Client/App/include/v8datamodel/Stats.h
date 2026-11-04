@@ -128,7 +128,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004ce140
 	// RBX::Stats::TypedStatsItem<bool>::TypedStatsItem<bool>
 	// TEMPLATE: WEBSERVICE 0x10065da0
-	// STUB: ROBLOX 0x004ce200
+	// TEMPLATE: ROBLOX 0x004ce200
 	// RBX::Stats::TypedStatsItem<bool>::update
 	// TEMPLATE: WEBSERVICE 0x10065dd0
 	// TEMPLATE: ROBLOX 0x005727a0

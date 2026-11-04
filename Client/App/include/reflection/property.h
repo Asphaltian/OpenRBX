@@ -1409,6 +1409,11 @@ public:
 
 DECOMP_SIZE_ASSERT(Property, 0x08)
 
+// clang-format off
+// TEMPLATE: ROBLOX 0x005c1e40
+// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::getset<enum RBX::Soundscape::ReverbType (__thiscall RBX::Soundscape::SoundService::*)(void)const ,void (__thiscall RBX::Soundscape::SoundService::*)(enum RBX::Soundscape::ReverbType const &)>
+// clang-format on
+
 } // namespace Reflection
 } // namespace RBX
 

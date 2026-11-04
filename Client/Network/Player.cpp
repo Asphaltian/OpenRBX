@@ -167,7 +167,7 @@ void Player::onCharacterChangedFrontend()
 }
 
 // FUNCTION: WEBSERVICE 0x1018ebc0
-// STUB: ROBLOX 0x004ac3d0
+// FUNCTION: ROBLOX 0x004ac3d0
 void Player::rebuildBackpack()
 {
 	if (!Players::backendProcessing(this, true)) {

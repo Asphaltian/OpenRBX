@@ -824,7 +824,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10081db0
-	// STUB: ROBLOX 0x005c5900
+	// TEMPLATE: ROBLOX 0x005c5900
 	// RBX::Reflection::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::EnumPropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType><enum RBX::Soundscape::ReverbType (__thiscall RBX::Soundscape::SoundService::*)(void)const ,void (__thiscall RBX::Soundscape::SoundService::*)(enum RBX::Soundscape::ReverbType const &)>
 	// TEMPLATE: WEBSERVICE 0x10082450
 	// TEMPLATE: ROBLOX 0x005c5f00

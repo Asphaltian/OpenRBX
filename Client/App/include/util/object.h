@@ -209,7 +209,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10077e80
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hat>
 	// TEMPLATE: WEBSERVICE 0x1007e750
-	// STUB: ROBLOX 0x0044fe80
+	// TEMPLATE: ROBLOX 0x0044fe80
 	// RBX::Creatable<RBX::Instance>::create<RBX::GameSettings>
 	// TEMPLATE: WEBSERVICE 0x100838c0
 	// TEMPLATE: ROBLOX 0x005c73d0

@@ -48,7 +48,7 @@ const RBX::Name& tag_mimeType = RBX::Name::declare("mimeType", 48);
 const RBX::Name& tag_xsinoNamespaceSchemaLocation = RBX::Name::declare("xsi:noNamespaceSchemaLocation", 49);
 
 // FUNCTION: WEBSERVICE 0x10084ac0
-// STUB: ROBLOX 0x0059d170 FOLDED
+// FUNCTION: ROBLOX 0x0059d170 FOLDED
 XmlNameValuePair::XmlNameValuePair(const RBX::Name& tag, const char* text) : tag(tag), valueType(STRING)
 {
 	stringValue = new std::string(text);
