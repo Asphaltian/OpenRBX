@@ -17,10 +17,14 @@ protected:
 public:
 	virtual ~CObjectBrowser();
 
+	// SYNTHETIC: ROBLOX 0x00437c30
+	// CObjectBrowser::`scalar deleting destructor'
+
 	virtual void OnDraw(CDC* pDC);
 
 private:
-	undefined m_unk0x58[0x288 - 0x58]; // 0x58
+	CXTSplitterWnd m_unk0x58;  // 0x58
+	CXTSplitterWnd m_unk0x170; // 0x170
 };
 
 DECOMP_SIZE_ASSERT(CObjectBrowser, 0x288)
