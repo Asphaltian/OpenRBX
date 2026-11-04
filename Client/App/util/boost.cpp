@@ -124,7 +124,7 @@ void worker_thread::threadProc(boost::shared_ptr<data> data, const boost::functi
 namespace boost_detail {
 
 // FUNCTION: WEBSERVICE 0x10033f30
-// STUB: ROBLOX 0x005ab940
+// FUNCTION: ROBLOX 0x005ab940
 void init_foo()
 {
 	static boost::thread_specific_ptr<std::string> value;
