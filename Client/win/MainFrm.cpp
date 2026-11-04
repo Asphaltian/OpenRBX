@@ -84,10 +84,9 @@ void CMainFrame::FUN_00432680()
 
 IMPLEMENT_XTP_CONTROL(CPatchedControlComboBox, CXTPControlComboBox)
 
-// STUB: ROBLOX 0x00432760
+// FUNCTION: ROBLOX 0x00432760
 CWrapperView::CWrapperView()
 {
-	STUB(0x432760);
 }
 
 // FUNCTION: ROBLOX 0x004327c0
@@ -101,24 +100,44 @@ BOOL CWrapperView::PreCreateWindow(CREATESTRUCT& cs)
 	return TRUE;
 }
 
-// STUB: ROBLOX 0x004327f0
+// FUNCTION: ROBLOX 0x004327f0
 BOOL CWrapperView::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 {
-	STUB(0x4327f0);
-	return CView::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
+	if (CView::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo)) {
+		return TRUE;
+	}
+
+	return m_unk0x58.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
-// STUB: ROBLOX 0x00432840
+// FUNCTION: ROBLOX 0x00432840
 BOOL CWrapperView::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 {
-	STUB(0x432840);
-	return CView::OnWndMsg(message, wParam, lParam, pResult);
-}
+	BOOL result = CView::OnWndMsg(message, wParam, lParam, pResult);
+	if (result && *pResult != 0) {
+		return TRUE;
+	}
 
-// STUB: ROBLOX 0x00432910
-CWrapperView::~CWrapperView()
-{
-	STUB(0x432910);
+	switch (message) {
+	case WM_CREATE: {
+		CRect rect(0, 0, 100, 100);
+		if (!m_unk0x58.Create(WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | WS_CLIPCHILDREN, rect, this, 0)) {
+			*pResult = -1;
+			return TRUE;
+		}
+
+		m_unk0x58.ModifyStyleEx(0, WS_EX_CLIENTEDGE, SWP_FRAMECHANGED);
+		return TRUE;
+	}
+	case WM_SIZE:
+		if (m_unk0x58.m_hWnd != NULL) {
+			m_unk0x58.MoveWindow(0, 0, LOWORD(lParam), HIWORD(lParam));
+		}
+
+		return TRUE;
+	}
+
+	return result;
 }
 
 void CWrapperView::OnDraw(CDC* pDC)

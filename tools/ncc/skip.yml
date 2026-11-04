@@ -68,3 +68,5 @@ onEvent_HandleTouched: 'Accoutrement method, misparsed as a variable without boo
 shared_ptr: 'libclang misparse of boost::shared_ptr<T>(boost::shared_ptr<T>) once RunStateOwner.h opens namespace boost without the boost headers'
 SpawnPlayer: 'libclang misparse of SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance>, Network::Player*) as a variable without the boost headers; recorded name, from WebService.pdb'
 OnClick: 'CXTPControl override taking BOOL, which ncc defines to 1'
+FUN_004285a0: 'CSelectionTreeCtrl member; libclang reads the definition as a variable because CXTTreeCtrl is outside the ncc include path'
+VTable0x00: 'CSelectionTreeCtrl member; libclang reads the definition as a variable because CXTTreeCtrl is outside the ncc include path'

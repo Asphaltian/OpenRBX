@@ -1,6 +1,7 @@
 #ifndef MAINFRM_H
 #define MAINFRM_H
 
+#include "SelectionTreeCtrl.h"
 #include "decomp.h"
 #include "util/Events.h"
 #include "v8datamodel/BrickColor.h"
@@ -69,6 +70,9 @@ class CWrapperView : public CView
 {
 	DECLARE_DYNCREATE(CWrapperView)
 
+	// SYNTHETIC: ROBLOX 0x00432910
+	// CWrapperView::~CWrapperView
+
 	// SYNTHETIC: ROBLOX 0x00432970
 	// ?GetThisClass@CWrapperView@@SGPAUCRuntimeClass@@XZ
 
@@ -76,15 +80,13 @@ protected:
 	CWrapperView();
 
 public:
-	virtual ~CWrapperView();
-
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo); // vtable+0x14
 	virtual BOOL OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult);        // vtable+0x114
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);                                             // vtable+0x6c
 	virtual void OnDraw(CDC* pDC);
 
 private:
-	undefined m_unk0x58[0x14c - 0x58]; // 0x58
+	CSelectionTreeCtrl m_unk0x58; // 0x58
 };
 
 DECOMP_SIZE_ASSERT(CWrapperView, 0x14c)
