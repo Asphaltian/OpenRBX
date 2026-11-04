@@ -10,8 +10,11 @@
 
 namespace RBX {
 
+template <class Source, class Event, class Source2, class Event2>
+class MarshaledListener;
+
 // SIZE 0x4
-class __declspec(novtable) EventDataBase
+class EventDataBase
 {
 public:
 	virtual void VTable0x00() = 0; // vtable+0x00
@@ -44,6 +47,9 @@ public:
 	static CMarshalWindow* FUN_00436e70();
 
 private:
+	template <class Source, class Event, class Source2, class Event2>
+	friend class MarshaledListener;
+
 	LRESULT FUN_00436b20(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	LRESULT OnEventData(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)

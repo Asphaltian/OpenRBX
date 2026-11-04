@@ -3646,3 +3646,9 @@ address,type,symbol,name,module,size
 00436d50,library,?Create@?$CWindowImpl@VCMarshalWindow@RBX@@VCWindow@ATL@@V?$CWinTraits@$0FGAAAAAA@$0A@@4@@ATL@@QAEPAUHWND__@@PAU3@V_U_RECT@2@PBDKKV_U_MENUorID@2@PAX@Z,,,
 0079f6ca,library,?__FreeStdCallThunk@@YGXPAX@Z,,,
 00805858,global,??_7CMarshalWindow@RBX@@6B@,,,
+0080210c,global,??_7?$MarshaledListener@VInstance@RBX@@UDescendentAdded@2@V12@U32@@RBX@@6B@,,,
+0080212c,global,??_7?$MarshaledListener@VInstance@RBX@@UDescendentRemoving@2@V12@U32@@RBX@@6B@,,,
+00802140,global,??_7EventData@?$MarshaledListener@VInstance@RBX@@UDescendentAdded@2@V12@U32@@RBX@@6B@,,,
+0080214c,global,??_7EventData@?$MarshaledListener@VInstance@RBX@@UDescendentRemoving@2@V12@U32@@RBX@@6B@,,,
+00802120,global,??_7EventDataBase@RBX@@6B@,,,
+00420f80,function,,,,181

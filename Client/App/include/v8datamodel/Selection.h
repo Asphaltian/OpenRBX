@@ -281,7 +281,6 @@ private:
 // TEMPLATE: ROBLOX 0x005688f0
 // RBX::Selection::setSelection<std::_Vector_const_iterator<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > >
 // FUNCTION: WEBSERVICE 0x10047e10
-// FUNCTION: ROBLOX 0x00568f50 FOLDED
 // RBX::DescendentRemoving::~DescendentRemoving
 // FUNCTION: WEBSERVICE 0x1005cf20
 // FUNCTION: ROBLOX 0x00566fc0

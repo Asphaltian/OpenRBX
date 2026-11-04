@@ -1,5 +1,6 @@
 #include "RobloxTreeCtrl.h"
 
+#include "MarshaledListener.h"
 #include "ReflectionMetadata.h"
 #include "RobloxTreeCtrlNode.h"
 #include "SelectionTreeCtrl.h"
@@ -562,3 +563,6 @@ void RootNode::VTable0x08()
 void RootNode::VTable0x14(NMTVDISPINFO* dispInfo)
 {
 }
+
+template class RBX::MarshaledListener<RBX::Instance, RBX::DescendentAdded, RBX::Instance, RBX::DescendentAdded>;
+template class RBX::MarshaledListener<RBX::Instance, RBX::DescendentRemoving, RBX::Instance, RBX::DescendentRemoving>;
