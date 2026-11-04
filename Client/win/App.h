@@ -43,6 +43,8 @@ public:
 	STDMETHOD(ClearFileCache)();
 	STDMETHOD(get_ID)(BSTR* pVal);
 	STDMETHOD(RobloxAuthenticate)(BSTR url, BSTR ticket);
+
+	static void FUN_00407a40(const char* url);
 };
 
 DECOMP_SIZE_ASSERT(CApp, 0x1c)

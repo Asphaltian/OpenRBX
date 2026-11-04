@@ -27,10 +27,18 @@ STDMETHODIMP CApp::get_Version(BSTR* pVal)
 	return version.CopyTo(pVal);
 }
 
-// STUB: ROBLOX 0x00407ae0
+// FUNCTION: ROBLOX 0x00407a40
+void CApp::FUN_00407a40(const char* url)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	theApp.m_unk0x10c->Upload(url, false);
+}
+
+// FUNCTION: ROBLOX 0x00407ae0
 STDMETHODIMP CApp::SendErrorFiles(BSTR url)
 {
-	STUB(0x407ae0);
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	FUN_00407a40(CString(url));
 	return S_OK;
 }
 
@@ -78,10 +86,11 @@ STDMETHODIMP CApp::RobloxAuthenticate(BSTR url, BSTR ticket)
 	return S_OK;
 }
 
-// STUB: ROBLOX 0x00409d20
+// FUNCTION: ROBLOX 0x00409d20
 STDMETHODIMP CApp::DeleteErrorFiles()
 {
-	STUB(0x409d20);
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	theApp.m_unk0xa4.archiveCrashLogs();
 	return S_OK;
 }
 
