@@ -1,5 +1,6 @@
 #include "RobloxTreeCtrl.h"
 
+#include "ReflectionMetadata.h"
 #include "RobloxTreeCtrlNode.h"
 #include "SelectionTreeCtrl.h"
 #include "util/scopedassign.h"
@@ -252,10 +253,51 @@ void CRobloxTreeCtrlNode::VTable0x0c()
 	STUB(0x4266a0);
 }
 
+// FUNCTION: ROBLOX 0x004267a0
+CRobloxTreeCtrlNode* CRobloxTreeCtrlNode::FUN_004267a0(const boost::shared_ptr<RBX::Instance>& instance)
+{
+	boost::shared_ptr<RBX::Reflection::Metadata::Reflection> reflection =
+		RBX::Reflection::Metadata::Reflection::FUN_004480c0();
+	RBX::Reflection::Metadata::Class* metadata = reflection->FUN_00446220(&instance->getDescriptor(), true);
+	if (!metadata || metadata->FUN_00422100() < 0) {
+		return NULL;
+	}
+
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0x30->m_unk0xb0);
+		std::map<RBX::Instance*, CRobloxTreeCtrlNode*>::iterator it = m_unk0x14.find(instance.get());
+		if (it != m_unk0x14.end()) {
+			return it->second;
+		}
+	}
+
+	CRobloxTreeCtrlNode* node = new CRobloxTreeCtrlNode(this, instance, m_unk0x30);
+	node->VTable0x0c();
+	return node;
+}
+
 // STUB: ROBLOX 0x00426960
 void CRobloxTreeCtrlNode::FUN_00426960()
 {
 	STUB(0x426960);
+}
+
+// FUNCTION: ROBLOX 0x00426b00
+void CRobloxTreeCtrlNode::FUN_00426b00()
+{
+	for (int i = 0; i < 10; i++) {
+		boost::shared_ptr<RBX::Instance> instance;
+		{
+			boost::recursive_mutex::scoped_lock lock(m_unk0x30->m_unk0xb0);
+			std::set<boost::shared_ptr<RBX::Instance> >::iterator it = m_unk0x38.begin();
+			if (it == m_unk0x38.end()) {
+				return;
+			}
+			instance = *it;
+			m_unk0x38.erase(it);
+		}
+		FUN_004267a0(instance);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00426c70
@@ -282,6 +324,77 @@ void CSelectionTreeCtrl::VTable0x15c()
 		m_unk0x94->FUN_00426960();
 		Expand(m_unk0x94->m_unk0x44, TVE_EXPAND);
 	}
+}
+
+// FUNCTION: ROBLOX 0x00426e00
+CRobloxTreeCtrlNode* CRobloxTreeCtrl::FUN_00426e00(const boost::shared_ptr<RBX::Instance>& instance)
+{
+	if (!instance) {
+		return NULL;
+	}
+
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0xb0);
+		std::map<RBX::Instance*, CRobloxTreeCtrlNode*>::iterator it = m_unk0x98.find(instance.get());
+		if (it != m_unk0x98.end()) {
+			return it->second;
+		}
+	}
+
+	CRobloxTreeCtrlNode* parent = FUN_00426e00(RBX::shared_from(instance->getParent()));
+	if (!parent) {
+		return NULL;
+	}
+	return parent->FUN_004267a0(instance);
+}
+
+// FUNCTION: ROBLOX 0x00426f50
+void CSelectionTreeCtrl::FUN_00426f50()
+{
+	for (int i = 0; i < 10; i++) {
+		boost::shared_ptr<RBX::Instance> instance;
+		{
+			boost::recursive_mutex::scoped_lock lock(m_unk0xb0);
+			std::set<boost::shared_ptr<RBX::Instance> >::iterator it = m_unk0xd0.begin();
+			if (it == m_unk0xd0.end()) {
+				return;
+			}
+			instance = *it;
+			m_unk0xd0.erase(it);
+		}
+		FUN_00426e00(instance);
+	}
+}
+
+// FUNCTION: ROBLOX 0x004270b0
+void CSelectionTreeCtrl::OnTimer(UINT_PTR nIDEvent)
+{
+	CRobloxTreeCtrlNode* node = NULL;
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0xb0);
+		if (m_unk0xdc.size() > 0) {
+			node = *m_unk0xdc.begin();
+		}
+	}
+
+	if (node) {
+		RBX::ScopedAssign<undefined> updating(m_unk0xcd, true);
+		node->FUN_004221a0();
+		node->VTable0x08();
+		{
+			RBX::ScopedAssign<undefined> selecting(m_unk0xcc, true);
+			node->FUN_00425c40();
+		}
+		node->FUN_00426b00();
+
+		boost::recursive_mutex::scoped_lock lock(m_unk0xb0);
+		if (node->m_unk0x38.empty()) {
+			VTable0x158(node);
+		}
+	}
+
+	FUN_00426f50();
+	CXTTreeCtrl::OnTimer(nIDEvent);
 }
 
 // FUNCTION: ROBLOX 0x00428580

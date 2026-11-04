@@ -28,9 +28,38 @@ char sEvents[] = "ReflectionMetadataEvents";
 // GLOBAL: ROBLOX 0x00919d14
 char sMember[] = "ReflectionMetadataMember";
 
-// FUNCTION: ROBLOX 0x004479b0
-Reflection::Reflection() : m_unk0xf8(0)
+// FUNCTION: ROBLOX 0x00446130
+Class* Classes::FUN_00446130(const ClassDescriptor* descriptor, bool recurse)
 {
+	Class* result = static_cast<Class*>(findFirstChildByName(descriptor->name.toString()));
+	if (result) {
+		return result;
+	}
+	if (recurse && descriptor->getBase()) {
+		return FUN_00446130(descriptor->getBase(), true);
+	}
+	return NULL;
+}
+
+// FUNCTION: ROBLOX 0x00446220
+Class* Reflection::FUN_00446220(const ClassDescriptor* descriptor, bool recurse)
+{
+	if (m_unk0xf8) {
+		return m_unk0xf8->FUN_00446130(descriptor, recurse);
+	}
+	return NULL;
+}
+
+// FUNCTION: ROBLOX 0x004479b0
+Reflection::Reflection() : m_unk0xf8(NULL)
+{
+}
+
+// STUB: ROBLOX 0x004480c0
+boost::shared_ptr<Reflection> Reflection::FUN_004480c0()
+{
+	STUB(0x4480c0);
+	return boost::shared_ptr<Reflection>();
 }
 
 RBX::Reflection::BoundProp<bool, 1> Item::g_unk0x00953a34("Browsable", "Reflection", &Item::m_unk0xf8);

@@ -37,7 +37,10 @@ protected:
 	);
 	virtual void onEvent(const RBX::Selection* source, RBX::SelectionChanged event);
 
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+
 private:
+	void FUN_00426f50();
 	void FUN_004285a0(boost::shared_ptr<RBX::DataModel> dataModel);
 
 	CMenu m_unk0xc4;                                       // 0xc4

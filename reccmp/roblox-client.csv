@@ -3458,3 +3458,5 @@ address,type,symbol,name,module,size
 00608330,library,,luaB_pcall,,
 00415510,synthetic,??1NewInstanceItem@Replicator@Network@RBX@@UAE@XZ,,,
 004c2750,synthetic,??1?$ScopedAssign@PAVInstance@RBX@@@RBX@@QAE@XZ,,,
+004243a0,library,?erase@?$_Tree@V?$_Tset_traits@V?$shared_ptr@VInstance@RBX@@@boost@@U?$less@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@4@$0A@@std@@@std@@QAE?AViterator@12@V312@@Z,,,
+00916c14,global,??_R0?AVClass@Metadata@Reflection@RBX@@@8,,,

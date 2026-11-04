@@ -20,6 +20,8 @@ extern char sFunctions[];
 extern char sEvents[];
 extern char sMember[];
 
+class Class;
+
 // SIZE 0xf8
 class Members : public Instance
 {
@@ -36,6 +38,8 @@ class Classes : public DescribedCreatable<Classes, Instance, sClasses>
 public:
 	// FUNCTION: ROBLOX 0x00429280
 	Classes() {}
+
+	Class* FUN_00446130(const ClassDescriptor* descriptor, bool recurse);
 };
 
 DECOMP_SIZE_ASSERT(Classes, 0xf8)
@@ -98,6 +102,15 @@ public:
 	// FUNCTION: ROBLOX 0x00429e20
 	Class() : m_unk0x118(-1), m_unk0x11c(0) {}
 
+	// FUNCTION: ROBLOX 0x00422100
+	int FUN_00422100() const
+	{
+		if (m_unk0x118) {
+			return m_unk0x118;
+		}
+		return dynamic_cast<Class*>(getParent()) && dynamic_cast<Class*>(getParent())->FUN_00422100();
+	}
+
 	static RBX::Reflection::BoundProp<int, 1> g_unk0x00953aa4;
 	static RBX::Reflection::BoundProp<int, 1> g_unk0x00953ac0;
 
@@ -124,8 +137,12 @@ class Reflection : public DescribedCreatable<Reflection, Instance, sReflection>
 public:
 	Reflection();
 
+	Class* FUN_00446220(const ClassDescriptor* descriptor, bool recurse);
+
+	static boost::shared_ptr<Reflection> FUN_004480c0();
+
 private:
-	undefined4 m_unk0xf8; // 0xf8
+	Classes* m_unk0xf8; // 0xf8
 };
 
 DECOMP_SIZE_ASSERT(Reflection, 0xfc)

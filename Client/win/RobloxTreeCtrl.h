@@ -34,6 +34,8 @@ public:
 	virtual void VTable0x158(CRobloxTreeCtrlNode* node) = 0;           // vtable+0x158
 	virtual void VTable0x15c();                                        // vtable+0x15c
 
+	CRobloxTreeCtrlNode* FUN_00426e00(const boost::shared_ptr<RBX::Instance>& instance);
+
 protected:
 	friend class CRobloxTreeCtrlNode;
 
