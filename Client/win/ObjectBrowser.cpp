@@ -66,17 +66,24 @@ void CObjectBrowser::OnDraw(CDC* pDC)
 IMPLEMENT_DYNAMIC(COutputView, CSecureHtmlView)
 IMPLEMENT_DYNCREATE(CStandardOutputView, COutputView)
 
-// STUB: ROBLOX 0x0043ae20
+// FUNCTION: ROBLOX 0x0043ae20
 CStandardOutputView::~CStandardOutputView()
 {
 	boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
 	RBX::stopListening<RBX::StandardOut, RBX::StandardOutMessage>(RBX::StandardOut::singleton(), this);
 }
 
-// STUB: ROBLOX 0x0043b210
+// FUNCTION: ROBLOX 0x0043b210
 void CStandardOutputView::onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage message)
 {
-	STUB(0x43b210);
+	boost::mutex::scoped_lock lock(m_unk0x128);
+	if (m_unk0x114.empty()) {
+		PostMessage(WM_USER + 101, 0, 0);
+	}
+	m_unk0x114.push_back(message);
+	if (m_unk0x114.size() > 300) {
+		m_unk0x114.pop_front();
+	}
 }
 
 // FUNCTION: ROBLOX 0x0043b720

@@ -7,7 +7,6 @@
 
 #include <boost/thread/mutex.hpp>
 #include <deque>
-#include <string>
 
 // SIZE 0x130
 class CStandardOutputView : public COutputView, public RBX::Listener<RBX::StandardOut, RBX::StandardOutMessage>
@@ -30,8 +29,8 @@ protected:
 	virtual void onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage message);
 
 private:
-	std::deque<std::string> m_unk0x114; // 0x114
-	boost::mutex m_unk0x128;            // 0x128
+	std::deque<RBX::StandardOutMessage> m_unk0x114; // 0x114
+	boost::mutex m_unk0x128;                        // 0x128
 };
 
 DECOMP_SIZE_ASSERT(CStandardOutputView, 0x130)
