@@ -3611,3 +3611,6 @@ address,type,symbol,name,module,size
 0080618c,global,??_7CClassTreeView@@6BCTreeView@@@,,,
 00806104,global,??_7CClassTreeView@@6BCXTTreeBase@@@,,,
 0080674c,global,??_7CDeclarationView@@6B@,,,
+00806b84,global,??_7CStandardOutputView@@6BCOutputView@@@,,,
+00806b78,global,??_7CStandardOutputView@@6B?$Listener@VStandardOut@RBX@@UStandardOutMessage@2@@RBX@@@,,,
+0043aab0,library,?_Tidy@?$deque@V?$CComPtr@UIHTMLDOMNode@@@ATL@@V?$allocator@V?$CComPtr@UIHTMLDOMNode@@@ATL@@@std@@@std@@IAEXXZ,,,

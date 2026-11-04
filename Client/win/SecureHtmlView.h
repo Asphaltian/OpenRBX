@@ -26,7 +26,6 @@ protected:
 	virtual BOOL OnAmbientProperty(COleControlSite* pSite, DISPID dispid, VARIANT* pvar);
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
-private:
 	undefined m_unk0xf0; // 0xf0
 };
 

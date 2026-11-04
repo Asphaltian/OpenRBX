@@ -3,6 +3,7 @@
 #include "ClassTreeView.h"
 #include "DeclarationView.h"
 #include "MemberTreeView.h"
+#include "StandardOutputView.h"
 
 IMPLEMENT_DYNCREATE(CClassTreeView, CXTTreeView)
 
@@ -60,4 +61,28 @@ CDeclarationView::~CDeclarationView()
 
 void CObjectBrowser::OnDraw(CDC* pDC)
 {
+}
+
+IMPLEMENT_DYNAMIC(COutputView, CSecureHtmlView)
+IMPLEMENT_DYNCREATE(CStandardOutputView, COutputView)
+
+// STUB: ROBLOX 0x0043ae20
+CStandardOutputView::~CStandardOutputView()
+{
+	boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
+	RBX::stopListening<RBX::StandardOut, RBX::StandardOutMessage>(RBX::StandardOut::singleton(), this);
+}
+
+// STUB: ROBLOX 0x0043b210
+void CStandardOutputView::onEvent(const RBX::StandardOut* source, RBX::StandardOutMessage message)
+{
+	STUB(0x43b210);
+}
+
+// FUNCTION: ROBLOX 0x0043b720
+CStandardOutputView::CStandardOutputView()
+{
+	m_unk0xf0 = 1;
+	boost::mutex::scoped_lock lock(RBX::StandardOut::singleton()->sync);
+	RBX::startListening<RBX::StandardOut, RBX::StandardOutMessage>(RBX::StandardOut::singleton(), this);
 }
