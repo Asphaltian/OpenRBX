@@ -5,6 +5,7 @@
 #include "reflection/property.h"
 #include "v8tree/Instance.h"
 
+#include <algorithm>
 #include <string>
 
 namespace RBX {
@@ -109,6 +110,15 @@ public:
 			return m_unk0x118;
 		}
 		return dynamic_cast<Class*>(getParent()) && dynamic_cast<Class*>(getParent())->FUN_00422100();
+	}
+
+	// FUNCTION: ROBLOX 0x004251c0
+	int FUN_004251c0() const
+	{
+		if (m_unk0x11c == -1) {
+			return dynamic_cast<Class*>(getParent()) && dynamic_cast<Class*>(getParent())->FUN_004251c0();
+		}
+		return std::max<int>(m_unk0x11c, 0);
 	}
 
 	static RBX::Reflection::BoundProp<int, 1> g_unk0x00953aa4;

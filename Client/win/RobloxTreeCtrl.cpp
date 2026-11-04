@@ -134,11 +134,47 @@ void CRobloxTreeCtrlNode::VTable0x10(undefined4 p_unk0x04)
 	}
 }
 
-// STUB: ROBLOX 0x004252f0
+// FUNCTION: ROBLOX 0x00425240
+int FUN_00425240(const RBX::Reflection::ClassDescriptor* descriptor)
+{
+	boost::shared_ptr<RBX::Reflection::Metadata::Reflection> reflection =
+		RBX::Reflection::Metadata::Reflection::FUN_004480c0();
+	RBX::Reflection::Metadata::Class* metadata = reflection->FUN_00446220(descriptor, true);
+	return metadata ? metadata->FUN_004251c0() : 0;
+}
+
+// FUNCTION: ROBLOX 0x004252f0
 HTREEITEM CRobloxTreeCtrlNode::VTable0x18()
 {
-	STUB(0x4252f0);
-	return NULL;
+	TVINSERTSTRUCT insert;
+	insert.item.mask = TVIF_TEXT | TVIF_IMAGE | TVIF_PARAM | TVIF_SELECTEDIMAGE | TVIF_CHILDREN;
+	insert.item.pszText = LPSTR_TEXTCALLBACK;
+	insert.item.cChildren = I_CHILDRENCALLBACK;
+	insert.item.iImage = insert.item.iSelectedImage = FUN_00425240(m_unk0x4c);
+	insert.item.lParam = reinterpret_cast<LPARAM>(this);
+	insert.hParent = m_unk0x34 ? m_unk0x34->m_unk0x44 : TVI_ROOT;
+
+	HTREEITEM after = TVI_FIRST;
+	for (HTREEITEM item = m_unk0x30->GetChildItem(insert.hParent); item;
+		 item = m_unk0x30->GetNextItem(item, TVGN_NEXT)) {
+		CRobloxTreeCtrlNode* sibling = reinterpret_cast<CRobloxTreeCtrlNode*>(m_unk0x30->GetItemData(item));
+		if (m_unk0x48 > sibling->m_unk0x48) {
+			after = item;
+		}
+		else if (m_unk0x48 == sibling->m_unk0x48) {
+			RBX::DataModel::Lock lock(m_unk0x30->VTable0x14c());
+			if (!(m_unk0x0c->getName() >= sibling->m_unk0x0c->getName())) {
+				break;
+			}
+			after = item;
+		}
+		else {
+			break;
+		}
+	}
+
+	insert.hInsertAfter = after;
+	return m_unk0x30->InsertItem(&insert);
 }
 
 // FUNCTION: ROBLOX 0x004254b0
@@ -266,10 +302,15 @@ CRobloxTreeCtrlNode::CRobloxTreeCtrlNode(
 	instance->RBX::Notifier<RBX::Instance, RBX::PropertyChanged>::addListener(this);
 }
 
-// STUB: ROBLOX 0x004266a0
+// FUNCTION: ROBLOX 0x004266a0
 void CRobloxTreeCtrlNode::VTable0x0c()
 {
-	STUB(0x4266a0);
+	m_unk0x44 = VTable0x18();
+	VTable0x08();
+
+	RBX::DataModel::Lock lock(m_unk0x30->VTable0x14c());
+	m_unk0x0c->RBX::Notifier<RBX::Instance, RBX::ChildAdded>::addListener(this);
+	m_unk0x0c->RBX::Notifier<RBX::Instance, RBX::ChildRemoved>::addListener(this);
 }
 
 // FUNCTION: ROBLOX 0x004267a0
