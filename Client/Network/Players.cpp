@@ -206,7 +206,7 @@ void Players::onChildChanged(Instance* instance, const PropertyChanged& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10192860
-// STUB: ROBLOX 0x004b2470
+// FUNCTION: ROBLOX 0x004b2470
 void AbuseReport::addMessage(const ChatMessage& cm)
 {
 	int userID = cm.source ? Player::prop_userId.getValue(cm.source.get()) : 0;
@@ -398,7 +398,7 @@ void Players::setMaxPlayers(int value)
 }
 
 // FUNCTION: WEBSERVICE 0x10195710
-// STUB: ROBLOX 0x004b6ca0
+// FUNCTION: ROBLOX 0x004b6ca0
 boost::shared_ptr<Instance> Players::createLocalPlayer(int userId)
 {
 	if (localPlayer) {

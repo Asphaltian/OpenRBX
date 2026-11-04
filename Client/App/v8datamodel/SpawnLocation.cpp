@@ -67,7 +67,7 @@ SpawnerService::~SpawnerService()
 }
 
 // FUNCTION: WEBSERVICE 0x100fe770
-// STUB: ROBLOX 0x005e5190
+// FUNCTION: ROBLOX 0x005e5190
 void SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network::Player* p)
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(this);
@@ -112,7 +112,7 @@ void SpawnerService::SpawnPlayer(boost::shared_ptr<ModelInstance> model, Network
 }
 
 // FUNCTION: WEBSERVICE 0x100febd0
-// STUB: ROBLOX 0x005e55f0
+// FUNCTION: ROBLOX 0x005e55f0
 SpawnerService::SpawnerService()
 {
 	setName(sSpawnerService);

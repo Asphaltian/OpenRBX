@@ -175,7 +175,7 @@ PartInstance* MouseCommand::getUnlockedPart(const UIEvent& uiEvent, G3D::Vector3
 }
 
 // FUNCTION: WEBSERVICE 0x100bf020
-// STUB: ROBLOX 0x00620cc0
+// FUNCTION: ROBLOX 0x00620cc0
 PartInstance* MouseCommand::getMousePart(
 	const G3D::Ray& unitRay,
 	const ContactManager& contactManager,

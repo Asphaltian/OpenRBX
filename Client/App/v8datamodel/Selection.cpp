@@ -63,7 +63,7 @@ Selection::~Selection()
 }
 
 // FUNCTION: WEBSERVICE 0x1005d7d0
-// STUB: ROBLOX 0x00567870
+// FUNCTION: ROBLOX 0x00567870
 void Selection::addFilteredSelection(ISelectionBase* fs)
 {
 	filteredSelections.push_back(fs);

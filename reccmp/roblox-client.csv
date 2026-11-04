@@ -2663,3 +2663,6 @@ address,type,symbol,name,module,size
 0095bbf8,global,?aggregateWorstSeverity@Log@RBX@@2W4Severity@12@A,,,
 0042b110,,,,,287
 007a2940,stub,?get_deleter@?$sp_counted_impl_p@Udata@AbuseReporter@Network@RBX@@@detail@boost@@UAEPAXABVtype_info@@@Z,,,
+005eb6e0,library,?push_back@?$vector@PAV?$Listener@VRunService@RBX@@VStepped@2@@RBX@@V?$allocator@PAV?$Listener@VRunService@RBX@@VStepped@2@@RBX@@@std@@@std@@QAEXABQAV?$Listener@VRunService@RBX@@VStepped@2@@RBX@@@Z,,,
+0095a108,global,?propArchivable@Instance@RBX@@2V?$BoundProp@_N$00@Reflection@2@A,,,
+0095594c,global,?prop_userId@Player@Network@RBX@@2V?$BoundProp@H$00@Reflection@3@A,,,

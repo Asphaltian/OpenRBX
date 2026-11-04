@@ -99,7 +99,7 @@ FlagStandService::~FlagStandService()
 }
 
 // FUNCTION: WEBSERVICE 0x100e84e0
-// STUB: ROBLOX 0x00627670
+// FUNCTION: ROBLOX 0x00627670
 FlagStand* FlagStandService::FindClosestEmptyStandForFlag(Flag* f)
 {
 	if (flagStands.empty()) {
@@ -131,7 +131,7 @@ FlagStand::FlagStand()
 }
 
 // FUNCTION: WEBSERVICE 0x100e8ea0
-// STUB: ROBLOX 0x00628050
+// FUNCTION: ROBLOX 0x00628050
 FlagStandService::FlagStandService()
 {
 	setName(sFlagStandService);

@@ -217,7 +217,7 @@ void MemberDescriptorContainer<T>::mergeMembers(const MemberDescriptorContainer*
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10047760
-// STUB: ROBLOX 0x005a9a10
+// TEMPLATE: ROBLOX 0x005a9a10
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>
 // clang-format on
 template <class T>

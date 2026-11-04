@@ -63,7 +63,7 @@ EnumDescriptor::~EnumDescriptor()
 }
 
 // FUNCTION: WEBSERVICE 0x10094390
-// STUB: ROBLOX 0x005c09b0
+// FUNCTION: ROBLOX 0x005c09b0
 EnumDescriptor::EnumDescriptor(const char* typeName, const std::type_info& type)
 	: Type(typeName, type, "token"), enumCount(0), enumCountMSB(0)
 {

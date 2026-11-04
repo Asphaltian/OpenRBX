@@ -1016,7 +1016,7 @@ void SoundChannel::playSound(Instance* context)
 } // namespace RBX
 
 // FUNCTION: WEBSERVICE 0x10083940
-// STUB: ROBLOX 0x005c7450
+// FUNCTION: ROBLOX 0x005c7450
 StockSound::StockSound()
 {
 	propArchivable.setValue(this, false);

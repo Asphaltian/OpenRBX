@@ -92,7 +92,7 @@ void MechanismTracker::stopTracking()
 }
 
 // FUNCTION: WEBSERVICE 0x101274f0
-// STUB: ROBLOX 0x005f1800
+// FUNCTION: ROBLOX 0x005f1800
 void MechanismTracker::setMechanism(Mechanism* m)
 {
 	stopTracking();

@@ -593,7 +593,7 @@ G3D::Vector3 Humanoid::updateWalkDirection()
 }
 
 // FUNCTION: WEBSERVICE 0x100a3110
-// STUB: ROBLOX 0x005eb750
+// FUNCTION: ROBLOX 0x005eb750
 static void collectAllDescendantCharacterPrims(
 	boost::shared_ptr<Instance> descendent, std::vector<Primitive*>& primitives
 )
@@ -758,7 +758,7 @@ void Humanoid::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100a4bf0
-// STUB: ROBLOX 0x005ed290
+// FUNCTION: ROBLOX 0x005ed290
 void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
 {
 	if (ModelInstance* character = getCharacterFromHumanoid(this)) {
