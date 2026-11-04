@@ -582,6 +582,16 @@ set_property(TARGET webservice PROPERTY SUFFIX ".dll")
 add_custom_target(rbxgs DEPENDS webservice)
 
 if (MSVC_FOR_DECOMP)
+  set(OPENRBX_ROBLOX_MIDL_DIR "${CMAKE_CURRENT_BINARY_DIR}/roblox_midl")
+  file(MAKE_DIRECTORY "${OPENRBX_ROBLOX_MIDL_DIR}")
+  add_custom_command(
+    OUTPUT "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_h.h" "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_i.c"
+    COMMAND midl /nologo /env win32 /h Roblox_h.h /iid Roblox_i.c /tlb Roblox.tlb /proxy Roblox_p.c /dlldata dlldata.c
+            "${PROJECT_SOURCE_DIR}/Client/win/Roblox.idl"
+    DEPENDS "${PROJECT_SOURCE_DIR}/Client/win/Roblox.idl"
+    WORKING_DIRECTORY "${OPENRBX_ROBLOX_MIDL_DIR}"
+  )
+
   add_executable(roblox WIN32
     Client/win/AboutRobloxDialog.cpp
     Client/win/BrowserView.cpp
@@ -602,6 +612,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/SecureHtmlView.cpp
     Client/win/VersionInfo.cpp
     Client/win/Roblox.rc
+    "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_h.h"
     util/decomp.cpp
   )
   target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS _AFXDLL _XTP_STATICLINK)
@@ -610,6 +621,7 @@ if (MSVC_FOR_DECOMP)
 
   target_include_directories(roblox PRIVATE
     "${PROJECT_SOURCE_DIR}/Client/win"
+    "${OPENRBX_ROBLOX_MIDL_DIR}"
     ${OPENRBX_ENGINE_INCLUDE_DIRS}
     ${OPENRBX_3RDPARTY_INCLUDE_DIRS}
     "${OPENRBX_MESA_INCLUDE_DIR}"
