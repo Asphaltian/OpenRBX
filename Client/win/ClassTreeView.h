@@ -3,6 +3,9 @@
 
 #include "decomp.h"
 
+class CDeclarationView;
+class CMemberTreeView;
+
 // SIZE 0xb0
 class CClassTreeView : public CXTTreeView
 {
@@ -34,8 +37,10 @@ protected:
 
 private:
 	CImageList m_unk0xa0; // 0xa0
-	undefined4 m_unk0xa8; // 0xa8
-	undefined4 m_unk0xac; // 0xac
+
+public:
+	CMemberTreeView* m_unk0xa8;  // 0xa8
+	CDeclarationView* m_unk0xac; // 0xac
 };
 
 DECOMP_SIZE_ASSERT(CClassTreeView, 0xb0)

@@ -52,20 +52,63 @@ CMemberTreeView::~CMemberTreeView()
 }
 
 // FUNCTION: ROBLOX 0x00437b30
-CClassTreeView::CClassTreeView() : m_unk0xa8(0)
+CClassTreeView::CClassTreeView() : m_unk0xa8(NULL)
 {
 }
 
 // STUB: ROBLOX 0x00437c50
 void CObjectBrowser::OnSize(UINT nType, int cx, int cy)
 {
-	STUB(0x437c50);
+	CView::OnSize(nType, cx, cy);
+	if (nType != SIZE_MINIMIZED && m_unk0x58.m_hWnd) {
+		CRect rect;
+		m_unk0x58.GetClientRect(&rect);
+		int height = rect.Height();
+		int delta = cy - height;
+		m_unk0x58.MoveWindow(0, 0, cx, cy);
+		if (m_unk0x170.m_hWnd) {
+			int cyCur;
+			int cyMin;
+			m_unk0x170.GetRowInfo(0, cyCur, cyMin);
+			int top = std::min<int>(cy - 150, cyCur + delta);
+			m_unk0x170.SetRowInfo(0, std::max<int>(50, top), 0);
+			m_unk0x170.RecalcLayout();
+		}
+	}
 }
 
-// STUB: ROBLOX 0x00437e10
+// FUNCTION: ROBLOX 0x00437e10
 int CObjectBrowser::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-	STUB(0x437e10);
+	if (CView::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+	if (!m_unk0x58.CreateStatic(this, 1, 2)) {
+		return -1;
+	}
+	m_unk0x58.SetSplitterStyle(XT_SPLIT_NOBORDER);
+
+	CCreateContext context;
+	context.m_pCurrentDoc = GetDocument();
+	if (!m_unk0x58.CreateView(0, 0, RUNTIME_CLASS(CClassTreeView), CSize(200, 600), &context)) {
+		return -1;
+	}
+	if (!m_unk0x170.CreateStatic(&m_unk0x58, 2, 1, WS_CHILD | WS_VISIBLE | WS_BORDER, m_unk0x58.IdFromRowCol(0, 1))) {
+		return -1;
+	}
+	if (!m_unk0x170.CreateView(0, 0, RUNTIME_CLASS(CMemberTreeView), CSize(300, 200), &context)) {
+		return -1;
+	}
+	if (!m_unk0x170.CreateView(1, 0, RUNTIME_CLASS(CDeclarationView), CSize(100, 190), &context)) {
+		return -1;
+	}
+
+	CClassTreeView* classes = static_cast<CClassTreeView*>(m_unk0x58.GetPane(0, 0));
+	CMemberTreeView* members = static_cast<CMemberTreeView*>(m_unk0x170.GetPane(0, 0));
+	CDeclarationView* declaration = static_cast<CDeclarationView*>(m_unk0x170.GetPane(1, 0));
+	classes->m_unk0xa8 = members;
+	classes->m_unk0xac = declaration;
+	members->m_unk0xb0 = declaration;
 	return 0;
 }
 
