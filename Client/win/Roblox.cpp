@@ -28,6 +28,9 @@ public:
 
 CRobloxModule _AtlModule;
 
+// GLOBAL: ROBLOX 0x00954290
+CString g_unk0x00954290;
+
 // SIZE 0x90
 class CRbxDocTemplate : public CMultiDocTemplate
 {
@@ -265,6 +268,12 @@ int CRobloxApp::ExitInstance()
 	RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "ROBLOX ExitInstance");
 	_AtlModule.RevokeClassObjects();
 	return CWinApp::ExitInstance();
+}
+
+// FUNCTION: ROBLOX 0x00450800
+void FUN_00450800(CString p_unk0x04)
+{
+	g_unk0x00954290 = p_unk0x04;
 }
 
 // FUNCTION: ROBLOX 0x004508c0

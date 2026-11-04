@@ -10,6 +10,16 @@
 #include <boost/scoped_ptr.hpp>
 #include <string>
 
+extern CString g_unk0x00954290;
+
+// FUNCTION: ROBLOX 0x00407190
+inline CString FUN_00407190()
+{
+	return g_unk0x00954290;
+}
+
+void FUN_00450800(CString p_unk0x04);
+
 // SIZE 0x110
 class CRobloxApp : public CWinApp
 {

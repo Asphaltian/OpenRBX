@@ -193,6 +193,12 @@ void CMainFrame::OnWindowPosChanging(WINDOWPOS* lpwndpos)
 	}
 }
 
+// STUB: ROBLOX 0x004334d0
+void FUN_004334d0(CXTPImageManager* imageManager)
+{
+	STUB(0x4334d0);
+}
+
 // STUB: ROBLOX 0x004335e0
 static void FUN_004335e0(CXTPImageManager* imageManager)
 {

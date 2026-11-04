@@ -11,6 +11,8 @@ namespace RBX {
 class FillToolColor;
 }
 
+void FUN_004334d0(CXTPImageManager* imageManager);
+
 // SIZE 0xcc
 class MyXTPCommandBars : public CXTPCommandBars
 {

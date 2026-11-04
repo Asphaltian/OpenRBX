@@ -5,10 +5,17 @@
 #include "SecureHtmlView.h"
 #include "decomp.h"
 
+#include <atlbase.h>
+#include <list>
+#include <string>
+
 // SIZE 0x2bc
 class CBrowserView : public CXTPCommandBarsSiteBase<CSecureHtmlView>
 {
 	DECLARE_DYNCREATE(CBrowserView)
+
+	// SYNTHETIC: ROBLOX 0x0040d1d0
+	// ?CreateObject@CBrowserView@@SGPAVCObject@@XZ
 
 protected:
 	CBrowserView();
@@ -16,8 +23,19 @@ protected:
 public:
 	virtual ~CBrowserView();
 
+	// SYNTHETIC: ROBLOX 0x0040d320
+	// ??_ECBrowserView@@UAEPAXI@Z
+
 private:
-	undefined m_unk0xf8[0x2bc - 0xf8]; // 0xf8
+	std::list<std::string> m_unk0xf8; // 0xf8
+	undefined4 m_unk0x104;            // 0x104
+	CXTPToolBar m_unk0x108;           // 0x108
+	CComPtr<IUnknown> m_unk0x2b0;     // 0x2b0
+	undefined m_unk0x2b4;             // 0x2b4
+	undefined m_unk0x2b5;             // 0x2b5
+
+protected:
+	CString m_unk0x2b8; // 0x2b8
 };
 
 DECOMP_SIZE_ASSERT(CBrowserView, 0x2bc)
@@ -30,8 +48,11 @@ class CIDEBrowserView : public CBrowserView
 	// SYNTHETIC: ROBLOX 0x0040a160
 	// ?GetThisClass@CIDEBrowserView@@SGPAUCRuntimeClass@@XZ
 
+	// SYNTHETIC: ROBLOX 0x0040d240
+	// ?CreateObject@CIDEBrowserView@@SGPAVCObject@@XZ
+
 protected:
-	CIDEBrowserView() {}
+	CIDEBrowserView();
 };
 
 DECOMP_SIZE_ASSERT(CIDEBrowserView, 0x2bc)
@@ -41,8 +62,11 @@ class CPlayBrowserView : public CBrowserView
 {
 	DECLARE_DYNCREATE(CPlayBrowserView)
 
+	// SYNTHETIC: ROBLOX 0x0040d2b0
+	// ?CreateObject@CPlayBrowserView@@SGPAVCObject@@XZ
+
 protected:
-	CPlayBrowserView() {}
+	CPlayBrowserView();
 };
 
 DECOMP_SIZE_ASSERT(CPlayBrowserView, 0x2bc)
