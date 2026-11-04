@@ -22,6 +22,15 @@ public:
 
 	virtual void OnDraw(CDC* pDC);
 
+protected:
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x00438cd0
+	// ?GetMessageMap@CObjectBrowser@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	CXTSplitterWnd m_unk0x58;  // 0x58
 	CXTSplitterWnd m_unk0x170; // 0x170

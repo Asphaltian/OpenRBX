@@ -23,6 +23,15 @@ public:
 	// SYNTHETIC: ROBLOX 0x004380c0
 	// CMemberTreeView::`scalar deleting destructor'
 
+protected:
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void FUN_0043a240(NMHDR* pNMHDR, LRESULT* pResult);
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x0043a420
+	// ?GetMessageMap@CMemberTreeView@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	CImageList m_unk0xa0; // 0xa0
 	undefined m_unk0xa8;  // 0xa8
