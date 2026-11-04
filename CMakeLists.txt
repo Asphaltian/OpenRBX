@@ -600,6 +600,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/ErrorUploader.cpp
     Client/win/LogManager.cpp
     Client/win/MainFrm.cpp
+    Client/win/MarshalWindow.cpp
     Client/win/NullDoc.cpp
     Client/win/ObjectBrowser.cpp
     Client/win/PropGrid.cpp

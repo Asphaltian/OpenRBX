@@ -3641,3 +3641,8 @@ address,type,symbol,name,module,size
 0080f738,global,??_7CSettingsPropGrid@@6B?$Listener@VInstance@RBX@@VPropertyChanged@2@@RBX@@@,,,
 0080f72c,global,??_7CSettingsPropGrid@@6B@,,,
 0080f58c,global,??_7CSettingsDialog@@6B@,,,
+00420250,library,?Lock@CCritSecLock@ATL@@QAEXXZ,,,
+00436a70,library,??0CCriticalSection@ATL@@QAE@XZ,,,
+00436d50,library,?Create@?$CWindowImpl@VCMarshalWindow@RBX@@VCWindow@ATL@@V?$CWinTraits@$0FGAAAAAA@$0A@@4@@ATL@@QAEPAUHWND__@@PAU3@V_U_RECT@2@PBDKKV_U_MENUorID@2@PAX@Z,,,
+0079f6ca,library,?__FreeStdCallThunk@@YGXPAX@Z,,,
+00805858,global,??_7CMarshalWindow@RBX@@6B@,,,
