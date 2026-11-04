@@ -35,6 +35,8 @@ public:
 	virtual void VTable0x15c();                                        // vtable+0x15c
 
 protected:
+	friend class CRobloxTreeCtrlNode;
+
 	CRobloxTreeCtrlNode* m_unk0x94;                           // 0x94
 	std::map<RBX::Instance*, CRobloxTreeCtrlNode*> m_unk0x98; // 0x98
 	undefined m_unk0xa4;                                      // 0xa4
