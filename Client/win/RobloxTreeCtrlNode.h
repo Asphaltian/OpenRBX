@@ -28,6 +28,7 @@ public:
 	virtual void VTable0x14(NMTVDISPINFO* dispInfo); // vtable+0x14
 	virtual HTREEITEM VTable0x18();                  // vtable+0x18
 
+	void FUN_00425c40();
 	void FUN_00426960();
 
 protected:

@@ -4,6 +4,10 @@
 #include "SelectionTreeCtrl.h"
 #include "util/scopedassign.h"
 
+#include <algorithm>
+#include <boost/bind.hpp>
+#include <vector>
+
 // SIZE 0x50
 class RootNode : public CRobloxTreeCtrlNode
 {
@@ -151,6 +155,24 @@ void CRobloxTreeCtrlNode::onEvent(const RBX::Instance* source, RBX::ChildAdded e
 	}
 
 	m_unk0x30->VTable0x154(this);
+}
+
+// FUNCTION: ROBLOX 0x00425c40
+void CRobloxTreeCtrlNode::FUN_00425c40()
+{
+	std::vector<CRobloxTreeCtrlNode*> nodes;
+
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0x30->m_unk0xb0);
+		std::for_each(
+			m_unk0x20.begin(), m_unk0x20.end(), boost::bind(&std::vector<CRobloxTreeCtrlNode*>::push_back, &nodes, _1)
+		);
+		m_unk0x20.clear();
+	}
+
+	for (std::vector<CRobloxTreeCtrlNode*>::iterator it = nodes.begin(); it != nodes.end(); ++it) {
+		m_unk0x30->DeleteItem((*it)->m_unk0x44);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00425d80
