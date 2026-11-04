@@ -613,10 +613,12 @@ if (MSVC_FOR_DECOMP)
     Client/win/VersionInfo.cpp
     Client/win/Roblox.rc
     "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_h.h"
+    "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_i.c"
     util/decomp.cpp
   )
   target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS _AFXDLL _XTP_STATICLINK)
   target_precompile_headers(roblox PRIVATE "${PROJECT_SOURCE_DIR}/Client/win/StdAfx.h")
+  set_source_files_properties("${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_i.c" PROPERTIES SKIP_PRECOMPILE_HEADERS ON)
   reccmp_add_target(roblox ID ROBLOX)
 
   target_include_directories(roblox PRIVATE

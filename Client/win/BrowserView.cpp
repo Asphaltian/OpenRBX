@@ -1,5 +1,7 @@
 #include "BrowserView.h"
 
+#include "BrowserViewExternal.h"
+#include "LogManager.h"
 #include "MainFrm.h"
 #include "Roblox.h"
 
@@ -254,6 +256,43 @@ BEGIN_MESSAGE_MAP(CBrowserView, CSecureHtmlView)
 END_MESSAGE_MAP()
 // clang-format on
 
+// FUNCTION: ROBLOX 0x0040bfb0
+HRESULT FUN_0040bfb0(CComObjectNoLock<CBrowserViewExternal>** p_unk0x04, void* p_unk0x08)
+{
+	HRESULT result = E_OUTOFMEMORY;
+	CComObjectNoLock<CBrowserViewExternal>* object = NULL;
+
+	ATLTRY(object = new CComObjectNoLock<CBrowserViewExternal>(p_unk0x08))
+
+	if (object != NULL) {
+		object->SetVoid(p_unk0x08);
+		object->InternalFinalConstructAddRef();
+		result = object->FinalConstruct();
+		object->InternalFinalConstructRelease();
+	}
+
+	*p_unk0x04 = object;
+	return result;
+}
+
+// FUNCTION: ROBLOX 0x0040c3c0
+HRESULT CBrowserView::OnGetExternal(LPDISPATCH* lppDispatch)
+{
+	if (!m_unk0x2b0) {
+		CComObjectNoLock<CBrowserViewExternal>* external;
+		HRESULT result = FUN_0040bfb0(&external, NULL);
+
+		if (result != S_OK) {
+			return result;
+		}
+
+		external->m_unk0x1c = dynamic_cast<CIDEBrowserView*>(this) ? VARIANT_TRUE : VARIANT_FALSE;
+		m_unk0x2b0 = external;
+	}
+
+	return m_unk0x2b0.CopyTo(lppDispatch);
+}
+
 // FUNCTION: ROBLOX 0x0040ce30
 CBrowserView::CBrowserView() : m_unk0x104(NULL), m_unk0x2b4(0), m_unk0x2b5(0)
 {
@@ -288,6 +327,34 @@ CPlayBrowserView::CPlayBrowserView()
 {
 	m_unk0x2b8 = FUN_00407190() + "/Start.aspx";
 }
+
+// FUNCTION: ROBLOX 0x0040d340
+STDMETHODIMP CBrowserViewExternal::get_IsRobloxIDE(VARIANT_BOOL* pVal)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	*pVal = m_unk0x1c;
+	return S_OK;
+}
+
+// FUNCTION: ROBLOX 0x0040d390
+STDMETHODIMP CBrowserViewExternal::GetApp(IDispatch** result)
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	CComPtr<IApp> app;
+	HRESULT hr = app.CoCreateInstance(CLSID_App);
+
+	if (hr != S_OK) {
+		CString message;
+		message.Format("IBrowserViewExternal::GetApp-0x%X", hr);
+		return LogManager::ReportCOMError(CLSID_BrowserViewExternal, message, hr);
+	}
+
+	CComPtr<IDispatch> dispatch(app);
+	return dispatch.CopyTo(result);
+}
+
+OBJECT_ENTRY_AUTO(__uuidof(BrowserViewExternal), CBrowserViewExternal)
 
 // FUNCTION: ROBLOX 0x00453eb0 FOLDED
 void CBrowserView::FUN_00453eb0(CCmdUI* pCmdUI)

@@ -28,6 +28,7 @@ public:
 
 protected:
 	virtual void OnInitialUpdate();
+	virtual HRESULT OnGetExternal(LPDISPATCH* lppDispatch);
 	virtual HRESULT OnGetHostInfo(DOCHOSTUIINFO* pInfo);
 	virtual void OnCommandStateChange(long nCommand, BOOL bEnable);
 	virtual void OnNavigateComplete2(LPCTSTR strURL);
@@ -61,7 +62,7 @@ private:
 	std::list<std::string> m_unk0xf8; // 0xf8
 	CXTPControlComboBox* m_unk0x104;  // 0x104
 	CXTPToolBar m_unk0x108;           // 0x108
-	CComPtr<IUnknown> m_unk0x2b0;     // 0x2b0
+	CComPtr<IDispatch> m_unk0x2b0;    // 0x2b0
 	undefined m_unk0x2b4;             // 0x2b4
 	undefined m_unk0x2b5;             // 0x2b5
 
