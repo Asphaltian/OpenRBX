@@ -389,6 +389,21 @@ void LogManager::ReportEvent(WORD type, const char* message)
 	}
 }
 
+#ifdef _AFXDLL
+// FUNCTION: ROBLOX 0x0042aae0
+void LogManager::ReportEvent(WORD type, HRESULT hr, const char* file, int line)
+{
+	COleException exception;
+	exception.m_sc = hr;
+	char message[1024];
+	exception.GetErrorMessage(message, 1024);
+
+	CString text;
+	text.Format("HRESULT = %d: %s\n%s(%d)", hr, message, file, line);
+	ReportEvent(type, text);
+}
+#endif
+
 // FUNCTION: ROBLOX 0x0042bf70
 HRESULT LogManager::ReportCOMError(const GUID& guid, const char* message, HRESULT hr)
 {

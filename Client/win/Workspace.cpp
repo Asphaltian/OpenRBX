@@ -37,6 +37,17 @@ std::auto_ptr<XmlElement> CWorkspace::FUN_0046f040()
 	return root;
 }
 
+// FUNCTION: ROBLOX 0x0046f230
+void FUN_0046f230(HRESULT hr, const GUID& guid)
+{
+	COleException* exception = new COleException;
+	exception->m_sc = E_NOTIMPL;
+	char message[1024];
+	exception->GetErrorMessage(message, 1024);
+	AtlReportError(guid, message, 0, NULL, GUID_NULL, hr);
+	throw exception;
+}
+
 // FUNCTION: ROBLOX 0x0046f420
 void CWorkspace::FUN_0046f420()
 {
