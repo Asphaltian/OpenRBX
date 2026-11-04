@@ -3630,3 +3630,7 @@ address,type,symbol,name,module,size
 00806ebc,global,?classCSelectionPropGrid@CSelectionPropGrid@@2UCRuntimeClass@@B,,,
 00806ed8,global,?classCDataModelPropGrid@CDataModelPropGrid@@2UCRuntimeClass@@B,,,
 006f38e0,library,?GetRuntimeClass@CXTPPropertyGrid@@UBEPAUCRuntimeClass@@XZ,,,
+00808f7c,global,??_7CPropGrid@@6BCXTPPropertyGrid@@@,,,
+00808f6c,global,??_7CPropGrid@@6B?$Listener@VInstance@RBX@@VPropertyChanged@2@@RBX@@@,,,
+006f5170,library,??0CXTPPropertyGrid@@QAE@XZ,,,
+00445200,library,?erase@?$_Tree@V?$_Tmap_traits@PBVClassDescriptor@Reflection@RBX@@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@U?$less@PBVClassDescriptor@Reflection@RBX@@@5@V?$allocator@U?$pair@QBVClassDescriptor@Reflection@RBX@@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@std@@@5@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z,,,
