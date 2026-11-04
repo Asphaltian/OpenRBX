@@ -532,10 +532,17 @@ void CMainFrame::OnClose()
 	CXTPMDIFrameWnd::OnClose();
 }
 
-// STUB: ROBLOX 0x00434d90
+// FUNCTION: ROBLOX 0x00434d90
 void CMainFrame::FUN_00434d90(CCmdUI* pCmdUI)
 {
-	STUB(0x434d90);
+	if (pCmdUI->m_pOther) {
+		CRobloxControlColorSelector* control = static_cast<CRobloxControlColorSelector*>(
+			static_cast<CXTPCommandBar*>(pCmdUI->m_pOther)->GetControls()->GetAt(pCmdUI->m_nIndex)
+		);
+		G3D::Color3uint8 color(RBX::FillTool::color.get().color3());
+		control->SetColor(RGB(color.r, color.g, color.b));
+	}
+
 	pCmdUI->Enable(TRUE);
 }
 
