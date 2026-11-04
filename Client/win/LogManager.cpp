@@ -121,7 +121,7 @@ LONG RobloxCrashReporter::ProcessException(_EXCEPTION_POINTERS* info)
 }
 
 // FUNCTION: WEBSERVICE 0x10002340
-// STUB: ROBLOX 0x0042ac60
+// FUNCTION: ROBLOX 0x0042ac60
 void MainLogManager::WriteCrashDump()
 {
 	std::string appName = "log_";

@@ -2662,3 +2662,4 @@ address,type,symbol,name,module,size
 00955e20,global,?singleton@CrashReporter@@2PAV1@A,,,
 0095bbf8,global,?aggregateWorstSeverity@Log@RBX@@2W4Severity@12@A,,,
 0042b110,,,,,287
+007a2940,stub,?get_deleter@?$sp_counted_impl_p@Udata@AbuseReporter@Network@RBX@@@detail@boost@@UAEPAXABVtype_info@@@Z,,,
