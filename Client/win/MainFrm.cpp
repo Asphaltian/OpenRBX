@@ -696,10 +696,37 @@ void CMainFrame::ChangeResolution()
 	}
 }
 
-// STUB: ROBLOX 0x00435e00
+// FUNCTION: ROBLOX 0x00435e00
 void CMainFrame::FUN_00435e00(bool p_unk0x04)
 {
-	STUB(0x435e00);
+	if (m_unk0xe0 == p_unk0x04) {
+		return;
+	}
+
+	m_unk0xe0 = p_unk0x04;
+
+	if (p_unk0x04) {
+		GetWindowRect(&m_unk0xf4.rcNormalPosition);
+		CRect rect(m_unk0xf4.rcNormalPosition);
+		ChangeResolution();
+	}
+	else {
+		RestoreResolution();
+
+		CRect rect(m_unk0xf4.rcNormalPosition);
+		if (!rect.IsRectEmpty()) {
+			SetWindowPos(
+				NULL,
+				rect.left,
+				rect.top,
+				rect.Width(),
+				rect.Height(),
+				SWP_NOOWNERZORDER | SWP_SHOWWINDOW | SWP_FRAMECHANGED
+			);
+		}
+	}
+
+	RecalcLayout();
 }
 
 // FUNCTION: ROBLOX 0x00435eb0
@@ -732,7 +759,7 @@ void CMainFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 	}
 }
 
-// STUB: ROBLOX 0x00435fa0
+// FUNCTION: ROBLOX 0x00435fa0
 void CMainFrame::FUN_00435fa0()
 {
 	FUN_00435e00(!m_unk0xe0);
