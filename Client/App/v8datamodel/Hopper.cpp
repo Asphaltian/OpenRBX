@@ -88,6 +88,7 @@ void StarterPackService::render2d(Adorn* adorn)
 }
 
 // FUNCTION: WEBSERVICE 0x100c7ca0
+// FUNCTION: ROBLOX 0x005e1eb0
 LegacyHopperService::~LegacyHopperService()
 {
 }

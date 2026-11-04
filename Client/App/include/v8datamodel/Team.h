@@ -18,6 +18,7 @@ public:
 	virtual ~Team();
 
 	// SYNTHETIC: WEBSERVICE 0x100be200
+	// SYNTHETIC: ROBLOX 0x0058b810
 	// RBX::Team::`scalar deleting destructor'
 
 	// FUNCTION: WEBSERVICE 0x100e44b0 FOLDED

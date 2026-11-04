@@ -94,6 +94,7 @@ FlagStand* FlagStandService::FindStandWithFlag(Flag* f)
 }
 
 // FUNCTION: WEBSERVICE 0x100e83d0
+// FUNCTION: ROBLOX 0x00627560
 FlagStandService::~FlagStandService()
 {
 }

@@ -146,6 +146,7 @@ public:
 	virtual ~LegacyHopperService();
 
 	// SYNTHETIC: WEBSERVICE 0x100c7dc0
+	// SYNTHETIC: ROBLOX 0x005e1f90
 	// RBX::LegacyHopperService::`scalar deleting destructor'
 };
 

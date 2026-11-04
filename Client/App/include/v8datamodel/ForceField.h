@@ -29,9 +29,11 @@ public:
 	ForceField();
 
 	// FUNCTION: WEBSERVICE 0x100e9950
+	// FUNCTION: ROBLOX 0x00628b00
 	virtual ~ForceField() {}
 
 	// SYNTHETIC: WEBSERVICE 0x100e99f0
+	// SYNTHETIC: ROBLOX 0x00628ba0
 	// RBX::ForceField::`scalar deleting destructor'
 
 	static bool partInForceField(PartInstance* part);

@@ -41,6 +41,7 @@ bool Team::getAutoAssignable() const
 }
 
 // FUNCTION: WEBSERVICE 0x100be010
+// FUNCTION: ROBLOX 0x0058b620
 Team::~Team()
 {
 }

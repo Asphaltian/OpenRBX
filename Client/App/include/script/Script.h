@@ -76,6 +76,7 @@ public:
 	LocalScript();
 
 	// FUNCTION: WEBSERVICE 0x10069e10
+	// FUNCTION: ROBLOX 0x00576160
 	virtual ~LocalScript() {}
 };
 
@@ -111,6 +112,7 @@ DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
 // SYNTHETIC: ROBLOX 0x00575760
 // RBX::Script::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x10069e60
+// SYNTHETIC: ROBLOX 0x005761b0
 // RBX::LocalScript::`scalar deleting destructor'
 // SYNTHETIC: WEBSERVICE 0x10218c00
 // `dynamic initializer for 'RBX::Script::prop_EmbeddedSourceCode''

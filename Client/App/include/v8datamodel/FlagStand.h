@@ -64,6 +64,7 @@ public:
 	virtual ~FlagStandService();
 
 	// SYNTHETIC: WEBSERVICE 0x100e84c0
+	// SYNTHETIC: ROBLOX 0x00627650
 	// RBX::FlagStandService::`scalar deleting destructor'
 
 	FlagStand* FindClosestEmptyStandForFlag(Flag* flag);
