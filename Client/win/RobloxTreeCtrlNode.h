@@ -53,4 +53,7 @@ protected:
 
 DECOMP_SIZE_ASSERT(CRobloxTreeCtrlNode, 0x50)
 
+// SYNTHETIC: ROBLOX 0x00425ed0
+// ??_ERootNode@@UAEPAXI@Z
+
 #endif // ROBLOXTREECTRLNODE_H
