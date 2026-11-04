@@ -30,6 +30,8 @@ class CRobloxReportDocView : public CRobloxReportView
 
 protected:
 	CRobloxReportDocView() {}
+
+	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView); // vtable+0x168
 };
 
 DECOMP_SIZE_ASSERT(CRobloxReportDocView, 0x3b8)

@@ -613,6 +613,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/SecureHtmlView.cpp
     Client/win/VersionInfo.cpp
     Client/win/Workspace.cpp
+    Client/win/ActiveDocView.cpp
     Client/win/Roblox.rc
     "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_h.h"
     "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_i.c"

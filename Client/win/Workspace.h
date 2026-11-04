@@ -54,6 +54,9 @@ public:
 
 	HRESULT FUN_0046fe10();
 
+	// FUNCTION: ROBLOX 0x0046edc0
+	boost::shared_ptr<RBX::DataModel> FUN_0046edc0() const { return m_unk0x24; }
+
 protected:
 	virtual void onEvent(const RBX::Selection* source, RBX::SelectionChanged event);
 	virtual void onEvent(const RBX::Workspace* source, RBX::DrawChanged event);
