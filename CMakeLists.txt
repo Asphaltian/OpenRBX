@@ -605,7 +605,7 @@ if (MSVC_FOR_DECOMP)
     util/decomp.cpp
   )
   target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS _AFXDLL _XTP_STATICLINK)
-  target_compile_options(roblox PRIVATE $<$<COMPILE_LANGUAGE:CXX>:/FIStdAfx.h>)
+  target_precompile_headers(roblox PRIVATE "${PROJECT_SOURCE_DIR}/Client/win/StdAfx.h")
   reccmp_add_target(roblox ID ROBLOX)
 
   target_include_directories(roblox PRIVATE

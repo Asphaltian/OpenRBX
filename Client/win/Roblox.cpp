@@ -581,7 +581,7 @@ void CRobloxDHtmlDialog::OnBeforeNavigate2(
 	STUB(0x453c20);
 }
 
-// STUB: ROBLOX 0x00453ce0
+// FUNCTION: ROBLOX 0x00453ce0
 void CRobloxDHtmlDialog::OnWindowClosing(BOOL isChildWindow, BOOL* cancel)
 {
 	*cancel = -1;

@@ -450,7 +450,7 @@ bool CMainFrame::FUN_00434970(bool p_unk0x04)
 	return true;
 }
 
-// STUB: ROBLOX 0x00434b80
+// FUNCTION: ROBLOX 0x00434b80
 void CMainFrame::FUN_00434b80()
 {
 	if (!m_unk0xec) {
@@ -485,7 +485,7 @@ void CMainFrame::OnSetPreviewMode(BOOL bPreview, CPrintPreviewState* pState)
 	CXTPMDIFrameWnd::OnSetPreviewMode(bPreview, pState);
 }
 
-// STUB: ROBLOX 0x00434ce0
+// FUNCTION: ROBLOX 0x00434ce0
 void CMainFrame::OnClose()
 {
 	if (!m_unk0xec) {
@@ -567,7 +567,7 @@ DEVMODE FUN_00434ec0(LPCTSTR device, int pixels)
 	return best;
 }
 
-// STUB: ROBLOX 0x00435230
+// FUNCTION: ROBLOX 0x00435230
 void CMainFrame::FUN_00435230(bool p_unk0x04)
 {
 	if (m_unk0xec && !m_unk0xed) {

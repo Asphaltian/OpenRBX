@@ -133,7 +133,7 @@ void MainLogManager::WriteCrashDump()
 }
 
 // FUNCTION: WEBSERVICE 0x10002490
-// STUB: ROBLOX 0x0042ada0
+// FUNCTION: ROBLOX 0x0042ada0
 static void __cdecl purecallHandler()
 {
 	CString eventMessage;
