@@ -602,6 +602,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/MainFrm.cpp
     Client/win/NullDoc.cpp
     Client/win/ObjectBrowser.cpp
+    Client/win/PropGrid.cpp
     Client/win/RenderSettings.cpp
     Client/win/Roblox.cpp
     Client/win/RobloxDoc.cpp
