@@ -21,6 +21,21 @@ public:
 
 DECOMP_SIZE_ASSERT(RootNode, 0x50)
 
+// FUNCTION: ROBLOX 0x004221a0
+void CRobloxTreeCtrlNode::FUN_004221a0()
+{
+	if (m_unk0x2c_bit0) {
+		if (m_unk0x44 && m_unk0x44 != TVI_ROOT) {
+			CRect rect;
+			if (m_unk0x30->GetItemRect(m_unk0x44, &rect, FALSE)) {
+				m_unk0x30->InvalidateRect(&rect);
+			}
+		}
+
+		m_unk0x2c_bit0 = 0;
+	}
+}
+
 // STUB: ROBLOX 0x00422ae0
 void CRobloxTreeCtrl::VTable0x15c()
 {
