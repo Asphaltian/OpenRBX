@@ -3,12 +3,15 @@
 #include "RenderSettings.h"
 #include "Roblox.h"
 #include "util/FileSystem.h"
+#include "util/Log.h"
 #include "util/StandardOut.h"
 #include "util/scopedassign.h"
 #include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/ToolsPart.h"
 
 #include <G3D/Color3uint8.h>
+#include <GLG3D/Texture.h>
+#include <GLG3D/VARArea.h>
 
 // GLOBAL: ROBLOX 0x0095391d
 bool g_unk0x0095391d;
@@ -158,18 +161,22 @@ void CMainFrame::FUN_00432990(CCmdUI* pCmdUI)
 	pCmdUI->SetText("");
 }
 
-// STUB: ROBLOX 0x004329b0
+// FUNCTION: ROBLOX 0x004329b0
 void CMainFrame::FUN_004329b0(CCmdUI* pCmdUI)
 {
-	STUB(0x4329b0);
-	pCmdUI->SetText("");
+	std::string mem = RBX::Log::formatMem(G3D::VARArea::sizeOfAllVARAreasInMemory());
+	CString text;
+	text.Format("VAR %s", mem.c_str());
+	pCmdUI->SetText(text);
 }
 
-// STUB: ROBLOX 0x00432a80
+// FUNCTION: ROBLOX 0x00432a80
 void CMainFrame::FUN_00432a80(CCmdUI* pCmdUI)
 {
-	STUB(0x432a80);
-	pCmdUI->SetText("");
+	std::string mem = RBX::Log::formatMem(G3D::Texture::sizeOfAllTexturesInMemory());
+	CString text;
+	text.Format("TEX %s", mem.c_str());
+	pCmdUI->SetText(text);
 }
 
 // STUB: ROBLOX 0x00432b50
