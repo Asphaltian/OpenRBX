@@ -4,11 +4,11 @@
 #include "util/ContentProvider.h"
 #include "v8datamodel/DebugSettings.h"
 
-// STUB: ROBLOX 0x004071d0
+// FUNCTION: ROBLOX 0x004071d0
 STDMETHODIMP CApp::LaunchIDE()
 {
-	STUB(0x4071d0);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	return static_cast<CRobloxApp*>(AfxGetApp())->FUN_0044dac0(false) ? S_OK : E_FAIL;
 }
 
 // FUNCTION: ROBLOX 0x00407270
