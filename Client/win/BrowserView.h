@@ -34,6 +34,29 @@ protected:
 	virtual void OnTitleChange(LPCTSTR lpszText);
 	virtual void OnDocumentComplete(LPCTSTR lpszURL);
 
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void FUN_0040a320(CCmdUI* pCmdUI);
+	afx_msg void FUN_0040a340(CCmdUI* pCmdUI);
+	afx_msg void FUN_0040a360(CCmdUI* pCmdUI);
+	afx_msg void FUN_0040a380(CCmdUI* pCmdUI);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg int OnCreateControl(LPCREATECONTROLSTRUCT lpCreateControl);
+	afx_msg void FUN_0040aa90();
+	afx_msg void FUN_0040aad0();
+	afx_msg void FUN_0040aae0();
+	afx_msg void FUN_0040aaf0();
+	afx_msg void FUN_0040ac30();
+	afx_msg void FUN_0040ac40();
+	afx_msg void FUN_0040ac50(CCmdUI* pCmdUI);
+	afx_msg void FUN_0040b0f0(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void FUN_00453eb0(CCmdUI* pCmdUI);
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x0040bb20
+	// ?GetMessageMap@CBrowserView@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	std::list<std::string> m_unk0xf8; // 0xf8
 	CXTPControlComboBox* m_unk0x104;  // 0x104
