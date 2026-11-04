@@ -29,7 +29,6 @@ public:
 		InstanceHandle value;                     // 0x08
 
 		// SYNTHETIC: WEBSERVICE 0x10096090
-		// SYNTHETIC: ROBLOX 0x00415510
 		// RBX::MergeBinder::IDREFItem::~IDREFItem
 	};
 

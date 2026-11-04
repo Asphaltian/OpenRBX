@@ -3456,3 +3456,5 @@ address,type,symbol,name,module,size
 00606dc0,library,,str_match,,
 00607a90,library,,luaB_error,,
 00608330,library,,luaB_pcall,,
+00415510,synthetic,??1NewInstanceItem@Replicator@Network@RBX@@UAE@XZ,,,
+004c2750,synthetic,??1?$ScopedAssign@PAVInstance@RBX@@@RBX@@QAE@XZ,,,
