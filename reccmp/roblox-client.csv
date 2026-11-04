@@ -3606,3 +3606,5 @@ address,type,symbol,name,module,size
 008bae48,global,__TI3?AVout_of_range@std@@,,,
 00863c98,global,?INDEXBOX_FACE_TO_NORMAL@IndexBox@RBX@@2QAY02$$CBMA,,,
 0080632c,global,??_7CObjectBrowser@@6B@,,,
+00806544,global,??_7CMemberTreeView@@6BCTreeView@@@,,,
+008064bc,global,??_7CMemberTreeView@@6BCXTTreeBase@@@,,,
