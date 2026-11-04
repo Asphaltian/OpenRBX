@@ -8,7 +8,7 @@
 #include <objsafe.h>
 
 template <class T, DWORD dwSupportedSafety>
-class __declspec(novtable) IObjectSafetyRobloxImpl : public IObjectSafety
+class IObjectSafetyRobloxImpl : public IObjectSafety
 {
 public:
 	IObjectSafetyRobloxImpl() : m_unk0x04(0) {}

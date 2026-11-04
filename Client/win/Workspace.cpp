@@ -1,0 +1,120 @@
+#include "Workspace.h"
+
+// FUNCTION: ROBLOX 0x0046ee10
+void CWorkspace::onEvent(const RBX::Workspace* source, RBX::DrawChanged event)
+{
+	m_unk0x2c->invalidateRunViews();
+}
+
+// FUNCTION: ROBLOX 0x0046ee30
+CWorkspace::~CWorkspace()
+{
+}
+
+// FUNCTION: ROBLOX 0x0046efb0
+void CWorkspace::onEvent(const RBX::Selection* source, RBX::SelectionChanged event)
+{
+	m_unk0x2c->invalidateRunViews();
+}
+
+// FUNCTION: ROBLOX 0x0046f010
+CWorkspace::CWorkspace()
+{
+}
+
+// FUNCTION: ROBLOX 0x0046f420
+void CWorkspace::FUN_0046f420()
+{
+	if (m_unk0x24) {
+		{
+			RBX::DataModel::Lock lock(m_unk0x24);
+			RBX::stopListening<RBX::Selection, RBX::SelectionChanged>(m_unk0x24->find<RBX::Selection>(), this);
+			RBX::stopListening<RBX::Workspace, RBX::DrawChanged>(m_unk0x24->getWorkspace(), this);
+		}
+
+		m_unk0x2c.reset();
+		RBX::DataModel::closeDataModel(m_unk0x24, true);
+		m_unk0x24.reset();
+	}
+}
+
+// STUB: ROBLOX 0x0046f970
+STDMETHODIMP CWorkspace::ExecUrlScript(
+	BSTR url, VARIANT arg1, VARIANT arg2, VARIANT arg3, VARIANT arg4, SAFEARRAY** result
+)
+{
+	STUB(0x46f970);
+	return S_OK;
+}
+
+// FUNCTION: ROBLOX 0x0046fd00
+STDMETHODIMP CWorkspace::Close()
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	FUN_0046f420();
+	return S_OK;
+}
+
+// FUNCTION: ROBLOX 0x0046fe10
+HRESULT CWorkspace::FUN_0046fe10()
+{
+	m_unk0x24 = RBX::DataModel::createDataModel();
+
+	RBX::DataModel::Lock lock(m_unk0x24);
+	m_unk0x2c = RBX::shared_from(m_unk0x24->create<RBX::RunService>());
+	RBX::startListening<RBX::Workspace, RBX::DrawChanged>(m_unk0x24->getWorkspace(), this);
+	RBX::startListening<RBX::Selection, RBX::SelectionChanged>(m_unk0x24->create<RBX::Selection>(), this);
+	return S_OK;
+}
+
+// FUNCTION: ROBLOX 0x0046ff90
+void CWorkspace::FinalRelease()
+{
+	FUN_0046f420();
+}
+
+// STUB: ROBLOX 0x00470120
+STDMETHODIMP CWorkspace::SaveSelectionToFile(BSTR pathName)
+{
+	STUB(0x470120);
+	return S_OK;
+}
+
+// STUB: ROBLOX 0x00470640
+STDMETHODIMP CWorkspace::Write(IContent** result)
+{
+	STUB(0x470640);
+	return S_OK;
+}
+
+// STUB: ROBLOX 0x004708b0
+STDMETHODIMP CWorkspace::WriteSelection(IContent** result)
+{
+	STUB(0x4708b0);
+	return S_OK;
+}
+
+// STUB: ROBLOX 0x00470b20
+STDMETHODIMP CWorkspace::ExecScript(
+	BSTR script, VARIANT arg1, VARIANT arg2, VARIANT arg3, VARIANT arg4, SAFEARRAY** result
+)
+{
+	STUB(0x470b20);
+	return S_OK;
+}
+
+// STUB: ROBLOX 0x00470da0
+STDMETHODIMP CWorkspace::SaveToFile(BSTR pathName)
+{
+	STUB(0x470da0);
+	return S_OK;
+}
+
+// STUB: ROBLOX 0x00470f40
+STDMETHODIMP CWorkspace::Insert(BSTR url)
+{
+	STUB(0x470f40);
+	return S_OK;
+}
+
+OBJECT_ENTRY_AUTO(__uuidof(Workspace), CWorkspace)
