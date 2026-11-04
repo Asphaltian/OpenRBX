@@ -931,6 +931,7 @@ address,type,symbol,name,module,size
 0069fb50,library,?DoPropExchange@CXTPCommandBarsOptions@@QAEXPAVCXTPPropExchange@@H@Z,,,
 006a0670,library,?Compare@CXTPControlComboBox@@UAEHPAVCXTPControl@@@Z,,,
 006a1140,library,??0CXTPControlComboBox@@QAE@PAVCXTPCommandBars@@@Z,,,
+006a2f40,library,?SetEditText@CXTPControlComboBox@@QAEXABV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z,,,
 006a4a20,library,?OnCustomizeDragOver@CXTPControl@@MAEXPAV1@VCPoint@@AAK@Z,,,
 006a4a60,library,?GetImageManager@CXTPControl@@QBEPAVCXTPImageManager@@XZ,,,
 006a4a90,library,?GetPaintManager@CXTPControl@@QBEPAVCXTPPaintManager@@XZ,,,

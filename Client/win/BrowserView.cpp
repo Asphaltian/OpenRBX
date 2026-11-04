@@ -3,6 +3,8 @@
 #include "MainFrm.h"
 #include "Roblox.h"
 
+#include <algorithm>
+
 IMPLEMENT_DYNCREATE(CIDEBrowserView, CBrowserView)
 IMPLEMENT_DYNCREATE(CBrowserView, CSecureHtmlView)
 IMPLEMENT_DYNCREATE(CPlayBrowserView, CBrowserView)
@@ -76,7 +78,7 @@ void CBrowserView::OnInitialUpdate()
 }
 
 // FUNCTION: ROBLOX 0x0040ce30
-CBrowserView::CBrowserView() : m_unk0x104(0), m_unk0x2b4(0), m_unk0x2b5(0)
+CBrowserView::CBrowserView() : m_unk0x104(NULL), m_unk0x2b4(0), m_unk0x2b5(0)
 {
 	FUN_004334d0(XTPImageManager());
 }
@@ -84,6 +86,18 @@ CBrowserView::CBrowserView() : m_unk0x104(0), m_unk0x2b4(0), m_unk0x2b5(0)
 // FUNCTION: ROBLOX 0x0040cee0
 CBrowserView::~CBrowserView()
 {
+}
+
+// FUNCTION: ROBLOX 0x0040cf90
+void CBrowserView::OnNavigateComplete2(LPCTSTR strURL)
+{
+	CSecureHtmlView::OnNavigateComplete2(strURL);
+
+	if (m_unk0x104) {
+		if (std::find(m_unk0xf8.begin(), m_unk0xf8.end(), std::string(strURL)) == m_unk0xf8.end()) {
+			m_unk0x104->SetEditText(strURL);
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x0040d090

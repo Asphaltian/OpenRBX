@@ -30,12 +30,13 @@ protected:
 	virtual void OnInitialUpdate();
 	virtual HRESULT OnGetHostInfo(DOCHOSTUIINFO* pInfo);
 	virtual void OnCommandStateChange(long nCommand, BOOL bEnable);
+	virtual void OnNavigateComplete2(LPCTSTR strURL);
 	virtual void OnTitleChange(LPCTSTR lpszText);
 	virtual void OnDocumentComplete(LPCTSTR lpszURL);
 
 private:
 	std::list<std::string> m_unk0xf8; // 0xf8
-	undefined4 m_unk0x104;            // 0x104
+	CXTPControlComboBox* m_unk0x104;  // 0x104
 	CXTPToolBar m_unk0x108;           // 0x108
 	CComPtr<IUnknown> m_unk0x2b0;     // 0x2b0
 	undefined m_unk0x2b4;             // 0x2b4
