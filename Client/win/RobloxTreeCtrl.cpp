@@ -192,10 +192,42 @@ void CRobloxTreeCtrlNode::onEvent(const RBX::Instance* source, RBX::PropertyChan
 	}
 }
 
-// STUB: ROBLOX 0x004258b0
+// FUNCTION: ROBLOX 0x004255f0
+bool CRobloxTreeCtrlNode::FUN_004255f0()
+{
+	RBX::DataModel::Lock lock(m_unk0x30->VTable0x14c());
+	boost::shared_ptr<const std::vector<boost::shared_ptr<RBX::Instance> > > children = m_unk0x0c->getChildren().read();
+	if (!children) {
+		return false;
+	}
+
+	std::vector<boost::shared_ptr<RBX::Instance> >::const_iterator end = children->end();
+	for (std::vector<boost::shared_ptr<RBX::Instance> >::const_iterator it = children->begin(); it != end; ++it) {
+		boost::shared_ptr<RBX::Reflection::Metadata::Reflection> reflection =
+			RBX::Reflection::Metadata::Reflection::FUN_004480c0();
+		RBX::Reflection::Metadata::Class* metadata = reflection->FUN_00446220(&(*it)->getDescriptor(), true);
+		if (metadata && metadata->FUN_00422100() >= 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// FUNCTION: ROBLOX 0x004258b0
 void CRobloxTreeCtrlNode::VTable0x14(NMTVDISPINFO* dispInfo)
 {
-	STUB(0x4258b0);
+	try {
+		if (dispInfo->item.mask & TVIF_TEXT) {
+			RBX::DataModel::Lock lock(m_unk0x30->VTable0x14c());
+			strncpy(dispInfo->item.pszText, m_unk0x0c->getName().c_str(), dispInfo->item.cchTextMax);
+		}
+		if (dispInfo->item.mask & TVIF_CHILDREN) {
+			dispInfo->item.cChildren = FUN_004255f0() ? 1 : 0;
+		}
+	}
+	catch (std::exception&) {
+		strncpy(dispInfo->item.pszText, "", dispInfo->item.cchTextMax);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00425ab0
@@ -264,10 +296,30 @@ void CRobloxTreeCtrlNode::onEvent(const RBX::Instance* source, RBX::ChildRemoved
 	m_unk0x30->VTable0x154(this);
 }
 
-// STUB: ROBLOX 0x00425ef0
+// FUNCTION: ROBLOX 0x00425ef0
 void CSelectionTreeCtrl::onEvent(const RBX::Selection* source, RBX::SelectionChanged event)
 {
-	STUB(0x425ef0);
+	if (!m_unk0xce) {
+		if (event.addedItem) {
+			boost::recursive_mutex::scoped_lock lock(m_unk0xb0);
+			std::map<RBX::Instance*, CRobloxTreeCtrlNode*>::iterator it = m_unk0x98.find(event.addedItem.get());
+			if (it != m_unk0x98.end()) {
+				VTable0x154(it->second);
+			}
+			else {
+				m_unk0xd0.insert(RBX::shared_from(event.addedItem.get()));
+			}
+		}
+
+		if (event.removedItem) {
+			boost::recursive_mutex::scoped_lock lock(m_unk0xb0);
+			m_unk0xd0.erase(event.removedItem);
+			std::map<RBX::Instance*, CRobloxTreeCtrlNode*>::iterator it = m_unk0x98.find(event.removedItem.get());
+			if (it != m_unk0x98.end()) {
+				VTable0x154(it->second);
+			}
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x004262b0
