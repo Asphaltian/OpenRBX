@@ -614,6 +614,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/VersionInfo.cpp
     Client/win/Workspace.cpp
     Client/win/ActiveDocView.cpp
+    Client/win/ReflectionMetadata.cpp
     Client/win/RobloxTreeCtrl.cpp
     Client/win/Roblox.rc
     "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_h.h"

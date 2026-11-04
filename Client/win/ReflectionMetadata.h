@@ -1,0 +1,211 @@
+#ifndef REFLECTIONMETADATA_H
+#define REFLECTIONMETADATA_H
+
+#include "decomp.h"
+#include "v8tree/Instance.h"
+
+#include <string>
+
+namespace RBX {
+namespace Reflection {
+namespace Metadata {
+
+extern char sReflection[];
+extern char sClasses[];
+extern char sItem[];
+extern char sClass[];
+extern char sProperties[];
+extern char sFunctions[];
+extern char sEvents[];
+extern char sMember[];
+
+// SIZE 0xf8
+class Members : public Instance
+{
+public:
+	// FUNCTION: ROBLOX 0x00427a60
+	Members() {}
+};
+
+DECOMP_SIZE_ASSERT(Members, 0xf8)
+
+// SIZE 0xf8
+class Classes : public DescribedCreatable<Classes, Instance, sClasses>
+{
+public:
+	// FUNCTION: ROBLOX 0x00429280
+	Classes() {}
+};
+
+DECOMP_SIZE_ASSERT(Classes, 0xf8)
+
+// SIZE 0xf8
+class Properties : public DescribedCreatable<Properties, Members, sProperties>
+{
+public:
+	// FUNCTION: ROBLOX 0x00429330
+	Properties() {}
+};
+
+DECOMP_SIZE_ASSERT(Properties, 0xf8)
+
+// SIZE 0xf8
+class Functions : public DescribedCreatable<Functions, Members, sFunctions>
+{
+public:
+	// FUNCTION: ROBLOX 0x004293a0
+	Functions() {}
+};
+
+DECOMP_SIZE_ASSERT(Functions, 0xf8)
+
+// SIZE 0xf8
+class Events : public DescribedCreatable<Events, Members, sEvents>
+{
+public:
+	// FUNCTION: ROBLOX 0x00429450
+	Events() {}
+};
+
+DECOMP_SIZE_ASSERT(Events, 0xf8)
+
+// SIZE 0x118
+class Item : public DescribedNonCreatable<Item, Instance, sItem>
+{
+public:
+	// FUNCTION: ROBLOX 0x00429500
+	Item() : m_unk0xf8(true), m_unk0xf9(false), m_unk0xfa(false) {}
+
+private:
+	bool m_unk0xf8;        // 0xf8
+	bool m_unk0xf9;        // 0xf9
+	bool m_unk0xfa;        // 0xfa
+	std::string m_unk0xfc; // 0xfc
+};
+
+DECOMP_SIZE_ASSERT(Item, 0x118)
+
+// SIZE 0x120
+class Class : public DescribedCreatable<Class, Item, sClass>
+{
+public:
+	// FUNCTION: ROBLOX 0x00429e20
+	Class() : m_unk0x118(-1), m_unk0x11c(0) {}
+
+private:
+	int m_unk0x118;        // 0x118
+	undefined4 m_unk0x11c; // 0x11c
+};
+
+DECOMP_SIZE_ASSERT(Class, 0x120)
+
+// SIZE 0x118
+class Member : public DescribedCreatable<Member, Item, sMember>
+{
+public:
+	// FUNCTION: ROBLOX 0x00429f90
+	Member() {}
+};
+
+DECOMP_SIZE_ASSERT(Member, 0x118)
+
+// SIZE 0xfc
+class Reflection : public DescribedCreatable<Reflection, Instance, sReflection>
+{
+public:
+	Reflection();
+
+private:
+	undefined4 m_unk0xf8; // 0xf8
+};
+
+DECOMP_SIZE_ASSERT(Reflection, 0xfc)
+
+} // namespace Metadata
+} // namespace Reflection
+} // namespace RBX
+
+// clang-format off
+// TEMPLATE: ROBLOX 0x00427560
+// ??0?$FactoryProduct@VClasses@Metadata@Reflection@RBX@@VInstance@4@$1?sClasses@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00427740
+// ??0?$NonFactoryProduct@VInstance@RBX@@$1?sItem@Metadata@Reflection@2@3PADA@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00427b60
+// ??0?$FactoryProduct@VProperties@Metadata@Reflection@RBX@@VMembers@234@$1?sProperties@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00427dc0
+// ??0?$FactoryProduct@VFunctions@Metadata@Reflection@RBX@@VMembers@234@$1?sFunctions@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00427ff0
+// ??0?$FactoryProduct@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00428380
+// ?classDescriptor@?$Described@VClasses@Metadata@Reflection@RBX@@$1?sClasses@234@3PADAV?$FactoryProduct@VClasses@Metadata@Reflection@RBX@@VInstance@4@$1?sClasses@234@3PADA@4@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
+// TEMPLATE: ROBLOX 0x00428400
+// ?classDescriptor@?$Described@VProperties@Metadata@Reflection@RBX@@$1?sProperties@234@3PADAV?$FactoryProduct@VProperties@Metadata@Reflection@RBX@@VMembers@234@$1?sProperties@234@3PADA@4@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
+// TEMPLATE: ROBLOX 0x00428480
+// ?classDescriptor@?$Described@VFunctions@Metadata@Reflection@RBX@@$1?sFunctions@234@3PADAV?$FactoryProduct@VFunctions@Metadata@Reflection@RBX@@VMembers@234@$1?sFunctions@234@3PADA@4@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
+// TEMPLATE: ROBLOX 0x00428500
+// ?classDescriptor@?$Described@VEvents@Metadata@Reflection@RBX@@$1?sEvents@234@3PADAV?$FactoryProduct@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@4@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
+// TEMPLATE: ROBLOX 0x00428880
+// ?classDescriptor@?$Described@VItem@Metadata@Reflection@RBX@@$1?sItem@234@3PADAV?$NonFactoryProduct@VInstance@RBX@@$1?sItem@Metadata@Reflection@2@3PADA@4@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
+// TEMPLATE: ROBLOX 0x00428900
+// ?classDescriptor@?$Described@VClass@Metadata@Reflection@RBX@@$1?sClass@234@3PADAV?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@4@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
+// TEMPLATE: ROBLOX 0x00428980
+// ??0?$Described@VClasses@Metadata@Reflection@RBX@@$1?sClasses@234@3PADAV?$FactoryProduct@VClasses@Metadata@Reflection@RBX@@VInstance@4@$1?sClasses@234@3PADA@4@@Reflection@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x004289d0
+// ??0?$Described@VProperties@Metadata@Reflection@RBX@@$1?sProperties@234@3PADAV?$FactoryProduct@VProperties@Metadata@Reflection@RBX@@VMembers@234@$1?sProperties@234@3PADA@4@@Reflection@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00428a20
+// ??0?$Described@VFunctions@Metadata@Reflection@RBX@@$1?sFunctions@234@3PADAV?$FactoryProduct@VFunctions@Metadata@Reflection@RBX@@VMembers@234@$1?sFunctions@234@3PADA@4@@Reflection@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00428a70
+// ??0?$Described@VEvents@Metadata@Reflection@RBX@@$1?sEvents@234@3PADAV?$FactoryProduct@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@4@@Reflection@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00428ac0
+// ?classDescriptor@?$Described@VMember@Metadata@Reflection@RBX@@$1?sMember@234@3PADAV?$FactoryProduct@VMember@Metadata@Reflection@RBX@@VItem@234@$1?sMember@234@3PADA@4@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
+// TEMPLATE: ROBLOX 0x00428da0
+// ??0?$Described@VItem@Metadata@Reflection@RBX@@$1?sItem@234@3PADAV?$NonFactoryProduct@VInstance@RBX@@$1?sItem@Metadata@Reflection@2@3PADA@4@@Reflection@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00428df0
+// ??0?$DescribedCreatable@VClasses@Metadata@Reflection@RBX@@VInstance@4@$1?sClasses@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00428e80
+// ??0?$DescribedCreatable@VProperties@Metadata@Reflection@RBX@@VMembers@234@$1?sProperties@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00428f20
+// ??0?$DescribedCreatable@VFunctions@Metadata@Reflection@RBX@@VMembers@234@$1?sFunctions@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00428f80
+// ??0?$DescribedCreatable@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00429220
+// ??0?$DescribedNonCreatable@VItem@Metadata@Reflection@RBX@@VInstance@4@$1?sItem@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00429650
+// ??0?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x004298f0
+// ??0?$FactoryProduct@VMember@Metadata@Reflection@RBX@@VItem@234@$1?sMember@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00429c60
+// ??0?$Described@VClass@Metadata@Reflection@RBX@@$1?sClass@234@3PADAV?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@4@@Reflection@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00429cb0
+// ??0?$Described@VMember@Metadata@Reflection@RBX@@$1?sMember@234@3PADAV?$FactoryProduct@VMember@Metadata@Reflection@RBX@@VItem@234@$1?sMember@234@3PADA@4@@Reflection@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00429d00
+// ??0?$DescribedCreatable@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00429d90
+// ??0?$DescribedCreatable@VMember@Metadata@Reflection@RBX@@VItem@234@$1?sMember@234@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00446080
+// ??0?$FactoryProduct@VReflection@Metadata@1RBX@@VInstance@3@$1?sReflection@213@3PADA@RBX@@IAE@XZ
+// TEMPLATE: ROBLOX 0x00447280
+// ?classDescriptor@?$Described@VReflection@Metadata@1RBX@@$1?sReflection@213@3PADAV?$FactoryProduct@VReflection@Metadata@1RBX@@VInstance@3@$1?sReflection@213@3PADA@3@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ
+// TEMPLATE: ROBLOX 0x00447300
+// ??0?$Described@VReflection@Metadata@1RBX@@$1?sReflection@213@3PADAV?$FactoryProduct@VReflection@Metadata@1RBX@@VInstance@3@$1?sReflection@213@3PADA@3@@Reflection@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x004476a0
+// ??0?$DescribedCreatable@VReflection@Metadata@1RBX@@VInstance@3@$1?sReflection@213@3PADA@RBX@@IAE@XZ
+// SYNTHETIC: ROBLOX 0x007ef7b0
+// `RBX::Reflection::Described<RBX::Reflection::Metadata::Class,&RBX::Reflection::Metadata::sClass,RBX::FactoryProduct<RBX::Reflection::Metadata::Class,RBX::Reflection::Metadata::Item,&RBX::Reflection::Metadata::sClass> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: ROBLOX 0x007ef7c0
+// `RBX::Reflection::Described<RBX::Reflection::Metadata::Item,&RBX::Reflection::Metadata::sItem,RBX::NonFactoryProduct<RBX::Instance,&RBX::Reflection::Metadata::sItem> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: ROBLOX 0x007ef7d0
+// `RBX::Reflection::Described<RBX::Reflection::Metadata::Member,&RBX::Reflection::Metadata::sMember,RBX::FactoryProduct<RBX::Reflection::Metadata::Member,RBX::Reflection::Metadata::Item,&RBX::Reflection::Metadata::sMember> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: ROBLOX 0x007ef7e0
+// `RBX::Reflection::Described<RBX::Reflection::Metadata::Events,&RBX::Reflection::Metadata::sEvents,RBX::FactoryProduct<RBX::Reflection::Metadata::Events,RBX::Reflection::Metadata::Members,&RBX::Reflection::Metadata::sEvents> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: ROBLOX 0x007ef7f0
+// `RBX::Reflection::Described<RBX::Reflection::Metadata::Functions,&RBX::Reflection::Metadata::sFunctions,RBX::FactoryProduct<RBX::Reflection::Metadata::Functions,RBX::Reflection::Metadata::Members,&RBX::Reflection::Metadata::sFunctions> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: ROBLOX 0x007ef800
+// `RBX::Reflection::Described<RBX::Reflection::Metadata::Properties,&RBX::Reflection::Metadata::sProperties,RBX::FactoryProduct<RBX::Reflection::Metadata::Properties,RBX::Reflection::Metadata::Members,&RBX::Reflection::Metadata::sProperties> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: ROBLOX 0x007ef810
+// `RBX::Reflection::Described<RBX::Reflection::Metadata::Classes,&RBX::Reflection::Metadata::sClasses,RBX::FactoryProduct<RBX::Reflection::Metadata::Classes,RBX::Instance,&RBX::Reflection::Metadata::sClasses> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// SYNTHETIC: ROBLOX 0x007efc60
+// `RBX::Reflection::Described<RBX::Reflection::Metadata::Reflection,&RBX::Reflection::Metadata::sReflection,RBX::FactoryProduct<RBX::Reflection::Metadata::Reflection,RBX::Instance,&RBX::Reflection::Metadata::sReflection> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// clang-format on
+
+#endif // REFLECTIONMETADATA_H
