@@ -118,7 +118,7 @@ address,type,symbol
 004a6710,synthetic,??$getset@P8Player@Network@RBX@@BEPAVModelInstance@3@XZP8123@AEXPAV43@@Z@?$PropDescriptor@VPlayer@Network@RBX@@PAVModelInstance@3@@Reflection@RBX@@SA?AV?$auto_ptr@VGetSet@?$TypedPropertyDescriptor@PAVModelInstance@RBX@@@Reflection@RBX@@@std@@P8Player@Network@2@BEPAVModelInstance@2@XZP8562@AEXPAV72@@Z@Z
 004a6cf0,synthetic,?equalValues@?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@RBX@@UBE_NPBVDescribedBase@23@0@Z
 004a7270,synthetic,?getClassName@?$FactoryProduct@VPlayer@Network@RBX@@VInstance@3@$1?sPlayer@23@3PADA@RBX@@UBEABVName@2@XZ
-004aa760,stub,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@QBEPAVWorkspace@1@XZ
+004aa760,synthetic,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@QBEPAVWorkspace@1@XZ
 004ab4f0,synthetic,??0?$Described@VPlayer@Network@RBX@@$1?sPlayer@23@3PADAV?$FactoryProduct@VPlayer@Network@RBX@@VInstance@3@$1?sPlayer@23@3PADA@3@@Reflection@RBX@@QAE@XZ
 004ab540,synthetic,??0TSignalInstance@?$TSignalDesc@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@RBX@@QAE@PAVSignalSource@23@ABVSignalDescriptor@23@@Z
 004abcc0,synthetic,??$find@VWorkspace@RBX@@@ServiceProvider@RBX@@SAPAVWorkspace@1@PBVInstance@1@@Z

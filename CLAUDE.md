@@ -456,6 +456,7 @@ Two dependencies are easy to miss because they were compiled into someone else's
 
 ## Gotchas
 
+- **A comment-only edit that adds lines needs a rebuild before scoring.** A marker on a function body resolves through the recompiled PDB's line records, so inserting a nameref into a header moves every annotated body below it off the lines the PDB holds, and they drop out of both targets with no error. A nameref appended at the end of the file shifts nothing, which is why it appears to work.
 - **`reccmp-reccmp --verbose` dies printing a match.** The success line carries an emoji and a cp1252 console cannot encode it, so a 100% match looks like a traceback. Export `PYTHONIOENCODING=utf-8`.
 
 - **`.clang-format` sets `IncludeBlocks: Regroup`,** so it merges include blocks and sorts across them. A blank line will not hold an include in place. `WebService.h` needs `<winsock2.h>` ahead of `<unknwn.h>`, and only `// clang-format off` around it survives.

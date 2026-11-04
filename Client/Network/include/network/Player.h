@@ -175,8 +175,6 @@ DECOMP_SIZE_ASSERT(Player, 0x178)
 // RBX::Network::`dynamic atexit destructor for 'loadCharacterFunction''
 // SYNTHETIC: WEBSERVICE 0x10225f80
 // `dynamic atexit destructor for 'RBX::Network::Player::event_Chatted''
-// TEMPLATE: ROBLOX 0x004a58d0
-// RBX::ServiceProvider::doGetClassIndex<RBX::Workspace>
 // clang-format on
 
 } // namespace Network

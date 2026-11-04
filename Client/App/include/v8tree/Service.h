@@ -58,17 +58,21 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x1000a7b0
-// STUB: ROBLOX 0x00476c30
+// TEMPLATE: ROBLOX 0x00476c30
 // RBX::ServiceProvider::create<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000bb10
-// STUB: ROBLOX 0x00476730
+// TEMPLATE: ROBLOX 0x00476730
 // RBX::ServiceProvider::find<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000c2e0
+// TEMPLATE: ROBLOX 0x00474ac0
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Lighting>
 // TEMPLATE: WEBSERVICE 0x1000c2f0
 // TEMPLATE: ROBLOX 0x004748a0
 // RBX::ServiceProvider::doGetClassIndex<RBX::Lighting>
+// TEMPLATE: ROBLOX 0x004a58d0
+// RBX::ServiceProvider::doGetClassIndex<RBX::Workspace>
 // TEMPLATE: WEBSERVICE 0x1000c360
+// TEMPLATE: ROBLOX 0x004a60e0
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::Workspace>
 // TEMPLATE: WEBSERVICE 0x1001e340
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::ScriptContext>

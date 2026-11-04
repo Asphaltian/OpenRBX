@@ -534,6 +534,8 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1007de40
 	// TEMPLATE: ROBLOX 0x005c1c70
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId>::TypedPropertyDescriptor<RBX::Soundscape::SoundId>
+	// TEMPLATE: ROBLOX 0x005c1e40
+	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::getset<enum RBX::Soundscape::ReverbType (__thiscall RBX::Soundscape::SoundService::*)(void)const ,void (__thiscall RBX::Soundscape::SoundService::*)(enum RBX::Soundscape::ReverbType const &)>
 	// TEMPLATE: WEBSERVICE 0x1007e140
 	// TEMPLATE: ROBLOX 0x005c1f00
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,int>::getset<int (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(int)>
@@ -1408,11 +1410,6 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(Property, 0x08)
-
-// clang-format off
-// TEMPLATE: ROBLOX 0x005c1e40
-// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundService,enum RBX::Soundscape::ReverbType>::getset<enum RBX::Soundscape::ReverbType (__thiscall RBX::Soundscape::SoundService::*)(void)const ,void (__thiscall RBX::Soundscape::SoundService::*)(enum RBX::Soundscape::ReverbType const &)>
-// clang-format on
 
 } // namespace Reflection
 } // namespace RBX
