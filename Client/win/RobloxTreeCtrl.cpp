@@ -102,10 +102,19 @@ HTREEITEM CRobloxTreeCtrlNode::VTable0x18()
 	return NULL;
 }
 
-// STUB: ROBLOX 0x004254b0
+// FUNCTION: ROBLOX 0x004254b0
 void CRobloxTreeCtrlNode::onEvent(const RBX::Instance* source, RBX::PropertyChanged event)
 {
-	STUB(0x4254b0);
+	bool isName;
+	{
+		RBX::DataModel::Lock lock(m_unk0x30->VTable0x14c());
+		isName = event.getDescriptor() == RBX::Instance::desc_Name;
+	}
+
+	if (isName) {
+		m_unk0x2c_bit0 = 1;
+		m_unk0x30->VTable0x154(this);
+	}
 }
 
 // STUB: ROBLOX 0x004258b0
