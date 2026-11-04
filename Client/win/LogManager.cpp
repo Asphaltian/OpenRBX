@@ -185,6 +185,25 @@ std::string MoveRelative(const char* fileName, std::string path)
 	return (LPCSTR) dir;
 }
 
+// FUNCTION: ROBLOX 0x0042aff0
+bool MainLogManager::hasCrashLogs() const
+{
+	ATL::CPath path = GetLogPath();
+	path.AddBackslash();
+
+	WIN32_FIND_DATA FindFileData;
+	HANDLE hFind = FindFirstFile(path + "*.dmp", &FindFileData);
+	if (hFind != INVALID_HANDLE_VALUE) {
+		do {
+			if (!(FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+				return true;
+			}
+		} while (FindNextFile(hFind, &FindFileData));
+	}
+
+	return false;
+}
+
 // STUB: WEBSERVICE 0x10002840
 // FUNCTION: ROBLOX 0x0042cd30
 std::vector<std::string> MainLogManager::archiveCrashLogs()
