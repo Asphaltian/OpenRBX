@@ -10,14 +10,24 @@ class CSecureHtmlView : public CHtmlView
 {
 	DECLARE_DYNAMIC(CSecureHtmlView)
 
+	// SYNTHETIC: ROBLOX 0x0046a0b0
+	// ?GetRuntimeClass@CSecureHtmlView@@UBEPAUCRuntimeClass@@XZ
+
 protected:
 	CSecureHtmlView();
 
 public:
 	virtual ~CSecureHtmlView();
 
+	// SYNTHETIC: ROBLOX 0x0046a1f0
+	// CSecureHtmlView::`scalar deleting destructor'
+
+protected:
+	virtual BOOL OnAmbientProperty(COleControlSite* pSite, DISPID dispid, VARIANT* pvar);
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+
 private:
-	undefined4 m_unk0xf0; // 0xf0
+	undefined m_unk0xf0; // 0xf0
 };
 
 DECOMP_SIZE_ASSERT(CSecureHtmlView, 0xf4)
