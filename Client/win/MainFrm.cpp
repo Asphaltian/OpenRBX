@@ -706,11 +706,23 @@ void CMainFrame::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 	}
 }
 
-// STUB: ROBLOX 0x00435f00
+// FUNCTION: ROBLOX 0x00435f00
 void CMainFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 {
-	STUB(0x435f00);
 	CXTPMDIFrameWnd::OnGetMinMaxInfo(lpMMI);
+
+	if (m_unk0xe0) {
+		lpMMI->ptMaxPosition.x = 0;
+		lpMMI->ptMaxPosition.y = 0;
+	}
+
+	if (!m_unk0xe1 && !m_unk0xe0 && m_unk0xec) {
+		G3D::Vector2int16 size = CRenderSettings::singleton().FUN_00448300();
+		CRect rect(0, 0, size.x, size.y);
+		CalcWindowRect(&rect);
+		lpMMI->ptMaxSize.x = lpMMI->ptMaxTrackSize.x = rect.Width();
+		lpMMI->ptMaxSize.y = lpMMI->ptMaxTrackSize.y = rect.Height();
+	}
 }
 
 // STUB: ROBLOX 0x00435fa0
