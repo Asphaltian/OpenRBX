@@ -44,7 +44,7 @@ protected:
 	Type(const char* name, const std::type_info& type) : Descriptor(name), type(type), tag(Name::lookup(name)) {}
 
 	// FUNCTION: WEBSERVICE 0x1003e9c0
-	// STUB: ROBLOX 0x004a4cc0
+	// FUNCTION: ROBLOX 0x004a4cc0
 	Type(const char* name, const std::type_info& type, const char* tag)
 		: Descriptor(name), type(type), tag(Name::declare(tag, -1))
 	{

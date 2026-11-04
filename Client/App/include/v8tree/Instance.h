@@ -262,7 +262,7 @@ public:
 	void setParent(Instance* newParent);
 
 	// FUNCTION: WEBSERVICE 0x100ab0a0
-	// STUB: ROBLOX 0x004c2f70
+	// FUNCTION: ROBLOX 0x004c2f70
 	void setParent2(boost::shared_ptr<Instance> instance) { setParent(instance.get()); }
 	void promoteChildren();
 
@@ -315,7 +315,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00577eb0
 	// ??$for_eachChild@VRaiseDescendentAdded2@RBX@@@Instance@RBX@@QBEXVRaiseDescendentAdded2@1@@Z
 	// TEMPLATE: WEBSERVICE 0x1005af10
-	// STUB: ROBLOX 0x004a6400
+	// TEMPLATE: ROBLOX 0x004a6400
 	// ??$for_eachChild@P6AXPAVInstance@RBX@@@Z@Instance@RBX@@QBEXP6AXPAV01@@Z@Z
 	// clang-format on
 	template <class Func>
@@ -545,7 +545,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: WEBSERVICE 0x10043190
 	// RBX::DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>::~DescribedCreatable<RBX::Lighting,RBX::Instance,&RBX::sLighting>
 	// FUNCTION: WEBSERVICE 0x10043270
-	// STUB: ROBLOX 0x00446240
+	// FUNCTION: ROBLOX 0x00446240
 	// RBX::Notifier<RBX::Instance,RBX::PropertyChanged>::raise
 	// FUNCTION: WEBSERVICE 0x10043920
 	// FUNCTION: ROBLOX 0x00446530

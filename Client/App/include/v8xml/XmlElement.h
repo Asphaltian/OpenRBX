@@ -160,7 +160,7 @@ public:
 	bool isValueEqual(const RBX::Name* value) const;
 
 	// FUNCTION: WEBSERVICE 0x1003e8b0
-	// STUB: ROBLOX 0x004af9f0
+	// FUNCTION: ROBLOX 0x004af9f0
 	void setValue(std::string value)
 	{
 		clearValue();
@@ -180,7 +180,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x1004b9a0
-	// STUB: ROBLOX 0x004ab780
+	// FUNCTION: ROBLOX 0x004ab780
 	void setValue(RBX::InstanceHandle handle)
 	{
 		clearValue();

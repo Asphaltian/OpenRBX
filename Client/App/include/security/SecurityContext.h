@@ -48,7 +48,7 @@ public:
 	}
 
 	// FUNCTION: WEBSERVICE 0x1005e9c0
-	// STUB: ROBLOX 0x004a4dd0
+	// FUNCTION: ROBLOX 0x004a4dd0
 	void requirePermission(Permissions permission, const char* operation) const
 	{
 		if (!isInRole(identity, permission)) {

@@ -71,7 +71,7 @@ public:
 	static ClassDescriptor& classDescriptor() { return ClassDescriptor::rootDescriptor(); }
 
 	// FUNCTION: WEBSERVICE 0x1004e900
-	// STUB: ROBLOX 0x004cfd40
+	// FUNCTION: ROBLOX 0x004cfd40
 	DescribedBase()
 	{
 		ClassDescriptor::lockedDown = true;

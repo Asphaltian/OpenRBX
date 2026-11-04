@@ -32,7 +32,7 @@ protected:
 
 public:
 	// FUNCTION: WEBSERVICE 0x10065a50
-	// STUB: ROBLOX 0x00462b00
+	// FUNCTION: ROBLOX 0x00462b00
 	Item() : val(0) {}
 	// FUNCTION: WEBSERVICE 0x10065510
 	// FUNCTION: ROBLOX 0x00572500
@@ -93,7 +93,7 @@ protected:
 	virtual bool askAddChild(const Instance* instance) const { return dynamic_cast<const Item*>(instance) != NULL; }
 
 	// SYNTHETIC: WEBSERVICE 0x100610e0
-	// STUB: ROBLOX 0x004600c0
+	// SYNTHETIC: ROBLOX 0x004600c0
 	// RBX::Stats::Item::~Item
 };
 
@@ -211,7 +211,7 @@ Item* Item::createChildItem(const char* name, boost::function0<T> func)
 }
 
 // TEMPLATE: WEBSERVICE 0x10066a00
-// STUB: ROBLOX 0x004cef20
+// TEMPLATE: ROBLOX 0x004cef20
 // RBX::Stats::Item::createBoundChildItem<bool>
 // TEMPLATE: WEBSERVICE 0x10083160
 // TEMPLATE: ROBLOX 0x005c6d10

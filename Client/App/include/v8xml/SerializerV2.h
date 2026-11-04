@@ -63,7 +63,7 @@ public:
 
 protected:
 	// FUNCTION: WEBSERVICE 0x10097200
-	// STUB: ROBLOX 0x00446d30
+	// FUNCTION: ROBLOX 0x00446d30
 	virtual bool processID(const XmlNameValuePair* valueID, Instance* source) // vtable+0x0c
 	{
 		InstanceHandle h;

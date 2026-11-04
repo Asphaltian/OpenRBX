@@ -287,7 +287,7 @@ private:
 	// TEMPLATE: ROBLOX 0x005db780
 	// RBX::Reflection::TSignalDesc<void __cdecl(bool)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x1004cfd0
-	// STUB: ROBLOX 0x004b43e0
+	// TEMPLATE: ROBLOX 0x004b43e0
 	// RBX::Reflection::TSignalDesc<void __cdecl(boost::shared_ptr<RBX::Instance>)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x1004d040
 	// TEMPLATE: ROBLOX 0x00579510
@@ -296,10 +296,10 @@ private:
 	// TEMPLATE: ROBLOX 0x0056ab10
 	// RBX::Reflection::TSignalDesc<void __cdecl(float,float)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x10056760
-	// STUB: ROBLOX 0x004ac870
+	// TEMPLATE: ROBLOX 0x004ac870
 	// RBX::Reflection::TSignalDesc<void __cdecl(float)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x10079440
-	// STUB: ROBLOX 0x004cc980
+	// TEMPLATE: ROBLOX 0x004cc980
 	// RBX::Reflection::TSignalDesc<void __cdecl(void)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100e2e30
 	// TEMPLATE: ROBLOX 0x00625f40
@@ -311,7 +311,7 @@ private:
 	// TEMPLATE: ROBLOX 0x006328c0
 	// RBX::Reflection::TSignalDesc<void __cdecl(double)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3c70
-	// STUB: ROBLOX 0x0041add0
+	// TEMPLATE: ROBLOX 0x0041add0
 	// RBX::Reflection::TSignalDesc<void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >)>::newSignalInstance
 	// TEMPLATE: WEBSERVICE 0x100f3ce0
 	// TEMPLATE: ROBLOX 0x00632930
@@ -510,13 +510,13 @@ protected:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004edd0
-	// STUB: ROBLOX 0x004b7d30
+	// TEMPLATE: ROBLOX 0x004b7d30
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x1004eeb0
 	// STUB: ROBLOX 0x0057aa40
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x10057d90
-	// STUB: ROBLOX 0x004aeb70
+	// TEMPLATE: ROBLOX 0x004aeb70
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(float)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x100f84f0
 	// TEMPLATE: ROBLOX 0x006369c0

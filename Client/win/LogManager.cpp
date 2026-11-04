@@ -40,7 +40,7 @@ ATL::CPath LogManager::GetLogPath() const
 }
 
 // FUNCTION: WEBSERVICE 0x10001ea0
-// STUB: ROBLOX 0x0042a630
+// FUNCTION: ROBLOX 0x0042a630
 std::string MainLogManager::getLogFileName()
 {
 	ATL::CPath path = GetLogPath();

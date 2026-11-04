@@ -310,7 +310,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100ad050
 	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
 	// TEMPLATE: WEBSERVICE 0x100b2810
-	// STUB: ROBLOX 0x004cdf50
+	// TEMPLATE: ROBLOX 0x004cdf50
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item>
 	// TEMPLATE: WEBSERVICE 0x100b2890
 	// TEMPLATE: ROBLOX 0x005d4000
@@ -515,7 +515,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004bf20
-	// STUB: ROBLOX 0x0041fa20
+	// TEMPLATE: ROBLOX 0x0041fa20
 	// RBX::AbstractFactoryProduct<RBX::Instance>::create
 	// clang-format on
 	static boost::shared_ptr<T> create(const Name& name)

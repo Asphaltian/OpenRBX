@@ -512,7 +512,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005d9e70
 	// RBX::Reflection::PropDescriptor<RBX::Lighting,G3D::Color3>::GetSetImpl<G3D::Color3 (__thiscall RBX::Lighting::*)(void)const ,void (__thiscall RBX::Lighting::*)(G3D::Color3)>::setValue
 	// FUNCTION: WEBSERVICE 0x100433c0
-	// STUB: ROBLOX 0x004463a0
+	// FUNCTION: ROBLOX 0x004463a0
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// FUNCTION: WEBSERVICE 0x10043430
 	// FUNCTION: ROBLOX 0x005aeb00
@@ -703,10 +703,10 @@ public:
 	// STUB: ROBLOX 0x005aeb70
 	// RBX::Reflection::TypedPropertyDescriptor<float>::TypedPropertyDescriptor<float>
 	// FUNCTION: WEBSERVICE 0x10048bd0
-	// STUB: ROBLOX 0x00446320
+	// FUNCTION: ROBLOX 0x00446320
 	// RBX::Reflection::TypedPropertyDescriptor<bool>::TypedPropertyDescriptor<bool>
 	// FUNCTION: WEBSERVICE 0x1007deb0
-	// STUB: ROBLOX 0x00446420
+	// FUNCTION: ROBLOX 0x00446420
 	// RBX::Reflection::TypedPropertyDescriptor<int>::TypedPropertyDescriptor<int>
 	// TEMPLATE: WEBSERVICE 0x10094df0
 	// RBX::Reflection::BoundProp<RBX::TextureId,1>::BoundProp<RBX::TextureId,1><RBX::Sky>
@@ -720,13 +720,13 @@ public:
 	// STUB: ROBLOX 0x005ac210
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>::TypedPropertyDescriptor<RBX::TextureId>
 	// FUNCTION: WEBSERVICE 0x1009ba30
-	// STUB: ROBLOX 0x004a65a0
+	// FUNCTION: ROBLOX 0x004a65a0
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>::TypedPropertyDescriptor<RBX::BrickColor>
 	// TEMPLATE: WEBSERVICE 0x10043a70
 	// TEMPLATE: ROBLOX 0x005af8f0
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>::equalValues
 	// TEMPLATE: WEBSERVICE 0x100439d0
-	// STUB: ROBLOX 0x00446620
+	// TEMPLATE: ROBLOX 0x00446620
 	// RBX::Reflection::TypedPropertyDescriptor<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >::equalValues
 	// SYNTHETIC: WEBSERVICE 0x1004b730
 	// SYNTHETIC: ROBLOX 0x005db480

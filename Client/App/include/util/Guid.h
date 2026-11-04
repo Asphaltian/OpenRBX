@@ -69,7 +69,7 @@ class __declspec(novtable) GuidItem
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004b3f0
-	// STUB: ROBLOX 0x004b3010
+	// TEMPLATE: ROBLOX 0x004b3010
 	// RBX::GuidItem<RBX::Instance>::initStaticData
 	// clang-format on
 	static void initStaticData() { staticData = new StaticData(); }
@@ -138,7 +138,7 @@ protected:
 private:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1004cbc0
-	// STUB: ROBLOX 0x004c99c0
+	// TEMPLATE: ROBLOX 0x004c99c0
 	// RBX::GuidItem<RBX::Instance>::unregisterGuid
 	// clang-format on
 	void unregisterGuid() const
@@ -155,7 +155,7 @@ private:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x1009de40
-	// STUB: ROBLOX 0x004b5260
+	// TEMPLATE: ROBLOX 0x004b5260
 	// RBX::GuidItem<RBX::Instance>::registerGuid
 	// clang-format on
 	void registerGuid() const

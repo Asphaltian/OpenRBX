@@ -111,7 +111,7 @@ class TextXmlParser : public XmlParser
 {
 public:
 	// FUNCTION: WEBSERVICE 0x10053e80
-	// STUB: ROBLOX 0x00411e10
+	// FUNCTION: ROBLOX 0x00411e10
 	TextXmlParser(std::streambuf* buffer) : XmlParser(buffer) {}
 
 	virtual std::auto_ptr<XmlElement> parse();
