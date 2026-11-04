@@ -26,6 +26,13 @@ public:
 	// SYNTHETIC: ROBLOX 0x0040d320
 	// ??_ECBrowserView@@UAEPAXI@Z
 
+protected:
+	virtual void OnInitialUpdate();
+	virtual HRESULT OnGetHostInfo(DOCHOSTUIINFO* pInfo);
+	virtual void OnCommandStateChange(long nCommand, BOOL bEnable);
+	virtual void OnTitleChange(LPCTSTR lpszText);
+	virtual void OnDocumentComplete(LPCTSTR lpszURL);
+
 private:
 	std::list<std::string> m_unk0xf8; // 0xf8
 	undefined4 m_unk0x104;            // 0x104
@@ -82,8 +89,8 @@ class CBrowserDoc : public CNullDoc
 protected:
 	CBrowserDoc() {}
 
-private:
-	undefined4 m_unk0x54; // 0x54
+public:
+	CBrowserView* m_unk0x54; // 0x54
 };
 
 DECOMP_SIZE_ASSERT(CBrowserDoc, 0x58)
