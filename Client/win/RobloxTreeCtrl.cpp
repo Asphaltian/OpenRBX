@@ -2,6 +2,7 @@
 
 #include "RobloxTreeCtrlNode.h"
 #include "SelectionTreeCtrl.h"
+#include "util/scopedassign.h"
 
 // SIZE 0x50
 class RootNode : public CRobloxTreeCtrlNode
@@ -104,10 +105,23 @@ void CRobloxTreeCtrlNode::VTable0x14(NMTVDISPINFO* dispInfo)
 	STUB(0x4258b0);
 }
 
-// STUB: ROBLOX 0x00425ab0
+// FUNCTION: ROBLOX 0x00425ab0
 void CRobloxTreeCtrlNode::VTable0x08()
 {
-	STUB(0x425ab0);
+	if (m_unk0x44) {
+		if (m_unk0x30->VTable0x148() && m_unk0x30->VTable0x148()->isSelected(m_unk0x0c.get())) {
+			for (CRobloxTreeCtrlNode* node = m_unk0x34; node; node = node->m_unk0x34) {
+				RBX::ScopedAssign<undefined> assign(node->m_unk0x2d, true);
+				node->m_unk0x30->Expand(node->m_unk0x44, TVE_EXPAND | TVE_EXPANDPARTIAL);
+			}
+
+			m_unk0x30->SelectItems(m_unk0x44, m_unk0x44, FALSE);
+			m_unk0x30->EnsureVisible(m_unk0x44);
+		}
+		else {
+			m_unk0x30->SetItemState(m_unk0x44, 0, TVIS_SELECTED);
+		}
+	}
 }
 
 // STUB: ROBLOX 0x00425b70
