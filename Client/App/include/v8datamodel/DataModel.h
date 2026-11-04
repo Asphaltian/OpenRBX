@@ -68,7 +68,7 @@ public:
 		Lock(const DataModel* dataModel);
 
 		// FUNCTION: WEBSERVICE 0x1000cd40
-		// STUB: ROBLOX 0x0040e150
+		// FUNCTION: ROBLOX 0x0040e150
 		Lock(boost::shared_ptr<const DataModel> dataModel) : lock(NULL) { doLock(dataModel.get()); }
 
 		~Lock();

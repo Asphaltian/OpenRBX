@@ -93,7 +93,7 @@ public:
 	void removeFromSelection(const Instance* instance);
 
 	// FUNCTION: WEBSERVICE 0x100bfd90
-	// STUB: ROBLOX 0x004259e0
+	// FUNCTION: ROBLOX 0x004259e0
 	bool isSelected(const Instance* instance) const
 	{
 		return std::find(selection->begin(), selection->end(), shared_from(instance)) != selection->end();
@@ -287,10 +287,10 @@ private:
 // FUNCTION: ROBLOX 0x00566fc0
 // RBX::SelectionChanged::SelectionChanged
 // TEMPLATE: WEBSERVICE 0x1005d010
-// STUB: ROBLOX 0x005670b0
+// TEMPLATE: ROBLOX 0x005670b0
 // ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@PAV?$Listener@VSelection@RBX@@VSelectionChanged@2@@2@@Z
 // TEMPLATE: WEBSERVICE 0x1005d160
-// STUB: ROBLOX 0x00567200
+// TEMPLATE: ROBLOX 0x00567200
 // ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@@Z
 // FUNCTION: WEBSERVICE 0x100d6c30
 // ?addListener@?$Notifier@VRunService@RBX@@VStepped@2@@RBX@@QBEXPAV?$Listener@VRunService@RBX@@VStepped@2@@2@@Z

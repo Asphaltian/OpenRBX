@@ -685,7 +685,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004aba30
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x1012cc30
-	// STUB: ROBLOX 0x005b3590
+	// TEMPLATE: ROBLOX 0x005b3590
 	// RBX::Reflection::TypedPropertyDescriptor<RBX::MeshId>::TypedPropertyDescriptor<RBX::MeshId>
 	// TEMPLATE: WEBSERVICE 0x1012ce50
 	// TEMPLATE: ROBLOX 0x005ac280 FOLDED

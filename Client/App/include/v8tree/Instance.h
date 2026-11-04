@@ -695,7 +695,7 @@ template <class T, class Base, const char* sName>
 	// FUNCTION: WEBSERVICE 0x100d8800
 	// RBX::DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>::~DescribedCreatable<RBX::Motor,RBX::AutoJoint,&RBX::sMotor>
 	// SYNTHETIC: WEBSERVICE 0x100d8dc0
-	// STUB: ROBLOX 0x005f2c70
+	// SYNTHETIC: ROBLOX 0x005f2c70
 	// RBX::DescribedNonCreatable<RBX::AutoJoint,RBX::JointInstance,&RBX::sAutoJoint>::`scalar deleting destructor'
 	// FUNCTION: WEBSERVICE 0x100d9440
 	// FUNCTION: ROBLOX 0x005f32e0

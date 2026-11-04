@@ -23,7 +23,7 @@ class Instance;
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x10005a80
-// STUB: ROBLOX 0x004078d0
+// FUNCTION: ROBLOX 0x004078d0
 // RBX::ContentProvider::singleton
 // clang-format on
 

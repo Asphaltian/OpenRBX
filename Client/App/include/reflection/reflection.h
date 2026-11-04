@@ -899,7 +899,7 @@ public:
 	// TEMPLATE: ROBLOX 0x0057c6b0
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::Debugable::AssertAction><enum RBX::Debugable::AssertAction (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::Debugable::AssertAction)>
 	// TEMPLATE: WEBSERVICE 0x100b48e0
-	// STUB: ROBLOX 0x0057c750
+	// TEMPLATE: ROBLOX 0x0057c750
 	// RBX::Reflection::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting>::EnumPropDescriptor<RBX::DebugSettings,enum RBX::DebugSettings::ErrorReporting><enum RBX::DebugSettings::ErrorReporting (__thiscall RBX::DebugSettings::*)(void)const ,void (__thiscall RBX::DebugSettings::*)(enum RBX::DebugSettings::ErrorReporting)>
 	// TEMPLATE: WEBSERVICE 0x100b49e0
 	// TEMPLATE: ROBLOX 0x0057c980

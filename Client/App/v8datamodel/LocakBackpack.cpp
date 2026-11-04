@@ -231,7 +231,7 @@ void LocalBackpack::onLocalCharacterAdded(Instance* added)
 }
 
 // FUNCTION: WEBSERVICE 0x100d6dc0
-// STUB: ROBLOX 0x0060dea0
+// FUNCTION: ROBLOX 0x0060dea0
 void LocalBackpack::onLocalPlayerAdded(Network::Player* added)
 {
 	localPlayer = shared_from(added);
@@ -243,7 +243,7 @@ void LocalBackpack::onLocalPlayerAdded(Network::Player* added)
 }
 
 // FUNCTION: WEBSERVICE 0x100d6ef0
-// STUB: ROBLOX 0x0060dfd0
+// FUNCTION: ROBLOX 0x0060dfd0
 void LocalBackpack::onLocalBackpackAdded(Backpack* added)
 {
 	localBackpack = shared_from(added);
@@ -273,7 +273,7 @@ LocalBackpack::LocalBackpack() : lastRemovedIndex(-1)
 }
 
 // FUNCTION: WEBSERVICE 0x100d75b0
-// STUB: ROBLOX 0x0060e650
+// FUNCTION: ROBLOX 0x0060e650
 void LocalBackpack::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	if (oldProvider) {
