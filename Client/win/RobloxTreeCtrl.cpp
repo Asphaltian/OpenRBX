@@ -142,16 +142,33 @@ void CRobloxTreeCtrlNode::VTable0x08()
 	}
 }
 
-// STUB: ROBLOX 0x00425b70
+// FUNCTION: ROBLOX 0x00425b70
 void CRobloxTreeCtrlNode::onEvent(const RBX::Instance* source, RBX::ChildAdded event)
 {
-	STUB(0x425b70);
+	if (m_unk0x2c_bit1) {
+		boost::recursive_mutex::scoped_lock lock(m_unk0x30->m_unk0xb0);
+		m_unk0x38.insert(event.child);
+	}
+
+	m_unk0x30->VTable0x154(this);
 }
 
-// STUB: ROBLOX 0x00425d80
+// FUNCTION: ROBLOX 0x00425d80
 void CRobloxTreeCtrlNode::onEvent(const RBX::Instance* source, RBX::ChildRemoved event)
 {
-	STUB(0x425d80);
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0x30->m_unk0xb0);
+		m_unk0x30->m_unk0x98.erase(event.child.get());
+
+		std::map<RBX::Instance*, CRobloxTreeCtrlNode*>::iterator it = m_unk0x14.find(event.child.get());
+		if (it != m_unk0x14.end()) {
+			m_unk0x20.insert(it->second);
+		}
+
+		m_unk0x38.erase(event.child);
+	}
+
+	m_unk0x30->VTable0x154(this);
 }
 
 // STUB: ROBLOX 0x00425ef0
