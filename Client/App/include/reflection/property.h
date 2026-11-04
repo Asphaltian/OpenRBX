@@ -1163,7 +1163,6 @@ public:
 		// TEMPLATE: ROBLOX 0x0062e0c0
 		// RBX::Reflection::BoundProp<double,1>::BoundPropGetSet<RBX::Value<double,&RBX::sDoubleValue> >::getValue
 		// TEMPLATE: WEBSERVICE 0x100eef90
-		// TEMPLATE: ROBLOX 0x004461e0
 		// RBX::Reflection::BoundProp<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,1>::BoundPropGetSet<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue> >::getValue
 		// TEMPLATE: WEBSERVICE 0x100eefd0
 		// TEMPLATE: ROBLOX 0x0062a860
@@ -1175,7 +1174,6 @@ public:
 		// TEMPLATE: ROBLOX 0x00635d50
 		// RBX::Reflection::BoundProp<double,1>::BoundPropGetSet<RBX::Value<double,&RBX::sDoubleValue> >::setValue
 		// TEMPLATE: WEBSERVICE 0x100f7600
-		// TEMPLATE: ROBLOX 0x00447df0
 		// RBX::Reflection::BoundProp<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,1>::BoundPropGetSet<RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue> >::setValue
 		// TEMPLATE: WEBSERVICE 0x100f7660
 		// TEMPLATE: ROBLOX 0x00635da0

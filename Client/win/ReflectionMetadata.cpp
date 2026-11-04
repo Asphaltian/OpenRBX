@@ -33,6 +33,18 @@ Reflection::Reflection() : m_unk0xf8(0)
 {
 }
 
+RBX::Reflection::BoundProp<bool, 1> Item::g_unk0x00953a34("Browsable", "Reflection", &Item::m_unk0xf8);
+
+RBX::Reflection::BoundProp<bool, 1> Item::g_unk0x00953a50("Deprecated", "Reflection", &Item::m_unk0xf9);
+
+RBX::Reflection::BoundProp<bool, 1> Item::g_unk0x00953a6c("Preliminary", "Reflection", &Item::m_unk0xfa);
+
+RBX::Reflection::BoundProp<std::string, 1> Item::g_unk0x00953a88("summary", "Reflection", &Item::m_unk0xfc);
+
+RBX::Reflection::BoundProp<int, 1> Class::g_unk0x00953aa4("ExplorerOrder", "Reflection", &Class::m_unk0x118);
+
+RBX::Reflection::BoundProp<int, 1> Class::g_unk0x00953ac0("ExplorerImageIndex", "Reflection", &Class::m_unk0x11c);
+
 } // namespace Metadata
 } // namespace Reflection
 } // namespace RBX
