@@ -29,6 +29,7 @@ public:
 	virtual HTREEITEM VTable0x18();                  // vtable+0x18
 
 	void FUN_004221a0();
+	void FUN_004248f0(const boost::shared_ptr<RBX::Instance>& instance);
 	void FUN_00425c40();
 	CRobloxTreeCtrlNode* FUN_004267a0(const boost::shared_ptr<RBX::Instance>& instance);
 	void FUN_00426960();

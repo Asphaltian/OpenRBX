@@ -37,17 +37,36 @@ void CRobloxTreeCtrlNode::FUN_004221a0()
 	}
 }
 
-// STUB: ROBLOX 0x00422ae0
+// FUNCTION: ROBLOX 0x00422ae0
 void CRobloxTreeCtrl::VTable0x15c()
 {
-	STUB(0x422ae0);
+	RBX::ScopedAssign<undefined> clearing(m_unk0xa4, true);
+	if (m_hWnd) {
+		DeleteAllItems();
+		if (m_unk0x94) {
+			delete m_unk0x94;
+			m_unk0x94 = NULL;
+		}
+	}
 }
 
-// STUB: ROBLOX 0x004230c0
+// FUNCTION: ROBLOX 0x004230c0
 int FUN_004230c0(RBX::Instance* instance)
 {
-	STUB(0x4230c0);
-	return 0;
+	boost::shared_ptr<RBX::Reflection::Metadata::Reflection> reflection =
+		RBX::Reflection::Metadata::Reflection::FUN_004480c0();
+	RBX::Reflection::Metadata::Class* metadata = reflection->FUN_00446220(&instance->getDescriptor(), true);
+	return metadata ? metadata->FUN_00422100() : 0;
+}
+
+// FUNCTION: ROBLOX 0x004248f0
+void CRobloxTreeCtrlNode::FUN_004248f0(const boost::shared_ptr<RBX::Instance>& instance)
+{
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0x30->m_unk0xb0);
+		m_unk0x38.insert(instance);
+	}
+	m_unk0x30->VTable0x154(this);
 }
 
 // FUNCTION: ROBLOX 0x00424980
@@ -227,7 +246,7 @@ boost::shared_ptr<RBX::DataModel> CSelectionTreeCtrl::VTable0x14c() const
 	return m_unk0xe8;
 }
 
-// STUB: ROBLOX 0x00426440
+// FUNCTION: ROBLOX 0x00426440
 CRobloxTreeCtrlNode::CRobloxTreeCtrlNode(
 	CRobloxTreeCtrlNode* parent, boost::shared_ptr<RBX::Instance> instance, CRobloxTreeCtrl* tree
 )
@@ -276,10 +295,19 @@ CRobloxTreeCtrlNode* CRobloxTreeCtrlNode::FUN_004267a0(const boost::shared_ptr<R
 	return node;
 }
 
-// STUB: ROBLOX 0x00426960
+// FUNCTION: ROBLOX 0x00426960
 void CRobloxTreeCtrlNode::FUN_00426960()
 {
-	STUB(0x426960);
+	std::vector<boost::shared_ptr<RBX::Instance> > children;
+
+	{
+		RBX::DataModel::Lock lock(m_unk0x30->VTable0x14c());
+		if (m_unk0x0c->getChildren()) {
+			children = *m_unk0x0c->getChildren();
+		}
+	}
+
+	std::for_each(children.begin(), children.end(), boost::bind(&CRobloxTreeCtrlNode::FUN_004248f0, this, _1));
 }
 
 // FUNCTION: ROBLOX 0x00426b00
@@ -313,7 +341,7 @@ HTREEITEM RootNode::VTable0x18()
 	return TVI_ROOT;
 }
 
-// STUB: ROBLOX 0x00426cf0
+// FUNCTION: ROBLOX 0x00426cf0
 void CSelectionTreeCtrl::VTable0x15c()
 {
 	CRobloxTreeCtrl::VTable0x15c();
