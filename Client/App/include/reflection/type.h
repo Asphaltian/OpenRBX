@@ -201,7 +201,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00412bc0
 	// RBX::Reflection::Value::isType<RBX::ContentId>
 	// TEMPLATE: WEBSERVICE 0x1001c450
-	// STUB: ROBLOX 0x00412be0
+	// TEMPLATE: ROBLOX 0x00412be0
 	// RBX::Reflection::Value::isType<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value> > >
 	// TEMPLATE: WEBSERVICE 0x1003f630
 	// TEMPLATE: ROBLOX 0x0056d680

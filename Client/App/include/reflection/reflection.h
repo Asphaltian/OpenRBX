@@ -239,13 +239,13 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x00619050
 // RBX::Reflection::Described<RBX::VelocityMotor,&RBX::sVelocityMotor,RBX::FactoryProduct<RBX::VelocityMotor,RBX::JointInstance,&RBX::sVelocityMotor> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec1a0
-// STUB: ROBLOX 0x0062b250
+// TEMPLATE: ROBLOX 0x0062b250
 // RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec210
 // TEMPLATE: ROBLOX 0x0062b2c0
 // RBX::Reflection::Described<RBX::BodyVelocity,&RBX::sBodyVelocity,RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec5c0
-// STUB: ROBLOX 0x0062b670
+// TEMPLATE: ROBLOX 0x0062b670
 // RBX::Reflection::Described<RBX::BodyGyro,&RBX::sBodyGyro,RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100ec630
 // TEMPLATE: ROBLOX 0x0062b6e0
@@ -521,7 +521,7 @@ namespace Reflection {
 // SYNTHETIC: ROBLOX 0x007f4c60
 // `RBX::Reflection::Described<RBX::BodyVelocity,&RBX::sBodyVelocity,RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246c0
-// STUB: ROBLOX 0x007f4c70
+// SYNTHETIC: ROBLOX 0x007f4c70
 // `RBX::Reflection::Described<RBX::BodyPosition,&RBX::sBodyPosition,RBX::FactoryProduct<RBX::BodyPosition,RBX::BodyMover,&RBX::sBodyPosition> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246d0
 // SYNTHETIC: ROBLOX 0x007f4c80
@@ -530,7 +530,7 @@ namespace Reflection {
 // SYNTHETIC: ROBLOX 0x007f4c90
 // `RBX::Reflection::Described<RBX::BodyForce,&RBX::sBodyForce,RBX::FactoryProduct<RBX::BodyForce,RBX::BodyMover,&RBX::sBodyForce> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x102246f0
-// STUB: ROBLOX 0x007f4ca0
+// SYNTHETIC: ROBLOX 0x007f4ca0
 // `RBX::Reflection::Described<RBX::BodyGyro,&RBX::sBodyGyro,RBX::FactoryProduct<RBX::BodyGyro,RBX::BodyMover,&RBX::sBodyGyro> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10224cc0
 // SYNTHETIC: ROBLOX 0x007f4080
