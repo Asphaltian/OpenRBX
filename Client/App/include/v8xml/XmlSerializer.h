@@ -130,7 +130,7 @@ private:
 
 public:
 	// SYNTHETIC: WEBSERVICE 0x10053c60
-	// STUB: ROBLOX 0x00411a90
+	// SYNTHETIC: ROBLOX 0x00411a90
 	// TextXmlParser::~TextXmlParser
 };
 

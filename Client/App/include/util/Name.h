@@ -74,7 +74,7 @@ private:
 	// TEMPLATE: WEBSERVICE 0x1000b0b0
 	// RBX::Name::doDeclare<&sThumbnailGenerator>
 	// FUNCTION: WEBSERVICE 0x10071c60
-	// STUB: ROBLOX 0x00448410
+	// FUNCTION: ROBLOX 0x00448410
 	// RBX::Name::doDeclare<0>
 	// TEMPLATE: WEBSERVICE 0x1000b140
 	// TEMPLATE: ROBLOX 0x004747c0
@@ -116,10 +116,10 @@ private:
 	// STUB: ROBLOX 0x004a5710
 	// RBX::Name::doDeclare<&RBX::sHumanoid>
 	// TEMPLATE: WEBSERVICE 0x1005f300
-	// STUB: ROBLOX 0x0045f810
+	// TEMPLATE: ROBLOX 0x0045f810
 	// RBX::Name::doDeclare<&RBX::Stats::sStatsItem>
 	// TEMPLATE: WEBSERVICE 0x1005f370
-	// STUB: ROBLOX 0x0045ac30
+	// TEMPLATE: ROBLOX 0x0045ac30
 	// RBX::Name::doDeclare<&RBX::Stats::sStats>
 	// TEMPLATE: WEBSERVICE 0x1005f3e0
 	// STUB: ROBLOX 0x004077a0
@@ -128,7 +128,7 @@ private:
 	// STUB: ROBLOX 0x0040d870
 	// RBX::Name::doDeclare<&RBX::sTeam>
 	// TEMPLATE: WEBSERVICE 0x10068a30
-	// STUB: ROBLOX 0x0040d8f0
+	// TEMPLATE: ROBLOX 0x0040d8f0
 	// RBX::Name::doDeclare<&RBX::Network::sPlayer>
 	// TEMPLATE: WEBSERVICE 0x1006a1e0
 	// STUB: ROBLOX 0x0045f790
@@ -140,7 +140,7 @@ private:
 	// STUB: ROBLOX 0x004a5110
 	// RBX::Name::doDeclare<&RBX::sHopperBin>
 	// TEMPLATE: WEBSERVICE 0x1006a330
-	// STUB: ROBLOX 0x004a5190
+	// TEMPLATE: ROBLOX 0x004a5190
 	// RBX::Name::doDeclare<&RBX::sStarterPackService>
 	// TEMPLATE: WEBSERVICE 0x1006a3a0
 	// STUB: ROBLOX 0x004a5210
@@ -188,7 +188,7 @@ private:
 	// STUB: ROBLOX 0x004a5290
 	// RBX::Name::doDeclare<&RBX::sBackpack>
 	// TEMPLATE: WEBSERVICE 0x10072130
-	// STUB: ROBLOX 0x004a5610
+	// TEMPLATE: ROBLOX 0x004a5610
 	// RBX::Name::doDeclare<&RBX::sTeams>
 	// TEMPLATE: WEBSERVICE 0x100721a0
 	// STUB: ROBLOX 0x004330d0
@@ -197,7 +197,7 @@ private:
 	// STUB: ROBLOX 0x00433150
 	// RBX::Name::doDeclare<&RBX::sHat>
 	// TEMPLATE: WEBSERVICE 0x10072280
-	// STUB: ROBLOX 0x0040d970
+	// TEMPLATE: ROBLOX 0x0040d970
 	// RBX::Name::doDeclare<&RBX::Network::sPlayers>
 	// TEMPLATE: WEBSERVICE 0x1007af90
 	// TEMPLATE: ROBLOX 0x00594150
@@ -278,7 +278,7 @@ private:
 	// TEMPLATE: ROBLOX 0x005ca0b0
 	// RBX::Name::doDeclare<&RBX::sDebrisService>
 	// TEMPLATE: WEBSERVICE 0x10088990
-	// STUB: ROBLOX 0x004a5690
+	// TEMPLATE: ROBLOX 0x004a5690
 	// RBX::Name::doDeclare<&RBX::sTimerService>
 	// TEMPLATE: WEBSERVICE 0x10088a00
 	// TEMPLATE: ROBLOX 0x005ca120
@@ -287,7 +287,7 @@ private:
 	// STUB: ROBLOX 0x004a5310
 	// RBX::Name::doDeclare<&RBX::sSpawnLocation>
 	// TEMPLATE: WEBSERVICE 0x10088ae0
-	// STUB: ROBLOX 0x004a5390
+	// TEMPLATE: ROBLOX 0x004a5390
 	// RBX::Name::doDeclare<&RBX::sSpawnerService>
 	// TEMPLATE: WEBSERVICE 0x100aafc0
 	// STUB: ROBLOX 0x0041e700

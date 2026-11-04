@@ -130,7 +130,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // STUB: ROBLOX 0x00461fc0
 // RBX::ServiceProvider::find<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006e670
-// STUB: ROBLOX 0x004cbe00
+// TEMPLATE: ROBLOX 0x004cbe00
 // RBX::ServiceProvider::create<RBX::StarterPackService>
 // TEMPLATE: WEBSERVICE 0x1006e760
 // STUB: ROBLOX 0x00462180
@@ -183,7 +183,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // TEMPLATE: ROBLOX 0x00592190
 // RBX::ServiceProvider::create<RBX::LocalBackpack>
 // TEMPLATE: WEBSERVICE 0x10078cf0
-// STUB: ROBLOX 0x004cbf00
+// TEMPLATE: ROBLOX 0x004cbf00
 // RBX::ServiceProvider::create<RBX::JointsService>
 // TEMPLATE: WEBSERVICE 0x10078de0
 // TEMPLATE: ROBLOX 0x0040f3d0
@@ -231,13 +231,13 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // FUNCTION: WEBSERVICE 0x100cdf90
 // RBX::ServiceProvider::find<RBX::TimerService>
 // TEMPLATE: WEBSERVICE 0x100ce4f0
-// STUB: ROBLOX 0x004abdb0
+// TEMPLATE: ROBLOX 0x004abdb0
 // RBX::ServiceProvider::create<RBX::TimerService>
 // TEMPLATE: WEBSERVICE 0x100dac50
 // TEMPLATE: ROBLOX 0x004abc70
 // RBX::ServiceProvider::find<RBX::Network::Players>
 // TEMPLATE: WEBSERVICE 0x100fd6c0
-// STUB: ROBLOX 0x004a5940
+// TEMPLATE: ROBLOX 0x004a5940
 // RBX::ServiceProvider::doGetClassIndex<RBX::SpawnerService>
 // TEMPLATE: WEBSERVICE 0x100fd720
 // TEMPLATE: ROBLOX 0x005e43f0

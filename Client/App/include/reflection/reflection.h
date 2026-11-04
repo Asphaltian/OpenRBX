@@ -33,7 +33,7 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x0056a730
 // RBX::Reflection::Described<RBX::RunService,&RBX::sRunService,RBX::FactoryProduct<RBX::RunService,RBX::Instance,&RBX::sRunService> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x100596e0
-// STUB: ROBLOX 0x004b8450
+// TEMPLATE: ROBLOX 0x004b8450
 // RBX::Reflection::Described<RBX::ServiceProvider,&RBX::sServiceProvider,RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1005bbe0
 // TEMPLATE: ROBLOX 0x00566490
@@ -51,7 +51,7 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x00571ea0
 // RBX::Reflection::Described<RBX::ScriptContext,&RBX::sScriptContext,RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064bf0
-// STUB: ROBLOX 0x00461f40
+// TEMPLATE: ROBLOX 0x00461f40
 // RBX::Reflection::Described<RBX::Stats::Item,&RBX::Stats::sStatsItem,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStatsItem> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10069590
 // TEMPLATE: ROBLOX 0x005758b0
@@ -159,7 +159,7 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x005ccf90
 // RBX::Reflection::Described<RBX::ObjectValue,&RBX::sObjectValue,RBX::FactoryProduct<RBX::ObjectValue,RBX::Instance,&RBX::sObjectValue> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008db70
-// STUB: ROBLOX 0x004b8710
+// TEMPLATE: ROBLOX 0x004b8710
 // RBX::Reflection::Described<RBX::GlobalSettings,&RBX::sGlobalSettings,RBX::NonFactoryProduct<RBX::ServiceProvider,&RBX::sGlobalSettings> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x1008dbe0
 // TEMPLATE: ROBLOX 0x005cd4e0

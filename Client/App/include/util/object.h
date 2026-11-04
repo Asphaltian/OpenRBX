@@ -132,7 +132,7 @@ public:
 	// STUB: ROBLOX 0x0040ed10
 	// RBX::Creatable<RBX::Instance>::create<RBX::Team>
 	// TEMPLATE: WEBSERVICE 0x10069460
-	// STUB: ROBLOX 0x0040efa0
+	// TEMPLATE: ROBLOX 0x0040efa0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x1006bd80
 	// STUB: ROBLOX 0x00461df0

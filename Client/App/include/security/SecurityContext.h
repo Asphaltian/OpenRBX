@@ -73,7 +73,7 @@ private:
 	Context(Identities identity) : identity(identity) {}
 
 	// FUNCTION: WEBSERVICE 0x10066850
-	// STUB: ROBLOX 0x00452830
+	// FUNCTION: ROBLOX 0x00452830
 	static boost::thread_specific_ptr<Context>& ptr()
 	{
 		static boost::thread_specific_ptr<Context> value;

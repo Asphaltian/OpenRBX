@@ -84,7 +84,7 @@ protected:
 	// RBX::MergeBinder::~MergeBinder
 
 	// FUNCTION: WEBSERVICE 0x100979e0
-	// STUB: ROBLOX 0x004477c0
+	// FUNCTION: ROBLOX 0x004477c0
 	virtual bool processIDREF(
 		const XmlNameValuePair* valueIDREF, Reflection::DescribedBase* propertyOwner, const IIDREF* idref
 	) // vtable+0x10
