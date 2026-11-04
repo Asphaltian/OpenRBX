@@ -2775,7 +2775,6 @@ address,type,symbol,name,module,size
 0083797c,global,??_7?$GetSetImpl@P8Rocket@RBX@@BEPAVPartInstance@2@XZP812@AEXPAV32@@Z@?$PropDescriptor@VRocket@RBX@@PAVPartInstance@2@@Reflection@RBX@@6B@,,,
 0083798c,global,??_7?$RefPropDescriptor@VRocket@RBX@@VPartInstance@2@@Reflection@RBX@@6BIIDREF@2@@,,,
 00837994,global,??_7?$RefPropDescriptor@VRocket@RBX@@VPartInstance@2@@Reflection@RBX@@6BRefPropertyDescriptor@12@@,,,
-008379c4,global,??_7?$BoundProp@VCoordinateFrame@G3D@@$00@Reflection@RBX@@6B@,,,
 00838314,global,??_7?$BoundFuncDesc@VRocket@RBX@@$$A6AXXZ$0A@@Reflection@RBX@@6B@,,,
 00838320,global,??_7?$SignalDesc@VRocket@RBX@@$$A6AXXZ@Reflection@RBX@@6B@,,,
 00838330,global,??_7?$BoundFuncDesc@VBodyPosition@RBX@@$$A6A?AVVector3@G3D@@XZ$0A@@Reflection@RBX@@6B@,,,
