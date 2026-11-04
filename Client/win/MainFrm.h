@@ -54,6 +54,9 @@ class CPatchedControlComboBox : public CXTPControlComboBox
 	// SYNTHETIC: ROBLOX 0x00433f20
 	// ?CreateObject@CPatchedControlComboBox@@SGPAVCObject@@XZ
 
+	// SYNTHETIC: ROBLOX 0x00433f90
+	// ?Clone@CPatchedControlComboBox@@UAEPAVCXTPControl@@H@Z
+
 public:
 	// FUNCTION: ROBLOX 0x00432720
 	CPatchedControlComboBox() {}

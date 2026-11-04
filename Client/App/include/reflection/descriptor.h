@@ -20,6 +20,7 @@ inline boost::recursive_mutex& sync()
 }
 
 // SYNTHETIC: WEBSERVICE 0x10005990
+// SYNTHETIC: ROBLOX 0x005deed0
 // RBX::Reflection::Descriptor::`scalar deleting destructor'
 // FUNCTION: WEBSERVICE 0x1004d7f0
 // STUB: ROBLOX 0x004b68f0
