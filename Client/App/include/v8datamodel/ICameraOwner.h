@@ -44,6 +44,7 @@ DECOMP_SIZE_ASSERT(ICameraOwner, 0x14)
 
 // clang-format off
 // FUNCTION: WEBSERVICE 0x100c1210
+// FUNCTION: ROBLOX 0x005a09c0
 // RBX::ICameraOwner::~ICameraOwner
 // clang-format on
 

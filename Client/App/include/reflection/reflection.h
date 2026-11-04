@@ -1543,6 +1543,7 @@ public:
 
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10047b70
+	// TEMPLATE: ROBLOX 0x00576370
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,bool),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x1004c330
 	// TEMPLATE: ROBLOX 0x00578cb0

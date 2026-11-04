@@ -81,6 +81,7 @@ protected:
 	}
 
 	// SYNTHETIC: WEBSERVICE 0x10097700
+	// SYNTHETIC: ROBLOX 0x00447240
 	// RBX::MergeBinder::~MergeBinder
 
 	// FUNCTION: WEBSERVICE 0x100979e0
