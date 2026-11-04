@@ -8,6 +8,9 @@ class CMemberTreeView : public CXTTreeView
 {
 	DECLARE_DYNCREATE(CMemberTreeView)
 
+	// SYNTHETIC: ROBLOX 0x00437850
+	// ?GetThisClass@CMemberTreeView@@SGPAUCRuntimeClass@@XZ
+
 	// SYNTHETIC: ROBLOX 0x00438050
 	// ?CreateObject@CMemberTreeView@@SGPAVCObject@@XZ
 

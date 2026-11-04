@@ -13,6 +13,9 @@ class CStandardOutputView : public COutputView, public RBX::Listener<RBX::Standa
 {
 	DECLARE_DYNCREATE(CStandardOutputView)
 
+	// SYNTHETIC: ROBLOX 0x0043a460
+	// ?GetThisClass@CStandardOutputView@@SGPAUCRuntimeClass@@XZ
+
 	// SYNTHETIC: ROBLOX 0x0043bab0
 	// ?CreateObject@CStandardOutputView@@SGPAVCObject@@XZ
 

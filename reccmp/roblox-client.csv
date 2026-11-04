@@ -3616,3 +3616,7 @@ address,type,symbol,name,module,size
 0043aab0,library,?_Tidy@?$deque@V?$CComPtr@UIHTMLDOMNode@@@ATL@@V?$allocator@V?$CComPtr@UIHTMLDOMNode@@@ATL@@@std@@@std@@IAEXXZ,,,
 0043b1b0,library,?push_back@?$deque@UStandardOutMessage@RBX@@V?$allocator@UStandardOutMessage@RBX@@@std@@@std@@QAEXABUStandardOutMessage@RBX@@@Z,,,
 0043aa20,library,?_Tidy@?$deque@UStandardOutMessage@RBX@@V?$allocator@UStandardOutMessage@RBX@@@std@@@std@@IAEXXZ,,,
+00806088,global,?classCDeclarationView@CDeclarationView@@2UCRuntimeClass@@B,,,
+008060a4,global,?classCClassTreeView@CClassTreeView@@2UCRuntimeClass@@B,,,
+008060dc,global,?classCMemberTreeView@CMemberTreeView@@2UCRuntimeClass@@B,,,
+00806aec,global,?classCStandardOutputView@CStandardOutputView@@2UCRuntimeClass@@B,,,

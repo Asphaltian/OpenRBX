@@ -10,6 +10,9 @@ class CDeclarationView : public CHtmlView
 {
 	DECLARE_DYNCREATE(CDeclarationView)
 
+	// SYNTHETIC: ROBLOX 0x00437550
+	// ?GetThisClass@CDeclarationView@@SGPAUCRuntimeClass@@XZ
+
 	// SYNTHETIC: ROBLOX 0x00438c60
 	// ?CreateObject@CDeclarationView@@SGPAVCObject@@XZ
 
