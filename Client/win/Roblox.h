@@ -48,6 +48,8 @@ public:
 
 	DECLARE_MESSAGE_MAP()
 
+	friend class CApp;
+
 private:
 	MainLogManager m_unk0xa4;                    // 0xa4
 	std::string m_unk0xf0;                       // 0xf0
