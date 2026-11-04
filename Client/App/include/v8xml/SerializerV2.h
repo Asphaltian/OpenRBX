@@ -18,7 +18,7 @@ namespace RBX {
 class DataModel;
 
 // SIZE 0x14
-class __declspec(novtable) MergeBinder : public IReferenceBinder
+class MergeBinder : public IReferenceBinder
 {
 public:
 	// SIZE 0x10

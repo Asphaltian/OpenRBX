@@ -3463,3 +3463,6 @@ address,type,symbol,name,module,size
 004260d0,library,??4?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@QAEAAV01@ABV01@@Z,,,
 004241b0,library,??$for_each@V?$_Vector_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@V?$bind_t@XV?$mf1@XVCRobloxTreeCtrlNode@@ABV?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVCRobloxTreeCtrlNode@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@std@@YA?AV?$bind_t@XV?$mf1@XVCRobloxTreeCtrlNode@@ABV?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVCRobloxTreeCtrlNode@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@V?$_Vector_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@0@0V123@@Z,,,
 004258b0,function,,,,303
+00809268,global,??_7MergeBinder@RBX@@6B@,,,
+00953a24,global,g_unk0x00953a24___RBX::Reflection::Metadata::Reflection::FUN_004480c0,,,
+00917df0,global,??_R0?AVClasses@Metadata@Reflection@RBX@@@8,,,

@@ -41,6 +41,7 @@ public:
 	Classes() {}
 
 	Class* FUN_00446130(const ClassDescriptor* descriptor, bool recurse);
+	void FUN_00447d00(const ClassDescriptor& descriptor);
 };
 
 DECOMP_SIZE_ASSERT(Classes, 0xf8)
@@ -88,6 +89,8 @@ public:
 	static RBX::Reflection::BoundProp<std::string, 1> g_unk0x00953a88;
 
 private:
+	friend class Classes;
+
 	bool m_unk0xf8;        // 0xf8
 	bool m_unk0xf9;        // 0xf9
 	bool m_unk0xfa;        // 0xfa
@@ -148,6 +151,8 @@ public:
 	Reflection();
 
 	Class* FUN_00446220(const ClassDescriptor* descriptor, bool recurse);
+
+	void FUN_00447e50(std::string fileName);
 
 	static boost::shared_ptr<Reflection> FUN_004480c0();
 
@@ -372,6 +377,13 @@ DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 // `dynamic atexit destructor for 'RBX::Reflection::Metadata::Class::g_unk0x00953aa4''
 // SYNTHETIC: ROBLOX 0x007efc40
 // `dynamic atexit destructor for 'RBX::Reflection::Metadata::Item::g_unk0x00953a88''
+// clang-format on
+
+// clang-format off
+// TEMPLATE: ROBLOX 0x00446720
+// RBX::Instance::findFirstChildOfType<RBX::Reflection::Metadata::Classes>
+// SYNTHETIC: ROBLOX 0x007efb80
+// `RBX::FUN_004480c0::Metadata::Reflection::FUN_004480c0'::`2'::`dynamic atexit destructor for 'g_unk0x00953a24''
 // clang-format on
 
 #endif // REFLECTIONMETADATA_H

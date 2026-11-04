@@ -1,5 +1,11 @@
 #include "ReflectionMetadata.h"
 
+#include "v8xml/SerializerV2.h"
+#include "v8xml/XmlSerializer.h"
+
+#include <fstream>
+#include <shlwapi.h>
+
 namespace RBX {
 namespace Reflection {
 namespace Metadata {
@@ -55,11 +61,66 @@ Reflection::Reflection() : m_unk0xf8(NULL)
 {
 }
 
-// STUB: ROBLOX 0x004480c0
+// FUNCTION: ROBLOX 0x00447d00
+void Classes::FUN_00447d00(const ClassDescriptor& descriptor)
+{
+	Instance* existing = findFirstChildByName(descriptor.name.toString());
+	if (existing) {
+		static_cast<Item*>(existing)->m_unk0xf8 = false;
+		return;
+	}
+
+	boost::shared_ptr<Class> metadata = Creatable<Instance>::create<Class>();
+	metadata->setName(descriptor.name.toString());
+	metadata->m_unk0xf8 = false;
+	metadata->setParent(this);
+}
+
+// FUNCTION: ROBLOX 0x00447e50
+void Reflection::FUN_00447e50(std::string fileName)
+{
+	if (fileName.size() == 0) {
+		return;
+	}
+
+	std::ifstream stream(fileName.c_str(), std::ios_base::in | std::ios_base::binary);
+	TextXmlParser parser(stream.rdbuf());
+	std::auto_ptr<XmlElement> root(parser.parse());
+
+	MergeBinder binder;
+	readChildren(root.get(), binder);
+	binder.resolveRefs();
+
+	m_unk0xf8 = findFirstChildOfType<Classes>();
+	if (m_unk0xf8) {
+		m_unk0xf8->FUN_00447d00(ClassDescriptor::rootDescriptor());
+		m_unk0xf8->FUN_00447d00(Instance::classDescriptor());
+		m_unk0xf8->FUN_00447d00(Reflection::classDescriptor());
+		m_unk0xf8->FUN_00447d00(Classes::classDescriptor());
+		m_unk0xf8->FUN_00447d00(Item::classDescriptor());
+		m_unk0xf8->FUN_00447d00(Class::classDescriptor());
+		m_unk0xf8->FUN_00447d00(Member::classDescriptor());
+		m_unk0xf8->FUN_00447d00(Properties::classDescriptor());
+		m_unk0xf8->FUN_00447d00(Functions::classDescriptor());
+		m_unk0xf8->FUN_00447d00(Events::classDescriptor());
+	}
+}
+
+// FUNCTION: ROBLOX 0x004480c0
 boost::shared_ptr<Reflection> Reflection::FUN_004480c0()
 {
-	STUB(0x4480c0);
-	return boost::shared_ptr<Reflection>();
+	static boost::shared_ptr<Reflection> g_unk0x00953a24;
+	if (!g_unk0x00953a24) {
+		g_unk0x00953a24 = Creatable<Instance>::create<Reflection>();
+
+		CString fileName;
+		AfxGetModuleShortFileName(AfxGetApp()->m_hInstance, fileName);
+		CString directory((LPCTSTR) fileName);
+		PathRemoveFileSpec(directory.GetBuffer(directory.GetLength()));
+		directory.ReleaseBuffer();
+		g_unk0x00953a24->FUN_00447e50((LPCTSTR) (directory + "\\ReflectionMetadata.xml"));
+	}
+	return g_unk0x00953a24;
 }
 
 RBX::Reflection::BoundProp<bool, 1> Item::g_unk0x00953a34("Browsable", "Reflection", &Item::m_unk0xf8);
