@@ -80,10 +80,19 @@ CRobloxTreeCtrlNode::~CRobloxTreeCtrlNode()
 	m_unk0x0c->RBX::Notifier<RBX::Instance, RBX::ChildRemoved>::removeListener(this);
 }
 
-// STUB: ROBLOX 0x00425150
+// FUNCTION: ROBLOX 0x00425150
 void CRobloxTreeCtrlNode::VTable0x10(undefined4 p_unk0x04)
 {
-	STUB(0x425150);
+	if (m_unk0x2d) {
+		m_unk0x2c_bit1 = 0;
+	}
+	else if (m_unk0x30->GetItemState(m_unk0x44, TVIF_STATE) | TVIS_EXPANDED) {
+		m_unk0x2c_bit1 = 1;
+
+		if (m_unk0x30->GetItemState(m_unk0x44, TVIF_STATE) | TVIS_EXPANDPARTIAL) {
+			m_unk0x30->SetItemState(m_unk0x44, TVIS_EXPANDED, TVIF_STATE);
+		}
+	}
 }
 
 // STUB: ROBLOX 0x004252f0
