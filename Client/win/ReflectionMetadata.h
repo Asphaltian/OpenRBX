@@ -168,10 +168,16 @@ DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 // ??$doDeclare@$1?sItem@Metadata@Reflection@RBX@@3PADA@Name@RBX@@CAABV01@XZ
 // TEMPLATE: ROBLOX 0x00427820
 // ??$callDoDeclare@$1?sItem@Metadata@Reflection@RBX@@3PADA@Name@RBX@@CAXXZ
+// SYNTHETIC: ROBLOX 0x004278c0
+// ??1Item@Metadata@Reflection@RBX@@UAE@XZ
 // TEMPLATE: ROBLOX 0x00427a20
 // ?className@?$NonFactoryProduct@VInstance@RBX@@$1?sItem@Metadata@Reflection@2@3PADA@RBX@@SAABVName@2@XZ
 // TEMPLATE: ROBLOX 0x00427a40
 // ?getClassName@?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@UBEABVName@2@XZ
+// TEMPLATE: ROBLOX 0x00427ac0
+// ??1?$FactoryProduct@VProperties@Metadata@Reflection@RBX@@VMembers@234@$1?sProperties@234@3PADA@RBX@@MAE@XZ
+// SYNTHETIC: ROBLOX 0x00427b40
+// ??_G?$FactoryProduct@VProperties@Metadata@Reflection@RBX@@VMembers@234@$1?sProperties@234@3PADA@RBX@@MAEPAXI@Z
 // TEMPLATE: ROBLOX 0x00427b60
 // ??0?$FactoryProduct@VProperties@Metadata@Reflection@RBX@@VMembers@234@$1?sProperties@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00427d00
@@ -180,10 +186,14 @@ DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 // ??0?$FactoryProduct@VFunctions@Metadata@Reflection@RBX@@VMembers@234@$1?sFunctions@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00427f60
 // ?className@?$FactoryProduct@VFunctions@Metadata@Reflection@RBX@@VMembers@234@$1?sFunctions@234@3PADA@RBX@@SAABVName@2@XZ
+// TEMPLATE: ROBLOX 0x00427f80
+// ??1?$FactoryProduct@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@RBX@@MAE@XZ
 // TEMPLATE: ROBLOX 0x00427ff0
 // ??0?$FactoryProduct@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00428190
 // ??$declare@$1?sEvents@Metadata@Reflection@RBX@@3PADA@Name@RBX@@SAABV01@XZ
+// TEMPLATE: ROBLOX 0x00428240
+// ??1?$FactoryProduct@VMember@Metadata@Reflection@RBX@@VItem@234@$1?sMember@234@3PADA@RBX@@MAE@XZ
 // TEMPLATE: ROBLOX 0x00428360
 // ??$declare@$1?sMember@Metadata@Reflection@RBX@@3PADA@Name@RBX@@SAABV01@XZ
 // TEMPLATE: ROBLOX 0x00428380
@@ -220,6 +230,14 @@ DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 // ??0?$DescribedCreatable@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00429220
 // ??0?$DescribedNonCreatable@VItem@Metadata@Reflection@RBX@@VInstance@4@$1?sItem@234@3PADA@RBX@@IAE@XZ
+// STUB: ROBLOX 0x00429310
+// ??_E?$DescribedCreatable@VReflection@Metadata@1RBX@@VInstance@3@$1?sReflection@213@3PADA@RBX@@UAEPAXI@Z
+// STUB: ROBLOX 0x00429430
+// ??_E?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@MAEPAXI@Z
+// SYNTHETIC: ROBLOX 0x004294e0
+// ??_E?$DescribedCreatable@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@RBX@@UAEPAXI@Z
+// SYNTHETIC: ROBLOX 0x00429630
+// ??_EItem@Metadata@Reflection@RBX@@UAEPAXI@Z
 // TEMPLATE: ROBLOX 0x00429650
 // ??0?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x004296b0
@@ -250,6 +268,8 @@ DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 // ??0?$DescribedCreatable@VMember@Metadata@Reflection@RBX@@VItem@234@$1?sMember@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00429f00
 // ??$create@VClass@Metadata@Reflection@RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VClass@Metadata@Reflection@RBX@@@boost@@XZ
+// SYNTHETIC: ROBLOX 0x0042a020
+// ??_G?$DescribedCreatable@VMember@Metadata@Reflection@RBX@@VItem@234@$1?sMember@234@3PADA@RBX@@UAEPAXI@Z
 // TEMPLATE: ROBLOX 0x0042a040
 // ?create@Creator@?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ
 // TEMPLATE: ROBLOX 0x0042a100
