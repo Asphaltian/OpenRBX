@@ -393,6 +393,7 @@ DECOMP_SIZE_ASSERT(SignatureDescriptor, 0x10)
 // SYNTHETIC: ROBLOX 0x007f2780
 // `RBX::Reflection::Type::singleton<G3D::Color3>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x102214f0
+// SYNTHETIC: ROBLOX 0x007f2790
 // `RBX::Reflection::Type::singleton<std::vector<RBX::Reflection::Value,std::allocator<RBX::Reflection::Value> > >'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10221500
 // SYNTHETIC: ROBLOX 0x007f27a0
@@ -401,6 +402,7 @@ DECOMP_SIZE_ASSERT(SignatureDescriptor, 0x10)
 // SYNTHETIC: ROBLOX 0x007f26c0
 // `RBX::Reflection::Type::singleton<void>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10222e90
+// SYNTHETIC: ROBLOX 0x007f2ea0
 // `RBX::Reflection::Type::singleton<RBX::Reflection::PropertyDescriptor const *>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x10223070
 // SYNTHETIC: ROBLOX 0x007f28b0

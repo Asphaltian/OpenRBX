@@ -127,7 +127,7 @@ const Type& Type::singleton<G3D::Color3>()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f430
-// STUB: ROBLOX 0x005a5fd0
+// FUNCTION: ROBLOX 0x005a5fd0
 template <>
 const Type& Type::singleton<std::vector<Value> >()
 {
