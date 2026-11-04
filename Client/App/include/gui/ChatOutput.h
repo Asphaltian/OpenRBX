@@ -68,7 +68,7 @@ public:
 DECOMP_SIZE_ASSERT(ChatOutput, 0x140)
 
 // clang-format off
-// STUB: ROBLOX 0x006593b0
+// TEMPLATE: ROBLOX 0x006593b0
 // ?addListener@?$Notifier@VPlayers@Network@RBX@@UChatMessage@23@@RBX@@QBEXPAV?$Listener@VPlayers@Network@RBX@@UChatMessage@23@@2@@Z
 // clang-format on
 

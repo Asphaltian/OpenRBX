@@ -528,7 +528,7 @@ void Players::onChildRemoving(Instance* child)
 }
 
 // FUNCTION: WEBSERVICE 0x10195f90
-// STUB: ROBLOX 0x004b7520
+// FUNCTION: ROBLOX 0x004b7520
 void Players::onChildAdded(Instance* child)
 {
 	if (Player* player = dynamic_cast<Player*>(child)) {

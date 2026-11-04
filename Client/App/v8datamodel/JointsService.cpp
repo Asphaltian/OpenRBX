@@ -71,7 +71,7 @@ void JointsService::onEvent(const World* source, AutoJoin event)
 }
 
 // FUNCTION: WEBSERVICE 0x100de040
-// STUB: ROBLOX 0x005f5b90
+// FUNCTION: ROBLOX 0x005f5b90
 void JointsService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<World, AutoJoin>(world, this);

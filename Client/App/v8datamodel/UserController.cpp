@@ -275,7 +275,7 @@ AIController::~AIController()
 }
 
 // FUNCTION: WEBSERVICE 0x100c6510
-// STUB: ROBLOX 0x005d5370
+// FUNCTION: ROBLOX 0x005d5370
 SteppingController::SteppingController(const PVInstance* _controlledInstance)
 	: runService(shared_from(ServiceProvider::create<RunService>(_controlledInstance))),
 	  controlledInstance(shared_from(_controlledInstance))

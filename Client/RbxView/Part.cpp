@@ -633,7 +633,7 @@ Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 }
 
 // FUNCTION: WEBSERVICE 0x10174800
-// STUB: ROBLOX 0x0047ec50
+// FUNCTION: ROBLOX 0x0047ec50
 Part::Part(const boost::shared_ptr<PartInstance>& partInstance, View* view) : PartChunk(0.0f, partInstance, view)
 {
 	if (partInstance->getCanAggregate()) {

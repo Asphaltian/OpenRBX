@@ -77,7 +77,7 @@ void ClientPhysics::onEvent(const RunService* source, Heartbeat event)
 }
 
 // FUNCTION: WEBSERVICE 0x101af540
-// STUB: ROBLOX 0x004d5430
+// FUNCTION: ROBLOX 0x004d5430
 void ClientPhysics::update(const boost::shared_ptr<RunService>& runService)
 {
 	lastUpdateTime = G3D::System::getLocalTime();

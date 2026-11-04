@@ -675,7 +675,7 @@ void Humanoid::onLocalHumanoidEnteringWorkspace()
 }
 
 // FUNCTION: WEBSERVICE 0x100a4610
-// STUB: ROBLOX 0x005eccb0
+// FUNCTION: ROBLOX 0x005eccb0
 void Humanoid::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening(oldProvider ? oldProvider->create<RunService>() : NULL, this);

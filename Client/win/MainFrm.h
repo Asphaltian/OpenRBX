@@ -111,8 +111,8 @@ public:
 	// ?raise@?$Notifier@VFillToolColor@RBX@@VBrickColor@2@@RBX@@IBEXVBrickColor@2@PAV?$Listener@VFillToolColor@RBX@@VBrickColor@2@@2@@Z
 	// TEMPLATE: ROBLOX 0x00435100
 	// ?raise@?$Notifier@VFillToolColor@RBX@@VBrickColor@2@@RBX@@IBEXVBrickColor@2@@Z
-	// STUB: ROBLOX 0x0047d950
-	// ?addListener@?$Notifier@VFillToolColor@RBX@@VBrickColor@2@@RBX@@QBEXPAV?$Listener@VFillToolColor@RBX@@VBrickColor@2@@2@@Z
+	// TEMPLATE: ROBLOX 0x0047d950
+	// ?addListener@?$Notifier@VRunService@RBX@@VStepped@2@@RBX@@QBEXPAV?$Listener@VRunService@RBX@@VStepped@2@@2@@Z
 	// clang-format on
 
 	// SYNTHETIC: ROBLOX 0x00436320

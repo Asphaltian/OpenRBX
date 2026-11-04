@@ -440,7 +440,7 @@ Rocket::Rocket()
 }
 
 // FUNCTION: WEBSERVICE 0x100ee130
-// STUB: ROBLOX 0x0062d170
+// FUNCTION: ROBLOX 0x0062d170
 void BodyMover::updateWorld()
 {
 	World* newWorld = part ? Workspace::getWorldIfInWorkspace(this) : NULL;
