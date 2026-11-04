@@ -3353,3 +3353,7 @@ address,type,symbol,name,module,size
 00749090,library,?GetReportHeader@CXTPReportColumns@@QBEPAVCXTPReportHeader@@XZ,,,
 00763cf0,library,??_E?$CMap@PAVCXTPDockingPaneBase@@PAV1@PAV1@PAV1@@@UAEPAXI@Z,,,
 007a2ef0,library,??1auto_disconnect_bound_object@detail@signals@boost@@QAE@XZ,,,
+004631f0,synthetic,??1?$TypedStatsItem@_N@Stats@RBX@@UAE@XZ,,,
+00463270,synthetic,??_E?$TypedStatsItem@_N@Stats@RBX@@UAEPAXI@Z,,,
+0062ffa0,synthetic,??1?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@RBX@@MAE@XZ,,,
+00630060,synthetic,??_G?$Described@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@$1?sStringValue@2@3PADAV?$FactoryProduct@V?$Value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$1?sStringValue@RBX@@3PADA@RBX@@VInstance@2@$1?sStringValue@2@3PADA@2@@Reflection@RBX@@UAEPAXI@Z,,,31

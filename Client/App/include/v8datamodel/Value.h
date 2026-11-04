@@ -69,8 +69,10 @@ private:
 	// TEMPLATE: ROBLOX 0x00633380
 	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>
 	// TEMPLATE: WEBSERVICE 0x100f4910
+	// TEMPLATE: ROBLOX 0x006334d0
 	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::~Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>
 	// TEMPLATE: WEBSERVICE 0x100f4960
+	// TEMPLATE: ROBLOX 0x00633520
 	// RBX::Value<std::basic_string<char,std::char_traits<char>,std::allocator<char> >,&RBX::sStringValue>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x100f4980
 	// TEMPLATE: ROBLOX 0x00633540
