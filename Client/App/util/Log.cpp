@@ -18,6 +18,7 @@ static const char* warning = " Warning: ";
 static const char* error = " Error:   ";
 
 // FUNCTION: WEBSERVICE 0x1003d880
+// FUNCTION: ROBLOX 0x005b9590
 void Log::setLogProvider(ILogProvider* provider)
 {
 	Log::provider = provider;

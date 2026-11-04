@@ -698,8 +698,8 @@ address,type,symbol,name,module,size
 00539960,library,?describeSystem@System@G3D@@SAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,,,
 0053a350,library,,,,
 0053a3d0,library,,,,
-0053ac90,library,,,,
-0053aca0,library,,,,
+0053ac90,library,?setAssertionHook@G3D@@YAXP6A_NPBDABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0HAA_N_N@Z@Z,,,
+0053aca0,library,?setFailureHook@G3D@@YAXP6A_NPBDABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0HAA_N_N@Z@Z,,,
 0053d710,library,,,,
 0053d9c0,library,?resolveFormat@GImage@G3D@@SA?AW4Format@12@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,,,
 0053db00,library,?insertRedAsAlpha@GImage@G3D@@QBE?AV12@ABV12@@Z,,,
@@ -2660,3 +2660,5 @@ address,type,symbol,name,module,size
 006e1db0,library,?GetScreenArea@CXTPMultiMonitor@@QAE?AVCRect@@PBVCWnd@@@Z,,,
 0040a3b0,library,??HATL@@YA?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@0@ABV10@PBD@Z,,,
 00955e20,global,?singleton@CrashReporter@@2PAV1@A,,,
+0095bbf8,global,?aggregateWorstSeverity@Log@RBX@@2W4Severity@12@A,,,
+0042b110,,,,,287
