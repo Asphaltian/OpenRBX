@@ -3600,3 +3600,5 @@ address,type,symbol,name,module,size
 0095654c,global,??_B?1???$doGetClassIndex@VJointsService@RBX@@@ServiceProvider@RBX@@CAIXZ@51,,,
 0095662c,global,isNullClassName___RBX::ServiceProvider::find<RBX::JointsService>,,,
 00956630,global,??_B?8???$find@VJointsService@RBX@@@ServiceProvider@RBX@@QBEPAVJointsService@1@XZ@58,,,
+00470da0,function,,,,415
+00809eb8,global,_CLSID_Workspace,,,

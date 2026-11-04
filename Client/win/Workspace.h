@@ -14,6 +14,8 @@
 #include <atlcom.h>
 #include <atlctl.h>
 #include <boost/shared_ptr.hpp>
+#include <iosfwd>
+#include <memory>
 
 // SIZE 0x34
 class __declspec(novtable) CWorkspace : public IDispatchImpl<IWorkspace, &IID_IWorkspace, &LIBID_RobloxLib, 1, 2>,
@@ -62,7 +64,9 @@ protected:
 	virtual void onEvent(const RBX::Workspace* source, RBX::DrawChanged event);
 
 private:
+	std::auto_ptr<XmlElement> FUN_0046f040();
 	void FUN_0046f420();
+	HRESULT FUN_004700b0(const XmlElement* root, std::ostream& stream);
 
 	boost::shared_ptr<RBX::DataModel> m_unk0x24;  // 0x24
 	boost::shared_ptr<RBX::RunService> m_unk0x2c; // 0x2c

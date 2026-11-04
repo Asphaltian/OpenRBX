@@ -1,5 +1,11 @@
 #include "Workspace.h"
 
+#include "LogManager.h"
+#include "v8xml/SerializerV2.h"
+#include "v8xml/XmlSerializer.h"
+
+#include <fstream>
+
 // FUNCTION: ROBLOX 0x0046ee10
 void CWorkspace::onEvent(const RBX::Workspace* source, RBX::DrawChanged event)
 {
@@ -20,6 +26,15 @@ void CWorkspace::onEvent(const RBX::Selection* source, RBX::SelectionChanged eve
 // FUNCTION: ROBLOX 0x0046f010
 CWorkspace::CWorkspace()
 {
+}
+
+// FUNCTION: ROBLOX 0x0046f040
+std::auto_ptr<XmlElement> CWorkspace::FUN_0046f040()
+{
+	std::auto_ptr<XmlElement> root(SerializerV2::newRootElement());
+	RBX::DataModel::Lock lock(m_unk0x24);
+	FUN_0046edc0()->writeChildren(root.get());
+	return root;
 }
 
 // FUNCTION: ROBLOX 0x0046f420
@@ -73,6 +88,14 @@ void CWorkspace::FinalRelease()
 	FUN_0046f420();
 }
 
+// STUB: ROBLOX 0x004700b0
+HRESULT CWorkspace::FUN_004700b0(const XmlElement* root, std::ostream& stream)
+{
+	TextXmlWriterWithEmbeddedContent writer(stream);
+	writer.serialize(root);
+	return S_OK;
+}
+
 // STUB: ROBLOX 0x00470120
 STDMETHODIMP CWorkspace::SaveSelectionToFile(BSTR pathName)
 {
@@ -103,11 +126,20 @@ STDMETHODIMP CWorkspace::ExecScript(
 	return S_OK;
 }
 
-// STUB: ROBLOX 0x00470da0
+// FUNCTION: ROBLOX 0x00470da0
 STDMETHODIMP CWorkspace::SaveToFile(BSTR pathName)
 {
-	STUB(0x470da0);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	try {
+		std::ofstream stream;
+		stream.open(CString(pathName), std::ios_base::out | std::ios_base::binary);
+
+		RBX::DataModel::Lock lock(m_unk0x24);
+		return FUN_004700b0(FUN_0046f040().get(), stream);
+	}
+	catch (const std::exception& e) {
+		return LogManager::ReportCOMError(CLSID_Workspace, e.what(), S_OK);
+	}
 }
 
 // STUB: ROBLOX 0x00470f40
