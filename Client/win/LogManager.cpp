@@ -31,7 +31,7 @@ MainLogManager* LogManager::getMainLogManger()
 }
 
 // FUNCTION: WEBSERVICE 0x10001df0
-// STUB: ROBLOX 0x0042a580
+// FUNCTION: ROBLOX 0x0042a580
 ATL::CPath LogManager::GetLogPath() const
 {
 	std::string result = RBX::FileSystem::getUserAppDataDirectory(true, "logs");
@@ -57,7 +57,7 @@ std::string MainLogManager::getLogFileName()
 }
 
 // FUNCTION: WEBSERVICE 0x10001fd0
-// STUB: ROBLOX 0x0042a250
+// FUNCTION: ROBLOX 0x0042a250
 std::string ThreadLogManager::getLogFileName()
 {
 	std::string fileName = mainLogManager->getLogFileName();
@@ -91,7 +91,7 @@ RBX::Log* MainLogManager::provideLog()
 }
 
 // FUNCTION: WEBSERVICE 0x100021c0
-// STUB: ROBLOX 0x0042a400
+// FUNCTION: ROBLOX 0x0042a400
 RobloxCrashReporter::RobloxCrashReporter(const char* outputPath, const char* appName, MINIDUMP_TYPE mdType)
 {
 	controls.actionToTake = AOC_WRITE_TO_DISK | AOC_SILENT_MODE;
@@ -168,7 +168,7 @@ MainLogManager::MainLogManager(const char* productName) : LogManager(productName
 }
 
 // FUNCTION: WEBSERVICE 0x100026d0
-// STUB: ROBLOX 0x0042ae20
+// FUNCTION: ROBLOX 0x0042ae20
 std::string MoveRelative(const char* fileName, std::string path)
 {
 	ATL::CPath dir(fileName);
@@ -185,7 +185,7 @@ std::string MoveRelative(const char* fileName, std::string path)
 }
 
 // STUB: WEBSERVICE 0x10002840
-// STUB: ROBLOX 0x0042cd30
+// FUNCTION: ROBLOX 0x0042cd30
 std::vector<std::string> MainLogManager::archiveCrashLogs()
 {
 	std::vector<std::string> result;
@@ -229,7 +229,7 @@ struct DateCompare
 };
 
 // STUB: WEBSERVICE 0x10002c00
-// STUB: ROBLOX 0x0042c780
+// FUNCTION: ROBLOX 0x0042c780
 void MainLogManager::CullLogs(const char* folder, int maxLogs)
 {
 	ATL::CPath path = GetLogPath();
@@ -294,7 +294,7 @@ LogManager::~LogManager()
 }
 
 // FUNCTION: WEBSERVICE 0x10003100
-// STUB: ROBLOX 0x0042b230
+// FUNCTION: ROBLOX 0x0042b230
 bool MainLogManager::handleDebugAssert(
 	const char* expression,
 	const std::string& message,
@@ -305,7 +305,7 @@ bool MainLogManager::handleDebugAssert(
 )
 {
 	CString eventMessage;
-	if (message.size() > 0) {
+	if (message.length() > 0) {
 		eventMessage.Format(
 			"Assertion failed: %s\n\nMessage: %s\n\n%s(%d)", expression, message.c_str(), filename, lineNumber
 		);
@@ -319,7 +319,7 @@ bool MainLogManager::handleDebugAssert(
 }
 
 // FUNCTION: WEBSERVICE 0x100031f0
-// STUB: ROBLOX 0x0042b2f0
+// FUNCTION: ROBLOX 0x0042b2f0
 bool MainLogManager::handleG3DFailure(
 	const char* expression,
 	const std::string& message,
@@ -330,7 +330,7 @@ bool MainLogManager::handleG3DFailure(
 )
 {
 	CString eventMessage;
-	if (message.size() > 0) {
+	if (message.length() > 0) {
 		eventMessage.Format(
 			"G3D Error: %s\n\nMessage: %s\n\n%s(%d)", expression, message.c_str(), filename, lineNumber
 		);

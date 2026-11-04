@@ -2658,3 +2658,5 @@ address,type,symbol,name,module,size
 0091a2e8,global,?g_unk0x0091a2e8@@3IA,,,
 006e23a0,library,?XTPMultiMonitor@@YAPAVCXTPMultiMonitor@@XZ,,,
 006e1db0,library,?GetScreenArea@CXTPMultiMonitor@@QAE?AVCRect@@PBVCWnd@@@Z,,,
+0040a3b0,library,??HATL@@YA?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@0@ABV10@PBD@Z,,,
+00955e20,global,?singleton@CrashReporter@@2PAV1@A,,,

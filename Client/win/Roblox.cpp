@@ -504,7 +504,7 @@ void CRobloxControlColorSelector::OnLButtonUp(CPoint point)
 	}
 }
 
-// STUB: ROBLOX 0x00453780
+// FUNCTION: ROBLOX 0x00453780
 static void FUN_00453780(RBX::BrickColor color)
 {
 	CRobloxControlColorSelector::CColorInfo info(toColorRef(color), g_unk0x00954298++);
@@ -554,7 +554,7 @@ CRobloxDHtmlDialog::CRobloxDHtmlDialog(UINT nIDTemplate, UINT nHtmlResID, CWnd* 
 	SetHostFlags(m_dwHostFlags | 0x1844013);
 }
 
-// STUB: ROBLOX 0x00453be0
+// FUNCTION: ROBLOX 0x00453be0
 BOOL CRobloxDHtmlDialog::OnInitDialog()
 {
 	CDHtmlDialog::OnInitDialog();

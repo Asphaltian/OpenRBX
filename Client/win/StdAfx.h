@@ -13,6 +13,7 @@
 #include <afxtempl.h>
 #include <atlbase.h>
 #include <XTToolkitPro.h>
+#include <string>
 // clang-format on
 
 #endif // STDAFX_H
