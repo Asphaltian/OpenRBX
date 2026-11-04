@@ -36,7 +36,7 @@ protected:
 
 private:
 	boost::recursive_mutex m_unk0x188;                                            // 0x188
-	undefined4 m_unk0x194;                                                        // 0x194
+	RBX::DataModel* m_unk0x194;                                                   // 0x194
 	std::vector<undefined4*> m_unk0x198;                                          // 0x198
 	std::map<const RBX::Reflection::PropertyDescriptor*, undefined4*> m_unk0x1a8; // 0x1a8
 	std::map<undefined4, undefined4> m_unk0x1b4;                                  // 0x1b4
@@ -57,8 +57,19 @@ class CSelectionPropGrid : public CPropGrid, public RBX::Listener<RBX::Selection
 	// SYNTHETIC: ROBLOX 0x0043bbb0
 	// ?GetThisClass@CSelectionPropGrid@@SGPAUCRuntimeClass@@XZ
 
+public:
+	CSelectionPropGrid() {}
+
+	// FUNCTION: ROBLOX 0x00434880
+	virtual ~CSelectionPropGrid() { FUN_00445580(NULL); }
+
+	void FUN_00445580(RBX::Selection* selection);
+
+protected:
+	virtual void onEvent(const RBX::Selection* source, RBX::SelectionChanged event);
+
 private:
-	undefined m_unk0x1e0[0x1e8 - 0x1e0]; // 0x1e0
+	boost::shared_ptr<RBX::Selection> m_unk0x1e0; // 0x1e0
 };
 
 DECOMP_SIZE_ASSERT(CSelectionPropGrid, 0x1e8)

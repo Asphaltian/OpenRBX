@@ -612,6 +612,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/ScintillaDocView.cpp
     Client/win/ScriptDoc.cpp
     Client/win/SecureHtmlView.cpp
+    Client/win/SettingsDialog.cpp
     Client/win/VersionInfo.cpp
     Client/win/Workspace.cpp
     Client/win/ActiveDocView.cpp
