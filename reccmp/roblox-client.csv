@@ -789,6 +789,7 @@ address,type,symbol,name,module,size
 005713c0,library,??1?$holder@V?$vector@VValue@Reflection@RBX@@V?$allocator@VValue@Reflection@RBX@@@std@@@std@@@any@boost@@UAE@XZ,,,
 005719b0,library,??$?0V?$vector@VValue@Reflection@RBX@@V?$allocator@VValue@Reflection@RBX@@@std@@@std@@@any@boost@@QAE@ABV?$vector@VValue@Reflection@RBX@@V?$allocator@VValue@Reflection@RBX@@@std@@@std@@@Z,,,
 00571d60,library,,"std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > >::push_back",,
+0057e700,library,??HATL@@YA?AV?$CStringT@DV?$StrTraitATL@DV?$ChTraitsCRT@D@ATL@@@ATL@@@0@ABV10@PBD@Z,,,
 00583ba0,library,?auto_close@?$indirect_streambuf@VString_sink@@U?$char_traits@D@std@@V?$allocator@D@3@Uoutput@iostreams@boost@@@detail@iostreams@boost@@UBE_NXZ,,,
 00583f50,library,?init_put_area@?$indirect_streambuf@VString_sink@@U?$char_traits@D@std@@V?$allocator@D@3@Uoutput@iostreams@boost@@@detail@iostreams@boost@@EAEXXZ,,,
 00584c50,library,?init_get_area@?$indirect_streambuf@VString_sink@@U?$char_traits@D@std@@V?$allocator@D@3@Uoutput@iostreams@boost@@@detail@iostreams@boost@@EAEXXZ,,,

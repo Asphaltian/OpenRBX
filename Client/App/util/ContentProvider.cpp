@@ -252,6 +252,25 @@ static CPath getLocalCachePath(bool createPath)
 	return result;
 }
 
+// FUNCTION: ROBLOX 0x0057f9c0
+void ContentProvider::clearFileCache()
+{
+	CPath path = getLocalCachePath(false);
+
+	if (path.m_strPath != "") {
+		WIN32_FIND_DATA FindFileData;
+		HANDLE hFind = FindFirstFile(path.m_strPath + "*.*", &FindFileData);
+
+		if (hFind != INVALID_HANDLE_VALUE) {
+			do {
+				if (!(FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+					DeleteFile(path.m_strPath + FindFileData.cFileName);
+				}
+			} while (FindNextFile(hFind, &FindFileData));
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10051f30
 // FUNCTION: ROBLOX 0x0057fb10
 ContentId ContentProvider::registerContent(std::istream& content, const Name& mimeType)

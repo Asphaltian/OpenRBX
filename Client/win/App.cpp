@@ -1,6 +1,8 @@
 #include "App.h"
 
 #include "Roblox.h"
+#include "util/ContentProvider.h"
+#include "v8datamodel/DebugSettings.h"
 
 // STUB: ROBLOX 0x004071d0
 STDMETHODIMP CApp::LaunchIDE()
@@ -17,11 +19,12 @@ STDMETHODIMP CApp::get_HasErrorFiles(VARIANT_BOOL* pVal)
 	return S_OK;
 }
 
-// STUB: ROBLOX 0x00407940
+// FUNCTION: ROBLOX 0x00407940
 STDMETHODIMP CApp::get_Version(BSTR* pVal)
 {
-	STUB(0x407940);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	CComBSTR version(static_cast<CRobloxApp*>(AfxGetApp())->m_unk0xf0.c_str());
+	return version.CopyTo(pVal);
 }
 
 // STUB: ROBLOX 0x00407ae0
@@ -31,10 +34,11 @@ STDMETHODIMP CApp::SendErrorFiles(BSTR url)
 	return S_OK;
 }
 
-// STUB: ROBLOX 0x00407b90
+// FUNCTION: ROBLOX 0x00407b90
 STDMETHODIMP CApp::ClearFileCache()
 {
-	STUB(0x407b90);
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	RBX::ContentProvider::singleton().clearFileCache();
 	return S_OK;
 }
 
@@ -59,10 +63,11 @@ STDMETHODIMP CApp::CreateGame(WINDOW_TYPE WindowType, IWorkspace** result)
 	return S_OK;
 }
 
-// STUB: ROBLOX 0x00409060
+// FUNCTION: ROBLOX 0x00409060
 STDMETHODIMP CApp::get_ErrorReporting(ERROR_REPORTING* pVal)
 {
-	STUB(0x409060);
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	*pVal = static_cast<ERROR_REPORTING>(RBX::DebugSettings::singleton().errorReporting);
 	return S_OK;
 }
 
