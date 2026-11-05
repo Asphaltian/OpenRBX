@@ -392,10 +392,17 @@ void RotateAxisCommand::doIt(IDataState* dataState)
 	STUB(0x59ad50);
 }
 
-// STUB: ROBLOX 0x0059af30
+// FUNCTION: ROBLOX 0x0059af30
 void AttachCameraCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59af30);
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+	PVInstance* subject = filteredSelection->items().size() > 0 ? filteredSelection->items().front() : NULL;
+
+	workspace->getCamera()->setCameraType(Camera::ATTACH_CAMERA);
+	workspace->getCamera()->setCameraSubject(subject);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // STUB: ROBLOX 0x0059aff0
@@ -404,16 +411,30 @@ void TrackCameraCommand::doIt(IDataState* dataState)
 	STUB(0x59aff0);
 }
 
-// STUB: ROBLOX 0x0059b100
+// FUNCTION: ROBLOX 0x0059b100
 void FollowCameraCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59b100);
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+	PVInstance* subject = filteredSelection->items().size() > 0 ? filteredSelection->items().front() : NULL;
+
+	workspace->getCamera()->setCameraType(Camera::FOLLOW_CAMERA);
+	workspace->getCamera()->setCameraSubject(subject);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059b1c0
+// FUNCTION: ROBLOX 0x0059b1c0
 void WatchCameraCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59b1c0);
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+	PVInstance* subject = filteredSelection->items().size() > 0 ? filteredSelection->items().front() : NULL;
+
+	workspace->getCamera()->setCameraType(Camera::WATCH_CAMERA);
+	workspace->getCamera()->setCameraSubject(subject);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // STUB: ROBLOX 0x0059b3a0
