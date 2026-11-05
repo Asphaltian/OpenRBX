@@ -778,4 +778,26 @@ bool EngineStatsCommand::isEnabled() const
 	return true;
 }
 
+// FUNCTION: ROBLOX 0x0059cdf0
+void UndoState::addState(XmlElement* element, Instance& instance)
+{
+	if (element) {
+		if (!element->findAttribute(name_referent)) {
+			element->addAttribute(name_referent, InstanceHandle(&instance));
+		}
+
+		root.pushFrontChild(element);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0059ce50
+void RedoState::addState(XmlElement* element, Instance& instance)
+{
+	if (!element->findAttribute(name_referent)) {
+		element->addAttribute(name_referent, InstanceHandle(&instance));
+	}
+
+	root.pushBackChild(element);
+}
+
 } // namespace RBX

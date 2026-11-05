@@ -43,6 +43,30 @@ public:
 
 	T* firstChild() const { return first; }
 
+	void pushBackChild(T* child)
+	{
+		if (last == NULL) {
+			first = child;
+		}
+		else {
+			last->setNextSibling(child);
+		}
+
+		last = child;
+	}
+
+	void pushFrontChild(T* child)
+	{
+		if (first == NULL) {
+			last = child;
+		}
+		else {
+			child->setNextSibling(first);
+		}
+
+		first = child;
+	}
+
 	void addChild(T* child)
 	{
 		if (last == NULL) {
