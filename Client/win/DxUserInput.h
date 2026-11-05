@@ -81,6 +81,7 @@ public:
 
 	void FUN_0046be50(bool p_unk0x78);
 	void FUN_0046ca90();
+	void FUN_0046cbc0(UINT message, int wParam, LPARAM lParam);
 	void FUN_0046d0a0();
 
 	// SYNTHETIC: ROBLOX 0x0046d650

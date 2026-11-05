@@ -4,7 +4,10 @@
 #include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
 
+#include <windowsx.h>
+
 static int FUN_0046db70(SDLKey key);
+static RBX::UIEvent::EventType FUN_0046e290(UINT message);
 
 // FUNCTION: ROBLOX 0x0046b7f0
 bool DxUserInput::FUN_0046b7f0()
@@ -280,6 +283,41 @@ void DxUserInput::FUN_0046ca90()
 	}
 }
 
+// STUB: ROBLOX 0x0046cbc0
+void DxUserInput::FUN_0046cbc0(UINT message, int wParam, LPARAM lParam)
+{
+	switch (message) {
+	case WM_KEYDOWN:
+		FUN_0046bd60();
+		break;
+	case WM_MOUSEMOVE:
+	case WM_LBUTTONDOWN:
+	case WM_LBUTTONUP:
+	case WM_RBUTTONDOWN:
+	case WM_RBUTTONUP: {
+		G3D::Vector2 position(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		FUN_0046c3c0(FUN_0046e290(message), position);
+
+		CPoint point(position.x, position.y);
+		CClientDC dc(m_unk0x180);
+
+		if (dc.PtVisible(point)) {
+			FUN_0046bc20(position);
+		}
+		break;
+	}
+	case WM_MOUSEWHEEL: {
+		G3D::Vector2 position(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		FUN_0046c3c0(wParam > 0.0 ? RBX::UIEvent::MOUSE_WHEEL_FORWARD : RBX::UIEvent::MOUSE_WHEEL_BACKWARD, position);
+		break;
+	}
+	case WM_ENTERMENULOOP:
+	case WM_ENTERSIZEMOVE:
+		FUN_0046ca90();
+		break;
+	}
+}
+
 // STUB: ROBLOX 0x0046cd90
 void DxUserInput::FUN_0046cd90()
 {
@@ -421,4 +459,23 @@ static int FUN_0046db70(SDLKey key)
 {
 	STUB(0x46db70);
 	return 0;
+}
+
+// STUB: ROBLOX 0x0046e290
+static RBX::UIEvent::EventType FUN_0046e290(UINT message)
+{
+	switch (message) {
+	case WM_MOUSEMOVE:
+		return RBX::UIEvent::MOUSE_MOVE;
+	case WM_LBUTTONDOWN:
+		return RBX::UIEvent::MOUSE_LEFT_BUTTON_DOWN;
+	case WM_RBUTTONDOWN:
+		return RBX::UIEvent::MOUSE_RIGHT_BUTTON_DOWN;
+	case WM_LBUTTONUP:
+		return RBX::UIEvent::MOUSE_LEFT_BUTTON_UP;
+	case WM_RBUTTONUP:
+		return RBX::UIEvent::MOUSE_RIGHT_BUTTON_UP;
+	default:
+		return RBX::UIEvent::NO_EVENT;
+	}
 }
