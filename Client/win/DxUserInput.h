@@ -47,10 +47,12 @@ private:
 	CComPtr<IDirectInputDevice8> m_unk0x190;      // 0x190
 	boost::shared_ptr<RBX::DataModel> m_unk0x194; // 0x194
 
+	bool FUN_0046b7f0();
 	void FUN_0046b9d0();
 	void FUN_0046ba80();
 	void FUN_0046bb10();
 	void FUN_0046bd60();
+	bool FUN_0046bed0(DIDEVICEOBJECTDATA* data, DWORD* count, IDirectInputDevice8* device);
 	void FUN_0046c090();
 	G3D::Vector2 FUN_0046c4f0();
 	G3D::Vector2 FUN_0046c590();

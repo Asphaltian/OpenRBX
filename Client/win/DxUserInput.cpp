@@ -1,9 +1,33 @@
 #include "DxUserInput.h"
 
 #include "rbxgraphics/TextureProxyBase.h"
+#include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
 
 static int FUN_0046db70(SDLKey key);
+
+// FUNCTION: ROBLOX 0x0046b7f0
+bool DxUserInput::FUN_0046b7f0()
+{
+	G3D::Vector2 extent = m_unk0x58.center();
+	if (m_unk0x70.x < -extent.x) {
+		return false;
+	}
+
+	if (m_unk0x70.x > extent.x) {
+		return false;
+	}
+
+	if (m_unk0x70.y < -extent.y) {
+		return false;
+	}
+
+	if (m_unk0x70.y > extent.y) {
+		return false;
+	}
+
+	return true;
+}
 
 // FUNCTION: ROBLOX 0x0046b9b0
 void DxUserInput::setKeyState(SDLKey key, bool down)
@@ -100,6 +124,27 @@ void DxUserInput::FUN_0046bd60()
 				m_unk0x79 = false;
 			}
 		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x0046bed0
+bool DxUserInput::FUN_0046bed0(DIDEVICEOBJECTDATA* data, DWORD* count, IDirectInputDevice8* device)
+{
+	ATL::CCritSecLock lock(m_unk0x34);
+
+	switch (device->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), data, count, 0)) {
+	case DI_OK:
+		return true;
+	case DI_BUFFEROVERFLOW: {
+		std::string name = device == m_unk0x190 ? "Keyboard " : "Mouse ";
+		std::string message = name + "DI_BUFFEROVERFLOW!\n";
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, message.c_str());
+		return true;
+	}
+	default: {
+		std::string name = device == m_unk0x190 ? "Keyboard " : "Mouse ";
+		return false;
+	}
 	}
 }
 
