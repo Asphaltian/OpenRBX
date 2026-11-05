@@ -643,8 +643,12 @@ void DuplicateSelectionVerb::doIt(IDataState* dataState)
 // STUB: ROBLOX 0x0059c860
 bool AttachCameraCommand::isEnabled() const
 {
-	STUB(0x59c860);
-	return false;
+	if (selection->size() == 0) {
+		return false;
+	}
+
+	ServiceClient<FilteredSelection<PVInstance> > filteredSelection(dataModel);
+	return filteredSelection->items().size() == 1;
 }
 
 // FUNCTION: ROBLOX 0x0059c950

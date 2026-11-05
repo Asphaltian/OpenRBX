@@ -501,6 +501,8 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100c0570
 	// TEMPLATE: ROBLOX 0x00621f90
 	// RBX::ServiceClient<RBX::FilteredSelection<RBX::Instance> >::createService
+	// TEMPLATE: ROBLOX 0x0059a600
+	// RBX::ServiceClient<RBX::FilteredSelection<RBX::PVInstance> >::createService
 	// clang-format on
 	operator T*() { return createService(true); }
 	operator const T*() const { return createService(true); }

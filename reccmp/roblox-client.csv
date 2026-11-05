@@ -97,6 +97,7 @@ address,type,symbol,name,module,size
 004cb700,function,,,,134
 004cb790,function,,,,187
 005975d0,library,??$?0V?$FilteredSelection@VModelInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@V?$FilteredSelection@VModelInstance@RBX@@@RBX@@@boost@@QAE@PAV?$FilteredSelection@VModelInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,,,
+00599f30,synthetic,??$create@V?$FilteredSelection@VPVInstance@RBX@@@RBX@@@ServiceProvider@RBX@@SAPAV?$FilteredSelection@VPVInstance@RBX@@@1@PBVInstance@1@@Z,,,
 006d50f0,library,??1CXTTreeView@@MAE@XZ,,,
 009544e4,global,cursor___DxUserInput::FUN_0046ca90,,,
 00401e20,library,?StrChrA@CRegParser@ATL@@KAPADPADD@Z,,,
