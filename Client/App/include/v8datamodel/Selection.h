@@ -55,6 +55,7 @@ public:
 	Selection();
 	virtual ~Selection();
 
+	// FUNCTION: ROBLOX 0x00410670
 	unsigned int size() const { return selection->size(); }
 	boost::shared_ptr<Instance> front() const;
 	boost::shared_ptr<Instance> back() const;
