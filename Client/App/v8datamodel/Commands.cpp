@@ -405,10 +405,18 @@ void AttachCameraCommand::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059aff0
+// FUNCTION: ROBLOX 0x0059aff0
 void TrackCameraCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59aff0);
+	Selection* currentSelection = dataModel ? dataModel->create<Selection>() : NULL;
+
+	if (PVInstance* subject = dynamic_cast<PVInstance*>(currentSelection->front().get())) {
+		workspace->getCamera()->setCameraSubject(subject);
+		workspace->getCamera()->setCameraType(Camera::TRACK_CAMERA);
+	}
+
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059b100
@@ -629,16 +637,33 @@ bool TrackCameraCommand::isEnabled() const
 	return (dataModel ? dataModel->create<Selection>() : NULL)->size() == 1;
 }
 
-// STUB: ROBLOX 0x0059c9c0
+// FUNCTION: ROBLOX 0x0059c9c0 FOLDED
 bool FollowCameraCommand::isEnabled() const
 {
-	STUB(0x59c9c0);
+	if (selection->size() > 0) {
+		FilteredSelection<PVInstance>* filteredSelection =
+			dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+
+		if (filteredSelection->items().size() == 1) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
+// FUNCTION: ROBLOX 0x0059c9c0 FOLDED
 bool WatchCameraCommand::isEnabled() const
 {
-	STUB(0x59c9c0);
+	if (selection->size() > 0) {
+		FilteredSelection<PVInstance>* filteredSelection =
+			dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+
+		if (filteredSelection->items().size() == 1) {
+			return true;
+		}
+	}
+
 	return false;
 }
 

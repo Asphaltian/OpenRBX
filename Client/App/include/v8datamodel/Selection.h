@@ -59,7 +59,13 @@ public:
 
 	// FUNCTION: ROBLOX 0x00410670
 	unsigned int size() const { return selection->size(); }
-	boost::shared_ptr<Instance> front() const;
+
+	// STUB: ROBLOX 0x004109b0
+	boost::shared_ptr<Instance> front() const
+	{
+		return size() > 0 ? selection->front() : boost::shared_ptr<Instance>();
+	}
+
 	boost::shared_ptr<Instance> back() const;
 
 	template <class _InIt>
