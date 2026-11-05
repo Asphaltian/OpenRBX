@@ -173,6 +173,8 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
+	friend class ExitCommand;
+
 private:
 	bool m_unk0xe0;                                   // 0xe0
 	bool m_unk0xe1;                                   // 0xe1

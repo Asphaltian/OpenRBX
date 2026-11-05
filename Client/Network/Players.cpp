@@ -125,6 +125,12 @@ bool Players::askAddChild(const Instance* instance) const
 	return dynamic_cast<const Player*>(instance) != NULL;
 }
 
+// FUNCTION: ROBLOX 0x004afe80
+bool Players::canReportAbuse() const
+{
+	return abuseReporter || clientIsPresent(this, true);
+}
+
 // FUNCTION: WEBSERVICE 0x10190e80
 // FUNCTION: ROBLOX 0x004affc0
 void Players::setConnection(RakPeerInterface* peer)

@@ -9,6 +9,43 @@
 #include <memory>
 #include <vector>
 
+class CRobloxDoc;
+
+// SIZE 0x10
+class ReportAbuseVerb : public RBX::Verb
+{
+public:
+	ReportAbuseVerb(RBX::VerbContainer* p_unk0x04, CRobloxDoc* p_unk0x08)
+		: RBX::Verb(p_unk0x04, "ReportAbuse"), m_unk0x0c(p_unk0x08)
+	{
+	}
+
+	virtual bool isEnabled() const;
+	virtual void doIt(RBX::IDataState* dataState);
+
+private:
+	CRobloxDoc* m_unk0x0c; // 0x0c
+};
+
+DECOMP_SIZE_ASSERT(ReportAbuseVerb, 0x10)
+
+// SIZE 0x10
+class ExitCommand : public RBX::Verb
+{
+public:
+	ExitCommand(RBX::VerbContainer* p_unk0x04, CRobloxDoc* p_unk0x08)
+		: RBX::Verb(p_unk0x04, "Exit"), m_unk0x0c(p_unk0x08)
+	{
+	}
+
+	virtual void doIt(RBX::IDataState* dataState);
+
+private:
+	CRobloxDoc* m_unk0x0c; // 0x0c
+};
+
+DECOMP_SIZE_ASSERT(ExitCommand, 0x10)
+
 // SIZE 0x7c
 class CRobloxDoc : public VerbBinder<CRobloxDoc, CDocument>
 {
