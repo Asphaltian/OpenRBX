@@ -304,10 +304,21 @@ void CRobloxApp::FUN_004510b0(CCmdUI* p_unk0x04)
 	}
 }
 
-// STUB: ROBLOX 0x00451100
+// FUNCTION: ROBLOX 0x00451100
 void CRobloxApp::FUN_00451100()
 {
-	STUB(0x451100);
+	if (CApp::FUN_00407300()) {
+		switch (RBX::DebugSettings::singleton().getErrorReporting()) {
+		case RBX::DebugSettings::Prompt: {
+			CRobloxDHtmlDialog dialog(124, FUN_00407190() + "/Error/ReportDialog.aspx", NULL);
+			dialog.DoModal();
+			break;
+		}
+		case RBX::DebugSettings::Report:
+			CApp::FUN_00407a40(FUN_00407190() + "/Error/Dmp.ashx");
+			break;
+		}
+	}
 }
 
 // STUB: ROBLOX 0x004521d0
