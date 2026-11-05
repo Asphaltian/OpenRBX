@@ -1,13 +1,24 @@
 #include "v8datamodel/Commands.h"
 
 #include "gui/GUI.h"
+#include "network/Player.h"
+#include "network/Players.h"
 #include "util/Math.h"
 #include "util/Sound.h"
+#include "v8datamodel/Backpack.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Selection.h"
 
 namespace RBX {
+
+// FUNCTION: ROBLOX 0x00596660
+static void FUN_00596660(DataModel* dataModel)
+{
+	if (Network::Players::clientIsPresent(dataModel, true) && !Network::Players::serverIsPresent(dataModel, true)) {
+		throw std::runtime_error("Insufficinet permissions");
+	}
+}
 
 // FUNCTION: ROBLOX 0x005966e0
 FirstPersonCommand::FirstPersonCommand(DataModel* dataModel)
@@ -45,10 +56,14 @@ ClearBackpack::ClearBackpack(DataModel* dataModel) : Verb(dataModel, "ClearBackp
 {
 }
 
-// STUB: ROBLOX 0x00596900
+// FUNCTION: ROBLOX 0x00596900
 void ClearBackpack::doIt(IDataState* dataState)
 {
-	STUB(0x596900);
+	FUN_00596660(dataModel);
+
+	if (Network::Player* player = Network::Players::findLocalPlayer(dataModel)) {
+		player->getPlayerBackpack()->removeAllChildren();
+	}
 }
 
 // FUNCTION: ROBLOX 0x00596930
@@ -158,10 +173,15 @@ bool WatchCameraCommand::isChecked() const
 	return workspace->getCamera()->getCameraType() == Camera::WATCH_CAMERA;
 }
 
-// STUB: ROBLOX 0x005972c0
+// FUNCTION: ROBLOX 0x005972c0
 bool ClearBackpack::isEnabled() const
 {
-	STUB(0x5972c0);
+	if (Network::Player* player = Network::Players::findLocalPlayer(dataModel)) {
+		if (Backpack* backpack = player->getPlayerBackpack()) {
+			return backpack->numChildren() > 0;
+		}
+	}
+
 	return false;
 }
 
@@ -262,17 +282,28 @@ void JoinCommand::doIt(IDataState* dataState)
 	STUB(0x59a110);
 }
 
-// STUB: ROBLOX 0x0059a230
+// FUNCTION: ROBLOX 0x0059a230
 bool ClearStarterpack::isEnabled() const
 {
-	STUB(0x59a230);
+	if (dataModel) {
+		if (StarterPackService* starterPack = dataModel->find<StarterPackService>()) {
+			return starterPack->numChildren() > 0;
+		}
+	}
+
 	return false;
 }
 
-// STUB: ROBLOX 0x0059a270
+// FUNCTION: ROBLOX 0x0059a270
 void ClearStarterpack::doIt(IDataState* dataState)
 {
-	STUB(0x59a270);
+	FUN_00596660(dataModel);
+
+	if (dataModel) {
+		if (StarterPackService* starterPack = dataModel->find<StarterPackService>()) {
+			starterPack->removeAllChildren();
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x00598960
@@ -449,10 +480,13 @@ void CameraZoomOutCommand::doIt(IDataState* dataState)
 	}
 }
 
-// STUB: ROBLOX 0x0059b7b0
+// FUNCTION: ROBLOX 0x0059b7b0
 void CameraModelViewCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59b7b0);
+	workspace->setImageServerView(workspace->getViewPort());
+	ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(STEP_SOUND);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059b800

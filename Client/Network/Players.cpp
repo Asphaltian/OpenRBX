@@ -100,6 +100,12 @@ bool Players::clientIsPresent(const Instance* context, bool testInDatamodel)
 	return Client::clientIsPresent(context, testInDatamodel);
 }
 
+// FUNCTION: ROBLOX 0x004afaa0
+bool Players::serverIsPresent(const Instance* context, bool testInDatamodel)
+{
+	return Server::serverIsPresent(context, testInDatamodel);
+}
+
 // FUNCTION: WEBSERVICE 0x10190c60
 // FUNCTION: ROBLOX 0x004afab0
 bool Players::frontendProcessing(const Instance* context, bool testInDatamodel)
