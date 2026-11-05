@@ -1,11 +1,54 @@
 #include "v8datamodel/Commands.h"
 
+#include "gui/GUI.h"
 #include "util/Sound.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Selection.h"
 
 namespace RBX {
+
+// FUNCTION: ROBLOX 0x005966e0
+FirstPersonCommand::FirstPersonCommand(DataModel* dataModel)
+	: Verb(dataModel, "FirstPersonIndicator"), dataModel(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00596730
+StatsCommand::StatsCommand(DataModel* dataModel) : Verb(dataModel, "Stats"), dataModel(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00596780
+ForceAssertionCommand::ForceAssertionCommand(DataModel* dataModel) : Verb(dataModel, "ForceAssertion")
+{
+}
+
+// FUNCTION: ROBLOX 0x005967c0
+EngineStatsCommand::EngineStatsCommand(DataModel* dataModel) : Verb(dataModel, "EngineStats"), dataModel(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00596810
+JoinCommand::JoinCommand(DataModel* dataModel) : Verb(dataModel, "JoinCommand"), dataModel(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00596860
+ClearStarterpack::ClearStarterpack(DataModel* dataModel) : Verb(dataModel, "ClearStarterpack"), dataModel(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x005968b0
+ClearBackpack::ClearBackpack(DataModel* dataModel) : Verb(dataModel, "ClearBackpack"), dataModel(dataModel)
+{
+}
+
+// STUB: ROBLOX 0x00596900
+void ClearBackpack::doIt(IDataState* dataState)
+{
+	STUB(0x596900);
+}
 
 // FUNCTION: ROBLOX 0x00596980
 bool CameraTiltUpCommand::isEnabled() const
@@ -37,6 +80,47 @@ bool FixedCameraCommand::isChecked() const
 	return getCamera()->getCameraType() == Camera::FIXED_CAMERA;
 }
 
+// FUNCTION: ROBLOX 0x00596d20
+bool FirstPersonCommand::isEnabled() const
+{
+	return dataModel->getWorkspace()->getCamera()->isFirstPersonCamera();
+}
+
+// FUNCTION: ROBLOX 0x00596d50
+void StatsCommand::doIt(IDataState* dataState)
+{
+	GuiRoot* guiRoot = dataModel->getGuiRoot();
+
+	if (TopMenuBar* bar = dynamic_cast<TopMenuBar*>(guiRoot->findFirstChildByName("StatsHud1"))) {
+		bar->setVisible(!bar->isVisible());
+	}
+
+	if (TopMenuBar* bar = dynamic_cast<TopMenuBar*>(guiRoot->findFirstChildByName("StatsHud2"))) {
+		bar->setVisible(!bar->isVisible());
+	}
+}
+
+// FUNCTION: ROBLOX 0x00596e60
+bool StatsCommand::isEnabled() const
+{
+	GuiRoot* guiRoot = dataModel->getGuiRoot();
+	return dynamic_cast<TopMenuBar*>(guiRoot->findFirstChildByName("StatsHud1")) != NULL;
+}
+
+// FUNCTION: ROBLOX 0x00596ef0
+bool StatsCommand::isChecked() const
+{
+	GuiRoot* guiRoot = dataModel->getGuiRoot();
+	TopMenuBar* bar = dynamic_cast<TopMenuBar*>(guiRoot->findFirstChildByName("StatsHud1"));
+	return bar && bar->isVisible();
+}
+
+// STUB: ROBLOX 0x00596fa0
+void EngineStatsCommand::doIt(IDataState* dataState)
+{
+	STUB(0x596fa0);
+}
+
 // FUNCTION: ROBLOX 0x00597090
 bool AttachCameraCommand::isChecked() const
 {
@@ -59,6 +143,13 @@ bool FollowCameraCommand::isChecked() const
 bool WatchCameraCommand::isChecked() const
 {
 	return workspace->getCamera()->getCameraType() == Camera::WATCH_CAMERA;
+}
+
+// STUB: ROBLOX 0x005972c0
+bool ClearBackpack::isEnabled() const
+{
+	STUB(0x5972c0);
+	return false;
 }
 
 // FUNCTION: ROBLOX 0x00597310
@@ -143,6 +234,32 @@ WatchCameraCommand::WatchCameraCommand(DataModel* dataModel) : EditSelectionVerb
 // FUNCTION: ROBLOX 0x00598230
 MoveDownSelectionVerb::MoveDownSelectionVerb(DataModel* dataModel) : EditSelectionVerb("SelectionDown", dataModel)
 {
+}
+
+// STUB: ROBLOX 0x00599f80
+bool JoinCommand::isEnabled() const
+{
+	STUB(0x599f80);
+	return false;
+}
+
+// STUB: ROBLOX 0x0059a110
+void JoinCommand::doIt(IDataState* dataState)
+{
+	STUB(0x59a110);
+}
+
+// STUB: ROBLOX 0x0059a230
+bool ClearStarterpack::isEnabled() const
+{
+	STUB(0x59a230);
+	return false;
+}
+
+// STUB: ROBLOX 0x0059a270
+void ClearStarterpack::doIt(IDataState* dataState)
+{
+	STUB(0x59a270);
 }
 
 // FUNCTION: ROBLOX 0x0059a2a0
@@ -384,6 +501,19 @@ bool CameraPanRightCommand::isEnabled() const
 }
 
 bool FixedCameraCommand::isEnabled() const
+{
+	return true;
+}
+
+void FirstPersonCommand::doIt(IDataState* dataState)
+{
+}
+
+void ForceAssertionCommand::doIt(IDataState* dataState)
+{
+}
+
+bool EngineStatsCommand::isEnabled() const
 {
 	return true;
 }

@@ -291,6 +291,17 @@ void Camera::panUnits(int p_unk0x04)
 	panRadians(heading - G3D::iRound(heading * 1.27323949f + p_unk0x04) * 0.785398185f);
 }
 
+// FUNCTION: ROBLOX 0x005d6b00
+bool Camera::isFirstPersonCamera() const
+{
+	ICharacterSubject* subject = dynamic_cast<ICharacterSubject*>(getCameraSubject());
+	if (subject) {
+		return subject->getCursorCenterLocked();
+	}
+
+	return false;
+}
+
 // FUNCTION: WEBSERVICE 0x100c2ef0
 // FUNCTION: ROBLOX 0x005d6b50
 void Camera::updateFocus()

@@ -15,6 +15,108 @@ class DataModel;
 class RunService;
 class Selection;
 
+// SIZE 0x10
+class FirstPersonCommand : public Verb
+{
+private:
+	DataModel* dataModel; // 0x0c
+
+public:
+	FirstPersonCommand(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(FirstPersonCommand, 0x10)
+
+// SIZE 0x10
+class StatsCommand : public Verb
+{
+private:
+	DataModel* dataModel; // 0x0c
+
+public:
+	StatsCommand(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual bool isChecked() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(StatsCommand, 0x10)
+
+// SIZE 0x0c
+class ForceAssertionCommand : public Verb
+{
+public:
+	ForceAssertionCommand(DataModel* dataModel);
+
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(ForceAssertionCommand, 0x0c)
+
+// SIZE 0x10
+class EngineStatsCommand : public Verb
+{
+private:
+	DataModel* dataModel; // 0x0c
+
+public:
+	EngineStatsCommand(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(EngineStatsCommand, 0x10)
+
+// SIZE 0x10
+class JoinCommand : public Verb
+{
+private:
+	DataModel* dataModel; // 0x0c
+
+public:
+	JoinCommand(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(JoinCommand, 0x10)
+
+// SIZE 0x10
+class ClearStarterpack : public Verb
+{
+private:
+	DataModel* dataModel; // 0x0c
+
+public:
+	ClearStarterpack(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(ClearStarterpack, 0x10)
+
+// SIZE 0x10
+class ClearBackpack : public Verb
+{
+private:
+	DataModel* dataModel; // 0x0c
+
+public:
+	ClearBackpack(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(ClearBackpack, 0x10)
+
 // SIZE 0x1c
 class RunStateVerb : public Verb
 {

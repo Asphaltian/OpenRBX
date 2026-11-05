@@ -49,7 +49,7 @@ public:
 	void onHeartBeat(CoordinateFrame& cameraGoal, CoordinateFrame& cameraFocus);
 	float panAdjust();
 	void setCursorCenterLocked(bool value);
-	bool getCursorCenterLocked() const;
+	bool getCursorCenterLocked() const { return cursorLocked; }
 };
 
 DECOMP_SIZE_ASSERT(ICharacterSubject, 0x58)
