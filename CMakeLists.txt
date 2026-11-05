@@ -601,6 +601,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/LogManager.cpp
     Client/win/MainFrm.cpp
     Client/win/MarshalWindow.cpp
+    Client/win/MultiPlayerPane.cpp
     Client/win/NullDoc.cpp
     Client/win/ObjectBrowser.cpp
     Client/win/PropGrid.cpp
@@ -609,6 +610,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/RobloxDoc.cpp
     Client/win/RobloxReportView.cpp
     Client/win/RobloxView.cpp
+    Client/win/RobloxWnd.cpp
     Client/win/ScintillaCtrl.cpp
     Client/win/ScintillaDocView.cpp
     Client/win/ScriptDoc.cpp

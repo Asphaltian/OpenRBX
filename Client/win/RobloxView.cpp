@@ -2,20 +2,41 @@
 
 IMPLEMENT_DYNCREATE(CRobloxView, CView)
 
-CRobloxView::CRobloxView()
+// STUB: ROBLOX 0x0045d500
+void CRobloxView::onEvent(const RBX::Network::Players* source, RBX::SuperSafeChanged event)
 {
-}
-
-CRobloxView::~CRobloxView()
-{
-}
-
-void CRobloxView::OnDraw(CDC* pDC)
-{
+	STUB(0x45d500);
 }
 
 // FUNCTION: ROBLOX 0x0045d8e0
 boost::shared_ptr<RBX::DataModel> CRobloxView::FUN_0045d8e0() const
 {
 	return m_unk0x140;
+}
+
+// STUB: ROBLOX 0x0045de90
+void CRobloxView::onEvent(const RBX::ServiceProvider* source, RBX::ServiceRemoving event)
+{
+	STUB(0x45de90);
+}
+
+// FUNCTION: ROBLOX 0x0045e2e0
+CRobloxView::~CRobloxView()
+{
+}
+
+// FUNCTION: ROBLOX 0x0045e4a0
+CRobloxView::CRobloxView() : RBX::VerbContainer(NULL), m_unk0x88(false), m_unk0x1a8(0)
+{
+	m_unk0x148.LoadMenu(0x67);
+}
+
+// STUB: ROBLOX 0x0045e630
+void CRobloxView::onEvent(const RBX::ServiceProvider* source, RBX::ServiceAdded event)
+{
+	STUB(0x45e630);
+}
+
+void CRobloxView::OnDraw(CDC* pDC)
+{
 }
