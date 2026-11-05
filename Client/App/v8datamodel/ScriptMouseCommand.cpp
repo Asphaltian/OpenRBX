@@ -66,7 +66,7 @@ MouseCommand* ScriptMouseCommand::onPeekKeyDown(const UIEvent& uiEvent)
 }
 
 // FUNCTION: WEBSERVICE 0x10117110
-// STUB: ROBLOX 0x00640700
+// FUNCTION: ROBLOX 0x00640700
 ScriptMouseCommand::ScriptMouseCommand(Workspace* workspace) : MouseCommand(workspace)
 {
 	mouse = Creatable<Instance>::create<Mouse>();

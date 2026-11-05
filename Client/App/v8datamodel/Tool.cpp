@@ -406,7 +406,7 @@ void Tool::onEquipping()
 }
 
 // FUNCTION: WEBSERVICE 0x100cc230
-// STUB: ROBLOX 0x00610e00
+// FUNCTION: ROBLOX 0x00610e00
 boost::shared_ptr<Mouse> Tool::getMouse()
 {
 	boost::shared_ptr<Mouse> mouse;

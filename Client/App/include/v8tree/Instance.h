@@ -182,19 +182,19 @@ public:
 	static const Reflection::PropDescriptor<Instance, std::string> desc_Name;
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10047f40
-	// STUB: ROBLOX 0x005764f0
+	// TEMPLATE: ROBLOX 0x005764f0
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@IBEXUDescendentAdded@2@PAV?$Listener@VInstance@RBX@@UDescendentAdded@2@@2@@Z
 	// TEMPLATE: WEBSERVICE 0x100487e0
-	// STUB: ROBLOX 0x00576af0
+	// TEMPLATE: ROBLOX 0x00576af0
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@IBEXUDescendentRemoving@2@PAV?$Listener@VInstance@RBX@@UDescendentRemoving@2@@2@@Z
 	// TEMPLATE: WEBSERVICE 0x100488f0
 	// TEMPLATE: ROBLOX 0x00576c00
 	// ?raise@?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@IBEXUAncestorChanged@2@PAV?$Listener@VInstance@RBX@@UAncestorChanged@2@@2@@Z
 	// TEMPLATE: WEBSERVICE 0x10048af0
-	// STUB: ROBLOX 0x00576dd0
+	// TEMPLATE: ROBLOX 0x00576dd0
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentAdded@2@@RBX@@IBEXUDescendentAdded@2@@Z
 	// TEMPLATE: WEBSERVICE 0x100493e0
-	// STUB: ROBLOX 0x00577520
+	// TEMPLATE: ROBLOX 0x00577520
 	// ?raise@?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@IBEXUDescendentRemoving@2@@Z
 	// TEMPLATE: WEBSERVICE 0x100494c0
 	// TEMPLATE: ROBLOX 0x00577600

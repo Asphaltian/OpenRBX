@@ -269,7 +269,7 @@ public:
 	// STUB: ROBLOX 0x005cc360 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::BodyVelocity>
 	// TEMPLATE: WEBSERVICE 0x1008c2a0
-	// STUB: ROBLOX 0x005cc5d0 FOLDED
+	// TEMPLATE: ROBLOX 0x005cc5d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Rocket>
 	// TEMPLATE: WEBSERVICE 0x1008c510
 	// TEMPLATE: ROBLOX 0x005cc840
@@ -818,7 +818,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005cc3e0
 	// RBX::FactoryProduct<RBX::BodyVelocity,RBX::BodyMover,&RBX::sBodyVelocity>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1008c320
-	// STUB: ROBLOX 0x005cc650
+	// TEMPLATE: ROBLOX 0x005cc650
 	// RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x1008c590
 	// TEMPLATE: ROBLOX 0x005cc8c0

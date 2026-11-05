@@ -110,7 +110,7 @@ void LocalBackpack::onHeartbeat()
 }
 
 // FUNCTION: WEBSERVICE 0x100d6300
-// STUB: ROBLOX 0x0060d2e0
+// FUNCTION: ROBLOX 0x0060d2e0
 void LocalBackpack::onEvent(const Instance* source, DescendentRemoving event)
 {
 	if (BackpackItem* item = dynamic_cast<BackpackItem*>(event.instance.get())) {
@@ -330,7 +330,7 @@ void LocalBackpack::onEvent(const Instance* source, ChildAdded event)
 }
 
 // FUNCTION: WEBSERVICE 0x100d7950
-// STUB: ROBLOX 0x0060e9f0
+// FUNCTION: ROBLOX 0x0060e9f0
 void LocalBackpack::onEvent(const Instance* source, DescendentAdded event)
 {
 	if (BackpackItem* item = dynamic_cast<BackpackItem*>(event.instance.get())) {
