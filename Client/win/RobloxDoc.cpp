@@ -49,3 +49,21 @@ bool ReportAbuseVerb::isEnabled() const
 	RBX::DataModel::Lock lock(m_unk0x0c->FUN_00403290());
 	return m_unk0x0c->FUN_00403290()->create<RBX::Network::Players>()->canReportAbuse();
 }
+
+// STUB: ROBLOX 0x00459950
+void CRobloxDoc::FUN_00459950(std::string p_unk0x04)
+{
+	STUB(0x459950);
+}
+
+// STUB: ROBLOX 0x00459c80
+void CRobloxDoc::FUN_00459c80()
+{
+	CString filter;
+	filter.LoadString(208);
+
+	CFileDialog dialog(TRUE, "lua", NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, filter);
+	if (dialog.DoModal() == IDOK) {
+		FUN_00459950(static_cast<LPCTSTR>(dialog.GetPathName()));
+	}
+}

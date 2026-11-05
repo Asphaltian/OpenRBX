@@ -249,10 +249,11 @@ void CRobloxApp::FUN_0044e270()
 	static_cast<CIDEDocManager*>(m_pDocManager)->m_unk0x2c->OpenDocumentFile(NULL);
 }
 
-// STUB: ROBLOX 0x0044e290
+// FUNCTION: ROBLOX 0x0044e290
 void CRobloxApp::FUN_0044e290()
 {
-	STUB(0x44e290);
+	static_cast<CRobloxDoc*>(static_cast<CIDEDocManager*>(m_pDocManager)->m_unk0x24->OpenDocumentFile(NULL))
+		->FUN_00459c80();
 }
 
 // STUB: ROBLOX 0x0044ed40
