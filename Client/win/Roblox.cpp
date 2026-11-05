@@ -177,7 +177,7 @@ BOOL CIDEDocManager::DoPromptFileName(
 	return CDocManager::DoPromptFileName(fileName, nIDSTitle, lFlags, bOpenFileDialog, pTemplate);
 }
 
-// STUB: ROBLOX 0x0044dac0
+// FUNCTION: ROBLOX 0x0044dac0
 BOOL CRobloxApp::FUN_0044dac0(bool p_unk0x04)
 {
 	if (m_pMainWnd != NULL) {
@@ -190,7 +190,11 @@ BOOL CRobloxApp::FUN_0044dac0(bool p_unk0x04)
 
 	CMainFrame* frame = new CMainFrame;
 
-	if (frame == NULL || !frame->LoadFrame(128)) {
+	if (frame == NULL) {
+		return FALSE;
+	}
+
+	if (!frame->LoadFrame(128)) {
 		return FALSE;
 	}
 
