@@ -210,6 +210,16 @@ public:
 	typename std::vector<T*>::const_iterator begin() const { return filteredSelection.begin(); }
 	typename std::vector<T*>::const_iterator end() const { return filteredSelection.end(); }
 
+	// FUNCTION: ROBLOX 0x00598690
+	// RBX::FilteredSelection<RBX::ModelInstance>::FUN_00598690
+	T* FUN_00598690(bool (*predicate)(T*)) const
+	{
+		typename std::vector<T*>::const_iterator it =
+			std::find_if(filteredSelection.begin(), filteredSelection.end(), predicate);
+
+		return it != filteredSelection.end() ? *it : NULL;
+	}
+
 	// STUB: ROBLOX 0x00598770
 	// RBX::FilteredSelection<RBX::PVInstance>::FUN_00598770
 	T* FUN_00598770(Controller::ControllerType controllerType) const
@@ -264,6 +274,8 @@ protected:
 	// RBX::FilteredSelection<RBX::PartInstance>::FilteredSelection<RBX::PartInstance>
 	// STUB: ROBLOX 0x005979b0
 	// RBX::FilteredSelection<RBX::PVInstance>::FilteredSelection<RBX::PVInstance>
+	// STUB: ROBLOX 0x00597b20
+	// RBX::FilteredSelection<RBX::ModelInstance>::FilteredSelection<RBX::ModelInstance>
 	// TEMPLATE: WEBSERVICE 0x100a1bd0
 	// TEMPLATE: ROBLOX 0x005ea1a0
 	// RBX::FilteredSelection<RBX::PartInstance>::~FilteredSelection<RBX::PartInstance>

@@ -326,6 +326,8 @@ public:
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::Instance> >
 	// TEMPLATE: ROBLOX 0x00598860
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::PVInstance> >
+	// TEMPLATE: ROBLOX 0x005988e0
+	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::ModelInstance> >
 	// TEMPLATE: WEBSERVICE 0x100cc1b0
 	// STUB: ROBLOX 0x00610d80 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::Mouse>

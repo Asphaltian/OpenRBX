@@ -143,6 +143,8 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::create<RBX::ControllerService>
 // STUB: ROBLOX 0x00599cb0
 // RBX::ServiceProvider::create<RBX::FilteredSelection<RBX::PVInstance> >
+// TEMPLATE: ROBLOX 0x00599da0
+// RBX::ServiceProvider::create<RBX::FilteredSelection<RBX::ModelInstance> >
 // FUNCTION: WEBSERVICE 0x10071ad0
 // FUNCTION: ROBLOX 0x00581d20
 // RBX::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>::NonFactoryProduct<RBX::Instance,&RBX::sServiceProvider>
@@ -226,6 +228,12 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // RBX::ServiceProvider::callDoGetClassIndex<RBX::FilteredSelection<RBX::PVInstance> >
 // TEMPLATE: ROBLOX 0x00599200
 // RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::PVInstance> >
+// TEMPLATE: ROBLOX 0x00596c20
+// RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::ModelInstance> >
+// TEMPLATE: ROBLOX 0x00597190
+// RBX::ServiceProvider::callDoGetClassIndex<RBX::FilteredSelection<RBX::ModelInstance> >
+// TEMPLATE: ROBLOX 0x005993b0
+// RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::ModelInstance> >
 // TEMPLATE: WEBSERVICE 0x100cd240
 // RBX::ServiceProvider::doGetClassIndex<RBX::TimerService>
 // TEMPLATE: WEBSERVICE 0x100cd2a0

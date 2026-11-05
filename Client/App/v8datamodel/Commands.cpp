@@ -8,6 +8,7 @@
 #include "v8datamodel/Backpack.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/DataModel.h"
+#include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Selection.h"
 
 namespace RBX {
@@ -76,6 +77,12 @@ G3D::Matrix3 RotateSelectionVerb::getRotationAxis()
 static void FUN_00596950(Controller::ControllerType controllerType, PVInstance* instance)
 {
 	instance->setControllerType(controllerType);
+}
+
+// FUNCTION: ROBLOX 0x00596960
+static bool FUN_00596960(PVInstance* instance)
+{
+	return instance->isControllable();
 }
 
 // FUNCTION: ROBLOX 0x00596980
@@ -189,6 +196,12 @@ bool ClearBackpack::isEnabled() const
 	}
 
 	return false;
+}
+
+// FUNCTION: ROBLOX 0x00597450
+static bool FUN_00597450(ModelInstance* model)
+{
+	return model->numChildren() > 0;
 }
 
 // FUNCTION: ROBLOX 0x00597310
@@ -607,11 +620,16 @@ void SnapSelectionVerb::doIt(IDataState* dataState)
 	STUB(0x59c1d0);
 }
 
-// STUB: ROBLOX 0x0059c2a0
+// FUNCTION: ROBLOX 0x0059c2a0
 bool UngroupSelectionVerb::isEnabled() const
 {
-	STUB(0x59c2a0);
-	return false;
+	if (selection->size() == 0) {
+		return false;
+	}
+
+	FilteredSelection<ModelInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<ModelInstance> >() : NULL;
+	return filteredSelection->FUN_00598690(&FUN_00597450) != NULL;
 }
 
 // STUB: ROBLOX 0x0059c2f0
@@ -667,11 +685,16 @@ bool WatchCameraCommand::isEnabled() const
 	return false;
 }
 
-// STUB: ROBLOX 0x0059ca20
+// FUNCTION: ROBLOX 0x0059ca20
 bool ControllerCommand::isEnabled() const
 {
-	STUB(0x59ca20);
-	return false;
+	if (selection->size() == 0) {
+		return false;
+	}
+
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+	return filteredSelection->FUN_00598690(&FUN_00596960) != NULL;
 }
 
 // STUB: ROBLOX 0x0059ca70

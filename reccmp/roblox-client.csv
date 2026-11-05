@@ -23,6 +23,7 @@ address,type,symbol,name,module,size
 0040ed10,function,,,,134
 0040eda0,function,,,,187
 0040f030,function,,,,187
+00596b80,library,??$_Find_if@PBQAVModelInstance@RBX@@P6A_NPAV12@@Z@std@@YAPBQAVModelInstance@RBX@@PBQAV12@0P6A_NPAV12@@Z@Z,,,
 00597520,library,??$?0V?$FilteredSelection@VPVInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@V?$FilteredSelection@VPVInstance@RBX@@@RBX@@@boost@@QAE@PAV?$FilteredSelection@VPVInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,,,
 0041e700,function,,,,116
 0041e780,function,,,,116
@@ -95,6 +96,7 @@ address,type,symbol,name,module,size
 004cb500,function,,,,187
 004cb700,function,,,,134
 004cb790,function,,,,187
+005975d0,library,??$?0V?$FilteredSelection@VModelInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@V?$FilteredSelection@VModelInstance@RBX@@@RBX@@@boost@@QAE@PAV?$FilteredSelection@VModelInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,,,
 006d50f0,library,??1CXTTreeView@@MAE@XZ,,,
 009544e4,global,cursor___DxUserInput::FUN_0046ca90,,,
 00401e20,library,?StrChrA@CRegParser@ATL@@KAPADPADD@Z,,,
@@ -2820,9 +2822,14 @@ address,type,symbol,name,module,size
 0095a8e4,global,c___RBX::GuiItem::menuSelect,,,
 0095add8,global,"index___RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::PVInstance> >",,,
 0095addc,global,"??_B?1???$doGetClassIndex@V?$FilteredSelection@VPVInstance@RBX@@@RBX@@@ServiceProvider@RBX@@CAIXZ@51",,,
+0095ade0,global,"index___RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::ModelInstance> >",,,
+0095ade4,global,"??_B?1???$doGetClassIndex@V?$FilteredSelection@VModelInstance@RBX@@@RBX@@@ServiceProvider@RBX@@CAIXZ@51",,,
 0095adf4,global,"flag___RBX::ServiceProvider::getClassIndex<RBX::FilteredSelection<RBX::PVInstance> >",,,
+0095adf8,global,"flag___RBX::ServiceProvider::getClassIndex<RBX::FilteredSelection<RBX::ModelInstance> >",,,
 0095adfc,global,"isNullClassName___RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::PVInstance> >",,,
 0095ae00,global,"??_B?8???$find@V?$FilteredSelection@VPVInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VPVInstance@RBX@@@1@XZ@58",,,
+0095ae04,global,"isNullClassName___RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::ModelInstance> >",,,
+0095ae08,global,"??_B?8???$find@V?$FilteredSelection@VModelInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VModelInstance@RBX@@@1@XZ@58",,,
 0095dca8,global,maxElevation___RBX::Camera::tiltRadians,,,
 0095f878,global,c___RBX::Color::red,,,
 0095f884,global,??_B?1??red@Color@RBX@@SAABVColor3@G3D@@XZ@51,,,
