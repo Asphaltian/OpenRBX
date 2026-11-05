@@ -16,6 +16,8 @@ public:
 	CSettingsDialog(CWnd* pParent);
 	virtual ~CSettingsDialog();
 
+	static void FUN_0046b3f0(CWnd* p_unk0x04);
+
 	// SYNTHETIC: ROBLOX 0x0046b240
 	// CSettingsDialog::`scalar deleting destructor'
 

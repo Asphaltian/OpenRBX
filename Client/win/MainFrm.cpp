@@ -5,6 +5,7 @@
 #include "Roblox.h"
 #include "RobloxReportView.h"
 #include "SelectionCaption.h"
+#include "SettingsDialog.h"
 #include "StandardOutputView.h"
 #include "WebToolbox.h"
 #include "util/FileSystem.h"
@@ -184,10 +185,10 @@ void CMainFrame::FUN_00432a80(CCmdUI* pCmdUI)
 	pCmdUI->SetText(text);
 }
 
-// STUB: ROBLOX 0x00432b50
+// FUNCTION: ROBLOX 0x00432b50
 void CMainFrame::FUN_00432b50()
 {
-	STUB(0x432b50);
+	CSettingsDialog::FUN_0046b3f0(this);
 }
 
 // FUNCTION: ROBLOX 0x00432b60
