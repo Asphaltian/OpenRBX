@@ -205,6 +205,7 @@ address,type,symbol,name,module,size
 006d72c0,library,?GetPrevSelectedItem@CXTTreeBase@@UBEPAU_TREEITEM@@PAU2@@Z,,,
 006d7350,library,?EnableMultiSelect@CXTTreeBase@@UAEHH@Z,,,
 006d73c0,library,?SendNotify@CXTTreeBase@@MAEJPAUtagNMHDR@@@Z,,,
+0070a780,library,?GetParent@CXTPRibbonTab@@QBEPAVCXTPCommandBar@@XZ,,,
 0079f441,library,?Allocate@CWin32Heap@ATL@@UAEPAXI@Z,,,
 0079f453,library,?Free@CWin32Heap@ATL@@UAEXPAX@Z,,,
 0079f4a4,library,?GetSize@CWin32Heap@ATL@@UAEIPAX@Z,,,
