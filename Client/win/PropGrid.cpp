@@ -21,6 +21,22 @@ IMPLEMENT_DYNAMIC(CPropGrid, CXTPPropertyGrid)
 IMPLEMENT_DYNAMIC(CSelectionPropGrid, CPropGrid)
 IMPLEMENT_DYNAMIC(CDataModelPropGrid, CSelectionPropGrid)
 
+// FUNCTION: ROBLOX 0x0043bbd0
+template <>
+bool XItem<bool, CXTPPropertyGridItemBool, RBX::Reflection::TypedPropertyDescriptor<bool> >::VTable0xe4()
+{
+	return GetBool() ? true : false;
+}
+
+// FUNCTION: ROBLOX 0x0043bbe0
+template <>
+void XItem<bool, CXTPPropertyGridItemBool, RBX::Reflection::TypedPropertyDescriptor<bool> >::VTable0xe8(
+	const bool& value
+)
+{
+	SetBool(value);
+}
+
 // FUNCTION: ROBLOX 0x0043bc00
 template <>
 void XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<float> >::VTable0xe8(
@@ -113,3 +129,4 @@ CPropGrid::CPropGrid() : m_unk0x194(NULL), m_unk0x1c0(false), m_unk0x1c1(false)
 
 template class XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<float> >;
 template class XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<int> >;
+template class XItem<bool, CXTPPropertyGridItemBool, RBX::Reflection::TypedPropertyDescriptor<bool> >;
