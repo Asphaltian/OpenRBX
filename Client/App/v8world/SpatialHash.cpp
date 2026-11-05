@@ -457,4 +457,10 @@ SpatialHash::SpatialHash(World* world, ContactManager* contactManager)
 	nodes.swap(temp);
 }
 
+// STUB: ROBLOX 0x0061c920
+void SpatialHash::doStats() const
+{
+	STUB(0x61c920);
+}
+
 } // namespace RBX

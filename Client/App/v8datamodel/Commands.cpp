@@ -10,6 +10,8 @@
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Selection.h"
+#include "v8world/SpatialHash.h"
+#include "v8world/World.h"
 
 namespace RBX {
 
@@ -150,10 +152,10 @@ bool StatsCommand::isChecked() const
 	return bar && bar->isVisible();
 }
 
-// STUB: ROBLOX 0x00596fa0
+// FUNCTION: ROBLOX 0x00596fa0
 void EngineStatsCommand::doIt(IDataState* dataState)
 {
-	STUB(0x596fa0);
+	dataModel->getWorkspace()->getWorld()->getContactManager().getSpatialHash().doStats();
 }
 
 // FUNCTION: ROBLOX 0x00597040
