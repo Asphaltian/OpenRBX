@@ -102,6 +102,7 @@ address,type,symbol,name,module,size
 00422510,library,?Add@CImageList@@QAEHPAVCBitmap@@0@Z,,,
 00422550,library,?Add@CImageList@@QAEHPAVCBitmap@@K@Z,,,
 00422c10,synthetic,??1SelectionChanged@RBX@@QAE@XZ,,,
+004a6830,library,??$?0VBackpack@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@VBackpack@RBX@@@boost@@QAE@PAVBackpack@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,,,
 00569a20,library,?erase@?$_Tree@V?$_Tmap_traits@PBVName@RBX@@PAVVerb@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PAVVerb@2@@std@@@5@$0A@@std@@@std@@QAEIABQBVName@RBX@@@Z,,,
 00581f70,function,,,,451
 006dad30,library,??0CXTPMDIFrameWnd@@QAE@XZ,,,

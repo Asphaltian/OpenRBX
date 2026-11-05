@@ -199,7 +199,7 @@ public:
 	// STUB: ROBLOX 0x004cb700
 	// RBX::Creatable<RBX::Instance>::create<RBX::Motor>
 	// TEMPLATE: WEBSERVICE 0x10077730
-	// STUB: ROBLOX 0x005cc360 FOLDED
+	// TEMPLATE: ROBLOX 0x004a6d30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Backpack>
 	// TEMPLATE: WEBSERVICE 0x100779a0
 	// TEMPLATE: ROBLOX 0x004aa1a0
