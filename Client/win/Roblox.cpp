@@ -219,10 +219,12 @@ void CRobloxApp::OnAppAbout()
 	aboutDlg.DoModal();
 }
 
-// STUB: ROBLOX 0x0044dc90
+// FUNCTION: ROBLOX 0x0044dc90
 void CRobloxApp::FUN_0044dc90()
 {
-	STUB(0x44dc90);
+	CString parameters;
+	parameters.Format("url.dll,FileProtocolHandler %s", "http://wiki.roblox.com");
+	ShellExecute(AfxGetMainWnd()->m_hWnd, "open", "rundll32.exe", parameters, NULL, SW_SHOWDEFAULT);
 }
 
 // FUNCTION: ROBLOX 0x0044e100
