@@ -566,10 +566,19 @@ void BoolPropertyVerb::doIt(IDataState* dataState)
 	STUB(0x59b900);
 }
 
-// STUB: ROBLOX 0x0059ba50
+// FUNCTION: ROBLOX 0x0059ba50
 bool CameraCenterCommand::isEnabled() const
 {
-	STUB(0x59ba50);
+	bool hasSelection = ServiceClient<FilteredSelection<PVInstance> >(workspace)->items().size() >= 1;
+
+	if (hasSelection) {
+		Camera* camera = getCamera();
+
+		if (camera && camera->getCameraType() == Camera::FIXED_CAMERA) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -585,10 +594,15 @@ bool EditSelectionVerb::isEnabled() const
 	return selection->size() > 0;
 }
 
-// STUB: ROBLOX 0x0059bfa0
+// FUNCTION: ROBLOX 0x0059bfa0
 bool GroupSelectionVerb::isEnabled() const
 {
-	return EditSelectionVerb::isEnabled() && selection->size() > 1;
+	if (selection->size() == 0) {
+		return false;
+	}
+
+	ServiceClient<Selection> currentSelection(dataModel);
+	return currentSelection->size() > 1;
 }
 
 // STUB: ROBLOX 0x0059c090
