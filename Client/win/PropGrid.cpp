@@ -57,6 +57,17 @@ void XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<i
 	SetValue(buffer);
 }
 
+// FUNCTION: ROBLOX 0x0043c070
+template <>
+void XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >::VTable0xe8(
+	const G3D::Vector3& value
+)
+{
+	char buffer[256];
+	sprintf(buffer, "%.3g, %.3g, %.3g", value.x, value.y, value.z);
+	SetValue(buffer);
+}
+
 // FUNCTION: ROBLOX 0x0043bcc0
 template <>
 G3D::Color3 XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropertyDescriptor<G3D::Color3> >::
@@ -149,3 +160,4 @@ template class XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedProperty
 template class XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<int> >;
 template class XItem<bool, CXTPPropertyGridItemBool, RBX::Reflection::TypedPropertyDescriptor<bool> >;
 template class XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropertyDescriptor<G3D::Color3> >;
+template class XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >;
