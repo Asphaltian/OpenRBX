@@ -142,28 +142,54 @@ void CRenderSettings::FUN_0044ce00(G3D::Vector2int16 p_unk0x04)
 	}
 }
 
-// STUB: ROBLOX 0x0044ce30
+// FUNCTION: ROBLOX 0x0044ce30
 void CRenderSettings::FUN_0044ce30(float p_unk0x04)
 {
-	STUB(0x44ce30);
+	if (p_unk0x04 > m_unk0x110) {
+		FUN_0044ced0(p_unk0x04);
+	}
+
+	p_unk0x04 = std::min(m_unk0x110, p_unk0x04);
+	p_unk0x04 = std::max(0.0f, p_unk0x04);
+	if (p_unk0x04 != m_unk0x10c) {
+		m_unk0x10c = p_unk0x04;
+		raisePropertyChanged(g_unk0x00953bbc);
+	}
 }
 
-// STUB: ROBLOX 0x0044ced0
+// FUNCTION: ROBLOX 0x0044ced0
 void CRenderSettings::FUN_0044ced0(float p_unk0x04)
 {
-	STUB(0x44ced0);
+	if (p_unk0x04 < m_unk0x10c) {
+		FUN_0044ce30(p_unk0x04);
+	}
+
+	p_unk0x04 = std::max(m_unk0x10c, p_unk0x04);
+	p_unk0x04 = std::min(100.0f, p_unk0x04);
+	if (p_unk0x04 != m_unk0x110) {
+		m_unk0x110 = p_unk0x04;
+		raisePropertyChanged(g_unk0x00953bd8);
+	}
 }
 
-// STUB: ROBLOX 0x0044cf70
+// FUNCTION: ROBLOX 0x0044cf70
 void CRenderSettings::FUN_0044cf70(float p_unk0x04)
 {
-	STUB(0x44cf70);
+	p_unk0x04 = std::min(m_unk0x118, std::max(0.0f, p_unk0x04));
+	if (p_unk0x04 != m_unk0x114) {
+		m_unk0x114 = p_unk0x04;
+		raisePropertyChanged(g_unk0x00953bf4);
+	}
 }
 
-// STUB: ROBLOX 0x0044cfe0
+// FUNCTION: ROBLOX 0x0044cfe0
 void CRenderSettings::FUN_0044cfe0(float p_unk0x04)
 {
-	STUB(0x44cfe0);
+	p_unk0x04 = std::min(100.0f, std::max(m_unk0x114, p_unk0x04));
+	if (p_unk0x04 != m_unk0x118) {
+		m_unk0x118 = p_unk0x04;
+		raisePropertyChanged(g_unk0x00953c10);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0044d050
