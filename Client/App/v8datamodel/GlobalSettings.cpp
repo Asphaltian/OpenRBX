@@ -2,6 +2,7 @@
 
 #include "util/FileSystem.h"
 #include "util/Name.h"
+#include "util/StandardOut.h"
 #include "v8xml/SerializerV2.h"
 #include "v8xml/XmlSerializer.h"
 
@@ -24,6 +25,36 @@ static std::string FUN_00581c60()
 	}
 
 	return fileName;
+}
+
+// FUNCTION: ROBLOX 0x00581cd0
+void GlobalSettings::eraseSettingsStore()
+{
+	DeleteFile(FUN_00581c60().c_str());
+}
+
+// FUNCTION: ROBLOX 0x00581f70
+void GlobalSettings::loadState()
+{
+	std::string fileName = FUN_00581c60();
+
+	if (fileName.size() == 0) {
+		return;
+	}
+
+	try {
+		std::ifstream stream(fileName.c_str(), std::ios_base::in | std::ios_base::binary);
+		TextXmlParser parser(stream.rdbuf());
+		std::auto_ptr<XmlElement> root(parser.parse());
+
+		boost::recursive_mutex::scoped_lock lock(mutex);
+		MergeBinder binder;
+		readChildren(root.get(), binder);
+		binder.resolveRefs();
+	}
+	catch (std::exception& e) {
+		StandardOut::singleton()->print(MESSAGE_INFO, "Exception thrown in loadState %s", e.what());
+	}
 }
 
 // FUNCTION: ROBLOX 0x00582140
