@@ -3,6 +3,7 @@
 #include "gui/GUI.h"
 #include "network/Player.h"
 #include "network/Players.h"
+#include "tool/MegaDragger.h"
 #include "util/Math.h"
 #include "util/Sound.h"
 #include "v8datamodel/Backpack.h"
@@ -469,10 +470,27 @@ void WatchCameraCommand::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059b3a0
+// FUNCTION: ROBLOX 0x0059b3a0
 void MoveDownSelectionVerb::doIt(IDataState* dataState)
 {
-	STUB(0x59b3a0);
+	FUN_00596660(dataModel);
+
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+
+	if (filteredSelection->items().size() > 0) {
+		MegaDragger dragger(NULL, filteredSelection->items(), workspace.get());
+		dragger.startDragging();
+		G3D::Vector3 moved = dragger.safeMoveNoDrop(G3D::Vector3(0.0f, -1.2f, 0.0f));
+		dragger.finishDragging();
+
+		SoundType sound = moved.y != 0.0f ? CLICK_SOUND : BOING_SOUND;
+		(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(sound);
+
+		workspace->raiseDrawChanged();
+		dataState->clearStack();
+		dataState->setDirty(true);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0059b4d0
