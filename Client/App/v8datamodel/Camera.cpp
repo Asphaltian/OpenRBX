@@ -57,6 +57,18 @@ ICameraOwner* Camera::getCameraOwner()
 	return NULL;
 }
 
+// STUB: ROBLOX 0x005d5fd0
+bool Camera::canZoom(int p_unk0x04) const
+{
+	float distance = goalToFocusDistance();
+
+	if (p_unk0x04 > 0) {
+		return distanceMin() < distance;
+	}
+
+	return distanceMax() > distance;
+}
+
 // FUNCTION: WEBSERVICE 0x100c2670
 // FUNCTION: ROBLOX 0x005d6040
 void Camera::alwaysMode()
@@ -70,6 +82,18 @@ void Camera::lookAt(const G3D::Vector3& point)
 {
 	cameraFocus.translation = point;
 	cameraGoal.lookAt(point);
+}
+
+// FUNCTION: ROBLOX 0x005d6080
+bool Camera::canTilt(int p_unk0x04) const
+{
+	float elevation = Math::elevationAngle(cameraGoal.lookVector());
+
+	if (p_unk0x04 < 0) {
+		return -1.57079637f <= elevation;
+	}
+
+	return 1.57079637f >= elevation;
 }
 
 // FUNCTION: WEBSERVICE 0x100c26b0
@@ -206,6 +230,31 @@ void Camera::setHeadingElevationDistance(float heading, float elevation, float d
 	cameraExternallyAdjusted = true;
 }
 
+// FUNCTION: ROBLOX 0x005d6790
+bool Camera::tiltRadians(float p_unk0x04)
+{
+	if (p_unk0x04 != 0.0f) {
+		float heading;
+		float elevation;
+		float distance;
+
+		getHeadingElevationDistance(heading, elevation, distance);
+
+		static const float maxElevation = (float) G3D::toRadians(81.0);
+
+		float newElevation = G3D::clamp(p_unk0x04 + elevation, -maxElevation, maxElevation);
+
+		if (newElevation != elevation) {
+			setHeadingElevationDistance(heading, newElevation, distance);
+
+			tellCameraMoved();
+			return true;
+		}
+	}
+
+	return false;
+}
+
 // FUNCTION: WEBSERVICE 0x100c2d10
 // FUNCTION: ROBLOX 0x005d6860
 void Camera::panRadians(float angle)
@@ -223,6 +272,23 @@ void Camera::panRadians(float angle)
 
 		tellCameraMoved();
 	}
+}
+
+// STUB: ROBLOX 0x005d68e0
+bool Camera::tiltUnits(int p_unk0x04)
+{
+	float elevation = Math::elevationAngle(cameraGoal.lookVector());
+
+	return tiltRadians((G3D::iRound(elevation * 57.2957764f * 0.1f) + p_unk0x04) * 0.174532935f - elevation);
+}
+
+// FUNCTION: ROBLOX 0x005d6980
+void Camera::panUnits(int p_unk0x04)
+{
+	G3D::Vector3 look = cameraGoal.lookVector();
+	float heading = atan2f(-look.z, -look.x);
+
+	panRadians(heading - G3D::iRound(heading * 1.27323949f + p_unk0x04) * 0.785398185f);
 }
 
 // FUNCTION: WEBSERVICE 0x100c2ef0

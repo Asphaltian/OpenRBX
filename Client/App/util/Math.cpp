@@ -315,6 +315,19 @@ float Math::angle(const Vector3& v0, const Vector3& v1)
 	return acosf(dot);
 }
 
+// FUNCTION: ROBLOX 0x005f0350
+float Math::elevationAngle(const Vector3& p_unk0x04)
+{
+	if (p_unk0x04.y >= 1.0f) {
+		return 1.57079637f;
+	}
+	if (p_unk0x04.y <= -1.0f) {
+		return -1.57079637f;
+	}
+
+	return asinf(p_unk0x04.y);
+}
+
 // FUNCTION: WEBSERVICE 0x100df1a0
 // FUNCTION: ROBLOX 0x005f0390
 bool Math::fuzzyEq(const Vector3& v0, const Vector3& v1, float epsilon)

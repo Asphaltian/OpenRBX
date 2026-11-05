@@ -45,10 +45,44 @@ Verb* VerbContainer::getVerb(std::string name)
 	return getVerb(Name::lookup(name));
 }
 
+// FUNCTION: ROBLOX 0x0059d060
+Verb::~Verb()
+{
+	if (container) {
+		container->removeVerb(this);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100d0b70
 // FUNCTION: ROBLOX 0x0059d080
 VerbContainer::VerbContainer(VerbContainer* parent) : parent(parent)
 {
+}
+
+// FUNCTION: ROBLOX 0x0059d0f0
+Verb::Verb(VerbContainer* container, std::string name) : name(Name::declare(name.c_str(), -1)), container(container)
+{
+	container->addVerb(this);
+}
+
+void VerbContainer::addVerb(Verb* verb)
+{
+	verbs[&verb->getName()] = verb;
+}
+
+void VerbContainer::removeVerb(Verb* verb)
+{
+	verbs.erase(&verb->getName());
+}
+
+bool Verb::isEnabled() const
+{
+	return true;
+}
+
+bool Verb::isChecked() const
+{
+	return false;
 }
 
 } // namespace RBX

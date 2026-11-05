@@ -448,6 +448,15 @@ if (TARGET app)
   target_link_libraries(app PRIVATE fmodex)
 endif()
 
+add_library(app_client OBJECT Client/App/v8datamodel/Commands.cpp)
+target_compile_definitions(app_client PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS _RELEASE BOOST_IOSTREAMS_NO_LIB)
+target_include_directories(app_client PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS} ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
+if (MSVC_FOR_DECOMP)
+  target_compile_options(app_client PRIVATE /O2 /Ob2 /Oi /Oy /GF /Gy /GS- /fp:fast)
+elseif (MSVC)
+  target_compile_options(app_client PRIVATE /EHsc)
+endif()
+
 add_engine_library(network
   OPTIONS /O2
   SOURCES ${OPENRBX_NETWORK_SOURCES} ${OPENRBX_RAKNET_SOURCES}
@@ -647,7 +656,7 @@ if (MSVC_FOR_DECOMP)
   )
 
   set(OPENRBX_CLIENT_ENGINE_LIBRARIES)
-  foreach(lib rbxview renderlib network app appdraw lua)
+  foreach(lib rbxview renderlib network app app_client appdraw lua)
     if (TARGET ${lib})
       list(APPEND OPENRBX_CLIENT_ENGINE_LIBRARIES ${lib})
     endif()
