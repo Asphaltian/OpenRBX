@@ -60,8 +60,6 @@ namespace RBX {
 // RBX::MarshaledListener<RBX::Selection,RBX::SelectionChanged,RBX::Selection,RBX::SelectionChanged>::EventData::`scalar deleting destructor'
 // TEMPLATE: ROBLOX 0x0046a870
 // ??1?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@UAE@XZ
-// SYNTHETIC: ROBLOX 0x0046a900
-// RBX::MarshaledListener<RBX::Selection,RBX::SelectionChanged,RBX::Selection,RBX::SelectionChanged>::`scalar deleting destructor'
 // TEMPLATE: ROBLOX 0x0046ac00
 // ?VTable0x0c@?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@MAEXPBVSelection@2@VSelectionChanged@2@@Z
 // clang-format on

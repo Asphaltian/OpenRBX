@@ -14,6 +14,9 @@ class ActiveDocView
 public:
 	static void FUN_004054f0(bool activate, CRobloxDoc* doc);
 
+	// FUNCTION: ROBLOX 0x004204e0
+	void FUN_004204e0() { VTable0x00(g_unk0x00952d9c, boost::shared_ptr<RBX::DataModel>()); }
+
 protected:
 	ActiveDocView();
 	~ActiveDocView();

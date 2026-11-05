@@ -7,6 +7,8 @@
 namespace RBX {
 
 // clang-format off
+// SYNTHETIC: ROBLOX 0x0046a900
+// RBX::FilteredListener<RBX::Selection,RBX::SelectionChanged,RBX::Selection,RBX::SelectionChanged>::`scalar deleting destructor'
 // TEMPLATE: ROBLOX 0x0046aca0
 // ?VTable0x0c@?$FilteredListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@MAEXPBVSelection@2@VSelectionChanged@2@@Z
 // clang-format on
