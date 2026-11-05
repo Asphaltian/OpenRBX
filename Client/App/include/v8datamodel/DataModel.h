@@ -177,10 +177,10 @@ private:
 // TEMPLATE: ROBLOX 0x00411b10
 // RBX::StateStack<RBX::XmlState>::clearStackAfter
 // SYNTHETIC: WEBSERVICE 0x10079310
-// STUB: ROBLOX 0x0046f580
+// SYNTHETIC: ROBLOX 0x0046f580
 // TextXmlWriterWithEmbeddedContent::~TextXmlWriterWithEmbeddedContent
 // FUNCTION: WEBSERVICE 0x100798c0
-// STUB: ROBLOX 0x0046fd90
+// FUNCTION: ROBLOX 0x0046fd90
 // TextXmlWriterWithEmbeddedContent::TextXmlWriterWithEmbeddedContent
 // TEMPLATE: WEBSERVICE 0x10079df0
 // TEMPLATE: ROBLOX 0x005932f0
