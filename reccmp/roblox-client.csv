@@ -1782,6 +1782,7 @@ address,type,symbol,name,module,size
 00809218,global,??_7?$TypedPropertyDescriptor@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@RBX@@6B@,,,
 00809240,global,??_7?$TypedPropertyDescriptor@H@Reflection@RBX@@6B@,,,
 008092a8,global,??_7?$BoundProp@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$00@Reflection@RBX@@6B@,,,
+008070d4,global,??_7Item@CPropGrid@@6B@,,,
 008096a8,global,??_7?$BoundPropGetSet@VCRenderSettings@@@?$BoundProp@_N$00@Reflection@RBX@@6B@,,,
 008096b8,global,??_7?$BoundPropGetSet@VCRenderSettings@@@?$BoundProp@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@$00@Reflection@RBX@@6B@,,,
 00809718,global,??_7?$GetSetImpl@P8CRenderSettings@@BE?AVVector2int16@G3D@@XZP81@AEXV23@@Z@?$PropDescriptor@VCRenderSettings@@VVector2int16@G3D@@@Reflection@RBX@@6B@,,,

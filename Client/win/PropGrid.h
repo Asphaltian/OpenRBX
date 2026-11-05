@@ -31,6 +31,24 @@ public:
 	// SYNTHETIC: ROBLOX 0x00445c20
 	// CPropGrid::`scalar deleting destructor'
 
+	// SIZE 0x18
+	class Item
+	{
+	public:
+		Item(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid);
+
+		virtual void VTable0x00(
+			const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >&
+				instances
+		) = 0; // vtable+0x00
+
+	protected:
+		void FUN_0043e120(const RBX::Reflection::ClassDescriptor* classDescriptor);
+
+		std::vector<const RBX::Reflection::ClassDescriptor*> m_unk0x04; // 0x04
+		CPropGrid* m_unk0x14;                                           // 0x14
+	};
+
 protected:
 	virtual void onEvent(const RBX::Instance* source, RBX::PropertyChanged event);
 

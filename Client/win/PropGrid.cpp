@@ -1,5 +1,20 @@
 #include "PropGrid.h"
 
+#include <algorithm>
+#include <boost/bind.hpp>
+
+inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Reflection::ClassDescriptor::
+	derivedClasses_begin() const
+{
+	return derivedClasses.begin();
+}
+
+inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Reflection::ClassDescriptor::
+	derivedClasses_end() const
+{
+	return derivedClasses.end();
+}
+
 IMPLEMENT_DYNAMIC(CPropGrid, CXTPPropertyGrid)
 IMPLEMENT_DYNAMIC(CSelectionPropGrid, CPropGrid)
 IMPLEMENT_DYNAMIC(CDataModelPropGrid, CSelectionPropGrid)
@@ -8,6 +23,23 @@ IMPLEMENT_DYNAMIC(CDataModelPropGrid, CSelectionPropGrid)
 void CPropGrid::onEvent(const RBX::Instance* source, RBX::PropertyChanged event)
 {
 	STUB(0x43df20);
+}
+
+// FUNCTION: ROBLOX 0x0043e120
+void CPropGrid::Item::FUN_0043e120(const RBX::Reflection::ClassDescriptor* classDescriptor)
+{
+	m_unk0x04.push_back(classDescriptor);
+	std::for_each(
+		classDescriptor->derivedClasses_begin(),
+		classDescriptor->derivedClasses_end(),
+		boost::bind(&Item::FUN_0043e120, this, _1)
+	);
+}
+
+// FUNCTION: ROBLOX 0x0043eba0
+CPropGrid::Item::Item(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid) : m_unk0x14(grid)
+{
+	FUN_0043e120(&descriptor.owner);
 }
 
 // STUB: ROBLOX 0x00445430
