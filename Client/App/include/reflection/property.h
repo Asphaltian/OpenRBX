@@ -711,11 +711,13 @@ public:
 	// TEMPLATE: ROBLOX 0x005660d0
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::CoordinateFrame>::equalValues
 	// TEMPLATE: WEBSERVICE 0x1009baa0
-	// STUB: ROBLOX 0x00448890
 	// RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>::TypedPropertyDescriptor<G3D::Vector3>
-	// FUNCTION: WEBSERVICE 0x100434e0
-	// STUB: ROBLOX 0x005aeb70
+	// TEMPLATE: ROBLOX 0x00448890
 	// RBX::Reflection::TypedPropertyDescriptor<float>::TypedPropertyDescriptor<float>
+	// FUNCTION: WEBSERVICE 0x100434e0
+	// RBX::Reflection::TypedPropertyDescriptor<float>::TypedPropertyDescriptor<float>
+	// TEMPLATE: ROBLOX 0x005aeb70
+	// RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>::TypedPropertyDescriptor<G3D::Vector3>
 	// FUNCTION: WEBSERVICE 0x10048bd0
 	// FUNCTION: ROBLOX 0x00446320
 	// RBX::Reflection::TypedPropertyDescriptor<bool>::TypedPropertyDescriptor<bool>
