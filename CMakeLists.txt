@@ -616,6 +616,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/SelectionCaption.cpp
     Client/win/SettingsDialog.cpp
     Client/win/VersionInfo.cpp
+    Client/win/WebToolbox.cpp
     Client/win/Workspace.cpp
     Client/win/ActiveDocView.cpp
     Client/win/ReflectionMetadata.cpp

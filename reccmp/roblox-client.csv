@@ -3661,3 +3661,5 @@ address,type,symbol,name,module,size
 0080f198,global,??_7CSelectionCaption@@6BCXTThemeManagerStyleHost@@@,,,
 0080f190,global,??_7CSelectionCaption@@6BActiveDocView@@@,,,
 0080f178,global,??_7CSelectionCaption@@6B?$FilteredListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@@,,,
+0080fa88,global,?classCWebToolbox@CWebToolbox@@2UCRuntimeClass@@B,,,
+0080fad4,global,??_7CWebToolbox@@6B@,,,
