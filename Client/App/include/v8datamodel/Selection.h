@@ -66,8 +66,6 @@ public:
 		return size() > 0 ? selection->front() : boost::shared_ptr<Instance>();
 	}
 
-	boost::shared_ptr<Instance> back() const;
-
 	template <class _InIt>
 	void setSelection(_InIt _First, _InIt _Last)
 	{
@@ -82,6 +80,10 @@ public:
 
 	// FUNCTION: ROBLOX 0x00410ad0
 	std::vector<boost::shared_ptr<Instance> >::const_iterator end() const { return selection->end(); }
+
+	// FUNCTION: ROBLOX 0x00597cd0
+	boost::shared_ptr<Instance> back() const { return size() > 0 ? selection->back() : boost::shared_ptr<Instance>(); }
+
 	const CopyOnWrite<std::vector<boost::shared_ptr<Instance> > >& getSelection() const;
 
 	void clearSelection();

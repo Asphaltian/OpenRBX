@@ -8,6 +8,7 @@
 #include "v8datamodel/Backpack.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/DataModel.h"
+#include "v8datamodel/Feature.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Selection.h"
 #include "v8world/SpatialHash.h"
@@ -297,10 +298,18 @@ bool JoinCommand::isEnabled() const
 	return false;
 }
 
-// STUB: ROBLOX 0x0059a110
+// FUNCTION: ROBLOX 0x0059a110
 void JoinCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59a110);
+	FUN_00596660(dataModel);
+
+	Selection* currentSelection = dataModel ? dataModel->create<Selection>() : NULL;
+
+	if (currentSelection->size() == 2) {
+		boost::shared_ptr<Instance> first = currentSelection->front();
+		boost::shared_ptr<Instance> second = currentSelection->back();
+		FUN_0061a840(first.get(), second.get());
+	}
 }
 
 // FUNCTION: ROBLOX 0x0059a230

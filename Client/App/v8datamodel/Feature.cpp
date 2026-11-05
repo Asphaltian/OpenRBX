@@ -376,6 +376,12 @@ MotorFeature::MotorFeature()
 	setName("MotorFeature");
 }
 
+// STUB: ROBLOX 0x0061a840
+void FUN_0061a840(Instance* first, Instance* second)
+{
+	STUB(0x61a840);
+}
+
 // FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
 // FUNCTION: ROBLOX 0x006171e0 FOLDED
 Hole* VelocityMotor::getHole() const
