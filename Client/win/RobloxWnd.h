@@ -14,18 +14,41 @@ public:
 	virtual ~CRobloxWnd();
 
 	void FUN_0045fc50(bool active);
+	void FUN_00460430();
+
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
 	virtual void InvalidateRunView();
 	virtual void AdjustThrottle(double frameRate);
 
 	virtual std::string getMetric(const std::string& metric) const;
 
+protected:
+	afx_msg LRESULT FUN_0045f4d0(WPARAM wParam, LPARAM lParam);
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
+	afx_msg void OnKillFocus(CWnd* pNewWnd);
+	afx_msg void OnWindowPosChanging(WINDOWPOS* lpwndpos);
+	afx_msg void OnClose();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnPaint();
+	afx_msg void OnDestroy();
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x00464210
+	// ?GetMessageMap@CRobloxWnd@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	undefined m_unk0x5c[0x7c - 0x5c]; // 0x5c
 	DxUserInput* m_unk0x7c;           // 0x7c
 	undefined m_unk0x80[0x88 - 0x80]; // 0x80
 	double m_unk0x88;                 // 0x88
-	undefined m_unk0x90[0xb8 - 0x90]; // 0x90
+	undefined m_unk0x90[0xa0 - 0x90]; // 0x90
+	bool m_unk0xa0;                   // 0xa0
+	undefined m_unk0xa1[0xb8 - 0xa1]; // 0xa1
 };
 
 DECOMP_SIZE_ASSERT(CRobloxWnd, 0xb8)

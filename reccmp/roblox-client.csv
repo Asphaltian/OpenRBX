@@ -3436,3 +3436,4 @@ address,type,symbol,name,module,size
 008058c0,global,?classCMultiPlayerPane@CMultiPlayerPane@@2UCRuntimeClass@@B,,,
 0080b5fc,global,??_7CRobloxDoc@@6B@,,,
 0080b53c,global,??_7?$VerbBinder@VCRobloxDoc@@VCDocument@@@@6B@,,,
+0080db5c,global,messageMap___CRobloxWnd::GetThisMessageMap,,,
