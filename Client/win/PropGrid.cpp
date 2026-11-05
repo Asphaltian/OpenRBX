@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <boost/bind.hpp>
+#include <cstdio>
+#include <string>
 
 inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Reflection::ClassDescriptor::
 	derivedClasses_begin() const
@@ -18,6 +20,28 @@ inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Refle
 IMPLEMENT_DYNAMIC(CPropGrid, CXTPPropertyGrid)
 IMPLEMENT_DYNAMIC(CSelectionPropGrid, CPropGrid)
 IMPLEMENT_DYNAMIC(CDataModelPropGrid, CSelectionPropGrid)
+
+// FUNCTION: ROBLOX 0x0043bc00
+template <>
+void XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<float> >::VTable0xe8(
+	const float& value
+)
+{
+	char buffer[32];
+	sprintf(buffer, "%.3g", value);
+	SetValue(buffer);
+}
+
+// FUNCTION: ROBLOX 0x0043c5f0
+template <>
+float XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<float> >::VTable0xe4()
+{
+	float result;
+	if (RBX::StringConverter<float>::convertToValue((LPCTSTR) GetValue(), result)) {
+		return result;
+	}
+	return 0.0f;
+}
 
 // STUB: ROBLOX 0x0043df20
 void CPropGrid::onEvent(const RBX::Instance* source, RBX::PropertyChanged event)
@@ -40,6 +64,22 @@ void CPropGrid::Item::FUN_0043e120(const RBX::Reflection::ClassDescriptor* class
 CPropGrid::Item::Item(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid) : m_unk0x14(grid)
 {
 	FUN_0043e120(&descriptor.owner);
+}
+
+// STUB: ROBLOX 0x0043f280
+template <class T, class Base, class Descriptor>
+void XItem<T, Base, Descriptor>::VTable0x00(
+	const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& instances
+)
+{
+	STUB(0x43f280);
+}
+
+// STUB: ROBLOX 0x00443670
+template <class T, class Base, class Descriptor>
+void XItem<T, Base, Descriptor>::FUN_00443670(const T& value)
+{
+	STUB(0x443670);
 }
 
 // STUB: ROBLOX 0x00445430
@@ -72,3 +112,5 @@ CPropGrid::CPropGrid() : m_unk0x194(NULL), m_unk0x1c0(false), m_unk0x1c1(false)
 {
 	m_bHelpVisible = FALSE;
 }
+
+template class XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<float> >;

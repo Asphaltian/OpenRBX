@@ -53,6 +53,9 @@ protected:
 	virtual void onEvent(const RBX::Instance* source, RBX::PropertyChanged event);
 
 private:
+	template <class T, class Base, class Descriptor>
+	friend class XItem;
+
 	boost::recursive_mutex m_unk0x188;                                            // 0x188
 	RBX::DataModel* m_unk0x194;                                                   // 0x194
 	std::vector<undefined4*> m_unk0x198;                                          // 0x198
@@ -66,6 +69,66 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(CPropGrid, 0x1dc)
+
+// SIZE 0x128
+template <class T, class Base, class Descriptor>
+class XItem : public Base, public CPropGrid::Item
+{
+public:
+	XItem(const Descriptor& descriptor, CPropGrid* grid)
+		: Base(descriptor.name.c_str()), Item(descriptor, grid), m_unk0x124(&descriptor)
+	{
+		m_bHidden = TRUE;
+		SetReadOnly(descriptor.isReadOnly());
+	}
+
+	virtual void OnValueChanged(CString strValue)
+	{
+		Base::OnValueChanged(strValue);
+		FUN_00443670(VTable0xe4());
+	}
+
+	virtual void VTable0x00(
+		const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >&
+			instances
+	);
+
+	virtual T VTable0xe4();                                  // vtable+0xe4
+	virtual void VTable0xe8(const T& value);                 // vtable+0xe8
+	virtual bool VTable0xec(const T& first, const T& second) // vtable+0xec
+	{
+		return first == second;
+	}
+	virtual void VTable0xf0(RBX::Instance* instance, const T& value) // vtable+0xf0
+	{
+		RBX::DataModel::Lock lock(m_unk0x14->m_unk0x194);
+		m_unk0x124->setValue(instance, value);
+	}
+	virtual bool VTable0xf4() // vtable+0xf4
+	{
+		return GetValue().IsEmpty();
+	}
+
+protected:
+	void FUN_00443670(const T& value);
+
+	const Descriptor* m_unk0x124; // 0x124
+};
+
+// clang-format off
+// TEMPLATE: ROBLOX 0x0043f100
+// ??0?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@M@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x0043f1c0
+// ?VTable0xec@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAE_NABM0@Z
+// TEMPLATE: ROBLOX 0x0043f560
+// ?VTable0xf4@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAE_NXZ
+// SYNTHETIC: ROBLOX 0x0043f830
+// ??_E?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEPAXI@Z
+// TEMPLATE: ROBLOX 0x004412e0
+// ?VTable0xf0@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXPAVInstance@RBX@@ABM@Z
+// STUB: ROBLOX 0x004445e0
+// ?OnValueChanged@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// clang-format on
 
 // SIZE 0x1e8
 class CSelectionPropGrid : public CPropGrid, public RBX::Listener<RBX::Selection, RBX::SelectionChanged>

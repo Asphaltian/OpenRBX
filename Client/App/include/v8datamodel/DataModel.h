@@ -65,7 +65,8 @@ public:
 	class Lock
 	{
 	public:
-		Lock(const DataModel* dataModel);
+		// FUNCTION: ROBLOX 0x0043cd60
+		Lock(const DataModel* dataModel) : lock(NULL) { doLock(dataModel); }
 
 		// FUNCTION: WEBSERVICE 0x1000cd40
 		// FUNCTION: ROBLOX 0x0040e150
