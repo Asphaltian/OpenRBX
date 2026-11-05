@@ -373,8 +373,8 @@ bool Math::fuzzyEq(const CoordinateFrame& c0, const CoordinateFrame& c1, float e
 	return fuzzyEq(c0.rotation, c1.rotation, epsR) ? true : false;
 }
 
-// STUB: WEBSERVICE 0x100df2c0
-// STUB: ROBLOX 0x005f04b0
+// FUNCTION: WEBSERVICE 0x100df2c0
+// FUNCTION: ROBLOX 0x005f04b0
 Matrix3 Math::alignAxesClosest(const Matrix3& align, const Matrix3& target)
 {
 	float dots[3][3];
@@ -389,7 +389,7 @@ Matrix3 Math::alignAxesClosest(const Matrix3& align, const Matrix3& target)
 		for (int i = 0; i < 3; ++i) {
 			Vector3 tAxis = target.getColumn(i);
 
-			dots[a][i] = tAxis.dot(aAxis);
+			dots[a][i] = aAxis.dot(tAxis);
 
 			if (fabs(dots[a][i]) > fabs(best)) {
 				aBest = a;
