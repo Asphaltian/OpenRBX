@@ -57,6 +57,24 @@ void XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<i
 	SetValue(buffer);
 }
 
+// FUNCTION: ROBLOX 0x0043bcc0
+template <>
+G3D::Color3 XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropertyDescriptor<G3D::Color3> >::
+	VTable0xe4()
+{
+	COLORREF color = GetColor();
+	return G3D::Color3(GetRValue(color) / 255.0, GetGValue(color) / 255.0, GetBValue(color) / 255.0);
+}
+
+// FUNCTION: ROBLOX 0x0043bd10
+template <>
+void XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropertyDescriptor<G3D::Color3> >::VTable0xe8(
+	const G3D::Color3& value
+)
+{
+	SetColor(RGB(value.r * 255.0, value.g * 255.0, value.b * 255.0));
+}
+
 // STUB: ROBLOX 0x0043df20
 void CPropGrid::onEvent(const RBX::Instance* source, RBX::PropertyChanged event)
 {
@@ -130,3 +148,4 @@ CPropGrid::CPropGrid() : m_unk0x194(NULL), m_unk0x1c0(false), m_unk0x1c1(false)
 template class XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<float> >;
 template class XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<int> >;
 template class XItem<bool, CXTPPropertyGridItemBool, RBX::Reflection::TypedPropertyDescriptor<bool> >;
+template class XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropertyDescriptor<G3D::Color3> >;

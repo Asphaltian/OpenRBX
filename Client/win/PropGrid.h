@@ -145,16 +145,26 @@ protected:
 // ?VTable0xf4@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAE_NXZ
 // SYNTHETIC: ROBLOX 0x0043f830
 // ??_E?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEPAXI@Z
+// TEMPLATE: ROBLOX 0x0043f890
+// ??0?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x0043f9a0
+// ?VTable0xf0@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAEXPAVInstance@RBX@@ABVColor3@G3D@@@Z
+// SYNTHETIC: ROBLOX 0x0043fc60
+// ??_E?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAEPAXI@Z
 // TEMPLATE: ROBLOX 0x0043fd80
 // ?VTable0xec@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAE_NABH0@Z
 // TEMPLATE: ROBLOX 0x004412e0
 // ?VTable0xf0@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXPAVInstance@RBX@@ABM@Z
+// TEMPLATE: ROBLOX 0x00440610
+// ?VTable0xec@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAE_NABVColor3@G3D@@0@Z
 // STUB: ROBLOX 0x00444560
 // ?OnValueChanged@?$XItem@_NVCXTPPropertyGridItemBool@@V?$TypedPropertyDescriptor@_N@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // STUB: ROBLOX 0x004445e0
 // ?OnValueChanged@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // STUB: ROBLOX 0x00444660
 // ?OnValueChanged@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// STUB: ROBLOX 0x004446e0
+// ?OnValueChanged@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // clang-format on
 
 // SIZE 0x1e8
