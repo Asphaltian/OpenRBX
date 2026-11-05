@@ -524,6 +524,20 @@ const Matrix3& Math::matrixTiltZ()
 	return m;
 }
 
+// STUB: ROBLOX 0x005f0b50
+const Matrix3 Math::matrixTiltQuadrant(int p_unk0x04)
+{
+	STUB(0x5f0b50);
+	return Matrix3::identity();
+}
+
+// STUB: ROBLOX 0x005f0c20
+int Math::toYAxisQuadrant(const CoordinateFrame& p_unk0x04)
+{
+	STUB(0x5f0c20);
+	return 0;
+}
+
 // FUNCTION: WEBSERVICE 0x100df8e0
 // FUNCTION: ROBLOX 0x005f0c90
 const Matrix3& Math::getAxisRotationMatrix(int face)

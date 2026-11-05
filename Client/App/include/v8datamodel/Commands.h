@@ -5,6 +5,7 @@
 #include "v8datamodel/Workspace.h"
 #include "v8tree/Service.h"
 #include "v8tree/Verb.h"
+#include "v8world/Controller.h"
 
 #include <string>
 
@@ -152,6 +153,96 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(EditSelectionVerb, 0x24)
+
+// SIZE 0x24
+class RotateAxisCommand : public EditSelectionVerb
+{
+protected:
+	RotateAxisCommand(std::string name, DataModel* dataModel);
+
+	virtual G3D::Matrix3 getRotationAxis() = 0; // vtable+0x14
+
+public:
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(RotateAxisCommand, 0x24)
+
+// SIZE 0x24
+class ControllerCommand : public EditSelectionVerb
+{
+protected:
+	ControllerCommand(std::string name, DataModel* dataModel);
+
+	void setController(Controller::ControllerType controllerType);
+
+public:
+	virtual bool isEnabled() const;
+};
+
+DECOMP_SIZE_ASSERT(ControllerCommand, 0x24)
+
+// SIZE 0x28
+class BoolPropertyVerb : public EditSelectionVerb
+{
+private:
+	const Name& propertyName; // 0x24
+
+public:
+	BoolPropertyVerb(const std::string& name, DataModel* dataModel, const char* property);
+
+protected:
+	virtual void doIt(IDataState* dataState);
+	virtual bool isChecked() const;
+};
+
+DECOMP_SIZE_ASSERT(BoolPropertyVerb, 0x28)
+
+// SIZE 0x24
+class RotateSelectionVerb : public RotateAxisCommand
+{
+public:
+	RotateSelectionVerb(DataModel* dataModel);
+
+protected:
+	virtual G3D::Matrix3 getRotationAxis();
+};
+
+DECOMP_SIZE_ASSERT(RotateSelectionVerb, 0x24)
+
+// SIZE 0x24
+class TiltSelectionVerb : public RotateAxisCommand
+{
+public:
+	TiltSelectionVerb(DataModel* dataModel);
+
+protected:
+	virtual G3D::Matrix3 getRotationAxis();
+};
+
+DECOMP_SIZE_ASSERT(TiltSelectionVerb, 0x24)
+
+// SIZE 0x24
+class PrimaryControllerCommand : public ControllerCommand
+{
+public:
+	PrimaryControllerCommand(DataModel* dataModel);
+
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(PrimaryControllerCommand, 0x24)
+
+// SIZE 0x24
+class SecondaryControllerCommand : public ControllerCommand
+{
+public:
+	SecondaryControllerCommand(DataModel* dataModel);
+
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(SecondaryControllerCommand, 0x24)
 
 // SIZE 0x24
 class GroupSelectionVerb : public EditSelectionVerb

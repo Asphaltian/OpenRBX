@@ -1,6 +1,7 @@
 #include "v8datamodel/Commands.h"
 
 #include "gui/GUI.h"
+#include "util/Math.h"
 #include "util/Sound.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/DataModel.h"
@@ -48,6 +49,12 @@ ClearBackpack::ClearBackpack(DataModel* dataModel) : Verb(dataModel, "ClearBackp
 void ClearBackpack::doIt(IDataState* dataState)
 {
 	STUB(0x596900);
+}
+
+// FUNCTION: ROBLOX 0x00596930
+G3D::Matrix3 RotateSelectionVerb::getRotationAxis()
+{
+	return Math::matrixRotateY();
 }
 
 // FUNCTION: ROBLOX 0x00596980
@@ -119,6 +126,12 @@ bool StatsCommand::isChecked() const
 void EngineStatsCommand::doIt(IDataState* dataState)
 {
 	STUB(0x596fa0);
+}
+
+// FUNCTION: ROBLOX 0x00597040
+G3D::Matrix3 TiltSelectionVerb::getRotationAxis()
+{
+	return Math::matrixTiltQuadrant(Math::toYAxisQuadrant(workspace->getGCamera().getCoordinateFrame()));
 }
 
 // FUNCTION: ROBLOX 0x00597090
@@ -262,6 +275,43 @@ void ClearStarterpack::doIt(IDataState* dataState)
 	STUB(0x59a270);
 }
 
+// FUNCTION: ROBLOX 0x00598960
+RotateAxisCommand::RotateAxisCommand(std::string name, DataModel* dataModel) : EditSelectionVerb(name, dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x005989d0
+ControllerCommand::ControllerCommand(std::string name, DataModel* dataModel) : EditSelectionVerb(name, dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598a40
+BoolPropertyVerb::BoolPropertyVerb(const std::string& name, DataModel* dataModel, const char* property)
+	: EditSelectionVerb(name, dataModel), propertyName(Name::declare(property, -1))
+{
+}
+
+// FUNCTION: ROBLOX 0x00598e50
+RotateSelectionVerb::RotateSelectionVerb(DataModel* dataModel) : RotateAxisCommand("SelectionRotate", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598e80
+TiltSelectionVerb::TiltSelectionVerb(DataModel* dataModel) : RotateAxisCommand("SelectionTilt", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598eb0
+PrimaryControllerCommand::PrimaryControllerCommand(DataModel* dataModel) : ControllerCommand("Controller1", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598ee0
+SecondaryControllerCommand::SecondaryControllerCommand(DataModel* dataModel)
+	: ControllerCommand("Controller2", dataModel)
+{
+}
+
 // FUNCTION: ROBLOX 0x0059a2a0
 EditSelectionVerb::EditSelectionVerb(VerbContainer* container, std::string name, DataModel* dataModel)
 	: Verb(container, name), workspace(shared_from(dataModel ? dataModel->find<Workspace>() : NULL)),
@@ -275,6 +325,12 @@ bool DuplicateSelectionVerb::isEnabled() const
 	return (dataModel ? dataModel->create<Selection>() : NULL)->size() > 0;
 }
 
+// STUB: ROBLOX 0x0059a410
+void ControllerCommand::setController(Controller::ControllerType controllerType)
+{
+	STUB(0x59a410);
+}
+
 // STUB: ROBLOX 0x0059a9f0
 void GroupSelectionVerb::doIt(IDataState* dataState)
 {
@@ -285,6 +341,12 @@ void GroupSelectionVerb::doIt(IDataState* dataState)
 void UngroupSelectionVerb::doIt(IDataState* dataState)
 {
 	STUB(0x59aaf0);
+}
+
+// STUB: ROBLOX 0x0059ad50
+void RotateAxisCommand::doIt(IDataState* dataState)
+{
+	STUB(0x59ad50);
 }
 
 // STUB: ROBLOX 0x0059af30
@@ -315,6 +377,22 @@ void WatchCameraCommand::doIt(IDataState* dataState)
 void MoveDownSelectionVerb::doIt(IDataState* dataState)
 {
 	STUB(0x59b3a0);
+}
+
+// STUB: ROBLOX 0x0059b4d0
+void PrimaryControllerCommand::doIt(IDataState* dataState)
+{
+	setController(Controller::PRIMARY_CONTROLLER);
+	dataState->clearStack();
+	dataState->setDirty(true);
+}
+
+// STUB: ROBLOX 0x0059b500
+void SecondaryControllerCommand::doIt(IDataState* dataState)
+{
+	setController(Controller::SECONDARY_CONTROLLER);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059b530
@@ -383,6 +461,19 @@ void FixedCameraCommand::doIt(IDataState* dataState)
 	getCamera()->setCameraType(Camera::FIXED_CAMERA);
 	dataState->clearStack();
 	dataState->setDirty(true);
+}
+
+// STUB: ROBLOX 0x0059b850
+bool BoolPropertyVerb::isChecked() const
+{
+	STUB(0x59b850);
+	return false;
+}
+
+// STUB: ROBLOX 0x0059b900
+void BoolPropertyVerb::doIt(IDataState* dataState)
+{
+	STUB(0x59b900);
 }
 
 // STUB: ROBLOX 0x0059ba50
@@ -481,6 +572,13 @@ bool FollowCameraCommand::isEnabled() const
 bool WatchCameraCommand::isEnabled() const
 {
 	STUB(0x59c9c0);
+	return false;
+}
+
+// STUB: ROBLOX 0x0059ca20
+bool ControllerCommand::isEnabled() const
+{
+	STUB(0x59ca20);
 	return false;
 }
 
