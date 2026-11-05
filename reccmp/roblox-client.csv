@@ -16,6 +16,7 @@ address,type,symbol,name,module,size
 00401c10,library,??0CParseBuffer@CRegParser@ATL@@QAE@H@Z,,,
 00401c60,library,?Append@CParseBuffer@CRegParser@ATL@@QAEHPBDH@Z,,,
 00401d00,library,?VTFromRegType@CRegParser@ATL@@KAHPBDAAG@Z,,,
+009544e4,global,cursor___DxUserInput::FUN_0046ca90,,,
 00401e20,library,?StrChrA@CRegParser@ATL@@KAPADPADD@Z,,,
 00401ff0,library,?CanForceRemoveKey@CRegParser@ATL@@IAEHPBD@Z,,,
 00402030,library,?HasSubKeys@CRegParser@ATL@@IAEHPAUHKEY__@@@Z,,,

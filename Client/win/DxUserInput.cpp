@@ -119,18 +119,24 @@ G3D::ReferenceCountedPointer<RBX::TextureProxyBase> DxUserInput::getGameCursor(R
 	return NULL;
 }
 
-// STUB: ROBLOX 0x0046c4f0
+// FUNCTION: ROBLOX 0x0046c4f0
 G3D::Vector2 DxUserInput::FUN_0046c4f0()
 {
-	STUB(0x46c4f0);
-	return G3D::Vector2();
+	ATL::CCritSecLock lock(m_unk0x34);
+	G3D::Rect2D rect = m_unk0x58;
+	return rect.center() + m_unk0x70;
 }
 
-// STUB: ROBLOX 0x0046c590
+// FUNCTION: ROBLOX 0x0046c590
 G3D::Vector2 DxUserInput::FUN_0046c590()
 {
-	STUB(0x46c590);
-	return G3D::Vector2();
+	ATL::CCritSecLock lock(m_unk0x34);
+
+	CPoint point;
+	GetCursorPos(&point);
+	m_unk0x180->ScreenToClient(&point);
+
+	return G3D::Vector2(point.x, point.y);
 }
 
 // STUB: ROBLOX 0x0046c600
@@ -156,10 +162,25 @@ bool DxUserInput::keyDown(SDLKey key) const
 	return false;
 }
 
-// STUB: ROBLOX 0x0046ca90
+// FUNCTION: ROBLOX 0x0046ca90
 void DxUserInput::FUN_0046ca90()
 {
-	STUB(0x46ca90);
+	ATL::CCritSecLock lock(m_unk0x34);
+
+	if (m_unk0x18c && m_unk0x68) {
+		m_unk0x18c->Unacquire();
+
+		G3D::Vector2 position = FUN_0046c4f0();
+		CPoint point(position.x, position.y);
+		m_unk0x180->ClientToScreen(&point);
+		SetCursorPos(point.x, point.y);
+
+		static HCURSOR cursor = AfxGetApp()->LoadStandardCursor(IDC_ARROW);
+		SetCursor(cursor);
+
+		m_unk0x180->InvalidateRect(NULL);
+		m_unk0x68 = false;
+	}
 }
 
 // STUB: ROBLOX 0x0046cd90
