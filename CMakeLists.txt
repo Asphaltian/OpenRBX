@@ -597,6 +597,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/App.cpp
     Client/win/BrowserView.cpp
     Client/win/ChildFrm.cpp
+    Client/win/DxUserInput.cpp
     Client/win/ErrorUploader.cpp
     Client/win/LogManager.cpp
     Client/win/MainFrm.cpp

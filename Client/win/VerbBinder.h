@@ -6,7 +6,6 @@
 #include "v8tree/Verb.h"
 
 #include <boost/shared_ptr.hpp>
-#include <exception>
 #include <map>
 
 // clang-format off
