@@ -152,10 +152,12 @@ protected:
 		m_unk0x18->FUN_00436b00(data);
 	}
 
-private:
+protected:
 	std::vector<EventData*> m_unk0x04; // 0x04
-	DWORD m_unk0x14;                   // 0x14
-	CMarshalWindow* m_unk0x18;         // 0x18
+
+private:
+	DWORD m_unk0x14;           // 0x14
+	CMarshalWindow* m_unk0x18; // 0x18
 };
 
 } // namespace RBX

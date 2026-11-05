@@ -3654,3 +3654,4 @@ address,type,symbol,name,module,size
 00420f80,function,,,,181
 0080f140,global,??_7?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@6B@,,,
 0080f154,global,??_7EventData@?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@6B@,,,
+0080f160,global,??_7?$FilteredListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@6B@,,,
