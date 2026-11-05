@@ -52,6 +52,8 @@ public:
 	G3D::Vector2int16 FUN_00448300() const;
 	G3D::Vector2int16 FUN_00448310() const;
 	int FUN_00448320() const;
+	void FUN_0044cdd0(G3D::Vector2int16 p_unk0x04);
+	void FUN_0044ce00(G3D::Vector2int16 p_unk0x04);
 	void FUN_0044ce30(float p_unk0x04);
 	void FUN_0044ced0(float p_unk0x04);
 	void FUN_0044cf70(float p_unk0x04);

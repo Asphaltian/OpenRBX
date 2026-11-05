@@ -6,6 +6,7 @@
 
 #include <G3D/Color3.h>
 #include <G3D/CoordinateFrame.h>
+#include <G3D/Vector2int16.h>
 #include <G3D/Vector3.h>
 #include <boost/lexical_cast.hpp>
 #include <cstdio>
@@ -202,6 +203,39 @@ bool StringConverter<float>::convertToValue(const std::string& text, float& valu
 			return false;
 		}
 	}
+
+	return true;
+}
+
+// STUB: ROBLOX 0x005c8af0
+template <>
+std::string StringConverter<G3D::Vector2int16>::convertToString(const G3D::Vector2int16& value)
+{
+	std::string result = StringConverter<int>::convertToString(value.x);
+
+	result += ", ";
+	result += StringConverter<int>::convertToString(value.y);
+
+	return result;
+}
+
+// FUNCTION: ROBLOX 0x005c8ba0
+template <>
+bool StringConverter<G3D::Vector2int16>::convertToValue(const std::string& text, G3D::Vector2int16& value)
+{
+	int x = text.find_first_of(",;");
+	if (x < 0) {
+		return false;
+	}
+
+	value.x = atoi(text.substr(0, x).c_str());
+
+	int start = x + 1;
+	if ((int) text.size() < start) {
+		return false;
+	}
+
+	value.y = atoi(text.substr(start, text.size() - start).c_str());
 
 	return true;
 }

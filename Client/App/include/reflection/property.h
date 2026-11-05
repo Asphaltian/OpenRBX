@@ -18,6 +18,7 @@
 #include "v8datamodel/BrickColor.h"
 
 #include <G3D/CoordinateFrame.h>
+#include <G3D/Vector2int16.h>
 #include <G3D/Vector3.h>
 #include <boost/cast.hpp>
 #include <memory>
@@ -266,6 +267,19 @@ void TypedPropertyDescriptor<G3D::Vector3>::readValue(
 ) const;
 template <>
 void TypedPropertyDescriptor<G3D::Vector3>::writeValue(const DescribedBase* instance, XmlElement* element) const;
+
+template <>
+bool TypedPropertyDescriptor<G3D::Vector2int16>::hasStringValue() const;
+template <>
+std::string TypedPropertyDescriptor<G3D::Vector2int16>::getStringValue(const DescribedBase* instance) const;
+template <>
+bool TypedPropertyDescriptor<G3D::Vector2int16>::setStringValue(DescribedBase* instance, const std::string& text) const;
+template <>
+void TypedPropertyDescriptor<G3D::Vector2int16>::readValue(
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
+) const;
+template <>
+void TypedPropertyDescriptor<G3D::Vector2int16>::writeValue(const DescribedBase* instance, XmlElement* element) const;
 
 template <>
 bool TypedPropertyDescriptor<G3D::Color3>::hasStringValue() const;

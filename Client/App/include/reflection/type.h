@@ -389,6 +389,8 @@ DECOMP_SIZE_ASSERT(SignatureDescriptor, 0x10)
 // SYNTHETIC: WEBSERVICE 0x102214d0
 // SYNTHETIC: ROBLOX 0x007f2760
 // `RBX::Reflection::Type::singleton<G3D::Vector3>'::`2'::`dynamic atexit destructor for 'type''
+// SYNTHETIC: ROBLOX 0x007f2770
+// `RBX::Reflection::Type::singleton<G3D::Vector2int16>'::`2'::`dynamic atexit destructor for 'type''
 // SYNTHETIC: WEBSERVICE 0x102214e0
 // SYNTHETIC: ROBLOX 0x007f2780
 // `RBX::Reflection::Type::singleton<G3D::Color3>'::`2'::`dynamic atexit destructor for 'type''

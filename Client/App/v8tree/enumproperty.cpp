@@ -8,6 +8,7 @@
 #include "v8xml/XmlElement.h"
 
 #include <G3D/Color3.h>
+#include <G3D/Vector2int16.h>
 #include <G3D/Vector3.h>
 #include <G3D/g3dmath.h>
 #include <string>
@@ -112,6 +113,15 @@ template <>
 const Type& Type::singleton<G3D::Vector3>()
 {
 	static Type type("Vector3", typeid(G3D::Vector3));
+
+	return type;
+}
+
+// FUNCTION: ROBLOX 0x005a5ef0
+template <>
+const Type& Type::singleton<G3D::Vector2int16>()
+{
+	static Type type("Vector2int16", typeid(G3D::Vector2int16));
 
 	return type;
 }
@@ -340,6 +350,63 @@ bool TypedPropertyDescriptor<G3D::Vector3>::setStringValue(DescribedBase* instan
 {
 	G3D::Vector3 value;
 	if (StringConverter<G3D::Vector3>::convertToValue(text, value)) {
+		setValue(instance, value);
+		return true;
+	}
+
+	return false;
+}
+
+// FUNCTION: ROBLOX 0x005df250 FOLDED
+template <>
+bool TypedPropertyDescriptor<G3D::Vector2int16>::hasStringValue() const
+{
+	return true;
+}
+
+// FUNCTION: ROBLOX 0x005a6fd0
+template <>
+void TypedPropertyDescriptor<G3D::Vector2int16>::readValue(
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
+) const
+{
+	if (!element->isXsiNil()) {
+		const XmlElement* x = element->findFirstChildByTag(tag_X);
+		const XmlElement* y = element->findFirstChildByTag(tag_Y);
+
+		int xValue;
+		int yValue;
+		x->getValue(xValue);
+		y->getValue(yValue);
+		setValue(instance, G3D::Vector2int16(xValue, yValue));
+	}
+}
+
+// FUNCTION: ROBLOX 0x005a7060
+template <>
+void TypedPropertyDescriptor<G3D::Vector2int16>::writeValue(const DescribedBase* instance, XmlElement* element) const
+{
+	XmlElement* x = element->addChild(tag_X);
+	XmlElement* y = element->addChild(tag_Y);
+
+	G3D::Vector2int16 v = getValue(instance);
+	x->setValue(v.x);
+	y->setValue(v.y);
+}
+
+// FUNCTION: ROBLOX 0x005a7140
+template <>
+std::string TypedPropertyDescriptor<G3D::Vector2int16>::getStringValue(const DescribedBase* instance) const
+{
+	return StringConverter<G3D::Vector2int16>::convertToString(getValue(instance));
+}
+
+// FUNCTION: ROBLOX 0x005a7180
+template <>
+bool TypedPropertyDescriptor<G3D::Vector2int16>::setStringValue(DescribedBase* instance, const std::string& text) const
+{
+	G3D::Vector2int16 value;
+	if (StringConverter<G3D::Vector2int16>::convertToValue(text, value)) {
 		setValue(instance, value);
 		return true;
 	}

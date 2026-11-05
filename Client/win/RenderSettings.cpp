@@ -10,6 +10,14 @@ undefined4 g_unk0x0091a2e8 = 1;
 G3D::Vector2int16 g_unk0x0091a2ec(800, 600);
 undefined4 g_unk0x00953ae0;
 
+static RBX::Reflection::PropDescriptor<CRenderSettings, G3D::Vector2int16> g_unk0x00953b84(
+	"WindowSize", "Screen", &CRenderSettings::FUN_00448310, &CRenderSettings::FUN_0044ce00
+);
+
+static RBX::Reflection::PropDescriptor<CRenderSettings, G3D::Vector2int16> g_unk0x00953ba0(
+	"FullscreenSize", "Screen", &CRenderSettings::FUN_00448300, &CRenderSettings::FUN_0044cdd0
+);
+
 static RBX::Reflection::PropDescriptor<CRenderSettings, float> g_unk0x00953bbc(
 	"minShadingQuality", "Qaulity", &CRenderSettings::FUN_00448290, &CRenderSettings::FUN_0044ce30
 );
@@ -114,6 +122,24 @@ CRenderSettings::CRenderSettings()
 {
 	setName("Rendering");
 	RBX::Render::AggregatingSceneManager::aggregationSize = 1;
+}
+
+// FUNCTION: ROBLOX 0x0044cdd0
+void CRenderSettings::FUN_0044cdd0(G3D::Vector2int16 p_unk0x04)
+{
+	if (p_unk0x04 != m_unk0x13c) {
+		m_unk0x13c = p_unk0x04;
+		raisePropertyChanged(g_unk0x00953ba0);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0044ce00
+void CRenderSettings::FUN_0044ce00(G3D::Vector2int16 p_unk0x04)
+{
+	if (p_unk0x04 != m_unk0x140) {
+		m_unk0x140 = p_unk0x04;
+		raisePropertyChanged(g_unk0x00953b84);
+	}
 }
 
 // STUB: ROBLOX 0x0044ce30
