@@ -8,8 +8,10 @@
 #include "util/Utilities.h"
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"
+#include "v8world/Controller.h"
 
 #include <algorithm>
+#include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include <vector>
 
@@ -202,6 +204,17 @@ public:
 	typename std::vector<T*>::const_iterator begin() const { return filteredSelection.begin(); }
 	typename std::vector<T*>::const_iterator end() const { return filteredSelection.end(); }
 
+	// STUB: ROBLOX 0x00598770
+	// RBX::FilteredSelection<RBX::PVInstance>::FUN_00598770
+	T* FUN_00598770(Controller::ControllerType controllerType) const
+	{
+		typename std::vector<T*>::const_iterator it = std::find_if(
+			filteredSelection.begin(), filteredSelection.end(), boost::bind(&T::getControllerType, _1) != controllerType
+		);
+
+		return it != filteredSelection.end() ? *it : NULL;
+	}
+
 protected:
 	virtual void onAncestorChanged(const AncestorChanged& event)
 	{
@@ -243,6 +256,8 @@ protected:
 	// TEMPLATE: WEBSERVICE 0x100a1850
 	// TEMPLATE: ROBLOX 0x005e9e40
 	// RBX::FilteredSelection<RBX::PartInstance>::FilteredSelection<RBX::PartInstance>
+	// STUB: ROBLOX 0x005979b0
+	// RBX::FilteredSelection<RBX::PVInstance>::FilteredSelection<RBX::PVInstance>
 	// TEMPLATE: WEBSERVICE 0x100a1bd0
 	// TEMPLATE: ROBLOX 0x005ea1a0
 	// RBX::FilteredSelection<RBX::PartInstance>::~FilteredSelection<RBX::PartInstance>

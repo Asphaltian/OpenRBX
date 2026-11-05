@@ -23,6 +23,7 @@ address,type,symbol,name,module,size
 0040ed10,function,,,,134
 0040eda0,function,,,,187
 0040f030,function,,,,187
+00597520,library,??$?0V?$FilteredSelection@VPVInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@V?$FilteredSelection@VPVInstance@RBX@@@RBX@@@boost@@QAE@PAV?$FilteredSelection@VPVInstance@RBX@@@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,,,
 0041e700,function,,,,116
 0041e780,function,,,,116
 0041e800,function,,,,116
@@ -2817,6 +2818,11 @@ address,type,symbol,name,module,size
 0095a8bc,global,c___RBX::GuiItem::menuEnabledFill,,,
 0095a8d0,global,c___RBX::GuiItem::menuDisabledFill,,,
 0095a8e4,global,c___RBX::GuiItem::menuSelect,,,
+0095add8,global,"index___RBX::ServiceProvider::doGetClassIndex<RBX::FilteredSelection<RBX::PVInstance> >",,,
+0095addc,global,"??_B?1???$doGetClassIndex@V?$FilteredSelection@VPVInstance@RBX@@@RBX@@@ServiceProvider@RBX@@CAIXZ@51",,,
+0095adf4,global,"flag___RBX::ServiceProvider::getClassIndex<RBX::FilteredSelection<RBX::PVInstance> >",,,
+0095adfc,global,"isNullClassName___RBX::ServiceProvider::find<RBX::FilteredSelection<RBX::PVInstance> >",,,
+0095ae00,global,"??_B?8???$find@V?$FilteredSelection@VPVInstance@RBX@@@RBX@@@ServiceProvider@RBX@@QBEPAV?$FilteredSelection@VPVInstance@RBX@@@1@XZ@58",,,
 0095dca8,global,maxElevation___RBX::Camera::tiltRadians,,,
 0095f878,global,c___RBX::Color::red,,,
 0095f884,global,??_B?1??red@Color@RBX@@SAABVColor3@G3D@@XZ@51,,,

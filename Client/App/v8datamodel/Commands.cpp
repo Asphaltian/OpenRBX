@@ -72,6 +72,12 @@ G3D::Matrix3 RotateSelectionVerb::getRotationAxis()
 	return Math::matrixRotateY();
 }
 
+// FUNCTION: ROBLOX 0x00596950
+static void FUN_00596950(Controller::ControllerType controllerType, PVInstance* instance)
+{
+	instance->setControllerType(controllerType);
+}
+
 // FUNCTION: ROBLOX 0x00596980
 bool CameraTiltUpCommand::isEnabled() const
 {
@@ -356,10 +362,16 @@ bool DuplicateSelectionVerb::isEnabled() const
 	return (dataModel ? dataModel->create<Selection>() : NULL)->size() > 0;
 }
 
-// STUB: ROBLOX 0x0059a410
+// FUNCTION: ROBLOX 0x0059a410
 void ControllerCommand::setController(Controller::ControllerType controllerType)
 {
-	STUB(0x59a410);
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+
+	Controller::ControllerType newType =
+		filteredSelection->FUN_00598770(controllerType) ? controllerType : Controller::NO_CONTROLLER;
+
+	std::for_each(filteredSelection->begin(), filteredSelection->end(), boost::bind(&FUN_00596950, newType, _1));
 }
 
 // STUB: ROBLOX 0x0059a9f0
@@ -410,7 +422,7 @@ void MoveDownSelectionVerb::doIt(IDataState* dataState)
 	STUB(0x59b3a0);
 }
 
-// STUB: ROBLOX 0x0059b4d0
+// FUNCTION: ROBLOX 0x0059b4d0
 void PrimaryControllerCommand::doIt(IDataState* dataState)
 {
 	setController(Controller::PRIMARY_CONTROLLER);
@@ -418,7 +430,7 @@ void PrimaryControllerCommand::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059b500
+// FUNCTION: ROBLOX 0x0059b500
 void SecondaryControllerCommand::doIt(IDataState* dataState)
 {
 	setController(Controller::SECONDARY_CONTROLLER);
