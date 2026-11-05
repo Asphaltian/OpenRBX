@@ -686,6 +686,8 @@ if (MSVC_FOR_DECOMP)
     wininet
     winmm
     ws2_32
+    "${OPENRBX_3RDPARTY}/Microsoft DirectX SDK (November 2007)/Lib/x86/dinput8.lib"
+    "${OPENRBX_3RDPARTY}/Microsoft DirectX SDK (November 2007)/Lib/x86/dxguid.lib"
   )
 
   target_link_options(roblox PRIVATE "-MAP:$<TARGET_FILE_DIR:roblox>/$<TARGET_FILE_BASE_NAME:roblox>.map" "/FIXED:NO" "/MANIFEST:NO")

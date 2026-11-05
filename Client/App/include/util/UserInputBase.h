@@ -24,6 +24,8 @@ public:
 		WRAP_AUTO = 0,
 		WRAP_CENTER = 1,
 	};
+
+	UserInputBase();
 	void init(Adorn*);
 
 protected:
@@ -51,6 +53,9 @@ public:
 private:
 	ContentId currentCursorId;                                    // 0x04
 	G3D::ReferenceCountedPointer<TextureProxyBase> currentCursor; // 0x24
+
+	// SYNTHETIC: ROBLOX 0x0046bb90
+	// RBX::UserInputBase::~UserInputBase
 };
 
 DECOMP_SIZE_ASSERT(UserInputBase, 0x28)
