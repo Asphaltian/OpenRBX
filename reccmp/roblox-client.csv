@@ -103,6 +103,7 @@ address,type,symbol,name,module,size
 00422550,library,?Add@CImageList@@QAEHPAVCBitmap@@K@Z,,,
 00422c10,synthetic,??1SelectionChanged@RBX@@QAE@XZ,,,
 00569a20,library,?erase@?$_Tree@V?$_Tmap_traits@PBVName@RBX@@PAVVerb@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PAVVerb@2@@std@@@5@$0A@@std@@@std@@QAEIABQBVName@RBX@@@Z,,,
+006dad30,library,??0CXTPMDIFrameWnd@@QAE@XZ,,,
 00704660,library,?Create@CXTPStatusBar@@QAEHPAVCWnd@@KI@Z,,,
 006deb40,library,?InstallDockingPanes@CXTPDockingPaneManager@@QAE_NPAVCWnd@@_N@Z,,,
 006fc900,library,?Attach@CXTPTabClientWnd@@QAEHPAVCXTPMDIFrameWnd@@H@Z,,,

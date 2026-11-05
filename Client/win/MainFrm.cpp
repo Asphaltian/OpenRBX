@@ -945,25 +945,21 @@ BEGIN_MESSAGE_MAP(CMainFrame, CXTPMDIFrameWnd)
 END_MESSAGE_MAP()
 // clang-format on
 
-// STUB: ROBLOX 0x00436350
+// FUNCTION: ROBLOX 0x00436350
 CMainFrame::CMainFrame()
+	: m_unk0xe0(false), m_unk0xe1(false), m_unk0xe4(NULL), m_unk0xe8(NULL), m_unk0xec(false), m_unk0xed(false)
 {
-	m_unk0xe0 = false;
-	m_unk0xe1 = false;
-	m_unk0xe4 = NULL;
-	m_unk0xe8 = NULL;
-	m_unk0xec = false;
-	m_unk0xed = false;
+	{
+		DWORD value = 0;
+		ATL::CRegKey key;
 
-	DWORD value = 0;
-	ATL::CRegKey key;
+		if (key.Open(HKEY_CURRENT_USER, "Software\\ROBLOX Corporation\\Roblox", KEY_READ) == ERROR_SUCCESS) {
+			key.QueryDWORDValue("OverrideLockViewGamelayout", value);
+		}
 
-	if (key.Open(HKEY_CURRENT_USER, "Software\\ROBLOX Corporation\\Roblox", KEY_READ) == ERROR_SUCCESS) {
-		key.QueryDWORDValue("OverrideLockViewGamelayout", value);
+		g_unk0x0095391d = value == 1;
+		RBX::Accoutrement::writeUnlocked = g_unk0x0095391d;
 	}
-
-	g_unk0x0095391d = value == 1;
-	RBX::Accoutrement::writeUnlocked = g_unk0x0095391d;
 
 	std::string directory = RBX::FileSystem::getUserAppDataDirectory(true, NULL);
 
