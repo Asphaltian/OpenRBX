@@ -1,9 +1,13 @@
 #include "RobloxWnd.h"
 
+#include "RenderSettings.h"
 #include "renderlib/Profiler.h"
+#include "util/standardout.h"
+#include "v8datamodel/GlobalSettings.h"
 
 #include <G3D/Log.h>
 #include <GLG3D/GLCaps.h>
+#include <GLG3D/Win32Window.h>
 #include <stdexcept>
 
 static ATL::CCriticalSection g_unk0x0095448c;
@@ -147,7 +151,54 @@ void CRobloxWnd::FUN_004610a0(int width, int height)
 // STUB: ROBLOX 0x00461420
 void CRobloxWnd::FUN_00461420(int width, int height)
 {
-	STUB(0x461420);
+	G3D::GWindow::Settings settings;
+	settings.width = width;
+	settings.height = height;
+	settings.stencilBits = 8;
+	settings.rgbBits = 8;
+	settings.depthBits = 24;
+	settings.alphaBits = m_unk0x80 ? 8 : 0;
+	settings.fsaaSamples = g_unk0x0091a2e8;
+
+	CClientDC dc(this);
+	CRect rect;
+	GetClientRect(&rect);
+
+	G3D::GWindow* window;
+	try {
+		window = G3D::Win32Window::create(settings, dc.m_hDC);
+	}
+	catch (std::exception&) {
+		if (CRenderSettings::singleton().FUN_0044d430() == 1) {
+			CRenderSettings::singleton().FUN_0044d0b0(3);
+			RBX::GlobalSettings::singleton()->saveState();
+			AfxMessageBox(
+				"There has been an error in graphics initialization. ROBLOX has made changes to your setting which "
+				"will take effect after you restart. Please restart ROBLOX and try again.",
+				MB_ICONEXCLAMATION
+			);
+			AfxPostQuitMessage(0);
+			throw;
+		}
+		throw std::runtime_error("Graphics failed to initialize");
+	}
+
+	try {
+		FUN_00460160(window);
+	}
+	catch (std::exception& e) {
+		if (m_unk0x60 == 0 && CRenderSettings::singleton().FUN_0044d430() == 1) {
+			m_unk0x60++;
+			RBX::StandardOut::singleton()->print(
+				RBX::MESSAGE_WARNING, "OpenGL-G3D failed: \"%s\". Trying RbxGfx.", e.what()
+			);
+			m_unk0x5c = 3;
+			FUN_004610a0(width, height);
+		}
+		else {
+			throw std::runtime_error("Graphics failed to initialize");
+		}
+	}
 }
 
 // STUB: ROBLOX 0x00461690

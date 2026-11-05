@@ -11,6 +11,7 @@ extern const char sRenderSettings[];
 
 extern undefined4 g_unk0x0091a2e8;
 extern G3D::Vector2int16 g_unk0x0091a2ec;
+extern undefined4 g_unk0x00953ae0;
 
 class CRenderSettings;
 
@@ -51,6 +52,8 @@ public:
 	G3D::Vector2int16 FUN_00448300() const;
 	G3D::Vector2int16 FUN_00448310() const;
 	unsigned int FUN_00448320() const;
+	void FUN_0044d0b0(undefined4 p_unk0x04);
+	undefined4 FUN_0044d430();
 
 	// clang-format off
 	// SYNTHETIC: ROBLOX 0x0044cd20

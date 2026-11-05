@@ -8,6 +8,7 @@ const char sRenderSettings[] = "RenderSettings";
 
 undefined4 g_unk0x0091a2e8 = 1;
 G3D::Vector2int16 g_unk0x0091a2ec(800, 600);
+undefined4 g_unk0x00953ae0;
 
 static G3D::Vector2int16 defaultFullscreenSize()
 {
@@ -85,6 +86,21 @@ CRenderSettings::CRenderSettings()
 {
 	setName("Rendering");
 	RBX::Render::AggregatingSceneManager::aggregationSize = 1;
+}
+
+// STUB: ROBLOX 0x0044d0b0
+void CRenderSettings::FUN_0044d0b0(undefined4 p_unk0x04)
+{
+	STUB(0x44d0b0);
+}
+
+// FUNCTION: ROBLOX 0x0044d430
+undefined4 CRenderSettings::FUN_0044d430()
+{
+	if (g_unk0x00953ae0 == 0) {
+		g_unk0x00953ae0 = m_unk0xf8;
+	}
+	return g_unk0x00953ae0;
 }
 
 template class RBX::FactoryProduct<CRenderSettings, RBX::GlobalSettings::Item, sRenderSettings>;

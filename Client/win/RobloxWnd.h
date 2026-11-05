@@ -50,7 +50,8 @@ protected:
 
 private:
 	int m_unk0x5c;                              // 0x5c
-	undefined m_unk0x60[0x7c - 0x60];           // 0x60
+	int m_unk0x60;                              // 0x60
+	undefined m_unk0x64[0x7c - 0x64];           // 0x64
 	DxUserInput* m_unk0x7c;                     // 0x7c
 	bool m_unk0x80;                             // 0x80
 	undefined m_unk0x81[0x88 - 0x81];           // 0x81
