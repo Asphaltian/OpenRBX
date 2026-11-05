@@ -609,10 +609,33 @@ bool CameraCenterCommand::isEnabled() const
 	return false;
 }
 
-// STUB: ROBLOX 0x0059bb40
+// FUNCTION: ROBLOX 0x0059bb40
 void CameraCenterCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59bb40);
+	ServiceClient<FilteredSelection<PVInstance> > filteredSelection(workspace);
+	G3D::Vector3 center;
+
+	if (filteredSelection->items().size() >= 1) {
+		const std::vector<PVInstance*>& items = filteredSelection->items();
+		Extents extents = items[0]->getExtentsWorld();
+
+		for (unsigned int i = 1; i < items.size(); i++) {
+			extents.unionWith(items[i]->getExtentsWorld());
+		}
+
+		center = extents.center();
+	}
+	else {
+		center = G3D::Vector3::zero();
+	}
+
+	getCamera()->setCameraType(Camera::FIXED_CAMERA);
+	getCamera()->setCameraFocus(G3D::CoordinateFrame(G3D::Matrix3::identity(), center));
+	ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(STEP_SOUND);
+	dataState->clearStack();
+	dataState->setDirty(true);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059bf60
