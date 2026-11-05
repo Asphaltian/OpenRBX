@@ -47,7 +47,10 @@ public:
 	};
 
 	UIEvent(UserInputBase* userInput, EventType eventType, SDLKey key, SDLMod mod);
-	UIEvent(UserInputBase* userInput, EventType eventType, G3D::Vector2int16, G3D::Vector2int16);
+	UIEvent(UserInputBase* userInput, EventType eventType, G3D::Vector2int16 position, G3D::Vector2int16 size)
+		: eventType(eventType), userInput(userInput), mousePosition(position), mouseDelta(0, 0), windowSize(size)
+	{
+	}
 	UIEvent() : eventType(NO_EVENT), userInput(NULL) {}
 
 	// FUNCTION: WEBSERVICE 0x10069fa0

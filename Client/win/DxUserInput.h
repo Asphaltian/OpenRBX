@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "util/Events.h"
 #include "util/RunStateOwner.h"
+#include "util/UIEvent.h"
 #include "util/UserInputBase.h"
 
 #include <G3D/Rect2D.h>
@@ -56,6 +57,7 @@ private:
 	void FUN_0046bd60();
 	bool FUN_0046bed0(DIDEVICEOBJECTDATA* data, DWORD* count, IDirectInputDevice8* device);
 	void FUN_0046c090();
+	void FUN_0046c3c0(RBX::UIEvent::EventType eventType, const G3D::Vector2& position);
 	G3D::Vector2 FUN_0046c4f0();
 	G3D::Vector2 FUN_0046c590();
 	void FUN_0046cd90();

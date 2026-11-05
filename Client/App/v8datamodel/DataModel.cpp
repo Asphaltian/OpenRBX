@@ -348,6 +348,12 @@ DataModel::Lock::~Lock()
 	delete lock;
 }
 
+// STUB: ROBLOX 0x00590fd0
+void DataModel::processGui(const UIEvent& event)
+{
+	STUB(0x590fd0);
+}
+
 // FUNCTION: WEBSERVICE 0x10079120
 // STUB: ROBLOX 0x00592490
 void DataModel::initializeContents()

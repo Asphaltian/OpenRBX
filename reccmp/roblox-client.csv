@@ -508,7 +508,7 @@ address,type,symbol,name,module,size
 0053ec10,library,??0GImage@G3D@@QAE@PBEHW4Format@01@@Z,,,
 0053edb0,library,,,,
 0053eed0,library,,,,
-00540730,library,,,,
+00540730,library,??0Vector2int16@G3D@@QAE@ABVVector2@1@@Z,,,
 00542480,library,??1Entry@?$Table@VMeshDirectedEdgeKey@G3D@@V?$Array@H@2@@G3D@@QAE@XZ,,,
 005434a0,library,,,,
 00543620,library,,,,

@@ -195,6 +195,17 @@ void DxUserInput::FUN_0046c090()
 	STUB(0x46c090);
 }
 
+// FUNCTION: ROBLOX 0x0046c3c0
+void DxUserInput::FUN_0046c3c0(RBX::UIEvent::EventType eventType, const G3D::Vector2& position)
+{
+	G3D::Vector2int16 windowSize(m_unk0x58.width(), m_unk0x58.height());
+	G3D::Vector2int16 mousePosition(position);
+	RBX::UIEvent event(this, eventType, mousePosition, windowSize);
+
+	RBX::DataModel::Lock lock(m_unk0x194);
+	m_unk0x194->processGui(event);
+}
+
 // FUNCTION: ROBLOX 0x0046c4b0
 G3D::ReferenceCountedPointer<RBX::TextureProxyBase> DxUserInput::getGameCursor(RBX::Adorn* adorn)
 {
