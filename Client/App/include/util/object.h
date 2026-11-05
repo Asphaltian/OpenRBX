@@ -140,13 +140,13 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1006be50
 	// RBX::Creatable<RBX::Instance>::create<RBX::ControllerService>
 	// TEMPLATE: WEBSERVICE 0x1006bed0
-	// STUB: ROBLOX 0x00610d80 FOLDED
+	// TEMPLATE: ROBLOX 0x004a8c60
 	// RBX::Creatable<RBX::Instance>::create<RBX::StarterPackService>
 	// TEMPLATE: WEBSERVICE 0x1006db70
 	// STUB: ROBLOX 0x004a89d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::HopperBin>
 	// TEMPLATE: WEBSERVICE 0x1006de90
-	// STUB: ROBLOX 0x00610d80 FOLDED
+	// STUB: ROBLOX 0x004a8ef0
 	// RBX::Creatable<RBX::Instance>::create<RBX::LegacyHopperService>
 	// TEMPLATE: WEBSERVICE 0x1006e120
 	// TEMPLATE: ROBLOX 0x00591db0
@@ -370,7 +370,7 @@ public:
 	// TEMPLATE: ROBLOX 0x006349e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Value<RBX::BrickColor,&RBX::sBrickColorValue> >
 	// TEMPLATE: WEBSERVICE 0x10129ea0
-	// STUB: ROBLOX 0x005cc5d0 FOLDED
+	// STUB: ROBLOX 0x0041f3b0
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpecialShape>
 	// TEMPLATE: WEBSERVICE 0x1018b8e0
 	// TEMPLATE: ROBLOX 0x004b82a0
