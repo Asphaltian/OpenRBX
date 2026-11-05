@@ -2393,6 +2393,8 @@ address,type,symbol,name,module,size
 00823788,global,??_7?$BoundFuncDesc@VDataModel@RBX@@$$A6AXXZ$0A@@Reflection@RBX@@6B@,,,
 00823794,global,??_7?$BoundFuncDesc@VDataModel@RBX@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$00@Reflection@RBX@@6B@,,,
 008237a0,global,??_7?$SignalDesc@VDataModel@RBX@@$$A6AXXZ@Reflection@RBX@@6B@,,,
+00823ddc,global,??_7RunStateVerb@RBX@@6B@,,,
+00823df4,global,??_7EditSelectionVerb@RBX@@6B@,,,
 00823e0c,global,??_7CameraVerb@RBX@@6B@,,,
 008241a8,global,??_7Creator@?$FactoryProduct@VMotorFeature@RBX@@VFeature@2@$1?sMotorFeature@2@3QBDB@RBX@@6B@,,,
 008241b0,global,??_7?$sp_counted_impl_pd@PAVMotorFeature@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@6B@,,,

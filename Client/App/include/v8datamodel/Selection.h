@@ -55,7 +55,7 @@ public:
 	Selection();
 	virtual ~Selection();
 
-	unsigned int size() const;
+	unsigned int size() const { return selection->size(); }
 	boost::shared_ptr<Instance> front() const;
 	boost::shared_ptr<Instance> back() const;
 

@@ -2,6 +2,7 @@
 
 #include "util/Sound.h"
 #include "v8datamodel/Camera.h"
+#include "v8datamodel/DataModel.h"
 #include "v8datamodel/Selection.h"
 
 namespace RBX {
@@ -36,6 +37,22 @@ bool FixedCameraCommand::isChecked() const
 	return getCamera()->getCameraType() == Camera::FIXED_CAMERA;
 }
 
+// FUNCTION: ROBLOX 0x00597310
+RunStateVerb::~RunStateVerb()
+{
+}
+
+// FUNCTION: ROBLOX 0x00597390
+EditSelectionVerb::~EditSelectionVerb()
+{
+}
+
+// FUNCTION: ROBLOX 0x00597680
+RunStateVerb::RunStateVerb(std::string name, DataModel* dataModel)
+	: Verb(dataModel, name), dataModel(dataModel), runService(dataModel)
+{
+}
+
 // FUNCTION: ROBLOX 0x00597720
 CameraVerb::CameraVerb(std::string name, Workspace* workspace)
 	: Verb(workspace, name), workspace(workspace), selection(workspace)
@@ -45,6 +62,20 @@ CameraVerb::CameraVerb(std::string name, Workspace* workspace)
 bool CameraVerb::isEnabled() const
 {
 	return true;
+}
+
+// FUNCTION: ROBLOX 0x00597f30
+EditSelectionVerb::EditSelectionVerb(std::string name, DataModel* dataModel)
+	: Verb(dataModel, name), workspace(shared_from(dataModel->getWorkspace())), selection(dataModel),
+	  dataModel(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x0059a2a0
+EditSelectionVerb::EditSelectionVerb(VerbContainer* container, std::string name, DataModel* dataModel)
+	: Verb(container, name), workspace(shared_from(dataModel ? dataModel->find<Workspace>() : NULL)),
+	  selection(dataModel), dataModel(dataModel)
+{
 }
 
 // FUNCTION: ROBLOX 0x0059b530
@@ -126,6 +157,12 @@ bool CameraCenterCommand::isEnabled() const
 void CameraCenterCommand::doIt(IDataState* dataState)
 {
 	STUB(0x59bb40);
+}
+
+// FUNCTION: ROBLOX 0x0059bf60
+bool EditSelectionVerb::isEnabled() const
+{
+	return selection->size() > 0;
 }
 
 // STUB: ROBLOX 0x0059ca70

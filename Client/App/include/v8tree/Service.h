@@ -487,7 +487,9 @@ public:
 	// RBX::ServiceClient<RBX::FilteredSelection<RBX::Instance> >::createService
 	// clang-format on
 	operator T*() { return createService(true); }
+	operator const T*() const { return createService(true); }
 	T* operator->() { return createService(true); }
+	const T* operator->() const { return createService(true); }
 
 private:
 	T* createService(bool createIfNotFound) const

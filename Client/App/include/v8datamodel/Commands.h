@@ -11,7 +11,45 @@
 namespace RBX {
 
 class Camera;
+class DataModel;
+class RunService;
 class Selection;
+
+// SIZE 0x1c
+class RunStateVerb : public Verb
+{
+protected:
+	DataModel* dataModel;                 // 0x0c
+	ServiceClient<RunService> runService; // 0x10
+
+	RunStateVerb(std::string name, DataModel* dataModel);
+
+	void playActionSound();
+
+public:
+	virtual ~RunStateVerb();
+};
+
+DECOMP_SIZE_ASSERT(RunStateVerb, 0x1c)
+
+// SIZE 0x24
+class EditSelectionVerb : public Verb
+{
+protected:
+	boost::shared_ptr<Workspace> workspace; // 0x0c
+	ServiceClient<Selection> selection;     // 0x14
+	DataModel* dataModel;                   // 0x20
+
+	EditSelectionVerb(VerbContainer* container, std::string name, DataModel* dataModel);
+	EditSelectionVerb(std::string name, DataModel* dataModel);
+
+public:
+	virtual ~EditSelectionVerb();
+
+	virtual bool isEnabled() const;
+};
+
+DECOMP_SIZE_ASSERT(EditSelectionVerb, 0x24)
 
 // SIZE 0x1c
 class CameraVerb : public Verb
