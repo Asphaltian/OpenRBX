@@ -1,5 +1,11 @@
 #include "RobloxWnd.h"
 
+#include "renderlib/Profiler.h"
+
+#include <G3D/Log.h>
+#include <GLG3D/GLCaps.h>
+#include <stdexcept>
+
 static ATL::CCriticalSection g_unk0x0095448c;
 
 // FUNCTION: ROBLOX 0x0045f4d0
@@ -40,6 +46,37 @@ void CRobloxWnd::AdjustThrottle(double frameRate)
 {
 	ATL::CCritSecLock lock(g_unk0x0095448c);
 	m_unk0x88 = frameRate;
+}
+
+// FUNCTION: ROBLOX 0x00460160
+void CRobloxWnd::FUN_00460160(G3D::GWindow* window)
+{
+	m_unk0x9c = window;
+	window->makeCurrent();
+
+	if (G3D::GLCaps::renderer() == "GDI Generic") {
+		throw std::runtime_error(
+			"This computer does not have correctly installed graphics drivers and is using the default Microsoft "
+			"OpenGL implementation. Most graphics capabilities are disabled. To correct this problem, download and "
+			"install the latest drivers for the graphics card."
+		);
+	}
+
+	m_unk0xa4.reset(new G3D::RenderDevice());
+	if (!m_unk0xa4->init(m_unk0x9c, G3D::Log::common())) {
+		m_unk0xa4.reset();
+		throw std::runtime_error("renderDevice->init failed");
+	}
+
+	RBX::Render::SpecData::glLoaded = true;
+	m_unk0xa4->setSwapBuffersAutomatically(false);
+	if (m_unk0x80) {
+		m_unk0xa4->enableAlphaWrite();
+	}
+
+	if (glGetError() != GL_NO_ERROR) {
+		throw std::runtime_error("GL error creating RenderDevice");
+	}
 }
 
 // STUB: ROBLOX 0x00460430
@@ -101,10 +138,47 @@ void CRobloxWnd::OnTimer(UINT_PTR nIDEvent)
 	STUB(0x461050);
 }
 
+// STUB: ROBLOX 0x004610a0
+void CRobloxWnd::FUN_004610a0(int width, int height)
+{
+	STUB(0x4610a0);
+}
+
+// STUB: ROBLOX 0x00461420
+void CRobloxWnd::FUN_00461420(int width, int height)
+{
+	STUB(0x461420);
+}
+
 // STUB: ROBLOX 0x00461690
 int CRobloxWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-	STUB(0x461690);
+	if (CWnd::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+
+	m_unk0x98 = GetCurrentThreadId();
+
+	CRect rect;
+	GetClientRect(&rect);
+
+	try {
+		if (m_unk0x5c == 2) {
+			FUN_00461420(rect.Width(), rect.Height());
+		}
+		else {
+			FUN_004610a0(rect.Width(), rect.Height());
+		}
+	}
+	catch (std::exception& e) {
+		CString message;
+		message.Format("Unable to run Roblox.\n\n%s", e.what());
+		AfxMessageBox(message);
+		return -1;
+	}
+
+	SetTimer(0, 200, NULL);
+	SetTimer(1, 100, NULL);
 	return 0;
 }
 

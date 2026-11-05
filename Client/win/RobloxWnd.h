@@ -6,6 +6,10 @@
 #include "util/IMetric.h"
 #include "util/RunStateOwner.h"
 
+#include <GLG3D/GWindow.h>
+#include <GLG3D/RenderDevice.h>
+#include <memory>
+
 // SIZE 0xb8
 class CRobloxWnd : public CWnd, public RBX::IRunView, public RBX::IMetric
 {
@@ -14,7 +18,10 @@ public:
 	virtual ~CRobloxWnd();
 
 	void FUN_0045fc50(bool active);
+	void FUN_00460160(G3D::GWindow* window);
 	void FUN_00460430();
+	void FUN_004610a0(int width, int height);
+	void FUN_00461420(int width, int height);
 
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
@@ -42,13 +49,19 @@ protected:
 	// ?GetMessageMap@CRobloxWnd@@MBEPBUAFX_MSGMAP@@XZ
 
 private:
-	undefined m_unk0x5c[0x7c - 0x5c]; // 0x5c
-	DxUserInput* m_unk0x7c;           // 0x7c
-	undefined m_unk0x80[0x88 - 0x80]; // 0x80
-	double m_unk0x88;                 // 0x88
-	undefined m_unk0x90[0xa0 - 0x90]; // 0x90
-	bool m_unk0xa0;                   // 0xa0
-	undefined m_unk0xa1[0xb8 - 0xa1]; // 0xa1
+	int m_unk0x5c;                              // 0x5c
+	undefined m_unk0x60[0x7c - 0x60];           // 0x60
+	DxUserInput* m_unk0x7c;                     // 0x7c
+	bool m_unk0x80;                             // 0x80
+	undefined m_unk0x81[0x88 - 0x81];           // 0x81
+	double m_unk0x88;                           // 0x88
+	undefined m_unk0x90[0x98 - 0x90];           // 0x90
+	DWORD m_unk0x98;                            // 0x98
+	G3D::GWindow* m_unk0x9c;                    // 0x9c
+	bool m_unk0xa0;                             // 0xa0
+	undefined m_unk0xa1[0xa4 - 0xa1];           // 0xa1
+	std::auto_ptr<G3D::RenderDevice> m_unk0xa4; // 0xa4
+	undefined m_unk0xa8[0xb8 - 0xa8];           // 0xa8
 };
 
 DECOMP_SIZE_ASSERT(CRobloxWnd, 0xb8)
