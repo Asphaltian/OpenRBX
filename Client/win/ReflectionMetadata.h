@@ -199,6 +199,8 @@ DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 // ??$create@VReflection@Metadata@1RBX@@@?$Creatable@VInstance@RBX@@@RBX@@SA?AV?$shared_ptr@VReflection@Metadata@1RBX@@@boost@@XZ
 // TEMPLATE: ROBLOX 0x00427450
 // ?create@Creator@?$FactoryProduct@VReflection@Metadata@1RBX@@VInstance@3@$1?sReflection@213@3PADA@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ
+// TEMPLATE: ROBLOX 0x00427510
+// ??1?$FactoryProduct@VClasses@Metadata@Reflection@RBX@@VInstance@4@$1?sClasses@234@3PADA@RBX@@MAE@XZ
 // TEMPLATE: ROBLOX 0x00427560
 // ??0?$FactoryProduct@VClasses@Metadata@Reflection@RBX@@VInstance@4@$1?sClasses@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00427720
@@ -223,6 +225,8 @@ DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 // ??0?$FactoryProduct@VProperties@Metadata@Reflection@RBX@@VMembers@234@$1?sProperties@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00427d00
 // ??$declare@$1?sProperties@Metadata@Reflection@RBX@@3PADA@Name@RBX@@SAABV01@XZ
+// TEMPLATE: ROBLOX 0x00427d20
+// ??1?$FactoryProduct@VFunctions@Metadata@Reflection@RBX@@VMembers@234@$1?sFunctions@234@3PADA@RBX@@MAE@XZ
 // TEMPLATE: ROBLOX 0x00427dc0
 // ??0?$FactoryProduct@VFunctions@Metadata@Reflection@RBX@@VMembers@234@$1?sFunctions@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00427f60
@@ -271,10 +275,10 @@ DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 // ??0?$DescribedCreatable@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@RBX@@IAE@XZ
 // TEMPLATE: ROBLOX 0x00429220
 // ??0?$DescribedNonCreatable@VItem@Metadata@Reflection@RBX@@VInstance@4@$1?sItem@234@3PADA@RBX@@IAE@XZ
-// STUB: ROBLOX 0x00429310
-// ??_E?$DescribedCreatable@VReflection@Metadata@1RBX@@VInstance@3@$1?sReflection@213@3PADA@RBX@@UAEPAXI@Z
-// STUB: ROBLOX 0x00429430
-// ??_E?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@MAEPAXI@Z
+// SYNTHETIC: ROBLOX 0x00429310
+// ??_EClasses@Metadata@Reflection@RBX@@UAEPAXI@Z
+// SYNTHETIC: ROBLOX 0x00429430
+// ??_EFunctions@Metadata@Reflection@RBX@@UAEPAXI@Z
 // SYNTHETIC: ROBLOX 0x004294e0
 // ??_E?$DescribedCreatable@VEvents@Metadata@Reflection@RBX@@VMembers@234@$1?sEvents@234@3PADA@RBX@@UAEPAXI@Z
 // SYNTHETIC: ROBLOX 0x00429630
