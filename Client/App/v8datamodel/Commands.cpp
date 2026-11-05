@@ -770,7 +770,31 @@ bool ControllerCommand::isEnabled() const
 // STUB: ROBLOX 0x0059ca70
 void CameraZoomExtentsCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59ca70);
+	ServiceClient<FilteredSelection<PVInstance> > filteredSelection(workspace);
+	Extents extents;
+
+	if (filteredSelection->items().size() >= 1) {
+		const std::vector<PVInstance*>& items = filteredSelection->items();
+		extents = items[0]->getExtentsWorld();
+
+		for (unsigned int i = 1; i < items.size(); i++) {
+			extents.unionWith(items[i]->getExtentsWorld());
+		}
+
+		getCamera()->setCameraType(Camera::FIXED_CAMERA);
+		getCamera()->zoomExtents(extents, workspace->getViewPort(), Camera::ZOOM_IN_OR_OUT);
+		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(STEP_SOUND);
+		dataState->clearStack();
+		dataState->setDirty(true);
+		dataState->clearStack();
+		dataState->setDirty(true);
+	}
+	else {
+		getCamera()->zoomExtents(workspace->getViewPort());
+		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(STEP_SOUND);
+		dataState->clearStack();
+		dataState->setDirty(true);
+	}
 }
 
 bool CameraPanLeftCommand::isEnabled() const
