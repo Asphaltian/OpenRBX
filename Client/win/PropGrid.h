@@ -81,6 +81,21 @@ class CDataModelPropGrid : public CSelectionPropGrid, public ActiveDocView
 
 	// SYNTHETIC: ROBLOX 0x0043bbc0
 	// ?GetThisClass@CDataModelPropGrid@@SGPAUCRuntimeClass@@XZ
+
+public:
+	// FUNCTION: ROBLOX 0x00435320
+	CDataModelPropGrid() {}
+
+	// SYNTHETIC: ROBLOX 0x004353e0
+	// CDataModelPropGrid::~CDataModelPropGrid
+
+	// SYNTHETIC: ROBLOX 0x00435440
+	// CDataModelPropGrid::`scalar deleting destructor'
+
+protected:
+	virtual void VTable0x00(
+		boost::shared_ptr<RBX::DataModel> newDataModel, boost::shared_ptr<RBX::DataModel> oldDataModel
+	);
 };
 
 DECOMP_SIZE_ASSERT(CDataModelPropGrid, 0x1ec)

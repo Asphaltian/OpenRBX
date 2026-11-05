@@ -22,6 +22,14 @@ void CSelectionPropGrid::FUN_00445580(RBX::Selection* selection)
 	STUB(0x445580);
 }
 
+// STUB: ROBLOX 0x00445830
+void CDataModelPropGrid::VTable0x00(
+	boost::shared_ptr<RBX::DataModel> newDataModel, boost::shared_ptr<RBX::DataModel> oldDataModel
+)
+{
+	STUB(0x445830);
+}
+
 // FUNCTION: ROBLOX 0x00445960
 CPropGrid::~CPropGrid()
 {

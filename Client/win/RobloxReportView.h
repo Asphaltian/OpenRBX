@@ -28,6 +28,9 @@ class CRobloxReportDocView : public CRobloxReportView
 	// SYNTHETIC: ROBLOX 0x0045ac00
 	// ?GetThisClass@CRobloxReportDocView@@SGPAUCRuntimeClass@@XZ
 
+	// SYNTHETIC: ROBLOX 0x0045ac20
+	// ?GetRuntimeClass@CRobloxReportPaneView@@UBEPAUCRuntimeClass@@XZ
+
 protected:
 	CRobloxReportDocView() {}
 

@@ -8,7 +8,7 @@
 class CSettingsPropGrid : public CSelectionPropGrid
 {
 	// SYNTHETIC: ROBLOX 0x00434950
-	// CSettingsPropGrid::`scalar deleting destructor'
+	// CSelectionPropGrid::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(CSettingsPropGrid, 0x1e8)

@@ -8,6 +8,9 @@
 
 #include <boost/scoped_ptr.hpp>
 
+class CDataModelPropGrid;
+class CSelectionCaption;
+
 namespace RBX {
 class FillToolColor;
 }
@@ -171,21 +174,21 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 private:
-	bool m_unk0xe0;                               // 0xe0
-	bool m_unk0xe1;                               // 0xe1
-	HMONITOR m_unk0xe4;                           // 0xe4
-	CCmdTarget* m_unk0xe8;                        // 0xe8
-	bool m_unk0xec;                               // 0xec
-	bool m_unk0xed;                               // 0xed
-	CString m_unk0xf0;                            // 0xf0
-	CXTWindowPos m_unk0xf4;                       // 0xf4
-	CXTPDockingPaneManager m_unk0x120;            // 0x120
-	CXTPTabClientWnd m_unk0x26c;                  // 0x26c
-	boost::scoped_ptr<CXTSplitterWnd> m_unk0x390; // 0x390
-	boost::scoped_ptr<CWnd> m_unk0x394;           // 0x394
-	boost::scoped_ptr<CWnd> m_unk0x398;           // 0x398
-	CXTThemeManager m_unk0x39c;                   // 0x39c
-	CXTPStatusBar m_unk0x3c8;                     // 0x3c8
+	bool m_unk0xe0;                                   // 0xe0
+	bool m_unk0xe1;                                   // 0xe1
+	HMONITOR m_unk0xe4;                               // 0xe4
+	CCmdTarget* m_unk0xe8;                            // 0xe8
+	bool m_unk0xec;                                   // 0xec
+	bool m_unk0xed;                                   // 0xed
+	CString m_unk0xf0;                                // 0xf0
+	CXTWindowPos m_unk0xf4;                           // 0xf4
+	CXTPDockingPaneManager m_unk0x120;                // 0x120
+	CXTPTabClientWnd m_unk0x26c;                      // 0x26c
+	boost::scoped_ptr<CXTSplitterWnd> m_unk0x390;     // 0x390
+	boost::scoped_ptr<CDataModelPropGrid> m_unk0x394; // 0x394
+	boost::scoped_ptr<CSelectionCaption> m_unk0x398;  // 0x398
+	CXTThemeManager m_unk0x39c;                       // 0x39c
+	CXTPStatusBar m_unk0x3c8;                         // 0x3c8
 };
 
 #endif // MAINFRM_H
