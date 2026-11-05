@@ -51,7 +51,12 @@ public:
 	undefined4 FUN_004482f0() const;
 	G3D::Vector2int16 FUN_00448300() const;
 	G3D::Vector2int16 FUN_00448310() const;
-	unsigned int FUN_00448320() const;
+	int FUN_00448320() const;
+	void FUN_0044ce30(float p_unk0x04);
+	void FUN_0044ced0(float p_unk0x04);
+	void FUN_0044cf70(float p_unk0x04);
+	void FUN_0044cfe0(float p_unk0x04);
+	void FUN_0044d050(int p_unk0x04);
 	void FUN_0044d0b0(undefined4 p_unk0x04);
 	undefined4 FUN_0044d430();
 
@@ -71,7 +76,7 @@ public:
 	float m_unk0x110;             // 0x110
 	float m_unk0x114;             // 0x114
 	float m_unk0x118;             // 0x118
-	undefined m_unk0x11c;         // 0x11c
+	bool m_unk0x11c;              // 0x11c
 	std::string m_unk0x120;       // 0x120
 	G3D::Vector2int16 m_unk0x13c; // 0x13c
 	G3D::Vector2int16 m_unk0x140; // 0x140

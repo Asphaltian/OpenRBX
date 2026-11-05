@@ -10,6 +10,34 @@ undefined4 g_unk0x0091a2e8 = 1;
 G3D::Vector2int16 g_unk0x0091a2ec(800, 600);
 undefined4 g_unk0x00953ae0;
 
+static RBX::Reflection::PropDescriptor<CRenderSettings, float> g_unk0x00953bbc(
+	"minShadingQuality", "Qaulity", &CRenderSettings::FUN_00448290, &CRenderSettings::FUN_0044ce30
+);
+
+static RBX::Reflection::PropDescriptor<CRenderSettings, float> g_unk0x00953bd8(
+	"maxShadingQuality", "Qaulity", &CRenderSettings::FUN_004482a0, &CRenderSettings::FUN_0044ced0
+);
+
+static RBX::Reflection::PropDescriptor<CRenderSettings, float> g_unk0x00953bf4(
+	"minMeshDetail", "Qaulity", &CRenderSettings::FUN_004482b0, &CRenderSettings::FUN_0044cf70
+);
+
+static RBX::Reflection::PropDescriptor<CRenderSettings, float> g_unk0x00953c10(
+	"maxMeshDetail", "Qaulity", &CRenderSettings::FUN_004482c0, &CRenderSettings::FUN_0044cfe0
+);
+
+static RBX::Reflection::PropDescriptor<CRenderSettings, float> g_unk0x00953c2c(
+	"_AggregateSize", "Performance", &CRenderSettings::FUN_00448320, &CRenderSettings::FUN_0044d050
+);
+
+static RBX::Reflection::BoundProp<bool, 1> g_unk0x00953c68(
+	"delaySwapBuffer", "Performance", &CRenderSettings::m_unk0x11c
+);
+
+static RBX::Reflection::BoundProp<std::string, 1> g_unk0x00953c84(
+	"profileName", "Qaulity", &CRenderSettings::m_unk0x120, RBX::Reflection::PropertyDescriptor::STREAMING
+);
+
 static G3D::Vector2int16 defaultFullscreenSize()
 {
 	if (static_cast<unsigned int>(G3D::DXCaps::videoMemorySize()) >= 16000000) {
@@ -73,7 +101,7 @@ G3D::Vector2int16 CRenderSettings::FUN_00448310() const
 }
 
 // FUNCTION: ROBLOX 0x00448320
-unsigned int CRenderSettings::FUN_00448320() const
+int CRenderSettings::FUN_00448320() const
 {
 	return RBX::Render::AggregatingSceneManager::aggregationSize;
 }
@@ -86,6 +114,40 @@ CRenderSettings::CRenderSettings()
 {
 	setName("Rendering");
 	RBX::Render::AggregatingSceneManager::aggregationSize = 1;
+}
+
+// STUB: ROBLOX 0x0044ce30
+void CRenderSettings::FUN_0044ce30(float p_unk0x04)
+{
+	STUB(0x44ce30);
+}
+
+// STUB: ROBLOX 0x0044ced0
+void CRenderSettings::FUN_0044ced0(float p_unk0x04)
+{
+	STUB(0x44ced0);
+}
+
+// STUB: ROBLOX 0x0044cf70
+void CRenderSettings::FUN_0044cf70(float p_unk0x04)
+{
+	STUB(0x44cf70);
+}
+
+// STUB: ROBLOX 0x0044cfe0
+void CRenderSettings::FUN_0044cfe0(float p_unk0x04)
+{
+	STUB(0x44cfe0);
+}
+
+// FUNCTION: ROBLOX 0x0044d050
+void CRenderSettings::FUN_0044d050(int p_unk0x04)
+{
+	int size = std::min(1000, std::max(1, p_unk0x04));
+	if (size != RBX::Render::AggregatingSceneManager::aggregationSize) {
+		RBX::Render::AggregatingSceneManager::aggregationSize = size;
+		raisePropertyChanged(g_unk0x00953c2c);
+	}
 }
 
 // STUB: ROBLOX 0x0044d0b0

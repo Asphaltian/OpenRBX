@@ -815,8 +815,9 @@ public:
 	// TEMPLATE: ROBLOX 0x0058b5d0
 	// RBX::Reflection::PropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::GetSetImpl<enum RBX::HopperBin::BinType (__thiscall RBX::HopperBin::*)(void)const ,void (__thiscall RBX::HopperBin::*)(enum RBX::HopperBin::BinType)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100e20d0
-	// TEMPLATE: ROBLOX 0x005c1740
 	// RBX::Reflection::PropDescriptor<RBX::Texture,float>::GetSetImpl<float (__thiscall RBX::Texture::*)(void)const ,void (__thiscall RBX::Texture::*)(float)>::setValue
+	// TEMPLATE: ROBLOX 0x005c1740
+	// RBX::Reflection::PropDescriptor<CRenderSettings,float>::GetSetImpl<float (__thiscall CRenderSettings::*)(void)const ,void (__thiscall CRenderSettings::*)(float)>::setValue
 	// TEMPLATE: WEBSERVICE 0x100b37d0
 	// TEMPLATE: ROBLOX 0x004a5f50
 	// RBX::Reflection::PropDescriptor<RBX::Team,bool>::GetSetImpl<bool (__thiscall RBX::Team::*)(void)const ,void (__thiscall RBX::Team::*)(bool)>::setValue
