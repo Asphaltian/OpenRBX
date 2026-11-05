@@ -48,8 +48,22 @@ namespace RBX {
 // ?FUN_0045b7d0@EventData@?$MarshaledListener@VInstance@RBX@@UDescendentAdded@2@V12@U32@@RBX@@QAEXPBVInstance@3@@Z
 // TEMPLATE: ROBLOX 0x0045bcb0
 // ?FUN_0045bcb0@?$MarshaledListener@VInstance@RBX@@UDescendentRemoving@2@V12@U32@@RBX@@QAEXPAVEventData@12@@Z
+// TEMPLATE: ROBLOX 0x0046a5e0
+// ??0?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@QAE@XZ
 // TEMPLATE: ROBLOX 0x0046a650
 // ?onEvent@?$MarshaledListener@VInstance@RBX@@UDescendentAdded@2@V12@U32@@RBX@@MAEXPBVInstance@2@UDescendentAdded@2@@Z
+// TEMPLATE: ROBLOX 0x0046a6f0
+// ??0EventData@?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@QAE@PAV12@PBVSelection@2@VSelectionChanged@2@@Z
+// TEMPLATE: ROBLOX 0x0046a7b0
+// ??1EventData@?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0046a850
+// RBX::MarshaledListener<RBX::Selection,RBX::SelectionChanged,RBX::Selection,RBX::SelectionChanged>::EventData::`scalar deleting destructor'
+// TEMPLATE: ROBLOX 0x0046a870
+// ??1?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0046a900
+// RBX::MarshaledListener<RBX::Selection,RBX::SelectionChanged,RBX::Selection,RBX::SelectionChanged>::`scalar deleting destructor'
+// TEMPLATE: ROBLOX 0x0046ac00
+// ?VTable0x0c@?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@MAEXPBVSelection@2@VSelectionChanged@2@@Z
 // clang-format on
 
 // SIZE 0x1c

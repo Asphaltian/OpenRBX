@@ -284,7 +284,7 @@ private:
 // RBX::DescendentRemoving::~DescendentRemoving
 // FUNCTION: WEBSERVICE 0x1005cf20
 // FUNCTION: ROBLOX 0x00566fc0
-// RBX::SelectionChanged::SelectionChanged
+// ??0SelectionChanged@RBX@@AAE@V?$shared_ptr@VInstance@RBX@@@boost@@0@Z
 // TEMPLATE: WEBSERVICE 0x1005d010
 // TEMPLATE: ROBLOX 0x005670b0
 // ?raise@?$Notifier@VSelection@RBX@@VSelectionChanged@2@@RBX@@IBEXVSelectionChanged@2@PAV?$Listener@VSelection@RBX@@VSelectionChanged@2@@2@@Z

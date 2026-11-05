@@ -3652,3 +3652,5 @@ address,type,symbol,name,module,size
 0080214c,global,??_7EventData@?$MarshaledListener@VInstance@RBX@@UDescendentRemoving@2@V12@U32@@RBX@@6B@,,,
 00802120,global,??_7EventDataBase@RBX@@6B@,,,
 00420f80,function,,,,181
+0080f140,global,??_7?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@6B@,,,
+0080f154,global,??_7EventData@?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@6B@,,,
