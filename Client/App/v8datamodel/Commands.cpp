@@ -37,6 +37,30 @@ bool FixedCameraCommand::isChecked() const
 	return getCamera()->getCameraType() == Camera::FIXED_CAMERA;
 }
 
+// FUNCTION: ROBLOX 0x00597090
+bool AttachCameraCommand::isChecked() const
+{
+	return workspace->getCamera()->getCameraType() == Camera::ATTACH_CAMERA;
+}
+
+// FUNCTION: ROBLOX 0x005970c0
+bool TrackCameraCommand::isChecked() const
+{
+	return workspace->getCamera()->getCameraType() == Camera::TRACK_CAMERA;
+}
+
+// FUNCTION: ROBLOX 0x005970f0
+bool FollowCameraCommand::isChecked() const
+{
+	return workspace->getCamera()->getCameraType() == Camera::FOLLOW_CAMERA;
+}
+
+// FUNCTION: ROBLOX 0x00597120
+bool WatchCameraCommand::isChecked() const
+{
+	return workspace->getCamera()->getCameraType() == Camera::WATCH_CAMERA;
+}
+
 // FUNCTION: ROBLOX 0x00597310
 RunStateVerb::~RunStateVerb()
 {
@@ -71,11 +95,109 @@ EditSelectionVerb::EditSelectionVerb(std::string name, DataModel* dataModel)
 {
 }
 
+// FUNCTION: ROBLOX 0x00597fe0
+GroupSelectionVerb::GroupSelectionVerb(DataModel* dataModel) : EditSelectionVerb("Group", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598010
+WeldSelectionVerb::WeldSelectionVerb(DataModel* dataModel) : EditSelectionVerb("WeldSelection", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598040
+SnapSelectionVerb::SnapSelectionVerb(DataModel* dataModel) : EditSelectionVerb("SnapSelection", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598070
+UngroupSelectionVerb::UngroupSelectionVerb(DataModel* dataModel) : EditSelectionVerb("UnGroup", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x005980a0
+DuplicateSelectionVerb::DuplicateSelectionVerb(DataModel* dataModel) : EditSelectionVerb("Duplicate", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598150
+AttachCameraCommand::AttachCameraCommand(DataModel* dataModel) : EditSelectionVerb("AttachCamera", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598180
+TrackCameraCommand::TrackCameraCommand(DataModel* dataModel) : EditSelectionVerb("TrackCamera", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x005981b0
+FollowCameraCommand::FollowCameraCommand(DataModel* dataModel) : EditSelectionVerb("FollowCamera", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598200
+WatchCameraCommand::WatchCameraCommand(DataModel* dataModel) : EditSelectionVerb("WatchCamera", dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x00598230
+MoveDownSelectionVerb::MoveDownSelectionVerb(DataModel* dataModel) : EditSelectionVerb("SelectionDown", dataModel)
+{
+}
+
 // FUNCTION: ROBLOX 0x0059a2a0
 EditSelectionVerb::EditSelectionVerb(VerbContainer* container, std::string name, DataModel* dataModel)
 	: Verb(container, name), workspace(shared_from(dataModel ? dataModel->find<Workspace>() : NULL)),
 	  selection(dataModel), dataModel(dataModel)
 {
+}
+
+// FUNCTION: ROBLOX 0x0059a350
+bool DuplicateSelectionVerb::isEnabled() const
+{
+	return (dataModel ? dataModel->create<Selection>() : NULL)->size() > 0;
+}
+
+// STUB: ROBLOX 0x0059a9f0
+void GroupSelectionVerb::doIt(IDataState* dataState)
+{
+	STUB(0x59a9f0);
+}
+
+// STUB: ROBLOX 0x0059aaf0
+void UngroupSelectionVerb::doIt(IDataState* dataState)
+{
+	STUB(0x59aaf0);
+}
+
+// STUB: ROBLOX 0x0059af30
+void AttachCameraCommand::doIt(IDataState* dataState)
+{
+	STUB(0x59af30);
+}
+
+// STUB: ROBLOX 0x0059aff0
+void TrackCameraCommand::doIt(IDataState* dataState)
+{
+	STUB(0x59aff0);
+}
+
+// STUB: ROBLOX 0x0059b100
+void FollowCameraCommand::doIt(IDataState* dataState)
+{
+	STUB(0x59b100);
+}
+
+// STUB: ROBLOX 0x0059b1c0
+void WatchCameraCommand::doIt(IDataState* dataState)
+{
+	STUB(0x59b1c0);
+}
+
+// STUB: ROBLOX 0x0059b3a0
+void MoveDownSelectionVerb::doIt(IDataState* dataState)
+{
+	STUB(0x59b3a0);
 }
 
 // FUNCTION: ROBLOX 0x0059b530
@@ -163,6 +285,86 @@ void CameraCenterCommand::doIt(IDataState* dataState)
 bool EditSelectionVerb::isEnabled() const
 {
 	return selection->size() > 0;
+}
+
+// STUB: ROBLOX 0x0059bfa0
+bool GroupSelectionVerb::isEnabled() const
+{
+	return EditSelectionVerb::isEnabled() && selection->size() > 1;
+}
+
+// STUB: ROBLOX 0x0059c090
+void WeldSelectionVerb::doIt(IDataState* dataState)
+{
+	STUB(0x59c090);
+}
+
+// FUNCTION: ROBLOX 0x0059c160
+bool WeldSelectionVerb::isEnabled() const
+{
+	if (!EditSelectionVerb::isEnabled()) {
+		return false;
+	}
+
+	return (dataModel ? dataModel->create<Selection>() : NULL)->size() > 0;
+}
+
+bool SnapSelectionVerb::isEnabled() const
+{
+	if (!EditSelectionVerb::isEnabled()) {
+		return false;
+	}
+
+	return (dataModel ? dataModel->create<Selection>() : NULL)->size() > 0;
+}
+
+// STUB: ROBLOX 0x0059c1d0
+void SnapSelectionVerb::doIt(IDataState* dataState)
+{
+	STUB(0x59c1d0);
+}
+
+// STUB: ROBLOX 0x0059c2a0
+bool UngroupSelectionVerb::isEnabled() const
+{
+	STUB(0x59c2a0);
+	return false;
+}
+
+// STUB: ROBLOX 0x0059c2f0
+void DuplicateSelectionVerb::doIt(IDataState* dataState)
+{
+	STUB(0x59c2f0);
+}
+
+// STUB: ROBLOX 0x0059c860
+bool AttachCameraCommand::isEnabled() const
+{
+	STUB(0x59c860);
+	return false;
+}
+
+// FUNCTION: ROBLOX 0x0059c950
+bool TrackCameraCommand::isEnabled() const
+{
+	if (!EditSelectionVerb::isEnabled()) {
+		return false;
+	}
+
+	return (dataModel ? dataModel->create<Selection>() : NULL)->size() == 1;
+}
+
+// STUB: ROBLOX 0x0059c9c0
+bool FollowCameraCommand::isEnabled() const
+{
+	STUB(0x59c9c0);
+	return false;
+}
+
+bool WatchCameraCommand::isEnabled() const
+{
+	STUB(0x59c9c0);
+	return false;
 }
 
 // STUB: ROBLOX 0x0059ca70

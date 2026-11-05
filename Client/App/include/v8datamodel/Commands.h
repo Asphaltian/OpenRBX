@@ -51,6 +51,129 @@ public:
 
 DECOMP_SIZE_ASSERT(EditSelectionVerb, 0x24)
 
+// SIZE 0x24
+class GroupSelectionVerb : public EditSelectionVerb
+{
+public:
+	GroupSelectionVerb(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(GroupSelectionVerb, 0x24)
+
+// SIZE 0x24
+class WeldSelectionVerb : public EditSelectionVerb
+{
+public:
+	WeldSelectionVerb(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(WeldSelectionVerb, 0x24)
+
+// SIZE 0x24
+class SnapSelectionVerb : public EditSelectionVerb
+{
+public:
+	SnapSelectionVerb(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(SnapSelectionVerb, 0x24)
+
+// SIZE 0x24
+class UngroupSelectionVerb : public EditSelectionVerb
+{
+public:
+	UngroupSelectionVerb(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(UngroupSelectionVerb, 0x24)
+
+// SIZE 0x24
+class DuplicateSelectionVerb : public EditSelectionVerb
+{
+public:
+	DuplicateSelectionVerb(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(DuplicateSelectionVerb, 0x24)
+
+// SIZE 0x24
+class AttachCameraCommand : public EditSelectionVerb
+{
+public:
+	AttachCameraCommand(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual bool isChecked() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(AttachCameraCommand, 0x24)
+
+// SIZE 0x24
+class TrackCameraCommand : public EditSelectionVerb
+{
+public:
+	TrackCameraCommand(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual bool isChecked() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(TrackCameraCommand, 0x24)
+
+// SIZE 0x24
+class FollowCameraCommand : public EditSelectionVerb
+{
+public:
+	FollowCameraCommand(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual bool isChecked() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(FollowCameraCommand, 0x24)
+
+// SIZE 0x24
+class WatchCameraCommand : public EditSelectionVerb
+{
+public:
+	WatchCameraCommand(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual bool isChecked() const;
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(WatchCameraCommand, 0x24)
+
+// SIZE 0x24
+class MoveDownSelectionVerb : public EditSelectionVerb
+{
+public:
+	MoveDownSelectionVerb(DataModel* dataModel);
+
+	virtual void doIt(IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(MoveDownSelectionVerb, 0x24)
+
 // SIZE 0x1c
 class CameraVerb : public Verb
 {
