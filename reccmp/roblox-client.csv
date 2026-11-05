@@ -2733,6 +2733,8 @@ address,type,symbol,name,module,size
 00948348,global,??_R0?AV?$Value@H$1?sIntValue@RBX@@3PADA@RBX@@@8,,,
 0094cfdc,global,?s_nExpandDelay@CXTPCommandBar@@2HA,,,
 00952c5c,global,?g_pfnGetThreadACP@ATL@@3P6GIXZA,,,
+009548f8,global,,g_unk0x009548f8,,
+00954e04,global,,g_unk0x00954e04,,
 009576f4,global,?_sizeOfAllTexturesInMemory@Texture@G3D@@0IA,,,
 00957780,global,?_sizeOfAllVARAreasInMemory@VARArea@G3D@@0IA,,,
 00953a34,global,?g_unk0x00953a34@Item@Metadata@Reflection@RBX@@2V?$BoundProp@_N$00@34@A,,,
