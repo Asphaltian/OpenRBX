@@ -44,6 +44,7 @@ public:
 	STDMETHOD(get_ID)(BSTR* pVal);
 	STDMETHOD(RobloxAuthenticate)(BSTR url, BSTR ticket);
 
+	static bool FUN_00407300();
 	static void FUN_00407a40(const char* url);
 };
 

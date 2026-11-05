@@ -106,12 +106,6 @@ Debugable::AssertAction DebugSettings::getAssertAction() const
 	return Debugable::assertAction;
 }
 
-// FUNCTION: WEBSERVICE 0x100b2d50
-DebugSettings::ErrorReporting DebugSettings::getErrorReporting() const
-{
-	return errorReporting;
-}
-
 // FUNCTION: WEBSERVICE 0x100b2d60
 bool DebugSettings::getShowAnchoredParts() const
 {

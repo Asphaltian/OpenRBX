@@ -60,7 +60,9 @@ public:
 	void setValidatingDebug(bool value);
 	Debugable::AssertAction getAssertAction() const;
 	void setAssertAction(Debugable::AssertAction value);
-	ErrorReporting getErrorReporting() const;
+	// FUNCTION: WEBSERVICE 0x100b2d50
+	ErrorReporting getErrorReporting() const { return errorReporting; }
+
 	void setErrorReporting(ErrorReporting value);
 
 	float shaderModel() const;

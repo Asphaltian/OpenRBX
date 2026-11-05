@@ -22,6 +22,13 @@ STDMETHODIMP CApp::get_HasErrorFiles(VARIANT_BOOL* pVal)
 	return S_OK;
 }
 
+// FUNCTION: ROBLOX 0x00407300
+bool CApp::FUN_00407300()
+{
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	return theApp.m_unk0xa4.hasCrashLogs();
+}
+
 // FUNCTION: ROBLOX 0x00407940
 STDMETHODIMP CApp::get_Version(BSTR* pVal)
 {

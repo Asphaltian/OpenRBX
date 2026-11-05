@@ -1,6 +1,7 @@
 #include "Roblox.h"
 
 #include "AboutRobloxDialog.h"
+#include "App.h"
 #include "BrowserView.h"
 #include "ChildFrm.h"
 #include "MainFrm.h"
@@ -14,6 +15,7 @@
 #include "network/API.h"
 #include "security/SecurityContext.h"
 #include "util/StandardOut.h"
+#include "v8datamodel/DebugSettings.h"
 #include "v8datamodel/factoryregistration.h"
 
 #include <afxpriv.h>
@@ -287,11 +289,19 @@ CRobloxApp::~CRobloxApp()
 {
 }
 
-// STUB: ROBLOX 0x004510b0
+// FUNCTION: ROBLOX 0x004510b0
 void CRobloxApp::FUN_004510b0(CCmdUI* p_unk0x04)
 {
-	STUB(0x4510b0);
-	p_unk0x04->Enable(TRUE);
+	switch (RBX::DebugSettings::singleton().getErrorReporting()) {
+	case RBX::DebugSettings::Prompt:
+		if (CApp::FUN_00407300()) {
+			p_unk0x04->Enable(TRUE);
+		}
+		break;
+	case RBX::DebugSettings::Report:
+		p_unk0x04->Enable(TRUE);
+		break;
+	}
 }
 
 // STUB: ROBLOX 0x00451100
