@@ -681,7 +681,7 @@ void ScriptContext::resume(
 }
 
 // FUNCTION: WEBSERVICE 0x10067e00
-// STUB: ROBLOX 0x005743c0
+// FUNCTION: ROBLOX 0x005743c0
 void ScriptContext::startScript(boost::shared_ptr<Script> script)
 {
 	if (scriptsDisabled) {
