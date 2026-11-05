@@ -93,7 +93,14 @@ public:
 			instances
 	);
 
-	virtual T VTable0xe4();                                  // vtable+0xe4
+	virtual T VTable0xe4() // vtable+0xe4
+	{
+		T result;
+		if (RBX::StringConverter<T>::convertToValue((LPCTSTR) GetValue(), result)) {
+			return result;
+		}
+		return T();
+	}
 	virtual void VTable0xe8(const T& value);                 // vtable+0xe8
 	virtual bool VTable0xec(const T& first, const T& second) // vtable+0xec
 	{
@@ -116,18 +123,28 @@ protected:
 };
 
 // clang-format off
+// TEMPLATE: ROBLOX 0x0043c5f0
+// ?VTable0xe4@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEMXZ
+// TEMPLATE: ROBLOX 0x0043c6a0
+// ?VTable0xe4@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAEHXZ
 // TEMPLATE: ROBLOX 0x0043f100
 // ??0?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@M@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x0043f1c0
 // ?VTable0xec@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAE_NABM0@Z
+// TEMPLATE: ROBLOX 0x0043f490
+// ??0?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@H@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x0043f560
 // ?VTable0xf4@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAE_NXZ
 // SYNTHETIC: ROBLOX 0x0043f830
 // ??_E?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEPAXI@Z
+// TEMPLATE: ROBLOX 0x0043fd80
+// ?VTable0xec@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAE_NABH0@Z
 // TEMPLATE: ROBLOX 0x004412e0
 // ?VTable0xf0@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXPAVInstance@RBX@@ABM@Z
 // STUB: ROBLOX 0x004445e0
 // ?OnValueChanged@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// STUB: ROBLOX 0x00444660
+// ?OnValueChanged@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // clang-format on
 
 // SIZE 0x1e8

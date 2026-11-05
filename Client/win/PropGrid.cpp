@@ -32,15 +32,13 @@ void XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor
 	SetValue(buffer);
 }
 
-// FUNCTION: ROBLOX 0x0043c5f0
+// FUNCTION: ROBLOX 0x0043bc60
 template <>
-float XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<float> >::VTable0xe4()
+void XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<int> >::VTable0xe8(const int& value)
 {
-	float result;
-	if (RBX::StringConverter<float>::convertToValue((LPCTSTR) GetValue(), result)) {
-		return result;
-	}
-	return 0.0f;
+	char buffer[32];
+	sprintf(buffer, "%d", value);
+	SetValue(buffer);
 }
 
 // STUB: ROBLOX 0x0043df20
@@ -114,3 +112,4 @@ CPropGrid::CPropGrid() : m_unk0x194(NULL), m_unk0x1c0(false), m_unk0x1c1(false)
 }
 
 template class XItem<float, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<float> >;
+template class XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<int> >;
