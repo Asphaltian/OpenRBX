@@ -36,7 +36,8 @@ public:
 	virtual void OnDraw(CDC* pDC);
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
 
-	boost::shared_ptr<RBX::DataModel> FUN_0045d8e0() const;
+	boost::shared_ptr<RBX::DataModel> FUN_00403290() const;
+	RBX::VerbContainer* FUN_004558a0() { return this; }
 
 protected:
 	virtual void onEvent(const RBX::ServiceProvider* source, RBX::ServiceAdded event);

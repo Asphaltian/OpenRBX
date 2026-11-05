@@ -9,6 +9,14 @@
 #include <map>
 
 // clang-format off
+// TEMPLATE: ROBLOX 0x00456820
+// ??0?$VerbBinder@VCRobloxDoc@@VCDocument@@@@QAE@XZ
+// STUB: ROBLOX 0x004568b0
+// ?OnCmdMsg@?$VerbBinder@VCRobloxDoc@@VCDocument@@@@MAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z
+// TEMPLATE: ROBLOX 0x00456aa0
+// ??1?$VerbBinder@VCRobloxDoc@@VCDocument@@@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x00456b30
+// VerbBinder<CRobloxDoc,CDocument>::`scalar deleting destructor'
 // TEMPLATE: ROBLOX 0x0045dfc0
 // ??0?$VerbBinder@VCRobloxView@@VCView@@@@QAE@XZ
 // STUB: ROBLOX 0x0045e040
@@ -28,9 +36,9 @@ protected:
 		if (nCode == CN_COMMAND || nCode == CN_UPDATE_COMMAND_UI) {
 			typename std::map<UINT, const RBX::Name*>::iterator it = m_unk0x58.find(nID);
 			if (it != m_unk0x58.end() && it->second) {
-				boost::shared_ptr<RBX::DataModel> dataModel = static_cast<T*>(this)->FUN_0045d8e0();
+				boost::shared_ptr<RBX::DataModel> dataModel = static_cast<T*>(this)->FUN_00403290();
 				RBX::DataModel::Lock lock(dataModel);
-				RBX::Verb* verb = static_cast<RBX::VerbContainer*>(static_cast<T*>(this))->getVerb(*it->second);
+				RBX::Verb* verb = static_cast<T*>(this)->FUN_004558a0()->getVerb(*it->second);
 				if (verb) {
 					if (nCode == CN_COMMAND) {
 						try {

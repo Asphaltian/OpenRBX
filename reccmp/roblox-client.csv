@@ -3678,3 +3678,5 @@ address,type,symbol,name,module,size
 0080c99c,global,??_7?$VerbBinder@VCRobloxView@@VCView@@@@6B@,,,
 008058e4,global,??_7CMultiPlayerPane@@6B@,,,
 008058c0,global,?classCMultiPlayerPane@CMultiPlayerPane@@2UCRuntimeClass@@B,,,
+0080b5fc,global,??_7CRobloxDoc@@6B@,,,
+0080b53c,global,??_7?$VerbBinder@VCRobloxDoc@@VCDocument@@@@6B@,,,
