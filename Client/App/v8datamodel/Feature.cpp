@@ -72,6 +72,13 @@ float VelocityMotor::getCurrentAngle() const
 	return static_cast<MotorJoint*>(joint)->getCurrentAngle();
 }
 
+// STUB: ROBLOX 0x00617200
+static bool FUN_00617200(Instance* first, Instance* second)
+{
+	return (dynamic_cast<Hole*>(first) && dynamic_cast<MotorFeature*>(second)) ||
+		   (dynamic_cast<Hole*>(second) && dynamic_cast<MotorFeature*>(first));
+}
+
 // STUB: WEBSERVICE 0x100e3e30
 // STUB: ROBLOX 0x006174a0
 CoordinateFrame Feature::computeLocalCoordinateFrame() const
@@ -379,7 +386,14 @@ MotorFeature::MotorFeature()
 // STUB: ROBLOX 0x0061a840
 void FUN_0061a840(Instance* first, Instance* second)
 {
-	STUB(0x61a840);
+	if (FUN_00617200(first, second)) {
+		Instance* hole = dynamic_cast<Hole*>(first) ? first : second;
+		Instance* feature = hole == first ? second : first;
+
+		boost::shared_ptr<VelocityMotor> motor = Creatable<Instance>::create<VelocityMotor>();
+		motor->setHole(static_cast<Hole*>(hole));
+		motor->setParent(feature);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100f9de0 FOLDED
