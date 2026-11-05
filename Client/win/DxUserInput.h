@@ -48,9 +48,11 @@ private:
 	boost::shared_ptr<RBX::DataModel> m_unk0x194; // 0x194
 
 	bool FUN_0046b7f0();
+	bool FUN_0046b920();
 	void FUN_0046b9d0();
 	void FUN_0046ba80();
 	void FUN_0046bb10();
+	void FUN_0046bc20(const G3D::Vector2& position);
 	void FUN_0046bd60();
 	bool FUN_0046bed0(DIDEVICEOBJECTDATA* data, DWORD* count, IDirectInputDevice8* device);
 	void FUN_0046c090();
@@ -75,7 +77,9 @@ public:
 	virtual bool keyDown(SDLKey key) const;
 	virtual void setKeyState(SDLKey key, bool down);
 
+	void FUN_0046be50(bool p_unk0x78);
 	void FUN_0046ca90();
+	void FUN_0046d0a0();
 
 	// SYNTHETIC: ROBLOX 0x0046d650
 	// DxUserInput::`scalar deleting destructor'

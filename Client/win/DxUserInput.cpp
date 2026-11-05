@@ -29,6 +29,13 @@ bool DxUserInput::FUN_0046b7f0()
 	return true;
 }
 
+// FUNCTION: ROBLOX 0x0046b920
+bool DxUserInput::FUN_0046b920()
+{
+	return keyDown(SDLK_w) || keyDown(SDLK_s) || keyDown(SDLK_a) || keyDown(SDLK_d) || keyDown(SDLK_UP) ||
+		   keyDown(SDLK_DOWN) || keyDown(SDLK_LEFT) || keyDown(SDLK_RIGHT);
+}
+
 // FUNCTION: ROBLOX 0x0046b9b0
 void DxUserInput::setKeyState(SDLKey key, bool down)
 {
@@ -100,6 +107,32 @@ void DxUserInput::FUN_0046bb10()
 	m_unk0x58 = G3D::Rect2D(G3D::Vector2(rect.Width(), rect.Height()));
 }
 
+// FUNCTION: ROBLOX 0x0046bc20
+void DxUserInput::FUN_0046bc20(const G3D::Vector2& position)
+{
+	ATL::CCritSecLock lock(m_unk0x34);
+
+	if (m_unk0x68) {
+		if (FAILED(m_unk0x18c->Acquire())) {
+			m_unk0x68 = false;
+		}
+
+		if (m_unk0x68) {
+			return;
+		}
+	}
+
+	if (m_unk0x180->IsTopParentActive()) {
+		m_unk0x18c->Unacquire();
+		m_unk0x68 = SUCCEEDED(m_unk0x18c->Acquire());
+
+		if (m_unk0x68) {
+			G3D::Rect2D rect = m_unk0x58;
+			m_unk0x70 = position - rect.center();
+		}
+	}
+}
+
 // STUB: ROBLOX 0x0046bd60
 void DxUserInput::FUN_0046bd60()
 {
@@ -125,6 +158,14 @@ void DxUserInput::FUN_0046bd60()
 			}
 		}
 	}
+}
+
+// FUNCTION: ROBLOX 0x0046be50
+void DxUserInput::FUN_0046be50(bool p_unk0x78)
+{
+	ATL::CCritSecLock lock(m_unk0x34);
+	m_unk0x78 = p_unk0x78;
+	FUN_0046bd60();
 }
 
 // FUNCTION: ROBLOX 0x0046bed0
@@ -232,6 +273,24 @@ void DxUserInput::FUN_0046ca90()
 void DxUserInput::FUN_0046cd90()
 {
 	STUB(0x46cd90);
+}
+
+// FUNCTION: ROBLOX 0x0046d0a0
+void DxUserInput::FUN_0046d0a0()
+{
+	FUN_0046bb10();
+
+	ATL::CCritSecLock lock(m_unk0x34);
+
+	if (m_unk0x68) {
+		G3D::Vector2 position = getCursorPosition();
+		CPoint point(position.x, position.y);
+		CClientDC dc(m_unk0x180);
+
+		if (!dc.PtVisible(point)) {
+			FUN_0046ca90();
+		}
+	}
 }
 
 // STUB: ROBLOX 0x0046d180
