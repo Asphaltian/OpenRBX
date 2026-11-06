@@ -5544,3 +5544,5 @@ address,type,symbol,name,module,size
 004c8ca0,library,?erase@?$_Tree@V?$_Tmap_traits@PBVInstance@RBX@@UReplicationData@Replicator@Network@2@U?$less@PBVInstance@RBX@@@std@@V?$allocator@U?$pair@QBVInstance@RBX@@UReplicationData@Replicator@Network@2@@std@@@7@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z,,,
 00456380,stub,??1CameraVerb@RBX@@UAE@XZ,,,
 00569f70,library,??A?$map@PAVIRunView@RBX@@_NU?$less@PAVIRunView@RBX@@@std@@V?$allocator@U?$pair@QAVIRunView@RBX@@_N@std@@@4@@std@@QAEAA_NABQAVIRunView@RBX@@@Z,,,
+004493d0,library,?push_back@?$vector@W4ShadowMode@CRenderSettings@@V?$allocator@W4ShadowMode@CRenderSettings@@@std@@@std@@QAEXABW4ShadowMode@CRenderSettings@@@Z,,,
+00693430,library,??A?$map@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4ShadowMode@CRenderSettings@@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@W4ShadowMode@CRenderSettings@@@std@@@2@@std@@QAEAAW4ShadowMode@CRenderSettings@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z,,,
