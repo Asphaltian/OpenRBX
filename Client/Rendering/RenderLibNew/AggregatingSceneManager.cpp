@@ -3,10 +3,10 @@
 namespace RBX {
 namespace RenderNew {
 
-// STUB: ROBLOX 0x0052fa00
+// FUNCTION: ROBLOX 0x0052fa00
 void AggregatingSceneManager::addModel(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
-	STUB(0x52fa00);
+	FUN_0052dcf0(chunk);
 }
 
 // STUB: ROBLOX 0x00530c70

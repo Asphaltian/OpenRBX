@@ -1,5 +1,7 @@
 #include "renderlibnew/RenderScene.h"
 
+#include "renderlibnew/Chunk.h"
+
 #include <G3D/g3dmath.h>
 
 namespace RBX {
@@ -15,6 +17,12 @@ void RenderScene::setThrottle(float t, float m, bool s, float c)
 RenderScene::~RenderScene()
 {
 	STUB(0x52d7e0);
+}
+
+// FUNCTION: ROBLOX 0x0052dcf0
+void SceneManager::FUN_0052dcf0(const G3D::ReferenceCountedPointer<Chunk>& chunk)
+{
+	renderScene->m_unk0xb8.append(chunk);
 }
 
 // FUNCTION: ROBLOX 0x0052dd00
