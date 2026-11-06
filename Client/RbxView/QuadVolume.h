@@ -19,11 +19,6 @@
 namespace RBX {
 namespace View {
 
-inline G3D::Vector3 absolute(G3D::Vector3 v)
-{
-	return G3D::abs(v);
-}
-
 // SIZE 0x20
 class __declspec(novtable) LevelBuilder
 {
@@ -78,6 +73,12 @@ protected:
 		return 0.0f;
 	}
 
+	template <int face>
+	static G3D::Vector3 uvwToObject(const G3D::Vector3& uvw)
+	{
+		return RBX::uvwToObject<face>(uvw);
+	}
+
 	template <int face, class Deform>
 	inline void buildFace(Deform deform, unsigned int uElements, unsigned int vElements, Purpose purpose)
 	{
@@ -89,7 +90,7 @@ protected:
 	{
 		RenderSurfaceType surfaceType = surfaceTypes.getSurfaceType((NormalId) face);
 
-		G3D::Vector3 localRadius = absolute(uvwToObject<face>(halfSize));
+		G3D::Vector3 localRadius = G3D::abs(uvwToObject<face>(halfSize));
 
 		bool vertical = purpose == Surface && localRadius.y > localRadius.x;
 		int stripIndex = vertical ? 0 : 1;
