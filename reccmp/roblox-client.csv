@@ -5565,3 +5565,6 @@ address,type,symbol,name,module,size
 00768e50,library,??1?$CList@PAVCAlphaBitmap@CXTPImageEditorPicture@@PAV12@@@UAE@XZ,,,
 00780c10,library,??1?$CList@PAUHEXCOLOR_CELL@CXTColorHex@@PAU12@@@UAE@XZ,,,
 00788460,library,??1?$CList@PAUCOLOR_CELL@CXTColorSelectorCtrl@@PAU12@@@UAE@XZ,,,
+00446f60,library,?_Insert_n@?$vector@UIDREFItem@MergeBinder@RBX@@V?$allocator@UIDREFItem@MergeBinder@RBX@@@std@@@std@@IAEXV?$_Vector_iterator@UIDREFItem@MergeBinder@RBX@@V?$allocator@UIDREFItem@MergeBinder@RBX@@@std@@@2@IABUIDREFItem@MergeBinder@RBX@@@Z,,,
+00451fc0,library,??$assign_to@U?$tss_adapter@VContext@Security@RBX@@@detail@boost@@@?$function1@XPAXV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXU?$tss_adapter@VContext@Security@RBX@@@detail@1@@Z,,,
+0051a4a0,library,??$?0V?$bind_t@XV?$mf0@XVPartChunk@ViewNew@RBX@@@_mfi@boost@@V?$list1@V?$value@PAVPartChunk@ViewNew@RBX@@@_bi@boost@@@_bi@3@@_bi@boost@@@?$slot@V?$function@$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@ZV?$allocator@X@std@@@boost@@@boost@@QAE@ABV?$bind_t@XV?$mf0@XVPartChunk@ViewNew@RBX@@@_mfi@boost@@V?$list1@V?$value@PAVPartChunk@ViewNew@RBX@@@_bi@boost@@@_bi@3@@_bi@1@@Z,,,
