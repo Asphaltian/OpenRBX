@@ -135,10 +135,48 @@ void RunService::invalidateRunViews()
 	}
 }
 
+// FUNCTION: ROBLOX 0x00569930
+void RunService::runViewValid(IRunView* runView)
+{
+	boost::mutex::scoped_lock lock(viewMutex);
+
+	if (invalidRunViewCount == 0) {
+		return;
+	}
+
+	Views::iterator iter = views.find(runView);
+
+	if (iter != views.end() && !iter->second) {
+		invalidRunViewCount--;
+		iter->second = true;
+	}
+
+	if (invalidRunViewCount == 0) {
+		runViewsDoneCondition.notify_all();
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x10055380
 // FUNCTION: ROBLOX 0x00569c40
 RunService::~RunService()
 {
+}
+
+// FUNCTION: ROBLOX 0x00569ef0
+void RunService::removeRunView(IRunView* runView)
+{
+	boost::mutex::scoped_lock lock(viewMutex);
+
+	runViewValid(runView);
+	views.erase(runView);
+}
+
+// FUNCTION: ROBLOX 0x0056a100
+void RunService::addRunView(IRunView* runView)
+{
+	boost::mutex::scoped_lock lock(viewMutex);
+
+	views[runView] = true;
 }
 
 // FUNCTION: WEBSERVICE 0x10056950

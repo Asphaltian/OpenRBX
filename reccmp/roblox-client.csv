@@ -5543,3 +5543,4 @@ address,type,symbol,name,module,size
 004119a0,library,?push_back@?$vector@UStateEntry@?$StateStack@VXmlState@RBX@@@RBX@@V?$allocator@UStateEntry@?$StateStack@VXmlState@RBX@@@RBX@@@std@@@std@@QAEXABUStateEntry@?$StateStack@VXmlState@RBX@@@RBX@@@Z,,,
 004c8ca0,library,?erase@?$_Tree@V?$_Tmap_traits@PBVInstance@RBX@@UReplicationData@Replicator@Network@2@U?$less@PBVInstance@RBX@@@std@@V?$allocator@U?$pair@QBVInstance@RBX@@UReplicationData@Replicator@Network@2@@std@@@7@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z,,,
 00456380,stub,??1CameraVerb@RBX@@UAE@XZ,,,
+00569f70,library,??A?$map@PAVIRunView@RBX@@_NU?$less@PAVIRunView@RBX@@@std@@V?$allocator@U?$pair@QAVIRunView@RBX@@_N@std@@@4@@std@@QAEAA_NABQAVIRunView@RBX@@@Z,,,
