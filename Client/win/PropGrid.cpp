@@ -1,7 +1,5 @@
 #include "PropGrid.h"
 
-#include "util/Sound.h"
-#include "util/TextureId.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/DataModel.h"
@@ -352,6 +350,103 @@ BOOL XBrickColorItem::OnDrawItemValue(CDC& dc, CRect rcValue)
 	return FALSE;
 }
 
+// FUNCTION: ROBLOX 0x00441c10
+Vector3Item::Vector3Item(const RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>& descriptor, CPropGrid* grid)
+	: XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >(
+		  descriptor, grid
+	  )
+{
+	m_unk0x128[0] = m_unk0x128[1] = m_unk0x128[2] = NULL;
+}
+
+// FUNCTION: ROBLOX 0x00441c60
+BOOL Vector3Item::OnAfterEdit(CString& strValue)
+{
+	G3D::Vector3 value;
+	return RBX::StringConverter<G3D::Vector3>::convertToValue((LPCTSTR) strValue, value);
+}
+
+// STUB: ROBLOX 0x00441cf0
+void Vector3Item::VTable0x00(
+	const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& instances
+)
+{
+	XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >::VTable0x00(
+		instances
+	);
+	for (int i = 0; i < 3; i++) {
+		if (m_unk0x128[i]) {
+			m_unk0x128[i]->VTable0x00(instances);
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x00441d30
+Vector3ComponentItem::Vector3ComponentItem(
+	const RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>& descriptor, CPropGrid* grid, int component
+)
+	: XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >(
+		  descriptor, grid
+	  ),
+	  m_unk0x128(component)
+{
+	switch (component) {
+	case 0:
+		SetCaption("x");
+		break;
+	case 1:
+		SetCaption("y");
+		break;
+	case 2:
+		SetCaption("z");
+		break;
+	}
+}
+
+// FUNCTION: ROBLOX 0x00441df0
+bool Vector3ComponentItem::VTable0xec(const G3D::Vector3& first, const G3D::Vector3& second)
+{
+	return first[m_unk0x128] == second[m_unk0x128];
+}
+
+// FUNCTION: ROBLOX 0x00441e20
+void Vector3ComponentItem::VTable0xe8(const G3D::Vector3& value)
+{
+	m_unk0x12c = value;
+	char buffer[32];
+	sprintf(buffer, "%.3g", value[m_unk0x128]);
+	SetValue(buffer);
+}
+
+// FUNCTION: ROBLOX 0x00441ea0
+G3D::Vector3 Vector3ComponentItem::VTable0xe4()
+{
+	G3D::Vector3 result = m_unk0x12c;
+	if (RBX::StringConverter<float>::convertToValue((LPCTSTR) GetValue(), result[m_unk0x128])) {
+		return result;
+	}
+	return m_unk0x12c;
+}
+
+// FUNCTION: ROBLOX 0x00441f90
+void Vector3ComponentItem::VTable0xf0(RBX::Instance* instance, const G3D::Vector3& value)
+{
+	RBX::DataModel::Lock lock(m_unk0x14->m_unk0x194);
+	G3D::Vector3 current = m_unk0x124->getValue(instance);
+	current[m_unk0x128] = value[m_unk0x128];
+	m_unk0x124->setValue(instance, current);
+}
+
+// FUNCTION: ROBLOX 0x00442060
+void Vector3Item::OnAddChildItem()
+{
+	CXTPPropertyGridItem::OnAddChildItem();
+	for (int i = 0; i < 3; i++) {
+		m_unk0x128[i] = new Vector3ComponentItem(*m_unk0x124, m_unk0x14, i);
+		AddChildItem(m_unk0x128[i]);
+	}
+}
+
 // FUNCTION: ROBLOX 0x00442100
 RefItem::RefItem(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid)
 	: XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>(descriptor, grid),
@@ -414,6 +509,22 @@ EnumItem::EnumItem(const RBX::Reflection::EnumPropertyDescriptor& descriptor, CP
 	}
 }
 
+// FUNCTION: ROBLOX 0x00442d00
+SoundItem::SoundItem(
+	const RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId>& descriptor, CPropGrid* grid
+)
+	: ContentItem<RBX::Soundscape::SoundId>(descriptor, grid)
+{
+	CXTPPropertyGridItem::SetValue("(Sound)");
+}
+
+// FUNCTION: ROBLOX 0x00442d90
+TextureItem::TextureItem(const RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>& descriptor, CPropGrid* grid)
+	: ContentItem<RBX::TextureId>(descriptor, grid)
+{
+	CXTPPropertyGridItem::SetValue("(Texture)");
+}
+
 // STUB: ROBLOX 0x00445430
 void CSelectionPropGrid::onEvent(const RBX::Selection* source, RBX::SelectionChanged event)
 {
@@ -432,6 +543,18 @@ void CDataModelPropGrid::VTable0x00(
 )
 {
 	STUB(0x445830);
+}
+
+// STUB: ROBLOX 0x00444c80
+void SoundItem::VTable0xf8()
+{
+	STUB(0x444c80);
+}
+
+// STUB: ROBLOX 0x00444e40
+void TextureItem::VTable0xf8()
+{
+	STUB(0x444e40);
 }
 
 // FUNCTION: ROBLOX 0x00445960

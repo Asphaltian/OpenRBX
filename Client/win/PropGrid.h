@@ -4,6 +4,8 @@
 #include "ActiveDocView.h"
 #include "decomp.h"
 #include "util/Events.h"
+#include "util/Sound.h"
+#include "util/TextureId.h"
 #include "v8datamodel/Selection.h"
 #include "v8tree/Instance.h"
 
@@ -55,6 +57,7 @@ protected:
 private:
 	template <class T, class Base, class Descriptor>
 	friend class XItem;
+	friend class Vector3ComponentItem;
 
 	boost::recursive_mutex m_unk0x188;                                            // 0x188
 	RBX::DataModel* m_unk0x194;                                                   // 0x194
@@ -268,6 +271,49 @@ public:
 
 DECOMP_SIZE_ASSERT(XBrickColorItem, 0x134)
 
+// SIZE 0x138
+class Vector3ComponentItem
+	: public XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >
+{
+public:
+	Vector3ComponentItem(
+		const RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>& descriptor, CPropGrid* grid, int component
+	);
+
+	virtual G3D::Vector3 VTable0xe4();                                              // vtable+0xe4
+	virtual void VTable0xe8(const G3D::Vector3& value);                             // vtable+0xe8
+	virtual bool VTable0xec(const G3D::Vector3& first, const G3D::Vector3& second); // vtable+0xec
+	virtual void VTable0xf0(RBX::Instance* instance, const G3D::Vector3& value);    // vtable+0xf0
+
+private:
+	int m_unk0x128;          // 0x128
+	G3D::Vector3 m_unk0x12c; // 0x12c
+};
+
+DECOMP_SIZE_ASSERT(Vector3ComponentItem, 0x138)
+
+// SIZE 0x134
+class Vector3Item
+	: public XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >
+{
+public:
+	Vector3Item(const RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3>& descriptor, CPropGrid* grid);
+
+	virtual BOOL OnAfterEdit(CString& strValue);
+	virtual void VTable0x00(
+		const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >&
+			instances
+	);
+
+protected:
+	virtual void OnAddChildItem();
+
+private:
+	Vector3ComponentItem* m_unk0x128[3]; // 0x128
+};
+
+DECOMP_SIZE_ASSERT(Vector3Item, 0x134)
+
 // SIZE 0x12c
 class RefItem : public XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>
 {
@@ -312,6 +358,70 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(EnumItem, 0x130)
+
+// SIZE 0x128
+template <class T>
+class ContentItem : public XItem<T, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<T> >
+{
+public:
+	ContentItem(const RBX::Reflection::TypedPropertyDescriptor<T>& descriptor, CPropGrid* grid)
+		: XItem<T, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<T> >(descriptor, grid)
+	{
+		this->SetFlags(this->GetFlags() | xtpGridItemHasComboButton);
+		this->GetConstraints()->AddConstraint("Browse...", 0, ID_FILE_OPEN);
+		this->GetConstraints()->AddConstraint("Clear", 1, ID_EDIT_CLEAR);
+	}
+
+	virtual void OnValueChanged(CString strValue)
+	{
+		switch (this->GetConstraints()->GetCurrent()) {
+		case 0:
+			VTable0xf8();
+			break;
+		default:
+			this->FUN_00443670(T((LPCTSTR) strValue));
+			break;
+		case 1:
+			this->FUN_00443670(T());
+			break;
+		}
+	}
+
+	virtual void VTable0xf8() = 0; // vtable+0xf8
+};
+
+// clang-format off
+// TEMPLATE: ROBLOX 0x00442980
+// ??0?$ContentItem@VSoundId@Soundscape@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x00442a40
+// ??0?$ContentItem@VTextureId@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x00444900
+// ?OnValueChanged@?$ContentItem@VSoundId@Soundscape@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// TEMPLATE: ROBLOX 0x00444900 FOLDED
+// ?OnValueChanged@?$ContentItem@VTextureId@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// clang-format on
+
+// SIZE 0x128
+class SoundItem : public ContentItem<RBX::Soundscape::SoundId>
+{
+public:
+	SoundItem(const RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId>& descriptor, CPropGrid* grid);
+
+	virtual void VTable0xf8(); // vtable+0xf8
+};
+
+DECOMP_SIZE_ASSERT(SoundItem, 0x128)
+
+// SIZE 0x128
+class TextureItem : public ContentItem<RBX::TextureId>
+{
+public:
+	TextureItem(const RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>& descriptor, CPropGrid* grid);
+
+	virtual void VTable0xf8(); // vtable+0xf8
+};
+
+DECOMP_SIZE_ASSERT(TextureItem, 0x128)
 
 // SIZE 0x1e8
 class CSelectionPropGrid : public CPropGrid, public RBX::Listener<RBX::Selection, RBX::SelectionChanged>
