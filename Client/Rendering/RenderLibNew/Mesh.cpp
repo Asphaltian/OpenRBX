@@ -17,7 +17,7 @@ Mesh::VertexList Mesh::freeList;
 bool Mesh::varDirty;
 
 static int g_unk0x00958738;
-static bool init;
+static bool g_unk0x00958794;
 
 void Mesh::endRender(G3D::RenderDevice* rd)
 {
@@ -128,15 +128,12 @@ void Mesh::freeVertex(unsigned int index)
 	}
 }
 
+// STUB: ROBLOX 0x00532770
 Mesh::Level::~Level()
 {
 	for (int i = 0; i < indexArray.size(); i++) {
 		freeVertex(indexArray[i]);
 	}
-}
-
-Mesh::~Mesh()
-{
 }
 
 void Mesh::makeVAR()
@@ -192,80 +189,22 @@ void Mesh::initStatics()
 	freeList.resize(0);
 }
 
-void Mesh::computeDirectionalShadowVolume(
-	const G3D::CoordinateFrame& cframe,
-	const G3D::Vector3& wsLightVector,
-	G3D::Array<unsigned int>& indexArray,
-	G3D::Array<G3D::Vector3>& shadowVertex,
-	bool generateLightCap
-) const
-{
-	G3D::Vector3 objectLight = cframe.rotation.transpose() * wsLightVector;
-	const G3D::Array<G3D::Vector3>& geometry = shadowSurface.geometry;
-
-	static G3D::Array<bool> backface;
-	backface.resize(shadowSurface.faceNormalArray.size(), false);
-
-	for (int f = 0; f < shadowSurface.faceNormalArray.size(); f++) {
-		backface[f] = shadowSurface.faceNormalArray[f].dot(objectLight) < 0;
-	}
-
-	if (generateLightCap) {
-		for (int f = 0; f < backface.size(); f++) {
-			if (!backface[f]) {
-				int n = shadowVertex.size();
-				indexArray.append(n, n + 1, n + 2);
-
-				const G3D::MeshAlg::Face& face = shadowSurface.faceArray[f];
-				const G3D::Vector3& v0 = geometry[face.vertexIndex[0]];
-				const G3D::Vector3& v1 = geometry[face.vertexIndex[1]];
-				const G3D::Vector3& v2 = geometry[face.vertexIndex[2]];
-
-				shadowVertex.append(
-					cframe.pointToWorldSpace(v0), cframe.pointToWorldSpace(v1), cframe.pointToWorldSpace(v2)
-				);
-			}
-		}
-	}
-
-	for (int e = 0; e < shadowSurface.edgeArray.size(); e++) {
-		const G3D::MeshAlg::Edge& edge = shadowSurface.edgeArray[e];
-		bool b0 = backface[edge.faceIndex[0]];
-
-		if (b0 != backface[edge.faceIndex[1]]) {
-			const G3D::Vector3& v0 = geometry[edge.vertexIndex[0]];
-			const G3D::Vector3& v1 = geometry[edge.vertexIndex[1]];
-
-			G3D::Vector3 wvertex0 = cframe.pointToWorldSpace(v0), wvertex1 = cframe.pointToWorldSpace(v1);
-
-			int n = shadowVertex.size();
-			shadowVertex.append(wvertex0, wvertex1);
-
-			unsigned int A;
-			unsigned int B;
-
-			if (b0) {
-				A = n;
-				B = n + 1;
-			}
-			else {
-				A = n + 1;
-				B = n;
-			}
-
-			indexArray.append(A, B, 0);
-		}
-	}
-}
-
+// FUNCTION: ROBLOX 0x00532ad0
 Mesh::Mesh()
 {
-	if (!init) {
+	if (!g_unk0x00958794) {
 		initStatics();
-		init = true;
+		g_unk0x00958794 = true;
 	}
 
-	debugBoundingRadius = 0.0f;
+	m_unk0x38 = NULL;
+	m_unk0x3c = 0;
+}
+
+// STUB: ROBLOX 0x00532b60
+Mesh::~Mesh()
+{
+	STUB(0x532b60);
 }
 
 G3D::ReferenceCountedPointer<Mesh> Mesh::aggregate(
@@ -318,121 +257,7 @@ G3D::ReferenceCountedPointer<Mesh> Mesh::aggregate(
 		}
 	}
 
-	ShadowSurface& shadow = mesh->shadowSurface;
-	shadow.dropShadowGeometry = mesh->levels[0];
-
-	int faceOffset = 0;
-	int edgeOffset = 0;
-	int vertexOffset = 0;
-
-	for (std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator iter = chunkArray.begin(); iter != end;
-		 ++iter) {
-		const G3D::ReferenceCountedPointer<Chunk>& chunk = *iter;
-		const G3D::ReferenceCountedPointer<Mesh>& srcMesh = chunk->getMesh();
-
-		if (srcMesh.isNull()) {
-			continue;
-		}
-
-		const ShadowSurface& src = srcMesh->shadowSurface;
-		const G3D::CoordinateFrame& cframe = chunk->cframe();
-
-		G3D::CoordinateFrame netTransform = outCFrame.inverse() * cframe;
-
-		for (int i = 0; i < src.faceNormalArray.size(); i++) {
-			shadow.faceNormalArray.append(netTransform.vectorToWorldSpace(src.faceNormalArray[i]));
-		}
-
-		for (int i = 0; i < src.geometry.size(); i++) {
-			shadow.geometry.append(netTransform.pointToWorldSpace(src.geometry[i]));
-		}
-
-		for (int i = 0; i < src.edgeArray.size(); i++) {
-			const G3D::MeshAlg::Edge& srcEdge = src.edgeArray[i];
-			shadow.edgeArray.resize(shadow.edgeArray.size() + 1, false);
-			G3D::MeshAlg::Edge& e = shadow.edgeArray.last();
-
-			for (int j = 0; j < 2; j++) {
-				e.vertexIndex[j] = srcEdge.vertexIndex[j] + vertexOffset;
-				e.faceIndex[j] = srcEdge.faceIndex[j] + faceOffset;
-			}
-		}
-
-		for (int i = 0; i < src.faceArray.size(); i++) {
-			const G3D::MeshAlg::Face& srcFace = src.faceArray[i];
-			shadow.faceArray.resize(shadow.faceArray.size() + 1, false);
-			G3D::MeshAlg::Face& f = shadow.faceArray.last();
-
-			for (int j = 0; j < 2; j++) {
-				f.edgeIndex[j] = srcFace.edgeIndex[j] + edgeOffset;
-			}
-
-			for (int j = 0; j < 3; j++) {
-				f.vertexIndex[j] = srcFace.vertexIndex[j] + vertexOffset;
-			}
-		}
-
-		faceOffset += src.faceArray.size();
-		edgeOffset += src.edgeArray.size();
-		vertexOffset += src.geometry.size();
-	}
-
-	mesh->debugBoundingRadius = outBoundingRadius;
-
 	return mesh;
-}
-
-void Mesh::computeShadowSurface(const LevelRef& level)
-{
-	shadowSurface.dropShadowGeometry = level;
-	shadowSurface.geometry.resize(0, false);
-
-	G3D::Array<G3D::Vector3> rawGeometry;
-
-	for (int i = 0; i < level->indexArray.size(); i++) {
-		G3D::Vector3 v = visibleGeometry.vertexArray[level->indexArray[i]];
-		rawGeometry.append(v);
-	}
-
-	G3D::Array<int> indexArray;
-
-	if (level->primitive == G3D::RenderDevice::TRIANGLES) {
-		G3D::MeshAlg::createIndexArray(level->indexArray.size(), indexArray);
-	}
-	else {
-		G3D::Array<int> tmp;
-		G3D::MeshAlg::createIndexArray(level->indexArray.size(), tmp);
-		G3D::MeshAlg::toIndexedTriList(tmp, (G3D::MeshAlg::Primitive) level->primitive, indexArray);
-	}
-
-	G3D::Array<G3D::Vector3> newVertexPositions;
-	G3D::Array<int> toNew;
-	G3D::Array<int> toOld;
-	G3D::MeshAlg::computeWeld(rawGeometry, shadowSurface.geometry, toNew, toOld);
-
-	for (int i = 0; i < indexArray.size(); i++) {
-		indexArray[i] = toNew[indexArray[i]];
-	}
-
-	G3D::Array<G3D::MeshAlg::Vertex> vertexArray;
-	G3D::MeshAlg::computeAdjacency(
-		shadowSurface.geometry, indexArray, shadowSurface.faceArray, shadowSurface.edgeArray, vertexArray
-	);
-
-	for (int i = 0; i < shadowSurface.edgeArray.size(); i++) {
-	}
-
-	shadowSurface.faceNormalArray.resize(shadowSurface.faceArray.size());
-
-	for (int f = 0; f < shadowSurface.faceNormalArray.size(); f++) {
-		G3D::Vector3 vertex[3];
-
-		for (int i = 0; i < 3; i++) {
-			vertex[i] = shadowSurface.geometry[shadowSurface.faceArray[f].vertexIndex[i]];
-		}
-
-		shadowSurface.faceNormalArray[f] = (vertex[1] - vertex[0]).cross(vertex[2] - vertex[0]).direction();
-	}
 }
 
 } // namespace RenderNew

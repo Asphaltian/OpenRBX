@@ -2,7 +2,6 @@
 
 #include "BrickMesh.h"
 #include "QuadVolume.h"
-#include "ViewBase.h"
 
 #include <G3D/Vector2int16.h>
 #include <G3D/Vector3int16.h>
@@ -201,13 +200,6 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 		levels.append(level);
 		PBBBuilder builder(level, size, surfaceTypes);
 		builder.build(LevelBuilder::Surface);
-	}
-
-	if (ViewBase::getShadowsEnabled()) {
-		RenderNew::Mesh::LevelRef tempShadowLevel = new RenderNew::Mesh::Level(G3D::RenderDevice::TRIANGLES);
-		PBBBuilder builder(tempShadowLevel, size, surfaceTypes);
-		builder.build(LevelBuilder::Shadow);
-		computeShadowSurface(tempShadowLevel);
 	}
 }
 

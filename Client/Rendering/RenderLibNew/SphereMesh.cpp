@@ -1,7 +1,6 @@
 #include "SphereMesh.h"
 
 #include "QuadVolume.h"
-#include "ViewBase.h"
 
 #include <G3D/Vector2int16.h>
 
@@ -79,26 +78,10 @@ SphereMesh::SphereMesh(const G3D::Vector3& diameter, RenderSurfaceTypes surfaceT
 		SphereBuilder builder(level, diameter, surfaceTypes, 6);
 		builder.build(LevelBuilder::Surface);
 	}
-
-	if (ViewBase::getShadowsEnabled()) {
-		int elements = (diameter.x < 40.0f && diameter.y < 40.0f && diameter.z < 40.0f) ? 3 : 4;
-
-		RenderNew::Mesh::LevelRef tempShadowLevel = new RenderNew::Mesh::Level(G3D::RenderDevice::TRIANGLES);
-		SphereBuilder builder(tempShadowLevel, diameter, surfaceTypes, elements);
-		builder.build(LevelBuilder::Shadow);
-		computeShadowSurface(tempShadowLevel);
-	}
 }
 
 SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId decalFace)
 {
-	if (false) {
-		RenderNew::Mesh::LevelRef tempShadowLevel = new RenderNew::Mesh::Level(G3D::RenderDevice::TRIANGLES);
-		SphereBuilder builder(tempShadowLevel, size, RenderSurfaceTypes(), 3);
-		builder.build(LevelBuilder::Shadow);
-		computeShadowSurface(tempShadowLevel);
-	}
-
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
 
 	levels.append(level);

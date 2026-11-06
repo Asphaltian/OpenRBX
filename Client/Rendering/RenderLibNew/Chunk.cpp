@@ -42,10 +42,6 @@ void AggregateChunk::renderShadows(
 
 		shadowVertex.append(-light.position.xyz().direction() * shadowVertexDistance);
 
-		G3D::Vector3 worldLight = light.position.xyz().direction();
-
-		mesh->computeDirectionalShadowVolume(cframe(), worldLight, shadowIndexArray, shadowVertex, caps);
-
 		if (shadowVertex.size() < 65536) {
 			int numIndices = shadowIndexArray.size();
 			shadowIndexArray16.resize(numIndices, true);

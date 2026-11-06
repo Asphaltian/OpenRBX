@@ -1,7 +1,6 @@
 #include "BrickMesh.h"
 
 #include "QuadVolume.h"
-#include "ViewBase.h"
 #include "util/Math.h"
 #include "v8datamodel/BrickColor.h"
 
@@ -235,20 +234,6 @@ void meshFace(
 	}
 }
 
-static void appendTriangles(RBX::RenderNew::Mesh::Level& level, int a, int b, int c, int d)
-{
-	level.indexArray.append(
-		RBX::RenderNew::Mesh::allocVertex(a, 1),
-		RBX::RenderNew::Mesh::allocVertex(b, 1),
-		RBX::RenderNew::Mesh::allocVertex(c, 1)
-	);
-	level.indexArray.append(
-		RBX::RenderNew::Mesh::allocVertex(a, 1),
-		RBX::RenderNew::Mesh::allocVertex(c, 1),
-		RBX::RenderNew::Mesh::allocVertex(d, 1)
-	);
-}
-
 BrickMesh::BrickMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color)
 {
 	{
@@ -265,56 +250,6 @@ BrickMesh::BrickMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, 
 		meshFace<3>(halfSize, bevel, surfaceTypes, colorIndex, level);
 		meshFace<4>(halfSize, bevel, surfaceTypes, colorIndex, level);
 		meshFace<5>(halfSize, bevel, surfaceTypes, colorIndex, level);
-	}
-
-	if (ViewBase::getShadowsEnabled()) {
-		RenderNew::Mesh::LevelRef shadowLevel = new RenderNew::Mesh::Level(G3D::RenderDevice::TRIANGLES);
-
-		G3D::Vector3 halfSize = G3D::Vector3(size.x * 0.5, size.y * 0.5, size.z * 0.5) -
-								G3D::Vector3(widthInset + bevel, bevel, widthInset + bevel);
-
-		unsigned int xyz = allocVertex(
-			G3D::Vector3(-halfSize.x, -halfSize.y, -halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
-		);
-		unsigned int xyZ = allocVertex(
-			G3D::Vector3(-halfSize.x, -halfSize.y, halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
-		);
-		unsigned int xYz = allocVertex(
-			G3D::Vector3(-halfSize.x, halfSize.y, -halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
-		);
-		unsigned int xYZ = allocVertex(
-			G3D::Vector3(-halfSize.x, halfSize.y, halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
-		);
-		unsigned int Xyz = allocVertex(
-			G3D::Vector3(halfSize.x, -halfSize.y, -halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
-		);
-		unsigned int XyZ = allocVertex(
-			G3D::Vector3(halfSize.x, -halfSize.y, halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
-		);
-		unsigned int XYz = allocVertex(
-			G3D::Vector3(halfSize.x, halfSize.y, -halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
-		);
-		unsigned int XYZ = allocVertex(
-			G3D::Vector3(halfSize.x, halfSize.y, halfSize.z), G3D::Vector3::zero(), G3D::Vector2::zero(), true
-		);
-
-		appendTriangles(*shadowLevel, XYZ, XyZ, Xyz, XYz);
-		appendTriangles(*shadowLevel, xYz, xyz, xyZ, xYZ);
-		appendTriangles(*shadowLevel, XYZ, XYz, xYz, xYZ);
-		appendTriangles(*shadowLevel, xyZ, xyz, Xyz, XyZ);
-		appendTriangles(*shadowLevel, xYZ, xyZ, XyZ, XYZ);
-		appendTriangles(*shadowLevel, XYz, Xyz, xyz, xYz);
-
-		freeVertex(xyz);
-		freeVertex(xyZ);
-		freeVertex(xYz);
-		freeVertex(xYZ);
-		freeVertex(Xyz);
-		freeVertex(XyZ);
-		freeVertex(XYz);
-		freeVertex(XYZ);
-
-		computeShadowSurface(shadowLevel);
 	}
 }
 

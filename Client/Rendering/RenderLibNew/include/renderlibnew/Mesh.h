@@ -15,47 +15,48 @@
 
 class ThumbnailGenerator;
 
+namespace Ogre {
+class SubMesh;
+}
+
 namespace RBX {
 namespace RenderNew {
 
 class Chunk;
 
-// SIZE 0x50
+// SIZE 0x40
 class Mesh : public G3D::ReferenceCountedObject
 {
 public:
 	typedef unsigned int IndexType;
 	typedef G3D::Array<int> VertexList;
 
-	// SIZE 0x1c
+	// SIZE 0x28
 	class Level : public G3D::ReferenceCountedObject
 	{
 	public:
 		G3D::Array<IndexType> indexArray;       // 0x0c
 		G3D::RenderDevice::Primitive primitive; // 0x18
+		bool m_unk0x1c;                         // 0x1c
+		int m_unk0x20;                          // 0x20
+		Ogre::SubMesh* m_unk0x24;               // 0x24
 
 		Level();
 
-		Level(G3D::RenderDevice::Primitive primitive) : primitive(primitive) {}
+		// FUNCTION: ROBLOX 0x0050e300
+		Level(G3D::RenderDevice::Primitive primitive)
+			: primitive(primitive), m_unk0x1c(true), m_unk0x20(-1), m_unk0x24(NULL)
+		{
+		}
 
 		virtual ~Level();
 
-		// clang-format off
-		// clang-format on
+		// SYNTHETIC: ROBLOX 0x0050e360
+		// RBX::RenderNew::Mesh::Level::`scalar deleting destructor'
 	};
 
 	typedef G3D::ReferenceCountedPointer<Level> LevelRef;
 
-	// SIZE 0x34
-	class ShadowSurface
-	{
-	public:
-		G3D::Array<G3D::MeshAlg::Edge> edgeArray; // 0x00
-		G3D::Array<G3D::Vector3> faceNormalArray; // 0x0c
-		G3D::Array<G3D::MeshAlg::Face> faceArray; // 0x18
-		G3D::Array<G3D::Vector3> geometry;        // 0x24
-		LevelRef dropShadowGeometry;              // 0x30
-	};
 	static void setShadowVertex(const G3D::Vector3&);
 
 private:
@@ -91,13 +92,14 @@ protected:
 
 	Mesh();
 
-	void computeShadowSurface(const LevelRef& level);
-
 	G3D::Array<LevelRef> levels; // 0x0c
 
 	int detailIndex(double detail) const { return G3D::iClamp((int) detail, 0, levels.size() - 1); }
 
-	ShadowSurface shadowSurface; // 0x18
+	std::vector<undefined4> m_unk0x18; // 0x18
+	std::vector<undefined4> m_unk0x28; // 0x28
+	undefined4* m_unk0x38;             // 0x38
+	undefined4 m_unk0x3c;              // 0x3c
 
 public:
 	static G3D::ReferenceCountedPointer<Mesh> aggregate(
@@ -108,8 +110,6 @@ public:
 	static unsigned int findVertex(const G3D::Vector3&, const G3D::Vector3&, const G3D::Vector2&);
 
 	virtual ~Mesh();
-
-	float debugBoundingRadius; // 0x4c
 
 	static void freeVertex(unsigned int index);
 
@@ -123,28 +123,15 @@ public:
 
 	static void sendGeometry(const Level* lvl, G3D::RenderDevice* rd);
 
-	LevelRef dropShadowMesh() { return shadowSurface.dropShadowGeometry; }
-
 	static void endRender(G3D::RenderDevice* rd);
 
 	const LevelRef detailLevel(float detail) const;
 
-	void computeDirectionalShadowVolume(
-		const G3D::CoordinateFrame& cframe,
-		const G3D::Vector3& wsLightVector,
-		G3D::Array<unsigned int>& indexArray,
-		G3D::Array<G3D::Vector3>& shadowVertex,
-		bool generateLightCap
-	) const;
-
-	// clang-format off
-	// clang-format on
 	static void flushVAR();
 };
 
-DECOMP_SIZE_ASSERT(Mesh, 0x50)
-DECOMP_SIZE_ASSERT(Mesh::Level, 0x1c)
-DECOMP_SIZE_ASSERT(Mesh::ShadowSurface, 0x34)
+DECOMP_SIZE_ASSERT(Mesh, 0x40)
+DECOMP_SIZE_ASSERT(Mesh::Level, 0x28)
 
 } // namespace RenderNew
 } // namespace RBX
