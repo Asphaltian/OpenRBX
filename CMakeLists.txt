@@ -336,8 +336,10 @@ set(OPENRBX_RBXVIEWNEW_SOURCES
 )
 set(OPENRBX_RENDERLIBNEW_SOURCES
   Client/Rendering/RenderLibNew/AggregatingSceneManager.cpp
+  Client/Rendering/RenderLibNew/Material.cpp
   Client/Rendering/RenderLibNew/Mesh.cpp
   Client/Rendering/RenderLibNew/RenderScene.cpp
+  Client/Rendering/RenderLibNew/TextureProxy.cpp
 )
 set(OPENRBX_RENDERLIB_SOURCES
   Client/Rendering/RenderLib/AggregatingSceneManager.cpp
