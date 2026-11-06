@@ -1,0 +1,166 @@
+#ifndef RENDERLIBNEW_PART_H
+#define RENDERLIBNEW_PART_H
+
+#include "decomp.h"
+#include "renderlibnew/Chunk.h"
+#include "renderlibnew/Material.h"
+#include "renderlibnew/Mesh.h"
+#include "util/Events.h"
+#include "v8world/IMoving.h"
+
+#include <G3D/CoordinateFrame.h>
+#include <G3D/ReferenceCount.h>
+#include <G3D/Vector3.h>
+#include <boost/shared_ptr.hpp>
+#include <boost/signals/connection.hpp>
+
+namespace RBX {
+
+class Decal;
+class Instance;
+class PartInstance;
+class SpecialShape;
+class Texture;
+
+namespace Reflection {
+class PropertyDescriptor;
+}
+
+namespace ViewNew {
+
+class View;
+
+float primaryComponent(const G3D::Vector3& v);
+
+// SIZE 0xcc
+class __declspec(novtable) PartChunk : public RenderNew::Chunk
+{
+private:
+	G3D::CoordinateFrame coordinateFrame; // 0x1c
+
+	virtual void updateMesh() = 0; // vtable+0x20
+
+	boost::signals::scoped_connection childAddedConnection;           // 0x4c
+	boost::signals::scoped_connection childRemovedConnection;         // 0x60
+	boost::signals::scoped_connection ancestorChangedConnection;      // 0x74
+	boost::signals::scoped_connection propertyChangedConnection;      // 0x88
+	boost::signals::scoped_connection shapePropertyChangedConnection; // 0x9c
+
+public:
+	virtual ~PartChunk();
+
+	virtual bool castsShadows() const;
+	virtual bool cullable() const;
+
+protected:
+	boost::shared_ptr<PartInstance> partInstance;               // 0xb0
+	G3D::ReferenceCountedPointer<RenderNew::Material> material; // 0xb8
+	bool materialInvalid;                                       // 0xbc
+	G3D::ReferenceCountedPointer<RenderNew::Mesh> mesh;         // 0xc0
+	View* view;                                                 // 0xc4
+	SpecialShape* specialShape;                                 // 0xc8
+
+	PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>& partInstance, View* view);
+
+	void invalidateMaterial();
+	void invalidateMesh();
+
+	virtual void onPropertyChanged(const Reflection::PropertyDescriptor* descriptor); // vtable+0x24
+
+	virtual G3D::ReferenceCountedPointer<RenderNew::Mesh> getMesh();
+	virtual const G3D::CoordinateFrame& cframe();
+
+private:
+	void onAncestorChanged(boost::shared_ptr<Instance> ancestor);
+	void onChildAdded(boost::shared_ptr<Instance> child);
+	void onChildRemoved(boost::shared_ptr<Instance> child);
+	void onSpecialShapeChanged();
+};
+
+DECOMP_SIZE_ASSERT(PartChunk, 0xcc)
+
+// SIZE 0xd0
+class Part : public PartChunk, public Listener<PartInstance, CanAggregateChanged>
+{
+public:
+	Part(const boost::shared_ptr<PartInstance>& partInstance, View* view);
+
+	virtual ~Part();
+
+	// clang-format off
+	// clang-format on
+
+	virtual G3D::ReferenceCountedPointer<RenderNew::Material> getMaterial();
+
+protected:
+	virtual void onPropertyChanged(const Reflection::PropertyDescriptor* descriptor);
+	virtual void onEvent(const PartInstance* source, CanAggregateChanged event);
+
+private:
+	bool usesMegaTexture() const;
+
+	virtual void updateMesh();
+};
+
+DECOMP_SIZE_ASSERT(Part, 0xd0)
+
+// SIZE 0xfc
+class Decal : public PartChunk
+{
+private:
+	boost::shared_ptr<RBX::Decal> decal;                              // 0xcc
+	boost::signals::scoped_connection decalAncestorChangedConnection; // 0xd4
+	boost::signals::scoped_connection decalPropertyChangedConnection; // 0xe8
+
+public:
+	Decal(RBX::Decal& decal, PartInstance& parentPart, View* view);
+
+	virtual ~Decal();
+
+	// clang-format off
+	// clang-format on
+
+	virtual G3D::ReferenceCountedPointer<RenderNew::Material> getMaterial();
+
+protected:
+	void onDecalPropertyChanged(const Reflection::PropertyDescriptor* descriptor);
+	void onDecalAncestorChanged(boost::shared_ptr<Instance> ancestor);
+
+private:
+	virtual void updateMesh();
+};
+
+DECOMP_SIZE_ASSERT(Decal, 0xfc)
+
+// SIZE 0xfc
+class Texture : public PartChunk
+{
+private:
+	boost::shared_ptr<RBX::Texture> texture;                            // 0xcc
+	boost::signals::scoped_connection textureAncestorChangedConnection; // 0xd4
+	boost::signals::scoped_connection texturePropertyChangedConnection; // 0xe8
+
+public:
+	Texture(RBX::Texture& texture, PartInstance& parentPart, View* view);
+
+	virtual ~Texture();
+
+	// clang-format off
+	// clang-format on
+
+	virtual G3D::ReferenceCountedPointer<RenderNew::Material> getMaterial();
+
+protected:
+	void onTexturePropertyChanged(const Reflection::PropertyDescriptor* descriptor);
+	void onTextureAncestorChanged(boost::shared_ptr<Instance> ancestor);
+
+private:
+	virtual void updateMesh();
+};
+
+DECOMP_SIZE_ASSERT(Texture, 0xfc)
+
+} // namespace ViewNew
+} // namespace RBX
+
+#endif // RENDERLIBNEW_PART_H

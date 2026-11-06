@@ -330,12 +330,23 @@ set(OPENRBX_RBXVIEW_SOURCES
   Client/RbxView/Part.cpp
 )
 set(OPENRBX_RBXVIEWNEW_SOURCES
+  Client/Rendering/RenderLibNew/BevelMesh.cpp
+  Client/Rendering/RenderLibNew/BrickMesh.cpp
+  Client/Rendering/RenderLibNew/CylinderMesh.cpp
+  Client/Rendering/RenderLibNew/FileMesh.cpp
+  Client/Rendering/RenderLibNew/HeadMesh.cpp
   Client/Rendering/RenderLibNew/MaterialFactory.cpp
+  Client/Rendering/RenderLibNew/Part.cpp
+  Client/Rendering/RenderLibNew/PBBMesh.cpp
   Client/Rendering/RenderLibNew/QuadVolume.cpp
+  Client/Rendering/RenderLibNew/SphereMesh.cpp
+  Client/Rendering/RenderLibNew/TorsoMesh.cpp
   Client/Rendering/RenderLibNew/View.cpp
+  Client/Rendering/RenderLibNew/WedgeMesh.cpp
 )
 set(OPENRBX_RENDERLIBNEW_SOURCES
   Client/Rendering/RenderLibNew/AggregatingSceneManager.cpp
+  Client/Rendering/RenderLibNew/Chunk.cpp
   Client/Rendering/RenderLibNew/Material.cpp
   Client/Rendering/RenderLibNew/Mesh.cpp
   Client/Rendering/RenderLibNew/RenderScene.cpp
