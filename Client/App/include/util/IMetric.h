@@ -8,7 +8,7 @@
 namespace RBX {
 
 // SIZE 0x4
-class IMetric
+class __declspec(novtable) IMetric
 {
 public:
 	IMetric() {}

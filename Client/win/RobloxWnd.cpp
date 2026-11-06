@@ -1,6 +1,7 @@
 #include "RobloxWnd.h"
 
 #include "RenderSettings.h"
+#include "Workspace.h"
 #include "renderlib/Profiler.h"
 #include "util/standardout.h"
 #include "v8datamodel/GlobalSettings.h"
@@ -124,10 +125,17 @@ void CRobloxWnd::OnClose()
 	CWnd::OnClose();
 }
 
-// STUB: ROBLOX 0x00460bd0
+// FUNCTION: ROBLOX 0x00460bd0
 CRobloxWnd::CRobloxWnd(bool p_unk0x80)
+	: m_unk0x78(true), m_unk0x80(p_unk0x80), m_unk0x81(false), m_unk0x82(false), m_unk0x83(true), m_unk0x88(666.0),
+	  m_unk0x90(new RBX::Profiling::CodeProfiler("Render")), m_unk0x94(false), m_unk0x98(0), m_unk0x9c(NULL),
+	  m_unk0xa0(false), m_unk0xb0(NULL)
 {
-	STUB(0x460bd0);
+	m_unk0x60 = 0;
+	m_unk0x5c = CRenderSettings::singleton().FUN_0044d430();
+	if (m_unk0x5c == 1) {
+		m_unk0x5c = 3;
+	}
 }
 
 // FUNCTION: ROBLOX 0x00460d10
@@ -252,10 +260,16 @@ std::string CRobloxWnd::getMetric(const std::string& metric) const
 	return std::string();
 }
 
+// STUB: ROBLOX 0x00463c30
+void CRobloxWnd::FUN_00463c30(CWorkspace* workspace)
+{
+	STUB(0x463c30);
+}
+
 // STUB: ROBLOX 0x00464000
 CRobloxWnd::~CRobloxWnd()
 {
-	STUB(0x464000);
+	FUN_00463c30(NULL);
 }
 
 // STUB: ROBLOX 0x00464180

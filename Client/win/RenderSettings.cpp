@@ -348,15 +348,6 @@ void CRenderSettings::FUN_0044d170(ShadowMode p_unk0x04)
 	}
 }
 
-// FUNCTION: ROBLOX 0x0044d430
-undefined4 CRenderSettings::FUN_0044d430()
-{
-	if (g_unk0x00953ae0 == 0) {
-		g_unk0x00953ae0 = m_unk0xf8;
-	}
-	return g_unk0x00953ae0;
-}
-
 template class RBX::FactoryProduct<CRenderSettings, RBX::GlobalSettings::Item, sRenderSettings>;
 template class RBX::Reflection::Described<
 	CRenderSettings,

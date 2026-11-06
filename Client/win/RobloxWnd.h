@@ -2,13 +2,25 @@
 #define ROBLOXWND_H
 
 #include "DxUserInput.h"
+#include "ViewBase.h"
 #include "decomp.h"
+#include "rbxgraphics/Adorn.h"
 #include "util/IMetric.h"
+#include "util/Profiling.h"
 #include "util/RunStateOwner.h"
 
 #include <GLG3D/GWindow.h>
 #include <GLG3D/RenderDevice.h>
+#include <atlbase.h>
+#include <boost/scoped_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 #include <memory>
+
+class CWorkspace;
+
+namespace RBX {
+class DataModel;
+}
 
 // SIZE 0xb8
 class CRobloxWnd : public CWnd, public RBX::IRunView, public RBX::IMetric
@@ -22,6 +34,7 @@ public:
 	void FUN_00460430();
 	void FUN_004610a0(int width, int height);
 	void FUN_00461420(int width, int height);
+	void FUN_00463c30(CWorkspace* workspace);
 
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
@@ -49,20 +62,30 @@ protected:
 	// ?GetMessageMap@CRobloxWnd@@MBEPBUAFX_MSGMAP@@XZ
 
 private:
-	int m_unk0x5c;                              // 0x5c
-	int m_unk0x60;                              // 0x60
-	undefined m_unk0x64[0x7c - 0x64];           // 0x64
-	DxUserInput* m_unk0x7c;                     // 0x7c
-	bool m_unk0x80;                             // 0x80
-	undefined m_unk0x81[0x88 - 0x81];           // 0x81
-	double m_unk0x88;                           // 0x88
-	undefined m_unk0x90[0x98 - 0x90];           // 0x90
-	DWORD m_unk0x98;                            // 0x98
-	G3D::GWindow* m_unk0x9c;                    // 0x9c
-	bool m_unk0xa0;                             // 0xa0
-	undefined m_unk0xa1[0xa4 - 0xa1];           // 0xa1
-	std::auto_ptr<G3D::RenderDevice> m_unk0xa4; // 0xa4
-	undefined m_unk0xa8[0xb8 - 0xa8];           // 0xa8
+	class RenderStatsItem;
+
+	int m_unk0x5c;                                         // 0x5c
+	int m_unk0x60;                                         // 0x60
+	boost::shared_ptr<RenderStatsItem> m_unk0x64;          // 0x64
+	CComPtr<CWorkspace> m_unk0x6c;                         // 0x6c
+	boost::shared_ptr<RBX::DataModel> m_unk0x70;           // 0x70
+	bool m_unk0x78;                                        // 0x78
+	boost::scoped_ptr<DxUserInput> m_unk0x7c;              // 0x7c
+	bool m_unk0x80;                                        // 0x80
+	bool m_unk0x81;                                        // 0x81
+	bool m_unk0x82;                                        // 0x82
+	bool m_unk0x83;                                        // 0x83
+	double m_unk0x88;                                      // 0x88
+	std::auto_ptr<RBX::Profiling::CodeProfiler> m_unk0x90; // 0x90
+	bool m_unk0x94;                                        // 0x94
+	DWORD m_unk0x98;                                       // 0x98
+	G3D::GWindow* m_unk0x9c;                               // 0x9c
+	bool m_unk0xa0;                                        // 0xa0
+	std::auto_ptr<G3D::RenderDevice> m_unk0xa4;            // 0xa4
+	std::auto_ptr<RBX::ViewBase> m_unk0xa8;                // 0xa8
+	std::auto_ptr<RBX::Adorn> m_unk0xac;                   // 0xac
+	undefined4* m_unk0xb0;                                 // 0xb0
+	undefined m_unk0xb4[0xb8 - 0xb4];                      // 0xb4
 };
 
 DECOMP_SIZE_ASSERT(CRobloxWnd, 0xb8)

@@ -264,7 +264,14 @@ public:
 	void FUN_0044d110(BevelMode p_unk0x04);
 	void FUN_0044d140(AntialiasingMode p_unk0x04);
 	void FUN_0044d170(ShadowMode p_unk0x04);
-	undefined4 FUN_0044d430();
+	// FUNCTION: ROBLOX 0x0044d430
+	undefined4 FUN_0044d430()
+	{
+		if (g_unk0x00953ae0 == 0) {
+			g_unk0x00953ae0 = m_unk0xf8;
+		}
+		return g_unk0x00953ae0;
+	}
 
 	// clang-format off
 	// SYNTHETIC: ROBLOX 0x0044cd20
