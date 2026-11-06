@@ -5739,3 +5739,14 @@ address,type,symbol,name,module,size
 00467bd0,library,?PrintHeader@CScintillaView@Scintilla@@MAEXPAVCDC@@PAUCPrintInfo@@AAURangeToFormat@2@@Z,,,
 006c99e0,library,?Serialize@?$CArray@V?$CXTPSmartPtrInternalT@VCXTPReportRow@@@@ABV1@@@UAEXAAVCArchive@@@Z,,,
 0076d920,library,?IsAlphaChar@?$CXTMaskEditT@VCEdit@@@@MAEHD@Z,,,
+00466760,library,?PrintFooter@CScintillaView@Scintilla@@MAEXPAVCDC@@PAUCPrintInfo@@AAURangeToFormat@2@@Z,,,411
+004669f0,library,?OnEditFindReplace@CScintillaView@Scintilla@@MAEXH@Z,,,439
+00466bb0,library,?OnReplaceAll@CScintillaView@Scintilla@@MAEXPBD0HHH@Z,,,382
+00467170,library,?Serialize@CScintillaView@Scintilla@@MAEXAAVCArchive@@@Z,,,401
+007485b0,library,?SetSize@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEXHH@Z,,,8
+00748620,library,?SetAtGrow@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEXHPAVCXTPReportHyperlink@@@Z,,,8
+00748650,library,?InsertAt@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEXHPAVCXTPReportHyperlink@@H@Z,,,8
+00748660,library,?RemoveAt@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEXHH@Z,,,8
+00748890,library,?Append@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEHABV1@@Z,,,19
+007488b0,library,?Copy@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEXABV1@@Z,,,19
+00467bc0,library,?GetMessageMap@CScintillaView@Scintilla@@MBEPBUAFX_MSGMAP@@XZ,,,
