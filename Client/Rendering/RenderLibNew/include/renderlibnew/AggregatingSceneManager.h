@@ -27,6 +27,12 @@ public:
 		float polygonOffset;                             // 0x04
 		G3D::ReferenceCountedPointer<Material> material; // 0x08
 
+		BucketKey(const G3D::ReferenceCountedPointer<Chunk>& chunk)
+			: castsShadows(chunk->castsShadows()), cullable(chunk->cullable()), polygonOffset(chunk->polygonOffset),
+			  material(chunk->getMaterial())
+		{
+		}
+
 		bool operator<(const BucketKey& that) const;
 	};
 
@@ -34,10 +40,18 @@ public:
 	class Bucket : public G3D::ReferenceCountedObject, public boost::noncopyable
 	{
 	public:
+		bool dequeueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+		void addToQueue(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+		void clear() { queue.clear(); }
+
 		typedef std::vector<G3D::ReferenceCountedPointer<Chunk> > Queue;
 
 	private:
 		Queue queue; // 0x0c
+
+	public:
+		// SYNTHETIC: ROBLOX 0x00530b90
+		// RBX::RenderNew::AggregatingSceneManager::Bucket::Bucket
 	};
 
 	typedef G3D::ReferenceCountedPointer<Bucket> BucketRef;
@@ -61,6 +75,11 @@ public:
 	virtual void clear();
 	virtual void setSleeping(const G3D::ReferenceCountedPointer<Chunk>& chunk, bool sleeping);
 	virtual void prerender(double optimizationTime);
+
+private:
+	void dequeueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+	void queueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+	void deconstructAggregate(G3D::ReferenceCountedPointer<AggregateChunk> aggregate);
 };
 
 DECOMP_SIZE_ASSERT(AggregatingSceneManager, 0x30)

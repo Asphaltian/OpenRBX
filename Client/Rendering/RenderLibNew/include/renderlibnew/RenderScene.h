@@ -100,7 +100,16 @@ public:
 protected:
 	SceneManager(RenderScene* renderScene) : renderScene(renderScene) {}
 
+	void clearScene() { renderScene->chunkArray.resize(0); }
+
 	void addToScene(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+
+	// FUNCTION: ROBLOX 0x005301d0
+	void removeFromScene(const G3D::ReferenceCountedPointer<Chunk>& chunk)
+	{
+		int index = renderScene->chunkArray.findIndex(chunk);
+		renderScene->chunkArray.fastRemove(index);
+	}
 };
 
 DECOMP_SIZE_ASSERT(SceneManager, 0x08)
