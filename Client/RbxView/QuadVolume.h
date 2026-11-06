@@ -19,6 +19,12 @@
 namespace RBX {
 namespace View {
 
+template <int face>
+inline G3D::Vector3 uvwToObject(const G3D::Vector3& uvw)
+{
+	return RBX::uvwToObject<face>(uvw);
+}
+
 // SIZE 0x20
 class __declspec(novtable) LevelBuilder
 {
@@ -71,12 +77,6 @@ protected:
 		}
 
 		return 0.0f;
-	}
-
-	template <int face>
-	static G3D::Vector3 uvwToObject(const G3D::Vector3& uvw)
-	{
-		return RBX::uvwToObject<face>(uvw);
 	}
 
 	template <int face, class Deform>

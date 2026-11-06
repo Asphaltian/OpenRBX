@@ -88,12 +88,14 @@ void meshFace(
 	RBX::RenderNew::Mesh::LevelRef& level
 )
 {
-	G3D::Vector3 faceCorner = G3D::abs(RBX::uvwToObject<N>(halfSize)) - G3D::Vector3(inset, inset, BrickMesh::bevel);
+	RenderSurfaceType surfaceType = surfaceTypes.getSurfaceType((RBX::NormalId) N);
+
+	G3D::Vector3 faceCorner =
+		G3D::abs(RBX::ViewNew::uvwToObject<N>(halfSize)) - G3D::Vector3(inset, inset, BrickMesh::bevel);
 
 	G3D::Vector2 studsPerTile(0.0f, 0.0f);
 	G3D::Vector2 textureOffset(0.0f, 0.0f);
 
-	RenderSurfaceType surfaceType = surfaceTypes.getSurfaceType((RBX::NormalId) N);
 	switch (surfaceType) {
 	case FLAT:
 		textureOffset = flatTex;
@@ -133,26 +135,26 @@ void meshFace(
 		G3D::Vector3 nXY(perturbationMax.x, perturbationMax.y, 1.0f);
 
 		unsigned int i0 = RBX::RenderNew::Mesh::allocVertex(
-			RBX::uvwToObject<N>(G3D::Vector3(-faceCorner.x, -faceCorner.y, faceCorner.z)),
-			RBX::uvwToObject<N>(nxy),
+			RBX::ViewNew::uvwToObject<N>(G3D::Vector3(-faceCorner.x, -faceCorner.y, faceCorner.z)),
+			RBX::ViewNew::uvwToObject<N>(nxy),
 			textureOffset,
 			true
 		);
 		unsigned int i1 = RBX::RenderNew::Mesh::allocVertex(
-			RBX::uvwToObject<N>(G3D::Vector3(faceCorner.x, -faceCorner.y, faceCorner.z)),
-			RBX::uvwToObject<N>(nXy),
+			RBX::ViewNew::uvwToObject<N>(G3D::Vector3(faceCorner.x, -faceCorner.y, faceCorner.z)),
+			RBX::ViewNew::uvwToObject<N>(nXy),
 			textureOffset,
 			true
 		);
 		unsigned int i2 = RBX::RenderNew::Mesh::allocVertex(
-			RBX::uvwToObject<N>(G3D::Vector3(faceCorner.x, faceCorner.y, faceCorner.z)),
-			RBX::uvwToObject<N>(nXY),
+			RBX::ViewNew::uvwToObject<N>(G3D::Vector3(faceCorner.x, faceCorner.y, faceCorner.z)),
+			RBX::ViewNew::uvwToObject<N>(nXY),
 			textureOffset,
 			true
 		);
 		unsigned int i3 = RBX::RenderNew::Mesh::allocVertex(
-			RBX::uvwToObject<N>(G3D::Vector3(-faceCorner.x, faceCorner.y, faceCorner.z)),
-			RBX::uvwToObject<N>(nxY),
+			RBX::ViewNew::uvwToObject<N>(G3D::Vector3(-faceCorner.x, faceCorner.y, faceCorner.z)),
+			RBX::ViewNew::uvwToObject<N>(nxY),
 			textureOffset,
 			true
 		);
@@ -187,37 +189,31 @@ void meshFace(
 					textureOffset.x + 1.0 / 1024.0,
 					textureOffset.y + (maxCorner.y - minCorner.y) / 12.0 - BrickMesh::bevel
 				);
-				G3D::Vector2 t1(
-					textureOffset.x - 1.0 / 1024.0 + (maxCorner.x - minCorner.x) / 64.0,
-					textureOffset.y + (maxCorner.y - minCorner.y) / 12.0 - BrickMesh::bevel
-				);
-				G3D::Vector2 t2(
-					textureOffset.x - 1.0 / 1024.0 + (maxCorner.x - minCorner.x) / 64.0,
-					textureOffset.y - BrickMesh::bevel
-				);
+				G3D::Vector2 t1(textureOffset.x - 1.0 / 1024.0 + (maxCorner.x - minCorner.x) / 64.0, t0.y);
+				G3D::Vector2 t2(t1.x, textureOffset.y - BrickMesh::bevel);
 				G3D::Vector2 t3(textureOffset.x + 1.0 / 1024.0, textureOffset.y + BrickMesh::bevel);
 
 				unsigned int i0 = RBX::RenderNew::Mesh::allocVertex(
-					RBX::uvwToObject<N>(G3D::Vector3(minCorner.x, minCorner.y, faceCorner.z)),
-					RBX::uvwToObject<N>(G3D::Vector3(minNormal.x, minNormal.y, 1.0f)),
+					RBX::ViewNew::uvwToObject<N>(G3D::Vector3(minCorner.x, minCorner.y, faceCorner.z)),
+					RBX::ViewNew::uvwToObject<N>(G3D::Vector3(minNormal.x, minNormal.y, 1.0f)),
 					t0,
 					true
 				);
 				unsigned int i1 = RBX::RenderNew::Mesh::allocVertex(
-					RBX::uvwToObject<N>(G3D::Vector3(maxCorner.x, minCorner.y, faceCorner.z)),
-					RBX::uvwToObject<N>(G3D::Vector3(maxNormal.x, minNormal.y, 1.0f)),
+					RBX::ViewNew::uvwToObject<N>(G3D::Vector3(maxCorner.x, minCorner.y, faceCorner.z)),
+					RBX::ViewNew::uvwToObject<N>(G3D::Vector3(maxNormal.x, minNormal.y, 1.0f)),
 					t1,
 					true
 				);
 				unsigned int i2 = RBX::RenderNew::Mesh::allocVertex(
-					RBX::uvwToObject<N>(G3D::Vector3(maxCorner.x, maxCorner.y, faceCorner.z)),
-					RBX::uvwToObject<N>(G3D::Vector3(maxNormal.x, maxNormal.y, 1.0f)),
+					RBX::ViewNew::uvwToObject<N>(G3D::Vector3(maxCorner.x, maxCorner.y, faceCorner.z)),
+					RBX::ViewNew::uvwToObject<N>(G3D::Vector3(maxNormal.x, maxNormal.y, 1.0f)),
 					t2,
 					true
 				);
 				unsigned int i3 = RBX::RenderNew::Mesh::allocVertex(
-					RBX::uvwToObject<N>(G3D::Vector3(minCorner.x, maxCorner.y, faceCorner.z)),
-					RBX::uvwToObject<N>(G3D::Vector3(minNormal.x, maxNormal.y, 1.0f)),
+					RBX::ViewNew::uvwToObject<N>(G3D::Vector3(minCorner.x, maxCorner.y, faceCorner.z)),
+					RBX::ViewNew::uvwToObject<N>(G3D::Vector3(minNormal.x, maxNormal.y, 1.0f)),
 					t3,
 					true
 				);

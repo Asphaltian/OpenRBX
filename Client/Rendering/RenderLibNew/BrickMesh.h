@@ -15,12 +15,18 @@ class BrickColor;
 namespace ViewNew {
 
 // Variations::~Variations
-// meshFace<0>
-// meshFace<1>
-// meshFace<2>
-// meshFace<3>
-// meshFace<4>
-// meshFace<5>
+// STUB: ROBLOX 0x0050f150
+// RBX::ViewNew::meshFace<0>
+// STUB: ROBLOX 0x0050fe80
+// RBX::ViewNew::meshFace<1>
+// STUB: ROBLOX 0x00510bb0
+// RBX::ViewNew::meshFace<2>
+// STUB: ROBLOX 0x005118e0
+// RBX::ViewNew::meshFace<3>
+// STUB: ROBLOX 0x00512610
+// RBX::ViewNew::meshFace<4>
+// STUB: ROBLOX 0x00513340
+// RBX::ViewNew::meshFace<5>
 
 // SIZE 0x50
 class BrickMesh : public RenderNew::Mesh
