@@ -145,7 +145,7 @@ void View::updateLighting()
 }
 
 // FUNCTION: WEBSERVICE 0x1016bd60
-// STUB: ROBLOX 0x00477280
+// FUNCTION: ROBLOX 0x00477280
 View::View(boost::shared_ptr<DataModel> dataModel)
 	: dataModel(dataModel), lightingValid(false), renderLibScene(new Render::RenderScene()),
 	  textureManager(new G3D::TextureManager())
@@ -167,7 +167,7 @@ View::View(boost::shared_ptr<DataModel> dataModel)
 }
 
 // FUNCTION: WEBSERVICE 0x1016c080
-// STUB: ROBLOX 0x004775a0
+// FUNCTION: ROBLOX 0x004775a0
 View::~View()
 {
 	sceneManager->clear();

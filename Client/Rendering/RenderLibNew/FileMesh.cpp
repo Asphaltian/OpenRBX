@@ -8,7 +8,7 @@
 namespace RBX {
 namespace ViewNew {
 
-// STUB: ROBLOX 0x0052be60
+// FUNCTION: ROBLOX 0x0052be60
 bool FileMesh::loadFromMeshFile(const G3D::Vector3& scale, const MeshId meshFile)
 {
 	try {

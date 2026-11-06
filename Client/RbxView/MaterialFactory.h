@@ -65,6 +65,7 @@ private:
 	Database megaDatabase; // 0x1c
 
 	// SYNTHETIC: WEBSERVICE 0x1016bbe0
+	// SYNTHETIC: ROBLOX 0x00477100
 	// RBX::View::MaterialFactory::~MaterialFactory
 };
 
