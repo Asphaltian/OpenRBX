@@ -3755,3 +3755,6 @@ address,type,symbol,name,module,size
 0050bf30,library,?freeMemory@?$Table@VRenderSurfaceTypes@ViewNew@RBX@@V?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VPBBMesh@ViewNew@RBX@@$03@ViewNew@RBX@@@G3D@@@G3D@@AAEXXZ,,,
 0050bfa0,library,?freeMemory@?$Table@VRenderSurfaceTypes@ViewNew@RBX@@V?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VSphereMesh@ViewNew@RBX@@$00@ViewNew@RBX@@@G3D@@@G3D@@AAEXXZ,,,
 0050c010,library,?freeMemory@?$Table@VRenderSurfaceTypes@ViewNew@RBX@@V?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VCylinderAlongXMesh@ViewNew@RBX@@$00@ViewNew@RBX@@@G3D@@@G3D@@AAEXXZ,,,
+009587f4,global,??_B?3??resize@?$Array@VLevel@Material@RenderNew@RBX@@@G3D@@QAEXH_N@Z@53,,,
+005362c0,library,??1?$Array@VLevel@Material@RenderNew@RBX@@@G3D@@QAE@XZ,,,
+00536500,library,?append@?$Array@VLevel@Material@RenderNew@RBX@@@G3D@@QAEXABVLevel@Material@RenderNew@RBX@@@Z,,,

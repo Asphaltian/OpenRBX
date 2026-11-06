@@ -9,6 +9,7 @@
 #include <G3D/ReferenceCount.h>
 #include <GLG3D/RenderDevice.h>
 #include <GLG3D/Texture.h>
+#include <OgreMaterial.h>
 
 namespace RBX {
 namespace RenderNew {
@@ -17,7 +18,7 @@ namespace RenderNew {
 class Material : public G3D::ReferenceCountedObject
 {
 public:
-	// SIZE 0x28
+	// SIZE 0x34
 	class Level
 	{
 	private:
@@ -29,6 +30,7 @@ public:
 		float mShiny;                 // 0x1c
 		float mReflect;               // 0x20
 		float mTransparent;           // 0x24
+		Ogre::MaterialPtr m_unk0x28;  // 0x28
 
 		Level(
 			TextureProxyRef baseTexture,
@@ -111,7 +113,7 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(Material, 0x18)
-DECOMP_SIZE_ASSERT(Material::Level, 0x28)
+DECOMP_SIZE_ASSERT(Material::Level, 0x34)
 
 } // namespace RenderNew
 } // namespace RBX
