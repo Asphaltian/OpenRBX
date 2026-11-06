@@ -1,6 +1,10 @@
 #include "View.h"
 
+#include "BrickMesh.h"
+#include "CylinderMesh.h"
 #include "MaterialFactory.h"
+#include "PBBMesh.h"
+#include "SphereMesh.h"
 #include "renderlibnew/AggregatingSceneManager.h"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Lighting.h"
@@ -105,6 +109,11 @@ View::~View()
 	if (dataModel) {
 		dataModel->find<Lighting>();
 	}
+
+	MeshFactory<CylinderAlongXMesh, 1>::flushCache();
+	MeshFactory<SphereMesh, 1>::flushCache();
+	MeshFactory<PBBMesh, 4>::flushCache();
+	BrickMesh::flushCache();
 }
 
 void View::updateLighting()

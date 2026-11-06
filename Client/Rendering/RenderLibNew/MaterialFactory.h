@@ -61,6 +61,9 @@ private:
 
 	Database database;     // 0x10
 	Database megaDatabase; // 0x1c
+
+	// SYNTHETIC: ROBLOX 0x0050d690
+	// RBX::ViewNew::MaterialFactory::~MaterialFactory
 };
 
 DECOMP_SIZE_ASSERT(MaterialFactory, 0x28)

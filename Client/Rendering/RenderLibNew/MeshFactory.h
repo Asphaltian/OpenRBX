@@ -137,6 +137,12 @@ public:
 	static void flushCache();
 
 	// clang-format off
+	// TEMPLATE: ROBLOX 0x0050c150
+	// RBX::ViewNew::MeshFactory<RBX::ViewNew::PBBMesh,4>::flushCache
+	// TEMPLATE: ROBLOX 0x0050c1d0
+	// RBX::ViewNew::MeshFactory<RBX::ViewNew::SphereMesh,1>::flushCache
+	// TEMPLATE: ROBLOX 0x0050c250
+	// RBX::ViewNew::MeshFactory<RBX::ViewNew::CylinderAlongXMesh,1>::flushCache
 	// TEMPLATE: ROBLOX 0x00517de0
 	// RBX::ViewNew::MeshFactory<RBX::ViewNew::PBBMesh,4>::create
 	// TEMPLATE: ROBLOX 0x00517f80
