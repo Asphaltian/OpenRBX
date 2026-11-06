@@ -239,7 +239,7 @@ G3D::Vector2 DxUserInput::FUN_0046c590()
 	return G3D::Vector2(point.x, point.y);
 }
 
-// STUB: ROBLOX 0x0046c600
+// FUNCTION: ROBLOX 0x0046c600
 G3D::Vector2 DxUserInput::getCursorPosition()
 {
 	ATL::CCritSecLock lock(m_unk0x34);

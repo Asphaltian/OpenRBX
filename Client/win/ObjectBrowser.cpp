@@ -12,7 +12,7 @@ ON_WM_CREATE()
 ON_NOTIFY_REFLECT(TVN_SELCHANGED, FUN_0043a280)
 END_MESSAGE_MAP()
 
-// STUB: ROBLOX 0x00437590
+// FUNCTION: ROBLOX 0x00437590
 CClassTreeView::~CClassTreeView()
 {
 }
@@ -46,7 +46,7 @@ CMemberTreeView::CMemberTreeView() : m_unk0xa8(1), m_unk0xac(0)
 {
 }
 
-// STUB: ROBLOX 0x004378e0
+// FUNCTION: ROBLOX 0x004378e0
 CMemberTreeView::~CMemberTreeView()
 {
 }
