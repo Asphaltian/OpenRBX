@@ -38,6 +38,8 @@ public:
 
 	void FUN_0044eaf0(boost::shared_ptr<RBX::Script> script);
 
+	friend class CScriptEditor;
+
 private:
 	boost::shared_ptr<RBX::Script> m_unk0x54; // 0x54
 };
@@ -71,6 +73,11 @@ protected:
 	virtual void VTable0x08(const RBX::RunService* source, RBX::RunState event);
 	virtual void VTable0x08(const RBX::Instance* source, RBX::PropertyChanged event);
 	virtual void VTable0x0c(const RBX::Instance* source, RBX::PropertyChanged event) throw();
+
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual void PostNcDestroy();
+	virtual void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint);
+	virtual void OnDwellEnd(Scintilla::SCNotification* pSCNotification);
 
 private:
 	boost::shared_ptr<boost::recursive_mutex> m_unk0x128; // 0x128

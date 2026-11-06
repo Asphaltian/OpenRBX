@@ -10,6 +10,12 @@
 #include <memory>
 #include <sstream>
 
+// GLOBAL: ROBLOX 0x009544b0
+static HMODULE g_unk0x009544b0;
+
+// GLOBAL: ROBLOX 0x009544b4
+static int g_unk0x009544b4;
+
 IMPLEMENT_DYNCREATE(CScriptDoc, CNullDoc)
 IMPLEMENT_DYNCREATE(CScriptEditor, Scintilla::CScintillaView)
 
@@ -22,6 +28,30 @@ void CScriptEditor::VTable0x08(const RBX::RunService* source, RBX::RunState even
 {
 	m_unk0x145 = event != RBX::RS_NORMAL;
 	GetCtrl().SetReadOnly(m_unk0x145 || !m_unk0x146);
+}
+
+// FUNCTION: ROBLOX 0x00467e20
+BOOL CScriptEditor::PreCreateWindow(CREATESTRUCT& cs)
+{
+	return CScintillaView::PreCreateWindow(cs) != FALSE;
+}
+
+// FUNCTION: ROBLOX 0x00467e90
+void CScriptEditor::PostNcDestroy()
+{
+	if (--g_unk0x009544b4 == 0) {
+		FreeLibrary(g_unk0x009544b0);
+	}
+	CScintillaView::PostNcDestroy();
+}
+
+// FUNCTION: ROBLOX 0x00468a30
+void CScriptEditor::OnDwellEnd(Scintilla::SCNotification* pSCNotification)
+{
+	Scintilla::CScintillaCtrl& ctrl = GetCtrl();
+	if (ctrl.CallTipActive()) {
+		ctrl.CallTipCancel();
+	}
 }
 
 // FUNCTION: ROBLOX 0x00468aa0
@@ -139,6 +169,14 @@ void CScriptEditor::onEvent(const RBX::Instance* source, RBX::AncestorChanged ev
 	if (!event.newParent) {
 		FUN_00469b30(boost::shared_ptr<RBX::Script>());
 		::PostMessage(m_unk0x130->m_hWnd, WM_CLOSE, 0, 0);
+	}
+}
+
+// FUNCTION: ROBLOX 0x00469ed0
+void CScriptEditor::OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint)
+{
+	if (lHint == 1) {
+		FUN_00469b30(static_cast<CScriptDoc*>(m_pDocument)->m_unk0x54);
 	}
 }
 
