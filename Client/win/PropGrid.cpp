@@ -1,5 +1,8 @@
 #include "PropGrid.h"
 
+#include "v8datamodel/Commands.h"
+#include "v8datamodel/DataModel.h"
+
 #include <algorithm>
 #include <boost/bind.hpp>
 #include <cstdio>
@@ -118,11 +121,44 @@ void XItem<T, Base, Descriptor>::VTable0x00(
 	STUB(0x43f280);
 }
 
-// STUB: ROBLOX 0x00443670
 template <class T, class Base, class Descriptor>
 void XItem<T, Base, Descriptor>::FUN_00443670(const T& value)
 {
-	STUB(0x443670);
+	try {
+		std::auto_ptr<RBX::XmlState> undoState(new RBX::UndoState());
+		std::auto_ptr<RBX::XmlState> redoState(new RBX::RedoState());
+
+		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& objects =
+			m_unk0x14->m_unk0x1d0;
+		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
+			objectsEnd = objects.end();
+		std::vector<const RBX::Reflection::ClassDescriptor*>::iterator end = m_unk0x04.end();
+		for (std::vector<const RBX::Reflection::ClassDescriptor*>::iterator iter = m_unk0x04.begin(); iter != end;
+			 ++iter) {
+			std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
+				found = objects.find(*iter);
+			if (found != objectsEnd) {
+				std::vector<boost::shared_ptr<RBX::Instance> >& instances = found->second;
+				std::vector<boost::shared_ptr<RBX::Instance> >::iterator instancesEnd = instances.end();
+				for (std::vector<boost::shared_ptr<RBX::Instance> >::iterator instance = instances.begin();
+					 instance != instancesEnd;
+					 ++instance) {
+					undoState->addProperty(RBX::Reflection::Property(*m_unk0x124, instance->get()));
+					VTable0xf0(instance->get(), value);
+					redoState->addProperty(RBX::Reflection::Property(*m_unk0x124, instance->get()));
+				}
+			}
+		}
+
+		if (m_unk0x14->m_unk0x194) {
+			RBX::DataModel::Lock lock(m_unk0x14->m_unk0x194);
+			m_unk0x14->m_unk0x194->pushState(m_unk0x124->name.toString(), undoState.release(), redoState.release());
+			m_unk0x14->m_unk0x194->setDirty(true);
+		}
+	}
+	catch (const std::exception& e) {
+		AfxMessageBox(e.what());
+	}
 }
 
 // STUB: ROBLOX 0x00445430

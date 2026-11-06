@@ -27,7 +27,7 @@ protected:
 	XmlElement root; // 0x10
 
 public:
-	XmlState();
+	XmlState() : root(name_root) {}
 
 	const XmlElement* getData() const;
 

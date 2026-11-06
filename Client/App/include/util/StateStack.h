@@ -55,6 +55,26 @@ private:
 	void clearStackAfter(int index);
 };
 
+// clang-format off
+// STUB: ROBLOX 0x00411e90
+// ?pushState@?$StateStack@VXmlState@RBX@@@RBX@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAVXmlState@2@1@Z
+// clang-format on
+
+template <class T>
+void StateStack<T>::pushState(std::string name, T* undoState, T* redoState)
+{
+	clearStackAfter(currentState);
+	StateEntry entry = {name, undoState, redoState};
+	stack.push_back(entry);
+	currentState++;
+	while (isStackTooBig()) {
+		delete stack.front().redoState;
+		delete stack.front().undoState;
+		stack.erase(stack.begin());
+		currentState--;
+	}
+}
+
 template <class T>
 inline void StateStack<T>::clearStackAfter(int index)
 {

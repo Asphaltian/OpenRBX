@@ -825,6 +825,15 @@ bool EngineStatsCommand::isEnabled() const
 	return true;
 }
 
+// FUNCTION: ROBLOX 0x0059cda0
+void XmlState::addProperty(const Reflection::Property& property)
+{
+	XmlElement* element = property.getDescriptor().write(property.getInstance(), false);
+	if (element) {
+		addState(element, *static_cast<Instance*>(property.getInstance()));
+	}
+}
+
 // FUNCTION: ROBLOX 0x0059cdf0
 void UndoState::addState(XmlElement* element, Instance& instance)
 {
