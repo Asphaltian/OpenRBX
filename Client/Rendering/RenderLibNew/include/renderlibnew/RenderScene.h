@@ -48,7 +48,7 @@ private:
 	float meshDetail;                                            // 0x0ac
 	bool shadows;                                                // 0x0b0
 	float cameraDistance;                                        // 0x0b4
-	G3D::Array<G3D::ReferenceCountedPointer<Chunk> > m_unk0xb8;  // 0x0b8
+	G3D::Array<G3D::ReferenceCountedPointer<Chunk> > chunkArray; // 0x0b8
 	G3D::Array<unsigned int> shadowIndexArray;                   // 0x0c4
 
 public:
@@ -100,7 +100,7 @@ public:
 protected:
 	SceneManager(RenderScene* renderScene) : renderScene(renderScene) {}
 
-	void FUN_0052dcf0(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+	void addToScene(const G3D::ReferenceCountedPointer<Chunk>& chunk);
 };
 
 DECOMP_SIZE_ASSERT(SceneManager, 0x08)

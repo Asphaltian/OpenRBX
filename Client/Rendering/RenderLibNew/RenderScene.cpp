@@ -20,9 +20,9 @@ RenderScene::~RenderScene()
 }
 
 // FUNCTION: ROBLOX 0x0052dcf0
-void SceneManager::FUN_0052dcf0(const G3D::ReferenceCountedPointer<Chunk>& chunk)
+void SceneManager::addToScene(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
-	renderScene->m_unk0xb8.append(chunk);
+	renderScene->chunkArray.append(chunk);
 }
 
 // FUNCTION: ROBLOX 0x0052dd00

@@ -1,18 +1,27 @@
 #include "renderlibnew/AggregatingSceneManager.h"
 
+#include "renderlibnew/Chunk.h"
+
 namespace RBX {
 namespace RenderNew {
 
 // FUNCTION: ROBLOX 0x0052fa00
 void AggregatingSceneManager::addModel(const G3D::ReferenceCountedPointer<Chunk>& chunk)
 {
-	FUN_0052dcf0(chunk);
+	addToScene(chunk);
 }
 
-// STUB: ROBLOX 0x00530c70
+// FUNCTION: ROBLOX 0x00530c70
 void AggregatingSceneManager::invalidateModel(const G3D::ReferenceCountedPointer<Chunk>& chunk, bool isSleeping)
 {
-	STUB(0x530c70);
+	chunk->VTable0x20();
+
+	if (isSleeping) {
+		invalidSleepingModels.insert(chunk);
+	}
+	else {
+		invalidMovingModels.insert(chunk);
+	}
 }
 
 // STUB: ROBLOX 0x00530ea0
