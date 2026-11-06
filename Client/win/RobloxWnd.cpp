@@ -170,7 +170,7 @@ void CRobloxWnd::FUN_00461420(int width, int height)
 	}
 	catch (std::exception&) {
 		if (CRenderSettings::singleton().FUN_0044d430() == 1) {
-			CRenderSettings::singleton().FUN_0044d0b0(3);
+			CRenderSettings::singleton().FUN_0044d0b0(CRenderSettings::c_graphicsModeUnk0x3);
 			RBX::GlobalSettings::singleton()->saveState();
 			AfxMessageBox(
 				"There has been an error in graphics initialization. ROBLOX has made changes to your setting which "

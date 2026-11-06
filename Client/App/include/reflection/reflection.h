@@ -935,8 +935,9 @@ public:
 	// TEMPLATE: ROBLOX 0x00619800
 	// RBX::Reflection::EnumPropDescriptor<RBX::Feature,enum RBX::Feature::InOut>::readValue
 	// TEMPLATE: WEBSERVICE 0x10102130
-	// TEMPLATE: ROBLOX 0x005b3ca0
 	// RBX::Reflection::EnumPropDescriptor<RBX::HopperBin,enum RBX::HopperBin::BinType>::writeValue
+	// TEMPLATE: ROBLOX 0x005b3ca0
+	// RBX::Reflection::EnumPropDescriptor<CRenderSettings,enum CRenderSettings::AASamples>::writeValue
 	// TEMPLATE: WEBSERVICE 0x10121b30
 	// TEMPLATE: ROBLOX 0x005e0080
 	// RBX::Reflection::EnumPropDescriptor<RBX::FaceInstance,enum RBX::NormalId>::setIndexValue

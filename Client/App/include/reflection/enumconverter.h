@@ -252,8 +252,9 @@ void EnumDesc<T>::addLegacyName(const Name& name, T value)
 // TEMPLATE: ROBLOX 0x005e26e0
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::singleton
 // TEMPLATE: WEBSERVICE 0x100e5f90
-// TEMPLATE: ROBLOX 0x0057c7f0
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::convertToIndex
+// TEMPLATE: ROBLOX 0x0057c7f0
+// RBX::Reflection::EnumDesc<enum CRenderSettings::AASamples>::convertToIndex
 // TEMPLATE: WEBSERVICE 0x1009ed00
 // TEMPLATE: ROBLOX 0x005b1770
 // RBX::Reflection::EnumDesc<enum RBX::Part::PartType>::singleton

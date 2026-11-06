@@ -509,7 +509,17 @@ void ScriptItem::VTable0x00(
 	const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& instances
 )
 {
-	STUB(0x4424f0);
+	std::vector<const RBX::Reflection::ClassDescriptor*>::iterator end = m_unk0x04.end();
+	for (std::vector<const RBX::Reflection::ClassDescriptor*>::iterator iter = m_unk0x04.begin(); iter != end; ++iter) {
+		const RBX::Reflection::ClassDescriptor* descriptor = *iter;
+		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::
+			const_iterator found = instances.find(descriptor);
+		if (found != instances.end() && found->second.size() != 0) {
+			SetHidden(FALSE);
+			return;
+		}
+	}
+	SetHidden(TRUE);
 }
 
 // STUB: ROBLOX 0x00442620
