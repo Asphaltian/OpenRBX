@@ -508,9 +508,10 @@ add_engine_library(renderlibnew
   SOURCES ${OPENRBX_RENDERLIBNEW_SOURCES}
 )
 
+list(REMOVE_ITEM OPENRBX_ENGINE_LIBRARIES rbxviewnew renderlibnew)
 foreach(lib rbxviewnew renderlibnew)
   if (TARGET ${lib})
-    target_include_directories(${lib} PRIVATE ${OPENRBX_RENDERLIBNEW_INCLUDE_DIRS})
+    target_include_directories(${lib} PRIVATE ${OPENRBX_RENDERLIBNEW_INCLUDE_DIRS} "${PROJECT_SOURCE_DIR}/Client/Rendering/OgreSDK/include")
   endif()
 endforeach()
 
@@ -538,8 +539,11 @@ if (MSVC_FOR_DECOMP)
   set_property(TARGET toolkitpro PROPERTY OUTPUT_NAME "ToolkitPro1121vc80DS")
 
   set(OPENRBX_OGRE "${PROJECT_SOURCE_DIR}/Client/Rendering/OgreSDK")
+  file(READ "${OPENRBX_OGRE}/lib/rgmain.def" OPENRBX_RGMAIN_DEF)
+  string(REGEX REPLACE " @[0-9]+" "" OPENRBX_RGMAIN_DEF "${OPENRBX_RGMAIN_DEF}")
+  file(WRITE "${CMAKE_BINARY_DIR}/rgmain.def" "${OPENRBX_RGMAIN_DEF}")
   add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/rgmain.lib"
-    COMMAND lib /nologo /machine:x86 "/def:${OPENRBX_OGRE}/lib/rgmain.def" "/out:${CMAKE_BINARY_DIR}/rgmain.lib"
+    COMMAND lib /nologo /machine:x86 "/def:${CMAKE_BINARY_DIR}/rgmain.def" "/out:${CMAKE_BINARY_DIR}/rgmain.lib"
     DEPENDS "${OPENRBX_OGRE}/lib/rgmain.def"
   )
   add_custom_target(rgmain_implib DEPENDS "${CMAKE_BINARY_DIR}/rgmain.lib")

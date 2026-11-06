@@ -4,9 +4,15 @@
 #include "decomp.h"
 #include "renderlib/RenderStats.h"
 
+#include <G3D/Array.h>
 #include <G3D/Color4.h>
 #include <G3D/GCamera.h>
 #include <G3D/ReferenceCount.h>
+#include <GLG3D/LightingParameters.h>
+#include <GLG3D/VAR.h>
+#include <GLG3D/VARArea.h>
+#include <OgreMaterial.h>
+#include <OgreMesh.h>
 
 namespace G3D {
 class RenderDevice;
@@ -21,24 +27,40 @@ class Chunk;
 class RenderScene
 {
 private:
-	undefined m_unk0x00[0xa8];        // 0x000
-	float shadingQuality;             // 0x0a8
-	float meshDetail;                 // 0x0ac
-	undefined m_unk0xb0[0xd0 - 0xb0]; // 0x0b0
+	undefined4* m_unk0x00;                                       // 0x000
+	undefined4* m_unk0x04;                                       // 0x004
+	Ogre::MaterialPtr m_unk0x08;                                 // 0x008
+	Ogre::MeshPtr m_unk0x14;                                     // 0x014
+	G3D::Array<undefined4> m_unk0x20;                            // 0x020
+	G3D::Array<undefined4> m_unk0x2c;                            // 0x02c
+	G3D::Array<undefined4> m_unk0x38;                            // 0x038
+	G3D::Array<undefined4> m_unk0x44;                            // 0x044
+	G3D::Array<undefined4> m_unk0x50;                            // 0x050
+	G3D::Array<undefined4> m_unk0x5c;                            // 0x05c
+	G3D::VAR shadowVAR;                                          // 0x068
+	G3D::ReferenceCountedPointer<G3D::VARArea> shadowVARArea;    // 0x088
+	undefined m_unk0x8c[0xa0 - 0x8c];                            // 0x08c
+	G3D::ReferenceCountedPointer<G3D::Lighting> desiredLighting; // 0x0a0
+	G3D::ReferenceCountedPointer<G3D::Lighting> lighting;        // 0x0a4
+	float shadingQuality;                                        // 0x0a8
+	float meshDetail;                                            // 0x0ac
+	bool shadows;                                                // 0x0b0
+	float cameraDistance;                                        // 0x0b4
+	G3D::Array<undefined4> m_unk0xb8;                            // 0x0b8
+	G3D::Array<unsigned int> shadowIndexArray;                   // 0x0c4
 
 public:
 	mutable RenderStats renderStats; // 0x0d0
+	bool debugShadowVolumes;         // 0x308
+	G3D::Color4 colorClearValue;     // 0x30c
 
 private:
-	undefined m_unk0x308[0x30c - 0x308]; // 0x308
+	undefined4 m_unk0x31c; // 0x31c
 
 public:
-	G3D::Color4 colorClearValue; // 0x30c
+	G3D::LightingParameters desiredSkyParameters; // 0x320
+	G3D::LightingParameters skyParameters;        // 0x418
 
-private:
-	undefined m_unk0x31c[0x510 - 0x31c]; // 0x31c
-
-public:
 	RenderScene();
 	~RenderScene();
 

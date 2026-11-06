@@ -1,5 +1,7 @@
 #include "renderlibnew/RenderScene.h"
 
+#include <G3D/g3dmath.h>
+
 namespace RBX {
 namespace RenderNew {
 
@@ -15,10 +17,13 @@ RenderScene::~RenderScene()
 	STUB(0x52d7e0);
 }
 
-// STUB: ROBLOX 0x0052dd00
+// FUNCTION: ROBLOX 0x0052dd00
 RenderScene::RenderScene()
+	: m_unk0x04(NULL), shadingQuality(-1.0f), meshDetail(-1.0f), shadows(false), cameraDistance((float) G3D::inf()),
+	  debugShadowVolumes(false), colorClearValue(0.5f, 0.5f, 1.0f, 1.0f)
 {
-	STUB(0x52dd00);
+	desiredLighting = lighting = G3D::Lighting::create();
+	m_unk0x00 = NULL;
 }
 
 // STUB: ROBLOX 0x0052df80

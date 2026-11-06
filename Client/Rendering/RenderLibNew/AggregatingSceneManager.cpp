@@ -27,10 +27,9 @@ void AggregatingSceneManager::removeModel(const G3D::ReferenceCountedPointer<Chu
 	STUB(0x531230);
 }
 
-// STUB: ROBLOX 0x00531550
+// FUNCTION: ROBLOX 0x00531550
 AggregatingSceneManager::~AggregatingSceneManager()
 {
-	STUB(0x531550);
 }
 
 // STUB: ROBLOX 0x005317e0
@@ -39,10 +38,9 @@ void AggregatingSceneManager::setSleeping(const G3D::ReferenceCountedPointer<Chu
 	STUB(0x5317e0);
 }
 
-// STUB: ROBLOX 0x00531980
+// FUNCTION: ROBLOX 0x00531980
 AggregatingSceneManager::AggregatingSceneManager(RenderScene* renderScene) : SceneManager(renderScene)
 {
-	STUB(0x531980);
 }
 
 // STUB: ROBLOX 0x00531f50
