@@ -329,6 +329,14 @@ set(OPENRBX_RBXVIEW_SOURCES
   Client/RbxView/WedgeMesh.cpp
   Client/RbxView/Part.cpp
 )
+set(OPENRBX_RBXVIEWNEW_SOURCES
+  Client/Rendering/RenderLibNew/MaterialFactory.cpp
+  Client/Rendering/RenderLibNew/View.cpp
+)
+set(OPENRBX_RENDERLIBNEW_SOURCES
+  Client/Rendering/RenderLibNew/AggregatingSceneManager.cpp
+  Client/Rendering/RenderLibNew/RenderScene.cpp
+)
 set(OPENRBX_RENDERLIB_SOURCES
   Client/Rendering/RenderLib/AggregatingSceneManager.cpp
   Client/Rendering/RenderLib/Chunk.cpp
@@ -483,6 +491,28 @@ add_engine_library(renderlib
   OPTIONS /O2 /Wp64
   SOURCES ${OPENRBX_RENDERLIB_SOURCES}
 )
+
+set(OPENRBX_RENDERLIBNEW_INCLUDE_DIRS
+  "${PROJECT_SOURCE_DIR}/Client/Rendering/RenderLibNew"
+  "${PROJECT_SOURCE_DIR}/Client/Rendering/RenderLibNew/include"
+)
+
+add_engine_library(rbxviewnew
+  DEFINITIONS _RELEASE
+  OPTIONS /O2 /Ob2 /Oi /Oy /GF /GS-
+  SOURCES ${OPENRBX_RBXVIEWNEW_SOURCES}
+)
+
+add_engine_library(renderlibnew
+  OPTIONS /O2 /Wp64
+  SOURCES ${OPENRBX_RENDERLIBNEW_SOURCES}
+)
+
+foreach(lib rbxviewnew renderlibnew)
+  if (TARGET ${lib})
+    target_include_directories(${lib} PRIVATE ${OPENRBX_RENDERLIBNEW_INCLUDE_DIRS})
+  endif()
+endforeach()
 
 if (MSVC_FOR_DECOMP)
   set(OPENRBX_TOOLKITPRO "${OPENRBX_3RDPARTY}/Codejock Software/MFC/Xtreme ToolkitPro v11.2.1")
@@ -647,6 +677,7 @@ if (MSVC_FOR_DECOMP)
     "${PROJECT_SOURCE_DIR}/Client/win"
     "${OPENRBX_ROBLOX_MIDL_DIR}"
     ${OPENRBX_ENGINE_INCLUDE_DIRS}
+    ${OPENRBX_RENDERLIBNEW_INCLUDE_DIRS}
     ${OPENRBX_3RDPARTY_INCLUDE_DIRS}
     "${OPENRBX_MESA_INCLUDE_DIR}"
     "${OPENRBX_TOOLKITPRO}/Source"
@@ -656,7 +687,7 @@ if (MSVC_FOR_DECOMP)
   )
 
   set(OPENRBX_CLIENT_ENGINE_LIBRARIES)
-  foreach(lib rbxview renderlib network app app_client appdraw lua)
+  foreach(lib rbxview renderlib rbxviewnew renderlibnew network app app_client appdraw lua)
     if (TARGET ${lib})
       list(APPEND OPENRBX_CLIENT_ENGINE_LIBRARIES ${lib})
     endif()

@@ -3597,3 +3597,7 @@ address,type,symbol,name,module,size
 00953fd0,global,s___RBX::Reflection::EnumDesc<enum CRenderSettings::ShadowMode>::singleton,,,
 00953e90,global,s___RBX::Reflection::EnumDesc<enum CRenderSettings::AntialiasingMode>::singleton,,,
 00953cb0,global,s___RBX::Reflection::EnumDesc<enum CRenderSettings::AASamples>::singleton,,,
+0050c360,library,??$?0V?$bind_t@XV?$mf1@XVView@ViewNew@RBX@@_N@_mfi@boost@@V?$list2@V?$value@PAVView@ViewNew@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$slot@V?$function@$$A6AX_N@ZV?$allocator@X@std@@@boost@@@boost@@QAE@ABV?$bind_t@XV?$mf1@XVView@ViewNew@RBX@@_N@_mfi@boost@@V?$list2@V?$value@PAVView@ViewNew@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z,,,
+0050c400,library,??$?0V?$bind_t@XV?$mf1@XVView@ViewNew@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVView@ViewNew@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$slot@V?$function@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@ZV?$allocator@X@std@@@boost@@@boost@@QAE@ABV?$bind_t@XV?$mf1@XVView@ViewNew@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVView@ViewNew@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z,,,
+0081a6d4,global,??_7View@ViewNew@RBX@@6B@,,,
+0081ae30,global,??_7AggregatingSceneManager@RenderNew@RBX@@6B@,,,
