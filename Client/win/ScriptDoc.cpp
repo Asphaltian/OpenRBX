@@ -12,27 +12,56 @@ CScriptDoc::CScriptDoc()
 {
 }
 
-// STUB: ROBLOX 0x00467de0
+// FUNCTION: ROBLOX 0x00467de0
 void CScriptEditor::VTable0x08(const RBX::RunService* source, RBX::RunState event)
 {
-	STUB(0x467de0);
+	m_unk0x145 = event != RBX::RS_NORMAL;
+	GetCtrl().SetReadOnly(m_unk0x145 || !m_unk0x146);
+}
+
+// FUNCTION: ROBLOX 0x00468aa0
+void CScriptEditor::FUN_00468aa0()
+{
+	if (GetParentFrame()) {
+		if (!m_unk0x134) {
+			GetParentFrame()->SetWindowText("");
+			return;
+		}
+		GetParentFrame()->SetWindowText(m_unk0x134->getName().c_str());
+	}
 }
 
 // FUNCTION: ROBLOX 0x00469550
-CScriptEditor::CScriptEditor() : m_unk0x130(0), m_unk0x144(false), m_unk0x145(false), m_unk0x146(false)
+CScriptEditor::CScriptEditor() : m_unk0x130(NULL), m_unk0x144(false), m_unk0x145(false), m_unk0x146(false)
 {
 }
 
-// STUB: ROBLOX 0x00469a70
+// STUB: ROBLOX 0x004696d0
+void CScriptEditor::FUN_004696d0()
+{
+	STUB(0x4696d0);
+}
+
+// FUNCTION: ROBLOX 0x00469a70
 void CScriptEditor::VTable0x0c(const RBX::Instance* source, RBX::PropertyChanged event) throw()
 {
-	STUB(0x469a70);
+	if (&event.getDescriptor() == &RBX::Script::prop_EmbeddedSourceCode ||
+		&event.getDescriptor() == &RBX::Instance::desc_Name) {
+		RBX::MarshaledListener<RBX::Instance, RBX::PropertyChanged, RBX::Instance, RBX::PropertyChanged>::VTable0x0c(
+			source, event
+		);
+	}
 }
 
 // STUB: ROBLOX 0x00469aa0
 void CScriptEditor::VTable0x08(const RBX::Instance* source, RBX::PropertyChanged event)
 {
-	STUB(0x469aa0);
+	if (&event.getDescriptor() == &RBX::Script::prop_EmbeddedSourceCode) {
+		FUN_004696d0();
+	}
+	else if (&event.getDescriptor() == &RBX::Instance::desc_Name) {
+		FUN_00468aa0();
+	}
 }
 
 // FUNCTION: ROBLOX 0x00469b30
@@ -64,10 +93,13 @@ void CScriptEditor::FUN_00469b30(boost::shared_ptr<RBX::Script> script)
 	}
 }
 
-// STUB: ROBLOX 0x00469e80
+// FUNCTION: ROBLOX 0x00469e80
 void CScriptEditor::onEvent(const RBX::Instance* source, RBX::AncestorChanged event)
 {
-	STUB(0x469e80);
+	if (!event.newParent) {
+		FUN_00469b30(boost::shared_ptr<RBX::Script>());
+		::PostMessage(m_unk0x130->m_hWnd, WM_CLOSE, 0, 0);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00469f10

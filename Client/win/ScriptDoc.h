@@ -62,6 +62,8 @@ protected:
 public:
 	virtual ~CScriptEditor();
 
+	void FUN_00468aa0();
+	void FUN_004696d0();
 	void FUN_00469b30(boost::shared_ptr<RBX::Script> script);
 
 protected:
@@ -72,7 +74,7 @@ protected:
 
 private:
 	boost::shared_ptr<boost::recursive_mutex> m_unk0x128; // 0x128
-	undefined4 m_unk0x130;                                // 0x130
+	CWnd* m_unk0x130;                                     // 0x130
 	boost::shared_ptr<RBX::Script> m_unk0x134;            // 0x134
 	boost::shared_ptr<RBX::RunService> m_unk0x13c;        // 0x13c
 	bool m_unk0x144;                                      // 0x144
