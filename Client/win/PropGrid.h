@@ -70,6 +70,21 @@ private:
 
 DECOMP_SIZE_ASSERT(CPropGrid, 0x1dc)
 
+// SIZE 0x118
+class CPropertyGridItemBrickColor : public CXTPPropertyGridItemColor
+{
+public:
+	CPropertyGridItemBrickColor(CString strCaption, COLORREF clr);
+
+	virtual void SetValue(CString strValue);
+	virtual void SetColor(COLORREF clr);
+
+protected:
+	virtual void OnInplaceButtonDown(CXTPPropertyGridInplaceButton* pButton);
+};
+
+DECOMP_SIZE_ASSERT(CPropertyGridItemBrickColor, 0x118)
+
 // SIZE 0x128
 template <class T, class Base, class Descriptor>
 class XItem : public Base, public CPropGrid::Item

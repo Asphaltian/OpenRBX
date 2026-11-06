@@ -1,5 +1,6 @@
 #include "PropGrid.h"
 
+#include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/DataModel.h"
 
@@ -60,17 +61,6 @@ void XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<i
 	SetValue(buffer);
 }
 
-// FUNCTION: ROBLOX 0x0043c070
-template <>
-void XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >::VTable0xe8(
-	const G3D::Vector3& value
-)
-{
-	char buffer[256];
-	sprintf(buffer, "%.3g, %.3g, %.3g", value.x, value.y, value.z);
-	SetValue(buffer);
-}
-
 // FUNCTION: ROBLOX 0x0043bcc0
 template <>
 G3D::Color3 XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropertyDescriptor<G3D::Color3> >::
@@ -87,6 +77,67 @@ void XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropert
 )
 {
 	SetColor(RGB(value.r * 255.0, value.g * 255.0, value.b * 255.0));
+}
+
+// STUB: ROBLOX 0x0043bdc0
+static CString FUN_0043bdc0(COLORREF color)
+{
+	RBX::BrickColor brickColor = RBX::BrickColor::closest(
+		G3D::Color3(GetRValue(color) / 255.0, GetGValue(color) / 255.0, GetBValue(color) / 255.0)
+	);
+	return brickColor.name().c_str();
+}
+
+// STUB: ROBLOX 0x0043be40
+void CPropertyGridItemBrickColor::SetColor(COLORREF clr)
+{
+	m_clrValue = clr;
+	CXTPPropertyGridItem::SetValue(FUN_0043bdc0(clr));
+}
+
+// STUB: ROBLOX 0x0043be70
+CPropertyGridItemBrickColor::CPropertyGridItemBrickColor(CString strCaption, COLORREF clr)
+	: CXTPPropertyGridItemColor(strCaption, clr)
+{
+	m_nFlags = xtpGridItemHasComboButton;
+	SetColor(clr);
+	m_strDefaultValue = m_strValue;
+}
+
+// FUNCTION: ROBLOX 0x0043bf30
+static COLORREF FUN_0043bf30(CString text)
+{
+	G3D::Color3uint8 color = RBX::BrickColor::parse(text).color3uint8();
+	return RGB(color.r, color.g, color.b);
+}
+
+// FUNCTION: ROBLOX 0x0043c070
+template <>
+void XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >::VTable0xe8(
+	const G3D::Vector3& value
+)
+{
+	char buffer[256];
+	sprintf(buffer, "%.3g, %.3g, %.3g", value.x, value.y, value.z);
+	SetValue(buffer);
+}
+
+// FUNCTION: ROBLOX 0x0043c740
+void CPropertyGridItemBrickColor::SetValue(CString strValue)
+{
+	if (strValue != "") {
+		SetColor(FUN_0043bf30(strValue));
+	}
+	else {
+		m_clrValue = (COLORREF) -1;
+		CXTPPropertyGridItem::SetValue("");
+	}
+}
+
+// STUB: ROBLOX 0x0043c7f0
+void CPropertyGridItemBrickColor::OnInplaceButtonDown(CXTPPropertyGridInplaceButton* pButton)
+{
+	STUB(0x43c7f0);
 }
 
 // STUB: ROBLOX 0x0043df20
