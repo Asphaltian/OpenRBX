@@ -144,6 +144,20 @@ void XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDes
 	SetValue(buffer);
 }
 
+// FUNCTION: ROBLOX 0x0043c240
+template <>
+int XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>::VTable0xe4()
+{
+	return GetEnum();
+}
+
+// FUNCTION: ROBLOX 0x0043c250
+template <>
+void XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>::VTable0xe8(const int& value)
+{
+	SetEnum(value);
+}
+
 // FUNCTION: ROBLOX 0x0043c740
 void CPropertyGridItemBrickColor::SetValue(CString strValue)
 {
@@ -233,6 +247,29 @@ void XItem<T, Base, Descriptor>::FUN_00443670(const T& value)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00440a70
+template <>
+void XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>::VTable0xf0(
+	RBX::Instance* instance, const int& value
+)
+{
+	RBX::DataModel::Lock lock(m_unk0x14->m_unk0x194);
+	m_unk0x124->setEnumValue(instance, value);
+}
+
+// STUB: ROBLOX 0x00442800
+EnumItem::EnumItem(const RBX::Reflection::EnumPropertyDescriptor& descriptor, CPropGrid* grid)
+	: XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>(descriptor, grid)
+{
+	for (std::vector<const RBX::Reflection::EnumDescriptor::Item*>::const_iterator
+			 iter = descriptor.enumDescriptor.begin(),
+			 end = descriptor.enumDescriptor.end();
+		 iter != end;
+		 ++iter) {
+		m_pConstraints->AddConstraint((*iter)->name.c_str(), (*iter)->value);
+	}
+}
+
 // STUB: ROBLOX 0x00445430
 void CSelectionPropGrid::onEvent(const RBX::Selection* source, RBX::SelectionChanged event)
 {
@@ -273,3 +310,4 @@ template class XItem<
 	RBX::BrickColor,
 	CPropertyGridItemBrickColor,
 	RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor> >;
+template class XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>;
