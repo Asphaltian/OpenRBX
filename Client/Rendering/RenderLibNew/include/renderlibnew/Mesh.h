@@ -95,9 +95,10 @@ protected:
 	std::vector<undefined4> m_unk0x18; // 0x18
 	std::vector<undefined4> m_unk0x28; // 0x28
 	undefined4* m_unk0x38;             // 0x38
-	undefined4 m_unk0x3c;              // 0x3c
 
 public:
+	undefined4 m_unk0x3c; // 0x3c
+
 	static G3D::ReferenceCountedPointer<Mesh> aggregate(
 		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
 		G3D::CoordinateFrame& outCFrame,

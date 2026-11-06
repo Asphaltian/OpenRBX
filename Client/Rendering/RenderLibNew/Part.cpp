@@ -365,7 +365,7 @@ static RenderSurfaceType renderSurfaceType(SurfaceType surfaceType)
 	}
 }
 
-// STUB: ROBLOX 0x00518b40
+// FUNCTION: ROBLOX 0x00518b40
 void Part::updateMesh()
 {
 	RenderSurfaceTypes surfaceTypes;
@@ -431,7 +431,7 @@ void Part::updateMesh()
 	radius = sqrt(2.0f) * 0.5 * primaryComponent(size);
 }
 
-// STUB: ROBLOX 0x0051a030
+// FUNCTION: ROBLOX 0x0051a030
 void Decal::updateMesh()
 {
 	if (partInstance) {
@@ -478,10 +478,14 @@ void Decal::updateMesh()
 		}
 
 		radius = sqrt(2.0f) * 0.5 * primaryComponent(size);
+
+		if (mesh.notNull()) {
+			mesh->m_unk0x3c = 4;
+		}
 	}
 }
 
-// STUB: ROBLOX 0x0051a250
+// FUNCTION: ROBLOX 0x0051a250
 void Texture::updateMesh()
 {
 	if (partInstance) {

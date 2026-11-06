@@ -149,9 +149,11 @@ CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, RenderSurfaceTy
 	}
 }
 
-// STUB: ROBLOX 0x00528b90
+// FUNCTION: ROBLOX 0x00528b90
 CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId decalFace)
 {
+	m_unk0x3c = 3;
+
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
 
 	levels.append(level);
@@ -161,9 +163,11 @@ CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId decalF
 	builder.buildFace(decalFace, LevelBuilder::Decal);
 }
 
-// STUB: ROBLOX 0x00528cf0
+// FUNCTION: ROBLOX 0x00528cf0
 CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
+	m_unk0x3c = 3;
+
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
 
 	levels.append(level);
