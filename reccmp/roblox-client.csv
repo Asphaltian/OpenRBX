@@ -5571,3 +5571,4 @@ address,type,symbol,name,module,size
 008214ec,global,??_7?$BoundFuncDesc@VInstance@RBX@@$$A6AXXZ$0A@@Reflection@RBX@@6B@,,,
 008363dc,global,??_7?$BoundPropGetSet@VExplosion@RBX@@@?$BoundProp@M$00@Reflection@RBX@@6B@,,,
 008378ec,global,??_7?$BoundPropGetSet@VBodyGyro@RBX@@@?$BoundProp@M$00@Reflection@RBX@@6B@,,,
+005b0e90,synthetic,??$?0P8PartInstance@RBX@@BEMXZP801@AEXM@Z@?$PropDescriptor@VPartInstance@RBX@@M@Reflection@RBX@@QAE@PBD0P8PartInstance@2@BEMXZP832@AEXM@ZW4Functionality@PropertyDescriptor@12@@Z,,,

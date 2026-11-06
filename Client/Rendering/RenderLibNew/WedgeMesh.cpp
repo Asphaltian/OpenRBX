@@ -70,7 +70,12 @@ public:
 		else {
 			vertex.x += inset;
 		}
-		vertex.y = (vertex.y > 0 ? vertex.y : -vertex.y) - inset;
+		if (vertex.y > 0) {
+			vertex.y -= inset;
+		}
+		else {
+			vertex.y = -vertex.y - inset;
+		}
 	}
 };
 
@@ -105,7 +110,8 @@ public:
 		else {
 			vertex.y += inset;
 		}
-		normal = G3D::Vector3(0, radius.z, radius.y);
+		normal.y = radius.z;
+		normal.z = radius.y;
 	}
 };
 
