@@ -33,7 +33,7 @@ class View;
 float primaryComponent(const G3D::Vector3& v);
 
 // SIZE 0xcc
-class __declspec(novtable) PartChunk : public RenderNew::Chunk
+class PartChunk : public RenderNew::Chunk
 {
 private:
 	G3D::CoordinateFrame coordinateFrame; // 0x1c
@@ -48,6 +48,9 @@ private:
 
 public:
 	virtual ~PartChunk();
+
+	// SYNTHETIC: ROBLOX 0x005166d0
+	// RBX::ViewNew::PartChunk::`scalar deleting destructor'
 
 	virtual bool castsShadows() const;
 	virtual bool cullable() const;
@@ -87,6 +90,9 @@ public:
 
 	virtual ~Part();
 
+	// SYNTHETIC: ROBLOX 0x00517dc0
+	// RBX::ViewNew::Part::`scalar deleting destructor'
+
 	// clang-format off
 	// clang-format on
 
@@ -117,6 +123,9 @@ public:
 
 	virtual ~Decal();
 
+	// SYNTHETIC: ROBLOX 0x00516790
+	// RBX::ViewNew::Decal::`scalar deleting destructor'
+
 	// clang-format off
 	// clang-format on
 
@@ -144,6 +153,9 @@ public:
 	Texture(RBX::Texture& texture, PartInstance& parentPart, View* view);
 
 	virtual ~Texture();
+
+	// SYNTHETIC: ROBLOX 0x005167b0
+	// RBX::ViewNew::Texture::`scalar deleting destructor'
 
 	// clang-format off
 	// clang-format on

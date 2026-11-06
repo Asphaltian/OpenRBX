@@ -13,9 +13,10 @@ const float Chunk::TEXTURE_OFFSET = -0.1f;
 bool AggregateChunk::randomColors;
 const G3D::CoordinateFrame AggregateChunk::identity;
 
-Chunk::Chunk(float polygonOffset) : polygonOffset(polygonOffset), radius(G3D::inf())
+// STUB: ROBLOX 0x005367b0
+void Chunk::VTable0x20()
 {
-	RenderStats::chunkCount++;
+	STUB(0x5367b0);
 }
 
 // STUB: ROBLOX 0x005367d0
@@ -24,54 +25,22 @@ void AggregateChunk::makeMesh()
 	mesh = Mesh::aggregate(components, _cframe, radius);
 }
 
-void AggregateChunk::renderShadows(
-	G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance
-)
+// FUNCTION: ROBLOX 0x005368f0
+Chunk::Chunk(float polygonOffset) : m_unk0x14(0.0f), polygonOffset(polygonOffset), radius(G3D::inf())
 {
-	if (light != shadowSource) {
-		shadowSource = light;
-		shadowIndexArray.resize(0, true);
-		shadowIndexArray16.resize(0, true);
-
-		if (material->veryTransparent()) {
-			return;
-		}
-
-		static G3D::Array<G3D::Vector3> shadowVertex;
-		shadowVertex.resize(0, true);
-
-		shadowVertex.append(-light.position.xyz().direction() * shadowVertexDistance);
-
-		if (shadowVertex.size() < 65536) {
-			int numIndices = shadowIndexArray.size();
-			shadowIndexArray16.resize(numIndices, true);
-
-			for (int i = 0; i < numIndices; i++) {
-				shadowIndexArray16[i] = (unsigned short) shadowIndexArray[i];
-			}
-
-			shadowIndexArray.resize(0, true);
-		}
-
-		G3D::VARAreaRef area =
-			G3D::VARArea::create(shadowVertex.size() * sizeof(G3D::Vector3), G3D::VARArea::WRITE_EVERY_FEW_FRAMES);
-		shadowVAR = G3D::VAR(shadowVertex, area);
-	}
-
-	if (shadowIndexArray.size() > 0) {
-		rd->beginIndexedPrimitives();
-		rd->setVertexArray(shadowVAR);
-		rd->sendIndices(G3D::RenderDevice::TRIANGLES, shadowIndexArray);
-		rd->endIndexedPrimitives();
-	}
-	else if (shadowIndexArray16.size() > 0) {
-		rd->beginIndexedPrimitives();
-		rd->setVertexArray(shadowVAR);
-		rd->sendIndices(G3D::RenderDevice::TRIANGLES, shadowIndexArray16);
-		rd->endIndexedPrimitives();
-	}
+	RenderStats::chunkCount++;
+	m_unk0x10 = NULL;
+	m_unk0x0c = NULL;
 }
 
+// STUB: ROBLOX 0x00536960
+Chunk::~Chunk()
+{
+	RenderStats::chunkCount--;
+	STUB(0x536960);
+}
+
+// FUNCTION: ROBLOX 0x00536a00
 AggregateChunk::AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& firstChunk)
 	: Chunk(firstChunk->polygonOffset), _castsShadows(firstChunk->castsShadows()), _cullable(firstChunk->cullable())
 {
@@ -88,6 +57,7 @@ AggregateChunk::AggregateChunk(const G3D::ReferenceCountedPointer<Chunk>& firstC
 	}
 }
 
+// FUNCTION: ROBLOX 0x00536c20
 AggregateChunk::~AggregateChunk()
 {
 	RenderStats::chunkCount++;

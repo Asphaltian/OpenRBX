@@ -74,6 +74,7 @@ const G3D::CoordinateFrame& PartChunk::cframe()
 	return coordinateFrame;
 }
 
+// STUB: ROBLOX 0x00515300
 G3D::ReferenceCountedPointer<RenderNew::Material> Part::getMaterial()
 {
 	try {
@@ -119,7 +120,7 @@ G3D::ReferenceCountedPointer<RenderNew::Material> Part::getMaterial()
 	return material;
 }
 
-// STUB: ROBLOX 0x00515660
+// FUNCTION: ROBLOX 0x00515660
 void Part::onEvent(const PartInstance* source, CanAggregateChanged event)
 {
 	view->sceneManager->setSleeping(this, event.canClump);
@@ -158,7 +159,12 @@ void Texture::onTextureAncestorChanged(boost::shared_ptr<Instance> ancestor)
 	}
 }
 
-// STUB: ROBLOX 0x00515a80
+// FUNCTION: ROBLOX 0x00515700
+PartChunk::~PartChunk()
+{
+}
+
+// FUNCTION: ROBLOX 0x00515a80
 void PartChunk::invalidateMesh()
 {
 	mesh = NULL;
@@ -166,6 +172,7 @@ void PartChunk::invalidateMesh()
 	view->sceneManager->invalidateModel(this, partInstance->getCanAggregate());
 }
 
+// FUNCTION: ROBLOX 0x00515b70
 void PartChunk::invalidateMaterial()
 {
 	material = NULL;
@@ -181,6 +188,7 @@ void PartChunk::onSpecialShapeChanged()
 	invalidateMaterial();
 }
 
+// STUB: ROBLOX 0x00515c70
 void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	if (descriptor == &PartInstance::prop_Size) {
@@ -195,6 +203,7 @@ void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor* descript
 	}
 }
 
+// STUB: ROBLOX 0x00515ce0
 void Part::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	PartChunk::onPropertyChanged(descriptor);
@@ -211,6 +220,7 @@ void Part::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00515d30
 G3D::ReferenceCountedPointer<RenderNew::Mesh> PartChunk::getMesh()
 {
 	if (mesh.isNull()) {
@@ -218,6 +228,11 @@ G3D::ReferenceCountedPointer<RenderNew::Mesh> PartChunk::getMesh()
 	}
 
 	return mesh;
+}
+
+// FUNCTION: ROBLOX 0x00515d70
+Decal::~Decal()
+{
 }
 
 void Decal::onDecalPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
@@ -284,6 +299,11 @@ void Texture::onTexturePropertyChanged(const Reflection::PropertyDescriptor* des
 	}
 }
 
+// FUNCTION: ROBLOX 0x00516010
+Texture::~Texture()
+{
+}
+
 // STUB: ROBLOX 0x005160f0
 G3D::ReferenceCountedPointer<RenderNew::Material> Texture::getMaterial()
 {
@@ -319,18 +339,6 @@ void PartChunk::onChildRemoved(boost::shared_ptr<Instance> child)
 	}
 }
 
-PartChunk::~PartChunk()
-{
-}
-
-Decal::~Decal()
-{
-}
-
-Texture::~Texture()
-{
-}
-
 // STUB: ROBLOX 0x00517180
 Part::~Part()
 {
@@ -355,6 +363,7 @@ static RenderSurfaceType renderSurfaceType(SurfaceType surfaceType)
 	}
 }
 
+// STUB: ROBLOX 0x00518b40
 void Part::updateMesh()
 {
 	RenderSurfaceTypes surfaceTypes;
@@ -420,6 +429,7 @@ void Part::updateMesh()
 	radius = sqrt(2.0f) * 0.5 * primaryComponent(size);
 }
 
+// STUB: ROBLOX 0x0051a030
 void Decal::updateMesh()
 {
 	if (partInstance) {
@@ -469,6 +479,7 @@ void Decal::updateMesh()
 	}
 }
 
+// STUB: ROBLOX 0x0051a250
 void Texture::updateMesh()
 {
 	if (partInstance) {
@@ -538,6 +549,7 @@ void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 	}
 }
 
+// STUB: ROBLOX 0x0051aa10
 PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>& partInstance, View* view)
 	: RenderNew::Chunk(polygonOffset), partInstance(partInstance), materialInvalid(true), view(view), specialShape(NULL)
 {
