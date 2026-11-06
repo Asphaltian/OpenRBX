@@ -1913,6 +1913,7 @@ address,type,symbol,name,module,size
 0080d570,global,??_7Creator@?$FactoryProduct@VCamera@RBX@@VInstance@2@$1?sCamera@2@3PADA@RBX@@6B@,,,
 0080d578,global,??_7?$sp_counted_impl_pd@PAVCamera@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@2@@detail@boost@@6B@,,,
 0080e81c,global,?classCScriptDoc@CScriptDoc@@2UCRuntimeClass@@B,,,
+0080e8dc,global,??_7CScriptDoc@@6B@,,,
 0080e838,global,?classCScriptEditor@CScriptEditor@@2UCRuntimeClass@@B,,,
 0080ee60,global,?classCSecureHtmlView@CSecureHtmlView@@2UCRuntimeClass@@B,,,
 0080ee84,global,??_7CSecureHtmlView@@6B@,,,

@@ -58,6 +58,7 @@ private:
 	template <class T, class Base, class Descriptor>
 	friend class XItem;
 	friend class Vector3ComponentItem;
+	friend class ScriptItem;
 
 	boost::recursive_mutex m_unk0x188;                                            // 0x188
 	RBX::DataModel* m_unk0x194;                                                   // 0x194

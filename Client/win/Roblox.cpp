@@ -13,6 +13,7 @@
 #include "ScriptDoc.h"
 #include "VersionInfo.h"
 #include "network/API.h"
+#include "script/Script.h"
 #include "security/SecurityContext.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/DebugSettings.h"
@@ -264,6 +265,14 @@ void CRobloxApp::FUN_0044e290()
 		->FUN_00459c80();
 }
 
+// FUNCTION: ROBLOX 0x0044eaf0
+void CScriptDoc::FUN_0044eaf0(boost::shared_ptr<RBX::Script> script)
+{
+	m_unk0x54 = script;
+	SetTitle(script->getName().c_str());
+	UpdateAllViews(NULL, 1);
+}
+
 // STUB: ROBLOX 0x0044ed40
 void CIDEDocManager::OnFileNew()
 {
@@ -277,6 +286,14 @@ int CRobloxApp::ExitInstance()
 	RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "ROBLOX ExitInstance");
 	_AtlModule.RevokeClassObjects();
 	return CWinApp::ExitInstance();
+}
+
+// FUNCTION: ROBLOX 0x0044ef90
+void CRobloxApp::FUN_0044ef90(boost::shared_ptr<RBX::Script> script)
+{
+	CScriptDoc* doc =
+		static_cast<CScriptDoc*>(static_cast<CIDEDocManager*>(m_pDocManager)->m_unk0x28->OpenDocumentFile(NULL));
+	doc->FUN_0044eaf0(script);
 }
 
 // FUNCTION: ROBLOX 0x00450800

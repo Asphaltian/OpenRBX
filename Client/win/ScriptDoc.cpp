@@ -7,10 +7,6 @@ CScriptDoc::CScriptDoc()
 {
 }
 
-CScriptDoc::~CScriptDoc()
-{
-}
-
 CScriptEditor::CScriptEditor()
 {
 }

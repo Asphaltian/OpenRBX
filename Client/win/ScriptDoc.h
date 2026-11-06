@@ -5,6 +5,12 @@
 #include "ScintillaDocView.h"
 #include "decomp.h"
 
+#include <boost/shared_ptr.hpp>
+
+namespace RBX {
+class Script;
+}
+
 // SIZE 0x5c
 class CScriptDoc : public CNullDoc
 {
@@ -13,15 +19,23 @@ class CScriptDoc : public CNullDoc
 	// SYNTHETIC: ROBLOX 0x00467db0
 	// ?GetThisClass@CScriptDoc@@SGPAUCRuntimeClass@@XZ
 
+	// SYNTHETIC: ROBLOX 0x00468d30
+	// ?CreateObject@CScriptDoc@@SGPAVCObject@@XZ
+
 protected:
 	CScriptDoc();
 
 public:
-	virtual ~CScriptDoc();
+	// SYNTHETIC: ROBLOX 0x00468be0
+	// ??1CScriptDoc@@UAE@XZ
+
+	// SYNTHETIC: ROBLOX 0x00468c70
+	// CScriptDoc::`scalar deleting destructor'
+
+	void FUN_0044eaf0(boost::shared_ptr<RBX::Script> script);
 
 private:
-	undefined4 m_unk0x54; // 0x54
-	undefined4 m_unk0x58; // 0x58
+	boost::shared_ptr<RBX::Script> m_unk0x54; // 0x54
 };
 
 DECOMP_SIZE_ASSERT(CScriptDoc, 0x5c)

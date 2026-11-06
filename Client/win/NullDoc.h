@@ -20,7 +20,8 @@ protected:
 	CNullDoc() {}
 
 public:
-	virtual BOOL IsModified() { return FALSE; } // vtable+0x60
+	virtual BOOL IsModified() { return FALSE; }  // vtable+0x60
+	virtual BOOL SaveModified() { return TRUE; } // vtable+0x98
 
 	// SYNTHETIC: ROBLOX 0x0040a800
 	// ??_GCNullDoc@@UAEPAXI@Z

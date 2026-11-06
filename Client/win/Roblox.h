@@ -8,6 +8,7 @@
 #include <G3D/Color3uint8.h>
 #include <afxdhtml.h>
 #include <boost/scoped_ptr.hpp>
+#include <boost/shared_ptr.hpp>
 #include <string>
 
 extern CString g_unk0x00954290;
@@ -21,6 +22,10 @@ inline CString FUN_00407190()
 void FUN_00450800(CString p_unk0x04);
 
 // SIZE 0x110
+namespace RBX {
+class Script;
+}
+
 class CRobloxApp : public CWinApp
 {
 public:
@@ -36,6 +41,7 @@ public:
 
 	BOOL FUN_0044dac0(bool p_unk0x04);
 	void FUN_0044e250();
+	void FUN_0044ef90(boost::shared_ptr<RBX::Script> script);
 
 	afx_msg void OnAppAbout();
 	afx_msg void FUN_0044dc90();

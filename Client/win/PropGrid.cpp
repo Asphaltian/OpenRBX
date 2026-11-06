@@ -1,5 +1,7 @@
 #include "PropGrid.h"
 
+#include "Roblox.h"
+#include "script/Script.h"
 #include "util/ContentProvider.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Commands.h"
@@ -513,7 +515,26 @@ void ScriptItem::VTable0x00(
 // STUB: ROBLOX 0x00442620
 void ScriptItem::OnInplaceButtonDown(CXTPPropertyGridInplaceButton* pButton)
 {
-	STUB(0x442620);
+	std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
+		objectsEnd = m_unk0x14->m_unk0x1d0.end();
+	for (std::vector<const RBX::Reflection::ClassDescriptor*>::iterator iter = m_unk0x04.begin(), end = m_unk0x04.end();
+		 iter != end;
+		 ++iter) {
+		const RBX::Reflection::ClassDescriptor* descriptor = *iter;
+		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
+			found = m_unk0x14->m_unk0x1d0.find(descriptor);
+		if (found != objectsEnd) {
+			std::vector<boost::shared_ptr<RBX::Instance> >& instances = found->second;
+			for (std::vector<boost::shared_ptr<RBX::Instance> >::iterator instance = instances.begin(),
+																		  instancesEnd = instances.end();
+				 instance != instancesEnd;
+				 ++instance) {
+				if (RBX::Script* script = dynamic_cast<RBX::Script*>(instance->get())) {
+					static_cast<CRobloxApp*>(AfxGetApp())->FUN_0044ef90(RBX::shared_from(script));
+				}
+			}
+		}
+	}
 }
 
 // STUB: ROBLOX 0x00442800
