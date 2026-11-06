@@ -139,31 +139,37 @@ Face::Face()
 	bulge[1] = G3D::uniformRandom() > 0.5f;
 }
 
+// FUNCTION: ROBLOX 0x0051f380
 void PBBBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(TopBottom(), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0051f3e0
 void PBBBuilder::buildBottom(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y_NEG>(TopBottom(), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0051f440
 void PBBBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(Side(), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0051f4a0
 void PBBBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(Side(), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0051f500
 void PBBBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(Side(), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0051f560
 void PBBBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(Side(), 1, 1, purpose);

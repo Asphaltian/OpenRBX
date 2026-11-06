@@ -154,26 +154,31 @@ protected:
 
 DECOMP_SIZE_ASSERT(TorsoBuilder, 0x28)
 
+// FUNCTION: ROBLOX 0x00524f40
 inline void TorsoBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(DeformSide(bevel, shoulderInset), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x00524f80
 inline void TorsoBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(DeformTop(bevel, shoulderInset), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x00524fc0
 inline void TorsoBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(DeformFrontBack(bevel, shoulderInset), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x00525000
 inline void TorsoBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(DeformSide(bevel, shoulderInset), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x00525040
 inline void TorsoBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(DeformFrontBack(bevel, shoulderInset), 1, 1, purpose);

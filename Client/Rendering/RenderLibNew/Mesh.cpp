@@ -78,6 +78,7 @@ void Mesh::computeAABounds(
 	}
 }
 
+// STUB: ROBLOX 0x00532600
 unsigned int Mesh::allocVertex(
 	const G3D::Vector3& vertex, const G3D::Vector3& normal, const G3D::Vector2& tex, bool share
 )
@@ -112,6 +113,7 @@ unsigned int Mesh::allocVertex(
 	return index;
 }
 
+// STUB: ROBLOX 0x00532700
 void Mesh::freeVertex(unsigned int index)
 {
 	if (vertexRefCounts.getCArray() != NULL) {

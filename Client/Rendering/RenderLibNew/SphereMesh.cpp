@@ -37,31 +37,37 @@ public:
 	}
 
 protected:
+	// FUNCTION: ROBLOX 0x005281c0
 	virtual void buildRight(Purpose purpose) // vtable+0x10
 	{
 		buildFace<RBX::NORM_X>(SphereTransform, elements, elements, purpose);
 	}
 
+	// FUNCTION: ROBLOX 0x005281f0
 	virtual void buildTop(Purpose purpose) // vtable+0x04
 	{
 		buildFace<RBX::NORM_Y>(SphereTransform, elements, elements, purpose);
 	}
 
+	// FUNCTION: ROBLOX 0x00528220
 	virtual void buildBack(Purpose purpose) // vtable+0x18
 	{
 		buildFace<RBX::NORM_Z>(SphereTransform, elements, elements, purpose);
 	}
 
+	// FUNCTION: ROBLOX 0x00528250
 	virtual void buildLeft(Purpose purpose) // vtable+0x0c
 	{
 		buildFace<RBX::NORM_X_NEG>(SphereTransform, elements, elements, purpose);
 	}
 
+	// FUNCTION: ROBLOX 0x00528280
 	virtual void buildBottom(Purpose purpose) // vtable+0x08
 	{
 		buildFace<RBX::NORM_Y_NEG>(SphereTransform, elements, elements, purpose);
 	}
 
+	// FUNCTION: ROBLOX 0x005282b0
 	virtual void buildFront(Purpose purpose) // vtable+0x14
 	{
 		buildFace<RBX::NORM_Z_NEG>(SphereTransform, elements, elements, purpose);

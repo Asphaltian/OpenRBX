@@ -102,31 +102,37 @@ static void CylinderTransform(
 	normal = G3D::Vector3(0, v.x, v.y);
 }
 
+// FUNCTION: ROBLOX 0x00528920
 inline void CylinderBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(EndcapTransform, elements, elements, purpose);
 }
 
+// FUNCTION: ROBLOX 0x00528950
 inline void CylinderBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(CylinderTransform, elements, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x00528980
 inline void CylinderBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(CylinderTransform, elements, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x005289b0
 inline void CylinderBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(EndcapTransform, elements, elements, purpose);
 }
 
+// FUNCTION: ROBLOX 0x005289e0
 inline void CylinderBuilder::buildBottom(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y_NEG>(CylinderTransform, elements, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x00528a10
 inline void CylinderBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(CylinderTransform, elements, 1, purpose);

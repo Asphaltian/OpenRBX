@@ -144,31 +144,37 @@ inline void EndcapTransform::operator()(
 	vertex.y *= ratio;
 }
 
+// FUNCTION: ROBLOX 0x0052b7c0
 inline void HeadBuilder::buildTop(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y>(EndcapTransform(bevel), elements, elements, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0052b7f0
 inline void HeadBuilder::buildBottom(Purpose purpose)
 {
 	buildFace<RBX::NORM_Y_NEG>(EndcapTransform(bevel), elements, elements, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0052b820
 inline void HeadBuilder::buildLeft(Purpose purpose)
 {
 	buildFace<RBX::NORM_X_NEG>(CylinderTransform(bevel, elements), elements, elements, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0052b860
 inline void HeadBuilder::buildRight(Purpose purpose)
 {
 	buildFace<RBX::NORM_X>(CylinderTransform(bevel, elements), elements, elements, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0052b8a0
 inline void HeadBuilder::buildFront(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z_NEG>(CylinderTransform(bevel, elements), elements, elements, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0052b8e0
 inline void HeadBuilder::buildBack(Purpose purpose)
 {
 	buildFace<RBX::NORM_Z>(CylinderTransform(bevel, elements), elements, elements, purpose);

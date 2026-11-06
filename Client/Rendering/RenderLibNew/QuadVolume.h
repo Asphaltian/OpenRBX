@@ -25,7 +25,7 @@ inline G3D::Vector3 absolute(G3D::Vector3 v)
 }
 
 // SIZE 0x20
-class __declspec(novtable) LevelBuilder
+class LevelBuilder
 {
 protected:
 	const G3D::Vector3 halfSize;                                // 0x04
