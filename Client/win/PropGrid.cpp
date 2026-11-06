@@ -1,5 +1,7 @@
 #include "PropGrid.h"
 
+#include "util/Sound.h"
+#include "util/TextureId.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/DataModel.h"
@@ -151,6 +153,26 @@ void XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescripto
 	SetValue(value.c_str());
 }
 
+// FUNCTION: ROBLOX 0x0043c0f0 FOLDED
+template <>
+void XItem<
+	RBX::Soundscape::SoundId,
+	CXTPPropertyGridItem,
+	RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId> >::
+	VTable0xe8(const RBX::Soundscape::SoundId& value)
+{
+	SetValue(value.c_str());
+}
+
+// FUNCTION: ROBLOX 0x0043c0f0 FOLDED
+template <>
+void XItem<RBX::TextureId, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId> >::VTable0xe8(
+	const RBX::TextureId& value
+)
+{
+	SetValue(value.c_str());
+}
+
 // FUNCTION: ROBLOX 0x0043c240
 template <>
 int XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>::VTable0xe4()
@@ -186,6 +208,24 @@ void CPropertyGridItemBrickColor::OnInplaceButtonDown(CXTPPropertyGridInplaceBut
 // FUNCTION: ROBLOX 0x0043c990
 template <>
 std::string XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>::VTable0xe4()
+{
+	return (LPCTSTR) GetValue();
+}
+
+// FUNCTION: ROBLOX 0x0043cad0
+template <>
+RBX::Soundscape::SoundId XItem<
+	RBX::Soundscape::SoundId,
+	CXTPPropertyGridItem,
+	RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId> >::VTable0xe4()
+{
+	return (LPCTSTR) GetValue();
+}
+
+// FUNCTION: ROBLOX 0x0043cad0 FOLDED
+template <>
+RBX::TextureId XItem<RBX::TextureId, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId> >::
+	VTable0xe4()
 {
 	return (LPCTSTR) GetValue();
 }
@@ -336,3 +376,8 @@ template class XItem<
 	RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor> >;
 template class XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>;
 template class XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>;
+template class XItem<
+	RBX::Soundscape::SoundId,
+	CXTPPropertyGridItem,
+	RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId> >;
+template class XItem<RBX::TextureId, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId> >;

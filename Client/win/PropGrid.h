@@ -174,6 +174,14 @@ protected:
 // ?VTable0xec@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAE_NABH0@Z
 // TEMPLATE: ROBLOX 0x00440920
 // ??0?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@QAE@ABVEnumPropertyDescriptor@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x00440d10
+// ??0?$XItem@VSoundId@Soundscape@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@3@@@QAE@ABV?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x00440e30
+// ?VTable0xec@?$XItem@VSoundId@Soundscape@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@3@@@UAE_NABVSoundId@Soundscape@RBX@@0@Z
+// TEMPLATE: ROBLOX 0x00440e30 FOLDED
+// ?VTable0xec@?$XItem@VTextureId@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@2@@@UAE_NABVTextureId@RBX@@0@Z
+// TEMPLATE: ROBLOX 0x00441150
+// ??0?$XItem@VTextureId@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@2@@@QAE@ABV?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x004412e0
 // ?VTable0xf0@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXPAVInstance@RBX@@ABM@Z
 // TEMPLATE: ROBLOX 0x00440060
@@ -210,6 +218,10 @@ protected:
 // ?OnValueChanged@?$XItem@VVector3@G3D@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // TEMPLATE: ROBLOX 0x004449d0
 // ?OnValueChanged@?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// TEMPLATE: ROBLOX 0x00445160
+// ?OnValueChanged@?$XItem@VSoundId@Soundscape@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@3@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// TEMPLATE: ROBLOX 0x00445160 FOLDED
+// ?OnValueChanged@?$XItem@VTextureId@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@2@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // clang-format on
 
 template <>
