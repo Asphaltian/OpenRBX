@@ -5750,3 +5750,14 @@ address,type,symbol,name,module,size
 00748890,library,?Append@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEHABV1@@Z,,,19
 007488b0,library,?Copy@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEXABV1@@Z,,,19
 00467bc0,library,?GetMessageMap@CScintillaView@Scintilla@@MBEPBUAFX_MSGMAP@@XZ,,,
+0080ea0c,global,??_7CScriptEditor@@6BCScintillaView@Scintilla@@@,,,552
+0080ea00,global,??_7CScriptEditor@@6B?$Listener@VInstance@RBX@@UAncestorChanged@2@@RBX@@@,,,8
+0080e9ec,global,??_7CScriptEditor@@6B?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@@,,,16
+0080e9d8,global,??_7CScriptEditor@@6B?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@@,,,16
+0080e998,global,??_7?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@6B@,,,16
+0080e9ac,global,??_7?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@6B@,,,16
+00469630,synthetic,??_ECScriptEditor@@WOM@AEPAXI@Z,,,
+00469640,synthetic,??_ECScriptEditor@@WBAM@AEPAXI@Z,,,
+00469650,synthetic,??_ECScriptEditor@@WPA@AEPAXI@Z,,,
+0080e9c0,global,??_7EventData@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@6B@,,,8
+0080e9cc,global,??_7EventData@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@6B@,,,8

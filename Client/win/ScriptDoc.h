@@ -1,15 +1,19 @@
 #ifndef SCRIPTDOC_H
 #define SCRIPTDOC_H
 
+#include "MarshaledListener.h"
 #include "NullDoc.h"
 #include "ScintillaDocView.h"
 #include "decomp.h"
+#include "util/RunStateOwner.h"
+#include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>
 
 namespace RBX {
+class DataModel;
 class Script;
-}
+} // namespace RBX
 
 // SIZE 0x5c
 class CScriptDoc : public CNullDoc
@@ -41,7 +45,11 @@ private:
 DECOMP_SIZE_ASSERT(CScriptDoc, 0x5c)
 
 // SIZE 0x150
-class CScriptEditor : public Scintilla::CScintillaView
+class CScriptEditor
+	: public Scintilla::CScintillaView,
+	  public RBX::Listener<RBX::Instance, RBX::AncestorChanged>,
+	  public RBX::MarshaledListener<RBX::Instance, RBX::PropertyChanged, RBX::Instance, RBX::PropertyChanged>,
+	  public RBX::MarshaledListener<RBX::RunService, RBX::RunState, RBX::RunService, RBX::RunState>
 {
 	DECLARE_DYNCREATE(CScriptEditor)
 
@@ -54,8 +62,23 @@ protected:
 public:
 	virtual ~CScriptEditor();
 
+	void FUN_00469b30(boost::shared_ptr<RBX::Script> script);
+
+protected:
+	virtual void onEvent(const RBX::Instance* source, RBX::AncestorChanged event);
+	virtual void VTable0x08(const RBX::RunService* source, RBX::RunState event);
+	virtual void VTable0x08(const RBX::Instance* source, RBX::PropertyChanged event);
+	virtual void VTable0x0c(const RBX::Instance* source, RBX::PropertyChanged event) throw();
+
 private:
-	undefined m_unk0xec[0x150 - 0xec]; // 0xec
+	boost::shared_ptr<RBX::DataModel> m_unk0x128;  // 0x128
+	undefined4 m_unk0x130;                         // 0x130
+	boost::shared_ptr<RBX::Script> m_unk0x134;     // 0x134
+	boost::shared_ptr<RBX::RunService> m_unk0x13c; // 0x13c
+	bool m_unk0x144;                               // 0x144
+	bool m_unk0x145;                               // 0x145
+	bool m_unk0x146;                               // 0x146
+	CFont m_unk0x148;                              // 0x148
 };
 
 DECOMP_SIZE_ASSERT(CScriptEditor, 0x150)

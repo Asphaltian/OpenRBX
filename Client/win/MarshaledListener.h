@@ -62,6 +62,30 @@ namespace RBX {
 // ??1?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@UAE@XZ
 // TEMPLATE: ROBLOX 0x0046ac00
 // ?VTable0x0c@?$MarshaledListener@VSelection@RBX@@VSelectionChanged@2@V12@V32@@RBX@@MAEXPBVSelection@2@VSelectionChanged@2@@Z
+// TEMPLATE: ROBLOX 0x00468f00
+// ??0?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00468f70
+// ?onEvent@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@MAEXPBVInstance@2@VPropertyChanged@2@@Z
+// TEMPLATE: ROBLOX 0x00468fd0
+// ??0?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@QAE@XZ
+// TEMPLATE: ROBLOX 0x00469040
+// ?onEvent@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@MAEXPBVRunService@2@W4RunState@2@@Z
+// TEMPLATE: ROBLOX 0x00469090
+// ??1?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@UAE@XZ
+// TEMPLATE: ROBLOX 0x00469110
+// ??1?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@UAE@XZ
+// TEMPLATE: ROBLOX 0x00469970
+// ?VTable0x0c@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@MAEXPBVInstance@2@VPropertyChanged@2@@Z
+// TEMPLATE: ROBLOX 0x004699d0
+// ?VTable0x0c@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@MAEXPBVRunService@2@W4RunState@2@@Z
+// TEMPLATE: ROBLOX 0x004691d0
+// ??0EventData@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@QAE@PAV12@PBVInstance@2@VPropertyChanged@2@@Z
+// TEMPLATE: ROBLOX 0x00469380
+// ??0EventData@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@QAE@PAV12@PBVRunService@2@W4RunState@2@@Z
+// SYNTHETIC: ROBLOX 0x00469190
+// RBX::MarshaledListener<RBX::Instance,RBX::PropertyChanged,RBX::Instance,RBX::PropertyChanged>::`scalar deleting destructor'
+// SYNTHETIC: ROBLOX 0x004691b0
+// RBX::MarshaledListener<RBX::RunService,enum RBX::RunState,RBX::RunService,enum RBX::RunState>::`scalar deleting destructor'
 // clang-format on
 
 // SIZE 0x1c
