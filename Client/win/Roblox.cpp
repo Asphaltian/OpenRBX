@@ -232,7 +232,7 @@ void CRobloxApp::FUN_0044dc90()
 	ShellExecute(AfxGetMainWnd()->m_hWnd, "open", "rundll32.exe", parameters, NULL, SW_SHOWDEFAULT);
 }
 
-// FUNCTION: ROBLOX 0x0044e100
+// FUNCTION: ROBLOX 0x0044e100 FOLDED
 CFrameWnd* CRbxDocTemplate::CreateNewFrame(CDocument* pDoc, CFrameWnd* pOther)
 {
 	theApp.FUN_0044dac0(true);

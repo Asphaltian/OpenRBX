@@ -51,7 +51,7 @@ ScoreHud::~ScoreHud()
 {
 }
 
-// FUNCTION: ROBLOX 0x0065a0e0
+// FUNCTION: ROBLOX 0x0065a0e0 FOLDED
 void ScoreHud::onEvent(const Instance* source, ChildRemoved event)
 {
 }

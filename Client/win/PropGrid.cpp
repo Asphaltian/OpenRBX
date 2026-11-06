@@ -149,7 +149,7 @@ void XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDes
 	SetValue(buffer);
 }
 
-// FUNCTION: ROBLOX 0x0043c0f0
+// FUNCTION: ROBLOX 0x0043c0f0 FOLDED
 template <>
 void XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>::VTable0xe8(const std::string& value)
 {
@@ -232,7 +232,7 @@ std::string XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDe
 	return (LPCTSTR) GetValue();
 }
 
-// FUNCTION: ROBLOX 0x0043cad0
+// FUNCTION: ROBLOX 0x0043cad0 FOLDED
 template <>
 RBX::Soundscape::SoundId XItem<
 	RBX::Soundscape::SoundId,
@@ -494,7 +494,7 @@ ScriptItem::ScriptItem(const RBX::Reflection::PropertyDescriptor& descriptor, CP
 	CXTPPropertyGridItem::SetValue("(Script)");
 }
 
-// FUNCTION: ROBLOX 0x004424e0
+// FUNCTION: ROBLOX 0x004424e0 FOLDED
 void RefItem::OnValueChanged(CString strValue)
 {
 }

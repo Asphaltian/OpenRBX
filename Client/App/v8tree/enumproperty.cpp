@@ -147,7 +147,7 @@ const Type& Type::singleton<std::vector<Value> >()
 }
 
 // FUNCTION: WEBSERVICE 0x1003f4a0
-// FUNCTION: ROBLOX 0x005a6040 FOLDED
+// FUNCTION: ROBLOX 0x005a6040
 template <>
 boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >& Value::convert<
 	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > >()
@@ -161,7 +161,6 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > >& Value::conv
 }
 
 // FUNCTION: WEBSERVICE 0x1003f530
-// FUNCTION: ROBLOX 0x005a6040 FOLDED
 template <>
 std::vector<Value>& Value::convert<std::vector<Value> >()
 {
