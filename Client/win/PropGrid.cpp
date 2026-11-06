@@ -128,19 +128,18 @@ void XItem<T, Base, Descriptor>::FUN_00443670(const T& value)
 		std::auto_ptr<RBX::XmlState> undoState(new RBX::UndoState());
 		std::auto_ptr<RBX::XmlState> redoState(new RBX::RedoState());
 
-		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& objects =
-			m_unk0x14->m_unk0x1d0;
 		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
-			objectsEnd = objects.end();
+			objectsEnd = m_unk0x14->m_unk0x1d0.end();
 		std::vector<const RBX::Reflection::ClassDescriptor*>::iterator end = m_unk0x04.end();
 		for (std::vector<const RBX::Reflection::ClassDescriptor*>::iterator iter = m_unk0x04.begin(); iter != end;
 			 ++iter) {
+			const RBX::Reflection::ClassDescriptor* descriptor = *iter;
 			std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
-				found = objects.find(*iter);
+				found = m_unk0x14->m_unk0x1d0.find(descriptor);
 			if (found != objectsEnd) {
 				std::vector<boost::shared_ptr<RBX::Instance> >& instances = found->second;
-				std::vector<boost::shared_ptr<RBX::Instance> >::iterator instancesEnd = instances.end();
-				for (std::vector<boost::shared_ptr<RBX::Instance> >::iterator instance = instances.begin();
+				for (std::vector<boost::shared_ptr<RBX::Instance> >::iterator instance = instances.begin(),
+																			  instancesEnd = instances.end();
 					 instance != instancesEnd;
 					 ++instance) {
 					undoState->addProperty(RBX::Reflection::Property(*m_unk0x124, instance->get()));
