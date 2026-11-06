@@ -5761,3 +5761,5 @@ address,type,symbol,name,module,size
 00469650,synthetic,??_ECScriptEditor@@WPA@AEPAXI@Z,,,
 0080e9c0,global,??_7EventData@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@6B@,,,8
 0080e9cc,global,??_7EventData@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@6B@,,,8
+0040d5b0,library,??1CGdiObject@@UAE@XZ,,,
+00466440,library,??1CScintillaView@Scintilla@@UAE@XZ,,,

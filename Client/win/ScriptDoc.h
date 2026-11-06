@@ -9,9 +9,9 @@
 #include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>
+#include <boost/thread/recursive_mutex.hpp>
 
 namespace RBX {
-class DataModel;
 class Script;
 } // namespace RBX
 
@@ -71,14 +71,14 @@ protected:
 	virtual void VTable0x0c(const RBX::Instance* source, RBX::PropertyChanged event) throw();
 
 private:
-	boost::shared_ptr<RBX::DataModel> m_unk0x128;  // 0x128
-	undefined4 m_unk0x130;                         // 0x130
-	boost::shared_ptr<RBX::Script> m_unk0x134;     // 0x134
-	boost::shared_ptr<RBX::RunService> m_unk0x13c; // 0x13c
-	bool m_unk0x144;                               // 0x144
-	bool m_unk0x145;                               // 0x145
-	bool m_unk0x146;                               // 0x146
-	CFont m_unk0x148;                              // 0x148
+	boost::shared_ptr<boost::recursive_mutex> m_unk0x128; // 0x128
+	undefined4 m_unk0x130;                                // 0x130
+	boost::shared_ptr<RBX::Script> m_unk0x134;            // 0x134
+	boost::shared_ptr<RBX::RunService> m_unk0x13c;        // 0x13c
+	bool m_unk0x144;                                      // 0x144
+	bool m_unk0x145;                                      // 0x145
+	bool m_unk0x146;                                      // 0x146
+	CFont m_unk0x148;                                     // 0x148
 };
 
 DECOMP_SIZE_ASSERT(CScriptEditor, 0x150)

@@ -102,8 +102,23 @@ public:
 	GuiRoot* getGuiRoot() const { return guiRoot.get(); }
 	GuiRoot* getGuiHooks() const;
 	void clearContents();
-	boost::shared_ptr<boost::recursive_mutex> getMutex() const;
-	static boost::shared_ptr<boost::recursive_mutex> getMutex(Instance*);
+	// FUNCTION: ROBLOX 0x00468c90
+	boost::shared_ptr<boost::recursive_mutex> getMutex() const { return mutex; }
+
+	// FUNCTION: ROBLOX 0x00468cd0
+	static boost::shared_ptr<boost::recursive_mutex> getMutex(Instance* instance)
+	{
+		if (!instance) {
+			return boost::shared_ptr<boost::recursive_mutex>();
+		}
+
+		DataModel* dataModel = dynamic_cast<DataModel*>(instance->getRootAncestor());
+		if (!dataModel) {
+			return boost::shared_ptr<boost::recursive_mutex>();
+		}
+
+		return dataModel->getMutex();
+	}
 
 	virtual void setDirty(bool dirty) { this->dirty = dirty; }
 	virtual bool isDirty() const { return dirty; }
