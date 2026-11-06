@@ -141,6 +141,8 @@ public:
 	virtual BOOL OnInitDialog(); // vtable+0x150
 
 protected:
+	virtual BOOL IsExternalDispatchSafe() { return TRUE; } // vtable+0x174
+
 	void OnBeforeNavigate2(
 		LPDISPATCH pDisp,
 		VARIANT* url,
