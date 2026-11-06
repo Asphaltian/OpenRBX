@@ -144,6 +144,13 @@ void XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDes
 	SetValue(buffer);
 }
 
+// FUNCTION: ROBLOX 0x0043c0f0
+template <>
+void XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>::VTable0xe8(const std::string& value)
+{
+	SetValue(value.c_str());
+}
+
 // FUNCTION: ROBLOX 0x0043c240
 template <>
 int XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>::VTable0xe4()
@@ -174,6 +181,13 @@ void CPropertyGridItemBrickColor::SetValue(CString strValue)
 void CPropertyGridItemBrickColor::OnInplaceButtonDown(CXTPPropertyGridInplaceButton* pButton)
 {
 	STUB(0x43c7f0);
+}
+
+// FUNCTION: ROBLOX 0x0043c990
+template <>
+std::string XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>::VTable0xe4()
+{
+	return (LPCTSTR) GetValue();
 }
 
 // STUB: ROBLOX 0x0043df20
@@ -247,6 +261,16 @@ void XItem<T, Base, Descriptor>::FUN_00443670(const T& value)
 	}
 }
 
+// FUNCTION: ROBLOX 0x004401e0
+template <>
+void XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>::VTable0xf0(
+	RBX::Instance* instance, const std::string& value
+)
+{
+	RBX::DataModel::Lock lock(m_unk0x14->m_unk0x194);
+	m_unk0x124->setStringValue(instance, value);
+}
+
 // FUNCTION: ROBLOX 0x00440a70
 template <>
 void XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>::VTable0xf0(
@@ -311,3 +335,4 @@ template class XItem<
 	CPropertyGridItemBrickColor,
 	RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor> >;
 template class XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>;
+template class XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>;

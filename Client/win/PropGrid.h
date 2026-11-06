@@ -176,6 +176,10 @@ protected:
 // ??0?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@QAE@ABVEnumPropertyDescriptor@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x004412e0
 // ?VTable0xf0@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXPAVInstance@RBX@@ABM@Z
+// TEMPLATE: ROBLOX 0x00440060
+// ??0?$XItem@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VCXTPPropertyGridItem@@VPropertyDescriptor@Reflection@RBX@@@@QAE@ABVPropertyDescriptor@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x00440120
+// ?VTable0xec@?$XItem@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VCXTPPropertyGridItem@@VPropertyDescriptor@Reflection@RBX@@@@UAE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z
 // TEMPLATE: ROBLOX 0x00440550
 // ??0?$XItem@VVector3@G3D@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x00440610
@@ -200,12 +204,24 @@ protected:
 // ?OnValueChanged@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // TEMPLATE: ROBLOX 0x00444760
 // ?OnValueChanged@?$XItem@VBrickColor@RBX@@VCPropertyGridItemBrickColor@@V?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@2@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// TEMPLATE: ROBLOX 0x004447e0
+// ?OnValueChanged@?$XItem@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VCXTPPropertyGridItem@@VPropertyDescriptor@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // TEMPLATE: ROBLOX 0x00444880
 // ?OnValueChanged@?$XItem@VVector3@G3D@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // TEMPLATE: ROBLOX 0x004449d0
 // ?OnValueChanged@?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // clang-format on
 
+template <>
+std::string XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>::VTable0xe4();
+template <>
+void XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>::VTable0xe8(
+	const std::string& value
+);
+template <>
+void XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>::VTable0xf0(
+	RBX::Instance* instance, const std::string& value
+);
 template <>
 int XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>::VTable0xe4();
 template <>
