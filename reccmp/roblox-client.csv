@@ -3758,3 +3758,9 @@ address,type,symbol,name,module,size
 009587f4,global,??_B?3??resize@?$Array@VLevel@Material@RenderNew@RBX@@@G3D@@QAEXH_N@Z@53,,,
 005362c0,library,??1?$Array@VLevel@Material@RenderNew@RBX@@@G3D@@QAE@XZ,,,
 00536500,library,?append@?$Array@VLevel@Material@RenderNew@RBX@@@G3D@@QAEXABVLevel@Material@RenderNew@RBX@@@Z,,,
+0051a650,library,??$?0V?$bind_t@XV?$mf1@XVPartChunk@ViewNew@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVPartChunk@ViewNew@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$slot@V?$function@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@ZV?$allocator@X@std@@@boost@@@boost@@QAE@ABV?$bind_t@XV?$mf1@XVPartChunk@ViewNew@RBX@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVPartChunk@ViewNew@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z,,,
+0051a6f0,library,??$?0V?$bind_t@XV?$mf1@XVPartChunk@ViewNew@RBX@@PBVPropertyDescriptor@Reflection@3@@_mfi@boost@@V?$list2@V?$value@PAVPartChunk@ViewNew@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@?$slot@V?$function@$$A6AXPBVPropertyDescriptor@Reflection@RBX@@@ZV?$allocator@X@std@@@boost@@@boost@@QAE@ABV?$bind_t@XV?$mf1@XVPartChunk@ViewNew@RBX@@PBVPropertyDescriptor@Reflection@3@@_mfi@boost@@V?$list2@V?$value@PAVPartChunk@ViewNew@RBX@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@1@@Z,,,
+00515010,synthetic,??_9PartChunk@ViewNew@RBX@@$BDA@AE,,,
+00515e40,function,,,,462
+005160f0,function,,,,462
+00515300,function,,,,852

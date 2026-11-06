@@ -126,6 +126,12 @@ void Part::onEvent(const PartInstance* source, CanAggregateChanged event)
 	view->sceneManager->setSleeping(this, event.canClump);
 }
 
+// FUNCTION: ROBLOX 0x00515700
+PartChunk::~PartChunk()
+{
+}
+
+// FUNCTION: ROBLOX 0x00515860
 void PartChunk::onAncestorChanged(boost::shared_ptr<Instance> ancestor)
 {
 	Workspace* workspace = Workspace::findWorkspace(partInstance.get());
@@ -157,11 +163,6 @@ void Texture::onTextureAncestorChanged(boost::shared_ptr<Instance> ancestor)
 		(workspace != (parent = texture->getParent()) && (parent == NULL || !parent->isDescendentOf(workspace)))) {
 		view->sceneManager->removeModel(this);
 	}
-}
-
-// FUNCTION: ROBLOX 0x00515700
-PartChunk::~PartChunk()
-{
 }
 
 // FUNCTION: ROBLOX 0x00515a80
@@ -251,7 +252,7 @@ void Decal::onDecalPropertyChanged(const Reflection::PropertyDescriptor* descrip
 	}
 }
 
-// STUB: ROBLOX 0x00515e40
+// FUNCTION: ROBLOX 0x00515e40
 G3D::ReferenceCountedPointer<RenderNew::Material> Decal::getMaterial()
 {
 	try {
@@ -304,7 +305,7 @@ Texture::~Texture()
 {
 }
 
-// STUB: ROBLOX 0x005160f0
+// FUNCTION: ROBLOX 0x005160f0
 G3D::ReferenceCountedPointer<RenderNew::Material> Texture::getMaterial()
 {
 	try {
@@ -330,6 +331,7 @@ G3D::ReferenceCountedPointer<RenderNew::Material> Texture::getMaterial()
 	return material;
 }
 
+// FUNCTION: ROBLOX 0x005166f0
 void PartChunk::onChildRemoved(boost::shared_ptr<Instance> child)
 {
 	if (child.get() == specialShape) {
