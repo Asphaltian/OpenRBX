@@ -321,6 +321,86 @@ void XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescripto
 	m_unk0x124->setEnumValue(instance, value);
 }
 
+// FUNCTION: ROBLOX 0x00441940
+XBoolItem::XBoolItem(const RBX::Reflection::TypedPropertyDescriptor<bool>& descriptor, CPropGrid* grid)
+	: XItem<bool, CXTPPropertyGridItemBool, RBX::Reflection::TypedPropertyDescriptor<bool> >(descriptor, grid)
+{
+	SetCheckBoxStyle();
+}
+
+// STUB: ROBLOX 0x004419c0
+BOOL XBoolItem::OnDrawItemValue(CDC& dc, CRect rcValue)
+{
+	STUB(0x4419c0);
+	return FALSE;
+}
+
+// FUNCTION: ROBLOX 0x00441b10
+XBrickColorItem::XBrickColorItem(
+	const RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>& descriptor, CPropGrid* grid
+)
+	: XItem<RBX::BrickColor, CPropertyGridItemBrickColor, RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor> >(
+		  descriptor, grid
+	  )
+{
+}
+
+// STUB: ROBLOX 0x00441b50
+BOOL XBrickColorItem::OnDrawItemValue(CDC& dc, CRect rcValue)
+{
+	STUB(0x441b50);
+	return FALSE;
+}
+
+// FUNCTION: ROBLOX 0x00442100
+RefItem::RefItem(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid)
+	: XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>(descriptor, grid),
+	  m_unk0x128(&descriptor)
+{
+	SetReadOnly(TRUE);
+}
+
+// STUB: ROBLOX 0x00442180
+void RefItem::VTable0x00(
+	const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& instances
+)
+{
+	STUB(0x442180);
+}
+
+// FUNCTION: ROBLOX 0x00442430
+ScriptItem::ScriptItem(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid)
+	: XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>(descriptor, grid)
+{
+	SetFlags(GetFlags() | xtpGridItemHasExpandButton);
+	SetFlags(GetFlags() & ~xtpGridItemHasEdit);
+	CXTPPropertyGridItem::SetValue("(Script)");
+}
+
+// FUNCTION: ROBLOX 0x004424e0
+void RefItem::OnValueChanged(CString strValue)
+{
+}
+
+// FUNCTION: ROBLOX 0x004424e0 FOLDED
+void ScriptItem::OnValueChanged(CString strValue)
+{
+}
+
+// STUB: ROBLOX 0x004424f0
+void ScriptItem::VTable0x00(
+	const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& instances
+)
+{
+	STUB(0x4424f0);
+}
+
+// STUB: ROBLOX 0x00442620
+void ScriptItem::OnInplaceButtonDown(CXTPPropertyGridInplaceButton* pButton)
+{
+	STUB(0x442620);
+}
+
 // STUB: ROBLOX 0x00442800
 EnumItem::EnumItem(const RBX::Reflection::EnumPropertyDescriptor& descriptor, CPropGrid* grid)
 	: XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>(descriptor, grid)

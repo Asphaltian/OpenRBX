@@ -243,6 +243,67 @@ void XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescripto
 	RBX::Instance* instance, const int& value
 );
 
+// SIZE 0x13c
+class XBoolItem : public XItem<bool, CXTPPropertyGridItemBool, RBX::Reflection::TypedPropertyDescriptor<bool> >
+{
+public:
+	XBoolItem(const RBX::Reflection::TypedPropertyDescriptor<bool>& descriptor, CPropGrid* grid);
+
+	virtual BOOL OnDrawItemValue(CDC& dc, CRect rcValue);
+};
+
+DECOMP_SIZE_ASSERT(XBoolItem, 0x13c)
+
+// SIZE 0x134
+class XBrickColorItem : public XItem<
+							RBX::BrickColor,
+							CPropertyGridItemBrickColor,
+							RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor> >
+{
+public:
+	XBrickColorItem(const RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor>& descriptor, CPropGrid* grid);
+
+	virtual BOOL OnDrawItemValue(CDC& dc, CRect rcValue);
+};
+
+DECOMP_SIZE_ASSERT(XBrickColorItem, 0x134)
+
+// SIZE 0x12c
+class RefItem : public XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>
+{
+public:
+	RefItem(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid);
+
+	virtual void OnValueChanged(CString strValue);
+	virtual void VTable0x00(
+		const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >&
+			instances
+	);
+
+private:
+	const RBX::Reflection::PropertyDescriptor* m_unk0x128; // 0x128
+};
+
+DECOMP_SIZE_ASSERT(RefItem, 0x12c)
+
+// SIZE 0x128
+class ScriptItem : public XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>
+{
+public:
+	ScriptItem(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid);
+
+	virtual void OnValueChanged(CString strValue);
+	virtual void VTable0x00(
+		const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >&
+			instances
+	);
+
+protected:
+	virtual void OnInplaceButtonDown(CXTPPropertyGridInplaceButton* pButton);
+};
+
+DECOMP_SIZE_ASSERT(ScriptItem, 0x128)
+
 // SIZE 0x130
 class EnumItem : public XItem<int, CXTPPropertyGridItemEnum, RBX::Reflection::EnumPropertyDescriptor>
 {
