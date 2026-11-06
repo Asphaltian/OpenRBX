@@ -1176,6 +1176,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00578fa0
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,boost::shared_ptr<RBX::Instance> __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x1004c680
+	// TEMPLATE: ROBLOX 0x00579000
 	// RBX::Reflection::BoundFuncDesc<RBX::Instance,void __cdecl(void),0>::BoundFuncDesc<RBX::Instance,void __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x1004c6f0
 	// TEMPLATE: ROBLOX 0x00579070
@@ -1256,7 +1257,6 @@ public:
 	// TEMPLATE: ROBLOX 0x0062cc10
 	// RBX::Reflection::BoundFuncDesc<RBX::Rocket,void __cdecl(void),0>::execute
 	// TEMPLATE: WEBSERVICE 0x100edbf0
-	// STUB: ROBLOX 0x00579000
 	// RBX::Reflection::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>::BoundFuncDesc<RBX::BodyPosition,G3D::Vector3 __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100edc60
 	// TEMPLATE: ROBLOX 0x0062cce0
