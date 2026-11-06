@@ -52,7 +52,7 @@ public:
 
 	const std::string& toString() const { return id; }
 
-	bool isNull() const { return id.empty(); }
+	bool isNull() const { return id.size() == 0; }
 
 	// FUNCTION: WEBSERVICE 0x1004f150
 	// FUNCTION: ROBLOX 0x0057d350

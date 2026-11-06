@@ -1,9 +1,14 @@
 #include "ScriptDoc.h"
 
 #include "script/Script.h"
+#include "util/ContentProvider.h"
 #include "util/Events.h"
 #include "v8datamodel/DataModel.h"
 #include "v8tree/Service.h"
+
+#include <boost/iostreams/copy.hpp>
+#include <memory>
+#include <sstream>
 
 IMPLEMENT_DYNCREATE(CScriptDoc, CNullDoc)
 IMPLEMENT_DYNCREATE(CScriptEditor, Scintilla::CScintillaView)
@@ -36,10 +41,45 @@ CScriptEditor::CScriptEditor() : m_unk0x130(NULL), m_unk0x144(false), m_unk0x145
 {
 }
 
-// STUB: ROBLOX 0x004696d0
+// FUNCTION: ROBLOX 0x004696d0
 void CScriptEditor::FUN_004696d0()
 {
-	STUB(0x4696d0);
+	if (m_hWnd) {
+		m_unk0x144 = true;
+
+		if (m_unk0x134) {
+			try {
+				boost::recursive_mutex::scoped_lock lock(*m_unk0x128);
+				m_unk0x146 = m_unk0x134->getScriptId().isNull();
+
+				if (m_unk0x146) {
+					GetCtrl().SetText(m_unk0x134->getEmbeddedCode().c_str());
+				}
+				else {
+					std::auto_ptr<std::istream> stream(
+						RBX::ContentProvider::singleton().getContent(m_unk0x134->getScriptId())
+					);
+					std::ostringstream text;
+					boost::iostreams::copy(*stream, text, 0x1000);
+					GetCtrl().SetText(text.str().c_str());
+				}
+
+				GetCtrl().SetReadOnly(m_unk0x145 || !m_unk0x146);
+			}
+			catch (std::exception& e) {
+				CString message;
+				message.Format("An error occurred while getting the script\n\n%s", e.what());
+				GetCtrl().SetText(message);
+				GetCtrl().SetReadOnly(FALSE);
+			}
+		}
+		else {
+			GetCtrl().SetText("");
+		}
+
+		GetCtrl().SetSavePoint();
+		m_unk0x144 = false;
+	}
 }
 
 // FUNCTION: ROBLOX 0x00469a70
@@ -53,7 +93,7 @@ void CScriptEditor::VTable0x0c(const RBX::Instance* source, RBX::PropertyChanged
 	}
 }
 
-// STUB: ROBLOX 0x00469aa0
+// FUNCTION: ROBLOX 0x00469aa0
 void CScriptEditor::VTable0x08(const RBX::Instance* source, RBX::PropertyChanged event)
 {
 	if (&event.getDescriptor() == &RBX::Script::prop_EmbeddedSourceCode) {
