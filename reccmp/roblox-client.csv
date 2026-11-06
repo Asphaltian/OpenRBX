@@ -5540,3 +5540,4 @@ address,type,symbol,name,module,size
 0040ba50,library,?Release@?$CComObject@VCBrowserViewExternal@@@ATL@@W3AGKXZ,,,
 0040bac0,library,?Release@?$CComContainedObject@VCBrowserViewExternal@@@ATL@@W7AGKXZ,,,
 0040bad0,library,?AddRef@?$CComContainedObject@VCBrowserViewExternal@@@ATL@@W7AGKXZ,,,
+0080bc40,global,?classCRobloxReportView@CRobloxReportView@@2UCRuntimeClass@@B,,,

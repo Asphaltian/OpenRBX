@@ -278,6 +278,14 @@ protected:
 	// RBX::FilteredSelection<RBX::PVInstance>::FilteredSelection<RBX::PVInstance>
 	// STUB: ROBLOX 0x00597b20
 	// RBX::FilteredSelection<RBX::ModelInstance>::FilteredSelection<RBX::ModelInstance>
+	// TEMPLATE: ROBLOX 0x00599080
+	// RBX::FilteredSelection<RBX::PVInstance>::onSelectionChanged
+	// TEMPLATE: ROBLOX 0x00599140
+	// RBX::FilteredSelection<RBX::ModelInstance>::onSelectionChanged
+	// STUB: ROBLOX 0x0059a6c0
+	// RBX::FilteredSelection<RBX::PVInstance>::onAncestorChanged
+	// STUB: ROBLOX 0x0059a830
+	// RBX::FilteredSelection<RBX::ModelInstance>::onAncestorChanged
 	// TEMPLATE: WEBSERVICE 0x100a1bd0
 	// TEMPLATE: ROBLOX 0x005ea1a0
 	// RBX::FilteredSelection<RBX::PartInstance>::~FilteredSelection<RBX::PartInstance>

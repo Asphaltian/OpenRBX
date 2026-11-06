@@ -19,6 +19,8 @@ class CRenderSettings;
 // RBX::Creatable<RBX::Instance>::create<CRenderSettings>
 // TEMPLATE: ROBLOX 0x0040fce0
 // RBX::GlobalSettingsItem<CRenderSettings,&sRenderSettings>::singleton
+// TEMPLATE: ROBLOX 0x0040fed0
+// ?create@Creator@?$FactoryProduct@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@UBE?AV?$shared_ptr@VObject@RBX@@@boost@@XZ
 // TEMPLATE: ROBLOX 0x004485d0
 // ?getValue@?$GetSetImpl@P8CRenderSettings@@BEHXZP81@AEXH@Z@?$PropDescriptor@VCRenderSettings@@M@Reflection@RBX@@UBEMPBVDescribedBase@34@@Z
 // TEMPLATE: ROBLOX 0x00448610
