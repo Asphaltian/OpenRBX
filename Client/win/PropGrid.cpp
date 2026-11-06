@@ -79,6 +79,28 @@ void XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropert
 	SetColor(RGB(value.r * 255.0, value.g * 255.0, value.b * 255.0));
 }
 
+// FUNCTION: ROBLOX 0x0043bfd0
+template <>
+RBX::BrickColor XItem<
+	RBX::BrickColor,
+	CPropertyGridItemBrickColor,
+	RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor> >::VTable0xe4()
+{
+	COLORREF color = GetColor();
+	return RBX::BrickColor::closest(
+		G3D::Color3(GetRValue(color) / 255.0, GetGValue(color) / 255.0, GetBValue(color) / 255.0)
+	);
+}
+
+// FUNCTION: ROBLOX 0x0043c030
+template <>
+void XItem<RBX::BrickColor, CPropertyGridItemBrickColor, RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor> >::
+	VTable0xe8(const RBX::BrickColor& value)
+{
+	G3D::Color4uint8 color = value.color4uint8();
+	SetColor(RGB(color.r, color.g, color.b));
+}
+
 // STUB: ROBLOX 0x0043bdc0
 static CString FUN_0043bdc0(COLORREF color)
 {
@@ -247,3 +269,7 @@ template class XItem<int, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDe
 template class XItem<bool, CXTPPropertyGridItemBool, RBX::Reflection::TypedPropertyDescriptor<bool> >;
 template class XItem<G3D::Color3, CXTPPropertyGridItemColor, RBX::Reflection::TypedPropertyDescriptor<G3D::Color3> >;
 template class XItem<G3D::Vector3, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<G3D::Vector3> >;
+template class XItem<
+	RBX::BrickColor,
+	CPropertyGridItemBrickColor,
+	RBX::Reflection::TypedPropertyDescriptor<RBX::BrickColor> >;

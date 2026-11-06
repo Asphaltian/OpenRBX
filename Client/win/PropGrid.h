@@ -74,7 +74,7 @@ DECOMP_SIZE_ASSERT(CPropGrid, 0x1dc)
 class CPropertyGridItemBrickColor : public CXTPPropertyGridItemColor
 {
 public:
-	CPropertyGridItemBrickColor(CString strCaption, COLORREF clr);
+	CPropertyGridItemBrickColor(CString strCaption, COLORREF clr = 0);
 
 	virtual void SetValue(CString strValue);
 	virtual void SetColor(COLORREF clr);
@@ -168,6 +168,8 @@ protected:
 // ?VTable0xf0@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAEXPAVInstance@RBX@@ABVColor3@G3D@@@Z
 // SYNTHETIC: ROBLOX 0x0043fc60
 // ??_E?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAEPAXI@Z
+// TEMPLATE: ROBLOX 0x0043fcc0
+// ??0?$XItem@VBrickColor@RBX@@VCPropertyGridItemBrickColor@@V?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@2@@@QAE@ABV?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x0043fd80
 // ?VTable0xec@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAE_NABH0@Z
 // TEMPLATE: ROBLOX 0x004412e0
@@ -190,6 +192,8 @@ protected:
 // ?OnValueChanged@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // TEMPLATE: ROBLOX 0x004446e0
 // ?OnValueChanged@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
+// TEMPLATE: ROBLOX 0x00444760
+// ?OnValueChanged@?$XItem@VBrickColor@RBX@@VCPropertyGridItemBrickColor@@V?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@2@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // TEMPLATE: ROBLOX 0x00444880
 // ?OnValueChanged@?$XItem@VVector3@G3D@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 // clang-format on
