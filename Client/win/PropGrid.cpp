@@ -1,12 +1,15 @@
 #include "PropGrid.h"
 
+#include "util/ContentProvider.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/DataModel.h"
 
+#include <G3D/GImage.h>
 #include <algorithm>
 #include <boost/bind.hpp>
 #include <cstdio>
+#include <fstream>
 #include <string>
 
 inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Reflection::ClassDescriptor::
@@ -169,6 +172,23 @@ void XItem<RBX::TextureId, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyD
 )
 {
 	SetValue(value.c_str());
+}
+
+// FUNCTION: ROBLOX 0x0043c120
+static const RBX::Name& FUN_0043c120(const char* path)
+{
+	switch (G3D::GImage::resolveFormat(path)) {
+	case G3D::GImage::JPEG:
+		return RBX::Name::declare("image/jpeg", -1);
+	case G3D::GImage::BMP:
+		return RBX::Name::declare("image/bmp", -1);
+	case G3D::GImage::ICO:
+		return RBX::Name::declare("image/vnd.microsoft.icon", -1);
+	case G3D::GImage::PNG:
+		return RBX::Name::declare("image/png", -1);
+	default:
+		return RBX::Name::getNullName();
+	}
 }
 
 // FUNCTION: ROBLOX 0x0043c240
@@ -545,16 +565,33 @@ void CDataModelPropGrid::VTable0x00(
 	STUB(0x445830);
 }
 
-// STUB: ROBLOX 0x00444c80
+// FUNCTION: ROBLOX 0x00444c80
 void SoundItem::VTable0xf8()
 {
-	STUB(0x444c80);
+	CString filter;
+	filter.LoadString(134);
+	CFileDialog dialog(TRUE, NULL, NULL, 0, filter, NULL, 0);
+	if (dialog.DoModal() == IDOK) {
+		RBX::Soundscape::SoundId id = RBX::ContentProvider::singleton().registerContent(
+			std::ifstream((LPCTSTR) dialog.GetPathName(), std::ios::in | std::ios::binary),
+			RBX::Name::declare("audio/x-wav", -1)
+		);
+		FUN_00443670(id);
+	}
 }
 
-// STUB: ROBLOX 0x00444e40
+// FUNCTION: ROBLOX 0x00444e40
 void TextureItem::VTable0xf8()
 {
-	STUB(0x444e40);
+	CString filter;
+	filter.LoadString(132);
+	CFileDialog dialog(TRUE, NULL, NULL, 0, filter, NULL, 0);
+	if (dialog.DoModal() == IDOK) {
+		std::ifstream stream((LPCTSTR) dialog.GetPathName(), std::ios::in | std::ios::binary);
+		RBX::TextureId id =
+			RBX::ContentProvider::singleton().registerContent(stream, FUN_0043c120(dialog.GetPathName()));
+		FUN_00443670(id);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00445960
