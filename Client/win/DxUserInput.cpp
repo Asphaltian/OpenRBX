@@ -1,13 +1,17 @@
 #include "DxUserInput.h"
 
+#include "MainFrm.h"
 #include "rbxgraphics/TextureProxyBase.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
 
 #include <windowsx.h>
 
+static SDLKey FUN_0046d6f0(DWORD scanCode);
 static int FUN_0046db70(SDLKey key);
+static int FUN_0046dff0(SDLKey key);
 static RBX::UIEvent::EventType FUN_0046e290(UINT message);
+static SDLMod FUN_0046e2e0(const BYTE* keys);
 
 // FUNCTION: ROBLOX 0x0046b7f0
 bool DxUserInput::FUN_0046b7f0()
@@ -195,7 +199,57 @@ bool DxUserInput::FUN_0046bed0(DIDEVICEOBJECTDATA* data, DWORD* count, IDirectIn
 // STUB: ROBLOX 0x0046c090
 void DxUserInput::FUN_0046c090()
 {
-	STUB(0x46c090);
+	DIDEVICEOBJECTDATA data[0x800];
+	DWORD count = 0x800;
+	{
+		ATL::CCritSecLock lock(m_unk0x34);
+		if (!FUN_0046bed0(data, &count, m_unk0x190)) {
+			m_unk0x79 = false;
+			return;
+		}
+	}
+
+	RBX::DataModel::Lock dataModelLock(m_unk0x194);
+	for (DWORD i = 0; i < count; i++) {
+		bool down = (data[i].dwData & 0x80) != 0;
+		DWORD scanCode = data[i].dwOfs;
+		SDLMod mod = FUN_0046e2e0(m_unk0x7b);
+		SDLKey key = FUN_0046d6f0(scanCode);
+		bool handled = false;
+		if (m_unk0x7a && down && m_unk0x4c) {
+			static HKL layout = GetKeyboardLayout(0);
+			UINT virtualKey = MapVirtualKeyEx(scanCode, 1, layout);
+			if (virtualKey == 0) {
+				virtualKey = FUN_0046dff0(key);
+			}
+
+			if (virtualKey == VK_SNAPSHOT) {
+				::SendMessage(m_unk0x4c->m_hWnd, WM_COMMAND, MAKEWPARAM(0x80fc, 1), 0);
+			}
+			else if (
+				virtualKey == VK_F1 || virtualKey == VK_F4 ||
+				!static_cast<CMainFrame*>(AfxGetApp()->m_pMainWnd)->m_unk0xec
+			) {
+				UINT character = MapVirtualKeyEx(virtualKey, 2, layout);
+				BYTE flags =
+					(mod & KMOD_ALT ? FALT : 0) | (mod & KMOD_CTRL ? FCONTROL : 0) | (mod & KMOD_SHIFT ? FSHIFT : 0);
+				for (int j = 0; j < m_unk0x54; j++) {
+					const ACCEL& accel = m_unk0x50[j];
+					bool matches =
+						accel.fVirt & FVIRTKEY ? accel.key == virtualKey : accel.key == static_cast<char>(character);
+					if (matches && (accel.fVirt & (FSHIFT | FCONTROL | FALT)) == flags) {
+						::SendMessage(m_unk0x4c->m_hWnd, WM_COMMAND, MAKEWPARAM(m_unk0x50[j].cmd, 1), 0);
+						handled = true;
+						break;
+					}
+				}
+			}
+		}
+
+		if (!handled) {
+			m_unk0x194->processGui(RBX::UIEvent(this, down ? RBX::UIEvent::KEY_DOWN : RBX::UIEvent::KEY_UP, key, mod));
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x0046c3c0
@@ -454,6 +508,132 @@ DxUserInput::DxUserInput(CWnd* wnd, RBX::DataModel* dataModel)
 	FUN_0046bd60();
 }
 
+static SDLKey g_unk0x009544f0[0x100];
+static bool g_unk0x009548f0;
+
+// STUB: ROBLOX 0x0046d6f0
+static SDLKey FUN_0046d6f0(DWORD scanCode)
+{
+	if (!g_unk0x009548f0) {
+		for (int i = 0; i < 0x100; i++) {
+			g_unk0x009544f0[i] = SDLK_UNKNOWN;
+		}
+
+		g_unk0x009544f0[DIK_ESCAPE] = SDLK_ESCAPE;
+		g_unk0x009544f0[DIK_1] = SDLK_1;
+		g_unk0x009544f0[DIK_2] = SDLK_2;
+		g_unk0x009544f0[DIK_3] = SDLK_3;
+		g_unk0x009544f0[DIK_4] = SDLK_4;
+		g_unk0x009544f0[DIK_5] = SDLK_5;
+		g_unk0x009544f0[DIK_6] = SDLK_6;
+		g_unk0x009544f0[DIK_7] = SDLK_7;
+		g_unk0x009544f0[DIK_8] = SDLK_8;
+		g_unk0x009544f0[DIK_9] = SDLK_9;
+		g_unk0x009544f0[DIK_0] = SDLK_0;
+		g_unk0x009544f0[DIK_MINUS] = SDLK_MINUS;
+		g_unk0x009544f0[DIK_EQUALS] = SDLK_EQUALS;
+		g_unk0x009544f0[DIK_BACK] = SDLK_BACKSPACE;
+		g_unk0x009544f0[DIK_TAB] = SDLK_TAB;
+		g_unk0x009544f0[DIK_Q] = SDLK_q;
+		g_unk0x009544f0[DIK_W] = SDLK_w;
+		g_unk0x009544f0[DIK_E] = SDLK_e;
+		g_unk0x009544f0[DIK_R] = SDLK_r;
+		g_unk0x009544f0[DIK_T] = SDLK_t;
+		g_unk0x009544f0[DIK_Y] = SDLK_y;
+		g_unk0x009544f0[DIK_U] = SDLK_u;
+		g_unk0x009544f0[DIK_I] = SDLK_i;
+		g_unk0x009544f0[DIK_O] = SDLK_o;
+		g_unk0x009544f0[DIK_P] = SDLK_p;
+		g_unk0x009544f0[DIK_LBRACKET] = SDLK_LEFTBRACKET;
+		g_unk0x009544f0[DIK_RBRACKET] = SDLK_RIGHTBRACKET;
+		g_unk0x009544f0[DIK_RETURN] = SDLK_RETURN;
+		g_unk0x009544f0[DIK_LCONTROL] = SDLK_LCTRL;
+		g_unk0x009544f0[DIK_A] = SDLK_a;
+		g_unk0x009544f0[DIK_S] = SDLK_s;
+		g_unk0x009544f0[DIK_D] = SDLK_d;
+		g_unk0x009544f0[DIK_F] = SDLK_f;
+		g_unk0x009544f0[DIK_G] = SDLK_g;
+		g_unk0x009544f0[DIK_H] = SDLK_h;
+		g_unk0x009544f0[DIK_J] = SDLK_j;
+		g_unk0x009544f0[DIK_K] = SDLK_k;
+		g_unk0x009544f0[DIK_L] = SDLK_l;
+		g_unk0x009544f0[DIK_SEMICOLON] = SDLK_SEMICOLON;
+		g_unk0x009544f0[DIK_APOSTROPHE] = SDLK_QUOTE;
+		g_unk0x009544f0[DIK_GRAVE] = SDLK_BACKQUOTE;
+		g_unk0x009544f0[DIK_LSHIFT] = SDLK_LSHIFT;
+		g_unk0x009544f0[DIK_BACKSLASH] = SDLK_BACKSLASH;
+		g_unk0x009544f0[DIK_OEM_102] = SDLK_BACKSLASH;
+		g_unk0x009544f0[DIK_Z] = SDLK_z;
+		g_unk0x009544f0[DIK_X] = SDLK_x;
+		g_unk0x009544f0[DIK_C] = SDLK_c;
+		g_unk0x009544f0[DIK_V] = SDLK_v;
+		g_unk0x009544f0[DIK_B] = SDLK_b;
+		g_unk0x009544f0[DIK_N] = SDLK_n;
+		g_unk0x009544f0[DIK_M] = SDLK_m;
+		g_unk0x009544f0[DIK_COMMA] = SDLK_COMMA;
+		g_unk0x009544f0[DIK_PERIOD] = SDLK_PERIOD;
+		g_unk0x009544f0[DIK_SLASH] = SDLK_SLASH;
+		g_unk0x009544f0[DIK_RSHIFT] = SDLK_RSHIFT;
+		g_unk0x009544f0[DIK_MULTIPLY] = SDLK_KP_MULTIPLY;
+		g_unk0x009544f0[DIK_LMENU] = SDLK_LALT;
+		g_unk0x009544f0[DIK_SPACE] = SDLK_SPACE;
+		g_unk0x009544f0[DIK_CAPITAL] = SDLK_CAPSLOCK;
+		g_unk0x009544f0[DIK_F1] = SDLK_F1;
+		g_unk0x009544f0[DIK_F2] = SDLK_F2;
+		g_unk0x009544f0[DIK_F3] = SDLK_F3;
+		g_unk0x009544f0[DIK_F4] = SDLK_F4;
+		g_unk0x009544f0[DIK_F5] = SDLK_F5;
+		g_unk0x009544f0[DIK_F6] = SDLK_F6;
+		g_unk0x009544f0[DIK_F7] = SDLK_F7;
+		g_unk0x009544f0[DIK_F8] = SDLK_F8;
+		g_unk0x009544f0[DIK_F9] = SDLK_F9;
+		g_unk0x009544f0[DIK_F10] = SDLK_F10;
+		g_unk0x009544f0[DIK_NUMLOCK] = SDLK_NUMLOCK;
+		g_unk0x009544f0[DIK_SCROLL] = SDLK_SCROLLOCK;
+		g_unk0x009544f0[DIK_NUMPAD7] = SDLK_KP7;
+		g_unk0x009544f0[DIK_NUMPAD8] = SDLK_KP8;
+		g_unk0x009544f0[DIK_NUMPAD9] = SDLK_KP9;
+		g_unk0x009544f0[DIK_SUBTRACT] = SDLK_KP_MINUS;
+		g_unk0x009544f0[DIK_NUMPAD4] = SDLK_KP4;
+		g_unk0x009544f0[DIK_NUMPAD5] = SDLK_KP5;
+		g_unk0x009544f0[DIK_NUMPAD6] = SDLK_KP6;
+		g_unk0x009544f0[DIK_ADD] = SDLK_KP_PLUS;
+		g_unk0x009544f0[DIK_NUMPAD1] = SDLK_KP1;
+		g_unk0x009544f0[DIK_NUMPAD2] = SDLK_KP2;
+		g_unk0x009544f0[DIK_NUMPAD3] = SDLK_KP3;
+		g_unk0x009544f0[DIK_NUMPAD0] = SDLK_KP0;
+		g_unk0x009544f0[DIK_DECIMAL] = SDLK_KP_PERIOD;
+		g_unk0x009544f0[DIK_F11] = SDLK_F11;
+		g_unk0x009544f0[DIK_F12] = SDLK_F12;
+		g_unk0x009544f0[DIK_F13] = SDLK_F13;
+		g_unk0x009544f0[DIK_F14] = SDLK_F14;
+		g_unk0x009544f0[DIK_F15] = SDLK_F15;
+		g_unk0x009544f0[DIK_NUMPADEQUALS] = SDLK_KP_EQUALS;
+		g_unk0x009544f0[DIK_NUMPADENTER] = SDLK_KP_ENTER;
+		g_unk0x009544f0[DIK_RCONTROL] = SDLK_RCTRL;
+		g_unk0x009544f0[DIK_DIVIDE] = SDLK_KP_DIVIDE;
+		g_unk0x009544f0[DIK_SYSRQ] = SDLK_SYSREQ;
+		g_unk0x009544f0[DIK_RMENU] = SDLK_RALT;
+		g_unk0x009544f0[DIK_PAUSE] = SDLK_PAUSE;
+		g_unk0x009544f0[DIK_HOME] = SDLK_HOME;
+		g_unk0x009544f0[DIK_UP] = SDLK_UP;
+		g_unk0x009544f0[DIK_PRIOR] = SDLK_PAGEUP;
+		g_unk0x009544f0[DIK_LEFT] = SDLK_LEFT;
+		g_unk0x009544f0[DIK_RIGHT] = SDLK_RIGHT;
+		g_unk0x009544f0[DIK_END] = SDLK_END;
+		g_unk0x009544f0[DIK_DOWN] = SDLK_DOWN;
+		g_unk0x009544f0[DIK_NEXT] = SDLK_PAGEDOWN;
+		g_unk0x009544f0[DIK_INSERT] = SDLK_INSERT;
+		g_unk0x009544f0[DIK_DELETE] = SDLK_DELETE;
+		g_unk0x009544f0[DIK_LWIN] = SDLK_LMETA;
+		g_unk0x009544f0[DIK_RWIN] = SDLK_RMETA;
+		g_unk0x009544f0[DIK_APPS] = SDLK_MENU;
+		g_unk0x009548f0 = true;
+	}
+
+	return g_unk0x009544f0[scanCode];
+}
+
 static int g_unk0x009548f8[SDLK_LAST];
 static bool g_unk0x00954e04;
 
@@ -580,6 +760,84 @@ static int FUN_0046db70(SDLKey key)
 	return g_unk0x009548f8[key];
 }
 
+static int g_unk0x00954e08[SDLK_LAST];
+static bool g_unk0x00955314;
+
+// STUB: ROBLOX 0x0046dff0
+static int FUN_0046dff0(SDLKey key)
+{
+	if (!g_unk0x00955314) {
+		for (int i = 0; i < SDLK_LAST; i++) {
+			g_unk0x00954e08[i] = 0;
+		}
+
+		g_unk0x00954e08[SDLK_RETURN] = VK_RETURN;
+		g_unk0x00954e08[SDLK_KP_ENTER] = VK_RETURN;
+		g_unk0x00954e08[SDLK_PRINT] = VK_PRINT;
+		g_unk0x00954e08[SDLK_SYSREQ] = VK_SNAPSHOT;
+		g_unk0x00954e08[SDLK_ESCAPE] = VK_ESCAPE;
+		g_unk0x00954e08[SDLK_BACKSPACE] = VK_BACK;
+		g_unk0x00954e08[SDLK_TAB] = VK_TAB;
+		g_unk0x00954e08[SDLK_LCTRL] = VK_LCONTROL;
+		g_unk0x00954e08[SDLK_LSHIFT] = VK_LSHIFT;
+		g_unk0x00954e08[SDLK_BACKSLASH] = VK_OEM_102;
+		g_unk0x00954e08[SDLK_RSHIFT] = VK_RSHIFT;
+		g_unk0x00954e08[SDLK_KP_MULTIPLY] = VK_MULTIPLY;
+		g_unk0x00954e08[SDLK_LALT] = VK_LMENU;
+		g_unk0x00954e08[SDLK_SPACE] = VK_SPACE;
+		g_unk0x00954e08[SDLK_CAPSLOCK] = VK_CAPITAL;
+		g_unk0x00954e08[SDLK_F1] = VK_F1;
+		g_unk0x00954e08[SDLK_F2] = VK_F2;
+		g_unk0x00954e08[SDLK_F3] = VK_F3;
+		g_unk0x00954e08[SDLK_F4] = VK_F4;
+		g_unk0x00954e08[SDLK_F5] = VK_F5;
+		g_unk0x00954e08[SDLK_F6] = VK_F6;
+		g_unk0x00954e08[SDLK_F7] = VK_F7;
+		g_unk0x00954e08[SDLK_F8] = VK_F8;
+		g_unk0x00954e08[SDLK_F9] = VK_F9;
+		g_unk0x00954e08[SDLK_F10] = VK_F10;
+		g_unk0x00954e08[SDLK_NUMLOCK] = VK_NUMLOCK;
+		g_unk0x00954e08[SDLK_SCROLLOCK] = VK_SCROLL;
+		g_unk0x00954e08[SDLK_KP7] = VK_NUMPAD7;
+		g_unk0x00954e08[SDLK_KP8] = VK_NUMPAD8;
+		g_unk0x00954e08[SDLK_KP9] = VK_NUMPAD9;
+		g_unk0x00954e08[SDLK_KP_MINUS] = VK_SUBTRACT;
+		g_unk0x00954e08[SDLK_KP4] = VK_NUMPAD4;
+		g_unk0x00954e08[SDLK_KP5] = VK_NUMPAD5;
+		g_unk0x00954e08[SDLK_KP6] = VK_NUMPAD6;
+		g_unk0x00954e08[SDLK_KP_PLUS] = VK_ADD;
+		g_unk0x00954e08[SDLK_KP1] = VK_NUMPAD1;
+		g_unk0x00954e08[SDLK_KP2] = VK_NUMPAD2;
+		g_unk0x00954e08[SDLK_KP3] = VK_NUMPAD3;
+		g_unk0x00954e08[SDLK_KP0] = VK_NUMPAD0;
+		g_unk0x00954e08[SDLK_KP_PERIOD] = VK_DECIMAL;
+		g_unk0x00954e08[SDLK_F11] = VK_F11;
+		g_unk0x00954e08[SDLK_F12] = VK_F12;
+		g_unk0x00954e08[SDLK_F13] = VK_F13;
+		g_unk0x00954e08[SDLK_F14] = VK_F14;
+		g_unk0x00954e08[SDLK_F15] = VK_F15;
+		g_unk0x00954e08[SDLK_RCTRL] = VK_RCONTROL;
+		g_unk0x00954e08[SDLK_KP_DIVIDE] = VK_DIVIDE;
+		g_unk0x00954e08[SDLK_RALT] = VK_RMENU;
+		g_unk0x00954e08[SDLK_HOME] = VK_HOME;
+		g_unk0x00954e08[SDLK_UP] = VK_UP;
+		g_unk0x00954e08[SDLK_PAGEUP] = VK_PRIOR;
+		g_unk0x00954e08[SDLK_LEFT] = VK_LEFT;
+		g_unk0x00954e08[SDLK_RIGHT] = VK_RIGHT;
+		g_unk0x00954e08[SDLK_END] = VK_END;
+		g_unk0x00954e08[SDLK_DOWN] = VK_DOWN;
+		g_unk0x00954e08[SDLK_PAGEDOWN] = VK_NEXT;
+		g_unk0x00954e08[SDLK_INSERT] = VK_INSERT;
+		g_unk0x00954e08[SDLK_DELETE] = VK_DELETE;
+		g_unk0x00954e08[SDLK_LMETA] = VK_LWIN;
+		g_unk0x00954e08[SDLK_RMETA] = VK_RWIN;
+		g_unk0x00954e08[SDLK_MENU] = VK_APPS;
+		g_unk0x00955314 = true;
+	}
+
+	return g_unk0x00954e08[key];
+}
+
 // STUB: ROBLOX 0x0046e290
 static RBX::UIEvent::EventType FUN_0046e290(UINT message)
 {
@@ -597,4 +855,29 @@ static RBX::UIEvent::EventType FUN_0046e290(UINT message)
 	default:
 		return RBX::UIEvent::NO_EVENT;
 	}
+}
+
+// STUB: ROBLOX 0x0046e2e0
+static SDLMod FUN_0046e2e0(const BYTE* keys)
+{
+	int mod = KMOD_NONE;
+	if (keys[DIK_LSHIFT] & 0x80) {
+		mod = KMOD_LSHIFT;
+	}
+	if (keys[DIK_RSHIFT] & 0x80) {
+		mod |= KMOD_RSHIFT;
+	}
+	if (keys[DIK_LCONTROL] & 0x80) {
+		mod |= KMOD_LCTRL;
+	}
+	if (keys[DIK_RCONTROL] & 0x80) {
+		mod |= KMOD_RCTRL;
+	}
+	if (keys[DIK_LMENU] & 0x80) {
+		mod |= KMOD_LALT;
+	}
+	if (keys[DIK_LMENU] & 0x80) {
+		mod |= KMOD_RALT;
+	}
+	return static_cast<SDLMod>(mod);
 }

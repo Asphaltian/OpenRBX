@@ -173,6 +173,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
+	friend class DxUserInput;
 	friend class ExitCommand;
 
 private:
