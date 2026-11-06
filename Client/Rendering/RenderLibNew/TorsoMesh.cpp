@@ -184,6 +184,7 @@ inline void TorsoBuilder::buildFront(Purpose purpose)
 	buildFace<RBX::NORM_Z_NEG>(DeformFrontBack(bevel, shoulderInset), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x005254e0
 TorsoMesh::TorsoMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
 	const float shoulderInset = size.z * 0.3f;
@@ -195,6 +196,7 @@ TorsoMesh::TorsoMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00525660
 TorsoMesh::TorsoMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	const float shoulderInset = size.z * 0.3f;
@@ -208,6 +210,7 @@ TorsoMesh::TorsoMesh(const G3D::Vector3& size, NormalId decalFace)
 	builder.buildFace(decalFace, LevelBuilder::Decal);
 }
 
+// FUNCTION: ROBLOX 0x005257f0
 TorsoMesh::TorsoMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	const float shoulderInset = size.z * 0.3f;

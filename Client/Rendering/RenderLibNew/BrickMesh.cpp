@@ -259,6 +259,7 @@ void BrickMesh::flushCache()
 	cache.clear();
 }
 
+// STUB: ROBLOX 0x00514c00
 G3D::ReferenceCountedPointer<RenderNew::Mesh> BrickMesh::create(
 	const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color
 )

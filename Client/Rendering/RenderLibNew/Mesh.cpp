@@ -45,37 +45,14 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 	}
 }
 
-void Mesh::computeAABounds(
-	const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray, G3D::Vector3& lo, G3D::Vector3& hi
+// FUNCTION: ROBLOX 0x005325c0
+G3D::ReferenceCountedPointer<Mesh> Mesh::aggregate(
+	const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
+	G3D::CoordinateFrame& outCFrame,
+	float& outBoundingRadius
 )
 {
-	lo = G3D::Vector3::inf();
-	hi = -G3D::Vector3::inf();
-
-	std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator end = chunkArray.end();
-
-	for (std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator iter = chunkArray.begin(); iter != end;
-		 ++iter) {
-		const G3D::ReferenceCountedPointer<Chunk>& chunk = *iter;
-		const G3D::ReferenceCountedPointer<Mesh>& srcMesh = chunk->getMesh();
-
-		if (srcMesh.isNull()) {
-			continue;
-		}
-
-		const G3D::CoordinateFrame& cframe = chunk->cframe();
-		LevelRef srcLevel = srcMesh->detailLevel(0.0f);
-		const G3D::Array<IndexType>& indexArray = srcLevel->indexArray;
-
-		for (int i = 0; i < indexArray.size(); i++) {
-			IndexType index = indexArray[i];
-
-			G3D::Vector3 v = cframe.pointToWorldSpace(visibleGeometry.vertexArray[index]);
-
-			hi = hi.max(v);
-			lo = lo.min(v);
-		}
-	}
+	return NULL;
 }
 
 // STUB: ROBLOX 0x00532600
@@ -207,59 +184,6 @@ Mesh::Mesh()
 Mesh::~Mesh()
 {
 	STUB(0x532b60);
-}
-
-G3D::ReferenceCountedPointer<Mesh> Mesh::aggregate(
-	const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,
-	G3D::CoordinateFrame& outCFrame,
-	float& outBoundingRadius
-)
-{
-	G3D::ReferenceCountedPointer<Mesh> mesh = new Mesh();
-
-	std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator end = chunkArray.end();
-
-	{
-		G3D::Vector3 lo, hi;
-		computeAABounds(chunkArray, lo, hi);
-
-		outCFrame.translation = (hi + lo) / 2.0f;
-		outCFrame.rotation = G3D::Matrix3::identity();
-		outBoundingRadius = (hi - lo).magnitude() * 0.5;
-	}
-
-	mesh->levels.append(new Level(G3D::RenderDevice::QUADS));
-
-	{
-		LevelRef dstLevel = mesh->levels.last();
-
-		for (std::vector<G3D::ReferenceCountedPointer<Chunk> >::const_iterator iter = chunkArray.begin(); iter != end;
-			 ++iter) {
-			const G3D::ReferenceCountedPointer<Chunk>& chunk = *iter;
-			const G3D::ReferenceCountedPointer<Mesh>& srcMesh = chunk->getMesh();
-
-			if (srcMesh.isNull()) {
-				continue;
-			}
-
-			const G3D::CoordinateFrame& cframe = chunk->cframe();
-			LevelRef srcLevel = srcMesh->detailLevel(0.3f);
-			const G3D::Array<IndexType>& indexArray = srcLevel->indexArray;
-
-			G3D::CoordinateFrame netTransform = outCFrame.inverse() * cframe;
-
-			for (int i = 0; i < indexArray.size(); i++) {
-				IndexType index = indexArray[i];
-				G3D::Vector3 v = netTransform.pointToWorldSpace(visibleGeometry.vertexArray[index]);
-				G3D::Vector3 n = netTransform.vectorToWorldSpace(visibleGeometry.normalArray[index]);
-				G3D::Vector2 t = texCoordArray[index];
-
-				dstLevel->indexArray.append(allocVertex(v, n, t, false));
-			}
-		}
-	}
-
-	return mesh;
 }
 
 } // namespace RenderNew

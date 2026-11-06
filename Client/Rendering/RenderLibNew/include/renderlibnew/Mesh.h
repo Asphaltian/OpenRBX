@@ -75,10 +75,6 @@ private:
 
 	static void makeVAR();
 
-	static void computeAABounds(
-		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray, G3D::Vector3& lo, G3D::Vector3& hi
-	);
-
 	static G3D::Vector3 findScale;
 	static VertexList findGrid[32][32][32];
 	static G3D::Array<int>& getFindGridCell(const G3D::Vector3&);

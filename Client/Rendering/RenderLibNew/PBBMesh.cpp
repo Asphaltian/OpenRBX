@@ -175,6 +175,7 @@ void PBBBuilder::buildBack(Purpose purpose)
 	buildFace<RBX::NORM_Z>(Side(), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0051f5c0
 PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
@@ -186,6 +187,7 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId decalFace)
 	builder.buildFace(decalFace, LevelBuilder::Decal);
 }
 
+// FUNCTION: ROBLOX 0x0051f710
 PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
@@ -199,6 +201,7 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vect
 	builder.buildFace(textureFace, LevelBuilder::Decal);
 }
 
+// STUB: ROBLOX 0x0051f8c0
 PBBMesh::PBBMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
 	{

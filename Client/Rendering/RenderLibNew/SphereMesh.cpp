@@ -76,6 +76,7 @@ protected:
 
 DECOMP_SIZE_ASSERT(SphereBuilder, 0x24)
 
+// STUB: ROBLOX 0x005282e0
 SphereMesh::SphereMesh(const G3D::Vector3& diameter, RenderSurfaceTypes surfaceTypes)
 {
 	levels.append(new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS));
@@ -86,6 +87,7 @@ SphereMesh::SphereMesh(const G3D::Vector3& diameter, RenderSurfaceTypes surfaceT
 	}
 }
 
+// STUB: ROBLOX 0x00528470
 SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
@@ -97,6 +99,7 @@ SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId decalFace)
 	builder.buildFace(decalFace, LevelBuilder::Decal);
 }
 
+// FUNCTION: ROBLOX 0x005285f0
 SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);

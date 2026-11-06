@@ -160,6 +160,7 @@ inline void WedgeBuilder::buildFront(Purpose purpose)
 	buildFace<RBX::NORM_Z_NEG>(DeformFront(bevel), 1, 1, purpose);
 }
 
+// FUNCTION: ROBLOX 0x00522520
 WedgeMesh::WedgeMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
 	levels.append(new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS));
@@ -169,6 +170,7 @@ WedgeMesh::WedgeMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00522690
 WedgeMesh::WedgeMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
@@ -180,6 +182,7 @@ WedgeMesh::WedgeMesh(const G3D::Vector3& size, NormalId decalFace)
 	builder.buildFace(decalFace, LevelBuilder::Decal);
 }
 
+// FUNCTION: ROBLOX 0x00522810
 WedgeMesh::WedgeMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);

@@ -180,6 +180,7 @@ inline void HeadBuilder::buildBack(Purpose purpose)
 	buildFace<RBX::NORM_Z>(CylinderTransform(bevel, elements), elements, elements, purpose);
 }
 
+// FUNCTION: ROBLOX 0x0052b920
 HeadMesh::HeadMesh(const G3D::Vector3& partSize, RenderSurfaceTypes surfaceTypes)
 {
 	const float bevel = std::min(partSize.x, partSize.z) * 0.25f;
@@ -192,6 +193,7 @@ HeadMesh::HeadMesh(const G3D::Vector3& partSize, RenderSurfaceTypes surfaceTypes
 	}
 }
 
+// FUNCTION: ROBLOX 0x0052bb00
 HeadMesh::HeadMesh(const G3D::Vector3& size, NormalId decalFace)
 {
 	const float bevel = std::min(size.x, size.z) * 0.25f;
@@ -205,6 +207,7 @@ HeadMesh::HeadMesh(const G3D::Vector3& size, NormalId decalFace)
 	builder.buildFace(decalFace, LevelBuilder::Decal);
 }
 
+// FUNCTION: ROBLOX 0x0052bc80
 HeadMesh::HeadMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vector2& studsPerTile)
 {
 	const float bevel = std::min(size.x, size.z) * 0.25f;
