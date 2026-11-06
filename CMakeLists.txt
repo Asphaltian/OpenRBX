@@ -331,10 +331,12 @@ set(OPENRBX_RBXVIEW_SOURCES
 )
 set(OPENRBX_RBXVIEWNEW_SOURCES
   Client/Rendering/RenderLibNew/MaterialFactory.cpp
+  Client/Rendering/RenderLibNew/QuadVolume.cpp
   Client/Rendering/RenderLibNew/View.cpp
 )
 set(OPENRBX_RENDERLIBNEW_SOURCES
   Client/Rendering/RenderLibNew/AggregatingSceneManager.cpp
+  Client/Rendering/RenderLibNew/Mesh.cpp
   Client/Rendering/RenderLibNew/RenderScene.cpp
 )
 set(OPENRBX_RENDERLIB_SOURCES
