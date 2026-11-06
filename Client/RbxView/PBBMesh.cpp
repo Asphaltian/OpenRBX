@@ -28,7 +28,12 @@ public:
 	)
 	{
 		for (int i = 0; i < 2; ++i) {
-			normal[i] = bulge[i] ? vertex[i] * perturbation[i] / radius[i] : perturbation[i];
+			if (bulge[i]) {
+				normal[i] = vertex[i] * perturbation[i] / radius[i];
+			}
+			else {
+				normal[i] = perturbation[i];
+			}
 		}
 	}
 };
