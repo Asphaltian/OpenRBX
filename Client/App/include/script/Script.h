@@ -119,12 +119,14 @@ DECOMP_SIZE_ASSERT(IScriptOwner, 0x4)
 // SYNTHETIC: WEBSERVICE 0x10218c40
 // `dynamic initializer for 'RBX::Script::prop_SourceCodeId''
 // SYNTHETIC: WEBSERVICE 0x10218c80
+// SYNTHETIC: ROBLOX 0x007e86b0
 // `dynamic initializer for 'RBX::Script::prop_Disabled''
 // SYNTHETIC: WEBSERVICE 0x10218cb0
 // `dynamic initializer for 'helloWorld''
 // SYNTHETIC: WEBSERVICE 0x10221b00
 // `dynamic atexit destructor for 'helloWorld''
 // SYNTHETIC: WEBSERVICE 0x10221b40
+// SYNTHETIC: ROBLOX 0x007f1db0
 // `dynamic atexit destructor for 'RBX::Script::prop_Disabled''
 // SYNTHETIC: WEBSERVICE 0x10221b60
 // `dynamic atexit destructor for 'RBX::Script::prop_SourceCodeId''

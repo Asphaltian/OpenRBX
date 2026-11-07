@@ -5800,3 +5800,7 @@ address,type,symbol,name,module,size
 008275bc,global,??_7PartTool@RBX@@6BINamed@1@@,,,
 008275a4,global,??_7PartTool@RBX@@6BIRenderable@1@@,,,
 00801148,global,??_8UndoState@RBX@@7B@,,,
+00835ba8,global,??_7UnlockedPartByLocalCharacter@RBX@@6B@,,,
+0095fdb8,global,?propPosition@Explosion@RBX@@2V?$BoundProp@VVector3@G3D@@$00@Reflection@2@A,,,
+0095fdd4,global,?propBlastPressure@Explosion@RBX@@2V?$BoundProp@M$00@Reflection@2@A,,,
+00959e10,global,?prop_Disabled@Script@RBX@@2V?$BoundProp@_N$00@Reflection@2@A,,,

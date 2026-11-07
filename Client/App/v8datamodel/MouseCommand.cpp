@@ -166,6 +166,13 @@ PartInstance* MouseCommand::getPartByLocalCharacter(const UIEvent& uiEvent, G3D:
 	return getPart(uiEvent, &filter, hitWorld);
 }
 
+// FUNCTION: ROBLOX 0x00620c10
+PartInstance* MouseCommand::getUnlockedPartByLocalCharacter(const UIEvent& uiEvent, G3D::Vector3& hitWorld)
+{
+	UnlockedPartByLocalCharacter filter(workspace);
+	return getPart(uiEvent, &filter, hitWorld);
+}
+
 // FUNCTION: WEBSERVICE 0x100beff0
 // FUNCTION: ROBLOX 0x00620c90
 PartInstance* MouseCommand::getUnlockedPart(const UIEvent& uiEvent, G3D::Vector3& hitWorld)

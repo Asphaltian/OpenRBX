@@ -29,6 +29,16 @@ HitTestFilter::Result PartByLocalCharacter::filterResult(const Primitive* testMe
 	return INCLUDE_PRIM;
 }
 
+// FUNCTION: ROBLOX 0x00662190
+HitTestFilter::Result UnlockedPartByLocalCharacter::filterResult(const Primitive* testMe) const
+{
+	Result result = PartByLocalCharacter::filterResult(testMe);
+	if (result != INCLUDE_PRIM) {
+		return result;
+	}
+	return Unlocked::unlocked(testMe) ? INCLUDE_PRIM : STOP_TEST;
+}
+
 // FUNCTION: WEBSERVICE 0x10115b30
 // FUNCTION: ROBLOX 0x006621f0
 HitTestFilter::Result IgnoreDescendantsOf::filterResult(const Primitive* testMe) const

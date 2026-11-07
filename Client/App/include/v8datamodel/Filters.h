@@ -51,6 +51,17 @@ public:
 
 DECOMP_SIZE_ASSERT(PartByLocalCharacter, 0x14)
 
+// SIZE 0x14
+class UnlockedPartByLocalCharacter : public PartByLocalCharacter
+{
+public:
+	UnlockedPartByLocalCharacter(Instance* root) : PartByLocalCharacter(root) {}
+
+	virtual Result filterResult(const Primitive* testMe) const; // vtable+0x00
+};
+
+DECOMP_SIZE_ASSERT(UnlockedPartByLocalCharacter, 0x14)
+
 // VTABLE: WEBSERVICE 0x10247a3c
 // VTABLE: ROBLOX 0x0083cbec
 // SIZE 0x0c

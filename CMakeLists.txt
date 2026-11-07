@@ -239,6 +239,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/tool/PartDragTool.cpp
   Client/App/tool/RunDragger.cpp
   Client/App/tool/ToolsArrow.cpp
+  Client/App/tool/ToolsSurface.cpp
   Client/App/util/RunStateOwner.cpp
   Client/App/util/Sound.cpp
   Client/App/util/SoundWorld.cpp

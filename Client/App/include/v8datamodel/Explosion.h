@@ -73,16 +73,18 @@ DECOMP_SIZE_ASSERT(Explosion, 0x124)
 // SYNTHETIC: WEBSERVICE 0x1021cbd0
 // RBX::`dynamic initializer for 'propBlastRadius''
 // SYNTHETIC: WEBSERVICE 0x1021cc10
-// STUB: ROBLOX 0x007e86b0
+// SYNTHETIC: ROBLOX 0x007ed1a0
 // `dynamic initializer for 'RBX::Explosion::propBlastPressure''
 // SYNTHETIC: WEBSERVICE 0x1021cc40
+// STUB: ROBLOX 0x007ed1d0
 // `dynamic initializer for 'RBX::Explosion::propPosition''
 // SYNTHETIC: WEBSERVICE 0x1021cc70
 // RBX::`dynamic initializer for 'signal_Hit''
 // SYNTHETIC: WEBSERVICE 0x10224180
+// SYNTHETIC: ROBLOX 0x007f4890
 // `dynamic atexit destructor for 'RBX::Explosion::propPosition''
 // SYNTHETIC: WEBSERVICE 0x102241a0
-// SYNTHETIC: ROBLOX 0x007f1db0
+// SYNTHETIC: ROBLOX 0x007f48b0
 // `dynamic atexit destructor for 'RBX::Explosion::propBlastPressure''
 // SYNTHETIC: WEBSERVICE 0x102241c0
 // RBX::`dynamic atexit destructor for 'propBlastRadius''
