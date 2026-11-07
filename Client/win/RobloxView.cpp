@@ -140,3 +140,25 @@ void CRobloxView::onEvent(const RBX::ServiceProvider* source, RBX::ServiceAdded 
 void CRobloxView::OnDraw(CDC* pDC)
 {
 }
+
+// STUB: ROBLOX 0x0045e900
+void CRobloxView::FUN_0045e900()
+{
+	RBX::DataModel::Lock lock(m_unk0x140);
+	m_unk0x1ac.reset();
+	m_unk0x1b0.reset();
+	m_unk0x1b4.reset();
+	m_unk0x1b8.reset();
+	m_unk0x1bc.reset();
+	RBX::stopListening(m_unk0x140, static_cast<RBX::Listener<RBX::ServiceProvider, RBX::ServiceAdded>*>(this));
+	RBX::stopListening(m_unk0x140, static_cast<RBX::Listener<RBX::ServiceProvider, RBX::ServiceRemoving>*>(this));
+
+	RBX::Network::Players* players;
+	{
+		boost::shared_ptr<RBX::DataModel> dataModel = FUN_00403290();
+		players = dataModel ? dataModel->find<RBX::Network::Players>() : NULL;
+	}
+	if (players) {
+		players->RBX::Notifier<RBX::Network::Players, RBX::SuperSafeChanged>::removeListener(this);
+	}
+}

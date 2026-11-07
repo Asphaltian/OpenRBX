@@ -60,6 +60,13 @@ void CRobloxWnd::FUN_0045f9f0()
 	m_unk0xac.reset(new RBX::AdornRbxGfx(m_unk0xb0));
 }
 
+// FUNCTION: ROBLOX 0x0045faf0
+void CRobloxWnd::FUN_0045faf0()
+{
+	m_unk0x9c->makeCurrent();
+	m_unk0x70->buildGui(m_unk0xac.get());
+}
+
 // FUNCTION: ROBLOX 0x0045fc50
 void CRobloxWnd::FUN_0045fc50(bool active)
 {

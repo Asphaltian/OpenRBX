@@ -17,6 +17,7 @@
 #include "v8datamodel/Accoutrement.h"
 #include "v8datamodel/Backpack.h"
 #include "v8datamodel/Camera.h"
+#include "v8datamodel/GuiBuilder.h"
 #include "v8datamodel/JointInstance.h"
 #include "v8datamodel/JointsService.h"
 #include "v8datamodel/Lighting.h"
@@ -140,6 +141,13 @@ static std::string report(const G3D::Stopwatch& timer)
 	}
 
 	return Log::formatTime(timer.smoothElapsedTime());
+}
+
+// FUNCTION: ROBLOX 0x0058f010
+void DataModel::buildGui(Adorn* adorn)
+{
+	GuiBuilder builder;
+	builder.buildGui(adorn, this, workspace.get());
 }
 
 // FUNCTION: WEBSERVICE 0x100725c0

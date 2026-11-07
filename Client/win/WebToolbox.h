@@ -1,10 +1,13 @@
 #ifndef WEBTOOLBOX_H
 #define WEBTOOLBOX_H
 
+#include "Roblox_h.h"
 #include "SecureHtmlView.h"
 #include "decomp.h"
 
 #include <atlbase.h>
+
+class CRobloxWnd;
 
 // SIZE 0xfc
 class CWebToolbox : public CSecureHtmlView
@@ -30,8 +33,10 @@ public:
 	// ?CreateObject@CWebToolbox@@SGPAVCObject@@XZ
 
 private:
-	undefined4 m_unk0xf4;        // 0xf4
-	CComPtr<IUnknown> m_unk0xf8; // 0xf8
+	friend class CRobloxView;
+
+	CRobloxWnd* m_unk0xf4;         // 0xf4
+	CComPtr<IWorkspace> m_unk0xf8; // 0xf8
 };
 
 DECOMP_SIZE_ASSERT(CWebToolbox, 0xfc)

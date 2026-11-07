@@ -4,6 +4,7 @@
 #include "MultiPlayerPane.h"
 #include "RobloxWnd.h"
 #include "VerbBinder.h"
+#include "WebToolbox.h"
 #include "decomp.h"
 #include "network/Players.h"
 #include "network/SuperSafeChanged.h"
@@ -118,6 +119,7 @@ public:
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
 
 	boost::shared_ptr<RBX::DataModel> FUN_00403290() const;
+	void FUN_0045e900();
 	RBX::VerbContainer* FUN_004558a0() { return this; }
 
 protected:
@@ -133,7 +135,7 @@ private:
 	boost::shared_ptr<RBX::DataModel> m_unk0x140; // 0x140
 	CMenu m_unk0x148;                             // 0x148
 	CMultiPlayerPane m_unk0x150;                  // 0x150
-	undefined4 m_unk0x1a8;                        // 0x1a8
+	CWebToolbox* m_unk0x1a8;                      // 0x1a8
 	boost::scoped_ptr<RBX::Verb> m_unk0x1ac;      // 0x1ac
 	boost::scoped_ptr<RBX::Verb> m_unk0x1b0;      // 0x1b0
 	boost::scoped_ptr<RBX::Verb> m_unk0x1b4;      // 0x1b4

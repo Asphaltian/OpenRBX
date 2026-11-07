@@ -77,6 +77,8 @@ public:
 	void FUN_00459c80();
 
 private:
+	friend class CRobloxView;
+
 	std::auto_ptr<XmlElement> m_unk0x60; // 0x60
 	std::vector<undefined4*> m_unk0x64;  // 0x64
 	undefined4 m_unk0x74;                // 0x74
