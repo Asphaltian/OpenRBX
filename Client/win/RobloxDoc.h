@@ -73,7 +73,7 @@ public:
 	virtual ~CRobloxDoc();
 
 	RBX::VerbContainer* FUN_004558a0();
-	void FUN_00459950(std::string p_unk0x04);
+	BOOL FUN_00459950(std::string p_unk0x04);
 	void FUN_00459c80();
 
 private:

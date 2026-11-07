@@ -10,6 +10,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <string>
+#include <vector>
 
 extern CString g_unk0x00954290;
 
@@ -20,6 +21,29 @@ inline CString FUN_00407190()
 }
 
 void FUN_00450800(CString p_unk0x04);
+
+// SIZE 0x38
+class CRobloxCommandLineInfo : public CCommandLineInfo
+{
+public:
+	CRobloxCommandLineInfo();
+
+	virtual void ParseParam(const TCHAR* pszParam, BOOL bFlag, BOOL bLast); // vtable+0x14
+
+	// SYNTHETIC: ROBLOX 0x00450860
+	// CRobloxCommandLineInfo::~CRobloxCommandLineInfo
+
+	// SYNTHETIC: ROBLOX 0x004514d0
+	// CRobloxCommandLineInfo::`scalar deleting destructor'
+
+	bool m_unk0x24;                     // 0x24
+	bool m_unk0x25;                     // 0x25
+	bool m_unk0x26;                     // 0x26
+	bool m_unk0x27;                     // 0x27
+	std::vector<std::string> m_unk0x28; // 0x28
+};
+
+DECOMP_SIZE_ASSERT(CRobloxCommandLineInfo, 0x38)
 
 // SIZE 0x110
 namespace RBX {
@@ -40,8 +64,12 @@ public:
 	// CRobloxApp::`scalar deleting destructor'
 
 	BOOL FUN_0044dac0(bool p_unk0x04);
+	BOOL FUN_0044e180(std::string script);
 	void FUN_0044e250();
+	BOOL FUN_0044ea70(std::string script);
 	void FUN_0044ef90(boost::shared_ptr<RBX::Script> script);
+	void FUN_004509e0();
+	BOOL FUN_00451550(std::vector<std::string>::iterator begin, std::vector<std::string>::iterator end);
 
 	afx_msg void OnAppAbout();
 	afx_msg void FUN_0044dc90();

@@ -162,6 +162,8 @@ private:
 
 DECOMP_SIZE_ASSERT(Reflection, 0xfc)
 
+void FUN_00447680();
+
 } // namespace Metadata
 } // namespace Reflection
 } // namespace RBX

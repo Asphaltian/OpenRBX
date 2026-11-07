@@ -145,4 +145,6 @@ DECOMP_SIZE_ASSERT(ThreadLogManager, 0x28)
 // `log_detail::init'::`2'::`dynamic atexit destructor for 'value''
 // clang-format on
 
+void FUN_0042b3c0(const std::exception& e);
+
 #endif // LOGMANAGER_H

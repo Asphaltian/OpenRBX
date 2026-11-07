@@ -3,6 +3,30 @@
 
 #include "decomp.h"
 
+// SIZE 0xd8
+class CBrowserFrameWnd : public CXTPFrameWnd
+{
+	DECLARE_DYNCREATE(CBrowserFrameWnd)
+
+	// SYNTHETIC: ROBLOX 0x00437150
+	// ?GetThisClass@CBrowserFrameWnd@@SGPAUCRuntimeClass@@XZ
+
+	// SYNTHETIC: ROBLOX 0x00437440
+	// ?CreateObject@CBrowserFrameWnd@@SGPAVCObject@@XZ
+
+protected:
+	CBrowserFrameWnd() {}
+
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x00437430
+	// ?GetMessageMap@CBrowserFrameWnd@@MBEPBUAFX_MSGMAP@@XZ
+};
+
+DECOMP_SIZE_ASSERT(CBrowserFrameWnd, 0xd8)
+
 // SIZE 0x54
 class CNullDoc : public CDocument
 {

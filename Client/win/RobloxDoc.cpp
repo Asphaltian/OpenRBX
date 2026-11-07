@@ -51,9 +51,10 @@ bool ReportAbuseVerb::isEnabled() const
 }
 
 // STUB: ROBLOX 0x00459950
-void CRobloxDoc::FUN_00459950(std::string p_unk0x04)
+BOOL CRobloxDoc::FUN_00459950(std::string p_unk0x04)
 {
 	STUB(0x459950);
+	return FALSE;
 }
 
 // STUB: ROBLOX 0x00459c80

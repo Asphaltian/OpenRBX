@@ -56,6 +56,17 @@ Class* Reflection::FUN_00446220(const ClassDescriptor* descriptor, bool recurse)
 	return NULL;
 }
 
+// FUNCTION: ROBLOX 0x00447680
+void FUN_00447680()
+{
+	Reflection::classDescriptor();
+	Classes::classDescriptor();
+	Functions::classDescriptor();
+	Member::classDescriptor();
+	Properties::classDescriptor();
+	Events::classDescriptor();
+}
+
 // FUNCTION: ROBLOX 0x004479b0
 Reflection::Reflection() : m_unk0xf8(NULL)
 {

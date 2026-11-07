@@ -1,5 +1,34 @@
 #include "NullDoc.h"
 
+IMPLEMENT_DYNCREATE(CBrowserFrameWnd, CXTPFrameWnd)
+
+// FUNCTION: ROBLOX 0x004372f0
+int CBrowserFrameWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CXTPFrameWnd::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+
+	CMenu* menu = GetMenu();
+	if (menu && ::IsMenu(menu->m_hMenu)) {
+		menu->DestroyMenu();
+		::SetMenu(m_hWnd, NULL);
+	}
+
+	CWnd* pane = GetDescendantWindow(AFX_IDW_PANE_FIRST, TRUE);
+	pane->ModifyStyle(WS_BORDER, 0, SWP_FRAMECHANGED);
+	pane->ModifyStyleEx(WS_EX_CLIENTEDGE, 0, SWP_FRAMECHANGED);
+	return 0;
+}
+
+// clang-format off
+BEGIN_MESSAGE_MAP(CBrowserFrameWnd, CXTPFrameWnd)
+	ON_WM_DESTROY()
+	ON_WM_CREATE()
+	ON_WM_NCDESTROY()
+END_MESSAGE_MAP()
+// clang-format on
+
 IMPLEMENT_DYNCREATE(CNullDoc, CDocument)
 
 // FUNCTION: ROBLOX 0x004374b0

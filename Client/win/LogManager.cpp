@@ -366,6 +366,12 @@ bool MainLogManager::handleG3DFailure(
 	return false;
 }
 
+// FUNCTION: ROBLOX 0x0042b3c0
+void FUN_0042b3c0(const std::exception& e)
+{
+	RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, e.what());
+}
+
 // FUNCTION: WEBSERVICE 0x100032e0
 // FUNCTION: ROBLOX 0x0042a970
 void LogManager::ReportEvent(WORD type, const char* message)
