@@ -24,6 +24,15 @@ template class RBX::TToolVerb<RBX::FillTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::DropperTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::HammerTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::LaserTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::FlatTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::GlueTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::WeldTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::StudsTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::InletTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::HingeTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::RightMotorTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::LeftMotorTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::OscillateMotorTool, RBX::RunStateVerb>;
 
 namespace RBX {
 
@@ -833,6 +842,19 @@ void ForceAssertionCommand::doIt(IDataState* dataState)
 bool EngineStatsCommand::isEnabled() const
 {
 	return true;
+}
+
+// FUNCTION: ROBLOX 0x0059cd30
+void XmlState::addAllProperties(Instance& instance)
+{
+	addState(instance.write(), instance);
+}
+
+// FUNCTION: ROBLOX 0x0059cd50
+void XmlState::addParentProperty(Instance& instance)
+{
+	XmlElement* element = Instance::propParent.write(&instance, true);
+	addState(element, instance);
 }
 
 // FUNCTION: ROBLOX 0x0059cda0

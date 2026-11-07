@@ -158,6 +158,20 @@ PartInstance* MouseCommand::getPart(const UIEvent& uiEvent, const HitTestFilter*
 	return part;
 }
 
+// FUNCTION: ROBLOX 0x00620b20
+Surface* MouseCommand::getSurface(const UIEvent& uiEvent, PartInstance*& part, int& surfaceId)
+{
+	part = getPart(uiEvent);
+	if (part) {
+		G3D::Ray ray = getUnitMouseRay(uiEvent);
+		Surface* surface = part->getSurface(ray, surfaceId);
+		if (surface) {
+			return surface;
+		}
+	}
+	return NULL;
+}
+
 // FUNCTION: WEBSERVICE 0x100bef80
 // FUNCTION: ROBLOX 0x00620ba0
 PartInstance* MouseCommand::getPartByLocalCharacter(const UIEvent& uiEvent, G3D::Vector3& hitWorld)

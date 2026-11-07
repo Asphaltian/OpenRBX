@@ -15,6 +15,8 @@
 #include "v8world/World.h"
 
 #include <G3D/AABox.h>
+#include <G3D/CollisionDetection.h>
+#include <G3D/Ray.h>
 #include <G3D/Sphere.h>
 
 namespace RBX {
@@ -431,6 +433,31 @@ Extents PartInstance::getExtentsLocal() const
 	const Vector3 corner = primitive->getGeometry()->getGridSize() * 0.5f;
 
 	return Extents(-corner, corner);
+}
+
+// FUNCTION: ROBLOX 0x005add10
+Surface* PartInstance::getSurface(const G3D::Ray& worldRay, int& surfaceId)
+{
+	const CoordinateFrame& cframe = primitive->getCoordinateFrame();
+	G3D::Ray localRay = cframe.toObjectSpace(worldRay);
+	const Vector3 corner = primitive->getGeometry()->getGridSize() * 0.5f;
+	Extents extents(-corner, corner);
+	Vector3 location;
+	G3D::CollisionDetection::collisionLocationForMovingPointFixedAABox(
+		localRay.origin, localRay.direction, G3D::AABox(extents.min(), extents.max()), location
+	);
+
+	for (int i = 0; i < 3; i++) {
+		if (location[i] == extents.max()[i]) {
+			surfaceId = i;
+			return &surfaces[(NormalId) i];
+		}
+		if (location[i] == extents.min()[i]) {
+			surfaceId = i + 3;
+			return &surfaces[(NormalId) (i + 3)];
+		}
+	}
+	return NULL;
 }
 
 Vector3 PartInstance::xmlToUiSize(const Vector3& size) const

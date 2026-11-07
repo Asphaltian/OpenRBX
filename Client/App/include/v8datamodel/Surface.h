@@ -24,8 +24,8 @@ public:
 
 	Surface(PartInstance* partInstance, NormalId surfId);
 
-	PartInstance* getPartInstance() const;
-	NormalId getNormalId() const;
+	PartInstance* getPartInstance() const { return partInstance; }
+	NormalId getNormalId() const { return surfId; }
 
 	bool isControllable() const;
 

@@ -101,6 +101,15 @@ void Surface::setParamB(float value)
 	}
 }
 
+// FUNCTION: ROBLOX 0x005e06c0
+void Surface::flat()
+{
+	setSurfaceType(NO_SURFACE);
+	setSurfaceInput(SurfaceData::empty().inputType);
+	setParamA(SurfaceData::empty().paramA);
+	setParamB(SurfaceData::empty().paramB);
+}
+
 // FUNCTION: WEBSERVICE 0x10104690
 // FUNCTION: ROBLOX 0x005e07d0
 void Surface::readValue(const XmlElement* element, IReferenceBinder& binder)

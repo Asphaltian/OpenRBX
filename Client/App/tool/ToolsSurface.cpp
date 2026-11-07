@@ -1,11 +1,14 @@
 #include "tool/ToolsSurface.h"
 
+#include "appdraw/DrawAdorn.h"
 #include "humanoid/Humanoid.h"
 #include "rbxgraphics/Adorn.h"
 #include "util/Sound.h"
 #include "util/SoundWorld.h"
+#include "v8datamodel/Commands.h"
 #include "v8datamodel/Explosion.h"
 #include "v8datamodel/PartInstance.h"
+#include "v8datamodel/Surface.h"
 #include "v8datamodel/Workspace.h"
 #include "v8tree/Service.h"
 
@@ -14,11 +17,169 @@
 
 namespace RBX {
 
+// GLOBAL: ROBLOX 0x00948bec
+char sFlatTool[] = "Flat";
+
+// GLOBAL: ROBLOX 0x00948bf4
+char sGlueTool[] = "Glue";
+
+// GLOBAL: ROBLOX 0x00948bfc
+char sWeldTool[] = "Weld";
+
+// GLOBAL: ROBLOX 0x00948c04
+char sStudsTool[] = "Studs";
+
+// GLOBAL: ROBLOX 0x00948c0c
+char sInletTool[] = "Inlet";
+
+// GLOBAL: ROBLOX 0x00948c14
+char sHingeTool[] = "Hinge";
+
+// GLOBAL: ROBLOX 0x00948c1c
+char sRightMotorTool[] = "RightMotor";
+
+// GLOBAL: ROBLOX 0x00948c28
+char sLeftMotorTool[] = "LeftMotor";
+
+// GLOBAL: ROBLOX 0x00948c34
+char sOscillateMotorTool[] = "OscillateMotor";
+
 // GLOBAL: ROBLOX 0x00948c90
 char sHammerTool[] = "Hammer";
 
 // GLOBAL: ROBLOX 0x00948c9c
 char sLaserTool[] = "Laser";
+
+// FUNCTION: ROBLOX 0x00639820
+void FlatTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->flat();
+	surface->getPartInstance()->join();
+}
+
+// FUNCTION: ROBLOX 0x00639840
+void HingeTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->setSurfaceType(ROTATE);
+	surface->setSurfaceInput(Controller::NO_INPUT);
+	surface->setParamA(0.0f);
+	surface->setParamB(0.0f);
+	surface->getPartInstance()->join();
+}
+
+// FUNCTION: ROBLOX 0x00639890
+void RightMotorTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->setSurfaceType(ROTATE_V);
+	surface->setSurfaceInput(Controller::RIGHT_TRACK_INPUT);
+	surface->setParamA(-0.1f);
+	surface->setParamB(0.1f);
+	surface->getPartInstance()->join();
+}
+
+// FUNCTION: ROBLOX 0x006398e0
+void LeftMotorTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->setSurfaceType(ROTATE_V);
+	surface->setSurfaceInput(Controller::LEFT_TRACK_INPUT);
+	surface->setParamA(-0.1f);
+	surface->setParamB(0.1f);
+	surface->getPartInstance()->join();
+}
+
+// FUNCTION: ROBLOX 0x00639930
+void OscillateMotorTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->setSurfaceType(ROTATE_V);
+	surface->setSurfaceInput(Controller::SIN_INPUT);
+	surface->setParamA(-0.1f);
+	surface->setParamB(0.1f);
+	surface->getPartInstance()->join();
+}
+
+// FUNCTION: ROBLOX 0x00639980
+void SurfaceTool::render3dAdorn(Adorn* adorn)
+{
+	if (part) {
+		DrawAdorn::partSurface(part->getPart(), surfaceId, adorn, G3D::Color4(G3D::Color3::orange(), 1.0f));
+	}
+}
+
+// FUNCTION: ROBLOX 0x00639a80
+SurfaceTool::SurfaceTool(Workspace* workspace) : MouseCommand(workspace), surface(NULL)
+{
+}
+
+// FUNCTION: ROBLOX 0x00639af0
+void SurfaceTool::onMouseHover(const UIEvent& uiEvent)
+{
+	PartInstance* hitPart;
+	surface = getSurface(uiEvent, hitPart, surfaceId);
+	part = shared_from(surface ? hitPart : NULL);
+}
+
+// FUNCTION: ROBLOX 0x00639ba0
+MouseCommand* SurfaceTool::onMouseDown(const UIEvent& uiEvent)
+{
+	onMouseHover(uiEvent);
+	if (surface) {
+		undoState.reset(new UndoState());
+		undoState->addAllProperties(*part);
+		VTable0x40(surface);
+		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+
+		std::auto_ptr<RedoState> redoState(new RedoState());
+		redoState->addAllProperties(*part);
+		workspace->getDataState().pushState(m_unk0x30, undoState.release(), redoState.release());
+		workspace->getDataState().setDirty(true);
+	}
+	return NULL;
+}
+
+// FUNCTION: ROBLOX 0x00639d20
+void GlueTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->flat();
+	surface->setSurfaceType(GLUE);
+	surface->getPartInstance()->join();
+	ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+}
+
+// FUNCTION: ROBLOX 0x00639d60
+void WeldTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->flat();
+	surface->setSurfaceType(WELD);
+	surface->getPartInstance()->join();
+	ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+}
+
+// FUNCTION: ROBLOX 0x00639da0
+void StudsTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->flat();
+	surface->setSurfaceType(STUDS);
+	surface->getPartInstance()->join();
+	ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+}
+
+// FUNCTION: ROBLOX 0x00639de0
+void InletTool::VTable0x40(Surface* surface)
+{
+	surface->getPartInstance()->destroyJoints();
+	surface->flat();
+	surface->setSurfaceType(INLET);
+	surface->getPartInstance()->join();
+	ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+}
 
 // FUNCTION: ROBLOX 0x0063b8d0
 const std::string HammerTool::getCursorName() const

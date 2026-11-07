@@ -164,8 +164,44 @@ public:
 	// RBX::TToolVerb<RBX::ArrowTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d0a70
 	// RBX::TToolVerb<RBX::ArrowTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d0e10
+	// RBX::TToolVerb<RBX::FlatTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d0ed0
+	// RBX::TToolVerb<RBX::FlatTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d0f60
+	// RBX::TToolVerb<RBX::GlueTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1020
+	// RBX::TToolVerb<RBX::GlueTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d10b0
+	// RBX::TToolVerb<RBX::WeldTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1170
+	// RBX::TToolVerb<RBX::WeldTool,RBX::RunStateVerb>::VTable0x14
 	// TEMPLATE: ROBLOX 0x005d1200
-	// RBX::TToolVerb<RBX::LaserTool,RBX::RunStateVerb>::doIt
+	// RBX::TToolVerb<RBX::OscillateMotorTool,RBX::RunStateVerb>::doIt
+	// TEMPLATE: ROBLOX 0x005d1220
+	// RBX::TToolVerb<RBX::StudsTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d12e0
+	// RBX::TToolVerb<RBX::StudsTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d1370
+	// RBX::TToolVerb<RBX::InletTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1430
+	// RBX::TToolVerb<RBX::InletTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d14c0
+	// RBX::TToolVerb<RBX::HingeTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d15a0
+	// RBX::TToolVerb<RBX::HingeTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d1630
+	// RBX::TToolVerb<RBX::RightMotorTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1660
+	// RBX::TToolVerb<RBX::RightMotorTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d16f0
+	// RBX::TToolVerb<RBX::LeftMotorTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1720
+	// RBX::TToolVerb<RBX::LeftMotorTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d17b0
+	// RBX::TToolVerb<RBX::OscillateMotorTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1810
+	// RBX::TToolVerb<RBX::OscillateMotorTool,RBX::RunStateVerb>::VTable0x14
 	// TEMPLATE: ROBLOX 0x005d1990
 	// RBX::TToolVerb<RBX::ModelSetPrimaryPartTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d19c0

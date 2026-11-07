@@ -398,6 +398,24 @@ private:
 	// RBX::Name::doDeclare<&RBX::sHammerTool>
 	// TEMPLATE: ROBLOX 0x005d0590
 	// RBX::Name::doDeclare<&RBX::sLaserTool>
+	// TEMPLATE: ROBLOX 0x005cfe90
+	// RBX::Name::doDeclare<&RBX::sFlatTool>
+	// TEMPLATE: ROBLOX 0x005cff00
+	// RBX::Name::doDeclare<&RBX::sGlueTool>
+	// TEMPLATE: ROBLOX 0x005cff70
+	// RBX::Name::doDeclare<&RBX::sWeldTool>
+	// TEMPLATE: ROBLOX 0x005cffe0
+	// RBX::Name::doDeclare<&RBX::sStudsTool>
+	// TEMPLATE: ROBLOX 0x005d0050
+	// RBX::Name::doDeclare<&RBX::sInletTool>
+	// TEMPLATE: ROBLOX 0x005d00c0
+	// RBX::Name::doDeclare<&RBX::sHingeTool>
+	// TEMPLATE: ROBLOX 0x005d0130
+	// RBX::Name::doDeclare<&RBX::sRightMotorTool>
+	// TEMPLATE: ROBLOX 0x005d01a0
+	// RBX::Name::doDeclare<&RBX::sLeftMotorTool>
+	// TEMPLATE: ROBLOX 0x005d0210
+	// RBX::Name::doDeclare<&RBX::sOscillateMotorTool>
 	template <const char* name>
 	static const Name& doDeclare()
 	{
@@ -733,6 +751,24 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sHammerTool>
 	// TEMPLATE: ROBLOX 0x005d09e0
 	// RBX::Name::callDoDeclare<&RBX::sLaserTool>
+	// TEMPLATE: ROBLOX 0x005d08e0
+	// RBX::Name::callDoDeclare<&RBX::sFlatTool>
+	// TEMPLATE: ROBLOX 0x005d08f0
+	// RBX::Name::callDoDeclare<&RBX::sGlueTool>
+	// TEMPLATE: ROBLOX 0x005d0900
+	// RBX::Name::callDoDeclare<&RBX::sWeldTool>
+	// TEMPLATE: ROBLOX 0x005d0910
+	// RBX::Name::callDoDeclare<&RBX::sStudsTool>
+	// TEMPLATE: ROBLOX 0x005d0920
+	// RBX::Name::callDoDeclare<&RBX::sInletTool>
+	// TEMPLATE: ROBLOX 0x005d0930
+	// RBX::Name::callDoDeclare<&RBX::sHingeTool>
+	// TEMPLATE: ROBLOX 0x005d0940
+	// RBX::Name::callDoDeclare<&RBX::sRightMotorTool>
+	// TEMPLATE: ROBLOX 0x005d0950
+	// RBX::Name::callDoDeclare<&RBX::sLeftMotorTool>
+	// TEMPLATE: ROBLOX 0x005d0960
+	// RBX::Name::callDoDeclare<&RBX::sOscillateMotorTool>
 	template <const char* name>
 	static void callDoDeclare()
 	{
@@ -832,6 +868,24 @@ public:
 	// RBX::Named<RBX::MouseCommand,&RBX::sHammerTool>::getName
 	// TEMPLATE: ROBLOX 0x005d26e0
 	// RBX::Named<RBX::MouseCommand,&RBX::sLaserTool>::getName
+	// TEMPLATE: ROBLOX 0x005d0f40
+	// RBX::Named<RBX::SurfaceTool,&RBX::sFlatTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1090
+	// RBX::Named<RBX::SurfaceTool,&RBX::sGlueTool>::getName
+	// TEMPLATE: ROBLOX 0x005d11e0
+	// RBX::Named<RBX::SurfaceTool,&RBX::sWeldTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1350
+	// RBX::Named<RBX::SurfaceTool,&RBX::sStudsTool>::getName
+	// TEMPLATE: ROBLOX 0x005d14a0
+	// RBX::Named<RBX::SurfaceTool,&RBX::sInletTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1610
+	// RBX::Named<RBX::SurfaceTool,&RBX::sHingeTool>::getName
+	// TEMPLATE: ROBLOX 0x005d16d0
+	// RBX::Named<RBX::SurfaceTool,&RBX::sRightMotorTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1790
+	// RBX::Named<RBX::SurfaceTool,&RBX::sLeftMotorTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1880
+	// RBX::Named<RBX::SurfaceTool,&RBX::sOscillateMotorTool>::getName
 	// clang-format on
 };
 
