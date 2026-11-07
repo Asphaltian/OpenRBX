@@ -131,6 +131,8 @@ public:
 
 	static void isolateHandles(XmlElement* root);
 
+	void FUN_005a33f0(const XmlElement* root, RBX::DataModel* dataModel);
+
 	void loadInstances(XmlElement* root, std::vector<boost::shared_ptr<RBX::Instance> >& instances);
 
 	static void load(XmlElement* root, RBX::DataModel* dataModel);

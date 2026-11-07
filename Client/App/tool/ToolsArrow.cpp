@@ -7,8 +7,10 @@
 #include "util/UIEvent.h"
 #include "util/UserInputBase.h"
 #include "v8datamodel/Camera.h"
+#include "v8datamodel/DataModel.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Workspace.h"
+#include "v8xml/SerializerV2.h"
 
 #include <algorithm>
 
@@ -208,6 +210,44 @@ void BoxSelectCommand::onMouseMove(const UIEvent& uiEvent)
 	else {
 		selectAnd(instances);
 	}
+}
+
+// FUNCTION: ROBLOX 0x0063d320
+UndoVerb::UndoVerb(DataModel* dataModel) : Verb(dataModel, "Undo"), m_unk0x0c(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063d370
+RedoVerb::RedoVerb(DataModel* dataModel) : Verb(dataModel, "Redo"), m_unk0x0c(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063d3c0
+bool UndoVerb::isEnabled() const
+{
+	std::string name;
+	return m_unk0x0c->canUndo(name);
+}
+
+// FUNCTION: ROBLOX 0x0063d430
+void UndoVerb::doIt(IDataState* dataState)
+{
+	SerializerV2 serializer;
+	serializer.FUN_005a33f0(m_unk0x0c->undo()->getData(), m_unk0x0c);
+}
+
+// FUNCTION: ROBLOX 0x0063d4a0
+bool RedoVerb::isEnabled() const
+{
+	std::string name;
+	return m_unk0x0c->canRedo(name);
+}
+
+// FUNCTION: ROBLOX 0x0063d510
+void RedoVerb::doIt(IDataState* dataState)
+{
+	SerializerV2 serializer;
+	serializer.FUN_005a33f0(m_unk0x0c->redo()->getData(), m_unk0x0c);
 }
 
 } // namespace RBX

@@ -75,6 +75,44 @@ void StateStack<T>::pushState(std::string name, T* undoState, T* redoState)
 	}
 }
 
+// TEMPLATE: ROBLOX 0x00455280
+// RBX::StateStack<RBX::XmlState>::canUndo
+
+template <class T>
+bool StateStack<T>::canUndo(std::string& name) const
+{
+	if (currentState >= 0) {
+		name = stack[currentState].name;
+		return true;
+	}
+	return false;
+}
+
+template <class T>
+inline T* StateStack<T>::undo()
+{
+	return stack[currentState--].undoState;
+}
+
+// TEMPLATE: ROBLOX 0x004552e0
+// RBX::StateStack<RBX::XmlState>::canRedo
+
+template <class T>
+bool StateStack<T>::canRedo(std::string& name) const
+{
+	if (currentState + 1 < (int) stack.size()) {
+		name = stack[currentState + 1].name;
+		return true;
+	}
+	return false;
+}
+
+template <class T>
+inline T* StateStack<T>::redo()
+{
+	return stack[++currentState].redoState;
+}
+
 template <class T>
 inline void StateStack<T>::clearStackAfter(int index)
 {

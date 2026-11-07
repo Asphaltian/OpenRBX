@@ -149,6 +149,12 @@ static void buildIsolationMap(XmlElement* element, std::map<RBX::Instance*, RBX:
 	}
 }
 
+// STUB: ROBLOX 0x005a33f0
+void SerializerV2::FUN_005a33f0(const XmlElement* root, RBX::DataModel* dataModel)
+{
+	STUB(0x5a33f0);
+}
+
 // FUNCTION: WEBSERVICE 0x10098450
 // FUNCTION: ROBLOX 0x005a3ee0
 bool ArchiveBinder::processID(const XmlNameValuePair* valueID, RBX::Instance* source)

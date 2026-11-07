@@ -6,6 +6,7 @@
 #include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/Selection.h"
 #include "v8tree/Service.h"
+#include "v8tree/Verb.h"
 
 #include <G3D/Rect2D.h>
 #include <G3D/Vector2int16.h>
@@ -80,6 +81,40 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(ArrowTool, 0x24)
+
+class DataModel;
+
+// VTABLE: ROBLOX 0x0083a894
+// SIZE 0x10
+class UndoVerb : public Verb
+{
+public:
+	UndoVerb(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+
+private:
+	DataModel* m_unk0x0c; // 0x0c
+};
+
+DECOMP_SIZE_ASSERT(UndoVerb, 0x10)
+
+// VTABLE: ROBLOX 0x0083a8b4
+// SIZE 0x10
+class RedoVerb : public Verb
+{
+public:
+	RedoVerb(DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(IDataState* dataState);
+
+private:
+	DataModel* m_unk0x0c; // 0x0c
+};
+
+DECOMP_SIZE_ASSERT(RedoVerb, 0x10)
 
 } // namespace RBX
 

@@ -29,7 +29,7 @@ protected:
 public:
 	XmlState() : root(name_root) {}
 
-	const XmlElement* getData() const;
+	const XmlElement* getData() const { return &root; }
 
 	virtual void addState(XmlElement*, Instance&) = 0; // vtable+0x00
 
