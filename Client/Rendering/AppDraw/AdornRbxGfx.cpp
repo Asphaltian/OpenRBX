@@ -18,6 +18,23 @@ int AdornRbxGfx::getHeight() const
 	return m_unk0x04->getViewport()->getActualHeight();
 }
 
+// FUNCTION: ROBLOX 0x0066a0f0
+void AdornRbxGfx::rect2d(const G3D::Rect2D& rect, const G3D::Color4& color) const
+{
+	m_unk0x04->m_unk0x14->FUN_0067d9e0(
+		m_unk0x08,
+		color,
+		rect.x0(),
+		getHeight() - 1 - rect.y0(),
+		rect.x1(),
+		getHeight() - 1 - rect.y1(),
+		0.0f,
+		0.0f,
+		1.0f,
+		1.0f
+	);
+}
+
 // FUNCTION: ROBLOX 0x0066a1b0
 void AdornRbxGfx::outlineRect2d(const G3D::Rect2D& rect, float thickness, const G3D::Color4& color) const
 {

@@ -9,6 +9,7 @@
 #include <OgreRenderOperation.h>
 #include <OgreRenderQueueListener.h>
 #include <list>
+#include <string>
 
 namespace Ogre {
 
@@ -38,6 +39,18 @@ public:
 	TwoDManager();
 
 	void FUN_0067cec0();
+	void FUN_0067d9e0(
+		std::string texture,
+		const G3D::Color4& color,
+		float x0,
+		float y0,
+		float x1,
+		float y1,
+		float u0,
+		float v0,
+		float u1,
+		float v1
+	);
 	void FUN_0067dcc0(int type, float x0, float y0, float x1, float y1, const G3D::Color4& color);
 	void FUN_0067dd70(float x0, float y0, float x1, float y1, const G3D::Color4& color);
 
