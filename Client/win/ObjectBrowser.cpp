@@ -77,6 +77,19 @@ void CObjectBrowser::OnSize(UINT nType, int cx, int cy)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00437d30
+static BOOL FUN_00437d30(CImageList& imageList, UINT nIDResource)
+{
+	if (!imageList.Create(16, 16, ILC_COLOR24 | ILC_MASK, 0, 1)) {
+		return FALSE;
+	}
+
+	CBitmap bitmap;
+	bitmap.LoadBitmap(nIDResource);
+	imageList.Add(&bitmap, CXTPImageManager::GetBitmapMaskColor(bitmap, CPoint(0, 0)));
+	return TRUE;
+}
+
 // FUNCTION: ROBLOX 0x00437e10
 int CObjectBrowser::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -112,16 +125,29 @@ int CObjectBrowser::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-// STUB: ROBLOX 0x00438290
+// FUNCTION: ROBLOX 0x00438290
 int CMemberTreeView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-	STUB(0x438290);
+	if (CXTTreeView::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+	if (!FUN_00437d30(m_unk0xa0, 196)) {
+		return -1;
+	}
+	GetTreeCtrl().SetImageList(&m_unk0xa0, TVSIL_NORMAL);
 	return 0;
 }
 
+// FUNCTION: ROBLOX 0x00438290 FOLDED
 int CClassTreeView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-	STUB(0x438290);
+	if (CXTTreeView::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+	if (!FUN_00437d30(m_unk0xa0, 196)) {
+		return -1;
+	}
+	GetTreeCtrl().SetImageList(&m_unk0xa0, TVSIL_NORMAL);
 	return 0;
 }
 

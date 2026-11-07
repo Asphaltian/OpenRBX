@@ -5766,3 +5766,4 @@ address,type,symbol,name,module,size
 004696d0,function,,,,672
 00456760,library,??$copy_impl@V?$reference_wrapper@V?$basic_istream@DU?$char_traits@D@std@@@std@@@boost@@V?$reference_wrapper@V?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@detail@iostreams@boost@@YAHV?$reference_wrapper@V?$basic_istream@DU?$char_traits@D@std@@@std@@@2@V?$reference_wrapper@V?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@H@Z,,,
 00456660,library,??$copy_impl@V?$reference_wrapper@V?$basic_istream@DU?$char_traits@D@std@@@std@@@boost@@V?$reference_wrapper@V?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@detail@iostreams@boost@@YAHAAV?$reference_wrapper@V?$basic_istream@DU?$char_traits@D@std@@@std@@@2@AAV?$reference_wrapper@V?$basic_ostringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@HU?$bool_@$0A@@mpl@2@2@Z,,,
+004218c0,library,?_ImageList_AddMasked@CComCtlWrapper@@QAEHPAU_IMAGELIST@@PAUHBITMAP__@@K@Z,,,
