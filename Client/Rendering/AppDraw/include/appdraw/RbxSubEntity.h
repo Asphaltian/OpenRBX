@@ -1,6 +1,7 @@
 #ifndef APPDRAW_RBXSUBENTITY_H
 #define APPDRAW_RBXSUBENTITY_H
 
+#include "appdraw/RbxSceneNode.h"
 #include "decomp.h"
 
 #include <OgreMatrix4.h>
@@ -10,10 +11,6 @@
 #include <vector>
 
 namespace Ogre {
-
-class RbxSceneNode : public SceneNode
-{
-};
 
 // VTABLE: ROBLOX 0x0083df0c Ogre::SubEntity
 // VTABLE: ROBLOX 0x0083ded4 Ogre::ShadowCaster
@@ -55,6 +52,10 @@ public:
 	RbxSubEntity(Entity* parent);
 	RbxSubEntity(Entity* parent, SubMesh* subMesh, int lodIndex);
 	virtual ~RbxSubEntity();
+
+	void FUN_0067b4b0(const MaterialPtr& material);
+	void FUN_0067b4c0(int lodIndex, SubMesh* subMesh);
+	SubMesh* FUN_0067b4e0(int lodIndex);
 
 	virtual void getRenderOperation(RenderOperation& op);
 	virtual void getWorldTransforms(Matrix4* xform) const;

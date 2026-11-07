@@ -31,6 +31,32 @@ Real RbxSubEntity::getSquaredViewDepth(const Camera* cam) const
 	return diff.squaredLength();
 }
 
+// FUNCTION: ROBLOX 0x0067b4b0
+void RbxSubEntity::FUN_0067b4b0(const MaterialPtr& material)
+{
+	mpMaterial = material;
+}
+
+// FUNCTION: ROBLOX 0x0067b4c0
+void RbxSubEntity::FUN_0067b4c0(int lodIndex, SubMesh* subMesh)
+{
+	if (lodIndex == 0) {
+		mSubMesh = subMesh;
+	}
+	else {
+		m_unk0x11c[lodIndex - 1] = subMesh;
+	}
+}
+
+// FUNCTION: ROBLOX 0x0067b4e0
+SubMesh* RbxSubEntity::FUN_0067b4e0(int lodIndex)
+{
+	if (lodIndex == 0) {
+		return mSubMesh;
+	}
+	return m_unk0x11c[lodIndex - 1];
+}
+
 // FUNCTION: ROBLOX 0x0067b510
 const AxisAlignedBox& RbxSubEntity::getLightCapBounds(void) const
 {

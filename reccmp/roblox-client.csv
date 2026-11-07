@@ -6033,3 +6033,6 @@ address,type,symbol,name,module,size
 00961424,global,"position___Ogre::RbxSubEntity::getWorldPosition",,,
 0083df5c,string,,,,
 0067bce0,synthetic,??_ERbxSubEntity@Ogre@@WNI@AEPAXI@Z,,,
+0043ee20,library,?find@?$_Tree@V?$_Tmap_traits@PBVClassDescriptor@Reflection@RBX@@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@U?$less@PBVClassDescriptor@Reflection@RBX@@@5@V?$allocator@U?$pair@QBVClassDescriptor@Reflection@RBX@@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@std@@@5@$0A@@std@@@std@@QAE?AViterator@12@ABQBVClassDescriptor@Reflection@RBX@@@Z,,,
+0067a540,library,?erase@?$_Tree@V?$_Tmap_traits@PBVSubMesh@Ogre@@VSphere@2@U?$less@PBVSubMesh@Ogre@@@std@@V?$allocator@U?$pair@QBVSubMesh@Ogre@@VSphere@2@@std@@@5@$0A@@std@@@std@@QAE?AViterator@12@V312@@Z,,,
+0067adf0,library,?insert@?$_Tree@V?$_Tmap_traits@PBVSubMesh@Ogre@@VSphere@2@U?$less@PBVSubMesh@Ogre@@@std@@V?$allocator@U?$pair@QBVSubMesh@Ogre@@VSphere@2@@std@@@5@$0A@@std@@@std@@QAE?AU?$pair@Viterator@?$_Tree@V?$_Tmap_traits@PBVSubMesh@Ogre@@VSphere@2@U?$less@PBVSubMesh@Ogre@@@std@@V?$allocator@U?$pair@QBVSubMesh@Ogre@@VSphere@2@@std@@@5@$0A@@std@@@std@@_N@2@ABU?$pair@QBVSubMesh@Ogre@@VSphere@2@@2@@Z,,,
