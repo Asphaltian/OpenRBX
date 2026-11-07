@@ -9,6 +9,10 @@
 #include <boost/function.hpp>
 #include <string>
 
+namespace G3D {
+class Stopwatch;
+}
+
 namespace RBX {
 
 namespace Profiling {
@@ -107,6 +111,8 @@ template <>
 void Item::formatValue<unsigned int>(const unsigned int& value);
 template <>
 void Item::formatValue<bool>(const bool& value);
+template <>
+void Item::formatValue<G3D::Stopwatch>(const G3D::Stopwatch& value);
 
 // SIZE 0x140
 template <class T>

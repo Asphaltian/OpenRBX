@@ -38,7 +38,7 @@ public:
 	);
 
 	const UserInputBase* getHardwareDevice() const { return hardwareDevice; }
-	void setHardwareDevice(UserInputBase*);
+	void setHardwareDevice(UserInputBase* device) { hardwareDevice = device; }
 	UserInputBase* getHardwareDevice() { return hardwareDevice; }
 };
 

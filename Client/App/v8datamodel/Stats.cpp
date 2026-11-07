@@ -3,6 +3,7 @@
 #include "util/Log.h"
 #include "util/Profiling.h"
 
+#include <G3D/Stopwatch.h>
 #include <G3D/format.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -37,6 +38,20 @@ void Item::formatValue(double val, const char* fmt, ...)
 	va_start(argList, fmt);
 	setValue(val, G3D::vformat(fmt, argList));
 	va_end(argList);
+}
+
+// STUB: ROBLOX 0x005d3820
+template <>
+void Item::formatValue<G3D::Stopwatch>(const G3D::Stopwatch& value)
+{
+	val = value.smoothElapsedTime();
+	if (value.smoothElapsedTime() <= 0) {
+		sValue = Log::formatTime(value.smoothElapsedTime());
+	}
+	else {
+		std::string time = Log::formatTime(value.smoothElapsedTime());
+		sValue = G3D::format("%s (%.3gfps)", time.c_str(), 1.0 / value.smoothElapsedTime());
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100b2060

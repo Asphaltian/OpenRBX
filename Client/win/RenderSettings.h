@@ -260,6 +260,7 @@ public:
 	void FUN_0044cfe0(float p_unk0x04);
 	void FUN_0044d050(int p_unk0x04);
 	void FUN_0044d0b0(GraphicsMode p_unk0x04);
+	void FUN_0044d1b0(bool p_unk0x04);
 	void FUN_0044d0e0(FrameRateManagerMode p_unk0x04);
 	void FUN_0044d110(BevelMode p_unk0x04);
 	void FUN_0044d140(AntialiasingMode p_unk0x04);

@@ -360,6 +360,12 @@ void CRobloxWnd::OnSize(UINT nType, int cx, int cy)
 	STUB(0x461950);
 }
 
+// STUB: ROBLOX 0x004619e0
+void CRobloxWnd::FUN_004619e0()
+{
+	STUB(0x4619e0);
+}
+
 // STUB: ROBLOX 0x004622d0
 void CRobloxWnd::FUN_004622d0(bool p_unk0x04)
 {

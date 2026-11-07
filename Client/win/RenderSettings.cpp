@@ -348,6 +348,12 @@ void CRenderSettings::FUN_0044d170(ShadowMode p_unk0x04)
 	}
 }
 
+// STUB: ROBLOX 0x0044d1b0
+void CRenderSettings::FUN_0044d1b0(bool p_unk0x04)
+{
+	STUB(0x44d1b0);
+}
+
 template class RBX::FactoryProduct<CRenderSettings, RBX::GlobalSettings::Item, sRenderSettings>;
 template class RBX::Reflection::Described<
 	CRenderSettings,

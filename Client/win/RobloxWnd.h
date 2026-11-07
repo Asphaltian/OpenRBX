@@ -17,6 +17,7 @@
 #include <memory>
 
 class CWorkspace;
+struct IWorkspace;
 
 namespace Ogre {
 class VisualEngine;
@@ -40,6 +41,7 @@ public:
 	void FUN_00460d30();
 	void FUN_004610a0(int width, int height);
 	void FUN_00461420(int width, int height);
+	void FUN_004619e0();
 	void FUN_004622d0(bool p_unk0x04);
 	void FUN_00462450(bool p_unk0x04);
 	void FUN_00462630(bool p_unk0x04);
@@ -78,7 +80,7 @@ private:
 	int m_unk0x5c;                                         // 0x5c
 	int m_unk0x60;                                         // 0x60
 	boost::shared_ptr<RenderStatsItem> m_unk0x64;          // 0x64
-	CComPtr<CWorkspace> m_unk0x6c;                         // 0x6c
+	CComPtr<IWorkspace> m_unk0x6c;                         // 0x6c
 	boost::shared_ptr<RBX::DataModel> m_unk0x70;           // 0x70
 	bool m_unk0x78;                                        // 0x78
 	boost::scoped_ptr<DxUserInput> m_unk0x7c;              // 0x7c
