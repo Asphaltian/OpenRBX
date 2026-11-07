@@ -63,6 +63,23 @@ public:
 		{
 		}
 
+		void prepare(
+			bool lightInFrustum,
+			const PlaneBoundedVolumeList* lightClipVolumes,
+			const Light* light,
+			const Camera* cam,
+			ShadowCasterList* casterList,
+			Real farDistSquared
+		)
+		{
+			mCasterList = casterList;
+			mIsLightInFrustum = lightInFrustum;
+			mLightClipVolumeList = lightClipVolumes;
+			mCamera = cam;
+			mLight = light;
+			mFarDistSquared = farDistSquared;
+		}
+
 		bool queryResult(MovableObject* object);
 		bool queryResult(SceneQuery::WorldFragment* fragment) { return true; }
 
@@ -88,11 +105,7 @@ protected:
 	bool validateRenderableForRendering(const Pass* pass, const Renderable* rend);
 
 public:
-	using SceneManager::destroyInstancedGeometry;
-	using SceneManager::destroyMovableObject;
-	using SceneManager::destroyStaticGeometry;
-	using SceneManager::extractMovableObject;
-	using SceneManager::setShadowTextureConfig;
+	using SceneManager::createEntity;
 
 	RbxSceneManager(const String& name);
 	~RbxSceneManager();
@@ -279,6 +292,157 @@ public:
 	virtual void _suppressShadows(bool suppress);
 	// FUNCTION: ROBLOX 0x006886a0
 	virtual bool _areShadowsSuppressed(void) const { return mSuppressShadows; }
+
+	virtual void initRenderQueue(void);
+	virtual void renderVisibleObjectsDefaultSequence(void);
+	virtual void renderVisibleObjectsCustomSequence(RenderQueueInvocationSequence* s);
+	virtual void prepareRenderQueue(void);
+	virtual void renderSingleObject(
+		const Renderable* rend, const Pass* pass, bool doLightIteration, const LightList* manualLightList = 0
+	);
+	virtual void findLightsAffectingFrustum(const Camera* camera);
+	virtual void initShadowVolumeMaterials(void);
+	virtual void ensureShadowTexturesCreated();
+	virtual void destroyShadowTextures(void);
+	virtual void prepareShadowTextures(Camera* cam, Viewport* vp);
+	virtual void renderShadowVolumesToStencil(const Light* light, const Camera* cam);
+	virtual void setShadowVolumeStencilState(bool secondpass, bool zfail, bool twosided);
+	virtual const ShadowCasterList& findShadowCastersForLight(const Light* light, const Camera* camera);
+	virtual void renderBasicQueueGroupObjects(
+		RenderQueueGroup* pGroup, QueuedRenderableCollection::OrganisationMode om
+	);
+	virtual void renderAdditiveStencilShadowedQueueGroupObjects(
+		RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om
+	);
+	virtual void renderModulativeStencilShadowedQueueGroupObjects(
+		RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om
+	);
+	virtual void renderTextureShadowCasterQueueGroupObjects(
+		RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om
+	);
+	virtual void renderTextureShadowReceiverQueueGroupObjects(
+		RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om
+	);
+	virtual void renderModulativeTextureShadowedQueueGroupObjects(
+		RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om
+	);
+	virtual void renderAdditiveTextureShadowedQueueGroupObjects(
+		RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om
+	);
+	virtual void renderTransparentShadowCasterObjects(
+		const QueuedRenderableCollection& objs,
+		QueuedRenderableCollection::OrganisationMode om,
+		bool doLightIteration,
+		const LightList* manualLightList = 0
+	);
+	virtual void updateRenderQueueSplitOptions(void);
+	virtual void updateRenderQueueGroupSplitOptions(
+		RenderQueueGroup* group, bool suppressShadows, bool suppressRenderState
+	);
+	virtual Camera* createCamera(const String& name);
+	virtual Camera* getCamera(const String& name) const;
+	virtual void destroyCamera(Camera* cam);
+	virtual void destroyCamera(const String& name);
+	virtual void _populateLightList(const Vector3& position, Real radius, LightList& destList);
+	virtual SceneNode* createSceneNode(void);
+	virtual SceneNode* createSceneNode(const String& name);
+	virtual void destroySceneNode(const String& name);
+	virtual SceneNode* getSceneNode(const String& name) const;
+	virtual Entity* createEntity(const String& entityName, const String& meshName);
+	virtual ParticleSystem* createParticleSystem(const String& name, const String& templateName);
+	virtual ParticleSystem* createParticleSystem(
+		const String& name,
+		size_t quota = 500,
+		const String& resourceGroup = ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+	);
+	virtual void setWorldGeometry(const String& filename);
+	virtual void setWorldGeometry(DataStreamPtr& stream, const String& typeName = StringUtil::BLANK);
+	virtual ViewPoint getSuggestedViewpoint(bool random = false);
+	virtual void _applySceneAnimations(void);
+	virtual void _renderScene(Camera* camera, Viewport* vp, bool includeOverlays);
+	virtual void _queueSkiesForRendering(Camera* cam);
+	virtual void setSkyPlane(
+		bool enable,
+		const Plane& plane,
+		const String& materialName,
+		Real scale = 1000,
+		Real tiling = 10,
+		bool drawFirst = true,
+		Real bow = 0,
+		int xsegments = 1,
+		int ysegments = 1,
+		const String& groupName = ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+	);
+	virtual void setSkyBox(
+		bool enable,
+		const String& materialName,
+		Real distance = 5000,
+		bool drawFirst = true,
+		const Quaternion& orientation = Quaternion::IDENTITY,
+		const String& groupName = ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+	);
+	virtual void setSkyDome(
+		bool enable,
+		const String& materialName,
+		Real curvature = 10,
+		Real tiling = 8,
+		Real distance = 4000,
+		bool drawFirst = true,
+		const Quaternion& orientation = Quaternion::IDENTITY,
+		int xsegments = 16,
+		int ysegments = 16,
+		int ysegments_keep = -1,
+		const String& groupName = ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+	);
+	virtual BillboardSet* createBillboardSet(const String& name, unsigned int poolSize = 20);
+	virtual Animation* createAnimation(const String& name, Real length);
+	virtual Animation* getAnimation(const String& name) const;
+	virtual bool hasAnimation(const String& name) const;
+	virtual void destroyAnimation(const String& name);
+	virtual void destroyAllAnimations(void);
+	virtual AnimationState* createAnimationState(const String& animName);
+	virtual void manualRender(
+		RenderOperation* rend,
+		Pass* pass,
+		Viewport* vp,
+		const Matrix4& worldMatrix,
+		const Matrix4& viewMatrix,
+		const Matrix4& projMatrix,
+		bool doBeginEndFrame = false
+	);
+	virtual void removeRenderQueueListener(RenderQueueListener* delListener);
+	virtual bool isRenderQueueToBeProcessed(uint8 qid);
+	virtual void setShadowTechnique(ShadowTechnique technique);
+	virtual void setShadowColour(const ColourValue& colour);
+	virtual void setShadowIndexBufferSize(size_t size);
+	virtual void setShadowTextureSize(unsigned short size);
+	virtual void setShadowTextureConfig(size_t shadowIndex, const ShadowTextureConfig& config);
+	virtual void setShadowTexturePixelFormat(PixelFormat fmt);
+	virtual void setShadowTextureCount(size_t count);
+	virtual void setShadowTextureSettings(unsigned short size, unsigned short count, PixelFormat fmt = PF_X8R8G8B8);
+	virtual const TexturePtr& getShadowTexture(size_t shadowIndex);
+	virtual void setShadowTextureCasterMaterial(const String& name);
+	virtual void setShadowTextureReceiverMaterial(const String& name);
+	virtual void removeShadowListener(ShadowListener* s);
+	virtual StaticGeometry* createStaticGeometry(const String& name);
+	virtual StaticGeometry* getStaticGeometry(const String& name) const;
+	virtual void destroyStaticGeometry(const String& name);
+	virtual void destroyAllStaticGeometry(void);
+	virtual InstancedGeometry* createInstancedGeometry(const String& name);
+	virtual InstancedGeometry* getInstancedGeometry(const String& name) const;
+	virtual void destroyInstancedGeometry(const String& name);
+	virtual void destroyAllInstancedGeometry(void);
+	virtual MovableObject* createMovableObject(
+		const String& name, const String& typeName, const NameValuePairList* params = 0
+	);
+	virtual void destroyMovableObject(const String& name, const String& typeName);
+	virtual void destroyAllMovableObjectsByType(const String& typeName);
+	virtual void destroyAllMovableObjects(void);
+	virtual MovableObject* getMovableObject(const String& name, const String& typeName) const;
+	virtual bool hasMovableObject(const String& name, const String& typeName) const;
+	virtual void extractMovableObject(const String& name, const String& typeName);
+	virtual const Pass* _setPass(const Pass* pass, bool evenIfSuppressed = false, bool shadowDerivation = true);
+	virtual void _renderQueueGroupObjects(RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om);
 
 	// SYNTHETIC: ROBLOX 0x00698370
 	// Ogre::RbxSceneManager::`scalar deleting destructor'
