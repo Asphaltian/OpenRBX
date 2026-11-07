@@ -6012,3 +6012,6 @@ address,type,symbol,name,module,size
 00672740,library,?_Construct_n@?$vector@MV?$allocator@M@std@@@std@@QAEXIABM@Z,,,
 00672840,library,??$_Sort@PAMH@std@@YAXPAM0H@Z,,,
 00672910,library,?push_back@?$vector@MV?$allocator@M@std@@@std@@QAEXABM@Z,,,
+0067cc60,library,?_Buynode@?$list@UUnk0x30@TwoDManager@Ogre@@V?$allocator@UUnk0x30@TwoDManager@Ogre@@@std@@@std@@IAEPAU_Node@?$_List_nod@UUnk0x30@TwoDManager@Ogre@@V?$allocator@UUnk0x30@TwoDManager@Ogre@@@std@@@2@XZ,,,
+0067cc80,library,?_Buynode@?$list@UUnk0x30@TwoDManager@Ogre@@V?$allocator@UUnk0x30@TwoDManager@Ogre@@@std@@@std@@IAEPAU_Node@?$_List_nod@UUnk0x30@TwoDManager@Ogre@@V?$allocator@UUnk0x30@TwoDManager@Ogre@@@std@@@2@PAU342@0ABUUnk0x30@TwoDManager@Ogre@@@Z,,,
+0067ccc0,library,?_Incsize@?$list@UUnk0x30@TwoDManager@Ogre@@V?$allocator@UUnk0x30@TwoDManager@Ogre@@@std@@@std@@IAEXI@Z,,,

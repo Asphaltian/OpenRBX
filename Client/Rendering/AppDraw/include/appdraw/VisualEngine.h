@@ -1,19 +1,16 @@
 #ifndef APPDRAW_VISUALENGINE_H
 #define APPDRAW_VISUALENGINE_H
 
+#include "appdraw/TwoDManager.h"
 #include "decomp.h"
 
-#include <OgreRenderQueueListener.h>
 #include <OgreRoot.h>
 
-namespace Ogre {
+namespace RBX {
+class AdornRbxGfx;
+} // namespace RBX
 
-// SIZE 0x48
-class TwoDManager : public RenderQueueListener
-{
-private:
-	undefined m_unk0x04[0x48 - 0x04]; // 0x04
-};
+namespace Ogre {
 
 // SIZE 0x808
 class VisualEngine
@@ -56,6 +53,8 @@ public:
 	// Ogre::VisualEngine::`scalar deleting destructor'
 
 private:
+	friend class RBX::AdornRbxGfx;
+
 	SceneManager* m_unk0x04;             // 0x04
 	Camera* m_unk0x08;                   // 0x08
 	RenderTarget* m_unk0x0c;             // 0x0c
