@@ -369,6 +369,7 @@ set(OPENRBX_RENDERLIB_SOURCES
   Client/Rendering/RenderLib/TextureProxy.cpp
 )
 set(OPENRBX_APPDRAW_CLIENT_SOURCES
+  Client/Rendering/AppDraw/AdornRbxGfx.cpp
   Client/Rendering/AppDraw/RbxSceneManager.cpp
   Client/Rendering/AppDraw/VisualEngine.cpp
 )

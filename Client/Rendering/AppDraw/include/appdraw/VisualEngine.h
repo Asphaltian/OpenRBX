@@ -50,6 +50,8 @@ public:
 	VisualEngine();
 	virtual ~VisualEngine(); // vtable+0x00
 
+	Viewport* getViewport() const { return m_unk0x10; }
+
 	// SYNTHETIC: ROBLOX 0x00671fb0
 	// Ogre::VisualEngine::`scalar deleting destructor'
 
