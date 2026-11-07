@@ -658,6 +658,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/DHTMLWindow.cpp
     Client/win/DxUserInput.cpp
     Client/win/ErrorUploader.cpp
+    Client/win/InstanceExplorer.cpp
     Client/win/LogManager.cpp
     Client/win/MainFrm.cpp
     Client/win/MarshalWindow.cpp
