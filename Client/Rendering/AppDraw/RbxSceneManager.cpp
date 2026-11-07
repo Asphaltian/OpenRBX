@@ -1132,6 +1132,94 @@ void RbxSceneManager::setSkyPlane(
 	mSkyPlaneGenParameters.skyPlaneYSegments = ysegments;
 }
 
+// FUNCTION: ROBLOX 0x00689090
+MeshPtr RbxSceneManager::createSkydomePlane(
+	BoxPlane bp,
+	Real curvature,
+	Real tiling,
+	Real distance,
+	const Quaternion& orientation,
+	int xsegments,
+	int ysegments,
+	int ysegments_keep,
+	const String& groupName
+)
+{
+
+	Plane plane;
+	String meshName;
+	Vector3 up;
+
+	meshName = mName + "SkyDomePlane_";
+
+	plane.d = distance;
+	switch (bp) {
+	case BP_FRONT:
+		plane.normal = Vector3::UNIT_Z;
+		up = Vector3::UNIT_Y;
+		meshName += "Front";
+		break;
+	case BP_BACK:
+		plane.normal = -Vector3::UNIT_Z;
+		up = Vector3::UNIT_Y;
+		meshName += "Back";
+		break;
+	case BP_LEFT:
+		plane.normal = Vector3::UNIT_X;
+		up = Vector3::UNIT_Y;
+		meshName += "Left";
+		break;
+	case BP_RIGHT:
+		plane.normal = -Vector3::UNIT_X;
+		up = Vector3::UNIT_Y;
+		meshName += "Right";
+		break;
+	case BP_UP:
+		plane.normal = -Vector3::UNIT_Y;
+		up = Vector3::UNIT_Z;
+		meshName += "Up";
+		break;
+	case BP_DOWN:
+
+		return MeshPtr();
+	}
+
+	plane.normal = orientation * plane.normal;
+	up = orientation * up;
+
+	MeshManager& mm = MeshManager::getSingleton();
+	MeshPtr planeMesh = mm.getByName(meshName);
+	if (!planeMesh.isNull()) {
+
+		mm.remove(planeMesh->getHandle());
+	}
+
+	Real planeSize = distance * 2;
+	planeMesh = mm.createCurvedIllusionPlane(
+		meshName,
+		groupName,
+		plane,
+		planeSize,
+		planeSize,
+		curvature,
+		xsegments,
+		ysegments,
+		false,
+		1,
+		tiling,
+		tiling,
+		up,
+		orientation,
+		HardwareBuffer::HBU_DYNAMIC_WRITE_ONLY,
+		HardwareBuffer::HBU_STATIC_WRITE_ONLY,
+		false,
+		false,
+		ysegments_keep
+	);
+
+	return planeMesh;
+}
+
 // STUB: ROBLOX 0x00689b90
 SceneManager* RbxSceneManagerFactory::createInstance(const String& instanceName)
 {
@@ -1209,6 +1297,54 @@ void RbxSceneManager::setSkyDome(
 	mSkyDomeGenParameters.skyDomeXSegments = xsegments;
 	mSkyDomeGenParameters.skyDomeYSegments = ysegments;
 	mSkyDomeGenParameters.skyDomeYSegments_keep = ySegmentsToKeep;
+}
+
+// FUNCTION: ROBLOX 0x0068a6c0
+bool RbxSceneManager::fireRenderQueueStarted(uint8 id, const String& invocation)
+{
+	RenderQueueListenerList::iterator i, iend;
+	bool skip = false;
+
+	iend = mRenderQueueListeners.end();
+	for (i = mRenderQueueListeners.begin(); i != iend; ++i) {
+		(*i)->renderQueueStarted(id, invocation, skip);
+	}
+	return skip;
+}
+
+// FUNCTION: ROBLOX 0x0068a760
+bool RbxSceneManager::fireRenderQueueEnded(uint8 id, const String& invocation)
+{
+	RenderQueueListenerList::iterator i, iend;
+	bool repeat = false;
+
+	iend = mRenderQueueListeners.end();
+	for (i = mRenderQueueListeners.begin(); i != iend; ++i) {
+		(*i)->renderQueueEnded(id, invocation, repeat);
+	}
+	return repeat;
+}
+
+// FUNCTION: ROBLOX 0x0068a800
+void RbxSceneManager::fireShadowTexturesUpdated(size_t numberOfShadowTextures)
+{
+	ShadowListenerList::iterator i, iend;
+
+	iend = mShadowListeners.end();
+	for (i = mShadowListeners.begin(); i != iend; ++i) {
+		(*i)->shadowTexturesUpdated(numberOfShadowTextures);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0068a870
+void RbxSceneManager::fireShadowTexturesPreCaster(Light* light, Camera* camera)
+{
+	ShadowListenerList::iterator i, iend;
+
+	iend = mShadowListeners.end();
+	for (i = mShadowListeners.begin(); i != iend; ++i) {
+		(*i)->shadowTextureCasterPreViewProj(light, camera);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0068a990
@@ -1589,7 +1725,7 @@ void RbxSceneManager::setSkyBox(
 	mSkyBoxGenParameters.skyBoxDistance = distance;
 }
 
-// STUB: ROBLOX 0x0068d800
+// FUNCTION: ROBLOX 0x0068d800
 void RbxSceneManager::renderVisibleObjectsCustomSequence(RenderQueueInvocationSequence* seq)
 {
 	RenderQueueInvocationIterator invocationIt = seq->iterator();
@@ -1671,7 +1807,61 @@ void RbxSceneManager::removeShadowListener(ShadowListener* delListener)
 	}
 }
 
-// STUB: ROBLOX 0x0068dcf0
+// STUB: ROBLOX 0x0068db80
+void RbxSceneManager::renderShadowVolumeObjects(
+	ShadowCaster::ShadowRenderableListIterator iShadowRenderables,
+	Pass* pass,
+	const LightList* manualLightList,
+	unsigned long flags,
+	bool secondpass,
+	bool zfail,
+	bool twosided
+)
+{
+
+	while (iShadowRenderables.hasMoreElements()) {
+		ShadowRenderable* sr = iShadowRenderables.getNext();
+
+		if (sr->isVisible()) {
+
+			renderSingleObject(sr, pass, false, manualLightList);
+
+			if (sr->isLightCapSeparate() && (flags & SRF_INCLUDE_LIGHT_CAP)) {
+				ShadowRenderable* lightCap = sr->getLightCapRenderable();
+				assert(lightCap && "Shadow renderable is missing a separate light cap renderable!");
+
+				if (twosided) {
+
+					mDestRenderSystem->_setCullingMode(CULL_ANTICLOCKWISE);
+
+					renderSingleObject(lightCap, pass, false, manualLightList);
+
+					mDestRenderSystem->_setCullingMode(CULL_CLOCKWISE);
+
+					mDestRenderSystem->_setDepthBufferFunction(CMPF_ALWAYS_FAIL);
+					renderSingleObject(lightCap, pass, false, manualLightList);
+
+					mDestRenderSystem->_setDepthBufferFunction(CMPF_LESS);
+
+					mDestRenderSystem->_setCullingMode(CULL_NONE);
+				}
+				else if ((secondpass || zfail) && !(secondpass && zfail)) {
+
+					renderSingleObject(lightCap, pass, false, manualLightList);
+				}
+				else {
+
+					mDestRenderSystem->_setDepthBufferFunction(CMPF_ALWAYS_FAIL);
+					renderSingleObject(lightCap, pass, false, manualLightList);
+
+					mDestRenderSystem->_setDepthBufferFunction(CMPF_LESS);
+				}
+			}
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x0068dcf0
 void RbxSceneManager::prepareShadowTextures(Camera* cam, Viewport* vp)
 {
 
@@ -1782,6 +1972,22 @@ InstancedGeometry* RbxSceneManager::getInstancedGeometry(const String& name) con
 	return i->second;
 }
 
+// STUB: ROBLOX 0x0068e390
+const SceneManager::MovableObjectCollection* RbxSceneManager::getMovableObjectCollection(const String& typeName) const
+{
+	MovableObjectCollectionMap::const_iterator i = mMovableObjectCollectionMap.find(typeName);
+	if (i == mMovableObjectCollectionMap.end()) {
+		OGRE_EXCEPT(
+			Exception::ERR_ITEM_NOT_FOUND,
+			"Object collection named '" + typeName + "' does not exist.",
+			"RbxSceneManager::getMovableObjectCollection"
+		);
+	}
+	else {
+		return i->second;
+	}
+}
+
 // STUB: ROBLOX 0x0068e4c0
 MovableObject* RbxSceneManager::getMovableObject(const String& name, const String& typeName) const
 {
@@ -1807,7 +2013,7 @@ void RbxSceneManager::addSpecialCaseRenderQueue(uint8 qid)
 	mSpecialCaseQueueList.insert(qid);
 }
 
-// STUB: ROBLOX 0x0068f5a0
+// FUNCTION: ROBLOX 0x0068f5a0
 bool RbxSceneManager::isRenderQueueToBeProcessed(uint8 qid)
 {
 	bool inList = mSpecialCaseQueueList.find(qid) != mSpecialCaseQueueList.end();
@@ -2256,7 +2462,7 @@ void RbxSceneManager::renderModulativeStencilShadowedQueueGroupObjects(
 	}
 }
 
-// STUB: ROBLOX 0x00690a70
+// FUNCTION: ROBLOX 0x00690a70
 void RbxSceneManager::renderTextureShadowCasterQueueGroupObjects(
 	RenderQueueGroup* pGroup, QueuedRenderableCollection::OrganisationMode om
 )
@@ -2394,7 +2600,7 @@ void RbxSceneManager::renderModulativeTextureShadowedQueueGroupObjects(
 	}
 }
 
-// STUB: ROBLOX 0x00691110
+// FUNCTION: ROBLOX 0x00691110
 void RbxSceneManager::renderTextureShadowReceiverQueueGroupObjects(
 	RenderQueueGroup* pGroup, QueuedRenderableCollection::OrganisationMode om
 )
@@ -2790,7 +2996,7 @@ void RbxSceneManager::prepareRenderQueue(void)
 	}
 }
 
-// STUB: ROBLOX 0x00694130
+// FUNCTION: ROBLOX 0x00694130
 void RbxSceneManager::renderVisibleObjectsDefaultSequence(void)
 {
 
@@ -3320,7 +3526,7 @@ bool RbxSceneManager::ShadowCasterSceneQueryListener::queryResult(MovableObject*
 	return true;
 }
 
-// STUB: ROBLOX 0x006960b0
+// FUNCTION: ROBLOX 0x006960b0
 void RbxSceneManager::renderShadowVolumesToStencil(const Light* light, const Camera* camera)
 {
 

@@ -98,7 +98,31 @@ protected:
 
 	friend class SceneMgrQueuedRenderableVisitor;
 
-	using SceneManager::getMovableObjectCollection;
+	MeshPtr createSkydomePlane(
+		BoxPlane bp,
+		Real curvature,
+		Real tiling,
+		Real distance,
+		const Quaternion& orientation,
+		int xsegments,
+		int ysegments,
+		int ySegmentsToKeep,
+		const String& groupName
+	);
+	bool fireRenderQueueStarted(uint8 id, const String& invocation);
+	bool fireRenderQueueEnded(uint8 id, const String& invocation);
+	void fireShadowTexturesUpdated(size_t numberOfShadowTextures);
+	void fireShadowTexturesPreCaster(Light* light, Camera* camera);
+	void renderShadowVolumeObjects(
+		ShadowCaster::ShadowRenderableListIterator iShadowRenderables,
+		Pass* pass,
+		const LightList* manualLightList,
+		unsigned long flags,
+		bool secondpass,
+		bool zfail,
+		bool twosided
+	);
+	const MovableObjectCollection* getMovableObjectCollection(const String& typeName) const;
 	MovableObjectCollection* getMovableObjectCollection(const String& typeName);
 
 	bool validatePassForRendering(const Pass* pass);
@@ -443,6 +467,14 @@ public:
 	virtual void extractMovableObject(const String& name, const String& typeName);
 	virtual const Pass* _setPass(const Pass* pass, bool evenIfSuppressed = false, bool shadowDerivation = true);
 	virtual void _renderQueueGroupObjects(RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om);
+
+	// clang-format off
+	// SYNTHETIC: ROBLOX 0x007f5750
+	// `Ogre::RbxSceneManager::renderTextureShadowCasterQueueGroupObjects'::`2'::`dynamic atexit destructor for 'nullLightList''
+
+	// SYNTHETIC: ROBLOX 0x007f5790
+	// `Ogre::RbxSceneManager::renderTextureShadowReceiverQueueGroupObjects'::`2'::`dynamic atexit destructor for 'nullLightList''
+	// clang-format on
 
 	// SYNTHETIC: ROBLOX 0x00698370
 	// Ogre::RbxSceneManager::`scalar deleting destructor'

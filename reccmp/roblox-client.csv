@@ -6004,3 +6004,6 @@ address,type,symbol,name,module,size
 0083f22c,global,??_SStaticGeometry@Ogre@@6B@,,,
 0083f2bc,global,??_SInstancedGeometry@Ogre@@6B@,,,
 00949fd8,global,?SPOT_SHADOW_FADE_PNG@Ogre@@3PAEA,,,
+0068ea50,library,?find@?$_Tree@V?$_Tset_traits@EU?$less@E@std@@V?$allocator@E@2@$0A@@std@@@std@@QAE?AViterator@12@ABE@Z,,,
+00961458,global,"nullLightList___Ogre::RbxSceneManager::renderTextureShadowCasterQueueGroupObjects",,,
+0096146c,global,"nullLightList___Ogre::RbxSceneManager::renderTextureShadowReceiverQueueGroupObjects",,,
