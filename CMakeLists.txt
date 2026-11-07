@@ -370,6 +370,7 @@ set(OPENRBX_RENDERLIB_SOURCES
 )
 set(OPENRBX_APPDRAW_CLIENT_SOURCES
   Client/Rendering/AppDraw/AdornRbxGfx.cpp
+  Client/Rendering/AppDraw/RbxEntity.cpp
   Client/Rendering/AppDraw/RbxFont.cpp
   Client/Rendering/AppDraw/RbxSceneManager.cpp
   Client/Rendering/AppDraw/RbxSceneNode.cpp
