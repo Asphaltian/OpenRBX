@@ -1,7 +1,10 @@
 #include "RobloxView.h"
 
 #include "ActiveDocView.h"
+#include "MainFrm.h"
 #include "RobloxDoc.h"
+
+#include <G3D/System.h>
 
 IMPLEMENT_DYNCREATE(CRobloxView, CView)
 
@@ -9,6 +12,86 @@ IMPLEMENT_DYNCREATE(CRobloxView, CView)
 void CRobloxView::onEvent(const RBX::Network::Players* source, RBX::SuperSafeChanged event)
 {
 	STUB(0x45d500);
+}
+
+// FUNCTION: ROBLOX 0x0045d520
+InsertModelFromRobloxVerb::InsertModelFromRobloxVerb(CRobloxView* view, RBX::DataModel* dataModel)
+	: RBX::Verb(dataModel, "ToggleToolbox"), m_unk0x0c(view), m_unk0x10(dataModel), m_unk0x18(G3D::System::getTick())
+{
+}
+
+// FUNCTION: ROBLOX 0x0045d5b0
+bool InsertModelFromRobloxVerb::isEnabled() const
+{
+	if (G3D::System::getTick() < m_unk0x18 + 3.0) {
+		return false;
+	}
+	return !RBX::Network::Players::clientIsPresent(m_unk0x10, true);
+}
+
+// FUNCTION: ROBLOX 0x0045d5f0
+bool InsertModelFromRobloxVerb::isChecked() const
+{
+	return m_unk0x0c->m_unk0x1a8 != 0;
+}
+
+// FUNCTION: ROBLOX 0x0045d610
+void InsertModelFromRobloxVerb::doIt(RBX::IDataState* dataState)
+{
+	m_unk0x0c->PostMessage(WM_COMMAND, 0x80fe);
+}
+
+// FUNCTION: ROBLOX 0x0045d630
+ToggleIDEModeVerb::ToggleIDEModeVerb(RBX::VerbContainer* container)
+	: RBX::Verb(container, "TogglePlayMode"), m_unk0x10(G3D::System::getTick())
+{
+}
+
+// FUNCTION: ROBLOX 0x0045d6b0
+bool ToggleIDEModeVerb::isEnabled() const
+{
+	if (G3D::System::getTick() < m_unk0x10 + 3.0) {
+		return false;
+	}
+	return !static_cast<CMainFrame*>(AfxGetApp()->m_pMainWnd)->m_unk0xed;
+}
+
+// FUNCTION: ROBLOX 0x0045d6f0
+bool ToggleIDEModeVerb::isChecked() const
+{
+	return !static_cast<CMainFrame*>(AfxGetApp()->m_pMainWnd)->m_unk0xec;
+}
+
+// FUNCTION: ROBLOX 0x0045d710
+void ToggleIDEModeVerb::doIt(RBX::IDataState* dataState)
+{
+	if (isEnabled()) {
+		AfxGetApp()->m_pMainWnd->PostMessage(WM_COMMAND, 0x80f5);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0045d740
+void LockPlayModeVerb::doIt(RBX::IDataState* dataState)
+{
+	AfxGetApp()->m_pMainWnd->PostMessage(WM_COMMAND, 0x80ff);
+}
+
+// FUNCTION: ROBLOX 0x0045d770
+bool ToggleFullscreenVerb::isChecked() const
+{
+	return static_cast<CMainFrame*>(AfxGetApp()->m_pMainWnd)->m_unk0xe0;
+}
+
+// FUNCTION: ROBLOX 0x0045d790
+void ToggleFullscreenVerb::doIt(RBX::IDataState* dataState)
+{
+	AfxGetApp()->m_pMainWnd->PostMessage(WM_COMMAND, 0x80f4);
+}
+
+// FUNCTION: ROBLOX 0x0045d7c0
+void HelpCommand::doIt(RBX::IDataState* dataState)
+{
+	m_unk0x0c->PostMessage(WM_COMMAND, 0x80fd);
 }
 
 // FUNCTION: ROBLOX 0x0045d8e0

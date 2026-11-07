@@ -15,6 +15,87 @@
 #include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 
+class CRobloxView;
+
+// VTABLE: ROBLOX 0x0080c8b8
+// SIZE 0x20
+class InsertModelFromRobloxVerb : public RBX::Verb
+{
+public:
+	InsertModelFromRobloxVerb(CRobloxView* view, RBX::DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual bool isChecked() const;
+	virtual void doIt(RBX::IDataState* dataState);
+
+private:
+	CRobloxView* m_unk0x0c;    // 0x0c
+	RBX::DataModel* m_unk0x10; // 0x10
+	double m_unk0x18;          // 0x18
+};
+
+DECOMP_SIZE_ASSERT(InsertModelFromRobloxVerb, 0x20)
+
+// VTABLE: ROBLOX 0x0080c8ec
+// SIZE 0x18
+class ToggleIDEModeVerb : public RBX::Verb
+{
+public:
+	ToggleIDEModeVerb(RBX::VerbContainer* container);
+
+	virtual bool isEnabled() const;
+	virtual bool isChecked() const;
+	virtual void doIt(RBX::IDataState* dataState);
+
+	// SYNTHETIC: ROBLOX 0x00410420
+	// ToggleIDEModeVerb::`scalar deleting destructor'
+
+private:
+	double m_unk0x10; // 0x10
+};
+
+DECOMP_SIZE_ASSERT(ToggleIDEModeVerb, 0x18)
+
+// VTABLE: ROBLOX 0x0080c914
+// SIZE 0x0c
+class LockPlayModeVerb : public RBX::Verb
+{
+public:
+	LockPlayModeVerb(RBX::VerbContainer* container) : RBX::Verb(container, "LockPlayMode") {}
+
+	virtual void doIt(RBX::IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(LockPlayModeVerb, 0x0c)
+
+// VTABLE: ROBLOX 0x0080c93c
+// SIZE 0x0c
+class ToggleFullscreenVerb : public RBX::Verb
+{
+public:
+	ToggleFullscreenVerb(RBX::VerbContainer* container) : RBX::Verb(container, "ToggleFullScreen") {}
+
+	virtual bool isChecked() const;
+	virtual void doIt(RBX::IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(ToggleFullscreenVerb, 0x0c)
+
+// VTABLE: ROBLOX 0x0080c968
+// SIZE 0x10
+class HelpCommand : public RBX::Verb
+{
+public:
+	HelpCommand(RBX::VerbContainer* container, CRobloxView* view) : RBX::Verb(container, "Help"), m_unk0x0c(view) {}
+
+	virtual void doIt(RBX::IDataState* dataState);
+
+private:
+	CRobloxView* m_unk0x0c; // 0x0c
+};
+
+DECOMP_SIZE_ASSERT(HelpCommand, 0x10)
+
 // SIZE 0x1c0
 class CRobloxView : public VerbBinder<CRobloxView, CView>,
 					public RBX::VerbContainer,
@@ -45,6 +126,8 @@ protected:
 	virtual void onEvent(const RBX::Network::Players* source, RBX::SuperSafeChanged event);
 
 private:
+	friend class InsertModelFromRobloxVerb;
+
 	undefined4 m_unk0x84;                         // 0x84
 	CRobloxWnd m_unk0x88;                         // 0x88
 	boost::shared_ptr<RBX::DataModel> m_unk0x140; // 0x140
