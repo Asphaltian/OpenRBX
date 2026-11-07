@@ -1,5 +1,11 @@
 #include "appdraw/RbxFont.h"
 
+#include <G3D/fileutils.h>
+#include <G3D/g3dmath.h>
+#include <OgreDataStream.h>
+#include <OgreTextureManager.h>
+#include <stdio.h>
+
 namespace Ogre {
 
 // STUB: ROBLOX 0x0067de70
@@ -66,6 +72,41 @@ Vector2 RbxFont::FUN_0067e0f0(const std::string& s, double size, RBX::Adorn::Spa
 		width = m_unk0x00['M'] * length * 0.85 * scale;
 	}
 	return Vector2(width, height);
+}
+
+// GLOBAL: ROBLOX 0x00961434
+int g_unk0x00961434;
+
+// STUB: ROBLOX 0x0067e610
+RbxFont::RbxFont(const std::string& filename, G3D::BinaryInput& in)
+{
+	in.readUInt32();
+	for (int i = 0; i < 128; i++) {
+		m_unk0x00[i] = in.readUInt16();
+	}
+	m_unk0x208 = in.readUInt16();
+	int cellSize = in.readUInt16();
+	cellSize /= 16;
+	m_unk0x200 = cellSize;
+	m_unk0x204 = cellSize;
+	int width = G3D::ceilPow2(cellSize * 16);
+	int height = G3D::ceilPow2(cellSize * 8);
+	const uint8* data = in.getCArray() + in.getPosition();
+	char name[8];
+	_snprintf(name, 8, "ft%d", g_unk0x00961434++);
+	m_unk0x20c = TextureManager::getSingleton().create(name, "General");
+	DataStreamPtr stream(new MemoryDataStream((void*) data, width * height));
+	m_unk0x20c->loadRawData(stream, width, height, PF_A8);
+}
+
+// FUNCTION: ROBLOX 0x0067e9d0
+SharedPtr<RbxFont> RbxFont::FUN_0067e9d0(const std::string& filename)
+{
+	if (!G3D::fileExists(filename)) {
+		return SharedPtr<RbxFont>();
+	}
+	G3D::BinaryInput in(filename, G3D::G3D_LITTLE_ENDIAN, true);
+	return SharedPtr<RbxFont>(new RbxFont(filename, in));
 }
 
 } // namespace Ogre

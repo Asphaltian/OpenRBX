@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "rbxgraphics/Adorn.h"
 
+#include <G3D/BinaryInput.h>
 #include <OgreTexture.h>
 #include <OgreVector2.h>
 #include <string>
@@ -14,6 +15,8 @@ namespace Ogre {
 class RbxFont
 {
 public:
+	RbxFont(const std::string& filename, G3D::BinaryInput& in);
+
 	Vector2 FUN_0067de70(
 		const std::string& s,
 		double x,
@@ -25,6 +28,8 @@ public:
 	);
 	Vector2 FUN_0067e0f0(const std::string& s, double size, RBX::Adorn::Spacing spacing);
 
+	static SharedPtr<RbxFont> FUN_0067e9d0(const std::string& filename);
+
 private:
 	int m_unk0x00[128];    // 0x00
 	int m_unk0x200;        // 0x200
@@ -34,6 +39,8 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(RbxFont, 0x218)
+
+extern int g_unk0x00961434;
 
 } // namespace Ogre
 
