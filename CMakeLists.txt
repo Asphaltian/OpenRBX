@@ -372,6 +372,7 @@ set(OPENRBX_APPDRAW_CLIENT_SOURCES
   Client/Rendering/AppDraw/AdornRbxGfx.cpp
   Client/Rendering/AppDraw/RbxFont.cpp
   Client/Rendering/AppDraw/RbxSceneManager.cpp
+  Client/Rendering/AppDraw/RbxSubEntity.cpp
   Client/Rendering/AppDraw/TwoDManager.cpp
   Client/Rendering/AppDraw/VisualEngine.cpp
 )
