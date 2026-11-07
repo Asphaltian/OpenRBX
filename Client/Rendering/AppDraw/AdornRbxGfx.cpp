@@ -57,6 +57,25 @@ void AdornRbxGfx::line2d(const G3D::Vector2& from, const G3D::Vector2& to, const
 	twoDManager->FUN_0067dd70(from.x, getHeight() - 1 - from.y, to.x, getHeight() - 1 - to.y, color);
 }
 
+// STUB: ROBLOX 0x0066a580
+G3D::Vector2 AdornRbxGfx::drawFont2D(
+	const std::string& s,
+	const G3D::Vector2& position,
+	double size,
+	const G3D::Color4& color,
+	const G3D::Color4& outline,
+	XAlign xAlign,
+	YAlign yAlign,
+	Spacing spacing
+) const
+{
+	float x = position.x;
+	float y = getHeight() - 1 - position.y;
+	Ogre::Vector2 extent =
+		g_unk0x00949c80->FUN_0067e1e0(m_unk0x04, s, Ogre::Vector2(x, y), size, color, outline, xAlign, yAlign, spacing);
+	return G3D::Vector2(extent.x, extent.y);
+}
+
 // FUNCTION: ROBLOX 0x0066a620
 G3D::Vector2 AdornRbxGfx::get2DStringBounds(const std::string& s, double size, Spacing spacing) const
 {

@@ -54,6 +54,7 @@ public:
 
 private:
 	friend class RBX::AdornRbxGfx;
+	friend class RbxFont;
 
 	SceneManager* m_unk0x04;             // 0x04
 	Camera* m_unk0x08;                   // 0x08
