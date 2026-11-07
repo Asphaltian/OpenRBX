@@ -1,10 +1,14 @@
 #include "appdraw/AdornRbxGfx.h"
 
+#include "appdraw/RbxFont.h"
 #include "appdraw/VisualEngine.h"
 
 #include <OgreViewport.h>
 
 namespace RBX {
+
+// GLOBAL: ROBLOX 0x00949c80
+Ogre::RbxFont* g_unk0x00949c80;
 
 // FUNCTION: ROBLOX 0x0066a0d0
 int AdornRbxGfx::getWidth() const
@@ -51,6 +55,13 @@ void AdornRbxGfx::line2d(const G3D::Vector2& from, const G3D::Vector2& to, const
 {
 	Ogre::TwoDManager* twoDManager = m_unk0x04->m_unk0x14;
 	twoDManager->FUN_0067dd70(from.x, getHeight() - 1 - from.y, to.x, getHeight() - 1 - to.y, color);
+}
+
+// FUNCTION: ROBLOX 0x0066a620
+G3D::Vector2 AdornRbxGfx::get2DStringBounds(const std::string& s, double size, Spacing spacing) const
+{
+	Ogre::Vector2 bounds = g_unk0x00949c80->FUN_0067e0f0(s, size, spacing);
+	return G3D::Vector2(bounds.x, bounds.y);
 }
 
 // FUNCTION: ROBLOX 0x0066a660
