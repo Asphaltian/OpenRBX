@@ -1,14 +1,24 @@
 #include "appdraw/AdornRbxGfx.h"
 
+#include "appdraw/RbxEntity.h"
 #include "appdraw/RbxFont.h"
+#include "appdraw/RbxSceneNode.h"
 #include "appdraw/VisualEngine.h"
+#include "util/ContentProvider.h"
 
+#include <OgreMaterialManager.h>
+#include <OgreMeshManager.h>
+#include <OgreSceneManager.h>
 #include <OgreViewport.h>
+#include <stdio.h>
 
 namespace RBX {
 
-// GLOBAL: ROBLOX 0x00949c80
-Ogre::RbxFont* g_unk0x00949c80;
+// GLOBAL: ROBLOX 0x00949c7c
+Ogre::SharedPtr<Ogre::RbxFont> g_unk0x00949c7c;
+
+// GLOBAL: ROBLOX 0x00961334
+int g_unk0x00961334;
 
 // FUNCTION: ROBLOX 0x0066a0d0
 int AdornRbxGfx::getWidth() const
@@ -72,14 +82,14 @@ G3D::Vector2 AdornRbxGfx::drawFont2D(
 	float x = position.x;
 	float y = getHeight() - 1 - position.y;
 	Ogre::Vector2 extent =
-		g_unk0x00949c80->FUN_0067e1e0(m_unk0x04, s, Ogre::Vector2(x, y), size, color, outline, xAlign, yAlign, spacing);
+		g_unk0x00949c7c->FUN_0067e1e0(m_unk0x04, s, Ogre::Vector2(x, y), size, color, outline, xAlign, yAlign, spacing);
 	return G3D::Vector2(extent.x, extent.y);
 }
 
 // FUNCTION: ROBLOX 0x0066a620
 G3D::Vector2 AdornRbxGfx::get2DStringBounds(const std::string& s, double size, Spacing spacing) const
 {
-	Ogre::Vector2 bounds = g_unk0x00949c80->FUN_0067e0f0(s, size, spacing);
+	Ogre::Vector2 bounds = g_unk0x00949c7c->FUN_0067e0f0(s, size, spacing);
 	return G3D::Vector2(bounds.x, bounds.y);
 }
 
@@ -98,6 +108,151 @@ G3D::Rect2D AdornRbxGfx::getViewport() const
 	float width = viewport->getActualWidth();
 	float height = viewport->getActualHeight();
 	return G3D::Rect2D::xywh(left, top, width, height);
+}
+
+// STUB: ROBLOX 0x0066a810
+void AdornRbxGfx::setTexture(int stage, G3D::ReferenceCountedPointer<TextureProxyBase> texture)
+{
+	STUB(0x66a810);
+}
+
+// STUB: ROBLOX 0x0066a8f0
+G3D::Rect2D AdornRbxGfx::getTextureSize(G3D::ReferenceCountedPointer<TextureProxyBase> texture) const
+{
+	STUB(0x66a8f0);
+	return G3D::Rect2D();
+}
+
+// STUB: ROBLOX 0x0066aa60
+G3D::ReferenceCountedPointer<TextureProxyBase> AdornRbxGfx::createTextureProxy(const std::string& name)
+{
+	STUB(0x66aa60);
+	return G3D::ReferenceCountedPointer<TextureProxyBase>();
+}
+
+// STUB: ROBLOX 0x0066b510
+void AdornRbxGfx::prepareRenderPass()
+{
+	STUB(0x66b510);
+}
+
+// STUB: ROBLOX 0x0066c2b0
+void AdornRbxGfx::finishRenderPass()
+{
+	STUB(0x66c2b0);
+}
+
+// STUB: ROBLOX 0x0066c2f0
+void AdornRbxGfx::box(const G3D::AABox& box, const G3D::Color4& solid, const G3D::Color4& wire)
+{
+	STUB(0x66c2f0);
+}
+
+// STUB: ROBLOX 0x0066ca20
+void AdornRbxGfx::cylinderAlongX(float radius, float length, const G3D::Color4& solid, const G3D::Color4& wire)
+{
+	STUB(0x66ca20);
+}
+
+// STUB: ROBLOX 0x0066cf50
+void AdornRbxGfx::sphere(const G3D::Sphere& sphere, const G3D::Color4& solid, const G3D::Color4& wire)
+{
+	STUB(0x66cf50);
+}
+
+// STUB: ROBLOX 0x0066d350
+void AdornRbxGfx::quad(
+	const G3D::Vector3& v0,
+	const G3D::Vector3& v1,
+	const G3D::Vector3& v2,
+	const G3D::Vector3& v3,
+	const G3D::Color4& color
+)
+{
+	STUB(0x66d350);
+}
+
+// STUB: ROBLOX 0x0066da00
+void AdornRbxGfx::ray(const G3D::Ray& ray, const G3D::Color4& color, float scale)
+{
+	STUB(0x66da00);
+}
+
+// STUB: ROBLOX 0x0066df30
+AdornRbxGfx::~AdornRbxGfx()
+{
+	for (std::map<std::string, Ogre::MeshPtr>::const_iterator it = m_unk0x64.begin(); it != m_unk0x64.end(); ++it) {
+		Ogre::MeshManager::getSingleton().remove(it->second->getHandle());
+	}
+	m_unk0x64.clear();
+
+	m_unk0x04->m_unk0x04->getRootSceneNode()->removeAndDestroyChild(m_unk0x30->getName());
+	m_unk0x04->m_unk0x04->getRootSceneNode()->removeChild(m_unk0x34);
+	delete m_unk0x34;
+	delete m_unk0x70;
+
+	for (int i = 0; i < (int) m_unk0x78.size(); i++) {
+		Ogre::Entity* entity = static_cast<Ogre::Entity*>(m_unk0x78[i]->detachObject((unsigned short) 0));
+		m_unk0x04->m_unk0x04->destroyEntity(entity->getName());
+		m_unk0x04->m_unk0x04->destroySceneNode(m_unk0x78[i]->getName());
+	}
+	if (m_unk0x74) {
+		m_unk0x04->m_unk0x04->destroySceneNode(m_unk0x74->getName());
+	}
+	m_unk0x78.clear();
+	m_unk0x88.clear();
+}
+
+// STUB: ROBLOX 0x0066e3b0
+AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08("")
+{
+	m_unk0x04 = visualEngine;
+	if (g_unk0x00949c7c.isNull()) {
+		try {
+			g_unk0x00949c7c =
+				Ogre::RbxFont::FUN_0067e9d0(ContentProvider::singleton().getAssetFile("Fonts\\comics.fnt"));
+		}
+		catch (...) {
+		}
+	}
+
+	char name[8];
+	_snprintf(name, sizeof(name), "a3dr%d", g_unk0x00961334++);
+	m_unk0x30 = m_unk0x04->m_unk0x04->createSceneNode(name);
+	m_unk0x04->m_unk0x04->getRootSceneNode()->addChild(m_unk0x30);
+
+	m_unk0x34 = new Ogre::RbxSceneNode(visualEngine->m_unk0x04, std::string(name) + "opt");
+	m_unk0x04->m_unk0x04->getRootSceneNode()->addChild(m_unk0x34);
+
+	m_unk0x70 = new Ogre::RbxEntity();
+	m_unk0x70->m_unk0x244 = false;
+	m_unk0x70->m_unk0x246 = false;
+	m_unk0x70->FUN_00674e30(&m_unk0x04->m_unk0x18);
+	m_unk0x34->attachObject(m_unk0x70);
+
+	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().getByName("rbxdummymesh");
+	if (mesh.isNull()) {
+		mesh = Ogre::MeshManager::getSingleton().create("rbxdummymesh", "General");
+	}
+	m_unk0x70->FUN_00674e40(mesh);
+
+	_snprintf(name, sizeof(name), "loff%d", g_unk0x00961334 - 1);
+	m_unk0x38 = Ogre::MaterialManager::getSingleton().create(name, "General");
+	m_unk0x38->setLightingEnabled(false);
+}
+
+// STUB: ROBLOX 0x0066e8e0
+void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid, const G3D::Color4& wire)
+{
+	STUB(0x66e8e0);
+}
+
+void AdornRbxGfx::lineSegment(const G3D::LineSegment& segment, const G3D::Color4& color, float scale)
+{
+}
+
+void AdornRbxGfx::axes(const G3D::Color4& x, const G3D::Color4& y, const G3D::Color4& z, float scale)
+{
 }
 
 } // namespace RBX

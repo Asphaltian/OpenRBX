@@ -33,6 +33,7 @@ public:
 	CRobloxWnd(bool p_unk0x80);
 	virtual ~CRobloxWnd();
 
+	void FUN_0045f9f0();
 	void FUN_0045fc50(bool active);
 	void FUN_00460160(G3D::GWindow* window);
 	void FUN_00460430();

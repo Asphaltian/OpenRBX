@@ -1,6 +1,8 @@
 #include "util/UserInputBase.h"
 
 #include "rbxgraphics/TextureProxyBase.h"
+#include "util/ContentProvider.h"
+#include "util/TextureId.h"
 
 namespace RBX {
 
@@ -17,6 +19,12 @@ void UserInputBase::getNavKeys(NavKeys& navKeys) const
 	navKeys.left_asdw = keyDown(SDLK_a);
 	navKeys.right_asdw = keyDown(SDLK_d);
 	navKeys.space = keyDown(SDLK_SPACE);
+}
+
+// FUNCTION: ROBLOX 0x005d8c00
+void UserInputBase::init(Adorn* adorn)
+{
+	setCursorId(adorn, ContentId::fromAssets("Textures\\ArrowCursor.png"));
 }
 
 // STUB: ROBLOX 0x005d8ce0

@@ -1,6 +1,7 @@
 #ifndef APPDRAW_RBXENTITY_H
 #define APPDRAW_RBXENTITY_H
 
+#include "appdraw/VisualEngine.h"
 #include "decomp.h"
 
 #include <OgreAxisAlignedBox.h>
@@ -22,6 +23,9 @@ public:
 	virtual void _notifyCurrentCamera(Camera* cam);
 	virtual void _updateRenderQueue(RenderQueue* queue);
 
+	void FUN_00674e30(VisualEngine::Unk0x18* p_unk0x240);
+	void FUN_00674e40(MeshPtr mesh);
+
 	virtual void FUN_00676870(Camera* cam);
 	virtual void FUN_00674fd0(bool visible);
 
@@ -29,7 +33,9 @@ public:
 	// Ogre::RbxEntity::`scalar deleting destructor'
 
 private:
-	undefined4 m_unk0x240;                 // 0x240
+	friend class RBX::AdornRbxGfx;
+
+	VisualEngine::Unk0x18* m_unk0x240;     // 0x240
 	bool m_unk0x244;                       // 0x244
 	bool m_unk0x245;                       // 0x245
 	bool m_unk0x246;                       // 0x246

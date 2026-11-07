@@ -7,6 +7,18 @@
 
 namespace Ogre {
 
+// FUNCTION: ROBLOX 0x00674e30
+void RbxEntity::FUN_00674e30(VisualEngine::Unk0x18* p_unk0x240)
+{
+	m_unk0x240 = p_unk0x240;
+}
+
+// FUNCTION: ROBLOX 0x00674e40
+void RbxEntity::FUN_00674e40(MeshPtr mesh)
+{
+	mMesh = mesh;
+}
+
 // FUNCTION: ROBLOX 0x00674ea0
 void RbxEntity::_notifyCurrentCamera(Camera* cam)
 {

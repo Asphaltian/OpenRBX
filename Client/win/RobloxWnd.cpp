@@ -12,6 +12,7 @@
 #include "RenderSettings.h"
 #include "View.h"
 #include "Workspace.h"
+#include "appdraw/AdornRbxGfx.h"
 #include "appdraw/VisualEngine.h"
 #include "network/Players.h"
 #include "renderlib/Profiler.h"
@@ -46,6 +47,13 @@ BOOL CRobloxWnd::OnEraseBkgnd(CDC* pDC)
 		return CWnd::OnEraseBkgnd(pDC);
 	}
 	return TRUE;
+}
+
+// FUNCTION: ROBLOX 0x0045f9f0
+void CRobloxWnd::FUN_0045f9f0()
+{
+	m_unk0xa8.reset(new RBX::ViewNew::View(m_unk0x70));
+	m_unk0xac.reset(new RBX::AdornRbxGfx(m_unk0xb0));
 }
 
 // FUNCTION: ROBLOX 0x0045fc50
