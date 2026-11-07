@@ -6007,3 +6007,4 @@ address,type,symbol,name,module,size
 0068ea50,library,?find@?$_Tree@V?$_Tset_traits@EU?$less@E@std@@V?$allocator@E@2@$0A@@std@@@std@@QAE?AViterator@12@ABE@Z,,,
 00961458,global,"nullLightList___Ogre::RbxSceneManager::renderTextureShadowCasterQueueGroupObjects",,,
 0096146c,global,"nullLightList___Ogre::RbxSceneManager::renderTextureShadowReceiverQueueGroupObjects",,,
+0083d65c,global,??_7VisualEngine@Ogre@@6B@,,,

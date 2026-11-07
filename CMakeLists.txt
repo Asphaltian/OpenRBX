@@ -370,6 +370,7 @@ set(OPENRBX_RENDERLIB_SOURCES
 )
 set(OPENRBX_APPDRAW_CLIENT_SOURCES
   Client/Rendering/AppDraw/RbxSceneManager.cpp
+  Client/Rendering/AppDraw/VisualEngine.cpp
 )
 
 set(OPENRBX_APPDRAW_SOURCES
