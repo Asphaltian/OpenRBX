@@ -21,6 +21,37 @@ class RbxSceneNode : public SceneNode
 class RbxSubEntity : public SubEntity, public ShadowCaster
 {
 public:
+	// VTABLE: ROBLOX 0x0083de84
+	// SIZE 0x5c
+	class RbxSubEntityShadowRenderable : public ShadowRenderable
+	{
+	protected:
+		HardwareVertexBufferSharedPtr mPositionBuffer; // 0x38
+		HardwareVertexBufferSharedPtr mWBuffer;        // 0x44
+		const VertexData* mCurrentVertexData;          // 0x50
+		unsigned short mOriginalPosBufferBinding;      // 0x54
+		RbxSubEntity* mSubEntity;                      // 0x58
+
+	public:
+		RbxSubEntityShadowRenderable(
+			Entity* parent,
+			HardwareIndexBufferSharedPtr* indexBuffer,
+			const VertexData* vertexData,
+			bool createSeparateLightCap,
+			RbxSubEntity* subent,
+			bool isLightCap = false
+		);
+		~RbxSubEntityShadowRenderable();
+
+		void getWorldTransforms(Matrix4* xform) const;
+		const Quaternion& getWorldOrientation(void) const;
+		const Vector3& getWorldPosition(void) const;
+		bool isVisible(void) const;
+
+		// SYNTHETIC: ROBLOX 0x0067bac0
+		// Ogre::RbxSubEntity::RbxSubEntityShadowRenderable::`scalar deleting destructor'
+	};
+
 	RbxSubEntity(Entity* parent);
 	RbxSubEntity(Entity* parent, SubMesh* subMesh, int lodIndex);
 	virtual ~RbxSubEntity();
@@ -63,6 +94,7 @@ private:
 	std::vector<ShadowRenderable*> m_unk0x130; // 0x130
 };
 
+DECOMP_SIZE_ASSERT(RbxSubEntity::RbxSubEntityShadowRenderable, 0x5c)
 DECOMP_SIZE_ASSERT(SubEntity, 0xd8)
 DECOMP_SIZE_ASSERT(RbxSubEntity, 0x140)
 

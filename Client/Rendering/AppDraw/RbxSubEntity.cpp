@@ -2,6 +2,7 @@
 
 #include <OgreCamera.h>
 #include <OgreEntity.h>
+#include <OgreHardwareBufferManager.h>
 #include <OgreLogManager.h>
 #include <OgreSubMesh.h>
 #include <exception>
@@ -52,6 +53,79 @@ EdgeData* RbxSubEntity::getEdgeList(void)
 bool RbxSubEntity::hasEdgeList(void)
 {
 	throw std::exception("RBX RbxSubEntity::hasEdgeList(): should not be called");
+}
+
+// FUNCTION: ROBLOX 0x0067b5b0
+RbxSubEntity::RbxSubEntityShadowRenderable::RbxSubEntityShadowRenderable(
+	Entity* parent,
+	HardwareIndexBufferSharedPtr* indexBuffer,
+	const VertexData* vertexData,
+	bool createSeparateLightCap,
+	RbxSubEntity* subent,
+	bool isLightCap
+)
+	: mSubEntity(subent)
+{
+	mCurrentVertexData = vertexData;
+
+	mRenderOp.indexData = new IndexData();
+	mRenderOp.indexData->indexBuffer = *indexBuffer;
+	mRenderOp.indexData->indexStart = 0;
+
+	mRenderOp.vertexData = new VertexData();
+	mRenderOp.vertexData->vertexDeclaration->addElement(0, 0, VET_FLOAT3, VES_POSITION);
+	mOriginalPosBufferBinding = vertexData->vertexDeclaration->findElementBySemantic(VES_POSITION)->getSource();
+	mPositionBuffer = vertexData->vertexBufferBinding->getBuffer(mOriginalPosBufferBinding);
+	mRenderOp.vertexData->vertexBufferBinding->setBinding(0, mPositionBuffer);
+	if (!vertexData->hardwareShadowVolWBuffer.isNull()) {
+		mRenderOp.vertexData->vertexDeclaration->addElement(1, 0, VET_FLOAT1, VES_TEXTURE_COORDINATES, 0);
+		mWBuffer = vertexData->hardwareShadowVolWBuffer;
+		mRenderOp.vertexData->vertexBufferBinding->setBinding(1, mWBuffer);
+	}
+	mRenderOp.vertexData->vertexStart = vertexData->vertexStart;
+
+	if (isLightCap) {
+		mRenderOp.vertexData->vertexCount = vertexData->vertexCount;
+	}
+	else {
+		mRenderOp.vertexData->vertexCount = vertexData->vertexCount * 2;
+		if (createSeparateLightCap) {
+			mLightCap = new RbxSubEntityShadowRenderable(parent, indexBuffer, vertexData, false, subent, true);
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x0067b790
+RbxSubEntity::RbxSubEntityShadowRenderable::~RbxSubEntityShadowRenderable()
+{
+	delete mRenderOp.indexData;
+	delete mRenderOp.vertexData;
+	mRenderOp.indexData = NULL;
+	mRenderOp.vertexData = NULL;
+}
+
+// FUNCTION: ROBLOX 0x0067b850
+void RbxSubEntity::RbxSubEntityShadowRenderable::getWorldTransforms(Matrix4* xform) const
+{
+	mSubEntity->getWorldTransforms(xform);
+}
+
+// FUNCTION: ROBLOX 0x0067b860
+const Quaternion& RbxSubEntity::RbxSubEntityShadowRenderable::getWorldOrientation(void) const
+{
+	return mSubEntity->getWorldOrientation();
+}
+
+// FUNCTION: ROBLOX 0x0067b870
+const Vector3& RbxSubEntity::RbxSubEntityShadowRenderable::getWorldPosition(void) const
+{
+	return mSubEntity->getWorldPosition();
+}
+
+// FUNCTION: ROBLOX 0x0067b880
+bool RbxSubEntity::RbxSubEntityShadowRenderable::isVisible(void) const
+{
+	return mSubEntity->isVisible();
 }
 
 // STUB: ROBLOX 0x0067b890
