@@ -418,6 +418,10 @@ private:
 	// RBX::Name::doDeclare<&RBX::sOscillateMotorTool>
 	// TEMPLATE: ROBLOX 0x005d0360
 	// RBX::Name::doDeclare<&RBX::sLockTool>
+	// TEMPLATE: ROBLOX 0x005d06e0
+	// RBX::Name::doDeclare<&RBX::sNullTool>
+	// TEMPLATE: ROBLOX 0x005d0600
+	// RBX::Name::doDeclare<&RBX::sGrabTool>
 	template <const char* name>
 	static const Name& doDeclare()
 	{
@@ -773,6 +777,10 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sOscillateMotorTool>
 	// TEMPLATE: ROBLOX 0x005d0990
 	// RBX::Name::callDoDeclare<&RBX::sLockTool>
+	// TEMPLATE: ROBLOX 0x005d0a10
+	// RBX::Name::callDoDeclare<&RBX::sNullTool>
+	// TEMPLATE: ROBLOX 0x005d09f0
+	// RBX::Name::callDoDeclare<&RBX::sGrabTool>
 	template <const char* name>
 	static void callDoDeclare()
 	{
@@ -892,6 +900,10 @@ public:
 	// RBX::Named<RBX::SurfaceTool,&RBX::sOscillateMotorTool>::getName
 	// TEMPLATE: ROBLOX 0x005d1bc0
 	// RBX::Named<RBX::ModelTool,&RBX::sLockTool>::getName
+	// TEMPLATE: ROBLOX 0x00622b80
+	// RBX::Named<RBX::MouseCommand,&RBX::sNullTool>::getName
+	// TEMPLATE: ROBLOX 0x0063be80
+	// RBX::Named<RBX::MouseCommand,&RBX::sGrabTool>::getName
 	// clang-format on
 };
 

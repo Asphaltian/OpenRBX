@@ -3,6 +3,8 @@
 #include "appdraw/DrawAdorn.h"
 #include "humanoid/Humanoid.h"
 #include "rbxgraphics/Adorn.h"
+#include "tool/DragTool.h"
+#include "tool/GrabTool.h"
 #include "util/Sound.h"
 #include "util/SoundWorld.h"
 #include "v8datamodel/Commands.h"
@@ -52,6 +54,9 @@ char sHammerTool[] = "Hammer";
 
 // GLOBAL: ROBLOX 0x00948c9c
 char sLaserTool[] = "Laser";
+
+// GLOBAL: ROBLOX 0x00948ca8
+char sGrabTool[] = "Grab";
 
 // FUNCTION: ROBLOX 0x00639820
 void FlatTool::VTable0x40(Surface* surface)
@@ -293,6 +298,44 @@ MouseCommand* LaserTool::onMouseDown(const UIEvent& uiEvent)
 		m_unk0x20 = 4;
 	}
 	return this;
+}
+
+// FUNCTION: ROBLOX 0x0063bce0
+void GrabTool::onMouseHover(const UIEvent& uiEvent)
+{
+	PartInstance* part = getUnlockedPartByLocalCharacter(uiEvent);
+	if (!part) {
+		cursor = "ArrowFarCursor";
+	}
+	else if (part->getPartLocked()) {
+		cursor = "ArrowCursor";
+	}
+	else {
+		cursor = "DragCursor";
+	}
+}
+
+// FUNCTION: ROBLOX 0x0063bd40
+GrabTool::~GrabTool()
+{
+}
+
+// FUNCTION: ROBLOX 0x0063bda0
+GrabTool::GrabTool(Workspace* workspace) : Named<MouseCommand, sGrabTool>(workspace), cursor("ArrowCursor")
+{
+}
+
+// FUNCTION: ROBLOX 0x0063bea0
+MouseCommand* GrabTool::onMouseDown(const UIEvent& uiEvent)
+{
+	G3D::Vector3 hitWorld;
+	PartInstance* part = getUnlockedPartByLocalCharacter(uiEvent, hitWorld);
+	if (part) {
+		std::vector<Instance*> dragInstances;
+		dragInstances.push_back(getTopSelectable3d(part));
+		return DragTool::onMouseDown(part, hitWorld, dragInstances, uiEvent, workspace);
+	}
+	return NULL;
 }
 
 } // namespace RBX

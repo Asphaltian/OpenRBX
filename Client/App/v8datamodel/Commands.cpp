@@ -3,7 +3,9 @@
 #include "gui/GUI.h"
 #include "network/Player.h"
 #include "network/Players.h"
+#include "tool/GrabTool.h"
 #include "tool/MegaDragger.h"
+#include "tool/NullTool.h"
 #include "tool/ToolsArrow.h"
 #include "tool/ToolsSurface.h"
 #include "util/Math.h"
@@ -34,6 +36,8 @@ template class RBX::TToolVerb<RBX::RightMotorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::LeftMotorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::OscillateMotorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::LockTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::NullTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::GrabTool, RBX::RunStateVerb>;
 
 namespace RBX {
 

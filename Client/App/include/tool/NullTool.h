@@ -12,7 +12,35 @@ namespace RBX {
 
 class Workspace;
 
+extern char sNullTool[];
 extern char sNewNullTool[];
+
+// SIZE 0x20
+class NullTool : public Named<MouseCommand, sNullTool>
+{
+private:
+	// FUNCTION: ROBLOX 0x00622760
+	virtual const std::string getCursorName() const { return "ArrowFarCursor"; }
+
+public:
+	NullTool(Workspace* workspace);
+	virtual ~NullTool() {}
+
+	// FUNCTION: ROBLOX 0x00622ac0
+	virtual MouseCommand* isSticky() const { return new NullTool(workspace); }
+
+	// FUNCTION: ROBLOX 0x00622820 FOLDED
+	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent)
+	{
+		releaseCapture();
+		return this;
+	}
+
+	// SYNTHETIC: ROBLOX 0x006229f0
+	// RBX::NullTool::`scalar deleting destructor'
+};
+
+DECOMP_SIZE_ASSERT(NullTool, 0x20)
 
 // SIZE 0x4c
 class NewNullTool : public Named<MouseCommand, sNewNullTool>

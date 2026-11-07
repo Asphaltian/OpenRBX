@@ -12,6 +12,9 @@
 
 namespace RBX {
 
+// GLOBAL: ROBLOX 0x0094275c
+char sNullTool[] = "NullTool";
+
 char sNewNullTool[] = "NewNullTool";
 
 // FUNCTION: WEBSERVICE 0x100c5000
@@ -63,6 +66,11 @@ MouseCommand* NewNullTool::onMouseDown(const UIEvent& uiEvent)
 	}
 
 	return this;
+}
+
+// FUNCTION: ROBLOX 0x006229d0
+NullTool::NullTool(Workspace* workspace) : Named<MouseCommand, sNullTool>(workspace)
+{
 }
 
 // FUNCTION: WEBSERVICE 0x100c5240
