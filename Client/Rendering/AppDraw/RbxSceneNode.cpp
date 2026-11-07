@@ -1,5 +1,8 @@
 #include "appdraw/RbxSceneNode.h"
 
+#include <OgreMovableObject.h>
+#include <OgreRenderQueue.h>
+#include <OgreSceneManager.h>
 #include <stdexcept>
 
 namespace Ogre {
@@ -7,13 +10,16 @@ namespace Ogre {
 // GLOBAL: ROBLOX 0x009613c4
 std::map<const SubMesh*, Sphere>* g_unk0x009613c4;
 
-// STUB: ROBLOX 0x0067a270
+// FUNCTION: ROBLOX 0x0067a270
 void RbxSceneNode::_update(bool updateChildren, bool parentHasChanged)
 {
-	STUB(0x67a270);
+	mDerivedOrientation = mOrientation;
+	mDerivedPosition = mPosition;
+	mDerivedScale = mScale;
+	mWorldAABB.setExtents(-10000.0f, -10000.0f, -10000.0f, 10000.0f, 10000.0f, 10000.0f);
 }
 
-// STUB: ROBLOX 0x0067a9e0
+// FUNCTION: ROBLOX 0x0067a9e0
 void RbxSceneNode::_findVisibleObjects(
 	Camera* cam,
 	RenderQueue* queue,
@@ -23,13 +29,56 @@ void RbxSceneNode::_findVisibleObjects(
 	bool onlyShadowCasters
 )
 {
-	STUB(0x67a9e0);
+	ObjectMap::iterator iobj;
+	ObjectMap::iterator iobjend = mObjectsByName.end();
+	for (iobj = mObjectsByName.begin(); iobj != iobjend; ++iobj) {
+		iobj->second->_notifyCurrentCamera(cam);
+		if (iobj->second->isVisible() && (!onlyShadowCasters || iobj->second->getCastShadows())) {
+			iobj->second->_updateRenderQueue(queue);
+
+			if (visibleBounds) {
+				visibleBounds->merge(
+					iobj->second->getWorldBoundingBox(true), iobj->second->getWorldBoundingSphere(true), cam
+				);
+			}
+		}
+	}
+
+	if (includeChildren) {
+		ChildNodeMap::iterator child, childend;
+		childend = mChildren.end();
+		for (child = mChildren.begin(); child != childend; ++child) {
+			SceneNode* sceneChild = static_cast<SceneNode*>(child->second);
+			sceneChild->_findVisibleObjects(
+				cam, queue, visibleBounds, includeChildren, displayNodes, onlyShadowCasters
+			);
+		}
+	}
+
+	if (displayNodes) {
+		queue->addRenderable(this);
+	}
+
+	if (mShowBoundingBox || (mCreator && mCreator->getShowBoundingBoxes())) {
+		_addBoundingBoxToQueue(queue);
+	}
 }
 
-// STUB: ROBLOX 0x0067abc0
+// FUNCTION: ROBLOX 0x0067abc0
 void RbxSceneNode::_updateBounds(void)
 {
-	STUB(0x67abc0);
+	mWorldAABB.setNull();
+
+	ObjectMap::iterator i;
+	for (i = mObjectsByName.begin(); i != mObjectsByName.end(); ++i) {
+		mWorldAABB.merge(i->second->getWorldBoundingBox(true));
+	}
+
+	ChildNodeMap::iterator child;
+	for (child = mChildren.begin(); child != mChildren.end(); ++child) {
+		SceneNode* sceneChild = static_cast<SceneNode*>(child->second);
+		mWorldAABB.merge(sceneChild->_getWorldAABB());
+	}
 }
 
 // FUNCTION: ROBLOX 0x0067ac90
