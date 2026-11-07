@@ -388,6 +388,16 @@ private:
 	// TEMPLATE: WEBSERVICE 0x101a9ff0
 	// TEMPLATE: ROBLOX 0x004d3130
 	// RBX::Name::doDeclare<&RBX::Network::sReplicator>
+	// TEMPLATE: ROBLOX 0x005cfd40
+	// RBX::Name::doDeclare<&RBX::sFillTool>
+	// TEMPLATE: ROBLOX 0x005cfdb0
+	// RBX::Name::doDeclare<&RBX::sDropperTool>
+	// TEMPLATE: ROBLOX 0x005cfe20
+	// RBX::Name::doDeclare<&RBX::sModelSetPrimaryPartTool>
+	// TEMPLATE: ROBLOX 0x005d0520
+	// RBX::Name::doDeclare<&RBX::sHammerTool>
+	// TEMPLATE: ROBLOX 0x005d0590
+	// RBX::Name::doDeclare<&RBX::sLaserTool>
 	template <const char* name>
 	static const Name& doDeclare()
 	{
@@ -713,6 +723,16 @@ private:
 	// TEMPLATE: WEBSERVICE 0x101aa0c0
 	// TEMPLATE: ROBLOX 0x004d31f0
 	// RBX::Name::callDoDeclare<&RBX::Network::sReplicator>
+	// TEMPLATE: ROBLOX 0x005d08b0
+	// RBX::Name::callDoDeclare<&RBX::sFillTool>
+	// TEMPLATE: ROBLOX 0x005d08c0
+	// RBX::Name::callDoDeclare<&RBX::sDropperTool>
+	// TEMPLATE: ROBLOX 0x005d08d0
+	// RBX::Name::callDoDeclare<&RBX::sModelSetPrimaryPartTool>
+	// TEMPLATE: ROBLOX 0x005d09d0
+	// RBX::Name::callDoDeclare<&RBX::sHammerTool>
+	// TEMPLATE: ROBLOX 0x005d09e0
+	// RBX::Name::callDoDeclare<&RBX::sLaserTool>
 	template <const char* name>
 	static void callDoDeclare()
 	{
@@ -802,6 +822,16 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1012a650
 	// TEMPLATE: ROBLOX 0x0066a060
 	// RBX::Named<RBX::Flying,&RBX::sFreefall>::getName
+	// TEMPLATE: ROBLOX 0x005d1a30
+	// RBX::Named<RBX::PartTool,&RBX::sModelSetPrimaryPartTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1ca0
+	// RBX::Named<RBX::PartTool,&RBX::sFillTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1e20
+	// RBX::Named<RBX::PartTool,&RBX::sDropperTool>::getName
+	// TEMPLATE: ROBLOX 0x005d22b0
+	// RBX::Named<RBX::MouseCommand,&RBX::sHammerTool>::getName
+	// TEMPLATE: ROBLOX 0x005d26e0
+	// RBX::Named<RBX::MouseCommand,&RBX::sLaserTool>::getName
 	// clang-format on
 };
 

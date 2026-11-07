@@ -4,6 +4,8 @@
 #include "network/Player.h"
 #include "network/Players.h"
 #include "tool/MegaDragger.h"
+#include "tool/ToolsArrow.h"
+#include "tool/ToolsSurface.h"
 #include "util/Math.h"
 #include "util/Sound.h"
 #include "v8datamodel/Backpack.h"
@@ -12,8 +14,16 @@
 #include "v8datamodel/Feature.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/Selection.h"
+#include "v8datamodel/ToolsPart.h"
 #include "v8world/SpatialHash.h"
 #include "v8world/World.h"
+
+template class RBX::TToolVerb<RBX::ArrowTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::ModelSetPrimaryPartTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::FillTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::DropperTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::HammerTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::LaserTool, RBX::RunStateVerb>;
 
 namespace RBX {
 

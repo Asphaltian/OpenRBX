@@ -117,7 +117,7 @@ public:
 	Workspace(IDataState* dataState);
 
 	World* getWorld() const { return world.get(); }
-	MouseCommand* getCurrentMouseCommand();
+	MouseCommand* getCurrentMouseCommand() { return currentCommand.get(); }
 	void cancelMouseCommand();
 	IDataState& getDataState() const { return *dataState; }
 

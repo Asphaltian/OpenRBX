@@ -2,12 +2,14 @@
 #define V8DATAMODEL_COMMANDS_H
 
 #include "decomp.h"
+#include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/Workspace.h"
 #include "v8tree/Service.h"
 #include "v8tree/Verb.h"
 #include "v8world/Controller.h"
 
 #include <string>
+#include <typeinfo>
 
 namespace RBX {
 
@@ -134,6 +136,58 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(RunStateVerb, 0x1c)
+
+template <class T, class Base>
+class TToolVerb : public Base
+{
+public:
+	TToolVerb(DataModel* dataModel) : Base(T::name().toString() + "Tool", dataModel) {}
+
+	virtual bool isChecked() const // vtable+0x0c
+	{
+		MouseCommand* command = this->dataModel->getWorkspace()->getCurrentMouseCommand();
+		if (command) {
+			return typeid(T) == typeid(*command);
+		}
+		return false;
+	}
+
+	virtual void doIt(IDataState* dataState) // vtable+0x10
+	{
+		this->dataModel->getWorkspace()->setMouseCommand(VTable0x14());
+	}
+
+	virtual MouseCommand* VTable0x14() { return new T(this->dataModel->getWorkspace()); } // vtable+0x14
+
+	// clang-format off
+	// TEMPLATE: ROBLOX 0x005d0a40
+	// RBX::TToolVerb<RBX::ArrowTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d0a70
+	// RBX::TToolVerb<RBX::ArrowTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d1200
+	// RBX::TToolVerb<RBX::LaserTool,RBX::RunStateVerb>::doIt
+	// TEMPLATE: ROBLOX 0x005d1990
+	// RBX::TToolVerb<RBX::ModelSetPrimaryPartTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d19c0
+	// RBX::TToolVerb<RBX::ModelSetPrimaryPartTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d1be0
+	// RBX::TToolVerb<RBX::FillTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1cc0
+	// RBX::TToolVerb<RBX::FillTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d1d30
+	// RBX::TToolVerb<RBX::DropperTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1db0
+	// RBX::TToolVerb<RBX::DropperTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d20c0
+	// RBX::TToolVerb<RBX::HammerTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d2220
+	// RBX::TToolVerb<RBX::HammerTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d2610
+	// RBX::TToolVerb<RBX::LaserTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d2640
+	// RBX::TToolVerb<RBX::LaserTool,RBX::RunStateVerb>::VTable0x14
+	// clang-format on
+};
 
 // SIZE 0x24
 class EditSelectionVerb : public Verb

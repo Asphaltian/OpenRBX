@@ -36,7 +36,7 @@ public:
 	// RBX::PartTool::~PartTool
 
 	// SYNTHETIC: ROBLOX 0x005d1d90
-	// RBX::PartTool::`scalar deleting destructor'
+	// RBX::FillTool::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(PartTool, 0x28)
