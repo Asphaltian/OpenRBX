@@ -381,6 +381,12 @@ void DataModel::initializeContents()
 	create<JointsService>();
 }
 
+// STUB: ROBLOX 0x00592680
+void DataModel::renderPass3dAdorn(Adorn* adorn)
+{
+	STUB(0x592680);
+}
+
 // FUNCTION: WEBSERVICE 0x100793b0
 // FUNCTION: ROBLOX 0x005926f0
 void DataModel::clearContents()
@@ -444,6 +450,12 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > DataModel::g
 	serializer.loadInstances(root.get(), *result);
 
 	return result;
+}
+
+// STUB: ROBLOX 0x00592dc0
+void DataModel::renderPass2d(Adorn* adorn, IMetric* metric)
+{
+	STUB(0x592dc0);
 }
 
 void DataModel::raiseClose()

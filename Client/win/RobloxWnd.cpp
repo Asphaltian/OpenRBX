@@ -1,7 +1,9 @@
 // clang-format off
 #include <OgreAnimation.h>
 #include <OgreCamera.h>
+#include <OgreRenderTarget.h>
 #include <OgreSceneManager.h>
+#include <OgreTimer.h>
 // clang-format on
 
 #include "RobloxWnd.h"
@@ -11,8 +13,12 @@
 #include "View.h"
 #include "Workspace.h"
 #include "appdraw/VisualEngine.h"
+#include "network/Players.h"
 #include "renderlib/Profiler.h"
+#include "renderlib/RenderStats.h"
 #include "renderlibnew/Chunk.h"
+#include "util/RunStateOwner.h"
+#include "util/scopedassign.h"
 #include "util/standardout.h"
 #include "v8datamodel/GlobalSettings.h"
 
@@ -22,6 +28,9 @@
 #include <stdexcept>
 
 static ATL::CCriticalSection g_unk0x0095448c;
+
+// GLOBAL: ROBLOX 0x00954484
+static bool g_unk0x00954484;
 
 // FUNCTION: ROBLOX 0x0045f4d0
 LRESULT CRobloxWnd::FUN_0045f4d0(WPARAM wParam, LPARAM lParam)
@@ -97,7 +106,13 @@ void CRobloxWnd::FUN_00460160(G3D::GWindow* window)
 // STUB: ROBLOX 0x00460430
 void CRobloxWnd::FUN_00460430()
 {
-	STUB(0x460430);
+	if (m_unk0x82) {
+		RenderStats& stats = m_unk0xa8->getRenderStats();
+		stats.swapBuffer.tick();
+		m_unk0x9c->swapGLBuffers();
+		m_unk0x82 = false;
+		stats.swapBuffer.tock();
+	}
 }
 
 // FUNCTION: ROBLOX 0x004604c0
@@ -154,10 +169,27 @@ void CRobloxWnd::InvalidateRunView()
 	InvalidateRgn(NULL, FALSE);
 }
 
+// STUB: ROBLOX 0x00460d30
+void CRobloxWnd::FUN_00460d30()
+{
+	STUB(0x460d30);
+}
+
 // STUB: ROBLOX 0x00461050
 void CRobloxWnd::OnTimer(UINT_PTR nIDEvent)
 {
-	STUB(0x461050);
+	switch (nIDEvent) {
+	case 0:
+		FUN_00460430();
+		FUN_00460d30();
+		break;
+	case 1:
+		if (m_unk0x70 && m_unk0x7c) {
+			m_unk0x7c->FUN_0046d0a0();
+		}
+		break;
+	}
+	CWnd::OnTimer(nIDEvent);
 }
 
 // STUB: ROBLOX 0x004610a0
@@ -320,10 +352,134 @@ void CRobloxWnd::OnSize(UINT nType, int cx, int cy)
 	STUB(0x461950);
 }
 
+// STUB: ROBLOX 0x004622d0
+void CRobloxWnd::FUN_004622d0(bool p_unk0x04)
+{
+	STUB(0x4622d0);
+}
+
+// STUB: ROBLOX 0x00462450
+void CRobloxWnd::FUN_00462450(bool p_unk0x04)
+{
+	if (RBX::Network::Players::findLocalCharacter(m_unk0x70.get()) == NULL) {
+		Ogre::g_unk0x00949dd0 = false;
+	}
+	else {
+		Ogre::g_unk0x00949dd0 =
+			CRenderSettings::singleton().m_unk0x108 != CRenderSettings::c_frameRateManagerModeUnk0x2;
+	}
+
+	Ogre::Timer timer;
+	RenderStats& stats = m_unk0xa8->getRenderStats();
+	stats.cpuRenderTotal.tick();
+	timer.reset();
+	float milliseconds;
+	{
+		RBX::DataModel::Lock lock(m_unk0x70);
+		m_unk0x70->renderPass2d(m_unk0xac.get(), this);
+		m_unk0x70->renderPass3dAdorn(m_unk0xac.get());
+		m_unk0xac->prepareRenderPass();
+		m_unk0xa8->render(m_unk0xb0);
+		m_unk0xac->finishRenderPass();
+		milliseconds = timer.getMilliseconds();
+	}
+	stats.cpuRenderTotal.tock();
+
+	if (Ogre::g_unk0x00949dd0) {
+		m_unk0xb0->m_unk0x18.FUN_00671ef0(0).m_unk0x00 = milliseconds;
+	}
+
+	RenderStats& renderStats = m_unk0xa8->getRenderStats();
+	renderStats.render2D.tick();
+	if (m_unk0x70) {
+		RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
+		if (runService) {
+			runService->runViewValid(this);
+		}
+	}
+	renderStats.render2D.tock();
+}
+
+// STUB: ROBLOX 0x00462630
+void CRobloxWnd::FUN_00462630(bool p_unk0x04)
+{
+	if (!m_unk0x81) {
+		RBX::ScopedAssign<bool> rendering(m_unk0x81, true);
+		if (!m_unk0x70) {
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		}
+		else if (!m_unk0xa8.get()) {
+			RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
+			if (runService) {
+				runService->runViewValid(this);
+			}
+		}
+		else if (m_unk0x5c == 2) {
+			FUN_004622d0(p_unk0x04);
+		}
+		else {
+			FUN_00462450(p_unk0x04);
+		}
+	}
+}
+
+// STUB: ROBLOX 0x00462710
+bool CRobloxWnd::FUN_00462710()
+{
+	if (g_unk0x00954484) {
+		g_unk0x00954484 = false;
+	}
+	else {
+		bool resized = false;
+		{
+			CPaintDC dc(this);
+			const RECT& paint = dc.m_ps.rcPaint;
+			if (paint.right != 0 || paint.left != 0 || paint.top != 0 || paint.bottom != 0) {
+				Ogre::RenderTarget* target = m_unk0xb0->m_unk0x0c;
+				if (paint.right - paint.left + 1 < (int) target->getWidth() ||
+					paint.bottom - paint.top + 1 < (int) target->getHeight()) {
+					resized = true;
+				}
+			}
+		}
+		if (resized) {
+			CWnd* frame = this;
+			while (frame->GetParent() != NULL) {
+				frame = frame->GetParent();
+			}
+			frame->InvalidateRgn(NULL, FALSE);
+			g_unk0x00954484 = true;
+			return false;
+		}
+	}
+	FUN_00462630(true);
+	return true;
+}
+
+// STUB: ROBLOX 0x00462890
+bool CRobloxWnd::FUN_00462890()
+{
+	STUB(0x462890);
+	return false;
+}
+
 // STUB: ROBLOX 0x00462a50
 void CRobloxWnd::OnPaint()
 {
-	STUB(0x462a50);
+	bool painted;
+	if (m_unk0x5c == 2) {
+		painted = FUN_00462890();
+	}
+	else {
+		painted = FUN_00462710();
+	}
+	if (!painted && m_unk0x70) {
+		RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
+		if (runService) {
+			runService->runViewValid(this);
+		}
+	}
 }
 
 // STUB: ROBLOX 0x00462be0

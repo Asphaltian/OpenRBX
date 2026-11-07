@@ -36,8 +36,14 @@ public:
 	void FUN_0045fc50(bool active);
 	void FUN_00460160(G3D::GWindow* window);
 	void FUN_00460430();
+	void FUN_00460d30();
 	void FUN_004610a0(int width, int height);
 	void FUN_00461420(int width, int height);
+	void FUN_004622d0(bool p_unk0x04);
+	void FUN_00462450(bool p_unk0x04);
+	void FUN_00462630(bool p_unk0x04);
+	bool FUN_00462710();
+	bool FUN_00462890();
 	void FUN_00463c30(CWorkspace* workspace);
 
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
