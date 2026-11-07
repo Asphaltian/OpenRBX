@@ -368,6 +368,10 @@ set(OPENRBX_RENDERLIB_SOURCES
   Client/Rendering/RenderLib/RenderSurface.cpp
   Client/Rendering/RenderLib/TextureProxy.cpp
 )
+set(OPENRBX_APPDRAW_CLIENT_SOURCES
+  Client/Rendering/AppDraw/RbxSceneManager.cpp
+)
+
 set(OPENRBX_APPDRAW_SOURCES
   Client/Rendering/AppDraw/AdornG3D.cpp
   Client/Rendering/AppDraw/Draw.cpp
@@ -496,6 +500,12 @@ add_engine_library(appdraw
   SOURCES ${OPENRBX_APPDRAW_SOURCES}
 )
 
+add_engine_library(appdraw_client
+  DEFINITIONS _RELEASE
+  OPTIONS /O2
+  SOURCES ${OPENRBX_APPDRAW_CLIENT_SOURCES}
+)
+
 add_engine_library(renderlib
   OPTIONS /O2 /Wp64
   SOURCES ${OPENRBX_RENDERLIB_SOURCES}
@@ -517,8 +527,8 @@ add_engine_library(renderlibnew
   SOURCES ${OPENRBX_RENDERLIBNEW_SOURCES}
 )
 
-list(REMOVE_ITEM OPENRBX_ENGINE_LIBRARIES rbxviewnew renderlibnew)
-foreach(lib rbxviewnew renderlibnew)
+list(REMOVE_ITEM OPENRBX_ENGINE_LIBRARIES rbxviewnew renderlibnew appdraw_client)
+foreach(lib rbxviewnew renderlibnew appdraw_client)
   if (TARGET ${lib})
     target_include_directories(${lib} PRIVATE ${OPENRBX_RENDERLIBNEW_INCLUDE_DIRS} "${PROJECT_SOURCE_DIR}/Client/Rendering/OgreSDK/include")
   endif()
@@ -702,7 +712,7 @@ if (MSVC_FOR_DECOMP)
   )
 
   set(OPENRBX_CLIENT_ENGINE_LIBRARIES)
-  foreach(lib rbxview renderlib rbxviewnew renderlibnew network app appdraw lua)
+  foreach(lib rbxview renderlib rbxviewnew renderlibnew network app appdraw appdraw_client lua)
     if (TARGET ${lib})
       list(APPEND OPENRBX_CLIENT_ENGINE_LIBRARIES ${lib})
     endif()
