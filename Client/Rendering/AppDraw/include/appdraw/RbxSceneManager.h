@@ -1,22 +1,13 @@
 #ifndef APPDRAW_RBXSCENEMANAGER_H
 #define APPDRAW_RBXSCENEMANAGER_H
 
+#include "appdraw/RbxSky.h"
 #include "decomp.h"
 
 #include <OgreSceneManager.h>
 #include <OgreSceneManagerEnumerator.h>
 
 namespace Ogre {
-
-// SIZE 0xc4
-class RbxSky
-{
-public:
-	virtual ~RbxSky(); // vtable+0x00
-
-private:
-	undefined m_unk0x04[0xc4 - 0x04]; // 0x04
-};
 
 // SIZE 0x8ab0
 class RbxSceneManager : public SceneManager
