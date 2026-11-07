@@ -44,6 +44,9 @@ char sLeftMotorTool[] = "LeftMotor";
 // GLOBAL: ROBLOX 0x00948c34
 char sOscillateMotorTool[] = "OscillateMotor";
 
+// GLOBAL: ROBLOX 0x00948c60
+char sLockTool[] = "Lock";
+
 // GLOBAL: ROBLOX 0x00948c90
 char sHammerTool[] = "Hammer";
 
@@ -179,6 +182,50 @@ void InletTool::VTable0x40(Surface* surface)
 	surface->setSurfaceType(INLET);
 	surface->getPartInstance()->join();
 	ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+}
+
+// FUNCTION: ROBLOX 0x00639e70
+void ModelTool::render3dAdorn(Adorn* adorn)
+{
+	if (m_unk0x20) {
+		if (IRenderable* renderable = dynamic_cast<IRenderable*>(m_unk0x20.get())) {
+			renderable->render3dSelect(adorn, SELECT_LIMIT);
+		}
+	}
+}
+
+// STUB: ROBLOX 0x00639f00
+const std::string LockTool::getCursorName() const
+{
+	if (m_unk0x20 && PartInstance::getLocked(m_unk0x20.get())) {
+		return "UnlockCursor";
+	}
+	return "LockCursor";
+}
+
+// FUNCTION: ROBLOX 0x00639f50
+ModelTool::ModelTool(Workspace* workspace) : MouseCommand(workspace)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063a200
+void ModelTool::onMouseHover(const UIEvent& uiEvent)
+{
+	PartInstance* part = getPart(uiEvent);
+	if (part) {
+		m_unk0x20 = shared_from(Workspace::findTopInstance(part));
+	}
+}
+
+// FUNCTION: ROBLOX 0x0063a3d0
+MouseCommand* LockTool::onMouseDown(const UIEvent& uiEvent)
+{
+	if (m_unk0x20) {
+		bool locked = PartInstance::getLocked(m_unk0x20.get());
+		PartInstance::setLocked(m_unk0x20.get(), !locked);
+		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+	}
+	return this;
 }
 
 // FUNCTION: ROBLOX 0x0063b8d0

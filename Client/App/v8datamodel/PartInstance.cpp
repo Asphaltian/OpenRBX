@@ -1001,6 +1001,19 @@ void PartInstance::setPartLocked(bool value)
 	}
 }
 
+// FUNCTION: ROBLOX 0x005b2640
+void PartInstance::setLocked(Instance* instance, bool value)
+{
+	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
+		part->setPartLocked(value);
+	}
+	else {
+		for (unsigned int i = 0; i < instance->numChildren(); i++) {
+			setLocked(instance->getChild(i), value);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1009fbb0
 // FUNCTION: ROBLOX 0x005b26e0
 void PartInstance::setTransparency(float value)

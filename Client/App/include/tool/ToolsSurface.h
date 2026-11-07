@@ -12,6 +12,7 @@
 namespace RBX {
 
 class Adorn;
+class Instance;
 class PartInstance;
 class Surface;
 class Workspace;
@@ -25,6 +26,7 @@ extern char sHingeTool[];
 extern char sRightMotorTool[];
 extern char sLeftMotorTool[];
 extern char sOscillateMotorTool[];
+extern char sLockTool[];
 extern char sHammerTool[];
 extern char sLaserTool[];
 
@@ -205,6 +207,35 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(OscillateMotorTool, 0x4c)
+
+// SIZE 0x28
+class ModelTool : public MouseCommand
+{
+protected:
+	boost::shared_ptr<Instance> m_unk0x20; // 0x20
+
+	virtual void render3dAdorn(Adorn* adorn);
+	virtual void onMouseHover(const UIEvent& uiEvent);
+
+public:
+	ModelTool(Workspace* workspace);
+};
+
+DECOMP_SIZE_ASSERT(ModelTool, 0x28)
+
+// SIZE 0x28
+class LockTool : public Named<ModelTool, sLockTool>
+{
+private:
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent) { return this; }
+	virtual const std::string getCursorName() const;
+
+public:
+	LockTool(Workspace* workspace) : Named<ModelTool, sLockTool>(workspace) {}
+};
+
+DECOMP_SIZE_ASSERT(LockTool, 0x28)
 
 // SIZE 0x28
 class HammerTool : public Named<MouseCommand, sHammerTool>

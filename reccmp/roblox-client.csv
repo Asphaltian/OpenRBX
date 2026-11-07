@@ -5920,3 +5920,13 @@ address,type,symbol,name,module,size
 00939770,global,??_R0?AVOscillateMotorTool@RBX@@@8,,,
 0083a4bc,global,??_7SurfaceTool@RBX@@6BIRenderable@1@@,,,
 0083a4d4,global,??_7SurfaceTool@RBX@@6BINamed@1@@,,,
+005d0990,function,,,,5
+0082b620,global,??_7?$TToolVerb@VLockTool@RBX@@VRunStateVerb@2@@RBX@@6B@,,,
+0082b63c,global,??_7LockTool@RBX@@6BIRenderable@1@@,,,
+0082b654,global,??_7LockTool@RBX@@6BINamed@1@@,,,
+0095db20,global,"n___RBX::Name::doDeclare<&RBX::sLockTool>",,,
+0095db24,global,"??_B?1???$doDeclare@$1?sLockTool@RBX@@3PADA@Name@RBX@@CAABV01@XZ@51",,,
+0095dbb0,global,"flag___RBX::Name::declare<&RBX::sLockTool>",,,
+00939a78,global,??_R0?AVLockTool@RBX@@@8,,,
+0083a560,global,??_7ModelTool@RBX@@6BIRenderable@1@@,,,
+0083a57c,global,??_7ModelTool@RBX@@6BINamed@1@@,,,

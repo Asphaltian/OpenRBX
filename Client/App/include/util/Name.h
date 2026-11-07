@@ -416,6 +416,8 @@ private:
 	// RBX::Name::doDeclare<&RBX::sLeftMotorTool>
 	// TEMPLATE: ROBLOX 0x005d0210
 	// RBX::Name::doDeclare<&RBX::sOscillateMotorTool>
+	// TEMPLATE: ROBLOX 0x005d0360
+	// RBX::Name::doDeclare<&RBX::sLockTool>
 	template <const char* name>
 	static const Name& doDeclare()
 	{
@@ -769,6 +771,8 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sLeftMotorTool>
 	// TEMPLATE: ROBLOX 0x005d0960
 	// RBX::Name::callDoDeclare<&RBX::sOscillateMotorTool>
+	// TEMPLATE: ROBLOX 0x005d0990
+	// RBX::Name::callDoDeclare<&RBX::sLockTool>
 	template <const char* name>
 	static void callDoDeclare()
 	{
@@ -886,6 +890,8 @@ public:
 	// RBX::Named<RBX::SurfaceTool,&RBX::sLeftMotorTool>::getName
 	// TEMPLATE: ROBLOX 0x005d1880
 	// RBX::Named<RBX::SurfaceTool,&RBX::sOscillateMotorTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1bc0
+	// RBX::Named<RBX::ModelTool,&RBX::sLockTool>::getName
 	// clang-format on
 };
 

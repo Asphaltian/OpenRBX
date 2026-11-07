@@ -177,7 +177,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005d1170
 	// RBX::TToolVerb<RBX::WeldTool,RBX::RunStateVerb>::VTable0x14
 	// TEMPLATE: ROBLOX 0x005d1200
-	// RBX::TToolVerb<RBX::OscillateMotorTool,RBX::RunStateVerb>::doIt
+	// RBX::TToolVerb<RBX::LockTool,RBX::RunStateVerb>::doIt
 	// TEMPLATE: ROBLOX 0x005d1220
 	// RBX::TToolVerb<RBX::StudsTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d12e0
@@ -206,6 +206,10 @@ public:
 	// RBX::TToolVerb<RBX::ModelSetPrimaryPartTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d19c0
 	// RBX::TToolVerb<RBX::ModelSetPrimaryPartTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d1b20
+	// RBX::TToolVerb<RBX::LockTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1b50
+	// RBX::TToolVerb<RBX::LockTool,RBX::RunStateVerb>::VTable0x14
 	// TEMPLATE: ROBLOX 0x005d1be0
 	// RBX::TToolVerb<RBX::FillTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d1cc0
