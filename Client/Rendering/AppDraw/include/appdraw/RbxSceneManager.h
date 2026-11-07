@@ -81,10 +81,19 @@ protected:
 
 	friend class SceneMgrQueuedRenderableVisitor;
 
+	using SceneManager::getMovableObjectCollection;
+	MovableObjectCollection* getMovableObjectCollection(const String& typeName);
+
 	bool validatePassForRendering(const Pass* pass);
 	bool validateRenderableForRendering(const Pass* pass, const Renderable* rend);
 
 public:
+	using SceneManager::destroyInstancedGeometry;
+	using SceneManager::destroyMovableObject;
+	using SceneManager::destroyStaticGeometry;
+	using SceneManager::extractMovableObject;
+	using SceneManager::setShadowTextureConfig;
+
 	RbxSceneManager(const String& name);
 	~RbxSceneManager();
 
@@ -92,6 +101,184 @@ public:
 
 	void clearScene();
 	void destroyAllCameras();
+
+	virtual void setViewport(Viewport* vp);
+	virtual void renderObjects(
+		const QueuedRenderableCollection& objs,
+		QueuedRenderableCollection::OrganisationMode om,
+		bool doLightIteration,
+		const LightList* manualLightList = 0
+	);
+	virtual bool hasCamera(const String& name) const;
+	virtual Light* createLight(const String& name);
+	virtual Light* getLight(const String& name) const;
+	virtual bool hasLight(const String& name) const;
+	virtual void destroyLight(const String& name);
+	virtual void destroyLight(Light* light);
+	virtual void destroyAllLights(void);
+	virtual void _notifyLightsDirty(void);
+	virtual const LightList& _getLightsAffectingFrustum(void) const;
+	virtual bool hasSceneNode(const String& name) const;
+	virtual Entity* getEntity(const String& name) const;
+	virtual bool hasEntity(const String& name) const;
+	virtual void destroyEntity(Entity* ent);
+	virtual void destroyEntity(const String& name);
+	virtual void destroyAllEntities(void);
+	virtual ManualObject* createManualObject(const String& name);
+	virtual ManualObject* getManualObject(const String& name) const;
+	virtual bool hasManualObject(const String& name) const;
+	virtual void destroyManualObject(ManualObject* obj);
+	virtual void destroyManualObject(const String& name);
+	virtual void destroyAllManualObjects(void);
+	virtual BillboardChain* createBillboardChain(const String& name);
+	virtual BillboardChain* getBillboardChain(const String& name) const;
+	virtual bool hasBillboardChain(const String& name) const;
+	virtual void destroyBillboardChain(BillboardChain* obj);
+	virtual void destroyBillboardChain(const String& name);
+	virtual void destroyAllBillboardChains(void);
+	virtual RibbonTrail* createRibbonTrail(const String& name);
+	virtual RibbonTrail* getRibbonTrail(const String& name) const;
+	virtual bool hasRibbonTrail(const String& name) const;
+	virtual void destroyRibbonTrail(RibbonTrail* obj);
+	virtual void destroyRibbonTrail(const String& name);
+	virtual void destroyAllRibbonTrails(void);
+	virtual ParticleSystem* getParticleSystem(const String& name) const;
+	virtual bool hasParticleSystem(const String& name) const;
+	virtual void destroyParticleSystem(ParticleSystem* obj);
+	virtual void destroyParticleSystem(const String& name);
+	virtual void destroyAllParticleSystems(void);
+	virtual void _updateSceneGraph(Camera* cam);
+	virtual void _findVisibleObjects(Camera* cam, VisibleObjectsBoundsInfo* visibleBounds, bool onlyShadowCasters);
+	virtual void _renderVisibleObjects(void);
+	// FUNCTION: ROBLOX 0x00688480
+	virtual bool isSkyPlaneEnabled(void) const { return mSkyPlaneEnabled; }
+	// FUNCTION: ROBLOX 0x00688490
+	virtual SceneNode* getSkyPlaneNode(void) const { return mSkyPlaneNode; }
+	// FUNCTION: ROBLOX 0x006884a0
+	virtual const SkyPlaneGenParameters& getSkyPlaneGenParameters(void) const { return mSkyPlaneGenParameters; }
+	// FUNCTION: ROBLOX 0x006884b0
+	virtual bool isSkyBoxEnabled(void) const { return mSkyBoxEnabled; }
+	// FUNCTION: ROBLOX 0x006884c0
+	virtual SceneNode* getSkyBoxNode(void) const { return mSkyBoxNode; }
+	// FUNCTION: ROBLOX 0x006884d0
+	virtual const SkyBoxGenParameters& getSkyBoxGenParameters(void) const { return mSkyBoxGenParameters; }
+	// FUNCTION: ROBLOX 0x006884e0
+	virtual bool isSkyDomeEnabled(void) const { return mSkyDomeEnabled; }
+	// FUNCTION: ROBLOX 0x006884f0
+	virtual SceneNode* getSkyDomeNode(void) const { return mSkyDomeNode; }
+	// FUNCTION: ROBLOX 0x00688500
+	virtual const SkyDomeGenParameters& getSkyDomeGenParameters(void) const { return mSkyDomeGenParameters; }
+	virtual const ColourValue& getFogColour(void) const;
+	virtual Real getFogStart(void) const;
+	virtual Real getFogEnd(void) const;
+	virtual Real getFogDensity(void) const;
+	virtual BillboardSet* getBillboardSet(const String& name) const;
+	virtual bool hasBillboardSet(const String& name) const;
+	virtual void destroyBillboardSet(BillboardSet* set);
+	virtual void destroyBillboardSet(const String& name);
+	virtual void destroyAllBillboardSets(void);
+	virtual void setDisplaySceneNodes(bool display);
+	// FUNCTION: ROBLOX 0x00688510
+	virtual bool getDisplaySceneNodes(void) const { return mDisplayNodes; }
+	virtual AnimationState* getAnimationState(const String& animName) const;
+	virtual bool hasAnimationState(const String& name) const;
+	virtual void destroyAnimationState(const String& name);
+	virtual void destroyAllAnimationStates(void);
+	virtual RenderQueue* getRenderQueue(void);
+	virtual void addRenderQueueListener(RenderQueueListener* newListener);
+	virtual void addSpecialCaseRenderQueue(uint8 qid);
+	virtual void removeSpecialCaseRenderQueue(uint8 qid);
+	virtual void clearSpecialCaseRenderQueues(void);
+	virtual void setSpecialCaseRenderQueueMode(SpecialCaseRenderQueueMode mode);
+	virtual SpecialCaseRenderQueueMode getSpecialCaseRenderQueueMode(void);
+	virtual void setWorldGeometryRenderQueue(uint8 qid);
+	virtual uint8 getWorldGeometryRenderQueue(void);
+	virtual void showBoundingBoxes(bool bShow);
+	virtual bool getShowBoundingBoxes() const;
+	virtual void _notifyAutotrackingSceneNode(SceneNode* node, bool autoTrack);
+	virtual void destroyQuery(SceneQuery* query);
+	// FUNCTION: ROBLOX 0x00688520
+	virtual ShadowTechnique getShadowTechnique(void) const { return mShadowTechnique; }
+	// FUNCTION: ROBLOX 0x00688530
+	virtual void setShowDebugShadows(bool debug) { mDebugShadows = debug; }
+	// FUNCTION: ROBLOX 0x00688540
+	virtual bool getShowDebugShadows(void) const { return mDebugShadows; }
+	virtual const ColourValue& getShadowColour(void) const;
+	virtual void setShadowDirectionalLightExtrusionDistance(Real dist);
+	virtual Real getShadowDirectionalLightExtrusionDistance(void) const;
+	virtual void setShadowFarDistance(Real distance);
+	// FUNCTION: ROBLOX 0x00688550
+	virtual Real getShadowFarDistance(void) const { return mShadowFarDist; }
+	// FUNCTION: ROBLOX 0x00688560
+	virtual size_t getShadowIndexBufferSize(void) const { return mShadowIndexBufferSize; }
+	virtual void setShadowTextureConfig(
+		size_t shadowIndex, unsigned short width, unsigned short height, PixelFormat format
+	);
+	// FUNCTION: ROBLOX 0x00688570
+	virtual void setShadowDirLightTextureOffset(Real offset) { mShadowTextureOffset = offset; }
+	// FUNCTION: ROBLOX 0x00688580
+	virtual Real getShadowDirLightTextureOffset(void) const { return mShadowTextureOffset; }
+	// FUNCTION: ROBLOX 0x00688590
+	virtual void setShadowTextureFadeStart(Real fadeStart) { mShadowTextureFadeStart = fadeStart; }
+	// FUNCTION: ROBLOX 0x006885a0
+	virtual void setShadowTextureFadeEnd(Real fadeEnd) { mShadowTextureFadeEnd = fadeEnd; }
+	virtual void setShadowTextureSelfShadow(bool selfShadow);
+	// FUNCTION: ROBLOX 0x006885b0
+	virtual bool getShadowTextureSelfShadow(void) const { return mShadowTextureSelfShadow; }
+	// FUNCTION: ROBLOX 0x006885c0
+	virtual void setShadowCasterRenderBackFaces(bool bf) { mShadowCasterRenderBackFaces = bf; }
+	// FUNCTION: ROBLOX 0x006885d0
+	virtual bool getShadowCasterRenderBackFaces() const { return mShadowCasterRenderBackFaces; }
+	virtual const ShadowCameraSetupPtr& getShadowCameraSetup() const;
+	// FUNCTION: ROBLOX 0x006885e0
+	virtual void setShadowUseInfiniteFarPlane(bool enable) { mShadowUseInfiniteFarPlane = enable; }
+	// FUNCTION: ROBLOX 0x006885f0
+	virtual bool isShadowTechniqueStencilBased(void) const
+	{
+		return (mShadowTechnique & SHADOWDETAILTYPE_STENCIL) != 0;
+	}
+	// FUNCTION: ROBLOX 0x00688600
+	virtual bool isShadowTechniqueTextureBased(void) const
+	{
+		return (mShadowTechnique & SHADOWDETAILTYPE_TEXTURE) != 0;
+	}
+	// FUNCTION: ROBLOX 0x00688610
+	virtual bool isShadowTechniqueModulative(void) const
+	{
+		return (mShadowTechnique & SHADOWDETAILTYPE_MODULATIVE) != 0;
+	}
+	// FUNCTION: ROBLOX 0x00688620
+	virtual bool isShadowTechniqueAdditive(void) const { return (mShadowTechnique & SHADOWDETAILTYPE_ADDITIVE) != 0; }
+	// FUNCTION: ROBLOX 0x00688630
+	virtual bool isShadowTechniqueIntegrated(void) const
+	{
+		return (mShadowTechnique & SHADOWDETAILTYPE_INTEGRATED) != 0;
+	}
+	// FUNCTION: ROBLOX 0x00688640
+	virtual bool isShadowTechniqueInUse(void) const { return mShadowTechnique != SHADOWTYPE_NONE; }
+	virtual void addShadowListener(ShadowListener* s);
+	virtual bool hasStaticGeometry(const String& name) const;
+	virtual void destroyStaticGeometry(StaticGeometry* geom);
+	virtual void destroyInstancedGeometry(InstancedGeometry* geom);
+	virtual void destroyMovableObject(MovableObject* m);
+	virtual void injectMovableObject(MovableObject* m);
+	virtual void extractMovableObject(MovableObject* m);
+	virtual void extractAllMovableObjectsByType(const String& typeName);
+	// FUNCTION: ROBLOX 0x00688650
+	virtual void setVisibilityMask(uint32 vmask) { mVisibilityMask = vmask; }
+	// FUNCTION: ROBLOX 0x00688660
+	virtual uint32 getVisibilityMask(void) { return mVisibilityMask; }
+	// FUNCTION: ROBLOX 0x00688670
+	virtual void setFindVisibleObjects(bool find) { mFindVisibleObjects = find; }
+	// FUNCTION: ROBLOX 0x00688680
+	virtual bool getFindVisibleObjects(void) { return mFindVisibleObjects; }
+	virtual void _injectRenderWithPass(Pass* pass, Renderable* rend, bool shadowDerivation = true);
+	virtual void _suppressRenderStateChanges(bool suppress);
+	// FUNCTION: ROBLOX 0x00688690
+	virtual bool _areRenderStateChangesSuppressed(void) const { return mSuppressRenderStateChanges; }
+	virtual void _suppressShadows(bool suppress);
+	// FUNCTION: ROBLOX 0x006886a0
+	virtual bool _areShadowsSuppressed(void) const { return mSuppressShadows; }
 
 	// SYNTHETIC: ROBLOX 0x00698370
 	// Ogre::RbxSceneManager::`scalar deleting destructor'

@@ -5968,3 +5968,5 @@ address,type,symbol,name,module,size
 0083e2e4,global,??_7?$SharedPtr@VRbxSky@Ogre@@@Ogre@@6B@,,,
 0083d644,global,??_7RbxSceneManagerFactory@Ogre@@6B@,,,
 00674ed0,library,??E?$_Vector_const_iterator@VPlaneBoundedVolume@Ogre@@V?$allocator@VPlaneBoundedVolume@Ogre@@@std@@@std@@QAEAAV01@XZ,,,
+0068e990,library,?insert@?$_Tree@V?$_Tset_traits@EU?$less@E@std@@V?$allocator@E@2@$0A@@std@@@std@@QAE?AU?$pair@Viterator@?$_Tree@V?$_Tset_traits@EU?$less@E@std@@V?$allocator@E@2@$0A@@std@@@std@@_N@2@ABE@Z,,,
+00691a90,library,?erase@?$_Tree@V?$_Tset_traits@EU?$less@E@std@@V?$allocator@E@2@$0A@@std@@@std@@QAEIABE@Z,,,
