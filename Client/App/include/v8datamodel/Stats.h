@@ -137,13 +137,11 @@ public:
 	// TEMPLATE: ROBLOX 0x004ce200
 	// RBX::Stats::TypedStatsItem<bool>::update
 	// TEMPLATE: WEBSERVICE 0x10065dd0
-	// TEMPLATE: ROBLOX 0x005727a0
 	// RBX::Stats::TypedStatsItem<int>::TypedStatsItem<int>
 	// TEMPLATE: WEBSERVICE 0x10065ec0
 	// STUB: ROBLOX 0x00463380
 	// RBX::Stats::TypedStatsItem<int>::update
 	// TEMPLATE: WEBSERVICE 0x10065ef0
-	// TEMPLATE: ROBLOX 0x005c6b20
 	// RBX::Stats::TypedStatsItem<int>::~TypedStatsItem<int>
 	// TEMPLATE: WEBSERVICE 0x1006f990
 	// TEMPLATE: ROBLOX 0x005b7d60
@@ -173,7 +171,6 @@ public:
 	virtual void update() { formatMem(func()); }
 
 	// SYNTHETIC: WEBSERVICE 0x10065f60
-	// SYNTHETIC: ROBLOX 0x005d4120
 	// RBX::Stats::TypedStatsItem<int>::`scalar deleting destructor'
 };
 

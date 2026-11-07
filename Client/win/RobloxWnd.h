@@ -8,6 +8,7 @@
 #include "util/IMetric.h"
 #include "util/Profiling.h"
 #include "util/RunStateOwner.h"
+#include "v8datamodel/Stats.h"
 
 #include <GLG3D/GWindow.h>
 #include <GLG3D/RenderDevice.h>
@@ -17,6 +18,7 @@
 #include <memory>
 
 class CWorkspace;
+class RenderStats;
 struct IWorkspace;
 
 namespace Ogre {
@@ -75,7 +77,24 @@ protected:
 	// ?GetMessageMap@CRobloxWnd@@MBEPBUAFX_MSGMAP@@XZ
 
 private:
-	class RenderStatsItem;
+	// VTABLE: ROBLOX 0x0080daec
+	// SIZE 0x140
+	class RenderStatsItem : public RBX::Stats::Item
+	{
+	public:
+		RenderStatsItem(RenderStats* stats);
+
+		virtual void update(); // vtable+0x40
+
+	private:
+		RBX::Stats::Item* m_unk0x120; // 0x120
+		RBX::Stats::Item* m_unk0x124; // 0x124
+		RBX::Stats::Item* m_unk0x128; // 0x128
+		RBX::Stats::Item* m_unk0x12c; // 0x12c
+		RBX::Stats::Item* m_unk0x130; // 0x130
+		RBX::Stats::Item* m_unk0x134; // 0x134
+		RenderStats* m_unk0x138;      // 0x138
+	};
 
 	int m_unk0x5c;                                         // 0x5c
 	int m_unk0x60;                                         // 0x60

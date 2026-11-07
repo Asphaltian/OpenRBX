@@ -22,6 +22,8 @@
 #include "util/scopedassign.h"
 #include "util/standardout.h"
 #include "v8datamodel/GlobalSettings.h"
+#include "v8datamodel/Stats.h"
+#include "v8datamodel/UserController.h"
 
 #include <G3D/Log.h>
 #include <GLG3D/GLCaps.h>
@@ -32,6 +34,8 @@ static ATL::CCriticalSection g_unk0x0095448c;
 
 // GLOBAL: ROBLOX 0x00954484
 static bool g_unk0x00954484;
+
+DECOMP_SIZE_ASSERT(CRobloxWnd::RenderStatsItem, 0x140)
 
 // FUNCTION: ROBLOX 0x0045f4d0
 LRESULT CRobloxWnd::FUN_0045f4d0(WPARAM wParam, LPARAM lParam)
@@ -503,10 +507,114 @@ std::string CRobloxWnd::getMetric(const std::string& metric) const
 	return std::string();
 }
 
+// STUB: ROBLOX 0x00463710
+CRobloxWnd::RenderStatsItem::RenderStatsItem(RenderStats* stats)
+{
+	m_unk0x138 = stats;
+	createBoundChildItem("2D CPU Render", stats->render2D);
+
+	RBX::Stats::Item* total = createBoundChildItem("3D CPU Total", stats->cpuRenderTotal);
+	total->createBoundChildItem("CPU Shadow", stats->cpuShadow);
+	total->createBoundChildItem("computeProxyArrays", stats->computeProxyArrays);
+	total->createBoundChildItem("Sort", stats->sort);
+	total->createBoundChildItem("Proxy count", stats->diffuseProxyCount);
+
+	RBX::Stats::Item* triangles = total->createBoundChildItem("Total Triangles", stats->totalTriangles);
+	triangles->createBoundChildItem("Ambient + Unshadowed", stats->unshadowedTriangles);
+	triangles->createBoundChildItem("Mark Shadows", stats->markShadowsTriangles);
+	triangles->createBoundChildItem("Shadowed Light", stats->shadowedLightTriangles);
+
+	createBoundChildItem("SwapBuffer", stats->swapBuffer);
+
+	m_unk0x120 = createChildItem("Aggregation");
+	m_unk0x120->createBoundChildItem("Total Chunks", RenderStats::chunkCount);
+	m_unk0x120->createBoundChildItem("Aggregated Chunks", RenderStats::aggregatedChunkCount);
+	m_unk0x120->createBoundChildItem("AggregateChunks", RenderStats::aggregateChunkCount);
+
+	RBX::Stats::Item* memory = createChildItem("Memory");
+	m_unk0x124 = memory->createChildItem("Tex");
+	m_unk0x128 = memory->createChildItem("VAR");
+	m_unk0x12c = memory->createChildItem("Video");
+
+	RBX::Stats::Item* stateChanges = createChildItem("State Changes");
+	m_unk0x130 = stateChanges->createChildItem("Major");
+	m_unk0x134 = stateChanges->createChildItem("Minor");
+}
+
+// STUB: ROBLOX 0x00463950
+void CRobloxWnd::RenderStatsItem::update()
+{
+	STUB(0x463950);
+}
+
 // STUB: ROBLOX 0x00463c30
 void CRobloxWnd::FUN_00463c30(CWorkspace* workspace)
 {
-	STUB(0x463c30);
+	if (workspace != m_unk0x6c) {
+		if (m_unk0x70) {
+			RBX::DataModel::Lock lock(m_unk0x70);
+			if (m_unk0x64) {
+				m_unk0x64->setParent(NULL);
+				m_unk0x64.reset();
+			}
+			if (RBX::ControllerService* controllers = m_unk0x70 ? m_unk0x70->find<RBX::ControllerService>() : NULL) {
+				controllers->setHardwareDevice(NULL);
+			}
+			m_unk0x9c->makeCurrent();
+			m_unk0xa8.reset();
+			if (m_unk0x70) {
+				RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
+				if (runService) {
+					runService->removeRunView(this);
+				}
+			}
+			m_unk0x7c.reset();
+		}
+
+		m_unk0x6c = workspace;
+		if (workspace) {
+			m_unk0x70 = workspace->FUN_0046edc0();
+		}
+		else {
+			m_unk0x70.reset();
+		}
+
+		if (m_unk0x70) {
+			if (!m_unk0x94) {
+				m_unk0x7c.reset(new DxUserInput(this, m_unk0x70.get()));
+			}
+
+			RBX::DataModel::Lock lock(m_unk0x70);
+			CRenderSettings::singleton().FUN_0044d1b0(false);
+			if (m_unk0x5c == 2) {
+				FUN_004619e0();
+			}
+			else {
+				FUN_0045f9f0();
+			}
+			m_unk0x7c->init(m_unk0xac.get());
+			AdjustThrottle(0.0);
+			FUN_00460d30();
+
+			(m_unk0x70 ? m_unk0x70->create<RBX::ControllerService>() : NULL)->setHardwareDevice(m_unk0x7c.get());
+			RBX::Stats::StatsService* stats = m_unk0x70 ? m_unk0x70->create<RBX::Stats::StatsService>() : NULL;
+
+			m_unk0x64 = RBX::Creatable<RBX::Instance>::create<RenderStatsItem>(&m_unk0xa8->getRenderStats());
+			m_unk0x64->setName("Render");
+			m_unk0x64->setParent(stats);
+			m_unk0x64->createBoundChildItem(*m_unk0x90);
+
+			if (m_unk0x70) {
+				RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
+				if (runService) {
+					runService->addRunView(this);
+				}
+			}
+		}
+	}
+	if (m_hWnd != NULL) {
+		Invalidate();
+	}
 }
 
 // STUB: ROBLOX 0x00464000
