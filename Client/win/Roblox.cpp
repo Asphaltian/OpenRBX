@@ -5,6 +5,7 @@
 #include "BrowserView.h"
 #include "ChildFrm.h"
 #include "DHTMLWindow.h"
+#include "LogManager.h"
 #include "MainFrm.h"
 #include "NullDoc.h"
 #include "ObjectBrowser.h"
@@ -32,6 +33,7 @@
 #include <exdispid.h>
 #include <functional>
 #include <shlwapi.h>
+#include <stdexcept>
 
 class CRobloxModule : public ATL::CAtlMfcModule
 {
@@ -43,6 +45,9 @@ CRobloxModule _AtlModule;
 
 // GLOBAL: ROBLOX 0x00954290
 CString g_unk0x00954290;
+
+// GLOBAL: ROBLOX 0x00954294
+static boost::scoped_ptr<std::runtime_error> g_unk0x00954294;
 
 // SIZE 0x90
 class CRbxDocTemplate : public CMultiDocTemplate
@@ -323,11 +328,37 @@ void CScriptDoc::FUN_0044eaf0(boost::shared_ptr<RBX::Script> script)
 	UpdateAllViews(NULL, 1);
 }
 
-// STUB: ROBLOX 0x0044ed40
+// FUNCTION: ROBLOX 0x0044ebb0
+void FUN_0044ebb0(const std::exception& e)
+{
+	g_unk0x00954294.reset(new std::runtime_error(e.what()));
+}
+
+// FUNCTION: ROBLOX 0x0044ec70
+void FUN_0044ec70()
+{
+	if (g_unk0x00954294) {
+		std::runtime_error error(g_unk0x00954294->what());
+		g_unk0x00954294.reset();
+		throw error;
+	}
+}
+
+// FUNCTION: ROBLOX 0x0044ed40
 void CIDEDocManager::OnFileNew()
 {
-	STUB(0x44ed40);
-	m_unk0x24->OpenDocumentFile(NULL);
+	g_unk0x00954294.reset();
+	CDocument* document = m_unk0x24->OpenDocumentFile(NULL);
+	try {
+		FUN_0044ec70();
+	}
+	catch (std::exception& e) {
+		FUN_0042b3c0(e);
+		AfxMessageBox(AFX_IDP_FAILED_TO_CREATE_DOC);
+		if (document) {
+			document->OnCloseDocument();
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x0044eee0

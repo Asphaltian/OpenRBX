@@ -1,5 +1,7 @@
 #include "SecureHtmlView.h"
 
+#include "InstanceExplorer.h"
+
 #include <atlconv.h>
 #include <mshtmdid.h>
 #include <mshtml.h>
@@ -33,6 +35,23 @@ BOOL CSecureHtmlView::OnAmbientProperty(COleControlSite* pSite, DISPID dispid, V
 	}
 
 	return CHtmlView::OnAmbientProperty(pSite, dispid, pvar);
+}
+
+// FUNCTION: ROBLOX 0x0046a160
+void CSecureHtmlView::OnBeforeNavigate2(
+	LPCTSTR lpszURL,
+	DWORD nFlags,
+	LPCTSTR lpszTargetFrameName,
+	CByteArray& baPostedData,
+	LPCTSTR lpszHeaders,
+	BOOL* pbCancel
+)
+{
+	if (FUN_0041e610(lpszURL)) {
+		*pbCancel = TRUE;
+		return;
+	}
+	CHtmlView::OnBeforeNavigate2(lpszURL, nFlags, lpszTargetFrameName, baPostedData, lpszHeaders, pbCancel);
 }
 
 // FUNCTION: ROBLOX 0x0046a1b0

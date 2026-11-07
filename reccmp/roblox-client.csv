@@ -6041,3 +6041,7 @@ address,type,symbol,name,module,size
 00949dd4,global,??_R0?AVSubEntity@Ogre@@@8,,,
 00675c70,synthetic,??_ERbxEntity@Ogre@@W3AEPAXI@Z,,,
 00675c80,synthetic,??_ERbxEntity@Ogre@@WMA@AEPAXI@Z,,,
+0044ed40,function,,,,172
+0040b870,library,?_Buynode@?$list@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEPAU_Node@?$_List_nod@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@PAU342@0ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,,,
+0040b350,library,?_Incsize@?$list@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEXI@Z,,,
+0040a440,library,??9ATL@@YA_NABV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@0@PBD@Z,,,

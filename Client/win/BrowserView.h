@@ -32,6 +32,14 @@ protected:
 	virtual HRESULT OnGetHostInfo(DOCHOSTUIINFO* pInfo);
 	virtual void OnCommandStateChange(long nCommand, BOOL bEnable);
 	virtual void OnNavigateComplete2(LPCTSTR strURL);
+	virtual void OnBeforeNavigate2(
+		LPCTSTR lpszURL,
+		DWORD nFlags,
+		LPCTSTR lpszTargetFrameName,
+		CByteArray& baPostedData,
+		LPCTSTR lpszHeaders,
+		BOOL* pbCancel
+	);
 	virtual void OnTitleChange(LPCTSTR lpszText);
 	virtual void OnDocumentComplete(LPCTSTR lpszURL);
 

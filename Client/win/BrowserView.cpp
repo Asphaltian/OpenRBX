@@ -4,6 +4,7 @@
 #include "LogManager.h"
 #include "MainFrm.h"
 #include "Roblox.h"
+#include "util/Http.h"
 
 #include <algorithm>
 
@@ -291,6 +292,43 @@ HRESULT CBrowserView::OnGetExternal(LPDISPATCH* lppDispatch)
 	}
 
 	return m_unk0x2b0.CopyTo(lppDispatch);
+}
+
+// STUB: ROBLOX 0x0040cc00
+void CBrowserView::OnBeforeNavigate2(
+	LPCTSTR lpszURL,
+	DWORD nFlags,
+	LPCTSTR lpszTargetFrameName,
+	CByteArray& baPostedData,
+	LPCTSTR lpszHeaders,
+	BOOL* pbCancel
+)
+{
+	CSecureHtmlView::OnBeforeNavigate2(lpszURL, nFlags, lpszTargetFrameName, baPostedData, lpszHeaders, pbCancel);
+	if (*pbCancel) {
+		return;
+	}
+
+	CString url(lpszURL);
+	if (strlen(lpszTargetFrameName) != 0) {
+		m_unk0xf8.push_back(std::string(lpszURL));
+		if (m_unk0xf8.size() > 10) {
+			m_unk0xf8.pop_front();
+		}
+	}
+	else if (url.Compare("about:blank") && !RBX::Http::isScript(lpszURL) && !RBX::Http::isRobloxSite(lpszURL)) {
+		bool external = url.Left(16) != "res://mshtml.dll";
+		if (external) {
+			external = url.Left(17) != "res://ieframe.dll";
+			if (external) {
+				external = url.Left(17) != "res://shdoclc.dll";
+				if (external) {
+					Navigate(lpszURL, 0, "_blank");
+					*pbCancel = TRUE;
+				}
+			}
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x0040ce30

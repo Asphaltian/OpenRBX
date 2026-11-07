@@ -1,6 +1,7 @@
 #include "InstanceExplorer.h"
 
 #include "util/Events.h"
+#include "util/Http.h"
 #include "util/scopedassign.h"
 #include "v8datamodel/Selection.h"
 #include "v8tree/Service.h"
@@ -8,6 +9,12 @@
 #include <vector>
 
 IMPLEMENT_DYNCREATE(CInstanceExplorer, CXTPReportView)
+
+// FUNCTION: ROBLOX 0x0041e610
+HRESULT FUN_0041e610(LPCTSTR url)
+{
+	return RBX::Http::trustCheck(url) ? S_OK : E_FAIL;
+}
 
 // FUNCTION: ROBLOX 0x00420050
 CString CInstanceRecord::CNameItem::GetCaption(CXTPReportColumn* pColumn)

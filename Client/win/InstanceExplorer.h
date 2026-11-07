@@ -82,4 +82,6 @@ private:
 
 DECOMP_SIZE_ASSERT(CInstanceExplorer, 0x3b0)
 
+HRESULT FUN_0041e610(LPCTSTR url);
+
 #endif // INSTANCEEXPLORER_H

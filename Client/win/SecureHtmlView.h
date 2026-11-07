@@ -26,6 +26,17 @@ protected:
 	virtual BOOL OnAmbientProperty(COleControlSite* pSite, DISPID dispid, VARIANT* pvar);
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 
+public:
+	virtual void OnBeforeNavigate2(
+		LPCTSTR lpszURL,
+		DWORD nFlags,
+		LPCTSTR lpszTargetFrameName,
+		CByteArray& baPostedData,
+		LPCTSTR lpszHeaders,
+		BOOL* pbCancel
+	);
+
+protected:
 	undefined m_unk0xf0; // 0xf0
 };
 
