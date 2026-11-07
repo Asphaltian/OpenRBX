@@ -5,6 +5,9 @@
 #include "decomp.h"
 
 #include <OgreRoot.h>
+#include <string>
+
+class CRobloxWnd;
 
 namespace RBX {
 class AdornRbxGfx;
@@ -49,31 +52,43 @@ public:
 
 	Viewport* getViewport() const { return m_unk0x10; }
 
+	void FUN_00673860(
+		int renderSystem, unsigned long window, int width, int height, int antialiasing, std::string logFileName
+	);
+
 	// SYNTHETIC: ROBLOX 0x00671fb0
 	// Ogre::VisualEngine::`scalar deleting destructor'
 
 private:
+	friend class ::CRobloxWnd;
 	friend class RBX::AdornRbxGfx;
 	friend class RbxFont;
 
-	SceneManager* m_unk0x04;             // 0x04
-	Camera* m_unk0x08;                   // 0x08
-	RenderTarget* m_unk0x0c;             // 0x0c
-	Viewport* m_unk0x10;                 // 0x10
-	TwoDManager* m_unk0x14;              // 0x14
-	Unk0x18 m_unk0x18;                   // 0x18
-	unsigned int m_unk0x7f0;             // 0x7f0
-	undefined4 m_unk0x7f4;               // 0x7f4
-	int m_unk0x7f8;                      // 0x7f8
-	undefined m_unk0x7fc[0x808 - 0x7fc]; // 0x7fc
+	SceneManager* m_unk0x04; // 0x04
+	Camera* m_unk0x08;       // 0x08
+	RenderTarget* m_unk0x0c; // 0x0c
+	Viewport* m_unk0x10;     // 0x10
+	TwoDManager* m_unk0x14;  // 0x14
+	Unk0x18 m_unk0x18;       // 0x18
+	unsigned int m_unk0x7f0; // 0x7f0
+	bool m_unk0x7f4;         // 0x7f4
+	bool m_unk0x7f5;         // 0x7f5
+	int m_unk0x7f8;          // 0x7f8
+	int m_unk0x7fc;          // 0x7fc
+	int m_unk0x800;          // 0x800
+	bool m_unk0x804;         // 0x804
+	bool m_unk0x805;         // 0x805
+	bool m_unk0x806;         // 0x806
 };
 
 DECOMP_SIZE_ASSERT(VisualEngine::Unk0x18::Unk0x08, 0x14)
 DECOMP_SIZE_ASSERT(VisualEngine::Unk0x18, 0x7d8)
 DECOMP_SIZE_ASSERT(VisualEngine, 0x808)
 
+extern bool g_unk0x00949dd0;
 extern Root* g_unk0x0096134c;
 
+unsigned int FUN_00671cf0();
 void FUN_00672010();
 
 } // namespace Ogre

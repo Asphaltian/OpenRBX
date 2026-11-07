@@ -18,6 +18,10 @@
 
 class CWorkspace;
 
+namespace Ogre {
+class VisualEngine;
+}
+
 namespace RBX {
 class DataModel;
 }
@@ -84,7 +88,7 @@ private:
 	std::auto_ptr<G3D::RenderDevice> m_unk0xa4;            // 0xa4
 	std::auto_ptr<RBX::ViewBase> m_unk0xa8;                // 0xa8
 	std::auto_ptr<RBX::Adorn> m_unk0xac;                   // 0xac
-	undefined4* m_unk0xb0;                                 // 0xb0
+	Ogre::VisualEngine* m_unk0xb0;                         // 0xb0
 	undefined m_unk0xb4[0xb8 - 0xb4];                      // 0xb4
 };
 

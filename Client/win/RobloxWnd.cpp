@@ -1,8 +1,18 @@
+// clang-format off
+#include <OgreAnimation.h>
+#include <OgreCamera.h>
+#include <OgreSceneManager.h>
+// clang-format on
+
 #include "RobloxWnd.h"
 
+#include "LogManager.h"
 #include "RenderSettings.h"
+#include "View.h"
 #include "Workspace.h"
+#include "appdraw/VisualEngine.h"
 #include "renderlib/Profiler.h"
+#include "renderlibnew/Chunk.h"
 #include "util/standardout.h"
 #include "v8datamodel/GlobalSettings.h"
 
@@ -153,7 +163,70 @@ void CRobloxWnd::OnTimer(UINT_PTR nIDEvent)
 // STUB: ROBLOX 0x004610a0
 void CRobloxWnd::FUN_004610a0(int width, int height)
 {
-	STUB(0x4610a0);
+	G3D::GWindow::Settings settings;
+	settings.width = width;
+	settings.height = height;
+	settings.stencilBits = 8;
+	settings.rgbBits = 8;
+	settings.depthBits = 24;
+	settings.alphaBits = m_unk0x80 ? 8 : 0;
+	settings.fsaaSamples = g_unk0x0091a2e8;
+
+	CClientDC dc(this);
+	CRect rect;
+	GetClientRect(&rect);
+
+	int videoMemory = Ogre::FUN_00671cf0();
+	m_unk0xb0 = new Ogre::VisualEngine();
+	if (RBX::ViewBase::getShadowsEnabled()) {
+		m_unk0xb0->m_unk0x7f8 = 0;
+	}
+
+	int antialiasing;
+	switch (CRenderSettings::singleton().m_unk0x100) {
+	case CRenderSettings::c_antialiasingModeUnk0x0:
+		antialiasing = videoMemory < 100000000 ? 2 : 0;
+		break;
+	case CRenderSettings::c_antialiasingModeUnk0x1:
+		antialiasing = 0;
+		break;
+	default:
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Unknown antialiasing mode");
+	case CRenderSettings::c_antialiasingModeUnk0x2:
+		antialiasing = 2;
+		break;
+	}
+
+	m_unk0xb0->FUN_00673860(
+		m_unk0x5c != 3,
+		(unsigned long) m_hWnd,
+		rect.Width(),
+		rect.Height(),
+		antialiasing,
+		LogManager::getMainLogManger()->MakeLogFileName("gfx")
+	);
+
+	Ogre::g_unk0x00949dd0 = CRenderSettings::singleton().m_unk0x108 != CRenderSettings::c_frameRateManagerModeUnk0x2;
+
+	bool bevels;
+	switch (CRenderSettings::singleton().m_unk0xfc) {
+	case CRenderSettings::c_bevelModeUnk0x0:
+		bevels = videoMemory >= 100000000 && !m_unk0xb0->m_unk0x804;
+		break;
+	case CRenderSettings::c_bevelModeUnk0x1:
+		bevels = true;
+		break;
+	default:
+		bevels = false;
+		break;
+	}
+	RBX::ViewNew::FUN_0050b2a0(bevels);
+
+	Ogre::Animation::setDefaultInterpolationMode(Ogre::Animation::IM_LINEAR);
+	Ogre::Animation::setDefaultRotationInterpolationMode(Ogre::Animation::RIM_LINEAR);
+	m_unk0xb0->m_unk0x04->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
+	m_unk0xb0->m_unk0x08->setPosition(0.0f, 50.0f, 200.0f);
+	m_unk0xb0->m_unk0x08->lookAt(0.0f, 50.0f, 0.0f);
 }
 
 // STUB: ROBLOX 0x00461420

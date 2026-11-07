@@ -38,6 +38,9 @@ public:
 	virtual ~TwoDManager(); // vtable+0x00
 	TwoDManager();
 
+	void FUN_0067c6c0(
+		SceneManager* sceneManager, RenderTarget* target, uint8 queueGroupId, bool p_unk0x09, bool p_unk0x0a
+	);
 	void FUN_0067cec0();
 	void FUN_0067d9e0(
 		std::string texture,
@@ -69,10 +72,11 @@ public:
 	// Ogre::TwoDManager::`scalar deleting destructor'
 
 private:
-	undefined4 m_unk0x04;                    // 0x04
+	SceneManager* m_unk0x04;                 // 0x04
 	uint8 m_unk0x08;                         // 0x08
 	bool m_unk0x09;                          // 0x09
-	undefined4 m_unk0x0c;                    // 0x0c
+	bool m_unk0x0a;                          // 0x0a
+	RenderTarget* m_unk0x0c;                 // 0x0c
 	RenderOperation m_unk0x10;               // 0x10
 	HardwareVertexBufferSharedPtr m_unk0x24; // 0x24
 	HardwareIndexBufferSharedPtr m_unk0x30;  // 0x30

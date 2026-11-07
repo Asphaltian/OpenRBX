@@ -2,9 +2,24 @@
 
 #include <OgreRenderSystem.h>
 #include <OgreRoot.h>
+#include <OgreSceneManager.h>
 #include <OgreTextureManager.h>
 
 namespace Ogre {
+
+// FUNCTION: ROBLOX 0x0067c6c0
+void TwoDManager::FUN_0067c6c0(
+	SceneManager* sceneManager, RenderTarget* target, uint8 queueGroupId, bool p_unk0x09, bool p_unk0x0a
+)
+{
+	m_unk0x09 = p_unk0x09;
+	m_unk0x08 = queueGroupId;
+	m_unk0x04 = sceneManager;
+	m_unk0x0c = target;
+	m_unk0x0a = p_unk0x0a;
+	m_unk0x24.setNull();
+	sceneManager->addRenderQueueListener(this);
+}
 
 // FUNCTION: ROBLOX 0x0067cda0
 TwoDManager::~TwoDManager()

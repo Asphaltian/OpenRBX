@@ -6046,3 +6046,4 @@ address,type,symbol,name,module,size
 0040b350,library,?_Incsize@?$list@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEXI@Z,,,
 0040a440,library,??9ATL@@YA_NABV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@0@PBD@Z,,,
 004335e0,function,,,,1216
+00673860,function,,,,5520
