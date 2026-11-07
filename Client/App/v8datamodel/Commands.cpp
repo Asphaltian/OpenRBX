@@ -38,6 +38,8 @@ template class RBX::TToolVerb<RBX::OscillateMotorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::LockTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::NullTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::GrabTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::CloneTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::GameTool, RBX::RunStateVerb>;
 
 namespace RBX {
 

@@ -12,6 +12,8 @@
 #include "v8kernel/Body.h"
 #include "v8world/Assembly2.h"
 #include "v8world/Geometry.h"
+#include "v8world/MotorJoint.h"
+#include "v8world/RigidJoint.h"
 #include "v8world/World.h"
 
 #include <G3D/AABox.h>
@@ -207,6 +209,27 @@ void PartInstance::setName(const std::string& value)
 	else {
 		getPrimitive()->setSizeMultiplier(1);
 	}
+}
+
+// FUNCTION: ROBLOX 0x005ad880
+bool PartInstance::lockedInPlace() const
+{
+	bool top = false;
+	bool bottom = false;
+	for (Joint* joint = primitive->getFirstJoint(); joint; joint = primitive->getNextJoint(joint)) {
+		if (RigidJoint::isRigidJoint(joint) || MotorJoint::isMotorJoint(joint)) {
+			NormalId normalId = primitive.get() == joint->getPrimitive(0)
+									? Matrix3ToNormalId(joint->getJointCoord(0).rotation)
+									: normalIdOpposite(Matrix3ToNormalId(joint->getJointCoord(1).rotation));
+			if (normalId == NORM_Y) {
+				top = true;
+			}
+			else if (normalId == NORM_Y_NEG) {
+				bottom = true;
+			}
+		}
+	}
+	return top && bottom;
 }
 
 // FUNCTION: WEBSERVICE 0x1009ae40

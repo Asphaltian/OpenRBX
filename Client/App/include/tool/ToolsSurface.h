@@ -29,6 +29,8 @@ extern char sOscillateMotorTool[];
 extern char sLockTool[];
 extern char sHammerTool[];
 extern char sLaserTool[];
+extern char sCloneTool[];
+extern char sGameTool[];
 
 // SIZE 0x4c
 class SurfaceTool : public MouseCommand
@@ -255,10 +257,10 @@ public:
 	virtual MouseCommand* isSticky() const { return new HammerTool(workspace); }
 
 	// SYNTHETIC: ROBLOX 0x005d20f0
-	// RBX::HammerTool::~HammerTool
+	// RBX::CloneTool::~CloneTool
 
 	// SYNTHETIC: ROBLOX 0x005d2200
-	// RBX::HammerTool::`scalar deleting destructor'
+	// RBX::CloneTool::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(HammerTool, 0x28)
@@ -285,6 +287,53 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(LaserTool, 0x3c)
+
+// SIZE 0x28
+class CloneTool : public Named<MouseCommand, sCloneTool>
+{
+private:
+	boost::shared_ptr<PartInstance> part; // 0x20
+
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+	virtual void onMouseIdle(const UIEvent& uiEvent);
+	virtual const std::string getCursorName() const;
+
+public:
+	CloneTool(Workspace* workspace);
+
+	// FUNCTION: ROBLOX 0x0063bff0
+	virtual MouseCommand* isSticky() const { return new CloneTool(workspace); }
+};
+
+DECOMP_SIZE_ASSERT(CloneTool, 0x28)
+
+// SIZE 0x3c
+class GameTool : public Named<MouseCommand, sGameTool>
+{
+private:
+	std::string cursor; // 0x20
+
+	bool FUN_0063c2c0(PartInstance* part, const G3D::Vector3& hitWorld) const;
+
+	virtual void onMouseIdle(const UIEvent& uiEvent) { onMouseHover(uiEvent); }
+	virtual void onMouseHover(const UIEvent& uiEvent);
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+
+	// FUNCTION: ROBLOX 0x006227f0 FOLDED
+	virtual const std::string getCursorName() const { return cursor; }
+
+public:
+	GameTool(Workspace* workspace);
+	virtual ~GameTool();
+
+	// FUNCTION: ROBLOX 0x0063c540
+	virtual MouseCommand* isSticky() const { return new GameTool(workspace); }
+
+	// SYNTHETIC: ROBLOX 0x0063c520
+	// RBX::GameTool::`scalar deleting destructor'
+};
+
+DECOMP_SIZE_ASSERT(GameTool, 0x3c)
 
 } // namespace RBX
 

@@ -422,6 +422,10 @@ private:
 	// RBX::Name::doDeclare<&RBX::sNullTool>
 	// TEMPLATE: ROBLOX 0x005d0600
 	// RBX::Name::doDeclare<&RBX::sGrabTool>
+	// TEMPLATE: ROBLOX 0x005d0670
+	// RBX::Name::doDeclare<&RBX::sCloneTool>
+	// TEMPLATE: ROBLOX 0x005d0750
+	// RBX::Name::doDeclare<&RBX::sGameTool>
 	template <const char* name>
 	static const Name& doDeclare()
 	{
@@ -781,6 +785,10 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sNullTool>
 	// TEMPLATE: ROBLOX 0x005d09f0
 	// RBX::Name::callDoDeclare<&RBX::sGrabTool>
+	// TEMPLATE: ROBLOX 0x005d0a00
+	// RBX::Name::callDoDeclare<&RBX::sCloneTool>
+	// TEMPLATE: ROBLOX 0x005d0a20
+	// RBX::Name::callDoDeclare<&RBX::sGameTool>
 	template <const char* name>
 	static void callDoDeclare()
 	{
@@ -904,6 +912,10 @@ public:
 	// RBX::Named<RBX::MouseCommand,&RBX::sNullTool>::getName
 	// TEMPLATE: ROBLOX 0x0063be80
 	// RBX::Named<RBX::MouseCommand,&RBX::sGrabTool>::getName
+	// TEMPLATE: ROBLOX 0x0063c080
+	// RBX::Named<RBX::MouseCommand,&RBX::sCloneTool>::getName
+	// TEMPLATE: ROBLOX 0x0063c5a0
+	// RBX::Named<RBX::MouseCommand,&RBX::sGameTool>::getName
 	// clang-format on
 };
 

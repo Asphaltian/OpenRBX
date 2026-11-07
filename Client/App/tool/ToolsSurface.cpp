@@ -5,6 +5,7 @@
 #include "rbxgraphics/Adorn.h"
 #include "tool/DragTool.h"
 #include "tool/GrabTool.h"
+#include "tool/PartDragTool.h"
 #include "util/Sound.h"
 #include "util/SoundWorld.h"
 #include "v8datamodel/Commands.h"
@@ -57,6 +58,12 @@ char sLaserTool[] = "Laser";
 
 // GLOBAL: ROBLOX 0x00948ca8
 char sGrabTool[] = "Grab";
+
+// GLOBAL: ROBLOX 0x00948cf8
+char sCloneTool[] = "Clone";
+
+// GLOBAL: ROBLOX 0x00948d48
+char sGameTool[] = "GameTool";
 
 // FUNCTION: ROBLOX 0x00639820
 void FlatTool::VTable0x40(Surface* surface)
@@ -336,6 +343,89 @@ MouseCommand* GrabTool::onMouseDown(const UIEvent& uiEvent)
 		return DragTool::onMouseDown(part, hitWorld, dragInstances, uiEvent, workspace);
 	}
 	return NULL;
+}
+
+// FUNCTION: ROBLOX 0x0063bf80
+const std::string CloneTool::getCursorName() const
+{
+	if (part) {
+		return "CloneOverCursor";
+	}
+	return "CloneCursor";
+}
+
+// FUNCTION: ROBLOX 0x0063bfc0
+CloneTool::CloneTool(Workspace* workspace) : Named<MouseCommand, sCloneTool>(workspace)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063c0a0
+MouseCommand* CloneTool::onMouseDown(const UIEvent& uiEvent)
+{
+	if (part) {
+		const G3D::CoordinateFrame& cframe = part->getCoordinateFrame();
+		boost::shared_ptr<PartInstance> clone = boost::shared_polymorphic_downcast<PartInstance>(part->clone());
+		std::vector<boost::shared_ptr<Instance> > instances;
+		instances.push_back(clone);
+		workspace->insertInstances(instances, workspace, INSERT_TO_TREE, SUPPRESS_PROMPTS);
+		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+
+		MouseCommand* dragger = new PartDragTool(clone.get(), clone->getCoordinateFrame().translation, workspace);
+		return dragger->onMouseDown(uiEvent);
+	}
+	return NULL;
+}
+
+// FUNCTION: ROBLOX 0x0063b920 FOLDED
+void CloneTool::onMouseIdle(const UIEvent& uiEvent)
+{
+	part = shared_from(getUnlockedPartByLocalCharacter(uiEvent));
+}
+
+// FUNCTION: ROBLOX 0x0063c2c0
+bool GameTool::FUN_0063c2c0(PartInstance* part, const G3D::Vector3& hitWorld) const
+{
+	return !part->getPartLocked() && !part->lockedInPlace() && characterCanReach(hitWorld);
+}
+
+// FUNCTION: ROBLOX 0x0063c300
+void GameTool::onMouseHover(const UIEvent& uiEvent)
+{
+	if (uiEvent.windowSize.x != 0 && uiEvent.windowSize.y != 0) {
+		G3D::Vector3 hitWorld;
+		PartInstance* part = getUnlockedPartByLocalCharacter(uiEvent, hitWorld);
+		if (!part) {
+			cursor = "ArrowFarCursor";
+		}
+		else if (!FUN_0063c2c0(part, hitWorld)) {
+			cursor = "ArrowCursor";
+		}
+		else {
+			cursor = "DragCursor";
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x0063c390
+MouseCommand* GameTool::onMouseDown(const UIEvent& uiEvent)
+{
+	G3D::Vector3 hitWorld;
+	PartInstance* part = getUnlockedPartByLocalCharacter(uiEvent, hitWorld);
+	if (part && FUN_0063c2c0(part, hitWorld)) {
+		MouseCommand* dragger = new PartDragTool(part, hitWorld, workspace);
+		return dragger->onMouseDown(uiEvent);
+	}
+	return NULL;
+}
+
+// FUNCTION: ROBLOX 0x0063c460
+GameTool::~GameTool()
+{
+}
+
+// FUNCTION: ROBLOX 0x0063c4c0
+GameTool::GameTool(Workspace* workspace) : Named<MouseCommand, sGameTool>(workspace)
+{
 }
 
 } // namespace RBX
