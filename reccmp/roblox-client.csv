@@ -6008,3 +6008,7 @@ address,type,symbol,name,module,size
 00961458,global,"nullLightList___Ogre::RbxSceneManager::renderTextureShadowCasterQueueGroupObjects",,,
 0096146c,global,"nullLightList___Ogre::RbxSceneManager::renderTextureShadowReceiverQueueGroupObjects",,,
 0083d65c,global,??_7VisualEngine@Ogre@@6B@,,,
+00672640,library,?clear@?$vector@PAVEventData@?$MarshaledListener@VInstance@RBX@@UDescendentRemoving@2@V12@U32@@RBX@@V?$allocator@PAVEventData@?$MarshaledListener@VInstance@RBX@@UDescendentRemoving@2@V12@U32@@RBX@@@std@@@std@@QAEXXZ,,,
+00672740,library,?_Construct_n@?$vector@MV?$allocator@M@std@@@std@@QAEXIABM@Z,,,
+00672840,library,??$_Sort@PAMH@std@@YAXPAM0H@Z,,,
+00672910,library,?push_back@?$vector@MV?$allocator@M@std@@@std@@QAEXABM@Z,,,

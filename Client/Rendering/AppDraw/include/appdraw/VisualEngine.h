@@ -39,6 +39,7 @@ public:
 
 		void FUN_00671eb0(const Unk0x08& entry);
 		Unk0x08& FUN_00671ef0(int back);
+		float FUN_00672980(int count);
 
 	private:
 		int m_unk0x00;          // 0x00
@@ -70,6 +71,8 @@ DECOMP_SIZE_ASSERT(VisualEngine::Unk0x18, 0x7d8)
 DECOMP_SIZE_ASSERT(VisualEngine, 0x808)
 
 extern Root* g_unk0x0096134c;
+
+void FUN_00672010();
 
 } // namespace Ogre
 

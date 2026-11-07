@@ -2,6 +2,8 @@
 
 #include <OgreRenderTarget.h>
 #include <OgreSceneManager.h>
+#include <algorithm>
+#include <vector>
 
 namespace Ogre {
 
@@ -43,6 +45,30 @@ VisualEngine::~VisualEngine()
 		}
 		delete m_unk0x14;
 	}
+}
+
+// FUNCTION: ROBLOX 0x00672010
+void FUN_00672010()
+{
+	if (g_unk0x0096134c) {
+		delete g_unk0x0096134c;
+		g_unk0x0096134c = NULL;
+	}
+}
+
+// FUNCTION: ROBLOX 0x00672980
+float VisualEngine::Unk0x18::FUN_00672980(int count)
+{
+	if (count <= 99 && m_unk0x00 >= count) {
+		std::vector<float> values(count, 0.0f);
+		values.clear();
+		for (int i = 1; i <= count; i++) {
+			values.push_back(m_unk0x08[(m_unk0x00 - i) % 100].m_unk0x00);
+		}
+		std::sort(values.begin(), values.end());
+		return values[count / 2];
+	}
+	return -1.0f;
 }
 
 } // namespace Ogre
