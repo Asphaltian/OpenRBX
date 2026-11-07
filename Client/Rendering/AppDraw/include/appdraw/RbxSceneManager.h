@@ -177,7 +177,7 @@ public:
 	virtual const SkyBoxGenParameters& getSkyBoxGenParameters(void) const { return mSkyBoxGenParameters; }
 	// FUNCTION: ROBLOX 0x006884e0
 	virtual bool isSkyDomeEnabled(void) const { return mSkyDomeEnabled; }
-	// FUNCTION: ROBLOX 0x006884f0
+	// STUB: ROBLOX 0x006884f0
 	virtual SceneNode* getSkyDomeNode(void) const { return mSkyDomeNode; }
 	// FUNCTION: ROBLOX 0x00688500
 	virtual const SkyDomeGenParameters& getSkyDomeGenParameters(void) const { return mSkyDomeGenParameters; }

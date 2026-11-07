@@ -60,7 +60,7 @@ RenderQueue* RbxSceneManager::getRenderQueue(void)
 	return mRenderQueue;
 }
 
-// STUB: ROBLOX 0x006856b0
+// FUNCTION: ROBLOX 0x006856b0
 void RbxSceneManager::initRenderQueue(void)
 {
 	mRenderQueue = new RenderQueue();
@@ -822,7 +822,7 @@ void RbxSceneManager::destroyInstancedGeometry(InstancedGeometry* geom)
 	destroyInstancedGeometry(geom->getName());
 }
 
-// FUNCTION: ROBLOX 0x00686db0
+// STUB: ROBLOX 0x00686db0
 void RbxSceneManager::destroyQuery(SceneQuery* query)
 {
 	delete query;
@@ -1132,7 +1132,7 @@ void RbxSceneManager::setSkyPlane(
 	mSkyPlaneGenParameters.skyPlaneYSegments = ysegments;
 }
 
-// FUNCTION: ROBLOX 0x00689b90
+// STUB: ROBLOX 0x00689b90
 SceneManager* RbxSceneManagerFactory::createInstance(const String& instanceName)
 {
 	return new RbxSceneManager(instanceName);
@@ -1211,7 +1211,7 @@ void RbxSceneManager::setSkyDome(
 	mSkyDomeGenParameters.skyDomeYSegments_keep = ySegmentsToKeep;
 }
 
-// STUB: ROBLOX 0x0068a990
+// FUNCTION: ROBLOX 0x0068a990
 void RbxSceneManager::initShadowVolumeMaterials(void)
 {
 
@@ -1814,7 +1814,7 @@ bool RbxSceneManager::isRenderQueueToBeProcessed(uint8 qid)
 	return (inList && mSpecialCaseQueueMode == SCRQM_INCLUDE) || (!inList && mSpecialCaseQueueMode == SCRQM_EXCLUDE);
 }
 
-// STUB: ROBLOX 0x0068f610
+// FUNCTION: ROBLOX 0x0068f610
 void RbxSceneManager::destroyCamera(Camera* cam)
 {
 
@@ -2852,7 +2852,7 @@ Animation* RbxSceneManager::createAnimation(const String& name, Real length)
 	return pAnim;
 }
 
-// STUB: ROBLOX 0x006943b0
+// FUNCTION: ROBLOX 0x006943b0
 void RbxSceneManager::destroyShadowTextures(void)
 {
 
@@ -3499,7 +3499,7 @@ void RbxSceneManager::renderShadowVolumesToStencil(const Light* light, const Cam
 	}
 }
 
-// STUB: ROBLOX 0x00696970
+// FUNCTION: ROBLOX 0x00696970
 void RbxSceneManager::ensureShadowTexturesCreated()
 {
 	if (mShadowTextureConfigDirty) {
@@ -3565,7 +3565,7 @@ void RbxSceneManager::ensureShadowTexturesCreated()
 	}
 }
 
-// STUB: ROBLOX 0x00697030
+// FUNCTION: ROBLOX 0x00697030
 void RbxSceneManager::setShadowTextureCount(size_t count)
 {
 
@@ -3781,7 +3781,7 @@ void RbxSceneManager::_populateLightList(const Vector3& position, Real radius, L
 	}
 }
 
-// STUB: ROBLOX 0x00697f60
+// FUNCTION: ROBLOX 0x00697f60
 void RbxSceneManager::findLightsAffectingFrustum(const Camera* camera)
 {
 
