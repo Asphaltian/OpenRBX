@@ -47,6 +47,8 @@ public:
 
 DECOMP_SIZE_ASSERT(BrickMesh, 0x50)
 
+extern bool g_unk0x0092a908;
+
 } // namespace ViewNew
 } // namespace RBX
 

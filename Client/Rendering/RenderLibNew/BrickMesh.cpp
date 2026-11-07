@@ -11,6 +11,9 @@
 namespace RBX {
 namespace ViewNew {
 
+// GLOBAL: ROBLOX 0x0092a908
+bool g_unk0x0092a908 = true;
+
 static int orderedCompare(const G3D::Vector3& a, const G3D::Vector3& b)
 {
 	if (a.x < b.x) {

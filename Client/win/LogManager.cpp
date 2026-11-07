@@ -57,6 +57,24 @@ std::string MainLogManager::getLogFileName()
 	return (LPCSTR) path;
 }
 
+// FUNCTION: ROBLOX 0x0042a780
+std::string MainLogManager::MakeLogFileName(const char* prefix)
+{
+	ATL::CPath path = GetLogPath();
+
+	std::string fileName = "log_";
+	fileName += guid;
+
+	fileName.erase(12);
+	fileName.erase(4, 3);
+	fileName += prefix;
+	fileName += ".txt";
+
+	path.Append(fileName.c_str());
+
+	return (LPCSTR) path;
+}
+
 // FUNCTION: WEBSERVICE 0x10001fd0
 // FUNCTION: ROBLOX 0x0042a250
 std::string ThreadLogManager::getLogFileName()

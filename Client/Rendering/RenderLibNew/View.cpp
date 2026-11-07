@@ -25,6 +25,22 @@ void View::invalidateLighting(bool updateSkybox)
 	}
 }
 
+// GLOBAL: ROBLOX 0x0092a24c
+bool g_unk0x0092a24c = true;
+
+// FUNCTION: ROBLOX 0x0050b2a0
+void FUN_0050b2a0(bool value)
+{
+	g_unk0x0092a24c = value;
+	g_unk0x0092a908 = value;
+}
+
+// FUNCTION: ROBLOX 0x0050b2b0
+bool FUN_0050b2b0()
+{
+	return g_unk0x0092a24c;
+}
+
 // FUNCTION: ROBLOX 0x0050b2e0
 Instance* View::getWorkspace()
 {

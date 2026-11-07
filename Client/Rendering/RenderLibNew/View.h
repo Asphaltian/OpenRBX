@@ -74,6 +74,11 @@ private:
 
 DECOMP_SIZE_ASSERT(View, 0x58)
 
+extern bool g_unk0x0092a24c;
+
+void FUN_0050b2a0(bool value);
+bool FUN_0050b2b0();
+
 } // namespace ViewNew
 } // namespace RBX
 
