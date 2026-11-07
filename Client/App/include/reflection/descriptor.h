@@ -20,9 +20,8 @@ inline boost::recursive_mutex& sync()
 }
 
 // SYNTHETIC: WEBSERVICE 0x10005990
-// RBX::Reflection::Descriptor::`scalar deleting destructor'
 // SYNTHETIC: ROBLOX 0x005deed0
-// RBX::Reflection::EnumDescriptor::Item::`scalar deleting destructor'
+// RBX::Reflection::Descriptor::`scalar deleting destructor'
 // FUNCTION: WEBSERVICE 0x1004d7f0
 // FUNCTION: ROBLOX 0x004b68f0
 // RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::fire

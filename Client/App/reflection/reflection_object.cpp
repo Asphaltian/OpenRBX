@@ -14,6 +14,11 @@ bool ClassDescriptor::operator==(const ClassDescriptor& other) const
 	return this == &other;
 }
 
+bool ClassDescriptor::operator!=(const ClassDescriptor& other) const
+{
+	return this != &other;
+}
+
 // FUNCTION: WEBSERVICE 0x10047800
 // FUNCTION: ROBLOX 0x005a9ab0
 ClassDescriptor::ClassDescriptor()
