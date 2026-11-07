@@ -16,6 +16,7 @@
 #include "v8datamodel/ToolsPart.h"
 
 #include <G3D/Color3uint8.h>
+#include <G3D/GImage.h>
 #include <GLG3D/Texture.h>
 #include <GLG3D/VARArea.h>
 
@@ -225,16 +226,154 @@ void CMainFrame::OnWindowPosChanging(WINDOWPOS* lpwndpos)
 	}
 }
 
-// STUB: ROBLOX 0x004334d0
-void FUN_004334d0(CXTPImageManager* imageManager)
+// STUB: ROBLOX 0x004331e0
+static bool FUN_004331e0(CXTPImageManager* imageManager, UINT id, LPCTSTR name, XTPImageState state)
 {
-	STUB(0x4334d0);
+	HINSTANCE instance = AfxFindResourceHandle(name, "PNG");
+	if (instance == NULL) {
+		return false;
+	}
+	HRSRC resource = FindResource(instance, name, "PNG");
+	if (resource == NULL) {
+		return false;
+	}
+	HGLOBAL global = LoadResource(instance, resource);
+	if (global == NULL) {
+		return false;
+	}
+	const G3D::uint8* data = static_cast<const G3D::uint8*>(LockResource(global));
+	if (data == NULL) {
+		return false;
+	}
+
+	G3D::GImage image(data, SizeofResource(instance, resource), G3D::GImage::PNG);
+	for (int x = 0; x < image.width; x++) {
+		for (int y = 0; y < image.height; y++) {
+			G3D::uint8* pixel = image.byte() + (y * image.width + x) * 4;
+			std::swap(pixel[0], pixel[2]);
+		}
+	}
+
+	ATL::CImage bitmap;
+	if (!bitmap.Create(
+			image.width, image.height, image.channels * 8, image.channels == 4 ? ATL::CImage::createAlphaChannel : 0
+		)) {
+		return false;
+	}
+	for (int y = 0; y < image.height; y++) {
+		memcpy(bitmap.GetPixelAddress(0, y), image.byte() + y * image.width * 4, image.width * 4);
+	}
+	BOOL result = imageManager->SetIcon(CXTPImageManagerIconHandle((HBITMAP) bitmap), id, CSize(0, 0), state);
+	FreeResource(global);
+	return result != FALSE;
 }
 
-// STUB: ROBLOX 0x004335e0
+// FUNCTION: ROBLOX 0x004333d0
+static void FUN_004333d0(CXTPImageManager* imageManager, UINT id, LPCTSTR name, int size)
+{
+	CString resourceName;
+	resourceName.Format("\"%s_%d\"", name, size);
+	if (FUN_004331e0(imageManager, id, resourceName.MakeUpper(), xtpImageNormal)) {
+		resourceName.Format("\"%s_%d_D\"", name, size);
+		FUN_004331e0(imageManager, id, resourceName.MakeUpper(), xtpImageDisabled);
+		resourceName.Format("\"%s_%d_H\"", name, size);
+		FUN_004331e0(imageManager, id, resourceName.MakeUpper(), xtpImageHot);
+	}
+}
+
+// FUNCTION: ROBLOX 0x004334d0
+void FUN_004334d0(CXTPImageManager* imageManager)
+{
+	imageManager->RemoveIcon(0x80bb);
+	FUN_004333d0(imageManager, 0x80bb, "stop", 16);
+	FUN_004333d0(imageManager, 0x80bb, "stop", 32);
+	imageManager->RemoveIcon(0x80bd);
+	FUN_004333d0(imageManager, 0x80bd, "home_brown", 16);
+	FUN_004333d0(imageManager, 0x80bd, "home_brown", 32);
+	imageManager->RemoveIcon(0x80bc);
+	FUN_004333d0(imageManager, 0x80bc, "refresh_doc", 16);
+	FUN_004333d0(imageManager, 0x80bc, "refresh_doc", 32);
+	imageManager->RemoveIcon(0x80ba);
+	FUN_004333d0(imageManager, 0x80ba, "arrowleft_green", 16);
+	FUN_004333d0(imageManager, 0x80ba, "arrowleft_green", 32);
+	imageManager->RemoveIcon(0x80b9);
+	FUN_004333d0(imageManager, 0x80b9, "arrowright_green", 16);
+	FUN_004333d0(imageManager, 0x80b9, "arrowright_green", 32);
+}
+
+// FUNCTION: ROBLOX 0x004335e0
 static void FUN_004335e0(CXTPImageManager* imageManager)
 {
-	STUB(0x4335e0);
+	FUN_004334d0(imageManager);
+	imageManager->RemoveIcon(0xe100);
+	FUN_004333d0(imageManager, 0xe100, "new_document", 16);
+	FUN_004333d0(imageManager, 0xe100, "new_document", 32);
+	imageManager->RemoveIcon(0xe101);
+	FUN_004333d0(imageManager, 0xe101, "open_document", 16);
+	FUN_004333d0(imageManager, 0xe101, "open_document", 32);
+	imageManager->RemoveIcon(0xe103);
+	FUN_004333d0(imageManager, 0xe103, "save", 16);
+	FUN_004333d0(imageManager, 0xe103, "save", 32);
+	imageManager->RemoveIcon(0xe12b);
+	FUN_004333d0(imageManager, 0xe12b, "undo", 16);
+	FUN_004333d0(imageManager, 0xe12b, "undo", 32);
+	imageManager->RemoveIcon(0xe12c);
+	FUN_004333d0(imageManager, 0xe12c, "redo", 16);
+	FUN_004333d0(imageManager, 0xe12c, "redo", 32);
+	imageManager->RemoveIcon(0xe120);
+	FUN_004333d0(imageManager, 0xe120, "delete_x", 16);
+	FUN_004333d0(imageManager, 0xe120, "delete_x", 32);
+	imageManager->RemoveIcon(0xe122);
+	FUN_004333d0(imageManager, 0xe122, "copy_clipboard", 16);
+	FUN_004333d0(imageManager, 0xe122, "copy_clipboard", 32);
+	imageManager->RemoveIcon(0xe123);
+	FUN_004333d0(imageManager, 0xe123, "cut_clipboard", 16);
+	FUN_004333d0(imageManager, 0xe123, "cut_clipboard", 32);
+	imageManager->RemoveIcon(0xe125);
+	FUN_004333d0(imageManager, 0xe125, "paste_clipboard", 16);
+	FUN_004333d0(imageManager, 0xe125, "paste_clipboard", 32);
+	imageManager->RemoveIcon(0x8040);
+	FUN_004333d0(imageManager, 0x8040, "paintcan", 16);
+	FUN_004333d0(imageManager, 0x8040, "paintcan", 32);
+	imageManager->RemoveIcon(0x8073);
+	FUN_004333d0(imageManager, 0x8073, "lock", 16);
+	FUN_004333d0(imageManager, 0x8073, "lock", 32);
+	imageManager->RemoveIcon(0x8010);
+	FUN_004333d0(imageManager, 0x8010, "lock", 16);
+	FUN_004333d0(imageManager, 0x8010, "lock", 32);
+	imageManager->RemoveIcon(0x8011);
+	FUN_004333d0(imageManager, 0x8011, "lock_open", 16);
+	FUN_004333d0(imageManager, 0x8011, "lock_open", 32);
+	imageManager->RemoveIcon(0x80da);
+	FUN_004333d0(imageManager, 0x80da, "recycle", 16);
+	FUN_004333d0(imageManager, 0x80da, "recycle", 32);
+	imageManager->RemoveIcon(0x80f1);
+	FUN_004333d0(imageManager, 0x80f1, "script_go", 16);
+	FUN_004333d0(imageManager, 0x80f1, "script_go", 32);
+	imageManager->RemoveIcon(0x80f3);
+	FUN_004333d0(imageManager, 0x80f3, "report", 16);
+	FUN_004333d0(imageManager, 0x80f3, "report", 32);
+	imageManager->RemoveIcon(0x800f);
+	FUN_004333d0(imageManager, 0x800f, "table", 16);
+	FUN_004333d0(imageManager, 0x800f, "table", 32);
+	imageManager->RemoveIcon(0x80e2);
+	FUN_004333d0(imageManager, 0x80e2, "text_list_numbers", 16);
+	FUN_004333d0(imageManager, 0x80e2, "text_list_numbers", 32);
+	imageManager->RemoveIcon(0x80bf);
+	FUN_004333d0(imageManager, 0x80bf, "world", 16);
+	FUN_004333d0(imageManager, 0x80bf, "world", 32);
+	imageManager->RemoveIcon(0x8101);
+	FUN_004333d0(imageManager, 0x8101, "bug_error", 16);
+	FUN_004333d0(imageManager, 0x8101, "bug_error", 32);
+	imageManager->RemoveIcon(0x8100);
+	FUN_004333d0(imageManager, 0x8100, "shield", 16);
+	FUN_004333d0(imageManager, 0x8100, "shield", 32);
+	imageManager->RemoveIcon(0x803a);
+	FUN_004333d0(imageManager, 0x803a, "ungroup", 16);
+	FUN_004333d0(imageManager, 0x803a, "ungroup", 32);
+	imageManager->RemoveIcon(0x8039);
+	FUN_004333d0(imageManager, 0x8039, "group", 16);
+	FUN_004333d0(imageManager, 0x8039, "group", 32);
 }
 
 // FUNCTION: ROBLOX 0x00433b20

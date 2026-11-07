@@ -12,6 +12,7 @@
 #include <afxcmn.h>
 #include <afxtempl.h>
 #include <atlbase.h>
+#include <atlimage.h>
 #include <XTToolkitPro.h>
 #include <string>
 // clang-format on
