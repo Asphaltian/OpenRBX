@@ -1,6 +1,7 @@
 #include "MainFrm.h"
 
 #include "PropGrid.h"
+#include "RBXImage.h"
 #include "RenderSettings.h"
 #include "Roblox.h"
 #include "RobloxReportView.h"
@@ -254,14 +255,15 @@ static bool FUN_004331e0(CXTPImageManager* imageManager, UINT id, LPCTSTR name, 
 		}
 	}
 
-	ATL::CImage bitmap;
-	if (!bitmap.Create(
-			image.width, image.height, image.channels * 8, image.channels == 4 ? ATL::CImage::createAlphaChannel : 0
+	RBXImage bitmap;
+	if (!bitmap.FUN_00445f50(
+			image.width, image.height, image.channels * 8, image.channels == 4 ? RBXImage::c_createAlphaChannel : 0
 		)) {
 		return false;
 	}
+	bitmap.FUN_00445c70();
 	for (int y = 0; y < image.height; y++) {
-		memcpy(bitmap.GetPixelAddress(0, y), image.byte() + y * image.width * 4, image.width * 4);
+		memcpy(bitmap.FUN_00445c40(0, y), image.byte() + y * image.width * 4, image.width * 4);
 	}
 	BOOL result = imageManager->SetIcon(CXTPImageManagerIconHandle((HBITMAP) bitmap), id, CSize(0, 0), state);
 	FreeResource(global);
