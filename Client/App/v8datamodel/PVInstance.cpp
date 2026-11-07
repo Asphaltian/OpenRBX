@@ -212,6 +212,17 @@ Controller* PVInstance::getTopPVController() const
 	return NullController::getStaticNullController();
 }
 
+// STUB: ROBLOX 0x005f7810
+PVInstance* PVInstance::getTopLevelPVParent()
+{
+	PVInstance* answer = this;
+	while (dynamic_cast<PVInstance*>(answer->getParent()) &&
+		   answer->getParent() != answer->getTypedRoot<PVInstance>()) {
+		answer = static_cast<PVInstance*>(answer->getParent());
+	}
+	return answer;
+}
+
 // FUNCTION: WEBSERVICE 0x100997e0
 // FUNCTION: ROBLOX 0x005f79c0
 void PVInstance::clearLegacyOffset()

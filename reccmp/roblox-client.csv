@@ -5797,3 +5797,6 @@ address,type,symbol,name,module,size
 009618fc,global,?ms_bUseCustomHeap@CXTPReportDataAllocatorData@@2HA,,,
 009618f4,global,?ms_dwRefs@CXTPReportDataAllocatorData@@2JA,,,
 006d19d0,library,??0CXTPReportRecordItemText@@QAE@PBD@Z,,,
+008275bc,global,??_7PartTool@RBX@@6BINamed@1@@,,,
+008275a4,global,??_7PartTool@RBX@@6BIRenderable@1@@,,,
+00801148,global,??_8UndoState@RBX@@7B@,,,

@@ -16,6 +16,8 @@ class Adorn;
 class PartInstance;
 
 extern char sFillTool[];
+extern char sDropperTool[];
+extern char sModelSetPrimaryPartTool[];
 
 // SIZE 0x28
 class PartTool : public MouseCommand
@@ -29,6 +31,12 @@ protected:
 
 public:
 	PartTool(Workspace* workspace);
+
+	// SYNTHETIC: ROBLOX 0x005c03d0
+	// RBX::PartTool::~PartTool
+
+	// SYNTHETIC: ROBLOX 0x005d1d90
+	// RBX::PartTool::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(PartTool, 0x28)
@@ -67,15 +75,45 @@ public:
 
 protected:
 	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
-	virtual const std::string getCursorName() const;
+
+	// FUNCTION: ROBLOX 0x005d1c10
+	virtual const std::string getCursorName() const { return "FillCursor"; }
 
 public:
-	FillTool(Workspace* workspace);
+	FillTool(Workspace* workspace) : Named<PartTool, sFillTool>(workspace) {}
 
-	virtual MouseCommand* isSticky() const;
+	// FUNCTION: ROBLOX 0x005d1c40
+	virtual MouseCommand* isSticky() const { return new FillTool(workspace); }
 };
 
 DECOMP_SIZE_ASSERT(FillTool, 0x28)
+
+// SIZE 0x28
+class DropperTool : public Named<PartTool, sDropperTool>
+{
+protected:
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+
+	// FUNCTION: ROBLOX 0x005d1d60
+	virtual const std::string getCursorName() const { return "DropperCursor"; }
+
+public:
+	DropperTool(Workspace* workspace) : Named<PartTool, sDropperTool>(workspace) {}
+};
+
+DECOMP_SIZE_ASSERT(DropperTool, 0x28)
+
+// SIZE 0x28
+class ModelSetPrimaryPartTool : public Named<PartTool, sModelSetPrimaryPartTool>
+{
+protected:
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+
+public:
+	ModelSetPrimaryPartTool(Workspace* workspace) : Named<PartTool, sModelSetPrimaryPartTool>(workspace) {}
+};
+
+DECOMP_SIZE_ASSERT(ModelSetPrimaryPartTool, 0x28)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021e7c0
