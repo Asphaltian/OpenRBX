@@ -40,6 +40,7 @@ template class RBX::TToolVerb<RBX::NullTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::GrabTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::CloneTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::GameTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::AxisMoveTool, RBX::RunStateVerb>;
 
 namespace RBX {
 

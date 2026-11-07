@@ -8,8 +8,11 @@
 #include "v8tree/Service.h"
 #include "v8tree/Verb.h"
 
+#include <G3D/Ray.h>
 #include <G3D/Rect2D.h>
 #include <G3D/Vector2int16.h>
+#include <G3D/Vector3.h>
+#include <memory>
 #include <set>
 #include <string>
 
@@ -81,6 +84,46 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(ArrowTool, 0x24)
+
+class MegaDragger;
+
+extern char sAxisMoveTool[];
+
+// SIZE 0x78
+class AxisMoveTool : public Named<ArrowToolBase, sAxisMoveTool>
+{
+private:
+	std::auto_ptr<MegaDragger> dragger; // 0x24
+	std::string cursor;                 // 0x28
+	bool m_unk0x44;                     // 0x44
+	G3D::Vector2int16 m_unk0x46;        // 0x46
+	G3D::Ray m_unk0x4c;                 // 0x4c
+	undefined4 m_unk0x68;               // 0x68
+	G3D::Vector3 m_unk0x6c;             // 0x6c
+
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+	virtual void onMouseIdle(const UIEvent& uiEvent);
+	virtual void onMouseMove(const UIEvent& uiEvent);
+	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent);
+	virtual const std::string getCursorName() const { return cursor; }
+
+public:
+	AxisMoveTool(Workspace* workspace);
+
+	// SYNTHETIC: ROBLOX 0x0063c770
+	// RBX::AxisMoveTool::~AxisMoveTool
+
+	// FUNCTION: ROBLOX 0x0063c820
+	virtual MouseCommand* isSticky() const { return new AxisMoveTool(workspace); }
+
+	// SYNTHETIC: ROBLOX 0x0063c880
+	// RBX::AxisMoveTool::`scalar deleting destructor'
+
+	virtual void render2d(Adorn* adorn);
+	virtual void render3dAdorn(Adorn* adorn);
+};
+
+DECOMP_SIZE_ASSERT(AxisMoveTool, 0x78)
 
 class DataModel;
 

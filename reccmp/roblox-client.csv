@@ -6018,3 +6018,11 @@ address,type,symbol,name,module,size
 008d195c,global,__TI2PAD,,,
 0083e018,string,,,,
 0083cf1c,global,??_7?$SharedPtr@VRbxFont@Ogre@@@Ogre@@6B@,,,
+005d0a30,function,,,,5
+0082afcc,global,??_7?$TToolVerb@VAxisMoveTool@RBX@@VRunStateVerb@2@@RBX@@6B@,,,
+0083a82c,global,??_7AxisMoveTool@RBX@@6BIRenderable@1@@,,,
+0083a844,global,??_7AxisMoveTool@RBX@@6BINamed@1@@,,,
+0095db70,global,"n___RBX::Name::doDeclare<&RBX::sAxisMoveTool>",,,
+0095db74,global,"??_B?1???$doDeclare@$1?sAxisMoveTool@RBX@@3PADA@Name@RBX@@CAABV01@XZ@51",,,
+0095dbd8,global,"flag___RBX::Name::declare<&RBX::sAxisMoveTool>",,,
+009391c4,global,??_R0?AVAxisMoveTool@RBX@@@8,,,

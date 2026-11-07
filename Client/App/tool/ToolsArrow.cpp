@@ -2,6 +2,7 @@
 
 #include "rbxgraphics/Adorn.h"
 #include "tool/DragTool.h"
+#include "tool/MegaDragger.h"
 #include "util/ISelectable3d.h"
 #include "util/Name.h"
 #include "util/UIEvent.h"
@@ -19,6 +20,9 @@ namespace RBX {
 char sBoxSelectCommand[] = "BoxSelect";
 
 char sArrowTool[] = "Arrow";
+
+// GLOBAL: ROBLOX 0x00948da0
+char sAxisMoveTool[] = "AxisMove";
 
 // FUNCTION: WEBSERVICE 0x100bf0e0
 // FUNCTION: ROBLOX 0x0063c600
@@ -210,6 +214,55 @@ void BoxSelectCommand::onMouseMove(const UIEvent& uiEvent)
 	else {
 		selectAnd(instances);
 	}
+}
+
+// FUNCTION: ROBLOX 0x0063c6b0
+AxisMoveTool::AxisMoveTool(Workspace* workspace)
+	: Named<ArrowToolBase, sAxisMoveTool>(workspace), cursor("ArrowCursor"), m_unk0x44(false)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063c7f0
+MouseCommand* AxisMoveTool::onMouseUp(const UIEvent& uiEvent)
+{
+	if (m_unk0x44) {
+		dragger->finishDragging();
+		dragger.release();
+		m_unk0x44 = false;
+	}
+	releaseCapture();
+	return NULL;
+}
+
+// STUB: ROBLOX 0x0063c920
+void AxisMoveTool::onMouseMove(const UIEvent& uiEvent)
+{
+	STUB(0x63c920);
+}
+
+// STUB: ROBLOX 0x0063cf00
+MouseCommand* AxisMoveTool::onMouseDown(const UIEvent& uiEvent)
+{
+	STUB(0x63cf00);
+	return NULL;
+}
+
+// STUB: ROBLOX 0x0063d010
+void AxisMoveTool::render2d(Adorn* adorn)
+{
+	STUB(0x63d010);
+}
+
+// STUB: ROBLOX 0x0063d120
+void AxisMoveTool::render3dAdorn(Adorn* adorn)
+{
+	STUB(0x63d120);
+}
+
+// STUB: ROBLOX 0x0063d240
+void AxisMoveTool::onMouseIdle(const UIEvent& uiEvent)
+{
+	STUB(0x63d240);
 }
 
 // FUNCTION: ROBLOX 0x0063d320

@@ -426,6 +426,8 @@ private:
 	// RBX::Name::doDeclare<&RBX::sCloneTool>
 	// TEMPLATE: ROBLOX 0x005d0750
 	// RBX::Name::doDeclare<&RBX::sGameTool>
+	// TEMPLATE: ROBLOX 0x005d07c0
+	// RBX::Name::doDeclare<&RBX::sAxisMoveTool>
 	template <const char* name>
 	static const Name& doDeclare()
 	{
@@ -789,6 +791,8 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sCloneTool>
 	// TEMPLATE: ROBLOX 0x005d0a20
 	// RBX::Name::callDoDeclare<&RBX::sGameTool>
+	// TEMPLATE: ROBLOX 0x005d0a30
+	// RBX::Name::callDoDeclare<&RBX::sAxisMoveTool>
 	template <const char* name>
 	static void callDoDeclare()
 	{
@@ -916,6 +920,8 @@ public:
 	// RBX::Named<RBX::MouseCommand,&RBX::sCloneTool>::getName
 	// TEMPLATE: ROBLOX 0x0063c5a0
 	// RBX::Named<RBX::MouseCommand,&RBX::sGameTool>::getName
+	// TEMPLATE: ROBLOX 0x0063c8a0
+	// RBX::Named<RBX::ArrowToolBase,&RBX::sAxisMoveTool>::getName
 	// clang-format on
 };
 
