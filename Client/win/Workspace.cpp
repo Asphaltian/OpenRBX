@@ -1,7 +1,9 @@
 #include "Workspace.h"
 
 #include "Content.h"
+#include "InstanceExplorer.h"
 #include "LogManager.h"
+#include "util/ContentProvider.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/Selection.h"
 #include "v8xml/SerializerV2.h"
@@ -148,6 +150,45 @@ STDMETHODIMP CWorkspace::SaveSelectionToFile(BSTR pathName)
 	return S_OK;
 }
 
+// FUNCTION: ROBLOX 0x004702b0
+void CWorkspace::FUN_004702b0(RBX::ContentId contentId, bool p_unk0x20)
+{
+	if (m_unk0x24->findFirstChildByName("NetworkClient")) {
+		return;
+	}
+
+	RBX::DataModel::Lock lock(m_unk0x24);
+	RBX::Selection* selection = RBX::ServiceProvider::create<RBX::Selection>(FUN_0046edf0());
+	RBX::Instance* parent = p_unk0x20 && selection->size() == 1 ? selection->front().get() : FUN_0046edf0();
+	RBX::InsertMode insertMode = p_unk0x20 ? RBX::INSERT_TO_TREE : RBX::INSERT_TO_3D_VIEW;
+	RBX::PromptMode promptMode = p_unk0x20 ? RBX::SUPPRESS_PROMPTS : RBX::ALLOW_PROMPTS;
+	std::vector<boost::shared_ptr<RBX::Instance> > instances;
+
+	try {
+		{
+			std::auto_ptr<std::istream> stream = RBX::ContentProvider::singleton().getContent(contentId);
+			TextXmlParser machine(stream->rdbuf());
+			std::auto_ptr<XmlElement> root = machine.parse();
+			SerializerV2().loadInstances(root.get(), instances);
+		}
+
+		FUN_0046edf0()->insertInstances(instances, parent, insertMode, promptMode);
+
+		if (m_unk0x2c->getRunState() == RBX::RS_NORMAL) {
+			const std::vector<boost::shared_ptr<RBX::Instance> >& items = instances;
+			selection->setSelection(items.begin(), items.end());
+		}
+	}
+	catch (...) {
+		std::for_each(
+			instances.begin(),
+			instances.end(),
+			boost::bind(&RBX::Instance::setParent, _1, static_cast<RBX::Instance*>(NULL))
+		);
+		throw;
+	}
+}
+
 // STUB: ROBLOX 0x00470640
 STDMETHODIMP CWorkspace::Write(IContent** result)
 {
@@ -219,11 +260,23 @@ STDMETHODIMP CWorkspace::SaveToFile(BSTR pathName)
 	}
 }
 
-// STUB: ROBLOX 0x00470f40
+// FUNCTION: ROBLOX 0x00470f40
 STDMETHODIMP CWorkspace::Insert(BSTR url)
 {
-	STUB(0x470f40);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	try {
+		if (HRESULT hr = FUN_0041e630(url)) {
+			CString message;
+			message.Format("Untrusted Url: %s", CString(url));
+			return LogManager::ReportCOMError(CLSID_Workspace, message, hr);
+		}
+
+		FUN_004702b0(RBX::ContentId(CString(url)), false);
+		return S_OK;
+	}
+	catch (const std::exception& e) {
+		return LogManager::ReportCOMError(CLSID_Workspace, e.what(), S_OK);
+	}
 }
 
 OBJECT_ENTRY_AUTO(__uuidof(Workspace), CWorkspace)

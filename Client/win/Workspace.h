@@ -72,6 +72,7 @@ private:
 	std::auto_ptr<XmlElement> FUN_0046f040();
 	void FUN_0046f420();
 	std::auto_ptr<XmlElement> FUN_0046ffa0();
+	void FUN_004702b0(RBX::ContentId contentId, bool p_unk0x20);
 	HRESULT FUN_004700b0(const XmlElement* root, std::ostream& stream);
 
 	boost::shared_ptr<RBX::DataModel> m_unk0x24;  // 0x24

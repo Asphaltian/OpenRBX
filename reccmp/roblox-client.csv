@@ -6126,3 +6126,5 @@ address,type,symbol,name,module,size
 00413850,library,?QueryInterface@?$CComObject@VCContent@@@ATL@@W3AGJABU_GUID@@PAPAX@Z,,,
 00413860,library,??_G?$CComObject@VCContent@@@ATL@@UAEPAXI@Z,,,
 004137b0,library,??1CContent@@QAE@XZ,,,
+00470f40,function,,,,429
+004702b0,function,,,,907
