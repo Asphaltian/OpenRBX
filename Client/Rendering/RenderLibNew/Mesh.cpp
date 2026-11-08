@@ -4,6 +4,7 @@
 #include "renderlibnew/Chunk.h"
 
 #include <OgreLogManager.h>
+#include <stdio.h>
 
 namespace RBX {
 namespace RenderNew {
@@ -22,6 +23,7 @@ Ogre::MeshPtr Mesh::g_unk0x0095877c;
 
 static int g_unk0x00958738;
 static int g_unk0x0095873c;
+static int g_unk0x00958798;
 static bool g_unk0x00958794;
 
 void Mesh::endRender(G3D::RenderDevice* rd)
@@ -307,6 +309,138 @@ void Mesh::Level::makeHWSubMesh(Ogre::VisualEngine* engine, Ogre::AxisAlignedBox
 	else {
 		Ogre::LogManager::getSingleton().logMessage("RBX makeHWSubMesh: should not be here");
 	}
+}
+
+// STUB: ROBLOX 0x00533160
+void Mesh::Level::FUN_00533160(Ogre::VisualEngine* engine, Ogre::AxisAlignedBox& box)
+{
+	char name[8];
+	sprintf(name, "m%d", g_unk0x00958798++);
+
+	unsigned int minIndex = 9999999;
+	unsigned int maxIndex = 0;
+	for (int i = 0; i < indexArray.size(); i++) {
+		if (minIndex > indexArray[i]) {
+			minIndex = indexArray[i];
+		}
+		if (maxIndex < indexArray[i]) {
+			maxIndex = indexArray[i];
+		}
+	}
+	int vertexCount = maxIndex - minIndex + 1;
+
+	std::vector<unsigned int> indices32;
+	std::vector<unsigned short> indices16;
+	std::vector<float> positions;
+	std::vector<float> normals;
+	std::vector<float> textureCoords;
+	if (engine->m_unk0x7f4) {
+		if (primitive == G3D::RenderDevice::QUADS) {
+			indices32.resize(indexArray.size() / 4 * 6);
+			for (int i = 0; i < indexArray.size(); i += 4) {
+				int quad = i / 4;
+				indices32[quad * 6] = indexArray[quad * 4] - minIndex;
+				indices32[quad * 6 + 1] = indexArray[quad * 4 + 1] - minIndex;
+				indices32[quad * 6 + 2] = indexArray[quad * 4 + 3] - minIndex;
+				indices32[quad * 6 + 3] = indexArray[quad * 4 + 3] - minIndex;
+				indices32[quad * 6 + 4] = indexArray[quad * 4 + 1] - minIndex;
+				indices32[quad * 6 + 5] = indexArray[quad * 4 + 2] - minIndex;
+			}
+			positions.resize(vertexCount * 3);
+			normals.resize(vertexCount * 3);
+			textureCoords.resize(vertexCount * 3);
+			for (int i = 0; i < (int) indices32.size(); i++) {
+				for (int j = 0; j < 3; j++) {
+					positions[indices32[i] * 3 + j] = visibleGeometry.vertexArray[indices32[i] + minIndex][j];
+					normals[indices32[i] * 3 + j] = visibleGeometry.normalArray[indices32[i] + minIndex][j];
+				}
+				for (int j = 0; j < 2; j++) {
+					textureCoords[indices32[i] * 2 + j] = texCoordArray[indices32[i] + minIndex][j];
+				}
+			}
+		}
+		else if (primitive == G3D::RenderDevice::TRIANGLES) {
+			indices32.resize(indexArray.size());
+			for (int i = 0; i < indexArray.size(); i++) {
+				indices32[i] = indexArray[i] - minIndex;
+			}
+			positions.resize(vertexCount * 3);
+			normals.resize(vertexCount * 3);
+			textureCoords.resize(vertexCount * 3);
+			for (int i = 0; i < (int) indices32.size(); i++) {
+				for (int j = 0; j < 3; j++) {
+					positions[indices32[i] * 3 + j] = visibleGeometry.vertexArray[indices32[i] + minIndex][j];
+					normals[indices32[i] * 3 + j] = visibleGeometry.normalArray[indices32[i] + minIndex][j];
+				}
+				for (int j = 0; j < 2; j++) {
+					textureCoords[indices32[i] * 2 + j] = texCoordArray[indices32[i] + minIndex][j];
+				}
+			}
+		}
+	}
+	else {
+		if (primitive == G3D::RenderDevice::QUADS) {
+			indices16.resize(indexArray.size() / 4 * 6);
+			for (int i = 0; i < indexArray.size(); i += 4) {
+				int quad = i / 4;
+				indices16[quad * 6] = indexArray[quad * 4] - minIndex;
+				indices16[quad * 6 + 1] = indexArray[quad * 4 + 1] - minIndex;
+				indices16[quad * 6 + 2] = indexArray[quad * 4 + 3] - minIndex;
+				indices16[quad * 6 + 3] = indexArray[quad * 4 + 3] - minIndex;
+				indices16[quad * 6 + 4] = indexArray[quad * 4 + 1] - minIndex;
+				indices16[quad * 6 + 5] = indexArray[quad * 4 + 2] - minIndex;
+			}
+			positions.resize(vertexCount * 3);
+			normals.resize(vertexCount * 3);
+			textureCoords.resize(vertexCount * 3);
+			for (int i = 0; i < (int) indices16.size(); i++) {
+				for (int j = 0; j < 3; j++) {
+					positions[indices16[i] * 3 + j] = visibleGeometry.vertexArray[indices16[i] + minIndex][j];
+					normals[indices16[i] * 3 + j] = visibleGeometry.normalArray[indices16[i] + minIndex][j];
+				}
+				for (int j = 0; j < 2; j++) {
+					textureCoords[indices16[i] * 2 + j] = texCoordArray[indices16[i] + minIndex][j];
+				}
+			}
+		}
+		else if (primitive == G3D::RenderDevice::TRIANGLES) {
+			indices16.resize(indexArray.size());
+			for (int i = 0; i < indexArray.size(); i++) {
+				indices16[i] = indexArray[i] - minIndex;
+			}
+			positions.resize(vertexCount * 3);
+			normals.resize(vertexCount * 3);
+			textureCoords.resize(vertexCount * 3);
+			for (int i = 0; i < (int) indices16.size(); i++) {
+				for (int j = 0; j < 3; j++) {
+					positions[indices16[i] * 3 + j] = visibleGeometry.vertexArray[indices16[i] + minIndex][j];
+					normals[indices16[i] * 3 + j] = visibleGeometry.normalArray[indices16[i] + minIndex][j];
+				}
+				for (int j = 0; j < 2; j++) {
+					textureCoords[indices16[i] * 2 + j] = texCoordArray[indices16[i] + minIndex][j];
+				}
+			}
+		}
+	}
+
+	size_t triangleCount = (engine->m_unk0x7f4 ? indices32.size() : indices16.size()) / 3;
+	Ogre::Vector3 minimum;
+	Ogre::Vector3 maximum;
+	m_unk0x24 = engine->FUN_006735b0(
+		&positions[0],
+		vertexCount,
+		&normals[0],
+		NULL,
+		&textureCoords[0],
+		engine->m_unk0x7f4 ? NULL : &indices16[0],
+		engine->m_unk0x7f4 ? &indices32[0] : NULL,
+		triangleCount,
+		&minimum,
+		&maximum
+	);
+	box.setMinimum(minimum.x, minimum.y, minimum.z);
+	box.setMaximum(maximum.x, maximum.y, maximum.z);
+	m_unk0x1c = false;
 }
 
 } // namespace RenderNew

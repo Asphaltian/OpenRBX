@@ -14,6 +14,10 @@ class CRobloxWnd;
 
 namespace RBX {
 class AdornRbxGfx;
+
+namespace RenderNew {
+class Mesh;
+} // namespace RenderNew
 } // namespace RBX
 
 namespace Ogre {
@@ -127,6 +131,7 @@ public:
 private:
 	friend class ::CRobloxWnd;
 	friend class RBX::AdornRbxGfx;
+	friend class RBX::RenderNew::Mesh;
 	friend class RbxFont;
 
 	SceneManager* m_unk0x04; // 0x04
