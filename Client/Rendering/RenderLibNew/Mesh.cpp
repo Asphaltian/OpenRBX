@@ -250,5 +250,64 @@ Mesh::~Mesh()
 	STUB(0x532b60);
 }
 
+// FUNCTION: ROBLOX 0x00532d90
+void Mesh::Level::makeHWSubMesh(Ogre::VisualEngine* engine, Ogre::AxisAlignedBox& box)
+{
+	if (m_unk0x1c) {
+		std::vector<unsigned int> triangles;
+		Ogre::SubMesh* subMesh;
+		if (primitive == G3D::RenderDevice::QUADS) {
+			triangles.resize(indexArray.size() / 4 * 6);
+			for (int i = 0; i < indexArray.size(); i += 4) {
+				int quad = i / 4;
+				triangles[quad * 6] = indexArray[quad * 4];
+				triangles[quad * 6 + 1] = indexArray[quad * 4 + 1];
+				triangles[quad * 6 + 2] = indexArray[quad * 4 + 3];
+				triangles[quad * 6 + 3] = indexArray[quad * 4 + 3];
+				triangles[quad * 6 + 4] = indexArray[quad * 4 + 1];
+				triangles[quad * 6 + 5] = indexArray[quad * 4 + 2];
+			}
+			subMesh = engine->FUN_00671d90(g_unk0x0095877c, NULL, &triangles[0], triangles.size() / 3);
+		}
+		else {
+			subMesh = engine->FUN_00671d90(g_unk0x0095877c, NULL, indexArray.getCArray(), indexArray.size() / 3);
+		}
+
+		if (subMesh) {
+			m_unk0x20 = g_unk0x0095877c->getNumSubMeshes() - 1;
+			m_unk0x1c = false;
+		}
+
+		Ogre::Vector3 lo(1e9f, 1e9f, 1e9f);
+		Ogre::Vector3 hi(-1e9f, -1e9f, -1e9f);
+		const float* positions = visibleGeometry.vertexArray[0];
+		for (int i = 0; i < indexArray.size(); i++) {
+			IndexType index = indexArray[i] * 3;
+			if (lo.x > positions[index]) {
+				lo.x = positions[index];
+			}
+			if (lo.y > positions[index + 1]) {
+				lo.y = positions[index + 1];
+			}
+			if (lo.z > positions[index + 2]) {
+				lo.z = positions[index + 2];
+			}
+			if (hi.x < positions[index]) {
+				hi.x = positions[index];
+			}
+			if (hi.y < positions[index + 1]) {
+				hi.y = positions[index + 1];
+			}
+			if (hi.z < positions[index + 2]) {
+				hi.z = positions[index + 2];
+			}
+		}
+		box.setExtents(lo, hi);
+	}
+	else {
+		Ogre::LogManager::getSingleton().logMessage("RBX makeHWSubMesh: should not be here");
+	}
+}
+
 } // namespace RenderNew
 } // namespace RBX

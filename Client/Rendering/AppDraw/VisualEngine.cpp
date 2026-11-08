@@ -73,6 +73,28 @@ unsigned int FUN_00671cf0()
 	return g_unk0x00961350;
 }
 
+// FUNCTION: ROBLOX 0x00671d90
+SubMesh* VisualEngine::FUN_00671d90(
+	MeshPtr& mesh, const unsigned short* indices16, const unsigned int* indices32, size_t triangleCount
+)
+{
+	SubMesh* subMesh = mesh->createSubMesh();
+	size_t indexCount = triangleCount * 3;
+	HardwareIndexBufferSharedPtr indexBuffer = HardwareBufferManager::getSingleton().createIndexBuffer(
+		indices16 ? HardwareIndexBuffer::IT_16BIT : HardwareIndexBuffer::IT_32BIT,
+		indexCount,
+		HardwareBuffer::HBU_STATIC_WRITE_ONLY
+	);
+	indexBuffer->writeData(
+		0, indexBuffer->getSizeInBytes(), indices16 ? (const void*) indices16 : (const void*) indices32, true
+	);
+	subMesh->useSharedVertices = true;
+	subMesh->indexData->indexBuffer = indexBuffer;
+	subMesh->indexData->indexCount = indexCount;
+	subMesh->indexData->indexStart = 0;
+	return subMesh;
+}
+
 // STUB: ROBLOX 0x00671e60
 VisualEngine::Unk0x18::Unk0x18() : m_unk0x00(0)
 {

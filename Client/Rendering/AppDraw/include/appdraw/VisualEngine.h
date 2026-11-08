@@ -69,6 +69,10 @@ public:
 
 	Viewport* getViewport() const { return m_unk0x10; }
 
+	SubMesh* FUN_00671d90(
+		MeshPtr& mesh, const unsigned short* indices16, const unsigned int* indices32, size_t triangleCount
+	);
+
 	VertexData* FUN_00672ab0(
 		const float* positions,
 		size_t vertexCount,

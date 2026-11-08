@@ -53,6 +53,8 @@ public:
 
 		virtual ~Level();
 
+		void makeHWSubMesh(Ogre::VisualEngine* engine, Ogre::AxisAlignedBox& box);
+
 		// SYNTHETIC: ROBLOX 0x0050e360
 		// RBX::RenderNew::Mesh::Level::`scalar deleting destructor'
 	};
