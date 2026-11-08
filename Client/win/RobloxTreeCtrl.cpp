@@ -2,8 +2,10 @@
 
 #include "MarshaledListener.h"
 #include "ReflectionMetadata.h"
+#include "Roblox.h"
 #include "RobloxTreeCtrlNode.h"
 #include "SelectionTreeCtrl.h"
+#include "script/Script.h"
 #include "util/scopedassign.h"
 
 #include <algorithm>
@@ -292,6 +294,28 @@ int CSelectionTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	FUN_004204e0();
 	SetTimer(0, 200, NULL);
 	return 0;
+}
+
+// STUB: ROBLOX 0x004239a0
+void CRobloxTreeCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
+{
+	Default();
+
+	if (nFlags & (MK_SHIFT | MK_CONTROL)) {
+		return;
+	}
+
+	HTREEITEM item = HitTest(point, &nFlags);
+	if (item && (nFlags & TVHT_ONITEM)) {
+		CRobloxTreeCtrlNode* node = reinterpret_cast<CRobloxTreeCtrlNode*>(GetItemData(item));
+		if (node) {
+			boost::shared_ptr<RBX::Script> script = boost::shared_dynamic_cast<RBX::Script>(node->m_unk0x0c);
+			if (script) {
+				RBX::DataModel::Lock lock(VTable0x14c());
+				static_cast<CRobloxApp*>(AfxGetApp())->FUN_0044ef90(script);
+			}
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x004248f0
@@ -823,6 +847,7 @@ BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
 	ON_NOTIFY_REFLECT(TVN_DELETEITEM, FUN_00422b80)
 	ON_NOTIFY_REFLECT(TVN_BEGINLABELEDIT, FUN_00422de0)
 	ON_NOTIFY_REFLECT(TVN_ENDLABELEDIT, FUN_004234f0)
+	ON_WM_LBUTTONDBLCLK()
 	ON_WM_KEYDOWN()
 	ON_WM_DESTROY()
 	ON_WM_CREATE()
