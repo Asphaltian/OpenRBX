@@ -12,11 +12,16 @@
 
 class CRobloxWnd;
 
+namespace G3D {
+class Color4;
+} // namespace G3D
+
 namespace RBX {
 class AdornRbxGfx;
 
 namespace RenderNew {
 class Mesh;
+class RenderScene;
 } // namespace RenderNew
 } // namespace RBX
 
@@ -35,6 +40,8 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(Unknown00671c70, 0xb0)
+
+ColourValue FUN_00671cd0(const G3D::Color4& color);
 
 // SIZE 0x808
 class VisualEngine
@@ -132,6 +139,7 @@ private:
 	friend class ::CRobloxWnd;
 	friend class RBX::AdornRbxGfx;
 	friend class RBX::RenderNew::Mesh;
+	friend class RBX::RenderNew::RenderScene;
 	friend class RbxFont;
 
 	SceneManager* m_unk0x04; // 0x04

@@ -18,6 +18,11 @@ namespace G3D {
 class RenderDevice;
 } // namespace G3D
 
+namespace Ogre {
+class RbxEntity;
+class VisualEngine;
+} // namespace Ogre
+
 namespace RBX {
 namespace RenderNew {
 
@@ -30,7 +35,7 @@ class RenderScene
 
 private:
 	undefined4* m_unk0x00;                                       // 0x000
-	undefined4* m_unk0x04;                                       // 0x004
+	Ogre::RbxEntity* m_unk0x04;                                  // 0x004
 	Ogre::MaterialPtr m_unk0x08;                                 // 0x008
 	Ogre::MeshPtr m_unk0x14;                                     // 0x014
 	G3D::Array<undefined4> m_unk0x20;                            // 0x020
@@ -41,7 +46,10 @@ private:
 	G3D::Array<undefined4> m_unk0x5c;                            // 0x05c
 	G3D::VAR shadowVAR;                                          // 0x068
 	G3D::ReferenceCountedPointer<G3D::VARArea> shadowVARArea;    // 0x088
-	undefined m_unk0x8c[0xa0 - 0x8c];                            // 0x08c
+	bool m_unk0x8c;                                              // 0x08c
+	undefined m_unk0x8d;                                         // 0x08d
+	bool m_unk0x8e;                                              // 0x08e
+	undefined m_unk0x8f[0xa0 - 0x8f];                            // 0x08f
 	G3D::ReferenceCountedPointer<G3D::Lighting> desiredLighting; // 0x0a0
 	G3D::ReferenceCountedPointer<G3D::Lighting> lighting;        // 0x0a4
 	float shadingQuality;                                        // 0x0a8
@@ -66,6 +74,7 @@ public:
 	RenderScene();
 	~RenderScene();
 
+	void FUN_0052c9b0(Ogre::VisualEngine* engine, bool p_unk0x8e);
 	void setThrottle(float t, float m, bool s, float c);
 
 	float getShadingQuality() const { return shadingQuality; }

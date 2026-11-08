@@ -8,6 +8,12 @@
 #include <OgreEntity.h>
 #include <vector>
 
+namespace RBX {
+namespace RenderNew {
+class RenderScene;
+} // namespace RenderNew
+} // namespace RBX
+
 namespace Ogre {
 
 class RbxSubEntity;
@@ -37,6 +43,7 @@ public:
 
 private:
 	friend class RBX::AdornRbxGfx;
+	friend class RBX::RenderNew::RenderScene;
 
 	VisualEngine::Unk0x18* m_unk0x240;     // 0x240
 	bool m_unk0x244;                       // 0x244

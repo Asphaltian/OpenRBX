@@ -2,6 +2,7 @@
 
 #include "appdraw/RbxSceneManager.h"
 
+#include <G3D/Color4.h>
 #include <OgreCamera.h>
 #include <OgreException.h>
 #include <OgreHardwareBufferManager.h>
@@ -46,6 +47,12 @@ int g_unk0x0096135c;
 // FUNCTION: ROBLOX 0x00671c70
 Unknown00671c70::Unknown00671c70() : m_unk0x84(false), m_unk0x88(0)
 {
+}
+
+// FUNCTION: ROBLOX 0x00671cd0
+ColourValue FUN_00671cd0(const G3D::Color4& color)
+{
+	return ColourValue(color.r, color.g, color.b, color.a);
 }
 
 // FUNCTION: ROBLOX 0x00671cf0
