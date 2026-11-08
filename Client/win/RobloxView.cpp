@@ -5,8 +5,20 @@
 #include "RobloxDoc.h"
 
 #include <G3D/System.h>
+#include <algorithm>
 
 IMPLEMENT_DYNCREATE(CRobloxView, CView)
+
+BEGIN_MESSAGE_MAP(CRobloxView, CView)
+ON_COMMAND(ID_FILE_PRINT, CView::OnFilePrint)
+ON_COMMAND(ID_FILE_PRINT_DIRECT, CView::OnFilePrint)
+ON_COMMAND(ID_FILE_PRINT_PREVIEW, CView::OnFilePrintPreview)
+ON_WM_SIZE()
+ON_WM_CREATE()
+ON_WM_ERASEBKGND()
+ON_WM_DESTROY()
+ON_WM_SETFOCUS()
+END_MESSAGE_MAP()
 
 // STUB: ROBLOX 0x0045d500
 void CRobloxView::onEvent(const RBX::Network::Players* source, RBX::SuperSafeChanged event)
@@ -94,10 +106,68 @@ void HelpCommand::doIt(RBX::IDataState* dataState)
 	m_unk0x0c->PostMessage(WM_COMMAND, 0x80fd);
 }
 
+// FUNCTION: ROBLOX 0x0045d7e0
+int CRobloxView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CView::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+
+	CRect rect;
+	GetClientRect(&rect);
+	return m_unk0x88.Create(NULL, "Roblox", WS_CHILD | WS_VISIBLE, rect, this, 1) ? 0 : -1;
+}
+
+// FUNCTION: ROBLOX 0x0045d880
+void CRobloxView::OnSetFocus(CWnd* pOldWnd)
+{
+	CView::OnSetFocus(pOldWnd);
+	GetParentFrame()->SetActiveView(this, FALSE);
+	m_unk0x88.SetFocus();
+}
+
 // FUNCTION: ROBLOX 0x0045d8e0
 boost::shared_ptr<RBX::DataModel> CRobloxView::FUN_00403290() const
 {
 	return m_unk0x140;
+}
+
+// FUNCTION: ROBLOX 0x0045d920
+void CRobloxView::FUN_0045d920()
+{
+	CRect rect;
+	GetClientRect(&rect);
+	int height = rect.Height();
+	int width = rect.Width();
+
+	int viewWidth = width;
+	int viewHeight = height;
+	if (m_unk0x1a8 && m_unk0x1a8->m_hWnd) {
+		viewWidth -= 0xe1;
+	}
+	if (m_unk0x150.m_hWnd) {
+		viewHeight = height - 0x14;
+	}
+
+	int cy = std::max(viewHeight, 0);
+	int cx = std::max(viewWidth, 0);
+
+	if (m_unk0x88.m_hWnd) {
+		m_unk0x88.MoveWindow(0, 0, cx, cy, TRUE);
+	}
+	if (m_unk0x1a8 && m_unk0x1a8->m_hWnd) {
+		m_unk0x1a8->MoveWindow(cx, 0, 0xe1, height, TRUE);
+	}
+	if (m_unk0x150.m_hWnd) {
+		m_unk0x150.MoveWindow(0, cy, cx, 0x14, TRUE);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0045da00
+void CRobloxView::OnSize(UINT nType, int cx, int cy)
+{
+	CView::OnSize(nType, cx, cy);
+	FUN_0045d920();
 }
 
 // FUNCTION: ROBLOX 0x0045da20
@@ -217,4 +287,16 @@ void CRobloxView::OnInitialUpdate()
 	m_unk0x58[0x8044] = &RBX::Name::lookup("SelectionTilt");
 
 	m_unk0x88.FUN_0045faf0();
+}
+
+BOOL CRobloxView::OnEraseBkgnd(CDC* pDC)
+{
+	return TRUE;
+}
+
+// FUNCTION: ROBLOX 0x0045f280
+void CRobloxView::OnDestroy()
+{
+	FUN_0045e900();
+	CView::OnDestroy();
 }

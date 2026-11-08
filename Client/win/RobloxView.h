@@ -105,6 +105,7 @@ class CRobloxView : public VerbBinder<CRobloxView, CView>,
 					public RBX::Listener<RBX::Network::Players, RBX::SuperSafeChanged>
 {
 	DECLARE_DYNCREATE(CRobloxView)
+	DECLARE_MESSAGE_MAP()
 
 	// SYNTHETIC: ROBLOX 0x0045d4e0
 	// ?GetThisClass@CRobloxView@@SGPAUCRuntimeClass@@XZ
@@ -117,6 +118,14 @@ public:
 
 	virtual void OnDraw(CDC* pDC);
 	virtual void OnInitialUpdate();
+
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+	afx_msg void OnDestroy();
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
+
+	void FUN_0045d920();
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
 
 	boost::shared_ptr<RBX::DataModel> FUN_00403290() const;
