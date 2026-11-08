@@ -5,6 +5,7 @@
 #include "decomp.h"
 
 #include <OgreAxisAlignedBox.h>
+#include <OgreMesh.h>
 #include <OgreRoot.h>
 #include <OgreSubMesh.h>
 #include <string>
@@ -71,17 +72,40 @@ public:
 	VertexData* FUN_00672ab0(
 		const float* positions,
 		size_t vertexCount,
-		const Vector3* normals,
+		const float* normals,
 		const ColourValue* colours,
-		const Vector2* textureCoords
+		const float* textureCoords
+	);
+
+	void FUN_00672e60(
+		MeshPtr& mesh,
+		const float* positions,
+		size_t vertexCount,
+		const float* normals,
+		const ColourValue* colours,
+		const float* textureCoords,
+		const Vector3* minimum,
+		const Vector3* maximum
+	);
+
+	MeshPtr FUN_006731e0(
+		const char* name,
+		const char* group,
+		const float* positions,
+		size_t vertexCount,
+		const float* normals,
+		const ColourValue* colours,
+		const float* textureCoords,
+		const Vector3* minimum,
+		const Vector3* maximum
 	);
 
 	Unknown00671c70* FUN_006735b0(
 		const float* positions,
 		size_t vertexCount,
-		const Vector3* normals,
+		const float* normals,
 		const ColourValue* colours,
-		const Vector2* textureCoords,
+		const float* textureCoords,
 		const unsigned short* indices16,
 		const unsigned int* indices32,
 		size_t triangleCount,

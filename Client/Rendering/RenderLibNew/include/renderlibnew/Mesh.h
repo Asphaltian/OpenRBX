@@ -11,12 +11,12 @@
 #include <G3D/Vector3.h>
 #include <GLG3D/RenderDevice.h>
 #include <GLG3D/VAR.h>
+#include <OgreMesh.h>
 #include <vector>
 
 class ThumbnailGenerator;
 
 namespace Ogre {
-class SubMesh;
 class Unknown00671c70;
 class VisualEngine;
 } // namespace Ogre
@@ -101,6 +101,9 @@ protected:
 public:
 	undefined4 m_unk0x3c; // 0x3c
 
+	static Ogre::MeshPtr g_unk0x0095877c;
+
+	static void FUN_00532380(Ogre::VisualEngine* engine);
 	void FUN_005324e0(Ogre::VisualEngine* engine);
 
 	static G3D::ReferenceCountedPointer<Mesh> aggregate(

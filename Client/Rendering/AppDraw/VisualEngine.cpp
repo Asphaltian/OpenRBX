@@ -6,6 +6,7 @@
 #include <OgreException.h>
 #include <OgreHardwareBufferManager.h>
 #include <OgreLogManager.h>
+#include <OgreMeshManager.h>
 #include <OgreRenderSystem.h>
 #include <OgreRenderTarget.h>
 #include <OgreRenderWindow.h>
@@ -137,9 +138,9 @@ float VisualEngine::Unk0x18::FUN_00672980(int count)
 VertexData* VisualEngine::FUN_00672ab0(
 	const float* positions,
 	size_t vertexCount,
-	const Vector3* normals,
+	const float* normals,
 	const ColourValue* colours,
-	const Vector2* textureCoords
+	const float* textureCoords
 )
 {
 	RenderSystem* renderSystem = Root::getSingleton().getRenderSystem();
@@ -199,13 +200,116 @@ VertexData* VisualEngine::FUN_00672ab0(
 	return vertexData;
 }
 
+// STUB: ROBLOX 0x00672e60
+void VisualEngine::FUN_00672e60(
+	MeshPtr& mesh,
+	const float* positions,
+	size_t vertexCount,
+	const float* normals,
+	const ColourValue* colours,
+	const float* textureCoords,
+	const Vector3* minimum,
+	const Vector3* maximum
+)
+{
+	if (mesh->sharedVertexData) {
+		delete mesh->sharedVertexData;
+		mesh->sharedVertexData = NULL;
+	}
+	mesh->sharedVertexData = FUN_00672ab0(positions, vertexCount, normals, colours, textureCoords);
+
+	if (minimum && maximum) {
+		mesh->_setBounds(AxisAlignedBox(minimum->x, minimum->y, minimum->z, maximum->x, maximum->y, maximum->z));
+		mesh->_setBoundingSphereRadius((*maximum - *minimum).length() * 0.5);
+	}
+	else {
+		Vector3 lo(1e9f, 1e9f, 1e9f);
+		Vector3 hi(-1e9f, -1e9f, -1e9f);
+		for (size_t i = 0; i < vertexCount * 3; i += 3) {
+			if (lo.x > positions[i]) {
+				lo.x = positions[i];
+			}
+			if (lo.y > positions[i + 1]) {
+				lo.y = positions[i + 1];
+			}
+			if (lo.z > positions[i + 2]) {
+				lo.z = positions[i + 2];
+			}
+			if (hi.x < positions[i]) {
+				hi.x = positions[i];
+			}
+			if (hi.y < positions[i + 1]) {
+				hi.y = positions[i + 1];
+			}
+			if (hi.z < positions[i + 2]) {
+				hi.z = positions[i + 2];
+			}
+		}
+
+		mesh->_setBounds(AxisAlignedBox(lo, hi));
+		mesh->_setBoundingSphereRadius((hi - lo).length() * 0.5);
+	}
+}
+
+// STUB: ROBLOX 0x006731e0
+MeshPtr VisualEngine::FUN_006731e0(
+	const char* name,
+	const char* group,
+	const float* positions,
+	size_t vertexCount,
+	const float* normals,
+	const ColourValue* colours,
+	const float* textureCoords,
+	const Vector3* minimum,
+	const Vector3* maximum
+)
+{
+	MeshPtr mesh = MeshManager::getSingleton().createManual(name, group);
+	FUN_00672e60(mesh, positions, vertexCount, normals, colours, textureCoords, minimum, maximum);
+
+	if (minimum && maximum) {
+		mesh->_setBounds(AxisAlignedBox(minimum->x, minimum->y, minimum->z, maximum->x, maximum->y, maximum->z));
+		mesh->_setBoundingSphereRadius((*maximum - *minimum).length() * 0.5);
+	}
+	else {
+		Vector3 lo(1e9f, 1e9f, 1e9f);
+		Vector3 hi(-1e9f, -1e9f, -1e9f);
+		for (size_t i = 0; i < vertexCount * 3; i += 3) {
+			if (lo.x > positions[i]) {
+				lo.x = positions[i];
+			}
+			if (lo.y > positions[i + 1]) {
+				lo.y = positions[i + 1];
+			}
+			if (lo.z > positions[i + 2]) {
+				lo.z = positions[i + 2];
+			}
+			if (hi.x < positions[i]) {
+				hi.x = positions[i];
+			}
+			if (hi.y < positions[i + 1]) {
+				hi.y = positions[i + 1];
+			}
+			if (hi.z < positions[i + 2]) {
+				hi.z = positions[i + 2];
+			}
+		}
+
+		mesh->_setBounds(AxisAlignedBox(lo, hi));
+		mesh->_setBoundingSphereRadius((hi - lo).length() * 0.5);
+	}
+
+	mesh->load();
+	return mesh;
+}
+
 // STUB: ROBLOX 0x006735b0
 Unknown00671c70* VisualEngine::FUN_006735b0(
 	const float* positions,
 	size_t vertexCount,
-	const Vector3* normals,
+	const float* normals,
 	const ColourValue* colours,
-	const Vector2* textureCoords,
+	const float* textureCoords,
 	const unsigned short* indices16,
 	const unsigned int* indices32,
 	size_t triangleCount,

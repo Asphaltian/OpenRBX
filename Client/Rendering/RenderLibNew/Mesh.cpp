@@ -3,6 +3,8 @@
 #include "appdraw/VisualEngine.h"
 #include "renderlibnew/Chunk.h"
 
+#include <OgreLogManager.h>
+
 namespace RBX {
 namespace RenderNew {
 
@@ -15,9 +17,11 @@ G3D::VAR Mesh::texCoordVAR;
 G3D::VAR Mesh::tangentVAR;
 Mesh::VertexList Mesh::vertexRefCounts;
 Mesh::VertexList Mesh::freeList;
-bool Mesh::varDirty;
+bool Mesh::varDirty = true;
+Ogre::MeshPtr Mesh::g_unk0x0095877c;
 
 static int g_unk0x00958738;
+static int g_unk0x0095873c;
 static bool g_unk0x00958794;
 
 void Mesh::endRender(G3D::RenderDevice* rd)
@@ -43,6 +47,44 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 {
 	if (lvl != NULL && lvl->indexArray.size() > 0) {
 		rd->sendIndices(lvl->primitive, lvl->indexArray);
+	}
+}
+
+// FUNCTION: ROBLOX 0x00532380
+void Mesh::FUN_00532380(Ogre::VisualEngine* engine)
+{
+	if (varDirty && visibleGeometry.vertexArray.size() != 0) {
+		if (!g_unk0x0095877c.isNull()) {
+			engine->FUN_00672e60(
+				g_unk0x0095877c,
+				visibleGeometry.vertexArray[0],
+				visibleGeometry.vertexArray.size(),
+				visibleGeometry.normalArray[0],
+				NULL,
+				texCoordArray[0],
+				NULL,
+				NULL
+			);
+			varDirty = false;
+		}
+		else {
+			g_unk0x0095877c = engine->FUN_006731e0(
+				"rbxvb",
+				"General",
+				visibleGeometry.vertexArray[0],
+				visibleGeometry.vertexArray.size(),
+				visibleGeometry.normalArray[0],
+				NULL,
+				texCoordArray[0],
+				NULL,
+				NULL
+			);
+			Ogre::LogManager::getSingleton().logMessage(
+				std::string("create mesh=") + g_unk0x0095877c->getName() + "\n"
+			);
+			g_unk0x0095873c = 0;
+			varDirty = false;
+		}
 	}
 }
 
