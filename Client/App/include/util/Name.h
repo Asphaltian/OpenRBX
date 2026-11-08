@@ -394,6 +394,8 @@ private:
 	// RBX::Name::doDeclare<&RBX::sDropperTool>
 	// TEMPLATE: ROBLOX 0x005cfe20
 	// RBX::Name::doDeclare<&RBX::sModelSetPrimaryPartTool>
+	// TEMPLATE: ROBLOX 0x005d04b0
+	// RBX::Name::doDeclare<&RBX::sResizeTool>
 	// TEMPLATE: ROBLOX 0x005d0520
 	// RBX::Name::doDeclare<&RBX::sHammerTool>
 	// TEMPLATE: ROBLOX 0x005d0590
@@ -761,6 +763,8 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sDropperTool>
 	// TEMPLATE: ROBLOX 0x005d08d0
 	// RBX::Name::callDoDeclare<&RBX::sModelSetPrimaryPartTool>
+	// TEMPLATE: ROBLOX 0x005d09c0
+	// RBX::Name::callDoDeclare<&RBX::sResizeTool>
 	// TEMPLATE: ROBLOX 0x005d09d0
 	// RBX::Name::callDoDeclare<&RBX::sHammerTool>
 	// TEMPLATE: ROBLOX 0x005d09e0
@@ -926,6 +930,8 @@ public:
 	// RBX::Named<RBX::MouseCommand,&RBX::sCloneTool>::getName
 	// TEMPLATE: ROBLOX 0x0063c5a0
 	// RBX::Named<RBX::MouseCommand,&RBX::sGameTool>::getName
+	// TEMPLATE: ROBLOX 0x005d0cc0
+	// RBX::Named<RBX::ArrowToolBase,&RBX::sResizeTool>::getName
 	// TEMPLATE: ROBLOX 0x0063c8a0
 	// RBX::Named<RBX::ArrowToolBase,&RBX::sAxisMoveTool>::getName
 	// clang-format on

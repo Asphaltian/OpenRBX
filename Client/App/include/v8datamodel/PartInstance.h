@@ -28,6 +28,7 @@ extern char sPart[];
 using boost::shared_ptr;
 
 class World;
+class XmlState;
 
 // SIZE 0x2ac
 class PartInstance : public DescribedCreatable<PartInstance, PVInstance, sPart>,
@@ -123,6 +124,7 @@ public:
 
 	bool getPartLocked() const { return locked; }
 
+	void FUN_005ad310(XmlState* state);
 	Surfaces& getSurfaces();
 	Surface* getSurface(const G3D::Ray&, int&);
 	const Surfaces& getSurfaces() const;

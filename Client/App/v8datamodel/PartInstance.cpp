@@ -183,6 +183,12 @@ void PartInstance::onChildAdded(Instance* child)
 	PVInstance::onChildAdded(child);
 }
 
+// FUNCTION: ROBLOX 0x005ad310
+void PartInstance::FUN_005ad310(XmlState* state)
+{
+	state->addProperty(Reflection::Property(prop_Size, this));
+}
+
 // FUNCTION: WEBSERVICE 0x1009a8e0 FOLDED
 // FUNCTION: ROBLOX 0x005ad340 FOLDED
 Surfaces& PartInstance::getSurfaces()

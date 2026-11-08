@@ -53,6 +53,9 @@ char sAnchorTool[] = "Anchor";
 // GLOBAL: ROBLOX 0x00948c60
 char sLockTool[] = "Lock";
 
+// GLOBAL: ROBLOX 0x00948c84
+char sResizeTool[] = "Resize";
+
 // GLOBAL: ROBLOX 0x00948c90
 char sHammerTool[] = "Hammer";
 
@@ -313,6 +316,73 @@ MouseCommand* LockTool::onMouseDown(const UIEvent& uiEvent)
 		PartInstance::setLocked(m_unk0x20.get(), !locked);
 		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
 	}
+	return this;
+}
+
+// FUNCTION: ROBLOX 0x0063ad00
+const std::string ResizeTool::getCursorName() const
+{
+	return m_unk0x2c ? std::string("ResizeCursor") : ArrowToolBase::getCursorName();
+}
+
+// FUNCTION: ROBLOX 0x0063adc0
+void ResizeTool::VTable0x40(XmlState* state)
+{
+	boost::shared_ptr<PVInstance> locked = m_unk0x24.lock();
+	if (PartInstance* part = dynamic_cast<PartInstance*>(locked.get())) {
+		part->FUN_005ad310(state);
+	}
+}
+
+// STUB: ROBLOX 0x0063ae70
+MouseCommand* ResizeTool::onMouseUp(const UIEvent& uiEvent)
+{
+	STUB(0x63ae70);
+	return NULL;
+}
+
+// STUB: ROBLOX 0x0063af80
+void ResizeTool::FUN_0063af80()
+{
+	STUB(0x63af80);
+}
+
+// STUB: ROBLOX 0x0063b020
+void ResizeTool::onMouseMove(const UIEvent& uiEvent)
+{
+	STUB(0x63b020);
+}
+
+// STUB: ROBLOX 0x0063b240
+void ResizeTool::FUN_0063b240(const UIEvent& uiEvent)
+{
+	STUB(0x63b240);
+}
+
+// STUB: ROBLOX 0x0063b4b0
+void ResizeTool::render3dAdorn(Adorn* adorn)
+{
+	STUB(0x63b4b0);
+}
+
+// STUB: ROBLOX 0x0063b620
+void ResizeTool::render2d(Adorn* adorn)
+{
+	STUB(0x63b620);
+}
+
+// STUB: ROBLOX 0x0063b7c0
+void ResizeTool::onMouseHover(const UIEvent& uiEvent)
+{
+	FUN_0063b240(uiEvent);
+	m_unk0x2c = !m_unk0x24.expired();
+	ArrowToolBase::onMouseHover(uiEvent);
+}
+
+// STUB: ROBLOX 0x0063b800
+MouseCommand* ResizeTool::onMouseDown(const UIEvent& uiEvent)
+{
+	STUB(0x63b800);
 	return this;
 }
 

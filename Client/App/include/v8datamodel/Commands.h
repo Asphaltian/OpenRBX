@@ -227,6 +227,10 @@ public:
 	// RBX::TToolVerb<RBX::ArrowTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d0a70
 	// RBX::TToolVerb<RBX::ArrowTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d0c20
+	// RBX::TToolVerb<RBX::ResizeTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d0c50
+	// RBX::TToolVerb<RBX::ResizeTool,RBX::RunStateVerb>::VTable0x14
 	// TEMPLATE: ROBLOX 0x005d0ce0
 	// RBX::TToolVerb<RBX::AxisMoveTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d0d10

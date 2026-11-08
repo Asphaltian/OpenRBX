@@ -2,11 +2,14 @@
 #define TOOL_TOOLSSURFACE_H
 
 #include "decomp.h"
+#include "tool/ToolsArrow.h"
 #include "util/Name.h"
 #include "v8datamodel/MouseCommand.h"
 
+#include <G3D/Vector2int16.h>
 #include <G3D/Vector3.h>
 #include <boost/shared_ptr.hpp>
+#include <boost/weak_ptr.hpp>
 #include <string>
 
 namespace RBX {
@@ -14,8 +17,10 @@ namespace RBX {
 class Adorn;
 class Instance;
 class PartInstance;
+class PVInstance;
 class Surface;
 class Workspace;
+class XmlState;
 
 extern char sFlatTool[];
 extern char sGlueTool[];
@@ -28,6 +33,7 @@ extern char sLeftMotorTool[];
 extern char sOscillateMotorTool[];
 extern char sAnchorTool[];
 extern char sLockTool[];
+extern char sResizeTool[];
 extern char sHammerTool[];
 extern char sLaserTool[];
 extern char sCloneTool[];
@@ -256,6 +262,51 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(AnchorTool, 0x2c)
+
+// SIZE 0x4c
+class ResizeTool : public Named<ArrowToolBase, sResizeTool>
+{
+private:
+	boost::weak_ptr<PVInstance> m_unk0x24; // 0x24
+	bool m_unk0x2c;                        // 0x2c
+	undefined4 m_unk0x30;                  // 0x30
+	G3D::Vector3 m_unk0x34;                // 0x34
+	G3D::Vector2int16 m_unk0x40;           // 0x40
+	undefined4 m_unk0x44;                  // 0x44
+	undefined4 m_unk0x48;                  // 0x48
+
+	void FUN_0063af80();
+	void FUN_0063b240(const UIEvent& uiEvent);
+
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+	virtual void onMouseHover(const UIEvent& uiEvent);
+	virtual void onMouseMove(const UIEvent& uiEvent);
+	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent);
+	virtual const std::string getCursorName() const;
+
+public:
+	// FUNCTION: ROBLOX 0x005d0af0
+	ResizeTool(Workspace* workspace)
+		: Named<ArrowToolBase, sResizeTool>(workspace), m_unk0x2c(false), m_unk0x44(0), m_unk0x48(0)
+	{
+	}
+
+	// SYNTHETIC: ROBLOX 0x005d0b40
+	// RBX::ResizeTool::~ResizeTool
+
+	// FUNCTION: ROBLOX 0x005d0ba0
+	virtual MouseCommand* isSticky() const { return new ResizeTool(workspace); }
+
+	// SYNTHETIC: ROBLOX 0x005d0c00
+	// RBX::ResizeTool::`scalar deleting destructor'
+
+	virtual void VTable0x40(XmlState* state); // vtable+0x40
+
+	virtual void render2d(Adorn* adorn);
+	virtual void render3dAdorn(Adorn* adorn);
+};
+
+DECOMP_SIZE_ASSERT(ResizeTool, 0x4c)
 
 // SIZE 0x28
 class HammerTool : public Named<MouseCommand, sHammerTool>

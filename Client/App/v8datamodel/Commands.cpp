@@ -38,6 +38,7 @@ template class RBX::TToolVerb<RBX::LeftMotorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::OscillateMotorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::AnchorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::LockTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::ResizeTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::NullTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::GrabTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::CloneTool, RBX::RunStateVerb>;
