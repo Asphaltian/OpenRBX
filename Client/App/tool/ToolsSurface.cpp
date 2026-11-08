@@ -53,6 +53,12 @@ char sAnchorTool[] = "Anchor";
 // GLOBAL: ROBLOX 0x00948c60
 char sLockTool[] = "Lock";
 
+// GLOBAL: ROBLOX 0x00948c6c
+char sSlingshotTool[] = "Slingshot";
+
+// GLOBAL: ROBLOX 0x00948c78
+char sRocketTool[] = "Rocket";
+
 // GLOBAL: ROBLOX 0x00948c84
 char sResizeTool[] = "Resize";
 
@@ -317,6 +323,96 @@ MouseCommand* LockTool::onMouseDown(const UIEvent& uiEvent)
 		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
 	}
 	return this;
+}
+
+// FUNCTION: ROBLOX 0x0063a410
+const std::string ShootTool::getCursorName() const
+{
+	if (m_unk0x30 && m_unk0x2c > 10) {
+		return "GunWaitCursor";
+	}
+	return "GunCursor";
+}
+
+// FUNCTION: ROBLOX 0x0063a460
+void ShootTool::onMouseIdle(const UIEvent& uiEvent)
+{
+	if (m_unk0x30 > 0) {
+		m_unk0x30--;
+	}
+	if (captured()) {
+		onMouseMove(uiEvent);
+	}
+}
+
+// STUB: ROBLOX 0x0063a4b0
+PV SlingshotTool::VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe)
+{
+	STUB(0x63a4b0);
+	return PV();
+}
+
+// STUB: ROBLOX 0x0063a740
+PV RocketTool::VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe)
+{
+	STUB(0x63a740);
+	return PV();
+}
+
+// FUNCTION: ROBLOX 0x0063a8d0
+ShootTool::ShootTool(Workspace* workspace, bool p_unk0x28, int p_unk0x2c)
+	: MouseCommand(workspace), m_unk0x28(p_unk0x28), m_unk0x2c(p_unk0x2c), m_unk0x30(0)
+{
+}
+
+// STUB: ROBLOX 0x0063a910
+boost::shared_ptr<PartInstance> SlingshotTool::VTable0x40()
+{
+	STUB(0x63a910);
+	return boost::shared_ptr<PartInstance>();
+}
+
+// STUB: ROBLOX 0x0063aa10
+boost::shared_ptr<PartInstance> RocketTool::VTable0x40()
+{
+	STUB(0x63aa10);
+	return boost::shared_ptr<PartInstance>();
+}
+
+// FUNCTION: ROBLOX 0x0063ab10
+void ShootTool::FUN_0063ab10(const UIEvent& uiEvent)
+{
+	m_unk0x30 = m_unk0x2c;
+	PartInstance* head = Humanoid::getLocalHeadFromContext(workspace);
+	if (head) {
+		if (!m_unk0x20) {
+			m_unk0x20 = VTable0x40();
+		}
+
+		boost::shared_ptr<PartInstance> projectile =
+			boost::shared_polymorphic_downcast<PartInstance>(m_unk0x20->clone());
+		projectile->setParent(workspace);
+		projectile->getPrimitive()->setPV(VTable0x44(uiEvent, head->getCoordinateFrame()));
+		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(VTable0x48());
+	}
+}
+
+// FUNCTION: ROBLOX 0x0063acb0
+MouseCommand* ShootTool::onMouseDown(const UIEvent& uiEvent)
+{
+	capture();
+	if (m_unk0x30 == 0) {
+		FUN_0063ab10(uiEvent);
+	}
+	return this;
+}
+
+// FUNCTION: ROBLOX 0x0063ace0
+void ShootTool::onMouseMove(const UIEvent& uiEvent)
+{
+	if (m_unk0x28 && m_unk0x30 == 0) {
+		FUN_0063ab10(uiEvent);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0063ad00

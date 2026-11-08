@@ -4,6 +4,8 @@
 #include "decomp.h"
 #include "tool/ToolsArrow.h"
 #include "util/Name.h"
+#include "util/PV.h"
+#include "util/SoundWorld.h"
 #include "v8datamodel/MouseCommand.h"
 
 #include <G3D/Vector2int16.h>
@@ -34,6 +36,8 @@ extern char sOscillateMotorTool[];
 extern char sAnchorTool[];
 extern char sLockTool[];
 extern char sResizeTool[];
+extern char sSlingshotTool[];
+extern char sRocketTool[];
 extern char sHammerTool[];
 extern char sLaserTool[];
 extern char sCloneTool[];
@@ -307,6 +311,73 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(ResizeTool, 0x4c)
+
+// SIZE 0x34
+class ShootTool : public MouseCommand
+{
+protected:
+	boost::shared_ptr<PartInstance> m_unk0x20; // 0x20
+	bool m_unk0x28;                            // 0x28
+	int m_unk0x2c;                             // 0x2c
+	int m_unk0x30;                             // 0x30
+
+	void FUN_0063ab10(const UIEvent& uiEvent);
+
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+	virtual void onMouseIdle(const UIEvent& uiEvent);
+	virtual void onMouseMove(const UIEvent& uiEvent);
+
+	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent)
+	{
+		releaseCapture();
+		return this;
+	}
+
+	virtual const std::string getCursorName() const;
+
+public:
+	ShootTool(Workspace* workspace, bool p_unk0x28, int p_unk0x2c);
+
+	virtual boost::shared_ptr<PartInstance> VTable0x40() = 0;                         // vtable+0x40
+	virtual PV VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe) = 0; // vtable+0x44
+	virtual SoundType VTable0x48() = 0;                                               // vtable+0x48
+};
+
+DECOMP_SIZE_ASSERT(ShootTool, 0x34)
+
+// SIZE 0x34
+class SlingshotTool : public Named<ShootTool, sSlingshotTool>
+{
+private:
+	virtual boost::shared_ptr<PartInstance> VTable0x40();
+	virtual PV VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe);
+	virtual SoundType VTable0x48() { return RUBBERBAND_SOUND; }
+
+public:
+	SlingshotTool(Workspace* workspace) : Named<ShootTool, sSlingshotTool>(workspace, true, 5) {}
+
+	// FUNCTION: ROBLOX 0x005d2300
+	virtual MouseCommand* isSticky() const { return new SlingshotTool(workspace); }
+};
+
+DECOMP_SIZE_ASSERT(SlingshotTool, 0x34)
+
+// SIZE 0x34
+class RocketTool : public Named<ShootTool, sRocketTool>
+{
+private:
+	virtual boost::shared_ptr<PartInstance> VTable0x40();
+	virtual PV VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe);
+	virtual SoundType VTable0x48() { return PING_SOUND; }
+
+public:
+	RocketTool(Workspace* workspace) : Named<ShootTool, sRocketTool>(workspace, false, 90) {}
+
+	// FUNCTION: ROBLOX 0x005d2430
+	virtual MouseCommand* isSticky() const { return new RocketTool(workspace); }
+};
+
+DECOMP_SIZE_ASSERT(RocketTool, 0x34)
 
 // SIZE 0x28
 class HammerTool : public Named<MouseCommand, sHammerTool>

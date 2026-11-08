@@ -645,6 +645,13 @@ void Primitive::setGridCorner(const CoordinateFrame& gridCorner)
 	setCoordinateFrame(CoordinateFrame(gridCorner.rotation, gridCorner.pointToWorldSpace(gridCenter)));
 }
 
+// FUNCTION: ROBLOX 0x005f72a0
+void Primitive::setPV(const PV& pv)
+{
+	body->setVelocity(pv.velocity);
+	setCoordinateFrame(pv.position);
+}
+
 // FUNCTION: WEBSERVICE 0x100a89f0
 // FUNCTION: ROBLOX 0x005f72d0
 void Primitive::setController(Controller* _controller)

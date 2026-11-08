@@ -394,6 +394,10 @@ private:
 	// RBX::Name::doDeclare<&RBX::sDropperTool>
 	// TEMPLATE: ROBLOX 0x005cfe20
 	// RBX::Name::doDeclare<&RBX::sModelSetPrimaryPartTool>
+	// TEMPLATE: ROBLOX 0x005d03d0
+	// RBX::Name::doDeclare<&RBX::sSlingshotTool>
+	// TEMPLATE: ROBLOX 0x005d0440
+	// RBX::Name::doDeclare<&RBX::sRocketTool>
 	// TEMPLATE: ROBLOX 0x005d04b0
 	// RBX::Name::doDeclare<&RBX::sResizeTool>
 	// TEMPLATE: ROBLOX 0x005d0520
@@ -763,6 +767,10 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sDropperTool>
 	// TEMPLATE: ROBLOX 0x005d08d0
 	// RBX::Name::callDoDeclare<&RBX::sModelSetPrimaryPartTool>
+	// TEMPLATE: ROBLOX 0x005d09a0
+	// RBX::Name::callDoDeclare<&RBX::sSlingshotTool>
+	// TEMPLATE: ROBLOX 0x005d09b0
+	// RBX::Name::callDoDeclare<&RBX::sRocketTool>
 	// TEMPLATE: ROBLOX 0x005d09c0
 	// RBX::Name::callDoDeclare<&RBX::sResizeTool>
 	// TEMPLATE: ROBLOX 0x005d09d0
@@ -898,6 +906,10 @@ public:
 	// RBX::Named<RBX::PartTool,&RBX::sDropperTool>::getName
 	// TEMPLATE: ROBLOX 0x005d22b0
 	// RBX::Named<RBX::MouseCommand,&RBX::sHammerTool>::getName
+	// TEMPLATE: ROBLOX 0x005d23e0
+	// RBX::Named<RBX::ShootTool,&RBX::sSlingshotTool>::getName
+	// TEMPLATE: ROBLOX 0x005d2510
+	// RBX::Named<RBX::ShootTool,&RBX::sRocketTool>::getName
 	// TEMPLATE: ROBLOX 0x005d26e0
 	// RBX::Named<RBX::MouseCommand,&RBX::sLaserTool>::getName
 	// TEMPLATE: ROBLOX 0x005d0f40

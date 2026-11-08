@@ -313,6 +313,14 @@ public:
 	// RBX::TToolVerb<RBX::HammerTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d2220
 	// RBX::TToolVerb<RBX::HammerTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d22d0
+	// RBX::TToolVerb<RBX::SlingshotTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d2370
+	// RBX::TToolVerb<RBX::SlingshotTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d2400
+	// RBX::TToolVerb<RBX::RocketTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d24a0
+	// RBX::TToolVerb<RBX::RocketTool,RBX::RunStateVerb>::VTable0x14
 	// TEMPLATE: ROBLOX 0x005d2610
 	// RBX::TToolVerb<RBX::LaserTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d2640
