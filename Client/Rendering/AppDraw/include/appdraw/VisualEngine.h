@@ -23,6 +23,7 @@ class AdornRbxGfx;
 namespace RenderNew {
 class Mesh;
 class RenderScene;
+class TextureProxy;
 } // namespace RenderNew
 
 namespace ViewNew {
@@ -145,6 +146,7 @@ private:
 	friend class RBX::AdornRbxGfx;
 	friend class RBX::RenderNew::Mesh;
 	friend class RBX::RenderNew::RenderScene;
+	friend class RBX::RenderNew::TextureProxy;
 	friend class RBX::ViewNew::View;
 	friend class RbxFont;
 

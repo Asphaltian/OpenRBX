@@ -4,11 +4,13 @@
 #include "appdraw/RbxFont.h"
 #include "appdraw/RbxSceneNode.h"
 #include "appdraw/VisualEngine.h"
+#include "renderlibnew/TextureProxy.h"
 #include "util/ContentProvider.h"
 
 #include <OgreMaterialManager.h>
 #include <OgreMeshManager.h>
 #include <OgreSceneManager.h>
+#include <OgreTextureManager.h>
 #include <OgreViewport.h>
 #include <stdio.h>
 
@@ -113,21 +115,32 @@ G3D::Rect2D AdornRbxGfx::getViewport() const
 // STUB: ROBLOX 0x0066a810
 void AdornRbxGfx::setTexture(int stage, G3D::ReferenceCountedPointer<TextureProxyBase> texture)
 {
-	STUB(0x66a810);
+	if (texture.isNull()) {
+		m_unk0x08 = "";
+		return;
+	}
+
+	RenderNew::TextureProxy* proxy = static_cast<RenderNew::TextureProxy*>(texture.pointer());
+	m_unk0x08 = proxy->filename;
+	proxy->resolve(reinterpret_cast<G3D::RenderDevice*>(m_unk0x04));
 }
 
 // STUB: ROBLOX 0x0066a8f0
 G3D::Rect2D AdornRbxGfx::getTextureSize(G3D::ReferenceCountedPointer<TextureProxyBase> texture) const
 {
-	STUB(0x66a8f0);
-	return G3D::Rect2D();
+	RenderNew::TextureProxy* proxy = static_cast<RenderNew::TextureProxy*>(texture.pointer());
+	proxy->resolve(reinterpret_cast<G3D::RenderDevice*>(m_unk0x04));
+
+	Ogre::TexturePtr ogreTexture = Ogre::TextureManager::getSingleton().getByName(proxy->filename);
+	float width = ogreTexture->getWidth();
+	float height = ogreTexture->getHeight();
+	return G3D::Rect2D::xywh(0.0f, 0.0f, width, height);
 }
 
 // STUB: ROBLOX 0x0066aa60
 G3D::ReferenceCountedPointer<TextureProxyBase> AdornRbxGfx::createTextureProxy(const std::string& name)
 {
-	STUB(0x66aa60);
-	return G3D::ReferenceCountedPointer<TextureProxyBase>();
+	return new RenderNew::TextureProxy(name);
 }
 
 // STUB: ROBLOX 0x0066b510
