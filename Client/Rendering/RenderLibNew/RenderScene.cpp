@@ -40,8 +40,8 @@ void RenderScene::FUN_0052c9b0(Ogre::VisualEngine* engine, bool p_unk0x8e)
 	Ogre::Vector3 center(0.0f, 0.0f, 0.0f);
 
 	int i;
-	for (i = 0; i < lighting->lightArray.size(); i++) {
-		const G3D::GLight& source = lighting->lightArray[i];
+	for (i = 0; i < lighting->shadowedLightArray.size(); i++) {
+		const G3D::GLight& source = lighting->shadowedLightArray[i];
 		std::string name = "rbxlight" + StringConverter<int>::convertToString(i);
 
 		Ogre::Light* light;
@@ -91,7 +91,7 @@ void RenderScene::FUN_0052c9b0(Ogre::VisualEngine* engine, bool p_unk0x8e)
 		sceneManager->destroyLight(sceneManager->getLight(name));
 	}
 
-	if (lighting->lightArray.size() == 1) {
+	if (lighting->shadowedLightArray.size() == 1) {
 		int index = 0;
 		std::string name = "rbxlight" + StringConverter<int>::convertToString(index);
 		Ogre::Light* light = sceneManager->getLight(name);
@@ -138,8 +138,8 @@ void RenderScene::FUN_0052c9b0(Ogre::VisualEngine* engine, bool p_unk0x8e)
 	}
 
 	G3D::Color3 ambient = (lighting->ambientBottom + lighting->ambientTop) / 2.0f;
-	if (lighting->lightArray.size() > 0) {
-		G3D::Vector3 direction = lighting->lightArray[0].position.xyz();
+	if (lighting->shadowedLightArray.size() > 0) {
+		G3D::Vector3 direction = lighting->shadowedLightArray[0].position.xyz();
 	}
 }
 
