@@ -586,11 +586,14 @@ XBrickColorItem::XBrickColorItem(
 {
 }
 
-// STUB: ROBLOX 0x00441b50
+// FUNCTION: ROBLOX 0x00441b50
 BOOL XBrickColorItem::OnDrawItemValue(CDC& dc, CRect rcValue)
 {
-	STUB(0x441b50);
-	return FALSE;
+	if (GetValue() == "") {
+		return FALSE;
+	}
+
+	return CPropertyGridItemBrickColor::OnDrawItemValue(dc, rcValue);
 }
 
 // FUNCTION: ROBLOX 0x00441c10
