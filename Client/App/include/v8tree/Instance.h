@@ -311,6 +311,8 @@ public:
 	boost::shared_ptr<const std::vector<shared_ptr<Instance> > > getChildren2() { return children.read(); }
 
 	// clang-format off
+	// TEMPLATE: ROBLOX 0x00639f80
+	// ??$for_eachChild@UUnknown00639e20@RBX@@@Instance@RBX@@QBEXUUnknown00639e20@1@@Z
 	// TEMPLATE: WEBSERVICE 0x1004a340
 	// TEMPLATE: ROBLOX 0x00577eb0
 	// ??$for_eachChild@VRaiseDescendentAdded2@RBX@@@Instance@RBX@@QBEXVRaiseDescendentAdded2@1@@Z

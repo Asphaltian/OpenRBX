@@ -36,6 +36,7 @@ template class RBX::TToolVerb<RBX::HingeTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::RightMotorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::LeftMotorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::OscillateMotorTool, RBX::RunStateVerb>;
+template class RBX::TToolVerb<RBX::AnchorTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::LockTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::NullTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::GrabTool, RBX::RunStateVerb>;

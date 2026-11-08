@@ -26,6 +26,7 @@ extern char sHingeTool[];
 extern char sRightMotorTool[];
 extern char sLeftMotorTool[];
 extern char sOscillateMotorTool[];
+extern char sAnchorTool[];
 extern char sLockTool[];
 extern char sHammerTool[];
 extern char sLaserTool[];
@@ -238,6 +239,23 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(LockTool, 0x28)
+
+// SIZE 0x2c
+class AnchorTool : public Named<ModelTool, sAnchorTool>
+{
+private:
+	bool m_unk0x28; // 0x28
+
+	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
+	virtual MouseCommand* onMouseUp(const UIEvent& uiEvent) { return this; }
+	virtual void onMouseHover(const UIEvent& uiEvent);
+	virtual const std::string getCursorName() const;
+
+public:
+	AnchorTool(Workspace* workspace) : Named<ModelTool, sAnchorTool>(workspace), m_unk0x28(false) {}
+};
+
+DECOMP_SIZE_ASSERT(AnchorTool, 0x2c)
 
 // SIZE 0x28
 class HammerTool : public Named<MouseCommand, sHammerTool>

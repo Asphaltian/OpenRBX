@@ -47,6 +47,9 @@ char sLeftMotorTool[] = "LeftMotor";
 // GLOBAL: ROBLOX 0x00948c34
 char sOscillateMotorTool[] = "OscillateMotor";
 
+// GLOBAL: ROBLOX 0x00948c58
+char sAnchorTool[] = "Anchor";
+
 // GLOBAL: ROBLOX 0x00948c60
 char sLockTool[] = "Lock";
 
@@ -196,6 +199,29 @@ void InletTool::VTable0x40(Surface* surface)
 	ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
 }
 
+void FUN_00639e20(Instance* instance, const bool& value);
+
+struct Unknown00639e20
+{
+	bool value;
+
+	Unknown00639e20(bool value) : value(value) {}
+
+	void operator()(Instance* instance) const { FUN_00639e20(instance, value); }
+};
+
+// FUNCTION: ROBLOX 0x00639e20
+void FUN_00639e20(Instance* instance, const bool& value)
+{
+	bool anchored = value;
+	if (PartInstance* part = dynamic_cast<PartInstance*>(instance)) {
+		part->setAnchored(anchored);
+	}
+	else {
+		instance->for_eachChild(Unknown00639e20(anchored));
+	}
+}
+
 // FUNCTION: ROBLOX 0x00639e70
 void ModelTool::render3dAdorn(Adorn* adorn)
 {
@@ -204,6 +230,15 @@ void ModelTool::render3dAdorn(Adorn* adorn)
 			renderable->render3dSelect(adorn, SELECT_LIMIT);
 		}
 	}
+}
+
+// STUB: ROBLOX 0x00639eb0
+const std::string AnchorTool::getCursorName() const
+{
+	if (m_unk0x20 && m_unk0x28) {
+		return "UnAnchorCursor";
+	}
+	return "AnchorCursor";
 }
 
 // STUB: ROBLOX 0x00639f00
@@ -220,6 +255,26 @@ ModelTool::ModelTool(Workspace* workspace) : MouseCommand(workspace)
 {
 }
 
+// FUNCTION: ROBLOX 0x0063a090
+static Instance* FUN_0063a090(Instance* instance)
+{
+	PartInstance* part = dynamic_cast<PartInstance*>(instance);
+	if (part && !part->getAnchored()) {
+		return part;
+	}
+
+	boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > children = instance->getChildren().read();
+	if (children) {
+		std::vector<boost::shared_ptr<Instance> >::const_iterator end = children->end();
+		for (std::vector<boost::shared_ptr<Instance> >::const_iterator iter = children->begin(); iter != end; ++iter) {
+			if (FUN_0063a090(iter->get())) {
+				return iter->get();
+			}
+		}
+	}
+	return NULL;
+}
+
 // FUNCTION: ROBLOX 0x0063a200
 void ModelTool::onMouseHover(const UIEvent& uiEvent)
 {
@@ -227,6 +282,27 @@ void ModelTool::onMouseHover(const UIEvent& uiEvent)
 	if (part) {
 		m_unk0x20 = shared_from(Workspace::findTopInstance(part));
 	}
+}
+
+// STUB: ROBLOX 0x0063a2b0
+void AnchorTool::onMouseHover(const UIEvent& uiEvent)
+{
+	boost::shared_ptr<Instance> oldInstance = m_unk0x20;
+	ModelTool::onMouseHover(uiEvent);
+	if (oldInstance != m_unk0x20) {
+		m_unk0x28 = m_unk0x20 && !FUN_0063a090(m_unk0x20.get());
+	}
+}
+
+// FUNCTION: ROBLOX 0x0063a370
+MouseCommand* AnchorTool::onMouseDown(const UIEvent& uiEvent)
+{
+	if (m_unk0x20 && !PartInstance::getLocked(m_unk0x20.get())) {
+		bool anchored = FUN_0063a090(m_unk0x20.get()) != NULL;
+		FUN_00639e20(m_unk0x20.get(), anchored);
+		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(PING_SOUND);
+	}
+	return this;
 }
 
 // FUNCTION: ROBLOX 0x0063a3d0

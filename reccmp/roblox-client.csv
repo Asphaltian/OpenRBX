@@ -5921,6 +5921,14 @@ address,type,symbol,name,module,size
 0083a4bc,global,??_7SurfaceTool@RBX@@6BIRenderable@1@@,,,
 0083a4d4,global,??_7SurfaceTool@RBX@@6BINamed@1@@,,,
 005d0990,function,,,,5
+005d0980,function,,,,5
+0082b5a8,global,??_7?$TToolVerb@VAnchorTool@RBX@@VRunStateVerb@2@@RBX@@6B@,,,
+0082b5c4,global,??_7AnchorTool@RBX@@6BIRenderable@1@@,,,
+0082b5dc,global,??_7AnchorTool@RBX@@6BINamed@1@@,,,
+0095db18,global,"n___RBX::Name::doDeclare<&RBX::sAnchorTool>",,,
+0095db1c,global,"??_B?1???$doDeclare@$1?sAnchorTool@RBX@@3PADA@Name@RBX@@CAABV01@XZ@51",,,
+0095dbac,global,"flag___RBX::Name::declare<&RBX::sAnchorTool>",,,
+009399b8,global,??_R0?AVAnchorTool@RBX@@@8,,,
 0082b620,global,??_7?$TToolVerb@VLockTool@RBX@@VRunStateVerb@2@@RBX@@6B@,,,
 0082b63c,global,??_7LockTool@RBX@@6BIRenderable@1@@,,,
 0082b654,global,??_7LockTool@RBX@@6BINamed@1@@,,,
