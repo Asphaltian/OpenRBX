@@ -7,6 +7,7 @@
 #include "SelectionTreeCtrl.h"
 #include "script/Script.h"
 #include "util/scopedassign.h"
+#include "v8datamodel/Workspace.h"
 
 #include <algorithm>
 #include <boost/bind.hpp>
@@ -887,6 +888,23 @@ void CRobloxTreeCtrl::FUN_00428720(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 }
 
+// STUB: ROBLOX 0x00428770
+static void FUN_00428770(RBX::Instance* parent, boost::shared_ptr<RBX::Instance> child)
+{
+	if (child->getParent() == parent) {
+		return;
+	}
+
+	RBX::Workspace* workspace = RBX::Workspace::findWorkspace(parent);
+	if (workspace && !child->isDescendentOf(workspace)) {
+		std::vector<boost::shared_ptr<RBX::Instance> > instances;
+		instances.push_back(child);
+		workspace->insertInstances(instances, workspace, RBX::INSERT_TO_TREE, RBX::SUPPRESS_PROMPTS);
+	}
+
+	child->setParent(parent);
+}
+
 // FUNCTION: ROBLOX 0x00428b40
 CSelectionTreeCtrl::~CSelectionTreeCtrl()
 {
@@ -913,6 +931,37 @@ void RootNode::VTable0x14(NMTVDISPINFO* dispInfo)
 template class RBX::MarshaledListener<RBX::Instance, RBX::DescendentAdded, RBX::Instance, RBX::DescendentAdded>;
 template class RBX::MarshaledListener<RBX::Instance, RBX::DescendentRemoving, RBX::Instance, RBX::DescendentRemoving>;
 
+// STUB: ROBLOX 0x00429040
+void CSelectionTreeCtrl::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	Default();
+
+	if (m_unk0xf0.get()) {
+		CImageList::DragLeave(this);
+		CImageList::EndDrag();
+		ReleaseCapture();
+		m_unk0xf0.reset();
+
+		HTREEITEM target = GetDropHilightItem();
+		if (target) {
+			CRobloxTreeCtrlNode* node = reinterpret_cast<CRobloxTreeCtrlNode*>(GetItemData(target));
+			if (node) {
+				boost::shared_ptr<RBX::Instance> instance = node->m_unk0x0c;
+				RBX::DataModel::Lock lock(m_unk0xe8);
+				if (instance) {
+					std::for_each(
+						VTable0x148()->begin(), VTable0x148()->end(), boost::bind(&FUN_00428770, instance.get(), _1)
+					);
+				}
+				m_unk0xe8->clearStack();
+				m_unk0xe8->setDirty(true);
+			}
+		}
+
+		SelectDropTarget(NULL);
+	}
+}
+
 // clang-format off
 BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
 	ON_NOTIFY_REFLECT(TVN_GETDISPINFO, FUN_00422210)
@@ -935,6 +984,7 @@ BEGIN_MESSAGE_MAP(CSelectionTreeCtrl, CRobloxTreeCtrl)
 	ON_WM_RBUTTONDOWN()
 	ON_NOTIFY_REFLECT(TVN_BEGINDRAG, FUN_00423630)
 	ON_WM_MOUSEMOVE()
+	ON_WM_LBUTTONUP()
 	ON_WM_CREATE()
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
