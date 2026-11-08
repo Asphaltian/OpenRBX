@@ -37,12 +37,15 @@ protected:
 	);
 	virtual void onEvent(const RBX::Selection* source, RBX::SelectionChanged event);
 
+	afx_msg void FUN_00422230(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void FUN_004232d0(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 	DECLARE_MESSAGE_MAP()
 
 private:
+	void FUN_00423170(TVITEM* item, bool select);
 	void FUN_00426f50();
 	void FUN_004285a0(boost::shared_ptr<RBX::DataModel> dataModel);
 

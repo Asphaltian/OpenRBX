@@ -54,6 +54,12 @@ void CRobloxTreeCtrl::FUN_00422210(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 }
 
+// FUNCTION: ROBLOX 0x00422230
+void CSelectionTreeCtrl::FUN_00422230(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	*pResult = m_unk0xcc != 0;
+}
+
 // FUNCTION: ROBLOX 0x00422ae0
 void CRobloxTreeCtrl::VTable0x15c()
 {
@@ -95,6 +101,40 @@ int FUN_004230c0(RBX::Instance* instance)
 		RBX::Reflection::Metadata::Reflection::FUN_004480c0();
 	RBX::Reflection::Metadata::Class* metadata = reflection->FUN_00446220(&instance->getDescriptor(), true);
 	return metadata ? metadata->FUN_00422100() : 0;
+}
+
+// FUNCTION: ROBLOX 0x00423170
+void CSelectionTreeCtrl::FUN_00423170(TVITEM* item, bool select)
+{
+	if (item->hItem && item->lParam) {
+		boost::shared_ptr<RBX::Instance> instance = reinterpret_cast<CRobloxTreeCtrlNode*>(item->lParam)->m_unk0x0c;
+		if (instance) {
+			RBX::DataModel::Lock lock(VTable0x14c());
+			RBX::Selection* selection = VTable0x148();
+			RBX::ScopedAssign<undefined> updating(m_unk0xce, true);
+			if (select) {
+				selection->addToSelection(instance.get());
+			}
+			else {
+				selection->removeFromSelection(instance.get());
+			}
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x004232d0
+void CSelectionTreeCtrl::FUN_004232d0(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	*pResult = 0;
+	if (!m_unk0xcd && !m_unk0xa4 && m_unk0xe8) {
+		NMTREEVIEW* treeView = reinterpret_cast<NMTREEVIEW*>(pNMHDR);
+		if (treeView->itemNew.hItem) {
+			FUN_00423170(&treeView->itemNew, true);
+		}
+		if (treeView->itemOld.hItem && treeView->action) {
+			FUN_00423170(&treeView->itemOld, false);
+		}
+	}
 }
 
 // STUB: ROBLOX 0x00423330
@@ -676,6 +716,8 @@ BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
 END_MESSAGE_MAP()
 
 BEGIN_MESSAGE_MAP(CSelectionTreeCtrl, CRobloxTreeCtrl)
+	ON_NOTIFY_REFLECT(TVN_SELCHANGED, FUN_004232d0)
+	ON_NOTIFY_REFLECT(TVN_SELCHANGING, FUN_00422230)
 	ON_WM_CREATE()
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
