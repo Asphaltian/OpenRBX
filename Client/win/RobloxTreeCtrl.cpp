@@ -60,6 +60,68 @@ void CSelectionTreeCtrl::FUN_00422230(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = m_unk0xcc != 0;
 }
 
+// VTABLE: ROBLOX 0x008024f0
+// SIZE 0x2c
+class CEnabledCmdUI : public CCmdUI
+{
+public:
+	// FUNCTION: ROBLOX 0x00422250
+	virtual void Enable(BOOL bOn = TRUE)
+	{
+		m_unk0x28 = bOn;
+		m_bEnableChanged = TRUE;
+	}
+
+	virtual void SetCheck(int nCheck = 1) {}
+	virtual void SetRadio(BOOL bOn = TRUE) {}
+	virtual void SetText(LPCTSTR lpszText) {}
+
+	BOOL m_unk0x28; // 0x28
+};
+
+DECOMP_SIZE_ASSERT(CEnabledCmdUI, 0x2c)
+
+// STUB: ROBLOX 0x00422270
+void CSelectionTreeCtrl::FUN_00422270(CPoint point)
+{
+	CMenu* popup = m_unk0xc4.GetSubMenu(0);
+	if (popup) {
+		for (UINT i = 0; i < popup->GetMenuItemCount(); i++) {
+			CEnabledCmdUI state;
+			state.m_nID = popup->GetMenuItemID(i);
+			if (state.m_nID == 0) {
+				continue;
+			}
+			if (state.m_nID == (UINT) -1) {
+				popup->GetSubMenu(i);
+				continue;
+			}
+
+			AfxGetMainWnd()->OnCmdMsg(state.m_nID, CN_UPDATE_COMMAND_UI, &state, NULL);
+			popup->EnableMenuItem(i, MF_BYPOSITION | (state.m_unk0x28 ? MF_ENABLED : MF_DISABLED));
+		}
+
+		if (point.x == -1 && point.y == -1) {
+			CRect rect;
+			GetClientRect(&rect);
+			point = rect.CenterPoint();
+			ClientToScreen(&point);
+			CXTPCommandBars::TrackPopupMenu(
+				popup, TPM_CENTERALIGN | TPM_VCENTERALIGN, point.x, point.y, GetParentFrame()
+			);
+		}
+		else {
+			CXTPCommandBars::TrackPopupMenu(popup, 0, point.x, point.y, GetParentFrame());
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x00422400
+void CSelectionTreeCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
+{
+	FUN_00422270(point);
+}
+
 // FUNCTION: ROBLOX 0x00422ae0
 void CRobloxTreeCtrl::VTable0x15c()
 {
@@ -100,6 +162,14 @@ BOOL CRobloxTreeCtrl::PreCreateWindow(CREATESTRUCT& cs)
 	cs.style &= ~TVS_DISABLEDRAGDROP;
 	cs.style |= TVS_HASBUTTONS | TVS_LINESATROOT | TVS_EDITLABELS | TVS_SHOWSELALWAYS;
 	return CXTTreeCtrl::PreCreateWindow(cs);
+}
+
+// STUB: ROBLOX 0x00422da0
+void CSelectionTreeCtrl::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	CXTTreeCtrl::OnRButtonDown(nFlags, point);
+	ClientToScreen(&point);
+	FUN_00422270(point);
 }
 
 // FUNCTION: ROBLOX 0x00422de0
@@ -759,8 +829,10 @@ BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
 END_MESSAGE_MAP()
 
 BEGIN_MESSAGE_MAP(CSelectionTreeCtrl, CRobloxTreeCtrl)
+	ON_WM_CONTEXTMENU()
 	ON_NOTIFY_REFLECT(TVN_SELCHANGED, FUN_004232d0)
 	ON_NOTIFY_REFLECT(TVN_SELCHANGING, FUN_00422230)
+	ON_WM_RBUTTONDOWN()
 	ON_WM_CREATE()
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
