@@ -109,6 +109,15 @@ void CRobloxTreeCtrl::FUN_00422de0(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 }
 
+// STUB: ROBLOX 0x00422ec0
+void CRobloxTreeCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	if (nChar == VK_F2) {
+		EditLabel(GetSelectedItem());
+	}
+	CXTTreeCtrl::OnKeyDown(nChar, nRepCnt, nFlags);
+}
+
 // FUNCTION: ROBLOX 0x004230c0
 int FUN_004230c0(RBX::Instance* instance)
 {
@@ -744,6 +753,7 @@ BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
 	ON_NOTIFY_REFLECT(TVN_DELETEITEM, FUN_00422b80)
 	ON_NOTIFY_REFLECT(TVN_BEGINLABELEDIT, FUN_00422de0)
 	ON_NOTIFY_REFLECT(TVN_ENDLABELEDIT, FUN_004234f0)
+	ON_WM_KEYDOWN()
 	ON_WM_DESTROY()
 	ON_WM_CREATE()
 END_MESSAGE_MAP()
