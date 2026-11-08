@@ -14,6 +14,45 @@
 
 class CRobloxDoc;
 
+// VTABLE: ROBLOX 0x008010c4
+// SIZE 0x14
+class PasteVerb : public RBX::Verb
+{
+public:
+	// FUNCTION: ROBLOX 0x00410000
+	PasteVerb(RBX::DataModel* dataModel, bool pasteInto)
+		: RBX::Verb(dataModel, pasteInto ? "PasteInto" : "Paste"), m_unk0x0c(dataModel), m_unk0x10(pasteInto)
+	{
+	}
+
+	virtual bool isEnabled() const;
+	virtual void doIt(RBX::IDataState* dataState);
+
+private:
+	RBX::DataModel* m_unk0x0c; // 0x0c
+	bool m_unk0x10;            // 0x10
+};
+
+DECOMP_SIZE_ASSERT(PasteVerb, 0x14)
+
+// VTABLE: ROBLOX 0x008010f0
+// SIZE 0x24
+class CopyVerb : public RBX::EditSelectionVerb
+{
+public:
+	// FUNCTION: ROBLOX 0x00410060
+	CopyVerb(RBX::DataModel* dataModel) : RBX::EditSelectionVerb("Copy", dataModel) {}
+
+	virtual ~CopyVerb() {}
+
+	// SYNTHETIC: ROBLOX 0x00410440
+	// CopyVerb::`scalar deleting destructor'
+
+	virtual void doIt(RBX::IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(CopyVerb, 0x24)
+
 // SIZE 0x10
 class ReportAbuseVerb : public RBX::Verb
 {

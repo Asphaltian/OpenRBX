@@ -16,6 +16,54 @@ HRESULT FUN_0041e610(LPCTSTR url)
 	return RBX::Http::trustCheck(url) ? S_OK : E_FAIL;
 }
 
+// FUNCTION: ROBLOX 0x0041e6d0
+InsertDecal::InsertDecal(RBX::DataModel* dataModel, const char* name) : RBX::EditSelectionVerb(name, dataModel)
+{
+}
+
+// STUB: ROBLOX 0x0041f500
+RBX::Instance* InsertDecal::FUN_0041f500() const
+{
+	STUB(0x41f500);
+	return NULL;
+}
+
+// STUB: ROBLOX 0x0041f5c0
+void InsertDecal::doIt(RBX::IDataState* dataState)
+{
+	STUB(0x41f5c0);
+}
+
+// STUB: ROBLOX 0x0041f810
+bool InsertDecal::isEnabled() const
+{
+	return RBX::EditSelectionVerb::isEnabled() && FUN_0041f500();
+}
+
+// FUNCTION: ROBLOX 0x0041f880
+InsertObject::InsertObject(RBX::DataModel* dataModel) : RBX::RunStateVerb("Insert Object", dataModel)
+{
+}
+
+// STUB: ROBLOX 0x0041fb40
+RBX::Instance* InsertObject::FUN_0041fb40() const
+{
+	STUB(0x41fb40);
+	return NULL;
+}
+
+// STUB: ROBLOX 0x0041fbe0
+void InsertObject::doIt(RBX::IDataState* dataState)
+{
+	STUB(0x41fbe0);
+}
+
+// STUB: ROBLOX 0x0041fef0
+bool InsertObject::isEnabled() const
+{
+	return FUN_0041fb40() != NULL;
+}
+
 // FUNCTION: ROBLOX 0x00420050
 CString CInstanceRecord::CNameItem::GetCaption(CXTPReportColumn* pColumn)
 {

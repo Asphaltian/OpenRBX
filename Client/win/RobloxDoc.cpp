@@ -2,8 +2,37 @@
 
 #include "MainFrm.h"
 #include "network/Players.h"
+#include "v8datamodel/Selection.h"
 
 IMPLEMENT_DYNCREATE(CRobloxDoc, CDocument)
+
+// FUNCTION: ROBLOX 0x00412120
+bool PasteVerb::isEnabled() const
+{
+	static UINT format = RegisterClipboardFormat("Roblox");
+
+	if (IsClipboardFormatAvailable(format) != TRUE) {
+		return false;
+	}
+
+	if (!m_unk0x10) {
+		return true;
+	}
+
+	return (m_unk0x0c ? m_unk0x0c->create<RBX::Selection>() : NULL)->size() == 1;
+}
+
+// STUB: ROBLOX 0x004121a0
+void PasteVerb::doIt(RBX::IDataState* dataState)
+{
+	STUB(0x4121a0);
+}
+
+// STUB: ROBLOX 0x004125e0
+void CopyVerb::doIt(RBX::IDataState* dataState)
+{
+	STUB(0x4125e0);
+}
 
 // FUNCTION: ROBLOX 0x00454390
 void ReportAbuseVerb::doIt(RBX::IDataState* dataState)

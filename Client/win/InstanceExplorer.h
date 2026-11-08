@@ -3,11 +3,53 @@
 
 #include "MarshaledListener.h"
 #include "decomp.h"
+#include "v8datamodel/Commands.h"
 #include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>
 
 // SIZE 0x5c
+// VTABLE: ROBLOX 0x00801bfc
+// SIZE 0x24
+class InsertDecal : public RBX::EditSelectionVerb
+{
+public:
+	InsertDecal(RBX::DataModel* dataModel, const char* name);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(RBX::IDataState* dataState);
+
+private:
+	RBX::Instance* FUN_0041f500() const;
+};
+
+DECOMP_SIZE_ASSERT(InsertDecal, 0x24)
+
+// SIZE 0x24
+class InsertTexture : public InsertDecal
+{
+public:
+	InsertTexture(RBX::DataModel* dataModel) : InsertDecal(dataModel, "InsertTexture") {}
+};
+
+DECOMP_SIZE_ASSERT(InsertTexture, 0x24)
+
+// VTABLE: ROBLOX 0x00801c94
+// SIZE 0x1c
+class InsertObject : public RBX::RunStateVerb
+{
+public:
+	InsertObject(RBX::DataModel* dataModel);
+
+	virtual bool isEnabled() const;
+	virtual void doIt(RBX::IDataState* dataState);
+
+private:
+	RBX::Instance* FUN_0041fb40() const;
+};
+
+DECOMP_SIZE_ASSERT(InsertObject, 0x1c)
+
 class CInstanceRecord : public CXTPReportRecord
 {
 public:
