@@ -96,6 +96,7 @@ public:
 
 private:
 	friend class RBX::RenderNew::RenderScene;
+	friend class RbxEntity;
 
 	Matrix4 m_unk0xdc;                         // 0xdc
 	SubMesh* m_unk0x11c[1];                    // 0x11c

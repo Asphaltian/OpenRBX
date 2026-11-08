@@ -1,10 +1,17 @@
 #include "appdraw/RbxEntity.h"
 
+#include "appdraw/RbxSceneNode.h"
 #include "appdraw/RbxSubEntity.h"
 
+#include <OgreCamera.h>
+#include <OgreLogManager.h>
+#include <OgreMath.h>
 #include <OgreMesh.h>
 #include <OgreRenderQueue.h>
+#include <OgreStringConverter.h>
 #include <OgreSubMesh.h>
+#include <algorithm>
+#include <string.h>
 
 namespace Ogre {
 
@@ -100,7 +107,142 @@ RbxSubEntity* RbxEntity::FUN_00676680(SubMesh* subMesh, int lodIndex)
 // STUB: ROBLOX 0x00676870
 void RbxEntity::FUN_00676870(Camera* cam)
 {
-	STUB(0x676870);
+	RbxSceneNode* node = dynamic_cast<RbxSceneNode*>(getParentNode());
+	std::vector<Unknown00676870> candidates;
+
+	bool managed;
+	if (!g_unk0x00949dd0 || !m_unk0x240) {
+		managed = false;
+	}
+	else {
+		managed = true;
+		candidates.resize(mSubEntityList.size());
+		candidates.clear();
+	}
+
+	if (!mSubEntityList.empty()) {
+		m_unk0x270.resize(mSubEntityList.size());
+		memset(&m_unk0x270[0], 0, m_unk0x270.size());
+	}
+
+	for (int i = 0; i < (int) mSubEntityList.size(); i++) {
+		RbxSubEntity* subEntity = dynamic_cast<RbxSubEntity*>(mSubEntityList[i]);
+		Vector3 offset = subEntity->m_unk0xdc.getTrans();
+		bool visible = true;
+
+		SubMesh* subMesh = subEntity->getSubMesh();
+		if (!subMesh) {
+			subMesh = subEntity->FUN_0067b4e0(1);
+		}
+
+		Sphere sphere = node->FUN_0067af60(subMesh);
+		sphere.setCenter(sphere.getCenter() + offset);
+
+		if (m_unk0x244) {
+			visible = cam->isVisible(sphere, NULL);
+		}
+		subEntity->setVisible(visible);
+
+		if (!visible) {
+			m_unk0x270[i] = 2;
+		}
+		else {
+			m_unk0x270[i] = 1;
+			if (managed) {
+				Unknown00676870 candidate;
+				candidate.m_unk0x00 = i;
+				candidate.m_unk0x04 = Math::Sqrt(subEntity->getSquaredViewDepth(cam)) - sphere.getRadius() -
+									  subEntity->FUN_0067bcd0() * 1000000.0;
+				candidates.push_back(candidate);
+			}
+		}
+	}
+
+	if (managed) {
+		int count = candidates.size();
+		int mode = -1;
+
+		if (m_unk0x240->FUN_00671ea0() > 30) {
+			VisualEngine::Unk0x18::Unk0x08& last = m_unk0x240->FUN_00671ef0(0);
+			Real average = m_unk0x240->FUN_00672980(20);
+
+			if (Math::Abs((average - last.m_unk0x00) / average) > 0.2f) {
+				if (last.m_unk0x04 > last.m_unk0x08) {
+					Real limit = (Real) candidates.size() < last.m_unk0x08 ? (Real) candidates.size() : last.m_unk0x08;
+					count = limit;
+				}
+				else {
+					count = candidates.size();
+				}
+				mode = 1;
+			}
+			else if (average > 50.0) {
+				Real budget = m_unk0x268;
+				int minimum = budget / 100.0;
+				Real fraction = minimum;
+				if (average > 100.0) {
+					count = last.m_unk0x08 * fraction;
+				}
+				else {
+					Real scale = 1.0f - (1.0f - fraction) * Math::Sin((average - 50.0) * Math::HALF_PI / 50.0);
+					count = last.m_unk0x08 * scale;
+				}
+
+				if (count < mSubEntityList.size() * fraction) {
+					count = mSubEntityList.size() * fraction;
+				}
+				if (Math::Abs(last.m_unk0x08 - count) < 40.0f) {
+					count = last.m_unk0x08;
+				}
+				if (count < m_unk0x26c) {
+					count = m_unk0x26c;
+				}
+				if (count > (int) candidates.size()) {
+					count = candidates.size();
+				}
+				mode = 2;
+			}
+			else if (last.m_unk0x04 > last.m_unk0x08) {
+				count = last.m_unk0x08;
+				Real growth = (50.0 - average) / average;
+				if (growth > 1.2f) {
+					growth = 1.2f;
+				}
+				int grown = count * growth;
+				if (grown >= count + 40) {
+					count = grown;
+				}
+				if (count > (int) candidates.size()) {
+					count = candidates.size();
+				}
+				mode = 3;
+			}
+			else {
+				count = candidates.size();
+				mode = 4;
+			}
+		}
+
+		if (count < (int) candidates.size()) {
+			std::sort(candidates.begin(), candidates.end());
+			for (int i = count; i < (int) candidates.size(); i++) {
+				dynamic_cast<RbxSubEntity*>(mSubEntityList[candidates[i].m_unk0x00])->setVisible(false);
+				m_unk0x270[candidates[i].m_unk0x00] = 3;
+			}
+
+			LogManager::getSingleton().logMessage(
+				StringConverter::toString(count) + "/" + StringConverter::toString(candidates.size()) +
+				" p=" + StringConverter::toString(mode)
+			);
+		}
+
+		if (m_unk0x246) {
+			m_unk0x240->FUN_00671eb0(VisualEngine::Unk0x18::Unk0x08());
+			VisualEngine::Unk0x18::Unk0x08& latest = m_unk0x240->FUN_00671ef0(0);
+			latest.m_unk0x04 = candidates.size();
+			latest.m_unk0x08 = count;
+		}
+	}
 }
 
 } // namespace Ogre

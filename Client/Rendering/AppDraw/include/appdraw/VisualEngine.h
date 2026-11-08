@@ -71,6 +71,7 @@ public:
 
 		Unk0x18();
 
+		int FUN_00671ea0() const;
 		void FUN_00671eb0(const Unk0x08& entry);
 		Unk0x08& FUN_00671ef0(int back);
 		float FUN_00672980(int count);

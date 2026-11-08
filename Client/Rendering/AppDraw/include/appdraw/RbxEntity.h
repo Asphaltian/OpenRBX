@@ -25,6 +25,15 @@ class RbxSubEntity;
 class RbxEntity : public Entity
 {
 public:
+	// SIZE 0x08
+	struct Unknown00676870
+	{
+		bool operator<(const Unknown00676870& other) const { return m_unk0x04 < other.m_unk0x04; }
+
+		int m_unk0x00;  // 0x00
+		Real m_unk0x04; // 0x04
+	};
+
 	RbxEntity();
 	virtual ~RbxEntity();
 

@@ -107,6 +107,12 @@ VisualEngine::Unk0x18::Unk0x18() : m_unk0x00(0)
 {
 }
 
+// FUNCTION: ROBLOX 0x00671ea0 FOLDED
+int VisualEngine::Unk0x18::FUN_00671ea0() const
+{
+	return m_unk0x00;
+}
+
 // FUNCTION: ROBLOX 0x00671eb0
 void VisualEngine::Unk0x18::FUN_00671eb0(const Unk0x08& entry)
 {
