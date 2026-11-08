@@ -188,6 +188,21 @@ int CRobloxTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
+// FUNCTION: ROBLOX 0x004234f0
+void CRobloxTreeCtrl::FUN_004234f0(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	NMTVDISPINFO* dispInfo = reinterpret_cast<NMTVDISPINFO*>(pNMHDR);
+	if (dispInfo->item.pszText) {
+		CRobloxTreeCtrlNode* node = reinterpret_cast<CRobloxTreeCtrlNode*>(dispInfo->item.lParam);
+		RBX::DataModel::Lock lock(VTable0x14c());
+		node->m_unk0x0c->setName(dispInfo->item.pszText);
+		*pResult = 1;
+	}
+	else {
+		*pResult = 0;
+	}
+}
+
 // FUNCTION: ROBLOX 0x00423730
 int CSelectionTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -728,6 +743,7 @@ BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDED, FUN_004221f0)
 	ON_NOTIFY_REFLECT(TVN_DELETEITEM, FUN_00422b80)
 	ON_NOTIFY_REFLECT(TVN_BEGINLABELEDIT, FUN_00422de0)
+	ON_NOTIFY_REFLECT(TVN_ENDLABELEDIT, FUN_004234f0)
 	ON_WM_DESTROY()
 	ON_WM_CREATE()
 END_MESSAGE_MAP()
