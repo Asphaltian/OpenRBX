@@ -4,6 +4,7 @@
 #include "CylinderMesh.h"
 #include "MaterialFactory.h"
 #include "PBBMesh.h"
+#include "Part.h"
 #include "SphereMesh.h"
 #include "appdraw/RbxSceneManager.h"
 #include "appdraw/RbxSky.h"
@@ -12,7 +13,9 @@
 #include "util/ContentProvider.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
+#include "v8datamodel/Decal.h"
 #include "v8datamodel/Lighting.h"
+#include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Sky.h"
 #include "v8datamodel/Workspace.h"
 
@@ -97,7 +100,23 @@ RenderStats& View::getRenderStats()
 // STUB: ROBLOX 0x0050b7e0
 void View::onWorkspaceDescendentAdded(boost::shared_ptr<Instance> descendent)
 {
-	STUB(0x50b7e0);
+	PartInstance* part = dynamic_cast<PartInstance*>(descendent.get());
+	if (part) {
+		new Part(shared_from(part), this);
+	}
+	else if (PartInstance* parentPart = dynamic_cast<PartInstance*>(descendent->getParent())) {
+		RBX::Texture* texture = dynamic_cast<RBX::Texture*>(descendent.get());
+		if (texture) {
+			new Texture(*texture, *parentPart, this);
+			return;
+		}
+
+		RBX::Decal* decal = dynamic_cast<RBX::Decal*>(descendent.get());
+		if (decal) {
+			new Decal(*decal, *parentPart, this);
+			return;
+		}
+	}
 }
 
 // STUB: ROBLOX 0x0050c4a0

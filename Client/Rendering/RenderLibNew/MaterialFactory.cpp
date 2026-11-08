@@ -3,7 +3,10 @@
 #include "util/ContentProvider.h"
 
 #include <G3D/GImage.h>
+#include <OgreImage.h>
+#include <OgreTextureManager.h>
 #include <algorithm>
+#include <stdio.h>
 
 namespace RBX {
 namespace ViewNew {
@@ -36,6 +39,9 @@ DECOMP_SIZE_ASSERT(MegaTextureProxy, 0x5c)
 
 const unsigned int MegaTextureProxy::numStrips = 32;
 
+// GLOBAL: ROBLOX 0x009586f4
+static int g_unk0x009586f4 = 0;
+
 // STUB: ROBLOX 0x0051b2e0
 G3D::ReferenceCountedPointer<G3D::Texture> MegaTextureProxy::resolve(G3D::RenderDevice* rd)
 {
@@ -62,11 +68,14 @@ G3D::ReferenceCountedPointer<G3D::Texture> MegaTextureProxy::resolve(G3D::Render
 			}
 		}
 
-		G3D::Texture::Settings params;
-		params.wrapMode = G3D::Texture::CLAMP;
+		char name[8];
+		_snprintf(name, sizeof(name), "ta%d", g_unk0x009586f4++);
 
-		texture =
-			G3D::Texture::fromGImage("MegaTexture", strip, G3D::TextureFormat::RGB8, G3D::Texture::DIM_2D, params);
+		Ogre::Image ogreImage;
+		ogreImage.loadDynamicImage(strip.byte(), strip.width, strip.height, 1, Ogre::PF_B8G8R8, false, 1, 0);
+		m_unk0x4c = Ogre::TextureManager::getSingleton().create(name, "general");
+		m_unk0x4c->loadImage(ogreImage);
+
 		root = NULL;
 		loaded = true;
 	}
