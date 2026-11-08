@@ -38,6 +38,22 @@ void CRobloxTreeCtrlNode::FUN_004221a0()
 	}
 }
 
+// FUNCTION: ROBLOX 0x004221f0
+void CRobloxTreeCtrl::FUN_004221f0(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	NMTREEVIEW* treeView = reinterpret_cast<NMTREEVIEW*>(pNMHDR);
+	reinterpret_cast<CRobloxTreeCtrlNode*>(treeView->itemNew.lParam)->VTable0x10(treeView->action);
+	*pResult = 0;
+}
+
+// FUNCTION: ROBLOX 0x00422210
+void CRobloxTreeCtrl::FUN_00422210(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	NMTVDISPINFO* dispInfo = reinterpret_cast<NMTVDISPINFO*>(pNMHDR);
+	reinterpret_cast<CRobloxTreeCtrlNode*>(dispInfo->item.lParam)->VTable0x14(dispInfo);
+	*pResult = 0;
+}
+
 // FUNCTION: ROBLOX 0x00422ae0
 void CRobloxTreeCtrl::VTable0x15c()
 {
@@ -51,6 +67,19 @@ void CRobloxTreeCtrl::VTable0x15c()
 	}
 }
 
+// FUNCTION: ROBLOX 0x00422cc0
+void CRobloxTreeCtrl::OnDestroy()
+{
+	CXTTreeCtrl::OnDestroy();
+
+	RBX::ScopedAssign<undefined> clearing(m_unk0xa4, true);
+	DeleteAllItems();
+	if (m_unk0x94) {
+		delete m_unk0x94;
+		m_unk0x94 = NULL;
+	}
+}
+
 // FUNCTION: ROBLOX 0x004230c0
 int FUN_004230c0(RBX::Instance* instance)
 {
@@ -58,6 +87,54 @@ int FUN_004230c0(RBX::Instance* instance)
 		RBX::Reflection::Metadata::Reflection::FUN_004480c0();
 	RBX::Reflection::Metadata::Class* metadata = reflection->FUN_00446220(&instance->getDescriptor(), true);
 	return metadata ? metadata->FUN_00422100() : 0;
+}
+
+// STUB: ROBLOX 0x00423330
+int CRobloxTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CXTTreeCtrl::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+
+	Init();
+
+	BOOL alpha = FALSE;
+	CBitmap bitmap;
+	bitmap.Attach(CXTPImageManagerIcon::LoadBitmapFromResource(MAKEINTRESOURCE(0x85), &alpha));
+
+	if (alpha) {
+		if (!m_unk0xa8.Create(16, 16, ILC_COLOR32, 0, 0)) {
+			return -1;
+		}
+		if (m_unk0xa8.Add(&bitmap, (CBitmap*) NULL) == -1) {
+			return -1;
+		}
+	}
+	else {
+		if (!m_unk0xa8.Create(16, 16, ILC_COLORDDB | ILC_MASK, 0, 0)) {
+			return -1;
+		}
+		if (m_unk0xa8.Add(&bitmap, RGB(255, 0, 255)) == -1) {
+			return -1;
+		}
+	}
+
+	SetImageList(&m_unk0xa8, TVSIL_NORMAL);
+	EnableMultiSelect(TRUE);
+	VTable0x15c();
+	return 0;
+}
+
+// FUNCTION: ROBLOX 0x00423730
+int CSelectionTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CRobloxTreeCtrl::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+
+	FUN_004204e0();
+	SetTimer(0, 200, NULL);
+	return 0;
 }
 
 // FUNCTION: ROBLOX 0x004248f0
@@ -541,6 +618,20 @@ void CSelectionTreeCtrl::FUN_004285a0(boost::shared_ptr<RBX::DataModel> dataMode
 	}
 }
 
+// STUB: ROBLOX 0x00428720
+void CRobloxTreeCtrl::FUN_00428720(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	NMTREEVIEW* treeView = reinterpret_cast<NMTREEVIEW*>(pNMHDR);
+	if (treeView->action & TVE_EXPAND) {
+		CRobloxTreeCtrlNode* node = reinterpret_cast<CRobloxTreeCtrlNode*>(treeView->itemNew.lParam);
+		if (!node->m_unk0x2d) {
+			node->FUN_00426960();
+			node->FUN_00426b00();
+		}
+	}
+	*pResult = 0;
+}
+
 // FUNCTION: ROBLOX 0x00428b40
 CSelectionTreeCtrl::~CSelectionTreeCtrl()
 {
@@ -566,3 +657,18 @@ void RootNode::VTable0x14(NMTVDISPINFO* dispInfo)
 
 template class RBX::MarshaledListener<RBX::Instance, RBX::DescendentAdded, RBX::Instance, RBX::DescendentAdded>;
 template class RBX::MarshaledListener<RBX::Instance, RBX::DescendentRemoving, RBX::Instance, RBX::DescendentRemoving>;
+
+// clang-format off
+BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
+	ON_NOTIFY_REFLECT(TVN_GETDISPINFO, FUN_00422210)
+	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, FUN_00428720)
+	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDED, FUN_004221f0)
+	ON_WM_DESTROY()
+	ON_WM_CREATE()
+END_MESSAGE_MAP()
+
+BEGIN_MESSAGE_MAP(CSelectionTreeCtrl, CRobloxTreeCtrl)
+	ON_WM_CREATE()
+	ON_WM_TIMER()
+END_MESSAGE_MAP()
+// clang-format on

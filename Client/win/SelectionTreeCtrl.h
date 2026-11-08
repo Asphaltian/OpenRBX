@@ -37,7 +37,10 @@ protected:
 	);
 	virtual void onEvent(const RBX::Selection* source, RBX::SelectionChanged event);
 
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+
+	DECLARE_MESSAGE_MAP()
 
 private:
 	void FUN_00426f50();

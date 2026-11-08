@@ -37,6 +37,14 @@ public:
 	CRobloxTreeCtrlNode* FUN_00426e00(const boost::shared_ptr<RBX::Instance>& instance);
 
 protected:
+	afx_msg void FUN_004221f0(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void FUN_00422210(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnDestroy();
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void FUN_00428720(NMHDR* pNMHDR, LRESULT* pResult);
+
+	DECLARE_MESSAGE_MAP()
+
 	friend class CRobloxTreeCtrlNode;
 
 	CRobloxTreeCtrlNode* m_unk0x94;                           // 0x94

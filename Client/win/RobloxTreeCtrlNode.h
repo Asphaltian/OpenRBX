@@ -37,6 +37,7 @@ public:
 	void FUN_00426b00();
 
 protected:
+	friend class CRobloxTreeCtrl;
 	friend class CSelectionTreeCtrl;
 
 	virtual void onEvent(const RBX::Instance* source, RBX::PropertyChanged event);
