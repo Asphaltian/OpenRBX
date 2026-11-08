@@ -41,7 +41,9 @@ protected:
 
 	afx_msg void FUN_004221f0(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void FUN_00422210(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void FUN_00422b80(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDestroy();
+	afx_msg void FUN_00422de0(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void FUN_00428720(NMHDR* pNMHDR, LRESULT* pResult);
 

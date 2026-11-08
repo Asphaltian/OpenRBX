@@ -73,6 +73,14 @@ void CRobloxTreeCtrl::VTable0x15c()
 	}
 }
 
+// FUNCTION: ROBLOX 0x00422b80
+void CRobloxTreeCtrl::FUN_00422b80(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	RBX::ScopedAssign<undefined> deleting(m_unk0xa4, true);
+	delete reinterpret_cast<CRobloxTreeCtrlNode*>(reinterpret_cast<NMTREEVIEW*>(pNMHDR)->itemOld.lParam);
+	*pResult = 0;
+}
+
 // FUNCTION: ROBLOX 0x00422cc0
 void CRobloxTreeCtrl::OnDestroy()
 {
@@ -92,6 +100,13 @@ BOOL CRobloxTreeCtrl::PreCreateWindow(CREATESTRUCT& cs)
 	cs.style &= ~TVS_DISABLEDRAGDROP;
 	cs.style |= TVS_HASBUTTONS | TVS_LINESATROOT | TVS_EDITLABELS | TVS_SHOWSELALWAYS;
 	return CXTTreeCtrl::PreCreateWindow(cs);
+}
+
+// FUNCTION: ROBLOX 0x00422de0
+void CRobloxTreeCtrl::FUN_00422de0(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	GetEditControl()->LimitText(32);
+	*pResult = 0;
 }
 
 // FUNCTION: ROBLOX 0x004230c0
@@ -711,6 +726,8 @@ BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
 	ON_NOTIFY_REFLECT(TVN_GETDISPINFO, FUN_00422210)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, FUN_00428720)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDED, FUN_004221f0)
+	ON_NOTIFY_REFLECT(TVN_DELETEITEM, FUN_00422b80)
+	ON_NOTIFY_REFLECT(TVN_BEGINLABELEDIT, FUN_00422de0)
 	ON_WM_DESTROY()
 	ON_WM_CREATE()
 END_MESSAGE_MAP()
