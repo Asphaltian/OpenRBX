@@ -924,12 +924,21 @@ void CSelectionPropGrid::FUN_00445580(RBX::Selection* selection)
 	}
 }
 
-// STUB: ROBLOX 0x00445830
+// FUNCTION: ROBLOX 0x00445830
 void CDataModelPropGrid::VTable0x00(
 	boost::shared_ptr<RBX::DataModel> newDataModel, boost::shared_ptr<RBX::DataModel> oldDataModel
 )
 {
-	STUB(0x445830);
+	if (m_unk0x194) {
+		RBX::DataModel::Lock lock(m_unk0x194);
+		FUN_00445580(NULL);
+	}
+
+	m_unk0x194 = newDataModel.get();
+	if (m_unk0x194) {
+		RBX::DataModel::Lock lock(m_unk0x194);
+		FUN_00445580(m_unk0x194 ? m_unk0x194->create<RBX::Selection>() : NULL);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00444c80
