@@ -291,10 +291,36 @@ void CRobloxDoc::FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult)
 }
 
 // STUB: ROBLOX 0x00459950
-BOOL CRobloxDoc::FUN_00459950(std::string p_unk0x04)
+BOOL CRobloxDoc::FUN_00459950(std::string fileName)
 {
-	STUB(0x459950);
-	return FALSE;
+	if (RBX::ContentProvider::isHttpUrl(fileName.c_str())) {
+		fileName = RBX::ContentProvider::singleton().getFile(RBX::ContentId(fileName.c_str()));
+	}
+
+	CString script;
+	{
+		CFile file(fileName.c_str(), CFile::modeRead);
+		char buffer[0x1000];
+		UINT count;
+		do {
+			count = file.Read(buffer, sizeof(buffer) - 1);
+			buffer[count] = 0;
+			script += buffer;
+		} while (count != 0);
+	}
+
+	RBX::DataModel::Lock lock(FUN_00403290());
+	std::vector<RBX::Reflection::Value> arguments;
+	try {
+		FUN_00403290()->create<RBX::ScriptContext>()->executeInNewThread(
+			RBX::Security::LocalGUI, script, fileName.c_str(), arguments
+		);
+	}
+	catch (...) {
+		return FALSE;
+	}
+
+	return TRUE;
 }
 
 // STUB: ROBLOX 0x00459c80
