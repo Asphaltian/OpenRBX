@@ -359,6 +359,7 @@ protected:
 	bool m_unk0x24; // 0x24
 
 	DeleteBase(DataModel* dataModel, std::string name, bool p_unk0x24);
+	DeleteBase(VerbContainer* container, DataModel* dataModel, std::string name);
 
 public:
 	virtual void doIt(IDataState* dataState); // vtable+0x10
@@ -382,6 +383,11 @@ class DeleteSelectionVerb : public DeleteBase
 {
 public:
 	DeleteSelectionVerb(DataModel* dataModel) : DeleteBase(dataModel, "Delete", false) {}
+
+	DeleteSelectionVerb(VerbContainer* container, DataModel* dataModel, std::string name)
+		: DeleteBase(container, dataModel, name)
+	{
+	}
 };
 
 DECOMP_SIZE_ASSERT(DeleteSelectionVerb, 0x28)

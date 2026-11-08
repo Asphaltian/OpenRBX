@@ -35,6 +35,19 @@ private:
 
 DECOMP_SIZE_ASSERT(PasteVerb, 0x14)
 
+// VTABLE: ROBLOX 0x00801120
+// SIZE 0x28
+class CutVerb : public RBX::DeleteSelectionVerb
+{
+public:
+	// FUNCTION: ROBLOX 0x00410470
+	CutVerb(RBX::DataModel* dataModel) : RBX::DeleteSelectionVerb(dataModel, dataModel, "Cut") {}
+
+	virtual void doIt(RBX::IDataState* dataState);
+};
+
+DECOMP_SIZE_ASSERT(CutVerb, 0x28)
+
 // VTABLE: ROBLOX 0x008010f0
 // SIZE 0x24
 class CopyVerb : public RBX::EditSelectionVerb

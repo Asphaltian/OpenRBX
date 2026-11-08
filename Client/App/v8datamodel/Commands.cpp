@@ -438,6 +438,12 @@ bool DuplicateSelectionVerb::isEnabled() const
 	return (dataModel ? dataModel->create<Selection>() : NULL)->size() > 0;
 }
 
+// FUNCTION: ROBLOX 0x0059a390
+DeleteBase::DeleteBase(VerbContainer* container, DataModel* dataModel, std::string name)
+	: EditSelectionVerb(container, name, dataModel), m_unk0x24(false)
+{
+}
+
 // FUNCTION: ROBLOX 0x0059a410
 void ControllerCommand::setController(Controller::ControllerType controllerType)
 {

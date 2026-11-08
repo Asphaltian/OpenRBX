@@ -6,6 +6,13 @@
 
 IMPLEMENT_DYNCREATE(CRobloxDoc, CDocument)
 
+// FUNCTION: ROBLOX 0x0040ffc0
+void CutVerb::doIt(RBX::IDataState* dataState)
+{
+	getContainer()->getVerb("Copy")->doIt(dataState);
+	RBX::DeleteBase::doIt(dataState);
+}
+
 // FUNCTION: ROBLOX 0x00412120
 bool PasteVerb::isEnabled() const
 {
