@@ -35,12 +35,23 @@ public:
 		int m_unk0x2c;    // 0x2c
 	};
 
+	// SIZE 0x10
+	struct Unk0x10
+	{
+		uint32 m_unk0x00; // 0x00
+		int m_unk0x04;    // 0x04
+		int m_unk0x08;    // 0x08
+		int m_unk0x0c;    // 0x0c
+	};
+
 	virtual ~TwoDManager(); // vtable+0x00
 	TwoDManager();
 
 	void FUN_0067c6c0(
 		SceneManager* sceneManager, RenderTarget* target, uint8 queueGroupId, bool p_unk0x09, bool p_unk0x0a
 	);
+	void FUN_0067c710();
+	void FUN_0067cb20(size_t numVertices);
 	void FUN_0067cec0();
 	void FUN_0067d9e0(
 		std::string texture,
@@ -83,6 +94,7 @@ private:
 	std::list<Unk0x30> m_unk0x3c;            // 0x3c
 };
 
+DECOMP_SIZE_ASSERT(TwoDManager::Unk0x10, 0x10)
 DECOMP_SIZE_ASSERT(TwoDManager::Unk0x30, 0x30)
 DECOMP_SIZE_ASSERT(TwoDManager, 0x48)
 
