@@ -4,6 +4,7 @@
 
 #include <OgreCamera.h>
 #include <OgreException.h>
+#include <OgreHardwareBufferManager.h>
 #include <OgreLogManager.h>
 #include <OgreRenderSystem.h>
 #include <OgreRenderTarget.h>
@@ -12,6 +13,7 @@
 #include <OgreSceneManager.h>
 #include <OgreStringConverter.h>
 #include <OgreTextureManager.h>
+#include <OgreVertexIndexData.h>
 #include <OgreViewport.h>
 #include <algorithm>
 #include <d3d9.h>
@@ -129,6 +131,68 @@ float VisualEngine::Unk0x18::FUN_00672980(int count)
 		return values[count / 2];
 	}
 	return -1.0f;
+}
+
+// STUB: ROBLOX 0x00672ab0
+VertexData* FUN_00672ab0(
+	const Vector3* positions,
+	size_t vertexCount,
+	const Vector3* normals,
+	const ColourValue* colours,
+	const Vector2* textureCoords
+)
+{
+	RenderSystem* renderSystem = Root::getSingleton().getRenderSystem();
+	VertexData* vertexData = new VertexData();
+	VertexDeclaration* declaration = vertexData->vertexDeclaration;
+	vertexData->vertexCount = vertexCount;
+
+	declaration->addElement(0, 0, VET_FLOAT3, VES_POSITION);
+	HardwareVertexBufferSharedPtr buffer = HardwareBufferManager::getSingleton().createVertexBuffer(
+		VertexElement::getTypeSize(VET_FLOAT3), vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
+	);
+	buffer->writeData(0, buffer->getSizeInBytes(), positions, true);
+	VertexBufferBinding* binding = vertexData->vertexBufferBinding;
+	binding->setBinding(0, buffer);
+
+	unsigned short source = 1;
+	if (colours) {
+		std::vector<RGBA> converted;
+		converted.resize(vertexCount);
+		for (size_t i = 0; i < vertexCount; i++, colours++) {
+			ColourValue colour(colours->r, colours->r, colours->r, colours->r);
+			renderSystem->convertColourValue(colour, &converted[i]);
+		}
+
+		declaration->addElement(1, 0, VET_COLOUR, VES_DIFFUSE);
+		buffer = HardwareBufferManager::getSingleton().createVertexBuffer(
+			VertexElement::getTypeSize(VET_COLOUR), vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
+		);
+		buffer->writeData(0, buffer->getSizeInBytes(), &converted[0], true);
+		binding->setBinding(1, buffer);
+		source = 2;
+	}
+
+	if (normals) {
+		declaration->addElement(source, 0, VET_FLOAT3, VES_NORMAL);
+		buffer = HardwareBufferManager::getSingleton().createVertexBuffer(
+			VertexElement::getTypeSize(VET_FLOAT3), vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
+		);
+		buffer->writeData(0, buffer->getSizeInBytes(), normals, true);
+		binding->setBinding(source, buffer);
+		source++;
+	}
+
+	if (textureCoords) {
+		declaration->addElement(source, 0, VET_FLOAT2, VES_TEXTURE_COORDINATES);
+		buffer = HardwareBufferManager::getSingleton().createVertexBuffer(
+			VertexElement::getTypeSize(VET_FLOAT2), vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
+		);
+		buffer->writeData(0, buffer->getSizeInBytes(), textureCoords, true);
+		binding->setBinding(source, buffer);
+	}
+
+	return vertexData;
 }
 
 // STUB: ROBLOX 0x00673860
