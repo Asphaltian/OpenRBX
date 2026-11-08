@@ -209,7 +209,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 	}
 
 	if (m_unk0x14.isNull()) {
-		m_unk0x14 = Ogre::MeshManager::getSingleton().create("rbxdummymesh", "General");
+		m_unk0x14 = Ogre::MeshManager::getSingleton().createOrRetrieve("rbxdummymesh", "General").first;
 	}
 
 	if (m_unk0x04 == NULL && chunkArray.size() != 0) {
