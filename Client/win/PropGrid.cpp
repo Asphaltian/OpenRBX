@@ -550,8 +550,30 @@ XBoolItem::XBoolItem(const RBX::Reflection::TypedPropertyDescriptor<bool>& descr
 // STUB: ROBLOX 0x004419c0
 BOOL XBoolItem::OnDrawItemValue(CDC& dc, CRect rcValue)
 {
-	STUB(0x4419c0);
-	return FALSE;
+	if (!m_bCheckBoxStyle) {
+		return FALSE;
+	}
+
+	CRect rcCheck(rcValue.left - 1, rcValue.CenterPoint().y - 6, rcValue.left + 12, rcValue.CenterPoint().y + 7);
+	CXTPPropertyGridPaintManager* paintManager = m_pGrid->GetPaintManager();
+
+	if (paintManager->m_buttonsStyle == xtpGridButtonsThemed && paintManager->m_themeButton.IsAppThemed()) {
+		int state;
+		if (GetReadOnly()) {
+			state = VTable0xf4() ? CBS_MIXEDDISABLED : (GetBool() ? CBS_CHECKEDDISABLED : CBS_UNCHECKEDDISABLED);
+		}
+		else {
+			state = VTable0xf4() ? CBS_MIXEDNORMAL : (GetBool() ? CBS_CHECKEDNORMAL : CBS_UNCHECKEDNORMAL);
+		}
+		paintManager->m_themeButton.DrawThemeBackground(dc, BP_CHECKBOX, state, rcCheck, 0);
+	}
+	else {
+		dc.DrawFrameControl(
+			rcCheck, DFC_BUTTON, DFCS_BUTTONCHECK | (GetReadOnly() ? DFCS_INACTIVE : 0) | (GetBool() ? DFCS_CHECKED : 0)
+		);
+	}
+
+	return TRUE;
 }
 
 // FUNCTION: ROBLOX 0x00441b10
