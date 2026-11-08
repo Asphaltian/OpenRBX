@@ -134,7 +134,7 @@ float VisualEngine::Unk0x18::FUN_00672980(int count)
 }
 
 // STUB: ROBLOX 0x00672ab0
-VertexData* FUN_00672ab0(
+VertexData* VisualEngine::FUN_00672ab0(
 	const Vector3* positions,
 	size_t vertexCount,
 	const Vector3* normals,

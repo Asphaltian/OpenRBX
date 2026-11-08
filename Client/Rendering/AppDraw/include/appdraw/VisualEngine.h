@@ -68,6 +68,14 @@ public:
 
 	Viewport* getViewport() const { return m_unk0x10; }
 
+	VertexData* FUN_00672ab0(
+		const Vector3* positions,
+		size_t vertexCount,
+		const Vector3* normals,
+		const ColourValue* colours,
+		const Vector2* textureCoords
+	);
+
 	void FUN_00673860(
 		int renderSystem, unsigned long window, int width, int height, int antialiasing, std::string logFileName
 	);
