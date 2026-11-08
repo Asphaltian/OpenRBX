@@ -6,8 +6,10 @@
 #include "network/Players.h"
 #include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
+#include "util/RunStateOwner.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/Selection.h"
+#include "v8datamodel/TimeState.h"
 
 #include <boost/iostreams/copy.hpp>
 #include <shlobj.h>
@@ -81,6 +83,19 @@ RBX::VerbContainer* CRobloxDoc::FUN_004558a0()
 
 CRobloxDoc::~CRobloxDoc()
 {
+}
+
+// FUNCTION: ROBLOX 0x00455ff0
+void CRobloxDoc::FUN_00455ff0(CCmdUI* pCmdUI)
+{
+	if (FUN_00403290()) {
+		char text[32];
+		{
+			RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+			sprintf(text, "t %.4g", FUN_00403290()->getSimTime());
+		}
+		pCmdUI->SetText(text);
+	}
 }
 
 // STUB: ROBLOX 0x00456c00
@@ -290,6 +305,22 @@ void CRobloxDoc::FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 }
 
+// STUB: ROBLOX 0x004590a0
+void CRobloxDoc::FUN_004590a0(CCmdUI* pCmdUI)
+{
+	if (FUN_00403290()) {
+		RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+		if (FUN_00403290()->create<RBX::RunService>()->getRunState() == RBX::RS_RUNNING) {
+			char text[32];
+			sprintf(text, "%.3gfps", FUN_00403290()->timeState->simulationStopwatch.smoothFPS());
+			pCmdUI->SetText(text);
+		}
+		else {
+			pCmdUI->SetText("");
+		}
+	}
+}
+
 // STUB: ROBLOX 0x00459950
 BOOL CRobloxDoc::FUN_00459950(std::string fileName)
 {
@@ -339,5 +370,7 @@ void CRobloxDoc::FUN_00459c80()
 BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_NOTIFY(CBN_XTP_EXECUTE, 0x80c3, FUN_004588a0)
 	ON_UPDATE_COMMAND_UI(0x80c3, FUN_00453eb0)
+	ON_UPDATE_COMMAND_UI(0xbb, FUN_00455ff0)
+	ON_UPDATE_COMMAND_UI(0xbe, FUN_004590a0)
 END_MESSAGE_MAP()
 // clang-format on
