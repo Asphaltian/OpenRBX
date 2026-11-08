@@ -80,6 +80,14 @@ void CRobloxTreeCtrl::OnDestroy()
 	}
 }
 
+// FUNCTION: ROBLOX 0x00422d60
+BOOL CRobloxTreeCtrl::PreCreateWindow(CREATESTRUCT& cs)
+{
+	cs.style &= ~TVS_DISABLEDRAGDROP;
+	cs.style |= TVS_HASBUTTONS | TVS_LINESATROOT | TVS_EDITLABELS | TVS_SHOWSELALWAYS;
+	return CXTTreeCtrl::PreCreateWindow(cs);
+}
+
 // FUNCTION: ROBLOX 0x004230c0
 int FUN_004230c0(RBX::Instance* instance)
 {

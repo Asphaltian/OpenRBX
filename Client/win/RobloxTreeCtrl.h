@@ -37,6 +37,8 @@ public:
 	CRobloxTreeCtrlNode* FUN_00426e00(const boost::shared_ptr<RBX::Instance>& instance);
 
 protected:
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+
 	afx_msg void FUN_004221f0(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void FUN_00422210(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDestroy();
