@@ -299,6 +299,24 @@ void CRobloxTreeCtrl::FUN_004234f0(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 }
 
+// STUB: ROBLOX 0x00423630
+void CSelectionTreeCtrl::FUN_00423630(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	NMTREEVIEW* treeView = reinterpret_cast<NMTREEVIEW*>(pNMHDR);
+	m_unk0xf0.reset(CreateDragImage(treeView->itemNew.hItem));
+	if (m_unk0xf0.get()) {
+		CRect rect;
+		GetItemRect(treeView->itemNew.hItem, &rect, TRUE);
+		int indent = GetIndent();
+		CPoint point = treeView->ptDrag;
+		m_unk0xf0->BeginDrag(0, CPoint(point.x - rect.left + indent, point.y - rect.top));
+		ClientToScreen(&point);
+		CImageList::DragEnter(NULL, point);
+		SetCapture();
+	}
+	*pResult = 0;
+}
+
 // FUNCTION: ROBLOX 0x00423730
 int CSelectionTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -331,6 +349,47 @@ void CRobloxTreeCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
 			}
 		}
 	}
+}
+
+// FUNCTION: ROBLOX 0x00423cc0
+HTREEITEM CSelectionTreeCtrl::FUN_00423cc0(HTREEITEM item)
+{
+	if (item) {
+		CRobloxTreeCtrlNode* node = reinterpret_cast<CRobloxTreeCtrlNode*>(GetItemData(item));
+		if (node) {
+			boost::shared_ptr<RBX::Instance> instance = node->m_unk0x0c;
+			if (instance && instance->FUN_00422f10(VTable0x148()->begin(), VTable0x148()->end())) {
+				return item;
+			}
+		}
+	}
+	return NULL;
+}
+
+// STUB: ROBLOX 0x00423dc0
+void CSelectionTreeCtrl::OnMouseMove(UINT nFlags, CPoint point)
+{
+	if (m_unk0xf0.get()) {
+		CPoint screen = point;
+		ClientToScreen(&screen);
+		CImageList::DragMove(screen);
+
+		UINT flags;
+		HTREEITEM target = HitTest(point, &flags);
+		if (target) {
+			if (flags & TVHT_ONITEM) {
+				target = FUN_00423cc0(target);
+			}
+			else {
+				target = NULL;
+			}
+		}
+
+		CImageList::DragShowNolock(FALSE);
+		SelectDropTarget(target);
+		CImageList::DragShowNolock(TRUE);
+	}
+	CXTTreeCtrl::OnMouseMove(nFlags, point);
 }
 
 // FUNCTION: ROBLOX 0x004248f0
@@ -874,6 +933,8 @@ BEGIN_MESSAGE_MAP(CSelectionTreeCtrl, CRobloxTreeCtrl)
 	ON_NOTIFY_REFLECT(TVN_SELCHANGED, FUN_004232d0)
 	ON_NOTIFY_REFLECT(TVN_SELCHANGING, FUN_00422230)
 	ON_WM_RBUTTONDOWN()
+	ON_NOTIFY_REFLECT(TVN_BEGINDRAG, FUN_00423630)
+	ON_WM_MOUSEMOVE()
 	ON_WM_CREATE()
 	ON_WM_TIMER()
 END_MESSAGE_MAP()

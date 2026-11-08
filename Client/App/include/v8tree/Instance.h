@@ -379,6 +379,22 @@ public:
 		}
 	}
 
+	// FUNCTION: ROBLOX 0x00422f10
+	template <class Iterator>
+	bool FUN_00422f10(Iterator begin, Iterator end) const
+	{
+		for (Iterator iter = begin; iter != end; ++iter) {
+			const Instance* child = iter->get();
+			if (!child || child->contains(this) || child->getParent() == this) {
+				return false;
+			}
+			if (!askAddChild(child) && !child->askSetParent(this)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	// FUNCTION: WEBSERVICE 0x10048320
 	// FUNCTION: ROBLOX 0x004a6110
 	unsigned int numChildren() const { return children ? children->size() : 0; }
