@@ -5,6 +5,7 @@
 #include "BrowserView.h"
 #include "ChildFrm.h"
 #include "DHTMLWindow.h"
+#include "InstanceExplorer.h"
 #include "LogManager.h"
 #include "MainFrm.h"
 #include "NullDoc.h"
@@ -892,7 +893,7 @@ BOOL CRobloxDHtmlDialog::OnInitDialog()
 	return TRUE;
 }
 
-// STUB: ROBLOX 0x00453c20
+// FUNCTION: ROBLOX 0x00453c20
 void CRobloxDHtmlDialog::OnBeforeNavigate2(
 	LPDISPATCH pDisp,
 	VARIANT* url,
@@ -903,7 +904,13 @@ void CRobloxDHtmlDialog::OnBeforeNavigate2(
 	BOOL* cancel
 )
 {
-	STUB(0x453c20);
+	CString strUrl(V_BSTR(url));
+	if (FUN_0041e610(strUrl)) {
+		*cancel = TRUE;
+	}
+	else {
+		OnBeforeNavigate(pDisp, strUrl);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00453ce0
