@@ -129,6 +129,7 @@ public:
 	RBX::VerbContainer* FUN_004558a0();
 	void FUN_00456c00(int id, RBX::Verb* verb);
 	void FUN_00456c50(int id, RBX::Verb* verb);
+	void FUN_00456d30();
 	BOOL FUN_00459950(std::string p_unk0x04);
 	void FUN_00459c80();
 
@@ -138,7 +139,7 @@ private:
 	std::auto_ptr<XmlElement> m_unk0x60;               // 0x60
 	std::vector<RBX::Verb*> m_unk0x64;                 // 0x64
 	boost::scoped_ptr<RBX::Unknown005d2700> m_unk0x74; // 0x74
-	CWorkspace* m_unk0x78;                             // 0x78
+	CComObject<CWorkspace>* m_unk0x78;                 // 0x78
 };
 
 DECOMP_SIZE_ASSERT(CRobloxDoc, 0x7c)

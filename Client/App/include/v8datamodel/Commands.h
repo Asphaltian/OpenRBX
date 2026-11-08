@@ -384,6 +384,7 @@ class DeleteSelectionVerb : public DeleteBase
 public:
 	DeleteSelectionVerb(DataModel* dataModel) : DeleteBase(dataModel, "Delete", false) {}
 
+	// FUNCTION: ROBLOX 0x00410390
 	DeleteSelectionVerb(VerbContainer* container, DataModel* dataModel, std::string name)
 		: DeleteBase(container, dataModel, name)
 	{
@@ -735,7 +736,7 @@ DECOMP_SIZE_ASSERT(CameraVerb, 0x1c)
 class CameraPanLeftCommand : public CameraVerb
 {
 public:
-	CameraPanLeftCommand(Workspace* workspace);
+	CameraPanLeftCommand(Workspace* workspace) : CameraVerb("CameraPanLeft", workspace) {}
 
 	virtual bool isEnabled() const;
 	virtual void doIt(IDataState* dataState);
@@ -747,7 +748,7 @@ DECOMP_SIZE_ASSERT(CameraPanLeftCommand, 0x1c)
 class CameraPanRightCommand : public CameraVerb
 {
 public:
-	CameraPanRightCommand(Workspace* workspace);
+	CameraPanRightCommand(Workspace* workspace) : CameraVerb("CameraPanRight", workspace) {}
 
 	virtual bool isEnabled() const;
 	virtual void doIt(IDataState* dataState);
@@ -759,7 +760,7 @@ DECOMP_SIZE_ASSERT(CameraPanRightCommand, 0x1c)
 class CameraTiltUpCommand : public CameraVerb
 {
 public:
-	CameraTiltUpCommand(Workspace* workspace);
+	CameraTiltUpCommand(Workspace* workspace) : CameraVerb("CameraTiltUp", workspace) {}
 
 	virtual bool isEnabled() const;
 	virtual void doIt(IDataState* dataState);
@@ -771,7 +772,7 @@ DECOMP_SIZE_ASSERT(CameraTiltUpCommand, 0x1c)
 class CameraTiltDownCommand : public CameraVerb
 {
 public:
-	CameraTiltDownCommand(Workspace* workspace);
+	CameraTiltDownCommand(Workspace* workspace) : CameraVerb("CameraTiltDown", workspace) {}
 
 	virtual bool isEnabled() const;
 	virtual void doIt(IDataState* dataState);
@@ -783,7 +784,7 @@ DECOMP_SIZE_ASSERT(CameraTiltDownCommand, 0x1c)
 class CameraZoomInCommand : public CameraVerb
 {
 public:
-	CameraZoomInCommand(Workspace* workspace);
+	CameraZoomInCommand(Workspace* workspace) : CameraVerb("CameraZoomIn", workspace) {}
 
 	virtual bool isEnabled() const;
 	virtual void doIt(IDataState* dataState);
@@ -795,7 +796,7 @@ DECOMP_SIZE_ASSERT(CameraZoomInCommand, 0x1c)
 class CameraZoomOutCommand : public CameraVerb
 {
 public:
-	CameraZoomOutCommand(Workspace* workspace);
+	CameraZoomOutCommand(Workspace* workspace) : CameraVerb("CameraZoomOut", workspace) {}
 
 	virtual bool isEnabled() const;
 	virtual void doIt(IDataState* dataState);
@@ -807,7 +808,7 @@ DECOMP_SIZE_ASSERT(CameraZoomOutCommand, 0x1c)
 class CameraModelViewCommand : public CameraVerb
 {
 public:
-	CameraModelViewCommand(Workspace* workspace);
+	CameraModelViewCommand(Workspace* workspace) : CameraVerb("CameraModelView", workspace) {}
 
 	virtual void doIt(IDataState* dataState);
 };
@@ -818,7 +819,7 @@ DECOMP_SIZE_ASSERT(CameraModelViewCommand, 0x1c)
 class FixedCameraCommand : public CameraVerb
 {
 public:
-	FixedCameraCommand(Workspace* workspace);
+	FixedCameraCommand(Workspace* workspace) : CameraVerb("FixedCamera", workspace) {}
 
 	virtual bool isEnabled() const;
 	virtual bool isChecked() const;
@@ -831,7 +832,7 @@ DECOMP_SIZE_ASSERT(FixedCameraCommand, 0x1c)
 class CameraCenterCommand : public CameraVerb
 {
 public:
-	CameraCenterCommand(Workspace* workspace);
+	CameraCenterCommand(Workspace* workspace) : CameraVerb("CameraCenter", workspace) {}
 
 	virtual bool isEnabled() const;
 	virtual void doIt(IDataState* dataState);
@@ -843,7 +844,7 @@ DECOMP_SIZE_ASSERT(CameraCenterCommand, 0x1c)
 class CameraZoomExtentsCommand : public CameraVerb
 {
 public:
-	CameraZoomExtentsCommand(Workspace* workspace);
+	CameraZoomExtentsCommand(Workspace* workspace) : CameraVerb("CameraZoomExtents", workspace) {}
 
 	virtual void doIt(IDataState* dataState);
 };
