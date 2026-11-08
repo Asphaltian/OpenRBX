@@ -38,6 +38,27 @@ CRobloxDoc::~CRobloxDoc()
 {
 }
 
+// STUB: ROBLOX 0x00456c00
+void CRobloxDoc::FUN_00456c00(int id, RBX::Verb* verb)
+{
+	const RBX::Name* name = verb ? &verb->getName() : &RBX::Name::getNullName();
+	m_unk0x58[id] = name;
+}
+
+// STUB: ROBLOX 0x00456c50
+void CRobloxDoc::FUN_00456c50(int id, RBX::Verb* verb)
+{
+	const RBX::Name* name;
+	if (verb) {
+		m_unk0x64.push_back(verb);
+		name = &verb->getName();
+	}
+	else {
+		name = &RBX::Name::getNullName();
+	}
+	m_unk0x58[id] = name;
+}
+
 // FUNCTION: ROBLOX 0x00456cb0
 CRobloxDoc::CRobloxDoc() : m_unk0x78(NULL)
 {
