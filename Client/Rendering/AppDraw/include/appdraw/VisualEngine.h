@@ -4,7 +4,9 @@
 #include "appdraw/TwoDManager.h"
 #include "decomp.h"
 
+#include <OgreAxisAlignedBox.h>
 #include <OgreRoot.h>
+#include <OgreSubMesh.h>
 #include <string>
 
 class CRobloxWnd;
@@ -14,6 +16,20 @@ class AdornRbxGfx;
 } // namespace RBX
 
 namespace Ogre {
+
+// SIZE 0xb0
+class Unknown00671c70 : public SubMesh
+{
+public:
+	Unknown00671c70();
+
+	bool m_unk0x84;           // 0x84
+	undefined4 m_unk0x88;     // 0x88
+	AxisAlignedBox m_unk0x8c; // 0x8c
+	float m_unk0xac;          // 0xac
+};
+
+DECOMP_SIZE_ASSERT(Unknown00671c70, 0xb0)
 
 // SIZE 0x808
 class VisualEngine

@@ -40,6 +40,11 @@ int g_unk0x00961358;
 // GLOBAL: ROBLOX 0x0096135c
 int g_unk0x0096135c;
 
+// FUNCTION: ROBLOX 0x00671c70
+Unknown00671c70::Unknown00671c70() : m_unk0x84(false), m_unk0x88(0)
+{
+}
+
 // FUNCTION: ROBLOX 0x00671cf0
 unsigned int FUN_00671cf0()
 {
