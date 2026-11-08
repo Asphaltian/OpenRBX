@@ -31,6 +31,9 @@ public:
 	virtual void _notifyCurrentCamera(Camera* cam);
 	virtual void _updateRenderQueue(RenderQueue* queue);
 
+	// FUNCTION: ROBLOX 0x0052c8b0
+	void FUN_0052c8b0(AxisAlignedBox box) { m_unk0x248 = box; }
+
 	void FUN_00674e30(VisualEngine::Unk0x18* p_unk0x240);
 	void FUN_00674e40(MeshPtr mesh);
 	RbxSubEntity* FUN_00676680(SubMesh* subMesh, int lodIndex);

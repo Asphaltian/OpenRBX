@@ -13,6 +13,11 @@
 #include <GLG3D/RenderDevice.h>
 #include <vector>
 
+namespace Ogre {
+class RbxEntity;
+class RbxSubEntity;
+} // namespace Ogre
+
 namespace RBX {
 namespace RenderNew {
 
@@ -25,11 +30,11 @@ public:
 	static const float DECAL_OFFSET;
 	static const float TEXTURE_OFFSET;
 
-	undefined4* m_unk0x0c; // 0x0c
-	undefined4* m_unk0x10; // 0x10
-	float m_unk0x14;       // 0x14
-	float polygonOffset;   // 0x18
-	float radius;          // 0x1c
+	Ogre::RbxEntity* m_unk0x0c;    // 0x0c
+	Ogre::RbxSubEntity* m_unk0x10; // 0x10
+	float m_unk0x14;               // 0x14
+	float polygonOffset;           // 0x18
+	float radius;                  // 0x1c
 
 	Chunk(float polygonOffset);
 

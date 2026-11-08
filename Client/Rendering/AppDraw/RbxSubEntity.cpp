@@ -57,6 +57,11 @@ SubMesh* RbxSubEntity::FUN_0067b4e0(int lodIndex)
 	return m_unk0x11c[lodIndex - 1];
 }
 
+void RbxSubEntity::FUN_0067b500(int lodIndex)
+{
+	m_unk0x120 = lodIndex;
+}
+
 // FUNCTION: ROBLOX 0x0067b510
 const AxisAlignedBox& RbxSubEntity::getLightCapBounds(void) const
 {
@@ -172,7 +177,7 @@ const AxisAlignedBox& RbxSubEntity::getDarkCapBounds(const Light& light, Real di
 // FUNCTION: ROBLOX 0x0067bae0
 RbxSubEntity::RbxSubEntity(Entity* parent) : SubEntity(parent, NULL), m_unk0x120(0), m_unk0x128(true)
 {
-	m_unk0x12c = 0;
+	m_unk0x12c = NULL;
 	m_unk0x11c[0] = NULL;
 }
 
@@ -226,7 +231,7 @@ RbxSubEntity::RbxSubEntity(Entity* parent, SubMesh* subMesh, int lodIndex)
 	else {
 		m_unk0x11c[m_unk0x120 - 1] = subMesh;
 	}
-	m_unk0x12c = 0;
+	m_unk0x12c = NULL;
 }
 
 // STUB: ROBLOX 0x0067bda0

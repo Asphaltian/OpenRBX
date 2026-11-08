@@ -12,6 +12,7 @@
 #include <GLG3D/RenderDevice.h>
 #include <GLG3D/VAR.h>
 #include <OgreMesh.h>
+#include <exception>
 #include <vector>
 
 class ThumbnailGenerator;
@@ -25,6 +26,7 @@ namespace RBX {
 namespace RenderNew {
 
 class Chunk;
+class RenderScene;
 
 // SIZE 0x40
 class Mesh : public G3D::ReferenceCountedObject
@@ -41,7 +43,7 @@ public:
 		G3D::RenderDevice::Primitive primitive; // 0x18
 		bool m_unk0x1c;                         // 0x1c
 		int m_unk0x20;                          // 0x20
-		Ogre::SubMesh* m_unk0x24;               // 0x24
+		Ogre::Unknown00671c70* m_unk0x24;       // 0x24
 
 		Level();
 
@@ -62,10 +64,29 @@ public:
 
 	typedef G3D::ReferenceCountedPointer<Level> LevelRef;
 
+	// FUNCTION: ROBLOX 0x0052c910
+	G3D::Vector3& getVertex(int index)
+	{
+		if (index < 0 || index >= visibleGeometry.vertexArray.size()) {
+			throw std::exception("RBX Mesh::getVertex() index out of range");
+		}
+		return visibleGeometry.vertexArray[index];
+	}
+
+	// FUNCTION: ROBLOX 0x0052c960
+	const G3D::Vector3& getNormal(int index)
+	{
+		if (index < 0 || index >= visibleGeometry.normalArray.size()) {
+			throw std::exception("RBX Mesh::getNormal() index out of range");
+		}
+		return visibleGeometry.normalArray[index];
+	}
+
 	static void setShadowVertex(const G3D::Vector3&);
 
 private:
 	friend class ::ThumbnailGenerator;
+	friend class RenderScene;
 
 	static G3D::MeshAlg::Geometry visibleGeometry;
 	static G3D::Array<G3D::Vector2> texCoordArray;

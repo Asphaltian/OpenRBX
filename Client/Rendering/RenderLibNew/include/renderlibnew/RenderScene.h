@@ -20,6 +20,7 @@ class RenderDevice;
 
 namespace Ogre {
 class RbxEntity;
+class RbxSceneNode;
 class VisualEngine;
 } // namespace Ogre
 
@@ -34,7 +35,7 @@ class RenderScene
 	friend class SceneManager;
 
 private:
-	undefined4* m_unk0x00;                                       // 0x000
+	Ogre::RbxSceneNode* m_unk0x00;                               // 0x000
 	Ogre::RbxEntity* m_unk0x04;                                  // 0x004
 	Ogre::MaterialPtr m_unk0x08;                                 // 0x008
 	Ogre::MeshPtr m_unk0x14;                                     // 0x014

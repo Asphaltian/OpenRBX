@@ -3600,6 +3600,7 @@ address,type,symbol,name,module,size
 0081ae30,global,??_7AggregatingSceneManager@RenderNew@RBX@@6B@,,,
 00530d20,library,?erase@?$_Tree@V?$_Tset_traits@V?$WeakReferenceCountedPointer@VChunk@RenderNew@RBX@@@G3D@@U?$less@V?$WeakReferenceCountedPointer@VChunk@RenderNew@RBX@@@G3D@@@std@@V?$allocator@V?$WeakReferenceCountedPointer@VChunk@RenderNew@RBX@@@G3D@@@4@$0A@@std@@@std@@QAE?AViterator@12@V312@0@Z,,,
 00958788,global,?vertexRefCounts@Mesh@RenderNew@RBX@@0V?$Array@H@G3D@@A,,,
+00958700,global,,g_unk0x00958700,,
 00958738,global,,g_unk0x00958738,,
 0095873c,global,,g_unk0x0095873c,,
 00958798,global,,g_unk0x00958798,,

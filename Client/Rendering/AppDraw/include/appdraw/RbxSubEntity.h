@@ -10,7 +10,15 @@
 #include <OgreSubEntity.h>
 #include <vector>
 
+namespace RBX {
+namespace RenderNew {
+class RenderScene;
+} // namespace RenderNew
+} // namespace RBX
+
 namespace Ogre {
+
+class Unknown00671c70;
 
 // VTABLE: ROBLOX 0x0083df0c Ogre::SubEntity
 // VTABLE: ROBLOX 0x0083ded4 Ogre::ShadowCaster
@@ -56,6 +64,7 @@ public:
 	void FUN_0067b4b0(const MaterialPtr& material);
 	void FUN_0067b4c0(int lodIndex, SubMesh* subMesh);
 	SubMesh* FUN_0067b4e0(int lodIndex);
+	void FUN_0067b500(int lodIndex);
 
 	virtual void getRenderOperation(RenderOperation& op);
 	virtual void getWorldTransforms(Matrix4* xform) const;
@@ -86,12 +95,14 @@ public:
 	// Ogre::RbxSubEntity::`scalar deleting destructor'
 
 private:
+	friend class RBX::RenderNew::RenderScene;
+
 	Matrix4 m_unk0xdc;                         // 0xdc
 	SubMesh* m_unk0x11c[1];                    // 0x11c
 	int m_unk0x120;                            // 0x120
 	Real m_unk0x124;                           // 0x124
 	bool m_unk0x128;                           // 0x128
-	undefined4 m_unk0x12c;                     // 0x12c
+	Unknown00671c70* m_unk0x12c;               // 0x12c
 	std::vector<ShadowRenderable*> m_unk0x130; // 0x130
 };
 

@@ -22,15 +22,15 @@ public:
 	class Level
 	{
 	private:
-		bool emptyLevel;              // 0x00
-		TextureProxyRef mMatte;       // 0x04
-		TextureProxyRef mBaseTexture; // 0x08
-		G3D::Color3 mColor;           // 0x0c
-		float mSpecular;              // 0x18
-		float mShiny;                 // 0x1c
-		float mReflect;               // 0x20
-		float mTransparent;           // 0x24
-		Ogre::MaterialPtr m_unk0x28;  // 0x28
+		bool emptyLevel;                     // 0x00
+		TextureProxyRef mMatte;              // 0x04
+		TextureProxyRef mBaseTexture;        // 0x08
+		G3D::Color3 mColor;                  // 0x0c
+		float mSpecular;                     // 0x18
+		float mShiny;                        // 0x1c
+		float mReflect;                      // 0x20
+		float mTransparent;                  // 0x24
+		mutable Ogre::MaterialPtr m_unk0x28; // 0x28
 
 		Level(
 			TextureProxyRef baseTexture,
@@ -79,6 +79,7 @@ public:
 		void configureRenderDevice(G3D::RenderDevice* renderDevice) const;
 
 		friend class Material;
+		friend class RenderScene;
 	};
 
 private:

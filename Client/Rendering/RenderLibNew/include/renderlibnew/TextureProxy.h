@@ -17,6 +17,7 @@ class RenderDevice;
 namespace RBX {
 namespace RenderNew {
 
+class RenderScene;
 class TextureProxy;
 
 typedef G3D::ReferenceCountedPointer<TextureProxy> TextureProxyRef;
@@ -33,6 +34,8 @@ protected:
 	TextureProxyRef shadeTexture;                       // 0x3c
 	G3D::Color3 shadeColor;                             // 0x40
 	Ogre::TexturePtr m_unk0x4c;                         // 0x4c
+
+	friend class RenderScene;
 
 	// STUB: ROBLOX 0x005344e0
 	TextureProxy(TextureProxyRef root) : loaded(false), textureManager(NULL), root(root) { filename = ""; }
