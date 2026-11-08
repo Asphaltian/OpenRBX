@@ -17,7 +17,9 @@ class ThumbnailGenerator;
 
 namespace Ogre {
 class SubMesh;
-}
+class Unknown00671c70;
+class VisualEngine;
+} // namespace Ogre
 
 namespace RBX {
 namespace RenderNew {
@@ -92,12 +94,14 @@ protected:
 
 	int detailIndex(double detail) const { return G3D::iClamp((int) detail, 0, levels.size() - 1); }
 
-	std::vector<undefined4> m_unk0x18; // 0x18
-	std::vector<undefined4> m_unk0x28; // 0x28
-	undefined4* m_unk0x38;             // 0x38
+	std::vector<unsigned short> m_unk0x18; // 0x18
+	std::vector<G3D::Vector3> m_unk0x28;   // 0x28
+	Ogre::Unknown00671c70* m_unk0x38;      // 0x38
 
 public:
 	undefined4 m_unk0x3c; // 0x3c
+
+	void FUN_005324e0(Ogre::VisualEngine* engine);
 
 	static G3D::ReferenceCountedPointer<Mesh> aggregate(
 		const std::vector<G3D::ReferenceCountedPointer<Chunk> >& chunkArray,

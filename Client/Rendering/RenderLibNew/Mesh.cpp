@@ -1,5 +1,6 @@
 #include "renderlibnew/Mesh.h"
 
+#include "appdraw/VisualEngine.h"
 #include "renderlibnew/Chunk.h"
 
 namespace RBX {
@@ -42,6 +43,27 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 {
 	if (lvl != NULL && lvl->indexArray.size() > 0) {
 		rd->sendIndices(lvl->primitive, lvl->indexArray);
+	}
+}
+
+// FUNCTION: ROBLOX 0x005324e0
+void Mesh::FUN_005324e0(Ogre::VisualEngine* engine)
+{
+	if (!m_unk0x28.empty() && !m_unk0x18.empty()) {
+		Ogre::Vector3 minimum;
+		Ogre::Vector3 maximum;
+		m_unk0x38 = engine->FUN_006735b0(
+			m_unk0x28[0],
+			m_unk0x28.size(),
+			NULL,
+			NULL,
+			NULL,
+			&m_unk0x18[0],
+			NULL,
+			m_unk0x18.size() / 3,
+			&minimum,
+			&maximum
+		);
 	}
 }
 
