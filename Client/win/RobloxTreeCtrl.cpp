@@ -181,6 +181,21 @@ void CRobloxTreeCtrl::FUN_00422de0(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 }
 
+// STUB: ROBLOX 0x00422e20
+void CRobloxTreeCtrl::OnPaint()
+{
+	COLORREF face = XTPColorManager()->GetColor(COLOR_3DFACE);
+	COLORREF highlight = XTPColorManager()->GetColor(COLOR_HIGHLIGHT);
+	XTPColorManager()->SetColor(
+		COLOR_3DFACE,
+		RGB((GetRValue(face) + GetRValue(highlight)) / 2,
+			(GetGValue(face) + GetGValue(highlight)) / 2,
+			(GetBValue(face) + GetBValue(highlight)) / 2)
+	);
+	CXTTreeCtrl::OnPaint();
+	XTPColorManager()->SetColor(COLOR_3DFACE, face);
+}
+
 // STUB: ROBLOX 0x00422ec0
 void CRobloxTreeCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
@@ -848,6 +863,7 @@ BEGIN_MESSAGE_MAP(CRobloxTreeCtrl, CXTTreeCtrl)
 	ON_NOTIFY_REFLECT(TVN_BEGINLABELEDIT, FUN_00422de0)
 	ON_NOTIFY_REFLECT(TVN_ENDLABELEDIT, FUN_004234f0)
 	ON_WM_LBUTTONDBLCLK()
+	ON_WM_PAINT()
 	ON_WM_KEYDOWN()
 	ON_WM_DESTROY()
 	ON_WM_CREATE()

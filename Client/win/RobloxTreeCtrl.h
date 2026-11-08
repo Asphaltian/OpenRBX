@@ -44,6 +44,7 @@ protected:
 	afx_msg void FUN_00422b80(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnDestroy();
 	afx_msg void FUN_00422de0(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnPaint();
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnLButtonDblClk(UINT nFlags, CPoint point);
 	afx_msg void FUN_004234f0(NMHDR* pNMHDR, LRESULT* pResult);
