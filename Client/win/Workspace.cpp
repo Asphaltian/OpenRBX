@@ -1,9 +1,13 @@
 #include "Workspace.h"
 
 #include "LogManager.h"
+#include "v8datamodel/Commands.h"
+#include "v8datamodel/Selection.h"
 #include "v8xml/SerializerV2.h"
 #include "v8xml/XmlSerializer.h"
 
+#include <algorithm>
+#include <boost/bind.hpp>
 #include <fstream>
 
 // FUNCTION: ROBLOX 0x0046ee10
@@ -107,6 +111,16 @@ void CWorkspace::FinalRelease()
 	FUN_0046f420();
 }
 
+// FUNCTION: ROBLOX 0x0046ffa0
+std::auto_ptr<XmlElement> CWorkspace::FUN_0046ffa0()
+{
+	std::auto_ptr<XmlElement> root(SerializerV2::newRootElement());
+	RBX::DataModel::Lock lock(m_unk0x24);
+	RBX::Selection* selection = RBX::ServiceProvider::create<RBX::Selection>(FUN_0046edf0());
+	std::for_each(selection->begin(), selection->end(), boost::bind(&RBX::FUN_00597490, root.get(), _1));
+	return root;
+}
+
 // STUB: ROBLOX 0x004700b0
 HRESULT CWorkspace::FUN_004700b0(const XmlElement* root, std::ostream& stream)
 {
@@ -115,10 +129,15 @@ HRESULT CWorkspace::FUN_004700b0(const XmlElement* root, std::ostream& stream)
 	return S_OK;
 }
 
-// STUB: ROBLOX 0x00470120
+// FUNCTION: ROBLOX 0x00470120
 STDMETHODIMP CWorkspace::SaveSelectionToFile(BSTR pathName)
 {
-	STUB(0x470120);
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	std::ofstream stream;
+	stream.open(CString(pathName), std::ios_base::out);
+
+	RBX::DataModel::Lock lock(m_unk0x24);
+	FUN_004700b0(FUN_0046ffa0().get(), stream);
 	return S_OK;
 }
 

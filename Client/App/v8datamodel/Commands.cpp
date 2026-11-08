@@ -253,6 +253,16 @@ static bool FUN_00597450(ModelInstance* model)
 	return model->numChildren() > 0;
 }
 
+// FUNCTION: ROBLOX 0x00597490
+void FUN_00597490(XmlElement* container, boost::shared_ptr<Instance> instance)
+{
+	XmlElement* child = instance->write();
+
+	if (child != NULL) {
+		container->addChild(child);
+	}
+}
+
 // FUNCTION: ROBLOX 0x00597310
 RunStateVerb::~RunStateVerb()
 {

@@ -6116,3 +6116,4 @@ address,type,symbol,name,module,size
 005727a0,synthetic,??0?$TypedStatsItem@H@Stats@RBX@@QAE@V?$function0@HV?$allocator@Vfunction_base@boost@@@std@@@boost@@@Z,,,
 005c6b20,synthetic,??1?$TypedStatsItem@I@Stats@RBX@@UAE@XZ,,,
 005d4120,synthetic,??_G?$TypedStatsItem@I@Stats@RBX@@UAEPAXI@Z,,,
+00424280,library,??$for_each@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@V?$bind_t@XP6AXPAVXmlElement@@V?$shared_ptr@VInstance@RBX@@@boost@@@ZV?$list2@V?$value@PAVXmlElement@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@std@@YA?AV?$bind_t@XP6AXPAVXmlElement@@V?$shared_ptr@VInstance@RBX@@@boost@@@ZV?$list2@V?$value@PAVXmlElement@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@0@0V123@@Z,,,

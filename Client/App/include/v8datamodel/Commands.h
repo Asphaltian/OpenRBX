@@ -8,8 +8,11 @@
 #include "v8tree/Verb.h"
 #include "v8world/Controller.h"
 
+#include <boost/shared_ptr.hpp>
 #include <string>
 #include <typeinfo>
+
+class XmlElement;
 
 namespace RBX {
 
@@ -17,6 +20,8 @@ class Camera;
 class DataModel;
 class RunService;
 class Selection;
+
+void FUN_00597490(XmlElement* container, boost::shared_ptr<Instance> instance);
 
 // SIZE 0x10
 class FirstPersonCommand : public Verb
