@@ -1132,6 +1132,68 @@ void RbxSceneManager::setSkyPlane(
 	mSkyPlaneGenParameters.skyPlaneYSegments = ysegments;
 }
 
+// FUNCTION: ROBLOX 0x00688c50
+MeshPtr RbxSceneManager::createSkyboxPlane(
+	BoxPlane bp, Real distance, const Quaternion& orientation, const String& groupName
+)
+{
+	Plane plane;
+	String meshName;
+	Vector3 up;
+
+	meshName = mName + "SkyBoxPlane_";
+	plane.d = distance;
+	switch (bp) {
+	case BP_FRONT:
+		plane.normal = Vector3::UNIT_Z;
+		up = Vector3::UNIT_Y;
+		meshName += "Front";
+		break;
+	case BP_BACK:
+		plane.normal = -Vector3::UNIT_Z;
+		up = Vector3::UNIT_Y;
+		meshName += "Back";
+		break;
+	case BP_LEFT:
+		plane.normal = Vector3::UNIT_X;
+		up = Vector3::UNIT_Y;
+		meshName += "Left";
+		break;
+	case BP_RIGHT:
+		plane.normal = -Vector3::UNIT_X;
+		up = Vector3::UNIT_Y;
+		meshName += "Right";
+		break;
+	case BP_UP:
+		plane.normal = -Vector3::UNIT_Y;
+		up = Vector3::UNIT_Z;
+		meshName += "Up";
+		break;
+	case BP_DOWN:
+		plane.normal = Vector3::UNIT_Y;
+		up = -Vector3::UNIT_Z;
+		meshName += "Down";
+		break;
+	}
+
+	plane.normal = orientation * plane.normal;
+	up = orientation * up;
+
+	MeshManager& mm = MeshManager::getSingleton();
+	MeshPtr planeMesh = mm.getByName(meshName);
+	if (!planeMesh.isNull()) {
+		mm.remove(planeMesh->getHandle());
+	}
+
+	Real planeSize = distance * 2;
+	const int BOX_SEGMENTS = 1;
+	planeMesh = mm.createPlane(
+		meshName, groupName, plane, planeSize, planeSize, BOX_SEGMENTS, BOX_SEGMENTS, false, 1, 1, 1, up
+	);
+
+	return planeMesh;
+}
+
 // FUNCTION: ROBLOX 0x00689090
 MeshPtr RbxSceneManager::createSkydomePlane(
 	BoxPlane bp,
@@ -1673,7 +1735,7 @@ void RbxSceneManager::setSkyBox(
 		}
 
 		m->setDepthWriteEnabled(false);
-
+		m->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setNumMipmaps(0);
 		m->load();
 
 		m->getBestTechnique()->getPass(0)->getTextureUnitState(0)->setTextureAddressingMode(
@@ -1684,9 +1746,12 @@ void RbxSceneManager::setSkyBox(
 
 		if (!mSkyBoxNode) {
 			mSkyBoxNode = createSceneNode("SkyBoxNode");
+			m_unk0x8a90 = createSceneNode("SkyBoxTBNode");
+			m_unk0x8a90->setOrientation(Quaternion(Radian(Degree(-90.0)), Vector3(0.0f, 1.0f, 0.0f)));
 		}
 		else {
 			mSkyBoxNode->detachAllObjects();
+			m_unk0x8a90->detachAllObjects();
 		}
 
 		MaterialManager& matMgr = MaterialManager::getSingleton();
@@ -1696,7 +1761,6 @@ void RbxSceneManager::setSkyBox(
 			String entName = mName + "SkyBoxPlane" + StringConverter::toString(i);
 
 			if (mSkyBoxEntity[i]) {
-
 				destroyEntity(entName);
 			}
 			mSkyBoxEntity[i] = createEntity(entName, planeMesh->getName());
@@ -1704,15 +1768,15 @@ void RbxSceneManager::setSkyBox(
 
 			MaterialPtr boxMat = matMgr.getByName(entName);
 			if (boxMat.isNull()) {
-
 				boxMat = m->clone(entName);
-				boxMat->load();
 			}
 			else {
-
 				m->copyDetailsTo(boxMat);
-				boxMat->load();
 			}
+
+			boxMat->setDepthWriteEnabled(false);
+			boxMat->setSceneBlending(SBT_MODULATE);
+			boxMat->load();
 
 			Material::TechniqueIterator ti = boxMat->getSupportedTechniqueIterator();
 			while (ti.hasMoreElements()) {
@@ -1722,7 +1786,12 @@ void RbxSceneManager::setSkyBox(
 
 			mSkyBoxEntity[i]->setMaterialName(boxMat->getName());
 
-			mSkyBoxNode->attachObject(mSkyBoxEntity[i]);
+			if (i < 4) {
+				mSkyBoxNode->attachObject(mSkyBoxEntity[i]);
+			}
+			else {
+				m_unk0x8a90->attachObject(mSkyBoxEntity[i]);
+			}
 		}
 	}
 	mSkyBoxEnabled = enable;

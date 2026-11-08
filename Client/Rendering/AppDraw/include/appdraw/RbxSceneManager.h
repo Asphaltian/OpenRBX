@@ -88,7 +88,7 @@ protected:
 	undefined4 m_unk0x8a64;                                          // 0x8a64
 	String m_unk0x8a68;                                              // 0x8a68
 	SharedPtr<RbxSky> m_unk0x8a84;                                   // 0x8a84
-	undefined4 m_unk0x8a90;                                          // 0x8a90
+	SceneNode* m_unk0x8a90;                                          // 0x8a90
 	ShadowCasterSceneQueryListener* mShadowCasterQueryListener;      // 0x8a94
 	SceneMgrQueuedRenderableVisitor* mActiveQueuedRenderableVisitor; // 0x8a98
 	SceneMgrQueuedRenderableVisitor mDefaultQueuedRenderableVisitor; // 0x8a9c
@@ -96,6 +96,7 @@ protected:
 	friend class SceneMgrQueuedRenderableVisitor;
 	friend class RBX::ViewNew::View;
 
+	MeshPtr createSkyboxPlane(BoxPlane bp, Real distance, const Quaternion& orientation, const String& groupName);
 	MeshPtr createSkydomePlane(
 		BoxPlane bp,
 		Real curvature,
