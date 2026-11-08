@@ -944,6 +944,7 @@ void RbxSceneManager::_queueSkiesForRendering(Camera* cam)
 				mSkyBoxEntity[plane]->getSubEntity(0), qid, OGRE_RENDERABLE_DEFAULT_PRIORITY
 			);
 		}
+		m_unk0x8a84->FUN_00678610(cam, getRenderQueue(), qid);
 	}
 
 	if (mSkyDomeEnabled) {
