@@ -6117,3 +6117,12 @@ address,type,symbol,name,module,size
 005c6b20,synthetic,??1?$TypedStatsItem@I@Stats@RBX@@UAE@XZ,,,
 005d4120,synthetic,??_G?$TypedStatsItem@I@Stats@RBX@@UAEPAXI@Z,,,
 00424280,library,??$for_each@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@V?$bind_t@XP6AXPAVXmlElement@@V?$shared_ptr@VInstance@RBX@@@boost@@@ZV?$list2@V?$value@PAVXmlElement@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@std@@YA?AV?$bind_t@XP6AXPAVXmlElement@@V?$shared_ptr@VInstance@RBX@@@boost@@@ZV?$list2@V?$value@PAVXmlElement@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@0@0V123@@Z,,,
+00809ed8,global,_CLSID_Content,,,
+004135e0,function,,,,456
+0046f150,library,?CreateInstance@?$CComObject@VCContent@@@ATL@@SGJPAPAV12@@Z,,,
+00413820,library,?QueryInterface@?$CComObject@VCContent@@@ATL@@UAGJABU_GUID@@PAPAX@Z,,,
+00413810,library,?AddRef@?$CComObject@VCContent@@@ATL@@UAGKXZ,,,
+00413840,library,?AddRef@?$CComObject@VCContent@@@ATL@@W3AGKXZ,,,
+00413850,library,?QueryInterface@?$CComObject@VCContent@@@ATL@@W3AGJABU_GUID@@PAPAX@Z,,,
+00413860,library,??_G?$CComObject@VCContent@@@ATL@@UAEPAXI@Z,,,
+004137b0,library,??1CContent@@QAE@XZ,,,

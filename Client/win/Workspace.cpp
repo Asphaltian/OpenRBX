@@ -1,5 +1,6 @@
 #include "Workspace.h"
 
+#include "Content.h"
 #include "LogManager.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/Selection.h"
@@ -9,6 +10,12 @@
 #include <algorithm>
 #include <boost/bind.hpp>
 #include <fstream>
+
+#define CHECK_HRESULT(expr)                                                                                            \
+	if (expr) {                                                                                                        \
+		LogManager::ReportEvent(EVENTLOG_ERROR_TYPE, expr, __FILE__, __LINE__);                                        \
+		FUN_0046f230(expr, CLSID_Workspace);                                                                           \
+	}
 
 // FUNCTION: ROBLOX 0x0046ee10
 void CWorkspace::onEvent(const RBX::Workspace* source, RBX::DrawChanged event)
@@ -144,15 +151,47 @@ STDMETHODIMP CWorkspace::SaveSelectionToFile(BSTR pathName)
 // STUB: ROBLOX 0x00470640
 STDMETHODIMP CWorkspace::Write(IContent** result)
 {
-	STUB(0x470640);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	try {
+		CComObject<CContent>* content = NULL;
+		CHECK_HRESULT(CComObject<CContent>::CreateInstance(&content));
+		CHECK_HRESULT(FUN_004700b0(FUN_0046f040().get(), content->m_unk0x0c));
+
+		CComPtr<IContent> pointer(content);
+		CHECK_HRESULT(pointer.CopyTo(result));
+		return S_OK;
+	}
+	catch (const std::exception& e) {
+		return LogManager::ReportCOMError(CLSID_Workspace, e.what(), S_OK);
+	}
+	catch (CException* e) {
+		HRESULT hr = COleException::Process(e);
+		e->Delete();
+		return hr;
+	}
 }
 
 // STUB: ROBLOX 0x004708b0
 STDMETHODIMP CWorkspace::WriteSelection(IContent** result)
 {
-	STUB(0x4708b0);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	try {
+		CComObject<CContent>* content = NULL;
+		CHECK_HRESULT(CComObject<CContent>::CreateInstance(&content));
+		CHECK_HRESULT(FUN_004700b0(FUN_0046ffa0().get(), content->m_unk0x0c));
+
+		CComPtr<IContent> pointer(content);
+		CHECK_HRESULT(pointer.CopyTo(result));
+		return S_OK;
+	}
+	catch (const std::exception& e) {
+		return LogManager::ReportCOMError(CLSID_Workspace, e.what(), S_OK);
+	}
+	catch (CException* e) {
+		HRESULT hr = COleException::Process(e);
+		e->Delete();
+		return hr;
+	}
 }
 
 // STUB: ROBLOX 0x00470b20

@@ -16,6 +16,12 @@ HRESULT FUN_0041e610(LPCTSTR url)
 	return RBX::Http::trustCheck(url) ? S_OK : E_FAIL;
 }
 
+// FUNCTION: ROBLOX 0x0041e630
+HRESULT FUN_0041e630(BSTR url)
+{
+	return FUN_0041e610(CString(url));
+}
+
 // FUNCTION: ROBLOX 0x0041e6d0
 InsertDecal::InsertDecal(RBX::DataModel* dataModel, const char* name) : RBX::EditSelectionVerb(name, dataModel)
 {

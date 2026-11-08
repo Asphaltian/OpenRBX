@@ -435,6 +435,12 @@ HRESULT LogManager::ReportCOMError(const GUID& guid, const char* message, HRESUL
 	return AtlReportError(guid, message, GUID_NULL, hr);
 }
 
+// FUNCTION: ROBLOX 0x0042bfa0
+HRESULT LogManager::ReportExceptionAsCOMError(const GUID& guid, const std::exception& e)
+{
+	return ReportCOMError(guid, e.what(), S_OK);
+}
+
 namespace log_detail {
 
 // GLOBAL: ROBLOX 0x009538ac

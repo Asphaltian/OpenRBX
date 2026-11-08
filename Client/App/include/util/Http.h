@@ -17,6 +17,8 @@ public:
 	// FUNCTION: WEBSERVICE 0x10001070
 	// FUNCTION: ROBLOX 0x0041ddc0
 	Http(const std::string& url) : url(url) {}
+
+	// FUNCTION: ROBLOX 0x00409e90
 	Http(const char* url) : url(url) {}
 
 	std::string additionalHeaders; // 0x1c
