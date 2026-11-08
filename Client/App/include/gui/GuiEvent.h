@@ -15,7 +15,7 @@ class GuiEvent : public UIEvent
 public:
 	IDataState* iDataState; // 0x14
 
-	GuiEvent(const UIEvent& p_unk0x04, IDataState* p_unk0x08);
+	GuiEvent(const UIEvent& event, IDataState* iDataState) : UIEvent(event), iDataState(iDataState) {}
 };
 
 DECOMP_SIZE_ASSERT(GuiEvent, 0x18)

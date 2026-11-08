@@ -229,6 +229,17 @@ void Tool::onEvent_RemovedBackend(boost::shared_ptr<Instance> child)
 	}
 }
 
+// STUB: ROBLOX 0x0060f6b0
+void Tool::dropAll(ModelInstance* model)
+{
+	Workspace* workspace = ServiceProvider::find<Workspace>(model);
+	if (workspace) {
+		while (Tool* tool = model->findFirstChildOfType<Tool>()) {
+			tool->setParent(workspace);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100ca990
 // FUNCTION: ROBLOX 0x0060f6f0
 void Tool::moveAllToolsToBackpack(Network::Player* player)

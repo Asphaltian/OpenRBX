@@ -40,6 +40,7 @@ class DataModel : public DescribedNonCreatable<DataModel, ServiceProvider, sData
 				  public Listener<RunService, RunTransition>
 {
 	GuiResponse processAccelerators(const GuiEvent&);
+	GuiResponse FUN_0058f350(const GuiEvent& event);
 	void processEvent(const UIEvent&);
 
 private:

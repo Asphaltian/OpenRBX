@@ -2,6 +2,7 @@
 
 #include "compat.h"
 #include "gui/GUI.h"
+#include "gui/GuiEvent.h"
 #include "network/Players.h"
 #include "rbxgraphics/Adorn.h"
 #include "reflection/reflection.h"
@@ -27,6 +28,7 @@
 #include "v8datamodel/LocalBackpack.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/TimeState.h"
+#include "v8datamodel/Tool.h"
 #include "v8datamodel/UserController.h"
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Kernel.h"
@@ -232,6 +234,111 @@ float DataModel::getSimTime() const
 	return timeState->totalVirtualTime;
 }
 
+// STUB: ROBLOX 0x0058f350
+GuiResponse DataModel::FUN_0058f350(const GuiEvent& event)
+{
+	Verb* verb = NULL;
+
+	switch (event.eventType) {
+	case UIEvent::MOUSE_WHEEL_FORWARD:
+		verb = workspace->getVerb("CameraZoomIn");
+		break;
+	case UIEvent::MOUSE_WHEEL_BACKWARD:
+		verb = workspace->getVerb("CameraZoomOut");
+		break;
+	case UIEvent::KEY_DOWN:
+		if (event.key > SDLK_0 && event.key <= SDLK_9) {
+			if (localBackpack->FUN_0060d7d0(event.key - SDLK_0)) {
+				return GuiResponse::used();
+			}
+			return GuiResponse::notUsed();
+		}
+
+		switch (event.key) {
+		case SDLK_BACKSPACE:
+			if (ModelInstance* character = Network::Players::findLocalCharacter(this)) {
+				Tool::dropAll(character);
+			}
+			break;
+		case SDLK_ESCAPE:
+			runService->FUN_00569480(RS_NORMAL);
+			break;
+		case SDLK_COMMA:
+			verb = workspace->getVerb("CameraPanLeft");
+			break;
+		case SDLK_PERIOD:
+			verb = workspace->getVerb("CameraPanRight");
+			break;
+		case SDLK_EQUALS:
+			if (ModelInstance* character = Network::Players::findLocalCharacter(this)) {
+				Accoutrement::dropAll(character);
+			}
+			break;
+		case SDLK_i:
+			verb = workspace->getVerb("CameraZoomIn");
+			break;
+		case SDLK_o:
+			verb = workspace->getVerb("CameraZoomOut");
+			break;
+		case SDLK_PAGEUP:
+			verb = workspace->getVerb("CameraTiltDown");
+			break;
+		case SDLK_PAGEDOWN:
+			verb = workspace->getVerb("CameraTiltUp");
+			break;
+		case SDLK_F1:
+			verb = getVerb(event.mod == KMOD_NONE ? "Help" : "Stats");
+			break;
+		}
+		break;
+	}
+
+	if (verb && verb->isEnabled()) {
+		verb->doIt(this);
+		return GuiResponse::used();
+	}
+
+	return GuiResponse::notUsed();
+}
+
+static G3D::Vector2 g_unk0x0095a91c;
+
+// STUB: ROBLOX 0x0058f660
+void DataModel::processEvent(const UIEvent& event)
+{
+	if (event.isMouseEvent()) {
+		g_unk0x0095a91c = G3D::Vector2(event.mousePosition.x, event.mousePosition.y);
+	}
+
+	GuiEvent guiEvent(event, this);
+
+	GuiResponse response = guiTarget ? guiTarget->process(guiEvent) : GuiResponse::notUsed();
+	if (response.wasNotUsed()) {
+		response = static_cast<GuiTarget*>(guiHooks.get())->process(guiEvent);
+	}
+	if (response.wasNotUsed()) {
+		response = static_cast<GuiTarget*>(guiRoot.get())->process(guiEvent);
+	}
+	if (response.wasNotUsed()) {
+		response = static_cast<GuiTarget*>(localBackpack.get())->process(guiEvent);
+	}
+	if (response.wasNotUsed()) {
+		response = FUN_0058f350(guiEvent);
+	}
+
+	forceArrowCursor = response.wasUsed() && guiTarget != static_cast<GuiTarget*>(workspace.get());
+
+	if (response.wasNotUsed()) {
+		response = static_cast<GuiTarget*>(workspace.get())->process(guiEvent);
+	}
+
+	if (event.isMouseEvent() || event.eventType == UIEvent::KEY_DOWN) {
+		Network::Player::onLocalPlayerNotIdle(this);
+	}
+
+	guiTarget = response.getTarget();
+}
+
 // FUNCTION: WEBSERVICE 0x10072860
 // FUNCTION: ROBLOX 0x0058f860
 std::string DataModel::evaluate(const std::string& valueName) const
@@ -363,7 +470,15 @@ DataModel::Lock::~Lock()
 // STUB: ROBLOX 0x00590fd0
 void DataModel::processGui(const UIEvent& event)
 {
-	STUB(0x590fd0);
+	if (isInitialized) {
+		if (event.eventType != UIEvent::NO_EVENT) {
+			processEvent(event);
+		}
+
+		if (runService->getRunState() != RS_RUNNING) {
+			workspace->raiseDrawChanged();
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x10079120

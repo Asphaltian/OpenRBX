@@ -260,6 +260,19 @@ XmlElement* Accoutrement::write()
 	return Instance::write();
 }
 
+// STUB: ROBLOX 0x005bb390
+void Accoutrement::dropAllOthers(ModelInstance* model, Accoutrement* accoutrement)
+{
+	Workspace* workspace = ServiceProvider::find<Workspace>(model);
+	if (workspace) {
+		while (Accoutrement* other = model->findFirstChildOfType<Accoutrement>()) {
+			if (other != accoutrement) {
+				other->setParent(workspace);
+			}
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x100dc1b0
 // FUNCTION: ROBLOX 0x005bb3d0
 void Accoutrement::onEvent_HandleTouched(boost::shared_ptr<Instance> other)
@@ -273,6 +286,12 @@ void Accoutrement::onEvent_HandleTouched(boost::shared_ptr<Instance> other)
 			}
 		}
 	}
+}
+
+// FUNCTION: ROBLOX 0x005bb4a0
+void Accoutrement::dropAll(ModelInstance* model)
+{
+	dropAllOthers(model, NULL);
 }
 
 // FUNCTION: WEBSERVICE 0x100dc3f0

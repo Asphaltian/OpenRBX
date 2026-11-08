@@ -97,6 +97,7 @@ public:
 
 	void onHeartbeat();
 	void onClick(LocalBackpackItem* clickedItem);
+	bool FUN_0060d7d0(unsigned int index);
 	bool onKey(int key);
 	void cycleUp();
 	void cycleDown();

@@ -144,6 +144,18 @@ Backpack* Player::getPlayerBackpack() const
 	return findFirstChildOfType<Backpack>();
 }
 
+// FUNCTION: ROBLOX 0x004ac2b0
+void Player::onLocalPlayerNotIdle(ServiceProvider* serviceProvider)
+{
+	Players* players = serviceProvider->find<Players>();
+	if (players) {
+		Player* player = players->getLocalPlayer();
+		if (player && ServiceProvider::findServiceProvider(player)) {
+			player->lastActivityTime = G3D::System::getLocalTime();
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1018eae0
 // FUNCTION: ROBLOX 0x004ac2f0
 void Player::onCharacterChangedFrontend()
