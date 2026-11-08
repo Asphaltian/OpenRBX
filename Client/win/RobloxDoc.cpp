@@ -65,11 +65,10 @@ void ExitCommand::doIt(RBX::IDataState* dataState)
 	}
 }
 
-// STUB: ROBLOX 0x004558a0
+// FUNCTION: ROBLOX 0x004558a0
 RBX::VerbContainer* CRobloxDoc::FUN_004558a0()
 {
-	STUB(0x4558a0);
-	return NULL;
+	return FUN_00403290()->getWorkspace();
 }
 
 CRobloxDoc::~CRobloxDoc()

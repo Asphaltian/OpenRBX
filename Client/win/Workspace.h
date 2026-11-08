@@ -54,7 +54,7 @@ public:
 	STDMETHOD(ExecUrlScript)(BSTR url, VARIANT arg1, VARIANT arg2, VARIANT arg3, VARIANT arg4, SAFEARRAY** result);
 	STDMETHOD(Close)();
 
-	HRESULT FUN_0046fe10();
+	HRESULT FinalConstruct();
 
 	// FUNCTION: ROBLOX 0x0046edc0
 	boost::shared_ptr<RBX::DataModel> FUN_0046edc0() const { return m_unk0x24; }

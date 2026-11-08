@@ -82,7 +82,7 @@ STDMETHODIMP CWorkspace::Close()
 }
 
 // FUNCTION: ROBLOX 0x0046fe10
-HRESULT CWorkspace::FUN_0046fe10()
+HRESULT CWorkspace::FinalConstruct()
 {
 	m_unk0x24 = RBX::DataModel::createDataModel();
 

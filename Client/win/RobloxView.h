@@ -116,6 +116,7 @@ public:
 	virtual ~CRobloxView();
 
 	virtual void OnDraw(CDC* pDC);
+	virtual void OnInitialUpdate();
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
 
 	boost::shared_ptr<RBX::DataModel> FUN_00403290() const;
