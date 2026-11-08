@@ -144,12 +144,13 @@ VertexData* VisualEngine::FUN_00672ab0(
 {
 	RenderSystem* renderSystem = Root::getSingleton().getRenderSystem();
 	VertexData* vertexData = new VertexData();
-	VertexDeclaration* declaration = vertexData->vertexDeclaration;
 	vertexData->vertexCount = vertexCount;
+	VertexDeclaration* declaration = vertexData->vertexDeclaration;
 
 	declaration->addElement(0, 0, VET_FLOAT3, VES_POSITION);
+	size_t vertexSize = VertexElement::getTypeSize(VET_FLOAT3);
 	HardwareVertexBufferSharedPtr buffer = HardwareBufferManager::getSingleton().createVertexBuffer(
-		VertexElement::getTypeSize(VET_FLOAT3), vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
+		vertexSize, vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
 	);
 	buffer->writeData(0, buffer->getSizeInBytes(), positions, true);
 	VertexBufferBinding* binding = vertexData->vertexBufferBinding;
@@ -165,8 +166,9 @@ VertexData* VisualEngine::FUN_00672ab0(
 		}
 
 		declaration->addElement(1, 0, VET_COLOUR, VES_DIFFUSE);
+		vertexSize = VertexElement::getTypeSize(VET_COLOUR);
 		buffer = HardwareBufferManager::getSingleton().createVertexBuffer(
-			VertexElement::getTypeSize(VET_COLOUR), vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
+			vertexSize, vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
 		);
 		buffer->writeData(0, buffer->getSizeInBytes(), &converted[0], true);
 		binding->setBinding(1, buffer);
@@ -175,8 +177,9 @@ VertexData* VisualEngine::FUN_00672ab0(
 
 	if (normals) {
 		declaration->addElement(source, 0, VET_FLOAT3, VES_NORMAL);
+		vertexSize = VertexElement::getTypeSize(VET_FLOAT3);
 		buffer = HardwareBufferManager::getSingleton().createVertexBuffer(
-			VertexElement::getTypeSize(VET_FLOAT3), vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
+			vertexSize, vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
 		);
 		buffer->writeData(0, buffer->getSizeInBytes(), normals, true);
 		binding->setBinding(source, buffer);
@@ -185,8 +188,9 @@ VertexData* VisualEngine::FUN_00672ab0(
 
 	if (textureCoords) {
 		declaration->addElement(source, 0, VET_FLOAT2, VES_TEXTURE_COORDINATES);
+		vertexSize = VertexElement::getTypeSize(VET_FLOAT2);
 		buffer = HardwareBufferManager::getSingleton().createVertexBuffer(
-			VertexElement::getTypeSize(VET_FLOAT2), vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
+			vertexSize, vertexData->vertexCount, HardwareBuffer::HBU_STATIC_WRITE_ONLY
 		);
 		buffer->writeData(0, buffer->getSizeInBytes(), textureCoords, true);
 		binding->setBinding(source, buffer);
