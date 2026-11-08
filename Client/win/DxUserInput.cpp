@@ -1,7 +1,9 @@
 #include "DxUserInput.h"
 
+#include "ActiveDocView.h"
 #include "MainFrm.h"
 #include "rbxgraphics/TextureProxyBase.h"
+#include "util/Rect.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
 
@@ -12,6 +14,18 @@ static int FUN_0046db70(SDLKey key);
 static int FUN_0046dff0(SDLKey key);
 static RBX::UIEvent::EventType FUN_0046e290(UINT message);
 static SDLMod FUN_0046e2e0(const BYTE* keys);
+static void FUN_0046d670(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position);
+static void FUN_0046d6a0(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position);
+static G3D::Vector2 FUN_0046d6c0(const DIDEVICEOBJECTDATA& data);
+static void FUN_0046e530(
+	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
+);
+static void FUN_0046e560(
+	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
+);
+static void FUN_0046e5f0(
+	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
+);
 
 // FUNCTION: ROBLOX 0x0046b7f0
 bool DxUserInput::FUN_0046b7f0()
@@ -34,6 +48,25 @@ bool DxUserInput::FUN_0046b7f0()
 	}
 
 	return true;
+}
+
+// STUB: ROBLOX 0x0046b880
+bool DxUserInput::FUN_0046b880()
+{
+	CRect rect;
+	m_unk0x180->GetClientRect(&rect);
+
+	CPoint clientOrigin = rect.TopLeft();
+	CPoint screenOrigin = clientOrigin;
+	m_unk0x180->ClientToScreen(&screenOrigin);
+
+	return screenOrigin == clientOrigin;
+}
+
+// FUNCTION: ROBLOX 0x0046b8f0
+G3D::Vector2int16 DxUserInput::FUN_0046b8f0()
+{
+	return G3D::Vector2int16((G3D::int16) m_unk0x58.width(), (G3D::int16) m_unk0x58.height());
 }
 
 // FUNCTION: ROBLOX 0x0046b920
@@ -316,6 +349,44 @@ bool DxUserInput::keyDown(SDLKey key) const
 	return false;
 }
 
+// STUB: ROBLOX 0x0046c780
+bool DxUserInput::FUN_0046c780()
+{
+	if (static_cast<CMainFrame*>(AfxGetApp()->m_pMainWnd)->m_unk0xec && ActiveDocView::FUN_00434840()) {
+		RBX::DataModel::Lock lock(ActiveDocView::FUN_00434840());
+		RBX::Verb* verb = ActiveDocView::FUN_00434840()->getVerb("ToggleToolbox");
+		if (verb) {
+			return !verb->isChecked();
+		}
+	}
+
+	return false;
+}
+
+// STUB: ROBLOX 0x0046c950
+void DxUserInput::FUN_0046c950(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta)
+{
+	switch (m_unk0x6c) {
+	case WRAP_AUTO:
+		if (FUN_0046b920()) {
+			FUN_0046e530(mouseDelta, wrapMouseDelta, m_unk0x70, G3D::Vector2(FUN_0046b8f0()));
+		}
+		else if (!FUN_0046c780()) {
+			FUN_0046d670(mouseDelta, wrapMouseDelta, m_unk0x70);
+		}
+		else if (FUN_0046b880()) {
+			FUN_0046e560(mouseDelta, wrapMouseDelta, m_unk0x70, G3D::Vector2(FUN_0046b8f0()));
+		}
+		else {
+			FUN_0046e5f0(mouseDelta, wrapMouseDelta, m_unk0x70, G3D::Vector2(FUN_0046b8f0()));
+		}
+		break;
+	case WRAP_CENTER:
+		FUN_0046d6a0(mouseDelta, wrapMouseDelta, m_unk0x70);
+		break;
+	}
+}
+
 // FUNCTION: ROBLOX 0x0046ca90
 void DxUserInput::FUN_0046ca90()
 {
@@ -375,7 +446,63 @@ void DxUserInput::FUN_0046cbc0(UINT message, int wParam, LPARAM lParam)
 // STUB: ROBLOX 0x0046cd90
 void DxUserInput::FUN_0046cd90()
 {
-	STUB(0x46cd90);
+	DIDEVICEOBJECTDATA data[0x800];
+	DWORD count = 0x800;
+	{
+		ATL::CCritSecLock lock(m_unk0x34);
+		if (!FUN_0046bed0(data, &count, m_unk0x18c)) {
+			m_unk0x68 = false;
+			return;
+		}
+	}
+
+	G3D::Vector2 wrapMouseDelta(0.0f, 0.0f);
+	bool moved = false;
+	for (DWORD i = 0; i < count; i++) {
+		switch (data[i].dwOfs) {
+		case DIMOFS_BUTTON0:
+			::PostMessage(m_unk0x180->m_hWnd, WM_USER + 0xbb, 0, 0);
+			FUN_0046c3c0(
+				data[i].dwData == 0x80 ? RBX::UIEvent::MOUSE_LEFT_BUTTON_DOWN : RBX::UIEvent::MOUSE_LEFT_BUTTON_UP,
+				getCursorPosition()
+			);
+			break;
+		case DIMOFS_BUTTON1:
+			::PostMessage(m_unk0x180->m_hWnd, WM_USER + 0xbb, 0, 0);
+			FUN_0046c3c0(
+				data[i].dwData == 0x80 ? RBX::UIEvent::MOUSE_RIGHT_BUTTON_DOWN : RBX::UIEvent::MOUSE_RIGHT_BUTTON_UP,
+				getCursorPosition()
+			);
+			break;
+		case DIMOFS_X:
+		case DIMOFS_Y:
+			moved = true;
+			FUN_0046c950(FUN_0046d6c0(data[i]), wrapMouseDelta);
+			break;
+		case DIMOFS_Z: {
+			float wheel = (int) data[i].dwData / 120.0;
+			FUN_0046c3c0(
+				wheel > 0.0f ? RBX::UIEvent::MOUSE_WHEEL_FORWARD : RBX::UIEvent::MOUSE_WHEEL_BACKWARD,
+				getCursorPosition()
+			);
+			break;
+		}
+		}
+
+		if (!m_unk0x68 || !FUN_0046b7f0()) {
+			break;
+		}
+	}
+
+	if (wrapMouseDelta != G3D::Vector2::zero()) {
+		RBX::DataModel::Lock lock(m_unk0x194);
+		m_unk0x194->getWorkspace()->onWrapMouse(wrapMouseDelta);
+		FUN_0046c3c0(RBX::UIEvent::MOUSE_DELTA, wrapMouseDelta);
+	}
+
+	if (moved) {
+		FUN_0046c3c0(RBX::UIEvent::MOUSE_MOVE, getCursorPosition());
+	}
 }
 
 // FUNCTION: ROBLOX 0x0046d0a0
@@ -396,7 +523,7 @@ void DxUserInput::FUN_0046d0a0()
 	}
 }
 
-// STUB: ROBLOX 0x0046d180
+// FUNCTION: ROBLOX 0x0046d180
 void DxUserInput::onEvent(const RBX::RunService* source, RBX::Heartbeat event)
 {
 	ATL::CCritSecLock lock(m_unk0x34);
@@ -510,6 +637,33 @@ DxUserInput::DxUserInput(CWnd* wnd, RBX::DataModel* dataModel)
 
 static SDLKey g_unk0x009544f0[0x100];
 static bool g_unk0x009548f0;
+
+// STUB: ROBLOX 0x0046d670
+static void FUN_0046d670(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position)
+{
+	wrapMouseDelta = G3D::Vector2::zero();
+	position += mouseDelta;
+}
+
+// STUB: ROBLOX 0x0046d6a0
+static void FUN_0046d6a0(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position)
+{
+	wrapMouseDelta += mouseDelta;
+}
+
+// STUB: ROBLOX 0x0046d6c0
+static G3D::Vector2 FUN_0046d6c0(const DIDEVICEOBJECTDATA& data)
+{
+	G3D::Vector2 delta(0.0f, 0.0f);
+	float value = (int) data.dwData;
+	if (data.dwOfs == DIMOFS_X) {
+		delta.x = value;
+	}
+	else {
+		delta.y = value;
+	}
+	return delta;
+}
 
 // STUB: ROBLOX 0x0046d6f0
 static SDLKey FUN_0046d6f0(DWORD scanCode)
@@ -880,4 +1034,62 @@ static SDLMod FUN_0046e2e0(const BYTE* keys)
 		mod |= KMOD_RALT;
 	}
 	return static_cast<SDLMod>(mod);
+}
+
+// STUB: ROBLOX 0x0046e3e0
+static void FUN_0046e3e0(
+	const G3D::Vector2& mouseDelta,
+	G3D::Vector2& wrapMouseDelta,
+	G3D::Vector2& position,
+	const G3D::Vector2& size,
+	int border,
+	float stickiness
+)
+{
+	G3D::Vector2 half(size.x * 0.5, size.y * 0.5);
+	float inset = border;
+	RBX::Rect bounds(inset - half.x, inset - half.y, half.x - inset, half.y - inset);
+
+	G3D::Vector2 oldPosition = position;
+	bounds.unionWith(RBX::Rect(oldPosition, oldPosition));
+
+	G3D::Vector2 newPosition = mouseDelta + oldPosition;
+	G3D::Vector2 clamped = newPosition.clamp(bounds.low, bounds.high);
+	G3D::Vector2 overflow = newPosition - clamped;
+
+	position = clamped + overflow * stickiness;
+	wrapMouseDelta += overflow;
+}
+
+// STUB: ROBLOX 0x0046e530
+static void FUN_0046e530(
+	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
+)
+{
+	FUN_0046e3e0(mouseDelta, wrapMouseDelta, position, size, 6, 0.0f);
+}
+
+// STUB: ROBLOX 0x0046e560
+static void FUN_0046e560(
+	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
+)
+{
+	float y = mouseDelta.y + position.y;
+	FUN_0046e3e0(mouseDelta, wrapMouseDelta, position, size, 6, 0.0f);
+	wrapMouseDelta.y = 0.0f;
+	position.y = y;
+
+	float top = -(size.y * 0.5 - 2.0);
+	position.y = std::max(top, position.y);
+}
+
+// STUB: ROBLOX 0x0046e5f0
+static void FUN_0046e5f0(
+	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
+)
+{
+	float y = mouseDelta.y + position.y;
+	FUN_0046e3e0(mouseDelta, wrapMouseDelta, position, size, 20, 0.05f);
+	wrapMouseDelta.y = 0.0f;
+	position.y = y;
 }

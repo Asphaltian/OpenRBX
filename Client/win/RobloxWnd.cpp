@@ -53,6 +53,25 @@ BOOL CRobloxWnd::OnEraseBkgnd(CDC* pDC)
 	return TRUE;
 }
 
+// FUNCTION: ROBLOX 0x0045f670
+void CRobloxWnd::FUN_0045f670(UINT nType, int cx, int cy)
+{
+	if (m_unk0xb0) {
+		CRect rect;
+		GetClientRect(&rect);
+
+		Ogre::RenderWindow* window = m_unk0xb0->m_unk0x0c;
+		Ogre::Camera* camera = m_unk0xb0->m_unk0x08;
+		window->windowMovedOrResized();
+
+		if (rect.Height() != 0 && camera) {
+			camera->setAspectRatio(Ogre::Real(window->getWidth()) / Ogre::Real(window->getHeight()));
+		}
+
+		camera->yaw(Ogre::Radian(0.0f));
+	}
+}
+
 // FUNCTION: ROBLOX 0x0045f9f0
 void CRobloxWnd::FUN_0045f9f0()
 {
@@ -65,6 +84,53 @@ void CRobloxWnd::FUN_0045faf0()
 {
 	m_unk0x9c->makeCurrent();
 	m_unk0x70->buildGui(m_unk0xac.get());
+}
+
+// STUB: ROBLOX 0x0045fb30
+BOOL CRobloxWnd::OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult)
+{
+	bool handled;
+	switch (message) {
+	case WM_KEYDOWN:
+	case WM_KEYUP:
+	case WM_CHAR:
+	case WM_SYSKEYDOWN:
+	case WM_SYSKEYUP:
+	case WM_SYSCHAR:
+		handled = false;
+		break;
+	case WM_LBUTTONDOWN:
+	case WM_RBUTTONDOWN:
+		SetFocus();
+	case WM_MOUSEMOVE:
+	case WM_MOUSEWHEEL:
+		handled = true;
+		*pResult = 0;
+		break;
+	case WM_LBUTTONUP:
+	case WM_LBUTTONDBLCLK:
+	case WM_RBUTTONUP:
+	case WM_RBUTTONDBLCLK:
+		handled = false;
+		*pResult = 0;
+		break;
+	default:
+		return CWnd::OnWndMsg(message, wParam, lParam, pResult);
+	}
+
+	if (m_unk0x70) {
+		m_unk0x9c->makeCurrent();
+		if (m_unk0x7c) {
+			m_unk0x7c->FUN_0046cbc0(message, wParam, lParam);
+		}
+		InvalidateRect(NULL);
+	}
+
+	if (handled) {
+		return TRUE;
+	}
+
+	return CWnd::OnWndMsg(message, wParam, lParam, pResult);
 }
 
 // FUNCTION: ROBLOX 0x0045fc50
@@ -119,6 +185,24 @@ void CRobloxWnd::FUN_00460160(G3D::GWindow* window)
 
 	if (glGetError() != GL_NO_ERROR) {
 		throw std::runtime_error("GL error creating RenderDevice");
+	}
+}
+
+// FUNCTION: ROBLOX 0x00460360
+void CRobloxWnd::FUN_00460360()
+{
+	if (m_unk0x9c) {
+		m_unk0x9c->makeCurrent();
+	}
+
+	if (m_unk0xa4.get()) {
+		m_unk0xa4->cleanup();
+		m_unk0xa4.reset();
+	}
+
+	if (m_unk0x9c) {
+		delete m_unk0x9c;
+		m_unk0x9c = NULL;
 	}
 }
 
@@ -365,10 +449,25 @@ int CRobloxWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
+// STUB: ROBLOX 0x004617b0
+void CRobloxWnd::FUN_004617b0(UINT nType, int cx, int cy)
+{
+	STUB(0x4617b0);
+}
+
 // STUB: ROBLOX 0x00461950
 void CRobloxWnd::OnSize(UINT nType, int cx, int cy)
 {
-	STUB(0x461950);
+	if (cx > 0 && cy > 0 && cx <= 0x2000 && cy <= 0x2000) {
+		CWnd::OnSize(nType, cx, cy);
+
+		if (m_unk0x5c == 2) {
+			FUN_004617b0(nType, cx, cy);
+		}
+		else {
+			FUN_0045f670(nType, cx, cy);
+		}
+	}
 }
 
 // STUB: ROBLOX 0x004619e0
@@ -633,7 +732,21 @@ CRobloxWnd::~CRobloxWnd()
 // STUB: ROBLOX 0x00464180
 void CRobloxWnd::OnDestroy()
 {
-	STUB(0x464180);
+	FUN_00460430();
+	FUN_00463c30(NULL);
+
+	if (m_unk0x5c == 2) {
+		FUN_00460360();
+		CWnd::OnDestroy();
+		return;
+	}
+
+	if (m_unk0xb0) {
+		m_unk0xac.reset();
+		delete m_unk0xb0;
+	}
+
+	CWnd::OnDestroy();
 }
 
 // clang-format off

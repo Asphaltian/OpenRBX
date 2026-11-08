@@ -82,6 +82,12 @@ const G3D::GCamera& Workspace::getGCamera() const
 	return getCamera()->getGCamera();
 }
 
+// FUNCTION: ROBLOX 0x005b4730
+void Workspace::onWrapMouse(const G3D::Vector2& wrapMouseDelta)
+{
+	getCamera()->onWrapMouse(wrapMouseDelta);
+}
+
 // FUNCTION: WEBSERVICE 0x1006a100
 // FUNCTION: ROBLOX 0x005b4750
 void Workspace::zoomToExtents()
@@ -649,6 +655,15 @@ void Workspace::start()
 			startScripts.end(),
 			boost::bind(&ScriptContext::addScript, scriptContext, boost::bind(&boost::shared_ptr<Script>::get, _1))
 		);
+	}
+}
+
+// FUNCTION: ROBLOX 0x005b75d0
+void Workspace::setCursor(Adorn* adorn)
+{
+	UserInputBase* userInput = ServiceProvider::create<ControllerService>(this)->getHardwareDevice();
+	if (userInput) {
+		userInput->setCursorId(adorn, getCurrentMouseCommand()->getCursorId());
 	}
 }
 

@@ -204,7 +204,7 @@ AdornRbxGfx::~AdornRbxGfx()
 }
 
 // STUB: ROBLOX 0x0066e3b0
-AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08("")
+AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08(""), m_unk0x74(NULL)
 {
 	m_unk0x04 = visualEngine;
 	if (g_unk0x00949c7c.isNull()) {

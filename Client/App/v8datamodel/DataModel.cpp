@@ -3,15 +3,18 @@
 #include "compat.h"
 #include "gui/GUI.h"
 #include "network/Players.h"
+#include "rbxgraphics/Adorn.h"
 #include "reflection/reflection.h"
 #include "reflection/signal.h"
 #include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
 #include "util/Http.h"
 #include "util/IMetric.h"
+#include "util/IRenderable.h"
 #include "util/Log.h"
 #include "util/Name.h"
 #include "util/Sound.h"
+#include "util/UserInputBase.h"
 #include "util/boost.hpp"
 #include "util/standardout.h"
 #include "v8datamodel/Accoutrement.h"
@@ -24,6 +27,7 @@
 #include "v8datamodel/LocalBackpack.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/TimeState.h"
+#include "v8datamodel/UserController.h"
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Kernel.h"
 #include "v8tree/Service.h"
@@ -463,7 +467,71 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > DataModel::g
 // STUB: ROBLOX 0x00592dc0
 void DataModel::renderPass2d(Adorn* adorn, IMetric* metric)
 {
-	STUB(0x592dc0);
+	if (adorn && metric) {
+		tempMetric = metric;
+
+		workspace->render2d(adorn);
+		GuiRoot::render2dItem(
+			adorn,
+			Network::Players::findLocalPlayer(this) ? static_cast<GuiItem*>(localBackpack.get())
+													: static_cast<GuiItem*>(starterPackService.get())
+		);
+		guiRoot->render2d(adorn);
+
+		Network::Player* player = create<Network::Players>()->getLocalPlayer();
+		if (player) {
+			for (unsigned int i = 0; i < player->numChildren(); i++) {
+				IRenderable* renderable = dynamic_cast<IRenderable*>(player->getChild(i));
+				if (renderable) {
+					renderable->render2d(adorn);
+				}
+			}
+		}
+
+		std::string text;
+		if (uiMessage == "[[[progress]]]") {
+			text = "Bricks: " + evaluate("numPrimitives") + "   Snaps: " + evaluate("numJoints");
+		}
+		else {
+			text = uiMessage;
+		}
+
+		if (!text.empty()) {
+			G3D::Rect2D viewport = adorn->getViewport();
+			G3D::Vector2 center = viewport.center();
+			float width = viewport.width();
+			int fontSize = (int) width * 0.02f;
+			G3D::Vector2 halfSize(width * 0.3f, width * 0.3f * 0.3f);
+
+			adorn->rect2d(G3D::Rect2D::xyxy(center - halfSize, center + halfSize), GuiItem::translucentBackdrop());
+			adorn->outlineRect2d(
+				G3D::Rect2D::xyxy(center - halfSize, center + halfSize), 2.0f, G3D::Color4(G3D::Color3::gray(), 1.0f)
+			);
+			adorn->drawFont2D(
+				text,
+				center,
+				fontSize,
+				G3D::Color4(G3D::Color3::white(), 1.0f),
+				G3D::Color4::clear(),
+				Adorn::XALIGN_CENTER,
+				Adorn::YALIGN_CENTER,
+				Adorn::PROPORTIONAL_SPACING
+			);
+		}
+
+		UserInputBase* userInput = create<ControllerService>()->getHardwareDevice();
+		if (userInput) {
+			if (forceArrowCursor) {
+				userInput->setCursorId(adorn, ContentId::fromAssets("Textures\\ArrowCursor.png"));
+			}
+			else {
+				workspace->setCursor(adorn);
+			}
+			userInput->renderGameCursor(adorn);
+		}
+
+		tempMetric = NULL;
+	}
 }
 
 void DataModel::raiseClose()

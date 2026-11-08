@@ -6,6 +6,7 @@
 
 #include <OgreAxisAlignedBox.h>
 #include <OgreMesh.h>
+#include <OgreRenderWindow.h>
 #include <OgreRoot.h>
 #include <OgreSubMesh.h>
 #include <string>
@@ -149,7 +150,7 @@ private:
 
 	SceneManager* m_unk0x04; // 0x04
 	Camera* m_unk0x08;       // 0x08
-	RenderTarget* m_unk0x0c; // 0x0c
+	RenderWindow* m_unk0x0c; // 0x0c
 	Viewport* m_unk0x10;     // 0x10
 	TwoDManager* m_unk0x14;  // 0x14
 	Unk0x18 m_unk0x18;       // 0x18

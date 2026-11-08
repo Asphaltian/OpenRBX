@@ -1,5 +1,7 @@
 #include "util/Rect.h"
 
+#include <algorithm>
+
 namespace RBX {
 
 // FUNCTION: ROBLOX 0x005d90c0
@@ -91,6 +93,15 @@ Rect Rect::positionChild(const Rect& child, Location xLocation, Location yLocati
 	}
 
 	return fromLowSize(Vector2(x, y), Vector2(width, height));
+}
+
+// FUNCTION: ROBLOX 0x005d9220
+void Rect::unionWith(const Rect& other)
+{
+	low.x = std::min(low.x, other.low.x);
+	low.y = std::min(low.y, other.low.y);
+	high.x = std::max(high.x, other.high.x);
+	high.y = std::max(high.y, other.high.y);
 }
 
 } // namespace RBX

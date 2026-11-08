@@ -369,6 +369,13 @@ void Camera::updateGoal()
 	cameraGoal.lookAt(cameraFocus.translation);
 }
 
+// FUNCTION: ROBLOX 0x005d6e40
+void Camera::onWrapMouse(const G3D::Vector2& wrapMouseDelta)
+{
+	tiltRadians(wrapMouseDelta.y * -0.0052359882f);
+	panRadians(wrapMouseDelta.x * -0.0069813174f);
+}
+
 // FUNCTION: WEBSERVICE 0x100c31e0
 // FUNCTION: ROBLOX 0x005d6e80
 bool Camera::zoom(float in)

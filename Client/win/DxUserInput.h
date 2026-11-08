@@ -49,6 +49,8 @@ private:
 	boost::shared_ptr<RBX::DataModel> m_unk0x194; // 0x194
 
 	bool FUN_0046b7f0();
+	bool FUN_0046b880();
+	G3D::Vector2int16 FUN_0046b8f0();
 	bool FUN_0046b920();
 	void FUN_0046b9d0();
 	void FUN_0046ba80();
@@ -60,6 +62,8 @@ private:
 	void FUN_0046c3c0(RBX::UIEvent::EventType eventType, const G3D::Vector2& position);
 	G3D::Vector2 FUN_0046c4f0();
 	G3D::Vector2 FUN_0046c590();
+	bool FUN_0046c780();
+	void FUN_0046c950(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta);
 	void FUN_0046cd90();
 
 protected:

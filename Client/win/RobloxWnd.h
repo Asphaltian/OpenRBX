@@ -37,13 +37,16 @@ public:
 	virtual ~CRobloxWnd();
 
 	void FUN_0045f9f0();
+	void FUN_0045f670(UINT nType, int cx, int cy);
 	void FUN_0045faf0();
 	void FUN_0045fc50(bool active);
 	void FUN_00460160(G3D::GWindow* window);
+	void FUN_00460360();
 	void FUN_00460430();
 	void FUN_00460d30();
 	void FUN_004610a0(int width, int height);
 	void FUN_00461420(int width, int height);
+	void FUN_004617b0(UINT nType, int cx, int cy);
 	void FUN_004619e0();
 	void FUN_004622d0(bool p_unk0x04);
 	void FUN_00462450(bool p_unk0x04);
@@ -53,6 +56,7 @@ public:
 	void FUN_00463c30(CWorkspace* workspace);
 
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+	virtual BOOL OnWndMsg(UINT message, WPARAM wParam, LPARAM lParam, LRESULT* pResult);
 
 	virtual void InvalidateRunView();
 	virtual void AdjustThrottle(double frameRate);
