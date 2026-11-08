@@ -922,6 +922,7 @@ void RbxSceneManager::_queueSkiesForRendering(Camera* cam)
 
 	if (mSkyBoxNode) {
 		mSkyBoxNode->setPosition(cam->getDerivedPosition());
+		m_unk0x8a90->setPosition(cam->getDerivedPosition());
 	}
 
 	if (mSkyDomeNode) {
