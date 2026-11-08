@@ -828,6 +828,21 @@ void ScriptContext::addScript(Script* script)
 	}
 }
 
+static unsigned int FUN_00407390(lua_State* thread)
+{
+	return 0;
+}
+
+static void FUN_00751160(lua_State* thread, unsigned int count)
+{
+}
+
+// STUB: ROBLOX 0x00574ef0
+void ScriptContext::executeInNewThread(Security::Identities identity, const char* script, const char* name)
+{
+	executeInNewThread(identity, script, name, &FUN_00407390, &FUN_00751160);
+}
+
 // FUNCTION: WEBSERVICE 0x100687d0
 // FUNCTION: ROBLOX 0x00575000
 std::auto_ptr<std::vector<Reflection::Value> > ScriptContext::executeInNewThread(

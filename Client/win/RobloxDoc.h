@@ -136,6 +136,12 @@ public:
 	BOOL FUN_00459950(std::string p_unk0x04);
 	void FUN_00459c80();
 
+protected:
+	afx_msg void FUN_00453eb0(CCmdUI* pCmdUI);
+	afx_msg void FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult);
+
+	DECLARE_MESSAGE_MAP()
+
 private:
 	friend class CRobloxView;
 

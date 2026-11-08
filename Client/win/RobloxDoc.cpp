@@ -4,11 +4,15 @@
 #include "LogManager.h"
 #include "MainFrm.h"
 #include "network/Players.h"
+#include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
+#include "util/StandardOut.h"
 #include "v8datamodel/Selection.h"
 
+#include <boost/iostreams/copy.hpp>
 #include <shlobj.h>
 #include <shlwapi.h>
+#include <sstream>
 
 IMPLEMENT_DYNCREATE(CRobloxDoc, CDocument)
 
@@ -240,6 +244,52 @@ bool ReportAbuseVerb::isEnabled() const
 	return m_unk0x0c->FUN_00403290()->create<RBX::Network::Players>()->canReportAbuse();
 }
 
+// FUNCTION: ROBLOX 0x00453eb0 FOLDED
+void CRobloxDoc::FUN_00453eb0(CCmdUI* pCmdUI)
+{
+	pCmdUI->Enable(TRUE);
+}
+
+// STUB: ROBLOX 0x004588a0
+void CRobloxDoc::FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult)
+{
+	CXTPControlComboBox* pControl = (CXTPControlComboBox*) ((NMXTPCONTROL*) pNMHDR)->pControl;
+	if (pControl->GetType() == xtpControlComboBox) {
+		std::string text(pControl->GetEditText());
+
+		try {
+			if (pControl->FindStringExact(-1, text.c_str()) == -1) {
+				pControl->InsertString(0, text.c_str());
+				if (pControl->GetCount() > 10) {
+					pControl->DeleteItem(pControl->GetCount() - 1);
+				}
+			}
+
+			pControl->SetEnabled(FALSE);
+			RBX::StandardOut::singleton()->print(RBX::MESSAGE_OUTPUT, "> %s", text.c_str());
+
+			if (RBX::ContentProvider::isHttpUrl(text)) {
+				std::auto_ptr<std::istream> stream = RBX::ContentProvider::singleton().getContent(RBX::ContentId(text));
+				std::ostringstream script;
+				boost::iostreams::copy(*stream, script, 0x1000);
+				text = script.str();
+			}
+
+			RBX::DataModel::Lock lock(FUN_00403290());
+			m_unk0x78->FUN_0046edc0()->create<RBX::ScriptContext>()->executeInNewThread(
+				RBX::Security::CmdLine, text.c_str(), "Cmd"
+			);
+		}
+		catch (...) {
+		}
+
+		pControl->SetEnabled(TRUE);
+		pControl->GetEditCtrl()->SetSel(0, -1);
+		pControl->GetEditCtrl()->SetFocus();
+		*pResult = 1;
+	}
+}
+
 // STUB: ROBLOX 0x00459950
 BOOL CRobloxDoc::FUN_00459950(std::string p_unk0x04)
 {
@@ -258,3 +308,10 @@ void CRobloxDoc::FUN_00459c80()
 		FUN_00459950(static_cast<LPCTSTR>(dialog.GetPathName()));
 	}
 }
+
+// clang-format off
+BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
+	ON_NOTIFY(CBN_XTP_EXECUTE, 0x80c3, FUN_004588a0)
+	ON_UPDATE_COMMAND_UI(0x80c3, FUN_00453eb0)
+END_MESSAGE_MAP()
+// clang-format on
