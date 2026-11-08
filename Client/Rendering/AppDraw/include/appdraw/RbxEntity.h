@@ -10,6 +10,8 @@
 
 namespace Ogre {
 
+class RbxSubEntity;
+
 // VTABLE: ROBLOX 0x0083dacc Ogre::ShadowCaster
 // VTABLE: ROBLOX 0x0083dab8 Ogre::AnimableObject
 // VTABLE: ROBLOX 0x0083daac
@@ -25,6 +27,7 @@ public:
 
 	void FUN_00674e30(VisualEngine::Unk0x18* p_unk0x240);
 	void FUN_00674e40(MeshPtr mesh);
+	RbxSubEntity* FUN_00676680(SubMesh* subMesh, int lodIndex);
 
 	virtual void FUN_00676870(Camera* cam);
 	virtual void FUN_00674fd0(bool visible);

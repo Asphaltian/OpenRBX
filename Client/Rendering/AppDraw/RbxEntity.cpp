@@ -4,6 +4,7 @@
 
 #include <OgreMesh.h>
 #include <OgreRenderQueue.h>
+#include <OgreSubMesh.h>
 
 namespace Ogre {
 
@@ -83,6 +84,17 @@ RbxEntity::~RbxEntity()
 		}
 	}
 	mSubEntityList.clear();
+}
+
+// FUNCTION: ROBLOX 0x00676680
+RbxSubEntity* RbxEntity::FUN_00676680(SubMesh* subMesh, int lodIndex)
+{
+	RbxSubEntity* subEntity = new RbxSubEntity(this, subMesh, lodIndex);
+	if (subMesh->isMatInitialised()) {
+		subEntity->setMaterialName(subMesh->getMaterialName());
+	}
+	mSubEntityList.push_back(subEntity);
+	return subEntity;
 }
 
 // STUB: ROBLOX 0x00676870
