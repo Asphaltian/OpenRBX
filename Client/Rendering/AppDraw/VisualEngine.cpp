@@ -135,7 +135,7 @@ float VisualEngine::Unk0x18::FUN_00672980(int count)
 
 // STUB: ROBLOX 0x00672ab0
 VertexData* VisualEngine::FUN_00672ab0(
-	const Vector3* positions,
+	const float* positions,
 	size_t vertexCount,
 	const Vector3* normals,
 	const ColourValue* colours,
@@ -197,6 +197,73 @@ VertexData* VisualEngine::FUN_00672ab0(
 	}
 
 	return vertexData;
+}
+
+// STUB: ROBLOX 0x006735b0
+Unknown00671c70* VisualEngine::FUN_006735b0(
+	const float* positions,
+	size_t vertexCount,
+	const Vector3* normals,
+	const ColourValue* colours,
+	const Vector2* textureCoords,
+	const unsigned short* indices16,
+	const unsigned int* indices32,
+	size_t triangleCount,
+	Vector3* minimumOut,
+	Vector3* maximumOut
+)
+{
+	Unknown00671c70* subMesh = new Unknown00671c70();
+	subMesh->parent = NULL;
+	subMesh->vertexData = FUN_00672ab0(positions, vertexCount, normals, colours, textureCoords);
+	subMesh->useSharedVertices = false;
+
+	size_t indexCount = triangleCount * 3;
+	HardwareIndexBufferSharedPtr indexBuffer = HardwareBufferManager::getSingleton().createIndexBuffer(
+		indices16 ? HardwareIndexBuffer::IT_16BIT : HardwareIndexBuffer::IT_32BIT,
+		indexCount,
+		HardwareBuffer::HBU_STATIC_WRITE_ONLY
+	);
+	if (indices16) {
+		indexBuffer->writeData(0, indexBuffer->getSizeInBytes(), indices16, true);
+	}
+	else {
+		indexBuffer->writeData(0, indexBuffer->getSizeInBytes(), indices32, true);
+	}
+	subMesh->indexData->indexBuffer = indexBuffer;
+	subMesh->indexData->indexCount = indexCount;
+	subMesh->indexData->indexStart = 0;
+
+	Vector3 minimum(1e9f, 1e9f, 1e9f);
+	Vector3 maximum(-1e9f, -1e9f, -1e9f);
+	for (size_t i = 0; i < vertexCount * 3; i += 3) {
+		if (minimum.x > positions[i]) {
+			minimum.x = positions[i];
+		}
+		if (minimum.y > positions[i + 1]) {
+			minimum.y = positions[i + 1];
+		}
+		if (minimum.z > positions[i + 2]) {
+			minimum.z = positions[i + 2];
+		}
+		if (maximum.x < positions[i]) {
+			maximum.x = positions[i];
+		}
+		if (maximum.y < positions[i + 1]) {
+			maximum.y = positions[i + 1];
+		}
+		if (maximum.z < positions[i + 2]) {
+			maximum.z = positions[i + 2];
+		}
+	}
+
+	*minimumOut = minimum;
+	*maximumOut = maximum;
+
+	AxisAlignedBox box(minimum, maximum);
+	subMesh->m_unk0x8c = box;
+	subMesh->m_unk0xac = box.getHalfSize().length();
+	return subMesh;
 }
 
 // STUB: ROBLOX 0x00673860

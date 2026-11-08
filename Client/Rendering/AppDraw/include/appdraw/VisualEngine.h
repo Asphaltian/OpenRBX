@@ -69,11 +69,24 @@ public:
 	Viewport* getViewport() const { return m_unk0x10; }
 
 	VertexData* FUN_00672ab0(
-		const Vector3* positions,
+		const float* positions,
 		size_t vertexCount,
 		const Vector3* normals,
 		const ColourValue* colours,
 		const Vector2* textureCoords
+	);
+
+	Unknown00671c70* FUN_006735b0(
+		const float* positions,
+		size_t vertexCount,
+		const Vector3* normals,
+		const ColourValue* colours,
+		const Vector2* textureCoords,
+		const unsigned short* indices16,
+		const unsigned int* indices32,
+		size_t triangleCount,
+		Vector3* minimumOut,
+		Vector3* maximumOut
 	);
 
 	void FUN_00673860(
