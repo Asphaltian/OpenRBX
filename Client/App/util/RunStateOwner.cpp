@@ -50,6 +50,23 @@ void RunService::onAncestorChanged(const AncestorChanged& event)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00569480
+void RunService::FUN_00569480(RunState state)
+{
+	if (state == RS_RUNNING) {
+		if (!isEditState() && !isPauseState()) {
+			return;
+		}
+	}
+	else if (state == RS_PAUSED) {
+		if (!isRunState()) {
+			return;
+		}
+	}
+
+	setRunState(state);
+}
+
 // FUNCTION: WEBSERVICE 0x10054cb0
 // FUNCTION: ROBLOX 0x005694e0
 void RunService::runProc(boost::shared_ptr<DataModel> dataModel)

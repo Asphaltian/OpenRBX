@@ -137,6 +137,69 @@ public:
 
 DECOMP_SIZE_ASSERT(RunStateVerb, 0x1c)
 
+// VTABLE: ROBLOX 0x0082adb0
+// SIZE 0x1c
+class SelectAllCommand : public RunStateVerb
+{
+public:
+	SelectAllCommand(DataModel* dataModel) : RunStateVerb("SelectAll", dataModel) {}
+
+	virtual void doIt(IDataState* dataState); // vtable+0x10
+};
+
+DECOMP_SIZE_ASSERT(SelectAllCommand, 0x1c)
+
+// VTABLE: ROBLOX 0x0082ae24
+// SIZE 0x1c
+class AllCanSelectCommand : public RunStateVerb
+{
+public:
+	AllCanSelectCommand(DataModel* dataModel) : RunStateVerb("AllCanSelect", dataModel) {}
+
+	virtual void doIt(IDataState* dataState); // vtable+0x10
+};
+
+DECOMP_SIZE_ASSERT(AllCanSelectCommand, 0x1c)
+
+// VTABLE: ROBLOX 0x0082aebc
+// SIZE 0x1c
+class RunCommand : public RunStateVerb
+{
+public:
+	RunCommand(DataModel* dataModel) : RunStateVerb("Run", dataModel) {}
+
+	virtual bool isEnabled() const;           // vtable+0x08
+	virtual void doIt(IDataState* dataState); // vtable+0x10
+};
+
+DECOMP_SIZE_ASSERT(RunCommand, 0x1c)
+
+// VTABLE: ROBLOX 0x0082aed4
+// SIZE 0x1c
+class StopCommand : public RunStateVerb
+{
+public:
+	StopCommand(DataModel* dataModel) : RunStateVerb("Stop", dataModel) {}
+
+	virtual bool isEnabled() const;           // vtable+0x08
+	virtual void doIt(IDataState* dataState); // vtable+0x10
+};
+
+DECOMP_SIZE_ASSERT(StopCommand, 0x1c)
+
+// VTABLE: ROBLOX 0x0082aeec
+// SIZE 0x1c
+class ResetCommand : public RunStateVerb
+{
+public:
+	ResetCommand(DataModel* dataModel) : RunStateVerb("Reset", dataModel) {}
+
+	virtual bool isEnabled() const;           // vtable+0x08
+	virtual void doIt(IDataState* dataState); // vtable+0x10
+};
+
+DECOMP_SIZE_ASSERT(ResetCommand, 0x1c)
+
 template <class T, class Base>
 class TToolVerb : public Base
 {
@@ -267,6 +330,53 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(EditSelectionVerb, 0x24)
+
+// VTABLE: ROBLOX 0x0082404c
+// SIZE 0x28
+class DeleteBase : public EditSelectionVerb
+{
+protected:
+	bool m_unk0x24; // 0x24
+
+	DeleteBase(DataModel* dataModel, std::string name, bool p_unk0x24);
+
+public:
+	virtual void doIt(IDataState* dataState); // vtable+0x10
+};
+
+DECOMP_SIZE_ASSERT(DeleteBase, 0x28)
+
+// VTABLE: ROBLOX 0x0082ad8c
+// SIZE 0x28
+class PlayDeleteSelectionVerb : public DeleteBase
+{
+public:
+	PlayDeleteSelectionVerb(DataModel* dataModel) : DeleteBase(dataModel, "PlayDelete", true) {}
+};
+
+DECOMP_SIZE_ASSERT(PlayDeleteSelectionVerb, 0x28)
+
+// VTABLE: ROBLOX 0x00801108
+// SIZE 0x28
+class DeleteSelectionVerb : public DeleteBase
+{
+public:
+	DeleteSelectionVerb(DataModel* dataModel) : DeleteBase(dataModel, "Delete", false) {}
+};
+
+DECOMP_SIZE_ASSERT(DeleteSelectionVerb, 0x28)
+
+// VTABLE: ROBLOX 0x0082ae4c
+// SIZE 0x24
+class CanNotSelectCommand : public EditSelectionVerb
+{
+public:
+	CanNotSelectCommand(DataModel* dataModel) : EditSelectionVerb("CanNotSelect", dataModel) {}
+
+	virtual void doIt(IDataState* dataState); // vtable+0x10
+};
+
+DECOMP_SIZE_ASSERT(CanNotSelectCommand, 0x24)
 
 // SIZE 0x24
 class RotateAxisCommand : public EditSelectionVerb

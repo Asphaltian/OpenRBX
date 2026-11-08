@@ -147,6 +147,7 @@ public:
 	// STUB: WEBSERVICE 0x10055180
 	void reset() { setRunState(RS_NORMAL); }
 
+	void FUN_00569480(RunState state);
 	void endRunThread(bool join);
 
 	void raiseHeartbeat(float time, float step);

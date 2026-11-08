@@ -667,6 +667,19 @@ boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Workspace::i
 	return values;
 }
 
+// FUNCTION: ROBLOX 0x005b79b0
+void Workspace::selectAll()
+{
+	ServiceClient<Selection> selection(this);
+	selection->clearSelection();
+	for (unsigned int i = 0; i < numChildren(); ++i) {
+		Instance* child = getChild(i);
+		if (!PartInstance::getLocked(child)) {
+			selection->addToSelection(child);
+		}
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1006f6e0
 // FUNCTION: ROBLOX 0x005b7ab0
 void Workspace::render3dAdorn(Adorn* adorn)

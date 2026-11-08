@@ -492,6 +492,8 @@ public:
 	ServiceClient(Instance* context) : context(context) {}
 
 	// clang-format off
+	// TEMPLATE: ROBLOX 0x0059a480
+	// RBX::ServiceClient<RBX::RunService>::createService
 	// TEMPLATE: WEBSERVICE 0x1006f250
 	// STUB: ROBLOX 0x0059a540
 	// RBX::ServiceClient<RBX::Selection>::createService

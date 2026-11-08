@@ -15,6 +15,7 @@
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Feature.h"
 #include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Selection.h"
 #include "v8datamodel/ToolsPart.h"
 #include "v8world/SpatialHash.h"
@@ -50,6 +51,11 @@ static void FUN_00596660(DataModel* dataModel)
 	if (Network::Players::clientIsPresent(dataModel, true) && !Network::Players::serverIsPresent(dataModel, true)) {
 		throw std::runtime_error("Insufficinet permissions");
 	}
+}
+
+inline void RunStateVerb::playActionSound()
+{
+	FUN_00596660(dataModel);
 }
 
 // FUNCTION: ROBLOX 0x005966e0
@@ -144,6 +150,13 @@ bool CameraZoomOutCommand::isEnabled() const
 bool FixedCameraCommand::isChecked() const
 {
 	return getCamera()->getCameraType() == Camera::FIXED_CAMERA;
+}
+
+// FUNCTION: ROBLOX 0x00596c80
+void SelectAllCommand::doIt(IDataState* dataState)
+{
+	playActionSound();
+	dataModel->getWorkspace()->selectAll();
 }
 
 // FUNCTION: ROBLOX 0x00596d20
@@ -294,6 +307,12 @@ DuplicateSelectionVerb::DuplicateSelectionVerb(DataModel* dataModel) : EditSelec
 {
 }
 
+// FUNCTION: ROBLOX 0x005980d0
+DeleteBase::DeleteBase(DataModel* dataModel, std::string name, bool p_unk0x24)
+	: EditSelectionVerb(name, dataModel), m_unk0x24(p_unk0x24)
+{
+}
+
 // FUNCTION: ROBLOX 0x00598150
 AttachCameraCommand::AttachCameraCommand(DataModel* dataModel) : EditSelectionVerb("AttachCamera", dataModel)
 {
@@ -424,6 +443,15 @@ void ControllerCommand::setController(Controller::ControllerType controllerType)
 		filteredSelection->FUN_00598770(controllerType) ? controllerType : Controller::NO_CONTROLLER;
 
 	std::for_each(filteredSelection->begin(), filteredSelection->end(), boost::bind(&FUN_00596950, newType, _1));
+}
+
+// FUNCTION: ROBLOX 0x0059a9a0
+void AllCanSelectCommand::doIt(IDataState* dataState)
+{
+	playActionSound();
+	PartInstance::setLocked(dataModel->getWorkspace(), false);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // STUB: ROBLOX 0x0059a9f0
@@ -665,6 +693,57 @@ void CameraCenterCommand::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
+// STUB: ROBLOX 0x0059bd90
+void CanNotSelectCommand::doIt(IDataState* dataState)
+{
+	STUB(0x59bd90);
+}
+
+// FUNCTION: ROBLOX 0x0059be40
+bool RunCommand::isEnabled() const
+{
+	return runService->getRunState() != RS_RUNNING;
+}
+
+// FUNCTION: ROBLOX 0x0059be60
+void RunCommand::doIt(IDataState* dataState)
+{
+	playActionSound();
+	RunService* service = runService;
+	if (!service->runDisabled) {
+		service->FUN_00569480(RS_RUNNING);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0059bea0
+bool StopCommand::isEnabled() const
+{
+	return runService->getRunState() == RS_RUNNING;
+}
+
+// FUNCTION: ROBLOX 0x0059bec0
+void StopCommand::doIt(IDataState* dataState)
+{
+	playActionSound();
+	RunService* service = runService;
+	service->FUN_00569480(RS_PAUSED);
+}
+
+// FUNCTION: ROBLOX 0x0059bef0
+bool ResetCommand::isEnabled() const
+{
+	RunState state = runService->getRunState();
+	return (state == RS_RUNNING || state == RS_PAUSED) && !Network::Players::findLocalPlayer(dataModel);
+}
+
+// FUNCTION: ROBLOX 0x0059bf30
+void ResetCommand::doIt(IDataState* dataState)
+{
+	playActionSound();
+	RunService* service = runService;
+	service->FUN_00569480(RS_NORMAL);
+}
+
 // FUNCTION: ROBLOX 0x0059bf60
 bool EditSelectionVerb::isEnabled() const
 {
@@ -729,6 +808,12 @@ bool UngroupSelectionVerb::isEnabled() const
 void DuplicateSelectionVerb::doIt(IDataState* dataState)
 {
 	STUB(0x59c2f0);
+}
+
+// STUB: ROBLOX 0x0059c5c0
+void DeleteBase::doIt(IDataState* dataState)
+{
+	STUB(0x59c5c0);
 }
 
 // STUB: ROBLOX 0x0059c860
