@@ -6128,3 +6128,6 @@ address,type,symbol,name,module,size
 004137b0,library,??1CContent@@QAE@XZ,,,
 00470f40,function,,,,429
 004702b0,function,,,,907
+00432ee0,library,?GetCaption@CXTPControl@@UBE?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@XZ,,,
+006a4ce0,library,?IsCaptionVisible@CXTPControl@@UBEHXZ,,,
+006ae9b0,library,?GetInterfaceMap@CXTPCommandBar@@MBEPBUAFX_INTERFACEMAP@@XZ,,,
