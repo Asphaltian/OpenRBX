@@ -130,6 +130,8 @@ public:
 	void FUN_00456c00(int id, RBX::Verb* verb);
 	void FUN_00456c50(int id, RBX::Verb* verb);
 	void FUN_00456d30();
+
+	virtual BOOL OnNewDocument();
 	BOOL FUN_00459950(std::string p_unk0x04);
 	void FUN_00459c80();
 

@@ -1,6 +1,7 @@
 #include "RobloxDoc.h"
 
 #include "InstanceExplorer.h"
+#include "LogManager.h"
 #include "MainFrm.h"
 #include "network/Players.h"
 #include "v8datamodel/Selection.h"
@@ -172,6 +173,26 @@ void CRobloxDoc::FUN_00456d30()
 	FUN_00456c00(0x80a8, &m_unk0x74->m_unk0x510);
 	FUN_00456c00(0x807b, &m_unk0x74->m_unk0x548);
 	FUN_00456c00(0x807c, &m_unk0x74->m_unk0x52c);
+}
+
+// FUNCTION: ROBLOX 0x00457e30
+BOOL CRobloxDoc::OnNewDocument()
+{
+	if (!CDocument::OnNewDocument()) {
+		return FALSE;
+	}
+
+	try {
+		FUN_00456d30();
+	}
+	catch (std::exception& e) {
+		FUN_0042b3c0(e);
+		AfxMessageBox("An error occured while creating the document", MB_ICONEXCLAMATION);
+		return FALSE;
+	}
+
+	SetModifiedFlag(FALSE);
+	return TRUE;
 }
 
 // FUNCTION: ROBLOX 0x00458620
