@@ -142,6 +142,19 @@ static void FUN_00534250(
 static bool g_unk0x009587d0 = false;
 static std::string g_unk0x009587d4 = "shadetex";
 
+// STUB: ROBLOX 0x00534340
+G3D::Vector2 TextureProxy::getSize()
+{
+	G3D::Vector2 size(0.0f, 0.0f);
+
+	if (!m_unk0x4c.isNull()) {
+		size.x = m_unk0x4c->getWidth();
+		size.y = m_unk0x4c->getHeight();
+	}
+
+	return size;
+}
+
 // STUB: ROBLOX 0x00534d20
 G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevice* rd)
 {
@@ -365,23 +378,6 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 TextureProxyRef TextureProxy::alphaOnlyVersion()
 {
 	return new TextureProxy(this);
-}
-
-G3D::Vector2 TextureProxy::getSize()
-{
-	G3D::TextureRef t = getIfResolved();
-	G3D::Vector2 size;
-
-	if (!t.isNull()) {
-		size.x = (float) t->texelWidth();
-		size.y = (float) t->texelHeight();
-	}
-	else {
-		size.y = 0;
-		size.x = 0;
-	}
-
-	return size;
 }
 
 } // namespace RenderNew
