@@ -62,6 +62,8 @@ public:
 	// FUNCTION: ROBLOX 0x0046edf0
 	RBX::Workspace* FUN_0046edf0() const { return m_unk0x24 ? m_unk0x24->getWorkspace() : NULL; }
 
+	void FUN_0046ef00(std::istream& stream);
+
 protected:
 	virtual void onEvent(const RBX::Selection* source, RBX::SelectionChanged event);
 	virtual void onEvent(const RBX::Workspace* source, RBX::DrawChanged event);

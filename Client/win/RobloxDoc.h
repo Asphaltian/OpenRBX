@@ -132,6 +132,7 @@ public:
 	void FUN_00456d30();
 
 	virtual BOOL OnNewDocument();
+	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	BOOL FUN_00459950(std::string p_unk0x04);
 	void FUN_00459c80();
 

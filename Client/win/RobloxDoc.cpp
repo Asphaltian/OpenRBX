@@ -4,7 +4,11 @@
 #include "LogManager.h"
 #include "MainFrm.h"
 #include "network/Players.h"
+#include "util/ContentProvider.h"
 #include "v8datamodel/Selection.h"
+
+#include <shlobj.h>
+#include <shlwapi.h>
 
 IMPLEMENT_DYNCREATE(CRobloxDoc, CDocument)
 
@@ -172,6 +176,41 @@ void CRobloxDoc::FUN_00456d30()
 	FUN_00456c00(0x80a8, &m_unk0x74->m_unk0x510);
 	FUN_00456c00(0x807b, &m_unk0x74->m_unk0x548);
 	FUN_00456c00(0x807c, &m_unk0x74->m_unk0x52c);
+}
+
+// STUB: ROBLOX 0x00457910
+BOOL CRobloxDoc::OnOpenDocument(LPCTSTR lpszPathName)
+{
+	char cachePath[MAX_PATH];
+	if (SHGetFolderPath(NULL, CSIDL_INTERNET_CACHE, NULL, 0, cachePath) == S_OK) {
+		CString relativePath;
+		BOOL relative =
+			PathRelativePathTo(relativePath.GetBuffer(MAX_PATH), cachePath, FILE_ATTRIBUTE_DIRECTORY, lpszPathName, 0);
+		relativePath.ReleaseBuffer();
+
+		if (relative && relativePath.Left(2).Compare(".\\") == 0) {
+			return FALSE;
+		}
+	}
+
+	try {
+		DeleteContents();
+		FUN_00456d30();
+		SetModifiedFlag(TRUE);
+
+		std::auto_ptr<std::istream> stream =
+			RBX::ContentProvider::singleton().getContent(RBX::ContentId::fromFile(lpszPathName));
+		m_unk0x78->FUN_0046ef00(*stream);
+
+		SetModifiedFlag(FALSE);
+	}
+	catch (std::exception& e) {
+		FUN_0042b3c0(e);
+		ReportSaveLoadException(lpszPathName, NULL, FALSE, AFX_IDP_FAILED_TO_OPEN_DOC);
+		return FALSE;
+	}
+
+	return TRUE;
 }
 
 // FUNCTION: ROBLOX 0x00457e30

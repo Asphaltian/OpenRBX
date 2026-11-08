@@ -10,6 +10,7 @@
 #include "appdraw/VisualEngine.h"
 #include "renderlibnew/AggregatingSceneManager.h"
 #include "util/ContentProvider.h"
+#include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
 #include "v8datamodel/Lighting.h"
 #include "v8datamodel/Sky.h"
@@ -136,12 +137,22 @@ void View::FUN_0050c5c0(void* rd)
 	}
 
 	std::string skyFolder = ContentProvider::singleton().assetFolder() + "Sky\\";
-	files[0] = ContentProvider::singleton().getFile(ft);
-	files[1] = ContentProvider::singleton().getFile(bk);
-	files[2] = ContentProvider::singleton().getFile(lf);
-	files[3] = ContentProvider::singleton().getFile(rt);
-	files[4] = ContentProvider::singleton().getFile(up);
-	files[5] = ContentProvider::singleton().getFile(dn);
+	try {
+		files[0] = ContentProvider::singleton().getFile(ft);
+		files[1] = ContentProvider::singleton().getFile(bk);
+		files[2] = ContentProvider::singleton().getFile(lf);
+		files[3] = ContentProvider::singleton().getFile(rt);
+		files[4] = ContentProvider::singleton().getFile(up);
+		files[5] = ContentProvider::singleton().getFile(dn);
+	}
+	catch (...) {
+		files[0] = skyFolder + "null_plainsky512_ft.jpg";
+		files[1] = skyFolder + "null_plainsky512_bk.jpg";
+		files[2] = skyFolder + "null_plainsky512_lf.jpg";
+		files[3] = skyFolder + "null_plainsky512_rt.jpg";
+		files[4] = skyFolder + "null_plainsky512_up.jpg";
+		files[5] = skyFolder + "null_plainsky512_dn.jpg";
+	}
 
 	std::string moved[6];
 	std::string baseName;
@@ -233,8 +244,16 @@ void View::FUN_0050d3d0(void* rd)
 			);
 		}
 		else if (!m_unk0x54) {
-			FUN_0050c5c0(rd);
-			m_unk0x54 = true;
+			try {
+				FUN_0050c5c0(rd);
+				m_unk0x54 = true;
+			}
+			catch (G3D::GImage::Error& e) {
+				StandardOut::singleton()->print(MESSAGE_ERROR, "Failed to load sky box. %s", e.reason.c_str());
+			}
+			catch (...) {
+				StandardOut::singleton()->print(MESSAGE_ERROR, "Failed to load sky box");
+			}
 		}
 
 		renderLibScene->presetLighting(
