@@ -29,6 +29,8 @@ class ModelInstance : public DescribedCreatable<ModelInstance, PVInstance, sMode
 public:
 	static bool showModelCoord;
 
+	void FUN_00565040(const G3D::Vector3& front);
+
 private:
 	mutable CoordinateFrame modelInPrimary;               // 0x178
 	mutable PartInstance* primaryPart;                    // 0x1a8
@@ -43,7 +45,12 @@ private:
 	float computeFlagHeight() const;
 	Extents computeLocalGridExtents() const;
 	Extents computeWorldGridExtents() const;
-	void dirtyAll() const;
+	void dirtyAll() const
+	{
+		LocalGridExtents.setDirty();
+		WorldGridExtents.setDirty();
+		FlagHeight.setDirty();
+	}
 
 	virtual bool shouldRender3dAdorn() const;
 	virtual void render3dAdorn(Adorn* adorn);

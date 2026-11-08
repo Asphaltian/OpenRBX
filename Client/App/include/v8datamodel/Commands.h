@@ -273,6 +273,10 @@ public:
 	// RBX::TToolVerb<RBX::OscillateMotorTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d1810
 	// RBX::TToolVerb<RBX::OscillateMotorTool,RBX::RunStateVerb>::VTable0x14
+	// TEMPLATE: ROBLOX 0x005d18a0
+	// RBX::TToolVerb<RBX::ModelSetFrontTool,RBX::RunStateVerb>::isChecked
+	// TEMPLATE: ROBLOX 0x005d1900
+	// RBX::TToolVerb<RBX::ModelSetFrontTool,RBX::RunStateVerb>::VTable0x14
 	// TEMPLATE: ROBLOX 0x005d1990
 	// RBX::TToolVerb<RBX::ModelSetPrimaryPartTool,RBX::RunStateVerb>::isChecked
 	// TEMPLATE: ROBLOX 0x005d19c0

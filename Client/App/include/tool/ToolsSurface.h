@@ -33,6 +33,7 @@ extern char sHingeTool[];
 extern char sRightMotorTool[];
 extern char sLeftMotorTool[];
 extern char sOscillateMotorTool[];
+extern char sModelSetFrontTool[];
 extern char sAnchorTool[];
 extern char sLockTool[];
 extern char sResizeTool[];
@@ -220,6 +221,21 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(OscillateMotorTool, 0x4c)
+
+// SIZE 0x4c
+class ModelSetFrontTool : public Named<SurfaceTool, sModelSetFrontTool>
+{
+private:
+	virtual void VTable0x40(Surface* surface);
+
+public:
+	ModelSetFrontTool(Workspace* workspace) : Named<SurfaceTool, sModelSetFrontTool>(workspace) {}
+
+	// FUNCTION: ROBLOX 0x005d18d0
+	virtual const std::string getCursorName() const { return "DirectionCursor"; }
+};
+
+DECOMP_SIZE_ASSERT(ModelSetFrontTool, 0x4c)
 
 // SIZE 0x28
 class ModelTool : public MouseCommand

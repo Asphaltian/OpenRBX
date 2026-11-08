@@ -6,10 +6,12 @@
 #include "tool/DragTool.h"
 #include "tool/GrabTool.h"
 #include "tool/PartDragTool.h"
+#include "util/Math.h"
 #include "util/Sound.h"
 #include "util/SoundWorld.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/Explosion.h"
+#include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Surface.h"
 #include "v8datamodel/Workspace.h"
@@ -46,6 +48,9 @@ char sLeftMotorTool[] = "LeftMotor";
 
 // GLOBAL: ROBLOX 0x00948c34
 char sOscillateMotorTool[] = "OscillateMotor";
+
+// GLOBAL: ROBLOX 0x00948c44
+char sModelSetFrontTool[] = "ModelSetFront";
 
 // GLOBAL: ROBLOX 0x00948c58
 char sAnchorTool[] = "Anchor";
@@ -134,6 +139,15 @@ void SurfaceTool::render3dAdorn(Adorn* adorn)
 {
 	if (part) {
 		DrawAdorn::partSurface(part->getPart(), surfaceId, adorn, G3D::Color4(G3D::Color3::orange(), 1.0f));
+	}
+}
+
+// FUNCTION: ROBLOX 0x006399e0
+void ModelSetFrontTool::VTable0x40(Surface* surface)
+{
+	PartInstance* part = surface->getPartInstance();
+	if (ModelInstance* model = dynamic_cast<ModelInstance*>(part->getTopLevelPVParent())) {
+		model->FUN_00565040(Math::getWorldNormal(surface->getNormalId(), part->getCoordinateFrame()));
 	}
 }
 

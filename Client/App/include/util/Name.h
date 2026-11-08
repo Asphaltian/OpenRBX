@@ -422,6 +422,8 @@ private:
 	// RBX::Name::doDeclare<&RBX::sLeftMotorTool>
 	// TEMPLATE: ROBLOX 0x005d0210
 	// RBX::Name::doDeclare<&RBX::sOscillateMotorTool>
+	// TEMPLATE: ROBLOX 0x005d0280
+	// RBX::Name::doDeclare<&RBX::sModelSetFrontTool>
 	// TEMPLATE: ROBLOX 0x005d02f0
 	// RBX::Name::doDeclare<&RBX::sAnchorTool>
 	// TEMPLATE: ROBLOX 0x005d0360
@@ -795,6 +797,8 @@ private:
 	// RBX::Name::callDoDeclare<&RBX::sLeftMotorTool>
 	// TEMPLATE: ROBLOX 0x005d0960
 	// RBX::Name::callDoDeclare<&RBX::sOscillateMotorTool>
+	// TEMPLATE: ROBLOX 0x005d0970
+	// RBX::Name::callDoDeclare<&RBX::sModelSetFrontTool>
 	// TEMPLATE: ROBLOX 0x005d0980
 	// RBX::Name::callDoDeclare<&RBX::sAnchorTool>
 	// TEMPLATE: ROBLOX 0x005d0990
@@ -930,6 +934,8 @@ public:
 	// RBX::Named<RBX::SurfaceTool,&RBX::sLeftMotorTool>::getName
 	// TEMPLATE: ROBLOX 0x005d1880
 	// RBX::Named<RBX::SurfaceTool,&RBX::sOscillateMotorTool>::getName
+	// TEMPLATE: ROBLOX 0x005d1970
+	// RBX::Named<RBX::SurfaceTool,&RBX::sModelSetFrontTool>::getName
 	// TEMPLATE: ROBLOX 0x005d1b00
 	// RBX::Named<RBX::ModelTool,&RBX::sAnchorTool>::getName
 	// TEMPLATE: ROBLOX 0x005d1bc0

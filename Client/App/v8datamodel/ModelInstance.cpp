@@ -113,6 +113,18 @@ void ModelInstance::updatePrimaryPart(PartInstance* set) const
 	}
 }
 
+// FUNCTION: ROBLOX 0x00565040
+void ModelInstance::FUN_00565040(const Vector3& front)
+{
+	if (primaryPart) {
+		CoordinateFrame look;
+		look.lookAt(front);
+		modelInPrimary =
+			CoordinateFrame(primaryPart->getCoordinateFrame().rotation.transpose() * look.rotation, Vector3::zero());
+		dirtyAll();
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1005a350
 // FUNCTION: ROBLOX 0x00565130
 Extents ModelInstance::computeWorldGridExtents() const
