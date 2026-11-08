@@ -277,6 +277,7 @@ set(OPENRBX_APP_SOURCES
   Client/App/v8datamodel/UserController.cpp
   Client/App/v8datamodel/Value.cpp
   Client/App/v8datamodel/Visit.cpp
+  Client/App/v8datamodel/Unknown005d2700.cpp
   Client/App/v8datamodel/factoryregistration.cpp
   Client/App/v8tree/Service.cpp
 )

@@ -39,7 +39,7 @@ CRobloxDoc::~CRobloxDoc()
 }
 
 // FUNCTION: ROBLOX 0x00456cb0
-CRobloxDoc::CRobloxDoc() : m_unk0x74(0), m_unk0x78(NULL)
+CRobloxDoc::CRobloxDoc() : m_unk0x78(NULL)
 {
 }
 

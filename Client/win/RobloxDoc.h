@@ -4,7 +4,9 @@
 #include "VerbBinder.h"
 #include "Workspace.h"
 #include "decomp.h"
+#include "v8datamodel/Unknown005d2700.h"
 
+#include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include <memory>
 #include <string>
@@ -79,10 +81,10 @@ public:
 private:
 	friend class CRobloxView;
 
-	std::auto_ptr<XmlElement> m_unk0x60; // 0x60
-	std::vector<undefined4*> m_unk0x64;  // 0x64
-	undefined4 m_unk0x74;                // 0x74
-	CWorkspace* m_unk0x78;               // 0x78
+	std::auto_ptr<XmlElement> m_unk0x60;               // 0x60
+	std::vector<undefined4*> m_unk0x64;                // 0x64
+	boost::scoped_ptr<RBX::Unknown005d2700> m_unk0x74; // 0x74
+	CWorkspace* m_unk0x78;                             // 0x78
 };
 
 DECOMP_SIZE_ASSERT(CRobloxDoc, 0x7c)

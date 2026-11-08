@@ -530,6 +530,28 @@ void WatchCameraCommand::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
+// FUNCTION: ROBLOX 0x0059b280
+void MoveUpSelectionVerb::doIt(IDataState* dataState)
+{
+	FUN_00596660(dataModel);
+
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+
+	if (filteredSelection->items().size() > 0) {
+		MegaDragger dragger(NULL, filteredSelection->items(), workspace.get());
+		dragger.startDragging();
+		dragger.safeMoveNoDrop(G3D::Vector3(0.0f, moveUpHeight, 0.0f));
+		dragger.finishDragging();
+
+		(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(CLICK_SOUND);
+
+		workspace->raiseDrawChanged();
+		dataState->clearStack();
+		dataState->setDirty(true);
+	}
+}
+
 // FUNCTION: ROBLOX 0x0059b3a0
 void MoveDownSelectionVerb::doIt(IDataState* dataState)
 {

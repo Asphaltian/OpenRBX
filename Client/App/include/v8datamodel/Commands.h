@@ -442,6 +442,79 @@ protected:
 
 DECOMP_SIZE_ASSERT(BoolPropertyVerb, 0x28)
 
+// VTABLE: ROBLOX 0x0082af04
+// SIZE 0x28
+class AnchorVerb : public BoolPropertyVerb
+{
+public:
+	// FUNCTION: ROBLOX 0x005d0830
+	AnchorVerb(DataModel* dataModel) : BoolPropertyVerb("AnchorVerb", dataModel, "Anchored") {}
+};
+
+DECOMP_SIZE_ASSERT(AnchorVerb, 0x28)
+
+// VTABLE: ROBLOX 0x0082add4
+// SIZE 0x28
+class TranslucentVerb : public BoolPropertyVerb
+{
+public:
+	// FUNCTION: ROBLOX 0x005cfb20
+	TranslucentVerb(DataModel* dataModel) : BoolPropertyVerb("TranslucentVerb", dataModel, "Transparent") {}
+};
+
+DECOMP_SIZE_ASSERT(TranslucentVerb, 0x28)
+
+// VTABLE: ROBLOX 0x0082adfc
+// SIZE 0x28
+class CanCollideVerb : public BoolPropertyVerb
+{
+public:
+	// FUNCTION: ROBLOX 0x005cfba0
+	CanCollideVerb(DataModel* dataModel) : BoolPropertyVerb("CanCollideVerb", dataModel, "CanCollide") {}
+};
+
+DECOMP_SIZE_ASSERT(CanCollideVerb, 0x28)
+
+// VTABLE: ROBLOX 0x0082ae74
+// SIZE 0x28
+class MoveUpSelectionVerb : public EditSelectionVerb
+{
+private:
+	float moveUpHeight; // 0x24
+
+public:
+	MoveUpSelectionVerb(DataModel* dataModel, const std::string& name, float moveUpHeight)
+		: EditSelectionVerb(name, dataModel), moveUpHeight(moveUpHeight)
+	{
+	}
+
+	virtual void doIt(IDataState* dataState); // vtable+0x10
+};
+
+DECOMP_SIZE_ASSERT(MoveUpSelectionVerb, 0x28)
+
+// VTABLE: ROBLOX 0x0082ae8c
+// SIZE 0x28
+class MoveUpPlateVerb : public MoveUpSelectionVerb
+{
+public:
+	// FUNCTION: ROBLOX 0x005cfc20
+	MoveUpPlateVerb(DataModel* dataModel) : MoveUpSelectionVerb(dataModel, "SelectionUpPlate", 0.4f) {}
+};
+
+DECOMP_SIZE_ASSERT(MoveUpPlateVerb, 0x28)
+
+// VTABLE: ROBLOX 0x0082aea4
+// SIZE 0x28
+class MoveUpBrickVerb : public MoveUpSelectionVerb
+{
+public:
+	// FUNCTION: ROBLOX 0x005cfcb0
+	MoveUpBrickVerb(DataModel* dataModel) : MoveUpSelectionVerb(dataModel, "SelectionUpBrick", 1.2f) {}
+};
+
+DECOMP_SIZE_ASSERT(MoveUpBrickVerb, 0x28)
+
 // SIZE 0x24
 class RotateSelectionVerb : public RotateAxisCommand
 {
