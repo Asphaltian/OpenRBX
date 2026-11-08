@@ -228,7 +228,7 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 					}
 				}
 
-				mipData.resize(Ogre::Image::calculateSize(numMipmaps, 1, width, height, 1, Ogre::PF_R8G8B8), 0);
+				mipData.resize(Ogre::Image::calculateSize(numMipmaps, 1, width, height, 1, Ogre::PF_BYTE_RGB), 0);
 
 				unsigned char* dst = &mipData[0];
 				unsigned char* prev = NULL;
@@ -256,12 +256,12 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 				}
 
 				shadedImage.loadDynamicImage(
-					&mipData[0], bumpImage.getWidth(), bumpImage.getHeight(), 1, Ogre::PF_R8G8B8, false, 1, numMipmaps
+					&mipData[0], bumpImage.getWidth(), bumpImage.getHeight(), 1, Ogre::PF_BYTE_RGB, false, 1, numMipmaps
 				);
 			}
 			else {
 				shadedImage.loadDynamicImage(
-					bumpImage.getData(), bumpImage.getWidth(), bumpImage.getHeight(), 1, Ogre::PF_R8G8B8, false, 1, 0
+					bumpImage.getData(), bumpImage.getWidth(), bumpImage.getHeight(), 1, Ogre::PF_BYTE_RGB, false, 1, 0
 				);
 			}
 
