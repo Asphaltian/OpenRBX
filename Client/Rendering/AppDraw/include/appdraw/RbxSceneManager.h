@@ -7,6 +7,12 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneManagerEnumerator.h>
 
+namespace RBX {
+namespace ViewNew {
+class View;
+} // namespace ViewNew
+} // namespace RBX
+
 namespace Ogre {
 
 // SIZE 0x8ab0
@@ -88,6 +94,7 @@ protected:
 	SceneMgrQueuedRenderableVisitor mDefaultQueuedRenderableVisitor; // 0x8a9c
 
 	friend class SceneMgrQueuedRenderableVisitor;
+	friend class RBX::ViewNew::View;
 
 	MeshPtr createSkydomePlane(
 		BoxPlane bp,

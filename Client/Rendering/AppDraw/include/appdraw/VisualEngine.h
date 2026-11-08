@@ -23,6 +23,10 @@ namespace RenderNew {
 class Mesh;
 class RenderScene;
 } // namespace RenderNew
+
+namespace ViewNew {
+class View;
+} // namespace ViewNew
 } // namespace RBX
 
 namespace Ogre {
@@ -140,6 +144,7 @@ private:
 	friend class RBX::AdornRbxGfx;
 	friend class RBX::RenderNew::Mesh;
 	friend class RBX::RenderNew::RenderScene;
+	friend class RBX::ViewNew::View;
 	friend class RbxFont;
 
 	SceneManager* m_unk0x04; // 0x04

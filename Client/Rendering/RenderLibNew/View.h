@@ -66,6 +66,7 @@ private:
 	virtual void updateLighting();                                                   // vtable+0x24
 	virtual void invalidateLighting(bool updateSkybox);                              // vtable+0x28
 
+	void FUN_0050c5c0(void* rd);
 	void FUN_0050d3d0(void* rd);
 
 	// SYNTHETIC: ROBLOX 0x0050dca0

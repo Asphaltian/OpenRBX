@@ -1659,6 +1659,10 @@ void RbxSceneManager::setSkyBox(
 )
 {
 	if (enable) {
+		if (m_unk0x8a84.isNull()) {
+			m_unk0x8a84.bind(new RbxSky(this, m_unk0x8a68, true));
+		}
+
 		MaterialPtr m = MaterialManager::getSingleton().getByName(materialName);
 		if (m.isNull()) {
 			OGRE_EXCEPT(

@@ -57,7 +57,7 @@ void RenderScene::FUN_0052c9b0(Ogre::VisualEngine* engine, bool p_unk0x8e)
 				Ogre::LogManager::getSingleton().logMessage("RbxGfx : FAILED to create light" + name);
 			}
 		}
-		light->setCastShadows(m_unk0x8c);
+		light->setCastShadows(effectSettings.stencilShadows());
 
 		if (m_unk0x04 && !m_unk0x04->m_unk0x248.isNull()) {
 			const Ogre::AxisAlignedBox& box = m_unk0x04->m_unk0x248;
@@ -149,10 +149,39 @@ void RenderScene::setThrottle(float t, float m, bool s, float c)
 	STUB(0x52d400);
 }
 
+// FUNCTION: ROBLOX 0x0052d570
+void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>& L)
+{
+	desiredLighting = L;
+	lighting = effectSettings.update(
+		shadingQuality, meshDetail, shadows, cameraDistance, desiredLighting, desiredSkyParameters, skyParameters
+	);
+}
+
 // STUB: ROBLOX 0x0052d7e0
 RenderScene::~RenderScene()
 {
 	STUB(0x52d7e0);
+}
+
+// FUNCTION: ROBLOX 0x0052da20
+void RenderScene::presetLighting(
+	G3D::ReferenceCountedPointer<G3D::Sky> sky,
+	G3D::LightingParameters skyParameters,
+	G3D::Color3 ambientTop,
+	G3D::Color3 ambientBottom
+)
+{
+	desiredSkyParameters = skyParameters;
+
+	G3D::LightingRef lighting = G3D::Lighting::create();
+	lighting->ambientTop = ambientTop;
+	lighting->ambientBottom = ambientBottom;
+
+	G3D::GLight sun = G3D::GLight::directional(skyParameters.lightDirection, skyParameters.lightColor * 0.9);
+	lighting->shadowedLightArray.append(sun);
+
+	setLighting(lighting);
 }
 
 // FUNCTION: ROBLOX 0x0052dcf0
@@ -177,7 +206,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 	Ogre::Camera* ogreCamera = engine->m_unk0x08;
 	G3D::CoordinateFrame cameraFrame = camera.getCoordinateFrame();
 
-	if (m_unk0x8c) {
+	if (effectSettings.stencilShadows()) {
 		engine->m_unk0x04->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 		engine->m_unk0x04->setShadowColour(Ogre::ColourValue(0.5f, 0.5f, 0.5f, 1.0f));
 	}
@@ -201,7 +230,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 		engine->m_unk0x04->getRootSceneNode()->addChild(m_unk0x00);
 	}
 
-	FUN_0052c9b0(engine, m_unk0x8e);
+	FUN_0052c9b0(engine, effectSettings.useAllLightsInUnshadowedPass());
 	bool hardwareMeshes = engine->m_unk0x7f5;
 
 	if (m_unk0x08.isNull()) {
@@ -252,7 +281,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 		}
 
 		G3D::ReferenceCountedPointer<Mesh> mesh = chunk->getMesh();
-		if (m_unk0x8c && mesh->m_unk0x38 == NULL) {
+		if (effectSettings.stencilShadows() && mesh->m_unk0x38 == NULL) {
 			mesh->FUN_005324e0(engine);
 		}
 
@@ -477,7 +506,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 		m_unk0x04->FUN_00674e30(&engine->m_unk0x18);
 		m_unk0x04->m_unk0x245 = false;
 		m_unk0x04->setVisible(true);
-		if (m_unk0x8c) {
+		if (effectSettings.stencilShadows()) {
 			m_unk0x04->m_unk0x268 = 15.0f;
 			m_unk0x04->m_unk0x26c = 600;
 		}
