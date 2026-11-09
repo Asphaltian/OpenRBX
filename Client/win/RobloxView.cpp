@@ -20,10 +20,10 @@ ON_WM_DESTROY()
 ON_WM_SETFOCUS()
 END_MESSAGE_MAP()
 
-// STUB: ROBLOX 0x0045d500
+// FUNCTION: ROBLOX 0x0045d500
 void CRobloxView::onEvent(const RBX::Network::Players* source, RBX::SuperSafeChanged event)
 {
-	STUB(0x45d500);
+	PostMessage(0x46b);
 }
 
 // FUNCTION: ROBLOX 0x0045d520
