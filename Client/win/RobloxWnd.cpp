@@ -616,7 +616,7 @@ void CRobloxWnd::FUN_004622d0(bool p_unk0x04)
 	m_unk0xa4->popState();
 }
 
-// STUB: ROBLOX 0x00462450
+// FUNCTION: ROBLOX 0x00462450
 void CRobloxWnd::FUN_00462450(bool p_unk0x04)
 {
 	if (RBX::Network::Players::findLocalCharacter(m_unk0x70.get()) == NULL) {
@@ -628,11 +628,10 @@ void CRobloxWnd::FUN_00462450(bool p_unk0x04)
 	}
 
 	Ogre::Timer timer;
-	RenderStats& stats = m_unk0xa8->getRenderStats();
-	stats.cpuRenderTotal.tick();
-	timer.reset();
 	float milliseconds;
 	{
+		Unknown0045f640 cpuTimer(m_unk0xa8->getRenderStats().cpuRenderTotal);
+		timer.reset();
 		RBX::DataModel::Lock lock(m_unk0x70);
 		m_unk0x70->renderPass2d(m_unk0xac.get(), this);
 		m_unk0x70->renderPass3dAdorn(m_unk0xac.get());
@@ -641,24 +640,16 @@ void CRobloxWnd::FUN_00462450(bool p_unk0x04)
 		m_unk0xac->finishRenderPass();
 		milliseconds = timer.getMilliseconds();
 	}
-	stats.cpuRenderTotal.tock();
 
 	if (Ogre::g_unk0x00949dd0) {
 		m_unk0xb0->m_unk0x18.FUN_00671ef0(0).m_unk0x00 = milliseconds;
 	}
 
-	RenderStats& renderStats = m_unk0xa8->getRenderStats();
-	renderStats.render2D.tick();
-	if (m_unk0x70) {
-		RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
-		if (runService) {
-			runService->runViewValid(this);
-		}
-	}
-	renderStats.render2D.tock();
+	Unknown0045f640 render2DTimer(m_unk0xa8->getRenderStats().render2D);
+	runViewValid(m_unk0x70.get(), this);
 }
 
-// STUB: ROBLOX 0x00462630
+// FUNCTION: ROBLOX 0x00462630
 void CRobloxWnd::FUN_00462630(bool p_unk0x04)
 {
 	if (!m_unk0x81) {
@@ -668,10 +659,7 @@ void CRobloxWnd::FUN_00462630(bool p_unk0x04)
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		}
 		else if (!m_unk0xa8.get()) {
-			RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
-			if (runService) {
-				runService->runViewValid(this);
-			}
+			runViewValid(m_unk0x70.get(), this);
 		}
 		else if (m_unk0x5c == 2) {
 			FUN_004622d0(p_unk0x04);
