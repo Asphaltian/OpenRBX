@@ -1,6 +1,7 @@
 // clang-format off
 #include <OgreAnimation.h>
 #include <OgreCamera.h>
+#include <OgreRenderSystem.h>
 #include <OgreRenderTarget.h>
 #include <OgreSceneManager.h>
 #include <OgreTimer.h>
@@ -12,15 +13,18 @@
 #include "RenderSettings.h"
 #include "View.h"
 #include "Workspace.h"
+#include "appdraw/AdornG3D.h"
 #include "appdraw/AdornRbxGfx.h"
 #include "appdraw/VisualEngine.h"
 #include "network/Players.h"
+#include "rbxview/View.h"
 #include "renderlib/Profiler.h"
 #include "renderlib/RenderStats.h"
 #include "renderlibnew/Chunk.h"
 #include "util/RunStateOwner.h"
 #include "util/scopedassign.h"
 #include "util/standardout.h"
+#include "v8datamodel/Camera.h"
 #include "v8datamodel/GlobalSettings.h"
 #include "v8datamodel/Stats.h"
 #include "v8datamodel/UserController.h"
@@ -272,13 +276,54 @@ void CRobloxWnd::InvalidateRunView()
 	InvalidateRgn(NULL, FALSE);
 }
 
-// STUB: ROBLOX 0x00460d30
+// FUNCTION: ROBLOX 0x00460d30
 void CRobloxWnd::FUN_00460d30()
 {
-	STUB(0x460d30);
+	double frameRate;
+	{
+		ATL::CCritSecLock lock(g_unk0x0095448c);
+		if (m_unk0x88 == 666.0) {
+			return;
+		}
+		frameRate = m_unk0x88;
+		m_unk0x88 = 666.0;
+	}
+
+	if (m_unk0xa8.get() == NULL || m_unk0x70 == NULL) {
+		return;
+	}
+
+	RBX::DataModel::Lock lock(m_unk0x70);
+
+	float shadingQuality = m_unk0xa8->getShadingQuality();
+	float meshDetail = m_unk0xa8->getMeshDetail();
+	if (frameRate < -0.01) {
+		shadingQuality *= 0.8f;
+		meshDetail *= 0.8f;
+	}
+	else if (frameRate > 0.002) {
+		shadingQuality = shadingQuality * 1.05f + 1.0f;
+		meshDetail = meshDetail * 1.05f + 1.0f;
+	}
+
+	shadingQuality = std::min(shadingQuality, CRenderSettings::singleton().FUN_004482a0());
+	shadingQuality = std::max(shadingQuality, CRenderSettings::singleton().FUN_00448290());
+	meshDetail = std::min(meshDetail, CRenderSettings::singleton().FUN_004482c0());
+	meshDetail = std::max(meshDetail, CRenderSettings::singleton().FUN_004482b0());
+
+	if (m_unk0x70->getWorkspace() && m_unk0x70->getWorkspace()->getCamera()) {
+		const G3D::CoordinateFrame& cameraFrame = m_unk0x70->getWorkspace()->getCamera()->getCameraCoordinateFrame();
+		float distance =
+			(cameraFrame.translation - m_unk0x70->getWorkspace()->getCamera()->getCameraFocus().translation).length();
+		if (m_unk0xb0 != NULL &&
+			!Ogre::g_unk0x0096134c->getRenderSystem()->getCapabilities()->hasCapability(Ogre::RSC_VERTEX_PROGRAM)) {
+			RBX::ViewBase::getShadowsEnabled() = false;
+		}
+		m_unk0xa8->updateSettings(shadingQuality, meshDetail, RBX::ViewBase::getShadowsEnabled(), distance);
+	}
 }
 
-// STUB: ROBLOX 0x00461050
+// FUNCTION: ROBLOX 0x00461050
 void CRobloxWnd::OnTimer(UINT_PTR nIDEvent)
 {
 	switch (nIDEvent) {
@@ -470,10 +515,11 @@ void CRobloxWnd::OnSize(UINT nType, int cx, int cy)
 	}
 }
 
-// STUB: ROBLOX 0x004619e0
+// FUNCTION: ROBLOX 0x004619e0
 void CRobloxWnd::FUN_004619e0()
 {
-	STUB(0x4619e0);
+	m_unk0xa8.reset(new RBX::View::View(m_unk0x70));
+	m_unk0xac.reset(new RBX::AdornG3D(m_unk0xa4.get()));
 }
 
 // STUB: ROBLOX 0x004622d0

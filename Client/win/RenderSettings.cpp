@@ -79,30 +79,6 @@ static G3D::Vector2int16 defaultFullscreenSize()
 	return G3D::Vector2int16(800, 600);
 }
 
-// FUNCTION: ROBLOX 0x00448290
-float CRenderSettings::FUN_00448290() const
-{
-	return m_unk0x10c;
-}
-
-// FUNCTION: ROBLOX 0x004482a0
-float CRenderSettings::FUN_004482a0() const
-{
-	return m_unk0x110;
-}
-
-// FUNCTION: ROBLOX 0x004482b0
-float CRenderSettings::FUN_004482b0() const
-{
-	return m_unk0x114;
-}
-
-// FUNCTION: ROBLOX 0x004482c0
-float CRenderSettings::FUN_004482c0() const
-{
-	return m_unk0x118;
-}
-
 // FUNCTION: ROBLOX 0x004482d0
 CRenderSettings::BevelMode CRenderSettings::FUN_004482d0() const
 {

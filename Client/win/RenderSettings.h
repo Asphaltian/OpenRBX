@@ -241,10 +241,18 @@ public:
 
 	CRenderSettings();
 
-	float FUN_00448290() const;
-	float FUN_004482a0() const;
-	float FUN_004482b0() const;
-	float FUN_004482c0() const;
+	// FUNCTION: ROBLOX 0x00448290
+	float FUN_00448290() const { return m_unk0x10c; }
+
+	// FUNCTION: ROBLOX 0x004482a0
+	float FUN_004482a0() const { return m_unk0x110; }
+
+	// FUNCTION: ROBLOX 0x004482b0
+	float FUN_004482b0() const { return m_unk0x114; }
+
+	// FUNCTION: ROBLOX 0x004482c0
+	float FUN_004482c0() const { return m_unk0x118; }
+
 	BevelMode FUN_004482d0() const;
 	AntialiasingMode FUN_004482e0() const;
 	AASamples FUN_004482f0() const;

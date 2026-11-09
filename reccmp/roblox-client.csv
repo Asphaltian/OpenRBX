@@ -6219,6 +6219,7 @@ address,type,symbol,name,module,size
 0080d834,global,??_7?$TypedStatsItem@VStopwatch@G3D@@@Stats@RBX@@6B?$Described@VInstance@RBX@@$1?sInstance@2@3QBDBVDescribedBase@Reflection@2@@Reflection@2@@,,,
 0080d83c,global,??_7?$TypedStatsItem@VStopwatch@G3D@@@Stats@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@2@@,,,
 0080d84c,global,??_7?$TypedStatsItem@VStopwatch@G3D@@@Stats@RBX@@6B?$GuidItem@VInstance@RBX@@@2@@,,,
+0080d504,global,??_7AdornG3D@RBX@@6B@,,,
 0080da6c,global,??_7RenderStatsItem@CRobloxWnd@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@RBX@@@,,,
 0080da7c,global,??_7RenderStatsItem@CRobloxWnd@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@RBX@@@,,,
 0080da8c,global,??_7RenderStatsItem@CRobloxWnd@@6B?$Notifier@VInstance@RBX@@UDescendentRemoving@2@@RBX@@@,,,
