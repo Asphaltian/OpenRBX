@@ -214,6 +214,13 @@ void EngineStatsCommand::doIt(IDataState* dataState)
 	dataModel->getWorkspace()->getWorld()->getContactManager().getSpatialHash().doStats();
 }
 
+// FUNCTION: ROBLOX 0x00596fc0
+static void FUN_00596fc0(UndoState* undoState, RedoState* redoState, boost::shared_ptr<Instance> instance)
+{
+	undoState->addParentProperty(*instance);
+	redoState->addDelete(*instance);
+}
+
 // FUNCTION: ROBLOX 0x00597040
 G3D::Matrix3 TiltSelectionVerb::getRotationAxis()
 {
@@ -504,6 +511,33 @@ SecondaryControllerCommand::SecondaryControllerCommand(DataModel* dataModel)
 {
 }
 
+// SIZE 0x8
+class Unknown00598fd0
+{
+public:
+	Unknown00598fd0(std::vector<Instance*>& newSelection, bool& changed) : m_unk0x00(newSelection), m_unk0x04(changed)
+	{
+	}
+
+	// FUNCTION: ROBLOX 0x00598fd0
+	void operator()(const boost::shared_ptr<Instance>& instance)
+	{
+		if (instance->numChildren() > 0) {
+			for (unsigned int i = 0; i < instance->numChildren(); i++) {
+				m_unk0x00.push_back(instance->getChild(i));
+			}
+
+			instance->promoteChildren();
+			instance->setParent(NULL);
+			m_unk0x04 = true;
+		}
+	}
+
+private:
+	std::vector<Instance*>& m_unk0x00; // 0x00
+	bool& m_unk0x04;                   // 0x04
+};
+
 // FUNCTION: ROBLOX 0x0059a2a0
 EditSelectionVerb::EditSelectionVerb(VerbContainer* container, std::string name, DataModel* dataModel)
 	: Verb(container, name), workspace(shared_from(dataModel ? dataModel->find<Workspace>() : NULL)),
@@ -561,7 +595,29 @@ void GroupSelectionVerb::doIt(IDataState* dataState)
 // STUB: ROBLOX 0x0059aaf0
 void UngroupSelectionVerb::doIt(IDataState* dataState)
 {
-	STUB(0x59aaf0);
+	FUN_00596660(dataModel);
+
+	FilteredSelection<ModelInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<ModelInstance> >() : NULL;
+
+	std::vector<boost::shared_ptr<Instance> > models;
+	for (std::vector<ModelInstance*>::const_iterator iter = filteredSelection->begin();
+		 iter != filteredSelection->end();
+		 ++iter) {
+		models.push_back((*iter)->shared_from_this());
+	}
+
+	std::vector<Instance*> newSelection;
+	bool changed = false;
+	std::for_each(models.begin(), models.end(), Unknown00598fd0(newSelection, changed));
+
+	if (changed) {
+		filteredSelection->setSelection(newSelection.begin(), newSelection.end());
+		(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(PING_SOUND);
+	}
+
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // STUB: ROBLOX 0x0059ad50
@@ -947,10 +1003,34 @@ void DuplicateSelectionVerb::doIt(IDataState* dataState)
 	STUB(0x59c2f0);
 }
 
-// STUB: ROBLOX 0x0059c5c0
+// FUNCTION: ROBLOX 0x0059c5c0
 void DeleteBase::doIt(IDataState* dataState)
 {
-	STUB(0x59c5c0);
+	FUN_00596660(dataModel);
+
+	if (selection->size() > 0) {
+		Selection* currentSelection = dataModel ? dataModel->create<Selection>() : NULL;
+
+		UndoState* undoState = new UndoState();
+		RedoState* redoState = new RedoState();
+
+		std::for_each(selection->begin(), selection->end(), boost::bind(&FUN_00596fc0, undoState, redoState, _1));
+
+		while (boost::shared_ptr<Instance> instance = selection->front()) {
+			instance->setParent(NULL);
+		}
+
+		(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(PAGE_SOUND);
+
+		if (undoState) {
+			dataState->pushState(getName(), undoState, redoState);
+		}
+		else {
+			dataState->clearStack();
+		}
+
+		dataState->setDirty(true);
+	}
 }
 
 // STUB: ROBLOX 0x0059c860
@@ -1073,50 +1153,6 @@ void ForceAssertionCommand::doIt(IDataState* dataState)
 bool EngineStatsCommand::isEnabled() const
 {
 	return true;
-}
-
-// FUNCTION: ROBLOX 0x0059cd30
-void XmlState::addAllProperties(Instance& instance)
-{
-	addState(instance.write(), instance);
-}
-
-// FUNCTION: ROBLOX 0x0059cd50
-void XmlState::addParentProperty(Instance& instance)
-{
-	XmlElement* element = Instance::propParent.write(&instance, true);
-	addState(element, instance);
-}
-
-// FUNCTION: ROBLOX 0x0059cda0
-void XmlState::addProperty(const Reflection::Property& property)
-{
-	XmlElement* element = property.getDescriptor().write(property.getInstance(), false);
-	if (element) {
-		addState(element, *static_cast<Instance*>(property.getInstance()));
-	}
-}
-
-// FUNCTION: ROBLOX 0x0059cdf0
-void UndoState::addState(XmlElement* element, Instance& instance)
-{
-	if (element) {
-		if (!element->findAttribute(name_referent)) {
-			element->addAttribute(name_referent, InstanceHandle(&instance));
-		}
-
-		root.pushFrontChild(element);
-	}
-}
-
-// FUNCTION: ROBLOX 0x0059ce50
-void RedoState::addState(XmlElement* element, Instance& instance)
-{
-	if (!element->findAttribute(name_referent)) {
-		element->addAttribute(name_referent, InstanceHandle(&instance));
-	}
-
-	root.pushBackChild(element);
 }
 
 } // namespace RBX

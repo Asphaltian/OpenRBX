@@ -1,8 +1,61 @@
 #include "v8tree/Verb.h"
 
+#include "reflection/property.h"
+#include "util/Handle.h"
 #include "util/Name.h"
+#include "v8tree/Instance.h"
 
 namespace RBX {
+
+// FUNCTION: ROBLOX 0x0059cd30
+void XmlState::addAllProperties(Instance& instance)
+{
+	addState(instance.write(), instance);
+}
+
+// FUNCTION: ROBLOX 0x0059cd50
+void XmlState::addParentProperty(Instance& instance)
+{
+	XmlElement* element = Instance::propParent.write(&instance, true);
+	addState(element, instance);
+}
+
+// FUNCTION: ROBLOX 0x0059cd80
+void XmlState::addDelete(Instance& instance)
+{
+	addState(instance.writeDelete(), instance);
+}
+
+// FUNCTION: ROBLOX 0x0059cda0
+void XmlState::addProperty(const Reflection::Property& property)
+{
+	XmlElement* element = property.getDescriptor().write(property.getInstance(), false);
+	if (element) {
+		addState(element, *static_cast<Instance*>(property.getInstance()));
+	}
+}
+
+// FUNCTION: ROBLOX 0x0059cdf0
+void UndoState::addState(XmlElement* element, Instance& instance)
+{
+	if (element) {
+		if (!element->findAttribute(name_referent)) {
+			element->addAttribute(name_referent, InstanceHandle(&instance));
+		}
+
+		root.pushFrontChild(element);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0059ce50
+void RedoState::addState(XmlElement* element, Instance& instance)
+{
+	if (!element->findAttribute(name_referent)) {
+		element->addAttribute(name_referent, InstanceHandle(&instance));
+	}
+
+	root.pushBackChild(element);
+}
 
 // FUNCTION: WEBSERVICE 0x100d09b0
 // FUNCTION: ROBLOX 0x00751f70

@@ -211,6 +211,12 @@ public:
 
 	void clearSelection() { rootSelection->clearSelection(); }
 
+	template <class _InIt>
+	void setSelection(_InIt _First, _InIt _Last)
+	{
+		rootSelection->setSelection(_First, _Last);
+	}
+
 	typename std::vector<T*>::const_iterator begin() const { return filteredSelection.begin(); }
 	typename std::vector<T*>::const_iterator end() const { return filteredSelection.end(); }
 
@@ -323,6 +329,8 @@ private:
 };
 
 // clang-format off
+// TEMPLATE: ROBLOX 0x004205f0
+// RBX::Selection::setSelection<std::_Vector_iterator<RBX::Instance *,std::allocator<RBX::Instance *> > >
 // TEMPLATE: WEBSERVICE 0x1005e8c0
 // TEMPLATE: ROBLOX 0x005688f0
 // RBX::Selection::setSelection<std::_Vector_const_iterator<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > >

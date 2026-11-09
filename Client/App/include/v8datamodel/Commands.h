@@ -696,28 +696,6 @@ public:
 
 DECOMP_SIZE_ASSERT(MoveDownSelectionVerb, 0x24)
 
-// VTABLE: ROBLOX 0x00801144 RBX::XmlState
-// VTABLE: ROBLOX 0x0080113c RBX::Debugable
-// SIZE 0x3c
-class UndoState : public XmlState
-{
-public:
-	virtual void addState(XmlElement* element, Instance& instance);
-};
-
-DECOMP_SIZE_ASSERT(UndoState, 0x3c)
-
-// VTABLE: ROBLOX 0x0080115c RBX::XmlState
-// VTABLE: ROBLOX 0x00801154 RBX::Debugable
-// SIZE 0x3c
-class RedoState : public XmlState
-{
-public:
-	virtual void addState(XmlElement* element, Instance& instance);
-};
-
-DECOMP_SIZE_ASSERT(RedoState, 0x3c)
-
 // SIZE 0x1c
 class CameraVerb : public Verb
 {

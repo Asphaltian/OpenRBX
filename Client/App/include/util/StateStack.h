@@ -2,13 +2,12 @@
 #define UTIL_STATESTACK_H
 
 #include "decomp.h"
+#include "util/Name.h"
 
 #include <string>
 #include <vector>
 
 namespace RBX {
-
-class Name;
 
 // SIZE 0x18
 template <class T>
@@ -59,6 +58,12 @@ private:
 // STUB: ROBLOX 0x00411e90
 // ?pushState@?$StateStack@VXmlState@RBX@@@RBX@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAVXmlState@2@1@Z
 // clang-format on
+
+template <class T>
+inline void StateStack<T>::pushState(const Name& name, T* undoState, T* redoState)
+{
+	pushState(name.toString(), undoState, redoState);
+}
 
 template <class T>
 void StateStack<T>::pushState(std::string name, T* undoState, T* redoState)

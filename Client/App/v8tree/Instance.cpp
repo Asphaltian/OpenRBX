@@ -238,6 +238,14 @@ boost::shared_ptr<Instance> Instance::findFirstChildByName2(std::string findName
 					 : shared_from(findFirstChildByName(findName));
 }
 
+// FUNCTION: ROBLOX 0x00577920
+XmlElement* Instance::writeDelete()
+{
+	XmlElement* element = new XmlElement(name_DeleteItem);
+	element->addAttribute(name_referent, InstanceHandle(this));
+	return element;
+}
+
 // FUNCTION: WEBSERVICE 0x10049c80
 // FUNCTION: ROBLOX 0x00577980
 void Instance::writeProperties(XmlElement* container) const
@@ -535,6 +543,14 @@ void Instance::remove()
 	setParent(NULL);
 	if (c) {
 		std::for_each(c->begin(), c->end(), boost::bind(&Instance::remove, _1));
+	}
+}
+
+// FUNCTION: ROBLOX 0x0057a2f0
+void Instance::promoteChildren()
+{
+	while (numChildren()) {
+		getChild(0)->setParent(getParent());
 	}
 }
 
