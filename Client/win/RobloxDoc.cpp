@@ -11,6 +11,8 @@
 #include "util/StandardOut.h"
 #include "v8datamodel/Selection.h"
 #include "v8datamodel/TimeState.h"
+#include "v8datamodel/Workspace.h"
+#include "v8xml/SerializerV2.h"
 
 #include <boost/iostreams/copy.hpp>
 #include <shlobj.h>
@@ -18,6 +20,12 @@
 #include <sstream>
 
 IMPLEMENT_DYNCREATE(CRobloxDoc, CDocument)
+
+template <class T>
+static T* createService(RBX::DataModel* dataModel)
+{
+	return dataModel ? dataModel->create<T>() : NULL;
+}
 
 // FUNCTION: ROBLOX 0x0040ffc0
 void CutVerb::doIt(RBX::IDataState* dataState)
@@ -391,6 +399,30 @@ void CRobloxDoc::FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00458c80
+void CRobloxDoc::FUN_00458c80(CCmdUI* pCmdUI)
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	pCmdUI->Enable(FUN_00403290()->create<RBX::RunService>()->getRunState() == RBX::RS_RUNNING);
+}
+
+// FUNCTION: ROBLOX 0x00458dc0
+void CRobloxDoc::FUN_00458dc0(CCmdUI* pCmdUI)
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	RBX::RunState runState = FUN_00403290()->create<RBX::RunService>()->getRunState();
+	bool hasLocalPlayer = RBX::Network::Players::findLocalPlayer(FUN_00403290().get()) != NULL;
+	pCmdUI->Enable(runState != RBX::RS_NORMAL && !hasLocalPlayer);
+}
+
+// FUNCTION: ROBLOX 0x00458f60
+void CRobloxDoc::FUN_00458f60(CCmdUI* pCmdUI)
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	RBX::RunService* runService = FUN_00403290()->create<RBX::RunService>();
+	pCmdUI->Enable(!runService->runDisabled && !runService->isRunState());
+}
+
 // STUB: ROBLOX 0x004590a0
 void CRobloxDoc::FUN_004590a0(CCmdUI* pCmdUI)
 {
@@ -459,6 +491,38 @@ void CRobloxDoc::FUN_0045a0b0(CCmdUI* pCmdUI)
 	pCmdUI->Enable(FUN_00403290()->create<RBX::Network::Players>()->canReportAbuse() ? TRUE : FALSE);
 }
 
+// FUNCTION: ROBLOX 0x0045a600
+void CRobloxDoc::FUN_0045a600()
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	createService<RBX::RunService>(FUN_00403290().get())->pause();
+}
+
+// FUNCTION: ROBLOX 0x0045a730
+void CRobloxDoc::FUN_0045a730()
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	if (FUN_00403290()->create<RBX::RunService>()->getRunState() != RBX::RS_NORMAL) {
+		createService<RBX::RunService>(FUN_00403290().get())->reset();
+		FUN_00403290()->clearContents();
+		SerializerV2::load(m_unk0x60.get(), FUN_00403290().get());
+		FUN_00403290()->getWorkspace()->joinAllHack();
+		m_unk0x60.reset();
+	}
+}
+
+// FUNCTION: ROBLOX 0x0045a9e0
+void CRobloxDoc::FUN_0045a9e0()
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	if (FUN_00403290()->create<RBX::RunService>()->getRunState() == RBX::RS_NORMAL) {
+		m_unk0x60.reset(SerializerV2::newRootElement());
+		FUN_00403290()->writeChildren(m_unk0x60.get());
+	}
+
+	createService<RBX::RunService>(FUN_00403290().get())->run();
+}
+
 // clang-format off
 BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_COMMAND(0x80b6, FUN_00454920)
@@ -476,5 +540,11 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_UNDO, FUN_00455a30)
 	ON_COMMAND(ID_EDIT_REDO, FUN_00455bb0)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_REDO, FUN_00455ce0)
+	ON_COMMAND(0x80c7, FUN_0045a600)
+	ON_UPDATE_COMMAND_UI(0x80c7, FUN_00458c80)
+	ON_COMMAND(0x80c8, FUN_0045a730)
+	ON_UPDATE_COMMAND_UI(0x80c8, FUN_00458dc0)
+	ON_COMMAND(0x80c6, FUN_0045a9e0)
+	ON_UPDATE_COMMAND_UI(0x80c6, FUN_00458f60)
 END_MESSAGE_MAP()
 // clang-format on

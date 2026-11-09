@@ -148,7 +148,13 @@ protected:
 	afx_msg void FUN_00455ff0(CCmdUI* pCmdUI);
 	afx_msg void FUN_004590a0(CCmdUI* pCmdUI);
 	afx_msg void FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void FUN_00458c80(CCmdUI* pCmdUI);
+	afx_msg void FUN_00458dc0(CCmdUI* pCmdUI);
+	afx_msg void FUN_00458f60(CCmdUI* pCmdUI);
 	afx_msg void FUN_0045a0b0(CCmdUI* pCmdUI);
+	afx_msg void FUN_0045a600();
+	afx_msg void FUN_0045a730();
+	afx_msg void FUN_0045a9e0();
 
 	DECLARE_MESSAGE_MAP()
 

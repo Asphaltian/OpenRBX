@@ -129,23 +129,21 @@ public:
 	}
 
 	// STUB: WEBSERVICE 0x100550f0
+	// FUNCTION: ROBLOX 0x00453e00
 	void run()
 	{
-		if (!runDisabled && (isEditState() || isPauseState())) {
-			setRunState(RS_RUNNING);
+		if (!runDisabled) {
+			FUN_00569480(RS_RUNNING);
 		}
 	}
 
 	// STUB: WEBSERVICE 0x10055140
-	void pause()
-	{
-		if (isRunState()) {
-			setRunState(RS_PAUSED);
-		}
-	}
+	// FUNCTION: ROBLOX 0x00453e20
+	void pause() { FUN_00569480(RS_PAUSED); }
 
 	// STUB: WEBSERVICE 0x10055180
-	void reset() { setRunState(RS_NORMAL); }
+	// FUNCTION: ROBLOX 0x00453e30
+	void reset() { FUN_00569480(RS_NORMAL); }
 
 	void FUN_00569480(RunState state);
 	void endRunThread(bool join);
