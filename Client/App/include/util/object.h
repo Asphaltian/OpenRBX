@@ -122,6 +122,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005726b0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::Item,char const *>
 	// TEMPLATE: WEBSERVICE 0x100659d0
+	// TEMPLATE: ROBLOX 0x0045cb00
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::StatsService>
 	// TEMPLATE: WEBSERVICE 0x100666f0
 	// TEMPLATE: ROBLOX 0x004ceb30
@@ -139,6 +140,7 @@ public:
 	// STUB: ROBLOX 0x00461df0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Camera>
 	// TEMPLATE: WEBSERVICE 0x1006be50
+	// TEMPLATE: ROBLOX 0x00460a70
 	// RBX::Creatable<RBX::Instance>::create<RBX::ControllerService>
 	// TEMPLATE: WEBSERVICE 0x1006bed0
 	// TEMPLATE: ROBLOX 0x004a8c60

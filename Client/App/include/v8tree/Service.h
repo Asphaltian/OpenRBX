@@ -106,7 +106,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // TEMPLATE: ROBLOX 0x00458420
 // RBX::ServiceProvider::create<RBX::RunService>
 // TEMPLATE: WEBSERVICE 0x10065ba0
-// STUB: ROBLOX 0x0045cb90
+// TEMPLATE: ROBLOX 0x0045cb90
 // RBX::ServiceProvider::create<RBX::Stats::StatsService>
 // TEMPLATE: WEBSERVICE 0x100666a0
 // TEMPLATE: ROBLOX 0x00572f20
@@ -128,13 +128,13 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // TEMPLATE: ROBLOX 0x004aaae0
 // RBX::ServiceProvider::find<RBX::StarterPackService>
 // FUNCTION: WEBSERVICE 0x1006e4c0
-// STUB: ROBLOX 0x00461fc0
+// FUNCTION: ROBLOX 0x00461fc0
 // RBX::ServiceProvider::find<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006e670
 // TEMPLATE: ROBLOX 0x004cbe00
 // RBX::ServiceProvider::create<RBX::StarterPackService>
 // TEMPLATE: WEBSERVICE 0x1006e760
-// STUB: ROBLOX 0x00462180
+// TEMPLATE: ROBLOX 0x00462180
 // RBX::ServiceProvider::create<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006ea80
 // TEMPLATE: ROBLOX 0x005b6ea0
