@@ -124,6 +124,10 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100659d0
 	// TEMPLATE: ROBLOX 0x0045cb00
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::StatsService>
+	// TEMPLATE: ROBLOX 0x004633b0
+	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<G3D::Stopwatch>,G3D::Stopwatch const *>
+	// TEMPLATE: ROBLOX 0x00463440
+	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<int>,int const *>
 	// TEMPLATE: WEBSERVICE 0x100666f0
 	// TEMPLATE: ROBLOX 0x004ceb30
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<bool>,bool const *>

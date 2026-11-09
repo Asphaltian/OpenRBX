@@ -12,6 +12,7 @@ inline static bool brighter(const G3D::GLight& A, const G3D::GLight& B)
 	return A.color.average() * (1.2 - A.position.w) > B.color.average() * (1.2 - B.position.w);
 }
 
+// FUNCTION: ROBLOX 0x00536db0
 G3D::ToneMap* EffectSettings::getToneMap()
 {
 	static std::auto_ptr<G3D::ToneMap> toneMap(new G3D::ToneMap());

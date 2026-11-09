@@ -136,10 +136,12 @@ public:
 	// TEMPLATE: WEBSERVICE 0x10065da0
 	// TEMPLATE: ROBLOX 0x004ce200
 	// RBX::Stats::TypedStatsItem<bool>::update
+	// TEMPLATE: ROBLOX 0x004631c0
+	// RBX::Stats::TypedStatsItem<G3D::Stopwatch>::update
 	// TEMPLATE: WEBSERVICE 0x10065dd0
 	// RBX::Stats::TypedStatsItem<int>::TypedStatsItem<int>
 	// TEMPLATE: WEBSERVICE 0x10065ec0
-	// STUB: ROBLOX 0x00463380
+	// TEMPLATE: ROBLOX 0x00463380
 	// RBX::Stats::TypedStatsItem<int>::update
 	// TEMPLATE: WEBSERVICE 0x10065ef0
 	// RBX::Stats::TypedStatsItem<int>::~TypedStatsItem<int>
@@ -213,6 +215,10 @@ Item* Item::createChildItem(const char* name, boost::function0<T> func)
 	return item.get();
 }
 
+// TEMPLATE: ROBLOX 0x004634d0
+// RBX::Stats::Item::createBoundChildItem<G3D::Stopwatch>
+// TEMPLATE: ROBLOX 0x004635f0
+// RBX::Stats::Item::createBoundChildItem<int>
 // TEMPLATE: WEBSERVICE 0x10066a00
 // TEMPLATE: ROBLOX 0x004cef20
 // RBX::Stats::Item::createBoundChildItem<bool>

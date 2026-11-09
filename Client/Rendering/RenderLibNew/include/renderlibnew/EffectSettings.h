@@ -38,6 +38,11 @@ public:
 		G3D::LightingParameters& outSkyParameters
 	);
 
+	// clang-format off
+	// SYNTHETIC: ROBLOX 0x007f1b10
+	// `RBX::RenderNew::EffectSettings::getToneMap'::`2'::`dynamic atexit destructor for 'toneMap''
+	// clang-format on
+
 	bool stencilShadows() const { return _stencilShadows; }
 
 	bool hemisphereLighting() const { return _hemisphereLighting; }
