@@ -9,7 +9,7 @@ const char sRenderSettings[] = "RenderSettings";
 
 CRenderSettings::AASamples g_unk0x0091a2e8 = CRenderSettings::c_aaSamplesUnk0x1;
 G3D::Vector2int16 g_unk0x0091a2ec(800, 600);
-undefined4 g_unk0x00953ae0;
+CRenderSettings::GraphicsMode g_unk0x00953ae0;
 
 static RBX::Reflection::EnumPropDescriptor<CRenderSettings, CRenderSettings::GraphicsMode> g_unk0x00953ae4(
 	"graphicsMode", "General", &CRenderSettings::FUN_00468a60, &CRenderSettings::FUN_0044d0b0

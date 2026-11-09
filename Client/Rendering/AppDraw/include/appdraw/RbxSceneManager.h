@@ -130,6 +130,8 @@ protected:
 public:
 	using SceneManager::createEntity;
 
+	const ShadowCasterList& getShadowCasterList() const { return mShadowCasterList; }
+
 	RbxSceneManager(const String& name);
 	~RbxSceneManager();
 

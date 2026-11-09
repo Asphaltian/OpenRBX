@@ -2,6 +2,7 @@
 #define ROBLOXWND_H
 
 #include "DxUserInput.h"
+#include "RenderSettings.h"
 #include "ViewBase.h"
 #include "decomp.h"
 #include "rbxgraphics/Adorn.h"
@@ -102,7 +103,7 @@ private:
 		RenderStats* m_unk0x138;      // 0x138
 	};
 
-	int m_unk0x5c;                                         // 0x5c
+	CRenderSettings::GraphicsMode m_unk0x5c;               // 0x5c
 	int m_unk0x60;                                         // 0x60
 	boost::shared_ptr<RenderStatsItem> m_unk0x64;          // 0x64
 	CComPtr<IWorkspace> m_unk0x6c;                         // 0x6c

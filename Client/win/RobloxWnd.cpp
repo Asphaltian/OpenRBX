@@ -4,6 +4,7 @@
 #include <OgreRenderSystem.h>
 #include <OgreRenderTarget.h>
 #include <OgreSceneManager.h>
+#include <OgreStringConverter.h>
 #include <OgreTimer.h>
 // clang-format on
 
@@ -15,14 +16,19 @@
 #include "Workspace.h"
 #include "appdraw/AdornG3D.h"
 #include "appdraw/AdornRbxGfx.h"
+#include "appdraw/RbxEntity.h"
+#include "appdraw/RbxSceneManager.h"
+#include "appdraw/RbxSceneNode.h"
 #include "appdraw/VisualEngine.h"
 #include "network/Players.h"
 #include "rbxview/View.h"
+#include "reflection/enumconverter.h"
 #include "renderlib/Mesh.h"
 #include "renderlib/Profiler.h"
 #include "renderlib/RenderStats.h"
 #include "renderlibnew/Chunk.h"
 #include "util/RunStateOwner.h"
+#include "util/Utilities.h"
 #include "util/scopedassign.h"
 #include "util/standardout.h"
 #include "v8datamodel/Camera.h"
@@ -37,6 +43,7 @@
 #include <GLG3D/Texture.h>
 #include <GLG3D/VARArea.h>
 #include <GLG3D/Win32Window.h>
+#include <cstdio>
 #include <stdexcept>
 
 static ATL::CCriticalSection g_unk0x0095448c;
@@ -316,7 +323,7 @@ CRobloxWnd::CRobloxWnd(bool p_unk0x80)
 	m_unk0x60 = 0;
 	m_unk0x5c = CRenderSettings::singleton().FUN_0044d430();
 	if (m_unk0x5c == 1) {
-		m_unk0x5c = 3;
+		m_unk0x5c = CRenderSettings::c_graphicsModeUnk0x3;
 	}
 }
 
@@ -443,7 +450,7 @@ void CRobloxWnd::FUN_004610a0(int width, int height)
 			RBX::StandardOut::singleton()->print(
 				RBX::MESSAGE_WARNING, "Direct3D error: \"%s\". Trying OpenGL stable.", e.what()
 			);
-			m_unk0x5c = 2;
+			m_unk0x5c = CRenderSettings::c_graphicsModeUnk0x2;
 			FUN_00461420(width, height);
 			return;
 		}
@@ -517,7 +524,7 @@ void CRobloxWnd::FUN_00461420(int width, int height)
 			RBX::StandardOut::singleton()->print(
 				RBX::MESSAGE_WARNING, "OpenGL-G3D failed: \"%s\". Trying RbxGfx.", e.what()
 			);
-			m_unk0x5c = 3;
+			m_unk0x5c = CRenderSettings::c_graphicsModeUnk0x3;
 			FUN_004610a0(width, height);
 		}
 		else {
@@ -658,7 +665,7 @@ void CRobloxWnd::FUN_00462450(bool p_unk0x04)
 	}
 
 	if (Ogre::g_unk0x00949dd0) {
-		m_unk0xb0->m_unk0x18.FUN_00671ef0(0).m_unk0x00 = milliseconds;
+		m_unk0xb0->getUnk0x18().FUN_00671ef0(0).m_unk0x00 = milliseconds;
 	}
 
 	Unknown0045f640 render2DTimer(m_unk0xa8->getRenderStats().render2D);
@@ -770,11 +777,116 @@ void CRobloxWnd::OnPaint()
 	}
 }
 
-// STUB: ROBLOX 0x00462be0
+// FUNCTION: ROBLOX 0x00462be0
 std::string CRobloxWnd::getMetric(const std::string& metric) const
 {
-	STUB(0x462be0);
-	return std::string();
+	int value = 0;
+	if (metric == "graphicsMode") {
+		return RBX::Reflection::EnumDesc<CRenderSettings::GraphicsMode>::singleton().convertToString(m_unk0x5c);
+	}
+
+	if (metric == "FRM") {
+		if (!m_unk0xb0) {
+			return "N/A";
+		}
+		if (!Ogre::g_unk0x00949dd0 && m_unk0xb0->m_unk0x18.FUN_00671ea0() < 30) {
+			return "Off";
+		}
+
+		std::string r;
+		std::string v;
+		std::string w;
+		Ogre::VisualEngine::Unk0x18::Unk0x08& frame = m_unk0xb0->getUnk0x18().FUN_00671ef0(0);
+		int visible = (int) frame.m_unk0x04;
+		int rendered = (int) frame.m_unk0x08;
+		if (visible > 0) {
+			value = (int) ((1.0 - (double) rendered / visible) * 100.0);
+		}
+		else {
+			value = 0;
+		}
+
+		int subEntities = 0;
+		Ogre::SceneNode* root = m_unk0xb0->m_unk0x04->getRootSceneNode();
+		for (int i = 0; i < root->numChildren(); i++) {
+			Ogre::RbxSceneNode* node = dynamic_cast<Ogre::RbxSceneNode*>(root->getChild(i));
+			if (node) {
+				Ogre::RbxEntity* entity = dynamic_cast<Ogre::RbxEntity*>(node->getAttachedObject(0));
+				subEntities += entity->getNumSubEntities();
+			}
+		}
+
+		char buffer[128];
+		sprintf(buffer, "On  %2d%% r=%d v=%d w=%d", value, rendered, visible, subEntities);
+		return buffer;
+	}
+
+	if (metric == "Shadows") {
+		if (!m_unk0xb0) {
+			return "?";
+		}
+		if (!RBX::ViewBase::getShadowsEnabled()) {
+			return "Off";
+		}
+		return "On  #casters=" +
+			   Ogre::StringConverter::toString(
+				   (int) static_cast<Ogre::RbxSceneManager*>(m_unk0xb0->m_unk0x04)->getShadowCasterList().size()
+			   );
+	}
+
+	if (metric == "antiAliasing") {
+		if (!m_unk0xb0) {
+			return "N/A";
+		}
+		std::string result;
+		switch (m_unk0xb0->m_unk0x800) {
+		case 1:
+			result = "On";
+			break;
+		case 2:
+			result = "Off";
+			break;
+		}
+		return result;
+	}
+
+	if (metric == "bevels") {
+		if (!m_unk0xb0) {
+			return "N/A";
+		}
+		return RBX::ViewNew::FUN_0050b2b0() ? "On" : "Off";
+	}
+
+	if (metric == "videoMemory") {
+		return RBX::StringConverter<int>::convertToString(Ogre::FUN_00671cf0());
+	}
+
+	if (metric == "GfxTime") {
+		if (!m_unk0xb0) {
+			return "?";
+		}
+		float ms;
+		if (Ogre::g_unk0x00949dd0) {
+			if (m_unk0xb0->m_unk0x18.FUN_00671ea0() == 0) {
+				return "??";
+			}
+			ms = m_unk0xb0->getUnk0x18().FUN_00671ef0(0).m_unk0x00;
+		}
+		else {
+			ms = m_unk0xa8->getRenderStats().cpuRenderTotal.elapsedTime();
+			ms *= 1000.0;
+		}
+		double fps = 1000.0;
+		if (ms >= 1.0) {
+			fps /= ms;
+		}
+
+		char buffer[256];
+		sprintf(buffer, "%.1fms (%.1ffps)", ms, fps);
+		return buffer;
+	}
+
+	return "";
 }
 
 // STUB: ROBLOX 0x00463710
