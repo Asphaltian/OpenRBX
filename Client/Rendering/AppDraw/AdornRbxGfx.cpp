@@ -19,6 +19,9 @@ namespace RBX {
 // GLOBAL: ROBLOX 0x00949c7c
 Ogre::SharedPtr<Ogre::RbxFont> g_unk0x00949c7c;
 
+// GLOBAL: ROBLOX 0x009612a8
+int g_unk0x009612a8;
+
 // GLOBAL: ROBLOX 0x00961334
 int g_unk0x00961334;
 
@@ -149,10 +152,23 @@ void AdornRbxGfx::prepareRenderPass()
 	STUB(0x66b510);
 }
 
-// STUB: ROBLOX 0x0066c2b0
+// STUB: ROBLOX 0x0066c190
+void AdornRbxGfx::FUN_0066c190()
+{
+	for (int i = 0; i < (int) m_unk0x54.size(); i++) {
+		m_unk0x44.push_back(m_unk0x54[i]);
+	}
+	m_unk0x54.clear();
+}
+
+// FUNCTION: ROBLOX 0x0066c2b0
 void AdornRbxGfx::finishRenderPass()
 {
-	STUB(0x66c2b0);
+	m_unk0x30->removeAndDestroyAllChildren();
+	m_unk0x04->m_unk0x04->destroyAllManualObjects();
+	g_unk0x009612a8 = 0;
+	m_unk0x70->FUN_00675c90();
+	FUN_0066c190();
 }
 
 // STUB: ROBLOX 0x0066c2f0

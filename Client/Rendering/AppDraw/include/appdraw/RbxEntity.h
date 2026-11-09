@@ -46,6 +46,7 @@ public:
 	void FUN_00674e30(VisualEngine::Unk0x18* p_unk0x240);
 	void FUN_00674e40(MeshPtr mesh);
 	void FUN_00675a70(RbxSubEntity* subEntity);
+	void FUN_00675c90();
 	RbxSubEntity* FUN_00676680(SubMesh* subMesh, int lodIndex);
 
 	virtual void FUN_00676870(Camera* cam);

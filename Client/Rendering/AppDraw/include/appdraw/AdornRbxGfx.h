@@ -40,6 +40,8 @@ private:
 	std::map<std::string, undefined4> m_unk0x88;    // 0x88
 	G3D::CoordinateFrame m_unk0x94;                 // 0x94
 
+	void FUN_0066c190();
+
 public:
 	AdornRbxGfx(Ogre::VisualEngine* visualEngine);
 	virtual ~AdornRbxGfx(); // vtable+0x00

@@ -97,6 +97,12 @@ RbxEntity::RbxEntity()
 	m_unk0x26c = 888;
 }
 
+// FUNCTION: ROBLOX 0x00675c90
+void RbxEntity::FUN_00675c90()
+{
+	mSubEntityList.clear();
+}
+
 // FUNCTION: ROBLOX 0x00675cd0
 RbxEntity::~RbxEntity()
 {
