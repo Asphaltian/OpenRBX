@@ -6290,3 +6290,4 @@ address,type,symbol,name,module,size
 00707ed0,library,?GetTypeInfo@XAccessible@CXTPAccessible@@UAGJIKPAPAUITypeInfo@@@Z,,,
 0070d340,library,?BindToBool@CXTPPropertyGridItemBool@@UAEXPAH@Z,,,
 0070d360,library,?OnBeforeInsert@CXTPPropertyGridItemColor@@MAEXXZ,,,
+00949ed0,global,??_R0?AVManualObject@Ogre@@@8,,,

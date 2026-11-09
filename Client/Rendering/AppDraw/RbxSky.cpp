@@ -35,14 +35,14 @@ void RbxSky::FUN_00677eb0(VisualEngine* engine, const G3D::LightingParameters& p
 		MeshPtr mesh = MeshManager::getSingleton().getByName("starsMesh");
 		if (!mesh.isNull()) {
 			if (parameters.skyAmbient.r > 0.3 && parameters.skyAmbient.r < 0.7f) {
-				for (unsigned short i = 0; i < 3; i++) {
+				for (int i = 0; i < 3; i++) {
 					MaterialPtr material =
 						MaterialManager::getSingleton().getByName(mesh->getSubMesh(i)->getMaterialName());
 					material->setSceneBlending(SBF_ONE_MINUS_DEST_COLOUR, SBF_ZERO);
 				}
 			}
 			else {
-				for (unsigned short i = 0; i < 3; i++) {
+				for (int i = 0; i < 3; i++) {
 					MaterialPtr material =
 						MaterialManager::getSingleton().getByName(mesh->getSubMesh(i)->getMaterialName());
 					material->setSceneBlending(SBT_REPLACE);
@@ -69,7 +69,7 @@ void RbxSky::FUN_00678210(VisualEngine* engine, const G3D::LightingParameters& p
 	G3D::Color3 colour = parameters.emissiveScale * 0.8;
 
 	if (position.y < 0.0f) {
-		float fade = std::max(0.0f, (float) ((0.1 + position.y) * 10.0));
+		float fade = std::max(0.0f, (float) ((0.1f + position.y) * 10.0));
 		colour *= fade;
 	}
 
@@ -103,7 +103,7 @@ void RbxSky::FUN_00678540(VisualEngine* engine, const G3D::LightingParameters& p
 	}
 }
 
-// STUB: ROBLOX 0x00678610
+// FUNCTION: ROBLOX 0x00678610
 void RbxSky::FUN_00678610(Camera* cam, RenderQueue* queue, uint8 queueGroupId)
 {
 	Vector3 position = cam->getDerivedPosition();
@@ -111,19 +111,19 @@ void RbxSky::FUN_00678610(Camera* cam, RenderQueue* queue, uint8 queueGroupId)
 	m_unk0x40->setPosition(m_unk0xac + position);
 	m_unk0x48->setPosition(position);
 
-	queue->getQueueGroup(RENDER_QUEUE_SKIES_EARLY)->setShadowsEnabled(false);
 	queue->getQueueGroup(RENDER_QUEUE_1)->setShadowsEnabled(false);
+	queue->getQueueGroup(RENDER_QUEUE_2)->setShadowsEnabled(false);
 
-	m_unk0x38->setRenderQueueGroup(RENDER_QUEUE_SKIES_EARLY);
+	m_unk0x38->setRenderQueueGroup(RENDER_QUEUE_1);
 	m_unk0x38->_notifyCurrentCamera(cam);
 	m_unk0x38->_updateRenderQueue(queue);
 
-	m_unk0x34->setRenderQueueGroup(RENDER_QUEUE_1);
+	m_unk0x34->setRenderQueueGroup(RENDER_QUEUE_2);
 	m_unk0x34->_notifyCurrentCamera(cam);
 	m_unk0x34->_updateRenderQueue(queue);
 
 	if (m_unk0x84) {
-		m_unk0x3c->setRenderQueueGroup(RENDER_QUEUE_1);
+		m_unk0x3c->setRenderQueueGroup(RENDER_QUEUE_2);
 		m_unk0x3c->_notifyCurrentCamera(cam);
 		m_unk0x3c->_updateRenderQueue(queue);
 	}
@@ -132,7 +132,7 @@ void RbxSky::FUN_00678610(Camera* cam, RenderQueue* queue, uint8 queueGroupId)
 		SceneNode::ObjectIterator it = m_unk0x48->getAttachedObjectIterator();
 		while (it.hasMoreElements()) {
 			ManualObject* stars = dynamic_cast<ManualObject*>(it.getNext());
-			stars->setRenderQueueGroup(RENDER_QUEUE_SKIES_EARLY);
+			stars->setRenderQueueGroup(RENDER_QUEUE_1);
 			stars->_notifyCurrentCamera(cam);
 			stars->_updateRenderQueue(queue);
 		}
