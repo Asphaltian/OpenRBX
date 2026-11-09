@@ -431,26 +431,32 @@ void XItem<T, Base, Descriptor>::VTable0x00(
 {
 	bool hasValue = false;
 	T first;
-	for (std::vector<const RBX::Reflection::ClassDescriptor*>::const_iterator iter = m_unk0x04.begin();
-		 iter != m_unk0x04.end();
+	std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::const_iterator
+		objectsEnd = instances.end();
+	for (std::vector<const RBX::Reflection::ClassDescriptor*>::const_iterator iter = m_unk0x04.begin(),
+																			  end = m_unk0x04.end();
+		 iter != end;
 		 ++iter) {
+		const RBX::Reflection::ClassDescriptor* descriptor = *iter;
 		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::
-			const_iterator found = instances.find(*iter);
-		if (found != instances.end()) {
-			for (std::vector<boost::shared_ptr<RBX::Instance> >::const_iterator instance = found->second.begin();
-				 instance != found->second.end();
+			const_iterator found = instances.find(descriptor);
+		if (found != objectsEnd) {
+			const std::vector<boost::shared_ptr<RBX::Instance> >& objects = found->second;
+			for (std::vector<boost::shared_ptr<RBX::Instance> >::const_iterator instance = objects.begin(),
+																				instancesEnd = objects.end();
+				 instance != instancesEnd;
 				 ++instance) {
-				if (hasValue) {
+				if (!hasValue) {
+					first = FUN_0043f1f0(instance->get());
+					VTable0xe8(first);
+				}
+				else {
 					T value = FUN_0043f1f0(instance->get());
 					if (!VTable0xec(first, value)) {
-						Base::SetValue("");
+						CXTPPropertyGridItem::SetValue("");
 						SetHidden(FALSE);
 						return;
 					}
-				}
-				else {
-					first = FUN_0043f1f0(instance->get());
-					VTable0xe8(first);
 				}
 				hasValue = true;
 			}

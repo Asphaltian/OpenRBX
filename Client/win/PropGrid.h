@@ -186,6 +186,8 @@ protected:
 // ??0?$XItem@_NVCXTPPropertyGridItemBool@@V?$TypedPropertyDescriptor@_N@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@_N@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x0043ecd0
 // ?VTable0xec@?$XItem@_NVCXTPPropertyGridItemBool@@V?$TypedPropertyDescriptor@_N@Reflection@RBX@@@@UAE_NAB_N0@Z
+// TEMPLATE: ROBLOX 0x0043ed00
+// ?FUN_0043f1f0@?$XItem@_NVCXTPPropertyGridItemBool@@V?$TypedPropertyDescriptor@_N@Reflection@RBX@@@@IAE_NPAVInstance@RBX@@@Z
 // TEMPLATE: ROBLOX 0x0043ed90
 // ?VTable0xf0@?$XItem@_NVCXTPPropertyGridItemBool@@V?$TypedPropertyDescriptor@_N@Reflection@RBX@@@@UAEXPAVInstance@RBX@@AB_N@Z
 // SYNTHETIC: ROBLOX 0x0043f0a0
@@ -194,10 +196,14 @@ protected:
 // ??0?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@M@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x0043f1c0
 // ?VTable0xec@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAE_NABM0@Z
+// TEMPLATE: ROBLOX 0x0043f1f0
+// ?FUN_0043f1f0@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@IAEMPAVInstance@RBX@@@Z
 // TEMPLATE: ROBLOX 0x0043f490
 // ??0?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@H@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x0043f560
 // ?VTable0xf4@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAE_NXZ
+// TEMPLATE: ROBLOX 0x0043f590
+// ?FUN_0043f1f0@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@IAEHPAVInstance@RBX@@@Z
 // SYNTHETIC: ROBLOX 0x0043f830
 // ??_E?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEPAXI@Z
 // TEMPLATE: ROBLOX 0x0043f890
@@ -210,8 +216,18 @@ protected:
 // ??0?$XItem@VBrickColor@RBX@@VCPropertyGridItemBrickColor@@V?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@2@@@QAE@ABV?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x0043fd80
 // ?VTable0xec@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAE_NABH0@Z
+// TEMPLATE: ROBLOX 0x0043fda0 FOLDED
+// ?FUN_0043f1f0@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@IAE?AVColor3@G3D@@PAVInstance@RBX@@@Z
+// TEMPLATE: ROBLOX 0x0043fda0 FOLDED
+// ?FUN_0043f1f0@?$XItem@VBrickColor@RBX@@VCPropertyGridItemBrickColor@@V?$TypedPropertyDescriptor@VBrickColor@RBX@@@Reflection@2@@@IAE?AVBrickColor@RBX@@PAVInstance@3@@Z
+// TEMPLATE: ROBLOX 0x00440140
+// ?FUN_0043f1f0@?$XItem@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VCXTPPropertyGridItem@@VPropertyDescriptor@Reflection@RBX@@@@IAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAVInstance@RBX@@@Z
+// TEMPLATE: ROBLOX 0x00440650
+// ?FUN_0043f1f0@?$XItem@VVector3@G3D@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@@IAE?AVVector3@G3D@@PAVInstance@RBX@@@Z
 // TEMPLATE: ROBLOX 0x00440920
 // ??0?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@QAE@ABVEnumPropertyDescriptor@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x004409e0
+// ?FUN_0043f1f0@?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@IAEHPAVInstance@RBX@@@Z
 // TEMPLATE: ROBLOX 0x00440d10
 // ??0?$XItem@VSoundId@Soundscape@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@3@@@QAE@ABV?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x00440e30 FOLDED
@@ -220,6 +236,10 @@ protected:
 // ?VTable0xec@?$XItem@VTextureId@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@2@@@UAE_NABVTextureId@RBX@@0@Z
 // TEMPLATE: ROBLOX 0x00441150
 // ??0?$XItem@VTextureId@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@2@@@QAE@ABV?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@RBX@@PAVCPropGrid@@@Z
+// TEMPLATE: ROBLOX 0x00441240 FOLDED
+// ?FUN_0043f1f0@?$XItem@VSoundId@Soundscape@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@3@@@IAE?AVSoundId@Soundscape@RBX@@PAVInstance@4@@Z
+// TEMPLATE: ROBLOX 0x00441240 FOLDED
+// ?FUN_0043f1f0@?$XItem@VTextureId@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@2@@@IAE?AVTextureId@RBX@@PAVInstance@3@@Z
 // TEMPLATE: ROBLOX 0x004412e0
 // ?VTable0xf0@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAEXPAVInstance@RBX@@ABM@Z
 // TEMPLATE: ROBLOX 0x00440060
