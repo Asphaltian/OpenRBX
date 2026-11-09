@@ -108,6 +108,14 @@ void CRobloxDoc::FUN_004549c0()
 	dialog.DoModal();
 }
 
+// FUNCTION: ROBLOX 0x00454a60
+void CRobloxDoc::FUN_00454a60()
+{
+	CRobloxDHtmlDialog dialog(123, FUN_00407190() + "/AbuseReport/InGameChat.aspx", NULL);
+	dialog.SetExternalDispatch(m_unk0x78);
+	dialog.DoModal();
+}
+
 // FUNCTION: ROBLOX 0x004558a0
 RBX::VerbContainer* CRobloxDoc::FUN_004558a0()
 {
@@ -400,6 +408,13 @@ void CRobloxDoc::FUN_00459c80()
 	}
 }
 
+// FUNCTION: ROBLOX 0x0045a0b0
+void CRobloxDoc::FUN_0045a0b0(CCmdUI* pCmdUI)
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	pCmdUI->Enable(FUN_00403290()->create<RBX::Network::Players>()->canReportAbuse() ? TRUE : FALSE);
+}
+
 // clang-format off
 BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_COMMAND(0x80b6, FUN_00454920)
@@ -409,5 +424,9 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(0x80c3, FUN_00453eb0)
 	ON_UPDATE_COMMAND_UI(0xbb, FUN_00455ff0)
 	ON_UPDATE_COMMAND_UI(0xbe, FUN_004590a0)
+	ON_COMMAND(0x80f1, FUN_00459c80)
+	ON_UPDATE_COMMAND_UI(0x80f1, FUN_00453eb0)
+	ON_COMMAND(0x8100, FUN_00454a60)
+	ON_UPDATE_COMMAND_UI(0x8100, FUN_0045a0b0)
 END_MESSAGE_MAP()
 // clang-format on
