@@ -26,6 +26,7 @@
 #include "v8datamodel/JointsService.h"
 #include "v8datamodel/Lighting.h"
 #include "v8datamodel/LocalBackpack.h"
+#include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/Teams.h"
 #include "v8datamodel/TimeState.h"
 #include "v8datamodel/Tool.h"
@@ -511,7 +512,16 @@ void DataModel::initializeContents()
 // STUB: ROBLOX 0x00592680
 void DataModel::renderPass3dAdorn(Adorn* adorn)
 {
-	STUB(0x592680);
+	drawId++;
+	if (adorn) {
+		workspace->render3dAdorn(adorn);
+		if (JointsService* joints = find<JointsService>()) {
+			joints->render3dAdornItems(adorn);
+		}
+		if (!forceArrowCursor) {
+			workspace->getCurrentMouseCommand()->render3dAdorn(adorn);
+		}
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100793b0
