@@ -111,6 +111,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004763e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Sky>
 	// TEMPLATE: WEBSERVICE 0x1005b840
+	// STUB: ROBLOX 0x0041f120
 	// RBX::Creatable<RBX::Instance>::create<RBX::PartInstance>
 	// FUNCTION: WEBSERVICE 0x1005bab0
 	// STUB: ROBLOX 0x004aa520
@@ -205,8 +206,10 @@ public:
 	// TEMPLATE: ROBLOX 0x004aa1a0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Teams>
 	// TEMPLATE: WEBSERVICE 0x10077c10
+	// STUB: ROBLOX 0x00436690
 	// RBX::Creatable<RBX::Instance>::create<RBX::Accoutrement>
 	// TEMPLATE: WEBSERVICE 0x10077e80
+	// STUB: ROBLOX 0x00436920
 	// RBX::Creatable<RBX::Instance>::create<RBX::Hat>
 	// TEMPLATE: WEBSERVICE 0x1007e750
 	// TEMPLATE: ROBLOX 0x0044fe80
@@ -275,6 +278,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005cc840
 	// RBX::Creatable<RBX::Instance>::create<RBX::Message>
 	// TEMPLATE: WEBSERVICE 0x1008ce10
+	// STUB: ROBLOX 0x00457c70
 	// RBX::Creatable<RBX::Instance>::create<RBX::Visit>
 	// TEMPLATE: WEBSERVICE 0x1008d080
 	// TEMPLATE: ROBLOX 0x005cd140
@@ -306,8 +310,10 @@ public:
 	// TEMPLATE: ROBLOX 0x005ea560
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::PartInstance> >
 	// TEMPLATE: WEBSERVICE 0x100acde0
+	// STUB: ROBLOX 0x0041ec70
 	// RBX::Creatable<RBX::Instance>::create<RBX::Decal>
 	// TEMPLATE: WEBSERVICE 0x100ad050
+	// STUB: ROBLOX 0x0041ed00
 	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
 	// TEMPLATE: WEBSERVICE 0x100b2810
 	// TEMPLATE: ROBLOX 0x004cdf50
