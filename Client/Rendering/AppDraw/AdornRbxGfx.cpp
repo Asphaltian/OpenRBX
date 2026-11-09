@@ -115,7 +115,7 @@ G3D::Rect2D AdornRbxGfx::getViewport() const
 	return G3D::Rect2D::xywh(left, top, width, height);
 }
 
-// STUB: ROBLOX 0x0066a810
+// FUNCTION: ROBLOX 0x0066a810
 void AdornRbxGfx::setTexture(int stage, G3D::ReferenceCountedPointer<TextureProxyBase> texture)
 {
 	if (texture.isNull()) {
@@ -140,7 +140,7 @@ G3D::Rect2D AdornRbxGfx::getTextureSize(G3D::ReferenceCountedPointer<TextureProx
 	return G3D::Rect2D::xywh(0.0f, 0.0f, width, height);
 }
 
-// STUB: ROBLOX 0x0066aa60
+// FUNCTION: ROBLOX 0x0066aa60
 G3D::ReferenceCountedPointer<TextureProxyBase> AdornRbxGfx::createTextureProxy(const std::string& name)
 {
 	return new RenderNew::TextureProxy(name);

@@ -41,7 +41,7 @@ protected:
 	TextureProxy(TextureProxyRef root) : loaded(false), textureManager(NULL), root(root) { filename = ""; }
 
 public:
-	// STUB: ROBLOX 0x0066a6f0
+	// FUNCTION: ROBLOX 0x0066a6f0
 	TextureProxy(const std::string& filename) : loaded(false) { this->filename = filename; }
 
 	// STUB: ROBLOX 0x00515260
