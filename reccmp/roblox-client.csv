@@ -6131,3 +6131,4 @@ address,type,symbol,name,module,size
 00432ee0,library,?GetCaption@CXTPControl@@UBE?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@XZ,,,
 006a4ce0,library,?IsCaptionVisible@CXTPControl@@UBEHXZ,,,
 006ae9b0,library,?GetInterfaceMap@CXTPCommandBar@@MBEPBUAFX_INTERFACEMAP@@XZ,,,
+0043de30,library,??$for_each@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@V?$bind_t@XV?$mf1@XVCPropGrid@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVCSelectionPropGrid@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@@std@@YA?AV?$bind_t@XV?$mf1@XVCPropGrid@@V?$shared_ptr@VInstance@RBX@@@boost@@@_mfi@boost@@V?$list2@V?$value@PAVCSelectionPropGrid@@@_bi@boost@@V?$arg@$00@3@@_bi@3@@_bi@boost@@V?$_Vector_const_iterator@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@0@0V123@@Z,,,
