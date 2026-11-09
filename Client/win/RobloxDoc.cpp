@@ -439,6 +439,22 @@ void CRobloxDoc::FUN_00458f60(CCmdUI* pCmdUI)
 	pCmdUI->Enable(!runService->runDisabled && !runService->isRunState());
 }
 
+// STUB: ROBLOX 0x004590a0
+void CRobloxDoc::FUN_004590a0(CCmdUI* pCmdUI)
+{
+	if (FUN_00403290()) {
+		RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+		if (FUN_00403290()->create<RBX::RunService>()->getRunState() == RBX::RS_RUNNING) {
+			char text[32];
+			sprintf(text, "%.3gfps", FUN_00403290()->timeState->simulationStopwatch.smoothFPS());
+			pCmdUI->SetText(text);
+		}
+		else {
+			pCmdUI->SetText("");
+		}
+	}
+}
+
 // FUNCTION: ROBLOX 0x004592c0
 void CRobloxDoc::FUN_004592c0(CCmdUI* pCmdUI)
 {
@@ -467,19 +483,40 @@ void CRobloxDoc::FUN_00459400()
 	}
 }
 
-// STUB: ROBLOX 0x004590a0
-void CRobloxDoc::FUN_004590a0(CCmdUI* pCmdUI)
+// FUNCTION: ROBLOX 0x00459600
+void CRobloxDoc::FUN_00459600(CCmdUI* pCmdUI)
 {
-	if (FUN_00403290()) {
-		RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
-		if (FUN_00403290()->create<RBX::RunService>()->getRunState() == RBX::RS_RUNNING) {
-			char text[32];
-			sprintf(text, "%.3gfps", FUN_00403290()->timeState->simulationStopwatch.smoothFPS());
-			pCmdUI->SetText(text);
-		}
-		else {
-			pCmdUI->SetText("");
-		}
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	RBX::ScriptContext* scriptContext = findService<RBX::ScriptContext>(FUN_00403290().get());
+	if (scriptContext && scriptContext->allocator) {
+		char text[32];
+		sprintf(text, "%d threads", scriptContext->getThreadCount());
+		pCmdUI->SetText(text);
+		pCmdUI->Enable(TRUE);
+	}
+	else {
+		pCmdUI->SetText("");
+		pCmdUI->Enable(FALSE);
+	}
+}
+
+// FUNCTION: ROBLOX 0x00459790
+void CRobloxDoc::FUN_00459790(CCmdUI* pCmdUI)
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	RBX::ScriptContext* scriptContext = findService<RBX::ScriptContext>(FUN_00403290().get());
+	if (scriptContext && scriptContext->allocator) {
+		unsigned int heapSize;
+		unsigned int heapCount;
+		scriptContext->allocator->getHeapStats(heapSize, heapCount);
+
+		std::string heap = RBX::Log::formatMem(heapSize);
+		pCmdUI->SetText(heap.c_str());
+		pCmdUI->Enable(TRUE);
+	}
+	else {
+		pCmdUI->SetText("");
+		pCmdUI->Enable(FALSE);
 	}
 }
 
@@ -593,5 +630,7 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(0x80c6, FUN_00458f60)
 	ON_UPDATE_COMMAND_UI(0x80da, FUN_004592c0)
 	ON_COMMAND(0x80da, FUN_00459400)
+	ON_UPDATE_COMMAND_UI(0x80f6, FUN_00459600)
+	ON_UPDATE_COMMAND_UI(0x80db, FUN_00459790)
 END_MESSAGE_MAP()
 // clang-format on

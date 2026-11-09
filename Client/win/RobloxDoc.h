@@ -152,6 +152,8 @@ protected:
 	afx_msg void FUN_00458c80(CCmdUI* pCmdUI);
 	afx_msg void FUN_004592c0(CCmdUI* pCmdUI);
 	afx_msg void FUN_00459400();
+	afx_msg void FUN_00459600(CCmdUI* pCmdUI);
+	afx_msg void FUN_00459790(CCmdUI* pCmdUI);
 	afx_msg void FUN_00458dc0(CCmdUI* pCmdUI);
 	afx_msg void FUN_00458f60(CCmdUI* pCmdUI);
 	afx_msg void FUN_0045a0b0(CCmdUI* pCmdUI);
