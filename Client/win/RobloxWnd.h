@@ -42,6 +42,7 @@ public:
 	void FUN_0045fc50(bool active);
 	void FUN_00460160(G3D::GWindow* window);
 	void FUN_00460360();
+	void FUN_004603e0();
 	void FUN_00460430();
 	void FUN_00460d30();
 	void FUN_004610a0(int width, int height);

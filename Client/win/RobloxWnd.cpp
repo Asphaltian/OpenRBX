@@ -31,6 +31,7 @@
 #include "v8datamodel/UserController.h"
 
 #include <G3D/Log.h>
+#include <G3D/stringutils.h>
 #include <GLG3D/DXCaps.h>
 #include <GLG3D/GLCaps.h>
 #include <GLG3D/Texture.h>
@@ -246,6 +247,18 @@ void CRobloxWnd::FUN_00460360()
 	if (m_unk0x9c) {
 		delete m_unk0x9c;
 		m_unk0x9c = NULL;
+	}
+}
+
+// FUNCTION: ROBLOX 0x004603e0
+void CRobloxWnd::FUN_004603e0()
+{
+	if (m_unk0x5c == 2) {
+		FUN_00460360();
+	}
+	else if (m_unk0xb0) {
+		m_unk0xac.reset();
+		delete m_unk0xb0;
 	}
 }
 
@@ -531,13 +544,35 @@ int CRobloxWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-// STUB: ROBLOX 0x004617b0
+// FUNCTION: ROBLOX 0x004617b0
 void CRobloxWnd::FUN_004617b0(UINT nType, int cx, int cy)
 {
-	STUB(0x4617b0);
+	if (m_unk0x9c && m_unk0xa4.get()) {
+		std::string renderer = G3D::GLCaps::renderer();
+		if (G3D::beginsWith(renderer, "MOBILITY RADEON 7500")) {
+			FUN_004603e0();
+			try {
+				if (m_unk0x5c == 2) {
+					FUN_00461420(cx, cy);
+				}
+				else {
+					FUN_004610a0(cx, cy);
+				}
+				m_unk0x9c->makeCurrent();
+			}
+			catch (std::exception&) {
+			}
+		}
+		else {
+			m_unk0xa4->notifyResize(cx, cy);
+			G3D::Rect2D viewport = G3D::Rect2D::xywh(0, 0, m_unk0xa4->width(), m_unk0xa4->height());
+			m_unk0xa4->setViewport(viewport);
+		}
+		m_unk0x83 = true;
+	}
 }
 
-// STUB: ROBLOX 0x00461950
+// FUNCTION: ROBLOX 0x00461950
 void CRobloxWnd::OnSize(UINT nType, int cx, int cy)
 {
 	if (cx > 0 && cy > 0 && cx <= 0x2000 && cy <= 0x2000) {
