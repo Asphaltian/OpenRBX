@@ -167,7 +167,7 @@ BOOL CRobloxTreeCtrl::PreCreateWindow(CREATESTRUCT& cs)
 	return CXTTreeCtrl::PreCreateWindow(cs);
 }
 
-// STUB: ROBLOX 0x00422da0
+// FUNCTION: ROBLOX 0x00422da0
 void CSelectionTreeCtrl::OnRButtonDown(UINT nFlags, CPoint point)
 {
 	CXTTreeCtrl::OnRButtonDown(nFlags, point);
@@ -182,7 +182,7 @@ void CRobloxTreeCtrl::FUN_00422de0(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 }
 
-// STUB: ROBLOX 0x00422e20
+// FUNCTION: ROBLOX 0x00422e20
 void CRobloxTreeCtrl::OnPaint()
 {
 	COLORREF face = XTPColorManager()->GetColor(COLOR_3DFACE);
@@ -367,7 +367,7 @@ HTREEITEM CSelectionTreeCtrl::FUN_00423cc0(HTREEITEM item)
 	return NULL;
 }
 
-// STUB: ROBLOX 0x00423dc0
+// FUNCTION: ROBLOX 0x00423dc0
 void CSelectionTreeCtrl::OnMouseMove(UINT nFlags, CPoint point)
 {
 	if (m_unk0xf0.get()) {
