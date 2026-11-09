@@ -167,6 +167,12 @@ void SelectAllCommand::doIt(IDataState* dataState)
 	dataModel->getWorkspace()->selectAll();
 }
 
+// FUNCTION: ROBLOX 0x00596ca0
+static void FUN_00596ca0(boost::shared_ptr<Instance> instance)
+{
+	PartInstance::setLocked(instance.get(), true);
+}
+
 // FUNCTION: ROBLOX 0x00596d20
 bool FirstPersonCommand::isEnabled() const
 {
@@ -291,6 +297,23 @@ CameraVerb::CameraVerb(std::string name, Workspace* workspace)
 bool CameraVerb::isEnabled() const
 {
 	return true;
+}
+
+// FUNCTION: ROBLOX 0x00597890
+static void FUN_00597890(boost::shared_ptr<Instance> instance)
+{
+	if (PartInstance* part = dynamic_cast<PartInstance*>(instance.get())) {
+		Surfaces& surfaces = part->getSurfaces();
+		for (int i = 0; i < 6; i++) {
+			if (surfaces[(NormalId) i].getSurfaceType() == WELD) {
+				surfaces[(NormalId) i].setSurfaceType(STUDS);
+			}
+		}
+	}
+
+	if (instance->getChildren()) {
+		std::for_each(instance->getChildren()->begin(), instance->getChildren()->end(), boost::bind(&FUN_00597890, _1));
+	}
 }
 
 // FUNCTION: ROBLOX 0x00597f30
@@ -773,10 +796,16 @@ void CameraCenterCommand::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059bd90
+// FUNCTION: ROBLOX 0x0059bd90
 void CanNotSelectCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59bd90);
+	FUN_00596660(dataModel);
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+	std::for_each(selection->begin(), selection->end(), &FUN_00596ca0);
+	filteredSelection->clearSelection();
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059be40
@@ -871,10 +900,15 @@ bool SnapSelectionVerb::isEnabled() const
 	return (dataModel ? dataModel->create<Selection>() : NULL)->size() > 0;
 }
 
-// STUB: ROBLOX 0x0059c1d0
+// FUNCTION: ROBLOX 0x0059c1d0
 void SnapSelectionVerb::doIt(IDataState* dataState)
 {
-	STUB(0x59c1d0);
+	FUN_00596660(dataModel);
+	Selection* currentSelection = dataModel ? dataModel->create<Selection>() : NULL;
+	std::for_each(selection->begin(), selection->end(), boost::bind(&FUN_00597890, _1));
+	(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(PING_SOUND);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059c2a0

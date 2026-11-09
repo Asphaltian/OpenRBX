@@ -209,6 +209,8 @@ public:
 	const std::vector<T*>& items() const { return filteredSelection; }
 	unsigned int size() const;
 
+	void clearSelection() { rootSelection->clearSelection(); }
+
 	typename std::vector<T*>::const_iterator begin() const { return filteredSelection.begin(); }
 	typename std::vector<T*>::const_iterator end() const { return filteredSelection.end(); }
 
