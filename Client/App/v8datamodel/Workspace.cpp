@@ -139,6 +139,18 @@ World* Workspace::getMyWorldFast(const Instance* context)
 	return getMyWorkspaceFast(context)->getWorld();
 }
 
+// FUNCTION: ROBLOX 0x005b4a30
+void Workspace::insertItems(
+	XmlElement* root, std::vector<boost::shared_ptr<Instance> >& items, InsertMode insertMode, PromptMode promptMode
+)
+{
+	SerializerV2().loadInstances(root, items);
+
+	if (items.size() > 0) {
+		insertInstances(items, this, insertMode, promptMode);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1006a830
 // FUNCTION: ROBLOX 0x005b4a70
 void Workspace::setNullMouseCommand()

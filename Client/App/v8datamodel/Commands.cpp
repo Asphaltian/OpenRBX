@@ -20,9 +20,11 @@
 #include "v8datamodel/ToolsPart.h"
 #include "v8world/SpatialHash.h"
 #include "v8world/World.h"
+#include "v8xml/SerializerV2.h"
 
 #include <algorithm>
 #include <boost/bind.hpp>
+#include <memory>
 
 template class RBX::TToolVerb<RBX::ArrowTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::ModelSetPrimaryPartTool, RBX::RunStateVerb>;
@@ -323,6 +325,27 @@ static void FUN_00597890(boost::shared_ptr<Instance> instance)
 	}
 }
 
+// SIZE 0x10
+class Unknown00597dd0
+{
+public:
+	// FUNCTION: ROBLOX 0x00597dd0
+	Unknown00597dd0(const Name& name, bool value)
+		: m_unk0x00(name), m_unk0x04(value), m_unk0x08(new UndoState()), m_unk0x0c(new RedoState())
+	{
+	}
+
+	// FUNCTION: ROBLOX 0x00597ec0
+	~Unknown00597dd0() {}
+
+	void operator()(boost::shared_ptr<Instance> instance);
+
+	const Name& m_unk0x00;              // 0x00
+	bool m_unk0x04;                     // 0x04
+	std::auto_ptr<UndoState> m_unk0x08; // 0x08
+	std::auto_ptr<RedoState> m_unk0x0c; // 0x0c
+};
+
 // FUNCTION: ROBLOX 0x00597f30
 EditSelectionVerb::EditSelectionVerb(std::string name, DataModel* dataModel)
 	: Verb(dataModel, name), workspace(shared_from(dataModel->getWorkspace())), selection(dataModel),
@@ -488,6 +511,23 @@ static bool FUN_00598ac0(const Name& propertyName, boost::shared_ptr<const Insta
 	}
 
 	return false;
+}
+
+// FUNCTION: ROBLOX 0x00598c10
+void Unknown00597dd0::operator()(boost::shared_ptr<Instance> instance)
+{
+	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::Iterator iter =
+		instance->findProperty(m_unk0x00);
+
+	if (iter != instance->properties_end()) {
+		if (dynamic_cast<const Reflection::TypedPropertyDescriptor<bool>*>(&(*iter).getDescriptor())) {
+			if ((*iter).getValue<bool>() != m_unk0x04) {
+				m_unk0x08->addProperty(*iter);
+				(*iter).setValue<bool>(m_unk0x04);
+				m_unk0x0c->addProperty(*iter);
+			}
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x00598e50
@@ -819,10 +859,15 @@ bool BoolPropertyVerb::isChecked() const
 		   ) != selection->end();
 }
 
-// STUB: ROBLOX 0x0059b900
+// FUNCTION: ROBLOX 0x0059b900
 void BoolPropertyVerb::doIt(IDataState* dataState)
 {
-	STUB(0x59b900);
+	FUN_00596660(dataModel);
+
+	Unknown00597dd0 functor(propertyName, !isChecked());
+	std::for_each(selection->begin(), selection->end(), functor);
+	dataState->pushState(propertyName.toString(), functor.m_unk0x08.release(), functor.m_unk0x0c.release());
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059ba50
@@ -997,10 +1042,36 @@ bool UngroupSelectionVerb::isEnabled() const
 	return filteredSelection->FUN_00598690(&FUN_00597450) != NULL;
 }
 
-// STUB: ROBLOX 0x0059c2f0
+// FUNCTION: ROBLOX 0x0059c2f0
 void DuplicateSelectionVerb::doIt(IDataState* dataState)
 {
-	STUB(0x59c2f0);
+	FUN_00596660(dataModel);
+
+	UndoState* undoState = new UndoState();
+	RedoState* redoState = new RedoState();
+
+	std::auto_ptr<XmlElement> root(SerializerV2::newRootElement());
+	Selection* currentSelection = dataModel ? dataModel->create<Selection>() : NULL;
+	std::for_each(selection->begin(), selection->end(), boost::bind(&FUN_00597490, root.get(), _1));
+	SerializerV2::isolateHandles(root.get());
+
+	std::vector<boost::shared_ptr<Instance> > instances;
+	workspace->insertItems(root.get(), instances, INSERT_TO_3D_VIEW, ALLOW_PROMPTS);
+
+	const std::vector<boost::shared_ptr<Instance> >& items = instances;
+	selection->setSelection(items.begin(), items.end());
+
+	(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(PING_SOUND);
+
+	for (std::vector<boost::shared_ptr<Instance> >::const_iterator iter = items.begin(); iter != items.end(); ++iter) {
+		if (Instance* instance = iter->get()) {
+			undoState->addDelete(*instance);
+			redoState->addParentProperty(*instance);
+		}
+	}
+
+	dataState->pushState(getName(), undoState, redoState);
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059c5c0
