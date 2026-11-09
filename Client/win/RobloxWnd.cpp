@@ -611,21 +611,19 @@ void CRobloxWnd::FUN_00462630(bool p_unk0x04)
 	}
 }
 
-// STUB: ROBLOX 0x00462710
+// FUNCTION: ROBLOX 0x00462710
 bool CRobloxWnd::FUN_00462710()
 {
-	if (g_unk0x00954484) {
-		g_unk0x00954484 = false;
-	}
-	else {
+	if (!g_unk0x00954484) {
 		bool resized = false;
 		{
 			CPaintDC dc(this);
-			const RECT& paint = dc.m_ps.rcPaint;
+			RECT paint = dc.m_ps.rcPaint;
 			if (paint.right != 0 || paint.left != 0 || paint.top != 0 || paint.bottom != 0) {
-				Ogre::RenderTarget* target = m_unk0xb0->m_unk0x0c;
-				if (paint.right - paint.left + 1 < (int) target->getWidth() ||
-					paint.bottom - paint.top + 1 < (int) target->getHeight()) {
+				if (paint.right - paint.left + 1 < (int) m_unk0xb0->m_unk0x0c->getWidth() ||
+					paint.bottom - paint.top + 1 < (int) m_unk0xb0->m_unk0x0c->getHeight()) {
+					int width = m_unk0xb0->m_unk0x0c->getWidth();
+					int height = m_unk0xb0->m_unk0x0c->getHeight();
 					resized = true;
 				}
 			}
@@ -639,6 +637,9 @@ bool CRobloxWnd::FUN_00462710()
 			g_unk0x00954484 = true;
 			return false;
 		}
+	}
+	else {
+		g_unk0x00954484 = false;
 	}
 	FUN_00462630(true);
 	return true;
