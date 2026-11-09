@@ -156,6 +156,12 @@ public:
 	const LevelRef detailLevel(float detail) const;
 
 	static void flushVAR();
+
+	// SYNTHETIC: ROBLOX 0x007e7fc0
+	// `dynamic initializer for 'RBX::RenderNew::Mesh::visibleGeometry''
+
+	// SYNTHETIC: ROBLOX 0x007f1ad0
+	// `dynamic atexit destructor for 'RBX::RenderNew::Mesh::visibleGeometry''
 };
 
 DECOMP_SIZE_ASSERT(Mesh, 0x40)

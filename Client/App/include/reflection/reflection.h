@@ -45,7 +45,7 @@ namespace Reflection {
 // TEMPLATE: ROBLOX 0x00567890
 // RBX::Reflection::Described<RBX::Selection,&RBX::sSelection,RBX::FactoryProduct<RBX::Selection,RBX::Instance,&RBX::sSelection> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064820
-// STUB: ROBLOX 0x0045c030
+// TEMPLATE: ROBLOX 0x0045c030
 // RBX::Reflection::Described<RBX::Stats::StatsService,&RBX::Stats::sStats,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats> >::classDescriptor
 // TEMPLATE: WEBSERVICE 0x10064b80
 // TEMPLATE: ROBLOX 0x00571ea0
@@ -336,6 +336,7 @@ namespace Reflection {
 // SYNTHETIC: ROBLOX 0x007f1d60
 // `RBX::Reflection::Described<RBX::ScriptContext,&RBX::sScriptContext,RBX::FactoryProduct<RBX::ScriptContext,RBX::Instance,&RBX::sScriptContext> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221ab0
+// SYNTHETIC: ROBLOX 0x007efff0
 // `RBX::Reflection::Described<RBX::Stats::StatsService,&RBX::Stats::sStats,RBX::NonFactoryProduct<RBX::Instance,&RBX::Stats::sStats> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: WEBSERVICE 0x10221ba0
 // SYNTHETIC: ROBLOX 0x007f1e10

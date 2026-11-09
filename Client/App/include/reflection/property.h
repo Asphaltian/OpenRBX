@@ -866,6 +866,7 @@ public:
 	// TEMPLATE: ROBLOX 0x00625ad0
 	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::Explosion>
 	// TEMPLATE: WEBSERVICE 0x100e2a90
+	// TEMPLATE: ROBLOX 0x00625ba0
 	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::Explosion>
 	// TEMPLATE: WEBSERVICE 0x100e4a40
 	// RBX::Reflection::PropDescriptor<RBX::VelocityMotor,float>::getset<float (__thiscall RBX::VelocityMotor::*)(void)const ,void (__thiscall RBX::VelocityMotor::*)(float)>
