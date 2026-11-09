@@ -122,6 +122,50 @@ RBX::VerbContainer* CRobloxDoc::FUN_004558a0()
 	return FUN_00403290()->getWorkspace();
 }
 
+// FUNCTION: ROBLOX 0x00455900
+void CRobloxDoc::FUN_00455900()
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	m_unk0x74->m_unk0x120.doIt(m_unk0x78->FUN_0046edc0().get());
+}
+
+// FUNCTION: ROBLOX 0x00455a30
+void CRobloxDoc::FUN_00455a30(CCmdUI* pCmdUI)
+{
+	boost::shared_ptr<RBX::DataModel> dataModel = m_unk0x78->FUN_0046edc0();
+	std::string name;
+	{
+		RBX::DataModel::Lock lock(dataModel);
+		pCmdUI->Enable(dataModel->canUndo(name));
+	}
+
+	CString text;
+	text.Format(130, name.c_str());
+	pCmdUI->SetText(text);
+}
+
+// FUNCTION: ROBLOX 0x00455bb0
+void CRobloxDoc::FUN_00455bb0()
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	m_unk0x74->m_unk0x130.doIt(m_unk0x78->FUN_0046edc0().get());
+}
+
+// FUNCTION: ROBLOX 0x00455ce0
+void CRobloxDoc::FUN_00455ce0(CCmdUI* pCmdUI)
+{
+	boost::shared_ptr<RBX::DataModel> dataModel = m_unk0x78->FUN_0046edc0();
+	std::string name;
+	{
+		RBX::DataModel::Lock lock(dataModel);
+		pCmdUI->Enable(dataModel->canRedo(name));
+	}
+
+	CString text;
+	text.Format(131, name.c_str());
+	pCmdUI->SetText(text);
+}
+
 // FUNCTION: ROBLOX 0x00456b50
 CRobloxDoc::~CRobloxDoc()
 {
@@ -428,5 +472,9 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(0x80f1, FUN_00453eb0)
 	ON_COMMAND(0x8100, FUN_00454a60)
 	ON_UPDATE_COMMAND_UI(0x8100, FUN_0045a0b0)
+	ON_COMMAND(ID_EDIT_UNDO, FUN_00455900)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_UNDO, FUN_00455a30)
+	ON_COMMAND(ID_EDIT_REDO, FUN_00455bb0)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_REDO, FUN_00455ce0)
 END_MESSAGE_MAP()
 // clang-format on

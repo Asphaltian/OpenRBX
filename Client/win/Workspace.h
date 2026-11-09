@@ -56,8 +56,7 @@ public:
 
 	HRESULT FinalConstruct();
 
-	// FUNCTION: ROBLOX 0x0046edc0
-	boost::shared_ptr<RBX::DataModel> FUN_0046edc0() const { return m_unk0x24; }
+	boost::shared_ptr<RBX::DataModel> FUN_0046edc0() const;
 
 	// FUNCTION: ROBLOX 0x0046edf0
 	RBX::Workspace* FUN_0046edf0() const { return m_unk0x24 ? m_unk0x24->getWorkspace() : NULL; }

@@ -19,6 +19,12 @@
 		FUN_0046f230(expr, CLSID_Workspace);                                                                           \
 	}
 
+// FUNCTION: ROBLOX 0x0046edc0
+boost::shared_ptr<RBX::DataModel> CWorkspace::FUN_0046edc0() const
+{
+	return m_unk0x24;
+}
+
 // FUNCTION: ROBLOX 0x0046ee10
 void CWorkspace::onEvent(const RBX::Workspace* source, RBX::DrawChanged event)
 {
