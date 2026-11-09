@@ -21,6 +21,9 @@
 #include "v8world/SpatialHash.h"
 #include "v8world/World.h"
 
+#include <algorithm>
+#include <boost/bind.hpp>
+
 template class RBX::TToolVerb<RBX::ArrowTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::ModelSetPrimaryPartTool, RBX::RunStateVerb>;
 template class RBX::TToolVerb<RBX::FillTool, RBX::RunStateVerb>;
@@ -414,6 +417,22 @@ BoolPropertyVerb::BoolPropertyVerb(const std::string& name, DataModel* dataModel
 {
 }
 
+// FUNCTION: ROBLOX 0x00598ac0
+static bool FUN_00598ac0(const Name& propertyName, boost::shared_ptr<const Instance> instance)
+{
+	Reflection::MemberDescriptorContainer<Reflection::PropertyDescriptor>::ConstIterator iter =
+		instance->findProperty(propertyName);
+	if (iter != instance->properties_end()) {
+		if (dynamic_cast<const Reflection::TypedPropertyDescriptor<bool>*>(&iter.getDescriptor())) {
+			if ((*iter).getValue<bool>()) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 // FUNCTION: ROBLOX 0x00598e50
 RotateSelectionVerb::RotateSelectionVerb(DataModel* dataModel) : RotateAxisCommand("SelectionRotate", dataModel)
 {
@@ -678,11 +697,12 @@ void FixedCameraCommand::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059b850
+// FUNCTION: ROBLOX 0x0059b850
 bool BoolPropertyVerb::isChecked() const
 {
-	STUB(0x59b850);
-	return false;
+	return std::find_if(
+			   selection->begin(), selection->end(), boost::bind(&FUN_00598ac0, boost::cref(propertyName), _1)
+		   ) != selection->end();
 }
 
 // STUB: ROBLOX 0x0059b900
