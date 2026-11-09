@@ -412,29 +412,43 @@ void CRobloxWnd::FUN_004610a0(int width, int height)
 		m_unk0xb0->m_unk0x7f8 = 0;
 	}
 
-	int antialiasing;
-	switch (CRenderSettings::singleton().m_unk0x100) {
-	case CRenderSettings::c_antialiasingModeUnk0x0:
-		antialiasing = videoMemory < 100000000 ? 2 : 0;
-		break;
-	case CRenderSettings::c_antialiasingModeUnk0x1:
-		antialiasing = 0;
-		break;
-	default:
-		RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Unknown antialiasing mode");
-	case CRenderSettings::c_antialiasingModeUnk0x2:
-		antialiasing = 2;
-		break;
-	}
+	try {
+		int antialiasing;
+		switch (CRenderSettings::singleton().m_unk0x100) {
+		case CRenderSettings::c_antialiasingModeUnk0x0:
+			antialiasing = videoMemory < 100000000 ? 2 : 0;
+			break;
+		case CRenderSettings::c_antialiasingModeUnk0x1:
+			antialiasing = 0;
+			break;
+		default:
+			RBX::StandardOut::singleton()->print(RBX::MESSAGE_INFO, "Unknown antialiasing mode");
+		case CRenderSettings::c_antialiasingModeUnk0x2:
+			antialiasing = 2;
+			break;
+		}
 
-	m_unk0xb0->FUN_00673860(
-		m_unk0x5c != 3,
-		(unsigned long) m_hWnd,
-		rect.Width(),
-		rect.Height(),
-		antialiasing,
-		LogManager::getMainLogManger()->MakeLogFileName("gfx")
-	);
+		m_unk0xb0->FUN_00673860(
+			m_unk0x5c != 3,
+			(unsigned long) m_hWnd,
+			rect.Width(),
+			rect.Height(),
+			antialiasing,
+			LogManager::getMainLogManger()->MakeLogFileName("gfx")
+		);
+	}
+	catch (std::exception& e) {
+		if (m_unk0x60 == 0 && CRenderSettings::singleton().FUN_0044d430() == 1) {
+			m_unk0x60++;
+			RBX::StandardOut::singleton()->print(
+				RBX::MESSAGE_WARNING, "Direct3D error: \"%s\". Trying OpenGL stable.", e.what()
+			);
+			m_unk0x5c = 2;
+			FUN_00461420(width, height);
+			return;
+		}
+		throw std::runtime_error("Graphics failed to initialize");
+	}
 
 	Ogre::g_unk0x00949dd0 = CRenderSettings::singleton().m_unk0x108 != CRenderSettings::c_frameRateManagerModeUnk0x2;
 
