@@ -474,7 +474,7 @@ DataModel::Lock::~Lock()
 	delete lock;
 }
 
-// STUB: ROBLOX 0x00590fd0
+// FUNCTION: ROBLOX 0x00590fd0
 void DataModel::processGui(const UIEvent& event)
 {
 	if (isInitialized) {
@@ -482,8 +482,12 @@ void DataModel::processGui(const UIEvent& event)
 			processEvent(event);
 		}
 
-		if (runService->getRunState() != RS_RUNNING) {
+		switch (runService->getRunState()) {
+		case RS_RUNNING:
+			break;
+		default:
 			workspace->raiseDrawChanged();
+			break;
 		}
 	}
 }

@@ -260,10 +260,10 @@ XmlElement* Accoutrement::write()
 	return Instance::write();
 }
 
-// STUB: ROBLOX 0x005bb390
+// FUNCTION: ROBLOX 0x005bb390
 void Accoutrement::dropAllOthers(ModelInstance* model, Accoutrement* accoutrement)
 {
-	Workspace* workspace = ServiceProvider::find<Workspace>(model);
+	Workspace* workspace = Workspace::findWorkspace(model);
 	if (workspace) {
 		while (Accoutrement* other = model->findFirstChildOfType<Accoutrement>()) {
 			if (other != accoutrement) {
