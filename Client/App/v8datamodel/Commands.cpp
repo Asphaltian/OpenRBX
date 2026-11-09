@@ -401,6 +401,23 @@ void ClearStarterpack::doIt(IDataState* dataState)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00598570
+static void FUN_00598570(boost::shared_ptr<Instance> instance)
+{
+	if (PartInstance* part = dynamic_cast<PartInstance*>(instance.get())) {
+		Surfaces& surfaces = part->getSurfaces();
+		for (int i = 0; i < 6; i++) {
+			if (surfaces[(NormalId) i].getSurfaceType() == GLUE) {
+				surfaces[(NormalId) i].setSurfaceType(WELD);
+			}
+		}
+	}
+
+	if (instance->getChildren()) {
+		std::for_each(instance->getChildren()->begin(), instance->getChildren()->end(), boost::bind(&FUN_00598570, _1));
+	}
+}
+
 // FUNCTION: ROBLOX 0x00598960
 RotateAxisCommand::RotateAxisCommand(std::string name, DataModel* dataModel) : EditSelectionVerb(name, dataModel)
 {
@@ -824,10 +841,15 @@ bool GroupSelectionVerb::isEnabled() const
 	return currentSelection->size() > 1;
 }
 
-// STUB: ROBLOX 0x0059c090
+// FUNCTION: ROBLOX 0x0059c090
 void WeldSelectionVerb::doIt(IDataState* dataState)
 {
-	STUB(0x59c090);
+	FUN_00596660(dataModel);
+	Selection* currentSelection = dataModel ? dataModel->create<Selection>() : NULL;
+	std::for_each(selection->begin(), selection->end(), boost::bind(&FUN_00598570, _1));
+	(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(PING_SOUND);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059c160
