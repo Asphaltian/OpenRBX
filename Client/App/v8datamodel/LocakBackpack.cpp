@@ -173,15 +173,15 @@ void LocalBackpack::clearLocalBackpack()
 	lastRemovedIndex = -1;
 }
 
-// STUB: ROBLOX 0x0060d7d0
+// FUNCTION: ROBLOX 0x0060d7d0
 bool LocalBackpack::FUN_0060d7d0(unsigned int index)
 {
-	if (index > numChildren()) {
-		return false;
+	if (index <= numChildren()) {
+		onClick(static_cast<LocalBackpackItem*>(getChild(index - 1)));
+		return true;
 	}
 
-	onClick(static_cast<LocalBackpackItem*>(getChild(index - 1)));
-	return true;
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x100d6740
