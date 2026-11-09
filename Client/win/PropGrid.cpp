@@ -548,7 +548,7 @@ XBoolItem::XBoolItem(const RBX::Reflection::TypedPropertyDescriptor<bool>& descr
 	SetCheckBoxStyle();
 }
 
-// STUB: ROBLOX 0x004419c0
+// FUNCTION: ROBLOX 0x004419c0
 BOOL XBoolItem::OnDrawItemValue(CDC& dc, CRect rcValue)
 {
 	if (!m_bCheckBoxStyle) {

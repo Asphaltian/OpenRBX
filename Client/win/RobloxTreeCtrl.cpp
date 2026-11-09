@@ -197,7 +197,7 @@ void CRobloxTreeCtrl::OnPaint()
 	XTPColorManager()->SetColor(COLOR_3DFACE, face);
 }
 
-// STUB: ROBLOX 0x00422ec0
+// FUNCTION: ROBLOX 0x00422ec0
 void CRobloxTreeCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	if (nChar == VK_F2) {
@@ -330,7 +330,7 @@ int CSelectionTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-// STUB: ROBLOX 0x004239a0
+// FUNCTION: ROBLOX 0x004239a0
 void CRobloxTreeCtrl::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
 	Default();
@@ -931,7 +931,7 @@ void RootNode::VTable0x14(NMTVDISPINFO* dispInfo)
 template class RBX::MarshaledListener<RBX::Instance, RBX::DescendentAdded, RBX::Instance, RBX::DescendentAdded>;
 template class RBX::MarshaledListener<RBX::Instance, RBX::DescendentRemoving, RBX::Instance, RBX::DescendentRemoving>;
 
-// STUB: ROBLOX 0x00429040
+// FUNCTION: ROBLOX 0x00429040
 void CSelectionTreeCtrl::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	Default();

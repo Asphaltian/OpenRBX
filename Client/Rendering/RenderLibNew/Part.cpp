@@ -584,6 +584,7 @@ Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
 		Instance::event_propertyChanged.connect(&decal, boost::bind(&Decal::onDecalPropertyChanged, this, _1), 10);
 }
 
+// STUB: ROBLOX 0x0051af00
 Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 	: PartChunk(RenderNew::Chunk::TEXTURE_OFFSET, shared_from(&parentPart), view), texture(shared_from(&texture))
 {
