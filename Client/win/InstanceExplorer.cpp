@@ -3,7 +3,10 @@
 #include "util/Events.h"
 #include "util/Http.h"
 #include "util/scopedassign.h"
+#include "v8datamodel/DataModel.h"
+#include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Selection.h"
+#include "v8datamodel/custommesh.h"
 #include "v8tree/Service.h"
 
 #include <vector>
@@ -27,10 +30,17 @@ InsertDecal::InsertDecal(RBX::DataModel* dataModel, const char* name) : RBX::Edi
 {
 }
 
-// STUB: ROBLOX 0x0041f500
+// FUNCTION: ROBLOX 0x0041f500
 RBX::Instance* InsertDecal::FUN_0041f500() const
 {
-	STUB(0x41f500);
+	RBX::Selection* selection = dataModel ? dataModel->create<RBX::Selection>() : NULL;
+	if (selection->size() == 1) {
+		RBX::Instance* instance = selection->front().get();
+		if (dynamic_cast<RBX::PartInstance*>(instance) || dynamic_cast<RBX::SpecialShape*>(instance)) {
+			return instance;
+		}
+	}
+
 	return NULL;
 }
 
@@ -40,7 +50,7 @@ void InsertDecal::doIt(RBX::IDataState* dataState)
 	STUB(0x41f5c0);
 }
 
-// STUB: ROBLOX 0x0041f810
+// FUNCTION: ROBLOX 0x0041f810
 bool InsertDecal::isEnabled() const
 {
 	return RBX::EditSelectionVerb::isEnabled() && FUN_0041f500();
