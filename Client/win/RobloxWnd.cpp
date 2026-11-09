@@ -30,7 +30,10 @@
 #include "v8datamodel/UserController.h"
 
 #include <G3D/Log.h>
+#include <GLG3D/DXCaps.h>
 #include <GLG3D/GLCaps.h>
+#include <GLG3D/Texture.h>
+#include <GLG3D/VARArea.h>
 #include <GLG3D/Win32Window.h>
 #include <stdexcept>
 
@@ -47,6 +50,21 @@ LRESULT CRobloxWnd::FUN_0045f4d0(WPARAM wParam, LPARAM lParam)
 	SetFocus();
 	return 0;
 }
+
+// SIZE 0x4
+class Unknown0045f640
+{
+public:
+	Unknown0045f640(G3D::Stopwatch& stopwatch) : m_unk0x00(&stopwatch) { m_unk0x00->tick(); }
+
+	// FUNCTION: ROBLOX 0x0045f640
+	~Unknown0045f640() { m_unk0x00->tock(); }
+
+private:
+	G3D::Stopwatch* m_unk0x00; // 0x00
+};
+
+DECOMP_SIZE_ASSERT(Unknown0045f640, 0x4)
 
 // FUNCTION: ROBLOX 0x0045f650
 BOOL CRobloxWnd::OnEraseBkgnd(CDC* pDC)
@@ -210,15 +228,13 @@ void CRobloxWnd::FUN_00460360()
 	}
 }
 
-// STUB: ROBLOX 0x00460430
+// FUNCTION: ROBLOX 0x00460430
 void CRobloxWnd::FUN_00460430()
 {
 	if (m_unk0x82) {
-		RenderStats& stats = m_unk0xa8->getRenderStats();
-		stats.swapBuffer.tick();
+		Unknown0045f640 timer(m_unk0xa8->getRenderStats().swapBuffer);
 		m_unk0x9c->swapGLBuffers();
 		m_unk0x82 = false;
-		stats.swapBuffer.tock();
 	}
 }
 
@@ -233,7 +249,7 @@ BOOL CRobloxWnd::PreCreateWindow(CREATESTRUCT& cs)
 	return CWnd::PreCreateWindow(cs);
 }
 
-// STUB: ROBLOX 0x00460530
+// FUNCTION: ROBLOX 0x00460530
 void CRobloxWnd::OnKillFocus(CWnd* pNewWnd)
 {
 	FUN_00460430();
@@ -243,14 +259,14 @@ void CRobloxWnd::OnKillFocus(CWnd* pNewWnd)
 	}
 }
 
-// STUB: ROBLOX 0x00460560
+// FUNCTION: ROBLOX 0x00460560
 void CRobloxWnd::OnWindowPosChanging(WINDOWPOS* lpwndpos)
 {
 	CWnd::OnWindowPosChanging(lpwndpos);
 	FUN_00460430();
 }
 
-// STUB: ROBLOX 0x00460580
+// FUNCTION: ROBLOX 0x00460580
 void CRobloxWnd::OnClose()
 {
 	FUN_00460430();
@@ -693,10 +709,33 @@ CRobloxWnd::RenderStatsItem::RenderStatsItem(RenderStats* stats)
 	m_unk0x134 = stateChanges->createChildItem("Minor");
 }
 
-// STUB: ROBLOX 0x00463950
+// FUNCTION: ROBLOX 0x00463950
 void CRobloxWnd::RenderStatsItem::update()
 {
-	STUB(0x463950);
+	int chunkCount = RenderStats::chunkCount;
+	if (chunkCount == 0) {
+		m_unk0x120->setValue(0.0, "n/a");
+	}
+	else if (RenderStats::aggregateChunkCount == 0) {
+		m_unk0x120->formatValue(0.0, "%.0f%%, %.2g", 0.0, 1.0);
+	}
+	else {
+		float total = chunkCount;
+		float rendered = RenderStats::aggregateChunkCount - RenderStats::aggregatedChunkCount + chunkCount;
+		float ratio = (total - rendered) / (total - 1.0);
+		m_unk0x120->formatValue(ratio, "%.0f%%, %.2g", ratio * 100.0, total / rendered);
+	}
+
+	m_unk0x130->formatValue(
+		m_unk0x138->majorGLStateChanges, "%d/%d", m_unk0x138->majorGLStateChanges, m_unk0x138->majorStateChanges
+	);
+	m_unk0x134->formatValue(
+		m_unk0x138->minorGLStateChanges, "%d/%d", m_unk0x138->minorGLStateChanges, m_unk0x138->minorStateChanges
+	);
+
+	m_unk0x124->formatMem(G3D::Texture::sizeOfAllTexturesInMemory());
+	m_unk0x128->formatMem(G3D::VARArea::sizeOfAllVARAreasInMemory());
+	m_unk0x12c->formatMem(G3D::DXCaps::videoMemorySize());
 }
 
 // STUB: ROBLOX 0x00463c30
@@ -775,7 +814,7 @@ CRobloxWnd::~CRobloxWnd()
 	FUN_00463c30(NULL);
 }
 
-// STUB: ROBLOX 0x00464180
+// FUNCTION: ROBLOX 0x00464180
 void CRobloxWnd::OnDestroy()
 {
 	FUN_00460430();
