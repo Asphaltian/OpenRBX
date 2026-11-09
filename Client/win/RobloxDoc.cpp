@@ -3,6 +3,7 @@
 #include "InstanceExplorer.h"
 #include "LogManager.h"
 #include "MainFrm.h"
+#include "SaveToRobloxDialog.h"
 #include "network/Players.h"
 #include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
@@ -53,6 +54,24 @@ void CopyVerb::doIt(RBX::IDataState* dataState)
 	STUB(0x4125e0);
 }
 
+// FUNCTION: ROBLOX 0x00454190
+CPublishAsPlaceDialog::CPublishAsPlaceDialog(IDispatch* external, CWnd* pParentWnd)
+	: CSaveToRobloxDialog(external, FUN_00407190() + "/IDE/Upload.aspx", pParentWnd)
+{
+}
+
+// FUNCTION: ROBLOX 0x00454250
+CUploadPlaceDialog::CUploadPlaceDialog(IDispatch* external, CWnd* pParentWnd)
+	: CSaveToRobloxDialog(external, FUN_00407190() + "/Game/Upload.aspx", pParentWnd)
+{
+}
+
+// FUNCTION: ROBLOX 0x004542f0
+CSaveModelToRobloxDialog::CSaveModelToRobloxDialog(IDispatch* external, CWnd* pParentWnd)
+	: CSaveToRobloxDialog(external, FUN_00407190() + "/UI/Save.aspx?type=Model", pParentWnd)
+{
+}
+
 // FUNCTION: ROBLOX 0x00454390
 void ReportAbuseVerb::doIt(RBX::IDataState* dataState)
 {
@@ -73,6 +92,20 @@ void ExitCommand::doIt(RBX::IDataState* dataState)
 	if (pos) {
 		m_unk0x0c->GetNextView(pos)->PostMessage(WM_COMMAND, ID_FILE_CLOSE);
 	}
+}
+
+// FUNCTION: ROBLOX 0x00454920
+void CRobloxDoc::FUN_00454920()
+{
+	CPublishAsPlaceDialog dialog(m_unk0x78, NULL);
+	dialog.DoModal();
+}
+
+// FUNCTION: ROBLOX 0x004549c0
+void CRobloxDoc::FUN_004549c0()
+{
+	CSaveModelToRobloxDialog dialog(m_unk0x78, NULL);
+	dialog.DoModal();
 }
 
 // FUNCTION: ROBLOX 0x004558a0
@@ -369,6 +402,9 @@ void CRobloxDoc::FUN_00459c80()
 
 // clang-format off
 BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
+	ON_COMMAND(0x80b6, FUN_00454920)
+	ON_UPDATE_COMMAND_UI(0x80b6, FUN_00453eb0)
+	ON_COMMAND(0x80b7, FUN_004549c0)
 	ON_NOTIFY(CBN_XTP_EXECUTE, 0x80c3, FUN_004588a0)
 	ON_UPDATE_COMMAND_UI(0x80c3, FUN_00453eb0)
 	ON_UPDATE_COMMAND_UI(0xbb, FUN_00455ff0)

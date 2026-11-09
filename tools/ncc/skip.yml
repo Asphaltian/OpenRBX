@@ -72,3 +72,5 @@ FUN_004285a0: 'CSelectionTreeCtrl member; libclang reads the definition as a var
 VTable0x00: 'CSelectionTreeCtrl member; libclang reads the definition as a variable because CXTTreeCtrl is outside the ncc include path'
 OnActivateView: 'CRobloxView override taking BOOL, which ncc defines away; libclang reads the definition as a variable because CView is outside the ncc include path'
 FUN_00596ca0: 'Commands.cpp static helper; libclang reads the definition as a variable'
+OnWindowClosing: 'CSaveToRobloxDialog event sink handler taking BOOL, which ncc defines to 1; libclang reads the definition as a variable'
+CSaveToRobloxDialog: 'Empty BEGIN_DHTML_EVENT_MAP; libclang reads the empty map as a variable named after the class'

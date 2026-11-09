@@ -700,6 +700,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/RobloxReportView.cpp
     Client/win/RobloxView.cpp
     Client/win/RobloxWnd.cpp
+    Client/win/SaveToRobloxDialog.cpp
     Client/win/ScintillaCtrl.cpp
     Client/win/ScintillaDocView.cpp
     Client/win/ScriptDoc.cpp

@@ -138,6 +138,8 @@ public:
 
 protected:
 	afx_msg void FUN_00453eb0(CCmdUI* pCmdUI);
+	afx_msg void FUN_00454920();
+	afx_msg void FUN_004549c0();
 	afx_msg void FUN_00455ff0(CCmdUI* pCmdUI);
 	afx_msg void FUN_004590a0(CCmdUI* pCmdUI);
 	afx_msg void FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult);
