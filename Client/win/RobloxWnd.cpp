@@ -459,7 +459,7 @@ void CRobloxWnd::FUN_004610a0(int width, int height)
 	m_unk0xb0->m_unk0x08->lookAt(0.0f, 50.0f, 0.0f);
 }
 
-// STUB: ROBLOX 0x00461420
+// FUNCTION: ROBLOX 0x00461420
 void CRobloxWnd::FUN_00461420(int width, int height)
 {
 	G3D::GWindow::Settings settings;
@@ -512,7 +512,7 @@ void CRobloxWnd::FUN_00461420(int width, int height)
 	}
 }
 
-// STUB: ROBLOX 0x00461690
+// FUNCTION: ROBLOX 0x00461690
 int CRobloxWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CWnd::OnCreate(lpCreateStruct) == -1) {
@@ -523,13 +523,15 @@ int CRobloxWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	CRect rect;
 	GetClientRect(&rect);
+	int height = rect.Height();
+	int width = rect.Width();
 
 	try {
 		if (m_unk0x5c == 2) {
-			FUN_00461420(rect.Width(), rect.Height());
+			FUN_00461420(width, height);
 		}
 		else {
-			FUN_004610a0(rect.Width(), rect.Height());
+			FUN_004610a0(width, height);
 		}
 	}
 	catch (std::exception& e) {
