@@ -82,7 +82,7 @@ protected:
 	// ?GetMessageMap@CRobloxWnd@@MBEPBUAFX_MSGMAP@@XZ
 
 private:
-	// VTABLE: ROBLOX 0x0080daec
+	// VTABLE: ROBLOX 0x0080daec RBX::GuidItem<RBX::Instance>
 	// SIZE 0x140
 	class RenderStatsItem : public RBX::Stats::Item
 	{
