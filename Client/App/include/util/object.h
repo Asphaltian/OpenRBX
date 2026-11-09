@@ -759,8 +759,9 @@ public:
 	// TEMPLATE: ROBLOX 0x005c1ab0
 	// RBX::FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>::~FactoryProduct<StockSound,RBX::Soundscape::SoundChannel,&sStockSound>
 	// TEMPLATE: WEBSERVICE 0x1007e870
-	// TEMPLATE: ROBLOX 0x005c2310
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::getClassName
+	// TEMPLATE: ROBLOX 0x005c2310
+	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::Creator::getClassName
 	// TEMPLATE: WEBSERVICE 0x100815c0
 	// STUB: ROBLOX 0x00451a30
 	// RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings>::Creator::create

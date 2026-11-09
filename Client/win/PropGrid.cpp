@@ -3,6 +3,7 @@
 #include "Roblox.h"
 #include "script/Script.h"
 #include "util/ContentProvider.h"
+#include "util/Sound.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/DataModel.h"
@@ -1029,3 +1030,8 @@ template class XItem<
 	CXTPPropertyGridItem,
 	RBX::Reflection::TypedPropertyDescriptor<RBX::Soundscape::SoundId> >;
 template class XItem<RBX::TextureId, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId> >;
+
+template const RBX::FactoryProduct<RBX::Soundscape::SoundChannel, RBX::Instance, RBX::Soundscape::sSoundChannel>::
+	Creator RBX::FactoryProduct<RBX::Soundscape::SoundChannel, RBX::Instance, RBX::Soundscape::sSoundChannel>::creator;
+template const RBX::FactoryProduct<RBX::Soundscape::SoundService, RBX::Instance, RBX::Soundscape::sSoundService>::
+	Creator RBX::FactoryProduct<RBX::Soundscape::SoundService, RBX::Instance, RBX::Soundscape::sSoundService>::creator;
