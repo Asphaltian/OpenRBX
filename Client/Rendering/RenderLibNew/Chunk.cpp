@@ -1,5 +1,6 @@
 #include "renderlibnew/Chunk.h"
 
+#include "appdraw/RbxEntity.h"
 #include "renderlib/RenderStats.h"
 
 #include <G3D/g3dmath.h>
@@ -33,11 +34,14 @@ Chunk::Chunk(float polygonOffset) : m_unk0x14(0.0f), polygonOffset(polygonOffset
 	m_unk0x0c = NULL;
 }
 
-// STUB: ROBLOX 0x00536960
+// FUNCTION: ROBLOX 0x00536960
 Chunk::~Chunk()
 {
 	RenderStats::chunkCount--;
-	STUB(0x536960);
+
+	if (m_unk0x10) {
+		m_unk0x0c->FUN_00675a70(m_unk0x10);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00536a00

@@ -70,6 +70,22 @@ void RbxEntity::_updateRenderQueue(RenderQueue* queue)
 	}
 }
 
+// STUB: ROBLOX 0x00675a70
+void RbxEntity::FUN_00675a70(RbxSubEntity* subEntity)
+{
+	SubEntityList::iterator it;
+	for (it = mSubEntityList.begin(); it != mSubEntityList.end(); ++it) {
+		if (*it == subEntity) {
+			mSubEntityList.erase(it);
+			return;
+		}
+	}
+
+	if (it == mSubEntityList.end()) {
+		delete subEntity;
+	}
+}
+
 // FUNCTION: ROBLOX 0x00675bc0
 RbxEntity::RbxEntity()
 {
