@@ -269,9 +269,9 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 			continue;
 		}
 
-		bool updateMaterial = chunk->getMesh().notNull();
+		bool hasMesh = chunk->getMesh().notNull();
 		bool hasMaterial = chunk->getMaterial().notNull();
-		if (!updateMaterial || !hasMaterial) {
+		if (!hasMesh || !hasMaterial) {
 			continue;
 		}
 
@@ -329,6 +329,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 			rebuilt = true;
 		}
 
+		bool updateMaterial = false;
 		materialLevel->baseTexture(rd);
 
 		if (materialLevel->m_unk0x28.isNull()) {
