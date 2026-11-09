@@ -6,6 +6,7 @@
 #include "tool/DragTool.h"
 #include "tool/GrabTool.h"
 #include "tool/PartDragTool.h"
+#include "util/ContentProvider.h"
 #include "util/Math.h"
 #include "util/Sound.h"
 #include "util/SoundWorld.h"
@@ -379,18 +380,20 @@ ShootTool::ShootTool(Workspace* workspace, bool p_unk0x28, int p_unk0x2c)
 {
 }
 
-// STUB: ROBLOX 0x0063a910
+// FUNCTION: ROBLOX 0x0063a910
 boost::shared_ptr<PartInstance> SlingshotTool::VTable0x40()
 {
-	STUB(0x63a910);
-	return boost::shared_ptr<PartInstance>();
+	std::vector<boost::shared_ptr<Instance> > instances;
+	ContentProvider::singleton().load(ContentId::fromAssets("Fonts\\SlingshotPellet.rbxm"), instances);
+	return boost::shared_polymorphic_downcast<PartInstance>(instances.front());
 }
 
-// STUB: ROBLOX 0x0063aa10
+// FUNCTION: ROBLOX 0x0063aa10
 boost::shared_ptr<PartInstance> RocketTool::VTable0x40()
 {
-	STUB(0x63aa10);
-	return boost::shared_ptr<PartInstance>();
+	std::vector<boost::shared_ptr<Instance> > instances;
+	ContentProvider::singleton().load(ContentId::fromAssets("Fonts\\Rocket.rbxm"), instances);
+	return boost::shared_polymorphic_downcast<PartInstance>(instances.front());
 }
 
 // FUNCTION: ROBLOX 0x0063ab10
