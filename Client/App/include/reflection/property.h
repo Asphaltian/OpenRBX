@@ -667,7 +667,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x100f35f0
 	// RBX::Reflection::BoundProp<G3D::Vector3,1>::BoundProp<G3D::Vector3,1><RBX::Value<G3D::Vector3,&RBX::sVector3Value> >
 	// TEMPLATE: WEBSERVICE 0x100f36d0
-	// STUB: ROBLOX 0x006323b0
+	// TEMPLATE: ROBLOX 0x006323b0
 	// RBX::Reflection::BoundProp<G3D::CoordinateFrame,1>::BoundProp<G3D::CoordinateFrame,1><RBX::Value<G3D::CoordinateFrame,&RBX::sCFrameValue> >
 	// TEMPLATE: WEBSERVICE 0x100f37b0
 	// TEMPLATE: ROBLOX 0x00632490

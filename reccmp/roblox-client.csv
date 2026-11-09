@@ -6172,3 +6172,7 @@ address,type,symbol,name,module,size
 006919e0,library,?reserve@?$vector@PAVLight@Ogre@@V?$allocator@PAVLight@Ogre@@@std@@@std@@QAEXI@Z,,,
 009543bc,global,"index___RBX::ServiceProvider::doGetClassIndex<RBX::ControllerService>",,,
 009543c0,global,"??_B?1???$doGetClassIndex@VControllerService@RBX@@@ServiceProvider@RBX@@CAIXZ@51",,,
+005cc2b0,library,??$?0VBodyVelocity@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@VBodyVelocity@RBX@@@boost@@QAE@PAVBodyVelocity@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,,,
+0060f5c0,library,??$?0VMouse@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@VMouse@RBX@@@boost@@QAE@PAVMouse@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,,,
+008379c4,global,??_7?$BoundProp@VCoordinateFrame@G3D@@$00@Reflection@RBX@@6B@,,,
+0043c570,synthetic,??_9CPropGrid@@$BBGA@AE,,,

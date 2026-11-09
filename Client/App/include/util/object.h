@@ -269,7 +269,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005cc0f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::BodyPosition>
 	// TEMPLATE: WEBSERVICE 0x1008c030
-	// STUB: ROBLOX 0x005cc360 FOLDED
+	// TEMPLATE: ROBLOX 0x005cc360 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::BodyVelocity>
 	// TEMPLATE: WEBSERVICE 0x1008c2a0
 	// TEMPLATE: ROBLOX 0x005cc5d0
@@ -335,7 +335,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005988e0
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::ModelInstance> >
 	// TEMPLATE: WEBSERVICE 0x100cc1b0
-	// STUB: ROBLOX 0x00610d80 FOLDED
+	// TEMPLATE: ROBLOX 0x00610d80 FOLDED
 	// RBX::Creatable<RBX::Instance>::create<RBX::Mouse>
 	// TEMPLATE: WEBSERVICE 0x100dda40
 	// TEMPLATE: ROBLOX 0x005f5670
