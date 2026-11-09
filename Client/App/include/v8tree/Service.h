@@ -112,6 +112,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // TEMPLATE: ROBLOX 0x00572f20
 // RBX::ServiceProvider::create<RBX::Stats::StatsService>
 // TEMPLATE: WEBSERVICE 0x1006a590
+// TEMPLATE: ROBLOX 0x0045f920
 // RBX::ServiceProvider::doGetClassIndex<RBX::ControllerService>
 // TEMPLATE: WEBSERVICE 0x1006a5f0
 // RBX::ServiceProvider::doGetClassIndex<RBX::StarterPackService>

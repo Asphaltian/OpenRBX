@@ -6170,3 +6170,5 @@ address,type,symbol,name,module,size
 006767e0,library,?push_back@?$vector@UUnknown00676870@RbxEntity@Ogre@@V?$allocator@UUnknown00676870@RbxEntity@Ogre@@@std@@@std@@QAEXABUUnknown00676870@RbxEntity@Ogre@@@Z,,,
 0068e5f0,library,?find@?$_Tree@V?$_Tmap_traits@W4TextureEffectType@TextureUnitState@Ogre@@UTextureEffect@23@U?$less@W4TextureEffectType@TextureUnitState@Ogre@@@std@@V?$allocator@U?$pair@$$CBW4TextureEffectType@TextureUnitState@Ogre@@UTextureEffect@23@@std@@@6@$00@std@@@std@@QBE?AVconst_iterator@12@ABW4TextureEffectType@TextureUnitState@Ogre@@@Z,,,
 006919e0,library,?reserve@?$vector@PAVLight@Ogre@@V?$allocator@PAVLight@Ogre@@@std@@@std@@QAEXI@Z,,,
+009543bc,global,"index___RBX::ServiceProvider::doGetClassIndex<RBX::ControllerService>",,,
+009543c0,global,"??_B?1???$doGetClassIndex@VControllerService@RBX@@@ServiceProvider@RBX@@CAIXZ@51",,,
