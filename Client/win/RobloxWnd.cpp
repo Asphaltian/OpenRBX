@@ -56,7 +56,7 @@ LRESULT CRobloxWnd::FUN_0045f4d0(WPARAM wParam, LPARAM lParam)
 class Unknown0045f640
 {
 public:
-	Unknown0045f640(G3D::Stopwatch& stopwatch) : m_unk0x00(&stopwatch) { m_unk0x00->tick(); }
+	Unknown0045f640(G3D::Stopwatch& stopwatch) : m_unk0x00(&stopwatch) { stopwatch.tick(); }
 
 	// FUNCTION: ROBLOX 0x0045f640
 	~Unknown0045f640() { m_unk0x00->tock(); }
@@ -66,6 +66,26 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(Unknown0045f640, 0x4)
+
+static void runViewValid(RBX::DataModel* dataModel, RBX::IRunView* runView)
+{
+	if (dataModel) {
+		RBX::RunService* runService = dataModel->create<RBX::RunService>();
+		if (runService) {
+			runService->runViewValid(runView);
+		}
+	}
+}
+
+static void removeRunView(RBX::DataModel* dataModel, RBX::IRunView* runView)
+{
+	if (dataModel) {
+		RBX::RunService* runService = dataModel->create<RBX::RunService>();
+		if (runService) {
+			runService->removeRunView(runView);
+		}
+	}
+}
 
 // FUNCTION: ROBLOX 0x0045f650
 BOOL CRobloxWnd::OnEraseBkgnd(CDC* pDC)
@@ -539,10 +559,26 @@ void CRobloxWnd::FUN_004619e0()
 	m_unk0xac.reset(new RBX::AdornG3D(m_unk0xa4.get()));
 }
 
-// STUB: ROBLOX 0x004622d0
+// FUNCTION: ROBLOX 0x004622d0
 void CRobloxWnd::FUN_004622d0(bool p_unk0x04)
 {
-	STUB(0x4622d0);
+	m_unk0xa4->pushState();
+	try {
+		RBX::DataModel::Lock lock(m_unk0x70);
+		m_unk0xa8->render(m_unk0xa4.get());
+		Unknown0045f640 timer(m_unk0xa8->getRenderStats().render2D);
+		m_unk0x70->renderPass3dAdorn(m_unk0xac.get());
+		if (p_unk0x04) {
+			m_unk0xa4->push2D();
+			m_unk0x70->renderPass2d(m_unk0xac.get(), this);
+			m_unk0xa4->pop2D();
+		}
+	}
+	catch (std::exception& e) {
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_ERROR, e);
+	}
+	runViewValid(m_unk0x70.get(), this);
+	m_unk0xa4->popState();
 }
 
 // STUB: ROBLOX 0x00462450
@@ -680,7 +716,7 @@ bool CRobloxWnd::FUN_00462890()
 	return painted;
 }
 
-// STUB: ROBLOX 0x00462a50
+// FUNCTION: ROBLOX 0x00462a50
 void CRobloxWnd::OnPaint()
 {
 	bool painted;
@@ -691,10 +727,7 @@ void CRobloxWnd::OnPaint()
 		painted = FUN_00462710();
 	}
 	if (!painted && m_unk0x70) {
-		RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
-		if (runService) {
-			runService->runViewValid(this);
-		}
+		runViewValid(m_unk0x70.get(), this);
 	}
 }
 
@@ -768,7 +801,7 @@ void CRobloxWnd::RenderStatsItem::update()
 	m_unk0x12c->formatMem(G3D::DXCaps::videoMemorySize());
 }
 
-// STUB: ROBLOX 0x00463c30
+// FUNCTION: ROBLOX 0x00463c30
 void CRobloxWnd::FUN_00463c30(CWorkspace* workspace)
 {
 	if (workspace != m_unk0x6c) {
@@ -783,12 +816,7 @@ void CRobloxWnd::FUN_00463c30(CWorkspace* workspace)
 			}
 			m_unk0x9c->makeCurrent();
 			m_unk0xa8.reset();
-			if (m_unk0x70) {
-				RBX::RunService* runService = m_unk0x70->create<RBX::RunService>();
-				if (runService) {
-					runService->removeRunView(this);
-				}
-			}
+			removeRunView(m_unk0x70.get(), this);
 			m_unk0x7c.reset();
 		}
 
