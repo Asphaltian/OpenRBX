@@ -379,10 +379,20 @@ MoveDownSelectionVerb::MoveDownSelectionVerb(DataModel* dataModel) : EditSelecti
 {
 }
 
-// STUB: ROBLOX 0x00599f80
+// FUNCTION: ROBLOX 0x00599f80
 bool JoinCommand::isEnabled() const
 {
-	STUB(0x599f80);
+	Selection* currentSelection = dataModel ? dataModel->create<Selection>() : NULL;
+
+	if (currentSelection->size() == 2) {
+		boost::shared_ptr<Instance> first = currentSelection->front();
+		boost::shared_ptr<Instance> second = currentSelection->back();
+
+		if (FUN_00617200(first.get(), second.get())) {
+			return true;
+		}
+	}
+
 	return false;
 }
 
@@ -534,10 +544,18 @@ void AllCanSelectCommand::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059a9f0
+// FUNCTION: ROBLOX 0x0059a9f0
 void GroupSelectionVerb::doIt(IDataState* dataState)
 {
-	STUB(0x59a9f0);
+	FUN_00596660(dataModel);
+
+	Selection* currentSelection = dataModel ? dataModel->create<Selection>() : NULL;
+	ModelInstance* model = workspace->FUN_005984c0(currentSelection->begin(), currentSelection->end()).get();
+	currentSelection->setSelection(model);
+
+	(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(PING_SOUND);
+	dataState->clearStack();
+	dataState->setDirty(true);
 }
 
 // STUB: ROBLOX 0x0059aaf0
@@ -998,7 +1016,7 @@ bool ControllerCommand::isEnabled() const
 	return filteredSelection->FUN_00598690(&FUN_00596960) != NULL;
 }
 
-// STUB: ROBLOX 0x0059ca70
+// FUNCTION: ROBLOX 0x0059ca70
 void CameraZoomExtentsCommand::doIt(IDataState* dataState)
 {
 	ServiceClient<FilteredSelection<PVInstance> > filteredSelection(workspace);
@@ -1021,6 +1039,7 @@ void CameraZoomExtentsCommand::doIt(IDataState* dataState)
 		dataState->setDirty(true);
 	}
 	else {
+		G3D::Vector3 center = G3D::Vector3::zero();
 		getCamera()->zoomExtents(workspace->getViewPort());
 		ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(STEP_SOUND);
 		dataState->clearStack();

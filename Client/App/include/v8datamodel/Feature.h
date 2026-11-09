@@ -218,6 +218,7 @@ DECOMP_SIZE_ASSERT(MotorFeature, 0x118)
 // RBX::VelocityMotor::`scalar deleting destructor'
 // clang-format on
 
+bool FUN_00617200(Instance* first, Instance* second);
 void FUN_0061a840(Instance* first, Instance* second);
 
 } // namespace RBX

@@ -72,8 +72,8 @@ float VelocityMotor::getCurrentAngle() const
 	return static_cast<MotorJoint*>(joint)->getCurrentAngle();
 }
 
-// STUB: ROBLOX 0x00617200
-static bool FUN_00617200(Instance* first, Instance* second)
+// FUNCTION: ROBLOX 0x00617200
+bool FUN_00617200(Instance* first, Instance* second)
 {
 	return (dynamic_cast<Hole*>(first) && dynamic_cast<MotorFeature*>(second)) ||
 		   (dynamic_cast<Hole*>(second) && dynamic_cast<MotorFeature*>(first));
@@ -383,7 +383,7 @@ MotorFeature::MotorFeature()
 	setName("MotorFeature");
 }
 
-// STUB: ROBLOX 0x0061a840
+// FUNCTION: ROBLOX 0x0061a840
 void FUN_0061a840(Instance* first, Instance* second)
 {
 	if (FUN_00617200(first, second)) {

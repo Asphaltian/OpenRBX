@@ -182,6 +182,19 @@ public:
 	boost::scoped_ptr<Profiling::CodeProfiler> profileRunServiceHeartbeat; // 0x368
 	boost::scoped_ptr<Profiling::ThreadProfiler> profileRun;               // 0x36c
 	int imageServerViewHack;                                               // 0x370
+
+	template <class _InIt>
+	boost::shared_ptr<ModelInstance> FUN_005984c0(_InIt first, _InIt last)
+	{
+		boost::shared_ptr<ModelInstance> model = Creatable<Instance>::create<ModelInstance>();
+		model->setParent(this);
+
+		for (; first != last; ++first) {
+			(*first)->setParent(model.get());
+		}
+
+		return model;
+	}
 };
 
 DECOMP_SIZE_ASSERT(Workspace, 0x394)
@@ -195,6 +208,8 @@ DECOMP_SIZE_ASSERT(Workspace, 0x394)
 // RBX::wrapper2<1>
 // TEMPLATE: WEBSERVICE 0x1006c1d0
 // RBX::wrapper2<0>
+// TEMPLATE: ROBLOX 0x005984c0
+// RBX::Workspace::FUN_005984c0<std::_Vector_const_iterator<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > >
 // TEMPLATE: WEBSERVICE 0x1006fab0
 // TEMPLATE: ROBLOX 0x005b7e90
 // RBX::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>::DescribedNonCreatable<RBX::Workspace,RBX::RootInstance,&RBX::sWorkspace>
