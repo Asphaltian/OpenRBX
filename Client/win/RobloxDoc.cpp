@@ -5,8 +5,10 @@
 #include "MainFrm.h"
 #include "SaveToRobloxDialog.h"
 #include "network/Players.h"
+#include "script/LuaMemory.h"
 #include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
+#include "util/Log.h"
 #include "util/RunStateOwner.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/Selection.h"
@@ -25,6 +27,12 @@ template <class T>
 static T* createService(RBX::DataModel* dataModel)
 {
 	return dataModel ? dataModel->create<T>() : NULL;
+}
+
+template <class T>
+static T* findService(RBX::DataModel* dataModel)
+{
+	return dataModel ? dataModel->find<T>() : NULL;
 }
 
 // FUNCTION: ROBLOX 0x0040ffc0
@@ -359,6 +367,14 @@ void CRobloxDoc::FUN_00453eb0(CCmdUI* pCmdUI)
 	pCmdUI->Enable(TRUE);
 }
 
+// FUNCTION: ROBLOX 0x00458750
+void CRobloxDoc::FUN_00458750(CCmdUI* pCmdUI)
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	RBX::Selection* selection = createService<RBX::Selection>(m_unk0x78->FUN_0046edc0().get());
+	pCmdUI->Enable(selection->size() > 0);
+}
+
 // STUB: ROBLOX 0x004588a0
 void CRobloxDoc::FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult)
 {
@@ -421,6 +437,34 @@ void CRobloxDoc::FUN_00458f60(CCmdUI* pCmdUI)
 	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
 	RBX::RunService* runService = FUN_00403290()->create<RBX::RunService>();
 	pCmdUI->Enable(!runService->runDisabled && !runService->isRunState());
+}
+
+// FUNCTION: ROBLOX 0x004592c0
+void CRobloxDoc::FUN_004592c0(CCmdUI* pCmdUI)
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	RBX::ScriptContext* scriptContext = findService<RBX::ScriptContext>(FUN_00403290().get());
+	pCmdUI->Enable(scriptContext && scriptContext->hasState());
+}
+
+// FUNCTION: ROBLOX 0x00459400
+void CRobloxDoc::FUN_00459400()
+{
+	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+	RBX::ScriptContext* scriptContext = findService<RBX::ScriptContext>(FUN_00403290().get());
+	if (scriptContext && scriptContext->allocator) {
+		scriptContext->gc();
+
+		unsigned int heapSize;
+		unsigned int heapCount;
+		scriptContext->allocator->getHeapStats(heapSize, heapCount);
+
+		std::string heap = RBX::Log::formatMem(heapSize);
+		unsigned int threadCount = scriptContext->getThreadCount();
+		RBX::StandardOut::singleton()->print(
+			RBX::MESSAGE_INFO, "Script heap %s (%d blocks), %d threads", heap.c_str(), heapCount, threadCount
+		);
+	}
 }
 
 // STUB: ROBLOX 0x004590a0
@@ -528,6 +572,7 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_COMMAND(0x80b6, FUN_00454920)
 	ON_UPDATE_COMMAND_UI(0x80b6, FUN_00453eb0)
 	ON_COMMAND(0x80b7, FUN_004549c0)
+	ON_UPDATE_COMMAND_UI(0x80b7, FUN_00458750)
 	ON_NOTIFY(CBN_XTP_EXECUTE, 0x80c3, FUN_004588a0)
 	ON_UPDATE_COMMAND_UI(0x80c3, FUN_00453eb0)
 	ON_UPDATE_COMMAND_UI(0xbb, FUN_00455ff0)
@@ -546,5 +591,7 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(0x80c8, FUN_00458dc0)
 	ON_COMMAND(0x80c6, FUN_0045a9e0)
 	ON_UPDATE_COMMAND_UI(0x80c6, FUN_00458f60)
+	ON_UPDATE_COMMAND_UI(0x80da, FUN_004592c0)
+	ON_COMMAND(0x80da, FUN_00459400)
 END_MESSAGE_MAP()
 // clang-format on

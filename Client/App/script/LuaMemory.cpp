@@ -21,6 +21,13 @@ void LuaAllocator::clearHeapMax()
 	maxHeapCount = 0;
 }
 
+// FUNCTION: ROBLOX 0x005d31c0
+void LuaAllocator::getHeapStats(unsigned int& heapSize, unsigned int& heapCount) const
+{
+	heapSize = this->heapSize;
+	heapCount = this->heapCount;
+}
+
 // FUNCTION: WEBSERVICE 0x100b8500
 // FUNCTION: ROBLOX 0x005d31e0
 void LuaAllocator::getHeapStats(

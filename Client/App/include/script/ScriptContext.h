@@ -90,7 +90,8 @@ public:
 	virtual XmlElement* write() { return NULL; }
 
 	unsigned int getThreadCount() const;
-	bool hasState() const;
+	bool hasState() const { return globalState != NULL; }
+
 	lua_State* state();
 
 	void closeState();

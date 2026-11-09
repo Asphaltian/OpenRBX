@@ -68,6 +68,14 @@ void ScriptContext::sandboxThread(lua_State* thread)
 	lua_replace(thread, LUA_GLOBALSINDEX);
 }
 
+// FUNCTION: ROBLOX 0x0056bd70
+void ScriptContext::gc()
+{
+	if (globalState) {
+		lua_gc(globalState, LUA_GCCOLLECT, 0);
+	}
+}
+
 // FUNCTION: WEBSERVICE 0x1005eb00
 // FUNCTION: ROBLOX 0x0056bd90
 ScriptContext& ScriptContext::getContext(lua_State* thread)
