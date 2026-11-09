@@ -14,10 +14,15 @@ const float Chunk::TEXTURE_OFFSET = -0.1f;
 bool AggregateChunk::randomColors;
 const G3D::CoordinateFrame AggregateChunk::identity;
 
-// STUB: ROBLOX 0x005367b0
+// FUNCTION: ROBLOX 0x005367b0
 void Chunk::VTable0x20()
 {
-	STUB(0x5367b0);
+	if (m_unk0x10) {
+		m_unk0x0c->FUN_00675a70(m_unk0x10);
+	}
+
+	m_unk0x10 = NULL;
+	m_unk0x0c = NULL;
 }
 
 // STUB: ROBLOX 0x005367d0
