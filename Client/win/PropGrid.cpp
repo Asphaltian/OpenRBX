@@ -370,7 +370,7 @@ void CPropGrid::FUN_0043e7f0(boost::shared_ptr<RBX::Instance> instance)
 	m_unk0x1d0.FUN_0043e170(instance.get());
 }
 
-// STUB: ROBLOX 0x0043e8a0
+// FUNCTION: ROBLOX 0x0043e8a0
 LRESULT CPropGrid::FUN_0043e8a0(WPARAM wParam, LPARAM lParam)
 {
 	if (m_unk0x198.empty()) {
@@ -384,13 +384,13 @@ LRESULT CPropGrid::FUN_0043e8a0(WPARAM wParam, LPARAM lParam)
 	std::set<Item*> dirty;
 	{
 		boost::recursive_mutex::scoped_lock lock(m_unk0x188);
-		if (!m_unk0x1c1) {
-			dirty = m_unk0x1c4;
-			m_unk0x1c4.clear();
-		}
-		else {
+		if (m_unk0x1c1) {
 			items = m_unk0x198;
 			m_unk0x1c1 = false;
+		}
+		else {
+			dirty = m_unk0x1c4;
+			m_unk0x1c4.clear();
 		}
 		m_unk0x1c0 = false;
 	}

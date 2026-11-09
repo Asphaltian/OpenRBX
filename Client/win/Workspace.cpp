@@ -30,11 +30,12 @@ CWorkspace::~CWorkspace()
 {
 }
 
-// STUB: ROBLOX 0x0046ef00
+// FUNCTION: ROBLOX 0x0046ef00
 void CWorkspace::FUN_0046ef00(std::istream& stream)
 {
 	RBX::DataModel::Lock lock(m_unk0x24);
-	SerializerV2().load(stream, m_unk0x24.get());
+	SerializerV2 serializer;
+	serializer.load(stream, m_unk0x24.get());
 	FUN_0046edf0()->joinAllHack();
 }
 
