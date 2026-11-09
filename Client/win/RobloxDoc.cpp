@@ -81,6 +81,7 @@ RBX::VerbContainer* CRobloxDoc::FUN_004558a0()
 	return FUN_00403290()->getWorkspace();
 }
 
+// FUNCTION: ROBLOX 0x00456b50
 CRobloxDoc::~CRobloxDoc()
 {
 }
