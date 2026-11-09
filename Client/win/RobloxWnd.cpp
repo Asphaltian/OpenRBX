@@ -18,6 +18,7 @@
 #include "appdraw/VisualEngine.h"
 #include "network/Players.h"
 #include "rbxview/View.h"
+#include "renderlib/Mesh.h"
 #include "renderlib/Profiler.h"
 #include "renderlib/RenderStats.h"
 #include "renderlibnew/Chunk.h"
@@ -643,11 +644,39 @@ bool CRobloxWnd::FUN_00462710()
 	return true;
 }
 
-// STUB: ROBLOX 0x00462890
+// FUNCTION: ROBLOX 0x00462890
 bool CRobloxWnd::FUN_00462890()
 {
-	STUB(0x462890);
-	return false;
+	bool painted = false;
+	CPaintDC dc(this);
+	if (m_unk0x9c && dc.m_hDC && m_unk0x70 && !IsRectEmpty(&dc.m_ps.rcPaint)) {
+		m_unk0x9c->makeCurrent();
+		if (!m_unk0xa4.get()) {
+			CRect rect;
+			GetClientRect(&rect);
+			dc.DrawText("Roblox can't run with your graphics driver", -1, &rect, DT_END_ELLIPSIS);
+		}
+		else {
+			RBX::Profiling::Mark mark(*m_unk0x90, true);
+			FUN_00460430();
+			m_unk0xa4->beginFrame();
+			FUN_00462630(true);
+			painted = true;
+			m_unk0xa4->endFrame();
+			m_unk0x82 = true;
+			if (m_unk0x83 || !g_unk0x00953c68.getValue(&CRenderSettings::singleton()) ||
+				!m_unk0x70->canDelaySwapBuffer()) {
+				FUN_00460430();
+				m_unk0x83 = false;
+			}
+			if (m_unk0x78) {
+				m_unk0x78 = false;
+				RBX::Render::Mesh::makeVAR();
+				RBX::Render::Mesh::varDirty = true;
+			}
+		}
+	}
+	return painted;
 }
 
 // STUB: ROBLOX 0x00462a50

@@ -13,6 +13,7 @@
 #include <GLG3D/VAR.h>
 #include <vector>
 
+class CRobloxWnd;
 class ThumbnailGenerator;
 
 namespace RBX {
@@ -64,6 +65,7 @@ public:
 	static void setShadowVertex(const G3D::Vector3&);
 
 private:
+	friend class ::CRobloxWnd;
 	friend class ::ThumbnailGenerator;
 
 	static G3D::MeshAlg::Geometry visibleGeometry;

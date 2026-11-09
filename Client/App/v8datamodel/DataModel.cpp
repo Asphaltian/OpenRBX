@@ -234,6 +234,12 @@ float DataModel::getSimTime() const
 	return timeState->totalVirtualTime;
 }
 
+// FUNCTION: ROBLOX 0x0058f110
+bool DataModel::canDelaySwapBuffer() const
+{
+	return runService->isRunState();
+}
+
 // STUB: ROBLOX 0x0058f350
 GuiResponse DataModel::FUN_0058f350(const GuiEvent& event)
 {

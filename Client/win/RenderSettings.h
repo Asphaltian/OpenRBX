@@ -310,6 +310,8 @@ public:
 
 DECOMP_SIZE_ASSERT(CRenderSettings, 0x144)
 
+extern RBX::Reflection::BoundProp<bool, 1> g_unk0x00953c68;
+
 extern CRenderSettings::AASamples g_unk0x0091a2e8;
 
 // clang-format off

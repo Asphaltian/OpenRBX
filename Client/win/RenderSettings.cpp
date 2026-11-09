@@ -63,9 +63,7 @@ static RBX::Reflection::EnumPropDescriptor<CRenderSettings, CRenderSettings::AAS
 	"AASamples", "Qaulity", &CRenderSettings::FUN_004482f0, &CRenderSettings::FUN_0044cda0
 );
 
-static RBX::Reflection::BoundProp<bool, 1> g_unk0x00953c68(
-	"delaySwapBuffer", "Performance", &CRenderSettings::m_unk0x11c
-);
+RBX::Reflection::BoundProp<bool, 1> g_unk0x00953c68("delaySwapBuffer", "Performance", &CRenderSettings::m_unk0x11c);
 
 static RBX::Reflection::BoundProp<std::string, 1> g_unk0x00953c84(
 	"profileName", "Qaulity", &CRenderSettings::m_unk0x120, RBX::Reflection::PropertyDescriptor::STREAMING
