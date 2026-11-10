@@ -143,6 +143,7 @@ void PartChunk::onAncestorChanged(boost::shared_ptr<Instance> ancestor)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00515970 FOLDED
 void Decal::onDecalAncestorChanged(boost::shared_ptr<Instance> ancestor)
 {
 	Workspace* workspace = Workspace::findWorkspace(decal.get());
@@ -154,6 +155,7 @@ void Decal::onDecalAncestorChanged(boost::shared_ptr<Instance> ancestor)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00515970 FOLDED
 void Texture::onTextureAncestorChanged(boost::shared_ptr<Instance> ancestor)
 {
 	Workspace* workspace = Workspace::findWorkspace(texture.get());
@@ -236,6 +238,7 @@ Decal::~Decal()
 {
 }
 
+// FUNCTION: ROBLOX 0x00515e10
 void Decal::onDecalPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	if (descriptor == &FaceInstance::prop_Face) {
@@ -278,6 +281,7 @@ G3D::ReferenceCountedPointer<RenderNew::Material> Decal::getMaterial()
 	return material;
 }
 
+// FUNCTION: ROBLOX 0x005160b0
 void Texture::onTexturePropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	if (descriptor == &FaceInstance::prop_Face) {
@@ -575,6 +579,7 @@ PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>&
 	partInstance->visitChildren(boost::bind(&PartChunk::onChildAdded, this, _1));
 }
 
+// STUB: ROBLOX 0x0051ad40
 Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
 	: PartChunk(RenderNew::Chunk::DECAL_OFFSET, shared_from(&parentPart), view), decal(shared_from(&decal))
 {

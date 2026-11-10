@@ -97,7 +97,7 @@ RenderStats& View::getRenderStats()
 	return renderLibScene->renderStats;
 }
 
-// STUB: ROBLOX 0x0050b7e0
+// FUNCTION: ROBLOX 0x0050b7e0
 void View::onWorkspaceDescendentAdded(boost::shared_ptr<Instance> descendent)
 {
 	PartInstance* part = dynamic_cast<PartInstance*>(descendent.get());

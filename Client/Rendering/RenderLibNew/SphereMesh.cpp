@@ -76,9 +76,11 @@ protected:
 
 DECOMP_SIZE_ASSERT(SphereBuilder, 0x24)
 
-// STUB: ROBLOX 0x005282e0
+// FUNCTION: ROBLOX 0x005282e0
 SphereMesh::SphereMesh(const G3D::Vector3& diameter, RenderSurfaceTypes surfaceTypes)
 {
+	m_unk0x3c = 2;
+
 	levels.append(new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS));
 	{
 		RenderNew::Mesh::LevelRef& level = levels.last();

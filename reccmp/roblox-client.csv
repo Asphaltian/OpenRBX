@@ -6337,3 +6337,5 @@ address,type,symbol,name,module,size
 0080b0cc,global,??_7CSaveModelToRobloxDialog@@6BCDialog@@@,,,
 0080b0a0,global,??_7CSaveModelToRobloxDialog@@6BCDHtmlEventSink@@@,,,
 0091cb80,global,_dhtmlEventEntries___CSaveToRobloxDialog::GetDHtmlEventMap,,,
+0081aa98,global,?DECAL_OFFSET@Chunk@RenderNew@RBX@@2MB,,,
+0081aa9c,global,?TEXTURE_OFFSET@Chunk@RenderNew@RBX@@2MB,,,

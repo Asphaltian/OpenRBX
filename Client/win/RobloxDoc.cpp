@@ -640,7 +640,7 @@ void CRobloxDoc::FUN_00459790(CCmdUI* pCmdUI)
 	}
 }
 
-// STUB: ROBLOX 0x00459950
+// FUNCTION: ROBLOX 0x00459950
 BOOL CRobloxDoc::FUN_00459950(std::string fileName)
 {
 	if (RBX::ContentProvider::isHttpUrl(fileName.c_str())) {
@@ -665,12 +665,11 @@ BOOL CRobloxDoc::FUN_00459950(std::string fileName)
 		FUN_00403290()->create<RBX::ScriptContext>()->executeInNewThread(
 			RBX::Security::LocalGUI, script, fileName.c_str(), arguments
 		);
+		return TRUE;
 	}
 	catch (std::exception&) {
 		return FALSE;
 	}
-
-	return TRUE;
 }
 
 // FUNCTION: ROBLOX 0x00459c80
