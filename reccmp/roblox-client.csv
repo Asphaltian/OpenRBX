@@ -3298,7 +3298,6 @@ address,type,symbol,name,module,size
 00424ec0,library,?_Tidy@?$_Tree@V?$_Tset_traits@V?$shared_ptr@VInstance@RBX@@@boost@@U?$less@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@4@$0A@@std@@@std@@IAEXXZ,,,
 0042bbf0,library,??$_Unchecked_move_backward@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV12@@stdext@@YAPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV12@00@Z,,,
 0042bfe0,library,??$_Umove@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@PAV21@00@Z,,,
-0042e310,library,?ResizeBorder@XDocHostUIHandler@CHTMLToolTip@CXTPToolTipContext@@UAGJPBUtagRECT@@PAUIOleInPlaceUIWindow@@H@Z,,,
 0042f7c0,library,??1?$list@V?$shared_ptr@VItem@Replicator@Network@RBX@@@boost@@V?$allocator@V?$shared_ptr@VItem@Replicator@Network@RBX@@@boost@@@std@@@std@@QAE@XZ,,,
 0042f960,library,??_ECXTPDockingPaneLayout@@UAEPAXI@Z,,,
 004315f0,library,?_Ufill@?$vector@VValue@Reflection@RBX@@V?$allocator@VValue@Reflection@RBX@@@std@@@std@@IAEPAVValue@Reflection@RBX@@PAV345@IABV345@@Z,,,
@@ -6282,7 +6281,6 @@ address,type,symbol,name,module,size
 0070c090,library,?InsertChildItem@CXTPPropertyGridItem@@QAEPAV1@HPAV1@@Z,,,
 0043c550,synthetic,??_9Item@CPropGrid@@$BA@AE,,,
 00415d10,library,?Release@?$CComObject@VCContent@@@ATL@@UAGKXZ,,,
-0042e320,library,?GetIDsOfNames@XAccessible@CXTPAccessible@@UAGJABU_GUID@@PAPA_WIKPAJ@Z,,,
 0045fca0,library,??1?$scoped_ptr@VDxUserInput@@@boost@@QAE@XZ,,,
 0050df20,library,??$_Copy_backward_opt@PAVVector3@Ogre@@PAV12@@std@@YAPAVVector3@Ogre@@PAV12@00Urandom_access_iterator_tag@0@U_Nonscalar_ptr_iterator_tag@0@U_Range_checked_iterator_tag@0@@Z,,,
 00534470,library,?swap@?$SharedPtr@VRbxSky@Ogre@@@Ogre@@MAEXAAV12@@Z,,,
@@ -6339,3 +6337,4 @@ address,type,symbol,name,module,size
 0091cb80,global,_dhtmlEventEntries___CSaveToRobloxDialog::GetDHtmlEventMap,,,
 0081aa98,global,?DECAL_OFFSET@Chunk@RenderNew@RBX@@2MB,,,
 0081aa9c,global,?TEXTURE_OFFSET@Chunk@RenderNew@RBX@@2MB,,,
+0042e760,function,,,,179
