@@ -6453,3 +6453,8 @@ address,type,symbol,name,module,size
 0041bfa0,synthetic,??_EDHTMLWindowService@@WCE@AEPAXI@Z,,,
 0041bfb0,function,,,,11
 0041bfb0,synthetic,??_EDHTMLWindowService@@WIE@AEPAXI@Z,,,
+00418660,function,,,,273
+004176d0,library,?pop_front@?$deque@V?$function@$$A6AXXZV?$allocator@X@std@@@boost@@V?$allocator@V?$function@$$A6AXXZV?$allocator@X@std@@@boost@@@std@@@std@@QAEXXZ,,,
+00417d70,library,?Create@?$CWindowImpl@VMarshaller@@VCWindow@ATL@@V?$CWinTraits@$0FGAAAAAA@$0A@@3@@ATL@@QAEPAUHWND__@@PAU3@V_U_RECT@2@PBDKKV_U_MENUorID@2@PAX@Z,,,
+00417e10,library,?push_back@?$deque@V?$function@$$A6AXXZV?$allocator@X@std@@@boost@@V?$allocator@V?$function@$$A6AXXZV?$allocator@X@std@@@boost@@@std@@@std@@QAEXABV?$function@$$A6AXXZV?$allocator@X@std@@@boost@@@Z,,,
+00417e70,library,?_Tidy@?$deque@V?$function@$$A6AXXZV?$allocator@X@std@@@boost@@V?$allocator@V?$function@$$A6AXXZV?$allocator@X@std@@@boost@@@std@@@std@@IAEXXZ,,,

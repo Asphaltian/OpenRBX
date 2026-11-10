@@ -8,7 +8,6 @@
 
 class CLuaHtmlView;
 class DHTMLWindow;
-class Marshaller;
 
 extern char sDHTMLWindowService[];
 extern char sDHTMLWindow[];
@@ -99,7 +98,6 @@ inline bool DHTMLWindowService::askAddChild(const RBX::Instance* instance) const
 // `RBX::Reflection::Described<DHTMLWindowService,&sDHTMLWindowService,RBX::FactoryProduct<DHTMLWindowService,RBX::Instance,&sDHTMLWindowService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // clang-format on
 
-Marshaller* FUN_0041a4a0();
 void FUN_0041ac10();
 
 #endif // DHTMLWINDOW_H
