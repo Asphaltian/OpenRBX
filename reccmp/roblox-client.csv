@@ -24,6 +24,7 @@ address,type,symbol,name,module,size
 0045dbf0,function,,,,8
 0045dd10,function,,,,271
 0045de50,function,,,,19
+0045de70,function,,,,27
 004610a0,function,,,,888
 00461420,function,,,,612
 0066e3b0,function,,,,1313

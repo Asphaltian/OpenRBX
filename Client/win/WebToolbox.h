@@ -26,6 +26,8 @@ protected:
 public:
 	virtual ~CWebToolbox() {}
 
+	void FUN_0046ea00(int category);
+
 	// SYNTHETIC: ROBLOX 0x0046ec50
 	// CWebToolbox::`scalar deleting destructor'
 
