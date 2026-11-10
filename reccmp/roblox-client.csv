@@ -19,6 +19,7 @@ address,type,symbol,name,module,size
 004077a0,function,,,,116
 00409dd0,function,,,,187
 0040d870,function,,,,116
+0040e250,function,,,,361
 00459950,function,,,,812
 0045dbe0,function,,,,8
 0045dbf0,function,,,,8

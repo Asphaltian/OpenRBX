@@ -7,6 +7,9 @@
 
 IMPLEMENT_DYNCREATE(CChatPrompt, CEditView)
 
+// GLOBAL: ROBLOX 0x00913b50
+const char* g_unk0x00913b50 = "To chat click here or press the \"/\" key";
+
 // FUNCTION: ROBLOX 0x0040d730
 RBX::GuiResponse ChatEnter::process(const RBX::GuiEvent& event)
 {
@@ -30,6 +33,31 @@ BOOL CChatPrompt::PreCreateWindow(CREATESTRUCT& cs)
 	return TRUE;
 }
 
+// FUNCTION: ROBLOX 0x0040d7d0
+HBRUSH CChatPrompt::CtlColor(CDC* pDC, UINT nCtlColor)
+{
+	if (GetFocus() == this) {
+		pDC->SetTextColor(RGB(0, 0, 0));
+		pDC->SetBkColor(RGB(230, 230, 250));
+	}
+	else {
+		pDC->SetTextColor(RGB(255, 255, 200));
+		pDC->SetBkColor(RGB(64, 64, 64));
+	}
+
+	return m_unk0x94;
+}
+
+// FUNCTION: ROBLOX 0x0040dbe0
+void CChatPrompt::FUN_0040dbe0()
+{
+	CString text;
+	GetWindowText(text);
+	if (text.Compare(g_unk0x00913b50) == 0) {
+		SetWindowText("");
+	}
+}
+
 // FUNCTION: ROBLOX 0x0040dd10
 ChatEnter::ChatEnter()
 {
@@ -42,8 +70,43 @@ CChatPrompt::CChatPrompt() : m_unk0x88(NULL), m_unk0xa4(NULL)
 
 // clang-format off
 BEGIN_MESSAGE_MAP(CChatPrompt, CEditView)
+ON_WM_CTLCOLOR_REFLECT()
+ON_CONTROL_REFLECT(EN_SETFOCUS, FUN_0040dbe0)
+ON_WM_CHAR()
+ON_MESSAGE(0x468, FUN_0045f4d0)
 END_MESSAGE_MAP()
 // clang-format on
+
+// FUNCTION: ROBLOX 0x0040e250
+void CChatPrompt::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	switch (nChar) {
+	case VK_RETURN: {
+		CString text;
+		GetWindowText(text);
+		if (m_unk0xa4 && !text.IsEmpty()) {
+			try {
+				{
+					RBX::DataModel::Lock lock(m_unk0x9c);
+					m_unk0xa4->chat(static_cast<LPCTSTR>(text));
+				}
+				SetWindowText(g_unk0x00913b50);
+			}
+			catch (std::exception&) {
+			}
+		}
+		m_unk0x88->SetFocus();
+		break;
+	}
+	case VK_ESCAPE:
+		SetWindowText(g_unk0x00913b50);
+		m_unk0x88->SetFocus();
+		break;
+	default:
+		Default();
+		break;
+	}
+}
 
 // FUNCTION: ROBLOX 0x0040f4d0
 void CChatPrompt::FUN_0040f4d0(RBX::DataModel* dataModel, CWnd* parent)
@@ -74,4 +137,11 @@ void CChatPrompt::FUN_0040f4d0(RBX::DataModel* dataModel, CWnd* parent)
 CChatPrompt::~CChatPrompt()
 {
 	FUN_0040f4d0(NULL, NULL);
+}
+
+// FUNCTION: ROBLOX 0x0045f4d0 FOLDED
+LRESULT CChatPrompt::FUN_0045f4d0(WPARAM wParam, LPARAM lParam)
+{
+	SetFocus();
+	return 0;
 }

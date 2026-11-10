@@ -53,7 +53,7 @@ static bool g_unk0x00954484;
 
 DECOMP_SIZE_ASSERT(CRobloxWnd::RenderStatsItem, 0x140)
 
-// FUNCTION: ROBLOX 0x0045f4d0
+// FUNCTION: ROBLOX 0x0045f4d0 FOLDED
 LRESULT CRobloxWnd::FUN_0045f4d0(WPARAM wParam, LPARAM lParam)
 {
 	SetFocus();
