@@ -2,9 +2,11 @@
 #define DHTMLWINDOW_H
 
 #include "decomp.h"
+#include "reflection/signal.h"
 #include "v8tree/Instance.h"
 
 #include <boost/thread/recursive_mutex.hpp>
+#include <string>
 
 class CLuaHtmlView;
 class DHTMLWindow;
@@ -44,7 +46,11 @@ public:
 	// SYNTHETIC: ROBLOX 0x004153d0
 	// DHTMLWindow::`scalar deleting destructor'
 
+	static RBX::Reflection::SignalDesc<DHTMLWindow, void(std::string)> g_unk0x00953120;
+
 private:
+	friend class CLuaHtmlView;
+
 	boost::recursive_mutex m_unk0xf8; // 0xf8
 	CLuaHtmlView* m_unk0x104;         // 0x104
 };

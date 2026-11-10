@@ -1,9 +1,16 @@
+#include "LuaHtmlView.h"
+
+#include "DHTMLWindow.h"
 #include "decomp.h"
 #include "util/StandardOut.h"
+#include "v8datamodel/DataModel.h"
 
 #include <boost/function.hpp>
 #include <exception>
+#include <mshtmdid.h>
+#include <mshtmhst.h>
 #include <oaidl.h>
+#include <string>
 
 // VTABLE: ROBLOX 0x00804010
 // SIZE 0x30
@@ -35,6 +42,70 @@ private:
 };
 
 DECOMP_SIZE_ASSERT(EventHandler, 0x30)
+
+IMPLEMENT_DYNCREATE(CLuaHtmlView, CSecureHtmlView)
+
+// clang-format off
+BEGIN_MESSAGE_MAP(CLuaHtmlView, CSecureHtmlView)
+	ON_WM_DESTROY()
+END_MESSAGE_MAP()
+// clang-format on
+
+// FUNCTION: ROBLOX 0x0042d640
+void CLuaHtmlView::FUN_0042d640()
+{
+	GetParentFrame()->DestroyWindow();
+}
+
+// FUNCTION: ROBLOX 0x0042d660
+BOOL CLuaHtmlView::OnAmbientProperty(COleControlSite* pSite, DISPID dispid, VARIANT* pvar)
+{
+	USES_CONVERSION;
+
+	if (dispid != DISPID_AMBIENT_DLCONTROL) {
+		return CSecureHtmlView::OnAmbientProperty(pSite, dispid, pvar);
+	}
+
+	if (!CSecureHtmlView::OnAmbientProperty(pSite, DISPID_AMBIENT_DLCONTROL, pvar)) {
+		return FALSE;
+	}
+
+	V_I4(pvar) |= DLCTL_NO_SCRIPTS;
+	V_VT(pvar) = VT_I4;
+	return TRUE;
+}
+
+// FUNCTION: ROBLOX 0x0042d6c0
+HRESULT CLuaHtmlView::OnGetHostInfo(DOCHOSTUIINFO* pInfo)
+{
+	HRESULT hr = CSecureHtmlView::OnGetHostInfo(pInfo);
+	if (hr == S_OK) {
+		pInfo->dwFlags |= DOCHOSTUIFLAG_DIALOG | DOCHOSTUIFLAG_DISABLE_HELP_MENU | DOCHOSTUIFLAG_NO3DBORDER |
+						  DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE | DOCHOSTUIFLAG_ENABLE_FORMS_AUTOCOMPLETE |
+						  DOCHOSTUIFLAG_THEME | DOCHOSTUIFLAG_LOCAL_MACHINE_ACCESS_CHECK |
+						  DOCHOSTUIFLAG_DISABLE_UNTRUSTEDPROTOCOL;
+	}
+
+	return hr;
+}
+
+// FUNCTION: ROBLOX 0x0042d850
+HRESULT CLuaHtmlView::OnGetExternal(LPDISPATCH* lppDispatch)
+{
+	return m_unk0xf4.CopyTo(lppDispatch);
+}
+
+// FUNCTION: ROBLOX 0x0042dbb0
+void CLuaHtmlView::OnDestroy()
+{
+	CSecureHtmlView::OnDestroy();
+
+	if (m_unk0x104) {
+		RBX::DataModel::Lock lock(m_unk0xfc);
+		m_unk0x104->m_unk0x104 = NULL;
+		m_unk0x104->setParent(NULL);
+	}
+}
 
 // FUNCTION: ROBLOX 0x0042e150
 EventHandler::EventHandler(boost::function<bool()> handler) : m_unk0x08(handler), m_unk0x28(0)
@@ -119,4 +190,33 @@ ULONG STDMETHODCALLTYPE EventHandler::Release()
 	}
 
 	return m_unk0x28;
+}
+
+// FUNCTION: ROBLOX 0x0042f370
+void CLuaHtmlView::FUN_0042f370()
+{
+	RBX::DataModel::Lock lock(m_unk0xfc);
+	m_unk0x10c.clear();
+}
+
+// FUNCTION: ROBLOX 0x0042f530
+CLuaHtmlView::CLuaHtmlView() : m_unk0xf8(NULL)
+{
+	m_unk0xf0 = 1;
+}
+
+// FUNCTION: ROBLOX 0x0042f5d0
+CLuaHtmlView::~CLuaHtmlView()
+{
+}
+
+// FUNCTION: ROBLOX 0x00431070
+void CLuaHtmlView::OnDocumentComplete(LPCTSTR lpszURL)
+{
+	CSecureHtmlView::OnDocumentComplete(lpszURL);
+
+	if (m_unk0x104) {
+		RBX::DataModel::Lock lock(m_unk0xfc);
+		DHTMLWindow::g_unk0x00953120.fire(m_unk0x104.get(), lpszURL);
+	}
 }

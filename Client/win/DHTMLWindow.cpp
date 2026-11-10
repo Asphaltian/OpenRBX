@@ -14,6 +14,8 @@ template const RBX::FactoryProduct<DHTMLWindowService, RBX::Instance, sDHTMLWind
 // GLOBAL: ROBLOX 0x00952f1c
 Marshaller* g_unk0x00952f1c;
 
+RBX::Reflection::SignalDesc<DHTMLWindow, void(std::string)> DHTMLWindow::g_unk0x00953120("DocumentComplete", "url");
+
 // GLOBAL: ROBLOX 0x00953144
 std::map<DWORD, Marshaller*> Marshaller::g_unk0x00953144;
 
