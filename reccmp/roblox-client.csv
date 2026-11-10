@@ -29,6 +29,8 @@ address,type,symbol,name,module,size
 004610a0,function,,,,888
 00461420,function,,,,612
 0066e3b0,function,,,,1313
+007f5720,function,,,,11
+007f5730,function,,,,11
 00461690,function,,,,280
 00596ca0,function,,,,119
 004617b0,function,,,,404
@@ -6136,6 +6138,8 @@ address,type,symbol,name,module,size
 008ceb6c,global,__TI1?AVexception@std@@,,,
 00961410,global,"orientation___Ogre::RbxSubEntity::getWorldOrientation",,,
 00961424,global,"position___Ogre::RbxSubEntity::getWorldPosition",,,
+009613c8,global,"box___Ogre::RbxSubEntity::getWorldBoundingBox",,,
+009613ec,global,"box___Ogre::RbxSubEntity::getDarkCapBounds",,,
 0083df5c,string,,,,
 0067bce0,synthetic,??_ERbxSubEntity@Ogre@@WNI@AEPAXI@Z,,,
 0043ee20,library,?find@?$_Tree@V?$_Tmap_traits@PBVClassDescriptor@Reflection@RBX@@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@U?$less@PBVClassDescriptor@Reflection@RBX@@@5@V?$allocator@U?$pair@QBVClassDescriptor@Reflection@RBX@@V?$vector@V?$shared_ptr@VInstance@RBX@@@boost@@V?$allocator@V?$shared_ptr@VInstance@RBX@@@boost@@@std@@@std@@@std@@@5@$0A@@std@@@std@@QAE?AViterator@12@ABQBVClassDescriptor@Reflection@RBX@@@Z,,,

@@ -5,6 +5,7 @@
 #include "decomp.h"
 
 #include <OgreAxisAlignedBox.h>
+#include <OgreEdgeListBuilder.h>
 #include <OgreMesh.h>
 #include <OgreRenderWindow.h>
 #include <OgreRoot.h>
@@ -38,9 +39,12 @@ class Unknown00671c70 : public SubMesh
 {
 public:
 	Unknown00671c70();
+	~Unknown00671c70();
+
+	void FUN_0067c590();
 
 	bool m_unk0x84;           // 0x84
-	undefined4 m_unk0x88;     // 0x88
+	EdgeData* m_unk0x88;      // 0x88
 	AxisAlignedBox m_unk0x8c; // 0x8c
 	float m_unk0xac;          // 0xac
 };
@@ -179,6 +183,25 @@ extern Root* g_unk0x0096134c;
 
 unsigned int FUN_00671cf0();
 void FUN_00672010();
+
+// FUNCTION: ROBLOX 0x0067c590
+inline void Unknown00671c70::FUN_0067c590()
+{
+	if (!m_unk0x84) {
+		vertexData->prepareForShadowVolume();
+		m_unk0x84 = true;
+		EdgeListBuilder builder;
+		builder.addVertexData(vertexData);
+		builder.addIndexData(indexData, 0, operationType);
+		m_unk0x88 = builder.build();
+	}
+}
+
+// FUNCTION: ROBLOX 0x0067c640
+inline Unknown00671c70::~Unknown00671c70()
+{
+	delete m_unk0x88;
+}
 
 } // namespace Ogre
 

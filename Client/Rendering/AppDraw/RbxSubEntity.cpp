@@ -1,8 +1,11 @@
 #include "appdraw/RbxSubEntity.h"
 
+#include "appdraw/VisualEngine.h"
+
 #include <OgreCamera.h>
 #include <OgreEntity.h>
 #include <OgreHardwareBufferManager.h>
+#include <OgreLight.h>
 #include <OgreLogManager.h>
 #include <OgreSubMesh.h>
 #include <exception>
@@ -168,16 +171,33 @@ bool RbxSubEntity::RbxSubEntityShadowRenderable::isVisible(void) const
 // STUB: ROBLOX 0x0067b890
 const AxisAlignedBox& RbxSubEntity::getWorldBoundingBox(bool derive) const
 {
-	STUB(0x67b890);
 	static AxisAlignedBox box;
+	Unknown00671c70* subMesh = m_unk0x12c;
+	if (!subMesh) {
+		for (int i = 0; i >= 0; i--) {
+			if (m_unk0x11c[i]) {
+				subMesh = static_cast<Unknown00671c70*>(m_unk0x11c[i]);
+				break;
+			}
+		}
+		if (!subMesh) {
+			subMesh = static_cast<Unknown00671c70*>(mSubMesh);
+		}
+	}
+
+	Vector3 center = m_unk0xdc.getTrans();
+	Real radius = subMesh->m_unk0xac * 1.7f;
+	box.setExtents(center + Vector3(-radius), center + radius);
 	return box;
 }
 
-// STUB: ROBLOX 0x0067ba00
+// FUNCTION: ROBLOX 0x0067ba00
 const AxisAlignedBox& RbxSubEntity::getDarkCapBounds(const Light& light, Real dirLightExtrusionDist) const
 {
-	STUB(0x67ba00);
-	return getWorldBoundingBox();
+	static AxisAlignedBox box;
+	box = getLightCapBounds();
+	extrudeBounds(box, light.getAs4DVector(), dirLightExtrusionDist);
+	return box;
 }
 
 // FUNCTION: ROBLOX 0x0067bae0
@@ -240,10 +260,32 @@ RbxSubEntity::RbxSubEntity(Entity* parent, SubMesh* subMesh, int lodIndex)
 	m_unk0x12c = NULL;
 }
 
-// STUB: ROBLOX 0x0067bda0
+// FUNCTION: ROBLOX 0x0067bda0
 RbxSubEntity::~RbxSubEntity()
 {
-	STUB(0x67bda0);
+	for (int i = 0; i < (int) m_unk0x130.size(); i++) {
+		delete m_unk0x130[i];
+	}
+	m_unk0x130.clear();
+
+	if (mSubMesh) {
+		if (mSubMesh->useSharedVertices) {
+			throw std::exception("RBX RbxSubEntity dtor(1)");
+		}
+		delete static_cast<Unknown00671c70*>(mSubMesh);
+		mSubMesh = NULL;
+	}
+	mSubMesh = NULL;
+
+	for (int i = 0; i < 1; i++) {
+		if (m_unk0x11c[i]) {
+			if (m_unk0x11c[i]->useSharedVertices) {
+				throw std::exception("RBX RbxSubEntity dtor (2)");
+			}
+			delete static_cast<Unknown00671c70*>(m_unk0x11c[i]);
+			m_unk0x11c[i] = NULL;
+		}
+	}
 }
 
 // STUB: ROBLOX 0x0067c230
@@ -251,12 +293,64 @@ ShadowCaster::ShadowRenderableListIterator RbxSubEntity::getShadowVolumeRenderab
 	ShadowTechnique shadowTechnique,
 	const Light* light,
 	HardwareIndexBufferSharedPtr* indexBuffer,
-	bool extrudeVertices,
+	bool extrude,
 	Real extrusionDistance,
 	unsigned long flags
 )
 {
-	STUB(0x67c230);
+	Unknown00671c70* subMesh = m_unk0x12c;
+	if (!subMesh) {
+		for (int i = 0; i >= 0; i--) {
+			if (m_unk0x11c[i]) {
+				subMesh = static_cast<Unknown00671c70*>(m_unk0x11c[i]);
+				break;
+			}
+		}
+		if (!subMesh) {
+			subMesh = static_cast<Unknown00671c70*>(mSubMesh);
+		}
+	}
+
+	if (m_unk0x130.empty()) {
+		subMesh->FUN_0067c590();
+	}
+
+	Vector4 lightPos = light->getAs4DVector();
+	Matrix4 world2Obj = m_unk0xdc.inverseAffine();
+	lightPos = world2Obj.transformAffine(lightPos);
+
+	EdgeData* edgeList = subMesh->m_unk0x88;
+	if (!edgeList) {
+		return ShadowRenderableListIterator(m_unk0x130.begin(), m_unk0x130.end());
+	}
+
+	bool init = m_unk0x130.empty();
+	EdgeData::EdgeGroupList::iterator egi;
+	ShadowRenderableList::iterator si, siend;
+	RbxSubEntityShadowRenderable* esr = NULL;
+	if (init) {
+		m_unk0x130.resize(edgeList->edgeGroups.size());
+	}
+
+	siend = m_unk0x130.end();
+	egi = edgeList->edgeGroups.begin();
+	for (si = m_unk0x130.begin(); si != siend; ++si, ++egi) {
+		const VertexData* pVertData = egi->vertexData;
+		if (init) {
+			*si = new RbxSubEntityShadowRenderable(NULL, indexBuffer, pVertData, !extrude, this);
+		}
+
+		esr = static_cast<RbxSubEntityShadowRenderable*>(*si);
+		HardwareVertexBufferSharedPtr esrPositionBuffer = esr->getPositionBuffer();
+		if (extrude) {
+			extrudeVertices(esrPositionBuffer, egi->vertexData->vertexCount, lightPos, extrusionDistance);
+		}
+		esrPositionBuffer->suppressHardwareUpdate(false);
+	}
+
+	updateEdgeListLightFacing(edgeList, lightPos);
+	generateShadowVolume(edgeList, *indexBuffer, light, m_unk0x130, flags);
+
 	return ShadowRenderableListIterator(m_unk0x130.begin(), m_unk0x130.end());
 }
 

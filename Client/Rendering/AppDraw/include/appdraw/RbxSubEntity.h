@@ -49,6 +49,9 @@ public:
 		);
 		~RbxSubEntityShadowRenderable();
 
+		// FUNCTION: ROBLOX 0x0067b3a0
+		HardwareVertexBufferSharedPtr getPositionBuffer(void) { return mPositionBuffer; }
+
 		void getWorldTransforms(Matrix4* xform) const;
 		const Quaternion& getWorldOrientation(void) const;
 		const Vector3& getWorldPosition(void) const;
@@ -95,6 +98,12 @@ public:
 
 	// SYNTHETIC: ROBLOX 0x0067bf90
 	// Ogre::RbxSubEntity::`scalar deleting destructor'
+
+	// SYNTHETIC: ROBLOX 0x007f5720
+	// `Ogre::RbxSubEntity::getWorldBoundingBox'::`2'::`dynamic atexit destructor for 'box''
+
+	// SYNTHETIC: ROBLOX 0x007f5730
+	// `Ogre::RbxSubEntity::getDarkCapBounds'::`2'::`dynamic atexit destructor for 'box''
 
 private:
 	friend class RBX::RenderNew::RenderScene;
