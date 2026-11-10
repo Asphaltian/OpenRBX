@@ -23,6 +23,8 @@ protected:
 public:
 	virtual ~CBrowserView();
 
+	static CBrowserView* FUN_0040b6d0(CRect rect, CWnd* parent, CString url, IDispatch* external);
+
 	// SYNTHETIC: ROBLOX 0x0040d320
 	// ??_ECBrowserView@@UAEPAXI@Z
 

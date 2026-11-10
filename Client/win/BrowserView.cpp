@@ -257,6 +257,29 @@ BEGIN_MESSAGE_MAP(CBrowserView, CSecureHtmlView)
 END_MESSAGE_MAP()
 // clang-format on
 
+// FUNCTION: ROBLOX 0x0040b6d0
+CBrowserView* CBrowserView::FUN_0040b6d0(CRect rect, CWnd* parent, CString url, IDispatch* external)
+{
+	CFrameWnd* frame = new CFrameWnd;
+	frame->Create(NULL, NULL, WS_OVERLAPPEDWINDOW, CRect(0, 0, 0, 0), parent);
+	frame->ModifyStyleEx(WS_EX_CLIENTEDGE, WS_EX_TOOLWINDOW);
+
+	CBrowserView* view = dynamic_cast<CBrowserView*>(
+		XTFuncCreateView(frame, RUNTIME_CLASS(CBrowserView), NULL, NULL, WS_CHILD | WS_VISIBLE | WS_BORDER)
+	);
+	view->m_unk0x2b0 = external;
+
+	LPCTSTR address = url;
+	view->m_unk0x2b8 = address;
+	view->Navigate(address);
+
+	parent->ClientToScreen(&rect);
+	frame->SetWindowPos(NULL, rect.left, rect.top, rect.Width(), rect.Height(), SWP_NOZORDER);
+	frame->InitialUpdateFrame(NULL, TRUE);
+
+	return view;
+}
+
 // FUNCTION: ROBLOX 0x0040bfb0
 HRESULT FUN_0040bfb0(CComObjectNoLock<CBrowserViewExternal>** p_unk0x04, void* p_unk0x08)
 {

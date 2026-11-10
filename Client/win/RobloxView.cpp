@@ -1,7 +1,9 @@
 #include "RobloxView.h"
 
 #include "ActiveDocView.h"
+#include "BrowserView.h"
 #include "MainFrm.h"
+#include "Roblox.h"
 #include "RobloxDoc.h"
 
 #include <G3D/System.h>
@@ -23,6 +25,7 @@ ON_COMMAND(0x8020, FUN_0045dbe0)
 ON_COMMAND(0x80d6, FUN_0045dbf0)
 ON_COMMAND(0x80fe, FUN_0045de50)
 ON_COMMAND(0x800c, FUN_0045de70)
+ON_COMMAND(0x80fd, FUN_0045dc00)
 END_MESSAGE_MAP()
 
 // FUNCTION: ROBLOX 0x0045d500
@@ -212,6 +215,17 @@ void CRobloxView::FUN_0045dbe0()
 void CRobloxView::FUN_0045dbf0()
 {
 	FUN_0045da90(0);
+}
+
+// FUNCTION: ROBLOX 0x0045dc00
+void CRobloxView::FUN_0045dc00()
+{
+	CRect rect;
+	m_unk0x88.GetClientRect(&rect);
+	rect.InflateRect(-12, -12);
+	rect.right = rect.Width() / 2;
+	rect.bottom = std::min(480, rect.Height()) - rect.top;
+	CBrowserView::FUN_0040b6d0(rect, &m_unk0x88, FUN_00407190() + "/Game/Help.aspx", NULL);
 }
 
 // FUNCTION: ROBLOX 0x0045dd10

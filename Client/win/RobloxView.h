@@ -132,6 +132,7 @@ public:
 	void FUN_0045da90(int p_unk0x04);
 	afx_msg void FUN_0045dbe0();
 	afx_msg void FUN_0045dbf0();
+	afx_msg void FUN_0045dc00();
 	void FUN_0045dd10(bool show, bool activate);
 	afx_msg LRESULT FUN_0045de20(WPARAM wParam, LPARAM lParam);
 	afx_msg void FUN_0045de50();
