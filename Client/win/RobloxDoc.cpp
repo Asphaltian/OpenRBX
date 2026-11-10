@@ -13,6 +13,7 @@
 #include "util/StandardOut.h"
 #include "v8datamodel/Selection.h"
 #include "v8datamodel/TimeState.h"
+#include "v8datamodel/Visit.h"
 #include "v8datamodel/Workspace.h"
 #include "v8xml/SerializerV2.h"
 
@@ -610,7 +611,7 @@ BOOL CRobloxDoc::FUN_00459950(std::string fileName)
 			RBX::Security::LocalGUI, script, fileName.c_str(), arguments
 		);
 	}
-	catch (...) {
+	catch (std::exception&) {
 		return FALSE;
 	}
 
@@ -634,6 +635,44 @@ void CRobloxDoc::FUN_0045a0b0(CCmdUI* pCmdUI)
 {
 	RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
 	pCmdUI->Enable(FUN_00403290()->create<RBX::Network::Players>()->canReportAbuse() ? TRUE : FALSE);
+}
+
+// STUB: ROBLOX 0x0045a1f0
+BOOL CRobloxDoc::SaveModified()
+{
+	if (!m_unk0x78->FUN_0046edc0()) {
+		return TRUE;
+	}
+
+	if (!IsModified()) {
+		return TRUE;
+	}
+
+	RBX::DataModel::Lock lock(FUN_00403290());
+	bool wasRunning = createService<RBX::RunService>(FUN_00403290().get())->isRunState();
+	createService<RBX::RunService>(FUN_00403290().get())->pause();
+	RBX::Visit* visit = createService<RBX::Visit>(FUN_00403290().get());
+
+	BOOL result;
+	if (visit == NULL || visit->getUploadUrl() == "NoVisit") {
+		SetForegroundWindow(AfxGetMainWnd()->m_hWnd);
+		result = CDocument::SaveModified();
+	}
+	else {
+		if (visit->getUploadUrl().size() == 0) {
+			return TRUE;
+		}
+
+		FlashWindow(AfxGetMainWnd()->m_hWnd, FALSE);
+
+		CUploadPlaceDialog dialog(m_unk0x78, NULL);
+		result = dialog.DoModal() == IDOK;
+		if (!result && wasRunning) {
+			createService<RBX::RunService>(m_unk0x78->FUN_0046edc0().get())->run();
+		}
+	}
+
+	return result;
 }
 
 // FUNCTION: ROBLOX 0x0045a600

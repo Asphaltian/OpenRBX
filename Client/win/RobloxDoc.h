@@ -135,6 +135,7 @@ public:
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	virtual BOOL OnSaveDocument(LPCTSTR lpszPathName);
 	virtual void OnCloseDocument();
+	virtual BOOL SaveModified();
 	virtual BOOL DoSave(LPCTSTR lpszPathName, BOOL bReplace = TRUE);
 	BOOL FUN_00459950(std::string p_unk0x04);
 	void FUN_00459c80();

@@ -18,6 +18,10 @@ ON_WM_CREATE()
 ON_WM_ERASEBKGND()
 ON_WM_DESTROY()
 ON_WM_SETFOCUS()
+ON_MESSAGE(0x46c, FUN_0045de20)
+ON_COMMAND(0x8020, FUN_0045dbe0)
+ON_COMMAND(0x80d6, FUN_0045dbf0)
+ON_COMMAND(0x80fe, FUN_0045de50)
 END_MESSAGE_MAP()
 
 // FUNCTION: ROBLOX 0x0045d500
@@ -182,6 +186,80 @@ void CRobloxView::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pD
 		ActiveDocView::FUN_004054f0(false, static_cast<CRobloxDoc*>(GetDocument()));
 		m_unk0x88.FUN_0045fc50(false);
 	}
+}
+
+// FUNCTION: ROBLOX 0x0045da90
+void CRobloxView::FUN_0045da90(int p_unk0x04)
+{
+	CString filter;
+	filter.LoadString(184);
+
+	CFileDialog dialog(TRUE, "rbxm", NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, filter, this);
+	if (dialog.DoModal() == IDOK) {
+		static_cast<CRobloxDoc*>(GetDocument())
+			->m_unk0x78->FUN_004702b0(RBX::ContentId::fromFile(static_cast<LPCTSTR>(dialog.GetPathName())), false);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0045dbe0
+void CRobloxView::FUN_0045dbe0()
+{
+	FUN_0045da90(2);
+}
+
+// FUNCTION: ROBLOX 0x0045dbf0
+void CRobloxView::FUN_0045dbf0()
+{
+	FUN_0045da90(0);
+}
+
+// FUNCTION: ROBLOX 0x0045dd10
+void CRobloxView::FUN_0045dd10(bool show, bool activate)
+{
+	bool shown = m_unk0x1a8 != NULL;
+	if (show == shown) {
+		return;
+	}
+
+	if (show) {
+		m_unk0x1a8 = static_cast<CWebToolbox*>(RUNTIME_CLASS(CWebToolbox)->CreateObject());
+		m_unk0x1a8->m_unk0xf8 = static_cast<CRobloxDoc*>(GetDocument())->m_unk0x78;
+		m_unk0x1a8->m_unk0xf4 = &m_unk0x88;
+
+		CRect rect(0, 0, 0, 0);
+		if (!m_unk0x1a8->Create(NULL, NULL, WS_CHILD | WS_VISIBLE, rect, this, 0x413)) {
+			m_unk0x1a8 = NULL;
+			return;
+		}
+
+		if (activate) {
+			m_unk0x1a8->SendMessage(WM_INITIALUPDATE);
+		}
+	}
+	else {
+		m_unk0x1a8->DestroyWindow();
+		m_unk0x1a8 = NULL;
+	}
+
+	FUN_0045d920();
+}
+
+// FUNCTION: ROBLOX 0x0045de20
+LRESULT CRobloxView::FUN_0045de20(WPARAM wParam, LPARAM lParam)
+{
+	if (m_unk0x1a8) {
+		m_unk0x1a8->DestroyWindow();
+		m_unk0x1a8 = NULL;
+		FUN_0045d920();
+	}
+
+	return 0;
+}
+
+// FUNCTION: ROBLOX 0x0045de50
+void CRobloxView::FUN_0045de50()
+{
+	FUN_0045dd10(m_unk0x1a8 == NULL, true);
 }
 
 // STUB: ROBLOX 0x0045de90

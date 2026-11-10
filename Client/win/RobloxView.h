@@ -110,6 +110,9 @@ class CRobloxView : public VerbBinder<CRobloxView, CView>,
 	// SYNTHETIC: ROBLOX 0x0045d4e0
 	// ?GetThisClass@CRobloxView@@SGPAUCRuntimeClass@@XZ
 
+	// SYNTHETIC: ROBLOX 0x0045e5c0
+	// ?CreateObject@CRobloxView@@SGPAVCObject@@XZ
+
 protected:
 	CRobloxView();
 
@@ -126,6 +129,12 @@ public:
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
 
 	void FUN_0045d920();
+	void FUN_0045da90(int p_unk0x04);
+	afx_msg void FUN_0045dbe0();
+	afx_msg void FUN_0045dbf0();
+	void FUN_0045dd10(bool show, bool activate);
+	afx_msg LRESULT FUN_0045de20(WPARAM wParam, LPARAM lParam);
+	afx_msg void FUN_0045de50();
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
 
 	boost::shared_ptr<RBX::DataModel> FUN_00403290() const;
