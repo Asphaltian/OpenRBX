@@ -2,11 +2,19 @@
 
 #include "DHTMLWindow.h"
 #include "LuaFunction.h"
+#include "Marshaller.h"
 #include "decomp.h"
+#include "reflection/property.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
+#include "v8tree/Instance.h"
 
+#include <G3D/format.h>
+#include <algorithm>
+#include <boost/bind.hpp>
 #include <boost/function.hpp>
+#include <boost/ref.hpp>
+#include <dispex.h>
 #include <exception>
 #include <mshtmdid.h>
 #include <mshtmhst.h>
@@ -40,6 +48,8 @@ public:
 	);
 
 private:
+	friend class CLuaHtmlView::Binder;
+
 	boost::function<bool()> m_unk0x08; // 0x08
 	ULONG m_unk0x28;                   // 0x28
 };
@@ -92,6 +102,18 @@ HRESULT CLuaHtmlView::OnGetHostInfo(DOCHOSTUIINFO* pInfo)
 	return hr;
 }
 
+// FUNCTION: ROBLOX 0x0042d7d0
+void CLuaHtmlView::Binder::PropBinding::FUN_0042d7d0(const std::string& value)
+{
+	m_unk0x08->setStringValue(m_unk0x00.get(), value);
+}
+
+// FUNCTION: ROBLOX 0x0042d810
+std::string CLuaHtmlView::Binder::PropBinding::FUN_0042d810()
+{
+	return m_unk0x08->getStringValue(m_unk0x00.get());
+}
+
 // FUNCTION: ROBLOX 0x0042d850
 HRESULT CLuaHtmlView::OnGetExternal(LPDISPATCH* lppDispatch)
 {
@@ -108,6 +130,39 @@ void CLuaHtmlView::OnDestroy()
 		m_unk0x104->m_unk0x104 = NULL;
 		m_unk0x104->setParent(NULL);
 	}
+}
+
+// FUNCTION: ROBLOX 0x0042dd20
+bool FUN_0042dd20(IUnknown* p_unk0x04, IUnknown* p_unk0x08)
+{
+	CComPtr<IUnknown> unknown1;
+	CComPtr<IUnknown> unknown2;
+	CComPtr<IObjectIdentity> identity;
+
+	if (p_unk0x04 == p_unk0x08) {
+		return true;
+	}
+
+	if (p_unk0x04 != NULL && p_unk0x08 != NULL) {
+		p_unk0x04->QueryInterface(IID_IUnknown, (void**) &unknown1);
+		p_unk0x08->QueryInterface(IID_IUnknown, (void**) &unknown2);
+
+		if (unknown1 == unknown2) {
+			return true;
+		}
+
+		if (unknown1 != NULL && unknown2 != NULL) {
+			HRESULT hr = unknown1->QueryInterface(IID_IObjectIdentity, (void**) &identity);
+			if (SUCCEEDED(hr) && identity != NULL) {
+				hr = identity->IsEqualObject(unknown2);
+				if (hr == S_OK) {
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
 }
 
 // FUNCTION: ROBLOX 0x0042e150
@@ -212,6 +267,31 @@ ULONG STDMETHODCALLTYPE EventHandler::Release()
 	return m_unk0x28;
 }
 
+// FUNCTION: ROBLOX 0x0042ebf0
+void CLuaHtmlView::Binder::FUN_0042ebf0()
+{
+	m_unk0x18 = false;
+
+	std::string value;
+	std::list<boost::shared_ptr<PropBinding> >::const_iterator iter = m_unk0x0c.begin();
+	std::list<boost::shared_ptr<PropBinding> >::const_iterator end = m_unk0x0c.end();
+	if (iter != end) {
+		value = (*iter)->FUN_0042d810();
+		++iter;
+	}
+
+	while (iter != end) {
+		if (value != (*iter)->FUN_0042d810()) {
+			value.clear();
+			break;
+		}
+
+		++iter;
+	}
+
+	m_unk0x20->put_value(CComBSTR(value.c_str()));
+}
+
 // FUNCTION: ROBLOX 0x0042ef30
 HRESULT FUN_0042ef30(CComObjectNoLock<CLuaFunction>** p_unk0x04, void* p_unk0x08)
 {
@@ -261,6 +341,131 @@ CLuaHtmlView::CLuaHtmlView() : m_unk0xf8(NULL)
 // FUNCTION: ROBLOX 0x0042f5d0
 CLuaHtmlView::~CLuaHtmlView()
 {
+}
+
+// FUNCTION: ROBLOX 0x0042f6e0
+bool CLuaHtmlView::Binder::FUN_0042f6e0()
+{
+	CComBSTR value;
+	m_unk0x20->get_value(&value);
+
+	std::string text = (LPCTSTR) CString(value);
+	std::for_each(m_unk0x0c.begin(), m_unk0x0c.end(), boost::bind(&PropBinding::FUN_0042d7d0, _1, boost::cref(text)));
+	return true;
+}
+
+// FUNCTION: ROBLOX 0x005df250 FOLDED
+bool FUN_005df250()
+{
+	return true;
+}
+
+// FUNCTION: ROBLOX 0x0042fe90
+CLuaHtmlView::Binder::Binder(IHTMLInputElement* element) : m_unk0x18(false), m_unk0x20(element)
+{
+	m_unk0x1c = new EventHandler(boost::bind(&Binder::FUN_0042f6e0, this));
+
+	CComQIPtr<IHTMLElement2> element2(element);
+	VARIANT_BOOL result;
+	if (element2->attachEvent(CComBSTR("onchange"), m_unk0x1c, &result)) {
+		throw std::runtime_error("attachEvent failed");
+	}
+
+	if (!result) {
+		throw std::runtime_error("attachEvent failed");
+	}
+}
+
+// FUNCTION: ROBLOX 0x00430200
+CLuaHtmlView::Binder::~Binder()
+{
+	m_unk0x1c->m_unk0x08 = &FUN_005df250;
+
+	CComQIPtr<IHTMLElement2> element2(m_unk0x20);
+	element2->detachEvent(CComBSTR("onchange"), m_unk0x1c);
+}
+
+// FUNCTION: ROBLOX 0x00430750
+void CLuaHtmlView::Binder::FUN_00430750()
+{
+	if (!m_unk0x18) {
+		g_unk0x00952f1c->FUN_00418fd0(boost::bind(&Binder::FUN_0042ebf0, shared_from_this()));
+		m_unk0x18 = true;
+	}
+}
+
+// FUNCTION: ROBLOX 0x00430940
+void FUN_00430940(
+	const RBX::Reflection::PropertyDescriptor* p_unk0x04,
+	const RBX::Reflection::PropertyDescriptor* p_unk0x08,
+	CLuaHtmlView::Binder* binder
+)
+{
+	if (p_unk0x04 == p_unk0x08) {
+		binder->FUN_00430750();
+	}
+}
+
+// FUNCTION: ROBLOX 0x004309f0
+CLuaHtmlView::Binder::PropBinding::PropBinding(
+	boost::shared_ptr<RBX::Instance> instance, const RBX::Reflection::PropertyDescriptor* descriptor, Binder* binder
+)
+	: m_unk0x00(instance), m_unk0x08(descriptor)
+{
+	m_unk0x0c = RBX::Instance::event_propertyChanged.connect(
+		instance.get(), boost::bind(&FUN_00430940, descriptor, _1, binder), 10
+	);
+}
+
+// FUNCTION: ROBLOX 0x00430b30
+void CLuaHtmlView::Binder::FUN_00430b30(
+	boost::shared_ptr<RBX::Instance> instance, const RBX::Reflection::PropertyDescriptor* descriptor
+)
+{
+	m_unk0x0c.push_back(boost::shared_ptr<PropBinding>(new PropBinding(instance, descriptor, this)));
+	FUN_0042ebf0();
+}
+
+// STUB: ROBLOX 0x00430c90
+void CLuaHtmlView::FUN_00430c90(
+	boost::shared_ptr<RBX::Instance> instance, const RBX::Reflection::PropertyDescriptor* descriptor, LPCTSTR name
+)
+{
+	CComQIPtr<IHTMLDocument2> document = GetHtmlDocument();
+	if (!document) {
+		throw std::runtime_error("The HtmlDocument is not loaded");
+	}
+
+	CComPtr<IHTMLElementCollection> all;
+	document->get_all(&all);
+
+	CComPtr<IDispatch> dispatch;
+	all->item(CComVariant(name), CComVariant(), &dispatch);
+	if (!dispatch) {
+		throw std::runtime_error(G3D::format("%s not found", name));
+	}
+
+	CComQIPtr<IHTMLInputElement> input(dispatch);
+	if (!input) {
+		throw std::runtime_error(G3D::format("%s is not an input element", name));
+	}
+
+	Binder* binder = NULL;
+	std::list<boost::shared_ptr<Binder> >::iterator end = m_unk0x10c.end();
+	for (std::list<boost::shared_ptr<Binder> >::iterator iter = m_unk0x10c.begin(); iter != end; ++iter) {
+		if (FUN_0042dd20((*iter)->m_unk0x20, input)) {
+			binder = (*iter).get();
+			break;
+		}
+	}
+
+	if (binder == NULL) {
+		RBX::DataModel::Lock lock(m_unk0xfc);
+		binder = new Binder(input);
+		m_unk0x10c.push_back(boost::shared_ptr<Binder>(binder));
+	}
+
+	binder->FUN_00430b30(instance, descriptor);
 }
 
 // FUNCTION: ROBLOX 0x00431070

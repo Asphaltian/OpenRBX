@@ -543,7 +543,7 @@ void Texture::updateMesh()
 	}
 }
 
-// STUB: ROBLOX 0x0051a540
+// FUNCTION: ROBLOX 0x0051a540
 void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 {
 	SpecialShape* specialShape = dynamic_cast<SpecialShape*>(child.get());
@@ -559,7 +559,7 @@ void PartChunk::onChildAdded(boost::shared_ptr<Instance> child)
 	}
 }
 
-// STUB: ROBLOX 0x0051aa10
+// FUNCTION: ROBLOX 0x0051aa10
 PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>& partInstance, View* view)
 	: RenderNew::Chunk(polygonOffset), partInstance(partInstance), materialInvalid(true), view(view), specialShape(NULL)
 {
@@ -579,7 +579,7 @@ PartChunk::PartChunk(float polygonOffset, const boost::shared_ptr<PartInstance>&
 	partInstance->visitChildren(boost::bind(&PartChunk::onChildAdded, this, _1));
 }
 
-// STUB: ROBLOX 0x0051ad40
+// FUNCTION: ROBLOX 0x0051ad40
 Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
 	: PartChunk(RenderNew::Chunk::DECAL_OFFSET, shared_from(&parentPart), view), decal(shared_from(&decal))
 {
@@ -589,7 +589,7 @@ Decal::Decal(RBX::Decal& decal, PartInstance& parentPart, View* view)
 		Instance::event_propertyChanged.connect(&decal, boost::bind(&Decal::onDecalPropertyChanged, this, _1), 10);
 }
 
-// STUB: ROBLOX 0x0051af00
+// FUNCTION: ROBLOX 0x0051af00
 Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 	: PartChunk(RenderNew::Chunk::TEXTURE_OFFSET, shared_from(&parentPart), view), texture(shared_from(&texture))
 {

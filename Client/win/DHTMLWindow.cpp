@@ -1,11 +1,15 @@
 #include "DHTMLWindow.h"
 
 #include "Marshaller.h"
+#include "reflection/member.h"
 #include "reflection/reflection.h"
+#include "util/Name.h"
 #include "util/StandardOut.h"
 
+#include <G3D/format.h>
 #include <boost/bind.hpp>
 #include <exception>
+#include <stdexcept>
 
 char sDHTMLWindowService[] = "HtmlService";
 char sDHTMLWindow[] = "HtmlWindow";
@@ -50,6 +54,16 @@ static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(), 0> g_unk0x00953048(
 static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(), 0> g_unk0x00953078(
 	&DHTMLWindow::FUN_00413f40, "Close", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
+
+static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(boost::shared_ptr<RBX::Instance>, std::string, std::string), 3>
+	g_unk0x009530a8(
+		&DHTMLWindow::FUN_0041d880,
+		"Bind",
+		"object",
+		"property",
+		"htmlElementId",
+		RBX::Reflection::FunctionDescriptor::AnyCaller
+	);
 
 static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(), 0> g_unk0x009530f0(
 	&DHTMLWindow::FUN_0041dc70, "Unbind", RBX::Reflection::FunctionDescriptor::AnyCaller
@@ -176,6 +190,25 @@ void DHTMLWindow::FUN_0041d1f0(std::string url)
 void DHTMLWindow::FUN_0041d2d0(std::string html)
 {
 	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_00415860, RBX::shared_from(this), html));
+}
+
+// FUNCTION: ROBLOX 0x0041d880
+void DHTMLWindow::FUN_0041d880(boost::shared_ptr<RBX::Instance> instance, std::string property, std::string name)
+{
+	if (!instance) {
+		throw std::runtime_error("The object to bind to must not be nil");
+	}
+
+	RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::Iterator iter =
+		instance->findProperty(RBX::Name::lookup(property));
+	if (iter == instance->properties_end()) {
+		throw std::runtime_error(G3D::format("Instance does not have property %s", property));
+	}
+
+	const RBX::Reflection::PropertyDescriptor* descriptor = &(*iter).getDescriptor();
+	g_unk0x00952f1c->FUN_00418fd0(
+		boost::bind(&DHTMLWindow::FUN_00415910, RBX::shared_from(this), instance, descriptor, name)
+	);
 }
 
 // FUNCTION: ROBLOX 0x0041dc70

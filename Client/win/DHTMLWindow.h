@@ -58,6 +58,7 @@ public:
 	void FUN_0041d110(RBX::Lua::FunctionRef function);
 	void FUN_0041d1f0(std::string url);
 	void FUN_0041d2d0(std::string html);
+	void FUN_0041d880(boost::shared_ptr<RBX::Instance> instance, std::string property, std::string name);
 	void FUN_0041dc70();
 
 	static RBX::Reflection::SignalDesc<DHTMLWindow, void(std::string)> g_unk0x00953120;
@@ -147,6 +148,19 @@ private:
 		}
 	}
 
+	// FUNCTION: ROBLOX 0x00415910
+	void FUN_00415910(
+		boost::shared_ptr<RBX::Instance> instance,
+		const RBX::Reflection::PropertyDescriptor* descriptor,
+		std::string name
+	)
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0xf8);
+		if (m_unk0x104) {
+			m_unk0x104->FUN_00430c90(instance, descriptor, name.c_str());
+		}
+	}
+
 	// FUNCTION: ROBLOX 0x00417550
 	void FUN_00417550()
 	{
@@ -231,6 +245,8 @@ inline bool DHTMLWindowService::askAddChild(const RBX::Instance* instance) const
 // `dynamic initializer for 'g_unk0x00953048''
 // SYNTHETIC: ROBLOX 0x007e42d0
 // `dynamic initializer for 'g_unk0x00953078''
+// SYNTHETIC: ROBLOX 0x007e4300
+// `dynamic initializer for 'g_unk0x009530a8''
 // SYNTHETIC: ROBLOX 0x007e4340
 // `dynamic initializer for 'g_unk0x009530f0''
 // SYNTHETIC: ROBLOX 0x007e4370
@@ -245,6 +261,8 @@ inline bool DHTMLWindowService::askAddChild(const RBX::Instance* instance) const
 // `dynamic atexit destructor for 'g_unk0x00953008''
 // SYNTHETIC: ROBLOX 0x007ef620
 // `dynamic atexit destructor for 'g_unk0x00953048''
+// SYNTHETIC: ROBLOX 0x007ef630
+// `dynamic atexit destructor for 'g_unk0x009530a8''
 // SYNTHETIC: ROBLOX 0x007ef640
 // `dynamic atexit destructor for 'g_unk0x00952f60''
 // SYNTHETIC: ROBLOX 0x007ef5f0
