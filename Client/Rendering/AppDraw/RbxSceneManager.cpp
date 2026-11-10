@@ -46,6 +46,7 @@
 #include <OgreTechnique.h>
 #include <OgreTextureManager.h>
 #include <OgreTextureUnitState.h>
+#include <OgreTimer.h>
 #include <OgreViewport.h>
 
 namespace Ogre {
@@ -1887,7 +1888,7 @@ void RbxSceneManager::removeShadowListener(ShadowListener* delListener)
 	}
 }
 
-// STUB: ROBLOX 0x0068db80
+// FUNCTION: ROBLOX 0x0068db80
 void RbxSceneManager::renderShadowVolumeObjects(
 	ShadowCaster::ShadowRenderableListIterator iShadowRenderables,
 	Pass* pass,
@@ -1902,40 +1903,37 @@ void RbxSceneManager::renderShadowVolumeObjects(
 	while (iShadowRenderables.hasMoreElements()) {
 		ShadowRenderable* sr = iShadowRenderables.getNext();
 
-		if (sr->isVisible()) {
+		renderSingleObject(sr, pass, false, manualLightList);
 
-			renderSingleObject(sr, pass, false, manualLightList);
+		if (sr->isLightCapSeparate() && (flags & SRF_INCLUDE_LIGHT_CAP)) {
+			ShadowRenderable* lightCap = sr->getLightCapRenderable();
+			assert(lightCap && "Shadow renderable is missing a separate light cap renderable!");
 
-			if (sr->isLightCapSeparate() && (flags & SRF_INCLUDE_LIGHT_CAP)) {
-				ShadowRenderable* lightCap = sr->getLightCapRenderable();
-				assert(lightCap && "Shadow renderable is missing a separate light cap renderable!");
+			if (twosided) {
 
-				if (twosided) {
+				mDestRenderSystem->_setCullingMode(CULL_ANTICLOCKWISE);
 
-					mDestRenderSystem->_setCullingMode(CULL_ANTICLOCKWISE);
+				renderSingleObject(lightCap, pass, false, manualLightList);
 
-					renderSingleObject(lightCap, pass, false, manualLightList);
+				mDestRenderSystem->_setCullingMode(CULL_CLOCKWISE);
 
-					mDestRenderSystem->_setCullingMode(CULL_CLOCKWISE);
+				mDestRenderSystem->_setDepthBufferFunction(CMPF_ALWAYS_FAIL);
+				renderSingleObject(lightCap, pass, false, manualLightList);
 
-					mDestRenderSystem->_setDepthBufferFunction(CMPF_ALWAYS_FAIL);
-					renderSingleObject(lightCap, pass, false, manualLightList);
+				mDestRenderSystem->_setDepthBufferFunction(CMPF_LESS);
 
-					mDestRenderSystem->_setDepthBufferFunction(CMPF_LESS);
+				mDestRenderSystem->_setCullingMode(CULL_NONE);
+			}
+			else if ((secondpass || zfail) && !(secondpass && zfail)) {
 
-					mDestRenderSystem->_setCullingMode(CULL_NONE);
-				}
-				else if ((secondpass || zfail) && !(secondpass && zfail)) {
+				renderSingleObject(lightCap, pass, false, manualLightList);
+			}
+			else {
 
-					renderSingleObject(lightCap, pass, false, manualLightList);
-				}
-				else {
+				mDestRenderSystem->_setDepthBufferFunction(CMPF_ALWAYS_FAIL);
+				renderSingleObject(lightCap, pass, false, manualLightList);
 
-					mDestRenderSystem->_setDepthBufferFunction(CMPF_ALWAYS_FAIL);
-					renderSingleObject(lightCap, pass, false, manualLightList);
-
-					mDestRenderSystem->_setDepthBufferFunction(CMPF_LESS);
-				}
+				mDestRenderSystem->_setDepthBufferFunction(CMPF_LESS);
 			}
 		}
 	}
@@ -2337,7 +2335,7 @@ const Pass* RbxSceneManager::_setPass(const Pass* pass, bool evenIfSuppressed, b
 	return pass;
 }
 
-// STUB: ROBLOX 0x006901e0
+// FUNCTION: ROBLOX 0x006901e0
 void RbxSceneManager::_renderScene(Camera* camera, Viewport* vp, bool includeOverlays)
 {
 	g_unk0x00961438 = false;
@@ -2346,8 +2344,6 @@ void RbxSceneManager::_renderScene(Camera* camera, Viewport* vp, bool includeOve
 	Root::getSingleton()._setCurrentSceneManager(this);
 	mActiveQueuedRenderableVisitor->targetSceneMgr = this;
 	mAutoParamDataSource.setCurrentSceneManager(this);
-
-	mCurrentViewport = vp;
 
 	if (isShadowTechniqueInUse()) {
 
@@ -2372,11 +2368,14 @@ void RbxSceneManager::_renderScene(Camera* camera, Viewport* vp, bool includeOve
 		mLastFrameNumber = thisFrameNumber;
 	}
 
+	Timer timer;
 	{
 
 		OGRE_LOCK_MUTEX(sceneGraphMutex)
 
+		timer.reset();
 		_updateSceneGraph(camera);
+		timer.getMicroseconds();
 
 		AutoTrackingSceneNodes::iterator atsni, atsniend;
 		atsniend = mAutoTrackingSceneNodes.end();
@@ -2437,7 +2436,9 @@ void RbxSceneManager::_renderScene(Camera* camera, Viewport* vp, bool includeOve
 			}
 		}
 
+		timer.reset();
 		prepareRenderQueue();
+		timer.getMicroseconds();
 
 		if (mFindVisibleObjects) {
 
@@ -2482,7 +2483,9 @@ void RbxSceneManager::_renderScene(Camera* camera, Viewport* vp, bool includeOve
 	mDestRenderSystem->_setProjectionMatrix(mCameraInProgress->getProjectionMatrixRS());
 	mDestRenderSystem->_setViewMatrix(mCameraInProgress->getViewMatrix(true));
 
+	timer.reset();
 	_renderVisibleObjects();
+	timer.getMicroseconds();
 
 	mDestRenderSystem->_endFrame();
 
