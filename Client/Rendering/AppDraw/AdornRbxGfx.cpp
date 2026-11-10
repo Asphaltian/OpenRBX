@@ -115,12 +115,10 @@ int g_unk0x00961334;
 inline static void setExplosionScale(Ogre::ParticleSystem* particleSystem, Ogre::ParticleEmitter* emitter, float scale)
 {
 	particleSystem->setParticleQuota((size_t) (atoi("400") * scale));
-	float velocityScale = pow(scale, 1.0f / 3.0f);
-	emitter->setMinParticleVelocity(atoi("20") * velocityScale);
-	emitter->setMaxParticleVelocity(atoi("30") * velocityScale);
-	double duration = (scale - 1.0) * 0.4;
-	emitter->setMinDuration(atoi("1.2") + duration);
-	emitter->setMaxDuration(atoi("1.2") + duration);
+	emitter->setMinParticleVelocity(pow(scale, 1.0f / 3.0f) * atoi("20"));
+	emitter->setMaxParticleVelocity(pow(scale, 1.0f / 3.0f) * atoi("30"));
+	emitter->setMinDuration((scale - 1.0) * 0.4f + atoi("1.2"));
+	emitter->setMaxDuration((scale - 1.0) * 0.4f + atoi("1.2"));
 }
 
 // FUNCTION: ROBLOX 0x0066a0d0
@@ -244,10 +242,35 @@ G3D::ReferenceCountedPointer<TextureProxyBase> AdornRbxGfx::createTextureProxy(c
 	return new RenderNew::TextureProxy(name);
 }
 
-// STUB: ROBLOX 0x0066b510
+// FUNCTION: ROBLOX 0x0066b510
 void AdornRbxGfx::prepareRenderPass()
 {
-	STUB(0x66b510);
+	int total = 0;
+	std::map<std::string, Ogre::SceneNode*>::iterator it;
+	for (it = m_unk0x88.begin(); it != m_unk0x88.end(); ++it) {
+		Ogre::ParticleSystem* particleSystem =
+			static_cast<Ogre::ParticleSystem*>(it->second->getAttachedObject((unsigned short) 0));
+		total += particleSystem->getParticleQuota();
+	}
+
+	float quota = total;
+	if (quota > 11000.0f) {
+		float scale = 10000.0 / quota;
+		for (it = m_unk0x88.begin(); it != m_unk0x88.end(); ++it) {
+			Ogre::ParticleSystem* particleSystem =
+				static_cast<Ogre::ParticleSystem*>(it->second->getAttachedObject((unsigned short) 0));
+			Ogre::ParticleEmitter* emitter = particleSystem->getEmitter(0);
+			int particleQuota = particleSystem->getParticleQuota();
+			float minVelocity = emitter->getMinParticleVelocity();
+			float maxVelocity = emitter->getMaxParticleVelocity();
+			float duration = emitter->getDuration();
+			particleSystem->setParticleQuota((size_t) (particleQuota * scale));
+			emitter->setMinParticleVelocity(pow(scale, 1.0f / 3.0f) * minVelocity);
+			emitter->setMaxParticleVelocity(pow(scale, 1.0f / 3.0f) * maxVelocity);
+			emitter->setMinDuration((scale - 1.0) * 0.4f + duration);
+			emitter->setMaxDuration((scale - 1.0) * 0.4f + duration);
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x0066c0b0
@@ -389,11 +412,14 @@ AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08(""), m_un
 // STUB: ROBLOX 0x0066e8e0
 void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid, const G3D::Color4& wire)
 {
-	Ogre::Quaternion orientation;
-	orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
-	Ogre::SceneNode* anchor =
-		m_unk0x30->createChildSceneNode(reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation), orientation);
-	Ogre::Vector3 position = anchor->getPosition();
+	Ogre::Vector3 position;
+	{
+		Ogre::Quaternion orientation;
+		orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
+		position =
+			m_unk0x30->createChildSceneNode(reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation), orientation)
+				->getPosition();
+	}
 
 	char key[64];
 	_snprintf(key, sizeof(key), "%.3f %.3f %.3f", position.x, position.y, position.z);
