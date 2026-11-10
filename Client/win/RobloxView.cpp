@@ -35,6 +35,12 @@ ON_COMMAND(0x800c, FUN_0045de70)
 ON_COMMAND(0x80fd, FUN_0045dc00)
 END_MESSAGE_MAP()
 
+// FUNCTION: ROBLOX 0x0045d4f0
+BOOL CRobloxView::OnPreparePrinting(CPrintInfo* pInfo)
+{
+	return DoPreparePrinting(pInfo);
+}
+
 // FUNCTION: ROBLOX 0x0045d500
 void CRobloxView::onEvent(const RBX::Network::Players* source, RBX::SuperSafeChanged event)
 {
@@ -131,6 +137,19 @@ int CRobloxView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CRect rect;
 	GetClientRect(&rect);
 	return m_unk0x88.Create(NULL, "Roblox", WS_CHILD | WS_VISIBLE, rect, this, 1) ? 0 : -1;
+}
+
+// FUNCTION: ROBLOX 0x0045d850
+void CRobloxView::OnActivateFrame(UINT nState, CFrameWnd* pFrameWnd)
+{
+	if (nState) {
+		m_unk0x88.FUN_0045fc50(true);
+	}
+	else {
+		m_unk0x88.FUN_0045fc50(false);
+	}
+
+	CView::OnActivateFrame(nState, pFrameWnd);
 }
 
 // FUNCTION: ROBLOX 0x0045d880

@@ -222,7 +222,7 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 	G3D::CoordinateFrame cameraFrame = camera.getCoordinateFrame();
 
 	if (effectSettings.stencilShadows()) {
-		engine->m_unk0x04->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
+		engine->m_unk0x04->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_MODULATIVE);
 		engine->m_unk0x04->setShadowColour(Ogre::ColourValue(0.5f, 0.5f, 0.5f, 1.0f));
 	}
 	else {
