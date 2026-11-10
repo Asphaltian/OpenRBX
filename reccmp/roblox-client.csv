@@ -3270,7 +3270,6 @@ address,type,symbol,name,module,size
 00453170,library,??$_Unchecked_move_backward@PAUCColorInfo@CRobloxControlColorSelector@@PAU12@@stdext@@YAPAUCColorInfo@CRobloxControlColorSelector@@PAU12@00@Z,,,
 00453250,library,?_Ufill@?$vector@UCColorInfo@CRobloxControlColorSelector@@V?$allocator@UCColorInfo@CRobloxControlColorSelector@@@std@@@std@@IAEPAUCColorInfo@CRobloxControlColorSelector@@PAU34@IABU34@@Z,,,
 00453310,library,??$_Umove@PAUCColorInfo@CRobloxControlColorSelector@@@?$vector@UCColorInfo@CRobloxControlColorSelector@@V?$allocator@UCColorInfo@CRobloxControlColorSelector@@@std@@@std@@IAEPAUCColorInfo@CRobloxControlColorSelector@@PAU23@00@Z,,,
-004741f0,library,??_GCXTPImageManagerIcon@@UAEPAXI@Z,,,
 00474920,library,??1?$auto_ptr@VRenderScene@Render@RBX@@@std@@QAE@XZ,,,
 004964e0,library,?_Tidy@?$vector@V?$ReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@V?$allocator@V?$ReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@@std@@@std@@IAEXXZ,,,
 00497b70,library,??1?$set@V?$WeakReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@U?$less@V?$WeakReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@@std@@V?$allocator@V?$WeakReferenceCountedPointer@VChunk@Render@RBX@@@G3D@@@4@@std@@QAE@XZ,,,
@@ -6594,3 +6593,4 @@ address,type,symbol,name,module,size
 00955350,global,,g_unk0x00955350,,
 00955354,global,,g_unk0x00955354,,
 00955358,global,,g_unk0x00955358,,
+0095535c,global,,g_unk0x0095535c,,
