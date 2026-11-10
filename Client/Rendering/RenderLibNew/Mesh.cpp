@@ -246,10 +246,10 @@ Mesh::Mesh()
 	m_unk0x3c = 0;
 }
 
-// STUB: ROBLOX 0x00532b60
+// FUNCTION: ROBLOX 0x00532b60
 Mesh::~Mesh()
 {
-	STUB(0x532b60);
+	delete m_unk0x38;
 }
 
 // FUNCTION: ROBLOX 0x00532d90

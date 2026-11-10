@@ -119,10 +119,17 @@ void View::onWorkspaceDescendentAdded(boost::shared_ptr<Instance> descendent)
 	}
 }
 
-// STUB: ROBLOX 0x0050c4a0
+// FUNCTION: ROBLOX 0x0050c4a0
 void View::suppressSkybox()
 {
-	STUB(0x50c4a0);
+	Lighting* lighting = dataModel ? dataModel->create<Lighting>() : NULL;
+
+	renderLibScene->presetLighting(
+		NULL, lighting->getSkyParameters(), lighting->getAmbientTop(), lighting->getAmbientBottom()
+	);
+
+	G3D::Color4 clearColor = lighting->getClearColor();
+	renderLibScene->colorClearValue = clearColor;
 }
 
 // STUB: ROBLOX 0x0050c5c0

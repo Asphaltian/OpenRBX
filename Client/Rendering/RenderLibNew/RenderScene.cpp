@@ -169,10 +169,14 @@ void RenderScene::setLighting(const G3D::ReferenceCountedPointer<G3D::Lighting>&
 	);
 }
 
-// STUB: ROBLOX 0x0052d7e0
+// FUNCTION: ROBLOX 0x0052d7e0
 RenderScene::~RenderScene()
 {
-	STUB(0x52d7e0);
+	if (m_unk0x00) {
+		m_unk0x00->getCreator()->getRootSceneNode()->removeChild(m_unk0x00->getName());
+		delete m_unk0x00;
+	}
+	delete m_unk0x04;
 }
 
 // FUNCTION: ROBLOX 0x0052da20

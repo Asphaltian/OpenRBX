@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "renderlib/RenderStats.h"
 #include "renderlibnew/EffectSettings.h"
+#include "renderlibnew/RenderSurface.h"
 
 #include <G3D/Array.h>
 #include <G3D/Color4.h>
@@ -37,27 +38,27 @@ class RenderScene
 	friend class SceneManager;
 
 private:
-	Ogre::RbxSceneNode* m_unk0x00;                               // 0x000
-	Ogre::RbxEntity* m_unk0x04;                                  // 0x004
-	Ogre::MaterialPtr m_unk0x08;                                 // 0x008
-	Ogre::MeshPtr m_unk0x14;                                     // 0x014
-	G3D::Array<undefined4> m_unk0x20;                            // 0x020
-	G3D::Array<undefined4> m_unk0x2c;                            // 0x02c
-	G3D::Array<undefined4> m_unk0x38;                            // 0x038
-	G3D::Array<undefined4> m_unk0x44;                            // 0x044
-	G3D::Array<undefined4> m_unk0x50;                            // 0x050
-	G3D::Array<undefined4> m_unk0x5c;                            // 0x05c
-	G3D::VAR shadowVAR;                                          // 0x068
-	G3D::ReferenceCountedPointer<G3D::VARArea> shadowVARArea;    // 0x088
-	EffectSettings effectSettings;                               // 0x08c
-	G3D::ReferenceCountedPointer<G3D::Lighting> desiredLighting; // 0x0a0
-	G3D::ReferenceCountedPointer<G3D::Lighting> lighting;        // 0x0a4
-	float shadingQuality;                                        // 0x0a8
-	float meshDetail;                                            // 0x0ac
-	bool shadows;                                                // 0x0b0
-	float cameraDistance;                                        // 0x0b4
-	G3D::Array<G3D::ReferenceCountedPointer<Chunk> > chunkArray; // 0x0b8
-	G3D::Array<unsigned int> shadowIndexArray;                   // 0x0c4
+	Ogre::RbxSceneNode* m_unk0x00;                                            // 0x000
+	Ogre::RbxEntity* m_unk0x04;                                               // 0x004
+	Ogre::MaterialPtr m_unk0x08;                                              // 0x008
+	Ogre::MeshPtr m_unk0x14;                                                  // 0x014
+	G3D::Array<RenderSurface> proxyArray;                                     // 0x020
+	G3D::Array<RenderSurface*> diffuseProxyArray;                             // 0x02c
+	G3D::Array<RenderSurface*> reflectProxyArray;                             // 0x038
+	G3D::Array<RenderSurface*> transparentProxyArray;                         // 0x044
+	G3D::Array<RenderSurface> shadowProxyArray;                               // 0x050
+	G3D::Array<G3D::ReferenceCountedPointer<Chunk> > shadowCachingChunkArray; // 0x05c
+	G3D::VAR shadowVAR;                                                       // 0x068
+	G3D::ReferenceCountedPointer<G3D::VARArea> shadowVARArea;                 // 0x088
+	EffectSettings effectSettings;                                            // 0x08c
+	G3D::ReferenceCountedPointer<G3D::Lighting> desiredLighting;              // 0x0a0
+	G3D::ReferenceCountedPointer<G3D::Lighting> lighting;                     // 0x0a4
+	float shadingQuality;                                                     // 0x0a8
+	float meshDetail;                                                         // 0x0ac
+	bool shadows;                                                             // 0x0b0
+	float cameraDistance;                                                     // 0x0b4
+	G3D::Array<G3D::ReferenceCountedPointer<Chunk> > chunkArray;              // 0x0b8
+	G3D::Array<unsigned int> shadowIndexArray;                                // 0x0c4
 
 public:
 	mutable RenderStats renderStats; // 0x0d0
