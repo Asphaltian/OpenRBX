@@ -131,6 +131,10 @@ public:
 	void FUN_00456c50(int id, RBX::Verb* verb);
 	void FUN_00456d30();
 
+	virtual void SetTitle(LPCTSTR lpszTitle);
+	virtual BOOL IsModified();
+	virtual void SetModifiedFlag(BOOL bModified = TRUE);
+	virtual void DeleteContents();
 	virtual BOOL OnNewDocument();
 	virtual BOOL OnOpenDocument(LPCTSTR lpszPathName);
 	virtual BOOL OnSaveDocument(LPCTSTR lpszPathName);

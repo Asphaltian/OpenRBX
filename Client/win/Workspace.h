@@ -69,6 +69,8 @@ protected:
 	virtual void onEvent(const RBX::Workspace* source, RBX::DrawChanged event);
 
 private:
+	friend class CRobloxDoc;
+
 	std::auto_ptr<XmlElement> FUN_0046f040();
 	void FUN_0046f420();
 	std::auto_ptr<XmlElement> FUN_0046ffa0();

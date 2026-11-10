@@ -1,5 +1,6 @@
 #include "RobloxDoc.h"
 
+#include "ActiveDocView.h"
 #include "InstanceExplorer.h"
 #include "LogManager.h"
 #include "MainFrm.h"
@@ -162,6 +163,24 @@ BOOL CRobloxDoc::OnSaveDocument(LPCTSTR lpszPathName)
 	return TRUE;
 }
 
+// FUNCTION: ROBLOX 0x004547a0
+void CRobloxDoc::SetModifiedFlag(BOOL bModified)
+{
+	m_bModified = bModified;
+	if (m_unk0x78) {
+		m_unk0x78->FUN_0046edc0()->setDirty(bModified == TRUE);
+	}
+}
+
+// FUNCTION: ROBLOX 0x00454850
+void CRobloxDoc::SetTitle(LPCTSTR lpszTitle)
+{
+	CDocument::SetTitle(lpszTitle);
+	if (m_unk0x78) {
+		m_unk0x78->FUN_0046edc0()->setName(lpszTitle);
+	}
+}
+
 // FUNCTION: ROBLOX 0x00454920
 void CRobloxDoc::FUN_00454920()
 {
@@ -234,6 +253,17 @@ void CRobloxDoc::FUN_00455ce0(CCmdUI* pCmdUI)
 	pCmdUI->SetText(text);
 }
 
+// FUNCTION: ROBLOX 0x00455e60
+BOOL CRobloxDoc::IsModified()
+{
+	if (FUN_00403290()) {
+		RBX::DataModel::Lock lock(FUN_00403290());
+		return FUN_00403290()->isDirty();
+	}
+
+	return FALSE;
+}
+
 // FUNCTION: ROBLOX 0x004561a0
 void CRobloxDoc::FUN_004561a0()
 {
@@ -245,6 +275,31 @@ void CRobloxDoc::FUN_004561a0()
 		RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
 		m_unk0x78->FUN_004702b0(RBX::ContentId::fromFile(static_cast<LPCTSTR>(dialog.GetPathName())), true);
 	}
+}
+
+// STUB: ROBLOX 0x004564b0
+void CRobloxDoc::DeleteContents()
+{
+	{
+		RBX::DataModel::Lock lock(FUN_00403290());
+		for (std::vector<RBX::Verb*>::iterator it = m_unk0x64.begin(), end = m_unk0x64.end(); it != end; ++it) {
+			delete *it;
+		}
+		m_unk0x64.erase(m_unk0x64.begin(), m_unk0x64.end());
+		m_unk0x74.reset();
+	}
+
+	if (m_unk0x78) {
+		m_unk0x78->FUN_0046f420();
+		m_unk0x78->Release();
+		m_unk0x78 = NULL;
+	}
+
+	if (ActiveDocView::g_unk0x00952d8c == this) {
+		ActiveDocView::FUN_004054f0(true, this);
+	}
+
+	CDocument::DeleteContents();
 }
 
 // FUNCTION: ROBLOX 0x00456b50
