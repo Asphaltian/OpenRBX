@@ -1,6 +1,7 @@
 #include "BrickMesh.h"
 
 #include "QuadVolume.h"
+#include "ViewBase.h"
 #include "util/Math.h"
 #include "v8datamodel/BrickColor.h"
 
@@ -78,7 +79,8 @@ const float BrickMesh::widthInset = 0.0f;
 
 const float BrickMesh::normalPerturbation = 0.05f;
 
-const float BrickMesh::bevel = 0.0f;
+// GLOBAL: ROBLOX 0x00958544
+float BrickMesh::bevel = 0.0f;
 
 static G3D::Vector2 flatTex(1.0f / 64.0f, 8.0f / 9.0f);
 
@@ -233,29 +235,77 @@ void meshFace(
 	}
 }
 
-BrickMesh::BrickMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color)
-{
-	{
-		RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
-		levels.append(level);
-
-		G3D::Vector3 halfSize(size.x * 0.5 - widthInset, size.y * 0.5, size.z * 0.5 - widthInset);
-
-		const float colorIndex = color.getClosestPaletteIndex();
-
-		meshFace<0>(halfSize, bevel, surfaceTypes, colorIndex, level);
-		meshFace<1>(halfSize, bevel, surfaceTypes, colorIndex, level);
-		meshFace<2>(halfSize, bevel, surfaceTypes, colorIndex, level);
-		meshFace<3>(halfSize, bevel, surfaceTypes, colorIndex, level);
-		meshFace<4>(halfSize, bevel, surfaceTypes, colorIndex, level);
-		meshFace<5>(halfSize, bevel, surfaceTypes, colorIndex, level);
-	}
-}
-
 // FUNCTION: ROBLOX 0x0050eed0
 void BrickMesh::flushCache()
 {
 	cache.clear();
+}
+
+// FUNCTION: ROBLOX 0x0050f030
+static void appendTriangles(std::vector<unsigned short>& indices, int v0, int v1, int v2, int v3)
+{
+	indices.push_back(v0);
+	indices.push_back(v1);
+	indices.push_back(v2);
+	indices.push_back(v0);
+	indices.push_back(v2);
+	indices.push_back(v3);
+}
+
+// STUB: ROBLOX 0x00514070
+void BrickMesh::FUN_00514070(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color)
+{
+	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
+	levels.append(level);
+
+	G3D::Vector3 halfSize(size.x * 0.5 - widthInset, size.y * 0.5, size.z * 0.5 - widthInset);
+
+	const float colorIndex = color.getClosestPaletteIndex();
+
+	meshFace<0>(halfSize, bevel, surfaceTypes, colorIndex, level);
+	meshFace<1>(halfSize, bevel, surfaceTypes, colorIndex, level);
+	meshFace<2>(halfSize, bevel, surfaceTypes, colorIndex, level);
+	meshFace<3>(halfSize, bevel, surfaceTypes, colorIndex, level);
+	meshFace<4>(halfSize, bevel, surfaceTypes, colorIndex, level);
+	meshFace<5>(halfSize, bevel, surfaceTypes, colorIndex, level);
+}
+
+// FUNCTION: ROBLOX 0x00514960
+void BrickMesh::FUN_00514960(
+	const G3D::Vector3& halfSize, std::vector<G3D::Vector3>& vertices, std::vector<unsigned short>& indices
+)
+{
+	vertices.reserve(8);
+	indices.reserve(36);
+
+	vertices.push_back(G3D::Vector3(-halfSize.x, -halfSize.y, -halfSize.z));
+	vertices.push_back(G3D::Vector3(-halfSize.x, -halfSize.y, halfSize.z));
+	vertices.push_back(G3D::Vector3(-halfSize.x, halfSize.y, -halfSize.z));
+	vertices.push_back(G3D::Vector3(-halfSize.x, halfSize.y, halfSize.z));
+	vertices.push_back(G3D::Vector3(halfSize.x, -halfSize.y, -halfSize.z));
+	vertices.push_back(G3D::Vector3(halfSize.x, -halfSize.y, halfSize.z));
+	vertices.push_back(G3D::Vector3(halfSize.x, halfSize.y, -halfSize.z));
+	vertices.push_back(G3D::Vector3(halfSize.x, halfSize.y, halfSize.z));
+
+	appendTriangles(indices, 7, 5, 4, 6);
+	appendTriangles(indices, 2, 0, 1, 3);
+	appendTriangles(indices, 7, 6, 2, 3);
+	appendTriangles(indices, 1, 0, 4, 5);
+	appendTriangles(indices, 3, 1, 5, 7);
+	appendTriangles(indices, 6, 4, 0, 2);
+}
+
+// FUNCTION: ROBLOX 0x00514b10
+BrickMesh::BrickMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color)
+{
+	m_unk0x3c = 1;
+	FUN_00514070(size, surfaceTypes, color);
+
+	if (ViewBase::getShadowsEnabled()) {
+		G3D::Vector3 halfSize = G3D::Vector3(size.x * 0.5, size.y * 0.5, size.z * 0.5) -
+								G3D::Vector3(widthInset + bevel, bevel, widthInset + bevel);
+		FUN_00514960(halfSize, m_unk0x28, m_unk0x18);
+	}
 }
 
 // STUB: ROBLOX 0x00514c00

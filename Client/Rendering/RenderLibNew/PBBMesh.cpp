@@ -2,6 +2,7 @@
 
 #include "BrickMesh.h"
 #include "QuadVolume.h"
+#include "ViewBase.h"
 
 #include <G3D/Vector2int16.h>
 #include <G3D/Vector3int16.h>
@@ -206,7 +207,7 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, NormalId textureFace, const G3D::Vect
 	builder.buildFace(textureFace, LevelBuilder::Decal);
 }
 
-// STUB: ROBLOX 0x0051f8c0
+// FUNCTION: ROBLOX 0x0051f8c0
 PBBMesh::PBBMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
 	{
@@ -214,6 +215,11 @@ PBBMesh::PBBMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 		levels.append(level);
 		PBBBuilder builder(level, size, surfaceTypes);
 		builder.build(LevelBuilder::Surface);
+	}
+
+	if (ViewBase::getShadowsEnabled()) {
+		G3D::Vector3 halfSize(size.x * 0.5, size.y * 0.5, size.z * 0.5);
+		BrickMesh::FUN_00514960(halfSize, m_unk0x28, m_unk0x18);
 	}
 }
 
