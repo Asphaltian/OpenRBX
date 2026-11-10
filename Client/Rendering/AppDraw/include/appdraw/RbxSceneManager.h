@@ -113,6 +113,7 @@ protected:
 	bool fireRenderQueueEnded(uint8 id, const String& invocation);
 	void fireShadowTexturesUpdated(size_t numberOfShadowTextures);
 	void fireShadowTexturesPreCaster(Light* light, Camera* camera);
+	void fireShadowTexturesPreReceiver(Light* light, Frustum* f);
 	void renderShadowVolumeObjects(
 		ShadowCaster::ShadowRenderableListIterator iShadowRenderables,
 		Pass* pass,

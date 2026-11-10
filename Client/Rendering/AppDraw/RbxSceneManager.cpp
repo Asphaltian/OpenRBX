@@ -1417,6 +1417,17 @@ void RbxSceneManager::fireShadowTexturesPreCaster(Light* light, Camera* camera)
 	}
 }
 
+// FUNCTION: ROBLOX 0x0068a900
+void RbxSceneManager::fireShadowTexturesPreReceiver(Light* light, Frustum* f)
+{
+	ShadowListenerList::iterator i, iend;
+
+	iend = mShadowListeners.end();
+	for (i = mShadowListeners.begin(); i != iend; ++i) {
+		(*i)->shadowTextureReceiverPreViewProj(light, f);
+	}
+}
+
 // FUNCTION: ROBLOX 0x0068a990
 void RbxSceneManager::initShadowVolumeMaterials(void)
 {
@@ -2585,7 +2596,7 @@ void RbxSceneManager::renderTextureShadowCasterQueueGroupObjects(
 	mDestRenderSystem->setAmbientLight(mAmbientLight.r, mAmbientLight.g, mAmbientLight.b);
 }
 
-// STUB: ROBLOX 0x00690c30
+// FUNCTION: ROBLOX 0x00690c30
 void RbxSceneManager::renderModulativeTextureShadowedQueueGroupObjects(
 	RenderQueueGroup* pGroup, QueuedRenderableCollection::OrganisationMode om
 )
@@ -2632,7 +2643,7 @@ void RbxSceneManager::renderModulativeTextureShadowedQueueGroupObjects(
 
 			mAutoParamDataSource.setTextureProjector(cam, 0);
 
-			if (l->getType() == Light::LT_SPOTLIGHT && !cam->isCustomProjectionMatrixEnabled()) {
+			if (l->getType() == Light::LT_SPOTLIGHT) {
 
 				while (targetPass->getNumTextureUnitStates() > 2) {
 					targetPass->removeTextureUnitState(2);
