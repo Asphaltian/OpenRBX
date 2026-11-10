@@ -16,6 +16,7 @@ class CRobloxWnd;
 
 namespace G3D {
 class Color4;
+class Vector3;
 } // namespace G3D
 
 namespace RBX {
@@ -51,6 +52,7 @@ public:
 
 DECOMP_SIZE_ASSERT(Unknown00671c70, 0xb0)
 
+Vector3 FUN_005e0b40(const G3D::Vector3& v);
 ColourValue FUN_00671cd0(const G3D::Color4& color);
 
 // SIZE 0x808
@@ -89,6 +91,7 @@ public:
 	VisualEngine();
 	virtual ~VisualEngine(); // vtable+0x00
 
+	SceneManager* getSceneManager() const { return m_unk0x04; }
 	Viewport* getViewport() const { return m_unk0x10; }
 
 	Unk0x18& getUnk0x18() { return m_unk0x18; }

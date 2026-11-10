@@ -7,14 +7,17 @@
 #include "appdraw/VisualEngine.h"
 #include "renderlibnew/TextureProxy.h"
 #include "util/ContentProvider.h"
+#include "util/IndexBox.h"
 #include "util/Utilities.h"
 
 #include <OgreLogManager.h>
+#include <OgreManualObject.h>
 #include <OgreMaterialManager.h>
 #include <OgreMeshManager.h>
 #include <OgreParticleEmitter.h>
 #include <OgreParticleSystem.h>
 #include <OgreParticleSystemManager.h>
+#include <OgreResourceGroupManager.h>
 #include <OgreSceneManager.h>
 #include <OgreStringConverter.h>
 #include <OgreTechnique.h>
@@ -365,7 +368,62 @@ void AdornRbxGfx::finishRenderPass()
 // STUB: ROBLOX 0x0066c2f0
 void AdornRbxGfx::box(const G3D::AABox& box, const G3D::Color4& solid, const G3D::Color4& wire)
 {
-	STUB(0x66c2f0);
+	IndexBox indexBox(G3D::Vector3(-1.0f, -1.0f, -1.0f), G3D::Vector3(1.0f, 1.0f, 1.0f));
+
+	char key[64];
+	_snprintf(key, sizeof(key), "c%d%d%d", (int) (solid.r * 255.0), (int) (solid.g * 255.0), (int) (solid.b * 255.0));
+	Ogre::MeshPtr mesh = FUN_0066b450(key);
+	if (mesh.isNull()) {
+		Ogre::ManualObject* manual = m_unk0x04->getSceneManager()->createManualObject("box" + FUN_0066a3c0());
+		manual->begin("", Ogre::RenderOperation::OT_TRIANGLE_LIST);
+		manual->colour(Ogre::FUN_00671cd0(solid));
+
+		int index = 0;
+		for (int face = 0; face < 6; face++) {
+			G3D::Vector3 v0;
+			G3D::Vector3 v1;
+			G3D::Vector3 v2;
+			G3D::Vector3 v3;
+			indexBox.getFaceCorners(face, v0, v1, v2, v3);
+			manual->normal(Ogre::FUN_005e0b40(indexBox.getFaceNormal(face)));
+			manual->position(Ogre::FUN_005e0b40(v0));
+			manual->index(index++);
+			manual->position(Ogre::FUN_005e0b40(v1));
+			manual->index(index++);
+			manual->position(Ogre::FUN_005e0b40(v2));
+			manual->index(index++);
+			manual->position(Ogre::FUN_005e0b40(v0));
+			manual->index(index++);
+			manual->position(Ogre::FUN_005e0b40(v2));
+			manual->index(index++);
+			manual->position(Ogre::FUN_005e0b40(v3));
+			manual->index(index++);
+		}
+
+		manual->end();
+		manual->setMaterialName(0, m_unk0x38->getName());
+		mesh = manual->convertToMesh(
+			m_unk0x04->m_unk0x04->getName() + "bmsh" + Ogre::StringConverter::toString(m_unk0x64.size()),
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+		);
+		FUN_0066bf20(std::string(key), mesh);
+		m_unk0x34->FUN_0067b2b0(
+			mesh->getSubMesh(0), Ogre::Sphere(mesh->getBounds().getCenter(), mesh->getBoundingSphereRadius())
+		);
+	}
+
+	Ogre::Matrix4 local;
+	Ogre::Matrix4 transform;
+	FUN_0066a2d0(transform, Ogre::Vector3(0.0f, 0.0f, 0.0f), Ogre::Vector3(1.0f, 1.0f, 1.0f), Ogre::Quaternion());
+	local.makeTransform(
+		Ogre::FUN_005e0b40(box.center()),
+		Ogre::Vector3(
+			(box.high().x - box.low().x) * 0.5, (box.high().y - box.low().y) * 0.5, (box.high().z - box.low().z) * 0.5
+		),
+		Ogre::Quaternion()
+	);
+
+	FUN_0066c220(mesh, transform * local, m_unk0x38);
 }
 
 // STUB: ROBLOX 0x0066ca20
@@ -398,29 +456,28 @@ void AdornRbxGfx::ray(const G3D::Ray& ray, const G3D::Color4& color, float scale
 	STUB(0x66da00);
 }
 
-// STUB: ROBLOX 0x0066df30
+// FUNCTION: ROBLOX 0x0066df30
 AdornRbxGfx::~AdornRbxGfx()
 {
-	for (std::map<std::string, Ogre::MeshPtr>::const_iterator it = m_unk0x64.begin(), end = m_unk0x64.end(); it != end;
-		 ++it) {
+	for (std::map<std::string, Ogre::MeshPtr>::const_iterator it = m_unk0x64.begin(); it != m_unk0x64.end(); ++it) {
 		const Ogre::MeshPtr& mesh = it->second;
 		Ogre::MeshManager::getSingleton().remove(mesh->getHandle());
 	}
 	m_unk0x64.clear();
 
-	m_unk0x04->m_unk0x04->getRootSceneNode()->removeAndDestroyChild(m_unk0x30->getName());
-	m_unk0x04->m_unk0x04->getRootSceneNode()->removeChild(m_unk0x34);
+	m_unk0x04->getSceneManager()->getRootSceneNode()->removeAndDestroyChild(m_unk0x30->getName());
+	m_unk0x04->getSceneManager()->getRootSceneNode()->removeChild(m_unk0x34);
 	delete m_unk0x34;
 	delete m_unk0x70;
 
 	for (int i = 0; i < (int) m_unk0x78.size(); i++) {
-		m_unk0x04->m_unk0x04->destroyParticleSystem(
+		m_unk0x04->getSceneManager()->destroyParticleSystem(
 			static_cast<Ogre::ParticleSystem*>(m_unk0x78[i]->getAttachedObject((unsigned short) 0))->getName()
 		);
-		m_unk0x04->m_unk0x04->destroySceneNode(m_unk0x78[i]->getName());
+		m_unk0x04->getSceneManager()->destroySceneNode(m_unk0x78[i]->getName());
 	}
 	if (m_unk0x74) {
-		m_unk0x04->m_unk0x04->destroySceneNode(m_unk0x74->getName());
+		m_unk0x04->getSceneManager()->destroySceneNode(m_unk0x74->getName());
 	}
 	m_unk0x78.clear();
 	m_unk0x88.clear();
@@ -441,11 +498,11 @@ AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08(""), m_un
 
 	char name[8];
 	_snprintf(name, sizeof(name), "a3dr%d", g_unk0x00961334++);
-	m_unk0x30 = m_unk0x04->m_unk0x04->createSceneNode(name);
-	m_unk0x04->m_unk0x04->getRootSceneNode()->addChild(m_unk0x30);
+	m_unk0x30 = m_unk0x04->getSceneManager()->createSceneNode(name);
+	m_unk0x04->getSceneManager()->getRootSceneNode()->addChild(m_unk0x30);
 
 	m_unk0x34 = new Ogre::RbxSceneNode(visualEngine->m_unk0x04, std::string(name) + "opt");
-	m_unk0x04->m_unk0x04->getRootSceneNode()->addChild(m_unk0x34);
+	m_unk0x04->getSceneManager()->getRootSceneNode()->addChild(m_unk0x34);
 
 	m_unk0x70 = new Ogre::RbxEntity();
 	m_unk0x70->m_unk0x244 = false;
@@ -555,12 +612,12 @@ void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid,
 		}
 
 		if (!m_unk0x74) {
-			m_unk0x74 = m_unk0x04->m_unk0x04->getRootSceneNode()->createChildSceneNode(
+			m_unk0x74 = m_unk0x04->getSceneManager()->getRootSceneNode()->createChildSceneNode(
 				m_unk0x04->m_unk0x04->getName() + "rbxexpl", Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY
 			);
 		}
 
-		Ogre::ParticleSystem* particleSystem = m_unk0x04->m_unk0x04->createParticleSystem(
+		Ogre::ParticleSystem* particleSystem = m_unk0x04->getSceneManager()->createParticleSystem(
 			m_unk0x04->m_unk0x04->getName() + "expl" + Ogre::StringConverter::toString(i), "explosion/explosion1"
 		);
 		if (!particleSystem) {
