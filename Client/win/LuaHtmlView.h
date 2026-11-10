@@ -48,6 +48,7 @@ public:
 	virtual void OnDocumentComplete(LPCTSTR lpszURL);
 
 	void FUN_0042d640();
+	void FUN_0042e330(LPCTSTR html);
 	void FUN_0042f370();
 
 protected:

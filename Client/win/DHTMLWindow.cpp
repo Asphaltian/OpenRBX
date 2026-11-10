@@ -16,8 +16,23 @@ template const RBX::FactoryProduct<DHTMLWindowService, RBX::Instance, sDHTMLWind
 // GLOBAL: ROBLOX 0x00952f1c
 Marshaller* g_unk0x00952f1c;
 
+static RBX::Reflection::BoundFuncDesc<DHTMLWindowService, boost::shared_ptr<RBX::Instance>(int, int), 2>
+	g_unk0x00952f20(
+		&DHTMLWindowService::FUN_0041cf60,
+		"NewWindow",
+		"width",
+		500,
+		"height",
+		300,
+		RBX::Reflection::FunctionDescriptor::AnyCaller
+	);
+
 static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(std::string), 1> g_unk0x00952f60(
 	&DHTMLWindow::FUN_0041d1f0, "Navigate", "url", "about:blank", RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+
+static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(std::string), 1> g_unk0x00952f98(
+	&DHTMLWindow::FUN_0041d2d0, "SetBody", "html", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
 
 static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(int, int), 2> g_unk0x00953008(
@@ -111,6 +126,15 @@ void DHTMLWindow::FUN_0041c1d0()
 	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_00415550, RBX::shared_from(this)));
 }
 
+// FUNCTION: ROBLOX 0x0041cf60
+boost::shared_ptr<RBX::Instance> DHTMLWindowService::FUN_0041cf60(int width, int height)
+{
+	boost::shared_ptr<DHTMLWindow> window = RBX::Creatable<RBX::Instance>::create<DHTMLWindow>();
+	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_004153f0, window, width, height));
+	window->setParent(this);
+	return window;
+}
+
 // FUNCTION: ROBLOX 0x0041d0a0
 void DHTMLWindow::FUN_0041d0a0(int x, int y)
 {
@@ -121,6 +145,12 @@ void DHTMLWindow::FUN_0041d0a0(int x, int y)
 void DHTMLWindow::FUN_0041d1f0(std::string url)
 {
 	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_004157b0, RBX::shared_from(this), url));
+}
+
+// FUNCTION: ROBLOX 0x0041d2d0
+void DHTMLWindow::FUN_0041d2d0(std::string html)
+{
+	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_00415860, RBX::shared_from(this), html));
 }
 
 // FUNCTION: ROBLOX 0x0041dc70

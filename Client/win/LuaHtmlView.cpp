@@ -9,7 +9,9 @@
 #include <exception>
 #include <mshtmdid.h>
 #include <mshtmhst.h>
+#include <mshtml.h>
 #include <oaidl.h>
+#include <stdexcept>
 #include <string>
 
 // VTABLE: ROBLOX 0x00804010
@@ -155,6 +157,23 @@ STDMETHODIMP EventHandler::GetTypeInfo(UINT iTInfo, LCID lcid, ITypeInfo** ppTIn
 STDMETHODIMP EventHandler::GetIDsOfNames(REFIID riid, LPOLESTR* rgszNames, UINT cNames, LCID lcid, DISPID* rgDispId)
 {
 	return DISP_E_UNKNOWNNAME;
+}
+
+// FUNCTION: ROBLOX 0x0042e330
+void CLuaHtmlView::FUN_0042e330(LPCTSTR html)
+{
+	CComQIPtr<IHTMLDocument2> document = GetHtmlDocument();
+	if (!document) {
+		throw std::runtime_error("The HtmlDocument is not loaded");
+	}
+
+	CComPtr<IHTMLElement> body;
+	document->get_body(&body);
+	if (!body) {
+		throw std::runtime_error("The HtmlDocument does not contain a body");
+	}
+
+	body->put_innerHTML(CComBSTR(html));
 }
 
 // FUNCTION: ROBLOX 0x0042e760
