@@ -3,17 +3,25 @@
 #include "appdraw/RbxEntity.h"
 #include "appdraw/RbxFont.h"
 #include "appdraw/RbxSceneNode.h"
+#include "appdraw/RbxSubEntity.h"
 #include "appdraw/VisualEngine.h"
 #include "renderlibnew/TextureProxy.h"
 #include "util/ContentProvider.h"
 
+#include <OgreLogManager.h>
 #include <OgreMaterialManager.h>
 #include <OgreMeshManager.h>
+#include <OgreParticleEmitter.h>
 #include <OgreParticleSystem.h>
+#include <OgreParticleSystemManager.h>
 #include <OgreSceneManager.h>
+#include <OgreStringConverter.h>
+#include <OgreTechnique.h>
 #include <OgreTextureManager.h>
 #include <OgreViewport.h>
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 namespace RBX {
 
@@ -23,8 +31,97 @@ Ogre::SharedPtr<Ogre::RbxFont> g_unk0x00949c7c;
 // GLOBAL: ROBLOX 0x009612a8
 int g_unk0x009612a8;
 
+// GLOBAL: ROBLOX 0x009612c8
+std::string g_unk0x009612c8 = "material explosion/explosionMatl\n"
+							  "{\n"
+							  "\ttechnique\n"
+							  "\t{\n"
+							  "\t\tpass\n"
+							  "\t\t{\n"
+							  "\t\t\tlighting off\n"
+							  "\t\t\tdepth_write off\n"
+							  "\t\t\tscene_blend add\n"
+							  "\n"
+							  "\t\t\ttexture_unit\n"
+							  "\t\t\t{\n"
+							  "\t\t\t\ttexture explosion.png\n"
+							  "\t\t\t\tcolour_op modulate\n"
+							  "\t\t\t}\n"
+							  "\t\t}\n"
+							  "\t}\n"
+							  "}\n";
+
+// GLOBAL: ROBLOX 0x009612e4
+std::string g_unk0x009612e4 = "explosion/explosion1\n"
+							  "{\n"
+							  "\tquota\t400\n"
+							  "\tmaterial\texplosion/explosionMatl\n"
+							  "\tparticle_width\t5\n"
+							  "\tparticle_height\t5\n"
+							  "\tcull_each\tfalse\n"
+							  "\trenderer\tbillboard\n"
+							  "\tsorted\tfalse\n"
+							  "\tlocal_space\tfalse\n"
+							  "\titeration_interval\t0\n"
+							  "\tnonvisible_update_timeout\t0\n"
+							  "\tbillboard_type\tpoint\n"
+							  "\tbillboard_origin\tcenter\n"
+							  "\tbillboard_rotation_type\tvertex\n"
+							  "\tcommon_up_vector\t0 1 0\n"
+							  "\tpoint_rendering\tfalse\n"
+							  "\taccurate_facing\tfalse\n"
+							  "\n"
+							  "\temitter Point\n"
+							  "\t{\n"
+							  "\t\tangle\t180\n"
+							  "\t\tcolour\t0.3 0.3 0.3 .6\n"
+							  "\t\tcolour_range_start\t0.25 0.25 0.25 1\n"
+							  "\t\tcolour_range_end\t0.5 0.5 0.5 1\n"
+							  "\t\tdirection\t0 -1 0\n"
+							  "\t\temission_rate\t20000\n"
+							  "\t\tposition\t0 0 0\n"
+							  "\t\tvelocity\t30\n"
+							  "\t\tvelocity_min\t20\n"
+							  "\t\tvelocity_max\t30\n"
+							  "\t\ttime_to_live\t0.3\n"
+							  "\t\ttime_to_live_min\t0.25\n"
+							  "\t\ttime_to_live_max\t0.35\n"
+							  "\t\tduration\t1.2\n"
+							  "\t\tduration_min\t1.2\n"
+							  "\t\tduration_max\t1.2\n"
+							  "\t\trepeat_delay\t10000\n"
+							  "\t\trepeat_delay_min\t10000\n"
+							  "\t\trepeat_delay_max\t10000\n"
+							  "\t}\n"
+							  "\n"
+							  "\taffector DeflectorPlane\n"
+							  "\t{\n"
+							  "\t\tplane_point\t0 0 0\n"
+							  "\t\tplane_normal\t0 1 0\n"
+							  "\t\tbounce\t0\n"
+							  "\t}\n"
+							  "\n"
+							  "\taffector DirectionRandomiser\n"
+							  "\t{\n"
+							  "\t\trandomness\t0\n"
+							  "\t\tscope\t1\n"
+							  "\t\tkeep_velocity\tfalse\n"
+							  "\t}\n"
+							  "}\n";
+
 // GLOBAL: ROBLOX 0x00961334
 int g_unk0x00961334;
+
+inline static void setExplosionScale(Ogre::ParticleSystem* particleSystem, Ogre::ParticleEmitter* emitter, float scale)
+{
+	particleSystem->setParticleQuota((size_t) (atoi("400") * scale));
+	float velocityScale = pow(scale, 1.0f / 3.0f);
+	emitter->setMinParticleVelocity(atoi("20") * velocityScale);
+	emitter->setMaxParticleVelocity(atoi("30") * velocityScale);
+	double duration = (scale - 1.0) * 0.4;
+	emitter->setMinDuration(atoi("1.2") + duration);
+	emitter->setMaxDuration(atoi("1.2") + duration);
+}
 
 // FUNCTION: ROBLOX 0x0066a0d0
 int AdornRbxGfx::getWidth() const
@@ -153,7 +250,22 @@ void AdornRbxGfx::prepareRenderPass()
 	STUB(0x66b510);
 }
 
-// STUB: ROBLOX 0x0066c190
+// FUNCTION: ROBLOX 0x0066c0b0
+Ogre::RbxSubEntity* AdornRbxGfx::FUN_0066c0b0()
+{
+	if (m_unk0x44.size() != 0) {
+		Ogre::RbxSubEntity* subEntity = m_unk0x44[m_unk0x44.size() - 1];
+		m_unk0x44.pop_back();
+		m_unk0x54.push_back(subEntity);
+		return subEntity;
+	}
+
+	Ogre::RbxSubEntity* subEntity = new Ogre::RbxSubEntity(m_unk0x70);
+	m_unk0x54.push_back(subEntity);
+	return subEntity;
+}
+
+// FUNCTION: ROBLOX 0x0066c190
 void AdornRbxGfx::FUN_0066c190()
 {
 	for (int i = 0; i < (int) m_unk0x54.size(); i++) {
@@ -277,7 +389,115 @@ AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08(""), m_un
 // STUB: ROBLOX 0x0066e8e0
 void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid, const G3D::Color4& wire)
 {
-	STUB(0x66e8e0);
+	Ogre::Quaternion orientation;
+	orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
+	Ogre::SceneNode* anchor =
+		m_unk0x30->createChildSceneNode(reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation), orientation);
+	Ogre::Vector3 position = anchor->getPosition();
+
+	char key[64];
+	_snprintf(key, sizeof(key), "%.3f %.3f %.3f", position.x, position.y, position.z);
+	Ogre::LogManager::getSingleton().logMessage(
+		std::string("RBX expl ") + " r=" + Ogre::StringConverter::toString(sphere.radius)
+	);
+
+	if (m_unk0x88.find(key) != m_unk0x88.end()) {
+		Ogre::ParticleSystem* particleSystem =
+			static_cast<Ogre::ParticleSystem*>(m_unk0x88[key]->getAttachedObject((unsigned short) 0));
+		if (particleSystem->getNumParticles() == 0) {
+			Ogre::ParticleEmitter* emitter = particleSystem->getEmitter(0);
+			setExplosionScale(particleSystem, emitter, 1.0f);
+			emitter->setEnabled(false);
+			m_unk0x88.erase(m_unk0x88.find(key));
+		}
+		return;
+	}
+
+	std::vector<std::map<std::string, Ogre::SceneNode*>::iterator> retired;
+	for (std::map<std::string, Ogre::SceneNode*>::iterator it = m_unk0x88.begin(); it != m_unk0x88.end(); ++it) {
+		Ogre::ParticleSystem* particleSystem =
+			static_cast<Ogre::ParticleSystem*>(it->second->getAttachedObject((unsigned short) 0));
+		if (particleSystem->getNumParticles() == 0) {
+			retired.push_back(it);
+		}
+	}
+
+	for (unsigned int i = 0; i < retired.size(); i++) {
+		Ogre::ParticleSystem* particleSystem =
+			static_cast<Ogre::ParticleSystem*>(retired[i]->second->getAttachedObject((unsigned short) 0));
+		Ogre::ParticleEmitter* emitter = particleSystem->getEmitter(0);
+		emitter->setEnabled(false);
+		m_unk0x88.erase(retired[i]);
+		Ogre::LogManager::getSingleton().logMessage("RBX retired " + particleSystem->getName());
+		setExplosionScale(particleSystem, emitter, 1.0f);
+	}
+
+	float scale = sphere.radius * 0.25;
+	if (scale > 3.0f) {
+		scale = 3.0f;
+	}
+
+	Ogre::SceneNode* node;
+	unsigned int i;
+	for (i = 0; i < m_unk0x78.size(); i++) {
+		Ogre::ParticleSystem* particleSystem =
+			static_cast<Ogre::ParticleSystem*>(m_unk0x78[i]->getAttachedObject((unsigned short) 0));
+		if (!particleSystem->getEmitter(0)->getEnabled()) {
+			Ogre::SceneNode* sceneNode = m_unk0x78[i];
+			node = sceneNode;
+			m_unk0x88[key] = sceneNode;
+			sceneNode->setPosition(position.x, position.y, position.z);
+			particleSystem = static_cast<Ogre::ParticleSystem*>(sceneNode->getAttachedObject((unsigned short) 0));
+			Ogre::ParticleEmitter* emitter = particleSystem->getEmitter(0);
+			setExplosionScale(particleSystem, emitter, scale);
+			emitter->setEnabled(true);
+			particleSystem->_update(0.001f);
+			Ogre::LogManager::getSingleton().logMessage("RBX use " + particleSystem->getName());
+			break;
+		}
+	}
+
+	if (i == m_unk0x78.size()) {
+		if (!Ogre::MaterialManager::getSingleton().resourceExists("explosion/explosionMatl")) {
+			Ogre::DataStreamPtr materialStream(new Ogre::MemoryDataStream(
+				const_cast<char*>(g_unk0x009612c8.c_str()), g_unk0x009612c8.size() + 1, false
+			));
+			Ogre::MaterialManager::getSingleton().parseScript(materialStream, "General");
+			Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().getByName("explosion/explosionMatl");
+			material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureName(
+				ContentProvider::singleton().getAssetFile("textures\\explosion.png"), Ogre::TEX_TYPE_2D
+			);
+			Ogre::DataStreamPtr particleStream(new Ogre::MemoryDataStream(
+				const_cast<char*>(g_unk0x009612e4.c_str()), g_unk0x009612e4.size() + 1, false
+			));
+			Ogre::ParticleSystemManager::getSingleton().parseScript(particleStream, "General");
+		}
+
+		if (!m_unk0x74) {
+			m_unk0x74 = m_unk0x04->m_unk0x04->getRootSceneNode()->createChildSceneNode(
+				m_unk0x04->m_unk0x04->getName() + "rbxexpl", Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY
+			);
+		}
+
+		Ogre::ParticleSystem* particleSystem = m_unk0x04->m_unk0x04->createParticleSystem(
+			m_unk0x04->m_unk0x04->getName() + "expl" + Ogre::StringConverter::toString(i), "explosion/explosion1"
+		);
+		if (!particleSystem) {
+			Ogre::LogManager::getSingleton().logMessage("RBX Error creating psys");
+			return;
+		}
+
+		Ogre::ParticleEmitter* emitter = particleSystem->getEmitter(0);
+		setExplosionScale(particleSystem, emitter, scale);
+		Ogre::SceneNode* sceneNode = m_unk0x74->createChildSceneNode(Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY);
+		node = sceneNode;
+		sceneNode->attachObject(particleSystem);
+		m_unk0x78.push_back(sceneNode);
+		m_unk0x88[key] = sceneNode;
+		Ogre::LogManager::getSingleton().logMessage("RBX created " + particleSystem->getName());
+	}
+
+	node->setPosition(position.x, position.y, position.z);
 }
 
 void AdornRbxGfx::lineSegment(const G3D::LineSegment& segment, const G3D::Color4& color, float scale)
