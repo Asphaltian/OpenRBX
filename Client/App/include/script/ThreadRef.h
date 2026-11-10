@@ -3,6 +3,7 @@
 
 #include "decomp.h"
 #include "lua/LuaBridge.h"
+#include "reflection/type.h"
 
 #include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
@@ -94,7 +95,8 @@ DECOMP_SIZE_ASSERT(ThreadRef::Node, 0xc)
 class FunctionRef : public ThreadRef
 {
 public:
-	FunctionRef();
+	// FUNCTION: ROBLOX 0x004148a0
+	FunctionRef() : functionId(0) {}
 	FunctionRef(const FunctionRef& other);
 	FunctionRef(lua_State* L, int index);
 
@@ -139,6 +141,13 @@ inline int Bridge<boost::shared_ptr<ThreadRef::Node>, 1>::on_tostring(
 FunctionRef lua_tofunction(lua_State* L, int index);
 
 } // namespace Lua
+
+namespace Reflection {
+
+template <>
+Lua::FunctionRef& Value::convert<Lua::FunctionRef>();
+
+} // namespace Reflection
 } // namespace RBX
 
 #endif // SCRIPT_THREADREF_H

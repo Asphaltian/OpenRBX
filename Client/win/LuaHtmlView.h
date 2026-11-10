@@ -49,6 +49,7 @@ public:
 
 	void FUN_0042d640();
 	void FUN_0042e330(LPCTSTR html);
+	void FUN_0042f1b0(boost::shared_ptr<DHTMLWindow> window);
 	void FUN_0042f370();
 
 protected:
@@ -62,6 +63,8 @@ protected:
 	// ?GetMessageMap@CLuaHtmlView@@MBEPBUAFX_MSGMAP@@XZ
 
 private:
+	friend class DHTMLWindow;
+
 	CComPtr<IDispatch> m_unk0xf4;                     // 0xf4
 	CComObjectNoLock<CLuaFunction>* m_unk0xf8;        // 0xf8
 	boost::shared_ptr<RBX::DataModel> m_unk0xfc;      // 0xfc

@@ -75,6 +75,8 @@ public:
 	END_COM_MAP()
 	// clang-format on
 
+	DECLARE_PROTECT_FINAL_CONSTRUCT()
+
 	STDMETHOD(Call)(VARIANT arg1, VARIANT arg2, VARIANT arg3, VARIANT arg4, VARIANT* result);
 	STDMETHOD(CallEx)(SAFEARRAY* args, SAFEARRAY** result);
 

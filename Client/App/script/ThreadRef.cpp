@@ -233,6 +233,27 @@ ThreadRef::Node::~Node()
 	eraseAllRefs();
 }
 
+// FUNCTION: ROBLOX 0x005a5230
+FunctionRef& FunctionRef::operator=(const FunctionRef& other)
+{
+	if (thread() != NULL) {
+		luaL_unref(thread(), LUA_REGISTRYINDEX, functionId);
+	}
+
+	ThreadRef::operator=(other);
+
+	if (thread() == NULL) {
+		functionId = 0;
+	}
+	else {
+		lua_rawgeti(thread(), LUA_REGISTRYINDEX, other.functionId);
+
+		functionId = luaL_ref(thread(), LUA_REGISTRYINDEX);
+	}
+
+	return *this;
+}
+
 // FUNCTION: WEBSERVICE 0x100b1ac0
 // FUNCTION: ROBLOX 0x005a52a0
 ThreadRef::~ThreadRef()
@@ -278,6 +299,30 @@ FunctionRef lua_tofunction(lua_State* L, int index)
 {
 	return FunctionRef(L, index);
 }
+
+} // namespace Lua
+
+namespace Reflection {
+
+// FUNCTION: ROBLOX 0x005a5590
+template <>
+Lua::FunctionRef& Value::convert<Lua::FunctionRef>()
+{
+	if (isType<void>()) {
+		value = Lua::FunctionRef();
+		_type = &Type::singleton<Lua::FunctionRef>();
+	}
+
+	if (Lua::FunctionRef* function = boost::any_cast<Lua::FunctionRef>(&value)) {
+		return *function;
+	}
+
+	throw std::runtime_error("Unable to cast value to RBX::Lua::FunctionRef");
+}
+
+} // namespace Reflection
+
+namespace Lua {
 
 // FUNCTION: WEBSERVICE 0x100b1db0
 // FUNCTION: ROBLOX 0x005a5690

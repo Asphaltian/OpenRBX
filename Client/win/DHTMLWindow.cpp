@@ -35,6 +35,10 @@ static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(std::string), 1> g_unk0x
 	&DHTMLWindow::FUN_0041d2d0, "SetBody", "html", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
 
+static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(RBX::Lua::FunctionRef), 1> g_unk0x00952fd0(
+	&DHTMLWindow::FUN_0041d110, "SetCallback", "function", RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+
 static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(int, int), 2> g_unk0x00953008(
 	&DHTMLWindow::FUN_0041d0a0, "Resize", "x", "y", RBX::Reflection::FunctionDescriptor::AnyCaller
 );
@@ -120,6 +124,21 @@ DHTMLWindow::DHTMLWindow() : m_unk0x104(NULL)
 	setName("Window");
 }
 
+// FUNCTION: ROBLOX 0x0041c0a0
+void DHTMLWindow::onServiceProvider(const RBX::ServiceProvider* oldProvider, const RBX::ServiceProvider* newProvider)
+{
+	RBX::Instance::onServiceProvider(oldProvider, newProvider);
+
+	if (oldProvider) {
+		g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_004155f0, RBX::shared_from(this)));
+	}
+
+	boost::recursive_mutex::scoped_lock lock(m_unk0xf8);
+	if (newProvider) {
+		g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_00417550, RBX::shared_from(this)));
+	}
+}
+
 // FUNCTION: ROBLOX 0x0041c1d0
 void DHTMLWindow::FUN_0041c1d0()
 {
@@ -139,6 +158,12 @@ boost::shared_ptr<RBX::Instance> DHTMLWindowService::FUN_0041cf60(int width, int
 void DHTMLWindow::FUN_0041d0a0(int x, int y)
 {
 	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_00415670, RBX::shared_from(this), x, y));
+}
+
+// FUNCTION: ROBLOX 0x0041d110
+void DHTMLWindow::FUN_0041d110(RBX::Lua::FunctionRef function)
+{
+	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_00415710, RBX::shared_from(this), function));
 }
 
 // FUNCTION: ROBLOX 0x0041d1f0

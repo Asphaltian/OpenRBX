@@ -1,6 +1,7 @@
 #include "LuaHtmlView.h"
 
 #include "DHTMLWindow.h"
+#include "LuaFunction.h"
 #include "decomp.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
@@ -209,6 +210,39 @@ ULONG STDMETHODCALLTYPE EventHandler::Release()
 	}
 
 	return m_unk0x28;
+}
+
+// FUNCTION: ROBLOX 0x0042ef30
+HRESULT FUN_0042ef30(CComObjectNoLock<CLuaFunction>** p_unk0x04, void* p_unk0x08)
+{
+	HRESULT result = E_OUTOFMEMORY;
+	CComObjectNoLock<CLuaFunction>* object = NULL;
+
+	ATLTRY(object = new CComObjectNoLock<CLuaFunction>(p_unk0x08))
+
+	if (object != NULL) {
+		object->SetVoid(p_unk0x08);
+		object->InternalFinalConstructAddRef();
+		result = object->FinalConstruct();
+		object->InternalFinalConstructRelease();
+	}
+
+	*p_unk0x04 = object;
+	return result;
+}
+
+// FUNCTION: ROBLOX 0x0042f1b0
+void CLuaHtmlView::FUN_0042f1b0(boost::shared_ptr<DHTMLWindow> window)
+{
+	m_unk0x104 = window;
+	m_unk0xfc = RBX::shared_from_dynamic_cast<RBX::DataModel, RBX::Instance>(window->getRootAncestor());
+
+	if (FUN_0042ef30(&m_unk0xf8, NULL)) {
+		throw std::runtime_error("CLuaHtmlView failed to create CLuaFunction");
+	}
+
+	m_unk0xf8->m_unk0x0c = m_unk0xfc;
+	m_unk0xf4 = m_unk0xf8;
 }
 
 // FUNCTION: ROBLOX 0x0042f370
