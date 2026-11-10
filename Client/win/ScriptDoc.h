@@ -58,6 +58,9 @@ class CScriptEditor
 	// SYNTHETIC: ROBLOX 0x00467dd0
 	// ?GetThisClass@CScriptEditor@@SGPAUCRuntimeClass@@XZ
 
+	// SYNTHETIC: ROBLOX 0x00469660
+	// ?CreateObject@CScriptEditor@@SGPAVCObject@@XZ
+
 protected:
 	CScriptEditor();
 
@@ -65,6 +68,7 @@ public:
 	virtual ~CScriptEditor();
 
 	void FUN_00468aa0();
+	void FUN_00468db0();
 	void FUN_004696d0();
 	void FUN_00469b30(boost::shared_ptr<RBX::Script> script);
 
@@ -76,8 +80,42 @@ protected:
 
 	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
 	virtual void PostNcDestroy();
+	virtual void OnInitialUpdate();
 	virtual void OnUpdate(CView* pSender, LPARAM lHint, CObject* pHint);
+	virtual void OnCharAdded(Scintilla::SCNotification* pSCNotification);
+	virtual void OnDwellStart(Scintilla::SCNotification* pSCNotification);
 	virtual void OnDwellEnd(Scintilla::SCNotification* pSCNotification);
+	virtual void OnKillFocus();
+
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
+	afx_msg void OnOptionsAddmarker();
+	afx_msg void OnUpdateOptionsAddmarker(CCmdUI* pCmdUI);
+	afx_msg void OnOptionsDeletemarker();
+	afx_msg void OnUpdateOptionsDeletemarker(CCmdUI* pCmdUI);
+	afx_msg void OnOptionsFindNextmarker();
+	afx_msg void OnOptionsFindPrevmarker();
+	afx_msg void OnOptionsFoldMargin();
+	afx_msg void OnUpdateOptionsFoldMargin(CCmdUI* pCmdUI);
+	afx_msg void OnOptionsSelectionMargin();
+	afx_msg void OnUpdateOptionsSelectionMargin(CCmdUI* pCmdUI);
+	afx_msg void OnOptionsViewLinenumbers();
+	afx_msg void OnUpdateOptionsViewLinenumbers(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateInsert(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateStyle(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateFold(CCmdUI* pCmdUI);
+	afx_msg void OnUpdateLine(CCmdUI* pCmdUI);
+	afx_msg LRESULT FUN_00469a20(WPARAM wParam, LPARAM lParam);
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x00469ad0
+	// ?GetMessageMap@CScriptEditor@@MBEPBUAFX_MSGMAP@@XZ
+
+	void SetAStyle(
+		int style, COLORREF fore, COLORREF back = RGB(0xff, 0xff, 0xff), int size = -1, const char* face = NULL
+	);
+	void DefineMarker(int marker, int markerType, COLORREF fore, COLORREF back);
 
 private:
 	boost::shared_ptr<boost::recursive_mutex> m_unk0x128; // 0x128

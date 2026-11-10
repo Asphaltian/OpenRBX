@@ -114,6 +114,16 @@ namespace RBX {
 // ??0EventData@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@QAE@PAV12@PBVInstance@2@VPropertyChanged@2@@Z
 // TEMPLATE: ROBLOX 0x00469380
 // ??0EventData@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@QAE@PAV12@PBVRunService@2@W4RunState@2@@Z
+// TEMPLATE: ROBLOX 0x00469250
+// ??1EventData@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@UAE@XZ
+// TEMPLATE: ROBLOX 0x004693f0
+// ??1EventData@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@UAE@XZ
+// TEMPLATE: ROBLOX 0x00469490
+// ?VTable0x00@EventData@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@UAEXXZ
+// SYNTHETIC: ROBLOX 0x00469510
+// RBX::MarshaledListener<RBX::Instance,RBX::PropertyChanged,RBX::Instance,RBX::PropertyChanged>::EventData::`scalar deleting destructor'
+// SYNTHETIC: ROBLOX 0x00469530
+// RBX::MarshaledListener<RBX::RunService,enum RBX::RunState,RBX::RunService,enum RBX::RunState>::EventData::`scalar deleting destructor'
 // SYNTHETIC: ROBLOX 0x00469190
 // RBX::MarshaledListener<RBX::Instance,RBX::PropertyChanged,RBX::Instance,RBX::PropertyChanged>::`scalar deleting destructor'
 // SYNTHETIC: ROBLOX 0x004691b0
