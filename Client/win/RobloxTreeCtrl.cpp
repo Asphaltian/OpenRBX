@@ -896,10 +896,13 @@ static void FUN_00428770(RBX::Instance* parent, boost::shared_ptr<RBX::Instance>
 	}
 
 	RBX::Workspace* workspace = RBX::Workspace::findWorkspace(parent);
-	if (workspace && !child->isDescendentOf(workspace)) {
-		std::vector<boost::shared_ptr<RBX::Instance> > instances;
-		instances.push_back(child);
-		workspace->insertInstances(instances, workspace, RBX::INSERT_TO_TREE, RBX::SUPPRESS_PROMPTS);
+	if (workspace) {
+		bool descendent = child->isDescendentOf(workspace);
+		if (!descendent) {
+			std::vector<boost::shared_ptr<RBX::Instance> > instances;
+			instances.push_back(child);
+			workspace->insertInstances(instances, workspace, RBX::INSERT_TO_TREE, RBX::SUPPRESS_PROMPTS);
+		}
 	}
 
 	child->setParent(parent);

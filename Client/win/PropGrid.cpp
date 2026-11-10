@@ -108,8 +108,8 @@ void XItem<RBX::BrickColor, CPropertyGridItemBrickColor, RBX::Reflection::TypedP
 	SetColor(RGB(color.r, color.g, color.b));
 }
 
-// STUB: ROBLOX 0x0043bdc0
-static CString FUN_0043bdc0(COLORREF color)
+// FUNCTION: ROBLOX 0x0043bdc0
+CString FUN_0043bdc0(COLORREF color)
 {
 	RBX::BrickColor brickColor = RBX::BrickColor::closest(
 		G3D::Color3(GetRValue(color) / 255.0, GetGValue(color) / 255.0, GetBValue(color) / 255.0)
@@ -117,7 +117,7 @@ static CString FUN_0043bdc0(COLORREF color)
 	return brickColor.name().c_str();
 }
 
-// STUB: ROBLOX 0x0043be40
+// FUNCTION: ROBLOX 0x0043be40
 void CPropertyGridItemBrickColor::SetColor(COLORREF clr)
 {
 	m_clrValue = clr;
