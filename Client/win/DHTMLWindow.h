@@ -1,14 +1,15 @@
 #ifndef DHTMLWINDOW_H
 #define DHTMLWINDOW_H
 
+#include "LuaHtmlView.h"
 #include "decomp.h"
 #include "reflection/signal.h"
 #include "v8tree/Instance.h"
 
+#include <boost/function.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 #include <string>
 
-class CLuaHtmlView;
 class DHTMLWindow;
 
 extern char sDHTMLWindowService[];
@@ -34,6 +35,9 @@ class DHTMLWindow : public RBX::DescribedNonCreatable<DHTMLWindow, RBX::Instance
 public:
 	DHTMLWindow();
 
+	// FUNCTION: ROBLOX 0x00413f40
+	void FUN_00413f40() { setParent(NULL); }
+
 	// FUNCTION: ROBLOX 0x004148f0
 	virtual ~DHTMLWindow() {}
 
@@ -46,10 +50,61 @@ public:
 	// SYNTHETIC: ROBLOX 0x004153d0
 	// DHTMLWindow::`scalar deleting destructor'
 
+	void FUN_0041c1d0();
+	void FUN_0041d0a0(int x, int y);
+	void FUN_0041d1f0(std::string url);
+	void FUN_0041dc70();
+
 	static RBX::Reflection::SignalDesc<DHTMLWindow, void(std::string)> g_unk0x00953120;
 
 private:
 	friend class CLuaHtmlView;
+
+	// FUNCTION: ROBLOX 0x004152c0
+	void FUN_004152c0(boost::function<void(CLuaHtmlView*)> function)
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0xf8);
+		if (m_unk0x104) {
+			function(m_unk0x104);
+		}
+	}
+
+	// FUNCTION: ROBLOX 0x00415550
+	void FUN_00415550()
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0xf8);
+		if (m_unk0x104) {
+			m_unk0x104->GetParentFrame()->CenterWindow(NULL);
+			m_unk0x104->GetParentFrame()->ShowWindow(SW_SHOW);
+		}
+	}
+
+	// FUNCTION: ROBLOX 0x004155f0
+	void FUN_004155f0()
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0xf8);
+		if (m_unk0x104) {
+			m_unk0x104->FUN_0042d640();
+		}
+	}
+
+	// FUNCTION: ROBLOX 0x00415670
+	void FUN_00415670(int x, int y)
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0xf8);
+		if (m_unk0x104) {
+			m_unk0x104->GetParentFrame()->SetWindowPos(NULL, 0, 0, x, y, SWP_NOMOVE | SWP_NOZORDER);
+		}
+	}
+
+	// FUNCTION: ROBLOX 0x004157b0
+	void FUN_004157b0(std::string url)
+	{
+		boost::recursive_mutex::scoped_lock lock(m_unk0xf8);
+		if (m_unk0x104) {
+			m_unk0x104->Navigate(url.c_str());
+		}
+	}
 
 	boost::recursive_mutex m_unk0xf8; // 0xf8
 	CLuaHtmlView* m_unk0x104;         // 0x104
@@ -102,6 +157,38 @@ inline bool DHTMLWindowService::askAddChild(const RBX::Instance* instance) const
 // `RBX::Reflection::Described<DHTMLWindow,&sDHTMLWindow,RBX::NonFactoryProduct<RBX::Instance,&sDHTMLWindow> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
 // SYNTHETIC: ROBLOX 0x007ef5a0
 // `RBX::Reflection::Described<DHTMLWindowService,&sDHTMLWindowService,RBX::FactoryProduct<DHTMLWindowService,RBX::Instance,&sDHTMLWindowService> >::classDescriptor'::`2'::`dynamic atexit destructor for 'foo''
+// TEMPLATE: ROBLOX 0x0041b7c0
+// RBX::Reflection::BoundFuncDesc<DHTMLWindow,void __cdecl(int,int),2>::`scalar deleting destructor'
+// TEMPLATE: ROBLOX 0x004b3a30
+// RBX::Reflection::BoundFuncDesc<DHTMLWindow,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::~BoundFuncDesc<DHTMLWindow,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>
+// TEMPLATE: ROBLOX 0x004b4700
+// RBX::Reflection::BoundFuncDesc<DHTMLWindow,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >),1>::`scalar deleting destructor'
+// TEMPLATE: ROBLOX 0x004bb580
+// RBX::Reflection::BoundFuncDesc<DHTMLWindow,void __cdecl(int,int),2>::declareSignature
+// SYNTHETIC: ROBLOX 0x007e41c0
+// `dynamic initializer for 'g_unk0x00952f60''
+// SYNTHETIC: ROBLOX 0x007e4270
+// `dynamic initializer for 'g_unk0x00953008''
+// SYNTHETIC: ROBLOX 0x007e42a0
+// `dynamic initializer for 'g_unk0x00953048''
+// SYNTHETIC: ROBLOX 0x007e42d0
+// `dynamic initializer for 'g_unk0x00953078''
+// SYNTHETIC: ROBLOX 0x007e4340
+// `dynamic initializer for 'g_unk0x009530f0''
+// SYNTHETIC: ROBLOX 0x007e4370
+// `dynamic initializer for 'DHTMLWindow::g_unk0x00953120''
+// SYNTHETIC: ROBLOX 0x007ef5d0
+// `dynamic atexit destructor for 'g_unk0x00953078''
+// SYNTHETIC: ROBLOX 0x007ef5e0
+// `dynamic atexit destructor for 'g_unk0x009530f0''
+// SYNTHETIC: ROBLOX 0x007ef610
+// `dynamic atexit destructor for 'g_unk0x00953008''
+// SYNTHETIC: ROBLOX 0x007ef620
+// `dynamic atexit destructor for 'g_unk0x00953048''
+// SYNTHETIC: ROBLOX 0x007ef640
+// `dynamic atexit destructor for 'g_unk0x00952f60''
+// SYNTHETIC: ROBLOX 0x007ef660
+// `dynamic atexit destructor for 'DHTMLWindow::g_unk0x00953120''
 // clang-format on
 
 void FUN_0041ac10();

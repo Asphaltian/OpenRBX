@@ -1441,7 +1441,6 @@ public:
 	// TEMPLATE: ROBLOX 0x004acad0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x101975b0
-	// SYNTHETIC: ROBLOX 0x004b3a30
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::~BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>
 	// TEMPLATE: WEBSERVICE 0x101983b0
 	// TEMPLATE: ROBLOX 0x004ba650
@@ -1450,7 +1449,6 @@ public:
 	// TEMPLATE: ROBLOX 0x004ba720
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(int),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x10198560
-	// SYNTHETIC: ROBLOX 0x004b4700
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Player,void __cdecl(bool),1>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x1019adb0
 	// TEMPLATE: ROBLOX 0x004bcfd0
@@ -1593,7 +1591,6 @@ public:
 	// TEMPLATE: ROBLOX 0x00418c90
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::~BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>
 	// TEMPLATE: WEBSERVICE 0x10193d30
-	// TEMPLATE: ROBLOX 0x0041b7c0
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Players,void __cdecl(boost::shared_ptr<RBX::Instance>,std::basic_string<char,std::char_traits<char>,std::allocator<char> >),2>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10196790
 	// TEMPLATE: ROBLOX 0x004b8970
@@ -1605,7 +1602,6 @@ public:
 	// SYNTHETIC: ROBLOX 0x004ba630
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Client,void __cdecl(std::basic_string<char,std::char_traits<char>,std::allocator<char> >,int,int,int),4>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10199300
-	// TEMPLATE: ROBLOX 0x004bb580
 	// RBX::Reflection::BoundFuncDesc<RBX::Network::Server,void __cdecl(int,int),2>::declareSignature
 	// TEMPLATE: WEBSERVICE 0x1019abb0
 	// TEMPLATE: ROBLOX 0x004bcdd0

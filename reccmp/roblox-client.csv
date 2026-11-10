@@ -6461,3 +6461,50 @@ address,type,symbol,name,module,size
 00803fd4,global,messageMap___CLuaHtmlView::GetThisMessageMap,,,
 00803fdc,global,_messageEntries___CLuaHtmlView::GetThisMessageMap,,,
 00953120,global,?g_unk0x00953120@DHTMLWindow@@2V?$SignalDesc@VDHTMLWindow@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@Reflection@RBX@@A,,,
+00413f40,function,,,,8
+0041c1d0,function,,,,85
+0041dc70,function,,,,90
+shape-mismatch 41dae0 (62 vs 62)
+shape-mismatch 41cc80 (37 vs 37)
+shape-mismatch 41cb20 (64 vs 64)
+shape-mismatch 41bbd0 (60 vs 60)
+00415f80,library,??0?$list2@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@P8CLuaHtmlView@@AEXXZ@23@@_bi@boost@@QAE@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@12@V?$value@P8CLuaHtmlView@@AEXXZ@12@@Z,,,
+00416030,library,??0?$storage3@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@H@23@V423@@_bi@boost@@QAE@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@12@V?$value@H@12@1@Z,,,
+00416e30,library,??$bind@XVDHTMLWindow@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$shared_ptr@VDHTMLWindow@@@boost@@V23@@boost@@YA?AV?$bind_t@XV?$mf1@XVDHTMLWindow@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@_mfi@boost@@V?$list2@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@@_bi@3@@_bi@0@P8DHTMLWindow@@AEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZV?$shared_ptr@VDHTMLWindow@@@0@0@Z,,,
+00416f40,library,??$bind@XVDHTMLWindow@@V?$function@$$A6AXPAVCLuaHtmlView@@@ZV?$allocator@X@std@@@boost@@V?$shared_ptr@VDHTMLWindow@@@3@P8CLuaHtmlView@@AEXXZ@boost@@YA?AV?$bind_t@XV?$mf1@XVDHTMLWindow@@V?$function@$$A6AXPAVCLuaHtmlView@@@ZV?$allocator@X@std@@@boost@@@_mfi@boost@@V?$list2@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@P8CLuaHtmlView@@AEXXZ@23@@_bi@3@@_bi@0@P8DHTMLWindow@@AEXV?$function@$$A6AXPAVCLuaHtmlView@@@ZV?$allocator@X@std@@@0@@ZV?$shared_ptr@VDHTMLWindow@@@0@P8CLuaHtmlView@@AEXXZ@Z,,,
+00417110,library,??0?$list3@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@H@23@V423@@_bi@boost@@QAE@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@12@V?$value@H@12@1@Z,,,
+00417f10,library,??$bind@XVDHTMLWindow@@HHV?$shared_ptr@VDHTMLWindow@@@boost@@HH@boost@@YA?AV?$bind_t@XV?$mf2@XVDHTMLWindow@@HH@_mfi@boost@@V?$list3@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@H@23@V423@@_bi@3@@_bi@0@P8DHTMLWindow@@AEXHH@ZV?$shared_ptr@VDHTMLWindow@@@0@HH@Z,,,
+0041bbd0,library,??$?0V?$bind_t@XV?$mf0@XVDHTMLWindow@@@_mfi@boost@@V?$list1@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@@_bi@3@@_bi@boost@@@?$function@$$A6AXXZV?$allocator@X@std@@@boost@@QAE@V?$bind_t@XV?$mf0@XVDHTMLWindow@@@_mfi@boost@@V?$list1@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@@_bi@3@@_bi@1@H@Z,,,
+0041cb20,library,??$?0V?$bind_t@XV?$mf2@XVDHTMLWindow@@HH@_mfi@boost@@V?$list3@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@H@23@V423@@_bi@3@@_bi@boost@@@?$function@$$A6AXXZV?$allocator@X@std@@@boost@@QAE@V?$bind_t@XV?$mf2@XVDHTMLWindow@@HH@_mfi@boost@@V?$list3@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@H@23@V423@@_bi@3@@_bi@1@H@Z,,,
+0041cc80,library,??$?0V?$bind_t@XV?$mf1@XVDHTMLWindow@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@_mfi@boost@@V?$list2@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@@_bi@3@@_bi@boost@@@?$function@$$A6AXXZV?$allocator@X@std@@@boost@@QAE@V?$bind_t@XV?$mf1@XVDHTMLWindow@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@_mfi@boost@@V?$list2@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@@_bi@3@@_bi@1@H@Z,,,
+0041dae0,library,??$?0V?$bind_t@XV?$mf1@XVDHTMLWindow@@V?$function@$$A6AXPAVCLuaHtmlView@@@ZV?$allocator@X@std@@@boost@@@_mfi@boost@@V?$list2@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@P8CLuaHtmlView@@AEXXZ@23@@_bi@3@@_bi@boost@@@?$function@$$A6AXXZV?$allocator@X@std@@@boost@@QAE@V?$bind_t@XV?$mf1@XVDHTMLWindow@@V?$function@$$A6AXPAVCLuaHtmlView@@@ZV?$allocator@X@std@@@boost@@@_mfi@boost@@V?$list2@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@P8CLuaHtmlView@@AEXXZ@23@@_bi@3@@_bi@1@H@Z,,,
+00415010,library,??0?$storage2@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@_bi@boost@@V?$value@H@23@@_bi@boost@@QAE@V?$value@V?$shared_ptr@VDHTMLWindow@@@boost@@@12@V?$value@H@12@@Z,,,
+0044e9a0,library,??R?$function1@XPAXV?$allocator@Vfunction_base@boost@@@std@@@boost@@QBEXPAX@Z,,,
+00952f60,global,,g_unk0x00952f60,,
+007e41c0,function,,,,71
+007ef640,function,,,,10
+00953008,global,,g_unk0x00953008,,
+007e4270,function,,,,48
+007ef610,function,,,,10
+00953048,global,,g_unk0x00953048,,
+007e42a0,function,,,,38
+007ef620,function,,,,10
+00953078,global,,g_unk0x00953078,,
+007e42d0,function,,,,38
+007ef5d0,function,,,,10
+009530f0,global,,g_unk0x009530f0,,
+007e4340,function,,,,38
+007ef5e0,function,,,,10
+007e4370,function,,,,32
+007ef660,function,,,,10
+008019d4,global,??_7?$BoundFuncDesc@VDHTMLWindow@@$$A6AXHH@Z$01@Reflection@RBX@@6B@,,,
+008019bc,global,??_7?$BoundFuncDesc@VDHTMLWindow@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$00@Reflection@RBX@@6B@,,,
+008019e0,global,??_7?$BoundFuncDesc@VDHTMLWindow@@$$A6AXXZ$0A@@Reflection@RBX@@6B@,,,
+0041ad00,synthetic,??0?$SignalDesc@VDHTMLWindow@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@Reflection@RBX@@QAE@PBD0@Z,,,
+0041b1c0,synthetic,??0?$BoundFuncDesc@VDHTMLWindow@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$00@Reflection@RBX@@QAE@P8DHTMLWindow@@AEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@ZPBD20W4Security@FunctionDescriptor@12@@Z,,,
+0041b5e0,synthetic,??0?$BoundFuncDesc@VDHTMLWindow@@$$A6AXHH@Z$01@Reflection@RBX@@QAE@P8DHTMLWindow@@AEXHH@ZPBD11W4Security@FunctionDescriptor@12@@Z,,,
+0041b7e0,synthetic,??0?$BoundFuncDesc@VDHTMLWindow@@$$A6AXXZ$0A@@Reflection@RBX@@QAE@P8DHTMLWindow@@AEXXZPBDW4Security@FunctionDescriptor@12@@Z,,,
+0041b2a0,synthetic,?execute@?$BoundFuncDesc@VDHTMLWindow@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z$00@Reflection@RBX@@UBEXPAVDescribedBase@23@AAVArguments@FunctionDescriptor@23@@Z,,,
+0041b680,synthetic,?execute@?$BoundFuncDesc@VDHTMLWindow@@$$A6AXHH@Z$01@Reflection@RBX@@UBEXPAVDescribedBase@23@AAVArguments@FunctionDescriptor@23@@Z,,,
+0041b860,synthetic,?execute@?$BoundFuncDesc@VDHTMLWindow@@$$A6AXXZ$0A@@Reflection@RBX@@UBEXPAVDescribedBase@23@AAVArguments@FunctionDescriptor@23@@Z,,,
+00801990,global,??_7?$SignalDesc@VDHTMLWindow@@$$A6AXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@Reflection@RBX@@6B@,,,

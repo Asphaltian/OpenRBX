@@ -1,8 +1,10 @@
 #include "DHTMLWindow.h"
 
 #include "Marshaller.h"
+#include "reflection/reflection.h"
 #include "util/StandardOut.h"
 
+#include <boost/bind.hpp>
 #include <exception>
 
 char sDHTMLWindowService[] = "HtmlService";
@@ -13,6 +15,26 @@ template const RBX::FactoryProduct<DHTMLWindowService, RBX::Instance, sDHTMLWind
 
 // GLOBAL: ROBLOX 0x00952f1c
 Marshaller* g_unk0x00952f1c;
+
+static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(std::string), 1> g_unk0x00952f60(
+	&DHTMLWindow::FUN_0041d1f0, "Navigate", "url", "about:blank", RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+
+static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(int, int), 2> g_unk0x00953008(
+	&DHTMLWindow::FUN_0041d0a0, "Resize", "x", "y", RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+
+static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(), 0> g_unk0x00953048(
+	&DHTMLWindow::FUN_0041c1d0, "Show", RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+
+static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(), 0> g_unk0x00953078(
+	&DHTMLWindow::FUN_00413f40, "Close", RBX::Reflection::FunctionDescriptor::AnyCaller
+);
+
+static RBX::Reflection::BoundFuncDesc<DHTMLWindow, void(), 0> g_unk0x009530f0(
+	&DHTMLWindow::FUN_0041dc70, "Unbind", RBX::Reflection::FunctionDescriptor::AnyCaller
+);
 
 RBX::Reflection::SignalDesc<DHTMLWindow, void(std::string)> DHTMLWindow::g_unk0x00953120("DocumentComplete", "url");
 
@@ -81,4 +103,30 @@ DHTMLWindowService::DHTMLWindowService()
 DHTMLWindow::DHTMLWindow() : m_unk0x104(NULL)
 {
 	setName("Window");
+}
+
+// FUNCTION: ROBLOX 0x0041c1d0
+void DHTMLWindow::FUN_0041c1d0()
+{
+	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_00415550, RBX::shared_from(this)));
+}
+
+// FUNCTION: ROBLOX 0x0041d0a0
+void DHTMLWindow::FUN_0041d0a0(int x, int y)
+{
+	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_00415670, RBX::shared_from(this), x, y));
+}
+
+// FUNCTION: ROBLOX 0x0041d1f0
+void DHTMLWindow::FUN_0041d1f0(std::string url)
+{
+	g_unk0x00952f1c->FUN_00418fd0(boost::bind(&DHTMLWindow::FUN_004157b0, RBX::shared_from(this), url));
+}
+
+// FUNCTION: ROBLOX 0x0041dc70
+void DHTMLWindow::FUN_0041dc70()
+{
+	g_unk0x00952f1c->FUN_00418fd0(
+		boost::bind(&DHTMLWindow::FUN_004152c0, RBX::shared_from(this), &CLuaHtmlView::FUN_0042f370)
+	);
 }
