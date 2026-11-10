@@ -143,10 +143,21 @@ void RenderScene::FUN_0052c9b0(Ogre::VisualEngine* engine, bool p_unk0x8e)
 	}
 }
 
-// STUB: ROBLOX 0x0052d400
+// FUNCTION: ROBLOX 0x0052d400
 void RenderScene::setThrottle(float t, float m, bool s, float c)
 {
-	STUB(0x52d400);
+	t = G3D::clamp(t, 0.0f, 100.0f);
+
+	if (t != shadingQuality || m != meshDetail || s != shadows || c != cameraDistance) {
+		shadingQuality = t;
+		meshDetail = m;
+		cameraDistance = c;
+		shadows = s;
+
+		lighting = effectSettings.update(
+			shadingQuality, meshDetail, shadows, cameraDistance, desiredLighting, desiredSkyParameters, skyParameters
+		);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0052d570
