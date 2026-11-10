@@ -28,7 +28,7 @@ LDrawParser::LDrawParser(const char* p_unk0x04) : m_unk0x04(p_unk0x04)
 	}
 }
 
-// STUB: ROBLOX 0x00473a80
+// FUNCTION: ROBLOX 0x00473a80
 void LDrawParser::FUN_00473a80(std::ostream& stream)
 {
 	stream << "-- " << "Roblox LDraw2Lua Conversion" << "\n";
@@ -41,7 +41,7 @@ void LDrawParser::FUN_00473a80(std::ostream& stream)
 		std::ifstream input(m_unk0x04.c_str());
 
 		while (!input.eof()) {
-			char line[2000];
+			char line[2048];
 			int type;
 			input >> type;
 
@@ -81,7 +81,7 @@ void LDrawParser::FUN_00473a80(std::ostream& stream)
 
 				input.getline(line, 2000);
 				std::string text(line);
-				command->m_unk0x70 = text.substr(text.find_first_not_of(" ", 0), text.length());
+				command->setFileName(text.substr(text.find_first_not_of(" ", 0), text.length()));
 				writer.FUN_00474210(command);
 			}
 			else {

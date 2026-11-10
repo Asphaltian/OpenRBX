@@ -143,6 +143,7 @@ public:
 	virtual BOOL DoSave(LPCTSTR lpszPathName, BOOL bReplace = TRUE);
 	BOOL FUN_00459950(std::string p_unk0x04);
 	void FUN_00459c80();
+	void FUN_00459da0();
 
 protected:
 	afx_msg void FUN_00453eb0(CCmdUI* pCmdUI);

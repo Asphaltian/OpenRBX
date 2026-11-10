@@ -2,6 +2,7 @@
 
 #include "ActiveDocView.h"
 #include "InstanceExplorer.h"
+#include "LDrawParser.h"
 #include "LogManager.h"
 #include "MainFrm.h"
 #include "SaveToRobloxDialog.h"
@@ -684,6 +685,33 @@ void CRobloxDoc::FUN_00459c80()
 	}
 }
 
+// FUNCTION: ROBLOX 0x00459da0
+void CRobloxDoc::FUN_00459da0()
+{
+	CString filter;
+	filter.LoadString(141);
+
+	CFileDialog dialog(TRUE, "ldr", NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, filter);
+	if (dialog.DoModal() == IDOK) {
+		RBX::LDraw2Lua::LDrawParser parser(dialog.GetPathName());
+		std::ostringstream stream;
+		parser.FUN_00473a80(stream);
+		stream.flush();
+
+		try {
+			RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+			std::vector<RBX::Reflection::Value> arguments;
+			std::string script = stream.str();
+			FUN_00403290()->create<RBX::ScriptContext>()->executeInNewThread(
+				RBX::Security::LocalGUI, script.c_str(), "LDraw", arguments
+			);
+		}
+		catch (std::exception& e) {
+			AfxMessageBox(e.what(), MB_ICONERROR);
+		}
+	}
+}
+
 // FUNCTION: ROBLOX 0x0045a0b0
 void CRobloxDoc::FUN_0045a0b0(CCmdUI* pCmdUI)
 {
@@ -773,6 +801,8 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(0xbe, FUN_004590a0)
 	ON_COMMAND(0x80f1, FUN_00459c80)
 	ON_UPDATE_COMMAND_UI(0x80f1, FUN_00453eb0)
+	ON_COMMAND(0x80f8, FUN_00459da0)
+	ON_UPDATE_COMMAND_UI(0x80f8, FUN_00453eb0)
 	ON_COMMAND(0x8100, FUN_00454a60)
 	ON_UPDATE_COMMAND_UI(0x8100, FUN_0045a0b0)
 	ON_COMMAND(0x8021, FUN_004561a0)

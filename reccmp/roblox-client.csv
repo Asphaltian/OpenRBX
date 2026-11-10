@@ -6594,3 +6594,4 @@ address,type,symbol,name,module,size
 00955354,global,,g_unk0x00955354,,
 00955358,global,,g_unk0x00955358,,
 0095535c,global,,g_unk0x0095535c,,
+00459da0,function,,,,771

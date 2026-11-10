@@ -26,6 +26,8 @@ public:
 	// SYNTHETIC: ROBLOX 0x00473310
 	// RBX::LDraw2Lua::LDrawCommand::`scalar deleting destructor'
 
+	void setFileName(std::string p_unk0x04) { m_unk0x70 = p_unk0x04; }
+
 	bool FUN_00473330(std::ostream& stream, const Unknown00473110* p_unk0x08);
 	bool FUN_00473500(std::ostream& stream);
 	bool FUN_00473550(std::ostream& stream, std::string p_unk0x08);
