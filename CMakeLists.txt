@@ -690,7 +690,10 @@ if (MSVC_FOR_DECOMP)
     Client/win/LogManager.cpp
     Client/win/LuaHtmlView.cpp
     Client/win/LDraw2RobloxColorMap.cpp
+    Client/win/LDraw2RobloxMapRoot.cpp
+    Client/win/LDraw2RobloxPartMap.cpp
     Client/win/LuaFunction.cpp
+    Client/win/LuaWriter.cpp
     Client/win/MainFrm.cpp
     Client/win/MarshalWindow.cpp
     Client/win/MultiPlayerPane.cpp
