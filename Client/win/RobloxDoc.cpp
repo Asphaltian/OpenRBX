@@ -29,6 +29,13 @@ static T* createService(RBX::DataModel* dataModel)
 	return dataModel ? dataModel->create<T>() : NULL;
 }
 
+static bool canSave(RBX::DataModel* dataModel)
+{
+	bool result = !RBX::Network::Players::clientIsPresent(dataModel, true) ||
+				  RBX::Network::Players::serverIsPresent(dataModel, true);
+	return result;
+}
+
 template <class T>
 static T* findService(RBX::DataModel* dataModel)
 {
@@ -68,6 +75,12 @@ void PasteVerb::doIt(RBX::IDataState* dataState)
 void CopyVerb::doIt(RBX::IDataState* dataState)
 {
 	STUB(0x4125e0);
+}
+
+// FUNCTION: ROBLOX 0x00453ed0
+void CRobloxDoc::OnCloseDocument()
+{
+	CDocument::OnCloseDocument();
 }
 
 // FUNCTION: ROBLOX 0x00454190
@@ -121,6 +134,31 @@ void CRobloxDoc::FUN_00454430()
 		CComBSTR pathName(dialog.GetPathName());
 		m_unk0x78->SaveSelectionToFile(pathName);
 	}
+}
+
+// FUNCTION: ROBLOX 0x00454580
+BOOL CRobloxDoc::DoSave(LPCTSTR lpszPathName, BOOL bReplace)
+{
+	if (!canSave(m_unk0x78->FUN_0046edc0().get())) {
+		return FALSE;
+	}
+
+	return CDocument::DoSave(lpszPathName, bReplace);
+}
+
+// FUNCTION: ROBLOX 0x00454660
+BOOL CRobloxDoc::OnSaveDocument(LPCTSTR lpszPathName)
+{
+	if (!canSave(m_unk0x78->FUN_0046edc0().get())) {
+		return FALSE;
+	}
+
+	if (m_unk0x78->SaveToFile(CComBSTR(lpszPathName)) != S_OK) {
+		return FALSE;
+	}
+
+	SetModifiedFlag(FALSE);
+	return TRUE;
 }
 
 // FUNCTION: ROBLOX 0x00454920
