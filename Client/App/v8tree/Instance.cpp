@@ -82,7 +82,15 @@ ChildAdded::ChildAdded(Instance* child) : child(shared_from(child))
 {
 }
 
+ChildAdded::ChildAdded(const ChildAdded& other) : child(other.child)
+{
+}
+
 ChildRemoved::ChildRemoved(Instance* child) : child(shared_from(child))
+{
+}
+
+ChildRemoved::ChildRemoved(const ChildRemoved& other) : child(other.child)
 {
 }
 
