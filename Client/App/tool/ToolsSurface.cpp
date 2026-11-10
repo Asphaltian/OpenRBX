@@ -10,12 +10,14 @@
 #include "util/Math.h"
 #include "util/Sound.h"
 #include "util/SoundWorld.h"
+#include "util/Units.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/Explosion.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Surface.h"
 #include "v8datamodel/Workspace.h"
+#include "v8kernel/Constants.h"
 #include "v8tree/Service.h"
 
 #include <G3D/CoordinateFrame.h>
@@ -363,15 +365,37 @@ void ShootTool::onMouseIdle(const UIEvent& uiEvent)
 // STUB: ROBLOX 0x0063a4b0
 PV SlingshotTool::VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe)
 {
-	STUB(0x63a4b0);
-	return PV();
+	G3D::Vector3 hitWorld;
+	PartInstance* part = getPart(uiEvent, NULL, hitWorld);
+	G3D::Vector3 direction = part ? (hitWorld - cframe.translation).direction() : cframe.lookVector();
+	G3D::Vector3 position = cframe.translation + direction * 3.0f;
+	if (part) {
+		direction = hitWorld - position;
+		float height = direction.y;
+		direction.y = 0.0f;
+		float distance = direction.unitize();
+		float angle = Math::computeLaunchAngle(
+			85.0f, distance, height, Units::kmsAccelerationToRbx(Constants::getKmsGravity()).y
+		);
+		direction.y = sin(angle);
+		direction.x *= cos(angle);
+		direction.z *= cos(angle);
+	}
+
+	CoordinateFrame frame(position);
+	return PV(frame, Velocity(direction * 85.0f, G3D::Vector3::zero()));
 }
 
 // STUB: ROBLOX 0x0063a740
 PV RocketTool::VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe)
 {
-	STUB(0x63a740);
-	return PV();
+	G3D::Vector3 hitWorld;
+	PartInstance* part = getPart(uiEvent, NULL, hitWorld);
+	G3D::Vector3 direction = part ? (hitWorld - cframe.translation).direction() : cframe.lookVector();
+	CoordinateFrame frame;
+	frame.lookAt(direction);
+	frame.translation = cframe.translation + direction * 5.0f;
+	return PV(frame, Velocity::zero());
 }
 
 // FUNCTION: ROBLOX 0x0063a8d0

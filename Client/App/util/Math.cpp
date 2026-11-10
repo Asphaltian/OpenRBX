@@ -597,6 +597,21 @@ unsigned char Math::rotationToByte(float angle)
 	return rotationToByteBase(angle);
 }
 
+// FUNCTION: ROBLOX 0x005f0f40
+float Math::computeLaunchAngle(float v, float x, float y, float g)
+{
+	g = fabs(g);
+	float disc = v * v * v * v - g * (x * x * g + 2.0f * y * v * v);
+	if (disc <= 0.0f) {
+		return 0.78539819f;
+	}
+
+	float root = sqrt(disc);
+	float a = atan((v * v + root) / (g * x));
+	float b = atan((v * v - root) / (g * x));
+	return std::min(a, b);
+}
+
 // FUNCTION: WEBSERVICE 0x100dfb90
 // FUNCTION: ROBLOX 0x005f0fd0
 Vector3 Math::toGrid(const Vector3& v, const Vector3& grid)
