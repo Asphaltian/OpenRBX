@@ -2988,7 +2988,7 @@ Camera* RbxSceneManager::createCamera(const String& name)
 	return c;
 }
 
-// STUB: ROBLOX 0x00693d20
+// FUNCTION: ROBLOX 0x00693d20
 SceneNode* RbxSceneManager::createSceneNode(void)
 {
 	SceneNode* sn = new SceneNode(this);

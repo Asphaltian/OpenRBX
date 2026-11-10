@@ -138,9 +138,11 @@ inline void CylinderBuilder::buildFront(Purpose purpose)
 	buildFace<RBX::NORM_Z_NEG>(CylinderTransform, elements, 1, purpose);
 }
 
-// STUB: ROBLOX 0x00528a40
+// FUNCTION: ROBLOX 0x00528a40
 CylinderAlongXMesh::CylinderAlongXMesh(const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes)
 {
+	m_unk0x3c = 3;
+
 	levels.append(new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS));
 	{
 		RenderNew::Mesh::LevelRef& level = levels.last();

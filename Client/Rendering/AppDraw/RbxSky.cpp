@@ -91,7 +91,7 @@ void RbxSky::FUN_00678210(VisualEngine* engine, const G3D::LightingParameters& p
 	}
 }
 
-// STUB: ROBLOX 0x00678540
+// FUNCTION: ROBLOX 0x00678540
 void RbxSky::FUN_00678540(VisualEngine* engine, const G3D::LightingParameters& parameters)
 {
 	engine->getViewport()->setBackgroundColour(
