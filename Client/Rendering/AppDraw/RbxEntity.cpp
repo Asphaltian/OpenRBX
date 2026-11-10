@@ -126,6 +126,12 @@ RbxSubEntity* RbxEntity::FUN_00676680(SubMesh* subMesh, int lodIndex)
 	return subEntity;
 }
 
+// FUNCTION: ROBLOX 0x00676730
+void RbxEntity::FUN_00676730(RbxSubEntity* subEntity)
+{
+	mSubEntityList.push_back(subEntity);
+}
+
 // STUB: ROBLOX 0x00676870
 void RbxEntity::FUN_00676870(Camera* cam)
 {

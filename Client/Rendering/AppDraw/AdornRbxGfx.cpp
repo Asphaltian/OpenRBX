@@ -7,6 +7,7 @@
 #include "appdraw/VisualEngine.h"
 #include "renderlibnew/TextureProxy.h"
 #include "util/ContentProvider.h"
+#include "util/Utilities.h"
 
 #include <OgreLogManager.h>
 #include <OgreMaterialManager.h>
@@ -168,6 +169,25 @@ void AdornRbxGfx::line2d(const G3D::Vector2& from, const G3D::Vector2& to, const
 	twoDManager->FUN_0067dd70(from.x, getHeight() - 1 - from.y, to.x, getHeight() - 1 - to.y, color);
 }
 
+// FUNCTION: ROBLOX 0x0066a2d0
+void AdornRbxGfx::FUN_0066a2d0(
+	Ogre::Matrix4& transform, const Ogre::Vector3& offset, const Ogre::Vector3& scale, const Ogre::Quaternion& rotation
+)
+{
+	Ogre::Quaternion orientation;
+	orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
+	orientation = orientation * rotation;
+	transform.makeTransform(reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation) + offset, scale, orientation);
+}
+
+// FUNCTION: ROBLOX 0x0066a3c0
+std::string AdornRbxGfx::FUN_0066a3c0()
+{
+	int id = 0;
+	id = g_unk0x009612a8++;
+	return StringConverter<int>::convertToString(id);
+}
+
 // STUB: ROBLOX 0x0066a580
 G3D::Vector2 AdornRbxGfx::drawFont2D(
 	const std::string& s,
@@ -242,6 +262,17 @@ G3D::ReferenceCountedPointer<TextureProxyBase> AdornRbxGfx::createTextureProxy(c
 	return new RenderNew::TextureProxy(name);
 }
 
+// FUNCTION: ROBLOX 0x0066b450
+Ogre::MeshPtr AdornRbxGfx::FUN_0066b450(std::string name)
+{
+	std::map<std::string, Ogre::MeshPtr>::const_iterator it = m_unk0x64.find(name);
+	if (it != m_unk0x64.end()) {
+		return it->second;
+	}
+
+	return Ogre::MeshPtr();
+}
+
 // FUNCTION: ROBLOX 0x0066b510
 void AdornRbxGfx::prepareRenderPass()
 {
@@ -273,6 +304,16 @@ void AdornRbxGfx::prepareRenderPass()
 	}
 }
 
+// FUNCTION: ROBLOX 0x0066bf20
+void AdornRbxGfx::FUN_0066bf20(const std::string& name, const Ogre::MeshPtr& mesh)
+{
+	m_unk0x64[name] = mesh;
+	Ogre::Sphere sphere(mesh->getBounds().getCenter(), mesh->getBoundingSphereRadius());
+	for (int i = 0; i < mesh->getNumSubMeshes(); i++) {
+		m_unk0x34->FUN_0067b2b0(mesh->getSubMesh(i), sphere);
+	}
+}
+
 // FUNCTION: ROBLOX 0x0066c0b0
 Ogre::RbxSubEntity* AdornRbxGfx::FUN_0066c0b0()
 {
@@ -295,6 +336,20 @@ void AdornRbxGfx::FUN_0066c190()
 		m_unk0x44.push_back(m_unk0x54[i]);
 	}
 	m_unk0x54.clear();
+}
+
+// FUNCTION: ROBLOX 0x0066c220
+void AdornRbxGfx::FUN_0066c220(
+	const Ogre::MeshPtr& mesh, const Ogre::Matrix4& transform, const Ogre::MaterialPtr& material
+)
+{
+	for (int i = 0; i < mesh->getNumSubMeshes(); i++) {
+		Ogre::RbxSubEntity* subEntity = FUN_0066c0b0();
+		subEntity->FUN_0067b3d0(mesh->getSubMesh(i));
+		subEntity->m_unk0xdc = transform;
+		subEntity->FUN_0067b4b0(material);
+		m_unk0x70->FUN_00676730(subEntity);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0066c2b0

@@ -41,8 +41,18 @@ private:
 	std::map<std::string, Ogre::SceneNode*> m_unk0x88; // 0x88
 	G3D::CoordinateFrame m_unk0x94;                    // 0x94
 
+	void FUN_0066a2d0(
+		Ogre::Matrix4& transform,
+		const Ogre::Vector3& offset,
+		const Ogre::Vector3& scale,
+		const Ogre::Quaternion& rotation
+	);
+	std::string FUN_0066a3c0();
+	Ogre::MeshPtr FUN_0066b450(std::string name);
+	void FUN_0066bf20(const std::string& name, const Ogre::MeshPtr& mesh);
 	Ogre::RbxSubEntity* FUN_0066c0b0();
 	void FUN_0066c190();
+	void FUN_0066c220(const Ogre::MeshPtr& mesh, const Ogre::Matrix4& transform, const Ogre::MaterialPtr& material);
 
 public:
 	AdornRbxGfx(Ogre::VisualEngine* visualEngine);

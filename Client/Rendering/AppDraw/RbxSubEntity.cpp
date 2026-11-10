@@ -9,6 +9,12 @@
 
 namespace Ogre {
 
+// FUNCTION: ROBLOX 0x0067b3d0
+void RbxSubEntity::FUN_0067b3d0(SubMesh* subMesh)
+{
+	mSubMesh = subMesh;
+}
+
 // FUNCTION: ROBLOX 0x0067b3e0
 void RbxSubEntity::getRenderOperation(RenderOperation& op)
 {
