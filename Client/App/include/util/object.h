@@ -284,7 +284,7 @@ public:
 	// TEMPLATE: ROBLOX 0x005cc840
 	// RBX::Creatable<RBX::Instance>::create<RBX::Message>
 	// TEMPLATE: WEBSERVICE 0x1008ce10
-	// STUB: ROBLOX 0x00457c70
+	// TEMPLATE: ROBLOX 0x00457c70
 	// RBX::Creatable<RBX::Instance>::create<RBX::Visit>
 	// TEMPLATE: WEBSERVICE 0x1008d080
 	// TEMPLATE: ROBLOX 0x005cd140

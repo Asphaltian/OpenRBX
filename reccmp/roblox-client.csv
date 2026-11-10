@@ -6595,3 +6595,7 @@ address,type,symbol,name,module,size
 00955358,global,,g_unk0x00955358,,
 0095535c,global,,g_unk0x0095535c,,
 00459da0,function,,,,771
+0040dea0,library,??$?0PAVChatEnter@@VDeleter@?$Creatable@VInstance@RBX@@@RBX@@@shared_count@detail@boost@@QAE@PAVChatEnter@@VDeleter@?$Creatable@VInstance@RBX@@@RBX@@@Z,,,
+0040e3c0,library,??$?0VChatEnter@@VDeleter@?$Creatable@VInstance@RBX@@@RBX@@@?$shared_ptr@VChatEnter@@@boost@@QAE@PAVChatEnter@@VDeleter@?$Creatable@VInstance@RBX@@@RBX@@@Z,,,
+00457b30,library,??$?0PAVVisit@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@shared_count@detail@boost@@QAE@PAVVisit@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@4@@Z,,,
+00457bc0,library,??$?0VVisit@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@1@@?$shared_ptr@VVisit@RBX@@@boost@@QAE@PAVVisit@RBX@@VDeleter@?$Creatable@VInstance@RBX@@@3@@Z,,,

@@ -22,7 +22,7 @@ private:
 
 DECOMP_SIZE_ASSERT(ChatEnter, 0x110)
 
-// STUB: ROBLOX 0x0040e590
+// TEMPLATE: ROBLOX 0x0040e590
 // RBX::Creatable<RBX::Instance>::create<ChatEnter>
 
 #endif // CHATENTER_H

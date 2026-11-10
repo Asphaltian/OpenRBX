@@ -9,21 +9,21 @@
 
 #include <windowsx.h>
 
-static SDLKey FUN_0046d6f0(DWORD scanCode);
-static int FUN_0046db70(SDLKey key);
-static int FUN_0046dff0(SDLKey key);
-static RBX::UIEvent::EventType FUN_0046e290(UINT message);
-static SDLMod FUN_0046e2e0(const BYTE* keys);
-static void FUN_0046d670(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position);
-static void FUN_0046d6a0(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position);
-static G3D::Vector2 FUN_0046d6c0(const DIDEVICEOBJECTDATA& data);
-static void FUN_0046e530(
+SDLKey FUN_0046d6f0(DWORD scanCode);
+int FUN_0046db70(SDLKey key);
+int FUN_0046dff0(SDLKey key);
+RBX::UIEvent::EventType FUN_0046e290(UINT message);
+SDLMod FUN_0046e2e0(const BYTE* keys);
+void FUN_0046d670(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position);
+void FUN_0046d6a0(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position);
+G3D::Vector2 FUN_0046d6c0(const DIDEVICEOBJECTDATA& data);
+void FUN_0046e530(
 	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
 );
-static void FUN_0046e560(
+void FUN_0046e560(
 	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
 );
-static void FUN_0046e5f0(
+void FUN_0046e5f0(
 	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
 );
 
@@ -408,7 +408,7 @@ void DxUserInput::FUN_0046ca90()
 	}
 }
 
-// STUB: ROBLOX 0x0046cbc0
+// FUNCTION: ROBLOX 0x0046cbc0
 void DxUserInput::FUN_0046cbc0(UINT message, int wParam, LPARAM lParam)
 {
 	switch (message) {
@@ -630,6 +630,7 @@ DxUserInput::DxUserInput(CWnd* wnd, RBX::DataModel* dataModel)
 		RBX::startListening(
 			dataModel->create<RBX::RunService>(), static_cast<RBX::Listener<RBX::RunService, RBX::RunTransition>*>(this)
 		);
+		dataModel->create<RBX::RunService>();
 	}
 
 	FUN_0046bd60();
@@ -638,21 +639,21 @@ DxUserInput::DxUserInput(CWnd* wnd, RBX::DataModel* dataModel)
 static SDLKey g_unk0x009544f0[0x100];
 static bool g_unk0x009548f0;
 
-// STUB: ROBLOX 0x0046d670
-static void FUN_0046d670(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position)
+// FUNCTION: ROBLOX 0x0046d670
+void FUN_0046d670(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position)
 {
 	wrapMouseDelta = G3D::Vector2::zero();
 	position += mouseDelta;
 }
 
-// STUB: ROBLOX 0x0046d6a0
-static void FUN_0046d6a0(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position)
+// FUNCTION: ROBLOX 0x0046d6a0
+void FUN_0046d6a0(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position)
 {
 	wrapMouseDelta += mouseDelta;
 }
 
-// STUB: ROBLOX 0x0046d6c0
-static G3D::Vector2 FUN_0046d6c0(const DIDEVICEOBJECTDATA& data)
+// FUNCTION: ROBLOX 0x0046d6c0
+G3D::Vector2 FUN_0046d6c0(const DIDEVICEOBJECTDATA& data)
 {
 	G3D::Vector2 delta(0.0f, 0.0f);
 	float value = (int) data.dwData;
@@ -665,8 +666,8 @@ static G3D::Vector2 FUN_0046d6c0(const DIDEVICEOBJECTDATA& data)
 	return delta;
 }
 
-// STUB: ROBLOX 0x0046d6f0
-static SDLKey FUN_0046d6f0(DWORD scanCode)
+// FUNCTION: ROBLOX 0x0046d6f0
+SDLKey FUN_0046d6f0(DWORD scanCode)
 {
 	if (!g_unk0x009548f0) {
 		for (int i = 0; i < 0x100; i++) {
@@ -791,8 +792,8 @@ static SDLKey FUN_0046d6f0(DWORD scanCode)
 static int g_unk0x009548f8[SDLK_LAST];
 static bool g_unk0x00954e04;
 
-// STUB: ROBLOX 0x0046db70
-static int FUN_0046db70(SDLKey key)
+// FUNCTION: ROBLOX 0x0046db70
+int FUN_0046db70(SDLKey key)
 {
 	if (!g_unk0x00954e04) {
 		for (int i = 0; i < SDLK_LAST; i++) {
@@ -917,8 +918,8 @@ static int FUN_0046db70(SDLKey key)
 static int g_unk0x00954e08[SDLK_LAST];
 static bool g_unk0x00955314;
 
-// STUB: ROBLOX 0x0046dff0
-static int FUN_0046dff0(SDLKey key)
+// FUNCTION: ROBLOX 0x0046dff0
+int FUN_0046dff0(SDLKey key)
 {
 	if (!g_unk0x00955314) {
 		for (int i = 0; i < SDLK_LAST; i++) {
@@ -992,8 +993,8 @@ static int FUN_0046dff0(SDLKey key)
 	return g_unk0x00954e08[key];
 }
 
-// STUB: ROBLOX 0x0046e290
-static RBX::UIEvent::EventType FUN_0046e290(UINT message)
+// FUNCTION: ROBLOX 0x0046e290
+RBX::UIEvent::EventType FUN_0046e290(UINT message)
 {
 	switch (message) {
 	case WM_MOUSEMOVE:
@@ -1011,8 +1012,8 @@ static RBX::UIEvent::EventType FUN_0046e290(UINT message)
 	}
 }
 
-// STUB: ROBLOX 0x0046e2e0
-static SDLMod FUN_0046e2e0(const BYTE* keys)
+// FUNCTION: ROBLOX 0x0046e2e0
+SDLMod FUN_0046e2e0(const BYTE* keys)
 {
 	int mod = KMOD_NONE;
 	if (keys[DIK_LSHIFT] & 0x80) {
@@ -1037,7 +1038,7 @@ static SDLMod FUN_0046e2e0(const BYTE* keys)
 }
 
 // STUB: ROBLOX 0x0046e3e0
-static void FUN_0046e3e0(
+void FUN_0046e3e0(
 	const G3D::Vector2& mouseDelta,
 	G3D::Vector2& wrapMouseDelta,
 	G3D::Vector2& position,
@@ -1061,16 +1062,16 @@ static void FUN_0046e3e0(
 	wrapMouseDelta += overflow;
 }
 
-// STUB: ROBLOX 0x0046e530
-static void FUN_0046e530(
+// FUNCTION: ROBLOX 0x0046e530
+void FUN_0046e530(
 	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
 )
 {
 	FUN_0046e3e0(mouseDelta, wrapMouseDelta, position, size, 6, 0.0f);
 }
 
-// STUB: ROBLOX 0x0046e560
-static void FUN_0046e560(
+// FUNCTION: ROBLOX 0x0046e560
+void FUN_0046e560(
 	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
 )
 {
@@ -1079,12 +1080,13 @@ static void FUN_0046e560(
 	wrapMouseDelta.y = 0.0f;
 	position.y = y;
 
-	float top = -(size.y * 0.5 - 2.0);
+	float inset = size.y * 0.5 - 2.0;
+	float top = -inset;
 	position.y = std::max(top, position.y);
 }
 
-// STUB: ROBLOX 0x0046e5f0
-static void FUN_0046e5f0(
+// FUNCTION: ROBLOX 0x0046e5f0
+void FUN_0046e5f0(
 	const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position, const G3D::Vector2& size
 )
 {
