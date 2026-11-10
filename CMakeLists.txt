@@ -681,6 +681,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/AboutRobloxDialog.cpp
     Client/win/App.cpp
     Client/win/BrowserView.cpp
+    Client/win/ChatPrompt.cpp
     Client/win/ChildFrm.cpp
     Client/win/DHTMLWindow.cpp
     Client/win/DxUserInput.cpp
