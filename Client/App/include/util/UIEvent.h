@@ -66,7 +66,7 @@ public:
 			   eventType == MOUSE_DELTA || eventType == MOUSE_IDLE;
 	}
 
-	bool isKeyPressedEvent(SDLKey key) const;
+	bool isKeyPressedEvent(SDLKey key) const { return eventType == KEY_DOWN && this->key == key; }
 	bool isKeyUpEvent(SDLKey key) const;
 	bool isKeyPressedWithShiftEvent(SDLKey key) const;
 	bool isKeyPressedWithShiftEvent() const;
