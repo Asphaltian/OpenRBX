@@ -110,6 +110,19 @@ void ExitCommand::doIt(RBX::IDataState* dataState)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00454430
+void CRobloxDoc::FUN_00454430()
+{
+	CString filter;
+	filter.LoadString(184);
+
+	CFileDialog dialog(FALSE, "rbxm", NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, filter);
+	if (dialog.DoModal() == IDOK) {
+		CComBSTR pathName(dialog.GetPathName());
+		m_unk0x78->SaveSelectionToFile(pathName);
+	}
+}
+
 // FUNCTION: ROBLOX 0x00454920
 void CRobloxDoc::FUN_00454920()
 {
@@ -180,6 +193,19 @@ void CRobloxDoc::FUN_00455ce0(CCmdUI* pCmdUI)
 	CString text;
 	text.Format(131, name.c_str());
 	pCmdUI->SetText(text);
+}
+
+// FUNCTION: ROBLOX 0x004561a0
+void CRobloxDoc::FUN_004561a0()
+{
+	CString filter;
+	filter.LoadString(184);
+
+	CFileDialog dialog(TRUE, "rbxm", NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, filter);
+	if (dialog.DoModal() == IDOK) {
+		RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
+		m_unk0x78->FUN_004702b0(RBX::ContentId::fromFile(static_cast<LPCTSTR>(dialog.GetPathName())), true);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00456b50
@@ -553,7 +579,7 @@ BOOL CRobloxDoc::FUN_00459950(std::string fileName)
 	return TRUE;
 }
 
-// STUB: ROBLOX 0x00459c80
+// FUNCTION: ROBLOX 0x00459c80
 void CRobloxDoc::FUN_00459c80()
 {
 	CString filter;
@@ -618,6 +644,9 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(0x80f1, FUN_00453eb0)
 	ON_COMMAND(0x8100, FUN_00454a60)
 	ON_UPDATE_COMMAND_UI(0x8100, FUN_0045a0b0)
+	ON_COMMAND(0x8021, FUN_004561a0)
+	ON_COMMAND(0x8025, FUN_00454430)
+	ON_UPDATE_COMMAND_UI(0x8025, FUN_00458750)
 	ON_COMMAND(ID_EDIT_UNDO, FUN_00455900)
 	ON_UPDATE_COMMAND_UI(ID_EDIT_UNDO, FUN_00455a30)
 	ON_COMMAND(ID_EDIT_REDO, FUN_00455bb0)
