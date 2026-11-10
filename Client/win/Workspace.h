@@ -75,6 +75,7 @@ private:
 	void FUN_0046f420();
 	std::auto_ptr<XmlElement> FUN_0046ffa0();
 	HRESULT FUN_004700b0(const XmlElement* root, std::ostream& stream);
+	HRESULT DoExecScript(LPCSTR script, VARIANT arg1, VARIANT arg2, VARIANT arg3, VARIANT arg4, SAFEARRAY** result);
 
 	boost::shared_ptr<RBX::DataModel> m_unk0x24;  // 0x24
 	boost::shared_ptr<RBX::RunService> m_unk0x2c; // 0x2c

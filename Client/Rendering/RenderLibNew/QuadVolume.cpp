@@ -37,7 +37,7 @@ void LevelBuilder::build(Purpose purpose)
 	buildBack(purpose);
 }
 
-// STUB: ROBLOX 0x0052c4b0
+// FUNCTION: ROBLOX 0x0052c4b0
 LevelBuilder::LevelBuilder(
 	G3D::ReferenceCountedPointer<RenderNew::Mesh::Level>& level, G3D::Vector3 size, RenderSurfaceTypes surfaceTypes
 )

@@ -142,7 +142,7 @@ DECOMP_SIZE_ASSERT(ServiceRemoving, 0x8)
 // TEMPLATE: WEBSERVICE 0x1006eb20
 // TEMPLATE: ROBLOX 0x005b6ef0
 // RBX::ServiceProvider::create<RBX::ControllerService>
-// STUB: ROBLOX 0x00599cb0
+// TEMPLATE: ROBLOX 0x00599cb0
 // RBX::ServiceProvider::create<RBX::FilteredSelection<RBX::PVInstance> >
 // TEMPLATE: ROBLOX 0x00599da0
 // RBX::ServiceProvider::create<RBX::FilteredSelection<RBX::ModelInstance> >
@@ -496,7 +496,7 @@ public:
 	// TEMPLATE: ROBLOX 0x0059a480
 	// RBX::ServiceClient<RBX::RunService>::createService
 	// TEMPLATE: WEBSERVICE 0x1006f250
-	// STUB: ROBLOX 0x0059a540
+	// TEMPLATE: ROBLOX 0x0059a540
 	// RBX::ServiceClient<RBX::Selection>::createService
 	// TEMPLATE: WEBSERVICE 0x100a49c0
 	// TEMPLATE: ROBLOX 0x005ed060

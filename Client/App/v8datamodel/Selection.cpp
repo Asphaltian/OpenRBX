@@ -70,7 +70,7 @@ void Selection::addFilteredSelection(ISelectionBase* fs)
 }
 
 // FUNCTION: WEBSERVICE 0x1005d8e0
-// STUB: ROBLOX 0x00567900
+// FUNCTION: ROBLOX 0x00567900
 void Selection::toggleSelection(Instance* instance)
 {
 	boost::shared_ptr<Instance> shared = shared_from(instance);
@@ -90,7 +90,7 @@ void Selection::toggleSelection(Instance* instance)
 }
 
 // FUNCTION: WEBSERVICE 0x1005dae0
-// STUB: ROBLOX 0x00567b00
+// FUNCTION: ROBLOX 0x00567b00
 void Selection::addToSelection(Instance* instance)
 {
 	boost::shared_ptr<Instance> shared = shared_from(instance);
@@ -117,7 +117,7 @@ void Selection::clearSelection()
 }
 
 // FUNCTION: WEBSERVICE 0x1005dde0
-// STUB: ROBLOX 0x00567e00
+// FUNCTION: ROBLOX 0x00567e00
 void Selection::setSelection(Instance* instance)
 {
 	boost::shared_ptr<Instance> inst = shared_from(instance);

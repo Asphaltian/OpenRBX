@@ -558,7 +558,7 @@ public:
 	// TEMPLATE: WEBSERVICE 0x1007e1a0
 	// RBX::Reflection::PropDescriptor<RBX::Soundscape::SoundChannel,bool>::getset<bool (__thiscall RBX::Soundscape::SoundChannel::*)(void)const ,void (__thiscall RBX::Soundscape::SoundChannel::*)(bool)>
 	// TEMPLATE: WEBSERVICE 0x10081cd0
-	// STUB: ROBLOX 0x005c5820
+	// TEMPLATE: ROBLOX 0x005c5820
 	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::Soundscape::SoundService>
 	// TEMPLATE: WEBSERVICE 0x10082260
 	// TEMPLATE: ROBLOX 0x005c5cd0

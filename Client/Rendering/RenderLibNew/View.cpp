@@ -300,7 +300,7 @@ void View::render(void* rd)
 	renderLibScene->render(static_cast<G3D::RenderDevice*>(rd), dataModel->getWorkspace()->getGCamera());
 }
 
-// STUB: ROBLOX 0x0050d810
+// FUNCTION: ROBLOX 0x0050d810
 View::View(boost::shared_ptr<DataModel> dataModel)
 	: dataModel(dataModel), lightingValid(false), renderLibScene(new RenderNew::RenderScene()),
 	  textureManager(new G3D::TextureManager()), m_unk0x54(false)
@@ -321,7 +321,7 @@ View::View(boost::shared_ptr<DataModel> dataModel)
 	);
 }
 
-// STUB: ROBLOX 0x0050db30
+// FUNCTION: ROBLOX 0x0050db30
 View::~View()
 {
 	sceneManager->clear();

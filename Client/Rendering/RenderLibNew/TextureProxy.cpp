@@ -38,7 +38,7 @@ void TextureProxy::shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& li
 	}
 }
 
-// STUB: ROBLOX 0x005345a0
+// FUNCTION: ROBLOX 0x005345a0
 TextureProxyRef TextureProxy::shade(const G3D::Color3& baseColor, const TextureProxyRef& baseTex)
 {
 	TextureProxy* answer = new TextureProxy(baseTex);
@@ -374,7 +374,7 @@ G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevi
 	return texture;
 }
 
-// STUB: ROBLOX 0x005346a0
+// FUNCTION: ROBLOX 0x005346a0
 TextureProxyRef TextureProxy::alphaOnlyVersion()
 {
 	return new TextureProxy(this);

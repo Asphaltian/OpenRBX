@@ -295,7 +295,7 @@ void ScriptContext::disassociateState(Script* script)
 }
 
 // FUNCTION: WEBSERVICE 0x10064510
-// STUB: ROBLOX 0x00571b00
+// FUNCTION: ROBLOX 0x00571b00
 void ScriptContext::removeScript(Script* script)
 {
 	if (scripts.erase(script)) {
@@ -473,7 +473,7 @@ int ScriptContext::dofile(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10067140
-// STUB: ROBLOX 0x00573700
+// FUNCTION: ROBLOX 0x00573700
 void ScriptContext::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
 {
 	stopListening<RunService, RunTransition>(runService, this);
@@ -841,7 +841,7 @@ void ScriptContext::onChangedScriptEnabled(const Reflection::PropertyDescriptor&
 }
 
 // FUNCTION: WEBSERVICE 0x10068780
-// STUB: ROBLOX 0x00574ea0
+// FUNCTION: ROBLOX 0x00574ea0
 void ScriptContext::addScript(Script* script)
 {
 	if (scripts.insert(script).second == true) {

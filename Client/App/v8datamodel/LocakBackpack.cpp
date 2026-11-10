@@ -232,7 +232,7 @@ LocalBackpack::~LocalBackpack()
 }
 
 // FUNCTION: WEBSERVICE 0x100d6ce0
-// STUB: ROBLOX 0x0060ddc0
+// FUNCTION: ROBLOX 0x0060ddc0
 void LocalBackpack::onLocalCharacterAdded(Instance* added)
 {
 	localCharacter = shared_from(added);

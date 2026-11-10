@@ -1550,7 +1550,7 @@ inline void Replicator::ChangePropertyItem::write(RakNet::BitStream& bitStream)
 }
 
 // FUNCTION: WEBSERVICE 0x101a78c0
-// STUB: ROBLOX 0x004d0840
+// FUNCTION: ROBLOX 0x004d0840
 Replicator::ReplicationData& Replicator::addReplicationData(boost::shared_ptr<Instance> instance, bool listenToChanges)
 {
 	std::pair<RepConts::iterator, bool> pair =
@@ -1610,7 +1610,7 @@ void Replicator::readProperties(RakNet::BitStream& inBitstream, Instance* instan
 }
 
 // FUNCTION: WEBSERVICE 0x101a7de0
-// STUB: ROBLOX 0x004d0d60
+// FUNCTION: ROBLOX 0x004d0d60
 void Replicator::readInstanceNew(RakNet::BitStream& inBitstream)
 {
 	int start = inBitstream.GetReadOffset();

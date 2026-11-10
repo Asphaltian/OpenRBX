@@ -76,7 +76,7 @@ DECOMP_SIZE_ASSERT(Explosion, 0x124)
 // SYNTHETIC: ROBLOX 0x007ed1a0
 // `dynamic initializer for 'RBX::Explosion::propBlastPressure''
 // SYNTHETIC: WEBSERVICE 0x1021cc40
-// STUB: ROBLOX 0x007ed1d0
+// SYNTHETIC: ROBLOX 0x007ed1d0
 // `dynamic initializer for 'RBX::Explosion::propPosition''
 // SYNTHETIC: WEBSERVICE 0x1021cc70
 // RBX::`dynamic initializer for 'signal_Hit''

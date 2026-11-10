@@ -990,7 +990,7 @@ CMainFrame::~CMainFrame()
 	RBX::FillTool::color.removeListener(this);
 }
 
-// STUB: ROBLOX 0x00436170
+// FUNCTION: ROBLOX 0x00436170
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CXTPMDIFrameWnd::OnCreate(lpCreateStruct) == -1) {

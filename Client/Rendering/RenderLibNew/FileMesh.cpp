@@ -57,7 +57,7 @@ bool FileMesh::loadFromMeshFile(const G3D::Vector3& scale, const MeshId meshFile
 	return true;
 }
 
-// STUB: ROBLOX 0x0052c2c0
+// FUNCTION: ROBLOX 0x0052c2c0
 G3D::ReferenceCountedPointer<RenderNew::Mesh> FileMesh::create(const G3D::Vector3& scale, const MeshId meshFile)
 {
 	FileMesh* mesh = new FileMesh();

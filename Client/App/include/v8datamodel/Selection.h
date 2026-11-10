@@ -60,7 +60,7 @@ public:
 	// FUNCTION: ROBLOX 0x00410670
 	unsigned int size() const { return selection->size(); }
 
-	// STUB: ROBLOX 0x004109b0
+	// FUNCTION: ROBLOX 0x004109b0
 	boost::shared_ptr<Instance> front() const
 	{
 		return size() > 0 ? selection->front() : boost::shared_ptr<Instance>();
@@ -282,17 +282,17 @@ protected:
 	// TEMPLATE: WEBSERVICE 0x100a1850
 	// TEMPLATE: ROBLOX 0x005e9e40
 	// RBX::FilteredSelection<RBX::PartInstance>::FilteredSelection<RBX::PartInstance>
-	// STUB: ROBLOX 0x005979b0
+	// TEMPLATE: ROBLOX 0x005979b0
 	// RBX::FilteredSelection<RBX::PVInstance>::FilteredSelection<RBX::PVInstance>
-	// STUB: ROBLOX 0x00597b20
+	// TEMPLATE: ROBLOX 0x00597b20
 	// RBX::FilteredSelection<RBX::ModelInstance>::FilteredSelection<RBX::ModelInstance>
 	// TEMPLATE: ROBLOX 0x00599080
 	// RBX::FilteredSelection<RBX::PVInstance>::onSelectionChanged
 	// TEMPLATE: ROBLOX 0x00599140
 	// RBX::FilteredSelection<RBX::ModelInstance>::onSelectionChanged
-	// STUB: ROBLOX 0x0059a6c0
+	// TEMPLATE: ROBLOX 0x0059a6c0
 	// RBX::FilteredSelection<RBX::PVInstance>::onAncestorChanged
-	// STUB: ROBLOX 0x0059a830
+	// TEMPLATE: ROBLOX 0x0059a830
 	// RBX::FilteredSelection<RBX::ModelInstance>::onAncestorChanged
 	// TEMPLATE: WEBSERVICE 0x100a1bd0
 	// TEMPLATE: ROBLOX 0x005ea1a0
@@ -304,7 +304,7 @@ protected:
 	// TEMPLATE: ROBLOX 0x005eb920
 	// RBX::FilteredSelection<RBX::PartInstance>::onSelectionChanged
 	// TEMPLATE: WEBSERVICE 0x100a4a80
-	// STUB: ROBLOX 0x005ed120
+	// TEMPLATE: ROBLOX 0x005ed120
 	// RBX::FilteredSelection<RBX::PartInstance>::onAncestorChanged
 	// TEMPLATE: WEBSERVICE 0x100bf860
 	// TEMPLATE: ROBLOX 0x006212e0
@@ -319,7 +319,7 @@ protected:
 	// TEMPLATE: ROBLOX 0x00621c00
 	// RBX::FilteredSelection<RBX::Instance>::onSelectionChanged
 	// TEMPLATE: WEBSERVICE 0x100c0630
-	// STUB: ROBLOX 0x00622050
+	// TEMPLATE: ROBLOX 0x00622050
 	// RBX::FilteredSelection<RBX::Instance>::onAncestorChanged
 	// clang-format on
 

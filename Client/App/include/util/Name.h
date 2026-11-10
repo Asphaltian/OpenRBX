@@ -89,7 +89,7 @@ private:
 	// TEMPLATE: ROBLOX 0x00402360
 	// RBX::Name::doDeclare<&RBX::sSelection>
 	// TEMPLATE: WEBSERVICE 0x1000b380
-	// STUB: ROBLOX 0x00402460
+	// TEMPLATE: ROBLOX 0x00402460
 	// RBX::Name::doDeclare<&RBX::sScriptContext>
 	// TEMPLATE: WEBSERVICE 0x1000b410
 	// STUB: ROBLOX 0x004024e0
@@ -101,10 +101,10 @@ private:
 	// TEMPLATE: ROBLOX 0x004a5090
 	// RBX::Name::doDeclare<&RBX::sWorkspace>
 	// TEMPLATE: WEBSERVICE 0x1001c980
-	// STUB: ROBLOX 0x0043c360
+	// TEMPLATE: ROBLOX 0x0043c360
 	// RBX::Name::doDeclare<&RBX::Soundscape::sSoundService>
 	// TEMPLATE: WEBSERVICE 0x1001ca10
-	// STUB: ROBLOX 0x0043c3e0
+	// TEMPLATE: ROBLOX 0x0043c3e0
 	// RBX::Name::doDeclare<&RBX::Soundscape::sSoundChannel>
 	// TEMPLATE: WEBSERVICE 0x100428c0
 	// TEMPLATE: ROBLOX 0x00474830
@@ -131,7 +131,7 @@ private:
 	// TEMPLATE: ROBLOX 0x0040d8f0
 	// RBX::Name::doDeclare<&RBX::Network::sPlayer>
 	// TEMPLATE: WEBSERVICE 0x1006a1e0
-	// STUB: ROBLOX 0x0045f790
+	// TEMPLATE: ROBLOX 0x0045f790
 	// RBX::Name::doDeclare<&RBX::sControllerService>
 	// TEMPLATE: WEBSERVICE 0x1006a250
 	// STUB: ROBLOX 0x0045f890

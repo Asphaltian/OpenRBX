@@ -54,7 +54,7 @@ float primaryComponent(const G3D::Vector3& v)
 	return nz;
 }
 
-// STUB: ROBLOX 0x00515020
+// FUNCTION: ROBLOX 0x00515020
 bool Part::usesMegaTexture() const
 {
 	if (specialShape == NULL && partInstance->getPartType() == RBX::Part::BLOCK_PART) {
@@ -66,7 +66,7 @@ bool Part::usesMegaTexture() const
 	return false;
 }
 
-// STUB: ROBLOX 0x00515090
+// FUNCTION: ROBLOX 0x00515090
 const G3D::CoordinateFrame& PartChunk::cframe()
 {
 	coordinateFrame = partInstance->getCoordinateFrame();
@@ -345,7 +345,7 @@ void PartChunk::onChildRemoved(boost::shared_ptr<Instance> child)
 	}
 }
 
-// STUB: ROBLOX 0x00517180
+// FUNCTION: ROBLOX 0x00517180
 Part::~Part()
 {
 	if (partInstance) {
@@ -601,7 +601,7 @@ Texture::Texture(RBX::Texture& texture, PartInstance& parentPart, View* view)
 	);
 }
 
-// STUB: ROBLOX 0x0051b0c0
+// FUNCTION: ROBLOX 0x0051b0c0
 Part::Part(const boost::shared_ptr<PartInstance>& partInstance, View* view) : PartChunk(0.0f, partInstance, view)
 {
 	if (partInstance->getCanAggregate()) {

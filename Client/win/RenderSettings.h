@@ -52,7 +52,7 @@ class CRenderSettings;
 // RBX::GlobalSettingsItem<CRenderSettings,&sRenderSettings>::~GlobalSettingsItem<CRenderSettings,&sRenderSettings>
 // TEMPLATE: ROBLOX 0x004494a0
 // RBX::Reflection::EnumDesc<enum CRenderSettings::AASamples>::~EnumDesc<enum CRenderSettings::AASamples>
-// STUB: ROBLOX 0x00449660
+// TEMPLATE: ROBLOX 0x00449660
 // RBX::Reflection::EnumDesc<enum CRenderSettings::ShadowMode>::addPair
 // TEMPLATE: ROBLOX 0x004498a0
 // RBX::Reflection::EnumDesc<enum CRenderSettings::GraphicsMode>::~EnumDesc<enum CRenderSettings::GraphicsMode>

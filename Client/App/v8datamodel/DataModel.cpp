@@ -493,7 +493,7 @@ void DataModel::processGui(const UIEvent& event)
 }
 
 // FUNCTION: WEBSERVICE 0x10079120
-// STUB: ROBLOX 0x00592490
+// FUNCTION: ROBLOX 0x00592490
 void DataModel::initializeContents()
 {
 	workspace->setParent(this);

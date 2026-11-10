@@ -597,7 +597,7 @@ template <class T, class Base, const char* sName>
 	// TEMPLATE: ROBLOX 0x00572460
 	// RBX::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem>::DescribedNonCreatable<RBX::Stats::Item,RBX::Instance,&RBX::Stats::sStatsItem><char const *>
 	// TEMPLATE: WEBSERVICE 0x100653c0
-	// STUB: ROBLOX 0x0045ca30
+	// TEMPLATE: ROBLOX 0x0045ca30
 	// RBX::DescribedNonCreatable<RBX::Stats::StatsService,RBX::Instance,&RBX::Stats::sStats>::DescribedNonCreatable<RBX::Stats::StatsService,RBX::Instance,&RBX::Stats::sStats><char const *>
 	// FUNCTION: WEBSERVICE 0x10065660
 	// FUNCTION: ROBLOX 0x005725b0

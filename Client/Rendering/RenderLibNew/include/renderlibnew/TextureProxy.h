@@ -37,14 +37,14 @@ protected:
 
 	friend class RenderScene;
 
-	// STUB: ROBLOX 0x005344e0
+	// FUNCTION: ROBLOX 0x005344e0
 	TextureProxy(TextureProxyRef root) : loaded(false), textureManager(NULL), root(root) { filename = ""; }
 
 public:
 	// FUNCTION: ROBLOX 0x0066a6f0
 	TextureProxy(const std::string& filename) : loaded(false) { this->filename = filename; }
 
-	// STUB: ROBLOX 0x00515260
+	// FUNCTION: ROBLOX 0x00515260
 	TextureProxy(G3D::TextureManager& textureManager, const std::string& filename, bool tiled)
 		: loaded(false), textureManager(&textureManager), tiled(tiled)
 	{

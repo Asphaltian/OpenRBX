@@ -25,7 +25,7 @@ void Chunk::VTable0x20()
 	m_unk0x0c = NULL;
 }
 
-// STUB: ROBLOX 0x005367d0
+// FUNCTION: ROBLOX 0x005367d0
 void AggregateChunk::makeMesh()
 {
 	mesh = Mesh::aggregate(components, _cframe, radius);

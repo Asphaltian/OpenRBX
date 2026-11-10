@@ -96,7 +96,7 @@ public:
 	// FUNCTION: ROBLOX 0x00406600
 	// RBX::Creatable<RBX::Instance>::create<RBX::Selection>
 	// FUNCTION: WEBSERVICE 0x10009690
-	// STUB: ROBLOX 0x00406b20
+	// FUNCTION: ROBLOX 0x00406b20
 	// RBX::Creatable<RBX::Instance>::create<RBX::ScriptContext>
 	// FUNCTION: WEBSERVICE 0x10009720
 	// STUB: ROBLOX 0x00406db0
@@ -105,7 +105,7 @@ public:
 	// STUB: ROBLOX 0x00407040
 	// RBX::Creatable<RBX::Instance>::create<RBX::LocalScript>
 	// STUB: WEBSERVICE 0x10019d00
-	// STUB: ROBLOX 0x004417f0
+	// TEMPLATE: ROBLOX 0x004417f0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Soundscape::SoundChannel>
 	// TEMPLATE: WEBSERVICE 0x10045340
 	// TEMPLATE: ROBLOX 0x004763e0
@@ -591,7 +591,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004415f0
 	// RBX::FactoryProduct<RBX::Soundscape::SoundService,RBX::Instance,&RBX::Soundscape::sSoundService>::Creator::create
 	// STUB: WEBSERVICE 0x1000feb0
-	// STUB: ROBLOX 0x00441880
+	// TEMPLATE: ROBLOX 0x00441880
 	// RBX::FactoryProduct<RBX::Soundscape::SoundChannel,RBX::Instance,&RBX::Soundscape::sSoundChannel>::Creator::create
 	// TEMPLATE: WEBSERVICE 0x10008b90
 	// RBX::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>::FactoryProduct<ThumbnailGenerator,RBX::Instance,&sThumbnailGenerator>

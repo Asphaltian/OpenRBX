@@ -154,7 +154,7 @@ G3D::ReferenceCountedPointer<RenderNew::Material> MaterialFactory::getMaterial(A
 	return result;
 }
 
-// STUB: ROBLOX 0x0051c4e0
+// FUNCTION: ROBLOX 0x0051c4e0
 MaterialFactory::MaterialFactory(G3D::TextureManager* textureManager)
 {
 	surfacesTexture = new RenderNew::TextureProxy(

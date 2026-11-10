@@ -513,7 +513,7 @@ protected:
 	// TEMPLATE: ROBLOX 0x004b7d30
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(boost::shared_ptr<RBX::Instance>)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x1004eeb0
-	// STUB: ROBLOX 0x0057aa40
+	// TEMPLATE: ROBLOX 0x0057aa40
 	// RBX::Reflection::SignalDescImpl<1,void __cdecl(RBX::Reflection::PropertyDescriptor const *)>::connectGeneric
 	// TEMPLATE: WEBSERVICE 0x10057d90
 	// TEMPLATE: ROBLOX 0x004aeb70

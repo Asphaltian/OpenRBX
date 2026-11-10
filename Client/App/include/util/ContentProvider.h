@@ -39,7 +39,7 @@ public:
 	ContentId(const std::string& id, const Name& mimeType) : id(id), mimeTypePtr(&mimeType) {}
 
 	// FUNCTION: WEBSERVICE 0x1004f100
-	// STUB: ROBLOX 0x0043bb30
+	// FUNCTION: ROBLOX 0x0043bb30
 	ContentId(const char* id) : id(id), mimeTypePtr(&Name::getNullName()) {}
 
 	ContentId(const std::string& id) : id(id), mimeTypePtr(&Name::getNullName()) {}

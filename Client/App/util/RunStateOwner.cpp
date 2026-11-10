@@ -206,7 +206,7 @@ RunService::RunService()
 }
 
 // FUNCTION: WEBSERVICE 0x100573e0
-// STUB: ROBLOX 0x0056b4e0
+// FUNCTION: ROBLOX 0x0056b4e0
 void RunService::start()
 {
 	boost::shared_ptr<DataModel> dataModel = shared_from(dynamic_cast<DataModel*>(getParent()));

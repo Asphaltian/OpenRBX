@@ -3,15 +3,21 @@
 #include "Content.h"
 #include "InstanceExplorer.h"
 #include "LogManager.h"
+#include "LuaFunction.h"
+#include "script/ScriptContext.h"
+#include "security/SecurityContext.h"
 #include "util/ContentProvider.h"
 #include "v8datamodel/Commands.h"
 #include "v8datamodel/Selection.h"
 #include "v8xml/SerializerV2.h"
 #include "v8xml/XmlSerializer.h"
 
+#include <G3D/format.h>
 #include <algorithm>
 #include <boost/bind.hpp>
+#include <boost/iostreams/copy.hpp>
 #include <fstream>
+#include <sstream>
 
 #define CHECK_HRESULT(expr)                                                                                            \
 	if (expr) {                                                                                                        \
@@ -92,13 +98,70 @@ void CWorkspace::FUN_0046f420()
 	}
 }
 
-// STUB: ROBLOX 0x0046f970
+// FUNCTION: ROBLOX 0x0046f630
+HRESULT CWorkspace::DoExecScript(
+	LPCSTR script, VARIANT arg1, VARIANT arg2, VARIANT arg3, VARIANT arg4, SAFEARRAY** result
+)
+{
+	try {
+		RBX::DataModel::Lock lock(m_unk0x24);
+		Unknown00431c00 arguments;
+		arguments.FUN_00431c00(arg1);
+		arguments.FUN_00431c00(arg2);
+		arguments.FUN_00431c00(arg3);
+		arguments.FUN_00431c00(arg4);
+
+		std::auto_ptr<std::vector<RBX::Reflection::Value> > values =
+			FUN_0046edc0()->create<RBX::ScriptContext>()->executeInNewThread(
+				RBX::Security::TrustedCOM, script, NULL, arguments
+			);
+		if (result) {
+			*result = FUN_00413500(*values);
+		}
+
+		return S_OK;
+	}
+	catch (std::exception& e) {
+		std::string text(script);
+		std::string message = G3D::format("DoExecScript failed because %s.  %s", e.what(), text.substr(0, 64).c_str());
+		return LogManager::ReportCOMError(CLSID_Workspace, message.c_str(), S_OK);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0046f970
 STDMETHODIMP CWorkspace::ExecUrlScript(
 	BSTR url, VARIANT arg1, VARIANT arg2, VARIANT arg3, VARIANT arg4, SAFEARRAY** result
 )
 {
-	STUB(0x46f970);
-	return S_OK;
+	try {
+		AFX_MANAGE_STATE(AfxGetAppModuleState());
+		std::ostringstream stream;
+
+		try {
+			CString text(url);
+			std::auto_ptr<std::istream> content = RBX::ContentProvider::singleton().getContent(RBX::ContentId(text));
+			boost::iostreams::copy(*content, stream, 0x1000);
+		}
+		catch (std::exception& e) {
+			std::string message = G3D::format("Failed to get URL, %s", e.what());
+			return LogManager::ReportCOMError(CLSID_Workspace, message.c_str(), S_OK);
+		}
+
+		return DoExecScript(stream.str().c_str(), arg1, arg2, arg3, arg4, result);
+	}
+	catch (CException* e) {
+		char message[255];
+		e->GetErrorMessage(message, 255, NULL);
+		std::string text = G3D::format("CException %s", message);
+		return LogManager::ReportCOMError(CLSID_Workspace, text.c_str(), S_OK);
+	}
+	catch (CAtlException e) {
+		std::string message = G3D::format("CAtlException %d", e.m_hr);
+		return LogManager::ReportCOMError(CLSID_Workspace, message.c_str(), S_OK);
+	}
+	catch (...) {
+		return LogManager::ReportCOMError(CLSID_Workspace, "Unexpected exception", S_OK);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0046fd00
@@ -242,13 +305,18 @@ STDMETHODIMP CWorkspace::WriteSelection(IContent** result)
 	}
 }
 
-// STUB: ROBLOX 0x00470b20
+// FUNCTION: ROBLOX 0x00470b20
 STDMETHODIMP CWorkspace::ExecScript(
 	BSTR script, VARIANT arg1, VARIANT arg2, VARIANT arg3, VARIANT arg4, SAFEARRAY** result
 )
 {
-	STUB(0x470b20);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+	std::string text = (LPCTSTR) CString(script);
+	if (RBX::ContentProvider::isHttpUrl(text)) {
+		return ExecUrlScript(script, arg1, arg2, arg3, arg4, result);
+	}
+
+	return DoExecScript(text.c_str(), arg1, arg2, arg3, arg4, result);
 }
 
 // FUNCTION: ROBLOX 0x00470da0

@@ -619,7 +619,7 @@ BOOL Vector3Item::OnAfterEdit(CString& strValue)
 	return RBX::StringConverter<G3D::Vector3>::convertToValue((LPCTSTR) strValue, value);
 }
 
-// STUB: ROBLOX 0x00441cf0
+// FUNCTION: ROBLOX 0x00441cf0
 void Vector3Item::VTable0x00(
 	const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& instances
 )
@@ -926,7 +926,7 @@ void CSelectionPropGrid::onEvent(const RBX::Selection* source, RBX::SelectionCha
 	}
 }
 
-// STUB: ROBLOX 0x00445580
+// FUNCTION: ROBLOX 0x00445580
 void CSelectionPropGrid::FUN_00445580(RBX::Selection* selection)
 {
 	boost::recursive_mutex::scoped_lock lock(m_unk0x188);

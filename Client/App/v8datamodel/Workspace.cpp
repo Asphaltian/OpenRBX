@@ -644,7 +644,7 @@ static void append(const boost::shared_ptr<Instance>& item, std::vector<boost::s
 }
 
 // FUNCTION: WEBSERVICE 0x1006f040
-// STUB: ROBLOX 0x005b73c0
+// FUNCTION: ROBLOX 0x005b73c0
 void Workspace::start()
 {
 	isSimulating = true;
