@@ -26,6 +26,15 @@ public:
 	// SYNTHETIC: ROBLOX 0x00437100
 	// CMultiPlayerPane::`scalar deleting destructor'
 
+protected:
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnDestroy();
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x00437130
+	// ?GetMessageMap@CMultiPlayerPane@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	CChatPrompt* m_unk0x54; // 0x54
 };

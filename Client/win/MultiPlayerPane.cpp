@@ -30,3 +30,27 @@ BOOL CMultiPlayerPane::FUN_00436ff0(CWnd* parent, RBX::DataModel* dataModel)
 	m_unk0x54->SendMessage(WM_INITIALUPDATE);
 	return TRUE;
 }
+
+// FUNCTION: ROBLOX 0x004370b0
+void CMultiPlayerPane::OnSize(UINT nType, int cx, int cy)
+{
+	if (nType != SIZE_MINIMIZED && m_unk0x54) {
+		m_unk0x54->MoveWindow(0, 0, cx, cy);
+	}
+
+	CWnd::OnSize(nType, cx, cy);
+}
+
+// FUNCTION: ROBLOX 0x004370f0
+void CMultiPlayerPane::OnDestroy()
+{
+	m_unk0x54 = NULL;
+	CWnd::OnDestroy();
+}
+
+// clang-format off
+BEGIN_MESSAGE_MAP(CMultiPlayerPane, CWnd)
+	ON_WM_SIZE()
+	ON_WM_DESTROY()
+END_MESSAGE_MAP()
+// clang-format on

@@ -6653,3 +6653,12 @@ address,type,symbol,name,module,size
 00464950,library,?MarkerPrevious@CScintillaCtrl@Scintilla@@QAEHHHH@Z,,,65
 00464a40,library,?GetMarginWidthN@CScintillaCtrl@Scintilla@@QAEHHH@Z,,,57
 00467120,library,?OnCreate@CScintillaView@Scintilla@@IAEHPAUtagCREATESTRUCTA@@@Z,,,71
+0040dc60,function,,,,118
+004370b0,function,,,,49
+004370f0,function,,,,12
+0045d8c0,function,,,,30
+0046eb30,function,,,,32
+0046eb50,function,,,,23
+0046ec10,function,,,,19
+00805a20,global,messageMap___CMultiPlayerPane::GetThisMessageMap,,,
+0080fd14,global,messageMap___CWebToolbox::GetThisMessageMap,,,

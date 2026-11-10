@@ -58,6 +58,20 @@ void CChatPrompt::FUN_0040dbe0()
 	}
 }
 
+// FUNCTION: ROBLOX 0x0040dc60
+int CChatPrompt::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	m_unk0x94.CreateSolidBrush(RGB(64, 64, 64));
+
+	if (CEditView::OnCreate(lpCreateStruct) == -1) {
+		return -1;
+	}
+
+	SetFont(XTPPaintManager()->GetRegularBoldFont());
+	SetWindowText(g_unk0x00913b50);
+	return 0;
+}
+
 // FUNCTION: ROBLOX 0x0040dd10
 ChatEnter::ChatEnter()
 {
@@ -70,10 +84,13 @@ CChatPrompt::CChatPrompt() : m_unk0x88(NULL), m_unk0xa4(NULL)
 
 // clang-format off
 BEGIN_MESSAGE_MAP(CChatPrompt, CEditView)
-ON_WM_CTLCOLOR_REFLECT()
-ON_CONTROL_REFLECT(EN_SETFOCUS, FUN_0040dbe0)
-ON_WM_CHAR()
-ON_MESSAGE(0x468, FUN_0045f4d0)
+	ON_CONTROL_REFLECT(EN_CHANGE, FUN_00751160)
+	ON_WM_CHAR()
+	ON_WM_SYSCHAR()
+	ON_MESSAGE(0x468, FUN_0045f4d0)
+	ON_CONTROL_REFLECT(EN_SETFOCUS, FUN_0040dbe0)
+	ON_WM_CREATE()
+	ON_WM_CTLCOLOR_REFLECT()
 END_MESSAGE_MAP()
 // clang-format on
 
@@ -137,6 +154,11 @@ void CChatPrompt::FUN_0040f4d0(RBX::DataModel* dataModel, CWnd* parent)
 CChatPrompt::~CChatPrompt()
 {
 	FUN_0040f4d0(NULL, NULL);
+}
+
+// FUNCTION: ROBLOX 0x00751160 FOLDED
+void CChatPrompt::FUN_00751160()
+{
 }
 
 // FUNCTION: ROBLOX 0x0045f4d0 FOLDED

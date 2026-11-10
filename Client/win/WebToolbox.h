@@ -34,6 +34,18 @@ public:
 	// SYNTHETIC: ROBLOX 0x0046ecd0
 	// ?CreateObject@CWebToolbox@@SGPAVCObject@@XZ
 
+protected:
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
+	afx_msg int OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message);
+	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized);
+
+	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x0046ed50
+	// ?GetMessageMap@CWebToolbox@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	friend class CRobloxView;
 

@@ -127,6 +127,7 @@ public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 	afx_msg void OnDestroy();
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
+	afx_msg void FUN_0045d8c0(CCmdUI* pCmdUI);
 
 	void FUN_0045d920();
 	void FUN_0045da90(int p_unk0x04);
