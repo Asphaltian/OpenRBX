@@ -11,6 +11,12 @@
 
 IMPLEMENT_DYNCREATE(CRobloxView, CView)
 
+template <class T>
+static T* findService(RBX::DataModel* dataModel)
+{
+	return dataModel ? dataModel->find<T>() : NULL;
+}
+
 BEGIN_MESSAGE_MAP(CRobloxView, CView)
 ON_COMMAND(ID_FILE_PRINT, CView::OnFilePrint)
 ON_COMMAND(ID_FILE_PRINT_DIRECT, CView::OnFilePrint)
@@ -20,6 +26,7 @@ ON_WM_CREATE()
 ON_WM_ERASEBKGND()
 ON_WM_DESTROY()
 ON_WM_SETFOCUS()
+ON_MESSAGE(0x46b, FUN_0045e740)
 ON_MESSAGE(0x46c, FUN_0045de20)
 ON_COMMAND(0x8020, FUN_0045dbe0)
 ON_COMMAND(0x80d6, FUN_0045dbf0)
@@ -309,6 +316,34 @@ void CRobloxView::onEvent(const RBX::ServiceProvider* source, RBX::ServiceAdded 
 
 void CRobloxView::OnDraw(CDC* pDC)
 {
+}
+
+// STUB: ROBLOX 0x0045e740
+LRESULT CRobloxView::FUN_0045e740(WPARAM wParam, LPARAM lParam)
+{
+	if (m_hWnd) {
+		RBX::DataModel::Lock lock(m_unk0x140);
+
+		bool showPane = false;
+		RBX::Network::Players* players = findService<RBX::Network::Players>(FUN_00403290().get());
+		if (players && RBX::Network::Players::clientIsPresent(FUN_00403290().get(), true) && !players->superSafeOn()) {
+			showPane = true;
+		}
+
+		bool paneShown = m_unk0x150.m_hWnd != NULL;
+		if (showPane != paneShown) {
+			if (showPane) {
+				m_unk0x150.FUN_00436ff0(this, FUN_00403290().get());
+			}
+			else {
+				m_unk0x150.DestroyWindow();
+			}
+
+			FUN_0045d920();
+		}
+	}
+
+	return 0;
 }
 
 // STUB: ROBLOX 0x0045e900

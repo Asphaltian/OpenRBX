@@ -137,6 +137,7 @@ public:
 	afx_msg LRESULT FUN_0045de20(WPARAM wParam, LPARAM lParam);
 	afx_msg void FUN_0045de50();
 	afx_msg void FUN_0045de70();
+	afx_msg LRESULT FUN_0045e740(WPARAM wParam, LPARAM lParam);
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
 
 	boost::shared_ptr<RBX::DataModel> FUN_00403290() const;
