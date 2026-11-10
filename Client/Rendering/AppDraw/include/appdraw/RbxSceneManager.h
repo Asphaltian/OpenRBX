@@ -85,7 +85,8 @@ public:
 	};
 
 protected:
-	undefined4 m_unk0x8a64;                                          // 0x8a64
+	bool m_unk0x8a64;                                                // 0x8a64
+	bool m_unk0x8a65;                                                // 0x8a65
 	String m_unk0x8a68;                                              // 0x8a68
 	SharedPtr<RbxSky> m_unk0x8a84;                                   // 0x8a84
 	SceneNode* m_unk0x8a90;                                          // 0x8a90

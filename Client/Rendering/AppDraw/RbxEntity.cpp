@@ -4,12 +4,17 @@
 #include "appdraw/RbxSubEntity.h"
 
 #include <OgreCamera.h>
+#include <OgreLight.h>
 #include <OgreLogManager.h>
 #include <OgreMath.h>
 #include <OgreMesh.h>
+#include <OgrePass.h>
+#include <OgrePlane.h>
+#include <OgreRay.h>
 #include <OgreRenderQueue.h>
 #include <OgreStringConverter.h>
 #include <OgreSubMesh.h>
+#include <OgreTechnique.h>
 #include <algorithm>
 #include <string.h>
 
@@ -270,6 +275,127 @@ void RbxEntity::FUN_00676870(Camera* cam)
 			latest.m_unk0x04 = candidates.size();
 			latest.m_unk0x08 = count;
 		}
+	}
+}
+
+// STUB: ROBLOX 0x006772d0
+void RbxEntity::FUN_006772d0(Camera* camera, const Light* light, std::vector<ShadowCaster*>* casters)
+{
+	casters->clear();
+	if (!m_unk0x245) {
+		FUN_00676870(camera);
+		m_unk0x245 = true;
+	}
+
+	const Vector3* corners = m_unk0x248.getAllCorners();
+	for (int i = 0; i < 8; i++) {
+		if (camera->isVisible(corners[i])) {
+			corners[i].distance(camera->getDerivedPosition());
+		}
+	}
+
+	Real farDistance;
+	{
+		std::vector<Plane> planes;
+		planes.push_back(Plane(Vector3(1.0f, 0.0f, 0.0f), Vector3(m_unk0x248.getMaximum().x, 0.0f, 0.0f)));
+		planes.push_back(Plane(Vector3(-1.0f, 0.0f, 0.0f), Vector3(m_unk0x248.getMinimum().x, 0.0f, 0.0f)));
+		planes.push_back(Plane(Vector3(0.0f, 1.0f, 0.0f), Vector3(0.0f, m_unk0x248.getMaximum().y, 0.0f)));
+		planes.push_back(Plane(Vector3(0.0f, -1.0f, 0.0f), Vector3(0.0f, m_unk0x248.getMinimum().y, 0.0f)));
+		planes.push_back(Plane(Vector3(0.0f, 0.0f, 1.0f), Vector3(0.0f, 0.0f, m_unk0x248.getMaximum().z)));
+		planes.push_back(Plane(Vector3(0.0f, 0.0f, -1.0f), Vector3(0.0f, 0.0f, m_unk0x248.getMinimum().z)));
+
+		const Vector3* frustumCorners = camera->getWorldSpaceCorners();
+		Ray rays[4];
+		for (int i = 0; i < 4; i++) {
+			rays[i].setOrigin(frustumCorners[i]);
+			Vector3 direction = frustumCorners[i + 4] - frustumCorners[i];
+			direction.normalise();
+			rays[i].setDirection(direction);
+		}
+
+		Real maxDistance = -1.0f;
+		for (int i = 0; i < 4; i++) {
+			Real minDistance = 1000000000.0f;
+			for (unsigned int j = 0; j < 6; j++) {
+				if (planes[j].getSide(rays[i].getOrigin()) == Plane::NEGATIVE_SIDE) {
+					std::pair<bool, Real> hit = Math::intersects(rays[i], planes[j]);
+					if (hit.first) {
+						minDistance = std::min(minDistance, hit.second);
+					}
+				}
+			}
+			if (minDistance != 1000000000.0 && minDistance < 10000.0f) {
+				maxDistance = std::max(minDistance, maxDistance);
+			}
+		}
+
+		farDistance = camera->getNearClipDistance() + maxDistance;
+	}
+
+	Real savedFarDistance;
+	if (0.0f < farDistance) {
+		savedFarDistance = camera->getFarClipDistance();
+		camera->setFarClipDistance(farDistance);
+	}
+
+	bool lightInFrustum;
+	const PlaneBoundedVolumeList* volList;
+	if (light->getType() == Light::LT_DIRECTIONAL) {
+		AxisAlignedBox aabb;
+		const Vector3* frustumCorners = camera->getWorldSpaceCorners();
+		Vector3 min, max;
+		Vector3 extrude = light->getDerivedDirection() * -10000.0;
+
+		min = max = frustumCorners[0];
+		min.makeFloor(frustumCorners[0] + extrude);
+		max.makeCeil(frustumCorners[0] + extrude);
+		for (size_t c = 1; c < 8; ++c) {
+			min.makeFloor(frustumCorners[c]);
+			max.makeCeil(frustumCorners[c]);
+			min.makeFloor(frustumCorners[c] + extrude);
+			max.makeCeil(frustumCorners[c] + extrude);
+		}
+		aabb.setExtents(min, max);
+
+		lightInFrustum = false;
+		volList = &light->_getFrustumClipVolumes(camera);
+	}
+	else {
+		Sphere s(light->getDerivedPosition(), light->getAttenuationRange());
+		if (camera->isVisible(s)) {
+			lightInFrustum = camera->isVisible(light->getDerivedPosition());
+			if (!lightInFrustum) {
+				volList = &light->_getFrustumClipVolumes(camera);
+			}
+			else {
+				volList = NULL;
+			}
+		}
+	}
+
+	for (int i = 0; i < (int) getNumSubEntities(); i++) {
+		RbxSubEntity* subEntity = dynamic_cast<RbxSubEntity*>(mSubEntityList[i]);
+		if (subEntity->getCastShadows()) {
+			if (!subEntity->getMaterial()->getTechnique(0)->getPass(0)->isTransparent()) {
+				if (subEntity->isVisible()) {
+					casters->push_back(subEntity);
+				}
+				else if (m_unk0x270[i] != 3 && (!lightInFrustum || light->getType() == Light::LT_DIRECTIONAL)) {
+					PlaneBoundedVolumeList::const_iterator pi, piend;
+					piend = volList->end();
+					for (pi = volList->begin(); pi != piend; ++pi) {
+						if (pi->intersects(subEntity->getWorldBoundingBox())) {
+							casters->push_back(subEntity);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if (0.0f < farDistance) {
+		camera->setFarClipDistance(savedFarDistance);
 	}
 }
 
