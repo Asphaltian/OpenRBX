@@ -804,6 +804,21 @@ void ScriptContext::executeInNewThread(
 	resume(thread, pushArguments, readResults);
 }
 
+// FUNCTION: ROBLOX 0x00574c00
+void ScriptContext::call(
+	const Lua::FunctionRef& function,
+	boost::function1<unsigned int, lua_State*> pushArguments,
+	boost::function2<void, lua_State*, unsigned int> readResults
+)
+{
+	if (!function.thread()) {
+		throw std::runtime_error("Cannot call a nil function");
+	}
+
+	lua_pushfunction(function.thread(), function);
+	resume(function.thread(), pushArguments, readResults);
+}
+
 // FUNCTION: WEBSERVICE 0x10068640
 // FUNCTION: ROBLOX 0x00574d60
 void ScriptContext::startPendingScripts()
@@ -849,6 +864,22 @@ static void FUN_00751160(lua_State* thread, unsigned int count)
 void ScriptContext::executeInNewThread(Security::Identities identity, const char* script, const char* name)
 {
 	executeInNewThread(identity, script, name, &FUN_00407390, &FUN_00751160);
+}
+
+// FUNCTION: ROBLOX 0x00574f60
+std::auto_ptr<std::vector<Reflection::Value> > ScriptContext::call(
+	const Lua::FunctionRef& function, const std::vector<Reflection::Value>& arguments
+)
+{
+	std::auto_ptr<std::vector<Reflection::Value> > result;
+
+	call(
+		function,
+		boost::bind(&pushArguments, boost::cref(arguments), _1),
+		boost::bind(&readResults, boost::ref(result), _1, _2)
+	);
+
+	return result;
 }
 
 // FUNCTION: WEBSERVICE 0x100687d0

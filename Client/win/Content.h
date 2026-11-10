@@ -3,10 +3,12 @@
 
 #include "Roblox_h.h"
 #include "decomp.h"
+#include "reflection/type.h"
 
 #include <atlbase.h>
 #include <atlcom.h>
 #include <sstream>
+#include <vector>
 
 // SIZE 0x94
 class __declspec(novtable) CContent : public CComObjectRootEx<CComSingleThreadModel>,
@@ -29,5 +31,8 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(CContent, 0x94)
+
+void FUN_004132b0(const RBX::Reflection::Value& value, VARIANT* result);
+SAFEARRAY* FUN_00413500(const std::vector<RBX::Reflection::Value>& values);
 
 #endif // CONTENT_H

@@ -689,6 +689,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/InstanceExplorer.cpp
     Client/win/LogManager.cpp
     Client/win/LuaHtmlView.cpp
+    Client/win/LuaFunction.cpp
     Client/win/MainFrm.cpp
     Client/win/MarshalWindow.cpp
     Client/win/MultiPlayerPane.cpp
