@@ -68,6 +68,8 @@ void CSelectionTreeCtrl::FUN_00422230(NMHDR* pNMHDR, LRESULT* pResult)
 class CEnabledCmdUI : public CCmdUI
 {
 public:
+	CEnabledCmdUI() : m_unk0x28(FALSE) {}
+
 	// FUNCTION: ROBLOX 0x00422250
 	virtual void Enable(BOOL bOn = TRUE)
 	{
@@ -84,7 +86,7 @@ public:
 
 DECOMP_SIZE_ASSERT(CEnabledCmdUI, 0x2c)
 
-// STUB: ROBLOX 0x00422270
+// FUNCTION: ROBLOX 0x00422270
 void CSelectionTreeCtrl::FUN_00422270(CPoint point)
 {
 	CMenu* popup = m_unk0xc4.GetSubMenu(0);
