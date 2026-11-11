@@ -4,6 +4,7 @@
 #include "appdraw/RbxFont.h"
 #include "appdraw/RbxSceneNode.h"
 #include "appdraw/RbxSubEntity.h"
+#include "appdraw/Unknown0067eb00.h"
 #include "appdraw/VisualEngine.h"
 #include "renderlibnew/TextureProxy.h"
 #include "util/ContentProvider.h"
@@ -266,6 +267,23 @@ G3D::ReferenceCountedPointer<TextureProxyBase> AdornRbxGfx::createTextureProxy(c
 	return new RenderNew::TextureProxy(name);
 }
 
+// FUNCTION: ROBLOX 0x0066aae0
+void AdornRbxGfx::FUN_0066aae0(const G3D::Color4& color, int p_unk0x08)
+{
+	char name[64];
+	_snprintf(name, sizeof(name), "setColor%.3f%.3f%.3f%.3f%d", color.r, color.g, color.b, color.a, p_unk0x08);
+	m_unk0x24 = Ogre::MaterialManager::getSingleton().getByName(name);
+	if (m_unk0x24.isNull()) {
+		m_unk0x24 = Ogre::MaterialManager::getSingleton().create(name, "adorn3d");
+		Ogre::Pass* pass = m_unk0x24->getTechnique(0)->getPass(0);
+		pass->setAmbient(color.r, color.g, color.b);
+		pass->setDiffuse(color.r, color.g, color.b, color.a);
+		pass->setSpecular(color.r, color.g, color.b, color.a);
+		pass->setShininess(10.0f);
+		m_unk0x24->setLightingEnabled(true);
+	}
+}
+
 // FUNCTION: ROBLOX 0x0066b450
 Ogre::MeshPtr AdornRbxGfx::FUN_0066b450(std::string name)
 {
@@ -432,10 +450,39 @@ void AdornRbxGfx::cylinderAlongX(float radius, float length, const G3D::Color4& 
 	STUB(0x66ca20);
 }
 
-// STUB: ROBLOX 0x0066cf50
+// FUNCTION: ROBLOX 0x0066cf50
 void AdornRbxGfx::sphere(const G3D::Sphere& sphere, const G3D::Color4& solid, const G3D::Color4& wire)
 {
-	STUB(0x66cf50);
+	Ogre::Unknown0067eb00 quadric;
+	FUN_0066aae0(G3D::Color4(0.8f * solid.r, 0.8f * solid.g, 0.8f * solid.b, 0.8f * solid.a), 0);
+
+	std::string key("sph0001");
+	Ogre::MeshPtr mesh = FUN_0066b450(key);
+	if (mesh.isNull()) {
+		Ogre::ManualObject* manual =
+			quadric.FUN_00682ad0(m_unk0x04->getSceneManager(), "sph" + FUN_0066a3c0(), NULL, 1.0f, 17, 17);
+		for (int i = 0; i < (int) manual->getNumSections(); i++) {
+			manual->setMaterialName(i, m_unk0x24->getName());
+		}
+		mesh = manual->convertToMesh(
+			m_unk0x04->m_unk0x04->getName() + "smsh" + Ogre::StringConverter::toString(m_unk0x64.size()),
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+		);
+		m_unk0x64[key] = mesh;
+		Ogre::Sphere bounds(mesh->getBounds().getCenter(), mesh->getBoundingSphereRadius());
+		for (int i = 0; i < mesh->getNumSubMeshes(); i++) {
+			m_unk0x34->FUN_0067b2b0(mesh->getSubMesh(i), bounds);
+		}
+	}
+
+	Ogre::Matrix4 transform;
+	FUN_0066a2d0(
+		transform,
+		Ogre::Vector3(sphere.center.x, sphere.center.y, sphere.center.z),
+		Ogre::Vector3(sphere.radius, sphere.radius, sphere.radius),
+		Ogre::Quaternion()
+	);
+	FUN_0066c220(mesh, transform, m_unk0x24);
 }
 
 // STUB: ROBLOX 0x0066d350

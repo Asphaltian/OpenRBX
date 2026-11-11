@@ -48,6 +48,7 @@ private:
 		const Ogre::Quaternion& rotation
 	);
 	std::string FUN_0066a3c0();
+	void FUN_0066aae0(const G3D::Color4& color, int p_unk0x08);
 	Ogre::MeshPtr FUN_0066b450(std::string name);
 	void FUN_0066bf20(const std::string& name, const Ogre::MeshPtr& mesh);
 	Ogre::RbxSubEntity* FUN_0066c0b0();
