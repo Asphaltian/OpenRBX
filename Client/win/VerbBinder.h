@@ -17,6 +17,8 @@
 // ??1?$VerbBinder@VCRobloxDoc@@VCDocument@@@@UAE@XZ
 // SYNTHETIC: ROBLOX 0x00456b30
 // VerbBinder<CRobloxDoc,CDocument>::`scalar deleting destructor'
+// TEMPLATE: ROBLOX 0x00456c00
+// ?bind@?$VerbBinder@VCRobloxDoc@@VCDocument@@@@QAEXHPAVVerb@RBX@@@Z
 // TEMPLATE: ROBLOX 0x0045dfc0
 // ??0?$VerbBinder@VCRobloxView@@VCView@@@@QAE@XZ
 // TEMPLATE: ROBLOX 0x0045e040
@@ -65,6 +67,18 @@ public:
 	}
 
 	void bind(UINT id, const RBX::Name& name) { m_unk0x58[id] = &name; }
+
+	void bind(int id, RBX::Verb* verb)
+	{
+		if (verb) {
+			const RBX::Name* name = &verb->getName();
+			m_unk0x58[id] = name;
+		}
+		else {
+			const RBX::Name* name = &RBX::Name::getNullName();
+			m_unk0x58[id] = name;
+		}
+	}
 
 	std::map<UINT, const RBX::Name*> m_unk0x58; // 0x58
 };

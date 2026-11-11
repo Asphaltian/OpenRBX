@@ -410,60 +410,54 @@ void CRobloxView::FUN_0045e900()
 	}
 }
 
-// STUB: ROBLOX 0x0045eab0
+// FUNCTION: ROBLOX 0x0045eab0
 void CRobloxView::OnInitialUpdate()
 {
-	FUN_0045e900();
-	m_unk0x88.FUN_00463c30(NULL);
-	m_unk0x140.reset();
-	CView::OnInitialUpdate();
+	try {
+		FUN_0045e900();
+		m_unk0x88.FUN_00463c30(NULL);
+		m_unk0x140.reset();
+		CView::OnInitialUpdate();
 
-	CRobloxDoc* document = static_cast<CRobloxDoc*>(GetDocument());
-	m_unk0x88.FUN_00463c30(document->m_unk0x78);
-	m_unk0x140 = document->m_unk0x78->FUN_0046edc0();
+		m_unk0x88.FUN_00463c30(static_cast<CRobloxDoc*>(GetDocument())->m_unk0x78);
+		m_unk0x140 = static_cast<CRobloxDoc*>(GetDocument())->m_unk0x78->FUN_0046edc0();
 
-	RBX::DataModel::Lock lock(m_unk0x140);
-	if (m_unk0x1a8) {
-		m_unk0x1a8->m_unk0xf8 = static_cast<CRobloxDoc*>(GetDocument())->m_unk0x78;
+		RBX::DataModel::Lock lock(m_unk0x140);
+		if (m_unk0x1a8) {
+			m_unk0x1a8->m_unk0xf8 = static_cast<CRobloxDoc*>(GetDocument())->m_unk0x78;
+		}
+		RBX::startListening(m_unk0x140, static_cast<RBX::Listener<RBX::ServiceProvider, RBX::ServiceAdded>*>(this));
+		RBX::startListening(m_unk0x140, static_cast<RBX::Listener<RBX::ServiceProvider, RBX::ServiceRemoving>*>(this));
+		setVerbParent(m_unk0x140->getWorkspace());
+
+		m_unk0x1b0.reset(new InsertModelFromRobloxVerb(this, m_unk0x140.get()));
+		m_unk0x1ac.reset(new HelpCommand(m_unk0x140.get(), this));
+		m_unk0x1b4.reset(new ToggleFullscreenVerb(m_unk0x140.get()));
+		m_unk0x1b8.reset(new ToggleIDEModeVerb(m_unk0x140.get()));
+		m_unk0x1bc.reset(new LockPlayModeVerb(m_unk0x140.get()));
+
+		bind(0x8027, m_unk0x140->getWorkspace()->getVerb("CameraPanLeft"));
+		bind(0x8028, m_unk0x140->getWorkspace()->getVerb("CameraPanRight"));
+		bind(0x8029, m_unk0x140->getWorkspace()->getVerb("CameraTiltUp"));
+		bind(0x802a, m_unk0x140->getWorkspace()->getVerb("CameraTiltDown"));
+		bind(0x802b, m_unk0x140->getWorkspace()->getVerb("CameraZoomIn"));
+		bind(0x802c, m_unk0x140->getWorkspace()->getVerb("CameraZoomOut"));
+		bind(0x80a6, m_unk0x140->getWorkspace()->getVerb("CameraCenter"));
+		bind(0x802d, m_unk0x140->getWorkspace()->getVerb("CameraZoomExtents"));
+		bind(0x80d7, m_unk0x140->getWorkspace()->getVerb("CameraModelView"));
+		bind(0x802f, RBX::Name::lookup("FixedCamera"));
+		bind(0x8030, RBX::Name::lookup("AttachCamera"));
+		bind(0x80a3, RBX::Name::lookup("TrackCamera"));
+		bind(0x8032, RBX::Name::lookup("FollowCamera"));
+		bind(0x80a2, RBX::Name::lookup("WatchCamera"));
+		bind(0x8043, RBX::Name::lookup("SelectionRotate"));
+		bind(0x8044, RBX::Name::lookup("SelectionTilt"));
+
+		m_unk0x88.FUN_0045faf0();
 	}
-	RBX::startListening(m_unk0x140, static_cast<RBX::Listener<RBX::ServiceProvider, RBX::ServiceAdded>*>(this));
-	RBX::startListening(m_unk0x140, static_cast<RBX::Listener<RBX::ServiceProvider, RBX::ServiceRemoving>*>(this));
-	setVerbParent(m_unk0x140->getWorkspace());
-
-	m_unk0x1b0.reset(new InsertModelFromRobloxVerb(this, m_unk0x140.get()));
-	m_unk0x1ac.reset(new HelpCommand(m_unk0x140.get(), this));
-	m_unk0x1b4.reset(new ToggleFullscreenVerb(m_unk0x140.get()));
-	m_unk0x1b8.reset(new ToggleIDEModeVerb(m_unk0x140.get()));
-	m_unk0x1bc.reset(new LockPlayModeVerb(m_unk0x140.get()));
-
-	RBX::Verb* verb;
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraPanLeft");
-	m_unk0x58[0x8027] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraPanRight");
-	m_unk0x58[0x8028] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraTiltUp");
-	m_unk0x58[0x8029] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraTiltDown");
-	m_unk0x58[0x802a] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraZoomIn");
-	m_unk0x58[0x802b] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraZoomOut");
-	m_unk0x58[0x802c] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraCenter");
-	m_unk0x58[0x80a6] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraZoomExtents");
-	m_unk0x58[0x802d] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	verb = m_unk0x140->getWorkspace()->getVerb("CameraModelView");
-	m_unk0x58[0x80d7] = verb ? &verb->getName() : &RBX::Name::getNullName();
-	m_unk0x58[0x802f] = &RBX::Name::lookup("FixedCamera");
-	m_unk0x58[0x8030] = &RBX::Name::lookup("AttachCamera");
-	m_unk0x58[0x80a3] = &RBX::Name::lookup("TrackCamera");
-	m_unk0x58[0x8032] = &RBX::Name::lookup("FollowCamera");
-	m_unk0x58[0x80a2] = &RBX::Name::lookup("WatchCamera");
-	m_unk0x58[0x8043] = &RBX::Name::lookup("SelectionRotate");
-	m_unk0x58[0x8044] = &RBX::Name::lookup("SelectionTilt");
-
-	m_unk0x88.FUN_0045faf0();
+	catch (std::exception& e) {
+		FUN_0044ebb0(e);
+	}
 }
 
 BOOL CRobloxView::OnEraseBkgnd(CDC* pDC)

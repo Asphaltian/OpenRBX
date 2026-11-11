@@ -823,9 +823,8 @@ LRESULT CMainFrame::FUN_004357f0(WPARAM wParam, LPARAM lParam)
 					}
 
 					m_unk0x398.reset(new CSelectionCaption);
-					CRect captionRect(0, 0, 0, 0);
 					if (!m_unk0x398->Create(
-							m_unk0x390.get(), "", 2, 0x10000201, captionRect, m_unk0x390->IdFromRowCol(0, 0)
+							m_unk0x390.get(), "", 2, 0x10000201, CRect(0, 0, 0, 0), m_unk0x390->IdFromRowCol(0, 0)
 						)) {
 						return -1;
 					}

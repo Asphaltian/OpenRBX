@@ -3076,6 +3076,10 @@ address,type,symbol,name,module,size
 00809878,global,??_7?$GlobalSettingsItem@VCRenderSettings@@$1?sRenderSettings@@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@UAncestorChanged@2@@1@@,,,
 00809868,global,??_7?$GlobalSettingsItem@VCRenderSettings@@$1?sRenderSettings@@3QBDB@RBX@@6B?$Notifier@VInstance@RBX@@VPropertyChanged@2@@1@@,,,
 00952ef8,global,?sing@?$GlobalSettingsItem@VCRenderSettings@@$1?sRenderSettings@@3QBDB@RBX@@0PAV12@A,,,
+008094f8,global,?g_unk0x008094f8@@3MB,,,
+008094fc,global,?g_unk0x008094fc@@3MB,,,
+00809500,global,?g_unk0x00809500@@3MB,,,
+00809504,global,?g_unk0x00809504@@3MB,,,
 0080950c,global,?sRenderSettings@@3QBDB,,,
 008097d4,global,??_7?$FactoryProduct@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@6B?$GuidItem@VInstance@RBX@@@1@@,,,
 008097c8,global,??_7?$FactoryProduct@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@6B?$AbstractFactoryProduct@VInstance@RBX@@@1@@,,,
@@ -3785,7 +3789,7 @@ address,type,symbol,name,module,size
 00401e60,function,,,,64
 00401ec0,function,,,,280
 00431c00,function,,,,748
-004357f0,function,,,,820
+004357f0,function,,,,875
 0043a550,function,,,,656
 0043b490,function,,,,644
 0045fb30,function,,,,244
@@ -6794,6 +6798,7 @@ address,type,symbol,name,module,size
 007a2e70,library,,,,
 007a9e20,library,,,,
 0046cd90,function,,,,782
+0045eab0,function,,,,1985
 0080ac40,global,??_7ReportAbuseVerb@@6B@,,,
 0080ac64,global,??_7ExitCommand@@6B@,,,
 0080b514,global,??_7FixedCameraCommand@RBX@@6B@,,,

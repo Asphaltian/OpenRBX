@@ -76,7 +76,6 @@ public:
 	virtual ~CRobloxDoc();
 
 	RBX::VerbContainer* FUN_004558a0();
-	void FUN_00456c00(int id, RBX::Verb* verb);
 	void FUN_00456c50(int id, RBX::Verb* verb);
 	void FUN_00456d30();
 

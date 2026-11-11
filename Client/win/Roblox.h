@@ -20,6 +20,7 @@ inline CString FUN_00407190()
 	return g_unk0x00954290;
 }
 
+void FUN_0044ebb0(const std::exception& e);
 void FUN_00450800(CString p_unk0x04);
 
 // SIZE 0x38

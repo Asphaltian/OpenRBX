@@ -370,19 +370,6 @@ void CRobloxDoc::FUN_00455ff0(CCmdUI* pCmdUI)
 	}
 }
 
-// FUNCTION: ROBLOX 0x00456c00
-void CRobloxDoc::FUN_00456c00(int id, RBX::Verb* verb)
-{
-	if (verb) {
-		const RBX::Name* name = &verb->getName();
-		m_unk0x58[id] = name;
-	}
-	else {
-		const RBX::Name* name = &RBX::Name::getNullName();
-		m_unk0x58[id] = name;
-	}
-}
-
 // FUNCTION: ROBLOX 0x00456c50
 void CRobloxDoc::FUN_00456c50(int id, RBX::Verb* verb)
 {
@@ -390,7 +377,7 @@ void CRobloxDoc::FUN_00456c50(int id, RBX::Verb* verb)
 		m_unk0x64.push_back(verb);
 	}
 
-	FUN_00456c00(id, verb);
+	bind(id, verb);
 }
 
 // FUNCTION: ROBLOX 0x00456cb0
@@ -430,14 +417,14 @@ void CRobloxDoc::FUN_00456d30()
 	m_unk0x64.push_back(new RBX::CameraZoomExtentsCommand(m_unk0x78->FUN_0046edf0()));
 	m_unk0x64.push_back(new RBX::CameraModelViewCommand(m_unk0x78->FUN_0046edf0()));
 
-	FUN_00456c00(0xe120, &m_unk0x74->m_unk0x28);
-	FUN_00456c00(0xe12a, &m_unk0x74->m_unk0x50);
-	FUN_00456c00(0x8005, &m_unk0x74->m_unk0xfc);
-	FUN_00456c00(0x8011, &m_unk0x74->m_unk0x26c);
-	FUN_00456c00(0x8010, &m_unk0x74->m_unk0x248);
-	FUN_00456c00(0x80d8, &m_unk0x74->m_unk0x43c);
-	FUN_00456c00(0x80d4, &m_unk0x74->m_unk0x420);
-	FUN_00456c00(0x80d5, &m_unk0x74->m_unk0x42c);
+	bind(0xe120, &m_unk0x74->m_unk0x28);
+	bind(0xe12a, &m_unk0x74->m_unk0x50);
+	bind(0x8005, &m_unk0x74->m_unk0xfc);
+	bind(0x8011, &m_unk0x74->m_unk0x26c);
+	bind(0x8010, &m_unk0x74->m_unk0x248);
+	bind(0x80d8, &m_unk0x74->m_unk0x43c);
+	bind(0x80d4, &m_unk0x74->m_unk0x420);
+	bind(0x80d5, &m_unk0x74->m_unk0x42c);
 	bind(0x8039, RBX::Name::lookup("Group"));
 	bind(0x803a, RBX::Name::lookup("UnGroup"));
 	bind(0x8061, RBX::Name::lookup("WeldSelection"));
@@ -447,8 +434,8 @@ void CRobloxDoc::FUN_00456d30()
 	bind(0x8057, RBX::Name::lookup("SelectionUpBrick"));
 	bind(0x8059, RBX::Name::lookup("SelectionUpPlate"));
 	bind(0x8058, RBX::Name::lookup("SelectionDown"));
-	FUN_00456c00(0x80aa, &m_unk0x74->m_unk0x59c);
-	FUN_00456c00(0x80ab, &m_unk0x74->m_unk0x5b8);
+	bind(0x80aa, &m_unk0x74->m_unk0x59c);
+	bind(0x80ab, &m_unk0x74->m_unk0x5b8);
 	FUN_00456c50(0xe123, new CutVerb(dataModel.get()));
 	FUN_00456c50(0xe122, new CopyVerb(dataModel.get()));
 	FUN_00456c50(0xe125, new PasteVerb(dataModel.get(), false));
@@ -456,22 +443,22 @@ void CRobloxDoc::FUN_00456d30()
 	FUN_00456c50(0x8062, new InsertDecal(dataModel.get(), "InsertDecal"));
 	FUN_00456c50(0x80ee, new InsertTexture(dataModel.get()));
 	FUN_00456c50(0x807f, new InsertObject(dataModel.get()));
-	FUN_00456c00(0x800d, &m_unk0x74->m_unk0x38c);
-	FUN_00456c00(0x800e, &m_unk0x74->m_unk0x39c);
+	bind(0x800d, &m_unk0x74->m_unk0x38c);
+	bind(0x800e, &m_unk0x74->m_unk0x39c);
 	bind(0x8040, RBX::Name::lookup("FillTool"));
 	bind(0x8041, RBX::Name::lookup("DropperTool"));
-	FUN_00456c00(0x8063, &m_unk0x74->m_unk0x44c);
-	FUN_00456c00(0x8065, &m_unk0x74->m_unk0x468);
-	FUN_00456c00(0x8067, &m_unk0x74->m_unk0x484);
-	FUN_00456c00(0x8073, &m_unk0x74->m_unk0x5f0);
-	FUN_00456c00(0x8074, &m_unk0x74->m_unk0x5d4);
-	FUN_00456c00(0x8077, &m_unk0x74->m_unk0x4bc);
-	FUN_00456c00(0x8078, &m_unk0x74->m_unk0x4a0);
-	FUN_00456c00(0x8079, &m_unk0x74->m_unk0x4d8);
-	FUN_00456c00(0x80a7, &m_unk0x74->m_unk0x4f4);
-	FUN_00456c00(0x80a8, &m_unk0x74->m_unk0x510);
-	FUN_00456c00(0x807b, &m_unk0x74->m_unk0x548);
-	FUN_00456c00(0x807c, &m_unk0x74->m_unk0x52c);
+	bind(0x8063, &m_unk0x74->m_unk0x44c);
+	bind(0x8065, &m_unk0x74->m_unk0x468);
+	bind(0x8067, &m_unk0x74->m_unk0x484);
+	bind(0x8073, &m_unk0x74->m_unk0x5f0);
+	bind(0x8074, &m_unk0x74->m_unk0x5d4);
+	bind(0x8077, &m_unk0x74->m_unk0x4bc);
+	bind(0x8078, &m_unk0x74->m_unk0x4a0);
+	bind(0x8079, &m_unk0x74->m_unk0x4d8);
+	bind(0x80a7, &m_unk0x74->m_unk0x4f4);
+	bind(0x80a8, &m_unk0x74->m_unk0x510);
+	bind(0x807b, &m_unk0x74->m_unk0x548);
+	bind(0x807c, &m_unk0x74->m_unk0x52c);
 }
 
 // FUNCTION: ROBLOX 0x00457910

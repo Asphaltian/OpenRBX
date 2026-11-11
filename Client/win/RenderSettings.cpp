@@ -5,6 +5,11 @@
 
 #include <GLG3D/DXCaps.h>
 
+const float g_unk0x008094f8 = 20.0f;
+const float g_unk0x008094fc = 20.0f;
+const float g_unk0x00809500 = 50.0f;
+const float g_unk0x00809504 = 50.0f;
+
 const char sRenderSettings[] = "RenderSettings";
 
 CRenderSettings::AASamples g_unk0x0091a2e8 = CRenderSettings::c_aaSamplesUnk0x1;
@@ -177,12 +182,12 @@ RBX::Reflection::EnumDesc<CRenderSettings::ShadowMode>::EnumDesc()
 	addPair(CRenderSettings::c_shadowModeUnk0x2, "Off");
 }
 
-// STUB: ROBLOX 0x0044cb20
+// FUNCTION: ROBLOX 0x0044cb20
 CRenderSettings::CRenderSettings()
 	: m_unk0xf8(c_graphicsModeUnk0x1), m_unk0xfc(c_bevelModeUnk0x0), m_unk0x100(c_antialiasingModeUnk0x2),
-	  m_unk0x104(c_shadowModeUnk0x0), m_unk0x108(c_frameRateManagerModeUnk0x0), m_unk0x10c(20.0f), m_unk0x110(20.0f),
-	  m_unk0x114(50.0f), m_unk0x118(50.0f), m_unk0x11c(1), m_unk0x13c(defaultFullscreenSize()),
-	  m_unk0x140(g_unk0x0091a2ec)
+	  m_unk0x104(c_shadowModeUnk0x0), m_unk0x108(c_frameRateManagerModeUnk0x0), m_unk0x10c(g_unk0x008094f8),
+	  m_unk0x110(g_unk0x008094fc), m_unk0x114(g_unk0x00809500), m_unk0x118(g_unk0x00809504), m_unk0x11c(1),
+	  m_unk0x13c(defaultFullscreenSize()), m_unk0x140(g_unk0x0091a2ec)
 {
 	setName("Rendering");
 	RBX::Render::AggregatingSceneManager::aggregationSize = 1;

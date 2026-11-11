@@ -9,6 +9,10 @@
 
 extern const char sRenderSettings[];
 
+extern const float g_unk0x008094f8;
+extern const float g_unk0x008094fc;
+extern const float g_unk0x00809500;
+extern const float g_unk0x00809504;
 extern G3D::Vector2int16 g_unk0x0091a2ec;
 
 class CRenderSettings;
