@@ -151,6 +151,9 @@ protected:
 	afx_msg void FUN_00454920();
 	afx_msg void FUN_004549c0();
 	afx_msg void FUN_00454a60();
+	afx_msg void FUN_00454e50();
+	afx_msg void FUN_00454f50();
+	afx_msg void FUN_004550b0();
 	afx_msg void FUN_00455900();
 	afx_msg void FUN_00455a30(CCmdUI* pCmdUI);
 	afx_msg void FUN_00455bb0();
@@ -171,6 +174,8 @@ protected:
 	afx_msg void FUN_0045a600();
 	afx_msg void FUN_0045a730();
 	afx_msg void FUN_0045a9e0();
+
+	static CString FUN_00454b50(CRobloxDoc* doc, const char* name);
 
 	DECLARE_MESSAGE_MAP()
 

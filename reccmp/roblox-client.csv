@@ -6695,3 +6695,7 @@ address,type,symbol,name,module,size
 009180ec,global,??_R0?AVMember@Metadata@Reflection@RBX@@@8,,,
 00958541,global,,g_unk0x00958541,,
 0092a90c,global,,flatTex,,
+00453ee0,library,??HATL@@YA?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@0@PBDABV10@@Z,,,
+00454e50,function,,,,243
+00454f50,function,,,,351
+004550b0,function,,,,455

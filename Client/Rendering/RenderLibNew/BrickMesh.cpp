@@ -140,14 +140,14 @@ void meshFace(
 		perturbationMin.y = G3D::uniformRandom(-BrickMesh::normalPerturbation, BrickMesh::normalPerturbation);
 		perturbationMax.x = G3D::uniformRandom() > 0.5f ? perturbationMin.x : -perturbationMin.x;
 		perturbationMax.y = G3D::uniformRandom() > 0.5f ? perturbationMin.y : -perturbationMin.y;
+
+		lastPerturbationMin = perturbationMin;
+		lastPerturbationMax = perturbationMax;
 	}
 	else {
 		perturbationMin = lastPerturbationMin;
 		perturbationMax = lastPerturbationMax;
 	}
-
-	lastPerturbationMax = perturbationMax;
-	lastPerturbationMin = perturbationMin;
 
 	if (surfaceType == FLAT) {
 		G3D::Vector3 nxy(perturbationMin.x, perturbationMin.y, 1.0f);

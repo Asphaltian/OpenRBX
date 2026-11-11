@@ -10,6 +10,7 @@
 #include "script/LuaMemory.h"
 #include "script/ScriptContext.h"
 #include "util/ContentProvider.h"
+#include "util/FileSystem.h"
 #include "util/Log.h"
 #include "util/RunStateOwner.h"
 #include "util/StandardOut.h"
@@ -202,6 +203,85 @@ void CRobloxDoc::FUN_00454a60()
 	CRobloxDHtmlDialog dialog(123, FUN_00407190() + "/AbuseReport/InGameChat.aspx", NULL);
 	dialog.SetExternalDispatch(m_unk0x78);
 	dialog.DoModal();
+}
+
+// STUB: ROBLOX 0x00454b50
+CString CRobloxDoc::FUN_00454b50(CRobloxDoc* doc, const char* name)
+{
+	CString path;
+	GetShortPathName(
+		RBX::FileSystem::getUserAppDataDirectory(true, "Test").c_str(), path.GetBuffer(MAX_PATH), MAX_PATH
+	);
+	path.ReleaseBuffer();
+	path += name;
+	path += ".rbxl";
+
+	if (doc->m_unk0x78->SaveToFile(CComBSTR(path)) != S_OK) {
+		throw std::runtime_error("Failed to copy document");
+	}
+
+	return path;
+}
+
+// FUNCTION: ROBLOX 0x00454cb0
+static void FUN_00454cb0(const char* file, const char* arguments)
+{
+	CString folder;
+	if (SHGetFolderPath(NULL, CSIDL_COMMON_DOCUMENTS, NULL, SHGFP_TYPE_CURRENT, folder.GetBuffer(MAX_PATH))) {
+		throw std::runtime_error("Unable to get common document folder");
+	}
+	folder.ReleaseBuffer();
+
+	CString module;
+	AfxGetModuleShortFileName(AfxGetApp()->m_hInstance, module);
+
+	CString parameters;
+	if (file) {
+		parameters += file;
+	}
+	if (arguments) {
+		parameters += arguments;
+	}
+
+	if ((UINT_PTR) ShellExecute(AfxGetMainWnd()->m_hWnd, "open", module, parameters, folder, SW_SHOW) <= 32) {
+		throw std::runtime_error("ShellExecute failed");
+	}
+}
+
+// FUNCTION: ROBLOX 0x00454e50
+void CRobloxDoc::FUN_00454e50()
+{
+	try {
+		FUN_00454cb0(FUN_00454b50(this, "Visit"), " -script " + FUN_00407190() + "/game/visit.ashx");
+	}
+	catch (std::exception& e) {
+		AfxMessageBox(e.what());
+	}
+}
+
+// FUNCTION: ROBLOX 0x00454f50
+void CRobloxDoc::FUN_00454f50()
+{
+	try {
+		FUN_00454cb0(FUN_00454b50(this, "Server"), " -script " + FUN_00407190() + "/game/gameserver.ashx");
+		FUN_00454cb0(NULL, " -script " + FUN_00407190() + "/game/join.ashx");
+	}
+	catch (std::exception& e) {
+		AfxMessageBox(e.what());
+	}
+}
+
+// FUNCTION: ROBLOX 0x004550b0
+void CRobloxDoc::FUN_004550b0()
+{
+	try {
+		FUN_00454cb0(FUN_00454b50(this, "Server"), " -script " + FUN_00407190() + "/game/gameserver.ashx");
+		FUN_00454cb0(NULL, " -script " + FUN_00407190() + "/game/join.ashx");
+		FUN_00454cb0(NULL, " -script " + FUN_00407190() + "/game/join.ashx?UserID=0&port=4344");
+	}
+	catch (std::exception& e) {
+		AfxMessageBox(e.what());
+	}
 }
 
 // FUNCTION: ROBLOX 0x004558a0
@@ -805,6 +885,12 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(0x80f8, FUN_00453eb0)
 	ON_COMMAND(0x8100, FUN_00454a60)
 	ON_UPDATE_COMMAND_UI(0x8100, FUN_0045a0b0)
+	ON_COMMAND(0x8104, FUN_00454e50)
+	ON_UPDATE_COMMAND_UI(0x8104, FUN_00453eb0)
+	ON_UPDATE_COMMAND_UI(0x8105, FUN_00453eb0)
+	ON_COMMAND(0x8105, FUN_00454f50)
+	ON_COMMAND(0x8106, FUN_004550b0)
+	ON_UPDATE_COMMAND_UI(0x8106, FUN_00453eb0)
 	ON_COMMAND(0x8021, FUN_004561a0)
 	ON_COMMAND(0x8025, FUN_00454430)
 	ON_UPDATE_COMMAND_UI(0x8025, FUN_00458750)
