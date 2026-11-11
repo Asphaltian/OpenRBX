@@ -424,15 +424,18 @@ void CRobloxDoc::FUN_004561a0()
 	}
 }
 
-// STUB: ROBLOX 0x004564b0
+// FUNCTION: ROBLOX 0x004564b0
 void CRobloxDoc::DeleteContents()
 {
 	{
 		RBX::DataModel::Lock lock(FUN_00403290());
-		for (std::vector<RBX::Verb*>::iterator it = m_unk0x64.begin(), end = m_unk0x64.end(); it != end; ++it) {
+		std::vector<RBX::Verb*>::iterator it = m_unk0x64.begin();
+		std::vector<RBX::Verb*>::iterator end = m_unk0x64.end();
+		while (it != end) {
 			delete *it;
+			++it;
 		}
-		m_unk0x64.erase(m_unk0x64.begin(), m_unk0x64.end());
+		m_unk0x64.clear();
 		m_unk0x74.reset();
 	}
 

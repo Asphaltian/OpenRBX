@@ -20,10 +20,9 @@
 #include <sstream>
 
 #define CHECK_HRESULT(expr)                                                                                            \
-	if (expr) {                                                                                                        \
-		LogManager::ReportEvent(EVENTLOG_ERROR_TYPE, expr, __FILE__, __LINE__);                                        \
-		FUN_0046f230(expr, CLSID_Workspace);                                                                           \
-	}
+	(void) ((expr) && (LogManager::ReportEvent(EVENTLOG_ERROR_TYPE, expr, __FILE__, __LINE__),                         \
+					   FUN_0046f230(expr, CLSID_Workspace),                                                            \
+					   1))
 
 // FUNCTION: ROBLOX 0x0046edc0
 boost::shared_ptr<RBX::DataModel> CWorkspace::FUN_0046edc0() const
@@ -201,9 +200,9 @@ std::auto_ptr<XmlElement> CWorkspace::FUN_0046ffa0()
 }
 
 // STUB: ROBLOX 0x004700b0
-HRESULT CWorkspace::FUN_004700b0(const XmlElement* root, std::ostream& stream)
+HRESULT CWorkspace::FUN_004700b0(const XmlElement* root, std::ostream* stream)
 {
-	TextXmlWriterWithEmbeddedContent writer(stream);
+	TextXmlWriterWithEmbeddedContent writer(*stream);
 	writer.serialize(root);
 	return S_OK;
 }
@@ -216,7 +215,7 @@ STDMETHODIMP CWorkspace::SaveSelectionToFile(BSTR pathName)
 	stream.open(CString(pathName), std::ios_base::out);
 
 	RBX::DataModel::Lock lock(m_unk0x24);
-	FUN_004700b0(FUN_0046ffa0().get(), stream);
+	FUN_004700b0(FUN_0046ffa0().get(), &stream);
 	return S_OK;
 }
 
@@ -264,9 +263,9 @@ STDMETHODIMP CWorkspace::Write(IContent** result)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 	try {
-		CComObject<CContent>* content = NULL;
+		CComObject<CContent>* content;
 		CHECK_HRESULT(CComObject<CContent>::CreateInstance(&content));
-		CHECK_HRESULT(FUN_004700b0(FUN_0046f040().get(), content->m_unk0x0c));
+		CHECK_HRESULT(FUN_004700b0(FUN_0046f040().get(), &content->m_unk0x0c));
 
 		CComPtr<IContent> pointer(content);
 		CHECK_HRESULT(pointer.CopyTo(result));
@@ -287,9 +286,9 @@ STDMETHODIMP CWorkspace::WriteSelection(IContent** result)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 	try {
-		CComObject<CContent>* content = NULL;
+		CComObject<CContent>* content;
 		CHECK_HRESULT(CComObject<CContent>::CreateInstance(&content));
-		CHECK_HRESULT(FUN_004700b0(FUN_0046ffa0().get(), content->m_unk0x0c));
+		CHECK_HRESULT(FUN_004700b0(FUN_0046ffa0().get(), &content->m_unk0x0c));
 
 		CComPtr<IContent> pointer(content);
 		CHECK_HRESULT(pointer.CopyTo(result));
@@ -328,7 +327,7 @@ STDMETHODIMP CWorkspace::SaveToFile(BSTR pathName)
 		stream.open(CString(pathName), std::ios_base::out | std::ios_base::binary);
 
 		RBX::DataModel::Lock lock(m_unk0x24);
-		return FUN_004700b0(FUN_0046f040().get(), stream);
+		return FUN_004700b0(FUN_0046f040().get(), &stream);
 	}
 	catch (const std::exception& e) {
 		return LogManager::ReportCOMError(CLSID_Workspace, e.what(), S_OK);

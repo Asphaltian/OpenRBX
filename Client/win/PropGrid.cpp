@@ -378,14 +378,16 @@ void CPropGrid::FUN_0043e6b0(T* item)
 	CXTPPropertyGridItem* category = FUN_0043cba0(item->m_unk0x124->category);
 
 	int i = 0;
-	for (; i < category->GetChilds()->GetCount(); i++) {
-		if (item->GetCaption().Compare(category->GetChilds()->GetAt(i)->GetCaption()) < 0) {
+	while (i < category->GetChilds()->GetCount()) {
+		CXTPPropertyGridItem* child = category->GetChilds()->GetAt(i);
+		if (item->GetCaption().Compare(child->GetCaption()) < 0) {
 			break;
 		}
+		i++;
 	}
 
 	category->InsertChildItem(i, item);
-	m_unk0x1a8[item->m_unk0x124] = item;
+	m_unk0x1a8[item->getDescriptor()] = item;
 	m_unk0x198.push_back(item);
 }
 
@@ -858,7 +860,7 @@ TextureItem::TextureItem(const RBX::Reflection::TypedPropertyDescriptor<RBX::Tex
 	CXTPPropertyGridItem::SetValue("(Texture)");
 }
 
-// STUB: ROBLOX 0x00442e20
+// FUNCTION: ROBLOX 0x00442e20
 void CPropGrid::FUN_00442e20(
 	const RBX::Reflection::ClassDescriptor* classDescriptor, const RBX::Reflection::PropertyDescriptor* descriptor
 )
@@ -920,7 +922,7 @@ void CPropGrid::FUN_00442e20(
 		FUN_0043e6b0(new RefItem(*d, this));
 	}
 	else if (descriptor == &RBX::Script::prop_EmbeddedSourceCode) {
-		FUN_0043e6b0(new ScriptItem(RBX::Script::prop_EmbeddedSourceCode, this));
+		FUN_0043e6b0(new ScriptItem(*descriptor, this));
 	}
 	else if (
 		const RBX::Reflection::TypedPropertyDescriptor<RBX::TextureId>* d =

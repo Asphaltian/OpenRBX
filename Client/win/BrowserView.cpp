@@ -317,7 +317,7 @@ HRESULT CBrowserView::OnGetExternal(LPDISPATCH* lppDispatch)
 	return m_unk0x2b0.CopyTo(lppDispatch);
 }
 
-// STUB: ROBLOX 0x0040cc00
+// FUNCTION: ROBLOX 0x0040cc00
 void CBrowserView::OnBeforeNavigate2(
 	LPCTSTR lpszURL,
 	DWORD nFlags,
@@ -334,7 +334,7 @@ void CBrowserView::OnBeforeNavigate2(
 
 	CString url(lpszURL);
 	if (strlen(lpszTargetFrameName) != 0) {
-		m_unk0xf8.push_back(std::string(lpszURL));
+		m_unk0xf8.push_back(lpszURL);
 		if (m_unk0xf8.size() > 10) {
 			m_unk0xf8.pop_front();
 		}
