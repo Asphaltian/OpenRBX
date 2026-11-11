@@ -6734,3 +6734,5 @@ address,type,symbol,name,module,size
 0043ad10,library,?push_back@?$deque@V?$CComPtr@UIHTMLDOMNode@@@ATL@@V?$allocator@V?$CComPtr@UIHTMLDOMNode@@@ATL@@@std@@@std@@QAEXABV?$CComPtr@UIHTMLDOMNode@@@ATL@@@Z,,,
 0043a9c0,library,?pop_front@?$deque@V?$CComPtr@UIHTMLDOMNode@@@ATL@@V?$allocator@V?$CComPtr@UIHTMLDOMNode@@@ATL@@@std@@@std@@QAEXXZ,,,
 00806b08,global,__GUID_3050f5da_98b5_11cf_bb82_00aa00bdce0b,,,
+0091b48c,global,,g_unk0x0091b48c,,
+0044d450,function,,,,80

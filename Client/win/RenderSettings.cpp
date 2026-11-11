@@ -69,6 +69,8 @@ static RBX::Reflection::BoundProp<std::string, 1> g_unk0x00953c84(
 	"profileName", "Qaulity", &CRenderSettings::m_unk0x120, RBX::Reflection::PropertyDescriptor::STREAMING
 );
 
+static const char* g_unk0x0091b48c = "profiled5";
+
 static G3D::Vector2int16 defaultFullscreenSize()
 {
 	if (static_cast<unsigned int>(G3D::DXCaps::videoMemorySize()) >= 16000000) {
@@ -322,10 +324,18 @@ void CRenderSettings::FUN_0044d170(ShadowMode p_unk0x04)
 	}
 }
 
-// STUB: ROBLOX 0x0044d1b0
+// FUNCTION: ROBLOX 0x0044d1b0
 void CRenderSettings::FUN_0044d1b0(bool p_unk0x04)
 {
-	STUB(0x44d1b0);
+	if (p_unk0x04 || m_unk0x120 != g_unk0x0091b48c) {
+		FUN_0044cfe0(100.0f);
+		FUN_0044cf70(100.0f);
+		FUN_0044cfe0(100.0f);
+		FUN_0044ced0(100.0f);
+		FUN_0044ce30(100.0f);
+		FUN_0044ced0(100.0f);
+		g_unk0x00953c84.setValue(this, g_unk0x0091b48c);
+	}
 }
 
 template class RBX::FactoryProduct<CRenderSettings, RBX::GlobalSettings::Item, sRenderSettings>;

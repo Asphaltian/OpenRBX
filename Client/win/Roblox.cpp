@@ -138,10 +138,15 @@ BEGIN_MESSAGE_MAP(CRobloxApp, CWinApp)
 END_MESSAGE_MAP()
 // clang-format on
 
-// STUB: ROBLOX 0x0044d450
+// FUNCTION: ROBLOX 0x0044d450
 void CRobloxApp::FUN_0044d450(WPARAM p_unk0x04, LPARAM p_unk0x08)
 {
-	STUB(0x44d450);
+	if (AfxGetMainWnd()) {
+		AfxGetMainWnd()->FlashWindow(FALSE);
+		AfxMessageBox(196);
+	}
+
+	AfxPostQuitMessage(0);
 }
 
 // FUNCTION: ROBLOX 0x0044d4a0

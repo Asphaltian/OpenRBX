@@ -1,5 +1,8 @@
 #include "ChildFrm.h"
 
+#include "MainFrm.h"
+#include "RenderSettings.h"
+
 IMPLEMENT_DYNCREATE(CChildFrame, CMDIChildWnd)
 
 // clang-format off
@@ -72,9 +75,24 @@ int CChildFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-// STUB: ROBLOX 0x0040fe00
+// FUNCTION: ROBLOX 0x0040fe00
 void CRbxChildFrame::OnGetMinMaxInfo(MINMAXINFO* lpMMI)
 {
-	STUB(0x40fe00);
 	CChildFrame::OnGetMinMaxInfo(lpMMI);
+
+	CMainFrame* frame = static_cast<CMainFrame*>(GetParentFrame());
+	if (frame && frame->m_unk0xe0 && frame->GetCommandBars()->GetCount() == 0) {
+		lpMMI->ptMaxSize.x += 40;
+		lpMMI->ptMaxSize.y += 40;
+		lpMMI->ptMaxTrackSize.x += 40;
+		lpMMI->ptMaxTrackSize.y += 40;
+	}
+
+	if (!IsZoomed()) {
+		G3D::Vector2int16 size = CRenderSettings::singleton().FUN_00448300();
+		CRect rect(0, 0, size.x, size.y);
+		CalcWindowRect(&rect);
+		lpMMI->ptMaxTrackSize.x = rect.Width();
+		lpMMI->ptMaxTrackSize.y = rect.Height();
+	}
 }

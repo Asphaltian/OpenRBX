@@ -401,25 +401,27 @@ void CRobloxDoc::FUN_00455ff0(CCmdUI* pCmdUI)
 	}
 }
 
-// STUB: ROBLOX 0x00456c00
+// FUNCTION: ROBLOX 0x00456c00
 void CRobloxDoc::FUN_00456c00(int id, RBX::Verb* verb)
 {
-	const RBX::Name* name = verb ? &verb->getName() : &RBX::Name::getNullName();
-	m_unk0x58[id] = name;
-}
-
-// STUB: ROBLOX 0x00456c50
-void CRobloxDoc::FUN_00456c50(int id, RBX::Verb* verb)
-{
-	const RBX::Name* name;
 	if (verb) {
-		m_unk0x64.push_back(verb);
-		name = &verb->getName();
+		const RBX::Name* name = &verb->getName();
+		m_unk0x58[id] = name;
 	}
 	else {
-		name = &RBX::Name::getNullName();
+		const RBX::Name* name = &RBX::Name::getNullName();
+		m_unk0x58[id] = name;
 	}
-	m_unk0x58[id] = name;
+}
+
+// FUNCTION: ROBLOX 0x00456c50
+void CRobloxDoc::FUN_00456c50(int id, RBX::Verb* verb)
+{
+	if (verb) {
+		m_unk0x64.push_back(verb);
+	}
+
+	FUN_00456c00(id, verb);
 }
 
 // FUNCTION: ROBLOX 0x00456cb0
