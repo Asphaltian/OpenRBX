@@ -17,6 +17,11 @@ inline const RBX::Reflection::SignatureDescriptor& RBX::Reflection::FunctionDesc
 	return signature;
 }
 
+inline const RBX::Reflection::SignatureDescriptor& RBX::Reflection::SignalDescriptor::getSignature() const
+{
+	return signature;
+}
+
 inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Reflection::ClassDescriptor::
 	derivedClasses_begin() const
 {
@@ -313,6 +318,45 @@ void CMemberTreeView::FUN_00438420(const RBX::Reflection::SignalDescriptor* desc
 	}
 }
 
+// FUNCTION: ROBLOX 0x00438530
+void CDeclarationView::FUN_00438530(
+	RBX::Reflection::Metadata::Item* metadata, const char* declaration, const char* owner
+)
+{
+	if (m_unk0xf4) {
+		m_unk0xf4->put_innerHTML(CComBSTR(declaration ? declaration : ""));
+	}
+
+	if (m_unk0xf8) {
+		CComPtr<IHTMLStyle> style;
+		m_unk0xf8->get_style(&style);
+		style->put_display(owner ? CComBSTR("block") : CComBSTR("none"));
+		m_unk0xfc->put_innerHTML(CComBSTR(owner));
+	}
+
+	if (m_unk0x100) {
+		CString summary(metadata ? metadata->m_unk0xfc.c_str() : "");
+		CComPtr<IHTMLStyle> style;
+		m_unk0x100->get_style(&style);
+		style->put_display(!summary.IsEmpty() ? CComBSTR("block") : CComBSTR("none"));
+		if (!summary.IsEmpty()) {
+			m_unk0x104->put_innerHTML(CComBSTR(summary));
+		}
+	}
+
+	if (m_unk0x108) {
+		CComPtr<IHTMLStyle> style;
+		m_unk0x108->get_style(&style);
+		style->put_display(metadata && metadata->m_unk0xf9 ? CComBSTR("block") : CComBSTR("none"));
+	}
+
+	if (m_unk0x10c) {
+		CComPtr<IHTMLStyle> style;
+		m_unk0x10c->get_style(&style);
+		style->put_display(metadata && metadata->m_unk0xfa ? CComBSTR("block") : CComBSTR("none"));
+	}
+}
+
 IMPLEMENT_DYNCREATE(CDeclarationView, CHtmlView)
 
 BEGIN_MESSAGE_MAP(CDeclarationView, CHtmlView)
@@ -379,6 +423,24 @@ static void FUN_00439910(int* count, std::string* text, const RBX::Reflection::S
 	++*count;
 }
 
+// FUNCTION: ROBLOX 0x00439990
+static void FUN_00439990(int* count, std::string* text, const RBX::Reflection::SignatureDescriptor::Item& argument)
+{
+	if (*count > 0) {
+		*text += ", ";
+	}
+
+	*text += argument.type->name.c_str();
+	*text += " ";
+	*text += argument.name->c_str();
+	if (&argument.defaultValue.type() == argument.type) {
+		*text += " = ";
+		*text += argument.defaultValue.get<std::string>();
+	}
+
+	++*count;
+}
+
 // FUNCTION: ROBLOX 0x00439a70
 void CMemberTreeView::FUN_00439a70(const RBX::Reflection::FunctionDescriptor* descriptor)
 {
@@ -403,6 +465,92 @@ void CMemberTreeView::FUN_00439a70(const RBX::Reflection::FunctionDescriptor* de
 			FUN_00438130(item, metadata);
 		}
 	}
+}
+
+// FUNCTION: ROBLOX 0x00439c30
+void CDeclarationView::FUN_00439c30(const RBX::Reflection::Descriptor* descriptor)
+{
+	if (!descriptor) {
+		FUN_00438530(NULL, NULL, NULL);
+		return;
+	}
+
+	std::string declaration;
+	RBX::Reflection::Metadata::Item* metadata = NULL;
+	const RBX::Reflection::ClassDescriptor* owner = NULL;
+
+	const RBX::Reflection::FunctionDescriptor* function =
+		dynamic_cast<const RBX::Reflection::FunctionDescriptor*>(descriptor);
+	if (function) {
+		declaration = function->getSignature().resultType->name.toString();
+		declaration += " ";
+		declaration += function->name.toString();
+		declaration += "(";
+
+		int count = 0;
+		std::for_each(
+			function->getSignature().arguments.begin(),
+			function->getSignature().arguments.end(),
+			boost::bind(FUN_00439990, &count, &declaration, _1)
+		);
+		declaration += ")";
+
+		owner = &function->owner;
+		metadata = RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446970(function);
+	}
+	else {
+		const RBX::Reflection::PropertyDescriptor* property =
+			dynamic_cast<const RBX::Reflection::PropertyDescriptor*>(descriptor);
+		if (property) {
+			declaration = property->type.name.toString();
+			declaration += " ";
+			declaration += property->name.toString();
+
+			owner = &property->owner;
+			metadata = RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446920(property);
+		}
+		else {
+			const RBX::Reflection::SignalDescriptor* signal =
+				dynamic_cast<const RBX::Reflection::SignalDescriptor*>(descriptor);
+			if (signal) {
+				declaration = "event ";
+				declaration += signal->name.toString();
+				declaration += "(";
+
+				int count = 0;
+				std::for_each(
+					signal->getSignature().arguments.begin(),
+					signal->getSignature().arguments.end(),
+					boost::bind(FUN_00439990, &count, &declaration, _1)
+				);
+				declaration += ")";
+
+				owner = &signal->owner;
+				metadata = RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_004469c0(signal);
+			}
+			else {
+				const RBX::Reflection::EnumDescriptor::Item* item =
+					dynamic_cast<const RBX::Reflection::EnumDescriptor::Item*>(descriptor);
+				if (item) {
+					declaration = G3D::format("%d: %s", item->value, item->name.c_str());
+				}
+				else {
+					const RBX::Reflection::ClassDescriptor* classDescriptor =
+						dynamic_cast<const RBX::Reflection::ClassDescriptor*>(descriptor);
+					if (classDescriptor) {
+						declaration = classDescriptor->name.toString();
+						metadata =
+							RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446220(classDescriptor, false);
+					}
+					else {
+						declaration = descriptor->name.toString();
+					}
+				}
+			}
+		}
+	}
+
+	FUN_00438530(metadata, declaration.c_str(), owner ? owner->name.c_str() : NULL);
 }
 
 // FUNCTION: ROBLOX 0x0043a060
@@ -436,16 +584,44 @@ void CMemberTreeView::FUN_0043a060(const RBX::Reflection::ClassDescriptor* descr
 	GetTreeCtrl().SortChildrenCB(&sort);
 }
 
-// STUB: ROBLOX 0x0043a240
+// FUNCTION: ROBLOX 0x0043a240
 void CMemberTreeView::FUN_0043a240(NMHDR* pNMHDR, LRESULT* pResult)
 {
-	STUB(0x43a240);
+	NMTREEVIEW* pNMTreeView = reinterpret_cast<NMTREEVIEW*>(pNMHDR);
+	if (m_unk0xb0) {
+		m_unk0xb0->FUN_00439c30(reinterpret_cast<const RBX::Reflection::Descriptor*>(pNMTreeView->itemNew.lParam));
+	}
+
+	*pResult = 0;
 }
 
-// STUB: ROBLOX 0x0043a280
+// FUNCTION: ROBLOX 0x0043a280
 void CClassTreeView::FUN_0043a280(NMHDR* pNMHDR, LRESULT* pResult)
 {
-	STUB(0x43a280);
+	NMTREEVIEW* pNMTreeView = reinterpret_cast<NMTREEVIEW*>(pNMHDR);
+	const RBX::Reflection::Descriptor* descriptor =
+		reinterpret_cast<const RBX::Reflection::Descriptor*>(pNMTreeView->itemNew.lParam);
+
+	if (m_unk0xa8) {
+		const RBX::Reflection::ClassDescriptor* classDescriptor =
+			dynamic_cast<const RBX::Reflection::ClassDescriptor*>(descriptor);
+		if (classDescriptor) {
+			m_unk0xa8->FUN_0043a060(classDescriptor);
+		}
+		else {
+			const RBX::Reflection::EnumDescriptor* enumDescriptor =
+				dynamic_cast<const RBX::Reflection::EnumDescriptor*>(descriptor);
+			if (enumDescriptor) {
+				m_unk0xa8->FUN_004397f0(enumDescriptor);
+			}
+		}
+	}
+
+	if (m_unk0xac) {
+		m_unk0xac->FUN_00439c30(descriptor);
+	}
+
+	*pResult = 0;
 }
 
 // FUNCTION: ROBLOX 0x0043a320

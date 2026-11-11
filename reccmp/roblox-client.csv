@@ -6724,3 +6724,6 @@ address,type,symbol,name,module,size
 00917e20,global,??_R0?AVProperties@Metadata@Reflection@RBX@@@8,,,
 00917e54,global,??_R0?AVFunctions@Metadata@Reflection@RBX@@@8,,,
 00917e84,global,??_R0?AVEvents@Metadata@Reflection@RBX@@@8,,,
+0043a240,function,,,,49
+0043a280,function,,,,146
+004395b0,synthetic,??$get@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Value@Reflection@RBX@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,,,
