@@ -317,10 +317,21 @@ void CRobloxView::FUN_0045de70()
 	m_unk0x1a8->FUN_0046ea00(9);
 }
 
-// STUB: ROBLOX 0x0045de90
+// FUNCTION: ROBLOX 0x0045de90
 void CRobloxView::onEvent(const RBX::ServiceProvider* source, RBX::ServiceRemoving event)
 {
-	STUB(0x45de90);
+	if (event.service->getClassName() == "NetworkClient") {
+		PostMessage(0x46c);
+	}
+
+	if (event.service->getClassName() == "NetworkClient" || event.service->getClassName() == "Players") {
+		PostMessage(0x46b);
+	}
+
+	if (event.service->getClassName() == "Players") {
+		static_cast<RBX::Network::Players*>(event.service.get())
+			->RBX::Notifier<RBX::Network::Players, RBX::SuperSafeChanged>::removeListener(this);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0045e2e0
@@ -334,17 +345,24 @@ CRobloxView::CRobloxView() : RBX::VerbContainer(NULL), m_unk0x88(false), m_unk0x
 	m_unk0x148.LoadMenu(0x67);
 }
 
-// STUB: ROBLOX 0x0045e630
+// FUNCTION: ROBLOX 0x0045e630
 void CRobloxView::onEvent(const RBX::ServiceProvider* source, RBX::ServiceAdded event)
 {
-	STUB(0x45e630);
+	if (event.service->getClassName() == "NetworkClient" || event.service->getClassName() == "Players") {
+		PostMessage(0x46b);
+	}
+
+	if (event.service->getClassName() == "Players") {
+		static_cast<RBX::Network::Players*>(event.service.get())
+			->RBX::Notifier<RBX::Network::Players, RBX::SuperSafeChanged>::addListener(this);
+	}
 }
 
 void CRobloxView::OnDraw(CDC* pDC)
 {
 }
 
-// STUB: ROBLOX 0x0045e740
+// FUNCTION: ROBLOX 0x0045e740
 LRESULT CRobloxView::FUN_0045e740(WPARAM wParam, LPARAM lParam)
 {
 	if (m_hWnd) {
@@ -352,8 +370,10 @@ LRESULT CRobloxView::FUN_0045e740(WPARAM wParam, LPARAM lParam)
 
 		bool showPane = false;
 		RBX::Network::Players* players = findService<RBX::Network::Players>(FUN_00403290().get());
-		if (players && RBX::Network::Players::clientIsPresent(FUN_00403290().get(), true) && !players->superSafeOn()) {
-			showPane = true;
+		if (players) {
+			if (RBX::Network::Players::clientIsPresent(FUN_00403290().get(), true) && !players->superSafeOn()) {
+				showPane = true;
+			}
 		}
 
 		bool paneShown = m_unk0x150.m_hWnd != NULL;
@@ -381,14 +401,10 @@ void CRobloxView::FUN_0045e900()
 	m_unk0x1b4.reset();
 	m_unk0x1b8.reset();
 	m_unk0x1bc.reset();
-	RBX::stopListening(m_unk0x140, static_cast<RBX::Listener<RBX::ServiceProvider, RBX::ServiceAdded>*>(this));
-	RBX::stopListening(m_unk0x140, static_cast<RBX::Listener<RBX::ServiceProvider, RBX::ServiceRemoving>*>(this));
+	RBX::stopListening<RBX::ServiceProvider, RBX::ServiceAdded>(m_unk0x140, this);
+	RBX::stopListening<RBX::ServiceProvider, RBX::ServiceRemoving>(m_unk0x140, this);
 
-	RBX::Network::Players* players;
-	{
-		boost::shared_ptr<RBX::DataModel> dataModel = FUN_00403290();
-		players = dataModel ? dataModel->find<RBX::Network::Players>() : NULL;
-	}
+	RBX::Network::Players* players = findService<RBX::Network::Players>(FUN_00403290().get());
 	if (players) {
 		players->RBX::Notifier<RBX::Network::Players, RBX::SuperSafeChanged>::removeListener(this);
 	}

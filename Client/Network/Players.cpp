@@ -159,6 +159,12 @@ void Players::onEvent(const Player* source, CharacterAdded event)
 	const_cast<Player*>(source)->rebuildBackpack();
 }
 
+// FUNCTION: ROBLOX 0x004b0e10
+bool Players::superSafeOn() const
+{
+	return localPlayer ? Player::prop_SuperSafeChat.getValue(localPlayer.get()) : false;
+}
+
 } // namespace Network
 } // namespace RBX
 
