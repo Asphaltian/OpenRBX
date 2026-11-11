@@ -202,20 +202,19 @@ int CInstanceExplorer::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-// STUB: ROBLOX 0x00420530
+// FUNCTION: ROBLOX 0x00420530
 void CInstanceExplorer::VTable0x08(const RBX::Instance* source, RBX::DescendentRemoving event)
 {
 	CXTPReportRecords* records = GetReportCtrl().GetRecords();
 	for (int i = records->GetCount() - 1; i >= 0; i--) {
-		if (static_cast<CInstanceRecord*>(records->GetAt(i))->m_unk0x54.get() == event.instance.get()) {
+		CInstanceRecord* record = static_cast<CInstanceRecord*>(records->GetAt(i));
+		if (record->m_unk0x54.get() == event.instance.get()) {
 			records->RemoveAt(i);
 			break;
 		}
 	}
 
-	if (!m_unk0x3ac) {
-		GetReportCtrl().Populate();
-	}
+	populate();
 }
 
 // FUNCTION: ROBLOX 0x004206b0
@@ -230,15 +229,13 @@ CInstanceRecord::~CInstanceRecord()
 {
 }
 
-// STUB: ROBLOX 0x004208d0
+// FUNCTION: ROBLOX 0x004208d0
 void CInstanceExplorer::VTable0x08(const RBX::Instance* source, RBX::DescendentAdded event)
 {
 	CInstanceRecord* record = new CInstanceRecord(shared_from(event.instance.get()));
 	GetReportCtrl().AddRecord(record);
 
-	if (!m_unk0x3ac) {
-		GetReportCtrl().Populate();
-	}
+	populate();
 }
 
 // FUNCTION: ROBLOX 0x00421080
@@ -269,7 +266,7 @@ CInstanceExplorer::~CInstanceExplorer()
 	FUN_004212d0(NULL);
 }
 
-// STUB: ROBLOX 0x00421580
+// FUNCTION: ROBLOX 0x00421580
 void CInstanceExplorer::FUN_00421580(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	RBX::Selection* selection = RBX::ServiceProvider::create<RBX::Selection>(m_unk0x3a4.get());
@@ -279,8 +276,8 @@ void CInstanceExplorer::FUN_00421580(NMHDR* pNMHDR, LRESULT* pResult)
 	POSITION pos = rows->GetFirstSelectedRowPosition();
 	while (pos) {
 		CXTPReportRow* row = rows->GetNextSelectedRow(pos);
-		RBX::Instance* instance = static_cast<CInstanceRecord*>(row->GetRecord())->m_unk0x54.get();
-		instances.push_back(instance);
+		CInstanceRecord* record = static_cast<CInstanceRecord*>(row->GetRecord());
+		instances.push_back(record->m_unk0x54.get());
 	}
 
 	selection->setSelection(instances.begin(), instances.end());

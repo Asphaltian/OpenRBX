@@ -124,6 +124,13 @@ protected:
 	// ?GetMessageMap@CInstanceExplorer@@MBEPBUAFX_MSGMAP@@XZ
 
 private:
+	void populate()
+	{
+		if (!m_unk0x3ac) {
+			GetReportCtrl().Populate();
+		}
+	}
+
 	boost::shared_ptr<RBX::Instance> m_unk0x3a4; // 0x3a4
 	bool m_unk0x3ac;                             // 0x3ac
 };

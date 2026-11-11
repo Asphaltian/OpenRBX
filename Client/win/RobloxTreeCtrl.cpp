@@ -298,37 +298,39 @@ void CSelectionTreeCtrl::FUN_004232d0(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 }
 
-// STUB: ROBLOX 0x00423330
+// FUNCTION: ROBLOX 0x00423330
 int CRobloxTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
 	if (CXTTreeCtrl::OnCreate(lpCreateStruct) == -1) {
 		return -1;
 	}
 
-	Init();
+	{
+		BOOL alpha = FALSE;
+		HBITMAP handle = CXTPImageManagerIcon::LoadBitmapFromResource(MAKEINTRESOURCE(0x85), &alpha);
+		CBitmap bitmap;
+		bitmap.Attach(handle);
 
-	BOOL alpha = FALSE;
-	CBitmap bitmap;
-	bitmap.Attach(CXTPImageManagerIcon::LoadBitmapFromResource(MAKEINTRESOURCE(0x85), &alpha));
+		if (alpha) {
+			if (!m_unk0xa8.Create(16, 16, ILC_COLOR32, 0, 0)) {
+				return -1;
+			}
+			if (m_unk0xa8.Add(&bitmap, &bitmap) == -1) {
+				return -1;
+			}
+		}
+		else {
+			if (!m_unk0xa8.Create(16, 16, ILC_COLORDDB | ILC_MASK, 0, 0)) {
+				return -1;
+			}
+			if (m_unk0xa8.Add(&bitmap, RGB(255, 0, 255)) == -1) {
+				return -1;
+			}
+		}
 
-	if (alpha) {
-		if (!m_unk0xa8.Create(16, 16, ILC_COLOR32, 0, 0)) {
-			return -1;
-		}
-		if (m_unk0xa8.Add(&bitmap, (CBitmap*) NULL) == -1) {
-			return -1;
-		}
+		SetImageList(&m_unk0xa8, TVSIL_NORMAL);
 	}
-	else {
-		if (!m_unk0xa8.Create(16, 16, ILC_COLORDDB | ILC_MASK, 0, 0)) {
-			return -1;
-		}
-		if (m_unk0xa8.Add(&bitmap, RGB(255, 0, 255)) == -1) {
-			return -1;
-		}
-	}
 
-	SetImageList(&m_unk0xa8, TVSIL_NORMAL);
 	EnableMultiSelect(TRUE);
 	VTable0x15c();
 	return 0;
@@ -950,12 +952,12 @@ void CSelectionTreeCtrl::FUN_004285a0(boost::shared_ptr<RBX::DataModel> dataMode
 	}
 }
 
-// STUB: ROBLOX 0x00428720
+// FUNCTION: ROBLOX 0x00428720
 void CRobloxTreeCtrl::FUN_00428720(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	NMTREEVIEW* treeView = reinterpret_cast<NMTREEVIEW*>(pNMHDR);
+	CRobloxTreeCtrlNode* node = reinterpret_cast<CRobloxTreeCtrlNode*>(treeView->itemNew.lParam);
 	if (treeView->action & TVE_EXPAND) {
-		CRobloxTreeCtrlNode* node = reinterpret_cast<CRobloxTreeCtrlNode*>(treeView->itemNew.lParam);
 		if (!node->m_unk0x2d) {
 			node->FUN_00426960();
 			node->FUN_00426b00();
