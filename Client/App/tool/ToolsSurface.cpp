@@ -484,33 +484,79 @@ void ResizeTool::VTable0x40(XmlState* state)
 {
 	boost::shared_ptr<PVInstance> locked = m_unk0x24.lock();
 	if (PartInstance* part = dynamic_cast<PartInstance*>(locked.get())) {
-		part->FUN_005ad310(state);
+		part->writeResizeData(state);
 	}
 }
 
-// STUB: ROBLOX 0x0063ae70
+// FUNCTION: ROBLOX 0x0063ae70
 MouseCommand* ResizeTool::onMouseUp(const UIEvent& uiEvent)
 {
-	STUB(0x63ae70);
+	if (captured()) {
+		releaseCapture();
+		if (!m_unk0x24.expired()) {
+			std::auto_ptr<RedoState> redoState(new RedoState());
+			VTable0x40(redoState.get());
+			XmlState* undo = undoState.release();
+			XmlState* redo = redoState.release();
+			IDataState& dataState = workspace->getDataState();
+			const Name& name = getName();
+			dataState.pushState(name.toString(), undo, redo);
+			workspace->getDataState().setDirty(true);
+		}
+	}
 	return NULL;
 }
 
-// STUB: ROBLOX 0x0063af80
-void ResizeTool::FUN_0063af80()
+// FUNCTION: ROBLOX 0x0063af80
+void ResizeTool::FUN_0063af80(int p_unk0x04)
 {
-	STUB(0x63af80);
+	if (!m_unk0x24.expired()) {
+		PartInstance* part = static_cast<PartInstance*>(m_unk0x24.lock().get());
+		part->destroyJoints();
+		if (part->resize(m_unk0x30, p_unk0x04)) {
+			ServiceProvider::create<Soundscape::SoundService>(workspace)->playSound(CLICK_SOUND);
+		}
+		part->join();
+	}
 }
 
 // STUB: ROBLOX 0x0063b020
 void ResizeTool::onMouseMove(const UIEvent& uiEvent)
 {
-	STUB(0x63b020);
+	if (!m_unk0x24.expired()) {
+		G3D::Vector3 axis = Math::getWorldNormal(m_unk0x30, m_unk0x24.lock()->getLocation());
+		G3D::Ray handleRay = G3D::Ray::fromOriginAndDirection(m_unk0x34, axis);
+		G3D::Ray mouseRay = getUnitMouseRay(uiEvent);
+		G3D::Vector3 closest = Math::closestPointOnRay(handleRay, mouseRay);
+		float distance = (closest - m_unk0x34).dot(handleRay.direction) - m_unk0x44;
+		if (distance > 1.0f) {
+			int amount = G3D::iRound(floor(distance));
+			m_unk0x44 += amount;
+			FUN_0063af80(amount);
+		}
+		if (distance < -1.0f) {
+			int amount = -G3D::iRound(floor(-distance));
+			m_unk0x44 += amount;
+			FUN_0063af80(amount);
+		}
+	}
 }
 
-// STUB: ROBLOX 0x0063b240
+// FUNCTION: ROBLOX 0x0063b240
 void ResizeTool::FUN_0063b240(const UIEvent& uiEvent)
 {
-	STUB(0x63b240);
+	ServiceClient<Selection> selection(workspace);
+	std::vector<boost::shared_ptr<Instance> >::const_iterator it;
+	for (it = selection->begin(); it != selection->end(); ++it) {
+		if (PartInstance* part = dynamic_cast<PartInstance*>(it->get())) {
+			G3D::Ray ray = getUnitMouseRay(uiEvent);
+			if (FUN_00662530(part->getExtentsLocal(), part->getLocation(), ray, m_unk0x34, m_unk0x30)) {
+				m_unk0x24 = shared_from(part);
+				return;
+			}
+		}
+	}
+	m_unk0x24.reset();
 }
 
 // STUB: ROBLOX 0x0063b4b0
@@ -525,7 +571,7 @@ void ResizeTool::render2d(Adorn* adorn)
 	STUB(0x63b620);
 }
 
-// STUB: ROBLOX 0x0063b7c0
+// FUNCTION: ROBLOX 0x0063b7c0
 void ResizeTool::onMouseHover(const UIEvent& uiEvent)
 {
 	FUN_0063b240(uiEvent);
@@ -533,10 +579,21 @@ void ResizeTool::onMouseHover(const UIEvent& uiEvent)
 	ArrowToolBase::onMouseHover(uiEvent);
 }
 
-// STUB: ROBLOX 0x0063b800
+// FUNCTION: ROBLOX 0x0063b800
 MouseCommand* ResizeTool::onMouseDown(const UIEvent& uiEvent)
 {
-	STUB(0x63b800);
+	FUN_0063b240(uiEvent);
+	if (m_unk0x24.expired()) {
+		return ArrowToolBase::onMouseDown(uiEvent);
+	}
+
+	m_unk0x40 = uiEvent.mousePosition;
+	m_unk0x44 = 0;
+	m_unk0x48 = 0;
+	m_unk0x2c = true;
+	capture();
+	undoState.reset(new UndoState());
+	VTable0x40(undoState.get());
 	return this;
 }
 

@@ -4,6 +4,7 @@
 #include "decomp.h"
 #include "tool/ToolsArrow.h"
 #include "util/Name.h"
+#include "util/NormalId.h"
 #include "util/PV.h"
 #include "util/SoundWorld.h"
 #include "v8datamodel/MouseCommand.h"
@@ -289,13 +290,13 @@ class ResizeTool : public Named<ArrowToolBase, sResizeTool>
 private:
 	boost::weak_ptr<PVInstance> m_unk0x24; // 0x24
 	bool m_unk0x2c;                        // 0x2c
-	undefined4 m_unk0x30;                  // 0x30
+	NormalId m_unk0x30;                    // 0x30
 	G3D::Vector3 m_unk0x34;                // 0x34
 	G3D::Vector2int16 m_unk0x40;           // 0x40
-	undefined4 m_unk0x44;                  // 0x44
-	undefined4 m_unk0x48;                  // 0x48
+	int m_unk0x44;                         // 0x44
+	int m_unk0x48;                         // 0x48
 
-	void FUN_0063af80();
+	void FUN_0063af80(int p_unk0x04);
 	void FUN_0063b240(const UIEvent& uiEvent);
 
 	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);

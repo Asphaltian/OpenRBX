@@ -124,7 +124,6 @@ public:
 
 	bool getPartLocked() const { return locked; }
 
-	void FUN_005ad310(XmlState* state);
 	Surfaces& getSurfaces();
 	Surface* getSurface(const G3D::Ray&, int&);
 	const Surfaces& getSurfaces() const;

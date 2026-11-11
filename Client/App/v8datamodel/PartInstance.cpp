@@ -184,7 +184,7 @@ void PartInstance::onChildAdded(Instance* child)
 }
 
 // FUNCTION: ROBLOX 0x005ad310
-void PartInstance::FUN_005ad310(XmlState* state)
+void PartInstance::writeResizeData(XmlState* state)
 {
 	state->addProperty(Reflection::Property(prop_Size, this));
 }
@@ -1137,6 +1137,13 @@ void PartInstance::setElasticity(float elasticity)
 		primitive->setElasticity(elasticity);
 		raisePropertyChanged(prop_Elasticity);
 	}
+}
+
+// STUB: ROBLOX 0x005b2990
+bool PartInstance::resize(NormalId p_unk0x04, int p_unk0x08)
+{
+	STUB(0x5b2990);
+	return false;
 }
 
 // FUNCTION: WEBSERVICE 0x1009fe60

@@ -717,6 +717,25 @@ float Math::maxAxisLength(const Vector3& v)
 	return std::max(answer[0], std::max(answer[1], answer[2]));
 }
 
+// FUNCTION: ROBLOX 0x005f1330
+Vector3 Math::closestPointOnRay(const Ray& p_unk0x08, const Ray& p_unk0x0c)
+{
+	Vector3 pa = p_unk0x08.origin;
+	Vector3 pb = p_unk0x0c.origin;
+	Vector3 ua = p_unk0x08.direction;
+	Vector3 ub = p_unk0x0c.direction;
+	Vector3 p = pb - pa;
+	float uaub = ua.dot(ub);
+	float q1 = ua.dot(p);
+	float q2 = -ub.dot(p);
+	float d = 1.0f - uaub * uaub;
+	if (d > 0.00001) {
+		float alpha = (q1 + uaub * q2) / d;
+		return pa + ua * alpha;
+	}
+	return pa;
+}
+
 // FUNCTION: WEBSERVICE 0x100dfef0
 // FUNCTION: ROBLOX 0x005f1440
 bool Math::intersectRayPlane(const Ray& ray, const Plane& plane, Vector3& hit)
