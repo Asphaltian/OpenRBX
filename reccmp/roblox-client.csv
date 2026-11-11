@@ -6706,3 +6706,8 @@ address,type,symbol,name,module,size
 00407ca0,function,,,,232
 0044d310,library,??1CWaitCursor@@QAE@XZ,,,
 00952da4,global,?_pAtlModule@ATL@@3PAVCAtlModule@1@A,,,
+00408920,function,,,,723
+007ff108,global,__GUID_6d5140c1_7436_11ce_8034_00aa006009fa,,,
+0083f84c,global,_IID_IWebBrowserApp,,,
+0083f83c,global,_IID_IWebBrowser2,,,
+0083f81c,global,_IID_IInternetSecurityManager,,,

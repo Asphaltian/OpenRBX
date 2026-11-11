@@ -83,4 +83,15 @@ private:
 
 DECOMP_SIZE_ASSERT(CWorkspace, 0x34)
 
+// clang-format off
+// TEMPLATE: ROBLOX 0x00403550
+// IObjectSafetyRobloxImpl<CWorkspace,1>::FUN_00408260
+// TEMPLATE: ROBLOX 0x00403e90
+// IObjectSafetyRobloxImpl<CWorkspace,1>::FUN_004085e0
+// TEMPLATE: ROBLOX 0x004050a0
+// IObjectSafetyRobloxImpl<CWorkspace,1>::GetInterfaceSafetyOptions
+// TEMPLATE: ROBLOX 0x00405130
+// IObjectSafetyRobloxImpl<CWorkspace,1>::SetInterfaceSafetyOptions
+// clang-format on
+
 #endif // WORKSPACE_H

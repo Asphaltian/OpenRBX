@@ -51,12 +51,14 @@ public:
 DECOMP_SIZE_ASSERT(CApp, 0x1c)
 
 // clang-format off
-// STUB: ROBLOX 0x00408780
-// IObjectSafetyRobloxImpl<CApp,1>::GetInterfaceSafetyOptions
-// STUB: ROBLOX 0x00408810
-// IObjectSafetyRobloxImpl<CApp,1>::SetInterfaceSafetyOptions
-// STUB: ROBLOX 0x004085e0
+// TEMPLATE: ROBLOX 0x00408260
+// IObjectSafetyRobloxImpl<CApp,1>::FUN_00408260
+// TEMPLATE: ROBLOX 0x004085e0
 // IObjectSafetyRobloxImpl<CApp,1>::FUN_004085e0
+// TEMPLATE: ROBLOX 0x00408780
+// IObjectSafetyRobloxImpl<CApp,1>::GetInterfaceSafetyOptions
+// TEMPLATE: ROBLOX 0x00408810
+// IObjectSafetyRobloxImpl<CApp,1>::SetInterfaceSafetyOptions
 // clang-format on
 
 #endif // APP_H

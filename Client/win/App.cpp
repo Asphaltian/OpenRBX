@@ -1,7 +1,8 @@
 #include "App.h"
 
+#include "LogManager.h"
 #include "Roblox.h"
-#include "Workspace.h"
+#include "RobloxDoc.h"
 #include "util/ContentProvider.h"
 #include "v8datamodel/DebugSettings.h"
 
@@ -120,8 +121,56 @@ STDMETHODIMP CApp::get_IsUploadingErrorFiles(VARIANT_BOOL* pVal)
 // STUB: ROBLOX 0x00408920
 STDMETHODIMP CApp::CreateGame(WINDOW_TYPE WindowType, IWorkspace** result)
 {
-	STUB(0x408920);
-	return S_OK;
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	CRobloxDoc* doc = NULL;
+	try {
+		HRESULT hr = FUN_004085e0();
+		if (hr != S_OK) {
+			return hr;
+		}
+
+		CRobloxApp* app = static_cast<CRobloxApp*>(AfxGetApp());
+		CComObject<CWorkspace>* workspace;
+		switch (WindowType) {
+		case NoWindowType:
+			hr = FUN_00407ca0(&workspace, NULL);
+			if (hr != S_OK) {
+				return LogManager::ReportCOMError(CLSID_App, "Couldn't create workspace", hr);
+			}
+			break;
+		case PlayWindowType: {
+			doc = static_cast<CRobloxDoc*>(app->FUN_0044fbc0());
+			workspace = doc->m_unk0x78;
+
+			POSITION pos = doc->GetFirstViewPosition();
+			if (pos) {
+				CView* view = doc->GetNextView(pos);
+				if (view) {
+					view->GetParentFrame()->ShowWindow(SW_SHOW);
+					view->SetForegroundWindow();
+				}
+			}
+			break;
+		}
+		default:
+			return LogManager::ReportCOMError(CLSID_App, "requested WindowType is invalid", ERROR_INVALID_PARAMETER);
+		}
+
+		CComPtr<IWorkspace> ptr(workspace);
+		hr = ptr.CopyTo(result);
+		if (FAILED(hr)) {
+			return LogManager::ReportCOMError(CLSID_App, "iworkspace.CopyTo failed", hr);
+		}
+
+		return S_OK;
+	}
+	catch (std::exception& e) {
+		if (doc) {
+			doc->OnCloseDocument();
+		}
+		return LogManager::ReportExceptionAsCOMError(CLSID_App, e);
+	}
 }
 
 // FUNCTION: ROBLOX 0x00409060
