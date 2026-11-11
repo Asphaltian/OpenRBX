@@ -200,19 +200,17 @@ void Workspace::setThrottleEnabled(bool value)
 	world->setCanThrottle(value);
 }
 
-// STUB: ROBLOX 0x005b4fe0
+// FUNCTION: ROBLOX 0x005b4fe0
 Instance* Workspace::findTopInstance(Instance* instance)
 {
-	Instance* parent = instance->getParent();
-	Instance* service = parent;
+	Instance* service = instance->getParent();
 	Instance* root = service->getParent();
 	while (root->getParent()) {
 		service = root;
 		root = root->getParent();
 	}
-	while (parent != service) {
-		instance = parent;
-		parent = instance->getParent();
+	while (instance->getParent() != service) {
+		instance = instance->getParent();
 	}
 	return instance;
 }

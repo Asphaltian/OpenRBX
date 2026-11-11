@@ -29,8 +29,8 @@ void UserInputBase::init(Adorn* adorn)
 	setCursorId(adorn, ContentId::fromAssets("Textures\\ArrowCursor.png"));
 }
 
-// STUB: ROBLOX 0x005d8ce0
-UserInputBase::UserInputBase()
+// FUNCTION: ROBLOX 0x005d8ce0
+UserInputBase::UserInputBase() : currentCursor(NULL)
 {
 }
 
@@ -53,13 +53,13 @@ void UserInputBase::setCursorId(Adorn* adorn, const TextureId& cursorId)
 	}
 }
 
-// STUB: ROBLOX 0x005d8ee0
+// FUNCTION: ROBLOX 0x005d8ee0
 void UserInputBase::renderGameCursor(Adorn* adorn)
 {
 	G3D::ReferenceCountedPointer<TextureProxyBase> cursor = getGameCursor(adorn);
 	if (cursor.notNull()) {
-		G3D::Rect2D size = adorn->getTextureSize(cursor);
-		G3D::Rect2D rect = (size - size.center()) + getCursorPosition();
+		G3D::Rect2D rect = adorn->getTextureSize(cursor);
+		rect = (rect - rect.center()) + getCursorPosition();
 
 		adorn->setTexture(0, cursor);
 		adorn->rect2d(rect, G3D::Color4(1.0f, 1.0f, 1.0f, 1.0f));
