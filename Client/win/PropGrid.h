@@ -394,7 +394,7 @@ DECOMP_SIZE_ASSERT(Vector3Item, 0x134)
 class RefItem : public XItem<std::string, CXTPPropertyGridItem, RBX::Reflection::PropertyDescriptor>
 {
 public:
-	RefItem(const RBX::Reflection::PropertyDescriptor& descriptor, CPropGrid* grid);
+	RefItem(const RBX::Reflection::RefPropertyDescriptor& descriptor, CPropGrid* grid);
 
 	virtual void OnValueChanged(CString strValue);
 	virtual void VTable0x00(
@@ -403,7 +403,7 @@ public:
 	);
 
 private:
-	const RBX::Reflection::PropertyDescriptor* m_unk0x128; // 0x128
+	const RBX::Reflection::RefPropertyDescriptor* m_unk0x128; // 0x128
 };
 
 DECOMP_SIZE_ASSERT(RefItem, 0x12c)

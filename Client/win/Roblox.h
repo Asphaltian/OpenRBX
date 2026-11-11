@@ -141,6 +141,8 @@ protected:
 	void OnLButtonUp(CPoint point);                                 // vtable+0xec
 
 private:
+	friend class CPropertyGridItemBrickColor;
+
 	CRect GetRect(int nIndex) const;
 	int HitTest(CPoint point) const;
 
