@@ -381,6 +381,7 @@ set(OPENRBX_APPDRAW_CLIENT_SOURCES
   Client/Rendering/AppDraw/RbxSky.cpp
   Client/Rendering/AppDraw/RbxSubEntity.cpp
   Client/Rendering/AppDraw/TwoDManager.cpp
+  Client/Rendering/AppDraw/Unknown0067eb00.cpp
   Client/Rendering/AppDraw/VisualEngine.cpp
 )
 
