@@ -6711,3 +6711,11 @@ address,type,symbol,name,module,size
 0083f84c,global,_IID_IWebBrowserApp,,,
 0083f83c,global,_IID_IWebBrowser2,,,
 0083f81c,global,_IID_IInternetSecurityManager,,,
+004380e0,function,,,,76
+0095395c,global,g_unk0x0095395c___FUN_00437ab0,,,
+0091490c,global,??_R0?AVDescriptor@Reflection@RBX@@@8,,,
+00918fd0,global,??_R0?AVItem@EnumDescriptor@Reflection@RBX@@@8,,,
+00918fa4,global,??_R0?AVEnumDescriptor@Reflection@RBX@@@8,,,
+00915584,global,??_R0?AVSignalDescriptor@Reflection@RBX@@@8,,,
+00915b20,global,??_R0?AVFunctionDescriptor@Reflection@RBX@@@8,,,
+00918f44,global,??_R0?AVClassDescriptor@Reflection@RBX@@@8,,,

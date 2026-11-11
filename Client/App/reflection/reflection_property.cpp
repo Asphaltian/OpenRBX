@@ -55,6 +55,18 @@ std::vector<const EnumDescriptor*>& EnumDescriptor::allEnums()
 	return s;
 }
 
+// FUNCTION: ROBLOX 0x005c0870
+std::vector<const EnumDescriptor*>::const_iterator EnumDescriptor::enumsBegin()
+{
+	return allEnums().begin();
+}
+
+// FUNCTION: ROBLOX 0x005c08a0
+std::vector<const EnumDescriptor*>::const_iterator EnumDescriptor::enumsEnd()
+{
+	return allEnums().end();
+}
+
 // FUNCTION: WEBSERVICE 0x100942b0
 // FUNCTION: ROBLOX 0x005c08d0
 EnumDescriptor::~EnumDescriptor()

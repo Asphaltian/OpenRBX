@@ -3,7 +3,26 @@
 #include "ClassTreeView.h"
 #include "DeclarationView.h"
 #include "MemberTreeView.h"
+#include "ReflectionMetadata.h"
 #include "StandardOutputView.h"
+#include "reflection/function.h"
+#include "reflection/property.h"
+#include "reflection/signal.h"
+
+#include <boost/bind.hpp>
+#include <boost/thread/recursive_mutex.hpp>
+
+inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Reflection::ClassDescriptor::
+	derivedClasses_begin() const
+{
+	return derivedClasses.begin();
+}
+
+inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Reflection::ClassDescriptor::
+	derivedClasses_end() const
+{
+	return derivedClasses.end();
+}
 
 IMPLEMENT_DYNCREATE(CClassTreeView, CXTTreeView)
 
@@ -41,14 +60,63 @@ CObjectBrowser::~CObjectBrowser()
 {
 }
 
+// FUNCTION: ROBLOX 0x00437700
+static int FUN_00437700(const RBX::Reflection::Descriptor* descriptor)
+{
+	if (dynamic_cast<const RBX::Reflection::EnumDescriptor::Item*>(descriptor)) {
+		return 5;
+	}
+
+	if (dynamic_cast<const RBX::Reflection::EnumDescriptor*>(descriptor)) {
+		return 4;
+	}
+
+	if (dynamic_cast<const RBX::Reflection::SignalDescriptor*>(descriptor)) {
+		return 3;
+	}
+
+	if (dynamic_cast<const RBX::Reflection::PropertyDescriptor*>(descriptor)) {
+		return 2;
+	}
+
+	if (dynamic_cast<const RBX::Reflection::FunctionDescriptor*>(descriptor)) {
+		return 1;
+	}
+
+	return dynamic_cast<const RBX::Reflection::ClassDescriptor*>(descriptor) ? 0 : 100;
+}
+
+// FUNCTION: ROBLOX 0x004377d0
+static int CALLBACK FUN_004377d0(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
+{
+	const RBX::Reflection::Descriptor* descriptor1 = reinterpret_cast<const RBX::Reflection::Descriptor*>(lParam1);
+	const RBX::Reflection::Descriptor* descriptor2 = reinterpret_cast<const RBX::Reflection::Descriptor*>(lParam2);
+
+	int rank1 = FUN_00437700(descriptor1);
+	int rank2 = FUN_00437700(descriptor2);
+	if (rank1 != rank2) {
+		return rank1 - rank2;
+	}
+
+	return strcmp(descriptor1->name.c_str(), descriptor2->name.c_str());
+}
+
 // FUNCTION: ROBLOX 0x00437860
-CMemberTreeView::CMemberTreeView() : m_unk0xa8(1), m_unk0xac(0)
+CMemberTreeView::CMemberTreeView() : m_unk0xa8(1), m_unk0xac(NULL)
 {
 }
 
 // FUNCTION: ROBLOX 0x004378e0
 CMemberTreeView::~CMemberTreeView()
 {
+}
+
+// FUNCTION: ROBLOX 0x00437ab0
+static boost::recursive_mutex& FUN_00437ab0()
+{
+	static boost::recursive_mutex g_unk0x0095395c;
+
+	return g_unk0x0095395c;
 }
 
 // FUNCTION: ROBLOX 0x00437b30
@@ -125,6 +193,67 @@ int CObjectBrowser::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
+// FUNCTION: ROBLOX 0x00437f90
+void CClassTreeView::FUN_00437f90(const RBX::Reflection::EnumDescriptor* descriptor)
+{
+	CString text;
+	text.Format("%s", descriptor->name.c_str());
+
+	HTREEITEM item = GetTreeCtrl().InsertItem(text, 9, 9);
+	GetTreeCtrl().SetItemData(item, reinterpret_cast<DWORD_PTR>(descriptor));
+}
+
+// FUNCTION: ROBLOX 0x004380e0
+void CMemberTreeView::FUN_004380e0(const RBX::Reflection::EnumDescriptor::Item* item)
+{
+	HTREEITEM treeItem = GetTreeCtrl().InsertItem(item->name.c_str(), 10, 10);
+	GetTreeCtrl().SetItemData(treeItem, reinterpret_cast<DWORD_PTR>(item));
+}
+
+// FUNCTION: ROBLOX 0x00438130 FOLDED
+void CMemberTreeView::FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::Item* metadata)
+{
+	if (metadata) {
+		if (metadata->m_unk0xf9) {
+			CXTLogFont logFont;
+			if (GetFont()->GetLogFont(&logFont)) {
+				logFont.lfStrikeOut = TRUE;
+				SetItemFont(item, logFont);
+			}
+		}
+
+		if (metadata->m_unk0xfa) {
+			CXTLogFont logFont;
+			if (GetFont()->GetLogFont(&logFont)) {
+				logFont.lfItalic = TRUE;
+				SetItemFont(item, logFont);
+			}
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x00438130 FOLDED
+void CClassTreeView::FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::Item* metadata)
+{
+	if (metadata) {
+		if (metadata->m_unk0xf9) {
+			CXTLogFont logFont;
+			if (GetFont()->GetLogFont(&logFont)) {
+				logFont.lfStrikeOut = TRUE;
+				SetItemFont(item, logFont);
+			}
+		}
+
+		if (metadata->m_unk0xfa) {
+			CXTLogFont logFont;
+			if (GetFont()->GetLogFont(&logFont)) {
+				logFont.lfItalic = TRUE;
+				SetItemFont(item, logFont);
+			}
+		}
+	}
+}
+
 // FUNCTION: ROBLOX 0x00438290
 int CMemberTreeView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -173,6 +302,39 @@ CDeclarationView::~CDeclarationView()
 {
 }
 
+// FUNCTION: ROBLOX 0x00439690
+void CClassTreeView::FUN_00439690(const RBX::Reflection::ClassDescriptor* descriptor)
+{
+	RBX::Reflection::Metadata::Class* metadata =
+		RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446220(descriptor, false);
+	if (!metadata || metadata->m_unk0xf8) {
+		HTREEITEM item = GetTreeCtrl().InsertItem(descriptor->name.c_str(), 3, 3);
+		GetTreeCtrl().SetItemData(item, reinterpret_cast<DWORD_PTR>(descriptor));
+		FUN_00438130(item, metadata);
+	}
+
+	std::for_each(
+		descriptor->derivedClasses_begin(),
+		descriptor->derivedClasses_end(),
+		boost::bind(&CClassTreeView::FUN_00439690, this, _1)
+	);
+}
+
+// FUNCTION: ROBLOX 0x004397f0
+void CMemberTreeView::FUN_004397f0(const RBX::Reflection::EnumDescriptor* descriptor)
+{
+	GetTreeCtrl().DeleteAllItems();
+	m_unk0xac = descriptor;
+
+	boost::recursive_mutex::scoped_lock lock(FUN_00437ab0());
+	std::for_each(descriptor->begin(), descriptor->end(), boost::bind(&CMemberTreeView::FUN_004380e0, this, _1));
+
+	TVSORTCB sort;
+	sort.hParent = TVI_ROOT;
+	sort.lpfnCompare = FUN_004377d0;
+	GetTreeCtrl().SortChildrenCB(&sort);
+}
+
 // STUB: ROBLOX 0x0043a240
 void CMemberTreeView::FUN_0043a240(NMHDR* pNMHDR, LRESULT* pResult)
 {
@@ -183,6 +345,25 @@ void CMemberTreeView::FUN_0043a240(NMHDR* pNMHDR, LRESULT* pResult)
 void CClassTreeView::FUN_0043a280(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	STUB(0x43a280);
+}
+
+// FUNCTION: ROBLOX 0x0043a320
+void CClassTreeView::OnInitialUpdate()
+{
+	CXTTreeView::OnInitialUpdate();
+
+	boost::recursive_mutex::scoped_lock lock(FUN_00437ab0());
+	FUN_00439690(&RBX::Reflection::ClassDescriptor::rootDescriptor());
+	std::for_each(
+		RBX::Reflection::EnumDescriptor::enumsBegin(),
+		RBX::Reflection::EnumDescriptor::enumsEnd(),
+		boost::bind(&CClassTreeView::FUN_00437f90, this, _1)
+	);
+
+	TVSORTCB sort;
+	sort.hParent = TVI_ROOT;
+	sort.lpfnCompare = FUN_004377d0;
+	GetTreeCtrl().SortChildrenCB(&sort);
 }
 
 void CObjectBrowser::OnDraw(CDC* pDC)

@@ -91,9 +91,6 @@ public:
 	static RBX::Reflection::BoundProp<bool, 1> g_unk0x00953a6c;
 	static RBX::Reflection::BoundProp<std::string, 1> g_unk0x00953a88;
 
-private:
-	friend class Classes;
-
 	bool m_unk0xf8;        // 0xf8
 	bool m_unk0xf9;        // 0xf9
 	bool m_unk0xfa;        // 0xfa

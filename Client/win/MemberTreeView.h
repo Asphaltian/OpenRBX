@@ -2,6 +2,15 @@
 #define MEMBERTREEVIEW_H
 
 #include "decomp.h"
+#include "reflection/EnumConverter.h"
+
+namespace RBX {
+namespace Reflection {
+namespace Metadata {
+class Item;
+}
+} // namespace Reflection
+} // namespace RBX
 
 class CDeclarationView;
 
@@ -22,6 +31,10 @@ protected:
 public:
 	virtual ~CMemberTreeView();
 
+	void FUN_004380e0(const RBX::Reflection::EnumDescriptor::Item* item);
+	void FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::Item* metadata);
+	void FUN_004397f0(const RBX::Reflection::EnumDescriptor* descriptor);
+
 	// SYNTHETIC: ROBLOX 0x004380c0
 	// CMemberTreeView::`scalar deleting destructor'
 
@@ -35,9 +48,9 @@ protected:
 	// ?GetMessageMap@CMemberTreeView@@MBEPBUAFX_MSGMAP@@XZ
 
 private:
-	CImageList m_unk0xa0; // 0xa0
-	undefined m_unk0xa8;  // 0xa8
-	undefined4 m_unk0xac; // 0xac
+	CImageList m_unk0xa0;                         // 0xa0
+	undefined m_unk0xa8;                          // 0xa8
+	const RBX::Reflection::Descriptor* m_unk0xac; // 0xac
 
 public:
 	CDeclarationView* m_unk0xb0; // 0xb0

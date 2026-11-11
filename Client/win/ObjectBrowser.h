@@ -38,4 +38,9 @@ private:
 
 DECOMP_SIZE_ASSERT(CObjectBrowser, 0x288)
 
+// clang-format off
+// SYNTHETIC: ROBLOX 0x007efac0
+// `FUN_00437ab0'::`2'::`dynamic atexit destructor for 'g_unk0x0095395c''
+// clang-format on
+
 #endif // OBJECTBROWSER_H
