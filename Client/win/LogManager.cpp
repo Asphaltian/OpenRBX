@@ -87,9 +87,13 @@ std::string ThreadLogManager::getLogFileName()
 }
 
 // FUNCTION: WEBSERVICE 0x100020c0
-// STUB: ROBLOX 0x0042a320
+// FUNCTION: ROBLOX 0x0042a320
 RBX::Log* LogManager::getLog()
 {
+	if (!logsEnabled) {
+		return NULL;
+	}
+
 	if (log == NULL) {
 		log = new RBX::Log(getLogFileName().c_str(), name.c_str());
 	}

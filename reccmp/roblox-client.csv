@@ -6811,3 +6811,4 @@ address,type,symbol,name,module,size
 0080b4c4,global,??_7CameraCenterCommand@RBX@@6B@,,,
 0080b498,global,??_7CameraZoomExtentsCommand@RBX@@6B@,,,
 0080b4ec,global,??_7CameraModelViewCommand@RBX@@6B@,,,
+00918138,global,?logsEnabled@LogManager@@0_NA,,,

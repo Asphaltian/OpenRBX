@@ -26,7 +26,7 @@
 
 namespace Ogre {
 
-// STUB: ROBLOX 0x00677eb0
+// FUNCTION: ROBLOX 0x00677eb0
 void RbxSky::FUN_00677eb0(VisualEngine* engine, const G3D::LightingParameters& parameters)
 {
 	if (parameters.moonPosition.y > -0.3f) {
@@ -34,7 +34,7 @@ void RbxSky::FUN_00677eb0(VisualEngine* engine, const G3D::LightingParameters& p
 
 		MeshPtr mesh = MeshManager::getSingleton().getByName("starsMesh");
 		if (!mesh.isNull()) {
-			if (parameters.skyAmbient.r > 0.3 && parameters.skyAmbient.r < 0.7f) {
+			if (0.3f < parameters.skyAmbient.r && parameters.skyAmbient.r < 0.7f) {
 				for (int i = 0; i < 3; i++) {
 					MaterialPtr material =
 						MaterialManager::getSingleton().getByName(mesh->getSubMesh(i)->getMaterialName());
