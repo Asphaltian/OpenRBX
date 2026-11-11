@@ -3,7 +3,9 @@
 
 #include "MarshaledListener.h"
 #include "decomp.h"
+#include "util/ContentProvider.h"
 #include "v8datamodel/Commands.h"
+#include "v8datamodel/Decal.h"
 #include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>
@@ -18,6 +20,7 @@ public:
 
 	virtual bool isEnabled() const;
 	virtual void doIt(RBX::IDataState* dataState);
+	virtual boost::shared_ptr<RBX::Decal> VTable0x14(); // vtable+0x14
 
 private:
 	RBX::Instance* FUN_0041f500() const;
@@ -25,11 +28,14 @@ private:
 
 DECOMP_SIZE_ASSERT(InsertDecal, 0x24)
 
+// VTABLE: ROBLOX 0x0080ac84
 // SIZE 0x24
 class InsertTexture : public InsertDecal
 {
 public:
 	InsertTexture(RBX::DataModel* dataModel) : InsertDecal(dataModel, "InsertTexture") {}
+
+	virtual boost::shared_ptr<RBX::Decal> VTable0x14();
 };
 
 DECOMP_SIZE_ASSERT(InsertTexture, 0x24)
@@ -126,5 +132,8 @@ DECOMP_SIZE_ASSERT(CInstanceExplorer, 0x3b0)
 
 HRESULT FUN_0041e610(LPCTSTR url);
 HRESULT FUN_0041e630(BSTR url);
+HRESULT FUN_0041e6b0(BSTR url, DWORD zone);
+RBX::ContentId FUN_0041e900(const char* path);
+const RBX::Name& FUN_0043c120(const char* path);
 
 #endif // INSTANCEEXPLORER_H

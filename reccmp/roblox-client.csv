@@ -6670,3 +6670,17 @@ address,type,symbol,name,module,size
 008023f4,global,?classCSelectionTreeCtrl@CSelectionTreeCtrl@@2UCRuntimeClass@@B,,,
 0080303c,global,messageMap___CRobloxTreeCtrl::GetThisMessageMap,,,
 008038ec,global,messageMap___CSelectionTreeCtrl::GetThisMessageMap,,,
+0046a240,function,,,,5
+00421110,synthetic,??_ECInstanceExplorer@@WDII@AEPAXI@Z,,,
+0046b090,synthetic,??_ECInstanceExplorer@@WDGM@AEPAXI@Z,,,
+00448690,synthetic,??_E?$DescribedCreatable@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@WBA@AEPAXI@Z,,,
+00448e50,synthetic,?getClassName@?$FactoryProduct@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@UBEABVName@2@XZ,,,
+00801d34,global,??_7CInsertObjectDialog@@6B@,,,
+00801d10,global,?classCInsertObjectDialog@CInsertObjectDialog@@2UCRuntimeClass@@B,,,
+0046aaa0,library,?Create@CXTCaption@@EAEHPBDKABUtagRECT@@PAVCWnd@@I@Z,,,5
+0040fa40,synthetic,??$callDoDeclare@$1?sRenderSettings@@3QBDB@Name@RBX@@CAXXZ,,,
+0040f980,synthetic,??$doDeclare@$1?sRenderSettings@@3QBDB@Name@RBX@@CAABV01@XZ,,,
+00952ef4,global,"flag___RBX::Name::declare<&sRenderSettings>",,,
+00952eec,global,"n___RBX::Name::doDeclare<&sRenderSettings>",,,
+00952ef0,global,"??_B?1???$doDeclare@$1?sRenderSettings@@3QBDB@Name@RBX@@CAABV01@XZ@51",,,
+0041fff0,stub,?GetMessageMap@CInsertObjectDialog@@MBEPBUAFX_MSGMAP@@XZ,,,

@@ -31,6 +31,8 @@ public:
 	// CSelectionCaption::`scalar deleting destructor'
 
 protected:
+	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
+
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 
 	DECLARE_MESSAGE_MAP()

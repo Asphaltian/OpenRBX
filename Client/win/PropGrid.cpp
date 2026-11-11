@@ -179,7 +179,7 @@ void XItem<RBX::TextureId, CXTPPropertyGridItem, RBX::Reflection::TypedPropertyD
 }
 
 // FUNCTION: ROBLOX 0x0043c120
-static const RBX::Name& FUN_0043c120(const char* path)
+const RBX::Name& FUN_0043c120(const char* path)
 {
 	switch (G3D::GImage::resolveFormat(path)) {
 	case G3D::GImage::JPEG:

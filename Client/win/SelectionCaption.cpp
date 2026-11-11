@@ -6,6 +6,12 @@ BEGIN_MESSAGE_MAP(CSelectionCaption, CStatic)
 ON_WM_CREATE()
 END_MESSAGE_MAP()
 
+// FUNCTION: ROBLOX 0x0046a240
+BOOL CSelectionCaption::PreCreateWindow(CREATESTRUCT& cs)
+{
+	return CXTCaption::PreCreateWindow(cs);
+}
+
 // FUNCTION: ROBLOX 0x0046a250
 int CSelectionCaption::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
