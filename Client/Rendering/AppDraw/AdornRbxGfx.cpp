@@ -698,7 +698,7 @@ AdornRbxGfx::~AdornRbxGfx()
 	m_unk0x88.clear();
 }
 
-// STUB: ROBLOX 0x0066e3b0
+// FUNCTION: ROBLOX 0x0066e3b0
 AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08(""), m_unk0x74(NULL)
 {
 	m_unk0x04 = visualEngine;
@@ -716,18 +716,19 @@ AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08(""), m_un
 	m_unk0x30 = m_unk0x04->getSceneManager()->createSceneNode(name);
 	m_unk0x04->getSceneManager()->getRootSceneNode()->addChild(m_unk0x30);
 
-	m_unk0x34 = new Ogre::RbxSceneNode(visualEngine->m_unk0x04, std::string(name) + "opt");
+	m_unk0x34 = new Ogre::RbxSceneNode(visualEngine->getSceneManager(), std::string(name) + "opt");
 	m_unk0x04->getSceneManager()->getRootSceneNode()->addChild(m_unk0x34);
 
 	m_unk0x70 = new Ogre::RbxEntity();
 	m_unk0x70->m_unk0x244 = false;
 	m_unk0x70->m_unk0x246 = false;
-	m_unk0x70->FUN_00674e30(&m_unk0x04->m_unk0x18);
+	Ogre::VisualEngine* engine = m_unk0x04;
+	m_unk0x70->FUN_00674e30(&engine->getUnk0x18());
 	m_unk0x34->attachObject(m_unk0x70);
 
 	Ogre::MeshPtr mesh = Ogre::MeshManager::getSingleton().getByName("rbxdummymesh");
 	if (mesh.isNull()) {
-		mesh = Ogre::MeshManager::getSingleton().create("rbxdummymesh", "General");
+		mesh = Ogre::MeshManager::getSingleton().createOrRetrieve("rbxdummymesh", "General").first;
 	}
 	m_unk0x70->FUN_00674e40(mesh);
 

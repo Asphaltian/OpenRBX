@@ -6087,6 +6087,7 @@ address,type,symbol,name,module,size
 008d195c,global,__TI2PAD,,,
 0083e018,string,,,,
 0083cf1c,global,??_7?$SharedPtr@VRbxFont@Ogre@@@Ogre@@6B@,,,
+0066ad50,library,??4?$SharedPtr@VRbxFont@Ogre@@@Ogre@@QAEAAV01@ABV01@@Z,,,
 005d0a30,function,,,,5
 0082afcc,global,??_7?$TToolVerb@VAxisMoveTool@RBX@@VRunStateVerb@2@@RBX@@6B@,,,
 0083a82c,global,??_7AxisMoveTool@RBX@@6BIRenderable@1@@,,,
