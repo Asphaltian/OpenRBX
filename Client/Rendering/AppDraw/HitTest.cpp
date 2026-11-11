@@ -9,6 +9,17 @@
 
 namespace RBX {
 
+// FUNCTION: ROBLOX 0x00670830
+float HitTest::distanceToHandleRadius(const G3D::Vector3& p_unk0x04, const G3D::Vector3& p_unk0x08)
+{
+	float distance = (p_unk0x04 - p_unk0x08).magnitude();
+	float radius = 0.5f;
+	if (distance > 28.66242f) {
+		radius = distance * 0.017444445f;
+	}
+	return radius;
+}
+
 // FUNCTION: WEBSERVICE 0x101ecd70
 // FUNCTION: ROBLOX 0x006708d0
 bool HitTest::hitTestBall(
