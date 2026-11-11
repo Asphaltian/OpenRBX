@@ -3,6 +3,10 @@
 
 #include "decomp.h"
 #include "reflection/EnumConverter.h"
+#include "reflection/function.h"
+#include "reflection/object.h"
+#include "reflection/property.h"
+#include "reflection/signal.h"
 
 namespace RBX {
 namespace Reflection {
@@ -33,7 +37,11 @@ public:
 
 	void FUN_004380e0(const RBX::Reflection::EnumDescriptor::Item* item);
 	void FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::Item* metadata);
+	void FUN_00438300(const RBX::Reflection::PropertyDescriptor* descriptor);
+	void FUN_00438420(const RBX::Reflection::SignalDescriptor* descriptor);
 	void FUN_004397f0(const RBX::Reflection::EnumDescriptor* descriptor);
+	void FUN_00439a70(const RBX::Reflection::FunctionDescriptor* descriptor);
+	void FUN_0043a060(const RBX::Reflection::ClassDescriptor* descriptor);
 
 	// SYNTHETIC: ROBLOX 0x004380c0
 	// CMemberTreeView::`scalar deleting destructor'
@@ -49,7 +57,7 @@ protected:
 
 private:
 	CImageList m_unk0xa0;                         // 0xa0
-	undefined m_unk0xa8;                          // 0xa8
+	bool m_unk0xa8;                               // 0xa8
 	const RBX::Reflection::Descriptor* m_unk0xac; // 0xac
 
 public:

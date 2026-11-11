@@ -6719,3 +6719,8 @@ address,type,symbol,name,module,size
 00915584,global,??_R0?AVSignalDescriptor@Reflection@RBX@@@8,,,
 00915b20,global,??_R0?AVFunctionDescriptor@Reflection@RBX@@@8,,,
 00918f44,global,??_R0?AVClassDescriptor@Reflection@RBX@@@8,,,
+0043a060,function,,,,470
+00439950,library,??$for_each@V?$_Const_iterator@$00@?$list@UItem@SignatureDescriptor@Reflection@RBX@@V?$allocator@UItem@SignatureDescriptor@Reflection@RBX@@@std@@@std@@V?$bind_t@XP6AXPAHPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABUItem@SignatureDescriptor@Reflection@RBX@@@ZV?$list3@V?$value@PAH@_bi@boost@@V?$value@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@V?$arg@$00@3@@_bi@boost@@@_bi@boost@@@std@@YA?AV?$bind_t@XP6AXPAHPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABUItem@SignatureDescriptor@Reflection@RBX@@@ZV?$list3@V?$value@PAH@_bi@boost@@V?$value@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@V?$arg@$00@3@@_bi@boost@@@_bi@boost@@V?$_Const_iterator@$00@?$list@UItem@SignatureDescriptor@Reflection@RBX@@V?$allocator@UItem@SignatureDescriptor@Reflection@RBX@@@std@@@0@0V123@@Z,,,
+00917e20,global,??_R0?AVProperties@Metadata@Reflection@RBX@@@8,,,
+00917e54,global,??_R0?AVFunctions@Metadata@Reflection@RBX@@@8,,,
+00917e84,global,??_R0?AVEvents@Metadata@Reflection@RBX@@@8,,,

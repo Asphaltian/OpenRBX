@@ -12,6 +12,11 @@
 #include <boost/bind.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 
+inline const RBX::Reflection::SignatureDescriptor& RBX::Reflection::FunctionDescriptor::getSignature() const
+{
+	return signature;
+}
+
 inline std::vector<RBX::Reflection::ClassDescriptor*>::const_iterator RBX::Reflection::ClassDescriptor::
 	derivedClasses_begin() const
 {
@@ -102,7 +107,7 @@ static int CALLBACK FUN_004377d0(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSo
 }
 
 // FUNCTION: ROBLOX 0x00437860
-CMemberTreeView::CMemberTreeView() : m_unk0xa8(1), m_unk0xac(NULL)
+CMemberTreeView::CMemberTreeView() : m_unk0xa8(true), m_unk0xac(NULL)
 {
 }
 
@@ -280,6 +285,34 @@ int CClassTreeView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
+// FUNCTION: ROBLOX 0x00438300
+void CMemberTreeView::FUN_00438300(const RBX::Reflection::PropertyDescriptor* descriptor)
+{
+	if (m_unk0xa8 || &descriptor->owner == m_unk0xac) {
+		RBX::Reflection::Metadata::Member* metadata =
+			RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446920(descriptor);
+		if ((!metadata || metadata->m_unk0xf8) && descriptor->isPublic()) {
+			HTREEITEM item = GetTreeCtrl().InsertItem(descriptor->name.c_str(), 6, 6);
+			GetTreeCtrl().SetItemData(item, reinterpret_cast<DWORD_PTR>(descriptor));
+			FUN_00438130(item, metadata);
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x00438420
+void CMemberTreeView::FUN_00438420(const RBX::Reflection::SignalDescriptor* descriptor)
+{
+	if (m_unk0xa8 || &descriptor->owner == m_unk0xac) {
+		RBX::Reflection::Metadata::Member* metadata =
+			RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_004469c0(descriptor);
+		if (!metadata || metadata->m_unk0xf8) {
+			HTREEITEM item = GetTreeCtrl().InsertItem(descriptor->name.c_str(), 8, 8);
+			GetTreeCtrl().SetItemData(item, reinterpret_cast<DWORD_PTR>(descriptor));
+			FUN_00438130(item, metadata);
+		}
+	}
+}
+
 IMPLEMENT_DYNCREATE(CDeclarationView, CHtmlView)
 
 BEGIN_MESSAGE_MAP(CDeclarationView, CHtmlView)
@@ -328,6 +361,74 @@ void CMemberTreeView::FUN_004397f0(const RBX::Reflection::EnumDescriptor* descri
 
 	boost::recursive_mutex::scoped_lock lock(FUN_00437ab0());
 	std::for_each(descriptor->begin(), descriptor->end(), boost::bind(&CMemberTreeView::FUN_004380e0, this, _1));
+
+	TVSORTCB sort;
+	sort.hParent = TVI_ROOT;
+	sort.lpfnCompare = FUN_004377d0;
+	GetTreeCtrl().SortChildrenCB(&sort);
+}
+
+// FUNCTION: ROBLOX 0x00439910
+static void FUN_00439910(int* count, std::string* text, const RBX::Reflection::SignatureDescriptor::Item& argument)
+{
+	if (*count > 0) {
+		*text += ", ";
+	}
+
+	*text += argument.name->c_str();
+	++*count;
+}
+
+// FUNCTION: ROBLOX 0x00439a70
+void CMemberTreeView::FUN_00439a70(const RBX::Reflection::FunctionDescriptor* descriptor)
+{
+	if (m_unk0xa8 || &descriptor->owner == m_unk0xac) {
+		RBX::Reflection::Metadata::Member* metadata =
+			RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446970(descriptor);
+		if (!metadata || metadata->m_unk0xf8) {
+			std::string text = descriptor->name.toString();
+			text += "(";
+
+			int count = 0;
+			std::for_each(
+				descriptor->getSignature().arguments.begin(),
+				descriptor->getSignature().arguments.end(),
+				boost::bind(FUN_00439910, &count, &text, _1)
+			);
+			text += ")";
+
+			int image = descriptor->security == RBX::Reflection::FunctionDescriptor::NeedTrustedCaller ? 5 : 4;
+			HTREEITEM item = GetTreeCtrl().InsertItem(text.c_str(), image, image);
+			GetTreeCtrl().SetItemData(item, reinterpret_cast<DWORD_PTR>(descriptor));
+			FUN_00438130(item, metadata);
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x0043a060
+void CMemberTreeView::FUN_0043a060(const RBX::Reflection::ClassDescriptor* descriptor)
+{
+	GetTreeCtrl().DeleteAllItems();
+	m_unk0xac = descriptor;
+
+	boost::recursive_mutex::scoped_lock lock(FUN_00437ab0());
+	std::for_each(
+		descriptor
+			->RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::descriptors_begin(),
+		descriptor->RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::descriptors_end(),
+		boost::bind(&CMemberTreeView::FUN_00438300, this, _1)
+	);
+	std::for_each(
+		descriptor
+			->RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::descriptors_begin(),
+		descriptor->RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::descriptors_end(),
+		boost::bind(&CMemberTreeView::FUN_00439a70, this, _1)
+	);
+	std::for_each(
+		descriptor->RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::descriptors_begin(),
+		descriptor->RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::descriptors_end(),
+		boost::bind(&CMemberTreeView::FUN_00438420, this, _1)
+	);
 
 	TVSORTCB sort;
 	sort.hParent = TVI_ROOT;

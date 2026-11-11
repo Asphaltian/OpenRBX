@@ -2,7 +2,9 @@
 #define REFLECTIONMETADATA_H
 
 #include "decomp.h"
+#include "reflection/function.h"
 #include "reflection/property.h"
+#include "reflection/signal.h"
 #include "v8tree/Instance.h"
 
 #include <algorithm>
@@ -151,6 +153,9 @@ public:
 	Reflection();
 
 	Class* FUN_00446220(const ClassDescriptor* descriptor, bool recurse);
+	Member* FUN_00446920(const PropertyDescriptor* descriptor);
+	Member* FUN_00446970(const FunctionDescriptor* descriptor);
+	Member* FUN_004469c0(const SignalDescriptor* descriptor);
 
 	void FUN_00447e50(std::string fileName);
 
@@ -388,6 +393,12 @@ void FUN_00447680();
 // clang-format off
 // TEMPLATE: ROBLOX 0x00446720
 // RBX::Instance::findFirstChildOfType<RBX::Reflection::Metadata::Classes>
+// TEMPLATE: ROBLOX 0x004467a0
+// RBX::Instance::findFirstChildOfType<RBX::Reflection::Metadata::Properties>
+// TEMPLATE: ROBLOX 0x00446820
+// RBX::Instance::findFirstChildOfType<RBX::Reflection::Metadata::Functions>
+// TEMPLATE: ROBLOX 0x004468a0
+// RBX::Instance::findFirstChildOfType<RBX::Reflection::Metadata::Events>
 // SYNTHETIC: ROBLOX 0x007efb80
 // `RBX::FUN_004480c0::Metadata::Reflection::FUN_004480c0'::`2'::`dynamic atexit destructor for 'g_unk0x00953a24''
 // clang-format on
