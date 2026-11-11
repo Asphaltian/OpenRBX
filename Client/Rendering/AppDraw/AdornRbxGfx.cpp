@@ -114,6 +114,12 @@ std::string g_unk0x009612e4 = "explosion/explosion1\n"
 							  "\t}\n"
 							  "}\n";
 
+// GLOBAL: ROBLOX 0x00961318
+std::string g_unk0x00961318 = "c01adorn";
+
+// GLOBAL: ROBLOX 0x00961300
+Ogre::MeshPtr g_unk0x00961300;
+
 // GLOBAL: ROBLOX 0x00961334
 int g_unk0x00961334;
 
@@ -444,10 +450,57 @@ void AdornRbxGfx::box(const G3D::AABox& box, const G3D::Color4& solid, const G3D
 	FUN_0066c220(mesh, transform * local, m_unk0x38);
 }
 
-// STUB: ROBLOX 0x0066ca20
+// FUNCTION: ROBLOX 0x0066ca20
 void AdornRbxGfx::cylinderAlongX(float radius, float length, const G3D::Color4& solid, const G3D::Color4& wire)
 {
-	STUB(0x66ca20);
+	Ogre::Sphere bounds(
+		Ogre::Vector3(m_unk0x94.translation + G3D::Vector3(length * 0.5, 0.0f, 0.0f)),
+		radius > length ? radius * 1.4f : length * 1.4f
+	);
+	if (!m_unk0x04->m_unk0x08->isVisible(bounds, NULL)) {
+		return;
+	}
+
+	FUN_0066aae0(solid, 0);
+	Ogre::Unknown0067eb00 quadric;
+	if (g_unk0x00961300.isNull()) {
+		Ogre::ManualObject* manual =
+			quadric.FUN_0067ecc0(m_unk0x04->getSceneManager(), "cyl" + FUN_0066a3c0(), NULL, 1.0f, 1.0f, 1.0f, 12, 1);
+		quadric.FUN_0067eae0(Ogre::Vector3(0.0f, 0.0f, 1.0f));
+		quadric.FUN_00685580(m_unk0x04->getSceneManager(), "dsk" + FUN_0066a3c0(), manual, 0.0f, 1.0f, 12, 1);
+		quadric.FUN_0067eae0(Ogre::Vector3(0.0f, 0.0f, 0.0f));
+		quadric.m_unk0x08 = 1;
+		quadric.FUN_00685580(m_unk0x04->getSceneManager(), "dsk" + FUN_0066a3c0(), manual, 0.0f, 1.0f, 12, 1);
+		manual->setMaterialName(0, m_unk0x24->getName());
+		manual->setMaterialName(1, m_unk0x24->getName());
+		manual->setMaterialName(2, m_unk0x24->getName());
+		g_unk0x00961300 = manual->convertToMesh(
+			m_unk0x04->getSceneManager()->getName() + g_unk0x00961318,
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+		);
+		Ogre::Sphere meshBounds(g_unk0x00961300->getBounds().getCenter(), g_unk0x00961300->getBoundingSphereRadius());
+		for (int i = 0; i < g_unk0x00961300->getNumSubMeshes(); i++) {
+			m_unk0x34->FUN_0067b2b0(g_unk0x00961300->getSubMesh(i), meshBounds);
+		}
+	}
+
+	Ogre::Matrix4 world;
+	{
+		Ogre::Quaternion orientation;
+		orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
+		world.makeTransform(
+			reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation), Ogre::Vector3(1.0f, 1.0f, 1.0f), orientation
+		);
+	}
+
+	Ogre::Matrix4 local;
+	local.makeTransform(
+		Ogre::Vector3(-length * 0.5, 0.0f, 0.0f),
+		Ogre::Vector3(radius, radius, length),
+		Ogre::Quaternion(Ogre::Radian(Ogre::Degree(90.0f)), Ogre::Vector3(0.0f, 1.0f, 0.0f))
+	);
+
+	FUN_0066c220(g_unk0x00961300, world * local, m_unk0x24);
 }
 
 // FUNCTION: ROBLOX 0x0066cf50
@@ -497,10 +550,49 @@ void AdornRbxGfx::quad(
 	STUB(0x66d350);
 }
 
-// STUB: ROBLOX 0x0066da00
+// FUNCTION: ROBLOX 0x0066da00
 void AdornRbxGfx::ray(const G3D::Ray& ray, const G3D::Color4& color, float scale)
 {
-	STUB(0x66da00);
+	FUN_0066aae0(color, 0);
+	Ogre::Unknown0067eb00 quadric;
+
+	std::string key("ray0001");
+	Ogre::MeshPtr mesh = FUN_0066b450(key);
+	if (mesh.isNull()) {
+		Ogre::Unknown0067eb00 quadric;
+		Ogre::ManualObject* manual =
+			quadric.FUN_0067ecc0(m_unk0x04->getSceneManager(), FUN_0066a3c0(), NULL, 0.05f, 0.05f, 1.0f, 12, 1);
+		quadric.FUN_0067eae0(Ogre::Vector3(0.0f, 0.0f, 1.0f));
+		quadric.FUN_0067ecc0(m_unk0x04->getSceneManager(), FUN_0066a3c0(), manual, 0.15f, 0.0f, 0.3f, 12, 1);
+		quadric.m_unk0x08 = 1;
+		quadric.FUN_00685580(m_unk0x04->getSceneManager(), FUN_0066a3c0(), manual, 0.0f, 0.15f, 12, 1);
+		quadric.FUN_0067eae0(Ogre::Vector3(0.0f, 0.0f, 0.0f));
+		quadric.FUN_00685580(m_unk0x04->getSceneManager(), FUN_0066a3c0(), manual, 0.0f, 0.05f, 12, 1);
+		for (int i = 0; i < 4; i++) {
+			manual->setMaterialName(i, m_unk0x24->getName());
+		}
+		mesh = manual->convertToMesh(
+			m_unk0x04->m_unk0x04->getName() + "amsh" + Ogre::StringConverter::toString(m_unk0x64.size()),
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+		);
+		m_unk0x64[key] = mesh;
+		Ogre::Sphere bounds(mesh->getBounds().getCenter(), mesh->getBoundingSphereRadius());
+		for (int i = 0; i < mesh->getNumSubMeshes(); i++) {
+			m_unk0x34->FUN_0067b2b0(mesh->getSubMesh(i), bounds);
+		}
+	}
+
+	float length = ray.direction.magnitude() / 1.3f;
+	Ogre::Quaternion rotation =
+		Ogre::Vector3(0.0f, 0.0f, 1.0f).getRotationTo(Ogre::Vector3(ray.direction.x, ray.direction.y, ray.direction.z));
+	Ogre::Matrix4 transform;
+	FUN_0066a2d0(
+		transform,
+		Ogre::Vector3(ray.origin.x, ray.origin.y, ray.origin.z),
+		Ogre::Vector3(length * 0.5, length * 0.5, length),
+		rotation
+	);
+	FUN_0066c220(mesh, transform, m_unk0x24);
 }
 
 // FUNCTION: ROBLOX 0x0066df30
