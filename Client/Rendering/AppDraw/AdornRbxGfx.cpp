@@ -191,7 +191,7 @@ std::string AdornRbxGfx::FUN_0066a3c0()
 	return StringConverter<int>::convertToString(id);
 }
 
-// STUB: ROBLOX 0x0066a580
+// FUNCTION: ROBLOX 0x0066a580
 G3D::Vector2 AdornRbxGfx::drawFont2D(
 	const std::string& s,
 	const G3D::Vector2& position,
@@ -205,8 +205,9 @@ G3D::Vector2 AdornRbxGfx::drawFont2D(
 {
 	float x = position.x;
 	float y = getHeight() - 1 - position.y;
+	Ogre::Vector2 pos(x, y);
 	Ogre::Vector2 extent =
-		g_unk0x00949c7c->FUN_0067e1e0(m_unk0x04, s, Ogre::Vector2(x, y), size, color, outline, xAlign, yAlign, spacing);
+		g_unk0x00949c7c->FUN_0067e1e0(m_unk0x04, s, pos, size, color, outline, xAlign, yAlign, spacing);
 	return G3D::Vector2(extent.x, extent.y);
 }
 
@@ -365,7 +366,7 @@ void AdornRbxGfx::finishRenderPass()
 	FUN_0066c190();
 }
 
-// STUB: ROBLOX 0x0066c2f0
+// FUNCTION: ROBLOX 0x0066c2f0
 void AdornRbxGfx::box(const G3D::AABox& box, const G3D::Color4& solid, const G3D::Color4& wire)
 {
 	IndexBox indexBox(G3D::Vector3(-1.0f, -1.0f, -1.0f), G3D::Vector3(1.0f, 1.0f, 1.0f));
@@ -407,9 +408,8 @@ void AdornRbxGfx::box(const G3D::AABox& box, const G3D::Color4& solid, const G3D
 			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
 		);
 		FUN_0066bf20(std::string(key), mesh);
-		m_unk0x34->FUN_0067b2b0(
-			mesh->getSubMesh(0), Ogre::Sphere(mesh->getBounds().getCenter(), mesh->getBoundingSphereRadius())
-		);
+		Ogre::Sphere bounds(mesh->getBounds().getCenter(), mesh->getBoundingSphereRadius());
+		m_unk0x34->FUN_0067b2b0(mesh->getSubMesh(0), bounds);
 	}
 
 	Ogre::Matrix4 local;
