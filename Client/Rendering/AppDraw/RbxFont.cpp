@@ -173,7 +173,7 @@ Vector2 RbxFont::FUN_0067e1e0(
 // GLOBAL: ROBLOX 0x00961434
 int g_unk0x00961434;
 
-// STUB: ROBLOX 0x0067e610
+// FUNCTION: ROBLOX 0x0067e610
 RbxFont::RbxFont(const std::string& filename, G3D::BinaryInput& in)
 {
 	in.readUInt32();
@@ -181,12 +181,11 @@ RbxFont::RbxFont(const std::string& filename, G3D::BinaryInput& in)
 		m_unk0x00[i] = in.readUInt16();
 	}
 	m_unk0x208 = in.readUInt16();
-	int cellSize = in.readUInt16();
-	cellSize /= 16;
-	m_unk0x200 = cellSize;
-	m_unk0x204 = cellSize;
-	int width = G3D::ceilPow2(cellSize * 16);
-	int height = G3D::ceilPow2(cellSize * 8);
+	int texWidth = in.readUInt16();
+	m_unk0x200 = texWidth / 16;
+	m_unk0x204 = texWidth / 16;
+	int width = G3D::ceilPow2(m_unk0x200 * 16);
+	int height = G3D::ceilPow2(m_unk0x204 * 8);
 	const uint8* data = in.getCArray() + in.getPosition();
 	char name[8];
 	_snprintf(name, 8, "ft%d", g_unk0x00961434++);
