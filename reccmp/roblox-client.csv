@@ -6699,3 +6699,10 @@ address,type,symbol,name,module,size
 00454e50,function,,,,243
 00454f50,function,,,,351
 004550b0,function,,,,455
+0044f970,function,,,,591
+0044fcf0,library,??$for_each@VIterator@?$MemberDescriptorContainer@VPropertyDescriptor@Reflection@RBX@@@Reflection@RBX@@P6AXVConstProperty@34@@Z@std@@YAP6AXVConstProperty@Reflection@RBX@@@ZVIterator@?$MemberDescriptorContainer@VPropertyDescriptor@Reflection@RBX@@@23@1P6AX0@Z@Z,,,
+00450460,library,??$for_each@VIterator@?$MemberDescriptorContainer@VPropertyDescriptor@Reflection@RBX@@@Reflection@RBX@@V?$bind_t@XP6AXPBDPAV?$basic_stringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVConstProperty@Reflection@RBX@@@ZV?$list3@V?$value@PBD@_bi@boost@@V?$value@PAV?$basic_stringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@V?$arg@$00@3@@_bi@boost@@@_bi@boost@@@std@@YA?AV?$bind_t@XP6AXPBDPAV?$basic_stringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABVConstProperty@Reflection@RBX@@@ZV?$list3@V?$value@PBD@_bi@boost@@V?$value@PAV?$basic_stringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@23@V?$arg@$00@3@@_bi@boost@@@_bi@boost@@VIterator@?$MemberDescriptorContainer@VPropertyDescriptor@Reflection@RBX@@@Reflection@RBX@@0V123@@Z,,,
+00450e30,function,,,,630
+00407ca0,function,,,,232
+0044d310,library,??1CWaitCursor@@QAE@XZ,,,
+00952da4,global,?_pAtlModule@ATL@@3PAVCAtlModule@1@A,,,

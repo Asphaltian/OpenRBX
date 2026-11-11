@@ -21,6 +21,7 @@
 #include "script/Script.h"
 #include "security/SecurityContext.h"
 #include "util/ContentProvider.h"
+#include "util/Http.h"
 #include "util/Profiling.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/DebugSettings.h"
@@ -31,9 +32,11 @@
 #include <afxpriv.h>
 #include <algorithm>
 #include <atlcom.h>
+#include <boost/bind.hpp>
 #include <exdispid.h>
 #include <functional>
 #include <shlwapi.h>
+#include <sstream>
 #include <stdexcept>
 
 class CRobloxModule : public ATL::CAtlMfcModule
@@ -77,6 +80,9 @@ public:
 
 	virtual void RemoveDocument(CDocument* pDoc);                          // vtable+0x68
 	virtual CFrameWnd* CreateNewFrame(CDocument* pDoc, CFrameWnd* pOther); // vtable+0x78
+
+	CDocument* FUN_0044d620(LPCTSTR lpszPathName, BOOL bMakeVisible);
+	CDocument* FUN_0044f970();
 
 private:
 	CDocument* m_unk0x90; // 0x90
@@ -177,6 +183,58 @@ void CRbxPlayDocTemplate::RemoveDocument(CDocument* pDoc)
 	}
 }
 
+// FUNCTION: ROBLOX 0x0044d620
+CDocument* CRbxPlayDocTemplate::FUN_0044d620(LPCTSTR lpszPathName, BOOL bMakeVisible)
+{
+	m_unk0x94 = "";
+
+	CDocument* pDocument = CreateNewDocument();
+	if (pDocument == NULL) {
+		m_unk0x94 = "CDocTemplate::CreateNewDocument returned NULL";
+		AfxMessageBox(AFX_IDP_FAILED_TO_CREATE_DOC);
+		return NULL;
+	}
+
+	BOOL bAutoDelete = pDocument->m_bAutoDelete;
+	pDocument->m_bAutoDelete = FALSE;
+	CFrameWnd* pFrame = CreateNewFrame(pDocument, NULL);
+	pDocument->m_bAutoDelete = bAutoDelete;
+	if (pFrame == NULL) {
+		m_unk0x94 = "CreateNewFrame returned NULL";
+		AfxMessageBox(AFX_IDP_FAILED_TO_CREATE_DOC);
+		delete pDocument;
+		return NULL;
+	}
+
+	if (lpszPathName == NULL) {
+		SetDefaultTitle(pDocument);
+
+		if (!bMakeVisible) {
+			pDocument->m_bEmbedded = TRUE;
+		}
+
+		if (!pDocument->OnNewDocument()) {
+			m_unk0x94 = "CDocument::OnNewDocument returned FALSE";
+			pFrame->DestroyWindow();
+			return NULL;
+		}
+
+		m_nUntitledCount++;
+	}
+	else {
+		CWaitCursor wait;
+		if (!pDocument->OnOpenDocument(lpszPathName)) {
+			m_unk0x94 = "CDocument::OnNewDocument returned FALSE (v2)";
+			pFrame->DestroyWindow();
+			return NULL;
+		}
+		pDocument->SetPathName(lpszPathName);
+	}
+
+	InitialUpdateFrame(pFrame, pDocument, bMakeVisible);
+	return pDocument;
+}
+
 // FUNCTION: ROBLOX 0x0044d7d0
 CIDEDocManager::CIDEDocManager(bool p_unk0x04)
 {
@@ -212,6 +270,23 @@ BOOL CIDEDocManager::DoPromptFileName(
 	}
 
 	return CDocManager::DoPromptFileName(fileName, nIDSTitle, lFlags, bOpenFileDialog, pTemplate);
+}
+
+// FUNCTION: ROBLOX 0x0044d9d0
+static void FUN_0044d9d0(RBX::Reflection::ConstProperty property)
+{
+	if (property.getDescriptor().hasStringValue()) {
+		RBX::Log::current()->writeEntry(
+			RBX::Log::Information,
+			G3D::format(
+				"\t\t%s.%s: %s",
+				property.getDescriptor().category.c_str(),
+				property.getName().c_str(),
+				property.getStringValue().c_str()
+			)
+				.c_str()
+		);
+	}
 }
 
 // FUNCTION: ROBLOX 0x0044dac0
@@ -362,6 +437,19 @@ void CIDEDocManager::OnFileNew()
 	}
 }
 
+// FUNCTION: ROBLOX 0x0044edf0
+static void FUN_0044edf0(
+	const char* category, std::stringstream* stream, const RBX::Reflection::ConstProperty& property
+)
+{
+	if (property.getDescriptor().category == category) {
+		*stream << property.getName().c_str();
+		*stream << ':';
+		*stream << property.getStringValue();
+		*stream << ';';
+	}
+}
+
 // FUNCTION: ROBLOX 0x0044eee0
 int CRobloxApp::ExitInstance()
 {
@@ -378,10 +466,82 @@ void CRobloxApp::FUN_0044ef90(boost::shared_ptr<RBX::Script> script)
 	doc->FUN_0044eaf0(script);
 }
 
-// STUB: ROBLOX 0x004500e0
+// FUNCTION: ROBLOX 0x0044f970
+CDocument* CRbxPlayDocTemplate::FUN_0044f970()
+{
+	if (!m_unk0x90) {
+		g_unk0x00954294.reset();
+		CDocument* document = FUN_0044d620(NULL, TRUE);
+		try {
+			FUN_0044ec70();
+		}
+		catch (std::exception&) {
+			AfxMessageBox(AFX_IDP_FAILED_TO_CREATE_DOC);
+			if (document) {
+				document->OnCloseDocument();
+			}
+			throw;
+		}
+
+		if (!document) {
+			if (!m_unk0x94.IsEmpty()) {
+				throw std::runtime_error(static_cast<LPCTSTR>(m_unk0x94));
+			}
+			throw std::runtime_error("OpenDocumentFile returned NULL");
+		}
+
+		m_unk0x90 = document;
+		return document;
+	}
+	else {
+		if (!m_unk0x90->SaveModified()) {
+			throw std::runtime_error("User cancelled");
+		}
+
+		SetDefaultTitle(m_unk0x90);
+		if (!m_unk0x90->OnNewDocument()) {
+			throw std::runtime_error("CDocument::OnNewDocument returned FALSE");
+		}
+
+		if (ActiveDocView::g_unk0x00952d8c == m_unk0x90) {
+			ActiveDocView::FUN_004054f0(true, ActiveDocView::g_unk0x00952d8c);
+		}
+
+		POSITION pos = m_unk0x90->GetFirstViewPosition();
+		while (pos) {
+			CView* view = m_unk0x90->GetNextView(pos);
+			g_unk0x00954294.reset();
+			view->SendMessage(WM_INITIALUPDATE);
+		}
+
+		return m_unk0x90;
+	}
+}
+
+// FUNCTION: ROBLOX 0x0044fbc0
+CDocument* CRobloxApp::FUN_0044fbc0()
+{
+	CIDEDocManager* manager = static_cast<CIDEDocManager*>(m_pDocManager);
+	return manager->m_unk0x24->FUN_0044f970();
+}
+
+// FUNCTION: ROBLOX 0x0044ff90
+static void FUN_0044ff90(boost::shared_ptr<RBX::Instance> instance)
+{
+	RBX::Log::current()->writeEntry(RBX::Log::Information, G3D::format("\t%s", instance->getName().c_str()).c_str());
+	std::for_each(instance->properties_begin(), instance->properties_end(), FUN_0044d9d0);
+}
+
+// FUNCTION: ROBLOX 0x004500e0
 static void FUN_004500e0()
 {
-	STUB(0x4500e0);
+	RBX::Log::current()->writeEntry(
+		RBX::Log::Information, G3D::format("GlobalSettings ---------------------------------------").c_str()
+	);
+	RBX::GlobalSettings::singleton()->visitChildren(FUN_0044ff90);
+	RBX::Log::current()->writeEntry(
+		RBX::Log::Information, G3D::format("End GlobalSettings -----------------------------------").c_str()
+	);
 }
 
 // FUNCTION: ROBLOX 0x004506a0
@@ -471,10 +631,34 @@ void CRobloxApp::FUN_004509e0()
 	FUN_004500e0();
 }
 
-// STUB: ROBLOX 0x00450e30
+// FUNCTION: ROBLOX 0x00450e30
 static void FUN_00450e30()
 {
-	STUB(0x450e30);
+	std::string url = FUN_00407190() + "/Game/MachineConfiguration.ashx";
+	std::string response;
+
+	try {
+		std::stringstream stream;
+
+		RBX::DebugSettings& debugSettings = RBX::DebugSettings::singleton();
+		std::for_each(
+			debugSettings.properties_begin(),
+			debugSettings.properties_end(),
+			boost::bind(FUN_0044edf0, "Profile", &stream, _1)
+		);
+
+		CRenderSettings& renderSettings = CRenderSettings::singleton();
+		std::for_each(
+			renderSettings.properties_begin(),
+			renderSettings.properties_end(),
+			boost::bind(FUN_0044edf0, "General", &stream, _1)
+		);
+
+		stream.flush();
+		RBX::Http(url).post(stream, false, response);
+	}
+	catch (std::exception&) {
+	}
 }
 
 // FUNCTION: ROBLOX 0x004510b0

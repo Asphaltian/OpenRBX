@@ -357,6 +357,8 @@ public:
 	}
 
 	// clang-format off
+	// TEMPLATE: ROBLOX 0x0044fd70
+	// ??$visitChildren@P6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Instance@RBX@@QBEXP6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Z
 	// TEMPLATE: WEBSERVICE 0x1016ee10
 	// TEMPLATE: ROBLOX 0x00479c30
 	// RBX::Instance::visitChildren<boost::_bi::bind_t<void,boost::_mfi::mf1<void,RBX::View::PartChunk,boost::shared_ptr<RBX::Instance> >,boost::_bi::list2<boost::_bi::value<RBX::View::PartChunk *>,boost::arg<1> > > >

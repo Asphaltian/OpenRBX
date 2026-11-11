@@ -1,6 +1,7 @@
 #include "App.h"
 
 #include "Roblox.h"
+#include "Workspace.h"
 #include "util/ContentProvider.h"
 #include "v8datamodel/DebugSettings.h"
 
@@ -58,6 +59,30 @@ STDMETHODIMP CApp::ClearFileCache()
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 	RBX::ContentProvider::singleton().clearFileCache();
 	return S_OK;
+}
+
+// FUNCTION: ROBLOX 0x00407ca0
+HRESULT FUN_00407ca0(CComObject<CWorkspace>** p_unk0x04, void* p_unk0x08)
+{
+	HRESULT result = E_OUTOFMEMORY;
+	CComObject<CWorkspace>* object = NULL;
+
+	ATLTRY(object = new CComObject<CWorkspace>(p_unk0x08))
+
+	if (object != NULL) {
+		object->SetVoid(p_unk0x08);
+		object->InternalFinalConstructAddRef();
+		result = object->FinalConstruct();
+		object->InternalFinalConstructRelease();
+
+		if (result != S_OK) {
+			delete object;
+			object = NULL;
+		}
+	}
+
+	*p_unk0x04 = object;
+	return result;
 }
 
 // FUNCTION: ROBLOX 0x00407fd0

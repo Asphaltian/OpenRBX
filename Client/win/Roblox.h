@@ -68,6 +68,7 @@ public:
 	void FUN_0044e250();
 	BOOL FUN_0044ea70(std::string script);
 	void FUN_0044ef90(boost::shared_ptr<RBX::Script> script);
+	CDocument* FUN_0044fbc0();
 	void FUN_004509e0();
 	BOOL FUN_00451550(std::vector<std::string>::iterator begin, std::vector<std::string>::iterator end);
 
