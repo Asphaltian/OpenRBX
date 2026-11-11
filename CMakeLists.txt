@@ -685,6 +685,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/ChildFrm.cpp
     Client/win/DHTMLWindow.cpp
     Client/win/DxUserInput.cpp
+    Client/win/UserInputUtil.cpp
     Client/win/ErrorUploader.cpp
     Client/win/InsertObjectDialog.cpp
     Client/win/InstanceExplorer.cpp

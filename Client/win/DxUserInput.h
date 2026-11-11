@@ -62,7 +62,7 @@ private:
 	void FUN_0046c3c0(RBX::UIEvent::EventType eventType, const G3D::Vector2& position);
 	G3D::Vector2 FUN_0046c4f0();
 	G3D::Vector2 FUN_0046c590();
-	bool FUN_0046c780();
+	static bool FUN_0046c780();
 	void FUN_0046c950(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta);
 	void FUN_0046cd90();
 

@@ -4,6 +4,12 @@
 #include "v8datamodel/Selection.h"
 #include "v8tree/Service.h"
 
+template <class T>
+static T* createService(RBX::GlobalSettings* settings)
+{
+	return settings ? settings->create<T>() : NULL;
+}
+
 IMPLEMENT_DYNCREATE(CSettingsDialog, CDialog)
 IMPLEMENT_DYNCREATE(CSettingsExplorer, CInstanceExplorer)
 
@@ -77,7 +83,8 @@ BOOL CSettingsDialog::OnInitDialog()
 	m_unk0x18c->FUN_004212d0(RBX::GlobalSettings::singleton().get());
 
 	m_unk0x190.Create(CRect(0, 0, 0, 0), &m_unk0x74, m_unk0x74.IdFromRowCol(0, 1));
-	m_unk0x190.FUN_00445580(RBX::ServiceProvider::create<RBX::Selection>(RBX::GlobalSettings::singleton().get()));
+	RBX::Selection* selection = createService<RBX::Selection>(RBX::GlobalSettings::singleton().get());
+	m_unk0x190.FUN_00445580(selection);
 
 	CRect rect;
 	GetDlgItem(1001)->GetWindowRect(&rect);
