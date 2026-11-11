@@ -36,6 +36,7 @@ public:
 	// CDeclarationView::`scalar deleting destructor'
 
 	virtual void OnInitialUpdate();
+	virtual void OnDocumentComplete(LPCTSTR lpszURL);
 
 	void FUN_00438530(RBX::Reflection::Metadata::Item* metadata, const char* declaration, const char* owner);
 	void FUN_00439c30(const RBX::Reflection::Descriptor* descriptor);

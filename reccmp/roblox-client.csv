@@ -6727,3 +6727,10 @@ address,type,symbol,name,module,size
 0043a240,function,,,,49
 0043a280,function,,,,146
 004395b0,synthetic,??$get@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Value@Reflection@RBX@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,,,
+008066dc,global,__GUID_3050f1ff_98b5_11cf_bb82_00aa00bdce0b,,,
+0043a550,library,?EscapeXML@ATL@@YAHPB_WHPA_WHK@Z,,,
+0043a490,library,?_AtlCopyNCR@ATL@@YAH_WPA_W@Z,,,
+0043a4f0,library,?_AtlCopyNCRPair@ATL@@YAHKPA_W@Z,,,
+0043ad10,library,?push_back@?$deque@V?$CComPtr@UIHTMLDOMNode@@@ATL@@V?$allocator@V?$CComPtr@UIHTMLDOMNode@@@ATL@@@std@@@std@@QAEXABV?$CComPtr@UIHTMLDOMNode@@@ATL@@@Z,,,
+0043a9c0,library,?pop_front@?$deque@V?$CComPtr@UIHTMLDOMNode@@@ATL@@V?$allocator@V?$CComPtr@UIHTMLDOMNode@@@ATL@@@std@@@std@@QAEXXZ,,,
+00806b08,global,__GUID_3050f5da_98b5_11cf_bb82_00aa00bdce0b,,,

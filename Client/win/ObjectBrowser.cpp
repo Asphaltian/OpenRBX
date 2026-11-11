@@ -9,6 +9,7 @@
 #include "reflection/property.h"
 #include "reflection/signal.h"
 
+#include <atlenc.h>
 #include <boost/bind.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 
@@ -379,6 +380,55 @@ CDeclarationView::~CDeclarationView()
 {
 }
 
+// FUNCTION: ROBLOX 0x00438ce0
+void CDeclarationView::OnDocumentComplete(LPCTSTR lpszURL)
+{
+	m_unk0xf0 = GetHtmlDocument();
+	if (m_unk0xf0) {
+		CComPtr<IHTMLElementCollection> all;
+		m_unk0xf0->get_all(&all);
+
+		CComPtr<IDispatch> dispatch;
+		all->item(CComVariant("Declaration"), CComVariant(), &dispatch);
+		m_unk0xf4 = dispatch;
+		dispatch.Release();
+
+		all->item(CComVariant("OwnerDiv"), CComVariant(), &dispatch);
+		m_unk0xf8 = dispatch;
+		dispatch.Release();
+
+		all->item(CComVariant("Owner"), CComVariant(), &dispatch);
+		m_unk0xfc = dispatch;
+		dispatch.Release();
+
+		all->item(CComVariant("DeprecatedElement"), CComVariant(), &dispatch);
+		m_unk0x108 = dispatch;
+		dispatch.Release();
+
+		all->item(CComVariant("PreliminaryElement"), CComVariant(), &dispatch);
+		m_unk0x10c = dispatch;
+		dispatch.Release();
+
+		all->item(CComVariant("SummaryDiv"), CComVariant(), &dispatch);
+		m_unk0x100 = dispatch;
+		dispatch.Release();
+
+		all->item(CComVariant("Summary"), CComVariant(), &dispatch);
+		m_unk0x104 = dispatch;
+	}
+	else {
+		m_unk0xf4.Release();
+		m_unk0xf8.Release();
+		m_unk0xfc.Release();
+		m_unk0x100.Release();
+		m_unk0x104.Release();
+		m_unk0x108.Release();
+		m_unk0x10c.Release();
+	}
+
+	FUN_00438530(NULL, NULL, NULL);
+}
+
 // FUNCTION: ROBLOX 0x00439690
 void CClassTreeView::FUN_00439690(const RBX::Reflection::ClassDescriptor* descriptor)
 {
@@ -654,6 +704,30 @@ BEGIN_MESSAGE_MAP(CStandardOutputView, COutputView)
 ON_MESSAGE(WM_USER + 101, FUN_0043b8a0)
 END_MESSAGE_MAP()
 
+// FUNCTION: ROBLOX 0x0043a470
+void COutputView::OnInitialUpdate()
+{
+	CSecureHtmlView::OnInitialUpdate();
+	LoadFromResource(134);
+}
+
+// FUNCTION: ROBLOX 0x0043a800
+void COutputView::OnDocumentComplete(LPCTSTR lpszURL)
+{
+	m_unk0x108 = GetHtmlDocument();
+	if (m_unk0x108) {
+		CComPtr<IHTMLElementCollection> all;
+		m_unk0x108->get_all(&all);
+
+		CComPtr<IDispatch> dispatch;
+		all->item(CComVariant("output"), CComVariant(), &dispatch);
+		m_unk0x10c = dispatch;
+	}
+	else {
+		m_unk0x10c.Release();
+	}
+}
+
 // FUNCTION: ROBLOX 0x0043ae20
 CStandardOutputView::~CStandardOutputView()
 {
@@ -674,6 +748,68 @@ void CStandardOutputView::onEvent(const RBX::StandardOut* source, RBX::StandardO
 	}
 }
 
+// FUNCTION: ROBLOX 0x0043b300
+void COutputView::FUN_0043b300(IHTMLElement* element)
+{
+	CComQIPtr<IHTMLDOMNode> node(element);
+	CComPtr<IHTMLDOMNode> appended;
+	if (m_unk0x10c->appendChild(node, &appended) == S_OK) {
+		element->scrollIntoView(CComVariant(VARIANT_FALSE));
+		m_unk0xf4.push_back(node);
+		if (m_unk0xf4.size() > 300) {
+			CComPtr<IHTMLDOMNode> removed;
+			m_unk0x10c->removeChild(m_unk0xf4.front(), &removed);
+			m_unk0xf4.pop_front();
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x0043b490
+void COutputView::FUN_0043b490(RBX::MessageType type, const char* text, __time64_t time)
+{
+	CStringW message(text);
+	CStringW escaped;
+	int length = EscapeXML(message, message.GetLength(), NULL, 0);
+	EscapeXML(message, message.GetLength(), escaped.GetBufferSetLength(length), length);
+	escaped.ReleaseBuffer();
+
+	CStringW html;
+	if (type != RBX::MESSAGE_OUTPUT && time != 0) {
+		char buffer[32];
+		_ctime64_s(buffer, sizeof(buffer), &time);
+		html = buffer;
+		html += " - ";
+	}
+
+	switch (type) {
+	case RBX::MESSAGE_INFO:
+		html += "<FONT color=\"blue\">";
+		html += escaped;
+		html += "</FONT>";
+		break;
+	case RBX::MESSAGE_WARNING:
+		html += "<STRONG><FONT color=\"orange\">";
+		html += escaped;
+		html += "</FONT>";
+		break;
+	case RBX::MESSAGE_ERROR:
+		html += "<STRONG><FONT color=\"red\">";
+		html += escaped;
+		html += "</FONT>";
+		break;
+	case RBX::MESSAGE_OUTPUT:
+		html += escaped;
+		break;
+	}
+
+	CComPtr<IHTMLElement> element;
+	if (m_unk0x108) {
+		m_unk0x108->createElement(CComBSTR("DIV"), &element);
+		element->put_innerHTML(CComBSTR(html));
+		FUN_0043b300(element);
+	}
+}
+
 // FUNCTION: ROBLOX 0x0043b720
 CStandardOutputView::CStandardOutputView()
 {
@@ -685,6 +821,24 @@ CStandardOutputView::CStandardOutputView()
 // STUB: ROBLOX 0x0043b8a0
 LRESULT CStandardOutputView::FUN_0043b8a0(WPARAM wParam, LPARAM lParam)
 {
-	STUB(0x43b8a0);
+	while (true) {
+		std::string message;
+		RBX::MessageType type;
+		__int64 time;
+		{
+			boost::mutex::scoped_lock lock(m_unk0x128);
+			if (m_unk0x114.empty()) {
+				break;
+			}
+
+			type = m_unk0x114.front().type;
+			message = m_unk0x114.front().message;
+			time = m_unk0x114.front().time;
+			m_unk0x114.pop_front();
+		}
+
+		FUN_0043b490(type, message.c_str(), time);
+	}
+
 	return 0;
 }

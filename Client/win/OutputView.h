@@ -3,6 +3,7 @@
 
 #include "SecureHtmlView.h"
 #include "decomp.h"
+#include "util/StandardOut.h"
 
 #include <atlbase.h>
 #include <deque>
@@ -19,6 +20,13 @@ protected:
 public:
 	// FUNCTION: ROBLOX 0x0043ada0
 	virtual ~COutputView() {}
+
+	virtual void OnInitialUpdate();
+	virtual void OnDocumentComplete(LPCTSTR lpszURL);
+
+protected:
+	void FUN_0043b300(IHTMLElement* element);
+	void FUN_0043b490(RBX::MessageType type, const char* text, __time64_t time);
 
 private:
 	std::deque<CComPtr<IHTMLDOMNode> > m_unk0xf4; // 0xf4
