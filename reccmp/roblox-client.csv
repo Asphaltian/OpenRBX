@@ -5950,7 +5950,7 @@ address,type,symbol,name,module,size
 009399b8,global,??_R0?AVAnchorTool@RBX@@@8,,,
 00410000,function,,,,87
 00457e30,function,,,,161
-00952efc,global,"format___PasteVerb::isEnabled",,,
+00952efc,global,format___clipboardFormat,,,
 0082b620,global,??_7?$TToolVerb@VLockTool@RBX@@VRunStateVerb@2@@RBX@@6B@,,,
 005d09c0,function,,,,5
 0082af4c,global,??_7?$TToolVerb@VResizeTool@RBX@@VRunStateVerb@2@@RBX@@6B@,,,
