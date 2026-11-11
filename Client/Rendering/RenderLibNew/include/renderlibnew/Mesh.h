@@ -84,11 +84,13 @@ public:
 
 	static void setShadowVertex(const G3D::Vector3&);
 
+protected:
+	static G3D::MeshAlg::Geometry visibleGeometry;
+
 private:
 	friend class ::ThumbnailGenerator;
 	friend class RenderScene;
 
-	static G3D::MeshAlg::Geometry visibleGeometry;
 	static G3D::Array<G3D::Vector2> texCoordArray;
 	static G3D::Array<G3D::Vector3> tangentArray;
 	static VertexList vertexRefCounts;

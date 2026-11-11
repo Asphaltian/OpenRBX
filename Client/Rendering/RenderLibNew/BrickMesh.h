@@ -44,7 +44,8 @@ public:
 
 	static const float widthInset;
 	static const float normalPerturbation;
-	static float bevel;
+	static const float bevel;
+	static float g_unk0x00958544;
 
 	static G3D::ReferenceCountedPointer<RenderNew::Mesh> create(
 		const G3D::Vector3& size, RenderSurfaceTypes surfaceTypes, BrickColor color
