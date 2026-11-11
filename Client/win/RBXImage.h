@@ -16,14 +16,14 @@ public:
 	};
 
 	RBXImage();
-	virtual ~RBXImage(); // vtable+0x00
+	virtual ~RBXImage() throw(); // vtable+0x00
 
 	// SYNTHETIC: ROBLOX 0x00445f00
 	// RBXImage::`scalar deleting destructor'
 
 	void* FUN_00445c40(int x, int y);
 	int FUN_00445c70();
-	BOOL FUN_00445dd0(int width, int height, int bpp, DWORD compression, const DWORD* masks, DWORD flags);
+	BOOL FUN_00445dd0(int width, int height, int bpp, DWORD compression, const DWORD* masks, DWORD flags) throw();
 	BOOL FUN_00445f50(int width, int height, int bpp, DWORD flags);
 	operator HBITMAP();
 

@@ -227,7 +227,7 @@ void CMainFrame::OnWindowPosChanging(WINDOWPOS* lpwndpos)
 	}
 }
 
-// STUB: ROBLOX 0x004331e0
+// FUNCTION: ROBLOX 0x004331e0
 static bool FUN_004331e0(CXTPImageManager* imageManager, UINT id, LPCTSTR name, XTPImageState state)
 {
 	HINSTANCE instance = AfxFindResourceHandle(name, "PNG");
@@ -262,12 +262,15 @@ static bool FUN_004331e0(CXTPImageManager* imageManager, UINT id, LPCTSTR name, 
 		return false;
 	}
 	bitmap.FUN_00445c70();
+	const G3D::uint8* source = image.byte();
 	for (int y = 0; y < image.height; y++) {
-		memcpy(bitmap.FUN_00445c40(0, y), image.byte() + y * image.width * 4, image.width * 4);
+		void* row = bitmap.FUN_00445c40(0, y);
+		const G3D::uint8* from = source + y * image.width * 4;
+		memcpy(row, from, image.width * 4);
 	}
-	BOOL result = imageManager->SetIcon(CXTPImageManagerIconHandle((HBITMAP) bitmap), id, CSize(0, 0), state);
+	bool result = imageManager->SetIcon(CXTPImageManagerIconHandle((HBITMAP) bitmap), id, CSize(0, 0), state) != FALSE;
 	FreeResource(global);
-	return result != FALSE;
+	return result;
 }
 
 // FUNCTION: ROBLOX 0x004333d0

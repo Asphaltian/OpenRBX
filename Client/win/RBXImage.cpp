@@ -23,16 +23,16 @@ RBXImage::RBXImage()
 {
 }
 
-// STUB: ROBLOX 0x00445cc0
+// FUNCTION: ROBLOX 0x00445cc0
 void RBXImage::FUN_00445cc0(int orientation)
 {
 	DIBSECTION section;
 	if (GetObject(m_unk0x04, sizeof(DIBSECTION), &section) == sizeof(DIBSECTION)) {
-		m_unk0x18 = section.dsBmih.biBitCount;
+		m_unk0x1c = true;
 		m_unk0x0c = section.dsBmih.biWidth;
 		m_unk0x10 = abs(section.dsBmih.biHeight);
+		m_unk0x18 = section.dsBmih.biBitCount;
 		m_unk0x14 = (m_unk0x18 * m_unk0x0c + 31) / 32 * 4;
-		m_unk0x1c = true;
 		m_unk0x08 = section.dsBm.bmBits;
 		if (orientation == 0) {
 			orientation = section.dsBmih.biHeight > 0 ? 2 : 1;
@@ -57,7 +57,7 @@ void RBXImage::FUN_00445cc0(int orientation)
 }
 
 // FUNCTION: ROBLOX 0x00445d90
-RBXImage::~RBXImage()
+RBXImage::~RBXImage() throw()
 {
 	if (m_unk0x04 != NULL) {
 		HBITMAP bitmap = m_unk0x04;
@@ -74,8 +74,8 @@ RBXImage::~RBXImage()
 	}
 }
 
-// STUB: ROBLOX 0x00445dd0
-BOOL RBXImage::FUN_00445dd0(int width, int height, int bpp, DWORD compression, const DWORD* masks, DWORD flags)
+// FUNCTION: ROBLOX 0x00445dd0
+BOOL RBXImage::FUN_00445dd0(int width, int height, int bpp, DWORD compression, const DWORD* masks, DWORD flags) throw()
 {
 	USES_ATL_SAFE_ALLOCA;
 	BITMAPINFO* info = static_cast<BITMAPINFO*>(
