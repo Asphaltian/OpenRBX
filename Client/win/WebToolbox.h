@@ -28,6 +28,11 @@ public:
 
 	void FUN_0046ea00(int category);
 
+	virtual void OnInitialUpdate();
+	virtual HRESULT OnGetExternal(LPDISPATCH* lppDispatch);
+	virtual HRESULT OnDocWindowActivate(BOOL fActivate);
+	virtual HRESULT OnFrameWindowActivate(BOOL fActivate);
+
 	// SYNTHETIC: ROBLOX 0x0046ec50
 	// CWebToolbox::`scalar deleting destructor'
 
@@ -35,6 +40,8 @@ public:
 	// ?CreateObject@CWebToolbox@@SGPAVCObject@@XZ
 
 protected:
+	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
+
 	afx_msg void OnSetFocus(CWnd* pOldWnd);
 	afx_msg int OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message);
 	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);

@@ -13,6 +13,36 @@ void CWebToolbox::FUN_0046ea00(int category)
 	Navigate(url);
 }
 
+// FUNCTION: ROBLOX 0x0046eac0
+HRESULT CWebToolbox::OnDocWindowActivate(BOOL fActivate)
+{
+	if (m_unk0xf4) {
+		m_unk0xf4->SetFocus();
+	}
+
+	return CSecureHtmlView::OnDocWindowActivate(FALSE);
+}
+
+// FUNCTION: ROBLOX 0x0046eae0
+HRESULT CWebToolbox::OnFrameWindowActivate(BOOL fActivate)
+{
+	if (m_unk0xf4) {
+		m_unk0xf4->SetFocus();
+	}
+
+	return CSecureHtmlView::OnFrameWindowActivate(FALSE);
+}
+
+// FUNCTION: ROBLOX 0x0046eb00
+void CWebToolbox::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView)
+{
+	CSecureHtmlView::OnActivateView(bActivate, pActivateView, pDeactiveView);
+
+	if (m_unk0xf4) {
+		m_unk0xf4->SetFocus();
+	}
+}
+
 // FUNCTION: ROBLOX 0x0046eb30
 void CWebToolbox::OnSetFocus(CWnd* pOldWnd)
 {
@@ -31,6 +61,15 @@ int CWebToolbox::OnMouseActivate(CWnd* pDesktopWnd, UINT nHitTest, UINT message)
 	}
 
 	return MA_NOACTIVATE;
+}
+
+// FUNCTION: ROBLOX 0x0046eb70
+void CWebToolbox::OnInitialUpdate()
+{
+	CSecureHtmlView::OnInitialUpdate();
+
+	CString url = FUN_00407190() + "/IDE/ClientToolbox.aspx";
+	Navigate(url);
 }
 
 // FUNCTION: ROBLOX 0x0046ec10
@@ -58,6 +97,17 @@ void CWebToolbox::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 	if (m_unk0xf4) {
 		m_unk0xf4->SetFocus();
 	}
+}
+
+// FUNCTION: ROBLOX 0x0046ed60
+HRESULT CWebToolbox::OnGetExternal(LPDISPATCH* lppDispatch)
+{
+	if (m_unk0xf4) {
+		m_unk0xf4->SetFocus();
+	}
+
+	CComPtr<IDispatch> dispatch(m_unk0xf8);
+	return dispatch.CopyTo(lppDispatch);
 }
 
 // clang-format off

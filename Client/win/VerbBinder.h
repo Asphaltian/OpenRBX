@@ -12,7 +12,7 @@
 // TEMPLATE: ROBLOX 0x00456820
 // ??0?$VerbBinder@VCRobloxDoc@@VCDocument@@@@QAE@XZ
 // STUB: ROBLOX 0x004568b0
-// ?OnCmdMsg@?$VerbBinder@VCRobloxDoc@@VCDocument@@@@MAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z
+// ?OnCmdMsg@?$VerbBinder@VCRobloxDoc@@VCDocument@@@@UAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z
 // TEMPLATE: ROBLOX 0x00456aa0
 // ??1?$VerbBinder@VCRobloxDoc@@VCDocument@@@@UAE@XZ
 // SYNTHETIC: ROBLOX 0x00456b30
@@ -20,7 +20,7 @@
 // TEMPLATE: ROBLOX 0x0045dfc0
 // ??0?$VerbBinder@VCRobloxView@@VCView@@@@QAE@XZ
 // STUB: ROBLOX 0x0045e040
-// ?OnCmdMsg@?$VerbBinder@VCRobloxView@@VCView@@@@MAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z
+// ?OnCmdMsg@?$VerbBinder@VCRobloxView@@VCView@@@@UAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z
 // TEMPLATE: ROBLOX 0x0045e230
 // ??1?$VerbBinder@VCRobloxView@@VCView@@@@UAE@XZ
 // SYNTHETIC: ROBLOX 0x0045e2c0
@@ -30,7 +30,7 @@
 template <class T, class Base>
 class VerbBinder : public Base
 {
-protected:
+public:
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
 	{
 		if (nCode == CN_COMMAND || nCode == CN_UPDATE_COMMAND_UI) {

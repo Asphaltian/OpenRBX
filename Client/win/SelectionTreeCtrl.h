@@ -17,9 +17,16 @@ class CSelectionTreeCtrl : public CRobloxTreeCtrl,
 						   public ActiveDocView,
 						   public RBX::Listener<RBX::Selection, RBX::SelectionChanged>
 {
+	DECLARE_DYNAMIC(CSelectionTreeCtrl)
+
+	// SYNTHETIC: ROBLOX 0x00422190
+	// ?GetThisClass@CSelectionTreeCtrl@@SGPAUCRuntimeClass@@XZ
+
 public:
 	CSelectionTreeCtrl();
 	virtual ~CSelectionTreeCtrl();
+
+	virtual BOOL OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo);
 
 	virtual RBX::Selection* VTable0x148();                         // vtable+0x148
 	virtual boost::shared_ptr<RBX::DataModel> VTable0x14c() const; // vtable+0x14c
@@ -37,6 +44,13 @@ protected:
 	);
 	virtual void onEvent(const RBX::Selection* source, RBX::SelectionChanged event);
 
+	virtual void SelectAllIgnore(BOOL bSelect, HTREEITEM hIgnore);
+	virtual BOOL OnButtonDown(BOOL bLeft, UINT nFlags, CPoint point);
+	virtual void DoPreSelection(HTREEITEM hItem, BOOL bLeft, UINT nFlags);
+	virtual void DoAction(HTREEITEM hItem, BOOL bLeft, UINT nFlags, CPoint point);
+	virtual void DoBanding(UINT nFlags, CPoint point);
+	virtual void UpdateSelectionForRect(LPCRECT pRect, UINT nFlags, CTypedPtrList<CPtrList, HTREEITEM>& list);
+
 	afx_msg void FUN_00422230(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
@@ -48,6 +62,9 @@ protected:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x00429950
+	// ?GetMessageMap@CSelectionTreeCtrl@@MBEPBUAFX_MSGMAP@@XZ
 
 private:
 	void FUN_00422270(CPoint point);

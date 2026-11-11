@@ -29,7 +29,6 @@ protected:
 		boost::shared_ptr<RBX::DataModel> oldDataModel
 	) = 0; // vtable+0x00
 
-private:
 	friend class CRobloxDoc;
 
 	static CRobloxDoc* g_unk0x00952d8c;

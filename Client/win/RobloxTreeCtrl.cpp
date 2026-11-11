@@ -26,6 +26,9 @@ public:
 
 DECOMP_SIZE_ASSERT(RootNode, 0x50)
 
+IMPLEMENT_DYNAMIC(CRobloxTreeCtrl, CXTTreeCtrl)
+IMPLEMENT_DYNAMIC(CSelectionTreeCtrl, CRobloxTreeCtrl)
+
 // FUNCTION: ROBLOX 0x004221a0
 void CRobloxTreeCtrlNode::FUN_004221a0()
 {
@@ -125,6 +128,50 @@ void CSelectionTreeCtrl::FUN_00422270(CPoint point)
 void CSelectionTreeCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 {
 	FUN_00422270(point);
+}
+
+// FUNCTION: ROBLOX 0x00422420
+BOOL CSelectionTreeCtrl::OnButtonDown(BOOL bLeft, UINT nFlags, CPoint point)
+{
+	return CXTTreeBase::OnButtonDown(bLeft, nFlags, point);
+}
+
+// FUNCTION: ROBLOX 0x00422440
+void CSelectionTreeCtrl::DoPreSelection(HTREEITEM hItem, BOOL bLeft, UINT nFlags)
+{
+	CXTTreeBase::DoPreSelection(hItem, bLeft, nFlags);
+}
+
+// FUNCTION: ROBLOX 0x00422450
+void CSelectionTreeCtrl::DoAction(HTREEITEM hItem, BOOL bLeft, UINT nFlags, CPoint point)
+{
+	CXTTreeBase::DoAction(hItem, bLeft, nFlags, point);
+}
+
+// FUNCTION: ROBLOX 0x00422480
+void CSelectionTreeCtrl::DoBanding(UINT nFlags, CPoint point)
+{
+	CXTTreeBase::DoBanding(nFlags, point);
+}
+
+// FUNCTION: ROBLOX 0x004224a0
+void CSelectionTreeCtrl::UpdateSelectionForRect(LPCRECT pRect, UINT nFlags, CTypedPtrList<CPtrList, HTREEITEM>& list)
+{
+	CXTTreeBase::UpdateSelectionForRect(pRect, nFlags, list);
+}
+
+// FUNCTION: ROBLOX 0x004224b0
+BOOL CSelectionTreeCtrl::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO* pHandlerInfo)
+{
+	if (CRobloxTreeCtrl::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo)) {
+		return TRUE;
+	}
+
+	if (!g_unk0x00952d8c) {
+		return FALSE;
+	}
+
+	return g_unk0x00952d8c->OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
 // FUNCTION: ROBLOX 0x00422ae0
@@ -330,6 +377,33 @@ int CSelectionTreeCtrl::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	FUN_004204e0();
 	SetTimer(0, 200, NULL);
 	return 0;
+}
+
+// FUNCTION: ROBLOX 0x00423770
+void CSelectionTreeCtrl::SelectAllIgnore(BOOL bSelect, HTREEITEM hIgnore)
+{
+	if (!bSelect) {
+		CRobloxTreeCtrlNode* node = reinterpret_cast<CRobloxTreeCtrlNode*>(GetItemData(hIgnore));
+		boost::shared_ptr<RBX::Instance> instance;
+		if (node) {
+			instance = node->m_unk0x0c;
+		}
+
+		{
+			RBX::DataModel::Lock lock(VTable0x14c());
+			RBX::Selection* selection = VTable0x148();
+			RBX::ScopedAssign<undefined> updating(m_unk0xce, true);
+			selection->setSelection(instance.get());
+		}
+
+		{
+			RBX::ScopedAssign<undefined> selecting(m_unk0xcd, true);
+			CXTTreeBase::SelectAllIgnore(FALSE, hIgnore);
+		}
+	}
+	else {
+		CXTTreeBase::SelectAllIgnore(bSelect, hIgnore);
+	}
 }
 
 // FUNCTION: ROBLOX 0x004239a0

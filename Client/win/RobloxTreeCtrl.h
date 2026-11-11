@@ -18,6 +18,14 @@ class CRobloxTreeCtrlNode;
 // SIZE 0xbc
 class CRobloxTreeCtrl : public CXTTreeCtrl
 {
+	DECLARE_DYNAMIC(CRobloxTreeCtrl)
+
+	// SYNTHETIC: ROBLOX 0x00422170
+	// ?_GetBaseClass@CRobloxTreeCtrl@@KGPAUCRuntimeClass@@XZ
+
+	// SYNTHETIC: ROBLOX 0x00422180
+	// ?GetThisClass@CRobloxTreeCtrl@@SGPAUCRuntimeClass@@XZ
+
 public:
 	CRobloxTreeCtrl();
 
@@ -52,6 +60,9 @@ protected:
 	afx_msg void FUN_00428720(NMHDR* pNMHDR, LRESULT* pResult);
 
 	DECLARE_MESSAGE_MAP()
+
+	// SYNTHETIC: ROBLOX 0x00429030
+	// ?GetMessageMap@CRobloxTreeCtrl@@MBEPBUAFX_MSGMAP@@XZ
 
 	friend class CRobloxTreeCtrlNode;
 

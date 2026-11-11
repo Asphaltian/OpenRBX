@@ -75,3 +75,6 @@ FUN_00596ca0: 'Commands.cpp static helper; libclang reads the definition as a va
 OnWindowClosing: 'CSaveToRobloxDialog event sink handler taking BOOL, which ncc defines to 1; libclang reads the definition as a variable'
 CSaveToRobloxDialog: 'Empty BEGIN_DHTML_EVENT_MAP; libclang reads the empty map as a variable named after the class'
 FUN_0041d880: 'DHTMLWindow method, misparsed as a variable without boost on the include path'
+OnDocWindowActivate: 'CWebToolbox override of CHtmlView, misparsed as a variable without the MFC headers'
+OnFrameWindowActivate: 'CWebToolbox override of CHtmlView, misparsed as a variable without the MFC headers'
+SelectAllIgnore: 'CSelectionTreeCtrl override of CXTTreeBase, misparsed as a variable without the MFC headers'

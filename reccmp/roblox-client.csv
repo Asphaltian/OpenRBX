@@ -6662,3 +6662,11 @@ address,type,symbol,name,module,size
 0046ec10,function,,,,19
 00805a20,global,messageMap___CMultiPlayerPane::GetThisMessageMap,,,
 0080fd14,global,messageMap___CWebToolbox::GetThisMessageMap,,,
+00422170,function,,,,6
+00422440,function,,,,5
+004224a0,function,,,,5
+006d4ee0,library,?GetRuntimeClass@CXTTreeCtrl@@UBEPAUCRuntimeClass@@XZ,,,
+008023d8,global,?classCRobloxTreeCtrl@CRobloxTreeCtrl@@2UCRuntimeClass@@B,,,
+008023f4,global,?classCSelectionTreeCtrl@CSelectionTreeCtrl@@2UCRuntimeClass@@B,,,
+0080303c,global,messageMap___CRobloxTreeCtrl::GetThisMessageMap,,,
+008038ec,global,messageMap___CSelectionTreeCtrl::GetThisMessageMap,,,
