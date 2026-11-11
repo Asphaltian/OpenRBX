@@ -129,15 +129,6 @@ Ogre::MeshPtr g_unk0x0096130c;
 // GLOBAL: ROBLOX 0x00961334
 int g_unk0x00961334;
 
-inline static void setExplosionScale(Ogre::ParticleSystem* particleSystem, Ogre::ParticleEmitter* emitter, float scale)
-{
-	particleSystem->setParticleQuota((size_t) (atoi("400") * scale));
-	emitter->setMinParticleVelocity(pow(scale, 1.0f / 3.0f) * atoi("20"));
-	emitter->setMaxParticleVelocity(pow(scale, 1.0f / 3.0f) * atoi("30"));
-	emitter->setMinDuration((scale - 1.0) * 0.4f + atoi("1.2"));
-	emitter->setMaxDuration((scale - 1.0) * 0.4f + atoi("1.2"));
-}
-
 // FUNCTION: ROBLOX 0x0066a0d0
 int AdornRbxGfx::getWidth() const
 {
@@ -737,13 +728,14 @@ AdornRbxGfx::AdornRbxGfx(Ogre::VisualEngine* visualEngine) : m_unk0x08(""), m_un
 	m_unk0x38->setLightingEnabled(false);
 }
 
-// STUB: ROBLOX 0x0066e8e0
+// FUNCTION: ROBLOX 0x0066e8e0
 void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid, const G3D::Color4& wire)
 {
 	Ogre::Vector3 position;
 	{
 		Ogre::Quaternion orientation;
-		orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
+		const Ogre::Matrix3& rotation = reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation);
+		orientation.FromRotationMatrix(rotation);
 		position =
 			m_unk0x30->createChildSceneNode(reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation), orientation)
 				->getPosition();
@@ -760,7 +752,11 @@ void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid,
 			static_cast<Ogre::ParticleSystem*>(m_unk0x88[key]->getAttachedObject((unsigned short) 0));
 		if (particleSystem->getNumParticles() == 0) {
 			Ogre::ParticleEmitter* emitter = particleSystem->getEmitter(0);
-			setExplosionScale(particleSystem, emitter, 1.0f);
+			particleSystem->setParticleQuota((size_t) (atoi("400") * 1.0f));
+			emitter->setMinParticleVelocity(pow(1.0f, 1.0f / 3.0f) * atoi("20"));
+			emitter->setMaxParticleVelocity(pow(1.0f, 1.0f / 3.0f) * atoi("30"));
+			emitter->setMinDuration((1.0f - 1.0) * 0.4f + atoi("1.2"));
+			emitter->setMaxDuration((1.0f - 1.0) * 0.4f + atoi("1.2"));
 			emitter->setEnabled(false);
 			m_unk0x88.erase(m_unk0x88.find(key));
 		}
@@ -768,7 +764,8 @@ void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid,
 	}
 
 	std::vector<std::map<std::string, Ogre::SceneNode*>::iterator> retired;
-	for (std::map<std::string, Ogre::SceneNode*>::iterator it = m_unk0x88.begin(); it != m_unk0x88.end(); ++it) {
+	std::map<std::string, Ogre::SceneNode*>::iterator it;
+	for (it = m_unk0x88.begin(); it != m_unk0x88.end(); ++it) {
 		Ogre::ParticleSystem* particleSystem =
 			static_cast<Ogre::ParticleSystem*>(it->second->getAttachedObject((unsigned short) 0));
 		if (particleSystem->getNumParticles() == 0) {
@@ -783,7 +780,11 @@ void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid,
 		emitter->setEnabled(false);
 		m_unk0x88.erase(retired[i]);
 		Ogre::LogManager::getSingleton().logMessage("RBX retired " + particleSystem->getName());
-		setExplosionScale(particleSystem, emitter, 1.0f);
+		particleSystem->setParticleQuota((size_t) (atoi("400") * 1.0f));
+		emitter->setMinParticleVelocity(pow(1.0f, 1.0f / 3.0f) * atoi("20"));
+		emitter->setMaxParticleVelocity(pow(1.0f, 1.0f / 3.0f) * atoi("30"));
+		emitter->setMinDuration((1.0f - 1.0) * 0.4f + atoi("1.2"));
+		emitter->setMaxDuration((1.0f - 1.0) * 0.4f + atoi("1.2"));
 	}
 
 	float scale = sphere.radius * 0.25;
@@ -797,13 +798,16 @@ void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid,
 		Ogre::ParticleSystem* particleSystem =
 			static_cast<Ogre::ParticleSystem*>(m_unk0x78[i]->getAttachedObject((unsigned short) 0));
 		if (!particleSystem->getEmitter(0)->getEnabled()) {
-			Ogre::SceneNode* sceneNode = m_unk0x78[i];
-			node = sceneNode;
-			m_unk0x88[key] = sceneNode;
-			sceneNode->setPosition(position.x, position.y, position.z);
-			particleSystem = static_cast<Ogre::ParticleSystem*>(sceneNode->getAttachedObject((unsigned short) 0));
+			node = m_unk0x78[i];
+			m_unk0x88[key] = node;
+			node->setPosition(position.x, position.y, position.z);
+			particleSystem = static_cast<Ogre::ParticleSystem*>(node->getAttachedObject((unsigned short) 0));
 			Ogre::ParticleEmitter* emitter = particleSystem->getEmitter(0);
-			setExplosionScale(particleSystem, emitter, scale);
+			particleSystem->setParticleQuota((size_t) (atoi("400") * scale));
+			emitter->setMinParticleVelocity(pow(scale, 1.0f / 3.0f) * atoi("20"));
+			emitter->setMaxParticleVelocity(pow(scale, 1.0f / 3.0f) * atoi("30"));
+			emitter->setMinDuration((scale - 1.0) * 0.4f + atoi("1.2"));
+			emitter->setMaxDuration((scale - 1.0) * 0.4f + atoi("1.2"));
 			emitter->setEnabled(true);
 			particleSystem->_update(0.001f);
 			Ogre::LogManager::getSingleton().logMessage("RBX use " + particleSystem->getName());
@@ -829,12 +833,13 @@ void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid,
 
 		if (!m_unk0x74) {
 			m_unk0x74 = m_unk0x04->getSceneManager()->getRootSceneNode()->createChildSceneNode(
-				m_unk0x04->m_unk0x04->getName() + "rbxexpl", Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY
+				m_unk0x04->getSceneManager()->getName() + "rbxexpl", Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY
 			);
 		}
 
 		Ogre::ParticleSystem* particleSystem = m_unk0x04->getSceneManager()->createParticleSystem(
-			m_unk0x04->m_unk0x04->getName() + "expl" + Ogre::StringConverter::toString(i), "explosion/explosion1"
+			m_unk0x04->getSceneManager()->getName() + "expl" + Ogre::StringConverter::toString(i),
+			"explosion/explosion1"
 		);
 		if (!particleSystem) {
 			Ogre::LogManager::getSingleton().logMessage("RBX Error creating psys");
@@ -842,12 +847,15 @@ void AdornRbxGfx::explosion(const G3D::Sphere& sphere, const G3D::Color4& solid,
 		}
 
 		Ogre::ParticleEmitter* emitter = particleSystem->getEmitter(0);
-		setExplosionScale(particleSystem, emitter, scale);
-		Ogre::SceneNode* sceneNode = m_unk0x74->createChildSceneNode(Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY);
-		node = sceneNode;
-		sceneNode->attachObject(particleSystem);
-		m_unk0x78.push_back(sceneNode);
-		m_unk0x88[key] = sceneNode;
+		particleSystem->setParticleQuota((size_t) (atoi("400") * scale));
+		emitter->setMinParticleVelocity(pow(scale, 1.0f / 3.0f) * atoi("20"));
+		emitter->setMaxParticleVelocity(pow(scale, 1.0f / 3.0f) * atoi("30"));
+		emitter->setMinDuration((scale - 1.0) * 0.4f + atoi("1.2"));
+		emitter->setMaxDuration((scale - 1.0) * 0.4f + atoi("1.2"));
+		node = m_unk0x74->createChildSceneNode(Ogre::Vector3::ZERO, Ogre::Quaternion::IDENTITY);
+		node->attachObject(particleSystem);
+		m_unk0x78.push_back(node);
+		m_unk0x88[key] = node;
 		Ogre::LogManager::getSingleton().logMessage("RBX created " + particleSystem->getName());
 	}
 
