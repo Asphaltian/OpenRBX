@@ -58,8 +58,7 @@ public:
 
 	boost::shared_ptr<RBX::DataModel> FUN_0046edc0() const;
 
-	// FUNCTION: ROBLOX 0x0046edf0
-	RBX::Workspace* FUN_0046edf0() const { return m_unk0x24 ? m_unk0x24->getWorkspace() : NULL; }
+	RBX::Workspace* FUN_0046edf0() const;
 
 	void FUN_0046ef00(std::istream& stream);
 	void FUN_004702b0(RBX::ContentId contentId, bool p_unk0x20);

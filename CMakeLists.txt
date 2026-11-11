@@ -683,6 +683,7 @@ if (MSVC_FOR_DECOMP)
     Client/win/BrowserView.cpp
     Client/win/ChatPrompt.cpp
     Client/win/ChildFrm.cpp
+    Client/win/ClipboardVerbs.cpp
     Client/win/DHTMLWindow.cpp
     Client/win/DxUserInput.cpp
     Client/win/UserInputUtil.cpp

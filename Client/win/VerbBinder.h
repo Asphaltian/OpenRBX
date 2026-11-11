@@ -64,6 +64,8 @@ public:
 		return Base::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 	}
 
+	void bind(UINT id, const RBX::Name& name) { m_unk0x58[id] = &name; }
+
 	std::map<UINT, const RBX::Name*> m_unk0x58; // 0x58
 };
 

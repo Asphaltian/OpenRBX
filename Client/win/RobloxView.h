@@ -48,9 +48,6 @@ public:
 	virtual bool isChecked() const;
 	virtual void doIt(RBX::IDataState* dataState);
 
-	// SYNTHETIC: ROBLOX 0x00410420
-	// ExitCommand::`scalar deleting destructor'
-
 private:
 	double m_unk0x10; // 0x10
 };
