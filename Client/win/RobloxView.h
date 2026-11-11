@@ -148,7 +148,7 @@ public:
 
 	boost::shared_ptr<RBX::DataModel> FUN_00403290() const;
 	void FUN_0045e900();
-	RBX::VerbContainer* FUN_004558a0() { return this; }
+	CRobloxView* FUN_004558a0() { return this; }
 
 protected:
 	virtual void onEvent(const RBX::ServiceProvider* source, RBX::ServiceAdded event);

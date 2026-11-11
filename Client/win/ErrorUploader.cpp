@@ -32,7 +32,7 @@ void ErrorUploader::Upload(std::string url, bool synchronous)
 }
 
 // FUNCTION: WEBSERVICE 0x10001350
-// STUB: ROBLOX 0x0041e020
+// FUNCTION: ROBLOX 0x0041e020
 RBX::worker_thread::work_result ErrorUploader::run(boost::shared_ptr<data> _data)
 {
 	std::string file;

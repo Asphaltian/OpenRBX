@@ -11,7 +11,7 @@
 // clang-format off
 // TEMPLATE: ROBLOX 0x00456820
 // ??0?$VerbBinder@VCRobloxDoc@@VCDocument@@@@QAE@XZ
-// STUB: ROBLOX 0x004568b0
+// TEMPLATE: ROBLOX 0x004568b0
 // ?OnCmdMsg@?$VerbBinder@VCRobloxDoc@@VCDocument@@@@UAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z
 // TEMPLATE: ROBLOX 0x00456aa0
 // ??1?$VerbBinder@VCRobloxDoc@@VCDocument@@@@UAE@XZ
@@ -19,7 +19,7 @@
 // VerbBinder<CRobloxDoc,CDocument>::`scalar deleting destructor'
 // TEMPLATE: ROBLOX 0x0045dfc0
 // ??0?$VerbBinder@VCRobloxView@@VCView@@@@QAE@XZ
-// STUB: ROBLOX 0x0045e040
+// TEMPLATE: ROBLOX 0x0045e040
 // ?OnCmdMsg@?$VerbBinder@VCRobloxView@@VCView@@@@UAEHIHPAXPAUAFX_CMDHANDLERINFO@@@Z
 // TEMPLATE: ROBLOX 0x0045e230
 // ??1?$VerbBinder@VCRobloxView@@VCView@@@@UAE@XZ
@@ -38,20 +38,24 @@ public:
 			if (it != m_unk0x58.end() && it->second) {
 				boost::shared_ptr<RBX::DataModel> dataModel = static_cast<T*>(this)->FUN_00403290();
 				RBX::DataModel::Lock lock(dataModel);
-				RBX::Verb* verb = static_cast<T*>(this)->FUN_004558a0()->getVerb(*it->second);
-				if (verb) {
-					if (nCode == CN_COMMAND) {
-						try {
-							verb->doIt(dataModel.get());
+				const RBX::Name* name = it->second;
+				RBX::VerbContainer* container = static_cast<T*>(this)->FUN_004558a0();
+				if (container) {
+					RBX::Verb* verb = container->getVerb(*name);
+					if (verb) {
+						if (nCode == CN_COMMAND) {
+							try {
+								verb->doIt(dataModel.get());
+							}
+							catch (std::exception& e) {
+								AfxMessageBox(e.what());
+							}
 						}
-						catch (std::exception& e) {
-							AfxMessageBox(e.what());
+						else {
+							CCmdUI* cmdUI = static_cast<CCmdUI*>(pExtra);
+							cmdUI->Enable(verb->isEnabled() ? TRUE : FALSE);
+							cmdUI->SetCheck(verb->isChecked() ? 1 : 0);
 						}
-					}
-					else {
-						CCmdUI* cmdUI = static_cast<CCmdUI*>(pExtra);
-						cmdUI->Enable(verb->isEnabled());
-						cmdUI->SetCheck(verb->isChecked());
 					}
 				}
 				return TRUE;

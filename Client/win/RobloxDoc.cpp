@@ -568,26 +568,28 @@ void CRobloxDoc::FUN_00456d30()
 	FUN_00456c00(0x807c, &m_unk0x74->m_unk0x52c);
 }
 
-// STUB: ROBLOX 0x00457910
+// FUNCTION: ROBLOX 0x00457910
 BOOL CRobloxDoc::OnOpenDocument(LPCTSTR lpszPathName)
 {
 	char cachePath[MAX_PATH];
 	if (SHGetFolderPath(NULL, CSIDL_INTERNET_CACHE, NULL, 0, cachePath) == S_OK) {
 		CString relativePath;
-		BOOL relative =
-			PathRelativePathTo(relativePath.GetBuffer(MAX_PATH), cachePath, FILE_ATTRIBUTE_DIRECTORY, lpszPathName, 0);
+		LPTSTR buffer = relativePath.GetBuffer(MAX_PATH);
+		BOOL relative = PathRelativePathTo(buffer, cachePath, FILE_ATTRIBUTE_DIRECTORY, lpszPathName, 0);
 		relativePath.ReleaseBuffer();
 
-		if (relative && relativePath.Left(2).Compare(".\\") == 0) {
-			return FALSE;
+		if (relative) {
+			if (relativePath.Left(2).Compare(".\\") == 0) {
+				return FALSE;
+			}
 		}
 	}
 
-	try {
-		DeleteContents();
-		FUN_00456d30();
-		SetModifiedFlag(TRUE);
+	DeleteContents();
+	FUN_00456d30();
+	SetModifiedFlag(TRUE);
 
+	try {
 		std::auto_ptr<std::istream> stream =
 			RBX::ContentProvider::singleton().getContent(RBX::ContentId::fromFile(lpszPathName));
 		m_unk0x78->FUN_0046ef00(*stream);
@@ -644,24 +646,24 @@ void CRobloxDoc::FUN_00458750(CCmdUI* pCmdUI)
 	pCmdUI->Enable(selection->size() > 0);
 }
 
-// STUB: ROBLOX 0x004588a0
+// FUNCTION: ROBLOX 0x004588a0
 void CRobloxDoc::FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	CXTPControlComboBox* pControl = (CXTPControlComboBox*) ((NMXTPCONTROL*) pNMHDR)->pControl;
 	if (pControl->GetType() == xtpControlComboBox) {
 		std::string text(pControl->GetEditText());
 
-		try {
-			if (pControl->FindStringExact(-1, text.c_str()) == -1) {
-				pControl->InsertString(0, text.c_str());
-				if (pControl->GetCount() > 10) {
-					pControl->DeleteItem(pControl->GetCount() - 1);
-				}
+		if (pControl->FindString(-1, text.c_str()) == -1) {
+			pControl->InsertString(0, text.c_str());
+			if (pControl->GetCount() > 10) {
+				pControl->DeleteItem(pControl->GetCount() - 1);
 			}
+		}
 
-			pControl->SetEnabled(FALSE);
-			RBX::StandardOut::singleton()->print(RBX::MESSAGE_OUTPUT, "> %s", text.c_str());
+		pControl->SetEnabled(FALSE);
+		RBX::StandardOut::singleton()->print(RBX::MESSAGE_OUTPUT, "> %s", text.c_str());
 
+		try {
 			if (RBX::ContentProvider::isHttpUrl(text)) {
 				std::auto_ptr<std::istream> stream = RBX::ContentProvider::singleton().getContent(RBX::ContentId(text));
 				std::ostringstream script;
@@ -674,7 +676,7 @@ void CRobloxDoc::FUN_004588a0(NMHDR* pNMHDR, LRESULT* pResult)
 				RBX::Security::CmdLine, text.c_str(), "Cmd"
 			);
 		}
-		catch (...) {
+		catch (std::exception&) {
 		}
 
 		pControl->SetEnabled(TRUE);
@@ -708,18 +710,19 @@ void CRobloxDoc::FUN_00458f60(CCmdUI* pCmdUI)
 	pCmdUI->Enable(!runService->runDisabled && !runService->isRunState());
 }
 
-// STUB: ROBLOX 0x004590a0
+// FUNCTION: ROBLOX 0x004590a0
 void CRobloxDoc::FUN_004590a0(CCmdUI* pCmdUI)
 {
 	if (FUN_00403290()) {
 		RBX::DataModel::Lock lock(m_unk0x78->FUN_0046edc0());
-		if (FUN_00403290()->create<RBX::RunService>()->getRunState() == RBX::RS_RUNNING) {
+		RBX::RunState runState = FUN_00403290()->create<RBX::RunService>()->getRunState();
+		if (runState != RBX::RS_RUNNING) {
+			pCmdUI->SetText("");
+		}
+		else {
 			char text[32];
 			sprintf(text, "%.3gfps", FUN_00403290()->timeState->simulationStopwatch.smoothFPS());
 			pCmdUI->SetText(text);
-		}
-		else {
-			pCmdUI->SetText("");
 		}
 	}
 }
