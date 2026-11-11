@@ -36,6 +36,9 @@ Ogre::SharedPtr<Ogre::RbxFont> g_unk0x00949c7c;
 // GLOBAL: ROBLOX 0x009612a8
 int g_unk0x009612a8;
 
+// GLOBAL: ROBLOX 0x009612ac
+std::string g_unk0x009612ac = "q0adorn";
+
 // GLOBAL: ROBLOX 0x009612c8
 std::string g_unk0x009612c8 = "material explosion/explosionMatl\n"
 							  "{\n"
@@ -120,6 +123,9 @@ std::string g_unk0x00961318 = "c01adorn";
 // GLOBAL: ROBLOX 0x00961300
 Ogre::MeshPtr g_unk0x00961300;
 
+// GLOBAL: ROBLOX 0x0096130c
+Ogre::MeshPtr g_unk0x0096130c;
+
 // GLOBAL: ROBLOX 0x00961334
 int g_unk0x00961334;
 
@@ -188,6 +194,16 @@ void AdornRbxGfx::FUN_0066a2d0(
 	orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
 	orientation = orientation * rotation;
 	transform.makeTransform(reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation) + offset, scale, orientation);
+}
+
+// FUNCTION: ROBLOX 0x0066a360
+void AdornRbxGfx::FUN_0066a360(Ogre::Matrix4& transform)
+{
+	Ogre::Quaternion orientation;
+	orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
+	transform.makeTransform(
+		reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation), Ogre::Vector3(1.0f, 1.0f, 1.0f), orientation
+	);
 }
 
 // FUNCTION: ROBLOX 0x0066a3c0
@@ -485,13 +501,7 @@ void AdornRbxGfx::cylinderAlongX(float radius, float length, const G3D::Color4& 
 	}
 
 	Ogre::Matrix4 world;
-	{
-		Ogre::Quaternion orientation;
-		orientation.FromRotationMatrix(reinterpret_cast<const Ogre::Matrix3&>(m_unk0x94.rotation));
-		world.makeTransform(
-			reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation), Ogre::Vector3(1.0f, 1.0f, 1.0f), orientation
-		);
-	}
+	FUN_0066a360(world);
 
 	Ogre::Matrix4 local;
 	local.makeTransform(
@@ -547,7 +557,73 @@ void AdornRbxGfx::quad(
 	const G3D::Color4& color
 )
 {
-	STUB(0x66d350);
+	float height = v0.y - v2.y;
+	float depth = v0.z - v2.z;
+	if (height < 0.0f) {
+		height = -height;
+	}
+	if (depth < 0.0f) {
+		depth = -depth;
+	}
+	float size = depth < height ? height : depth;
+
+	G3D::Vector3 center(v0.x, (v0.y + v1.y + v2.y + v3.y) * 0.25, (v0.z + v1.z + v2.z + v3.z) * 0.25);
+	Ogre::Sphere bounds(Ogre::Vector3(m_unk0x94.translation + center), size * 1.4f);
+	Ogre::Vector3 offset =
+		reinterpret_cast<const Ogre::Vector3&>(m_unk0x94.translation) - m_unk0x04->m_unk0x08->getDerivedPosition();
+	if (!m_unk0x04->m_unk0x08->isVisible(bounds, NULL)) {
+		return;
+	}
+
+	if (offset.squaredLength() > size * size * 60.0 * 60.0) {
+		return;
+	}
+
+	FUN_0066aae0(color, 0);
+	if (v0.x != v1.x || v1.x != v2.x || v2.x != v3.x) {
+		throw std::runtime_error("Bad: quad not handled");
+	}
+
+	if (g_unk0x0096130c.isNull()) {
+		Ogre::ManualObject* manual = m_unk0x04->getSceneManager()->createManualObject("ln" + FUN_0066a3c0());
+		manual->begin("", Ogre::RenderOperation::OT_TRIANGLE_LIST);
+		manual->position(0.0f, 0.5f, 0.5f);
+		manual->normal(Ogre::Vector3(1.0f, 0.0f, 0.0f));
+		manual->index(0);
+		manual->position(0.0f, -0.5f, 0.5f);
+		manual->normal(Ogre::Vector3(1.0f, 0.0f, 0.0f));
+		manual->index(1);
+		manual->position(0.0f, -0.5f, -0.5f);
+		manual->normal(Ogre::Vector3(1.0f, 0.0f, 0.0f));
+		manual->index(2);
+		manual->position(0.0f, 0.5f, 0.5f);
+		manual->normal(Ogre::Vector3(1.0f, 0.0f, 0.0f));
+		manual->index(3);
+		manual->position(0.0f, -0.5f, -0.5f);
+		manual->normal(Ogre::Vector3(1.0f, 0.0f, 0.0f));
+		manual->index(4);
+		manual->position(0.0f, 0.5f, -0.5f);
+		manual->normal(Ogre::Vector3(1.0f, 0.0f, 0.0f));
+		manual->index(5);
+		manual->end();
+		g_unk0x0096130c = manual->convertToMesh(
+			m_unk0x04->getSceneManager()->getName() + g_unk0x009612ac,
+			Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME
+		);
+		Ogre::Sphere meshBounds(g_unk0x0096130c->getBounds().getCenter(), g_unk0x0096130c->getBoundingSphereRadius());
+		m_unk0x34->FUN_0067b2b0(g_unk0x0096130c->getSubMesh(0), meshBounds);
+	}
+
+	Ogre::Matrix4 transform;
+	FUN_0066a360(transform);
+	Ogre::Matrix4 local;
+	local.makeTransform(
+		reinterpret_cast<const Ogre::Vector3&>(center),
+		Ogre::Vector3(1.0f, v2.y - v0.y, v2.z - v0.z),
+		Ogre::Quaternion()
+	);
+	transform = transform * local;
+	FUN_0066c220(g_unk0x0096130c, transform, m_unk0x24);
 }
 
 // FUNCTION: ROBLOX 0x0066da00
