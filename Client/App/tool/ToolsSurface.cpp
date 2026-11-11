@@ -559,16 +559,40 @@ void ResizeTool::FUN_0063b240(const UIEvent& uiEvent)
 	m_unk0x24.reset();
 }
 
-// STUB: ROBLOX 0x0063b4b0
+// FUNCTION: ROBLOX 0x0063b4b0
 void ResizeTool::render3dAdorn(Adorn* adorn)
 {
-	STUB(0x63b4b0);
+	ServiceClient<Selection> selection(workspace);
+	std::vector<boost::shared_ptr<Instance> >::const_iterator it;
+	for (it = selection->begin(); it != selection->end(); ++it) {
+		if (PartInstance* part = dynamic_cast<PartInstance*>(it->get())) {
+			DrawAdorn::handles3d(
+				part->getPartSizeXml(),
+				part->getCoordinateFrame(),
+				adorn,
+				HANDLE_RESIZE,
+				workspace->getGCamera().getCoordinateFrame().translation
+			);
+		}
+	}
 }
 
-// STUB: ROBLOX 0x0063b620
+// FUNCTION: ROBLOX 0x0063b620
 void ResizeTool::render2d(Adorn* adorn)
 {
-	STUB(0x63b620);
+	ServiceClient<Selection> selection(workspace);
+	std::vector<boost::shared_ptr<Instance> >::const_iterator it;
+	for (it = selection->begin(); it != selection->end(); ++it) {
+		if (PartInstance* part = dynamic_cast<PartInstance*>(it->get())) {
+			DrawAdorn::handles2d(
+				part->getPartSizeXml(),
+				part->getCoordinateFrame(),
+				workspace->getGCamera(),
+				adorn,
+				DrawAdorn::resizeColor()
+			);
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x0063b7c0

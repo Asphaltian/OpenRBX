@@ -1,5 +1,6 @@
 #include "appdraw/DrawAdorn.h"
 
+#include "appdraw/HitTest.h"
 #include "appdraw/Part.h"
 #include "decomp.h"
 #include "util/Math.h"
@@ -65,6 +66,44 @@ void DrawAdorn::partSurface(const Part& part, int surfaceId, Adorn* adorn, const
 	G3D::Vector3 halfRealSize = part.gridSize * 0.5f;
 
 	surfaceBorder(adorn, halfRealSize, 0.2f, surfaceId, color);
+}
+
+// STUB: ROBLOX 0x00670e40
+void DrawAdorn::handles3d(
+	const G3D::Vector3& p_unk0x04,
+	const G3D::CoordinateFrame& p_unk0x08,
+	Adorn* p_unk0x0c,
+	HandleType p_unk0x10,
+	const G3D::Vector3& p_unk0x14
+)
+{
+	STUB(0x670e40);
+}
+
+// STUB: ROBLOX 0x00671300
+void DrawAdorn::handles2d(
+	const G3D::Vector3& p_unk0x04,
+	const G3D::CoordinateFrame& p_unk0x08,
+	const G3D::GCamera& p_unk0x0c,
+	Adorn* p_unk0x10,
+	const G3D::Color3& p_unk0x14
+)
+{
+	G3D::Vector3 halfSize = p_unk0x04 * 0.5;
+
+	for (int posNeg = 0; posNeg < 2; posNeg++) {
+		float polarity = posNeg < 1.0f ? -1.0f : 1.0f;
+
+		for (int axis = 0; axis < 3; axis++) {
+			G3D::Vector3 handleInPart;
+			handleInPart[axis] = (halfSize[axis] + HitTest::handleOffset()) * polarity;
+			G3D::Vector3 handleInWorld = p_unk0x08.pointToWorldSpace(handleInPart);
+			G3D::Vector2 screen = p_unk0x0c.project(handleInWorld, p_unk0x10->getViewport()).xy();
+			G3D::Color4 color(p_unk0x14, 1.0f);
+			G3D::Rect2D rect = G3D::Rect2D::xyxy(screen - G3D::Vector2(3.0f, 3.0f), screen + G3D::Vector2(3.0f, 3.0f));
+			p_unk0x10->rect2d(rect, color);
+		}
+	}
 }
 
 } // namespace RBX

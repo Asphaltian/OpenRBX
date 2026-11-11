@@ -13,6 +13,14 @@ namespace RBX {
 
 class Part;
 
+enum HandleType
+{
+	HANDLE_RESIZE = 0,
+	HANDLE_MOVE = 1,
+	HANDLE_ROTATE = 2,
+	HANDLE_VELOCITY = 3
+};
+
 class DrawAdorn
 {
 private:
@@ -21,13 +29,18 @@ private:
 	);
 
 public:
-	static const G3D::Color3& resizeColor();
+	static const G3D::Color3& resizeColor()
+	{
+		static G3D::Color3 c(0.1f, 0.6f, 1.0f);
+		return c;
+	}
 
 	static void cylinder(
 		Adorn* adorn, const G3D::CoordinateFrame& worldC, int axis, float length, float radius, const G3D::Color3& color
 	);
 
 	static void partSurface(const Part& part, int surfaceId, Adorn* adorn, const G3D::Color4& color);
+	static void handles3d(const G3D::Vector3&, const G3D::CoordinateFrame&, Adorn*, HandleType, const G3D::Vector3&);
 	static void handles2d(
 		const G3D::Vector3&, const G3D::CoordinateFrame&, const G3D::GCamera&, Adorn*, const G3D::Color3&
 	);

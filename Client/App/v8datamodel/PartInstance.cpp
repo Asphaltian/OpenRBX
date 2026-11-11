@@ -1142,7 +1142,39 @@ void PartInstance::setElasticity(float elasticity)
 // STUB: ROBLOX 0x005b2990
 bool PartInstance::resize(NormalId p_unk0x04, int p_unk0x08)
 {
-	STUB(0x5b2990);
+	if (p_unk0x08 != 0) {
+		Vector3 oldSizeXml = getPartSizeXml();
+		CoordinateFrame oldCoord = getCoordinateFrame();
+		Vector3 deltaSizeUi;
+		float posNeg = p_unk0x04 < 3 ? 1.0f : -1.0f;
+
+		if (partType == Part::BLOCK_PART) {
+			deltaSizeUi[p_unk0x04 % 3] = (float) p_unk0x08;
+		}
+		else {
+			deltaSizeUi = Vector3((float) p_unk0x08, (float) p_unk0x08, (float) p_unk0x08);
+		}
+
+		Vector3 newSizeUi = xmlToUiSize(oldSizeXml) + deltaSizeUi;
+		Vector3 newSizeXml = uiToXmlSize(newSizeUi);
+		Vector3 deltaSizeXml = newSizeXml - oldSizeXml;
+		Vector3 offset = oldCoord.rotation * deltaSizeXml;
+		Vector3 newTranslation = offset * 0.5f * posNeg + oldCoord.translation;
+		CoordinateFrame newCoord(oldCoord.rotation, newTranslation);
+
+		setCoordinateFrame(newCoord);
+		Vector3 sizeXml = uiToXmlSize(newSizeUi);
+		setPartSizeXml(sizeXml);
+		safeMove();
+
+		if (Math::fuzzyEq(getCoordinateFrame(), newCoord, 0.00001f, 0.00001f)) {
+			return true;
+		}
+
+		setCoordinateFrame(oldCoord);
+		setPartSizeXml(oldSizeXml);
+	}
+
 	return false;
 }
 
