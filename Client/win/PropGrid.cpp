@@ -429,8 +429,8 @@ void XItem<T, Base, Descriptor>::VTable0x00(
 	const std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >& instances
 )
 {
-	bool hasValue = false;
 	T first;
+	bool hasValue = false;
 	std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::const_iterator
 		objectsEnd = instances.end();
 	for (std::vector<const RBX::Reflection::ClassDescriptor*>::const_iterator iter = m_unk0x04.begin(),
@@ -441,22 +441,18 @@ void XItem<T, Base, Descriptor>::VTable0x00(
 		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::
 			const_iterator found = instances.find(descriptor);
 		if (found != objectsEnd) {
-			const std::vector<boost::shared_ptr<RBX::Instance> >& objects = found->second;
-			for (std::vector<boost::shared_ptr<RBX::Instance> >::const_iterator instance = objects.begin(),
-																				instancesEnd = objects.end();
+			for (std::vector<boost::shared_ptr<RBX::Instance> >::const_iterator instance = found->second.begin(),
+																				instancesEnd = found->second.end();
 				 instance != instancesEnd;
 				 ++instance) {
 				if (!hasValue) {
 					first = FUN_0043f1f0(instance->get());
 					VTable0xe8(first);
 				}
-				else {
-					T value = FUN_0043f1f0(instance->get());
-					if (!VTable0xec(first, value)) {
-						CXTPPropertyGridItem::SetValue("");
-						SetHidden(FALSE);
-						return;
-					}
+				else if (!VTable0xec(first, FUN_0043f1f0(instance->get()))) {
+					CXTPPropertyGridItem::SetValue("");
+					SetHidden(FALSE);
+					return;
 				}
 				hasValue = true;
 			}
@@ -504,9 +500,8 @@ void XItem<T, Base, Descriptor>::FUN_00443670(const T& value)
 			std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
 				found = m_unk0x14->m_unk0x1d0.find(descriptor);
 			if (found != objectsEnd) {
-				std::vector<boost::shared_ptr<RBX::Instance> >& instances = found->second;
-				for (std::vector<boost::shared_ptr<RBX::Instance> >::iterator instance = instances.begin(),
-																			  instancesEnd = instances.end();
+				for (std::vector<boost::shared_ptr<RBX::Instance> >::iterator instance = found->second.begin(),
+																			  instancesEnd = found->second.end();
 					 instance != instancesEnd;
 					 ++instance) {
 					undoState->addProperty(RBX::Reflection::Property(*m_unk0x124, instance->get()));
