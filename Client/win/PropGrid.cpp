@@ -124,7 +124,7 @@ void CPropertyGridItemBrickColor::SetColor(COLORREF clr)
 	CXTPPropertyGridItem::SetValue(FUN_0043bdc0(clr));
 }
 
-// STUB: ROBLOX 0x0043be70
+// FUNCTION: ROBLOX 0x0043be70
 CPropertyGridItemBrickColor::CPropertyGridItemBrickColor(CString strCaption, COLORREF clr)
 	: CXTPPropertyGridItemColor(strCaption, clr)
 {
@@ -521,12 +521,13 @@ void XItem<T, Base, Descriptor>::FUN_00443670(const T& value)
 
 		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
 			objectsEnd = m_unk0x14->m_unk0x1d0.end();
-		std::vector<const RBX::Reflection::ClassDescriptor*>::iterator end = m_unk0x04.end();
-		for (std::vector<const RBX::Reflection::ClassDescriptor*>::iterator iter = m_unk0x04.begin(); iter != end;
+		std::vector<const RBX::Reflection::ClassDescriptor*>::const_iterator end = m_unk0x04.end();
+		for (std::vector<const RBX::Reflection::ClassDescriptor*>::const_iterator iter = m_unk0x04.begin(); iter != end;
 			 ++iter) {
 			const RBX::Reflection::ClassDescriptor* descriptor = *iter;
+			CPropGrid::Unk0x1d0& objects = m_unk0x14->m_unk0x1d0;
 			std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
-				found = m_unk0x14->m_unk0x1d0.find(descriptor);
+				found = objects.find(descriptor);
 			if (found != objectsEnd) {
 				for (std::vector<boost::shared_ptr<RBX::Instance> >::iterator instance = found->second.begin(),
 																			  instancesEnd = found->second.end();
@@ -807,17 +808,19 @@ void ScriptItem::VTable0x00(
 	SetHidden(TRUE);
 }
 
-// STUB: ROBLOX 0x00442620
+// FUNCTION: ROBLOX 0x00442620
 void ScriptItem::OnInplaceButtonDown(CXTPPropertyGridInplaceButton* pButton)
 {
 	std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
 		objectsEnd = m_unk0x14->m_unk0x1d0.end();
-	for (std::vector<const RBX::Reflection::ClassDescriptor*>::iterator iter = m_unk0x04.begin(), end = m_unk0x04.end();
+	for (std::vector<const RBX::Reflection::ClassDescriptor*>::const_iterator iter = m_unk0x04.begin(),
+																			  end = m_unk0x04.end();
 		 iter != end;
 		 ++iter) {
 		const RBX::Reflection::ClassDescriptor* descriptor = *iter;
+		CPropGrid::Unk0x1d0& objects = m_unk0x14->m_unk0x1d0;
 		std::map<const RBX::Reflection::ClassDescriptor*, std::vector<boost::shared_ptr<RBX::Instance> > >::iterator
-			found = m_unk0x14->m_unk0x1d0.find(descriptor);
+			found = objects.find(descriptor);
 		if (found != objectsEnd) {
 			for (std::vector<boost::shared_ptr<RBX::Instance> >::iterator instance = found->second.begin(),
 																		  instancesEnd = found->second.end();

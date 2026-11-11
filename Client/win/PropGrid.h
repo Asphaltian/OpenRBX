@@ -185,6 +185,42 @@ protected:
 // ?VTable0xe4@?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAEHXZ
 // TEMPLATE: ROBLOX 0x0043ca00
 // ?VTable0xe4@?$XItem@VVector3@G3D@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@@UAE?AVVector3@G3D@@XZ
+// TEMPLATE: ROBLOX 0x0043da80 FOLDED
+// ??1?$ContentItem@VSoundId@Soundscape@RBX@@@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043da80 FOLDED
+// ??1?$ContentItem@VTextureId@RBX@@@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043da80 FOLDED
+// ??1?$XItem@HVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@H@Reflection@RBX@@@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043da80 FOLDED
+// ??1?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043da80 FOLDED
+// ??1?$XItem@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VCXTPPropertyGridItem@@VPropertyDescriptor@Reflection@RBX@@@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043da80 FOLDED
+// ??1?$XItem@VSoundId@Soundscape@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VSoundId@Soundscape@RBX@@@Reflection@3@@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043da80 FOLDED
+// ??1?$XItem@VTextureId@RBX@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VTextureId@RBX@@@Reflection@2@@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043da80 FOLDED
+// ??1?$XItem@VVector3@G3D@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0043da80 FOLDED
+// ??1RefItem@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0043da80 FOLDED
+// ??1ScriptItem@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0043da80 FOLDED
+// ??1SoundItem@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0043da80 FOLDED
+// ??1TextureItem@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0043da80 FOLDED
+// ??1Vector3ComponentItem@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0043da80 FOLDED
+// ??1Vector3Item@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043dac0 FOLDED
+// ??1?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0043dac0 FOLDED
+// ??1EnumItem@@UAE@XZ
+// TEMPLATE: ROBLOX 0x0043dee0 FOLDED
+// ??1?$XItem@_NVCXTPPropertyGridItemBool@@V?$TypedPropertyDescriptor@_N@Reflection@RBX@@@@UAE@XZ
+// SYNTHETIC: ROBLOX 0x0043dee0 FOLDED
+// ??1XBoolItem@@UAE@XZ
 // TEMPLATE: ROBLOX 0x0043e2f0
 // ??$FUN_0043e6b0@VXBoolItem@@@CPropGrid@@AAEXPAVXBoolItem@@@Z
 // TEMPLATE: ROBLOX 0x0043e430 FOLDED
@@ -277,15 +313,15 @@ protected:
 // ??0?$XItem@VVector3@G3D@@VCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@@@QAE@ABV?$TypedPropertyDescriptor@VVector3@G3D@@@Reflection@RBX@@PAVCPropGrid@@@Z
 // TEMPLATE: ROBLOX 0x00440610
 // ?VTable0xec@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@UAE_NABVColor3@G3D@@0@Z
-// STUB: ROBLOX 0x004432b0
+// TEMPLATE: ROBLOX 0x004432b0
 // ?FUN_00443670@?$XItem@_NVCXTPPropertyGridItemBool@@V?$TypedPropertyDescriptor@_N@Reflection@RBX@@@@IAEXAB_N@Z
 // SYNTHETIC: ROBLOX 0x00442920
 // ??_E?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@UAEPAXI@Z
-// STUB: ROBLOX 0x00443670
+// TEMPLATE: ROBLOX 0x00443670
 // ?FUN_00443670@?$XItem@MVCXTPPropertyGridItem@@V?$TypedPropertyDescriptor@M@Reflection@RBX@@@@IAEXABM@Z
-// STUB: ROBLOX 0x00443a30
+// TEMPLATE: ROBLOX 0x00443a30
 // ?FUN_00443670@?$XItem@VColor3@G3D@@VCXTPPropertyGridItemColor@@V?$TypedPropertyDescriptor@VColor3@G3D@@@Reflection@RBX@@@@IAEXABVColor3@G3D@@@Z
-// STUB: ROBLOX 0x00443df0
+// TEMPLATE: ROBLOX 0x00443df0
 // ?FUN_00443670@?$XItem@HVCXTPPropertyGridItemEnum@@VEnumPropertyDescriptor@Reflection@RBX@@@@IAEXABH@Z
 // TEMPLATE: ROBLOX 0x00444560
 // ?OnValueChanged@?$XItem@_NVCXTPPropertyGridItemBool@@V?$TypedPropertyDescriptor@_N@Reflection@RBX@@@@UAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z

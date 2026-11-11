@@ -426,7 +426,7 @@ void CLuaHtmlView::Binder::FUN_00430b30(
 	FUN_0042ebf0();
 }
 
-// STUB: ROBLOX 0x00430c90
+// FUNCTION: ROBLOX 0x00430c90
 void CLuaHtmlView::FUN_00430c90(
 	boost::shared_ptr<RBX::Instance> instance, const RBX::Reflection::PropertyDescriptor* descriptor, LPCTSTR name
 )
@@ -451,12 +451,14 @@ void CLuaHtmlView::FUN_00430c90(
 	}
 
 	Binder* binder = NULL;
+	std::list<boost::shared_ptr<Binder> >::iterator iter = m_unk0x10c.begin();
 	std::list<boost::shared_ptr<Binder> >::iterator end = m_unk0x10c.end();
-	for (std::list<boost::shared_ptr<Binder> >::iterator iter = m_unk0x10c.begin(); iter != end; ++iter) {
-		if (FUN_0042dd20((*iter)->m_unk0x20, input)) {
+	while (iter != end) {
+		if (FUN_0042dd20((*iter)->m_unk0x20.p, input.p)) {
 			binder = (*iter).get();
 			break;
 		}
+		++iter;
 	}
 
 	if (binder == NULL) {

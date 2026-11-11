@@ -6748,3 +6748,5 @@ address,type,symbol,name,module,size
 00443df0,function,,,,955
 0040ee60,function,,,,142
 00809f88,widechar,,,,
+0042def0,library,??$?0VBinder@CLuaHtmlView@@@?$shared_ptr@VBinder@CLuaHtmlView@@@boost@@QAE@PAVBinder@CLuaHtmlView@@@Z,,,
+00455360,library,?CreateInstance@?$CComObject@VCWorkspace@@@ATL@@SGJPAPAV12@@Z,,,
