@@ -52,7 +52,7 @@ void LuaWriter::FUN_00474210(LDrawCommand* p_unk0x04)
 } // namespace LDraw2Lua
 } // namespace RBX
 
-// STUB: ROBLOX 0x004742e0
+// FUNCTION: ROBLOX 0x004742e0
 int FUN_004742e0(const std::string& p_unk0x04, const std::string& p_unk0x08)
 {
 	std::string::const_iterator p = p_unk0x04.begin();
@@ -67,5 +67,7 @@ int FUN_004742e0(const std::string& p_unk0x04, const std::string& p_unk0x08)
 		++p2;
 	}
 
-	return p_unk0x08.size() == p_unk0x04.size() ? 0 : p_unk0x04.size() < p_unk0x08.size() ? -1 : 1;
+	size_t size = p_unk0x04.size();
+	size_t size2 = p_unk0x08.size();
+	return size2 == size ? 0 : size < size2 ? -1 : 1;
 }

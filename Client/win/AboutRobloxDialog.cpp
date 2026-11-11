@@ -47,7 +47,7 @@ BEGIN_DHTML_EVENT_MAP(CAboutRobloxDialog)
 DHTML_EVENT_ONCLICK(_T("ButtonOK"), OnButtonOK)
 END_DHTML_EVENT_MAP()
 
-// STUB: ROBLOX 0x004013f0
+// FUNCTION: ROBLOX 0x004013f0
 void CAboutRobloxDialog::DoDataExchange(CDataExchange* pDX)
 {
 	if (!pDX->m_bSaveAndValidate) {
@@ -62,15 +62,7 @@ void CAboutRobloxDialog::DoDataExchange(CDataExchange* pDX)
 		G3D::System::describeSystem(systemInfo);
 		DDX_DHtml_ElementText(pDX, _T("systemInfo"), DISPID_IHTMLELEMENT_INNERHTML, CString(systemInfo.c_str()));
 
-		if (glGetString(GL_VENDOR) == NULL) {
-			CComPtr<IHTMLElement> element;
-			if (GetElement(_T("glInfo"), &element) == S_OK) {
-				CComPtr<IHTMLStyle> style;
-				element->get_style(&style);
-				style->put_display(CComBSTR("none"));
-			}
-		}
-		else {
+		if (glGetString(GL_VENDOR) != NULL) {
 			CString glVersion(G3D::GLCaps::glVersion().c_str());
 			DDX_DHtml_ElementText(pDX, _T("glVersion"), DISPID_IHTMLELEMENT_INNERHTML, glVersion);
 			CString driverVersion(G3D::GLCaps::driverVersion().c_str());
@@ -79,6 +71,14 @@ void CAboutRobloxDialog::DoDataExchange(CDataExchange* pDX)
 			DDX_DHtml_ElementText(pDX, _T("vendor"), DISPID_IHTMLELEMENT_INNERHTML, vendor);
 			CString renderer(G3D::GLCaps::renderer().c_str());
 			DDX_DHtml_ElementText(pDX, _T("renderer"), DISPID_IHTMLELEMENT_INNERHTML, renderer);
+		}
+		else {
+			CComPtr<IHTMLElement> element;
+			if (GetElement(_T("glInfo"), &element) == S_OK) {
+				CComPtr<IHTMLStyle> style;
+				element->get_style(&style);
+				style->put_display(CComBSTR("none"));
+			}
 		}
 	}
 }

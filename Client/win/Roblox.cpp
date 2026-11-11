@@ -581,7 +581,7 @@ CRobloxApp::~CRobloxApp()
 {
 }
 
-// STUB: ROBLOX 0x004509e0
+// FUNCTION: ROBLOX 0x004509e0
 void CRobloxApp::FUN_004509e0()
 {
 	SetRegistryKey("ROBLOX Corporation");
@@ -592,23 +592,24 @@ void CRobloxApp::FUN_004509e0()
 
 	CString moduleFileName;
 	AfxGetModuleShortFileName(AfxGetApp()->m_hInstance, moduleFileName);
-	CString path(static_cast<LPCTSTR>(moduleFileName));
-	PathRemoveFileSpec(path.GetBuffer(path.GetLength()));
-	path.ReleaseBuffer();
-	px.LoadFromFile(path + "\\AppSettings.xml");
+	CPath path(moduleFileName);
+	path.RemoveFileSpec();
+	px.LoadFromFile(path.m_strPath + "\\AppSettings.xml");
 
-	BOOL silentCrashReport = TRUE;
-	if (!PX_Bool(&px, "SilentCrashReport", silentCrashReport) || silentCrashReport) {
-		silentCrashReport = FALSE;
-		CRegKey key;
-		if (key.Open(HKEY_CURRENT_USER, "Software\\ROBLOX Corporation\\Roblox", KEY_READ) == ERROR_SUCCESS) {
-			DWORD value = 0;
-			key.QueryDWORDValue("SilentCrashReport", value);
-			silentCrashReport = value;
-			g_unk0x00954290.ReleaseBuffer();
+	{
+		BOOL silentCrashReport = TRUE;
+		if (!PX_Bool(&px, "SilentCrashReport", silentCrashReport) || silentCrashReport) {
+			silentCrashReport = FALSE;
+			CRegKey key;
+			if (key.Open(HKEY_CURRENT_USER, "Software\\ROBLOX Corporation\\Roblox", KEY_READ) == ERROR_SUCCESS) {
+				DWORD value = 0;
+				key.QueryDWORDValue("SilentCrashReport", value);
+				silentCrashReport = value;
+				g_unk0x00954290.ReleaseBuffer();
+			}
 		}
+		RobloxCrashReporter::silent = silentCrashReport != FALSE;
 	}
-	RobloxCrashReporter::silent = silentCrashReport != FALSE;
 
 	PX_String(&px, "BaseUrl", g_unk0x00954290);
 	if (g_unk0x00954290.IsEmpty()) {
@@ -623,9 +624,8 @@ void CRobloxApp::FUN_004509e0()
 	CString contentFolder;
 	PX_String(&px, "ContentFolder", contentFolder);
 	if (!contentFolder.IsEmpty()) {
-		CString assetFolder;
-		PathCombine(assetFolder.GetBuffer(MAX_PATH), path, contentFolder);
-		assetFolder.ReleaseBuffer();
+		CPath assetFolder;
+		assetFolder.Combine(path, contentFolder);
 		RBX::ContentProvider::singleton().setAssetFolder(assetFolder);
 	}
 
