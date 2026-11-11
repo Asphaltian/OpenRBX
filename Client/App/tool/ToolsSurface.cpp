@@ -258,20 +258,30 @@ void ModelTool::render3dAdorn(Adorn* adorn)
 	}
 }
 
-// STUB: ROBLOX 0x00639eb0
+// FUNCTION: ROBLOX 0x00639eb0
 const std::string AnchorTool::getCursorName() const
 {
-	if (m_unk0x20 && m_unk0x28) {
-		return "UnAnchorCursor";
+	if (m_unk0x20) {
+		if (m_unk0x28) {
+			return "UnAnchorCursor";
+		}
+		else {
+			return "AnchorCursor";
+		}
 	}
 	return "AnchorCursor";
 }
 
-// STUB: ROBLOX 0x00639f00
+// FUNCTION: ROBLOX 0x00639f00
 const std::string LockTool::getCursorName() const
 {
-	if (m_unk0x20 && PartInstance::getLocked(m_unk0x20.get())) {
-		return "UnlockCursor";
+	if (m_unk0x20) {
+		if (PartInstance::getLocked(m_unk0x20.get())) {
+			return "UnlockCursor";
+		}
+		else {
+			return "LockCursor";
+		}
 	}
 	return "LockCursor";
 }
@@ -310,13 +320,20 @@ void ModelTool::onMouseHover(const UIEvent& uiEvent)
 	}
 }
 
-// STUB: ROBLOX 0x0063a2b0
+// FUNCTION: ROBLOX 0x0063a2b0
 void AnchorTool::onMouseHover(const UIEvent& uiEvent)
 {
 	boost::shared_ptr<Instance> oldInstance = m_unk0x20;
 	ModelTool::onMouseHover(uiEvent);
 	if (oldInstance != m_unk0x20) {
-		m_unk0x28 = m_unk0x20 && !FUN_0063a090(m_unk0x20.get());
+		bool anchored;
+		if (m_unk0x20) {
+			anchored = FUN_0063a090(m_unk0x20.get()) == NULL;
+		}
+		else {
+			anchored = false;
+		}
+		m_unk0x28 = anchored;
 	}
 }
 
@@ -386,7 +403,7 @@ PV SlingshotTool::VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cfra
 	return PV(frame, Velocity(direction * 85.0f, G3D::Vector3::zero()));
 }
 
-// STUB: ROBLOX 0x0063a740
+// FUNCTION: ROBLOX 0x0063a740
 PV RocketTool::VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe)
 {
 	G3D::Vector3 hitWorld;
@@ -394,7 +411,7 @@ PV RocketTool::VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cframe)
 	G3D::Vector3 direction = part ? (hitWorld - cframe.translation).direction() : cframe.lookVector();
 	CoordinateFrame frame;
 	frame.lookAt(direction);
-	frame.translation = cframe.translation + direction * 5.0f;
+	frame.translation = cframe.translation + 5.0f * direction;
 	return PV(frame, Velocity::zero());
 }
 

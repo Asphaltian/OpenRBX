@@ -59,7 +59,7 @@ void PartTool::onMouseHover(const UIEvent& uiEvent)
 	partInstance = shared_from(getPart(uiEvent));
 }
 
-// STUB: ROBLOX 0x005c0530
+// FUNCTION: ROBLOX 0x005c0530
 MouseCommand* FillTool::onMouseDown(const UIEvent& uiEvent)
 {
 	PartInstance* part = getPart(uiEvent);
@@ -71,7 +71,9 @@ MouseCommand* FillTool::onMouseDown(const UIEvent& uiEvent)
 
 		RedoState* redoState = new RedoState();
 		redoState->addProperty(Reflection::Property(PartInstance::prop_BrickColor, part));
-		workspace->getDataState().pushState(getName().toString(), undoState, redoState);
+		IDataState& dataState = workspace->getDataState();
+		const Name& name = getName();
+		dataState.pushState(name.toString(), undoState, redoState);
 		workspace->getDataState().setDirty(true);
 	}
 	return NULL;

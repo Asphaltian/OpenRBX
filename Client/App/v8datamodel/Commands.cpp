@@ -632,7 +632,7 @@ void GroupSelectionVerb::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059aaf0
+// FUNCTION: ROBLOX 0x0059aaf0
 void UngroupSelectionVerb::doIt(IDataState* dataState)
 {
 	FUN_00596660(dataModel);
@@ -644,7 +644,8 @@ void UngroupSelectionVerb::doIt(IDataState* dataState)
 	for (std::vector<ModelInstance*>::const_iterator iter = filteredSelection->begin();
 		 iter != filteredSelection->end();
 		 ++iter) {
-		models.push_back((*iter)->shared_from_this());
+		ModelInstance* model = *iter;
+		models.push_back(model->shared_from_this());
 	}
 
 	std::vector<Instance*> newSelection;
@@ -1104,15 +1105,20 @@ void DeleteBase::doIt(IDataState* dataState)
 	}
 }
 
-// STUB: ROBLOX 0x0059c860
+// FUNCTION: ROBLOX 0x0059c860
 bool AttachCameraCommand::isEnabled() const
 {
 	if (selection->size() == 0) {
 		return false;
 	}
 
-	ServiceClient<FilteredSelection<PVInstance> > filteredSelection(dataModel);
-	return filteredSelection->items().size() == 1;
+	bool result;
+	{
+		ServiceClient<FilteredSelection<PVInstance> > filteredSelection(dataModel);
+		result = filteredSelection->items().size() == 1;
+	}
+
+	return result ? true : false;
 }
 
 // FUNCTION: ROBLOX 0x0059c950

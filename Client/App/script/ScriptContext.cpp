@@ -439,7 +439,7 @@ int ScriptContext::loadfile(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x10066f20
-// STUB: ROBLOX 0x005734e0
+// FUNCTION: ROBLOX 0x005734e0
 int ScriptContext::stats(lua_State* L)
 {
 	Security::Context::current().requirePermission(Security::Administrator, "Stats");
