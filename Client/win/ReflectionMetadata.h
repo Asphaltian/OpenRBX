@@ -29,6 +29,9 @@ class Members : public Instance
 public:
 	// FUNCTION: ROBLOX 0x00427a60
 	Members() {}
+
+protected:
+	virtual bool askAddChild(const Instance* instance) const;
 };
 
 DECOMP_SIZE_ASSERT(Members, 0xf8)

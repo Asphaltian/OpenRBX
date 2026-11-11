@@ -33,6 +33,11 @@ class DataModel;
 // SIZE 0xb8
 class CRobloxWnd : public CWnd, public RBX::IRunView, public RBX::IMetric
 {
+	DECLARE_DYNAMIC(CRobloxWnd)
+
+	// SYNTHETIC: ROBLOX 0x0045f630
+	// ?GetThisClass@CRobloxWnd@@SGPAUCRuntimeClass@@XZ
+
 public:
 	CRobloxWnd(bool p_unk0x80);
 	virtual ~CRobloxWnd();

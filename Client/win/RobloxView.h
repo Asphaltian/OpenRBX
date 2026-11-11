@@ -113,6 +113,9 @@ class CRobloxView : public VerbBinder<CRobloxView, CView>,
 	// SYNTHETIC: ROBLOX 0x0045e5c0
 	// ?CreateObject@CRobloxView@@SGPAVCObject@@XZ
 
+	// SYNTHETIC: ROBLOX 0x0045f290
+	// ?GetMessageMap@CRobloxView@@MBEPBUAFX_MSGMAP@@XZ
+
 protected:
 	CRobloxView();
 

@@ -63,7 +63,8 @@ public:
 	virtual void FUN_00442e20(
 		const RBX::Reflection::ClassDescriptor* classDescriptor,
 		const RBX::Reflection::PropertyDescriptor* descriptor
-	); // vtable+0x160
+	);                                         // vtable+0x160
+	virtual RBX::Selection* VTable0x164() = 0; // vtable+0x164
 
 protected:
 	virtual void onEvent(const RBX::Instance* source, RBX::PropertyChanged event);
@@ -511,6 +512,9 @@ public:
 
 	// FUNCTION: ROBLOX 0x00434880
 	virtual ~CSelectionPropGrid() { FUN_00445580(NULL); }
+
+	// FUNCTION: ROBLOX 0x00434940
+	virtual RBX::Selection* VTable0x164() { return m_unk0x1e0.get(); }
 
 	void FUN_00445580(RBX::Selection* selection);
 

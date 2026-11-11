@@ -82,6 +82,9 @@ public:
 
 	DECLARE_MESSAGE_MAP()
 
+	// SYNTHETIC: ROBLOX 0x004518f0
+	// ?GetMessageMap@CRobloxApp@@MBEPBUAFX_MSGMAP@@XZ
+
 	friend class CApp;
 
 private:

@@ -174,6 +174,9 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 
+	// SYNTHETIC: ROBLOX 0x0045abf0
+	// ?GetMessageMap@CRobloxDoc@@MBEPBUAFX_MSGMAP@@XZ
+
 private:
 	friend class CRobloxView;
 

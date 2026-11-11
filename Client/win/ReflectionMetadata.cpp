@@ -34,6 +34,12 @@ char sEvents[] = "ReflectionMetadataEvents";
 // GLOBAL: ROBLOX 0x00919d14
 char sMember[] = "ReflectionMetadataMember";
 
+// FUNCTION: ROBLOX 0x00446000
+bool Members::askAddChild(const Instance* instance) const
+{
+	return dynamic_cast<const Member*>(instance) != NULL;
+}
+
 // FUNCTION: ROBLOX 0x00446130
 Class* Classes::FUN_00446130(const ClassDescriptor* descriptor, bool recurse)
 {

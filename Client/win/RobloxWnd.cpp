@@ -95,6 +95,8 @@ static void removeRunView(RBX::DataModel* dataModel, RBX::IRunView* runView)
 	}
 }
 
+IMPLEMENT_DYNAMIC(CRobloxWnd, CWnd)
+
 // FUNCTION: ROBLOX 0x0045f650
 BOOL CRobloxWnd::OnEraseBkgnd(CDC* pDC)
 {
