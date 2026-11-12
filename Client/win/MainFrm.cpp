@@ -794,10 +794,25 @@ void CMainFrame::FUN_00435460(NMHDR* pNMHDR, LRESULT* pResult)
 	}
 }
 
-// STUB: ROBLOX 0x00435570
+// FUNCTION: ROBLOX 0x00435570
 void CMainFrame::FUN_00435570(NMHDR* pNMHDR, LRESULT* pResult)
 {
-	STUB(0x435570);
+	CRobloxControlColorSelector* control =
+		static_cast<CRobloxControlColorSelector*>(((NMXTPCONTROL*) pNMHDR)->pControl);
+
+	G3D::Color3uint8 color;
+	color.r = GetRValue(control->GetColor());
+	color.g = GetGValue(control->GetColor());
+	color.b = GetBValue(control->GetColor());
+	RBX::FillTool::color.set(RBX::BrickColor::closest(color));
+
+	if (ActiveDocView::FUN_00434840()) {
+		RBX::DataModel::Lock lock(ActiveDocView::FUN_00434840());
+		RBX::Verb* verb = ActiveDocView::FUN_00434840()->getVerb("FillTool");
+		verb->doIt(ActiveDocView::FUN_00434840().get());
+	}
+
+	*pResult = 1;
 }
 
 // FUNCTION: ROBLOX 0x004357d0

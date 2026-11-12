@@ -681,6 +681,7 @@ if (MSVC_FOR_DECOMP)
   add_executable(roblox WIN32
     Client/win/AboutRobloxDialog.cpp
     Client/win/App.cpp
+    Client/win/Unknown00409ef0.cpp
     Client/win/BrowserView.cpp
     Client/win/ChatPrompt.cpp
     Client/win/ChildFrm.cpp

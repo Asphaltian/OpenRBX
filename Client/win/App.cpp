@@ -3,9 +3,12 @@
 #include "LogManager.h"
 #include "Roblox.h"
 #include "RobloxDoc.h"
+#include "Unknown00409ef0.h"
 #include "util/ContentProvider.h"
+#include "util/standardout.h"
 #include "v8datamodel/DebugSettings.h"
 
+#include <atlutil.h>
 #include <boost/scoped_ptr.hpp>
 #include <iphlpapi.h>
 
@@ -181,10 +184,29 @@ STDMETHODIMP CApp::get_ErrorReporting(ERROR_REPORTING* pVal)
 	return S_OK;
 }
 
-// STUB: ROBLOX 0x00409ab0
+// FUNCTION: ROBLOX 0x00409ab0
 STDMETHODIMP CApp::RobloxAuthenticate(BSTR url, BSTR ticket)
 {
-	STUB(0x409ab0);
+	AFX_MANAGE_STATE(AfxGetAppModuleState());
+
+	RBX::StandardOut::singleton()->print(
+		RBX::MESSAGE_INFO,
+		"CApp::RobloxAuthenticate %s %s",
+		static_cast<LPCSTR>(CString(url)),
+		static_cast<LPCSTR>(CString(ticket))
+	);
+
+	try {
+		CUrl crackedUrl;
+		crackedUrl.CrackUrl(FUN_00407190());
+
+		Unknown00409ef0 authenticator(crackedUrl.GetHostName());
+		authenticator.FUN_00409f70(CString(url), CString(ticket));
+	}
+	catch (std::exception& e) {
+		return LogManager::ReportExceptionAsCOMError(CLSID_App, e);
+	}
+
 	return S_OK;
 }
 
