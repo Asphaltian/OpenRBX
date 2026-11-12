@@ -779,7 +779,7 @@ void CRobloxWnd::OnPaint()
 	}
 }
 
-// FUNCTION: ROBLOX 0x00462be0
+// STUB: ROBLOX 0x00462be0
 std::string CRobloxWnd::getMetric(const std::string& metric) const
 {
 	int value = 0;

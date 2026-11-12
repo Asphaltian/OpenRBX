@@ -610,6 +610,17 @@ DeleteBase::DeleteBase(VerbContainer* container, DataModel* dataModel, std::stri
 {
 }
 
+// SIZE 0x04
+class Unknown00598770
+{
+public:
+	Unknown00598770(Controller::ControllerType controllerType) : m_unk0x00(controllerType) {}
+
+	bool operator()(PVInstance* instance) const { return instance->getControllerType() != m_unk0x00; }
+
+	Controller::ControllerType m_unk0x00; // 0x00
+};
+
 // FUNCTION: ROBLOX 0x0059a410
 void ControllerCommand::setController(Controller::ControllerType controllerType)
 {
@@ -617,7 +628,7 @@ void ControllerCommand::setController(Controller::ControllerType controllerType)
 		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
 
 	Controller::ControllerType newType =
-		filteredSelection->FUN_00598770(controllerType) ? controllerType : Controller::NO_CONTROLLER;
+		filteredSelection->FUN_00598690(Unknown00598770(controllerType)) ? controllerType : Controller::NO_CONTROLLER;
 
 	std::for_each(filteredSelection->begin(), filteredSelection->end(), boost::bind(&FUN_00596950, newType, _1));
 }

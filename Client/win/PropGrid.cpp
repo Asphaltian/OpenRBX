@@ -327,7 +327,7 @@ void CPropGrid::FUN_0043db00(const RBX::Reflection::ClassDescriptor* classDescri
 	);
 }
 
-// FUNCTION: ROBLOX 0x0043df20
+// STUB: ROBLOX 0x0043df20
 void CPropGrid::onEvent(const RBX::Instance* source, RBX::PropertyChanged event)
 {
 	boost::recursive_mutex::scoped_lock lock(m_unk0x188);

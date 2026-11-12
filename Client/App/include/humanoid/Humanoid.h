@@ -106,6 +106,7 @@ public:
 
 	void setMaxHealth(float value);
 	// FUNCTION: WEBSERVICE 0x100a0750
+	// FUNCTION: ROBLOX 0x005e8ce0
 	float getMaxHealth() const { return maxHealth; }
 
 	void takeDamage(float value);

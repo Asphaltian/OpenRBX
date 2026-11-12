@@ -22,7 +22,7 @@ int CSelectionCaption::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	return 0;
 }
 
-// FUNCTION: ROBLOX 0x0046a290
+// STUB: ROBLOX 0x0046a290
 void CSelectionCaption::FUN_0046a290()
 {
 	if (m_hWnd) {
