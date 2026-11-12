@@ -3808,7 +3808,6 @@ address,type,symbol,name,module,size
 0051a030,function,,,,544
 0051a250,function,,,,584
 00544950,function,,,,280
-0058f3f3,function,,,,377
 005f0b50,function,,,,200
 006083d0,function,,,,244
 0067ecc0,function,,,,7788
@@ -7485,8 +7484,8 @@ address,type,symbol,name,module,size
 00534450,library,,,,
 005344a0,library,,,,
 00538520,library,,,,
-00571200,library,,,,
-00571280,library,,,,
+00571200,library,??$assign_to@V?$bind_t@IP6AIPAUlua_State@@@ZV?$list1@V?$arg@$00@boost@@@_bi@boost@@@_bi@boost@@@?$function1@IPAUlua_State@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@IP6AIPAUlua_State@@@ZV?$list1@V?$arg@$00@boost@@@_bi@boost@@@_bi@1@@Z,,,
+00571280,library,??$assign_to@V?$bind_t@XP6AXPAUlua_State@@I@ZV?$list2@V?$arg@$00@boost@@V?$arg@$01@2@@_bi@boost@@@_bi@boost@@@?$function2@XPAUlua_State@@IV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@XP6AXPAUlua_State@@I@ZV?$list2@V?$arg@$00@boost@@V?$arg@$01@2@@_bi@boost@@@_bi@1@@Z,,,
 005d9450,library,,,,
 0066af60,library,,,,
 0066b820,library,,,,
@@ -9303,3 +9302,4 @@ address,type,symbol,name,module,size
 00924f28,global,?creator@?$FactoryProduct@VRotateP@RBX@@VAutoJoint@2@$1?sRotateP@2@3QBDB@RBX@@0VCreator@12@B,,,
 00924f2c,global,?creator@?$FactoryProduct@VRotateV@RBX@@VAutoJoint@2@$1?sRotateV@2@3QBDB@RBX@@0VCreator@12@B,,,
 00924f30,global,?creator@?$FactoryProduct@VMotor@RBX@@VAutoJoint@2@$1?sMotor@2@3QBDB@RBX@@0VCreator@12@B,,,
+0083f8ac,global,_IID_IDispatch,,,

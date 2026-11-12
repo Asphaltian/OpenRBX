@@ -191,11 +191,14 @@ void PartChunk::onSpecialShapeChanged()
 	invalidateMaterial();
 }
 
-// STUB: ROBLOX 0x00515c70
+// FUNCTION: ROBLOX 0x00515c70
 void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	if (descriptor == &PartInstance::prop_Size) {
 		invalidateMesh();
+		invalidateMaterial();
+	}
+	else if (descriptor == &PartInstance::prop_Transparency) {
 		invalidateMaterial();
 	}
 	else if (descriptor == &PartInstance::prop_shapeXml) {
@@ -204,9 +207,12 @@ void PartChunk::onPropertyChanged(const Reflection::PropertyDescriptor* descript
 	else if (Surfaces::isSurfaceDescriptor(*descriptor)) {
 		invalidateMesh();
 	}
+	else if (descriptor == &PartInstance::prop_RenderImportance) {
+		VTable0x24(partInstance->getRenderImportance());
+	}
 }
 
-// STUB: ROBLOX 0x00515ce0
+// FUNCTION: ROBLOX 0x00515ce0
 void Part::onPropertyChanged(const Reflection::PropertyDescriptor* descriptor)
 {
 	PartChunk::onPropertyChanged(descriptor);

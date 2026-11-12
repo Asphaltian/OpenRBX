@@ -174,14 +174,24 @@ void LocalBackpack::clearLocalBackpack()
 }
 
 // FUNCTION: ROBLOX 0x0060d7d0
-bool LocalBackpack::FUN_0060d7d0(unsigned int index)
+bool LocalBackpack::onKey(int key)
 {
-	if (index <= numChildren()) {
-		onClick(static_cast<LocalBackpackItem*>(getChild(index - 1)));
+	if (key <= numChildren()) {
+		onClick(static_cast<LocalBackpackItem*>(getChild(key - 1)));
 		return true;
 	}
 
 	return false;
+}
+
+// FUNCTION: ROBLOX 0x00751160 FOLDED
+void LocalBackpack::cycleUp()
+{
+}
+
+// FUNCTION: ROBLOX 0x00751160 FOLDED
+void LocalBackpack::cycleDown()
+{
 }
 
 // FUNCTION: WEBSERVICE 0x100d6740

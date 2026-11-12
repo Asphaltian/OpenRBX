@@ -860,10 +860,10 @@ static void FUN_00751160(lua_State* thread, unsigned int count)
 {
 }
 
-// STUB: ROBLOX 0x00574ef0
+// FUNCTION: ROBLOX 0x00574ef0
 void ScriptContext::executeInNewThread(Security::Identities identity, const char* script, const char* name)
 {
-	executeInNewThread(identity, script, name, &FUN_00407390, &FUN_00751160);
+	executeInNewThread(identity, script, name, boost::bind(&FUN_00407390, _1), boost::bind(&FUN_00751160, _1, _2));
 }
 
 // FUNCTION: ROBLOX 0x00574f60

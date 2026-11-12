@@ -241,8 +241,8 @@ bool DataModel::canDelaySwapBuffer() const
 	return runService->isRunState();
 }
 
-// STUB: ROBLOX 0x0058f350
-GuiResponse DataModel::FUN_0058f350(const GuiEvent& event)
+// FUNCTION: ROBLOX 0x0058f350
+GuiResponse DataModel::processAccelerators(const GuiEvent& event)
 {
 	Verb* verb = NULL;
 
@@ -255,47 +255,58 @@ GuiResponse DataModel::FUN_0058f350(const GuiEvent& event)
 		break;
 	case UIEvent::KEY_DOWN:
 		if (event.key > SDLK_0 && event.key <= SDLK_9) {
-			if (localBackpack->FUN_0060d7d0(event.key - SDLK_0)) {
+			if (localBackpack->onKey(event.key - SDLK_0)) {
 				return GuiResponse::used();
 			}
-			return GuiResponse::notUsed();
 		}
-
-		switch (event.key) {
-		case SDLK_BACKSPACE:
-			if (ModelInstance* character = Network::Players::findLocalCharacter(this)) {
-				Tool::dropAll(character);
+		else {
+			switch (event.key) {
+			case SDLK_ESCAPE:
+				runService->pause();
+				break;
+			case SDLK_BACKSPACE:
+				if (ModelInstance* character = Network::Players::findLocalCharacter(this)) {
+					Tool::dropAll(character);
+				}
+				break;
+			case SDLK_COMMA:
+				verb = workspace->getVerb("CameraPanLeft");
+				break;
+			case SDLK_o:
+				verb = workspace->getVerb("CameraZoomOut");
+				break;
+			case SDLK_PERIOD:
+				verb = workspace->getVerb("CameraPanRight");
+				break;
+			case SDLK_PAGEUP:
+				verb = workspace->getVerb("CameraTiltDown");
+				break;
+			case SDLK_PAGEDOWN:
+				verb = workspace->getVerb("CameraTiltUp");
+				break;
+			case SDLK_EQUALS:
+				if (ModelInstance* character = Network::Players::findLocalCharacter(this)) {
+					Accoutrement::dropAll(character);
+				}
+				break;
+			case SDLK_RIGHTBRACKET:
+				localBackpack->cycleUp();
+				break;
+			case SDLK_LEFTBRACKET:
+				localBackpack->cycleDown();
+				break;
+			case SDLK_F1:
+				if (event.mod == KMOD_NONE) {
+					verb = getVerb("Help");
+				}
+				else {
+					verb = getVerb("Stats");
+				}
+				break;
+			case SDLK_i:
+				verb = workspace->getVerb("CameraZoomIn");
+				break;
 			}
-			break;
-		case SDLK_ESCAPE:
-			runService->FUN_00569480(RS_NORMAL);
-			break;
-		case SDLK_COMMA:
-			verb = workspace->getVerb("CameraPanLeft");
-			break;
-		case SDLK_PERIOD:
-			verb = workspace->getVerb("CameraPanRight");
-			break;
-		case SDLK_EQUALS:
-			if (ModelInstance* character = Network::Players::findLocalCharacter(this)) {
-				Accoutrement::dropAll(character);
-			}
-			break;
-		case SDLK_i:
-			verb = workspace->getVerb("CameraZoomIn");
-			break;
-		case SDLK_o:
-			verb = workspace->getVerb("CameraZoomOut");
-			break;
-		case SDLK_PAGEUP:
-			verb = workspace->getVerb("CameraTiltDown");
-			break;
-		case SDLK_PAGEDOWN:
-			verb = workspace->getVerb("CameraTiltUp");
-			break;
-		case SDLK_F1:
-			verb = getVerb(event.mod == KMOD_NONE ? "Help" : "Stats");
-			break;
 		}
 		break;
 	}
@@ -330,7 +341,7 @@ void DataModel::processEvent(const UIEvent& event)
 		response = static_cast<GuiTarget*>(localBackpack.get())->process(guiEvent);
 	}
 	if (response.wasNotUsed()) {
-		response = FUN_0058f350(guiEvent);
+		response = processAccelerators(guiEvent);
 	}
 
 	forceArrowCursor = response.wasUsed() && guiTarget != static_cast<GuiTarget*>(workspace.get());

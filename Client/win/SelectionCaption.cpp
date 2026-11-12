@@ -98,12 +98,30 @@ CSelectionCaption::CSelectionCaption()
 {
 }
 
-// STUB: ROBLOX 0x0046adc0
+// FUNCTION: ROBLOX 0x0046adc0
 void CSelectionCaption::VTable0x00(
 	boost::shared_ptr<RBX::DataModel> newDataModel, boost::shared_ptr<RBX::DataModel> oldDataModel
 )
 {
-	STUB(0x46adc0);
+	{
+		RBX::DataModel::Lock lock(m_unk0x1b0);
+		RBX::stopListening<RBX::Selection, RBX::SelectionChanged>(m_unk0x1b8, this);
+		m_unk0x1b8.reset();
+	}
+
+	m_unk0x1b0.reset();
+
+	if (newDataModel) {
+		m_unk0x1b0 = newDataModel;
+
+		RBX::DataModel::Lock lock(m_unk0x1b0);
+		m_unk0x1b8 = RBX::shared_from(m_unk0x1b0 ? m_unk0x1b0->create<RBX::Selection>() : NULL);
+		RBX::startListening<RBX::Selection, RBX::SelectionChanged>(m_unk0x1b8, this);
+	}
+
+	if (!m_unk0x1b8) {
+		FUN_0046a290();
+	}
 }
 
 template class RBX::MarshaledListener<RBX::Selection, RBX::SelectionChanged, RBX::Selection, RBX::SelectionChanged>;
