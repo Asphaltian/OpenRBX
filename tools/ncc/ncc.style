@@ -4,7 +4,7 @@ EnumName: '^\(unnamed|^[A-Z][a-zA-Z0-9]*$'
 EnumConstantName: '^ValueType_[A-Za-z0-9]+$|^c_[a-z][a-zA-Z0-9]*$|^lego_[0-9]+$|^[A-Z][A-Z0-9_]*$|^[A-Z][a-zA-Z0-9]*$'
 FunctionName: '^operator|^IMPLEMENT_(DYNAMIC|DYNCREATE)$|^SafeChat_singleton$|^FUN_[a-f0-9]{8}$|^lua_(pushfunction|tofunction|tofloat)$|^[a-zA-Z][a-zA-Z0-9]*$'
 ParameterName: '^p_unk0x[a-f0-9]{1,8}$|^ysegments_keep$|^_(First|Last|To|St|Endl|Iter|End)$|^L$|^CF$|^[AB]$|^DelayFunction$|^WindowType$|^ExceptionInfo$|^_?[a-z][a-zA-Z0-9]*$|^$'
-StructName: '^\(anon|^\(unnamed|^myLess$|^___Roblox_CWebService_[A-Za-z]+_struct$|^crlf$|^noline$|^lua_State$|^luaL_Reg$|^_TOKEN_MANDATORY_LABEL$|^[A-Z][a-zA-Z0-9]*$'
+StructName: '^\(anon|^\(unnamed|^myLess$|^lightsForShadowTextureLess$|^___Roblox_CWebService_[A-Za-z]+_struct$|^crlf$|^noline$|^lua_State$|^luaL_Reg$|^_TOKEN_MANDATORY_LABEL$|^[A-Z][a-zA-Z0-9]*$'
 TypedefName: '^P?TOKEN_MANDATORY_LABEL$|^[A-Z][a-zA-Z0-9]*$'
 UnionName: '^\(anon|^\(unnamed|^[A-Z][a-zA-Z0-9]*$'
 VariableName:

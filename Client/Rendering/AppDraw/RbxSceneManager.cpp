@@ -612,6 +612,44 @@ void RbxSceneManager::manualRender(
 	}
 }
 
+// FUNCTION: ROBLOX 0x006863b0
+void RbxSceneManager::useRenderableViewProjMode(const Renderable* pRend)
+{
+
+	bool useIdentityView = pRend->getUseIdentityView();
+	if (useIdentityView) {
+
+		mDestRenderSystem->_setViewMatrix(Matrix4::IDENTITY);
+		mResetIdentityView = true;
+	}
+
+	bool useIdentityProj = pRend->getUseIdentityProjection();
+	if (useIdentityProj) {
+
+		Matrix4 mat;
+		mDestRenderSystem->_convertProjectionMatrix(Matrix4::IDENTITY, mat);
+		mDestRenderSystem->_setProjectionMatrix(mat);
+
+		mResetIdentityProj = true;
+	}
+}
+
+// FUNCTION: ROBLOX 0x00686420
+void RbxSceneManager::resetViewProjMode(void)
+{
+	if (mResetIdentityView) {
+
+		mDestRenderSystem->_setViewMatrix(mCameraInProgress->getViewMatrix(true));
+		mResetIdentityView = false;
+	}
+
+	if (mResetIdentityProj) {
+
+		mDestRenderSystem->_setProjectionMatrix(mCameraInProgress->getProjectionMatrixRS());
+		mResetIdentityProj = false;
+	}
+}
+
 // FUNCTION: ROBLOX 0x00686480
 void RbxSceneManager::setViewport(Viewport* vp)
 {
@@ -709,6 +747,20 @@ void RbxSceneManager::updateRenderQueueGroupSplitOptions(
 void RbxSceneManager::_notifyLightsDirty(void)
 {
 	++mLightsDirtyCounter;
+}
+
+// FUNCTION: ROBLOX 0x006866a0
+bool RbxSceneManager::lightsForShadowTextureLess::operator()(const Ogre::Light* l1, const Ogre::Light* l2) const
+{
+	if (l1 == l2) {
+		return false;
+	}
+
+	if (l1->getCastShadows() != l2->getCastShadows()) {
+		return l1->getCastShadows();
+	}
+
+	return l1->tempSquareDist < l2->tempSquareDist;
 }
 
 // FUNCTION: ROBLOX 0x00686710
@@ -826,6 +878,53 @@ void RbxSceneManager::destroyStaticGeometry(StaticGeometry* geom)
 void RbxSceneManager::destroyInstancedGeometry(InstancedGeometry* geom)
 {
 	destroyInstancedGeometry(geom->getName());
+}
+
+// FUNCTION: ROBLOX 0x00686a00
+AxisAlignedBoxSceneQuery* RbxSceneManager::createAABBQuery(const AxisAlignedBox& box, unsigned long mask)
+{
+	DefaultAxisAlignedBoxSceneQuery* q = new DefaultAxisAlignedBoxSceneQuery(this);
+	q->setBox(box);
+	q->setQueryMask(mask);
+	return q;
+}
+
+// FUNCTION: ROBLOX 0x00686ac0
+SphereSceneQuery* RbxSceneManager::createSphereQuery(const Sphere& sphere, unsigned long mask)
+{
+	DefaultSphereSceneQuery* q = new DefaultSphereSceneQuery(this);
+	q->setSphere(sphere);
+	q->setQueryMask(mask);
+	return q;
+}
+
+// FUNCTION: ROBLOX 0x00686b80
+PlaneBoundedVolumeListSceneQuery* RbxSceneManager::createPlaneBoundedVolumeQuery(
+	const PlaneBoundedVolumeList& volumes, unsigned long mask
+)
+{
+	DefaultPlaneBoundedVolumeListSceneQuery* q = new DefaultPlaneBoundedVolumeListSceneQuery(this);
+	q->setVolumes(volumes);
+	q->setQueryMask(mask);
+	return q;
+}
+
+// FUNCTION: ROBLOX 0x00686c40
+RaySceneQuery* RbxSceneManager::createRayQuery(const Ray& ray, unsigned long mask)
+{
+	DefaultRaySceneQuery* q = new DefaultRaySceneQuery(this);
+	q->setRay(ray);
+	q->setQueryMask(mask);
+	return q;
+}
+
+// FUNCTION: ROBLOX 0x00686d00
+IntersectionSceneQuery* RbxSceneManager::createIntersectionQuery(unsigned long mask)
+{
+
+	DefaultIntersectionSceneQuery* q = new DefaultIntersectionSceneQuery(this);
+	q->setQueryMask(mask);
+	return q;
 }
 
 // STUB: ROBLOX 0x00686db0
@@ -1288,6 +1387,224 @@ MeshPtr RbxSceneManager::createSkydomePlane(
 	);
 
 	return planeMesh;
+}
+
+// FUNCTION: ROBLOX 0x00689500
+const Pass* RbxSceneManager::deriveShadowCasterPass(const Pass* pass)
+{
+	if (isShadowTechniqueTextureBased()) {
+		Pass* retPass = mShadowTextureCustomCasterPass ? mShadowTextureCustomCasterPass : mShadowCasterPlainBlackPass;
+
+		if ((pass->getSourceBlendFactor() == SBF_SOURCE_ALPHA &&
+			 pass->getDestBlendFactor() == SBF_ONE_MINUS_SOURCE_ALPHA) ||
+			pass->getAlphaRejectFunction() != CMPF_ALWAYS_PASS) {
+
+			retPass->setAlphaRejectSettings(pass->getAlphaRejectFunction(), pass->getAlphaRejectValue());
+			retPass->setSceneBlending(pass->getSourceBlendFactor(), pass->getDestBlendFactor());
+			retPass->getParent()->getParent()->setTransparencyCastsShadows(true);
+
+			unsigned short origPassTUCount = pass->getNumTextureUnitStates();
+			for (unsigned short t = 0; t < origPassTUCount; ++t) {
+				TextureUnitState* tex;
+				if (retPass->getNumTextureUnitStates() <= t) {
+					tex = retPass->createTextureUnitState();
+				}
+				else {
+					tex = retPass->getTextureUnitState(t);
+				}
+
+				(*tex) = *(pass->getTextureUnitState(t));
+
+				tex->setColourOperationEx(
+					LBX_SOURCE1,
+					LBS_MANUAL,
+					LBS_CURRENT,
+					isShadowTechniqueAdditive() ? ColourValue::Black : mShadowColour
+				);
+			}
+
+			while (retPass->getNumTextureUnitStates() > origPassTUCount) {
+				retPass->removeTextureUnitState(origPassTUCount);
+			}
+		}
+		else {
+
+			retPass->setSceneBlending(SBT_REPLACE);
+			retPass->setAlphaRejectFunction(CMPF_ALWAYS_PASS);
+			while (retPass->getNumTextureUnitStates() > 0) {
+				retPass->removeTextureUnitState(0);
+			}
+		}
+
+		retPass->setCullingMode(pass->getCullingMode());
+		retPass->setManualCullingMode(pass->getManualCullingMode());
+
+		if (!pass->getShadowCasterVertexProgramName().empty()) {
+
+			retPass->setVertexProgram(pass->getShadowCasterVertexProgramName(), false);
+			const GpuProgramPtr& prg = retPass->getVertexProgram();
+
+			if (!prg->isLoaded()) {
+				prg->load();
+			}
+
+			retPass->setVertexProgramParameters(pass->getShadowCasterVertexProgramParameters());
+		}
+		else {
+			if (retPass == mShadowTextureCustomCasterPass) {
+
+				if (mShadowTextureCustomCasterPass->getVertexProgramName() != mShadowTextureCustomCasterVertexProgram) {
+					mShadowTextureCustomCasterPass->setVertexProgram(mShadowTextureCustomCasterVertexProgram, false);
+					if (mShadowTextureCustomCasterPass->hasVertexProgram()) {
+						mShadowTextureCustomCasterPass->setVertexProgramParameters(mShadowTextureCustomCasterVPParams);
+					}
+				}
+			}
+			else {
+
+				retPass->setVertexProgram(StringUtil::BLANK);
+			}
+		}
+		return retPass;
+	}
+	else {
+		return pass;
+	}
+}
+
+// FUNCTION: ROBLOX 0x006897c0
+const Pass* RbxSceneManager::deriveShadowReceiverPass(const Pass* pass)
+{
+
+	if (isShadowTechniqueTextureBased()) {
+		Pass* retPass = mShadowTextureCustomReceiverPass ? mShadowTextureCustomReceiverPass : mShadowReceiverPass;
+
+		if (!pass->getShadowReceiverVertexProgramName().empty()) {
+
+			retPass->setVertexProgram(pass->getShadowReceiverVertexProgramName(), false);
+			const GpuProgramPtr& prg = retPass->getVertexProgram();
+
+			if (!prg->isLoaded()) {
+				prg->load();
+			}
+
+			retPass->setVertexProgramParameters(pass->getShadowReceiverVertexProgramParameters());
+		}
+		else {
+			if (retPass == mShadowTextureCustomReceiverPass) {
+
+				if (mShadowTextureCustomReceiverPass->getVertexProgramName() !=
+					mShadowTextureCustomReceiverVertexProgram) {
+					mShadowTextureCustomReceiverPass->setVertexProgram(
+						mShadowTextureCustomReceiverVertexProgram, false
+					);
+					if (mShadowTextureCustomReceiverPass->hasVertexProgram()) {
+						mShadowTextureCustomReceiverPass->setVertexProgramParameters(
+							mShadowTextureCustomReceiverVPParams
+						);
+					}
+				}
+			}
+			else {
+
+				retPass->setVertexProgram(StringUtil::BLANK);
+			}
+		}
+
+		unsigned short keepTUCount;
+
+		if (isShadowTechniqueAdditive()) {
+			retPass->setLightingEnabled(true);
+			retPass->setAmbient(pass->getAmbient());
+			retPass->setSelfIllumination(pass->getSelfIllumination());
+			retPass->setDiffuse(pass->getDiffuse());
+			retPass->setSpecular(pass->getSpecular());
+			retPass->setShininess(pass->getShininess());
+			retPass->setIteratePerLight(
+				pass->getIteratePerLight(), pass->getRunOnlyForOneLightType(), pass->getOnlyLightType()
+			);
+
+			retPass->setAlphaRejectSettings(pass->getAlphaRejectFunction(), pass->getAlphaRejectValue());
+
+			unsigned short origPassTUCount = pass->getNumTextureUnitStates();
+			for (unsigned short t = 0; t < origPassTUCount; ++t) {
+				unsigned short targetIndex = t + 1;
+				TextureUnitState* tex;
+				if (retPass->getNumTextureUnitStates() <= targetIndex) {
+					tex = retPass->createTextureUnitState();
+				}
+				else {
+					tex = retPass->getTextureUnitState(targetIndex);
+				}
+				(*tex) = *(pass->getTextureUnitState(t));
+
+				if (retPass->hasVertexProgram()) {
+					tex->setTextureCoordSet(targetIndex);
+				}
+			}
+			keepTUCount = origPassTUCount + 1;
+		}
+		else {
+
+			keepTUCount = retPass->getNumTextureUnitStates();
+		}
+
+		if (!pass->getShadowReceiverFragmentProgramName().empty()) {
+
+			retPass->setFragmentProgram(pass->getShadowReceiverFragmentProgramName(), false);
+			const GpuProgramPtr& prg = retPass->getFragmentProgram();
+
+			if (!prg->isLoaded()) {
+				prg->load();
+			}
+
+			retPass->setFragmentProgramParameters(pass->getShadowReceiverFragmentProgramParameters());
+
+			if (pass->hasVertexProgram() && !retPass->hasVertexProgram()) {
+
+				retPass->setVertexProgram(pass->getVertexProgramName(), false);
+				const GpuProgramPtr& prg = retPass->getVertexProgram();
+
+				if (!prg->isLoaded()) {
+					prg->load();
+				}
+
+				retPass->setVertexProgramParameters(pass->getVertexProgramParameters());
+			}
+		}
+		else {
+
+			if (retPass == mShadowTextureCustomReceiverPass) {
+
+				if (mShadowTextureCustomReceiverPass->getFragmentProgramName() !=
+					mShadowTextureCustomReceiverFragmentProgram) {
+					mShadowTextureCustomReceiverPass->setFragmentProgram(
+						mShadowTextureCustomReceiverFragmentProgram, false
+					);
+					if (mShadowTextureCustomReceiverPass->hasFragmentProgram()) {
+						mShadowTextureCustomReceiverPass->setFragmentProgramParameters(
+							mShadowTextureCustomReceiverFPParams
+						);
+					}
+				}
+			}
+			else {
+
+				retPass->setFragmentProgram(StringUtil::BLANK);
+			}
+		}
+
+		while (retPass->getNumTextureUnitStates() > keepTUCount) {
+			retPass->removeTextureUnitState(keepTUCount);
+		}
+
+		retPass->_load();
+
+		return retPass;
+	}
+	else {
+		return pass;
+	}
 }
 
 // STUB: ROBLOX 0x00689b90
@@ -2184,10 +2501,12 @@ void RbxSceneManager::destroySceneNode(const String& name)
 	mSceneNodes.erase(i);
 }
 
-// STUB: ROBLOX 0x0068fa40
+// FUNCTION: ROBLOX 0x0068fa40
 const Pass* RbxSceneManager::_setPass(const Pass* pass, bool evenIfSuppressed, bool shadowDerivation)
 {
 	if (!mSuppressRenderStateChanges || evenIfSuppressed) {
+		m_unk0x8a64 = pass->getLightingEnabled() ? true : false;
+
 		if (mIlluminationStage == IRS_RENDER_TO_TEXTURE && shadowDerivation) {
 
 			pass = deriveShadowCasterPass(pass);
