@@ -42,6 +42,7 @@ public:
 	public:
 		bool dequeueSleepingChunk(const G3D::ReferenceCountedPointer<Chunk>& chunk);
 		void addToQueue(const G3D::ReferenceCountedPointer<Chunk>& chunk);
+		void optimize(AggregatingSceneManager& sceneManager, double maxTime);
 		void clear() { queue.clear(); }
 
 		typedef std::vector<G3D::ReferenceCountedPointer<Chunk> > Queue;
@@ -63,6 +64,8 @@ private:
 	std::set<G3D::WeakReferenceCountedPointer<Chunk> > invalidMovingModels;   // 0x24
 
 public:
+	static unsigned int aggregationSize;
+
 	AggregatingSceneManager(RenderScene* renderScene);
 	virtual ~AggregatingSceneManager();
 

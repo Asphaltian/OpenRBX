@@ -8,7 +8,7 @@ namespace RBX {
 namespace Render {
 
 // FUNCTION: WEBSERVICE 0x101f9fa0
-// FUNCTION: ROBLOX 0x00537270
+// FUNCTION: ROBLOX 0x00537270 FOLDED
 Clusterer::Cluster* Clusterer::findClosestCluster(Sample* sample)
 {
 	Cluster* bestCluster = NULL;
@@ -29,7 +29,7 @@ Clusterer::Cluster* Clusterer::findClosestCluster(Sample* sample)
 }
 
 // FUNCTION: WEBSERVICE 0x101fa0c0
-// FUNCTION: ROBLOX 0x004a2380
+// FUNCTION: ROBLOX 0x004a2380 FOLDED
 void Clusterer::Cluster::computeCentroid()
 {
 	G3D::Vector3 c(0, 0, 0);
@@ -45,7 +45,7 @@ void Clusterer::Cluster::computeCentroid()
 }
 
 // FUNCTION: WEBSERVICE 0x101fa2c0
-// FUNCTION: ROBLOX 0x005374b0
+// FUNCTION: ROBLOX 0x005374b0 FOLDED
 unsigned int Clusterer::moveSample(Sample* sample, Cluster* cluster)
 {
 	while (true) {
@@ -68,7 +68,7 @@ unsigned int Clusterer::moveSample(Sample* sample, Cluster* cluster)
 }
 
 // FUNCTION: WEBSERVICE 0x101fa380
-// FUNCTION: ROBLOX 0x004a2460
+// FUNCTION: ROBLOX 0x004a2460 FOLDED
 unsigned int Clusterer::moveSamples()
 {
 	unsigned int moveCount = 0;
@@ -99,7 +99,7 @@ unsigned int Clusterer::moveSamples()
 }
 
 // FUNCTION: WEBSERVICE 0x101fa520
-// FUNCTION: ROBLOX 0x00537570
+// FUNCTION: ROBLOX 0x00537570 FOLDED
 Clusterer::Clusters* Clusterer::go(unsigned int maxSteps)
 {
 	if (clusterCount > 1) {
@@ -127,7 +127,7 @@ Clusterer::Clusters* Clusterer::go(unsigned int maxSteps)
 }
 
 // FUNCTION: WEBSERVICE 0x101fa8a0
-// FUNCTION: ROBLOX 0x005378f0
+// FUNCTION: ROBLOX 0x005378f0 FOLDED
 Clusterer::Clusterer(unsigned int clusterCount) : sampleSize(0), clusterCount(clusterCount), clusters(clusterCount)
 {
 }

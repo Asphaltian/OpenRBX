@@ -350,6 +350,7 @@ set(OPENRBX_RBXVIEWNEW_SOURCES
 set(OPENRBX_RENDERLIBNEW_SOURCES
   Client/Rendering/RenderLibNew/AggregatingSceneManager.cpp
   Client/Rendering/RenderLibNew/Chunk.cpp
+  Client/Rendering/RenderLibNew/Clusterer.cpp
   Client/Rendering/RenderLibNew/EffectSettings.cpp
   Client/Rendering/RenderLibNew/Material.cpp
   Client/Rendering/RenderLibNew/Mesh.cpp

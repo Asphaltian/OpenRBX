@@ -1,12 +1,17 @@
 #include "renderlibnew/AggregatingSceneManager.h"
 
+#include "Clusterer.h"
 #include "renderlibnew/Chunk.h"
 
+#include <G3D/System.h>
 #include <G3D/g3dmath.h>
 #include <algorithm>
 
 namespace RBX {
 namespace RenderNew {
+
+// GLOBAL: ROBLOX 0x0092b7c4
+unsigned int AggregatingSceneManager::aggregationSize = 40;
 
 static bool isFinite(const G3D::Matrix3& m)
 {
@@ -246,10 +251,85 @@ AggregatingSceneManager::AggregatingSceneManager(RenderScene* renderScene) : Sce
 {
 }
 
-// STUB: ROBLOX 0x00531f50
+// FUNCTION: ROBLOX 0x00531a70
+void AggregatingSceneManager::Bucket::optimize(AggregatingSceneManager& sceneManager, double maxTime)
+{
+	if (queue.size() * 4 < aggregationSize) {
+		return;
+	}
+
+	Clusterer clusterer(std::max(1U, queue.size() / aggregationSize));
+
+	clusterer.addSamples(queue.begin(), queue.end());
+	queue.clear();
+
+	Clusterer::Clusters* clusters = clusterer.go(5);
+
+	Clusterer::Clusters::iterator iter = clusters->begin();
+	Clusterer::Clusters::iterator end = clusters->end();
+	for (; iter != end; ++iter) {
+		Clusterer::Samples::iterator iter2 = iter->samples.begin();
+		Clusterer::Samples::iterator end2 = iter->samples.end();
+
+		if (end2 - iter2 >= 4) {
+			G3D::ReferenceCountedPointer<AggregateChunk> aggregateChunk;
+
+			for (; iter2 != end2; ++iter2) {
+				G3D::ReferenceCountedPointer<Chunk> chunkToAggregate = *iter2;
+				if (aggregateChunk.isNull()) {
+					aggregateChunk = new AggregateChunk(chunkToAggregate);
+				}
+
+				aggregateChunk->components.push_back(chunkToAggregate);
+				chunkToAggregate->aggregate = aggregateChunk;
+				RenderStats::aggregatedChunkCount++;
+				sceneManager.removeFromScene(chunkToAggregate);
+			}
+
+			if (aggregateChunk.notNull()) {
+				aggregateChunk->makeMesh();
+				sceneManager.addToScene(aggregateChunk);
+			}
+		}
+	}
+}
+
+// FUNCTION: ROBLOX 0x00531f50
 void AggregatingSceneManager::prerender(double optimizationTime)
 {
-	STUB(0x531f50);
+	const double timeUp = G3D::System::getTick() + optimizationTime * 1000.0;
+
+	std::set<G3D::WeakReferenceCountedPointer<Chunk> >::iterator iter = invalidSleepingModels.begin();
+	std::set<G3D::WeakReferenceCountedPointer<Chunk> >::iterator end = invalidSleepingModels.end();
+	while (iter != end) {
+		G3D::ReferenceCountedPointer<Chunk> chunk = iter->createStrongPtr();
+		if (chunk.notNull()) {
+			chunk->getMesh();
+			chunk->getMaterial();
+
+			G3D::ReferenceCountedPointer<AggregateChunk> aggr = chunk->aggregate.createStrongPtr();
+			if (aggr.notNull()) {
+				deconstructAggregate(aggr);
+			}
+			else {
+				dequeueSleepingChunk(chunk);
+				queueSleepingChunk(chunk);
+			}
+		}
+		++iter;
+	}
+
+	invalidSleepingModels.clear();
+	invalidMovingModels.clear();
+
+	if (aggregationSize > 1) {
+		std::map<BucketKey, BucketRef>::iterator iter = buckets.begin();
+		std::map<BucketKey, BucketRef>::iterator end = buckets.end();
+		while (timeUp > G3D::System::getTick() && iter != end) {
+			iter->second->optimize(*this, optimizationTime);
+			++iter;
+		}
+	}
 }
 
 } // namespace RenderNew
