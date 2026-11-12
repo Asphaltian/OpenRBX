@@ -832,6 +832,14 @@ if (MSVC_FOR_DECOMP)
 
   set_property(TARGET webservice roblox PROPERTY MSVC_DEBUG_INFORMATION_FORMAT "$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>")
 
+  # Ninja links a target's OBJECT libraries ahead of its own objects; NMake, and CI, the other way round
+  if (CMAKE_GENERATOR MATCHES "Ninja")
+    foreach(target webservice roblox)
+      set_property(TARGET ${target} PROPERTY CXX_LINKER_LAUNCHER
+        "${CMAKE_COMMAND}" -P "${PROJECT_SOURCE_DIR}/cmake/ninja-link-order.cmake" -- ${target})
+    endforeach()
+  endif()
+
   set(CMAKE_CXX_FLAGS "/EHsc /TP /GR /nologo")
   set(CMAKE_CXX_FLAGS_DEBUG "/Od /D_DEBUG")
   set(CMAKE_CXX_FLAGS_RELEASE "/O2 /DNDEBUG")
