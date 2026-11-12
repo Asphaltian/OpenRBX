@@ -225,7 +225,7 @@ void CMemberTreeView::FUN_004380e0(const RBX::Reflection::EnumDescriptor::Item* 
 void CMemberTreeView::FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::Item* metadata)
 {
 	if (metadata) {
-		if (metadata->m_unk0xf9) {
+		if (metadata->deprecated) {
 			CXTLogFont logFont;
 			if (GetFont()->GetLogFont(&logFont)) {
 				logFont.lfStrikeOut = TRUE;
@@ -233,7 +233,7 @@ void CMemberTreeView::FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::It
 			}
 		}
 
-		if (metadata->m_unk0xfa) {
+		if (metadata->preliminary) {
 			CXTLogFont logFont;
 			if (GetFont()->GetLogFont(&logFont)) {
 				logFont.lfItalic = TRUE;
@@ -247,7 +247,7 @@ void CMemberTreeView::FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::It
 void CClassTreeView::FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::Item* metadata)
 {
 	if (metadata) {
-		if (metadata->m_unk0xf9) {
+		if (metadata->deprecated) {
 			CXTLogFont logFont;
 			if (GetFont()->GetLogFont(&logFont)) {
 				logFont.lfStrikeOut = TRUE;
@@ -255,7 +255,7 @@ void CClassTreeView::FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::Ite
 			}
 		}
 
-		if (metadata->m_unk0xfa) {
+		if (metadata->preliminary) {
 			CXTLogFont logFont;
 			if (GetFont()->GetLogFont(&logFont)) {
 				logFont.lfItalic = TRUE;
@@ -297,7 +297,7 @@ void CMemberTreeView::FUN_00438300(const RBX::Reflection::PropertyDescriptor* de
 	if (m_unk0xa8 || &descriptor->owner == m_unk0xac) {
 		RBX::Reflection::Metadata::Member* metadata =
 			RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446920(descriptor);
-		if ((!metadata || metadata->m_unk0xf8) && descriptor->isPublic()) {
+		if ((!metadata || metadata->browsable) && descriptor->isPublic()) {
 			HTREEITEM item = GetTreeCtrl().InsertItem(descriptor->name.c_str(), 6, 6);
 			GetTreeCtrl().SetItemData(item, reinterpret_cast<DWORD_PTR>(descriptor));
 			FUN_00438130(item, metadata);
@@ -311,7 +311,7 @@ void CMemberTreeView::FUN_00438420(const RBX::Reflection::SignalDescriptor* desc
 	if (m_unk0xa8 || &descriptor->owner == m_unk0xac) {
 		RBX::Reflection::Metadata::Member* metadata =
 			RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_004469c0(descriptor);
-		if (!metadata || metadata->m_unk0xf8) {
+		if (!metadata || metadata->browsable) {
 			HTREEITEM item = GetTreeCtrl().InsertItem(descriptor->name.c_str(), 8, 8);
 			GetTreeCtrl().SetItemData(item, reinterpret_cast<DWORD_PTR>(descriptor));
 			FUN_00438130(item, metadata);
@@ -336,7 +336,7 @@ void CDeclarationView::FUN_00438530(
 	}
 
 	if (m_unk0x100) {
-		CString summary(metadata ? metadata->m_unk0xfc.c_str() : "");
+		CString summary(metadata ? metadata->summary.c_str() : "");
 		CComPtr<IHTMLStyle> style;
 		m_unk0x100->get_style(&style);
 		style->put_display(!summary.IsEmpty() ? CComBSTR("block") : CComBSTR("none"));
@@ -348,13 +348,13 @@ void CDeclarationView::FUN_00438530(
 	if (m_unk0x108) {
 		CComPtr<IHTMLStyle> style;
 		m_unk0x108->get_style(&style);
-		style->put_display(metadata && metadata->m_unk0xf9 ? CComBSTR("block") : CComBSTR("none"));
+		style->put_display(metadata && metadata->deprecated ? CComBSTR("block") : CComBSTR("none"));
 	}
 
 	if (m_unk0x10c) {
 		CComPtr<IHTMLStyle> style;
 		m_unk0x10c->get_style(&style);
-		style->put_display(metadata && metadata->m_unk0xfa ? CComBSTR("block") : CComBSTR("none"));
+		style->put_display(metadata && metadata->preliminary ? CComBSTR("block") : CComBSTR("none"));
 	}
 }
 
@@ -434,7 +434,7 @@ void CClassTreeView::FUN_00439690(const RBX::Reflection::ClassDescriptor* descri
 {
 	RBX::Reflection::Metadata::Class* metadata =
 		RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446220(descriptor, false);
-	if (!metadata || metadata->m_unk0xf8) {
+	if (!metadata || metadata->browsable) {
 		HTREEITEM item = GetTreeCtrl().InsertItem(descriptor->name.c_str(), 3, 3);
 		GetTreeCtrl().SetItemData(item, reinterpret_cast<DWORD_PTR>(descriptor));
 		FUN_00438130(item, metadata);
@@ -497,7 +497,7 @@ void CMemberTreeView::FUN_00439a70(const RBX::Reflection::FunctionDescriptor* de
 	if (m_unk0xa8 || &descriptor->owner == m_unk0xac) {
 		RBX::Reflection::Metadata::Member* metadata =
 			RBX::Reflection::Metadata::Reflection::FUN_004480c0()->FUN_00446970(descriptor);
-		if (!metadata || metadata->m_unk0xf8) {
+		if (!metadata || metadata->browsable) {
 			std::string text = descriptor->name.toString();
 			text += "(";
 

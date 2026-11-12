@@ -34,6 +34,24 @@ char sEvents[] = "ReflectionMetadataEvents";
 // GLOBAL: ROBLOX 0x00919d14
 char sMember[] = "ReflectionMetadataMember";
 
+// FUNCTION: ROBLOX 0x00445f70
+bool Reflection::askAddChild(const Instance* instance) const
+{
+	return dynamic_cast<const Classes*>(instance) != NULL;
+}
+
+// FUNCTION: ROBLOX 0x00445fa0
+bool Classes::askAddChild(const Instance* instance) const
+{
+	return dynamic_cast<const Class*>(instance) != NULL;
+}
+
+// FUNCTION: ROBLOX 0x00445fd0
+bool Class::askAddChild(const Instance* instance) const
+{
+	return dynamic_cast<const Members*>(instance) != NULL;
+}
+
 // FUNCTION: ROBLOX 0x00446000
 bool Members::askAddChild(const Instance* instance) const
 {
@@ -122,13 +140,13 @@ void Classes::FUN_00447d00(const ClassDescriptor& descriptor)
 {
 	Instance* existing = findFirstChildByName(descriptor.name.toString());
 	if (existing) {
-		static_cast<Item*>(existing)->m_unk0xf8 = false;
+		static_cast<Item*>(existing)->browsable = false;
 		return;
 	}
 
 	boost::shared_ptr<Class> metadata = Creatable<Instance>::create<Class>();
 	metadata->setName(descriptor.name.toString());
-	metadata->m_unk0xf8 = false;
+	metadata->browsable = false;
 	metadata->setParent(this);
 }
 
@@ -179,17 +197,19 @@ boost::shared_ptr<Reflection> Reflection::FUN_004480c0()
 	return g_unk0x00953a24;
 }
 
-RBX::Reflection::BoundProp<bool, 1> Item::g_unk0x00953a34("Browsable", "Reflection", &Item::m_unk0xf8);
+RBX::Reflection::BoundProp<bool, 1> Item::prop_Browsable("Browsable", "Reflection", &Item::browsable);
 
-RBX::Reflection::BoundProp<bool, 1> Item::g_unk0x00953a50("Deprecated", "Reflection", &Item::m_unk0xf9);
+RBX::Reflection::BoundProp<bool, 1> Item::prop_Deprecated("Deprecated", "Reflection", &Item::deprecated);
 
-RBX::Reflection::BoundProp<bool, 1> Item::g_unk0x00953a6c("Preliminary", "Reflection", &Item::m_unk0xfa);
+RBX::Reflection::BoundProp<bool, 1> Item::prop_Preliminary("Preliminary", "Reflection", &Item::preliminary);
 
-RBX::Reflection::BoundProp<std::string, 1> Item::g_unk0x00953a88("summary", "Reflection", &Item::m_unk0xfc);
+RBX::Reflection::BoundProp<std::string, 1> Item::prop_summary("summary", "Reflection", &Item::summary);
 
-RBX::Reflection::BoundProp<int, 1> Class::g_unk0x00953aa4("ExplorerOrder", "Reflection", &Class::m_unk0x118);
+RBX::Reflection::BoundProp<int, 1> Class::prop_ExplorerOrder("ExplorerOrder", "Reflection", &Class::explorerOrder);
 
-RBX::Reflection::BoundProp<int, 1> Class::g_unk0x00953ac0("ExplorerImageIndex", "Reflection", &Class::m_unk0x11c);
+RBX::Reflection::BoundProp<int, 1> Class::prop_ExplorerImageIndex(
+	"ExplorerImageIndex", "Reflection", &Class::explorerImageIndex
+);
 
 } // namespace Metadata
 } // namespace Reflection
