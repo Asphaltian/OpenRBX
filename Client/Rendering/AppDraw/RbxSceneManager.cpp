@@ -566,7 +566,7 @@ void RbxSceneManager::destroyAllAnimationStates(void)
 	mAnimationStates.removeAllAnimationStates();
 }
 
-// STUB: ROBLOX 0x00686310
+// FUNCTION: ROBLOX 0x00686310
 void RbxSceneManager::manualRender(
 	RenderOperation* rend,
 	Pass* pass,
@@ -588,23 +588,6 @@ void RbxSceneManager::manualRender(
 
 	_setPass(pass);
 
-	if (pass->isProgrammable()) {
-		mAutoParamDataSource.setCurrentViewport(vp);
-		mAutoParamDataSource.setCurrentRenderTarget(vp->getTarget());
-		mAutoParamDataSource.setCurrentSceneManager(this);
-		mAutoParamDataSource.setWorldMatrices(&worldMatrix, 1);
-		Camera dummyCam(StringUtil::BLANK, 0);
-		dummyCam.setCustomViewMatrix(true, viewMatrix);
-		dummyCam.setCustomProjectionMatrix(true, projMatrix);
-		pass->_updateAutoParamsNoLights(mAutoParamDataSource);
-
-		if (pass->hasVertexProgram()) {
-			mDestRenderSystem->bindGpuProgramParameters(GPT_VERTEX_PROGRAM, pass->getVertexProgramParameters());
-		}
-		if (pass->hasFragmentProgram()) {
-			mDestRenderSystem->bindGpuProgramParameters(GPT_FRAGMENT_PROGRAM, pass->getFragmentProgramParameters());
-		}
-	}
 	mDestRenderSystem->_render(*rend);
 
 	if (doBeginEndFrame) {
@@ -1016,7 +999,7 @@ ViewPoint RbxSceneManager::getSuggestedViewpoint(bool random)
 	return vp;
 }
 
-// STUB: ROBLOX 0x006874a0
+// FUNCTION: ROBLOX 0x006874a0
 void RbxSceneManager::_queueSkiesForRendering(Camera* cam)
 {
 
@@ -1034,7 +1017,7 @@ void RbxSceneManager::_queueSkiesForRendering(Camera* cam)
 		mSkyDomeNode->setPosition(cam->getDerivedPosition());
 	}
 
-	uint8 qid;
+	RenderQueueGroupID qid;
 	if (mSkyPlaneEnabled) {
 		qid = mSkyPlaneDrawFirst ? RENDER_QUEUE_SKIES_EARLY : RENDER_QUEUE_SKIES_LATE;
 		getRenderQueue()->addRenderable(mSkyPlaneEntity->getSubEntity(0), qid, OGRE_RENDERABLE_DEFAULT_PRIORITY);
@@ -3038,22 +3021,29 @@ void RbxSceneManager::renderTextureShadowReceiverQueueGroupObjects(
 	mDestRenderSystem->setAmbientLight(mAmbientLight.r, mAmbientLight.g, mAmbientLight.b);
 }
 
-// STUB: ROBLOX 0x00691260
+// FUNCTION: ROBLOX 0x00691260
 void RbxSceneManager::renderBasicQueueGroupObjects(
 	RenderQueueGroup* pGroup, QueuedRenderableCollection::OrganisationMode om
 )
 {
 
 	RenderQueueGroup::PriorityMapIterator groupIt = pGroup->getIterator();
+	Timer timer;
 
 	while (groupIt.hasMoreElements()) {
 		RenderPriorityGroup* pPriorityGrp = groupIt.getNext();
 
+		timer.reset();
 		pPriorityGrp->sort(mCameraInProgress);
+		timer.getMicroseconds();
 
+		timer.reset();
 		renderObjects(pPriorityGrp->getSolidsBasic(), om, true);
+		timer.getMicroseconds();
 
+		timer.reset();
 		renderObjects(pPriorityGrp->getTransparents(), QueuedRenderableCollection::OM_SORT_DESCENDING, true);
+		timer.getMicroseconds();
 	}
 }
 
@@ -3076,7 +3066,7 @@ void RbxSceneManager::destroyAnimation(const String& name)
 	mAnimationsList.erase(i);
 }
 
-// STUB: ROBLOX 0x006914d0
+// FUNCTION: ROBLOX 0x006914d0
 void RbxSceneManager::_applySceneAnimations(void)
 {
 
@@ -3091,17 +3081,13 @@ void RbxSceneManager::_applySceneAnimations(void)
 		Animation::NodeTrackIterator nodeTrackIt = anim->getNodeTrackIterator();
 		while (nodeTrackIt.hasMoreElements()) {
 			Node* nd = nodeTrackIt.getNext()->getAssociatedNode();
-			if (nd) {
-				nd->resetToInitialState();
-			}
+			nd->resetToInitialState();
 		}
 
 		Animation::NumericTrackIterator numTrackIt = anim->getNumericTrackIterator();
 		while (numTrackIt.hasMoreElements()) {
 			const AnimableValuePtr& anim = numTrackIt.getNext()->getAssociatedAnimable();
-			if (!anim.isNull()) {
-				anim->resetToBaseValue();
-			}
+			anim->resetToBaseValue();
 		}
 
 		anim->apply(state->getTimePosition(), state->getWeight());
@@ -4322,7 +4308,7 @@ RbxSceneManager::~RbxSceneManager()
 	delete mShadowCasterQueryListener;
 }
 
-// STUB: ROBLOX 0x00697d00
+// FUNCTION: ROBLOX 0x00697d00
 void RbxSceneManager::_populateLightList(const Vector3& position, Real radius, LightList& destList)
 {
 

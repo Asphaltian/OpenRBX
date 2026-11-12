@@ -462,6 +462,7 @@ public:
 	virtual void setShadowTextureConfig(size_t shadowIndex, const ShadowTextureConfig& config);
 	virtual void setShadowTexturePixelFormat(PixelFormat fmt);
 	virtual void setShadowTextureCount(size_t count);
+	size_t getShadowTextureCount(void) const { return mShadowTextureConfigList.size(); }
 	virtual void setShadowTextureSettings(unsigned short size, unsigned short count, PixelFormat fmt = PF_X8R8G8B8);
 	virtual const TexturePtr& getShadowTexture(size_t shadowIndex);
 	virtual void setShadowTextureCasterMaterial(const String& name);
