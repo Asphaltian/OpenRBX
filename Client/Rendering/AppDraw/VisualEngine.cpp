@@ -127,10 +127,11 @@ void VisualEngine::Unk0x18::FUN_00671eb0(const Unk0x08& entry)
 	m_unk0x00++;
 }
 
-// STUB: ROBLOX 0x00671ef0
+// FUNCTION: ROBLOX 0x00671ef0
 VisualEngine::Unk0x18::Unk0x08& VisualEngine::Unk0x18::FUN_00671ef0(int back)
 {
-	return m_unk0x08[(m_unk0x00 - back - 1) % 100];
+	int index = m_unk0x00 - back - 1;
+	return m_unk0x08[index % 100];
 }
 
 // FUNCTION: ROBLOX 0x00671f80
