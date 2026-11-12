@@ -9577,3 +9577,5 @@ address,type,symbol,name,module,size
 0040c1f0,library,?CreateInstance@?$CComObject@V?$CComEnum@UIEnumConnectionPoints@@$1?_GUID_b196b285_bab4_101a_b69c_00aa00341d07@@3U__s_GUID@@BPAUIConnectionPoint@@V?$_CopyInterface@UIConnectionPoint@@@ATL@@VCComSingleThreadModel@6@@ATL@@@ATL@@SGJPAPAV12@@Z,,,
 0040c2c0,library,?CreateInstance@?$CComObject@V?$CComEnum@UIEnumConnections@@$1?_GUID_b196b287_bab4_101a_b69c_00aa00341d07@@3U__s_GUID@@BUtagCONNECTDATA@@V?$_Copy@UtagCONNECTDATA@@@ATL@@VCComSingleThreadModel@6@@ATL@@@ATL@@SGJPAPAV12@@Z,,,
 004139e0,library,?CreateInstance@?$CComCreator@V?$CComObject@VCContent@@@ATL@@@ATL@@SGJPAXABU_GUID@@PAPAX@Z,,,
+008e9844,global,__TI3?AVInvalidParametersException@Ogre@@,,,
+008ea35c,global,__TI3?AVItemIdentityException@Ogre@@,,,

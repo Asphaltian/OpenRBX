@@ -805,6 +805,10 @@ if (MSVC_FOR_DECOMP)
   endforeach()
 
   set_property(TARGET roblox PROPERTY OUTPUT_NAME "Roblox")
+
+  set_property(TARGET roblox appdraw_client PROPERTY RULE_LAUNCH_COMPILE
+    "\"${CMAKE_COMMAND}\" -DSOURCE=<SOURCE> -P \"${PROJECT_SOURCE_DIR}/cmake/compile_relative.cmake\" --"
+  )
 endif()
 
 if (OPENRBX_DECOMP_ASSERT)

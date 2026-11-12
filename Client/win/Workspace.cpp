@@ -264,17 +264,22 @@ void CWorkspace::FUN_004702b0(RBX::ContentId contentId, bool p_unk0x20)
 	}
 }
 
-// STUB: ROBLOX 0x00470640
+// FUNCTION: ROBLOX 0x00470640
 STDMETHODIMP CWorkspace::Write(IContent** result)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 	try {
 		CComObject<CContent>* content;
+#line 304
 		CHECK_HRESULT(CComObject<CContent>::CreateInstance(&content));
+#line 308
 		CHECK_HRESULT(FUN_004700b0(FUN_0046f040().get(), &content->m_unk0x0c));
+#line 278
 
 		CComPtr<IContent> pointer(content);
+#line 312
 		CHECK_HRESULT(pointer.CopyTo(result));
+#line 283
 		return S_OK;
 	}
 	catch (const std::exception& e) {
@@ -287,17 +292,22 @@ STDMETHODIMP CWorkspace::Write(IContent** result)
 	}
 }
 
-// STUB: ROBLOX 0x004708b0
+// FUNCTION: ROBLOX 0x004708b0
 STDMETHODIMP CWorkspace::WriteSelection(IContent** result)
 {
 	AFX_MANAGE_STATE(AfxGetAppModuleState());
 	try {
 		CComObject<CContent>* content;
+#line 335
 		CHECK_HRESULT(CComObject<CContent>::CreateInstance(&content));
+#line 338
 		CHECK_HRESULT(FUN_004700b0(FUN_0046ffa0().get(), &content->m_unk0x0c));
+#line 306
 
 		CComPtr<IContent> pointer(content);
+#line 342
 		CHECK_HRESULT(pointer.CopyTo(result));
+#line 311
 		return S_OK;
 	}
 	catch (const std::exception& e) {
