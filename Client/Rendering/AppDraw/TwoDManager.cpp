@@ -179,88 +179,138 @@ void TwoDManager::FUN_0067cec0()
 	batch.m_unk0x00 = it->m_unk0x24;
 	batch.m_unk0x04 = it->m_unk0x28;
 	batch.m_unk0x08 = it->m_unk0x2c;
+	batch.m_unk0x0c = 0;
 
-	for (;;) {
-		batch.m_unk0x0c = 0;
+	while (it != m_unk0x3c.end()) {
+		if (batch.m_unk0x04 == RenderOperation::OT_TRIANGLE_LIST) {
+			*vertex++ = it->m_unk0x00;
+			*vertex++ = it->m_unk0x0c;
+			*vertex++ = -1.0f;
+			*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+			*vertex++ = it->m_unk0x10;
+			*vertex++ = it->m_unk0x1c;
 
-		for (;;) {
-			const Unk0x30& item = *it;
-			float colour = *reinterpret_cast<const float*>(&item.m_unk0x20);
-			int count;
+			*vertex++ = it->m_unk0x08;
+			*vertex++ = it->m_unk0x04;
+			*vertex++ = -1.0f;
+			*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+			*vertex++ = it->m_unk0x18;
+			*vertex++ = it->m_unk0x14;
 
-			if (batch.m_unk0x04 == RenderOperation::OT_TRIANGLE_LIST) {
-				const float quad[6][4] = {
-					{item.m_unk0x00, item.m_unk0x0c, item.m_unk0x10, item.m_unk0x1c},
-					{item.m_unk0x08, item.m_unk0x04, item.m_unk0x18, item.m_unk0x14},
-					{item.m_unk0x00, item.m_unk0x04, item.m_unk0x10, item.m_unk0x14},
-					{item.m_unk0x00, item.m_unk0x0c, item.m_unk0x10, item.m_unk0x1c},
-					{item.m_unk0x08, item.m_unk0x04, item.m_unk0x18, item.m_unk0x14},
-					{item.m_unk0x08, item.m_unk0x0c, item.m_unk0x18, item.m_unk0x1c},
-				};
-				for (int i = 0; i < 6; i++) {
-					*vertex++ = quad[i][0];
-					*vertex++ = quad[i][1];
-					*vertex++ = -1.0f;
-					*vertex++ = colour;
-					*vertex++ = quad[i][2];
-					*vertex++ = quad[i][3];
-				}
-				count = 6;
-			}
-			else if (batch.m_unk0x08 == 0) {
-				const float outline[8][2] = {
-					{item.m_unk0x00, item.m_unk0x04},
-					{item.m_unk0x08, item.m_unk0x04},
-					{item.m_unk0x08, item.m_unk0x04},
-					{item.m_unk0x08, item.m_unk0x0c},
-					{item.m_unk0x08, item.m_unk0x0c},
-					{item.m_unk0x00, item.m_unk0x0c},
-					{item.m_unk0x00, item.m_unk0x0c},
-					{item.m_unk0x00, item.m_unk0x04},
-				};
-				for (int i = 0; i < 8; i++) {
-					*vertex++ = outline[i][0];
-					*vertex++ = outline[i][1];
-					*vertex++ = -1.0f;
-					*vertex++ = colour;
-					*vertex++ = item.m_unk0x10;
-					*vertex++ = item.m_unk0x14;
-				}
-				count = 8;
+			*vertex++ = it->m_unk0x00;
+			*vertex++ = it->m_unk0x04;
+			*vertex++ = -1.0f;
+			*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+			*vertex++ = it->m_unk0x10;
+			*vertex++ = it->m_unk0x14;
+
+			*vertex++ = it->m_unk0x00;
+			*vertex++ = it->m_unk0x0c;
+			*vertex++ = -1.0f;
+			*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+			*vertex++ = it->m_unk0x10;
+			*vertex++ = it->m_unk0x1c;
+
+			*vertex++ = it->m_unk0x08;
+			*vertex++ = it->m_unk0x04;
+			*vertex++ = -1.0f;
+			*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+			*vertex++ = it->m_unk0x18;
+			*vertex++ = it->m_unk0x14;
+
+			*vertex++ = it->m_unk0x08;
+			*vertex++ = it->m_unk0x0c;
+			*vertex++ = -1.0f;
+			*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+			*vertex++ = it->m_unk0x18;
+			*vertex++ = it->m_unk0x1c;
+
+			batch.m_unk0x0c += 6;
+		}
+		else {
+			*vertex++ = it->m_unk0x00;
+			*vertex++ = it->m_unk0x04;
+			*vertex++ = -1.0f;
+			*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+			*vertex++ = it->m_unk0x10;
+			*vertex++ = it->m_unk0x14;
+
+			if (batch.m_unk0x08 == 0) {
+				*vertex++ = it->m_unk0x08;
+				*vertex++ = it->m_unk0x04;
+				*vertex++ = -1.0f;
+				*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+				*vertex++ = it->m_unk0x10;
+				*vertex++ = it->m_unk0x14;
+
+				*vertex++ = it->m_unk0x08;
+				*vertex++ = it->m_unk0x04;
+				*vertex++ = -1.0f;
+				*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+				*vertex++ = it->m_unk0x10;
+				*vertex++ = it->m_unk0x14;
+
+				*vertex++ = it->m_unk0x08;
+				*vertex++ = it->m_unk0x0c;
+				*vertex++ = -1.0f;
+				*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+				*vertex++ = it->m_unk0x10;
+				*vertex++ = it->m_unk0x14;
+
+				*vertex++ = it->m_unk0x08;
+				*vertex++ = it->m_unk0x0c;
+				*vertex++ = -1.0f;
+				*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+				*vertex++ = it->m_unk0x10;
+				*vertex++ = it->m_unk0x14;
+
+				*vertex++ = it->m_unk0x00;
+				*vertex++ = it->m_unk0x0c;
+				*vertex++ = -1.0f;
+				*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+				*vertex++ = it->m_unk0x10;
+				*vertex++ = it->m_unk0x14;
+
+				*vertex++ = it->m_unk0x00;
+				*vertex++ = it->m_unk0x0c;
+				*vertex++ = -1.0f;
+				*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+				*vertex++ = it->m_unk0x10;
+				*vertex++ = it->m_unk0x14;
+
+				*vertex++ = it->m_unk0x00;
+				*vertex++ = it->m_unk0x04;
+				*vertex++ = -1.0f;
+				*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+				*vertex++ = it->m_unk0x10;
+				*vertex++ = it->m_unk0x14;
+
+				batch.m_unk0x0c += 8;
 			}
 			else {
-				const float line[2][2] = {
-					{item.m_unk0x00, item.m_unk0x04},
-					{item.m_unk0x08, item.m_unk0x0c},
-				};
-				for (int i = 0; i < 2; i++) {
-					*vertex++ = line[i][0];
-					*vertex++ = line[i][1];
-					*vertex++ = -1.0f;
-					*vertex++ = colour;
-					*vertex++ = item.m_unk0x10;
-					*vertex++ = item.m_unk0x14;
-				}
-				count = 2;
-			}
+				*vertex++ = it->m_unk0x08;
+				*vertex++ = it->m_unk0x0c;
+				*vertex++ = -1.0f;
+				*reinterpret_cast<uint32*>(vertex++) = it->m_unk0x20;
+				*vertex++ = it->m_unk0x10;
+				*vertex++ = it->m_unk0x14;
 
-			batch.m_unk0x0c += count;
-			++it;
-
-			if (it == m_unk0x3c.end() || it->m_unk0x24 != batch.m_unk0x00 || it->m_unk0x28 != batch.m_unk0x04) {
-				break;
+				batch.m_unk0x0c += 2;
 			}
 		}
 
-		batches.push_back(batch);
+		++it;
 
-		if (it == m_unk0x3c.end()) {
-			break;
+		if (it == m_unk0x3c.end() || batch.m_unk0x00 != it->m_unk0x24 || batch.m_unk0x04 != it->m_unk0x28) {
+			batches.push_back(batch);
+
+			if (it != m_unk0x3c.end()) {
+				batch.m_unk0x00 = it->m_unk0x24;
+				batch.m_unk0x04 = it->m_unk0x28;
+				batch.m_unk0x08 = it->m_unk0x2c;
+				batch.m_unk0x0c = 0;
+			}
 		}
-
-		batch.m_unk0x00 = it->m_unk0x24;
-		batch.m_unk0x04 = it->m_unk0x28;
-		batch.m_unk0x08 = it->m_unk0x2c;
 	}
 
 	m_unk0x24->unlock();
