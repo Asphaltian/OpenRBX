@@ -1683,7 +1683,7 @@ address,type,symbol,name,module,size
 00809434,global,??_7Reflection@Metadata@0RBX@@6B?$GuidItem@VInstance@RBX@@@2@@,,,
 0080fde4,global,??_7?$IObjectSafetyRobloxImpl@VCWorkspace@@$00@@6B@,,,
 00804ef4,library,??_7?$CXTPFrameWndBase@VCMDIFrameWnd@@@@6B@,,,
-00457ee0,stub,??$create@VVisit@RBX@@@ServiceProvider@RBX@@QBEPAVVisit@1@XZ,,,
+00457ee0,synthetic,??$find@VVisit@RBX@@@ServiceProvider@RBX@@QBEPAVVisit@1@XZ,,,
 00401110,function,,,,0xf
 0041e020,function,,,,956
 0042a970,function,,,,0x169
@@ -7734,3 +7734,18 @@ address,type,symbol,name,module,size
 005f2650,synthetic,??$declare@$1?sMotor@RBX@@3QBDB@Name@RBX@@SAABV01@XZ,,,
 00952ea0,global,enabled___Unknown00409ef0::FUN_00409f70,,,
 004016f0,library,?AfxCrtErrorCheck@@YAHH@Z,,,
+009542d8,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Soundscape::SoundService>,,,
+009542dc,global,flag___RBX::ServiceProvider::getClassIndex<RBX::Visit>,,,
+009542e0,global,isNullClassName___RBX::ServiceProvider::find<RBX::Visit>,,,
+009542e4,global,??_B?8???$find@VVisit@RBX@@@ServiceProvider@RBX@@QBEPAVVisit@1@XZ@58,,,
+00458260,synthetic,??$find@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@QBEPAVSoundService@Soundscape@1@XZ,,,
+009542f0,global,isNullClassName___RBX::ServiceProvider::find<RBX::Soundscape::SoundService>,,,
+009542f4,global,??_B?8???$find@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@QBEPAVSoundService@Soundscape@1@XZ@58,,,
+00454090,synthetic,??$doGetClassIndex@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@CAIXZ,,,
+00454120,synthetic,??$doGetClassIndex@VVisit@RBX@@@ServiceProvider@RBX@@CAIXZ,,,
+00455880,synthetic,??$callDoGetClassIndex@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@CAXXZ,,,
+00455890,synthetic,??$callDoGetClassIndex@VVisit@RBX@@@ServiceProvider@RBX@@CAXXZ,,,
+009542c0,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::Soundscape::SoundService>,,,
+009542c4,global,??_B?1???$doGetClassIndex@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@CAIXZ@51,,,
+009542c8,global,index___RBX::ServiceProvider::doGetClassIndex<RBX::Visit>,,,
+009542cc,global,??_B?1???$doGetClassIndex@VVisit@RBX@@@ServiceProvider@RBX@@CAIXZ@51,,,

@@ -2235,6 +2235,8 @@ address,type,size
 00455360,function,176
 00455440,function,1042
 00455860,function,5
+00455880,function,5
+00455890,function,5
 004558a0,function,95
 00455900,function,302
 00455a30,function,373
@@ -7286,6 +7288,7 @@ address,type,size
 0057b1b0,function,126
 0057b230,function,38
 0057b260,function,126
+0057b2e0,function,6
 0057b2f0,function,82
 0057b2f0,function,82
 0057b350,function,39

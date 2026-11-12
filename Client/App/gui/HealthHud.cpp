@@ -25,7 +25,7 @@ void HealthHud::render2d(Adorn* adorn)
 	int fontSize = (int) (height * 0.18f);
 
 	if (!visit) {
-		visit = shared_from(ServiceProvider::create<Visit>(this));
+		visit = shared_from(ServiceProvider::find<Visit>(this));
 		if (!visit) {
 			return;
 		}

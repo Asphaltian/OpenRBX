@@ -28,7 +28,7 @@ public:
 	// RBX::HealthHud::`scalar deleting destructor'
 
 	// SYNTHETIC: ROBLOX 0x0065f360
-	// ??$create@VVisit@RBX@@@ServiceProvider@RBX@@SAPAVVisit@1@PBVInstance@1@@Z
+	// ??$find@VVisit@RBX@@@ServiceProvider@RBX@@SAPAVVisit@1@PBVInstance@1@@Z
 };
 
 DECOMP_SIZE_ASSERT(HealthHud, 0x114)

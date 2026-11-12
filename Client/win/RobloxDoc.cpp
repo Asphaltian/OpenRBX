@@ -13,6 +13,7 @@
 #include "util/FileSystem.h"
 #include "util/Log.h"
 #include "util/RunStateOwner.h"
+#include "util/Sound.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/Selection.h"
 #include "v8datamodel/TimeState.h"
@@ -777,7 +778,7 @@ BOOL CRobloxDoc::SaveModified()
 	RBX::DataModel::Lock lock(FUN_00403290());
 	bool wasRunning = createService<RBX::RunService>(FUN_00403290().get())->isRunState();
 	createService<RBX::RunService>(FUN_00403290().get())->pause();
-	RBX::Visit* visit = createService<RBX::Visit>(FUN_00403290().get());
+	RBX::Visit* visit = findService<RBX::Visit>(FUN_00403290().get());
 
 	BOOL result;
 	if (visit == NULL || visit->getUploadUrl() == "NoVisit") {
@@ -877,3 +878,5 @@ END_MESSAGE_MAP()
 
 template const RBX::FactoryProduct<RBX::Visit, RBX::Instance, RBX::sVisit>::Creator
 	RBX::FactoryProduct<RBX::Visit, RBX::Instance, RBX::sVisit>::creator;
+
+template RBX::Soundscape::SoundService* RBX::ServiceProvider::create<RBX::Soundscape::SoundService>() const;

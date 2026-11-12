@@ -23,7 +23,7 @@ address,type,symbol
 0044aec0,synthetic,?convertToString@?$EnumDesc@W4SurfaceType@RBX@@@Reflection@RBX@@QBE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@ABW4SurfaceType@3@@Z
 0044b2b0,synthetic,?convertToValue@?$EnumDesc@W4ControllerType@Controller@RBX@@@Reflection@RBX@@QBE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAW4ControllerType@Controller@3@@Z
 00453da0,synthetic,??0ContentId@RBX@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z
-00458520,stub,??$create@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@QBEPAVSoundService@Soundscape@1@XZ
+00458520,synthetic,??$create@VSoundService@Soundscape@RBX@@@ServiceProvider@RBX@@QBEPAVSoundService@Soundscape@1@XZ
 0045b640,synthetic,?getClassName@?$NonFactoryProduct@VInstance@RBX@@$1?sStats@Stats@2@3PADA@RBX@@UBEABVName@2@XZ
 0045caf0,synthetic,??_E?$NonFactoryProduct@VInstance@RBX@@$0A@@RBX@@WIE@AEPAXI@Z
 0045f990,synthetic,??_E?$NonFactoryProduct@VInstance@RBX@@$1?sJointInstance@2@3QBDB@RBX@@WGM@AEPAXI@Z
