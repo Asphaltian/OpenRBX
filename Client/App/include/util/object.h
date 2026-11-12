@@ -316,10 +316,10 @@ public:
 	// TEMPLATE: ROBLOX 0x005ea560
 	// RBX::Creatable<RBX::Instance>::create<RBX::FilteredSelection<RBX::PartInstance> >
 	// TEMPLATE: WEBSERVICE 0x100acde0
-	// STUB: ROBLOX 0x0041ec70
+	// TEMPLATE: ROBLOX 0x0041ec70
 	// RBX::Creatable<RBX::Instance>::create<RBX::Decal>
 	// TEMPLATE: WEBSERVICE 0x100ad050
-	// STUB: ROBLOX 0x0041ed00
+	// TEMPLATE: ROBLOX 0x0041ed00
 	// RBX::Creatable<RBX::Instance>::create<RBX::Texture>
 	// TEMPLATE: WEBSERVICE 0x100b2810
 	// TEMPLATE: ROBLOX 0x004cdf50
