@@ -418,6 +418,9 @@ protected:
 
 	virtual G3D::Matrix3 getRotationAxis() = 0; // vtable+0x14
 
+private:
+	void FUN_00598da0(const G3D::Matrix3& rotation, const std::vector<PVInstance*>& pvInstances);
+
 public:
 	virtual void doIt(IDataState* dataState);
 };

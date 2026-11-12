@@ -5,6 +5,7 @@
 #include "util/Name.h"
 #include "util/standardout.h"
 #include "v8datamodel/DataModel.h"
+#include "v8datamodel/Workspace.h"
 #include "v8xml/XmlElement.h"
 #include "v8xml/XmlSerializer.h"
 
@@ -149,10 +150,34 @@ static void buildIsolationMap(XmlElement* element, std::map<RBX::Instance*, RBX:
 	}
 }
 
-// STUB: ROBLOX 0x005a33f0
-void SerializerV2::FUN_005a33f0(const XmlElement* root, RBX::DataModel* dataModel)
+// FUNCTION: ROBLOX 0x005a33f0
+void SerializerV2::merge(const XmlElement* root, RBX::DataModel* dataModel)
 {
-	STUB(0x5a33f0);
+	RBX::MergeBinder binder;
+
+	const XmlElement* child = root->firstChild();
+	while (child != NULL) {
+		const XmlAttribute* referent = child->findAttribute(name_referent);
+		RBX::InstanceHandle h;
+		referent->getValue(h);
+		boost::shared_ptr<RBX::Instance> instance = h.getTarget();
+
+		if (child->getTag() != tag_External) {
+			if (child->getTag() == name_DeleteItem) {
+				instance->remove();
+			}
+			else if (instance) {
+				instance->read(child, binder);
+			}
+			else {
+				dataModel->getWorkspace()->readChild(child, binder);
+			}
+		}
+
+		child = child->nextSibling();
+	}
+
+	binder.resolveRefs();
 }
 
 // FUNCTION: WEBSERVICE 0x10098450

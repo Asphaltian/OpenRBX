@@ -87,7 +87,17 @@ private:
 
 	void changeMinMax(Primitive* p, const Extents& change, const Extents& oldBox, const Extents& newBox);
 	void primitiveExtentsChanged(Primitive* p);
-	unsigned int numNodes(unsigned int) const;
+	unsigned int numNodes(unsigned int bucket) const
+	{
+		SpatialNode* const& head = nodes[bucket];
+		unsigned int answer = 0;
+
+		for (SpatialNode* node = head; node != NULL; node = node->nextHashLink) {
+			answer++;
+		}
+
+		return answer;
+	}
 
 	World* world;                    // 0x00
 	ContactManager* contactManager;  // 0x04

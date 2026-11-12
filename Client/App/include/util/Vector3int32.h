@@ -43,6 +43,20 @@ inline Vector3int32 Vector3int32::floor(const Vector3& v)
 	return Vector3int32(G3D::iRound(floorf(v.x)), G3D::iRound(floorf(v.y)), G3D::iRound(floorf(v.z)));
 }
 
+inline bool operator<(const Vector3int32& a, const Vector3int32& b)
+{
+	for (int i = 0; i < 3; i++) {
+		if (a[i] < b[i]) {
+			return true;
+		}
+		if (a[i] > b[i]) {
+			return false;
+		}
+	}
+
+	return false;
+}
+
 } // namespace RBX
 
 #endif // UTIL_VECTOR3INT32_H

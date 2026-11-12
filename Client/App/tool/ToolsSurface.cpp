@@ -394,21 +394,24 @@ PV SlingshotTool::VTable0x44(const UIEvent& uiEvent, const CoordinateFrame& cfra
 	PartInstance* part = getPart(uiEvent, NULL, hitWorld);
 	G3D::Vector3 direction = part ? (hitWorld - cframe.translation).direction() : cframe.lookVector();
 	G3D::Vector3 position = cframe.translation + direction * 3.0f;
-	if (part) {
-		direction = hitWorld - position;
-		float height = direction.y;
-		direction.y = 0.0f;
-		float distance = direction.unitize();
+	if (!part) {
+		CoordinateFrame frame(position);
+		return PV(frame, Velocity(direction * 85.0f, G3D::Vector3::zero()));
+	}
+	else {
+		G3D::Vector3 delta = hitWorld - position;
+		float height = delta.y;
+		delta.y = 0.0f;
+		float distance = delta.unitize();
 		float angle = Math::computeLaunchAngle(
 			85.0f, distance, height, Units::kmsAccelerationToRbx(Constants::getKmsGravity()).y
 		);
-		direction.y = sin(angle);
-		direction.x *= cos(angle);
-		direction.z *= cos(angle);
+		delta.y = sin(angle);
+		delta.x *= cos(angle);
+		delta.z *= cos(angle);
+		CoordinateFrame frame(position);
+		return PV(frame, Velocity(delta * 85.0f, G3D::Vector3::zero()));
 	}
-
-	CoordinateFrame frame(position);
-	return PV(frame, Velocity(direction * 85.0f, G3D::Vector3::zero()));
 }
 
 // FUNCTION: ROBLOX 0x0063a740
@@ -974,7 +977,7 @@ bool UndoVerb::isEnabled() const
 void UndoVerb::doIt(IDataState* dataState)
 {
 	SerializerV2 serializer;
-	serializer.FUN_005a33f0(m_unk0x0c->undo()->getData(), m_unk0x0c);
+	serializer.merge(m_unk0x0c->undo()->getData(), m_unk0x0c);
 }
 
 // FUNCTION: ROBLOX 0x0063d4a0
@@ -988,7 +991,7 @@ bool RedoVerb::isEnabled() const
 void RedoVerb::doIt(IDataState* dataState)
 {
 	SerializerV2 serializer;
-	serializer.FUN_005a33f0(m_unk0x0c->redo()->getData(), m_unk0x0c);
+	serializer.merge(m_unk0x0c->redo()->getData(), m_unk0x0c);
 }
 
 } // namespace RBX

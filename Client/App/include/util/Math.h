@@ -146,7 +146,11 @@ public:
 	static CoordinateFrame snapToGrid(const CoordinateFrame& coordinateFrame, const Vector3& grid);
 	static float zAxisAngle(const CoordinateFrame&);
 	static void pan(const Vector3&, CoordinateFrame&, float);
-	static int radiansToQuadrant(float);
+	static int radiansToQuadrant(float radians)
+	{
+		return static_cast<int>(floor((radians + 7.0685835f) * 4.0f / G3D::twoPi())) % 4;
+	}
+
 	static int radiansToOctant(float);
 	static float radiansToDegrees(float);
 	static float degreesToRadians(float);

@@ -1,6 +1,7 @@
 #include "v8world/SpatialHash.h"
 
 #include "decomp.h"
+#include "util/standardout.h"
 #include "v8world/Assembly2.h"
 #include "v8world/Primitive.h"
 #include "v8world/World.h"
@@ -457,10 +458,56 @@ SpatialHash::SpatialHash(World* world, ContactManager* contactManager)
 	nodes.swap(temp);
 }
 
-// STUB: ROBLOX 0x0061c920
+// FUNCTION: ROBLOX 0x0061c870
+unsigned int FUN_0061c870(SpatialNode* node)
+{
+	std::set<Vector3int32> grids;
+
+	for (; node != NULL; node = node->nextHashLink) {
+		grids.insert(node->gridId);
+	}
+
+	return grids.size();
+}
+
+// FUNCTION: ROBLOX 0x0061c920
 void SpatialHash::doStats() const
 {
-	STUB(0x61c920);
+	std::set<int> set1;
+	std::set<int> set2;
+	std::set<int> set3;
+	std::set<int> set4;
+	std::vector<unsigned int> bucketCounts(numBuckets());
+	std::vector<unsigned int> gridCounts(numBuckets());
+
+	for (unsigned int i = 0; i < numBuckets(); i++) {
+		bucketCounts[i] = numNodes(i);
+		gridCounts[i] = FUN_0061c870(nodes[i]);
+	}
+
+	std::sort(bucketCounts.begin(), bucketCounts.end());
+	std::sort(gridCounts.begin(), gridCounts.end());
+
+	StandardOut::singleton()->print(MESSAGE_INFO, "CURRENT HASH DISTRIBUTION");
+
+	for (unsigned int i = 0; i < 100; i++) {
+		unsigned int index = (i + 1) * numBuckets() / 100 - 1;
+		StandardOut::singleton()->print(MESSAGE_INFO, "Slot: %d      Count: %d", i, bucketCounts[index]);
+	}
+
+	StandardOut::singleton()->print(MESSAGE_INFO, "TOP HASH DISTRIBUTION");
+
+	for (unsigned int i = 0; i < 100; i++) {
+		unsigned int index = numBuckets() - 1 - i;
+		StandardOut::singleton()->print(MESSAGE_INFO, "Slot: %d      Count: %d", i, bucketCounts[index]);
+	}
+
+	StandardOut::singleton()->print(MESSAGE_INFO, "TOP GRID COLLISIONS DISTRIBUTION");
+
+	for (unsigned int i = 0; i < 100; i++) {
+		unsigned int index = numBuckets() - 1 - i;
+		StandardOut::singleton()->print(MESSAGE_INFO, "Slot: %d      Count: %d", i, gridCounts[index]);
+	}
 }
 
 } // namespace RBX

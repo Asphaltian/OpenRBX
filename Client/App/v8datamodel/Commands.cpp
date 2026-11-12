@@ -530,6 +530,19 @@ void Unknown00597dd0::operator()(boost::shared_ptr<Instance> instance)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00598da0
+void RotateAxisCommand::FUN_00598da0(const G3D::Matrix3& rotation, const std::vector<PVInstance*>& pvInstances)
+{
+	if (pvInstances.size() > 0) {
+		MegaDragger dragger(NULL, pvInstances, workspace.get());
+		dragger.startDragging();
+		dragger.safeRotate(rotation);
+		dragger.finishDragging();
+
+		workspace->raiseDrawChanged();
+	}
+}
+
 // FUNCTION: ROBLOX 0x00598e50
 RotateSelectionVerb::RotateSelectionVerb(DataModel* dataModel) : RotateAxisCommand("SelectionRotate", dataModel)
 {
@@ -661,10 +674,38 @@ void UngroupSelectionVerb::doIt(IDataState* dataState)
 	dataState->setDirty(true);
 }
 
-// STUB: ROBLOX 0x0059ad50
+// FUNCTION: ROBLOX 0x0059ad50
 void RotateAxisCommand::doIt(IDataState* dataState)
 {
-	STUB(0x59ad50);
+	FUN_00596660(dataModel);
+
+	FilteredSelection<PVInstance>* filteredSelection =
+		dataModel ? dataModel->create<FilteredSelection<PVInstance> >() : NULL;
+
+	UndoState* undoState = new UndoState();
+
+	for (std::vector<PVInstance*>::const_iterator iter = filteredSelection->items().begin();
+		 iter != filteredSelection->items().end();
+		 ++iter) {
+		PVInstance* pvInstance = *iter;
+	}
+
+	FUN_00598da0(getRotationAxis(), filteredSelection->items());
+
+	(dataModel ? dataModel->create<Soundscape::SoundService>() : NULL)->playSound(CLICK_SOUND);
+
+	workspace->raiseDrawChanged();
+
+	RedoState* redoState = new RedoState();
+
+	for (std::vector<PVInstance*>::const_iterator iter = filteredSelection->items().begin();
+		 iter != filteredSelection->items().end();
+		 ++iter) {
+		PVInstance* pvInstance = *iter;
+	}
+
+	dataState->pushState(getName(), undoState, redoState);
+	dataState->setDirty(true);
 }
 
 // FUNCTION: ROBLOX 0x0059af30
