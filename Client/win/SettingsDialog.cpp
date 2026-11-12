@@ -64,6 +64,16 @@ void CSettingsDialog::FUN_0046b3f0(CWnd* p_unk0x04)
 	}
 }
 
+// FUNCTION: ROBLOX 0x0046b560
+void CSettingsPropGrid::FUN_00442e20(
+	const RBX::Reflection::ClassDescriptor* classDescriptor, const RBX::Reflection::PropertyDescriptor* descriptor
+)
+{
+	if (descriptor->owner != RBX::Instance::classDescriptor()) {
+		CPropGrid::FUN_00442e20(classDescriptor, descriptor);
+	}
+}
+
 // STUB: ROBLOX 0x0046b590
 BOOL CSettingsDialog::OnInitDialog()
 {

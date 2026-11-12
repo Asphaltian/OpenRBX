@@ -17,6 +17,8 @@ class __declspec(novtable) CContent : public CComObjectRootEx<CComSingleThreadMo
 									  public IDispatchImpl<IContent, &IID_IContent, &LIBID_RobloxLib, 1, 0>
 {
 public:
+	DECLARE_REGISTRY_RESOURCEID(116)
+
 	// clang-format off
 	BEGIN_COM_MAP(CContent)
 		COM_INTERFACE_ENTRY(IContent)
@@ -31,6 +33,8 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(CContent, 0x94)
+
+OBJECT_ENTRY_AUTO(__uuidof(Content), CContent)
 
 void FUN_004132b0(const RBX::Reflection::Value& value, VARIANT* result);
 SAFEARRAY* FUN_00413500(const std::vector<RBX::Reflection::Value>& values);

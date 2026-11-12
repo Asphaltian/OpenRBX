@@ -476,7 +476,7 @@ void AdornRbxGfx::cylinderAlongX(float radius, float length, const G3D::Color4& 
 		quadric.FUN_0067eae0(Ogre::Vector3(0.0f, 0.0f, 1.0f));
 		quadric.FUN_00685580(m_unk0x04->getSceneManager(), "dsk" + FUN_0066a3c0(), manual, 0.0f, 1.0f, 12, 1);
 		quadric.FUN_0067eae0(Ogre::Vector3(0.0f, 0.0f, 0.0f));
-		quadric.m_unk0x08 = 1;
+		quadric.orientation = 1;
 		quadric.FUN_00685580(m_unk0x04->getSceneManager(), "dsk" + FUN_0066a3c0(), manual, 0.0f, 1.0f, 12, 1);
 		manual->setMaterialName(0, m_unk0x24->getName());
 		manual->setMaterialName(1, m_unk0x24->getName());
@@ -631,7 +631,7 @@ void AdornRbxGfx::ray(const G3D::Ray& ray, const G3D::Color4& color, float scale
 			quadric.FUN_0067ecc0(m_unk0x04->getSceneManager(), FUN_0066a3c0(), NULL, 0.05f, 0.05f, 1.0f, 12, 1);
 		quadric.FUN_0067eae0(Ogre::Vector3(0.0f, 0.0f, 1.0f));
 		quadric.FUN_0067ecc0(m_unk0x04->getSceneManager(), FUN_0066a3c0(), manual, 0.15f, 0.0f, 0.3f, 12, 1);
-		quadric.m_unk0x08 = 1;
+		quadric.orientation = 1;
 		quadric.FUN_00685580(m_unk0x04->getSceneManager(), FUN_0066a3c0(), manual, 0.0f, 0.15f, 12, 1);
 		quadric.FUN_0067eae0(Ogre::Vector3(0.0f, 0.0f, 0.0f));
 		quadric.FUN_00685580(m_unk0x04->getSceneManager(), FUN_0066a3c0(), manual, 0.0f, 0.05f, 12, 1);

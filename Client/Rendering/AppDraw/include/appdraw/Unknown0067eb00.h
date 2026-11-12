@@ -52,10 +52,10 @@ public:
 		int loops
 	);
 
-	int m_unk0x00;         // 0x00
-	bool m_unk0x04;        // 0x04
-	int m_unk0x08;         // 0x08
-	int m_unk0x0c;         // 0x0c
+	int normals;           // 0x00
+	bool textureCoords;    // 0x04
+	int orientation;       // 0x08
+	int drawStyle;         // 0x0c
 	ColourValue m_unk0x10; // 0x10
 	Vector3 m_unk0x20;     // 0x20
 };

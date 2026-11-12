@@ -16,10 +16,10 @@ void Unknown0067eb00::FUN_0067eae0(const Vector3& p_unk0x04)
 // FUNCTION: ROBLOX 0x0067eb00
 Unknown0067eb00::Unknown0067eb00()
 {
-	m_unk0x00 = 0;
-	m_unk0x04 = false;
-	m_unk0x08 = 0;
-	m_unk0x0c = 2;
+	normals = 0;
+	textureCoords = false;
+	orientation = 0;
+	drawStyle = 2;
 	m_unk0x10 = ColourValue(-1.0f, -1.0f, -1.0f, -1.0f);
 	m_unk0x20 = Vector3(0.0f, 0.0f, 0.0f);
 }
@@ -73,15 +73,15 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 	}
 
 	needCache2 = needCache3 = 0;
-	if (m_unk0x00 == 0) {
+	if (normals == 0) {
 		needCache2 = 1;
 	}
 
-	if (m_unk0x00 == 1) {
-		if (m_unk0x0c != 0) {
+	if (normals == 1) {
+		if (drawStyle != 0) {
 			needCache3 = 1;
 		}
-		if (m_unk0x0c == 1) {
+		if (drawStyle == 1) {
 			needCache2 = 1;
 		}
 	}
@@ -92,7 +92,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 	for (i = 0; i < slices; i++) {
 		angle = 2 * Math::PI * i / slices;
 		if (needCache2) {
-			if (m_unk0x08 == 0) {
+			if (orientation == 0) {
 				sinCache2[i] = xyNormalRatio * sin(angle);
 				cosCache2[i] = xyNormalRatio * cos(angle);
 			}
@@ -108,7 +108,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 	if (needCache3) {
 		for (i = 0; i < slices; i++) {
 			angle = 2 * Math::PI * (i - 0.5) / slices;
-			if (m_unk0x08 == 0) {
+			if (orientation == 0) {
 				sinCache3[i] = xyNormalRatio * sin(angle);
 				cosCache3[i] = xyNormalRatio * cos(angle);
 			}
@@ -130,7 +130,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 		cosCache3[slices] = cosCache3[0];
 	}
 
-	switch (m_unk0x0c) {
+	switch (drawStyle) {
 	case 2:
 		for (j = 0; j < stacks; j++) {
 			zLow = j * height / stacks;
@@ -140,14 +140,14 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 			index = 0;
 
 			std::vector<Vector3> positions;
-			std::vector<Vector3> normals;
+			std::vector<Vector3> vertexNormals;
 			manual->begin("", RenderOperation::OT_TRIANGLE_LIST);
 			if (m_unk0x10.r >= 0.0f) {
 				manual->colour(m_unk0x10);
 			}
 			for (i = 0; i <= slices; i++) {
 				Vector3 normal;
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 1:
 					normal = Vector3(sinCache3[i], cosCache3[i], zNormal);
 					break;
@@ -157,104 +157,108 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 				default:
 					break;
 				}
-				if (m_unk0x08 == 0) {
-					if (m_unk0x04) {
+				if (orientation == 0) {
+					if (textureCoords) {
 						manual->textureCoord(1 - (float) i / slices, (float) j / stacks);
 					}
 					size = positions.size();
-					if (size < 2) {
-						positions.push_back(Vector3(
-							m_unk0x20.x + radiusLow * sinCache[i],
-							m_unk0x20.y + radiusLow * cosCache[i],
-							m_unk0x20.z + zLow
-						));
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(
-							radiusLow * sinCache[i] + m_unk0x20.x,
-							radiusLow * cosCache[i] + m_unk0x20.y,
-							zLow + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
-						positions.push_back(Vector3(
-							m_unk0x20.x + radiusLow * sinCache[i],
-							m_unk0x20.y + radiusLow * cosCache[i],
-							m_unk0x20.z + zLow
-						));
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(
+								radiusLow * sinCache[i] + m_unk0x20.x,
+								radiusLow * cosCache[i] + m_unk0x20.y,
+								zLow + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + radiusLow * sinCache[i],
+								m_unk0x20.y + radiusLow * cosCache[i],
+								m_unk0x20.z + zLow
+							));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(
+								radiusLow * sinCache[i] + m_unk0x20.x,
+								radiusLow * cosCache[i] + m_unk0x20.y,
+								zLow + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + radiusLow * sinCache[i],
+								m_unk0x20.y + radiusLow * cosCache[i],
+								m_unk0x20.z + zLow
+							));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(
-							radiusLow * sinCache[i] + m_unk0x20.x,
-							radiusLow * cosCache[i] + m_unk0x20.y,
-							zLow + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
 						positions.push_back(Vector3(
 							m_unk0x20.x + radiusLow * sinCache[i],
 							m_unk0x20.y + radiusLow * cosCache[i],
 							m_unk0x20.z + zLow
 						));
 					}
-					normals.push_back(normal);
-					if (m_unk0x04) {
+					vertexNormals.push_back(normal);
+					if (textureCoords) {
 						manual->textureCoord(1 - (float) i / slices, (float) (j + 1) / stacks);
 					}
 					size = positions.size();
-					if (size < 2) {
-						positions.push_back(Vector3(
-							m_unk0x20.x + radiusHigh * sinCache[i],
-							m_unk0x20.y + radiusHigh * cosCache[i],
-							m_unk0x20.z + zHigh
-						));
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(
-							radiusHigh * sinCache[i] + m_unk0x20.x,
-							radiusHigh * cosCache[i] + m_unk0x20.y,
-							zHigh + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
-						positions.push_back(Vector3(
-							m_unk0x20.x + radiusHigh * sinCache[i],
-							m_unk0x20.y + radiusHigh * cosCache[i],
-							m_unk0x20.z + zHigh
-						));
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(
+								radiusHigh * sinCache[i] + m_unk0x20.x,
+								radiusHigh * cosCache[i] + m_unk0x20.y,
+								zHigh + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + radiusHigh * sinCache[i],
+								m_unk0x20.y + radiusHigh * cosCache[i],
+								m_unk0x20.z + zHigh
+							));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(
+								radiusHigh * sinCache[i] + m_unk0x20.x,
+								radiusHigh * cosCache[i] + m_unk0x20.y,
+								zHigh + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + radiusHigh * sinCache[i],
+								m_unk0x20.y + radiusHigh * cosCache[i],
+								m_unk0x20.z + zHigh
+							));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(
-							radiusHigh * sinCache[i] + m_unk0x20.x,
-							radiusHigh * cosCache[i] + m_unk0x20.y,
-							zHigh + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
 						positions.push_back(Vector3(
 							m_unk0x20.x + radiusHigh * sinCache[i],
 							m_unk0x20.y + radiusHigh * cosCache[i],
@@ -263,103 +267,107 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 					}
 				}
 				else {
-					if (m_unk0x04) {
+					if (textureCoords) {
 						manual->textureCoord(1 - (float) i / slices, (float) (j + 1) / stacks);
 					}
 					size = positions.size();
-					if (size < 2) {
-						positions.push_back(Vector3(
-							m_unk0x20.x + radiusHigh * sinCache[i],
-							m_unk0x20.y + radiusHigh * cosCache[i],
-							m_unk0x20.z + zHigh
-						));
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(
-							radiusHigh * sinCache[i] + m_unk0x20.x,
-							radiusHigh * cosCache[i] + m_unk0x20.y,
-							zHigh + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
-						positions.push_back(Vector3(
-							m_unk0x20.x + radiusHigh * sinCache[i],
-							m_unk0x20.y + radiusHigh * cosCache[i],
-							m_unk0x20.z + zHigh
-						));
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(
+								radiusHigh * sinCache[i] + m_unk0x20.x,
+								radiusHigh * cosCache[i] + m_unk0x20.y,
+								zHigh + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + radiusHigh * sinCache[i],
+								m_unk0x20.y + radiusHigh * cosCache[i],
+								m_unk0x20.z + zHigh
+							));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(
+								radiusHigh * sinCache[i] + m_unk0x20.x,
+								radiusHigh * cosCache[i] + m_unk0x20.y,
+								zHigh + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + radiusHigh * sinCache[i],
+								m_unk0x20.y + radiusHigh * cosCache[i],
+								m_unk0x20.z + zHigh
+							));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(
-							radiusHigh * sinCache[i] + m_unk0x20.x,
-							radiusHigh * cosCache[i] + m_unk0x20.y,
-							zHigh + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
 						positions.push_back(Vector3(
 							m_unk0x20.x + radiusHigh * sinCache[i],
 							m_unk0x20.y + radiusHigh * cosCache[i],
 							m_unk0x20.z + zHigh
 						));
 					}
-					normals.push_back(normal);
-					if (m_unk0x04) {
+					vertexNormals.push_back(normal);
+					if (textureCoords) {
 						manual->textureCoord(1 - (float) i / slices, (float) j / stacks);
 					}
 					size = positions.size();
-					if (size < 2) {
-						positions.push_back(Vector3(
-							m_unk0x20.x + radiusLow * sinCache[i],
-							m_unk0x20.y + radiusLow * cosCache[i],
-							m_unk0x20.z + zLow
-						));
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(
-							radiusLow * sinCache[i] + m_unk0x20.x,
-							radiusLow * cosCache[i] + m_unk0x20.y,
-							zLow + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
-						positions.push_back(Vector3(
-							m_unk0x20.x + radiusLow * sinCache[i],
-							m_unk0x20.y + radiusLow * cosCache[i],
-							m_unk0x20.z + zLow
-						));
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(
+								radiusLow * sinCache[i] + m_unk0x20.x,
+								radiusLow * cosCache[i] + m_unk0x20.y,
+								zLow + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + radiusLow * sinCache[i],
+								m_unk0x20.y + radiusLow * cosCache[i],
+								m_unk0x20.z + zLow
+							));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(
+								radiusLow * sinCache[i] + m_unk0x20.x,
+								radiusLow * cosCache[i] + m_unk0x20.y,
+								zLow + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + radiusLow * sinCache[i],
+								m_unk0x20.y + radiusLow * cosCache[i],
+								m_unk0x20.z + zLow
+							));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(
-							radiusLow * sinCache[i] + m_unk0x20.x,
-							radiusLow * cosCache[i] + m_unk0x20.y,
-							zLow + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
 						positions.push_back(Vector3(
 							m_unk0x20.x + radiusLow * sinCache[i],
 							m_unk0x20.y + radiusLow * cosCache[i],
@@ -367,7 +375,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 						));
 					}
 				}
-				normals.push_back(normal);
+				vertexNormals.push_back(normal);
 			}
 			manual->end();
 		}
@@ -386,7 +394,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 				manual->position(
 					radiusLow * sintemp + m_unk0x20.x, radiusLow * costemp + m_unk0x20.y, zLow + m_unk0x20.z
 				);
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 1:
 				case 0:
 					manual->normal(sinCache2[i], cosCache2[i], zNormal);
@@ -394,7 +402,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 				default:
 					break;
 				}
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(1 - (float) i / slices, (float) j / stacks);
 				}
 			}
@@ -414,7 +422,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 				manual->position(
 					radiusLow * sinCache[i] + m_unk0x20.x, radiusLow * cosCache[i] + m_unk0x20.y, zLow + m_unk0x20.z
 				);
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 1:
 					manual->normal(sinCache3[i], cosCache3[i], zNormal);
 					break;
@@ -424,7 +432,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 				default:
 					break;
 				}
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(1 - (float) i / slices, (float) j / stacks);
 				}
 			}
@@ -443,7 +451,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 				manual->position(
 					radiusLow * sinCache[i] + m_unk0x20.x, radiusLow * cosCache[i] + m_unk0x20.y, zLow + m_unk0x20.z
 				);
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 1:
 					manual->normal(sinCache3[i], cosCache3[i], zNormal);
 					break;
@@ -453,14 +461,14 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 				default:
 					break;
 				}
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(1 - (float) i / slices, (float) j / stacks);
 				}
 			}
 			manual->end();
 		}
 		for (i = 0; i < slices; i++) {
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 			case 0:
 				manual->normal(sinCache2[i], cosCache2[i], 0.0f);
@@ -480,7 +488,7 @@ ManualObject* Unknown0067eb00::FUN_0067ecc0(
 				);
 				zLow = j * height / stacks;
 				radiusLow = baseRadius - deltaRadius * ((float) j / stacks);
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(1 - (float) i / slices, (float) j / stacks);
 				}
 			}
@@ -564,7 +572,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 		cosCache[slices] = cosCache[0];
 	}
 
-	switch (m_unk0x0c) {
+	switch (drawStyle) {
 	case 2:
 		if (innerRadius == 0.0) {
 			finish = loops - 1;
@@ -575,10 +583,10 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 			manual->position(0.0f + m_unk0x20.x, 0.0f + m_unk0x20.y, 0.0f + m_unk0x20.z);
 			manual->index(0);
 			index = 1;
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 			case 0:
-				if (m_unk0x08 == 0) {
+				if (orientation == 0) {
 					manual->normal(0.0f, 0.0f, 1.0f);
 				}
 				else {
@@ -588,21 +596,21 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 			default:
 				break;
 			}
-			if (m_unk0x04) {
+			if (textureCoords) {
 				manual->textureCoord(0.5f, 0.5f);
 			}
 			radiusLow = outerRadius - deltaRadius * ((float) (loops - 1) / loops);
-			if (m_unk0x04) {
+			if (textureCoords) {
 				texLow = radiusLow / outerRadius / 2;
 			}
 
-			if (m_unk0x08 == 0) {
+			if (orientation == 0) {
 				for (i = slices; i >= 0; i--) {
 					manual->position(
 						radiusLow * sinCache[i] + m_unk0x20.x, radiusLow * cosCache[i] + m_unk0x20.y, 0.0 + m_unk0x20.z
 					);
 					manual->index(index++);
-					if (m_unk0x04) {
+					if (textureCoords) {
 						manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 					}
 				}
@@ -613,7 +621,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 						radiusLow * sinCache[i] + m_unk0x20.x, radiusLow * cosCache[i] + m_unk0x20.y, 0.0 + m_unk0x20.z
 					);
 					manual->index(index++);
-					if (m_unk0x04) {
+					if (textureCoords) {
 						manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 					}
 				}
@@ -626,7 +634,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 		for (j = 0; j < finish; j++) {
 			radiusLow = outerRadius - deltaRadius * ((float) j / loops);
 			radiusHigh = outerRadius - deltaRadius * ((float) (j + 1) / loops);
-			if (m_unk0x04) {
+			if (textureCoords) {
 				texLow = radiusLow / outerRadius / 2;
 				texHigh = radiusHigh / outerRadius / 2;
 			}
@@ -637,10 +645,10 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 			if (m_unk0x10.r >= 0.0f) {
 				manual->colour(m_unk0x10);
 			}
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 			case 0:
-				if (m_unk0x08 == 0) {
+				if (orientation == 0) {
 					manual->normal(0.0f, 0.0f, 1.0f);
 				}
 				else {
@@ -651,148 +659,152 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 				break;
 			}
 			for (i = 0; i <= slices; i++) {
-				Vector3 vertex;
-				if (m_unk0x08 == 0) {
-					if (m_unk0x04) {
+				if (orientation == 0) {
+					if (textureCoords) {
 						manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 					}
 					size = positions.size();
-					if (size < 2) {
-						vertex = Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f);
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->position(
-							radiusLow * sinCache[i] + m_unk0x20.x,
-							radiusLow * cosCache[i] + m_unk0x20.y,
-							0.0 + m_unk0x20.z
-						);
-						manual->index(index++);
-						vertex = Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f);
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->position(
+								radiusLow * sinCache[i] + m_unk0x20.x,
+								radiusLow * cosCache[i] + m_unk0x20.y,
+								0.0 + m_unk0x20.z
+							);
+							manual->index(index++);
+							positions.push_back(Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->position(
+								radiusLow * sinCache[i] + m_unk0x20.x,
+								radiusLow * cosCache[i] + m_unk0x20.y,
+								0.0 + m_unk0x20.z
+							);
+							manual->index(index++);
+							positions.push_back(Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->position(
-							radiusLow * sinCache[i] + m_unk0x20.x,
-							radiusLow * cosCache[i] + m_unk0x20.y,
-							0.0 + m_unk0x20.z
-						);
-						manual->index(index++);
-						vertex = Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f);
+						positions.push_back(Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f));
 					}
-					positions.push_back(vertex);
 
-					if (m_unk0x04) {
+					if (textureCoords) {
 						manual->textureCoord(texHigh * sinCache[i] + 0.5, texHigh * cosCache[i] + 0.5);
 					}
 					size = positions.size();
-					if (size < 2) {
-						vertex = Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f);
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->position(
-							radiusHigh * sinCache[i] + m_unk0x20.x,
-							radiusHigh * cosCache[i] + m_unk0x20.y,
-							0.0 + m_unk0x20.z
-						);
-						manual->index(index++);
-						vertex = Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f);
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->position(
+								radiusHigh * sinCache[i] + m_unk0x20.x,
+								radiusHigh * cosCache[i] + m_unk0x20.y,
+								0.0 + m_unk0x20.z
+							);
+							manual->index(index++);
+							positions.push_back(Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->position(
+								radiusHigh * sinCache[i] + m_unk0x20.x,
+								radiusHigh * cosCache[i] + m_unk0x20.y,
+								0.0 + m_unk0x20.z
+							);
+							manual->index(index++);
+							positions.push_back(Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->position(
-							radiusHigh * sinCache[i] + m_unk0x20.x,
-							radiusHigh * cosCache[i] + m_unk0x20.y,
-							0.0 + m_unk0x20.z
-						);
-						manual->index(index++);
-						vertex = Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f);
+						positions.push_back(Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f));
 					}
 				}
 				else {
-					if (m_unk0x04) {
+					if (textureCoords) {
 						manual->textureCoord(texHigh * sinCache[i] + 0.5, texHigh * cosCache[i] + 0.5);
 					}
 					size = positions.size();
-					if (size < 2) {
-						vertex = Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f);
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->position(
-							radiusHigh * sinCache[i] + m_unk0x20.x,
-							radiusHigh * cosCache[i] + m_unk0x20.y,
-							0.0 + m_unk0x20.z
-						);
-						manual->index(index++);
-						vertex = Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f);
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->position(
+								radiusHigh * sinCache[i] + m_unk0x20.x,
+								radiusHigh * cosCache[i] + m_unk0x20.y,
+								0.0 + m_unk0x20.z
+							);
+							manual->index(index++);
+							positions.push_back(Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->position(
+								radiusHigh * sinCache[i] + m_unk0x20.x,
+								radiusHigh * cosCache[i] + m_unk0x20.y,
+								0.0 + m_unk0x20.z
+							);
+							manual->index(index++);
+							positions.push_back(Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->position(
-							radiusHigh * sinCache[i] + m_unk0x20.x,
-							radiusHigh * cosCache[i] + m_unk0x20.y,
-							0.0 + m_unk0x20.z
-						);
-						manual->index(index++);
-						vertex = Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f);
+						positions.push_back(Vector3(radiusHigh * sinCache[i], radiusHigh * cosCache[i], 0.0f));
 					}
-					positions.push_back(vertex);
 
-					if (m_unk0x04) {
+					if (textureCoords) {
 						manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 					}
 					size = positions.size();
-					if (size < 2) {
-						vertex = Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f);
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->position(
-							radiusLow * sinCache[i] + m_unk0x20.x,
-							radiusLow * cosCache[i] + m_unk0x20.y,
-							0.0 + m_unk0x20.z
-						);
-						manual->index(index++);
-						vertex = Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f);
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->position(
+								radiusLow * sinCache[i] + m_unk0x20.x,
+								radiusLow * cosCache[i] + m_unk0x20.y,
+								0.0 + m_unk0x20.z
+							);
+							manual->index(index++);
+							positions.push_back(Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->position(
+								radiusLow * sinCache[i] + m_unk0x20.x,
+								radiusLow * cosCache[i] + m_unk0x20.y,
+								0.0 + m_unk0x20.z
+							);
+							manual->index(index++);
+							positions.push_back(Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->position(
-							radiusLow * sinCache[i] + m_unk0x20.x,
-							radiusLow * cosCache[i] + m_unk0x20.y,
-							0.0 + m_unk0x20.z
-						);
-						manual->index(index++);
-						vertex = Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f);
+						positions.push_back(Vector3(radiusLow * sinCache[i], radiusLow * cosCache[i], 0.0f));
 					}
 				}
-				positions.push_back(vertex);
 			}
 			manual->end();
 		}
@@ -803,10 +815,10 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 		if (m_unk0x10.r >= 0.0f) {
 			manual->colour(m_unk0x10);
 		}
-		switch (m_unk0x00) {
+		switch (normals) {
 		case 1:
 		case 0:
-			if (m_unk0x08 == 0) {
+			if (orientation == 0) {
 				manual->normal(0.0f, 0.0f, 1.0f);
 			}
 			else {
@@ -825,7 +837,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 					radiusLow * sintemp + m_unk0x20.x, radiusLow * costemp + m_unk0x20.y, 0.0 + m_unk0x20.z
 				);
 				manual->index(index++);
-				if (m_unk0x04) {
+				if (textureCoords) {
 					texLow = radiusLow / outerRadius / 2;
 					manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 				}
@@ -840,10 +852,10 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 			if (m_unk0x10.r >= 0.0f) {
 				manual->colour(m_unk0x10);
 			}
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 			case 0:
-				if (m_unk0x08 == 0) {
+				if (orientation == 0) {
 					manual->normal(0.0f, 0.0f, 1.0f);
 				}
 				else {
@@ -858,7 +870,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 					innerRadius * sinCache[i] + m_unk0x20.x, innerRadius * cosCache[i] + m_unk0x20.y, 0.0 + m_unk0x20.z
 				);
 				manual->index(index++);
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(sinCache[i] / 2 + 0.5, cosCache[i] / 2 + 0.5);
 				}
 			}
@@ -867,7 +879,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 		}
 		for (j = 0; j <= loops; j++) {
 			radiusLow = outerRadius - deltaRadius * ((float) j / loops);
-			if (m_unk0x04) {
+			if (textureCoords) {
 				texLow = radiusLow / outerRadius / 2;
 			}
 
@@ -881,7 +893,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 					radiusLow * sinCache[i] + m_unk0x20.x, radiusLow * cosCache[i] + m_unk0x20.y, 0.0 + m_unk0x20.z
 				);
 				manual->index(index++);
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 				}
 			}
@@ -901,7 +913,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 					radiusLow * sintemp + m_unk0x20.x, radiusLow * costemp + m_unk0x20.y, 0.0 + m_unk0x20.z
 				);
 				manual->index(index++);
-				if (m_unk0x04) {
+				if (textureCoords) {
 					texLow = radiusLow / outerRadius / 2;
 					manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 				}
@@ -919,10 +931,10 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 				if (m_unk0x10.r >= 0.0f) {
 					manual->colour(m_unk0x10);
 				}
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 1:
 				case 0:
-					if (m_unk0x08 == 0) {
+					if (orientation == 0) {
 						manual->normal(0.0f, 0.0f, 1.0f);
 					}
 					else {
@@ -938,7 +950,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 						radiusLow * sintemp + m_unk0x20.x, radiusLow * costemp + m_unk0x20.y, 0.0 + m_unk0x20.z
 					);
 					manual->index(index++);
-					if (m_unk0x04) {
+					if (textureCoords) {
 						texLow = radiusLow / outerRadius / 2;
 						manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 					}
@@ -948,7 +960,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 		}
 		for (j = 0; j <= loops; j += loops) {
 			radiusLow = outerRadius - deltaRadius * ((float) j / loops);
-			if (m_unk0x04) {
+			if (textureCoords) {
 				texLow = radiusLow / outerRadius / 2;
 			}
 
@@ -962,7 +974,7 @@ ManualObject* Unknown0067eb00::FUN_00680b30(
 					radiusLow * sinCache[i] + m_unk0x20.x, radiusLow * cosCache[i] + m_unk0x20.y, 0.0 + m_unk0x20.z
 				);
 				manual->index(index++);
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(texLow * sinCache[i] + 0.5, texLow * cosCache[i] + 0.5);
 				}
 			}
@@ -1022,15 +1034,15 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 
 	needCache2 = needCache3 = false;
 
-	if (m_unk0x00 == 0) {
+	if (normals == 0) {
 		needCache2 = true;
 	}
 
-	if (m_unk0x00 == 1) {
-		if (m_unk0x0c != 0) {
+	if (normals == 1) {
+		if (drawStyle != 0) {
 			needCache3 = true;
 		}
-		if (m_unk0x0c == 1) {
+		if (drawStyle == 1) {
 			needCache2 = true;
 		}
 	}
@@ -1048,7 +1060,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 	for (j = 0; j <= stacks; j++) {
 		angle = Math::PI * j / stacks;
 		if (needCache2) {
-			if (m_unk0x08 == 0) {
+			if (orientation == 0) {
 				sinCache2b[j] = sin(angle);
 				cosCache2b[j] = cos(angle);
 			}
@@ -1071,7 +1083,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 		}
 		for (j = 0; j <= stacks; j++) {
 			angle = Math::PI * (j - 0.5) / stacks;
-			if (m_unk0x08 == 0) {
+			if (orientation == 0) {
 				sinCache3b[j] = sin(angle);
 				cosCache3b[j] = cos(angle);
 			}
@@ -1093,9 +1105,9 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 		cosCache3a[slices] = cosCache3a[0];
 	}
 
-	switch (m_unk0x0c) {
+	switch (drawStyle) {
 	case 2:
-		if (!m_unk0x04) {
+		if (!textureCoords) {
 			start = 1;
 			finish = stacks - 1;
 
@@ -1108,7 +1120,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 			manual->position(0.0f + m_unk0x20.x, 0.0f + m_unk0x20.y, radius + m_unk0x20.z);
 			manual->index(0);
 			index = 1;
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 				sintemp3 = sinCache3b[1];
 				costemp3 = cosCache3b[1];
@@ -1121,7 +1133,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 			default:
 				break;
 			}
-			if (m_unk0x08 == 0) {
+			if (orientation == 0) {
 				for (i = slices; i >= 0; i--) {
 					manual->position(
 						sintemp2 * sinCache1a[i] + m_unk0x20.x,
@@ -1129,7 +1141,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 						zHigh + m_unk0x20.z
 					);
 					manual->index(index++);
-					switch (m_unk0x00) {
+					switch (normals) {
 					case 0:
 						manual->normal(sinCache2a[i] * sintemp3, cosCache2a[i] * sintemp3, costemp3);
 						break;
@@ -1151,7 +1163,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 						zHigh + m_unk0x20.z
 					);
 					manual->index(index++);
-					switch (m_unk0x00) {
+					switch (normals) {
 					case 0:
 						manual->normal(sinCache2a[i] * sintemp3, cosCache2a[i] * sintemp3, costemp3);
 						break;
@@ -1174,7 +1186,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 			index = 1;
 			sintemp2 = sinCache1b[stacks - 1];
 			zHigh = cosCache1b[stacks - 1];
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 				sintemp3 = sinCache3b[stacks];
 				costemp3 = cosCache3b[stacks];
@@ -1189,7 +1201,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 			default:
 				break;
 			}
-			if (m_unk0x08 == 0) {
+			if (orientation == 0) {
 				for (i = 0; i <= slices; i++) {
 					manual->position(
 						sintemp2 * sinCache1a[i] + m_unk0x20.x,
@@ -1197,7 +1209,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 						zHigh + m_unk0x20.z
 					);
 					manual->index(index++);
-					switch (m_unk0x00) {
+					switch (normals) {
 					case 0:
 						manual->normal(sinCache2a[i] * sintemp3, cosCache2a[i] * sintemp3, costemp3);
 						break;
@@ -1217,7 +1229,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 						zHigh + m_unk0x20.z
 					);
 					manual->index(index++);
-					switch (m_unk0x00) {
+					switch (normals) {
 					case 0:
 						manual->normal(sinCache2a[i] * sintemp3, cosCache2a[i] * sintemp3, costemp3);
 						break;
@@ -1242,13 +1254,13 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 			zHigh = cosCache1b[j + 1];
 			sintemp1 = sinCache1b[j];
 			sintemp2 = sinCache1b[j + 1];
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 				sintemp4 = sinCache3b[j + 1];
 				costemp4 = cosCache3b[j + 1];
 				break;
 			case 0:
-				if (m_unk0x08 == 0) {
+				if (orientation == 0) {
 					sintemp3 = sinCache2b[j + 1];
 					costemp3 = cosCache2b[j + 1];
 					sintemp4 = sinCache2b[j];
@@ -1266,7 +1278,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 			}
 
 			std::vector<Vector3> positions;
-			std::vector<Vector3> normals;
+			std::vector<Vector3> vertexNormals;
 			if (j == start) {
 				manual->begin("", RenderOperation::OT_TRIANGLE_LIST);
 				index = 0;
@@ -1276,118 +1288,122 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 			}
 			for (i = 0; i <= slices; i++) {
 				Vector3 normal;
-				if (m_unk0x00 == 0) {
+				if (normals == 0) {
 					normal = Vector3(sinCache2a[i] * sintemp3, cosCache2a[i] * sintemp3, costemp3);
 				}
-				if (m_unk0x08 == 0) {
-					if (m_unk0x04) {
+				if (orientation == 0) {
+					if (textureCoords) {
 						manual->textureCoord(1 - (float) i / slices, 1 - (float) (j + 1) / stacks);
 					}
 					size = positions.size();
-					if (size < 2) {
-						positions.push_back(Vector3(
-							m_unk0x20.x + sintemp2 * sinCache1a[i],
-							m_unk0x20.y + sintemp2 * cosCache1a[i],
-							m_unk0x20.z + zHigh
-						));
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(
-							sintemp2 * sinCache1a[i] + m_unk0x20.x,
-							sintemp2 * cosCache1a[i] + m_unk0x20.y,
-							zHigh + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
-						positions.push_back(Vector3(
-							m_unk0x20.x + sintemp2 * sinCache1a[i],
-							m_unk0x20.y + sintemp2 * cosCache1a[i],
-							m_unk0x20.z + zHigh
-						));
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(
+								sintemp2 * sinCache1a[i] + m_unk0x20.x,
+								sintemp2 * cosCache1a[i] + m_unk0x20.y,
+								zHigh + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + sintemp2 * sinCache1a[i],
+								m_unk0x20.y + sintemp2 * cosCache1a[i],
+								m_unk0x20.z + zHigh
+							));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(
+								sintemp2 * sinCache1a[i] + m_unk0x20.x,
+								sintemp2 * cosCache1a[i] + m_unk0x20.y,
+								zHigh + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + sintemp2 * sinCache1a[i],
+								m_unk0x20.y + sintemp2 * cosCache1a[i],
+								m_unk0x20.z + zHigh
+							));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(
-							sintemp2 * sinCache1a[i] + m_unk0x20.x,
-							sintemp2 * cosCache1a[i] + m_unk0x20.y,
-							zHigh + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
 						positions.push_back(Vector3(
 							m_unk0x20.x + sintemp2 * sinCache1a[i],
 							m_unk0x20.y + sintemp2 * cosCache1a[i],
 							m_unk0x20.z + zHigh
 						));
 					}
-					normals.push_back(normal);
+					vertexNormals.push_back(normal);
 				}
 				else {
-					if (m_unk0x04) {
+					if (textureCoords) {
 						manual->textureCoord(1 - (float) i / slices, 1 - (float) j / stacks);
 					}
 					size = positions.size();
-					if (size < 2) {
-						positions.push_back(Vector3(
-							m_unk0x20.x + sintemp1 * sinCache1a[i],
-							m_unk0x20.y + sintemp1 * cosCache1a[i],
-							m_unk0x20.z + zLow
-						));
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(
-							sintemp1 * sinCache1a[i] + m_unk0x20.x,
-							sintemp1 * cosCache1a[i] + m_unk0x20.y,
-							zLow + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
-						positions.push_back(Vector3(
-							m_unk0x20.x + sintemp1 * sinCache1a[i],
-							m_unk0x20.y + sintemp1 * cosCache1a[i],
-							m_unk0x20.z + zLow
-						));
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(
+								sintemp1 * sinCache1a[i] + m_unk0x20.x,
+								sintemp1 * cosCache1a[i] + m_unk0x20.y,
+								zLow + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + sintemp1 * sinCache1a[i],
+								m_unk0x20.y + sintemp1 * cosCache1a[i],
+								m_unk0x20.z + zLow
+							));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(
+								sintemp1 * sinCache1a[i] + m_unk0x20.x,
+								sintemp1 * cosCache1a[i] + m_unk0x20.y,
+								zLow + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + sintemp1 * sinCache1a[i],
+								m_unk0x20.y + sintemp1 * cosCache1a[i],
+								m_unk0x20.z + zLow
+							));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(
-							sintemp1 * sinCache1a[i] + m_unk0x20.x,
-							sintemp1 * cosCache1a[i] + m_unk0x20.y,
-							zLow + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
 						positions.push_back(Vector3(
 							m_unk0x20.x + sintemp1 * sinCache1a[i],
 							m_unk0x20.y + sintemp1 * cosCache1a[i],
 							m_unk0x20.z + zLow
 						));
 					}
-					normals.push_back(normal);
+					vertexNormals.push_back(normal);
 				}
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 0:
 					normal = Vector3(sinCache2a[i] * sintemp4, cosCache2a[i] * sintemp4, costemp4);
 					break;
@@ -1397,113 +1413,117 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 				default:
 					break;
 				}
-				if (m_unk0x08 == 0) {
-					if (m_unk0x04) {
+				if (orientation == 0) {
+					if (textureCoords) {
 						manual->textureCoord(1 - (float) i / slices, 1 - (float) j / stacks);
 					}
 					size = positions.size();
-					if (size < 2) {
-						positions.push_back(Vector3(
-							m_unk0x20.x + sintemp1 * sinCache1a[i],
-							m_unk0x20.y + sintemp1 * cosCache1a[i],
-							m_unk0x20.z + zLow
-						));
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(
-							sintemp1 * sinCache1a[i] + m_unk0x20.x,
-							sintemp1 * cosCache1a[i] + m_unk0x20.y,
-							zLow + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
-						positions.push_back(Vector3(
-							m_unk0x20.x + sintemp1 * sinCache1a[i],
-							m_unk0x20.y + sintemp1 * cosCache1a[i],
-							m_unk0x20.z + zLow
-						));
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(
+								sintemp1 * sinCache1a[i] + m_unk0x20.x,
+								sintemp1 * cosCache1a[i] + m_unk0x20.y,
+								zLow + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + sintemp1 * sinCache1a[i],
+								m_unk0x20.y + sintemp1 * cosCache1a[i],
+								m_unk0x20.z + zLow
+							));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(
+								sintemp1 * sinCache1a[i] + m_unk0x20.x,
+								sintemp1 * cosCache1a[i] + m_unk0x20.y,
+								zLow + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + sintemp1 * sinCache1a[i],
+								m_unk0x20.y + sintemp1 * cosCache1a[i],
+								m_unk0x20.z + zLow
+							));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(
-							sintemp1 * sinCache1a[i] + m_unk0x20.x,
-							sintemp1 * cosCache1a[i] + m_unk0x20.y,
-							zLow + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
 						positions.push_back(Vector3(
 							m_unk0x20.x + sintemp1 * sinCache1a[i],
 							m_unk0x20.y + sintemp1 * cosCache1a[i],
 							m_unk0x20.z + zLow
 						));
 					}
-					normals.push_back(normal);
+					vertexNormals.push_back(normal);
 				}
 				else {
-					if (m_unk0x04) {
+					if (textureCoords) {
 						manual->textureCoord(1 - (float) i / slices, 1 - (float) (j + 1) / stacks);
 					}
 					size = positions.size();
-					if (size < 2) {
-						positions.push_back(Vector3(
-							m_unk0x20.x + sintemp2 * sinCache1a[i],
-							m_unk0x20.y + sintemp2 * cosCache1a[i],
-							m_unk0x20.z + zHigh
-						));
-					}
-					else if (size % 2 != 0) {
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(
-							sintemp2 * sinCache1a[i] + m_unk0x20.x,
-							sintemp2 * cosCache1a[i] + m_unk0x20.y,
-							zHigh + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
-						positions.push_back(Vector3(
-							m_unk0x20.x + sintemp2 * sinCache1a[i],
-							m_unk0x20.y + sintemp2 * cosCache1a[i],
-							m_unk0x20.z + zHigh
-						));
+					if (positions.size() >= 2) {
+						if (size % 2 != 0) {
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(
+								sintemp2 * sinCache1a[i] + m_unk0x20.x,
+								sintemp2 * cosCache1a[i] + m_unk0x20.y,
+								zHigh + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + sintemp2 * sinCache1a[i],
+								m_unk0x20.y + sintemp2 * cosCache1a[i],
+								m_unk0x20.z + zHigh
+							));
+						}
+						else {
+							manual->position(positions[size - 2]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 2]);
+							manual->position(positions[size - 1]);
+							manual->index(index++);
+							manual->normal(vertexNormals[size - 1]);
+							manual->position(
+								sintemp2 * sinCache1a[i] + m_unk0x20.x,
+								sintemp2 * cosCache1a[i] + m_unk0x20.y,
+								zHigh + m_unk0x20.z
+							);
+							manual->index(index++);
+							manual->normal(normal);
+							positions.push_back(Vector3(
+								m_unk0x20.x + sintemp2 * sinCache1a[i],
+								m_unk0x20.y + sintemp2 * cosCache1a[i],
+								m_unk0x20.z + zHigh
+							));
+						}
 					}
 					else {
-						manual->position(positions[size - 2]);
-						manual->index(index++);
-						manual->normal(normals[size - 2]);
-						manual->position(positions[size - 1]);
-						manual->index(index++);
-						manual->normal(normals[size - 1]);
-						manual->position(
-							sintemp2 * sinCache1a[i] + m_unk0x20.x,
-							sintemp2 * cosCache1a[i] + m_unk0x20.y,
-							zHigh + m_unk0x20.z
-						);
-						manual->index(index++);
-						manual->normal(normal);
 						positions.push_back(Vector3(
 							m_unk0x20.x + sintemp2 * sinCache1a[i],
 							m_unk0x20.y + sintemp2 * cosCache1a[i],
 							m_unk0x20.z + zHigh
 						));
 					}
-					normals.push_back(normal);
+					vertexNormals.push_back(normal);
 				}
 			}
 			if (j == finish - 1) {
@@ -1520,7 +1540,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 		for (j = 0; j <= stacks; j++) {
 			sintemp1 = sinCache1b[j];
 			costemp1 = cosCache1b[j];
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 			case 0:
 				sintemp2 = sinCache2b[j];
@@ -1536,7 +1556,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 					costemp1 + m_unk0x20.z
 				);
 				manual->index(index++);
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 1:
 				case 0:
 					manual->normal(sinCache2a[i] * sintemp2, cosCache2a[i] * sintemp2, costemp2);
@@ -1545,7 +1565,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 					break;
 				}
 
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(1 - (float) i / slices, 1 - (float) j / stacks);
 				}
 			}
@@ -1557,7 +1577,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 		for (j = 1; j < stacks; j++) {
 			sintemp1 = sinCache1b[j];
 			costemp1 = cosCache1b[j];
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 			case 0:
 				sintemp2 = sinCache2b[j];
@@ -1579,7 +1599,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 					costemp1 + m_unk0x20.z
 				);
 				manual->index(index++);
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 1:
 					manual->normal(sinCache3a[i] * sintemp2, cosCache3a[i] * sintemp2, costemp2);
 					break;
@@ -1589,7 +1609,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 				default:
 					break;
 				}
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(1 - (float) i / slices, 1 - (float) j / stacks);
 				}
 			}
@@ -1598,7 +1618,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 		for (i = 0; i < slices; i++) {
 			sintemp1 = sinCache1a[i];
 			costemp1 = cosCache1a[i];
-			switch (m_unk0x00) {
+			switch (normals) {
 			case 1:
 			case 0:
 				sintemp2 = sinCache2a[i];
@@ -1620,7 +1640,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 					cosCache1b[j] + m_unk0x20.z
 				);
 				manual->index(index++);
-				switch (m_unk0x00) {
+				switch (normals) {
 				case 1:
 					manual->normal(sintemp2 * sinCache3b[j], costemp2 * sinCache3b[j], cosCache3b[j]);
 					break;
@@ -1631,7 +1651,7 @@ ManualObject* Unknown0067eb00::FUN_00682ad0(
 					break;
 				}
 
-				if (m_unk0x04) {
+				if (textureCoords) {
 					manual->textureCoord(1 - (float) i / slices, 1 - (float) j / stacks);
 				}
 			}

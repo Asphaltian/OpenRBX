@@ -67,6 +67,8 @@ class __declspec(novtable) CLuaFunction : public CComObjectRootEx<CComSingleThre
 										  public IDispatchImpl<ILuaFunction, &IID_ILuaFunction, &LIBID_RobloxLib, 1, 0>
 {
 public:
+	DECLARE_REGISTRY_RESOURCEID(116)
+
 	// clang-format off
 	BEGIN_COM_MAP(CLuaFunction)
 		COM_INTERFACE_ENTRY(ILuaFunction)
@@ -85,5 +87,7 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(CLuaFunction, 0x38)
+
+OBJECT_ENTRY_AUTO(__uuidof(LuaFunction), CLuaFunction)
 
 #endif // LUAFUNCTION_H
