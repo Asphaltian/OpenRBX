@@ -367,7 +367,7 @@ void Player::loadCharacterAppearance()
 }
 
 // FUNCTION: WEBSERVICE 0x101905d0
-// STUB: ROBLOX 0x004af300
+// FUNCTION: ROBLOX 0x004af300
 void Player::loadCharacter()
 {
 	Workspace* workspace = ServiceProvider::find<Workspace>(this);

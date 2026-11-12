@@ -91,7 +91,7 @@ boost::shared_ptr<TopMenuBar> GuiBuilder::buildChatHud()
 // FUNCTION: ROBLOX 0x00614c50
 void GuiBuilder::buildChatMenu(ChatOption* option, std::string prefix, boost::shared_ptr<UnifiedWidget> parent)
 {
-	for (int i = 0; i < option->children.size(); ++i) {
+	for (unsigned int i = 0; i < option->children.size(); ++i) {
 		ChatOption* child = option->children[i];
 		std::string code = prefix + " " + boost::lexical_cast<std::string>(i);
 

@@ -966,7 +966,7 @@ void CRobloxTreeCtrl::FUN_00428720(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 }
 
-// STUB: ROBLOX 0x00428770
+// FUNCTION: ROBLOX 0x00428770
 static void FUN_00428770(RBX::Instance* parent, boost::shared_ptr<RBX::Instance> child)
 {
 	if (child->getParent() == parent) {
