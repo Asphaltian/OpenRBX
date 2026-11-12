@@ -1060,3 +1060,9 @@ BEGIN_MESSAGE_MAP(CRobloxWnd, CWnd)
 	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 // clang-format on
+
+template const RBX::FactoryProduct<RBX::ControllerService, RBX::Instance, RBX::sControllerService>::Creator
+	RBX::FactoryProduct<RBX::ControllerService, RBX::Instance, RBX::sControllerService>::creator;
+
+template const RBX::FactoryProduct<RBX::Camera, RBX::Instance, RBX::sCamera>::Creator
+	RBX::FactoryProduct<RBX::Camera, RBX::Instance, RBX::sCamera>::creator;

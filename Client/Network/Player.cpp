@@ -12,6 +12,7 @@
 #include "v8datamodel/Hopper.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/SpawnLocation.h"
+#include "v8datamodel/Teams.h"
 #include "v8datamodel/TimerService.h"
 #include "v8datamodel/Workspace.h"
 #include "v8world/World.h"
@@ -456,3 +457,42 @@ template class RBX::Reflection::Described<
 	RBX::Network::sPlayer,
 	RBX::FactoryProduct<RBX::Network::Player, RBX::Instance, RBX::Network::sPlayer> >;
 template class RBX::DescribedCreatable<RBX::Network::Player, RBX::Instance, RBX::Network::sPlayer>;
+
+template const RBX::FactoryProduct<RBX::HopperBin, RBX::BackpackItem, RBX::sHopperBin>::Creator
+	RBX::FactoryProduct<RBX::HopperBin, RBX::BackpackItem, RBX::sHopperBin>::creator;
+
+template const RBX::FactoryProduct<RBX::StarterPackService, RBX::Hopper, RBX::sStarterPackService>::Creator
+	RBX::FactoryProduct<RBX::StarterPackService, RBX::Hopper, RBX::sStarterPackService>::creator;
+
+template const RBX::FactoryProduct<RBX::LegacyHopperService, RBX::Hopper, RBX::sLegacyHopperService>::Creator
+	RBX::FactoryProduct<RBX::LegacyHopperService, RBX::Hopper, RBX::sLegacyHopperService>::creator;
+
+template const RBX::FactoryProduct<RBX::Backpack, RBX::Hopper, RBX::sBackpack>::Creator
+	RBX::FactoryProduct<RBX::Backpack, RBX::Hopper, RBX::sBackpack>::creator;
+
+template const RBX::FactoryProduct<RBX::SpawnLocation, RBX::PartInstance, RBX::sSpawnLocation>::Creator
+	RBX::FactoryProduct<RBX::SpawnLocation, RBX::PartInstance, RBX::sSpawnLocation>::creator;
+
+template const RBX::FactoryProduct<RBX::SpawnerService, RBX::Instance, RBX::sSpawnerService>::Creator
+	RBX::FactoryProduct<RBX::SpawnerService, RBX::Instance, RBX::sSpawnerService>::creator;
+
+template const RBX::FactoryProduct<RBX::ShirtGraphic, RBX::CharacterAppearance, RBX::sShirtGraphic>::Creator
+	RBX::FactoryProduct<RBX::ShirtGraphic, RBX::CharacterAppearance, RBX::sShirtGraphic>::creator;
+
+template const RBX::FactoryProduct<RBX::Shirt, RBX::ShirtGraphic, RBX::sShirt>::Creator
+	RBX::FactoryProduct<RBX::Shirt, RBX::ShirtGraphic, RBX::sShirt>::creator;
+
+template const RBX::FactoryProduct<RBX::BodyColors, RBX::CharacterAppearance, RBX::sBodyColors>::Creator
+	RBX::FactoryProduct<RBX::BodyColors, RBX::CharacterAppearance, RBX::sBodyColors>::creator;
+
+template const RBX::FactoryProduct<RBX::Skin, RBX::CharacterAppearance, RBX::sSkin>::Creator
+	RBX::FactoryProduct<RBX::Skin, RBX::CharacterAppearance, RBX::sSkin>::creator;
+
+template const RBX::FactoryProduct<RBX::Teams, RBX::Instance, RBX::sTeams>::Creator
+	RBX::FactoryProduct<RBX::Teams, RBX::Instance, RBX::sTeams>::creator;
+
+template const RBX::FactoryProduct<RBX::TimerService, RBX::Instance, RBX::sTimerService>::Creator
+	RBX::FactoryProduct<RBX::TimerService, RBX::Instance, RBX::sTimerService>::creator;
+
+template const RBX::FactoryProduct<RBX::Humanoid, RBX::Instance, RBX::sHumanoid>::Creator
+	RBX::FactoryProduct<RBX::Humanoid, RBX::Instance, RBX::sHumanoid>::creator;

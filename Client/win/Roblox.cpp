@@ -1125,3 +1125,6 @@ void CRobloxApp::FUN_00453eb0(CCmdUI* p_unk0x04)
 }
 
 CRobloxApp theApp;
+
+template const RBX::FactoryProduct<RBX::GameSettings, RBX::GlobalSettings::Item, RBX::sGameSettings>::Creator
+	RBX::FactoryProduct<RBX::GameSettings, RBX::GlobalSettings::Item, RBX::sGameSettings>::creator;

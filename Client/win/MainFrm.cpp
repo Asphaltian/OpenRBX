@@ -1127,3 +1127,9 @@ void CMainFrame::OnPaint()
 {
 	Default();
 }
+
+template const RBX::FactoryProduct<RBX::Accoutrement, RBX::Instance, RBX::sAccoutrement>::Creator
+	RBX::FactoryProduct<RBX::Accoutrement, RBX::Instance, RBX::sAccoutrement>::creator;
+
+template const RBX::FactoryProduct<RBX::Hat, RBX::Accoutrement, RBX::sHat>::Creator
+	RBX::FactoryProduct<RBX::Hat, RBX::Accoutrement, RBX::sHat>::creator;

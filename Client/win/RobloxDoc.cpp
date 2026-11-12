@@ -874,3 +874,6 @@ BEGIN_MESSAGE_MAP(CRobloxDoc, CDocument)
 	ON_UPDATE_COMMAND_UI(0x80db, FUN_00459790)
 END_MESSAGE_MAP()
 // clang-format on
+
+template const RBX::FactoryProduct<RBX::Visit, RBX::Instance, RBX::sVisit>::Creator
+	RBX::FactoryProduct<RBX::Visit, RBX::Instance, RBX::sVisit>::creator;

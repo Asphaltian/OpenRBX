@@ -16,6 +16,7 @@
 #include "util/scopedassign.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/Hopper.h"
+#include "v8datamodel/JointInstance.h"
 #include "v8datamodel/JointsService.h"
 #include "v8datamodel/Lighting.h"
 #include "v8datamodel/ModelInstance.h"
@@ -2054,3 +2055,24 @@ Replicator::Replicator(SystemAddress remotePlayerId, RakPeerInterface* peer)
 
 template const RBX::Name& RBX::Name::doDeclare<RBX::Network::sReplicator>();
 template void RBX::Name::callDoDeclare<RBX::Network::sReplicator>();
+
+template const RBX::FactoryProduct<RBX::Snap, RBX::AutoJoint, RBX::sSnap>::Creator
+	RBX::FactoryProduct<RBX::Snap, RBX::AutoJoint, RBX::sSnap>::creator;
+
+template const RBX::FactoryProduct<RBX::Weld, RBX::AutoJoint, RBX::sWeld>::Creator
+	RBX::FactoryProduct<RBX::Weld, RBX::AutoJoint, RBX::sWeld>::creator;
+
+template const RBX::FactoryProduct<RBX::Glue, RBX::AutoJoint, RBX::sGlue>::Creator
+	RBX::FactoryProduct<RBX::Glue, RBX::AutoJoint, RBX::sGlue>::creator;
+
+template const RBX::FactoryProduct<RBX::Rotate, RBX::AutoJoint, RBX::sRotate>::Creator
+	RBX::FactoryProduct<RBX::Rotate, RBX::AutoJoint, RBX::sRotate>::creator;
+
+template const RBX::FactoryProduct<RBX::RotateP, RBX::AutoJoint, RBX::sRotateP>::Creator
+	RBX::FactoryProduct<RBX::RotateP, RBX::AutoJoint, RBX::sRotateP>::creator;
+
+template const RBX::FactoryProduct<RBX::RotateV, RBX::AutoJoint, RBX::sRotateV>::Creator
+	RBX::FactoryProduct<RBX::RotateV, RBX::AutoJoint, RBX::sRotateV>::creator;
+
+template const RBX::FactoryProduct<RBX::Motor, RBX::AutoJoint, RBX::sMotor>::Creator
+	RBX::FactoryProduct<RBX::Motor, RBX::AutoJoint, RBX::sMotor>::creator;

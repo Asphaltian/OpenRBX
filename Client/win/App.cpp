@@ -197,3 +197,6 @@ STDMETHODIMP CApp::DeleteErrorFiles()
 }
 
 OBJECT_ENTRY_AUTO(__uuidof(App), CApp)
+
+template const RBX::FactoryProduct<RBX::DebugSettings, RBX::GlobalSettings::Item, RBX::sDebugSettings>::Creator
+	RBX::FactoryProduct<RBX::DebugSettings, RBX::GlobalSettings::Item, RBX::sDebugSettings>::creator;

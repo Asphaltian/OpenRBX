@@ -5,6 +5,7 @@
 #include "util/Http.h"
 #include "util/scopedassign.h"
 #include "v8datamodel/DataModel.h"
+#include "v8datamodel/Decal.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Selection.h"
 #include "v8datamodel/custommesh.h"
@@ -289,3 +290,15 @@ BEGIN_MESSAGE_MAP(CInstanceExplorer, CXTPReportView)
 	ON_NOTIFY(XTP_NM_REPORT_SELCHANGED, 100, FUN_00421580)
 END_MESSAGE_MAP()
 // clang-format on
+
+template const RBX::FactoryProduct<RBX::Decal, RBX::FaceInstance, RBX::sDecal>::Creator
+	RBX::FactoryProduct<RBX::Decal, RBX::FaceInstance, RBX::sDecal>::creator;
+
+template const RBX::FactoryProduct<RBX::Texture, RBX::Decal, RBX::sTexture>::Creator
+	RBX::FactoryProduct<RBX::Texture, RBX::Decal, RBX::sTexture>::creator;
+
+template const RBX::FactoryProduct<RBX::PartInstance, RBX::PVInstance, RBX::sPart>::Creator
+	RBX::FactoryProduct<RBX::PartInstance, RBX::PVInstance, RBX::sPart>::creator;
+
+template const RBX::FactoryProduct<RBX::SpecialShape, RBX::Instance, RBX::sSpecialShape>::Creator
+	RBX::FactoryProduct<RBX::SpecialShape, RBX::Instance, RBX::sSpecialShape>::creator;

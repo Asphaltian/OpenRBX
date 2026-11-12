@@ -1,9 +1,11 @@
 #include "ChatPrompt.h"
 
 #include "ChatEnter.h"
+#include "network/Player.h"
 #include "network/Players.h"
 #include "util/object.h"
 #include "v8datamodel/DataModel.h"
+#include "v8datamodel/Team.h"
 
 IMPLEMENT_DYNCREATE(CChatPrompt, CEditView)
 
@@ -167,3 +169,9 @@ LRESULT CChatPrompt::FUN_0045f4d0(WPARAM wParam, LPARAM lParam)
 	SetFocus();
 	return 0;
 }
+
+template const RBX::FactoryProduct<RBX::Team, RBX::Instance, RBX::sTeam>::Creator
+	RBX::FactoryProduct<RBX::Team, RBX::Instance, RBX::sTeam>::creator;
+
+template const RBX::FactoryProduct<RBX::Network::Player, RBX::Instance, RBX::Network::sPlayer>::Creator
+	RBX::FactoryProduct<RBX::Network::Player, RBX::Instance, RBX::Network::sPlayer>::creator;
