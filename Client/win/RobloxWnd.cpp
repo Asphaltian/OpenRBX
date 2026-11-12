@@ -779,7 +779,7 @@ void CRobloxWnd::OnPaint()
 	}
 }
 
-// STUB: ROBLOX 0x00462be0
+// FUNCTION: ROBLOX 0x00462be0
 std::string CRobloxWnd::getMetric(const std::string& metric) const
 {
 	int value = 0;
@@ -830,10 +830,9 @@ std::string CRobloxWnd::getMetric(const std::string& metric) const
 		if (!RBX::ViewBase::getShadowsEnabled()) {
 			return "Off";
 		}
-		return "On  #casters=" +
-			   Ogre::StringConverter::toString(
-				   (int) static_cast<Ogre::RbxSceneManager*>(m_unk0xb0->m_unk0x04)->getShadowCasterList().size()
-			   );
+		Ogre::RbxSceneManager* sceneManager = static_cast<Ogre::RbxSceneManager*>(m_unk0xb0->m_unk0x04);
+		int casters = (int) sceneManager->getShadowCasterList().size();
+		return "On  #casters=" + Ogre::StringConverter::toString(casters);
 	}
 
 	if (metric == "antiAliasing") {
@@ -878,10 +877,7 @@ std::string CRobloxWnd::getMetric(const std::string& metric) const
 			ms = m_unk0xa8->getRenderStats().cpuRenderTotal.elapsedTime();
 			ms *= 1000.0;
 		}
-		double fps = 1000.0;
-		if (ms >= 1.0) {
-			fps /= ms;
-		}
+		double fps = ms >= 1.0 ? 1000.0 / ms : 1000.0;
 
 		char buffer[256];
 		sprintf(buffer, "%.1fms (%.1ffps)", ms, fps);

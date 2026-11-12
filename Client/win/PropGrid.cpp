@@ -327,12 +327,12 @@ void CPropGrid::FUN_0043db00(const RBX::Reflection::ClassDescriptor* classDescri
 	);
 }
 
-// STUB: ROBLOX 0x0043df20
+// FUNCTION: ROBLOX 0x0043df20
 void CPropGrid::onEvent(const RBX::Instance* source, RBX::PropertyChanged event)
 {
 	boost::recursive_mutex::scoped_lock lock(m_unk0x188);
 	if (!m_unk0x1c1) {
-		std::map<const RBX::Reflection::PropertyDescriptor*, Item*>::iterator iter =
+		std::map<const RBX::Reflection::PropertyDescriptor*, Item*>::const_iterator iter =
 			m_unk0x1a8.find(&event.getDescriptor());
 		if (iter != m_unk0x1a8.end()) {
 			m_unk0x1c4.insert(iter->second);
