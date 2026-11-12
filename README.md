@@ -12,9 +12,9 @@ Keep in mind that this code reproduces the original release as it was, bugs incl
 
 <p align="center"><a href="https://asphaltian.github.io/OpenRBX/ROBLOXPROGRESS.HTML"><img src="https://asphaltian.github.io/OpenRBX/ROBLOXPROGRESS.SVG" width="45%"></a> <a href="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.HTML"><img src="https://asphaltian.github.io/OpenRBX/WEBSERVICEPROGRESS.SVG" width="45%"></a></p>
 
-All but ~140 of the Roblox functions in `WebService.dll` from RBXGS, the game server, compile to the same instructions as the original.
+All but ~80 of the Roblox functions in `WebService.dll` from RBXGS, the game server, compile to the same instructions as the original.
 
-The client, `Roblox.exe`, is currently being worked on. Both binaries were built from the same engine libraries, so a little over a third of it already matches.
+The client, `Roblox.exe`, is close behind, with all but ~190 of its Roblox functions matching.
 
 ## Building
 
