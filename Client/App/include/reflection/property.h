@@ -32,7 +32,7 @@ namespace RBX {
 
 class IReferenceBinder;
 
-extern const char* const category_Part;
+extern const char* category_Part;
 
 namespace Reflection {
 
@@ -909,7 +909,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004c1e10
 	// RBX::Reflection::BoundProp<bool,1>::BoundProp<bool,1><RBX::NetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1019b6a0
-	// STUB: ROBLOX 0x0062b330
+	// TEMPLATE: ROBLOX 0x004c1ef0
 	// RBX::Reflection::BoundProp<int,1>::BoundProp<int,1><RBX::NetworkSettings>
 	// TEMPLATE: WEBSERVICE 0x1019b780
 	// RBX::Reflection::BoundProp<float,1>::BoundProp<float,1><RBX::NetworkSettings>

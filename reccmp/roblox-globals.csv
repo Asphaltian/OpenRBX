@@ -4779,7 +4779,6 @@ address,type,symbol
 0095a084,global,?desc_Name@Instance@RBX@@2V?$PropDescriptor@VInstance@RBX@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Reflection@2@B
 0095a124,global,?event_descendentAdded@Instance@RBX@@2V?$SignalDesc@VInstance@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@2@A
 0095a148,global,?event_childAdded@Instance@RBX@@2V?$SignalDesc@VInstance@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@2@A
-0095a170,global,?func_getLastForce@@3V?$BoundFuncDesc@VBodyPosition@RBX@@$$A6A?AVVector3@G3D@@XZ$0A@@Reflection@RBX@@A
 0095a1d0,global,?event_propertyChanged@Instance@RBX@@2V?$SignalDesc@VInstance@RBX@@$$A6AXPBVPropertyDescriptor@Reflection@2@@Z@Reflection@2@A
 0095a1f4,global,?event_descendentRemoving@Instance@RBX@@2V?$SignalDesc@VInstance@RBX@@$$A6AXV?$shared_ptr@VInstance@RBX@@@boost@@@Z@Reflection@2@A
 0095a258,global,s___RBX::Reflection::EnumDesc<enum RBX::DebugSettings::ErrorReporting>::singleton
@@ -5006,7 +5005,6 @@ address,type,symbol
 0095c340,global,"foo___RBX::Reflection::Described<RBX::GameSettings,&RBX::sGameSettings,RBX::FactoryProduct<RBX::GameSettings,RBX::GlobalSettings::Item,&RBX::sGameSettings> >::classDescriptor"
 0095c3c8,global,??_B?1??classDescriptor@?$Described@VGameSettings@RBX@@$1?sGameSettings@2@3QBDBV?$FactoryProduct@VGameSettings@RBX@@VItem@GlobalSettings@2@$1?sGameSettings@2@3QBDB@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 0095c3d0,global,?prop_AnimateCharacter@RBX@@3V?$BoundProp@_N$00@Reflection@1@A
-0095c3ec,global,?prop_AutoColorCharacters@Team@RBX@@2V?$BoundProp@_N$00@Reflection@2@A
 0095c3ec,global,?prop_SoftwareSound@RBX@@3V?$BoundProp@_N$00@Reflection@1@A
 0095c408,global,?prop_SoundEnabled@RBX@@3V?$BoundProp@_N$00@Reflection@1@A
 0095c424,global,?prop_ChatScrollLength@RBX@@3V?$BoundProp@H$00@Reflection@1@A
@@ -5321,8 +5319,6 @@ address,type,symbol
 00960130,global,??_B?1??classDescriptor@?$Described@VBodyThrust@RBX@@$1?sBodyThrust@2@3PADAV?$FactoryProduct@VBodyThrust@RBX@@VBodyMover@2@$1?sBodyThrust@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
 00960138,global,"foo___RBX::Reflection::Described<RBX::Rocket,&RBX::sRocket,RBX::FactoryProduct<RBX::Rocket,RBX::BodyMover,&RBX::sRocket> >::classDescriptor"
 009601c0,global,??_B?1??classDescriptor@?$Described@VRocket@RBX@@$1?sRocket@2@3PADAV?$FactoryProduct@VRocket@RBX@@VBodyMover@2@$1?sRocket@2@3PADA@2@@Reflection@RBX@@SAAAVClassDescriptor@23@XZ@51
-00960200,global,?prop_force@BodyThrust@RBX@@2V?$BoundProp@VVector3@G3D@@$00@Reflection@2@A
-00960238,global,?prop_MaxDataModelSendBuffer@RBX@@3V?$BoundProp@H$00@Reflection@1@A
 009602a8,global,?prop_targetRadius@Rocket@RBX@@2V?$BoundProp@M$00@Reflection@2@A
 0096036c,global,?event_ReachedTarget@Rocket@RBX@@2V?$SignalDesc@VRocket@RBX@@$$A6AXXZ@Reflection@2@A
 009605c0,global,?prop_Target@Rocket@RBX@@2V?$RefPropDescriptor@VRocket@RBX@@VPartInstance@2@@Reflection@2@A

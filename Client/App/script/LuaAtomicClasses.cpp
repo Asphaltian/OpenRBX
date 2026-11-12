@@ -211,7 +211,7 @@ static int lerp(lua_State* L)
 }
 
 // FUNCTION: WEBSERVICE 0x100ae210
-// STUB: ROBLOX 0x005fec00
+// FUNCTION: ROBLOX 0x005fec00
 template <>
 int Bridge<G3D::Vector3, 1>::on_index(const G3D::Vector3& value, const char* name, lua_State* L)
 {

@@ -44,6 +44,8 @@ DECOMP_SIZE_ASSERT(LDraw2RobloxMapRoot, 0x54)
 } // namespace RBX
 
 // clang-format off
+// SYNTHETIC: ROBLOX 0x007e5000
+// RBX::LDraw2Lua::`dynamic initializer for 'g_unk0x00955318''
 // SYNTHETIC: ROBLOX 0x007e5020
 // RBX::LDraw2Lua::`dynamic initializer for 'g_unk0x0095531c''
 // SYNTHETIC: ROBLOX 0x007e5040

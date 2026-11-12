@@ -41,7 +41,7 @@ DECOMP_SIZE_ASSERT(GameSettings, 0x104)
 // SYNTHETIC: ROBLOX 0x007ead50
 // RBX::`dynamic initializer for 'prop_SoundEnabled''
 // SYNTHETIC: WEBSERVICE 0x1021c990
-// STUB: ROBLOX 0x007ead80 FOLDED
+// SYNTHETIC: ROBLOX 0x007ead80
 // RBX::`dynamic initializer for 'prop_SoftwareSound''
 // SYNTHETIC: WEBSERVICE 0x10223f60
 // SYNTHETIC: ROBLOX 0x007f3110

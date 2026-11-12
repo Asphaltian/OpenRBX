@@ -570,7 +570,7 @@ G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
 				result = G3D::Vector3::zero();
 			}
 			else {
-				result = worldPosition.unit();
+				result = worldPosition.direction();
 			}
 		}
 	}

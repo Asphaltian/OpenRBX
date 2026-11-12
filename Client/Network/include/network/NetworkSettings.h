@@ -54,7 +54,6 @@ DECOMP_SIZE_ASSERT(NetworkSettings, 0x124)
 // SYNTHETIC: WEBSERVICE 0x1021fa60
 // RBX::`dynamic initializer for 'prop_ExtraPingVariance''
 // SYNTHETIC: WEBSERVICE 0x1021fa90
-// STUB: ROBLOX 0x007ed620
 // RBX::`dynamic initializer for 'prop_MaxDataModelSendBuffer''
 // SYNTHETIC: WEBSERVICE 0x1021fac0
 // RBX::`dynamic initializer for 'prop_DataPacketSize''
@@ -69,7 +68,6 @@ DECOMP_SIZE_ASSERT(NetworkSettings, 0x124)
 // SYNTHETIC: WEBSERVICE 0x102261a0
 // RBX::`dynamic atexit destructor for 'prop_ExtraPingVariance''
 // SYNTHETIC: WEBSERVICE 0x102261c0
-// SYNTHETIC: ROBLOX 0x007f4ab0
 // RBX::`dynamic atexit destructor for 'prop_MaxDataModelSendBuffer''
 // SYNTHETIC: WEBSERVICE 0x102261e0
 // RBX::`dynamic atexit destructor for 'prop_PrintInstances''

@@ -629,7 +629,7 @@ address,type,symbol
 005b6760,synthetic,??_EWorkspace@RBX@@WDM@AEPAXI@Z
 005b6770,synthetic,?onCameraNear@ModelInstance@RBX@@$4PPPPPPPM@BEA@AEXM@Z
 005b6780,synthetic,??_EWorkspace@RBX@@WPI@AEPAXI@Z
-005b6790,stub,?getPrimaryPart@ModelInstance@RBX@@$4PPPPPPPM@BEA@AEPAVPartInstance@2@XZ
+005b6790,synthetic,?getPrimaryPart@ModelInstance@RBX@@$4PPPPPPPM@BEA@AEPAVPartInstance@2@XZ
 005b67a0,synthetic,??_EWorkspace@RBX@@WJM@AEPAXI@Z
 005b7ff0,synthetic,??_ERootInstance@RBX@@OBE@AEPAXI@Z
 005b8000,synthetic,??_ERootInstance@RBX@@OFE@AEPAXI@Z

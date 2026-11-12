@@ -14,6 +14,7 @@
 namespace RBX {
 namespace LDraw2Lua {
 
+static const RBX::Name& g_unk0x00955318 = RBX::Name::declare("LDraw2RobloxMap", -1);
 static const RBX::Name& g_unk0x0095531c = RBX::Name::declare("schema_version", -1);
 static const RBX::Name& g_unk0x00955320 = RBX::Name::declare("color_map", -1);
 static const RBX::Name& g_unk0x00955324 = RBX::Name::declare("color", -1);

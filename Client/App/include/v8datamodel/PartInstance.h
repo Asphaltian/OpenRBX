@@ -289,9 +289,9 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // RBX::`dynamic initializer for 'desc_join''
 // FUNCTION: WEBSERVICE 0x1021aa10
 // RBX::`dynamic initializer for 'desc_getMass''
-// STUB: WEBSERVICE 0x1021aa50
+// FUNCTION: WEBSERVICE 0x1021aa50
 // `dynamic initializer for 'RBX::PartInstance::prop_shapeXml''
-// STUB: WEBSERVICE 0x1021aab0
+// FUNCTION: WEBSERVICE 0x1021aab0
 // RBX::`dynamic initializer for 'prop_shapeUi''
 // FUNCTION: WEBSERVICE 0x1021ab10
 // `dynamic initializer for 'RBX::PartInstance::prop_Color''
@@ -309,17 +309,17 @@ DECOMP_SIZE_ASSERT(PartInstance, 0x2ac)
 // `dynamic initializer for 'RBX::PartInstance::prop_CanCollide''
 // FUNCTION: WEBSERVICE 0x1021adb0
 // `dynamic initializer for 'RBX::PartInstance::prop_RenderImportance''
-// STUB: WEBSERVICE 0x1021ae10
+// FUNCTION: WEBSERVICE 0x1021ae10
 // RBX::`dynamic initializer for 'prop_SizeUi''
-// STUB: WEBSERVICE 0x1021ae70
+// FUNCTION: WEBSERVICE 0x1021ae70
 // `dynamic initializer for 'RBX::PartInstance::prop_Size''
-// STUB: WEBSERVICE 0x1021aed0
+// FUNCTION: WEBSERVICE 0x1021aed0
 // RBX::`dynamic initializer for 'prop_FormFactorUi''
-// STUB: WEBSERVICE 0x1021af30
+// FUNCTION: WEBSERVICE 0x1021af30
 // RBX::`dynamic initializer for 'prop_formFactor''
-// STUB: WEBSERVICE 0x1021af90
+// FUNCTION: WEBSERVICE 0x1021af90
 // RBX::`dynamic initializer for 'prop_Elasticity''
-// STUB: WEBSERVICE 0x1021aff0
+// FUNCTION: WEBSERVICE 0x1021aff0
 // RBX::`dynamic initializer for 'prop_Friction''
 // FUNCTION: WEBSERVICE 0x1021b050
 // `dynamic initializer for 'RBX::PartInstance::event_Touched''

@@ -28,7 +28,7 @@ void AggregateChunk::makeMesh()
 }
 
 // FUNCTION: WEBSERVICE 0x101f9740
-// STUB: ROBLOX 0x004a1b80
+// FUNCTION: ROBLOX 0x004a1b80
 void AggregateChunk::renderShadows(
 	G3D::RenderDevice* rd, const G3D::GLight& light, bool caps, float shadowVertexDistance
 )

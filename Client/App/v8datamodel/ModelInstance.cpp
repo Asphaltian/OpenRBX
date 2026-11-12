@@ -281,12 +281,14 @@ void ModelInstance::onCameraNear(float distance)
 }
 
 // FUNCTION: WEBSERVICE 0x1005b220 FOLDED
+// FUNCTION: ROBLOX 0x00565e70 FOLDED
 PartInstance* ModelInstance::getPrimaryPart()
 {
 	return getPrimaryPartInternal();
 }
 
 // FUNCTION: WEBSERVICE 0x1005b220 FOLDED
+// FUNCTION: ROBLOX 0x00565e70 FOLDED
 const PartInstance* ModelInstance::getPrimaryPartConst() const
 {
 	return getPrimaryPartInternal();
