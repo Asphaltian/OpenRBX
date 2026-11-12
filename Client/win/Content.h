@@ -27,6 +27,8 @@ public:
 	END_COM_MAP()
 	// clang-format on
 
+	DECLARE_PROTECT_FINAL_CONSTRUCT()
+
 	STDMETHOD(Upload)(BSTR url);
 
 	std::stringstream m_unk0x0c; // 0x0c

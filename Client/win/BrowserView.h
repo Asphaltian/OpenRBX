@@ -121,8 +121,11 @@ class CBrowserDoc : public CNullDoc
 	// SYNTHETIC: ROBLOX 0x0040a1a0
 	// ?GetThisClass@CBrowserDoc@@SGPAUCRuntimeClass@@XZ
 
+	// SYNTHETIC: ROBLOX 0x0040a820
+	// ?CreateObject@CBrowserDoc@@SGPAVCObject@@XZ
+
 protected:
-	CBrowserDoc() {}
+	CBrowserDoc() : m_unk0x54(NULL) {}
 
 public:
 	CBrowserView* m_unk0x54; // 0x54

@@ -5,6 +5,8 @@
 #define VC_EXTRALEAN
 #endif
 
+#define _ATL_APARTMENT_THREADED
+
 // clang-format off
 #include <afxwin.h>
 #include <afxext.h>
