@@ -838,7 +838,31 @@ MouseCommand* AxisMoveTool::onMouseUp(const UIEvent& uiEvent)
 // STUB: ROBLOX 0x0063c920
 void AxisMoveTool::onMouseMove(const UIEvent& uiEvent)
 {
-	STUB(0x63c920);
+	if (!m_unk0x44) {
+		if ((G3D::Vector2(uiEvent.mousePosition) - G3D::Vector2(m_unk0x46)).length() > 4.0f) {
+			ServiceClient<FilteredSelection<PVInstance> > selection(workspace);
+			dragger.reset(new MegaDragger(NULL, selection->items(), workspace));
+			dragger->startDragging();
+			dragger->alignAndCleanParts();
+			m_unk0x44 = true;
+		}
+		if (!m_unk0x44) {
+			return;
+		}
+	}
+
+	if (dragger->anyDragPartAlive()) {
+		G3D::Vector3 closest = Math::closestPointOnRay(m_unk0x4c, getUnitMouseRay(uiEvent));
+		closest = Math::toGrid(closest, FUN_0063c5c0());
+		G3D::Vector3 delta = Math::toGrid(closest - m_unk0x6c, FUN_0063c5c0());
+		if (delta != G3D::Vector3::zero()) {
+			dragger->continueDragging();
+			G3D::Vector3 moved = dragger->safeMoveAlongLine(delta);
+			if (moved != G3D::Vector3::zero()) {
+				m_unk0x6c = Math::toGrid(m_unk0x6c + moved, FUN_0063c5c0());
+			}
+		}
+	}
 }
 
 // FUNCTION: ROBLOX 0x0063cc60

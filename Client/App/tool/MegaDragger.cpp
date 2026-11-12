@@ -18,6 +18,12 @@ void MegaDragger::continueDragging()
 	DragUtilities::unJoinAndSetDragging(dragParts);
 }
 
+// FUNCTION: ROBLOX 0x0061cfb0
+bool MegaDragger::anyDragPartAlive()
+{
+	return DragUtilities::anyPartAlive(dragParts);
+}
+
 // FUNCTION: WEBSERVICE 0x10116210
 // FUNCTION: ROBLOX 0x0061d020
 bool MegaDragger::mousePartAlive()
@@ -88,6 +94,20 @@ G3D::Vector3 MegaDragger::safeMoveNoDrop(const G3D::Vector3& tryDrag)
 	DragUtilities::partsToPrimitives(dragParts, primitives);
 
 	return Dragger::safeMoveNoDrop(primitives, tryDrag, *contactManager);
+}
+
+// FUNCTION: ROBLOX 0x0061d440
+G3D::Vector3 MegaDragger::safeMoveAlongLine(const G3D::Vector3& tryDrag)
+{
+	G3D::Array<Primitive*> primitives;
+	DragUtilities::partsToPrimitives(dragParts, primitives);
+
+	if (primitives.size() > 0) {
+		G3D::Vector3 answer = Dragger::safeMoveAlongLine(primitives, tryDrag, *contactManager);
+		return answer;
+	}
+
+	return G3D::Vector3::zero();
 }
 
 // FUNCTION: WEBSERVICE 0x10116630
