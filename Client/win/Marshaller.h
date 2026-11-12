@@ -37,7 +37,7 @@ public:
 	virtual void OnFinalMessage(HWND hWnd) { delete this; }
 
 	// FUNCTION: ROBLOX 0x00418fd0
-	void FUN_00418fd0(boost::function<void()> function)
+	void FUN_00418fd0(boost::function0<void> function)
 	{
 		{
 			boost::mutex::scoped_lock lock(m_unk0x40);
@@ -52,10 +52,10 @@ public:
 private:
 	LRESULT FUN_00418660(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
-	int m_unk0x24;                                  // 0x24
-	DWORD m_unk0x28;                                // 0x28
-	std::deque<boost::function<void()> > m_unk0x2c; // 0x2c
-	boost::mutex m_unk0x40;                         // 0x40
+	int m_unk0x24;                                 // 0x24
+	DWORD m_unk0x28;                               // 0x28
+	std::deque<boost::function0<void> > m_unk0x2c; // 0x2c
+	boost::mutex m_unk0x40;                        // 0x40
 
 	static std::map<DWORD, Marshaller*> g_unk0x00953144;
 	static boost::recursive_mutex g_unk0x00953150;

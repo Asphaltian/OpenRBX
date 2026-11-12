@@ -77,11 +77,11 @@ std::map<DWORD, Marshaller*> Marshaller::g_unk0x00953144;
 // GLOBAL: ROBLOX 0x00953150
 boost::recursive_mutex Marshaller::g_unk0x00953150;
 
-// STUB: ROBLOX 0x00418660
+// FUNCTION: ROBLOX 0x00418660
 LRESULT Marshaller::FUN_00418660(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	try {
-		boost::function<void()> function;
+		boost::function0<void> function;
 		{
 			boost::mutex::scoped_lock lock(m_unk0x40);
 			function = m_unk0x2c.front();

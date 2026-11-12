@@ -153,7 +153,7 @@ const char* get_thread_name()
 }
 
 // FUNCTION: WEBSERVICE 0x10034080
-// STUB: ROBLOX 0x005aba90
+// FUNCTION: ROBLOX 0x005aba90
 void run_in_background(const boost::function0<void>& threadfunc, std::string name)
 {
 	try {

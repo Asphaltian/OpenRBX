@@ -885,7 +885,7 @@ address,size,type,symbol,name
 005c4c90,0x84,library,??$?0VSound@Soundscape@RBX@@@shared_count@detail@boost@@QAE@PAVSound@Soundscape@RBX@@@Z,
 005c4d20,0x7c,library,??$assign_to@V?$bind_t@ABIP6AABIPBI@ZV?$list1@V?$value@PBI@_bi@boost@@@_bi@boost@@@_bi@boost@@@?$function0@IV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXV?$bind_t@ABIP6AABIPBI@ZV?$list1@V?$value@PBI@_bi@boost@@@_bi@boost@@@_bi@1@@Z,
 005c4da0,0x1a,library,?dispose@?$sp_counted_impl_p@VSound@Soundscape@RBX@@@detail@boost@@UAEXXZ,
-005c6ad0,0x4f,library,??R?$function0@XV?$allocator@Vfunction_base@boost@@@std@@@boost@@QBEXXZ,
+005c6ad0,0x4f,library,??R?$function0@NV?$allocator@Vfunction_base@boost@@@std@@@boost@@QBENXZ,
 005c8370,0x116,library,??$lexical_cast@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@boost@@YAHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 005c8490,0x116,library,??$lexical_cast@IV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@boost@@YAIABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
 005c85b0,0x119,library,??$lexical_cast@NV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@boost@@YANABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,
