@@ -10,8 +10,8 @@
 namespace RBX {
 namespace Render {
 
-// STUB: WEBSERVICE 0x10168ea0
-// STUB: ROBLOX 0x004a0480
+// FUNCTION: WEBSERVICE 0x10168ea0
+// FUNCTION: ROBLOX 0x004a0480
 void TextureProxy::shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& lighting)
 {
 	for (int i = 0; i < 3; i++) {
@@ -19,7 +19,7 @@ void TextureProxy::shadePixel(const G3D::Color3uint8& base, G3D::Color3uint8& li
 		float color = base[i];
 
 		if (shade > 130) {
-			float a = std::min(float((shade - 128.0) / 128.0), 1.0f);
+			float a = std::min(float(float(shade - 128.0) / 128.0f), 1.0f);
 			color = (1.0 - a) * color + 255.0 * a;
 		}
 		else if (shade < 126) {
