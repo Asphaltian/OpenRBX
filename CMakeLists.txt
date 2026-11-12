@@ -56,7 +56,19 @@ function(add_cxx_warning WARNING)
   cmake_pop_check_state()
 
   if (${varname})
-    add_compile_options(${compiler_option})
+    set(OPENRBX_WARNING_OPTIONS ${OPENRBX_WARNING_OPTIONS} ${compiler_option} PARENT_SCOPE)
+  endif()
+endfunction()
+
+function(openrbx_compile_defaults NAME)
+  if (OPENRBX_WARNING_OPTIONS)
+    target_compile_options(${NAME} PRIVATE ${OPENRBX_WARNING_OPTIONS})
+  endif()
+  if (MSVC)
+    target_compile_options(${NAME} PRIVATE /W3)
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "15")
+      target_compile_definitions(${NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
+    endif()
   endif()
 endfunction()
 
@@ -91,10 +103,6 @@ add_subdirectory(3rdparty)
 set(OPENRBX_BOOST_LIBS boost_signals boost_thread boost_date_time)
 set(OPENRBX_G3D_LIBS   graphics3d glg3d)
 set(OPENRBX_MESA_LIBS  opengl32 glu32 osmesa32)
-
-if (MSVC)
-  add_compile_options(/W3)
-endif()
 
 set(OPENRBX_APP_SOURCES
   Client/App/security/SecurityContext.cpp
@@ -433,6 +441,7 @@ function(add_engine_library NAME)
     return()
   endif()
   add_library(${NAME} OBJECT ${ARGS_SOURCES})
+  openrbx_compile_defaults(${NAME})
   target_compile_definitions(${NAME} PRIVATE ${OPENRBX_COMMON_DEFINITIONS} ${ARGS_DEFINITIONS})
   target_include_directories(${NAME} PRIVATE ${OPENRBX_ENGINE_INCLUDE_DIRS} ${OPENRBX_3RDPARTY_INCLUDE_DIRS})
   if (MSVC_FOR_DECOMP AND ARGS_OPTIONS)
@@ -572,6 +581,7 @@ if (MSVC_FOR_DECOMP)
   endforeach()
 
   add_library(toolkitpro STATIC ${OPENRBX_TOOLKITPRO_SOURCES})
+  openrbx_compile_defaults(toolkitpro)
   target_compile_definitions(toolkitpro PRIVATE WIN32 _LIB NDEBUG _MBCS _AFXDLL ZLIB_WINAPI)
   target_include_directories(toolkitpro PRIVATE
     "${OPENRBX_TOOLKITPRO_WORKSPACE}"
@@ -608,6 +618,7 @@ add_library(webservice SHARED
   ${OPENRBX_WEBSERVICE_SOURCES}
   util/decomp.cpp
 )
+openrbx_compile_defaults(webservice)
 target_compile_definitions(webservice PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _USRDLL _CRT_SECURE_NO_WARNINGS
   _ATL_NO_COM_SUPPORT)
 reccmp_add_target(webservice ID WEBSERVICE)
@@ -734,6 +745,7 @@ if (MSVC_FOR_DECOMP)
     "${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_i.c"
     util/decomp.cpp
   )
+  openrbx_compile_defaults(roblox)
   target_compile_definitions(roblox PRIVATE ${OPENRBX_COMMON_DEFINITIONS} _CRT_SECURE_NO_WARNINGS _AFXDLL _XTP_STATICLINK)
   target_precompile_headers(roblox PRIVATE "${PROJECT_SOURCE_DIR}/Client/win/StdAfx.h")
   set_source_files_properties("${OPENRBX_ROBLOX_MIDL_DIR}/Roblox_i.c" PROPERTIES SKIP_PRECOMPILE_HEADERS ON)
@@ -793,15 +805,6 @@ if (MSVC_FOR_DECOMP)
   endforeach()
 
   set_property(TARGET roblox PROPERTY OUTPUT_NAME "Roblox")
-endif()
-
-if (MSVC)
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "15")
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-  endif()
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "19.14.26428")
-    add_compile_options(-Zc:__cplusplus)
-  endif()
 endif()
 
 if (OPENRBX_DECOMP_ASSERT)
