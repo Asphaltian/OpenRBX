@@ -68,7 +68,7 @@ void DrawAdorn::partSurface(const Part& part, int surfaceId, Adorn* adorn, const
 	surfaceBorder(adorn, halfRealSize, 0.2f, surfaceId, color);
 }
 
-// STUB: ROBLOX 0x00670e40
+// FUNCTION: ROBLOX 0x00670e40
 void DrawAdorn::handles3d(
 	const G3D::Vector3& p_unk0x04,
 	const G3D::CoordinateFrame& p_unk0x08,
@@ -77,7 +77,45 @@ void DrawAdorn::handles3d(
 	const G3D::Vector3& p_unk0x14
 )
 {
-	STUB(0x670e40);
+	G3D::Vector3 halfSize = p_unk0x04 * 0.5;
+
+	for (int posNeg = 0; posNeg < 2; posNeg++) {
+		float polarity = posNeg < 1.0f ? -1.0f : 1.0f;
+
+		for (int axis = 0; axis < 3; axis++) {
+			switch (p_unk0x10) {
+			case HANDLE_RESIZE:
+			case HANDLE_VELOCITY: {
+				G3D::Vector3 handleInPart;
+				handleInPart[axis] = (halfSize[axis] + HitTest::handleOffset()) * polarity;
+				G3D::Vector3 handleInWorld = p_unk0x08.pointToWorldSpace(handleInPart);
+				float radius = HitTest::distanceToHandleRadius(p_unk0x14, handleInWorld);
+				p_unk0x0c->setObjectToWorldMatrix(G3D::CoordinateFrame(handleInWorld));
+				G3D::Color4 color(resizeColor(), 1.0f);
+				p_unk0x0c->sphere(G3D::Sphere(G3D::Vector3::zero(), radius), color, G3D::Color4::clear());
+				break;
+			}
+			case HANDLE_MOVE: {
+				G3D::Ray ray;
+				ray.origin[axis] = polarity * halfSize[axis];
+				ray.direction[axis] = polarity * 3.5f;
+				G3D::Vector3 originInWorld = p_unk0x08.pointToWorldSpace(ray.origin);
+				float scale = HitTest::distanceToHandleRadius(p_unk0x14, originInWorld) * 4.0f;
+				p_unk0x0c->setObjectToWorldMatrix(p_unk0x08);
+				p_unk0x0c->ray(ray, G3D::Color4(G3D::Color3::orange(), 1.0f), scale);
+				break;
+			}
+			default: {
+				G3D::Vector3 handleInPart;
+				handleInPart[axis] = (halfSize[axis] + 4.0f) * polarity;
+				G3D::Vector3 handleInWorld = p_unk0x08.translation + handleInPart;
+				p_unk0x0c->setObjectToWorldMatrix(G3D::CoordinateFrame(handleInWorld));
+				cylinder(p_unk0x0c, p_unk0x08, 0, 1.0f, 0.5f, G3D::Color3::red());
+				break;
+			}
+			}
+		}
+	}
 }
 
 // STUB: ROBLOX 0x00671300
