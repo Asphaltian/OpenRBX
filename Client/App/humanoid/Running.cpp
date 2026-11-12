@@ -28,8 +28,8 @@ const float Running::kAltitudeP = 10000.0f;
 const float Running::kAltitudeD = 1250.0f;
 const G3D::Vector3 Running::maxMoveAccelerationGrid(1000.0f, 10000.0f, 200.0f);
 
-// STUB: WEBSERVICE 0x10106260
-// STUB: ROBLOX 0x006408d0
+// FUNCTION: WEBSERVICE 0x10106260
+// FUNCTION: ROBLOX 0x006408d0
 void Running::onComputeForce(const float dt)
 {
 	Balancing::onComputeForce(dt);
@@ -93,8 +93,9 @@ void Running::onComputeForce(const float dt)
 		desiredVelocity.y > 0.0f ? (desiredVelocity.y - currentVelocity.linear.y) * kAltitudeD : currentAccel.y;
 	float accelZ = (desiredVelocityInWorldZ - currentVelocity.linear.z) * kAltitudeD;
 
+	G3D::Vector3 accel(accelX, accelY, accelZ);
 	G3D::Vector3 deltaAccel =
-		(G3D::Vector3(accelX, accelY, accelZ) - currentAccel)
+		(accel - currentAccel)
 			.clamp(G3D::Vector3(-maxMoveAccelerationGrid.x, 0.0f, -maxMoveAccelerationGrid.z), maxMoveAccelerationGrid);
 
 	G3D::Vector3 deltaForce = deltaAccel * mass;
