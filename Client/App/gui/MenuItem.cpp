@@ -12,17 +12,17 @@ MenuItem::MenuItem(Verb* p_unk0x04, const std::string& p_unk0x08) : VerbWidget(p
 }
 
 // FUNCTION: ROBLOX 0x00657a10
-void MenuItem::render2d(Adorn* p_unk0x04)
+void MenuItem::render2d(Adorn* adorn)
 {
 	if (widgetState == HOVER || widgetState == DOWN_OVER) {
-		p_unk0x04->rect2d(getMyRect2D(), menuSelect());
+		adorn->rect2d(getMyRect2D(), menuSelect());
 	}
 
 	bool enabled = isEnabled();
 	const G3D::Color4& fontColor = isEnabled() ? menuEnabledFill() : menuDisabledFill();
 
 	label2d(
-		p_unk0x04,
+		adorn,
 		getVerb() != NULL && getVerb()->isChecked() ? "x " + getTitle() : getTitle(),
 		fontColor,
 		G3D::Color4::clear(),
@@ -31,7 +31,7 @@ void MenuItem::render2d(Adorn* p_unk0x04)
 
 	if (accelerator.size() > 0) {
 		label2d(
-			p_unk0x04,
+			adorn,
 			accelerator,
 			isEnabled() ? menuEnabledFill() : menuDisabledFill(),
 			G3D::Color4::clear(),

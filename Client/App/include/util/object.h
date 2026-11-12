@@ -135,13 +135,13 @@ public:
 	// TEMPLATE: ROBLOX 0x00572f70
 	// RBX::Creatable<RBX::Instance>::create<RBX::Stats::TypedStatsItem<int>,boost::function0<int,std::allocator<boost::function_base> > >
 	// TEMPLATE: WEBSERVICE 0x100691f0
-	// STUB: ROBLOX 0x0040ed10
+	// TEMPLATE: ROBLOX 0x0040ed10
 	// RBX::Creatable<RBX::Instance>::create<RBX::Team>
 	// TEMPLATE: WEBSERVICE 0x10069460
 	// TEMPLATE: ROBLOX 0x0040efa0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Network::Player>
 	// TEMPLATE: WEBSERVICE 0x1006bd80
-	// STUB: ROBLOX 0x00461df0
+	// TEMPLATE: ROBLOX 0x00461df0
 	// RBX::Creatable<RBX::Instance>::create<RBX::Camera>
 	// TEMPLATE: WEBSERVICE 0x1006be50
 	// TEMPLATE: ROBLOX 0x00460a70
@@ -203,7 +203,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004cb470
 	// RBX::Creatable<RBX::Instance>::create<RBX::RotateV>
 	// TEMPLATE: WEBSERVICE 0x100774c0
-	// STUB: ROBLOX 0x004cb700
+	// TEMPLATE: ROBLOX 0x004cb700
 	// RBX::Creatable<RBX::Instance>::create<RBX::Motor>
 	// TEMPLATE: WEBSERVICE 0x10077730
 	// TEMPLATE: ROBLOX 0x004a6d30
@@ -299,7 +299,7 @@ public:
 	// TEMPLATE: ROBLOX 0x004a9240
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpawnLocation>
 	// TEMPLATE: WEBSERVICE 0x1008da40
-	// STUB: ROBLOX 0x004a94d0
+	// TEMPLATE: ROBLOX 0x004a94d0
 	// RBX::Creatable<RBX::Instance>::create<RBX::SpawnerService>
 	// TEMPLATE: WEBSERVICE 0x1008e7a0
 	// TEMPLATE: ROBLOX 0x005ce020

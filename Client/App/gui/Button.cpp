@@ -20,23 +20,23 @@ GuiResponse KeyButton::process(const GuiEvent& p_unk0x04)
 }
 
 // FUNCTION: ROBLOX 0x00657c30
-void KeyButton::onDown(const UIEvent& p_unk0x04)
+void KeyButton::onDown(const UIEvent& event)
 {
-	p_unk0x04.userInput->setKeyState(keyCode, true);
+	event.userInput->setKeyState(keyCode, true);
 }
 
 // FUNCTION: ROBLOX 0x00657c50
-void KeyButton::onUp(const UIEvent& p_unk0x04)
+void KeyButton::onUp(const UIEvent& event)
 {
-	p_unk0x04.userInput->setKeyState(keyCode, false);
+	event.userInput->setKeyState(keyCode, false);
 }
 
 // FUNCTION: ROBLOX 0x00657c70
-void ImageKeyButton::render2d(Adorn* p_unk0x04)
+void ImageKeyButton::render2d(Adorn* adorn)
 {
 	if (isVisible()) {
 		imageDraw.render2d(
-			p_unk0x04,
+			adorn,
 			isEnabled(),
 			const_cast<Rect&>(static_cast<const Rect&>(getMyRect())),
 			keyIsDown ? DOWN_OVER : widgetState
@@ -45,21 +45,19 @@ void ImageKeyButton::render2d(Adorn* p_unk0x04)
 }
 
 // FUNCTION: ROBLOX 0x00657cd0
-void ImageWidget::render2d(Adorn* p_unk0x04)
+void ImageWidget::render2d(Adorn* adorn)
 {
 	if (isVisible()) {
-		guiImageDraw.render2d(
-			p_unk0x04, isEnabled(), const_cast<Rect&>(static_cast<const Rect&>(getMyRect())), NOTHING
-		);
+		guiImageDraw.render2d(adorn, isEnabled(), const_cast<Rect&>(static_cast<const Rect&>(getMyRect())), NOTHING);
 	}
 }
 
 // FUNCTION: ROBLOX 0x00657d20
-void ImageButton::render2d(Adorn* p_unk0x04)
+void ImageButton::render2d(Adorn* adorn)
 {
 	if (isVisible()) {
 		guiImageDraw.render2d(
-			p_unk0x04, isEnabled(), const_cast<Rect&>(static_cast<const Rect&>(getMyRect())), widgetState
+			adorn, isEnabled(), const_cast<Rect&>(static_cast<const Rect&>(getMyRect())), widgetState
 		);
 	}
 }

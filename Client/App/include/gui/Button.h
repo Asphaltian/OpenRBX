@@ -21,8 +21,8 @@ private:
 protected:
 	bool keyIsDown; // 0x114
 
-	virtual void onDown(const UIEvent& p_unk0x04);
-	virtual void onUp(const UIEvent& p_unk0x04);
+	virtual void onDown(const UIEvent& event);
+	virtual void onUp(const UIEvent& event);
 	virtual bool isEnabled() { return true; }
 	virtual GuiResponse process(const GuiEvent& p_unk0x04);
 
@@ -41,7 +41,7 @@ private:
 public:
 	ImageKeyButton(Adorn* p_unk0x04, const std::string& p_unk0x08, SDLKey p_unk0x0c);
 
-	virtual void render2d(Adorn* p_unk0x04);
+	virtual void render2d(Adorn* adorn);
 
 	// FUNCTION: ROBLOX 0x006581f0
 	virtual G3D::Vector2 getSize() const { return imageDraw.getImageSize(); }
@@ -63,7 +63,7 @@ private:
 public:
 	ImageWidget(Adorn* p_unk0x04, const std::string& p_unk0x08);
 
-	virtual void render2d(Adorn* p_unk0x04);
+	virtual void render2d(Adorn* adorn);
 
 	// FUNCTION: ROBLOX 0x00657ee0
 	virtual G3D::Vector2 getSize() const { return guiImageDraw.getImageSize(); }
@@ -85,7 +85,7 @@ protected:
 public:
 	ImageButton(Adorn* p_unk0x04, Verb* p_unk0x08, const std::string& p_unk0x0c);
 
-	virtual void render2d(Adorn* p_unk0x04);
+	virtual void render2d(Adorn* adorn);
 
 	void setSize(const G3D::Vector2& p_unk0x04) { guiImageDraw.setImageSize(p_unk0x04); }
 

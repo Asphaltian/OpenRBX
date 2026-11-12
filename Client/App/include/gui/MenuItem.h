@@ -23,7 +23,7 @@ public:
 	MenuItem(Verb* p_unk0x04, const std::string& p_unk0x08, std::string p_unk0x0c);
 	MenuItem(Verb* p_unk0x04, const std::string& p_unk0x08);
 
-	virtual void render2d(Adorn* p_unk0x04);
+	virtual void render2d(Adorn* adorn);
 
 	// SYNTHETIC: ROBLOX 0x00657930
 	// RBX::MenuItem::~MenuItem

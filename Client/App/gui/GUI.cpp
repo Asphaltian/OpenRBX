@@ -166,9 +166,9 @@ void TextDisplay::init()
 }
 
 // FUNCTION: ROBLOX 0x0058cfd0
-void TextDisplay::render2d(Adorn* p_unk0x04)
+void TextDisplay::render2d(Adorn* adorn)
 {
-	label2d(p_unk0x04, getLabel(), fontColor, borderColor, align);
+	label2d(adorn, getLabel(), fontColor, borderColor, align);
 }
 
 // FUNCTION: WEBSERVICE 0x100d1270
@@ -385,11 +385,11 @@ void UnifiedWidget::render2dChildren(Adorn* p_unk0x04)
 }
 
 // FUNCTION: ROBLOX 0x0058dc50
-void UnifiedWidget::render2d(Adorn* p_unk0x04)
+void UnifiedWidget::render2d(Adorn* adorn)
 {
 	if (isVisible()) {
-		render2dMe(p_unk0x04);
-		render2dChildren(p_unk0x04);
+		render2dMe(adorn);
+		render2dChildren(adorn);
 	}
 }
 
@@ -416,7 +416,7 @@ G3D::Vector2 UnifiedWidget::firstChildPosition() const
 }
 
 // FUNCTION: ROBLOX 0x0058dd60
-G3D::Vector2 UnifiedWidget::getChildPosition(const GuiItem* p_unk0x04) const
+G3D::Vector2 UnifiedWidget::getChildPosition(const GuiItem* child) const
 {
 	G3D::Vector2 position = firstChildPosition();
 
@@ -424,7 +424,7 @@ G3D::Vector2 UnifiedWidget::getChildPosition(const GuiItem* p_unk0x04) const
 		const GuiItem* item = getGuiItem(i);
 
 		if (item != NULL) {
-			if (item == p_unk0x04) {
+			if (item == child) {
 				return position;
 			}
 

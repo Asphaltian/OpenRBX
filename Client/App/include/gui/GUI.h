@@ -249,7 +249,7 @@ private:
 	GuiResponse processShown(const GuiEvent& p_unk0x04);
 	GuiResponse processKey(const GuiEvent& p_unk0x04);
 	void render2dChildren(Adorn* p_unk0x04);
-	virtual G3D::Vector2 getChildPosition(const GuiItem* p_unk0x04) const;
+	virtual G3D::Vector2 getChildPosition(const GuiItem* child) const;
 	virtual bool canLoseFocus() { return true; }
 	virtual void onLoseFocus() { menuState = NOTHING; }
 	virtual int getFontSize() const;
@@ -271,7 +271,7 @@ public:
 	void setMenuState(MenuState p_unk0x04);
 
 	virtual GuiResponse process(const GuiEvent& p_unk0x04);
-	virtual void render2d(Adorn* p_unk0x04);
+	virtual void render2d(Adorn* adorn);
 };
 
 DECOMP_SIZE_ASSERT(UnifiedWidget, 0x110)
@@ -309,7 +309,7 @@ public:
 	TextDisplay(const std::string& p_unk0x04, const std::string& p_unk0x08);
 	TextDisplay();
 
-	virtual void render2d(Adorn* p_unk0x04);
+	virtual void render2d(Adorn* adorn);
 
 	void setLabel(const std::string& value) { label = value; }
 
