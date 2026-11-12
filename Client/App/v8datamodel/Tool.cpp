@@ -502,63 +502,65 @@ inline void Tool::downFrom_HasHandle()
 	handleTouched.disconnect();
 }
 
-// STUB: WEBSERVICE 0x100cc4b0
-// STUB: ROBLOX 0x00611080
+// FUNCTION: WEBSERVICE 0x100cc4b0
+// FUNCTION: ROBLOX 0x00611080
 void Tool::setDesiredState(ToolState desiredState, const ServiceProvider* serviceProvider)
 {
-	do {
-		if (desiredState > backendToolState) {
-			switch (backendToolState) {
-			case ACTIVATED:
-				debugAssert(false);
-				break;
-			case EQUIPPED:
-				upTo_Activated();
-				break;
-			case HAS_TORSO:
-				upTo_Equipped();
-				break;
-			case IN_CHARACTER:
-				upTo_HasTorso();
-				break;
-			case IN_WORKSPACE:
-				upTo_InCharacter();
-				break;
-			case HAS_HANDLE:
-				upTo_InWorkspace();
-				break;
-			case NOTHING:
-				upTo_HasHandle();
-				break;
-			}
-
-			setBackendToolState(backendToolState + 1);
+	if (desiredState > backendToolState) {
+		switch (backendToolState) {
+		case ACTIVATED:
+			debugAssert(false);
+			break;
+		case EQUIPPED:
+			upTo_Activated();
+			break;
+		case HAS_TORSO:
+			upTo_Equipped();
+			break;
+		case IN_CHARACTER:
+			upTo_HasTorso();
+			break;
+		case IN_WORKSPACE:
+			upTo_InCharacter();
+			break;
+		case HAS_HANDLE:
+			upTo_InWorkspace();
+			break;
+		case NOTHING:
+			upTo_HasHandle();
+			break;
 		}
-		else if (desiredState < backendToolState) {
-			switch (backendToolState) {
-			case EQUIPPED:
-				downFrom_Equipped();
-				break;
-			case HAS_TORSO:
-				downFrom_HasTorso();
-				break;
-			case IN_CHARACTER:
-				downFrom_InCharacter();
-				break;
-			case IN_WORKSPACE:
-				downFrom_InWorkspace();
-				break;
-			case HAS_HANDLE:
-				downFrom_HasHandle();
-				break;
-			case NOTHING:
-				debugAssert(false);
-				break;
-			}
 
-			setBackendToolState(backendToolState - 1);
+		setBackendToolState(backendToolState + 1);
+	}
+	else if (desiredState < backendToolState) {
+		switch (backendToolState) {
+		case EQUIPPED:
+			downFrom_Equipped();
+			break;
+		case HAS_TORSO:
+			downFrom_HasTorso();
+			break;
+		case IN_CHARACTER:
+			downFrom_InCharacter();
+			break;
+		case IN_WORKSPACE:
+			downFrom_InWorkspace();
+			break;
+		case HAS_HANDLE:
+			downFrom_HasHandle();
+			break;
+		case NOTHING:
+			debugAssert(false);
+			break;
 		}
-	} while (desiredState != backendToolState);
+
+		setBackendToolState(backendToolState - 1);
+	}
+
+	if (desiredState != backendToolState) {
+		setDesiredState(desiredState, serviceProvider);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100cc5c0

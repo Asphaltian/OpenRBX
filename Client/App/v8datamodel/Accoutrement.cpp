@@ -384,48 +384,50 @@ void Accoutrement::setBackendAccoutrementState(int value)
 	}
 }
 
-// STUB: WEBSERVICE 0x100dcfe0
-// STUB: ROBLOX 0x005bc310
+// FUNCTION: WEBSERVICE 0x100dcfe0
+// FUNCTION: ROBLOX 0x005bc310
 void Accoutrement::setDesiredState(AccoutrementState desiredState, const ServiceProvider* serviceProvider)
 {
-	do {
-		if (desiredState > backendAccoutrementState) {
-			switch (backendAccoutrementState) {
-			case IN_CHARACTER:
-				upTo_Equipped();
-				break;
-			case IN_WORKSPACE:
-				upTo_InCharacter();
-				break;
-			case HAS_HANDLE:
-				upTo_InWorkspace();
-				break;
-			case NOTHING:
-				upTo_HasHandle();
-				break;
-			}
-
-			setBackendAccoutrementStateNoReplicate(backendAccoutrementState + 1);
+	if (desiredState > backendAccoutrementState) {
+		switch (backendAccoutrementState) {
+		case IN_CHARACTER:
+			upTo_Equipped();
+			break;
+		case IN_WORKSPACE:
+			upTo_InCharacter();
+			break;
+		case HAS_HANDLE:
+			upTo_InWorkspace();
+			break;
+		case NOTHING:
+			upTo_HasHandle();
+			break;
 		}
-		else if (desiredState < backendAccoutrementState) {
-			switch (backendAccoutrementState) {
-			case EQUIPPED:
-				downFrom_Equipped();
-				break;
-			case IN_CHARACTER:
-				downFrom_InCharacter();
-				break;
-			case IN_WORKSPACE:
-				downFrom_InWorkspace();
-				break;
-			case HAS_HANDLE:
-				downFrom_HasHandle();
-				break;
-			}
 
-			setBackendAccoutrementStateNoReplicate(backendAccoutrementState - 1);
+		setBackendAccoutrementStateNoReplicate(backendAccoutrementState + 1);
+	}
+	else if (desiredState < backendAccoutrementState) {
+		switch (backendAccoutrementState) {
+		case EQUIPPED:
+			downFrom_Equipped();
+			break;
+		case IN_CHARACTER:
+			downFrom_InCharacter();
+			break;
+		case IN_WORKSPACE:
+			downFrom_InWorkspace();
+			break;
+		case HAS_HANDLE:
+			downFrom_HasHandle();
+			break;
 		}
-	} while (desiredState != backendAccoutrementState);
+
+		setBackendAccoutrementStateNoReplicate(backendAccoutrementState - 1);
+	}
+
+	if (desiredState != backendAccoutrementState) {
+		setDesiredState(desiredState, serviceProvider);
+	}
 }
 
 // FUNCTION: WEBSERVICE 0x100dd0c0

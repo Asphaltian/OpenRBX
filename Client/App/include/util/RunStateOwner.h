@@ -115,37 +115,25 @@ public:
 
 	virtual ~RunService();
 
-	void setRunState(RunState state)
-	{
-		if (runState == state) {
-			return;
-		}
+	void setRunState(RunState state);
 
-		RunState oldState = runState;
-
-		runState = state;
-		Notifier<RunService, RunState>::raise(state);
-		Notifier<RunService, RunTransition>::raise(RunTransition(oldState, state));
-	}
-
-	// STUB: WEBSERVICE 0x100550f0
+	// FUNCTION: WEBSERVICE 0x100550f0
 	// FUNCTION: ROBLOX 0x00453e00
 	void run()
 	{
 		if (!runDisabled) {
-			FUN_00569480(RS_RUNNING);
+			setRunState(RS_RUNNING);
 		}
 	}
 
-	// STUB: WEBSERVICE 0x10055140
+	// FUNCTION: WEBSERVICE 0x10055140
 	// FUNCTION: ROBLOX 0x00453e20
-	void pause() { FUN_00569480(RS_PAUSED); }
+	void pause() { setRunState(RS_PAUSED); }
 
-	// STUB: WEBSERVICE 0x10055180
+	// FUNCTION: WEBSERVICE 0x10055180
 	// FUNCTION: ROBLOX 0x00453e30
-	void reset() { FUN_00569480(RS_NORMAL); }
+	void reset() { setRunState(RS_NORMAL); }
 
-	void FUN_00569480(RunState state);
 	void endRunThread(bool join);
 
 	void raiseHeartbeat(float time, float step);

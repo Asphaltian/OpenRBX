@@ -51,7 +51,7 @@ void RunService::onAncestorChanged(const AncestorChanged& event)
 }
 
 // FUNCTION: ROBLOX 0x00569480
-void RunService::FUN_00569480(RunState state)
+void RunService::setRunState(RunState state)
 {
 	if (state == RS_RUNNING) {
 		if (!isEditState() && !isPauseState()) {
@@ -64,7 +64,15 @@ void RunService::FUN_00569480(RunState state)
 		}
 	}
 
-	setRunState(state);
+	if (runState == state) {
+		return;
+	}
+
+	RunTransition transition(runState, state);
+
+	runState = state;
+	Notifier<RunService, RunState>::raise(state);
+	Notifier<RunService, RunTransition>::raise(transition);
 }
 
 // FUNCTION: WEBSERVICE 0x10054cb0

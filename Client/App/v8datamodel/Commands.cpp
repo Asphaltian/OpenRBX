@@ -991,9 +991,7 @@ void RunCommand::doIt(IDataState* dataState)
 {
 	playActionSound();
 	RunService* service = runService;
-	if (!service->runDisabled) {
-		service->FUN_00569480(RS_RUNNING);
-	}
+	service->run();
 }
 
 // FUNCTION: ROBLOX 0x0059bea0
@@ -1007,7 +1005,7 @@ void StopCommand::doIt(IDataState* dataState)
 {
 	playActionSound();
 	RunService* service = runService;
-	service->FUN_00569480(RS_PAUSED);
+	service->pause();
 }
 
 // FUNCTION: ROBLOX 0x0059bef0
@@ -1022,7 +1020,7 @@ void ResetCommand::doIt(IDataState* dataState)
 {
 	playActionSound();
 	RunService* service = runService;
-	service->FUN_00569480(RS_NORMAL);
+	service->reset();
 }
 
 // FUNCTION: ROBLOX 0x0059bf60
