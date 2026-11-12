@@ -10725,6 +10725,7 @@ address,type,size
 005f9fb0,function,270
 005fa0c0,function,112
 005fa130,function,147
+005fa1d0,function,5
 005fa1e0,function,37
 005fa210,function,126
 005fa290,function,34
@@ -12395,6 +12396,7 @@ address,type,size
 0063c5a0,function,23
 0063c5c0,function,51
 0063c600,function,7
+0063c610,function,122
 0063c690,function,25
 0063c6b0,function,135
 0063c740,function,33

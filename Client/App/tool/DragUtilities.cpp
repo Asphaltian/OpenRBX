@@ -242,4 +242,10 @@ void DragUtilities::getPrimitivesConst(const Instance* instance, std::vector<con
 	}
 }
 
+// FUNCTION: ROBLOX 0x005fa1d0
+void DragUtilities::getPrimitives(const Instance* instance, std::vector<Primitive*>& primitives)
+{
+	getPrimitivesConst(instance, reinterpret_cast<std::vector<const Primitive*>&>(primitives));
+}
+
 } // namespace RBX

@@ -28,6 +28,18 @@ void Dragger::movePrimitives(const G3D::Array<Primitive*>& primitives, const G3D
 	}
 }
 
+// FUNCTION: ROBLOX 0x0061db20
+Extents Dragger::computeExtents(const std::vector<Primitive*>& primitives)
+{
+	Extents answer = Extents::negativeInfiniteExtents();
+
+	for (unsigned int i = 0; i < primitives.size(); i++) {
+		answer.unionWith(primitives[i]->getExtentsWorld());
+	}
+
+	return answer;
+}
+
 // FUNCTION: WEBSERVICE 0x10105760
 // FUNCTION: ROBLOX 0x0061dc20
 Extents Dragger::computeExtents(const G3D::Array<Primitive*>& primitives)

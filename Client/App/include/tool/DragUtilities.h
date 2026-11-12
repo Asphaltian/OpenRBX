@@ -7,6 +7,7 @@
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Ray.h>
 #include <G3D/Vector3.h>
+#include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
 #include <vector>
 
@@ -57,8 +58,14 @@ public:
 		G3D::Vector3& hit
 	);
 	static bool anyPartAlive(const std::vector<boost::weak_ptr<PartInstance> >& parts);
-	static void getPrimitives2(boost::shared_ptr<Instance>, std::vector<Primitive*>&);
 	static void getPrimitives(const Instance*, std::vector<Primitive*>&);
+
+	// FUNCTION: ROBLOX 0x0063c610
+	static void getPrimitives2(boost::shared_ptr<Instance> instance, std::vector<Primitive*>& primitives)
+	{
+		getPrimitives(instance.get(), primitives);
+	}
+
 	static void getPrimitivesConst(const Instance* instance, std::vector<const Primitive*>& primitives);
 };
 

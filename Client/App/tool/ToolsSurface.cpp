@@ -4,7 +4,10 @@
 #include "humanoid/Humanoid.h"
 #include "rbxgraphics/Adorn.h"
 #include "tool/DragTool.h"
+#include "tool/DragUtilities.h"
+#include "tool/Dragger.h"
 #include "tool/GrabTool.h"
+#include "tool/MegaDragger.h"
 #include "tool/PartDragTool.h"
 #include "util/ContentProvider.h"
 #include "util/Math.h"
@@ -12,6 +15,7 @@
 #include "util/SoundWorld.h"
 #include "util/Units.h"
 #include "v8datamodel/Commands.h"
+#include "v8datamodel/DataModel.h"
 #include "v8datamodel/Explosion.h"
 #include "v8datamodel/ModelInstance.h"
 #include "v8datamodel/PartInstance.h"
@@ -19,6 +23,7 @@
 #include "v8datamodel/Workspace.h"
 #include "v8kernel/Constants.h"
 #include "v8tree/Service.h"
+#include "v8xml/SerializerV2.h"
 
 #include <G3D/CoordinateFrame.h>
 #include <G3D/LineSegment.h>
@@ -84,6 +89,9 @@ char sCloneTool[] = "Clone";
 
 // GLOBAL: ROBLOX 0x00948d48
 char sGameTool[] = "GameTool";
+
+// GLOBAL: ROBLOX 0x00948da0
+char sAxisMoveTool[] = "AxisMove";
 
 // FUNCTION: ROBLOX 0x00639820
 void FlatTool::VTable0x40(Surface* surface)
@@ -807,6 +815,156 @@ GameTool::~GameTool()
 // FUNCTION: ROBLOX 0x0063c4c0
 GameTool::GameTool(Workspace* workspace) : Named<MouseCommand, sGameTool>(workspace)
 {
+}
+
+// FUNCTION: ROBLOX 0x0063c6b0
+AxisMoveTool::AxisMoveTool(Workspace* workspace)
+	: Named<ArrowToolBase, sAxisMoveTool>(workspace), cursor("ArrowCursor"), m_unk0x44(false)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063c7f0
+MouseCommand* AxisMoveTool::onMouseUp(const UIEvent& uiEvent)
+{
+	if (m_unk0x44) {
+		dragger->finishDragging();
+		dragger.release();
+		m_unk0x44 = false;
+	}
+	releaseCapture();
+	return NULL;
+}
+
+// STUB: ROBLOX 0x0063c920
+void AxisMoveTool::onMouseMove(const UIEvent& uiEvent)
+{
+	STUB(0x63c920);
+}
+
+// FUNCTION: ROBLOX 0x0063cc60
+bool AxisMoveTool::FUN_0063cc60(Extents& extents)
+{
+	ServiceClient<Selection> selection(workspace);
+	std::vector<Primitive*> primitives;
+	std::for_each(
+		selection->begin(), selection->end(), boost::bind(&DragUtilities::getPrimitives2, _1, boost::ref(primitives))
+	);
+	if (primitives.size() != 0) {
+		extents = Dragger::computeExtents(primitives);
+		return true;
+	}
+
+	return false;
+}
+
+// FUNCTION: ROBLOX 0x0063ce30
+bool AxisMoveTool::FUN_0063ce30(const UIEvent& uiEvent, G3D::Vector3& hitPoint, NormalId& normalId)
+{
+	Extents extents;
+	if (FUN_0063cc60(extents)) {
+		if (FUN_00662700(extents, getUnitMouseRay(uiEvent), hitPoint, normalId)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// FUNCTION: ROBLOX 0x0063cf00
+MouseCommand* AxisMoveTool::onMouseDown(const UIEvent& uiEvent)
+{
+	G3D::Vector3 hitPoint;
+	NormalId normalId;
+	if (FUN_0063ce30(uiEvent, hitPoint, normalId)) {
+		m_unk0x46 = uiEvent.mousePosition;
+		m_unk0x68 = normalId % 3;
+		m_unk0x6c = Math::toGrid(hitPoint, FUN_0063c5c0());
+		m_unk0x4c = G3D::Ray::fromOriginAndDirection(m_unk0x6c, normalIdToVector3(normalId));
+		capture();
+		return this;
+	}
+
+	return ArrowToolBase::onMouseDown(uiEvent);
+}
+
+// FUNCTION: ROBLOX 0x0063d010
+void AxisMoveTool::render2d(Adorn* adorn)
+{
+	Extents extents;
+	if (FUN_0063cc60(extents)) {
+		CoordinateFrame location(extents.center());
+		G3D::Vector3 size = extents.size();
+		DrawAdorn::handles2d(size, location, workspace->getGCamera(), adorn, G3D::Color3::orange());
+	}
+}
+
+// STUB: ROBLOX 0x0063d120
+void AxisMoveTool::render3dAdorn(Adorn* adorn)
+{
+	Extents extents;
+	if (FUN_0063cc60(extents)) {
+		CoordinateFrame location(extents.center());
+		G3D::Vector3 size = extents.size();
+		DrawAdorn::handles3d(
+			size, location, adorn, HANDLE_MOVE, workspace->getGCamera().getCoordinateFrame().translation
+		);
+	}
+}
+
+// FUNCTION: ROBLOX 0x0063d240
+void AxisMoveTool::onMouseIdle(const UIEvent& uiEvent)
+{
+	ArrowToolBase::onMouseIdle(uiEvent);
+	if (captured()) {
+		cursor = "DragCursor";
+		return;
+	}
+
+	G3D::Vector3 hitPoint;
+	NormalId normalId;
+	if (FUN_0063ce30(uiEvent, hitPoint, normalId)) {
+		cursor = "ResizeCursor";
+	}
+	else {
+		cursor = ArrowToolBase::getCursorName();
+	}
+}
+
+// FUNCTION: ROBLOX 0x0063d320
+UndoVerb::UndoVerb(DataModel* dataModel) : Verb(dataModel, "Undo"), m_unk0x0c(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063d370
+RedoVerb::RedoVerb(DataModel* dataModel) : Verb(dataModel, "Redo"), m_unk0x0c(dataModel)
+{
+}
+
+// FUNCTION: ROBLOX 0x0063d3c0
+bool UndoVerb::isEnabled() const
+{
+	std::string name;
+	return m_unk0x0c->canUndo(name);
+}
+
+// FUNCTION: ROBLOX 0x0063d430
+void UndoVerb::doIt(IDataState* dataState)
+{
+	SerializerV2 serializer;
+	serializer.FUN_005a33f0(m_unk0x0c->undo()->getData(), m_unk0x0c);
+}
+
+// FUNCTION: ROBLOX 0x0063d4a0
+bool RedoVerb::isEnabled() const
+{
+	std::string name;
+	return m_unk0x0c->canRedo(name);
+}
+
+// FUNCTION: ROBLOX 0x0063d510
+void RedoVerb::doIt(IDataState* dataState)
+{
+	SerializerV2 serializer;
+	serializer.FUN_005a33f0(m_unk0x0c->redo()->getData(), m_unk0x0c);
 }
 
 } // namespace RBX

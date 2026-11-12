@@ -2,7 +2,9 @@
 #define TOOL_TOOLSARROW_H
 
 #include "decomp.h"
+#include "util/Extents.h"
 #include "util/Name.h"
+#include "util/NormalId.h"
 #include "v8datamodel/MouseCommand.h"
 #include "v8datamodel/Selection.h"
 #include "v8tree/Service.h"
@@ -98,8 +100,19 @@ private:
 	bool m_unk0x44;                     // 0x44
 	G3D::Vector2int16 m_unk0x46;        // 0x46
 	G3D::Ray m_unk0x4c;                 // 0x4c
-	undefined4 m_unk0x68;               // 0x68
+	int m_unk0x68;                      // 0x68
 	G3D::Vector3 m_unk0x6c;             // 0x6c
+
+	// FUNCTION: ROBLOX 0x0063c5c0
+	static const G3D::Vector3& FUN_0063c5c0()
+	{
+		static G3D::Vector3 v(1.0f, 0.4f, 1.0f);
+
+		return v;
+	}
+
+	bool FUN_0063cc60(Extents& extents);
+	bool FUN_0063ce30(const UIEvent& uiEvent, G3D::Vector3& hitPoint, NormalId& normalId);
 
 	virtual MouseCommand* onMouseDown(const UIEvent& uiEvent);
 	virtual void onMouseIdle(const UIEvent& uiEvent);
