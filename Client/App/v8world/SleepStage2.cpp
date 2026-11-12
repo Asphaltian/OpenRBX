@@ -12,6 +12,11 @@
 
 namespace RBX {
 
+inline static bool isSleeping(Sim::AssemblyState state)
+{
+	return state == Sim::SLEEPING_CHECKING || state == Sim::SLEEPING_DEEPLY;
+}
+
 Sim::AssemblyState SleepStage::getState(Assembly* assembly)
 {
 	return assembly->inPipeline() && assembly->inOrDownstreamOfStage(this) ? assembly->getSleepInfo()->state
@@ -296,7 +301,7 @@ void SleepStage::changeAssemblyState(Assembly* a, Sim::AssemblyState newState)
 			}
 		}
 	}
-	else if (newState == Sim::SLEEPING_CHECKING || newState == Sim::SLEEPING_DEEPLY) {
+	else if (isSleeping(newState)) {
 		a->getAssemblyPrimitive()->getBody()->setVelocity(Velocity::zero());
 
 		if (a->downstreamOfStage(this)) {
@@ -354,8 +359,8 @@ SleepStage::SleepStage(IStage* upstream, World* world)
 {
 }
 
-// STUB: WEBSERVICE 0x10119e00
-// STUB: ROBLOX 0x006438f0
+// FUNCTION: WEBSERVICE 0x10119e00
+// FUNCTION: ROBLOX 0x006438f0
 void SleepStage::wakeEvent(Assembly* a)
 {
 	Sim::AssemblyState state = getState(a);
@@ -365,8 +370,8 @@ void SleepStage::wakeEvent(Assembly* a)
 	}
 }
 
-// STUB: WEBSERVICE 0x10119e50
-// STUB: ROBLOX 0x00643940
+// FUNCTION: WEBSERVICE 0x10119e50
+// FUNCTION: ROBLOX 0x00643940
 void SleepStage::recursiveWakeEvent(Assembly* a)
 {
 	Sim::AssemblyState state = getState(a);
@@ -376,8 +381,8 @@ void SleepStage::recursiveWakeEvent(Assembly* a)
 	}
 }
 
-// STUB: WEBSERVICE 0x10119ea0
-// STUB: ROBLOX 0x00643990
+// FUNCTION: WEBSERVICE 0x10119ea0
+// FUNCTION: ROBLOX 0x00643990
 void SleepStage::touchEvent(Contact* c)
 {
 	for (int i = 0; i < 2; i++) {
@@ -502,8 +507,8 @@ void SleepStage::stepAssembliesSleepingChecking()
 	changeAssemblyState(toDeep, Sim::SLEEPING_DEEPLY);
 }
 
-// STUB: WEBSERVICE 0x1011a480
-// STUB: ROBLOX 0x00643f70
+// FUNCTION: WEBSERVICE 0x1011a480
+// FUNCTION: ROBLOX 0x00643f70
 void SleepStage::wakeEvent(Edge* e)
 {
 	for (int i = 0; i < 2; i++) {
