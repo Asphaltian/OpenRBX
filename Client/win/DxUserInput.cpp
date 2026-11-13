@@ -243,7 +243,7 @@ void DxUserInput::FUN_0046c090()
 			}
 
 			if (virtualKey == VK_SNAPSHOT) {
-				::SendMessage(m_unk0x4c->m_hWnd, WM_COMMAND, MAKEWPARAM(0x80fc, 1), 0);
+				::PostMessage(m_unk0x4c->m_hWnd, WM_COMMAND, MAKEWPARAM(0x80fc, 1), 0);
 			}
 			else if (
 				virtualKey == VK_F1 || virtualKey == VK_F4 ||
@@ -257,7 +257,7 @@ void DxUserInput::FUN_0046c090()
 					bool matches =
 						accel.fVirt & FVIRTKEY ? accel.key == virtualKey : accel.key == static_cast<char>(character);
 					if (matches && (accel.fVirt & (FSHIFT | FCONTROL | FALT)) == flags) {
-						::SendMessage(m_unk0x4c->m_hWnd, WM_COMMAND, MAKEWPARAM(m_unk0x50[j].cmd, 1), 0);
+						::PostMessage(m_unk0x4c->m_hWnd, WM_COMMAND, MAKEWPARAM(m_unk0x50[j].cmd, 1), 0);
 						handled = true;
 						break;
 					}

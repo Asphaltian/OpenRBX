@@ -4,6 +4,7 @@
 #include "appdraw/VisualEngine.h"
 #include "renderlibnew/Chunk.h"
 
+#include <G3D/Log.h>
 #include <OgreLogManager.h>
 #include <OgreSubMesh.h>
 #include <stdio.h>
@@ -23,7 +24,7 @@ Mesh::VertexList Mesh::freeList;
 bool Mesh::varDirty = true;
 Ogre::MeshPtr Mesh::g_unk0x0095877c;
 
-static int g_unk0x00958738;
+static int vertexRefCount;
 static int g_unk0x0095873c;
 static int g_unk0x00958798;
 static bool g_unk0x00958794;
@@ -37,7 +38,7 @@ void Mesh::endRender(G3D::RenderDevice* rd)
 unsigned int Mesh::allocVertex(unsigned int i, unsigned int count)
 {
 	vertexRefCounts[i] += count;
-	g_unk0x00958738 += count;
+	vertexRefCount += count;
 
 	return i;
 }
@@ -159,7 +160,7 @@ unsigned int Mesh::allocVertex(
 		texCoordArray.append(tex);
 		tangentArray.append(G3D::Vector3::zero());
 		vertexRefCounts.append(1);
-		g_unk0x00958738++;
+		vertexRefCount++;
 
 		return index;
 	}
@@ -172,18 +173,21 @@ unsigned int Mesh::allocVertex(
 	texCoordArray[index] = tex;
 	tangentArray[index] = G3D::Vector3::zero();
 	vertexRefCounts[index] = 1;
-	g_unk0x00958738++;
+	vertexRefCount++;
 
 	return index;
 }
 
-// STUB: ROBLOX 0x00532700
+// FUNCTION: ROBLOX 0x00532700
 void Mesh::freeVertex(unsigned int index)
 {
-	if (vertexRefCounts.getCArray() != NULL) {
-		int refCount = vertexRefCounts[index];
-		g_unk0x00958738--;
+	if (vertexRefCounts.getCArray() != NULL && vertexRefCounts.size() != 0) {
+		vertexRefCount--;
+		if (vertexRefCount < 20) {
+			G3D::Log::common()->printf("vertexRefCount = %d\n", vertexRefCount);
+		}
 
+		int refCount = vertexRefCounts[index];
 		if (refCount == 1) {
 			vertexRefCounts[index] = 0;
 			freeList.append(index);
