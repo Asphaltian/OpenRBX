@@ -485,6 +485,7 @@ public:
 	virtual MovableObject* getMovableObject(const String& name, const String& typeName) const;
 	virtual bool hasMovableObject(const String& name, const String& typeName) const;
 	virtual void extractMovableObject(const String& name, const String& typeName);
+	virtual MovableObjectIterator getMovableObjectIterator(const String& typeName);
 	virtual const Pass* _setPass(const Pass* pass, bool evenIfSuppressed = false, bool shadowDerivation = true);
 	virtual void _renderQueueGroupObjects(RenderQueueGroup* group, QueuedRenderableCollection::OrganisationMode om);
 

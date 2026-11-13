@@ -57,8 +57,10 @@ public:
 };
 
 // SYNTHETIC: WEBSERVICE 0x1021f100
+// SYNTHETIC: ROBLOX 0x007e5730
 // `dynamic initializer for 'cache''
 // SYNTHETIC: WEBSERVICE 0x10225cd0
+// SYNTHETIC: ROBLOX 0x007f0520
 // `dynamic atexit destructor for 'cache''
 
 DECOMP_SIZE_ASSERT(BrickMesh, 0x50)

@@ -53,6 +53,11 @@ public:
 	static void flushCache();
 };
 
+// SYNTHETIC: ROBLOX 0x007e7c60
+// RBX::ViewNew::`dynamic initializer for 'cache''
+// SYNTHETIC: ROBLOX 0x007f1750
+// RBX::ViewNew::`dynamic atexit destructor for 'cache''
+
 DECOMP_SIZE_ASSERT(BrickMesh, 0x50)
 
 extern bool g_unk0x0092a908;

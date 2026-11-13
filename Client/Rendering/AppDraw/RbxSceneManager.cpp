@@ -4304,6 +4304,13 @@ void RbxSceneManager::destroyAllMovableObjectsByType(const String& typeName)
 	}
 }
 
+// FUNCTION: ROBLOX 0x00697a60
+SceneManager::MovableObjectIterator RbxSceneManager::getMovableObjectIterator(const String& typeName)
+{
+	MovableObjectCollection* objectMap = getMovableObjectCollection(typeName);
+	return MovableObjectIterator(objectMap->map.begin(), objectMap->map.end());
+}
+
 // FUNCTION: ROBLOX 0x00697a90
 void RbxSceneManager::injectMovableObject(MovableObject* m)
 {

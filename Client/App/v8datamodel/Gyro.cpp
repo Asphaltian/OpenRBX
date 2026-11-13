@@ -315,7 +315,7 @@ void Rocket::computeForce(float dt, bool throttling)
 		Body* body = part->getPrimitive()->getBody();
 
 		Vector3 targetPos = target ? target->getCoordinateFrame().pointToWorldSpace(targetOffset) : targetOffset;
-		targetPos -= body->getPV().position.translation;
+		targetPos = targetPos - body->getPV().position.translation;
 
 		Body* root = body->getRoot();
 
