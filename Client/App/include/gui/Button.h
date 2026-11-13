@@ -23,7 +23,7 @@ protected:
 
 	virtual void onDown(const UIEvent& event);
 	virtual void onUp(const UIEvent& event);
-	virtual bool isEnabled() { return true; }
+	virtual bool isEnabled() { return isVisible(); }
 	virtual GuiResponse process(const GuiEvent& p_unk0x04);
 
 public:

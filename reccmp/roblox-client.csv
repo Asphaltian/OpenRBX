@@ -9819,3 +9819,4 @@ address,type,symbol,name,module,size
 0040bb10,library,?QueryInterface@?$CComContainedObject@VCBrowserViewExternal@@@ATL@@W3AGJABU_GUID@@PAPAX@Z,,,10
 00437aa0,library,?PreTranslateMessage@CXTTreeViewBase@@OGA@AEHPAUtagMSG@@@Z,,,8
 00761a90,,??_ECXTPDockingPaneOffice2003Theme@XTPDockingPanePaintThemes@@UAEPAXI@Z,,,
+006b3c80,,?RectVisible@CDC@@UBEHPBUtagRECT@@@Z,,,
