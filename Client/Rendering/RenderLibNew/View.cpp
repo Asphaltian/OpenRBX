@@ -252,7 +252,7 @@ void View::FUN_0050c5c0(void* rd)
 	}
 }
 
-// STUB: ROBLOX 0x0050d3d0
+// FUNCTION: ROBLOX 0x0050d3d0
 void View::FUN_0050d3d0(void* rd)
 {
 	if (!lightingValid) {
@@ -283,7 +283,10 @@ void View::FUN_0050d3d0(void* rd)
 		}
 
 		renderLibScene->presetLighting(
-			NULL, lighting->getSkyParameters(), lighting->getAmbientTop(), lighting->getAmbientBottom()
+			G3D::ReferenceCountedPointer<G3D::Sky>(),
+			lighting->getSkyParameters(),
+			lighting->getAmbientTop(),
+			lighting->getAmbientBottom()
 		);
 		G3D::Color4 clearColor = lighting->getClearColor();
 		renderLibScene->colorClearValue = clearColor;

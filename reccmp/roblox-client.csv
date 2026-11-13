@@ -9684,3 +9684,4 @@ address,type,symbol,name,module,size
 007f59b0,library,,"`dynamic atexit destructor for 'extendedColors''",,
 007f1b30,library,,,,
 007f1b60,library,,,,
+0081aecc,global,??_7?$SharedPtr@V?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@Ogre@@6B@,,,

@@ -73,8 +73,8 @@ static int FUN_00534170(int value)
 // STUB: ROBLOX 0x00534190
 static void FUN_00534190(
 	int components,
-	int width,
-	int height,
+	unsigned int width,
+	unsigned int height,
 	const unsigned char* in,
 	unsigned char* out,
 	int elementSize,
@@ -84,32 +84,37 @@ static void FUN_00534190(
 {
 	int halfWidth = width / 2;
 	int halfHeight = height / 2;
+	const unsigned char* src = in;
+	unsigned char* dest = out;
 
 	if (height == 1) {
-		for (int i = 0; i < halfWidth; i++) {
-			for (int k = 0; k < components; k++) {
-				*out++ = (in[0] + in[groupSize]) / 2;
-				in += elementSize;
+		for (int jj = 0; jj < halfWidth; jj++) {
+			for (int kk = 0; kk < components; kk++) {
+				*dest = (src[0] + src[groupSize]) / 2;
+				src += elementSize;
+				dest++;
 			}
-			in += groupSize;
+			src += groupSize;
 		}
 	}
 	else if (width == 1) {
-		int padding = rowSize - groupSize;
-		for (int j = 0; j < halfHeight; j++) {
-			for (int k = 0; k < components; k++) {
-				*out++ = (in[0] + in[rowSize]) / 2;
-				in += elementSize;
+		int padBytes = rowSize - width * groupSize;
+		for (int jj = 0; jj < halfHeight; jj++) {
+			for (int kk = 0; kk < components; kk++) {
+				*dest = (src[0] + src[rowSize]) / 2;
+				src += elementSize;
+				dest++;
 			}
-			in += padding + rowSize;
+			src += padBytes;
+			src += rowSize;
 		}
 	}
 }
 
 // STUB: ROBLOX 0x00534250
 static void FUN_00534250(
-	int width,
-	int height,
+	unsigned int width,
+	unsigned int height,
 	int components,
 	const unsigned char* in,
 	unsigned char* out,
@@ -123,19 +128,23 @@ static void FUN_00534250(
 		return;
 	}
 
-	int halfWidth = width / 2;
-	int halfHeight = height / 2;
-	int padding = rowSize - width * groupSize;
+	int newWidth = width / 2;
+	int newHeight = height / 2;
+	int padBytes = rowSize - width * groupSize;
+	unsigned char* s = out;
+	const unsigned char* t = in;
 
-	for (int j = 0; j < halfHeight; j++) {
-		for (int i = 0; i < halfWidth; i++) {
+	for (int i = 0; i < newHeight; i++) {
+		for (int j = 0; j < newWidth; j++) {
 			for (int k = 0; k < components; k++) {
-				*out++ = (in[0] + in[groupSize] + in[rowSize] + in[rowSize + groupSize] + 2) / 4;
-				in += elementSize;
+				s[0] = (t[0] + t[groupSize] + t[rowSize] + t[rowSize + groupSize] + 2) / 4;
+				s++;
+				t += elementSize;
 			}
-			in += groupSize;
+			t += groupSize;
 		}
-		in += padding + rowSize;
+		t += padBytes;
+		t += rowSize;
 	}
 }
 
