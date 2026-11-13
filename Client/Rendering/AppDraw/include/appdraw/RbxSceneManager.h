@@ -167,6 +167,7 @@ public:
 	virtual void destroyAllLights(void);
 	virtual void _notifyLightsDirty(void);
 	virtual const LightList& _getLightsAffectingFrustum(void) const;
+	virtual Entity* createEntity(const String& entityName, PrefabType ptype);
 	virtual bool hasSceneNode(const String& name) const;
 	virtual Entity* getEntity(const String& name) const;
 	virtual bool hasEntity(const String& name) const;

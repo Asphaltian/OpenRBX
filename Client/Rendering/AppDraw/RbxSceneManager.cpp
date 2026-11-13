@@ -137,6 +137,25 @@ const LightList& RbxSceneManager::_getLightsAffectingFrustum(void) const
 	return mLightsAffectingFrustum;
 }
 
+// FUNCTION: ROBLOX 0x00685870
+Entity* RbxSceneManager::createEntity(const String& entityName, PrefabType ptype)
+{
+	switch (ptype) {
+	case PT_PLANE:
+		return createEntity(entityName, "Prefab_Plane");
+	case PT_CUBE:
+		return createEntity(entityName, "Prefab_Cube");
+	case PT_SPHERE:
+		return createEntity(entityName, "Prefab_Sphere");
+	}
+
+#line 435
+	OGRE_EXCEPT(
+		Exception::ERR_ITEM_NOT_FOUND, "Unknown prefab type for entity " + entityName, "RbxSceneManager::createEntity"
+	);
+#line 157
+}
+
 // FUNCTION: ROBLOX 0x00685a10
 Entity* RbxSceneManager::getEntity(const String& name) const
 {
@@ -334,7 +353,7 @@ void RbxSceneManager::setWorldGeometry(const String& filename)
 		"World geometry is not supported by the generic SceneManager.",
 		"RbxSceneManager::setWorldGeometry"
 	);
-#line 338
+#line 357
 }
 
 // FUNCTION: ROBLOX 0x00685df0
@@ -347,7 +366,7 @@ void RbxSceneManager::setWorldGeometry(DataStreamPtr& stream, const String& type
 		"World geometry is not supported by the generic SceneManager.",
 		"RbxSceneManager::setWorldGeometry"
 	);
-#line 351
+#line 370
 }
 
 // FUNCTION: ROBLOX 0x00685e90
@@ -1099,7 +1118,7 @@ void RbxSceneManager::setShadowTextureConfig(size_t shadowIndex, const ShadowTex
 		OGRE_EXCEPT(
 			Exception::ERR_ITEM_NOT_FOUND, "shadowIndex out of bounds", "RbxSceneManager::setShadowTextureConfig"
 		);
-#line 1103
+#line 1122
 	}
 	mShadowTextureConfigList[shadowIndex] = config;
 
@@ -1112,7 +1131,7 @@ const TexturePtr& RbxSceneManager::getShadowTexture(size_t shadowIndex)
 	if (shadowIndex >= mShadowTextureConfigList.size()) {
 #line 4792
 		OGRE_EXCEPT(Exception::ERR_ITEM_NOT_FOUND, "shadowIndex out of bounds", "RbxSceneManager::getShadowTexture");
-#line 1116
+#line 1135
 	}
 	ensureShadowTexturesCreated();
 
@@ -1152,7 +1171,7 @@ void RbxSceneManager::setSkyPlane(
 				"Sky plane material '" + materialName + "' not found.",
 				"RbxSceneManager::setSkyPlane"
 			);
-#line 1156
+#line 1175
 		}
 
 		m->setDepthWriteEnabled(false);
@@ -1630,7 +1649,7 @@ void RbxSceneManager::setSkyDome(
 				"Sky dome material '" + materialName + "' not found.",
 				"RbxSceneManager::setSkyDome"
 			);
-#line 1634
+#line 1653
 		}
 
 		m->setDepthWriteEnabled(false);
@@ -1949,7 +1968,7 @@ void RbxSceneManager::setShadowTextureCasterMaterial(const String& name)
 				"Cannot locate material called '" + name + "'",
 				"RbxSceneManager::setShadowTextureCasterMaterial"
 			);
-#line 1953
+#line 1972
 		}
 		mat->load();
 		mShadowTextureCustomCasterPass = mat->getBestTechnique()->getPass(0);
@@ -1976,7 +1995,7 @@ void RbxSceneManager::setShadowTextureReceiverMaterial(const String& name)
 				"Cannot locate material called '" + name + "'",
 				"RbxSceneManager::setShadowTextureReceiverMaterial"
 			);
-#line 1980
+#line 1999
 		}
 		mat->load();
 		mShadowTextureCustomReceiverPass = mat->getBestTechnique()->getPass(0);
@@ -2014,7 +2033,7 @@ Camera* RbxSceneManager::getCamera(const String& name) const
 		OGRE_EXCEPT(
 			Exception::ERR_ITEM_NOT_FOUND, "Cannot find Camera with name " + name, "RbxSceneManager::getCamera"
 		);
-#line 2018
+#line 2037
 	}
 	else {
 		return i->second;
@@ -2037,7 +2056,7 @@ SceneNode* RbxSceneManager::getSceneNode(const String& name) const
 		OGRE_EXCEPT(
 			Exception::ERR_ITEM_NOT_FOUND, "SceneNode '" + name + "' not found.", "RbxSceneManager::getSceneNode"
 		);
-#line 2041
+#line 2060
 	}
 
 	return i->second;
@@ -2072,7 +2091,7 @@ void RbxSceneManager::setSkyBox(
 				"Sky box material '" + materialName + "' not found.",
 				"RbxSceneManager::setSkyBox"
 			);
-#line 2076
+#line 2095
 		}
 
 		m->setDepthWriteEnabled(false);
@@ -2185,7 +2204,7 @@ Animation* RbxSceneManager::getAnimation(const String& name) const
 		OGRE_EXCEPT(
 			Exception::ERR_ITEM_NOT_FOUND, "Cannot find animation with name " + name, "RbxSceneManager::getAnimation"
 		);
-#line 2189
+#line 2208
 	}
 	return i->second;
 }
@@ -2362,7 +2381,7 @@ StaticGeometry* RbxSceneManager::getStaticGeometry(const String& name) const
 			"StaticGeometry with name '" + name + "' not found",
 			"RbxSceneManager::createStaticGeometry"
 		);
-#line 2366
+#line 2385
 	}
 	return i->second;
 }
@@ -2384,7 +2403,7 @@ InstancedGeometry* RbxSceneManager::getInstancedGeometry(const String& name) con
 			"InstancedGeometry with name '" + name + "' not found",
 			"RbxSceneManager::createInstancedGeometry"
 		);
-#line 2388
+#line 2407
 	}
 	return i->second;
 }
@@ -2400,7 +2419,7 @@ const SceneManager::MovableObjectCollection* RbxSceneManager::getMovableObjectCo
 			"Object collection named '" + typeName + "' does not exist.",
 			"RbxSceneManager::getMovableObjectCollection"
 		);
-#line 2404
+#line 2423
 	}
 	else {
 		return i->second;
@@ -2422,7 +2441,7 @@ MovableObject* RbxSceneManager::getMovableObject(const String& name, const Strin
 				"Object named '" + name + "' does not exist.",
 				"RbxSceneManager::getMovableObject"
 			);
-#line 2426
+#line 2445
 		}
 		return mi->second;
 	}
@@ -2490,7 +2509,7 @@ void RbxSceneManager::destroySceneNode(const String& name)
 		OGRE_EXCEPT(
 			Exception::ERR_ITEM_NOT_FOUND, "SceneNode '" + name + "' not found.", "RbxSceneManager::destroySceneNode"
 		);
-#line 2494
+#line 2513
 	}
 
 	AutoTrackingSceneNodes::iterator ai, aiend;
@@ -3094,7 +3113,7 @@ void RbxSceneManager::destroyAnimation(const String& name)
 		OGRE_EXCEPT(
 			Exception::ERR_ITEM_NOT_FOUND, "Cannot find animation with name " + name, "RbxSceneManager::getAnimation"
 		);
-#line 3098
+#line 3117
 	}
 
 	delete i->second;
@@ -3320,7 +3339,7 @@ Camera* RbxSceneManager::createCamera(const String& name)
 			"A camera with the name " + name + " already exists",
 			"RbxSceneManager::createCamera"
 		);
-#line 3324
+#line 3343
 	}
 
 	Camera* c = new Camera(name, this);
@@ -3351,7 +3370,7 @@ SceneNode* RbxSceneManager::createSceneNode(const String& name)
 			"A scene node with the name " + name + " already exists",
 			"RbxSceneManager::createSceneNode"
 		);
-#line 3355
+#line 3374
 	}
 
 	SceneNode* sn = new SceneNode(this, name);
@@ -3455,7 +3474,7 @@ Animation* RbxSceneManager::createAnimation(const String& name, Real length)
 			"An animation with the name " + name + " already exists",
 			"RbxSceneManager::createAnimation"
 		);
-#line 3459
+#line 3478
 	}
 
 	Animation* pAnim = new Animation(name, length);
@@ -3503,7 +3522,7 @@ StaticGeometry* RbxSceneManager::createStaticGeometry(const String& name)
 			"StaticGeometry with name '" + name + "' already exists!",
 			"RbxSceneManager::createStaticGeometry"
 		);
-#line 3507
+#line 3526
 	}
 	StaticGeometry* ret = new StaticGeometry(this, name);
 	mStaticGeometryList[name] = ret;
@@ -3521,7 +3540,7 @@ InstancedGeometry* RbxSceneManager::createInstancedGeometry(const String& name)
 			"InstancedGeometry with name '" + name + "' already exists!",
 			"RbxSceneManager::createInstancedGeometry"
 		);
-#line 3525
+#line 3544
 	}
 	InstancedGeometry* ret = new InstancedGeometry(this, name);
 	mInstancedGeometryList[name] = ret;
@@ -4259,7 +4278,7 @@ MovableObject* RbxSceneManager::createMovableObject(
 				"An object of type '" + typeName + "' with name '" + name + "' already exists.",
 				"RbxSceneManager::createMovableObject"
 			);
-#line 4263
+#line 4282
 		}
 
 		MovableObject* newObj = factory->createInstance(name, this, params);
