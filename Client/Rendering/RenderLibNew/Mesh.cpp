@@ -1,9 +1,11 @@
 #include "renderlibnew/Mesh.h"
 
+#include "appdraw/RbxSceneNode.h"
 #include "appdraw/VisualEngine.h"
 #include "renderlibnew/Chunk.h"
 
 #include <OgreLogManager.h>
+#include <OgreSubMesh.h>
 #include <stdio.h>
 
 namespace RBX {
@@ -49,6 +51,25 @@ void Mesh::sendGeometry(const Level* lvl, G3D::RenderDevice* rd)
 {
 	if (lvl != NULL && lvl->indexArray.size() > 0) {
 		rd->sendIndices(lvl->primitive, lvl->indexArray);
+	}
+}
+
+// FUNCTION: ROBLOX 0x005322f0
+void Mesh::Level::FUN_005322f0()
+{
+	m_unk0x1c = true;
+
+	if (m_unk0x24) {
+		delete m_unk0x24;
+		m_unk0x24 = NULL;
+	}
+
+	if (m_unk0x20 > 0) {
+		g_unk0x0095877c->getNumSubMeshes();
+		Ogre::IndexData*& indexData = g_unk0x0095877c->getSubMesh(m_unk0x20)->indexData;
+		delete indexData;
+		indexData = NULL;
+		Ogre::RbxSceneNode::FUN_0067b070(g_unk0x0095877c->getSubMesh(m_unk0x20));
 	}
 }
 

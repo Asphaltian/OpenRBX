@@ -450,7 +450,8 @@ void RenderScene::render(G3D::RenderDevice* rd, const G3D::GCamera& camera)
 			Ogre::AxisAlignedBox bounds(m_unk0x04->m_unk0x248);
 			if (fabs(translation.x) < 10000.0f && fabs(translation.y) < 10000.0f && fabs(translation.z) < 10000.0f) {
 				if (subMesh == meshLevel->m_unk0x24) {
-					const Ogre::AxisAlignedBox& meshBounds = meshLevel->m_unk0x24->m_unk0x8c;
+					const Ogre::AxisAlignedBox& meshBounds =
+						static_cast<Ogre::Unknown00671c70*>(meshLevel->m_unk0x24)->m_unk0x8c;
 					Ogre::Vector3 offset(translation.x, translation.y, translation.z);
 					bounds.merge(
 						Ogre::AxisAlignedBox(meshBounds.getMinimum() + offset, meshBounds.getMaximum() + offset)

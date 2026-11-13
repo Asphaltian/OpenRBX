@@ -43,7 +43,7 @@ public:
 		G3D::RenderDevice::Primitive primitive; // 0x18
 		bool m_unk0x1c;                         // 0x1c
 		int m_unk0x20;                          // 0x20
-		Ogre::Unknown00671c70* m_unk0x24;       // 0x24
+		Ogre::SubMesh* m_unk0x24;               // 0x24
 
 		Level();
 
@@ -55,6 +55,7 @@ public:
 
 		virtual ~Level();
 
+		void FUN_005322f0();
 		void makeHWSubMesh(Ogre::VisualEngine* engine, Ogre::AxisAlignedBox& box);
 		void FUN_00533160(Ogre::VisualEngine* engine, Ogre::AxisAlignedBox& box);
 

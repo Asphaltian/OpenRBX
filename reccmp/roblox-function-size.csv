@@ -20791,7 +20791,11 @@ address,type,size
 007f1330,function,11
 007f1340,function,11
 007f1350,function,11
+007f1360,function,20
 007f1380,function,30
+007f13a0,function,10
+007f13b0,function,11
+007f13c0,function,23
 007f13f0,function,20
 007f1410,function,63
 007f1450,function,63
@@ -21357,10 +21361,15 @@ address,type,size
 007f55b0,function,10
 007f55c0,function,10
 007f55d0,function,10
+007f55e0,function,47
 007f5610,function,11
 007f5620,function,11
 007f5630,function,11
+007f5640,function,11
 007f5650,function,11
 007f5660,function,11
+007f5670,function,49
+007f56b0,function,63
+007f56f0,function,21
 007f5740,function,11
 007f5afe,function,10
