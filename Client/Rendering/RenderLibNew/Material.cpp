@@ -11,8 +11,10 @@ bool Material::veryTransparent() const
 	return levels.size() > 0 && levels[0].transparent() > 0.25f;
 }
 
+// FUNCTION: ROBLOX 0x00535ec0
 Material::Level::Level()
-	: emptyLevel(true), mColor(G3D::Color3::white()), mSpecular(0), mShiny(0), mReflect(0), mTransparent(0)
+	: emptyLevel(true), mColor(G3D::Color3::white()), mSpecular(0), mShiny(0), mReflect(0), mTransparent(0),
+	  m_unk0x28(NULL)
 {
 }
 
