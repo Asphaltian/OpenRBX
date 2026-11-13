@@ -267,7 +267,8 @@ struct DateCompare
 
 	DateCompare(const WIN32_FIND_DATA& data) : fileTime(data.ftCreationTime) {}
 
-	bool operator()(WIN32_FIND_DATA data) const { return fileTime < ATL::CFileTime(data.ftCreationTime); }
+	// FUNCTION: ROBLOX 0x0042a8e0
+	bool operator()(WIN32_FIND_DATA data) const { return fileTime < data.ftCreationTime; }
 };
 
 // STUB: WEBSERVICE 0x10002c00
