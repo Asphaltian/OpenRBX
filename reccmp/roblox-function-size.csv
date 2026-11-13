@@ -20805,6 +20805,12 @@ address,type,size
 007f1550,function,20
 007f1570,function,64
 007f15b0,function,20
+007f15d0,function,49
+007f1610,function,49
+007f1650,function,49
+007f1690,function,49
+007f16d0,function,49
+007f1710,function,49
 007f1750,function,64
 007f1790,function,20
 007f17b0,function,20
