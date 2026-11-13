@@ -346,7 +346,7 @@ MeshPtr VisualEngine::FUN_006731e0(
 	return mesh;
 }
 
-// STUB: ROBLOX 0x006735b0
+// FUNCTION: ROBLOX 0x006735b0
 Unknown00671c70* VisualEngine::FUN_006735b0(
 	const float* positions,
 	size_t vertexCount,
@@ -371,12 +371,9 @@ Unknown00671c70* VisualEngine::FUN_006735b0(
 		indexCount,
 		HardwareBuffer::HBU_STATIC_WRITE_ONLY
 	);
-	if (indices16) {
-		indexBuffer->writeData(0, indexBuffer->getSizeInBytes(), indices16, true);
-	}
-	else {
-		indexBuffer->writeData(0, indexBuffer->getSizeInBytes(), indices32, true);
-	}
+	indexBuffer->writeData(
+		0, indexBuffer->getSizeInBytes(), indices16 ? (const void*) indices16 : (const void*) indices32, true
+	);
 	subMesh->indexData->indexBuffer = indexBuffer;
 	subMesh->indexData->indexCount = indexCount;
 	subMesh->indexData->indexStart = 0;
@@ -486,8 +483,9 @@ void VisualEngine::FUN_00673860(
 		bool has32Bit = false;
 		ConfigOptionMap::iterator videoMode = options.find("Video Mode");
 		if (videoMode != options.end()) {
-			for (int i = 0; i < (int) videoMode->second.possibleValues.size(); i++) {
-				has32Bit = StringUtil::match(videoMode->second.possibleValues[i], "*32-bit*", false);
+			StringVector& values = videoMode->second.possibleValues;
+			for (int i = 0; i < (int) values.size(); i++) {
+				has32Bit = StringUtil::match(values[i], "*32-bit*", false);
 				if (has32Bit) {
 					break;
 				}
@@ -554,10 +552,7 @@ void VisualEngine::FUN_00673860(
 				IDirect3DSurface9* depthBuffer;
 				m_unk0x0c->getCustomAttribute("D3DZBUFFER", &depthBuffer);
 				D3DSURFACE_DESC desc;
-				if (FAILED(depthBuffer->GetDesc(&desc))) {
-					m_unk0x7fc = 24;
-				}
-				else {
+				if (SUCCEEDED(depthBuffer->GetDesc(&desc))) {
 					switch (desc.Format) {
 					case D3DFMT_D16_LOCKABLE:
 					case D3DFMT_D16:
@@ -581,6 +576,9 @@ void VisualEngine::FUN_00673860(
 						LogManager::getSingleton().logMessage("RBX unknown zbuffer format");
 						break;
 					}
+				}
+				else {
+					m_unk0x7fc = 24;
 				}
 			}
 			catch (...) {

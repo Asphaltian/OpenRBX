@@ -9683,3 +9683,5 @@ address,type,symbol,name,module,size
 0095879c,global,"cachedBumpImage___RBX::RenderNew::TextureProxy::resolve",,,
 009587b0,global,"lastFilename___RBX::RenderNew::TextureProxy::resolve",,,
 007f59b0,library,,"`dynamic atexit destructor for 'extendedColors''",,
+007f1b30,library,,,,
+007f1b60,library,,,,
