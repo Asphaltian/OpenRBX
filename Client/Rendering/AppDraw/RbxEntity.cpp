@@ -399,4 +399,6 @@ void RbxEntity::FUN_006772d0(Camera* camera, const Light* light, std::vector<Sha
 	}
 }
 
+String RbxEntityFactory::FACTORY_TYPE_NAME = "Entity";
+
 } // namespace Ogre

@@ -74,6 +74,12 @@ private:
 DECOMP_SIZE_ASSERT(Entity, 0x240)
 DECOMP_SIZE_ASSERT(RbxEntity, 0x280)
 
+class RbxEntityFactory : public MovableObjectFactory
+{
+public:
+	static String FACTORY_TYPE_NAME;
+};
+
 } // namespace Ogre
 
 #endif // APPDRAW_RBXENTITY_H

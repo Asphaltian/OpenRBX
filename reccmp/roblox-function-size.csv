@@ -20804,6 +20804,7 @@ address,type,size
 007f1510,function,64
 007f1550,function,20
 007f1570,function,64
+007f15b0,function,20
 007f1750,function,64
 007f1790,function,20
 007f17b0,function,20
@@ -21371,5 +21372,6 @@ address,type,size
 007f5670,function,49
 007f56b0,function,63
 007f56f0,function,21
+007f5710,function,11
 007f5740,function,11
 007f5afe,function,10
