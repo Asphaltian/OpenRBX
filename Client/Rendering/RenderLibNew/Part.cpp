@@ -74,7 +74,7 @@ const G3D::CoordinateFrame& PartChunk::cframe()
 	return coordinateFrame;
 }
 
-// STUB: ROBLOX 0x00515300
+// FUNCTION: ROBLOX 0x00515300
 G3D::ReferenceCountedPointer<RenderNew::Material> Part::getMaterial()
 {
 	try {
@@ -95,7 +95,6 @@ G3D::ReferenceCountedPointer<RenderNew::Material> Part::getMaterial()
 				}
 
 				G3D::Vector3 color = specialShape->getVertColor();
-				float trans = specialShape->getAlpha();
 
 				material = new RenderNew::Material();
 				material->appendLevel(
@@ -104,7 +103,7 @@ G3D::ReferenceCountedPointer<RenderNew::Material> Part::getMaterial()
 					0.0f,
 					0.1f,
 					0.0f,
-					trans
+					partInstance->getTransparencyUi()
 				);
 				materialInvalid = false;
 			}

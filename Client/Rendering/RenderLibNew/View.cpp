@@ -185,9 +185,9 @@ void View::FUN_0050c5c0(void* rd)
 	std::string path;
 	Ogre::StringUtil::splitFilename(files[0], baseName, path);
 	if (baseName.find(".") == std::string::npos) {
-		unsigned int format = G3D::GImage::resolveFormat(files[0]);
+		G3D::GImage::Format format = G3D::GImage::resolveFormat(files[0]);
 		std::string suffix;
-		if (format < 8) {
+		if (format >= 0 && format < sizeof(g_unk0x0092a308) / sizeof(g_unk0x0092a308[0])) {
 			suffix = std::string(".") + g_unk0x0092a308[format];
 		}
 		else {
@@ -230,9 +230,8 @@ void View::FUN_0050c5c0(void* rd)
 		Ogre::MaterialManager::getSingleton().parseScript(stream, "General");
 		Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().getByName("rbxskybox");
 
-		Ogre::RbxSceneManager* sceneManager = static_cast<Ogre::RbxSceneManager*>(engine->m_unk0x04);
-		sceneManager->m_unk0x8a68 = skyFolder;
-		sceneManager->setSkyBox(
+		static_cast<Ogre::RbxSceneManager*>(engine->m_unk0x04)->m_unk0x8a68 = skyFolder;
+		engine->m_unk0x04->setSkyBox(
 			true,
 			"rbxskybox",
 			2700.0f,
@@ -242,7 +241,7 @@ void View::FUN_0050c5c0(void* rd)
 		);
 	}
 	catch (Ogre::Exception& e) {
-		Ogre::LogManager::getSingleton().logMessage("RBX error in skybox: " + e.getFullDescription());
+		Ogre::LogManager::getSingleton().logMessage(std::string("RBX error in skybox: ") + e.what());
 	}
 
 	if (moved[0] != "") {
