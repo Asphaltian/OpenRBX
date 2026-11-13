@@ -9799,3 +9799,15 @@ address,type,symbol,name,module,size
 0085a620,global,,_messageEntries___CXTButton::GetThisMessageMap,,
 0085d658,global,,messageMap___CXTPDialogBar::GetThisMessageMap,,
 0085d660,global,,_messageEntries___CXTPDialogBar::GetThisMessageMap,,
+00437960,library,?GetItemState@CXTTreeViewBase@@UBEIPAU_TREEITEM@@I@Z,,,8
+00437970,library,?SelectItem@CXTTreeViewBase@@UAEHPAU_TREEITEM@@@Z,,,8
+00437980,library,?SetItemState@CXTTreeViewBase@@UAEHPAU_TREEITEM@@II@Z,,,8
+004379c0,library,?OnNotify@CXTTreeViewBase@@MAEHIJPAJ@Z,,,8
+004379d0,library,?PreTranslateMessage@CXTTreeViewBase@@MAEHPAUtagMSG@@@Z,,,8
+006eabd0,library,??_ECCaptionPopupBar@CXTPDialogBar@@WFM@AEPAXI@Z,,,8
+006ee680,library,??_ECControlQuickAccessCommand@CXTPRibbonBar@@WCA@AEPAXI@Z,,,8
+0070d4b0,library,??_ECPropertyGridItemColorColorPopup@?8??OnInplaceButtonDown@CXTPPropertyGridItemColor@@MAEXPAVCXTPPropertyGridInplaceButton@@@Z@WFE@AEPAXI@Z,,,8
+0071c5e0,library,??_ECXTPRibbonControlSystemButton@@WCA@AEPAXI@Z,,,8
+00728e00,library,??_ECXTPRibbonBarMorePopupToolBar@@WFE@AEPAXI@Z,,,8
+0073b8e0,library,??_ECCustomizeEdit@CXTPCustomizeSheet@@WCA@AEPAXI@Z,,,8
+0078bd80,library,??_ECXTCaptionButton@@WFE@AEPAXI@Z,,,8
