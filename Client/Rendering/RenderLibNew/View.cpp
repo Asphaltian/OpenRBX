@@ -132,7 +132,7 @@ void View::suppressSkybox()
 	renderLibScene->colorClearValue = clearColor;
 }
 
-// STUB: ROBLOX 0x0050c5c0
+// FUNCTION: ROBLOX 0x0050c5c0
 void View::FUN_0050c5c0(void* rd)
 {
 	Ogre::VisualEngine* engine = static_cast<Ogre::VisualEngine*>(rd);
@@ -223,14 +223,15 @@ void View::FUN_0050c5c0(void* rd)
 	);
 
 	Ogre::DataStreamPtr stream(new Ogre::MemoryDataStream(script, strlen(script) + 1));
+	if (Ogre::MaterialManager::getSingleton().resourceExists("rbxskybox")) {
+		Ogre::MaterialManager::getSingleton().remove("rbxskybox");
+	}
 	try {
-		if (Ogre::MaterialManager::getSingleton().resourceExists("rbxskybox")) {
-			Ogre::MaterialManager::getSingleton().remove("rbxskybox");
-		}
 		Ogre::MaterialManager::getSingleton().parseScript(stream, "General");
 		Ogre::MaterialPtr material = Ogre::MaterialManager::getSingleton().getByName("rbxskybox");
 
-		static_cast<Ogre::RbxSceneManager*>(engine->m_unk0x04)->m_unk0x8a68 = skyFolder;
+		Ogre::RbxSceneManager* sceneManager = static_cast<Ogre::RbxSceneManager*>(engine->m_unk0x04);
+		sceneManager->m_unk0x8a68 = skyFolder;
 		engine->m_unk0x04->setSkyBox(
 			true,
 			"rbxskybox",
