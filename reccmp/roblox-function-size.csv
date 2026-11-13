@@ -219,7 +219,7 @@ address,type,size
 00408780,function,137
 00408810,function,119
 00408890,function,134
-00408920,function,642
+00408920,function,723
 00408c00,function,266
 00408d20,function,36
 00408d50,function,67
@@ -2401,7 +2401,7 @@ address,type,size
 00460bd0,function,308
 00460d10,function,15
 00460d30,function,795
-004610a0,function,723
+004610a0,function,888
 00461420,function,257
 00461660,function,36
 00461690,function,181
@@ -5662,7 +5662,7 @@ address,type,size
 0051af00,function,442
 0051b0c0,function,235
 0051b1b0,function,259
-0051b2e0,function,839
+0051b2e0,function,1319
 0051b810,function,152
 0051b8b0,function,126
 0051b930,function,75

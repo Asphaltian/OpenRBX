@@ -229,7 +229,7 @@ address,type,symbol
 004bcc40,synthetic,??_E?$DescribedCreatable@VServer@Network@RBX@@VPeer@23@$1?sServer@23@3PADA@RBX@@WJM@AEPAXI@Z
 004bcc50,synthetic,??_E?$FactoryProduct@VServer@Network@RBX@@VPeer@23@$1?sServer@23@3PADA@RBX@@OPM@AEPAXI@Z
 004bcc60,synthetic,??_E?$FactoryProduct@VServer@Network@RBX@@VPeer@23@$1?sServer@23@3PADA@RBX@@OCE@AEPAXI@Z
-004bdc10,stub,??$Write@_N@BitStream@RakNet@@QAEX_N@Z
+004bdc10,synthetic,??$Write@_N@BitStream@RakNet@@QAEX_N@Z
 004c1d00,synthetic,??_E?$FactoryProduct@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@OBE@AEPAXI@Z
 004c1d10,synthetic,??_E?$FactoryProduct@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@OJM@AEPAXI@Z
 004c1df0,synthetic,?getClassName@?$FactoryProduct@VNetworkSettings@RBX@@VItem@GlobalSettings@2@$1?sNetworkSettings@2@3QBDB@RBX@@UBEABVName@2@XZ
@@ -1625,7 +1625,7 @@ address,type,symbol
 006632c0,stub,?onComputeForce@Balancing@RBX@@MAEXM@Z
 00667d90,synthetic,??_9Contact@RBX@@$BBM@AE
 0069afbf,stub,_atexit
-007ef270,stub,??__Fcreators@?1??getCreators@?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@KAAAV?$map@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@@std@@XZ@YAXXZ
+007ef270,synthetic,??__Fcreators@?1??getCreators@?$AbstractFactoryProduct@VInstance@RBX@@@RBX@@KAAAV?$map@PBVName@RBX@@PBVICreator@2@U?$less@PBVName@RBX@@@std@@V?$allocator@U?$pair@QBVName@RBX@@PBVICreator@2@@std@@@5@@std@@XZ@YAXXZ
 007f2260,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4AssertAction@Debugable@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 007f2270,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4ErrorReporting@DebugSettings@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ
 007f2b80,synthetic,??__Fs@?1??singleton@?$EnumDesc@W4FormFactor@PartInstance@RBX@@@Reflection@RBX@@SAABV123@XZ@YAXXZ

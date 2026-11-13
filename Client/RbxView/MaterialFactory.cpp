@@ -25,7 +25,7 @@ private:
 	}
 
 public:
-	static const unsigned int numStrips;
+	static const unsigned int numStrips = 32;
 
 	static float stripWidth();
 
@@ -33,8 +33,6 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(MegaTextureProxy, 0x50)
-
-const unsigned int MegaTextureProxy::numStrips = 32;
 
 // FUNCTION: WEBSERVICE 0x101749c0
 // FUNCTION: ROBLOX 0x0047ee80
