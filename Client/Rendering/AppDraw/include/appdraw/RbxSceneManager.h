@@ -139,7 +139,8 @@ protected:
 	bool validateRenderableForRendering(const Pass* pass, const Renderable* rend);
 
 public:
-	enum PrefabType {
+	enum PrefabType
+	{
 		PT_PLANE,
 		PT_CUBE,
 		PT_SPHERE
@@ -400,7 +401,10 @@ public:
 	virtual void destroySceneNode(const String& name);
 	virtual SceneNode* getSceneNode(const String& name) const;
 	virtual size_t estimateWorldGeometry(const String& filename) { return 0; }
-	virtual size_t estimateWorldGeometry(DataStreamPtr& stream, const String& typeName = StringUtil::BLANK) { return 0; }
+	virtual size_t estimateWorldGeometry(DataStreamPtr& stream, const String& typeName = StringUtil::BLANK)
+	{
+		return 0;
+	}
 	virtual bool setOption(const String& strKey, const void* pValue) { return false; }
 	virtual bool getOption(const String& strKey, void* pDestValue) { return false; }
 	virtual bool hasOption(const String& strKey) const { return false; }
