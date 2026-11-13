@@ -72,8 +72,8 @@ Rect GuiItem::getMyRect() const
 	return Rect(pos, pos + getSize());
 }
 
-// STUB: WEBSERVICE 0x100d10b0
-// STUB: ROBLOX 0x0058ccc0
+// FUNCTION: WEBSERVICE 0x100d10b0
+// FUNCTION: ROBLOX 0x0058ccc0
 void GuiItem::label2d(
 	Adorn* adorn, const std::string& label, const G3D::Color4& fill, const G3D::Color4& border, Adorn::XAlign align
 ) const
@@ -88,15 +88,15 @@ void GuiItem::label2d(
 	G3D::Vector2 pos = myRect.center();
 
 	switch (align) {
+	default:
+		pos.x = myRect.low.x + size.x * 0.1f;
+		break;
+
 	case Adorn::XALIGN_RIGHT:
 		pos.x = myRect.high.x - size.x * 0.1f;
 		break;
 
 	case Adorn::XALIGN_CENTER:
-		break;
-
-	default:
-		pos.x = myRect.low.x + size.x * 0.1f;
 		break;
 	}
 
