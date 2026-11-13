@@ -3771,7 +3771,6 @@ address,type,symbol,name,module,size
 0081a9b0,global,,bevel,TorsoMesh.obj,
 0081a708,global,?widthInset@BrickMesh@ViewNew@RBX@@2MB,,,
 0081a70c,global,?normalPerturbation@BrickMesh@ViewNew@RBX@@2MB,,,
-00534740,stub,??1TextureProxy@RenderNew@RBX@@UAE@XZ,,,
 0050bf30,library,?freeMemory@?$Table@VRenderSurfaceTypes@ViewNew@RBX@@V?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VPBBMesh@ViewNew@RBX@@$03@ViewNew@RBX@@@G3D@@@G3D@@AAEXXZ,,,
 0050bfa0,library,?freeMemory@?$Table@VRenderSurfaceTypes@ViewNew@RBX@@V?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VSphereMesh@ViewNew@RBX@@$00@ViewNew@RBX@@@G3D@@@G3D@@AAEXXZ,,,
 0050c010,library,?freeMemory@?$Table@VRenderSurfaceTypes@ViewNew@RBX@@V?$Table@VVector3@G3D@@UVariations@?$MeshFactory@VCylinderAlongXMesh@ViewNew@RBX@@$00@ViewNew@RBX@@@G3D@@@G3D@@AAEXXZ,,,

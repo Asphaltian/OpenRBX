@@ -51,6 +51,8 @@ public:
 		this->filename = filename;
 	}
 
+	~TextureProxy();
+
 	TextureProxyRef shade(const G3D::Color3& baseColor, const TextureProxyRef& baseTex);
 
 	TextureProxyRef alphaOnlyVersion();

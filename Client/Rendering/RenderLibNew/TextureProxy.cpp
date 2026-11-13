@@ -155,6 +155,20 @@ G3D::Vector2 TextureProxy::getSize()
 	return size;
 }
 
+// FUNCTION: ROBLOX 0x00534740
+TextureProxy::~TextureProxy()
+{
+	if (!m_unk0x4c.isNull() && m_unk0x4c->getName() == g_unk0x009587d4) {
+		m_unk0x4c.setNull();
+		Ogre::ResourceGroupManager::getSingleton().unloadUnreferencedResourcesInGroup(g_unk0x009587d4, true);
+		Ogre::StringVectorPtr names =
+			Ogre::ResourceGroupManager::getSingleton().listResourceNames(g_unk0x009587d4, false);
+		Ogre::LogManager::getSingleton().logMessage(
+			"RBX shadetex remaining: " + Ogre::StringConverter::toString(names->size())
+		);
+	}
+}
+
 // STUB: ROBLOX 0x00534d20
 G3D::ReferenceCountedPointer<G3D::Texture> TextureProxy::resolve(G3D::RenderDevice* rd)
 {
