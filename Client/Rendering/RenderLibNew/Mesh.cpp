@@ -198,11 +198,17 @@ void Mesh::freeVertex(unsigned int index)
 	}
 }
 
-// STUB: ROBLOX 0x00532770
+// FUNCTION: ROBLOX 0x00532770
 Mesh::Level::~Level()
 {
 	for (int i = 0; i < indexArray.size(); i++) {
 		freeVertex(indexArray[i]);
+	}
+
+	FUN_005322f0();
+	g_unk0x0095873c++;
+	if (!g_unk0x0095877c.isNull()) {
+		g_unk0x0095877c->getNumSubMeshes();
 	}
 }
 
