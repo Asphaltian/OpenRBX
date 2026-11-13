@@ -7638,7 +7638,7 @@ address,type,symbol,name,module,size
 005ef030,library,,,,
 0067a7f0,library,,,,
 00687f10,library,,,,
-00689cb0,library,,,,
+00689cb0,library,??4?$SharedPtr@VShadowCameraSetup@Ogre@@@Ogre@@QAEAAV01@ABV01@@Z,,,
 0068c070,library,,,,
 0068cc30,library,,,,
 0068f420,library,,,,

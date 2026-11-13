@@ -139,6 +139,12 @@ protected:
 	bool validateRenderableForRendering(const Pass* pass, const Renderable* rend);
 
 public:
+	enum PrefabType {
+		PT_PLANE,
+		PT_CUBE,
+		PT_SPHERE
+	};
+
 	using SceneManager::createEntity;
 
 	const ShadowCasterList& getShadowCasterList() const { return mShadowCasterList; }
@@ -168,6 +174,7 @@ public:
 	virtual void _notifyLightsDirty(void);
 	virtual const LightList& _getLightsAffectingFrustum(void) const;
 	virtual Entity* createEntity(const String& entityName, PrefabType ptype);
+	virtual SceneNode* getRootSceneNode(void) const;
 	virtual bool hasSceneNode(const String& name) const;
 	virtual Entity* getEntity(const String& name) const;
 	virtual bool hasEntity(const String& name) const;
@@ -392,6 +399,16 @@ public:
 	virtual SceneNode* createSceneNode(const String& name);
 	virtual void destroySceneNode(const String& name);
 	virtual SceneNode* getSceneNode(const String& name) const;
+	virtual size_t estimateWorldGeometry(const String& filename) { return 0; }
+	virtual size_t estimateWorldGeometry(DataStreamPtr& stream, const String& typeName = StringUtil::BLANK) { return 0; }
+	virtual bool setOption(const String& strKey, const void* pValue) { return false; }
+	virtual bool getOption(const String& strKey, void* pDestValue) { return false; }
+	virtual bool hasOption(const String& strKey) const { return false; }
+	virtual bool getOptionValues(const String& strKey, StringVector& refValueList) { return false; }
+	virtual bool getOptionKeys(StringVector& refKeys) { return false; }
+	virtual void _setDestinationRenderSystem(RenderSystem* sys);
+	virtual FogMode getFogMode(void) const;
+	virtual void setShadowCameraSetup(const ShadowCameraSetupPtr& shadowSetup);
 	virtual Entity* createEntity(const String& entityName, const String& meshName);
 	virtual ParticleSystem* createParticleSystem(const String& name, const String& templateName);
 	virtual ParticleSystem* createParticleSystem(
