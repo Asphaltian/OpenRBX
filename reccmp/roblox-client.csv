@@ -4040,7 +4040,7 @@ address,type,symbol,name,module,size
 00429e90,synthetic,??_E?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@ODM@AEPAXI@Z,,,
 00429ed0,synthetic,??_E?$FactoryProduct@VClass@Metadata@Reflection@RBX@@VItem@234@$1?sClass@234@3PADA@RBX@@OBA@AEPAXI@Z,,,
 00429ff0,synthetic,??_E?$FactoryProduct@VMember@Metadata@Reflection@RBX@@VItem@234@$1?sMember@234@3PADA@RBX@@OJM@AEPAXI@Z,,,
-00437a90,library,?PreTranslateMessage@CXTTreeViewBase@@OGA@AEHPAUtagMSG@@@Z,,,
+00437a90,library,?OnNotify@CXTTreeViewBase@@OGA@AEHIJPAJ@Z,,,8
 004486a0,synthetic,??_E?$FactoryProduct@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@OBE@AEPAXI@Z,,,
 004486b0,synthetic,??_E?$FactoryProduct@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@OFE@AEPAXI@Z,,,
 004486c0,synthetic,??_E?$FactoryProduct@VCRenderSettings@@VItem@GlobalSettings@RBX@@$1?sRenderSettings@@3QBDB@RBX@@OCE@AEPAXI@Z,,,
@@ -9374,7 +9374,7 @@ address,type,symbol,name,module,size
 006f5430,library,,,,
 00707985,library,,,,
 0070c340,library,,,,
-0070d070,library,,,,
+0070d070,library,?GetRuntimeClass@CXTPPropertyGridItemColor@@UBEPAUCRuntimeClass@@XZ,,,
 0070d0c0,library,,,,
 0070ff70,library,,,,
 00710710,library,,,,
@@ -9811,3 +9811,11 @@ address,type,symbol,name,module,size
 00728e00,library,??_ECXTPRibbonBarMorePopupToolBar@@WFE@AEPAXI@Z,,,8
 0073b8e0,library,??_ECCustomizeEdit@CXTPCustomizeSheet@@WCA@AEPAXI@Z,,,8
 0078bd80,library,??_ECXTCaptionButton@@WFE@AEPAXI@Z,,,8
+00408ff0,library,?AddRef@?$CComContainedObject@VCApp@@@ATL@@W3AGKXZ,,,10
+0040bab0,library,?Release@?$CComContainedObject@VCBrowserViewExternal@@@ATL@@W3AGKXZ,,,10
+0040bae0,library,?QueryInterface@?$CComContainedObject@VCBrowserViewExternal@@@ATL@@WBE@AGJABU_GUID@@PAPAX@Z,,,10
+0040baf0,library,?Release@?$CComContainedObject@VCApp@@@ATL@@WBE@AGKXZ,,,10
+0040bb00,library,?AddRef@?$CComContainedObject@VCBrowserViewExternal@@@ATL@@WBE@AGKXZ,,,10
+0040bb10,library,?QueryInterface@?$CComContainedObject@VCBrowserViewExternal@@@ATL@@W3AGJABU_GUID@@PAPAX@Z,,,10
+00437aa0,library,?PreTranslateMessage@CXTTreeViewBase@@OGA@AEHPAUtagMSG@@@Z,,,8
+00761a90,,??_ECXTPDockingPaneOffice2003Theme@XTPDockingPanePaintThemes@@UAEPAXI@Z,,,

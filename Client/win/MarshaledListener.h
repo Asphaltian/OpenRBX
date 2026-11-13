@@ -116,6 +116,8 @@ namespace RBX {
 // ??0EventData@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@QAE@PAV12@PBVRunService@2@W4RunState@2@@Z
 // TEMPLATE: ROBLOX 0x00469250
 // ??1EventData@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@UAE@XZ
+// STUB: ROBLOX 0x004692f0
+// ?VTable0x00@EventData@?$MarshaledListener@VInstance@RBX@@VPropertyChanged@2@V12@V32@@RBX@@UAEXXZ
 // TEMPLATE: ROBLOX 0x004693f0
 // ??1EventData@?$MarshaledListener@VRunService@RBX@@W4RunState@2@V12@W432@@RBX@@UAE@XZ
 // TEMPLATE: ROBLOX 0x00469490
