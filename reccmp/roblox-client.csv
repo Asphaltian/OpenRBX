@@ -9604,3 +9604,8 @@ address,type,symbol,name,module,size
 007f1410,library,,"`dynamic atexit destructor for 'G3D::ToneMap::RG''",,
 007f1450,library,,"`dynamic atexit destructor for 'G3D::ToneMap::B''",,
 00686f90,library,?destroy@?$SharedPtr@VShadowCameraSetup@Ogre@@@Ogre@@MAEXXZ,,,
+007e4e00,synthetic,,"`dynamic initializer for 'g_unk0x0095429c''",,
+007effa0,synthetic,,"`dynamic atexit destructor for 'g_unk0x0095429c''",,
+0095429c,global,,g_unk0x0095429c,Roblox.obj,
+0081a86c,global,??_7BadConversion@ViewNew@RBX@@6B@,,,
+008d2b6c,global,__TI3?AVBadConversion@ViewNew@RBX@@,,,

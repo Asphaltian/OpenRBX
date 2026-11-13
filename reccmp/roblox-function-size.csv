@@ -20655,6 +20655,7 @@ address,type,size
 007eff00,function,77
 007eff50,function,10
 007eff60,function,55
+007effa0,function,10
 007effb0,function,55
 007f0000,function,12
 007f0020,function,55
