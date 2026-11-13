@@ -42,6 +42,14 @@ BOOL CRobloxView::OnPreparePrinting(CPrintInfo* pInfo)
 	return DoPreparePrinting(pInfo);
 }
 
+void CRobloxView::OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo)
+{
+}
+
+void CRobloxView::OnEndPrinting(CDC* pDC, CPrintInfo* pInfo)
+{
+}
+
 // FUNCTION: ROBLOX 0x0045d500
 void CRobloxView::onEvent(const RBX::Network::Players* source, RBX::SuperSafeChanged event)
 {

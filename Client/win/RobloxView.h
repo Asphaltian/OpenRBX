@@ -142,6 +142,8 @@ public:
 	virtual void OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView);
 	virtual void OnActivateFrame(UINT nState, CFrameWnd* pFrameWnd);
 	virtual BOOL OnPreparePrinting(CPrintInfo* pInfo);
+	virtual void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo);
+	virtual void OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
 	boost::shared_ptr<RBX::DataModel> FUN_00403290() const;
 	void FUN_0045e900();

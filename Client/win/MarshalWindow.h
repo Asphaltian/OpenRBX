@@ -41,6 +41,9 @@ public:
 	// SYNTHETIC: ROBLOX 0x00436c00
 	// ?ProcessWindowMessage@CMarshalWindow@RBX@@UAEHPAUHWND__@@IIJAAJK@Z
 
+	// FUNCTION: ROBLOX 0x00418e30 FOLDED
+	virtual void OnFinalMessage(HWND hWnd) { delete this; }
+
 	void FUN_00436b00(EventDataBase* data);
 
 	static void FUN_00436cc0(CMarshalWindow* window);

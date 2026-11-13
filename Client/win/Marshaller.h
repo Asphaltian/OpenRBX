@@ -33,7 +33,7 @@ public:
 	// SYNTHETIC: ROBLOX 0x00418f90
 	// ?ProcessWindowMessage@Marshaller@@UAEHPAUHWND__@@IIJAAJK@Z
 
-	// FUNCTION: ROBLOX 0x00418e30
+	// FUNCTION: ROBLOX 0x00418e30 FOLDED
 	virtual void OnFinalMessage(HWND hWnd) { delete this; }
 
 	// FUNCTION: ROBLOX 0x00418fd0
