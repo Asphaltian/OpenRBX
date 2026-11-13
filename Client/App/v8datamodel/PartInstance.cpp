@@ -1164,8 +1164,7 @@ bool PartInstance::resize(NormalId p_unk0x04, int p_unk0x08)
 		CoordinateFrame newCoord(oldCoord.rotation, newTranslation);
 
 		setCoordinateFrame(newCoord);
-		Vector3 sizeXml = uiToXmlSize(newSizeUi);
-		setPartSizeXml(sizeXml);
+		setPartSizeXml(uiToXmlSize(newSizeUi));
 		safeMove();
 
 		if (Math::fuzzyEq(getCoordinateFrame(), newCoord, 0.00001f, 0.00001f)) {

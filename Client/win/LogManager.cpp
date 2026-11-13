@@ -226,7 +226,7 @@ bool MainLogManager::hasCrashLogs() const
 	return false;
 }
 
-// STUB: WEBSERVICE 0x10002840
+// FUNCTION: WEBSERVICE 0x10002840
 // FUNCTION: ROBLOX 0x0042cd30
 std::vector<std::string> MainLogManager::archiveCrashLogs()
 {
@@ -271,7 +271,7 @@ struct DateCompare
 	bool operator()(WIN32_FIND_DATA data) const { return fileTime < data.ftCreationTime; }
 };
 
-// STUB: WEBSERVICE 0x10002c00
+// FUNCTION: WEBSERVICE 0x10002c00
 // FUNCTION: ROBLOX 0x0042c780
 void MainLogManager::CullLogs(const char* folder, int maxLogs)
 {
