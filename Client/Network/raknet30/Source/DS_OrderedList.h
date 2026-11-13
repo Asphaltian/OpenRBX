@@ -71,8 +71,9 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c2070
-	// FUNCTION: ROBLOX 0x004d4730
 	// DataStructures::OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>::~OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>
+	// FUNCTION: ROBLOX 0x004d4730
+	// DataStructures::OrderedList<int,DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode,&DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::NodeComparisonFunc>::~OrderedList<int,DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode,&DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::NodeComparisonFunc>
 	// FUNCTION: WEBSERVICE 0x101bedb0
 	// FUNCTION: ROBLOX 0x004e4da0
 	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::~OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >
@@ -127,8 +128,9 @@ namespace DataStructures
 	// FUNCTION: ROBLOX 0x004d7aa0
 	// DataStructures::OrderedList<SystemAddress,SystemAddressAndIndex,&SystemAddressAndIndexComp>::GetIndexFromKey
 	// FUNCTION: WEBSERVICE 0x101bb0f0
-	// FUNCTION: ROBLOX 0x004e2e10
 	// DataStructures::OrderedList<unsigned int,DataStructures::RangeNode<unsigned int>,&DataStructures::RangeNodeComp<unsigned int> >::GetIndexFromKey
+	// FUNCTION: ROBLOX 0x004e2e10
+	// DataStructures::OrderedList<int,DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode,&DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::NodeComparisonFunc>::GetIndexFromKey
 	// FUNCTION: WEBSERVICE 0x101bc4c0
 	// FUNCTION: ROBLOX 0x004e2be0
 	// DataStructures::OrderedList<unsigned short,SplitPacketChannel *,&SplitPacketChannelComp>::GetIndexFromKey

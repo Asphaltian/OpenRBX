@@ -117,8 +117,9 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101b0400
-	// FUNCTION: ROBLOX 0x004e2430
 	// DataStructures::List<RPCNode *>::~List<RPCNode *>
+	// FUNCTION: ROBLOX 0x004e2430
+	// DataStructures::List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>::~List<DataStructures::Map<int,HuffmanEncodingTree *,&DataStructures::defaultMapKeyComparison<int> >::MapNode>
 	// FUNCTION: WEBSERVICE 0x101bd030
 	// FUNCTION: ROBLOX 0x004e3020
 	// DataStructures::List<DataStructures::RangeNode<unsigned int> >::~List<DataStructures::RangeNode<unsigned int> >
@@ -249,8 +250,9 @@ namespace DataStructures
 
 
 	// FUNCTION: WEBSERVICE 0x101bc440
-	// FUNCTION: ROBLOX 0x004e2440
 	// DataStructures::List<RPCNode *>::Insert
+	// FUNCTION: ROBLOX 0x004e2440
+	// DataStructures::List<PluginInterface *>::Insert
 	// FUNCTION: WEBSERVICE 0x101b1df0
 	// FUNCTION: ROBLOX 0x004d7c00
 	// DataStructures::List<SystemAddressAndIndex>::Insert(struct SystemAddressAndIndex)
@@ -297,8 +299,9 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c1190
-	// FUNCTION: ROBLOX 0x004e7180
 	// DataStructures::List<RPCNode *>::Replace
+	// FUNCTION: ROBLOX 0x004e7180
+	// DataStructures::List<DataStructures::LinkedList<InternalPacket *> *>::Replace
 	template <class list_type>
 		inline void List<list_type>::Replace( const list_type input, const list_type filler, const unsigned int position )
 	{

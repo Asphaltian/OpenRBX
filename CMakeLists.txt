@@ -325,6 +325,39 @@ set(OPENRBX_RAKNET_SOURCES
   Client/Network/raknet30/Source/StringTable.cpp
   Client/Network/raknet30/Source/rijndael.cpp
 )
+set(OPENRBX_NETWORK_CLIENT_SOURCES
+  Client/Network/Player.cpp
+  Client/Network/Players.cpp
+  Client/Network/CrashReporter.cpp
+  Client/Network/API.cpp
+  Client/Network/raknet30/Source/PluginInterface.cpp
+  Client/Network/Client.cpp
+  Client/Network/Server.cpp
+  Client/Network/raknet30/Source/BitStream.cpp
+  Client/Network/Streaming.cpp
+  Client/Network/raknet30/Source/RakNetTypes.cpp
+  Client/Network/raknet30/Source/FileOperations.cpp
+  Client/Network/NetworkSettings.cpp
+  Client/Network/Replicator.cpp
+  Client/Network/raknet30/Source/PacketLogger.cpp
+  Client/Network/raknet30/Source/StringCompressor.cpp
+  Client/Network/raknet30/Source/GetTime.cpp
+  Client/Network/ClientPhysics.cpp
+  Client/Network/raknet30/Source/RakPeer.cpp
+  Client/Network/raknet30/Source/DS_HuffmanEncodingTree.cpp
+  Client/Network/raknet30/Source/SocketLayer.cpp
+  Client/Network/raknet30/Source/ReliabilityLayer.cpp
+  Client/Network/raknet30/Source/RPCMap.cpp
+  Client/Network/raknet30/Source/Rand.cpp
+  Client/Network/raknet30/Source/NetworkIDManager.cpp
+  Client/Network/raknet30/Source/StringTable.cpp
+  Client/Network/raknet30/Source/SHA1.cpp
+  Client/Network/raknet30/Source/RakSleep.cpp
+  Client/Network/raknet30/Source/DataBlockEncryptor.cpp
+  Client/Network/raknet30/Source/rijndael.cpp
+  Client/Network/raknet30/Source/CheckSum.cpp
+  Client/Network/raknet30/Source/SimpleMutex.cpp
+)
 set(OPENRBX_RBXVIEW_SOURCES
   Client/RbxView/BevelMesh.cpp
   Client/RbxView/BrickMesh.cpp
@@ -510,6 +543,12 @@ if (TARGET network AND OPENRBX_RAKNET_SOURCES)
   set_source_files_properties(${OPENRBX_RAKNET_SOURCES}
     PROPERTIES COMPILE_DEFINITIONS "_CRT_SECURE_NO_WARNINGS")
 endif()
+
+add_engine_library(network_client
+  OPTIONS /O2
+  SOURCES ${OPENRBX_NETWORK_CLIENT_SOURCES}
+)
+list(REMOVE_ITEM OPENRBX_ENGINE_LIBRARIES network_client)
 
 add_engine_library(rbxview
   DEFINITIONS _RELEASE
@@ -765,7 +804,7 @@ if (MSVC_FOR_DECOMP)
   )
 
   set(OPENRBX_CLIENT_ENGINE_LIBRARIES)
-  foreach(lib rbxview renderlib rbxviewnew renderlibnew network app appdraw_rbxgfx appdraw appdraw_client lua)
+  foreach(lib rbxview renderlib rbxviewnew renderlibnew network_client app appdraw_rbxgfx appdraw appdraw_client lua)
     if (TARGET ${lib})
       list(APPEND OPENRBX_CLIENT_ENGINE_LIBRARIES ${lib})
     endif()

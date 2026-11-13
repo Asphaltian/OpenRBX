@@ -81,8 +81,9 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101bc160
-	// FUNCTION: ROBLOX 0x004e1f10
 	// DataStructures::Queue<HuffmanEncodingTreeNode *>::Queue<HuffmanEncodingTreeNode *>
+	// FUNCTION: ROBLOX 0x004e1f10
+	// DataStructures::Queue<Packet *>::Queue<Packet *>
 	template <class queue_type>
 		Queue<queue_type>::Queue()
 	{
@@ -93,8 +94,9 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101c16f0
-	// FUNCTION: ROBLOX 0x004e1f50
 	// DataStructures::Queue<HuffmanEncodingTreeNode *>::~Queue<HuffmanEncodingTreeNode *>
+	// FUNCTION: ROBLOX 0x004e1f50
+	// DataStructures::Queue<Packet *>::~Queue<Packet *>
 	template <class queue_type>
 		Queue<queue_type>::~Queue()
 	{
@@ -189,8 +191,9 @@ namespace DataStructures
 	}
 
 	// FUNCTION: WEBSERVICE 0x101b08a0
-	// FUNCTION: ROBLOX 0x004e1f60
 	// DataStructures::Queue<HuffmanEncodingTreeNode *>::Push
+	// FUNCTION: ROBLOX 0x004e1f60
+	// DataStructures::Queue<Packet *>::Push
 	// FUNCTION: WEBSERVICE 0x101bc290
 	// FUNCTION: ROBLOX 0x004e2120
 	// DataStructures::Queue<__int64>::Push
