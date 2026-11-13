@@ -30,8 +30,8 @@ DepthBlur* EffectSettings::getDepthBlur()
 	return depthBlur.get();
 }
 
-// STUB: WEBSERVICE 0x101f8bc0
-// STUB: ROBLOX 0x004a40f0
+// FUNCTION: WEBSERVICE 0x101f8bc0
+// FUNCTION: ROBLOX 0x004a40f0
 G3D::ReferenceCountedPointer<G3D::Lighting> EffectSettings::update(
 	float shadingDetail,
 	float meshDetail,
@@ -86,7 +86,7 @@ G3D::ReferenceCountedPointer<G3D::Lighting> EffectSettings::update(
 		}
 	}
 
-	std::sort(lighting->shadowedLightArray.begin(), lighting->shadowedLightArray.end(), brighter);
+	lighting->shadowedLightArray.sort(brighter);
 
 	int excessShadowLights = lighting->shadowedLightArray.size() - numShadowLights;
 
@@ -100,7 +100,7 @@ G3D::ReferenceCountedPointer<G3D::Lighting> EffectSettings::update(
 		lighting->shadowedLightArray.resize(lighting->shadowedLightArray.size() - excessShadowLights, true);
 	}
 
-	std::sort(lighting->lightArray.begin(), lighting->lightArray.end(), brighter);
+	lighting->lightArray.sort(brighter);
 
 	int excessLights = lighting->lightArray.size() - numNonShadowLights;
 
@@ -110,10 +110,13 @@ G3D::ReferenceCountedPointer<G3D::Lighting> EffectSettings::update(
 
 	_useAllLightsInUnshadowedPass = _stencilShadows == false;
 
+	static const float brighten = 1.0f;
 	for (int i = 0; i < lighting->lightArray.size(); i++) {
+		lighting->lightArray[i].color *= brighten;
 	}
 
 	for (int i = 0; i < lighting->shadowedLightArray.size(); i++) {
+		lighting->shadowedLightArray[i].color *= brighten;
 	}
 
 	if (_toneMap) {

@@ -89,9 +89,15 @@ SphereMesh::SphereMesh(const G3D::Vector3& diameter, RenderSurfaceTypes surfaceT
 	}
 }
 
-// STUB: ROBLOX 0x00528470
+// FUNCTION: ROBLOX 0x00528470
 SphereMesh::SphereMesh(const G3D::Vector3& size, NormalId decalFace)
 {
+	if (false) {
+		RenderNew::Mesh::LevelRef tempShadowLevel = new RenderNew::Mesh::Level(G3D::RenderDevice::TRIANGLES);
+		SphereBuilder builder(tempShadowLevel, size, RenderSurfaceTypes(), 3);
+		builder.build(LevelBuilder::Shadow);
+	}
+
 	RenderNew::Mesh::LevelRef level = new RenderNew::Mesh::Level(G3D::RenderDevice::QUADS);
 
 	levels.append(level);

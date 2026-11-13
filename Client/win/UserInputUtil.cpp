@@ -403,7 +403,7 @@ SDLMod FUN_0046e2e0(const BYTE* keys)
 	return static_cast<SDLMod>(mod);
 }
 
-// STUB: ROBLOX 0x0046e3e0
+// FUNCTION: ROBLOX 0x0046e3e0
 void FUN_0046e3e0(
 	const G3D::Vector2& mouseDelta,
 	G3D::Vector2& wrapMouseDelta,
@@ -414,8 +414,7 @@ void FUN_0046e3e0(
 )
 {
 	G3D::Vector2 half(size.x * 0.5, size.y * 0.5);
-	float inset = border;
-	RBX::Rect bounds(inset - half.x, inset - half.y, half.x - inset, half.y - inset);
+	RBX::Rect bounds = RBX::Rect(-half, half).inset(border);
 
 	G3D::Vector2 oldPosition = position;
 	bounds.unionWith(RBX::Rect(oldPosition, oldPosition));
