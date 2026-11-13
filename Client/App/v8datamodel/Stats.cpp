@@ -40,17 +40,17 @@ void Item::formatValue(double val, const char* fmt, ...)
 	va_end(argList);
 }
 
-// STUB: ROBLOX 0x005d3820
+// FUNCTION: ROBLOX 0x005d3820
 template <>
 void Item::formatValue<G3D::Stopwatch>(const G3D::Stopwatch& value)
 {
 	val = value.smoothElapsedTime();
-	if (value.smoothElapsedTime() <= 0) {
-		sValue = Log::formatTime(value.smoothElapsedTime());
-	}
-	else {
+	if (value.smoothElapsedTime() > 0) {
 		std::string time = Log::formatTime(value.smoothElapsedTime());
 		sValue = G3D::format("%s (%.3gfps)", time.c_str(), 1.0 / value.smoothElapsedTime());
+	}
+	else {
+		sValue = Log::formatTime(value.smoothElapsedTime());
 	}
 }
 
