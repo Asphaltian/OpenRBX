@@ -245,10 +245,11 @@ RbxSky::RbxSky(SceneManager* sceneManager, const String& folder, bool p_unk0x0c)
 		Real brightness = i;
 		m_unk0x78->setPointSize(brightness + 0.2f);
 
-		ManualObject* stars = new ManualObject(name + "st" + StringConverter::toString(i));
+		String starsName = name + "st" + StringConverter::toString(i);
+		ManualObject* stars = new ManualObject(starsName);
 		stars->begin(m_unk0x78->getName(), RenderOperation::OT_POINT_LIST);
 		for (int j = 0; j < (int) m_unk0x88.size(); j++) {
-			if (m_unk0x98[j] * 3.0 > i - 1 && m_unk0x98[j] * 3.0 <= brightness) {
+			if (i - 1 < m_unk0x98[j] * 3.0 && m_unk0x98[j] * 3.0 <= brightness) {
 				stars->position(m_unk0x88[j].x, m_unk0x88[j].y, m_unk0x88[j].z);
 			}
 		}

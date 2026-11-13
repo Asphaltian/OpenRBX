@@ -98,7 +98,7 @@ private:
 		}
 	}
 
-	// STUB: WEBSERVICE 0x100065a0
+	// FUNCTION: WEBSERVICE 0x100065a0
 	static OSMesaContext shared(bool alphaChannel)
 	{
 		if (alphaChannel) {

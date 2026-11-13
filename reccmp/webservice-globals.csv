@@ -7026,8 +7026,8 @@ address,type,symbol
 0x10301b08,global,showedMessage___RobloxCrashReporter::ProcessException
 0x10301b10,global,??_B?1???$assign_to@P6AXPAVThreadLogManager@@@Z@?$function1@XPAVThreadLogManager@@V?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXP6AXPAVThreadLogManager@@@Z@Z@51
 0x10301b14,global,value___log_detail::init
-0x10301b34,global,?shared@?6??0OSContext@@CAPAUosmesa_context@@_N@Z@4V1@A
-0x10301b68,global,?shared@?4??0OSContext@@CAPAUosmesa_context@@_N@Z@4V1@A
+0x10301b34,global,shared___OSContext::shared
+0x10301b68,global,shared___OSContext::shared
 0x10301b9c,global,??_B?4??shared@OSContext@@CAPAUosmesa_context@@_N@Z@54
 0x10301ba8,global,??_B?1???$assign_to@U?$tss_adapter@VThreadLogManager@@@detail@boost@@@?$function1@XPAXV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXU?$tss_adapter@VThreadLogManager@@@detail@1@@Z@51
 0x10301bb0,global,isNullClassName___RBX::ServiceProvider::find<RBX::Workspace>

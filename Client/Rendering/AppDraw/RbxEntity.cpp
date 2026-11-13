@@ -149,8 +149,8 @@ void RbxEntity::FUN_00676870(Camera* cam)
 	}
 	else {
 		managed = true;
-		candidates.resize(mSubEntityList.size());
-		candidates.clear();
+		candidates.resize(mSubEntityList.size(), Unknown00676870());
+		candidates.erase(candidates.begin(), candidates.end());
 	}
 
 	if (!mSubEntityList.empty()) {
@@ -199,8 +199,8 @@ void RbxEntity::FUN_00676870(Camera* cam)
 			VisualEngine::Unk0x18::Unk0x08& last = m_unk0x240->FUN_00671ef0(0);
 			Real average = m_unk0x240->FUN_00672980(20);
 
-			if (Math::Abs((average - last.m_unk0x00) / average) > 0.2f) {
-				if (last.m_unk0x04 > last.m_unk0x08) {
+			if (!(Math::Abs((average - last.m_unk0x00) / average) <= 0.2)) {
+				if (last.m_unk0x08 < last.m_unk0x04) {
 					Real limit = (Real) candidates.size() < last.m_unk0x08 ? (Real) candidates.size() : last.m_unk0x08;
 					count = limit;
 				}
@@ -333,7 +333,7 @@ void RbxEntity::FUN_006772d0(Camera* camera, const Light* light, std::vector<Sha
 	}
 
 	Real savedFarDistance;
-	if (0.0f < farDistance) {
+	if (farDistance > 0.0f) {
 		savedFarDistance = camera->getFarClipDistance();
 		camera->setFarClipDistance(farDistance);
 	}
@@ -394,7 +394,7 @@ void RbxEntity::FUN_006772d0(Camera* camera, const Light* light, std::vector<Sha
 		}
 	}
 
-	if (0.0f < farDistance) {
+	if (farDistance > 0.0f) {
 		camera->setFarClipDistance(savedFarDistance);
 	}
 }
