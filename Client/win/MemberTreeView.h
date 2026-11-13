@@ -35,6 +35,8 @@ protected:
 public:
 	virtual ~CMemberTreeView();
 
+	virtual void OnInitialUpdate();
+
 	void FUN_004380e0(const RBX::Reflection::EnumDescriptor::Item* item);
 	void FUN_00438130(HTREEITEM item, RBX::Reflection::Metadata::Item* metadata);
 	void FUN_00438300(const RBX::Reflection::PropertyDescriptor* descriptor);

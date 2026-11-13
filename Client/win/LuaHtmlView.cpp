@@ -88,7 +88,7 @@ BOOL CLuaHtmlView::OnAmbientProperty(COleControlSite* pSite, DISPID dispid, VARI
 	return TRUE;
 }
 
-// FUNCTION: ROBLOX 0x0042d6c0
+// FUNCTION: ROBLOX 0x0042d6c0 FOLDED
 HRESULT CLuaHtmlView::OnGetHostInfo(DOCHOSTUIINFO* pInfo)
 {
 	HRESULT hr = CSecureHtmlView::OnGetHostInfo(pInfo);

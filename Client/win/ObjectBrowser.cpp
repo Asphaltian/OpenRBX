@@ -122,6 +122,24 @@ CMemberTreeView::~CMemberTreeView()
 {
 }
 
+// FUNCTION: ROBLOX 0x00437950 FOLDED
+void CMemberTreeView::OnInitialUpdate()
+{
+	CXTTreeView::OnInitialUpdate();
+}
+
+// FUNCTION: ROBLOX 0x00437950 FOLDED
+void CObjectBrowser::OnInitialUpdate()
+{
+	CView::OnInitialUpdate();
+}
+
+// FUNCTION: ROBLOX 0x00467e20 FOLDED
+BOOL CObjectBrowser::PreCreateWindow(CREATESTRUCT& cs)
+{
+	return CView::PreCreateWindow(cs) != FALSE;
+}
+
 // FUNCTION: ROBLOX 0x00437ab0
 static boost::recursive_mutex& FUN_00437ab0()
 {

@@ -32,6 +32,7 @@ public:
 	virtual HRESULT OnGetExternal(LPDISPATCH* lppDispatch);
 	virtual HRESULT OnDocWindowActivate(BOOL fActivate);
 	virtual HRESULT OnFrameWindowActivate(BOOL fActivate);
+	virtual HRESULT OnGetHostInfo(DOCHOSTUIINFO* pInfo);
 
 	// SYNTHETIC: ROBLOX 0x0046ec50
 	// CWebToolbox::`scalar deleting destructor'

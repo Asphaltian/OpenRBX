@@ -33,6 +33,20 @@ HRESULT CWebToolbox::OnFrameWindowActivate(BOOL fActivate)
 	return CSecureHtmlView::OnFrameWindowActivate(FALSE);
 }
 
+// FUNCTION: ROBLOX 0x0042d6c0 FOLDED
+HRESULT CWebToolbox::OnGetHostInfo(DOCHOSTUIINFO* pInfo)
+{
+	HRESULT hr = CSecureHtmlView::OnGetHostInfo(pInfo);
+	if (hr == S_OK) {
+		pInfo->dwFlags |= DOCHOSTUIFLAG_DIALOG | DOCHOSTUIFLAG_DISABLE_HELP_MENU | DOCHOSTUIFLAG_NO3DBORDER |
+						  DOCHOSTUIFLAG_DISABLE_SCRIPT_INACTIVE | DOCHOSTUIFLAG_ENABLE_FORMS_AUTOCOMPLETE |
+						  DOCHOSTUIFLAG_THEME | DOCHOSTUIFLAG_LOCAL_MACHINE_ACCESS_CHECK |
+						  DOCHOSTUIFLAG_DISABLE_UNTRUSTEDPROTOCOL;
+	}
+
+	return hr;
+}
+
 // FUNCTION: ROBLOX 0x0046eb00
 void CWebToolbox::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView)
 {

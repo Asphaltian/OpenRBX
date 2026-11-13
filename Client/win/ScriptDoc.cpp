@@ -32,7 +32,7 @@ void CScriptEditor::VTable0x08(const RBX::RunService* source, RBX::RunState even
 	GetCtrl().SetReadOnly(m_unk0x145 || !m_unk0x146);
 }
 
-// FUNCTION: ROBLOX 0x00467e20
+// FUNCTION: ROBLOX 0x00467e20 FOLDED
 BOOL CScriptEditor::PreCreateWindow(CREATESTRUCT& cs)
 {
 	return CScintillaView::PreCreateWindow(cs) != FALSE;
