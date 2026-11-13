@@ -21,7 +21,7 @@ public:
 	// clang-format off
 	// TEMPLATE: WEBSERVICE 0x10047440
 	// TEMPLATE: ROBLOX 0x005a9410
-	// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::compare
+	// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::compare
 	// clang-format on
 	static bool compare(const T* a, const T* b)
 	{
@@ -79,9 +79,9 @@ public:
 			: instance(instance), iter(iter)
 		{
 		}
-
 		// clang-format off
 		// TEMPLATE: WEBSERVICE 0x10047dd0
+		// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::Iterator::operator*
 		// TEMPLATE: ROBLOX 0x005fc620
 		// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::Iterator::operator*
 		// clang-format on
@@ -147,9 +147,9 @@ protected:
 	std::vector<MemberDescriptorContainer*> derivedContainers; // 0x10
 	const MemberDescriptorContainer* base;                     // 0x20
 };
-
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100495f0
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::findDescriptor
 // TEMPLATE: ROBLOX 0x005fc920
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::PropertyDescriptor>::findDescriptor
 // clang-format on
@@ -178,6 +178,9 @@ typename MemberDescriptorContainer<T>::Collection::const_iterator MemberDescript
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100475e0
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::declare
+// TEMPLATE: ROBLOX 0x005a8ec0
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::declare
 // TEMPLATE: ROBLOX 0x005a9790
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::declare
 // clang-format on
@@ -197,11 +200,13 @@ void MemberDescriptorContainer<T>::declare(T* descriptor)
 		(*it)->declare(descriptor);
 	}
 }
-
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10047700
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::mergeMembers
 // TEMPLATE: ROBLOX 0x005a98b0
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::mergeMembers
+// TEMPLATE: ROBLOX 0x005a9910
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::mergeMembers
 // clang-format on
 template <class T>
 void MemberDescriptorContainer<T>::mergeMembers(const MemberDescriptorContainer* source)
@@ -217,6 +222,9 @@ void MemberDescriptorContainer<T>::mergeMembers(const MemberDescriptorContainer*
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x10047760
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>
+// TEMPLATE: ROBLOX 0x005a9970
+// RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>::MemberDescriptorContainer<RBX::Reflection::SignalDescriptor>
 // TEMPLATE: ROBLOX 0x005a9a10
 // RBX::Reflection::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>::MemberDescriptorContainer<RBX::Reflection::FunctionDescriptor>
 // clang-format on

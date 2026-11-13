@@ -6,6 +6,8 @@
 namespace RBX {
 namespace Reflection {
 
+extern template class MemberDescriptorContainer<PropertyDescriptor>;
+
 // FUNCTION: WEBSERVICE 0x10094120
 // FUNCTION: ROBLOX 0x00774720
 void PropertyDescriptor::read(DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder) const

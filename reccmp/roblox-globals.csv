@@ -4899,8 +4899,6 @@ address,type,symbol
 0095afdc,global,type___RBX::Reflection::Type::singleton<RBX::BrickColor>
 0095afec,global,??_B?1???$singleton@VBrickColor@RBX@@@Type@Reflection@RBX@@SAABV012@XZ@51
 0095b001,global,?lockedDown@ClassDescriptor@Reflection@RBX@@2_NA
-0095b004,global,s___RBX::Reflection::sync
-0095b010,global,??_B?1??sync@Reflection@RBX@@YAAAVrecursive_mutex@boost@@XZ@51
 0095b018,global,?once_init_foo@boost_detail@RBX@@3JA
 0095b024,global,??_B?1???$assign_to@P6AXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@?$function1@XPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@Vfunction_base@boost@@@2@@boost@@AAEXP6AXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z@Z@51
 0095b030,global,??_B?1???$assign_to@U?$tss_adapter@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@detail@boost@@@?$function1@XPAXV?$allocator@Vfunction_base@boost@@@std@@@boost@@AAEXU?$tss_adapter@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@detail@1@@Z@51

@@ -39,7 +39,7 @@ SignalInstance* SignalDescriptor::findSignalInstance(const SignalSource* source)
 }
 
 // FUNCTION: WEBSERVICE 0x10095b90
-// STUB: ROBLOX 0x005a8fe0
+// FUNCTION: ROBLOX 0x005a8fe0
 SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char* name)
 	: MemberDescriptor(classDescriptor, name, "Signals"), signalCreatedHook(NULL)
 {

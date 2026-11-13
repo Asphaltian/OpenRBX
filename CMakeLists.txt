@@ -523,14 +523,28 @@ if (MSVC_FOR_DECOMP)
   list(APPEND OPENRBX_APP_SOURCES Client/boost_1_34_1/libs/iostreams/src/zlib.cpp)
 endif()
 
-add_engine_library(app
-  DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE BOOST_IOSTREAMS_NO_LIB
-  OPTIONS /O2 /Ob2 /Oi /Oy /GF /Gy /GS- /fp:fast
-  SOURCES ${OPENRBX_APP_SOURCES}
-)
+list(FIND OPENRBX_APP_SOURCES Client/App/reflection/reflection_object.cpp OPENRBX_APP_REFLECTION_INDEX)
+list(FIND OPENRBX_APP_SOURCES Client/App/reflection/signal.cpp OPENRBX_APP_SIGNAL_INDEX)
+math(EXPR OPENRBX_APP_REFLECTION_LENGTH "${OPENRBX_APP_SIGNAL_INDEX} - ${OPENRBX_APP_REFLECTION_INDEX}")
+math(EXPR OPENRBX_APP_TAIL_INDEX "${OPENRBX_APP_SIGNAL_INDEX} + 1")
+list(SUBLIST OPENRBX_APP_SOURCES 0 ${OPENRBX_APP_REFLECTION_INDEX} OPENRBX_APP_PART_app)
+list(SUBLIST OPENRBX_APP_SOURCES ${OPENRBX_APP_REFLECTION_INDEX} ${OPENRBX_APP_REFLECTION_LENGTH} OPENRBX_APP_PART_app_reflection)
+list(SUBLIST OPENRBX_APP_SOURCES ${OPENRBX_APP_SIGNAL_INDEX} 1 OPENRBX_APP_PART_app_signal)
+list(SUBLIST OPENRBX_APP_SOURCES ${OPENRBX_APP_TAIL_INDEX} -1 OPENRBX_APP_PART_app_tail)
+
+foreach(part app app_reflection app_signal app_tail)
+  add_engine_library(${part}
+    DEFINITIONS _CRT_SECURE_NO_WARNINGS _RELEASE BOOST_IOSTREAMS_NO_LIB
+    OPTIONS /O2 /Ob2 /Oi /Oy /GF /Gy /GS- /fp:fast
+    SOURCES ${OPENRBX_APP_PART_${part}}
+  )
+  if (TARGET ${part})
+    target_link_libraries(${part} PRIVATE fmodex)
+  endif()
+endforeach()
 
 if (TARGET app)
-  target_link_libraries(app PRIVATE fmodex)
+  add_dependencies(app app_reflection app_signal app_tail)
 endif()
 
 
@@ -804,7 +818,7 @@ if (MSVC_FOR_DECOMP)
   )
 
   set(OPENRBX_CLIENT_ENGINE_LIBRARIES)
-  foreach(lib rbxview renderlib rbxviewnew renderlibnew network_client app appdraw_rbxgfx appdraw appdraw_client lua)
+  foreach(lib rbxview renderlib rbxviewnew renderlibnew network_client app app_signal app_reflection app_tail appdraw_rbxgfx appdraw appdraw_client lua)
     if (TARGET ${lib})
       list(APPEND OPENRBX_CLIENT_ENGINE_LIBRARIES ${lib})
     endif()

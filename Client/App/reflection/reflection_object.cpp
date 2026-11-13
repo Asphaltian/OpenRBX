@@ -28,7 +28,7 @@ ClassDescriptor::ClassDescriptor()
 }
 
 // FUNCTION: WEBSERVICE 0x100478c0
-// STUB: ROBLOX 0x005a9b70
+// FUNCTION: ROBLOX 0x005a9b70
 ClassDescriptor::ClassDescriptor(ClassDescriptor& base, const char* name)
 	: Descriptor(name), MemberDescriptorContainer<PropertyDescriptor>(&base),
 	  MemberDescriptorContainer<SignalDescriptor>(&base), MemberDescriptorContainer<FunctionDescriptor>(&base),
@@ -60,6 +60,9 @@ bool MemberDescriptor::isMemberOf(const DescribedBase* instance) const
 {
 	return isMemberOf(instance->getDescriptor());
 }
+
+template class MemberDescriptorContainer<FunctionDescriptor>;
+template class MemberDescriptorContainer<PropertyDescriptor>;
 
 } // namespace Reflection
 } // namespace RBX

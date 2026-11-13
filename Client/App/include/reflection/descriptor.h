@@ -10,9 +10,7 @@
 namespace RBX {
 namespace Reflection {
 
-// FUNCTION: WEBSERVICE 0x10047470
-// FUNCTION: ROBLOX 0x005a9440
-inline boost::recursive_mutex& sync()
+static boost::recursive_mutex& sync()
 {
 	static boost::recursive_mutex s;
 
@@ -57,12 +55,6 @@ public:
 };
 
 DECOMP_SIZE_ASSERT(Descriptor, 0x08)
-
-// clang-format off
-// SYNTHETIC: WEBSERVICE 0x10221680
-// SYNTHETIC: ROBLOX 0x007f27c0
-// `RBX::Reflection::sync'::`2'::`dynamic atexit destructor for 's''
-// clang-format on
 
 } // namespace Reflection
 } // namespace RBX

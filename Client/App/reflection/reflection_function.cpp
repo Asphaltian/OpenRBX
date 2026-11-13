@@ -4,6 +4,8 @@
 namespace RBX {
 namespace Reflection {
 
+extern template class MemberDescriptorContainer<FunctionDescriptor>;
+
 // FUNCTION: WEBSERVICE 0x100713b0
 // FUNCTION: ROBLOX 0x005a9d20
 FunctionDescriptor::FunctionDescriptor(ClassDescriptor& classDescriptor, const char* name, Security security)
