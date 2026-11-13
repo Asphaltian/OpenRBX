@@ -93,11 +93,11 @@ address,type,symbol
 006a0520,library,?OnClick@CXTPControlComboBox@@MAEXHVCPoint@@@Z
 006a0610,library,?OnUnderlineActivate@CXTPControlComboBox@@MAEXXZ
 006a0630,library,?OnCalcDynamicSize@CXTPControlComboBox@@MAEXK@Z
-006a06a0,library,?GetPaintManager@CXTPSyntaxEditCtrl@@UAEPAVCXTPSyntaxEditPaintManager@@XZ
+006a06a0,library,?getGuiRoot@DataModel@RBX@@QBEPAVGuiRoot@2@XZ
 006a06d0,library,??0CXTPControlComboBoxPopupBar@@QAE@XZ
-006a0710,library,?GetCurrentSystemTheme@CXTPCalendarPaintManager@@QAE?AW4XTPCurrentSystemTheme@@XZ
+006a0710,library,?IsCustomizable@CXTPCommandBar@@UBEHXZ
 006a0730,library,?DelayRedraw@CXTPPopupBar@@MAEXXZ
-006a0750,library,?GetClientBrushMessage@CXTPSkinObjectFrame@@MAEHXZ
+006a0750,library,?IsResizable@CXTPPopupBar@@UBEHXZ
 006a0760,library,?GetCurSel@CXTPControlComboBoxPopupBar@@UBEHXZ
 006a0770,library,?OnHookKeyDown@CXTPControlComboBoxPopupBar@@UAEHIJ@Z
 006a07e0,library,??0CXTPControlComboBoxList@@QAE@XZ
@@ -336,7 +336,7 @@ address,type,symbol
 006b2600,library,?OnNcLButtonDown@CXTPCommandBar@@QAEXIVCPoint@@@Z
 006b36f0,library,?RemoveAll@?$CMap@HHHH@@QAEXXZ
 006b3740,library,?FreeAssoc@?$CMap@HHKK@@IAEXPAVCAssoc@1@@Z
-006b3c60,library,?CheckMenuItem@CMenu@@QAEIII@Z
+006b3c60,library,?PtVisible@CDC@@UBEHHH@Z
 006b3c80,library,?DrawFocusRect@CDC@@QAEXPBUtagRECT@@@Z
 006b3cd0,library,?ExtTextOutA@CDC@@UAEHHHIPBUtagRECT@@PBDIPAH@Z
 006b3d00,library,?TabbedTextOutA@CDC@@UAE?AVCSize@@HHPBDHHPAHH@Z
@@ -398,7 +398,7 @@ address,type,symbol
 006bb320,library,?IsHiddenExists@CControlButtonExpand@CXTPToolBar@@QAEHXZ
 006bb380,library,?Draw@CControlButtonExpand@CXTPToolBar@@UAEXPAVCDC@@@Z
 006bb3d0,library,??0CXTPToolBar@@QAE@XZ
-006bb4c0,library,?GetBackgroundBitmap@CXTPPopupControl@@QBEHXZ
+006bb4c0,library,?IsVisible@CXTPToolBar@@UBEHXZ
 006bb4d0,library,?EnableDocking@CXTPToolBar@@QAEXK@Z
 006bb4e0,library,??1CXTPToolBar@@UAE@XZ
 006bb560,library,??1XTP_COMMANDBARS_CREATECONTROL@@QAE@XZ
@@ -464,9 +464,9 @@ address,type,symbol
 006c0390,library,?GetCaptionRect@CXTPReportRecordItem@@UAEXPAUXTP_REPORTRECORDITEM_ARGS@@AAVCRect@@@Z
 006c0410,library,?OnDrawCaption@CXTPReportRecordItem@@UAEXPAUXTP_REPORTRECORDITEM_DRAWARGS@@PAUXTP_REPORTRECORDITEM_METRICS@@@Z
 006c0440,library,?SetFont@CXTPReportRecordItem@@UAEXPAVCFont@@@Z
-006c0450,library,?Init@CXTPDayInfoCache@CXTPCalendarController@@QAEXPAV2@@Z
+006c0450,library,?SetBold@CXTPReportRecordItem@@UAEXH@Z
 006c0460,library,?Compare@CXTPReportRecordItem@@UAEHPAVCXTPReportColumn@@PAV1@@Z
-006c0520,library,?GetCodePage@CXTPSyntaxEditBufferManager@@QAEIXZ
+006c0520,library,?IsEnabled@CXTPTabManagerItem@@QBEHXZ
 006c05c0,library,?GetGroupCaptionID@CXTPReportRecordItem@@UAEHPAVCXTPReportColumn@@@Z
 006c05d0,library,?GetItemMetrics@CXTPReportRecordItem@@UAEXPAUXTP_REPORTRECORDITEM_DRAWARGS@@PAUXTP_REPORTRECORDITEM_METRICS@@@Z
 006c0610,library,?IsEditable@CXTPReportRecordItem@@UBEHXZ
@@ -507,7 +507,7 @@ address,type,symbol
 006c4380,library,?GetHeaderIndent@CXTPReportControl@@QBEHXZ
 006c43a0,library,?SetCollapseRect@CXTPReportRow@@UAEXVCRect@@@Z
 006c43c0,library,?GetItemRect@CXTPShortcutBarItem@@QBE?AVCRect@@XZ
-006c43e0,library,?GetCurIBeam@CXTPSyntaxEditPaintManager@@QAEPAUHICON__@@XZ
+006c43e0,library,?GetStatusBar@CXTPStatusBarPane@@QBEPAVCXTPStatusBar@@XZ
 006c43f0,library,?IsVirtualMode@CXTPReportControl@@QBEHXZ
 006c4410,library,?GetFocusedRow@CXTPReportControl@@QBEPAVCXTPReportRow@@XZ
 006c4470,library,?CanCopy@CXTPReportControl@@UAEHXZ
@@ -531,7 +531,7 @@ address,type,symbol
 006c5ca0,library,?EnsureVisible@CXTPReportControl@@QAEXPAVCXTPReportColumn@@@Z
 006c5df0,library,?HitTest@CXTPReportControl@@QBEPAVCXTPReportRow@@VCPoint@@@Z
 006c5fa0,library,?AdjustLayout@CXTPReportControl@@QAEXXZ
-006c6350,library,?GetScrollBarCtrl@CXTPCalendarControl@@MBEPAVCScrollBar@@H@Z
+006c6350,library,?GetScrollBarCtrl@CXTPReportControl@@MBEPAVCScrollBar@@H@Z
 006c63a0,library,?SetWatermarkBitmap@CXTPReportControl@@MAEHPAUHBITMAP__@@E@Z
 006c64f0,library,?SetWatermarkBitmap@CXTPReportControl@@MAEHPBDE@Z
 006c6650,library,?OnPaint@CXTPReportControl@@IAEXXZ
@@ -572,7 +572,7 @@ address,type,symbol
 006ca290,library,?SetRowsCompareFunc@CXTPReportControl@@UAEXP6AHPAPBVCXTPReportRow@@0@Z@Z
 006ca2a0,library,?SetHScrollStep@CXTPReportControl@@UAEXH@Z
 006ca2c0,library,?SetSortRecordChilds@CXTPReportControl@@UAEXH@Z
-006ca2d0,library,?GetMDIMenus@CXTPMenuBar@@QBEPAVCXTPMenuBarMDIMenus@@XZ
+006ca2d0,library,?IsSortRecordChilds@CXTPReportControl@@UAEHXZ
 006ca2e0,library,?IsFilterHiddenColumns@CXTPReportControl@@UBEHXZ
 006ca2f0,library,?SetFilterHiddenColumns@CXTPReportControl@@UAEXH@Z
 006ca3a0,library,?OnSelectionChanged@CXTPReportControl@@MAEXXZ
@@ -1048,7 +1048,7 @@ address,type,symbol
 006eddd0,library,?Copy@CXTPControls@@UAEXPAV1@H@Z
 006ee250,library,?GetParameter@CXTPControl@@QBE?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@XZ
 006ee3f0,library,?OnExecute@CXTPControlToolbar@CXTPControlToolbars@@EAEXXZ
-006ee470,library,?FnName_active_tags@XTPSyntaxEditLexAnalyser@@YAPBDXZ
+006ee470,library,?GetFirstMruID@CXTPRibbonControlSystemRecentFileList@@MAEHXZ
 006ee480,library,?IsCustomizeDragOverAvail@CXTPControlCustom@@MAEHPAVCXTPCommandBar@@VCPoint@@AAK@Z
 006ee4d0,library,?Copy@CXTPControlSelector@@MAEXPAVCXTPControl@@H@Z
 006ee540,library,?AddCommand@CXTPControlWorkspaceActions@@IAEXPAVCXTPTabClientWnd@@IAAH@Z
@@ -1094,7 +1094,7 @@ address,type,symbol
 006f0ae0,library,?_FormatDateTime@CXTPPrintPageHeaderFooter@@MAEXAAV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@K@Z
 006f0c50,library,?_SplitFormatLCR@CXTPPrintPageHeaderFooter@@MAEXV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@@Z
 006f0d90,library,?fnYi@CXTPPrintPageHeaderFooter@@AAEHHH@Z
-006f0dc0,library,?FnName_active_tags@XTPSyntaxEditLexAnalyser@@YAPBDXZ
+006f0dc0,library,?GetActiveLCID@CXTPPrintOptions@@UAEKXZ
 006f0dd0,library,?IsMarginsMeasureInches@CXTPPrintOptions@@UAEHXZ
 006f0e20,library,??1CXTPPrintOptions@@UAE@XZ
 006f0ea0,library,?Set@CXTPPrintOptions@@QAEXPBV1@@Z
@@ -1237,7 +1237,7 @@ address,type,symbol
 006fa8a0,library,?GetPaintManager@CWorkspace@CXTPTabClientWnd@@MBEPAVCXTPTabPaintManager@@XZ
 006fa8c0,library,?GetItemTooltip@CWorkspace@CXTPTabClientWnd@@MBE?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@PBVCXTPTabManagerItem@@@Z
 006fa8f0,library,?OnBeforeItemClick@CWorkspace@CXTPTabClientWnd@@MAEHPAVCXTPTabManagerItem@@@Z
-006fa900,library,?GetConnection@CXTPCalendarRemindersManager@@UAEPAVCXTPNotifyConnection@@XZ
+006fa900,library,?getProfileBroadphase@World@RBX@@QBEABVCodeProfiler@Profiling@2@XZ
 006fa910,library,?GetItemIcon@CWorkspace@CXTPTabClientWnd@@MBEPAUHICON__@@PBVCXTPTabManagerItem@@@Z
 006fa920,library,?GetItemColor@CWorkspace@CXTPTabClientWnd@@MBEKPBVCXTPTabManagerItem@@@Z
 006fa970,library,??1CSingleWorkspace@CXTPTabClientWnd@@UAE@XZ
@@ -1413,7 +1413,7 @@ address,type,symbol
 00703a60,library,?GetColor@CXTPImageEditorPicker@@QAEKXZ
 00703a70,library,?GetBackgroundColor@CXTPStatusBarPane@@QBEKXZ
 00703a80,library,?GetTextFont@CXTPStatusBarPane@@UAEPAVCFont@@XZ
-00703aa0,library,?GetCacheMode@CXTPCalendarData@@UBEHXZ
+00703aa0,library,?GetDropSource@CXTPCommandBars@@QBEPAVCXTPCustomizeDropSource@@XZ
 00703ad0,library,?GetImageManager@CXTPStatusBar@@QBEPAVCXTPImageManager@@XZ
 00703af0,library,?PreCreateWindow@CXTPStatusBar@@MAEHAAUtagCREATESTRUCTA@@@Z
 00703b20,library,?CalcInsideRect@CXTPStatusBar@@MBEXAAVCRect@@H@Z
@@ -1692,7 +1692,7 @@ address,type,symbol
 007160b0,library,?RemoveAll@CXTPHookManager@@QAEXPAUHWND__@@@Z
 007160e0,library,?CallWndProc@CXTPKeyboardManager@@KGJHIJ@Z
 007161d0,library,?KeyboardProc@CXTPKeyboardManager@@KGJHIJ@Z
-00716300,library,?Serialize@?$CMap@HHHH@@UAEXAAVCArchive@@@Z
+00716300,library,?Serialize@?$CMap@IIPAVCXTPOffice2007Image@@PAV1@@@UAEXAAVCArchive@@@Z
 007163c0,library,?RemoveHook@CHookSink@CXTPHookManager@@QAEXPAVCXTPHookManagerHookAble@@@Z
 00716420,library,?HookWndProc@CXTPHookManager@@CGJPAUHWND__@@IIJ@Z
 00716550,library,?RemoveAll@CXTPHookManager@@QAEXPAVCXTPHookManagerHookAble@@@Z
@@ -2114,7 +2114,7 @@ address,type,symbol
 0073b4b0,library,??0CXTPControlEdit@@QAE@XZ
 0073b5b0,library,??1CXTPControlEdit@@UAE@XZ
 0073b680,library,?OnEditChanged@CXTPControlEdit@@MAEXXZ
-0073b790,library,?GetViewType@?$CXTPCalendarViewT@VCXTPCalendarDayViewDay@@UXTP_CALENDAR_HITTESTINFO_DAY_VIEW@@@@UAE?AW4XTPCalendarViewType@@XZ
+0073b790,library,?IsFocused@CXTPControlEdit@@UBEHXZ
 0073b810,library,?UpdateCharFormat@CXTPControlEditCtrl@@IAEXXZ
 0073b890,library,?OnDestroy@CXTPControlEditCtrl@@IAEXXZ
 0073b9b0,library,?_GetEditText@CXTPControlEdit@@IBE?AV?$CStringT@DV?$StrTraitMFC_DLL@DV?$ChTraitsCRT@D@ATL@@@@@ATL@@XZ
@@ -2214,7 +2214,7 @@ address,type,symbol
 00748310,library,?CopyFrom@CXTPReportHyperlinks@@UAEXPAV1@@Z
 007487f0,library,?RemoveAt@CXTPReportHyperlinks@@UAEXH@Z
 00748830,library,?RemoveAll@CXTPReportHyperlinks@@UAEXXZ
-007488d0,library,?InsertAt@?$CXTPArrayT@IIJ@@UAEXHPAV1@@Z
+007488d0,library,?InsertAt@?$CXTPArrayT@PAVCXTPReportHyperlink@@PAV1@PAUIDispatch@@@@UAEXHPAV1@@Z
 007489a0,library,?DoPropExchange@CXTPReportHyperlinks@@UAEXPAVCXTPPropExchange@@@Z
 00749100,library,?SetAtGrow@?$CArray@HH@@QAEXHH@Z
 007498a0,library,??0CXTPDatePickerDaysCollection@@QAE@PAVCXTPDatePickerControl@@@Z
@@ -2331,7 +2331,7 @@ address,type,symbol
 00751b70,library,?FreeAll@CAutoHidePanelTabManagersArray@CXTPDockingPaneAutoHidePanel@@QAEXXZ
 00751bc0,library,?AddManager@CAutoHidePanelTabManagersArray@CXTPDockingPaneAutoHidePanel@@QAEPAVCAutoHidePanelTabManager@2@XZ
 00751ea0,library,??1CXTPDockingPaneAutoHidePanel@@MAE@XZ
-00751f80,library,?GetAutoApplyNewThreads@CXTPSkinManager@@QBEHXZ
+00751f80,library,?GetHighlightedGroup@CXTPRibbonScrollableBar@@QBEPAVCXTPRibbonGroup@@XZ
 00751fa0,library,?RemovePane@CXTPDockingPaneAutoHidePanel@@MAEXPAVCXTPDockingPaneBase@@@Z
 00752200,library,?OnPaint@CXTHexEdit@@IAEXXZ
 007522c0,library,?CloseActiveWindows@CXTPDockingPaneAutoHidePanel@@IAEXXZ
@@ -2688,7 +2688,7 @@ address,type,symbol
 0076c660,library,??0CXTPPropertyGridInplaceButton@@QAE@I@Z
 0076c6f0,library,?OnLButtonDown@CXTPPropertyGridInplaceButton@@UAEXIVCPoint@@@Z
 0076cc70,library,??1?$CXTMaskEditT@VCEdit@@@@UAE@XZ
-0076cce0,library,?SetDayHeaderFormatShort@CXTPCalendarView@@UAEXPBD@Z
+0076cce0,library,?SetValue@CXTPPropertyGridInplaceEdit@@UAEXPBD@Z
 0076ccf0,library,?HideWindow@CXTPPropertyGridInplaceEdit@@UAEXXZ
 0076cd00,library,?DestroyItem@CXTPPropertyGridInplaceEdit@@UAEXXZ
 0076ce30,library,??1CXTPPropertyGridInplaceEdit@@UAE@XZ
@@ -2821,14 +2821,14 @@ address,type,symbol
 00776c40,library,?SetLayout@CXTPTabPaintManager@@QAEXW4XTPTabLayoutStyle@@@Z
 00776c60,library,?GetExpanded@CXTPControl@@QBEHXZ
 00776c80,library,??0CAppearanceSetPropertyPage@CXTPTabPaintManager@@QAE@XZ
-00776cb0,library,?FnName_active_tags@XTPSyntaxEditLexAnalyser@@YAPBDXZ
+00776cb0,library,?GetSupportedColorSets@CAppearanceSetPropertyPage@CXTPTabPaintManager@@UAEHXZ
 00776cc0,library,??0CAppearanceSetPropertyPage2003@CXTPTabPaintManager@@QAE@XZ
-00776cf0,library,?FnName_active_tags@XTPSyntaxEditLexAnalyser@@YAPBDXZ
+00776cf0,library,?GetSupportedColorSets@CAppearanceSetPropertyPage2003@CXTPTabPaintManager@@UAEHXZ
 00776d00,library,?GetHeaderMargin@CAppearanceSetPropertyPage2003@CXTPTabPaintManager@@UAE?AVCRect@@XZ
 00776d30,library,??0CAppearanceSetPropertyPage2007@CXTPTabPaintManager@@QAE@XZ
-00776d60,library,?FnName_active_tags@XTPSyntaxEditLexAnalyser@@YAPBDXZ
+00776d60,library,?GetDefaultColorSet@CAppearanceSetPropertyPage2007@CXTPTabPaintManager@@UAE?AW4XTPTabColorStyle@@XZ
 00776d70,library,??0CAppearanceSetStateButtons@CXTPTabPaintManager@@QAE@XZ
-00776da0,library,?FnName_active_tags@XTPSyntaxEditLexAnalyser@@YAPBDXZ
+00776da0,library,?GetSupportedColorSets@CAppearanceSet@CXTPTabPaintManager@@UAEHXZ
 00776db0,library,??0CAppearanceSetVisualStudio2005@CXTPTabPaintManager@@QAE@XZ
 00776df0,library,?GetHeaderMargin@CAppearanceSetVisualStudio2005@CXTPTabPaintManager@@UAE?AVCRect@@XZ
 00776e20,library,??0CAppearanceSetExcel@CXTPTabPaintManager@@QAE@XZ
@@ -3000,7 +3000,7 @@ address,type,symbol
 0078a940,library,??0CXTCaptionTheme@@QAE@XZ
 0078a9a0,library,?RefreshMetrics@CXTCaptionTheme@@UAEXXZ
 0078aa10,library,??0CXTCaptionButtonTheme@@QAE@XZ
-0078aa30,library,?SetColHeaderHeight@CMonthViewGrid@CXTPCalendarMonthView@@QAEXH@Z
+0078aa30,library,?SetDockingSite@CXTPDockingPaneBase@@MAEXPAVCWnd@@@Z
 0078aa40,library,??0CXTCaptionButtonThemeOfficeXP@@QAE@XZ
 0078aa70,library,?UseWordTheme@CXTButtonThemeOfficeXP@@UAEXH@Z
 0078ab10,library,?DrawCaptionBack@CXTCaptionTheme@@UAEXPAVCDC@@PAVCXTCaption@@AAVCRect@@@Z
@@ -3080,7 +3080,7 @@ address,type,symbol
 0078dd60,library,?GetButtonSize@CXTPRibbonBarMorePopupToolBar@@UBE?AVCSize@@XZ
 0078dd80,library,??0CXTPRibbonScrollableBar@@QAE@XZ
 0078dda0,library,??1CXTPRibbonTabPopupToolBar@@UAE@XZ
-0078de30,library,?GetDayRect@CXTPCalendarViewDay@@UAE?AVCRect@@XZ
+0078de30,library,?GetGroupsRect@CXTPRibbonTabPopupToolBar@@UBE?AVCRect@@XZ
 0078de50,library,?OnGroupsScroll@CXTPRibbonTabPopupToolBar@@UAEXH@Z
 0078deb0,library,?CreateKeyboardTips@CXTPRibbonTabPopupToolBar@@UAEXXZ
 0078ded0,library,?GetButtonSize@CXTPRibbonGroupPopupToolBar@@UBE?AVCSize@@XZ
@@ -3317,7 +3317,7 @@ address,type,symbol
 0079b080,library,?GetTextColor@CXTButtonThemeOfficeXP@@MAEKIPAVCXTButton@@@Z
 0079b120,library,?SetAutoTheme@CXTPTabClientWnd@@QAEXH@Z
 0079b140,library,?SetCaption@CXTCaptionButton@@QAEXPAVCXTCaption@@@Z
-0079b150,library,?EnableOleDrag@CXTPSyntaxEditCtrl@@QAEXH@Z
+0079b150,library,?SetTextHiliteColor@CXTButtonThemeOfficeXP@@UAEXK@Z
 0079b160,library,??0CXTButtonThemeOffice2003@@QAE@H@Z
 0079b1a0,library,?DrawButtonIcon@CXTButtonThemeOffice2003@@MAEXPAVCDC@@IAAVCRect@@PAVCXTButton@@@Z
 0079b3b0,library,?CreateTheme@CXTButtonThemeFactory@@UAEPAVCXTThemeManagerStyle@@W4XTThemeStyle@@@Z

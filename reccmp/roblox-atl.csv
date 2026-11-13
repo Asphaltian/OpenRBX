@@ -28,7 +28,7 @@ address,size,type,symbol,name
 00409490,0x3d2,library,?Parse@CUrl@ATL@@AAEHPBD@Z,
 004099a0,0x10e,library,?CrackUrl@CUrl@ATL@@QAEHPBDK@Z,
 0044f8d0,0x4e,library,?GetGITPtr@CAtlModule@ATL@@UAEJPAPAUIGlobalInterfaceTable@@@Z,
-0044f950,0x19,library,?AddCommonRGSReplacements@?$CAtlModuleT@VCDllMainOverride@@@ATL@@UAEJPAUIRegistrarBase@@@Z,
+0044f950,0x19,library,?AddCommonRGSReplacements@?$CAtlModuleT@VCAtlMfcModule@ATL@@@ATL@@UAEJPAUIRegistrarBase@@@Z,
 0057d6c0,0x99,library,?AtlCrtErrorCheck@ATL@@YAHH@Z,
 0057d760,0x68,library,?_AtlGetStringResourceImage@ATL@@YAPBUATLSTRINGRESOURCEIMAGE@1@PAUHINSTANCE__@@PAUHRSRC__@@I@Z,
 0057d7d0,0x75,library,?AtlFindStringResourceInstance@ATL@@YAPAUHINSTANCE__@@IG@Z,
