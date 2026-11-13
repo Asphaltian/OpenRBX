@@ -826,72 +826,73 @@ void CMainFrame::FUN_004357d0()
 	}
 }
 
-// STUB: ROBLOX 0x004357f0
+// FUNCTION: ROBLOX 0x004357f0
 LRESULT CMainFrame::FUN_004357f0(WPARAM wParam, LPARAM lParam)
 {
 	if (wParam == XTP_DPN_SHOWWINDOW) {
 		CXTPDockingPane* pane = (CXTPDockingPane*) lParam;
-		if (!pane->IsValid()) {
-			switch (pane->GetID()) {
-			case 0xc1:
-				if (!m_unk0x390 || !m_unk0x390->m_hWnd) {
-					m_unk0x390.reset(new CXTSplitterWnd);
-					if (!m_unk0x390->CreateStatic(this, 2, 1)) {
-						return FALSE;
-					}
-
-					m_unk0x398.reset(new CSelectionCaption);
-					if (!m_unk0x398->Create(
-							m_unk0x390.get(), "", 2, 0x10000201, CRect(0, 0, 0, 0), m_unk0x390->IdFromRowCol(0, 0)
-						)) {
-						return -1;
-					}
-
-					m_unk0x394.reset(new CDataModelPropGrid);
-					CRect gridRect(0, 0, 0, 0);
-					m_unk0x394->Create(gridRect, m_unk0x390.get(), m_unk0x390->IdFromRowCol(1, 0), 0);
-					m_unk0x394->ShowToolBar(TRUE);
-					m_unk0x394->SetTheme(xtpGridThemeWhidbey);
-					m_unk0x394->FUN_004204e0();
-
-					m_unk0x390->SetRowInfo(0, 28, 0);
-					m_unk0x390->SetSplitterStyle(XT_SPLIT_NOSIZE);
-				}
-				pane->Attach(m_unk0x390.get());
-				break;
-			case 0xc2: {
-				CWnd* view = pane->AttachView(this, RUNTIME_CLASS(CWrapperView));
-				if (view && ::IsWindow(view->m_hWnd)) {
-					view->SendMessage(WM_INITIALUPDATE);
-				}
-				return TRUE;
-			}
-			case 0xc0: {
-				CWnd* view = pane->AttachView(this, RUNTIME_CLASS(CStandardOutputView));
-				if (view && ::IsWindow(view->m_hWnd)) {
-					view->SendMessage(WM_INITIALUPDATE);
-				}
-				return TRUE;
-			}
-			case 0x8c: {
-				CWnd* view = pane->AttachView(this, RUNTIME_CLASS(CRobloxReportPaneView));
-				if (view && ::IsWindow(view->m_hWnd)) {
-					view->SendMessage(WM_INITIALUPDATE);
-				}
-				return TRUE;
-			}
-			case 0xbf: {
-				CWnd* view = pane->AttachView(this, RUNTIME_CLASS(CWebToolbox));
-				if (view && ::IsWindow(view->m_hWnd)) {
-					view->SendMessage(WM_INITIALUPDATE);
-				}
-				return TRUE;
-			}
-			default:
-				return FALSE;
-			}
+		if (pane->IsValid()) {
+			return TRUE;
 		}
-		return TRUE;
+
+		switch (pane->GetID()) {
+		case 0xc1:
+			if (!m_unk0x390 || !m_unk0x390->m_hWnd) {
+				m_unk0x390.reset(new CXTSplitterWnd);
+				if (!m_unk0x390->CreateStatic(this, 2, 1)) {
+					return FALSE;
+				}
+
+				m_unk0x398.reset(new CSelectionCaption);
+				if (!m_unk0x398->Create(
+						m_unk0x390.get(), "", 2, 0x10000201, CRect(0, 0, 0, 0), m_unk0x390->IdFromRowCol(0, 0)
+					)) {
+					return -1;
+				}
+
+				m_unk0x394.reset(new CDataModelPropGrid);
+				CRect gridRect(0, 0, 0, 0);
+				m_unk0x394->Create(gridRect, m_unk0x390.get(), m_unk0x390->IdFromRowCol(1, 0), 0);
+				m_unk0x394->ShowToolBar(TRUE);
+				m_unk0x394->SetTheme(xtpGridThemeWhidbey);
+				m_unk0x394->FUN_004204e0();
+
+				m_unk0x390->SetRowInfo(0, 28, 0);
+				m_unk0x390->SetSplitterStyle(XT_SPLIT_NOSIZE);
+			}
+			pane->Attach(m_unk0x390.get());
+			return TRUE;
+		case 0xc2: {
+			CWnd* view = pane->AttachView(this, RUNTIME_CLASS(CWrapperView));
+			if (view && ::IsWindow(view->m_hWnd)) {
+				view->SendMessage(WM_INITIALUPDATE);
+			}
+			return TRUE;
+		}
+		case 0xc0: {
+			CWnd* view = pane->AttachView(this, RUNTIME_CLASS(CStandardOutputView));
+			if (view && ::IsWindow(view->m_hWnd)) {
+				view->SendMessage(WM_INITIALUPDATE);
+			}
+			return TRUE;
+		}
+		case 0x8c: {
+			CWnd* view = pane->AttachView(this, RUNTIME_CLASS(CRobloxReportPaneView));
+			if (view && ::IsWindow(view->m_hWnd)) {
+				view->SendMessage(WM_INITIALUPDATE);
+			}
+			return TRUE;
+		}
+		case 0xbf: {
+			CWnd* view = pane->AttachView(this, RUNTIME_CLASS(CWebToolbox));
+			if (view && ::IsWindow(view->m_hWnd)) {
+				view->SendMessage(WM_INITIALUPDATE);
+			}
+			return TRUE;
+		}
+		default:
+			return FALSE;
+		}
 	}
 	return FALSE;
 }
