@@ -30,8 +30,9 @@ void fastRemoveIndex(std::vector<T>& vec, unsigned int index)
 }
 
 // TEMPLATE: WEBSERVICE 0x10103660
-// TEMPLATE: ROBLOX 0x005f4fb0
 // RBX::fastRemoveShort<RBX::Assembly *>
+// TEMPLATE: ROBLOX 0x005f4fb0
+// RBX::fastRemoveShort<RBX::MechanismTracker *>
 
 template <class T>
 unsigned int fastRemoveShort(std::vector<T>& vec, const T& item)

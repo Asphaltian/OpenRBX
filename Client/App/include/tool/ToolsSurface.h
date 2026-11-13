@@ -67,7 +67,7 @@ public:
 	// RBX::SurfaceTool::~SurfaceTool
 
 	// SYNTHETIC: ROBLOX 0x005d1580
-	// RBX::SurfaceTool::`scalar deleting destructor'
+	// RBX::FlatTool::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(SurfaceTool, 0x4c)
@@ -414,10 +414,10 @@ public:
 	virtual MouseCommand* isSticky() const { return new HammerTool(workspace); }
 
 	// SYNTHETIC: ROBLOX 0x005d20f0
-	// RBX::CloneTool::~CloneTool
+	// RBX::HammerTool::~HammerTool
 
 	// SYNTHETIC: ROBLOX 0x005d2200
-	// RBX::CloneTool::`scalar deleting destructor'
+	// RBX::HammerTool::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(HammerTool, 0x28)

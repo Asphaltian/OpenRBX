@@ -193,8 +193,9 @@ DECOMP_SIZE_ASSERT(ContentProvider, 0x54)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x100547e0
-// SYNTHETIC: ROBLOX 0x00568f50 FOLDED
 // RBX::ContentProvider::CachedContent::~CachedContent
+// SYNTHETIC: ROBLOX 0x00568f50 FOLDED
+// boost::_bi::storage2<boost::_bi::value<boost::shared_ptr<RBX::RunService> >,boost::_bi::value<boost::shared_ptr<RBX::DataModel> > >::~storage2<boost::_bi::value<boost::shared_ptr<RBX::RunService> >,boost::_bi::value<boost::shared_ptr<RBX::DataModel> > >
 // SYNTHETIC: WEBSERVICE 0x10220f90
 // SYNTHETIC: ROBLOX 0x007ef430
 // `RBX::ContentProvider::singleton'::`2'::`dynamic atexit destructor for 'sing''

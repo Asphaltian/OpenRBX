@@ -122,7 +122,6 @@ DECOMP_SIZE_ASSERT(PVInstance, 0x170)
 
 // clang-format off
 // SYNTHETIC: WEBSERVICE 0x1021a6b0
-// SYNTHETIC: ROBLOX 0x007eca80
 // RBX::`dynamic initializer for 'desc_CoordFrame''
 // FUNCTION: WEBSERVICE 0x1021a6f0
 // RBX::`dynamic initializer for 'prop_ControllerFlagShown''

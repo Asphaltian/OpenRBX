@@ -941,17 +941,17 @@ public:
 	// TEMPLATE: ROBLOX 0x005d1bc0
 	// RBX::Named<RBX::ModelTool,&RBX::sLockTool>::getName
 	// TEMPLATE: ROBLOX 0x00622b80
-	// RBX::Named<RBX::MouseCommand,&RBX::sNullTool>::getName
+	// RBX::Named<RBX::MouseCommand,&RBX::sNullTool>::name
 	// TEMPLATE: ROBLOX 0x0063be80
-	// RBX::Named<RBX::MouseCommand,&RBX::sGrabTool>::getName
+	// RBX::Named<RBX::MouseCommand,&RBX::sGrabTool>::name
 	// TEMPLATE: ROBLOX 0x0063c080
-	// RBX::Named<RBX::MouseCommand,&RBX::sCloneTool>::getName
+	// RBX::Named<RBX::MouseCommand,&RBX::sCloneTool>::name
 	// TEMPLATE: ROBLOX 0x0063c5a0
-	// RBX::Named<RBX::MouseCommand,&RBX::sGameTool>::getName
+	// RBX::Named<RBX::MouseCommand,&RBX::sGameTool>::name
 	// TEMPLATE: ROBLOX 0x005d0cc0
 	// RBX::Named<RBX::ArrowToolBase,&RBX::sResizeTool>::getName
 	// TEMPLATE: ROBLOX 0x0063c8a0
-	// RBX::Named<RBX::ArrowToolBase,&RBX::sAxisMoveTool>::getName
+	// RBX::Named<RBX::ArrowToolBase,&RBX::sAxisMoveTool>::name
 	// clang-format on
 };
 

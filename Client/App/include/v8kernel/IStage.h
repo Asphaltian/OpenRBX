@@ -27,8 +27,9 @@ public:
 	IStage(IStage* upstream, IStage* downstream) : upstream(upstream), downstream(downstream) {}
 
 	// FUNCTION: WEBSERVICE 0x100ab1a0
-	// FUNCTION: ROBLOX 0x00641fa0
 	// RBX::IStage::~IStage
+	// FUNCTION: ROBLOX 0x00641fa0
+	// RBX::Lua::LuaArguments::~LuaArguments
 
 	virtual ~IStage() { delete downstream; }
 	virtual StageType getStageType() = 0;

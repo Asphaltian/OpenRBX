@@ -1020,8 +1020,9 @@ public:
 	// TEMPLATE: ROBLOX 0x00632700
 	// RBX::Reflection::RefPropDescriptor<RBX::Instance,RBX::Instance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x1004ba90
-	// TEMPLATE: ROBLOX 0x00656ff0
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::assignIDREF
+	// TEMPLATE: ROBLOX 0x00656ff0
+	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::assignIDREF
 	// TEMPLATE: WEBSERVICE 0x1005bd80
 	// TEMPLATE: ROBLOX 0x00566630
 	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance><RBX::PartInstance * (__thiscall RBX::ModelInstance::*)(void)const ,void (__thiscall RBX::ModelInstance::*)(RBX::PartInstance *)>
@@ -1062,8 +1063,9 @@ public:
 	// TEMPLATE: ROBLOX 0x004ab840
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::getRefValue
 	// TEMPLATE: WEBSERVICE 0x100ec850
-	// TEMPLATE: ROBLOX 0x005ebd00
 	// RBX::Reflection::RefPropDescriptor<RBX::Humanoid,RBX::PartInstance>::setRefValue
+	// TEMPLATE: ROBLOX 0x005ebd00
+	// RBX::Reflection::RefPropDescriptor<RBX::ModelInstance,RBX::PartInstance>::setRefValue
 	// TEMPLATE: WEBSERVICE 0x100f3970
 	// TEMPLATE: ROBLOX 0x00632650
 	// RBX::Reflection::RefPropDescriptor<RBX::ObjectValue,RBX::Instance>::RefPropDescriptor<RBX::ObjectValue,RBX::Instance><RBX::Instance * (__thiscall RBX::ObjectValue::*)(void)const ,void (__thiscall RBX::ObjectValue::*)(RBX::Instance *)>
@@ -1162,7 +1164,6 @@ public:
 	// TEMPLATE: ROBLOX 0x005dba70 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,double __cdecl(void),0>::call<double>
 	// TEMPLATE: WEBSERVICE 0x10045f00 FOLDED
-	// TEMPLATE: ROBLOX 0x005dba70 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::Lighting,double __cdecl(void),0>::call<double>
 	// TEMPLATE: WEBSERVICE 0x10045f60
 	// TEMPLATE: ROBLOX 0x005dbad0
@@ -1231,8 +1232,9 @@ public:
 	// TEMPLATE: ROBLOX 0x005d3c90
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>
 	// TEMPLATE: WEBSERVICE 0x100b2420
-	// TEMPLATE: ROBLOX 0x005cf470
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::call<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
+	// TEMPLATE: ROBLOX 0x005cf470
+	// RBX::Reflection::BoundFuncDesc<RBX::Visit,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::call<std::basic_string<char,std::char_traits<char>,std::allocator<char> > >
 	// TEMPLATE: WEBSERVICE 0x100b24b0
 	// TEMPLATE: ROBLOX 0x005d3d00
 	// RBX::Reflection::BoundFuncDesc<RBX::Stats::Item,std::basic_string<char,std::char_traits<char>,std::allocator<char> > __cdecl(void),0>::execute
@@ -1407,7 +1409,6 @@ public:
 	// SYNTHETIC: ROBLOX 0x005b6e40 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::~BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>
 	// SYNTHETIC: WEBSERVICE 0x1006ea20 FOLDED
-	// SYNTHETIC: ROBLOX 0x005b6e40 FOLDED
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::~BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>
 	// TEMPLATE: WEBSERVICE 0x1006fdc0
 	// TEMPLATE: ROBLOX 0x005b81b0
@@ -1416,8 +1417,9 @@ public:
 	// TEMPLATE: ROBLOX 0x005b8330
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(boost::shared_ptr<std::vector<boost::shared_ptr<RBX::Instance>,std::allocator<boost::shared_ptr<RBX::Instance> > > const >),1>::execute
 	// SYNTHETIC: WEBSERVICE 0x10070050
-	// SYNTHETIC: ROBLOX 0x005b8440
 	// RBX::Reflection::BoundFuncDesc<RBX::Humanoid,void __cdecl(float),1>::`scalar deleting destructor'
+	// SYNTHETIC: ROBLOX 0x005b8440
+	// RBX::Reflection::BoundFuncDesc<RBX::ModelInstance,void __cdecl(G3D::Vector3),1>::`scalar deleting destructor'
 	// TEMPLATE: WEBSERVICE 0x10070070
 	// RBX::Reflection::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>::BoundFuncDesc<RBX::Workspace,void __cdecl(bool),1>
 	// TEMPLATE: WEBSERVICE 0x10070120

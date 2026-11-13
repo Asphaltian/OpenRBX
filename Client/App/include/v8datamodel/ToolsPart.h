@@ -33,10 +33,10 @@ public:
 	PartTool(Workspace* workspace);
 
 	// SYNTHETIC: ROBLOX 0x005c03d0
-	// RBX::ShootTool::~ShootTool
+	// RBX::PartTool::~PartTool
 
 	// SYNTHETIC: ROBLOX 0x005d1d90
-	// RBX::ShootTool::`scalar deleting destructor'
+	// RBX::FillTool::`scalar deleting destructor'
 };
 
 DECOMP_SIZE_ASSERT(PartTool, 0x28)

@@ -181,8 +181,9 @@ private:
 
 // clang-format off
 // TEMPLATE: WEBSERVICE 0x100dfff0
-// TEMPLATE: ROBLOX 0x005e22f0
 // RBX::Reflection::EnumDesc<enum RBX::HopperBin::BinType>::addPair
+// TEMPLATE: ROBLOX 0x005e22f0
+// RBX::Reflection::EnumDesc<enum RBX::Debugable::AssertAction>::addPair
 // clang-format on
 template <class T>
 void EnumDesc<T>::addPair(T value, const char* name)
