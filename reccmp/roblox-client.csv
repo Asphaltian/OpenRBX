@@ -3619,6 +3619,7 @@ address,type,symbol,name,module,size
 00958788,global,?vertexRefCounts@Mesh@RenderNew@RBX@@0V?$Array@H@G3D@@A,,,
 00958700,global,,g_unk0x00958700,,
 00958738,global,,vertexRefCount,,
+00958735,global,,g_unk0x00958735,,
 0095873c,global,,g_unk0x0095873c,,
 00958798,global,,g_unk0x00958798,,
 0095877c,global,?g_unk0x0095877c@Mesh@RenderNew@RBX@@2VMeshPtr@Ogre@@A,,,

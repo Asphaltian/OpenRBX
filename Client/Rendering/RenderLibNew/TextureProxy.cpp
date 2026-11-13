@@ -151,14 +151,18 @@ static void FUN_00534250(
 static bool g_unk0x009587d0 = false;
 static std::string g_unk0x009587d4 = "shadetex";
 
-// STUB: ROBLOX 0x00534340
+// FUNCTION: ROBLOX 0x00534340
 G3D::Vector2 TextureProxy::getSize()
 {
-	G3D::Vector2 size(0.0f, 0.0f);
+	G3D::Vector2 size;
 
 	if (!m_unk0x4c.isNull()) {
-		size.x = m_unk0x4c->getWidth();
-		size.y = m_unk0x4c->getHeight();
+		size.x = (float) m_unk0x4c->getWidth();
+		size.y = (float) m_unk0x4c->getHeight();
+	}
+	else {
+		size.y = 0;
+		size.x = 0;
 	}
 
 	return size;

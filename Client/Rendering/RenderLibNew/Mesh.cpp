@@ -25,6 +25,7 @@ bool Mesh::varDirty = true;
 Ogre::MeshPtr Mesh::g_unk0x0095877c;
 
 static int vertexRefCount;
+static bool g_unk0x00958735;
 static int g_unk0x0095873c;
 static int g_unk0x00958798;
 static bool g_unk0x00958794;
@@ -143,14 +144,15 @@ G3D::ReferenceCountedPointer<Mesh> Mesh::aggregate(
 	return NULL;
 }
 
-// STUB: ROBLOX 0x00532600
+// FUNCTION: ROBLOX 0x00532600
 unsigned int Mesh::allocVertex(
 	const G3D::Vector3& vertex, const G3D::Vector3& normal, const G3D::Vector2& tex, bool share
 )
 {
-	if (!varDirty) {
-		varDirty = true;
+	if (!g_unk0x00958735) {
+		g_unk0x00958735 = true;
 	}
+	varDirty = true;
 
 	if (freeList.size() == 0) {
 		int index = visibleGeometry.vertexArray.size();
@@ -158,7 +160,6 @@ unsigned int Mesh::allocVertex(
 		visibleGeometry.vertexArray.append(vertex);
 		visibleGeometry.normalArray.append(normal);
 		texCoordArray.append(tex);
-		tangentArray.append(G3D::Vector3::zero());
 		vertexRefCounts.append(1);
 		vertexRefCount++;
 
@@ -171,7 +172,6 @@ unsigned int Mesh::allocVertex(
 	visibleGeometry.vertexArray[index] = vertex;
 	visibleGeometry.normalArray[index] = normal;
 	texCoordArray[index] = tex;
-	tangentArray[index] = G3D::Vector3::zero();
 	vertexRefCounts[index] = 1;
 	vertexRefCount++;
 
