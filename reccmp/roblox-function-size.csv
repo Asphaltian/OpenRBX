@@ -20648,6 +20648,7 @@ address,type,size
 007efa30,function,55
 007efa70,function,12
 007efa80,function,64
+007efad0,function,71
 007efae0,function,55
 007efb20,function,55
 007efec0,function,11
@@ -20831,6 +20832,8 @@ address,type,size
 007f1a90,function,32
 007f1ab0,function,32
 007f1ae0,function,11
+007f1af0,function,27
+007f1b00,function,11
 007f1b40,function,11
 007f1b50,function,11
 007f1ba0,function,10
@@ -21020,6 +21023,7 @@ address,type,size
 007f2e30,function,10
 007f2e40,function,10
 007f2e50,function,10
+007f2e60,function,49
 007f2eb0,function,49
 007f2ef0,function,25
 007f2f10,function,25
@@ -21380,4 +21384,5 @@ address,type,size
 007f56f0,function,21
 007f5710,function,11
 007f5740,function,11
+007f57d0,function,49
 007f5afe,function,10
