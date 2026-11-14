@@ -470,6 +470,10 @@ void Primitive::setCoordinateFrame(const CoordinateFrame& cFrame)
 
 const CoordinateFrame& Primitive::getCoordinateFrame() const
 {
+	if (FrameInterpolator::isRendering()) {
+		return renderInterpolator.sample(body->getCoordinateFrame());
+	}
+
 	return body->getCoordinateFrame();
 }
 

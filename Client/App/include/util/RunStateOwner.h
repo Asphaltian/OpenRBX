@@ -90,6 +90,8 @@ private:
 	boost::mutex viewMutex;
 	Views views;
 	int invalidRunViewCount;
+	int stepCount;
+	double stepTime;
 
 	void start();
 
@@ -128,6 +130,9 @@ public:
 
 	void setPeriod(float period) { framePeriod = period; }
 	float getPeriod() { return framePeriod; }
+
+	int getStepCount() const { return stepCount; }
+	double getStepTime() const { return stepTime; }
 
 	void addRunView(IRunView* runView);
 	void removeRunView(IRunView* runView);

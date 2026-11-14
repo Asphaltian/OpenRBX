@@ -573,7 +573,7 @@ void CRobloxDoc::FUN_004590a0(CCmdUI* pCmdUI)
 		}
 		else {
 			char text[32];
-			sprintf(text, "%.3gfps", FUN_00403290()->timeState->simulationStopwatch.smoothFPS());
+			sprintf(text, "%.3gfps", FUN_00403290()->timeState->fpsStopwatch.smoothFPS());
 			pCmdUI->SetText(text);
 		}
 	}

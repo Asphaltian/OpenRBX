@@ -1,6 +1,7 @@
 #include "v8datamodel/ForceField.h"
 
 #include "appdraw/Draw.h"
+#include "util/FrameInterpolator.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Workspace.h"
 
@@ -56,7 +57,9 @@ bool ForceField::partInForceField(PartInstance* part)
 
 void ForceField::render3dAdorn(Adorn* adorn)
 {
-	cycle = (cycle + 1) % 30;
+	if (!FrameInterpolator::isExtraFrame()) {
+		cycle = (cycle + 1) % 30;
+	}
 
 	getParent()->visitDescendents(boost::bind(&renderForceField, _1, adorn, cycle));
 }

@@ -171,9 +171,6 @@ float DataModel::step(float timeInterval)
 	workspace->profileRun->sample(GetCurrentThread());
 	Profiling::Mark mark(*workspace->profileWorkspaceStep, true);
 
-	timeState->fpsStopwatch.tick();
-	timeState->fpsStopwatch.tock();
-
 	if (runService->getRunState() == RS_RUNNING) {
 		timeState->simulationStopwatch.tick();
 		timeInterval = workspace->step(timeInterval);

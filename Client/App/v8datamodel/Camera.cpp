@@ -349,6 +349,17 @@ bool Camera::zoom(float in)
 	return isCharacterCamera() ? characterZoom(in) : nonCharacterZoom(in);
 }
 
+const G3D::GCamera& Camera::getGCamera() const
+{
+	if (FrameInterpolator::isRendering()) {
+		renderCamera = gCamera;
+		renderCamera.setCoordinateFrame(renderInterpolator.sample(gCamera.getCoordinateFrame()));
+		return renderCamera;
+	}
+
+	return gCamera;
+}
+
 void Camera::onHeartbeat()
 {
 	updateGoal();

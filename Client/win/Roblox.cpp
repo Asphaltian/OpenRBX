@@ -15,6 +15,7 @@
 #include "RobloxDoc.h"
 #include "RobloxReportView.h"
 #include "RobloxView.h"
+#include "RobloxWnd.h"
 #include "ScriptDoc.h"
 #include "VersionInfo.h"
 #include "network/API.h"
@@ -811,6 +812,12 @@ int CRobloxApp::Run()
 {
 	RBX::Security::Impersonator impersonate(RBX::Security::LocalGUI);
 	return CWinApp::Run();
+}
+
+BOOL CRobloxApp::OnIdle(LONG lCount)
+{
+	BOOL more = CWinApp::OnIdle(lCount);
+	return CRobloxWnd::renderIdle() || more;
 }
 
 IMPLEMENT_XTP_CONTROL(CRobloxControlColorSelector, CXTPControl)

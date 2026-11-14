@@ -27,13 +27,16 @@
 #include "renderlib/Profiler.h"
 #include "renderlib/RenderStats.h"
 #include "renderlibnew/Chunk.h"
+#include "util/FrameInterpolator.h"
 #include "util/RunStateOwner.h"
+#include "util/Timer.h"
 #include "util/Utilities.h"
 #include "util/scopedassign.h"
 #include "util/standardout.h"
 #include "v8datamodel/Camera.h"
 #include "v8datamodel/GlobalSettings.h"
 #include "v8datamodel/Stats.h"
+#include "v8datamodel/TimeState.h"
 #include "v8datamodel/UserController.h"
 
 #include <G3D/Log.h>
@@ -44,11 +47,34 @@
 #include <GLG3D/VARArea.h>
 #include <GLG3D/Win32Window.h>
 #include <cstdio>
+#include <set>
 #include <stdexcept>
+#include <vector>
 
 static ATL::CCriticalSection g_unk0x0095448c;
 
 static bool g_unk0x00954484;
+
+static std::set<CRobloxWnd*> idleWindows;
+static double paintDuration;
+
+class RenderFrame
+{
+public:
+	RenderFrame(RBX::DataModel* dataModel)
+	{
+		dataModel->timeState->fpsStopwatch.tick();
+		dataModel->timeState->fpsStopwatch.tock();
+
+		if (RBX::RunService* runService = dataModel->find<RBX::RunService>()) {
+			RBX::FrameInterpolator::beginRender(
+				runService->getStepCount(), runService->getStepTime(), runService->getPeriod()
+			);
+		}
+	}
+
+	~RenderFrame() { RBX::FrameInterpolator::endRender(); }
+};
 
 LRESULT CRobloxWnd::FUN_0045f4d0(WPARAM wParam, LPARAM lParam)
 {
@@ -535,6 +561,7 @@ int CRobloxWnd::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	SetTimer(0, 200, NULL);
 	SetTimer(1, 100, NULL);
+	idleWindows.insert(this);
 	return 0;
 }
 
@@ -590,6 +617,7 @@ void CRobloxWnd::FUN_004622d0(bool p_unk0x04)
 	m_unk0xa4->pushState();
 	try {
 		RBX::DataModel::Lock lock(m_unk0x70);
+		RenderFrame frame(m_unk0x70.get());
 		m_unk0xa8->render(m_unk0xa4.get());
 		Unknown0045f640 timer(m_unk0xa8->getRenderStats().render2D);
 		m_unk0x70->renderPass3dAdorn(m_unk0xac.get());
@@ -622,6 +650,7 @@ void CRobloxWnd::FUN_00462450(bool p_unk0x04)
 		Unknown0045f640 cpuTimer(m_unk0xa8->getRenderStats().cpuRenderTotal);
 		timer.reset();
 		RBX::DataModel::Lock lock(m_unk0x70);
+		RenderFrame frame(m_unk0x70.get());
 		m_unk0x70->renderPass2d(m_unk0xac.get(), this);
 		m_unk0x70->renderPass3dAdorn(m_unk0xac.get());
 		m_unk0xac->prepareRenderPass();
@@ -727,6 +756,8 @@ bool CRobloxWnd::FUN_00462890()
 
 void CRobloxWnd::OnPaint()
 {
+	double start = RBX::getRealTime();
+
 	bool painted;
 	if (m_unk0x5c == 2) {
 		painted = FUN_00462890();
@@ -737,6 +768,40 @@ void CRobloxWnd::OnPaint()
 	if (!painted && m_unk0x70) {
 		runViewValid(m_unk0x70.get(), this);
 	}
+
+	if (painted) {
+		paintDuration = RBX::getRealTime() - start;
+	}
+}
+
+bool CRobloxWnd::renderIdle()
+{
+	std::vector<CRobloxWnd*> windows(idleWindows.begin(), idleWindows.end());
+	bool active = false;
+	bool rendered = false;
+	for (std::vector<CRobloxWnd*>::iterator it = windows.begin(); it != windows.end(); ++it) {
+		CRobloxWnd* window = *it;
+		if (!idleWindows.count(window) || !window->m_unk0x70 || !window->IsWindowVisible() ||
+			window->GetTopLevelParent()->IsIconic()) {
+			continue;
+		}
+
+		active = true;
+		if (RBX::getRealTime() + paintDuration < RBX::FrameInterpolator::getNextStepTime()) {
+			RBX::FrameInterpolator::setExtraFrame(true);
+			window->RedrawWindow(NULL, NULL, RDW_INVALIDATE | RDW_UPDATENOW);
+			RBX::FrameInterpolator::setExtraFrame(false);
+			rendered = true;
+		}
+	}
+
+	if (active && !rendered) {
+		double remaining = RBX::FrameInterpolator::getNextStepTime() - RBX::getRealTime();
+		DWORD timeout = remaining > 0.0 ? (DWORD) (remaining * 1000.0) + 1 : 1;
+		MsgWaitForMultipleObjects(0, NULL, FALSE, timeout, QS_ALLINPUT);
+	}
+
+	return active;
 }
 
 std::string CRobloxWnd::getMetric(const std::string& metric) const
@@ -978,6 +1043,7 @@ CRobloxWnd::~CRobloxWnd()
 
 void CRobloxWnd::OnDestroy()
 {
+	idleWindows.erase(this);
 	FUN_00460430();
 	FUN_00463c30(NULL);
 

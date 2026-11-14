@@ -5,6 +5,7 @@
 #include "util/ComputeProp.h"
 #include "util/Extents.h"
 #include "util/Face.h"
+#include "util/FrameInterpolator.h"
 #include "util/Guid.h"
 #include "util/NormalId.h"
 #include "util/Vector3int32.h"
@@ -149,6 +150,7 @@ private:
 protected:
 	Geometry* geometry;
 	Body* body;
+	mutable FrameInterpolator renderInterpolator;
 	IMoving* myOwner;
 	Anchor* anchorObject;
 	bool dragging;

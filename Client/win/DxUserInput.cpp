@@ -4,28 +4,29 @@
 #include "MainFrm.h"
 #include "UserInputUtil.h"
 #include "rbxgraphics/TextureProxyBase.h"
+#include "util/FrameInterpolator.h"
 #include "util/Rect.h"
 #include "util/StandardOut.h"
 #include "v8datamodel/DataModel.h"
 
 #include <windowsx.h>
 
-bool DxUserInput::FUN_0046b7f0()
+bool DxUserInput::FUN_0046b7f0(const G3D::Vector2& position)
 {
 	G3D::Vector2 extent = m_unk0x58.center();
-	if (m_unk0x70.x < -extent.x) {
+	if (position.x < -extent.x) {
 		return false;
 	}
 
-	if (m_unk0x70.x > extent.x) {
+	if (position.x > extent.x) {
 		return false;
 	}
 
-	if (m_unk0x70.y < -extent.y) {
+	if (position.y < -extent.y) {
 		return false;
 	}
 
-	if (m_unk0x70.y > extent.y) {
+	if (position.y > extent.y) {
 		return false;
 	}
 
@@ -298,7 +299,34 @@ G3D::Vector2 DxUserInput::FUN_0046c590()
 G3D::Vector2 DxUserInput::getCursorPosition()
 {
 	ATL::CCritSecLock lock(m_unk0x34);
+	if (m_unk0x68 && RBX::FrameInterpolator::isRendering()) {
+		return getPendingCursorPosition();
+	}
+
 	return m_unk0x68 ? FUN_0046c4f0() : FUN_0046c590();
+}
+
+G3D::Vector2 DxUserInput::getPendingCursorPosition()
+{
+	G3D::Vector2 position = m_unk0x70;
+
+	DIDEVICEOBJECTDATA data[0x800];
+	DWORD count = 0x800;
+	if (SUCCEEDED(m_unk0x18c->GetDeviceData(sizeof(DIDEVICEOBJECTDATA), data, &count, DIGDD_PEEK))) {
+		G3D::Vector2 wrapMouseDelta(0.0f, 0.0f);
+		for (DWORD i = 0; i < count; i++) {
+			if (data[i].dwOfs == DIMOFS_X || data[i].dwOfs == DIMOFS_Y) {
+				FUN_0046c950(FUN_0046d6c0(data[i]), wrapMouseDelta, position);
+			}
+
+			if (!FUN_0046b7f0(position)) {
+				break;
+			}
+		}
+	}
+
+	G3D::Rect2D rect = m_unk0x58;
+	return rect.center() + position;
 }
 
 bool DxUserInput::keyDown(SDLKey key) const
@@ -331,25 +359,25 @@ bool DxUserInput::FUN_0046c780()
 	return false;
 }
 
-void DxUserInput::FUN_0046c950(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta)
+void DxUserInput::FUN_0046c950(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position)
 {
 	switch (m_unk0x6c) {
 	case WRAP_AUTO:
 		if (FUN_0046b920()) {
-			FUN_0046e530(mouseDelta, wrapMouseDelta, m_unk0x70, G3D::Vector2(FUN_0046b8f0()));
+			FUN_0046e530(mouseDelta, wrapMouseDelta, position, G3D::Vector2(FUN_0046b8f0()));
 		}
 		else if (!FUN_0046c780()) {
-			FUN_0046d670(mouseDelta, wrapMouseDelta, m_unk0x70);
+			FUN_0046d670(mouseDelta, wrapMouseDelta, position);
 		}
 		else if (FUN_0046b880()) {
-			FUN_0046e560(mouseDelta, wrapMouseDelta, m_unk0x70, FUN_0046b8f0());
+			FUN_0046e560(mouseDelta, wrapMouseDelta, position, FUN_0046b8f0());
 		}
 		else {
-			FUN_0046e5f0(mouseDelta, wrapMouseDelta, m_unk0x70, FUN_0046b8f0());
+			FUN_0046e5f0(mouseDelta, wrapMouseDelta, position, FUN_0046b8f0());
 		}
 		break;
 	case WRAP_CENTER:
-		FUN_0046d6a0(mouseDelta, wrapMouseDelta, m_unk0x70);
+		FUN_0046d6a0(mouseDelta, wrapMouseDelta, position);
 		break;
 	}
 }
@@ -441,7 +469,7 @@ void DxUserInput::FUN_0046cd90()
 		case DIMOFS_X:
 		case DIMOFS_Y:
 			moved = true;
-			FUN_0046c950(FUN_0046d6c0(data[i]), wrapMouseDelta);
+			FUN_0046c950(FUN_0046d6c0(data[i]), wrapMouseDelta, m_unk0x70);
 			break;
 		case DIMOFS_Z: {
 			float wheel = (int) data[i].dwData / 120.0;
@@ -453,7 +481,7 @@ void DxUserInput::FUN_0046cd90()
 		}
 		}
 
-		if (!m_unk0x68 || !FUN_0046b7f0()) {
+		if (!m_unk0x68 || !FUN_0046b7f0(m_unk0x70)) {
 			break;
 		}
 	}

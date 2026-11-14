@@ -10,6 +10,7 @@
 #include "tool/MegaDragger.h"
 #include "tool/PartDragTool.h"
 #include "util/ContentProvider.h"
+#include "util/FrameInterpolator.h"
 #include "util/Math.h"
 #include "util/Sound.h"
 #include "util/SoundWorld.h"
@@ -600,7 +601,9 @@ MouseCommand* HammerTool::onMouseDown(const UIEvent& uiEvent)
 void LaserTool::render3dAdorn(Adorn* adorn)
 {
 	if (m_unk0x20 > 0) {
-		m_unk0x20--;
+		if (!FrameInterpolator::isExtraFrame()) {
+			m_unk0x20--;
+		}
 		adorn->setObjectToWorldMatrix(G3D::CoordinateFrame());
 		adorn->lineSegment(G3D::LineSegment::fromTwoPoints(m_unk0x24, m_unk0x30), G3D::Color3::red(), 5.0f);
 	}

@@ -44,7 +44,7 @@ private:
 	CComPtr<IDirectInputDevice8> m_unk0x190;
 	boost::shared_ptr<RBX::DataModel> m_unk0x194;
 
-	bool FUN_0046b7f0();
+	bool FUN_0046b7f0(const G3D::Vector2& position);
 	bool FUN_0046b880();
 	G3D::Vector2int16 FUN_0046b8f0();
 	bool FUN_0046b920();
@@ -59,8 +59,9 @@ private:
 	G3D::Vector2 FUN_0046c4f0();
 	G3D::Vector2 FUN_0046c590();
 	static bool FUN_0046c780();
-	void FUN_0046c950(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta);
+	void FUN_0046c950(const G3D::Vector2& mouseDelta, G3D::Vector2& wrapMouseDelta, G3D::Vector2& position);
 	void FUN_0046cd90();
+	G3D::Vector2 getPendingCursorPosition();
 
 protected:
 	virtual G3D::Vector2 getCursorPosition();

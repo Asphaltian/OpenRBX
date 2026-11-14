@@ -49,6 +49,7 @@ public:
 	virtual BOOL InitInstance();
 	virtual int Run();
 	virtual int ExitInstance();
+	virtual BOOL OnIdle(LONG lCount);
 
 	BOOL FUN_0044dac0(bool p_unk0x04);
 	BOOL FUN_0044e180(std::string script);

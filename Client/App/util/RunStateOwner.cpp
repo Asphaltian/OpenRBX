@@ -125,6 +125,9 @@ void RunService::runProc(boost::shared_ptr<DataModel> dataModel)
 			}
 
 			dataModel->step(framePeriod);
+
+			stepCount++;
+			stepTime = desiredTime;
 		}
 
 		desiredTime += framePeriod;
@@ -192,7 +195,7 @@ void RunService::addRunView(IRunView* runView)
 
 RunService::RunService()
 	: runState(RS_NORMAL), stopRequested(false), framePeriod(1.0f / 30.0f), runThread(NULL), invalidRunViewCount(0),
-	  runDisabled(false)
+	  stepCount(0), stepTime(0.0), runDisabled(false)
 {
 	setName("Run Service");
 }

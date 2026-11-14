@@ -3,6 +3,7 @@
 
 #include "placeholder.h"
 #include "util/Extents.h"
+#include "util/FrameInterpolator.h"
 #include "util/Math.h"
 #include "v8datamodel/ICameraOwner.h"
 #include "v8tree/Instance.h"
@@ -47,6 +48,8 @@ public:
 
 private:
 	G3D::GCamera gCamera;
+	mutable G3D::GCamera renderCamera;
+	mutable FrameInterpolator renderInterpolator;
 	G3D::CoordinateFrame cameraGoal;
 	G3D::CoordinateFrame cameraFocus;
 	CameraType cameraType;
@@ -90,7 +93,7 @@ public:
 
 	virtual ~Camera() {}
 
-	const G3D::GCamera& getGCamera() const { return gCamera; }
+	const G3D::GCamera& getGCamera() const;
 
 	void onHeartbeat();
 	void autoMode();
@@ -111,7 +114,7 @@ public:
 
 	void setCameraFocus(const G3D::CoordinateFrame& value);
 
-	G3D::CoordinateFrame getCameraCoordinateFrame() const { return gCamera.getCoordinateFrame(); }
+	G3D::CoordinateFrame getCameraCoordinateFrame() const { return getGCamera().getCoordinateFrame(); }
 
 	void setCameraCoordinateFrameNoLerp(const G3D::CoordinateFrame& value);
 	void goalToCamera();
