@@ -13,6 +13,7 @@
 #include "util/UserInputBase.h"
 #include "util/standardout.h"
 #include "v8datamodel/Camera.h"
+#include "v8datamodel/DataModel.h"
 #include "v8datamodel/Flag.h"
 #include "v8datamodel/Hopper.h"
 #include "v8datamodel/ModelInstance.h"
@@ -20,6 +21,7 @@
 #include "v8datamodel/PartInstance.h"
 #include "v8datamodel/Selection.h"
 #include "v8datamodel/Stats.h"
+#include "v8datamodel/TimeState.h"
 #include "v8datamodel/Tool.h"
 #include "v8datamodel/UserController.h"
 #include "v8kernel/Kernel.h"
@@ -99,9 +101,10 @@ MouseCommand* newNullTool(Workspace* workspace)
 	return new NewNullTool(workspace);
 }
 
-static double getFPS(Profiling::CodeProfiler* profiler)
+static double getFPS(const Workspace* workspace)
 {
-	return profiler->getData(3.0).getActualFPS();
+	const DataModel* dataModel = dynamic_cast<const DataModel*>(workspace->getParent());
+	return dataModel ? dataModel->timeState->fpsStopwatch.smoothFPS() : 0.0;
 }
 
 Workspace* Workspace::getMyWorkspaceFast(const Instance* context)
@@ -682,7 +685,7 @@ WorkspaceStatsItem::WorkspaceStatsItem(const Workspace* workspace, const World* 
 {
 	setName("Workspace");
 
-	createChildItem<double>("FPS", boost::bind(&getFPS, workspace->profileWorkspaceStep.get()));
+	createChildItem<double>("FPS", boost::bind(&getFPS, workspace));
 	createBoundChildItem(*workspace->profileRun);
 
 	Stats::Item* pWorkspaceStep = createBoundChildItem(*workspace->profileWorkspaceStep);
