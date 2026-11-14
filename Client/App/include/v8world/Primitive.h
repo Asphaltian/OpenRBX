@@ -1,0 +1,336 @@
+#ifndef V8WORLD_PRIMITIVE_H
+#define V8WORLD_PRIMITIVE_H
+
+#include "placeholder.h"
+#include "util/ComputeProp.h"
+#include "util/Extents.h"
+#include "util/Face.h"
+#include "util/Guid.h"
+#include "util/NormalId.h"
+#include "util/Vector3int32.h"
+#include "v8world/Geometry.h"
+#include "v8world/IPipelined.h"
+#include "v8world/SurfaceData.h"
+
+#include <G3D/CoordinateFrame.h>
+#include <G3D/Ray.h>
+#include <G3D/Vector3.h>
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
+
+namespace RBX {
+
+class Anchor;
+class Assembly;
+class Body;
+class Clump;
+class Contact;
+class Controller;
+class IMoving;
+class Joint;
+class Primitive;
+class PV;
+class RigidJoint;
+class SpatialNode;
+class Velocity;
+class World;
+
+using G3D::CoordinateFrame;
+using G3D::Ray;
+using G3D::Vector3;
+
+namespace Sim {
+
+enum EdgeState
+{
+	UNDEFINED = 0,
+	STEPPING = 1,
+	SLEEPING = 2,
+	TOUCHING = 3,
+	TOUCHING_SLEEPING = 4,
+};
+
+} // namespace Sim
+
+class __declspec(novtable) Edge : public IPipelined
+{
+public:
+	enum EdgeType
+	{
+		JOINT = 0,
+		CONTACT = 1,
+	};
+
+	Edge(Primitive* prim0, Primitive* prim1);
+	virtual ~Edge() {}
+
+	virtual EdgeType getEdgeType() const = 0;
+	virtual void setPrimitive(int index, Primitive* primitive);
+
+	Edge* getNext(const Primitive* primitive) const { return primitive == prim0 ? next0 : next1; }
+
+	void setNext(Primitive* primitive, Edge* edge)
+	{
+		if (primitive == prim0) {
+			next0 = edge;
+		}
+		else {
+			next1 = edge;
+		}
+	}
+	bool links(const Primitive*) const;
+	bool links(Primitive*, Primitive*) const;
+
+	Primitive* getPrimitive(int index) const { return (&prim0)[index]; }
+
+	Primitive* otherPrimitive(const Primitive* primitive) const { return primitive == prim0 ? prim1 : prim0; }
+	Primitive* otherPrimitive(int) const;
+	int getPrimitiveId(const Primitive*) const;
+
+	bool getInEdgeList() const { return inEdgeList; }
+	void setInEdgeList(bool value) { inEdgeList = value; }
+
+	Sim::EdgeState getEdgeState() const { return edgeState; }
+	void setEdgeState(Sim::EdgeState value) { edgeState = value; }
+
+private:
+	Sim::EdgeState edgeState;
+	Primitive* prim0;
+	Primitive* prim1;
+	Edge* next0;
+	Edge* next1;
+	bool inEdgeList;
+};
+
+class EdgeList
+{
+public:
+	static void insertEdge(Primitive* primitive, Edge* edge, EdgeList& list);
+	static void removeEdge(Primitive* primitive, Edge* edge, EdgeList& list);
+
+	EdgeList() : first(NULL), num(0) {}
+
+	Edge* first;
+	int num;
+	bool hasEdge();
+};
+
+class Primitive : public IPipelined
+{
+public:
+	Primitive(Geometry::GeometryType geometryType);
+
+	static bool disableSleep;
+
+private:
+	friend class SpatialHash;
+	friend class World;
+
+	static bool ignoreBool;
+
+	Guid guid;
+	bool guidSetExternally;
+	unsigned int sizeMultiplier;
+	EdgeList contacts;
+	EdgeList joints;
+	int worldIndex;
+	World* world;
+	Clump* clump;
+	int clumpDepth;
+	int traverseId;
+
+	SpatialNode* spatialNodes;
+	Vector3int32 oldSpatialMin;
+	Vector3int32 oldSpatialMax;
+	mutable Extents fuzzyExtents;
+	mutable int fuzzyExtentsStateId;
+
+protected:
+	Geometry* geometry;
+	Body* body;
+	IMoving* myOwner;
+	Anchor* anchorObject;
+	bool dragging;
+	bool anchored;
+	bool canCollide;
+	bool canSleep;
+	float friction;
+	float elasticity;
+	SurfaceType surfaceType[6];
+	SurfaceData* surfaceData[6];
+	Controller* controller;
+
+	ComputeProp<float, Primitive> JointK;
+
+	static Geometry* newGeometry(Geometry::GeometryType geometryType);
+
+public:
+	virtual ~Primitive();
+
+	Body* getBody() { return body; }
+	const Body* getBody() const { return body; }
+	Extents getExtentsLocal() const
+	{
+		const Vector3 corner = geometry->getGridSize() * 0.5f;
+
+		return Extents(-corner, corner);
+	}
+
+	Extents getExtentsWorld() const
+	{
+		const Vector3 corner = geometry->getGridSize() * 0.5f;
+
+		return Extents(-corner, corner).toWorldSpace(getCoordinateFrame());
+	}
+
+	const Geometry* getGeometry() const { return geometry; }
+	Geometry* getGeometry() { return geometry; }
+
+	const Vector3& getGridSize() const { return geometry->getGridSize(); }
+	Geometry::GeometryType getPrimitiveType() const { return geometry->getGeometryType(); }
+
+	Clump* getClump() const { return clump; }
+	void setOwner(IMoving* value) { myOwner = value; }
+	IMoving* getOwner() const { return myOwner; }
+	const bool getCanSleep() const { return canSleep; }
+	Anchor* getAnchorObject() { return anchorObject; }
+	bool getAnchor() const { return anchorObject != NULL; }
+
+	bool getDragging() const { return dragging; }
+	const bool getCanCollide() const { return canCollide; }
+	float getFriction() const { return friction; }
+	float getElasticity() const { return elasticity; }
+
+	const Guid& getGuid() const;
+	void setGuid(const Guid& value);
+
+	int& worldIndexFunc() { return worldIndex; }
+
+	unsigned int getSizeMultiplier() const { return sizeMultiplier; }
+	void setSizeMultiplier(unsigned int multiplier);
+	World* getWorld() const;
+	void setWorld(World*);
+
+	static void insertEdge(Edge* edge);
+	static void removeEdge(Edge* edge);
+	int getNumJoints2() const;
+	int countNumJoints() const;
+	int getNumContacts() const;
+	int getNumEdges() const;
+	bool hasEdge();
+
+	void setClump(Clump* value);
+
+	int getClumpDepth() const { return clumpDepth; }
+	void setClumpDepth(int value) { clumpDepth = value; }
+	int getTraverseId() const;
+	void setTraverseId(int);
+
+	Assembly* getAssembly() const;
+
+	void setDragging(bool value);
+	void setAnchor(bool value);
+	void setCanSleep(bool value);
+	void setCanCollide(bool value);
+	void setFriction(float value);
+	void setElasticity(float value);
+
+	const CoordinateFrame& getCoordinateFrame() const;
+	void setVelocity(const Velocity& velocity);
+	void setMassInertia(float);
+
+	static void onNewTouch(Primitive* p0, Primitive* p1);
+
+	bool hitTest(const Ray& ray, Vector3& hitPoint, bool& inside);
+
+	CoordinateFrame getFaceCoordInObject(NormalId normalId);
+	Face getFaceInObject(NormalId normalId);
+	Face getFaceInWorld(NormalId normalId);
+
+protected:
+	float computeJointK() const;
+
+private:
+	Extents computeFuzzyExtents() const;
+	void onChangedInKernel();
+	static const int fuzzyExtentsReset();
+
+public:
+	const Extents& getFastFuzzyExtents() const;
+	static float squaredDistance(const Primitive&, const Primitive&);
+
+	void setSurfaceData(NormalId normalId, const SurfaceData& value);
+	void setSurfaceType(NormalId normalId, SurfaceType surfaceType);
+
+	SurfaceType getSurfaceType(NormalId normalId) const { return surfaceType[normalId]; }
+
+	float getJointK() const { return JointK; }
+	static float defaultElasticity();
+	static float defaultFriction();
+
+	const SurfaceData& getSurfaceData(NormalId normalId) const
+	{
+		return surfaceData[normalId] != NULL ? *surfaceData[normalId] : SurfaceData::empty();
+	}
+
+	Controller* getController() { return controller; }
+
+	CoordinateFrame getGridCorner() const;
+	void setGridCorner(const CoordinateFrame& corner);
+	void setPV(const PV&);
+
+	void setCoordinateFrame(const CoordinateFrame& value);
+
+private:
+	Vector3 clipToSafeSize(const Vector3& size);
+
+public:
+	void setGridSize(const Vector3& size);
+
+	void setController(Controller* value);
+	void setPrimitiveType(Geometry::GeometryType geometryType);
+
+	virtual float getRadius() const { return geometry->getRadius(); }
+
+	float getPlanarSize() const;
+
+private:
+	RigidJoint* getFirstRigidAt(Edge* edge);
+
+public:
+	Edge* getFirstEdge() const;
+	Edge* getNextEdge(Edge* edge) const;
+	Joint* getFirstJoint() const;
+	Joint* getNextJoint(Joint* joint) const;
+	Contact* getFirstContact();
+	Contact* getNextContact(Contact* contact);
+	RigidJoint* getFirstRigid();
+	RigidJoint* getNextRigid(RigidJoint* joint);
+
+	static Joint* getJoint(Primitive* p0, Primitive* p1);
+	static Contact* getContact(Primitive* p0, Primitive* p1);
+
+	static bool aaBoxCollide(const Primitive& p0, const Primitive& p1)
+	{
+		Vector3 delta = p0.getCoordinateFrame().translation - p1.getCoordinateFrame().translation;
+
+		float r0 = p0.getRadius();
+		float r1 = p1.getRadius();
+
+		if (r0 + r1 < std::max(fabsf(delta.x), std::max(fabsf(delta.y), fabsf(delta.z)))) {
+			return false;
+		}
+
+		const Extents& e1 = p1.getFastFuzzyExtents();
+		const Extents& e0 = p0.getFastFuzzyExtents();
+
+		return e0.overlapsOrTouches(e1);
+	}
+
+	static Primitive* downstreamPrimitive(Joint* joint);
+};
+
+} // namespace RBX
+
+#endif // V8WORLD_PRIMITIVE_H

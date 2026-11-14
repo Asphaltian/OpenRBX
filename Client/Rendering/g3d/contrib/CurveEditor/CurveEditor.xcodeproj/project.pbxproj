@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F0B7D5506DEE062002E4048 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0B7D5406DEE062002E4048 /* OpenGL.framework */; };
+		0F0B7E3506DEE749002E4048 /* SDLMain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F0B7E3406DEE749002E4048 /* SDLMain.h */; };
+		0F0B7E3706DEE751002E4048 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B7E3606DEE751002E4048 /* SDLMain.m */; };
+		0F0B7E7006DEEC38002E4048 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0B7E6F06DEEC38002E4048 /* SDL.framework */; };
+		3E9F693F087F496500553053 /* libGLG3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9F693D087F496500553053 /* libGLG3D.a */; };
+		3E9F6940087F496500553053 /* libG3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E9F693E087F496500553053 /* libG3D.a */; };
+		50DD9C74095C938C00790847 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50DD9C6E095C938C00790847 /* main.cpp */; };
+		50DD9CCD095C97A100790847 /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50DD9CC9095C97A100790847 /* App.cpp */; };
+		50DD9CCE095C97A100790847 /* App.h in Headers */ = {isa = PBXBuildFile; fileRef = 50DD9CCA095C97A100790847 /* App.h */; };
+		50DD9CCF095C97A100790847 /* Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50DD9CCB095C97A100790847 /* Editor.cpp */; };
+		50DD9CD0095C97A100790847 /* Editor.h in Headers */ = {isa = PBXBuildFile; fileRef = 50DD9CCC095C97A100790847 /* Editor.h */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		4A9504CCFFE6A4B311CA0CBA /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = ../../../G3DOSX/build;
+				OPTIMIZATION_CFLAGS = "-O0";
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		4A9504CDFFE6A4B311CA0CBA /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = ../../../G3DOSX/build;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		0F0B7D5406DEE062002E4048 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		0F0B7E3406DEE749002E4048 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SDLMain.h; path = ../../../G3DOSX/SDLMain.h; sourceTree = SOURCE_ROOT; };
+		0F0B7E3606DEE751002E4048 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = SDLMain.m; path = ../../../G3DOSX/SDLMain.m; sourceTree = SOURCE_ROOT; };
+		0F0B7E6F06DEEC38002E4048 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		3E9F693D087F496500553053 /* libGLG3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLG3D.a; path = ../../../G3DOSX/build/Development/libGLG3D.a; sourceTree = SOURCE_ROOT; };
+		3E9F693E087F496500553053 /* libG3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libG3D.a; path = ../../../G3DOSX/build/Development/libG3D.a; sourceTree = SOURCE_ROOT; };
+		50DD9C6E095C938C00790847 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		50DD9CC9095C97A100790847 /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
+		50DD9CCA095C97A100790847 /* App.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		50DD9CCB095C97A100790847 /* Editor.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Editor.cpp; sourceTree = "<group>"; };
+		50DD9CCC095C97A100790847 /* Editor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Editor.h; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* CurveEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurveEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E9F693F087F496500553053 /* libGLG3D.a in Frameworks */,
+				3E9F6940087F496500553053 /* libG3D.a in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				0F0B7E7006DEEC38002E4048 /* SDL.framework in Frameworks */,
+				0F0B7D5506DEE062002E4048 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* CurveEditor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CurveEditor */ = {
+			isa = PBXGroup;
+			children = (
+				29B97315FDCFA39411CA2CEA /* Source */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CurveEditor;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				50DD9CC9095C97A100790847 /* App.cpp */,
+				50DD9CCA095C97A100790847 /* App.h */,
+				50DD9CCB095C97A100790847 /* Editor.cpp */,
+				50DD9CCC095C97A100790847 /* Editor.h */,
+				50DD9C6E095C938C00790847 /* main.cpp */,
+				0F0B7E3606DEE751002E4048 /* SDLMain.m */,
+				0F0B7E3406DEE749002E4048 /* SDLMain.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E9F693D087F496500553053 /* libGLG3D.a */,
+				3E9F693E087F496500553053 /* libG3D.a */,
+				0F0B7E6F06DEEC38002E4048 /* SDL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				0F0B7D5406DEE062002E4048 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		8D1107270486CEB800E47090 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F0B7E3506DEE749002E4048 /* SDLMain.h in Headers */,
+				50DD9CCE095C97A100790847 /* App.h in Headers */,
+				50DD9CD0095C97A100790847 /* Editor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* CurveEditor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E74443E087F4934007B1326 /* Build configuration list for PBXNativeTarget "CurveEditor" */;
+			buildPhases = (
+				8D1107270486CEB800E47090 /* Headers */,
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__cdecl=",
+					"__stdcall=",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-multiply_defined",
+					suppress,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CurveEditor;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			dependencies = (
+			);
+			name = CurveEditor;
+			productInstallPath = "$(HOME)/Applications";
+			productName = CurveEditor;
+			productReference = 8D1107320486CEB800E47090 /* CurveEditor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 3E744442087F4934007B1326 /* Build configuration list for PBXProject "CurveEditor" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA /* Development */,
+				4A9504CDFFE6A4B311CA0CBA /* Deployment */,
+			);
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CurveEditor */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* CurveEditor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F0B7E3706DEE751002E4048 /* SDLMain.m in Sources */,
+				50DD9C74095C938C00790847 /* main.cpp in Sources */,
+				50DD9CCD095C97A100790847 /* App.cpp in Sources */,
+				50DD9CCF095C97A100790847 /* Editor.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3E74443F087F4934007B1326 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__cdecl=",
+					"__stdcall=",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = ../../include;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../G3DOSX/build/Development\"";
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-multiply_defined",
+					suppress,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CurveEditor;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		3E744440087F4934007B1326 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__cdecl=",
+					"__stdcall=",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = ../../include;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../G3DOSX/build/Development\"";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-multiply_defined",
+					suppress,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CurveEditor;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		3E744441087F4934007B1326 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__cdecl=",
+					"__stdcall=",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../G3DOSX/build/Development\"";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-multiply_defined",
+					suppress,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = CurveEditor;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		3E744443087F4934007B1326 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		3E744444087F4934007B1326 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		3E744445087F4934007B1326 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E74443E087F4934007B1326 /* Build configuration list for PBXNativeTarget "CurveEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E74443F087F4934007B1326 /* Development */,
+				3E744440087F4934007B1326 /* Deployment */,
+				3E744441087F4934007B1326 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		3E744442087F4934007B1326 /* Build configuration list for PBXProject "CurveEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E744443087F4934007B1326 /* Development */,
+				3E744444087F4934007B1326 /* Deployment */,
+				3E744445087F4934007B1326 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

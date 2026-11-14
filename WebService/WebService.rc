@@ -1,0 +1,42 @@
+#include <winres.h>
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+203 ICON "WebService.ico"
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,3,676,0
+ PRODUCTVERSION 0,3,676,0
+ FILEFLAGSMASK 0x3fL
+ FILEFLAGS 0x0L
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "ROBLOX Corporation"
+            VALUE "FileDescription", "ROBLOX Web Service"
+            VALUE "FileVersion", "0, 3, 676, 0"
+            VALUE "InternalName", "WebService.dll"
+            VALUE "LegalCopyright", "\xfd 2007 ROBLOX Corporation.  All rights reserved."
+            VALUE "OriginalFilename", "WebService.dll"
+            VALUE "ProductName", "ROBLOX"
+            VALUE "ProductVersion", "0, 3, 676, 0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+STRINGTABLE
+BEGIN
+    100 "WebService"
+END
+
+#include "atlsrv.rc"

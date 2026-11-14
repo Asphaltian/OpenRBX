@@ -1,0 +1,47 @@
+/**
+ Transforms the light to tangent space.
+ */
+
+struct VIN {
+    float4          position    : POSITION;
+    float2          texCoord    : TEXCOORD0;
+    float3          normal      : NORMAL;
+    float3          tangent     : TEXCOORD1;
+    float3          binormal    : TEXCOORD2;
+};
+
+
+struct VOUT {
+    /** Homogeneous position */
+    float4          position    : POSITION;
+    float2          texCoord    : TEXCOORD0;
+    /** Tangent space light */
+    float3          light       : TEXCOORD1;
+
+    /** Tangent space eye vector */
+    float3          eye         : TEXCOORD2;
+};
+
+
+VOUT main(
+    const float4x4   in uniform MVP,
+    const float4     in uniform osLight,
+    const float3     in uniform osEye,
+    const VIN        in         vin) {
+
+    VOUT vout;
+
+    vout.position = mul(MVP, vin.position);
+    vout.texCoord = vin.texCoord;
+
+    // Object space to tangent space matrix (transpose of
+    // the tangent to object matrix).  We take care
+    // of translation explicitly first, so this is just 
+    // the rotation component.
+    float3x3 T = float3x3(-vin.binormal, -vin.tangent, vin.normal);
+
+    vout.light = mul(T, (osLight.xyz - vin.position.xyz * osLight.w));
+    vout.eye   = mul(T, osEye - vin.position.xyz);
+
+    return vout;
+}

@@ -1,0 +1,40 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{16302877-99F4-4880-8EBF-E974FCBCBC69}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viewer", "Viewer\Viewer.csproj", "{F527879A-D463-4E48-A6EF-C31F083ADFD1}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChemCPP", "ChemCPP\ChemCPP.vcproj", "{D11FD407-CEFD-4191-A0B9-2151C79B4A3E}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{16302877-99F4-4880-8EBF-E974FCBCBC69}.Debug.ActiveCfg = Debug|.NET
+		{16302877-99F4-4880-8EBF-E974FCBCBC69}.Debug.Build.0 = Debug|.NET
+		{16302877-99F4-4880-8EBF-E974FCBCBC69}.Release.ActiveCfg = Release|.NET
+		{16302877-99F4-4880-8EBF-E974FCBCBC69}.Release.Build.0 = Release|.NET
+		{F527879A-D463-4E48-A6EF-C31F083ADFD1}.Debug.ActiveCfg = Debug|.NET
+		{F527879A-D463-4E48-A6EF-C31F083ADFD1}.Debug.Build.0 = Debug|.NET
+		{F527879A-D463-4E48-A6EF-C31F083ADFD1}.Release.ActiveCfg = Release|.NET
+		{F527879A-D463-4E48-A6EF-C31F083ADFD1}.Release.Build.0 = Release|.NET
+		{D11FD407-CEFD-4191-A0B9-2151C79B4A3E}.Debug.ActiveCfg = Debug|Win32
+		{D11FD407-CEFD-4191-A0B9-2151C79B4A3E}.Debug.Build.0 = Debug|Win32
+		{D11FD407-CEFD-4191-A0B9-2151C79B4A3E}.Release.ActiveCfg = Release|Win32
+		{D11FD407-CEFD-4191-A0B9-2151C79B4A3E}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionItems) = postSolution
+		ReadMe.txt = ReadMe.txt
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

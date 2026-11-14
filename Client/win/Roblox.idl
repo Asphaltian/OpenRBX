@@ -1,0 +1,150 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+typedef [public] enum WindowType {
+	NoWindowType = 0,
+	PlayWindowType = 2
+} WINDOW_TYPE;
+
+typedef [public] enum ErrorReporting {
+	DontReport = 0,
+	Prompt = 1,
+	Report = 2
+} ERROR_REPORTING;
+
+[
+	object,
+	uuid(D63F927A-1170-4239-9C1D-06E8A658F300),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IContent : IDispatch {
+	[id(1), helpstring("method Upload")] HRESULT Upload([in] BSTR url);
+};
+
+[
+	object,
+	uuid(0730C3C6-092D-4F45-B8B9-BDEB82DE1C7B),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IWorkspace : IDispatch {
+	[id(3), hidden, restricted] HRESULT SaveToFile([in] BSTR pathName);
+	[id(4), hidden, restricted] HRESULT SaveSelectionToFile([in] BSTR pathName);
+	[id(5), helpstring("method Insert")] HRESULT Insert([in] BSTR url);
+	[id(6), helpstring("method Write")] HRESULT Write([out, retval] IContent** result);
+	[id(7), helpstring("method WriteSelection")] HRESULT WriteSelection([out, retval] IContent** result);
+	[id(8), helpstring("method ExecScript")] HRESULT ExecScript([in] BSTR script, [in, optional] VARIANT arg1, [in, optional] VARIANT arg2, [in, optional] VARIANT arg3, [in, optional] VARIANT arg4, [out, retval] SAFEARRAY(VARIANT)* result);
+	[id(9), helpstring("method ExecUrlScript")] HRESULT ExecUrlScript([in] BSTR url, [in, optional] VARIANT arg1, [in, optional] VARIANT arg2, [in, optional] VARIANT arg3, [in, optional] VARIANT arg4, [out, retval] SAFEARRAY(VARIANT)* result);
+	[id(10), helpstring("method Close")] HRESULT Close();
+};
+
+[
+	object,
+	uuid(54F58168-734E-4379-B198-64B0826A002E),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IApp : IDispatch {
+	[id(1)] HRESULT CreateGame([in] WINDOW_TYPE WindowType, [out, retval] IWorkspace** result);
+	[id(2)] HRESULT LaunchIDE();
+	[propget, id(4)] HRESULT Version([out, retval] BSTR* pVal);
+	[propget, id(5)] HRESULT ErrorReporting([out, retval] ERROR_REPORTING* pVal);
+	[propget, id(6)] HRESULT HasErrorFiles([out, retval] VARIANT_BOOL* pVal);
+	[id(7)] HRESULT SendErrorFiles([in] BSTR url);
+	[propget, id(8)] HRESULT IsUploadingErrorFiles([out, retval] VARIANT_BOOL* pVal);
+	[id(9)] HRESULT DeleteErrorFiles();
+	[id(10)] HRESULT ClearFileCache();
+	[propget, id(11)] HRESULT ID([out, retval] BSTR* pVal);
+	[id(12)] HRESULT RobloxAuthenticate([in] BSTR url, [in] BSTR ticket);
+};
+
+[
+	object,
+	uuid(D5AB3A9C-C462-48BA-A430-34B227340E42),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface ILuaFunction : IDispatch {
+	[id(1)] HRESULT Call([in, optional] VARIANT arg1, [in, optional] VARIANT arg2, [in, optional] VARIANT arg3, [in, optional] VARIANT arg4, [out, retval] VARIANT* result);
+	[id(2)] HRESULT CallEx([in, optional] SAFEARRAY(VARIANT) args, [out, retval] SAFEARRAY(VARIANT)* result);
+};
+
+[
+	object,
+	uuid(E2ECE10D-9997-414B-B40B-0928B8F3CADB),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IBrowserViewExternal : IDispatch {
+	[propget, id(1), helpstring("property IsRobloxIDE")] HRESULT IsRobloxIDE([out, retval] VARIANT_BOOL* pVal);
+	[id(2)] HRESULT GetApp([out, retval] IDispatch** result);
+};
+
+[
+	uuid(03E1C8ED-C1C6-47BF-B9B9-A37B677318DD),
+	version(1.3),
+	helpstring("Roblox 1.3 Type Library")
+]
+library RobloxLib
+{
+	importlib("stdole2.tlb");
+
+	[
+		uuid(ABB1FABF-E42E-45B8-81B4-39B1CF160142)
+	]
+	coclass Workspace
+	{
+		[default] interface IWorkspace;
+	};
+
+	[
+		uuid(EEC6B245-01BE-4A51-92BA-2AFDAF97581B)
+	]
+	coclass App
+	{
+		[default] interface IApp;
+	};
+
+	[
+		uuid(19821FDD-546E-4284-A925-B2C5D7CC3084),
+		noncreatable
+	]
+	coclass Content
+	{
+		[default] interface IContent;
+	};
+
+	[
+		uuid(7FD4F714-8BA6-47D0-ABBF-0D6F1163521A),
+		noncreatable
+	]
+	coclass LuaFunction
+	{
+		[default] interface ILuaFunction;
+	};
+
+	[
+		uuid(DD754D30-321A-45A2-A40C-75783AFABFAB)
+	]
+	dispinterface _IBrowserViewExternalEvents
+	{
+		properties:
+		methods:
+	};
+
+	[
+		uuid(70EBD57E-FD0D-4032-B090-9244AA7DED6E),
+		noncreatable
+	]
+	coclass BrowserViewExternal
+	{
+		[default] interface IBrowserViewExternal;
+		[default, source] dispinterface _IBrowserViewExternalEvents;
+	};
+};

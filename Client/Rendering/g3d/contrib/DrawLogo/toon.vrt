@@ -1,0 +1,8 @@
+// Camera space normal
+varying vec3 N;
+
+void main(void) {
+	vec4 t = gl_ModelViewMatrix * vec4(gl_Normal, 0);
+	N = t.xyz;
+	gl_Position = ftransform();
+}

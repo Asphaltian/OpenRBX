@@ -1,0 +1,82 @@
+#include "reflection/signal.h"
+
+#include "reflection/object.h"
+
+#include <cstddef>
+
+namespace RBX {
+namespace Reflection {
+
+GenericSlotWrapper::~GenericSlotWrapper()
+{
+}
+
+SignalInstance::~SignalInstance()
+{
+}
+
+SignalInstance* SignalDescriptor::findSignalInstance(const SignalSource* source) const
+{
+	if (source == NULL) {
+		return NULL;
+	}
+
+	if (source->signals.get() == NULL) {
+		return NULL;
+	}
+
+	SignalSource::SignalMap::const_iterator it = source->signals->find(this);
+
+	if (it == source->signals->end()) {
+		return NULL;
+	}
+
+	return it->second.get();
+}
+
+SignalDescriptor::SignalDescriptor(ClassDescriptor& classDescriptor, const char* name)
+	: MemberDescriptor(classDescriptor, name, "Signals"), signalCreatedHook(NULL)
+{
+	classDescriptor.MemberDescriptorContainer<SignalDescriptor>::declare(this);
+}
+
+boost::shared_ptr<SignalInstance> SignalDescriptor::getSignalInstance(SignalSource& source) const
+{
+	if (source.signals.get() == NULL) {
+		source.signals.reset(new SignalSource::SignalMap());
+	}
+	else {
+		SignalSource::SignalMap::iterator iter = source.signals->find(this);
+
+		if (iter != source.signals->end()) {
+			return iter->second;
+		}
+	}
+
+	boost::shared_ptr<SignalInstance> si(newSignalInstance(source));
+
+	(*source.signals)[this] = si;
+
+	if (signalCreatedHook != NULL) {
+		signalCreatedHook(&source);
+	}
+
+	return si;
+}
+
+boost::shared_ptr<SignalInstance> Signal::getSignalInstance() const
+{
+	return descriptor->getSignalInstance(*instance);
+}
+
+SignalSource::~SignalSource()
+{
+}
+
+void SignalSource::disconnect_all_slots()
+{
+	signals.reset();
+}
+
+} // namespace Reflection
+} // namespace RBX

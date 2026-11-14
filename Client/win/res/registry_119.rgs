@@ -1,0 +1,24 @@
+HKCR
+{
+	Roblox.BrowserViewExternal.1 = s 'BrowserViewExternal Class'
+	{
+		CLSID = s '{70EBD57E-FD0D-4032-B090-9244AA7DED6E}'
+	}
+	Roblox.BrowserViewExternal = s 'BrowserViewExternal Class'
+	{
+		CLSID = s '{70EBD57E-FD0D-4032-B090-9244AA7DED6E}'
+		CurVer = s 'Roblox.BrowserViewExternal.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {70EBD57E-FD0D-4032-B090-9244AA7DED6E} = s 'BrowserViewExternal Class'
+		{
+			ProgID = s 'Roblox.BrowserViewExternal.1'
+			VersionIndependentProgID = s 'Roblox.BrowserViewExternal'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{03E1C8ED-C1C6-47BF-B9B9-A37B677318DD}'
+		}
+	}
+}

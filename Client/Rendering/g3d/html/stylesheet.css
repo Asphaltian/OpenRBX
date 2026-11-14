@@ -1,0 +1,129 @@
+/**
+    @file	stylesheet.css
+    
+    @maintainer Daniel J. Hilferty, daniel@hilferty.org
+    
+    @created    23-Feb-2006
+    @edited     27-Feb-2006
+ */
+
+a.qindex {}
+
+a.qindexRef {}
+
+a.el { 
+    text-decoration: none; 
+    font-weight: bold; }
+
+a.elRef { 
+    font-weight: bold; }
+
+a.code { 
+    text-decoration: none; 
+    font-weight: normal; 
+    color: #2929ee; }
+
+a.codeRef { 
+    font-weight: normal; 
+    color: #2929ee; }
+
+a:hover { 
+    text-decoration: none; 
+    background-color: #E0E0FF; }
+
+a:visited {
+    color: #2929ee; }
+
+body {
+    background: white; 
+    color: black; }
+
+caption { 
+    font-weight: bold; }
+
+
+dl.el { 
+    margin-left: -1cm; }
+
+div.fragment { 
+    width: 100%; 
+    border: none; 
+    background-color: #eeeeee; }
+
+div.ah { 
+    background-color: black; 
+    font-weight: bold; 
+    color: #ffffff; 
+    margin-bottom: 3px; 
+    margin-top: 3px; }
+
+div.groupHeader { 
+    margin-left: 16px; 
+    margin-top: 12px; 
+    margin-bottom: 6px; 
+    font-weight: bold; }
+
+div.groupText { 
+    margin-left: 16px; 
+    font-style: italic; 
+    font-size: smaller; }
+
+h1 { 
+    text-align: center; }
+
+table.mdTable, td.md, td.mdname1, td.mdname {
+    background:		#FFFF90; }
+table.mdTable, td.md, td.mdname1, td.mdname {
+    background:		#E0E0E0; }
+
+table.mdTable {
+    width:			100%; 
+    border-style:   solid;
+    border-color:   #676767;
+    border-width:   1px; }
+
+td.md { 
+    font-weight: bold; }
+
+td.mdname1, td.mdname { 
+    font-weight: bold; 
+    color: #602020; }
+
+td.mdname { 
+    width: 600px; }
+
+td.memItemLeft, td.memItemRight {
+    padding:	1px; }
+
+td.indexkey { 
+    background-color: #eeeeff; 
+    font-weight: bold; 
+    padding-right  : 10px; 
+    padding-top    : 2px; 
+    padding-left   : 10px; 
+    padding-bottom : 2px; 
+    margin-left    : 0px; 
+    margin-right   : 0px; 
+    margin-top     : 2px; 
+    margin-bottom  : 2px; }
+
+td.indexvalue { 
+    background-color: #eeeeff; 
+    font-style: italic; 
+    padding-right  : 10px; 
+    padding-top    : 2px; 
+    padding-left   : 10px; 
+    padding-bottom : 2px; 
+    margin-left    : 0px; 
+    margin-right   : 0px; 
+    margin-top     : 2px; 
+    margin-bottom  : 2px; }
+
+span.keyword       { color: #008000 }
+span.keywordtype   { color: #604020 }
+span.keywordflow   { color: #e08000 }
+span.comment       { color: #800000 }
+span.preprocessor  { color: #806020 }
+span.stringliteral { color: #002080 }
+span.charliteral   { color: #008080 }
+.charliteral   { color: #008080 }

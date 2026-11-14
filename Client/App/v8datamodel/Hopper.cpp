@@ -1,0 +1,329 @@
+#include "v8datamodel/Hopper.h"
+
+#include "compat.h"
+#include "reflection/enumconverter.h"
+#include "reflection/property.h"
+#include "reflection/signal.h"
+#include "util/Name.h"
+#include "v8datamodel/Backpack.h"
+#include "v8datamodel/DataModel.h"
+#include "v8datamodel/ScriptMouseCommand.h"
+#include "v8datamodel/Workspace.h"
+
+namespace RBX {
+
+static Reflection::PropDescriptor<BackpackItem, TextureId> desc_TextureId(
+	"TextureId", "Data", &BackpackItem::getTextureId, &BackpackItem::setTextureId
+);
+
+static Reflection::EnumPropDescriptor<HopperBin, HopperBin::BinType> desc_BinType(
+	"BinType", "Data", &HopperBin::getBinType, &HopperBin::setBinType
+);
+
+static Reflection::SignalDesc<HopperBin, void(boost::shared_ptr<Instance>)> desc_Selected("Selected", "mouse");
+static Reflection::SignalDesc<HopperBin, void()> desc_Deselected("Deselected");
+
+static Reflection::PropDescriptor<HopperBin, std::string> desc_legacyCommand(
+	"Command", "Data", NULL, &HopperBin::setLegacyCommand, Reflection::PropertyDescriptor::LEGACY
+);
+
+static Reflection::PropDescriptor<HopperBin, std::string> desc_legacyTextureName(
+	"TextureName", "Data", NULL, &HopperBin::setLegacyTextureName, Reflection::PropertyDescriptor::LEGACY
+);
+
+bool BackpackItem::inBackpack()
+{
+	return getParent() && dynamic_cast<Backpack*>(getParent()) != NULL;
+}
+
+int BackpackItem::getBinId() const
+{
+	return getParent() ? getParent()->findChildIndex(this) : -1;
+}
+
+const TextureId BackpackItem::getTextureId() const
+{
+	return textureId;
+}
+
+bool Hopper::askAddChild(const Instance* instance) const
+{
+	return dynamic_cast<const BackpackItem*>(instance) != NULL;
+}
+
+Hopper::Hopper()
+{
+	yLocation = Rect::BOTTOM;
+}
+
+void StarterPackService::render2d(Adorn* adorn)
+{
+	Hopper::render2d(adorn);
+
+	if (findFirstChildOfType<BackpackItem>()) {
+		G3D::Rect2D viewPort = adorn->getViewport();
+
+		int fontSize = GuiRoot::normalizedFontSize(12);
+		G3D::Vector2 pos2d = viewPort.x0y1() + G3D::Vector2(4, -4);
+
+		adorn->drawFont2D(
+			"StarterPack - these items will be given to each new player",
+			pos2d,
+			fontSize,
+			G3D::Color3::white(),
+			G3D::Color4::clear(),
+			Adorn::XALIGN_LEFT,
+			Adorn::YALIGN_BOTTOM,
+			Adorn::PROPORTIONAL_SPACING
+		);
+	}
+}
+
+LegacyHopperService::~LegacyHopperService()
+{
+}
+
+template <>
+Reflection::EnumDesc<HopperBin::BinType>::EnumDesc() : EnumDescriptor("BinType", typeid(HopperBin::BinType))
+{
+	addPair(HopperBin::SCRIPT_BIN, "Script");
+	addPair(HopperBin::GAME_TOOL, "GameTool");
+	addPair(HopperBin::GRAB_TOOL, "Grab");
+	addPair(HopperBin::CLONE_TOOL, "Clone");
+	addPair(HopperBin::HAMMER_TOOL, "Hammer");
+	addPair(HopperBin::SLINGSHOT_TOOL, "Slingshot");
+	addPair(HopperBin::ROCKET_TOOL, "Rocket");
+	addPair(HopperBin::LASER_TOOL, "Laser");
+}
+
+void BackpackItem::render2d(Adorn* adorn)
+{
+	bool viewHack = false;
+	Workspace* workspace = ServiceProvider::find<Workspace>(this);
+	if (workspace && workspace->imageServerViewHack) {
+		viewHack = true;
+	}
+
+	Rect draw = viewHack ? Rect(GuiRoot::getCanvasSize()) : getMyRect();
+
+	int fontSize = GuiRoot::normalizedFontSize(12);
+
+	float numberSize = draw.size().x * 0.2f;
+	Rect numberRect = Rect::fromLowSize(
+		G3D::Vector2(draw.low.x + 2, draw.high.y - 2 - numberSize), G3D::Vector2(numberSize, numberSize)
+	);
+
+	if (!viewHack) {
+		adorn->rect2d(draw.toRect2D(), GuiItem::translucentBackdrop());
+	}
+
+	if (isEnabled()) {
+		adorn->rect2d(numberRect.toRect2D(), G3D::Color4(G3D::Color3::gray(), 1));
+
+		adorn->drawFont2D(
+			StringConverter<int>::convertToString(getBinId() + 1),
+			numberRect.center(),
+			fontSize,
+			G3D::Color3::white(),
+			G3D::Color4::clear(),
+			Adorn::XALIGN_CENTER,
+			Adorn::YALIGN_CENTER,
+			Adorn::PROPORTIONAL_SPACING
+		);
+	}
+
+	if (drawSelected()) {
+		adorn->outlineRect2d(draw.toRect2D(), 3.0f, G3D::Color4(G3D::Color3::green(), 1));
+	}
+
+	if (guiImageDraw.setImage(adorn, textureId)) {
+#ifdef COMPAT_MODE
+		Rect imageRect = draw.inset(fontSize);
+		guiImageDraw.render2d(adorn, isEnabled() || viewHack, imageRect, widgetState);
+#else
+		guiImageDraw.render2d(adorn, isEnabled() || viewHack, draw.inset(fontSize), widgetState);
+#endif
+	}
+	else {
+		Widget::render2d(adorn);
+	}
+}
+
+void HopperBin::onSelectCommand()
+{
+	DataModel* dataModel = static_cast<DataModel*>(getRootAncestor());
+
+	std::string command = Reflection::EnumDesc<BinType>::singleton().convertToString(binType) + "Tool";
+
+	Verb* verb = dataModel->getVerb(command);
+
+	if (verb->isEnabled()) {
+		if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
+			verb->doIt(&workspace->getDataState());
+		}
+	}
+}
+
+void LegacyHopperService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	Instance::onServiceProvider(oldProvider, newProvider);
+
+	if (newProvider) {
+		StarterPackService* starterPack = newProvider->find<StarterPackService>();
+
+		while (numChildren() > 0) {
+			getChild(0)->setParent(starterPack);
+		}
+
+		setParent(NULL);
+	}
+}
+
+StarterPackService::StarterPackService()
+{
+	setName(sStarterPackService);
+}
+
+LegacyHopperService::LegacyHopperService()
+{
+	setName(sLegacyHopperService);
+}
+
+void BackpackItem::setTextureId(const TextureId& value)
+{
+	if (value != textureId) {
+		textureId = value;
+
+		std::string filename;
+		ContentProvider::singleton().requestContentFile(value, filename);
+
+		if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
+			workspace->raiseDrawChanged();
+		}
+
+		raisePropertyChanged(desc_TextureId);
+	}
+}
+
+void HopperBin::onSelectScript()
+{
+	if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
+		ScriptMouseCommand* command = new ScriptMouseCommand(workspace);
+		workspace->setMouseCommand(command);
+		desc_Selected.fire(this, command->getMouse());
+	}
+}
+
+void HopperBin::onLocalClicked()
+{
+	if (!active) {
+		active = true;
+		if (binType == SCRIPT_BIN) {
+			onSelectScript();
+		}
+		else {
+			onSelectCommand();
+		}
+	}
+	else {
+		onLocalOtherClicked();
+	}
+}
+
+void HopperBin::onLocalOtherClicked()
+{
+	if (active) {
+		if (binType == SCRIPT_BIN) {
+			desc_Deselected.fire(this);
+		}
+
+		active = false;
+		if (Workspace* workspace = ServiceProvider::find<Workspace>(this)) {
+			workspace->setDefaultMouseCommand();
+		}
+	}
+}
+
+void HopperBin::setLegacyTextureName(const std::string& value)
+{
+	TextureId textureId = ContentId::fromAssets("Textures\\" + value + ".png");
+	setTextureId(textureId);
+}
+
+HopperBin::HopperBin() : binType(SCRIPT_BIN), active(false)
+{
+	setName("HopperBin");
+}
+
+void HopperBin::setBinType(const BinType value)
+{
+	if (value != binType) {
+		binType = value;
+		raisePropertyChanged(desc_BinType);
+
+		if (binType != SCRIPT_BIN) {
+			std::string textureName = Reflection::EnumDesc<BinType>::singleton().convertToString(binType);
+			setLegacyTextureName(textureName);
+		}
+	}
+}
+
+void HopperBin::setLegacyCommand(const std::string& text)
+{
+	BinType newBinType;
+	if (!Reflection::EnumDesc<BinType>::singleton().convertToValue(text, newBinType)) {
+		newBinType = SCRIPT_BIN;
+	}
+
+	setBinType(newBinType);
+}
+
+G3D::Vector2 BackpackItem::getSize() const
+{
+	float size = GuiRoot::toPixelSize(G3D::Vector2(10, 10)).x;
+	return G3D::Vector2(size, size);
+}
+
+bool Hopper::askSetParent(const Instance* instance) const
+{
+	return true;
+}
+
+const char sLegacyHopperService[] = "Hopper";
+
+const char sStarterPackService[] = "StarterPack";
+
+const char sHopperBin[] = "HopperBin";
+
+const char sBackpackItem[] = "BackpackItem";
+
+} // namespace RBX
+
+template class RBX::FactoryProduct<RBX::StarterPackService, RBX::Hopper, RBX::sStarterPackService>;
+template class RBX::Reflection::Described<
+	RBX::StarterPackService,
+	RBX::sStarterPackService,
+	RBX::FactoryProduct<RBX::StarterPackService, RBX::Hopper, RBX::sStarterPackService> >;
+template class RBX::DescribedCreatable<RBX::StarterPackService, RBX::Hopper, RBX::sStarterPackService>;
+
+template class RBX::FactoryProduct<RBX::LegacyHopperService, RBX::Hopper, RBX::sLegacyHopperService>;
+template class RBX::Reflection::Described<
+	RBX::LegacyHopperService,
+	RBX::sLegacyHopperService,
+	RBX::FactoryProduct<RBX::LegacyHopperService, RBX::Hopper, RBX::sLegacyHopperService> >;
+template class RBX::DescribedCreatable<RBX::LegacyHopperService, RBX::Hopper, RBX::sLegacyHopperService>;
+
+template class RBX::FactoryProduct<RBX::HopperBin, RBX::BackpackItem, RBX::sHopperBin>;
+template class RBX::Reflection::Described<
+	RBX::HopperBin,
+	RBX::sHopperBin,
+	RBX::FactoryProduct<RBX::HopperBin, RBX::BackpackItem, RBX::sHopperBin> >;
+template class RBX::DescribedCreatable<RBX::HopperBin, RBX::BackpackItem, RBX::sHopperBin>;
+
+template class RBX::NonFactoryProduct<RBX::Widget, RBX::sBackpackItem>;
+template class RBX::Reflection::
+	Described<RBX::BackpackItem, RBX::sBackpackItem, RBX::NonFactoryProduct<RBX::Widget, RBX::sBackpackItem> >;
+template class RBX::DescribedNonCreatable<RBX::BackpackItem, RBX::Widget, RBX::sBackpackItem>;
+
+template const RBX::Name& RBX::Name::doDeclare<RBX::sBackpackItem>();
+template void RBX::Name::callDoDeclare<RBX::sBackpackItem>();

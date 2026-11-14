@@ -1,0 +1,187 @@
+#ifndef V8WORLD_SPATIALHASH_H
+#define V8WORLD_SPATIALHASH_H
+
+#include "placeholder.h"
+#include "util/Extents.h"
+#include "util/Vector3int32.h"
+
+#include <G3D/Array.h>
+#include <G3D/Ray.h>
+#include <set>
+#include <vector>
+
+namespace RBX {
+
+class Contact;
+class ContactManager;
+class HitTestFilter;
+class Primitive;
+class World;
+
+class SpatialNode
+{
+public:
+	Primitive* primitive;
+	SpatialNode* nextHashLink;
+	SpatialNode* nextPrimitiveLink;
+	SpatialNode* prevPrimitiveLink;
+	int hashId;
+	Vector3int32 gridId;
+};
+
+class SpatialHash
+{
+public:
+	SpatialHash(World* world, ContactManager* contactManager);
+	~SpatialHash();
+
+	static Vector3int32 realToHashGrid(const Vector3& realPoint);
+	static G3D::Vector3 hashGridToReal(const G3D::Vector3&);
+	static Extents hashGridToRealExtents(const Vector3& hashGrid);
+
+	bool getNextGrid(Vector3int32& grid, const G3D::Ray& unitRay, float maxDistance);
+
+	void getPrimitivesTouchingExtents(const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& answer);
+
+	void onPrimitiveAdded(Primitive* p);
+	void onPrimitiveRemoved(Primitive* p);
+	void onPrimitiveExtentsChanged(Primitive* p);
+
+	void onAllPrimitivesMoved();
+
+	int getNodesOut() const { return nodesOut; }
+	int getMaxBucket() const { return maxBucket; }
+	void doStats() const;
+
+private:
+	static unsigned int numBits() { return 16; }
+	static unsigned int numBuckets() { return 1 << numBits(); }
+
+	static float hashGridSize() { return 8.0f; }
+	static float hashGridRecip() { return 1.0f / hashGridSize(); }
+
+	static int getHash(const Vector3int32& grid);
+
+	SpatialNode* findNode(Primitive* p, const Vector3int32& grid);
+	SpatialNode* newNode();
+	void insertNodeToPrimitive(SpatialNode* node, Primitive* p, const Vector3int32& grid, int hash);
+	void addNode(Primitive* p, const Vector3int32& grid);
+
+public:
+	void getPrimitivesInGrid(const Vector3int32& grid, G3D::Array<Primitive*>& found);
+
+private:
+	void removeNodeFromPrimitive(SpatialNode* remove);
+	void removeNodeFromHash(SpatialNode* remove);
+	void returnNode(SpatialNode* node);
+	void destroyNode(SpatialNode* destroy);
+	bool shareCommonGrid(Primitive* me, Primitive* other);
+	bool hashHasPrimitive(Primitive*, int, const Vector3int32&);
+	static void computeMinMax(const Primitive*, Vector3int32&, Vector3int32&);
+	static void computeMinMax(const Extents& extents, Vector3int32& min, Vector3int32& max);
+	static Extents computeMinMax(const Extents&);
+
+	void changeMinMax(Primitive* p, const Extents& change, const Extents& oldBox, const Extents& newBox);
+	void primitiveExtentsChanged(Primitive* p);
+	unsigned int numNodes(unsigned int bucket) const
+	{
+		SpatialNode* const& head = nodes[bucket];
+		unsigned int answer = 0;
+
+		for (SpatialNode* node = head; node != NULL; node = node->nextHashLink) {
+			answer++;
+		}
+
+		return answer;
+	}
+
+	World* world;
+	ContactManager* contactManager;
+	std::vector<SpatialNode*> nodes;
+	SpatialNode* extraNodes;
+	int nodesOut;
+	int maxBucket;
+};
+
+class ContactManager
+{
+public:
+	ContactManager(World* world);
+	~ContactManager();
+
+	void getPrimitivesTouchingExtents(const Extents& extents, const Primitive* ignore, G3D::Array<Primitive*>& found);
+
+	void onPrimitiveAdded(Primitive* primitive);
+	void onPrimitiveRemoved(Primitive* p);
+	void onPrimitiveExtentsChanged(Primitive* p);
+	void onPrimitiveGeometryTypeChanged(Primitive* p);
+
+	void onNewPair(Primitive* p0, Primitive* p1);
+	void onReleasePair(Primitive* p0, Primitive* p1);
+
+	bool intersectingOthers(Primitive* check, const std::set<Primitive*>& checkSet, float overlapIgnored);
+	bool intersectingOthers(const G3D::Array<Primitive*>& check, float overlapIgnored);
+	bool intersectingOthers(Primitive* check, float overlapIgnored);
+
+	void stepWorld();
+
+	Primitive* getHit(
+		const G3D::Ray& ray,
+		const G3D::Array<const Primitive*>* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		bool& hitSurface = ignoreBool
+	) const;
+
+	Primitive* getHit(
+		const G3D::Ray& ray,
+		const std::vector<const Primitive*>* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		bool& hitSurface = ignoreBool
+	) const;
+
+	Primitive* getHitLegacy(
+		const G3D::Ray& ray,
+		const Primitive* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		float& distance,
+		const float& maxDistance
+	) const;
+
+	const SpatialHash& getSpatialHash() { return *spatialHash; }
+
+private:
+	Contact* createContact(Primitive* p0, Primitive* p1);
+	void stepBroadPhase();
+
+	Primitive* getSlowHit(
+		const G3D::Array<Primitive*>& primitives,
+		const G3D::Ray& unitRay,
+		const G3D::Array<const Primitive*>* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		float maxDistance,
+		bool& hitSurface,
+		bool& blocked
+	) const;
+
+	Primitive* getFastHit(
+		const G3D::Ray& ray,
+		const G3D::Array<const Primitive*>* ignore,
+		const HitTestFilter* filter,
+		Vector3& hitPoint,
+		bool& hitSurface,
+		bool& blocked
+	) const;
+
+	static bool ignoreBool;
+
+	SpatialHash* spatialHash;
+	World* world;
+};
+
+} // namespace RBX
+
+#endif // V8WORLD_SPATIALHASH_H

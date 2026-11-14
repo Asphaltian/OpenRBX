@@ -1,0 +1,24 @@
+HKCR
+{
+	Roblox.App.1 = s 'App Class'
+	{
+		CLSID = s '{EEC6B245-01BE-4A51-92BA-2AFDAF97581B}'
+	}
+	Roblox.App = s 'App Class'
+	{
+		CLSID = s '{EEC6B245-01BE-4A51-92BA-2AFDAF97581B}'
+		CurVer = s 'Roblox.App.2'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {EEC6B245-01BE-4A51-92BA-2AFDAF97581B} = s 'App Class'
+		{
+			ProgID = s 'Roblox.App.2'
+			VersionIndependentProgID = s 'Roblox.App'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{03E1C8ED-C1C6-47BF-B9B9-A37B677318DD}'
+		}
+	}
+}

@@ -1,0 +1,350 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F34CB2D06F3850E00AD0B70 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F34CB2A06F3850E00AD0B70 /* main.cpp */; };
+		0F34CB7E06F3870000AD0B70 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F34CB7D06F3870000AD0B70 /* SDL.framework */; };
+		0F34CB8206F3871600AD0B70 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F34CB8106F3871600AD0B70 /* OpenGL.framework */; };
+		0F34CB9E06F387BE00AD0B70 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F34CB7306F385B500AD0B70 /* SDLMain.m */; };
+		3E053D6608DE29EB005489AC /* libG3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E053D6408DE29EB005489AC /* libG3D.a */; };
+		3E053D6708DE29EB005489AC /* libGLG3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E053D6508DE29EB005489AC /* libGLG3D.a */; };
+		50D9B1FA0959E196000E50F0 /* Browse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D9B1EB0959E196000E50F0 /* Browse.cpp */; };
+		50D9B1FB0959E196000E50F0 /* Client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D9B1ED0959E196000E50F0 /* Client.cpp */; };
+		50D9B1FC0959E196000E50F0 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D9B1EF0959E196000E50F0 /* Entity.cpp */; };
+		50D9B1FD0959E196000E50F0 /* messages.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D9B1F20959E196000E50F0 /* messages.cpp */; };
+		50D9B1FE0959E196000E50F0 /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D9B1F40959E196000E50F0 /* Model.cpp */; };
+		50D9B1FF0959E196000E50F0 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D9B1F60959E196000E50F0 /* Server.cpp */; };
+		50D9B2000959E196000E50F0 /* ServerAd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D9B1F80959E196000E50F0 /* ServerAd.cpp */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		4A9504CCFFE6A4B311CA0CBA /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		4A9504CDFFE6A4B311CA0CBA /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		0F34CB2A06F3850E00AD0B70 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		0F34CB7206F385B500AD0B70 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SDLMain.h; path = ../../../G3DOSX/SDLMain.h; sourceTree = SOURCE_ROOT; };
+		0F34CB7306F385B500AD0B70 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = SDLMain.m; path = ../../../G3DOSX/SDLMain.m; sourceTree = SOURCE_ROOT; };
+		0F34CB7D06F3870000AD0B70 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		0F34CB8106F3871600AD0B70 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		3E053D6408DE29EB005489AC /* libG3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libG3D.a; path = ../../../G3DOSX/build/Development/libG3D.a; sourceTree = SOURCE_ROOT; };
+		3E053D6508DE29EB005489AC /* libGLG3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLG3D.a; path = ../../../G3DOSX/build/Development/libGLG3D.a; sourceTree = SOURCE_ROOT; };
+		50D9B1EA0959E196000E50F0 /* App.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
+		50D9B1EB0959E196000E50F0 /* Browse.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Browse.cpp; sourceTree = "<group>"; };
+		50D9B1EC0959E196000E50F0 /* Browse.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Browse.h; sourceTree = "<group>"; };
+		50D9B1ED0959E196000E50F0 /* Client.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Client.cpp; sourceTree = "<group>"; };
+		50D9B1EE0959E196000E50F0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		50D9B1EF0959E196000E50F0 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		50D9B1F00959E196000E50F0 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		50D9B1F10959E196000E50F0 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		50D9B1F20959E196000E50F0 /* messages.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = messages.cpp; sourceTree = "<group>"; };
+		50D9B1F30959E196000E50F0 /* messages.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = messages.h; sourceTree = "<group>"; };
+		50D9B1F40959E196000E50F0 /* Model.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		50D9B1F50959E196000E50F0 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		50D9B1F60959E196000E50F0 /* Server.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = Server.cpp; sourceTree = "<group>"; };
+		50D9B1F70959E196000E50F0 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		50D9B1F80959E196000E50F0 /* ServerAd.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = ServerAd.cpp; sourceTree = "<group>"; };
+		50D9B1F90959E196000E50F0 /* ServerAd.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ServerAd.h; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* Network_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Network_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E053D6708DE29EB005489AC /* libGLG3D.a in Frameworks */,
+				3E053D6608DE29EB005489AC /* libG3D.a in Frameworks */,
+				0F34CB7E06F3870000AD0B70 /* SDL.framework in Frameworks */,
+				0F34CB8206F3871600AD0B70 /* OpenGL.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0F34CB7406F385BA00AD0B70 /* SDL Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F34CB7206F385B500AD0B70 /* SDLMain.h */,
+				0F34CB7306F385B500AD0B70 /* SDLMain.m */,
+			);
+			name = "SDL Support Files";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Network_Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Network_Demo */ = {
+			isa = PBXGroup;
+			children = (
+				29B97315FDCFA39411CA2CEA /* Sources */,
+				0F34CB7406F385BA00AD0B70 /* SDL Support Files */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Network_Demo;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				50D9B1EA0959E196000E50F0 /* App.h */,
+				50D9B1EB0959E196000E50F0 /* Browse.cpp */,
+				50D9B1EC0959E196000E50F0 /* Browse.h */,
+				50D9B1ED0959E196000E50F0 /* Client.cpp */,
+				50D9B1EE0959E196000E50F0 /* Client.h */,
+				50D9B1EF0959E196000E50F0 /* Entity.cpp */,
+				50D9B1F00959E196000E50F0 /* Entity.h */,
+				50D9B1F10959E196000E50F0 /* Game.h */,
+				50D9B1F20959E196000E50F0 /* messages.cpp */,
+				50D9B1F30959E196000E50F0 /* messages.h */,
+				50D9B1F40959E196000E50F0 /* Model.cpp */,
+				50D9B1F50959E196000E50F0 /* Model.h */,
+				50D9B1F60959E196000E50F0 /* Server.cpp */,
+				50D9B1F70959E196000E50F0 /* Server.h */,
+				50D9B1F80959E196000E50F0 /* ServerAd.cpp */,
+				50D9B1F90959E196000E50F0 /* ServerAd.h */,
+				0F34CB2A06F3850E00AD0B70 /* main.cpp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E053D6408DE29EB005489AC /* libG3D.a */,
+				3E053D6508DE29EB005489AC /* libGLG3D.a */,
+				0F34CB8106F3871600AD0B70 /* OpenGL.framework */,
+				0F34CB7D06F3870000AD0B70 /* SDL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Network_Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E1F2A8408DD6F6C0099ADCA /* Build configuration list for PBXNativeTarget "Network_Demo" */;
+			buildPhases = (
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__cdecl=",
+					"__stdcall=",
+				);
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = ../../../G3DOSX/build;
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = Network_Demo;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			dependencies = (
+			);
+			name = Network_Demo;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Network_Demo;
+			productReference = 8D1107320486CEB800E47090 /* Network_Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 3E1F2A8808DD6F6C0099ADCA /* Build configuration list for PBXProject "Network_Demo" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA /* Development */,
+				4A9504CDFFE6A4B311CA0CBA /* Deployment */,
+			);
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Network_Demo */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Network_Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0F34CB2D06F3850E00AD0B70 /* main.cpp in Sources */,
+				0F34CB9E06F387BE00AD0B70 /* SDLMain.m in Sources */,
+				50D9B1FA0959E196000E50F0 /* Browse.cpp in Sources */,
+				50D9B1FB0959E196000E50F0 /* Client.cpp in Sources */,
+				50D9B1FC0959E196000E50F0 /* Entity.cpp in Sources */,
+				50D9B1FD0959E196000E50F0 /* messages.cpp in Sources */,
+				50D9B1FE0959E196000E50F0 /* Model.cpp in Sources */,
+				50D9B1FF0959E196000E50F0 /* Server.cpp in Sources */,
+				50D9B2000959E196000E50F0 /* ServerAd.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3E1F2A8508DD6F6C0099ADCA /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__cdecl=",
+					"__stdcall=",
+				);
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = (
+					../../../G3DOSX/build,
+					"$(SRCROOT)/../../../G3DOSX/build/Development",
+				);
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = Network_Demo;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		3E1F2A8608DD6F6C0099ADCA /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__cdecl=",
+					"__stdcall=",
+				);
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = (
+					../../../G3DOSX/build,
+					"$(SRCROOT)/../../../G3DOSX/build/Development",
+				);
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = Network_Demo;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		3E1F2A8708DD6F6C0099ADCA /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"__cdecl=",
+					"__stdcall=",
+				);
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = (
+					../../../G3DOSX/build,
+					"$(SRCROOT)/../../../G3DOSX/build/Development",
+				);
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = Network_Demo;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Default;
+		};
+		3E1F2A8908DD6F6C0099ADCA /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		3E1F2A8A08DD6F6C0099ADCA /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		3E1F2A8B08DD6F6C0099ADCA /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3E1F2A8408DD6F6C0099ADCA /* Build configuration list for PBXNativeTarget "Network_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E1F2A8508DD6F6C0099ADCA /* Development */,
+				3E1F2A8608DD6F6C0099ADCA /* Deployment */,
+				3E1F2A8708DD6F6C0099ADCA /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		3E1F2A8808DD6F6C0099ADCA /* Build configuration list for PBXProject "Network_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E1F2A8908DD6F6C0099ADCA /* Development */,
+				3E1F2A8A08DD6F6C0099ADCA /* Deployment */,
+				3E1F2A8B08DD6F6C0099ADCA /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

@@ -1,0 +1,24 @@
+HKCR
+{
+	Roblox.Content.1 = s 'Content Class'
+	{
+		CLSID = s '{19821FDD-546E-4284-A925-B2C5D7CC3084}'
+	}
+	Roblox.Content = s 'Content Class'
+	{
+		CLSID = s '{19821FDD-546E-4284-A925-B2C5D7CC3084}'
+		CurVer = s 'Roblox.Content.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {19821FDD-546E-4284-A925-B2C5D7CC3084} = s 'Content Class'
+		{
+			ProgID = s 'Roblox.Content.1'
+			VersionIndependentProgID = s 'Roblox.Content'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{03E1C8ED-C1C6-47BF-B9B9-A37B677318DD}'
+		}
+	}
+}

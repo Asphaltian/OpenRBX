@@ -1,0 +1,361 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3E29963B0891C14C00395ECA /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E29963A0891C14C00395ECA /* SDLMain.m */; };
+		3E5B8BCB0891C1770081DD0D /* bump.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E5B8BC30891C1770081DD0D /* bump.jpg */; };
+		3E5B8BCC0891C1770081DD0D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E5B8BC40891C1770081DD0D /* main.cpp */; };
+		3E5B8BCD0891C1770081DD0D /* parallaxPP.cg in Resources */ = {isa = PBXBuildFile; fileRef = 3E5B8BC60891C1770081DD0D /* parallaxPP.cg */; };
+		3E5B8BCE0891C1770081DD0D /* parallaxPP.pp in Resources */ = {isa = PBXBuildFile; fileRef = 3E5B8BC70891C1770081DD0D /* parallaxPP.pp */; };
+		3E5B8BCF0891C1770081DD0D /* parallaxVP.cg in Resources */ = {isa = PBXBuildFile; fileRef = 3E5B8BC80891C1770081DD0D /* parallaxVP.cg */; };
+		3E5B8BD00891C1770081DD0D /* parallaxVP.vp in Resources */ = {isa = PBXBuildFile; fileRef = 3E5B8BC90891C1770081DD0D /* parallaxVP.vp */; };
+		3E5B8BD10891C1770081DD0D /* texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E5B8BCA0891C1770081DD0D /* texture.jpg */; };
+		3E8FE0920891C1E2004D9A2A /* libG3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8FE0900891C1E2004D9A2A /* libG3D.a */; };
+		3E8FE0930891C1E2004D9A2A /* libGLG3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8FE0910891C1E2004D9A2A /* libGLG3D.a */; };
+		3E8FE0950891C1F4004D9A2A /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8FE0940891C1F4004D9A2A /* SDL.framework */; };
+		3E8FE0990891C20F004D9A2A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E8FE0980891C20F004D9A2A /* OpenGL.framework */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		4A9504CCFFE6A4B311CA0CBA /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PREBINDING = NO;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		4A9504CDFFE6A4B311CA0CBA /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PREBINDING = NO;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXFileReference section */
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3E2996390891C14C00395ECA /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SDLMain.h; path = ../../../G3DOSX/SDLMain.h; sourceTree = SOURCE_ROOT; };
+		3E29963A0891C14C00395ECA /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = SDLMain.m; path = ../../../G3DOSX/SDLMain.m; sourceTree = SOURCE_ROOT; };
+		3E5B8BC30891C1770081DD0D /* bump.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bump.jpg; sourceTree = "<group>"; };
+		3E5B8BC40891C1770081DD0D /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		3E5B8BC50891C1770081DD0D /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = SOURCE_ROOT; };
+		3E5B8BC60891C1770081DD0D /* parallaxPP.cg */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = parallaxPP.cg; sourceTree = "<group>"; };
+		3E5B8BC70891C1770081DD0D /* parallaxPP.pp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = parallaxPP.pp; sourceTree = "<group>"; };
+		3E5B8BC80891C1770081DD0D /* parallaxVP.cg */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = parallaxVP.cg; sourceTree = "<group>"; };
+		3E5B8BC90891C1770081DD0D /* parallaxVP.vp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = parallaxVP.vp; sourceTree = "<group>"; };
+		3E5B8BCA0891C1770081DD0D /* texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = texture.jpg; sourceTree = "<group>"; };
+		3E8FE0900891C1E2004D9A2A /* libG3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libG3D.a; path = ../../../G3DOSX/build/Development/libG3D.a; sourceTree = SOURCE_ROOT; };
+		3E8FE0910891C1E2004D9A2A /* libGLG3D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLG3D.a; path = ../../../G3DOSX/build/Development/libGLG3D.a; sourceTree = SOURCE_ROOT; };
+		3E8FE0940891C1F4004D9A2A /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = /Library/Frameworks/SDL.framework; sourceTree = "<absolute>"; };
+		3E8FE0980891C20F004D9A2A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		8D1107320486CEB800E47090 /* Cg_Shader_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cg_Shader_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E8FE0930891C1E2004D9A2A /* libGLG3D.a in Frameworks */,
+				3E8FE0920891C1E2004D9A2A /* libG3D.a in Frameworks */,
+				3E8FE0950891C1F4004D9A2A /* SDL.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				3E8FE0990891C20F004D9A2A /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Cg_Shader_Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Cg_Shader_Demo */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Cg_Shader_Demo;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				3E5B8BC40891C1770081DD0D /* main.cpp */,
+				3E5B8BC50891C1770081DD0D /* Mesh.h */,
+				3E2996390891C14C00395ECA /* SDLMain.h */,
+				3E29963A0891C14C00395ECA /* SDLMain.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E5B8BC30891C1770081DD0D /* bump.jpg */,
+				3E5B8BC60891C1770081DD0D /* parallaxPP.cg */,
+				3E5B8BC70891C1770081DD0D /* parallaxPP.pp */,
+				3E5B8BC80891C1770081DD0D /* parallaxVP.cg */,
+				3E5B8BC90891C1770081DD0D /* parallaxVP.vp */,
+				3E5B8BCA0891C1770081DD0D /* texture.jpg */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3E8FE0980891C20F004D9A2A /* OpenGL.framework */,
+				3E8FE0940891C1F4004D9A2A /* SDL.framework */,
+				3E8FE0900891C1E2004D9A2A /* libG3D.a */,
+				3E8FE0910891C1E2004D9A2A /* libGLG3D.a */,
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Cg_Shader_Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3EF66EFB0891C0B6008D1E7A /* Build configuration list for PBXNativeTarget "Cg_Shader_Demo" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Cg_Shader_Demo_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Cg_Shader_Demo;
+				WRAPPER_EXTENSION = app;
+			};
+			dependencies = (
+			);
+			name = Cg_Shader_Demo;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Cg_Shader_Demo;
+			productReference = 8D1107320486CEB800E47090 /* Cg_Shader_Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 3EF66EFF0891C0B6008D1E7A /* Build configuration list for PBXProject "Cg_Shader_Demo" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA /* Debug */,
+				4A9504CDFFE6A4B311CA0CBA /* Release */,
+			);
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Cg_Shader_Demo */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Cg_Shader_Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5B8BCB0891C1770081DD0D /* bump.jpg in Resources */,
+				3E5B8BCD0891C1770081DD0D /* parallaxPP.cg in Resources */,
+				3E5B8BCE0891C1770081DD0D /* parallaxPP.pp in Resources */,
+				3E5B8BCF0891C1770081DD0D /* parallaxVP.cg in Resources */,
+				3E5B8BD00891C1770081DD0D /* parallaxVP.vp in Resources */,
+				3E5B8BD10891C1770081DD0D /* texture.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E29963B0891C14C00395ECA /* SDLMain.m in Sources */,
+				3E5B8BCC0891C1770081DD0D /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3EF66EFC0891C0B6008D1E7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../G3DOSX/build/Development\"";
+				PREBINDING = NO;
+				PRODUCT_NAME = Cg_Shader_Demo;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		3EF66EFD0891C0B6008D1E7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Cg_Shader_Demo_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../G3DOSX/build/Development\"";
+				PREBINDING = NO;
+				PRODUCT_NAME = Cg_Shader_Demo;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		3EF66EFE0891C0B6008D1E7A /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Cg_Shader_Demo_Prefix.pch;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../../../G3DOSX/build/Development\"";
+				PRODUCT_NAME = Cg_Shader_Demo;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Default;
+		};
+		3EF66F000891C0B6008D1E7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(SRCROOT)";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = ../../../G3DOSX/build/Development;
+				OTHER_LDFLAGS = "-lz";
+			};
+			name = Debug;
+		};
+		3EF66F010891C0B6008D1E7A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		3EF66F020891C0B6008D1E7A /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3EF66EFB0891C0B6008D1E7A /* Build configuration list for PBXNativeTarget "Cg_Shader_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EF66EFC0891C0B6008D1E7A /* Debug */,
+				3EF66EFD0891C0B6008D1E7A /* Release */,
+				3EF66EFE0891C0B6008D1E7A /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		3EF66EFF0891C0B6008D1E7A /* Build configuration list for PBXProject "Cg_Shader_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EF66F000891C0B6008D1E7A /* Debug */,
+				3EF66F010891C0B6008D1E7A /* Release */,
+				3EF66F020891C0B6008D1E7A /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

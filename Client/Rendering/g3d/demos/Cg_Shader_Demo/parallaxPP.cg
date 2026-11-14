@@ -1,0 +1,48 @@
+/**
+  @cite Parallax bump mapping method by mogumbo http://www.opengl.org/discussion_boards/ubb/Forum3/HTML/011292.html
+ */
+
+struct PIN {
+    /** Homogeneous position */
+    float4          position    : POSITION;
+    float2          texCoord    : TEXCOORD0;
+
+    /** Tangent space light */
+    float3          light       : TEXCOORD1;
+
+    /** Tangent space eye vector */
+    float3          eye         : TEXCOORD2;
+};
+
+
+
+float4 main(
+    const sampler2D  in uniform texture   : TEXTURE0,
+    const sampler2D  in uniform normalMap : TEXTURE1,
+    const PIN        in         pin) : COLOR0 {
+
+    // Technically, only point lights need to be normalized per-pixel
+    const float3 light = normalize(pin.light);
+    const float3 eye   = normalize(pin.eye);
+
+    // Convert bumps to a world space distance
+    float  bump   = (tex2D(normalMap, pin.texCoord).w - 0.5) * 0.04;
+
+    // Offset the texture coord
+    float2 offsetCoord = bump * float2(-eye.y, eye.x) + pin.texCoord;
+
+    const float4 surfColor = tex2D(texture, offsetCoord);
+
+    // Take the normal map values back to (-1, 1) range
+    float3 normal = (tex2D(normalMap, offsetCoord).xyz - float3(0.5, 0.5, 0.5)) * 2;
+	// (normal map space doesn't match the tangent space for this demo, so transform
+	//  the normal map into our tangent space).
+	normal = float3(-normal.y, -normal.x, normal.z);
+
+    const float3 lightColor = float3(1, 1, .85);
+    const float3 ambient = float3(0, 0, .15);
+
+    float3 diffuse = lightColor * max(dot(normal, light), 0);
+
+    return float4((diffuse + ambient) * surfColor.xyz, surfColor.w);
+}

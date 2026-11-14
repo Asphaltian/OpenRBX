@@ -1,0 +1,74 @@
+#ifndef UTIL_UIEVENT_H
+#define UTIL_UIEVENT_H
+
+#include "placeholder.h"
+
+#include <G3D/Vector2int16.h>
+#include <SDL_keysym.h>
+
+namespace RBX {
+
+class UserInputBase;
+
+class UIEvent
+{
+public:
+	enum EventType
+	{
+		NO_EVENT = 0,
+		MOUSE_RIGHT_BUTTON_DOWN = 1,
+		MOUSE_RIGHT_BUTTON_UP = 2,
+		MOUSE_LEFT_BUTTON_DOWN = 3,
+		MOUSE_LEFT_BUTTON_UP = 4,
+		MOUSE_MOVE = 5,
+		MOUSE_DELTA = 6,
+		MOUSE_IDLE = 7,
+		MOUSE_WHEEL_FORWARD = 8,
+		MOUSE_WHEEL_BACKWARD = 9,
+		KEY_DOWN = 10,
+		KEY_UP = 11
+	};
+
+	EventType eventType;
+	UserInputBase* userInput;
+	union {
+		struct
+		{
+			G3D::Vector2int16 mousePosition;
+			G3D::Vector2int16 mouseDelta;
+			G3D::Vector2int16 windowSize;
+		};
+		struct
+		{
+			SDLKey key;
+			SDLMod mod;
+		};
+	};
+
+	UIEvent(UserInputBase* userInput, EventType eventType, SDLKey key, SDLMod mod)
+		: eventType(eventType), userInput(userInput), key(key), mod(mod)
+	{
+		windowSize = G3D::Vector2int16(0, 0);
+	}
+	UIEvent(UserInputBase* userInput, EventType eventType, G3D::Vector2int16 position, G3D::Vector2int16 size)
+		: eventType(eventType), userInput(userInput), mousePosition(position), mouseDelta(0, 0), windowSize(size)
+	{
+	}
+	UIEvent() : eventType(NO_EVENT), userInput(NULL) {}
+
+	bool isMouseEvent() const
+	{
+		return eventType == MOUSE_RIGHT_BUTTON_DOWN || eventType == MOUSE_RIGHT_BUTTON_UP ||
+			   eventType == MOUSE_LEFT_BUTTON_DOWN || eventType == MOUSE_LEFT_BUTTON_UP || eventType == MOUSE_MOVE ||
+			   eventType == MOUSE_DELTA || eventType == MOUSE_IDLE;
+	}
+
+	bool isKeyPressedEvent(SDLKey key) const { return eventType == KEY_DOWN && this->key == key; }
+	bool isKeyUpEvent(SDLKey key) const;
+	bool isKeyPressedWithShiftEvent(SDLKey key) const;
+	bool isKeyPressedWithShiftEvent() const;
+};
+
+} // namespace RBX
+
+#endif // UTIL_UIEVENT_H

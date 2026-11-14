@@ -1,0 +1,929 @@
+#include "humanoid/Humanoid.h"
+
+#include "appdraw/DrawAdorn.h"
+#include "humanoid/FallingDown.h"
+#include "humanoid/Running.h"
+#include "network/Players.h"
+#include "rbxgraphics/Adorn.h"
+#include "reflection/property.h"
+#include "util/Color.h"
+#include "util/NormalId.h"
+#include "v8datamodel/Camera.h"
+#include "v8datamodel/ForceField.h"
+#include "v8datamodel/JointInstance.h"
+#include "v8datamodel/ModelInstance.h"
+#include "v8datamodel/Selection.h"
+#include "v8datamodel/Teams.h"
+#include "v8datamodel/Tool.h"
+#include "v8datamodel/Workspace.h"
+#include "v8kernel/Body.h"
+#include "v8kernel/Kernel.h"
+#include "v8tree/Service.h"
+#include "v8world/Joint.h"
+#include "v8world/Primitive.h"
+#include "v8world/World.h"
+
+#include <algorithm>
+#include <boost/bind.hpp>
+#include <boost/ref.hpp>
+#include <stdexcept>
+#include <vector>
+
+namespace RBX {
+
+char sHumanoid[] = "Humanoid";
+
+using namespace Reflection;
+
+static RefPropDescriptor<Humanoid, PartInstance> propTorso(
+	"Torso", "Data", &Humanoid::getTorso, &Humanoid::setTorso, PropertyDescriptor::UI
+);
+
+static RefPropDescriptor<Humanoid, PartInstance> propLeftLeg(
+	"LeftLeg", "Data", &Humanoid::getLeftLeg, &Humanoid::setLeftLeg, PropertyDescriptor::UI
+);
+
+static RefPropDescriptor<Humanoid, PartInstance> propRightLeg(
+	"RightLeg", "Data", &Humanoid::getRightLeg, &Humanoid::setRightLeg, PropertyDescriptor::UI
+);
+
+static RefPropDescriptor<Humanoid, PartInstance> propWalkToPart(
+	"WalkToPart", "Control", &Humanoid::getWalkToPart, &Humanoid::setWalkToPart, PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, G3D::Vector3> propWalkToPoint(
+	"WalkToPoint", "Control", &Humanoid::getWalkToPoint, &Humanoid::setWalkToPoint, PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, G3D::Vector3> propWalkDirection(
+	"WalkDirection", "Control", &Humanoid::getWalkDirection, &Humanoid::setWalkDirection, PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, float> propWalkRotationalVelocity(
+	"WalkRotationalVelocity",
+	"Control",
+	&Humanoid::getWalkRotationalVelocity,
+	&Humanoid::setWalkRotationalVelocity,
+	PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, bool> propJump(
+	"Jump", "Control", &Humanoid::getJump, &Humanoid::setJump, PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, G3D::Vector3> propTargetPoint(
+	"TargetPoint", "Control", &Humanoid::getTargetPoint, &Humanoid::setTargetPoint, PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, bool> propSit(
+	"Sit", "Control", &Humanoid::getSit, &Humanoid::setSit, PropertyDescriptor::STREAMING
+);
+
+static PropDescriptor<Humanoid, float> propHealth("Health", "Game", &Humanoid::getHealth, &Humanoid::setHealth);
+
+static PropDescriptor<Humanoid, float> propMaxHealth(
+	"MaxHealth", "Game", &Humanoid::getMaxHealth, &Humanoid::setMaxHealth
+);
+
+static BoundFuncDesc<Humanoid, void(float), 1> func_TakeDamage(
+	&Humanoid::takeDamage, "TakeDamage", "amount", FunctionDescriptor::AnyCaller
+);
+
+static BoundFuncDesc<Humanoid, void(G3D::Vector3, boost::shared_ptr<Instance>), 2> func_MoveTo(
+	&Humanoid::moveTo2, "MoveTo", "location", "part", FunctionDescriptor::AnyCaller
+);
+
+SignalDesc<Humanoid, void()> Humanoid::event_Died("Died");
+SignalDesc<Humanoid, void(float)> Humanoid::event_Running("Running", "speed");
+SignalDesc<Humanoid, void(float)> Humanoid::event_Climbing("Climbing", "speed");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_Jumping("Jumping", "active");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_FreeFalling("FreeFalling", "active");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_GettingUp("GettingUp", "active");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_FallingDown("FallingDown", "active");
+SignalDesc<Humanoid, void(bool)> Humanoid::event_Seated("Seated", "active");
+
+PartInstance* Humanoid::getHeadFromCharacter(const ModelInstance* character)
+{
+	return character ? dynamic_cast<PartInstance*>(character->findFirstChildByName("Head")) : NULL;
+}
+
+ModelInstance* Humanoid::getCharacterFromHumanoid(Humanoid* humanoid)
+{
+	if (humanoid != NULL) {
+		Instance* parent = humanoid->getParent();
+		ModelInstance* model = dynamic_cast<ModelInstance*>(parent);
+		if (model != NULL) {
+			return model;
+		}
+	}
+
+	return NULL;
+}
+
+G3D::CoordinateFrame Humanoid::getTopOfHead() const
+{
+	return G3D::CoordinateFrame(G3D::Matrix3::identity(), G3D::Vector3(0, 0.5f, 0));
+}
+
+void Humanoid::renderWaypoint(Adorn* adorn, const G3D::Vector3& waypoint)
+{
+	DrawAdorn::cylinder(
+		adorn, G3D::CoordinateFrame(G3D::Matrix3::identity(), waypoint), 1, 0.2f, 1.0f, G3D::Color3::green()
+	);
+}
+
+ContactManager* Humanoid::getContactManager()
+{
+	World* world = Workspace::getWorldIfInWorkspace(this);
+
+	if (world != NULL) {
+		return &world->getContactManager();
+	}
+
+	return NULL;
+}
+
+PartInstance* Humanoid::getLocalHeadFromContext(const Instance* context)
+{
+	ModelInstance* character = Network::Players::findLocalCharacter(context);
+
+	return getHeadFromCharacter(character);
+}
+
+bool Humanoid::hasWalkToPoint(G3D::Vector3& worldPosition) const
+{
+	if (walkToPart != NULL && Workspace::findWorkspace(this) != NULL &&
+		Workspace::contextInWorkspace(walkToPart.get())) {
+		worldPosition = walkToPart->getCoordinateFrame().pointToWorldSpace(walkToPoint);
+
+		return true;
+	}
+
+	return false;
+}
+
+G3D::CoordinateFrame Humanoid::getRightArmGrip() const
+{
+	G3D::CoordinateFrame grip;
+	grip.lookAt(G3D::Vector3(0, -1, 0), G3D::Vector3(0, 0, -1));
+	grip.translation = G3D::Vector3(0, -1, 0);
+
+	return grip;
+}
+
+PartInstance* Humanoid::findRightArm() const
+{
+	return static_cast<PartInstance*>(getParent() ? getParent()->findFirstChildByName("Right Arm") : NULL);
+}
+
+void Humanoid::computeForce(float dt, bool throttling)
+{
+	if (currentState.get() != NULL) {
+		currentState->onComputeForce(dt);
+	}
+}
+
+void Humanoid::setState(State* state)
+{
+	if (state != currentState.get()) {
+		currentState.reset(state);
+	}
+}
+
+void Humanoid::onAncestorChanged(const AncestorChanged& event)
+{
+	World* newWorld = Workspace::getWorldIfInWorkspace(this);
+	if (newWorld != world) {
+		currentState.reset();
+
+		if (world) {
+			world->getKernel().removeConnector2ndPass(this);
+		}
+
+		world = newWorld;
+		if (world) {
+			setState(new Running(this));
+			world->getKernel().insertConnector2ndPass(this);
+		}
+	}
+
+	Instance::onAncestorChanged(event);
+}
+
+Humanoid::~Humanoid()
+{
+}
+
+void Humanoid::getCameraIgnorePrimitives(std::vector<const Primitive*>& primitives)
+{
+	getIgnorePrims(primitives);
+}
+
+float Humanoid::getIntendedRotationAboutYAxis()
+{
+	if (currentState.get() != NULL) {
+		return currentState->getIntendedRotationAboutYAxis();
+	}
+
+	return 0;
+}
+
+bool Humanoid::askSetParent(const Instance* instance) const
+{
+	return dynamic_cast<const ModelInstance*>(instance) != NULL;
+}
+
+Humanoid* Humanoid::modelIsCharacter(const Instance* testModel)
+{
+	return testModel ? testModel->findFirstChildOfType<Humanoid>() : NULL;
+}
+
+Humanoid* Humanoid::getLocalHumanoidFromContext(const Instance* context)
+{
+	return modelIsCharacter(Network::Players::findLocalCharacter(context));
+}
+
+boost::shared_ptr<AutoJoint> newJoint(bool animated)
+{
+	if (animated) {
+		boost::shared_ptr<Motor> m = Creatable<Instance>::create<Motor>();
+		m->setMaxVelocity(0.1f);
+		return m;
+	}
+
+	boost::shared_ptr<Snap> s = Creatable<Instance>::create<Snap>();
+	return s;
+}
+
+void Humanoid::render3dAdorn(Adorn* adorn)
+{
+	if (walkMode == CLICK_TO_MOVE) {
+		if (this == getLocalHumanoidFromContext(this)) {
+			if (Workspace::findWorkspace(this)) {
+				G3D::Vector3 worldPosition;
+				if (hasWalkToPoint(worldPosition)) {
+					renderWaypoint(adorn, worldPosition);
+				}
+			}
+		}
+	}
+
+	if (Running* running = dynamic_cast<Running*>(currentState.get())) {
+		running->render3dAdorn(adorn);
+	}
+}
+
+PartInstance* Humanoid::getHead() const
+{
+	if (head == NULL && getParent() != NULL) {
+		head = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Head"));
+	}
+
+	return head.get();
+}
+
+PartInstance* Humanoid::getTorso() const
+{
+	if (torso == NULL && getParent() != NULL) {
+		torso = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Torso"));
+	}
+
+	return torso.get();
+}
+
+PartInstance* Humanoid::getLeftLeg() const
+{
+	if (leftLeg == NULL && getParent() != NULL) {
+		leftLeg = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Left Leg"));
+	}
+
+	return leftLeg.get();
+}
+
+PartInstance* Humanoid::getRightLeg() const
+{
+	if (rightLeg == NULL && getParent() != NULL) {
+		rightLeg = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Right Leg"));
+	}
+
+	return rightLeg.get();
+}
+
+PartInstance* Humanoid::getLeftArm() const
+{
+	if (leftArm == NULL && getParent() != NULL) {
+		leftArm = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Left Arm"));
+	}
+
+	return leftArm.get();
+}
+
+PartInstance* Humanoid::getRightArm() const
+{
+	if (rightArm == NULL && getParent() != NULL) {
+		rightArm = shared_from_dynamic_cast<PartInstance>(getParent()->findFirstChildByName("Right Arm"));
+	}
+
+	return rightArm.get();
+}
+
+JointInstance* Humanoid::findRightShoulder() const
+{
+	PartInstance* torso = getTorso();
+	return static_cast<JointInstance*>(torso ? torso->findFirstChildByName("Right Shoulder") : NULL);
+}
+
+Primitive* Humanoid::getTorsoPrimitive() const
+{
+	PartInstance* part = getTorso();
+
+	return part != NULL ? part->getPrimitive() : NULL;
+}
+
+Primitive* Humanoid::getLeftLegPrimitive()
+{
+	PartInstance* part = getLeftLeg();
+
+	return part != NULL ? part->getPrimitive() : NULL;
+}
+
+Primitive* Humanoid::getRightLegPrimitive()
+{
+	PartInstance* part = getRightLeg();
+
+	return part != NULL ? part->getPrimitive() : NULL;
+}
+
+Body* Humanoid::getTorsoBody()
+{
+	PartInstance* part = getTorso();
+
+	return part != NULL ? part->getPrimitive()->getBody() : NULL;
+}
+
+Body* Humanoid::getRootBody()
+{
+	Body* body = getTorsoBody();
+
+	return body != NULL ? body->getRoot() : NULL;
+}
+
+float Humanoid::getTorsoHeading() const
+{
+	Primitive* torso = getTorsoPrimitive();
+
+	if (torso != NULL) {
+		return Math::getHeading(torso->getCoordinateFrame().lookVector());
+	}
+
+	return 0.0f;
+}
+
+const CoordinateFrame Humanoid::getLocation() const
+{
+	return getHead() != NULL ? getHead()->getCoordinateFrame() : CoordinateFrame();
+}
+
+void Humanoid::buildJoints()
+{
+	ModelInstance* character = getCharacterFromHumanoid(this);
+
+	if (character) {
+		PartInstance* head = getHead();
+		PartInstance* torso = getTorso();
+		PartInstance* rightArm = getRightArm();
+		PartInstance* leftArm = getLeftArm();
+		PartInstance* rightLeg = getRightLeg();
+		PartInstance* leftLeg = getLeftLeg();
+
+		if (torso) {
+			head->getPrimitive()->getBody()->setCanThrottle(false);
+			torso->getPrimitive()->getBody()->setCanThrottle(false);
+			rightArm->getPrimitive()->getBody()->setCanThrottle(false);
+			leftArm->getPrimitive()->getBody()->setCanThrottle(false);
+			rightLeg->getPrimitive()->getBody()->setCanThrottle(false);
+			leftLeg->getPrimitive()->getBody()->setCanThrottle(false);
+
+			boost::shared_ptr<AutoJoint> rightShoulder = newJoint(true);
+			boost::shared_ptr<AutoJoint> leftShoulder = newJoint(true);
+			boost::shared_ptr<AutoJoint> rightHip = newJoint(true);
+			boost::shared_ptr<AutoJoint> leftHip = newJoint(true);
+			boost::shared_ptr<AutoJoint> neck = newJoint(false);
+
+			rightShoulder->setName("Right Shoulder");
+			leftShoulder->setName("Left Shoulder");
+			rightHip->setName("Right Hip");
+			leftHip->setName("Left Hip");
+			neck->setName("Neck");
+
+			rightShoulder->setPart0(torso);
+			leftShoulder->setPart0(torso);
+			rightHip->setPart0(torso);
+			leftHip->setPart0(torso);
+			neck->setPart0(torso);
+
+			rightShoulder->setPart1(rightArm);
+			leftShoulder->setPart1(leftArm);
+			rightHip->setPart1(rightLeg);
+			leftHip->setPart1(leftLeg);
+			neck->setPart1(head);
+
+			G3D::Matrix3 xPos = normalIdToMatrix3(NORM_X);
+			G3D::Matrix3 xNeg = normalIdToMatrix3(NORM_X_NEG);
+			G3D::Matrix3 yPos = normalIdToMatrix3(NORM_Y);
+
+			G3D::CoordinateFrame rightShoulderP(xPos, G3D::Vector3(1.0f, 0.5f, 0.0f));
+			G3D::CoordinateFrame leftShoulderP(xNeg, G3D::Vector3(-1.0f, 0.5f, 0.0f));
+			G3D::CoordinateFrame rightHipP(xPos, G3D::Vector3(1.0f, -1.0f, 0.0f));
+			G3D::CoordinateFrame leftHipP(xNeg, G3D::Vector3(-1.0f, -1.0f, 0.0f));
+			G3D::CoordinateFrame neckP(yPos, G3D::Vector3(0.0f, 1.0f, 0.0f));
+
+			G3D::CoordinateFrame rightArmP(xPos, G3D::Vector3(-0.5f, 0.5f, 0.0f));
+			G3D::CoordinateFrame leftArmP(xNeg, G3D::Vector3(0.5f, 0.5f, 0.0f));
+			G3D::CoordinateFrame rightLegP(xPos, G3D::Vector3(0.5f, 1.0f, 0.0f));
+			G3D::CoordinateFrame leftLegP(xNeg, G3D::Vector3(-0.5f, 1.0f, 0.0f));
+			G3D::CoordinateFrame headP(yPos, G3D::Vector3(0.0f, -0.5f, 0.0f));
+
+			rightShoulder->setC0(rightShoulderP);
+			leftShoulder->setC0(leftShoulderP);
+			rightHip->setC0(rightHipP);
+			leftHip->setC0(leftHipP);
+			neck->setC0(neckP);
+
+			rightShoulder->setC1(rightArmP);
+			leftShoulder->setC1(leftArmP);
+			rightHip->setC1(rightLegP);
+			leftHip->setC1(leftLegP);
+			neck->setC1(headP);
+
+			rightShoulder->setParent(torso);
+			leftShoulder->setParent(torso);
+			rightHip->setParent(torso);
+			leftHip->setParent(torso);
+			neck->setParent(torso);
+		}
+	}
+}
+
+G3D::Vector3 Humanoid::getIntendedMovementVector(bool setWalkMode)
+{
+	G3D::Vector3 result = G3D::Vector3::zero();
+
+	if (walkMode == DIRECTION_MOVE) {
+		result = walkDirection;
+	}
+	else if (walkMode == CLICK_TO_MOVE) {
+		PartInstance* torso = getTorso();
+		G3D::Vector3 worldPosition;
+
+		if (torso != NULL && hasWalkToPoint(worldPosition)) {
+			const G3D::Vector3& translation = torso->getCoordinateFrame().translation;
+
+			G3D::Vector3 delta = worldPosition - translation;
+
+			worldPosition.x = delta.x;
+			worldPosition.y = delta.y + 3.0f;
+			worldPosition.z = delta.z;
+
+			float distance = (worldPosition.z * worldPosition.z + worldPosition.x * worldPosition.x) +
+							 worldPosition.y * worldPosition.y;
+
+			worldPosition.y = 0;
+
+			if (sqrtf(distance) < 2.0f) {
+				if (setWalkMode) {
+					walkMode = DIRECTION_MOVE;
+				}
+
+				result = G3D::Vector3::zero();
+			}
+			else {
+				result = worldPosition.direction();
+			}
+		}
+	}
+
+	return result;
+}
+
+G3D::Vector3 Humanoid::getIntendedMovementVector()
+{
+	return getIntendedMovementVector(false);
+}
+
+G3D::Vector3 Humanoid::updateWalkDirection()
+{
+	return getIntendedMovementVector(true);
+}
+
+static void collectAllDescendantCharacterPrims(
+	boost::shared_ptr<Instance> descendent, std::vector<Primitive*>& primitives
+)
+{
+	PartInstance* part = dynamic_cast<PartInstance*>(descendent.get());
+	if (part) {
+		primitives.push_back(part->getPrimitive());
+	}
+}
+
+void Humanoid::tellCameraNear(float distance)
+{
+	std::vector<Primitive*> primitives;
+	if (ModelInstance* character = getCharacterFromHumanoid(this)) {
+		character->visitDescendents(boost::bind(&collectAllDescendantCharacterPrims, _1, boost::ref(primitives)));
+	}
+
+	float alphaModifier = 1.0f;
+	if (distance < 3.0f) {
+		alphaModifier = 0.0f;
+	}
+	else if (distance < 6.0f) {
+		alphaModifier = 0.5f;
+	}
+
+	for (size_t i = 0; i < primitives.size(); ++i) {
+		PartInstance* part = PartInstance::fromPrimitive(primitives[i]);
+		if (!dynamic_cast<Tool*>(part->getParent())) {
+			part->setAlphaModifier(alphaModifier);
+		}
+	}
+}
+
+Humanoid::Humanoid()
+	: health(100), maxHealth(100), walkRotationalVelocity(0), walkTimer(0), walkMode(DIRECTION_MOVE), jump(false),
+	  imDead(false), hadHeadJoint(false), sit(false), world(NULL)
+{
+	setName("Humanoid");
+}
+
+void Humanoid::onLocalHumanoidEnteringWorkspace()
+{
+	Workspace* workspace = ServiceProvider::find<Workspace>(this);
+
+	if (workspace) {
+		if (this == getLocalHumanoidFromContext(this)) {
+			if (workspace->getCamera()->getCameraType() == Camera::CUSTOM_CAMERA) {
+				if (workspace->getCamera()->getCameraSubject() != this) {
+					workspace->getCamera()->setCameraSubject(this);
+				}
+			}
+
+			if (getHead()) {
+				getHead()->setRenderImportance(1.0f);
+			}
+			if (getLeftLeg()) {
+				getLeftLeg()->setRenderImportance(1.0f);
+			}
+			if (getRightLeg()) {
+				getRightLeg()->setRenderImportance(1.0f);
+			}
+			if (getLeftArm()) {
+				getLeftArm()->setRenderImportance(1.0f);
+			}
+			if (getRightArm()) {
+				getRightArm()->setRenderImportance(1.0f);
+			}
+			if (getTorso()) {
+				getTorso()->setRenderImportance(1.0f);
+			}
+		}
+	}
+}
+
+void Humanoid::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	stopListening(oldProvider ? oldProvider->create<RunService>() : NULL, this);
+
+	Instance::onServiceProvider(oldProvider, newProvider);
+
+	startListening(newProvider ? newProvider->create<RunService>() : NULL, this);
+
+	if (newProvider && !oldProvider) {
+		onLocalHumanoidEnteringWorkspace();
+	}
+}
+
+void Humanoid::renderMultiplayer(Adorn* adorn, const G3D::GCamera& camera)
+{
+	if (getHead()) {
+		Vector3 aboveHead = head->getCoordinateFrame().translation;
+		aboveHead.y += 1.5f;
+
+		Vector3 screenLoc = camera.project(aboveHead, adorn->getViewport());
+		float distance = (camera.getCoordinateFrame().translation - aboveHead).magnitude();
+
+		if (distance < 100.0f) {
+			int fontSize = 8;
+			if (distance < 20.0f) {
+				fontSize = 12;
+			}
+			else if (50.0f > distance) {
+				fontSize = 10;
+			}
+
+			Teams* teams = ServiceProvider::find<Teams>(this);
+			G3D::Color3 nameTagColor = teams ? teams->getTeamColorForHumanoid(this) : G3D::Color3::white();
+
+			adorn->drawFont2D(
+				getParent()->getName(),
+				screenLoc.xy(),
+				fontSize,
+				G3D::Color4(nameTagColor, 1.0f),
+				G3D::Color4(G3D::Color3::black(), 1.0f),
+				Adorn::XALIGN_CENTER,
+				Adorn::YALIGN_BOTTOM,
+				Adorn::PROPORTIONAL_SPACING
+			);
+
+			float width = fontSize * 4;
+			float height = fontSize / 2;
+			G3D::Vector2 low(screenLoc.x - 0.5f * width, screenLoc.y);
+			Rect fullRect = Rect::fromLowSize(low, G3D::Vector2(width, height));
+			float mid = fullRect.low.x + (health / maxHealth) * width;
+
+			Rect greenRect(fullRect.low.x, fullRect.low.y, mid, fullRect.high.y);
+			Rect redRect(mid, fullRect.low.y, fullRect.high.x, fullRect.high.y);
+
+			adorn->rect2d(greenRect.toRect2D(), G3D::Color4(Color::lightGreen(), 1.0f));
+			adorn->rect2d(redRect.toRect2D(), G3D::Color4(G3D::Color3::red(), 1.0f));
+		}
+	}
+}
+
+void Humanoid::render2d(Adorn* adorn)
+{
+	Humanoid* self = this;
+	ModelInstance* character = Network::Players::findLocalCharacter(self);
+	Humanoid* localHumanoid = character != NULL ? character->findFirstChildOfType<Humanoid>() : NULL;
+
+	if (this == localHumanoid) {
+		return;
+	}
+
+	Workspace* workspace = Workspace::findWorkspace(self);
+
+	if (workspace != NULL) {
+		renderMultiplayer(adorn, workspace->getGCamera());
+	}
+}
+
+void Humanoid::getIgnorePrims(std::vector<const Primitive*>& ignore)
+{
+	if (ModelInstance* character = getCharacterFromHumanoid(this)) {
+		character->visitDescendents(
+			boost::bind(
+				&collectAllDescendantCharacterPrims, _1, boost::ref(reinterpret_cast<std::vector<Primitive*>&>(ignore))
+			)
+		);
+	}
+
+	ServiceClient<FilteredSelection<PartInstance> > pvSelection(this);
+	if (pvSelection) {
+		for (std::vector<PartInstance*>::const_iterator iter = pvSelection->begin(); iter != pvSelection->end();
+			 ++iter) {
+			ignore.push_back((*iter)->getPrimitive());
+		}
+	}
+}
+
+void Humanoid::setHealth(float value)
+{
+	float newHealth = G3D::clamp(value, 0.0f, maxHealth);
+
+	if (health != newHealth) {
+		health = newHealth;
+		raisePropertyChanged(propHealth);
+
+		if (health == 0.0f && !imDead) {
+			imDead = true;
+			setState(new FallingDown(this, Math::inf()));
+
+			if (ModelInstance* character = getCharacterFromHumanoid(this)) {
+				character->breakJoints();
+			}
+
+			event_Died.fire(this);
+		}
+	}
+}
+
+void Humanoid::setMaxHealth(float value)
+{
+	if (maxHealth != value) {
+		maxHealth = value;
+		raisePropertyChanged(propMaxHealth);
+	}
+}
+
+void Humanoid::takeDamage(float value)
+{
+	if (getTorso() && !ForceField::partInForceField(getTorso())) {
+		setHealth(health - value);
+	}
+}
+
+void Humanoid::setWalkDirection(const G3D::Vector3& value)
+{
+	if (walkDirection != value) {
+		if (value == G3D::Vector3::zero()) {
+			walkDirection = value;
+		}
+		else {
+			walkDirection = G3D::Vector3(value.x, 0.0f, value.z).direction();
+			walkMode = DIRECTION_MOVE;
+		}
+
+		raisePropertyChanged(propWalkDirection);
+	}
+}
+
+void Humanoid::setWalkRotationalVelocity(const float& value)
+{
+	if (walkRotationalVelocity != value) {
+		walkRotationalVelocity = value;
+		raisePropertyChanged(propWalkRotationalVelocity);
+	}
+}
+
+void Humanoid::setWalkToPoint(const G3D::Vector3& value)
+{
+	if (walkToPoint != value) {
+		walkToPoint = value;
+		raisePropertyChanged(propWalkToPoint);
+	}
+
+	walkMode = walkMode == HAS_PART ? CLICK_TO_MOVE : HAS_POINT;
+	walkTimer = walkMode == CLICK_TO_MOVE ? 240 : 0;
+}
+
+void Humanoid::setWalkToPart(PartInstance* value)
+{
+	if (walkToPart.get() != value) {
+		walkToPart = shared_from(value);
+		raisePropertyChanged(propWalkToPart);
+	}
+
+	walkMode = walkMode == HAS_POINT ? CLICK_TO_MOVE : HAS_PART;
+	walkTimer = walkMode == CLICK_TO_MOVE ? 240 : 0;
+}
+
+void Humanoid::setJump(bool value)
+{
+	if (jump != value) {
+		jump = value;
+		raisePropertyChanged(propJump);
+	}
+}
+
+void Humanoid::setSit(bool value)
+{
+	if (sit != value) {
+		sit = value;
+		raisePropertyChanged(propSit);
+	}
+}
+
+void Humanoid::setTargetPoint(const G3D::Vector3& value)
+{
+	float tolerance = 1.0f;
+	if (getTorso()) {
+		float torsoToTarget = Math::taxiCabMagnitude(getTorso()->getCoordinateFrame().translation - value);
+		tolerance = std::max(2.0f, torsoToTarget) * 0.01f;
+	}
+
+	if (Math::taxiCabMagnitude(value - targetPoint) > tolerance) {
+		targetPoint = value;
+		raisePropertyChanged(propTargetPoint);
+	}
+}
+
+void Humanoid::moveTo(const G3D::Vector3& worldPosition, PartInstance* part)
+{
+	if (part) {
+		G3D::Vector3 local = part->getCoordinateFrame().pointToObjectSpace(worldPosition);
+		walkToPoint = local + G3D::Vector3::unitX();
+		walkToPart.reset();
+
+		setWalkToPart(part);
+		setWalkToPoint(local);
+	}
+}
+
+void Humanoid::setLeftLeg(PartInstance* value)
+{
+	if (leftLeg.get() != value) {
+		leftLeg = shared_from(value);
+		raisePropertyChanged(propLeftLeg);
+	}
+}
+
+void Humanoid::setRightLeg(PartInstance* value)
+{
+	if (rightLeg.get() != value) {
+		rightLeg = shared_from(value);
+		raisePropertyChanged(propRightLeg);
+	}
+}
+
+void Humanoid::setTorso(PartInstance* value)
+{
+	if (torso.get() != value) {
+		torso = shared_from(value);
+		raisePropertyChanged(propTorso);
+	}
+}
+
+void Humanoid::checkForJointDeath()
+{
+	if (Primitive* headPrim = getHeadPrimitive()) {
+		if (Primitive* torsoPrim = getTorsoPrimitive()) {
+			Joint* joint = headPrim->getFirstJoint();
+			while (joint) {
+				if (joint->otherPrimitive(headPrim) == torsoPrim) {
+					hadHeadJoint = true;
+					return;
+				}
+
+				joint = headPrim->getNextJoint(joint);
+			}
+		}
+	}
+
+	if (hadHeadJoint) {
+		setHealth(0.0f);
+	}
+}
+
+void Humanoid::onEvent(const RunService* source, Stepped event)
+{
+	if (State* state = currentState.get()) {
+		if (getParent()) {
+			setState(state->onStep(event.step, *static_cast<PVInstance*>(getParent())->getTopPVController()));
+		}
+	}
+
+	if (getTorsoPrimitive()) {
+		getTorsoPrimitive()->setCanSleep(false);
+	}
+
+	checkForJointDeath();
+
+	if (walkTimer > 0) {
+		walkTimer--;
+		if (walkTimer == 0) {
+			walkMode = DIRECTION_MOVE;
+		}
+	}
+}
+
+void Humanoid::cameraSetWalkOrientation(float rad, bool noAdjust)
+{
+	if (noAdjust) {
+		setWalkRotationalVelocity(0.0f);
+	}
+	else if (Body* torsoBody = getTorsoBody()) {
+		if (Body* root = torsoBody->getRoot()) {
+			G3D::Vector3 look = root->getPV().position.lookVector();
+			look.y = 0.0f;
+			look.unitize();
+			float lookAng = Math::radWrap(Math::angleToE0(G3D::Vector2(look.z, look.x)));
+			float delta = Math::radWrap(Math::radWrap(rad) - lookAng);
+			if (fabs(delta) < 0.1f) {
+				delta = 0.0f;
+			}
+			setWalkRotationalVelocity(delta);
+		}
+	}
+}
+
+void Humanoid::moveTo2(G3D::Vector3 worldPosition, boost::shared_ptr<Instance> part)
+{
+	PartInstance* p = dynamic_cast<PartInstance*>(part.get());
+	if (!p) {
+		throw std::runtime_error("Argument error: A Part is required");
+	}
+
+	moveTo(worldPosition, p);
+}
+
+bool Humanoid::isControllable() const
+{
+	return true;
+}
+
+bool Humanoid::shouldRender2d() const
+{
+	return true;
+}
+
+bool Humanoid::shouldRender3dAdorn() const
+{
+	return true;
+}
+
+} // namespace RBX
+
+template class RBX::FactoryProduct<RBX::Humanoid, RBX::Instance, RBX::sHumanoid>;
+template class RBX::Reflection::
+	Described<RBX::Humanoid, RBX::sHumanoid, RBX::FactoryProduct<RBX::Humanoid, RBX::Instance, RBX::sHumanoid> >;
+template class RBX::DescribedCreatable<RBX::Humanoid, RBX::Instance, RBX::sHumanoid>;

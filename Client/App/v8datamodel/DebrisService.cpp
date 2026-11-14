@@ -1,0 +1,91 @@
+#include "v8datamodel/DebrisService.h"
+
+#include "reflection/property.h"
+#include "reflection/reflection.h"
+#include "util/standardout.h"
+#include "v8datamodel/TimerService.h"
+
+#include <boost/bind.hpp>
+#include <stdexcept>
+
+namespace RBX {
+
+char sDebrisService[] = "Debris";
+
+static Reflection::PropDescriptor<DebrisService, int> prop_MaxItems(
+	"MaxItems", "Data", &DebrisService::getMaxItems, &DebrisService::setMaxItems
+);
+
+static Reflection::BoundFuncDesc<DebrisService, void(boost::shared_ptr<Instance>, double), 2> func_AddItem(
+	&DebrisService::addItem, "AddItem", "item", "lifetime", 10.0, Reflection::FunctionDescriptor::AnyCaller
+);
+
+static void cleanup(boost::weak_ptr<Instance> item)
+{
+	try {
+		boost::shared_ptr<Instance> i = item.lock();
+		if (i) {
+			i->setParent(NULL);
+		}
+	}
+	catch (std::exception& e) {
+		StandardOut::singleton()->print(MESSAGE_WARNING, e);
+	}
+}
+
+void DebrisService::cleanup()
+{
+	while ((int) queue.size() > maxItems) {
+		RBX::cleanup(queue.front());
+		queue.pop();
+	}
+}
+
+DebrisService::DebrisService()
+	: DescribedCreatable<DebrisService, Instance, sDebrisService>(sDebrisService), maxItems(300), timer(NULL)
+{
+}
+
+void DebrisService::addItem(boost::shared_ptr<Instance> item, double lifetime)
+{
+	if (timer) {
+		timer->delay(boost::bind(&RBX::cleanup, item), lifetime);
+	}
+
+	queue.push(item);
+	cleanup();
+}
+
+void DebrisService::onServiceProvider(const ServiceProvider* oldProvider, const ServiceProvider* newProvider)
+{
+	while ((int) queue.size() > 0) {
+		RBX::cleanup(queue.front());
+		queue.pop();
+	}
+
+	DescribedCreatable<DebrisService, Instance, sDebrisService>::onServiceProvider(oldProvider, newProvider);
+
+	timer = newProvider ? newProvider->create<TimerService>() : NULL;
+}
+
+void DebrisService::setMaxItems(int value)
+{
+	if (value != maxItems) {
+		if (value < 0) {
+			throw std::runtime_error("DebrisService MaxItems must be greater than 0");
+		}
+
+		maxItems = value;
+		raisePropertyChanged(prop_MaxItems);
+		cleanup();
+	}
+}
+
+} // namespace RBX
+
+template class RBX::FactoryProduct<RBX::DebrisService, RBX::Instance, RBX::sDebrisService>;
+template class RBX::Reflection::Described<
+	RBX::DebrisService,
+	RBX::sDebrisService,
+	RBX::FactoryProduct<RBX::DebrisService, RBX::Instance, RBX::sDebrisService> >;
+template class RBX::DescribedCreatable<RBX::DebrisService, RBX::Instance, RBX::sDebrisService>;

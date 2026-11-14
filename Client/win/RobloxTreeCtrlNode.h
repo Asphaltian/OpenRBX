@@ -1,0 +1,60 @@
+#ifndef ROBLOXTREECTRLNODE_H
+#define ROBLOXTREECTRLNODE_H
+
+#include "placeholder.h"
+#include "util/Events.h"
+#include "v8tree/Instance.h"
+
+#include <boost/shared_ptr.hpp>
+#include <map>
+#include <set>
+
+class CRobloxTreeCtrl;
+
+int FUN_004230c0(RBX::Instance* instance);
+
+class CRobloxTreeCtrlNode : public RBX::Listener<RBX::Instance, RBX::PropertyChanged>,
+							public RBX::Listener<RBX::Instance, RBX::ChildAdded>,
+							public RBX::Listener<RBX::Instance, RBX::ChildRemoved>
+{
+public:
+	CRobloxTreeCtrlNode(CRobloxTreeCtrlNode* parent, boost::shared_ptr<RBX::Instance> instance, CRobloxTreeCtrl* tree);
+	virtual ~CRobloxTreeCtrlNode();
+
+	virtual void VTable0x08();
+	virtual void VTable0x0c();
+	virtual void VTable0x10(undefined4 p_unk0x04);
+	virtual void VTable0x14(NMTVDISPINFO* dispInfo);
+	virtual HTREEITEM VTable0x18();
+
+	void FUN_004221a0();
+	void FUN_004248f0(const boost::shared_ptr<RBX::Instance>& instance);
+	bool FUN_004255f0();
+	void FUN_00425c40();
+	CRobloxTreeCtrlNode* FUN_004267a0(const boost::shared_ptr<RBX::Instance>& instance);
+	void FUN_00426960();
+	void FUN_00426b00();
+
+protected:
+	friend class CRobloxTreeCtrl;
+	friend class CSelectionTreeCtrl;
+
+	virtual void onEvent(const RBX::Instance* source, RBX::PropertyChanged event);
+	virtual void onEvent(const RBX::Instance* source, RBX::ChildAdded event);
+	virtual void onEvent(const RBX::Instance* source, RBX::ChildRemoved event);
+
+	boost::shared_ptr<RBX::Instance> m_unk0x0c;
+	std::map<RBX::Instance*, CRobloxTreeCtrlNode*> m_unk0x14;
+	std::set<CRobloxTreeCtrlNode*> m_unk0x20;
+	undefined m_unk0x2c_bit0 : 1;
+	undefined m_unk0x2c_bit1 : 1;
+	undefined m_unk0x2d;
+	CRobloxTreeCtrl* m_unk0x30;
+	CRobloxTreeCtrlNode* m_unk0x34;
+	std::set<boost::shared_ptr<RBX::Instance> > m_unk0x38;
+	HTREEITEM m_unk0x44;
+	int m_unk0x48;
+	const RBX::Reflection::ClassDescriptor* m_unk0x4c;
+};
+
+#endif // ROBLOXTREECTRLNODE_H

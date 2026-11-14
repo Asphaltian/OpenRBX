@@ -1,0 +1,773 @@
+#include "v8datamodel/DataModel.h"
+
+#include "compat.h"
+#include "gui/GUI.h"
+#include "gui/GuiEvent.h"
+#include "network/Players.h"
+#include "rbxgraphics/Adorn.h"
+#include "reflection/reflection.h"
+#include "reflection/signal.h"
+#include "script/ScriptContext.h"
+#include "util/ContentProvider.h"
+#include "util/Http.h"
+#include "util/IMetric.h"
+#include "util/IRenderable.h"
+#include "util/Log.h"
+#include "util/Name.h"
+#include "util/Sound.h"
+#include "util/UserInputBase.h"
+#include "util/boost.hpp"
+#include "util/standardout.h"
+#include "v8datamodel/Accoutrement.h"
+#include "v8datamodel/Backpack.h"
+#include "v8datamodel/Camera.h"
+#include "v8datamodel/GuiBuilder.h"
+#include "v8datamodel/JointInstance.h"
+#include "v8datamodel/JointsService.h"
+#include "v8datamodel/Lighting.h"
+#include "v8datamodel/LocalBackpack.h"
+#include "v8datamodel/MouseCommand.h"
+#include "v8datamodel/Teams.h"
+#include "v8datamodel/TimeState.h"
+#include "v8datamodel/Tool.h"
+#include "v8datamodel/UserController.h"
+#include "v8datamodel/Workspace.h"
+#include "v8kernel/Kernel.h"
+#include "v8tree/Service.h"
+#include "v8world/Contact.h"
+#include "v8world/World.h"
+#include "v8xml/SerializerV2.h"
+#include "v8xml/XmlSerializer.h"
+
+#include <G3D/format.h>
+#include <boost/bind.hpp>
+#include <boost/thread/thread.hpp>
+#include <sstream>
+
+namespace RBX {
+
+const char sDataModel[] = "DataModel";
+
+typedef boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > Instances;
+
+static Reflection::BoundFuncDesc<DataModel, Instances(ContentId), 1> getContentFunctionOld(
+	&DataModel::get, "get", "url", Reflection::FunctionDescriptor::AnyCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, Instances(ContentId), 1> getContentFunction(
+	&DataModel::get, "GetObjects", "url", Reflection::FunctionDescriptor::AnyCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, void(ContentId), 1> loadFunction(
+	&DataModel::loadContent, "Load", "url", Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, void(ContentId), 1> saveFunction(
+	&DataModel::save, "Save", "url", Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, std::string(std::string, bool), 2> httpGetFunction(
+	&DataModel::httpGet, "HttpGet", "url", "synchronous", false, Reflection::FunctionDescriptor::AnyCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, std::string(std::string, std::string, bool), 3> httpPostFunction(
+	&DataModel::httpPost,
+	"HttpPost",
+	"url",
+	"data",
+	"synchronous",
+	false,
+	Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, void(), 0> sanitizeFunction(
+	&DataModel::clearContents, "ClearContent", Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, void(), 0> closeFunction(
+	&DataModel::close, "Close", Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, void(std::string), 1> func_SetUiMessage(
+	&DataModel::setUiMessage, "SetMessage", "message", Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, void(), 0> func_ClearUIMessage(
+	&DataModel::clearUiMessage, "ClearMessage", Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::BoundFuncDesc<DataModel, void(), 0> func_SetUIMessageBrickCount(
+	&DataModel::setUiMessageBrickCount, "SetMessageBrickCount", Reflection::FunctionDescriptor::NeedTrustedCaller
+);
+
+static Reflection::SignalDesc<DataModel, void()> event_Closing("Close");
+
+std::string DataModel::doHttpGet(std::string url)
+{
+	std::string response;
+	Http(url.c_str()).get(response);
+	return response;
+}
+
+std::string DataModel::doHttpPost(std::string url, std::string data)
+{
+	std::string response;
+#ifdef COMPAT_MODE
+	std::istringstream input(data);
+	Http(url).post(input, true, response);
+#else
+	Http(url).post(std::istringstream(data), true, response);
+#endif
+	return response;
+}
+
+void DataModel::close()
+{
+	Verb* verb = getVerb("Exit");
+	if (!verb) {
+		throw std::runtime_error("Couldn't find Exit Verb");
+	}
+	verb->doIt(NULL);
+}
+
+static std::string report(const G3D::Stopwatch& timer)
+{
+	char buffer[256];
+	if (timer.smoothElapsedTime() > 0) {
+		std::string t = Log::formatTime(timer.smoothElapsedTime());
+		sprintf(buffer, "%s (%.3gfps)", t.c_str(), 1.0 / timer.smoothElapsedTime());
+		return buffer;
+	}
+
+	return Log::formatTime(timer.smoothElapsedTime());
+}
+
+void DataModel::buildGui(Adorn* adorn)
+{
+	GuiBuilder builder;
+	builder.buildGui(adorn, this, workspace.get());
+}
+
+void DataModel::onChildAdded(Instance* child)
+{
+	ServiceProvider::onChildAdded(child);
+
+	if (child->getClassName() == "NetworkClient") {
+		Verb* verb = getVerb("LockPlayMode");
+		if (verb) {
+			verb->doIt(NULL);
+		}
+
+		workspace->setNullMouseCommand();
+	}
+}
+
+float DataModel::step(float timeInterval)
+{
+	if (!isInitialized) {
+		return timeInterval;
+	}
+
+	workspace->profileRun->sample(GetCurrentThread());
+	Profiling::Mark mark(*workspace->profileWorkspaceStep, true);
+
+	timeState->fpsStopwatch.tick();
+	timeState->fpsStopwatch.tock();
+
+	if (runService->getRunState() == RS_RUNNING) {
+		timeState->simulationStopwatch.tick();
+		timeInterval = workspace->step(timeInterval);
+		timeState->simulationStopwatch.tock();
+		timeState->totalVirtualTime += timeInterval;
+
+		Profiling::Mark mark(*workspace->profileRunServiceStepped, true);
+		runService->raiseStepped(getSimTime(), timeInterval);
+	}
+
+	{
+		Profiling::Mark mark(*workspace->profileRunServiceHeartbeat, true);
+		runService->raiseHeartbeat(getSimTime(), timeInterval);
+	}
+
+	workspace->getCamera()->onHeartbeat();
+
+	localBackpack->onHeartbeat();
+
+	return timeInterval;
+}
+
+void DataModel::onEvent(const RunService* source, RunTransition event)
+{
+	switch (event.newState) {
+	case RS_NORMAL:
+		if (event.oldState == RS_RUNNING) {
+			workspace->reset();
+		}
+		timeState->clear();
+		break;
+	case RS_RUNNING:
+		workspace->start();
+		break;
+	case RS_PAUSED:
+		workspace->stop();
+		break;
+	}
+}
+
+float DataModel::getSimTime() const
+{
+	return timeState->totalVirtualTime;
+}
+
+bool DataModel::canDelaySwapBuffer() const
+{
+	return runService->isRunState();
+}
+
+GuiResponse DataModel::processAccelerators(const GuiEvent& event)
+{
+	Verb* verb = NULL;
+
+	switch (event.eventType) {
+	case UIEvent::MOUSE_WHEEL_FORWARD:
+		verb = workspace->getVerb("CameraZoomIn");
+		break;
+	case UIEvent::MOUSE_WHEEL_BACKWARD:
+		verb = workspace->getVerb("CameraZoomOut");
+		break;
+	case UIEvent::KEY_DOWN:
+		if (event.key > SDLK_0 && event.key <= SDLK_9) {
+			if (localBackpack->onKey(event.key - SDLK_0)) {
+				return GuiResponse::used();
+			}
+		}
+		else {
+			switch (event.key) {
+			case SDLK_ESCAPE:
+				runService->pause();
+				break;
+			case SDLK_BACKSPACE:
+				if (ModelInstance* character = Network::Players::findLocalCharacter(this)) {
+					Tool::dropAll(character);
+				}
+				break;
+			case SDLK_COMMA:
+				verb = workspace->getVerb("CameraPanLeft");
+				break;
+			case SDLK_o:
+				verb = workspace->getVerb("CameraZoomOut");
+				break;
+			case SDLK_PERIOD:
+				verb = workspace->getVerb("CameraPanRight");
+				break;
+			case SDLK_PAGEUP:
+				verb = workspace->getVerb("CameraTiltDown");
+				break;
+			case SDLK_PAGEDOWN:
+				verb = workspace->getVerb("CameraTiltUp");
+				break;
+			case SDLK_EQUALS:
+				if (ModelInstance* character = Network::Players::findLocalCharacter(this)) {
+					Accoutrement::dropAll(character);
+				}
+				break;
+			case SDLK_RIGHTBRACKET:
+				localBackpack->cycleUp();
+				break;
+			case SDLK_LEFTBRACKET:
+				localBackpack->cycleDown();
+				break;
+			case SDLK_F1:
+				if (event.mod == KMOD_NONE) {
+					verb = getVerb("Help");
+				}
+				else {
+					verb = getVerb("Stats");
+				}
+				break;
+			case SDLK_i:
+				verb = workspace->getVerb("CameraZoomIn");
+				break;
+			}
+		}
+		break;
+	}
+
+	if (verb && verb->isEnabled()) {
+		verb->doIt(this);
+		return GuiResponse::used();
+	}
+
+	return GuiResponse::notUsed();
+}
+
+static G3D::Vector2 g_unk0x0095a91c;
+
+void DataModel::processEvent(const UIEvent& event)
+{
+	if (event.isMouseEvent()) {
+		g_unk0x0095a91c = G3D::Vector2(event.mousePosition.x, event.mousePosition.y);
+	}
+
+	GuiEvent guiEvent(event, this);
+
+	GuiResponse response = guiTarget ? guiTarget->process(guiEvent) : GuiResponse::notUsed();
+	if (response.wasNotUsed()) {
+		response = static_cast<GuiTarget*>(guiHooks.get())->process(guiEvent);
+	}
+	if (response.wasNotUsed()) {
+		response = static_cast<GuiTarget*>(guiRoot.get())->process(guiEvent);
+	}
+	if (response.wasNotUsed()) {
+		response = static_cast<GuiTarget*>(localBackpack.get())->process(guiEvent);
+	}
+	if (response.wasNotUsed()) {
+		response = processAccelerators(guiEvent);
+	}
+
+	forceArrowCursor = response.wasUsed() && guiTarget != static_cast<GuiTarget*>(workspace.get());
+
+	if (response.wasNotUsed()) {
+		response = static_cast<GuiTarget*>(workspace.get())->process(guiEvent);
+	}
+
+	if (event.isMouseEvent() || event.eventType == UIEvent::KEY_DOWN) {
+		Network::Player::onLocalPlayerNotIdle(this);
+	}
+
+	guiTarget = response.getTarget();
+}
+
+std::string DataModel::evaluate(const std::string& valueName) const
+{
+	World* world = workspace->getWorld();
+
+	if (valueName == "timer") {
+		return StringConverter<float>::convertToString(getSimTime());
+	}
+	if (valueName == "FPS") {
+		return G3D::format("%.3g", timeState->fpsStopwatch.smoothFPS());
+	}
+	if (valueName == "simDC") {
+		return report(timeState->simulationStopwatch);
+	}
+	if (valueName == "drawId") {
+		return StringConverter<int>::convertToString(drawId);
+	}
+	if (valueName == "graphicsMode") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "FRM") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "Shadows") {
+		return tempMetric->getMetric(valueName);
+	}
+
+	if (valueName == "antiAliasing") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "bevels") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "videoMemory") {
+		return tempMetric->getMetric(valueName);
+	}
+	if (valueName == "GfxTime") {
+		return tempMetric->getMetric(valueName);
+	}
+
+	if (valueName == "numPrimitives") {
+		return StringConverter<int>::convertToString(world->getNumPrimitives());
+	}
+	if (valueName == "numJoints") {
+		return StringConverter<int>::convertToString(world->getNumJoints());
+	}
+	if (valueName == "numContacts") {
+		return StringConverter<int>::convertToString(world->getNumContacts());
+	}
+	if (valueName == "numContactsInCollisionStage") {
+		return StringConverter<int>::convertToString(world->getMetric(IWorldStage::NUM_CONTACTSTAGE_CONTACTS));
+	}
+	if (valueName == "numSteppingContacts") {
+		return StringConverter<int>::convertToString(world->getMetric(IWorldStage::NUM_STEPPING_CONTACTS));
+	}
+	if (valueName == "numTouchingContacts") {
+		return StringConverter<int>::convertToString(world->getMetric(IWorldStage::NUM_TOUCHING_CONTACTS));
+	}
+	if (valueName == "maxTreeDepth") {
+		return StringConverter<int>::convertToString(world->getMetric(IWorldStage::MAX_TREE_DEPTH));
+	}
+	if (valueName == "contactPairHitRatio") {
+		return StringConverter<float>::convertToString(BlockBlockContact::contactPairHitRatio());
+	}
+
+	if (valueName == "numLinkCalls") {
+		return StringConverter<int>::convertToString(world->getNumLinkCalls());
+	}
+	if (valueName == "numHashNodes") {
+		return StringConverter<int>::convertToString(world->getNumHashNodes());
+	}
+	if (valueName == "maxBucketSize") {
+		return StringConverter<int>::convertToString(world->getMaxBucketSize());
+	}
+
+	if (valueName == "numBodies") {
+		return StringConverter<int>::convertToString(world->getNumBodies());
+	}
+	if (valueName == "numConstraints") {
+		return StringConverter<int>::convertToString(world->getNumConstraints());
+	}
+	if (valueName == "numPoints") {
+		return StringConverter<int>::convertToString(world->getNumPoints());
+	}
+	if (valueName == "energyBody") {
+		return StringConverter<float>::convertToString(world->getKernel().bodyKineticEnergy());
+	}
+	if (valueName == "energyConnector") {
+		return StringConverter<float>::convertToString(world->getKernel().connectorSpringEnergy());
+	}
+	if (valueName == "energyTotal") {
+		return StringConverter<float>::convertToString(world->getKernel().totalKineticEnergy());
+	}
+
+	return "?";
+}
+
+void DataModel::loadContent(ContentId contentId)
+{
+	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
+
+	StandardOut::singleton()->print(MESSAGE_INFO, "DataModel Loading %s", contentId.c_str());
+
+	Serializer serializer;
+	serializer.load(*stream, this);
+	workspace->joinAllHack();
+}
+
+void DataModel::Lock::doLock(const DataModel* dataModel)
+{
+	if (dataModel) {
+		mutex = dataModel->mutex;
+		lock = new boost::recursive_mutex::scoped_lock(*mutex);
+	}
+}
+
+DataModel::Lock::~Lock()
+{
+	delete lock;
+}
+
+void DataModel::processGui(const UIEvent& event)
+{
+	if (isInitialized) {
+		if (event.eventType != UIEvent::NO_EVENT) {
+			processEvent(event);
+		}
+
+		switch (runService->getRunState()) {
+		case RS_RUNNING:
+			break;
+		default:
+			workspace->raiseDrawChanged();
+			break;
+		}
+	}
+}
+
+void DataModel::initializeContents()
+{
+	workspace->setParent(this);
+	guiRoot->setParent(this);
+	guiHooks->setParent(this);
+
+	localBackpack = shared_from(create<LocalBackpack>());
+
+	starterPackService = shared_from(create<StarterPackService>());
+
+	runService = shared_from(create<RunService>());
+
+	create<Soundscape::SoundService>();
+
+	workspace->setDefaultMouseCommand();
+
+	workspace->setVerbParent(this);
+
+	runService->start();
+
+	startListening(runService, this);
+
+	create<JointsService>();
+}
+
+void DataModel::renderPass3dAdorn(Adorn* adorn)
+{
+	drawId++;
+	if (adorn) {
+		workspace->render3dAdorn(adorn);
+		if (JointsService* joints = find<JointsService>()) {
+			joints->render3dAdornItems(adorn);
+		}
+		if (!forceArrowCursor) {
+			workspace->getCurrentMouseCommand()->render3dAdorn(adorn);
+		}
+	}
+}
+
+void DataModel::clearContents()
+{
+	workspace->setMouseCommand(NULL);
+
+	workspace->removeAllChildren();
+	workspace->setCamera(NULL);
+
+	starterPackService->removeAllChildren();
+
+	Teams* teams = find<Teams>();
+	if (teams) {
+		teams->removeAllChildren();
+	}
+
+	Lighting* lighting = find<Lighting>();
+	if (lighting) {
+		lighting->removeAllChildren();
+	}
+
+	ScriptContext* context = find<ScriptContext>();
+	if (context) {
+		context->closeState();
+		ScriptContext::propScriptsDisabled.setValue(context, false);
+	}
+}
+
+void DataModel::save(ContentId contentId)
+{
+	std::stringstream stream;
+	{
+		boost::scoped_ptr<XmlElement> root(SerializerV2::newRootElement());
+
+		writeChildren(root.get());
+
+		TextXmlWriterWithEmbeddedContent machine(stream);
+		machine.serialize(root.get());
+		stream.flush();
+	}
+
+	std::string response;
+	Http(contentId.toString()).post(stream, true, response);
+}
+
+boost::shared_ptr<const std::vector<boost::shared_ptr<Instance> > > DataModel::get(ContentId contentId)
+{
+	std::auto_ptr<std::istream> stream = ContentProvider::singleton().getContent(contentId);
+	TextXmlParser machine(stream->rdbuf());
+	std::auto_ptr<XmlElement> root = machine.parse();
+
+	boost::shared_ptr<std::vector<boost::shared_ptr<Instance> > > result(
+		new std::vector<boost::shared_ptr<Instance> >()
+	);
+
+	Serializer serializer;
+	serializer.loadInstances(root.get(), *result);
+
+	return result;
+}
+
+void DataModel::renderPass2d(Adorn* adorn, IMetric* metric)
+{
+	if (adorn && metric) {
+		tempMetric = metric;
+
+		workspace->render2d(adorn);
+		GuiRoot::render2dItem(
+			adorn,
+			Network::Players::findLocalPlayer(this) ? static_cast<GuiItem*>(localBackpack.get())
+													: static_cast<GuiItem*>(starterPackService.get())
+		);
+		guiRoot->render2d(adorn);
+
+		Network::Player* player = create<Network::Players>()->getLocalPlayer();
+		if (player) {
+			for (unsigned int i = 0; i < player->numChildren(); i++) {
+				IRenderable* renderable = dynamic_cast<IRenderable*>(player->getChild(i));
+				if (renderable) {
+					renderable->render2d(adorn);
+				}
+			}
+		}
+
+		std::string text;
+		if (uiMessage == "[[[progress]]]") {
+			text = "Bricks: " + evaluate("numPrimitives") + "   Snaps: " + evaluate("numJoints");
+		}
+		else {
+			text = uiMessage;
+		}
+
+		if (!text.empty()) {
+			G3D::Rect2D viewport = adorn->getViewport();
+			G3D::Vector2 center = viewport.center();
+			float width = viewport.width();
+			int fontSize = (int) width * 0.02f;
+			G3D::Vector2 halfSize(width * 0.3f, width * 0.3f * 0.3f);
+
+			adorn->rect2d(G3D::Rect2D::xyxy(center - halfSize, center + halfSize), GuiItem::translucentBackdrop());
+			adorn->outlineRect2d(
+				G3D::Rect2D::xyxy(center - halfSize, center + halfSize), 2.0f, G3D::Color4(G3D::Color3::gray(), 1.0f)
+			);
+			adorn->drawFont2D(
+				text,
+				center,
+				fontSize,
+				G3D::Color4(G3D::Color3::white(), 1.0f),
+				G3D::Color4::clear(),
+				Adorn::XALIGN_CENTER,
+				Adorn::YALIGN_CENTER,
+				Adorn::PROPORTIONAL_SPACING
+			);
+		}
+
+		UserInputBase* userInput = create<ControllerService>()->getHardwareDevice();
+		if (userInput) {
+			if (forceArrowCursor) {
+				userInput->setCursorId(adorn, ContentId::fromAssets("Textures\\ArrowCursor.png"));
+			}
+			else {
+				workspace->setCursor(adorn);
+			}
+			userInput->renderGameCursor(adorn);
+		}
+
+		tempMetric = NULL;
+	}
+}
+
+void DataModel::raiseClose()
+{
+	Notifier<ServiceProvider, Closing>::raise(Closing());
+	event_Closing.fire(this);
+}
+
+DataModel::~DataModel()
+{
+	stopListening(runService, this);
+}
+
+void DataModel::closeDataModel(boost::shared_ptr<DataModel> dataModel, bool joinRunThread)
+{
+	dataModel->isInitialized = false;
+
+	boost::shared_ptr<RunService> runService;
+	{
+		DataModel::Lock lock(dataModel);
+		runService = dataModel->runService;
+	}
+
+	if (runService) {
+		runService->endRunThread(joinRunThread);
+	}
+
+	DataModel::Lock lock(dataModel);
+
+	dataModel->raiseClose();
+
+	dataModel->clearContents();
+	dataModel->removeAllChildren();
+	dataModel->clearServices();
+}
+
+DataModel::DataModel()
+	: VerbContainer(NULL), workspace(Creatable<Instance>::create<Workspace>(this)),
+	  guiRoot(Creatable<Instance>::create<GuiRoot>()), guiHooks(Creatable<Instance>::create<GuiRoot>()),
+	  guiTarget(NULL), forceArrowCursor(true), drawId(0), dirty(false), isInitialized(false),
+	  mutex(new boost::recursive_mutex()), timeState(new TimeState())
+{
+	setName("Level");
+}
+
+boost::shared_ptr<DataModel> DataModel::createDataModel()
+{
+	ContentProvider::singleton().clearContentCache();
+
+	boost::shared_ptr<DataModel> dataModel = Creatable<Instance>::create<DataModel>();
+
+	{
+		DataModel::Lock lock(dataModel);
+		dataModel->initializeContents();
+		dataModel->isInitialized = true;
+	}
+
+	return dataModel;
+}
+
+std::string DataModel::httpGet(std::string url, bool synchronous)
+{
+	if (synchronous) {
+		return doHttpGet(url);
+	}
+
+	if (url.size() > 0) {
+		boost::function0<void> f = boost::bind(&doHttpGet, url);
+		boost::function0<void> g = boost::bind(&StandardOut::print_exception, f, MESSAGE_ERROR, false);
+		boost::thread(background_function(g, "rbx_httpGet"));
+	}
+
+	return "";
+}
+
+std::string DataModel::httpPost(std::string url, std::string data, bool synchronous)
+{
+	if (synchronous) {
+		return doHttpPost(url, data);
+	}
+
+	boost::function0<void> f = boost::bind(&doHttpPost, url, data);
+	boost::function0<void> g = boost::bind(&StandardOut::print_exception, f, MESSAGE_ERROR, false);
+	boost::thread(background_function(g, "rbx_httpPost"));
+
+	return "";
+}
+
+} // namespace RBX
+
+template RBX::JointsService* RBX::ServiceProvider::create<RBX::JointsService>() const;
+template RBX::LocalBackpack* RBX::ServiceProvider::create<RBX::LocalBackpack>() const;
+
+template const RBX::Name& RBX::Name::doDeclare<RBX::sServiceProvider>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sLocalBackpackItem>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sLocalBackpack>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sSnap>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sWeld>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sGlue>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sRotate>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sRotateP>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sRotateV>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sMotor>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sBackpack>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sTeams>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sAccoutrement>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sHat>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::Network::sPlayers>();
+template void RBX::Name::callDoDeclare<RBX::sServiceProvider>();
+template void RBX::Name::callDoDeclare<RBX::sLocalBackpackItem>();
+template void RBX::Name::callDoDeclare<RBX::sLocalBackpack>();
+template void RBX::Name::callDoDeclare<RBX::sSnap>();
+template void RBX::Name::callDoDeclare<RBX::sWeld>();
+template void RBX::Name::callDoDeclare<RBX::sGlue>();
+template void RBX::Name::callDoDeclare<RBX::sRotate>();
+template void RBX::Name::callDoDeclare<RBX::sRotateP>();
+template void RBX::Name::callDoDeclare<RBX::sRotateV>();
+template void RBX::Name::callDoDeclare<RBX::sMotor>();
+template void RBX::Name::callDoDeclare<RBX::sBackpack>();
+template void RBX::Name::callDoDeclare<RBX::sTeams>();
+template void RBX::Name::callDoDeclare<RBX::sAccoutrement>();
+template void RBX::Name::callDoDeclare<RBX::sHat>();
+template void RBX::Name::callDoDeclare<RBX::Network::sPlayers>();
+template const RBX::Name& RBX::Name::doDeclare<RBX::sDataModel>();
+template void RBX::Name::callDoDeclare<RBX::sDataModel>();
+template const RBX::FactoryProduct<RBX::LocalBackpackItem, RBX::Widget, RBX::sLocalBackpackItem>::Creator
+	RBX::FactoryProduct<RBX::LocalBackpackItem, RBX::Widget, RBX::sLocalBackpackItem>::creator;
+template const RBX::FactoryProduct<RBX::LocalBackpack, RBX::RelativePanel, RBX::sLocalBackpack>::Creator
+	RBX::FactoryProduct<RBX::LocalBackpack, RBX::RelativePanel, RBX::sLocalBackpack>::creator;
+template const RBX::FactoryProduct<RBX::Motor, RBX::AutoJoint, RBX::sMotor>::Creator
+	RBX::FactoryProduct<RBX::Motor, RBX::AutoJoint, RBX::sMotor>::creator;

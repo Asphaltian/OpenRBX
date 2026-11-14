@@ -1,0 +1,63 @@
+!!ARBvp1.0
+#
+# Twists a model like a cork-screw 
+# Maintainer: Morgan McGuire, matrix@graphics3d.com
+#
+
+ATTRIB iPos         = vertex.position;
+ATTRIB iNormal      = vertex.normal;
+PARAM  mvinv[4]     = { state.matrix.modelview.invtrans };
+PARAM  mvp[4]       = { state.matrix.mvp };
+PARAM  lightDir     = state.light[0].position;
+PARAM  halfDir      = state.light[0].half;
+PARAM  specExp      = state.material.shininess;
+PARAM  ambientCol   = state.lightprod[0].ambient;
+PARAM  diffuseCol   = state.lightprod[0].diffuse;
+PARAM  specularCol  = state.lightprod[0].specular;
+
+PARAM  rotVec       = program.local[0];
+PARAM  unit         = {1,1,1,1};
+
+TEMP   xfNormal, temp, dots, alpha, beta;
+OUTPUT oPos         = result.position;
+OUTPUT oColor       = result.color;
+
+MOV   temp, iPos;
+MUL   temp.x, rotVec.x, iPos.x;
+MAD   temp.x, rotVec.z,  iPos.z, temp.x;
+MUL   temp.z, rotVec.x, iPos.z;
+MAD   temp.z, -rotVec.z, iPos.x, temp.z;
+
+MOV   alpha.xyzw, iPos.yyyy;
+SUB   beta, unit, alpha;
+MOV   alpha.w, 1;
+MOV   beta.w, 1;
+
+MUL   temp, alpha, temp;
+MAD   temp, beta, iPos, temp;
+
+# Transform the vertex to clip coordinates.
+DP4   oPos.x, mvp[0], temp;
+DP4   oPos.y, mvp[1], temp;
+DP4   oPos.z, mvp[2], temp;
+DP4   oPos.w, mvp[3], temp;
+
+# Note: we aren't rotating the normals (we could, though)
+
+# Transform the normal to eye coordinates.
+DP3   xfNormal.x, mvinv[0], iNormal;
+DP3   xfNormal.y, mvinv[1], iNormal;
+DP3   xfNormal.z, mvinv[2], iNormal;
+
+# Compute diffuse and specular dot products and use LIT to compute
+# lighting coefficients.
+DP3   dots.x, xfNormal, lightDir;
+DP3   dots.y, xfNormal, halfDir;
+MOV   dots.w, specExp.x;
+LIT   dots, dots;
+
+# Accumulate color contributions.
+MAD   temp, dots.y, diffuseCol, ambientCol;
+MAD   oColor.xyz, dots.z, specularCol, temp;
+MOV   oColor.w, diffuseCol.w;
+END

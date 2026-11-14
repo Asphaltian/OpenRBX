@@ -1,0 +1,349 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 39;
+	objects = {
+		0F0A9DDF06FE4DD300A2C0A1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = archive.ar;
+			name = libGLG3D.a;
+			path = ../../../G3DOSX/build/libGLG3D.a;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		0F0A9DE006FE4DD300A2C0A1 = {
+			fileRef = 0F0A9DDF06FE4DD300A2C0A1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0F0A9DE106FE4DD800A2C0A1 = {
+			isa = PBXFileReference;
+			lastKnownFileType = archive.ar;
+			name = libG3D.a;
+			path = ../../../G3DOSX/build/libG3D.a;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		0F0A9DE206FE4DD800A2C0A1 = {
+			fileRef = 0F0A9DE106FE4DD800A2C0A1;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0F0B7D5406DEE062002E4048 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = OpenGL.framework;
+			path = /System/Library/Frameworks/OpenGL.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		0F0B7D5506DEE062002E4048 = {
+			fileRef = 0F0B7D5406DEE062002E4048;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0F0B7E3406DEE749002E4048 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = SDLMain.h;
+			path = ../../../G3DOSX/SDLMain.h;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		0F0B7E3506DEE749002E4048 = {
+			fileRef = 0F0B7E3406DEE749002E4048;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0F0B7E3606DEE751002E4048 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.objc;
+			name = SDLMain.m;
+			path = ../../../G3DOSX/SDLMain.m;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		0F0B7E3706DEE751002E4048 = {
+			fileRef = 0F0B7E3606DEE751002E4048;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0F0B7E6F06DEEC38002E4048 = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = SDL.framework;
+			path = /Library/Frameworks/SDL.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+		0F0B7E7006DEEC38002E4048 = {
+			fileRef = 0F0B7E6F06DEEC38002E4048;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		0F55023006DD65DA008DD4F8 = {
+			fileEncoding = 30;
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			path = main.cpp;
+			refType = 2;
+			sourceTree = SOURCE_ROOT;
+		};
+		0F55023106DD65DA008DD4F8 = {
+			fileRef = 0F55023006DD65DA008DD4F8;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+//0F0
+//0F1
+//0F2
+//0F3
+//0F4
+//100
+//101
+//102
+//103
+//104
+		1058C7A1FEA54F0111CA2CBB = {
+			isa = PBXFileReference;
+			lastKnownFileType = wrapper.framework;
+			name = Cocoa.framework;
+			path = /System/Library/Frameworks/Cocoa.framework;
+			refType = 0;
+			sourceTree = "<absolute>";
+		};
+//100
+//101
+//102
+//103
+//104
+//190
+//191
+//192
+//193
+//194
+		19C28FACFE9D520D11CA2CBB = {
+			children = (
+				8D1107320486CEB800E47090,
+			);
+			isa = PBXGroup;
+			name = Products;
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//190
+//191
+//192
+//193
+//194
+//290
+//291
+//292
+//293
+//294
+		29B97313FDCFA39411CA2CEA = {
+			buildSettings = {
+			};
+			buildStyles = (
+				4A9504CCFFE6A4B311CA0CBA,
+				4A9504CDFFE6A4B311CA0CBA,
+			);
+			hasScannedForEncodings = 1;
+			isa = PBXProject;
+			mainGroup = 29B97314FDCFA39411CA2CEA;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090,
+			);
+		};
+		29B97314FDCFA39411CA2CEA = {
+			children = (
+				29B97315FDCFA39411CA2CEA,
+				29B97323FDCFA39411CA2CEA,
+				19C28FACFE9D520D11CA2CBB,
+			);
+			isa = PBXGroup;
+			name = VAR_Demo;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA = {
+			children = (
+				0F55023006DD65DA008DD4F8,
+				0F0B7E3606DEE751002E4048,
+				0F0B7E3406DEE749002E4048,
+			);
+			isa = PBXGroup;
+			name = Source;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA = {
+			children = (
+				0F0A9DDF06FE4DD300A2C0A1,
+				0F0A9DE106FE4DD800A2C0A1,
+				0F0B7E6F06DEEC38002E4048,
+				0F0B7D5406DEE062002E4048,
+				1058C7A1FEA54F0111CA2CBB,
+			);
+			isa = PBXGroup;
+			name = Frameworks;
+			path = "";
+			refType = 4;
+			sourceTree = "<group>";
+		};
+//290
+//291
+//292
+//293
+//294
+//4A0
+//4A1
+//4A2
+//4A3
+//4A4
+		4A9504CCFFE6A4B311CA0CBA = {
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = ../../../G3DOSX/build;
+				OPTIMIZATION_CFLAGS = "-O0";
+				ZERO_LINK = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Development;
+		};
+		4A9504CDFFE6A4B311CA0CBA = {
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(HOME)/Library/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				HEADER_SEARCH_PATHS = ../../include;
+				LIBRARY_SEARCH_PATHS = ../../../G3DOSX/build;
+				ZERO_LINK = NO;
+			};
+			isa = PBXBuildStyle;
+			name = Deployment;
+		};
+//4A0
+//4A1
+//4A2
+//4A3
+//4A4
+//8D0
+//8D1
+//8D2
+//8D3
+//8D4
+		8D1107260486CEB800E47090 = {
+			buildPhases = (
+				8D1107270486CEB800E47090,
+				8D1107290486CEB800E47090,
+				8D11072C0486CEB800E47090,
+				8D11072E0486CEB800E47090,
+			);
+			buildRules = (
+			);
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "__cdecl=  __stdcall=";
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "";
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "-lz -multiply_defined suppress";
+				PREBINDING = NO;
+				PRODUCT_NAME = VAR_Demo;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = "-Wmost -Wno-four-char-constants -Wno-unknown-pragmas";
+				WRAPPER_EXTENSION = app;
+			};
+			dependencies = (
+			);
+			isa = PBXNativeTarget;
+			name = VAR_Demo;
+			productInstallPath = "$(HOME)/Applications";
+			productName = VAR_Demo;
+			productReference = 8D1107320486CEB800E47090;
+			productType = "com.apple.product-type.application";
+		};
+		8D1107270486CEB800E47090 = {
+			buildActionMask = 2147483647;
+			files = (
+				0F0B7E3506DEE749002E4048,
+			);
+			isa = PBXHeadersBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D1107290486CEB800E47090 = {
+			buildActionMask = 2147483647;
+			files = (
+			);
+			isa = PBXResourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072C0486CEB800E47090 = {
+			buildActionMask = 2147483647;
+			files = (
+				0F55023106DD65DA008DD4F8,
+				0F0B7E3706DEE751002E4048,
+			);
+			isa = PBXSourcesBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072E0486CEB800E47090 = {
+			buildActionMask = 2147483647;
+			files = (
+				0F0A9DE006FE4DD300A2C0A1,
+				0F0A9DE206FE4DD800A2C0A1,
+				0F0B7D5506DEE062002E4048,
+				8D11072F0486CEB800E47090,
+				0F0B7E7006DEEC38002E4048,
+			);
+			isa = PBXFrameworksBuildPhase;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072F0486CEB800E47090 = {
+			fileRef = 1058C7A1FEA54F0111CA2CBB;
+			isa = PBXBuildFile;
+			settings = {
+			};
+		};
+		8D1107320486CEB800E47090 = {
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			isa = PBXFileReference;
+			path = VAR_Demo.app;
+			refType = 3;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA;
+}

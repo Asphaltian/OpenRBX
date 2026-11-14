@@ -1,0 +1,74 @@
+#include "util/MeshId.h"
+
+#include "reflection/property.h"
+#include "util/Utilities.h"
+#include "v8xml/XmlElement.h"
+
+namespace RBX {
+
+template <>
+std::string StringConverter<MeshId>::convertToString(const MeshId& value)
+{
+	return value.toString();
+}
+
+template <>
+bool StringConverter<MeshId>::convertToValue(const std::string& text, MeshId& value)
+{
+	value = MeshId(text);
+	return true;
+}
+
+namespace Reflection {
+
+template <>
+const Type& Type::singleton<MeshId>()
+{
+	return singleton<ContentId>();
+}
+
+template <>
+void TypedPropertyDescriptor<MeshId>::readValue(
+	DescribedBase* instance, const XmlElement* element, IReferenceBinder& binder
+) const
+{
+	if (!element->isXsiNil()) {
+		ContentId value;
+		if (element->getValue(value)) {
+			setValue(instance, MeshId(value));
+		}
+	}
+}
+
+template <>
+void TypedPropertyDescriptor<MeshId>::writeValue(const DescribedBase* instance, XmlElement* element) const
+{
+	element->setValue(getValue(instance));
+}
+
+template <>
+bool TypedPropertyDescriptor<MeshId>::hasStringValue() const
+{
+	return true;
+}
+
+template <>
+std::string TypedPropertyDescriptor<MeshId>::getStringValue(const DescribedBase* instance) const
+{
+	return StringConverter<MeshId>::convertToString(getValue(instance));
+}
+
+template <>
+bool TypedPropertyDescriptor<MeshId>::setStringValue(DescribedBase* instance, const std::string& text) const
+{
+	MeshId value;
+	if (StringConverter<MeshId>::convertToValue(text, value)) {
+		setValue(instance, value);
+		return true;
+	}
+
+	return false;
+}
+
+} // namespace Reflection
+} // namespace RBX

@@ -1,0 +1,27 @@
+#ifndef UTIL_SOUNDWORLD_H
+#define UTIL_SOUNDWORLD_H
+
+namespace RBX {
+
+enum SoundType
+{
+	NO_SOUND = 0,
+	BOING_SOUND = 1,
+	BOMB_SOUND = 2,
+	BREAK_SOUND = 3,
+	CLICK_SOUND = 4,
+	CLOCK_SOUND = 5,
+	RUBBERBAND_SOUND = 6,
+	PAGE_SOUND = 7,
+	PING_SOUND = 8,
+	SNAP_SOUND = 9,
+	SPLAT_SOUND = 10,
+	STEP_SOUND = 11,
+	STEP_ON_SOUND = 12,
+	SWOOSH_SOUND = 13,
+	VICTORY_SOUND = 14,
+};
+
+} // namespace RBX
+
+#endif // UTIL_SOUNDWORLD_H
