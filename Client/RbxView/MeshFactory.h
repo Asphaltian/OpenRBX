@@ -1,8 +1,8 @@
 #ifndef RBXVIEW_MESHFACTORY_H
 #define RBXVIEW_MESHFACTORY_H
 
-#include "renderlib/Mesh.h"
 #include "placeholder.h"
+#include "renderlib/Mesh.h"
 #include "util/NormalId.h"
 
 #include <G3D/ReferenceCount.h>

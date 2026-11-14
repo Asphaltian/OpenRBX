@@ -1,12 +1,12 @@
 #ifndef SCRIPT_LUAARGUMENTS_H
 #define SCRIPT_LUAARGUMENTS_H
 
+#include "placeholder.h"
 #include "reflection/function.h"
 #include "reflection/type.h"
 #include "script/LuaAtomicClasses.h"
 #include "script/LuaInstanceBridge.h"
 #include "script/ThreadRef.h"
-#include "placeholder.h"
 #include "util/ContentProvider.h"
 
 #include <lua.h>

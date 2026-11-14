@@ -2,8 +2,8 @@
 #define SCRIPT_LUASIGNALBRIDGE_H
 
 #include "lua/LuaBridge.h"
-#include "reflection/signal.h"
 #include "placeholder.h"
+#include "reflection/signal.h"
 
 #include <boost/signals/connection.hpp>
 

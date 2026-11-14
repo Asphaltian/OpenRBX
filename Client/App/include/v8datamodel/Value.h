@@ -1,9 +1,9 @@
 #ifndef V8DATAMODEL_VALUE_H
 #define V8DATAMODEL_VALUE_H
 
+#include "placeholder.h"
 #include "reflection/property.h"
 #include "reflection/signal.h"
-#include "placeholder.h"
 #include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>

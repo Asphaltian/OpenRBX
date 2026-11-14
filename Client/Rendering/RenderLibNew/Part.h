@@ -1,10 +1,10 @@
 #ifndef RENDERLIBNEW_PART_H
 #define RENDERLIBNEW_PART_H
 
+#include "placeholder.h"
 #include "renderlibnew/Chunk.h"
 #include "renderlibnew/Material.h"
 #include "renderlibnew/Mesh.h"
-#include "placeholder.h"
 #include "util/Events.h"
 #include "v8world/IMoving.h"
 

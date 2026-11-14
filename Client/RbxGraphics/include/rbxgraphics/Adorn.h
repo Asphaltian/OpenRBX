@@ -1,8 +1,8 @@
 #ifndef RBXGRAPHICS_ADORN_H
 #define RBXGRAPHICS_ADORN_H
 
-#include "rbxgraphics/TextureProxyBase.h"
 #include "placeholder.h"
+#include "rbxgraphics/TextureProxyBase.h"
 
 #include <G3D/AABox.h>
 #include <G3D/Color4.h>

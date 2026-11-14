@@ -3,8 +3,8 @@
 
 #include "network/Player.h"
 #include "network/SuperSafeChanged.h"
-#include "reflection/reflection.h"
 #include "placeholder.h"
+#include "reflection/reflection.h"
 #include "util/Events.h"
 #include "util/boost.hpp"
 #include "v8tree/Instance.h"

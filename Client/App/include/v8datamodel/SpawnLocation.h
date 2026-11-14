@@ -1,8 +1,8 @@
 #ifndef V8DATAMODEL_SPAWNLOCATION_H
 #define V8DATAMODEL_SPAWNLOCATION_H
 
-#include "reflection/property.h"
 #include "placeholder.h"
+#include "reflection/property.h"
 #include "util/Handle.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8datamodel/PartInstance.h"

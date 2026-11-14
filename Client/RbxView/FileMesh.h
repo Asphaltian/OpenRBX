@@ -1,8 +1,8 @@
 #ifndef RBXVIEW_FILEMESH_H
 #define RBXVIEW_FILEMESH_H
 
-#include "renderlib/Mesh.h"
 #include "placeholder.h"
+#include "renderlib/Mesh.h"
 #include "util/MeshId.h"
 
 #include <G3D/ReferenceCount.h>

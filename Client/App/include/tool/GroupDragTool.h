@@ -1,8 +1,8 @@
 #ifndef TOOL_GROUPDRAGTOOL_H
 #define TOOL_GROUPDRAGTOOL_H
 
-#include "tool/MegaDragger.h"
 #include "placeholder.h"
+#include "tool/MegaDragger.h"
 #include "util/Name.h"
 #include "v8datamodel/MouseCommand.h"
 

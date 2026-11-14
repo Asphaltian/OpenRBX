@@ -1,9 +1,9 @@
 #ifndef RENDERLIB_RENDERSURFACE_H
 #define RENDERLIB_RENDERSURFACE_H
 
+#include "placeholder.h"
 #include "renderlib/Material.h"
 #include "renderlib/Mesh.h"
-#include "placeholder.h"
 
 #include <G3D/Array.h>
 #include <G3D/CoordinateFrame.h>

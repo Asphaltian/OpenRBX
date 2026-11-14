@@ -1,8 +1,8 @@
 #ifndef V8DATAMODEL_SKY_H
 #define V8DATAMODEL_SKY_H
 
-#include "reflection/property.h"
 #include "placeholder.h"
+#include "reflection/property.h"
 #include "util/TextureId.h"
 #include "v8tree/Instance.h"
 

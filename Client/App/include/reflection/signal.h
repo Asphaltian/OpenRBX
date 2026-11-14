@@ -1,10 +1,10 @@
 #ifndef REFLECTION_SIGNAL_H
 #define REFLECTION_SIGNAL_H
 
+#include "placeholder.h"
 #include "reflection/member.h"
 #include "reflection/property.h"
 #include "reflection/type.h"
-#include "placeholder.h"
 #include "util/standardout.h"
 
 #include <boost/any.hpp>

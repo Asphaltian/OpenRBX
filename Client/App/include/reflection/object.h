@@ -1,12 +1,12 @@
 #ifndef REFLECTION_OBJECT_H
 #define REFLECTION_OBJECT_H
 
+#include "placeholder.h"
 #include "reflection/descriptor.h"
 #include "reflection/function.h"
 #include "reflection/member.h"
 #include "reflection/property.h"
 #include "reflection/signal.h"
-#include "placeholder.h"
 
 #include <vector>
 

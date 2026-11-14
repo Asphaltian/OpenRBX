@@ -1,10 +1,10 @@
 #ifndef REFLECTIONMETADATA_H
 #define REFLECTIONMETADATA_H
 
+#include "placeholder.h"
 #include "reflection/function.h"
 #include "reflection/property.h"
 #include "reflection/signal.h"
-#include "placeholder.h"
 #include "v8tree/Instance.h"
 
 #include <algorithm>

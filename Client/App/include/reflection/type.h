@@ -1,8 +1,8 @@
 #ifndef REFLECTION_TYPE_H
 #define REFLECTION_TYPE_H
 
-#include "reflection/descriptor.h"
 #include "placeholder.h"
+#include "reflection/descriptor.h"
 #include "util/Utilities.h"
 
 #include <G3D/format.h>

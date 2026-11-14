@@ -1,8 +1,8 @@
 #ifndef SCRIPT_SCRIPTEVENT_H
 #define SCRIPT_SCRIPTEVENT_H
 
-#include "script/ThreadRef.h"
 #include "placeholder.h"
+#include "script/ThreadRef.h"
 #include "util/RunStateOwner.h"
 
 #include <boost/shared_ptr.hpp>

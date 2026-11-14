@@ -2,8 +2,8 @@
 #define CONTENT_H
 
 #include "Roblox_h.h"
-#include "reflection/type.h"
 #include "placeholder.h"
+#include "reflection/type.h"
 
 #include <atlbase.h>
 #include <atlcom.h>

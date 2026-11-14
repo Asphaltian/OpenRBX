@@ -1,10 +1,10 @@
 #ifndef RENDERLIBNEW_AGGREGATINGSCENEMANAGER_H
 #define RENDERLIBNEW_AGGREGATINGSCENEMANAGER_H
 
+#include "placeholder.h"
 #include "renderlibnew/Chunk.h"
 #include "renderlibnew/Material.h"
 #include "renderlibnew/RenderScene.h"
-#include "placeholder.h"
 
 #include <G3D/ReferenceCount.h>
 #include <boost/noncopyable.hpp>

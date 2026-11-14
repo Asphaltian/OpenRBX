@@ -1,9 +1,9 @@
 #ifndef CLASSTREEVIEW_H
 #define CLASSTREEVIEW_H
 
+#include "placeholder.h"
 #include "reflection/EnumConverter.h"
 #include "reflection/object.h"
-#include "placeholder.h"
 
 namespace RBX {
 namespace Reflection {

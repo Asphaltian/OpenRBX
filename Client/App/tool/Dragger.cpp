@@ -1,7 +1,7 @@
 #include "tool/Dragger.h"
 
-#include "tool/DragUtilities.h"
 #include "placeholder.h"
+#include "tool/DragUtilities.h"
 #include "util/Math.h"
 #include "v8datamodel/PartInstance.h"
 #include "v8world/SpatialHash.h"

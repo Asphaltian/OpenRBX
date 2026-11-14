@@ -1,9 +1,9 @@
 #ifndef RBXVIEW_MATERIALFACTORY_H
 #define RBXVIEW_MATERIALFACTORY_H
 
+#include "placeholder.h"
 #include "renderlib/Material.h"
 #include "renderlib/TextureProxy.h"
-#include "placeholder.h"
 #include "v8datamodel/BrickColor.h"
 
 #include <G3D/ReferenceCount.h>

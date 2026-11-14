@@ -1,8 +1,8 @@
 #ifndef APPDRAW_ADORNG3D_H
 #define APPDRAW_ADORNG3D_H
 
-#include "rbxgraphics/Adorn.h"
 #include "placeholder.h"
+#include "rbxgraphics/Adorn.h"
 
 #include <GLG3D/RenderDevice.h>
 #include <GLG3D/TextureManager.h>

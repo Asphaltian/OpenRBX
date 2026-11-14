@@ -1,8 +1,8 @@
 #ifndef UTIL_MESHID_H
 #define UTIL_MESHID_H
 
-#include "reflection/type.h"
 #include "placeholder.h"
+#include "reflection/type.h"
 #include "util/ContentProvider.h"
 
 namespace RBX {

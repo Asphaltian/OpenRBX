@@ -2,8 +2,8 @@
 #define V8DATAMODEL_WORKSPACE_H
 
 #include "gui/GuiEvent.h"
-#include "script/Script.h"
 #include "placeholder.h"
+#include "script/Script.h"
 #include "util/ContentProvider.h"
 #include "util/IRenderable.h"
 #include "util/InsertMode.h"

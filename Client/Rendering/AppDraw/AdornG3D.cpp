@@ -2,8 +2,8 @@
 
 #include "appdraw/DrawPrimitives.h"
 #include "appdraw/Fonts.h"
-#include "renderlib/TextureProxy.h"
 #include "placeholder.h"
+#include "renderlib/TextureProxy.h"
 #include "util/Rect.h"
 
 #include <GLG3D/Draw.h>

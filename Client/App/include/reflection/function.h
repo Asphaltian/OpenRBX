@@ -1,9 +1,9 @@
 #ifndef REFLECTION_FUNCTION_H
 #define REFLECTION_FUNCTION_H
 
+#include "placeholder.h"
 #include "reflection/member.h"
 #include "reflection/type.h"
-#include "placeholder.h"
 
 namespace RBX {
 namespace Reflection {

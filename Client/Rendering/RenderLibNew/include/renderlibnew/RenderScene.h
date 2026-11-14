@@ -1,10 +1,10 @@
 #ifndef RENDERLIBNEW_RENDERSCENE_H
 #define RENDERLIBNEW_RENDERSCENE_H
 
+#include "placeholder.h"
 #include "renderlib/RenderStats.h"
 #include "renderlibnew/EffectSettings.h"
 #include "renderlibnew/RenderSurface.h"
-#include "placeholder.h"
 
 #include <G3D/Array.h>
 #include <G3D/Color4.h>

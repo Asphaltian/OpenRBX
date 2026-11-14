@@ -1,8 +1,8 @@
 #ifndef REFLECTION_MEMBER_H
 #define REFLECTION_MEMBER_H
 
-#include "reflection/descriptor.h"
 #include "placeholder.h"
+#include "reflection/descriptor.h"
 
 #include <algorithm>
 #include <vector>

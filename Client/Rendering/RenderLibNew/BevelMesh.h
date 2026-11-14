@@ -2,8 +2,8 @@
 #define RENDERLIBNEW_BEVELMESH_H
 
 #include "QuadVolume.h"
-#include "renderlibnew/Mesh.h"
 #include "placeholder.h"
+#include "renderlibnew/Mesh.h"
 
 namespace RBX {
 namespace ViewNew {

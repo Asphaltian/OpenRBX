@@ -2,8 +2,8 @@
 #define RBXVIEW_VIEW_H
 
 #include "ViewBase.h"
-#include "renderlib/AggregatingSceneManager.h"
 #include "placeholder.h"
+#include "renderlib/AggregatingSceneManager.h"
 
 #include <G3D/ReferenceCount.h>
 #include <boost/shared_ptr.hpp>

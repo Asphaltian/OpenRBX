@@ -1,8 +1,8 @@
 #ifndef TOOL_TOOLSSURFACE_H
 #define TOOL_TOOLSSURFACE_H
 
-#include "tool/ToolsArrow.h"
 #include "placeholder.h"
+#include "tool/ToolsArrow.h"
 #include "util/Name.h"
 #include "util/NormalId.h"
 #include "util/PV.h"

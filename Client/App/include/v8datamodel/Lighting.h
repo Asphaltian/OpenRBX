@@ -1,8 +1,8 @@
 #ifndef V8DATAMODEL_LIGHTING_H
 #define V8DATAMODEL_LIGHTING_H
 
-#include "reflection/signal.h"
 #include "placeholder.h"
+#include "reflection/signal.h"
 #include "util/Handle.h"
 #include "v8tree/Instance.h"
 #include "v8tree/Service.h"

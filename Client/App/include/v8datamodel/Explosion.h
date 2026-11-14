@@ -1,8 +1,8 @@
 #ifndef V8DATAMODEL_EXPLOSION_H
 #define V8DATAMODEL_EXPLOSION_H
 
-#include "reflection/property.h"
 #include "placeholder.h"
+#include "reflection/property.h"
 #include "util/Handle.h"
 #include "util/IRenderable.h"
 #include "util/RunStateOwner.h"

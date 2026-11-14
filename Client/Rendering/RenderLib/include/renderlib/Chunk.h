@@ -1,10 +1,10 @@
 #ifndef RENDERLIB_CHUNK_H
 #define RENDERLIB_CHUNK_H
 
+#include "placeholder.h"
 #include "renderlib/Material.h"
 #include "renderlib/Mesh.h"
 #include "renderlib/RenderStats.h"
-#include "placeholder.h"
 
 #include <G3D/Array.h>
 #include <G3D/CoordinateFrame.h>

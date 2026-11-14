@@ -1,8 +1,8 @@
 #ifndef V8DATAMODEL_BACKPACK_H
 #define V8DATAMODEL_BACKPACK_H
 
-#include "script/Script.h"
 #include "placeholder.h"
+#include "script/Script.h"
 #include "v8datamodel/Hopper.h"
 
 namespace RBX {

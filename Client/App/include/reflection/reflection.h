@@ -1,10 +1,10 @@
 #ifndef REFLECTION_REFLECTION_H
 #define REFLECTION_REFLECTION_H
 
+#include "placeholder.h"
 #include "reflection/object.h"
 #include "reflection/property.h"
 #include "reflection/signal.h"
-#include "placeholder.h"
 #include "util/Handle.h"
 #include "v8xml/Serializer.h"
 #include "v8xml/XmlElement.h"

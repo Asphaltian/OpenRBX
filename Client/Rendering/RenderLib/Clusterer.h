@@ -1,8 +1,8 @@
 #ifndef RENDERLIB_CLUSTERER_H
 #define RENDERLIB_CLUSTERER_H
 
-#include "renderlib/Chunk.h"
 #include "placeholder.h"
+#include "renderlib/Chunk.h"
 
 #include <G3D/Vector3.h>
 #include <vector>

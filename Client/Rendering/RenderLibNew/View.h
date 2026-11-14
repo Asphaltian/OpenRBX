@@ -2,8 +2,8 @@
 #define RENDERLIBNEW_VIEW_H
 
 #include "ViewBase.h"
-#include "renderlibnew/RenderScene.h"
 #include "placeholder.h"
+#include "renderlibnew/RenderScene.h"
 
 #include <boost/shared_ptr.hpp>
 #include <boost/signals/connection.hpp>

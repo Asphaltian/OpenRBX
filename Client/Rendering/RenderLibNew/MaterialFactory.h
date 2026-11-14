@@ -1,9 +1,9 @@
 #ifndef RENDERLIBNEW_MATERIALFACTORY_H
 #define RENDERLIBNEW_MATERIALFACTORY_H
 
+#include "placeholder.h"
 #include "renderlibnew/Material.h"
 #include "renderlibnew/TextureProxy.h"
-#include "placeholder.h"
 #include "v8datamodel/BrickColor.h"
 
 #include <G3D/ReferenceCount.h>

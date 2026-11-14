@@ -1,10 +1,10 @@
 #ifndef UTIL_SOUND_H
 #define UTIL_SOUND_H
 
+#include "placeholder.h"
 #include "reflection/property.h"
 #include "reflection/reflection.h"
 #include "reflection/type.h"
-#include "placeholder.h"
 #include "util/ContentProvider.h"
 #include "util/RunStateOwner.h"
 #include "util/SoundWorld.h"

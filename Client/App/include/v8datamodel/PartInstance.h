@@ -2,8 +2,8 @@
 #define V8DATAMODEL_PARTINSTANCE_H
 
 #include "appdraw/Part.h"
-#include "reflection/signal.h"
 #include "placeholder.h"
+#include "reflection/signal.h"
 #include "util/ComputeProp.h"
 #include "util/Extents.h"
 #include "util/ICameraSubject.h"

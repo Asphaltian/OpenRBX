@@ -1,9 +1,9 @@
 #ifndef NETWORK_PLAYER_H
 #define NETWORK_PLAYER_H
 
+#include "placeholder.h"
 #include "reflection/property.h"
 #include "reflection/signal.h"
-#include "placeholder.h"
 #include "util/Events.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8tree/Instance.h"

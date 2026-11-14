@@ -3,8 +3,8 @@
 
 #include "humanoid/Humanoid.h"
 #include "network/Players.h"
-#include "reflection/property.h"
 #include "placeholder.h"
+#include "reflection/property.h"
 #include "util/TextureId.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8tree/Instance.h"

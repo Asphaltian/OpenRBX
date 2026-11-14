@@ -1,8 +1,8 @@
 #ifndef UTIL_TEXTUREID_H
 #define UTIL_TEXTUREID_H
 
-#include "reflection/type.h"
 #include "placeholder.h"
+#include "reflection/type.h"
 #include "util/ContentProvider.h"
 
 namespace RBX {

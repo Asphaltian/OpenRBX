@@ -3,8 +3,8 @@
 
 #include "BevelMesh.h"
 #include "MeshFactory.h"
-#include "renderlibnew/Mesh.h"
 #include "placeholder.h"
+#include "renderlibnew/Mesh.h"
 #include "util/NormalId.h"
 
 #include <G3D/Vector2.h>

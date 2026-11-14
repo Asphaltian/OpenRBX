@@ -1,8 +1,8 @@
 #ifndef V8DATAMODEL_TOOL_H
 #define V8DATAMODEL_TOOL_H
 
-#include "reflection/property.h"
 #include "placeholder.h"
+#include "reflection/property.h"
 #include "util/ILocation.h"
 #include "util/IRenderable.h"
 #include "util/ISelectable3d.h"

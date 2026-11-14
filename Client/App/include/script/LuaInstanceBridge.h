@@ -2,8 +2,8 @@
 #define SCRIPT_LUAINSTANCEBRIDGE_H
 
 #include "lua/LuaBridge.h"
-#include "reflection/reflection.h"
 #include "placeholder.h"
+#include "reflection/reflection.h"
 #include "v8tree/Instance.h"
 
 #include <boost/shared_ptr.hpp>

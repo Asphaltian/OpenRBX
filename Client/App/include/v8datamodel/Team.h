@@ -1,8 +1,8 @@
 #ifndef V8DATAMODEL_TEAM_H
 #define V8DATAMODEL_TEAM_H
 
-#include "reflection/property.h"
 #include "placeholder.h"
+#include "reflection/property.h"
 #include "v8datamodel/BrickColor.h"
 #include "v8tree/Instance.h"
 

@@ -1,8 +1,8 @@
 #ifndef RENDERLIBNEW_MESHFACTORY_H
 #define RENDERLIBNEW_MESHFACTORY_H
 
-#include "renderlibnew/Mesh.h"
 #include "placeholder.h"
+#include "renderlibnew/Mesh.h"
 #include "util/NormalId.h"
 
 #include <G3D/ReferenceCount.h>

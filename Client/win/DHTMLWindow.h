@@ -3,8 +3,8 @@
 
 #include "LuaFunction.h"
 #include "LuaHtmlView.h"
-#include "reflection/signal.h"
 #include "placeholder.h"
+#include "reflection/signal.h"
 #include "v8tree/Instance.h"
 
 #include <boost/function.hpp>
