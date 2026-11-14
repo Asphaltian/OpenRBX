@@ -11,6 +11,8 @@
 
 OpenRBX is a source port of Roblox as it was released in December 2007. It is built from the code recovered by [RBXDecomp](https://github.com/Asphaltian/RBXDecomp), and the goal is a modern, cross-platform codebase.
 
+<img width="1919" height="1031" alt="Screenshot 2026-11-14 114011" src="https://github.com/user-attachments/assets/fed54e9f-48b7-46ef-9bc2-5b1b7d0a3137" />
+
 ## Getting OpenRBX
 
 ### Compiling from source
